@@ -4,10 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Crown,
-  Building2,
   ArrowRight,
-  Sparkles,
-  Network
+  Sparkles
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
