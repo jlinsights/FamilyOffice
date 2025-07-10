@@ -2,7 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, ArrowRight, Building, Factory, Hammer, Cpu, TrendingUp, Shield, Calculator, FileText, PieChart, Globe, Award, Users, Target, Star, Zap, Crown, Phone, MessageSquare, MapPin, Calendar, Clock } from "lucide-react"
+import { CheckCircle, ArrowRight, Building, TrendingUp, Award, Users, FileText, Phone } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
 
@@ -43,7 +43,7 @@ export default function ServicePage() {
 
   const coreServices = [
     {
-      icon: Calculator,
+      icon: Building,
       title: "Tax Management",
       subtitle: "세무 최적화",
       description: "중소중견기업 특화 세무 전략과 법인-개인 자산 분리를 통한 절세 솔루션",
@@ -85,7 +85,7 @@ export default function ServicePage() {
 
   const industryServices = [
     {
-      icon: Factory,
+      icon: Building,
       title: "제조업 특화 서비스",
       description: "전통 제조업부터 첨단 제조업까지, 제조업의 특성을 반영한 전문 자산관리",
       specialServices: [
@@ -114,7 +114,7 @@ export default function ServicePage() {
       }
     },
     {
-      icon: Hammer,
+      icon: Building,
       title: "건설·위험업종 서비스",
       description: "건설업 등 위험업종의 특수성을 고려한 전문 자산관리 및 리스크 관리",
       specialServices: [
@@ -143,7 +143,7 @@ export default function ServicePage() {
       }
     },
     {
-      icon: Cpu,
+      icon: Building,
       title: "IT·벤처기업 서비스",
       description: "기술기업의 성장 단계별 맞춤형 자산관리 및 투자 전략",
       specialServices: [
@@ -204,7 +204,7 @@ export default function ServicePage() {
 
   const additionalServices = [
     {
-      icon: Shield,
+      icon: Building,
       title: "기업 리스크 관리",
       description: "중소중견기업이 직면하는 다양한 리스크에 대한 종합적 관리 솔루션",
       features: [
@@ -215,7 +215,7 @@ export default function ServicePage() {
       ]
     },
     {
-      icon: PieChart,
+      icon: Building,
       title: "투자 포트폴리오 관리",
       description: "법인과 개인 자산을 통합한 최적의 투자 포트폴리오 구성",
       features: [
@@ -237,7 +237,7 @@ export default function ServicePage() {
       ]
     },
     {
-      icon: Globe,
+      icon: Building,
       title: "글로벌 자산관리",
       description: "해외 진출과 글로벌 자산 배분을 위한 전문 서비스",
       features: [
@@ -261,7 +261,7 @@ export default function ServicePage() {
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-6 animate-fade-in">
-              <Zap className="h-3 w-3 mr-1" />
+              <Building className="h-3 w-3 mr-1" />
               Professional Services
             </Badge>
             
@@ -285,8 +285,8 @@ export default function ServicePage() {
               
               <Button size="lg" variant="outline" asChild>
                 <Link href="/program" className="flex items-center">
+                  <Building className="ml-2 h-4 w-4" />
                   프로그램 안내
-                  <Crown className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -337,7 +337,7 @@ export default function ServicePage() {
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-4 animate-fade-in">
-              <Target className="h-3 w-3 mr-1" />
+              <Building className="h-3 w-3 mr-1" />
               Core Services
             </Badge>
             
@@ -431,7 +431,7 @@ export default function ServicePage() {
                     {/* 성공 사례 */}
                     <div className="card p-8 bg-gradient-to-br from-primary/5 to-primary/10">
                       <div className="flex items-center space-x-2 mb-4">
-                        <Star className="h-5 w-5 text-primary" />
+                        <Building className="h-5 w-5 text-primary" />
                         <h4 className="text-lg font-semibold">성공 사례</h4>
                       </div>
                       
@@ -522,7 +522,7 @@ export default function ServicePage() {
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 animate-fade-in">
-              <Globe className="h-3 w-3 mr-1" />
+              <Building className="h-3 w-3 mr-1" />
               Additional Services
             </Badge>
             
@@ -590,13 +590,13 @@ export default function ServicePage() {
                 <p className="text-sm text-muted-foreground">평일 10:00~18:00</p>
               </div>
               <div className="card p-6 text-center">
-                <MessageSquare className="h-8 w-8 text-primary mx-auto mb-4" />
+                <Building className="h-8 w-8 text-primary mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2">카카오채널</h3>
                 <p className="text-lg font-bold text-primary mb-2">@패밀리오피스</p>
                 <p className="text-sm text-muted-foreground">24시간 상담 가능</p>
               </div>
               <div className="card p-6 text-center">
-                <Calendar className="h-8 w-8 text-primary mx-auto mb-4" />
+                <Building className="h-8 w-8 text-primary mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2">상담 예약</h3>
                 <p className="text-sm text-muted-foreground mb-2">온라인 예약 시스템</p>
                 <p className="text-sm text-muted-foreground">원하는 시간에 예약</p>
@@ -606,14 +606,14 @@ export default function ServicePage() {
             {/* 오피스 주소 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 animate-slide-up" style={{ animationDelay: '250ms' }}>
               <div className="card p-6">
-                <MapPin className="h-6 w-6 text-primary mb-4" />
+                <Building className="h-6 w-6 text-primary mb-4" />
                 <h3 className="text-lg font-semibold mb-2">서초 오피스</h3>
                 <p className="text-muted-foreground mb-2">서울 서초구 서초대로 74길 4</p>
                 <p className="text-sm text-muted-foreground">지하철 3호선 남부터미널역 5번출구</p>
               </div>
               
               <div className="card p-6">
-                <MapPin className="h-6 w-6 text-primary mb-4" />
+                <Building className="h-6 w-6 text-primary mb-4" />
                 <h3 className="text-lg font-semibold mb-2">종로 오피스</h3>
                 <p className="text-muted-foreground mb-2">서울시 종로구 종로 33</p>
                 <p className="text-sm text-muted-foreground">지하철 1호선 종각역 1번출구</p>
