@@ -1,0 +1,625 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 기본 변수 설정 - 외부 폰트 참조 없음 */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 217 91% 60%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 217 91% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Enhanced typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+    letter-spacing: -0.02em;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    line-height: 1.1;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+    line-height: 1.2;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+    line-height: 1.25;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+    line-height: 1.3;
+  }
+  
+  h5 {
+    @apply text-lg md:text-xl;
+    line-height: 1.4;
+  }
+  
+  h6 {
+    @apply text-base md:text-lg;
+    line-height: 1.4;
+  }
+  
+  p {
+    line-height: 1.7;
+  }
+  
+  /* Improved scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+    border-radius: 2px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-border/80;
+  }
+  
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Modern button variants */
+  .btn {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+    /* Enhanced consultation button with maximum visibility guarantee */
+  .btn-consultation {
+    @apply btn border shadow-sm hover:shadow-md font-semibold transition-all duration-200;
+    /* Force styles with highest specificity */
+    background-color: hsl(var(--primary)) !important;
+    border-color: hsl(var(--primary)) !important;
+    color: #ffffff !important;
+  }
+
+  .btn-consultation:hover {
+    background-color: hsl(var(--primary)/0.9) !important;
+    color: #ffffff !important;
+    transform: scale(1.02) !important;
+  }
+
+  .btn-consultation:active {
+    transform: scale(0.98) !important;
+  }
+
+  .btn-consultation a,
+  .btn-consultation a:visited,
+  .btn-consultation a:link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  .btn-consultation:hover a,
+  .btn-consultation:hover a:visited,
+  .btn-consultation:hover a:link {
+    color: #ffffff !important;
+  }
+
+  /* Ensure all nested elements are white */
+  .btn-consultation *,
+  .btn-consultation span,
+  .btn-consultation .text-white {
+    color: #ffffff !important;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  .btn-outline {
+    @apply btn border border-input bg-background hover:bg-accent hover:text-accent-foreground hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  .btn-ghost {
+    @apply btn hover:bg-accent hover:text-accent-foreground hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+    /* Enhanced auth button styles for optimal visibility across themes */
+  .btn-auth-login {
+    @apply btn bg-transparent border border-border/40 hover:bg-accent hover:border-border hover:scale-[1.02] active:scale-[0.98] transition-all duration-200;
+    /* Force consistent text color for visibility */
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .btn-auth-login:hover {
+    color: hsl(var(--accent-foreground)) !important;
+  }
+
+  .btn-auth-signup {
+    @apply btn bg-primary border border-primary hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md transition-all duration-200;
+    /* Force white text for maximum contrast */
+    color: white !important;
+  }
+
+  .btn-auth-signup:hover {
+    color: white !important;
+  }
+
+  .btn-auth-signup-outline {
+    @apply btn bg-transparent border-2 border-primary hover:bg-primary hover:scale-[1.02] active:scale-[0.98] font-semibold transition-all duration-200;
+    /* Force primary color for text, white on hover */
+    color: hsl(var(--primary)) !important;
+    background-color: transparent !important;
+  }
+
+  .btn-auth-signup-outline:hover {
+    color: white !important;
+    background-color: hsl(var(--primary)) !important;
+  }
+  
+  /* Modern card styles */
+  .card {
+    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+  }
+  
+  .card-modern {
+    @apply card backdrop-blur-sm bg-card/80 border-border/50;
+  }
+  
+  .card-interactive {
+    @apply card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:-translate-y-1 hover:border-border/80 cursor-pointer;
+  }
+  
+  .card-gradient {
+    @apply card bg-gradient-to-br from-card to-card/50 border-border/50;
+  }
+  
+  /* Enhanced input styles */
+  .input {
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200;
+  }
+  
+  .input:focus {
+    @apply border-ring;
+  }
+  
+  /* Modern badge styles */
+  .badge {
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors;
+  }
+  
+  .badge-default {
+    @apply badge border-transparent bg-primary text-primary-foreground hover:bg-primary/80;
+  }
+  
+  .badge-secondary {
+    @apply badge border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+  
+  .badge-outline {
+    @apply badge text-foreground border-border;
+  }
+  
+  /* Glass morphism */
+  .glass {
+    @apply backdrop-blur-md bg-background/70 border-border/50;
+  }
+  
+  .glass-card {
+    @apply glass rounded-lg shadow-xl;
+  }
+  
+  /* Modern navigation */
+  .nav-link {
+    @apply relative inline-flex items-center px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground;
+  }
+  
+  .nav-link-active {
+    @apply nav-link text-foreground;
+  }
+  
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300;
+    content: '';
+  }
+  
+  .nav-link:hover::after,
+  .nav-link-active::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  /* Modern animations */
+  .animate-in {
+    animation: fade-in 0.5s ease-out;
+  }
+  
+  .animate-up {
+    animation: slide-up 0.5s ease-out;
+  }
+  
+  .animate-down {
+    animation: slide-down 0.3s ease-out;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out;
+  }
+  
+  .animate-slide-down {
+    animation: slide-down 0.3s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounce-in 0.6s ease-out;
+  }
+  
+  /* Focus utilities */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+  
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+  
+  /* Typography utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  /* Layout utilities */
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+  
+  .section-sm {
+    @apply py-8 md:py-12 lg:py-16;
+  }
+  
+  /* Grid utilities */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  /* Gradient utilities */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary)/0.8));
+  }
+  
+  .gradient-secondary {
+    background: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary)/0.8));
+  }
+  
+  .gradient-muted {
+    background: linear-gradient(135deg, hsl(var(--muted)), hsl(var(--muted)/0.5));
+  }
+  
+  /* Force white utility */
+  .force-white,
+  .force-white *,
+  .force-white svg,
+  .force-white path {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .card-modern {
+    @apply bg-card border-border;
+  }
+  
+  .glass {
+    @apply bg-background border-border;
+  }
+  
+  /* Enhanced button visibility for high contrast mode */
+  .btn-auth-login {
+    border-width: 2px !important;
+  }
+  
+  .btn-auth-signup-outline {
+    border-width: 3px !important;
+  }
+  
+  .btn-consultation {
+    border-width: 2px !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* Dark mode specific enhancements */
+.dark .btn-auth-login {
+  border-color: hsl(var(--border)) !important;
+  background-color: hsl(var(--background)/0.5) !important;
+}
+
+.dark .btn-auth-login:hover {
+  background-color: hsl(var(--accent)) !important;
+  border-color: hsl(var(--accent)) !important;
+}
+
+.dark .btn-auth-signup-outline {
+  border-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary)) !important;
+  background-color: transparent !important;
+}
+
+.dark .btn-auth-signup-outline:hover {
+  background-color: hsl(var(--primary)) !important;
+  color: #ffffff !important;
+  border-color: hsl(var(--primary)) !important;
+}
+
+/* Ultimate consultation button visibility for dark mode - MAXIMUM POWER */
+.dark .btn-consultation,
+html.dark .btn-consultation,
+[data-theme="dark"] .btn-consultation,
+.btn-consultation {
+  background-color: hsl(var(--primary)) !important;
+  border-color: hsl(var(--primary)) !important;
+  color: #ffffff !important;
+  /* 절대적 보장을 위한 직접 색상 지정 */
+  background: #3b82f6 !important;
+  border: 1px solid #3b82f6 !important;
+}
+
+.dark .btn-consultation:hover,
+html.dark .btn-consultation:hover,
+[data-theme="dark"] .btn-consultation:hover,
+.btn-consultation:hover {
+  background-color: hsl(var(--primary)/0.9) !important;
+  color: #ffffff !important;
+  /* 호버시에도 직접 색상 지정 */
+  background: #2563eb !important;
+  border: 1px solid #2563eb !important;
+}
+
+.dark .btn-consultation a,
+.dark .btn-consultation a:visited,
+.dark .btn-consultation a:link,
+html.dark .btn-consultation a,
+html.dark .btn-consultation a:visited,
+html.dark .btn-consultation a:link,
+[data-theme="dark"] .btn-consultation a,
+[data-theme="dark"] .btn-consultation a:visited,
+[data-theme="dark"] .btn-consultation a:link {
+  color: #ffffff !important;
+}
+
+.dark .btn-consultation:hover a,
+.dark .btn-consultation:hover a:visited,
+.dark .btn-consultation:hover a:link,
+html.dark .btn-consultation:hover a,
+html.dark .btn-consultation:hover a:visited,
+html.dark .btn-consultation:hover a:link,
+[data-theme="dark"] .btn-consultation:hover a,
+[data-theme="dark"] .btn-consultation:hover a:visited,
+[data-theme="dark"] .btn-consultation:hover a:link {
+  color: #ffffff !important;
+}
+
+/* Force all nested elements to be white in dark mode */
+.dark .btn-consultation *,
+.dark .btn-consultation span,
+.dark .btn-consultation .text-white,
+.dark .btn-consultation .lucide,
+.dark .btn-consultation svg,
+html.dark .btn-consultation *,
+html.dark .btn-consultation span,
+html.dark .btn-consultation .text-white,
+html.dark .btn-consultation .lucide,
+html.dark .btn-consultation svg,
+[data-theme="dark"] .btn-consultation *,
+[data-theme="dark"] .btn-consultation span,
+[data-theme="dark"] .btn-consultation .text-white,
+[data-theme="dark"] .btn-consultation .lucide,
+[data-theme="dark"] .btn-consultation svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Additional fallback for all modes - ULTIMATE OVERRIDE */
+.btn-consultation,
+.btn-consultation *,
+.btn-consultation a,
+.btn-consultation a *,
+.btn-consultation span,
+.btn-consultation .lucide,
+.btn-consultation svg,
+.btn-consultation path,
+button.btn-consultation,
+button.btn-consultation *,
+button.btn-consultation a,
+button.btn-consultation span,
+.dark .btn-consultation,
+.dark .btn-consultation *,
+.dark .btn-consultation a,
+.dark .btn-consultation span {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* 버튼 자체에 대한 절대적 스타일 */
+button.btn-consultation,
+.btn-consultation button {
+  background: #3b82f6 !important;
+  border: 1px solid #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* 호버 상태 */
+button.btn-consultation:hover,
+.btn-consultation button:hover {
+  background: #2563eb !important;
+  border: 1px solid #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    @apply text-black bg-white;
+  }
+}
