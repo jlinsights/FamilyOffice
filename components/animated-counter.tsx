@@ -61,6 +61,8 @@ export function AnimatedCounter({
 
       return () => clearInterval(timer)
     }
+    // cleanup 함수가 필요 없는 경우 명시적으로 undefined 반환
+    return undefined
   }, [isVisible, startAnimation, end, duration])
 
   return (
