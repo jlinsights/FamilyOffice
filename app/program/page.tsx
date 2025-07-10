@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Crown,
-  TrendingUp,
   Building2,
   ArrowRight,
   Sparkles,
