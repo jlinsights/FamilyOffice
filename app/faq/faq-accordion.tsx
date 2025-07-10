@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { ChevronDown, ChevronUp, Building, Factory, Hammer, Cpu } from "lucide-react"
 
-import type { FAQ, FAQCategory, FAQAccordionProps } from "@/types/faq";
 
 const iconMap = {
   Building,
