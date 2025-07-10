@@ -41,20 +41,20 @@ export function EducationScheduleSection({ educationPrograms }: { educationProgr
           {scheduleList.map((schedule, index) => (
             <div
               key={index}
-              className={`card p-8 bg-gradient-to-br ${schedule.color} animate-slide-up`}
+              className={`card flex flex-col items-center p-8 bg-gradient-to-br ${schedule.color} animate-slide-up`}
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="text-center mb-6">
+              <div className="text-center mb-6 w-full">
                 <Badge variant="outline" className="mb-2">
                   {schedule.period}
                 </Badge>
                 <h3 className="text-xl font-semibold">{schedule.title}</h3>
               </div>
-              <ul className="space-y-3">
+              <ul className="space-y-3 flex flex-col items-center w-full">
                 {schedule.programs.map((program, idx) => (
-                  <li key={idx} className="flex items-start">
-                    <CheckCircle className="h-4 w-4 text-primary mr-2 mt-0.5 flex-shrink-0" aria-hidden />
-                    <span className="text-sm leading-relaxed">{program}</span>
+                  <li key={idx} className="flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-primary mx-2 flex-shrink-0" aria-hidden />
+                    <span className="text-sm leading-relaxed text-center">{program}</span>
                   </li>
                 ))}
               </ul>
