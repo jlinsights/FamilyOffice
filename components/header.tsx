@@ -2,7 +2,7 @@
 
 import { useState, useCallback, memo } from "react"
 import Link from "next/link"
-import { Settings, Menu, X, ArrowRight } from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { MinimalFamilyOfficeLogo } from "@/components/logo"
