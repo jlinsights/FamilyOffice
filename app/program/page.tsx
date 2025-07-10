@@ -4,18 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Crown,
-  Users,
   TrendingUp,
   Building2,
-  Globe,
-  BookOpen,
   ArrowRight,
-  Target,
   Sparkles,
-  Coffee,
-  Brain,
-  Network,
-  Trophy
+  Network
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
