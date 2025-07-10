@@ -515,15 +515,15 @@ export default function HomePage() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="text-center">
-                  <p className="font-medium text-primary">서초 본점</p>
+                  <p className="font-medium text-primary">서초타워</p>
                   <p className="text-muted-foreground">서울 서초구 서초대로 74길 4</p>
                 </div>
                 <div className="text-center flex flex-col items-center justify-center">
-                  <p className="font-semibold text-gray-700">서울법인지역단</p>
+                  <p className="font-semibold text-primary">서울법인지역단</p>
                   <p className="text-muted-foreground">서울시 중구 세종대로 73 태평로빌딩</p>
                 </div>
                 <div className="text-center">
-                  <p className="font-medium text-primary">종로 지점</p>
+                  <p className="font-medium text-primary">그랑서울</p>
                   <p className="text-muted-foreground">서울시 종로구 종로 33</p>
                 </div>
               </div>
