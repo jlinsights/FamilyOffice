@@ -1,3 +1,4 @@
+import type { FAQAccordionProps } from "@/types/faq";
 "use client"
 
 import { useState } from "react"
