@@ -1,4 +1,4 @@
-import { Coffee, BookOpen, Globe, Brain, Users, TrendingUp, Building2, Crown, Network, Trophy, Target, Sparkles } from "lucide-react";
+import { Coffee, BookOpen, Globe, Brain, Users, TrendingUp, Building2, Crown, Network, Trophy, Target } from "lucide-react";
 import type { MembershipStat, MemberBenefit, ExclusiveProgramCategory, EducationPrograms, SpecialProgram } from "@/types/program";
 
 export const MEMBERSHIP_STATS: MembershipStat[] = [
