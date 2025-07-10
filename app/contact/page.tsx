@@ -312,10 +312,11 @@ export default function ContactPage() {
             <CalComButton
               calLink="familyoffice/consultation"
               buttonText="지금 바로 예약"
-              className="rounded-full px-8 py-4 text-lg font-bold border border-primary bg-white text-primary shadow-lg transition
-                hover:bg-primary-foreground hover:text-primary
-                dark:bg-background dark:text-primary dark:border-primary
-                dark:hover:bg-primary-foreground dark:hover:text-primary"
+              className="rounded-full px-8 py-4 text-lg font-bold bg-primary text-primary-foreground border border-primary shadow-lg transition
+                hover:bg-primary/90 hover:shadow-xl
+                focus:ring-2 focus:ring-primary/50
+                dark:bg-primary dark:text-primary-foreground dark:border-primary
+                dark:hover:bg-primary/80"
             />
             <Button
               size="lg"
