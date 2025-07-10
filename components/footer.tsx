@@ -205,6 +205,15 @@ export function Footer() {
               </Link>
             </div>
           </div>
+
+          {/* 오피스 위치 - 가운데 정렬 */}
+          <div className="pt-8 pb-4 flex flex-col items-center justify-center text-center">
+            <h4 className="font-semibold text-base mb-1">오피스 위치</h4>
+            <div className="text-sm text-muted-foreground leading-relaxed">
+              서울법인지역단<br />
+              서울시 중구 세종대로 73 태평로빌딩
+            </div>
+          </div>
         </div>
       </div>
     </footer>
