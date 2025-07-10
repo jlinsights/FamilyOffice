@@ -309,12 +309,21 @@ export default function ContactPage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <CalComButton 
+            <CalComButton
               calLink="familyoffice/consultation"
               buttonText="지금 바로 예약"
-              className="bg-white text-primary border-white hover:bg-primary-foreground hover:text-primary px-8 py-4 text-lg"
+              className="rounded-full px-8 py-4 text-lg font-bold border border-primary bg-white text-primary shadow-lg transition
+                hover:bg-primary-foreground hover:text-primary
+                dark:bg-background dark:text-primary dark:border-primary
+                dark:hover:bg-primary-foreground dark:hover:text-primary"
             />
-            <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button
+              size="lg"
+              className="rounded-full px-8 py-4 text-lg font-bold border border-primary-foreground bg-primary-foreground text-primary shadow-lg transition
+                hover:bg-white hover:text-primary hover:border-primary
+                dark:bg-primary-foreground dark:text-primary dark:border-primary
+                dark:hover:bg-background dark:hover:text-primary"
+            >
               <Phone className="mr-2 h-4 w-4" />
               0502-5550-8700
             </Button>
