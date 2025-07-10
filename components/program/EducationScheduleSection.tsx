@@ -1,4 +1,4 @@
-import { EducationPrograms } from "./types";
+import type { EducationPrograms } from "@/types/program";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight, CheckCircle } from "lucide-react";
