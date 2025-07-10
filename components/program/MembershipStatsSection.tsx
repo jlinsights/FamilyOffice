@@ -1,4 +1,4 @@
-import { MembershipStat } from "./types";
+import { MembershipStat } from "@/types/program";
 import { Badge } from "@/components/ui/badge";
 
 export function MembershipStatsSection({ stats }: { stats: MembershipStat[] }) {

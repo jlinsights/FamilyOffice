@@ -1,4 +1,4 @@
-import { SpecialProgram } from "./types";
+import { SpecialProgram } from "@/types/program";
 import { Badge } from "@/components/ui/badge";
 
 function ProgramCard({ title, subtitle, desc, place, target, freq }: SpecialProgram) {

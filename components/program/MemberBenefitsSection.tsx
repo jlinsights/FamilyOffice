@@ -1,4 +1,4 @@
-import { MemberBenefit } from "./types";
+import { MemberBenefit } from "@/types/program";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Award } from "lucide-react";
 

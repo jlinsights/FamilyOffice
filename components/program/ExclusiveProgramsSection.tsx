@@ -1,4 +1,4 @@
-import { ExclusiveProgramCategory } from "./types";
+import { ExclusiveProgramCategory } from "@/types/program";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase } from "lucide-react";
 
