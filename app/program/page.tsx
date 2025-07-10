@@ -9,13 +9,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import type {
-  MembershipStat,
-  MemberBenefit,
-  ExclusiveProgramCategory,
-  EducationPrograms,
-  SpecialProgram
-} from "@/types/program";
 import { MembershipStatsSection } from "@/components/program/MembershipStatsSection";
 import { MemberBenefitsSection } from "@/components/program/MemberBenefitsSection";
 import { ExclusiveProgramsSection } from "@/components/program/ExclusiveProgramsSection";
