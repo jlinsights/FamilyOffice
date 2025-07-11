@@ -11,6 +11,7 @@ import { Footer } from "@/components/footer";
 import { Download, Copy, Check, Eye, Code, Palette, Type, Component, BookOpen, Lightbulb } from "lucide-react";
 import { BRAND_COLORS, TYPOGRAPHY_SYSTEM, BRAND_VALUES } from "@/constants/brand";
 import type { BrandColorSystem, TypographyCategory, BrandValue } from "@/types/brand";
+import BrandExcellenceSection from "@/components/brand-excellence-section";
 
 // ColorPalette 컴포넌트 정의를 함수 바깥으로 이동 및 props 확장
 const ColorPalette = ({
@@ -134,10 +135,298 @@ export default function BrandPage() {
 
             {/* 브랜드 정체성 탭 */}
             <TabsContent value="brand" className="space-y-8">
+              {/* === Brand Guidelines Header === */}
+              <div className="mb-8">
+                {/* 상단 타이틀/버전/부제목 */}
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                  <div>
+                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-1 flex items-center gap-2">
+                      <span className="inline-flex items-center gap-2">
+                        <span className="text-blue-600 dark:text-blue-400">
+                          <FamilyOfficeLogo className="w-7 h-7 inline-block align-middle mr-1" />
+                        </span>
+                        FamilyOffice S Brand Guidelines
+                      </span>
+                    </h1>
+                    <p className="text-base md:text-lg text-gray-600 dark:text-gray-300">
+                      Professional, Personal, Prosperity - 신뢰 기반 프리미엄 자산관리 브랜드
+                    </p>
+                  </div>
+                  <span className="mt-2 md:mt-0 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 font-mono">
+                    Version 1.0 | 2025
+                  </span>
+                </div>
+              </div>
+
+              {/* === Brand Identity Section === */}
+              <section className="mb-10">
+                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+                  <span className="inline-block text-blue-600 dark:text-blue-400">◎</span> Brand Identity
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Brand Name */}
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-start shadow-sm">
+                    <span className="text-sm font-semibold text-gray-500 mb-2">Brand Name</span>
+                    <span className="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-1">FamilyOffice S</span>
+                  </div>
+                  {/* Brand Essence */}
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-start shadow-sm">
+                    <span className="text-sm font-semibold text-gray-500 mb-2">Brand Essence</span>
+                    <span className="text-lg font-medium text-gray-900 dark:text-white">신뢰 기반의 전문적이고 개인화된 프리미엄 자산관리 파트너십</span>
+                  </div>
+                  {/* Brand Promise */}
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-start shadow-sm">
+                    <span className="text-sm font-semibold text-gray-500 mb-2">Brand Promise</span>
+                    <span className="text-lg font-medium text-gray-900 dark:text-white">초고액자산가를 위한 전략적 파트너십을 통해 성공과 지속가능성을 동시에 실현</span>
+                  </div>
+                </div>
+              </section>
+
+              {/* === Brand Messages Section === */}
+              <section className="mb-10">
+                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+                  <span className="inline-block text-purple-600 dark:text-purple-400">T</span> Brand Messages
+                </h2>
+                {/* Taglines */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {/* Primary Tagline */}
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
+                    <span className="text-lg font-bold text-gray-900 dark:text-white mb-2 block">Primary Tagline</span>
+                    <div className="text-base font-medium text-gray-800 dark:text-gray-100 mb-1">"Your Trusted Financial Partner for Life"</div>
+                    <div className="text-base text-gray-600 dark:text-gray-300">"평생을 함께하는 신뢰할 수 있는 금융 파트너"</div>
+                  </div>
+                  {/* Secondary Tagline */}
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
+                    <span className="text-lg font-bold text-gray-900 dark:text-white mb-2 block">Secondary Tagline</span>
+                    <div className="text-base font-medium text-gray-800 dark:text-gray-100 mb-1">"Professional. Personal. Prosperity."</div>
+                    <div className="text-base text-gray-600 dark:text-gray-300">"전문적. 개인적. 번영."</div>
+                  </div>
+                </div>
+                {/* Brand Statement */}
+                <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 mb-6 shadow-sm">
+                  <span className="text-lg font-bold text-gray-900 dark:text-white mb-2 block">Brand Statement</span>
+                  <div className="mb-2">
+                    <span className="font-semibold text-gray-700 dark:text-gray-200 mr-2">English:</span>
+                    <span className="text-gray-800 dark:text-gray-100">
+                      "FamilyOffice S is your trusted financial partner, dedicated to providing sophisticated wealth management expertise and personalized solutions that ensure sustainable prosperity for you and your family's future."
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-gray-700 dark:text-gray-200 mr-2">Korean:</span>
+                    <span className="text-gray-800 dark:text-gray-100">
+                      "FamilyOffice S는 신뢰할 수 있는 금융 파트너로서, 정교한 자산관리 전문성과 개인 맞춤형 솔루션을 통해 고객님과 가족의 미래를 위한 지속가능한 번영을 보장합니다."
+                    </span>
+                  </div>
+                </div>
+                {/* Elevator Pitch */}
+                <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
+                  <span className="text-lg font-bold text-gray-900 dark:text-white mb-2 block">Elevator Pitch</span>
+                  <div className="text-gray-800 dark:text-gray-100">
+                    "FamilyOffice S는 고객의 평생 금융 파트너로서 신뢰를 바탕으로 한 프리미엄 패밀리오피스입니다. 우리는 Professional한 전문성, Personal한 맞춤 서비스, 그리고 Prosperity한 미래를 통해 중소중견기업 법인 대표님들의 성공적인 자산관리와 가족의 지속가능한 번영을 실현합니다."
+                  </div>
+                </div>
+              </section>
+
+              {/* === Core Values & Differentiators Section === */}
+              <section className="mb-10">
+                {/* Core Values */}
+                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+                  <span className="inline-block text-yellow-500">🧑‍💼</span> Core Values
+                </h2>
+                {/* 핵심 가치 배열 선언 */}
+                {(() => {
+                  const values = [
+                    {
+                      icon: <svg className="w-7 h-7 text-blue-600 mx-auto mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 9.74-7 10-3.5-.26-7-5-7-10V6l7-4z" /></svg>,
+                      title: 'Strategic Excellence',
+                      subtitle: '전략적 우수성',
+                    },
+                    {
+                      icon: <svg className="w-7 h-7 text-purple-500 mx-auto mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2v6m0 0a4 4 0 100 8 4 4 0 000-8zm0 8v6" /></svg>,
+                      title: 'Sophisticated Solutions',
+                      subtitle: '고도화된 솔루션',
+                    },
+                    {
+                      icon: <svg className="w-7 h-7 text-green-600 mx-auto mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 7l-7.5 7.5-3.5-3.5" /></svg>,
+                      title: 'Personal Partnership',
+                      subtitle: '개인적 파트너십',
+                    },
+                    {
+                      icon: <svg className="w-7 h-7 text-emerald-600 mx-auto mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8" /></svg>,
+                      title: 'Sustainable Growth',
+                      subtitle: '지속가능한 성장',
+                    },
+                    {
+                      icon: <svg className="w-7 h-7 text-orange-500 mx-auto mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>,
+                      title: 'Superior Service',
+                      subtitle: '차별화된 서비스',
+                    },
+                  ];
+                  return (
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+                      {values.map((v, i) => (
+                        <div key={i} className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-center shadow-sm">
+                          {v.icon}
+                          <div className="font-semibold text-gray-900 dark:text-white text-base mb-1">{v.title}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-300">{v.subtitle}</div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+                {/* Core Differentiators */}
+                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+                  <span className="inline-block text-purple-500">✈️</span> Core Differentiators
+                </h2>
+                {/* 차별화 요소 배열 선언 */}
+                {(() => {
+                  const diff = [
+                    {
+                      color: 'text-blue-600',
+                      title: 'Trusted Partnership Approach',
+                      desc: '신뢰 기반의 장기적 파트너십과 통합 솔루션',
+                    },
+                    {
+                      color: 'text-purple-600',
+                      title: 'Sophisticated Analytics',
+                      desc: 'AI 기반 고도화된 분석 및 예측 솔루션',
+                    },
+                    {
+                      color: 'text-green-600',
+                      title: 'Strategic Succession Planning',
+                      desc: '체계적이고 전략적인 승계 계획 수립',
+                    },
+                    {
+                      color: 'text-emerald-600',
+                      title: 'Sustainable Growth',
+                      desc: '지속가능한 성장 동력 확보 및 관리',
+                    },
+                  ];
+                  return (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {diff.map((d, i) => (
+                        <div key={i} className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
+                          <div className={`font-bold text-2xl mb-2 ${d.color}`}>{d.title}</div>
+                          <div className="text-gray-700 dark:text-gray-200 text-base">{d.desc}</div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </section>
+
+              {/* === Brand Personality & Usage Guidelines Section === */}
+              <section className="mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Brand Personality 카드 */}
+                  <div className="border rounded-2xl bg-white dark:bg-gray-800 p-8 shadow-sm">
+                    <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+                      <span className="text-pink-500">✨</span> Brand Personality
+                    </h2>
+                    <div className="space-y-4">
+                      {[
+                        { label: 'Professional', desc: '전문성과 신뢰성', color: 'bg-blue-100 text-blue-700' },
+                        { label: 'Innovative', desc: '혁신적 사고와 접근', color: 'bg-blue-100 text-blue-500' },
+                        { label: 'Sophisticated', desc: '세련되고 고도화된 서비스', color: 'bg-blue-100 text-blue-400' },
+                        { label: 'Trustworthy', desc: '신뢰할 수 있는 파트너', color: 'bg-blue-100 text-blue-600' },
+                        { label: 'Exclusive', desc: '프리미엄 고객 대상의 특별함', color: 'bg-blue-100 text-blue-800' },
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-center gap-3">
+                          <span className={`px-3 py-1 rounded-full font-semibold text-sm ${item.color} border border-blue-200 mr-2`}>{item.label}</span>
+                          <span className="text-gray-700 dark:text-gray-200 text-base">{item.desc}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Usage Guidelines 카드 */}
+                  <div className="border rounded-2xl bg-white dark:bg-gray-800 p-8 shadow-sm">
+                    <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+                      <span className="text-green-500">✔️</span> Usage Guidelines
+                    </h2>
+                    <div className="mb-6">
+                      <div className="text-xl font-bold text-green-600 mb-2">Do's</div>
+                      <ul className="list-disc pl-5 space-y-1 text-gray-800 dark:text-gray-100">
+                        <li>신뢰와 파트너십 가치 강조</li>
+                        <li>Professional한 이미지 유지</li>
+                        <li>Personal한 맞춤 서비스 명확화</li>
+                        <li>Premium 고객층에 적합한 커뮤니케이션</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-xl font-bold text-red-600 mb-2">Don'ts</div>
+                      <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300">
+                        <li>단순한 Sales 중심 메시지 지양</li>
+                        <li>과도한 기술적 전문용어 사용 금지</li>
+                        <li>신뢰 관계를 손상시키는 과도한 영업 방지</li>
+                        <li>일반적인 자산관리사와의 차별화 부족</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* === 브랜드 핵심 가치 & 디자인 철학 Section === */}
+              <section className="mb-10">
+                {/* 브랜드 핵심 가치 */}
+                <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white">브랜드 핵심 가치</h2>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                  {[
+                    {
+                      icon: <svg className="w-8 h-8 text-blue-500 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 9.74-7 10-3.5-.26-7-5-7-10V6l7-4z" /></svg>,
+                      title: '신뢰성 (Trust)',
+                      desc: '중소중견기업 법인 대표님의 자산을 안전하게 관리하는 신뢰할 수 있는 파트너',
+                    },
+                    {
+                      icon: <svg className="w-8 h-8 text-emerald-500 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>,
+                      title: '전문성 (Expertise)',
+                      desc: '20여년의 중소중견기업 전문 노하우와 최신 금융 트렌드를 결합한 전문 서비스',
+                    },
+                    {
+                      icon: <svg className="w-8 h-8 text-purple-500 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /></svg>,
+                      title: '개인화 (Personalization)',
+                      desc: '고객 중심의 맞춤형 자산관리 솔루션으로 각각의 고유한 요구사항 충족',
+                    },
+                    {
+                      icon: <svg className="w-8 h-8 text-orange-400 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 7l-7.5 7.5-3.5-3.5" /></svg>,
+                      title: '혁신성 (Innovation)',
+                      desc: '최신 기술과 시스템을 활용한 차별화된 통합 자산관리 플랫폼',
+                    },
+                  ].map((item, i) => (
+                    <div key={i} className="border rounded-xl bg-white dark:bg-gray-800 p-8 flex flex-col items-center shadow-sm">
+                      {item.icon}
+                      <div className="font-bold text-xl md:text-2xl text-gray-900 dark:text-white mb-2 text-center">{item.title}</div>
+                      <div className="text-gray-700 dark:text-gray-200 text-base text-center">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
+                {/* 디자인 철학 */}
+                <div className="max-w-5xl mx-auto">
+                  <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">디자인 철학</h3>
+                  <div className="text-gray-700 dark:text-gray-300 mb-6">FamilyOffice S의 디자인 원칙과 접근 방식</div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <div className="font-bold text-lg md:text-xl text-gray-900 dark:text-white mb-1">모던 미니멀리즘</div>
+                      <div className="text-gray-700 dark:text-gray-300">불필요한 요소를 제거하고 핵심에 집중하는 깔끔한 디자인으로 전문성과 신뢰성을 표현합니다.</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-lg md:text-xl text-gray-900 dark:text-white mb-1">반응형 적용</div>
+                      <div className="text-gray-700 dark:text-gray-300">다양한 디바이스와 환경에서 일관된 경험을 제공하는 적응형 디자인을 구현합니다.</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-lg md:text-xl text-gray-900 dark:text-white mb-1">사용자 중심</div>
+                      <div className="text-gray-700 dark:text-gray-300">바쁜 경영진들이 쉽고 빠르게 정보를 찾을 수 있도록 직관적인 인터페이스를 제공합니다.</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-lg md:text-xl text-gray-900 dark:text-white mb-1">접근성 우선</div>
+                      <div className="text-gray-700 dark:text-gray-300">모든 사용자가 접근할 수 있는 포용적 디자인으로 다크모드와 고대비 모드를 지원합니다.</div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              {/* --- 기존 브랜드 비전/핵심가치/개성은 주석 처리 또는 하단 이동 --- */}
+              {/*
               <div>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-300">브랜드 정체성</h2>
-                
-                {/* 브랜드 비전 */}
                 <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
                   <CardHeader className="border-b border-gray-200 dark:border-gray-700">
                     <CardTitle className="text-gray-900 dark:text-white">브랜드 비전</CardTitle>
@@ -149,8 +438,6 @@ export default function BrandPage() {
                     </p>
                   </CardContent>
                 </Card>
-
-                {/* 브랜드 핵심 가치 */}
                 <div className="mb-8">
                   <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white transition-colors duration-300">브랜드 핵심 가치</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -167,8 +454,6 @@ export default function BrandPage() {
                     ))}
                   </div>
                 </div>
-
-                {/* 브랜드 개성 */}
                 <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
                   <CardHeader className="border-b border-gray-200 dark:border-gray-700">
                     <CardTitle className="text-gray-900 dark:text-white">브랜드 개성</CardTitle>
@@ -184,69 +469,91 @@ export default function BrandPage() {
                   </CardContent>
                 </Card>
               </div>
+              */}
+              {/* === Brand Excellence 안내 섹션 (공통) === */}
+              <BrandExcellenceSection />
             </TabsContent>
 
             {/* 로고 시스템 탭 */}
             <TabsContent value="logo" className="space-y-8">
-              <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-300">로고 시스템</h2>
-                
-                {/* 메인 로고 */}
-                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
-                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-                    <CardTitle className="text-gray-900 dark:text-white">메인 로고</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-lg text-center mb-6 transition-colors duration-300">
-                      <FamilyOfficeLogo className="w-32 h-32 mx-auto text-gray-900 dark:text-white" />
+              {/* === 상단 타이틀/부제/대표 로고 === */}
+              <section className="border rounded-2xl bg-white dark:bg-gray-800 p-8 mb-10 shadow-sm">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+                  <div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-1">
+                      <span className="text-blue-600 dark:text-blue-400">{/* 아이콘 */}
+                        <svg className="w-6 h-6 inline-block mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 9.74-7 10-3.5-.26-7-5-7-10V6l7-4z" /></svg>
+                      </span>
+                      로고 시스템
+                    </h2>
+                    <div className="text-gray-500 dark:text-gray-300 text-base">브랜드 아이덴티티의 핵심 · 완전 적용형 로고</div>
+                  </div>
+                  <div className="flex flex-col items-center mt-6 md:mt-0">
+                    {/* 대표 로고 (라이트/다크 자동 전환) */}
+                    <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 flex items-center justify-center">
+                      <FamilyOfficeLogo className="w-56 h-16" />
                     </div>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                      <Button variant="outline">
-                        <Download className="w-4 h-4 mr-2" />
-                        SVG 다운로드
-                      </Button>
-                      <Button variant="outline">
-                        <Download className="w-4 h-4 mr-2" />
-                        PNG 다운로드
-                      </Button>
-                      <Button variant="outline">
-                        <Download className="w-4 h-4 mr-2" />
-                        JPG 다운로드
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* 로고 사용 가이드 */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
-                    <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-                      <CardTitle className="text-green-600 dark:text-green-400">올바른 사용</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                        <li>• 충분한 여백 유지 (로고 높이의 1/2 이상)</li>
-                        <li>• 명확한 배경과의 대비</li>
-                        <li>• 원본 비율 유지</li>
-                        <li>• 브랜드 컬러 사용</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                  <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
-                    <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-                      <CardTitle className="text-red-600 dark:text-red-400">잘못된 사용</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                        <li>• 로고 왜곡이나 변형</li>
-                        <li>• 불충분한 여백</li>
-                        <li>• 낮은 대비의 배경</li>
-                        <li>• 브랜드 컬러 변경</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
+                    <div className="text-xs text-gray-400 dark:text-gray-500 mt-2">라이트/다크 모드 자동 적용형 로고</div>
+                  </div>
                 </div>
-              </div>
+                {/* === 2열: 핵심 원칙 & 주의사항 === */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  {/* 핵심 원칙 */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                      <span className="text-xl font-bold text-green-600">핵심 원칙</span>
+                    </div>
+                    <ul className="text-gray-700 dark:text-gray-200 text-base space-y-1 mb-4">
+                      <li><b>일관성:</b> 모든 접점에서 동일한 로고 사용</li>
+                      <li><b>가독성:</b> 최소 크기 120px 이상 유지</li>
+                      <li><b>적용성:</b> 라이트/다크 모드 모두 자동 전환</li>
+                      <li><b>품질:</b> 고해상도 벡터 형태 사용</li>
+                    </ul>
+                  </div>
+                  {/* 주의사항 */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <span className="text-xl font-bold text-orange-500">주의사항</span>
+                    </div>
+                    <ul className="text-gray-700 dark:text-gray-200 text-base space-y-1 mb-4">
+                      <li>로고 비율이나 색상 임의 변경 금지</li>
+                      <li><b>Playfair Display</b> 폰트 외 사용 금지</li>
+                      <li>태그라인 위치나 내용 수정 금지</li>
+                      <li>저해상도 이미지 사용 금지</li>
+                    </ul>
+                  </div>
+                </div>
+                {/* === React 컴포넌트 안내 === */}
+                <div className="mb-4">
+                  <div className="font-bold text-lg text-gray-900 dark:text-white mb-1">React 컴포넌트</div>
+                  <div className="text-gray-500 dark:text-gray-300 text-base mb-2">재사용 가능한 React 로고 컴포넌트들</div>
+                </div>
+                {/* === 3종류 로고 카드 === */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* 기본 로고 */}
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-center shadow-sm">
+                    <div className="font-bold text-base text-gray-900 dark:text-white mb-1">기본 로고</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">태그라인 포함, 다국어 지원</div>
+                    <FamilyOfficeLogo className="w-40 h-12" />
+                  </div>
+                  {/* 미니멀 로고 */}
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-center shadow-sm">
+                    <div className="font-bold text-base text-gray-900 dark:text-white mb-1">미니멀 로고</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">헤더, 내비게이션용</div>
+                    <FamilyOfficeLogo className="w-32 h-10" />
+                  </div>
+                  {/* 프리미엄 로고 */}
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-center shadow-sm">
+                    <div className="font-bold text-base text-gray-900 dark:text-white mb-1">프리미엄 로고</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">특별한 페이지, 랜딩용</div>
+                    <FamilyOfficeLogo className="w-48 h-14" />
+                  </div>
+                </div>
+              </section>
+              {/* === Brand Excellence 안내 섹션 (공통) === */}
+              <BrandExcellenceSection />
             </TabsContent>
 
             {/* 컬러 시스템 탭 */}
@@ -258,6 +565,8 @@ export default function BrandPage() {
                 <ColorPalette colors={brandColors.accent} title="Accent Colors" copiedColor={copiedColor} copyToClipboard={copyToClipboard} />
                 <ColorPalette colors={brandColors.status} title="Status Colors" copiedColor={copiedColor} copyToClipboard={copyToClipboard} />
               </div>
+              {/* === Brand Excellence 안내 섹션 (공통) === */}
+              <BrandExcellenceSection />
             </TabsContent>
 
             {/* 타이포그라피 탭 */}
@@ -304,6 +613,8 @@ export default function BrandPage() {
                   </div>
                 ))}
               </div>
+              {/* === Brand Excellence 안내 섹션 (공통) === */}
+              <BrandExcellenceSection />
             </TabsContent>
 
             {/* UI 컴포넌트 탭 */}
@@ -368,6 +679,8 @@ export default function BrandPage() {
                   </CardContent>
                 </Card>
               </div>
+              {/* === Brand Excellence 안내 섹션 (공통) === */}
+              <BrandExcellenceSection />
             </TabsContent>
 
             {/* 코드 가이드 탭 */}
@@ -429,6 +742,8 @@ export default function BrandPage() {
                   </CardContent>
                 </Card>
               </div>
+              {/* === Brand Excellence 안내 섹션 (공통) === */}
+              <BrandExcellenceSection />
             </TabsContent>
 
             {/* 활용 사례 탭 */}
@@ -514,6 +829,8 @@ export default function BrandPage() {
                   </Card>
                 </div>
               </div>
+              {/* === Brand Excellence 안내 섹션 (공통) === */}
+              <BrandExcellenceSection />
             </TabsContent>
           </Tabs>
         </section>
