@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle, Phone, MessageSquare, MapPin } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
-import FAQAccordion from "./faq-accordion"
+import FAQGridSection from "./faq-accordion"
 import { CUSTOMER_CONCERNS, FAQ_CATEGORIES } from "@/constants/faq";
 
 export const metadata: Metadata = {
@@ -102,7 +102,8 @@ export default function FAQPage() {
             </p>
           </div>
 
-          <FAQAccordion faqCategories={FAQ_CATEGORIES} />
+          {/* 아코디언 → 그리드 FAQ 섹션 */}
+          <FAQGridSection faqCategories={FAQ_CATEGORIES} />
         </div>
       </section>
 
