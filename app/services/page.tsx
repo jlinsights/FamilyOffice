@@ -2,7 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, ArrowRight, Building, TrendingUp, Award, Users, FileText, Phone } from "lucide-react"
+import { CheckCircle, ArrowRight, Building, TrendingUp, Award, Users, Phone } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
 import { IndustryServicesTabsSection } from "@/components/industry-services-section";
