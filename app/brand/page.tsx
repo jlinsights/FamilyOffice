@@ -12,6 +12,7 @@ import { Download, Copy, Check, Eye, Code, Palette, Type, Component, BookOpen, L
 import { BRAND_COLORS, TYPOGRAPHY_SYSTEM, BRAND_VALUES } from "@/constants/brand";
 import type { BrandColorSystem, TypographyCategory, BrandValue } from "@/types/brand";
 import BrandExcellenceSection from "@/components/brand-excellence-section";
+import LogoShowcaseCard from "@/components/logo-showcase-card";
 
 // ColorPalette 컴포넌트 정의를 함수 바깥으로 이동 및 props 확장
 const ColorPalette = ({
@@ -76,61 +77,41 @@ export default function BrandPage() {
     <>
       <Header />
       <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900/20 py-20 transition-colors duration-300">
-          <div className="container mx-auto px-4 text-center">
-            <FamilyOfficeLogo className="w-24 h-24 mx-auto mb-8 dark:filter dark:brightness-110" />
-            <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-              FamilyOffice S 브랜드 시스템
+        {/* === Header: 좌상단 로고만 단독 배치 === */}
+        <header className="w-full flex items-center px-6 py-4">
+          <img src="/logo.svg" alt="FamilyOffice S" className="w-32 h-auto" />
+        </header>
+
+        {/* === Hero Section: 중앙 정렬, 위계 분리, 프리미엄 스타일 === */}
+        <section className="w-full bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-blue-900/20 py-20 px-4 text-center border-b border-gray-100 dark:border-gray-800">
+          <div className="max-w-3xl mx-auto">
+            {/* 브랜드 가이드 타이틀 */}
+            <h1 className="text-4xl md:text-5xl font-playfair font-bold text-blue-900 dark:text-white mb-4 tracking-tight">
+              FamilyOffice S Brand Guidelines
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto transition-colors duration-300">
-              일관되고 신뢰할 수 있는 브랜드 경험을 위한 디자인 시스템과 가이드라인
+            {/* 서브타이틀/슬로건 */}
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200 mb-4 font-light">
+              Professional, Personal, Prosperity - 신뢰 기반 프리미엄 자산관리 브랜드
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-300">
-                <Download className="w-4 h-4 mr-2" />
-                브랜드 키트 다운로드
-              </Button>
-              <Button size="lg" variant="outline" className="border-gray-300 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800 transition-colors duration-300">
-                <Eye className="w-4 h-4 mr-2" />
-                활용 가이드 보기
-              </Button>
-            </div>
+            {/* 버전 정보 */}
+            <span className="inline-block bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-300 rounded-full px-4 py-1 text-xs font-semibold mt-2">
+              Version 1.0 | 2025
+            </span>
           </div>
         </section>
-
-        {/* Main Content */}
-        <section className="container mx-auto px-4 py-16">
+        {/* === Main Content === */}
+        <section className="max-w-7xl mx-auto px-4 py-16">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-7 bg-gray-100 dark:bg-gray-800 border dark:border-gray-700 transition-colors duration-300">
-              <TabsTrigger value="brand" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:dark:bg-gray-700 text-gray-600 dark:text-gray-300 data-[state=active]:text-gray-900 data-[state=active]:dark:text-white transition-all duration-300">
-                <Lightbulb className="w-4 h-4" />
-                브랜드
-              </TabsTrigger>
-              <TabsTrigger value="logo" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:dark:bg-gray-700 text-gray-600 dark:text-gray-300 data-[state=active]:text-gray-900 data-[state=active]:dark:text-white transition-all duration-300">
-                <Component className="w-4 h-4" />
-                로고 시스템
-              </TabsTrigger>
-              <TabsTrigger value="colors" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:dark:bg-gray-700 text-gray-600 dark:text-gray-300 data-[state=active]:text-gray-900 data-[state=active]:dark:text-white transition-all duration-300">
-                <Palette className="w-4 h-4" />
-                컬러 시스템
-              </TabsTrigger>
-              <TabsTrigger value="typography" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:dark:bg-gray-700 text-gray-600 dark:text-gray-300 data-[state=active]:text-gray-900 data-[state=active]:dark:text-white transition-all duration-300">
-                <Type className="w-4 h-4" />
-                타이포그라피
-              </TabsTrigger>
-              <TabsTrigger value="components" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:dark:bg-gray-700 text-gray-600 dark:text-gray-300 data-[state=active]:text-gray-900 data-[state=active]:dark:text-white transition-all duration-300">
-                <Component className="w-4 h-4" />
-                UI 컴포넌트
-              </TabsTrigger>
-              <TabsTrigger value="code" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:dark:bg-gray-700 text-gray-600 dark:text-gray-300 data-[state=active]:text-gray-900 data-[state=active]:dark:text-white transition-all duration-300">
-                <Code className="w-4 h-4" />
-                코드 가이드
-              </TabsTrigger>
-              <TabsTrigger value="examples" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:dark:bg-gray-700 text-gray-600 dark:text-gray-300 data-[state=active]:text-gray-900 data-[state=active]:dark:text-white transition-all duration-300">
-                <BookOpen className="w-4 h-4" />
-                활용 사례
-              </TabsTrigger>
+            {/* === 탭 리스트 (프리미엄 스타일) === */}
+            <TabsList className="flex flex-wrap justify-center gap-2 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-2 mb-8">
+              <TabsTrigger value="brand" className="px-6 py-2 rounded-t-lg font-semibold text-blue-700 data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-blue-700 dark:text-blue-200 data-[state=active]:dark:bg-blue-900 data-[state=active]:dark:text-blue-200 data-[state=inactive]:dark:bg-gray-900 data-[state=inactive]:dark:text-gray-400 transition-all duration-300">브랜드</TabsTrigger>
+              <TabsTrigger value="logo" className="px-6 py-2 rounded-t-lg font-semibold text-blue-700 data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-blue-700 dark:text-blue-200 data-[state=active]:dark:bg-blue-900 data-[state=active]:dark:text-blue-200 data-[state=inactive]:dark:bg-gray-900 data-[state=inactive]:dark:text-gray-400 transition-all duration-300">로고 시스템</TabsTrigger>
+              <TabsTrigger value="colors" className="px-6 py-2 rounded-t-lg font-semibold text-blue-700 data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-blue-700 dark:text-blue-200 data-[state=active]:dark:bg-blue-900 data-[state=active]:dark:text-blue-200 data-[state=inactive]:dark:bg-gray-900 data-[state=inactive]:dark:text-gray-400 transition-all duration-300">컬러 시스템</TabsTrigger>
+              <TabsTrigger value="typography" className="px-6 py-2 rounded-t-lg font-semibold text-blue-700 data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-blue-700 dark:text-blue-200 data-[state=active]:dark:bg-blue-900 data-[state=active]:dark:text-blue-200 data-[state=inactive]:dark:bg-gray-900 data-[state=inactive]:dark:text-gray-400 transition-all duration-300">타이포그라피</TabsTrigger>
+              <TabsTrigger value="components" className="px-6 py-2 rounded-t-lg font-semibold text-blue-700 data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-blue-700 dark:text-blue-200 data-[state=active]:dark:bg-blue-900 data-[state=active]:dark:text-blue-200 data-[state=inactive]:dark:bg-gray-900 data-[state=inactive]:dark:text-gray-400 transition-all duration-300">UI 컴포넌트</TabsTrigger>
+              <TabsTrigger value="code" className="px-6 py-2 rounded-t-lg font-semibold text-blue-700 data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-blue-700 dark:text-blue-200 data-[state=active]:dark:bg-blue-900 data-[state=active]:dark:text-blue-200 data-[state=inactive]:dark:bg-gray-900 data-[state=inactive]:dark:text-gray-400 transition-all duration-300">코드 가이드</TabsTrigger>
+              <TabsTrigger value="examples" className="px-6 py-2 rounded-t-lg font-semibold text-blue-700 data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-blue-700 dark:text-blue-200 data-[state=active]:dark:bg-blue-900 data-[state=active]:dark:text-blue-200 data-[state=inactive]:dark:bg-gray-900 data-[state=inactive]:dark:text-gray-400 transition-all duration-300">활용 사례</TabsTrigger>
+              <TabsTrigger value="webdesign" className="px-6 py-2 rounded-t-lg font-semibold text-blue-700 data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-blue-700 dark:text-blue-200 data-[state=active]:dark:bg-blue-900 data-[state=active]:dark:text-blue-200 data-[state=inactive]:dark:bg-gray-900 data-[state=inactive]:dark:text-gray-400 transition-all duration-300">웹디자인 시스템</TabsTrigger>
             </TabsList>
 
             {/* 브랜드 정체성 탭 */}
@@ -476,6 +457,8 @@ export default function BrandPage() {
 
             {/* 로고 시스템 탭 */}
             <TabsContent value="logo" className="space-y-8">
+              {/* === 완전한 로고(권장) 예시 카드 === */}
+              <LogoShowcaseCard />
               {/* === 상단 타이틀/부제/대표 로고 === */}
               <section className="border rounded-2xl bg-white dark:bg-gray-800 p-8 mb-10 shadow-sm">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
