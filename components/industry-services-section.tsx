@@ -1,40 +1,46 @@
 import { INDUSTRY_SERVICES } from "@/constants/services";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-export default function IndustryServicesSection() {
+/**
+ * 업종별 특화 전문 서비스 섹션 (Tabs 방식)
+ * - 업종별로 탭 구분, 각 탭 클릭 시 해당 서비스만 노출
+ * - 반응형, 다크모드, 접근성, 상세 주석 적용
+ */
+export function IndustryServicesTabsSection() {
   return (
-    <section className="py-24 bg-gradient-to-br from-white via-primary/5 to-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">업종별 맞춤 자산관리</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            각 업종별 특수성을 반영한 전문 자산관리 전략을 제공합니다.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="my-12">
+      <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-200 mb-6">업종별 특화 전문 서비스</h2>
+      <Tabs defaultValue={INDUSTRY_SERVICES[0].title} className="w-full">
+        {/* 탭 리스트: 업종별 */}
+        <TabsList className="flex flex-wrap gap-2 mb-6">
           {INDUSTRY_SERVICES.map((item) => (
-            <div
+            <TabsTrigger
               key={item.title}
-              className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center border border-border hover:shadow-xl transition-shadow animate-fade-in"
+              value={item.title}
+              className="px-4 py-2 rounded-lg font-semibold text-blue-900 dark:text-blue-200 data-[state=active]:bg-blue-100 data-[state=active]:dark:bg-blue-900"
             >
-              <div className="mb-4">
-                <item.icon className="h-8 w-8" />
+              {item.title}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {/* 탭 컨텐츠: 각 업종별 서비스 */}
+        {INDUSTRY_SERVICES.map((item) => (
+          <TabsContent key={item.title} value={item.title}>
+            <div className="bg-white dark:bg-blue-950/60 rounded-xl shadow p-6 flex flex-col gap-4 max-w-2xl mx-auto">
+              <div className="flex items-center gap-3 mb-2">
+                <item.icon className="h-7 w-7 text-blue-900 dark:text-blue-200" />
+                <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-100">{item.title}</h3>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">{item.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4 min-h-[48px]">{item.description}</p>
-              <ul className="flex flex-wrap gap-2 justify-center mt-auto">
-                {item.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full"
-                  >
-                    {feature}
-                  </li>
+              <p className="text-gray-700 dark:text-gray-300 mb-2">{item.description}</p>
+              <ul className="list-disc pl-5 space-y-1 text-sm text-blue-900 dark:text-blue-200">
+                {item.features.map((feature, idx) => (
+                  <li key={idx}>{feature}</li>
                 ))}
               </ul>
             </div>
-          ))}
-        </div>
-      </div>
+          </TabsContent>
+        ))}
+      </Tabs>
     </section>
   );
 } 
