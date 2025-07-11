@@ -218,9 +218,6 @@ export default function ServicePage() {
         </div>
       </section>
 
-      {/* 업종별 특화 서비스 섹션 (Tabs 방식) */}
-      <IndustryServicesTabsSection />
-
       {/* 전문가 팀 */}
       <section className="py-24">
         <div className="container mx-auto px-4">
@@ -273,6 +270,9 @@ export default function ServicePage() {
           </div>
         </div>
       </section>
+
+      {/* 업종별 특화 서비스 섹션 (프리미엄 Tabs) */}
+      <IndustryServicesTabsSection />
 
       {/* 연락처 및 CTA 섹션 */}
       <section id="contact" className="section bg-gradient-to-r from-primary/5 to-primary/10">
