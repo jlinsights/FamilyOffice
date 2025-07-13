@@ -3,7 +3,7 @@
  */
 
 import axios from 'axios'
-import type { StockData, ForexData, ApiResponse, ApiError, AlphaVantageQuote, AlphaVantageForex } from '../types/financial'
+import type { StockData, ForexData, ApiResponse, ApiError } from '../types/financial'
 
 const ALPHA_VANTAGE_BASE_URL = 'https://www.alphavantage.co/query'
 const REQUEST_TIMEOUT = 10000 // 10초

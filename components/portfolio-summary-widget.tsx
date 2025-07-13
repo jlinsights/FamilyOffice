@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button'
 import { 
   TrendingUp, 
   TrendingDown, 
-  RefreshCw, 
   ArrowUpRight,
   PieChart,
   Target,
@@ -33,13 +32,11 @@ interface PortfolioSummaryData {
 }
 
 interface PortfolioSummaryWidgetProps {
-  clientId?: string
   className?: string
   onViewFull?: () => void
 }
 
 export default function PortfolioSummaryWidget({
-  clientId = 'demo',
   className = '',
   onViewFull
 }: PortfolioSummaryWidgetProps) {

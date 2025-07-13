@@ -94,7 +94,7 @@ const ClerkAuthButtons = memo(() => {
 const SignedInContent = memo(() => {
   const { user } = useUser()
   const isAdminUser = user?.emailAddresses?.some(
-    (email: any) => email.emailAddress === "jhlim725@gmail.com"
+    (email: { emailAddress: string }) => email.emailAddress === "jhlim725@gmail.com"
   ) || false
 
   return (

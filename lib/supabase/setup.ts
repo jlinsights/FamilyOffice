@@ -4,7 +4,7 @@ export async function createConsultationsTable() {
   const supabase = createClient()
   
   // 먼저 테이블이 존재하는지 확인
-  const { data: tables, error: tablesError } = await supabase.rpc('get_tables')
+  const { error: tablesError } = await supabase.rpc('get_tables')
   
   if (tablesError) {
     console.error("Error checking tables:", tablesError)

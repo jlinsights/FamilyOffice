@@ -19,7 +19,7 @@ export async function GET() {
       })
     }
 
-    const supabase = createClient()
+    const supabase = await createClient()
     
     // 연결 테스트
     const { data, error } = await supabase

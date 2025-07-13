@@ -30,7 +30,6 @@ async function initializeRedis() {
     if (process.env.REDIS_URL) {
       redisClient = new Redis(process.env.REDIS_URL, {
         maxRetriesPerRequest: 3,
-        retryDelayOnFailover: 100,
         enableReadyCheck: false,
         lazyConnect: true
       })
@@ -38,9 +37,8 @@ async function initializeRedis() {
       redisClient = new Redis({
         host: process.env.REDIS_HOST,
         port: parseInt(process.env.REDIS_PORT || '6379'),
-        password: process.env.REDIS_PASSWORD,
+        ...(process.env.REDIS_PASSWORD && { password: process.env.REDIS_PASSWORD }),
         maxRetriesPerRequest: 3,
-        retryDelayOnFailover: 100,
         enableReadyCheck: false,
         lazyConnect: true
       })

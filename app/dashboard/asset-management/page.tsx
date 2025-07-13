@@ -144,8 +144,8 @@ const demoAssetClasses = [
   }
 ]
 
-export default function AssetManagementPage() {
-  const { userId } = auth()
+export default async function AssetManagementPage() {
+  const { userId } = await auth()
 
   if (!userId) {
     redirect('/sign-in')

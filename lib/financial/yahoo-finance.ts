@@ -3,13 +3,9 @@
  */
 
 import yahooFinance from 'yahoo-finance2'
-import type { StockData, ForexData, IndexData, ApiResponse, ApiError, YahooFinanceQuote } from '../types/financial'
+import type { StockData, ForexData, IndexData, ApiResponse, ApiError } from '../types/financial'
 
 // Yahoo Finance 설정
-const yahooOptions = {
-  validateResult: false,  // 결과 검증 비활성화 (속도 향상)
-  timeout: 10000,        // 10초 타임아웃
-}
 
 /**
  * Yahoo Finance에서 주식 데이터 가져오기
@@ -18,7 +14,7 @@ export async function getYahooStockData(symbol: string): Promise<ApiResponse<Sto
   try {
     console.log(`📈 Yahoo Finance에서 주식 데이터 요청: ${symbol}`)
     
-    const quote = await yahooFinance.quote(symbol, yahooOptions)
+    const quote = await yahooFinance.quote(symbol)
     
     if (!quote || !quote.regularMarketPrice) {
       throw new Error(`No data found for symbol: ${symbol}`)
@@ -34,9 +30,9 @@ export async function getYahooStockData(symbol: string): Promise<ApiResponse<Sto
       high: quote.regularMarketDayHigh || quote.regularMarketPrice,
       low: quote.regularMarketDayLow || quote.regularMarketPrice,
       volume: quote.regularMarketVolume || 0,
-      marketCap: quote.marketCap,
-      pe: quote.trailingPE,
-      eps: quote.epsTrailingTwelveMonths,
+      marketCap: quote.marketCap || 0,
+      pe: quote.trailingPE || 0,
+      eps: quote.epsTrailingTwelveMonths || 0,
       currency: quote.currency || 'USD',
       timestamp: Date.now(),
       source: 'yahoo',
@@ -79,7 +75,7 @@ export async function getYahooForexData(fromCurrency: string, toCurrency: string
     const symbol = `${fromCurrency}${toCurrency}=X`
     console.log(`💱 Yahoo Finance에서 환율 데이터 요청: ${symbol}`)
     
-    const quote = await yahooFinance.quote(symbol, yahooOptions)
+    const quote = await yahooFinance.quote(symbol)
     
     if (!quote || !quote.regularMarketPrice) {
       throw new Error(`No forex data found for: ${fromCurrency}/${toCurrency}`)
@@ -92,10 +88,10 @@ export async function getYahooForexData(fromCurrency: string, toCurrency: string
       rate: quote.regularMarketPrice,
       change: quote.regularMarketChange || 0,
       changePercent: quote.regularMarketChangePercent || 0,
-      bid: quote.bid,
-      ask: quote.ask,
-      high: quote.regularMarketDayHigh,
-      low: quote.regularMarketDayLow,
+      bid: quote.bid || 0,
+      ask: quote.ask || 0,
+      high: quote.regularMarketDayHigh || 0,
+      low: quote.regularMarketDayLow || 0,
       timestamp: Date.now(),
       source: 'yahoo',
       cached: false
@@ -136,7 +132,7 @@ export async function getYahooIndexData(symbol: string): Promise<ApiResponse<Ind
   try {
     console.log(`📊 Yahoo Finance에서 지수 데이터 요청: ${symbol}`)
     
-    const quote = await yahooFinance.quote(symbol, yahooOptions)
+    const quote = await yahooFinance.quote(symbol)
     
     if (!quote || !quote.regularMarketPrice) {
       throw new Error(`No index data found for symbol: ${symbol}`)
@@ -190,7 +186,7 @@ export async function getYahooMultipleStocks(symbols: string[]): Promise<ApiResp
   try {
     console.log(`📈 Yahoo Finance에서 복수 주식 데이터 요청: [${symbols.join(', ')}]`)
     
-    const quotes = await yahooFinance.quote(symbols, yahooOptions)
+    const quotes = await yahooFinance.quote(symbols)
     const stockDataArray: StockData[] = []
 
     // 단일 심볼인 경우 배열로 변환
@@ -208,9 +204,9 @@ export async function getYahooMultipleStocks(symbols: string[]): Promise<ApiResp
           high: quote.regularMarketDayHigh || quote.regularMarketPrice,
           low: quote.regularMarketDayLow || quote.regularMarketPrice,
           volume: quote.regularMarketVolume || 0,
-          marketCap: quote.marketCap,
-          pe: quote.trailingPE,
-          eps: quote.epsTrailingTwelveMonths,
+          marketCap: quote.marketCap || 0,
+          pe: quote.trailingPE || 0,
+          eps: quote.epsTrailingTwelveMonths || 0,
           currency: quote.currency || 'USD',
           timestamp: Date.now(),
           source: 'yahoo',

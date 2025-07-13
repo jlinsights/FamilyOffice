@@ -399,7 +399,7 @@ export async function withLogging<T>(
     const apiError: ApiError = {
       code: error instanceof Error ? error.name : 'UNKNOWN_ERROR',
       message: error instanceof Error ? error.message : 'Unknown error',
-      source: 'api',
+      source: 'network',
       timestamp: Date.now()
     }
 

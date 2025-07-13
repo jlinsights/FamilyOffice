@@ -24,7 +24,7 @@ export default async function ConsultationsPage() {
     )
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data: consultations, error } = await supabase
     .from("consultations")
     .select("*")
