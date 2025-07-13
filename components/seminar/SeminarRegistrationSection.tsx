@@ -63,23 +63,23 @@ export function SeminarRegistrationSection() {
     {
       icon: Phone,
       title: "전화 상담",
-      description: "02-1234-5678",
+      description: "☎︎ 0502-5550-8700",
       action: "전화하기",
-      href: "tel:02-1234-5678"
+      href: "tel:0502-5550-8700"
     },
     {
       icon: Mail,
       title: "이메일 문의",
-      description: "seminar@familyoffices.vip",
+      description: "cs@familyoffices.vip",
       action: "메일 보내기",
-      href: "mailto:seminar@familyoffices.vip"
+      href: "mailto:cs@familyoffices.vip"
     },
     {
       icon: Calendar,
       title: "온라인 예약",
       description: "Cal.com을 통한 즉시 예약",
       action: "예약하기",
-      href: "#booking"
+      href: "https://cal.com/familyoffice/coffeechat"
     }
   ];
 
@@ -160,7 +160,10 @@ export function SeminarRegistrationSection() {
                             className="group/btn"
                             asChild
                           >
-                            <a href={method.href}>
+                            <a 
+                              href={method.href}
+                              {...(method.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                            >
                               {method.action}
                               <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                             </a>
