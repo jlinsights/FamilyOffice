@@ -1,6 +1,6 @@
-import type { FAQAccordionProps } from "@/types/faq";
 "use client"
 
+import type { FAQAccordionProps } from "@/types/faq";
 import { useState } from "react"
 import { ChevronDown, ChevronUp, Building, Factory, Hammer, Cpu } from "lucide-react"
 

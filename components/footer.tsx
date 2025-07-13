@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Sparkles, TrendingUp, Users, Award, Shield } from "lucide-react"
 import { FamilyOfficeLogo } from "@/components/logo"
+import NewsletterSignup from "./newsletter-signup";
 
 export function Footer() {
   return (
-    <footer className="border-t bg-gradient-to-b from-muted/30 to-muted/50">
+    <footer className="border-t border-border/40 bg-gradient-to-b from-muted/30 to-muted/50 dark:from-muted/20 dark:to-muted/40">
       <div className="container section-sm">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* 회사 정보 */}
@@ -23,21 +24,21 @@ export function Footer() {
             <div className="flex space-x-3">
               <Link 
                 href="#" 
-                className="flex h-10 w-10 items-center justify-center rounded-lg border bg-background hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
               >
                 <Facebook className="h-4 w-4" />
                 <span className="sr-only">Facebook</span>
               </Link>
               <Link 
                 href="#" 
-                className="flex h-10 w-10 items-center justify-center rounded-lg border bg-background hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
               >
                 <Instagram className="h-4 w-4" />
                 <span className="sr-only">Instagram</span>
               </Link>
               <Link 
                 href="#" 
-                className="flex h-10 w-10 items-center justify-center rounded-lg border bg-background hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
               >
                 <Linkedin className="h-4 w-4" />
                 <span className="sr-only">LinkedIn</span>
@@ -126,9 +127,9 @@ export function Footer() {
         {/* 연락처 정보 */}
         <div className="border-t mt-12 pt-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="card p-4 transition-all hover:shadow-md">
+            <div className="card p-4 transition-all hover:shadow-md bg-background/60 dark:bg-background/40 border-border/30">
               <div className="flex items-start space-x-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div className="text-sm">
@@ -140,9 +141,9 @@ export function Footer() {
               </div>
             </div>
             
-            <div className="card p-4 transition-all hover:shadow-md">
+            <div className="card p-4 transition-all hover:shadow-md bg-background/60 dark:bg-background/40 border-border/30">
               <div className="flex items-start space-x-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
                   <Phone className="h-5 w-5 text-primary" />
                 </div>
                 <div className="text-sm">
@@ -153,9 +154,9 @@ export function Footer() {
               </div>
             </div>
             
-            <div className="card p-4 transition-all hover:shadow-md">
+            <div className="card p-4 transition-all hover:shadow-md bg-background/60 dark:bg-background/40 border-border/30">
               <div className="flex items-start space-x-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
                   <Mail className="h-5 w-5 text-primary" />
                 </div>
                 <div className="text-sm">
@@ -171,16 +172,16 @@ export function Footer() {
           <div className="border-t pt-8 mb-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { icon: TrendingUp, value: "500억원+", label: "자산관리 실적", color: "text-blue-600" },
-                { icon: Users, value: "500+", label: "법인 고객사", color: "text-green-600" },
-                { icon: Shield, value: "20년+", label: "전문 경험", color: "text-purple-600" },
-                { icon: Award, value: "98%", label: "만족도", color: "text-orange-600" }
+                { icon: TrendingUp, value: "500억원+", label: "자산관리 실적", color: "text-blue-600 dark:text-blue-400" },
+                { icon: Users, value: "500+", label: "법인 고객사", color: "text-green-600 dark:text-green-400" },
+                { icon: Shield, value: "20년+", label: "전문 경험", color: "text-purple-600 dark:text-purple-400" },
+                { icon: Award, value: "98%", label: "만족도", color: "text-orange-600 dark:text-orange-400" }
               ].map((stat, index) => {
                 const IconComponent = stat.icon
                 return (
                   <div key={index} className="text-center group">
                     <div className="flex justify-center mb-2">
-                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <div className="h-12 w-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                         <IconComponent className={`h-6 w-6 ${stat.color}`} />
                       </div>
                     </div>
@@ -191,6 +192,9 @@ export function Footer() {
               })}
             </div>
           </div>
+          
+          {/* 뉴스레터 구독 폼 */}
+          <NewsletterSignup />
           
           <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">

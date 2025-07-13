@@ -17,9 +17,9 @@ export const ServiceCard = memo(function ServiceCard({
 }: ServiceCardProps) {
   return (
     <Link href={href} className="group block h-full">
-      <div className="card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:-translate-y-2 hover:border-border/80 p-6 h-full bg-gradient-to-br from-card to-card/50">
+      <div className="card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 hover:-translate-y-2 hover:border-border/80 p-6 h-full bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30">
         {/* 아이콘 */}
-        <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+        <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20 text-primary mb-6 group-hover:bg-primary/20 dark:group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
           {icon}
         </div>
         

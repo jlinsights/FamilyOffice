@@ -1,7 +1,7 @@
 // FamilyOffice S - 사용자 통계 API
 // 관리자가 사용자 통계 정보를 조회하는 엔드포인트
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { getUserStats } from '@/lib/user-sync';
 
@@ -10,7 +10,7 @@ const SUPER_ADMIN_EMAILS = [
   'jhlim725@gmail.com'
 ];
 
-export async function GET(_req: NextRequest) {
+export async function GET() {
   try {
     // 사용자 인증 확인
     const { userId } = await auth();

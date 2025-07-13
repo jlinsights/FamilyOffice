@@ -29,6 +29,16 @@ const envSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
+  
+  // Financial Data APIs
+  ALPHA_VANTAGE_API_KEY: z.string().optional(),
+  YAHOO_FINANCE_API_KEY: z.string().optional(),
+  
+  // Redis (선택사항)
+  REDIS_URL: z.string().optional(),
+  REDIS_HOST: z.string().optional(),
+  REDIS_PORT: z.string().optional(),
+  REDIS_PASSWORD: z.string().optional(),
 })
 
 // 환경변수 검증 함수

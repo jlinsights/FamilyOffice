@@ -26,18 +26,26 @@ export function ConsultationForm() {
     const message = formData.get("message") as string
 
     try {
+      // 폼 데이터 검증
+      if (!name || !email || !phone) {
+        throw new Error("필수 항목을 모두 입력해주세요.")
+      }
+
       const supabase = createClient()
 
       const { error } = await supabase.from("consultations").insert({
         name,
         email,
         phone,
-        service_type: service,
-        message,
+        service_type: service || null,
+        message: message || null,
         status: "pending",
       })
 
-      if (error) throw error
+      if (error) {
+        console.error("Supabase error:", error)
+        throw error
+      }
 
       setFormSuccess(true)
       event.currentTarget.reset()
@@ -48,7 +56,16 @@ export function ConsultationForm() {
       }, 3000)
     } catch (error) {
       console.error("Error submitting form:", error)
-      setFormError("상담 신청 중 오류가 발생했습니다. 다시 시도해 주세요.")
+      
+      let errorMessage = "상담 신청 중 오류가 발생했습니다."
+      
+      if (error instanceof Error) {
+        errorMessage = error.message
+      } else if (error && typeof error === 'object' && 'message' in error) {
+        errorMessage = String(error.message)
+      }
+      
+      setFormError(errorMessage)
     } finally {
       setIsSubmitting(false)
     }
@@ -125,7 +142,7 @@ export function ConsultationForm() {
         </div>
       )}
 
-      <Button type="submit" variant="primary" className="w-full" disabled={isSubmitting}>
+      <Button type="submit" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? "처리 중..." : "상담 신청하기"}
       </Button>
     </form>

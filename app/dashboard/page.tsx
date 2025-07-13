@@ -39,13 +39,16 @@ export default async function DashboardPage() {
             {/* 대시보드 메뉴 */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* 자산 현황 */}
-              <div className="glass-card p-6 hover:scale-105 transition-all duration-300">
+              <a 
+                href="/dashboard/asset-management" 
+                className="glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer block"
+              >
                 <div className="text-2xl mb-4">📊</div>
                 <h3 className="font-heading text-xl font-semibold mb-2">자산 현황</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
                   포트폴리오 현황과 자산 분석 리포트를 확인하세요.
                 </p>
-              </div>
+              </a>
 
               {/* 상담 이력 */}
               <div className="glass-card p-6 hover:scale-105 transition-all duration-300">

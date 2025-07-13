@@ -3,7 +3,6 @@ import React from 'react'
 interface LogoProps {
   language?: 'en' | 'ko'
   size?: 'small' | 'default' | 'large'
-  theme?: 'light' | 'dark'
   showTagline?: boolean
   align?: 'left' | 'center'
   className?: string
@@ -13,7 +12,6 @@ interface LogoProps {
 export const FamilyOfficeLogo: React.FC<LogoProps> = ({ 
   language = "en", 
   size = "default",
-  theme = "light",
   showTagline = true,
   align = "center",
   className = ""
@@ -57,9 +55,7 @@ export const FamilyOfficeLogo: React.FC<LogoProps> = ({
   }
 
   const currentSize = sizes[size]
-  const themeClasses = theme === "dark" 
-    ? "text-white" 
-    : "text-foreground"
+  const themeClasses = "text-foreground"
   
   const alignmentClasses = align === "left" 
     ? "items-start" 
@@ -105,7 +101,6 @@ export const FamilyOfficeLogo: React.FC<LogoProps> = ({
 // 미니멀 버전 - 인라인 사용을 위한 컴포넌트
 export const MinimalFamilyOfficeLogo: React.FC<Omit<LogoProps, 'showTagline'>> = ({ 
   size = "default",
-  theme = "light",
   className = ""
 }) => {
   const sizes = {
@@ -130,9 +125,7 @@ export const MinimalFamilyOfficeLogo: React.FC<Omit<LogoProps, 'showTagline'>> =
   }
 
   const currentSize = sizes[size]
-  const themeClasses = theme === "dark" 
-    ? "text-white" 
-    : "text-foreground"
+  const themeClasses = "text-foreground"
 
   return (
     <div className={`inline-flex items-center ${currentSize.spacing} group ${className}`}>
@@ -154,13 +147,10 @@ export const MinimalFamilyOfficeLogo: React.FC<Omit<LogoProps, 'showTagline'>> =
 
 // 프리미엄 버전 - 특별한 페이지나 섹션용
 export const PremiumFamilyOfficeLogo: React.FC<Omit<LogoProps, 'size' | 'language'>> = ({ 
-  theme = "light",
   showTagline = true,
   className = ""
 }) => {
-  const themeClasses = theme === "dark" 
-    ? "text-white" 
-    : "text-foreground"
+  const themeClasses = "text-foreground"
 
   return (
     <header className={`flex flex-col items-center space-y-4 ${className}`} role="banner">

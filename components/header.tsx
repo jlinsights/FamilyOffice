@@ -2,19 +2,19 @@
 
 import { useState, useCallback, memo } from "react"
 import Link from "next/link"
-import { Menu, X, ArrowRight } from "lucide-react"
+import { Menu, X, ArrowRight, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { MinimalFamilyOfficeLogo } from "@/components/logo"
 import { NAVIGATION_ITEMS } from "@/lib/constants"
-// import { 
-//   SignInButton, 
-//   SignUpButton, 
-//   SignedIn, 
-//   SignedOut, 
-//   UserButton, 
-//   useUser 
-// } from "@clerk/nextjs"
+import { 
+  SignInButton, 
+  SignUpButton, 
+  SignedIn, 
+  SignedOut, 
+  UserButton, 
+  useUser 
+} from "@clerk/nextjs"
 import type { NavigationItem } from "@/types/globals"
 import type { MouseEventHandler } from "react"
 
@@ -53,158 +53,153 @@ const NavigationLink = memo(({
 NavigationLink.displayName = "NavigationLink"
 
 // Clerk 인증 버튼 컴포넌트 - 안전한 버전
-// const ClerkAuthButtons = memo(() => {
-//   if (!isClerkEnabled) {
-//     return (
-//       <div className="flex items-center space-x-2">
-//         <Button variant="ghost" size="sm" className="btn-auth-login text-sm font-medium">
-//           로그인
-//         </Button>
-//         <Button size="sm" className="btn-auth-signup-outline text-sm font-medium">
-//           회원가입
-//         </Button>
-//       </div>
-//     )
-//   }
+const ClerkAuthButtons = memo(() => {
+  if (!isClerkEnabled) {
+    return (
+      <div className="flex items-center space-x-2">
+        <Button variant="ghost" size="sm" className="btn-auth-login text-sm font-medium">
+          로그인
+        </Button>
+        <Button size="sm" className="btn-auth-signup-outline text-sm font-medium">
+          회원가입
+        </Button>
+      </div>
+    )
+  }
 
-//   return (
-//     <>
-//       <SignedOut>
-//         <div className="flex items-center space-x-2">
-//           <SignInButton mode="modal">
-//             <Button variant="ghost" size="sm" className="btn-auth-login text-sm font-medium">
-//               로그인
-//             </Button>
-//           </SignInButton>
-          
-//           <SignUpButton mode="modal">
-//             <Button size="sm" className="btn-auth-signup-outline text-sm font-medium">
-//               회원가입
-//             </Button>
-//           </SignUpButton>
-//         </div>
-//       </SignedOut>
-      
-//       <SignedIn>
-//         <SignedInContent />
-//       </SignedIn>
-//     </>
-//   )
-// })
+  return (
+    <>
+      <SignedOut>
+        <div className="flex items-center space-x-2">
+          <SignInButton mode="modal">
+            <Button variant="ghost" size="sm" className="btn-auth-login text-sm font-medium">
+              로그인
+            </Button>
+          </SignInButton>
+          <SignUpButton mode="modal">
+            <Button size="sm" className="btn-auth-signup-outline text-sm font-medium">
+              회원가입
+            </Button>
+          </SignUpButton>
+        </div>
+      </SignedOut>
+      <SignedIn>
+        <SignedInContent />
+      </SignedIn>
+    </>
+  )
+})
 
 // SignedIn 내부에서만 useUser 사용
-// const SignedInContent = memo(() => {
-//   const { user } = useUser()
-//   const isAdminUser = user?.emailAddresses?.some(
-//     (email: any) => email.emailAddress === "jhlim725@gmail.com"
-//   ) || false
+const SignedInContent = memo(() => {
+  const { user } = useUser()
+  const isAdminUser = user?.emailAddresses?.some(
+    (email: any) => email.emailAddress === "jhlim725@gmail.com"
+  ) || false
 
-//   return (
-//     <div className="flex items-center space-x-2">
-//       {/* 관리자 전용 설정 버튼 */}
-//       {isAdminUser && (
-//         <Button variant="ghost" size="sm" asChild>
-//           <Link href="/dashboard">
-//             <Settings className="h-4 w-4" />
-//           </Link>
-//         </Button>
-//       )}
-      
-//       <UserButton 
-//         appearance={{
-//           elements: {
-//             avatarBox: "h-8 w-8 border-2 border-border hover:border-primary transition-all duration-200 hover:scale-105",
-//             userButtonPopoverCard: "bg-card border border-border shadow-lg rounded-lg",
-//             userButtonPopoverActionButton: "hover:bg-accent transition-colors duration-200",
-//             userButtonPopoverActionButtonText: "text-foreground",
-//             userButtonPopoverFooter: "hidden"
-//           }
-//         }}
-//       />
-//     </div>
-//   )
-// })
+  return (
+    <div className="flex items-center space-x-2">
+      {/* 관리자 전용 설정 버튼 */}
+      {isAdminUser && (
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/dashboard">
+            <Settings className="h-4 w-4" />
+          </Link>
+        </Button>
+      )}
+      <UserButton 
+        appearance={{
+          elements: {
+            avatarBox: "h-8 w-8 border-2 border-border hover:border-primary transition-all duration-200 hover:scale-105",
+            userButtonPopoverCard: "bg-card border border-border shadow-lg rounded-lg",
+            userButtonPopoverActionButton: "hover:bg-accent transition-colors duration-200",
+            userButtonPopoverActionButtonText: "text-foreground",
+            userButtonPopoverFooter: "hidden"
+          }
+        }}
+      />
+    </div>
+  )
+})
 
-// ClerkAuthButtons.displayName = "ClerkAuthButtons"
-// SignedInContent.displayName = "SignedInContent"
+ClerkAuthButtons.displayName = "ClerkAuthButtons"
+SignedInContent.displayName = "SignedInContent"
 
 // 모바일 Clerk 인증 버튼 컴포넌트
-// const MobileClerkAuthButtons = memo(({ closeMenu }: { closeMenu: () => void }) => {
-//   if (!isClerkEnabled) {
-//     return null
-//   }
+const MobileClerkAuthButtons = memo(({ closeMenu }: { closeMenu: () => void }) => {
+  if (!isClerkEnabled) {
+    return null
+  }
+  return (
+    <>
+      <SignedOut>
+        <div className="px-4 py-2 border-t border-border">
+          <div className="space-y-2">
+            <SignInButton mode="modal">
+              <Button variant="ghost" size="sm" className="btn-auth-login w-full">
+                로그인
+              </Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button size="sm" className="btn-auth-signup-outline w-full">
+                회원가입
+              </Button>
+            </SignUpButton>
+          </div>
+        </div>
+      </SignedOut>
+      <SignedIn>
+        <div className="px-4 py-2 border-t border-border">
+          <div className="flex items-center justify-between">
+            <UserButton 
+              appearance={{
+                elements: {
+                  avatarBox: "h-8 w-8 border-2 border-border hover:border-primary transition-all duration-200 hover:scale-105",
+                  userButtonPopoverCard: "bg-card border border-border shadow-lg rounded-lg",
+                  userButtonPopoverActionButton: "hover:bg-accent transition-colors duration-200",
+                  userButtonPopoverActionButtonText: "text-foreground",
+                  userButtonPopoverFooter: "hidden"
+                }
+              }}
+            />
+            <Button 
+              size="sm" 
+              asChild 
+              className="btn-consultation !text-white"
+              style={{ 
+                backgroundColor: 'hsl(var(--primary)) !important',
+                borderColor: 'hsl(var(--primary)) !important',
+                color: '#ffffff !important'
+              }}
+            >
+              <Link 
+                href="/contact" 
+                onClick={closeMenu} 
+                className="text-white !text-white force-white" 
+                style={{ 
+                  color: '#ffffff !important',
+                  textDecoration: 'none !important'
+                }}
+              >
+                <span 
+                  className="!text-white force-white" 
+                  style={{ 
+                    color: '#ffffff !important',
+                    fontWeight: '600 !important'
+                  }}
+                >
+                  상담 신청
+                </span>
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </SignedIn>
+    </>
+  )
+})
 
-//   return (
-//     <>
-//       <SignedOut>
-//         <div className="px-4 py-2 border-t border-border">
-//           <div className="space-y-2">
-//             <SignInButton mode="modal">
-//               <Button variant="ghost" size="sm" className="btn-auth-login w-full">
-//                 로그인
-//               </Button>
-//             </SignInButton>
-//             <SignUpButton mode="modal">
-//               <Button size="sm" className="btn-auth-signup-outline w-full">
-//                 회원가입
-//               </Button>
-//             </SignUpButton>
-//           </div>
-//         </div>
-//       </SignedOut>
-      
-//       <SignedIn>
-//         <div className="px-4 py-2 border-t border-border">
-//           <div className="flex items-center justify-between">
-//             <UserButton 
-//               appearance={{
-//                 elements: {
-//                   avatarBox: "h-8 w-8 border-2 border-border hover:border-primary transition-all duration-200 hover:scale-105",
-//                   userButtonPopoverCard: "bg-card border border-border shadow-lg rounded-lg",
-//                   userButtonPopoverActionButton: "hover:bg-accent transition-colors duration-200",
-//                   userButtonPopoverActionButtonText: "text-foreground",
-//                   userButtonPopoverFooter: "hidden"
-//                 }
-//               }}
-//             />
-//                          <Button 
-//                size="sm" 
-//                asChild 
-//                className="btn-consultation !text-white"
-//                style={{ 
-//                  backgroundColor: 'hsl(var(--primary)) !important',
-//                  borderColor: 'hsl(var(--primary)) !important',
-//                  color: '#ffffff !important'
-//                }}
-//              >
-//                <Link 
-//                  href="/contact" 
-//                  onClick={closeMenu} 
-//                  className="text-white !text-white force-white" 
-//                  style={{ 
-//                    color: '#ffffff !important',
-//                    textDecoration: 'none !important'
-//                  }}
-//                >
-//                  <span 
-//                    className="!text-white force-white" 
-//                    style={{ 
-//                      color: '#ffffff !important',
-//                      fontWeight: '600 !important'
-//                    }}
-//                  >
-//                    상담 신청
-//                  </span>
-//                </Link>
-//              </Button>
-//           </div>
-//         </div>
-//       </SignedIn>
-//     </>
-//   )
-// })
-
-// MobileClerkAuthButtons.displayName = "MobileClerkAuthButtons"
+MobileClerkAuthButtons.displayName = "MobileClerkAuthButtons"
 
 export const Header = memo(function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -239,7 +234,9 @@ export const Header = memo(function Header() {
           {/* 데스크톱 - 인증 및 액션 버튼들 */}
           <div className="hidden md:flex items-center space-x-3">
             {/* Clerk 인증 버튼들 */}
-            {/* <ClerkAuthButtons /> */}
+            {isClerkEnabled ? (
+              <ClerkAuthButtons />
+            ) : null}
             
             {/* 상담 신청 버튼 - 강화된 가시성 */}
             <Button 
@@ -333,45 +330,13 @@ export const Header = memo(function Header() {
         </nav>
         
         {/* 모바일 인증 및 액션 버튼들 */}
-        {/* <MobileClerkAuthButtons closeMenu={closeMenu} /> */}
+        {isClerkEnabled ? (
+          <MobileClerkAuthButtons closeMenu={closeMenu} />
+        ) : null}
         
         {/* 로그인하지 않은 사용자를 위한 상담 신청 버튼 (SignedOut일 때만) */}
         {isClerkEnabled ? (
-          // <SignedOut>
-          //   <div className="px-4 py-2 border-t border-border">
-          //     <Button 
-          //       size="sm" 
-          //       asChild 
-          //       className="btn-consultation w-full !text-white"
-          //       style={{ 
-          //         backgroundColor: 'hsl(var(--primary)) !important',
-          //         borderColor: 'hsl(var(--primary)) !important',
-          //         color: '#ffffff !important'
-          //       }}
-          //     >
-          //       <Link 
-          //         href="/contact" 
-          //         onClick={closeMenu} 
-          //         className="text-white !text-white force-white" 
-          //         style={{ 
-          //           color: '#ffffff !important',
-          //           textDecoration: 'none !important'
-          //         }}
-          //       >
-          //         <span 
-          //           className="!text-white force-white" 
-          //           style={{ 
-          //             color: '#ffffff !important',
-          //             fontWeight: '600 !important'
-          //           }}
-          //         >
-          //           상담 신청
-          //         </span>
-          //       </Link>
-          //     </Button>
-          //   </div>
-          // </SignedOut>
-          null // 전체 주석 처리
+          null
         ) : (
           <div className="px-4 py-2 border-t border-border">
             <Button 

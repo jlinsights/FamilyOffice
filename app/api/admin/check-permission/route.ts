@@ -1,7 +1,7 @@
 // FamilyOffice S - 관리자 권한 체크 API
 // 슈퍼관리자(jhlim725@gmail.com) 권한을 확인하는 엔드포인트
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { currentUser } from '@clerk/nextjs/server';
 
 // 슈퍼 관리자 이메일 목록
@@ -9,7 +9,7 @@ const SUPER_ADMIN_EMAILS = [
   'jhlim725@gmail.com'
 ];
 
-export async function POST(_req: NextRequest) {
+export async function POST() {
   try {
     // 현재 사용자 정보 가져오기
     const user = await currentUser();
