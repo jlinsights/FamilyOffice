@@ -7,7 +7,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: "/services", label: "서비스" },
   { href: "/program", label: "프로그램" },
   { href: "/faq", label: "FAQ" },
-  { href: "https://seminar.familyoffices.vip/", label: "세미나" },
+  { href: "/seminar", label: "세미나" },
   { href: "https://recruit.familyoffices.vip/", label: "채용" }
 ] as const
 

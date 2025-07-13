@@ -73,9 +73,7 @@ export function EducationScheduleSection({ educationPrograms }: { educationProgr
             aria-label="세미나 바로가기"
           >
             <a
-              href="https://seminar.familyoffices.vip/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/seminar"
               className="flex items-center justify-center gap-2"
             >
               <Calendar className="h-5 w-5 mr-2" aria-hidden />

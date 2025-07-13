@@ -52,7 +52,7 @@ export default function HomePage() {
           
           {/* 메인 헤드라인 */}
           <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-            백년영속의 시작
+            百年永續의 시작
           </h1>
           
           {/* 서브 헤드라인 */}
@@ -61,7 +61,7 @@ export default function HomePage() {
           </p>
           
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
-            성공적인 가업승계는 백년영속의 시작입니다
+            성공적인 가업승계는 百年永續의 시작입니다
           </p>
           
           {/* 핵심 성과 지표 */}
