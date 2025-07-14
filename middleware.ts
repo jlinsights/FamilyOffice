@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { rateLimiters, applySecurityHeaders, CSRFProtection } from '@/lib/security/rate-limiter'
 
 // Clerk middleware를 조건부로 import
 let clerkMiddleware: any = null;
@@ -28,18 +29,67 @@ const isAdminRoute = createRouteMatcher([
   '/api/admin(.*)'
 ]);
 
+// Rate limiting route matchers
+const isApiRoute = createRouteMatcher(['/api(.*)'])
+const isAuthRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)'])
+const isContactRoute = createRouteMatcher(['/api/contact', '/contact'])
+const isFinancialRoute = createRouteMatcher(['/api/financial(.*)'])
+const isPublicRoute = createRouteMatcher([
+  '/',
+  '/about',
+  '/services',
+  '/contact',
+  '/faq',
+  '/brand', 
+  '/program',
+  '/privacy',
+  '/terms',
+  '/api/docs(.*)',
+  '/api/webhooks(.*)',
+  '/api/financial(.*)',
+  '/api/v0',
+  '/sign-in(.*)',
+  '/sign-up(.*)'
+]);
+
 export default clerkMiddleware(async (auth: any, req: NextRequest) => {
+  const { pathname } = req.nextUrl;
+  
+  // Rate limiting based on route type
+  try {
+    let rateLimitResponse: Response | null = null;
+    
+    if (isAuthRoute(req)) {
+      rateLimitResponse = await rateLimiters.auth.createMiddleware()(req)
+    } else if (isContactRoute(req)) {
+      rateLimitResponse = await rateLimiters.contact.createMiddleware()(req)
+    } else if (isFinancialRoute(req)) {
+      rateLimitResponse = await rateLimiters.financial.createMiddleware()(req)
+    } else if (isApiRoute(req)) {
+      rateLimitResponse = await rateLimiters.api.createMiddleware()(req)
+    } else {
+      rateLimitResponse = await rateLimiters.pages.createMiddleware()(req)
+    }
+    
+    if (rateLimitResponse) {
+      return applySecurityHeaders(rateLimitResponse)
+    }
+
+    // CSRF Protection for API routes (except webhooks and docs)
+    if (isApiRoute(req) && !pathname.includes('/webhooks') && !pathname.includes('/docs')) {
+      const csrfResponse = CSRFProtection.createMiddleware()(req)
+      if (csrfResponse) {
+        return applySecurityHeaders(csrfResponse)
+      }
+    }
+  } catch (error) {
+    console.error('Security middleware error:', error);
+  }
+
   // Clerk가 설정되지 않은 경우 기본 응답
   if (!auth) {
     const response = NextResponse.next();
-    
-    // 보안 헤더 추가
-    response.headers.set(
-      'Content-Security-Policy',
-      "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' *.google-analytics.com;"
-    );
-
-    return response;
+    return applySecurityHeaders(response);
   }
 
   // 사용자가 인증된 경우 Supabase 동기화 트리거
@@ -108,27 +158,16 @@ export default clerkMiddleware(async (auth: any, req: NextRequest) => {
     }
   }
 
-  // 보안 헤더 추가
+  // 보안 헤더가 적용된 응답 반환
   const response = NextResponse.next();
-  
-  // CSP 헤더 추가
-  response.headers.set(
-    'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' *.clerk.accounts.dev *.googletagmanager.com *.google-analytics.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: blob: *.clerk.accounts.dev; connect-src 'self' *.clerk.accounts.dev *.google-analytics.com;"
-  );
-
-  return response;
+  return applySecurityHeaders(response);
 });
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
   ],
 }; 
