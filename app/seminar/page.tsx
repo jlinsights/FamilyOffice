@@ -6,7 +6,6 @@ import { UpcomingSeminarsSection } from "@/components/seminar/UpcomingSeminarsSe
 import { SeminarCategoriesSection } from "@/components/seminar/SeminarCategoriesSection";
 import { PastSeminarsSection } from "@/components/seminar/PastSeminarsSection";
 import SeminarRegistrationSection from "@/components/seminar/SeminarRegistrationSection";
-import { cmsService } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "세미나 | 패밀리오피스 S - 프리미엄 교육 프로그램",
@@ -20,18 +19,7 @@ export const metadata: Metadata = {
   }
 };
 
-export const revalidate = 300; // 5 minutes ISR
-
-export default async function SeminarPage() {
-  // Fetch seminars from CMS
-  let seminarsData;
-  try {
-    seminarsData = await cmsService.getSeminars();
-  } catch (error) {
-    console.error('Failed to fetch seminars:', error);
-    // Fallback to static data is handled by CMS service
-    seminarsData = await cmsService.getSeminars();
-  }
+export default function SeminarPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
       <Header />
