@@ -11,6 +11,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "type-check": "tsc --noEmit",
+    "analyze": "cross-env ANALYZE=true next build",
     "vercel-build": "next build"
   },
   "dependencies": {
@@ -79,12 +87,21 @@
     "zod": "3.24.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/jest": "^30.0.0",
     "@types/node": "20.12.7",
     "@types/react": "18.2.62",
     "@types/react-dom": "18.2.19",
+    "cross-env": "^7.0.3",
     "eslint": "9.31.0",
     "eslint-config-next": "15.3.5",
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4",
     "postcss": "^8.4.38",
+    "prettier": "^3.6.2",
     "tailwindcss": "3.4.17",
     "typescript": "5.4.5"
   }
