@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Cal, { getCalApi } from "@calcom/embed-react";
+import { useEffect } from "react";
 import { 
   UserPlus, 
   Calendar, 
@@ -18,24 +18,14 @@ import {
   Star
 } from "lucide-react";
 
-export function SeminarRegistrationSection() {
+export default function SeminarRegistrationSection() {
   useEffect(() => {
     (async function () {
-      try {
-        const cal = await getCalApi({ namespace: "seminar" })
-        cal("ui", {
-          cssVarsPerTheme: {
-            light: { "cal-brand": "#1e3a8a" },
-            dark: { "cal-brand": "#3b82f6" }
-          },
-          hideEventTypeDetails: false,
-          layout: "month_view"
-        })
-      } catch (error) {
-        console.error('❌ Cal.com 초기화 실패:', error)
-      }
-    })()
-  }, [])
+      const cal = await getCalApi({"namespace":"consulting"});
+      cal("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#000000"},"dark":{"cal-brand":"#ffffff"}},"hideEventTypeDetails":false,"layout":"month_view"});
+    })();
+  }, []);
+
   const benefits = [
     {
       icon: Calendar,
@@ -84,17 +74,17 @@ export function SeminarRegistrationSection() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-muted/20 to-primary/5">
+    <section className="py-20 bg-gradient-to-b from-muted/20 to-primary/5 dark:from-gray-900 dark:to-gray-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <Badge variant="secondary" className="mb-4 animate-fade-in">
+          <Badge variant="secondary" className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60">
             <UserPlus className="h-3 w-3 mr-1" />
             Registration & Contact
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-slide-up">
-            <span className="text-primary">세미나 신청</span> 및 문의
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-slide-up text-gray-900 dark:text-white">
+            <span className="text-primary dark:text-emerald-300">세미나 신청</span> 및 문의
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '200ms' }}>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-up dark:text-gray-200" style={{ animationDelay: '200ms' }}>
             다양한 방법으로 세미나 신청 및 상담 예약이 가능합니다
           </p>
         </div>
@@ -104,23 +94,23 @@ export function SeminarRegistrationSection() {
           <div className="space-y-8">
             {/* Member Benefits */}
             <div className="animate-slide-up" style={{ animationDelay: '300ms' }}>
-              <h3 className="text-2xl font-bold mb-6 flex items-center">
-                <Gift className="h-6 w-6 text-primary mr-3" />
+              <h3 className="text-2xl font-bold mb-6 flex items-center text-foreground dark:text-white">
+                <Gift className="h-6 w-6 text-primary dark:text-primary mr-3" />
                 멤버 전용 혜택
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => {
                   const Icon = benefit.icon;
                   return (
-                    <Card key={index} className="group hover:shadow-md transition-all duration-300">
+                    <Card key={index} className="group hover:shadow-md transition-all duration-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100">
                       <CardContent className="p-4">
                         <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                            <Icon className="h-5 w-5 text-primary" />
+                          <div className="w-10 h-10 bg-primary/10 dark:bg-primary/30 rounded-full flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors">
+                            <Icon className="h-5 w-5 text-primary dark:text-primary" />
                           </div>
                           <div>
-                            <h4 className="font-semibold text-sm mb-1">{benefit.title}</h4>
-                            <p className="text-xs text-muted-foreground leading-relaxed">
+                            <h4 className="font-semibold text-sm mb-1 text-foreground dark:text-white">{benefit.title}</h4>
+                            <p className="text-xs text-muted-foreground dark:text-gray-200 leading-relaxed">
                               {benefit.description}
                             </p>
                           </div>
@@ -134,30 +124,30 @@ export function SeminarRegistrationSection() {
 
             {/* Contact Methods */}
             <div className="animate-slide-up" style={{ animationDelay: '400ms' }}>
-              <h3 className="text-2xl font-bold mb-6 flex items-center">
-                <Phone className="h-6 w-6 text-primary mr-3" />
+              <h3 className="text-2xl font-bold mb-6 flex items-center text-foreground dark:text-white">
+                <Phone className="h-6 w-6 text-primary dark:text-primary mr-3" />
                 문의 방법
               </h3>
               <div className="space-y-4">
                 {contactMethods.map((method, index) => {
                   const Icon = method.icon;
                   return (
-                    <Card key={index} className="group hover:shadow-md transition-all duration-300">
+                    <Card key={index} className="group hover:shadow-md transition-all duration-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100">
                       <CardContent className="p-4">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                              <Icon className="h-6 w-6 text-primary" />
+                            <div className="w-12 h-12 bg-primary/10 dark:bg-primary/30 rounded-full flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors">
+                              <Icon className="h-6 w-6 text-primary dark:text-primary" />
                             </div>
                             <div>
-                              <h4 className="font-semibold mb-1">{method.title}</h4>
-                              <p className="text-sm text-muted-foreground">{method.description}</p>
+                              <h4 className="font-semibold mb-1 text-foreground dark:text-white">{method.title}</h4>
+                              <p className="text-sm text-muted-foreground dark:text-gray-200">{method.description}</p>
                             </div>
                           </div>
                           <Button 
                             variant="outline" 
                             size="sm" 
-                            className="group/btn"
+                            className="group/btn dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700"
                             asChild
                           >
                             <a 
@@ -177,23 +167,23 @@ export function SeminarRegistrationSection() {
             </div>
 
             {/* Quick Stats */}
-            <div className="bg-primary/5 rounded-lg p-6 animate-slide-up" style={{ animationDelay: '500ms' }}>
-              <h4 className="font-semibold mb-4 flex items-center">
-                <CheckCircle className="h-5 w-5 text-primary mr-2" />
+            <div className="bg-primary/5 dark:bg-primary/10 border border-primary/20 dark:border-primary/30 rounded-lg p-6 animate-slide-up" style={{ animationDelay: '500ms' }}>
+              <h4 className="font-semibold mb-4 flex items-center text-foreground dark:text-white">
+                <CheckCircle className="h-5 w-5 text-primary dark:text-primary mr-2" />
                 신청 현황
               </h4>
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-primary">89%</div>
-                  <div className="text-xs text-muted-foreground">평균 예약률</div>
+                  <div className="text-2xl font-bold text-primary dark:text-emerald-300">89%</div>
+                  <div className="text-xs text-muted-foreground dark:text-gray-300">평균 예약률</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-primary">24h</div>
-                  <div className="text-xs text-muted-foreground">평균 응답시간</div>
+                  <div className="text-2xl font-bold text-primary dark:text-emerald-300">24h</div>
+                  <div className="text-xs text-muted-foreground dark:text-gray-300">평균 응답시간</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-primary">98%</div>
-                  <div className="text-xs text-muted-foreground">재참석률</div>
+                  <div className="text-2xl font-bold text-primary dark:text-emerald-300">98%</div>
+                  <div className="text-xs text-muted-foreground dark:text-gray-300">재참석률</div>
                 </div>
               </div>
             </div>
@@ -201,48 +191,48 @@ export function SeminarRegistrationSection() {
 
           {/* Right Column - Cal.com Integration */}
           <div className="animate-slide-up" style={{ animationDelay: '600ms' }}>
-            <div id="booking" className="bg-background rounded-lg border shadow-lg overflow-hidden">
-              <div className="p-6 border-b">
-                <h3 className="text-xl font-bold mb-2 flex items-center">
-                  <Calendar className="h-5 w-5 text-primary mr-2" />
+            <div id="booking" className="bg-background dark:bg-background rounded-lg border shadow-lg overflow-hidden">
+              <div className="p-6 border-b border-border dark:border-border">
+                <h3 className="text-xl font-bold mb-2 flex items-center text-foreground dark:text-foreground">
+                  <Calendar className="h-5 w-5 text-primary dark:text-primary mr-2" />
                   온라인 상담 예약
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground">
                   세미나 관련 상담을 위한 시간을 예약하세요
                 </p>
               </div>
               <div className="p-6">
                 <Cal 
-                  namespace="seminar"
-                  calLink="familyoffice/seminar-consultation"
-                  style={{ width: "100%", height: "600px" }}
-                  config={{ layout: "month_view" }}
+                  namespace="consulting"
+                  calLink="familyoffice/consulting"
+                  style={{width:"100%",height:"600px",overflow:"scroll"}}
+                  config={{"layout":"month_view"}}
                 />
               </div>
             </div>
             
             {/* Additional Info */}
             <div className="mt-6 space-y-4">
-              <div className="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <Clock className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <div className="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30 rounded-lg">
+                <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-1">
+                  <h4 className="font-medium text-blue-900 dark:text-blue-300 mb-1">
                     상담 시간 안내
                   </h4>
-                  <p className="text-sm text-blue-700 dark:text-blue-200">
+                  <p className="text-sm text-blue-700 dark:text-blue-300">
                     평일 오전 9시부터 오후 6시까지 상담이 가능합니다. 
                     주말 및 공휴일은 온라인 문의를 이용해 주세요.
                   </p>
                 </div>
               </div>
               
-              <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+              <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/30 rounded-lg">
+                <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-green-900 dark:text-green-100 mb-1">
+                  <h4 className="font-medium text-green-900 dark:text-green-300 mb-1">
                     예약 확인
                   </h4>
-                  <p className="text-sm text-green-700 dark:text-green-200">
+                  <p className="text-sm text-green-700 dark:text-green-300">
                     예약 완료 후 이메일과 SMS로 상담 일정을 확인해 드립니다.
                   </p>
                 </div>
