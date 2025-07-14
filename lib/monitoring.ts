@@ -1,5 +1,3 @@
-import { env } from '@/lib/env'
-
 // Error monitoring and logging utilities
 export class ErrorMonitor {
   static logError(error: Error, context?: Record<string, any>) {
