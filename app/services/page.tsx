@@ -338,7 +338,7 @@ export default function ServicePage() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="http://pf.kakao.com/_xkchGj" target="_blank" rel="noopener noreferrer">
+                <Link href="http://pf.kakao.com/_gsxkxdG/chat" target="_blank" rel="noopener noreferrer">
                   카카오톡 상담하기
                 </Link>
               </Button>

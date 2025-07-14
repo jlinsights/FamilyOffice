@@ -500,7 +500,7 @@ export default function HomePage() {
                 <MessageSquare className="h-8 w-8 text-primary mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2">카카오채널</h3>
                 <Button variant="outline" size="sm" asChild>
-                  <Link href="http://pf.kakao.com/_xkchGj" target="_blank" rel="noopener noreferrer">
+                  <Link href="http://pf.kakao.com/_gsxkxdG/chat" target="_blank" rel="noopener noreferrer">
                     @패밀리오피스
                   </Link>
                 </Button>
