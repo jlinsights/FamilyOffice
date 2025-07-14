@@ -6,10 +6,17 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: "/about", label: "소개" },
   { href: "/services", label: "서비스" },
   { href: "/program", label: "프로그램" },
+  // { href: "/blog", label: "블로그" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
+  // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
+  // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
+  // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   { href: "/faq", label: "FAQ" },
   { href: "/seminar", label: "세미나" },
-  { href: "https://recruit.familyoffices.vip/", label: "채용" }
+  { href: "/recruit", label: "채용" }
 ] as const
+
+// 위 4개 메뉴는 미완성 상태이므로 주석 처리하여 숨깁니다.
+// 추후 완성 시 주석을 해제하면 바로 노출됩니다.
 
 // 서비스 데이터
 export const SERVICES_DATA: ServiceItem[] = [

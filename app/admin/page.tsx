@@ -187,22 +187,22 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 dark:bg-gray-900">
       {/* 헤더 */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold">관리자 대시보드</h1>
-          <p className="text-muted-foreground mt-2">
+          <h1 className="text-3xl font-bold dark:text-white">관리자 대시보드</h1>
+          <p className="text-muted-foreground mt-2 dark:text-gray-300">
             FamilyOffice S 시스템 관리
           </p>
         </div>
         <div className="flex gap-3">
-          <Button onClick={handleSyncUser} variant="outline">
+          <Button onClick={handleSyncUser} variant="outline" className="dark:bg-gray-800 dark:text-white dark:border-gray-600">
             <UserCheck className="w-4 h-4 mr-2" />
             사용자 동기화
           </Button>
           <Link href="/admin/consultations">
-            <Button>
+            <Button className="dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90">
               <ExternalLink className="w-4 h-4 mr-2" />
               상담 관리
             </Button>
@@ -213,53 +213,50 @@ export default function AdminDashboard() {
       {/* 통계 카드 */}
       {userStats && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="dark:bg-gray-800 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">전체 사용자</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium dark:text-white">전체 사용자</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{userStats.total}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-2xl font-bold dark:text-emerald-300">{userStats.total}</div>
+              <p className="text-xs text-muted-foreground dark:text-gray-300">
                 총 등록된 사용자 수
               </p>
             </CardContent>
           </Card>
-
-          <Card>
+          <Card className="dark:bg-gray-800 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">관리자</CardTitle>
-              <Shield className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium dark:text-white">관리자</CardTitle>
+              <Shield className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{userStats.admins}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-2xl font-bold dark:text-emerald-300">{userStats.admins}</div>
+              <p className="text-xs text-muted-foreground dark:text-gray-300">
                 관리자 권한 사용자
               </p>
             </CardContent>
           </Card>
-
-          <Card>
+          <Card className="dark:bg-gray-800 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">활성 사용자</CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium dark:text-white">활성 사용자</CardTitle>
+              <Activity className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{userStats.active}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-2xl font-bold dark:text-emerald-300">{userStats.active}</div>
+              <p className="text-xs text-muted-foreground dark:text-gray-300">
                 최근 30일 내 로그인
               </p>
             </CardContent>
           </Card>
-
-          <Card>
+          <Card className="dark:bg-gray-800 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">비활성 사용자</CardTitle>
-              <UserX className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium dark:text-white">비활성 사용자</CardTitle>
+              <UserX className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{userStats.deleted}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-2xl font-bold dark:text-emerald-300">{userStats.deleted}</div>
+              <p className="text-xs text-muted-foreground dark:text-gray-300">
                 삭제된 계정
               </p>
             </CardContent>
@@ -269,10 +266,10 @@ export default function AdminDashboard() {
 
       {/* 최근 사용자 목록 */}
       {userStats && userStats.recent.length > 0 && (
-        <Card>
+        <Card className="dark:bg-gray-800 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>최근 가입 사용자</CardTitle>
-            <CardDescription>
+            <CardTitle className="dark:text-white">최근 가입 사용자</CardTitle>
+            <CardDescription className="dark:text-gray-300">
               최근에 가입한 사용자 목록입니다.
             </CardDescription>
           </CardHeader>
@@ -281,17 +278,17 @@ export default function AdminDashboard() {
               {userStats.recent.map((user) => (
                 <div
                   key={user.id}
-                  className="flex items-center justify-between p-4 border rounded-lg"
+                  className="flex items-center justify-between p-4 border rounded-lg dark:border-gray-700"
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Users className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center">
+                      <Users className="w-5 h-5 text-primary dark:text-emerald-300" />
                     </div>
                     <div>
-                      <p className="font-medium">
+                      <p className="font-medium dark:text-white">
                         {user.full_name || user.email}
                       </p>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground dark:text-gray-300">
                         <span className="flex items-center gap-1">
                           <Mail className="w-3 h-3" />
                           {user.email}
@@ -305,19 +302,19 @@ export default function AdminDashboard() {
                   </div>
                   <div className="flex items-center gap-2">
                     {user.is_admin && (
-                      <Badge variant="secondary">
+                      <Badge variant="secondary" className="dark:bg-primary/80 dark:text-white dark:border-primary/60">
                         <Shield className="w-3 h-3 mr-1" />
                         관리자
                       </Badge>
                     )}
                     {user.last_sign_in_at && (
-                      <Badge variant="outline">
+                      <Badge variant="outline" className="dark:bg-gray-700 dark:text-white dark:border-gray-600">
                         <Activity className="w-3 h-3 mr-1" />
                         활성
                       </Badge>
                     )}
                     {user.metadata?.deleted && (
-                      <Badge variant="destructive">
+                      <Badge variant="destructive" className="dark:bg-red-600 dark:text-white">
                         <UserX className="w-3 h-3 mr-1" />
                         삭제됨
                       </Badge>
@@ -332,14 +329,14 @@ export default function AdminDashboard() {
 
       {/* 빈 상태 */}
       {userStats && userStats.total === 0 && (
-        <Card>
+        <Card className="dark:bg-gray-800 dark:border-gray-700">
           <CardContent className="py-12 text-center">
-            <Users className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-medium mb-2">사용자가 없습니다</h3>
-            <p className="text-muted-foreground mb-4">
+            <Users className="w-12 h-12 text-muted-foreground dark:text-emerald-300 mx-auto mb-4" />
+            <h3 className="text-lg font-medium mb-2 dark:text-white">사용자가 없습니다</h3>
+            <p className="text-muted-foreground mb-4 dark:text-gray-300">
               아직 동기화된 사용자가 없습니다. 사용자 동기화를 실행해보세요.
             </p>
-            <Button onClick={handleSyncUser}>
+            <Button onClick={handleSyncUser} className="dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90">
               <UserCheck className="w-4 h-4 mr-2" />
               사용자 동기화 실행
             </Button>

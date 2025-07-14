@@ -50,9 +50,9 @@ export function IndustryServicesTabsSection() {
                   <ul className="list-disc pl-5 space-y-2 text-blue-900 dark:text-blue-200 text-sm">
                     {item.solutions.map((sol, idx) => (
                       <li key={idx}>{sol}</li>
-                    ))}
-                  </ul>
-                </div>
+                ))}
+              </ul>
+            </div>
               </div>
 
               {/* 성공사례 카드 */}
@@ -77,8 +77,8 @@ export function IndustryServicesTabsSection() {
                   <h4 className="font-semibold text-blue-800 dark:text-blue-100 mb-3">전문가의 한마디</h4>
                   <blockquote className="italic text-blue-900 dark:text-blue-200 text-base border-l-4 border-blue-400 pl-4">{item.expertComment}</blockquote>
                 </div>
-              </div>
-            </div>
+        </div>
+      </div>
           </TabsContent>
         ))}
       </Tabs>

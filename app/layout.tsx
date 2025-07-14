@@ -7,6 +7,7 @@ import { Analytics } from "../components/analytics"
 import ExternalScripts from "../components/external-scripts"
 import { StructuredData } from "../components/structured-data"
 import { CalComFloating } from "../components/cal-com-floating"
+// import { ChatWidget } from "@/components/chatbot/ChatWidget" // 삭제: 챗봇 파일 제거됨
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://familyoffices.vip'),
@@ -196,6 +197,9 @@ export default function RootLayout({
               {/* Cal.com 플로팅 버튼 */}
               <CalComFloating />
               
+              {/* AI 챗봇 위젯 */}
+              {/* <ChatWidget /> */} {/* 삭제: 챗봇 파일 제거됨 */}
+              
               {/* 클라이언트 전용 스크립트들 */}
               <StructuredData />
               <ExternalScripts />
@@ -213,6 +217,9 @@ export default function RootLayout({
             
             {/* Cal.com 플로팅 버튼 */}
             <CalComFloating />
+            
+            {/* AI 챗봇 위젯 */}
+            {/* <ChatWidget /> */} {/* 삭제: 챗봇 파일 제거됨 */}
             
             {/* 클라이언트 전용 스크립트들 */}
             <StructuredData />

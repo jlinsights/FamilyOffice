@@ -461,7 +461,7 @@ export default function BrandPage() {
               {/* === 상단 타이틀/부제/대표 로고 === */}
               <section className="border rounded-2xl bg-white dark:bg-gray-800 p-8 mb-10 shadow-sm">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-                  <div>
+              <div>
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-1">
                       <span className="text-blue-600 dark:text-blue-400">{/* 아이콘 */}
                         <svg className="w-6 h-6 inline-block mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 9.74-7 10-3.5-.26-7-5-7-10V6l7-4z" /></svg>
@@ -491,7 +491,7 @@ export default function BrandPage() {
                       <li><b>가독성:</b> 최소 크기 120px 이상 유지</li>
                       <li><b>적용성:</b> 라이트/다크 모드 모두 자동 전환</li>
                       <li><b>품질:</b> 고해상도 벡터 형태 사용</li>
-                    </ul>
+                      </ul>
                   </div>
                   {/* 주의사항 */}
                   <div>
@@ -504,7 +504,7 @@ export default function BrandPage() {
                       <li><b>Playfair Display</b> 폰트 외 사용 금지</li>
                       <li>태그라인 위치나 내용 수정 금지</li>
                       <li>저해상도 이미지 사용 금지</li>
-                    </ul>
+                      </ul>
                   </div>
                 </div>
                 {/* === React 컴포넌트 안내 === */}
@@ -531,8 +531,8 @@ export default function BrandPage() {
                     <div className="font-bold text-base text-gray-900 dark:text-white mb-1">프리미엄 로고</div>
                     <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">특별한 페이지, 랜딩용</div>
                     <FamilyOfficeLogo className="w-48 h-14" />
-                  </div>
                 </div>
+              </div>
               </section>
               {/* === Brand Excellence 안내 섹션 (공통) === */}
               <BrandExcellenceSection />
