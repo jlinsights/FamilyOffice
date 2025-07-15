@@ -50,11 +50,12 @@ const nextConfig = {
       )
     }
 
-    // Tree shaking 최적화
-    config.optimization = {
-      ...config.optimization,
-      usedExports: true,
-      sideEffects: false,
+    // Tree shaking 최적화 (Next.js 15.2.4+ 호환)
+    if (!dev) {
+      config.optimization = {
+        ...config.optimization,
+        sideEffects: false,
+      }
     }
 
     // 청크 분할 최적화
