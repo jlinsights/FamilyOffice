@@ -33,7 +33,7 @@ import 'swagger-ui-react/swagger-ui.css'
 
 // Disable static generation for this page
 export const dynamic = 'force-dynamic'
-export const revalidate = false
+export const runtime = 'nodejs'
 
 export default function SwaggerPage() {
   return (
