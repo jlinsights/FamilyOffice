@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const supabase = createClient()
+    const supabase = await createClient()
     
     // Store performance metric in database
     const { data, error } = await supabase
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
     const metric = searchParams.get('metric')
     const timeframe = searchParams.get('timeframe') || '24h'
     
-    const supabase = createClient()
+    const supabase = await createClient()
     
     // Calculate time range
     const now = new Date()
