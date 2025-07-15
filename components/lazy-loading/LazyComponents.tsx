@@ -36,7 +36,7 @@ const ChartSkeleton = () => (
 
 // Heavy components with lazy loading
 export const LazyFinancialDashboard = dynamic(
-  () => import('@/components/financial/FinancialDashboard'),
+  () => import('@/components/asset-management-dashboard'),
   {
     loading: () => <ComponentSkeleton />,
     ssr: false,
@@ -77,7 +77,7 @@ export const LazyForexCard = dynamic(
 
 // Cal.com components with lazy loading
 export const LazyCalComInline = dynamic(
-  () => import('@/components/cal-com-inline'),
+  () => import('@/components/cal-com-inline').then((mod) => ({ default: mod.default })),
   {
     loading: () => (
       <div className="h-96 flex items-center justify-center">
@@ -189,7 +189,7 @@ export const loadFeature = async (featureName: string) => {
   try {
     switch (featureName) {
       case 'financial':
-        return await import('@/components/financial/FinancialDashboard')
+        return await import('@/components/asset-management-dashboard')
       case 'consulting':
         return await import('@/components/forms/consultation-form')
       case 'analytics':

@@ -15,9 +15,11 @@ export default function ExternalScripts() {
         script.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
         script.async = true;
         script.onload = () => {
-          window.ChannelIO('boot', {
-            pluginKey: channelIOKey
-          });
+          if (window.ChannelIO) {
+            window.ChannelIO('boot', {
+              pluginKey: channelIOKey
+            });
+          }
         };
         document.head.appendChild(script);
       }
