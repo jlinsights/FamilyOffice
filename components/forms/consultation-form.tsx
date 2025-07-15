@@ -148,3 +148,5 @@ export function ConsultationForm() {
     </form>
   )
 }
+
+export default ConsultationForm
