@@ -1,10 +1,10 @@
 'use client'
 
-import dynamic from 'next/dynamic'
+import NextDynamic from 'next/dynamic'
 import { Skeleton } from '@/components/ui/skeleton'
 
 // Dynamically import SwaggerUI to avoid SSR issues
-const SwaggerUI = dynamic(
+const SwaggerUI = NextDynamic(
   () => import('swagger-ui-react').then((mod) => ({ default: mod.default })),
   {
     ssr: false,
