@@ -6,11 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { 
   BarChart3, 
-  TrendingUp, 
   Users, 
   DollarSign, 
   Clock, 
-  Globe,
   Activity,
   AlertCircle,
   CheckCircle,
