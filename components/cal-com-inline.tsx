@@ -127,4 +127,6 @@ export function CalComInline({
       </div>
     </div>
   )
-} 
+}
+
+export default CalComInline 

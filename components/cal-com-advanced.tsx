@@ -18,6 +18,8 @@ export function CalComAdvanced() {
   )
 }
 
+export default CalComAdvanced
+
 // 타입 정의
 declare global {
   interface Window {
