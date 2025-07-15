@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 // Dynamically import SwaggerUI to avoid SSR issues
 const SwaggerUI = dynamic(
-  () => import('swagger-ui-react'),
+  () => import('swagger-ui-react').then((mod) => ({ default: mod.default })),
   {
     ssr: false,
     loading: () => (
@@ -68,7 +68,7 @@ export default function SwaggerPage() {
             }
             return req
           }}
-          onComplete={(system) => {
+          onComplete={(_system) => {
             console.log('Swagger UI loaded successfully')
           }}
         />
