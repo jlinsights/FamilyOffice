@@ -4,7 +4,7 @@ import { ConsultationForm } from "@/components/forms/consultation-form"
 import { CalComButton } from "@/components/cal-com-button"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { MapPin, Phone, Mail, Clock, Users, Shield, Award } from "lucide-react"
+import { MapPin, Phone, Mail, Clock, Users, Shield, Award, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
 
@@ -88,43 +88,53 @@ export default function ContactPage() {
       <Header />
 
       {/* 히어로 섹션 */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-background via-muted/30 to-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <Badge variant="outline" className="mb-6">
+      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+        {/* 배경 그라데이션 효과 - 메인 페이지와 동일 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+        
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+          {/* 상단 태그 */}
+          <div className="flex justify-center mb-8">
+            <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+              <Phone className="h-3 w-3 mr-1" />
               Free Consultation
             </Badge>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-foreground">중소중견기업 전문가와</span><br />
-              <span className="text-primary">무료 상담</span> <span className="text-foreground">받으세요</span>
-            </h1>
-            
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-balanced">
-              업종별 특성을 정확히 이해하는 전문가들이<br />
-              <span className="font-semibold text-foreground">법인 대표님만을 위한 맞춤형 자산관리 솔루션</span>을 제안해드립니다
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* CalComButton(온라인 예약하기) 버튼 삭제됨 */}
-              <Button size="lg" asChild>
-                <Link href="#consultation-form">
-                  <Phone className="h-5 w-5 mr-2" />
-                  폼으로 신청하기
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/services">
-                  서비스 자세히 보기
-                </Link>
-              </Button>
-            </div>
+          </div>
+          
+          {/* 메인 헤드라인 */}
+          <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+            중소중견기업{'\n'}전문가와{'\n'}<span className="text-foreground">무료 상담</span>
+          </h1>
+          
+          {/* 서브 헤드라인 */}
+          <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
+            맞춤형 자산관리 상담
+          </p>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
+            업종별 특성을 정확히 이해하는 전문가들이 <span className="font-semibold text-foreground">법인 대표님만을 위한 맞춤형 자산관리 솔루션</span>을 제안해드립니다
+          </p>
+          
+          {/* CTA 버튼 - 메인 페이지와 동일한 스타일 */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
+            <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">
+              <Link href="#consultation-form" className="flex items-center">
+                폼으로 신청하기
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="font-bold shadow-lg px-8 py-4 text-lg">
+              <Link href="/services" className="flex items-center">
+                <Phone className="mr-2 h-5 w-5" />
+                서비스 자세히 보기
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* 상담 혜택 */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -148,14 +158,14 @@ export default function ContactPage() {
       </section>
 
       {/* 상담 신청 폼 */}
-      <section id="consultation-form" className="py-24">
+      <section id="consultation-form" className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* 폼 영역 */}
               <div className="animate-up">
                 <div className="mb-8">
-                  <Badge variant="secondary" className="mb-4">
+                  <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">
                     Consultation Form
                   </Badge>
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -174,7 +184,7 @@ export default function ContactPage() {
               {/* 연락처 정보 */}
               <div className="animate-up" style={{ animationDelay: "200ms" }}>
                 <div className="mb-8">
-                  <Badge variant="secondary" className="mb-4">
+                  <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">
                     Contact Information
                   </Badge>
                   <h3 className="text-2xl font-bold mb-4">
@@ -214,10 +224,10 @@ export default function ContactPage() {
       </section>
 
       {/* 상담 프로세스 */}
-      <section className="py-24 bg-muted/30">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4">
+            <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">
               Consultation Process
             </Badge>
             
@@ -245,10 +255,10 @@ export default function ContactPage() {
       </section>
 
       {/* 고객 신뢰도 */}
-      <section className="py-24">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4">
+            <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">
               Why Choose Us
             </Badge>
             
@@ -297,7 +307,7 @@ export default function ContactPage() {
       </section>
 
       {/* CTA 섹션 */}
-      <section className="py-24 bg-primary text-primary-foreground">
+      <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             지금 바로 상담을 시작하세요

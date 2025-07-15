@@ -37,30 +37,31 @@ function HeroSection() {
       <div className="absolute inset-0 bg-grid-black/[0.02] bg-[size:60px_60px]" />
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <Badge variant="secondary" className="mb-6 animate-fade-in border-primary/20 bg-primary/10">
+          <Badge variant="outline" className="mb-6 animate-fade-in bg-background/80 backdrop-blur-sm">
             <Crown className="h-3 w-3 mr-1" aria-hidden />
             Exclusive 프로그램
           </Badge>
-          <h1 className="mb-6 text-balance animate-slide-up font-bold leading-tight">
-            <span className="text-muted-foreground">대한민국 중소중견기업</span>
-            <br />
-            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">CEO들만의 특별한 공간</span>
+          <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+            대한민국 중소중견기업{'\n'}CEO들만의{'\n'}<span className="text-foreground">특별한 공간</span>
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 text-balance max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '200ms' }}>
-            검증된 <span className="font-semibold text-primary">500+ 법인 대표님들</span>과 함께하는 <br className="hidden sm:block" />
+          <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
             프리미엄 네트워킹 & 자산관리 클럽
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '300ms' }}>
-            <Button size="lg" asChild className="btn-primary group">
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
+            검증된 <span className="font-semibold text-primary">500+ 법인 대표님들</span>과 함께하는 특별한 공간에서 최고의 네트워킹과 전문 자산관리 서비스를 경험하세요
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
+            <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">
               <Link href="/contact" className="flex items-center" aria-label="멤버십 신청하기">
                 멤버십 신청하기
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="outline" asChild className="font-bold shadow-lg px-8 py-4 text-lg">
               <Link href="#benefits" className="flex items-center" aria-label="혜택 알아보기">
+                <Sparkles className="mr-2 h-5 w-5" aria-hidden />
                 혜택 알아보기
-                <Sparkles className="ml-2 h-4 w-4" aria-hidden />
               </Link>
             </Button>
           </div>

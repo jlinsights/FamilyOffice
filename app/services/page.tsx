@@ -89,38 +89,39 @@ export default function ServicePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative section min-h-[80vh] flex items-center overflow-hidden">
+      <section className="relative section min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-muted/30" />
         <div className="absolute inset-0 bg-grid-black/[0.02] bg-[size:60px_60px]" />
         
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 animate-fade-in">
+            <Badge variant="outline" className="mb-6 animate-fade-in bg-background/80 backdrop-blur-sm">
               <Building className="h-3 w-3 mr-1" />
               Professional Services
             </Badge>
             
-            <h1 className="mb-6 text-balance animate-slide-up font-bold leading-tight">
-              중소중견기업 법인 대표를 위한 <span className="text-primary">전문 자산관리 서비스</span>
+            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+              중소중견기업 법인{'\n'}대표를 위한{'\n'}<span className="text-foreground">전문 자산관리</span>
             </h1>
             
-            <p className="text-xl text-muted-foreground mb-8 text-balance max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '200ms' }}>
-              <span className="font-semibold text-foreground">10년+ 가업승계 노하우</span>와 <span className="font-semibold text-primary">500억원+ 관리 실적</span>을 바탕으로
-              <br className="hidden sm:block" />
-              업종별 특화된 통합 자산관리 솔루션을 제공합니다
+            <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
+              업종별 특화 솔루션
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '300ms' }}>
-              <Button size="lg" asChild className="btn-primary group">
+            <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
+              <span className="font-semibold text-foreground">10년+ 가업승계 노하우</span>와 <span className="font-semibold text-primary">500억원+ 관리 실적</span>을 바탕으로 업종별 특화된 통합 자산관리 솔루션을 제공합니다
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
+              <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">
                 <Link href="/contact" className="flex items-center">
                   무료 상담 신청
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" asChild className="font-bold shadow-lg px-8 py-4 text-lg">
                 <Link href="/program" className="flex items-center">
-                  <Building className="ml-2 h-4 w-4" />
+                  <Building className="mr-2 h-5 w-5" />
                   프로그램 안내
                 </Link>
               </Button>
@@ -133,7 +134,7 @@ export default function ServicePage() {
       <section className="section bg-gradient-to-r from-muted/30 to-background">
         <div className="container">
           <div className="text-center mb-12">
-            <Badge variant="outline" className="mb-4 animate-fade-in">
+            <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">
               <Award className="h-3 w-3 mr-1" />
               Proven Excellence
             </Badge>
@@ -171,7 +172,7 @@ export default function ServicePage() {
       <section className="section">
         <div className="container">
           <div className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4 animate-fade-in">
+            <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">
               <Building className="h-3 w-3 mr-1" />
               Core Services
             </Badge>
@@ -219,10 +220,10 @@ export default function ServicePage() {
       </section>
 
       {/* 전문가 팀 */}
-      <section className="py-24">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4">Expert Team</Badge>
+            <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">Expert Team</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">중소중견기업 전문가 팀</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">20년 이상의 경험을 보유한 중소중견기업 자산관리 전문가들이 함께합니다</p>
           </div>
@@ -278,7 +279,7 @@ export default function ServicePage() {
       <section id="contact" className="section bg-gradient-to-r from-primary/5 to-primary/10">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-4 animate-fade-in">
+            <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">
               <Phone className="h-3 w-3 mr-1" />
               상담 문의
             </Badge>
