@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedCounter } from "@/components/animated-counter";
 import { 
-  Users, 
   TrendingUp, 
   Award, 
   Globe,
