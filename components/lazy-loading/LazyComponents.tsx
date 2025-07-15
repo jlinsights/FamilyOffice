@@ -164,7 +164,7 @@ export const withLazyLoading = <T extends object>(
   Component: React.ComponentType<T>,
   fallback: React.ComponentType = ComponentSkeleton
 ) => {
-  return React.forwardRef<HTMLDivElement, T>((props, ref) => {
+  const LazyLoadedComponent = React.forwardRef<HTMLDivElement, T>((props, ref) => {
     const elementRef = React.useRef<HTMLDivElement>(null)
     const isVisible = useIntersectionObserver(elementRef, {
       threshold: 0.1,
@@ -179,6 +179,9 @@ export const withLazyLoading = <T extends object>(
       </div>
     )
   })
+  
+  LazyLoadedComponent.displayName = `withLazyLoading(${Component.displayName || Component.name || 'Component'})`
+  return LazyLoadedComponent
 }
 
 // Bundle splitting utilities

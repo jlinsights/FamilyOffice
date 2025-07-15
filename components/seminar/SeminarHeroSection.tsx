@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, Trophy, ArrowRight, GraduationCap } from "lucide-react";
+import { Calendar, Users, GraduationCap } from "lucide-react";
 import { AnimatedCounter } from "@/components/animated-counter";
 
 export function SeminarHeroSection() {
