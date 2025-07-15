@@ -28,6 +28,9 @@ declare namespace NodeJS {
     NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?: string
     NEXT_PUBLIC_NAVER_SITE_VERIFICATION?: string
     NEXT_PUBLIC_BING_SITE_VERIFICATION?: string
+    
+    // Channel Talk
+    NEXT_PUBLIC_CHANNEL_IO_KEY?: string
   }
 }
 
@@ -100,5 +103,6 @@ export type LoadingState = 'idle' | 'loading' | 'success' | 'error'
 declare global {
   interface Window {
     Cal?: ((command: string, ...args: any[]) => any) & { ns?: Record<string, (...args: any[]) => any> }
+    ChannelIO?: (command: string, options?: any) => void
   }
 } 
