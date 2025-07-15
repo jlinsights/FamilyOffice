@@ -1,4 +1,5 @@
 // Performance monitoring utilities
+import React from 'react'
 import { ErrorMonitor } from '@/lib/monitoring'
 
 interface PerformanceMetric {
@@ -131,7 +132,7 @@ export class PerformanceMonitor {
         // DOM 파싱 시간
         this.recordMetric({
           name: 'domParsing',
-          value: navigation.domContentLoadedEventEnd - navigation.domLoading,
+          value: navigation.domContentLoadedEventEnd - (navigation as any).domLoading,
           timestamp: Date.now(),
           type: 'navigation',
           url: window.location.pathname,
@@ -219,7 +220,7 @@ export class PerformanceMonitor {
       value,
       timestamp: Date.now(),
       type: 'custom',
-      url: typeof window !== 'undefined' ? window.location.pathname : undefined,
+      url: typeof window !== 'undefined' ? window.location.pathname : '',
     })
 
     // 컨텍스트 정보가 있으면 에러 모니터에도 기록

@@ -31,6 +31,9 @@ declare namespace NodeJS {
     
     // Channel Talk
     NEXT_PUBLIC_CHANNEL_IO_KEY?: string
+    
+    // Beehiiv Newsletter
+    BEEHIIV_API_KEY?: string
   }
 }
 

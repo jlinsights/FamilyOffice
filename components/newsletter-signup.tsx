@@ -19,9 +19,20 @@ export default function NewsletterSignup() {
     setError("");
 
     try {
-      // TODO: 실제 뉴스레터 구독 API 연결
-      await new Promise(resolve => setTimeout(resolve, 1000)); // 임시 딜레이
-      
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || '구독 신청 중 오류가 발생했습니다.');
+      }
+
       setIsSuccess(true);
       setEmail("");
       
@@ -29,8 +40,8 @@ export default function NewsletterSignup() {
       setTimeout(() => {
         setIsSuccess(false);
       }, 3000);
-    } catch {
-      setError("구독 신청 중 오류가 발생했습니다. 다시 시도해주세요.");
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "구독 신청 중 오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
       setIsSubmitting(false);
     }

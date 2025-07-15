@@ -34,23 +34,6 @@ const isApiRoute = createRouteMatcher(['/api(.*)'])
 const isAuthRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)'])
 const isContactRoute = createRouteMatcher(['/api/contact', '/contact'])
 const isFinancialRoute = createRouteMatcher(['/api/financial(.*)'])
-const isPublicRoute = createRouteMatcher([
-  '/',
-  '/about',
-  '/services',
-  '/contact',
-  '/faq',
-  '/brand', 
-  '/program',
-  '/privacy',
-  '/terms',
-  '/api/docs(.*)',
-  '/api/webhooks(.*)',
-  '/api/financial(.*)',
-  '/api/v0',
-  '/sign-in(.*)',
-  '/sign-up(.*)'
-]);
 
 export default clerkMiddleware(async (auth: any, req: NextRequest) => {
   const { pathname } = req.nextUrl;
