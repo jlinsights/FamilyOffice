@@ -1,5 +1,9 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { FileText, ArrowLeft, Shield } from "lucide-react"
+import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -13,10 +17,44 @@ export default function TermsOfServicePage() {
     <div className="min-h-screen">
       <Header />
       
-      <main className="section pt-32">
+      {/* 간단한 히어로 섹션 */}
+      <section className="relative w-full min-h-[60vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
+          <div className="flex justify-center mb-6">
+            <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+              <FileText className="h-3 w-3 mr-1" />
+              Terms of Service
+            </Badge>
+          </div>
+          
+          <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 text-primary animate-slide-up">
+            이용약관
+          </h1>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '200ms' }}>
+            FamilyOffice S 서비스 이용에 관한 약관과 정책을 확인하세요
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '400ms' }}>
+            <Button variant="outline" asChild className="font-bold shadow-lg px-6 py-3">
+              <Link href="/">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                홈으로 돌아가기
+              </Link>
+            </Button>
+            <Button asChild className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-6 py-3">
+              <Link href="/privacy">
+                <Shield className="mr-2 h-4 w-4" />
+                개인정보처리방침 보기
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+      
+      <main className="section pt-16">
         <div className="container max-w-4xl">
           <div className="prose prose-slate max-w-none">
-            <h1 className="text-4xl font-bold text-center mb-12">이용약관</h1>
             
             <div className="space-y-8">
               <section>

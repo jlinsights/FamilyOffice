@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Palette, ArrowRight } from "lucide-react";
 import { BRAND_COLORS, TYPOGRAPHY_SYSTEM } from "@/constants/brand";
 import type { BrandColorSystem, TypographyCategory } from "@/types/brand";
 import BrandExcellenceSection from "@/components/brand-excellence-section";
@@ -76,26 +76,52 @@ export default function BrandPage() {
     <>
       <Header />
       <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-        {/* === Header: 좌상단 로고만 단독 배치 === */}
-        <header className="w-full flex items-center px-6 py-4">
-          <img src="/logo.svg" alt="FamilyOffice S" className="w-32 h-auto" />
-        </header>
-
-        {/* === Hero Section: 중앙 정렬, 위계 분리, 프리미엄 스타일 === */}
-        <section className="w-full bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-blue-900/20 py-20 px-4 text-center border-b border-gray-100 dark:border-gray-800">
-          <div className="max-w-3xl mx-auto">
-            {/* 브랜드 가이드 타이틀 */}
-            <h1 className="text-4xl md:text-5xl font-playfair font-bold text-blue-900 dark:text-white mb-4 tracking-tight">
-              FamilyOffice S Brand Guidelines
+        {/* Hero Section */}
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+          {/* 배경 그라데이션 효과 */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+          
+          <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+            {/* 상단 태그 */}
+            <div className="flex justify-center mb-8">
+              <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+                <Palette className="h-3 w-3 mr-1" />
+                Brand Guidelines
+              </Badge>
+            </div>
+            
+            {/* 메인 헤드라인 */}
+            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+              FamilyOffice S{"\\n"}<span className="text-foreground">브랜드 가이드라인</span>
             </h1>
-            {/* 서브타이틀/슬로건 */}
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200 mb-4 font-light">
-              Professional, Personal, Prosperity - 신뢰 기반 프리미엄 자산관리 브랜드
+            
+            {/* 서브 헤드라인 */}
+            <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
+              Professional, Personal, Prosperity
             </p>
+            
+            <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
+              <span className="font-semibold text-foreground">신뢰 기반 프리미엄 자산관리</span> 브랜드의 일관된 아이덴티티와 <span className="font-semibold text-primary">브랜드 표준</span>을 제시합니다
+            </p>
+            
+            {/* CTA 버튼 */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">
+                브랜드 가이드 다운로드
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button size="lg" variant="outline" className="font-bold shadow-lg px-8 py-4 text-lg">
+                <Copy className="mr-2 h-5 w-5" />
+                로고 에셋 다운로드
+              </Button>
+            </div>
+            
             {/* 버전 정보 */}
-            <span className="inline-block bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-300 rounded-full px-4 py-1 text-xs font-semibold mt-2">
-              Version 1.0 | 2025
-            </span>
+            <div className="animate-slide-up" style={{ animationDelay: '600ms' }}>
+              <Badge variant="secondary" className="text-sm">
+                Version 1.0 | 2025
+              </Badge>
+            </div>
           </div>
         </section>
         {/* === Main Content === */}

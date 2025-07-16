@@ -36,15 +36,18 @@ export const runtime = 'nodejs';
 
 function HeroSection() {
   return (
-    <section className="relative section min-h-[90vh] flex items-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-muted/30" />
-      <div className="absolute inset-0 bg-grid-black/[0.02] bg-[size:60px_60px]" />
-      <div className="container relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <Badge variant="outline" className="mb-6 animate-fade-in bg-background/80 backdrop-blur-sm">
-            <Crown className="h-3 w-3 mr-1" aria-hidden />
-            Exclusive 프로그램
-          </Badge>
+    <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+      {/* 배경 그라데이션 효과 */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+      
+      <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+          {/* 상단 태그 */}
+          <div className="flex justify-center mb-8">
+            <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+              <Crown className="h-3 w-3 mr-1" />
+              Exclusive 프로그램
+            </Badge>
+          </div>
           <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
             대한민국 중소중견기업{'\n'}CEO들만의{'\n'}<span className="text-foreground">특별한 공간</span>
           </h1>
@@ -70,8 +73,7 @@ function HeroSection() {
             </Button>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
   );
 }
 

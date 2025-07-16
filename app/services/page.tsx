@@ -89,16 +89,18 @@ export default function ServicePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative section min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-muted/30" />
-        <div className="absolute inset-0 bg-grid-black/[0.02] bg-[size:60px_60px]" />
+      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+        {/* 배경 그라데이션 효과 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
         
-        <div className="container relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="outline" className="mb-6 animate-fade-in bg-background/80 backdrop-blur-sm">
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+          {/* 상단 태그 */}
+          <div className="flex justify-center mb-8">
+            <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
               <Building className="h-3 w-3 mr-1" />
               Professional Services
             </Badge>
+          </div>
             
             <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
               중소중견기업 법인{'\n'}대표를 위한{'\n'}<span className="text-foreground">전문 자산관리</span>
@@ -126,7 +128,6 @@ export default function ServicePage() {
                 </Link>
               </Button>
             </div>
-          </div>
         </div>
       </section>
 
