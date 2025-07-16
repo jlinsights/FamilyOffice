@@ -20,8 +20,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Beehiiv의 Publication ID
-    const publicationId = '1539b3fe-72c3-4104-91c1-8eb643ad2e48'
+    // Beehiiv의 Publication ID (올바른 형식: pub_ 접두사 필요)
+    // 현재 ID가 잘못된 형식입니다. 실제 Beehiiv 대시보드에서 확인 필요
+    const publicationId = process.env.BEEHIIV_PUBLICATION_ID || 'pub_cadbc5d4-d1b2-4eae-94f5-485d75c9042f'
     
     // Beehiiv 구독 API 호출
     const beehiivApiUrl = `https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`
