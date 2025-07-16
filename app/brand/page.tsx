@@ -92,7 +92,7 @@ export default function BrandPage() {
             
             {/* 메인 헤드라인 */}
             <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-              FamilyOffice S{"\\n"}<span className="text-foreground">브랜드 가이드라인</span>
+              FamilyOffice S{"\n"}<span className="text-foreground">브랜드 가이드라인</span>
             </h1>
             
             {/* 서브 헤드라인 */}

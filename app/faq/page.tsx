@@ -39,7 +39,7 @@ export default function FAQPage() {
           
           {/* 메인 헤드라인 */}
           <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-            법인 대표님들이{"\\n"}<span className="text-foreground">자주 묻는 질문</span>
+            법인 대표님들이{"\n"}<span className="text-foreground">자주 묻는 질문</span>
           </h1>
           
           {/* 서브 헤드라인 */}
