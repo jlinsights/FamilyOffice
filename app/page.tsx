@@ -29,6 +29,10 @@ export const metadata: Metadata = {
   }
 }
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 export default function HomePage() {
   return (
     <div className="min-h-screen">

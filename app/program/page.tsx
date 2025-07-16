@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   keywords: "프로그램, 중소중견기업 네트워킹, 경영진 모임, 투자 정보, 승계 전략, 패밀리오피스 교육"
 };
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 function HeroSection() {
   return (
     <section className="relative section min-h-[90vh] flex items-center overflow-hidden">
