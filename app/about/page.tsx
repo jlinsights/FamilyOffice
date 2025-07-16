@@ -112,37 +112,48 @@ export default function AboutPage() {
       <Header />
       
       {/* 히어로 섹션 */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-background via-muted/30 to-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <Badge variant="outline" className="mb-6">
+      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+        {/* 배경 그라데이션 효과 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+        
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+          {/* 상단 태그 */}
+          <div className="flex justify-center mb-8">
+            <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+              <Building className="h-3 w-3 mr-1" />
               About FamilyOffice S
             </Badge>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-muted-foreground">현명한 법인 대표님은</span><br />
-              <span className="text-primary">패밀리오피스</span>를 <span className="text-foreground">준비합니다</span>
-            </h1>
-            
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-balanced">
-              중소중견기업 전문 자산관리 서비스 팀으로<br />
-              법인 대표님을 위한 전문적인 자산관리 및 가업승계 설계 서비스를 제공합니다
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link href="/contact">
-                  <Phone className="h-5 w-5 mr-2" />
-                  상담 신청
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/services">
-                  <Briefcase className="h-5 w-5 mr-2" />
-                  서비스 보기
-                </Link>
-              </Button>
-            </div>
+          </div>
+          
+          {/* 메인 헤드라인 */}
+          <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+            현명한 법인 대표님은{"\n"}<span className="text-foreground">패밀리오피스를</span>{"\n"}준비합니다
+          </h1>
+          
+          {/* 서브 헤드라인 */}
+          <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
+            중소중견기업 전문 자산관리
+          </p>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
+            <span className="font-semibold text-foreground">법인 대표님을 위한 전문적인 자산관리</span> 및 <span className="font-semibold text-primary">가업승계 설계 서비스</span>를 제공합니다
+          </p>
+          
+          {/* CTA 버튼 */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg" asChild>
+              <Link href="/contact">
+                <Phone className="mr-2 h-5 w-5" />
+                상담 신청
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="font-bold shadow-lg px-8 py-4 text-lg" asChild>
+              <Link href="/services">
+                <Briefcase className="mr-2 h-5 w-5" />
+                서비스 보기
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

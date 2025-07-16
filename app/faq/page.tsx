@@ -24,21 +24,48 @@ export default function FAQPage() {
       <Header />
 
       {/* 히어로 섹션 */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-background via-muted/30 to-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="outline" className="mb-6">
-              FAQ
+      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+        {/* 배경 그라데이션 효과 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+        
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+          {/* 상단 태그 */}
+          <div className="flex justify-center mb-8">
+            <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+              <MessageSquare className="h-3 w-3 mr-1" />
+              FAQ & Solutions
             </Badge>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-foreground">법인 대표님들이</span><br />
-              <span className="text-primary">자주 묻는 질문</span>
-            </h1>
-            
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-balanced">
-              중소중견기업 법인 대표님들의 실제 고민과 해결책을 Q&A로 정리했습니다
-            </p>
+          </div>
+          
+          {/* 메인 헤드라인 */}
+          <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+            법인 대표님들이{"\\n"}<span className="text-foreground">자주 묻는 질문</span>
+          </h1>
+          
+          {/* 서브 헤드라인 */}
+          <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
+            실제 고민과 전문가 해결책
+          </p>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
+            중소중견기업 법인 대표님들의 <span className="font-semibold text-foreground">실제 고민과 해결책</span>을 Q&A로 정리했습니다
+          </p>
+          
+          {/* CTA 버튼 */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg" asChild>
+              <Link href="/contact">
+                <Phone className="mr-2 h-5 w-5" />
+                전문가에게 질문하기
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="font-bold shadow-lg px-8 py-4 text-lg" asChild>
+              <Link href="/services">
+                <CheckCircle className="mr-2 h-5 w-5" />
+                서비스 자세히 보기
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
