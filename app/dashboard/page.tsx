@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false }
 };
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 export default async function DashboardPage() {
   const user = await currentUser();
   

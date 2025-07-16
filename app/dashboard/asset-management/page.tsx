@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   keywords: ['자산관리', '포트폴리오', '투자', '한국주식', '위험관리', 'FamilyOffice'],
 }
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 // 데모 위험 메트릭 데이터
 const demoRiskMetrics = {
   volatility: 12.4,

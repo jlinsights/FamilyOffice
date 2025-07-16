@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   keywords: "중소중견기업 FAQ, 법인 자산관리 질문, 중대재해처벌법 FAQ, 가족법인 FAQ, 승계 설계 질문",
 }
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 export default function FAQPage() {
   return (
     <div className="min-h-screen">

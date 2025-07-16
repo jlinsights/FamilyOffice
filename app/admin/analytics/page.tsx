@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   description: '실시간 플랫폼 분석 및 모니터링',
 }
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 // Mock data - 실제 구현에서는 API에서 가져올 것
 const analyticsData = {
   overview: {

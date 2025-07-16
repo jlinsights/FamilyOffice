@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   keywords: "패밀리오피스 상담, 중소중견기업 자산관리 상담, 법인 대표 재무상담, 무료 자산관리 상담",
 }
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 export default function ContactPage() {
   const contactInfo = [
     {

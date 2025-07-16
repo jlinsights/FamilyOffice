@@ -188,9 +188,20 @@ const nextConfig = {
     ]
   },
   
+  // Force dynamic rendering globally
+  output: 'standalone',
+  
   // 환경 변수
   env: {
     CUSTOM_KEY: process.env.NODE_ENV,
+  },
+  
+  // Global dynamic rendering configuration
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    optimizeCss: true,
+    optimizeServerReact: true,
+    memoryBasedWorkersCount: true,
   },
 }
 

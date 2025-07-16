@@ -1,13 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { ThemeProvider } from "@/components/theme-provider"
-import { ClerkProvider } from "@clerk/nextjs"
-import { Analytics } from "../components/analytics"
-import ExternalScripts from "../components/external-scripts"
-import { StructuredData } from "../components/structured-data"
-import { CalComFloating } from "../components/cal-com-floating"
-// import { ChatWidget } from "@/components/chatbot/ChatWidget" // 삭제: 챗봇 파일 제거됨
+import { Providers } from "@/components/providers"
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://familyoffices.vip'),
@@ -159,9 +153,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Clerk 환경변수 확인
-  const hasClerkConfig = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY
-
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
@@ -184,49 +175,9 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="FamilyOffice S 뉴스" href="/rss.xml" />
       </head>
       <body className="antialiased">
-        {hasClerkConfig ? (
-          <ClerkProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-              
-              {/* Cal.com 플로팅 버튼 */}
-              <CalComFloating />
-              
-              {/* AI 챗봇 위젯 */}
-              {/* <ChatWidget /> */} {/* 삭제: 챗봇 파일 제거됨 */}
-              
-              {/* 클라이언트 전용 스크립트들 */}
-              <StructuredData />
-              <ExternalScripts />
-              <Analytics />
-            </ThemeProvider>
-          </ClerkProvider>
-        ) : (
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            
-            {/* Cal.com 플로팅 버튼 */}
-            <CalComFloating />
-            
-            {/* AI 챗봇 위젯 */}
-            {/* <ChatWidget /> */} {/* 삭제: 챗봇 파일 제거됨 */}
-            
-            {/* 클라이언트 전용 스크립트들 */}
-            <StructuredData />
-            <ExternalScripts />
-            <Analytics />
-          </ThemeProvider>
-        )}
+        <Providers>
+          {children}
+        </Providers>
         
         {/* Google Tag Manager (noscript) */}
       </body>
