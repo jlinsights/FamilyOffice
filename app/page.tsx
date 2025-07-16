@@ -40,8 +40,9 @@ export default function HomePage() {
       <Header />
       <SmoothScroll />
 
-      {/* Hero Section - 백년영속의 시작 */}
-      <section id="hero" className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
+      <main className="pt-20">
+        {/* Hero Section - 백년영속의 시작 */}
+        <section id="hero" className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
         {/* 배경 그라데이션 효과 */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
         
@@ -112,9 +113,9 @@ export default function HomePage() {
             <ArrowDown className="h-6 w-6 text-muted-foreground mx-auto" />
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* 전문 서비스 소개 */}
+        {/* 전문 서비스 소개 */}
       <section id="services" className="section bg-gradient-to-b from-muted/30 to-background">
         <div className="container">
           <div className="text-center mb-16">
@@ -541,7 +542,8 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

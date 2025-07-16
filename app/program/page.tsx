@@ -81,13 +81,15 @@ export default function ProgramPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <HeroSection />
+      <main className="pt-20">
+        <HeroSection />
       <MembershipStatsSection stats={MEMBERSHIP_STATS} />
       <MemberBenefitsSection benefits={MEMBER_BENEFITS} />
       <ExclusiveProgramsSection categories={EXCLUSIVE_PROGRAMS} />
       <SpecialProgramsSection ceoPrograms={CEO_PROGRAMS} assetPrograms={ASSET_PROGRAMS} />
       <EducationScheduleSection educationPrograms={EDUCATION_PROGRAMS} />
-      <MembershipCTASection />
+        <MembershipCTASection />
+      </main>
       <Footer />
     </div>
   );

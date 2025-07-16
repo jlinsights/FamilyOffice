@@ -75,7 +75,7 @@ export default function BrandPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 pt-20">
         {/* Hero Section */}
         <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
           {/* 배경 그라데이션 효과 */}

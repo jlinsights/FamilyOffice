@@ -88,8 +88,9 @@ export default function ServicePage() {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
+      <main className="pt-20">
+        {/* Hero Section */}
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
         {/* 배경 그라데이션 효과 */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
         
@@ -129,9 +130,9 @@ export default function ServicePage() {
               </Button>
             </div>
         </div>
-      </section>
+        </section>
 
-      {/* 서비스 실적 통계 섹션 */}
+        {/* 서비스 실적 통계 섹션 */}
       <section className="section bg-gradient-to-r from-muted/30 to-background">
         <div className="container">
           <div className="text-center mb-12">
@@ -347,7 +348,8 @@ export default function ServicePage() {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

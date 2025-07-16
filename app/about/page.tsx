@@ -111,8 +111,9 @@ export default function AboutPage() {
     <div className="min-h-screen">
       <Header />
       
-      {/* 히어로 섹션 */}
-      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
+      <main className="pt-20">
+        {/* 히어로 섹션 */}
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
         {/* 배경 그라데이션 효과 */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
         
@@ -156,9 +157,9 @@ export default function AboutPage() {
             </Button>
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* 통계 섹션 */}
+        {/* 통계 섹션 */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -386,7 +387,8 @@ export default function AboutPage() {
             </Button>
           </div>
         </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

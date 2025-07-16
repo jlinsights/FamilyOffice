@@ -91,8 +91,9 @@ export default function ContactPage() {
     <div className="min-h-screen">
       <Header />
 
-      {/* 히어로 섹션 */}
-      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
+      <main className="pt-20">
+        {/* 히어로 섹션 */}
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
         {/* 배경 그라데이션 효과 - 메인 페이지와 동일 */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
         
@@ -135,9 +136,9 @@ export default function ContactPage() {
             </Button>
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* 상담 혜택 */}
+        {/* 상담 혜택 */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -344,7 +345,8 @@ export default function ContactPage() {
             </Button>
           </div>
         </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>
