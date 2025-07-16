@@ -41,7 +41,7 @@ export default function HomePage() {
       <SmoothScroll />
 
       {/* Hero Section - 백년영속의 시작 */}
-      <section id="hero" className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+      <section id="hero" className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
         {/* 배경 그라데이션 효과 */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
         

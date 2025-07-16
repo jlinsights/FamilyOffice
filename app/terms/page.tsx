@@ -18,7 +18,7 @@ export default function TermsOfServicePage() {
       <Header />
       
       {/* 간단한 히어로 섹션 */}
-      <section className="relative w-full min-h-[60vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background">
+      <section className="relative w-full min-h-[60vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background pt-20">
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           <div className="flex justify-center mb-6">
             <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">

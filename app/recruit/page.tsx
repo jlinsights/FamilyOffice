@@ -120,7 +120,7 @@ export default function RecruitPage() {
       
       <main className="pt-20">
         {/* Hero Section - 메인 페이지와 통일성 있는 디자인 */}
-        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
           {/* 배경 그라데이션 효과 - 메인 페이지와 동일 */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
           
