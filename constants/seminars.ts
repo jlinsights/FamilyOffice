@@ -137,158 +137,148 @@ export const FEATURED_SPEAKERS: Speaker[] = [
 
 export const UPCOMING_SEMINARS: Seminar[] = [
   {
-    id: "asset-management-2025",
-    title: "2025년 VVIP 자산관리 전략",
-    subtitle: "삼성생명 패밀리오피스 전문가가 제시하는 맞춤형 포트폴리오",
-    description: "고액자산가를 위한 통합 자산관리 전략과 시장 변화에 대응하는 포트폴리오 구성 방법을 심도 있게 다룹니다.",
-    speaker: FEATURED_SPEAKERS[0],
-    date: "2025-02-20",
-    time: "14:00",
-    duration: "2.5시간",
-    location: {
-      type: "hybrid",
-      venue: "삼성생명 본사 VIP룸",
-      address: "서울시 중구 태평로2가 150",
-      onlineLink: "cal.com/familyoffice/coffeechat",
-      capacity: 30
-    },
-    category: "finance",
-    targetAudience: ["VVIP 고객", "자산가", "기업오너"],
-    capacity: 30,
-    registeredCount: 24,
-    price: 0,
-    isPremium: true,
-    status: "upcoming",
-    tags: ["자산관리", "포트폴리오", "VVIP", "투자전략"],
-    agenda: [
-      {
-        time: "14:00",
-        title: "VVIP 고객 환영 인사",
-        duration: 15
-      },
-      {
-        time: "14:15",
-        title: "2025년 글로벌 자산시장 전망",
-        description: "주요 자산군별 투자 기회와 리스크 분석",
-        speaker: "김재원 상무",
-        duration: 60
-      },
-      {
-        time: "15:15",
-        title: "커피브레이크 & 네트워킹",
-        duration: 15
-      },
-      {
-        time: "15:30",
-        title: "맞춤형 포트폴리오 구성 전략",
-        description: "고액자산가 유형별 최적 자산배분 방법론",
-        speaker: "김재원 상무",
-        duration: 60
-      },
-      {
-        time: "16:30",
-        title: "개별 상담 및 Q&A",
-        duration: 30
-      }
-    ]
-  },
-  {
-    id: "tax-optimization-2025",
-    title: "2025년 상속·증여세 최적화 전략",
-    subtitle: "새로운 세법 개정사항과 절세 방안",
-    description: "고액자산가를 위한 상속·증여세 절세 전략과 최신 세법 변화에 대한 실무적 대응 방안을 제시합니다.",
-    speaker: FEATURED_SPEAKERS[1],
-    date: "2025-03-05",
-    time: "10:00",
+    id: "vvip-seminar-grand-hyatt-july",
+    title: "VVIP 고객초청 세미나",
+    subtitle: "미래를 준비하는 가업승계 전략",
+    description: "차세대 경영진을 위한 체계적인 가업승계 전략과 자산관리 방안을 심도 있게 다룹니다. 업계 최고 전문가들과 함께하는 프리미엄 세미나에서 미래 경영 전략을 수립하세요.",
+    speaker: FEATURED_SPEAKERS[2],
+    date: "2025-07-23",
+    time: "10:30",
     duration: "3시간",
     location: {
       type: "offline",
-      venue: "코엑스 컨퍼런스센터",
-      address: "서울시 강남구 영동대로 513",
+      venue: "그랜드 하얏트 서울",
+      address: "서울시 용산구 한강대로23길 322",
       capacity: 50
     },
-    category: "taxation",
-    targetAudience: ["기업오너", "고액자산가", "재무담당임원"],
+    category: "succession",
+    targetAudience: ["VVIP 고객", "기업 경영진", "차세대 리더"],
     capacity: 50,
-    registeredCount: 42,
-    price: 100000,
-    isPremium: false,
+    registeredCount: 12,
+    price: 50000,
+    isPremium: true,
     status: "upcoming",
-    tags: ["상속세", "증여세", "절세전략", "세무설계"],
+    tags: ["가업승계", "VVIP", "경영전략", "차세대"],
     agenda: [
       {
-        time: "10:00",
-        title: "등록 및 자료 배포",
+        time: "10:30",
+        title: "등록 및 Welcome Coffee",
         duration: 30
       },
       {
-        time: "10:30",
-        title: "2025년 세법 개정 주요사항",
-        description: "상속·증여세 관련 주요 변화와 영향",
-        speaker: "박세무 세무사",
+        time: "11:00",
+        title: "가업승계 전략의 핵심",
+        description: "성공적인 가업승계를 위한 필수 요소와 전략",
+        speaker: "이승계 변호사",
         duration: 60
       },
       {
-        time: "11:30",
-        title: "휴식",
-        duration: 15
-      },
-      {
-        time: "11:45",
-        title: "고액자산가 절세 전략 사례",
-        description: "실제 사례를 통한 절세 방법론",
-        speaker: "박세무 세무사",
-        duration: 75
+        time: "12:00",
+        title: "네트워킹 런치",
+        duration: 60
       },
       {
         time: "13:00",
-        title: "개별 세무상담 및 질의응답",
+        title: "개별 상담 및 Q&A 세션",
+        description: "맞춤형 가업승계 전략 수립을 위한 개별 상담",
         duration: 30
       }
     ]
   },
   {
-    id: "succession-planning-2025",
-    title: "가족법인을 통한 승계 설계",
-    subtitle: "지속가능한 가업승계를 위한 법적 구조 설계",
-    description: "가족법인 설립을 통한 체계적인 가업승계 방법과 법적 리스크 관리 방안에 대해 전문가가 상세히 설명합니다.",
-    speaker: FEATURED_SPEAKERS[2],
-    date: "2025-03-20",
-    time: "14:30",
-    duration: "2시간",
+    id: "vvip-seminar-shilla-august",
+    title: "VVIP 고객초청 세미나",
+    subtitle: "글로벌 시장을 위한 자산관리 전략",
+    description: "변화하는 글로벌 경제 환경에서 효과적인 자산관리 전략과 포트폴리오 구성 방법을 제시합니다. 해외 투자와 자산 다각화를 통한 안정적 수익 창출 방안을 학습하세요.",
+    speaker: FEATURED_SPEAKERS[3],
+    date: "2025-08-12",
+    time: "10:30",
+    duration: "3시간",
     location: {
       type: "offline",
-      venue: "법무법인 광장 회의실",
-      address: "서울시 종로구 새문안로 92",
-      capacity: 25
+      venue: "서울 신라호텔",
+      address: "서울시 중구 동호로 249",
+      capacity: 50
     },
-    category: "succession",
-    targetAudience: ["창업주", "후계자", "기업 법무팀"],
-    capacity: 25,
-    registeredCount: 18,
-    price: 150000,
-    isPremium: false,
+    category: "finance",
+    targetAudience: ["VVIP 고객", "자산가", "투자자"],
+    capacity: 50,
+    registeredCount: 8,
+    price: 50000,
+    isPremium: true,
     status: "upcoming",
-    tags: ["가업승계", "가족법인", "지배구조", "법적설계"],
+    tags: ["자산관리", "글로벌투자", "VVIP", "포트폴리오"],
     agenda: [
       {
-        time: "14:30",
-        title: "가족법인의 이해",
-        description: "가족법인의 개념과 장점, 설립 요건",
-        speaker: "이승계 변호사",
-        duration: 45
+        time: "10:30",
+        title: "등록 및 Welcome Coffee",
+        duration: 30
       },
       {
-        time: "15:15",
-        title: "승계 구조 설계 실무",
-        description: "단계별 승계 과정과 법적 고려사항",
-        speaker: "이승계 변호사",
-        duration: 45
+        time: "11:00",
+        title: "글로벌 자산관리 전략",
+        description: "해외 투자 동향과 자산 다각화 방안",
+        speaker: "정투자 본부장",
+        duration: 60
       },
       {
-        time: "16:00",
-        title: "사례 연구 및 질의응답",
-        description: "실제 승계 사례 분석과 개별 상담",
+        time: "12:00",
+        title: "네트워킹 런치",
+        duration: 60
+      },
+      {
+        time: "13:00",
+        title: "개별 상담 및 Q&A 세션",
+        description: "맞춤형 자산관리 전략 수립을 위한 개별 상담",
+        duration: 30
+      }
+    ]
+  },
+  {
+    id: "vvip-seminar-grand-hyatt-august",
+    title: "VVIP 고객초청 세미나",
+    subtitle: "스마트한 세무 설계와 절세 전략",
+    description: "최신 세법 변화에 대응하는 효과적인 세무 설계 방법과 절세 전략을 제시합니다. 상속·증여세 최적화와 기업 세무 리스크 관리 방안을 전문가와 함께 학습하세요.",
+    speaker: FEATURED_SPEAKERS[1],
+    date: "2025-08-27",
+    time: "10:30",
+    duration: "3시간",
+    location: {
+      type: "offline",
+      venue: "그랜드 하얏트 서울",
+      address: "서울시 용산구 한강대로23길 322",
+      capacity: 50
+    },
+    category: "taxation",
+    targetAudience: ["VVIP 고객", "기업오너", "재무담당임원"],
+    capacity: 50,
+    registeredCount: 15,
+    price: 50000,
+    isPremium: true,
+    status: "upcoming",
+    tags: ["세무설계", "절세전략", "VVIP", "상속증여"],
+    agenda: [
+      {
+        time: "10:30",
+        title: "등록 및 Welcome Coffee",
+        duration: 30
+      },
+      {
+        time: "11:00",
+        title: "스마트 세무 설계 전략",
+        description: "최신 세법 변화와 효과적인 절세 방안",
+        speaker: "박세무 세무사",
+        duration: 60
+      },
+      {
+        time: "12:00",
+        title: "네트워킹 런치",
+        duration: 60
+      },
+      {
+        time: "13:00",
+        title: "개별 상담 및 Q&A 세션",
+        description: "맞춤형 세무 전략 수립을 위한 개별 상담",
         duration: 30
       }
     ]

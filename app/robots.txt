@@ -1,0 +1,62 @@
+User-agent: *
+Allow: /
+
+# High priority pages
+Allow: /services
+Allow: /strategic-partnership
+Allow: /market-entry
+Allow: /success-stories
+Allow: /about
+Allow: /contact
+Allow: /program
+Allow: /faq
+
+# Allow API documentation
+Allow: /api/docs
+
+# Block admin and sensitive areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/webhooks/
+Disallow: /api/admin/
+Disallow: /api/sync-user
+Disallow: /api/test-*
+
+# Block temporary and development files
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /tmp/
+Disallow: /.next/
+Disallow: /node_modules/
+
+# Allow search engines to crawl important resources
+Allow: /favicon.ico
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Sitemap location
+Sitemap: https://familyoffices.vip/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2

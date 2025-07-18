@@ -26,6 +26,8 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
     setIsMobileMenuOpen(false)
   }, [])
 
+  const consultationText = "무료 상담 신청"
+
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-200 border-b ${
       isScrolled || isMobileMenuOpen
@@ -83,7 +85,7 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
             {/* 컨설팅 신청 버튼 */}
             <Button size="sm" asChild>
               <Link href="/contact">
-                상담 신청
+                {consultationText}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -131,12 +133,14 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="flex items-center justify-between">
-                <ThemeToggle />
+                <div className="flex items-center space-x-2">
+                  <ThemeToggle />
+                </div>
                 
                 {/* 모바일 컨설팅 신청 버튼 */}
                 <Button size="sm" asChild onClick={handleMobileLinkClick}>
                   <Link href="/contact">
-                    상담 신청
+                    {consultationText}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

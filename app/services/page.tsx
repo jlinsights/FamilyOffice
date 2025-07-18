@@ -104,7 +104,7 @@ export default function ServicePage() {
           </div>
             
             <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-              중소중견기업 법인{'\n'}대표를 위한{'\n'}<span className="text-foreground">전문 자산관리</span>
+              중소중견기업{'\n'}대표를 위한{'\n'}<span className="text-foreground">전문 자산관리</span>
             </h1>
             
             <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
@@ -112,7 +112,8 @@ export default function ServicePage() {
             </p>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
-              <span className="font-semibold text-foreground">10년+ 가업승계 노하우</span>와 <span className="font-semibold text-primary">500억원+ 관리 실적</span>을 바탕으로 업종별 특화된 통합 자산관리 솔루션을 제공합니다
+              <span className="font-semibold text-foreground">10년+ 가업승계 노하우</span>와 <span className="font-semibold text-primary">500억원+ 관리 실적</span>을 바탕으로<br />
+              업종별 특화된 통합 자산관리 솔루션을 제공합니다
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>

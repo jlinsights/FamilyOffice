@@ -109,6 +109,8 @@ export function ConsultationForm() {
           <option value="real-estate">부동산 포트폴리오</option>
           <option value="business-succession">가업승계</option>
           <option value="global-assets">해외 자산 관리</option>
+          <option value="strategic-partnership">Strategic Partnership (글로벌 기업 한국 진출)</option>
+          <option value="korea-market-entry">Korea Market Entry Solutions</option>
         </select>
       </div>
       <div>

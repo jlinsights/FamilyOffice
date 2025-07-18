@@ -6,7 +6,6 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: "/about", label: "소개" },
   { href: "/services", label: "서비스" },
   { href: "/program", label: "프로그램" },
-  // { href: "/blog", label: "블로그" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김

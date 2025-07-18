@@ -1,16 +1,14 @@
 import React from 'react'
 
 interface LogoProps {
-  language?: 'en' | 'ko'
   size?: 'small' | 'default' | 'large'
   showTagline?: boolean
   align?: 'left' | 'center'
   className?: string
 }
 
-// 반응형 및 다국어 최적화 FamilyOffice 로고 컴포넌트
+// 반응형 FamilyOffice 로고 컴포넌트
 export const FamilyOfficeLogo: React.FC<LogoProps> = ({ 
-  language = "en", 
   size = "default",
   showTagline = true,
   align = "center",
@@ -43,17 +41,6 @@ export const FamilyOfficeLogo: React.FC<LogoProps> = ({
     }
   }
 
-  const content = {
-    en: { 
-      title: "FamilyOffice", 
-      tagline: "Your Trusted Financial Partner for Life" 
-    },
-    ko: { 
-      title: "FamilyOffice", 
-      tagline: "중소중견기업 전문 자산관리 파트너" 
-    }
-  }
-
   const currentSize = sizes[size]
   const themeClasses = "text-foreground"
   
@@ -73,12 +60,12 @@ export const FamilyOfficeLogo: React.FC<LogoProps> = ({
       {/* 로고 컨테이너 */}
       <div className={`flex items-center ${currentSize.iconSpacing} group`}>
         <h1 className={`${currentSize.title} font-playfair font-medium ${themeClasses} tracking-tight transition-all duration-200 group-hover:tracking-normal`}>
-          {content[language].title}
+          FamilyOffice
         </h1>
         <div 
           className={`${currentSize.icon} rounded-md bg-primary flex items-center justify-center shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:rotate-2`}
           role="img" 
-          aria-label={`${content[language].title} logo`}
+          aria-label="FamilyOffice logo"
         >
           <span className={`text-primary-foreground font-medium ${currentSize.iconText}`} aria-hidden="true">
             S
@@ -90,7 +77,7 @@ export const FamilyOfficeLogo: React.FC<LogoProps> = ({
       {showTagline && (
         <div className={`flex ${taglineAlignmentClasses}`}>
           <p className={`${currentSize.tagline} text-muted-foreground font-light tracking-wider whitespace-nowrap select-none transition-opacity duration-200 hover:opacity-75`}>
-            {content[language].tagline}
+            중소중견기업 전문 자산관리 파트너
           </p>
         </div>
       )}
