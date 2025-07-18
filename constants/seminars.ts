@@ -100,6 +100,34 @@ export const SEMINAR_CATEGORIES: SeminarCategoryInfo[] = [
   }
 ];
 
+// 새로운 강연자 정보 추가
+export const SPEAKERS = {
+  leeSangSun: {
+    id: "lee-sang-sun",
+    name: "이상선",
+    title: "박사",
+    company: "패밀리오피스 전문가",
+    bio: "패밀리오피스 분야의 전문가로 20년 이상의 경험을 보유하고 있으며, 가업승계와 자산관리 전략의 권위자입니다.",
+    expertise: ["가업승계", "자산관리", "패밀리오피스", "경영전략"]
+  },
+  hwangByungHoon: {
+    id: "hwang-byung-hoon",
+    name: "황병훈",
+    title: "세무전문가",
+    company: "세무법인",
+    bio: "고액자산가 세무 전문가로 15년 이상의 경험을 보유하고 있으며, 상속·증여세 최적화 전략 수립의 전문가입니다.",
+    expertise: ["상속세", "증여세", "절세전략", "세무설계"]
+  },
+  jungGiHong: {
+    id: "jung-gi-hong",
+    name: "정기홍",
+    title: "FO",
+    company: "패밀리오피스",
+    bio: "패밀리오피스 운영 전문가로 고액자산가 자산관리와 투자 자문을 담당하고 있습니다.",
+    expertise: ["자산관리", "투자자문", "패밀리오피스", "포트폴리오"]
+  }
+};
+
 export const FEATURED_SPEAKERS: Speaker[] = [
   {
     id: "samsung-life-director",
@@ -141,7 +169,7 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     title: "VVIP 고객초청 세미나",
     subtitle: "미래를 준비하는 가업승계 전략",
     description: "차세대 경영진을 위한 체계적인 가업승계 전략과 자산관리 방안을 심도 있게 다룹니다. 업계 최고 전문가들과 함께하는 프리미엄 세미나에서 미래 경영 전략을 수립하세요.",
-    speaker: FEATURED_SPEAKERS[2],
+    speaker: SPEAKERS.leeSangSun,
     date: "2025-07-23",
     time: "10:30",
     duration: "3시간",
@@ -159,6 +187,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     isPremium: true,
     status: "upcoming",
     tags: ["가업승계", "VVIP", "경영전략", "차세대"],
+    registrationUrl: "https://lu.ma/k0lpxec5",
+    detailsUrl: "https://lu.ma/k0lpxec5",
     agenda: [
       {
         time: "10:30",
@@ -169,7 +199,7 @@ export const UPCOMING_SEMINARS: Seminar[] = [
         time: "11:00",
         title: "가업승계 전략의 핵심",
         description: "성공적인 가업승계를 위한 필수 요소와 전략",
-        speaker: "이승계 변호사",
+        speaker: "이상선 박사",
         duration: 60
       },
       {
@@ -190,7 +220,7 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     title: "VVIP 고객초청 세미나",
     subtitle: "글로벌 시장을 위한 자산관리 전략",
     description: "변화하는 글로벌 경제 환경에서 효과적인 자산관리 전략과 포트폴리오 구성 방법을 제시합니다. 해외 투자와 자산 다각화를 통한 안정적 수익 창출 방안을 학습하세요.",
-    speaker: FEATURED_SPEAKERS[3],
+    speaker: SPEAKERS.hwangByungHoon,
     date: "2025-08-12",
     time: "10:30",
     duration: "3시간",
@@ -208,6 +238,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     isPremium: true,
     status: "upcoming",
     tags: ["자산관리", "글로벌투자", "VVIP", "포트폴리오"],
+    registrationUrl: "https://lu.ma/sd0gfmmn",
+    detailsUrl: "https://lu.ma/sd0gfmmn",
     agenda: [
       {
         time: "10:30",
@@ -218,16 +250,23 @@ export const UPCOMING_SEMINARS: Seminar[] = [
         time: "11:00",
         title: "글로벌 자산관리 전략",
         description: "해외 투자 동향과 자산 다각화 방안",
-        speaker: "정투자 본부장",
+        speaker: "황병훈 세무전문가",
         duration: 60
       },
       {
         time: "12:00",
-        title: "네트워킹 런치",
-        duration: 60
+        title: "패밀리오피스 운영 전략",
+        description: "효과적인 패밀리오피스 운영과 자산관리 방안",
+        speaker: "정기홍 FO",
+        duration: 45
       },
       {
-        time: "13:00",
+        time: "12:45",
+        title: "네트워킹 런치",
+        duration: 45
+      },
+      {
+        time: "13:30",
         title: "개별 상담 및 Q&A 세션",
         description: "맞춤형 자산관리 전략 수립을 위한 개별 상담",
         duration: 30
@@ -239,7 +278,7 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     title: "VVIP 고객초청 세미나",
     subtitle: "스마트한 세무 설계와 절세 전략",
     description: "최신 세법 변화에 대응하는 효과적인 세무 설계 방법과 절세 전략을 제시합니다. 상속·증여세 최적화와 기업 세무 리스크 관리 방안을 전문가와 함께 학습하세요.",
-    speaker: FEATURED_SPEAKERS[1],
+    speaker: SPEAKERS.leeSangSun,
     date: "2025-08-27",
     time: "10:30",
     duration: "3시간",
@@ -257,6 +296,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     isPremium: true,
     status: "upcoming",
     tags: ["세무설계", "절세전략", "VVIP", "상속증여"],
+    registrationUrl: "https://lu.ma/t83yj5i9",
+    detailsUrl: "https://lu.ma/t83yj5i9",
     agenda: [
       {
         time: "10:30",
@@ -267,7 +308,7 @@ export const UPCOMING_SEMINARS: Seminar[] = [
         time: "11:00",
         title: "스마트 세무 설계 전략",
         description: "최신 세법 변화와 효과적인 절세 방안",
-        speaker: "박세무 세무사",
+        speaker: "이상선 박사",
         duration: 60
       },
       {

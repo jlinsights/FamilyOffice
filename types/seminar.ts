@@ -22,6 +22,7 @@ export interface Seminar {
   materials?: string[];
   image?: string;
   registrationUrl?: string;
+  detailsUrl?: string;
   videoUrl?: string;
   presentationUrl?: string;
 }

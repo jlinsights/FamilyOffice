@@ -161,26 +161,66 @@ export function UpcomingSeminarsSection() {
                 
                 <CardFooter className="pt-4">
                   <div className="w-full space-y-2">
-                    <Button 
-                      className="w-full group dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
-                      disabled={seminar.registeredCount >= seminar.capacity}
-                    >
-                      {seminar.registeredCount >= seminar.capacity ? (
-                        <>
-                          <CheckCircle className="h-4 w-4 mr-2" />
-                          마감되었습니다
-                        </>
-                      ) : (
-                        <>
-                          <Calendar className="h-4 w-4 mr-2" />
-                          신청하기
-                          <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
-                        </>
-                      )}
-                    </Button>
-                    <Button variant="outline" size="sm" className="w-full dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
-                      자세히 보기
-                    </Button>
+                    {seminar.registrationUrl ? (
+                      <a 
+                        href={seminar.registrationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button 
+                          className="w-full group dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
+                          disabled={seminar.registeredCount >= seminar.capacity}
+                        >
+                          {seminar.registeredCount >= seminar.capacity ? (
+                            <>
+                              <CheckCircle className="h-4 w-4 mr-2" />
+                              마감되었습니다
+                            </>
+                          ) : (
+                            <>
+                              <Calendar className="h-4 w-4 mr-2" />
+                              신청하기
+                              <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                            </>
+                          )}
+                        </Button>
+                      </a>
+                    ) : (
+                      <Button 
+                        className="w-full group dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
+                        disabled={seminar.registeredCount >= seminar.capacity}
+                      >
+                        {seminar.registeredCount >= seminar.capacity ? (
+                          <>
+                            <CheckCircle className="h-4 w-4 mr-2" />
+                            마감되었습니다
+                          </>
+                        ) : (
+                          <>
+                            <Calendar className="h-4 w-4 mr-2" />
+                            신청하기
+                            <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                          </>
+                        )}
+                      </Button>
+                    )}
+                    {seminar.detailsUrl ? (
+                      <a 
+                        href={seminar.detailsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button variant="outline" size="sm" className="w-full dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
+                          자세히 보기
+                        </Button>
+                      </a>
+                    ) : (
+                      <Button variant="outline" size="sm" className="w-full dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
+                        자세히 보기
+                      </Button>
+                    )}
                   </div>
                 </CardFooter>
               </Card>
