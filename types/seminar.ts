@@ -123,6 +123,6 @@ export interface SeminarSeries {
   seminars: Seminar[];
   totalSeminars: number;
   completedSeminars: number;
-  nextSeminar?: Seminar;
+  nextSeminar?: Seminar | undefined;
   registrationUrl?: string;
 }
