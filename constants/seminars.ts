@@ -216,64 +216,6 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     ]
   },
   {
-    id: "vvip-seminar-july-12",
-    title: "VVIP 고객초청 세미나",
-    subtitle: "세무전문가와 패밀리오피스 전문가의 특별 강연",
-    description: "황병훈 세무전문가와 정기홍 FO가 함께하는 특별 세미나입니다. 세무 설계와 패밀리오피스 운영에 대한 실무 중심의 강의를 통해 실질적인 도움을 드립니다.",
-    speaker: SPEAKERS.hwangByungHoon,
-    date: "2025-07-12",
-    time: "10:30",
-    duration: "3시간",
-    location: {
-      type: "offline",
-      venue: "그랜드 하얏트 서울",
-      address: "서울시 용산구 한강대로23길 322",
-      capacity: 50
-    },
-    category: "taxation",
-    targetAudience: ["VVIP 고객", "기업오너", "재무담당임원"],
-    capacity: 50,
-    registeredCount: 18,
-    price: 50000,
-    isPremium: true,
-    status: "upcoming",
-    tags: ["세무설계", "패밀리오피스", "VVIP", "절세전략"],
-    registrationUrl: "https://lu.ma/july12-seminar",
-    detailsUrl: "https://lu.ma/july12-seminar",
-    agenda: [
-      {
-        time: "10:30",
-        title: "등록 및 Welcome Coffee",
-        duration: 30
-      },
-      {
-        time: "11:00",
-        title: "고액자산가를 위한 세무 설계 전략",
-        description: "상속·증여세 최적화와 절세 전략",
-        speaker: "황병훈 세무전문가",
-        duration: 60
-      },
-      {
-        time: "12:00",
-        title: "패밀리오피스 운영과 자산관리",
-        description: "효과적인 패밀리오피스 운영 방안",
-        speaker: "정기홍 FO",
-        duration: 45
-      },
-      {
-        time: "12:45",
-        title: "네트워킹 런치",
-        duration: 45
-      },
-      {
-        time: "13:30",
-        title: "개별 상담 및 Q&A 세션",
-        description: "맞춤형 세무 및 자산관리 전략 수립을 위한 개별 상담",
-        duration: 30
-      }
-    ]
-  },
-  {
     id: "vvip-seminar-shilla-august",
     title: "VVIP 고객초청 세미나",
     subtitle: "세무전문가와 패밀리오피스 전문가의 특별 강연",
@@ -429,56 +371,24 @@ export const PAST_SEMINARS: Seminar[] = [
       title: "세무사",
       company: "삼일회계법인",
       bio: "고액자산가 세무 전문가로 상속·증여세 최적화 전략을 전문으로 합니다.",
-      expertise: ["연말정산", "상속세", "증여세", "절세전략"]
+      expertise: ["연말정산", "절세전략", "세무설계", "고액자산가"]
     },
-    date: "2024-11-28",
+    date: "2024-11-30",
     time: "14:00",
-    duration: "2.5시간",
+    duration: "2시간",
     location: {
-      type: "hybrid",
-      venue: "코엑스 컨퍼런스센터",
-      address: "서울시 강남구 영동대로 513"
+      type: "offline",
+      venue: "삼성생명 본사 세미나룸",
+      address: "서울시 중구 태평로2가 150"
     },
     category: "taxation",
-    targetAudience: ["고액자산가", "기업오너", "재무담당자"],
-    capacity: 50,
-    registeredCount: 48,
-    price: 80000,
-    isPremium: false,
+    targetAudience: ["VVIP 고객", "자산가", "기업오너"],
+    capacity: 40,
+    registeredCount: 40,
+    price: 0,
+    isPremium: true,
     status: "completed",
-    tags: ["연말정산", "절세전략", "세법변화", "고액자산가"],
-    agenda: [],
-    videoUrl: "https://cal.com/familyoffice/coffeechat",
-    presentationUrl: "https://cal.com/familyoffice/coffeechat"
-  },
-  {
-    id: "private-banking-2024",
-    title: "프라이빗뱅킹과 대체투자 동향",
-    subtitle: "2024년 하반기 투자 트렌드 분석",
-    description: "프라이빗뱅킹 시장의 최신 동향과 대체투자 기회를 분석하여 고액자산가를 위한 투자 인사이트를 제공했습니다.",
-    speaker: {
-      id: "private-banking-expert",
-      name: "정투자",
-      title: "투자본부장",
-      company: "미래에셋대우",
-      bio: "프라이빗뱅킹 부문 투자 전문가로 고액자산가 대상 투자자문을 담당합니다.",
-      expertise: ["프라이빗뱅킹", "대체투자", "해외투자", "자산배분"]
-    },
-    date: "2024-10-24",
-    time: "16:00",
-    duration: "1.5시간",
-    location: {
-      type: "online",
-      onlineLink: "zoom.us/j/private-banking"
-    },
-    category: "investment",
-    targetAudience: ["투자자", "자산가", "프라이빗뱅킹 고객"],
-    capacity: 100,
-    registeredCount: 87,
-    price: 50000,
-    isPremium: false,
-    status: "completed",
-    tags: ["프라이빗뱅킹", "대체투자", "투자동향", "자산배분"],
+    tags: ["연말정산", "절세전략", "세무설계", "고액자산가"],
     agenda: [],
     videoUrl: "https://cal.com/familyoffice/coffeechat",
     presentationUrl: "https://cal.com/familyoffice/coffeechat"
@@ -487,23 +397,23 @@ export const PAST_SEMINARS: Seminar[] = [
 
 export const SEMINAR_SERIES: SeminarSeries[] = [
   {
-    id: "vvip-premium-2025",
-    title: "VVIP 프리미엄 시리즈 2025",
-    description: "삼성생명 패밀리오피스가 제공하는 최고급 자산관리 교육 프로그램",
-    seminars: ["asset-management-2025", "tax-optimization-2025", "succession-planning-2025"],
-    totalDuration: "7.5시간",
-    price: 0,
-    discount: 0,
-    certificate: true
+    id: "vvip-quarterly",
+    name: "VVIP 분기별 세미나",
+    description: "VVIP 고객을 위한 분기별 특별 세미나 시리즈",
+    seminars: UPCOMING_SEMINARS.filter(s => s.isPremium),
+    totalSeminars: UPCOMING_SEMINARS.filter(s => s.isPremium).length,
+    completedSeminars: PAST_SEMINARS.filter(s => s.isPremium).length,
+    nextSeminar: UPCOMING_SEMINARS.find(s => s.isPremium && s.status === "upcoming"),
+    registrationUrl: "https://cal.com/familyoffice/coffeechat"
   },
   {
-    id: "wealth-protection-series",
-    title: "자산보호 전문가 과정",
-    description: "고액자산가를 위한 종합 자산보호 전략 과정",
-    seminars: ["tax-optimization-2025", "succession-planning-2025"],
-    totalDuration: "5시간",
-    price: 200000,
-    discount: 0.1,
-    certificate: true
+    id: "tax-strategy",
+    name: "세무 전략 시리즈",
+    description: "고액자산가를 위한 세무 설계와 절세 전략 시리즈",
+    seminars: [...UPCOMING_SEMINARS, ...PAST_SEMINARS].filter(s => s.category === "taxation"),
+    totalSeminars: [...UPCOMING_SEMINARS, ...PAST_SEMINARS].filter(s => s.category === "taxation").length,
+    completedSeminars: PAST_SEMINARS.filter(s => s.category === "taxation").length,
+    nextSeminar: UPCOMING_SEMINARS.find(s => s.category === "taxation" && s.status === "upcoming"),
+    registrationUrl: "https://cal.com/familyoffice/coffeechat"
   }
 ];

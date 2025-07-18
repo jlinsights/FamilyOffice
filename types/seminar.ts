@@ -118,11 +118,11 @@ export interface SeminarFeedback {
 
 export interface SeminarSeries {
   id: string;
-  title: string;
+  name: string;
   description: string;
-  seminars: string[]; // seminar IDs
-  totalDuration: string;
-  price: number;
-  discount?: number;
-  certificate: boolean;
+  seminars: Seminar[];
+  totalSeminars: number;
+  completedSeminars: number;
+  nextSeminar?: Seminar;
+  registrationUrl?: string;
 }
