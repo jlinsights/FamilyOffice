@@ -197,8 +197,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       },
       {
         time: "11:00",
-        title: "가업승계 전략의 핵심",
-        description: "성공적인 가업승계를 위한 필수 요소와 전략",
+        title: "효과적인 가업승계 및 자산관리 전략",
+        description: "성공적인 가업승계를 위한 체계적인 전략과 자산관리 방안",
         speaker: "이상선 박사",
         duration: 60
       },
@@ -306,15 +306,15 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       },
       {
         time: "11:00",
-        title: "고액자산가를 위한 세무 설계 전략",
-        description: "상속·증여세 최적화와 절세 전략",
+        title: "25년 개정세법 및 CEO 자산관리 전략",
+        description: "최신 세법 개정사항과 CEO를 위한 자산관리 전략",
         speaker: "황병훈 세무전문가",
         duration: 60
       },
       {
         time: "12:00",
-        title: "패밀리오피스 운영과 자산관리",
-        description: "효과적인 패밀리오피스 운영 방안",
+        title: "개정세법 주요내용 이해와 CEO 대응전략",
+        description: "개정세법의 핵심 내용과 CEO들의 대응 방안",
         speaker: "정기홍 FO",
         duration: 45
       },
@@ -326,7 +326,7 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       {
         time: "13:30",
         title: "개별 상담 및 Q&A 세션",
-        description: "맞춤형 자산관리 전략 수립을 위한 개별 상담",
+        description: "맞춤형 세무 및 자산관리 전략 수립을 위한 개별 상담",
         duration: 30
       }
     ]
@@ -364,8 +364,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       },
       {
         time: "11:00",
-        title: "스마트 세무 설계 전략",
-        description: "최신 세법 변화와 효과적인 절세 방안",
+        title: "효과적인 가업승계 및 자산관리 전략",
+        description: "성공적인 가업승계를 위한 체계적인 전략과 자산관리 방안",
         speaker: "이상선 박사",
         duration: 60
       },
