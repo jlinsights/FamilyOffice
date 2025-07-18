@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Globe, Users, TrendingUp, Shield, Building, Handshake, Target } from 'lucide-react'

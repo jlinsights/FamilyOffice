@@ -78,15 +78,14 @@ export function OptimizedImage({
       <Image
         src={src}
         alt={alt}
-        width={width}
-        height={height}
+        {...(width && height ? { width, height } : {})}
         className={cn(
           'transition-opacity duration-300',
           isLoading ? 'opacity-0' : 'opacity-100'
         )}
         priority={priority}
         placeholder={placeholder}
-        blurDataURL={blurDataURL}
+        {...(blurDataURL ? { blurDataURL } : {})}
         fill={fill}
         sizes={sizes}
         quality={quality}
