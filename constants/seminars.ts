@@ -106,8 +106,8 @@ export const SPEAKERS = {
     id: "lee-sang-sun",
     name: "이상선",
     title: "박사",
-    company: "패밀리오피스 전문가",
-    bio: "패밀리오피스 분야의 전문가로 20년 이상의 경험을 보유하고 있으며, 가업승계와 자산관리 전략의 권위자입니다.",
+    company: "삼성생명 컨설턴트",
+    bio: "삼성생명에서 패밀리오피스 분야의 전문가로 20년 이상의 경험을 보유하고 있으며, 가업승계와 자산관리 전략의 권위자입니다.",
     expertise: ["가업승계", "자산관리", "패밀리오피스", "경영전략"]
   },
   hwangByungHoon: {
@@ -122,8 +122,8 @@ export const SPEAKERS = {
     id: "jung-gi-hong",
     name: "정기홍",
     title: "FO",
-    company: "패밀리오피스",
-    bio: "패밀리오피스 운영 전문가로 고액자산가 자산관리와 투자 자문을 담당하고 있습니다.",
+    company: "삼성 패밀리오피스",
+    bio: "삼성 패밀리오피스 소속으로 고액자산가 자산관리와 투자 자문을 담당하고 있습니다.",
     expertise: ["자산관리", "투자자문", "패밀리오피스", "포트폴리오"]
   }
 };
@@ -216,10 +216,68 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     ]
   },
   {
+    id: "vvip-seminar-july-12",
+    title: "VVIP 고객초청 세미나",
+    subtitle: "세무전문가와 패밀리오피스 전문가의 특별 강연",
+    description: "황병훈 세무전문가와 정기홍 FO가 함께하는 특별 세미나입니다. 세무 설계와 패밀리오피스 운영에 대한 실무 중심의 강의를 통해 실질적인 도움을 드립니다.",
+    speaker: SPEAKERS.hwangByungHoon,
+    date: "2025-07-12",
+    time: "10:30",
+    duration: "3시간",
+    location: {
+      type: "offline",
+      venue: "그랜드 하얏트 서울",
+      address: "서울시 용산구 한강대로23길 322",
+      capacity: 50
+    },
+    category: "taxation",
+    targetAudience: ["VVIP 고객", "기업오너", "재무담당임원"],
+    capacity: 50,
+    registeredCount: 18,
+    price: 50000,
+    isPremium: true,
+    status: "upcoming",
+    tags: ["세무설계", "패밀리오피스", "VVIP", "절세전략"],
+    registrationUrl: "https://lu.ma/july12-seminar",
+    detailsUrl: "https://lu.ma/july12-seminar",
+    agenda: [
+      {
+        time: "10:30",
+        title: "등록 및 Welcome Coffee",
+        duration: 30
+      },
+      {
+        time: "11:00",
+        title: "고액자산가를 위한 세무 설계 전략",
+        description: "상속·증여세 최적화와 절세 전략",
+        speaker: "황병훈 세무전문가",
+        duration: 60
+      },
+      {
+        time: "12:00",
+        title: "패밀리오피스 운영과 자산관리",
+        description: "효과적인 패밀리오피스 운영 방안",
+        speaker: "정기홍 FO",
+        duration: 45
+      },
+      {
+        time: "12:45",
+        title: "네트워킹 런치",
+        duration: 45
+      },
+      {
+        time: "13:30",
+        title: "개별 상담 및 Q&A 세션",
+        description: "맞춤형 세무 및 자산관리 전략 수립을 위한 개별 상담",
+        duration: 30
+      }
+    ]
+  },
+  {
     id: "vvip-seminar-shilla-august",
     title: "VVIP 고객초청 세미나",
-    subtitle: "글로벌 시장을 위한 자산관리 전략",
-    description: "변화하는 글로벌 경제 환경에서 효과적인 자산관리 전략과 포트폴리오 구성 방법을 제시합니다. 해외 투자와 자산 다각화를 통한 안정적 수익 창출 방안을 학습하세요.",
+    subtitle: "세무전문가와 패밀리오피스 전문가의 특별 강연",
+    description: "황병훈 세무전문가와 정기홍 FO가 함께하는 특별 세미나입니다. 세무 설계와 패밀리오피스 운영에 대한 실무 중심의 강의를 통해 실질적인 도움을 드립니다.",
     speaker: SPEAKERS.hwangByungHoon,
     date: "2025-08-12",
     time: "10:30",
@@ -230,14 +288,14 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       address: "서울시 중구 동호로 249",
       capacity: 50
     },
-    category: "finance",
-    targetAudience: ["VVIP 고객", "자산가", "투자자"],
+    category: "taxation",
+    targetAudience: ["VVIP 고객", "기업오너", "재무담당임원"],
     capacity: 50,
     registeredCount: 8,
     price: 50000,
     isPremium: true,
     status: "upcoming",
-    tags: ["자산관리", "글로벌투자", "VVIP", "포트폴리오"],
+    tags: ["세무설계", "패밀리오피스", "VVIP", "절세전략"],
     registrationUrl: "https://lu.ma/sd0gfmmn",
     detailsUrl: "https://lu.ma/sd0gfmmn",
     agenda: [
@@ -248,15 +306,15 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       },
       {
         time: "11:00",
-        title: "글로벌 자산관리 전략",
-        description: "해외 투자 동향과 자산 다각화 방안",
+        title: "고액자산가를 위한 세무 설계 전략",
+        description: "상속·증여세 최적화와 절세 전략",
         speaker: "황병훈 세무전문가",
         duration: 60
       },
       {
         time: "12:00",
-        title: "패밀리오피스 운영 전략",
-        description: "효과적인 패밀리오피스 운영과 자산관리 방안",
+        title: "패밀리오피스 운영과 자산관리",
+        description: "효과적인 패밀리오피스 운영 방안",
         speaker: "정기홍 FO",
         duration: 45
       },
