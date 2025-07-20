@@ -181,7 +181,7 @@ export default function ServicePage() {
             </Badge>
             
             <h2 className="mb-6 font-bold text-balance animate-slide-up">
-              중소중견기업 법인 대표 전문 <span className="text-primary">핵심 서비스</span>
+              중소중견기업 대표 전문 <span className="text-primary">핵심 서비스</span>
             </h2>
             
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-balance animate-slide-up leading-relaxed" style={{ animationDelay: '100ms' }}>

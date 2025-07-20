@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Crown, ArrowDown } from "lucide-react"
 import { AnimatedCounter } from "@/components/animated-counter"
+import { ClientOnlyIcon } from "@/components/ui/client-only-icon"
 
 export function HeroSection() {
   return (
@@ -15,7 +16,7 @@ export function HeroSection() {
         {/* 상단 태그 */}
         <div className="flex justify-center mb-8">
           <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
-            <Crown className="h-3 w-3 mr-1" />
+            <ClientOnlyIcon icon={Crown} className="h-3 w-3 mr-1" />
             Heritage Planning Solution
           </Badge>
         </div>
@@ -66,7 +67,7 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
           <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">
             가업승계 컨설팅 신청
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ClientOnlyIcon icon={ArrowRight} className="ml-2 h-5 w-5" />
           </Button>
           <Button size="lg" variant="outline" className="font-semibold px-8 py-4 text-lg">
             헤리티지 플래닝 알아보기
@@ -75,7 +76,7 @@ export function HeroSection() {
         
         {/* 스크롤 인디케이터 */}
         <div className="animate-bounce">
-          <ArrowDown className="h-6 w-6 text-muted-foreground mx-auto" />
+          <ClientOnlyIcon icon={ArrowDown} className="h-6 w-6 text-muted-foreground mx-auto" />
         </div>
       </div>
     </section>

@@ -1,0 +1,292 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    # Warm-up phase
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm-up phase"
+    
+    # Gradual load increase
+    - duration: 300
+      arrivalRate: 10
+      rampTo: 50
+      name: "Gradual load increase"
+    
+    # Peak load testing
+    - duration: 600
+      arrivalRate: 50
+      name: "Peak load testing"
+    
+    # Stress testing
+    - duration: 300
+      arrivalRate: 100
+      name: "Stress testing"
+    
+    # Cool down
+    - duration: 120
+      arrivalRate: 5
+      name: "Cool down"
+
+  plugins:
+    expect: {}
+    metrics-by-endpoint: {}
+    publish-metrics:
+      - type: datadog
+        tags:
+          - "environment:test"
+          - "service:family-office"
+
+  variables:
+    testUserId: "test-user-{{ $randomString() }}"
+    testPortfolioId: "portfolio-{{ $randomString() }}"
+
+scenarios:
+  - name: "Authentication and Portfolio Access"
+    weight: 30
+    flow:
+      # Login flow
+      - get:
+          url: "/login"
+          headers:
+            User-Agent: "Artillery Load Test"
+          expect:
+            - statusCode: 200
+            - contentType: "text/html"
+          capture:
+            - header: "set-cookie"
+              as: "sessionCookie"
+      
+      # Authenticate (mock successful login)
+      - post:
+          url: "/api/auth/login"
+          headers:
+            Content-Type: "application/json"
+            Cookie: "{{ sessionCookie }}"
+          json:
+            email: "test@example.com"
+            password: "testpassword"
+          expect:
+            - statusCode: [200, 302]
+          capture:
+            - json: "$.token"
+              as: "authToken"
+      
+      # Access portfolio page
+      - get:
+          url: "/portfolio"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+            Cookie: "{{ sessionCookie }}"
+          expect:
+            - statusCode: 200
+            - contentType: "text/html"
+            - hasHeader: "x-powered-by"
+
+  - name: "Financial API Performance"
+    weight: 40
+    flow:
+      # Get Korean stock data
+      - get:
+          url: "/api/financial/stocks?symbol=005930.KS"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+            - hasProperty: "price"
+            - hasProperty: "symbol"
+          capture:
+            - json: "$.price"
+              as: "samsungPrice"
+      
+      # Get major Korean stocks
+      - get:
+          url: "/api/financial/stocks?korean=true"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+      
+      # Get forex data
+      - get:
+          url: "/api/financial/forex?from=USD&to=KRW"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+            - hasProperty: "rate"
+      
+      # Get financial service status
+      - get:
+          url: "/api/financial/status"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+            - hasProperty: "status"
+
+  - name: "Transaction Processing"
+    weight: 20
+    flow:
+      # Create new transaction
+      - post:
+          url: "/api/transactions"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+            Content-Type: "application/json"
+          json:
+            type: "BUY"
+            symbol: "AAPL"
+            shares: 10
+            price: 185.50
+            portfolioId: "{{ testPortfolioId }}"
+            orderType: "LIMIT"
+          expect:
+            - statusCode: [200, 201]
+            - contentType: "application/json"
+            - hasProperty: "transactionId"
+          capture:
+            - json: "$.transactionId"
+              as: "transactionId"
+      
+      # Get transaction details
+      - get:
+          url: "/api/transactions/{{ transactionId }}"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+            - hasProperty: "status"
+      
+      # Update transaction
+      - put:
+          url: "/api/transactions/{{ transactionId }}"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+            Content-Type: "application/json"
+          json:
+            status: "COMPLETED"
+          expect:
+            - statusCode: [200, 204]
+
+  - name: "Portfolio Management"
+    weight: 15
+    flow:
+      # Get portfolio summary
+      - get:
+          url: "/api/portfolio"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+            - hasProperty: "totalValue"
+            - hasProperty: "positions"
+      
+      # Get portfolio performance
+      - get:
+          url: "/api/portfolio/performance?period=1M"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+            - hasProperty: "returns"
+      
+      # Get portfolio allocation
+      - get:
+          url: "/api/portfolio/allocation"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+            - hasProperty: "allocations"
+
+  - name: "Report Generation"
+    weight: 10
+    flow:
+      # Generate performance report
+      - post:
+          url: "/api/reports/performance"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+            Content-Type: "application/json"
+          json:
+            startDate: "2024-01-01"
+            endDate: "2024-12-31"
+            portfolios: ["{{ testPortfolioId }}"]
+            format: "PDF"
+          expect:
+            - statusCode: [200, 202]
+            - contentType: "application/json"
+          capture:
+            - json: "$.reportId"
+              as: "reportId"
+      
+      # Check report status
+      - get:
+          url: "/api/reports/{{ reportId }}/status"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+            - hasProperty: "status"
+      
+      # Download report (if ready)
+      - get:
+          url: "/api/reports/{{ reportId }}/download"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: [200, 202, 404]
+
+  - name: "Concurrent User Simulation"
+    weight: 25
+    flow:
+      # Simulate multiple concurrent operations
+      - parallel:
+          - get:
+              url: "/api/financial/stocks?symbol=005930.KS"
+              headers:
+                Authorization: "Bearer {{ authToken }}"
+          - get:
+              url: "/api/financial/stocks?symbol=000660.KS"
+              headers:
+                Authorization: "Bearer {{ authToken }}"
+          - get:
+              url: "/api/financial/forex?from=USD&to=KRW"
+              headers:
+                Authorization: "Bearer {{ authToken }}"
+          - get:
+              url: "/api/portfolio"
+              headers:
+                Authorization: "Bearer {{ authToken }}"
+          - get:
+              url: "/api/transactions?limit=10"
+              headers:
+                Authorization: "Bearer {{ authToken }}"
+
+# Custom metrics collection
+metrics:
+  - name: "financial_api_response_time"
+    unit: "milliseconds"
+  - name: "transaction_processing_time"
+    unit: "milliseconds"
+  - name: "portfolio_load_time"
+    unit: "milliseconds"
+  - name: "concurrent_user_handling"
+    unit: "requests_per_second"
+
+# Performance thresholds
+expect:
+  - http.response_time.p95: 2000  # 95th percentile should be under 2 seconds
+  - http.response_time.p99: 5000  # 99th percentile should be under 5 seconds
+  - http.request_rate: "> 45"     # Should handle more than 45 requests per second
+  - http.codes.200: "> 90%"       # 90% success rate minimum
+  - http.codes.500: "< 1%"        # Less than 1% server errors

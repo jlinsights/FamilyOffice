@@ -146,13 +146,48 @@ const nextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' *.clerk.accounts.dev *.googletagmanager.com *.google-analytics.com *.hubspot.com js.hs-scripts.com cdn.channel.io *.channel.io app.cal.com *.cal.com embed.typeform.com",
               "style-src 'self' 'unsafe-inline'",
-              "font-src 'self'",
-              "img-src 'self' data: blob: *.clerk.accounts.dev",
-              "connect-src 'self' *.clerk.accounts.dev *.google-analytics.com *.hubspot.com *.channel.io *.cal.com api.cal.com",
+              "font-src 'self' data:",
+              "img-src 'self' data: blob: *.clerk.accounts.dev https:",
+              "connect-src 'self' *.clerk.accounts.dev *.google-analytics.com *.hubspot.com *.channel.io *.cal.com api.cal.com wss:",
               "frame-src 'self' *.cal.com app.cal.com *.typeform.com",
               "object-src 'none'",
-              "base-uri 'self'"
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'none'",
+              "upgrade-insecure-requests"
             ].join('; ')
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: [
+              'camera=()',
+              'microphone=()',
+              'geolocation=()',
+              'payment=()',
+              'usb=()',
+              'screen-wake-lock=()',
+              'web-share=()'
+            ].join(', ')
+          },
+          {
+            key: 'X-Permitted-Cross-Domain-Policies',
+            value: 'none'
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'require-corp'
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin'
+          },
+          {
+            key: 'Cross-Origin-Resource-Policy',
+            value: 'same-origin'
           },
         ],
       },

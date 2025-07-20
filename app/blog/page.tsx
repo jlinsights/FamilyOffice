@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -28,8 +27,6 @@ export const metadata: Metadata = {
     title: 'Korea Market Insights Blog | FamilyOffices.vip',
     description: 'Expert insights and analysis on Korea market trends and strategic partnerships.',
     type: 'website',
-    locale: 'en_US',
-    alternateLocale: 'ko_KR',
   },
 }
 
@@ -147,191 +144,207 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20 bg-gradient-to-br from-slate-50 to-blue-50">
-      {/* Hero Section */}
-      <section className="pb-12 bg-gradient-to-r from-blue-900 to-slate-900">
-        <div className="container mx-auto px-4">
-          <div className="text-center text-white">
-            <Badge className="mb-4 bg-blue-600 text-white">Korea Market Insights</Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Business Intelligence
-              <span className="text-blue-400"> & Market Analysis</span>
+      <main className="pt-20">
+        {/* Hero Section */}
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <Badge className="mb-4 bg-background/80 backdrop-blur-sm animate-fade-in">
+              Korea Market Insights
+            </Badge>
+            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+              Business Intelligence{'\\n'}
+              <span className="text-foreground">& Market Analysis</span>
             </h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+            <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '200ms' }}>
               Expert insights on Korea market trends, strategic partnerships, and business development opportunities for global companies.
             </p>
-            <div className="max-w-md mx-auto">
+            <div className="max-w-md mx-auto animate-slide-up" style={{ animationDelay: '400ms' }}>
               <div className="flex">
                 <Input 
                   placeholder="Search insights..." 
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/70"
+                  className="bg-background/80 backdrop-blur-sm border-border"
                 />
-                <Button className="ml-2 bg-blue-600 hover:bg-blue-700">
+                <Button className="ml-2 bg-primary hover:bg-primary/90">
                   <Search className="h-4 w-4" />
                 </Button>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Categories */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Blog Categories</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {blogCategories.map((category) => (
-              <Card key={category.slug} className="hover:shadow-lg transition-shadow cursor-pointer">
-                <CardHeader className="text-center">
-                  <div className="flex justify-center mb-2">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                      {category.icon}
+        {/* Categories */}
+        <section className="section bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up">
+                Blog Categories
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '200ms' }}>
+                Explore insights across different areas of Korea market expertise
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+              {blogCategories.map((category, index) => (
+                <div key={category.slug} className="card-modern p-6 hover:shadow-lg transition-all duration-300 cursor-pointer animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
+                  <div className="text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                        {category.icon}
+                      </div>
                     </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">{category.name}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
+                    <Badge variant="outline">{category.count} posts</Badge>
                   </div>
-                  <CardTitle className="text-lg">{category.name}</CardTitle>
-                  <p className="text-sm text-gray-600">{category.description}</p>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <Badge variant="outline">{category.count} posts</Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Posts */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Featured Insights</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPosts.map((post) => (
-              <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                  <BookOpen className="h-12 w-12 text-blue-600" />
                 </div>
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant="outline">{post.category}</Badge>
-                    <Badge className="bg-orange-100 text-orange-800">Featured</Badge>
-                  </div>
-                  <CardTitle className="text-xl hover:text-blue-600">
-                    <Link href={`/blog/${post.slug}`}>
-                      {post.title}
-                    </Link>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                  <div className="flex items-center justify-between text-sm text-gray-500">
-                    <div className="flex items-center gap-2">
-                      <User className="h-4 w-4" />
-                      {post.author}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4" />
-                      {post.readTime}
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
-                    <CalendarDays className="h-4 w-4" />
-                    {new Date(post.date).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}
-                  </div>
-                  <Button className="w-full mt-4" variant="outline" asChild>
-                    <Link href={`/blog/${post.slug}`}>
-                      Read More
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Recent Posts */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Recent Insights</h2>
-          <div className="space-y-8">
-            {recentPosts.map((post) => (
-              <Card key={post.id} className="hover:shadow-lg transition-shadow">
-                <div className="md:flex">
-                  <div className="md:w-1/4 aspect-video md:aspect-square bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                    <FileText className="h-8 w-8 text-gray-600" />
+        {/* Featured Posts */}
+        <section className="section">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up">
+                Featured Insights
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '200ms' }}>
+                Latest analysis and insights on Korea market trends
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredPosts.map((post, index) => (
+                <div key={post.id} className="card-modern overflow-hidden hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: `${index * 150}ms` }}>
+                  <div className="aspect-video bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                    <BookOpen className="h-12 w-12 text-primary" />
                   </div>
-                  <div className="md:w-3/4 p-6">
-                    <div className="flex items-center gap-4 mb-3">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-3">
                       <Badge variant="outline">{post.category}</Badge>
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
-                        <CalendarDays className="h-4 w-4" />
-                        {new Date(post.date).toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
-                        })}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
-                        <Clock className="h-4 w-4" />
-                        {post.readTime}
-                      </div>
+                      <Badge className="bg-primary/10 text-primary">Featured</Badge>
                     </div>
-                    <h3 className="text-xl font-bold mb-3 hover:text-blue-600">
+                    <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
                       <Link href={`/blog/${post.slug}`}>
                         {post.title}
                       </Link>
                     </h3>
-                    <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <p className="text-muted-foreground mb-4 line-clamp-2">{post.excerpt}</p>
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
+                      <div className="flex items-center gap-2">
                         <User className="h-4 w-4" />
                         {post.author}
                       </div>
-                      <Button variant="outline" size="sm" asChild>
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        {post.readTime}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                      <CalendarDays className="h-4 w-4" />
+                      {new Date(post.date).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </div>
+                    <Button className="w-full" variant="outline" asChild>
+                      <Link href={`/blog/${post.slug}`}>
+                        Read More
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Recent Posts */}
+        <section className="section bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up">
+                Recent Insights
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '200ms' }}>
+                Stay updated with the latest Korea market developments
+              </p>
+            </div>
+            <div className="space-y-8">
+              {recentPosts.map((post, index) => (
+                <div key={post.id} className="card-modern overflow-hidden hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: `${index * 150}ms` }}>
+                  <div className="md:flex">
+                    <div className="md:w-1/4 aspect-video md:aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                      <FileText className="h-8 w-8 text-primary" />
+                    </div>
+                    <div className="md:w-3/4 p-6">
+                      <div className="flex items-center gap-4 mb-3 flex-wrap">
+                        <Badge variant="outline">{post.category}</Badge>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <CalendarDays className="h-4 w-4" />
+                          {new Date(post.date).toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          })}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="h-4 w-4" />
+                          {post.readTime}
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
                         <Link href={`/blog/${post.slug}`}>
-                          Read More
-                          <ArrowRight className="ml-2 h-4 w-4" />
+                          {post.title}
                         </Link>
-                      </Button>
+                      </h3>
+                      <p className="text-muted-foreground mb-4 line-clamp-2">{post.excerpt}</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <User className="h-4 w-4" />
+                          {post.author}
+                        </div>
+                        <Button variant="outline" size="sm" asChild>
+                          <Link href={`/blog/${post.slug}`}>
+                            Read More
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </Card>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Newsletter Signup */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-6">
+        {/* Newsletter Signup */}
+        <section className="section bg-primary text-primary-foreground">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-4 animate-slide-up">
               Stay Updated with Korea Market Insights
             </h2>
-            <p className="text-xl text-blue-100 mb-8">
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto animate-slide-up opacity-90 leading-relaxed" style={{ animationDelay: '200ms' }}>
               Get weekly insights on Korea market trends, regulatory changes, and strategic partnership opportunities.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '400ms' }}>
               <Input 
                 placeholder="Enter your email address" 
-                className="max-w-sm bg-white/10 border-white/20 text-white placeholder:text-white/70"
+                className="max-w-sm bg-background/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/70"
               />
-              <Button className="bg-white text-blue-600 hover:bg-gray-100">
+              <Button className="bg-background text-foreground hover:bg-background/90">
                 Subscribe to Newsletter
               </Button>
             </div>
-            <p className="text-sm text-blue-200 mt-4">
+            <p className="text-sm text-primary-foreground/80 mt-4">
               Join 500+ professionals who receive our weekly Korea market insights.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
       </main>
       <Footer />
     </div>

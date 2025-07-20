@@ -11,7 +11,8 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   { href: "/faq", label: "FAQ" },
   { href: "/seminar", label: "세미나" },
-  { href: "/recruit", label: "채용" }
+  { href: "/recruit", label: "채용" },
+  { href: "https://newsletter.familyoffices.vip", label: "뉴스레터", isExternal: true }
 ] as const
 
 // 위 4개 메뉴는 미완성 상태이므로 주석 처리하여 숨깁니다.

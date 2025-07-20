@@ -120,6 +120,16 @@ export function Footer() {
                   무료 상담 신청
                 </Link>
               </li>
+              <li>
+                <Link 
+                  href="https://newsletter.familyoffices.vip" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="nav-link text-muted-foreground hover:text-foreground"
+                >
+                  뉴스레터
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

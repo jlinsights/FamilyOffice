@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Copy, Check, Palette, ArrowRight } from "lucide-react";
-import { BRAND_COLORS, TYPOGRAPHY_SYSTEM } from "@/constants/brand";
+import { BRAND_COLORS, TYPOGRAPHY_SYSTEM, BRAND_VALUES } from "@/constants/brand";
 import type { BrandColorSystem, TypographyCategory } from "@/types/brand";
 import BrandExcellenceSection from "@/components/brand-excellence-section";
 import LogoShowcaseCard from "@/components/logo-showcase-card";
@@ -71,6 +71,7 @@ export default function BrandPage() {
   // 타입 명확화: BRAND_COLORS, TYPOGRAPHY_SYSTEM, BRAND_VALUES
   const brandColors: BrandColorSystem = BRAND_COLORS;
   const typographySystem: TypographyCategory[] = TYPOGRAPHY_SYSTEM;
+  const brandValues = BRAND_VALUES;
 
   return (
     <>

@@ -17,6 +17,16 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:unit": "jest --testPathPattern=tests/unit",
+    "test:integration": "jest --testPathPattern=tests/integration",
+    "test:security": "jest --testPathPattern=tests/security",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open",
+    "test:performance": "node tests/performance/load-tests.js",
+    "test:performance:financial": "artillery run tests/performance/financial-api-stress.yml",
+    "test:performance:standard": "artillery run artillery.yml",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:security && npm run test:e2e && npm run test:performance",
+    "test:coverage:report": "jest --coverage && open coverage/lcov-report/index.html",
     "type-check": "tsc --noEmit",
     "analyze": "cross-env ANALYZE=true next build",
     "vercel-build": "next build"
@@ -65,7 +75,7 @@
     "googleapis": "^131.0.0",
     "input-otp": "1.4.1",
     "ioredis": "^5.6.1",
-    "lucide-react": "0.454.0",
+    "lucide-react": "^0.525.0",
     "nanoid": "^5.1.5",
     "next": "^15.4.1",
     "next-themes": "0.2.0",
@@ -87,6 +97,8 @@
     "zod": "3.24.1"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@testing-library/cypress": "^10.0.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
@@ -95,8 +107,11 @@
     "@types/node": "20.12.7",
     "@types/react": "18.2.62",
     "@types/react-dom": "18.2.19",
+    "artillery": "^2.0.20",
     "critters": "^0.0.23",
     "cross-env": "^7.0.3",
+    "cypress": "^13.15.2",
+    "cypress-axe": "^1.6.0",
     "eslint": "9.31.0",
     "eslint-config-next": "15.3.5",
     "jest": "^30.0.4",
@@ -106,6 +121,7 @@
     "prettier": "^3.6.2",
     "swagger-ui-react": "^5.26.2",
     "tailwindcss": "3.4.17",
+    "ts-jest": "^29.2.5",
     "typescript": "5.4.5"
   }
 }

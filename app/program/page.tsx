@@ -49,14 +49,15 @@ function HeroSection() {
             </Badge>
           </div>
           <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-            대한민국 중소중견기업{'\n'}CEO들만의{'\n'}<span className="text-foreground">특별한 공간</span>
+            중소중견기업{'\n'}CEO들만의{'\n'}<span className="text-foreground">특별한 공간</span>
           </h1>
           <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
             프리미엄 네트워킹 & 자산관리 클럽
           </p>
           
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
-            검증된 <span className="font-semibold text-primary">500+ 법인 대표님들</span>과 함께하는 특별한 공간에서 최고의 네트워킹과 전문 자산관리 서비스를 경험하세요
+            검증된 <span className="font-semibold text-primary">500+ 법인 대표님들</span>과 함께하는 특별한 공간에서<br />
+            최고의 네트워킹과 전문 자산관리 서비스를 경험하세요
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
             <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">

@@ -2,6 +2,7 @@ import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
 import { Providers } from "@/components/providers"
+import { ErrorBoundary } from "@/components/error-boundary"
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://familyoffices.vip'),
@@ -175,9 +176,11 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="FamilyOffice S 뉴스" href="/rss.xml" />
       </head>
       <body className="antialiased">
-        <Providers>
-          {children}
-        </Providers>
+        <ErrorBoundary>
+          <Providers>
+            {children}
+          </Providers>
+        </ErrorBoundary>
         
         {/* Google Tag Manager (noscript) */}
       </body>

@@ -67,6 +67,7 @@ export interface ServiceItem {
 export interface NavigationItem {
   href: string
   label: string
+  isExternal?: boolean // 외부 링크 여부
 }
 
 // 폼 상태 타입

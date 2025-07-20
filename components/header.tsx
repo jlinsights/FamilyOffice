@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { MinimalFamilyOfficeLogo } from "@/components/logo"
 import { NAVIGATION_ITEMS } from "@/lib/constants"
+import { ClientOnlyIcon } from "@/components/ui/client-only-icon"
 import type { NavigationItem } from "@/types/globals"
 import type { MouseEventHandler } from "react"
 
@@ -58,9 +59,9 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
             >
               <span className="sr-only">{isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}</span>
               {isMobileMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
+                <ClientOnlyIcon icon={X} className="h-6 w-6" aria-hidden="true" />
               ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
+                <ClientOnlyIcon icon={Menu} className="h-6 w-6" aria-hidden="true" />
               )}
             </Button>
           </div>
@@ -71,6 +72,8 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
               <Link
                 key={item.href}
                 href={item.href}
+                target={item.isExternal ? "_blank" : undefined}
+                rel={item.isExternal ? "noopener noreferrer" : undefined}
                 className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
               >
                 {item.label}
@@ -110,7 +113,7 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
                     aria-label="메뉴 닫기"
                   >
                     <span className="sr-only">메뉴 닫기</span>
-                    <X className="h-6 w-6" aria-hidden="true" />
+                    <ClientOnlyIcon icon={X} className="h-6 w-6" aria-hidden="true" />
                   </Button>
                 </div>
               </div>
@@ -120,6 +123,8 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
                     <Link
                       key={item.href}
                       href={item.href}
+                      target={item.isExternal ? "_blank" : undefined}
+                      rel={item.isExternal ? "noopener noreferrer" : undefined}
                       onClick={handleMobileLinkClick}
                       className="-m-3 p-3 flex items-center rounded-md hover:bg-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     >

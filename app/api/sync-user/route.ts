@@ -1,10 +1,11 @@
 // FamilyOffice S - 사용자 동기화 API
 // 로그인한 사용자를 Supabase에 자동 동기화하는 엔드포인트
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { syncCurrentUser } from '@/lib/user-sync';
+import { withRateLimit, rateLimiters } from '@/lib/rate-limit';
 
-export async function POST() {
+async function handler(req: NextRequest) {
   try {
     // 현재 사용자를 Supabase에 동기화
     const syncedUser = await syncCurrentUser();
@@ -34,4 +35,7 @@ export async function POST() {
       error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
-} 
+}
+
+// Apply rate limiting to the handler
+export const POST = withRateLimit(handler, rateLimiters.general); 
