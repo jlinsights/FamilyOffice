@@ -222,10 +222,6 @@ export class OptimizedPortfolioQueries {
     const startTime = performance.now()
 
     try {
-      // 청크로 나누어 처리하여 메모리 효율성 확보
-      const chunkSize = 1000
-      const results = []
-
       // 스트리밍 쿼리로 대용량 데이터 처리
       const { data, error } = await this.supabase
         .rpc('generate_performance_report', {

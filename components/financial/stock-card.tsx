@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { TrendingUp, TrendingDown, RefreshCw, Clock } from 'lucide-react'
+import { TrendingUp, TrendingDown, RefreshCw } from 'lucide-react'
 import type { StockData } from '@/lib/types/financial'
 
 interface StockCardProps {
@@ -28,7 +28,6 @@ export default function StockCard({
   const [stockData, setStockData] = useState<StockData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
   const fetchStockData = useCallback(async (forceRefresh = false) => {
     if (loading && !forceRefresh) return

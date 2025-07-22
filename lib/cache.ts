@@ -56,9 +56,8 @@ export class CacheManager {
   private cache: NodeCache
   private prefix: string
 
-  constructor(cache: NodeCache, prefix: string = '') {
+  constructor(cache: NodeCache) {
     this.cache = cache
-    this.prefix = prefix
   }
 
   private getKey(key: string): string {
@@ -158,10 +157,10 @@ export class CacheManager {
 
 // Cache managers for different purposes
 export const cacheManagers = {
-  api: new CacheManager(caches.medium, 'api'),
-  user: new CacheManager(caches.session, 'user'),
-  content: new CacheManager(caches.long, 'content'),
-  temp: new CacheManager(caches.short, 'temp'),
+  api: new CacheManager(caches.medium),
+  user: new CacheManager(caches.session),
+  content: new CacheManager(caches.long),
+  temp: new CacheManager(caches.short),
 }
 
 // Cache decorator for functions

@@ -193,7 +193,7 @@ export class AuditService {
   // 감사 이벤트 조회
   static async queryEvents(query: AuditQuery): Promise<AuditEvent[]> {
     // 데이터베이스에서 감사 이벤트 조회
-    return await this.queryFromDatabase(query);
+    return await this.queryFromDatabase();
   }
 
   // 감사 보고서 생성
@@ -334,7 +334,7 @@ export class AuditService {
     console.log('Sending critical alert for event:', event.id);
   }
 
-  private static async queryFromDatabase(query: AuditQuery): Promise<AuditEvent[]> {
+  private static async queryFromDatabase(): Promise<AuditEvent[]> {
     return []; // 구현 필요
   }
 

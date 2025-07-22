@@ -60,7 +60,7 @@ export class PAMService {
 
     // 긴급 요청은 즉시 승인자에게 알림
     if (request.urgency === 'critical') {
-      await this.sendCriticalAlert(access);
+      await this.sendCriticalAlert();
     }
 
     // 데이터베이스에 저장
@@ -75,7 +75,7 @@ export class PAMService {
     approvedBy: string,
     comments?: string
   ): Promise<void> {
-    const access = await this.getPrivilegedAccess(accessId);
+    const access = await this.getPrivilegedAccess();
     
     if (!access) {
       throw new Error('Privileged access request not found');
@@ -109,7 +109,7 @@ export class PAMService {
     deniedBy: string,
     reason: string
   ): Promise<void> {
-    const access = await this.getPrivilegedAccess(accessId);
+    const access = await this.getPrivilegedAccess();
     
     if (!access) {
       throw new Error('Privileged access request not found');
@@ -134,7 +134,7 @@ export class PAMService {
     resource: string,
     permission: string
   ): Promise<boolean> {
-    const activeAccess = await this.getActivePrivilegedAccess(userId, resource);
+    const activeAccess = await this.getActivePrivilegedAccess();
     
     if (!activeAccess) {
       return false;
@@ -152,7 +152,7 @@ export class PAMService {
 
   // 권한 만료 처리
   static async expirePrivilegedAccess(accessId: string): Promise<void> {
-    const access = await this.getPrivilegedAccess(accessId);
+    const access = await this.getPrivilegedAccess();
     
     if (access && access.status === 'approved') {
       access.status = 'expired';
@@ -210,19 +210,17 @@ export class PAMService {
       }
 
       // 사용 패턴 분석
-      await this.analyzeUsagePattern(access);
+      await this.analyzeUsagePattern();
     }
   }
 
   // 사용 패턴 분석
-  private static async analyzeUsagePattern(access: PrivilegedAccess): Promise<void> {
+  private static async analyzeUsagePattern(): Promise<void> {
     // 비정상적인 사용 패턴 감지
-    const usageStats = await this.getUsageStatistics(access.id);
+    const usageStats = await this.getUsageStatistics();
     
-    if (this.isAnomalousUsage(usageStats)) {
+    if (this.isAnomalousUsage()) {
       await this.logAuditEvent('anomalous_privileged_access', {
-        accessId: access.id,
-        userId: access.userId,
         usageStats
       });
     }
@@ -246,9 +244,9 @@ export class PAMService {
   }
 
   // 긴급 알림 전송
-  private static async sendCriticalAlert(access: PrivilegedAccess): Promise<void> {
+  private static async sendCriticalAlert(): Promise<void> {
     // 관리자에게 긴급 알림 전송
-    console.log('Critical PAM alert:', access);
+    console.log('Critical PAM alert');
   }
 
   // 자동 승인 설정 확인
@@ -257,7 +255,7 @@ export class PAMService {
   }
 
   // 비정상 사용 패턴 감지
-  private static isAnomalousUsage(stats: any): boolean {
+  private static isAnomalousUsage(): boolean {
     // 구현 필요: 비정상 패턴 감지 로직
     return false;
   }
@@ -267,7 +265,7 @@ export class PAMService {
     console.log('Saving privileged access:', access.id);
   }
 
-  private static async getPrivilegedAccess(accessId: string): Promise<PrivilegedAccess | null> {
+  private static async getPrivilegedAccess(): Promise<PrivilegedAccess | null> {
     return null; // 구현 필요
   }
 
@@ -275,7 +273,7 @@ export class PAMService {
     console.log('Updating privileged access:', access.id);
   }
 
-  private static async getActivePrivilegedAccess(userId: string, resource: string): Promise<PrivilegedAccess | null> {
+  private static async getActivePrivilegedAccess(): Promise<PrivilegedAccess | null> {
     return null; // 구현 필요
   }
 
@@ -291,7 +289,7 @@ export class PAMService {
     console.log('Deactivating privileged access:', access.id);
   }
 
-  private static async getUsageStatistics(accessId: string): Promise<any> {
+  private static async getUsageStatistics(): Promise<any> {
     return {}; // 구현 필요
   }
 

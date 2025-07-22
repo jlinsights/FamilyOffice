@@ -13,8 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { ResponsiveContainer, LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
-import { AlertTriangle, CheckCircle, Clock, Activity, Database, Globe, Server, Users, Zap, TrendingUp, TrendingDown } from 'lucide-react'
+import { AlertTriangle, CheckCircle, Clock, Activity, Database, TrendingUp, TrendingDown, Users } from 'lucide-react'
 
 // 성능 메트릭 타입 정의
 interface PerformanceMetrics {
@@ -103,7 +102,7 @@ function usePerformanceMetrics() {
 // 알림 관리 훅
 function useAlerts() {
   const [alerts, setAlerts] = useState<Alert[]>([])
-  const [alertRules, setAlertRules] = useState<AlertRule[]>([
+  const alertRules: AlertRule[] = [
     {
       id: '1',
       name: 'High API Response Time',
@@ -149,7 +148,7 @@ function useAlerts() {
       severity: 'warning',
       active: true,
     },
-  ])
+  ]
 
   const checkAlerts = (metrics: PerformanceMetrics) => {
     const now = Date.now()
@@ -190,7 +189,7 @@ function getNestedValue(obj: any, path: string): number | undefined {
 // 메인 모니터링 대시보드
 export function PerformanceMonitoringDashboard() {
   const { metrics, loading, error } = usePerformanceMetrics()
-  const { alerts, alertRules, checkAlerts } = useAlerts()
+  const { alerts, checkAlerts } = useAlerts()
   const [timeRange, setTimeRange] = useState('1h')
   const [selectedMetric, setSelectedMetric] = useState('api')
 

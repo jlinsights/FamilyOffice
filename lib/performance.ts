@@ -64,7 +64,7 @@ export function measureWebVitals() {
     clsObserver.observe({ type: 'layout-shift', buffered: true })
     lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true })
     fidObserver.observe({ type: 'first-input', buffered: true })
-  } catch (e) {
+  } catch {
     console.warn('Some performance observers not supported')
   }
 
@@ -117,7 +117,7 @@ export function measureResourceLoadTime() {
 
   try {
     observer.observe({ type: 'resource', buffered: true })
-  } catch (e) {
+  } catch {
     // 브라우저가 지원하지 않는 경우 무시
   }
 }

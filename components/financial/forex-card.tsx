@@ -30,7 +30,6 @@ export default function ForexCard({
   const [forexData, setForexData] = useState<ForexData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
   const fetchForexData = useCallback(async (forceRefresh = false) => {
     if (loading && !forceRefresh) return
@@ -313,11 +312,11 @@ export default function ForexCard({
         )}
 
         {/* 업데이트 시간 */}
-        {lastUpdated && (
+        {forexData.timestamp && (
           <div className="flex items-center justify-center text-xs text-gray-500 border-t pt-2">
             <Clock className="h-3 w-3 mr-1" />
             <span>
-              {lastUpdated.toLocaleTimeString('ko-KR', {
+              {new Date(forexData.timestamp).toLocaleTimeString('ko-KR', {
                 hour: '2-digit',
                 minute: '2-digit'
               })} 업데이트

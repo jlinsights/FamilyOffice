@@ -6,14 +6,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
-import compression from 'compression'
 import { Agent } from 'https'
 
 // 함수 타입 정의
 type ApiHandler = (req: Request, params?: any) => Promise<Response>
-type MiddlewareFunction = (handler: ApiHandler) => ApiHandler
-type CacheFunction = (key: string, data: any, ttl?: number) => Promise<void>
-type RateLimitFunction = (identifier: string, limit: number, window: number) => Promise<boolean>
 
 // 연결 풀링을 위한 HTTP Agent
 export const httpsAgent = new Agent({

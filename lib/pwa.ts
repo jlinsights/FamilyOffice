@@ -406,8 +406,6 @@ export function initializePWA() {
     const offlineManager = new OfflineManager()
     const pushNotificationManager = new PushNotificationManager()
     const backgroundSyncManager = new BackgroundSyncManager()
-    const mobileOptimizations = new MobileOptimizations()
-    const pwaAnalytics = new PWAAnalytics()
     
     // Make managers available globally
     ;(window as any).pwaManagers = {

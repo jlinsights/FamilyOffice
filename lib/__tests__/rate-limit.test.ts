@@ -90,7 +90,7 @@ describe('RateLimiter', () => {
     const customRateLimiter = new RateLimiter({
       windowMs: 60000,
       maxRequests: 5,
-      keyGenerator: (req) => 'custom-key',
+      keyGenerator: () => 'custom-key',
     })
 
     const result = await customRateLimiter.check(mockRequest)

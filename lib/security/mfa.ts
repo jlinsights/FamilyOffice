@@ -14,13 +14,13 @@ export interface MFASettings {
 
 export class MFAService {
   // TOTP 시크릿 생성
-  static generateSecret(userId: string): string {
+  static generateSecret(): string {
     return authenticator.generateSecret();
   }
 
   // QR 코드 생성
-  static async generateQRCode(userId: string, secret: string): Promise<string> {
-    const otpauth = authenticator.keyuri(userId, 'Family Office', secret);
+  static async generateQRCode(secret: string): Promise<string> {
+    const otpauth = authenticator.keyuri('user', 'Family Office', secret);
     return await QRCode.toDataURL(otpauth);
   }
 
@@ -38,7 +38,7 @@ export class MFAService {
 
   // MFA 설정 생성
   static async createMFASettings(userId: string): Promise<MFASettings> {
-    const secret = this.generateSecret(userId);
+    const secret = this.generateSecret();
     const backupCodes = this.generateBackupCodes();
 
     const settings: MFASettings = {

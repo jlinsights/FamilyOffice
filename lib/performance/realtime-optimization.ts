@@ -329,7 +329,6 @@ export class PriceUpdateManager {
 
   // 가격 업데이트 큐에 추가
   public queuePriceUpdate(symbol: string, priceData: any): void {
-    const existing = this.updateQueue.get(symbol)
     const subscriberCount = this.getSubscriberCount(symbol)
 
     // 구독자가 없으면 무시
@@ -459,7 +458,7 @@ export class PriceUpdateManager {
     }
 
     // 외부 API에서 히스토리 조회 (실제 구현 필요)
-    const history = await this.fetchPriceHistoryFromAPI(symbol, timeframe)
+    const history = await this.fetchPriceHistoryFromAPI()
     
     // 캐시에 저장 (1분 TTL)
     try {
@@ -471,7 +470,7 @@ export class PriceUpdateManager {
     return history
   }
 
-  private async fetchPriceHistoryFromAPI(symbol: string, timeframe: string): Promise<any[]> {
+  private async fetchPriceHistoryFromAPI(): Promise<any[]> {
     // 실제 구현시 외부 API 호출
     return []
   }

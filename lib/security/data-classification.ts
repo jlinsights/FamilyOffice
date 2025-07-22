@@ -134,8 +134,7 @@ export class DataClassificationService {
   // 데이터 분류 결정
   static classifyData(
     dataType: string,
-    content: string,
-    context: Record<string, any>
+    content: string
   ): DataClassification {
     // 금융 데이터
     if (this.isFinancialData(dataType, content)) {

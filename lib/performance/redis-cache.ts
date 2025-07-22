@@ -125,7 +125,7 @@ export class RedisCache {
             } else {
               data[key] = JSON.parse(value)
             }
-          } catch (parseError) {
+          } catch {
             data[key] = null
           }
         } else {
@@ -147,16 +147,14 @@ export class RedisCache {
       
       pairs.forEach(({ key, value, ttl = 300 }) => {
         const serialized = JSON.stringify(value)
-        const shouldCompress = serialized.length > this.compressionThreshold
-        
-        const data = shouldCompress 
+        const data = serialized.length > this.compressionThreshold 
           ? compress(Buffer.from(serialized)).toString('base64')
           : serialized
 
         pipeline.setex(
           key, 
           ttl, 
-          shouldCompress ? `compressed:${data}` : data
+          serialized.length > this.compressionThreshold ? `compressed:${data}` : data
         )
       })
 

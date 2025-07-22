@@ -1,11 +1,9 @@
 import crypto from 'crypto'
-import { promisify } from 'util'
 
 // 암호화 키 관리
-class EncryptionManager {
+class EncryptionService {
   private algorithm = 'aes-256-gcm'
   private keyLength = 32
-  private ivLength = 16
   private tagLength = 16
 
   constructor() {
@@ -22,7 +20,7 @@ class EncryptionManager {
   async encrypt(data: string): Promise<string> {
     try {
       const key = Buffer.from(process.env.ENCRYPTION_KEY!, 'hex')
-      const iv = crypto.randomBytes(this.ivLength)
+      const iv = crypto.randomBytes(16)
       
       const cipher = crypto.createCipher(this.algorithm, key)
       cipher.setAAD(Buffer.from('familyoffice', 'utf8'))
@@ -46,9 +44,9 @@ class EncryptionManager {
       const key = Buffer.from(process.env.ENCRYPTION_KEY!, 'hex')
       
       // IV, Tag, Encrypted Data 분리
-      const iv = Buffer.from(encryptedData.slice(0, this.ivLength * 2), 'hex')
-      const tag = Buffer.from(encryptedData.slice(this.ivLength * 2, (this.ivLength + this.tagLength) * 2), 'hex')
-      const encrypted = encryptedData.slice((this.ivLength + this.tagLength) * 2)
+      const iv = Buffer.from(encryptedData.slice(0, 32), 'hex')
+      const tag = Buffer.from(encryptedData.slice(32, 64), 'hex')
+      const encrypted = encryptedData.slice(64)
       
       const decipher = crypto.createDecipher(this.algorithm, key)
       decipher.setAuthTag(tag)
