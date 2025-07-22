@@ -73,7 +73,7 @@ export default function NewsletterSignup() {
         </div>
         
         <h3 className="text-xl font-bold text-foreground mb-2">
-          FamilyOffice S 뉴스레터
+          FamilyOffice S Newsletter
         </h3>
         <p className="text-muted-foreground text-sm mb-6 max-w-sm mx-auto">
           중소중견기업 자산관리 전문 인사이트와 시장 동향을 받아보세요
