@@ -20,7 +20,7 @@ const customJestConfig = {
   ],
   
   // Module name mapping
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/lib/(.*)$': '<rootDir>/lib/$1',
@@ -158,42 +158,10 @@ const customJestConfig = {
   },
   
   // Test reporters
-  reporters: [
-    'default',
-    [
-      'jest-html-reporters',
-      {
-        publicPath: './coverage/html-report',
-        filename: 'test-report.html',
-        expand: true,
-        hideIcon: false,
-        pageTitle: 'FamilyOffice Financial Test Report',
-        includeFailureMsg: true,
-        includeSuiteFailure: true,
-      },
-    ],
-    [
-      'jest-junit',
-      {
-        outputDirectory: './coverage/junit',
-        outputName: 'junit.xml',
-        ancestorSeparator: ' › ',
-        uniqueOutputName: 'false',
-        suiteNameTemplate: '{filepath}',
-        classNameTemplate: '{classname}',
-        titleTemplate: '{title}',
-      },
-    ],
-  ],
+  reporters: ['default'],
   
   // Verbose output
   verbose: process.env.CI === 'true' || process.env.JEST_VERBOSE === 'true',
-  
-  // Watch plugins
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
   
   // Error handling
   errorOnDeprecated: true,

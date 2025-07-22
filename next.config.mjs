@@ -46,17 +46,6 @@ const nextConfig = {
         'backend': false,
       }
     }
-    
-    // Bundle analyzer
-    if (process.env.ANALYZE === 'true') {
-      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-      config.plugins.push(
-        new BundleAnalyzerPlugin({
-          analyzerMode: 'static',
-          openAnalyzer: true,
-        })
-      )
-    }
 
     // Tree shaking 최적화 (Next.js 15.2.4+ 호환)
     if (!dev) {

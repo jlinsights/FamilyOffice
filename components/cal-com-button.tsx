@@ -1,17 +1,23 @@
 'use client'
 
 import { useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { Calendar } from 'lucide-react'
 
 interface CalComButtonProps {
   calLink?: string
   buttonText?: string
   className?: string
+  variant?: 'default' | 'outline' | 'secondary'
+  size?: 'default' | 'sm' | 'lg' | 'icon'
 }
 
 export function CalComButton({ 
   calLink = 'familyoffice/consultation',
   buttonText = '상담 예약',
-  className = ''
+  className = '',
+  variant = 'default',
+  size = 'lg'
 }: CalComButtonProps) {
   const fullCalUrl = calLink.startsWith('http') ? calLink : `https://cal.com/${calLink}`
 
@@ -49,21 +55,15 @@ export function CalComButton({
   }
 
   return (
-    <button
+    <Button
       onClick={handleClick}
       data-cal-link={calLink}
-      className={`inline-flex items-center justify-center px-6 py-3 
-        bg-gradient-to-r from-yellow-400 to-amber-500 
-        hover:from-amber-500 hover:to-yellow-400
-        text-gray-900 font-bold rounded-lg text-sm
-        transform hover:scale-105 transition-all duration-300
-        shadow-lg hover:shadow-xl
-        border-2 border-amber-600 hover:border-yellow-400
-        ${className}`}
+      variant={variant}
+      size={size}
+      className={`font-bold shadow-lg transition-all duration-300 hover:shadow-xl ${className}`}
     >
-      📅 {buttonText}
-    </button>
+      <Calendar className="mr-2 h-4 w-4" />
+      {buttonText}
+    </Button>
   )
-}
-
-// Cal 타입은 external-scripts.tsx에서 이미 정의됨 
+} 

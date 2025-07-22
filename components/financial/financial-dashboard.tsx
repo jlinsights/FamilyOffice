@@ -4,14 +4,30 @@
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, lazy } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { RefreshCw, AlertCircle } from 'lucide-react'
-import StockCard from './stock-card'
-import ForexCard from './forex-card'
+import { Skeleton } from '@/components/ui/skeleton'
+
+// 동적 임포트로 지연 로딩
+const StockCard = lazy(() => import('./stock-card'))
+const ForexCard = lazy(() => import('./forex-card'))
+
+// 로딩 스켈레톤 컴포넌트
+const CardSkeleton = () => (
+  <Card className="w-full">
+    <CardHeader>
+      <Skeleton className="h-4 w-24" />
+    </CardHeader>
+    <CardContent>
+      <Skeleton className="h-8 w-full mb-2" />
+      <Skeleton className="h-4 w-16" />
+    </CardContent>
+  </Card>
+)
 
 interface ApiStatus {
   yahoo: { available: boolean; error?: string }
@@ -195,12 +211,13 @@ export default function FinancialDashboard({
         <TabsContent value="korean-stocks" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {koreanStocks.map((symbol) => (
-              <StockCard
-                key={symbol}
-                symbol={symbol}
-                autoRefresh={autoRefresh}
-                refreshInterval={refreshInterval}
-              />
+              <Suspense key={symbol} fallback={<CardSkeleton />}>
+                <StockCard
+                  symbol={symbol}
+                  autoRefresh={autoRefresh}
+                  refreshInterval={refreshInterval}
+                />
+              </Suspense>
             ))}
           </div>
         </TabsContent>
@@ -209,12 +226,13 @@ export default function FinancialDashboard({
         <TabsContent value="us-stocks" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {usStocks.map((symbol) => (
-              <StockCard
-                key={symbol}
-                symbol={symbol}
-                autoRefresh={autoRefresh}
-                refreshInterval={refreshInterval}
-              />
+              <Suspense key={symbol} fallback={<CardSkeleton />}>
+                <StockCard
+                  symbol={symbol}
+                  autoRefresh={autoRefresh}
+                  refreshInterval={refreshInterval}
+                />
+              </Suspense>
             ))}
           </div>
         </TabsContent>
@@ -223,13 +241,14 @@ export default function FinancialDashboard({
         <TabsContent value="forex" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {majorForex.map(({ from, to }) => (
-              <ForexCard
-                key={`${from}-${to}`}
-                fromCurrency={from}
-                toCurrency={to}
-                autoRefresh={autoRefresh}
-                refreshInterval={refreshInterval}
-              />
+              <Suspense key={`${from}-${to}`} fallback={<CardSkeleton />}>
+                <ForexCard
+                  fromCurrency={from}
+                  toCurrency={to}
+                  autoRefresh={autoRefresh}
+                  refreshInterval={refreshInterval}
+                />
+              </Suspense>
             ))}
           </div>
         </TabsContent>
@@ -237,10 +256,18 @@ export default function FinancialDashboard({
         {/* 지수 탭 */}
         <TabsContent value="indices" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <StockCard symbol="^GSPC" autoRefresh={autoRefresh} /> {/* S&P 500 */}
-            <StockCard symbol="^DJI" autoRefresh={autoRefresh} />  {/* 다우존스 */}
-            <StockCard symbol="^IXIC" autoRefresh={autoRefresh} /> {/* 나스닥 */}
-            <StockCard symbol="^KS11" autoRefresh={autoRefresh} /> {/* 코스피 */}
+            <Suspense fallback={<CardSkeleton />}>
+              <StockCard symbol="^GSPC" autoRefresh={autoRefresh} /> {/* S&P 500 */}
+            </Suspense>
+            <Suspense fallback={<CardSkeleton />}>
+              <StockCard symbol="^DJI" autoRefresh={autoRefresh} />  {/* 다우존스 */}
+            </Suspense>
+            <Suspense fallback={<CardSkeleton />}>
+              <StockCard symbol="^IXIC" autoRefresh={autoRefresh} /> {/* 나스닥 */}
+            </Suspense>
+            <Suspense fallback={<CardSkeleton />}>
+              <StockCard symbol="^KS11" autoRefresh={autoRefresh} /> {/* 코스피 */}
+            </Suspense>
           </div>
         </TabsContent>
       </Tabs>

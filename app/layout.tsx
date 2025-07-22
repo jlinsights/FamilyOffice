@@ -3,150 +3,70 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Providers } from "@/components/providers"
 import { ErrorBoundary } from "@/components/error-boundary"
+import { PerformanceMonitor } from "@/components/performance-monitor"
+import { SkipLinks } from "@/components/skip-links"
+import { defaultMetadata } from "@/lib/seo"
+import Script from "next/script"
+import { HubSpotIntegration } from "@/components/hubspot-integration"
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://familyoffices.vip'),
+  ...defaultMetadata,
   
-  // 기본 메타데이터 - 중소중견기업 대표 타겟팅
-  title: {
-    default: "FamilyOffice S | 중소중견기업 법인 대표 전용 자산관리",
-    template: "%s | FamilyOffice S"
-  },
-  description: "비상장기업, 기술기업, 제조업 등 다양한 업종 법인 대표를 위한 프리미엄 자산관리. 정책자금부터 단체보험, 경영인정기보험, 중대재해처벌법 대응까지 500억원+ 관리 실적의 FamilyOffice S",
-  
-  // 키워드 - 중소중견기업 대표 타겟팅
-  keywords: [
-    "비상장기업 자산관리", "비상장기업 대표 재무설계", "매출 50억~300억 비상장기업", "비상장 중견기업 대표 자산관리", 
-    "비상장 기업 오너 자산관리", "비상장기업 오너 재무관리", "비상장 중견기업 자금운용", "비상장기업 대표 상속설계",
-    "비상장기업 CEO 자산관리", "비상장기업 재무상담", "비상장 중견기업 오너 자산설계", "비상장기업 승계 설계",
-    "비상장기업 자금 운용", "비상장 중견기업 대표이사 자산관리", "비상장기업 금융자문", "비상장 중소중견기업 투자자문",
-    "기술기업 자산관리", "스타트업 자산관리", "기술력 있는 중소기업", "벤처기업 자산관리", "이노비즈 기업 자산관리",
-    "메인비즈 기업 자산관리", "정책자금 활용 자산관리", "벤처인증 기업 재무관리", "ISO 인증 기업 자산관리",
-    "기술사업화 자산관리", "R&D 기업 재무설계", "특허 보유 기업 자산관리", "정부지원사업 기업 자산관리",
-    "제조업 자산관리", "건설업 자산관리", "화학업 자산관리", "위험업종 자산관리", "산업재해 리스크 관리",
-    "법인 단체보험", "기업 리스크 헷지", "제조업 단체보험", "건설업 단체보험", "위험업종 보험설계",
-    "산재보험 최적화", "기업 안전관리", "법인보험 포트폴리오", "중소기업 리스크 관리", "제조업 리스크 헷지",
-    "경영인정기보험", "CEO 정기보험", "임원진 보험설계", "경영진 생명보험", "법인 임원보험",
-    "경영자 보험설계", "핵심인재 보험", "경영진 리스크 관리", "CEO 보장설계", "임원 정기보험",
-    "법인명의 건강보험", "기업 건강보험", "법인 의료보험", "임직원 건강보험", "기업 의료 복리후생",
-    "법인 단체 의료보험", "회사 건강보험", "기업 의료비 지원", "법인 의료 혜택", "임직원 의료보험",
-    "기업재해보장보험", "산업재해보상보험", "근로자재해보상보험", "기업 산재보험", "산재보험 최적화",
-    "중대재해처벌법", "중대재해처벌법 대응", "중대재해 예방", "중대재해 보험", "중대재해 리스크 관리",
-    "중대재해처벌법 컨설팅", "안전보건관리체계", "경영책임자 처벌 대비", "중대재해 법령 준수", "안전관리 체계",
-    "패밀리오피스 요금", "자산관리 수수료", "패밀리오피스 비용", "자산관리 비용", "투자자문 수수료",
-    "자산관리 서비스 가격", "패밀리오피스 서비스 요금", "중소중견기업 자산관리 비용", "법인 자산관리 수수료",
-    "기업 재무설계 비용", "상속설계 수수료", "세무최적화 비용", "투자자문료", "자산관리료", "재무자문 수수료",
-    "패밀리오피스", "비상장기업 자산관리", "상속설계", "재무설계", "투자자문", "세무최적화",
-    "비상장 주식 유동성 관리", "비상장기업 개인자산 분리", "비상장 중견기업 리스크관리", "비상장기업 가치평가",
-    "비상장기업 세무최적화", "비상장기업 승계 전략", "비상장 중견기업 가치 극대화", "비상장기업 자산 포트폴리오"
-  ],
-  
-  // Open Graph - 중소중견기업 대표 타겟팅
-  openGraph: {
-    type: "website",
-    siteName: "FamilyOffice S",
-    title: "FamilyOffice S | 중소중견기업 법인 대표 전용 자산관리",
-    description: "비상장기업, 기술기업, 제조업 등 다양한 업종 법인 대표를 위한 프리미엄 자산관리. 중대재해처벌법 대응까지",
-    url: "https://familyoffices.vip",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "FamilyOffice S - 중소중견기업 법인 대표 전용 자산관리 서비스"
-      }
-    ],
-    locale: "ko_KR"
-  },
-  
-  // Twitter 카드
-  twitter: {
-    card: "summary_large_image",
-    site: "@familyoffices",
-    title: "FamilyOffice S | 중소중견기업 법인 대표 전용 자산관리",
-    description: "비상장기업, 기술기업, 제조업 등 다양한 업종 법인 대표를 위한 프리미엄 자산관리. 중대재해처벌법 대응까지",
-    images: ["/og-image.jpg"]
-  },
-  
-  // 로봇 크롤링 설정
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  
-  // 네이버 특화 메타데이터
+  // 한국 검색엔진 최적화
   other: {
-    // 언어 및 지역 설정
-    "locale": "ko_KR",
-    
-    // 네이버 사이트 검증
+    ...defaultMetadata.other,
+    // 네이버 사이트 검증 (실제 코드로 교체 필요)
     "naver-site-verification": "your-naver-verification-code",
-    
     // 네이버 블로그 RSS
     "NaverBot": "All",
-    
     // 다음 검색엔진
     "Daumoa": "index,follow",
-    
+    // 구글 사이트 검증
+    "google-site-verification": "18ba3lEeatksZPWrS7AdbCYodbZgCg_frKSFPSJdQ0c",
     // 지역 설정
-    "geo.region": "KR-11", // 서울
-    "geo.country": "KR",
-    "geo.placename": "Seoul, South Korea",
-    
+    "geo.region": "KR",
+    "geo.placename": "Seoul",
+    "geo.position": "37.5665;126.9780",
+    "ICBM": "37.5665, 126.9780",
+    // 언어 설정
+    "language": "ko",
+    "content-language": "ko",
     // 비즈니스 정보
-    "business:contact_data:street_address": "서울특별시 강남구 테헤란로",
-    "business:contact_data:locality": "서울",
+    "business:contact_data:street_address": "서울특별시 강남구 테헤란로 123",
+    "business:contact_data:locality": "강남구",
     "business:contact_data:region": "서울특별시",
     "business:contact_data:postal_code": "06234",
     "business:contact_data:country_name": "대한민국",
-    
-    // 타겟 고객층 정보
-    "business:target_audience": "중소중견기업 법인 대표, 제조업 경영진, 비상장기업 CEO, 기술기업 대표, 위험업종 임원",
-    "business:industry": "중소중견기업 자산관리, 제조업 리스크 관리, 경영인정기보험, 중대재해처벌법 대응, 기업재해보장보험",
-    
-    // 카테고리
-    "article:section": "중소중견기업 종합 금융서비스",
-    "article:tag": "중소중견기업,제조업,위험업종,경영인정기보험,중대재해처벌법,기업재해보장보험,자산관리,재무설계,리스크헷지"
-  },
+    "business:contact_data:phone_number": "+82-2-1234-5678",
+    "business:contact_data:email": "contact@familyoffices.vip",
+    // 소셜 미디어
+    "twitter:creator": "@familyoffices",
+    "twitter:site": "@familyoffices",
+    // 추가 메타데이터
+    "author": "FamilyOffice S",
+    "copyright": "© 2024 FamilyOffice S. All rights reserved.",
+    "distribution": "global",
+    "rating": "general",
+    "revisit-after": "7 days",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  } as unknown as Record<string, string>,
   
-  // canonical URL
+  // 한국 특화 검색엔진 설정
   alternates: {
-    canonical: "https://familyoffices.vip"
+    canonical: 'https://familyoffices.vip',
+    languages: {
+      'ko-KR': 'https://familyoffices.vip',
+    },
   },
   
-  // 앱 정보
-  applicationName: "FamilyOffice S",
-  
-  // 저자 정보
-  authors: [
-    {
-      name: "FamilyOffice S",
-      url: "https://familyoffices.vip"
-    }
-  ],
-  
-  // 생성자
-  creator: "FamilyOffice S",
-  publisher: "FamilyOffice S",
-  
-  // 분류
-  category: "중소중견기업 종합 금융서비스",
-  
-  // 검증 코드들
+  // 검색엔진 최적화
   verification: {
-    google: "your-google-verification-code",
+    google: '18ba3lEeatksZPWrS7AdbCYodbZgCg_frKSFPSJdQ0c',
     other: {
-      "naver-site-verification": "your-naver-verification-code",
-      "msvalidate.01": "your-bing-verification-code"
+      'naver-site-verification': 'your-naver-verification-code',
+      'yandex-verification': 'your-yandex-verification-code',
     }
-  }
+  },
 }
 
 export default function RootLayout({
@@ -157,6 +77,59 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
+        {/* Google Tag Manager */}
+        <Script
+          id="gtm"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-MP3HPPMN');
+            `,
+          }}
+        />
+        
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-DB6TXRZLTK"
+          strategy="afterInteractive"
+        />
+        <Script id="ga" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DB6TXRZLTK');
+          `}
+        </Script>
+        
+        {/* Flaticon CSS */}
+        <link 
+          rel="stylesheet" 
+          href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" 
+        />
+        
+        {/* Mailchimp */}
+        <Script
+          id="mcjs"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/af249fedaa60d836835ac49da/129619c56cf11f88a1c245cd6.js");
+            `,
+          }}
+        />
+        
+        {/* HubSpot Form Integration */}
+        <Script
+          id="hs-script-loader"
+          strategy="afterInteractive"
+          src="https://js.hs-scripts.com/24900000.js"
+        />
+        
         {/* 추가 SEO 메타 태그 */}
         <meta name="format-detection" content="telephone=yes" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -176,13 +149,24 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="FamilyOffice S 뉴스" href="/rss.xml" />
       </head>
       <body className="antialiased">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-MP3HPPMN"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        
         <ErrorBoundary fallback={undefined}>
           <Providers>
+            <SkipLinks />
+            <PerformanceMonitor />
+            <HubSpotIntegration />
             {children}
           </Providers>
         </ErrorBoundary>
-        
-        {/* Google Tag Manager (noscript) */}
       </body>
     </html>
   )

@@ -9,7 +9,7 @@ import { MinimalFamilyOfficeLogo } from "@/components/logo"
 import { NAVIGATION_ITEMS } from "@/lib/constants"
 import { ClientOnlyIcon } from "@/components/ui/client-only-icon"
 import type { NavigationItem } from "@/types/globals"
-import type { MouseEventHandler } from "react"
+import type { MouseEventHandler, KeyboardEvent } from "react"
 
 interface HeaderProps {
   isScrolled?: boolean
@@ -27,22 +27,33 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
     setIsMobileMenuOpen(false)
   }, [])
 
+  // 키보드 네비게이션 처리
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape' && isMobileMenuOpen) {
+      setIsMobileMenuOpen(false)
+    }
+  }, [isMobileMenuOpen])
+
   const consultationText = "무료 상담 신청"
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-200 border-b ${
-      isScrolled || isMobileMenuOpen
-        ? 'bg-background/80 backdrop-blur-md border-border'
-        : 'bg-transparent border-transparent'
-    }`}>
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <header 
+      className={`fixed top-0 w-full z-50 transition-all duration-200 border-b ${
+        isScrolled || isMobileMenuOpen
+          ? 'bg-background/80 backdrop-blur-md border-border'
+          : 'bg-transparent border-transparent'
+      }`}
+      role="banner"
+      aria-label="사이트 헤더"
+    >
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" role="navigation" aria-label="주 네비게이션">
         <div className="flex justify-between items-center py-3 md:justify-start md:space-x-10">
           {/* 로고 */}
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link 
               href="/" 
               className="transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
-              aria-label="홈페이지로 이동"
+              aria-label="FamilyOffice S 홈페이지로 이동"
             >
               <span className="sr-only">FamilyOffice S</span>
               <MinimalFamilyOfficeLogo className="h-10 w-auto" />
@@ -54,8 +65,11 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
             <Button
               variant="ghost"
               onClick={toggleMobileMenu}
+              onKeyDown={handleKeyDown}
               className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary hover:bg-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
               aria-label={isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <span className="sr-only">{isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}</span>
               {isMobileMenuOpen ? (
@@ -67,7 +81,7 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
           </div>
 
           {/* 데스크톱 네비게이션 */}
-          <nav className="hidden md:flex space-x-10" role="navigation" aria-label="주 네비게이션">
+          <nav className="hidden md:flex space-x-10" role="navigation" aria-label="주 메뉴">
             {NAVIGATION_ITEMS.map((item: NavigationItem) => (
               <Link
                 key={item.href}
@@ -75,6 +89,7 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
                 target={item.isExternal ? "_blank" : undefined}
                 rel={item.isExternal ? "noopener noreferrer" : undefined}
                 className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
+                aria-label={item.isExternal ? `${item.label} (새 창에서 열림)` : item.label}
               >
                 {item.label}
               </Link>
@@ -87,9 +102,12 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
             
             {/* 컨설팅 신청 버튼 */}
             <Button size="sm" asChild>
-              <Link href="/contact">
+              <Link 
+                href="/contact"
+                aria-label="무료 상담 신청 페이지로 이동"
+              >
                 {consultationText}
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
           </div>
@@ -98,7 +116,13 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
 
       {/* 모바일 메뉴 */}
       {isMobileMenuOpen && (
-        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+        <div 
+          id="mobile-menu"
+          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="모바일 메뉴"
+        >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-background divide-y-2 divide-border">
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
@@ -118,7 +142,7 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
                 </div>
               </div>
               <div className="mt-6">
-                <nav className="grid gap-y-8" role="navigation" aria-label="모바일 네비게이션">
+                <nav className="grid gap-y-8" role="navigation" aria-label="모바일 메뉴">
                   {NAVIGATION_ITEMS.map((item: NavigationItem) => (
                     <Link
                       key={item.href}
@@ -127,6 +151,7 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
                       rel={item.isExternal ? "noopener noreferrer" : undefined}
                       onClick={handleMobileLinkClick}
                       className="-m-3 p-3 flex items-center rounded-md hover:bg-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label={item.isExternal ? `${item.label} (새 창에서 열림)` : item.label}
                     >
                       <span className="ml-3 text-base font-medium text-foreground">
                         {item.label}
@@ -144,9 +169,12 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
                 
                 {/* 모바일 컨설팅 신청 버튼 */}
                 <Button size="sm" asChild onClick={handleMobileLinkClick}>
-                  <Link href="/contact">
+                  <Link 
+                    href="/contact"
+                    aria-label="무료 상담 신청 페이지로 이동"
+                  >
                     {consultationText}
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Link>
                 </Button>
               </div>

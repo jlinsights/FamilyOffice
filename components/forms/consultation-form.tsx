@@ -7,16 +7,20 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { createClient } from "@/lib/supabase/client"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { CheckCircle, AlertCircle } from "lucide-react"
 
 export function ConsultationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsSubmitting(true)
     setFormError(null)
+    setFieldErrors({})
 
     const formData = new FormData(event.currentTarget)
     const name = formData.get("name") as string
@@ -25,20 +29,40 @@ export function ConsultationForm() {
     const service = formData.get("service") as string
     const message = formData.get("message") as string
 
-    try {
-      // 폼 데이터 검증
-      if (!name || !email || !phone) {
-        throw new Error("필수 항목을 모두 입력해주세요.")
-      }
+    // 필드별 검증
+    const errors: Record<string, string> = {}
+    
+    if (!name?.trim()) {
+      errors.name = "성함을 입력해주세요."
+    }
+    
+    if (!email?.trim()) {
+      errors.email = "이메일을 입력해주세요."
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "올바른 이메일 형식을 입력해주세요."
+    }
+    
+    if (!phone?.trim()) {
+      errors.phone = "연락처를 입력해주세요."
+    } else if (!/^[0-9-+\s()]+$/.test(phone)) {
+      errors.phone = "올바른 전화번호 형식을 입력해주세요."
+    }
 
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors)
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
       const supabase = createClient()
 
       const { error } = await supabase.from("consultations").insert({
-        name,
-        email,
-        phone,
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
         service_type: service || null,
-        message: message || null,
+        message: message?.trim() || null,
         status: "pending",
       })
 
@@ -72,29 +96,91 @@ export function ConsultationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      {/* 성공 메시지 */}
+      {formSuccess && (
+        <Alert className="border-green-200 bg-green-50">
+          <CheckCircle className="h-4 w-4 text-green-600" />
+          <AlertDescription className="text-green-800">
+            상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
+          </AlertDescription>
+        </Alert>
+      )}
+
+      {/* 오류 메시지 */}
+      {formError && (
+        <Alert className="border-red-200 bg-red-50">
+          <AlertCircle className="h-4 w-4 text-red-600" />
+          <AlertDescription className="text-red-800">
+            {formError}
+          </AlertDescription>
+        </Alert>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="name" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
-            성함 *
+          <label htmlFor="name" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium">
+            성함 <span className="text-red-500" aria-label="필수 항목">*</span>
           </label>
-          <Input type="text" id="name" name="name" placeholder="성함을 입력해주세요" required />
+          <Input 
+            type="text" 
+            id="name" 
+            name="name" 
+            placeholder="성함을 입력해주세요" 
+            required 
+            aria-describedby={fieldErrors.name ? "name-error" : undefined}
+            aria-invalid={!!fieldErrors.name}
+            className={fieldErrors.name ? "border-red-500" : ""}
+          />
+          {fieldErrors.name && (
+            <p id="name-error" className="text-red-500 text-sm mt-1" role="alert">
+              {fieldErrors.name}
+            </p>
+          )}
         </div>
         <div>
-          <label htmlFor="phone" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
-            연락처 *
+          <label htmlFor="phone" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium">
+            연락처 <span className="text-red-500" aria-label="필수 항목">*</span>
           </label>
-          <Input type="tel" id="phone" name="phone" placeholder="연락 가능한 번호를 입력해주세요" required />
+          <Input 
+            type="tel" 
+            id="phone" 
+            name="phone" 
+            placeholder="연락 가능한 번호를 입력해주세요" 
+            required 
+            aria-describedby={fieldErrors.phone ? "phone-error" : undefined}
+            aria-invalid={!!fieldErrors.phone}
+            className={fieldErrors.phone ? "border-red-500" : ""}
+          />
+          {fieldErrors.phone && (
+            <p id="phone-error" className="text-red-500 text-sm mt-1" role="alert">
+              {fieldErrors.phone}
+            </p>
+          )}
         </div>
       </div>
       <div>
-        <label htmlFor="email" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
-          이메일 *
+        <label htmlFor="email" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium">
+          이메일 <span className="text-red-500" aria-label="필수 항목">*</span>
         </label>
-        <Input type="email" id="email" name="email" placeholder="이메일 주소를 입력해주세요" required />
+        <Input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="이메일 주소를 입력해주세요" 
+          required 
+          aria-describedby={fieldErrors.email ? "email-error" : undefined}
+          aria-invalid={!!fieldErrors.email}
+          className={fieldErrors.email ? "border-red-500" : ""}
+        />
+        {fieldErrors.email && (
+          <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
+            {fieldErrors.email}
+          </p>
+        )}
       </div>
       <div>
-        <label htmlFor="service" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
+        <label htmlFor="service" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium">
           관심 서비스
         </label>
         <select 
@@ -114,7 +200,7 @@ export function ConsultationForm() {
         </select>
       </div>
       <div>
-        <label htmlFor="message" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
+        <label htmlFor="message" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium">
           문의사항
         </label>
         <Textarea
@@ -131,18 +217,6 @@ export function ConsultationForm() {
           개인정보 수집 및 이용에 동의합니다. 수집된 정보는 상담 목적으로만 사용되며, 관련 법령에 따라 보호됩니다.
         </label>
       </div>
-
-      {formError && (
-        <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-3 rounded-md text-sm">
-          {formError}
-        </div>
-      )}
-
-      {formSuccess && (
-        <div className="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 p-3 rounded-md text-sm">
-          상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
-        </div>
-      )}
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? "처리 중..." : "상담 신청하기"}

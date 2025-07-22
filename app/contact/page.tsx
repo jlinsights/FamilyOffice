@@ -312,40 +312,44 @@ export default function ContactPage() {
       </section>
 
       {/* CTA 섹션 */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="py-20 bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            지금 바로 상담을 시작하세요
-          </h2>
-          
-          <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
-            중소중견기업 전문가와의 1:1 무료 상담으로<br />
-            더 나은 자산관리 전략을 확인해보세요
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <CalComButton
-              calLink="familyoffice/consultation"
-              buttonText="지금 바로 예약"
-              className="rounded-full px-8 py-4 text-lg font-bold bg-primary text-primary-foreground border border-primary shadow-lg transition
-                hover:bg-primary/90 hover:shadow-xl
-                focus:ring-2 focus:ring-primary/50
-                dark:bg-primary dark:text-primary-foreground dark:border-primary
-                dark:hover:bg-primary/80"
-            />
-            <Button
-              size="lg"
-              className="rounded-full px-8 py-4 text-lg font-bold border border-primary-foreground bg-primary-foreground text-primary shadow-lg transition
-                hover:bg-white hover:text-primary hover:border-primary
-                dark:bg-primary-foreground dark:text-primary dark:border-primary
-                dark:hover:bg-background dark:hover:text-primary"
-            >
-              <Phone className="mr-2 h-4 w-4" />
-              0502-5550-8700
-            </Button>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              지금 바로 상담을 시작하세요
+            </h2>
+            
+            <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
+              중소중견기업 전문가와의 1:1 무료 상담으로<br />
+              더 나은 자산관리 전략을 확인해보세요
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <CalComButton
+                calLink="familyoffice/consultation"
+                buttonText="지금 바로 예약"
+                size="lg"
+                className="bg-primary-foreground text-primary hover:bg-white hover:text-primary shadow-lg hover:shadow-xl"
+              />
+              <Button
+                size="lg"
+                variant="outline"
+                className="font-bold border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary shadow-lg hover:shadow-xl"
+                asChild
+              >
+                <a href="tel:0502-5550-8700">
+                  <Phone className="mr-2 h-4 w-4" />
+                  0502-5550-8700
+                </a>
+              </Button>
+            </div>
+            
+            <p className="text-sm text-primary-foreground/70 mt-6">
+              상담은 완전 무료이며, 영업 목적의 연락은 하지 않습니다
+            </p>
           </div>
         </div>
-        </section>
+      </section>
       </main>
 
       <Footer />

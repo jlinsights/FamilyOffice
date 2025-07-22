@@ -5,6 +5,10 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getStockData, getMultipleStocks, getKoreanStocks } from '@/lib/financial/financial-service'
+import { caches, getOrSet, CacheManager } from '@/lib/cache'
+
+// 캐시 매니저 인스턴스
+const cacheManager = new CacheManager(caches.medium)
 
 export async function GET(request: NextRequest) {
   try {
@@ -18,13 +22,27 @@ export async function GET(request: NextRequest) {
 
     // 한국 주요 주식 데이터 요청
     if (korean === 'true') {
-      const result = await getKoreanStocks()
+      const cacheKey = 'korean-stocks'
+      
+      if (forceRefresh) {
+        await cacheManager.del(cacheKey)
+      }
+
+      const result = await getOrSet(
+        cacheManager,
+        cacheKey,
+        async () => {
+          const data = await getKoreanStocks()
+          return data
+        },
+        300 // 5분 캐시
+      )
       
       if (result.success) {
         return NextResponse.json({
           success: true,
           data: result.data,
-          fromCache: result.fromCache,
+          fromCache: !forceRefresh,
           timestamp: result.timestamp,
           count: result.data?.length || 0
         })
@@ -52,13 +70,27 @@ export async function GET(request: NextRequest) {
         }, { status: 400 })
       }
 
-      const result = await getMultipleStocks(symbolArray)
+      const cacheKey = `multiple-stocks:${symbolArray.sort().join(',')}`
+      
+      if (forceRefresh) {
+        await cacheManager.del(cacheKey)
+      }
+
+      const result = await getOrSet(
+        cacheManager,
+        cacheKey,
+        async () => {
+          const data = await getMultipleStocks(symbolArray)
+          return data
+        },
+        180 // 3분 캐시
+      )
       
       if (result.success) {
         return NextResponse.json({
           success: true,
           data: result.data,
-          fromCache: result.fromCache,
+          fromCache: !forceRefresh,
           timestamp: result.timestamp,
           count: result.data?.length || 0,
           requested: symbolArray.length
@@ -73,13 +105,27 @@ export async function GET(request: NextRequest) {
 
     // 단일 심볼 요청
     if (symbol) {
-      const result = await getStockData(symbol, forceRefresh)
+      const cacheKey = `stock:${symbol}`
+      
+      if (forceRefresh) {
+        await cacheManager.del(cacheKey)
+      }
+
+      const result = await getOrSet(
+        cacheManager,
+        cacheKey,
+        async () => {
+          const data = await getStockData(symbol, false)
+          return data
+        },
+        120 // 2분 캐시
+      )
       
       if (result.success) {
         return NextResponse.json({
           success: true,
           data: result.data,
-          fromCache: result.fromCache,
+          fromCache: !forceRefresh,
           timestamp: result.timestamp
         })
       } else {

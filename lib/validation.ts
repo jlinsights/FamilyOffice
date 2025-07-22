@@ -26,7 +26,9 @@ export const contactSchema = z.object({
 export const adminUserSchema = z.object({
   email: z.string().email('올바른 이메일 주소를 입력해주세요'),
   name: z.string().min(2, '이름은 2자 이상 입력해주세요').max(50, '이름은 50자 이하로 입력해주세요'),
-  role: z.enum(['admin', 'user'], '올바른 역할을 선택해주세요')
+  role: z.enum(['admin', 'user'], {
+    errorMap: () => ({ message: '올바른 역할을 선택해주세요' })
+  })
 })
 
 export type ConsultationFormData = z.infer<typeof consultationSchema>
