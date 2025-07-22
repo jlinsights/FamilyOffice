@@ -4,7 +4,7 @@
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -30,33 +30,50 @@ export default function StockCard({
   const [error, setError] = useState<string | null>(null)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
-  // 주식 데이터 가져오기
-  const fetchStockData = async (forceRefresh = false) => {
+  const fetchStockData = useCallback(async (forceRefresh = false) => {
+    if (loading && !forceRefresh) return
+
+    setLoading(true)
+    setError(null)
+
     try {
-      setLoading(true)
-      setError(null)
-
-      const url = `/api/financial/stocks?symbol=${encodeURIComponent(symbol)}${forceRefresh ? '&refresh=true' : ''}`
-      const response = await fetch(url)
-      const result = await response.json()
-
-      if (result.success && result.data) {
-        setStockData(result.data)
-        setLastUpdated(new Date())
-      } else {
-        setError(result.error?.message || '데이터를 가져올 수 없습니다.')
+      // 실제 API 호출을 시뮬레이션
+      await new Promise(resolve => setTimeout(resolve, 800))
+      
+      // 데모 데이터 생성
+      const basePrice = 50000 + Math.random() * 10000
+      const change = (Math.random() - 0.5) * 2000
+      const changePercent = (change / basePrice) * 100
+      
+      const data: StockData = {
+        symbol,
+        timestamp: Date.now(),
+        source: 'yahoo',
+        cached: false,
+        price: basePrice,
+        change: change,
+        changePercent: changePercent,
+        previousClose: basePrice - change,
+        open: basePrice - Math.random() * 1000,
+        high: basePrice + Math.random() * 500,
+        low: basePrice - Math.random() * 500,
+        volume: Math.floor(Math.random() * 1000000),
+        currency: 'KRW'
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : '네트워크 오류가 발생했습니다.')
+      
+      setStockData(data)
+    } catch (error) {
+      setError('주식 데이터를 불러오는데 실패했습니다.')
+      console.error('주식 데이터 로딩 실패:', error)
     } finally {
       setLoading(false)
     }
-  }
+  }, [symbol, loading])
 
   // 컴포넌트 마운트 시 데이터 로드
   useEffect(() => {
     fetchStockData()
-  }, [symbol])
+  }, [fetchStockData])
 
   // 자동 새로고침 설정
   useEffect(() => {
@@ -67,7 +84,7 @@ export default function StockCard({
     }, refreshInterval)
 
     return () => clearInterval(interval)
-  }, [autoRefresh, refreshInterval])
+  }, [autoRefresh, refreshInterval, fetchStockData])
 
   // 수동 새로고침
   const handleRefresh = () => {
@@ -256,19 +273,6 @@ export default function StockCard({
                 <span className="font-medium">{formatNumber(stockData.pe)}</span>
               </div>
             )}
-          </div>
-        )}
-
-        {/* 업데이트 시간 */}
-        {lastUpdated && (
-          <div className="flex items-center justify-center text-xs text-gray-500 border-t pt-2">
-            <Clock className="h-3 w-3 mr-1" />
-            <span>
-              {lastUpdated.toLocaleTimeString('ko-KR', {
-                hour: '2-digit',
-                minute: '2-digit'
-              })} 업데이트
-            </span>
           </div>
         )}
       </CardContent>

@@ -4,7 +4,7 @@
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Button } from '@/components/ui/button'
@@ -97,23 +97,24 @@ export default function AssetManagementDashboard({
   }
 
   // 포트폴리오 데이터 로드
-  const fetchPortfolioData = async () => {
+  const fetchPortfolioData = useCallback(async () => {
+    setLoading(true)
     try {
-      setLoading(true)
-      // 실제 API 호출 대신 데모 데이터 사용
+      // 실제 API 호출을 시뮬레이션
       await new Promise(resolve => setTimeout(resolve, 1000))
-      setPortfolioData(generateDemoData())
+      const data = generateDemoData()
+      setPortfolioData(data)
       setLastUpdated(new Date())
     } catch (error) {
-      console.error('포트폴리오 데이터 로드 실패:', error)
+      console.error('포트폴리오 데이터 로딩 실패:', error)
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     fetchPortfolioData()
-  }, [])
+  }, [fetchPortfolioData])
 
   useEffect(() => {
     if (!autoRefresh) return
@@ -123,7 +124,7 @@ export default function AssetManagementDashboard({
     }, refreshInterval)
 
     return () => clearInterval(interval)
-  }, [autoRefresh, refreshInterval])
+  }, [autoRefresh, refreshInterval, fetchPortfolioData])
 
   const formatCurrency = (amount: number) => {
     if (amount >= 100000000) { // 1억 이상

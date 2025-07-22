@@ -296,7 +296,7 @@ export default function StrategicPartnershipPage() {
               Ready to Enter the Korean Market?
             </h2>
             <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto animate-slide-up opacity-90 leading-relaxed" style={{ animationDelay: '200ms' }}>
-              Let's discuss how our strategic partnership can accelerate your Korea market entry and drive sustainable growth.
+              Let&apos;s discuss how our strategic partnership can accelerate your Korea market entry and drive sustainable growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '400ms' }}>
               <Button size="lg" variant="secondary" className="bg-background text-foreground hover:bg-background/90 font-bold shadow-lg px-8 py-4 text-lg" asChild>

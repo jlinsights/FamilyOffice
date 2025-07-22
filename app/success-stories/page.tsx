@@ -210,9 +210,9 @@ export default function SuccessStoriesPage() {
                   </div>
                   <div>
                     <blockquote className="text-muted-foreground mb-4">
-                      "FamilyOffices.vip's deep understanding of Korean business culture and regulatory environment 
-                      was instrumental in our successful market entry. Their network opened doors we couldn't have 
-                      accessed otherwise."
+                      &quot;FamilyOffices.vip&apos;s deep understanding of Korean business culture and regulatory environment 
+                      was instrumental in our successful market entry. Their network opened doors we couldn&apos;t have 
+                      accessed otherwise.&quot;
                     </blockquote>
                     <div>
                       <div className="font-semibold text-foreground">Managing Director</div>
@@ -229,8 +229,8 @@ export default function SuccessStoriesPage() {
                   </div>
                   <div>
                     <blockquote className="text-muted-foreground mb-4">
-                      "The strategic partnership approach provided us with not just market entry, but sustainable 
-                      growth strategies. We achieved our 12-month targets in just 8 months."
+                      &quot;The strategic partnership approach provided us with not just market entry, but sustainable 
+                      growth strategies. We achieved our 12-month targets in just 8 months.&quot;
                     </blockquote>
                     <div>
                       <div className="font-semibold text-foreground">CEO</div>

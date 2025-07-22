@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-primary">1. 개인정보의 처리목적</h2>
                 <div className="pl-4 space-y-4">
-                  <p>FamilyOffice S('회사'라 함)는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
+                  <p>FamilyOffice S(&apos;회사&apos;라 함)는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
                   
                   <h3 className="text-lg font-semibold mt-6 mb-3">가. 홈페이지 회원가입 및 관리</h3>
                   <p>회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별·인증, 회원자격 유지·관리, 서비스 부정이용 방지, 각종 고지·통지 목적으로 개인정보를 처리합니다.</p>

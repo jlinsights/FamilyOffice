@@ -97,7 +97,7 @@ export default function FAQPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2 text-destructive">
-                      "{item.concern}"
+                      &quot;{item.concern}&quot;
                     </h3>
                   </div>
                 </div>

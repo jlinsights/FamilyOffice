@@ -449,9 +449,9 @@ export default function KoreanMarketInsight({
             <CardContent>
               <div className="space-y-4">
                 <blockquote className="border-l-4 border-blue-400 pl-4 italic text-blue-900">
-                  "현재 한국 증시는 구조적 변화 국면에 있습니다. AI와 친환경 에너지 전환이라는 
+                  &quot;현재 한국 증시는 구조적 변화 국면에 있습니다. AI와 친환경 에너지 전환이라는 
                   두 가지 메가 트렌드가 새로운 투자 기회를 제공하고 있으며, 이에 따른 선별적 
-                  접근이 필요합니다."
+                  접근이 필요합니다.&quot;
                 </blockquote>
                 
                 <div className="bg-white p-4 rounded-lg">

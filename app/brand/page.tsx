@@ -198,14 +198,14 @@ export default function BrandPage() {
                   {/* Primary Tagline */}
                   <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
                     <span className="text-lg font-bold text-gray-900 dark:text-white mb-2 block">Primary Tagline</span>
-                    <div className="text-base font-medium text-gray-800 dark:text-gray-100 mb-1">"Your Trusted Financial Partner for Life"</div>
-                    <div className="text-base text-gray-600 dark:text-gray-300">"평생을 함께하는 신뢰할 수 있는 금융 파트너"</div>
+                    <div className="text-base font-medium text-gray-800 dark:text-gray-100 mb-1">&quot;Your Trusted Financial Partner for Life&quot;</div>
+                    <div className="text-base text-gray-600 dark:text-gray-300">&quot;평생을 함께하는 신뢰할 수 있는 금융 파트너&quot;</div>
                   </div>
                   {/* Secondary Tagline */}
                   <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
                     <span className="text-lg font-bold text-gray-900 dark:text-white mb-2 block">Secondary Tagline</span>
-                    <div className="text-base font-medium text-gray-800 dark:text-gray-100 mb-1">"Professional. Personal. Prosperity."</div>
-                    <div className="text-base text-gray-600 dark:text-gray-300">"전문적. 개인적. 번영."</div>
+                    <div className="text-base font-medium text-gray-800 dark:text-gray-100 mb-1">&quot;Professional. Personal. Prosperity.&quot;</div>
+                    <div className="text-base text-gray-600 dark:text-gray-300">&quot;전문적. 개인적. 번영.&quot;</div>
                   </div>
                 </div>
                 {/* Brand Statement */}
@@ -214,13 +214,13 @@ export default function BrandPage() {
                   <div className="mb-2">
                     <span className="font-semibold text-gray-700 dark:text-gray-200 mr-2">English:</span>
                     <span className="text-gray-800 dark:text-gray-100">
-                      "FamilyOffice S is your trusted financial partner, dedicated to providing sophisticated wealth management expertise and personalized solutions that ensure sustainable prosperity for you and your family's future."
+                      &quot;FamilyOffice S is your trusted financial partner, dedicated to providing sophisticated wealth management expertise and personalized solutions that ensure sustainable prosperity for you and your family&apos;s future.&quot;
                     </span>
                   </div>
                   <div>
                     <span className="font-semibold text-gray-700 dark:text-gray-200 mr-2">Korean:</span>
                     <span className="text-gray-800 dark:text-gray-100">
-                      "FamilyOffice S는 신뢰할 수 있는 금융 파트너로서, 정교한 자산관리 전문성과 개인 맞춤형 솔루션을 통해 고객님과 가족의 미래를 위한 지속가능한 번영을 보장합니다."
+                      &quot;FamilyOffice S는 신뢰할 수 있는 금융 파트너로서, 정교한 자산관리 전문성과 개인 맞춤형 솔루션을 통해 고객님과 가족의 미래를 위한 지속가능한 번영을 보장합니다.&quot;
                     </span>
                   </div>
                 </div>
@@ -228,7 +228,7 @@ export default function BrandPage() {
                 <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
                   <span className="text-lg font-bold text-gray-900 dark:text-white mb-2 block">Elevator Pitch</span>
                   <div className="text-gray-800 dark:text-gray-100">
-                    "FamilyOffice S는 고객의 평생 금융 파트너로서 신뢰를 바탕으로 한 프리미엄 패밀리오피스입니다. 우리는 Professional한 전문성, Personal한 맞춤 서비스, 그리고 Prosperity한 미래를 통해 중소중견기업 법인 대표님들의 성공적인 자산관리와 가족의 지속가능한 번영을 실현합니다."
+                    &quot;FamilyOffice S는 고객의 평생 금융 파트너로서 신뢰를 바탕으로 한 프리미엄 패밀리오피스입니다. 우리는 Professional한 전문성, Personal한 맞춤 서비스, 그리고 Prosperity한 미래를 통해 중소중견기업 법인 대표님들의 성공적인 자산관리와 가족의 지속가능한 번영을 실현합니다.&quot;
                   </div>
                 </div>
               </section>
