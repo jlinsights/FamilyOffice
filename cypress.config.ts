@@ -126,7 +126,7 @@ export default defineConfig({
         },
         
         // Wait for financial API response
-        waitForApiResponse: (url: string) => {
+        waitForApiResponse: () => {
           return new Promise((resolve) => {
             setTimeout(() => {
               resolve({ status: 'completed', timestamp: Date.now() })
