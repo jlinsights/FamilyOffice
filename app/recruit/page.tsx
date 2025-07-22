@@ -298,9 +298,9 @@ export default function RecruitPage() {
             
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
               <Button size="lg" asChild className="dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90">
-                <a href="mailto:recruit@familyoffices.vip">
+                <a href="https://cal.com/familyoffice/recruit" target="_blank" rel="noopener noreferrer">
                   <Mail className="h-5 w-5 mr-2" />
-                  이메일로 문의
+                  무료 상담 예약
                 </a>
               </Button>
               <Button size="lg" variant="outline" asChild className="dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700">

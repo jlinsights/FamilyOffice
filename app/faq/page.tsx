@@ -183,7 +183,7 @@ export default function FAQPage() {
               </Link>
             </Button>
             
-            <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
+            <Button size="lg" variant="outline" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground bg-primary-foreground/5" asChild>
               <Link href="/services">
                 서비스 자세히 보기
               </Link>
