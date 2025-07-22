@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { syncCurrentUser } from '@/lib/user-sync';
 import { withRateLimit, rateLimiters } from '@/lib/rate-limit';
 
-async function handler(req: NextRequest) {
+async function handler(_req: NextRequest) {
   try {
     // 현재 사용자를 Supabase에 동기화
     const syncedUser = await syncCurrentUser();

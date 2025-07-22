@@ -14,8 +14,6 @@ import {
   Users, 
   Settings,
   Bell,
-  Search,
-  Filter,
   Download,
   RefreshCw
 } from 'lucide-react'
@@ -89,10 +87,10 @@ function MetricCard({ title, value, change, icon, color, className }: MetricCard
 // 엔터프라이즈급 대시보드
 export function EnterpriseDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
-  const [refreshKey, setRefreshKey] = useState(0)
+
 
   const handleRefresh = () => {
-    setRefreshKey(prev => prev + 1)
+    // Refresh functionality
   }
 
   return (

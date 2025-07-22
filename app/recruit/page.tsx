@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+'use client'
+
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -16,31 +17,20 @@ import {
   Heart,
   Lightbulb,
   ArrowRight,
-  Briefcase
+  Briefcase,
+  Users
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "채용정보 | 패밀리오피스 S - 함께 성장할 인재를 찾습니다",
-  description: "패밀리오피스 S에서 글로벌 자산관리 전문가로 성장하세요. 다양한 포지션의 채용정보를 확인하고 지원해보세요.",
-  keywords: ["채용", "구인", "자산관리", "패밀리오피스", "금융", "경력직", "신입", "인재채용"],
-  openGraph: {
-    title: "채용정보 | 패밀리오피스 S",
-    description: "글로벌 자산관리 전문가로 성장할 기회, 패밀리오피스 S에서 함께하세요",
-    type: "website",
-    locale: "ko_KR"
-  }
-};
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
+
+// 클라이언트 컴포넌트에서는 서버 전용 설정 제거
 
 export default function RecruitPage() {
   const positions = [
     {
       title: "자산관리 어드바이저",
       department: "자산관리팀",
-      type: "정규직",
+      type: "위촉직",
       experience: "경력 3년 이상",
       location: "서울 강남",
       description: "고액자산가 대상 종합자산관리 서비스 제공",
@@ -54,7 +44,7 @@ export default function RecruitPage() {
     {
       title: "세무 컨설턴트",
       department: "세무팀",
-      type: "정규직",
+      type: "위촉직",
       experience: "경력 5년 이상",
       location: "서울 강남",
       description: "기업 및 개인 세무 컨설팅 업무",
@@ -68,7 +58,7 @@ export default function RecruitPage() {
     {
       title: "부동산 투자 매니저",
       department: "투자팀",
-      type: "정규직",
+      type: "위촉직",
       experience: "경력 3년 이상",
       location: "서울 강남",
       description: "부동산 투자 상품 개발 및 관리",
@@ -177,13 +167,27 @@ export default function RecruitPage() {
             
             {/* CTA 버튼 - 메인 페이지와 동일한 스타일 */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">
-                채용 공고 보기
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
+                onClick={() => {
+                  const positionsSection = document.getElementById('positions-section');
+                  if (positionsSection) {
+                    positionsSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                채용 포지션 보기
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" size="lg" className="font-bold shadow-lg px-8 py-4 text-lg">
-                <Mail className="mr-2 h-5 w-5" />
-                입사 지원하기
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="font-bold shadow-lg px-8 py-4 text-lg"
+                onClick={() => window.open('https://recruit.familyoffices.vip', '_blank')}
+              >
+                <Users className="mr-2 h-5 w-5" />
+                잡페어 참석하기
               </Button>
             </div>
           </div>
@@ -221,7 +225,7 @@ export default function RecruitPage() {
         </section>
 
         {/* Positions Section */}
-        <section className="py-20 bg-muted/20 dark:bg-gray-900/50">
+        <section id="positions-section" className="py-20 bg-muted/20 dark:bg-gray-900/50">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
@@ -257,7 +261,10 @@ export default function RecruitPage() {
                           </Badge>
                         </div>
                       </div>
-                      <Button className="mt-4 md:mt-0 dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90">
+                      <Button 
+                        className="mt-4 md:mt-0 dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
+                        onClick={() => window.open('https://cal.com/familyoffice/recruit', '_blank')}
+                      >
                         지원하기
                       </Button>
                     </div>

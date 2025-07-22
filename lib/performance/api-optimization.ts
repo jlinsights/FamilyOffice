@@ -9,6 +9,12 @@ import { Redis } from '@upstash/redis'
 import compression from 'compression'
 import { Agent } from 'https'
 
+// 함수 타입 정의
+type ApiHandler = (req: Request, params?: any) => Promise<Response>
+type MiddlewareFunction = (handler: ApiHandler) => ApiHandler
+type CacheFunction = (key: string, data: any, ttl?: number) => Promise<void>
+type RateLimitFunction = (identifier: string, limit: number, window: number) => Promise<boolean>
+
 // 연결 풀링을 위한 HTTP Agent
 export const httpsAgent = new Agent({
   keepAlive: true,
@@ -80,7 +86,7 @@ export function getRateLimiter(userTier: 'free' | 'premium' | 'enterprise'): typ
 }
 
 // API 응답 압축 미들웨어
-export function withCompression(handler: Function) {
+export function withCompression(handler: (req: NextRequest) => Promise<NextResponse>) {
   return async (req: NextRequest) => {
     const response = await handler(req)
     
@@ -108,7 +114,7 @@ export function withCompression(handler: Function) {
 }
 
 // API 성능 모니터링 미들웨어
-export function withPerformanceMonitoring(handler: Function, apiName: string) {
+export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise<NextResponse>, apiName: string) {
   return async (req: NextRequest) => {
     const startTime = performance.now()
     const requestId = crypto.randomUUID()
@@ -239,7 +245,7 @@ function calculateStats(metrics: APIMetric[]) {
 // 요청 병합 미들웨어 (동일한 요청 중복 제거)
 const pendingRequests = new Map<string, Promise<any>>()
 
-export function withRequestDeduplication(handler: Function, keyGenerator: (req: NextRequest) => string) {
+export function withRequestDeduplication(handler: (req: NextRequest) => Promise<NextResponse>, keyGenerator: (req: NextRequest) => string) {
   return async (req: NextRequest) => {
     const requestKey = keyGenerator(req)
     

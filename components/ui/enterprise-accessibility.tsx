@@ -4,21 +4,17 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { 
   Accessibility, 
   Eye, 
-  EyeOff, 
-  Volume2, 
-  VolumeX,
   Keyboard,
   MousePointer,
-  HighContrast,
-  ZoomIn,
-  ZoomOut
+  Contrast,
+  ZoomIn
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -170,7 +166,7 @@ export function AccessibilityPanel({ isOpen, onClose, className }: Accessibility
           {/* 고대비 모드 */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <HighContrast className="h-5 w-5 text-premium-600" />
+                              <Contrast className="h-5 w-5 text-premium-600" />
               <div>
                 <Label htmlFor="high-contrast" className="font-medium">
                   고대비 모드
@@ -326,6 +322,8 @@ export function AccessibilityFocusManager() {
         document.head.removeChild(style)
       }
     }
+    
+    return undefined
   }, [settings.focusIndicator])
 
   return null

@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { swaggerConfig } from '@/lib/api/swagger-config'
 
 // Generate Swagger JSON spec
-export async function GET(_request: NextRequest) {
+export async function GET() {
   try {
     return NextResponse.json(swaggerConfig, {
       headers: {

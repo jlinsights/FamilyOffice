@@ -6,21 +6,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
+
+
 import { 
-  BarChart3, 
   PieChart, 
   TrendingUp, 
-  TrendingDown,
-  Download,
-  RefreshCw,
   Eye,
-  EyeOff,
-  Filter,
-  Calendar,
-  DollarSign,
-  Shield
+  EyeOff
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -165,18 +157,19 @@ export function PortfolioPerformanceChart({
             >
               {showGrid ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
             </Button>
-            <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe}>
-              <SelectTrigger className="w-24">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1M">1M</SelectItem>
-                <SelectItem value="3M">3M</SelectItem>
-                <SelectItem value="6M">6M</SelectItem>
-                <SelectItem value="1Y">1Y</SelectItem>
-                <SelectItem value="ALL">ALL</SelectItem>
-              </SelectContent>
-            </Select>
+            <div className="flex space-x-1">
+              {(['1M', '3M', '6M', '1Y', 'ALL'] as const).map((tf) => (
+                <Button
+                  key={tf}
+                  variant={selectedTimeframe === tf ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedTimeframe(tf)}
+                  className="px-2 py-1 text-xs"
+                >
+                  {tf}
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
         <CardDescription>
@@ -244,7 +237,7 @@ export function AssetAllocationChart({ data, className }: AssetAllocationChartPr
     let currentAngle = 0
     const total = data.reduce((sum, asset) => sum + asset.percentage, 0)
 
-    data.forEach((asset, index) => {
+    data.forEach((asset) => {
       const sliceAngle = (asset.percentage / total) * 2 * Math.PI
       const isSelected = selectedAsset === asset.category
 
@@ -295,11 +288,8 @@ export function AssetAllocationChart({ data, className }: AssetAllocationChartPr
               className="w-full h-64 cursor-pointer"
               role="img"
               aria-label="자산 배분 파이 차트"
-              onClick={(e) => {
+              onClick={() => {
                 // 클릭 이벤트 처리 (간단한 구현)
-                const rect = e.currentTarget.getBoundingClientRect()
-                const x = e.clientX - rect.left
-                const y = e.clientY - rect.top
                 // 여기서 클릭된 자산 카테고리 계산
               }}
             />
@@ -394,7 +384,7 @@ export function RiskMetricsDashboard({ data, className }: RiskMetricsDashboardPr
       <CardHeader className="border-b bg-gradient-to-r from-error-50 to-error-100">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Shield className="h-5 w-5 text-error-600" />
+            <TrendingUp className="h-5 w-5 text-error-600" />
             <CardTitle>리스크 메트릭스</CardTitle>
           </div>
         </div>

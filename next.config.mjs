@@ -39,6 +39,14 @@ const nextConfig = {
   
   // 웹팩 설정 최적화
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    // backend 디렉토리 제외 (개발 환경에서는 제거)
+    if (!dev) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'backend': false,
+      }
+    }
+    
     // Bundle analyzer
     if (process.env.ANALYZE === 'true') {
       const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
@@ -223,8 +231,8 @@ const nextConfig = {
     ]
   },
   
-  // Force dynamic rendering globally
-  output: 'standalone',
+  // Force dynamic rendering globally (개발 환경에서는 제거)
+  output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
   
   // 환경 변수
   env: {

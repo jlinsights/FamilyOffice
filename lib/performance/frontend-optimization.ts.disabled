@@ -3,40 +3,10 @@
  * Portfolio dashboard load time: <2 seconds 목표
  */
 
-import { lazy, Suspense, memo, useMemo, useCallback, useState, useEffect } from 'react'
+import React, { memo, useState, useCallback, useMemo } from 'react'
 import dynamic from 'next/dynamic'
-import { useIntersectionObserver } from '@/hooks/use-intersection-observer'
 import { useVirtualizer } from '@tanstack/react-virtual'
-
-// 동적 컴포넌트 로딩 (코드 분할)
-export const LazyComponents = {
-  // 차트 컴포넌트들 (번들 크기 최적화)
-  AdvancedChart: dynamic(() => import('@/components/charts/advanced-chart'), {
-    loading: () => <ChartSkeleton />,
-    ssr: false, // 서버사이드 렌더링 비활성화
-  }),
-  
-  PortfolioAnalytics: dynamic(() => import('@/components/portfolio/analytics'), {
-    loading: () => <AnalyticsSkeleton />,
-    ssr: false,
-  }),
-  
-  ReportGenerator: dynamic(() => import('@/components/reports/generator'), {
-    loading: () => <ReportSkeleton />,
-    ssr: false,
-  }),
-  
-  // 무거운 테이블 컴포넌트
-  DataTable: dynamic(() => import('@/components/ui/data-table'), {
-    loading: () => <TableSkeleton />,
-  }),
-
-  // 금융 계산기
-  FinancialCalculator: dynamic(() => import('@/components/tools/calculator'), {
-    loading: () => <CalculatorSkeleton />,
-    ssr: false,
-  }),
-}
+import { useIntersectionObserver } from '@/hooks/use-intersection-observer'
 
 // 스켈레톤 컴포넌트들
 const ChartSkeleton = memo(() => (
@@ -70,6 +40,36 @@ const TableSkeleton = memo(() => (
 const CalculatorSkeleton = memo(() => (
   <div className="h-48 bg-muted animate-pulse rounded-lg" />
 ))
+
+// 동적 컴포넌트 로딩 (코드 분할)
+export const LazyComponents = {
+  // 차트 컴포넌트들 (번들 크기 최적화)
+  AdvancedChart: dynamic(() => import('@/components/charts/advanced-chart'), {
+    loading: () => <ChartSkeleton />,
+    ssr: false, // 서버사이드 렌더링 비활성화
+  }),
+  
+  PortfolioAnalytics: dynamic(() => import('@/components/portfolio/analytics'), {
+    loading: () => <AnalyticsSkeleton />,
+    ssr: false,
+  }),
+  
+  ReportGenerator: dynamic(() => import('@/components/reports/generator'), {
+    loading: () => <ReportSkeleton />,
+    ssr: false,
+  }),
+  
+  // 무거운 테이블 컴포넌트
+  DataTable: dynamic(() => import('@/components/ui/data-table'), {
+    loading: () => <TableSkeleton />,
+  }),
+
+  // 금융 계산기
+  FinancialCalculator: dynamic(() => import('@/components/tools/calculator'), {
+    loading: () => <CalculatorSkeleton />,
+    ssr: false,
+  }),
+}
 
 // 이미지 최적화 컴포넌트
 interface OptimizedImageProps {

@@ -8,19 +8,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+
 import { 
   Shield, 
-  Lock, 
-  Eye, 
-  EyeOff, 
   Smartphone, 
   Mail, 
   Clock, 
-  CheckCircle,
   AlertTriangle,
-  LogOut,
-  Settings
+  LogOut
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 

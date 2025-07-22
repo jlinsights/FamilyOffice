@@ -176,7 +176,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="FamilyOffice S 뉴스" href="/rss.xml" />
       </head>
       <body className="antialiased">
-        <ErrorBoundary>
+        <ErrorBoundary fallback={undefined}>
           <Providers>
             {children}
           </Providers>

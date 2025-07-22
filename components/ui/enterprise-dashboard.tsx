@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { 
   TrendingUp, 
-  TrendingDown, 
   DollarSign, 
   Shield, 
   BarChart3,

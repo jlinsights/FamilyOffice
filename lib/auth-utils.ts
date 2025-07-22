@@ -2,7 +2,7 @@ import { auth } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
 export async function requireAuth() {
-  const { userId } = auth()
+  const { userId } = await auth()
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
@@ -10,7 +10,7 @@ export async function requireAuth() {
 }
 
 export async function requireAdmin() {
-  const { userId } = auth()
+  const { userId } = await auth()
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
@@ -26,7 +26,9 @@ export async function requireAdmin() {
   return userId
 }
 
-export function withAuth(handler: Function) {
+type AuthHandler = (req: Request, userId: string) => Promise<NextResponse>
+
+export function withAuth(handler: AuthHandler) {
   return async (req: Request) => {
     const authResult = await requireAuth()
     if (authResult instanceof NextResponse) {
@@ -36,7 +38,7 @@ export function withAuth(handler: Function) {
   }
 }
 
-export function withAdmin(handler: Function) {
+export function withAdmin(handler: AuthHandler) {
   return async (req: Request) => {
     const authResult = await requireAdmin()
     if (authResult instanceof NextResponse) {

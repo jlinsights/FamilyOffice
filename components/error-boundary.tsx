@@ -6,27 +6,27 @@ import { AlertTriangle, RefreshCw } from 'lucide-react'
 
 interface ErrorBoundaryState {
   hasError: boolean
-  error?: Error
-  errorInfo?: React.ErrorInfo
+  error: Error | null
+  errorInfo: React.ErrorInfo | null
 }
 
 interface ErrorBoundaryProps {
   children: React.ReactNode
-  fallback?: React.ComponentType<{
+  fallback: React.ComponentType<{
     error: Error
     resetError: () => void
     errorInfo?: React.ErrorInfo
-  }>
+  }> | undefined
 }
 
 export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props)
-    this.state = { hasError: false }
+    this.state = { hasError: false, error: null, errorInfo: null }
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error }
+    return { hasError: true, error, errorInfo: null }
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
@@ -57,23 +57,25 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 
   handleReset = () => {
-    this.setState({ hasError: false, error: undefined, errorInfo: undefined })
+    this.setState({ hasError: false, error: null, errorInfo: null })
   }
 
   render() {
     if (this.state.hasError) {
-      if (this.props.fallback) {
+      if (this.state.error && this.props.fallback) {
         const FallbackComponent = this.props.fallback
         return (
           <FallbackComponent
-            error={this.state.error!}
+            error={this.state.error}
             resetError={this.handleReset}
-            errorInfo={this.state.errorInfo}
+            {...(this.state.errorInfo && { errorInfo: this.state.errorInfo })}
           />
         )
       }
 
-      return <DefaultErrorFallback error={this.state.error!} resetError={this.handleReset} />
+      if (this.state.error) {
+        return <DefaultErrorFallback error={this.state.error} resetError={this.handleReset} />
+      }
     }
 
     return this.props.children

@@ -346,7 +346,7 @@ export class FinancialDataCache {
   }
 
   // 실시간 가격 업데이트 구독
-  subscribeToPrice Updates(callback: (update: any) => void): void {
+  subscribeToPriceUpdates(callback: (update: any) => void): void {
     this.redis.subscribe(this.PRICE_STREAM, callback)
   }
 

@@ -175,6 +175,4 @@ export const PremiumFamilyOfficeLogo: React.FC<Omit<LogoProps, 'size' | 'languag
       )}
     </header>
   )
-}
-
-export default FamilyOfficeLogo 
+} 
