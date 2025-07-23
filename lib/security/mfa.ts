@@ -22,7 +22,7 @@ const initializeMFAPackages = async () => {
 }
 
 // 초기화 호출
-initializeMFAPackages()
+// initializeMFAPackages() - lazy loading on first use
 
 export interface MFASettings {
   id: string;

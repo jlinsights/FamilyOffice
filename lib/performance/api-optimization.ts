@@ -28,7 +28,7 @@ const initializeUpstash = async () => {
 }
 
 // 초기화 호출
-initializeUpstash()
+// initializeUpstash() - lazy loading on first use
 
 // 함수 타입 정의
 type ApiHandler = (req: Request, params?: any) => Promise<Response>

@@ -22,7 +22,7 @@ const initializeWebSocket = async () => {
 }
 
 // 초기화 호출
-initializeWebSocket()
+// initializeWebSocket() - lazy loading on first use
 
 // 부하 테스트 설정
 interface LoadTestConfig {

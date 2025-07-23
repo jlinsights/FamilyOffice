@@ -66,10 +66,7 @@ const initializeMFAPackages = async () => {
   }
 }
 
-// 초기화 호출
-initializeCache()
-initializeUpstash()
-initializeMFAPackages()
+// 초기화는 함수 호출 시 lazy loading
 
 export interface RateLimitConfig {
   windowMs: number // Time window in milliseconds
@@ -94,12 +91,17 @@ export class RateLimiter {
   }
 
   async check(req: NextRequest): Promise<RateLimitResult> {
+    // 캐시 초기화 확인
+    if (!cache) {
+      await initializeCache()
+    }
+    
     const key = this.config.keyGenerator ? this.config.keyGenerator(req) : this.getDefaultKey(req)
     const now = Date.now()
     const windowStart = Math.floor(now / this.config.windowMs) * this.config.windowMs
     
     const cacheKey = `${key}:${windowStart}`
-    const current = cache.get<number>(cacheKey) || 0
+    const current = cache?.get<number>(cacheKey) || 0
     
     const remaining = Math.max(0, this.config.maxRequests - current - 1)
     const reset = new Date(windowStart + this.config.windowMs)
@@ -114,7 +116,7 @@ export class RateLimiter {
     }
     
     // Increment counter
-    cache.set(cacheKey, current + 1, Math.ceil(this.config.windowMs / 1000))
+    cache?.set(cacheKey, current + 1, Math.ceil(this.config.windowMs / 1000))
     
     return {
       success: true,

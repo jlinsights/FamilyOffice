@@ -1,22 +1,46 @@
-// SSR 안전성을 위한 dynamic imports
-let NodeCache: any = null
-
-// SSR 안전한 NodeCache 초기화
-const initializeNodeCache = async () => {
-  if (typeof window === 'undefined' && !NodeCache) {
-    try {
-      // Server-side에서만 NodeCache 사용
-      const NodeCacheModule = await import('node-cache')
-      NodeCache = NodeCacheModule.default || NodeCacheModule
-    } catch (error) {
-      console.error('NodeCache 초기화 실패:', error)
-      NodeCache = null
+// 간단한 메모리 캐시 fallback
+class SimpleMemoryCache {
+  private cache = new Map<string, { value: any; expiry: number }>()
+  
+  get<T>(key: string): T | undefined {
+    const item = this.cache.get(key)
+    if (!item || Date.now() > item.expiry) {
+      this.cache.delete(key)
+      return undefined
     }
+    return item.value
+  }
+  
+  set(key: string, value: any, ttlSeconds: number = 300) {
+    this.cache.set(key, {
+      value,
+      expiry: Date.now() + ttlSeconds * 1000
+    })
+  }
+  
+  del(key: string) {
+    this.cache.delete(key)
+  }
+  
+  keys() {
+    return Array.from(this.cache.keys())
+  }
+  
+  flushAll() {
+    this.cache.clear()
   }
 }
 
-// 초기화 호출
-initializeNodeCache()
+// SSR 안전한 캐시 생성
+const createCache = (config: any) => {
+  if (typeof window !== 'undefined') {
+    // 클라이언트 사이드에서는 간단한 메모리 캐시 사용
+    return new SimpleMemoryCache()
+  }
+  
+  // 서버 사이드에서는 항상 SimpleMemoryCache 사용 (안정성 우선)
+  return new SimpleMemoryCache()
+}
 
 // Cache configuration
 export interface CacheConfig {
@@ -61,12 +85,12 @@ export const cacheConfigs = {
   },
 } as const
 
-// Cache instances - SSR 안전하게 초기화
+// Cache instances - 즉시 사용 가능
 export const caches = {
-  short: NodeCache ? new NodeCache(cacheConfigs.short) : null,
-  medium: NodeCache ? new NodeCache(cacheConfigs.medium) : null,
-  long: NodeCache ? new NodeCache(cacheConfigs.long) : null,
-  session: NodeCache ? new NodeCache(cacheConfigs.session) : null,
+  short: createCache(cacheConfigs.short),
+  medium: createCache(cacheConfigs.medium),
+  long: createCache(cacheConfigs.long),
+  session: createCache(cacheConfigs.session),
 }
 
 // Cache wrapper class
