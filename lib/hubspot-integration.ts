@@ -256,11 +256,11 @@ class HubSpotFormIntegration {
         
         const data: FormResponse = await response.json();
         
-        if ("redirectUri" in data) {
+        if ("redirectUri" in data && data.redirectUri) {
           window.location.href = data.redirectUri;
         }
 
-        if ("inlineMessage" in data) {
+        if ("inlineMessage" in data && data.inlineMessage) {
           const message = document.createElement("div");
           message.style.marginTop = "1rem";
           message.style.marginBottom = "1rem";

@@ -4,11 +4,16 @@ import { SEMINAR_CATEGORIES } from "@/constants/seminars";
 import { ArrowRight, BookOpen } from "lucide-react";
 
 export function SeminarCategoriesSection() {
+  const handleCardClick = (categoryKey: string) => {
+    // 외부 세미나 사이트로 이동
+    window.open('https://seminar.familyoffices.vip', '_blank');
+  };
+
   return (
     <section className="py-20 bg-gradient-to-b from-muted/20 to-background dark:from-gray-900 dark:to-gray-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <Badge variant="secondary" className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60">
+          <Badge className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60">
             <BookOpen className="h-3 w-3 mr-1" />
             Seminar Categories
           </Badge>
@@ -29,6 +34,15 @@ export function SeminarCategoriesSection() {
                 key={category.key} 
                 className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer animate-slide-up dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 style={{ animationDelay: `${index * 100}ms` }}
+                onClick={() => handleCardClick(category.key)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick(category.key);
+                  }
+                }}
               >
                 <CardHeader className="text-center pb-4">
                   <div className={`inline-flex items-center justify-center w-16 h-16 ${category.bgColor} rounded-full mb-4 group-hover:scale-110 transition-transform duration-300 dark:bg-primary/30`}>

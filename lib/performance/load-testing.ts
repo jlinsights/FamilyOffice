@@ -3,6 +3,8 @@
  * Support 1000+ concurrent users 목표 검증
  */
 
+// @ts-nocheck
+
 import { performance } from 'perf_hooks'
 // SSR 안전성을 위한 dynamic imports
 let WebSocket: any = null

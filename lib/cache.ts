@@ -33,7 +33,7 @@ class SimpleMemoryCache {
   getStats() {
     const now = Date.now()
     const totalKeys = this.cache.size
-    const expiredKeys = Array.from(this.cache.entries()).filter(([_, item]) => now > item.expiry).length
+    const expiredKeys = Array.from(this.cache.entries()).filter(([, item]) => now > item.expiry).length
     
     return {
       hits: 0, // SimpleMemoryCache doesn't track hits
@@ -46,7 +46,7 @@ class SimpleMemoryCache {
 }
 
 // SSR 안전한 캐시 생성
-const createCache = (config: any) => {
+const createCache = (_config: any) => {
   if (typeof window !== 'undefined') {
     // 클라이언트 사이드에서는 간단한 메모리 캐시 사용
     return new SimpleMemoryCache()
@@ -310,7 +310,7 @@ export class CacheInvalidator {
     }
   }
 
-  async invalidateByPrefix(prefix: string): Promise<void> {
+  async invalidateByPrefix(_prefix: string): Promise<void> {
     // This would require implementing a prefix-based deletion
     // For now, we'll clear all cache if no Redis
     await this.cacheManager.clear()

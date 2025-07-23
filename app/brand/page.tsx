@@ -350,7 +350,7 @@ export default function BrandPage() {
                       <span className="text-green-500">✔️</span> Usage Guidelines
                     </h2>
                     <div className="mb-6">
-                      <div className="text-xl font-bold text-green-600 mb-2">Do's</div>
+                      <div className="text-xl font-bold text-green-600 mb-2">Do&apos;s</div>
                       <ul className="list-disc pl-5 space-y-1 text-gray-800 dark:text-gray-100">
                         <li>신뢰와 파트너십 가치 강조</li>
                         <li>Professional한 이미지 유지</li>
@@ -359,7 +359,7 @@ export default function BrandPage() {
                       </ul>
                     </div>
                     <div>
-                      <div className="text-xl font-bold text-red-600 mb-2">Don'ts</div>
+                      <div className="text-xl font-bold text-red-600 mb-2">Don&apos;ts</div>
                       <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300">
                         <li>단순한 Sales 중심 메시지 지양</li>
                         <li>과도한 기술적 전문용어 사용 금지</li>
