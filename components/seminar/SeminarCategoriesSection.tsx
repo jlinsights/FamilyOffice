@@ -1,10 +1,12 @@
+'use client';
+
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { SEMINAR_CATEGORIES } from "@/constants/seminars";
 import { ArrowRight, BookOpen } from "lucide-react";
 
 export function SeminarCategoriesSection() {
-  const handleCardClick = (categoryKey: string) => {
+  const handleCardClick = () => {
     // 외부 세미나 사이트로 이동
     window.open('https://seminar.familyoffices.vip', '_blank');
   };
@@ -34,13 +36,13 @@ export function SeminarCategoriesSection() {
                 key={category.key} 
                 className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer animate-slide-up dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 style={{ animationDelay: `${index * 100}ms` }}
-                onClick={() => handleCardClick(category.key)}
+                onClick={handleCardClick}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    handleCardClick(category.key);
+                    handleCardClick();
                   }
                 }}
               >

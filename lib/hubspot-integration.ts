@@ -72,7 +72,7 @@ class HubSpotFormIntegration {
   }
 
   private updateFormData(formData: FormData): FormData {
-    for (const [name, value] of formData.entries()) {
+    for (const [name] of formData.entries()) {
       switch (name) {
         case "hutk":
           const cookies = document.cookie.split(";");

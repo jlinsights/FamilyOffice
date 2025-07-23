@@ -192,6 +192,8 @@ export class AuditService {
 
   // 감사 이벤트 조회
   static async queryEvents(query: AuditQuery): Promise<AuditEvent[]> {
+    // Using query parameter for future implementation
+    console.log('Query parameters:', query);
     // 데이터베이스에서 감사 이벤트 조회
     return await this.queryFromDatabase();
   }

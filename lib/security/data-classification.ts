@@ -377,6 +377,7 @@ export class GDPRService {
     requestDetails: Record<string, any>
   ): Promise<any> {
     console.log('Executing right to access for:', subject.id);
+    console.log('Request details:', requestDetails);
     return {
       subjectId: subject.id,
       dataProcessing: subject.dataProcessing,

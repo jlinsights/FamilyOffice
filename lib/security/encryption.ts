@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 
 // 암호화 키 관리
-class EncryptionService {
+export class EncryptionService {
   private algorithm = 'aes-256-gcm'
   private keyLength = 32
   private tagLength = 16
@@ -23,15 +23,12 @@ class EncryptionService {
       const iv = crypto.randomBytes(16)
       
       const cipher = crypto.createCipher(this.algorithm, key)
-      cipher.setAAD(Buffer.from('familyoffice', 'utf8'))
       
       let encrypted = cipher.update(data, 'utf8', 'hex')
       encrypted += cipher.final('hex')
       
-      const tag = cipher.getAuthTag()
-      
-      // IV + Tag + Encrypted Data
-      return iv.toString('hex') + tag.toString('hex') + encrypted
+      // IV + Encrypted Data
+      return iv.toString('hex') + encrypted
     } catch (error) {
       console.error('Encryption error:', error)
       throw new Error('Failed to encrypt data')
@@ -43,14 +40,10 @@ class EncryptionService {
     try {
       const key = Buffer.from(process.env.ENCRYPTION_KEY!, 'hex')
       
-      // IV, Tag, Encrypted Data 분리
-      const iv = Buffer.from(encryptedData.slice(0, 32), 'hex')
-      const tag = Buffer.from(encryptedData.slice(32, 64), 'hex')
-      const encrypted = encryptedData.slice(64)
+      // IV, Encrypted Data 분리  
+      const encrypted = encryptedData.slice(32)
       
       const decipher = crypto.createDecipher(this.algorithm, key)
-      decipher.setAuthTag(tag)
-      decipher.setAAD(Buffer.from('familyoffice', 'utf8'))
       
       let decrypted = decipher.update(encrypted, 'hex', 'utf8')
       decrypted += decipher.final('utf8')

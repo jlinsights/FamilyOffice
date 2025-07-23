@@ -88,7 +88,7 @@ export class WebSocketManager extends EventEmitter {
 
     this.clients.set(clientId, client)
 
-    ws.on('message', (data: WebSocket.Data) => {
+    ws.on('message', (data: any) => {
       this.handleMessage(clientId, data)
     })
 
@@ -119,7 +119,7 @@ export class WebSocketManager extends EventEmitter {
     this.emit('clientConnected', { clientId, userId })
   }
 
-  private handleMessage(clientId: string, data: WebSocket.Data): void {
+  private handleMessage(clientId: string, data: any): void {
     try {
       const message = JSON.parse(data.toString())
       const client = this.clients.get(clientId)
@@ -444,7 +444,7 @@ export class PriceUpdateManager {
   // 외부 피드 구독
   private subscribeToExternalFeeds(): void {
     // Redis Pub/Sub으로 외부 가격 피드 구독
-    redis.subscribe('external_price_feed', (data) => {
+    redis.subscribe('external_price_feed', (data: any) => {
       try {
         const priceUpdate = JSON.parse(data)
         this.queuePriceUpdate(priceUpdate.symbol, priceUpdate)
@@ -568,7 +568,7 @@ export class PortfolioUpdateManager {
   // 포트폴리오 모니터링 시작
   private startPortfolioMonitoring(): void {
     // Redis에서 포트폴리오 업데이트 구독
-    redis.subscribe('portfolio_updates', (data) => {
+    redis.subscribe('portfolio_updates', (data: any) => {
       try {
         const update = JSON.parse(data)
         this.updatePortfolioValue(update.portfolioId, update.data)
@@ -684,9 +684,12 @@ export class LoadBalancer {
     setInterval(async () => {
       for (const server of this.servers) {
         try {
+          const controller = new AbortController()
+          const timeoutId = setTimeout(() => controller.abort(), 5000)
           const response = await fetch(`${server.url}/health`, {
-            timeout: 5000,
+            signal: controller.signal,
           })
+          clearTimeout(timeoutId)
           server.healthy = response.ok
           server.lastCheck = Date.now()
         } catch (error) {
@@ -730,7 +733,7 @@ export function initializeRealtimeSystem(): void {
 }
 
 // 테스트 데이터 생성 (개발용)
-function startTestDataGeneration(): void {
+export function startTestDataGeneration(): void {
   const testSymbols = ['AAPL', 'TSLA', '005930.KS', 'NAVER']
   
   setInterval(() => {

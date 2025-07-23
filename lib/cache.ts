@@ -46,7 +46,7 @@ class SimpleMemoryCache {
 }
 
 // SSR 안전한 캐시 생성
-const createCache = (_config: any) => {
+const createCache = () => {
   if (typeof window !== 'undefined') {
     // 클라이언트 사이드에서는 간단한 메모리 캐시 사용
     return new SimpleMemoryCache()
@@ -101,10 +101,10 @@ export const cacheConfigs = {
 
 // Cache instances - 즉시 사용 가능
 export const caches = {
-  short: createCache(cacheConfigs.short),
-  medium: createCache(cacheConfigs.medium),
-  long: createCache(cacheConfigs.long),
-  session: createCache(cacheConfigs.session),
+  short: createCache(),
+  medium: createCache(),
+  long: createCache(),
+  session: createCache(),
 }
 
 // Cache wrapper class
@@ -310,7 +310,7 @@ export class CacheInvalidator {
     }
   }
 
-  async invalidateByPrefix(_prefix: string): Promise<void> {
+  async invalidateByPrefix(): Promise<void> {
     // This would require implementing a prefix-based deletion
     // For now, we'll clear all cache if no Redis
     await this.cacheManager.clear()

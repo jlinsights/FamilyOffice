@@ -10,7 +10,7 @@ import { performance } from 'perf_hooks'
 let WebSocket: any = null
 
 // SSR 안전한 WebSocket 초기화
-const initializeWebSocket = async () => {
+export const initializeWebSocket = async () => {
   if (typeof window === 'undefined' && !WebSocket) {
     try {
       // Server-side에서만 WebSocket 사용
@@ -204,7 +204,7 @@ class VirtualUser {
       clearTimeout(timeoutId)
       const responseTime = performance.now() - startTime
       
-      if (error.name === 'AbortError') {
+      if ((error as Error).name === 'AbortError') {
         this.recordResult(scenarioName, step.name, 'timeout', responseTime)
       } else {
         throw error
@@ -247,7 +247,7 @@ class VirtualUser {
         resolve()
       })
       
-      this.ws.on('error', (error) => {
+      this.ws.on('error', (error: any) => {
         clearTimeout(timeout)
         this.recordResult(scenarioName, step.name, 'failure', performance.now() - startTime, {
           error: error.message

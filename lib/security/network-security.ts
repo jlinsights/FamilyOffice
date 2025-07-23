@@ -56,7 +56,7 @@ export class NetworkSecurityService {
   private firewallRules: FirewallRule[] = [];
   private networkSegments: NetworkSegment[] = [];
   private vpnConnections: VPNConnection[] = [];
-  private securityPolicy: NetworkSecurityPolicy;
+  private securityPolicy!: NetworkSecurityPolicy;
 
   constructor() {
     this.initializeDefaultSecurityPolicy();

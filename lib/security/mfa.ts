@@ -4,7 +4,7 @@ let QRCode: any = null
 import crypto from 'crypto';
 
 // SSR 안전한 MFA 패키지 초기화
-const initializeMFAPackages = async () => {
+export const initializeMFAPackages = async () => {
   if (typeof window === 'undefined' && !authenticator && !QRCode) {
     try {
       // Server-side에서만 MFA 패키지 사용
@@ -163,6 +163,7 @@ export class MFAService {
 
   private static async getMFASettings(userId: string): Promise<MFASettings | null> {
     // 데이터베이스 조회 로직
+    console.log('Getting MFA settings for user:', userId);
     return null; // 구현 필요
   }
 

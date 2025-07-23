@@ -263,7 +263,7 @@ export class BackgroundSyncManager {
     }
 
     try {
-      await this.registration.sync.register(tag)
+      await (this.registration as any).sync.register(tag)
       return true
     } catch (error) {
       console.error('Background sync registration failed:', error)
@@ -422,4 +422,6 @@ export function initializePWA() {
       backgroundSync: backgroundSyncManager,
     }
   }
+  
+  return null
 }

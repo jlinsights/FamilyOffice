@@ -7,6 +7,7 @@
 
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from '@/types/supabase'
+import { performance } from 'perf_hooks'
 
 // 성능 최적화된 Supabase 클라이언트 설정
 export function createOptimizedSupabaseClient() {
@@ -338,7 +339,7 @@ export class QueryPerformanceMonitor {
 
   getSlowQueries() {
     return Array.from(this.queryStats.entries())
-      .filter(([_, stats]) => stats.slowQueries > 0)
+      .filter(([, stats]) => stats.slowQueries > 0)
       .map(([queryName, stats]) => ({
         queryName,
         ...stats,

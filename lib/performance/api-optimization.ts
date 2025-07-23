@@ -3,7 +3,6 @@
  * API response time: <500ms for 95th percentile 목표
  */
 
-// @ts-nocheck
 
 import { NextRequest, NextResponse } from 'next/server'
 // SSR 안전성을 위한 dynamic imports
@@ -12,7 +11,7 @@ let Redis: any = null
 import { Agent } from 'https'
 
 // SSR 안전한 Upstash 초기화
-const initializeUpstash = async () => {
+export const initializeUpstash = async () => {
   if (typeof window === 'undefined' && !Ratelimit && !Redis) {
     try {
       // Server-side에서만 Upstash 사용
@@ -33,7 +32,7 @@ const initializeUpstash = async () => {
 // initializeUpstash() - lazy loading on first use
 
 // 함수 타입 정의
-type ApiHandler = (req: Request, params?: any) => Promise<Response>
+// type ApiHandler = (req: Request, params?: any) => Promise<Response>
 
 // 연결 풀링을 위한 HTTP Agent
 export const httpsAgent = new Agent({
@@ -376,7 +375,7 @@ export class DatabaseConnectionPool {
   }
   
   async closeAll(): Promise<void> {
-    for (const [url, pool] of this.pools.entries()) {
+    for (const [url] of this.pools.entries()) {
       // 실제 구현시 pool.end() 호출
       console.log(`Closing connection pool for ${url}`)
     }
@@ -583,7 +582,7 @@ export function optimizeAPI(config: {
     // 요청 중복 제거
     if (config.batch) {
       optimizedHandler = withRequestDeduplication(
-        optimizedHandler,
+        optimizedHandler as (req: NextRequest) => Promise<NextResponse>,
         config.batch.keyGenerator
       )
     }
@@ -594,7 +593,7 @@ export function optimizeAPI(config: {
       const originalHandler = optimizedHandler
       
       optimizedHandler = async (req: NextRequest) => {
-        const ip = req.ip || req.headers.get('x-forwarded-for') || 'unknown'
+        const ip = req.headers.get('x-forwarded-for') || 'unknown'
         const { success, limit, remaining, reset } = await rateLimiter?.limit(ip)
         
         if (!success) {

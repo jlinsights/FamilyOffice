@@ -33,7 +33,7 @@ const initializeCache = async () => {
 }
 
 // SSR 안전한 Upstash 초기화
-const initializeUpstash = async () => {
+export const initializeUpstash = async () => {
   if (typeof window === 'undefined' && !Ratelimit && !Redis) {
     try {
       const upstashRedisModule = await import('@upstash/redis')
@@ -50,7 +50,7 @@ const initializeUpstash = async () => {
 }
 
 // SSR 안전한 MFA 패키지 초기화
-const initializeMFAPackages = async () => {
+export const initializeMFAPackages = async () => {
   if (typeof window === 'undefined' && !authenticator && !QRCode) {
     try {
       const otplibModule = await import('otplib')
@@ -101,7 +101,7 @@ export class RateLimiter {
     const windowStart = Math.floor(now / this.config.windowMs) * this.config.windowMs
     
     const cacheKey = `${key}:${windowStart}`
-    const current = cache?.get<number>(cacheKey) || 0
+    const current = (cache?.get(cacheKey) as number) || 0
     
     const remaining = Math.max(0, this.config.maxRequests - current - 1)
     const reset = new Date(windowStart + this.config.windowMs)
@@ -129,7 +129,7 @@ export class RateLimiter {
   private getDefaultKey(req: NextRequest): string {
     // Get IP address
     const forwarded = req.headers.get('x-forwarded-for')
-    const ip = forwarded ? forwarded.split(',')[0] : req.ip || 'unknown'
+    const ip = forwarded ? forwarded.split(',')[0] : 'unknown'
     
     // Include user agent for additional fingerprinting
     const userAgent = req.headers.get('user-agent') || 'unknown'
@@ -153,7 +153,10 @@ export class RateLimiter {
 export const rateLimiters = {
   // General API rate limit
   general: Ratelimit && Redis ? new Ratelimit({
-    redis,
+    redis: new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL!,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+    }),
     limiter: Ratelimit.slidingWindow(100, '1 m'),
     analytics: true,
     prefix: 'ratelimit:general',
@@ -244,7 +247,7 @@ export class IPRateLimiter {
 
   getIP(req: NextRequest): string {
     const forwarded = req.headers.get('x-forwarded-for')
-    return forwarded ? forwarded.split(',')[0] : req.ip || 'unknown'
+    return forwarded ? forwarded.split(',')[0] : 'unknown'
   }
 
   isBlocked(ip: string): boolean {
