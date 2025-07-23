@@ -107,7 +107,12 @@ export const LazyAdminDashboard = dynamic(
 
 // Charts and analytics components
 export const LazyChartComponent = dynamic(
-  () => import('recharts').then((mod) => mod.ResponsiveContainer),
+  () => import('recharts').then((mod) => mod.ResponsiveContainer).catch(() => {
+    console.warn('Recharts 로드 실패, 대체 컴포넌트 사용');
+    const FallbackComponent = () => <div className="h-64 flex items-center justify-center text-muted-foreground">차트를 불러올 수 없습니다</div>;
+    FallbackComponent.displayName = 'ResponsiveContainerFallback';
+    return FallbackComponent;
+  }),
   {
     loading: () => <ChartSkeleton />,
     ssr: false,

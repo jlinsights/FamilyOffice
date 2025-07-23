@@ -2,10 +2,30 @@
  * Yahoo Finance API 클라이언트
  */
 
-import yahooFinance from 'yahoo-finance2'
 import type { StockData, ForexData, IndexData, ApiResponse, ApiError } from '../types/financial'
 
 // Yahoo Finance 설정
+let yahooFinance: any = null;
+
+// Dynamic import for SSR safety
+const loadYahooFinance = async () => {
+  if (typeof window === 'undefined') {
+    // Server-side에서는 사용하지 않음
+    return null;
+  }
+  
+  if (!yahooFinance) {
+    try {
+      const YahooFinanceModule = await import('yahoo-finance2');
+      yahooFinance = YahooFinanceModule.default;
+    } catch (error) {
+      console.error('Yahoo Finance 모듈 로드 실패:', error);
+      return null;
+    }
+  }
+  
+  return yahooFinance;
+};
 
 /**
  * Yahoo Finance에서 주식 데이터 가져오기
@@ -14,7 +34,12 @@ export async function getYahooStockData(symbol: string): Promise<ApiResponse<Sto
   try {
     console.log(`📈 Yahoo Finance에서 주식 데이터 요청: ${symbol}`)
     
-    const quote = await yahooFinance.quote(symbol)
+    const yf = await loadYahooFinance();
+    if (!yf) {
+      throw new Error('Yahoo Finance 모듈을 로드할 수 없습니다');
+    }
+    
+    const quote = await yf.quote(symbol)
     
     if (!quote || !quote.regularMarketPrice) {
       throw new Error(`No data found for symbol: ${symbol}`)
@@ -75,7 +100,12 @@ export async function getYahooForexData(fromCurrency: string, toCurrency: string
     const symbol = `${fromCurrency}${toCurrency}=X`
     console.log(`💱 Yahoo Finance에서 환율 데이터 요청: ${symbol}`)
     
-    const quote = await yahooFinance.quote(symbol)
+    const yf = await loadYahooFinance();
+    if (!yf) {
+      throw new Error('Yahoo Finance 모듈을 로드할 수 없습니다');
+    }
+
+    const quote = await yf.quote(symbol)
     
     if (!quote || !quote.regularMarketPrice) {
       throw new Error(`No forex data found for: ${fromCurrency}/${toCurrency}`)
@@ -132,7 +162,12 @@ export async function getYahooIndexData(symbol: string): Promise<ApiResponse<Ind
   try {
     console.log(`📊 Yahoo Finance에서 지수 데이터 요청: ${symbol}`)
     
-    const quote = await yahooFinance.quote(symbol)
+    const yf = await loadYahooFinance();
+    if (!yf) {
+      throw new Error('Yahoo Finance 모듈을 로드할 수 없습니다');
+    }
+
+    const quote = await yf.quote(symbol)
     
     if (!quote || !quote.regularMarketPrice) {
       throw new Error(`No index data found for symbol: ${symbol}`)
@@ -186,7 +221,12 @@ export async function getYahooMultipleStocks(symbols: string[]): Promise<ApiResp
   try {
     console.log(`📈 Yahoo Finance에서 복수 주식 데이터 요청: [${symbols.join(', ')}]`)
     
-    const quotes = await yahooFinance.quote(symbols)
+    const yf = await loadYahooFinance();
+    if (!yf) {
+      throw new Error('Yahoo Finance 모듈을 로드할 수 없습니다');
+    }
+
+    const quotes = await yf.quote(symbols)
     const stockDataArray: StockData[] = []
 
     // 단일 심볼인 경우 배열로 변환

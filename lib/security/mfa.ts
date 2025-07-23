@@ -1,6 +1,28 @@
-import { authenticator } from 'otplib';
-import QRCode from 'qrcode';
+// SSR 안전성을 위한 dynamic imports
+let authenticator: any = null
+let QRCode: any = null
 import crypto from 'crypto';
+
+// SSR 안전한 MFA 패키지 초기화
+const initializeMFAPackages = async () => {
+  if (typeof window === 'undefined' && !authenticator && !QRCode) {
+    try {
+      // Server-side에서만 MFA 패키지 사용
+      const otplibModule = await import('otplib')
+      const qrcodeModule = await import('qrcode')
+      
+      authenticator = otplibModule.authenticator || otplibModule.default
+      QRCode = qrcodeModule.default || qrcodeModule
+    } catch (error) {
+      console.error('MFA 패키지 초기화 실패:', error)
+      authenticator = null
+      QRCode = null
+    }
+  }
+}
+
+// 초기화 호출
+initializeMFAPackages()
 
 export interface MFASettings {
   id: string;

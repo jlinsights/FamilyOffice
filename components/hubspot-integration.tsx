@@ -9,8 +9,13 @@ import HubSpotFormIntegration from '@/lib/hubspot-integration'
  */
 export function HubSpotIntegration() {
   useEffect(() => {
-    // HubSpot 통합 초기화
-    new HubSpotFormIntegration()
+    try {
+      // HubSpot 통합 초기화
+      new HubSpotFormIntegration()
+    } catch (error) {
+      console.warn('HubSpot 통합 초기화 실패:', error);
+      // HubSpot 통합이 실패해도 앱이 계속 작동하도록 함
+    }
   }, [])
 
   return null // 이 컴포넌트는 UI를 렌더링하지 않음

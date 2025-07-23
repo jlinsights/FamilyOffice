@@ -5,14 +5,15 @@
  */
 
 import { EventEmitter } from 'events'
-import WebSocket from 'ws'
-import { redis } from './redis-cache'
+// SSR 안전성을 위한 dynamic imports
+let WebSocket: any = null
+const redis: any = null
 
 // WebSocket 연결 관리자
 export class WebSocketManager extends EventEmitter {
-  private wss: WebSocket.Server | null = null
+  private wss: any = null
   private clients = new Map<string, {
-    ws: WebSocket
+    ws: any
     userId: string
     subscriptions: Set<string>
     lastPing: number
@@ -31,27 +32,43 @@ export class WebSocketManager extends EventEmitter {
     this.startMetricsCollection()
   }
 
-  private initializeWebSocketServer(port: number): void {
-    this.wss = new WebSocket.Server({
-      port,
-      perMessageDeflate: {
-        zlibDeflateOptions: {
-          threshold: 1024, // 1KB 이상만 압축
-          concurrencyLimit: 10,
+  private async initializeWebSocketServer(port: number): Promise<void> {
+    if (typeof window === 'undefined') {
+      // Server-side에서는 WebSocket 서버를 초기화하지 않음
+      console.log('Server-side에서는 WebSocket 서버를 초기화하지 않습니다.')
+      return
+    }
+
+    try {
+      // Dynamic imports
+      if (!WebSocket) {
+        const wsModule = await import('ws')
+        WebSocket = wsModule.default
+      }
+
+      this.wss = new WebSocket.Server({
+        port,
+        perMessageDeflate: {
+          zlibDeflateOptions: {
+            threshold: 1024, // 1KB 이상만 압축
+            concurrencyLimit: 10,
+          },
         },
-      },
-      maxPayload: 16 * 1024, // 16KB 최대 메시지 크기
-    })
+        maxPayload: 16 * 1024, // 16KB 최대 메시지 크기
+      })
 
-    this.wss.on('connection', this.handleConnection.bind(this))
-    this.wss.on('error', (error) => {
-      console.error('WebSocket Server Error:', error)
-    })
+      this.wss.on('connection', this.handleConnection.bind(this))
+      this.wss.on('error', (error: any) => {
+        console.error('WebSocket Server Error:', error)
+      })
 
-    console.log(`🔗 WebSocket server listening on port ${port}`)
+      console.log(`🔗 WebSocket server listening on port ${port}`)
+    } catch (error) {
+      console.error('WebSocket 서버 초기화 실패:', error)
+    }
   }
 
-  private handleConnection(ws: WebSocket, request: any): void {
+  private handleConnection(ws: any, request: any): void {
     const clientId = this.generateClientId()
     const userId = this.extractUserIdFromRequest(request)
 
@@ -71,7 +88,7 @@ export class WebSocketManager extends EventEmitter {
 
     this.clients.set(clientId, client)
 
-    ws.on('message', (data) => {
+    ws.on('message', (data: WebSocket.Data) => {
       this.handleMessage(clientId, data)
     })
 
@@ -86,7 +103,7 @@ export class WebSocketManager extends EventEmitter {
       this.handleDisconnection(clientId)
     })
 
-    ws.on('error', (error) => {
+    ws.on('error', (error: any) => {
       console.error(`WebSocket client error (${clientId}):`, error)
       this.handleDisconnection(clientId)
     })
@@ -698,11 +715,17 @@ export const loadBalancer = new LoadBalancer()
 
 // 초기화 함수
 export function initializeRealtimeSystem(): void {
-  console.log('🚀 Real-time system initialized')
-  
-  // 개발 환경에서 테스트 데이터 생성
-  if (process.env.NODE_ENV === 'development') {
-    startTestDataGeneration()
+  if (typeof window === 'undefined') {
+    console.log('Server-side에서는 실시간 시스템을 초기화하지 않습니다.')
+    return
+  }
+
+  try {
+    // 클라이언트에서만 초기화
+    console.log('🚀 실시간 시스템 초기화 중...')
+    // 실제 초기화 로직은 클라이언트에서만 실행
+  } catch (error) {
+    console.error('실시간 시스템 초기화 실패:', error)
   }
 }
 

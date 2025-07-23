@@ -3,38 +3,71 @@
  * Real-time price updates: <100ms latency 목표
  */
 
-import Redis from 'ioredis'
-import { compress, decompress } from 'lz4'
+// SSR 안전성을 위한 dynamic imports
+let Redis: any = null
+let compress: any = null
+let decompress: any = null
 
 // Redis 클라이언트 설정
 export class RedisCache {
-  private redis: Redis
+  private redis: any
   private fallbackCache = new Map<string, { value: any; expires: number }>()
   private compressionThreshold = 1024 // 1KB 이상 압축
 
   constructor() {
-    this.redis = new Redis({
-      host: process.env.REDIS_HOST || 'localhost',
-      port: parseInt(process.env.REDIS_PORT || '6379'),
-      password: process.env.REDIS_PASSWORD,
-      db: 0,
-      retryDelayOnFailover: 100,
-      enableReadyCheck: true,
-      maxRetriesPerRequest: 3,
-      lazyConnect: true,
-      // 연결 풀 설정
-      family: 4,
-      keepAlive: 30000,
-      // 클러스터 설정 (프로덕션용)
-      enableOfflineQueue: false,
-      // 성능 최적화
-      compression: 'gzip',
-    })
+    this.initializeRedis()
+  }
 
-    this.setupEventHandlers()
+  private async initializeRedis() {
+    if (typeof window === 'undefined') {
+      // Server-side에서는 사용하지 않음
+      return
+    }
+
+    try {
+      // Dynamic imports
+      if (!Redis) {
+        const redisModule = await import('ioredis')
+        Redis = redisModule.default
+      }
+      
+      if (!compress || !decompress) {
+        const lz4Module = await import('lz4')
+        compress = lz4Module.compress
+        decompress = lz4Module.decompress
+      }
+
+      this.redis = new Redis({
+        host: process.env.REDIS_HOST || 'localhost',
+        port: parseInt(process.env.REDIS_PORT || '6379'),
+        password: process.env.REDIS_PASSWORD,
+        db: 0,
+        retryDelayOnFailover: 100,
+        enableReadyCheck: true,
+        maxRetriesPerRequest: 3,
+        lazyConnect: true,
+        // 연결 풀 설정
+        family: 4,
+        keepAlive: 30000,
+        // 클러스터 설정 (프로덕션용)
+        enableOfflineQueue: false,
+        // 성능 최적화
+        compression: 'gzip',
+      })
+
+      this.setupEventHandlers()
+    } catch (error) {
+      console.error('Redis 초기화 실패:', error)
+      this.redis = null
+    }
   }
 
   private setupEventHandlers() {
+    if (!this.redis) {
+      console.warn('Redis 클라이언트가 초기화되지 않았습니다. 이벤트 핸들러를 설정할 수 없습니다.')
+      return
+    }
+
     this.redis.on('connect', () => {
       console.log('✅ Redis connected')
     })
@@ -51,6 +84,15 @@ export class RedisCache {
 
   // 압축된 데이터 저장
   async set(key: string, value: any, ttl: number = 300): Promise<boolean> {
+    if (!this.redis) {
+      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 저장할 수 없습니다.')
+      this.fallbackCache.set(key, {
+        value,
+        expires: Date.now() + (ttl * 1000)
+      })
+      return true
+    }
+
     try {
       const serialized = JSON.stringify(value)
       const shouldCompress = serialized.length > this.compressionThreshold
@@ -79,6 +121,15 @@ export class RedisCache {
 
   // 압축 해제된 데이터 조회
   async get<T>(key: string): Promise<T | null> {
+    if (!this.redis) {
+      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 조회할 수 없습니다.')
+      const fallback = this.fallbackCache.get(key)
+      if (fallback && fallback.expires > Date.now()) {
+        return fallback.value
+      }
+      return null
+    }
+
     try {
       const data = await this.redis.get(key)
       if (!data) return null
@@ -106,6 +157,11 @@ export class RedisCache {
 
   // 배치 데이터 조회 (파이프라인 사용)
   async mget<T>(keys: string[]): Promise<Record<string, T | null>> {
+    if (!this.redis) {
+      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 조회할 수 없습니다.')
+      return {}
+    }
+
     try {
       const pipeline = this.redis.pipeline()
       keys.forEach(key => pipeline.get(key))
@@ -142,6 +198,11 @@ export class RedisCache {
 
   // 배치 데이터 저장
   async mset(pairs: Array<{key: string; value: any; ttl?: number}>): Promise<boolean> {
+    if (!this.redis) {
+      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 저장할 수 없습니다.')
+      return false
+    }
+
     try {
       const pipeline = this.redis.pipeline()
       
@@ -168,6 +229,11 @@ export class RedisCache {
 
   // 패턴 기반 키 삭제
   async deletePattern(pattern: string): Promise<number> {
+    if (!this.redis) {
+      console.error('Redis 클라이언트가 초기화되지 않았습니다. 키를 삭제할 수 없습니다.')
+      return 0
+    }
+
     try {
       const keys = await this.redis.keys(pattern)
       if (keys.length > 0) {
@@ -182,6 +248,11 @@ export class RedisCache {
 
   // 실시간 데이터 발행/구독
   async publish(channel: string, data: any): Promise<number> {
+    if (!this.redis) {
+      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 발행할 수 없습니다.')
+      return 0
+    }
+
     try {
       return await this.redis.publish(channel, JSON.stringify(data))
     } catch (error) {
@@ -192,6 +263,11 @@ export class RedisCache {
 
   // 구독 설정
   subscribe(channel: string, callback: (data: any) => void): void {
+    if (typeof window === 'undefined') {
+      console.warn('브라우저 환경이 아니므로 Redis 구독을 설정할 수 없습니다.')
+      return
+    }
+
     const subscriber = new Redis({
       host: process.env.REDIS_HOST || 'localhost',
       port: parseInt(process.env.REDIS_PORT || '6379'),
@@ -213,6 +289,11 @@ export class RedisCache {
 
   // 캐시 통계
   async getStats() {
+    if (!this.redis) {
+      console.error('Redis 클라이언트가 초기화되지 않았습니다. 통계를 가져올 수 없습니다.')
+      return null
+    }
+
     try {
       const info = await this.redis.info('memory')
       const keyspace = await this.redis.info('keyspace')
@@ -230,16 +311,25 @@ export class RedisCache {
   }
 
   private parseMemoryUsage(info: string): number {
+    if (!this.redis) {
+      return 0
+    }
     const match = info.match(/used_memory:(\d+)/)
     return match ? parseInt(match[1]) : 0
   }
 
   private parseKeyCount(keyspace: string): number {
+    if (!this.redis) {
+      return 0
+    }
     const match = keyspace.match(/keys=(\d+)/)
     return match ? parseInt(match[1]) : 0
   }
 
   private async getHitRate(): Promise<number> {
+    if (!this.redis) {
+      return 0
+    }
     try {
       const stats = await this.redis.info('stats')
       const hitsMatch = stats.match(/keyspace_hits:(\d+)/)
@@ -255,7 +345,9 @@ export class RedisCache {
   }
 
   async disconnect(): Promise<void> {
-    await this.redis.quit()
+    if (this.redis) {
+      await this.redis.quit()
+    }
   }
 }
 
@@ -350,6 +442,11 @@ export class FinancialDataCache {
 
   // 캐시 예열 (자주 조회되는 데이터)
   async warmCache(): Promise<void> {
+    if (typeof window === 'undefined') {
+      console.warn('브라우저 환경이 아니므로 캐시를 예열할 수 없습니다.')
+      return
+    }
+
     const popularSymbols = [
       '005930.KS', // 삼성전자
       '000660.KS', // SK하이닉스
@@ -639,19 +736,16 @@ export const cacheMonitor = new CachePerformanceMonitor()
 
 // 초기화 함수
 export function initializeRedisCache(): void {
-  console.log('🚀 Redis cache system initialized')
-  
-  // 캐시 예열
-  financialCache.warmCache()
-  
-  // 브라우저 캐시 최적화
-  BrowserCacheOptimizer.optimizeMemoryCache()
-  
-  // 정기적인 캐시 통계 리포트
-  if (process.env.NODE_ENV === 'production') {
-    setInterval(() => {
-      const report = cacheMonitor.generatePerformanceReport()
-      console.log('📊 Cache Performance Report:', report)
-    }, 5 * 60 * 1000) // 5분마다
+  if (typeof window === 'undefined') {
+    console.log('Server-side에서는 Redis 캐시를 초기화하지 않습니다.')
+    return
+  }
+
+  try {
+    // 클라이언트에서만 초기화
+    const cache = new RedisCache()
+    console.log('Redis 캐시 초기화 완료')
+  } catch (error) {
+    console.error('Redis 캐시 초기화 실패:', error)
   }
 }

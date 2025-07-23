@@ -34,11 +34,40 @@ class HubSpotFormIntegration {
 
   private async loadBlockedDomains(): Promise<void> {
     try {
-      const response = await fetch('https://hubspotonwebflow.com/assets/js/blockedDomains.json');
+      // 네트워크 요청에 타임아웃 추가
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5초 타임아웃
+      
+      const response = await fetch('https://hubspotonwebflow.com/assets/js/blockedDomains.json', {
+        signal: controller.signal,
+        headers: {
+          'Accept': 'application/json',
+        }
+      });
+      
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
       this.blockedDomains = data;
     } catch (error) {
-      console.error('Error loading blocked domains:', error);
+      console.warn('HubSpot blocked domains 로드 실패, 기본값 사용:', error);
+      // 기본 차단 도메인 목록 사용
+      this.blockedDomains = [
+        '10minutemail.com',
+        'guerrillamail.com',
+        'tempmail.org',
+        'mailinator.com',
+        'yopmail.com',
+        'throwaway.email',
+        'temp-mail.org',
+        'sharklasers.com',
+        'getairmail.com',
+        'mailnesia.com'
+      ];
     }
   }
 

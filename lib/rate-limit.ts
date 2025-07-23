@@ -1,11 +1,75 @@
 import { NextRequest, NextResponse } from 'next/server'
-import NodeCache from 'node-cache'
+// SSR 안전성을 위한 dynamic imports
+let NodeCache: any = null
 
 // In-memory cache for rate limiting (use Redis in production)
-const cache = new NodeCache({ 
-  stdTTL: 60, // 1 minute default TTL
-  checkperiod: 120 // cleanup every 2 minutes
-})
+let cache: any = null
+
+// SSR 안전성을 위한 dynamic imports
+let Ratelimit: any = null
+let Redis: any = null
+
+// SSR 안전성을 위한 dynamic imports
+let authenticator: any = null
+let QRCode: any = null
+
+// SSR 안전한 캐시 초기화
+const initializeCache = async () => {
+  if (typeof window === 'undefined' && !cache) {
+    try {
+      // Server-side에서만 NodeCache 사용
+      const NodeCacheModule = await import('node-cache')
+      NodeCache = NodeCacheModule.default || NodeCacheModule
+      cache = new NodeCache({ 
+        stdTTL: 60, // 1 minute default TTL
+        checkperiod: 120 // cleanup every 2 minutes
+      })
+    } catch (error) {
+      console.error('NodeCache 초기화 실패:', error)
+      // Fallback to simple Map-based cache
+      cache = new Map()
+    }
+  }
+}
+
+// SSR 안전한 Upstash 초기화
+const initializeUpstash = async () => {
+  if (typeof window === 'undefined' && !Ratelimit && !Redis) {
+    try {
+      const upstashRedisModule = await import('@upstash/redis')
+      const upstashRatelimitModule = await import('@upstash/ratelimit')
+      
+      Redis = upstashRedisModule.Redis || upstashRedisModule.default
+      Ratelimit = upstashRatelimitModule.Ratelimit || upstashRatelimitModule.default
+    } catch (error) {
+      console.error('Upstash 초기화 실패:', error)
+      Redis = null
+      Ratelimit = null
+    }
+  }
+}
+
+// SSR 안전한 MFA 패키지 초기화
+const initializeMFAPackages = async () => {
+  if (typeof window === 'undefined' && !authenticator && !QRCode) {
+    try {
+      const otplibModule = await import('otplib')
+      const qrcodeModule = await import('qrcode')
+      
+      authenticator = otplibModule.authenticator || otplibModule.default
+      QRCode = qrcodeModule.default || qrcodeModule
+    } catch (error) {
+      console.error('MFA 패키지 초기화 실패:', error)
+      authenticator = null
+      QRCode = null
+    }
+  }
+}
+
+// 초기화 호출
+initializeCache()
+initializeUpstash()
+initializeMFAPackages()
 
 export interface RateLimitConfig {
   windowMs: number // Time window in milliseconds
@@ -86,10 +150,12 @@ export class RateLimiter {
 // Predefined rate limiters
 export const rateLimiters = {
   // General API rate limit
-  general: new RateLimiter({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    maxRequests: 100 // 100 requests per 15 minutes
-  }),
+  general: Ratelimit && Redis ? new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(100, '1 m'),
+    analytics: true,
+    prefix: 'ratelimit:general',
+  }) : null,
 
   // Contact form rate limit
   contact: new RateLimiter({

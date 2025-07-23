@@ -4,6 +4,7 @@ import { Footer } from '@/components/footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { TrendingUp } from 'lucide-react';
+import { ErrorBoundary } from '@/components/error-boundary';
 
 export const metadata: Metadata = {
   title: '대시보드 | FamilyOffice S',
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
-export default function DashboardPage() {
+// 클라이언트 전용 대시보드 컴포넌트
+const DashboardContent = () => {
   return (
     <div className="min-h-screen bg-background dark:bg-gray-900">
       <Header />
@@ -50,5 +52,31 @@ export default function DashboardPage() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+// 에러 폴백 컴포넌트
+const DashboardErrorFallback = ({ resetError }: { error: Error; resetError: () => void }) => {
+  return (
+    <div className="min-h-screen bg-background dark:bg-gray-900 flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold mb-4">대시보드 로딩 중...</h1>
+        <p className="text-muted-foreground mb-4">잠시만 기다려주세요.</p>
+        <button 
+          onClick={resetError}
+          className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+        >
+          다시 시도
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <ErrorBoundary fallback={DashboardErrorFallback}>
+      <DashboardContent />
+    </ErrorBoundary>
   );
 }

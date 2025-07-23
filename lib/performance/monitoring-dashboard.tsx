@@ -197,7 +197,7 @@ export function PerformanceMonitoringDashboard() {
     if (metrics) {
       checkAlerts(metrics)
     }
-  }, [metrics])
+  }, [metrics, checkAlerts])
 
   const activeAlerts = alerts.filter(alert => !alert.resolved)
   const criticalAlerts = activeAlerts.filter(alert => alert.rule.severity === 'critical')

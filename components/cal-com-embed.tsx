@@ -1,7 +1,6 @@
 'use client'
 
-import Cal, { getCalApi } from "@calcom/embed-react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 interface CalComEmbedProps {
   className?: string
@@ -9,32 +8,40 @@ interface CalComEmbedProps {
 }
 
 export default function CalComEmbed({ className, style }: CalComEmbedProps) {
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ "namespace": "consulting" })
-      cal("ui", {
-        "cssVarsPerTheme": {
-          "light": { "cal-brand": "#000000" },
-          "dark": { "cal-brand": "#ffffff" }
-        },
-        "hideEventTypeDetails": false,
-        "layout": "month_view"
-      })
-    })()
+    // 로딩 상태를 잠시 후 해제
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+
+    return () => clearTimeout(timer)
   }, [])
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center" style={style}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-sm text-muted-foreground">예약 시스템을 불러오는 중...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <Cal
-      namespace="consulting"
-      calLink="familyoffice/consulting"
+    <iframe
+      src="https://cal.com/familyoffice/consulting"
+      width="100%"
+      height="100%"
       style={{
-        width: "100%",
-        height: "100%",
-        overflow: "scroll",
+        border: "none",
+        borderRadius: "8px",
         ...style
       }}
-      config={{ "layout": "month_view" }}
       className={className}
+      title="상담 예약"
     />
   )
 } 

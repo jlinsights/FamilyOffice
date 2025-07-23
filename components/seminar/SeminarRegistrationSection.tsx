@@ -3,7 +3,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 import { 
   UserPlus, 
@@ -20,10 +19,21 @@ import {
 
 export default function SeminarRegistrationSection() {
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({"namespace":"consulting"});
-      cal("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#000000"},"dark":{"cal-brand":"#ffffff"}},"hideEventTypeDetails":false,"layout":"month_view"});
-    })();
+    const loadCalScript = () => {
+      if (typeof window === 'undefined' || (window as any).Cal) return;
+      
+      const script = document.createElement('script');
+      script.src = 'https://app.cal.com/embed/embed.js';
+      script.async = true;
+      script.onload = () => {
+        if ((window as any).Cal) {
+          (window as any).Cal('init', { origin: 'https://cal.com' });
+        }
+      };
+      document.head.appendChild(script);
+    };
+
+    loadCalScript();
   }, []);
 
   const benefits = [
@@ -202,11 +212,12 @@ export default function SeminarRegistrationSection() {
                 </p>
               </div>
               <div className="p-6">
-                <Cal 
-                  namespace="consulting"
-                  calLink="familyoffice/consulting"
+                <div 
+                  className="cal-embed"
+                  data-cal-link="familyoffice/consulting"
+                  data-cal-namespace="consulting"
+                  data-cal-config='{"layout":"month_view"}'
                   style={{width:"100%",height:"600px",overflow:"scroll"}}
-                  config={{"layout":"month_view"}}
                 />
               </div>
             </div>

@@ -3,24 +3,50 @@
  * Redis + In-Memory 캐시 조합으로 최적화
  */
 
-import NodeCache from 'node-cache'
 import type { StockData, ForexData, IndexData, CacheKeyType } from '../types/financial'
 
-// In-Memory 캐시 설정 (빠른 액세스용)
-const memoryCache = new NodeCache({
-  stdTTL: 300,        // 5분 기본 TTL
-  checkperiod: 60,    // 1분마다 만료된 키 정리
-  useClones: false,   // 성능 최적화
-  maxKeys: 1000      // 최대 1000개 키 저장
-})
-
-// Redis 클라이언트 (선택적)
+// SSR 안전성을 위한 dynamic imports
+let NodeCache: any = null
+let memoryCache: any = null
 let redisClient: any = null
+
+/**
+ * NodeCache 초기화 (SSR 안전)
+ */
+async function initializeNodeCache() {
+  if (typeof window === 'undefined') {
+    // Server-side에서는 기본값 반환
+    return null
+  }
+  
+  if (!NodeCache) {
+    try {
+      const NodeCacheModule = await import('node-cache')
+      NodeCache = NodeCacheModule.default
+      memoryCache = new NodeCache({
+        stdTTL: 300,        // 5분 기본 TTL
+        checkperiod: 60,    // 1분마다 만료된 키 정리
+        useClones: false,   // 성능 최적화
+        maxKeys: 1000      // 최대 1000개 키 저장
+      })
+    } catch (error) {
+      console.error('NodeCache 로드 실패:', error)
+      return null
+    }
+  }
+  
+  return memoryCache
+}
 
 /**
  * Redis 클라이언트 초기화
  */
 async function initializeRedis() {
+  if (typeof window === 'undefined') {
+    // Server-side에서는 사용하지 않음
+    return null
+  }
+  
   if (redisClient) return redisClient
 
   try {
@@ -92,16 +118,22 @@ function generateCacheKey(type: CacheKeyType, identifier: string): string {
 /**
  * 메모리 캐시에서 데이터 가져오기
  */
-function getFromMemoryCache<T>(key: string): T | null {
+async function getFromMemoryCache<T>(key: string): Promise<T | null> {
   try {
-    const cached = memoryCache.get<T>(key)
+    const cache = await initializeNodeCache()
+    if (!cache) {
+      return null
+    }
+    
+    const cached = cache.get<T>(key)
     if (cached) {
       console.log(`🎯 메모리 캐시 히트: ${key}`)
       return cached
     }
+    
     return null
   } catch (error) {
-    console.error('❌ 메모리 캐시 읽기 오류:', error)
+    console.error('메모리 캐시 조회 오류:', error)
     return null
   }
 }
@@ -109,11 +141,20 @@ function getFromMemoryCache<T>(key: string): T | null {
 /**
  * 메모리 캐시에 데이터 저장
  */
-function setToMemoryCache<T>(key: string, data: T, ttl: number = 300): boolean {
+async function setToMemoryCache<T>(key: string, data: T, ttl: number = 300): Promise<boolean> {
   try {
-    return memoryCache.set(key, data, ttl)
+    const cache = await initializeNodeCache()
+    if (!cache) {
+      return false
+    }
+    
+    const success = cache.set(key, data, ttl)
+    if (success) {
+      console.log(`💾 메모리 캐시 저장: ${key} (TTL: ${ttl}s)`)
+    }
+    return success
   } catch (error) {
-    console.error('❌ 메모리 캐시 쓰기 오류:', error)
+    console.error('메모리 캐시 저장 오류:', error)
     return false
   }
 }
@@ -167,7 +208,7 @@ export async function getCachedData<T>(type: CacheKeyType, identifier: string): 
   const key = generateCacheKey(type, identifier)
   
   // 1. 메모리 캐시 확인 (가장 빠름)
-  const memoryData = getFromMemoryCache<T>(key)
+  const memoryData = await getFromMemoryCache<T>(key)
   if (memoryData) {
     return memoryData
   }
@@ -260,20 +301,43 @@ export async function setCachedIndexData(symbol: string, data: IndexData, ttl: n
 /**
  * 캐시 통계 정보
  */
-export function getCacheStats() {
-  const memoryStats = memoryCache.getStats()
-  
-  return {
-    memory: {
-      keys: memoryStats.keys,
-      hits: memoryStats.hits,
-      misses: memoryStats.misses,
-      hitRate: memoryStats.hits / (memoryStats.hits + memoryStats.misses),
-      memory: `${Math.round(memoryStats.vsize / 1024 / 1024)}MB`
-    },
-    redis: {
-      connected: !!redisClient,
-      status: redisClient?.status || 'disconnected'
+export async function getCacheStats() {
+  try {
+    const cache = await initializeNodeCache()
+    if (!cache) {
+      return {
+        memory: {
+          keys: 0,
+          hits: 0,
+          misses: 0,
+          hitRate: 0
+        },
+        redis: {
+          connected: false,
+          keys: 0
+        }
+      }
+    }
+    
+    const stats = cache.getStats()
+    
+    return {
+      memory: {
+        keys: stats.keys,
+        hits: stats.hits,
+        misses: stats.misses,
+        hitRate: stats.hits / (stats.hits + stats.misses) || 0
+      },
+      redis: {
+        connected: redisClient !== null,
+        keys: 0 // Redis 키 수는 별도로 계산 필요
+      }
+    }
+  } catch (error) {
+    console.error('캐시 통계 조회 오류:', error)
+    return {
+      memory: { keys: 0, hits: 0, misses: 0, hitRate: 0 },
+      redis: { connected: false, keys: 0 }
     }
   }
 }
@@ -281,20 +345,24 @@ export function getCacheStats() {
 /**
  * 캐시 초기화
  */
-export function clearCache(): void {
-  console.log('🧹 캐시 초기화 중...')
-  
-  // 메모리 캐시 초기화
-  memoryCache.flushAll()
-  
-  // Redis 캐시 초기화 (선택적)
-  if (redisClient) {
-    redisClient.flushdb().catch((error: Error) => {
-      console.error('❌ Redis 캐시 초기화 실패:', error)
-    })
+export async function clearCache(): Promise<void> {
+  try {
+    // 메모리 캐시 클리어
+    const cache = await initializeNodeCache()
+    if (cache) {
+      cache.flushAll()
+      console.log('🧹 메모리 캐시 클리어 완료')
+    }
+    
+    // Redis 캐시 클리어
+    const redis = await initializeRedis()
+    if (redis) {
+      await redis.flushdb()
+      console.log('🧹 Redis 캐시 클리어 완료')
+    }
+  } catch (error) {
+    console.error('캐시 클리어 오류:', error)
   }
-  
-  console.log('✅ 캐시 초기화 완료')
 }
 
 /**

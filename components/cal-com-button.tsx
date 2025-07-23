@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Calendar } from 'lucide-react'
-import { getCalApi } from '@calcom/embed-react'
 
 interface CalComButtonProps {
   calLink?: string
@@ -21,23 +20,41 @@ export function CalComButton({
   size = 'lg'
 }: CalComButtonProps) {
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ "namespace": "consulting" })
-      cal("ui", {
-        "cssVarsPerTheme": {
-          "light": { "cal-brand": "#000000" },
-          "dark": { "cal-brand": "#ffffff" }
-        },
-        "hideEventTypeDetails": false,
-        "layout": "month_view"
-      })
-    })()
+    // Cal.com 스크립트 로드
+    const loadCalScript = () => {
+      if (typeof window === 'undefined' || (window as any).Cal) return
+
+      const script = document.createElement('script')
+      script.src = 'https://app.cal.com/embed/embed.js'
+      script.async = true
+      script.onload = () => {
+        if ((window as any).Cal) {
+          (window as any).Cal('init', {
+            origin: 'https://cal.com'
+          })
+        }
+      }
+      document.head.appendChild(script)
+    }
+
+    loadCalScript()
   }, [])
 
   const handleClick = () => {
+    if (typeof window === 'undefined') return
+
     // Cal.com 팝업 열기
-    if (typeof window !== 'undefined' && (window as any).Cal) {
-      (window as any).Cal('ns.consulting', 'open', { calLink })
+    if ((window as any).Cal) {
+      try {
+        (window as any).Cal('open', { calLink })
+      } catch (error) {
+        console.error('Cal.com 팝업 열기 실패:', error)
+        // 폴백: 외부 링크로 이동
+        window.open(`https://cal.com/${calLink}`, '_blank')
+      }
+    } else {
+      // Cal API가 없으면 외부 링크로 이동
+      window.open(`https://cal.com/${calLink}`, '_blank')
     }
   }
 

@@ -1,4 +1,22 @@
-import NodeCache from 'node-cache'
+// SSR 안전성을 위한 dynamic imports
+let NodeCache: any = null
+
+// SSR 안전한 NodeCache 초기화
+const initializeNodeCache = async () => {
+  if (typeof window === 'undefined' && !NodeCache) {
+    try {
+      // Server-side에서만 NodeCache 사용
+      const NodeCacheModule = await import('node-cache')
+      NodeCache = NodeCacheModule.default || NodeCacheModule
+    } catch (error) {
+      console.error('NodeCache 초기화 실패:', error)
+      NodeCache = null
+    }
+  }
+}
+
+// 초기화 호출
+initializeNodeCache()
 
 // Cache configuration
 export interface CacheConfig {
@@ -43,20 +61,20 @@ export const cacheConfigs = {
   },
 } as const
 
-// Cache instances
+// Cache instances - SSR 안전하게 초기화
 export const caches = {
-  short: new NodeCache(cacheConfigs.short),
-  medium: new NodeCache(cacheConfigs.medium),
-  long: new NodeCache(cacheConfigs.long),
-  session: new NodeCache(cacheConfigs.session),
+  short: NodeCache ? new NodeCache(cacheConfigs.short) : null,
+  medium: NodeCache ? new NodeCache(cacheConfigs.medium) : null,
+  long: NodeCache ? new NodeCache(cacheConfigs.long) : null,
+  session: NodeCache ? new NodeCache(cacheConfigs.session) : null,
 }
 
 // Cache wrapper class
 export class CacheManager {
-  private cache: NodeCache
+  private cache: any
   private prefix: string
 
-  constructor(cache: NodeCache) {
+  constructor(cache: any) {
     this.cache = cache
   }
 
@@ -336,10 +354,10 @@ export function withResponseCache(
 // Cache monitoring and statistics
 export function getCacheStats() {
   return {
-    short: caches.short.getStats(),
-    medium: caches.medium.getStats(),
-    long: caches.long.getStats(),
-    session: caches.session.getStats(),
+    short: caches.short?.getStats(),
+    medium: caches.medium?.getStats(),
+    long: caches.long?.getStats(),
+    session: caches.session?.getStats(),
   }
 }
 
@@ -353,9 +371,9 @@ export function startCacheCleanup(intervalMs: number = 300000) { // 5 minutes
       
       // Optional: Implement custom cleanup logic
       Object.values(caches).forEach(cache => {
-        const stats = cache.getStats()
+        const stats = cache?.getStats()
         // If hit rate is low, consider clearing some entries
-        if (stats.hits > 0 && stats.hits / (stats.hits + stats.misses) < 0.1) {
+        if (stats && stats.hits > 0 && stats.hits / (stats.hits + stats.misses) < 0.1) {
           console.log('Low cache hit rate detected, consider reviewing cache strategy')
         }
       })

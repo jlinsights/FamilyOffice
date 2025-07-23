@@ -4,7 +4,25 @@
  */
 
 import { performance } from 'perf_hooks'
-import WebSocket from 'ws'
+// SSR 안전성을 위한 dynamic imports
+let WebSocket: any = null
+
+// SSR 안전한 WebSocket 초기화
+const initializeWebSocket = async () => {
+  if (typeof window === 'undefined' && !WebSocket) {
+    try {
+      // Server-side에서만 WebSocket 사용
+      const wsModule = await import('ws')
+      WebSocket = wsModule.default || wsModule
+    } catch (error) {
+      console.error('WebSocket 초기화 실패:', error)
+      WebSocket = null
+    }
+  }
+}
+
+// 초기화 호출
+initializeWebSocket()
 
 // 부하 테스트 설정
 interface LoadTestConfig {
@@ -69,7 +87,7 @@ class VirtualUser {
   private config: LoadTestConfig
   private results: TestResult[] = []
   private isRunning = false
-  private ws: WebSocket | null = null
+  private ws: any | null = null
 
   constructor(id: string, config: LoadTestConfig) {
     this.id = id
@@ -199,8 +217,15 @@ class VirtualUser {
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       const wsUrl = step.url.replace('http', 'ws')
-      this.ws = new WebSocket(wsUrl)
+      this.ws = WebSocket ? new WebSocket(wsUrl) : null
       
+      if (!this.ws) {
+        this.recordResult(scenarioName, step.name, 'failure', performance.now() - startTime, {
+          error: 'WebSocket 초기화 실패'
+        })
+        return reject(new Error('WebSocket 초기화 실패'))
+      }
+
       const timeout = setTimeout(() => {
         this.ws?.close()
         this.recordResult(scenarioName, step.name, 'timeout', performance.now() - startTime)

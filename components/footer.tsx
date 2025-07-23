@@ -2,28 +2,13 @@ import Link from "next/link"
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Sparkles, TrendingUp, Users, Award, Shield } from "lucide-react"
 import { FamilyOfficeLogo } from "@/components/logo"
 import NewsletterSignup from "./newsletter-signup"
-import Script from "next/script"
+import { ClientScripts } from "./client-scripts"
 
 export function Footer() {
   return (
     <>
-      {/* 외부 스크립트들 */}
-      {/* HubSpot Embed Code */}
-      <Script
-        id="hs-script-loader"
-        strategy="afterInteractive"
-        src="//js.hs-scripts.com/43932435.js"
-      />
-      
-      {/* Google Tag Manager (noscript) */}
-      <noscript>
-        <iframe 
-          src="https://www.googletagmanager.com/ns.html?id=GTM-MP3HPPMN"
-          height="0" 
-          width="0" 
-          style={{ display: 'none', visibility: 'hidden' }}
-        />
-      </noscript>
+      {/* 클라이언트 전용 스크립트들 */}
+      <ClientScripts />
 
       <footer className="border-t border-border/40 bg-gradient-to-b from-muted/30 to-muted/50 dark:from-muted/20 dark:to-muted/40">
         <div className="container section-sm">

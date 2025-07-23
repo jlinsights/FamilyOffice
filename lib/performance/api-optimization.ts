@@ -4,9 +4,31 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { Ratelimit } from '@upstash/ratelimit'
-import { Redis } from '@upstash/redis'
+// SSR 안전성을 위한 dynamic imports
+let Ratelimit: any = null
+let Redis: any = null
 import { Agent } from 'https'
+
+// SSR 안전한 Upstash 초기화
+const initializeUpstash = async () => {
+  if (typeof window === 'undefined' && !Ratelimit && !Redis) {
+    try {
+      // Server-side에서만 Upstash 사용
+      const upstashRedisModule = await import('@upstash/redis')
+      const upstashRatelimitModule = await import('@upstash/ratelimit')
+      
+      Redis = upstashRedisModule.Redis || upstashRedisModule.default
+      Ratelimit = upstashRatelimitModule.Ratelimit || upstashRatelimitModule.default
+    } catch (error) {
+      console.error('Upstash 초기화 실패:', error)
+      Redis = null
+      Ratelimit = null
+    }
+  }
+}
+
+// 초기화 호출
+initializeUpstash()
 
 // 함수 타입 정의
 type ApiHandler = (req: Request, params?: any) => Promise<Response>
@@ -20,53 +42,53 @@ export const httpsAgent = new Agent({
   freeSocketTimeout: 30000,
 })
 
-// Redis 기반 속도 제한
-const redis = new Redis({
+// Redis 기반 속도 제한 - SSR 안전하게 초기화
+const redis = Redis ? new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL!,
   token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-})
+}) : null
 
-// 다양한 속도 제한 전략
+// 다양한 속도 제한 전략 - SSR 안전하게 초기화
 export const rateLimiters = {
   // 일반 API (분당 100회)
-  general: new Ratelimit({
+  general: Ratelimit && redis ? new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(100, '1 m'),
     analytics: true,
     prefix: 'ratelimit:general',
-  }),
+  }) : null,
 
   // 금융 데이터 API (분당 300회)
-  financial: new Ratelimit({
+  financial: Ratelimit && redis ? new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(300, '1 m'),
     analytics: true,
     prefix: 'ratelimit:financial',
-  }),
+  }) : null,
 
   // 인증 API (분당 10회)
-  auth: new Ratelimit({
+  auth: Ratelimit && redis ? new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(10, '1 m'),
     analytics: true,
     prefix: 'ratelimit:auth',
-  }),
+  }) : null,
 
   // 리포트 생성 (시간당 50회)
-  reports: new Ratelimit({
+  reports: Ratelimit && redis ? new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(50, '1 h'),
     analytics: true,
     prefix: 'ratelimit:reports',
-  }),
+  }) : null,
 
   // 프리미엄 사용자 (분당 1000회)
-  premium: new Ratelimit({
+  premium: Ratelimit && redis ? new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(1000, '1 m'),
     analytics: true,
     prefix: 'ratelimit:premium',
-  }),
+  }) : null,
 }
 
 // 사용자 등급별 속도 제한
@@ -479,7 +501,7 @@ export function withResponseCaching(
     
     // 캐시된 응답 확인
     try {
-      const cached = await redis.get(key)
+      const cached = await redis?.get(key)
       if (cached) {
         console.log(`📦 Cache HIT for ${key}`)
         const response = new NextResponse(cached.body, {
@@ -506,7 +528,7 @@ export function withResponseCaching(
           headers: Object.fromEntries(response.headers.entries()),
         }
         
-        await redis.setex(key, ttl, JSON.stringify(cacheData))
+        await redis?.setex(key, ttl, JSON.stringify(cacheData))
         console.log(`📦 Cache SET for ${key}`)
         
         // 새로운 응답 객체 생성 (body를 읽었으므로)
@@ -572,7 +594,7 @@ export function optimizeAPI(config: {
       
       optimizedHandler = async (req: NextRequest) => {
         const ip = req.ip || req.headers.get('x-forwarded-for') || 'unknown'
-        const { success, limit, remaining, reset } = await rateLimiter.limit(ip)
+        const { success, limit, remaining, reset } = await rateLimiter?.limit(ip)
         
         if (!success) {
           return new NextResponse(
@@ -629,7 +651,7 @@ export function getGlobalPerformanceStats() {
 export async function cleanup(): Promise<void> {
   await dbConnectionPool.closeAll()
   // Redis 연결 정리
-  await redis.quit?.()
+  await redis?.quit?.()
   console.log('🧹 API optimization cleanup completed')
 }
 
