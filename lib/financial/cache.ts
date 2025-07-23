@@ -125,7 +125,7 @@ async function getFromMemoryCache<T>(key: string): Promise<T | null> {
       return null
     }
     
-    const cached = cache.get<T>(key)
+    const cached = cache.get(key) as T | undefined
     if (cached) {
       console.log(`🎯 메모리 캐시 히트: ${key}`)
       return cached

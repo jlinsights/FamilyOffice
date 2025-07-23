@@ -29,6 +29,20 @@ class SimpleMemoryCache {
   flushAll() {
     this.cache.clear()
   }
+  
+  getStats() {
+    const now = Date.now()
+    const totalKeys = this.cache.size
+    const expiredKeys = Array.from(this.cache.entries()).filter(([_, item]) => now > item.expiry).length
+    
+    return {
+      hits: 0, // SimpleMemoryCache doesn't track hits
+      misses: 0, // SimpleMemoryCache doesn't track misses
+      keys: totalKeys,
+      expired: expiredKeys,
+      size: totalKeys
+    }
+  }
 }
 
 // SSR 안전한 캐시 생성
@@ -98,8 +112,9 @@ export class CacheManager {
   private cache: any
   private prefix: string
 
-  constructor(cache: any) {
+  constructor(cache: any, prefix?: string) {
     this.cache = cache
+    this.prefix = prefix || ''
   }
 
   private getKey(key: string): string {
@@ -108,7 +123,7 @@ export class CacheManager {
 
   async get<T>(key: string): Promise<T | undefined> {
     try {
-      const result = this.cache.get<T>(this.getKey(key))
+      const result = this.cache.get(this.getKey(key)) as T
       return result
     } catch (error) {
       console.error('Cache get error:', error)
@@ -148,7 +163,7 @@ export class CacheManager {
       if (this.prefix) {
         // Clear only keys with this prefix
         const keys = this.cache.keys()
-        const prefixedKeys = keys.filter(key => key.startsWith(this.prefix))
+        const prefixedKeys = keys.filter((key: string) => key.startsWith(this.prefix))
         this.cache.del(prefixedKeys)
       } else {
         this.cache.flushAll()

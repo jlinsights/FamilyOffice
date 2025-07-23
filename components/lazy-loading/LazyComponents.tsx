@@ -77,7 +77,7 @@ export const LazyForexCard = dynamic(
 
 // Cal.com components with lazy loading
 export const LazyCalComInline = dynamic(
-  () => import('@/components/cal-com-inline'),
+  () => import('@/components/cal-com-inline').then(mod => ({ default: mod.CalComInline })),
   {
     loading: () => (
       <div className="h-96 flex items-center justify-center">
@@ -89,7 +89,7 @@ export const LazyCalComInline = dynamic(
 )
 
 export const LazyCalComAdvanced = dynamic(
-  () => import('@/components/cal-com-advanced'),
+  () => import('@/components/cal-com-advanced').then(mod => ({ default: mod.CalComAdvanced })),
   {
     loading: () => <ComponentSkeleton />,
     ssr: false,
