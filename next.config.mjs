@@ -20,12 +20,10 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
     optimizeCss: true,
-    // React Server Components 최적화
-    serverComponentsExternalPackages: ['@clerk/nextjs'],
   },
   
   // 서버 외부 패키지 (Clerk 관련 문제 해결)
-  serverExternalPackages: ['@clerk/nextjs'],
+  serverExternalPackages: ['@clerk/nextjs', 'yahoo-finance2'],
   
   // 컴파일러 최적화
   compiler: {
@@ -62,7 +60,25 @@ const nextConfig = {
         fs: false,
         net: false,
         tls: false,
+        crypto: false,
+        stream: false,
+        url: false,
+        zlib: false,
+        http: false,
+        https: false,
+        assert: false,
+        os: false,
+        path: false,
+        'querystringify': false,
+        'requires-port': false,
+        'punycode/': false,
       }
+    }
+
+    // yahoo-finance2 관련 모듈 처리
+    config.externals = config.externals || []
+    if (!isServer) {
+      config.externals.push('yahoo-finance2')
     }
 
     // 청크 분할 최적화 (단순화)

@@ -9,8 +9,9 @@ let yahooFinance: any = null;
 
 // Dynamic import for SSR safety
 const loadYahooFinance = async () => {
-  if (typeof window === 'undefined') {
-    // Server-side에서는 사용하지 않음
+  // 서버 사이드에서만 로드
+  if (typeof window !== 'undefined') {
+    console.warn('Yahoo Finance는 서버 사이드에서만 사용됩니다.');
     return null;
   }
   
