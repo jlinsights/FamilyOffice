@@ -4,7 +4,7 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   
   // 이미지 최적화 강화
@@ -16,15 +16,15 @@ const nextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30일 캐시
   },
   
-  // 실험적 기능 확장
+  // 실험적 기능 확장 (안정성을 위해 일부 비활성화)
   experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    optimizePackageImports: ['lucide-react'],
     optimizeCss: true,
-    optimizeServerReact: true,
-    memoryBasedWorkersCount: true,
+    // React Server Components 최적화
+    serverComponentsExternalPackages: ['@clerk/nextjs'],
   },
   
-  // 서버 외부 패키지
+  // 서버 외부 패키지 (Clerk 관련 문제 해결)
   serverExternalPackages: ['@clerk/nextjs'],
   
   // 컴파일러 최적화
@@ -37,7 +37,7 @@ const nextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
   
-  // 웹팩 설정 최적화
+  // 웹팩 설정 최적화 (단순화)
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // backend 디렉토리 제외 (개발 환경에서는 제거)
     if (!dev) {
@@ -55,7 +55,17 @@ const nextConfig = {
       }
     }
 
-    // 청크 분할 최적화
+    // React Server Components 관련 설정
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      }
+    }
+
+    // 청크 분할 최적화 (단순화)
     if (!isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
@@ -80,13 +90,6 @@ const nextConfig = {
             name: 'auth-lib',
             test: /[\\/]node_modules[\\/](@clerk)[\\/]/,
             priority: 25,
-            enforce: true,
-          },
-          // 차트 라이브러리
-          charts: {
-            name: 'charts-lib',
-            test: /[\\/]node_modules[\\/](recharts|d3)[\\/]/,
-            priority: 20,
             enforce: true,
           },
           // 외부 라이브러리
@@ -226,14 +229,6 @@ const nextConfig = {
   // 환경 변수
   env: {
     CUSTOM_KEY: process.env.NODE_ENV,
-  },
-  
-  // Global dynamic rendering configuration
-  experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-    optimizeCss: true,
-    optimizeServerReact: true,
-    memoryBasedWorkersCount: true,
   },
 }
 
