@@ -1,10 +1,9 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ConsultationForm } from "@/components/forms/consultation-form"
-import { CalComButton } from "@/components/cal-com-button"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { MapPin, Phone, Mail, Clock, Users, Shield, Award, ArrowRight } from "lucide-react"
+import { MapPin, Phone, Mail, Clock, Users, Shield, Award, ArrowRight, Calendar } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
 
@@ -35,7 +34,7 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "이메일 문의",
-      content: "info@familyoffices.vip",
+      content: "cs@familyoffices.vip",
       description: "24시간 내 답변을 약속드립니다"
     },
     {
@@ -325,12 +324,16 @@ export default function ContactPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CalComButton
-                calLink="familyoffice/consultation"
-                buttonText="지금 바로 예약"
+              <Button
                 size="lg"
-                className="bg-primary-foreground text-primary hover:bg-white hover:text-primary shadow-lg hover:shadow-xl"
-              />
+                className="bg-primary-foreground text-primary hover:bg-white hover:text-primary shadow-lg hover:shadow-xl font-bold"
+                asChild
+              >
+                <a href="https://cal.com/familyoffice/consultation" target="_blank" rel="noopener noreferrer">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  지금 바로 예약
+                </a>
+              </Button>
               <Button
                 size="lg"
                 variant="outline"

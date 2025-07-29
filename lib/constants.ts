@@ -1,11 +1,26 @@
-import { ServiceItem, NavigationItem } from "@/types/globals"
+import { ServiceItem, NavigationItem, NavigationSubItem } from "@/types/globals"
 import { WealthManagementIcon, InheritanceIcon, TaxLegalIcon } from "@/components/icons/service-icons"
 
 // 네비게이션 메뉴 데이터
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: "/about", label: "소개" },
   { href: "/services", label: "서비스" },
-  { href: "/program", label: "프로그램" },
+  { 
+    href: "/program", 
+    label: "프로그램",
+    submenu: [
+      {
+        href: "/program",
+        label: "프로그램 전체",
+        description: "모든 교육 프로그램 및 세미나 정보"
+      },
+      {
+        href: "/program/100-years-ceo",
+        label: "100년 기업 차세대 CEO 과정",
+        description: "지속가능한 경영을 위한 특별 과정"
+      }
+    ]
+  },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
