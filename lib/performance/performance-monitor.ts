@@ -317,7 +317,7 @@ export const withPerformanceMeasurement = <T extends object>(
       }
     }, [])
 
-    return React.createElement(Component, { ...props, ref })
+    return React.createElement(Component, { ...(props as T), ref })
   })
 
   PerformanceWrapper.displayName = `withPerformanceMeasurement(${componentName})`

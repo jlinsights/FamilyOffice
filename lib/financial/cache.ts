@@ -14,8 +14,8 @@ let redisClient: any = null
  * NodeCache 초기화 (SSR 안전)
  */
 async function initializeNodeCache() {
-  if (typeof window === 'undefined') {
-    // Server-side에서는 기본값 반환
+  if (typeof window !== 'undefined') {
+    // Client-side에서는 기본값 반환
     return null
   }
   
@@ -42,8 +42,8 @@ async function initializeNodeCache() {
  * Redis 클라이언트 초기화
  */
 async function initializeRedis() {
-  if (typeof window === 'undefined') {
-    // Server-side에서는 사용하지 않음
+  if (typeof window !== 'undefined') {
+    // Client-side에서는 사용하지 않음
     return null
   }
   

@@ -3,6 +3,8 @@
  * Real-time price updates: <100ms latency 목표
  */
 
+import { logger } from '../logger'
+
 // SSR 안전성을 위한 dynamic imports
 let Redis: any = null
 let compress: any = null
@@ -19,8 +21,8 @@ export class RedisCache {
   }
 
   private async initializeRedis() {
-    if (typeof window === 'undefined') {
-      // Server-side에서는 사용하지 않음
+    if (typeof window !== 'undefined') {
+      // Client-side에서는 사용하지 않음
       return
     }
 
@@ -32,16 +34,13 @@ export class RedisCache {
       }
       
       if (!compress || !decompress) {
-        try {
-          // Use eval to prevent TypeScript from checking the module at build time
-          const lz4Module = await eval('import("lz4")')
-          compress = lz4Module.compress
-          decompress = lz4Module.decompress
-        } catch {
-          console.warn('LZ4 compression not available, using default serialization')
-          compress = (data: any) => JSON.stringify(data)
-          decompress = (data: any) => JSON.parse(data.toString())
-        }
+        // Fallback to default serialization (LZ4 compression disabled for compatibility)
+        logger.warn('Using default JSON serialization (LZ4 compression disabled)', {
+          component: 'RedisCache',
+          function: 'initializeRedis'
+        })
+        compress = (data: any) => JSON.stringify(data)
+        decompress = (data: any) => JSON.parse(data.toString())
       }
 
       this.redis = new Redis({
@@ -64,35 +63,54 @@ export class RedisCache {
 
       this.setupEventHandlers()
     } catch (error) {
-      console.error('Redis 초기화 실패:', error)
+      logger.error('Redis 초기화 실패', error as Error, {
+        component: 'RedisCache',
+        function: 'initializeRedis'
+      })
       this.redis = null
     }
   }
 
   private setupEventHandlers() {
     if (!this.redis) {
-      console.warn('Redis 클라이언트가 초기화되지 않았습니다. 이벤트 핸들러를 설정할 수 없습니다.')
+      logger.warn('Redis 클라이언트가 초기화되지 않음', {
+        component: 'RedisCache',
+        function: 'setupEventHandlers'
+      })
       return
     }
 
     this.redis.on('connect', () => {
-      console.log('✅ Redis connected')
+      logger.info('Redis connected', {
+        component: 'RedisCache',
+        function: 'onConnect'
+      })
     })
 
     this.redis.on('error', (error: any) => {
-      console.error('❌ Redis error:', error)
+      logger.error('Redis error', error, {
+        component: 'RedisCache',
+        function: 'onError'
+      })
       // Fallback to in-memory cache
     })
 
     this.redis.on('close', () => {
-      console.warn('⚠️ Redis connection closed')
+      logger.warn('Redis connection closed', {
+        component: 'RedisCache',
+        function: 'onClose'
+      })
     })
   }
 
   // 압축된 데이터 저장
   async set(key: string, value: any, ttl: number = 300): Promise<boolean> {
     if (!this.redis) {
-      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 저장할 수 없습니다.')
+      logger.error('Redis 클라이언트가 초기화되지 않음 - fallback cache 사용', undefined, {
+        component: 'RedisCache',
+        function: 'set',
+        key
+      })
       this.fallbackCache.set(key, {
         value,
         expires: Date.now() + (ttl * 1000)
@@ -116,7 +134,11 @@ export class RedisCache {
 
       return result === 'OK'
     } catch (error) {
-      console.error('Redis set error:', error)
+      logger.error('Redis set error - using fallback cache', error as Error, {
+        component: 'RedisCache',
+        function: 'set',
+        key
+      })
       // Fallback to memory cache
       this.fallbackCache.set(key, {
         value,
@@ -129,7 +151,11 @@ export class RedisCache {
   // 압축 해제된 데이터 조회
   async get<T>(key: string): Promise<T | null> {
     if (!this.redis) {
-      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 조회할 수 없습니다.')
+      logger.error('Redis 클라이언트가 초기화되지 않음 - fallback cache 사용', undefined, {
+        component: 'RedisCache',
+        function: 'get',
+        key
+      })
       const fallback = this.fallbackCache.get(key)
       if (fallback && fallback.expires > Date.now()) {
         return fallback.value
@@ -152,7 +178,11 @@ export class RedisCache {
 
       return parsed
     } catch (error) {
-      console.error('Redis get error:', error)
+      logger.error('Redis get error - using fallback cache', error as Error, {
+        component: 'RedisCache',
+        function: 'get',
+        key
+      })
       // Fallback to memory cache
       const fallback = this.fallbackCache.get(key)
       if (fallback && fallback.expires > Date.now()) {
@@ -165,7 +195,11 @@ export class RedisCache {
   // 배치 데이터 조회 (파이프라인 사용)
   async mget<T>(keys: string[]): Promise<Record<string, T | null>> {
     if (!this.redis) {
-      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 조회할 수 없습니다.')
+      logger.error('Redis 클라이언트가 초기화되지 않음 - mget 실패', undefined, {
+        component: 'RedisCache',
+        function: 'mget',
+        keyCount: keys.length
+      })
       return {}
     }
 
@@ -198,7 +232,11 @@ export class RedisCache {
 
       return data
     } catch (error) {
-      console.error('Redis mget error:', error)
+      logger.error('Redis mget error', error as Error, {
+        component: 'RedisCache',
+        function: 'mget',
+        keyCount: keys.length
+      })
       return {}
     }
   }
@@ -206,7 +244,11 @@ export class RedisCache {
   // 배치 데이터 저장
   async mset(pairs: Array<{key: string; value: any; ttl?: number}>): Promise<boolean> {
     if (!this.redis) {
-      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 저장할 수 없습니다.')
+      logger.error('Redis 클라이언트가 초기화되지 않음 - mset 실패', undefined, {
+        component: 'RedisCache',
+        function: 'mset',
+        pairCount: pairs.length
+      })
       return false
     }
 
@@ -229,7 +271,11 @@ export class RedisCache {
       const results = await pipeline.exec()
       return results?.every((result: any) => result[1] === 'OK') || false
     } catch (error) {
-      console.error('Redis mset error:', error)
+      logger.error('Redis mset error', error as Error, {
+        component: 'RedisCache',
+        function: 'mset',
+        pairCount: pairs.length
+      })
       return false
     }
   }
@@ -237,7 +283,11 @@ export class RedisCache {
   // 패턴 기반 키 삭제
   async deletePattern(pattern: string): Promise<number> {
     if (!this.redis) {
-      console.error('Redis 클라이언트가 초기화되지 않았습니다. 키를 삭제할 수 없습니다.')
+      logger.error('Redis 클라이언트가 초기화되지 않음 - 키 삭제 실패', undefined, {
+        component: 'RedisCache',
+        function: 'deletePattern',
+        pattern
+      })
       return 0
     }
 
@@ -248,7 +298,11 @@ export class RedisCache {
       }
       return 0
     } catch (error) {
-      console.error('Redis delete pattern error:', error)
+      logger.error('Redis delete pattern error', error as Error, {
+        component: 'RedisCache',
+        function: 'deletePattern',
+        pattern
+      })
       return 0
     }
   }
@@ -256,22 +310,34 @@ export class RedisCache {
   // 실시간 데이터 발행/구독
   async publish(channel: string, data: any): Promise<number> {
     if (!this.redis) {
-      console.error('Redis 클라이언트가 초기화되지 않았습니다. 데이터를 발행할 수 없습니다.')
+      logger.error('Redis 클라이언트가 초기화되지 않음 - publish 실패', undefined, {
+        component: 'RedisCache',
+        function: 'publish',
+        channel
+      })
       return 0
     }
 
     try {
       return await this.redis.publish(channel, JSON.stringify(data))
     } catch (error) {
-      console.error('Redis publish error:', error)
+      logger.error('Redis publish error', error as Error, {
+        component: 'RedisCache',
+        function: 'publish',
+        channel
+      })
       return 0
     }
   }
 
   // 구독 설정
   subscribe(channel: string, callback: (data: any) => void): void {
-    if (typeof window === 'undefined') {
-      console.warn('브라우저 환경이 아니므로 Redis 구독을 설정할 수 없습니다.')
+    if (typeof window !== 'undefined') {
+      logger.warn('브라우저 환경에서는 Redis 구독 설정 불가', {
+        component: 'RedisCache',
+        function: 'subscribe',
+        channel
+      })
       return
     }
 
@@ -288,7 +354,11 @@ export class RedisCache {
           const data = JSON.parse(message)
           callback(data)
         } catch (error) {
-          console.error('Redis message parse error:', error)
+          logger.error('Redis message parse error', error as Error, {
+            component: 'RedisCache',
+            function: 'subscribe',
+            channel
+          })
         }
       }
     })
@@ -297,7 +367,10 @@ export class RedisCache {
   // 캐시 통계
   async getStats() {
     if (!this.redis) {
-      console.error('Redis 클라이언트가 초기화되지 않았습니다. 통계를 가져올 수 없습니다.')
+      logger.error('Redis 클라이언트가 초기화되지 않음 - 통계 조회 실패', undefined, {
+        component: 'RedisCache',
+        function: 'getStats'
+      })
       return null
     }
 
@@ -312,7 +385,10 @@ export class RedisCache {
         connected: this.redis.status === 'ready'
       }
     } catch (error) {
-      console.error('Redis stats error:', error)
+      logger.error('Redis stats error', error as Error, {
+        component: 'RedisCache',
+        function: 'getStats'
+      })
       return null
     }
   }
@@ -449,8 +525,11 @@ export class FinancialDataCache {
 
   // 캐시 예열 (자주 조회되는 데이터)
   async warmCache(): Promise<void> {
-    if (typeof window === 'undefined') {
-      console.warn('브라우저 환경이 아니므로 캐시를 예열할 수 없습니다.')
+    if (typeof window !== 'undefined') {
+      logger.warn('브라우저 환경에서는 캐시 예열 불가', {
+        component: 'FinancialDataCache',
+        function: 'warmCache'
+      })
       return
     }
 
@@ -462,7 +541,11 @@ export class FinancialDataCache {
       'TSLA',      // Tesla
     ]
 
-    console.log('🔥 Warming cache for popular symbols...')
+    logger.info('Warming cache for popular symbols', {
+      component: 'FinancialDataCache',
+      function: 'warmCache',
+      symbolCount: popularSymbols.length
+    })
     
     // 외부 API에서 최신 데이터 가져와서 캐시
     // 실제 구현시 외부 API 호출 추가
@@ -520,7 +603,12 @@ export class CDNCacheManager {
   async purgeCache(urls: string[]): Promise<boolean> {
     try {
       // CDN 제공업체별 구현 (예: CloudFlare, AWS CloudFront)
-      console.log('Purging CDN cache for URLs:', urls)
+      logger.info('Purging CDN cache', {
+        component: 'CDNCacheManager',
+        function: 'purgeCache',
+        urlCount: urls.length,
+        urls
+      })
       
       // CloudFlare API 예시
       if (process.env.CLOUDFLARE_API_TOKEN) {
@@ -538,7 +626,11 @@ export class CDNCacheManager {
       
       return true
     } catch (error) {
-      console.error('CDN cache purge error:', error)
+      logger.error('CDN cache purge error', error as Error, {
+        component: 'CDNCacheManager',
+        function: 'purgeCache',
+        urlCount: urls.length
+      })
       return false
     }
   }
@@ -743,16 +835,25 @@ export const cacheMonitor = new CachePerformanceMonitor()
 
 // 초기화 함수
 export function initializeRedisCache(): void {
-  if (typeof window === 'undefined') {
-    console.log('Server-side에서는 Redis 캐시를 초기화하지 않습니다.')
+  if (typeof window !== 'undefined') {
+    logger.debug('Client-side에서는 Redis 캐시 초기화 제외', {
+      component: 'redis-cache',
+      function: 'initializeRedisCache'
+    })
     return
   }
 
   try {
-    // 클라이언트에서만 초기화
+    // 서버에서만 초기화
     new RedisCache()
-    console.log('Redis 캐시 초기화 완료')
+    logger.info('Redis 캐시 초기화 완료', {
+      component: 'redis-cache',
+      function: 'initializeRedisCache'
+    })
   } catch (error) {
-    console.error('Redis 캐시 초기화 실패:', error)
+    logger.error('Redis 캐시 초기화 실패', error as Error, {
+      component: 'redis-cache',
+      function: 'initializeRedisCache'
+    })
   }
 }

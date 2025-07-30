@@ -180,7 +180,7 @@ export const withLazyLoading = <T extends object>(
 
     return (
       <div ref={elementRef}>
-        {isVisible ? <Component {...props} /> : React.createElement(fallback)}
+        {isVisible ? <Component {...(props as T)} /> : React.createElement(fallback)}
       </div>
     )
   })

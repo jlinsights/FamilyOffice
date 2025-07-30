@@ -3,8 +3,8 @@
  * API response time: <500ms for 95th percentile 목표
  */
 
-
 import { NextRequest, NextResponse } from 'next/server'
+import { logger } from '../logger'
 // SSR 안전성을 위한 dynamic imports
 let Ratelimit: any = null
 let Redis: any = null
@@ -18,10 +18,13 @@ export const initializeUpstash = async () => {
       const upstashRedisModule = await import('@upstash/redis')
       const upstashRatelimitModule = await import('@upstash/ratelimit')
       
-      Redis = upstashRedisModule.Redis || upstashRedisModule.default
-      Ratelimit = upstashRatelimitModule.Ratelimit || upstashRatelimitModule.default
+      Redis = upstashRedisModule.Redis
+      Ratelimit = upstashRatelimitModule.Ratelimit
     } catch (error) {
-      console.error('Upstash 초기화 실패:', error)
+      logger.error('Upstash 초기화 실패', error as Error, {
+        component: 'api-optimization',
+        function: 'initializeUpstash'
+      })
       Redis = null
       Ratelimit = null
     }
@@ -137,7 +140,12 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
     const startTime = performance.now()
     const requestId = crypto.randomUUID()
     
-    console.log(`🚀 API Request [${requestId}] ${apiName} started`)
+    logger.debug(`API Request ${apiName} started`, {
+      component: 'api-optimization',
+      function: 'withPerformanceMonitoring',
+      requestId,
+      apiName
+    })
     
     try {
       const response = await handler(req)
@@ -153,14 +161,27 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
       
       // 느린 API 경고
       if (duration > 1000) {
-        console.warn(`⚠️ Slow API detected: ${apiName} took ${duration.toFixed(2)}ms`)
+        logger.warn(`Slow API detected: ${apiName}`, {
+          component: 'api-optimization',
+          function: 'withPerformanceMonitoring',
+          apiName,
+          duration,
+          requestId
+        })
       }
       
       // 응답 헤더에 성능 정보 추가
       response.headers.set('X-Response-Time', `${duration.toFixed(2)}ms`)
       response.headers.set('X-Request-ID', requestId)
       
-      console.log(`✅ API Request [${requestId}] ${apiName} completed in ${duration.toFixed(2)}ms`)
+      logger.info(`API Request ${apiName} completed`, {
+        component: 'api-optimization',
+        function: 'withPerformanceMonitoring',
+        apiName,
+        duration,
+        requestId,
+        status: response.status
+      })
       
       return response
     } catch (error) {
@@ -174,7 +195,13 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
         error: error instanceof Error ? error.message : 'Unknown error',
       })
       
-      console.error(`❌ API Request [${requestId}] ${apiName} failed after ${duration.toFixed(2)}ms:`, error)
+      logger.error(`API Request ${apiName} failed`, error as Error, {
+        component: 'api-optimization',
+        function: 'withPerformanceMonitoring',
+        apiName,
+        duration,
+        requestId
+      })
       
       throw error
     }
@@ -269,7 +296,11 @@ export function withRequestDeduplication(handler: (req: NextRequest) => Promise<
     
     // 이미 진행 중인 동일한 요청이 있는지 확인
     if (pendingRequests.has(requestKey)) {
-      console.log(`🔄 Deduplicating request: ${requestKey}`)
+      logger.debug(`Deduplicating request`, {
+        component: 'api-optimization',
+        function: 'withRequestDeduplication',
+        requestKey
+      })
       return await pendingRequests.get(requestKey)
     }
     
@@ -377,7 +408,11 @@ export class DatabaseConnectionPool {
   async closeAll(): Promise<void> {
     for (const [url] of this.pools.entries()) {
       // 실제 구현시 pool.end() 호출
-      console.log(`Closing connection pool for ${url}`)
+      logger.info(`Closing connection pool`, {
+        component: 'DatabaseConnectionPool',
+        function: 'closeAll',
+        databaseUrl: url
+      })
     }
     this.pools.clear()
   }
@@ -423,7 +458,11 @@ export class ExternalAPIOptimizer {
       if (Date.now() - breaker.lastFailure > this.recoveryTimeout) {
         breaker.state = 'half-open'
       } else {
-        console.warn(`Circuit breaker OPEN for ${apiName}, using fallback`)
+        logger.warn(`Circuit breaker OPEN, using fallback`, {
+          component: 'ExternalAPIOptimizer',
+          function: 'callWithCircuitBreaker',
+          apiName
+        })
         if (fallback) {
           return await fallback()
         }
@@ -448,11 +487,21 @@ export class ExternalAPIOptimizer {
       // 실패 임계값 확인
       if (breaker.failureCount >= this.failureThreshold) {
         breaker.state = 'open'
-        console.error(`Circuit breaker OPENED for ${apiName} after ${breaker.failureCount} failures`)
+        logger.error(`Circuit breaker OPENED after threshold failures`, error as Error, {
+          component: 'ExternalAPIOptimizer',
+          function: 'callWithCircuitBreaker',
+          apiName,
+          failureCount: breaker.failureCount,
+          threshold: this.failureThreshold
+        })
       }
       
       if (fallback) {
-        console.warn(`API ${apiName} failed, using fallback`)
+        logger.warn(`API failed, using fallback`, {
+          component: 'ExternalAPIOptimizer',
+          function: 'callWithCircuitBreaker',
+          apiName
+        })
         return await fallback()
       }
       
@@ -503,7 +552,11 @@ export function withResponseCaching(
     try {
       const cached = await redis?.get(key)
       if (cached) {
-        console.log(`📦 Cache HIT for ${key}`)
+        logger.debug(`Cache HIT`, {
+          component: 'api-optimization',
+          function: 'withResponseCaching',
+          cacheKey: key
+        })
         const response = new NextResponse(cached.body, {
           status: cached.status,
           headers: cached.headers,
@@ -512,7 +565,11 @@ export function withResponseCaching(
         return response
       }
     } catch (error) {
-      console.warn('Cache read error:', error)
+      logger.warn('Cache read error', error as Error, {
+        component: 'api-optimization',
+        function: 'withResponseCaching',
+        cacheKey: key
+      })
     }
     
     // 새로운 응답 생성
@@ -529,7 +586,12 @@ export function withResponseCaching(
         }
         
         await redis?.setex(key, ttl, JSON.stringify(cacheData))
-        console.log(`📦 Cache SET for ${key}`)
+        logger.debug(`Cache SET`, {
+          component: 'api-optimization',
+          function: 'withResponseCaching',
+          cacheKey: key,
+          ttl
+        })
         
         // 새로운 응답 객체 생성 (body를 읽었으므로)
         const newResponse = new NextResponse(body, {
@@ -539,7 +601,11 @@ export function withResponseCaching(
         newResponse.headers.set('X-Cache', 'MISS')
         return newResponse
       } catch (error) {
-        console.warn('Cache write error:', error)
+        logger.warn('Cache write error', error as Error, {
+          component: 'api-optimization',
+          function: 'withResponseCaching',
+          cacheKey: key
+        })
       }
     }
     
@@ -652,7 +718,10 @@ export async function cleanup(): Promise<void> {
   await dbConnectionPool.closeAll()
   // Redis 연결 정리
   await redis?.quit?.()
-  console.log('🧹 API optimization cleanup completed')
+  logger.info('API optimization cleanup completed', {
+    component: 'api-optimization',
+    function: 'cleanup'
+  })
 }
 
 // 프로세스 종료시 정리
@@ -661,4 +730,7 @@ if (typeof process !== 'undefined') {
   process.on('SIGINT', cleanup)
 }
 
-console.log('🚀 API optimization initialized')
+logger.info('API optimization initialized', {
+  component: 'api-optimization',
+  function: 'initialization'
+})

@@ -1,5 +1,5 @@
 // OpenAPI/Swagger configuration for API documentation
-import { OpenAPIV3 } from 'openapi-types'
+import type { OpenAPIV3 } from 'openapi-types'
 
 export const swaggerConfig: OpenAPIV3.Document = {
   openapi: '3.0.0',

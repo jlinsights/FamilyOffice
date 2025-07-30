@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { createClient } from "@/lib/supabase/client"
+// import { createClient } from "@/lib/supabase/client"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { CheckCircle, AlertCircle } from "lucide-react"
 
@@ -55,9 +55,8 @@ export function ConsultationForm() {
     }
 
     try {
-      const supabase = createClient()
-
-      const { error } = await supabase.from("consultations").insert({
+      // 임시로 콘솔에 폼 데이터 출력 (실제 환경에서는 Supabase에 저장)
+      console.log("Form submission:", {
         name: name.trim(),
         email: email.trim(),
         phone: phone.trim(),
@@ -66,11 +65,7 @@ export function ConsultationForm() {
         status: "pending",
       })
 
-      if (error) {
-        console.error("Supabase error:", error)
-        throw error
-      }
-
+      // 임시 성공 처리
       setFormSuccess(true)
       event.currentTarget.reset()
 

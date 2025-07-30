@@ -340,11 +340,7 @@ class HubSpotFormIntegration {
   }
 }
 
-// 페이지 로드 시 HubSpot 통합 초기화
-if (typeof window !== 'undefined') {
-  window.addEventListener("load", () => {
-    new HubSpotFormIntegration();
-  });
-}
+// HubSpot 통합은 React 컴포넌트에서 초기화됨
+// 중복 초기화 방지를 위해 주석 처리
 
 export default HubSpotFormIntegration; 

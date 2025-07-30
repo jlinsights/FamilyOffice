@@ -18,6 +18,11 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
         href: "/program/100-years-ceo",
         label: "100년 기업 차세대 CEO 과정",
         description: "지속가능한 경영을 위한 특별 과정"
+      },
+      {
+        href: "/program/art-asset-class",
+        label: "예술자산클래스ART",
+        description: "VIP 고객 예술 투자 및 문화 교육 프로그램"
       }
     ]
   },

@@ -39,8 +39,8 @@ export const initializeUpstash = async () => {
       const upstashRedisModule = await import('@upstash/redis')
       const upstashRatelimitModule = await import('@upstash/ratelimit')
       
-      Redis = upstashRedisModule.Redis || upstashRedisModule.default
-      Ratelimit = upstashRatelimitModule.Ratelimit || upstashRatelimitModule.default
+      Redis = upstashRedisModule.Redis
+      Ratelimit = upstashRatelimitModule.Ratelimit
     } catch (error) {
       console.error('Upstash 초기화 실패:', error)
       Redis = null

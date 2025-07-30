@@ -68,6 +68,15 @@ export interface NavigationItem {
   href: string
   label: string
   isExternal?: boolean // 외부 링크 여부
+  submenu?: NavigationSubItem[] // 서브메뉴 아이템들
+}
+
+// 서브메뉴 아이템 타입 정의
+export interface NavigationSubItem {
+  href: string
+  label: string
+  description?: string // 서브메뉴 설명
+  isExternal?: boolean
 }
 
 // 폼 상태 타입
