@@ -34,9 +34,11 @@ export function EnvironmentGuard({
     if (!status.isValid && !status.isLoading) {
       logger.error('Environment guard detected invalid environment', undefined, {
         component: 'EnvironmentGuard',
-        errors: status.errors,
-        warnings: status.warnings,
-        criticalValid: status.criticalValid
+        metadata: {
+          errors: status.errors,
+          warnings: status.warnings,
+          criticalValid: status.criticalValid
+        }
       })
     }
   }, [status])
@@ -45,7 +47,7 @@ export function EnvironmentGuard({
     setRetryCount(prev => prev + 1)
     logger.info('Environment validation retry initiated', {
       component: 'EnvironmentGuard',
-      retryCount: retryCount + 1
+      metadata: { retryCount: retryCount + 1 }
     })
     
     await revalidate()
@@ -55,7 +57,7 @@ export function EnvironmentGuard({
     const result = validateCritical()
     logger.info('Quick critical validation performed', {
       component: 'EnvironmentGuard',
-      result
+      metadata: { result }
     })
   }
 

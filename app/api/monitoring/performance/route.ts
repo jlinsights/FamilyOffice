@@ -29,8 +29,10 @@ export async function POST(request: NextRequest) {
     logger.performance(performanceReport.metric, performanceReport.duration, {
       component: 'monitoring-api',
       function: 'performanceEndpoint',
-      clientTimestamp: performanceReport.timestamp,
-      ...performanceReport.context
+      metadata: {
+        clientTimestamp: performanceReport.timestamp,
+        ...performanceReport.context
+      }
     })
 
     // Check for performance issues that need attention
@@ -40,18 +42,22 @@ export async function POST(request: NextRequest) {
     if (isCriticalPerformance) {
       logger.critical('Critical performance issue detected', undefined, {
         component: 'monitoring-api',
-        metric: performanceReport.metric,
-        duration: performanceReport.duration,
-        clientReport: true,
-        ...performanceReport.context
+        metadata: {
+          metric: performanceReport.metric,
+          duration: performanceReport.duration,
+          clientReport: true,
+          ...performanceReport.context
+        }
       })
     } else if (isSlowPerformance) {
       logger.warn('Slow performance detected', {
         component: 'monitoring-api',
-        metric: performanceReport.metric,
-        duration: performanceReport.duration,
-        clientReport: true,
-        ...performanceReport.context
+        metadata: {
+          metric: performanceReport.metric,
+          duration: performanceReport.duration,
+          clientReport: true,
+          ...performanceReport.context
+        }
       })
     }
 

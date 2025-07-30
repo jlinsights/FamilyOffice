@@ -18,8 +18,7 @@ export async function GET(request: NextRequest) {
     logger.debug('Environment validation API called', {
       component: 'env-api',
       function: 'GET',
-      category,
-      detailed
+      metadata: { category, detailed }
     })
     
     // Category-specific validation
@@ -80,16 +79,16 @@ export async function GET(request: NextRequest) {
         }
       }
       
-      response.categories = categoryResults
+      (response as any).categories = categoryResults
     }
     
     // Include errors and warnings if validation failed
     if (!validation.success) {
-      response.errors = validation.errors || []
+      (response as any).errors = validation.errors || []
     }
     
     if (validation.warnings && validation.warnings.length > 0) {
-      response.warnings = validation.warnings
+      (response as any).warnings = validation.warnings
     }
     
     const httpStatus = validation.success && criticalValid ? 200 : 500
@@ -97,9 +96,11 @@ export async function GET(request: NextRequest) {
     logger.info('Environment validation API response', {
       component: 'env-api',
       function: 'GET',
-      success: response.success,
-      errorCount: status.errors,
-      warningCount: status.warnings
+      metadata: {
+        success: response.success,
+        errorCount: status.errors,
+        warningCount: status.warnings
+      }
     })
     
     return NextResponse.json(response, { status: httpStatus })
@@ -128,7 +129,7 @@ export async function HEAD(request: NextRequest) {
     logger.debug('Environment health check', {
       component: 'env-api',
       function: 'HEAD',
-      critical: criticalValid
+      metadata: { critical: criticalValid }
     })
     
     return new NextResponse(null, { 

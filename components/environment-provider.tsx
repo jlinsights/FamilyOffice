@@ -92,9 +92,11 @@ export function EnvironmentProvider({
       logger.info('Runtime environment validation completed', {
         component: 'EnvironmentProvider',
         function: 'validateEnvironment',
-        isValid: newStatus.isValid,
-        errorCount: errors.length,
-        warningCount: warnings.length
+        metadata: {
+          isValid: newStatus.isValid,
+          errorCount: errors.length,
+          warningCount: warnings.length
+        }
       })
 
       return newStatus

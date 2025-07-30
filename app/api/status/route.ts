@@ -58,8 +58,10 @@ async function statusHandler(request: NextRequest): Promise<NextResponse> {
     
     logger.info('System status check completed', {
       component: 'status-api',
-      overallHealth,
-      environmentValid: envStatus.isValid,
+      metadata: {
+        overallHealth,
+        environmentValid: envStatus.isValid
+      },
       duration
     })
     

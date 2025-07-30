@@ -22,7 +22,7 @@ export async function StartupInit() {
     
     logger.info('Starting application initialization', {
       component: 'StartupInit',
-      key: initKey
+      metadata: { key: initKey }
     })
     
     const result = await initializeApplication()
@@ -30,7 +30,7 @@ export async function StartupInit() {
     if (!result.canContinue) {
       logger.critical('Application cannot continue due to initialization failure', undefined, {
         component: 'StartupInit',
-        errors: result.errors
+        metadata: { errors: result.errors }
       })
       
       // In a real application, you might want to exit the process here
@@ -41,13 +41,15 @@ export async function StartupInit() {
     if (!result.success) {
       logger.warn('Application initialized with warnings', {
         component: 'StartupInit',
-        warnings: result.warnings,
-        errors: result.errors
+        metadata: {
+          warnings: result.warnings,
+          errors: result.errors
+        }
       })
     } else {
       logger.info('Application initialization completed successfully', {
         component: 'StartupInit',
-        services: result.services
+        metadata: { services: result.services }
       })
     }
     

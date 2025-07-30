@@ -31,11 +31,13 @@ export async function POST(request: NextRequest) {
     logger.error('Client-reported error', new Error(errorReport.message), {
       component: 'monitoring-api',
       function: 'errorEndpoint',
-      clientTimestamp: errorReport.timestamp,
-      userAgent: errorReport.userAgent,
-      url: errorReport.url,
-      stack: errorReport.stack,
-      ...errorReport.context
+      metadata: {
+        clientTimestamp: errorReport.timestamp,
+        userAgent: errorReport.userAgent,
+        url: errorReport.url,
+        stack: errorReport.stack,
+        ...errorReport.context
+      }
     })
 
     // In production, you might want to:
@@ -51,8 +53,10 @@ export async function POST(request: NextRequest) {
     if (isCritical) {
       logger.critical('Critical error reported from client', new Error(errorReport.message), {
         component: 'monitoring-api',
-        clientReport: true,
-        ...errorReport.context
+        metadata: {
+          clientReport: true,
+          ...errorReport.context
+        }
       })
     }
 

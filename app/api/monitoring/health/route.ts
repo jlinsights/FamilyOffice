@@ -69,9 +69,11 @@ export async function GET(request: NextRequest) {
 
     logger.info('Monitoring health check completed', {
       component: 'monitoring-health-api',
-      healthScore,
-      activeScore,
-      detailed
+      metadata: {
+        healthScore,
+        activeScore,
+        detailed
+      }
     })
 
     const httpStatus = healthScore >= 50 ? 200 : 503

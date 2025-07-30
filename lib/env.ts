@@ -552,8 +552,8 @@ export function initializeEnvironment(): boolean {
   return true
 }
 
-// Export the manager instance for advanced usage
-export { envManager as EnvironmentManager }
+// Export the manager instance for advanced usage  
+export { envManager }
 
 // Export environment types
 export type { EnvVars, ValidationResult } 
