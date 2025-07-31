@@ -328,11 +328,19 @@ export class EnvironmentManager {
   
   // 런타임 검증 (중요 환경변수)
   validateCriticalAtRuntime(): boolean {
-    const criticalVars = [
-      'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY',
-      'CLERK_SECRET_KEY',
-      'NEXT_PUBLIC_APP_URL'
-    ]
+    // Client-side와 server-side 환경에 따라 다른 변수 체크
+    const isClientSide = typeof window !== 'undefined'
+    
+    const criticalVars = isClientSide 
+      ? [
+          'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY',
+          'NEXT_PUBLIC_APP_URL'
+        ]
+      : [
+          'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY',
+          'CLERK_SECRET_KEY',
+          'NEXT_PUBLIC_APP_URL'
+        ]
     
     const missing = criticalVars.filter(varName => !process.env[varName])
     
@@ -340,14 +348,18 @@ export class EnvironmentManager {
       logger.critical('Critical environment variables missing at runtime', undefined, {
         component: 'EnvironmentManager',
         function: 'validateCriticalAtRuntime',
-        metadata: { missingVars: missing }
+        metadata: { 
+          missingVars: missing,
+          environment: isClientSide ? 'client' : 'server'
+        }
       })
       return false
     }
     
     logger.info('Critical environment variables validated at runtime', {
       component: 'EnvironmentManager',
-      function: 'validateCriticalAtRuntime'
+      function: 'validateCriticalAtRuntime',
+      metadata: { environment: isClientSide ? 'client' : 'server' }
     })
     
     return true
