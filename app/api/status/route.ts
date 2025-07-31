@@ -8,7 +8,7 @@ import { withEnvironmentValidation, quickValidation } from '@/lib/runtime-valida
 import { validateServerEnvironment } from '@/lib/runtime-validation'
 import { logger } from '@/lib/logger'
 
-async function statusHandler(request: NextRequest): Promise<NextResponse> {
+async function statusHandler(_request: NextRequest): Promise<NextResponse> {
   const startTime = performance.now()
   
   try {

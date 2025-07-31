@@ -1,4 +1,4 @@
-import { ServiceItem, NavigationItem, NavigationSubItem } from "@/types/globals"
+import { ServiceItem, NavigationItem } from "@/types/globals"
 import { WealthManagementIcon, InheritanceIcon, TaxLegalIcon } from "@/components/icons/service-icons"
 
 // 네비게이션 메뉴 데이터

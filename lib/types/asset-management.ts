@@ -138,14 +138,6 @@ export interface AssetManagementDashboardProps {
   refreshInterval?: number
 }
 
-// 자산군 카드 컴포넌트 Props
-export interface AssetClassCardProps {
-  data: AssetClassData
-  className?: string
-  onViewDetails?: () => void
-  onRebalance?: () => void
-}
-
 // 포트폴리오 요약 위젯 Props
 export interface PortfolioSummaryWidgetProps {
   clientId?: string

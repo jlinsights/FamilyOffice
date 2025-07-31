@@ -3,7 +3,7 @@
  * Provides validation hooks for API routes, middleware, and server components
  */
 
-import { validateCriticalEnvVars, validateEnv, EnvironmentManager } from './env'
+import { validateCriticalEnvVars, validateEnv } from './env'
 import { logger } from './logger'
 import { NextRequest, NextResponse } from 'next/server'
 

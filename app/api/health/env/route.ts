@@ -122,7 +122,7 @@ export async function GET(request: NextRequest) {
 }
 
 // Health check endpoint for critical environment variables only
-export async function HEAD(request: NextRequest) {
+export async function HEAD(_request: NextRequest) {
   try {
     const criticalValid = validateCriticalEnvVars()
     

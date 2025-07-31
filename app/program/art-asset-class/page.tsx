@@ -9,7 +9,6 @@ import {
   Calendar,
   MapPin,
   Clock,
-  Award,
   TrendingUp,
   Eye,
   Heart,

@@ -5,8 +5,8 @@
  * Provides runtime environment validation and monitoring
  */
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { validateCriticalEnvVars, validateEnv, EnvironmentManager } from '@/lib/env'
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import { validateCriticalEnvVars, validateEnv } from '@/lib/env'
 import { logger } from '@/lib/logger'
 
 interface EnvironmentStatus {
@@ -61,7 +61,6 @@ export function EnvironmentProvider({
         function: 'validateEnvironment'
       })
 
-      const envManager = EnvironmentManager.getInstance()
       const validation = validateEnv()
       const criticalValid = validateCriticalEnvVars()
 
@@ -117,13 +116,13 @@ export function EnvironmentProvider({
     }
   }
 
-  const revalidate = async () => {
+  const revalidate = useCallback(async () => {
     setStatus(prev => ({ ...prev, isLoading: true }))
     const newStatus = await validateEnvironment()
     setStatus(newStatus)
-  }
+  }, [])
 
-  const validateCritical = (): boolean => {
+  const validateCritical = useCallback((): boolean => {
     try {
       const result = validateCriticalEnvVars()
       
@@ -148,7 +147,7 @@ export function EnvironmentProvider({
       })
       return false
     }
-  }
+  }, [])
 
   // Initial validation on mount
   useEffect(() => {
@@ -174,7 +173,7 @@ export function EnvironmentProvider({
     }, checkInterval)
 
     return () => clearInterval(interval)
-  }, [checkInterval, enableContinuousMonitoring])
+  }, [checkInterval, enableContinuousMonitoring, revalidate, validateCritical])
 
   // Page visibility API - validate when page becomes visible
   useEffect(() => {

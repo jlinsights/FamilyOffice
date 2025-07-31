@@ -60,7 +60,7 @@ class Logger {
   }
 
   private formatLogEntry(entry: LogEntry): string {
-    const { level, message, timestamp, context, environment, service } = entry;
+    const { level, message, timestamp, context, service } = entry;
     
     if (this.environment === 'development') {
       // Human-readable format for development
