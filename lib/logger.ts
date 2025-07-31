@@ -47,8 +47,11 @@ class Logger {
       timestamp: new Date().toISOString(),
       context: {
         ...context,
-        userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server',
-        url: typeof window !== 'undefined' ? window.location.href : 'server'
+        metadata: {
+          ...context.metadata,
+          userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server',
+          url: typeof window !== 'undefined' ? window.location.href : 'server'
+        }
       },
       environment: this.environment,
       service: this.serviceName,
@@ -178,8 +181,11 @@ class Logger {
   performance(metricName: string, duration: number, context?: LogContext): void {
     this.info(`Performance: ${metricName}`, {
       ...context,
-      duration,
-      metric: metricName
+      metadata: {
+        ...context?.metadata,
+        duration,
+        metric: metricName
+      }
     });
   }
 
@@ -190,11 +196,14 @@ class Logger {
     const level = statusCode >= 400 ? LogLevel.ERROR : LogLevel.INFO;
     this.log(level, `API ${method} ${endpoint} - ${statusCode}`, {
       ...context,
-      api: {
-        method,
-        endpoint,
-        statusCode,
-        duration
+      metadata: {
+        ...context?.metadata,
+        api: {
+          method,
+          endpoint,
+          statusCode,
+          duration
+        }
       }
     });
   }
@@ -205,8 +214,11 @@ class Logger {
   userAction(action: string, userId: string, context?: LogContext): void {
     this.info(`User Action: ${action}`, {
       ...context,
-      userId,
-      action
+      metadata: {
+        ...context?.metadata,
+        userId,
+        action
+      }
     });
   }
 
@@ -220,9 +232,12 @@ class Logger {
     
     this.log(level, `Security Event: ${event}`, {
       ...context,
-      security: {
-        event,
-        severity
+      metadata: {
+        ...context?.metadata,
+        security: {
+          event,
+          severity
+        }
       }
     });
   }

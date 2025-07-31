@@ -87,24 +87,30 @@ export async function validateStartupEnvironment(): Promise<StartupValidationRes
       logger.info('Startup environment validation completed successfully', {
         component: 'startup-validation',
         function: 'validateStartupEnvironment',
-        duration,
-        warningCount: warnings.length
+        metadata: {
+          duration,
+          warningCount: warnings.length
+        }
       })
     } else if (canContinue) {
       logger.warn('Startup environment validation completed with errors', {
         component: 'startup-validation',
         function: 'validateStartupEnvironment',
-        duration,
-        errorCount: errors.length,
-        warningCount: warnings.length
+        metadata: {
+          duration,
+          errorCount: errors.length,
+          warningCount: warnings.length
+        }
       })
     } else {
-      logger.critical('Startup environment validation failed - cannot continue', undefined, {
+      logger.warn('Startup environment validation failed - cannot continue', {
         component: 'startup-validation',
         function: 'validateStartupEnvironment',
-        duration,
-        criticalMissing,
-        errorCount: errors.length
+        metadata: {
+          duration,
+          criticalMissing,
+          errorCount: errors.length
+        }
       })
     }
     
@@ -143,10 +149,10 @@ export function validateCriticalStartup(): boolean {
   const missing = criticalVars.filter(varName => !process.env[varName])
   
   if (missing.length > 0) {
-    logger.critical('Critical startup environment variables missing', undefined, {
+    logger.warn('Critical startup environment variables missing', {
       component: 'startup-validation',
       function: 'validateCriticalStartup',
-      missingVars: missing
+      metadata: { missingVars: missing }
     })
     return false
   }
@@ -247,9 +253,11 @@ export function checkDevelopmentEnvironment(): void {
       logger.info(`Development recommendation: ${rec.var}`, {
         component: 'startup-validation',
         function: 'checkDevelopmentEnvironment',
-        variable: rec.var,
-        reason: rec.reason,
-        priority: rec.priority
+        metadata: {
+          variable: rec.var,
+          reason: rec.reason,
+          priority: rec.priority
+        }
       })
     })
   } else {

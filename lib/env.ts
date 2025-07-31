@@ -133,7 +133,7 @@ export class EnvironmentManager {
       logger.info('Environment validation completed successfully', {
         component: 'EnvironmentManager',
         function: 'validateEnvironment',
-        warningCount: warnings.length
+        metadata: { warningCount: warnings.length }
       })
       
       return { 
@@ -155,8 +155,10 @@ export class EnvironmentManager {
         logger.error('Environment validation failed', error, {
           component: 'EnvironmentManager',
           function: 'validateEnvironment',
-          errorCount: errors.length,
-          errors: errors.map(e => e.field)
+          metadata: {
+            errorCount: errors.length,
+            errors: errors.map(e => e.field)
+          }
         })
         
         return {
@@ -202,7 +204,7 @@ export class EnvironmentManager {
       logger.debug(`Environment category validation successful: ${category}`, {
         component: 'EnvironmentManager',
         function: 'validateCategory',
-        category
+        metadata: { category }
       })
       
       return { success: true, data: env as EnvVars }
@@ -218,8 +220,10 @@ export class EnvironmentManager {
         logger.warn(`Environment category validation failed: ${category}`, {
           component: 'EnvironmentManager',
           function: 'validateCategory',
-          category,
-          errorCount: errors.length
+          metadata: { 
+            category,
+            errorCount: errors.length
+          }
         })
         
         return { success: false, errors }
@@ -257,7 +261,7 @@ export class EnvironmentManager {
         logger.critical('Required environment variable missing', error, {
           component: 'EnvironmentManager',
           function: 'getEnvVar',
-          key: String(key)
+          metadata: { key: String(key) }
         })
         throw error
       }
@@ -266,7 +270,7 @@ export class EnvironmentManager {
         logger.debug(`Using fallback value for ${String(key)}`, {
           component: 'EnvironmentManager',
           function: 'getEnvVar',
-          key: String(key)
+          metadata: { key: String(key) }
         })
         return fallback
       }
@@ -274,7 +278,7 @@ export class EnvironmentManager {
       logger.warn(`Environment variable ${String(key)} is not defined`, {
         component: 'EnvironmentManager',
         function: 'getEnvVar',
-        key: String(key)
+        metadata: { key: String(key) }
       })
       
       return '' as EnvVars[K]
@@ -336,7 +340,7 @@ export class EnvironmentManager {
       logger.critical('Critical environment variables missing at runtime', undefined, {
         component: 'EnvironmentManager',
         function: 'validateCriticalAtRuntime',
-        missingVars: missing
+        metadata: { missingVars: missing }
       })
       return false
     }
@@ -471,19 +475,21 @@ export function checkEnvStatus(): void {
   logger.info('Environment status check', {
     component: 'env',
     function: 'checkEnvStatus',
-    environment: status.environment,
-    isValid: status.isValid,
-    coreConfigured: `${status.core.configured}/${status.core.total}`,
-    optionalConfigured: `${status.optional.configured}/${status.optional.total}`,
-    errors: status.errors,
-    warnings: status.warnings
+    metadata: {
+      environment: status.environment,
+      isValid: status.isValid,
+      coreConfigured: `${status.core.configured}/${status.core.total}`,
+      optionalConfigured: `${status.optional.configured}/${status.optional.total}`,
+      errors: status.errors,
+      warnings: status.warnings
+    }
   })
   
   if (!status.isValid) {
     logger.error('Environment validation failed', undefined, {
       component: 'env',
       function: 'checkEnvStatus',
-      errors: status.errors
+      metadata: { errors: status.errors }
     })
   }
 }
@@ -527,7 +533,7 @@ export function initializeEnvironment(): boolean {
     logger.critical('Environment initialization failed', undefined, {
       component: 'env',
       function: 'initializeEnvironment',
-      errors: validation.errors?.map(e => `${e.field}: ${e.message}`)
+      metadata: { errors: validation.errors?.map(e => `${e.field}: ${e.message}`) }
     })
     return false
   }
@@ -537,8 +543,10 @@ export function initializeEnvironment(): boolean {
       logger.warn(`Environment warning: ${warning.message}`, {
         component: 'env',
         function: 'initializeEnvironment',
-        field: warning.field,
-        category: warning.category
+        metadata: {
+          field: warning.field,
+          category: warning.category
+        }
       })
     })
   }
@@ -546,7 +554,7 @@ export function initializeEnvironment(): boolean {
   logger.info('Environment validation completed successfully', {
     component: 'env',
     function: 'initializeEnvironment',
-    warningCount: validation.warnings?.length || 0
+    metadata: { warningCount: validation.warnings?.length || 0 }
   })
   
   return true
@@ -555,5 +563,5 @@ export function initializeEnvironment(): boolean {
 // Export the manager instance for advanced usage  
 export { envManager }
 
-// Export environment types
-export type { EnvVars, ValidationResult } 
+// Export validation result type
+export type { ValidationResult } 

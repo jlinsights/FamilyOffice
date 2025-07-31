@@ -106,10 +106,10 @@ export class RedisCache {
   // 압축된 데이터 저장
   async set(key: string, value: any, ttl: number = 300): Promise<boolean> {
     if (!this.redis) {
-      logger.error('Redis 클라이언트가 초기화되지 않음 - fallback cache 사용', undefined, {
+      logger.warn('Redis 클라이언트가 초기화되지 않음 - fallback cache 사용', {
         component: 'RedisCache',
         function: 'set',
-        key
+        metadata: { key }
       })
       this.fallbackCache.set(key, {
         value,
@@ -137,7 +137,7 @@ export class RedisCache {
       logger.error('Redis set error - using fallback cache', error as Error, {
         component: 'RedisCache',
         function: 'set',
-        key
+        metadata: { key }
       })
       // Fallback to memory cache
       this.fallbackCache.set(key, {
@@ -151,10 +151,10 @@ export class RedisCache {
   // 압축 해제된 데이터 조회
   async get<T>(key: string): Promise<T | null> {
     if (!this.redis) {
-      logger.error('Redis 클라이언트가 초기화되지 않음 - fallback cache 사용', undefined, {
+      logger.warn('Redis 클라이언트가 초기화되지 않음 - fallback cache 사용', {
         component: 'RedisCache',
         function: 'get',
-        key
+        metadata: { key }
       })
       const fallback = this.fallbackCache.get(key)
       if (fallback && fallback.expires > Date.now()) {
@@ -181,7 +181,7 @@ export class RedisCache {
       logger.error('Redis get error - using fallback cache', error as Error, {
         component: 'RedisCache',
         function: 'get',
-        key
+        metadata: { key }
       })
       // Fallback to memory cache
       const fallback = this.fallbackCache.get(key)
@@ -195,10 +195,10 @@ export class RedisCache {
   // 배치 데이터 조회 (파이프라인 사용)
   async mget<T>(keys: string[]): Promise<Record<string, T | null>> {
     if (!this.redis) {
-      logger.error('Redis 클라이언트가 초기화되지 않음 - mget 실패', undefined, {
+      logger.warn('Redis 클라이언트가 초기화되지 않음 - mget 실패', {
         component: 'RedisCache',
         function: 'mget',
-        keyCount: keys.length
+        metadata: { keyCount: keys.length }
       })
       return {}
     }
@@ -235,7 +235,7 @@ export class RedisCache {
       logger.error('Redis mget error', error as Error, {
         component: 'RedisCache',
         function: 'mget',
-        keyCount: keys.length
+        metadata: { keyCount: keys.length }
       })
       return {}
     }
@@ -244,10 +244,10 @@ export class RedisCache {
   // 배치 데이터 저장
   async mset(pairs: Array<{key: string; value: any; ttl?: number}>): Promise<boolean> {
     if (!this.redis) {
-      logger.error('Redis 클라이언트가 초기화되지 않음 - mset 실패', undefined, {
+      logger.warn('Redis 클라이언트가 초기화되지 않음 - mset 실패', {
         component: 'RedisCache',
         function: 'mset',
-        pairCount: pairs.length
+        metadata: { pairCount: pairs.length }
       })
       return false
     }
@@ -274,7 +274,7 @@ export class RedisCache {
       logger.error('Redis mset error', error as Error, {
         component: 'RedisCache',
         function: 'mset',
-        pairCount: pairs.length
+        metadata: { pairCount: pairs.length }
       })
       return false
     }
@@ -283,10 +283,10 @@ export class RedisCache {
   // 패턴 기반 키 삭제
   async deletePattern(pattern: string): Promise<number> {
     if (!this.redis) {
-      logger.error('Redis 클라이언트가 초기화되지 않음 - 키 삭제 실패', undefined, {
+      logger.warn('Redis 클라이언트가 초기화되지 않음 - 키 삭제 실패', {
         component: 'RedisCache',
         function: 'deletePattern',
-        pattern
+        metadata: { pattern }
       })
       return 0
     }
@@ -301,7 +301,7 @@ export class RedisCache {
       logger.error('Redis delete pattern error', error as Error, {
         component: 'RedisCache',
         function: 'deletePattern',
-        pattern
+        metadata: { pattern }
       })
       return 0
     }
@@ -310,10 +310,10 @@ export class RedisCache {
   // 실시간 데이터 발행/구독
   async publish(channel: string, data: any): Promise<number> {
     if (!this.redis) {
-      logger.error('Redis 클라이언트가 초기화되지 않음 - publish 실패', undefined, {
+      logger.warn('Redis 클라이언트가 초기화되지 않음 - publish 실패', {
         component: 'RedisCache',
         function: 'publish',
-        channel
+        metadata: { channel }
       })
       return 0
     }
@@ -324,7 +324,7 @@ export class RedisCache {
       logger.error('Redis publish error', error as Error, {
         component: 'RedisCache',
         function: 'publish',
-        channel
+        metadata: { channel }
       })
       return 0
     }
@@ -336,7 +336,7 @@ export class RedisCache {
       logger.warn('브라우저 환경에서는 Redis 구독 설정 불가', {
         component: 'RedisCache',
         function: 'subscribe',
-        channel
+        metadata: { channel }
       })
       return
     }
@@ -357,7 +357,7 @@ export class RedisCache {
           logger.error('Redis message parse error', error as Error, {
             component: 'RedisCache',
             function: 'subscribe',
-            channel
+            metadata: { channel }
           })
         }
       }
@@ -544,7 +544,7 @@ export class FinancialDataCache {
     logger.info('Warming cache for popular symbols', {
       component: 'FinancialDataCache',
       function: 'warmCache',
-      symbolCount: popularSymbols.length
+      metadata: { symbolCount: popularSymbols.length }
     })
     
     // 외부 API에서 최신 데이터 가져와서 캐시
@@ -606,8 +606,10 @@ export class CDNCacheManager {
       logger.info('Purging CDN cache', {
         component: 'CDNCacheManager',
         function: 'purgeCache',
-        urlCount: urls.length,
-        urls
+        metadata: {
+          urlCount: urls.length,
+          urls
+        }
       })
       
       // CloudFlare API 예시
@@ -629,7 +631,7 @@ export class CDNCacheManager {
       logger.error('CDN cache purge error', error as Error, {
         component: 'CDNCacheManager',
         function: 'purgeCache',
-        urlCount: urls.length
+        metadata: { urlCount: urls.length }
       })
       return false
     }

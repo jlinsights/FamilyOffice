@@ -143,8 +143,10 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
     logger.debug(`API Request ${apiName} started`, {
       component: 'api-optimization',
       function: 'withPerformanceMonitoring',
-      requestId,
-      apiName
+      metadata: {
+        requestId,
+        apiName
+      }
     })
     
     try {
@@ -164,9 +166,11 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
         logger.warn(`Slow API detected: ${apiName}`, {
           component: 'api-optimization',
           function: 'withPerformanceMonitoring',
-          apiName,
-          duration,
-          requestId
+          metadata: {
+            apiName,
+            duration,
+            requestId
+          }
         })
       }
       
@@ -177,10 +181,12 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
       logger.info(`API Request ${apiName} completed`, {
         component: 'api-optimization',
         function: 'withPerformanceMonitoring',
-        apiName,
-        duration,
-        requestId,
-        status: response.status
+        metadata: {
+          apiName,
+          duration,
+          requestId,
+          status: response.status
+        }
       })
       
       return response
@@ -198,9 +204,11 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
       logger.error(`API Request ${apiName} failed`, error as Error, {
         component: 'api-optimization',
         function: 'withPerformanceMonitoring',
-        apiName,
-        duration,
-        requestId
+        metadata: {
+          apiName,
+          duration,
+          requestId
+        }
       })
       
       throw error
@@ -299,7 +307,7 @@ export function withRequestDeduplication(handler: (req: NextRequest) => Promise<
       logger.debug(`Deduplicating request`, {
         component: 'api-optimization',
         function: 'withRequestDeduplication',
-        requestKey
+        metadata: { requestKey }
       })
       return await pendingRequests.get(requestKey)
     }
@@ -411,7 +419,7 @@ export class DatabaseConnectionPool {
       logger.info(`Closing connection pool`, {
         component: 'DatabaseConnectionPool',
         function: 'closeAll',
-        databaseUrl: url
+        metadata: { databaseUrl: url }
       })
     }
     this.pools.clear()
@@ -461,7 +469,7 @@ export class ExternalAPIOptimizer {
         logger.warn(`Circuit breaker OPEN, using fallback`, {
           component: 'ExternalAPIOptimizer',
           function: 'callWithCircuitBreaker',
-          apiName
+          metadata: { apiName }
         })
         if (fallback) {
           return await fallback()
@@ -490,9 +498,11 @@ export class ExternalAPIOptimizer {
         logger.error(`Circuit breaker OPENED after threshold failures`, error as Error, {
           component: 'ExternalAPIOptimizer',
           function: 'callWithCircuitBreaker',
-          apiName,
-          failureCount: breaker.failureCount,
-          threshold: this.failureThreshold
+          metadata: {
+            apiName,
+            failureCount: breaker.failureCount,
+            threshold: this.failureThreshold
+          }
         })
       }
       
@@ -500,7 +510,7 @@ export class ExternalAPIOptimizer {
         logger.warn(`API failed, using fallback`, {
           component: 'ExternalAPIOptimizer',
           function: 'callWithCircuitBreaker',
-          apiName
+          metadata: { apiName }
         })
         return await fallback()
       }
@@ -555,7 +565,7 @@ export function withResponseCaching(
         logger.debug(`Cache HIT`, {
           component: 'api-optimization',
           function: 'withResponseCaching',
-          cacheKey: key
+          metadata: { cacheKey: key }
         })
         const response = new NextResponse(cached.body, {
           status: cached.status,
@@ -565,10 +575,13 @@ export function withResponseCaching(
         return response
       }
     } catch (error) {
-      logger.warn('Cache read error', error as Error, {
+      logger.warn('Cache read error', {
         component: 'api-optimization',
         function: 'withResponseCaching',
-        cacheKey: key
+        metadata: { 
+          cacheKey: key,
+          error: (error as Error).message
+        }
       })
     }
     
@@ -589,8 +602,10 @@ export function withResponseCaching(
         logger.debug(`Cache SET`, {
           component: 'api-optimization',
           function: 'withResponseCaching',
-          cacheKey: key,
-          ttl
+          metadata: {
+            cacheKey: key,
+            ttl
+          }
         })
         
         // 새로운 응답 객체 생성 (body를 읽었으므로)
@@ -601,10 +616,13 @@ export function withResponseCaching(
         newResponse.headers.set('X-Cache', 'MISS')
         return newResponse
       } catch (error) {
-        logger.warn('Cache write error', error as Error, {
+        logger.warn('Cache write error', {
           component: 'api-optimization',
           function: 'withResponseCaching',
-          cacheKey: key
+          metadata: { 
+            cacheKey: key,
+            error: (error as Error).message
+          }
         })
       }
     }

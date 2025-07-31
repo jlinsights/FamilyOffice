@@ -28,7 +28,7 @@ export async function initializeApplication(): Promise<InitializationResult> {
   logger.info('Application initialization started', {
     component: 'app-initialization',
     function: 'initializeApplication',
-    environment: process.env.NODE_ENV
+    metadata: { environment: process.env.NODE_ENV }
   })
   
   const errors: string[] = []
@@ -42,7 +42,7 @@ export async function initializeApplication(): Promise<InitializationResult> {
     // 1. Validate startup environment
     logger.info('Starting environment validation...', {
       component: 'app-initialization',
-      step: 'environment-validation'
+      metadata: { step: 'environment-validation' }
     })
     
     const envValidation = await validateStartupEnvironment()
@@ -59,8 +59,10 @@ export async function initializeApplication(): Promise<InitializationResult> {
     if (!envValidation.canContinue) {
       logger.critical('Cannot continue application startup due to critical environment validation failures', undefined, {
         component: 'app-initialization',
-        errors: envValidation.errors,
-        criticalMissing: envValidation.criticalMissing
+        metadata: {
+          errors: envValidation.errors,
+          criticalMissing: envValidation.criticalMissing
+        }
       })
       
       return {
@@ -76,7 +78,7 @@ export async function initializeApplication(): Promise<InitializationResult> {
     if (process.env.NODE_ENV === 'development') {
       logger.info('Checking development environment recommendations...', {
         component: 'app-initialization',
-        step: 'development-check'
+        metadata: { step: 'development-check' }
       })
       
       checkDevelopmentEnvironment()
@@ -87,7 +89,7 @@ export async function initializeApplication(): Promise<InitializationResult> {
       try {
         logger.info('Starting scheduled environment validation...', {
           component: 'app-initialization',
-          step: 'scheduled-validation'
+          metadata: { step: 'scheduled-validation' }
         })
         
         startScheduledValidation(10 * 60 * 1000) // Every 10 minutes
@@ -95,12 +97,12 @@ export async function initializeApplication(): Promise<InitializationResult> {
         
         logger.info('Scheduled validation started successfully', {
           component: 'app-initialization',
-          interval: '10 minutes'
+          metadata: { interval: '10 minutes' }
         })
       } catch (error) {
         logger.warn('Failed to start scheduled validation', {
           component: 'app-initialization',
-          error: (error as Error).message
+          metadata: { error: (error as Error).message }
         })
         warnings.push('Scheduled environment validation could not be started')
       }
@@ -116,16 +118,20 @@ export async function initializeApplication(): Promise<InitializationResult> {
       logger.info('Application initialization completed successfully', {
         component: 'app-initialization',
         duration,
-        warningCount: warnings.length,
-        services
+        metadata: {
+          warningCount: warnings.length,
+          services
+        }
       })
     } else {
       logger.warn('Application initialization completed with issues', {
         component: 'app-initialization',
         duration,
-        errorCount: errors.length,
-        warningCount: warnings.length,
-        services
+        metadata: {
+          errorCount: errors.length,
+          warningCount: warnings.length,
+          services
+        }
       })
     }
     
@@ -164,7 +170,7 @@ async function initializeOptionalServices(warnings: string[]): Promise<void> {
     try {
       logger.debug('Redis configuration detected, initializing...', {
         component: 'app-initialization',
-        service: 'redis'
+        metadata: { service: 'redis' }
       })
       
       // Redis initialization would go here
@@ -172,20 +178,22 @@ async function initializeOptionalServices(warnings: string[]): Promise<void> {
       
       logger.info('Redis service initialized', {
         component: 'app-initialization',
-        service: 'redis'
+        metadata: { service: 'redis' }
       })
     } catch (error) {
       logger.warn('Redis initialization failed', {
         component: 'app-initialization',
-        service: 'redis',
-        error: (error as Error).message
+        metadata: { 
+          service: 'redis',
+          error: (error as Error).message
+        }
       })
       warnings.push('Redis service could not be initialized')
     }
   } else {
     logger.info('Redis not configured, skipping initialization', {
       component: 'app-initialization',
-      service: 'redis'
+      metadata: { service: 'redis' }
     })
   }
   
@@ -194,20 +202,22 @@ async function initializeOptionalServices(warnings: string[]): Promise<void> {
     try {
       logger.debug('Monitoring service configuration detected', {
         component: 'app-initialization',
-        service: 'monitoring'
+        metadata: { service: 'monitoring' }
       })
       
       // Monitoring initialization would go here
       
       logger.info('Monitoring service initialized', {
         component: 'app-initialization',
-        service: 'monitoring'
+        metadata: { service: 'monitoring' }
       })
     } catch (error) {
       logger.warn('Monitoring service initialization failed', {
         component: 'app-initialization',
-        service: 'monitoring',
-        error: (error as Error).message
+        metadata: { 
+          service: 'monitoring',
+          error: (error as Error).message
+        }
       })
       warnings.push('Monitoring service could not be initialized')
     }
@@ -217,9 +227,11 @@ async function initializeOptionalServices(warnings: string[]): Promise<void> {
   if (process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GTM_ID) {
     logger.info('Analytics configuration detected', {
       component: 'app-initialization',
-      service: 'analytics',
-      ga: !!process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
-      gtm: !!process.env.NEXT_PUBLIC_GTM_ID
+      metadata: {
+        service: 'analytics',
+        ga: !!process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+        gtm: !!process.env.NEXT_PUBLIC_GTM_ID
+      }
     })
   }
 }
@@ -246,8 +258,8 @@ export async function quickInitialization(): Promise<boolean> {
     logger.info('Quick initialization completed', {
       component: 'app-initialization',
       function: 'quickInitialization',
-      success: result,
-      duration
+      duration,
+      metadata: { success: result }
     })
     
     return result
@@ -287,7 +299,7 @@ export const initializationHooks = {
   development: async () => {
     logger.info('Development mode initialization', {
       component: 'app-initialization',
-      mode: 'development'
+      metadata: { mode: 'development' }
     })
     
     const result = await initializeApplication()
@@ -296,7 +308,7 @@ export const initializationHooks = {
     if (result.warnings.length > 0) {
       logger.warn('Development environment has configuration warnings', {
         component: 'app-initialization',
-        warnings: result.warnings
+        metadata: { warnings: result.warnings }
       })
     }
     
@@ -309,7 +321,7 @@ export const initializationHooks = {
   production: async () => {
     logger.info('Production mode initialization', {
       component: 'app-initialization',
-      mode: 'production'
+      metadata: { mode: 'production' }
     })
     
     const result = await initializeApplication()
@@ -318,7 +330,7 @@ export const initializationHooks = {
     if (!result.success) {
       logger.critical('Production initialization failed', undefined, {
         component: 'app-initialization',
-        errors: result.errors
+        metadata: { errors: result.errors }
       })
     }
     
@@ -330,8 +342,8 @@ export const initializationHooks = {
    */
   test: async () => {
     logger.info('Test mode initialization', {
-      component: 'app-initialization',
-      mode: 'test'
+      component: 'app-initialization',  
+      metadata: { mode: 'test' }
     })
     
     // Use quick initialization for tests

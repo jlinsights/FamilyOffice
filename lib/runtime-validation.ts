@@ -65,10 +65,12 @@ class RuntimeValidator {
     logger.debug('Runtime validation completed', {
       component: 'RuntimeValidator',
       function: 'validateWithCache',
-      isValid: result.isValid,
-      errorCount: errors.length,
-      duration,
-      cached: false
+      metadata: {
+        isValid: result.isValid,
+        errorCount: errors.length,
+        duration,
+        cached: false
+      }
     })
     
     return result
@@ -162,8 +164,10 @@ export function createEnvironmentMiddleware(options: {
       if (!isValid) {
         logger.warn('Environment validation failed in middleware', {
           component: 'environmentMiddleware',
-          pathname,
-          errors
+          metadata: {
+            pathname,
+            errors
+          }
         })
         
         if (onValidationFailed) {
@@ -192,7 +196,7 @@ export function createEnvironmentMiddleware(options: {
     } catch (error) {
       logger.error('Environment middleware error', error as Error, {
         component: 'environmentMiddleware',
-        pathname
+        metadata: { pathname }
       })
       
       return NextResponse.json(
@@ -240,7 +244,7 @@ export function withEnvironmentValidation<T extends any[]>(
       if (!isValid && requireValid) {
         logger.warn('API request blocked due to environment validation failure', {
           component: 'withEnvironmentValidation',
-          errors
+          metadata: { errors }
         })
         
         return NextResponse.json(
@@ -265,9 +269,11 @@ export function withEnvironmentValidation<T extends any[]>(
       
       logger.debug('API request completed with environment validation', {
         component: 'withEnvironmentValidation',
-        isValid,
-        duration,
-        status: response.status
+        metadata: {
+          isValid,
+          duration,
+          status: response.status
+        }
       })
       
       return response
@@ -328,7 +334,7 @@ export async function validateServerEnvironment(): Promise<{
 export function startScheduledValidation(intervalMs: number = 10 * 60 * 1000): NodeJS.Timeout {
   logger.info('Starting scheduled environment validation', {
     component: 'scheduledValidation',
-    intervalMs
+    metadata: { intervalMs }
   })
   
   const interval = setInterval(async () => {
@@ -338,7 +344,7 @@ export function startScheduledValidation(intervalMs: number = 10 * 60 * 1000): N
       if (!validation.isValid) {
         logger.warn('Scheduled environment validation failed', {
           component: 'scheduledValidation',
-          errors: validation.errors
+          metadata: { errors: validation.errors }
         })
       } else {
         logger.debug('Scheduled environment validation passed', {

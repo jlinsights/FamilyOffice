@@ -22,7 +22,7 @@ const environmentMiddleware = createEnvironmentMiddleware({
   onValidationFailed: (errors) => {
     logger.warn('Environment validation failed in middleware', {
       component: 'middleware',
-      errors
+      metadata: { errors }
     })
     
     // Return a generic service unavailable response
@@ -54,7 +54,7 @@ export default clerkMiddleware(async (auth, req) => {
   } catch (error) {
     logger.error('Middleware error', error as Error, {
       component: 'middleware',
-      pathname: req.nextUrl.pathname
+      metadata: { pathname: req.nextUrl.pathname }
     })
     
     // For API routes, return JSON error
