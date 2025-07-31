@@ -92,7 +92,7 @@ export default function BrandPage() {
             
             {/* 메인 헤드라인 */}
             <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-              FamilyOffice S{"\n"}<span className="text-foreground">브랜드 가이드라인</span>
+              <span className="playfair-display-bold">FamilyOffice S</span>{"\n"}<span className="text-foreground">브랜드 가이드라인</span>
             </h1>
             
             {/* 서브 헤드라인 */}
@@ -151,7 +151,7 @@ export default function BrandPage() {
                         <span className="text-blue-600 dark:text-blue-400">
                           <FamilyOfficeLogo className="w-7 h-7 inline-block align-middle mr-1" />
                         </span>
-                        FamilyOffice S Brand Guidelines
+                        <span className="playfair-display-bold">FamilyOffice S</span> Brand Guidelines
                       </span>
                     </h1>
                     <p className="text-base md:text-lg text-gray-600 dark:text-gray-300">
@@ -173,7 +173,7 @@ export default function BrandPage() {
                   {/* Brand Name */}
                   <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-start shadow-sm">
                     <span className="text-sm font-semibold text-gray-500 mb-2">Brand Name</span>
-                    <span className="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-1">FamilyOffice S</span>
+                    <span className="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-1 playfair-display-bold">FamilyOffice S</span>
                   </div>
                   {/* Brand Essence */}
                   <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-start shadow-sm">

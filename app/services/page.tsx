@@ -247,7 +247,7 @@ export default function ServicePage() {
                 <Users className="h-12 w-12 text-primary" />
               </div>
               <h3 className="font-semibold text-lg mb-1">장현오</h3>
-                              <p className="text-primary font-medium mb-1">FamilyOffice S</p>
+                              <p className="text-primary font-medium mb-1 playfair-display-bold">FamilyOffice S</p>
               <p className="text-sm text-muted-foreground mb-2">제조업·건설업 전문, 중대재해처벌법 대응</p>
               <p className="text-muted-foreground text-sm">위험업종 전문 보험설계 및 기업재해보장보험 설계 전문가</p>
             </div>

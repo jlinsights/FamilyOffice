@@ -213,7 +213,7 @@ export function Footer() {
             
             <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="text-sm text-muted-foreground">
-                &copy; {new Date().getFullYear()} FamilyOffice S. All rights reserved.
+                &copy; {new Date().getFullYear()} <span className="playfair-display-bold">FamilyOffice S</span>. All rights reserved.
               </p>
               <div className="flex space-x-6 text-sm">
                 <Link href="/privacy" className="nav-link text-muted-foreground hover:text-foreground">

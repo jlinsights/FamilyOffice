@@ -20,7 +20,7 @@ const BrandExcellenceSection: React.FC = () => {
       </h2>
       {/* 설명 */}
       <p className="text-lg text-center text-gray-500 dark:text-gray-300 mb-8 max-w-2xl">
-        이 가이드라인을 통해 <span className="font-semibold text-gray-800 dark:text-white">FamilyOffice S</span>의 브랜드 아이덴티티를 일관되게 표현하고, 사용자에게 신뢰할 수 있는 프리미엄 서비스 경험을 제공할 수 있습니다.
+        이 가이드라인을 통해 <span className="font-semibold text-gray-800 dark:text-white playfair-display-bold">FamilyOffice S</span>의 브랜드 아이덴티티를 일관되게 표현하고, 사용자에게 신뢰할 수 있는 프리미엄 서비스 경험을 제공할 수 있습니다.
       </p>
       {/* CTA 버튼 2개 */}
       <div className="flex flex-col md:flex-row gap-4 w-full justify-center">
