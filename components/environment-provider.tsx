@@ -186,7 +186,7 @@ export function EnvironmentProvider({
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
-  }, [])
+  }, [validateCritical])
 
   const contextValue: EnvironmentContextType = {
     status,
