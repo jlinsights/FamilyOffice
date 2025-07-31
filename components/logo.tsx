@@ -67,7 +67,7 @@ export const FamilyOfficeLogo: React.FC<LogoProps> = ({
           role="img" 
           aria-label="FamilyOffice logo"
         >
-          <span className={`text-primary-foreground font-medium ${currentSize.iconText}`} aria-hidden="true">
+          <span className={`text-primary-foreground font-medium ${currentSize.iconText} font-playfair`} aria-hidden="true">
             S
           </span>
         </div>
@@ -124,7 +124,7 @@ export const MinimalFamilyOfficeLogo: React.FC<Omit<LogoProps, 'showTagline'>> =
         role="img" 
                   aria-label="FamilyOffice logo"
       >
-        <span className={`text-primary-foreground font-medium ${currentSize.iconText}`} aria-hidden="true">
+        <span className={`text-primary-foreground font-medium ${currentSize.iconText} font-playfair`} aria-hidden="true">
           S
         </span>
       </div>
@@ -156,7 +156,7 @@ export const PremiumFamilyOfficeLogo: React.FC<Omit<LogoProps, 'size' | 'languag
           role="img" 
           aria-label="FamilyOffice premium logo"
         >
-          <span className="text-primary-foreground font-semibold text-2xl tracking-wide" aria-hidden="true">
+          <span className="text-primary-foreground font-semibold text-2xl tracking-wide font-playfair" aria-hidden="true">
             S
           </span>
           

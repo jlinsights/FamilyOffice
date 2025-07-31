@@ -117,6 +117,7 @@ const config: Config = {
         mono: [...fontFamily.mono],
         heading: [...fontFamily.sans],
         body: [...fontFamily.sans],
+        playfair: ["Playfair Display", "serif"],
       },
       fontSize: {
         xs: ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.05em" }],

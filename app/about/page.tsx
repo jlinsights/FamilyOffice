@@ -128,7 +128,7 @@ export default function AboutPage() {
           
           {/* 메인 헤드라인 */}
           <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-            현명한 법인 대표님은{"\n"}<span className="text-foreground">패밀리오피스를</span>{"\n"}준비합니다
+            현명한 법인 대표님은{"\n"}<span className="text-foreground">FamilyOffice S</span>{"\n"}준비합니다
           </h1>
           
           {/* 서브 헤드라인 */}

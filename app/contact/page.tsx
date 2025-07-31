@@ -22,8 +22,8 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: "오피스 위치",
-      content: "서울 중구 세종대로 73(태평로2가 310)\n태평로빌딩 10층",
-      description: "지하철 1,2호선 시청역 3번출구 도보 3분"
+      content: "서울 중구 세종대로 73 태평로빌딩",
+      description: "지하철 1,2호선 시청역 8번출구 도보 1분"
     },
     {
       icon: Phone,
