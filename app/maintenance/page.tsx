@@ -32,7 +32,7 @@ export default function MaintenancePage() {
                 <span className="font-medium">임시 서비스 중단</span>
               </div>
               <p className="text-sm text-orange-600 dark:text-orange-400">
-                시스템 환경 설정을 업데이트하고 있습니다.
+                환경 변수 설정을 업데이트하고 있습니다.
                 <br />
                 불편을 드려 죄송합니다.
               </p>
