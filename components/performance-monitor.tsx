@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 interface PerformanceMetrics {
   fcp: number | null
@@ -8,18 +8,18 @@ interface PerformanceMetrics {
   fid: number | null
   cls: number | null
   ttfb: number | null
+  inp: number | null
 }
 
 export function PerformanceMonitor() {
-  useEffect(() => {
-    // Web Vitals 측정
-    const measureWebVitals = () => {
+  const measureWebVitals = useCallback(() => {
       const metrics: PerformanceMetrics = {
         fcp: null,
         lcp: null,
         fid: null,
         cls: null,
-        ttfb: null
+        ttfb: null,
+        inp: null
       }
 
       // First Contentful Paint (FCP)
@@ -90,8 +90,9 @@ export function PerformanceMonitor() {
         // 실제 구현에서는 분석 서비스로 전송
         console.log('Performance Metrics:', metrics)
       }
-    }
+    }, [])
 
+  useEffect(() => {
     // 페이지 로드 완료 후 측정
     if (document.readyState === 'complete') {
       measureWebVitals()
@@ -102,7 +103,7 @@ export function PerformanceMonitor() {
     return () => {
       window.removeEventListener('load', measureWebVitals)
     }
-  }, [])
+  }, [measureWebVitals])
 
   return null // 이 컴포넌트는 UI를 렌더링하지 않음
 }

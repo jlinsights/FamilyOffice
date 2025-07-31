@@ -77,10 +77,10 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
-        {/* Google Tag Manager */}
+        {/* Google Tag Manager - Optimized Loading */}
         <Script
           id="gtm"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -92,24 +92,40 @@ export default function RootLayout({
           }}
         />
         
-        {/* Google Analytics */}
+        {/* Google Analytics - Deferred Loading */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-DB6TXRZLTK"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="ga" strategy="afterInteractive">
+        <Script id="ga" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-DB6TXRZLTK');
+            gtag('config', 'G-DB6TXRZLTK', {
+              page_title: document.title,
+              page_location: window.location.href,
+              send_page_view: false
+            });
+            gtag('event', 'page_view', {
+              page_title: document.title,
+              page_location: window.location.href
+            });
           `}
         </Script>
         
-        {/* Flaticon CSS */}
-        <link 
-          rel="stylesheet" 
-          href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" 
+        {/* Flaticon CSS - Non-blocking load */}
+        <Script
+          id="flaticon-loader"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              const link = document.createElement('link');
+              link.rel = 'stylesheet';
+              link.href = 'https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css';
+              document.head.appendChild(link);
+            `,
+          }}
         />
         
         {/* Mailchimp */}
@@ -144,6 +160,14 @@ export default function RootLayout({
             `,
           }}
         />
+        
+        {/* Performance Optimization - DNS Prefetch & Preconnect */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="//cdn.channel.io" />
+        <link rel="dns-prefetch" href="//js.hs-scripts.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         
         {/* 추가 SEO 메타 태그 */}
         <meta name="format-detection" content="telephone=yes" />

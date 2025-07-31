@@ -48,8 +48,8 @@ function HeroSection() {
           </Badge>
         </div>
         
-        <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-          예술자산클래{'\\n'}<span className="text-foreground">ART</span>
+        <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary animate-slide-up">
+          예술자산클래스<span className="text-foreground">ART</span>
         </h1>
         
         <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
@@ -336,20 +336,6 @@ function BenefitsSection() {
           ))}
         </div>
 
-        {/* 추가 이미지들 그리드 */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map((num) => (
-            <div key={num} className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg group">
-              <Image
-                src={`/ART Asset Class/Art_${num}.png`}
-                alt={`예술자산클래ART 프로그램 ${num}`}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
