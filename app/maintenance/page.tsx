@@ -3,17 +3,12 @@
  * Shown when critical environment variables are missing or invalid
  */
 
-import { Metadata } from 'next'
+'use client'
+
 import { AlertTriangle, RefreshCw, Settings } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
-
-export const metadata: Metadata = {
-  title: '시스템 점검 중 - FamilyOffice S',
-  description: '시스템 점검 중입니다. 잠시 후 다시 시도해주세요.',
-  robots: 'noindex, nofollow'
-}
 
 export default function MaintenancePage() {
   return (
