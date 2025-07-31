@@ -45,7 +45,7 @@ export default function SeminarRegistrationSection() {
     {
       icon: Gift,
       title: "멤버 할인",
-      description: "패밀리오피스 S 멤버에게는 특별 할인 혜택을 제공합니다"
+      description: "FamilyOffice S 멤버에게는 특별 할인 혜택을 제공합니다"
     },
     {
       icon: Users,

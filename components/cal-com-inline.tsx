@@ -42,7 +42,7 @@ export function CalComInline({
         <>
           <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">무료 상담 예약</h2>
           <p className="text-muted-foreground dark:text-muted-foreground mb-8">
-            패밀리오피스 S의 전문가들과 직접 상담을 예약하세요. 
+            <span className="playfair-display-bold">FamilyOffice S</span>의 전문가들과 직접 상담을 예약하세요. 
             귀하의 자산과 가문의 번영을 위한 맞춤형 솔루션을 제안해 드립니다.
           </p>
         </>

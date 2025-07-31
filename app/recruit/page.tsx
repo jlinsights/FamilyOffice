@@ -134,7 +134,7 @@ export default function RecruitPage() {
             </p>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
-              글로벌 자산관리 전문가로 성장하고 싶은 분들을 기다립니다. 패밀리오피스 S에서 당신의 커리어를 한 단계 높여보세요
+              글로벌 자산관리 전문가로 성장하고 싶은 분들을 기다립니다. <span className="playfair-display-bold">FamilyOffice S</span>에서 당신의 커리어를 한 단계 높여보세요
             </p>
             
             {/* 핵심 성과 지표 - 메인 페이지와 동일한 스타일 */}
@@ -198,7 +198,7 @@ export default function RecruitPage() {
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-                <span className="text-primary dark:text-emerald-300">패밀리오피스 S</span>와 함께하는 이유
+                <span className="text-primary dark:text-emerald-300 playfair-display-bold">FamilyOffice S</span>와 함께하는 이유
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
                 최고의 환경에서 전문성을 키우고 성장할 수 있는 기회를 제공합니다

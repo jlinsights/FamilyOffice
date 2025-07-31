@@ -185,12 +185,12 @@ export default function AboutPage() {
             </Badge>
             
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              <span className="text-primary">패밀리오피스 S</span> 소개
+              <span className="text-primary playfair-display-bold">FamilyOffice S</span> 소개
             </h2>
             
             <div className="space-y-6 text-lg text-muted-foreground max-w-3xl mx-auto text-left">
               <p className="text-center">
-                패밀리오피스 S는 <span className="font-semibold text-foreground">중소중견기업 전문</span> 
+                <span className="playfair-display-bold">FamilyOffice S</span>는 <span className="font-semibold text-foreground">중소중견기업 전문</span> 
                 <span className="font-semibold text-foreground">자산관리 서비스 팀</span>입니다.
               </p>
               <p className="text-center">
