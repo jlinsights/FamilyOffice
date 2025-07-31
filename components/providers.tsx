@@ -9,10 +9,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <EnvironmentProvider 
       checkInterval={5 * 60 * 1000} // 5 minutes
-      enableContinuousMonitoring={true}
+      enableContinuousMonitoring={false}
     >
       <EnvironmentGuard
-        blockOnCriticalFailure={true}
+        blockOnCriticalFailure={false}
         showWarnings={process.env.NODE_ENV === 'development'}
         enableDevMode={process.env.NODE_ENV === 'development'}
       >
