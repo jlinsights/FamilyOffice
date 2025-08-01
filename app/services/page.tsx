@@ -10,11 +10,6 @@ import { IndustryServicesTabsSection } from "@/components/industry-services-sect
 import { AnimatedCounter } from "@/components/animated-counter"
 import { useEffect, useState } from "react"
 
-export const metadata = {
-  title: "중소중견기업 전문 자산관리 서비스 | FamilyOffice S",
-  description: "제조업, 건설업, IT벤처기업 등 업종별 특화 자산관리. 중대재해처벌법 대응부터 가족법인 설립, 승계 설계까지 통합 솔루션.",
-  keywords: "중소중견기업 자산관리, 제조업 자산관리, 건설업 보험, 벤처기업 정책자금, 중대재해처벌법, 가족법인 설립",
-}
 
 export default function ServicePage() {
   const [startAnimation, setStartAnimation] = useState(false)
