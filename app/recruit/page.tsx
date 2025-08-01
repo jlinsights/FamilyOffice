@@ -20,12 +20,24 @@ import {
   Briefcase,
   Users
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 
 
 // 클라이언트 컴포넌트에서는 서버 전용 설정 제거
 
 export default function RecruitPage() {
+  const [startAnimation, setStartAnimation] = useState(false)
+
+  useEffect(() => {
+    // 컴포넌트가 마운트된 후 애니메이션 시작
+    const timer = setTimeout(() => {
+      setStartAnimation(true)
+    }, 500) // 500ms 지연 후 애니메이션 시작
+
+    return () => clearTimeout(timer)
+  }, [])
+
   const positions = [
     {
       title: "자산관리 어드바이저",
@@ -141,25 +153,49 @@ export default function RecruitPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 animate-slide-up" style={{ animationDelay: '400ms' }}>
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                  <AnimatedCounter end={95} suffix="%" />
+                  <AnimatedCounter 
+                    end={95} 
+                    suffix="%" 
+                    startAnimation={startAnimation}
+                    duration={1500}
+                    easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+                  />
                 </div>
                 <div className="text-sm text-muted-foreground">직원 만족도</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
-                  <AnimatedCounter end={24} suffix="개월" />
+                  <AnimatedCounter 
+                    end={24} 
+                    suffix="개월" 
+                    startAnimation={startAnimation}
+                    duration={1800}
+                    easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+                  />
                 </div>
                 <div className="text-sm text-muted-foreground">평균 교육기간</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-violet-600 dark:text-violet-400 mb-2">
-                  <AnimatedCounter end={85} suffix="%" />
+                  <AnimatedCounter 
+                    end={85} 
+                    suffix="%" 
+                    startAnimation={startAnimation}
+                    duration={1600}
+                    easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+                  />
                 </div>
                 <div className="text-sm text-muted-foreground">내부 승진률</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">
-                  <AnimatedCounter end={3} suffix="개" />
+                  <AnimatedCounter 
+                    end={3} 
+                    suffix="개" 
+                    startAnimation={startAnimation}
+                    duration={1200}
+                    easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+                  />
                 </div>
                 <div className="text-sm text-muted-foreground">현재 채용직군</div>
               </div>

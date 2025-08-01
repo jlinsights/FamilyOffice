@@ -21,13 +21,26 @@ import {
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { AnimatedCounter } from "@/components/animated-counter"
+import { useEffect, useState } from "react"
 
 export default function AboutPage() {
+  const [startAnimation, setStartAnimation] = useState(false)
+
+  useEffect(() => {
+    // 컴포넌트가 마운트된 후 애니메이션 시작
+    const timer = setTimeout(() => {
+      setStartAnimation(true)
+    }, 500) // 500ms 지연 후 애니메이션 시작
+
+    return () => clearTimeout(timer)
+  }, [])
+
   const stats = [
-    { label: "자산관리 실적", value: "500억원+", icon: TrendingUp, color: "text-primary" },
-    { label: "법인 대표 만족도", value: "98%", icon: Star, color: "text-primary" },
-    { label: "법인 고객사", value: "500+", icon: Building, color: "text-primary" },
-    { label: "중소중견기업 전문경험", value: "20년+", icon: Award, color: "text-primary" }
+    { label: "자산관리 실적", value: 500, suffix: "억원+", icon: TrendingUp, color: "text-primary" },
+    { label: "법인 대표 만족도", value: 98, suffix: "%", icon: Star, color: "text-primary" },
+    { label: "법인 고객사", value: 500, suffix: "+", icon: Building, color: "text-primary" },
+    { label: "중소중견기업 전문경험", value: 20, suffix: "년+", icon: Award, color: "text-primary" }
   ]
 
   const values = [
@@ -168,7 +181,15 @@ export default function AboutPage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary mx-auto mb-4">
                   <stat.icon className="h-6 w-6" />
                 </div>
-                <div className="text-2xl font-bold mb-2">{stat.value}</div>
+                <div className="text-2xl font-bold mb-2">
+                  <AnimatedCounter 
+                    end={stat.value} 
+                    suffix={stat.suffix} 
+                    startAnimation={startAnimation}
+                    duration={1500 + (index * 200)}
+                    easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+                  />
+                </div>
                 <div className="text-muted-foreground text-sm">{stat.label}</div>
               </div>
             ))}

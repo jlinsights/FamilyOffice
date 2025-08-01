@@ -6,8 +6,20 @@ import { ArrowRight, Crown, ArrowDown } from "lucide-react"
 import { AnimatedCounter } from "@/components/animated-counter"
 import { ClientOnlyIcon } from "@/components/ui/client-only-icon"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export function HeroSection() {
+  const [startAnimation, setStartAnimation] = useState(false)
+
+  useEffect(() => {
+    // 컴포넌트가 마운트된 후 애니메이션 시작
+    const timer = setTimeout(() => {
+      setStartAnimation(true)
+    }, 500) // 500ms 지연 후 애니메이션 시작
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <section id="hero" className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
       {/* 배경 그라데이션 효과 */}
@@ -40,25 +52,49 @@ export function HeroSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 animate-slide-up" style={{ animationDelay: '400ms' }}>
           <div className="text-center">
             <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-              <AnimatedCounter end={10} suffix="년+" />
+              <AnimatedCounter 
+                end={10} 
+                suffix="년+" 
+                startAnimation={startAnimation}
+                duration={1500}
+                easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+              />
             </div>
             <div className="text-sm text-muted-foreground">가업승계 노하우</div>
           </div>
           <div className="text-center">
             <div className="text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
-              <AnimatedCounter end={1500} suffix="+" />
+              <AnimatedCounter 
+                end={1500} 
+                suffix="+" 
+                startAnimation={startAnimation}
+                duration={2000}
+                easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+              />
             </div>
             <div className="text-sm text-muted-foreground">M&A 플랫폼<br />잠재 매수기업</div>
           </div>
           <div className="text-center">
             <div className="text-3xl md:text-4xl font-bold text-violet-600 dark:text-violet-400 mb-2">
-              <AnimatedCounter end={60} suffix="+" />
+              <AnimatedCounter 
+                end={60} 
+                suffix="+" 
+                startAnimation={startAnimation}
+                duration={1500}
+                easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+              />
             </div>
             <div className="text-sm text-muted-foreground">Big 4 출신<br />전문가 컨소시엄</div>
           </div>
           <div className="text-center">
             <div className="text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">
-              <AnimatedCounter end={88} suffix="%" />
+              <AnimatedCounter 
+                end={88} 
+                suffix="%" 
+                startAnimation={startAnimation}
+                duration={1800}
+                easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+              />
             </div>
             <div className="text-sm text-muted-foreground">법인 CEO<br />고정자산 비중</div>
           </div>

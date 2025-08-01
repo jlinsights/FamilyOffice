@@ -1,42 +1,60 @@
+'use client'
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, ArrowRight, Building, TrendingUp, Award, Users, Phone } from "lucide-react"
 import Link from "next/link"
-import type { Metadata } from "next"
 import { IndustryServicesTabsSection } from "@/components/industry-services-section";
+import { AnimatedCounter } from "@/components/animated-counter"
+import { useEffect, useState } from "react"
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "중소중견기업 전문 자산관리 서비스 | FamilyOffice S",
   description: "제조업, 건설업, IT벤처기업 등 업종별 특화 자산관리. 중대재해처벌법 대응부터 가족법인 설립, 승계 설계까지 통합 솔루션.",
   keywords: "중소중견기업 자산관리, 제조업 자산관리, 건설업 보험, 벤처기업 정책자금, 중대재해처벌법, 가족법인 설립",
 }
 
 export default function ServicePage() {
+  const [startAnimation, setStartAnimation] = useState(false)
+
+  useEffect(() => {
+    // 컴포넌트가 마운트된 후 애니메이션 시작
+    const timer = setTimeout(() => {
+      setStartAnimation(true)
+    }, 500) // 500ms 지연 후 애니메이션 시작
+
+    return () => clearTimeout(timer)
+  }, [])
+
   // 실적 및 신뢰성 지표
   const serviceStats = [
     {
       icon: TrendingUp,
-      value: "500억원+",
+      value: 500,
+      suffix: "억원+",
       label: "누적 관리 자산",
       description: "중소중견기업 전문 관리 실적"
     },
     {
       icon: Building,
-      value: "500+",
+      value: 500,
+      suffix: "+",
       label: "법인 고객사",
       description: "다양한 업종의 중소중견기업"
     },
     {
       icon: Award,
-      value: "20년",
+      value: 20,
+      suffix: "년",
       label: "전문 경험",
       description: "중소중견기업 자산관리 노하우"
     },
     {
       icon: Users,
-      value: "98%",
+      value: 98,
+      suffix: "%",
       label: "고객 만족도",
       description: "지속적인 신뢰 관계 구축"
     }
@@ -161,7 +179,15 @@ export default function ServicePage() {
                       <IconComponent className="h-6 w-6 text-primary" />
                     </div>
                   </div>
-                  <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+                  <div className="text-3xl font-bold text-primary mb-2">
+                    <AnimatedCounter 
+                      end={stat.value} 
+                      suffix={stat.suffix} 
+                      startAnimation={startAnimation}
+                      duration={1500 + (index * 200)}
+                      easingFunction={(t) => 1 - Math.pow(1 - t, 3)}
+                    />
+                  </div>
                   <div className="font-semibold text-foreground mb-1">{stat.label}</div>
                   <div className="text-sm text-muted-foreground text-pretty">{stat.description}</div>
                 </div>
