@@ -617,6 +617,114 @@
   }
 }
 
+/* 서브메뉴 애니메이션 */
+@keyframes dropdown-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submenu-dropdown {
+  animation: dropdown-fade-in 0.2s ease-out;
+}
+
+/* 서브메뉴 호버 효과 */
+.submenu-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.submenu-item:hover {
+  transform: translateX(4px);
+}
+
+/* 서브메뉴 화살표 회전 애니메이션 */
+.chevron-rotate {
+  transition: transform 0.2s ease-in-out;
+}
+
+.chevron-rotate.rotated {
+  transform: rotate(180deg);
+}
+
+/* 서브메뉴 배경 블러 효과 */
+.submenu-backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* 서브메뉴 그림자 효과 */
+.submenu-shadow {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .submenu-shadow {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* 서브메뉴 마우스 이동 경로 개선 */
+.submenu-gap {
+  padding-top: 0.5rem;
+}
+
+.submenu-gap::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+  background: transparent;
+}
+
+/* 서브메뉴 아이템 호버 상태 */
+.submenu-item-hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.submenu-item-hover .submenu-title {
+  color: hsl(var(--primary));
+}
+
+.submenu-item-hover .submenu-description {
+  color: hsl(var(--muted-foreground) / 0.8);
+}
+
+/* 서브메뉴 반응형 개선 */
+@media (max-width: 768px) {
+  .submenu-dropdown {
+    animation: none;
+  }
+  
+  .submenu-item:hover {
+    transform: none;
+  }
+}
+
+/* 서브메뉴 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+  .submenu-dropdown {
+    animation: none;
+  }
+  
+  .chevron-rotate {
+    transition: none;
+  }
+  
+  .submenu-item {
+    transition: none;
+  }
+  
+  .submenu-item:hover {
+    transform: none;
+  }
+}
+
 /* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
   *,

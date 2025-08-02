@@ -421,7 +421,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
-                <Link href="/strategic-partnership">
+                <Link href="/services">
                   Learn More About Our Services
                 </Link>
               </Button>

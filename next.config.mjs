@@ -81,34 +81,12 @@ const nextConfig = {
       config.externals.push('yahoo-finance2')
     }
 
-    // 청크 분할 최적화 (단순화)
+    // 청크 분할 단순화 (ChunkLoadError 해결)
     if (!isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
         cacheGroups: {
-          // Framework 청크
-          framework: {
-            chunks: 'all',
-            name: 'framework',
-            test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
-            priority: 40,
-            enforce: true,
-          },
-          // UI 라이브러리 청크
-          ui: {
-            name: 'ui-lib',
-            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|class-variance-authority|clsx|tailwind-merge)[\\/]/,
-            priority: 30,
-            enforce: true,
-          },
-          // 인증 청크
-          auth: {
-            name: 'auth-lib',
-            test: /[\\/]node_modules[\\/](@clerk)[\\/]/,
-            priority: 25,
-            enforce: true,
-          },
-          // 외부 라이브러리
+          // 기본 벤더 청크
           vendor: {
             name: 'vendor',
             test: /[\\/]node_modules[\\/]/,

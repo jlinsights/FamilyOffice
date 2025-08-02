@@ -95,7 +95,7 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
             {NAVIGATION_ITEMS.map((item: NavigationItem) => (
               <div
                 key={item.href}
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => item.submenu && handleMenuHover(item.label)}
                 onMouseLeave={() => item.submenu && handleMenuLeave()}
               >
@@ -107,17 +107,17 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
                       aria-expanded={hoveredMenu === item.label}
                     >
                       {item.label}
-                      <ChevronDown className="h-4 w-4" />
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${hoveredMenu === item.label ? 'rotate-180' : ''}`} />
                     </button>
                     
-                    {/* 서브메뉴 드롭다운 - 마우스 이동 경로를 위한 패딩 추가 */}
+                    {/* 서브메뉴 드롭다운 */}
                     {hoveredMenu === item.label && (
                       <div 
                         className="absolute top-full left-0 pt-2 w-80 z-50"
                         onMouseEnter={() => handleMenuHover(item.label)}
                         onMouseLeave={handleMenuLeave}
                       >
-                        <div className="bg-background border border-border rounded-lg shadow-lg">
+                        <div className="bg-background/95 backdrop-blur-sm border border-border rounded-lg shadow-xl">
                           <div className="p-2">
                             {item.submenu.map((subItem: NavigationSubItem) => (
                               <Link
@@ -125,14 +125,14 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
                                 href={subItem.href}
                                 target={subItem.isExternal ? "_blank" : undefined}
                                 rel={subItem.isExternal ? "noopener noreferrer" : undefined}
-                                className="block p-3 rounded-md hover:bg-accent transition-colors group"
+                                className="block p-3 rounded-md hover:bg-accent transition-colors group/submenu"
                                 aria-label={subItem.isExternal ? `${subItem.label} (새 창에서 열림)` : subItem.label}
                               >
-                                <div className="font-medium text-foreground group-hover:text-primary transition-colors">
+                                <div className="font-medium text-foreground group-hover/submenu:text-primary transition-colors">
                                   {subItem.label}
                                 </div>
                                 {subItem.description && (
-                                  <div className="text-sm text-muted-foreground mt-1">
+                                  <div className="text-sm text-muted-foreground mt-1 group-hover/submenu:text-muted-foreground/80 transition-colors">
                                     {subItem.description}
                                   </div>
                                 )}
@@ -180,97 +180,61 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
       {isMobileMenuOpen && (
         <div 
           id="mobile-menu"
-          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
-          role="dialog"
-          aria-modal="true"
+          className="md:hidden bg-background/95 backdrop-blur-sm border-t border-border"
+          role="navigation"
           aria-label="모바일 메뉴"
         >
-          <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-background divide-y-2 divide-border">
-            <div className="pt-5 pb-6 px-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <MinimalFamilyOfficeLogo className="h-8 w-auto" />
-                </div>
-                <div className="-mr-2">
-                  <Button
-                    variant="ghost"
-                    onClick={toggleMobileMenu}
-                    className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary hover:bg-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
-                    aria-label="메뉴 닫기"
-                  >
-                    <span className="sr-only">메뉴 닫기</span>
-                    <ClientOnlyIcon icon={X} className="h-6 w-6" aria-hidden="true" />
-                  </Button>
-                </div>
-              </div>
-              <div className="mt-6">
-                <nav className="grid gap-y-2" role="navigation" aria-label="모바일 메뉴">
-                  {NAVIGATION_ITEMS.map((item: NavigationItem) => (
-                    <div key={item.href}>
-                      {item.submenu ? (
-                        <div className="space-y-2">
-                          <div className="p-3 text-base font-medium text-foreground border-b border-border">
-                            {item.label}
-                          </div>
-                          <div className="pl-4 space-y-1">
-                            {item.submenu.map((subItem: NavigationSubItem) => (
-                              <Link
-                                key={subItem.href}
-                                href={subItem.href}
-                                target={subItem.isExternal ? "_blank" : undefined}
-                                rel={subItem.isExternal ? "noopener noreferrer" : undefined}
-                                onClick={handleMobileLinkClick}
-                                className="block p-3 rounded-md hover:bg-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                                aria-label={subItem.isExternal ? `${subItem.label} (새 창에서 열림)` : subItem.label}
-                              >
-                                <div className="text-sm font-medium text-foreground">
-                                  {subItem.label}
-                                </div>
-                                {subItem.description && (
-                                  <div className="text-xs text-muted-foreground mt-1">
-                                    {subItem.description}
-                                  </div>
-                                )}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      ) : (
-                        <Link
-                          href={item.href}
-                          target={item.isExternal ? "_blank" : undefined}
-                          rel={item.isExternal ? "noopener noreferrer" : undefined}
-                          onClick={handleMobileLinkClick}
-                          className="-m-3 p-3 flex items-center rounded-md hover:bg-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                          aria-label={item.isExternal ? `${item.label} (새 창에서 열림)` : item.label}
-                        >
-                          <span className="ml-3 text-base font-medium text-foreground">
-                            {item.label}
-                          </span>
-                        </Link>
-                      )}
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {NAVIGATION_ITEMS.map((item: NavigationItem) => (
+              <div key={item.href}>
+                {item.submenu ? (
+                  <div className="space-y-1">
+                    <div className="px-3 py-2 text-base font-medium text-foreground">
+                      {item.label}
                     </div>
-                  ))}
-                </nav>
-              </div>
-            </div>
-            <div className="py-6 px-5 space-y-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  {/* <ThemeToggle /> 임시 비활성화 */}
-                </div>
-                
-                {/* 모바일 컨설팅 신청 버튼 */}
-                <Button size="sm" asChild onClick={handleMobileLinkClick}>
-                  <Link 
-                    href="/contact"
-                    aria-label="무료 상담 신청 페이지로 이동"
+                    <div className="pl-4 space-y-1">
+                      {item.submenu.map((subItem: NavigationSubItem) => (
+                        <Link
+                          key={subItem.href}
+                          href={subItem.href}
+                          target={subItem.isExternal ? "_blank" : undefined}
+                          rel={subItem.isExternal ? "noopener noreferrer" : undefined}
+                          className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                          onClick={handleMobileLinkClick}
+                          aria-label={subItem.isExternal ? `${subItem.label} (새 창에서 열림)` : subItem.label}
+                        >
+                          {subItem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    href={item.href}
+                    target={item.isExternal ? "_blank" : undefined}
+                    rel={item.isExternal ? "noopener noreferrer" : undefined}
+                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                    onClick={handleMobileLinkClick}
+                    aria-label={item.isExternal ? `${item.label} (새 창에서 열림)` : item.label}
                   >
-                    {consultationText}
-                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                    {item.label}
                   </Link>
-                </Button>
+                )}
               </div>
+            ))}
+            
+            {/* 모바일 컨설팅 신청 버튼 */}
+            <div className="pt-4 border-t border-border">
+              <Button size="sm" className="w-full" asChild>
+                <Link 
+                  href="/contact"
+                  onClick={handleMobileLinkClick}
+                  aria-label="무료 상담 신청 페이지로 이동"
+                >
+                  {consultationText}
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
