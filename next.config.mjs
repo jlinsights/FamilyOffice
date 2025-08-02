@@ -35,7 +35,7 @@ const nextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
   
-  // 웹팩 설정 최적화 (단순화)
+  // 웹팩 설정 최적화 (ChunkLoadError 해결)
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // backend 디렉토리 제외 (개발 환경에서는 제거)
     if (!dev) {
@@ -75,16 +75,26 @@ const nextConfig = {
       }
     }
 
-    // yahoo-finance2 관련 모듈 처리
-    config.externals = config.externals || []
+    // Node.js 전용 모듈들을 클라이언트에서 제외
     if (!isServer) {
-      config.externals.push('yahoo-finance2')
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        'yahoo-finance2': false,
+        'node-cache': false,
+        'fs': false,
+        'stream': false,
+        'path': false,
+        'os': false,
+        'crypto': false,
+      }
     }
 
-    // 청크 분할 단순화 (ChunkLoadError 해결)
+    // ChunkLoadError 해결을 위한 청크 분할 최적화
     if (!isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
+        maxInitialRequests: 25,
+        minSize: 20000,
         cacheGroups: {
           // 기본 벤더 청크
           vendor: {
@@ -92,6 +102,7 @@ const nextConfig = {
             test: /[\\/]node_modules[\\/]/,
             priority: 10,
             enforce: true,
+            chunks: 'all',
           },
           // 공통 컴포넌트
           commons: {
@@ -99,9 +110,32 @@ const nextConfig = {
             minChunks: 2,
             priority: 5,
             reuseExistingChunk: true,
+            enforce: true,
+          },
+          // Clerk 관련 청크
+          clerk: {
+            name: 'clerk',
+            test: /[\\/]node_modules[\\/]@clerk[\\/]/,
+            priority: 20,
+            enforce: true,
+          },
+          // UI 컴포넌트 청크
+          ui: {
+            name: 'ui',
+            test: /[\\/]components[\\/]ui[\\/]/,
+            priority: 15,
+            enforce: true,
           },
         },
       }
+    }
+
+    // 청크 로딩 실패 시 재시도 설정
+    config.output = {
+      ...config.output,
+      chunkFilename: dev 
+        ? 'static/chunks/[name].js' 
+        : 'static/chunks/[name].[contenthash].js',
     }
 
     return config

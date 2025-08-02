@@ -11,7 +11,7 @@ export function Footer() {
 
       <footer className="border-t border-border/40 bg-gradient-to-b from-muted/30 to-muted/50 dark:from-muted/20 dark:to-muted/40">
         <div className="container section-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             {/* 회사 정보 */}
             <div className="lg:col-span-2">
               <div className="mb-6 flex justify-start">
@@ -20,11 +20,6 @@ export function Footer() {
                   showTagline={true}
                 />
               </div>
-              <p className="text-muted-foreground mb-6 max-w-md text-pretty leading-relaxed">
-                중소중견기업 전문 자산관리 서비스 팀.
-                <br />
-                중소중견기업 법인 대표님을 위한 전문 자산관리 서비스를 제공합니다.
-              </p>
               <div className="flex space-x-3">
                 <Link 
                   href="#" 

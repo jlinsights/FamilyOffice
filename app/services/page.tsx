@@ -11,18 +11,36 @@ import Link from "next/link"
 import { IndustryServicesTabsSection } from "@/components/industry-services-section"
 import { AnimatedCounter } from "@/components/animated-counter"
 import { SERVICE_CATEGORIES, INDUSTRY_SERVICES } from "@/constants/services"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 export default function ServicePage() {
   const [startAnimation, setStartAnimation] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
+  const statsSectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setStartAnimation(true)
-    }, 500)
-    return () => clearTimeout(timer)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStartAnimation(true)
+        }
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+      }
+    )
+
+    if (statsSectionRef.current) {
+      observer.observe(statsSectionRef.current)
+    }
+
+    return () => {
+      if (statsSectionRef.current) {
+        observer.unobserve(statsSectionRef.current)
+      }
+    }
   }, [])
 
   // 실적 및 신뢰성 지표
@@ -110,7 +128,7 @@ export default function ServicePage() {
         </section>
 
         {/* 서비스 실적 통계 섹션 */}
-        <section className="section bg-gradient-to-r from-muted/30 to-background">
+        <section ref={statsSectionRef} className="section bg-gradient-to-r from-muted/30 to-background">
           <div className="container">
             <div className="text-center mb-12">
               <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">
@@ -312,8 +330,8 @@ export default function ServicePage() {
           </div>
         </section>
 
-        {/* 전문가 팀 */}
-        <section className="py-20">
+        {/* 전문가 팀 - 숨김 처리 */}
+        {/* <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 animate-fade-in bg-background/80 backdrop-blur-sm">Expert Team</Badge>
@@ -321,7 +339,6 @@ export default function ServicePage() {
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">20년 이상의 경험을 보유한 중소중견기업 자산관리 전문가들이 함께합니다</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {/* 임재홍 */}
               <div className="card-modern p-8 text-center animate-up" style={{ animationDelay: `0ms` }}>
                 <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <Users className="h-12 w-12 text-primary" />
@@ -331,7 +348,6 @@ export default function ServicePage() {
                 <p className="text-sm text-muted-foreground mb-2">중소중견기업 전문, 패밀리오피스 설계</p>
                 <p className="text-muted-foreground text-sm">대형 금융그룹 출신으로 중소중견기업 자산관리 경험과 전문성 보유</p>
               </div>
-              {/* 장현오 */}
               <div className="card-modern p-8 text-center animate-up" style={{ animationDelay: `150ms` }}>
                 <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <Users className="h-12 w-12 text-primary" />
@@ -341,7 +357,6 @@ export default function ServicePage() {
                 <p className="text-sm text-muted-foreground mb-2">제조업·건설업 전문, 중대재해처벌법 대응</p>
                 <p className="text-muted-foreground text-sm">위험업종 전문 보험설계 및 기업재해보장보험 설계 전문가</p>
               </div>
-              {/* 박병학 */}
               <div className="card-modern p-8 text-center animate-up" style={{ animationDelay: `300ms` }}>
                 <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <Users className="h-12 w-12 text-primary" />
@@ -351,7 +366,6 @@ export default function ServicePage() {
                 <p className="text-sm text-muted-foreground mb-2">가족법인 설립, 승계 설계, MSO 구조화</p>
                 <p className="text-muted-foreground text-sm">Big4 회계법인 출신으로 중소중견기업 세무 및 승계 전문가</p>
               </div>
-              {/* 주상미 */}
               <div className="card-modern p-8 text-center animate-up" style={{ animationDelay: `450ms` }}>
                 <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <Users className="h-12 w-12 text-primary" />
@@ -363,10 +377,10 @@ export default function ServicePage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
-        {/* 업종별 특화 서비스 섹션 (프리미엄 Tabs) */}
-        <IndustryServicesTabsSection />
+        {/* 업종별 특화 서비스 섹션 (프리미엄 Tabs) - 숨김 처리 */}
+        {/* <IndustryServicesTabsSection /> */}
 
         {/* 연락처 및 CTA 섹션 */}
         <section id="contact" className="section bg-gradient-to-r from-primary/5 to-primary/10">

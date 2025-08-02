@@ -89,19 +89,19 @@ const mainPageServices = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="section bg-gradient-to-b from-muted/30 to-background">
+    <section id="services" className="section bg-gradient-to-b from-muted/30 to-background dark:from-gray-900 dark:to-gray-900">
       <div className="container">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 animate-fade-in">
+          <Badge variant="outline" className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60">
             <Briefcase className="h-3 w-3 mr-1" />
             Professional Services
           </Badge>
           
-          <h2 className="mb-6 font-bold text-balance animate-slide-up">
-            <span className="text-primary">8개 분야 34개</span> 전문 서비스
+          <h2 className="mb-6 font-bold text-balance animate-slide-up text-gray-900 dark:text-white">
+            <span className="text-primary dark:text-emerald-300">8개 분야 34개</span> 전문 서비스
           </h2>
           
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance animate-slide-up leading-relaxed" style={{ animationDelay: '100ms' }}>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance animate-slide-up leading-relaxed dark:text-gray-200" style={{ animationDelay: '100ms' }}>
             기업가의 모든 고민을 해결하는 체계적이고 전문적인 서비스 포트폴리오
           </p>
         </div>
@@ -111,22 +111,22 @@ export function ServicesSection() {
           {mainPageServices.map((service, index) => (
             <Card 
               key={service.id} 
-              className="group hover:shadow-lg transition-all duration-300 animate-slide-up border-border/50 hover:border-primary/30"
+              className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 animate-slide-up border-border/50 hover:border-primary/30 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors">
-                    <service.icon className="h-5 w-5 text-primary" />
+                  <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors">
+                    <service.icon className="h-5 w-5 text-primary dark:text-emerald-300" />
                   </div>
-                  <Badge variant="secondary" className="text-xs">
+                  <Badge variant="secondary" className="text-xs dark:bg-gray-700 dark:text-gray-200">
                     {service.serviceCount}개 서비스
                   </Badge>
                 </div>
-                <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                <CardTitle className="text-lg font-semibold text-foreground dark:text-white group-hover:text-primary dark:group-hover:text-emerald-300 transition-colors">
                   {service.title}
                 </CardTitle>
-                <CardDescription className="text-sm text-muted-foreground leading-relaxed">
+                <CardDescription className="text-sm text-muted-foreground dark:text-gray-200 leading-relaxed">
                   {service.description}
                 </CardDescription>
               </CardHeader>
@@ -134,14 +134,14 @@ export function ServicesSection() {
                 <div className="space-y-2">
                   {service.keyFeatures.slice(0, 3).map((feature, idx) => (
                     <div key={idx} className="flex items-center text-sm">
-                      <CheckCircle className="h-3 w-3 text-primary mr-2 flex-shrink-0" />
-                      <span className="text-muted-foreground">{feature}</span>
+                      <CheckCircle className="h-3 w-3 text-primary dark:text-emerald-300 mr-2 flex-shrink-0" />
+                      <span className="text-muted-foreground dark:text-gray-200">{feature}</span>
                     </div>
                   ))}
                   {service.keyFeatures.length > 3 && (
                     <div className="flex items-center text-sm">
-                      <CheckCircle className="h-3 w-3 text-primary mr-2 flex-shrink-0" />
-                      <span className="text-muted-foreground">+{service.keyFeatures.length - 3}개 더</span>
+                      <CheckCircle className="h-3 w-3 text-primary dark:text-emerald-300 mr-2 flex-shrink-0" />
+                      <span className="text-muted-foreground dark:text-gray-200">+{service.keyFeatures.length - 3}개 더</span>
                     </div>
                   )}
                 </div>
@@ -151,12 +151,12 @@ export function ServicesSection() {
         </div>
 
         {/* 통계 섹션 */}
-        <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-8 mb-12">
+        <div className="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-2xl p-8 mb-12 dark:bg-gray-800/50">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-4 text-foreground">
-              <span className="text-primary">검증된 실적</span>과 <span className="text-primary">전문성</span>
+            <h3 className="text-2xl font-bold mb-4 text-foreground dark:text-white">
+              <span className="text-primary dark:text-emerald-300">검증된 실적</span>과 <span className="text-primary dark:text-emerald-300">전문성</span>
             </h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground dark:text-gray-200 max-w-2xl mx-auto">
               500억원+ 관리 실적과 20년+ 전문 경험을 바탕으로 중소중견기업 대표님의 모든 고민을 해결합니다
             </p>
           </div>
@@ -169,8 +169,8 @@ export function ServicesSection() {
               { value: "98%", label: "고객 만족도", icon: Target }
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-2xl font-bold text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-2xl font-bold text-primary dark:text-emerald-300 mb-1">{stat.value}</div>
+                <div className="text-sm text-muted-foreground dark:text-gray-200">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -179,21 +179,21 @@ export function ServicesSection() {
         {/* CTA 섹션 */}
         <div className="text-center">
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">
+            <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg dark:bg-emerald-600 dark:hover:bg-emerald-700">
               <Link href="/services" className="flex items-center">
                 <Search className="mr-2 h-5 w-5" />
                 서비스 자세히 보기
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="font-bold shadow-lg px-8 py-4 text-lg">
+            <Button size="lg" variant="outline" asChild className="font-bold shadow-lg px-8 py-4 text-lg dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800">
               <Link href="/contact" className="flex items-center">
                 무료 상담 신청
               </Link>
             </Button>
           </div>
           
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground dark:text-gray-300">
             각 서비스별 상세 내용과 혜택을 확인하시고, 맞춤형 솔루션을 경험해보세요
           </p>
         </div>

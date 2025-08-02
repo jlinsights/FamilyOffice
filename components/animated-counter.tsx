@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 interface AnimatedCounterProps {
   end: number
@@ -17,13 +17,6 @@ interface AnimatedCounterProps {
   ariaLabel?: string
 }
 
-const defaultEasingFunctions = {
-  easeOut: (t: number) => 1 - Math.pow(1 - t, 3),
-  easeIn: (t: number) => Math.pow(t, 3),
-  easeInOut: (t: number) => t < 0.5 ? 4 * Math.pow(t, 3) : 1 - Math.pow(-2 * t + 2, 3) / 2,
-  linear: (t: number) => t
-}
-
 export function AnimatedCounter({ 
   end, 
   start = 0,
@@ -32,98 +25,75 @@ export function AnimatedCounter({
   suffix = "", 
   className = "",
   startAnimation = false,
-  easingFunction = defaultEasingFunctions.easeOut,
   formatNumber,
   onComplete,
   locale = 'ko-KR',
   ariaLabel
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(start)
-  const [isVisible, setIsVisible] = useState(false)
-  const [hasAnimated, setHasAnimated] = useState(false)
-  const counterRef = useRef<HTMLSpanElement>(null)
-  const animationRef = useRef<number | null>(null)
+  const [isMounted, setIsMounted] = useState(false)
 
-  // 숫자 포맷팅 함수 (한국 로케일 적용)
+  // 클라이언트 사이드 마운트 확인
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  // 숫자 포맷팅 함수
   const formatDisplayNumber = useCallback((num: number): string => {
     if (formatNumber) {
       return formatNumber(num)
     }
-    return new Intl.NumberFormat(locale).format(Math.floor(num))
+    return Math.floor(num).toLocaleString(locale)
   }, [formatNumber, locale])
 
-  // Intersection Observer 설정
+  // 단순한 애니메이션 로직
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isVisible && !hasAnimated) {
-          setIsVisible(true)
-        }
-      },
-      { 
-        threshold: 0.1,
-        rootMargin: '50px'
-      }
-    )
+    if (!isMounted || !startAnimation) return
 
-    if (counterRef.current) {
-      observer.observe(counterRef.current)
-    }
+    let animationFrame: number
+    const startTime = Date.now()
+    const difference = end - start
 
-    return () => observer.disconnect()
-  }, [isVisible, hasAnimated])
+    const animate = () => {
+      const elapsed = Date.now() - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      
+      // 간단한 easing
+      const easedProgress = 1 - Math.pow(1 - progress, 3)
+      const currentCount = start + (difference * easedProgress)
+      
+      setCount(currentCount)
 
-  // 애니메이션 로직
-  useEffect(() => {
-    if ((isVisible || startAnimation) && !hasAnimated) {
-      setHasAnimated(true)
-      const startTime = performance.now()
-      const difference = end - start
-
-      const animate = (currentTime: number) => {
-        const elapsed = currentTime - startTime
-        const progress = Math.min(elapsed / duration, 1)
-        
-        const easedProgress = easingFunction(progress)
-        const currentCount = start + (difference * easedProgress)
-        
-        setCount(currentCount)
-
-        if (progress < 1) {
-          animationRef.current = requestAnimationFrame(animate)
-        } else {
-          setCount(end)
-          onComplete?.()
-        }
-      }
-
-      animationRef.current = requestAnimationFrame(animate)
-
-      return () => {
-        if (animationRef.current) {
-          cancelAnimationFrame(animationRef.current)
-        }
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate)
+      } else {
+        setCount(end)
+        onComplete?.()
       }
     }
-    return undefined
-  }, [isVisible, startAnimation, hasAnimated, start, end, duration, easingFunction, onComplete])
 
-  // 컴포넌트 언마운트 시 애니메이션 정리
-  useEffect(() => {
+    animationFrame = requestAnimationFrame(animate)
+
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame)
       }
     }
-  }, [])
+  }, [isMounted, startAnimation, start, end, duration, onComplete])
+
+  // SSR 방지: 마운트되기 전에는 시작 값 표시
+  if (!isMounted) {
+    return (
+      <span className={className}>
+        {prefix}{formatDisplayNumber(start)}{suffix}
+      </span>
+    )
+  }
 
   return (
     <span 
-      ref={counterRef} 
       className={className}
       aria-label={ariaLabel || `${prefix}${formatDisplayNumber(count)}${suffix}`}
-      role="img"
-      aria-live="polite"
     >
       {prefix}{formatDisplayNumber(count)}{suffix}
     </span>

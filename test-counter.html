@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AnimatedCounter Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .counter { font-size: 24px; font-weight: bold; margin: 10px 0; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>AnimatedCounter Test</h1>
+    <p>This HTML file tests basic counter functionality without React/Next.js</p>
+    
+    <div class="counter" id="counter1">10년+</div>
+    <div class="counter" id="counter2">1,500+</div>
+    <div class="counter" id="counter3">60+</div>
+    <div class="counter" id="counter4">88%</div>
+    
+    <div class="debug">
+        <h3>Expected values on main page:</h3>
+        <ul>
+            <li>10년+ (10 years experience)</li>
+            <li>1,500+ (clients/projects)</li>
+            <li>60+ (experts/specialists)</li>
+            <li>88% (success rate)</li>
+        </ul>
+    </div>
+
+    <script>
+        console.log('Simple counter test loaded successfully');
+        
+        // Simulate counter animation
+        setTimeout(() => {
+            document.getElementById('counter1').textContent = '10년+';
+            document.getElementById('counter2').textContent = '1,500+';
+            document.getElementById('counter3').textContent = '60+';
+            document.getElementById('counter4').textContent = '88%';
+            console.log('Counters updated');
+        }, 500);
+    </script>
+</body>
+</html>

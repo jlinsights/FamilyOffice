@@ -37,5 +37,5 @@ async function handler() {
   }
 }
 
-// Apply rate limiting to the handler
-export const POST = withRateLimit(handler, rateLimiters.general); 
+// Apply rate limiting to the handler (use contact limiter since general is null)
+export const POST = withRateLimit(handler, rateLimiters.contact); 

@@ -18,7 +18,6 @@ interface HeaderProps {
 
 export const Header = memo(function Header({ isScrolled = false }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null)
 
   const toggleMobileMenu: MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
     e.preventDefault()
@@ -35,14 +34,6 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
       setIsMobileMenuOpen(false)
     }
   }, [isMobileMenuOpen])
-
-  const handleMenuHover = useCallback((label: string) => {
-    setHoveredMenu(label)
-  }, [])
-
-  const handleMenuLeave = useCallback(() => {
-    setHoveredMenu(null)
-  }, [])
 
   const consultationText = "무료 상담 신청"
 
@@ -96,52 +87,43 @@ export const Header = memo(function Header({ isScrolled = false }: HeaderProps) 
               <div
                 key={item.href}
                 className="relative group"
-                onMouseEnter={() => item.submenu && handleMenuHover(item.label)}
-                onMouseLeave={() => item.submenu && handleMenuLeave()}
               >
                 {item.submenu ? (
                   <>
                     <button
                       className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1 flex items-center gap-1 h-9"
                       aria-label={`${item.label} 메뉴`}
-                      aria-expanded={hoveredMenu === item.label}
                     >
                       {item.label}
-                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${hoveredMenu === item.label ? 'rotate-180' : ''}`} />
+                      <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
                     </button>
                     
-                    {/* 서브메뉴 드롭다운 */}
-                    {hoveredMenu === item.label && (
-                      <div 
-                        className="absolute top-full left-0 pt-2 w-80 z-50"
-                        onMouseEnter={() => handleMenuHover(item.label)}
-                        onMouseLeave={handleMenuLeave}
-                      >
-                        <div className="bg-background/95 backdrop-blur-sm border border-border rounded-lg shadow-xl">
-                          <div className="p-2">
-                            {item.submenu.map((subItem: NavigationSubItem) => (
-                              <Link
-                                key={subItem.href}
-                                href={subItem.href}
-                                target={subItem.isExternal ? "_blank" : undefined}
-                                rel={subItem.isExternal ? "noopener noreferrer" : undefined}
-                                className="block p-3 rounded-md hover:bg-accent transition-colors group/submenu"
-                                aria-label={subItem.isExternal ? `${subItem.label} (새 창에서 열림)` : subItem.label}
-                              >
-                                <div className="font-medium text-foreground group-hover/submenu:text-primary transition-colors">
-                                  {subItem.label}
+                    {/* 서브메뉴 드롭다운 - CSS group hover 사용 */}
+                    <div className="absolute top-full left-0 pt-2 w-80 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-[60]">
+                      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl">
+                        <div className="p-2">
+                          {item.submenu.map((subItem: NavigationSubItem) => (
+                            <Link
+                              key={subItem.href}
+                              href={subItem.href}
+                              target={subItem.isExternal ? "_blank" : undefined}
+                              rel={subItem.isExternal ? "noopener noreferrer" : undefined}
+                              className="block p-3 rounded-md hover:bg-accent transition-colors group/submenu"
+                              aria-label={subItem.isExternal ? `${subItem.label} (새 창에서 열림)` : subItem.label}
+                            >
+                              <div className="font-medium text-foreground group-hover/submenu:text-primary transition-colors">
+                                {subItem.label}
+                              </div>
+                              {subItem.description && (
+                                <div className="text-sm text-muted-foreground mt-1 group-hover/submenu:text-muted-foreground/80 transition-colors">
+                                  {subItem.description}
                                 </div>
-                                {subItem.description && (
-                                  <div className="text-sm text-muted-foreground mt-1 group-hover/submenu:text-muted-foreground/80 transition-colors">
-                                    {subItem.description}
-                                  </div>
-                                )}
-                              </Link>
-                            ))}
-                          </div>
+                              )}
+                            </Link>
+                          ))}
                         </div>
                       </div>
-                    )}
+                    </div>
                   </>
                 ) : (
                   <Link

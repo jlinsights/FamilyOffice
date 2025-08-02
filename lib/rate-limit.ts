@@ -190,9 +190,14 @@ export const rateLimiters = {
 // Middleware function to apply rate limiting
 export function withRateLimit(
   handler: (req: NextRequest) => Promise<NextResponse>,
-  limiter: RateLimiter = rateLimiters.general
+  limiter?: RateLimiter | null
 ) {
   return async (req: NextRequest): Promise<NextResponse> => {
+    // Skip rate limiting if no limiter provided
+    if (!limiter) {
+      return handler(req)
+    }
+    
     const result = await limiter.check(req)
     
     if (!result.success) {

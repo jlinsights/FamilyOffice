@@ -34,110 +34,129 @@ const ChartSkeleton = () => (
   </div>
 )
 
-// Heavy components with lazy loading
-export const LazyFinancialDashboard = dynamic(
-  () => import('@/components/asset-management-dashboard'),
-  {
-    loading: () => <ComponentSkeleton />,
-    ssr: false,
-  }
+// Error boundary for chunk loading failures
+const ChunkErrorFallback = ({ componentName }: { componentName: string }) => (
+  <Card className="w-full border-destructive">
+    <CardHeader>
+      <h3 className="text-lg font-semibold text-destructive">컴포넌트 로드 실패</h3>
+      <p className="text-sm text-muted-foreground">
+        {componentName}을 불러올 수 없습니다. 페이지를 새로고침해주세요.
+      </p>
+    </CardHeader>
+    <CardContent>
+      <button 
+        onClick={() => window.location.reload()}
+        className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+      >
+        새로고침
+      </button>
+    </CardContent>
+  </Card>
 )
 
-export const LazyAssetManagementDashboard = dynamic(
+// Enhanced dynamic import with error handling
+const createLazyComponent = (
+  importFn: () => Promise<any>,
+  componentName: string,
+  fallback: React.ComponentType = ComponentSkeleton
+) => {
+  return dynamic(
+    () => importFn().catch((error) => {
+      console.error(`Failed to load ${componentName}:`, error)
+      // Return a fallback component that shows error
+      const ErrorComponent = () => <ChunkErrorFallback componentName={componentName} />
+      ErrorComponent.displayName = `${componentName}Error`
+      return ErrorComponent
+    }),
+    {
+      loading: () => React.createElement(fallback),
+      ssr: false,
+    }
+  )
+}
+
+// Heavy components with lazy loading and error handling
+export const LazyFinancialDashboard = createLazyComponent(
   () => import('@/components/asset-management-dashboard'),
-  {
-    loading: () => <ComponentSkeleton />,
-    ssr: false,
-  }
+  'FinancialDashboard'
 )
 
-export const LazyKoreanMarketInsight = dynamic(
+export const LazyAssetManagementDashboard = createLazyComponent(
+  () => import('@/components/asset-management-dashboard'),
+  'AssetManagementDashboard'
+)
+
+export const LazyKoreanMarketInsight = createLazyComponent(
   () => import('@/components/korean-market-insight'),
-  {
-    loading: () => <ChartSkeleton />,
-    ssr: false,
-  }
+  'KoreanMarketInsight',
+  ChartSkeleton
 )
 
-export const LazyStockCard = dynamic(
+export const LazyStockCard = createLazyComponent(
   () => import('@/components/financial/stock-card'),
-  {
-    loading: () => <ComponentSkeleton />,
-    ssr: false,
-  }
+  'StockCard'
 )
 
-export const LazyForexCard = dynamic(
+export const LazyForexCard = createLazyComponent(
   () => import('@/components/financial/forex-card'),
-  {
-    loading: () => <ComponentSkeleton />,
-    ssr: false,
-  }
+  'ForexCard'
 )
 
 // Cal.com components with lazy loading
-export const LazyCalComInline = dynamic(
+export const LazyCalComInline = createLazyComponent(
   () => import('@/components/cal-com-inline').then(mod => ({ default: mod.CalComInline })),
-  {
-    loading: () => (
-      <div className="h-96 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600" />
-      </div>
-    ),
-    ssr: false,
-  }
+  'CalComInline',
+  () => (
+    <div className="h-96 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600" />
+    </div>
+  )
 )
 
-export const LazyCalComAdvanced = dynamic(
+export const LazyCalComAdvanced = createLazyComponent(
   () => import('@/components/cal-com-advanced').then(mod => ({ default: mod.CalComAdvanced })),
-  {
-    loading: () => <ComponentSkeleton />,
-    ssr: false,
-  }
+  'CalComAdvanced'
 )
 
 // Admin components (heavy and rarely used)
-export const LazyAdminDashboard = dynamic(
+export const LazyAdminDashboard = createLazyComponent(
   () => import('@/app/admin/page').then((mod) => ({ default: mod.default })),
-  {
-    loading: () => <ComponentSkeleton />,
-    ssr: false,
-  }
+  'AdminDashboard'
 )
 
-// Charts and analytics components
-export const LazyChartComponent = dynamic(
+// Charts and analytics components with enhanced error handling
+export const LazyChartComponent = createLazyComponent(
   () => import('recharts').then((mod) => mod.ResponsiveContainer).catch(() => {
     console.warn('Recharts 로드 실패, 대체 컴포넌트 사용');
-    const FallbackComponent = () => <div className="h-64 flex items-center justify-center text-muted-foreground">차트를 불러올 수 없습니다</div>;
+    const FallbackComponent = () => (
+      <div className="h-64 flex items-center justify-center text-muted-foreground">
+        차트를 불러올 수 없습니다
+      </div>
+    );
     FallbackComponent.displayName = 'ResponsiveContainerFallback';
     return FallbackComponent;
   }),
-  {
-    loading: () => <ChartSkeleton />,
-    ssr: false,
-  }
+  'ChartComponent',
+  ChartSkeleton
 )
 
 // Form components that might be heavy
-export const LazyConsultationForm = dynamic(
+export const LazyConsultationForm = createLazyComponent(
   () => import('@/components/forms/consultation-form'),
-  {
-    loading: () => (
-      <Card>
-        <CardHeader>
-          <Skeleton className="h-6 w-1/2" />
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-24 w-full" />
-          <Skeleton className="h-10 w-1/3" />
-        </CardContent>
-      </Card>
-    ),
-    ssr: false,
-  }
+  'ConsultationForm',
+  () => (
+    <Card>
+      <CardHeader>
+        <Skeleton className="h-6 w-1/2" />
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-24 w-full" />
+        <Skeleton className="h-10 w-1/3" />
+      </CardContent>
+    </Card>
+  )
 )
 
 // Utility hook for intersection observer
@@ -189,8 +208,10 @@ export const withLazyLoading = <T extends object>(
   return LazyLoadedComponent
 }
 
-// Bundle splitting utilities
-export const loadFeature = async (featureName: string) => {
+// Enhanced bundle splitting utilities with retry logic
+export const loadFeature = async (featureName: string, retryCount = 0): Promise<any> => {
+  const maxRetries = 3
+  
   try {
     switch (featureName) {
       case 'financial':
@@ -205,7 +226,31 @@ export const loadFeature = async (featureName: string) => {
         throw new Error(`Unknown feature: ${featureName}`)
     }
   } catch (error) {
-    console.error(`Failed to load feature ${featureName}:`, error)
-    throw error
+    console.error(`Failed to load feature ${featureName} (attempt ${retryCount + 1}):`, error)
+    
+    if (retryCount < maxRetries) {
+      // Wait before retrying (exponential backoff)
+      await new Promise(resolve => setTimeout(resolve, Math.pow(2, retryCount) * 1000))
+      return loadFeature(featureName, retryCount + 1)
+    }
+    
+    throw new Error(`Failed to load feature ${featureName} after ${maxRetries} attempts`)
   }
+}
+
+// Global error handler for chunk loading failures
+if (typeof window !== 'undefined') {
+  window.addEventListener('error', (event) => {
+    if (event.error && event.error.name === 'ChunkLoadError') {
+      console.error('ChunkLoadError detected:', event.error)
+      // Optionally show a user-friendly error message
+      const errorMessage = document.createElement('div')
+      errorMessage.innerHTML = `
+        <div style="position: fixed; top: 0; left: 0; right: 0; background: #ef4444; color: white; padding: 1rem; text-align: center; z-index: 9999;">
+          <p>페이지 로딩 중 오류가 발생했습니다. <button onclick="window.location.reload()" style="background: white; color: #ef4444; border: none; padding: 0.5rem 1rem; margin-left: 1rem; border-radius: 4px; cursor: pointer;">새로고침</button></p>
+        </div>
+      `
+      document.body.appendChild(errorMessage)
+    }
+  })
 }
