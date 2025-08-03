@@ -2,34 +2,36 @@
  * API 성능 최적화 및 속도 제한
  * API response time: <500ms for 95th percentile 목표
  */
+import { Agent } from 'https';
 
-import { NextRequest, NextResponse } from 'next/server'
-import { logger } from '../logger'
+import { NextRequest, NextResponse } from 'next/server';
+
+import { logger } from '../logger';
+
 // SSR 안전성을 위한 dynamic imports
-let Ratelimit: any = null
-let Redis: any = null
-import { Agent } from 'https'
+let Ratelimit: any = null;
+let Redis: any = null;
 
 // SSR 안전한 Upstash 초기화
 export const initializeUpstash = async () => {
   if (typeof window === 'undefined' && !Ratelimit && !Redis) {
     try {
       // Server-side에서만 Upstash 사용
-      const upstashRedisModule = await import('@upstash/redis')
-      const upstashRatelimitModule = await import('@upstash/ratelimit')
-      
-      Redis = upstashRedisModule.Redis
-      Ratelimit = upstashRatelimitModule.Ratelimit
+      const upstashRedisModule = await import('@upstash/redis');
+      const upstashRatelimitModule = await import('@upstash/ratelimit');
+
+      Redis = upstashRedisModule.Redis;
+      Ratelimit = upstashRatelimitModule.Ratelimit;
     } catch (error) {
       logger.error('Upstash 초기화 실패', error as Error, {
         component: 'api-optimization',
-        function: 'initializeUpstash'
-      })
-      Redis = null
-      Ratelimit = null
+        function: 'initializeUpstash',
+      });
+      Redis = null;
+      Ratelimit = null;
     }
   }
-}
+};
 
 // 초기화 호출
 // initializeUpstash() - lazy loading on first use
@@ -43,124 +45,148 @@ export const httpsAgent = new Agent({
   maxSockets: 50,
   maxFreeSockets: 10,
   timeout: 30000,
-})
+});
 
 // Redis 기반 속도 제한 - SSR 안전하게 초기화
-const redis = Redis ? new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-}) : null
+const redis = Redis
+  ? new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL!,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+    })
+  : null;
 
 // 다양한 속도 제한 전략 - SSR 안전하게 초기화
 export const rateLimiters = {
   // 일반 API (분당 100회)
-  general: Ratelimit && redis ? new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(100, '1 m'),
-    analytics: true,
-    prefix: 'ratelimit:general',
-  }) : null,
+  general:
+    Ratelimit && redis
+      ? new Ratelimit({
+          redis,
+          limiter: Ratelimit.slidingWindow(100, '1 m'),
+          analytics: true,
+          prefix: 'ratelimit:general',
+        })
+      : null,
 
   // 금융 데이터 API (분당 300회)
-  financial: Ratelimit && redis ? new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(300, '1 m'),
-    analytics: true,
-    prefix: 'ratelimit:financial',
-  }) : null,
+  financial:
+    Ratelimit && redis
+      ? new Ratelimit({
+          redis,
+          limiter: Ratelimit.slidingWindow(300, '1 m'),
+          analytics: true,
+          prefix: 'ratelimit:financial',
+        })
+      : null,
 
   // 인증 API (분당 10회)
-  auth: Ratelimit && redis ? new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(10, '1 m'),
-    analytics: true,
-    prefix: 'ratelimit:auth',
-  }) : null,
+  auth:
+    Ratelimit && redis
+      ? new Ratelimit({
+          redis,
+          limiter: Ratelimit.slidingWindow(10, '1 m'),
+          analytics: true,
+          prefix: 'ratelimit:auth',
+        })
+      : null,
 
   // 리포트 생성 (시간당 50회)
-  reports: Ratelimit && redis ? new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(50, '1 h'),
-    analytics: true,
-    prefix: 'ratelimit:reports',
-  }) : null,
+  reports:
+    Ratelimit && redis
+      ? new Ratelimit({
+          redis,
+          limiter: Ratelimit.slidingWindow(50, '1 h'),
+          analytics: true,
+          prefix: 'ratelimit:reports',
+        })
+      : null,
 
   // 프리미엄 사용자 (분당 1000회)
-  premium: Ratelimit && redis ? new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(1000, '1 m'),
-    analytics: true,
-    prefix: 'ratelimit:premium',
-  }) : null,
-}
+  premium:
+    Ratelimit && redis
+      ? new Ratelimit({
+          redis,
+          limiter: Ratelimit.slidingWindow(1000, '1 m'),
+          analytics: true,
+          prefix: 'ratelimit:premium',
+        })
+      : null,
+};
 
 // 사용자 등급별 속도 제한
-export function getRateLimiter(userTier: 'free' | 'premium' | 'enterprise'): typeof rateLimiters.general {
+export function getRateLimiter(
+  userTier: 'free' | 'premium' | 'enterprise'
+): typeof rateLimiters.general {
   switch (userTier) {
     case 'premium':
-      return rateLimiters.premium
+      return rateLimiters.premium;
     case 'enterprise':
-      return rateLimiters.premium // 엔터프라이즈는 별도 구현
+      return rateLimiters.premium; // 엔터프라이즈는 별도 구현
     default:
-      return rateLimiters.general
+      return rateLimiters.general;
   }
 }
 
 // API 응답 압축 미들웨어
-export function withCompression(handler: (req: NextRequest) => Promise<NextResponse>) {
+export function withCompression(
+  handler: (req: NextRequest) => Promise<NextResponse>
+) {
   return async (req: NextRequest) => {
-    const response = await handler(req)
-    
+    const response = await handler(req);
+
     if (response instanceof NextResponse) {
       // 압축 가능한 콘텐츠 타입 확인
-      const contentType = response.headers.get('content-type')
-      const shouldCompress = contentType && (
-        contentType.includes('application/json') ||
-        contentType.includes('text/') ||
-        contentType.includes('application/javascript')
-      )
+      const contentType = response.headers.get('content-type');
+      const shouldCompress =
+        contentType &&
+        (contentType.includes('application/json') ||
+          contentType.includes('text/') ||
+          contentType.includes('application/javascript'));
 
       if (shouldCompress) {
         // 클라이언트가 gzip을 지원하는지 확인
-        const acceptEncoding = req.headers.get('accept-encoding') || ''
+        const acceptEncoding = req.headers.get('accept-encoding') || '';
         if (acceptEncoding.includes('gzip')) {
-          response.headers.set('content-encoding', 'gzip')
-          response.headers.set('vary', 'accept-encoding')
+          response.headers.set('content-encoding', 'gzip');
+          response.headers.set('vary', 'accept-encoding');
         }
       }
     }
-    
-    return response
-  }
+
+    return response;
+  };
 }
 
 // API 성능 모니터링 미들웨어
-export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise<NextResponse>, apiName: string) {
+export function withPerformanceMonitoring(
+  handler: (req: NextRequest) => Promise<NextResponse>,
+  apiName: string
+) {
   return async (req: NextRequest) => {
-    const startTime = performance.now()
-    const requestId = crypto.randomUUID()
-    
+    const startTime = performance.now();
+    const requestId = crypto.randomUUID();
+
     logger.debug(`API Request ${apiName} started`, {
       component: 'api-optimization',
       function: 'withPerformanceMonitoring',
       metadata: {
         requestId,
-        apiName
-      }
-    })
-    
+        apiName,
+      },
+    });
+
     try {
-      const response = await handler(req)
-      const duration = performance.now() - startTime
-      
+      const response = await handler(req);
+      const duration = performance.now() - startTime;
+
       // 성능 메트릭 기록
       recordAPIMetrics(apiName, {
         duration,
         status: response.status,
         requestId,
         success: true,
-      })
-      
+      });
+
       // 느린 API 경고
       if (duration > 1000) {
         logger.warn(`Slow API detected: ${apiName}`, {
@@ -169,15 +195,15 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
           metadata: {
             apiName,
             duration,
-            requestId
-          }
-        })
+            requestId,
+          },
+        });
       }
-      
+
       // 응답 헤더에 성능 정보 추가
-      response.headers.set('X-Response-Time', `${duration.toFixed(2)}ms`)
-      response.headers.set('X-Request-ID', requestId)
-      
+      response.headers.set('X-Response-Time', `${duration.toFixed(2)}ms`);
+      response.headers.set('X-Request-ID', requestId);
+
       logger.info(`API Request ${apiName} completed`, {
         component: 'api-optimization',
         function: 'withPerformanceMonitoring',
@@ -185,61 +211,61 @@ export function withPerformanceMonitoring(handler: (req: NextRequest) => Promise
           apiName,
           duration,
           requestId,
-          status: response.status
-        }
-      })
-      
-      return response
+          status: response.status,
+        },
+      });
+
+      return response;
     } catch (error) {
-      const duration = performance.now() - startTime
-      
+      const duration = performance.now() - startTime;
+
       recordAPIMetrics(apiName, {
         duration,
         status: 500,
         requestId,
         success: false,
         error: error instanceof Error ? error.message : 'Unknown error',
-      })
-      
+      });
+
       logger.error(`API Request ${apiName} failed`, error as Error, {
         component: 'api-optimization',
         function: 'withPerformanceMonitoring',
         metadata: {
           apiName,
           duration,
-          requestId
-        }
-      })
-      
-      throw error
+          requestId,
+        },
+      });
+
+      throw error;
     }
-  }
+  };
 }
 
 // API 메트릭 기록
 interface APIMetric {
-  duration: number
-  status: number
-  requestId: string
-  success: boolean
-  error?: string
+  duration: number;
+  status: number;
+  requestId: string;
+  success: boolean;
+  error?: string;
 }
 
-const apiMetrics = new Map<string, APIMetric[]>()
+const apiMetrics = new Map<string, APIMetric[]>();
 
 function recordAPIMetrics(apiName: string, metric: APIMetric): void {
   if (!apiMetrics.has(apiName)) {
-    apiMetrics.set(apiName, [])
+    apiMetrics.set(apiName, []);
   }
-  
-  const metrics = apiMetrics.get(apiName)!
-  metrics.push(metric)
-  
+
+  const metrics = apiMetrics.get(apiName)!;
+  metrics.push(metric);
+
   // 최근 1000개 요청만 유지
   if (metrics.length > 1000) {
-    metrics.shift()
+    metrics.shift();
   }
-  
+
   // Google Analytics로 전송
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'api_request', {
@@ -250,24 +276,24 @@ function recordAPIMetrics(apiName: string, metric: APIMetric): void {
         api_name: apiName,
         status_code: metric.status,
         is_success: metric.success,
-      }
-    })
+      },
+    });
   }
 }
 
 // API 통계 조회
 export function getAPIStats(apiName?: string) {
   if (apiName) {
-    const metrics = apiMetrics.get(apiName) || []
-    return calculateStats(metrics)
+    const metrics = apiMetrics.get(apiName) || [];
+    return calculateStats(metrics);
   }
-  
-  const allStats: Record<string, any> = {}
+
+  const allStats: Record<string, any> = {};
   for (const [name, metrics] of apiMetrics.entries()) {
-    allStats[name] = calculateStats(metrics)
+    allStats[name] = calculateStats(metrics);
   }
-  
-  return allStats
+
+  return allStats;
 }
 
 function calculateStats(metrics: APIMetric[]) {
@@ -279,12 +305,12 @@ function calculateStats(metrics: APIMetric[]) {
       p99Duration: 0,
       successRate: 0,
       errorRate: 0,
-    }
+    };
   }
-  
-  const durations = metrics.map(m => m.duration).sort((a, b) => a - b)
-  const successCount = metrics.filter(m => m.success).length
-  
+
+  const durations = metrics.map(m => m.duration).sort((a, b) => a - b);
+  const successCount = metrics.filter(m => m.success).length;
+
   return {
     count: metrics.length,
     avgDuration: durations.reduce((sum, d) => sum + d, 0) / durations.length,
@@ -292,53 +318,59 @@ function calculateStats(metrics: APIMetric[]) {
     p99Duration: durations[Math.floor(durations.length * 0.99)],
     successRate: (successCount / metrics.length) * 100,
     errorRate: ((metrics.length - successCount) / metrics.length) * 100,
-  }
+  };
 }
 
 // 요청 병합 미들웨어 (동일한 요청 중복 제거)
-const pendingRequests = new Map<string, Promise<any>>()
+const pendingRequests = new Map<string, Promise<any>>();
 
-export function withRequestDeduplication(handler: (req: NextRequest) => Promise<NextResponse>, keyGenerator: (req: NextRequest) => string) {
+export function withRequestDeduplication(
+  handler: (req: NextRequest) => Promise<NextResponse>,
+  keyGenerator: (req: NextRequest) => string
+) {
   return async (req: NextRequest) => {
-    const requestKey = keyGenerator(req)
-    
+    const requestKey = keyGenerator(req);
+
     // 이미 진행 중인 동일한 요청이 있는지 확인
     if (pendingRequests.has(requestKey)) {
       logger.debug(`Deduplicating request`, {
         component: 'api-optimization',
         function: 'withRequestDeduplication',
-        metadata: { requestKey }
-      })
-      return await pendingRequests.get(requestKey)
+        metadata: { requestKey },
+      });
+      return await pendingRequests.get(requestKey);
     }
-    
+
     // 새로운 요청 처리
-    const requestPromise = handler(req)
-    pendingRequests.set(requestKey, requestPromise)
-    
+    const requestPromise = handler(req);
+    pendingRequests.set(requestKey, requestPromise);
+
     try {
-      const result = await requestPromise
-      return result
+      const result = await requestPromise;
+      return result;
     } finally {
       // 요청 완료 후 맵에서 제거
-      pendingRequests.delete(requestKey)
+      pendingRequests.delete(requestKey);
     }
-  }
+  };
 }
 
 // 배치 요청 처리 유틸리티
 export class BatchRequestProcessor {
-  private batchQueue = new Map<string, {
-    requests: Array<{
-      params: any
-      resolve: (value: any) => void
-      reject: (error: any) => void
-    }>
-    timeout: NodeJS.Timeout
-  }>()
-  
-  private batchTimeout = 50 // 50ms 후 배치 처리
-  private maxBatchSize = 100
+  private batchQueue = new Map<
+    string,
+    {
+      requests: Array<{
+        params: any;
+        resolve: (value: any) => void;
+        reject: (error: any) => void;
+      }>;
+      timeout: NodeJS.Timeout;
+    }
+  >();
+
+  private batchTimeout = 50; // 50ms 후 배치 처리
+  private maxBatchSize = 100;
 
   async addToBatch<T>(
     batchKey: string,
@@ -346,59 +378,62 @@ export class BatchRequestProcessor {
     processor: (paramsList: any[]) => Promise<T[]>
   ): Promise<T> {
     return new Promise((resolve, reject) => {
-      let batch = this.batchQueue.get(batchKey)
-      
+      let batch = this.batchQueue.get(batchKey);
+
       if (!batch) {
         batch = {
           requests: [],
-          timeout: setTimeout(() => this.processBatch(batchKey, processor), this.batchTimeout)
-        }
-        this.batchQueue.set(batchKey, batch)
+          timeout: setTimeout(
+            () => this.processBatch(batchKey, processor),
+            this.batchTimeout
+          ),
+        };
+        this.batchQueue.set(batchKey, batch);
       }
-      
-      batch.requests.push({ params, resolve, reject })
-      
+
+      batch.requests.push({ params, resolve, reject });
+
       // 배치 크기 제한 확인
       if (batch.requests.length >= this.maxBatchSize) {
-        clearTimeout(batch.timeout)
-        this.processBatch(batchKey, processor)
+        clearTimeout(batch.timeout);
+        this.processBatch(batchKey, processor);
       }
-    })
+    });
   }
-  
+
   private async processBatch<T>(
     batchKey: string,
     processor: (paramsList: any[]) => Promise<T[]>
   ): Promise<void> {
-    const batch = this.batchQueue.get(batchKey)
-    if (!batch) return
-    
-    this.batchQueue.delete(batchKey)
-    
+    const batch = this.batchQueue.get(batchKey);
+    if (!batch) return;
+
+    this.batchQueue.delete(batchKey);
+
     try {
-      const paramsList = batch.requests.map(req => req.params)
-      const results = await processor(paramsList)
-      
+      const paramsList = batch.requests.map(req => req.params);
+      const results = await processor(paramsList);
+
       batch.requests.forEach((request, index) => {
-        request.resolve(results[index])
-      })
+        request.resolve(results[index]);
+      });
     } catch (error) {
       batch.requests.forEach(request => {
-        request.reject(error)
-      })
+        request.reject(error);
+      });
     }
   }
 }
 
 // 전역 배치 프로세서 인스턴스
-export const globalBatchProcessor = new BatchRequestProcessor()
+export const globalBatchProcessor = new BatchRequestProcessor();
 
 // 데이터베이스 연결 풀링
 export class DatabaseConnectionPool {
-  private pools = new Map<string, any>()
-  private maxPoolSize = 20
-  private idleTimeout = 30000 // 30초
-  
+  private pools = new Map<string, any>();
+  private maxPoolSize = 20;
+  private idleTimeout = 30000; // 30초
+
   async getConnection(databaseUrl: string) {
     if (!this.pools.has(databaseUrl)) {
       // 실제 구현시 pg-pool 또는 다른 커넥션 풀 라이브러리 사용
@@ -406,148 +441,155 @@ export class DatabaseConnectionPool {
         maxConnections: this.maxPoolSize,
         idleTimeout: this.idleTimeout,
         url: databaseUrl,
-      }
-      this.pools.set(databaseUrl, pool)
+      };
+      this.pools.set(databaseUrl, pool);
     }
-    
-    return this.pools.get(databaseUrl)
+
+    return this.pools.get(databaseUrl);
   }
-  
+
   async closeAll(): Promise<void> {
     for (const [url] of this.pools.entries()) {
       // 실제 구현시 pool.end() 호출
       logger.info(`Closing connection pool`, {
         component: 'DatabaseConnectionPool',
         function: 'closeAll',
-        metadata: { databaseUrl: url }
-      })
+        metadata: { databaseUrl: url },
+      });
     }
-    this.pools.clear()
+    this.pools.clear();
   }
-  
+
   getStats() {
-    const stats: Record<string, any> = {}
-    
+    const stats: Record<string, any> = {};
+
     for (const [url, pool] of this.pools.entries()) {
       stats[url] = {
         totalConnections: pool.maxConnections,
         activeConnections: 0, // 실제 구현시 pool.activeCount
-        idleConnections: 0,   // 실제 구현시 pool.idleCount
-      }
+        idleConnections: 0, // 실제 구현시 pool.idleCount
+      };
     }
-    
-    return stats
+
+    return stats;
   }
 }
 
 // 전역 연결 풀
-export const dbConnectionPool = new DatabaseConnectionPool()
+export const dbConnectionPool = new DatabaseConnectionPool();
 
 // 외부 API 호출 최적화
 export class ExternalAPIOptimizer {
-  private circuitBreakers = new Map<string, {
-    failureCount: number
-    lastFailure: number
-    state: 'closed' | 'open' | 'half-open'
-  }>()
-  
-  private failureThreshold = 5
-  private recoveryTimeout = 60000 // 1분
-  
+  private circuitBreakers = new Map<
+    string,
+    {
+      failureCount: number;
+      lastFailure: number;
+      state: 'closed' | 'open' | 'half-open';
+    }
+  >();
+
+  private failureThreshold = 5;
+  private recoveryTimeout = 60000; // 1분
+
   async callWithCircuitBreaker<T>(
     apiName: string,
     apiCall: () => Promise<T>,
     fallback?: () => Promise<T>
   ): Promise<T> {
-    const breaker = this.getCircuitBreaker(apiName)
-    
+    const breaker = this.getCircuitBreaker(apiName);
+
     // Circuit Breaker 상태 확인
     if (breaker.state === 'open') {
       if (Date.now() - breaker.lastFailure > this.recoveryTimeout) {
-        breaker.state = 'half-open'
+        breaker.state = 'half-open';
       } else {
         logger.warn(`Circuit breaker OPEN, using fallback`, {
           component: 'ExternalAPIOptimizer',
           function: 'callWithCircuitBreaker',
-          metadata: { apiName }
-        })
+          metadata: { apiName },
+        });
         if (fallback) {
-          return await fallback()
+          return await fallback();
         }
-        throw new Error(`Circuit breaker is OPEN for ${apiName}`)
+        throw new Error(`Circuit breaker is OPEN for ${apiName}`);
       }
     }
-    
+
     try {
-      const result = await apiCall()
-      
+      const result = await apiCall();
+
       // 성공시 circuit breaker 리셋
       if (breaker.state === 'half-open') {
-        breaker.state = 'closed'
-        breaker.failureCount = 0
+        breaker.state = 'closed';
+        breaker.failureCount = 0;
       }
-      
-      return result
+
+      return result;
     } catch (error) {
-      breaker.failureCount++
-      breaker.lastFailure = Date.now()
-      
+      breaker.failureCount++;
+      breaker.lastFailure = Date.now();
+
       // 실패 임계값 확인
       if (breaker.failureCount >= this.failureThreshold) {
-        breaker.state = 'open'
-        logger.error(`Circuit breaker OPENED after threshold failures`, error as Error, {
-          component: 'ExternalAPIOptimizer',
-          function: 'callWithCircuitBreaker',
-          metadata: {
-            apiName,
-            failureCount: breaker.failureCount,
-            threshold: this.failureThreshold
+        breaker.state = 'open';
+        logger.error(
+          `Circuit breaker OPENED after threshold failures`,
+          error as Error,
+          {
+            component: 'ExternalAPIOptimizer',
+            function: 'callWithCircuitBreaker',
+            metadata: {
+              apiName,
+              failureCount: breaker.failureCount,
+              threshold: this.failureThreshold,
+            },
           }
-        })
+        );
       }
-      
+
       if (fallback) {
         logger.warn(`API failed, using fallback`, {
           component: 'ExternalAPIOptimizer',
           function: 'callWithCircuitBreaker',
-          metadata: { apiName }
-        })
-        return await fallback()
+          metadata: { apiName },
+        });
+        return await fallback();
       }
-      
-      throw error
+
+      throw error;
     }
   }
-  
+
   private getCircuitBreaker(apiName: string) {
     if (!this.circuitBreakers.has(apiName)) {
       this.circuitBreakers.set(apiName, {
         failureCount: 0,
         lastFailure: 0,
         state: 'closed',
-      })
+      });
     }
-    
-    return this.circuitBreakers.get(apiName)!
+
+    return this.circuitBreakers.get(apiName)!;
   }
-  
+
   getCircuitBreakerStats() {
-    const stats: Record<string, any> = {}
-    
+    const stats: Record<string, any> = {};
+
     for (const [apiName, breaker] of this.circuitBreakers.entries()) {
       stats[apiName] = {
         state: breaker.state,
         failureCount: breaker.failureCount,
         lastFailure: breaker.lastFailure ? new Date(breaker.lastFailure) : null,
-      }
+      };
     }
-    
-    return stats
+
+    return stats;
   }
 }
 
 // 전역 API 최적화기
-export const apiOptimizer = new ExternalAPIOptimizer()
+export const apiOptimizer = new ExternalAPIOptimizer();
 
 // 응답 캐싱 미들웨어
 export function withResponseCaching(
@@ -556,102 +598,107 @@ export function withResponseCaching(
   ttl: number = 300 // 5분 기본값
 ) {
   return async (req: NextRequest) => {
-    const key = `response:${cacheKey(req)}`
-    
+    const key = `response:${cacheKey(req)}`;
+
     // 캐시된 응답 확인
     try {
-      const cached = await redis?.get(key)
+      const cached = await redis?.get(key);
       if (cached) {
         logger.debug(`Cache HIT`, {
           component: 'api-optimization',
           function: 'withResponseCaching',
-          metadata: { cacheKey: key }
-        })
+          metadata: { cacheKey: key },
+        });
         const response = new NextResponse(cached.body, {
           status: cached.status,
           headers: cached.headers,
-        })
-        response.headers.set('X-Cache', 'HIT')
-        return response
+        });
+        response.headers.set('X-Cache', 'HIT');
+        return response;
       }
     } catch (error) {
       logger.warn('Cache read error', {
         component: 'api-optimization',
         function: 'withResponseCaching',
-        metadata: { 
+        metadata: {
           cacheKey: key,
-          error: (error as Error).message
-        }
-      })
+          error: (error as Error).message,
+        },
+      });
     }
-    
+
     // 새로운 응답 생성
-    const response = await handler(req)
-    
+    const response = await handler(req);
+
     // 성공적인 응답만 캐싱
     if (response.status === 200) {
       try {
-        const body = await response.text()
+        const body = await response.text();
         const cacheData = {
           body,
           status: response.status,
           headers: Object.fromEntries(response.headers.entries()),
-        }
-        
-        await redis?.setex(key, ttl, JSON.stringify(cacheData))
+        };
+
+        await redis?.setex(key, ttl, JSON.stringify(cacheData));
         logger.debug(`Cache SET`, {
           component: 'api-optimization',
           function: 'withResponseCaching',
           metadata: {
             cacheKey: key,
-            ttl
-          }
-        })
-        
+            ttl,
+          },
+        });
+
         // 새로운 응답 객체 생성 (body를 읽었으므로)
         const newResponse = new NextResponse(body, {
           status: response.status,
           headers: response.headers,
-        })
-        newResponse.headers.set('X-Cache', 'MISS')
-        return newResponse
+        });
+        newResponse.headers.set('X-Cache', 'MISS');
+        return newResponse;
       } catch (error) {
         logger.warn('Cache write error', {
           component: 'api-optimization',
           function: 'withResponseCaching',
-          metadata: { 
+          metadata: {
             cacheKey: key,
-            error: (error as Error).message
-          }
-        })
+            error: (error as Error).message,
+          },
+        });
       }
     }
-    
-    response.headers.set('X-Cache', 'SKIP')
-    return response
-  }
+
+    response.headers.set('X-Cache', 'SKIP');
+    return response;
+  };
 }
 
 // API 라우트 최적화 헬퍼
 export function optimizeAPI(config: {
-  name: string
-  rateLimit?: keyof typeof rateLimiters
-  cache?: { ttl: number; keyGenerator: (req: NextRequest) => string }
-  batch?: { keyGenerator: (req: NextRequest) => string }
-  monitor?: boolean
-  compress?: boolean
+  name: string;
+  rateLimit?: keyof typeof rateLimiters;
+  cache?: { ttl: number; keyGenerator: (req: NextRequest) => string };
+  batch?: { keyGenerator: (req: NextRequest) => string };
+  monitor?: boolean;
+  compress?: boolean;
 }) {
   return function (handler: Function) {
-    let optimizedHandler = handler
+    let optimizedHandler = handler;
 
     // 성능 모니터링
     if (config.monitor !== false) {
-      optimizedHandler = withPerformanceMonitoring(optimizedHandler as (req: NextRequest) => Promise<NextResponse>, config.name)
+      optimizedHandler = withPerformanceMonitoring(
+        optimizedHandler as (req: NextRequest) => Promise<NextResponse>,
+        config.name
+      );
     }
 
     // 압축
     if (config.compress) {
-      optimizedHandler = withCompression(optimizedHandler as (req: NextRequest) => Promise<NextResponse>)
+      optimizedHandler = withCompression(
+        optimizedHandler as (req: NextRequest) => Promise<NextResponse>
+      );
     }
 
     // 캐싱
@@ -660,7 +707,7 @@ export function optimizeAPI(config: {
         optimizedHandler,
         config.cache.keyGenerator,
         config.cache.ttl
-      )
+      );
     }
 
     // 요청 중복 제거
@@ -668,18 +715,19 @@ export function optimizeAPI(config: {
       optimizedHandler = withRequestDeduplication(
         optimizedHandler as (req: NextRequest) => Promise<NextResponse>,
         config.batch.keyGenerator
-      )
+      );
     }
 
     // 속도 제한
     if (config.rateLimit) {
-      const rateLimiter = rateLimiters[config.rateLimit]
-      const originalHandler = optimizedHandler
-      
+      const rateLimiter = rateLimiters[config.rateLimit];
+      const originalHandler = optimizedHandler;
+
       optimizedHandler = async (req: NextRequest) => {
-        const ip = req.headers.get('x-forwarded-for') || 'unknown'
-        const { success, limit, remaining, reset } = await rateLimiter?.limit(ip)
-        
+        const ip = req.headers.get('x-forwarded-for') || 'unknown';
+        const { success, limit, remaining, reset } =
+          await rateLimiter?.limit(ip);
+
         if (!success) {
           return new NextResponse(
             JSON.stringify({
@@ -694,30 +742,32 @@ export function optimizeAPI(config: {
                 'X-RateLimit-Limit': limit.toString(),
                 'X-RateLimit-Remaining': remaining.toString(),
                 'X-RateLimit-Reset': reset.toString(),
-                'Retry-After': Math.round((reset - Date.now()) / 1000).toString(),
+                'Retry-After': Math.round(
+                  (reset - Date.now()) / 1000
+                ).toString(),
               },
             }
-          )
+          );
         }
-        
-        const response = await originalHandler(req)
-        
+
+        const response = await originalHandler(req);
+
         // 속도 제한 헤더 추가
-        response.headers.set('X-RateLimit-Limit', limit.toString())
-        response.headers.set('X-RateLimit-Remaining', remaining.toString())
-        response.headers.set('X-RateLimit-Reset', reset.toString())
-        
-        return response
-      }
+        response.headers.set('X-RateLimit-Limit', limit.toString());
+        response.headers.set('X-RateLimit-Remaining', remaining.toString());
+        response.headers.set('X-RateLimit-Reset', reset.toString());
+
+        return response;
+      };
     }
 
-    return optimizedHandler
-  }
+    return optimizedHandler;
+  };
 }
 
 // 사용 예시 데코레이터
-export const FastAPI = (config: Parameters<typeof optimizeAPI>[0]) => 
-  optimizeAPI(config)
+export const FastAPI = (config: Parameters<typeof optimizeAPI>[0]) =>
+  optimizeAPI(config);
 
 // 글로벌 성능 통계
 export function getGlobalPerformanceStats() {
@@ -728,27 +778,27 @@ export function getGlobalPerformanceStats() {
     cache: {
       // Redis 캐시 통계는 별도 구현
     },
-  }
+  };
 }
 
 // 정리 함수
 export async function cleanup(): Promise<void> {
-  await dbConnectionPool.closeAll()
+  await dbConnectionPool.closeAll();
   // Redis 연결 정리
-  await redis?.quit?.()
+  await redis?.quit?.();
   logger.info('API optimization cleanup completed', {
     component: 'api-optimization',
-    function: 'cleanup'
-  })
+    function: 'cleanup',
+  });
 }
 
 // 프로세스 종료시 정리
 if (typeof process !== 'undefined') {
-  process.on('SIGTERM', cleanup)
-  process.on('SIGINT', cleanup)
+  process.on('SIGTERM', cleanup);
+  process.on('SIGINT', cleanup);
 }
 
 logger.info('API optimization initialized', {
   component: 'api-optimization',
-  function: 'initialization'
-})
+  function: 'initialization',
+});

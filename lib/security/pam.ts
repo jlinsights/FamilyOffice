@@ -46,7 +46,7 @@ export class PAMService {
       expiresAt: new Date(Date.now() + request.duration * 60 * 60 * 1000),
       reason: request.reason,
       status: 'pending',
-      auditTrail: []
+      auditTrail: [],
     };
 
     // 감사 로그 기록
@@ -55,7 +55,7 @@ export class PAMService {
       userId: request.userId,
       role: request.role,
       resource: request.resource,
-      urgency: request.urgency
+      urgency: request.urgency,
     });
 
     // 긴급 요청은 즉시 승인자에게 알림
@@ -76,7 +76,7 @@ export class PAMService {
     comments?: string
   ): Promise<void> {
     const access = await this.getPrivilegedAccess();
-    
+
     if (!access) {
       throw new Error('Privileged access request not found');
     }
@@ -93,7 +93,7 @@ export class PAMService {
     await this.logAuditEvent('privileged_access_approved', {
       accessId,
       approvedBy,
-      comments
+      comments,
     });
 
     // 승인된 권한을 활성화
@@ -110,7 +110,7 @@ export class PAMService {
     reason: string
   ): Promise<void> {
     const access = await this.getPrivilegedAccess();
-    
+
     if (!access) {
       throw new Error('Privileged access request not found');
     }
@@ -121,7 +121,7 @@ export class PAMService {
     await this.logAuditEvent('privileged_access_denied', {
       accessId,
       deniedBy,
-      reason
+      reason,
     });
 
     // 데이터베이스 업데이트
@@ -135,7 +135,7 @@ export class PAMService {
     permission: string
   ): Promise<boolean> {
     const activeAccess = await this.getActivePrivilegedAccess();
-    
+
     if (!activeAccess) {
       return false;
     }
@@ -153,14 +153,14 @@ export class PAMService {
   // 권한 만료 처리
   static async expirePrivilegedAccess(accessId: string): Promise<void> {
     const access = await this.getPrivilegedAccess();
-    
+
     if (access && access.status === 'approved') {
       access.status = 'expired';
-      
+
       // 감사 로그 기록
       await this.logAuditEvent('privileged_access_expired', {
         accessId,
-        userId: access.userId
+        userId: access.userId,
       });
 
       // 권한 비활성화
@@ -186,11 +186,11 @@ export class PAMService {
       permissions,
       reason,
       duration: duration / 60, // 시간 단위로 변환
-      urgency: 'high'
+      urgency: 'high',
     };
 
     const access = await this.requestAccess(request);
-    
+
     // JIT 액세스는 자동 승인 (구성 가능)
     if (this.isAutoApproveJIT()) {
       await this.approveAccess(access.id, 'system', 'Auto-approved JIT access');
@@ -202,7 +202,7 @@ export class PAMService {
   // 권한 사용 모니터링
   static async monitorPrivilegedAccess(): Promise<void> {
     const activeAccesses = await this.getAllActivePrivilegedAccess();
-    
+
     for (const access of activeAccesses) {
       // 만료 시간 확인
       if (access.expiresAt < new Date()) {
@@ -218,10 +218,10 @@ export class PAMService {
   private static async analyzeUsagePattern(): Promise<void> {
     // 비정상적인 사용 패턴 감지
     const usageStats = await this.getUsageStatistics();
-    
+
     if (this.isAnomalousUsage()) {
       await this.logAuditEvent('anomalous_privileged_access', {
-        usageStats
+        usageStats,
       });
     }
   }
@@ -236,7 +236,7 @@ export class PAMService {
       timestamp: new Date(),
       action: eventType,
       userId: details.userId || 'system',
-      details
+      details,
     };
 
     // 감사 로그 저장
@@ -261,7 +261,9 @@ export class PAMService {
   }
 
   // 데이터베이스 작업 (구현 필요)
-  private static async savePrivilegedAccess(access: PrivilegedAccess): Promise<void> {
+  private static async savePrivilegedAccess(
+    access: PrivilegedAccess
+  ): Promise<void> {
     console.log('Saving privileged access:', access.id);
   }
 
@@ -269,7 +271,9 @@ export class PAMService {
     return null; // 구현 필요
   }
 
-  private static async updatePrivilegedAccess(access: PrivilegedAccess): Promise<void> {
+  private static async updatePrivilegedAccess(
+    access: PrivilegedAccess
+  ): Promise<void> {
     console.log('Updating privileged access:', access.id);
   }
 
@@ -277,15 +281,21 @@ export class PAMService {
     return null; // 구현 필요
   }
 
-  private static async getAllActivePrivilegedAccess(): Promise<PrivilegedAccess[]> {
+  private static async getAllActivePrivilegedAccess(): Promise<
+    PrivilegedAccess[]
+  > {
     return []; // 구현 필요
   }
 
-  private static async activatePrivilegedAccess(access: PrivilegedAccess): Promise<void> {
+  private static async activatePrivilegedAccess(
+    access: PrivilegedAccess
+  ): Promise<void> {
     console.log('Activating privileged access:', access.id);
   }
 
-  private static async deactivatePrivilegedAccess(access: PrivilegedAccess): Promise<void> {
+  private static async deactivatePrivilegedAccess(
+    access: PrivilegedAccess
+  ): Promise<void> {
     console.log('Deactivating privileged access:', access.id);
   }
 
@@ -296,4 +306,4 @@ export class PAMService {
   private static async saveAuditEntry(entry: AuditEntry): Promise<void> {
     console.log('Saving audit entry:', entry.id);
   }
-} 
+}

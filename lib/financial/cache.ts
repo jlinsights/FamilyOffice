@@ -2,13 +2,17 @@
  * 금융 데이터 캐싱 전략 구현
  * Redis + In-Memory 캐시 조합으로 최적화
  */
-
-import type { StockData, ForexData, IndexData, CacheKeyType } from '../types/financial'
+import type {
+  StockData,
+  ForexData,
+  IndexData,
+  CacheKeyType,
+} from '../types/financial';
 
 // SSR 안전성을 위한 dynamic imports
-let NodeCache: any = null
-let memoryCache: any = null
-let redisClient: any = null
+let NodeCache: any = null;
+let memoryCache: any = null;
+let redisClient: any = null;
 
 /**
  * NodeCache 초기화 (SSR 안전)
@@ -16,26 +20,26 @@ let redisClient: any = null
 async function initializeNodeCache() {
   if (typeof window !== 'undefined') {
     // Client-side에서는 기본값 반환
-    return null
+    return null;
   }
-  
+
   if (!NodeCache) {
     try {
-      const NodeCacheModule = await import('node-cache')
-      NodeCache = NodeCacheModule.default
+      const NodeCacheModule = await import('node-cache');
+      NodeCache = NodeCacheModule.default;
       memoryCache = new NodeCache({
-        stdTTL: 300,        // 5분 기본 TTL
-        checkperiod: 60,    // 1분마다 만료된 키 정리
-        useClones: false,   // 성능 최적화
-        maxKeys: 1000      // 최대 1000개 키 저장
-      })
+        stdTTL: 300, // 5분 기본 TTL
+        checkperiod: 60, // 1분마다 만료된 키 정리
+        useClones: false, // 성능 최적화
+        maxKeys: 1000, // 최대 1000개 키 저장
+      });
     } catch (error) {
-      console.error('NodeCache 로드 실패:', error)
-      return null
+      console.error('NodeCache 로드 실패:', error);
+      return null;
     }
   }
-  
-  return memoryCache
+
+  return memoryCache;
 }
 
 /**
@@ -44,55 +48,56 @@ async function initializeNodeCache() {
 async function initializeRedis() {
   if (typeof window !== 'undefined') {
     // Client-side에서는 사용하지 않음
-    return null
+    return null;
   }
-  
-  if (redisClient) return redisClient
+
+  if (redisClient) return redisClient;
 
   try {
-    const Redis = (await import('ioredis')).default
-    
+    const Redis = (await import('ioredis')).default;
+
     // Redis URL이 있으면 URL로 연결, 없으면 개별 설정으로 연결
     if (process.env.REDIS_URL) {
       redisClient = new Redis(process.env.REDIS_URL, {
         maxRetriesPerRequest: 3,
         enableReadyCheck: false,
-        lazyConnect: true
-      })
+        lazyConnect: true,
+      });
     } else if (process.env.REDIS_HOST) {
       redisClient = new Redis({
         host: process.env.REDIS_HOST,
         port: parseInt(process.env.REDIS_PORT || '6379'),
-        ...(process.env.REDIS_PASSWORD && { password: process.env.REDIS_PASSWORD }),
+        ...(process.env.REDIS_PASSWORD && {
+          password: process.env.REDIS_PASSWORD,
+        }),
         maxRetriesPerRequest: 3,
         enableReadyCheck: false,
-        lazyConnect: true
-      })
+        lazyConnect: true,
+      });
     } else {
-      console.log('🔶 Redis 설정이 없어 메모리 캐시만 사용합니다.')
-      return null
+      console.log('🔶 Redis 설정이 없어 메모리 캐시만 사용합니다.');
+      return null;
     }
 
     // Redis 연결 상태 확인
     redisClient.on('connect', () => {
-      console.log('✅ Redis 연결 성공')
-    })
+      console.log('✅ Redis 연결 성공');
+    });
 
     redisClient.on('error', (error: Error) => {
-      console.error('❌ Redis 연결 오류:', error.message)
-      redisClient = null
-    })
+      console.error('❌ Redis 연결 오류:', error.message);
+      redisClient = null;
+    });
 
     // 연결 테스트
-    await redisClient.ping()
-    console.log('✅ Redis 초기화 완료')
-    
-    return redisClient
+    await redisClient.ping();
+    console.log('✅ Redis 초기화 완료');
 
+    return redisClient;
   } catch (error) {
-    console.error('❌ Redis 초기화 실패:', error)
-    redisClient = null
-    return null
+    console.error('❌ Redis 초기화 실패:', error);
+    redisClient = null;
+    return null;
   }
 }
 
@@ -100,18 +105,18 @@ async function initializeRedis() {
  * 캐시 키 생성
  */
 function generateCacheKey(type: CacheKeyType, identifier: string): string {
-  const prefix = 'financial'
-  const timestamp = Math.floor(Date.now() / (1000 * 60)) // 1분 단위로 키 변경
-  
+  const prefix = 'financial';
+  const timestamp = Math.floor(Date.now() / (1000 * 60)); // 1분 단위로 키 변경
+
   switch (type) {
     case 'stock':
-      return `${prefix}:stock:${identifier}:${timestamp}`
+      return `${prefix}:stock:${identifier}:${timestamp}`;
     case 'forex':
-      return `${prefix}:forex:${identifier}:${timestamp}`
+      return `${prefix}:forex:${identifier}:${timestamp}`;
     case 'index':
-      return `${prefix}:index:${identifier}:${timestamp}`
+      return `${prefix}:index:${identifier}:${timestamp}`;
     default:
-      return `${prefix}:unknown:${identifier}:${timestamp}`
+      return `${prefix}:unknown:${identifier}:${timestamp}`;
   }
 }
 
@@ -120,42 +125,46 @@ function generateCacheKey(type: CacheKeyType, identifier: string): string {
  */
 async function getFromMemoryCache<T>(key: string): Promise<T | null> {
   try {
-    const cache = await initializeNodeCache()
+    const cache = await initializeNodeCache();
     if (!cache) {
-      return null
+      return null;
     }
-    
-    const cached = cache.get(key) as T | undefined
+
+    const cached = cache.get(key) as T | undefined;
     if (cached) {
-      console.log(`🎯 메모리 캐시 히트: ${key}`)
-      return cached
+      console.log(`🎯 메모리 캐시 히트: ${key}`);
+      return cached;
     }
-    
-    return null
+
+    return null;
   } catch (error) {
-    console.error('메모리 캐시 조회 오류:', error)
-    return null
+    console.error('메모리 캐시 조회 오류:', error);
+    return null;
   }
 }
 
 /**
  * 메모리 캐시에 데이터 저장
  */
-async function setToMemoryCache<T>(key: string, data: T, ttl: number = 300): Promise<boolean> {
+async function setToMemoryCache<T>(
+  key: string,
+  data: T,
+  ttl: number = 300
+): Promise<boolean> {
   try {
-    const cache = await initializeNodeCache()
+    const cache = await initializeNodeCache();
     if (!cache) {
-      return false
+      return false;
     }
-    
-    const success = cache.set(key, data, ttl)
+
+    const success = cache.set(key, data, ttl);
     if (success) {
-      console.log(`💾 메모리 캐시 저장: ${key} (TTL: ${ttl}s)`)
+      console.log(`💾 메모리 캐시 저장: ${key} (TTL: ${ttl}s)`);
     }
-    return success
+    return success;
   } catch (error) {
-    console.error('메모리 캐시 저장 오류:', error)
-    return false
+    console.error('메모리 캐시 저장 오류:', error);
+    return false;
   }
 }
 
@@ -164,138 +173,162 @@ async function setToMemoryCache<T>(key: string, data: T, ttl: number = 300): Pro
  */
 async function getFromRedisCache<T>(key: string): Promise<T | null> {
   if (!redisClient) {
-    redisClient = await initializeRedis()
+    redisClient = await initializeRedis();
   }
-  
-  if (!redisClient) return null
+
+  if (!redisClient) return null;
 
   try {
-    const cached = await redisClient.get(key)
+    const cached = await redisClient.get(key);
     if (cached) {
-      console.log(`🎯 Redis 캐시 히트: ${key}`)
-      return JSON.parse(cached)
+      console.log(`🎯 Redis 캐시 히트: ${key}`);
+      return JSON.parse(cached);
     }
-    return null
+    return null;
   } catch (error) {
-    console.error('❌ Redis 캐시 읽기 오류:', error)
-    return null
+    console.error('❌ Redis 캐시 읽기 오류:', error);
+    return null;
   }
 }
 
 /**
  * Redis에 데이터 저장
  */
-async function setToRedisCache<T>(key: string, data: T, ttl: number = 300): Promise<boolean> {
+async function setToRedisCache<T>(
+  key: string,
+  data: T,
+  ttl: number = 300
+): Promise<boolean> {
   if (!redisClient) {
-    redisClient = await initializeRedis()
+    redisClient = await initializeRedis();
   }
-  
-  if (!redisClient) return false
+
+  if (!redisClient) return false;
 
   try {
-    await redisClient.setex(key, ttl, JSON.stringify(data))
-    return true
+    await redisClient.setex(key, ttl, JSON.stringify(data));
+    return true;
   } catch (error) {
-    console.error('❌ Redis 캐시 쓰기 오류:', error)
-    return false
+    console.error('❌ Redis 캐시 쓰기 오류:', error);
+    return false;
   }
 }
 
 /**
  * 통합 캐시에서 데이터 가져오기 (메모리 -> Redis 순서)
  */
-export async function getCachedData<T>(type: CacheKeyType, identifier: string): Promise<T | null> {
-  const key = generateCacheKey(type, identifier)
-  
+export async function getCachedData<T>(
+  type: CacheKeyType,
+  identifier: string
+): Promise<T | null> {
+  const key = generateCacheKey(type, identifier);
+
   // 1. 메모리 캐시 확인 (가장 빠름)
-  const memoryData = await getFromMemoryCache<T>(key)
+  const memoryData = await getFromMemoryCache<T>(key);
   if (memoryData) {
-    return memoryData
+    return memoryData;
   }
-  
+
   // 2. Redis 캐시 확인
-  const redisData = await getFromRedisCache<T>(key)
+  const redisData = await getFromRedisCache<T>(key);
   if (redisData) {
     // Redis에서 가져온 데이터를 메모리 캐시에도 저장
-    setToMemoryCache(key, redisData, 300)
-    return redisData
+    setToMemoryCache(key, redisData, 300);
+    return redisData;
   }
-  
-  return null
+
+  return null;
 }
 
 /**
  * 통합 캐시에 데이터 저장 (메모리 + Redis 동시 저장)
  */
 export async function setCachedData<T>(
-  type: CacheKeyType, 
-  identifier: string, 
-  data: T, 
+  type: CacheKeyType,
+  identifier: string,
+  data: T,
   ttl: number = 300
 ): Promise<boolean> {
-  const key = generateCacheKey(type, identifier)
-  
+  const key = generateCacheKey(type, identifier);
+
   // 병렬로 메모리와 Redis에 저장
   const promises = [
     Promise.resolve(setToMemoryCache(key, data, ttl)),
-    setToRedisCache(key, data, ttl)
-  ]
-  
+    setToRedisCache(key, data, ttl),
+  ];
+
   try {
-    const results = await Promise.allSettled(promises)
-    const memorySuccess = results[0].status === 'fulfilled' && results[0].value
-    const redisSuccess = results[1].status === 'fulfilled' && results[1].value
-    
+    const results = await Promise.allSettled(promises);
+    const memorySuccess = results[0].status === 'fulfilled' && results[0].value;
+    const redisSuccess = results[1].status === 'fulfilled' && results[1].value;
+
     if (memorySuccess || redisSuccess) {
-      console.log(`✅ 캐시 저장 성공: ${key} (메모리: ${memorySuccess}, Redis: ${redisSuccess})`)
-      return true
+      console.log(
+        `✅ 캐시 저장 성공: ${key} (메모리: ${memorySuccess}, Redis: ${redisSuccess})`
+      );
+      return true;
     }
-    
-    return false
+
+    return false;
   } catch (error) {
-    console.error('❌ 캐시 저장 오류:', error)
-    return false
+    console.error('❌ 캐시 저장 오류:', error);
+    return false;
   }
 }
 
 /**
  * 주식 데이터 캐시
  */
-export async function getCachedStockData(symbol: string): Promise<StockData | null> {
-  return getCachedData<StockData>('stock', symbol)
+export async function getCachedStockData(
+  symbol: string
+): Promise<StockData | null> {
+  return getCachedData<StockData>('stock', symbol);
 }
 
-export async function setCachedStockData(symbol: string, data: StockData, ttl: number = 300): Promise<boolean> {
-  return setCachedData('stock', symbol, { ...data, cached: true }, ttl)
+export async function setCachedStockData(
+  symbol: string,
+  data: StockData,
+  ttl: number = 300
+): Promise<boolean> {
+  return setCachedData('stock', symbol, { ...data, cached: true }, ttl);
 }
 
 /**
  * 환율 데이터 캐시
  */
-export async function getCachedForexData(fromCurrency: string, toCurrency: string): Promise<ForexData | null> {
-  const identifier = `${fromCurrency}-${toCurrency}`
-  return getCachedData<ForexData>('forex', identifier)
+export async function getCachedForexData(
+  fromCurrency: string,
+  toCurrency: string
+): Promise<ForexData | null> {
+  const identifier = `${fromCurrency}-${toCurrency}`;
+  return getCachedData<ForexData>('forex', identifier);
 }
 
 export async function setCachedForexData(
-  fromCurrency: string, 
-  toCurrency: string, 
-  data: ForexData, 
+  fromCurrency: string,
+  toCurrency: string,
+  data: ForexData,
   ttl: number = 300
 ): Promise<boolean> {
-  const identifier = `${fromCurrency}-${toCurrency}`
-  return setCachedData('forex', identifier, { ...data, cached: true }, ttl)
+  const identifier = `${fromCurrency}-${toCurrency}`;
+  return setCachedData('forex', identifier, { ...data, cached: true }, ttl);
 }
 
 /**
  * 지수 데이터 캐시
  */
-export async function getCachedIndexData(symbol: string): Promise<IndexData | null> {
-  return getCachedData<IndexData>('index', symbol)
+export async function getCachedIndexData(
+  symbol: string
+): Promise<IndexData | null> {
+  return getCachedData<IndexData>('index', symbol);
 }
 
-export async function setCachedIndexData(symbol: string, data: IndexData, ttl: number = 300): Promise<boolean> {
-  return setCachedData('index', symbol, { ...data, cached: true }, ttl)
+export async function setCachedIndexData(
+  symbol: string,
+  data: IndexData,
+  ttl: number = 300
+): Promise<boolean> {
+  return setCachedData('index', symbol, { ...data, cached: true }, ttl);
 }
 
 /**
@@ -303,42 +336,42 @@ export async function setCachedIndexData(symbol: string, data: IndexData, ttl: n
  */
 export async function getCacheStats() {
   try {
-    const cache = await initializeNodeCache()
+    const cache = await initializeNodeCache();
     if (!cache) {
       return {
         memory: {
           keys: 0,
           hits: 0,
           misses: 0,
-          hitRate: 0
+          hitRate: 0,
         },
         redis: {
           connected: false,
-          keys: 0
-        }
-      }
+          keys: 0,
+        },
+      };
     }
-    
-    const stats = cache.getStats()
-    
+
+    const stats = cache.getStats();
+
     return {
       memory: {
         keys: stats.keys,
         hits: stats.hits,
         misses: stats.misses,
-        hitRate: stats.hits / (stats.hits + stats.misses) || 0
+        hitRate: stats.hits / (stats.hits + stats.misses) || 0,
       },
       redis: {
         connected: redisClient !== null,
-        keys: 0 // Redis 키 수는 별도로 계산 필요
-      }
-    }
+        keys: 0, // Redis 키 수는 별도로 계산 필요
+      },
+    };
   } catch (error) {
-    console.error('캐시 통계 조회 오류:', error)
+    console.error('캐시 통계 조회 오류:', error);
     return {
       memory: { keys: 0, hits: 0, misses: 0, hitRate: 0 },
-      redis: { connected: false, keys: 0 }
-    }
+      redis: { connected: false, keys: 0 },
+    };
   }
 }
 
@@ -348,20 +381,20 @@ export async function getCacheStats() {
 export async function clearCache(): Promise<void> {
   try {
     // 메모리 캐시 클리어
-    const cache = await initializeNodeCache()
+    const cache = await initializeNodeCache();
     if (cache) {
-      cache.flushAll()
-      console.log('🧹 메모리 캐시 클리어 완료')
+      cache.flushAll();
+      console.log('🧹 메모리 캐시 클리어 완료');
     }
-    
+
     // Redis 캐시 클리어
-    const redis = await initializeRedis()
+    const redis = await initializeRedis();
     if (redis) {
-      await redis.flushdb()
-      console.log('🧹 Redis 캐시 클리어 완료')
+      await redis.flushdb();
+      console.log('🧹 Redis 캐시 클리어 완료');
     }
   } catch (error) {
-    console.error('캐시 클리어 오류:', error)
+    console.error('캐시 클리어 오류:', error);
   }
 }
 
@@ -371,35 +404,34 @@ export async function clearCache(): Promise<void> {
 export async function validateCache(): Promise<boolean> {
   try {
     // 테스트 데이터로 캐시 동작 확인
-    const testKey = 'test'
-    const testData = { test: true, timestamp: Date.now() }
-    
+    const testKey = 'test';
+    const testData = { test: true, timestamp: Date.now() };
+
     // 캐시 저장 테스트
-    const setResult = await setCachedData('stock', testKey, testData, 60)
+    const setResult = await setCachedData('stock', testKey, testData, 60);
     if (!setResult) {
-      console.error('❌ 캐시 저장 테스트 실패')
-      return false
+      console.error('❌ 캐시 저장 테스트 실패');
+      return false;
     }
-    
+
     // 캐시 읽기 테스트
-    const getData = await getCachedData('stock', testKey)
+    const getData = await getCachedData('stock', testKey);
     if (!getData) {
-      console.error('❌ 캐시 읽기 테스트 실패')
-      return false
+      console.error('❌ 캐시 읽기 테스트 실패');
+      return false;
     }
-    
-    console.log('✅ 캐시 유효성 검사 통과')
-    return true
-    
+
+    console.log('✅ 캐시 유효성 검사 통과');
+    return true;
   } catch (error) {
-    console.error('❌ 캐시 유효성 검사 실패:', error)
-    return false
+    console.error('❌ 캐시 유효성 검사 실패:', error);
+    return false;
   }
 }
 
 // 앱 시작 시 Redis 초기화 (선택적)
 if (process.env.NODE_ENV === 'production') {
   initializeRedis().catch(error => {
-    console.warn('⚠️ Redis 초기화 실패, 메모리 캐시만 사용:', error.message)
-  })
+    console.warn('⚠️ Redis 초기화 실패, 메모리 캐시만 사용:', error.message);
+  });
 }

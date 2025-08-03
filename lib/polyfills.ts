@@ -5,5 +5,7 @@
 if (typeof globalThis.self === 'undefined') {
   // eslint-disable-next-line no-global-assign
   // @ts-expect-error – allow write to global
-  globalThis.self = globalThis as unknown as typeof globalThis & { self: typeof globalThis }
-} 
+  globalThis.self = globalThis as unknown as typeof globalThis & {
+    self: typeof globalThis;
+  };
+}

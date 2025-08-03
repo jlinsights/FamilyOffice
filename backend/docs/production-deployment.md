@@ -3,12 +3,14 @@
 ## 🏗️ 인프라 요구사항
 
 ### 최소 사양
+
 - **CPU**: 8 코어 이상
 - **메모리**: 32GB RAM 이상
 - **스토리지**: 500GB SSD 이상
 - **네트워크**: 1Gbps 이상
 
 ### 권장 사양
+
 - **CPU**: 16 코어 이상
 - **메모리**: 64GB RAM 이상
 - **스토리지**: 1TB NVMe SSD
@@ -17,6 +19,7 @@
 ## 🔒 보안 설정
 
 ### 네트워크 보안
+
 ```bash
 # 방화벽 설정
 sudo ufw enable
@@ -28,6 +31,7 @@ sudo ufw allow 6379/tcp  # Redis (내부 네트워크만)
 ```
 
 ### SSL/TLS 인증서
+
 ```bash
 # Let's Encrypt 인증서 발급
 sudo certbot --nginx -d api.familyoffice.com
@@ -35,6 +39,7 @@ sudo certbot --nginx -d admin.familyoffice.com
 ```
 
 ### 데이터베이스 보안
+
 ```sql
 -- PostgreSQL 보안 설정
 ALTER SYSTEM SET ssl = on;
@@ -45,6 +50,7 @@ ALTER SYSTEM SET password_encryption = 'scram-sha-256';
 ## 🐳 Docker 프로덕션 설정
 
 ### 프로덕션 Docker Compose
+
 ```yaml
 # docker-compose.prod.yml
 version: '3.8'
@@ -95,7 +101,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - "3001:3001"
+      - '3001:3001'
     networks:
       - family-office-network
     depends_on:
@@ -121,7 +127,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - "3002:3002"
+      - '3002:3002'
     networks:
       - family-office-network
     depends_on:
@@ -147,7 +153,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - "3003:3003"
+      - '3003:3003'
     networks:
       - family-office-network
     depends_on:
@@ -173,7 +179,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - "3004:3004"
+      - '3004:3004'
     networks:
       - family-office-network
     depends_on:
@@ -199,7 +205,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - "3005:3005"
+      - '3005:3005'
     networks:
       - family-office-network
     depends_on:
@@ -212,8 +218,8 @@ services:
     image: nginx:alpine
     container_name: family-office-nginx
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/ssl:/etc/nginx/ssl
@@ -233,7 +239,7 @@ services:
     image: prom/prometheus:latest
     container_name: family-office-prometheus
     ports:
-      - "9090:9090"
+      - '9090:9090'
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
@@ -245,7 +251,7 @@ services:
     image: grafana/grafana:latest
     container_name: family-office-grafana
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
     volumes:
@@ -272,6 +278,7 @@ networks:
 ## ☸️ Kubernetes 배포
 
 ### 네임스페이스 생성
+
 ```yaml
 # k8s/namespace.yaml
 apiVersion: v1
@@ -283,6 +290,7 @@ metadata:
 ```
 
 ### ConfigMap 설정
+
 ```yaml
 # k8s/configmap.yaml
 apiVersion: v1
@@ -291,19 +299,20 @@ metadata:
   name: family-office-config
   namespace: family-office
 data:
-  NODE_ENV: "production"
-  DB_HOST: "postgres-service"
-  DB_PORT: "5432"
-  DB_NAME: "familyoffice"
-  REDIS_HOST: "redis-service"
-  REDIS_PORT: "6379"
-  JWT_SECRET: "your-jwt-secret"
-  JWT_EXPIRES_IN: "24h"
-  REFRESH_TOKEN_SECRET: "your-refresh-secret"
-  REFRESH_TOKEN_EXPIRES_IN: "7d"
+  NODE_ENV: 'production'
+  DB_HOST: 'postgres-service'
+  DB_PORT: '5432'
+  DB_NAME: 'familyoffice'
+  REDIS_HOST: 'redis-service'
+  REDIS_PORT: '6379'
+  JWT_SECRET: 'your-jwt-secret'
+  JWT_EXPIRES_IN: '24h'
+  REFRESH_TOKEN_SECRET: 'your-refresh-secret'
+  REFRESH_TOKEN_EXPIRES_IN: '7d'
 ```
 
 ### Secret 설정
+
 ```yaml
 # k8s/secret.yaml
 apiVersion: v1
@@ -313,14 +322,15 @@ metadata:
   namespace: family-office
 type: Opaque
 data:
-  DB_USER: ZmFtaWx5b2ZmaWNl  # base64 encoded
-  DB_PASSWORD: cGFzc3dvcmQ=  # base64 encoded
-  REDIS_PASSWORD: cmVkaXNwYXNzd29yZA==  # base64 encoded
-  JWT_SECRET: eW91ci1qd3Qtc2VjcmV0  # base64 encoded
-  REFRESH_TOKEN_SECRET: eW91ci1yZWZyZXNoLXNlY3JldA==  # base64 encoded
+  DB_USER: ZmFtaWx5b2ZmaWNl # base64 encoded
+  DB_PASSWORD: cGFzc3dvcmQ= # base64 encoded
+  REDIS_PASSWORD: cmVkaXNwYXNzd29yZA== # base64 encoded
+  JWT_SECRET: eW91ci1qd3Qtc2VjcmV0 # base64 encoded
+  REFRESH_TOKEN_SECRET: eW91ci1yZWZyZXNoLXNlY3JldA== # base64 encoded
 ```
 
 ### PersistentVolume 설정
+
 ```yaml
 # k8s/persistent-volume.yaml
 apiVersion: v1
@@ -350,6 +360,7 @@ spec:
 ```
 
 ### 서비스 배포
+
 ```yaml
 # k8s/deployment.yaml
 apiVersion: apps/v1
@@ -368,48 +379,49 @@ spec:
         app: portfolio-service
     spec:
       containers:
-      - name: portfolio-service
-        image: family-office/portfolio-service:latest
-        ports:
-        - containerPort: 3001
-        env:
-        - name: NODE_ENV
-          valueFrom:
-            configMapKeyRef:
-              name: family-office-config
-              key: NODE_ENV
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: family-office-config
-              key: DB_HOST
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: family-office-secrets
-              key: DB_USER
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "250m"
-          limits:
-            memory: "1Gi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3001
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 3001
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: portfolio-service
+          image: family-office/portfolio-service:latest
+          ports:
+            - containerPort: 3001
+          env:
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: family-office-config
+                  key: NODE_ENV
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: family-office-config
+                  key: DB_HOST
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: family-office-secrets
+                  key: DB_USER
+          resources:
+            requests:
+              memory: '512Mi'
+              cpu: '250m'
+            limits:
+              memory: '1Gi'
+              cpu: '500m'
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 5
 ```
 
 ### Ingress 설정
+
 ```yaml
 # k8s/ingress.yaml
 apiVersion: networking.k8s.io/v1
@@ -418,72 +430,73 @@ metadata:
   name: family-office-ingress
   namespace: family-office
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/rate-limit: "100"
+    kubernetes.io/ingress.class: 'nginx'
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/rate-limit: '100'
 spec:
   tls:
-  - hosts:
-    - api.familyoffice.com
-    secretName: family-office-tls
+    - hosts:
+        - api.familyoffice.com
+      secretName: family-office-tls
   rules:
-  - host: api.familyoffice.com
-    http:
-      paths:
-      - path: /portfolio
-        pathType: Prefix
-        backend:
-          service:
-            name: portfolio-service
-            port:
-              number: 3001
-      - path: /transaction
-        pathType: Prefix
-        backend:
-          service:
-            name: transaction-service
-            port:
-              number: 3002
-      - path: /reporting
-        pathType: Prefix
-        backend:
-          service:
-            name: reporting-service
-            port:
-              number: 3003
-      - path: /user
-        pathType: Prefix
-        backend:
-          service:
-            name: user-service
-            port:
-              number: 3004
-      - path: /integration
-        pathType: Prefix
-        backend:
-          service:
-            name: integration-hub
-            port:
-              number: 3005
+    - host: api.familyoffice.com
+      http:
+        paths:
+          - path: /portfolio
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio-service
+                port:
+                  number: 3001
+          - path: /transaction
+            pathType: Prefix
+            backend:
+              service:
+                name: transaction-service
+                port:
+                  number: 3002
+          - path: /reporting
+            pathType: Prefix
+            backend:
+              service:
+                name: reporting-service
+                port:
+                  number: 3003
+          - path: /user
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service
+                port:
+                  number: 3004
+          - path: /integration
+            pathType: Prefix
+            backend:
+              service:
+                name: integration-hub
+                port:
+                  number: 3005
 ```
 
 ## 📊 모니터링 설정
 
 ### Prometheus 설정
+
 ```yaml
 # monitoring/prometheus.yml
 global:
   scrape_interval: 15s
 
 rule_files:
-  - "alert.rules"
+  - 'alert.rules'
 
 alerting:
   alertmanagers:
     - static_configs:
         - targets:
-          - alertmanager:9093
+            - alertmanager:9093
 
 scrape_configs:
   - job_name: 'portfolio-service'
@@ -513,6 +526,7 @@ scrape_configs:
 ```
 
 ### Grafana 대시보드
+
 ```json
 // monitoring/grafana/dashboards/family-office-dashboard.json
 {
@@ -563,6 +577,7 @@ scrape_configs:
 ## 🔄 CI/CD 파이프라인
 
 ### GitHub Actions
+
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy to Production
@@ -575,51 +590,52 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-    - name: Install dependencies
-      run: |
-        cd backend
-        npm install
-    - name: Run tests
-      run: |
-        cd backend
-        npm test
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm install
+      - name: Run tests
+        run: |
+          cd backend
+          npm test
 
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Build Docker images
-      run: |
-        cd backend
-        docker build -t family-office/portfolio-service:latest ./services/portfolio-service
-        docker build -t family-office/transaction-service:latest ./services/transaction-service
-        docker build -t family-office/reporting-service:latest ./services/reporting-service
-        docker build -t family-office/user-service:latest ./services/user-service
-        docker build -t family-office/integration-hub:latest ./services/integration-hub
+      - uses: actions/checkout@v3
+      - name: Build Docker images
+        run: |
+          cd backend
+          docker build -t family-office/portfolio-service:latest ./services/portfolio-service
+          docker build -t family-office/transaction-service:latest ./services/transaction-service
+          docker build -t family-office/reporting-service:latest ./services/reporting-service
+          docker build -t family-office/user-service:latest ./services/user-service
+          docker build -t family-office/integration-hub:latest ./services/integration-hub
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f k8s/namespace.yaml
-        kubectl apply -f k8s/configmap.yaml
-        kubectl apply -f k8s/secret.yaml
-        kubectl apply -f k8s/persistent-volume.yaml
-        kubectl apply -f k8s/deployment.yaml
-        kubectl apply -f k8s/ingress.yaml
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/namespace.yaml
+          kubectl apply -f k8s/configmap.yaml
+          kubectl apply -f k8s/secret.yaml
+          kubectl apply -f k8s/persistent-volume.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/ingress.yaml
 ```
 
 ## 💾 백업 및 재해 복구
 
 ### 데이터베이스 백업
+
 ```bash
 #!/bin/bash
 # scripts/backup.sh
@@ -648,6 +664,7 @@ find $BACKUP_DIR -name "*.tar.gz" -mtime +30 -delete
 ```
 
 ### 재해 복구 계획
+
 ```bash
 #!/bin/bash
 # scripts/disaster-recovery.sh
@@ -680,6 +697,7 @@ kubectl get pods -n family-office
 ## ⚡ 성능 튜닝
 
 ### PostgreSQL 최적화
+
 ```sql
 -- postgresql.conf 최적화
 shared_buffers = 256MB
@@ -694,6 +712,7 @@ effective_io_concurrency = 200
 ```
 
 ### Redis 최적화
+
 ```bash
 # redis.conf 최적화
 maxmemory 2gb
@@ -704,29 +723,34 @@ save 60 10000
 ```
 
 ### Node.js 최적화
+
 ```javascript
 // PM2 설정
 module.exports = {
-  apps: [{
-    name: 'portfolio-service',
-    script: 'dist/index.js',
-    instances: 'max',
-    exec_mode: 'cluster',
-    max_memory_restart: '1G',
-    node_args: '--max-old-space-size=1024'
-  }]
-}
+  apps: [
+    {
+      name: 'portfolio-service',
+      script: 'dist/index.js',
+      instances: 'max',
+      exec_mode: 'cluster',
+      max_memory_restart: '1G',
+      node_args: '--max-old-space-size=1024',
+    },
+  ],
+};
 ```
 
 ## 🔍 보안 감사 체크리스트
 
 ### 네트워크 보안
+
 - [ ] 방화벽 설정 완료
 - [ ] SSL/TLS 인증서 설치
 - [ ] VPN 접근 설정
 - [ ] 네트워크 분리 (DMZ)
 
 ### 애플리케이션 보안
+
 - [ ] 입력값 검증
 - [ ] SQL 인젝션 방지
 - [ ] XSS 방지
@@ -735,12 +759,14 @@ module.exports = {
 - [ ] 로그 모니터링
 
 ### 데이터 보안
+
 - [ ] 데이터 암호화 (저장/전송)
 - [ ] 백업 암호화
 - [ ] 접근 로그 기록
 - [ ] 정기 보안 스캔
 
 ### 운영 보안
+
 - [ ] 정기 패치 업데이트
 - [ ] 보안 모니터링
 - [ ] 인시던트 대응 계획
@@ -749,16 +775,19 @@ module.exports = {
 ## 📞 지원 및 연락처
 
 ### 기술 지원
+
 - **이메일**: tech-support@familyoffice.com
 - **전화**: +82-2-1234-5678
 - **긴급 연락처**: +82-10-1234-5678
 
 ### 문서 및 리소스
+
 - **API 문서**: https://api.familyoffice.com/docs
 - **모니터링**: https://grafana.familyoffice.com
 - **로그**: https://logs.familyoffice.com
 
 ### 문제 해결
+
 ```bash
 # 서비스 상태 확인
 kubectl get pods -n family-office
@@ -771,4 +800,4 @@ curl http://localhost:9090/metrics
 
 # 헬스 체크
 curl http://localhost:3001/health
-``` 
+```

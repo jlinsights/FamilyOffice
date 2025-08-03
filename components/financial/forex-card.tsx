@@ -2,107 +2,127 @@
  * 환율 정보 카드 컴포넌트
  */
 
-'use client'
+'use client';
 
-import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
-import { TrendingUp, TrendingDown, RefreshCw, Clock, ArrowRightLeft } from 'lucide-react'
-import type { ForexData } from '@/lib/types/financial'
+import {
+  TrendingUp,
+  TrendingDown,
+  RefreshCw,
+  Clock,
+  ArrowRightLeft,
+} from 'lucide-react';
+
+import { useState, useEffect, useCallback } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+
+import type { ForexData } from '@/lib/types/financial';
+
+/**
+ * 환율 정보 카드 컴포넌트
+ */
+
+/**
+ * 환율 정보 카드 컴포넌트
+ */
 
 interface ForexCardProps {
-  fromCurrency: string
-  toCurrency: string
-  autoRefresh?: boolean
-  refreshInterval?: number
-  className?: string
+  fromCurrency: string;
+  toCurrency: string;
+  autoRefresh?: boolean;
+  refreshInterval?: number;
+  className?: string;
 }
 
-export default function ForexCard({ 
-  fromCurrency, 
+export default function ForexCard({
+  fromCurrency,
   toCurrency,
   autoRefresh = false,
   refreshInterval = 300000, // 5분
-  className = ''
+  className = '',
 }: ForexCardProps) {
-  const [forexData, setForexData] = useState<ForexData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [forexData, setForexData] = useState<ForexData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchForexData = useCallback(async (forceRefresh = false) => {
-    if (loading && !forceRefresh) return
+  const fetchForexData = useCallback(
+    async (forceRefresh = false) => {
+      if (loading && !forceRefresh) return;
 
-    setLoading(true)
-    setError(null)
+      setLoading(true);
+      setError(null);
 
-    try {
-      // 실제 API 호출을 시뮬레이션
-      await new Promise(resolve => setTimeout(resolve, 800))
-      
-      // 데모 데이터 생성
-      const baseRate = 1300 + Math.random() * 100
-      const change = (Math.random() - 0.5) * 20
-      const changePercent = (change / baseRate) * 100
-      
-      const data: ForexData = {
-        symbol: `${fromCurrency}/${toCurrency}`,
-        timestamp: Date.now(),
-        source: 'alphavantage',
-        cached: false,
-        fromCurrency,
-        toCurrency,
-        rate: baseRate,
-        change: change,
-        changePercent: changePercent,
-        high: baseRate + Math.random() * 10,
-        low: baseRate - Math.random() * 10
+      try {
+        // 실제 API 호출을 시뮬레이션
+        await new Promise(resolve => setTimeout(resolve, 800));
+
+        // 데모 데이터 생성
+        const baseRate = 1300 + Math.random() * 100;
+        const change = (Math.random() - 0.5) * 20;
+        const changePercent = (change / baseRate) * 100;
+
+        const data: ForexData = {
+          symbol: `${fromCurrency}/${toCurrency}`,
+          timestamp: Date.now(),
+          source: 'alphavantage',
+          cached: false,
+          fromCurrency,
+          toCurrency,
+          rate: baseRate,
+          change: change,
+          changePercent: changePercent,
+          high: baseRate + Math.random() * 10,
+          low: baseRate - Math.random() * 10,
+        };
+
+        setForexData(data);
+      } catch (error) {
+        setError('환율 데이터를 불러오는데 실패했습니다.');
+        console.error('환율 데이터 로딩 실패:', error);
+      } finally {
+        setLoading(false);
       }
-      
-      setForexData(data)
-    } catch (error) {
-      setError('환율 데이터를 불러오는데 실패했습니다.')
-      console.error('환율 데이터 로딩 실패:', error)
-    } finally {
-      setLoading(false)
-    }
-  }, [fromCurrency, toCurrency, loading])
+    },
+    [fromCurrency, toCurrency, loading]
+  );
 
   // 컴포넌트 마운트 시 데이터 로드
   useEffect(() => {
-    fetchForexData()
-  }, [fetchForexData])
+    fetchForexData();
+  }, [fetchForexData]);
 
   // 자동 새로고침 설정
   useEffect(() => {
-    if (!autoRefresh) return
+    if (!autoRefresh) return;
 
     const interval = setInterval(() => {
-      fetchForexData()
-    }, refreshInterval)
+      fetchForexData();
+    }, refreshInterval);
 
-    return () => clearInterval(interval)
-  }, [autoRefresh, refreshInterval, fetchForexData])
+    return () => clearInterval(interval);
+  }, [autoRefresh, refreshInterval, fetchForexData]);
 
   // 수동 새로고침
   const handleRefresh = () => {
-    fetchForexData(true)
-  }
+    fetchForexData(true);
+  };
 
   // 환율 변화 색상 결정
   const getRateChangeColor = (change: number) => {
-    if (change > 0) return 'text-green-600'
-    if (change < 0) return 'text-red-600'
-    return 'text-gray-600'
-  }
+    if (change > 0) return 'text-green-600';
+    if (change < 0) return 'text-red-600';
+    return 'text-gray-600';
+  };
 
   // 환율 변화 아이콘
   const getRateChangeIcon = (change: number) => {
-    if (change > 0) return <TrendingUp className="h-4 w-4" />
-    if (change < 0) return <TrendingDown className="h-4 w-4" />
-    return null
-  }
+    if (change > 0) return <TrendingUp className="h-4 w-4" />;
+    if (change < 0) return <TrendingDown className="h-4 w-4" />;
+    return null;
+  };
 
   // 통화 기호 가져오기
   const getCurrencySymbol = (currency: string) => {
@@ -115,25 +135,25 @@ export default function ForexCard({
       CNY: '¥',
       CHF: 'CHF',
       CAD: 'C$',
-      AUD: 'A$'
-    }
-    return symbols[currency] || currency
-  }
+      AUD: 'A$',
+    };
+    return symbols[currency] || currency;
+  };
 
   // 숫자 포맷팅
   const formatRate = (rate: number) => {
     // KRW의 경우 소수점 없이, 다른 통화는 4자리까지
-    const decimals = toCurrency === 'KRW' ? 0 : 4
+    const decimals = toCurrency === 'KRW' ? 0 : 4;
     return new Intl.NumberFormat('ko-KR', {
       minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals
-    }).format(rate)
-  }
+      maximumFractionDigits: decimals,
+    }).format(rate);
+  };
 
   // 퍼센트 포맷팅
   const formatPercent = (num: number) => {
-    return `${num >= 0 ? '+' : ''}${num.toFixed(2)}%`
-  }
+    return `${num >= 0 ? '+' : ''}${num.toFixed(2)}%`;
+  };
 
   // 로딩 상태
   if (loading && !forexData) {
@@ -162,7 +182,7 @@ export default function ForexCard({
           </div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   // 오류 상태
@@ -180,7 +200,9 @@ export default function ForexCard({
               onClick={handleRefresh}
               disabled={loading}
             >
-              <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+              <RefreshCw
+                className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`}
+              />
             </Button>
           </div>
         </CardHeader>
@@ -199,10 +221,10 @@ export default function ForexCard({
           </div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
-  if (!forexData) return null
+  if (!forexData) return null;
 
   return (
     <Card className={`w-full ${className}`}>
@@ -236,15 +258,17 @@ export default function ForexCard({
         <div className="space-y-1">
           <div className="flex items-center space-x-2">
             <span className="text-2xl font-bold">
-              {getCurrencySymbol(forexData.toCurrency)}{formatRate(forexData.rate)}
+              {getCurrencySymbol(forexData.toCurrency)}
+              {formatRate(forexData.rate)}
             </span>
             {getRateChangeIcon(forexData.change)}
           </div>
-          
+
           {(forexData.change !== 0 || forexData.changePercent !== 0) && (
             <div className={`text-sm ${getRateChangeColor(forexData.change)}`}>
               {forexData.change >= 0 ? '+' : ''}
-              {formatRate(forexData.change)} ({formatPercent(forexData.changePercent)})
+              {formatRate(forexData.change)} (
+              {formatPercent(forexData.changePercent)})
             </div>
           )}
         </div>
@@ -257,7 +281,7 @@ export default function ForexCard({
               {formatRate(forexData.rate)} {forexData.toCurrency}
             </span>
           </div>
-          
+
           {/* 역환율 표시 */}
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">1 {forexData.toCurrency}</span>
@@ -318,12 +342,13 @@ export default function ForexCard({
             <span>
               {new Date(forexData.timestamp).toLocaleTimeString('ko-KR', {
                 hour: '2-digit',
-                minute: '2-digit'
-              })} 업데이트
+                minute: '2-digit',
+              })}{' '}
+              업데이트
             </span>
           </div>
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,4 +1,5 @@
 # Family Office Security Audit Report
+
 ## SOX, GDPR, SOC 2 Compliance Analysis
 
 ### 📋 Executive Summary
@@ -6,6 +7,7 @@
 이 보고서는 패밀리 오피스 자산 관리 시스템의 보안 상태를 SOX, GDPR, SOC 2 준수 관점에서 종합적으로 분석합니다.
 
 **감사 범위:**
+
 - 인증 및 권한 관리
 - 데이터 보호 및 암호화
 - 네트워크 보안
@@ -13,6 +15,7 @@
 - 운영 보안
 
 **준수 프레임워크:**
+
 - SOX (Sarbanes-Oxley Act) - 재무 보고 제어
 - GDPR (General Data Protection Regulation) - EU 데이터 보호
 - SOC 2 Type II - 보안, 가용성, 처리 무결성, 기밀성, 개인정보보호
@@ -24,17 +27,20 @@
 ### ✅ 구현된 보안 조치
 
 #### 1. 인증 및 권한 관리
+
 - **JWT 토큰 기반 인증** ✅
 - **PBKDF2 비밀번호 해싱** ✅
 - **기본 RBAC (Role-Based Access Control)** ✅
 - **Rate Limiting** ✅
 
 #### 2. 데이터 보호
+
 - **AES-256-GCM 암호화** ✅
 - **전송 중 암호화 (HTTPS)** ✅
 - **구조화된 로깅** ✅
 
 #### 3. 애플리케이션 보안
+
 - **CSRF 보호** ✅
 - **보안 헤더 (Helmet)** ✅
 - **Rate Limiting** ✅
@@ -42,18 +48,21 @@
 ### ❌ 누락된 엔터프라이즈 보안 조치
 
 #### 1. 인증 및 권한 관리
+
 - **Multi-Factor Authentication (MFA)** ❌
 - **Privileged Access Management (PAM)** ❌
 - **Session Management** ❌
 - **Just-In-Time Access** ❌
 
 #### 2. 데이터 보호
+
 - **Key Management System** ❌
 - **Data Classification** ❌
 - **Data Retention Policies** ❌
 - **Backup Encryption** ❌
 
 #### 3. 감사 및 모니터링
+
 - **Comprehensive Audit Trail** ❌
 - **Real-time Security Monitoring** ❌
 - **Incident Response Procedures** ❌
@@ -88,7 +97,7 @@ export class MFAService {
 
   // 백업 코드 생성
   static generateBackupCodes(): string[] {
-    return Array.from({ length: 10 }, () => 
+    return Array.from({ length: 10 }, () =>
       Math.random().toString(36).substring(2, 8).toUpperCase()
     );
   }
@@ -132,12 +141,12 @@ export class PAMService {
       requestedAt: new Date(),
       expiresAt: new Date(Date.now() + duration * 60 * 60 * 1000),
       reason,
-      status: 'pending'
+      status: 'pending',
     };
 
     // 감사 로그 기록
     await this.logAuditEvent('privileged_access_requested', access);
-    
+
     return access;
   }
 
@@ -147,7 +156,10 @@ export class PAMService {
     approvedBy: string
   ): Promise<void> {
     // 승인 로직 구현
-    await this.logAuditEvent('privileged_access_approved', { accessId, approvedBy });
+    await this.logAuditEvent('privileged_access_approved', {
+      accessId,
+      approvedBy,
+    });
   }
 
   // 권한 검증
@@ -183,19 +195,21 @@ export interface AuditEvent {
 
 export class AuditService {
   // 감사 이벤트 기록
-  static async logEvent(event: Omit<AuditEvent, 'id' | 'timestamp'>): Promise<void> {
+  static async logEvent(
+    event: Omit<AuditEvent, 'id' | 'timestamp'>
+  ): Promise<void> {
     const auditEvent: AuditEvent = {
       ...event,
       id: crypto.randomUUID(),
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
     // 데이터베이스에 저장
     await this.saveToDatabase(auditEvent);
-    
+
     // 실시간 모니터링
     await this.sendToMonitoring(auditEvent);
-    
+
     // 위험도가 높은 이벤트는 즉시 알림
     if (auditEvent.severity === 'critical') {
       await this.sendAlert(auditEvent);
@@ -219,13 +233,13 @@ export class AuditService {
         amount,
         currency,
         type,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       },
       userId,
       severity: 'high',
       ipAddress: 'system',
       userAgent: 'system',
-      sessionId: 'system'
+      sessionId: 'system',
     });
   }
 
@@ -244,13 +258,13 @@ export class AuditService {
         dataSubjectId,
         dataType,
         purpose,
-        legalBasis: 'legitimate_interest'
+        legalBasis: 'legitimate_interest',
       },
       userId,
       severity: 'medium',
       ipAddress: 'system',
       userAgent: 'system',
-      sessionId: 'system'
+      sessionId: 'system',
     });
   }
 }
@@ -265,7 +279,7 @@ export enum DataClassification {
   INTERNAL = 'internal',
   CONFIDENTIAL = 'confidential',
   RESTRICTED = 'restricted',
-  HIGHLY_RESTRICTED = 'highly_restricted'
+  HIGHLY_RESTRICTED = 'highly_restricted',
 }
 
 export enum DataRetentionPolicy {
@@ -273,7 +287,7 @@ export enum DataRetentionPolicy {
   ONE_YEAR = '1_year',
   THREE_YEARS = '3_years',
   SEVEN_YEARS = '7_years',
-  PERMANENT = 'permanent'
+  PERMANENT = 'permanent',
 }
 
 export interface DataClassificationRule {
@@ -293,7 +307,7 @@ export class DataClassificationService {
       classification: DataClassification.HIGHLY_RESTRICTED,
       retentionPolicy: DataRetentionPolicy.SEVEN_YEARS,
       encryptionRequired: true,
-      accessControls: ['financial_manager', 'compliance_officer']
+      accessControls: ['financial_manager', 'compliance_officer'],
     },
     {
       id: 'personal-data',
@@ -301,8 +315,8 @@ export class DataClassificationService {
       classification: DataClassification.RESTRICTED,
       retentionPolicy: DataRetentionPolicy.THREE_YEARS,
       encryptionRequired: true,
-      accessControls: ['family_admin', 'wealth_manager']
-    }
+      accessControls: ['family_admin', 'wealth_manager'],
+    },
   ];
 
   // 데이터 분류
@@ -312,14 +326,14 @@ export class DataClassificationService {
         return rule;
       }
     }
-    
+
     return {
       id: 'default',
       pattern: '.*',
       classification: DataClassification.INTERNAL,
       retentionPolicy: DataRetentionPolicy.ONE_YEAR,
       encryptionRequired: false,
-      accessControls: ['authenticated_user']
+      accessControls: ['authenticated_user'],
     };
   }
 
@@ -328,8 +342,10 @@ export class DataClassificationService {
     dataId: string,
     classification: DataClassificationRule
   ): Promise<void> {
-    const retentionDate = this.calculateRetentionDate(classification.retentionPolicy);
-    
+    const retentionDate = this.calculateRetentionDate(
+      classification.retentionPolicy
+    );
+
     // 데이터베이스에 보존 정책 기록
     await this.recordRetentionPolicy(dataId, classification, retentionDate);
   }
@@ -359,7 +375,7 @@ export class KeyManagementService {
     keySize: number = 256
   ): Promise<EncryptionKey> {
     const key = crypto.randomBytes(keySize / 8);
-    
+
     const encryptionKey: EncryptionKey = {
       id: crypto.randomUUID(),
       name,
@@ -367,12 +383,12 @@ export class KeyManagementService {
       keySize,
       createdAt: new Date(),
       status: 'active',
-      usage: []
+      usage: [],
     };
 
     // 키를 안전한 저장소에 저장
     await this.storeKey(encryptionKey, key);
-    
+
     return encryptionKey;
   }
 
@@ -387,7 +403,7 @@ export class KeyManagementService {
 
     // 기존 데이터 재암호화
     await this.reEncryptData(oldKey.id, newKey.id);
-    
+
     return newKey;
   }
 
@@ -447,7 +463,7 @@ export class GDPRService {
       severity: 'high',
       ipAddress: 'system',
       userAgent: 'system',
-      sessionId: 'system'
+      sessionId: 'system',
     });
 
     // 데이터 삭제 실행
@@ -469,7 +485,11 @@ export class GDPRService {
 export interface SOXControl {
   id: string;
   name: string;
-  category: 'access_control' | 'change_management' | 'data_integrity' | 'segregation_of_duties';
+  category:
+    | 'access_control'
+    | 'change_management'
+    | 'data_integrity'
+    | 'segregation_of_duties';
   description: string;
   status: 'implemented' | 'in_progress' | 'not_implemented';
   lastReviewDate?: Date;
@@ -494,7 +514,7 @@ export class SOXComplianceService {
         severity: 'critical',
         ipAddress: 'system',
         userAgent: 'system',
-        sessionId: 'system'
+        sessionId: 'system',
       });
       return false;
     }
@@ -516,10 +536,8 @@ export class SOXComplianceService {
   ): Promise<boolean> {
     const userRoles = await this.getUserRoles(userId);
     const conflictingRoles = await this.getConflictingRoles(action, resource);
-    
-    const hasConflict = userRoles.some(role => 
-      conflictingRoles.includes(role)
-    );
+
+    const hasConflict = userRoles.some(role => conflictingRoles.includes(role));
 
     if (hasConflict) {
       await AuditService.logEvent({
@@ -530,7 +548,7 @@ export class SOXComplianceService {
         severity: 'critical',
         ipAddress: 'system',
         userAgent: 'system',
-        sessionId: 'system'
+        sessionId: 'system',
       });
       return false;
     }
@@ -545,11 +563,13 @@ export class SOXComplianceService {
 ## 📊 보안 준수 점수
 
 ### 현재 상태
+
 - **SOX 준수**: 45% (기본 인증/권한만 구현)
 - **GDPR 준수**: 30% (기본 데이터 보호만 구현)
 - **SOC 2 준수**: 35% (기본 로깅만 구현)
 
 ### 목표 상태 (구현 후)
+
 - **SOX 준수**: 95% (재무 제어 완전 구현)
 - **GDPR 준수**: 90% (데이터 주체 권리 완전 구현)
 - **SOC 2 준수**: 90% (보안 제어 완전 구현)
@@ -559,16 +579,19 @@ export class SOXComplianceService {
 ## 🚀 구현 우선순위
 
 ### Phase 1: 핵심 보안 (1-2주)
+
 1. **Multi-Factor Authentication (MFA)**
 2. **Comprehensive Audit Trail**
 3. **Data Classification System**
 
 ### Phase 2: 준수 강화 (2-3주)
+
 4. **GDPR Data Subject Rights**
 5. **SOX Financial Controls**
 6. **Key Management System**
 
 ### Phase 3: 고급 보안 (3-4주)
+
 7. **Privileged Access Management (PAM)**
 8. **Real-time Security Monitoring**
 9. **Incident Response Procedures**
@@ -578,6 +601,7 @@ export class SOXComplianceService {
 ## 📋 보안 체크리스트
 
 ### 인증 및 권한 관리
+
 - [ ] Multi-Factor Authentication (MFA)
 - [ ] Privileged Access Management (PAM)
 - [ ] Session Management
@@ -585,6 +609,7 @@ export class SOXComplianceService {
 - [ ] Role-Based Access Control (RBAC)
 
 ### 데이터 보호
+
 - [ ] Data Classification
 - [ ] Data Retention Policies
 - [ ] Encryption at Rest
@@ -593,6 +618,7 @@ export class SOXComplianceService {
 - [ ] Backup Encryption
 
 ### 감사 및 모니터링
+
 - [ ] Comprehensive Audit Trail
 - [ ] Real-time Security Monitoring
 - [ ] Incident Response Procedures
@@ -600,6 +626,7 @@ export class SOXComplianceService {
 - [ ] Automated Alerts
 
 ### 애플리케이션 보안
+
 - [ ] Input Validation
 - [ ] SQL Injection Prevention
 - [ ] XSS Protection
@@ -607,6 +634,7 @@ export class SOXComplianceService {
 - [ ] Security Headers
 
 ### 네트워크 보안
+
 - [ ] Firewall Configuration
 - [ ] Network Segmentation
 - [ ] VPN Access
@@ -690,8 +718,9 @@ CREATE TABLE data_classification (
 ```typescript
 // middleware/security.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { MFAService } from '@/lib/security/mfa';
+
 import { AuditService } from '@/lib/security/audit';
+import { MFAService } from '@/lib/security/mfa';
 import { PAMService } from '@/lib/security/pam';
 
 export async function securityMiddleware(req: NextRequest) {
@@ -699,10 +728,7 @@ export async function securityMiddleware(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith('/api/')) {
     const mfaValid = await validateMFA(req);
     if (!mfaValid) {
-      return NextResponse.json(
-        { error: 'MFA required' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'MFA required' }, { status: 401 });
     }
   }
 
@@ -713,7 +739,7 @@ export async function securityMiddleware(req: NextRequest) {
       req.nextUrl.pathname,
       req.method
     );
-    
+
     if (!hasPrivilegedAccess) {
       return NextResponse.json(
         { error: 'Insufficient privileges' },
@@ -729,12 +755,12 @@ export async function securityMiddleware(req: NextRequest) {
     resource: req.nextUrl.pathname,
     details: {
       query: Object.fromEntries(req.nextUrl.searchParams),
-      headers: Object.fromEntries(req.headers)
+      headers: Object.fromEntries(req.headers),
     },
     severity: 'low',
     ipAddress: req.ip || 'unknown',
     userAgent: req.headers.get('user-agent') || 'unknown',
-    sessionId: req.headers.get('session-id') || 'unknown'
+    sessionId: req.headers.get('session-id') || 'unknown',
   });
 
   return NextResponse.next();
@@ -753,4 +779,4 @@ export async function securityMiddleware(req: NextRequest) {
 
 ---
 
-*이 보고서는 2024년 기준으로 작성되었으며, 정기적으로 업데이트됩니다.* 
+_이 보고서는 2024년 기준으로 작성되었으며, 정기적으로 업데이트됩니다._

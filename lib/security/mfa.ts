@@ -1,25 +1,26 @@
-// SSR 안전성을 위한 dynamic imports
-let authenticator: any = null
-let QRCode: any = null
 import crypto from 'crypto';
+
+// SSR 안전성을 위한 dynamic imports
+let authenticator: any = null;
+let QRCode: any = null;
 
 // SSR 안전한 MFA 패키지 초기화
 export const initializeMFAPackages = async () => {
   if (typeof window === 'undefined' && !authenticator && !QRCode) {
     try {
       // Server-side에서만 MFA 패키지 사용
-      const otplibModule = await import('otplib')
-      const qrcodeModule = await import('qrcode')
-      
-      authenticator = otplibModule.authenticator || otplibModule.default
-      QRCode = qrcodeModule.default || qrcodeModule
+      const otplibModule = await import('otplib');
+      const qrcodeModule = await import('qrcode');
+
+      authenticator = otplibModule.authenticator || otplibModule.default;
+      QRCode = qrcodeModule.default || qrcodeModule;
     } catch (error) {
-      console.error('MFA 패키지 초기화 실패:', error)
-      authenticator = null
-      QRCode = null
+      console.error('MFA 패키지 초기화 실패:', error);
+      authenticator = null;
+      QRCode = null;
     }
   }
-}
+};
 
 // 초기화 호출
 // initializeMFAPackages() - lazy loading on first use
@@ -53,7 +54,7 @@ export class MFAService {
 
   // 백업 코드 생성
   static generateBackupCodes(): string[] {
-    return Array.from({ length: 10 }, () => 
+    return Array.from({ length: 10 }, () =>
       Math.random().toString(36).substring(2, 8).toUpperCase()
     );
   }
@@ -70,7 +71,7 @@ export class MFAService {
       backupCodes,
       enabled: false,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     // 데이터베이스에 저장
@@ -82,7 +83,7 @@ export class MFAService {
   // MFA 활성화
   static async enableMFA(userId: string, token: string): Promise<boolean> {
     const settings = await this.getMFASettings(userId);
-    
+
     if (!settings) {
       throw new Error('MFA settings not found');
     }
@@ -98,18 +99,23 @@ export class MFAService {
   }
 
   // 백업 코드 검증
-  static async verifyBackupCode(userId: string, backupCode: string): Promise<boolean> {
+  static async verifyBackupCode(
+    userId: string,
+    backupCode: string
+  ): Promise<boolean> {
     const settings = await this.getMFASettings(userId);
-    
+
     if (!settings) {
       return false;
     }
 
     const isValid = settings.backupCodes.includes(backupCode);
-    
+
     if (isValid) {
       // 사용된 백업 코드 제거
-      settings.backupCodes = settings.backupCodes.filter(code => code !== backupCode);
+      settings.backupCodes = settings.backupCodes.filter(
+        code => code !== backupCode
+      );
       await this.updateMFASettings(settings);
     }
 
@@ -119,7 +125,7 @@ export class MFAService {
   // MFA 검증
   static async validateMFA(userId: string, token: string): Promise<boolean> {
     const settings = await this.getMFASettings(userId);
-    
+
     if (!settings || !settings.enabled) {
       return true; // MFA가 비활성화된 경우 통과
     }
@@ -130,7 +136,7 @@ export class MFAService {
   // MFA 비활성화
   static async disableMFA(userId: string): Promise<void> {
     const settings = await this.getMFASettings(userId);
-    
+
     if (settings) {
       settings.enabled = false;
       settings.updatedAt = new Date();
@@ -141,7 +147,7 @@ export class MFAService {
   // 백업 코드 재생성
   static async regenerateBackupCodes(userId: string): Promise<string[]> {
     const settings = await this.getMFASettings(userId);
-    
+
     if (!settings) {
       throw new Error('MFA settings not found');
     }
@@ -149,9 +155,9 @@ export class MFAService {
     const newBackupCodes = this.generateBackupCodes();
     settings.backupCodes = newBackupCodes;
     settings.updatedAt = new Date();
-    
+
     await this.updateMFASettings(settings);
-    
+
     return newBackupCodes;
   }
 
@@ -161,7 +167,9 @@ export class MFAService {
     console.log('Saving MFA settings:', settings.id);
   }
 
-  private static async getMFASettings(userId: string): Promise<MFASettings | null> {
+  private static async getMFASettings(
+    userId: string
+  ): Promise<MFASettings | null> {
     // 데이터베이스 조회 로직
     console.log('Getting MFA settings for user:', userId);
     return null; // 구현 필요
@@ -171,4 +179,4 @@ export class MFAService {
     // 데이터베이스 업데이트 로직
     console.log('Updating MFA settings:', settings.id);
   }
-} 
+}

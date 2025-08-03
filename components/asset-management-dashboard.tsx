@@ -2,70 +2,83 @@
  * 자산 관리 대시보드 - FamilyOffice S 프리미엄 자산관리 플랫폼
  */
 
-'use client'
+'use client';
 
-import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  RefreshCw, 
-  PieChart, 
-  Building2, 
+import {
+  TrendingUp,
+  TrendingDown,
+  RefreshCw,
+  PieChart,
+  Building2,
   Wallet,
   Target,
   AlertTriangle,
   Calendar,
   User,
-  Globe
-} from 'lucide-react'
-import StockCard from './financial/stock-card'
-import ForexCard from './financial/forex-card'
+  Globe,
+} from 'lucide-react';
+
+import { useState, useEffect, useCallback } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+import ForexCard from './financial/forex-card';
+import StockCard from './financial/stock-card';
+
+/**
+ * 자산 관리 대시보드 - FamilyOffice S 프리미엄 자산관리 플랫폼
+ */
+
+/**
+ * 자산 관리 대시보드 - FamilyOffice S 프리미엄 자산관리 플랫폼
+ */
 
 interface PortfolioData {
-  totalValue: number
-  dayChange: number
-  dayChangePercent: number
+  totalValue: number;
+  dayChange: number;
+  dayChangePercent: number;
   allocations: {
-    stocks: number
-    bonds: number
-    realEstate: number
-    alternatives: number
-    cash: number
-  }
+    stocks: number;
+    bonds: number;
+    realEstate: number;
+    alternatives: number;
+    cash: number;
+  };
   topHoldings: Array<{
-    symbol: string
-    name: string
-    value: number
-    weight: number
-    change: number
-  }>
+    symbol: string;
+    name: string;
+    value: number;
+    weight: number;
+    change: number;
+  }>;
   riskMetrics: {
-    volatility: number
-    sharpeRatio: number
-    beta: number
-    maxDrawdown: number
-  }
+    volatility: number;
+    sharpeRatio: number;
+    beta: number;
+    maxDrawdown: number;
+  };
 }
 
 interface AssetManagementDashboardProps {
-  className?: string
-  autoRefresh?: boolean
-  refreshInterval?: number
+  className?: string;
+  autoRefresh?: boolean;
+  refreshInterval?: number;
 }
 
 export default function AssetManagementDashboard({
   className = '',
   autoRefresh = true,
-  refreshInterval = 300000 // 5분
+  refreshInterval = 300000, // 5분
 }: AssetManagementDashboardProps) {
-  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(
+    null
+  );
+  const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   // 데모 데이터 생성
   const generateDemoData = (): PortfolioData => {
@@ -78,74 +91,106 @@ export default function AssetManagementDashboard({
         bonds: 25.8,
         realEstate: 18.5,
         alternatives: 7.3,
-        cash: 3.2
+        cash: 3.2,
       },
       topHoldings: [
-        { symbol: '005930.KS', name: '삼성전자', value: 350000000, weight: 14.3, change: 2.1 },
-        { symbol: 'AAPL', name: 'Apple Inc.', value: 280000000, weight: 11.4, change: 1.8 },
-        { symbol: '000660.KS', name: 'SK하이닉스', value: 210000000, weight: 8.6, change: -0.7 },
-        { symbol: 'MSFT', name: 'Microsoft', value: 185000000, weight: 7.5, change: 0.9 },
-        { symbol: '035420.KS', name: 'NAVER', value: 165000000, weight: 6.7, change: 1.3 }
+        {
+          symbol: '005930.KS',
+          name: '삼성전자',
+          value: 350000000,
+          weight: 14.3,
+          change: 2.1,
+        },
+        {
+          symbol: 'AAPL',
+          name: 'Apple Inc.',
+          value: 280000000,
+          weight: 11.4,
+          change: 1.8,
+        },
+        {
+          symbol: '000660.KS',
+          name: 'SK하이닉스',
+          value: 210000000,
+          weight: 8.6,
+          change: -0.7,
+        },
+        {
+          symbol: 'MSFT',
+          name: 'Microsoft',
+          value: 185000000,
+          weight: 7.5,
+          change: 0.9,
+        },
+        {
+          symbol: '035420.KS',
+          name: 'NAVER',
+          value: 165000000,
+          weight: 6.7,
+          change: 1.3,
+        },
       ],
       riskMetrics: {
         volatility: 12.4,
         sharpeRatio: 1.25,
         beta: 0.88,
-        maxDrawdown: -8.2
-      }
-    }
-  }
+        maxDrawdown: -8.2,
+      },
+    };
+  };
 
   // 포트폴리오 데이터 로드
   const fetchPortfolioData = useCallback(async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       // 실제 API 호출을 시뮬레이션
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      const data = generateDemoData()
-      setPortfolioData(data)
-      setLastUpdated(new Date())
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      const data = generateDemoData();
+      setPortfolioData(data);
+      setLastUpdated(new Date());
     } catch (error) {
-      console.error('포트폴리오 데이터 로딩 실패:', error)
+      console.error('포트폴리오 데이터 로딩 실패:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    fetchPortfolioData()
-  }, [fetchPortfolioData])
+    fetchPortfolioData();
+  }, [fetchPortfolioData]);
 
   useEffect(() => {
-    if (!autoRefresh) return
+    if (!autoRefresh) return;
 
     const interval = setInterval(() => {
-      fetchPortfolioData()
-    }, refreshInterval)
+      fetchPortfolioData();
+    }, refreshInterval);
 
-    return () => clearInterval(interval)
-  }, [autoRefresh, refreshInterval, fetchPortfolioData])
+    return () => clearInterval(interval);
+  }, [autoRefresh, refreshInterval, fetchPortfolioData]);
 
   const formatCurrency = (amount: number) => {
-    if (amount >= 100000000) { // 1억 이상
-      return `${(amount / 100000000).toFixed(1)}억원`
-    } else if (amount >= 10000) { // 1만 이상
-      return `${(amount / 10000).toFixed(0)}만원`
+    if (amount >= 100000000) {
+      // 1억 이상
+      return `${(amount / 100000000).toFixed(1)}억원`;
+    } else if (amount >= 10000) {
+      // 1만 이상
+      return `${(amount / 10000).toFixed(0)}만원`;
     }
-    return `${amount.toLocaleString()}원`
-  }
+    return `${amount.toLocaleString()}원`;
+  };
 
   const getChangeColor = (change: number) => {
-    if (change > 0) return 'text-green-600'
-    if (change < 0) return 'text-red-600'
-    return 'text-gray-600'
-  }
+    if (change > 0) return 'text-green-600';
+    if (change < 0) return 'text-red-600';
+    return 'text-gray-600';
+  };
 
   const getChangeIcon = (change: number) => {
-    if (change > 0) return <TrendingUp className="h-4 w-4" />
-    if (change < 0) return <TrendingDown className="h-4 w-4" />
-    return null
-  }
+    if (change > 0) return <TrendingUp className="h-4 w-4" />;
+    if (change < 0) return <TrendingDown className="h-4 w-4" />;
+    return null;
+  };
 
   if (loading && !portfolioData) {
     return (
@@ -159,22 +204,24 @@ export default function AssetManagementDashboard({
           </div>
         </div>
       </div>
-    )
+    );
   }
 
-  if (!portfolioData) return null
+  if (!portfolioData) return null;
 
   return (
     <div className={`space-y-6 ${className}`}>
       {/* 헤더 */}
       <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">자산 관리 대시보드</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            자산 관리 대시보드
+          </h1>
           <p className="text-gray-600">
             FamilyOffice S 프리미엄 자산관리 포트폴리오
           </p>
         </div>
-        
+
         <div className="flex items-center space-x-4">
           <Badge variant="outline" className="bg-blue-50 text-blue-700">
             <User className="h-3 w-3 mr-1" />
@@ -186,7 +233,9 @@ export default function AssetManagementDashboard({
             onClick={fetchPortfolioData}
             disabled={loading}
           >
-            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`}
+            />
             새로고침
           </Button>
         </div>
@@ -198,19 +247,22 @@ export default function AssetManagementDashboard({
         <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium flex items-center">
-              <Wallet className="h-4 w-4 mr-2 text-blue-600" />
-              총 자산가액
+              <Wallet className="h-4 w-4 mr-2 text-blue-600" />총 자산가액
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-blue-900">
               {formatCurrency(portfolioData.totalValue)}
             </div>
-            <div className={`text-sm flex items-center mt-1 ${getChangeColor(portfolioData.dayChange)}`}>
+            <div
+              className={`text-sm flex items-center mt-1 ${getChangeColor(portfolioData.dayChange)}`}
+            >
               {getChangeIcon(portfolioData.dayChange)}
               <span className="ml-1">
-                {portfolioData.dayChange >= 0 ? '+' : ''}{formatCurrency(portfolioData.dayChange)}
-                ({portfolioData.dayChangePercent >= 0 ? '+' : ''}{portfolioData.dayChangePercent.toFixed(2)}%)
+                {portfolioData.dayChange >= 0 ? '+' : ''}
+                {formatCurrency(portfolioData.dayChange)}(
+                {portfolioData.dayChangePercent >= 0 ? '+' : ''}
+                {portfolioData.dayChangePercent.toFixed(2)}%)
               </span>
             </div>
           </CardContent>
@@ -229,7 +281,9 @@ export default function AssetManagementDashboard({
               {portfolioData.riskMetrics.beta.toFixed(2)}
             </div>
             <div className="text-sm text-green-700 mt-1">
-              시장 대비 {portfolioData.riskMetrics.beta < 1 ? '안정적' : '공격적'} 포트폴리오
+              시장 대비{' '}
+              {portfolioData.riskMetrics.beta < 1 ? '안정적' : '공격적'}{' '}
+              포트폴리오
             </div>
           </CardContent>
         </Card>
@@ -264,9 +318,7 @@ export default function AssetManagementDashboard({
             <div className="text-2xl font-bold text-orange-900">
               {portfolioData.riskMetrics.maxDrawdown.toFixed(1)}%
             </div>
-            <div className="text-sm text-orange-700 mt-1">
-              과거 1년 기준
-            </div>
+            <div className="text-sm text-orange-700 mt-1">과거 1년 기준</div>
           </CardContent>
         </Card>
       </div>
@@ -296,33 +348,58 @@ export default function AssetManagementDashboard({
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-sm">주식</span>
-                    <span className="text-sm font-medium">{portfolioData.allocations.stocks}%</span>
+                    <span className="text-sm font-medium">
+                      {portfolioData.allocations.stocks}%
+                    </span>
                   </div>
-                  <Progress value={portfolioData.allocations.stocks} className="h-2" />
-                  
+                  <Progress
+                    value={portfolioData.allocations.stocks}
+                    className="h-2"
+                  />
+
                   <div className="flex justify-between items-center">
                     <span className="text-sm">채권</span>
-                    <span className="text-sm font-medium">{portfolioData.allocations.bonds}%</span>
+                    <span className="text-sm font-medium">
+                      {portfolioData.allocations.bonds}%
+                    </span>
                   </div>
-                  <Progress value={portfolioData.allocations.bonds} className="h-2" />
-                  
+                  <Progress
+                    value={portfolioData.allocations.bonds}
+                    className="h-2"
+                  />
+
                   <div className="flex justify-between items-center">
                     <span className="text-sm">부동산</span>
-                    <span className="text-sm font-medium">{portfolioData.allocations.realEstate}%</span>
+                    <span className="text-sm font-medium">
+                      {portfolioData.allocations.realEstate}%
+                    </span>
                   </div>
-                  <Progress value={portfolioData.allocations.realEstate} className="h-2" />
-                  
+                  <Progress
+                    value={portfolioData.allocations.realEstate}
+                    className="h-2"
+                  />
+
                   <div className="flex justify-between items-center">
                     <span className="text-sm">대체투자</span>
-                    <span className="text-sm font-medium">{portfolioData.allocations.alternatives}%</span>
+                    <span className="text-sm font-medium">
+                      {portfolioData.allocations.alternatives}%
+                    </span>
                   </div>
-                  <Progress value={portfolioData.allocations.alternatives} className="h-2" />
-                  
+                  <Progress
+                    value={portfolioData.allocations.alternatives}
+                    className="h-2"
+                  />
+
                   <div className="flex justify-between items-center">
                     <span className="text-sm">현금</span>
-                    <span className="text-sm font-medium">{portfolioData.allocations.cash}%</span>
+                    <span className="text-sm font-medium">
+                      {portfolioData.allocations.cash}%
+                    </span>
                   </div>
-                  <Progress value={portfolioData.allocations.cash} className="h-2" />
+                  <Progress
+                    value={portfolioData.allocations.cash}
+                    className="h-2"
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -343,21 +420,21 @@ export default function AssetManagementDashboard({
                     </div>
                     <div className="text-sm text-blue-600">변동성</div>
                   </div>
-                  
+
                   <div className="text-center p-4 bg-green-50 rounded-lg">
                     <div className="text-2xl font-bold text-green-900">
                       {portfolioData.riskMetrics.sharpeRatio}
                     </div>
                     <div className="text-sm text-green-600">샤프 비율</div>
                   </div>
-                  
+
                   <div className="text-center p-4 bg-purple-50 rounded-lg">
                     <div className="text-2xl font-bold text-purple-900">
                       {portfolioData.riskMetrics.beta}
                     </div>
                     <div className="text-sm text-purple-600">베타</div>
                   </div>
-                  
+
                   <div className="text-center p-4 bg-orange-50 rounded-lg">
                     <div className="text-2xl font-bold text-orange-900">
                       {portfolioData.riskMetrics.maxDrawdown}%
@@ -387,7 +464,7 @@ export default function AssetManagementDashboard({
                 <CardContent>
                   <div className="text-3xl font-bold mb-2">{value}%</div>
                   <div className="text-sm text-gray-600 mb-4">
-                    {formatCurrency(portfolioData.totalValue * value / 100)}
+                    {formatCurrency((portfolioData.totalValue * value) / 100)}
                   </div>
                   <Progress value={value} className="h-3" />
                 </CardContent>
@@ -405,19 +482,33 @@ export default function AssetManagementDashboard({
             <CardContent>
               <div className="space-y-4">
                 {portfolioData.topHoldings.map((holding, index) => (
-                  <div key={holding.symbol} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div
+                    key={holding.symbol}
+                    className="flex items-center justify-between p-4 border rounded-lg"
+                  >
                     <div className="flex items-center space-x-4">
-                      <div className="text-lg font-bold text-gray-500">#{index + 1}</div>
+                      <div className="text-lg font-bold text-gray-500">
+                        #{index + 1}
+                      </div>
                       <div>
                         <div className="font-semibold">{holding.name}</div>
-                        <div className="text-sm text-gray-600">{holding.symbol}</div>
+                        <div className="text-sm text-gray-600">
+                          {holding.symbol}
+                        </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold">{formatCurrency(holding.value)}</div>
-                      <div className="text-sm text-gray-600">{holding.weight}%</div>
-                      <div className={`text-sm ${getChangeColor(holding.change)}`}>
-                        {holding.change >= 0 ? '+' : ''}{holding.change.toFixed(2)}%
+                      <div className="font-semibold">
+                        {formatCurrency(holding.value)}
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        {holding.weight}%
+                      </div>
+                      <div
+                        className={`text-sm ${getChangeColor(holding.change)}`}
+                      >
+                        {holding.change >= 0 ? '+' : ''}
+                        {holding.change.toFixed(2)}%
                       </div>
                     </div>
                   </div>
@@ -438,8 +529,11 @@ export default function AssetManagementDashboard({
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span>일간 수익률</span>
-                    <span className={getChangeColor(portfolioData.dayChangePercent)}>
-                      {portfolioData.dayChangePercent >= 0 ? '+' : ''}{portfolioData.dayChangePercent.toFixed(2)}%
+                    <span
+                      className={getChangeColor(portfolioData.dayChangePercent)}
+                    >
+                      {portfolioData.dayChangePercent >= 0 ? '+' : ''}
+                      {portfolioData.dayChangePercent.toFixed(2)}%
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -516,9 +610,21 @@ export default function AssetManagementDashboard({
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 gap-4">
-                  <ForexCard fromCurrency="USD" toCurrency="KRW" autoRefresh={autoRefresh} />
-                  <ForexCard fromCurrency="EUR" toCurrency="KRW" autoRefresh={autoRefresh} />
-                  <ForexCard fromCurrency="JPY" toCurrency="KRW" autoRefresh={autoRefresh} />
+                  <ForexCard
+                    fromCurrency="USD"
+                    toCurrency="KRW"
+                    autoRefresh={autoRefresh}
+                  />
+                  <ForexCard
+                    fromCurrency="EUR"
+                    toCurrency="KRW"
+                    autoRefresh={autoRefresh}
+                  />
+                  <ForexCard
+                    fromCurrency="JPY"
+                    toCurrency="KRW"
+                    autoRefresh={autoRefresh}
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -534,5 +640,5 @@ export default function AssetManagementDashboard({
         </div>
       )}
     </div>
-  )
+  );
 }

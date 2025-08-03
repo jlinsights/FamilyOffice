@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
-import { IntegrationService } from '../services/integration.service';
+
 import { logger } from '../../../shared/logging/logger';
 import { metricsCollector } from '../../../shared/monitoring/metrics';
-import { validateRequest } from '../../../shared/utils/validation';
 import { rateLimiter } from '../../../shared/utils/rateLimiter';
+import { validateRequest } from '../../../shared/utils/validation';
+import { IntegrationService } from '../services/integration.service';
 import {
   CreateIntegrationRequest,
   UpdateIntegrationRequest,
@@ -23,10 +24,13 @@ export class IntegrationController {
   // 통합 생성
   async createIntegration(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       // 요청 검증
-      const validationResult = validateRequest(req.body, CreateIntegrationRequest);
+      const validationResult = validateRequest(
+        req.body,
+        CreateIntegrationRequest
+      );
       if (!validationResult.isValid) {
         res.status(400).json({
           success: false,
@@ -37,7 +41,10 @@ export class IntegrationController {
       }
 
       // 속도 제한 확인
-      const rateLimitResult = await rateLimiter.checkLimit(req, 'integration_create');
+      const rateLimitResult = await rateLimiter.checkLimit(
+        req,
+        'integration_create'
+      );
       if (!rateLimitResult.allowed) {
         res.status(429).json({
           success: false,
@@ -50,18 +57,28 @@ export class IntegrationController {
       const request: CreateIntegrationRequest = req.body;
       const context = req.tenantContext;
 
-      const integration = await this.integrationService.createIntegration(request, context);
+      const integration = await this.integrationService.createIntegration(
+        request,
+        context
+      );
 
-      metricsCollector.recordApiCall('integration', 'create', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'integration',
+        'create',
+        Date.now() - startTime
+      );
+
       res.status(201).json({
         success: true,
         data: integration,
       });
     } catch (error) {
       metricsCollector.recordApiError('integration', 'create');
-      logger.error('Failed to create integration', { error, tenantId: req.tenantContext?.tenantId });
-      
+      logger.error('Failed to create integration', {
+        error,
+        tenantId: req.tenantContext?.tenantId,
+      });
+
       res.status(500).json({
         success: false,
         error: 'Failed to create integration',
@@ -73,12 +90,15 @@ export class IntegrationController {
   // 통합 업데이트
   async updateIntegration(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const { integrationId } = req.params;
-      
+
       // 요청 검증
-      const validationResult = validateRequest(req.body, UpdateIntegrationRequest);
+      const validationResult = validateRequest(
+        req.body,
+        UpdateIntegrationRequest
+      );
       if (!validationResult.isValid) {
         res.status(400).json({
           success: false,
@@ -89,7 +109,10 @@ export class IntegrationController {
       }
 
       // 속도 제한 확인
-      const rateLimitResult = await rateLimiter.checkLimit(req, 'integration_update');
+      const rateLimitResult = await rateLimiter.checkLimit(
+        req,
+        'integration_update'
+      );
       if (!rateLimitResult.allowed) {
         res.status(429).json({
           success: false,
@@ -108,16 +131,23 @@ export class IntegrationController {
         context
       );
 
-      metricsCollector.recordApiCall('integration', 'update', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'integration',
+        'update',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         data: integration,
       });
     } catch (error) {
       metricsCollector.recordApiError('integration', 'update');
-      logger.error('Failed to update integration', { error, integrationId: req.params.integrationId });
-      
+      logger.error('Failed to update integration', {
+        error,
+        integrationId: req.params.integrationId,
+      });
+
       if (error.message === 'Integration not found') {
         res.status(404).json({
           success: false,
@@ -136,12 +166,15 @@ export class IntegrationController {
   // 통합 조회
   async getIntegration(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const { integrationId } = req.params;
       const context = req.tenantContext;
 
-      const integration = await this.integrationService.getIntegration(integrationId, context);
+      const integration = await this.integrationService.getIntegration(
+        integrationId,
+        context
+      );
 
       if (!integration) {
         res.status(404).json({
@@ -151,16 +184,23 @@ export class IntegrationController {
         return;
       }
 
-      metricsCollector.recordApiCall('integration', 'read', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'integration',
+        'read',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         data: integration,
       });
     } catch (error) {
       metricsCollector.recordApiError('integration', 'read');
-      logger.error('Failed to get integration', { error, integrationId: req.params.integrationId });
-      
+      logger.error('Failed to get integration', {
+        error,
+        integrationId: req.params.integrationId,
+      });
+
       res.status(500).json({
         success: false,
         error: 'Failed to get integration',
@@ -172,10 +212,10 @@ export class IntegrationController {
   // 통합 목록 조회
   async getIntegrations(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const context = req.tenantContext;
-      
+
       // 쿼리 파라미터 파싱
       const filter: IntegrationFilter = {
         type: req.query.type as string,
@@ -194,10 +234,19 @@ export class IntegrationController {
         limit: parseInt(req.query.limit as string) || 20,
       };
 
-      const result = await this.integrationService.getIntegrations(filter, sort, pagination, context);
+      const result = await this.integrationService.getIntegrations(
+        filter,
+        sort,
+        pagination,
+        context
+      );
 
-      metricsCollector.recordApiCall('integration', 'list', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'integration',
+        'list',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         data: result.data,
@@ -210,8 +259,11 @@ export class IntegrationController {
       });
     } catch (error) {
       metricsCollector.recordApiError('integration', 'list');
-      logger.error('Failed to get integrations', { error, tenantId: req.tenantContext?.tenantId });
-      
+      logger.error('Failed to get integrations', {
+        error,
+        tenantId: req.tenantContext?.tenantId,
+      });
+
       res.status(500).json({
         success: false,
         error: 'Failed to get integrations',
@@ -223,13 +275,16 @@ export class IntegrationController {
   // 통합 삭제
   async deleteIntegration(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const { integrationId } = req.params;
       const context = req.tenantContext;
 
       // 속도 제한 확인
-      const rateLimitResult = await rateLimiter.checkLimit(req, 'integration_delete');
+      const rateLimitResult = await rateLimiter.checkLimit(
+        req,
+        'integration_delete'
+      );
       if (!rateLimitResult.allowed) {
         res.status(429).json({
           success: false,
@@ -241,16 +296,23 @@ export class IntegrationController {
 
       await this.integrationService.deleteIntegration(integrationId, context);
 
-      metricsCollector.recordApiCall('integration', 'delete', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'integration',
+        'delete',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         message: 'Integration deleted successfully',
       });
     } catch (error) {
       metricsCollector.recordApiError('integration', 'delete');
-      logger.error('Failed to delete integration', { error, integrationId: req.params.integrationId });
-      
+      logger.error('Failed to delete integration', {
+        error,
+        integrationId: req.params.integrationId,
+      });
+
       if (error.message === 'Integration not found') {
         res.status(404).json({
           success: false,
@@ -269,7 +331,7 @@ export class IntegrationController {
   // 동기화 작업 시작
   async startSyncJob(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const { integrationId } = req.params;
       const context = req.tenantContext;
@@ -286,7 +348,10 @@ export class IntegrationController {
       }
 
       // 속도 제한 확인
-      const rateLimitResult = await rateLimiter.checkLimit(req, 'sync_job_start');
+      const rateLimitResult = await rateLimiter.checkLimit(
+        req,
+        'sync_job_start'
+      );
       if (!rateLimitResult.allowed) {
         res.status(429).json({
           success: false,
@@ -297,18 +362,29 @@ export class IntegrationController {
       }
 
       const syncConfig: SyncConfig = req.body;
-      const syncJob = await this.integrationService.startSyncJob(integrationId, syncConfig, context);
+      const syncJob = await this.integrationService.startSyncJob(
+        integrationId,
+        syncConfig,
+        context
+      );
 
-      metricsCollector.recordApiCall('sync_job', 'start', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'sync_job',
+        'start',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         data: syncJob,
       });
     } catch (error) {
       metricsCollector.recordApiError('sync_job', 'start');
-      logger.error('Failed to start sync job', { error, integrationId: req.params.integrationId });
-      
+      logger.error('Failed to start sync job', {
+        error,
+        integrationId: req.params.integrationId,
+      });
+
       if (error.message === 'Integration not found') {
         res.status(404).json({
           success: false,
@@ -332,7 +408,7 @@ export class IntegrationController {
   // 웹훅 이벤트 처리
   async processWebhookEvent(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const { integrationId } = req.params;
       const context = req.tenantContext;
@@ -347,7 +423,10 @@ export class IntegrationController {
       }
 
       // 속도 제한 확인
-      const rateLimitResult = await rateLimiter.checkLimit(req, 'webhook_event');
+      const rateLimitResult = await rateLimiter.checkLimit(
+        req,
+        'webhook_event'
+      );
       if (!rateLimitResult.allowed) {
         res.status(429).json({
           success: false,
@@ -365,16 +444,23 @@ export class IntegrationController {
         context
       );
 
-      metricsCollector.recordApiCall('webhook_event', 'process', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'webhook_event',
+        'process',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         data: webhookEvent,
       });
     } catch (error) {
       metricsCollector.recordApiError('webhook_event', 'process');
-      logger.error('Failed to process webhook event', { error, integrationId: req.params.integrationId });
-      
+      logger.error('Failed to process webhook event', {
+        error,
+        integrationId: req.params.integrationId,
+      });
+
       res.status(500).json({
         success: false,
         error: 'Failed to process webhook event',
@@ -386,13 +472,16 @@ export class IntegrationController {
   // 통합 테스트
   async testIntegration(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const { integrationId } = req.params;
       const context = req.tenantContext;
 
       // 속도 제한 확인
-      const rateLimitResult = await rateLimiter.checkLimit(req, 'integration_test');
+      const rateLimitResult = await rateLimiter.checkLimit(
+        req,
+        'integration_test'
+      );
       if (!rateLimitResult.allowed) {
         res.status(429).json({
           success: false,
@@ -402,7 +491,10 @@ export class IntegrationController {
         return;
       }
 
-      const integration = await this.integrationService.getIntegration(integrationId, context);
+      const integration = await this.integrationService.getIntegration(
+        integrationId,
+        context
+      );
       if (!integration) {
         res.status(404).json({
           success: false,
@@ -411,18 +503,26 @@ export class IntegrationController {
         return;
       }
 
-      const testResult = await this.integrationService.testIntegration(integration);
+      const testResult =
+        await this.integrationService.testIntegration(integration);
 
-      metricsCollector.recordApiCall('integration', 'test', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'integration',
+        'test',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         data: testResult,
       });
     } catch (error) {
       metricsCollector.recordApiError('integration', 'test');
-      logger.error('Failed to test integration', { error, integrationId: req.params.integrationId });
-      
+      logger.error('Failed to test integration', {
+        error,
+        integrationId: req.params.integrationId,
+      });
+
       res.status(500).json({
         success: false,
         error: 'Failed to test integration',
@@ -434,12 +534,15 @@ export class IntegrationController {
   // 동기화 작업 상태 조회
   async getSyncJobStatus(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const { syncJobId } = req.params;
       const context = req.tenantContext;
 
-      const syncJob = await this.integrationService.getSyncJobStatus(syncJobId, context);
+      const syncJob = await this.integrationService.getSyncJobStatus(
+        syncJobId,
+        context
+      );
 
       if (!syncJob) {
         res.status(404).json({
@@ -449,16 +552,23 @@ export class IntegrationController {
         return;
       }
 
-      metricsCollector.recordApiCall('sync_job', 'status', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'sync_job',
+        'status',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         data: syncJob,
       });
     } catch (error) {
       metricsCollector.recordApiError('sync_job', 'status');
-      logger.error('Failed to get sync job status', { error, syncJobId: req.params.syncJobId });
-      
+      logger.error('Failed to get sync job status', {
+        error,
+        syncJobId: req.params.syncJobId,
+      });
+
       res.status(500).json({
         success: false,
         error: 'Failed to get sync job status',
@@ -470,12 +580,15 @@ export class IntegrationController {
   // 통합 메트릭 조회
   async getIntegrationMetrics(req: Request, res: Response): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const { integrationId } = req.params;
       const context = req.tenantContext;
 
-      const metrics = await this.integrationService.getIntegrationMetrics(integrationId, context);
+      const metrics = await this.integrationService.getIntegrationMetrics(
+        integrationId,
+        context
+      );
 
       if (!metrics) {
         res.status(404).json({
@@ -485,16 +598,23 @@ export class IntegrationController {
         return;
       }
 
-      metricsCollector.recordApiCall('integration', 'metrics', Date.now() - startTime);
-      
+      metricsCollector.recordApiCall(
+        'integration',
+        'metrics',
+        Date.now() - startTime
+      );
+
       res.status(200).json({
         success: true,
         data: metrics,
       });
     } catch (error) {
       metricsCollector.recordApiError('integration', 'metrics');
-      logger.error('Failed to get integration metrics', { error, integrationId: req.params.integrationId });
-      
+      logger.error('Failed to get integration metrics', {
+        error,
+        integrationId: req.params.integrationId,
+      });
+
       res.status(500).json({
         success: false,
         error: 'Failed to get integration metrics',
@@ -502,4 +622,4 @@ export class IntegrationController {
       });
     }
   }
-} 
+}

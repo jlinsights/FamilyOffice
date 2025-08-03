@@ -2,130 +2,149 @@
  * 엔터프라이즈급 접근성 컴포넌트 - FamilyOffice S
  * WCAG 2.1 AA 준수, 키보드 네비게이션, 스크린 리더 지원
  */
-
-import React, { useState, useRef, useEffect } from 'react'
-import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
-import { 
-  Accessibility, 
-  Eye, 
+import {
+  Accessibility,
+  Eye,
   Keyboard,
   MousePointer,
   Contrast,
-  ZoomIn
-} from 'lucide-react'
-import { cn } from '@/lib/utils'
+  ZoomIn,
+} from 'lucide-react';
+
+import React, { useState, useRef, useEffect } from 'react';
+
+import { Button } from '@/components/ui/button';
+import {
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+
+import { cn } from '@/lib/utils';
 
 // 접근성 설정 타입
 interface AccessibilitySettings {
-  highContrast: boolean
-  largeText: boolean
-  reducedMotion: boolean
-  screenReader: boolean
-  keyboardNavigation: boolean
-  focusIndicator: boolean
+  highContrast: boolean;
+  largeText: boolean;
+  reducedMotion: boolean;
+  screenReader: boolean;
+  keyboardNavigation: boolean;
+  focusIndicator: boolean;
 }
 
 // 접근성 컨텍스트
 interface AccessibilityContextType {
-  settings: AccessibilitySettings
-  updateSettings: (settings: Partial<AccessibilitySettings>) => void
+  settings: AccessibilitySettings;
+  updateSettings: (settings: Partial<AccessibilitySettings>) => void;
 }
 
-const AccessibilityContext = React.createContext<AccessibilityContextType | undefined>(undefined)
+const AccessibilityContext = React.createContext<
+  AccessibilityContextType | undefined
+>(undefined);
 
 // 접근성 프로바이더
-export function AccessibilityProvider({ children }: { children: React.ReactNode }) {
+export function AccessibilityProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [settings, setSettings] = useState<AccessibilitySettings>({
     highContrast: false,
     largeText: false,
     reducedMotion: false,
     screenReader: false,
     keyboardNavigation: false,
-    focusIndicator: true
-  })
+    focusIndicator: true,
+  });
 
   const updateSettings = (newSettings: Partial<AccessibilitySettings>) => {
-    setSettings(prev => ({ ...prev, ...newSettings }))
-  }
+    setSettings(prev => ({ ...prev, ...newSettings }));
+  };
 
   // 접근성 설정을 DOM에 적용
   useEffect(() => {
-    const root = document.documentElement
-    
+    const root = document.documentElement;
+
     if (settings.highContrast) {
-      root.classList.add('high-contrast')
+      root.classList.add('high-contrast');
     } else {
-      root.classList.remove('high-contrast')
+      root.classList.remove('high-contrast');
     }
-    
+
     if (settings.largeText) {
-      root.classList.add('large-text')
+      root.classList.add('large-text');
     } else {
-      root.classList.remove('large-text')
+      root.classList.remove('large-text');
     }
-    
+
     if (settings.reducedMotion) {
-      root.classList.add('reduced-motion')
+      root.classList.add('reduced-motion');
     } else {
-      root.classList.remove('reduced-motion')
+      root.classList.remove('reduced-motion');
     }
-  }, [settings])
+  }, [settings]);
 
   return (
     <AccessibilityContext.Provider value={{ settings, updateSettings }}>
       {children}
     </AccessibilityContext.Provider>
-  )
+  );
 }
 
 // 접근성 훅
 export function useAccessibility() {
-  const context = React.useContext(AccessibilityContext)
+  const context = React.useContext(AccessibilityContext);
   if (!context) {
-    throw new Error('useAccessibility must be used within AccessibilityProvider')
+    throw new Error(
+      'useAccessibility must be used within AccessibilityProvider'
+    );
   }
-  return context
+  return context;
 }
 
 // 접근성 패널 컴포넌트
 interface AccessibilityPanelProps {
-  isOpen: boolean
-  onClose: () => void
-  className?: string
+  isOpen: boolean;
+  onClose: () => void;
+  className?: string;
 }
 
-export function AccessibilityPanel({ isOpen, onClose, className }: AccessibilityPanelProps) {
-  const { settings, updateSettings } = useAccessibility()
-  const panelRef = useRef<HTMLDivElement>(null)
+export function AccessibilityPanel({
+  isOpen,
+  onClose,
+  className,
+}: AccessibilityPanelProps) {
+  const { settings, updateSettings } = useAccessibility();
+  const panelRef = useRef<HTMLDivElement>(null);
 
   // 키보드 네비게이션 처리
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
-        onClose()
+        onClose();
       }
-    }
+    };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown)
+      document.addEventListener('keydown', handleKeyDown);
       // 포커스 트랩 설정
       const focusableElements = panelRef.current?.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      )
+      );
       if (focusableElements && focusableElements.length > 0) {
-        (focusableElements[0] as HTMLElement).focus()
+        (focusableElements[0] as HTMLElement).focus();
       }
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isOpen, onClose])
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div
@@ -137,14 +156,17 @@ export function AccessibilityPanel({ isOpen, onClose, className }: Accessibility
       <div
         ref={panelRef}
         className={cn(
-          "bg-white rounded-lg shadow-xl max-w-md w-full max-h-[80vh] overflow-y-auto",
+          'bg-white rounded-lg shadow-xl max-w-md w-full max-h-[80vh] overflow-y-auto',
           className
         )}
         role="document"
       >
         <CardHeader className="border-b">
           <div className="flex items-center justify-between">
-            <CardTitle id="accessibility-panel-title" className="flex items-center space-x-2">
+            <CardTitle
+              id="accessibility-panel-title"
+              className="flex items-center space-x-2"
+            >
               <Accessibility className="h-5 w-5 text-premium-600" />
               <span>접근성 설정</span>
             </CardTitle>
@@ -161,12 +183,12 @@ export function AccessibilityPanel({ isOpen, onClose, className }: Accessibility
             사용자 편의를 위한 접근성 옵션을 설정하세요
           </CardDescription>
         </CardHeader>
-        
+
         <CardContent className="space-y-6 p-6">
           {/* 고대비 모드 */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-                              <Contrast className="h-5 w-5 text-premium-600" />
+              <Contrast className="h-5 w-5 text-premium-600" />
               <div>
                 <Label htmlFor="high-contrast" className="font-medium">
                   고대비 모드
@@ -179,7 +201,9 @@ export function AccessibilityPanel({ isOpen, onClose, className }: Accessibility
             <Switch
               id="high-contrast"
               checked={settings.highContrast}
-              onCheckedChange={(checked) => updateSettings({ highContrast: checked })}
+              onCheckedChange={checked =>
+                updateSettings({ highContrast: checked })
+              }
               aria-label="고대비 모드 토글"
             />
           </div>
@@ -200,7 +224,9 @@ export function AccessibilityPanel({ isOpen, onClose, className }: Accessibility
             <Switch
               id="large-text"
               checked={settings.largeText}
-              onCheckedChange={(checked) => updateSettings({ largeText: checked })}
+              onCheckedChange={checked =>
+                updateSettings({ largeText: checked })
+              }
               aria-label="큰 글씨 모드 토글"
             />
           </div>
@@ -221,7 +247,9 @@ export function AccessibilityPanel({ isOpen, onClose, className }: Accessibility
             <Switch
               id="reduced-motion"
               checked={settings.reducedMotion}
-              onCheckedChange={(checked) => updateSettings({ reducedMotion: checked })}
+              onCheckedChange={checked =>
+                updateSettings({ reducedMotion: checked })
+              }
               aria-label="애니메이션 감소 토글"
             />
           </div>
@@ -242,7 +270,9 @@ export function AccessibilityPanel({ isOpen, onClose, className }: Accessibility
             <Switch
               id="keyboard-nav"
               checked={settings.keyboardNavigation}
-              onCheckedChange={(checked) => updateSettings({ keyboardNavigation: checked })}
+              onCheckedChange={checked =>
+                updateSettings({ keyboardNavigation: checked })
+              }
               aria-label="키보드 네비게이션 토글"
             />
           </div>
@@ -263,49 +293,54 @@ export function AccessibilityPanel({ isOpen, onClose, className }: Accessibility
             <Switch
               id="focus-indicator"
               checked={settings.focusIndicator}
-              onCheckedChange={(checked) => updateSettings({ focusIndicator: checked })}
+              onCheckedChange={checked =>
+                updateSettings({ focusIndicator: checked })
+              }
               aria-label="포커스 표시 토글"
             />
           </div>
         </CardContent>
       </div>
     </div>
-  )
+  );
 }
 
 // 접근성 토글 버튼
 interface AccessibilityToggleProps {
-  onOpen: () => void
-  className?: string
+  onOpen: () => void;
+  className?: string;
 }
 
-export function AccessibilityToggle({ onOpen, className }: AccessibilityToggleProps) {
+export function AccessibilityToggle({
+  onOpen,
+  className,
+}: AccessibilityToggleProps) {
   return (
     <Button
       variant="outline"
       size="sm"
       onClick={onOpen}
       className={cn(
-        "fixed bottom-4 right-4 z-40 rounded-full w-12 h-12 p-0 shadow-lg",
-        "bg-white border-2 border-premium-200 hover:border-premium-300",
-        "focus:outline-none focus:ring-2 focus:ring-premium-500 focus:ring-offset-2",
+        'fixed bottom-4 right-4 z-40 rounded-full w-12 h-12 p-0 shadow-lg',
+        'bg-white border-2 border-premium-200 hover:border-premium-300',
+        'focus:outline-none focus:ring-2 focus:ring-premium-500 focus:ring-offset-2',
         className
       )}
       aria-label="접근성 설정 열기"
     >
       <Accessibility className="h-5 w-5 text-premium-600" />
     </Button>
-  )
+  );
 }
 
 // 접근성 포커스 관리자
 export function AccessibilityFocusManager() {
-  const { settings } = useAccessibility()
+  const { settings } = useAccessibility();
 
   useEffect(() => {
     if (settings.focusIndicator) {
       // 포커스 표시 스타일 추가
-      const style = document.createElement('style')
+      const style = document.createElement('style');
       style.textContent = `
         *:focus {
           outline: 2px solid #eab308 !important;
@@ -315,16 +350,16 @@ export function AccessibilityFocusManager() {
           outline: 3px solid #000 !important;
           outline-offset: 1px !important;
         }
-      `
-      document.head.appendChild(style)
+      `;
+      document.head.appendChild(style);
 
       return () => {
-        document.head.removeChild(style)
-      }
+        document.head.removeChild(style);
+      };
     }
-    
-    return undefined
-  }, [settings.focusIndicator])
 
-  return null
-} 
+    return undefined;
+  }, [settings.focusIndicator]);
+
+  return null;
+}

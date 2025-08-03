@@ -7,6 +7,7 @@ This guide provides AI agents with the essential information needed to effective
 ## Project Context & Purpose
 
 **FamilyOffice** is a production-ready Next.js platform serving Korean SME executives and high-net-worth individuals with:
+
 - Comprehensive asset management services
 - Consultation booking system (Cal.com integration)
 - Premium financial advisory services
@@ -26,6 +27,7 @@ npm run type-check            # Validate TypeScript
 ## Key File Locations & Purposes
 
 ### Core Application Structure
+
 ```
 app/
 ├── layout.tsx                 # Root layout with providers
@@ -51,6 +53,7 @@ lib/
 ```
 
 ### Critical Configuration Files
+
 - `middleware.ts` - Clerk authentication middleware
 - `next.config.mjs` - Advanced Next.js configuration
 - `tailwind.config.ts` - Design system configuration
@@ -59,6 +62,7 @@ lib/
 ## Common Development Patterns
 
 ### 1. Component Creation
+
 ```typescript
 // Follow this pattern for new components
 "use client"
@@ -81,40 +85,43 @@ export function ComponentName({ className, ...props }: Props) {
 ```
 
 ### 2. API Route Creation
+
 ```typescript
 // app/api/new-endpoint/route.ts
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
     // Business logic
-    return NextResponse.json({ success: true, data: {} })
+    return NextResponse.json({ success: true, data: {} });
   } catch (error) {
     return NextResponse.json(
       { error: 'Something went wrong' },
       { status: 500 }
-    )
+    );
   }
 }
 ```
 
 ### 3. Form Handling Pattern
+
 ```typescript
 // Forms use react-hook-form + zod validation
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+import { useForm } from 'react-hook-form';
 
 const schema = z.object({
   name: z.string().min(1, '이름을 입력해주세요'),
-  email: z.string().email('올바른 이메일을 입력해주세요')
-})
+  email: z.string().email('올바른 이메일을 입력해주세요'),
+});
 
 export function ExampleForm() {
   const form = useForm({
-    resolver: zodResolver(schema)
-  })
-  
+    resolver: zodResolver(schema),
+  });
+
   // Form submission logic
 }
 ```
@@ -122,6 +129,7 @@ export function ExampleForm() {
 ## Database Schema (Supabase)
 
 ### Primary Tables
+
 ```sql
 -- consultations table (main lead capture)
 CREATE TABLE consultations (
@@ -137,6 +145,7 @@ CREATE TABLE consultations (
 ```
 
 ### Database Client Usage
+
 ```typescript
 // Server-side (app/api routes)
 import { createClient } from '@/lib/supabase/server'
@@ -156,23 +165,25 @@ const supabase = createClient()
 ## Authentication System (Clerk)
 
 ### Protected Routes
+
 ```typescript
 // middleware.ts automatically protects:
 - /admin/*           # Admin dashboard
-- /dashboard/*       # User dashboard  
+- /dashboard/*       # User dashboard
 - /api/admin/*       # Admin API routes
 ```
 
 ### Authentication in Components
+
 ```typescript
 import { useUser } from '@clerk/nextjs'
 
 export function ProtectedComponent() {
   const { isLoaded, isSignedIn, user } = useUser()
-  
+
   if (!isLoaded) return <div>Loading...</div>
   if (!isSignedIn) return <div>Please sign in</div>
-  
+
   return <div>Welcome {user.firstName}!</div>
 }
 ```
@@ -180,16 +191,18 @@ export function ProtectedComponent() {
 ## Styling System (Tailwind + shadcn/ui)
 
 ### Design Tokens
+
 ```css
 /* Key CSS variables in globals.css */
 :root {
-  --primary: 142 36 170;           /* Purple brand color */
-  --consultation: 234 88 12;       /* Orange CTA color */
-  --emerald-luxury: 5 150 105;     /* Success/positive color */
+  --primary: 142 36 170; /* Purple brand color */
+  --consultation: 234 88 12; /* Orange CTA color */
+  --emerald-luxury: 5 150 105; /* Success/positive color */
 }
 ```
 
 ### Component Styling Patterns
+
 ```typescript
 // Use cn() for conditional classes
 import { cn } from '@/lib/utils'
@@ -204,6 +217,7 @@ className={cn(
 ## External Integrations
 
 ### Cal.com (Booking System)
+
 ```typescript
 // API route: /api/cal-com/bookings
 // Environment: CALCOM_API_KEY
@@ -211,6 +225,7 @@ className={cn(
 ```
 
 ### HubSpot (CRM)
+
 ```typescript
 // Environment: NEXT_PUBLIC_HUBSPOT_PORTAL_ID
 // Forms automatically sync to HubSpot
@@ -218,6 +233,7 @@ className={cn(
 ```
 
 ### Channel Talk (Support)
+
 ```typescript
 // Environment: NEXT_PUBLIC_CHANNEL_IO_KEY
 // Live chat integration for customer support
@@ -226,12 +242,14 @@ className={cn(
 ## Performance & SEO Optimizations
 
 ### Pre-configured Optimizations
+
 - **Image optimization**: WebP/AVIF with Next.js Image
 - **Code splitting**: Dynamic imports for heavy components
 - **Caching**: Redis for API responses, browser caching
 - **SEO**: Korean market optimized metadata and structured data
 
 ### Performance Targets
+
 - **LCP**: < 2.5 seconds
 - **FID**: < 100ms
 - **CLS**: < 0.1
@@ -240,6 +258,7 @@ className={cn(
 ## Common Development Tasks
 
 ### 1. Adding a New Page
+
 ```bash
 # Create page file
 touch app/new-page/page.tsx
@@ -249,6 +268,7 @@ touch app/new-page/page.tsx
 ```
 
 ### 2. Creating a New API Endpoint
+
 ```bash
 # Create API route
 mkdir app/api/new-endpoint
@@ -259,6 +279,7 @@ touch app/api/new-endpoint/route.ts
 ```
 
 ### 3. Adding New Form Fields
+
 ```typescript
 // 1. Update TypeScript types in types/
 // 2. Update Supabase schema if needed
@@ -267,6 +288,7 @@ touch app/api/new-endpoint/route.ts
 ```
 
 ### 4. Modifying Styles
+
 ```typescript
 // 1. Check if CSS variable exists in globals.css
 // 2. Use Tailwind classes preferentially
@@ -277,6 +299,7 @@ touch app/api/new-endpoint/route.ts
 ## Testing Guidelines
 
 ### Unit Testing (Jest)
+
 ```bash
 npm run test                   # Run all tests
 npm run test:watch            # Watch mode
@@ -284,12 +307,14 @@ npm run test:coverage         # Coverage report
 ```
 
 ### E2E Testing (Cypress)
+
 ```bash
 npm run test:e2e              # Run E2E tests
 npm run test:e2e:open         # Open Cypress UI
 ```
 
 ### Test File Locations
+
 ```
 __tests__/                    # Unit tests
 cypress/e2e/                 # E2E test specs
@@ -299,6 +324,7 @@ components/__tests__/         # Component tests
 ## Deployment & Production
 
 ### Environment Setup
+
 ```env
 # Required for development
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
@@ -308,6 +334,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 ```
 
 ### Deployment Process
+
 ```bash
 # Production build verification
 npm run build
@@ -319,6 +346,7 @@ npm run build
 ## Troubleshooting Common Issues
 
 ### 1. Build Failures
+
 ```bash
 # Check TypeScript errors
 npm run type-check
@@ -332,16 +360,18 @@ npm run build
 ```
 
 ### 2. Database Connection Issues
+
 ```typescript
 // Verify environment variables
-console.log(process.env.NEXT_PUBLIC_SUPABASE_URL)
+console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
 // Check client initialization
-const supabase = createClient()
-console.log(supabase)
+const supabase = createClient();
+console.log(supabase);
 ```
 
 ### 3. Authentication Issues
+
 ```typescript
 // Check Clerk configuration
 // Verify middleware.ts routes
@@ -351,6 +381,7 @@ console.log(supabase)
 ## Best Practices for AI Agents
 
 ### DO ✅
+
 - Follow existing component patterns
 - Use TypeScript strictly
 - Test changes locally first
@@ -359,6 +390,7 @@ console.log(supabase)
 - Use established form validation patterns
 
 ### DON'T ❌
+
 - Modify core authentication middleware
 - Change Next.js configuration without testing
 - Break existing API contracts
@@ -367,6 +399,7 @@ console.log(supabase)
 - Skip testing after changes
 
 ### CAUTION ⚠️
+
 - External API integrations have rate limits
 - Security headers are strictly configured
 - Database schema changes require migration planning
@@ -375,11 +408,13 @@ console.log(supabase)
 ## Getting Help & Resources
 
 ### Project Documentation
+
 - `README.md` - Project overview and setup
 - `DEPLOYMENT_CHECKLIST.md` - Production deployment guide
 - `/docs` - Comprehensive project documentation
 
 ### External Documentation
+
 - [Next.js 15 Documentation](https://nextjs.org/docs)
 - [Clerk Authentication](https://clerk.com/docs)
 - [Supabase Documentation](https://supabase.com/docs)

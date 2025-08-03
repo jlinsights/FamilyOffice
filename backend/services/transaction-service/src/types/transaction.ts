@@ -240,4 +240,4 @@ export interface PaginatedResponse<T> {
 export interface TenantContext {
   tenantId: string;
   userId: string;
-} 
+}

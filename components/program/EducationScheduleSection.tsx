@@ -1,28 +1,34 @@
-import type { EducationPrograms } from "@/types/program";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Calendar, ArrowRight, CheckCircle } from "lucide-react";
+import { Calendar, ArrowRight, CheckCircle } from 'lucide-react';
 
-export function EducationScheduleSection({ educationPrograms }: { educationPrograms: EducationPrograms }) {
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+
+import type { EducationPrograms } from '@/types/program';
+
+export function EducationScheduleSection({
+  educationPrograms,
+}: {
+  educationPrograms: EducationPrograms;
+}) {
   const scheduleList = [
     {
-      period: "매월",
-      title: "월간 교육 프로그램",
+      period: '매월',
+      title: '월간 교육 프로그램',
       programs: educationPrograms.monthly,
-      color: "from-blue-500/10 to-cyan-500/10"
+      color: 'from-blue-500/10 to-cyan-500/10',
     },
     {
-      period: "분기별",
-      title: "분기별 전문 세미나",
+      period: '분기별',
+      title: '분기별 전문 세미나',
       programs: educationPrograms.quarterly,
-      color: "from-green-500/10 to-emerald-500/10"
+      color: 'from-green-500/10 to-emerald-500/10',
     },
     {
-      period: "연간",
-      title: "연간 특별 프로그램",
+      period: '연간',
+      title: '연간 특별 프로그램',
       programs: educationPrograms.annual,
-      color: "from-purple-500/10 to-pink-500/10"
-    }
+      color: 'from-purple-500/10 to-pink-500/10',
+    },
   ];
 
   return (
@@ -53,8 +59,13 @@ export function EducationScheduleSection({ educationPrograms }: { educationProgr
               <ul className="space-y-3 flex flex-col items-center w-full">
                 {schedule.programs.map((program, idx) => (
                   <li key={idx} className="flex items-center justify-center">
-                    <CheckCircle className="h-4 w-4 text-primary mx-2 flex-shrink-0" aria-hidden />
-                    <span className="text-sm leading-relaxed text-center">{program}</span>
+                    <CheckCircle
+                      className="h-4 w-4 text-primary mx-2 flex-shrink-0"
+                      aria-hidden
+                    />
+                    <span className="text-sm leading-relaxed text-center">
+                      {program}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -62,7 +73,10 @@ export function EducationScheduleSection({ educationPrograms }: { educationProgr
           ))}
         </div>
         {/* 세미나 바로가기 버튼 */}
-        <div className="mt-16 text-center animate-slide-up" style={{ animationDelay: '500ms' }}>
+        <div
+          className="mt-16 text-center animate-slide-up"
+          style={{ animationDelay: '500ms' }}
+        >
           <div className="mb-4 text-lg text-muted-foreground font-medium">
             최신 세미나 일정이 궁금하다면?
           </div>
@@ -78,7 +92,10 @@ export function EducationScheduleSection({ educationPrograms }: { educationProgr
             >
               <Calendar className="h-5 w-5 mr-2" aria-hidden />
               세미나 바로가기
-              <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden />
+              <ArrowRight
+                className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform"
+                aria-hidden
+              />
             </a>
           </Button>
           <div className="mt-2 text-sm text-muted-foreground">

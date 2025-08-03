@@ -1,101 +1,110 @@
-"use client"
+'use client';
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react';
 
 interface AnimatedCounterProps {
-  end: number
-  start?: number
-  duration?: number
-  prefix?: string
-  suffix?: string
-  className?: string
-  startAnimation?: boolean
-  easingFunction?: (t: number) => number
-  formatNumber?: (num: number) => string
-  onComplete?: () => void
-  locale?: string
-  ariaLabel?: string
+  end: number;
+  start?: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+  className?: string;
+  startAnimation?: boolean;
+  easingFunction?: (t: number) => number;
+  formatNumber?: (num: number) => string;
+  onComplete?: () => void;
+  locale?: string;
+  ariaLabel?: string;
 }
 
-export function AnimatedCounter({ 
-  end, 
+export function AnimatedCounter({
+  end,
   start = 0,
-  duration = 2000, 
-  prefix = "", 
-  suffix = "", 
-  className = "",
+  duration = 2000,
+  prefix = '',
+  suffix = '',
+  className = '',
   startAnimation = false,
   formatNumber,
   onComplete,
   locale = 'ko-KR',
-  ariaLabel
+  ariaLabel,
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(start)
-  const [isMounted, setIsMounted] = useState(false)
+  const [count, setCount] = useState(start);
+  const [isMounted, setIsMounted] = useState(false);
 
   // 클라이언트 사이드 마운트 확인
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   // 숫자 포맷팅 함수
-  const formatDisplayNumber = useCallback((num: number): string => {
-    if (formatNumber) {
-      return formatNumber(num)
-    }
-    return Math.floor(num).toLocaleString(locale)
-  }, [formatNumber, locale])
+  const formatDisplayNumber = useCallback(
+    (num: number): string => {
+      if (formatNumber) {
+        return formatNumber(num);
+      }
+      return Math.floor(num).toLocaleString(locale);
+    },
+    [formatNumber, locale]
+  );
 
   // 단순한 애니메이션 로직
   useEffect(() => {
-    if (!isMounted || !startAnimation) return
+    if (!isMounted || !startAnimation) return;
 
-    let animationFrame: number
-    const startTime = Date.now()
-    const difference = end - start
+    let animationFrame: number;
+    const startTime = Date.now();
+    const difference = end - start;
 
     const animate = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
       // 간단한 easing
-      const easedProgress = 1 - Math.pow(1 - progress, 3)
-      const currentCount = start + (difference * easedProgress)
-      
-      setCount(currentCount)
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      const currentCount = start + difference * easedProgress;
+
+      setCount(currentCount);
 
       if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
+        animationFrame = requestAnimationFrame(animate);
       } else {
-        setCount(end)
-        onComplete?.()
+        setCount(end);
+        onComplete?.();
       }
-    }
+    };
 
-    animationFrame = requestAnimationFrame(animate)
+    animationFrame = requestAnimationFrame(animate);
 
     return () => {
       if (animationFrame) {
-        cancelAnimationFrame(animationFrame)
+        cancelAnimationFrame(animationFrame);
       }
-    }
-  }, [isMounted, startAnimation, start, end, duration, onComplete])
+    };
+  }, [isMounted, startAnimation, start, end, duration, onComplete]);
 
   // SSR 방지: 마운트되기 전에는 시작 값 표시
   if (!isMounted) {
     return (
       <span className={className}>
-        {prefix}{formatDisplayNumber(start)}{suffix}
+        {prefix}
+        {formatDisplayNumber(start)}
+        {suffix}
       </span>
-    )
+    );
   }
 
   return (
-    <span 
+    <span
       className={className}
-      aria-label={ariaLabel || `${prefix}${formatDisplayNumber(count)}${suffix}`}
+      aria-label={
+        ariaLabel || `${prefix}${formatDisplayNumber(count)}${suffix}`
+      }
     >
-      {prefix}{formatDisplayNumber(count)}{suffix}
+      {prefix}
+      {formatDisplayNumber(count)}
+      {suffix}
     </span>
-  )
-} 
+  );
+}

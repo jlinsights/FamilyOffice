@@ -1,7 +1,8 @@
-'use client'
+'use client';
 
-import React, { useEffect } from 'react'
-import HubSpotFormIntegration from '@/lib/hubspot-integration'
+import React, { useEffect } from 'react';
+
+import HubSpotFormIntegration from '@/lib/hubspot-integration';
 
 /**
  * HubSpot 통합 컴포넌트
@@ -11,14 +12,14 @@ export function HubSpotIntegration() {
   useEffect(() => {
     try {
       // HubSpot 통합 초기화
-      new HubSpotFormIntegration()
+      new HubSpotFormIntegration();
     } catch (error) {
       console.warn('HubSpot 통합 초기화 실패:', error);
       // HubSpot 통합이 실패해도 앱이 계속 작동하도록 함
     }
-  }, [])
+  }, []);
 
-  return null // 이 컴포넌트는 UI를 렌더링하지 않음
+  return null; // 이 컴포넌트는 UI를 렌더링하지 않음
 }
 
 /**
@@ -26,8 +27,8 @@ export function HubSpotIntegration() {
  * HubSpot 폼을 감싸는 컨테이너
  */
 interface HubSpotFormProps {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }
 
 export function HubSpotForm({ children, className }: HubSpotFormProps) {
@@ -35,7 +36,7 @@ export function HubSpotForm({ children, className }: HubSpotFormProps) {
     <div className={className} data-wf-hs-form>
       {children}
     </div>
-  )
+  );
 }
 
 /**
@@ -43,20 +44,21 @@ export function HubSpotForm({ children, className }: HubSpotFormProps) {
  * HubSpot API를 사용하는 폼을 감싸는 컨테이너
  */
 interface HubSpotApiFormProps {
-  children: React.ReactNode
-  className?: string
-  formUrl: string
+  children: React.ReactNode;
+  className?: string;
+  formUrl: string;
 }
 
-export function HubSpotApiForm({ children, className, formUrl }: HubSpotApiFormProps) {
+export function HubSpotApiForm({
+  children,
+  className,
+  formUrl,
+}: HubSpotApiFormProps) {
   return (
-    <div 
-      className={className} 
-      data-webflow-hubspot-api-form-url={formUrl}
-    >
+    <div className={className} data-webflow-hubspot-api-form-url={formUrl}>
       {children}
     </div>
-  )
+  );
 }
 
 /**
@@ -64,21 +66,21 @@ export function HubSpotApiForm({ children, className, formUrl }: HubSpotApiFormP
  * HubSpot 필드 매핑을 위한 래퍼
  */
 interface HubSpotFieldProps {
-  children: React.ReactNode
-  fieldName: string
-  type?: 'text' | 'email' | 'tel' | 'textarea' | 'checkbox' | 'radio' | 'file'
-  required?: boolean
-  placeholder?: string
-  className?: string
+  children: React.ReactNode;
+  fieldName: string;
+  type?: 'text' | 'email' | 'tel' | 'textarea' | 'checkbox' | 'radio' | 'file';
+  required?: boolean;
+  placeholder?: string;
+  className?: string;
 }
 
-export function HubSpotField({ 
-  children, 
-  fieldName, 
+export function HubSpotField({
+  children,
+  fieldName,
   type = 'text',
   required = false,
   placeholder,
-  className 
+  className,
 }: HubSpotFieldProps) {
   return (
     <div className={className}>
@@ -89,5 +91,5 @@ export function HubSpotField({
         placeholder,
       })}
     </div>
-  )
-} 
+  );
+}

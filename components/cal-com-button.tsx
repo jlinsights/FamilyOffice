@@ -1,14 +1,15 @@
-'use client'
+'use client';
 
-import { Button } from '@/components/ui/button'
-import { Calendar } from 'lucide-react'
+import { Calendar } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 
 interface CalComButtonProps {
-  calLink?: string
-  buttonText?: string
-  className?: string
-  variant?: 'default' | 'outline' | 'secondary'
-  size?: 'default' | 'sm' | 'lg' | 'icon'
+  calLink?: string;
+  buttonText?: string;
+  className?: string;
+  variant?: 'default' | 'outline' | 'secondary';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
 }
 
 export function CalComButton({
@@ -16,14 +17,18 @@ export function CalComButton({
   buttonText = '상담 예약',
   className = '',
   variant = 'default',
-  size = 'lg'
+  size = 'lg',
 }: CalComButtonProps) {
   const handleClick = () => {
     // 단순히 외부 링크로 이동
     if (typeof window !== 'undefined') {
-      window.open(`https://cal.com/${calLink}`, '_blank', 'noopener,noreferrer')
+      window.open(
+        `https://cal.com/${calLink}`,
+        '_blank',
+        'noopener,noreferrer'
+      );
     }
-  }
+  };
 
   return (
     <Button
@@ -35,5 +40,5 @@ export function CalComButton({
       <Calendar className="mr-2 h-4 w-4" />
       {buttonText}
     </Button>
-  )
-} 
+  );
+}

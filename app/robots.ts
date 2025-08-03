@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: [
           '/',
           '/services',
-          '/strategic-partnership', 
+          '/strategic-partnership',
           '/market-entry',
           '/success-stories',
           '/about',
@@ -55,11 +55,7 @@ export default function robots(): MetadataRoute.Robots {
           '/brand',
           '/recruit',
         ],
-        disallow: [
-          '/admin/',
-          '/api/',
-          '/dashboard/',
-        ],
+        disallow: ['/admin/', '/api/', '/dashboard/'],
         crawlDelay: 0,
       },
       {
@@ -79,11 +75,7 @@ export default function robots(): MetadataRoute.Robots {
           '/brand',
           '/recruit',
         ],
-        disallow: [
-          '/admin/',
-          '/api/',
-          '/dashboard/',
-        ],
+        disallow: ['/admin/', '/api/', '/dashboard/'],
         crawlDelay: 1,
       },
       {
@@ -103,11 +95,7 @@ export default function robots(): MetadataRoute.Robots {
           '/brand',
           '/recruit',
         ],
-        disallow: [
-          '/admin/',
-          '/api/',
-          '/dashboard/',
-        ],
+        disallow: ['/admin/', '/api/', '/dashboard/'],
         crawlDelay: 1,
       },
       {
@@ -127,15 +115,11 @@ export default function robots(): MetadataRoute.Robots {
           '/brand',
           '/recruit',
         ],
-        disallow: [
-          '/admin/',
-          '/api/',
-          '/dashboard/',
-        ],
+        disallow: ['/admin/', '/api/', '/dashboard/'],
         crawlDelay: 1,
       },
     ],
     sitemap: 'https://familyoffices.vip/sitemap.xml',
     host: 'https://familyoffices.vip',
-  }
-} 
+  };
+}

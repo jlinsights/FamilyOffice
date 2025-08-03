@@ -1,29 +1,38 @@
 /**
  * 자산 관리 대시보드 페이지 - FamilyOffice S 프리미엄 자산관리
  */
-
-import { Metadata } from 'next'
-import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { 
-  Briefcase, 
-  Shield, 
-  TrendingUp, 
+import {
+  Briefcase,
+  Shield,
+  TrendingUp,
   ArrowLeft,
-  PieChart
-} from 'lucide-react'
+  PieChart,
+} from 'lucide-react';
+
+import { Metadata } from 'next';
+import Link from 'next/link';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
   title: '자산관리 | FamilyOffice S - 프리미엄 자산관리 대시보드',
-  description: '한국 중소중견기업 법인 대표를 위한 전문 자산관리 서비스. 실시간 포트폴리오 분석과 리스크 관리를 통해 자산을 체계적으로 관리하세요.',
-  keywords: ['자산관리', '포트폴리오', '투자', '한국주식', '위험관리', 'FamilyOffice'],
-}
+  description:
+    '한국 중소중견기업 법인 대표를 위한 전문 자산관리 서비스. 실시간 포트폴리오 분석과 리스크 관리를 통해 자산을 체계적으로 관리하세요.',
+  keywords: [
+    '자산관리',
+    '포트폴리오',
+    '투자',
+    '한국주식',
+    '위험관리',
+    'FamilyOffice',
+  ],
+};
 
 // Disable static generation for this page
-export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export default function AssetManagementPage() {
   return (
@@ -43,9 +52,7 @@ export default function AssetManagementPage() {
                 <PieChart className="h-8 w-8 text-primary" />
                 <h1 className="text-3xl font-bold">자산관리</h1>
               </div>
-              <Badge variant="outline">
-                Asset Management
-              </Badge>
+              <Badge variant="outline">Asset Management</Badge>
             </div>
           </div>
         </div>
@@ -101,7 +108,8 @@ export default function AssetManagementPage() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-4">
-              자산관리 대시보드의 모든 기능은 로그인 시스템과 함께 곧 제공될 예정입니다.
+              자산관리 대시보드의 모든 기능은 로그인 시스템과 함께 곧 제공될
+              예정입니다.
             </p>
             <ul className="space-y-2 text-sm">
               <li>• 실시간 포트폴리오 현황</li>
@@ -114,5 +122,5 @@ export default function AssetManagementPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

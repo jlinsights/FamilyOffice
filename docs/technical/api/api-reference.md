@@ -6,11 +6,11 @@ The FamilyOffice platform provides a comprehensive REST API for managing family 
 
 ### 🔗 Base URLs
 
-| Environment | Base URL | Description |
-|-------------|----------|-------------|
-| Development | `http://localhost:3000/api/v1` | Local development |
-| Staging | `https://staging-api.familyoffice.com/api/v1` | Pre-production testing |
-| Production | `https://api.familyoffice.com/api/v1` | Live production |
+| Environment | Base URL                                      | Description            |
+| ----------- | --------------------------------------------- | ---------------------- |
+| Development | `http://localhost:3000/api/v1`                | Local development      |
+| Staging     | `https://staging-api.familyoffice.com/api/v1` | Pre-production testing |
+| Production  | `https://api.familyoffice.com/api/v1`         | Live production        |
 
 ### 🔐 Authentication
 
@@ -44,17 +44,20 @@ All API responses follow a consistent format:
 ### Base URL: `/portfolios`
 
 #### Get All Portfolios
+
 ```http
 GET /portfolios
 ```
 
 **Query Parameters:**
+
 - `family_id` (string): Filter by family ID
 - `status` (string): Filter by status (active, inactive, archived)
 - `page` (number): Page number (default: 1)
 - `limit` (number): Items per page (default: 20)
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -82,11 +85,13 @@ GET /portfolios
 ```
 
 #### Create Portfolio
+
 ```http
 POST /portfolios
 ```
 
 **Request Body:**
+
 ```json
 {
   "name": "New Portfolio",
@@ -99,30 +104,36 @@ POST /portfolios
 ```
 
 #### Get Portfolio by ID
+
 ```http
 GET /portfolios/{portfolio_id}
 ```
 
 #### Update Portfolio
+
 ```http
 PUT /portfolios/{portfolio_id}
 ```
 
 #### Delete Portfolio
+
 ```http
 DELETE /portfolios/{portfolio_id}
 ```
 
 #### Get Portfolio Performance
+
 ```http
 GET /portfolios/{portfolio_id}/performance
 ```
 
 **Query Parameters:**
+
 - `period` (string): Time period (1m, 3m, 6m, 1y, 3y, 5y, all)
 - `benchmark` (string): Benchmark index (optional)
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -154,11 +165,13 @@ GET /portfolios/{portfolio_id}/performance
 ```
 
 #### Rebalance Portfolio
+
 ```http
 POST /portfolios/{portfolio_id}/rebalance
 ```
 
 **Request Body:**
+
 ```json
 {
   "target_allocations": [
@@ -188,11 +201,13 @@ POST /portfolios/{portfolio_id}/rebalance
 ### Base URL: `/transactions`
 
 #### Get All Transactions
+
 ```http
 GET /transactions
 ```
 
 **Query Parameters:**
+
 - `portfolio_id` (string): Filter by portfolio
 - `type` (string): Transaction type (buy, sell, dividend, corporate_action)
 - `status` (string): Status (pending, executed, settled, cancelled)
@@ -200,18 +215,20 @@ GET /transactions
 - `date_to` (string): End date (ISO 8601)
 
 #### Create Transaction
+
 ```http
 POST /transactions
 ```
 
 **Request Body:**
+
 ```json
 {
   "portfolio_id": "port_123456789",
   "asset_id": "asset_123",
   "type": "buy",
   "quantity": 1000,
-  "price": 150.50,
+  "price": 150.5,
   "currency": "USD",
   "trade_date": "2024-12-19",
   "settlement_date": "2024-12-21",
@@ -221,26 +238,31 @@ POST /transactions
 ```
 
 #### Get Transaction by ID
+
 ```http
 GET /transactions/{transaction_id}
 ```
 
 #### Update Transaction
+
 ```http
 PUT /transactions/{transaction_id}
 ```
 
 #### Cancel Transaction
+
 ```http
 DELETE /transactions/{transaction_id}
 ```
 
 #### Batch Transaction Processing
+
 ```http
 POST /transactions/batch
 ```
 
 **Request Body:**
+
 ```json
 {
   "transactions": [
@@ -249,7 +271,7 @@ POST /transactions/batch
       "asset_id": "asset_123",
       "type": "buy",
       "quantity": 1000,
-      "price": 150.50
+      "price": 150.5
     },
     {
       "portfolio_id": "port_123456789",
@@ -268,16 +290,19 @@ POST /transactions/batch
 ### Base URL: `/reports`
 
 #### Get All Reports
+
 ```http
 GET /reports
 ```
 
 #### Create Report
+
 ```http
 POST /reports
 ```
 
 **Request Body:**
+
 ```json
 {
   "name": "Monthly Performance Report",
@@ -297,31 +322,37 @@ POST /reports
 ```
 
 #### Get Report by ID
+
 ```http
 GET /reports/{report_id}
 ```
 
 #### Update Report
+
 ```http
 PUT /reports/{report_id}
 ```
 
 #### Delete Report
+
 ```http
 DELETE /reports/{report_id}
 ```
 
 #### Generate Report
+
 ```http
 POST /reports/{report_id}/generate
 ```
 
 #### Export Report
+
 ```http
 GET /reports/{report_id}/export
 ```
 
 **Query Parameters:**
+
 - `format` (string): Export format (pdf, excel, csv)
 
 ## 👥 User Management API
@@ -331,11 +362,13 @@ GET /reports/{report_id}/export
 #### Authentication
 
 ##### Login
+
 ```http
 POST /auth/login
 ```
 
 **Request Body:**
+
 ```json
 {
   "email": "user@familyoffice.com",
@@ -345,6 +378,7 @@ POST /auth/login
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -366,11 +400,13 @@ POST /auth/login
 ```
 
 ##### Refresh Token
+
 ```http
 POST /auth/refresh
 ```
 
 **Request Body:**
+
 ```json
 {
   "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
@@ -378,6 +414,7 @@ POST /auth/refresh
 ```
 
 ##### Logout
+
 ```http
 POST /auth/logout
 ```
@@ -385,16 +422,19 @@ POST /auth/logout
 #### User Management
 
 ##### Get All Users
+
 ```http
 GET /users
 ```
 
 ##### Create User
+
 ```http
 POST /users
 ```
 
 **Request Body:**
+
 ```json
 {
   "email": "newuser@familyoffice.com",
@@ -406,16 +446,19 @@ POST /users
 ```
 
 ##### Get User by ID
+
 ```http
 GET /users/{user_id}
 ```
 
 ##### Update User
+
 ```http
 PUT /users/{user_id}
 ```
 
 ##### Delete User
+
 ```http
 DELETE /users/{user_id}
 ```
@@ -423,11 +466,13 @@ DELETE /users/{user_id}
 #### Multi-Factor Authentication
 
 ##### Setup MFA
+
 ```http
 POST /users/{user_id}/2fa/setup
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -440,11 +485,13 @@ POST /users/{user_id}/2fa/setup
 ```
 
 ##### Verify MFA
+
 ```http
 POST /users/{user_id}/2fa/verify
 ```
 
 **Request Body:**
+
 ```json
 {
   "code": "123456"
@@ -454,11 +501,13 @@ POST /users/{user_id}/2fa/verify
 #### Family Management
 
 ##### Get Family Members
+
 ```http
 GET /families/{family_id}/members
 ```
 
 ##### Add Family Member
+
 ```http
 POST /families/{family_id}/members
 ```
@@ -468,16 +517,19 @@ POST /families/{family_id}/members
 ### Base URL: `/integrations`
 
 #### Get All Integrations
+
 ```http
 GET /integrations
 ```
 
 #### Create Integration
+
 ```http
 POST /integrations
 ```
 
 **Request Body:**
+
 ```json
 {
   "name": "Bloomberg Market Data",
@@ -498,31 +550,37 @@ POST /integrations
 ```
 
 #### Get Integration by ID
+
 ```http
 GET /integrations/{integration_id}
 ```
 
 #### Update Integration
+
 ```http
 PUT /integrations/{integration_id}
 ```
 
 #### Delete Integration
+
 ```http
 DELETE /integrations/{integration_id}
 ```
 
 #### Test Integration
+
 ```http
 POST /integrations/{integration_id}/test
 ```
 
 #### Sync Data
+
 ```http
 POST /integrations/{integration_id}/sync
 ```
 
 **Request Body:**
+
 ```json
 {
   "data_types": ["prices", "corporate_actions"],
@@ -532,6 +590,7 @@ POST /integrations/{integration_id}/sync
 ```
 
 #### Get Sync Status
+
 ```http
 GET /sync-jobs/{job_id}/status
 ```
@@ -543,11 +602,13 @@ GET /sync-jobs/{job_id}/status
 #### Audit Trail
 
 ##### Get Audit Logs
+
 ```http
 GET /audit/logs
 ```
 
 **Query Parameters:**
+
 - `user_id` (string): Filter by user
 - `event_type` (string): Filter by event type
 - `date_from` (string): Start date
@@ -557,11 +618,13 @@ GET /audit/logs
 #### Privileged Access Management
 
 ##### Request Elevated Access
+
 ```http
 POST /pam/requests
 ```
 
 **Request Body:**
+
 ```json
 {
   "resource": "portfolio_management",
@@ -572,11 +635,13 @@ POST /pam/requests
 ```
 
 ##### Approve Access Request
+
 ```http
 PUT /pam/requests/{request_id}/approve
 ```
 
 **Request Body:**
+
 ```json
 {
   "approved_by": "admin@familyoffice.com",
@@ -609,14 +674,14 @@ PUT /pam/requests/{request_id}/approve
 
 ### Common Error Codes
 
-| Code | HTTP Status | Description |
-|------|-------------|-------------|
-| `AUTHENTICATION_ERROR` | 401 | Invalid or missing authentication |
-| `AUTHORIZATION_ERROR` | 403 | Insufficient permissions |
-| `VALIDATION_ERROR` | 400 | Invalid request parameters |
-| `NOT_FOUND` | 404 | Resource not found |
-| `RATE_LIMIT_EXCEEDED` | 429 | Too many requests |
-| `INTERNAL_ERROR` | 500 | Internal server error |
+| Code                   | HTTP Status | Description                       |
+| ---------------------- | ----------- | --------------------------------- |
+| `AUTHENTICATION_ERROR` | 401         | Invalid or missing authentication |
+| `AUTHORIZATION_ERROR`  | 403         | Insufficient permissions          |
+| `VALIDATION_ERROR`     | 400         | Invalid request parameters        |
+| `NOT_FOUND`            | 404         | Resource not found                |
+| `RATE_LIMIT_EXCEEDED`  | 429         | Too many requests                 |
+| `INTERNAL_ERROR`       | 500         | Internal server error             |
 
 ## 📊 Rate Limiting
 
@@ -668,4 +733,4 @@ The platform supports webhooks for real-time notifications:
 
 ---
 
-*This API documentation is maintained by the Platform Development Team and is updated with each release.* 
+_This API documentation is maintained by the Platform Development Team and is updated with each release._

@@ -2,9 +2,9 @@ name: Comprehensive Testing Suite
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
     # Run full test suite daily at 2 AM UTC
     - cron: '0 2 * * *'
@@ -24,50 +24,50 @@ jobs:
     strategy:
       matrix:
         test-suite: [unit, integration, security]
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Run TypeScript type checking
-      run: npm run type-check
-    
-    - name: Run ESLint
-      run: npm run lint
-    
-    - name: Run ${{ matrix.test-suite }} tests
-      run: npm run test:${{ matrix.test-suite }}
-    
-    - name: Generate test coverage
-      run: npm run test:coverage
-      if: matrix.test-suite == 'unit'
-    
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
-      if: matrix.test-suite == 'unit'
-      with:
-        file: ./coverage/lcov.info
-        flags: unittests
-        name: codecov-umbrella
-    
-    - name: Upload test results
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: test-results-${{ matrix.test-suite }}
-        path: |
-          coverage/
-          test-results/
-          junit.xml
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run TypeScript type checking
+        run: npm run type-check
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run ${{ matrix.test-suite }} tests
+        run: npm run test:${{ matrix.test-suite }}
+
+      - name: Generate test coverage
+        run: npm run test:coverage
+        if: matrix.test-suite == 'unit'
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        if: matrix.test-suite == 'unit'
+        with:
+          file: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ matrix.test-suite }}
+          path: |
+            coverage/
+            test-results/
+            junit.xml
 
   # End-to-End Tests
   e2e-tests:
@@ -76,363 +76,371 @@ jobs:
       matrix:
         browser: [chrome, firefox, edge]
         viewport: [desktop, tablet, mobile]
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build application
-      run: npm run build
-    
-    - name: Start application
-      run: npm start &
-      env:
-        PORT: 3000
-    
-    - name: Wait for application to be ready
-      run: npx wait-on http://localhost:3000 --timeout 60000
-    
-    - name: Run Cypress E2E tests
-      uses: cypress-io/github-action@v6
-      with:
-        start: npm start
-        wait-on: 'http://localhost:3000'
-        wait-on-timeout: 120
-        browser: ${{ matrix.browser }}
-        config: viewportWidth=1280,viewportHeight=720
-      env:
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-    - name: Upload Cypress screenshots
-      uses: actions/upload-artifact@v4
-      if: failure()
-      with:
-        name: cypress-screenshots-${{ matrix.browser }}-${{ matrix.viewport }}
-        path: cypress/screenshots/
-    
-    - name: Upload Cypress videos
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: cypress-videos-${{ matrix.browser }}-${{ matrix.viewport }}
-        path: cypress/videos/
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Start application
+        run: npm start &
+        env:
+          PORT: 3000
+
+      - name: Wait for application to be ready
+        run: npx wait-on http://localhost:3000 --timeout 60000
+
+      - name: Run Cypress E2E tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: ${{ matrix.browser }}
+          config: viewportWidth=1280,viewportHeight=720
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots-${{ matrix.browser }}-${{ matrix.viewport }}
+          path: cypress/screenshots/
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos-${{ matrix.browser }}-${{ matrix.viewport }}
+          path: cypress/videos/
 
   # Performance Tests
   performance-tests:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build application
-      run: npm run build
-    
-    - name: Start application
-      run: npm start &
-      env:
-        PORT: 3000
-    
-    - name: Wait for application to be ready
-      run: npx wait-on http://localhost:3000 --timeout 60000
-    
-    - name: Install Artillery
-      run: npm install -g artillery@latest
-    
-    - name: Run standard performance tests
-      run: npm run test:performance:standard
-      continue-on-error: true
-    
-    - name: Run financial API stress tests
-      run: npm run test:performance:financial
-      continue-on-error: true
-    
-    - name: Run comprehensive performance tests
-      run: npm run test:performance
-      continue-on-error: true
-    
-    - name: Upload performance results
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: performance-results
-        path: |
-          tests/performance/results/
-          artillery-report.json
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Start application
+        run: npm start &
+        env:
+          PORT: 3000
+
+      - name: Wait for application to be ready
+        run: npx wait-on http://localhost:3000 --timeout 60000
+
+      - name: Install Artillery
+        run: npm install -g artillery@latest
+
+      - name: Run standard performance tests
+        run: npm run test:performance:standard
+        continue-on-error: true
+
+      - name: Run financial API stress tests
+        run: npm run test:performance:financial
+        continue-on-error: true
+
+      - name: Run comprehensive performance tests
+        run: npm run test:performance
+        continue-on-error: true
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-results
+          path: |
+            tests/performance/results/
+            artillery-report.json
 
   # Security Audit
   security-audit:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Run npm audit
-      run: npm audit --audit-level high
-      continue-on-error: true
-    
-    - name: Run security tests
-      run: npm run test:security
-    
-    - name: Run OWASP ZAP baseline scan
-      uses: zaproxy/action-baseline@v0.12.0
-      with:
-        target: 'http://localhost:3000'
-        fail_action: false
-        allow_issue_writing: false
-    
-    - name: Upload ZAP report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: zap-report
-        path: report_html.html
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level high
+        continue-on-error: true
+
+      - name: Run security tests
+        run: npm run test:security
+
+      - name: Run OWASP ZAP baseline scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: 'http://localhost:3000'
+          fail_action: false
+          allow_issue_writing: false
+
+      - name: Upload ZAP report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: zap-report
+          path: report_html.html
 
   # Accessibility Tests
   accessibility-tests:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build application
-      run: npm run build
-    
-    - name: Start application
-      run: npm start &
-      env:
-        PORT: 3000
-    
-    - name: Wait for application to be ready
-      run: npx wait-on http://localhost:3000 --timeout 60000
-    
-    - name: Run accessibility tests with axe-core
-      run: |
-        npx @axe-core/cli http://localhost:3000 \
-          --save accessibility-report.json \
-          --reporter json
-      continue-on-error: true
-    
-    - name: Upload accessibility report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: accessibility-report
-        path: accessibility-report.json
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Start application
+        run: npm start &
+        env:
+          PORT: 3000
+
+      - name: Wait for application to be ready
+        run: npx wait-on http://localhost:3000 --timeout 60000
+
+      - name: Run accessibility tests with axe-core
+        run: |
+          npx @axe-core/cli http://localhost:3000 \
+            --save accessibility-report.json \
+            --reporter json
+        continue-on-error: true
+
+      - name: Upload accessibility report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: accessibility-report
+          path: accessibility-report.json
 
   # Compliance Tests
   compliance-tests:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Run compliance and audit trail tests
-      run: npx jest tests/compliance/ --verbose
-    
-    - name: Generate compliance report
-      run: |
-        node -e "
-          const { execSync } = require('child_process');
-          const fs = require('fs');
-          
-          try {
-            const result = execSync('npm run test:compliance', { encoding: 'utf8' });
-            fs.writeFileSync('compliance-summary.txt', result);
-            console.log('Compliance report generated');
-          } catch (error) {
-            console.log('Compliance tests completed with issues');
-            fs.writeFileSync('compliance-summary.txt', error.stdout || error.message);
-          }
-        "
-      continue-on-error: true
-    
-    - name: Upload compliance report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: compliance-report
-        path: compliance-summary.txt
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run compliance and audit trail tests
+        run: npx jest tests/compliance/ --verbose
+
+      - name: Generate compliance report
+        run: |
+          node -e "
+            const { execSync } = require('child_process');
+            const fs = require('fs');
+            
+            try {
+              const result = execSync('npm run test:compliance', { encoding: 'utf8' });
+              fs.writeFileSync('compliance-summary.txt', result);
+              console.log('Compliance report generated');
+            } catch (error) {
+              console.log('Compliance tests completed with issues');
+              fs.writeFileSync('compliance-summary.txt', error.stdout || error.message);
+            }
+          "
+        continue-on-error: true
+
+      - name: Upload compliance report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compliance-report
+          path: compliance-summary.txt
 
   # Test Results Summary
   test-summary:
     runs-on: ubuntu-latest
-    needs: [unit-integration-tests, e2e-tests, performance-tests, security-audit, accessibility-tests, compliance-tests]
+    needs:
+      [
+        unit-integration-tests,
+        e2e-tests,
+        performance-tests,
+        security-audit,
+        accessibility-tests,
+        compliance-tests,
+      ]
     if: always()
-    
+
     steps:
-    - name: Download all artifacts
-      uses: actions/download-artifact@v4
-    
-    - name: Generate comprehensive test report
-      run: |
-        echo "# Comprehensive Test Report" > test-summary.md
-        echo "" >> test-summary.md
-        echo "## Test Results Overview" >> test-summary.md
-        echo "" >> test-summary.md
-        
-        # Unit/Integration Tests
-        echo "### Unit & Integration Tests" >> test-summary.md
-        if [ -d "test-results-unit" ]; then
-          echo "✅ Unit tests completed" >> test-summary.md
-        else
-          echo "❌ Unit tests failed" >> test-summary.md
-        fi
-        
-        if [ -d "test-results-integration" ]; then
-          echo "✅ Integration tests completed" >> test-summary.md
-        else
-          echo "❌ Integration tests failed" >> test-summary.md
-        fi
-        
-        if [ -d "test-results-security" ]; then
-          echo "✅ Security tests completed" >> test-summary.md
-        else
-          echo "❌ Security tests failed" >> test-summary.md
-        fi
-        
-        # E2E Tests
-        echo "" >> test-summary.md
-        echo "### End-to-End Tests" >> test-summary.md
-        if ls cypress-* 1> /dev/null 2>&1; then
-          echo "✅ E2E tests completed" >> test-summary.md
-        else
-          echo "❌ E2E tests failed" >> test-summary.md
-        fi
-        
-        # Performance Tests
-        echo "" >> test-summary.md
-        echo "### Performance Tests" >> test-summary.md
-        if [ -d "performance-results" ]; then
-          echo "✅ Performance tests completed" >> test-summary.md
-        else
-          echo "❌ Performance tests failed" >> test-summary.md
-        fi
-        
-        # Security Audit
-        echo "" >> test-summary.md
-        echo "### Security Audit" >> test-summary.md
-        if [ -f "zap-report/report_html.html" ]; then
-          echo "✅ Security audit completed" >> test-summary.md
-        else
-          echo "❌ Security audit failed" >> test-summary.md
-        fi
-        
-        # Accessibility Tests
-        echo "" >> test-summary.md
-        echo "### Accessibility Tests" >> test-summary.md
-        if [ -f "accessibility-report/accessibility-report.json" ]; then
-          echo "✅ Accessibility tests completed" >> test-summary.md
-        else
-          echo "❌ Accessibility tests failed" >> test-summary.md
-        fi
-        
-        # Compliance Tests
-        echo "" >> test-summary.md
-        echo "### Compliance Tests" >> test-summary.md
-        if [ -f "compliance-report/compliance-summary.txt" ]; then
-          echo "✅ Compliance tests completed" >> test-summary.md
-        else
-          echo "❌ Compliance tests failed" >> test-summary.md
-        fi
-        
-        echo "" >> test-summary.md
-        echo "## Next Steps" >> test-summary.md
-        echo "- Review failed tests and address issues" >> test-summary.md
-        echo "- Check coverage reports for areas needing more tests" >> test-summary.md
-        echo "- Review performance metrics and optimize if needed" >> test-summary.md
-        echo "- Address any security vulnerabilities found" >> test-summary.md
-        echo "- Fix accessibility issues to improve user experience" >> test-summary.md
-        echo "- Ensure compliance violations are resolved" >> test-summary.md
-        
-        cat test-summary.md
-    
-    - name: Upload comprehensive test summary
-      uses: actions/upload-artifact@v4
-      with:
-        name: comprehensive-test-summary
-        path: test-summary.md
-    
-    - name: Comment PR with test results
-      if: github.event_name == 'pull_request'
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const fs = require('fs');
-          const testSummary = fs.readFileSync('test-summary.md', 'utf8');
-          
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: testSummary
-          });
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Generate comprehensive test report
+        run: |
+          echo "# Comprehensive Test Report" > test-summary.md
+          echo "" >> test-summary.md
+          echo "## Test Results Overview" >> test-summary.md
+          echo "" >> test-summary.md
+
+          # Unit/Integration Tests
+          echo "### Unit & Integration Tests" >> test-summary.md
+          if [ -d "test-results-unit" ]; then
+            echo "✅ Unit tests completed" >> test-summary.md
+          else
+            echo "❌ Unit tests failed" >> test-summary.md
+          fi
+
+          if [ -d "test-results-integration" ]; then
+            echo "✅ Integration tests completed" >> test-summary.md
+          else
+            echo "❌ Integration tests failed" >> test-summary.md
+          fi
+
+          if [ -d "test-results-security" ]; then
+            echo "✅ Security tests completed" >> test-summary.md
+          else
+            echo "❌ Security tests failed" >> test-summary.md
+          fi
+
+          # E2E Tests
+          echo "" >> test-summary.md
+          echo "### End-to-End Tests" >> test-summary.md
+          if ls cypress-* 1> /dev/null 2>&1; then
+            echo "✅ E2E tests completed" >> test-summary.md
+          else
+            echo "❌ E2E tests failed" >> test-summary.md
+          fi
+
+          # Performance Tests
+          echo "" >> test-summary.md
+          echo "### Performance Tests" >> test-summary.md
+          if [ -d "performance-results" ]; then
+            echo "✅ Performance tests completed" >> test-summary.md
+          else
+            echo "❌ Performance tests failed" >> test-summary.md
+          fi
+
+          # Security Audit
+          echo "" >> test-summary.md
+          echo "### Security Audit" >> test-summary.md
+          if [ -f "zap-report/report_html.html" ]; then
+            echo "✅ Security audit completed" >> test-summary.md
+          else
+            echo "❌ Security audit failed" >> test-summary.md
+          fi
+
+          # Accessibility Tests
+          echo "" >> test-summary.md
+          echo "### Accessibility Tests" >> test-summary.md
+          if [ -f "accessibility-report/accessibility-report.json" ]; then
+            echo "✅ Accessibility tests completed" >> test-summary.md
+          else
+            echo "❌ Accessibility tests failed" >> test-summary.md
+          fi
+
+          # Compliance Tests
+          echo "" >> test-summary.md
+          echo "### Compliance Tests" >> test-summary.md
+          if [ -f "compliance-report/compliance-summary.txt" ]; then
+            echo "✅ Compliance tests completed" >> test-summary.md
+          else
+            echo "❌ Compliance tests failed" >> test-summary.md
+          fi
+
+          echo "" >> test-summary.md
+          echo "## Next Steps" >> test-summary.md
+          echo "- Review failed tests and address issues" >> test-summary.md
+          echo "- Check coverage reports for areas needing more tests" >> test-summary.md
+          echo "- Review performance metrics and optimize if needed" >> test-summary.md
+          echo "- Address any security vulnerabilities found" >> test-summary.md
+          echo "- Fix accessibility issues to improve user experience" >> test-summary.md
+          echo "- Ensure compliance violations are resolved" >> test-summary.md
+
+          cat test-summary.md
+
+      - name: Upload comprehensive test summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: comprehensive-test-summary
+          path: test-summary.md
+
+      - name: Comment PR with test results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const testSummary = fs.readFileSync('test-summary.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: testSummary
+            });
 
   # Coverage Report
   coverage-report:
     runs-on: ubuntu-latest
     needs: [unit-integration-tests]
     if: always()
-    
+
     steps:
-    - name: Download coverage artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: test-results-unit
-    
-    - name: Generate coverage badge
-      uses: codecov/codecov-action@v4
-      with:
-        files: ./coverage/lcov.info
-        flags: unittests
-        name: codecov-umbrella
-        verbose: true
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results-unit
+
+      - name: Generate coverage badge
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          verbose: true

@@ -17,6 +17,7 @@ components/
 ## 🧩 컴포넌트 분류
 
 ### 1. Atoms (ui/)
+
 기본적인 UI 요소들로 다른 컴포넌트의 기반이 됩니다.
 
 ```typescript
@@ -36,6 +37,7 @@ components/
 ```
 
 ### 2. Molecules (forms/)
+
 여러 atoms을 조합한 기능적 단위입니다.
 
 ```typescript
@@ -49,6 +51,7 @@ components/
 ```
 
 ### 3. Organisms (program/)
+
 비즈니스 로직을 포함한 복합 컴포넌트입니다.
 
 ```typescript
@@ -86,7 +89,7 @@ export function ProgramCard({
 }: ProgramCardProps) {
   const isRegistrationOpen = program.status === 'registration_open'
   const isFull = program.approvedRegistrations >= program.capacity
-  
+
   return (
     <Card className={cn('program-card', className)}>
       {/* 프로그램 이미지 */}
@@ -101,16 +104,16 @@ export function ProgramCard({
           {getStatusText(program.status)}
         </Badge>
       </div>
-      
+
       {/* 프로그램 정보 */}
       <CardContent className="program-content">
         <div className="program-category">
           <Badge variant="outline">{program.category}</Badge>
         </div>
-        
+
         <h3 className="program-title">{program.title}</h3>
         <p className="program-summary">{program.summary}</p>
-        
+
         <div className="program-meta">
           <div className="program-capacity">
             <Users className="h-4 w-4" />
@@ -124,7 +127,7 @@ export function ProgramCard({
             )}
           </div>
         </div>
-        
+
         {/* 다음 일정 */}
         {program.nextSessionDate && (
           <div className="next-session">
@@ -132,7 +135,7 @@ export function ProgramCard({
             <span>{formatDate(program.nextSessionDate)}</span>
           </div>
         )}
-        
+
         {/* 등록 버튼 */}
         {showRegistrationButton && (
           <Button
@@ -176,11 +179,11 @@ export function ProgramList({
 }: ProgramListProps) {
   const [filters, setFilters] = useState<ProgramFilters>({})
   const [searchTerm, setSearchTerm] = useState('')
-  
+
   if (error) {
     return <ErrorState message={error} />
   }
-  
+
   return (
     <div className="program-list">
       {/* 검색 및 필터 */}
@@ -197,7 +200,7 @@ export function ProgramList({
           />
         </div>
       )}
-      
+
       {/* 프로그램 목록 */}
       <div className={cn(
         'program-grid',
@@ -212,17 +215,17 @@ export function ProgramList({
           />
         ))}
       </div>
-      
+
       {/* 로딩 상태 */}
       {loading && <LoadingSpinner />}
-      
+
       {/* 더 보기 버튼 */}
       {hasMore && !loading && (
         <Button onClick={onLoadMore} variant="outline" className="w-full">
           더 보기
         </Button>
       )}
-      
+
       {/* 빈 상태 */}
       {programs.length === 0 && !loading && (
         <EmptyState
@@ -255,7 +258,7 @@ export function RegistrationForm({
   const form = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema)
   })
-  
+
   const handleSubmit = async (data: RegistrationFormData) => {
     try {
       await onSubmit(data)
@@ -264,7 +267,7 @@ export function RegistrationForm({
       toast.error('등록 신청 중 오류가 발생했습니다.')
     }
   }
-  
+
   return (
     <Card className="registration-form">
       <CardHeader>
@@ -273,7 +276,7 @@ export function RegistrationForm({
           {program.title} 프로그램에 참가 신청합니다.
         </CardDescription>
       </CardHeader>
-      
+
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
@@ -287,7 +290,7 @@ export function RegistrationForm({
                 <span>기간: {program.duration}분</span>
               </div>
             </div>
-            
+
             {/* 신청자 정보 */}
             <div className="applicant-info">
               <FormField
@@ -306,7 +309,7 @@ export function RegistrationForm({
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="specialRequirements"
@@ -324,7 +327,7 @@ export function RegistrationForm({
                 )}
               />
             </div>
-            
+
             {/* 약관 동의 */}
             <div className="terms-agreement">
               <FormField
@@ -347,7 +350,7 @@ export function RegistrationForm({
                 )}
               />
             </div>
-            
+
             {/* 버튼 */}
             <div className="form-actions">
               <Button
@@ -377,6 +380,7 @@ export function RegistrationForm({
 ## 🎨 스타일링 시스템
 
 ### CSS 변수 및 테마
+
 ```css
 /* globals.css - 프로그램 관련 CSS 변수 */
 :root {
@@ -388,7 +392,7 @@ export function RegistrationForm({
   --program-in-progress: hsl(262 83% 58%);
   --program-completed: hsl(142 76% 36%);
   --program-cancelled: hsl(0 84% 60%);
-  
+
   /* Program Category Colors */
   --category-ceo-education: hsl(217 91% 60%);
   --category-asset-management: hsl(142 76% 36%);
@@ -399,6 +403,7 @@ export function RegistrationForm({
 ```
 
 ### 컴포넌트별 스타일 클래스
+
 ```css
 /* 프로그램 카드 스타일 */
 .program-card {
@@ -460,132 +465,139 @@ export function RegistrationForm({
 ## 🔄 상태 관리
 
 ### 컴포넌트 상태 패턴
+
 ```typescript
 // hooks/usePrograms.ts
 export function usePrograms(filters?: ProgramFilters) {
-  const [programs, setPrograms] = useState<Program[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [hasMore, setHasMore] = useState(true)
-  const [page, setPage] = useState(1)
-  
-  const fetchPrograms = useCallback(async (reset = false) => {
-    try {
-      setLoading(true)
-      const response = await api.programs.list({
-        ...filters,
-        page: reset ? 1 : page
-      })
-      
-      if (reset) {
-        setPrograms(response.data)
-        setPage(1)
-      } else {
-        setPrograms(prev => [...prev, ...response.data])
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
+
+  const fetchPrograms = useCallback(
+    async (reset = false) => {
+      try {
+        setLoading(true);
+        const response = await api.programs.list({
+          ...filters,
+          page: reset ? 1 : page,
+        });
+
+        if (reset) {
+          setPrograms(response.data);
+          setPage(1);
+        } else {
+          setPrograms(prev => [...prev, ...response.data]);
+        }
+
+        setHasMore(response.pagination.hasMore);
+        setError(null);
+      } catch (err) {
+        setError('프로그램을 불러오는 중 오류가 발생했습니다.');
+      } finally {
+        setLoading(false);
       }
-      
-      setHasMore(response.pagination.hasMore)
-      setError(null)
-    } catch (err) {
-      setError('프로그램을 불러오는 중 오류가 발생했습니다.')
-    } finally {
-      setLoading(false)
-    }
-  }, [filters, page])
-  
+    },
+    [filters, page]
+  );
+
   const loadMore = useCallback(() => {
     if (!loading && hasMore) {
-      setPage(prev => prev + 1)
+      setPage(prev => prev + 1);
     }
-  }, [loading, hasMore])
-  
+  }, [loading, hasMore]);
+
   const refresh = useCallback(() => {
-    fetchPrograms(true)
-  }, [fetchPrograms])
-  
+    fetchPrograms(true);
+  }, [fetchPrograms]);
+
   useEffect(() => {
-    fetchPrograms(true)
-  }, [filters])
-  
+    fetchPrograms(true);
+  }, [filters]);
+
   useEffect(() => {
     if (page > 1) {
-      fetchPrograms()
+      fetchPrograms();
     }
-  }, [page])
-  
+  }, [page]);
+
   return {
     programs,
     loading,
     error,
     hasMore,
     loadMore,
-    refresh
-  }
+    refresh,
+  };
 }
 ```
 
 ### 등록 상태 관리
+
 ```typescript
 // hooks/useRegistration.ts
 export function useRegistration() {
-  const [registrations, setRegistrations] = useState<Registration[]>([])
-  const [loading, setLoading] = useState(false)
-  
-  const register = useCallback(async (
-    programId: string,
-    data: Omit<RegistrationFormData, 'programId'>
-  ) => {
-    setLoading(true)
-    try {
-      const response = await api.registrations.create({
-        programId,
-        ...data
-      })
-      
-      setRegistrations(prev => [...prev, response.data])
-      toast.success('등록 신청이 완료되었습니다.')
-      return response.data
-    } catch (error) {
-      toast.error('등록 신청 중 오류가 발생했습니다.')
-      throw error
-    } finally {
-      setLoading(false)
-    }
-  }, [])
-  
+  const [registrations, setRegistrations] = useState<Registration[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const register = useCallback(
+    async (
+      programId: string,
+      data: Omit<RegistrationFormData, 'programId'>
+    ) => {
+      setLoading(true);
+      try {
+        const response = await api.registrations.create({
+          programId,
+          ...data,
+        });
+
+        setRegistrations(prev => [...prev, response.data]);
+        toast.success('등록 신청이 완료되었습니다.');
+        return response.data;
+      } catch (error) {
+        toast.error('등록 신청 중 오류가 발생했습니다.');
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
+
   const cancel = useCallback(async (registrationId: string) => {
     try {
-      await api.registrations.cancel(registrationId)
-      setRegistrations(prev => 
-        prev.filter(reg => reg.id !== registrationId)
-      )
-      toast.success('등록이 취소되었습니다.')
+      await api.registrations.cancel(registrationId);
+      setRegistrations(prev => prev.filter(reg => reg.id !== registrationId));
+      toast.success('등록이 취소되었습니다.');
     } catch (error) {
-      toast.error('등록 취소 중 오류가 발생했습니다.')
-      throw error
+      toast.error('등록 취소 중 오류가 발생했습니다.');
+      throw error;
     }
-  }, [])
-  
+  }, []);
+
   return {
     registrations,
     loading,
     register,
-    cancel
-  }
+    cancel,
+  };
 }
 ```
 
 ## 📱 반응형 디자인
 
 ### 브레이크포인트 전략
+
 ```typescript
 // 반응형 브레이크포인트
 const breakpoints = {
-  sm: '640px',   // 모바일 가로
-  md: '768px',   // 태블릿
-  lg: '1024px',  // 데스크톱
-  xl: '1280px'   // 와이드 데스크톱
-}
+  sm: '640px', // 모바일 가로
+  md: '768px', // 태블릿
+  lg: '1024px', // 데스크톱
+  xl: '1280px', // 와이드 데스크톱
+};
 
 // 컴포넌트별 반응형 적용
 // ProgramCard: sm(1열) → md(2열) → lg(3열)
@@ -596,6 +608,7 @@ const breakpoints = {
 ## ♿ 접근성 고려사항
 
 ### ARIA 및 시멘틱 마크업
+
 ```typescript
 // ProgramCard 접근성 개선
 <Card role="article" aria-labelledby={`program-title-${program.id}`}>
@@ -611,6 +624,7 @@ const breakpoints = {
 ```
 
 ### 키보드 네비게이션
+
 - Tab/Shift+Tab으로 순차 탐색
 - Enter/Space로 버튼 활성화
 - Escape로 모달 닫기
@@ -619,6 +633,7 @@ const breakpoints = {
 ## 🧪 테스트 전략
 
 ### 컴포넌트 테스트 예시
+
 ```typescript
 // __tests__/ProgramCard.test.tsx
 describe('ProgramCard', () => {
@@ -629,23 +644,23 @@ describe('ProgramCard', () => {
     capacity: 50,
     approvedRegistrations: 25
   }
-  
+
   it('displays program information correctly', () => {
     render(<ProgramCard program={mockProgram} />)
-    
+
     expect(screen.getByText('Test Program')).toBeInTheDocument()
     expect(screen.getByText('25/50')).toBeInTheDocument()
   })
-  
+
   it('calls onRegister when button is clicked', async () => {
     const onRegister = jest.fn()
     render(
       <ProgramCard program={mockProgram} onRegister={onRegister} />
     )
-    
+
     const button = screen.getByRole('button', { name: /등록 신청/ })
     await user.click(button)
-    
+
     expect(onRegister).toHaveBeenCalledWith('1')
   })
 })
@@ -654,25 +669,32 @@ describe('ProgramCard', () => {
 ## 🚀 성능 최적화
 
 ### 메모이제이션 전략
+
 ```typescript
 // React.memo로 불필요한 리렌더링 방지
-export const ProgramCard = memo(function ProgramCard(props: ProgramCardProps) {
-  // 컴포넌트 로직
-}, (prevProps, nextProps) => {
-  // 커스텀 비교 함수
-  return prevProps.program.id === nextProps.program.id &&
-         prevProps.program.updatedAt === nextProps.program.updatedAt
-})
+export const ProgramCard = memo(
+  function ProgramCard(props: ProgramCardProps) {
+    // 컴포넌트 로직
+  },
+  (prevProps, nextProps) => {
+    // 커스텀 비교 함수
+    return (
+      prevProps.program.id === nextProps.program.id &&
+      prevProps.program.updatedAt === nextProps.program.updatedAt
+    );
+  }
+);
 
 // useMemo로 무거운 계산 최적화
 const filteredPrograms = useMemo(() => {
-  return programs.filter(program => 
+  return programs.filter(program =>
     program.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-}, [programs, searchTerm])
+  );
+}, [programs, searchTerm]);
 ```
 
 ### 가상화 및 지연 로딩
+
 ```typescript
 // 큰 목록에 대한 가상화
 import { FixedSizeList as List } from 'react-window'

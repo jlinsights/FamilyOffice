@@ -1,12 +1,19 @@
 'use client';
 
+import { Shield } from 'lucide-react';
+
+import { Badge } from '@/components/ui/badge';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Shield } from 'lucide-react';
 
 export default function AdminDashboard() {
   return (
@@ -21,17 +28,16 @@ export default function AdminDashboard() {
             Admin Dashboard
           </Badge>
         </div>
-        
+
         <Card>
           <CardHeader>
             <CardTitle>시스템 관리</CardTitle>
-            <CardDescription>
-              FamilyOffice S 관리자 전용 페이지
-            </CardDescription>
+            <CardDescription>FamilyOffice S 관리자 전용 페이지</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground">
-              관리자 기능은 현재 개발 중입니다. 사용자 관리, 시스템 통계, 설정 등의 기능이 곧 제공될 예정입니다.
+              관리자 기능은 현재 개발 중입니다. 사용자 관리, 시스템 통계, 설정
+              등의 기능이 곧 제공될 예정입니다.
             </p>
           </CardContent>
         </Card>

@@ -7,12 +7,14 @@ FamilyOffice S는 비상장기업, 기술기업, 제조업 등 다양한 업종�
 ## 🚀 주요 기능
 
 ### 💼 자산관리 서비스
+
 - **비상장기업 자산관리**: 매출 50억~300억 비상장기업 전용
 - **상속설계**: 세무최적화를 통한 효율적인 자산승계
 - **재무설계**: 법인 대표 맞춤형 재무상담
 - **투자자문**: 전문적인 투자 전략 수립
 
 ### 🛡️ 리스크 관리
+
 - **법인 단체보험**: 기업 리스크 헷지
 - **경영인정기보험**: CEO 정기보험 및 임원진 보험설계
 - **중대재해처벌법 대응**: 중대재해 예방 및 리스크 관리
@@ -20,6 +22,7 @@ FamilyOffice S는 비상장기업, 기술기업, 제조업 등 다양한 업종�
 ### 📊 기술 스택
 
 #### Frontend
+
 - **Next.js 15.4.3** - React 기반 풀스택 프레임워크
 - **React 18+** - 사용자 인터페이스 라이브러리
 - **TypeScript** - 타입 안전성 보장
@@ -27,12 +30,14 @@ FamilyOffice S는 비상장기업, 기술기업, 제조업 등 다양한 업종�
 - **Framer Motion** - 애니메이션 라이브러리
 
 #### Backend & Database
+
 - **Supabase** - PostgreSQL 기반 백엔드 서비스
 - **Clerk** - 인증 및 사용자 관리
 - **Redis** - 캐싱 및 세션 관리
 - **Upstash** - 서버리스 Redis 서비스
 
 #### 한국 시장 통합
+
 - **Cal.com** - 스케줄링 및 예약 시스템
 - **HubSpot** - CRM 및 마케팅 자동화
 - **Channel Talk** - 고객 지원 채팅
@@ -40,6 +45,7 @@ FamilyOffice S는 비상장기업, 기술기업, 제조업 등 다양한 업종�
 - **Toss Payments** - 한국 결제 시스템
 
 #### DevOps & Monitoring
+
 - **Vercel** - 배포 플랫폼
 - **Sentry** - 에러 추적 및 모니터링
 - **Cypress** - E2E 테스팅
@@ -48,6 +54,7 @@ FamilyOffice S는 비상장기업, 기술기업, 제조업 등 다양한 업종�
 ## 🛠️ 개발 환경 설정
 
 ### 필수 요구사항
+
 - Node.js 18.0.0 이상
 - npm 9.0.0 이상
 - Git
@@ -99,6 +106,7 @@ NEXT_PUBLIC_CHANNEL_IO_KEY=your_channel_io_key
 다음 패키지들의 SSR 호환성 문제를 해결했습니다:
 
 #### ✅ 해결된 패키지들
+
 1. **Cal.com embed-react** - 스크립트 기반 통합으로 변경
 2. **HubSpot** - 에러 처리 및 타임아웃 개선
 3. **Recharts** - 동적 import로 SSR 안전성 확보
@@ -113,21 +121,22 @@ NEXT_PUBLIC_CHANNEL_IO_KEY=your_channel_io_key
 12. **MFA Security** - otplib/qrcode SSR 안전성 확보
 
 #### 🔧 해결 방법
+
 ```typescript
 // SSR 안전성을 위한 dynamic imports
-let PackageName: any = null
+let PackageName: any = null;
 
 const initializePackage = () => {
   if (typeof window === 'undefined' && !PackageName) {
     try {
-      const packageModule = require('package-name')
-      PackageName = packageModule.default || packageModule
+      const packageModule = require('package-name');
+      PackageName = packageModule.default || packageModule;
     } catch (error) {
-      console.error('패키지 초기화 실패:', error)
-      PackageName = null
+      console.error('패키지 초기화 실패:', error);
+      PackageName = null;
     }
   }
-}
+};
 ```
 
 ## 📁 프로젝트 구조
@@ -163,6 +172,7 @@ npm run test:coverage
 ## 🚀 배포
 
 ### Vercel 배포
+
 ```bash
 # Vercel CLI 설치
 npm i -g vercel
@@ -172,6 +182,7 @@ vercel --prod
 ```
 
 ### 환경별 배포 설정
+
 - **개발**: `npm run dev`
 - **스테이징**: Vercel Preview Deployments
 - **프로덕션**: Vercel Production Deployment
@@ -179,6 +190,7 @@ vercel --prod
 ## 📊 성능 최적화
 
 ### 구현된 최적화 기법
+
 - **SSR/SSG**: 서버사이드 렌더링 및 정적 생성
 - **이미지 최적화**: Next.js Image 컴포넌트 활용
 - **코드 스플리팅**: 동적 import를 통한 번들 최적화
@@ -186,6 +198,7 @@ vercel --prod
 - **CDN**: Vercel Edge Network 활용
 
 ### 성능 목표
+
 - **First Contentful Paint**: < 1.5초
 - **Largest Contentful Paint**: < 2.5초
 - **Cumulative Layout Shift**: < 0.1
@@ -194,6 +207,7 @@ vercel --prod
 ## 🔒 보안
 
 ### 구현된 보안 기능
+
 - **인증**: Clerk 기반 멀티팩터 인증
 - **권한 관리**: Role-based Access Control (RBAC)
 - **데이터 암호화**: AES-256 암호화
@@ -204,6 +218,7 @@ vercel --prod
 ## 🤝 기여 가이드
 
 ### 개발 워크플로우
+
 1. 이슈 생성 또는 기존 이슈 확인
 2. 새로운 브랜치 생성 (`feature/issue-number`)
 3. 코드 작성 및 테스트
@@ -211,6 +226,7 @@ vercel --prod
 5. Pull Request 생성
 
 ### 코딩 스타일
+
 - **TypeScript**: 엄격한 타입 체크
 - **ESLint**: 코드 품질 검사
 - **Prettier**: 코드 포맷팅
@@ -219,11 +235,13 @@ vercel --prod
 ## 📞 지원
 
 ### 기술 지원
+
 - **이슈 트래커**: GitHub Issues
 - **문서**: `/docs` 디렉토리
 - **API 문서**: `/docs/technical/api`
 
 ### 비즈니스 문의
+
 - **이메일**: contact@familyoffices.vip
 - **전화**: 02-1234-5678
 - **카카오톡**: @familyoffice-s
@@ -243,4 +261,4 @@ vercel --prod
 
 **FamilyOffice S** - 중소중견기업 법인 대표를 위한 프리미엄 자산관리 플랫폼
 
-© 2024 FamilyOffice S. All rights reserved. 
+© 2024 FamilyOffice S. All rights reserved.

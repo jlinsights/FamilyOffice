@@ -1,34 +1,40 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import type { LucideIcon } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react';
+
+import { useEffect, useState } from 'react';
 
 interface ClientOnlyIconProps {
-  icon: LucideIcon
-  className?: string
-  size?: number
-  [key: string]: any
+  icon: LucideIcon;
+  className?: string;
+  size?: number;
+  [key: string]: any;
 }
 
-export function ClientOnlyIcon({ icon: Icon, className, size = 24, ...props }: ClientOnlyIconProps) {
-  const [isClient, setIsClient] = useState(false)
+export function ClientOnlyIcon({
+  icon: Icon,
+  className,
+  size = 24,
+  ...props
+}: ClientOnlyIconProps) {
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
-  // 서버와 클라이언트에서 동일한 구조를 렌더링하여 hydration mismatch 방지
+  // 서버와 클라이언트 모두에서 동일한 구조를 유지
   return (
-    <div 
+    <div
       className={className}
-      style={{ 
-        width: size, 
-        height: size,
-        display: 'inline-block'
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        display: 'inline-block',
       }}
       {...props}
     >
-      {isClient && <Icon className="w-full h-full" size={size} />}
+      {mounted && <Icon className="w-full h-full" />}
     </div>
-  )
-} 
+  );
+}

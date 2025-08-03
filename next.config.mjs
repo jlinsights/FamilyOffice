@@ -6,7 +6,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  
+
   // 이미지 최적화 강화
   images: {
     unoptimized: process.env.NODE_ENV === 'development',
@@ -15,34 +15,34 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30일 캐시
   },
-  
+
   // 실험적 기능 확장 (안정성을 위해 일부 비활성화)
   experimental: {
     optimizePackageImports: ['lucide-react'],
     optimizeCss: true,
   },
-  
-  // 서버 외부 패키지 (Clerk 관련 문제 해결)
-  serverExternalPackages: ['@clerk/nextjs', 'yahoo-finance2'],
-  
+
+  // 서버 외부 패키지 (Clerk 관련 문제 해결) - 임시 비활성화
+  // serverExternalPackages: ['@clerk/nextjs', 'yahoo-finance2'],
+
   // 컴파일러 최적화
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  
+
   // 성능 설정
   compress: true,
   trailingSlash: false,
   poweredByHeader: false,
-  
+
   // 웹팩 설정 최적화 (ChunkLoadError 해결)
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // backend 디렉토리 제외 (개발 환경에서는 제거)
     if (!dev) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        'backend': false,
-      }
+        backend: false,
+      };
     }
 
     // Tree shaking 최적화 (Next.js 15.2.4+ 호환)
@@ -50,7 +50,7 @@ const nextConfig = {
       config.optimization = {
         ...config.optimization,
         sideEffects: false,
-      }
+      };
     }
 
     // React Server Components 관련 설정
@@ -69,10 +69,10 @@ const nextConfig = {
         assert: false,
         os: false,
         path: false,
-        'querystringify': false,
+        querystringify: false,
         'requires-port': false,
         'punycode/': false,
-      }
+      };
     }
 
     // Node.js 전용 모듈들을 클라이언트에서 제외
@@ -81,12 +81,12 @@ const nextConfig = {
         ...config.resolve.fallback,
         'yahoo-finance2': false,
         'node-cache': false,
-        'fs': false,
-        'stream': false,
-        'path': false,
-        'os': false,
-        'crypto': false,
-      }
+        fs: false,
+        stream: false,
+        path: false,
+        os: false,
+        crypto: false,
+      };
     }
 
     // ChunkLoadError 해결을 위한 청크 분할 최적화
@@ -127,20 +127,20 @@ const nextConfig = {
             enforce: true,
           },
         },
-      }
+      };
     }
 
     // 청크 로딩 실패 시 재시도 설정
     config.output = {
       ...config.output,
-      chunkFilename: dev 
-        ? 'static/chunks/[name].js' 
+      chunkFilename: dev
+        ? 'static/chunks/[name].js'
         : 'static/chunks/[name].[contenthash].js',
-    }
+    };
 
-    return config
+    return config;
   },
-  
+
   // 캐싱 및 보안 헤더 강화
   async headers() {
     return [
@@ -150,11 +150,11 @@ const nextConfig = {
           // 보안 헤더
           {
             key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            value: 'on',
           },
           {
             key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            value: '1; mode=block',
           },
           {
             key: 'X-Frame-Options',
@@ -182,12 +182,12 @@ const nextConfig = {
               "base-uri 'self'",
               "form-action 'self'",
               "frame-ancestors 'none'",
-              "upgrade-insecure-requests"
-            ].join('; ')
+              'upgrade-insecure-requests',
+            ].join('; '),
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains; preload'
+            value: 'max-age=31536000; includeSubDomains; preload',
           },
           {
             key: 'Permissions-Policy',
@@ -198,24 +198,24 @@ const nextConfig = {
               'payment=()',
               'usb=()',
               'screen-wake-lock=()',
-              'web-share=()'
-            ].join(', ')
+              'web-share=()',
+            ].join(', '),
           },
           {
             key: 'X-Permitted-Cross-Domain-Policies',
-            value: 'none'
+            value: 'none',
           },
           {
             key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp'
+            value: 'require-corp',
           },
           {
             key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin'
+            value: 'same-origin',
           },
           {
             key: 'Cross-Origin-Resource-Policy',
-            value: 'same-origin'
+            value: 'same-origin',
           },
         ],
       },
@@ -225,18 +225,18 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
       },
       {
         source: '/_next/static/(.*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
       },
       // API 응답 캐싱
       {
@@ -244,20 +244,20 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, s-maxage=300, stale-while-revalidate=600'
-          }
-        ]
-      }
-    ]
+            value: 'public, s-maxage=300, stale-while-revalidate=600',
+          },
+        ],
+      },
+    ];
   },
-  
+
   // Force dynamic rendering globally (개발 환경에서는 제거)
   output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
-  
+
   // 환경 변수
   env: {
     CUSTOM_KEY: process.env.NODE_ENV,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

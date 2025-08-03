@@ -73,7 +73,7 @@ export class NetworkSecurityService {
       vpnConnections: [],
       monitoringEnabled: true,
       intrusionDetection: true,
-      ddosProtection: true
+      ddosProtection: true,
     };
   }
 
@@ -94,7 +94,7 @@ export class NetworkSecurityService {
         createdAt: new Date(),
         updatedAt: new Date(),
         createdBy: 'system',
-        description: 'HTTPS 트래픽 허용'
+        description: 'HTTPS 트래픽 허용',
       },
       {
         id: 'allow-http',
@@ -110,7 +110,7 @@ export class NetworkSecurityService {
         createdAt: new Date(),
         updatedAt: new Date(),
         createdBy: 'system',
-        description: 'HTTP 트래픽 허용 (리다이렉트용)'
+        description: 'HTTP 트래픽 허용 (리다이렉트용)',
       },
       {
         id: 'deny-admin-ports',
@@ -126,7 +126,7 @@ export class NetworkSecurityService {
         createdAt: new Date(),
         updatedAt: new Date(),
         createdBy: 'system',
-        description: 'SSH 포트 차단'
+        description: 'SSH 포트 차단',
       },
       {
         id: 'allow-api-internal',
@@ -142,8 +142,8 @@ export class NetworkSecurityService {
         createdAt: new Date(),
         updatedAt: new Date(),
         createdBy: 'system',
-        description: '내부 API 접근 허용'
-      }
+        description: '내부 API 접근 허용',
+      },
     ];
   }
 
@@ -159,7 +159,7 @@ export class NetworkSecurityService {
         allowedServices: ['web', 'api'],
         vpnRequired: false,
         mfaRequired: false,
-        auditLogging: true
+        auditLogging: true,
       },
       {
         id: 'internal',
@@ -170,7 +170,7 @@ export class NetworkSecurityService {
         allowedServices: ['database', 'cache', 'queue'],
         vpnRequired: true,
         mfaRequired: true,
-        auditLogging: true
+        auditLogging: true,
       },
       {
         id: 'management',
@@ -181,31 +181,36 @@ export class NetworkSecurityService {
         allowedServices: ['monitoring', 'logging', 'admin'],
         vpnRequired: true,
         mfaRequired: true,
-        auditLogging: true
-      }
+        auditLogging: true,
+      },
     ];
   }
 
   // 방화벽 규칙 추가
-  addFirewallRule(rule: Omit<FirewallRule, 'id' | 'createdAt' | 'updatedAt'>): FirewallRule {
+  addFirewallRule(
+    rule: Omit<FirewallRule, 'id' | 'createdAt' | 'updatedAt'>
+  ): FirewallRule {
     const newRule: FirewallRule = {
       ...rule,
       id: crypto.randomUUID(),
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     this.firewallRules.push(newRule);
     this.securityPolicy.rules.push(newRule);
-    
+
     console.log('Added firewall rule:', newRule.name);
     return newRule;
   }
 
   // 방화벽 규칙 업데이트
-  updateFirewallRule(ruleId: string, updates: Partial<FirewallRule>): FirewallRule | null {
+  updateFirewallRule(
+    ruleId: string,
+    updates: Partial<FirewallRule>
+  ): FirewallRule | null {
     const ruleIndex = this.firewallRules.findIndex(r => r.id === ruleId);
-    
+
     if (ruleIndex === -1) {
       return null;
     }
@@ -213,7 +218,7 @@ export class NetworkSecurityService {
     this.firewallRules[ruleIndex] = {
       ...this.firewallRules[ruleIndex],
       ...updates,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     console.log('Updated firewall rule:', ruleId);
@@ -223,14 +228,16 @@ export class NetworkSecurityService {
   // 방화벽 규칙 삭제
   deleteFirewallRule(ruleId: string): boolean {
     const ruleIndex = this.firewallRules.findIndex(r => r.id === ruleId);
-    
+
     if (ruleIndex === -1) {
       return false;
     }
 
     this.firewallRules.splice(ruleIndex, 1);
-    this.securityPolicy.rules = this.securityPolicy.rules.filter(r => r.id !== ruleId);
-    
+    this.securityPolicy.rules = this.securityPolicy.rules.filter(
+      r => r.id !== ruleId
+    );
+
     console.log('Deleted firewall rule:', ruleId);
     return true;
   }
@@ -249,10 +256,19 @@ export class NetworkSecurityService {
       .sort((a, b) => a.priority - b.priority);
 
     for (const rule of sortedRules) {
-      if (this.matchesRule(rule, sourceIp, destinationIp, protocol, sourcePort, destinationPort)) {
+      if (
+        this.matchesRule(
+          rule,
+          sourceIp,
+          destinationIp,
+          protocol,
+          sourcePort,
+          destinationPort
+        )
+      ) {
         return {
           allowed: rule.type === 'allow',
-          rule
+          rule,
         };
       }
     }
@@ -271,7 +287,10 @@ export class NetworkSecurityService {
     destinationPort?: number
   ): boolean {
     // IP 주소 매칭
-    if (!this.ipMatches(rule.sourceIp, sourceIp) || !this.ipMatches(rule.destinationIp, destinationIp)) {
+    if (
+      !this.ipMatches(rule.sourceIp, sourceIp) ||
+      !this.ipMatches(rule.destinationIp, destinationIp)
+    ) {
       return false;
     }
 
@@ -285,7 +304,11 @@ export class NetworkSecurityService {
       return false;
     }
 
-    if (rule.destinationPort && destinationPort && rule.destinationPort !== destinationPort) {
+    if (
+      rule.destinationPort &&
+      destinationPort &&
+      rule.destinationPort !== destinationPort
+    ) {
       return false;
     }
 
@@ -329,20 +352,25 @@ export class NetworkSecurityService {
       lastActivity: new Date(),
       sessionId: crypto.randomUUID(),
       deviceInfo,
-      status: 'active'
+      status: 'active',
     };
 
     this.vpnConnections.push(connection);
     this.securityPolicy.vpnConnections.push(connection);
-    
+
     console.log('Created VPN connection for user:', userId);
     return connection;
   }
 
   // VPN 연결 업데이트
-  updateVPNConnection(connectionId: string, updates: Partial<VPNConnection>): VPNConnection | null {
-    const connectionIndex = this.vpnConnections.findIndex(c => c.id === connectionId);
-    
+  updateVPNConnection(
+    connectionId: string,
+    updates: Partial<VPNConnection>
+  ): VPNConnection | null {
+    const connectionIndex = this.vpnConnections.findIndex(
+      c => c.id === connectionId
+    );
+
     if (connectionIndex === -1) {
       return null;
     }
@@ -350,7 +378,7 @@ export class NetworkSecurityService {
     this.vpnConnections[connectionIndex] = {
       ...this.vpnConnections[connectionIndex],
       ...updates,
-      lastActivity: new Date()
+      lastActivity: new Date(),
     };
 
     console.log('Updated VPN connection:', connectionId);
@@ -360,21 +388,23 @@ export class NetworkSecurityService {
   // VPN 연결 종료
   disconnectVPN(connectionId: string): boolean {
     const connection = this.vpnConnections.find(c => c.id === connectionId);
-    
+
     if (!connection) {
       return false;
     }
 
     connection.status = 'disconnected';
     connection.lastActivity = new Date();
-    
+
     console.log('Disconnected VPN connection:', connectionId);
     return true;
   }
 
   // 네트워크 보안 모니터링
   monitorNetworkSecurity(): NetworkSecurityReport {
-    const activeConnections = this.vpnConnections.filter(c => c.status === 'active');
+    const activeConnections = this.vpnConnections.filter(
+      c => c.status === 'active'
+    );
     const blockedAttempts = this.getBlockedAttempts();
     const securityAlerts = this.getSecurityAlerts();
 
@@ -385,7 +415,11 @@ export class NetworkSecurityService {
       securityAlerts: securityAlerts.length,
       firewallRules: this.firewallRules.filter(r => r.enabled).length,
       networkSegments: this.networkSegments.length,
-      riskLevel: this.calculateRiskLevel(activeConnections, blockedAttempts, securityAlerts)
+      riskLevel: this.calculateRiskLevel(
+        activeConnections,
+        blockedAttempts,
+        securityAlerts
+      ),
     };
   }
 
@@ -443,4 +477,4 @@ export interface NetworkSecurityReport {
   firewallRules: number;
   networkSegments: number;
   riskLevel: 'low' | 'medium' | 'high' | 'critical';
-} 
+}

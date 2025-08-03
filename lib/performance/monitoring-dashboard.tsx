@@ -3,105 +3,138 @@
  * APM, RUM, Infrastructure monitoring 통합
  */
 
-'use client'
+'use client';
 
-import React, { useState, useEffect, useMemo } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Progress } from '@/components/ui/progress'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { AlertTriangle, CheckCircle, Clock, Activity, Database, TrendingUp, TrendingDown, Users } from 'lucide-react'
+import {
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  Activity,
+  Database,
+  TrendingUp,
+  TrendingDown,
+  Users,
+} from 'lucide-react';
+
+import React, { useState, useEffect, useMemo } from 'react';
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+/**
+ * 성능 모니터링 대시보드
+ * APM, RUM, Infrastructure monitoring 통합
+ */
+
+/**
+ * 성능 모니터링 대시보드
+ * APM, RUM, Infrastructure monitoring 통합
+ */
 
 // 성능 메트릭 타입 정의
 interface PerformanceMetrics {
   webVitals: {
-    lcp: number
-    fid: number
-    cls: number
-    fcp: number
-    ttfb: number
-  }
+    lcp: number;
+    fid: number;
+    cls: number;
+    fcp: number;
+    ttfb: number;
+  };
   api: {
-    averageResponseTime: number
-    p95ResponseTime: number
-    p99ResponseTime: number
-    errorRate: number
-    requestsPerSecond: number
-  }
+    averageResponseTime: number;
+    p95ResponseTime: number;
+    p99ResponseTime: number;
+    errorRate: number;
+    requestsPerSecond: number;
+  };
   database: {
-    queryTime: number
-    connectionPool: number
-    slowQueries: number
-    cacheHitRate: number
-  }
+    queryTime: number;
+    connectionPool: number;
+    slowQueries: number;
+    cacheHitRate: number;
+  };
   realtime: {
-    activeConnections: number
-    messagesPerSecond: number
-    latency: number
-    errorRate: number
-  }
+    activeConnections: number;
+    messagesPerSecond: number;
+    latency: number;
+    errorRate: number;
+  };
   infrastructure: {
-    cpuUsage: number
-    memoryUsage: number
-    diskUsage: number
-    networkIO: number
-  }
+    cpuUsage: number;
+    memoryUsage: number;
+    diskUsage: number;
+    networkIO: number;
+  };
 }
 
 interface AlertRule {
-  id: string
-  name: string
-  metric: string
-  threshold: number
-  condition: 'greater' | 'less'
-  severity: 'critical' | 'warning' | 'info'
-  active: boolean
+  id: string;
+  name: string;
+  metric: string;
+  threshold: number;
+  condition: 'greater' | 'less';
+  severity: 'critical' | 'warning' | 'info';
+  active: boolean;
 }
 
 interface Alert {
-  id: string
-  rule: AlertRule
-  value: number
-  timestamp: number
-  resolved: boolean
+  id: string;
+  rule: AlertRule;
+  value: number;
+  timestamp: number;
+  resolved: boolean;
 }
 
 // 성능 모니터링 훅
 function usePerformanceMetrics() {
-  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const response = await fetch('/api/performance/metrics')
-        if (!response.ok) throw new Error('Failed to fetch metrics')
-        const data = await response.json()
-        setMetrics(data)
-        setError(null)
+        const response = await fetch('/api/performance/metrics');
+        if (!response.ok) throw new Error('Failed to fetch metrics');
+        const data = await response.json();
+        setMetrics(data);
+        setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error')
+        setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchMetrics()
-    const interval = setInterval(fetchMetrics, 30000) // 30초마다 업데이트
+    fetchMetrics();
+    const interval = setInterval(fetchMetrics, 30000); // 30초마다 업데이트
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
-  return { metrics, loading, error }
+  return { metrics, loading, error };
 }
 
 // 알림 관리 훅
 function useAlerts() {
-  const [alerts, setAlerts] = useState<Alert[]>([])
+  const [alerts, setAlerts] = useState<Alert[]>([]);
   const alertRules: AlertRule[] = [
     {
       id: '1',
@@ -148,21 +181,22 @@ function useAlerts() {
       severity: 'warning',
       active: true,
     },
-  ]
+  ];
 
   const checkAlerts = (metrics: PerformanceMetrics) => {
-    const now = Date.now()
-    const newAlerts: Alert[] = []
+    const now = Date.now();
+    const newAlerts: Alert[] = [];
 
     alertRules.forEach(rule => {
-      if (!rule.active) return
+      if (!rule.active) return;
 
-      const value = getNestedValue(metrics, rule.metric)
-      if (value === undefined) return
+      const value = getNestedValue(metrics, rule.metric);
+      if (value === undefined) return;
 
-      const shouldAlert = rule.condition === 'greater' 
-        ? value > rule.threshold 
-        : value < rule.threshold
+      const shouldAlert =
+        rule.condition === 'greater'
+          ? value > rule.threshold
+          : value < rule.threshold;
 
       if (shouldAlert) {
         newAlerts.push({
@@ -171,36 +205,38 @@ function useAlerts() {
           value,
           timestamp: now,
           resolved: false,
-        })
+        });
       }
-    })
+    });
 
-    setAlerts(prev => [...newAlerts, ...prev.slice(0, 49)]) // 최대 50개 유지
-  }
+    setAlerts(prev => [...newAlerts, ...prev.slice(0, 49)]); // 최대 50개 유지
+  };
 
-  return { alerts, alertRules, checkAlerts }
+  return { alerts, alertRules, checkAlerts };
 }
 
 // 중첩된 객체 값 가져오기
 function getNestedValue(obj: any, path: string): number | undefined {
-  return path.split('.').reduce((current, key) => current?.[key], obj)
+  return path.split('.').reduce((current, key) => current?.[key], obj);
 }
 
 // 메인 모니터링 대시보드
 export function PerformanceMonitoringDashboard() {
-  const { metrics, loading, error } = usePerformanceMetrics()
-  const { alerts, checkAlerts } = useAlerts()
-  const [timeRange, setTimeRange] = useState('1h')
-  const [selectedMetric, setSelectedMetric] = useState('api')
+  const { metrics, loading, error } = usePerformanceMetrics();
+  const { alerts, checkAlerts } = useAlerts();
+  const [timeRange, setTimeRange] = useState('1h');
+  const [selectedMetric, setSelectedMetric] = useState('api');
 
   useEffect(() => {
     if (metrics) {
-      checkAlerts(metrics)
+      checkAlerts(metrics);
     }
-  }, [metrics, checkAlerts])
+  }, [metrics, checkAlerts]);
 
-  const activeAlerts = alerts.filter(alert => !alert.resolved)
-  const criticalAlerts = activeAlerts.filter(alert => alert.rule.severity === 'critical')
+  const activeAlerts = alerts.filter(alert => !alert.resolved);
+  const criticalAlerts = activeAlerts.filter(
+    alert => alert.rule.severity === 'critical'
+  );
 
   if (loading) {
     return (
@@ -210,7 +246,7 @@ export function PerformanceMonitoringDashboard() {
           <p>성능 데이터 로딩 중...</p>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -220,10 +256,10 @@ export function PerformanceMonitoringDashboard() {
         <AlertTitle>모니터링 오류</AlertTitle>
         <AlertDescription>{error}</AlertDescription>
       </Alert>
-    )
+    );
   }
 
-  if (!metrics) return null
+  if (!metrics) return null;
 
   return (
     <div className="space-y-6">
@@ -231,9 +267,11 @@ export function PerformanceMonitoringDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">성능 모니터링</h1>
-          <p className="text-muted-foreground">실시간 시스템 성능 및 비즈니스 메트릭</p>
+          <p className="text-muted-foreground">
+            실시간 시스템 성능 및 비즈니스 메트릭
+          </p>
         </div>
-        
+
         <div className="flex items-center gap-4">
           <Select value={timeRange} onValueChange={setTimeRange}>
             <SelectTrigger className="w-32">
@@ -247,7 +285,7 @@ export function PerformanceMonitoringDashboard() {
               <SelectItem value="7d">7일</SelectItem>
             </SelectContent>
           </Select>
-          
+
           <Button variant="outline" size="sm">
             <Activity className="h-4 w-4 mr-2" />
             실시간 업데이트
@@ -267,7 +305,7 @@ export function PerformanceMonitoringDashboard() {
               </AlertDescription>
             </Alert>
           )}
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {activeAlerts.slice(0, 6).map(alert => (
               <AlertCard key={alert.id} alert={alert} />
@@ -283,17 +321,29 @@ export function PerformanceMonitoringDashboard() {
           value={`${metrics.api.averageResponseTime.toFixed(0)}ms`}
           change={-12}
           icon={<Clock className="h-4 w-4" />}
-          status={metrics.api.averageResponseTime < 500 ? 'good' : metrics.api.averageResponseTime < 1000 ? 'warning' : 'critical'}
+          status={
+            metrics.api.averageResponseTime < 500
+              ? 'good'
+              : metrics.api.averageResponseTime < 1000
+                ? 'warning'
+                : 'critical'
+          }
         />
-        
+
         <MetricCard
           title="에러율"
           value={`${metrics.api.errorRate.toFixed(2)}%`}
           change={-0.5}
           icon={<AlertTriangle className="h-4 w-4" />}
-          status={metrics.api.errorRate < 1 ? 'good' : metrics.api.errorRate < 5 ? 'warning' : 'critical'}
+          status={
+            metrics.api.errorRate < 1
+              ? 'good'
+              : metrics.api.errorRate < 5
+                ? 'warning'
+                : 'critical'
+          }
         />
-        
+
         <MetricCard
           title="활성 연결"
           value={metrics.realtime.activeConnections.toString()}
@@ -301,13 +351,19 @@ export function PerformanceMonitoringDashboard() {
           icon={<Users className="h-4 w-4" />}
           status="good"
         />
-        
+
         <MetricCard
           title="캐시 적중률"
           value={`${metrics.database.cacheHitRate.toFixed(1)}%`}
           change={2.3}
           icon={<Database className="h-4 w-4" />}
-          status={metrics.database.cacheHitRate > 90 ? 'good' : metrics.database.cacheHitRate > 80 ? 'warning' : 'critical'}
+          status={
+            metrics.database.cacheHitRate > 90
+              ? 'good'
+              : metrics.database.cacheHitRate > 80
+                ? 'warning'
+                : 'critical'
+          }
         />
       </div>
 
@@ -342,16 +398,16 @@ export function PerformanceMonitoringDashboard() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
 
 // 메트릭 카드 컴포넌트
 interface MetricCardProps {
-  title: string
-  value: string
-  change?: number
-  icon: React.ReactNode
-  status: 'good' | 'warning' | 'critical'
+  title: string;
+  value: string;
+  change?: number;
+  icon: React.ReactNode;
+  status: 'good' | 'warning' | 'critical';
 }
 
 function MetricCard({ title, value, change, icon, status }: MetricCardProps) {
@@ -359,7 +415,7 @@ function MetricCard({ title, value, change, icon, status }: MetricCardProps) {
     good: 'text-green-600 bg-green-50 border-green-200',
     warning: 'text-yellow-600 bg-yellow-50 border-yellow-200',
     critical: 'text-red-600 bg-red-50 border-red-200',
-  }
+  };
 
   return (
     <Card className={`${statusColors[status]}`}>
@@ -370,22 +426,26 @@ function MetricCard({ title, value, change, icon, status }: MetricCardProps) {
             <div className="flex items-center gap-2">
               <p className="text-2xl font-bold">{value}</p>
               {change !== undefined && (
-                <div className={`flex items-center text-xs ${
-                  change > 0 ? 'text-green-600' : 'text-red-600'
-                }`}>
-                  {change > 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
+                <div
+                  className={`flex items-center text-xs ${
+                    change > 0 ? 'text-green-600' : 'text-red-600'
+                  }`}
+                >
+                  {change > 0 ? (
+                    <TrendingUp className="h-3 w-3" />
+                  ) : (
+                    <TrendingDown className="h-3 w-3" />
+                  )}
                   <span>{Math.abs(change)}%</span>
                 </div>
               )}
             </div>
           </div>
-          <div className="opacity-60">
-            {icon}
-          </div>
+          <div className="opacity-60">{icon}</div>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 // 알림 카드 컴포넌트
@@ -394,7 +454,7 @@ function AlertCard({ alert }: { alert: Alert }) {
     critical: 'border-red-500 bg-red-50',
     warning: 'border-yellow-500 bg-yellow-50',
     info: 'border-blue-500 bg-blue-50',
-  }
+  };
 
   return (
     <Card className={severityColors[alert.rule.severity]}>
@@ -409,25 +469,29 @@ function AlertCard({ alert }: { alert: Alert }) {
               {new Date(alert.timestamp).toLocaleTimeString('ko-KR')}
             </p>
           </div>
-          <Badge variant={alert.rule.severity === 'critical' ? 'destructive' : 'secondary'}>
+          <Badge
+            variant={
+              alert.rule.severity === 'critical' ? 'destructive' : 'secondary'
+            }
+          >
             {alert.rule.severity}
           </Badge>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 // 개요 탭
 function OverviewTab({ metrics }: { metrics: PerformanceMetrics }) {
   const webVitalsScore = useMemo(() => {
-    let score = 100
-    if (metrics.webVitals.lcp > 2500) score -= 25
-    if (metrics.webVitals.fid > 100) score -= 25
-    if (metrics.webVitals.cls > 0.1) score -= 25
-    if (metrics.webVitals.fcp > 1800) score -= 25
-    return Math.max(0, score)
-  }, [metrics.webVitals])
+    let score = 100;
+    if (metrics.webVitals.lcp > 2500) score -= 25;
+    if (metrics.webVitals.fid > 100) score -= 25;
+    if (metrics.webVitals.cls > 0.1) score -= 25;
+    if (metrics.webVitals.fcp > 1800) score -= 25;
+    return Math.max(0, score);
+  }, [metrics.webVitals]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -440,11 +504,23 @@ function OverviewTab({ metrics }: { metrics: PerformanceMetrics }) {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-3xl font-bold">{webVitalsScore}</span>
-              <Badge variant={webVitalsScore >= 90 ? 'default' : webVitalsScore >= 50 ? 'secondary' : 'destructive'}>
-                {webVitalsScore >= 90 ? 'Good' : webVitalsScore >= 50 ? 'Needs Improvement' : 'Poor'}
+              <Badge
+                variant={
+                  webVitalsScore >= 90
+                    ? 'default'
+                    : webVitalsScore >= 50
+                      ? 'secondary'
+                      : 'destructive'
+                }
+              >
+                {webVitalsScore >= 90
+                  ? 'Good'
+                  : webVitalsScore >= 50
+                    ? 'Needs Improvement'
+                    : 'Poor'}
               </Badge>
             </div>
-            
+
             <div className="space-y-3">
               <WebVitalMetric
                 name="LCP (Largest Contentful Paint)"
@@ -490,7 +566,9 @@ function OverviewTab({ metrics }: { metrics: PerformanceMetrics }) {
             />
             <SystemHealthIndicator
               name="데이터베이스"
-              status={metrics.database.cacheHitRate > 80 ? 'healthy' : 'degraded'}
+              status={
+                metrics.database.cacheHitRate > 80 ? 'healthy' : 'degraded'
+              }
               details={`캐시 적중률: ${metrics.database.cacheHitRate.toFixed(1)}%`}
             />
             <SystemHealthIndicator
@@ -500,70 +578,81 @@ function OverviewTab({ metrics }: { metrics: PerformanceMetrics }) {
             />
             <SystemHealthIndicator
               name="인프라스트럭처"
-              status={metrics.infrastructure.cpuUsage < 80 ? 'healthy' : 'degraded'}
+              status={
+                metrics.infrastructure.cpuUsage < 80 ? 'healthy' : 'degraded'
+              }
               details={`CPU 사용률: ${metrics.infrastructure.cpuUsage.toFixed(1)}%`}
             />
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 // Web Vital 메트릭 컴포넌트
-function WebVitalMetric({ 
-  name, 
-  value, 
-  threshold, 
-  unit, 
-  reverse = false 
-}: { 
-  name: string
-  value: number
-  threshold: number
-  unit: string
-  reverse?: boolean
+function WebVitalMetric({
+  name,
+  value,
+  threshold,
+  unit,
+  reverse = false,
+}: {
+  name: string;
+  value: number;
+  threshold: number;
+  unit: string;
+  reverse?: boolean;
 }) {
-  const isGood = reverse ? value < threshold : value > threshold
-  const percentage = reverse 
+  const isGood = reverse ? value < threshold : value > threshold;
+  const percentage = reverse
     ? Math.min((threshold / value) * 100, 100)
-    : Math.min((value / threshold) * 100, 100)
+    : Math.min((value / threshold) * 100, 100);
 
   return (
     <div className="space-y-2">
       <div className="flex justify-between">
         <span className="text-sm font-medium">{name}</span>
-        <span className="text-sm">{value.toFixed(value < 1 ? 3 : 0)}{unit}</span>
+        <span className="text-sm">
+          {value.toFixed(value < 1 ? 3 : 0)}
+          {unit}
+        </span>
       </div>
-      <Progress 
-        value={percentage} 
+      <Progress
+        value={percentage}
         className={`h-2 ${isGood ? 'bg-green-100' : 'bg-red-100'}`}
       />
     </div>
-  )
+  );
 }
 
 // 시스템 건강도 지표
-function SystemHealthIndicator({ 
-  name, 
-  status, 
-  details 
-}: { 
-  name: string
-  status: 'healthy' | 'degraded' | 'down'
-  details: string
+function SystemHealthIndicator({
+  name,
+  status,
+  details,
+}: {
+  name: string;
+  status: 'healthy' | 'degraded' | 'down';
+  details: string;
 }) {
   const statusConfig = {
     healthy: { color: 'text-green-600', icon: CheckCircle, bg: 'bg-green-100' },
-    degraded: { color: 'text-yellow-600', icon: AlertTriangle, bg: 'bg-yellow-100' },
+    degraded: {
+      color: 'text-yellow-600',
+      icon: AlertTriangle,
+      bg: 'bg-yellow-100',
+    },
     down: { color: 'text-red-600', icon: AlertTriangle, bg: 'bg-red-100' },
-  }
+  };
 
-  const config = statusConfig[status]
-  const Icon = config.icon
+  const config = statusConfig[status];
+  const Icon = config.icon;
 
   return (
-    <div className={`flex items-center justify-between p-3 rounded-lg ${config.bg}`}>
+    <div
+      className={`flex items-center justify-between p-3 rounded-lg ${config.bg}`}
+    >
       <div className="flex items-center gap-3">
         <Icon className={`h-5 w-5 ${config.color}`} />
         <div>
@@ -571,11 +660,23 @@ function SystemHealthIndicator({
           <div className="text-sm text-muted-foreground">{details}</div>
         </div>
       </div>
-      <Badge variant={status === 'healthy' ? 'default' : status === 'degraded' ? 'secondary' : 'destructive'}>
-        {status === 'healthy' ? '정상' : status === 'degraded' ? '성능저하' : '다운'}
+      <Badge
+        variant={
+          status === 'healthy'
+            ? 'default'
+            : status === 'degraded'
+              ? 'secondary'
+              : 'destructive'
+        }
+      >
+        {status === 'healthy'
+          ? '정상'
+          : status === 'degraded'
+            ? '성능저하'
+            : '다운'}
       </Badge>
     </div>
-  )
+  );
 }
 
 // API 탭
@@ -590,15 +691,21 @@ function APITab({ metrics }: { metrics: PerformanceMetrics['api'] }) {
           <div className="space-y-4">
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold">{metrics.averageResponseTime.toFixed(0)}ms</div>
+                <div className="text-2xl font-bold">
+                  {metrics.averageResponseTime.toFixed(0)}ms
+                </div>
                 <div className="text-sm text-muted-foreground">평균</div>
               </div>
               <div>
-                <div className="text-2xl font-bold">{metrics.p95ResponseTime.toFixed(0)}ms</div>
+                <div className="text-2xl font-bold">
+                  {metrics.p95ResponseTime.toFixed(0)}ms
+                </div>
                 <div className="text-sm text-muted-foreground">95th %</div>
               </div>
               <div>
-                <div className="text-2xl font-bold">{metrics.p99ResponseTime.toFixed(0)}ms</div>
+                <div className="text-2xl font-bold">
+                  {metrics.p99ResponseTime.toFixed(0)}ms
+                </div>
                 <div className="text-sm text-muted-foreground">99th %</div>
               </div>
             </div>
@@ -614,11 +721,15 @@ function APITab({ metrics }: { metrics: PerformanceMetrics['api'] }) {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold">{metrics.requestsPerSecond.toFixed(1)}</div>
+                <div className="text-2xl font-bold">
+                  {metrics.requestsPerSecond.toFixed(1)}
+                </div>
                 <div className="text-sm text-muted-foreground">요청/초</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-red-600">{metrics.errorRate.toFixed(2)}%</div>
+                <div className="text-2xl font-bold text-red-600">
+                  {metrics.errorRate.toFixed(2)}%
+                </div>
                 <div className="text-sm text-muted-foreground">에러율</div>
               </div>
             </div>
@@ -626,7 +737,7 @@ function APITab({ metrics }: { metrics: PerformanceMetrics['api'] }) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 // 데이터베이스 탭
@@ -641,11 +752,17 @@ function DatabaseTab({ metrics }: { metrics: PerformanceMetrics['database'] }) {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold">{metrics.queryTime.toFixed(0)}ms</div>
-                <div className="text-sm text-muted-foreground">평균 쿼리 시간</div>
+                <div className="text-2xl font-bold">
+                  {metrics.queryTime.toFixed(0)}ms
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  평균 쿼리 시간
+                </div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-red-600">{metrics.slowQueries}</div>
+                <div className="text-2xl font-bold text-red-600">
+                  {metrics.slowQueries}
+                </div>
                 <div className="text-sm text-muted-foreground">느린 쿼리</div>
               </div>
             </div>
@@ -661,11 +778,15 @@ function DatabaseTab({ metrics }: { metrics: PerformanceMetrics['database'] }) {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold text-green-600">{metrics.cacheHitRate.toFixed(1)}%</div>
+                <div className="text-2xl font-bold text-green-600">
+                  {metrics.cacheHitRate.toFixed(1)}%
+                </div>
                 <div className="text-sm text-muted-foreground">캐시 적중률</div>
               </div>
               <div>
-                <div className="text-2xl font-bold">{metrics.connectionPool}</div>
+                <div className="text-2xl font-bold">
+                  {metrics.connectionPool}
+                </div>
                 <div className="text-sm text-muted-foreground">활성 연결</div>
               </div>
             </div>
@@ -673,7 +794,7 @@ function DatabaseTab({ metrics }: { metrics: PerformanceMetrics['database'] }) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 // 실시간 탭
@@ -688,11 +809,15 @@ function RealtimeTab({ metrics }: { metrics: PerformanceMetrics['realtime'] }) {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold">{metrics.activeConnections}</div>
+                <div className="text-2xl font-bold">
+                  {metrics.activeConnections}
+                </div>
                 <div className="text-sm text-muted-foreground">활성 연결</div>
               </div>
               <div>
-                <div className="text-2xl font-bold">{metrics.messagesPerSecond.toFixed(1)}</div>
+                <div className="text-2xl font-bold">
+                  {metrics.messagesPerSecond.toFixed(1)}
+                </div>
                 <div className="text-sm text-muted-foreground">메시지/초</div>
               </div>
             </div>
@@ -708,11 +833,17 @@ function RealtimeTab({ metrics }: { metrics: PerformanceMetrics['realtime'] }) {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold">{metrics.latency.toFixed(0)}ms</div>
-                <div className="text-sm text-muted-foreground">평균 지연시간</div>
+                <div className="text-2xl font-bold">
+                  {metrics.latency.toFixed(0)}ms
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  평균 지연시간
+                </div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-red-600">{metrics.errorRate.toFixed(2)}%</div>
+                <div className="text-2xl font-bold text-red-600">
+                  {metrics.errorRate.toFixed(2)}%
+                </div>
                 <div className="text-sm text-muted-foreground">에러율</div>
               </div>
             </div>
@@ -720,11 +851,15 @@ function RealtimeTab({ metrics }: { metrics: PerformanceMetrics['realtime'] }) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 // 인프라스트럭처 탭
-function InfrastructureTab({ metrics }: { metrics: PerformanceMetrics['infrastructure'] }) {
+function InfrastructureTab({
+  metrics,
+}: {
+  metrics: PerformanceMetrics['infrastructure'];
+}) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
@@ -746,22 +881,24 @@ function InfrastructureTab({ metrics }: { metrics: PerformanceMetrics['infrastru
         </CardHeader>
         <CardContent>
           <div className="text-center">
-            <div className="text-2xl font-bold">{(metrics.networkIO / 1024 / 1024).toFixed(1)} MB/s</div>
+            <div className="text-2xl font-bold">
+              {(metrics.networkIO / 1024 / 1024).toFixed(1)} MB/s
+            </div>
             <div className="text-sm text-muted-foreground">네트워크 처리량</div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 // 리소스 사용률 컴포넌트
 function ResourceUsage({ name, usage }: { name: string; usage: number }) {
   const getColor = (usage: number) => {
-    if (usage < 60) return 'bg-green-500'
-    if (usage < 80) return 'bg-yellow-500'
-    return 'bg-red-500'
-  }
+    if (usage < 60) return 'bg-green-500';
+    if (usage < 80) return 'bg-yellow-500';
+    return 'bg-red-500';
+  };
 
   return (
     <div className="space-y-2">
@@ -770,11 +907,11 @@ function ResourceUsage({ name, usage }: { name: string; usage: number }) {
         <span className="text-sm">{usage.toFixed(1)}%</span>
       </div>
       <div className="w-full bg-muted rounded-full h-2">
-        <div 
+        <div
           className={`h-2 rounded-full transition-all ${getColor(usage)}`}
           style={{ width: `${usage}%` }}
         />
       </div>
     </div>
-  )
+  );
 }

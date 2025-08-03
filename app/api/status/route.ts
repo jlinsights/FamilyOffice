@@ -1,8 +1,7 @@
 /**
  * Simple System Status API Route
  */
-
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   const response = {
@@ -12,14 +11,14 @@ export async function GET() {
     health: {
       overall: 100,
       core: 100,
-      services: 100
-    }
-  }
-  
-  return NextResponse.json(response, { 
+      services: 100,
+    },
+  };
+
+  return NextResponse.json(response, {
     status: 200,
     headers: {
-      'Cache-Control': 'no-store, no-cache, must-revalidate'
-    }
-  })
+      'Cache-Control': 'no-store, no-cache, must-revalidate',
+    },
+  });
 }

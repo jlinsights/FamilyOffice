@@ -16,12 +16,14 @@ Welcome to the FamilyOffice platform! This comprehensive user manual will guide 
 ### 1. First-Time Login
 
 #### Access the Platform
+
 1. **Navigate to**: https://familyoffice.com
 2. **Click**: "Sign In" button
 3. **Enter**: Your email address and password
 4. **Complete**: Multi-factor authentication (MFA)
 
 #### MFA Setup (First Time Only)
+
 ```typescript
 interface MFASetup {
   step1: {
@@ -46,6 +48,7 @@ interface MFASetup {
 ### 2. Dashboard Overview
 
 #### Main Dashboard Layout
+
 ```typescript
 interface DashboardLayout {
   header: {
@@ -76,12 +79,14 @@ interface DashboardLayout {
 ### 1. Portfolio Overview
 
 #### View Portfolio Summary
+
 1. **Navigate to**: Portfolio > Overview
 2. **View**: Total portfolio value, allocation, performance
 3. **Filter**: By date range, asset class, or individual assets
 4. **Export**: Data to Excel or PDF format
 
 #### Portfolio Metrics
+
 ```typescript
 interface PortfolioMetrics {
   totalValue: {
@@ -112,12 +117,14 @@ interface PortfolioMetrics {
 ### 2. Asset Allocation
 
 #### View Asset Allocation
+
 1. **Navigate to**: Portfolio > Allocation
 2. **View**: Pie chart and detailed breakdown
 3. **Filter**: By asset class, sector, or geography
 4. **Compare**: Against target allocation
 
 #### Allocation Analysis
+
 ```typescript
 interface AllocationAnalysis {
   currentAllocation: {
@@ -143,12 +150,14 @@ interface AllocationAnalysis {
 ### 3. Performance Tracking
 
 #### Performance Analysis
+
 1. **Navigate to**: Portfolio > Performance
 2. **Select**: Time period (1M, 3M, 6M, 1Y, 3Y, 5Y, YTD)
 3. **Compare**: Against benchmarks
 4. **Analyze**: Risk-adjusted returns
 
 #### Performance Metrics
+
 ```typescript
 interface PerformanceMetrics {
   returns: {
@@ -177,12 +186,14 @@ interface PerformanceMetrics {
 ### 1. View Transactions
 
 #### Transaction List
+
 1. **Navigate to**: Transactions > All Transactions
 2. **Filter**: By date, type, asset, or status
 3. **Search**: By symbol, order ID, or confirmation number
 4. **Sort**: By date, amount, or status
 
 #### Transaction Details
+
 ```typescript
 interface TransactionDetails {
   basicInfo: {
@@ -216,6 +227,7 @@ interface TransactionDetails {
 ### 2. Add New Transaction
 
 #### Transaction Entry
+
 1. **Navigate to**: Transactions > Add Transaction
 2. **Select**: Transaction type (Buy, Sell, Dividend, etc.)
 3. **Enter**: Asset symbol or search by name
@@ -223,6 +235,7 @@ interface TransactionDetails {
 5. **Submit**: For approval if required
 
 #### Transaction Form
+
 ```typescript
 interface TransactionForm {
   transactionType: 'buy' | 'sell' | 'dividend' | 'interest' | 'fee';
@@ -242,12 +255,14 @@ interface TransactionForm {
 ### 3. Transaction Approval
 
 #### Approval Workflow
+
 1. **Submit**: Transaction for approval
 2. **Review**: By designated approvers
 3. **Approve/Reject**: With comments
 4. **Execute**: If approved, or cancel if rejected
 
 #### Approval Levels
+
 ```typescript
 interface ApprovalWorkflow {
   level1: {
@@ -273,6 +288,7 @@ interface ApprovalWorkflow {
 ### 1. Standard Reports
 
 #### Available Reports
+
 1. **Portfolio Summary**: Monthly portfolio overview
 2. **Performance Report**: Detailed performance analysis
 3. **Transaction Report**: All transactions for period
@@ -280,10 +296,16 @@ interface ApprovalWorkflow {
 5. **Compliance Report**: Regulatory compliance status
 
 #### Report Generation
+
 ```typescript
 interface ReportGeneration {
   selectReport: {
-    type: 'portfolio_summary' | 'performance' | 'transactions' | 'tax' | 'compliance';
+    type:
+      | 'portfolio_summary'
+      | 'performance'
+      | 'transactions'
+      | 'tax'
+      | 'compliance';
     dateRange: DateRange;
     portfolios: Portfolio[];
   };
@@ -303,12 +325,14 @@ interface ReportGeneration {
 ### 2. Custom Analytics
 
 #### Analytics Dashboard
+
 1. **Navigate to**: Reports > Analytics
 2. **Select**: Metrics to analyze
 3. **Configure**: Time periods and comparisons
 4. **Visualize**: Charts and graphs
 
 #### Analytics Features
+
 ```typescript
 interface AnalyticsFeatures {
   performance: {
@@ -342,12 +366,14 @@ interface AnalyticsFeatures {
 ### 1. Security Features
 
 #### Multi-Factor Authentication
+
 1. **Enable MFA**: Security Settings > MFA Setup
 2. **Choose Method**: Authenticator app or SMS
 3. **Backup Codes**: Save for emergency access
 4. **Test Setup**: Verify authentication works
 
 #### Session Management
+
 ```typescript
 interface SessionManagement {
   activeSessions: {
@@ -368,12 +394,14 @@ interface SessionManagement {
 ### 2. Compliance Monitoring
 
 #### Compliance Dashboard
+
 1. **Navigate to**: Compliance > Overview
 2. **View**: Compliance status by category
 3. **Review**: Alerts and warnings
 4. **Take Action**: Address compliance issues
 
 #### Compliance Categories
+
 ```typescript
 interface ComplianceCategories {
   sox: {
@@ -399,12 +427,14 @@ interface ComplianceCategories {
 ### 1. User Profile
 
 #### Profile Management
+
 1. **Navigate to**: Settings > Profile
 2. **Update**: Personal information
 3. **Upload**: Profile picture
 4. **Save**: Changes
 
 #### Profile Settings
+
 ```typescript
 interface ProfileSettings {
   personalInfo: {
@@ -434,12 +464,14 @@ interface ProfileSettings {
 ### 2. System Preferences
 
 #### Display Settings
+
 1. **Navigate to**: Settings > Preferences
 2. **Configure**: Dashboard layout
 3. **Set**: Default views and filters
 4. **Save**: Preferences
 
 #### System Preferences
+
 ```typescript
 interface SystemPreferences {
   dashboard: {
@@ -466,6 +498,7 @@ interface SystemPreferences {
 ### 1. Getting Help
 
 #### Support Channels
+
 1. **In-App Help**: Click "?" icon for contextual help
 2. **Knowledge Base**: Searchable documentation
 3. **Video Tutorials**: Step-by-step guides
@@ -474,6 +507,7 @@ interface SystemPreferences {
 6. **Phone Support**: +1-555-FAMILY
 
 #### Help Resources
+
 ```typescript
 interface HelpResources {
   documentation: {
@@ -498,12 +532,14 @@ interface HelpResources {
 ### 2. Troubleshooting
 
 #### Common Issues
+
 1. **Login Problems**: Check credentials and MFA
 2. **Performance Issues**: Clear cache and refresh
 3. **Data Not Loading**: Check internet connection
 4. **Report Generation**: Verify permissions and data
 
 #### Troubleshooting Steps
+
 ```typescript
 interface TroubleshootingSteps {
   loginIssues: {
@@ -532,12 +568,14 @@ interface TroubleshootingSteps {
 ### 1. Mobile App
 
 #### App Features
+
 1. **Download**: From App Store or Google Play
 2. **Login**: Same credentials as web platform
 3. **Access**: Core features optimized for mobile
 4. **Sync**: Real-time data synchronization
 
 #### Mobile Features
+
 ```typescript
 interface MobileFeatures {
   portfolio: {
@@ -566,6 +604,7 @@ interface MobileFeatures {
 ### 2. Mobile Security
 
 #### Mobile Security Features
+
 1. **Biometric Authentication**: Fingerprint or Face ID
 2. **App Lock**: Auto-lock after inactivity
 3. **Remote Wipe**: Erase data if device lost
@@ -576,12 +615,14 @@ interface MobileFeatures {
 ### 1. Data Export
 
 #### Export Options
+
 1. **Navigate to**: Data > Export
 2. **Select**: Data type and date range
 3. **Choose**: Format (CSV, Excel, PDF)
 4. **Download**: Or schedule automatic delivery
 
 #### Export Formats
+
 ```typescript
 interface ExportFormats {
   csv: {
@@ -605,12 +646,14 @@ interface ExportFormats {
 ### 2. Third-Party Integrations
 
 #### Available Integrations
+
 1. **Accounting Systems**: QuickBooks, Xero, Sage
 2. **Custody Banks**: Major banks and custodians
 3. **Market Data**: Bloomberg, Reuters, Morningstar
 4. **Tax Software**: TurboTax, H&R Block
 
 #### Integration Setup
+
 ```typescript
 interface IntegrationSetup {
   selectProvider: {
@@ -639,4 +682,4 @@ interface IntegrationSetup {
 **Document Version**: 1.0  
 **Last Updated**: 2024-12-19  
 **Next Review**: 2025-01-19  
-**Owner**: Product Team 
+**Owner**: Product Team

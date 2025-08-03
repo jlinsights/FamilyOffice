@@ -5,12 +5,14 @@ FamilyOffice 프로젝트에 실시간 주식/환율 데이터를 제공하는 �
 ## 🚀 주요 기능
 
 ### 데이터 제공
+
 - **실시간 주식 데이터**: Yahoo Finance + Alpha Vantage API
 - **환율 정보**: 주요 통화쌍 실시간 환율
 - **시장 지수**: 코스피, S&P 500, 나스닥 등
 - **한국 주식 특화**: 삼성전자, SK하이닉스, NAVER 등
 
 ### 고급 기능
+
 - **이중 Failover**: Yahoo Finance ↔ Alpha Vantage 자동 전환
 - **다층 캐싱**: Redis + 메모리 캐시 조합
 - **오류 처리**: 구조화된 로깅 및 알림 시스템
@@ -42,11 +44,13 @@ components/financial/
 ## 🔧 설치 및 설정
 
 ### 1. 의존성 설치
+
 ```bash
 npm install axios redis ioredis node-cache yahoo-finance2
 ```
 
 ### 2. 환경 변수 설정
+
 `.env.local` 파일에 다음 설정을 추가하세요:
 
 ```bash
@@ -67,11 +71,13 @@ REDIS_PASSWORD=your_redis_password
 ### 3. API 키 발급
 
 #### Alpha Vantage API
+
 1. [Alpha Vantage](https://www.alphavantage.co/support/#api-key) 회원가입
 2. 무료 API 키 발급 (일 500회 요청)
 3. `ALPHA_VANTAGE_API_KEY`에 설정
 
 #### Yahoo Finance API (선택사항)
+
 - Yahoo Finance는 대부분 무료로 사용 가능
 - 필요시 RapidAPI를 통해 확장 가능
 
@@ -80,40 +86,40 @@ REDIS_PASSWORD=your_redis_password
 ### 주식 데이터 조회
 
 ```typescript
-import { getStockData, getKoreanStocks } from '@/lib/financial'
+import { getStockData, getKoreanStocks } from '@/lib/financial';
 
 // 개별 주식 조회
-const stockData = await getStockData('005930.KS') // 삼성전자
+const stockData = await getStockData('005930.KS'); // 삼성전자
 if (stockData.success) {
-  console.log('삼성전자 현재가:', stockData.data.price)
+  console.log('삼성전자 현재가:', stockData.data.price);
 }
 
 // 한국 주요 주식 일괄 조회
-const koreanStocks = await getKoreanStocks()
+const koreanStocks = await getKoreanStocks();
 if (koreanStocks.success) {
   koreanStocks.data.forEach(stock => {
-    console.log(`${stock.symbol}: ${stock.price}`)
-  })
+    console.log(`${stock.symbol}: ${stock.price}`);
+  });
 }
 ```
 
 ### 환율 데이터 조회
 
 ```typescript
-import { getForexData, getMajorForexRates } from '@/lib/financial'
+import { getForexData, getMajorForexRates } from '@/lib/financial';
 
 // 개별 환율 조회
-const usdKrw = await getForexData('USD', 'KRW')
+const usdKrw = await getForexData('USD', 'KRW');
 if (usdKrw.success) {
-  console.log('USD/KRW 환율:', usdKrw.data.rate)
+  console.log('USD/KRW 환율:', usdKrw.data.rate);
 }
 
 // 주요 환율 일괄 조회
-const majorRates = await getMajorForexRates()
+const majorRates = await getMajorForexRates();
 if (majorRates.success) {
   majorRates.data.forEach(rate => {
-    console.log(`${rate.fromCurrency}/${rate.toCurrency}: ${rate.rate}`)
-  })
+    console.log(`${rate.fromCurrency}/${rate.toCurrency}: ${rate.rate}`);
+  });
 }
 ```
 
@@ -163,7 +169,7 @@ GET /api/financial/status?detailed=true
 ### 주식 카드 컴포넌트
 
 ```tsx
-import StockCard from '@/components/financial/stock-card'
+import StockCard from '@/components/financial/stock-card';
 
 export default function MyPage() {
   return (
@@ -172,14 +178,14 @@ export default function MyPage() {
       <StockCard symbol="AAPL" autoRefresh={true} />
       <StockCard symbol="TSLA" autoRefresh={true} />
     </div>
-  )
+  );
 }
 ```
 
 ### 환율 카드 컴포넌트
 
 ```tsx
-import ForexCard from '@/components/financial/forex-card'
+import ForexCard from '@/components/financial/forex-card';
 
 export default function ForexPage() {
   return (
@@ -187,30 +193,31 @@ export default function ForexPage() {
       <ForexCard fromCurrency="USD" toCurrency="KRW" autoRefresh={true} />
       <ForexCard fromCurrency="EUR" toCurrency="KRW" autoRefresh={true} />
     </div>
-  )
+  );
 }
 ```
 
 ### 통합 대시보드
 
 ```tsx
-import FinancialDashboard from '@/components/financial/financial-dashboard'
+import FinancialDashboard from '@/components/financial/financial-dashboard';
 
 export default function DashboardPage() {
   return (
     <div className="container mx-auto p-6">
-      <FinancialDashboard 
+      <FinancialDashboard
         autoRefresh={true}
         refreshInterval={300000} // 5분
       />
     </div>
-  )
+  );
 }
 ```
 
 ## ⚡ 성능 최적화
 
 ### 캐싱 전략
+
 - **L1 캐시**: 메모리 캐시 (5분 TTL, 매우 빠름)
 - **L2 캐시**: Redis (5분 TTL, 분산 환경 지원)
 - **Failover**: API 실패 시 캐시된 데이터 사용
@@ -218,34 +225,35 @@ export default function DashboardPage() {
 ### 캐시 설정 조정
 
 ```typescript
-import { updateFinancialConfig } from '@/lib/financial'
+import { updateFinancialConfig } from '@/lib/financial';
 
 updateFinancialConfig({
-  refreshInterval: 2 * 60 * 1000,    // 2분으로 단축
-  cacheTimeout: 10 * 60,             // 10분으로 연장
-  maxRetries: 5,                     // 재시도 횟수 증가
-  fallbackToCache: true,             // 캐시 Fallback 활성화
-  enableRealtime: true               // 실시간 업데이트 활성화
-})
+  refreshInterval: 2 * 60 * 1000, // 2분으로 단축
+  cacheTimeout: 10 * 60, // 10분으로 연장
+  maxRetries: 5, // 재시도 횟수 증가
+  fallbackToCache: true, // 캐시 Fallback 활성화
+  enableRealtime: true, // 실시간 업데이트 활성화
+});
 ```
 
 ### 성능 모니터링
 
 ```typescript
-import { getCacheStats, getErrorStats } from '@/lib/financial'
+import { getCacheStats, getErrorStats } from '@/lib/financial';
 
 // 캐시 성능 확인
-const cacheStats = getCacheStats()
-console.log('캐시 적중률:', cacheStats.memory.hitRate)
+const cacheStats = getCacheStats();
+console.log('캐시 적중률:', cacheStats.memory.hitRate);
 
 // 오류 통계 확인
-const errorStats = getErrorStats()
-console.log('API 오류 통계:', errorStats)
+const errorStats = getErrorStats();
+console.log('API 오류 통계:', errorStats);
 ```
 
 ## 🔍 오류 처리 및 로깅
 
 ### 구조화된 로깅
+
 모든 API 호출, 오류, 성능 메트릭이 자동으로 기록됩니다:
 
 ```json
@@ -265,41 +273,49 @@ console.log('API 오류 통계:', errorStats)
 ```
 
 ### 오류 심각도 분류
+
 - **LOW**: 일반적인 API 오류
 - **MEDIUM**: 네트워크 오류, API 제한
-- **HIGH**: 인증 오류, 설정 문제  
+- **HIGH**: 인증 오류, 설정 문제
 - **CRITICAL**: 모든 API 실패
 
 ### 수동 로깅
 
 ```typescript
-import { withLogging, createTimer } from '@/lib/financial/error-handler'
+import { withLogging, createTimer } from '@/lib/financial/error-handler';
 
 // 자동 로깅이 포함된 함수 실행
-const result = await withLogging('customOperation', async () => {
-  // 여기에 비즈니스 로직
-  return await someApiCall()
-}, { symbol: 'AAPL', userId: '123' })
+const result = await withLogging(
+  'customOperation',
+  async () => {
+    // 여기에 비즈니스 로직
+    return await someApiCall();
+  },
+  { symbol: 'AAPL', userId: '123' }
+);
 
 // 성능 타이머
-const timer = createTimer()
+const timer = createTimer();
 // ... 작업 수행
-timer.stop('operationName', { dataPoints: 100 })
+timer.stop('operationName', { dataPoints: 100 });
 ```
 
 ## 🚨 프로덕션 고려사항
 
 ### API 제한 관리
+
 - **Alpha Vantage**: 무료 플랜 일 500회 제한
 - **Yahoo Finance**: 비공식 API로 제한 불분명
 - **권장**: Alpha Vantage 유료 플랜 고려
 
 ### 확장성
+
 - Redis 클러스터 구성으로 캐시 확장
 - API 키 로테이션 시스템 구현
 - CDN을 통한 정적 데이터 캐싱
 
 ### 모니터링
+
 - 외부 로깅 서비스 연동 (DataDog, Sentry)
 - 알림 시스템 구성 (Slack, PagerDuty)
 - 대시보드 구성 (Grafana, New Relic)
@@ -309,15 +325,19 @@ timer.stop('operationName', { dataPoints: 100 })
 ### 일반적인 문제
 
 1. **API 키 오류**
+
    ```bash
    Error: ALPHA_VANTAGE_API_KEY 환경변수가 설정되지 않았습니다.
    ```
+
    → `.env.local` 파일에 API 키 추가
 
 2. **Redis 연결 실패**
+
    ```bash
    Redis 연결 오류: ECONNREFUSED
    ```
+
    → Redis 서버 실행 또는 환경변수 확인
 
 3. **API 제한 초과**
@@ -332,9 +352,9 @@ timer.stop('operationName', { dataPoints: 100 })
 // 개발 환경에서 상세 로그 활성화
 if (process.env.NODE_ENV === 'development') {
   updateFinancialConfig({
-    refreshInterval: 10000,  // 10초로 단축
-    enableRealtime: true     // 실시간 업데이트
-  })
+    refreshInterval: 10000, // 10초로 단축
+    enableRealtime: true, // 실시간 업데이트
+  });
 }
 ```
 

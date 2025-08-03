@@ -1,8 +1,9 @@
 import request from 'supertest';
-import { app } from '../index';
-import { PortfolioService } from '../services/portfolio.service';
-import { PortfolioRepository } from '../repositories/portfolio.repository';
+
 import { pgPool, redisClient } from '../../../shared/database/connection';
+import { app } from '../index';
+import { PortfolioRepository } from '../repositories/portfolio.repository';
+import { PortfolioService } from '../services/portfolio.service';
 
 describe('Portfolio Service API Tests', () => {
   let authToken: string;
@@ -11,15 +12,13 @@ describe('Portfolio Service API Tests', () => {
   beforeAll(async () => {
     // 테스트 데이터베이스 설정
     await pgPool.query('BEGIN');
-    
+
     // 테스트 사용자 생성 및 인증 토큰 발급
-    const loginResponse = await request(app)
-      .post('/api/auth/login')
-      .send({
-        email: 'test@familyoffice.com',
-        password: 'testpassword123'
-      });
-    
+    const loginResponse = await request(app).post('/api/auth/login').send({
+      email: 'test@familyoffice.com',
+      password: 'testpassword123',
+    });
+
     authToken = loginResponse.body.data.token;
   });
 
@@ -36,7 +35,7 @@ describe('Portfolio Service API Tests', () => {
         name: 'Test Portfolio',
         description: 'Test portfolio for unit testing',
         currency: 'USD',
-        initialBalance: 100000
+        initialBalance: 100000,
       };
 
       const response = await request(app)
@@ -48,14 +47,14 @@ describe('Portfolio Service API Tests', () => {
       expect(response.body.success).toBe(true);
       expect(response.body.data.name).toBe(portfolioData.name);
       expect(response.body.data.currency).toBe(portfolioData.currency);
-      
+
       testPortfolioId = response.body.data.id;
     });
 
     it('should return 400 for invalid portfolio data', async () => {
       const invalidData = {
         name: '', // 빈 이름
-        currency: 'INVALID' // 잘못된 통화
+        currency: 'INVALID', // 잘못된 통화
       };
 
       const response = await request(app)
@@ -120,7 +119,7 @@ describe('Portfolio Service API Tests', () => {
     it('should update portfolio details', async () => {
       const updateData = {
         name: 'Updated Test Portfolio',
-        description: 'Updated description'
+        description: 'Updated description',
       };
 
       const response = await request(app)
@@ -142,7 +141,7 @@ describe('Portfolio Service API Tests', () => {
         name: 'Apple Inc.',
         assetType: 'stock',
         quantity: 100,
-        averagePrice: 150.00
+        averagePrice: 150.0,
       };
 
       const response = await request(app)
@@ -177,9 +176,9 @@ describe('Portfolio Service API Tests', () => {
         targets: [
           { assetType: 'stock', targetWeight: 0.6 },
           { assetType: 'bond', targetWeight: 0.3 },
-          { assetType: 'cash', targetWeight: 0.1 }
+          { assetType: 'cash', targetWeight: 0.1 },
         ],
-        tolerance: 0.05
+        tolerance: 0.05,
       };
 
       const response = await request(app)
@@ -216,7 +215,7 @@ describe('Portfolio Service Business Logic Tests', () => {
             averagePrice: 150,
             currentPrice: 160,
             marketValue: 16000,
-            costBasis: 15000
+            costBasis: 15000,
           },
           {
             symbol: 'GOOGL',
@@ -224,13 +223,14 @@ describe('Portfolio Service Business Logic Tests', () => {
             averagePrice: 2800,
             currentPrice: 2900,
             marketValue: 145000,
-            costBasis: 140000
-          }
-        ]
+            costBasis: 140000,
+          },
+        ],
       };
 
-      const performance = await portfolioService.calculatePerformance(mockPortfolio);
-      
+      const performance =
+        await portfolioService.calculatePerformance(mockPortfolio);
+
       expect(performance.totalGainLoss).toBe(5000);
       expect(performance.totalGainLossPercent).toBeCloseTo(5.26, 2);
     });
@@ -239,11 +239,12 @@ describe('Portfolio Service Business Logic Tests', () => {
       const mockAssets = [
         { symbol: 'AAPL', marketValue: 60000, assetType: 'stock' },
         { symbol: 'BOND', marketValue: 30000, assetType: 'bond' },
-        { symbol: 'CASH', marketValue: 10000, assetType: 'cash' }
+        { symbol: 'CASH', marketValue: 10000, assetType: 'cash' },
       ];
 
-      const allocation = await portfolioService.calculateAssetAllocation(mockAssets);
-      
+      const allocation =
+        await portfolioService.calculateAssetAllocation(mockAssets);
+
       expect(allocation.stock).toBeCloseTo(0.6, 2);
       expect(allocation.bond).toBeCloseTo(0.3, 2);
       expect(allocation.cash).toBeCloseTo(0.1, 2);
@@ -253,9 +254,10 @@ describe('Portfolio Service Business Logic Tests', () => {
   describe('Risk Management', () => {
     it('should calculate portfolio risk metrics', async () => {
       const mockReturns = [0.02, -0.01, 0.03, -0.02, 0.01, 0.02, -0.01, 0.03];
-      
-      const riskMetrics = await portfolioService.calculateRiskMetrics(mockReturns);
-      
+
+      const riskMetrics =
+        await portfolioService.calculateRiskMetrics(mockReturns);
+
       expect(riskMetrics.volatility).toBeGreaterThan(0);
       expect(riskMetrics.sharpeRatio).toBeDefined();
       expect(riskMetrics.maxDrawdown).toBeDefined();
@@ -275,21 +277,27 @@ describe('Database Integration Tests', () => {
       name: 'Integration Test Portfolio',
       description: 'Test portfolio for database integration',
       currency: 'USD',
-      initialBalance: 100000
+      initialBalance: 100000,
     };
 
     const context = {
       tenantId: 'test-tenant',
-      userId: 'test-user'
+      userId: 'test-user',
     };
 
     // 포트폴리오 생성
-    const createdPortfolio = await portfolioRepository.createPortfolio(portfolioData, context);
+    const createdPortfolio = await portfolioRepository.createPortfolio(
+      portfolioData,
+      context
+    );
     expect(createdPortfolio.id).toBeDefined();
     expect(createdPortfolio.name).toBe(portfolioData.name);
 
     // 포트폴리오 조회
-    const retrievedPortfolio = await portfolioRepository.getPortfolioById(createdPortfolio.id, context);
+    const retrievedPortfolio = await portfolioRepository.getPortfolioById(
+      createdPortfolio.id,
+      context
+    );
     expect(retrievedPortfolio).toBeDefined();
     expect(retrievedPortfolio.name).toBe(portfolioData.name);
   });
@@ -298,14 +306,17 @@ describe('Database Integration Tests', () => {
     // 잘못된 데이터베이스 연결로 테스트
     const invalidContext = {
       tenantId: 'invalid-tenant',
-      userId: 'invalid-user'
+      userId: 'invalid-user',
     };
 
     try {
-      await portfolioRepository.getPortfolioById('non-existent', invalidContext);
+      await portfolioRepository.getPortfolioById(
+        'non-existent',
+        invalidContext
+      );
       fail('Should have thrown an error');
     } catch (error) {
       expect(error).toBeDefined();
     }
   });
-}); 
+});

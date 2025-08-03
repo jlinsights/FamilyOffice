@@ -1,22 +1,21 @@
-import { cn } from "@/lib/utils"
-import { designTokens } from "@/lib/design-tokens"
+import { cn } from '@/lib/utils';
 
 interface LoadingSkeletonProps {
-  type: 'card' | 'table' | 'chart' | 'metric' | 'text' | 'avatar' | 'button'
-  count?: number
-  className?: string
-  height?: string
-  width?: string
-  rounded?: boolean
+  type: 'card' | 'table' | 'chart' | 'metric' | 'text' | 'avatar' | 'button';
+  count?: number;
+  className?: string;
+  height?: string;
+  width?: string;
+  rounded?: boolean;
 }
 
-export function LoadingSkeleton({ 
-  type, 
-  count = 1, 
+export function LoadingSkeleton({
+  type,
+  count = 1,
   className,
   height,
   width,
-  rounded = true
+  rounded = true,
 }: LoadingSkeletonProps) {
   const variants = {
     card: 'h-32 w-full',
@@ -25,9 +24,9 @@ export function LoadingSkeleton({
     metric: 'h-16 w-full',
     text: 'h-4 w-full',
     avatar: 'h-10 w-10 rounded-full',
-    button: 'h-10 w-24'
-  }
-  
+    button: 'h-10 w-24',
+  };
+
   const baseClasses = cn(
     'animate-pulse bg-gradient-to-r from-muted via-muted/50 to-muted',
     rounded && 'rounded-lg',
@@ -35,15 +34,15 @@ export function LoadingSkeleton({
     height && `h-[${height}]`,
     width && `w-[${width}]`,
     className
-  )
-  
+  );
+
   return (
     <div className="space-y-4">
       {Array.from({ length: count }).map((_, i) => (
         <div key={i} className={baseClasses} />
       ))}
     </div>
-  )
+  );
 }
 
 // Specialized skeleton components
@@ -54,10 +53,16 @@ export function CardSkeleton({ className }: { className?: string }) {
       <LoadingSkeleton type="text" count={3} />
       <LoadingSkeleton type="button" count={1} className="w-24" />
     </div>
-  )
+  );
 }
 
-export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; columns?: number }) {
+export function TableSkeleton({
+  rows = 5,
+  columns = 4,
+}: {
+  rows?: number;
+  columns?: number;
+}) {
   return (
     <div className="space-y-3">
       {/* Header */}
@@ -66,7 +71,7 @@ export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; column
           <LoadingSkeleton key={i} type="text" className="flex-1 h-6" />
         ))}
       </div>
-      
+
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIndex) => (
         <div key={rowIndex} className="flex gap-4">
@@ -76,7 +81,7 @@ export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; column
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 export function ChartSkeleton({ className }: { className?: string }) {
@@ -89,7 +94,7 @@ export function ChartSkeleton({ className }: { className?: string }) {
         <LoadingSkeleton type="text" count={3} className="w-1/4" />
       </div>
     </div>
-  )
+  );
 }
 
 export function MetricSkeleton({ className }: { className?: string }) {
@@ -99,7 +104,7 @@ export function MetricSkeleton({ className }: { className?: string }) {
       <LoadingSkeleton type="text" count={1} className="h-8 w-1/3" />
       <LoadingSkeleton type="text" count={1} className="h-3 w-1/4" />
     </div>
-  )
+  );
 }
 
 export function DashboardSkeleton() {
@@ -112,5 +117,5 @@ export function DashboardSkeleton() {
       <CardSkeleton />
       <TableSkeleton rows={4} columns={3} />
     </div>
-  )
-} 
+  );
+}

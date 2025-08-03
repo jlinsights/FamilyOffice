@@ -1,7 +1,9 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Crown, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Crown, ArrowRight } from 'lucide-react';
+
+import Link from 'next/link';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 export function MembershipCTASection() {
   return (
@@ -13,16 +15,30 @@ export function MembershipCTASection() {
             Join the Club
           </Badge>
           <h2 className="mb-6 font-bold text-balance animate-slide-up">
-            대한민국 중소중견기업 CEO들의 <span className="text-primary">프리미엄 클럽</span>에 합류하세요
+            대한민국 중소중견기업 CEO들의{' '}
+            <span className="text-primary">프리미엄 클럽</span>에 합류하세요
           </h2>
-          <p className="text-xl text-muted-foreground mb-8 text-balance animate-slide-up leading-relaxed" style={{ animationDelay: '100ms' }}>
+          <p
+            className="text-xl text-muted-foreground mb-8 text-balance animate-slide-up leading-relaxed"
+            style={{ animationDelay: '100ms' }}
+          >
             검증된 멤버들과 함께 더 큰 성장과 성공을 만들어가세요
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '200ms' }}>
+          <div
+            className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up"
+            style={{ animationDelay: '200ms' }}
+          >
             <Button size="lg" asChild className="btn-primary group">
-              <Link href="/contact" className="flex items-center" aria-label="멤버십 신청하기">
+              <Link
+                href="/contact"
+                className="flex items-center"
+                aria-label="멤버십 신청하기"
+              >
                 멤버십 신청하기
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                <ArrowRight
+                  className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                  aria-hidden
+                />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
@@ -31,7 +47,10 @@ export function MembershipCTASection() {
               </Link>
             </Button>
           </div>
-          <div className="mt-8 text-sm text-muted-foreground animate-slide-up" style={{ animationDelay: '300ms' }}>
+          <div
+            className="mt-8 text-sm text-muted-foreground animate-slide-up"
+            style={{ animationDelay: '300ms' }}
+          >
             * 멤버십은 자산 규모와 사업 실적을 검증한 후 승인됩니다
           </div>
         </div>

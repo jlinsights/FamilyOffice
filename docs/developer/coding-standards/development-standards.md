@@ -17,6 +17,7 @@ This document establishes comprehensive coding standards, best practices, and de
 ### 1. Code Organization
 
 #### Project Structure
+
 ```typescript
 interface ProjectStructure {
   frontend: {
@@ -43,6 +44,7 @@ interface ProjectStructure {
 ```
 
 #### File Naming Conventions
+
 ```typescript
 interface FileNamingConventions {
   components: {
@@ -71,6 +73,7 @@ interface FileNamingConventions {
 ### 2. Code Style Guidelines
 
 #### TypeScript Standards
+
 ```typescript
 interface TypeScriptStandards {
   // Use strict TypeScript configuration
@@ -78,7 +81,7 @@ interface TypeScriptStandards {
   noImplicitAny: true;
   strictNullChecks: true;
   strictFunctionTypes: true;
-  
+
   // Naming conventions
   interfaces: 'PascalCase with descriptive names';
   types: 'PascalCase with descriptive names';
@@ -86,7 +89,7 @@ interface TypeScriptStandards {
   functions: 'camelCase with descriptive names';
   variables: 'camelCase with descriptive names';
   constants: 'UPPER_SNAKE_CASE for true constants';
-  
+
   // Type definitions
   preferInterfaces: 'Use interfaces for object shapes';
   avoidAny: 'Avoid using any type';
@@ -96,24 +99,25 @@ interface TypeScriptStandards {
 ```
 
 #### React/Next.js Standards
+
 ```typescript
 interface ReactStandards {
   // Component structure
   functionalComponents: 'Use functional components with hooks';
   componentNaming: 'PascalCase for components';
   propInterfaces: 'Define interfaces for component props';
-  
+
   // State management
   useState: 'Use for local component state';
   useEffect: 'Use for side effects and lifecycle';
   useContext: 'Use for global state when appropriate';
   customHooks: 'Extract reusable logic into custom hooks';
-  
+
   // Performance
   memo: 'Use React.memo for expensive components';
   useMemo: 'Use for expensive calculations';
   useCallback: 'Use for function references in dependencies';
-  
+
   // Error handling
   errorBoundaries: 'Implement error boundaries for component trees';
   tryCatch: 'Use try-catch for async operations';
@@ -126,6 +130,7 @@ interface ReactStandards {
 ### 1. Input Validation
 
 #### Validation Patterns
+
 ```typescript
 interface InputValidation {
   // Client-side validation
@@ -133,13 +138,13 @@ interface InputValidation {
   format: 'Validate email, phone, date formats';
   length: 'Validate string lengths and array sizes';
   range: 'Validate numeric ranges';
-  
+
   // Server-side validation
   sanitization: 'Sanitize all user inputs';
   typeChecking: 'Validate data types on server';
   businessRules: 'Validate business logic rules';
   sqlInjection: 'Use parameterized queries';
-  
+
   // Validation utilities
   zod: 'Use Zod for schema validation';
   yup: 'Use Yup for form validation';
@@ -148,6 +153,7 @@ interface InputValidation {
 ```
 
 #### Security Best Practices
+
 ```typescript
 interface SecurityBestPractices {
   // Authentication
@@ -155,13 +161,13 @@ interface SecurityBestPractices {
   refreshTokens: 'Implement secure refresh token rotation';
   mfa: 'Require multi-factor authentication';
   sessionManagement: 'Implement secure session management';
-  
+
   // Authorization
   rbac: 'Implement role-based access control';
   resourcePermissions: 'Check permissions for each resource';
   apiSecurity: 'Secure all API endpoints';
   dataAccess: 'Implement row-level security';
-  
+
   // Data Protection
   encryption: 'Encrypt sensitive data at rest and in transit';
   hashing: 'Use bcrypt for password hashing';
@@ -173,23 +179,24 @@ interface SecurityBestPractices {
 ### 2. API Security
 
 #### API Security Standards
+
 ```typescript
 interface APISecurityStandards {
   // Authentication
   bearerTokens: 'Use Bearer token authentication';
   apiKeys: 'Use API keys for service-to-service communication';
   rateLimiting: 'Implement rate limiting on all endpoints';
-  
+
   // Authorization
   middleware: 'Use authorization middleware on all routes';
   resourceOwnership: 'Verify resource ownership before access';
   permissionChecks: 'Check specific permissions for actions';
-  
+
   // Input/Output
   validation: 'Validate all inputs and outputs';
   sanitization: 'Sanitize all data before processing';
   errorHandling: 'Return generic error messages to clients';
-  
+
   // Headers
   securityHeaders: {
     'X-Content-Type-Options': 'nosniff';
@@ -205,23 +212,24 @@ interface APISecurityStandards {
 ### 1. Frontend Performance
 
 #### Optimization Techniques
+
 ```typescript
 interface FrontendPerformance {
   // Code splitting
   dynamicImports: 'Use dynamic imports for large components';
   routeBased: 'Split code by routes';
   componentBased: 'Split large components';
-  
+
   // Caching
   browserCache: 'Implement proper cache headers';
   serviceWorker: 'Use service workers for offline functionality';
   cdn: 'Use CDN for static assets';
-  
+
   // Rendering
   ssr: 'Use server-side rendering for SEO';
   csr: 'Use client-side rendering for dynamic content';
   hydration: 'Optimize hydration performance';
-  
+
   // Bundle optimization
   treeShaking: 'Remove unused code';
   minification: 'Minify all production code';
@@ -230,18 +238,19 @@ interface FrontendPerformance {
 ```
 
 #### React Performance
+
 ```typescript
 interface ReactPerformance {
   // Component optimization
   memoization: 'Use React.memo for expensive components';
   useMemo: 'Memoize expensive calculations';
   useCallback: 'Memoize function references';
-  
+
   // State management
   localState: 'Keep state as local as possible';
   context: 'Use Context for global state sparingly';
   externalState: 'Use external state management for complex state';
-  
+
   // Rendering optimization
   virtualization: 'Use virtualization for large lists';
   lazyLoading: 'Lazy load components and images';
@@ -252,18 +261,19 @@ interface ReactPerformance {
 ### 2. Backend Performance
 
 #### Database Optimization
+
 ```typescript
 interface DatabasePerformance {
   // Query optimization
   indexing: 'Create proper indexes for frequently queried columns';
   queryOptimization: 'Optimize SQL queries for performance';
   connectionPooling: 'Use connection pooling for database connections';
-  
+
   // Caching
   redis: 'Use Redis for caching frequently accessed data';
   queryCache: 'Cache expensive database queries';
   sessionCache: 'Cache user sessions in Redis';
-  
+
   // Data management
   pagination: 'Implement proper pagination for large datasets';
   filtering: 'Use efficient filtering and sorting';
@@ -272,18 +282,19 @@ interface DatabasePerformance {
 ```
 
 #### API Performance
+
 ```typescript
 interface APIPerformance {
   // Response optimization
   compression: 'Compress API responses';
   caching: 'Cache API responses where appropriate';
   pagination: 'Implement cursor-based pagination';
-  
+
   // Request handling
   rateLimiting: 'Implement rate limiting to prevent abuse';
   requestValidation: 'Validate requests early in the pipeline';
   errorHandling: 'Handle errors efficiently';
-  
+
   // Monitoring
   metrics: 'Collect performance metrics';
   logging: 'Log performance-relevant events';
@@ -296,6 +307,7 @@ interface APIPerformance {
 ### 1. Testing Strategy
 
 #### Testing Pyramid
+
 ```typescript
 interface TestingPyramid {
   unit: {
@@ -320,6 +332,7 @@ interface TestingPyramid {
 ```
 
 #### Test Structure
+
 ```typescript
 interface TestStructure {
   // Test file organization
@@ -331,12 +344,12 @@ interface TestStructure {
     beforeEach: 'Setup for each test';
     afterEach: 'Cleanup after each test';
   };
-  
+
   // Test data
   fixtures: 'Use test fixtures for consistent data';
   factories: 'Use factories for creating test objects';
   mocks: 'Mock external dependencies';
-  
+
   // Assertions
   matchers: 'Use descriptive assertion messages';
   coverage: 'Test both success and error cases';
@@ -347,18 +360,19 @@ interface TestStructure {
 ### 2. Testing Best Practices
 
 #### Unit Testing
+
 ```typescript
 interface UnitTesting {
   // Component testing
   render: 'Render components in isolation';
   userEvents: 'Simulate user interactions';
   assertions: 'Assert expected outcomes';
-  
+
   // Hook testing
   customHooks: 'Test custom hooks with renderHook';
   stateChanges: 'Test state changes and side effects';
   cleanup: 'Clean up after hook tests';
-  
+
   // Utility testing
   pureFunctions: 'Test pure functions with various inputs';
   edgeCases: 'Test edge cases and error conditions';
@@ -367,18 +381,19 @@ interface UnitTesting {
 ```
 
 #### Integration Testing
+
 ```typescript
 interface IntegrationTesting {
   // API testing
   endpoints: 'Test API endpoints with real requests';
   authentication: 'Test authentication and authorization';
   validation: 'Test input validation and error handling';
-  
+
   // Database testing
   transactions: 'Test database transactions';
   constraints: 'Test database constraints and relationships';
   cleanup: 'Clean up test data after tests';
-  
+
   // External services
   mocking: 'Mock external service calls';
   contracts: 'Test service contracts and interfaces';
@@ -391,18 +406,19 @@ interface IntegrationTesting {
 ### 1. Code Comments
 
 #### Comment Standards
+
 ```typescript
 interface CommentStandards {
   // Function documentation
   jsdoc: 'Use JSDoc for function documentation';
   parameters: 'Document all parameters and return values';
   examples: 'Provide usage examples for complex functions';
-  
+
   // Inline comments
   complexLogic: 'Comment complex business logic';
   algorithms: 'Explain algorithms and data structures';
   workarounds: 'Document workarounds and temporary solutions';
-  
+
   // TODO comments
   format: 'TODO: Description (assignee, date)';
   tracking: 'Track and review TODO comments regularly';
@@ -411,6 +427,7 @@ interface CommentStandards {
 ```
 
 #### Documentation Examples
+
 ```typescript
 /**
  * Calculates the portfolio performance metrics for a given time period
@@ -442,6 +459,7 @@ async function calculatePortfolioPerformance(
 ### 2. API Documentation
 
 #### OpenAPI Standards
+
 ```typescript
 interface OpenAPIStandards {
   // Specification
@@ -453,7 +471,7 @@ interface OpenAPIStandards {
     paths: 'API endpoints and operations';
     components: 'Reusable schemas and parameters';
   };
-  
+
   // Documentation
   descriptions: 'Clear descriptions for all endpoints';
   examples: 'Provide request and response examples';
@@ -467,6 +485,7 @@ interface OpenAPIStandards {
 ### 1. Git Standards
 
 #### Branch Strategy
+
 ```typescript
 interface BranchStrategy {
   main: {
@@ -493,6 +512,7 @@ interface BranchStrategy {
 ```
 
 #### Commit Standards
+
 ```typescript
 interface CommitStandards {
   // Commit message format
@@ -506,7 +526,7 @@ interface CommitStandards {
     test: 'Test additions or changes';
     chore: 'Build or tooling changes';
   };
-  
+
   // Commit guidelines
   atomic: 'One logical change per commit';
   descriptive: 'Clear and descriptive commit messages';
@@ -518,6 +538,7 @@ interface CommitStandards {
 ### 2. Pull Request Standards
 
 #### PR Guidelines
+
 ```typescript
 interface PullRequestStandards {
   // PR template
@@ -528,7 +549,7 @@ interface PullRequestStandards {
     breaking: 'Any breaking changes';
     checklist: 'PR completion checklist';
   };
-  
+
   // Review process
   reviewers: 'At least 2 reviewers for main branch';
   automated: 'All automated checks must pass';
@@ -542,6 +563,7 @@ interface PullRequestStandards {
 ### 1. CI/CD Pipeline
 
 #### Pipeline Stages
+
 ```typescript
 interface CICDPipeline {
   stages: {
@@ -551,13 +573,13 @@ interface CICDPipeline {
     security: 'Security scanning and vulnerability checks';
     deploy: 'Deployment to target environment';
   };
-  
+
   environments: {
     development: 'Local development environment';
     staging: 'Pre-production testing environment';
     production: 'Live production environment';
   };
-  
+
   automation: {
     triggers: 'Automatic triggers on code changes';
     approvals: 'Manual approvals for production';
@@ -567,18 +589,19 @@ interface CICDPipeline {
 ```
 
 #### Deployment Standards
+
 ```typescript
 interface DeploymentStandards {
   // Deployment process
   blueGreen: 'Use blue-green deployment for zero downtime';
   canary: 'Use canary deployment for gradual rollout';
   rollback: 'Maintain ability to rollback quickly';
-  
+
   // Environment management
   configuration: 'Use environment-specific configuration';
   secrets: 'Manage secrets securely';
   monitoring: 'Monitor deployment health';
-  
+
   // Quality gates
   tests: 'All tests must pass before deployment';
   security: 'Security scans must pass';
@@ -591,6 +614,7 @@ interface DeploymentStandards {
 ### 1. Logging Standards
 
 #### Log Levels
+
 ```typescript
 interface LogLevels {
   error: {
@@ -617,18 +641,19 @@ interface LogLevels {
 ```
 
 #### Logging Best Practices
+
 ```typescript
 interface LoggingBestPractices {
   // Structured logging
   format: 'Use structured logging (JSON)';
   context: 'Include relevant context in each log';
   correlation: 'Use correlation IDs for request tracing';
-  
+
   // Security
   pii: 'Never log personally identifiable information';
   secrets: 'Never log secrets or sensitive data';
   sanitization: 'Sanitize log data before output';
-  
+
   // Performance
   async: 'Use asynchronous logging for performance';
   batching: 'Batch log messages when possible';
@@ -639,6 +664,7 @@ interface LoggingBestPractices {
 ### 2. Monitoring Standards
 
 #### Metrics Collection
+
 ```typescript
 interface MetricsCollection {
   // Application metrics
@@ -648,7 +674,7 @@ interface MetricsCollection {
     errorRate: 'Error percentage';
     availability: 'Service uptime percentage';
   };
-  
+
   // Business metrics
   business: {
     userActivity: 'User engagement metrics';
@@ -656,7 +682,7 @@ interface MetricsCollection {
     portfolioValue: 'Total portfolio values';
     complianceStatus: 'Compliance metrics';
   };
-  
+
   // Infrastructure metrics
   infrastructure: {
     cpu: 'CPU utilization';
@@ -672,4 +698,4 @@ interface MetricsCollection {
 **Document Version**: 1.0  
 **Last Updated**: 2024-12-19  
 **Next Review**: 2025-01-19  
-**Owner**: Engineering Team 
+**Owner**: Engineering Team

@@ -81,7 +81,7 @@ export class DataClassificationService {
       accessLogging: false,
       auditRequired: false,
       gdprCompliance: false,
-      soxCompliance: false
+      soxCompliance: false,
     },
     {
       id: 'internal',
@@ -93,7 +93,7 @@ export class DataClassificationService {
       accessLogging: true,
       auditRequired: false,
       gdprCompliance: true,
-      soxCompliance: false
+      soxCompliance: false,
     },
     {
       id: 'confidential',
@@ -105,7 +105,7 @@ export class DataClassificationService {
       accessLogging: true,
       auditRequired: true,
       gdprCompliance: true,
-      soxCompliance: true
+      soxCompliance: true,
     },
     {
       id: 'restricted',
@@ -117,8 +117,8 @@ export class DataClassificationService {
       accessLogging: true,
       auditRequired: true,
       gdprCompliance: true,
-      soxCompliance: true
-    }
+      soxCompliance: true,
+    },
   ];
 
   // 데이터 분류 가져오기
@@ -132,10 +132,7 @@ export class DataClassificationService {
   }
 
   // 데이터 분류 결정
-  static classifyData(
-    dataType: string,
-    content: string
-  ): DataClassification {
+  static classifyData(dataType: string, content: string): DataClassification {
     // 금융 데이터
     if (this.isFinancialData(dataType, content)) {
       return this.getClassification('restricted')!;
@@ -158,40 +155,70 @@ export class DataClassificationService {
   // 금융 데이터 확인
   private static isFinancialData(dataType: string, content: string): boolean {
     const financialKeywords = [
-      'portfolio', 'investment', 'asset', 'wealth', 'financial',
-      'transaction', 'trade', 'balance', 'account', 'fund',
-      'security', 'bond', 'stock', 'derivative', 'option'
+      'portfolio',
+      'investment',
+      'asset',
+      'wealth',
+      'financial',
+      'transaction',
+      'trade',
+      'balance',
+      'account',
+      'fund',
+      'security',
+      'bond',
+      'stock',
+      'derivative',
+      'option',
     ];
 
-    return financialKeywords.some(keyword => 
-      dataType.toLowerCase().includes(keyword) || 
-      content.toLowerCase().includes(keyword)
+    return financialKeywords.some(
+      keyword =>
+        dataType.toLowerCase().includes(keyword) ||
+        content.toLowerCase().includes(keyword)
     );
   }
 
   // 개인정보 확인
   private static isPersonalData(dataType: string, content: string): boolean {
     const personalKeywords = [
-      'name', 'email', 'phone', 'address', 'ssn', 'passport',
-      'birth', 'family', 'personal', 'private', 'identity'
+      'name',
+      'email',
+      'phone',
+      'address',
+      'ssn',
+      'passport',
+      'birth',
+      'family',
+      'personal',
+      'private',
+      'identity',
     ];
 
-    return personalKeywords.some(keyword => 
-      dataType.toLowerCase().includes(keyword) || 
-      content.toLowerCase().includes(keyword)
+    return personalKeywords.some(
+      keyword =>
+        dataType.toLowerCase().includes(keyword) ||
+        content.toLowerCase().includes(keyword)
     );
   }
 
   // 내부 데이터 확인
   private static isInternalData(dataType: string, content: string): boolean {
     const internalKeywords = [
-      'internal', 'operational', 'process', 'workflow',
-      'system', 'configuration', 'setting', 'log'
+      'internal',
+      'operational',
+      'process',
+      'workflow',
+      'system',
+      'configuration',
+      'setting',
+      'log',
     ];
 
-    return internalKeywords.some(keyword => 
-      dataType.toLowerCase().includes(keyword) || 
-      content.toLowerCase().includes(keyword)
+    return internalKeywords.some(
+      keyword =>
+        dataType.toLowerCase().includes(keyword) ||
+        content.toLowerCase().includes(keyword)
     );
   }
 }
@@ -202,8 +229,9 @@ export class DataRetentionService {
     classificationId: string,
     customRetention?: number
   ): DataRetentionPolicy {
-    const classification = DataClassificationService.getClassification(classificationId);
-    
+    const classification =
+      DataClassificationService.getClassification(classificationId);
+
     if (!classification) {
       throw new Error(`Invalid classification: ${classificationId}`);
     }
@@ -212,11 +240,14 @@ export class DataRetentionService {
       id: crypto.randomUUID(),
       classificationId,
       retentionPeriod: customRetention || classification.retentionPeriod,
-      archiveAfter: Math.floor((customRetention || classification.retentionPeriod) * 0.7),
+      archiveAfter: Math.floor(
+        (customRetention || classification.retentionPeriod) * 0.7
+      ),
       deleteAfter: customRetention || classification.retentionPeriod,
-      backupFrequency: classification.level === 'restricted' ? 'daily' : 'weekly',
+      backupFrequency:
+        classification.level === 'restricted' ? 'daily' : 'weekly',
       encryptionRequired: classification.encryptionRequired,
-      accessControls: this.getAccessControls(classification.level)
+      accessControls: this.getAccessControls(classification.level),
     };
   }
 
@@ -242,14 +273,18 @@ export class DataRetentionService {
     policy: DataRetentionPolicy
   ): Promise<void> {
     const now = new Date();
-    const archiveDate = new Date(now.getTime() + policy.archiveAfter * 24 * 60 * 60 * 1000);
-    const deleteDate = new Date(now.getTime() + policy.deleteAfter * 24 * 60 * 60 * 1000);
+    const archiveDate = new Date(
+      now.getTime() + policy.archiveAfter * 24 * 60 * 60 * 1000
+    );
+    const deleteDate = new Date(
+      now.getTime() + policy.deleteAfter * 24 * 60 * 60 * 1000
+    );
 
     // 보존 정책 스케줄링
     await this.scheduleDataRetention(dataId, {
       archiveDate,
       deleteDate,
-      policy
+      policy,
     });
   }
 
@@ -280,7 +315,7 @@ export class GDPRService {
       email,
       gdprRights: this.getDefaultGDPRRights(),
       dataProcessing: [],
-      consentHistory: []
+      consentHistory: [],
     };
   }
 
@@ -294,7 +329,7 @@ export class GDPRService {
       rightToObject: true,
       rightToRestriction: true,
       automatedDecisionMaking: false,
-      profiling: false
+      profiling: false,
     };
   }
 
@@ -314,7 +349,7 @@ export class GDPRService {
       granted,
       legalBasis,
       dataCategories,
-      purpose
+      purpose,
     };
 
     subject.consentHistory.push(record);
@@ -340,7 +375,7 @@ export class GDPRService {
       automatedDecisionMaking: false,
       profiling: false,
       internationalTransfers: false,
-      safeguards: []
+      safeguards: [],
     };
 
     subject.dataProcessing.push(processing);
@@ -382,7 +417,7 @@ export class GDPRService {
       subjectId: subject.id,
       dataProcessing: subject.dataProcessing,
       consentHistory: subject.consentHistory,
-      gdprRights: subject.gdprRights
+      gdprRights: subject.gdprRights,
     };
   }
 
@@ -412,7 +447,7 @@ export class GDPRService {
     console.log('Executing right to portability for:', subject.id);
     return {
       format: requestDetails.format || 'json',
-      data: subject.dataProcessing
+      data: subject.dataProcessing,
     };
   }
 
@@ -433,4 +468,4 @@ export class GDPRService {
     console.log('Executing right to restriction for:', subject.id);
     return { success: true, restrictionsApplied: requestDetails.restrictions };
   }
-} 
+}

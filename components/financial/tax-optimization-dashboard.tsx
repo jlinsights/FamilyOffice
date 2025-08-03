@@ -1,106 +1,106 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { LoadingSkeleton } from '@/components/ui/loading-skeleton'
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  DollarSign, 
+import {
+  TrendingUp,
+  DollarSign,
   Calculator,
   AlertCircle,
   CheckCircle,
-  Info
-} from 'lucide-react'
-import { cn } from '@/lib/utils'
+  Info,
+} from 'lucide-react';
+
+import { useState, useEffect } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
 
 interface TaxOptimizationData {
   dividendTax: {
-    currentTax: number
-    optimizedTax: number
-    savings: number
-    strategies: string[]
-  }
+    currentTax: number;
+    optimizedTax: number;
+    savings: number;
+    strategies: string[];
+  };
   capitalGainsTax: {
-    currentTax: number
-    optimizedTax: number
-    savings: number
-    strategies: string[]
-  }
+    currentTax: number;
+    optimizedTax: number;
+    savings: number;
+    strategies: string[];
+  };
   corporateTax: {
-    currentTax: number
-    optimizedTax: number
-    savings: number
-    strategies: string[]
-  }
+    currentTax: number;
+    optimizedTax: number;
+    savings: number;
+    strategies: string[];
+  };
   recommendations: Array<{
-    category: string
-    title: string
-    description: string
-    impact: 'high' | 'medium' | 'low'
-    implementation: string
-  }>
+    category: string;
+    title: string;
+    description: string;
+    impact: 'high' | 'medium' | 'low';
+    implementation: string;
+  }>;
   koreanMarketSpecific: Array<{
-    title: string
-    description: string
-    benefit: string
-  }>
+    title: string;
+    description: string;
+    benefit: string;
+  }>;
 }
 
 export function TaxOptimizationDashboard() {
-  const [data, setData] = useState<TaxOptimizationData | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [data, setData] = useState<TaxOptimizationData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchTaxData = async () => {
     try {
-      setIsLoading(true)
-      setError(null)
-      
-      const response = await fetch('/api/financial/tax-optimization')
-      const result = await response.json()
-      
+      setIsLoading(true);
+      setError(null);
+
+      const response = await fetch('/api/financial/tax-optimization');
+      const result = await response.json();
+
       if (result.success) {
-        setData(result.data)
+        setData(result.data);
       } else {
-        setError(result.message || '세무 데이터를 가져오는데 실패했습니다.')
+        setError(result.message || '세무 데이터를 가져오는데 실패했습니다.');
       }
     } catch (err) {
-      setError('네트워크 오류가 발생했습니다.')
-      console.error('Tax data fetch error:', err)
+      setError('네트워크 오류가 발생했습니다.');
+      console.error('Tax data fetch error:', err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchTaxData()
-  }, [])
+    fetchTaxData();
+  }, []);
 
   const formatCurrency = (num: number) => {
     return new Intl.NumberFormat('ko-KR', {
       style: 'currency',
-      currency: 'KRW'
-    }).format(num)
-  }
+      currency: 'KRW',
+    }).format(num);
+  };
 
   const getImpactColor = (impact: 'high' | 'medium' | 'low') => {
     switch (impact) {
       case 'high':
-        return 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+        return 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400';
       case 'medium':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
       case 'low':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
     }
-  }
+  };
 
   if (isLoading) {
-    return <LoadingSkeleton type="card" count={3} className="h-96" />
+    return <LoadingSkeleton type="card" count={3} className="h-96" />;
   }
 
   if (error) {
@@ -110,11 +110,13 @@ export function TaxOptimizationDashboard() {
           <div className="flex items-center gap-3">
             <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400" />
             <div>
-              <h3 className="font-semibold text-red-900 dark:text-red-100">데이터 로드 실패</h3>
+              <h3 className="font-semibold text-red-900 dark:text-red-100">
+                데이터 로드 실패
+              </h3>
               <p className="text-red-700 dark:text-red-300 text-sm">{error}</p>
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={fetchTaxData}
                 className="mt-2"
               >
@@ -124,12 +126,15 @@ export function TaxOptimizationDashboard() {
           </div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
-  if (!data) return null
+  if (!data) return null;
 
-  const totalSavings = (data.dividendTax?.savings || 0) + (data.capitalGainsTax?.savings || 0) + (data.corporateTax?.savings || 0)
+  const totalSavings =
+    (data.dividendTax?.savings || 0) +
+    (data.capitalGainsTax?.savings || 0) +
+    (data.corporateTax?.savings || 0);
 
   return (
     <div className="space-y-6">
@@ -141,7 +146,10 @@ export function TaxOptimizationDashboard() {
             한국 세법에 맞춘 세무 최적화 전략
           </p>
         </div>
-        <Badge variant="outline" className="text-green-600 dark:text-green-400 border-green-200 dark:border-green-800">
+        <Badge
+          variant="outline"
+          className="text-green-600 dark:text-green-400 border-green-200 dark:border-green-800"
+        >
           총 절약: {formatCurrency(totalSavings)}
         </Badge>
       </div>
@@ -159,15 +167,21 @@ export function TaxOptimizationDashboard() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">현재 세금</span>
-                <span className="font-semibold">{formatCurrency(data.dividendTax?.currentTax || 0)}</span>
+                <span className="font-semibold">
+                  {formatCurrency(data.dividendTax?.currentTax || 0)}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">최적화 후</span>
-                <span className="font-semibold text-green-600 dark:text-green-400">{formatCurrency(data.dividendTax?.optimizedTax || 0)}</span>
+                <span className="font-semibold text-green-600 dark:text-green-400">
+                  {formatCurrency(data.dividendTax?.optimizedTax || 0)}
+                </span>
               </div>
               <div className="flex justify-between items-center pt-2 border-t">
                 <span className="text-sm font-medium">절약액</span>
-                <span className="font-bold text-green-600 dark:text-green-400">+{formatCurrency(data.dividendTax?.savings || 0)}</span>
+                <span className="font-bold text-green-600 dark:text-green-400">
+                  +{formatCurrency(data.dividendTax?.savings || 0)}
+                </span>
               </div>
             </div>
           </CardContent>
@@ -184,15 +198,21 @@ export function TaxOptimizationDashboard() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">현재 세금</span>
-                <span className="font-semibold">{formatCurrency(data.capitalGainsTax?.currentTax || 0)}</span>
+                <span className="font-semibold">
+                  {formatCurrency(data.capitalGainsTax?.currentTax || 0)}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">최적화 후</span>
-                <span className="font-semibold text-green-600 dark:text-green-400">{formatCurrency(data.capitalGainsTax?.optimizedTax || 0)}</span>
+                <span className="font-semibold text-green-600 dark:text-green-400">
+                  {formatCurrency(data.capitalGainsTax?.optimizedTax || 0)}
+                </span>
               </div>
               <div className="flex justify-between items-center pt-2 border-t">
                 <span className="text-sm font-medium">절약액</span>
-                <span className="font-bold text-green-600 dark:text-green-400">+{formatCurrency(data.capitalGainsTax?.savings || 0)}</span>
+                <span className="font-bold text-green-600 dark:text-green-400">
+                  +{formatCurrency(data.capitalGainsTax?.savings || 0)}
+                </span>
               </div>
             </div>
           </CardContent>
@@ -209,15 +229,21 @@ export function TaxOptimizationDashboard() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">현재 세금</span>
-                <span className="font-semibold">{formatCurrency(data.corporateTax?.currentTax || 0)}</span>
+                <span className="font-semibold">
+                  {formatCurrency(data.corporateTax?.currentTax || 0)}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">최적화 후</span>
-                <span className="font-semibold text-green-600 dark:text-green-400">{formatCurrency(data.corporateTax?.optimizedTax || 0)}</span>
+                <span className="font-semibold text-green-600 dark:text-green-400">
+                  {formatCurrency(data.corporateTax?.optimizedTax || 0)}
+                </span>
               </div>
               <div className="flex justify-between items-center pt-2 border-t">
                 <span className="text-sm font-medium">절약액</span>
-                <span className="font-bold text-green-600 dark:text-green-400">+{formatCurrency(data.corporateTax?.savings || 0)}</span>
+                <span className="font-bold text-green-600 dark:text-green-400">
+                  +{formatCurrency(data.corporateTax?.savings || 0)}
+                </span>
               </div>
             </div>
           </CardContent>
@@ -235,15 +261,23 @@ export function TaxOptimizationDashboard() {
         <CardContent>
           <div className="space-y-4">
             {(data.recommendations || []).map((recommendation, index) => (
-              <div key={index} className="border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+              <div
+                key={index}
+                className="border rounded-lg p-4 hover:bg-muted/50 transition-colors"
+              >
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <h4 className="font-semibold">{recommendation.title}</h4>
-                    <p className="text-sm text-muted-foreground">{recommendation.description}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {recommendation.description}
+                    </p>
                   </div>
                   <Badge className={getImpactColor(recommendation.impact)}>
-                    {recommendation.impact === 'high' ? '높음' : 
-                     recommendation.impact === 'medium' ? '보통' : '낮음'}
+                    {recommendation.impact === 'high'
+                      ? '높음'
+                      : recommendation.impact === 'medium'
+                        ? '보통'
+                        : '낮음'}
                   </Badge>
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -266,9 +300,14 @@ export function TaxOptimizationDashboard() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {(data.koreanMarketSpecific || []).map((strategy, index) => (
-              <div key={index} className="border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+              <div
+                key={index}
+                className="border rounded-lg p-4 hover:bg-muted/50 transition-colors"
+              >
                 <h4 className="font-semibold mb-2">{strategy.title}</h4>
-                <p className="text-sm text-muted-foreground mb-2">{strategy.description}</p>
+                <p className="text-sm text-muted-foreground mb-2">
+                  {strategy.description}
+                </p>
                 <div className="text-sm font-medium text-green-600 dark:text-green-400">
                   {strategy.benefit}
                 </div>
@@ -302,16 +341,18 @@ export function TaxOptimizationDashboard() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-2 text-sm">
-              {(data.capitalGainsTax?.strategies || []).map((strategy, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
-                  <span>{strategy}</span>
-                </li>
-              ))}
+              {(data.capitalGainsTax?.strategies || []).map(
+                (strategy, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                    <span>{strategy}</span>
+                  </li>
+                )
+              )}
             </ul>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
-} 
+  );
+}

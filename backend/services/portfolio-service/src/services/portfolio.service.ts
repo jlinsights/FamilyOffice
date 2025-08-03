@@ -1,7 +1,7 @@
-import { PortfolioRepository } from '../repositories/portfolio.repository';
-import { QueueManager } from '../../../shared/messaging/queue';
 import { logger } from '../../../shared/logging/logger';
+import { QueueManager } from '../../../shared/messaging/queue';
 import { metricsCollector } from '../../../shared/monitoring/metrics';
+import { PortfolioRepository } from '../repositories/portfolio.repository';
 import {
   Portfolio,
   PortfolioAsset,
@@ -73,11 +73,17 @@ export class PortfolioService {
         userId: context.userId,
       });
 
-      metricsCollector.recordError('portfolio-service', 'create_portfolio_failed');
+      metricsCollector.recordError(
+        'portfolio-service',
+        'create_portfolio_failed'
+      );
 
       return {
         success: false,
-        error: error instanceof Error ? error.message : '포트폴리오 생성 중 오류가 발생했습니다.',
+        error:
+          error instanceof Error
+            ? error.message
+            : '포트폴리오 생성 중 오류가 발생했습니다.',
         timestamp: new Date(),
       };
     }
@@ -114,7 +120,10 @@ export class PortfolioService {
 
       return {
         success: false,
-        error: error instanceof Error ? error.message : '포트폴리오 조회 중 오류가 발생했습니다.',
+        error:
+          error instanceof Error
+            ? error.message
+            : '포트폴리오 조회 중 오류가 발생했습니다.',
         timestamp: new Date(),
       };
     }
@@ -139,11 +148,17 @@ export class PortfolioService {
         tenantId: context.tenantId,
       });
 
-      metricsCollector.recordError('portfolio-service', 'get_portfolios_failed');
+      metricsCollector.recordError(
+        'portfolio-service',
+        'get_portfolios_failed'
+      );
 
       return {
         success: false,
-        error: error instanceof Error ? error.message : '포트폴리오 목록 조회 중 오류가 발생했습니다.',
+        error:
+          error instanceof Error
+            ? error.message
+            : '포트폴리오 목록 조회 중 오류가 발생했습니다.',
         timestamp: new Date(),
       };
     }
@@ -156,7 +171,11 @@ export class PortfolioService {
     context: TenantContext
   ): Promise<ApiResponse<Portfolio | null>> {
     try {
-      const portfolio = await this.repository.updatePortfolio(id, request, context);
+      const portfolio = await this.repository.updatePortfolio(
+        id,
+        request,
+        context
+      );
 
       if (!portfolio) {
         return {
@@ -189,11 +208,17 @@ export class PortfolioService {
         error: error instanceof Error ? error.message : 'Unknown error',
       });
 
-      metricsCollector.recordError('portfolio-service', 'update_portfolio_failed');
+      metricsCollector.recordError(
+        'portfolio-service',
+        'update_portfolio_failed'
+      );
 
       return {
         success: false,
-        error: error instanceof Error ? error.message : '포트폴리오 업데이트 중 오류가 발생했습니다.',
+        error:
+          error instanceof Error
+            ? error.message
+            : '포트폴리오 업데이트 중 오류가 발생했습니다.',
         timestamp: new Date(),
       };
     }
@@ -207,7 +232,10 @@ export class PortfolioService {
   ): Promise<ApiResponse<PortfolioAsset>> {
     try {
       // 포트폴리오 존재 확인
-      const portfolio = await this.repository.getPortfolio(portfolioId, context);
+      const portfolio = await this.repository.getPortfolio(
+        portfolioId,
+        context
+      );
       if (!portfolio) {
         return {
           success: false,
@@ -255,7 +283,10 @@ export class PortfolioService {
 
       return {
         success: false,
-        error: error instanceof Error ? error.message : '자산 추가 중 오류가 발생했습니다.',
+        error:
+          error instanceof Error
+            ? error.message
+            : '자산 추가 중 오류가 발생했습니다.',
         timestamp: new Date(),
       };
     }
@@ -267,7 +298,10 @@ export class PortfolioService {
     context: TenantContext
   ): Promise<ApiResponse<PortfolioAsset[]>> {
     try {
-      const assets = await this.repository.getPortfolioAssets(portfolioId, context);
+      const assets = await this.repository.getPortfolioAssets(
+        portfolioId,
+        context
+      );
 
       return {
         success: true,
@@ -284,7 +318,10 @@ export class PortfolioService {
 
       return {
         success: false,
-        error: error instanceof Error ? error.message : '자산 조회 중 오류가 발생했습니다.',
+        error:
+          error instanceof Error
+            ? error.message
+            : '자산 조회 중 오류가 발생했습니다.',
         timestamp: new Date(),
       };
     }
@@ -322,11 +359,17 @@ export class PortfolioService {
         error: error instanceof Error ? error.message : 'Unknown error',
       });
 
-      metricsCollector.recordError('portfolio-service', 'calculate_stats_failed');
+      metricsCollector.recordError(
+        'portfolio-service',
+        'calculate_stats_failed'
+      );
 
       return {
         success: false,
-        error: error instanceof Error ? error.message : '통계 계산 중 오류가 발생했습니다.',
+        error:
+          error instanceof Error
+            ? error.message
+            : '통계 계산 중 오류가 발생했습니다.',
         timestamp: new Date(),
       };
     }
@@ -338,7 +381,10 @@ export class PortfolioService {
     context: TenantContext
   ): Promise<ApiResponse<AssetAllocation[]>> {
     try {
-      const assets = await this.repository.getPortfolioAssets(portfolioId, context);
+      const assets = await this.repository.getPortfolioAssets(
+        portfolioId,
+        context
+      );
       const allocation = this.calculateAssetAllocation(assets);
 
       return {
@@ -352,11 +398,17 @@ export class PortfolioService {
         error: error instanceof Error ? error.message : 'Unknown error',
       });
 
-      metricsCollector.recordError('portfolio-service', 'asset_allocation_failed');
+      metricsCollector.recordError(
+        'portfolio-service',
+        'asset_allocation_failed'
+      );
 
       return {
         success: false,
-        error: error instanceof Error ? error.message : '자산 할당 분석 중 오류가 발생했습니다.',
+        error:
+          error instanceof Error
+            ? error.message
+            : '자산 할당 분석 중 오류가 발생했습니다.',
         timestamp: new Date(),
       };
     }
@@ -368,13 +420,16 @@ export class PortfolioService {
     context: TenantContext
   ): Promise<void> {
     try {
-      const assets = await this.repository.getPortfolioAssets(portfolioId, context);
+      const assets = await this.repository.getPortfolioAssets(
+        portfolioId,
+        context
+      );
       const allocation = this.calculateAssetAllocation(assets);
 
       // 리밸런싱 임계값 (5% 이상 편차)
       const rebalancingThreshold = 0.05;
       const needsRebalancing = allocation.some(
-        (asset) => Math.abs(asset.deviation) > rebalancingThreshold
+        asset => Math.abs(asset.deviation) > rebalancingThreshold
       );
 
       if (needsRebalancing) {
@@ -498,14 +553,20 @@ export class PortfolioService {
   }
 
   // 자산 할당 계산
-  private calculateAssetAllocation(assets: PortfolioAsset[]): AssetAllocation[] {
-    const totalValue = assets.reduce((sum, asset) => sum + asset.marketValue, 0);
-    
+  private calculateAssetAllocation(
+    assets: PortfolioAsset[]
+  ): AssetAllocation[] {
+    const totalValue = assets.reduce(
+      (sum, asset) => sum + asset.marketValue,
+      0
+    );
+
     const allocationMap = new Map<string, AssetAllocation>();
 
     for (const asset of assets) {
       const key = asset.assetType;
-      const weight = totalValue > 0 ? (asset.marketValue / totalValue) * 100 : 0;
+      const weight =
+        totalValue > 0 ? (asset.marketValue / totalValue) * 100 : 0;
 
       if (allocationMap.has(key)) {
         const existing = allocationMap.get(key)!;
@@ -531,14 +592,20 @@ export class PortfolioService {
   }
 
   // 위험 지표 계산
-  private calculateRiskMetrics(assets: PortfolioAsset[]): PortfolioStats['riskMetrics'] {
+  private calculateRiskMetrics(
+    assets: PortfolioAsset[]
+  ): PortfolioStats['riskMetrics'] {
     // 간단한 위험 지표 계산 (실제로는 더 복잡한 계산 필요)
-    const totalValue = assets.reduce((sum, asset) => sum + asset.marketValue, 0);
+    const totalValue = assets.reduce(
+      (sum, asset) => sum + asset.marketValue,
+      0
+    );
     const totalCost = assets.reduce((sum, asset) => sum + asset.costBasis, 0);
-    
+
     const volatility = 0.15; // 임시 값 (실제로는 히스토리컬 데이터 필요)
-    const sharpeRatio = totalCost > 0 ? (totalValue - totalCost) / (totalCost * volatility) : 0;
-    const maxDrawdown = 0.10; // 임시 값
+    const sharpeRatio =
+      totalCost > 0 ? (totalValue - totalCost) / (totalCost * volatility) : 0;
+    const maxDrawdown = 0.1; // 임시 값
     const beta = 1.0; // 임시 값
 
     return {
@@ -550,7 +617,9 @@ export class PortfolioService {
   }
 
   // 입력 검증
-  private validateCreatePortfolioRequest(request: CreatePortfolioRequest): void {
+  private validateCreatePortfolioRequest(
+    request: CreatePortfolioRequest
+  ): void {
     if (!request.name || request.name.trim().length === 0) {
       throw new Error('포트폴리오 이름은 필수입니다.');
     }
@@ -575,4 +644,4 @@ export class PortfolioService {
       }
     }
   }
-} 
+}

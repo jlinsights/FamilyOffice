@@ -1,16 +1,30 @@
-import { useState } from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Menu, X, Home, User, BarChart3, Calendar, FileText, Settings, LogOut } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import {
+  Menu,
+  X,
+  Home,
+  User,
+  BarChart3,
+  Calendar,
+  FileText,
+  Settings,
+  LogOut,
+} from 'lucide-react';
+
+import { useState } from 'react';
+
+import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+
+import { cn } from '@/lib/utils';
 
 interface NavigationItem {
-  href: string
-  label: string
-  icon: React.ComponentType<{ className?: string }>
-  description?: string
-  badge?: string
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description?: string;
+  badge?: string;
 }
 
 const navigationItems: NavigationItem[] = [
@@ -18,44 +32,44 @@ const navigationItems: NavigationItem[] = [
     href: '/',
     label: '홈',
     icon: Home,
-    description: '메인 대시보드'
+    description: '메인 대시보드',
   },
   {
     href: '/dashboard',
     label: '대시보드',
     icon: BarChart3,
-    description: '포트폴리오 관리'
+    description: '포트폴리오 관리',
   },
   {
     href: '/program',
     label: '프로그램',
     icon: Calendar,
     description: '교육 프로그램',
-    badge: 'NEW'
+    badge: 'NEW',
   },
   {
     href: '/services',
     label: '서비스',
     icon: FileText,
-    description: '컨설팅 서비스'
+    description: '컨설팅 서비스',
   },
   {
     href: '/contact',
     label: '문의',
     icon: User,
-    description: '상담 신청'
-  }
-]
+    description: '상담 신청',
+  },
+];
 
 export function MobileNav() {
-  const [isOpen, setIsOpen] = useState(false)
-  
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="md:hidden">
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             size="sm"
             className="relative"
             aria-label="메뉴 열기"
@@ -70,7 +84,9 @@ export function MobileNav() {
             <div className="flex items-center justify-between p-6 border-b">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">F</span>
+                  <span className="text-primary-foreground font-bold text-sm">
+                    F
+                  </span>
                 </div>
                 <span className="font-semibold text-lg">FamilyOffice</span>
               </div>
@@ -83,12 +99,12 @@ export function MobileNav() {
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            
+
             {/* Navigation */}
             <nav className="flex-1 p-6">
               <div className="space-y-2">
-                {navigationItems.map((item) => {
-                  const Icon = item.icon
+                {navigationItems.map(item => {
+                  const Icon = item.icon;
                   return (
                     <Link
                       key={item.href}
@@ -99,12 +115,16 @@ export function MobileNav() {
                         'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2'
                       )}
                       onClick={() => setIsOpen(false)}
-                      aria-describedby={item.description ? `${item.href}-desc` : undefined}
+                      aria-describedby={
+                        item.description ? `${item.href}-desc` : undefined
+                      }
                     >
                       <Icon className="h-5 w-5 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="font-medium truncate">{item.label}</span>
+                          <span className="font-medium truncate">
+                            {item.label}
+                          </span>
                           {item.badge && (
                             <span className="px-2 py-0.5 text-xs font-medium bg-primary text-primary-foreground rounded-full">
                               {item.badge}
@@ -112,7 +132,7 @@ export function MobileNav() {
                           )}
                         </div>
                         {item.description && (
-                          <p 
+                          <p
                             id={`${item.href}-desc`}
                             className="text-sm text-muted-foreground truncate"
                           >
@@ -121,11 +141,11 @@ export function MobileNav() {
                         )}
                       </div>
                     </Link>
-                  )
+                  );
                 })}
               </div>
             </nav>
-            
+
             {/* Footer */}
             <div className="p-6 border-t space-y-3">
               <Link
@@ -140,13 +160,13 @@ export function MobileNav() {
                 <Settings className="h-4 w-4" />
                 <span className="font-medium">설정</span>
               </Link>
-              
+
               <Button
                 variant="ghost"
                 className="w-full justify-start gap-3 px-3 py-2 h-auto"
                 onClick={() => {
                   // 로그아웃 로직
-                  setIsOpen(false)
+                  setIsOpen(false);
                 }}
               >
                 <LogOut className="h-4 w-4" />
@@ -157,7 +177,7 @@ export function MobileNav() {
         </SheetContent>
       </Sheet>
     </div>
-  )
+  );
 }
 
 // Quick actions component for mobile
@@ -177,7 +197,7 @@ export function MobileQuickActions() {
               <span className="text-xs">상담</span>
             </Link>
           </Button>
-          
+
           <Button
             variant="ghost"
             size="sm"
@@ -189,7 +209,7 @@ export function MobileQuickActions() {
               <span className="text-xs">프로그램</span>
             </Link>
           </Button>
-          
+
           <Button
             variant="ghost"
             size="sm"
@@ -204,5 +224,5 @@ export function MobileQuickActions() {
         </div>
       </div>
     </div>
-  )
-} 
+  );
+}

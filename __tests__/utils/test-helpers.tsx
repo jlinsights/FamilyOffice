@@ -1,16 +1,17 @@
-import React from 'react'
-import { render, RenderOptions } from '@testing-library/react'
+import { render, RenderOptions } from '@testing-library/react';
+
+import React from 'react';
 
 // Simple Button component for testing
 export const TestButton: React.FC<{
-  children: React.ReactNode
-  onClick?: () => void
-  className?: string
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
 }> = ({ children, onClick, className }) => (
   <button onClick={onClick} className={className}>
     {children}
   </button>
-)
+);
 
 // Test utility functions
 export const mockRouter = {
@@ -20,7 +21,7 @@ export const mockRouter = {
   refresh: jest.fn(),
   replace: jest.fn(),
   prefetch: jest.fn(),
-}
+};
 
 // Custom render function that includes providers
 const customRender = (
@@ -28,11 +29,11 @@ const customRender = (
   options?: Omit<RenderOptions, 'wrapper'>
 ) => {
   const Wrapper = ({ children }: { children: React.ReactNode }) => {
-    return <div data-testid="test-wrapper">{children}</div>
-  }
+    return <div data-testid="test-wrapper">{children}</div>;
+  };
 
-  return render(ui, { wrapper: Wrapper, ...options })
-}
+  return render(ui, { wrapper: Wrapper, ...options });
+};
 
-export { customRender as render }
-export * from '@testing-library/react'
+export { customRender as render };
+export * from '@testing-library/react';

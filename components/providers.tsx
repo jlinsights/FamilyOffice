@@ -1,9 +1,14 @@
-'use client'
+'use client';
 
-import React, { memo } from "react"
-import { ThemeProvider } from "@/components/theme-provider"
+import React, { memo } from 'react';
 
-export const Providers = memo(function Providers({ children }: { children: React.ReactNode }) {
+import { ThemeProvider } from '@/components/theme-provider';
+
+export const Providers = memo(function Providers({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <ThemeProvider
       attribute="class"
@@ -13,5 +18,5 @@ export const Providers = memo(function Providers({ children }: { children: React
     >
       {children}
     </ThemeProvider>
-  )
-})
+  );
+});

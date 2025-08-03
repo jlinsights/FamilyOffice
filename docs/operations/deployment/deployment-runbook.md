@@ -17,6 +17,7 @@ This runbook provides step-by-step procedures for deploying the FamilyOffice pla
 ### 1. Environment Preparation
 
 #### Infrastructure Verification
+
 ```bash
 # Check infrastructure health
 kubectl get nodes
@@ -32,6 +33,7 @@ kubectl get pv,pvc -A
 ```
 
 #### Database Preparation
+
 ```bash
 # Verify database connectivity
 curl -X GET https://api.familyoffice.com/health/database
@@ -44,6 +46,7 @@ curl -X GET https://api.familyoffice.com/admin/database/backups
 ```
 
 #### Security Verification
+
 ```bash
 # Check security controls
 curl -X GET https://api.familyoffice.com/admin/security/status
@@ -58,6 +61,7 @@ curl -X GET https://api.familyoffice.com/admin/security/access-controls
 ### 2. Code Quality Assurance
 
 #### Automated Testing
+
 ```bash
 # Run unit tests
 npm run test:unit
@@ -73,6 +77,7 @@ npm run test:performance
 ```
 
 #### Code Review Checklist
+
 - [ ] Security review completed
 - [ ] Performance review completed
 - [ ] Compliance review completed
@@ -82,6 +87,7 @@ npm run test:performance
 ### 3. Deployment Package Preparation
 
 #### Version Tagging
+
 ```bash
 # Create version tag
 git tag -a v1.2.3 -m "Release version 1.2.3"
@@ -94,6 +100,7 @@ docker build -t familyoffice/admin:v1.2.3 ./admin
 ```
 
 #### Artifact Verification
+
 ```bash
 # Verify Docker images
 docker images | grep familyoffice
@@ -114,6 +121,7 @@ docker push familyoffice/admin:v1.2.3
 ### 1. Blue-Green Deployment Strategy
 
 #### Phase 1: Green Environment Preparation
+
 ```bash
 # Create new deployment
 kubectl apply -f k8s/deployments/frontend-green.yaml
@@ -127,6 +135,7 @@ kubectl rollout status deployment/admin-green
 ```
 
 #### Phase 2: Health Checks
+
 ```bash
 # Run comprehensive health checks
 ./scripts/health-check.sh --environment=green
@@ -138,6 +147,7 @@ curl -X GET https://green-app.familyoffice.com/health
 ```
 
 #### Phase 3: Traffic Switch
+
 ```bash
 # Update ingress to point to green environment
 kubectl apply -f k8s/ingress/green-traffic.yaml
@@ -147,6 +157,7 @@ curl -X GET https://api.familyoffice.com/health
 ```
 
 #### Phase 4: Blue Environment Cleanup
+
 ```bash
 # Scale down blue environment
 kubectl scale deployment frontend-blue --replicas=0
@@ -157,6 +168,7 @@ kubectl scale deployment admin-blue --replicas=0
 ### 2. Rolling Update Deployment
 
 #### Database Migration
+
 ```bash
 # Run database migrations
 kubectl exec -it deployment/backend-green -- npm run migrate
@@ -169,6 +181,7 @@ kubectl exec -it deployment/backend-green -- npm run migrate:rollback
 ```
 
 #### Service Deployment
+
 ```bash
 # Deploy backend services
 kubectl rollout restart deployment/portfolio-service
@@ -186,6 +199,7 @@ kubectl rollout status deployment/integration-service
 ```
 
 #### Frontend Deployment
+
 ```bash
 # Deploy frontend application
 kubectl rollout restart deployment/frontend
@@ -200,6 +214,7 @@ curl -X GET https://app.familyoffice.com/health
 ### 3. Canary Deployment
 
 #### Traffic Splitting
+
 ```bash
 # Deploy canary version
 kubectl apply -f k8s/deployments/canary.yaml
@@ -212,6 +227,7 @@ kubectl apply -f k8s/ingress/canary-10.yaml
 ```
 
 #### Gradual Rollout
+
 ```bash
 # Increase canary traffic to 25%
 kubectl apply -f k8s/ingress/canary-25.yaml
@@ -234,6 +250,7 @@ kubectl apply -f k8s/ingress/canary-100.yaml
 ### 1. Functional Testing
 
 #### API Endpoint Testing
+
 ```bash
 # Test all API endpoints
 ./scripts/api-test.sh
@@ -255,6 +272,7 @@ curl -X POST https://api.familyoffice.com/transactions \
 ```
 
 #### User Interface Testing
+
 ```bash
 # Run UI tests
 npm run test:e2e
@@ -266,6 +284,7 @@ npm run test:e2e
 ### 2. Performance Testing
 
 #### Load Testing
+
 ```bash
 # Run load tests
 k6 run scripts/load-test.js
@@ -275,6 +294,7 @@ k6 run scripts/load-test.js
 ```
 
 #### Performance Verification
+
 ```bash
 # Check response times
 curl -w "@curl-format.txt" -o /dev/null -s https://api.familyoffice.com/health
@@ -286,6 +306,7 @@ curl -w "@curl-format.txt" -o /dev/null -s https://api.familyoffice.com/health
 ### 3. Security Verification
 
 #### Security Scan
+
 ```bash
 # Run security scans
 npm run security:scan
@@ -295,6 +316,7 @@ npm run security:scan
 ```
 
 #### Compliance Verification
+
 ```bash
 # Verify SOX controls
 curl -X GET https://api.familyoffice.com/admin/compliance/sox/status
@@ -308,6 +330,7 @@ curl -X GET https://api.familyoffice.com/admin/compliance/gdpr/status
 ### 1. Quick Rollback
 
 #### Emergency Rollback
+
 ```bash
 # Revert to previous version
 kubectl rollout undo deployment/frontend
@@ -321,6 +344,7 @@ kubectl rollout status deployment/admin
 ```
 
 #### Traffic Reversion
+
 ```bash
 # Revert traffic to blue environment
 kubectl apply -f k8s/ingress/blue-traffic.yaml
@@ -332,6 +356,7 @@ curl -X GET https://api.familyoffice.com/health
 ### 2. Database Rollback
 
 #### Migration Rollback
+
 ```bash
 # Rollback database migrations
 kubectl exec -it deployment/backend -- npm run migrate:rollback
@@ -341,6 +366,7 @@ kubectl exec -it deployment/backend -- npm run migrate:status
 ```
 
 #### Data Recovery
+
 ```bash
 # Restore from backup if needed
 ./scripts/restore-backup.sh --backup-id=latest
@@ -354,6 +380,7 @@ kubectl exec -it deployment/backend -- npm run migrate:status
 ### 1. Deployment Monitoring
 
 #### Real-time Monitoring
+
 ```bash
 # Monitor deployment metrics
 kubectl top pods -A
@@ -365,17 +392,18 @@ kubectl logs -f deployment/admin
 ```
 
 #### Alert Configuration
+
 ```yaml
 # Deployment alerts
 alerts:
   - name: deployment_failure
     condition: deployment_status == "failed"
     action: notify_team
-    
+
   - name: high_error_rate
     condition: error_rate > 5%
     action: rollback_deployment
-    
+
   - name: performance_degradation
     condition: response_time > 500ms
     action: scale_up_resources
@@ -384,6 +412,7 @@ alerts:
 ### 2. Health Check Monitoring
 
 #### Automated Health Checks
+
 ```bash
 # Run health check script
 ./scripts/health-check.sh --continuous
@@ -397,6 +426,7 @@ curl -X GET https://api.familyoffice.com/health/metrics
 ### 1. Deployment Log
 
 #### Required Documentation
+
 - **Deployment Date/Time**: When deployment occurred
 - **Version Deployed**: Version number and commit hash
 - **Deployment Method**: Blue-green, rolling, or canary
@@ -407,29 +437,31 @@ curl -X GET https://api.familyoffice.com/health/metrics
 - **Rollback Plan**: Rollback procedures if needed
 
 #### Deployment Log Template
+
 ```yaml
 deployment_log:
-  date: "2024-12-19T10:00:00Z"
-  version: "v1.2.3"
-  method: "blue-green"
+  date: '2024-12-19T10:00:00Z'
+  version: 'v1.2.3'
+  method: 'blue-green'
   team_members:
-    - "John Doe (Lead)"
-    - "Jane Smith (DevOps)"
+    - 'John Doe (Lead)'
+    - 'Jane Smith (DevOps)'
   pre_deployment_checks:
-    - "Infrastructure Health: ✅"
-    - "Security Scan: ✅"
-    - "Performance Tests: ✅"
+    - 'Infrastructure Health: ✅'
+    - 'Security Scan: ✅'
+    - 'Performance Tests: ✅'
   post_deployment_verification:
-    - "API Tests: ✅"
-    - "UI Tests: ✅"
-    - "Performance: ✅"
+    - 'API Tests: ✅'
+    - 'UI Tests: ✅'
+    - 'Performance: ✅'
   issues: []
-  rollback_plan: "Ready if needed"
+  rollback_plan: 'Ready if needed'
 ```
 
 ### 2. Change Management
 
 #### Change Request Process
+
 1. **Request Submission**: Submit change request
 2. **Review and Approval**: Technical and business review
 3. **Implementation**: Deploy changes
@@ -437,17 +469,18 @@ deployment_log:
 5. **Documentation**: Update documentation
 
 #### Change Request Template
+
 ```yaml
 change_request:
-  id: "CR-2024-001"
-  title: "Deploy version 1.2.3"
-  description: "New features and bug fixes"
-  risk_assessment: "Low"
-  rollback_plan: "Revert to v1.2.2"
+  id: 'CR-2024-001'
+  title: 'Deploy version 1.2.3'
+  description: 'New features and bug fixes'
+  risk_assessment: 'Low'
+  rollback_plan: 'Revert to v1.2.2'
   approval:
-    technical_lead: "Approved"
-    business_owner: "Approved"
-    security_team: "Approved"
+    technical_lead: 'Approved'
+    business_owner: 'Approved'
+    security_team: 'Approved'
 ```
 
 ## 🚨 Emergency Procedures
@@ -455,6 +488,7 @@ change_request:
 ### 1. Critical Issue Response
 
 #### Immediate Actions
+
 1. **Assess Impact**: Determine scope of issue
 2. **Notify Stakeholders**: Alert relevant teams
 3. **Implement Rollback**: Execute rollback if needed
@@ -462,26 +496,29 @@ change_request:
 5. **Document Incident**: Record all actions taken
 
 #### Emergency Contacts
+
 ```yaml
 emergency_contacts:
-  platform_lead: "+1-555-0101"
-  devops_lead: "+1-555-0102"
-  security_lead: "+1-555-0103"
-  business_owner: "+1-555-0104"
+  platform_lead: '+1-555-0101'
+  devops_lead: '+1-555-0102'
+  security_lead: '+1-555-0103'
+  business_owner: '+1-555-0104'
 ```
 
 ### 2. Communication Plan
 
 #### Stakeholder Communication
+
 - **Internal Teams**: Immediate notification
 - **Business Users**: Status updates every 30 minutes
 - **External Partners**: Communication as needed
 - **Regulatory Bodies**: Notification if required
 
 #### Communication Template
+
 ```yaml
 communication_template:
-  subject: "Deployment Status Update"
+  subject: 'Deployment Status Update'
   body: |
     Deployment Status: {status}
     Version: {version}
@@ -492,4 +529,4 @@ communication_template:
 
 ---
 
-*This deployment runbook is maintained by the DevOps Team and updated with each deployment procedure change.* 
+_This deployment runbook is maintained by the DevOps Team and updated with each deployment procedure change._

@@ -112,4 +112,4 @@ data:
               severity: warning
             annotations:
               summary: "High error rate detected"
-              description: "Error rate is {{ $value }} errors per second" 
+              description: "Error rate is {{ $value }} errors per second"

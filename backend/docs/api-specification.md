@@ -26,6 +26,7 @@ Content-Type: application/json
 ```
 
 **응답:**
+
 ```json
 {
   "success": true,
@@ -54,12 +55,14 @@ Authorization: Bearer <token>
 ```
 
 **쿼리 파라미터:**
+
 - `page`: 페이지 번호 (기본값: 1)
 - `limit`: 페이지당 항목 수 (기본값: 20)
 - `search`: 검색어
 - `status`: 상태 필터 (active, inactive)
 
 **응답:**
+
 ```json
 {
   "success": true,
@@ -70,9 +73,9 @@ Authorization: Bearer <token>
         "name": "Main Portfolio",
         "description": "Primary investment portfolio",
         "currency": "USD",
-        "totalValue": 1000000.00,
-        "totalCost": 950000.00,
-        "totalGainLoss": 50000.00,
+        "totalValue": 1000000.0,
+        "totalCost": 950000.0,
+        "totalGainLoss": 50000.0,
         "totalGainLossPercent": 5.26,
         "createdAt": "2024-01-15T10:30:00Z",
         "updatedAt": "2024-01-15T10:30:00Z"
@@ -110,6 +113,7 @@ Authorization: Bearer <token>
 ```
 
 **응답:**
+
 ```json
 {
   "success": true,
@@ -119,9 +123,9 @@ Authorization: Bearer <token>
       "name": "Main Portfolio",
       "description": "Primary investment portfolio",
       "currency": "USD",
-      "totalValue": 1000000.00,
-      "totalCost": 950000.00,
-      "totalGainLoss": 50000.00,
+      "totalValue": 1000000.0,
+      "totalCost": 950000.0,
+      "totalGainLoss": 50000.0,
       "totalGainLossPercent": 5.26,
       "assets": [
         {
@@ -130,11 +134,11 @@ Authorization: Bearer <token>
           "name": "Apple Inc.",
           "assetType": "stock",
           "quantity": 100,
-          "averagePrice": 150.00,
-          "currentPrice": 155.00,
-          "marketValue": 15500.00,
-          "costBasis": 15000.00,
-          "unrealizedGainLoss": 500.00,
+          "averagePrice": 150.0,
+          "currentPrice": 155.0,
+          "marketValue": 15500.0,
+          "costBasis": 15000.0,
+          "unrealizedGainLoss": 500.0,
           "unrealizedGainLossPercent": 3.33,
           "weight": 1.55
         }
@@ -166,6 +170,7 @@ Authorization: Bearer <token>
 ```
 
 **쿼리 파라미터:**
+
 - `portfolioId`: 포트폴리오 ID
 - `type`: 트랜잭션 타입 (buy, sell, dividend, etc.)
 - `startDate`: 시작 날짜 (YYYY-MM-DD)
@@ -329,8 +334,8 @@ Content-Type: application/json
     "portfolioId": "portfolio-123",
     "changes": {
       "totalValue": {
-        "old": 950000.00,
-        "new": 1000000.00
+        "old": 950000.0,
+        "new": 1000000.0
       }
     }
   }
@@ -346,6 +351,7 @@ GET /health
 ```
 
 **응답:**
+
 ```json
 {
   "status": "healthy",
@@ -418,4 +424,4 @@ docker-compose down
 - Rate limiting으로 DDoS 방지
 - 입력 검증 및 SQL 인젝션 방지
 - CORS 정책으로 허용된 도메인만 접근 가능
-- 보안 헤더 설정 (Helmet.js) 
+- 보안 헤더 설정 (Helmet.js)

@@ -1,4 +1,5 @@
 import { Queue, Worker, Job, QueueScheduler } from 'bullmq';
+
 import { redisClient } from '../database/connection';
 import { logger } from '../logging/logger';
 
@@ -32,7 +33,7 @@ export class QueueManager {
   // 큐 생성
   createQueue(name: string, config?: Partial<QueueConfig>): Queue {
     const queueConfig = { ...defaultQueueConfig, ...config };
-    
+
     const queue = new Queue(name, {
       connection: redisClient,
       defaultJobOptions: {
@@ -55,14 +56,14 @@ export class QueueManager {
     config?: Partial<QueueConfig>
   ): Worker {
     const queueConfig = { ...defaultQueueConfig, ...config };
-    
+
     const worker = new Worker(name, processor, {
       connection: redisClient,
       concurrency: queueConfig.concurrency,
     });
 
     // 워커 이벤트 리스너
-    worker.on('completed', (job) => {
+    worker.on('completed', job => {
       logger.info(`작업 완료: ${job.id}`, {
         queue: name,
         jobId: job.id,
@@ -79,7 +80,7 @@ export class QueueManager {
       });
     });
 
-    worker.on('error', (err) => {
+    worker.on('error', err => {
       logger.error(`워커 에러: ${name}`, {
         queue: name,
         error: err.message,
@@ -214,7 +215,10 @@ export class QueueManager {
   }
 
   // 큐 정리
-  async cleanQueue(queueName: string, grace: number = 1000 * 60 * 60 * 24): Promise<void> {
+  async cleanQueue(
+    queueName: string,
+    grace: number = 1000 * 60 * 60 * 24
+  ): Promise<void> {
     const queue = this.queues.get(queueName);
     if (!queue) {
       throw new Error(`큐를 찾을 수 없음: ${queueName}`);
@@ -263,4 +267,4 @@ export const QUEUE_NAMES = {
   EMAIL_NOTIFICATIONS: 'email-notifications',
   DATA_SYNC: 'data-sync',
   AUDIT_LOGS: 'audit-logs',
-} as const; 
+} as const;

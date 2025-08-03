@@ -1,4 +1,11 @@
-import { register, Counter, Histogram, Gauge, collectDefaultMetrics } from 'prom-client';
+import {
+  register,
+  Counter,
+  Histogram,
+  Gauge,
+  collectDefaultMetrics,
+} from 'prom-client';
+
 import { logger } from '../logging/logger';
 
 // 기본 메트릭 수집 활성화
@@ -105,17 +112,13 @@ export class MetricsCollector {
     duration: number
   ): void {
     const labels = { method, route, status_code: statusCode.toString() };
-    
+
     httpRequestDuration.observe(labels, duration / 1000); // 초 단위로 변환
     httpRequestTotal.inc(labels);
   }
 
   // 데이터베이스 쿼리 메트릭 기록
-  recordDbQuery(
-    operation: string,
-    table: string,
-    duration: number
-  ): void {
+  recordDbQuery(operation: string, table: string, duration: number): void {
     const labels = { operation, table };
     dbQueryDuration.observe(labels, duration / 1000);
   }
@@ -133,7 +136,7 @@ export class MetricsCollector {
     status: 'completed' | 'failed'
   ): void {
     const labels = { queue, job_type: jobType };
-    
+
     queueJobDuration.observe(labels, duration / 1000);
     queueJobsTotal.inc({ ...labels, status });
   }
@@ -149,7 +152,10 @@ export class MetricsCollector {
     portfolioId: string,
     value: number
   ): void {
-    portfolioValue.set({ tenant_id: tenantId, portfolio_id: portfolioId }, value);
+    portfolioValue.set(
+      { tenant_id: tenantId, portfolio_id: portfolioId },
+      value
+    );
   }
 
   // 거래량 증가
@@ -158,7 +164,10 @@ export class MetricsCollector {
     transactionType: string,
     amount: number = 1
   ): void {
-    transactionVolume.inc({ tenant_id: tenantId, transaction_type: transactionType }, amount);
+    transactionVolume.inc(
+      { tenant_id: tenantId, transaction_type: transactionType },
+      amount
+    );
   }
 
   // 활성 사용자 세션 수 설정
@@ -177,7 +186,10 @@ export class MetricsCollector {
   }
 
   // 헬스 체크
-  async healthCheck(): Promise<{ status: string; checks: Record<string, any> }> {
+  async healthCheck(): Promise<{
+    status: string;
+    checks: Record<string, any>;
+  }> {
     const checks: Record<string, any> = {};
 
     try {
@@ -215,7 +227,7 @@ export const metricsCollector = MetricsCollector.getInstance();
 // 메트릭 미들웨어 (Express용)
 export const metricsMiddleware = (req: any, res: any, next: any) => {
   const start = Date.now();
-  
+
   res.on('finish', () => {
     const duration = Date.now() - start;
     metricsCollector.recordHttpRequest(
@@ -225,6 +237,6 @@ export const metricsMiddleware = (req: any, res: any, next: any) => {
       duration
     );
   });
-  
+
   next();
-}; 
+};

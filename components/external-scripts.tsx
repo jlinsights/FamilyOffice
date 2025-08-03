@@ -1,11 +1,12 @@
-'use client'
+'use client';
 
-import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect } from 'react';
+
+import Script from 'next/script';
 
 export default function ExternalScripts() {
   const channelIOKey = process.env.NEXT_PUBLIC_CHANNEL_IO_KEY;
-  
+
   useEffect(() => {
     // Channel Talk 초기화
     if (channelIOKey && typeof window !== 'undefined') {
@@ -17,7 +18,7 @@ export default function ExternalScripts() {
         script.onload = () => {
           if (window.ChannelIO) {
             window.ChannelIO('boot', {
-              pluginKey: channelIOKey
+              pluginKey: channelIOKey,
             });
           }
         };
@@ -25,7 +26,7 @@ export default function ExternalScripts() {
       }
     }
   }, [channelIOKey]);
-  
+
   return (
     <>
       {/* HubSpot Embed Code */}
@@ -48,9 +49,11 @@ export default function ExternalScripts() {
       </Script>
 
       {/* Google Tag Manager (noscript) */}
-      <div dangerouslySetInnerHTML={{
-        __html: `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MP3HPPMN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`
-      }} />
+      <div
+        dangerouslySetInnerHTML={{
+          __html: `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MP3HPPMN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`,
+        }}
+      />
     </>
   );
-} 
+}

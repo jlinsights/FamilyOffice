@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import Script from 'next/script'
+import Script from 'next/script';
 
 interface StructuredDataProps {
-  data: any
+  data: any;
 }
 
 export function StructuredData({ data }: StructuredDataProps) {
@@ -13,8 +13,8 @@ export function StructuredData({ data }: StructuredDataProps) {
       type="application/ld+json"
       strategy="afterInteractive"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data)
+        __html: JSON.stringify(data),
       }}
     />
-  )
-} 
+  );
+}

@@ -1,19 +1,25 @@
-import { createClient } from "@/lib/supabase/server"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+
+import { createClient } from '@/lib/supabase/server';
 
 // 동적 렌더링 강제
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 export default async function ConsultationsPage() {
   // 환경변수가 없으면 에러 페이지 표시
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
     return (
       <div className="min-h-screen font-body text-navy-primary dark:text-white">
         <Header />
         <section className="py-20 bg-light-bg-primary dark:bg-dark-bg-primary">
           <div className="container mx-auto px-6">
-            <h1 className="font-heading text-3xl font-bold mb-10">상담 신청 목록</h1>
+            <h1 className="font-heading text-3xl font-bold mb-10">
+              상담 신청 목록
+            </h1>
             <div className="bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 p-4 rounded-md mb-6">
               Supabase 환경변수가 설정되지 않았습니다. 관리자에게 문의하세요.
             </div>
@@ -21,17 +27,17 @@ export default async function ConsultationsPage() {
         </section>
         <Footer />
       </div>
-    )
+    );
   }
 
-  const supabase = await createClient()
+  const supabase = await createClient();
   const { data: consultations, error } = await supabase
-    .from("consultations")
-    .select("*")
-    .order("created_at", { ascending: false })
+    .from('consultations')
+    .select('*')
+    .order('created_at', { ascending: false });
 
   if (error) {
-    console.error("Error fetching consultations:", error)
+    console.error('Error fetching consultations:', error);
   }
 
   return (
@@ -40,7 +46,9 @@ export default async function ConsultationsPage() {
 
       <section className="py-20 bg-light-bg-primary dark:bg-dark-bg-primary">
         <div className="container mx-auto px-6">
-          <h1 className="font-heading text-3xl font-bold mb-10">상담 신청 목록</h1>
+          <h1 className="font-heading text-3xl font-bold mb-10">
+            상담 신청 목록
+          </h1>
 
           {error && (
             <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-4 rounded-md mb-6">
@@ -75,19 +83,32 @@ export default async function ConsultationsPage() {
                 </thead>
                 <tbody className="divide-y divide-light-border dark:divide-dark-border">
                   {consultations && consultations.length > 0 ? (
-                    consultations.map((consultation) => (
-                      <tr key={consultation.id} className="hover:bg-light-bg-tertiary dark:hover:bg-dark-bg-tertiary">
+                    consultations.map(consultation => (
+                      <tr
+                        key={consultation.id}
+                        className="hover:bg-light-bg-tertiary dark:hover:bg-dark-bg-tertiary"
+                      >
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          {new Date(consultation.created_at).toLocaleDateString("ko-KR")}
+                          {new Date(consultation.created_at).toLocaleDateString(
+                            'ko-KR'
+                          )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{consultation.name}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{consultation.phone}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{consultation.email}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          {consultation.name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          {consultation.phone}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          {consultation.email}
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
                           {getServiceName(consultation.service_type)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${getStatusClass(consultation.status)}`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs ${getStatusClass(consultation.status)}`}
+                          >
                             {getStatusName(consultation.status)}
                           </span>
                         </td>
@@ -112,44 +133,51 @@ export default async function ConsultationsPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
 
 function getServiceName(serviceType: string | null): string {
-  if (!serviceType) return "미지정"
+  if (!serviceType) return '미지정';
 
   const serviceMap: Record<string, string> = {
-    "wealth-management": "통합 자산관리",
-    inheritance: "상속·증여 설계",
-    "tax-legal": "세무·법률 자문",
-    "real-estate": "부동산 포트폴리오",
-    "business-succession": "가업승계",
-    "global-assets": "해외 자산 관리",
-  }
+    'wealth-management': '통합 자산관리',
+    inheritance: '상속·증여 설계',
+    'tax-legal': '세무·법률 자문',
+    'real-estate': '부동산 포트폴리오',
+    'business-succession': '가업승계',
+    'global-assets': '해외 자산 관리',
+  };
 
-  return serviceMap[serviceType] || serviceType
+  return serviceMap[serviceType] || serviceType;
 }
 
 function getStatusName(status: string | null): string {
-  if (!status) return "미지정"
+  if (!status) return '미지정';
 
   const statusMap: Record<string, string> = {
-    pending: "대기중",
-    contacted: "연락완료",
-    completed: "상담완료",
-  }
+    pending: '대기중',
+    contacted: '연락완료',
+    completed: '상담완료',
+  };
 
-  return statusMap[status] || status
+  return statusMap[status] || status;
 }
 
 function getStatusClass(status: string | null): string {
-  if (!status) return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+  if (!status)
+    return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
 
   const statusClassMap: Record<string, string> = {
-    pending: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
-    contacted: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
-    completed: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-  }
+    pending:
+      'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300',
+    contacted:
+      'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
+    completed:
+      'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
+  };
 
-  return statusClassMap[status] || "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+  return (
+    statusClassMap[status] ||
+    'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+  );
 }

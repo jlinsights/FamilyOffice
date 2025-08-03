@@ -2,19 +2,29 @@
  * 금융 데이터 대시보드 컴포넌트
  */
 
-'use client'
+'use client';
 
-import { useState, useEffect, Suspense, lazy } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { RefreshCw, AlertCircle } from 'lucide-react'
-import { Skeleton } from '@/components/ui/skeleton'
+import { RefreshCw, AlertCircle } from 'lucide-react';
+
+import { useState, useEffect, Suspense, lazy } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+/**
+ * 금융 데이터 대시보드 컴포넌트
+ */
+
+/**
+ * 금융 데이터 대시보드 컴포넌트
+ */
 
 // 동적 임포트로 지연 로딩
-const StockCard = lazy(() => import('./stock-card'))
-const ForexCard = lazy(() => import('./forex-card'))
+const StockCard = lazy(() => import('./stock-card'));
+const ForexCard = lazy(() => import('./forex-card'));
 
 // 로딩 스켈레톤 컴포넌트
 const CardSkeleton = () => (
@@ -27,31 +37,31 @@ const CardSkeleton = () => (
       <Skeleton className="h-4 w-16" />
     </CardContent>
   </Card>
-)
+);
 
 interface ApiStatus {
-  yahoo: { available: boolean; error?: string }
-  alphavantage: { available: boolean; error?: string }
+  yahoo: { available: boolean; error?: string };
+  alphavantage: { available: boolean; error?: string };
   cache: {
-    memory: { keys: number; hitRate: number }
-    redis: { connected: boolean; status: string }
-  }
+    memory: { keys: number; hitRate: number };
+    redis: { connected: boolean; status: string };
+  };
 }
 
 interface FinancialDashboardProps {
-  className?: string
-  autoRefresh?: boolean
-  refreshInterval?: number
+  className?: string;
+  autoRefresh?: boolean;
+  refreshInterval?: number;
 }
 
 export default function FinancialDashboard({
   className = '',
   autoRefresh = true,
-  refreshInterval = 300000 // 5분
+  refreshInterval = 300000, // 5분
 }: FinancialDashboardProps) {
-  const [apiStatus, setApiStatus] = useState<ApiStatus | null>(null)
-  const [statusLoading, setStatusLoading] = useState(false)
-  const [lastStatusUpdate, setLastStatusUpdate] = useState<Date | null>(null)
+  const [apiStatus, setApiStatus] = useState<ApiStatus | null>(null);
+  const [statusLoading, setStatusLoading] = useState(false);
+  const [lastStatusUpdate, setLastStatusUpdate] = useState<Date | null>(null);
 
   // 한국 주요 주식 목록
   const koreanStocks = [
@@ -59,90 +69,98 @@ export default function FinancialDashboard({
     '000660.KS', // SK하이닉스
     '035420.KS', // NAVER
     '051910.KS', // LG화학
-    '035720.KS'  // 카카오
-  ]
+    '035720.KS', // 카카오
+  ];
 
   // 미국 주요 주식 목록
   const usStocks = [
-    'AAPL',  // 애플
-    'MSFT',  // 마이크로소프트
+    'AAPL', // 애플
+    'MSFT', // 마이크로소프트
     'GOOGL', // 구글
-    'AMZN',  // 아마존
-    'TSLA'   // 테슬라
-  ]
+    'AMZN', // 아마존
+    'TSLA', // 테슬라
+  ];
 
   // 주요 환율 목록
   const majorForex = [
     { from: 'USD', to: 'KRW' },
     { from: 'EUR', to: 'KRW' },
     { from: 'JPY', to: 'KRW' },
-    { from: 'CNY', to: 'KRW' }
-  ]
+    { from: 'CNY', to: 'KRW' },
+  ];
 
   // API 상태 확인
   const fetchApiStatus = async () => {
     try {
-      setStatusLoading(true)
-      const response = await fetch('/api/financial/status?detailed=true')
-      const result = await response.json()
-      
+      setStatusLoading(true);
+      const response = await fetch('/api/financial/status?detailed=true');
+      const result = await response.json();
+
       if (result.success) {
-        setApiStatus(result.data.status)
-        setLastStatusUpdate(new Date())
+        setApiStatus(result.data.status);
+        setLastStatusUpdate(new Date());
       }
     } catch (error) {
-      console.error('API 상태 확인 실패:', error)
+      console.error('API 상태 확인 실패:', error);
     } finally {
-      setStatusLoading(false)
+      setStatusLoading(false);
     }
-  }
+  };
 
   // 컴포넌트 마운트 시 상태 확인
   useEffect(() => {
-    fetchApiStatus()
-  }, [])
+    fetchApiStatus();
+  }, []);
 
   // 자동 상태 업데이트
   useEffect(() => {
-    if (!autoRefresh) return
+    if (!autoRefresh) return;
 
     const interval = setInterval(() => {
-      fetchApiStatus()
-    }, refreshInterval)
+      fetchApiStatus();
+    }, refreshInterval);
 
-    return () => clearInterval(interval)
-  }, [autoRefresh, refreshInterval])
+    return () => clearInterval(interval);
+  }, [autoRefresh, refreshInterval]);
 
   // API 상태 색상
   const getStatusColor = (available: boolean) => {
-    return available ? 'bg-green-500' : 'bg-red-500'
-  }
+    return available ? 'bg-green-500' : 'bg-red-500';
+  };
 
   return (
     <div className={`space-y-6 ${className}`}>
       {/* 헤더 및 상태 정보 */}
       <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">금융 데이터 대시보드</h2>
+          <h2 className="text-2xl font-bold tracking-tight">
+            금융 데이터 대시보드
+          </h2>
           <p className="text-muted-foreground">
             실시간 주식 및 환율 정보를 확인하세요
           </p>
         </div>
-        
+
         <div className="flex items-center space-x-4">
           {/* API 상태 표시 */}
           {apiStatus && (
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1">
-                <div className={`w-2 h-2 rounded-full ${getStatusColor(apiStatus.yahoo.available)}`} />
+                <div
+                  className={`w-2 h-2 rounded-full ${getStatusColor(apiStatus.yahoo.available)}`}
+                />
                 <span className="text-xs">Yahoo</span>
               </div>
               <div className="flex items-center space-x-1">
-                <div className={`w-2 h-2 rounded-full ${getStatusColor(apiStatus.alphavantage.available)}`} />
+                <div
+                  className={`w-2 h-2 rounded-full ${getStatusColor(apiStatus.alphavantage.available)}`}
+                />
                 <span className="text-xs">Alpha</span>
               </div>
               <div className="flex items-center space-x-1">
-                <div className={`w-2 h-2 rounded-full ${getStatusColor(apiStatus.cache.redis.connected)}`} />
+                <div
+                  className={`w-2 h-2 rounded-full ${getStatusColor(apiStatus.cache.redis.connected)}`}
+                />
                 <span className="text-xs">Cache</span>
               </div>
             </div>
@@ -154,7 +172,9 @@ export default function FinancialDashboard({
             onClick={fetchApiStatus}
             disabled={statusLoading}
           >
-            <RefreshCw className={`h-4 w-4 mr-2 ${statusLoading ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`h-4 w-4 mr-2 ${statusLoading ? 'animate-spin' : ''}`}
+            />
             상태 새로고침
           </Button>
         </div>
@@ -180,7 +200,11 @@ export default function FinancialDashboard({
               </div>
               <div>
                 <p className="text-gray-500">Redis 상태</p>
-                <Badge variant={apiStatus.cache.redis.connected ? 'default' : 'destructive'}>
+                <Badge
+                  variant={
+                    apiStatus.cache.redis.connected ? 'default' : 'destructive'
+                  }
+                >
                   {apiStatus.cache.redis.status}
                 </Badge>
               </div>
@@ -189,7 +213,7 @@ export default function FinancialDashboard({
                 <p className="font-semibold">
                   {lastStatusUpdate?.toLocaleTimeString('ko-KR', {
                     hour: '2-digit',
-                    minute: '2-digit'
+                    minute: '2-digit',
                   }) || '-'}
                 </p>
               </div>
@@ -210,7 +234,7 @@ export default function FinancialDashboard({
         {/* 한국 주식 탭 */}
         <TabsContent value="korean-stocks" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {koreanStocks.map((symbol) => (
+            {koreanStocks.map(symbol => (
               <Suspense key={symbol} fallback={<CardSkeleton />}>
                 <StockCard
                   symbol={symbol}
@@ -225,7 +249,7 @@ export default function FinancialDashboard({
         {/* 미국 주식 탭 */}
         <TabsContent value="us-stocks" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {usStocks.map((symbol) => (
+            {usStocks.map(symbol => (
               <Suspense key={symbol} fallback={<CardSkeleton />}>
                 <StockCard
                   symbol={symbol}
@@ -257,39 +281,46 @@ export default function FinancialDashboard({
         <TabsContent value="indices" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Suspense fallback={<CardSkeleton />}>
-              <StockCard symbol="^GSPC" autoRefresh={autoRefresh} /> {/* S&P 500 */}
+              <StockCard symbol="^GSPC" autoRefresh={autoRefresh} />{' '}
+              {/* S&P 500 */}
             </Suspense>
             <Suspense fallback={<CardSkeleton />}>
-              <StockCard symbol="^DJI" autoRefresh={autoRefresh} />  {/* 다우존스 */}
+              <StockCard symbol="^DJI" autoRefresh={autoRefresh} />{' '}
+              {/* 다우존스 */}
             </Suspense>
             <Suspense fallback={<CardSkeleton />}>
-              <StockCard symbol="^IXIC" autoRefresh={autoRefresh} /> {/* 나스닥 */}
+              <StockCard symbol="^IXIC" autoRefresh={autoRefresh} />{' '}
+              {/* 나스닥 */}
             </Suspense>
             <Suspense fallback={<CardSkeleton />}>
-              <StockCard symbol="^KS11" autoRefresh={autoRefresh} /> {/* 코스피 */}
+              <StockCard symbol="^KS11" autoRefresh={autoRefresh} />{' '}
+              {/* 코스피 */}
             </Suspense>
           </div>
         </TabsContent>
       </Tabs>
 
       {/* API 오류 알림 */}
-      {apiStatus && (!apiStatus.yahoo.available && !apiStatus.alphavantage.available) && (
-        <Card className="border-red-200 bg-red-50">
-          <CardContent className="pt-6">
-            <div className="flex items-center space-x-2">
-              <AlertCircle className="h-5 w-5 text-red-600" />
-              <div>
-                <p className="font-semibold text-red-800">
-                  금융 데이터 서비스 오류
-                </p>
-                <p className="text-sm text-red-600">
-                  모든 데이터 제공업체에 연결할 수 없습니다. 캐시된 데이터만 표시됩니다.
-                </p>
+      {apiStatus &&
+        !apiStatus.yahoo.available &&
+        !apiStatus.alphavantage.available && (
+          <Card className="border-red-200 bg-red-50">
+            <CardContent className="pt-6">
+              <div className="flex items-center space-x-2">
+                <AlertCircle className="h-5 w-5 text-red-600" />
+                <div>
+                  <p className="font-semibold text-red-800">
+                    금융 데이터 서비스 오류
+                  </p>
+                  <p className="text-sm text-red-600">
+                    모든 데이터 제공업체에 연결할 수 없습니다. 캐시된 데이터만
+                    표시됩니다.
+                  </p>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+            </CardContent>
+          </Card>
+        )}
     </div>
-  )
+  );
 }

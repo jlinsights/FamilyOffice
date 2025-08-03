@@ -18,6 +18,7 @@ headers: {
 ## 📊 응답 형식
 
 ### 성공 응답
+
 ```typescript
 {
   success: true,
@@ -33,6 +34,7 @@ headers: {
 ```
 
 ### 에러 응답
+
 ```typescript
 {
   success: false,
@@ -49,9 +51,11 @@ headers: {
 ### 1. 프로그램 관리 API
 
 #### GET `/api/programs`
+
 프로그램 목록 조회
 
 **Query Parameters:**
+
 ```typescript
 {
   page?: number = 1,
@@ -65,6 +69,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -78,12 +83,15 @@ headers: {
 ---
 
 #### GET `/api/programs/[id]`
+
 특정 프로그램 상세 조회
 
 **Path Parameters:**
+
 - `id`: 프로그램 UUID
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -96,9 +104,11 @@ headers: {
 ---
 
 #### POST `/api/programs`
+
 새 프로그램 생성 (관리자 전용)
 
 **요청 본문:**
+
 ```typescript
 {
   title: string,
@@ -121,6 +131,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -132,11 +143,13 @@ headers: {
 ---
 
 #### PUT `/api/programs/[id]`
+
 프로그램 정보 수정 (관리자 전용)
 
 **요청 본문:** POST와 동일
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -148,9 +161,11 @@ headers: {
 ---
 
 #### DELETE `/api/programs/[id]`
+
 프로그램 삭제 (관리자 전용)
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -163,9 +178,11 @@ headers: {
 ### 2. 등록 관리 API
 
 #### GET `/api/registrations`
+
 사용자 등록 목록 조회
 
 **Query Parameters:**
+
 ```typescript
 {
   page?: number = 1,
@@ -177,6 +194,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -190,9 +208,11 @@ headers: {
 ---
 
 #### POST `/api/registrations`
+
 프로그램 등록 신청
 
 **요청 본문:**
+
 ```typescript
 {
   programId: string,
@@ -202,6 +222,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -213,9 +234,11 @@ headers: {
 ---
 
 #### GET `/api/registrations/[id]`
+
 특정 등록 정보 조회
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -226,9 +249,11 @@ headers: {
 ---
 
 #### PUT `/api/registrations/[id]`
+
 등록 상태 변경 (관리자 전용)
 
 **요청 본문:**
+
 ```typescript
 {
   status: RegistrationStatus,
@@ -237,6 +262,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -248,9 +274,11 @@ headers: {
 ---
 
 #### DELETE `/api/registrations/[id]`
+
 등록 취소
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -263,9 +291,11 @@ headers: {
 ### 3. 일정 관리 API
 
 #### GET `/api/programs/[id]/schedules`
+
 프로그램 일정 목록 조회
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -278,9 +308,11 @@ headers: {
 ---
 
 #### POST `/api/programs/[id]/schedules`
+
 새 일정 추가 (관리자 전용)
 
 **요청 본문:**
+
 ```typescript
 {
   sessionNumber: number,
@@ -301,9 +333,11 @@ headers: {
 ### 4. 참석 관리 API
 
 #### GET `/api/registrations/[id]/attendance`
+
 참석 기록 조회
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -314,9 +348,11 @@ headers: {
 ---
 
 #### POST `/api/schedules/[scheduleId]/attendance`
+
 참석 체크인 (관리자 전용)
 
 **요청 본문:**
+
 ```typescript
 {
   registrationId: string,
@@ -330,9 +366,11 @@ headers: {
 ### 5. 사용자 관리 API
 
 #### GET `/api/users/profile`
+
 사용자 프로필 조회
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -345,9 +383,11 @@ headers: {
 ---
 
 #### PUT `/api/users/profile`
+
 사용자 프로필 수정
 
 **요청 본문:**
+
 ```typescript
 {
   name?: string,
@@ -361,9 +401,11 @@ headers: {
 ---
 
 #### GET `/api/users/registrations`
+
 사용자의 등록 목록 조회
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -376,9 +418,11 @@ headers: {
 ### 6. 관리자 API
 
 #### GET `/api/admin/dashboard`
+
 관리자 대시보드 데이터
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -398,9 +442,11 @@ headers: {
 ---
 
 #### GET `/api/admin/programs`
+
 관리자용 프로그램 관리 (모든 상태 포함)
 
 **Query Parameters:**
+
 ```typescript
 {
   page?: number,
@@ -414,9 +460,11 @@ headers: {
 ---
 
 #### GET `/api/admin/registrations`
+
 관리자용 등록 관리
 
 **Query Parameters:**
+
 ```typescript
 {
   page?: number,
@@ -431,9 +479,11 @@ headers: {
 ---
 
 #### PUT `/api/admin/registrations/bulk`
+
 대량 등록 상태 변경
 
 **요청 본문:**
+
 ```typescript
 {
   registrationIds: string[],
@@ -447,9 +497,11 @@ headers: {
 ### 7. 통계 및 분석 API
 
 #### GET `/api/analytics/programs/[id]`
+
 프로그램별 분석 데이터
 
 **Query Parameters:**
+
 ```typescript
 {
   startDate?: string,
@@ -459,6 +511,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -477,9 +530,11 @@ headers: {
 ---
 
 #### GET `/api/analytics/overview`
+
 전체 통계 개요
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -499,9 +554,11 @@ headers: {
 ### 8. 알림 API
 
 #### GET `/api/notifications`
+
 사용자 알림 목록
 
 **Query Parameters:**
+
 ```typescript
 {
   page?: number,
@@ -511,6 +568,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -522,9 +580,11 @@ headers: {
 ---
 
 #### PUT `/api/notifications/[id]/read`
+
 알림 읽음 처리
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -535,6 +595,7 @@ headers: {
 ---
 
 #### PUT `/api/notifications/read-all`
+
 모든 알림 읽음 처리
 
 ---
@@ -542,9 +603,11 @@ headers: {
 ### 9. 파일 업로드 API
 
 #### POST `/api/upload`
+
 파일 업로드 (이미지, 문서)
 
 **요청:** `multipart/form-data`
+
 ```typescript
 {
   file: File,
@@ -554,6 +617,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -571,9 +635,11 @@ headers: {
 ### 10. 검색 API
 
 #### GET `/api/search`
+
 통합 검색
 
 **Query Parameters:**
+
 ```typescript
 {
   q: string, // 검색어
@@ -584,6 +650,7 @@ headers: {
 ```
 
 **응답:**
+
 ```typescript
 {
   success: true,
@@ -599,17 +666,18 @@ headers: {
 
 ## 🔒 권한 매트릭스
 
-| 엔드포인트 | 게스트 | 회원 | VIP | 관리자 |
-|------------|--------|------|-----|--------|
-| GET /programs | ✓ | ✓ | ✓ | ✓ |
-| POST /programs | - | - | - | ✓ |
-| POST /registrations | - | ✓ | ✓ | ✓ |
-| GET /admin/* | - | - | - | ✓ |
-| PUT /registrations/status | - | - | - | ✓ |
+| 엔드포인트                | 게스트 | 회원 | VIP | 관리자 |
+| ------------------------- | ------ | ---- | --- | ------ |
+| GET /programs             | ✓      | ✓    | ✓   | ✓      |
+| POST /programs            | -      | -    | -   | ✓      |
+| POST /registrations       | -      | ✓    | ✓   | ✓      |
+| GET /admin/\*             | -      | -    | -   | ✓      |
+| PUT /registrations/status | -      | -    | -   | ✓      |
 
 ## 📝 에러 코드
 
 ### 일반 에러
+
 - `AUTH_001`: 인증 토큰이 없음
 - `AUTH_002`: 유효하지 않은 토큰
 - `AUTH_003`: 권한 없음
@@ -617,12 +685,14 @@ headers: {
 - `RATE_001`: 요청 한도 초과
 
 ### 프로그램 관련 에러
+
 - `PROG_001`: 프로그램을 찾을 수 없음
 - `PROG_002`: 프로그램 등록 마감
 - `PROG_003`: 중복 등록
 - `PROG_004`: 참가 자격 미달
 
 ### 등록 관련 에러
+
 - `REG_001`: 등록을 찾을 수 없음
 - `REG_002`: 이미 등록됨
 - `REG_003`: 등록 기간 종료
@@ -631,12 +701,14 @@ headers: {
 ## 🧪 테스트 예시
 
 ### 프로그램 목록 조회
+
 ```bash
 curl -X GET "https://familyoffice.com/api/programs?category=ceo_education&limit=5" \
   -H "Authorization: Bearer <token>"
 ```
 
 ### 프로그램 등록
+
 ```bash
 curl -X POST "https://familyoffice.com/api/registrations" \
   -H "Authorization: Bearer <token>" \
@@ -650,17 +722,20 @@ curl -X POST "https://familyoffice.com/api/registrations" \
 ## 📊 성능 고려사항
 
 ### 캐싱 전략
+
 - 프로그램 목록: 5분 캐시
 - 프로그램 상세: 10분 캐시
 - 사용자 등록 정보: 캐시 없음
 - 통계 데이터: 1시간 캐시
 
 ### Rate Limiting
+
 - 일반 사용자: 100 req/min
 - VIP 사용자: 200 req/min
 - 관리자: 500 req/min
 
 ### 페이지네이션
+
 - 기본 페이지 크기: 10
 - 최대 페이지 크기: 100
 - 오프셋 기반 페이지네이션 사용
@@ -668,6 +743,7 @@ curl -X POST "https://familyoffice.com/api/registrations" \
 ## 🔄 버전 관리
 
 현재 버전: `v1`
+
 - 호환성: 3개월 유지
 - 변경 사항: CHANGELOG.md 참조
 - 마이그레이션: 별도 가이드 제공

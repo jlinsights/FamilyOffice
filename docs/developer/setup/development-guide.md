@@ -17,6 +17,7 @@ This guide provides comprehensive instructions for developers working on the Fam
 ### 1. Prerequisites
 
 #### System Requirements
+
 - **Operating System**: macOS 12+, Ubuntu 20.04+, Windows 11+
 - **Node.js**: Version 18.0.0 or higher
 - **Docker**: Version 20.10.0 or higher
@@ -24,6 +25,7 @@ This guide provides comprehensive instructions for developers working on the Fam
 - **IDE**: VS Code (recommended) or IntelliJ IDEA
 
 #### Required Tools
+
 ```bash
 # Install Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -49,6 +51,7 @@ sudo apt-get install code
 ### 2. Project Setup
 
 #### Clone Repository
+
 ```bash
 # Clone the repository
 git clone https://github.com/familyoffice/platform.git
@@ -62,6 +65,7 @@ cp .env.example .env
 ```
 
 #### Environment Configuration
+
 ```bash
 # Development environment
 NODE_ENV=development
@@ -78,6 +82,7 @@ SENTRY_DSN=your_sentry_dsn
 ```
 
 #### Database Setup
+
 ```bash
 # Start PostgreSQL with Docker
 docker run --name postgres-dev \
@@ -99,6 +104,7 @@ npm run migrate:dev
 ### 3. Development Tools
 
 #### VS Code Extensions
+
 ```json
 {
   "recommendations": [
@@ -115,6 +121,7 @@ npm run migrate:dev
 ```
 
 #### Git Hooks
+
 ```bash
 # Install Husky for Git hooks
 npm install --save-dev husky lint-staged
@@ -130,6 +137,7 @@ npx husky add .husky/commit-msg "npm run lint:commit"
 ### 1. TypeScript Standards
 
 #### Code Style
+
 ```typescript
 // Use strict TypeScript configuration
 {
@@ -175,6 +183,7 @@ interface ApiResponse<T> {
 ```
 
 #### Function Standards
+
 ```typescript
 // Use async/await for asynchronous operations
 async function getPortfolio(id: string): Promise<Portfolio> {
@@ -212,6 +221,7 @@ function validatePortfolioData(data: Partial<Portfolio>): void {
 ### 2. React Standards
 
 #### Component Structure
+
 ```typescript
 // Use functional components with hooks
 import React, { useState, useEffect } from 'react';
@@ -254,9 +264,11 @@ export const PortfolioList: React.FC<PortfolioListProps> = ({
 ```
 
 #### Custom Hooks
+
 ```typescript
 // Create reusable custom hooks
 import { useState, useEffect } from 'react';
+
 import { api } from '@/lib/api';
 
 export function usePortfolio(familyId: string) {
@@ -287,6 +299,7 @@ export function usePortfolio(familyId: string) {
 ### 3. API Standards
 
 #### RESTful API Design
+
 ```typescript
 // Use consistent HTTP methods
 // GET /portfolios - List portfolios
@@ -321,10 +334,14 @@ interface ApiResponse<T> {
 ```
 
 #### Error Handling
+
 ```typescript
 // Create custom error classes
 export class ValidationError extends Error {
-  constructor(message: string, public field?: string) {
+  constructor(
+    message: string,
+    public field?: string
+  ) {
     super(message);
     this.name = 'ValidationError';
   }
@@ -344,7 +361,13 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof ValidationError) {
     return res.status(400).json({
       success: false,
-      errors: [{ code: 'VALIDATION_ERROR', message: error.message, field: error.field }],
+      errors: [
+        {
+          code: 'VALIDATION_ERROR',
+          message: error.message,
+          field: error.field,
+        },
+      ],
     });
   }
 
@@ -365,6 +388,7 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 ### 4. Security Standards
 
 #### Input Validation
+
 ```typescript
 // Use validation libraries
 import { z } from 'zod';
@@ -384,6 +408,7 @@ function createPortfolio(data: unknown): Portfolio {
 ```
 
 #### Authentication and Authorization
+
 ```typescript
 // Use JWT for authentication
 import jwt from 'jsonwebtoken';
@@ -424,11 +449,13 @@ function requireRole(roles: UserRole[]) {
 ### 1. Unit Testing
 
 #### Test Structure
+
 ```typescript
 // Use Jest for unit testing
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
-import { PortfolioService } from '@/services/PortfolioService';
+
 import { PortfolioRepository } from '@/repositories/PortfolioRepository';
+import { PortfolioService } from '@/services/PortfolioService';
 
 describe('PortfolioService', () => {
   let portfolioService: PortfolioService;
@@ -486,9 +513,11 @@ describe('PortfolioService', () => {
 ### 2. Integration Testing
 
 #### API Testing
+
 ```typescript
 // Use Supertest for API testing
 import request from 'supertest';
+
 import { app } from '@/app';
 import { createTestUser, createTestPortfolio } from '@/test/helpers';
 
@@ -528,6 +557,7 @@ describe('Portfolio API', () => {
 ### 3. End-to-End Testing
 
 #### E2E Testing with Playwright
+
 ```typescript
 // Use Playwright for E2E testing
 import { test, expect } from '@playwright/test';
@@ -536,20 +566,22 @@ test.describe('Portfolio Management', () => {
   test('should create new portfolio', async ({ page }) => {
     // Navigate to portfolio page
     await page.goto('/portfolios');
-    
+
     // Click create portfolio button
     await page.click('[data-testid="create-portfolio-btn"]');
-    
+
     // Fill portfolio form
     await page.fill('[data-testid="portfolio-name"]', 'Test Portfolio');
     await page.selectOption('[data-testid="portfolio-currency"]', 'USD');
     await page.selectOption('[data-testid="portfolio-risk"]', 'moderate');
-    
+
     // Submit form
     await page.click('[data-testid="submit-btn"]');
-    
+
     // Verify portfolio created
-    await expect(page.locator('[data-testid="portfolio-list"]')).toContainText('Test Portfolio');
+    await expect(page.locator('[data-testid="portfolio-list"]')).toContainText(
+      'Test Portfolio'
+    );
   });
 });
 ```
@@ -559,6 +591,7 @@ test.describe('Portfolio Management', () => {
 ### 1. Git Workflow
 
 #### Branch Naming
+
 ```bash
 # Feature branches
 git checkout -b feature/portfolio-management
@@ -574,6 +607,7 @@ git checkout -b release/v1.2.3
 ```
 
 #### Commit Standards
+
 ```bash
 # Use conventional commits
 git commit -m "feat: add portfolio creation functionality"
@@ -586,27 +620,33 @@ git commit -m "refactor: improve error handling in API"
 ### 2. Code Review Process
 
 #### Pull Request Template
+
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Integration tests added/updated
 - [ ] E2E tests added/updated
 - [ ] Manual testing completed
 
 ## Security
+
 - [ ] Security review completed
 - [ ] No security vulnerabilities introduced
 
 ## Checklist
+
 - [ ] Code follows style guidelines
 - [ ] Self-review completed
 - [ ] Documentation updated
@@ -617,6 +657,7 @@ Brief description of changes
 ### 3. Deployment Pipeline
 
 #### CI/CD Configuration
+
 ```yaml
 # GitHub Actions workflow
 name: CI/CD Pipeline
@@ -668,6 +709,7 @@ jobs:
 ### 1. Code Documentation
 
 #### JSDoc Comments
+
 ```typescript
 /**
  * Calculates the total return of a portfolio over a specified period
@@ -689,7 +731,8 @@ function calculatePortfolioReturn(
 ```
 
 #### README Files
-```markdown
+
+````markdown
 # Portfolio Service
 
 Handles portfolio management operations including creation, updates, and performance calculations.
@@ -709,6 +752,7 @@ import { PortfolioService } from '@/services/PortfolioService';
 const portfolioService = new PortfolioService();
 const portfolio = await portfolioService.getPortfolio('port_123');
 ```
+````
 
 ## API Reference
 
@@ -717,12 +761,14 @@ const portfolio = await portfolioService.getPortfolio('port_123');
 Retrieves a portfolio by ID.
 
 **Parameters:**
+
 - `id`: Portfolio identifier
 
 **Returns:** Promise resolving to Portfolio object
 
 **Throws:** NotFoundError if portfolio doesn't exist
-```
+
+````
 
 ### 2. API Documentation
 
@@ -752,13 +798,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioList'
-```
+````
 
 ## 🚨 Security Guidelines
 
 ### 1. Secure Coding Practices
 
 #### Input Sanitization
+
 ```typescript
 // Always sanitize user input
 import DOMPurify from 'dompurify';
@@ -773,26 +820,29 @@ const result = await db.query(query, [familyId]);
 ```
 
 #### Authentication Best Practices
-```typescript
-// Use secure session management
-app.use(session({
-  secret: process.env.SESSION_SECRET!,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: true,
-    httpOnly: true,
-    sameSite: 'strict',
-    maxAge: 1000 * 60 * 60 * 24 // 24 hours
-  }
-}));
 
+```typescript
 // Implement rate limiting
 import rateLimit from 'express-rate-limit';
 
+// Use secure session management
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET!,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: 1000 * 60 * 60 * 24, // 24 hours
+    },
+  })
+);
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
 });
 
 app.use('/api/', limiter);
@@ -801,6 +851,7 @@ app.use('/api/', limiter);
 ### 2. Data Protection
 
 #### Encryption
+
 ```typescript
 // Encrypt sensitive data
 import crypto from 'crypto';
@@ -810,14 +861,14 @@ function encryptData(data: string): string {
   const key = crypto.scryptSync(process.env.ENCRYPTION_KEY!, 'salt', 32);
   const iv = crypto.randomBytes(16);
   const cipher = crypto.createCipher(algorithm, key);
-  
+
   let encrypted = cipher.update(data, 'utf8', 'hex');
   encrypted += cipher.final('hex');
-  
+
   return `${iv.toString('hex')}:${encrypted}`;
 }
 ```
 
 ---
 
-*This developer guide is maintained by the Development Team and updated with each major release.* 
+_This developer guide is maintained by the Development Team and updated with each major release._

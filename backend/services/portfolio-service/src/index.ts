@@ -1,12 +1,13 @@
-import express from 'express';
-import helmet from 'helmet';
 import cors from 'cors';
+import express from 'express';
 import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
 import { register } from 'prom-client';
-import { PortfolioController } from './controllers/portfolio.controller';
+
+import { pgPool, redisClient } from '../../shared/database/connection';
 import { logger } from '../../shared/logging/logger';
 import { metricsCollector } from '../../shared/monitoring/metrics';
-import { pgPool, redisClient } from '../../shared/database/connection';
+import { PortfolioController } from './controllers/portfolio.controller';
 
 // 환경 변수
 const PORT = process.env.PORT || 3001;
@@ -16,21 +17,27 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const app = express();
 
 // 보안 미들웨어
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      scriptSrc: ["'self'"],
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrc: ["'self'"],
+      },
     },
-  },
-}));
+  })
+);
 
 // CORS 설정
-app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || [
+      'http://localhost:3000',
+    ],
+    credentials: true,
+  })
+);
 
 // 요청 제한 설정
 const limiter = rateLimit({
@@ -54,7 +61,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // 요청 로깅 미들웨어
 app.use((req, res, next) => {
   const startTime = Date.now();
-  
+
   logger.info('HTTP 요청', {
     method: req.method,
     url: req.url,
@@ -65,7 +72,7 @@ app.use((req, res, next) => {
 
   res.on('finish', () => {
     const duration = Date.now() - startTime;
-    
+
     logger.info('HTTP 응답', {
       method: req.method,
       url: req.url,
@@ -74,7 +81,12 @@ app.use((req, res, next) => {
       userId: req.user?.id || 'anonymous',
     });
 
-    metricsCollector.recordHttpRequest(req.method, req.url, res.statusCode, duration);
+    metricsCollector.recordHttpRequest(
+      req.method,
+      req.url,
+      res.statusCode,
+      duration
+    );
   });
 
   next();
@@ -83,7 +95,7 @@ app.use((req, res, next) => {
 // 인증 미들웨어 (간단한 버전)
 app.use((req, res, next) => {
   const token = req.headers.authorization?.replace('Bearer ', '');
-  
+
   if (token) {
     // 실제로는 JWT 토큰 검증 필요
     req.user = {
@@ -92,7 +104,7 @@ app.use((req, res, next) => {
       roles: ['user'],
     };
   }
-  
+
   next();
 });
 
@@ -103,42 +115,50 @@ const portfolioController = new PortfolioController();
 const apiRouter = express.Router();
 
 // 포트폴리오 라우트
-apiRouter.post('/portfolios', 
+apiRouter.post(
+  '/portfolios',
   PortfolioController.getValidationRules().createPortfolio,
   portfolioController.createPortfolio.bind(portfolioController)
 );
 
-apiRouter.get('/portfolios', 
+apiRouter.get(
+  '/portfolios',
   PortfolioController.getValidationRules().getPortfolios,
   portfolioController.getPortfolios.bind(portfolioController)
 );
 
-apiRouter.get('/portfolios/:id', 
+apiRouter.get(
+  '/portfolios/:id',
   PortfolioController.getValidationRules().getPortfolio,
   portfolioController.getPortfolio.bind(portfolioController)
 );
 
-apiRouter.put('/portfolios/:id', 
+apiRouter.put(
+  '/portfolios/:id',
   PortfolioController.getValidationRules().updatePortfolio,
   portfolioController.updatePortfolio.bind(portfolioController)
 );
 
-apiRouter.post('/portfolios/:id/assets', 
+apiRouter.post(
+  '/portfolios/:id/assets',
   PortfolioController.getValidationRules().addAssetToPortfolio,
   portfolioController.addAssetToPortfolio.bind(portfolioController)
 );
 
-apiRouter.get('/portfolios/:id/assets', 
+apiRouter.get(
+  '/portfolios/:id/assets',
   PortfolioController.getValidationRules().getPortfolioAssets,
   portfolioController.getPortfolioAssets.bind(portfolioController)
 );
 
-apiRouter.get('/portfolios/:id/stats', 
+apiRouter.get(
+  '/portfolios/:id/stats',
   PortfolioController.getValidationRules().getPortfolioStats,
   portfolioController.getPortfolioStats.bind(portfolioController)
 );
 
-apiRouter.get('/portfolios/:id/allocation', 
+apiRouter.get(
+  '/portfolios/:id/allocation',
   PortfolioController.getValidationRules().getAssetAllocation,
   portfolioController.getAssetAllocation.bind(portfolioController)
 );
@@ -182,25 +202,33 @@ app.use('*', (req, res) => {
 });
 
 // 전역 에러 핸들러
-app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  logger.error('전역 에러 핸들러', {
-    error: error.message,
-    stack: error.stack,
-    method: req.method,
-    url: req.url,
-    userId: req.user?.id || 'anonymous',
-  });
+app.use(
+  (
+    error: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    logger.error('전역 에러 핸들러', {
+      error: error.message,
+      stack: error.stack,
+      method: req.method,
+      url: req.url,
+      userId: req.user?.id || 'anonymous',
+    });
 
-  metricsCollector.recordError('portfolio-service', 'unhandled_error');
+    metricsCollector.recordError('portfolio-service', 'unhandled_error');
 
-  res.status(500).json({
-    success: false,
-    error: NODE_ENV === 'production' 
-      ? '서버 내부 오류가 발생했습니다.' 
-      : error.message,
-    timestamp: new Date(),
-  });
-});
+    res.status(500).json({
+      success: false,
+      error:
+        NODE_ENV === 'production'
+          ? '서버 내부 오류가 발생했습니다.'
+          : error.message,
+      timestamp: new Date(),
+    });
+  }
+);
 
 // 데이터베이스 연결 테스트
 async function testDatabaseConnections() {
@@ -240,26 +268,25 @@ async function startServer() {
     // Graceful shutdown
     process.on('SIGTERM', async () => {
       logger.info('SIGTERM 신호 수신, 서버 종료 시작');
-      
+
       // 연결 풀 종료
       await pgPool.end();
       await redisClient.quit();
-      
+
       logger.info('서버 종료 완료');
       process.exit(0);
     });
 
     process.on('SIGINT', async () => {
       logger.info('SIGINT 신호 수신, 서버 종료 시작');
-      
+
       // 연결 풀 종료
       await pgPool.end();
       await redisClient.quit();
-      
+
       logger.info('서버 종료 완료');
       process.exit(0);
     });
-
   } catch (error) {
     logger.error('서버 시작 실패', {
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -269,4 +296,4 @@ async function startServer() {
 }
 
 // 서버 시작
-startServer(); 
+startServer();

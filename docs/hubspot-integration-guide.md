@@ -17,11 +17,14 @@ FamilyOffice 프로젝트에 HubSpot 폼 통합이 완료되었습니다. 이 �
 
 ```typescript
 // 차단된 도메인 목록 로드
-const response = await fetch('https://hubspotonwebflow.com/assets/js/blockedDomains.json');
+const response = await fetch(
+  'https://hubspotonwebflow.com/assets/js/blockedDomains.json'
+);
 const blockedDomains = await response.json();
 ```
 
 **특징:**
+
 - 실시간 도메인 차단 목록 업데이트
 - 추가 차단 도메인 설정 가능
 - 차단된 도메인 입력 시 제출 버튼 비활성화
@@ -38,6 +41,7 @@ const checkboxes = form.querySelectorAll('input[type="checkbox"][required]');
 ```
 
 **특징:**
+
 - 동일한 name 속성을 가진 체크박스 그룹 처리
 - 최소 하나 선택 필수 검증
 - 실시간 유효성 상태 업데이트
@@ -49,13 +53,14 @@ HubSpot 추적 정보를 자동으로 폼에 추가:
 
 ```typescript
 // HubSpot 추적 정보 자동 추가
-formData.set("hutk", hubspotCookie);
-formData.set("pageUri", window.location.href);
-formData.set("pageName", document.title);
-formData.set("pageId", window.location.pathname);
+formData.set('hutk', hubspotCookie);
+formData.set('pageUri', window.location.href);
+formData.set('pageName', document.title);
+formData.set('pageId', window.location.pathname);
 ```
 
 **추가되는 정보:**
+
 - `hutk`: HubSpot 추적 쿠키
 - `pageUri`: 현재 페이지 URL
 - `pageName`: 페이지 제목
@@ -66,43 +71,43 @@ formData.set("pageId", window.location.pathname);
 ### 1. 기본 HubSpot 폼 사용
 
 ```tsx
-import { HubSpotContactForm } from '@/components/forms/hubspot-contact-form'
+import { HubSpotContactForm } from '@/components/forms/hubspot-contact-form';
 
 export default function ContactPage() {
   return (
     <div>
       <h1>문의하기</h1>
-      <HubSpotContactForm 
+      <HubSpotContactForm
         formId="your-hubspot-form-id"
         className="max-w-md mx-auto"
       />
     </div>
-  )
+  );
 }
 ```
 
 ### 2. HubSpot API 폼 사용
 
 ```tsx
-import { HubSpotApiContactForm } from '@/components/forms/hubspot-contact-form'
+import { HubSpotApiContactForm } from '@/components/forms/hubspot-contact-form';
 
 export default function ContactPage() {
   return (
     <div>
       <h1>문의하기</h1>
-      <HubSpotApiContactForm 
+      <HubSpotApiContactForm
         formId="your-hubspot-form-id"
         className="max-w-md mx-auto"
       />
     </div>
-  )
+  );
 }
 ```
 
 ### 3. 커스텀 폼 생성
 
 ```tsx
-import { HubSpotForm, HubSpotField } from '@/components/hubspot-integration'
+import { HubSpotForm, HubSpotField } from '@/components/hubspot-integration';
 
 export function CustomContactForm() {
   return (
@@ -111,15 +116,15 @@ export function CustomContactForm() {
         <HubSpotField fieldName="firstname" required>
           <input type="text" name="firstname" required />
         </HubSpotField>
-        
+
         <HubSpotField fieldName="email" type="email" required>
           <input type="email" name="email" required />
         </HubSpotField>
-        
+
         <button type="submit">제출</button>
       </form>
     </HubSpotForm>
-  )
+  );
 }
 ```
 
@@ -130,6 +135,7 @@ export function CustomContactForm() {
 HubSpot 폼을 감싸는 컨테이너 컴포넌트.
 
 **Props:**
+
 - `children`: React 노드
 - `className`: CSS 클래스명 (선택사항)
 
@@ -138,6 +144,7 @@ HubSpot 폼을 감싸는 컨테이너 컴포넌트.
 HubSpot API를 사용하는 폼을 감싸는 컨테이너 컴포넌트.
 
 **Props:**
+
 - `children`: React 노드
 - `className`: CSS 클래스명 (선택사항)
 - `formUrl`: HubSpot API 엔드포인트 URL
@@ -147,6 +154,7 @@ HubSpot API를 사용하는 폼을 감싸는 컨테이너 컴포넌트.
 HubSpot 필드 매핑을 위한 래퍼 컴포넌트.
 
 **Props:**
+
 - `children`: React 노드 (input, textarea, select 등)
 - `fieldName`: HubSpot 필드명
 - `type`: 필드 타입 ('text', 'email', 'tel', 'textarea', 'checkbox', 'radio', 'file')
@@ -171,11 +179,7 @@ HUBSPOT_CLIENT_SECRET=your-client-secret
 
 ```json
 {
-  "blockedDomains": [
-    "10minutemail.com",
-    "tempmail.org",
-    "guerrillamail.com"
-  ]
+  "blockedDomains": ["10minutemail.com", "tempmail.org", "guerrillamail.com"]
 }
 ```
 
@@ -186,9 +190,7 @@ HUBSPOT_CLIENT_SECRET=your-client-secret
 ```json
 {
   "enabled": true,
-  "additionalBlockedDomains": [
-    "custom-blocked-domain.com"
-  ]
+  "additionalBlockedDomains": ["custom-blocked-domain.com"]
 }
 ```
 
@@ -198,7 +200,9 @@ HUBSPOT_CLIENT_SECRET=your-client-secret
 
 ```typescript
 try {
-  const response = await fetch('https://hubspotonwebflow.com/assets/js/blockedDomains.json');
+  const response = await fetch(
+    'https://hubspotonwebflow.com/assets/js/blockedDomains.json'
+  );
   const data = await response.json();
 } catch (error) {
   console.error('Error loading blocked domains:', error);
@@ -289,7 +293,7 @@ describe('HubSpot Integration', () => {
   it('should block email domains', () => {
     // 테스트 로직
   });
-  
+
   it('should validate checkboxes', () => {
     // 테스트 로직
   });
@@ -347,4 +351,4 @@ console.log('HubSpot response:', response);
 
 HubSpot 통합은 FamilyOffice 프로젝트의 리드 생성 및 고객 관리 기능을 강화합니다. 이메일 도메인 차단, 체크박스 유효성 검사, 자동 데이터 업데이트 등의 기능을 통해 사용자 경험을 개선하고 스팸을 방지합니다.
 
-정기적인 모니터링과 업데이트를 통해 안정적이고 효율적인 HubSpot 통합을 유지할 수 있습니다. 
+정기적인 모니터링과 업데이트를 통해 안정적이고 효율적인 HubSpot 통합을 유지할 수 있습니다.

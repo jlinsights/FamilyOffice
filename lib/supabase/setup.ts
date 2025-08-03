@@ -1,16 +1,16 @@
-import { createClient } from "./client"
+import { createClient } from './client';
 
 export async function createConsultationsTable() {
-  const supabase = createClient()
-  
+  const supabase = createClient();
+
   // 먼저 테이블이 존재하는지 확인
-  const { error: tablesError } = await supabase.rpc('get_tables')
-  
+  const { error: tablesError } = await supabase.rpc('get_tables');
+
   if (tablesError) {
-    console.error("Error checking tables:", tablesError)
-    return { success: false, error: tablesError }
+    console.error('Error checking tables:', tablesError);
+    return { success: false, error: tablesError };
   }
-  
+
   // 테이블 생성 SQL
   const createTableSQL = `
     CREATE TABLE IF NOT EXISTS consultations (
@@ -36,49 +36,51 @@ export async function createConsultationsTable() {
       
     CREATE POLICY "Admin can view all consultations" ON consultations
       FOR SELECT USING (true);
-  `
-  
+  `;
+
   try {
-    const { error } = await supabase.rpc('exec_sql', { sql: createTableSQL })
-    
+    const { error } = await supabase.rpc('exec_sql', { sql: createTableSQL });
+
     if (error) {
-      console.error("Error creating table:", error)
-      return { success: false, error }
+      console.error('Error creating table:', error);
+      return { success: false, error };
     }
-    
-    return { success: true }
+
+    return { success: true };
   } catch (error) {
-    console.error("Exception creating table:", error)
-    return { success: false, error }
+    console.error('Exception creating table:', error);
+    return { success: false, error };
   }
 }
 
 export async function testSupabaseConnection() {
-  const supabase = createClient()
-  
+  const supabase = createClient();
+
   try {
     // 간단한 연결 테스트
-    const { data, error } = await supabase.from('consultations').select('count', { count: 'exact', head: true })
-    
+    const { data, error } = await supabase
+      .from('consultations')
+      .select('count', { count: 'exact', head: true });
+
     if (error) {
-      console.error("Connection test error:", error)
-      return { 
-        connected: false, 
+      console.error('Connection test error:', error);
+      return {
+        connected: false,
         error: error.message || 'Unknown error',
-        details: error
-      }
+        details: error,
+      };
     }
-    
-    return { 
-      connected: true, 
-      count: data?.[0]?.count || 0 
-    }
+
+    return {
+      connected: true,
+      count: data?.[0]?.count || 0,
+    };
   } catch (error) {
-    console.error("Connection test exception:", error)
-    return { 
-      connected: false, 
+    console.error('Connection test exception:', error);
+    return {
+      connected: false,
       error: error instanceof Error ? error.message : 'Unknown error',
-      details: error
-    }
+      details: error,
+    };
   }
 }

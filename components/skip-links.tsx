@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
 export function SkipLinks() {
   return (
@@ -15,5 +15,5 @@ export function SkipLinks() {
         푸터로 건너뛰기
       </Link>
     </>
-  )
-} 
+  );
+}

@@ -5,7 +5,7 @@
 
 // Mock realistic financial data
 export const MOCK_STOCK_DATA = {
-  'AAPL': {
+  AAPL: {
     symbol: 'AAPL',
     name: 'Apple Inc.',
     price: 182.52,
@@ -19,14 +19,14 @@ export const MOCK_STOCK_DATA = {
     low52w: 144.25,
     beta: 1.28,
     eps: 6.42,
-    currency: 'USD'
+    currency: 'USD',
   },
-  'TSLA': {
+  TSLA: {
     symbol: 'TSLA',
     name: 'Tesla, Inc.',
     price: 248.87,
     change: -8.23,
-    changePercent: -3.20,
+    changePercent: -3.2,
     volume: 67890123,
     marketCap: 789234000000,
     pe: 62.3,
@@ -35,7 +35,7 @@ export const MOCK_STOCK_DATA = {
     low52w: 152.37,
     beta: 2.09,
     eps: 3.99,
-    currency: 'USD'
+    currency: 'USD',
   },
   '005930.KS': {
     symbol: '005930.KS',
@@ -51,7 +51,7 @@ export const MOCK_STOCK_DATA = {
     low52w: 68900,
     beta: 1.12,
     eps: 3946,
-    currency: 'KRW'
+    currency: 'KRW',
   },
   '035420.KS': {
     symbol: '035420.KS',
@@ -67,26 +67,26 @@ export const MOCK_STOCK_DATA = {
     low52w: 156000,
     beta: 1.45,
     eps: 7340,
-    currency: 'KRW'
-  }
-}
+    currency: 'KRW',
+  },
+};
 
 export const MOCK_FOREX_DATA = {
   'USD/KRW': {
     from: 'USD',
     to: 'KRW',
-    rate: 1325.50,
+    rate: 1325.5,
     change: 8.25,
     changePercent: 0.63,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   },
   'EUR/KRW': {
     from: 'EUR',
     to: 'KRW',
     rate: 1438.75,
-    change: -5.30,
+    change: -5.3,
     changePercent: -0.37,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   },
   'JPY/KRW': {
     from: 'JPY',
@@ -94,9 +94,9 @@ export const MOCK_FOREX_DATA = {
     rate: 8.89,
     change: 0.12,
     changePercent: 1.37,
-    timestamp: Date.now()
-  }
-}
+    timestamp: Date.now(),
+  },
+};
 
 export const MOCK_PORTFOLIO_DATA = {
   id: 'portfolio-001',
@@ -115,7 +115,7 @@ export const MOCK_PORTFOLIO_DATA = {
       marketValue: 73800000,
       unrealizedGain: 1800000,
       unrealizedGainPercent: 2.5,
-      weight: 59.04
+      weight: 59.04,
     },
     {
       symbol: '035420.KS',
@@ -126,7 +126,7 @@ export const MOCK_PORTFOLIO_DATA = {
       marketValue: 18650000,
       unrealizedGain: -850000,
       unrealizedGainPercent: -4.36,
-      weight: 14.92
+      weight: 14.92,
     },
     {
       symbol: 'AAPL',
@@ -137,8 +137,8 @@ export const MOCK_PORTFOLIO_DATA = {
       marketValue: 12076100, // USD to KRW converted
       unrealizedGain: 480475,
       unrealizedGainPercent: 4.15,
-      weight: 9.66
-    }
+      weight: 9.66,
+    },
   ],
   performance: {
     totalReturn: 12500000,
@@ -146,16 +146,16 @@ export const MOCK_PORTFOLIO_DATA = {
     dayChange: 850000,
     dayChangePercent: 0.68,
     ytdReturn: 8750000,
-    ytdReturnPercent: 7.78
+    ytdReturnPercent: 7.78,
   },
   allocation: {
     stocks: 88.0,
     cash: 12.0,
     bonds: 0.0,
-    alternatives: 0.0
+    alternatives: 0.0,
   },
-  lastUpdated: new Date().toISOString()
-}
+  lastUpdated: new Date().toISOString(),
+};
 
 export const MOCK_TRANSACTION_DATA = [
   {
@@ -169,7 +169,7 @@ export const MOCK_TRANSACTION_DATA = [
     fees: 35750,
     currency: 'KRW',
     date: '2024-01-15T09:30:00Z',
-    status: 'SETTLED'
+    status: 'SETTLED',
   },
   {
     id: 'txn-002',
@@ -182,7 +182,7 @@ export const MOCK_TRANSACTION_DATA = [
     fees: 5050,
     currency: 'KRW',
     date: '2024-01-20T14:15:00Z',
-    status: 'SETTLED'
+    status: 'SETTLED',
   },
   {
     id: 'txn-003',
@@ -195,9 +195,9 @@ export const MOCK_TRANSACTION_DATA = [
     fees: 0,
     currency: 'KRW',
     date: '2024-03-15T00:00:00Z',
-    status: 'SETTLED'
-  }
-]
+    status: 'SETTLED',
+  },
+];
 
 export const MOCK_TAX_DATA = {
   year: 2024,
@@ -205,75 +205,75 @@ export const MOCK_TAX_DATA = {
   capitalGains: {
     shortTerm: 2500000,
     longTerm: 8750000,
-    total: 11250000
+    total: 11250000,
   },
   dividends: {
     domestic: 1416000,
     foreign: 156750,
-    total: 1572750
+    total: 1572750,
   },
   taxLiability: {
     capitalGainsTax: 1687500, // 15% on capital gains
     dividendTax: 235913, // 15% on dividends
-    totalTax: 1923413
+    totalTax: 1923413,
   },
   deductions: {
     tradingFees: 125000,
     managementFees: 450000,
-    total: 575000
+    total: 575000,
   },
-  netTaxableIncome: 12247750
-}
+  netTaxableIncome: 12247750,
+};
 
 export const MOCK_MARKET_DATA = {
   indices: {
-    'KOSPI': {
+    KOSPI: {
       name: 'KOSPI',
       value: 2645.32,
       change: 15.67,
-      changePercent: 0.60
+      changePercent: 0.6,
     },
-    'KOSDAQ': {
+    KOSDAQ: {
       name: 'KOSDAQ',
       value: 852.45,
       change: -3.21,
-      changePercent: -0.38
+      changePercent: -0.38,
     },
     'S&P500': {
       name: 'S&P 500',
       value: 4567.23,
       change: 12.45,
-      changePercent: 0.27
+      changePercent: 0.27,
     },
-    'NASDAQ': {
+    NASDAQ: {
       name: 'NASDAQ',
       value: 14234.56,
       change: -25.67,
-      changePercent: -0.18
-    }
+      changePercent: -0.18,
+    },
   },
   sectors: {
-    'Technology': { return: 15.6, weight: 32.5 },
-    'Financial': { return: 8.9, weight: 18.7 },
-    'Healthcare': { return: 12.3, weight: 14.2 },
-    'Consumer': { return: 6.7, weight: 12.8 },
-    'Industrial': { return: 9.4, weight: 11.3 },
-    'Energy': { return: 22.1, weight: 6.2 },
-    'Utilities': { return: 4.2, weight: 4.3 }
-  }
-}
+    Technology: { return: 15.6, weight: 32.5 },
+    Financial: { return: 8.9, weight: 18.7 },
+    Healthcare: { return: 12.3, weight: 14.2 },
+    Consumer: { return: 6.7, weight: 12.8 },
+    Industrial: { return: 9.4, weight: 11.3 },
+    Energy: { return: 22.1, weight: 6.2 },
+    Utilities: { return: 4.2, weight: 4.3 },
+  },
+};
 
 // Financial calculation precision helpers
 export const PRECISION = {
   CURRENCY: 2,
   PERCENTAGE: 4,
   PRICE: 4,
-  SHARES: 6
-}
+  SHARES: 6,
+};
 
 export function roundToPrecision(value, precision) {
-  const factor = Math.pow(10, precision)
-  return Math.round(value * factor) / factor
+  const factor = Math.pow(10, precision);
+  return Math.round(value * factor) / factor;
 }
 
 export function formatCurrency(amount, currency = 'KRW') {
@@ -282,56 +282,56 @@ export function formatCurrency(amount, currency = 'KRW') {
       style: 'currency',
       currency: 'KRW',
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount)
+      maximumFractionDigits: 0,
+    }).format(amount);
   } else if (currency === 'USD') {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(amount)
+      maximumFractionDigits: 2,
+    }).format(amount);
   }
-  return amount.toString()
+  return amount.toString();
 }
 
 // Mock API response generators
 export function generateMockStockResponse(symbol) {
-  const baseData = MOCK_STOCK_DATA[symbol]
+  const baseData = MOCK_STOCK_DATA[symbol];
   if (!baseData) {
-    throw new Error(`No mock data for symbol: ${symbol}`)
+    throw new Error(`No mock data for symbol: ${symbol}`);
   }
-  
+
   return {
     ...baseData,
     timestamp: Date.now(),
-    lastUpdated: new Date().toISOString()
-  }
+    lastUpdated: new Date().toISOString(),
+  };
 }
 
 export function generateMockPortfolioResponse(portfolioId) {
   return {
     ...MOCK_PORTFOLIO_DATA,
     id: portfolioId,
-    lastUpdated: new Date().toISOString()
-  }
+    lastUpdated: new Date().toISOString(),
+  };
 }
 
 // Mock time series data for charts
 export function generateMockTimeSeries(symbol, days = 30) {
-  const basePrice = MOCK_STOCK_DATA[symbol]?.price || 100
-  const data = []
-  const startDate = new Date()
-  startDate.setDate(startDate.getDate() - days)
-  
+  const basePrice = MOCK_STOCK_DATA[symbol]?.price || 100;
+  const data = [];
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
+
   for (let i = 0; i < days; i++) {
-    const date = new Date(startDate)
-    date.setDate(date.getDate() + i)
-    
-    const volatility = 0.02 // 2% daily volatility
-    const randomChange = (Math.random() - 0.5) * 2 * volatility
-    const price = basePrice * (1 + randomChange * i / days)
-    
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + i);
+
+    const volatility = 0.02; // 2% daily volatility
+    const randomChange = (Math.random() - 0.5) * 2 * volatility;
+    const price = basePrice * (1 + (randomChange * i) / days);
+
     data.push({
       date: date.toISOString().split('T')[0],
       timestamp: date.getTime(),
@@ -339,57 +339,57 @@ export function generateMockTimeSeries(symbol, days = 30) {
       high: roundToPrecision(price * 1.015, PRECISION.PRICE),
       low: roundToPrecision(price * 0.985, PRECISION.PRICE),
       close: roundToPrecision(price, PRECISION.PRICE),
-      volume: Math.floor(Math.random() * 10000000) + 1000000
-    })
+      volume: Math.floor(Math.random() * 10000000) + 1000000,
+    });
   }
-  
-  return data
+
+  return data;
 }
 
 // Mock external API failures for testing error handling
 export const MOCK_API_ERRORS = {
   RATE_LIMIT: {
     status: 429,
-    message: 'Rate limit exceeded'
+    message: 'Rate limit exceeded',
   },
   SERVER_ERROR: {
     status: 500,
-    message: 'Internal server error'
+    message: 'Internal server error',
   },
   NOT_FOUND: {
     status: 404,
-    message: 'Symbol not found'
+    message: 'Symbol not found',
   },
   UNAUTHORIZED: {
     status: 401,
-    message: 'Unauthorized access'
-  }
-}
+    message: 'Unauthorized access',
+  },
+};
 
 // Mock async delay for testing loading states
 export function mockAsyncDelay(ms = 100) {
-  return new Promise(resolve => setTimeout(resolve, ms))
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // Global mocks setup
 beforeEach(() => {
   // Mock fetch for API calls
-  global.fetch = jest.fn()
-  
+  global.fetch = jest.fn();
+
   // Mock console.error to reduce noise in tests
-  jest.spyOn(console, 'error').mockImplementation(() => {})
-  
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+
   // Mock Date.now for consistent timestamps
-  jest.spyOn(Date, 'now').mockReturnValue(1704067200000) // 2024-01-01
-  
+  jest.spyOn(Date, 'now').mockReturnValue(1704067200000); // 2024-01-01
+
   // Mock performance.now for timing tests
-  jest.spyOn(performance, 'now').mockReturnValue(0)
-})
+  jest.spyOn(performance, 'now').mockReturnValue(0);
+});
 
 afterEach(() => {
   // Restore all mocks
-  jest.restoreAllMocks()
-})
+  jest.restoreAllMocks();
+});
 
 // Export all mocks for individual test use
 export {
@@ -399,5 +399,5 @@ export {
   MOCK_TRANSACTION_DATA,
   MOCK_TAX_DATA,
   MOCK_MARKET_DATA,
-  MOCK_API_ERRORS
-}
+  MOCK_API_ERRORS,
+};

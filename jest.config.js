@@ -12,13 +12,13 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   // Test environment
   testEnvironment: 'jest-environment-jsdom',
-  
+
   // Setup files
   setupFilesAfterEnv: [
     '<rootDir>/jest.setup.js',
-    '<rootDir>/tests/setup/financial-mocks.js'
+    '<rootDir>/tests/setup/financial-mocks.js',
   ],
-  
+
   // Module name mapping
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
@@ -29,21 +29,21 @@ const customJestConfig = {
     '^@/types/(.*)$': '<rootDir>/types/$1',
     '^@/tests/(.*)$': '<rootDir>/tests/$1',
   },
-  
+
   // Test directories
   testMatch: [
     '<rootDir>/tests/**/*.test.{js,jsx,ts,tsx}',
     '<rootDir>/**/__tests__/**/*.{js,jsx,ts,tsx}',
     '<rootDir>/**/*.{test,spec}.{js,jsx,ts,tsx}',
   ],
-  
+
   testPathIgnorePatterns: [
     '<rootDir>/.next/',
     '<rootDir>/node_modules/',
     '<rootDir>/coverage/',
     '<rootDir>/dist/',
   ],
-  
+
   // Coverage configuration - Enhanced for financial applications
   collectCoverage: true,
   collectCoverageFrom: [
@@ -54,16 +54,16 @@ const customJestConfig = {
     'lib/tax/**/*.{js,ts,jsx,tsx}',
     'lib/reporting/**/*.{js,ts,jsx,tsx}',
     'lib/compliance/**/*.{js,ts,jsx,tsx}',
-    
+
     // API routes (85%+ required)
     'app/api/**/*.{js,ts}',
-    
+
     // Core application logic (80%+ required)
     'app/**/*.{js,jsx,ts,tsx}',
     'components/**/*.{js,jsx,ts,tsx}',
     'lib/**/*.{js,jsx,ts,tsx}',
     'constants/**/*.{js,jsx,ts,tsx}',
-    
+
     // Exclude files
     '!**/*.d.ts',
     '!**/*.config.{js,ts}',
@@ -75,7 +75,7 @@ const customJestConfig = {
     '!**/layout.tsx',
     '!**/globals.css',
   ],
-  
+
   // Strict coverage thresholds for financial calculations
   coverageThreshold: {
     global: {
@@ -117,7 +117,7 @@ const customJestConfig = {
       statements: 90,
     },
   },
-  
+
   // Coverage reporters
   coverageReporters: [
     'text',
@@ -128,23 +128,23 @@ const customJestConfig = {
     'json-summary',
     'cobertura', // For CI/CD
   ],
-  
+
   // Coverage directory
   coverageDirectory: '<rootDir>/coverage',
-  
+
   // Clear mocks between tests
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
-  
+
   // Test timeout for complex financial calculations
   testTimeout: 30000,
-  
+
   // Transform configuration
   transformIgnorePatterns: [
     'node_modules/(?!(.*\\.mjs$|@radix-ui|lucide-react|recharts))',
   ],
-  
+
   // Globals for financial testing
   globals: {
     'ts-jest': {
@@ -156,22 +156,22 @@ const customJestConfig = {
     PERCENTAGE_PRECISION: 4,
     TEST_MODE: true,
   },
-  
+
   // Test reporters
   reporters: ['default'],
-  
+
   // Verbose output
   verbose: process.env.CI === 'true' || process.env.JEST_VERBOSE === 'true',
-  
+
   // Error handling
   errorOnDeprecated: true,
   bail: false, // Continue running tests even if some fail
-  
+
   // Test environment options
   testEnvironmentOptions: {
     url: 'http://localhost:3000',
   },
-  
+
   // Module directories
   moduleDirectories: ['node_modules', '<rootDir>'],
 };

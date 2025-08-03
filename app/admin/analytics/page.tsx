@@ -1,28 +1,37 @@
-import { Metadata } from 'next'
-import { Suspense } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { 
-  BarChart3, 
-  Users, 
-  DollarSign, 
-  Clock, 
+import {
+  BarChart3,
+  Users,
+  DollarSign,
+  Clock,
   Activity,
   AlertCircle,
   CheckCircle,
-  XCircle
-} from 'lucide-react'
+  XCircle,
+} from 'lucide-react';
+
+import { Suspense } from 'react';
+
+import { Metadata } from 'next';
+
+import { Badge } from '@/components/ui/badge';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const metadata: Metadata = {
   title: '분석 대시보드',
   description: '실시간 플랫폼 분석 및 모니터링',
-}
+};
 
 // Disable static generation for this page
-export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 // Mock data - 실제 구현에서는 API에서 가져올 것
 const analyticsData = {
@@ -34,9 +43,9 @@ const analyticsData = {
     totalRevenue: 2450000000, // 24.5억
     averageSessionTime: '4:32',
     bounceRate: 28.5,
-    conversionRate: 3.8
+    conversionRate: 3.8,
   },
-  
+
   realTimeMetrics: {
     currentVisitors: 45,
     pageViews: 1892,
@@ -45,30 +54,30 @@ const analyticsData = {
       { path: '/services', views: 298, title: '서비스' },
       { path: '/program', views: 187, title: '교육 프로그램' },
       { path: '/contact', views: 156, title: '상담 신청' },
-      { path: '/dashboard', views: 134, title: '대시보드' }
+      { path: '/dashboard', views: 134, title: '대시보드' },
     ],
     devices: {
       desktop: 67.3,
       mobile: 28.4,
-      tablet: 4.3
+      tablet: 4.3,
     },
     browsers: {
       chrome: 68.9,
       safari: 18.7,
       edge: 8.1,
       firefox: 3.2,
-      other: 1.1
-    }
+      other: 1.1,
+    },
   },
-  
+
   userSegments: [
     { segment: '제조업', users: 387, percentage: 31.0, growth: '+12%' },
     { segment: '건설업', users: 298, percentage: 23.9, growth: '+8%' },
     { segment: 'IT/기술', users: 234, percentage: 18.8, growth: '+24%' },
     { segment: '가족기업', users: 189, percentage: 15.2, growth: '+5%' },
-    { segment: '기타', users: 139, percentage: 11.1, growth: '-2%' }
+    { segment: '기타', users: 139, percentage: 11.1, growth: '-2%' },
   ],
-  
+
   systemHealth: {
     apiStatus: 'operational',
     dbStatus: 'operational',
@@ -76,33 +85,33 @@ const analyticsData = {
     uptime: 99.98,
     avgResponseTime: 145,
     errorRate: 0.02,
-    lastIncident: '2024-01-15T10:30:00Z'
+    lastIncident: '2024-01-15T10:30:00Z',
   },
-  
+
   financialMetrics: {
     apiCalls: {
       yahoo: { calls: 15642, success: 99.94, avgLatency: 230 },
-      alphaVantage: { calls: 3421, success: 99.87, avgLatency: 340 }
+      alphaVantage: { calls: 3421, success: 99.87, avgLatency: 340 },
     },
     cacheHitRate: 87.3,
-    dataFreshness: 95.8
-  }
-}
+    dataFreshness: 95.8,
+  },
+};
 
-function MetricCard({ 
-  title, 
-  value, 
-  description, 
-  icon: Icon, 
-  trend, 
-  className = "" 
+function MetricCard({
+  title,
+  value,
+  description,
+  icon: Icon,
+  trend,
+  className = '',
 }: {
-  title: string
-  value: string | number
-  description: string
-  icon: any
-  trend?: string
-  className?: string
+  title: string;
+  value: string | number;
+  description: string;
+  icon: any;
+  trend?: string;
+  className?: string;
 }) {
   return (
     <Card className={className}>
@@ -114,10 +123,15 @@ function MetricCard({
         <div className="text-2xl font-bold">{value}</div>
         <p className="text-xs text-muted-foreground flex items-center gap-1">
           {trend && (
-            <span className={`font-medium ${
-              trend.startsWith('+') ? 'text-green-600' : 
-              trend.startsWith('-') ? 'text-red-600' : ''
-            }`}>
+            <span
+              className={`font-medium ${
+                trend.startsWith('+')
+                  ? 'text-green-600'
+                  : trend.startsWith('-')
+                    ? 'text-red-600'
+                    : ''
+              }`}
+            >
               {trend}
             </span>
           )}
@@ -125,29 +139,29 @@ function MetricCard({
         </p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function StatusIndicator({ status }: { status: string }) {
   const getStatusIcon = () => {
     switch (status) {
       case 'operational':
-        return <CheckCircle className="h-4 w-4 text-green-500" />
+        return <CheckCircle className="h-4 w-4 text-green-500" />;
       case 'degraded':
-        return <AlertCircle className="h-4 w-4 text-yellow-500" />
+        return <AlertCircle className="h-4 w-4 text-yellow-500" />;
       case 'down':
-        return <XCircle className="h-4 w-4 text-red-500" />
+        return <XCircle className="h-4 w-4 text-red-500" />;
       default:
-        return <AlertCircle className="h-4 w-4 text-gray-500" />
+        return <AlertCircle className="h-4 w-4 text-gray-500" />;
     }
-  }
+  };
 
   return (
     <div className="flex items-center gap-2">
       {getStatusIcon()}
       <span className="capitalize">{status}</span>
     </div>
-  )
+  );
 }
 
 function RealTimeChart() {
@@ -156,10 +170,12 @@ function RealTimeChart() {
       <div className="text-center">
         <BarChart3 className="h-12 w-12 text-gray-400 mx-auto mb-2" />
         <p className="text-gray-500">실시간 차트</p>
-        <p className="text-sm text-gray-400">Chart.js 또는 Recharts 구현 예정</p>
+        <p className="text-sm text-gray-400">
+          Chart.js 또는 Recharts 구현 예정
+        </p>
       </div>
     </div>
-  )
+  );
 }
 
 function LoadingSkeleton() {
@@ -180,18 +196,26 @@ function LoadingSkeleton() {
       </div>
       <Skeleton className="h-64 w-full" />
     </div>
-  )
+  );
 }
 
 export default function AnalyticsPage() {
-  const { overview, realTimeMetrics, userSegments, systemHealth, financialMetrics } = analyticsData
+  const {
+    overview,
+    realTimeMetrics,
+    userSegments,
+    systemHealth,
+    financialMetrics,
+  } = analyticsData;
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">분석 대시보드</h1>
-          <p className="text-muted-foreground">실시간 플랫폼 성능 및 사용자 분석</p>
+          <p className="text-muted-foreground">
+            실시간 플랫폼 성능 및 사용자 분석
+          </p>
         </div>
         <Badge variant="outline" className="flex items-center gap-1">
           <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
@@ -281,14 +305,22 @@ export default function AnalyticsPage() {
               <CardContent>
                 <div className="space-y-2">
                   {realTimeMetrics.topPages.map((page, index) => (
-                    <div key={page.path} className="flex items-center justify-between">
+                    <div
+                      key={page.path}
+                      className="flex items-center justify-between"
+                    >
                       <div className="flex items-center gap-3">
-                        <Badge variant="outline" className="w-8 h-6 flex items-center justify-center">
+                        <Badge
+                          variant="outline"
+                          className="w-8 h-6 flex items-center justify-center"
+                        >
                           {index + 1}
                         </Badge>
                         <div>
                           <p className="font-medium">{page.title}</p>
-                          <p className="text-sm text-muted-foreground">{page.path}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {page.path}
+                          </p>
                         </div>
                       </div>
                       <div className="text-right">
@@ -321,8 +353,11 @@ export default function AnalyticsPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {userSegments.map((segment) => (
-                      <div key={segment.segment} className="flex items-center justify-between">
+                    {userSegments.map(segment => (
+                      <div
+                        key={segment.segment}
+                        className="flex items-center justify-between"
+                      >
                         <div className="flex items-center gap-3">
                           <div className="w-3 h-3 bg-blue-500 rounded-full" />
                           <span className="font-medium">{segment.segment}</span>
@@ -330,14 +365,20 @@ export default function AnalyticsPage() {
                         <div className="text-right">
                           <div className="flex items-center gap-2">
                             <span className="font-medium">{segment.users}</span>
-                            <Badge 
-                              variant={segment.growth.startsWith('+') ? 'default' : 'destructive'}
+                            <Badge
+                              variant={
+                                segment.growth.startsWith('+')
+                                  ? 'default'
+                                  : 'destructive'
+                              }
                               className="text-xs"
                             >
                               {segment.growth}
                             </Badge>
                           </div>
-                          <p className="text-sm text-muted-foreground">{segment.percentage}%</p>
+                          <p className="text-sm text-muted-foreground">
+                            {segment.percentage}%
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -354,15 +395,21 @@ export default function AnalyticsPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span>데스크톱</span>
-                      <span className="font-medium">{realTimeMetrics.devices.desktop}%</span>
+                      <span className="font-medium">
+                        {realTimeMetrics.devices.desktop}%
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span>모바일</span>
-                      <span className="font-medium">{realTimeMetrics.devices.mobile}%</span>
+                      <span className="font-medium">
+                        {realTimeMetrics.devices.mobile}%
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span>태블릿</span>
-                      <span className="font-medium">{realTimeMetrics.devices.tablet}%</span>
+                      <span className="font-medium">
+                        {realTimeMetrics.devices.tablet}%
+                      </span>
                     </div>
                   </div>
                 </CardContent>
@@ -399,15 +446,21 @@ export default function AnalyticsPage() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between">
                     <span>가동률</span>
-                    <span className="font-medium text-green-600">{systemHealth.uptime}%</span>
+                    <span className="font-medium text-green-600">
+                      {systemHealth.uptime}%
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>평균 응답시간</span>
-                    <span className="font-medium">{systemHealth.avgResponseTime}ms</span>
+                    <span className="font-medium">
+                      {systemHealth.avgResponseTime}ms
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>오류율</span>
-                    <span className="font-medium text-green-600">{systemHealth.errorRate}%</span>
+                    <span className="font-medium text-green-600">
+                      {systemHealth.errorRate}%
+                    </span>
                   </div>
                 </CardContent>
               </Card>
@@ -421,7 +474,9 @@ export default function AnalyticsPage() {
                     <p>✅ 시스템 업데이트 완료</p>
                     <p>📊 일일 백업 완료</p>
                     <p>🔄 캐시 최적화 실행</p>
-                    <p className="text-muted-foreground">마지막 업데이트: 방금 전</p>
+                    <p className="text-muted-foreground">
+                      마지막 업데이트: 방금 전
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -433,20 +488,28 @@ export default function AnalyticsPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Yahoo Finance API</CardTitle>
-                  <CardDescription>주식 및 금융 데이터 API 상태</CardDescription>
+                  <CardDescription>
+                    주식 및 금융 데이터 API 상태
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between">
                     <span>API 호출</span>
-                    <span className="font-medium">{financialMetrics.apiCalls.yahoo.calls.toLocaleString()}</span>
+                    <span className="font-medium">
+                      {financialMetrics.apiCalls.yahoo.calls.toLocaleString()}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>성공률</span>
-                    <span className="font-medium text-green-600">{financialMetrics.apiCalls.yahoo.success}%</span>
+                    <span className="font-medium text-green-600">
+                      {financialMetrics.apiCalls.yahoo.success}%
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>평균 지연시간</span>
-                    <span className="font-medium">{financialMetrics.apiCalls.yahoo.avgLatency}ms</span>
+                    <span className="font-medium">
+                      {financialMetrics.apiCalls.yahoo.avgLatency}ms
+                    </span>
                   </div>
                 </CardContent>
               </Card>
@@ -459,15 +522,21 @@ export default function AnalyticsPage() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between">
                     <span>API 호출</span>
-                    <span className="font-medium">{financialMetrics.apiCalls.alphaVantage.calls.toLocaleString()}</span>
+                    <span className="font-medium">
+                      {financialMetrics.apiCalls.alphaVantage.calls.toLocaleString()}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>성공률</span>
-                    <span className="font-medium text-green-600">{financialMetrics.apiCalls.alphaVantage.success}%</span>
+                    <span className="font-medium text-green-600">
+                      {financialMetrics.apiCalls.alphaVantage.success}%
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>평균 지연시간</span>
-                    <span className="font-medium">{financialMetrics.apiCalls.alphaVantage.avgLatency}ms</span>
+                    <span className="font-medium">
+                      {financialMetrics.apiCalls.alphaVantage.avgLatency}ms
+                    </span>
                   </div>
                 </CardContent>
               </Card>
@@ -482,11 +551,17 @@ export default function AnalyticsPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <p className="text-sm text-muted-foreground">캐시 적중률</p>
-                    <p className="text-2xl font-bold text-blue-600">{financialMetrics.cacheHitRate}%</p>
+                    <p className="text-2xl font-bold text-blue-600">
+                      {financialMetrics.cacheHitRate}%
+                    </p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">데이터 신선도</p>
-                    <p className="text-2xl font-bold text-green-600">{financialMetrics.dataFreshness}%</p>
+                    <p className="text-sm text-muted-foreground">
+                      데이터 신선도
+                    </p>
+                    <p className="text-2xl font-bold text-green-600">
+                      {financialMetrics.dataFreshness}%
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -495,5 +570,5 @@ export default function AnalyticsPage() {
         </Tabs>
       </Suspense>
     </div>
-  )
+  );
 }

@@ -1,5 +1,6 @@
 import { Pool, PoolConfig } from 'pg';
 import { createClient } from 'redis';
+
 import { logger } from '../logging/logger';
 
 // PostgreSQL 연결 풀 설정
@@ -12,8 +13,13 @@ const pgConfig: PoolConfig = {
   max: parseInt(process.env.DB_MAX_CONNECTIONS || '20'),
   min: parseInt(process.env.DB_MIN_CONNECTIONS || '5'),
   idleTimeoutMillis: parseInt(process.env.DB_IDLE_TIMEOUT || '30000'),
-  connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT || '2000'),
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  connectionTimeoutMillis: parseInt(
+    process.env.DB_CONNECTION_TIMEOUT || '2000'
+  ),
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
 };
 
 // PostgreSQL 연결 풀 생성
@@ -86,10 +92,12 @@ export interface TenantContext {
   permissions: string[];
 }
 
-export const getTenantContext = (headers: Record<string, string>): TenantContext => {
+export const getTenantContext = (
+  headers: Record<string, string>
+): TenantContext => {
   return {
     tenantId: headers['x-tenant-id'] || 'default',
     userId: headers['x-user-id'] || 'anonymous',
     permissions: headers['x-permissions']?.split(',') || [],
   };
-}; 
+};

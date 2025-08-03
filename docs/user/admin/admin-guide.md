@@ -16,11 +16,13 @@ This guide provides comprehensive instructions for FamilyOffice platform adminis
 ### 1. Initial Setup
 
 #### Access the Admin Dashboard
+
 1. Navigate to `https://admin.familyoffice.com`
 2. Login with your admin credentials
 3. Complete MFA setup if not already configured
 
 #### First-Time Configuration
+
 ```bash
 # Access admin console
 ssh admin@familyoffice-server
@@ -35,12 +37,14 @@ sudo journalctl -u familyoffice-platform -f
 ### 2. System Health Check
 
 #### Dashboard Overview
+
 - **System Status**: Green (healthy), Yellow (warning), Red (critical)
 - **Active Users**: Current logged-in users
 - **Recent Alerts**: Security and performance alerts
 - **Performance Metrics**: Response times and throughput
 
 #### Health Check Commands
+
 ```bash
 # Check all services
 curl -X GET https://api.familyoffice.com/health
@@ -57,6 +61,7 @@ curl -X GET https://api.familyoffice.com/health/integrations
 ### 1. User Lifecycle Management
 
 #### Creating New Users
+
 1. Navigate to **Users** → **Add User**
 2. Fill in required information:
    - **Email**: User's email address
@@ -67,29 +72,30 @@ curl -X GET https://api.familyoffice.com/health/integrations
 
 #### User Roles and Permissions
 
-| Role | Description | Permissions |
-|------|-------------|-------------|
-| **Family Principal** | Family office owner | Full access to family data |
-| **Wealth Manager** | Investment advisor | Portfolio management, reporting |
-| **Family Member** | Family member | Read access to assigned portfolios |
-| **Administrative Staff** | Support staff | Limited administrative access |
-| **Compliance Officer** | Compliance specialist | Audit access, compliance reporting |
+| Role                     | Description           | Permissions                        |
+| ------------------------ | --------------------- | ---------------------------------- |
+| **Family Principal**     | Family office owner   | Full access to family data         |
+| **Wealth Manager**       | Investment advisor    | Portfolio management, reporting    |
+| **Family Member**        | Family member         | Read access to assigned portfolios |
+| **Administrative Staff** | Support staff         | Limited administrative access      |
+| **Compliance Officer**   | Compliance specialist | Audit access, compliance reporting |
 
 #### Permission Matrix
 
-| Permission | Principal | Wealth Manager | Family Member | Admin Staff | Compliance |
-|------------|-----------|----------------|---------------|-------------|------------|
-| View Portfolio | ✅ | ✅ | ✅ | ❌ | ✅ |
-| Edit Portfolio | ✅ | ✅ | ❌ | ❌ | ❌ |
-| Execute Trades | ✅ | ✅ | ❌ | ❌ | ❌ |
-| View Reports | ✅ | ✅ | ✅ | ❌ | ✅ |
-| Generate Reports | ✅ | ✅ | ❌ | ❌ | ✅ |
-| User Management | ✅ | ❌ | ❌ | ✅ | ❌ |
-| System Admin | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Permission       | Principal | Wealth Manager | Family Member | Admin Staff | Compliance |
+| ---------------- | --------- | -------------- | ------------- | ----------- | ---------- |
+| View Portfolio   | ✅        | ✅             | ✅            | ❌          | ✅         |
+| Edit Portfolio   | ✅        | ✅             | ❌            | ❌          | ❌         |
+| Execute Trades   | ✅        | ✅             | ❌            | ❌          | ❌         |
+| View Reports     | ✅        | ✅             | ✅            | ❌          | ✅         |
+| Generate Reports | ✅        | ✅             | ❌            | ❌          | ✅         |
+| User Management  | ✅        | ❌             | ❌            | ✅          | ❌         |
+| System Admin     | ✅        | ❌             | ❌            | ❌          | ❌         |
 
 ### 2. Access Control Management
 
 #### Multi-Factor Authentication Setup
+
 1. Navigate to **Security** → **MFA Management**
 2. Select user to configure MFA
 3. Choose MFA method:
@@ -98,6 +104,7 @@ curl -X GET https://api.familyoffice.com/health/integrations
    - **Hardware Token**: Physical security key
 
 #### Privileged Access Management
+
 1. Navigate to **Security** → **Privileged Access**
 2. Review pending access requests
 3. Approve or deny requests with justification
@@ -106,6 +113,7 @@ curl -X GET https://api.familyoffice.com/health/integrations
 ### 3. Family Group Management
 
 #### Creating Family Groups
+
 1. Navigate to **Families** → **Add Family**
 2. Enter family information:
    - **Family Name**: Official family name
@@ -114,6 +122,7 @@ curl -X GET https://api.familyoffice.com/health/integrations
    - **Jurisdiction**: Legal jurisdiction
 
 #### Managing Family Members
+
 1. Select family group
 2. Navigate to **Members** tab
 3. Add or remove family members
@@ -124,12 +133,14 @@ curl -X GET https://api.familyoffice.com/health/integrations
 ### 1. Security Monitoring
 
 #### Real-time Security Dashboard
+
 - **Active Sessions**: Current user sessions
 - **Failed Login Attempts**: Security alerts
 - **Privileged Access**: Elevated access monitoring
 - **Data Access**: Sensitive data access logs
 
 #### Security Alerts Configuration
+
 ```yaml
 # Alert thresholds
 failed_logins_threshold: 5
@@ -145,6 +156,7 @@ slack_integration: true
 ### 2. Audit Trail Management
 
 #### Audit Log Review
+
 1. Navigate to **Security** → **Audit Logs**
 2. Filter logs by:
    - **Date Range**: Select time period
@@ -153,6 +165,7 @@ slack_integration: true
    - **Severity**: Log severity level
 
 #### Audit Report Generation
+
 ```bash
 # Generate monthly audit report
 curl -X POST https://api.familyoffice.com/admin/audit/reports \
@@ -168,6 +181,7 @@ curl -X POST https://api.familyoffice.com/admin/audit/reports \
 ### 3. Data Protection
 
 #### Data Classification Management
+
 1. Navigate to **Security** → **Data Classification**
 2. Configure classification rules:
    - **Public**: Non-sensitive information
@@ -176,6 +190,7 @@ curl -X POST https://api.familyoffice.com/admin/audit/reports \
    - **Restricted**: Highly sensitive data
 
 #### Encryption Management
+
 ```bash
 # Check encryption status
 curl -X GET https://api.familyoffice.com/admin/security/encryption
@@ -189,12 +204,14 @@ curl -X POST https://api.familyoffice.com/admin/security/encryption/rotate
 ### 1. Performance Monitoring
 
 #### Key Performance Indicators
+
 - **Response Time**: API response times
 - **Throughput**: Requests per second
 - **Error Rate**: Percentage of failed requests
 - **Availability**: System uptime percentage
 
 #### Performance Alerts
+
 ```yaml
 # Performance thresholds
 response_time_threshold: 200ms
@@ -210,6 +227,7 @@ failover: true
 ### 2. Database Management
 
 #### Database Health Check
+
 ```bash
 # Check database connections
 curl -X GET https://api.familyoffice.com/admin/database/connections
@@ -222,6 +240,7 @@ curl -X GET https://api.familyoffice.com/admin/database/backups
 ```
 
 #### Database Maintenance
+
 ```bash
 # Run database maintenance
 curl -X POST https://api.familyoffice.com/admin/database/maintenance
@@ -233,6 +252,7 @@ curl -X POST https://api.familyoffice.com/admin/database/optimize
 ### 3. Integration Monitoring
 
 #### External Integration Status
+
 1. Navigate to **Integrations** → **Status**
 2. Monitor integration health:
    - **Market Data**: Bloomberg, Reuters
@@ -240,6 +260,7 @@ curl -X POST https://api.familyoffice.com/admin/database/optimize
    - **Accounting Systems**: QuickBooks, Xero
 
 #### Integration Troubleshooting
+
 ```bash
 # Test integration connectivity
 curl -X POST https://api.familyoffice.com/admin/integrations/test
@@ -253,6 +274,7 @@ curl -X POST https://api.familyoffice.com/admin/integrations/sync
 ### 1. Backup Management
 
 #### Automated Backup Schedule
+
 ```yaml
 # Backup configuration
 database_backup: daily
@@ -263,6 +285,7 @@ compression: true
 ```
 
 #### Manual Backup Procedures
+
 ```bash
 # Create manual backup
 curl -X POST https://api.familyoffice.com/admin/backup/create
@@ -277,6 +300,7 @@ curl -X GET https://api.familyoffice.com/admin/backup/download/{backup_id}
 ### 2. Disaster Recovery
 
 #### Recovery Procedures
+
 1. **Assessment**: Evaluate disaster impact
 2. **Notification**: Alert stakeholders
 3. **Recovery**: Execute recovery procedures
@@ -284,6 +308,7 @@ curl -X GET https://api.familyoffice.com/admin/backup/download/{backup_id}
 5. **Documentation**: Record incident details
 
 #### Recovery Time Objectives
+
 - **RTO**: 4 hours maximum downtime
 - **RPO**: 1 hour maximum data loss
 - **Failover**: Automatic failover to secondary site
@@ -293,12 +318,14 @@ curl -X GET https://api.familyoffice.com/admin/backup/download/{backup_id}
 ### 1. SOX Compliance
 
 #### Control Testing
+
 1. Navigate to **Compliance** → **SOX Controls**
 2. Review control effectiveness
 3. Run automated tests
 4. Document test results
 
 #### Compliance Reporting
+
 ```bash
 # Generate SOX report
 curl -X POST https://api.familyoffice.com/admin/compliance/sox/report
@@ -310,6 +337,7 @@ curl -X GET https://api.familyoffice.com/admin/compliance/export
 ### 2. GDPR Compliance
 
 #### Data Subject Rights
+
 1. Navigate to **Compliance** → **GDPR**
 2. Process data subject requests:
    - **Access**: Provide data access
@@ -318,6 +346,7 @@ curl -X GET https://api.familyoffice.com/admin/compliance/export
    - **Portability**: Export personal data
 
 #### Consent Management
+
 1. Navigate to **Compliance** → **Consent**
 2. Review consent records
 3. Update consent preferences
@@ -328,12 +357,14 @@ curl -X GET https://api.familyoffice.com/admin/compliance/export
 ### 1. Security Incidents
 
 #### Incident Classification
+
 - **Low**: Minor security events
 - **Medium**: Significant security events
 - **High**: Critical security events
 - **Critical**: Emergency security events
 
 #### Response Procedures
+
 1. **Detection**: Identify security incident
 2. **Assessment**: Evaluate incident impact
 3. **Containment**: Limit incident scope
@@ -344,6 +375,7 @@ curl -X GET https://api.familyoffice.com/admin/compliance/export
 ### 2. System Outages
 
 #### Outage Response
+
 1. **Immediate**: Assess outage scope
 2. **Communication**: Notify stakeholders
 3. **Resolution**: Fix underlying issue
@@ -355,6 +387,7 @@ curl -X GET https://api.familyoffice.com/admin/compliance/export
 ### 1. Administrative Reports
 
 #### System Health Report
+
 ```bash
 # Generate system health report
 curl -X POST https://api.familyoffice.com/admin/reports/system-health
@@ -364,6 +397,7 @@ curl -X GET https://api.familyoffice.com/admin/reports/export
 ```
 
 #### User Activity Report
+
 1. Navigate to **Reports** → **User Activity**
 2. Select date range
 3. Choose report format
@@ -372,12 +406,14 @@ curl -X GET https://api.familyoffice.com/admin/reports/export
 ### 2. Compliance Reports
 
 #### Audit Reports
+
 1. Navigate to **Compliance** → **Audit Reports**
 2. Select audit period
 3. Choose report type
 4. Generate compliance report
 
 #### Regulatory Reports
+
 ```bash
 # Generate regulatory report
 curl -X POST https://api.familyoffice.com/admin/compliance/regulatory-report
@@ -391,6 +427,7 @@ curl -X POST https://api.familyoffice.com/admin/compliance/submit
 ### 1. Environment Configuration
 
 #### Production Environment
+
 ```yaml
 # Production settings
 environment: production
@@ -401,6 +438,7 @@ security_monitoring: true
 ```
 
 #### Development Environment
+
 ```yaml
 # Development settings
 environment: development
@@ -413,6 +451,7 @@ security_monitoring: true
 ### 2. Feature Flags
 
 #### Feature Management
+
 1. Navigate to **Configuration** → **Feature Flags**
 2. Enable/disable features:
    - **Advanced Reporting**: Enhanced reporting features
@@ -425,28 +464,31 @@ security_monitoring: true
 ### 1. Support Procedures
 
 #### Level 1 Support
+
 - **Basic Issues**: Password resets, access requests
 - **Response Time**: 4 hours
 - **Escalation**: Level 2 if unresolved
 
 #### Level 2 Support
+
 - **Technical Issues**: System configuration, performance
 - **Response Time**: 2 hours
 - **Escalation**: Level 3 if unresolved
 
 #### Level 3 Support
+
 - **Critical Issues**: Security incidents, system outages
 - **Response Time**: 1 hour
 - **Escalation**: Emergency procedures
 
 ### 2. Contact Information
 
-| Support Level | Email | Phone | Response Time |
-|---------------|-------|-------|---------------|
-| Level 1 | support@familyoffice.com | +1-555-0123 | 4 hours |
-| Level 2 | tech-support@familyoffice.com | +1-555-0124 | 2 hours |
-| Level 3 | emergency@familyoffice.com | +1-555-0125 | 1 hour |
+| Support Level | Email                         | Phone       | Response Time |
+| ------------- | ----------------------------- | ----------- | ------------- |
+| Level 1       | support@familyoffice.com      | +1-555-0123 | 4 hours       |
+| Level 2       | tech-support@familyoffice.com | +1-555-0124 | 2 hours       |
+| Level 3       | emergency@familyoffice.com    | +1-555-0125 | 1 hour        |
 
 ---
 
-*This administrator guide is maintained by the Platform Operations Team and updated quarterly.* 
+_This administrator guide is maintained by the Platform Operations Team and updated quarterly._

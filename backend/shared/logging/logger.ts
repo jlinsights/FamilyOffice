@@ -25,16 +25,14 @@ winston.addColors(colors);
 const logFormat = format.combine(
   format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
   format.colorize({ all: true }),
-  format.printf(
-    (info) => `${info.timestamp} ${info.level}: ${info.message}`,
-  ),
+  format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
 );
 
 // 프로덕션용 JSON 포맷
 const jsonFormat = format.combine(
   format.timestamp(),
   format.errors({ stack: true }),
-  format.json(),
+  format.json()
 );
 
 // 로거 생성
@@ -75,7 +73,10 @@ export const logWithContext = (
   message: string,
   context: Record<string, any> = {}
 ) => {
-  logger.log(level, message, { ...context, timestamp: new Date().toISOString() });
+  logger.log(level, message, {
+    ...context,
+    timestamp: new Date().toISOString(),
+  });
 };
 
 // API 요청 로깅
@@ -141,13 +142,10 @@ export const logPerformanceMetric = (
 };
 
 // 에러 로깅 헬퍼
-export const logError = (
-  error: Error,
-  context: Record<string, any> = {}
-) => {
+export const logError = (error: Error, context: Record<string, any> = {}) => {
   logger.error(error.message, {
     stack: error.stack,
     ...context,
     eventType: 'error',
   });
-}; 
+};

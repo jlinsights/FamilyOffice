@@ -41,19 +41,21 @@ export interface AuditReport {
 
 export class AuditService {
   // 감사 이벤트 기록
-  static async logEvent(event: Omit<AuditEvent, 'id' | 'timestamp'>): Promise<void> {
+  static async logEvent(
+    event: Omit<AuditEvent, 'id' | 'timestamp'>
+  ): Promise<void> {
     const auditEvent: AuditEvent = {
       ...event,
       id: crypto.randomUUID(),
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
     // 데이터베이스에 저장
     await this.saveToDatabase(auditEvent);
-    
+
     // 실시간 모니터링
     await this.sendToMonitoring(auditEvent);
-    
+
     // 위험도가 높은 이벤트는 즉시 알림
     if (auditEvent.severity === 'critical') {
       await this.sendCriticalAlert(auditEvent);
@@ -90,14 +92,14 @@ export class AuditService {
         amount,
         currency,
         accountId,
-        ...details
+        ...details,
       },
       ipAddress: 'system',
       userAgent: 'system',
       sessionId: 'system',
       severity: 'high',
       complianceTags: ['SOX', 'SOC2'],
-      dataClassification: 'confidential'
+      dataClassification: 'confidential',
     });
   }
 
@@ -119,14 +121,14 @@ export class AuditService {
       details: {
         dataType,
         resourceId,
-        dataClassification
+        dataClassification,
       },
       ipAddress: 'system',
       userAgent: 'system',
       sessionId: 'system',
       severity: dataClassification === 'restricted' ? 'high' : 'medium',
       complianceTags: ['GDPR', 'SOC2'],
-      dataClassification
+      dataClassification,
     });
   }
 
@@ -149,14 +151,17 @@ export class AuditService {
         targetUserId,
         oldPermissions,
         newPermissions,
-        changes: this.calculatePermissionChanges(oldPermissions, newPermissions)
+        changes: this.calculatePermissionChanges(
+          oldPermissions,
+          newPermissions
+        ),
       },
       ipAddress: 'system',
       userAgent: 'system',
       sessionId: 'system',
       severity: 'high',
       complianceTags: ['SOX', 'SOC2'],
-      dataClassification: 'confidential'
+      dataClassification: 'confidential',
     });
   }
 
@@ -179,14 +184,14 @@ export class AuditService {
         settingType,
         oldValue,
         newValue,
-        reason
+        reason,
       },
       ipAddress: 'system',
       userAgent: 'system',
       sessionId: 'system',
       severity: 'high',
       complianceTags: ['SOX', 'SOC2'],
-      dataClassification: 'confidential'
+      dataClassification: 'confidential',
     });
   }
 
@@ -207,7 +212,7 @@ export class AuditService {
     const events = await this.queryEvents({
       startDate,
       endDate,
-      tenantId
+      tenantId,
     });
 
     return this.generateReportFromEvents(events);
@@ -230,18 +235,18 @@ export class AuditService {
       sessionId: 'system',
       severity: 'high',
       complianceTags: ['GDPR'],
-      dataClassification: 'confidential'
+      dataClassification: 'confidential',
     });
   }
 
   // 데이터 보존 정책 적용
   static async applyRetentionPolicy(): Promise<void> {
     const retentionRules = this.getRetentionRules();
-    
+
     for (const rule of retentionRules) {
       const eventsToDelete = await this.queryEvents({
         eventType: rule.eventType,
-        endDate: new Date(Date.now() - rule.retentionPeriod)
+        endDate: new Date(Date.now() - rule.retentionPeriod),
       });
 
       for (const event of eventsToDelete) {
@@ -254,7 +259,7 @@ export class AuditService {
   static async monitorSecurityEvents(): Promise<void> {
     const recentEvents = await this.queryEvents({
       startDate: new Date(Date.now() - 5 * 60 * 1000), // 최근 5분
-      severity: 'high'
+      severity: 'high',
     });
 
     for (const event of recentEvents) {
@@ -271,19 +276,22 @@ export class AuditService {
       'multiple_failed_logins',
       'privilege_escalation',
       'data_exfiltration',
-      'unauthorized_access'
+      'unauthorized_access',
     ];
 
-    return threatPatterns.some(pattern => 
-      event.eventType.includes(pattern) || event.action.includes(pattern)
+    return threatPatterns.some(
+      pattern =>
+        event.eventType.includes(pattern) || event.action.includes(pattern)
     );
   }
 
   // 보안 대응 트리거
-  private static async triggerSecurityResponse(event: AuditEvent): Promise<void> {
+  private static async triggerSecurityResponse(
+    event: AuditEvent
+  ): Promise<void> {
     // 즉시 알림 전송
     await this.sendSecurityAlert(event);
-    
+
     // 자동 대응 조치
     if (event.severity === 'critical') {
       await this.triggerAutomaticResponse(event);
@@ -296,18 +304,18 @@ export class AuditService {
     newPermissions: string[]
   ): Record<string, string> {
     const changes: Record<string, string> = {};
-    
+
     const added = newPermissions.filter(p => !oldPermissions.includes(p));
     const removed = oldPermissions.filter(p => !newPermissions.includes(p));
-    
+
     if (added.length > 0) {
       changes.added = added.join(', ');
     }
-    
+
     if (removed.length > 0) {
       changes.removed = removed.join(', ');
     }
-    
+
     return changes;
   }
 
@@ -347,7 +355,7 @@ export class AuditService {
       eventsByType: {},
       complianceSummary: {},
       topUsers: [],
-      topResources: []
+      topResources: [],
     };
   }
 
@@ -360,9 +368,18 @@ export class AuditService {
     retentionPeriod: number;
   }> {
     return [
-      { eventType: 'financial_transaction', retentionPeriod: 7 * 365 * 24 * 60 * 60 * 1000 }, // 7년
-      { eventType: 'data_access', retentionPeriod: 3 * 365 * 24 * 60 * 60 * 1000 }, // 3년
-      { eventType: 'system_change', retentionPeriod: 5 * 365 * 24 * 60 * 60 * 1000 } // 5년
+      {
+        eventType: 'financial_transaction',
+        retentionPeriod: 7 * 365 * 24 * 60 * 60 * 1000,
+      }, // 7년
+      {
+        eventType: 'data_access',
+        retentionPeriod: 3 * 365 * 24 * 60 * 60 * 1000,
+      }, // 3년
+      {
+        eventType: 'system_change',
+        retentionPeriod: 5 * 365 * 24 * 60 * 60 * 1000,
+      }, // 5년
     ];
   }
 
@@ -370,7 +387,9 @@ export class AuditService {
     console.log('Security alert for event:', event.id);
   }
 
-  private static async triggerAutomaticResponse(event: AuditEvent): Promise<void> {
+  private static async triggerAutomaticResponse(
+    event: AuditEvent
+  ): Promise<void> {
     console.log('Automatic response for event:', event.id);
   }
-} 
+}

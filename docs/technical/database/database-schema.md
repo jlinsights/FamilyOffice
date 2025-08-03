@@ -18,6 +18,7 @@ The FamilyOffice platform uses PostgreSQL as the primary database with Redis for
 ### 1. Core Tables
 
 #### Users and Authentication
+
 ```sql
 -- Users table with comprehensive profile data
 CREATE TABLE users (
@@ -36,7 +37,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
     deleted_at TIMESTAMP,
-    
+
     -- Audit fields
     created_by UUID REFERENCES users(id),
     updated_by UUID REFERENCES users(id),
@@ -71,6 +72,7 @@ CREATE TABLE mfa_devices (
 ```
 
 #### Organizations and Tenants
+
 ```sql
 -- Multi-tenant organizations
 CREATE TABLE organizations (
@@ -105,6 +107,7 @@ CREATE TABLE organization_members (
 ### 2. Portfolio Management
 
 #### Assets and Holdings
+
 ```sql
 -- Asset definitions
 CREATE TABLE assets (
@@ -165,6 +168,7 @@ CREATE TABLE portfolios (
 ### 3. Transaction Processing
 
 #### Transactions
+
 ```sql
 -- Transaction records
 CREATE TABLE transactions (
@@ -209,6 +213,7 @@ CREATE TABLE transaction_approvals (
 ### 4. Reporting and Analytics
 
 #### Performance Tracking
+
 ```sql
 -- Performance snapshots
 CREATE TABLE performance_snapshots (
@@ -244,6 +249,7 @@ CREATE TABLE allocation_snapshots (
 ### 5. Compliance and Audit
 
 #### Audit Trail
+
 ```sql
 -- Comprehensive audit trail
 CREATE TABLE audit_logs (
@@ -285,6 +291,7 @@ CREATE TABLE data_classification (
 ### 6. Security and Access Control
 
 #### Row-Level Security Policies
+
 ```sql
 -- Enable RLS on all tables
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
@@ -328,6 +335,7 @@ CREATE POLICY portfolio_access_policy ON portfolios
 ## 📊 Database Indexes
 
 ### 1. Performance Indexes
+
 ```sql
 -- User indexes
 CREATE INDEX idx_users_email ON users(email);
@@ -357,24 +365,25 @@ CREATE INDEX idx_audit_event_type ON audit_logs(event_type, created_at);
 ```
 
 ### 2. Composite Indexes
+
 ```sql
 -- Multi-column indexes for complex queries
 CREATE INDEX idx_transactions_complex ON transactions(
-    organization_id, 
-    portfolio_id, 
-    trade_date DESC, 
+    organization_id,
+    portfolio_id,
+    trade_date DESC,
     status
 );
 
 CREATE INDEX idx_holdings_complex ON holdings(
-    organization_id, 
-    portfolio_id, 
+    organization_id,
+    portfolio_id,
     asset_id
 );
 
 CREATE INDEX idx_audit_complex ON audit_logs(
-    organization_id, 
-    event_type, 
+    organization_id,
+    event_type,
     created_at DESC
 );
 ```
@@ -382,6 +391,7 @@ CREATE INDEX idx_audit_complex ON audit_logs(
 ## 🔐 Security Features
 
 ### 1. Data Encryption
+
 ```sql
 -- Encrypt sensitive columns
 ALTER TABLE users ALTER COLUMN tax_id SET ENCRYPTED;
@@ -393,15 +403,16 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 ```
 
 ### 2. Data Masking
+
 ```sql
 -- Create views with masked sensitive data
 CREATE VIEW users_masked AS
-SELECT 
+SELECT
     id,
     email,
     first_name,
     last_name,
-    CASE 
+    CASE
         WHEN current_user = email THEN phone
         ELSE '***-***-' || RIGHT(phone, 4)
     END as phone,
@@ -413,6 +424,7 @@ FROM users;
 ## 📈 Performance Optimization
 
 ### 1. Partitioning Strategy
+
 ```sql
 -- Partition large tables by date
 CREATE TABLE transactions_partitioned (
@@ -428,10 +440,11 @@ CREATE TABLE transactions_2024_02 PARTITION OF transactions_partitioned
 ```
 
 ### 2. Materialized Views
+
 ```sql
 -- Portfolio summary materialized view
 CREATE MATERIALIZED VIEW portfolio_summary AS
-SELECT 
+SELECT
     p.id as portfolio_id,
     p.name as portfolio_name,
     p.organization_id,
@@ -450,21 +463,22 @@ REFRESH MATERIALIZED VIEW portfolio_summary;
 ## 🔄 Data Retention and Archival
 
 ### 1. Retention Policies
+
 ```sql
 -- Create retention policy function
 CREATE OR REPLACE FUNCTION cleanup_old_data()
 RETURNS void AS $$
 BEGIN
     -- Delete audit logs older than 7 years
-    DELETE FROM audit_logs 
+    DELETE FROM audit_logs
     WHERE created_at < NOW() - INTERVAL '7 years';
-    
+
     -- Archive old transactions
-    INSERT INTO transactions_archive 
-    SELECT * FROM transactions 
+    INSERT INTO transactions_archive
+    SELECT * FROM transactions
     WHERE trade_date < NOW() - INTERVAL '3 years';
-    
-    DELETE FROM transactions 
+
+    DELETE FROM transactions
     WHERE trade_date < NOW() - INTERVAL '3 years';
 END;
 $$ LANGUAGE plpgsql;
@@ -474,6 +488,7 @@ SELECT cron.schedule('cleanup-old-data', '0 2 * * 0', 'SELECT cleanup_old_data()
 ```
 
 ### 2. Backup Strategy
+
 ```sql
 -- Create backup function
 CREATE OR REPLACE FUNCTION create_backup()
@@ -492,6 +507,7 @@ $$ LANGUAGE plpgsql;
 ## 📋 Database Maintenance
 
 ### 1. Regular Maintenance
+
 ```sql
 -- Vacuum and analyze tables
 VACUUM ANALYZE users;
@@ -509,6 +525,7 @@ REINDEX TABLE transactions;
 ```
 
 ### 2. Health Monitoring
+
 ```sql
 -- Database health check function
 CREATE OR REPLACE FUNCTION check_database_health()
@@ -531,4 +548,4 @@ $$ LANGUAGE plpgsql;
 **Document Version**: 1.0  
 **Last Updated**: 2024-12-19  
 **Next Review**: 2025-01-19  
-**Owner**: Database Team 
+**Owner**: Database Team

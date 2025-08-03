@@ -1,26 +1,35 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
-import { Checkbox } from '@/components/ui/checkbox'
-import { HubSpotForm, HubSpotField, HubSpotApiForm } from '@/components/hubspot-integration'
+import React from 'react';
+
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+
+import {
+  HubSpotForm,
+  HubSpotField,
+  HubSpotApiForm,
+} from '@/components/hubspot-integration';
 
 interface HubSpotContactFormProps {
-  className?: string
-  formId?: string
+  className?: string;
+  formId?: string;
 }
 
 /**
  * HubSpot 연락처 폼 컴포넌트
  * 이메일 도메인 차단, 체크박스 유효성 검사 기능 포함
  */
-export function HubSpotContactForm({ className, formId }: HubSpotContactFormProps) {
+export function HubSpotContactForm({
+  className,
+  formId,
+}: HubSpotContactFormProps) {
   return (
     <HubSpotForm className={className}>
-      <form 
+      <form
         action={`https://api.hubapi.com/submissions/v3/integration/submit/${formId || 'default-form-id'}`}
         method="POST"
         className="space-y-6"
@@ -126,28 +135,44 @@ export function HubSpotContactForm({ className, formId }: HubSpotContactFormProp
           <div className="space-y-2">
             <HubSpotField fieldName="services" type="checkbox">
               <div className="flex items-center space-x-2">
-                <Checkbox id="service1" name="services" value="asset-management" />
+                <Checkbox
+                  id="service1"
+                  name="services"
+                  value="asset-management"
+                />
                 <Label htmlFor="service1">자산관리</Label>
               </div>
             </HubSpotField>
-            
+
             <HubSpotField fieldName="services" type="checkbox">
               <div className="flex items-center space-x-2">
-                <Checkbox id="service2" name="services" value="tax-consulting" />
+                <Checkbox
+                  id="service2"
+                  name="services"
+                  value="tax-consulting"
+                />
                 <Label htmlFor="service2">세무컨설팅</Label>
               </div>
             </HubSpotField>
-            
+
             <HubSpotField fieldName="services" type="checkbox">
               <div className="flex items-center space-x-2">
-                <Checkbox id="service3" name="services" value="succession-planning" />
+                <Checkbox
+                  id="service3"
+                  name="services"
+                  value="succession-planning"
+                />
                 <Label htmlFor="service3">가업승계</Label>
               </div>
             </HubSpotField>
-            
+
             <HubSpotField fieldName="services" type="checkbox">
               <div className="flex items-center space-x-2">
-                <Checkbox id="service4" name="services" value="investment-advisory" />
+                <Checkbox
+                  id="service4"
+                  name="services"
+                  value="investment-advisory"
+                />
                 <Label htmlFor="service4">투자자문</Label>
               </div>
             </HubSpotField>
@@ -158,11 +183,17 @@ export function HubSpotContactForm({ className, formId }: HubSpotContactFormProp
         <div className="space-y-2">
           <HubSpotField fieldName="privacy_consent" type="checkbox" required>
             <div className="flex items-start space-x-2">
-              <Checkbox id="privacy" name="privacy_consent" value="yes" required />
+              <Checkbox
+                id="privacy"
+                name="privacy_consent"
+                value="yes"
+                required
+              />
               <Label htmlFor="privacy" className="text-sm">
                 <a href="/privacy" className="text-primary hover:underline">
                   개인정보 처리방침
-                </a>에 동의합니다. *
+                </a>
+                에 동의합니다. *
               </Label>
             </div>
           </HubSpotField>
@@ -192,16 +223,19 @@ export function HubSpotContactForm({ className, formId }: HubSpotContactFormProp
         </Button>
       </form>
     </HubSpotForm>
-  )
+  );
 }
 
 /**
  * HubSpot API를 사용하는 연락처 폼
  */
-export function HubSpotApiContactForm({ className, formId }: HubSpotContactFormProps) {
+export function HubSpotApiContactForm({
+  className,
+  formId,
+}: HubSpotContactFormProps) {
   return (
-    <HubSpotApiForm 
-      className={className} 
+    <HubSpotApiForm
+      className={className}
       formUrl={`https://api.hubapi.com/submissions/v3/integration/submit/${formId || 'default-form-id'}`}
     >
       <form className="space-y-6">
@@ -250,5 +284,5 @@ export function HubSpotApiContactForm({ className, formId }: HubSpotContactFormP
         </Button>
       </form>
     </HubSpotApiForm>
-  )
-} 
+  );
+}

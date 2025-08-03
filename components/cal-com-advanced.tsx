@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 // Cal.com API를 활용한 고급 기능 예시
 export function CalComAdvanced() {
@@ -15,7 +15,7 @@ export function CalComAdvanced() {
         <div>• 다중 캘린더 통합 관리</div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CalComAdvanced 
+export default CalComAdvanced;

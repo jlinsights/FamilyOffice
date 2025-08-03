@@ -5,6 +5,7 @@
 ### Phase 1: 기본 인프라 구축 (2주)
 
 #### Week 1: 데이터베이스 및 기본 API
+
 ```bash
 # 1. 데이터베이스 스키마 구축
 # Supabase에서 program-schema.sql 실행
@@ -17,11 +18,12 @@ touch types/api.ts
 # 3. 기본 API 라우트 생성
 mkdir app/api/programs
 touch app/api/programs/route.ts
-mkdir app/api/registrations  
+mkdir app/api/registrations
 touch app/api/registrations/route.ts
 ```
 
 #### Week 2: 기본 UI 컴포넌트
+
 ```bash
 # 1. 프로그램 관련 컴포넌트
 mkdir components/program
@@ -43,12 +45,14 @@ touch app/programs/[id]/page.tsx
 ### Phase 2: 핵심 기능 구현 (3주)
 
 #### Week 3-4: 프로그램 관리
+
 - [x] 프로그램 CRUD API 구현
 - [x] 프로그램 목록/상세 페이지
 - [x] 검색 및 필터링 기능
 - [x] 카테고리별 프로그램 분류
 
 #### Week 5: 등록 시스템
+
 - [ ] 사용자 등록 신청 API
 - [ ] 관리자 승인/거부 시스템
 - [ ] 이메일 알림 시스템
@@ -57,12 +61,14 @@ touch app/programs/[id]/page.tsx
 ### Phase 3: 고도화 기능 (2주)
 
 #### Week 6: 관리자 도구
+
 - [ ] 관리자 대시보드
 - [ ] 참가자 관리 시스템
 - [ ] 통계 및 분석 도구
 - [ ] 일정 관리 시스템
 
 #### Week 7: 최적화 및 테스트
+
 - [ ] 성능 최적화
 - [ ] 테스트 코드 작성
 - [ ] 접근성 개선
@@ -200,6 +206,7 @@ FamilyOffice/
 ## 🔧 개발 환경 설정
 
 ### 1. 의존성 설치
+
 ```bash
 # 기존 프로젝트에 추가 패키지 설치
 npm install @hookform/resolvers react-hook-form zod
@@ -210,6 +217,7 @@ npm install @types/react-window -D
 ```
 
 ### 2. 환경 변수 설정
+
 ```bash
 # .env.local에 추가
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
@@ -226,6 +234,7 @@ SMTP_PASS=your_smtp_pass
 ```
 
 ### 3. Supabase 설정
+
 ```sql
 -- 1. program-schema.sql 실행
 -- 2. RLS 정책 활성화
@@ -239,116 +248,121 @@ SMTP_PASS=your_smtp_pass
 ```typescript
 // types/program.ts
 export interface Program {
-  id: string
-  title: string
-  slug: string
-  category: ProgramCategory
-  description: string
-  summary: string
-  targetAudience: string
-  capacity: number
-  frequency?: string
-  duration?: number
-  price: number
-  currency: string
-  status: ProgramStatus
-  requirements: string[]
-  benefits: string[]
-  featuredImage?: string
-  galleryImages: string[]
-  tags: string[]
-  seoTitle?: string
-  seoDescription?: string
-  autoApprove: boolean
-  requireApproval: boolean
-  allowWaitlist: boolean
-  createdAt: string
-  updatedAt: string
-  publishedAt?: string
-  
+  id: string;
+  title: string;
+  slug: string;
+  category: ProgramCategory;
+  description: string;
+  summary: string;
+  targetAudience: string;
+  capacity: number;
+  frequency?: string;
+  duration?: number;
+  price: number;
+  currency: string;
+  status: ProgramStatus;
+  requirements: string[];
+  benefits: string[];
+  featuredImage?: string;
+  galleryImages: string[];
+  tags: string[];
+  seoTitle?: string;
+  seoDescription?: string;
+  autoApprove: boolean;
+  requireApproval: boolean;
+  allowWaitlist: boolean;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+
   // 관계형 데이터
-  schedules?: ProgramSchedule[]
-  instructors?: Instructor[]
-  registrations?: Registration[]
-  
+  schedules?: ProgramSchedule[];
+  instructors?: Instructor[];
+  registrations?: Registration[];
+
   // 계산된 필드
-  totalRegistrations?: number
-  approvedRegistrations?: number
-  pendingRegistrations?: number
-  nextSessionDate?: string
-  totalSessions?: number
+  totalRegistrations?: number;
+  approvedRegistrations?: number;
+  pendingRegistrations?: number;
+  nextSessionDate?: string;
+  totalSessions?: number;
 }
 
-export type ProgramCategory = 
+export type ProgramCategory =
   | 'ceo_education'
   | 'asset_management'
   | 'networking'
   | 'cultural'
-  | 'investment'
+  | 'investment';
 
-export type ProgramStatus = 
+export type ProgramStatus =
   | 'draft'
   | 'published'
   | 'registration_open'
   | 'full'
   | 'in_progress'
   | 'completed'
-  | 'cancelled'
+  | 'cancelled';
 ```
 
 ### Step 2: API 클라이언트 구현
 
 ```typescript
 // lib/api/programs.ts
-import { createClient } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/client';
 
 export class ProgramsAPI {
-  private supabase = createClient()
-  
+  private supabase = createClient();
+
   async list(params: {
-    page?: number
-    limit?: number
-    category?: ProgramCategory
-    status?: ProgramStatus
-    search?: string
-    sort?: string
-    order?: 'asc' | 'desc'
+    page?: number;
+    limit?: number;
+    category?: ProgramCategory;
+    status?: ProgramStatus;
+    search?: string;
+    sort?: string;
+    order?: 'asc' | 'desc';
   }) {
-    let query = this.supabase
-      .from('program_details')
-      .select('*')
-    
+    let query = this.supabase.from('program_details').select('*');
+
     // 필터 적용
     if (params.category) {
-      query = query.eq('category', params.category)
+      query = query.eq('category', params.category);
     }
-    
+
     if (params.status) {
-      query = query.eq('status', params.status)
+      query = query.eq('status', params.status);
     } else {
       // 기본적으로 공개된 프로그램만 조회
-      query = query.in('status', ['published', 'registration_open', 'full', 'in_progress'])
+      query = query.in('status', [
+        'published',
+        'registration_open',
+        'full',
+        'in_progress',
+      ]);
     }
-    
+
     if (params.search) {
-      query = query.or(`title.ilike.%${params.search}%,description.ilike.%${params.search}%`)
+      query = query.or(
+        `title.ilike.%${params.search}%,description.ilike.%${params.search}%`
+      );
     }
-    
+
     // 정렬
-    const sortField = params.sort || 'created_at'
-    const sortOrder = params.order || 'desc'
-    query = query.order(sortField, { ascending: sortOrder === 'asc' })
-    
+    const sortField = params.sort || 'created_at';
+    const sortOrder = params.order || 'desc';
+    query = query.order(sortField, { ascending: sortOrder === 'asc' });
+
     // 페이지네이션
-    const page = params.page || 1
-    const limit = params.limit || 10
-    const offset = (page - 1) * limit
-    query = query.range(offset, offset + limit - 1)
-    
-    const { data, error, count } = await query
-    
-    if (error) throw error
-    
+    const page = params.page || 1;
+    const limit = params.limit || 10;
+    const offset = (page - 1) * limit;
+    query = query.range(offset, offset + limit - 1);
+
+    const { data, error, count } = await query;
+
+    if (error) throw error;
+
     return {
       data: data as Program[],
       pagination: {
@@ -356,138 +370,149 @@ export class ProgramsAPI {
         limit,
         total: count || 0,
         totalPages: Math.ceil((count || 0) / limit),
-        hasMore: (count || 0) > page * limit
-      }
-    }
+        hasMore: (count || 0) > page * limit,
+      },
+    };
   }
-  
+
   async getById(id: string) {
     const { data, error } = await this.supabase
       .from('program_details')
-      .select(`
+      .select(
+        `
         *,
         schedules:program_schedules(*),
         instructors:program_instructors(
           role,
           instructor:instructors(*)
         )
-      `)
+      `
+      )
       .eq('id', id)
-      .single()
-    
-    if (error) throw error
-    return data as Program
+      .single();
+
+    if (error) throw error;
+    return data as Program;
   }
-  
+
   async create(program: Omit<Program, 'id' | 'createdAt' | 'updatedAt'>) {
     const { data, error } = await this.supabase
       .from('programs')
       .insert(program)
       .select()
-      .single()
-    
-    if (error) throw error
-    return data as Program
+      .single();
+
+    if (error) throw error;
+    return data as Program;
   }
-  
+
   async update(id: string, updates: Partial<Program>) {
     const { data, error } = await this.supabase
       .from('programs')
       .update(updates)
       .eq('id', id)
       .select()
-      .single()
-    
-    if (error) throw error
-    return data as Program
+      .single();
+
+    if (error) throw error;
+    return data as Program;
   }
-  
+
   async delete(id: string) {
     const { error } = await this.supabase
       .from('programs')
       .delete()
-      .eq('id', id)
-    
-    if (error) throw error
+      .eq('id', id);
+
+    if (error) throw error;
   }
 }
 
-export const programsAPI = new ProgramsAPI()
+export const programsAPI = new ProgramsAPI();
 ```
 
 ### Step 3: React Hook 구현
 
 ```typescript
 // hooks/usePrograms.ts
-import { useState, useEffect, useCallback } from 'react'
-import { programsAPI } from '@/lib/api/programs'
-import { Program, ProgramCategory, ProgramStatus } from '@/types/program'
+import { useState, useEffect, useCallback } from 'react';
+
+import { programsAPI } from '@/lib/api/programs';
+
+import { Program, ProgramCategory, ProgramStatus } from '@/types/program';
 
 interface UseProgramsParams {
-  category?: ProgramCategory
-  status?: ProgramStatus
-  search?: string
-  autoFetch?: boolean
+  category?: ProgramCategory;
+  status?: ProgramStatus;
+  search?: string;
+  autoFetch?: boolean;
 }
 
 export function usePrograms(params: UseProgramsParams = {}) {
-  const [programs, setPrograms] = useState<Program[]>([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [hasMore, setHasMore] = useState(true)
-  const [page, setPage] = useState(1)
-  
-  const fetchPrograms = useCallback(async (reset = false) => {
-    try {
-      setLoading(true)
-      setError(null)
-      
-      const response = await programsAPI.list({
-        ...params,
-        page: reset ? 1 : page,
-        limit: 10
-      })
-      
-      if (reset) {
-        setPrograms(response.data)
-        setPage(1)
-      } else {
-        setPrograms(prev => [...prev, ...response.data])
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
+
+  const fetchPrograms = useCallback(
+    async (reset = false) => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await programsAPI.list({
+          ...params,
+          page: reset ? 1 : page,
+          limit: 10,
+        });
+
+        if (reset) {
+          setPrograms(response.data);
+          setPage(1);
+        } else {
+          setPrograms(prev => [...prev, ...response.data]);
+        }
+
+        setHasMore(response.pagination.hasMore);
+      } catch (err) {
+        setError(
+          err instanceof Error
+            ? err.message
+            : '프로그램을 불러오는 중 오류가 발생했습니다.'
+        );
+      } finally {
+        setLoading(false);
       }
-      
-      setHasMore(response.pagination.hasMore)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : '프로그램을 불러오는 중 오류가 발생했습니다.')
-    } finally {
-      setLoading(false)
-    }
-  }, [params, page])
-  
+    },
+    [params, page]
+  );
+
   const loadMore = useCallback(() => {
     if (!loading && hasMore) {
-      setPage(prev => prev + 1)
+      setPage(prev => prev + 1);
     }
-  }, [loading, hasMore])
-  
+  }, [loading, hasMore]);
+
   const refresh = useCallback(() => {
-    setPage(1)
-    fetchPrograms(true)
-  }, [fetchPrograms])
-  
+    setPage(1);
+    fetchPrograms(true);
+  }, [fetchPrograms]);
+
   // 필터 변경시 리셋
   useEffect(() => {
     if (params.autoFetch !== false) {
-      refresh()
+      refresh();
     }
-  }, [params.category, params.status, params.search])
-  
+  }, [params.category, params.status, params.search]);
+
   // 페이지 변경시 추가 로딩
   useEffect(() => {
     if (page > 1) {
-      fetchPrograms()
+      fetchPrograms();
     }
-  }, [page])
-  
+  }, [page]);
+
   return {
     programs,
     loading,
@@ -495,8 +520,8 @@ export function usePrograms(params: UseProgramsParams = {}) {
     hasMore,
     loadMore,
     refresh,
-    fetchPrograms
-  }
+    fetchPrograms,
+  };
 }
 ```
 
@@ -527,7 +552,7 @@ export function ProgramCard({
 }: ProgramCardProps) {
   const isRegistrationOpen = program.status === 'registration_open'
   const isFull = (program.approvedRegistrations || 0) >= program.capacity
-  
+
   return (
     <Card className={`program-card ${variant} ${className}`}>
       {/* 프로그램 이미지 */}
@@ -546,7 +571,7 @@ export function ProgramCard({
           </div>
         </div>
       )}
-      
+
       <CardContent className="program-content">
         {/* 카테고리 */}
         <div className="program-category">
@@ -554,31 +579,31 @@ export function ProgramCard({
             {getCategoryText(program.category)}
           </Badge>
         </div>
-        
+
         {/* 제목 */}
         <h3 className="program-title">
           <Link href={`/programs/${program.id}`}>
             {program.title}
           </Link>
         </h3>
-        
+
         {/* 요약 */}
         <p className="program-summary">{program.summary}</p>
-        
+
         {/* 메타 정보 */}
         <div className="program-meta">
           <div className="program-capacity">
             <Users className="h-4 w-4" />
             <span>{program.approvedRegistrations || 0}/{program.capacity}</span>
           </div>
-          
+
           {program.duration && (
             <div className="program-duration">
               <Clock className="h-4 w-4" />
               <span>{program.duration}분</span>
             </div>
           )}
-          
+
           <div className="program-price">
             {program.price > 0 ? (
               <span>{formatPrice(program.price)}</span>
@@ -587,7 +612,7 @@ export function ProgramCard({
             )}
           </div>
         </div>
-        
+
         {/* 다음 일정 */}
         {program.nextSessionDate && (
           <div className="next-session">
@@ -595,7 +620,7 @@ export function ProgramCard({
             <span>{formatDate(program.nextSessionDate)}</span>
           </div>
         )}
-        
+
         {/* 등록 버튼 */}
         {showRegistrationButton && (
           <Button
@@ -667,11 +692,11 @@ function getRegistrationButtonText(program: Program): string {
   if (program.status !== 'registration_open') {
     return '등록 불가'
   }
-  
+
   if ((program.approvedRegistrations || 0) >= program.capacity) {
     return '정원 마감'
   }
-  
+
   return '등록 신청'
 }
 ```
@@ -680,13 +705,15 @@ function getRegistrationButtonText(program: Program): string {
 
 ```typescript
 // app/api/programs/route.ts
-import { NextRequest, NextResponse } from 'next/server'
-import { programsAPI } from '@/lib/api/programs'
-import { auth } from '@clerk/nextjs'
+import { NextRequest, NextResponse } from 'next/server';
+
+import { auth } from '@clerk/nextjs';
+
+import { programsAPI } from '@/lib/api/programs';
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
+    const { searchParams } = new URL(request.url);
     const params = {
       page: parseInt(searchParams.get('page') || '1'),
       limit: parseInt(searchParams.get('limit') || '10'),
@@ -694,96 +721,96 @@ export async function GET(request: NextRequest) {
       status: searchParams.get('status') as any,
       search: searchParams.get('search') || undefined,
       sort: searchParams.get('sort') || 'created_at',
-      order: (searchParams.get('order') || 'desc') as 'asc' | 'desc'
-    }
-    
-    const result = await programsAPI.list(params)
-    
+      order: (searchParams.get('order') || 'desc') as 'asc' | 'desc',
+    };
+
+    const result = await programsAPI.list(params);
+
     return NextResponse.json({
       success: true,
       data: result.data,
-      pagination: result.pagination
-    })
+      pagination: result.pagination,
+    });
   } catch (error) {
-    console.error('Programs API Error:', error)
+    console.error('Programs API Error:', error);
     return NextResponse.json(
       {
         success: false,
         error: {
           code: 'FETCH_ERROR',
-          message: '프로그램을 불러오는 중 오류가 발생했습니다.'
-        }
+          message: '프로그램을 불러오는 중 오류가 발생했습니다.',
+        },
       },
       { status: 500 }
-    )
+    );
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const { userId } = auth()
-    
+    const { userId } = auth();
+
     if (!userId) {
       return NextResponse.json(
         {
           success: false,
           error: {
             code: 'AUTH_001',
-            message: '인증이 필요합니다.'
-          }
+            message: '인증이 필요합니다.',
+          },
         },
         { status: 401 }
-      )
+      );
     }
-    
+
     // 관리자 권한 확인
-    const isAdmin = await checkAdminPermission(userId)
+    const isAdmin = await checkAdminPermission(userId);
     if (!isAdmin) {
       return NextResponse.json(
         {
           success: false,
           error: {
             code: 'AUTH_003',
-            message: '관리자 권한이 필요합니다.'
-          }
+            message: '관리자 권한이 필요합니다.',
+          },
         },
         { status: 403 }
-      )
+      );
     }
-    
-    const programData = await request.json()
-    const program = await programsAPI.create(programData)
-    
+
+    const programData = await request.json();
+    const program = await programsAPI.create(programData);
+
     return NextResponse.json({
       success: true,
       data: program,
-      message: '프로그램이 성공적으로 생성되었습니다.'
-    })
+      message: '프로그램이 성공적으로 생성되었습니다.',
+    });
   } catch (error) {
-    console.error('Program Creation Error:', error)
+    console.error('Program Creation Error:', error);
     return NextResponse.json(
       {
         success: false,
         error: {
           code: 'CREATE_ERROR',
-          message: '프로그램 생성 중 오류가 발생했습니다.'
-        }
+          message: '프로그램 생성 중 오류가 발생했습니다.',
+        },
       },
       { status: 500 }
-    )
+    );
   }
 }
 
 async function checkAdminPermission(userId: string): Promise<boolean> {
   // 실제 구현에서는 데이터베이스에서 사용자 권한 확인
   // 현재는 하드코딩된 관리자 이메일 체크
-  const adminEmails = ['jhlim725@gmail.com']
-  
+  const adminEmails = ['jhlim725@gmail.com'];
+
   try {
-    const user = await clerkClient.users.getUser(userId)
-    return adminEmails.includes(user.emailAddresses[0]?.emailAddress || '')
+    const user = await clerkClient.users.getUser(userId);
+    return adminEmails.includes(user.emailAddresses[0]?.emailAddress || '');
   } catch {
-    return false
+    return false;
   }
 }
 ```
@@ -791,48 +818,53 @@ async function checkAdminPermission(userId: string): Promise<boolean> {
 ## 🧪 테스트 전략
 
 ### 단위 테스트
+
 ```typescript
 // __tests__/hooks/usePrograms.test.ts
-import { renderHook, waitFor } from '@testing-library/react'
-import { usePrograms } from '@/hooks/usePrograms'
+import { renderHook, waitFor } from '@testing-library/react';
 
-jest.mock('@/lib/api/programs')
+import { usePrograms } from '@/hooks/usePrograms';
+
+jest.mock('@/lib/api/programs');
 
 describe('usePrograms', () => {
   it('should fetch programs on mount', async () => {
-    const { result } = renderHook(() => usePrograms())
-    
+    const { result } = renderHook(() => usePrograms());
+
     await waitFor(() => {
-      expect(result.current.loading).toBe(false)
-    })
-    
-    expect(result.current.programs).toBeDefined()
-  })
-})
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.programs).toBeDefined();
+  });
+});
 ```
 
 ### 통합 테스트
+
 ```typescript
 // __tests__/api/programs.test.ts
-import { GET } from '@/app/api/programs/route'
-import { NextRequest } from 'next/server'
+import { NextRequest } from 'next/server';
+
+import { GET } from '@/app/api/programs/route';
 
 describe('/api/programs', () => {
   it('should return programs list', async () => {
-    const request = new NextRequest('http://localhost:3000/api/programs')
-    const response = await GET(request)
-    const data = await response.json()
-    
-    expect(response.status).toBe(200)
-    expect(data.success).toBe(true)
-    expect(Array.isArray(data.data)).toBe(true)
-  })
-})
+    const request = new NextRequest('http://localhost:3000/api/programs');
+    const response = await GET(request);
+    const data = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(data.success).toBe(true);
+    expect(Array.isArray(data.data)).toBe(true);
+  });
+});
 ```
 
 ## 📚 추가 리소스
 
 ### 유용한 라이브러리
+
 - **React Query**: 서버 상태 관리
 - **React Hook Form**: 폼 관리
 - **Zod**: 스키마 검증
@@ -841,6 +873,7 @@ describe('/api/programs', () => {
 - **Framer Motion**: 애니메이션
 
 ### 성능 최적화 팁
+
 1. **이미지 최적화**: Next.js Image 컴포넌트 사용
 2. **코드 스플리팅**: 동적 import 활용
 3. **메모이제이션**: React.memo, useMemo 적극 활용
@@ -848,6 +881,7 @@ describe('/api/programs', () => {
 5. **캐싱**: SWR 또는 React Query로 데이터 캐싱
 
 ### 보안 고려사항
+
 1. **입력 검증**: 모든 사용자 입력에 대한 검증
 2. **권한 확인**: API별 적절한 권한 확인
 3. **SQL 인젝션**: Supabase 쿼리 빌더 사용

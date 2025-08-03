@@ -2,27 +2,31 @@
  * Performance Monitoring API Endpoint
  * Receives performance metrics from the ErrorMonitor service
  */
+import { NextRequest, NextResponse } from 'next/server';
 
-import { NextRequest, NextResponse } from 'next/server'
-import { logger } from '@/lib/logger'
+import { logger } from '@/lib/logger';
 
 interface PerformanceReport {
-  metric: string
-  duration: number
-  timestamp: string
-  context?: Record<string, any>
+  metric: string;
+  duration: number;
+  timestamp: string;
+  context?: Record<string, any>;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const performanceReport: PerformanceReport = await request.json()
+    const performanceReport: PerformanceReport = await request.json();
 
     // Validate required fields
-    if (!performanceReport.metric || typeof performanceReport.duration !== 'number' || !performanceReport.timestamp) {
+    if (
+      !performanceReport.metric ||
+      typeof performanceReport.duration !== 'number' ||
+      !performanceReport.timestamp
+    ) {
       return NextResponse.json(
         { error: 'Missing required fields: metric, duration, timestamp' },
         { status: 400 }
-      )
+      );
     }
 
     // Log the performance metric using our structured logging system
@@ -31,13 +35,13 @@ export async function POST(request: NextRequest) {
       function: 'performanceEndpoint',
       metadata: {
         clientTimestamp: performanceReport.timestamp,
-        ...performanceReport.context
-      }
-    })
+        ...performanceReport.context,
+      },
+    });
 
     // Check for performance issues that need attention
-    const isSlowPerformance = performanceReport.duration > 3000 // 3 seconds
-    const isCriticalPerformance = performanceReport.duration > 10000 // 10 seconds
+    const isSlowPerformance = performanceReport.duration > 3000; // 3 seconds
+    const isCriticalPerformance = performanceReport.duration > 10000; // 10 seconds
 
     if (isCriticalPerformance) {
       logger.critical('Critical performance issue detected', undefined, {
@@ -46,9 +50,9 @@ export async function POST(request: NextRequest) {
           metric: performanceReport.metric,
           duration: performanceReport.duration,
           clientReport: true,
-          ...performanceReport.context
-        }
-      })
+          ...performanceReport.context,
+        },
+      });
     } else if (isSlowPerformance) {
       logger.warn('Slow performance detected', {
         component: 'monitoring-api',
@@ -56,9 +60,9 @@ export async function POST(request: NextRequest) {
           metric: performanceReport.metric,
           duration: performanceReport.duration,
           clientReport: true,
-          ...performanceReport.context
-        }
-      })
+          ...performanceReport.context,
+        },
+      });
     }
 
     // In production, you might want to:
@@ -68,32 +72,35 @@ export async function POST(request: NextRequest) {
     // 4. Generate performance dashboards
 
     return NextResponse.json(
-      { 
-        success: true, 
+      {
+        success: true,
         message: 'Performance report received',
         timestamp: new Date().toISOString(),
         metrics: {
           received: performanceReport.metric,
           duration: performanceReport.duration,
-          status: isCriticalPerformance ? 'critical' : isSlowPerformance ? 'warning' : 'ok'
-        }
+          status: isCriticalPerformance
+            ? 'critical'
+            : isSlowPerformance
+              ? 'warning'
+              : 'ok',
+        },
       },
       { status: 200 }
-    )
-
+    );
   } catch (error) {
     logger.error('Failed to process performance report', error as Error, {
       component: 'monitoring-api',
-      function: 'performanceEndpoint'
-    })
+      function: 'performanceEndpoint',
+    });
 
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to process performance report',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       },
       { status: 500 }
-    )
+    );
   }
 }
 
@@ -112,8 +119,8 @@ export async function GET() {
       context: {
         endpoint: '/api/users',
         method: 'GET',
-        userId: 'user_123'
-      }
-    }
-  })
+        userId: 'user_123',
+      },
+    },
+  });
 }

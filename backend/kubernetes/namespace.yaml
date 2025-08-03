@@ -4,4 +4,4 @@ metadata:
   name: familyoffice
   labels:
     name: familyoffice
-    environment: production 
+    environment: production

@@ -483,4 +483,4 @@ export interface IntegrationMetrics {
   errorRecordsCount: number;
   createdAt: Date;
   updatedAt: Date;
-} 
+}

@@ -1,43 +1,55 @@
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 import compression from 'compression';
+import cors from 'cors';
+import express from 'express';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+
 import { logger } from '../../shared/logging/logger';
+import { authMiddleware } from '../../shared/middleware/auth';
+import { tenantMiddleware } from '../../shared/middleware/tenant';
 import { metricsCollector } from '../../shared/monitoring/metrics';
 import { errorHandler } from '../../shared/utils/errorHandler';
 import { requestLogger } from '../../shared/utils/requestLogger';
-import { authMiddleware } from '../../shared/middleware/auth';
-import { tenantMiddleware } from '../../shared/middleware/tenant';
 import { UserController } from './controllers/user.controller';
 
 const app = express();
 const port = process.env.USER_SERVICE_PORT || 3001;
 
 // 미들웨어 설정
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      scriptSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "https:"],
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrc: ["'self'"],
+        imgSrc: ["'self'", 'data:', 'https:'],
+      },
     },
-  },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true
-  }
-}));
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+  })
+);
 
 app.use(compression());
-app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Tenant-ID', 'X-User-ID']
-}));
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || [
+      'http://localhost:3000',
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'X-Tenant-ID',
+      'X-User-ID',
+    ],
+  })
+);
 
 // Rate limiting
 const limiter = rateLimit({
@@ -45,7 +57,7 @@ const limiter = rateLimit({
   max: 100, // IP당 최대 100개 요청
   message: {
     success: false,
-    error: 'Too many requests from this IP'
+    error: 'Too many requests from this IP',
   },
   standardHeaders: true,
   legacyHeaders: false,
@@ -67,7 +79,7 @@ app.get('/health', (req, res) => {
     service: 'user-service',
     timestamp: new Date().toISOString(),
     status: 'healthy',
-    version: process.env.npm_package_version || '1.0.0'
+    version: process.env.npm_package_version || '1.0.0',
   });
 });
 
@@ -81,7 +93,7 @@ app.get('/metrics', async (req, res) => {
     logger.error('Failed to get metrics', { error: error.message });
     res.status(500).json({
       success: false,
-      error: 'Failed to get metrics'
+      error: 'Failed to get metrics',
     });
   }
 });
@@ -106,27 +118,66 @@ apiRouter.delete('/users/:id', userController.deleteUser.bind(userController));
 // 인증 라우트 (인증 미들웨어 제외)
 const authRouter = express.Router();
 authRouter.post('/login', userController.login.bind(userController));
-authRouter.post('/logout/:sessionId', userController.logout.bind(userController));
-authRouter.post('/password-reset/request', userController.requestPasswordReset.bind(userController));
-authRouter.post('/password-reset/change', userController.changePassword.bind(userController));
+authRouter.post(
+  '/logout/:sessionId',
+  userController.logout.bind(userController)
+);
+authRouter.post(
+  '/password-reset/request',
+  userController.requestPasswordReset.bind(userController)
+);
+authRouter.post(
+  '/password-reset/change',
+  userController.changePassword.bind(userController)
+);
 
 // 세션 관리 라우트
-authRouter.get('/sessions/:sessionId/validate', userController.validateSession.bind(userController));
-authRouter.get('/sessions/:sessionId/info', userController.getSessionInfo.bind(userController));
+authRouter.get(
+  '/sessions/:sessionId/validate',
+  userController.validateSession.bind(userController)
+);
+authRouter.get(
+  '/sessions/:sessionId/info',
+  userController.getSessionInfo.bind(userController)
+);
 
 // 패밀리 관리 라우트
-apiRouter.post('/family-members', userController.createFamilyMember.bind(userController));
-apiRouter.get('/family-hierarchy/:familyGroupId', userController.getFamilyHierarchy.bind(userController));
+apiRouter.post(
+  '/family-members',
+  userController.createFamilyMember.bind(userController)
+);
+apiRouter.get(
+  '/family-hierarchy/:familyGroupId',
+  userController.getFamilyHierarchy.bind(userController)
+);
 
 // 보안 설정 라우트
-apiRouter.get('/users/:id/profile', userController.getUserProfile.bind(userController));
-apiRouter.get('/users/:id/permissions', userController.getUserPermissions.bind(userController));
-apiRouter.get('/users/:id/login-history', userController.getLoginHistory.bind(userController));
-apiRouter.get('/users/:id/security-settings', userController.getSecuritySettings.bind(userController));
-apiRouter.put('/users/:id/security-settings', userController.updateSecuritySettings.bind(userController));
+apiRouter.get(
+  '/users/:id/profile',
+  userController.getUserProfile.bind(userController)
+);
+apiRouter.get(
+  '/users/:id/permissions',
+  userController.getUserPermissions.bind(userController)
+);
+apiRouter.get(
+  '/users/:id/login-history',
+  userController.getLoginHistory.bind(userController)
+);
+apiRouter.get(
+  '/users/:id/security-settings',
+  userController.getSecuritySettings.bind(userController)
+);
+apiRouter.put(
+  '/users/:id/security-settings',
+  userController.updateSecuritySettings.bind(userController)
+);
 
 // 2FA 설정 라우트
-apiRouter.post('/users/:id/two-factor/setup', userController.setupTwoFactor.bind(userController));
+apiRouter.post(
+  '/users/:id/two-factor/setup',
+  userController.setupTwoFactor.bind(userController)
+);
 
 // 라우터 마운트
 app.use('/api/v1/auth', authRouter);
@@ -137,7 +188,7 @@ app.use('*', (req, res) => {
   res.status(404).json({
     success: false,
     error: 'Endpoint not found',
-    path: req.originalUrl
+    path: req.originalUrl,
   });
 });
 
@@ -149,7 +200,7 @@ const server = app.listen(port, () => {
   logger.info('User service started', {
     port,
     environment: process.env.NODE_ENV || 'development',
-    version: process.env.npm_package_version || '1.0.0'
+    version: process.env.npm_package_version || '1.0.0',
   });
 });
 
@@ -175,17 +226,17 @@ process.on('unhandledRejection', (reason, promise) => {
   logger.error('Unhandled Rejection at:', {
     promise,
     reason,
-    stack: reason instanceof Error ? reason.stack : undefined
+    stack: reason instanceof Error ? reason.stack : undefined,
   });
 });
 
 // Uncaught exception
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', error => {
   logger.error('Uncaught Exception:', {
     error: error.message,
-    stack: error.stack
+    stack: error.stack,
   });
   process.exit(1);
 });
 
-export default app; 
+export default app;

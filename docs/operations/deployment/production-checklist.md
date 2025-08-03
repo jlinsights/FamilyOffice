@@ -5,6 +5,7 @@
 ### 1. Infrastructure Verification
 
 #### Kubernetes Cluster Health
+
 ```bash
 # Verify cluster health
 kubectl get nodes
@@ -21,6 +22,7 @@ kubectl get pv,pvc -A
 ```
 
 #### Database Health
+
 ```bash
 # PostgreSQL health check
 kubectl exec -it postgres-0 -- pg_isready
@@ -32,6 +34,7 @@ kubectl exec -it redis-0 -- redis-cli info memory
 ```
 
 #### Network Connectivity
+
 ```bash
 # Verify internal connectivity
 kubectl exec -it deployment/frontend -- curl -f http://backend-service:3000/health
@@ -45,6 +48,7 @@ curl -f https://familyoffice.com
 ### 2. Security Verification
 
 #### Secrets Management
+
 ```bash
 # Verify secrets are properly configured
 kubectl get secrets -A
@@ -55,6 +59,7 @@ kubectl get secret api-secrets -n familyoffice -o jsonpath='{.metadata.creationT
 ```
 
 #### Access Controls
+
 ```bash
 # Verify RBAC configuration
 kubectl get roles,rolebindings -A
@@ -65,6 +70,7 @@ kubectl get serviceaccounts -A
 ```
 
 #### Network Security
+
 ```bash
 # Verify network policies
 kubectl get networkpolicies -A
@@ -77,6 +83,7 @@ kubectl get ingress -n familyoffice -o yaml
 ### 3. Application Health
 
 #### Service Health Checks
+
 ```bash
 # Frontend health
 curl -f https://familyoffice.com/api/health
@@ -92,6 +99,7 @@ curl -f https://api.familyoffice.com/health/cache
 ```
 
 #### Performance Metrics
+
 ```bash
 # Check response times
 curl -w "@curl-format.txt" -o /dev/null -s https://api.familyoffice.com/health
@@ -106,6 +114,7 @@ kubectl top pods -n familyoffice --containers
 ### 4. Monitoring Verification
 
 #### Prometheus Metrics
+
 ```bash
 # Verify metrics endpoint
 curl -f https://api.familyoffice.com/metrics
@@ -116,6 +125,7 @@ kubectl port-forward svc/prometheus 9090:9090 -n monitoring
 ```
 
 #### Grafana Dashboards
+
 ```bash
 # Verify Grafana access
 kubectl port-forward svc/grafana 3000:3000 -n monitoring
@@ -123,6 +133,7 @@ kubectl port-forward svc/grafana 3000:3000 -n monitoring
 ```
 
 #### Alerting Configuration
+
 ```bash
 # Check AlertManager configuration
 kubectl get configmap alertmanager-config -n monitoring -o yaml
@@ -136,6 +147,7 @@ kubectl get configmap prometheus-rules -n monitoring -o yaml
 ### 1. Blue-Green Deployment
 
 #### Pre-Deployment Steps
+
 ```bash
 # 1. Create new deployment
 kubectl apply -f k8s/deployments/frontend-v2.yaml
@@ -150,6 +162,7 @@ kubectl exec -it deployment/frontend-v2 -- curl -f http://backend-v2:3000/health
 ```
 
 #### Traffic Switch
+
 ```bash
 # 1. Update service to point to new deployment
 kubectl patch service frontend-service -p '{"spec":{"selector":{"version":"v2"}}}'
@@ -165,6 +178,7 @@ kubectl port-forward svc/grafana 3000:3000 -n monitoring
 ```
 
 #### Rollback Plan
+
 ```bash
 # If issues detected, rollback immediately
 kubectl patch service frontend-service -p '{"spec":{"selector":{"version":"v1"}}}'
@@ -178,6 +192,7 @@ kubectl logs -f deployment/backend-v1
 ### 2. Database Migration
 
 #### Migration Verification
+
 ```bash
 # 1. Check migration status
 kubectl exec -it deployment/backend -- npm run migrate:status
@@ -190,6 +205,7 @@ kubectl exec -it deployment/backend -- npm run migrate:status
 ```
 
 #### Data Integrity Check
+
 ```bash
 # 1. Verify critical tables
 kubectl exec -it postgres-0 -- psql -U postgres -d familyoffice -c "SELECT COUNT(*) FROM users;"
@@ -203,6 +219,7 @@ kubectl exec -it postgres-0 -- psql -U postgres -d familyoffice -c "SELECT * FRO
 ### 3. Configuration Updates
 
 #### Environment Variables
+
 ```bash
 # 1. Update ConfigMaps
 kubectl apply -f k8s/configmaps/app-config-v2.yaml
@@ -216,6 +233,7 @@ kubectl rollout restart deployment/backend-v2
 ```
 
 #### Feature Flags
+
 ```bash
 # 1. Enable new features
 kubectl patch configmap feature-flags -p '{"data":{"new-feature":"enabled"}}'
@@ -229,6 +247,7 @@ curl -f https://api.familyoffice.com/config/features
 ### 1. Functional Testing
 
 #### API Endpoint Testing
+
 ```bash
 # Test critical API endpoints
 curl -f -H "Authorization: Bearer $TOKEN" https://api.familyoffice.com/api/v1/portfolios
@@ -242,6 +261,7 @@ curl -f -X POST https://api.familyoffice.com/api/v1/auth/login \
 ```
 
 #### User Interface Testing
+
 ```bash
 # Test frontend functionality
 curl -f https://familyoffice.com
@@ -253,6 +273,7 @@ curl -f https://familyoffice.com/dashboard
 ```
 
 #### Database Testing
+
 ```bash
 # Test database connections
 kubectl exec -it deployment/backend -- npm run test:db
@@ -264,6 +285,7 @@ kubectl exec -it deployment/backend -- npm run test:data-integrity
 ### 2. Performance Testing
 
 #### Load Testing
+
 ```bash
 # Run load tests
 kubectl exec -it deployment/load-tester -- npm run test:load
@@ -274,6 +296,7 @@ kubectl port-forward svc/grafana 3000:3000 -n monitoring
 ```
 
 #### Stress Testing
+
 ```bash
 # Run stress tests
 kubectl exec -it deployment/stress-tester -- npm run test:stress
@@ -286,6 +309,7 @@ kubectl top pods -A
 ### 3. Security Testing
 
 #### Vulnerability Scanning
+
 ```bash
 # Run security scans
 kubectl exec -it deployment/security-scanner -- npm run scan:vulnerabilities
@@ -295,6 +319,7 @@ kubectl logs deployment/security-scanner
 ```
 
 #### Penetration Testing
+
 ```bash
 # Run penetration tests
 kubectl exec -it deployment/pen-tester -- npm run test:penetration
@@ -308,6 +333,7 @@ kubectl logs deployment/pen-tester
 ### 1. Real-Time Monitoring
 
 #### System Metrics
+
 ```bash
 # Monitor system health
 kubectl port-forward svc/prometheus 9090:9090 -n monitoring
@@ -319,6 +345,7 @@ kubectl port-forward svc/grafana 3000:3000 -n monitoring
 ```
 
 #### Business Metrics
+
 ```bash
 # Monitor business KPIs
 kubectl port-forward svc/grafana 3000:3000 -n monitoring
@@ -332,6 +359,7 @@ kubectl logs -f deployment/backend | grep "user activity"
 ### 2. Alert Verification
 
 #### Alert Testing
+
 ```bash
 # Test alerting system
 kubectl exec -it deployment/alert-tester -- npm run test:alerts
@@ -341,6 +369,7 @@ kubectl logs deployment/alertmanager -n monitoring
 ```
 
 #### Incident Response
+
 ```bash
 # Test incident response procedures
 kubectl exec -it deployment/incident-tester -- npm run test:incident-response
@@ -354,6 +383,7 @@ kubectl logs deployment/incident-manager
 ### 1. Deployment Records
 
 #### Update Deployment Log
+
 ```bash
 # Record deployment details
 echo "Deployment completed: $(date)" >> /var/log/deployments/deployment.log
@@ -363,6 +393,7 @@ echo "Deployed by: $(whoami)" >> /var/log/deployments/deployment.log
 ```
 
 #### Update Runbook
+
 ```bash
 # Update operational runbook
 kubectl exec -it deployment/docs-updater -- npm run update:runbook
@@ -374,6 +405,7 @@ kubectl exec -it deployment/docs-updater -- npm run update:troubleshooting
 ### 2. Compliance Documentation
 
 #### Update Compliance Records
+
 ```bash
 # Update SOX compliance records
 kubectl exec -it deployment/compliance-updater -- npm run update:sox-records
@@ -390,6 +422,7 @@ kubectl exec -it deployment/audit-logger -- npm run log:deployment
 ### 1. Rollback Procedures
 
 #### Immediate Rollback
+
 ```bash
 # Emergency rollback command
 kubectl rollout undo deployment/frontend
@@ -401,6 +434,7 @@ kubectl rollout status deployment/backend
 ```
 
 #### Database Rollback
+
 ```bash
 # Rollback database changes
 kubectl exec -it deployment/backend -- npm run migrate:down
@@ -412,6 +446,7 @@ kubectl exec -it postgres-0 -- psql -U postgres -d familyoffice -c "SELECT * FRO
 ### 2. Incident Response
 
 #### Incident Declaration
+
 ```bash
 # Declare incident
 kubectl exec -it deployment/incident-manager -- npm run declare:incident
@@ -421,6 +456,7 @@ kubectl exec -it deployment/notification-service -- npm run notify:incident
 ```
 
 #### Emergency Contacts
+
 ```bash
 # Get emergency contact list
 kubectl get configmap emergency-contacts -o yaml
@@ -434,18 +470,21 @@ kubectl exec -it deployment/notification-service -- npm run notify:emergency
 ### 1. Success Criteria
 
 #### Performance Criteria
+
 - [ ] Response time < 500ms for 95% of requests
 - [ ] Error rate < 0.1%
 - [ ] System uptime > 99.9%
 - [ ] Database connection success rate > 99.9%
 
 #### Security Criteria
+
 - [ ] All security scans passed
 - [ ] No critical vulnerabilities detected
 - [ ] Access controls functioning properly
 - [ ] Audit logging operational
 
 #### Compliance Criteria
+
 - [ ] SOX controls functioning
 - [ ] GDPR compliance maintained
 - [ ] Audit trails complete
@@ -454,6 +493,7 @@ kubectl exec -it deployment/notification-service -- npm run notify:emergency
 ### 2. Sign-Off
 
 #### Stakeholder Sign-Off
+
 ```bash
 # Record stakeholder approvals
 echo "Deployment approved by: $(whoami)" >> /var/log/deployments/approval.log
@@ -462,6 +502,7 @@ echo "Deployment status: SUCCESS" >> /var/log/deployments/approval.log
 ```
 
 #### Documentation Sign-Off
+
 ```bash
 # Update deployment documentation
 kubectl exec -it deployment/docs-updater -- npm run update:deployment-docs
@@ -475,4 +516,4 @@ kubectl exec -it deployment/artifact-manager -- npm run archive:deployment
 **Document Version**: 1.0  
 **Last Updated**: 2024-12-19  
 **Next Review**: 2025-01-19  
-**Owner**: DevOps Team 
+**Owner**: DevOps Team

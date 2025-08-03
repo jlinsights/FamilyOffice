@@ -1,4 +1,4 @@
-import { LucideIcon } from "lucide-react";
+import { LucideIcon } from 'lucide-react';
 
 export interface Seminar {
   id: string;
@@ -43,7 +43,7 @@ export interface Speaker {
 }
 
 export interface SeminarLocation {
-  type: "online" | "offline" | "hybrid";
+  type: 'online' | 'offline' | 'hybrid';
   venue?: string;
   address?: string;
   onlineLink?: string;
@@ -58,24 +58,24 @@ export interface AgendaItem {
   duration: number; // minutes
 }
 
-export type SeminarCategory = 
-  | "leadership"
-  | "finance" 
-  | "legal"
-  | "succession"
-  | "investment"
-  | "taxation"
-  | "management"
-  | "networking"
-  | "technology"
-  | "esg";
+export type SeminarCategory =
+  | 'leadership'
+  | 'finance'
+  | 'legal'
+  | 'succession'
+  | 'investment'
+  | 'taxation'
+  | 'management'
+  | 'networking'
+  | 'technology'
+  | 'esg';
 
-export type SeminarStatus = 
-  | "upcoming"
-  | "ongoing" 
-  | "completed"
-  | "cancelled"
-  | "full";
+export type SeminarStatus =
+  | 'upcoming'
+  | 'ongoing'
+  | 'completed'
+  | 'cancelled'
+  | 'full';
 
 export interface SeminarCategoryInfo {
   key: SeminarCategory;
@@ -99,8 +99,8 @@ export interface SeminarRegistration {
   dietaryRestrictions?: string;
   accessibilityNeeds?: string;
   registrationDate: string;
-  paymentStatus: "pending" | "completed" | "failed" | "refunded";
-  attendanceStatus: "registered" | "attended" | "no-show" | "cancelled";
+  paymentStatus: 'pending' | 'completed' | 'failed' | 'refunded';
+  attendanceStatus: 'registered' | 'attended' | 'no-show' | 'cancelled';
 }
 
 export interface SeminarFeedback {

@@ -1,7 +1,9 @@
 # Design System Enhancement Plan
+
 ## FamilyOffice Wealth Management Platform
 
 ### Executive Summary
+
 This document outlines a comprehensive design system enhancement plan for the FamilyOffice platform, focusing on creating a cohesive, scalable, and professional design language that reflects premium wealth management standards while maintaining Korean cultural context.
 
 ---
@@ -9,19 +11,23 @@ This document outlines a comprehensive design system enhancement plan for the Fa
 ## 1. Current Design System Audit
 
 ### 1.1 Existing Foundation
+
 **Strengths:**
+
 - Modern component architecture with shadcn/ui
 - Consistent Tailwind CSS implementation
 - Professional color palette (Navy + Bronze)
 - TypeScript integration for type safety
 
 **Areas for Improvement:**
+
 - Limited design token system
 - Inconsistent spacing and typography scales
 - Missing component variants for financial data
 - Insufficient accessibility considerations
 
 ### 1.2 Component Inventory
+
 ```typescript
 // Current component structure
 components/
@@ -42,6 +48,7 @@ components/
 ## 2. Enhanced Design Token System
 
 ### 2.1 Color Palette Expansion
+
 ```typescript
 // Enhanced color system
 export const colors = {
@@ -82,18 +89,18 @@ export const colors = {
       700: '#15803d',
       800: '#166534',
       900: '#14532d',
-    }
+    },
   },
-  
+
   // Semantic colors for financial data
   financial: {
-    positive: '#10b981',   // Green for gains
-    negative: '#ef4444',   // Red for losses
-    neutral: '#6b7280',    // Gray for neutral
-    warning: '#f59e0b',    // Amber for warnings
-    info: '#3b82f6',       // Blue for information
+    positive: '#10b981', // Green for gains
+    negative: '#ef4444', // Red for losses
+    neutral: '#6b7280', // Gray for neutral
+    warning: '#f59e0b', // Amber for warnings
+    info: '#3b82f6', // Blue for information
   },
-  
+
   // Status colors
   status: {
     success: '#10b981',
@@ -101,18 +108,19 @@ export const colors = {
     error: '#ef4444',
     info: '#3b82f6',
     pending: '#6b7280',
-  }
-} as const
+  },
+} as const;
 
 // Color utilities
 export const getFinancialColor = (value: number): string => {
-  if (value > 0) return colors.financial.positive
-  if (value < 0) return colors.financial.negative
-  return colors.financial.neutral
-}
+  if (value > 0) return colors.financial.positive;
+  if (value < 0) return colors.financial.negative;
+  return colors.financial.neutral;
+};
 ```
 
 ### 2.2 Typography Scale Enhancement
+
 ```typescript
 // Enhanced typography system
 export const typography = {
@@ -124,46 +132,43 @@ export const typography = {
       '-apple-system',
       'BlinkMacSystemFont',
       'system-ui',
-      'sans-serif'
+      'sans-serif',
     ],
-    mono: [
-      'SF Mono',
-      'Monaco',
-      'Inconsolata',
-      'Roboto Mono',
-      'monospace'
-    ],
+    mono: ['SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'monospace'],
     financial: [
       'SF Pro Display',
       'Pretendard Variable',
       'system-ui',
-      'sans-serif'
-    ]
+      'sans-serif',
+    ],
   },
-  
+
   // Type scales
   fontSize: {
-    'xs': ['0.75rem', { lineHeight: '1rem' }],
-    'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-    'base': ['1rem', { lineHeight: '1.5rem' }],
-    'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-    'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+    xs: ['0.75rem', { lineHeight: '1rem' }],
+    sm: ['0.875rem', { lineHeight: '1.25rem' }],
+    base: ['1rem', { lineHeight: '1.5rem' }],
+    lg: ['1.125rem', { lineHeight: '1.75rem' }],
+    xl: ['1.25rem', { lineHeight: '1.75rem' }],
     '2xl': ['1.5rem', { lineHeight: '2rem' }],
     '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
     '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
     '5xl': ['3rem', { lineHeight: '1' }],
     '6xl': ['3.75rem', { lineHeight: '1' }],
-    
+
     // Financial-specific sizes
     'financial-xs': ['0.6875rem', { lineHeight: '1rem', fontWeight: '500' }],
     'financial-sm': ['0.8125rem', { lineHeight: '1.25rem', fontWeight: '500' }],
-    'financial-base': ['0.9375rem', { lineHeight: '1.5rem', fontWeight: '500' }],
+    'financial-base': [
+      '0.9375rem',
+      { lineHeight: '1.5rem', fontWeight: '500' },
+    ],
     'financial-lg': ['1.125rem', { lineHeight: '1.75rem', fontWeight: '600' }],
     'financial-xl': ['1.375rem', { lineHeight: '1.75rem', fontWeight: '600' }],
     'financial-2xl': ['1.75rem', { lineHeight: '2rem', fontWeight: '600' }],
     'financial-3xl': ['2.125rem', { lineHeight: '2.25rem', fontWeight: '700' }],
   },
-  
+
   // Font weights
   fontWeight: {
     thin: '100',
@@ -175,11 +180,12 @@ export const typography = {
     bold: '700',
     extrabold: '800',
     black: '900',
-  }
-} as const
+  },
+} as const;
 ```
 
 ### 2.3 Spacing and Layout System
+
 ```typescript
 // Enhanced spacing system
 export const spacing = {
@@ -221,7 +227,7 @@ export const spacing = {
     80: '20rem',
     96: '24rem',
   },
-  
+
   // Component-specific spacing
   component: {
     cardPadding: '1.5rem',
@@ -233,7 +239,7 @@ export const spacing = {
     sidebarWidth: '16rem',
     dashboardGutter: '1.5rem',
   },
-  
+
   // Layout breakpoints
   breakpoints: {
     sm: '640px',
@@ -241,8 +247,8 @@ export const spacing = {
     lg: '1024px',
     xl: '1280px',
     '2xl': '1536px',
-  }
-} as const
+  },
+} as const;
 ```
 
 ---
@@ -250,6 +256,7 @@ export const spacing = {
 ## 3. Component System Enhancement
 
 ### 3.1 Financial Data Components
+
 ```typescript
 // Enhanced financial metric component
 interface FinancialMetricProps {
@@ -275,7 +282,7 @@ export function FinancialMetric({
 }: FinancialMetricProps) {
   const formatValue = (val: number | string) => {
     if (typeof val === 'string') return val
-    
+
     switch (format) {
       case 'currency':
         return new Intl.NumberFormat('ko-KR', {
@@ -292,19 +299,19 @@ export function FinancialMetric({
         return val
     }
   }
-  
+
   const sizeClasses = {
     sm: 'text-sm',
     md: 'text-base',
     lg: 'text-lg'
   }
-  
+
   const valueSizeClasses = {
     sm: 'text-lg font-semibold',
     md: 'text-xl font-semibold',
     lg: 'text-2xl font-bold'
   }
-  
+
   return (
     <div className={cn('space-y-1', className)}>
       <div className={cn('text-muted-foreground', sizeClasses[size])}>
@@ -316,7 +323,7 @@ export function FinancialMetric({
       {change !== undefined && (
         <div className={cn(
           'flex items-center gap-1 text-sm',
-          change > 0 ? 'text-financial-positive' : 
+          change > 0 ? 'text-financial-positive' :
           change < 0 ? 'text-financial-negative' : 'text-financial-neutral'
         )}>
           {change > 0 ? (
@@ -338,6 +345,7 @@ export function FinancialMetric({
 ```
 
 ### 3.2 Enhanced Data Table Component
+
 ```typescript
 // Professional data table with financial features
 interface DataTableColumn<T> {
@@ -380,7 +388,7 @@ export function DataTable<T extends Record<string, any>>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState('')
-  
+
   const table = useReactTable({
     data,
     columns: columns.map(col => ({
@@ -391,7 +399,7 @@ export function DataTable<T extends Record<string, any>>({
         if (col.render) {
           return col.render(value, row.original)
         }
-        
+
         // Format based on column type
         switch (col.format) {
           case 'currency':
@@ -437,7 +445,7 @@ export function DataTable<T extends Record<string, any>>({
       },
     },
   })
-  
+
   return (
     <div className={cn('space-y-4', className)}>
       {/* Search and filters */}
@@ -460,7 +468,7 @@ export function DataTable<T extends Record<string, any>>({
           )}
         </div>
       )}
-      
+
       {/* Table */}
       <div className="rounded-md border">
         <Table>
@@ -468,7 +476,7 @@ export function DataTable<T extends Record<string, any>>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead 
+                  <TableHead
                     key={header.id}
                     className={cn(
                       header.column.columnDef.meta?.align === 'center' && 'text-center',
@@ -513,7 +521,7 @@ export function DataTable<T extends Record<string, any>>({
                   )}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell 
+                    <TableCell
                       key={cell.id}
                       className={cn(
                         cell.column.columnDef.meta?.align === 'center' && 'text-center',
@@ -541,7 +549,7 @@ export function DataTable<T extends Record<string, any>>({
           </TableBody>
         </Table>
       </div>
-      
+
       {/* Pagination */}
       {pagination && (
         <div className="flex items-center justify-between px-2">
@@ -583,6 +591,7 @@ export function DataTable<T extends Record<string, any>>({
 ```
 
 ### 3.3 Enhanced Chart Components
+
 ```typescript
 // Professional chart wrapper with consistent styling
 interface ChartWrapperProps {
@@ -622,7 +631,7 @@ export function ChartWrapper({
       </Card>
     )
   }
-  
+
   if (error) {
     return (
       <Card className={cn('p-6', className)}>
@@ -644,7 +653,7 @@ export function ChartWrapper({
       </Card>
     )
   }
-  
+
   return (
     <Card className={cn('p-6', className)}>
       <div className="space-y-4">
@@ -678,6 +687,7 @@ export function ChartWrapper({
 ## 4. Design System Documentation
 
 ### 4.1 Component Library Structure
+
 ```
 design-system/
 ├── tokens/
@@ -718,35 +728,36 @@ design-system/
 ```
 
 ### 4.2 Usage Guidelines
+
 ```typescript
 // Component usage examples and guidelines
 export const ComponentGuidelines = {
   // Color usage
   colors: {
-    primary: "Use navy for primary actions and brand elements",
-    secondary: "Use bronze for secondary actions and accents",
+    primary: 'Use navy for primary actions and brand elements',
+    secondary: 'Use bronze for secondary actions and accents',
     financial: {
-      positive: "Use green for gains, profits, and positive changes",
-      negative: "Use red for losses, deficits, and negative changes",
-      neutral: "Use gray for neutral values and placeholders"
-    }
+      positive: 'Use green for gains, profits, and positive changes',
+      negative: 'Use red for losses, deficits, and negative changes',
+      neutral: 'Use gray for neutral values and placeholders',
+    },
   },
-  
+
   // Typography guidelines
   typography: {
-    headers: "Use semibold to bold weights for headers",
-    body: "Use regular to medium weights for body text",
-    financial: "Use tabular numbers for financial data",
-    emphasis: "Use medium weight for emphasis, not bold"
+    headers: 'Use semibold to bold weights for headers',
+    body: 'Use regular to medium weights for body text',
+    financial: 'Use tabular numbers for financial data',
+    emphasis: 'Use medium weight for emphasis, not bold',
   },
-  
+
   // Spacing guidelines
   spacing: {
-    components: "Use consistent spacing between components",
-    sections: "Use larger spacing to separate major sections",
-    forms: "Use consistent spacing in forms for better usability"
-  }
-}
+    components: 'Use consistent spacing between components',
+    sections: 'Use larger spacing to separate major sections',
+    forms: 'Use consistent spacing in forms for better usability',
+  },
+};
 ```
 
 ---
@@ -754,6 +765,7 @@ export const ComponentGuidelines = {
 ## 5. Implementation Roadmap
 
 ### Phase 1: Foundation (Weeks 1-2)
+
 - [ ] Implement design token system
 - [ ] Create enhanced color palette
 - [ ] Establish typography scale
@@ -761,6 +773,7 @@ export const ComponentGuidelines = {
 - [ ] Create component documentation
 
 ### Phase 2: Core Components (Weeks 3-4)
+
 - [ ] Enhance existing shadcn/ui components
 - [ ] Create financial-specific components
 - [ ] Implement data table enhancements
@@ -768,6 +781,7 @@ export const ComponentGuidelines = {
 - [ ] Create loading and error states
 
 ### Phase 3: Advanced Features (Weeks 5-6)
+
 - [ ] Implement advanced form components
 - [ ] Create dashboard-specific components
 - [ ] Add animation and micro-interactions
@@ -775,6 +789,7 @@ export const ComponentGuidelines = {
 - [ ] Create responsive design patterns
 
 ### Phase 4: Documentation & Testing (Weeks 7-8)
+
 - [ ] Create comprehensive component documentation
 - [ ] Implement automated testing
 - [ ] Create design system guidelines
@@ -786,18 +801,21 @@ export const ComponentGuidelines = {
 ## 6. Success Metrics
 
 ### Design System Adoption
+
 - Component reuse rate: Target 80%
 - Design consistency score: Target 95%
 - Development velocity: Target +30%
 - Design-to-code time: Target -40%
 
 ### User Experience Impact
+
 - User satisfaction: Target +25%
 - Task completion rate: Target +35%
 - Error reduction: Target -50%
 - Accessibility compliance: Target 100%
 
 ### Technical Metrics
+
 - Bundle size optimization: Target -20%
 - Performance improvement: Target +15%
 - Code maintainability: Target +40%

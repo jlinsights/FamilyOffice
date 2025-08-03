@@ -1,5 +1,5 @@
 // OpenAPI/Swagger configuration for API documentation
-import type { OpenAPIV3 } from 'openapi-types'
+import type { OpenAPIV3 } from 'openapi-types';
 
 export const swaggerConfig: OpenAPIV3.Document = {
   openapi: '3.0.0',
@@ -10,23 +10,23 @@ export const swaggerConfig: OpenAPIV3.Document = {
     contact: {
       name: 'FamilyOffice S Support',
       email: 'support@familyoffices.vip',
-      url: 'https://familyoffices.vip/contact'
+      url: 'https://familyoffices.vip/contact',
     },
     license: {
       name: 'Private',
-    }
+    },
   },
   servers: [
     {
       url: 'https://familyoffices.vip/api',
-      description: 'Production server'
+      description: 'Production server',
     },
     {
       url: 'http://localhost:3000/api',
-      description: 'Development server'
-    }
+      description: 'Development server',
+    },
   ],
-  
+
   // Security schemes
   components: {
     securitySchemes: {
@@ -34,16 +34,16 @@ export const swaggerConfig: OpenAPIV3.Document = {
         type: 'http',
         scheme: 'bearer',
         bearerFormat: 'JWT',
-        description: 'Clerk authentication token'
+        description: 'Clerk authentication token',
       },
       ApiKey: {
         type: 'apiKey',
         in: 'header',
         name: 'X-API-Key',
-        description: 'API key for service-to-service communication'
-      }
+        description: 'API key for service-to-service communication',
+      },
     },
-    
+
     // Reusable schemas
     schemas: {
       User: {
@@ -51,178 +51,195 @@ export const swaggerConfig: OpenAPIV3.Document = {
         properties: {
           id: {
             type: 'string',
-            description: 'Unique user identifier'
+            description: 'Unique user identifier',
           },
           email: {
             type: 'string',
             format: 'email',
-            description: 'User email address'
+            description: 'User email address',
           },
           name: {
             type: 'string',
-            description: 'User full name'
+            description: 'User full name',
           },
           created_at: {
             type: 'string',
             format: 'date-time',
-            description: 'Account creation timestamp'
+            description: 'Account creation timestamp',
           },
           updated_at: {
             type: 'string',
             format: 'date-time',
-            description: 'Last update timestamp'
-          }
+            description: 'Last update timestamp',
+          },
         },
-        required: ['id', 'email', 'name']
+        required: ['id', 'email', 'name'],
       },
-      
+
       UserStats: {
         type: 'object',
         properties: {
           totalUsers: {
             type: 'integer',
-            description: 'Total number of registered users'
+            description: 'Total number of registered users',
           },
           activeUsers: {
             type: 'integer',
-            description: 'Number of active users (last 30 days)'
+            description: 'Number of active users (last 30 days)',
           },
           newUsersThisMonth: {
             type: 'integer',
-            description: 'New users registered this month'
+            description: 'New users registered this month',
           },
           userGrowthRate: {
             type: 'number',
             format: 'float',
-            description: 'Monthly user growth rate as percentage'
-          }
-        }
+            description: 'Monthly user growth rate as percentage',
+          },
+        },
       },
-      
+
       ConsultationRequest: {
         type: 'object',
         properties: {
           name: {
             type: 'string',
-            description: '신청자 이름'
+            description: '신청자 이름',
           },
           email: {
             type: 'string',
             format: 'email',
-            description: '이메일 주소'
+            description: '이메일 주소',
           },
           phone: {
             type: 'string',
-            description: '연락처'
+            description: '연락처',
           },
           company: {
             type: 'string',
-            description: '회사명'
+            description: '회사명',
           },
           position: {
             type: 'string',
-            description: '직책'
+            description: '직책',
           },
           businessType: {
             type: 'string',
-            enum: ['manufacturing', 'construction', 'it', 'family_corp', 'other'],
-            description: '업종'
+            enum: [
+              'manufacturing',
+              'construction',
+              'it',
+              'family_corp',
+              'other',
+            ],
+            description: '업종',
           },
           assets: {
             type: 'string',
             enum: ['under_1b', '1b_5b', '5b_10b', '10b_50b', 'over_50b'],
-            description: '자산 규모'
+            description: '자산 규모',
           },
           consultationType: {
             type: 'string',
-            enum: ['asset_management', 'succession_planning', 'tax_strategy', 'risk_management'],
-            description: '상담 분야'
+            enum: [
+              'asset_management',
+              'succession_planning',
+              'tax_strategy',
+              'risk_management',
+            ],
+            description: '상담 분야',
           },
           message: {
             type: 'string',
-            description: '상담 내용'
-          }
+            description: '상담 내용',
+          },
         },
-        required: ['name', 'email', 'phone', 'businessType', 'consultationType']
+        required: [
+          'name',
+          'email',
+          'phone',
+          'businessType',
+          'consultationType',
+        ],
       },
-      
+
       StockData: {
         type: 'object',
         properties: {
           symbol: {
             type: 'string',
-            description: 'Stock symbol (e.g., 005930.KS)'
+            description: 'Stock symbol (e.g., 005930.KS)',
           },
           name: {
             type: 'string',
-            description: 'Company name'
+            description: 'Company name',
           },
           price: {
             type: 'number',
             format: 'float',
-            description: 'Current stock price'
+            description: 'Current stock price',
           },
           change: {
             type: 'number',
             format: 'float',
-            description: 'Price change'
+            description: 'Price change',
           },
           changePercent: {
             type: 'number',
             format: 'float',
-            description: 'Percentage change'
+            description: 'Percentage change',
           },
           volume: {
             type: 'integer',
-            description: 'Trading volume'
+            description: 'Trading volume',
           },
           marketCap: {
             type: 'number',
             format: 'float',
-            description: 'Market capitalization'
+            description: 'Market capitalization',
           },
           timestamp: {
             type: 'string',
             format: 'date-time',
-            description: 'Data timestamp'
-          }
-        }
+            description: 'Data timestamp',
+          },
+        },
       },
-      
+
       ForexData: {
         type: 'object',
         properties: {
           from: {
             type: 'string',
-            description: 'Base currency code'
+            description: 'Base currency code',
           },
           to: {
             type: 'string',
-            description: 'Target currency code'
+            description: 'Target currency code',
           },
           rate: {
             type: 'number',
             format: 'float',
-            description: 'Exchange rate'
+            description: 'Exchange rate',
           },
           change: {
             type: 'number',
             format: 'float',
-            description: 'Rate change'
+            description: 'Rate change',
           },
           changePercent: {
             type: 'number',
             format: 'float',
-            description: 'Percentage change'
+            description: 'Percentage change',
           },
           timestamp: {
             type: 'string',
             format: 'date-time',
-            description: 'Data timestamp'
-          }
-        }
+            description: 'Data timestamp',
+          },
+        },
       },
-      
+
       FinancialStatus: {
         type: 'object',
         properties: {
@@ -232,18 +249,18 @@ export const swaggerConfig: OpenAPIV3.Document = {
               status: {
                 type: 'string',
                 enum: ['operational', 'degraded', 'down'],
-                description: 'Yahoo Finance API status'
+                description: 'Yahoo Finance API status',
               },
               latency: {
                 type: 'number',
-                description: 'Average response time in milliseconds'
+                description: 'Average response time in milliseconds',
               },
               lastCheck: {
                 type: 'string',
                 format: 'date-time',
-                description: 'Last health check timestamp'
-              }
-            }
+                description: 'Last health check timestamp',
+              },
+            },
           },
           alphaVantage: {
             type: 'object',
@@ -251,18 +268,18 @@ export const swaggerConfig: OpenAPIV3.Document = {
               status: {
                 type: 'string',
                 enum: ['operational', 'degraded', 'down'],
-                description: 'Alpha Vantage API status'
+                description: 'Alpha Vantage API status',
               },
               latency: {
                 type: 'number',
-                description: 'Average response time in milliseconds'
+                description: 'Average response time in milliseconds',
               },
               lastCheck: {
                 type: 'string',
                 format: 'date-time',
-                description: 'Last health check timestamp'
-              }
-            }
+                description: 'Last health check timestamp',
+              },
+            },
           },
           cache: {
             type: 'object',
@@ -270,39 +287,39 @@ export const swaggerConfig: OpenAPIV3.Document = {
               memoryHitRate: {
                 type: 'number',
                 format: 'float',
-                description: 'Memory cache hit rate'
+                description: 'Memory cache hit rate',
               },
               redisHitRate: {
                 type: 'number',
                 format: 'float',
-                description: 'Redis cache hit rate'
-              }
-            }
-          }
-        }
+                description: 'Redis cache hit rate',
+              },
+            },
+          },
+        },
       },
-      
+
       Error: {
         type: 'object',
         properties: {
           error: {
             type: 'string',
-            description: 'Error message'
+            description: 'Error message',
           },
           code: {
             type: 'string',
-            description: 'Error code'
+            description: 'Error code',
           },
           details: {
             type: 'object',
-            description: 'Additional error details'
-          }
+            description: 'Additional error details',
+          },
         },
-        required: ['error']
-      }
-    }
+        required: ['error'],
+      },
+    },
   },
-  
+
   // API paths
   paths: {
     '/admin/users/stats': {
@@ -317,35 +334,35 @@ export const swaggerConfig: OpenAPIV3.Document = {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/UserStats'
-                }
-              }
-            }
+                  $ref: '#/components/schemas/UserStats',
+                },
+              },
+            },
           },
           '401': {
             description: '인증 필요',
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/Error'
-                }
-              }
-            }
+                  $ref: '#/components/schemas/Error',
+                },
+              },
+            },
           },
           '403': {
             description: '관리자 권한 필요',
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/Error'
-                }
-              }
-            }
-          }
-        }
-      }
+                  $ref: '#/components/schemas/Error',
+                },
+              },
+            },
+          },
+        },
+      },
     },
-    
+
     '/admin/check-permission': {
       get: {
         tags: ['Admin'],
@@ -362,31 +379,31 @@ export const swaggerConfig: OpenAPIV3.Document = {
                   properties: {
                     isAdmin: {
                       type: 'boolean',
-                      description: '관리자 권한 여부'
+                      description: '관리자 권한 여부',
                     },
                     email: {
                       type: 'string',
-                      description: '사용자 이메일'
-                    }
-                  }
-                }
-              }
-            }
+                      description: '사용자 이메일',
+                    },
+                  },
+                },
+              },
+            },
           },
           '401': {
             description: '인증 필요',
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/Error'
-                }
-              }
-            }
-          }
-        }
-      }
+                  $ref: '#/components/schemas/Error',
+                },
+              },
+            },
+          },
+        },
+      },
     },
-    
+
     '/financial/stocks': {
       get: {
         tags: ['Financial'],
@@ -398,17 +415,17 @@ export const swaggerConfig: OpenAPIV3.Document = {
             in: 'query',
             description: '주식 심볼 (예: 005930.KS)',
             schema: {
-              type: 'string'
-            }
+              type: 'string',
+            },
           },
           {
             name: 'korean',
             in: 'query',
             description: '한국 주요 종목 조회',
             schema: {
-              type: 'boolean'
-            }
-          }
+              type: 'boolean',
+            },
+          },
         ],
         responses: {
           '200': {
@@ -420,27 +437,27 @@ export const swaggerConfig: OpenAPIV3.Document = {
                     { $ref: '#/components/schemas/StockData' },
                     {
                       type: 'array',
-                      items: { $ref: '#/components/schemas/StockData' }
-                    }
-                  ]
-                }
-              }
-            }
+                      items: { $ref: '#/components/schemas/StockData' },
+                    },
+                  ],
+                },
+              },
+            },
           },
           '400': {
             description: '잘못된 요청',
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/Error'
-                }
-              }
-            }
-          }
-        }
-      }
+                  $ref: '#/components/schemas/Error',
+                },
+              },
+            },
+          },
+        },
+      },
     },
-    
+
     '/financial/forex': {
       get: {
         tags: ['Financial'],
@@ -452,25 +469,25 @@ export const swaggerConfig: OpenAPIV3.Document = {
             in: 'query',
             description: '기준 통화',
             schema: {
-              type: 'string'
-            }
+              type: 'string',
+            },
           },
           {
             name: 'to',
             in: 'query',
             description: '대상 통화',
             schema: {
-              type: 'string'
-            }
+              type: 'string',
+            },
           },
           {
             name: 'major',
             in: 'query',
             description: '주요 통화쌍 조회',
             schema: {
-              type: 'boolean'
-            }
-          }
+              type: 'boolean',
+            },
+          },
         ],
         responses: {
           '200': {
@@ -482,17 +499,17 @@ export const swaggerConfig: OpenAPIV3.Document = {
                     { $ref: '#/components/schemas/ForexData' },
                     {
                       type: 'array',
-                      items: { $ref: '#/components/schemas/ForexData' }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
+                      items: { $ref: '#/components/schemas/ForexData' },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        },
+      },
     },
-    
+
     '/financial/status': {
       get: {
         tags: ['Financial'],
@@ -504,9 +521,9 @@ export const swaggerConfig: OpenAPIV3.Document = {
             in: 'query',
             description: '상세 정보 포함',
             schema: {
-              type: 'boolean'
-            }
-          }
+              type: 'boolean',
+            },
+          },
         ],
         responses: {
           '200': {
@@ -514,15 +531,15 @@ export const swaggerConfig: OpenAPIV3.Document = {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/FinancialStatus'
-                }
-              }
-            }
-          }
-        }
-      }
+                  $ref: '#/components/schemas/FinancialStatus',
+                },
+              },
+            },
+          },
+        },
+      },
     },
-    
+
     '/sync-user': {
       post: {
         tags: ['User'],
@@ -538,30 +555,30 @@ export const swaggerConfig: OpenAPIV3.Document = {
                   type: 'object',
                   properties: {
                     success: {
-                      type: 'boolean'
+                      type: 'boolean',
                     },
                     user: {
-                      $ref: '#/components/schemas/User'
-                    }
-                  }
-                }
-              }
-            }
+                      $ref: '#/components/schemas/User',
+                    },
+                  },
+                },
+              },
+            },
           },
           '401': {
             description: '인증 필요',
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/Error'
-                }
-              }
-            }
-          }
-        }
-      }
+                  $ref: '#/components/schemas/Error',
+                },
+              },
+            },
+          },
+        },
+      },
     },
-    
+
     '/webhooks/clerk': {
       post: {
         tags: ['Webhooks'],
@@ -574,51 +591,49 @@ export const swaggerConfig: OpenAPIV3.Document = {
             'application/json': {
               schema: {
                 type: 'object',
-                description: 'Clerk webhook payload'
-              }
-            }
-          }
+                description: 'Clerk webhook payload',
+              },
+            },
+          },
         },
         responses: {
           '200': {
-            description: '웹훅 처리 성공'
+            description: '웹훅 처리 성공',
           },
           '400': {
-            description: '잘못된 웹훅 데이터'
+            description: '잘못된 웹훅 데이터',
           },
           '401': {
-            description: '웹훅 인증 실패'
-          }
-        }
-      }
-    }
+            description: '웹훅 인증 실패',
+          },
+        },
+      },
+    },
   },
-  
+
   // Global security requirements
-  security: [
-    { ClerkAuth: [] }
-  ],
-  
+  security: [{ ClerkAuth: [] }],
+
   // Tags for grouping
   tags: [
     {
       name: 'Admin',
-      description: '관리자 전용 API'
+      description: '관리자 전용 API',
     },
     {
       name: 'Financial',
-      description: '금융 데이터 API'
+      description: '금융 데이터 API',
     },
     {
       name: 'User',
-      description: '사용자 관리 API'
+      description: '사용자 관리 API',
     },
     {
       name: 'Webhooks',
-      description: '웹훅 엔드포인트'
-    }
-  ]
-}
+      description: '웹훅 엔드포인트',
+    },
+  ],
+};
 
 // Swagger UI configuration
 export const swaggerUIConfig = {
@@ -639,5 +654,5 @@ export const swaggerUIConfig = {
     defaultModelRendering: 'model',
     showExtensions: true,
     showCommonExtensions: true,
-  }
-}
+  },
+};

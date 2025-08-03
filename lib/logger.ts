@@ -5,10 +5,10 @@
 
 export enum LogLevel {
   DEBUG = 'debug',
-  INFO = 'info', 
+  INFO = 'info',
   WARN = 'warn',
   ERROR = 'error',
-  CRITICAL = 'critical'
+  CRITICAL = 'critical',
 }
 
 export interface LogContext {
@@ -49,25 +49,29 @@ class Logger {
         ...context,
         metadata: {
           ...context.metadata,
-          userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server',
-          url: typeof window !== 'undefined' ? window.location.href : 'server'
-        }
+          userAgent:
+            typeof window !== 'undefined'
+              ? window.navigator.userAgent
+              : 'server',
+          url: typeof window !== 'undefined' ? window.location.href : 'server',
+        },
       },
       environment: this.environment,
       service: this.serviceName,
-      version: this.version
+      version: this.version,
     };
   }
 
   private formatLogEntry(entry: LogEntry): string {
     const { level, message, timestamp, context, service } = entry;
-    
+
     if (this.environment === 'development') {
       // Human-readable format for development
-      const contextStr = Object.keys(context).length > 0 
-        ? `\n  Context: ${JSON.stringify(context, null, 2)}`
-        : '';
-      
+      const contextStr =
+        Object.keys(context).length > 0
+          ? `\n  Context: ${JSON.stringify(context, null, 2)}`
+          : '';
+
       return `[${timestamp}] [${level.toUpperCase()}] [${service}] ${message}${contextStr}`;
     } else {
       // JSON format for production (easier for log aggregation)
@@ -93,7 +97,11 @@ class Logger {
     }
   }
 
-  private log(level: LogLevel, message: string, context: LogContext = {}): void {
+  private log(
+    level: LogLevel,
+    message: string,
+    context: LogContext = {}
+  ): void {
     const entry = this.createLogEntry(level, message, context);
     const formattedLog = this.formatLogEntry(entry);
 
@@ -147,14 +155,16 @@ class Logger {
    * Error level logging - for error events that don't stop execution
    */
   error(message: string, error?: Error, context?: LogContext): void {
-    const errorContext = error ? {
-      ...context,
-      error: {
-        name: error.name,
-        message: error.message,
-        stack: error.stack
-      }
-    } : context;
+    const errorContext = error
+      ? {
+          ...context,
+          error: {
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+          },
+        }
+      : context;
 
     this.log(LogLevel.ERROR, message, errorContext);
   }
@@ -163,14 +173,16 @@ class Logger {
    * Critical level logging - for very severe error events
    */
   critical(message: string, error?: Error, context?: LogContext): void {
-    const errorContext = error ? {
-      ...context,
-      error: {
-        name: error.name,
-        message: error.message,
-        stack: error.stack
-      }
-    } : context;
+    const errorContext = error
+      ? {
+          ...context,
+          error: {
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+          },
+        }
+      : context;
 
     this.log(LogLevel.CRITICAL, message, errorContext);
   }
@@ -178,21 +190,31 @@ class Logger {
   /**
    * Performance monitoring utility
    */
-  performance(metricName: string, duration: number, context?: LogContext): void {
+  performance(
+    metricName: string,
+    duration: number,
+    context?: LogContext
+  ): void {
     this.info(`Performance: ${metricName}`, {
       ...context,
       metadata: {
         ...context?.metadata,
         duration,
-        metric: metricName
-      }
+        metric: metricName,
+      },
     });
   }
 
   /**
    * API request logging utility
    */
-  apiRequest(method: string, endpoint: string, statusCode: number, duration: number, context?: LogContext): void {
+  apiRequest(
+    method: string,
+    endpoint: string,
+    statusCode: number,
+    duration: number,
+    context?: LogContext
+  ): void {
     const level = statusCode >= 400 ? LogLevel.ERROR : LogLevel.INFO;
     this.log(level, `API ${method} ${endpoint} - ${statusCode}`, {
       ...context,
@@ -202,9 +224,9 @@ class Logger {
           method,
           endpoint,
           statusCode,
-          duration
-        }
-      }
+          duration,
+        },
+      },
     });
   }
 
@@ -217,28 +239,37 @@ class Logger {
       metadata: {
         ...context?.metadata,
         userId,
-        action
-      }
+        action,
+      },
     });
   }
 
   /**
    * Security event logging utility
    */
-  security(event: string, severity: 'low' | 'medium' | 'high' | 'critical', context?: LogContext): void {
-    const level = severity === 'critical' ? LogLevel.CRITICAL : 
-                  severity === 'high' ? LogLevel.ERROR :
-                  severity === 'medium' ? LogLevel.WARN : LogLevel.INFO;
-    
+  security(
+    event: string,
+    severity: 'low' | 'medium' | 'high' | 'critical',
+    context?: LogContext
+  ): void {
+    const level =
+      severity === 'critical'
+        ? LogLevel.CRITICAL
+        : severity === 'high'
+          ? LogLevel.ERROR
+          : severity === 'medium'
+            ? LogLevel.WARN
+            : LogLevel.INFO;
+
     this.log(level, `Security Event: ${event}`, {
       ...context,
       metadata: {
         ...context?.metadata,
         security: {
           event,
-          severity
-        }
-      }
+          severity,
+        },
+      },
     });
   }
 }
@@ -254,22 +285,22 @@ export function withPerformanceLogging<T>(
 ): Promise<T> {
   return new Promise(async (resolve, reject) => {
     const startTime = performance.now();
-    
+
     try {
       logger.debug(`Starting: ${metricName}`, context);
       const result = await fn();
       const endTime = performance.now();
       const duration = endTime - startTime;
-      
+
       logger.performance(metricName, duration, context);
       resolve(result);
     } catch (error) {
       const endTime = performance.now();
       const duration = endTime - startTime;
-      
-      logger.error(`Failed: ${metricName}`, error as Error, { 
-        ...context, 
-        duration 
+
+      logger.error(`Failed: ${metricName}`, error as Error, {
+        ...context,
+        duration,
       });
       reject(error);
     }

@@ -2,9 +2,9 @@
  * 데이터베이스 성능 최적화 유틸리티
  * Portfolio dashboard load time: <2 seconds 목표
  */
+import { createClient } from '@supabase/supabase-js';
 
-import { createClient } from '@supabase/supabase-js'
-import type { Database } from '@/types/supabase'
+import type { Database } from '@/types/supabase';
 
 // 성능 최적화된 Supabase 클라이언트 설정
 export function createOptimizedSupabaseClient() {
@@ -30,7 +30,7 @@ export function createOptimizedSupabaseClient() {
         },
       },
     }
-  )
+  );
 }
 
 // 데이터베이스 인덱스 생성 스크립트
@@ -75,7 +75,7 @@ ON users USING hash(email);
 -- GIN 인덱스로 JSON 필드 검색 최적화
 CREATE INDEX IF NOT EXISTS idx_portfolio_metadata_gin 
 ON portfolios USING gin(metadata);
-`
+`;
 
 // 파티셔닝 전략
 export const DATABASE_PARTITIONING = `
@@ -104,11 +104,11 @@ $$ LANGUAGE plpgsql;
 SELECT create_monthly_partition('transactions_partitioned', date_trunc('month', CURRENT_DATE - interval '12 months'));
 SELECT create_monthly_partition('transactions_partitioned', date_trunc('month', CURRENT_DATE));
 SELECT create_monthly_partition('transactions_partitioned', date_trunc('month', CURRENT_DATE + interval '1 month'));
-`
+`;
 
 // 성능 최적화 초기화
 export function initializeDatabaseOptimization(): void {
-  console.log('🔧 Database optimization initialized')
+  console.log('🔧 Database optimization initialized');
 }
 
 // 사용 예시
@@ -117,4 +117,4 @@ export const portfolioQueries = {
   getOptimizedClient: createOptimizedSupabaseClient,
   getIndexes: () => DATABASE_INDEXES,
   getPartitioning: () => DATABASE_PARTITIONING,
-}
+};

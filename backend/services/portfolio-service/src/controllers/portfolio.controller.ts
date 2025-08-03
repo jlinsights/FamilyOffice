@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { body, param, query, validationResult } from 'express-validator';
-import { PortfolioService } from '../services/portfolio.service';
+
 import { logger } from '../../../shared/logging/logger';
 import { metricsCollector } from '../../../shared/monitoring/metrics';
+import { PortfolioService } from '../services/portfolio.service';
 import {
   CreatePortfolioRequest,
   UpdatePortfolioRequest,
@@ -42,7 +43,12 @@ export class PortfolioController {
       const result = await this.service.createPortfolio(request, context);
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('POST', '/portfolios', result.success ? 200 : 400, duration);
+      metricsCollector.recordHttpRequest(
+        'POST',
+        '/portfolios',
+        result.success ? 200 : 400,
+        duration
+      );
 
       if (result.success) {
         res.status(201).json(result);
@@ -88,7 +94,12 @@ export class PortfolioController {
       const result = await this.service.getPortfolio(portfolioId, context);
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios/:id', result.success ? 200 : 404, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios/:id',
+        result.success ? 200 : 404,
+        duration
+      );
 
       if (result.success) {
         res.status(200).json(result);
@@ -102,7 +113,12 @@ export class PortfolioController {
       });
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios/:id', 500, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios/:id',
+        500,
+        duration
+      );
 
       res.status(500).json({
         success: false,
@@ -139,7 +155,12 @@ export class PortfolioController {
       const result = await this.service.getPortfolios(context, pagination);
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios', result.success ? 200 : 400, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios',
+        result.success ? 200 : 400,
+        duration
+      );
 
       if (result.success) {
         res.status(200).json(result);
@@ -183,10 +204,19 @@ export class PortfolioController {
       const context = this.extractTenantContext(req);
       const request: UpdatePortfolioRequest = req.body;
 
-      const result = await this.service.updatePortfolio(portfolioId, request, context);
+      const result = await this.service.updatePortfolio(
+        portfolioId,
+        request,
+        context
+      );
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('PUT', '/portfolios/:id', result.success ? 200 : 404, duration);
+      metricsCollector.recordHttpRequest(
+        'PUT',
+        '/portfolios/:id',
+        result.success ? 200 : 404,
+        duration
+      );
 
       if (result.success) {
         res.status(200).json(result);
@@ -200,7 +230,12 @@ export class PortfolioController {
       });
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('PUT', '/portfolios/:id', 500, duration);
+      metricsCollector.recordHttpRequest(
+        'PUT',
+        '/portfolios/:id',
+        500,
+        duration
+      );
 
       res.status(500).json({
         success: false,
@@ -230,10 +265,19 @@ export class PortfolioController {
       const context = this.extractTenantContext(req);
       const asset: CreatePortfolioAsset = req.body;
 
-      const result = await this.service.addAssetToPortfolio(portfolioId, asset, context);
+      const result = await this.service.addAssetToPortfolio(
+        portfolioId,
+        asset,
+        context
+      );
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('POST', '/portfolios/:id/assets', result.success ? 201 : 400, duration);
+      metricsCollector.recordHttpRequest(
+        'POST',
+        '/portfolios/:id/assets',
+        result.success ? 201 : 400,
+        duration
+      );
 
       if (result.success) {
         res.status(201).json(result);
@@ -247,7 +291,12 @@ export class PortfolioController {
       });
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('POST', '/portfolios/:id/assets', 500, duration);
+      metricsCollector.recordHttpRequest(
+        'POST',
+        '/portfolios/:id/assets',
+        500,
+        duration
+      );
 
       res.status(500).json({
         success: false,
@@ -276,10 +325,18 @@ export class PortfolioController {
       const portfolioId = req.params.id;
       const context = this.extractTenantContext(req);
 
-      const result = await this.service.getPortfolioAssets(portfolioId, context);
+      const result = await this.service.getPortfolioAssets(
+        portfolioId,
+        context
+      );
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios/:id/assets', result.success ? 200 : 400, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios/:id/assets',
+        result.success ? 200 : 400,
+        duration
+      );
 
       if (result.success) {
         res.status(200).json(result);
@@ -293,7 +350,12 @@ export class PortfolioController {
       });
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios/:id/assets', 500, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios/:id/assets',
+        500,
+        duration
+      );
 
       res.status(500).json({
         success: false,
@@ -325,7 +387,12 @@ export class PortfolioController {
       const result = await this.service.getPortfolioStats(portfolioId, context);
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios/:id/stats', result.success ? 200 : 404, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios/:id/stats',
+        result.success ? 200 : 404,
+        duration
+      );
 
       if (result.success) {
         res.status(200).json(result);
@@ -339,7 +406,12 @@ export class PortfolioController {
       });
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios/:id/stats', 500, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios/:id/stats',
+        500,
+        duration
+      );
 
       res.status(500).json({
         success: false,
@@ -368,10 +440,18 @@ export class PortfolioController {
       const portfolioId = req.params.id;
       const context = this.extractTenantContext(req);
 
-      const result = await this.service.getAssetAllocation(portfolioId, context);
+      const result = await this.service.getAssetAllocation(
+        portfolioId,
+        context
+      );
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios/:id/allocation', result.success ? 200 : 400, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios/:id/allocation',
+        result.success ? 200 : 400,
+        duration
+      );
 
       if (result.success) {
         res.status(200).json(result);
@@ -385,7 +465,12 @@ export class PortfolioController {
       });
 
       const duration = Date.now() - startTime;
-      metricsCollector.recordHttpRequest('GET', '/portfolios/:id/allocation', 500, duration);
+      metricsCollector.recordHttpRequest(
+        'GET',
+        '/portfolios/:id/allocation',
+        500,
+        duration
+      );
 
       res.status(500).json({
         success: false,
@@ -398,7 +483,7 @@ export class PortfolioController {
   // 테넌트 컨텍스트 추출
   private extractTenantContext(req: Request): TenantContext {
     return {
-      tenantId: req.headers['x-tenant-id'] as string || 'default',
+      tenantId: (req.headers['x-tenant-id'] as string) || 'default',
       userId: req.user?.id || 'anonymous',
     };
   }
@@ -413,7 +498,21 @@ export class PortfolioController {
         body('initialAssets').optional().isArray(),
         body('initialAssets.*.symbol').optional().notEmpty(),
         body('initialAssets.*.name').optional().notEmpty(),
-        body('initialAssets.*.assetType').optional().isIn(['stock', 'bond', 'etf', 'mutual_fund', 'real_estate', 'private_equity', 'hedge_fund', 'cash', 'commodity', 'cryptocurrency', 'other']),
+        body('initialAssets.*.assetType')
+          .optional()
+          .isIn([
+            'stock',
+            'bond',
+            'etf',
+            'mutual_fund',
+            'real_estate',
+            'private_equity',
+            'hedge_fund',
+            'cash',
+            'commodity',
+            'cryptocurrency',
+            'other',
+          ]),
         body('initialAssets.*.quantity').optional().isFloat({ min: 0.01 }),
         body('initialAssets.*.averagePrice').optional().isFloat({ min: 0.01 }),
       ],
@@ -429,16 +528,36 @@ export class PortfolioController {
       getPortfolios: [
         query('page').optional().isInt({ min: 1 }),
         query('limit').optional().isInt({ min: 1, max: 100 }),
-        query('sortBy').optional().isIn(['name', 'created_at', 'updated_at', 'total_value']),
+        query('sortBy')
+          .optional()
+          .isIn(['name', 'created_at', 'updated_at', 'total_value']),
         query('sortOrder').optional().isIn(['asc', 'desc']),
       ],
       addAssetToPortfolio: [
         param('id').isUUID().withMessage('유효한 포트폴리오 ID가 필요합니다.'),
         body('symbol').notEmpty().withMessage('자산 심볼은 필수입니다.'),
         body('name').notEmpty().withMessage('자산 이름은 필수입니다.'),
-        body('assetType').isIn(['stock', 'bond', 'etf', 'mutual_fund', 'real_estate', 'private_equity', 'hedge_fund', 'cash', 'commodity', 'cryptocurrency', 'other']).withMessage('유효한 자산 타입이 필요합니다.'),
-        body('quantity').isFloat({ min: 0.01 }).withMessage('수량은 0보다 커야 합니다.'),
-        body('averagePrice').isFloat({ min: 0.01 }).withMessage('평균 가격은 0보다 커야 합니다.'),
+        body('assetType')
+          .isIn([
+            'stock',
+            'bond',
+            'etf',
+            'mutual_fund',
+            'real_estate',
+            'private_equity',
+            'hedge_fund',
+            'cash',
+            'commodity',
+            'cryptocurrency',
+            'other',
+          ])
+          .withMessage('유효한 자산 타입이 필요합니다.'),
+        body('quantity')
+          .isFloat({ min: 0.01 })
+          .withMessage('수량은 0보다 커야 합니다.'),
+        body('averagePrice')
+          .isFloat({ min: 0.01 })
+          .withMessage('평균 가격은 0보다 커야 합니다.'),
         body('purchaseDate').optional().isISO8601(),
       ],
       getPortfolioAssets: [
@@ -452,4 +571,4 @@ export class PortfolioController {
       ],
     };
   }
-} 
+}

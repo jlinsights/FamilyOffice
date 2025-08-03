@@ -7,6 +7,7 @@
 ## Technical Architecture
 
 ### Core Stack
+
 - **Framework**: Next.js 15.4.3 (App Router)
 - **Runtime**: React 18.3.1 + TypeScript 5.8.3
 - **Styling**: Tailwind CSS 3.4.17 + shadcn/ui
@@ -16,6 +17,7 @@
 - **Deployment**: Vercel with edge optimization
 
 ### External Integrations
+
 - **Booking**: Cal.com API for consultation scheduling
 - **CRM**: HubSpot for customer relationship management
 - **Support**: Channel Talk for live customer support
@@ -25,26 +27,28 @@
 ## Agent OS Compatibility Matrix
 
 ### Development Commands
+
 ```yaml
 primary_commands:
-  dev: "npm run dev"          # Development server (localhost:3000)
-  build: "npm run build"      # Production build
-  vercel-build: "npm run vercel-build"  # Vercel-specific build
-  
+  dev: 'npm run dev' # Development server (localhost:3000)
+  build: 'npm run build' # Production build
+  vercel-build: 'npm run vercel-build' # Vercel-specific build
+
 testing_commands:
-  test: "npm run test"                    # Jest unit tests
-  test:e2e: "npm run test:e2e"           # Cypress E2E tests
-  test:coverage: "npm run test:coverage"  # Coverage reports
-  test:all: "npm run test:all"           # Full test suite
+  test: 'npm run test' # Jest unit tests
+  test:e2e: 'npm run test:e2e' # Cypress E2E tests
+  test:coverage: 'npm run test:coverage' # Coverage reports
+  test:all: 'npm run test:all' # Full test suite
 
 quality_commands:
-  lint: "npm run lint"                   # ESLint checks
-  lint:fix: "npm run lint:fix"          # Auto-fix linting issues
-  format: "npm run format"               # Prettier formatting
-  type-check: "npm run type-check"       # TypeScript checking
+  lint: 'npm run lint' # ESLint checks
+  lint:fix: 'npm run lint:fix' # Auto-fix linting issues
+  format: 'npm run format' # Prettier formatting
+  type-check: 'npm run type-check' # TypeScript checking
 ```
 
 ### Agent-Friendly File Structure
+
 ```
 /app/                    # Next.js App Router pages
 ├── admin/              # Protected admin routes (Clerk auth)
@@ -74,6 +78,7 @@ quality_commands:
 ## Agent OS Integration Guidelines
 
 ### 1. Database Schema Management
+
 ```typescript
 // Primary database interface (Supabase)
 interface Database {
@@ -81,25 +86,27 @@ interface Database {
     Tables: {
       consultations: {
         Row: {
-          id: string
-          name: string
-          email: string
-          phone: string
-          service_type: string
-          message: string
-          status: "pending" | "contacted" | "completed"
-        }
-      }
-    }
-  }
+          id: string;
+          name: string;
+          email: string;
+          phone: string;
+          service_type: string;
+          message: string;
+          status: 'pending' | 'contacted' | 'completed';
+        };
+      };
+    };
+  };
 }
 ```
 
 ### 2. API Route Patterns
+
 All API routes follow this structure:
+
 ```typescript
 // /app/api/[feature]/route.ts
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   // Authentication check
@@ -109,24 +116,27 @@ export async function GET(request: NextRequest) {
 ```
 
 ### 3. Component Development Standards
+
 - All components use TypeScript with strict typing
 - UI components extend shadcn/ui base components
 - Form components include validation and error handling
 - Responsive design using Tailwind CSS breakpoints
 
 ### 4. Authentication & Authorization
+
 ```typescript
 // Clerk-based authentication with protected routes
 const isProtectedRoute = createRouteMatcher([
   '/admin(.*)',
   '/dashboard(.*)',
-  '/api/admin(.*)'
-])
+  '/api/admin(.*)',
+]);
 ```
 
 ## Agent OS Development Workflows
 
 ### 1. Feature Development
+
 ```bash
 # 1. Create feature branch
 git checkout -b feature/agent-feature-name
@@ -146,6 +156,7 @@ npm run vercel-build        # Vercel-specific build check
 ```
 
 ### 2. Component Creation Template
+
 ```typescript
 // components/new-component.tsx
 "use client"
@@ -168,39 +179,37 @@ export function NewComponent({ className, children }: ComponentProps) {
 ```
 
 ### 3. API Route Template
+
 ```typescript
 // app/api/new-endpoint/route.ts
-import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@clerk/nextjs/server'
+import { NextRequest, NextResponse } from 'next/server';
+
+import { auth } from '@clerk/nextjs/server';
 
 export async function POST(request: NextRequest) {
   try {
     // Authentication check
-    const { userId } = auth()
+    const { userId } = auth();
     if (!userId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' }, 
-        { status: 401 }
-      )
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Request validation
-    const data = await request.json()
-    
+    const data = await request.json();
+
     // Business logic here
-    
+
     // Success response
-    return NextResponse.json({ 
-      success: true, 
-      data 
-    })
-    
+    return NextResponse.json({
+      success: true,
+      data,
+    });
   } catch (error) {
-    console.error('API Error:', error)
+    console.error('API Error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
-    )
+    );
   }
 }
 ```
@@ -208,18 +217,21 @@ export async function POST(request: NextRequest) {
 ## Security & Performance Considerations
 
 ### Security Headers (Pre-configured)
+
 - Content Security Policy (CSP) with allowlisted domains
 - Cross-Origin Resource Policy (CORP)
 - Strict Transport Security (HSTS)
 - X-Frame-Options: DENY
 
 ### Performance Optimizations
+
 - Image optimization with WebP/AVIF formats
 - Code splitting with dynamic imports
 - Redis caching for API responses
 - CDN optimization via Vercel Edge Network
 
 ### Environment Variables Required
+
 ```env
 # Authentication (Clerk)
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
@@ -243,6 +255,7 @@ UPSTASH_REDIS_REST_TOKEN=
 ## Agent OS Compatibility Notes
 
 ### Safe Operations
+
 ✅ **Component modification** - All UI components are modular and safe to modify
 ✅ **API route creation** - Follow established patterns for new endpoints
 ✅ **Database operations** - Use Supabase client with proper error handling
@@ -250,12 +263,14 @@ UPSTASH_REDIS_REST_TOKEN=
 ✅ **Content updates** - Marketing pages and static content
 
 ### Caution Required
+
 ⚠️ **Authentication flows** - Clerk integration requires careful handling
 ⚠️ **External API integrations** - Cal.com, HubSpot have rate limits
 ⚠️ **Security headers** - Modifications may break CSP policies
 ⚠️ **Performance optimizations** - Bundle splitting configurations
 
 ### Avoid Modifying
+
 ❌ **Next.js configuration** - Complex webpack and build optimizations
 ❌ **Core middleware** - Authentication and security middleware
 ❌ **Production environment variables** - Sensitive API keys and secrets
@@ -263,12 +278,14 @@ UPSTASH_REDIS_REST_TOKEN=
 ## Testing & Quality Assurance
 
 ### Automated Testing
+
 - **Unit Tests**: Jest with React Testing Library
 - **E2E Tests**: Cypress with real browser automation
 - **Type Checking**: TypeScript strict mode enabled
 - **Linting**: ESLint with Next.js and TypeScript rules
 
 ### Performance Monitoring
+
 - **Core Web Vitals**: LCP < 2.5s, FID < 100ms, CLS < 0.1
 - **API Response Times**: < 500ms for 95th percentile
 - **Bundle Size**: Monitored with @next/bundle-analyzer

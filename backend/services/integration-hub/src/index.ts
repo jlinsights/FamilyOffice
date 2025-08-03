@@ -1,42 +1,49 @@
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 import compression from 'compression';
+import cors from 'cors';
+import express from 'express';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+
 import { logger } from '../../shared/logging/logger';
+import { authMiddleware } from '../../shared/middleware/auth';
+import { tenantMiddleware } from '../../shared/middleware/tenant';
 import { metricsCollector } from '../../shared/monitoring/metrics';
 import { errorHandler } from '../../shared/utils/errorHandler';
 import { requestLogger } from '../../shared/utils/requestLogger';
-import { authMiddleware } from '../../shared/middleware/auth';
-import { tenantMiddleware } from '../../shared/middleware/tenant';
 import { IntegrationController } from './controllers/integration.controller';
 
 const app = express();
 const port = process.env.INTEGRATION_HUB_PORT || 3004;
 
 // 미들웨어 설정
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      scriptSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "https:"],
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrc: ["'self'"],
+        imgSrc: ["'self'", 'data:', 'https:'],
+      },
     },
-  },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true,
-  },
-}));
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+  })
+);
 
-app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Tenant-ID'],
-}));
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || [
+      'http://localhost:3000',
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Tenant-ID'],
+  })
+);
 
 app.use(compression());
 app.use(express.json({ limit: '10mb' }));
@@ -72,24 +79,54 @@ const integrationController = new IntegrationController();
 const apiRouter = express.Router();
 
 // 통합 관리 라우트
-apiRouter.post('/integrations', integrationController.createIntegration.bind(integrationController));
-apiRouter.get('/integrations', integrationController.getIntegrations.bind(integrationController));
-apiRouter.get('/integrations/:integrationId', integrationController.getIntegration.bind(integrationController));
-apiRouter.put('/integrations/:integrationId', integrationController.updateIntegration.bind(integrationController));
-apiRouter.delete('/integrations/:integrationId', integrationController.deleteIntegration.bind(integrationController));
+apiRouter.post(
+  '/integrations',
+  integrationController.createIntegration.bind(integrationController)
+);
+apiRouter.get(
+  '/integrations',
+  integrationController.getIntegrations.bind(integrationController)
+);
+apiRouter.get(
+  '/integrations/:integrationId',
+  integrationController.getIntegration.bind(integrationController)
+);
+apiRouter.put(
+  '/integrations/:integrationId',
+  integrationController.updateIntegration.bind(integrationController)
+);
+apiRouter.delete(
+  '/integrations/:integrationId',
+  integrationController.deleteIntegration.bind(integrationController)
+);
 
 // 동기화 작업 라우트
-apiRouter.post('/integrations/:integrationId/sync', integrationController.startSyncJob.bind(integrationController));
-apiRouter.get('/sync-jobs/:syncJobId/status', integrationController.getSyncJobStatus.bind(integrationController));
+apiRouter.post(
+  '/integrations/:integrationId/sync',
+  integrationController.startSyncJob.bind(integrationController)
+);
+apiRouter.get(
+  '/sync-jobs/:syncJobId/status',
+  integrationController.getSyncJobStatus.bind(integrationController)
+);
 
 // 웹훅 이벤트 라우트
-apiRouter.post('/integrations/:integrationId/webhooks', integrationController.processWebhookEvent.bind(integrationController));
+apiRouter.post(
+  '/integrations/:integrationId/webhooks',
+  integrationController.processWebhookEvent.bind(integrationController)
+);
 
 // 통합 테스트 라우트
-apiRouter.post('/integrations/:integrationId/test', integrationController.testIntegration.bind(integrationController));
+apiRouter.post(
+  '/integrations/:integrationId/test',
+  integrationController.testIntegration.bind(integrationController)
+);
 
 // 메트릭 라우트
-apiRouter.get('/integrations/:integrationId/metrics', integrationController.getIntegrationMetrics.bind(integrationController));
+apiRouter.get(
+  '/integrations/:integrationId/metrics',
+  integrationController.getIntegrationMetrics.bind(integrationController)
+);
 
 // API 라우트 등록
 app.use('/api/v1', apiRouter);
@@ -160,7 +197,7 @@ process.on('SIGINT', () => {
 });
 
 // 예상치 못한 에러 처리
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', error => {
   logger.error('Uncaught Exception', { error });
   process.exit(1);
 });
@@ -170,4 +207,4 @@ process.on('unhandledRejection', (reason, promise) => {
   process.exit(1);
 });
 
-export default app; 
+export default app;
