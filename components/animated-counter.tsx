@@ -17,6 +17,9 @@ interface AnimatedCounterProps {
   ariaLabel?: string;
 }
 
+// 기본 easing 함수 정의
+const defaultEasingFunction = (t: number): number => 1 - Math.pow(1 - t, 3);
+
 export function AnimatedCounter({
   end,
   start = 0,
@@ -25,6 +28,7 @@ export function AnimatedCounter({
   suffix = '',
   className = '',
   startAnimation = false,
+  easingFunction = defaultEasingFunction,
   formatNumber,
   onComplete,
   locale = 'ko-KR',
@@ -49,7 +53,7 @@ export function AnimatedCounter({
     [formatNumber, locale]
   );
 
-  // 단순한 애니메이션 로직
+  // 애니메이션 로직 - easingFunction prop 사용
   useEffect(() => {
     if (!isMounted || !startAnimation) return;
 
@@ -61,8 +65,8 @@ export function AnimatedCounter({
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
-      // 간단한 easing
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      // 전달받은 easingFunction 사용
+      const easedProgress = easingFunction(progress);
       const currentCount = start + difference * easedProgress;
 
       setCount(currentCount);
@@ -82,7 +86,7 @@ export function AnimatedCounter({
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [isMounted, startAnimation, start, end, duration, onComplete]);
+  }, [isMounted, startAnimation, start, end, duration, easingFunction, onComplete]);
 
   // SSR 방지: 마운트되기 전에는 시작 값 표시
   if (!isMounted) {
