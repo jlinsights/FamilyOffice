@@ -1,14 +1,12 @@
 import type { Metadata } from 'next';
 
-import { AdminAccessDeniedAlert } from '@/components/admin-access-denied-alert';
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
+import { generateMetadata } from '@/lib/seo';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
-import { SmoothScroll } from '@/components/smooth-scroll';
-import { StructuredData } from '@/components/structured-data';
-
-import { generateMetadata, generateStructuredData } from '@/lib/seo';
+import { AIConsultingChat } from '@/components/ai-consulting-chat';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import { Badge } from '@/components/ui/badge';
 
 // 페이지별 메타데이터 - 가업승계 전문 서비스로 업데이트
 export const metadata: Metadata = generateMetadata(
@@ -35,20 +33,52 @@ export const metadata: Metadata = generateMetadata(
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen">
-      <AdminAccessDeniedAlert />
+    <div className="min-h-screen bg-background">
       <Header />
-      <SmoothScroll />
-
-      {/* 구조화된 데이터 */}
-      <StructuredData data={generateStructuredData('Organization')} />
-      <StructuredData data={generateStructuredData('WebSite')} />
-
-      <main id="main-content" className="pt-20">
-        <HeroSection />
-        <ServicesSection />
-      </main>
-
+      
+      {/* Hero Section */}
+      <HeroSection />
+      
+      {/* AI Consulting Chat Section */}
+      <section id="ai-consulting" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-6">
+              <Badge variant="outline" className="bg-background/80 backdrop-blur-sm text-sm px-3 py-1">
+                Premium AI Consulting
+              </Badge>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              지금 바로 물어보세요
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              복잡한 가업승계, 세무전략, M&A 구조화까지. 
+              귀사만의 고유한 상황을 이해하고 최적화된 해법을 제시합니다.
+              전문가의 통찰력을 AI가 24시간 제공합니다.
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <AIConsultingChat />
+          </div>
+        </div>
+      </section>
+      
+      {/* Services Section */}
+      <ServicesSection />
+      
+      {/* Test Button Section - 숨김 처리 */}
+      {/* <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-foreground mb-8">
+              클라이언트 기능 테스트
+            </h2>
+            <TestButton />
+          </div>
+        </div>
+      </section> */}
+      
       <Footer />
     </div>
   );

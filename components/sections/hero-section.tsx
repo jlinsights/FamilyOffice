@@ -46,7 +46,7 @@ export function HeroSection() {
 
         {/* 메인 헤드라인 */}
         <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-          百年永續의 시작
+          百年永續
         </h1>
 
         {/* 서브 헤드라인 */}
@@ -136,13 +136,19 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
           style={{ animationDelay: '500ms' }}
         >
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 bg-primary hover:bg-primary/90 text-white shadow-lg"
+          <Button
+            size="lg"
+            className="font-bold px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white shadow-lg"
+            onClick={() => {
+              document.getElementById('ai-consulting')?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              });
+            }}
           >
-            무료 컨설팅 신청
+            지금 바로 물어보세요
             <ClientOnlyIcon icon={ArrowRight} className="ml-2 h-5 w-5" />
-          </Link>
+          </Button>
           <Button
             size="lg"
             variant="outline"
