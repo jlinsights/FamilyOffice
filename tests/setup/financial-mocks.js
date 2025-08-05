@@ -1,7 +1,35 @@
 /**
- * Financial testing mocks and setup
- * Provides realistic financial data scenarios for testing
+ * Financial calculation mocks for testing
+ * Mock financial APIs and calculations to ensure consistent test results
  */
+
+// Mock Yahoo Finance API
+jest.mock('yahoo-finance2', () => ({
+  quote: jest.fn().mockResolvedValue({
+    symbol: 'AAPL',
+    regularMarketPrice: 150.25,
+    regularMarketChange: 2.5,
+    regularMarketChangePercent: 1.69,
+    currency: 'USD',
+  }),
+  historical: jest.fn().mockResolvedValue([
+    {
+      date: new Date('2024-01-01'),
+      open: 148.0,
+      high: 152.0,
+      low: 147.0,
+      close: 150.25,
+      adjClose: 150.25,
+      volume: 1000000,
+    },
+  ]),
+}));
+
+// Mock financial calculation utilities
+global.FINANCIAL_PRECISION = 4;
+global.CURRENCY_PRECISION = 2;
+global.PERCENTAGE_PRECISION = 4;
+global.TEST_MODE = true;
 
 // Mock realistic financial data
 export const MOCK_STOCK_DATA = {

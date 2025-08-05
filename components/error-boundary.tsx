@@ -2,7 +2,7 @@
 
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 
@@ -14,7 +14,7 @@ interface ErrorBoundaryState {
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
-  fallback:
+  fallback?:
     | React.ComponentType<{
         error: Error;
         resetError: () => void;
@@ -40,7 +40,7 @@ export class ErrorBoundary extends React.Component<
     console.error('Error caught by boundary:', error, errorInfo);
 
     // Log to analytics service in production
-    if (process.env.NODE_ENV === 'production') {
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
       // Send to error monitoring service
       this.logErrorToService(error, errorInfo);
     }
@@ -121,7 +121,7 @@ function DefaultErrorFallback({
           시도해 주세요.
         </p>
 
-        {process.env.NODE_ENV === 'development' && (
+        {typeof window !== 'undefined' && window.location.hostname === 'localhost' && (
           <details className="mb-6 text-left">
             <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">
               개발자 정보 보기

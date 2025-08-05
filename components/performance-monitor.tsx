@@ -13,6 +13,12 @@ interface PerformanceMetrics {
 
 export function PerformanceMonitor() {
   const measureWebVitals = useCallback(() => {
+    // 브라우저가 PerformanceObserver를 지원하는지 확인
+    if (typeof window === 'undefined' || !('PerformanceObserver' in window)) {
+      console.warn('PerformanceObserver is not supported in this environment');
+      return;
+    }
+
     const metrics: PerformanceMetrics = {
       fcp: null,
       lcp: null,
@@ -22,8 +28,8 @@ export function PerformanceMonitor() {
       inp: null,
     };
 
-    // First Contentful Paint (FCP)
-    if ('PerformanceObserver' in window) {
+    try {
+      // First Contentful Paint (FCP)
       const fcpObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const fcpEntry = entries.find(
@@ -35,10 +41,12 @@ export function PerformanceMonitor() {
         }
       });
       fcpObserver.observe({ type: 'paint', buffered: true });
+    } catch (error) {
+      console.warn('FCP observer setup failed:', error);
     }
 
-    // Largest Contentful Paint (LCP)
-    if ('PerformanceObserver' in window) {
+    try {
+      // Largest Contentful Paint (LCP)
       const lcpObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
@@ -48,10 +56,12 @@ export function PerformanceMonitor() {
         }
       });
       lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+    } catch (error) {
+      console.warn('LCP observer setup failed:', error);
     }
 
-    // First Input Delay (FID)
-    if ('PerformanceObserver' in window) {
+    try {
+      // First Input Delay (FID)
       const fidObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         entries.forEach((entry: any) => {
@@ -62,10 +72,12 @@ export function PerformanceMonitor() {
         });
       });
       fidObserver.observe({ type: 'first-input', buffered: true });
+    } catch (error) {
+      console.warn('FID observer setup failed:', error);
     }
 
-    // Cumulative Layout Shift (CLS)
-    if ('PerformanceObserver' in window) {
+    try {
+      // Cumulative Layout Shift (CLS)
       let clsValue = 0;
       const clsObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
@@ -78,36 +90,38 @@ export function PerformanceMonitor() {
         console.log('CLS:', metrics.cls);
       });
       clsObserver.observe({ type: 'layout-shift', buffered: true });
+    } catch (error) {
+      console.warn('CLS observer setup failed:', error);
     }
 
-    // Time to First Byte (TTFB)
-    const navigationEntry = performance.getEntriesByType(
-      'navigation'
-    )[0] as PerformanceNavigationTiming;
-    if (navigationEntry) {
-      metrics.ttfb =
-        navigationEntry.responseStart - navigationEntry.requestStart;
-      console.log('TTFB:', metrics.ttfb);
+    try {
+      // Time to First Byte (TTFB)
+      const navigationEntries = performance.getEntriesByType('navigation');
+      if (navigationEntries.length > 0) {
+        const navigationEntry = navigationEntries[0] as PerformanceNavigationTiming;
+        if (navigationEntry && navigationEntry.responseStart && navigationEntry.requestStart) {
+          metrics.ttfb = navigationEntry.responseStart - navigationEntry.requestStart;
+          console.log('TTFB:', metrics.ttfb);
+        }
+      }
+    } catch (error) {
+      console.warn('TTFB measurement failed:', error);
     }
 
     // 성능 메트릭을 서버로 전송 (선택사항)
-    if (process.env.NODE_ENV === 'production') {
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
       // 실제 구현에서는 분석 서비스로 전송
       console.log('Performance Metrics:', metrics);
     }
   }, []);
 
   useEffect(() => {
-    // 페이지 로드 완료 후 측정
-    if (document.readyState === 'complete') {
+    // 컴포넌트가 마운트된 후 성능 측정 시작
+    const timer = setTimeout(() => {
       measureWebVitals();
-    } else {
-      window.addEventListener('load', measureWebVitals);
-    }
+    }, 1000); // 1초 지연 후 측정 시작
 
-    return () => {
-      window.removeEventListener('load', measureWebVitals);
-    };
+    return () => clearTimeout(timer);
   }, [measureWebVitals]);
 
   return null; // 이 컴포넌트는 UI를 렌더링하지 않음

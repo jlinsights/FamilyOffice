@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Facebook,
   Instagram,
@@ -13,6 +15,8 @@ import {
   Youtube,
   MessageCircle,
 } from 'lucide-react';
+
+import { useState, useEffect } from 'react';
 
 import Link from 'next/link';
 
@@ -41,6 +45,29 @@ const SubstackIcon = ({ className }: { className?: string }) => (
 );
 
 export function Footer() {
+  const [mounted, setMounted] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsClient(true);
+  }, []);
+
+  // SSR 방지: 마운트되기 전에는 기본 푸터만 표시
+  if (!mounted || !isClient) {
+    return (
+      <footer className="border-t border-border/40 bg-gradient-to-b from-muted/30 to-muted/50 dark:from-muted/20 dark:to-muted/40">
+        <div className="container section-sm">
+          <div className="text-center py-8">
+            <p className="text-sm text-muted-foreground">
+              © 2025 FamilyOffice S. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <>
       {/* 클라이언트 전용 스크립트들 */}
@@ -48,13 +75,15 @@ export function Footer() {
 
       <footer className="border-t border-border/40 bg-gradient-to-b from-muted/30 to-muted/50 dark:from-muted/20 dark:to-muted/40">
         <div className="container section-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {/* 회사 정보 */}
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* 회사 정보 및 뉴스레터 */}
+            <div>
               <div className="mb-6 flex justify-start">
                 <FamilyOfficeLogo size="large" showTagline={true} />
               </div>
-              <div className="flex flex-wrap gap-3">
+              
+              {/* 소셜 미디어 */}
+              <div className="flex flex-wrap gap-3 mb-6 justify-start">
                 <Link
                   href="https://www.facebook.com/samsunglife4vip"
                   target="_blank"
@@ -127,6 +156,30 @@ export function Footer() {
                   <MessageCircle className="h-4 w-4" />
                   <span className="sr-only">Kakao</span>
                 </Link>
+              </div>
+
+              {/* FamilyOffice S Newsletter 구독 폼 */}
+              <div className="p-4 bg-muted/30 dark:bg-muted/20 rounded-lg border border-border/40">
+                <h5 className="font-semibold text-sm mb-3 text-foreground text-left">
+                  FamilyOffice S Newsletter
+                </h5>
+                <p className="text-xs text-muted-foreground mb-3 text-left">
+                  중소중견기업 자산관리 인사이트를 받아보세요
+                </p>
+                <form className="flex gap-2">
+                  <input
+                    type="email"
+                    placeholder="이메일 주소"
+                    className="flex-1 px-3 py-2 text-xs bg-background/80 dark:bg-background/60 border border-border/40 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="px-3 py-2 text-xs bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                  >
+                    구독
+                  </button>
+                </form>
               </div>
             </div>
 

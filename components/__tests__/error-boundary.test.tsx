@@ -54,7 +54,10 @@ describe('ErrorBoundary', () => {
 
   it('shows error details in development mode', () => {
     const originalEnv = process.env.NODE_ENV;
-    process.env.NODE_ENV = 'development';
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: 'development',
+      configurable: true,
+    });
 
     render(
       <ErrorBoundary>
@@ -64,12 +67,18 @@ describe('ErrorBoundary', () => {
 
     expect(screen.getByText('개발자 정보 보기')).toBeInTheDocument();
 
-    process.env.NODE_ENV = originalEnv;
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: originalEnv,
+      configurable: true,
+    });
   });
 
   it('hides error details in production mode', () => {
     const originalEnv = process.env.NODE_ENV;
-    process.env.NODE_ENV = 'production';
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: 'production',
+      configurable: true,
+    });
 
     render(
       <ErrorBoundary>
@@ -79,7 +88,10 @@ describe('ErrorBoundary', () => {
 
     expect(screen.queryByText('개발자 정보 보기')).not.toBeInTheDocument();
 
-    process.env.NODE_ENV = originalEnv;
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: originalEnv,
+      configurable: true,
+    });
   });
 
   it('handles retry button click', async () => {

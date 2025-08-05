@@ -347,7 +347,7 @@ export const DAY_TRADER_HIGH_FREQUENCY: FinancialScenario = {
     // Generate many transactions to simulate day trading
     ...Array.from({ length: 50 }, (_, i) => ({
       id: `day-txn-${i + 1}`,
-      type: Math.random() > 0.5 ? 'BUY' : ('SELL' as const),
+      type: (Math.random() > 0.5 ? 'BUY' : 'SELL') as 'BUY' | 'SELL',
       symbol: ['TSLA', 'NVDA', 'AMD'][Math.floor(Math.random() * 3)],
       shares: Math.floor(Math.random() * 100) + 10,
       price: 200 + Math.random() * 600, // Random price between $200-800

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 
 interface AnimatedCounterProps {
   end: number;
@@ -25,6 +25,7 @@ export function AnimatedCounter({
   suffix = '',
   className = '',
   startAnimation = false,
+  easingFunction,
   formatNumber,
   onComplete,
   locale = 'ko-KR',
@@ -32,10 +33,22 @@ export function AnimatedCounter({
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(start);
   const [isMounted, setIsMounted] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // ref를 사용하여 최신 함수들을 참조
+  const easingFunctionRef = useRef(easingFunction);
+  const onCompleteRef = useRef(onComplete);
+
+  // ref 업데이트
+  useEffect(() => {
+    easingFunctionRef.current = easingFunction;
+    onCompleteRef.current = onComplete;
+  }, [easingFunction, onComplete]);
 
   // 클라이언트 사이드 마운트 확인
   useEffect(() => {
     setIsMounted(true);
+    setIsClient(true);
   }, []);
 
   // 숫자 포맷팅 함수
@@ -49,9 +62,9 @@ export function AnimatedCounter({
     [formatNumber, locale]
   );
 
-  // 단순한 애니메이션 로직
+  // 애니메이션 로직
   useEffect(() => {
-    if (!isMounted || !startAnimation) return;
+    if (!isMounted || !isClient || !startAnimation) return;
 
     let animationFrame: number;
     const startTime = Date.now();
@@ -61,8 +74,12 @@ export function AnimatedCounter({
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
-      // 간단한 easing
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      // ref를 통해 최신 easing 함수 사용
+      const currentEasingFunction = easingFunctionRef.current;
+      const easedProgress = currentEasingFunction 
+        ? currentEasingFunction(progress) 
+        : 1 - Math.pow(1 - progress, 3);
+      
       const currentCount = start + difference * easedProgress;
 
       setCount(currentCount);
@@ -71,7 +88,7 @@ export function AnimatedCounter({
         animationFrame = requestAnimationFrame(animate);
       } else {
         setCount(end);
-        onComplete?.();
+        onCompleteRef.current?.();
       }
     };
 
@@ -82,10 +99,10 @@ export function AnimatedCounter({
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [isMounted, startAnimation, start, end, duration, onComplete]);
+  }, [isMounted, isClient, startAnimation, start, end, duration]);
 
   // SSR 방지: 마운트되기 전에는 시작 값 표시
-  if (!isMounted) {
+  if (!isMounted || !isClient) {
     return (
       <span className={className}>
         {prefix}

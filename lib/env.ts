@@ -3,7 +3,7 @@
  */
 import { z } from 'zod';
 
-// Simple environment schema
+// Environment schema with AI API keys
 const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
@@ -14,6 +14,12 @@ const envSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().optional(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
   V0_API_KEY: z.string().optional(),
+  // Triple-AI API Keys
+  OPENAI_API_KEY: z.string().optional(),
+  CLAUDE_API_KEY: z.string().optional(),
+  ANTHROPIC_API_KEY: z.string().optional(),
+  GEMINI_API_KEY: z.string().optional(),
+  GOOGLE_AI_API_KEY: z.string().optional(),
 });
 
 type EnvSchema = z.infer<typeof envSchema>;
@@ -36,6 +42,12 @@ export function getEnv(): EnvSchema {
       NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
       NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       V0_API_KEY: process.env.V0_API_KEY,
+      // Triple-AI API Keys
+      OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+      CLAUDE_API_KEY: process.env.CLAUDE_API_KEY,
+      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+      GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+      GOOGLE_AI_API_KEY: process.env.GOOGLE_AI_API_KEY,
     };
 
     cachedEnv = envSchema.parse(env);

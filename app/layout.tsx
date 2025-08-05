@@ -1,15 +1,9 @@
 import type React from 'react';
 
 import type { Metadata } from 'next';
-import Script from 'next/script';
-
-import { ErrorBoundary } from '@/components/error-boundary';
-import { HubSpotIntegration } from '@/components/hubspot-integration';
-import { PerformanceMonitor } from '@/components/performance-monitor';
-import { Providers } from '@/components/providers';
-import { SkipLinks } from '@/components/skip-links';
 
 import { defaultMetadata } from '@/lib/seo';
+import { ThemeProvider } from '@/components/theme-provider';
 
 import './globals.css';
 
@@ -82,111 +76,22 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
-        {/* Google Fonts - Playfair Display with optimized loading */}
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
           rel="stylesheet"
           media="all"
         />
 
-        {/* Google Tag Manager - Optimized Loading */}
-        <Script
-          id="gtm"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-MP3HPPMN');
-            `,
-          }}
-        />
-
-        {/* Google Analytics - Deferred Loading */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-DB6TXRZLTK"
-          strategy="lazyOnload"
-        />
-        <Script id="ga" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-DB6TXRZLTK', {
-              page_title: document.title,
-              page_location: window.location.href,
-              send_page_view: false
-            });
-            gtag('event', 'page_view', {
-              page_title: document.title,
-              page_location: window.location.href
-            });
-          `}
-        </Script>
-
-        {/* Flaticon CSS - Non-blocking load */}
-        <Script
-          id="flaticon-loader"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              const link = document.createElement('link');
-              link.rel = 'stylesheet';
-              link.href = 'https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css';
-              document.head.appendChild(link);
-            `,
-          }}
-        />
-
-        {/* Mailchimp */}
-        <Script
-          id="mcjs"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/af249fedaa60d836835ac49da/129619c56cf11f88a1c245cd6.js");
-            `,
-          }}
-        />
-
-        {/* HubSpot Form Integration */}
-        <Script
-          id="hs-script-loader"
-          strategy="afterInteractive"
-          src="https://js.hs-scripts.com/24900000.js"
-        />
-
-        {/* Channel Talk */}
-        <Script
-          id="channel-talk"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
-
-              ChannelIO('boot', {
-                "pluginKey": "4c0cca0c-7cf1-4441-8f11-3e04995a4a78"
-              });
-            `,
-          }}
-        />
-
-        {/* Performance Optimization - DNS Prefetch & Preconnect */}
+        {/* Performance Optimization */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="//cdn.channel.io" />
-        <link rel="dns-prefetch" href="//js.hs-scripts.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -194,7 +99,7 @@ export default function RootLayout({
         />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
 
-        {/* 추가 SEO 메타 태그 */}
+        {/* SEO 메타 태그 */}
         <meta name="format-detection" content="telephone=yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -202,8 +107,6 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
-
-        {/* 폰트 최적화 - Google Fonts 비활성화 */}
 
         {/* Favicon */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -235,24 +138,14 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-MP3HPPMN"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-
-        <ErrorBoundary fallback={undefined}>
-          <Providers>
-            <SkipLinks />
-            <PerformanceMonitor />
-            <HubSpotIntegration />
-            {children}
-          </Providers>
-        </ErrorBoundary>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={true}
+          disableTransitionOnChange={false}
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

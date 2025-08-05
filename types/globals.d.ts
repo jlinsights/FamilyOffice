@@ -29,8 +29,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_NAVER_SITE_VERIFICATION?: string;
     NEXT_PUBLIC_BING_SITE_VERIFICATION?: string;
 
-    // Channel Talk
-    NEXT_PUBLIC_CHANNEL_IO_KEY?: string;
 
     // Beehiiv Newsletter
     BEEHIIV_API_KEY?: string;
@@ -118,6 +116,5 @@ declare global {
     Cal?: ((command: string, ...args: any[]) => any) & {
       ns?: Record<string, (...args: any[]) => any>;
     };
-    ChannelIO?: (command: string, options?: any) => void;
   }
 }

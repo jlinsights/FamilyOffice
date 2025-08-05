@@ -868,4 +868,5 @@ export async function runOWASPZAPScan(
 }
 
 // Export security test utilities
-export { SecurityTester, VulnerabilityReport, SecurityTestConfig };
+export { SecurityTester };
+export type { VulnerabilityReport, SecurityTestConfig };

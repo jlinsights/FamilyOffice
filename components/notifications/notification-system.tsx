@@ -308,7 +308,9 @@ function NotificationItem({
               <div className="flex items-center gap-2 mt-2">
                 <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <Clock className="h-3 w-3" />
-                  {formatTime(notification.timestamp)}
+                  <span suppressHydrationWarning>
+                    {formatTime(notification.timestamp)}
+                  </span>
                 </div>
 
                 {notification.category && (

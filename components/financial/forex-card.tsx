@@ -339,7 +339,7 @@ export default function ForexCard({
         {forexData.timestamp && (
           <div className="flex items-center justify-center text-xs text-gray-500 border-t pt-2">
             <Clock className="h-3 w-3 mr-1" />
-            <span>
+            <span suppressHydrationWarning>
               {new Date(forexData.timestamp).toLocaleTimeString('ko-KR', {
                 hour: '2-digit',
                 minute: '2-digit',

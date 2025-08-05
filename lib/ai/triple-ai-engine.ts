@@ -87,6 +87,343 @@ export class FamilyOfficeTripleAI {
   }
 
   /**
+   * 구직자 관련 질문 감지
+   */
+  private isJobSeekerQuery(query: string): boolean {
+    const jobSeekerKeywords = [
+      '구직', '채용', '취업', '일자리', '직장', '회사 지원',
+      '이력서', '자기소개서', '면접', '채용공고', '모집',
+      '근무', '연봉', '복지', '경력', '신입', '경력자',
+      '위촉직', '파트타임', '아르바이트', '인턴', '인턴십',
+      '채용정보', '구인', '구인구직', '취업정보', '채용사이트',
+      '자산관리 어드바이저', '세무 컨설턴트', '부동산 투자 매니저',
+      'FamilyOffice S 채용', '패밀리오피스 채용', '채용 문의',
+      // 삼성생명 관련 키워드 추가
+      '삼성생명', '삼성생명GFC', 'GFC', '기업재무전문가', '기업재무컨설턴트',
+      '컨설턴트', '컨설턴트 채용', '삼성생명 채용', 'GFC 채용',
+      '기업재무전문가 채용', '기업재무컨설턴트 채용', '삼성생명GFC 채용',
+      '삼성생명 구직', 'GFC 구직', '기업재무 구직', '컨설턴트 구직',
+      '삼성생명 취업', 'GFC 취업', '기업재무 취업', '컨설턴트 취업',
+      '삼성생명 일자리', 'GFC 일자리', '기업재무 일자리', '컨설턴트 일자리',
+      '삼성생명 지원', 'GFC 지원', '기업재무 지원', '컨설턴트 지원',
+      '삼성생명 모집', 'GFC 모집', '기업재무 모집', '컨설턴트 모집',
+      '삼성생명 근무', 'GFC 근무', '기업재무 근무', '컨설턴트 근무',
+      '삼성생명 연봉', 'GFC 연봉', '기업재무 연봉', '컨설턴트 연봉',
+      '삼성생명 복지', 'GFC 복지', '기업재무 복지', '컨설턴트 복지',
+      '삼성생명 경력', 'GFC 경력', '기업재무 경력', '컨설턴트 경력',
+      '삼성생명 신입', 'GFC 신입', '기업재무 신입', '컨설턴트 신입',
+      '삼성생명 경력자', 'GFC 경력자', '기업재무 경력자', '컨설턴트 경력자',
+      '삼성생명 위촉직', 'GFC 위촉직', '기업재무 위촉직', '컨설턴트 위촉직',
+      '삼성생명 파트타임', 'GFC 파트타임', '기업재무 파트타임', '컨설턴트 파트타임',
+      '삼성생명 아르바이트', 'GFC 아르바이트', '기업재무 아르바이트', '컨설턴트 아르바이트',
+      '삼성생명 인턴', 'GFC 인턴', '기업재무 인턴', '컨설턴트 인턴',
+      '삼성생명 인턴십', 'GFC 인턴십', '기업재무 인턴십', '컨설턴트 인턴십',
+      '삼성생명 채용정보', 'GFC 채용정보', '기업재무 채용정보', '컨설턴트 채용정보',
+      '삼성생명 구인', 'GFC 구인', '기업재무 구인', '컨설턴트 구인',
+      '삼성생명 구인구직', 'GFC 구인구직', '기업재무 구인구직', '컨설턴트 구인구직',
+      '삼성생명 취업정보', 'GFC 취업정보', '기업재무 취업정보', '컨설턴트 취업정보',
+      '삼성생명 채용사이트', 'GFC 채용사이트', '기업재무 채용사이트', '컨설턴트 채용사이트'
+    ];
+
+    return jobSeekerKeywords.some(keyword => 
+      query.toLowerCase().includes(keyword.toLowerCase())
+    );
+  }
+
+  /**
+   * 세미나/이벤트 관련 질문 감지
+   */
+  private isSeminarEventQuery(query: string): boolean {
+    const seminarEventKeywords = [
+      '세미나', '이벤트', '강연', '워크샵', '컨퍼런스', '포럼',
+      '교육', '강의', '특강', '오프라인', '온라인', '하이브리드',
+      '참가', '신청', '등록', '참석', '참관', '참여',
+      '일정', '스케줄', '날짜', '시간', '장소', '위치',
+      '주제', '내용', '프로그램', '커리큘럼', '아젠다',
+      '강사', '스피커', '패널', '발표자', '전문가',
+      '비용', '참가비', '수강료', '등록비', '무료', '유료',
+      '정원', '모집', '마감', '마감일', '신청기간',
+      'FamilyOffice S 세미나', '패밀리오피스 세미나', '세미나 문의',
+      '가업승계 세미나', '세무 세미나', 'M&A 세미나',
+      '기업재무 세미나', '자산관리 세미나', '투자 세미나',
+      '법인세 세미나', '상속세 세미나', '부동산 세미나',
+      'CEO 세미나', '경영진 세미나', '임원 세미나',
+      '중소기업 세미나', '중견기업 세미나', '스타트업 세미나',
+      '100년 CEO', '백년영속', '헤리티지 플래닝',
+      'ART Asset Class', '아트 자산 클래스', '예술 투자',
+      '법인 지배구조', '인사 고용지원', '투자 금융',
+      '자산관리 보험', '가업승계 M&A', '상속계획',
+      '세무 최적화', '자산 이전', '경영권 승계',
+      '세대 간 소통', '가족법인', '비상장기업',
+      '상속세 절약', '증여세 절약', '자산 분산',
+      '리스크 관리', '성장 전략', '지속가능 경영',
+      // 추가 키워드
+      'Business Live ON', '비즈니스 라이브 온', '비즈니스 라이브',
+      '강남FP', '서울FP', 'FP', 'Financial Planner',
+      '삼성금융캠퍼스', '삼성금융', '금융캠퍼스',
+      'VVIP', '브이브이아이피', 'VIP', '브이아이피',
+      '고객초청', '고객 초청', '초청', '초대',
+      '멋진하루', '멋진 하루', '특별한 하루',
+      '프리미엄', '엘리트', '고급', '전문가',
+      '네트워킹', '멘토링', '컨설팅', '상담',
+      '워크샵', '세미나', '컨퍼런스', '포럼',
+      '강연', '특강', '교육', '훈련',
+      '오프라인', '온라인', '하이브리드', '블렌디드',
+      '참가', '신청', '등록', '참석', '참관', '참여',
+      '일정', '스케줄', '날짜', '시간', '장소', '위치',
+      '주제', '내용', '프로그램', '커리큘럼', '아젠다',
+      '강사', '스피커', '패널', '발표자', '전문가',
+      '비용', '참가비', '수강료', '등록비', '무료', '유료',
+      '정원', '모집', '마감', '마감일', '신청기간',
+      'Business Live ON 세미나', '비즈니스 라이브 온 이벤트',
+      '강남FP 세미나', '서울FP 이벤트', 'FP 세미나',
+      '삼성금융캠퍼스 세미나', '삼성금융 이벤트', '금융캠퍼스 강연',
+      'VVIP 세미나', 'VIP 이벤트', '브이브이아이피 강연',
+      '고객초청 세미나', '고객 초청 이벤트', '초청 세미나',
+      '멋진하루 이벤트', '멋진 하루 세미나', '특별한 하루 강연',
+      '프리미엄 세미나', '엘리트 이벤트', '고급 강연',
+      '전문가 세미나', '네트워킹 이벤트', '멘토링 세미나',
+      '컨설팅 세미나', '상담 이벤트', '워크샵 세미나',
+      '컨퍼런스 이벤트', '포럼 세미나', '강연 이벤트',
+      '특강 세미나', '교육 이벤트', '훈련 세미나',
+      '오프라인 세미나', '온라인 이벤트', '하이브리드 강연',
+      '블렌디드 세미나', '참가 이벤트', '신청 세미나',
+      '등록 이벤트', '참석 세미나', '참관 이벤트',
+      '참여 세미나', '일정 이벤트', '스케줄 세미나',
+      '날짜 이벤트', '시간 세미나', '장소 이벤트',
+      '위치 세미나', '주제 이벤트', '내용 세미나',
+      '프로그램 이벤트', '커리큘럼 세미나', '아젠다 이벤트',
+      '강사 세미나', '스피커 이벤트', '패널 세미나',
+      '발표자 이벤트', '전문가 세미나', '비용 이벤트',
+      '참가비 세미나', '수강료 이벤트', '등록비 세미나',
+      '무료 이벤트', '유료 세미나', '정원 이벤트',
+      '모집 세미나', '마감 이벤트', '마감일 세미나',
+      '신청기간 이벤트', 'Business Live ON 문의',
+      '비즈니스 라이브 온 문의', '강남FP 문의', '서울FP 문의',
+      'FP 문의', '삼성금융캠퍼스 문의', '삼성금융 문의',
+      '금융캠퍼스 문의', 'VVIP 문의', 'VIP 문의',
+      '브이브이아이피 문의', '브이아이피 문의', '고객초청 문의',
+      '고객 초청 문의', '초청 문의', '초대 문의',
+      '멋진하루 문의', '멋진 하루 문의', '특별한 하루 문의',
+      '프리미엄 문의', '엘리트 문의', '고급 문의',
+      '전문가 문의', '네트워킹 문의', '멘토링 문의',
+      '컨설팅 문의', '상담 문의', '워크샵 문의',
+      '컨퍼런스 문의', '포럼 문의', '강연 문의',
+      '특강 문의', '교육 문의', '훈련 문의',
+      '오프라인 문의', '온라인 문의', '하이브리드 문의',
+      '블렌디드 문의', '참가 문의', '신청 문의',
+      '등록 문의', '참석 문의', '참관 문의',
+      '참여 문의', '일정 문의', '스케줄 문의',
+      '날짜 문의', '시간 문의', '장소 문의',
+      '위치 문의', '주제 문의', '내용 문의',
+      '프로그램 문의', '커리큘럼 문의', '아젠다 문의',
+      '강사 문의', '스피커 문의', '패널 문의',
+      '발표자 문의', '전문가 문의', '비용 문의',
+      '참가비 문의', '수강료 문의', '등록비 문의',
+      '무료 문의', '유료 문의', '정원 문의',
+      '모집 문의', '마감 문의', '마감일 문의',
+      '신청기간 문의'
+    ];
+
+    return seminarEventKeywords.some(keyword => 
+      query.toLowerCase().includes(keyword.toLowerCase())
+    );
+  }
+
+  /**
+   * 구직자 응답 생성
+   */
+  private generateJobSeekerResponse(
+    query: string,
+    clientProfile: ClientProfile,
+    consultationId: string,
+    startTime: number
+  ): ConsultationResponse {
+    const response = `안녕하세요! FamilyOffice S 채용에 관심을 가져주셔서 감사합니다. 🏢
+
+## 📋 **현재 채용 포지션**
+
+### 1. **자산관리 어드바이저** (위촉직)
+- **부서**: 자산관리팀
+- **경력**: 3년 이상
+- **위치**: 서울 강남
+- **업무**: 고액자산가 대상 종합자산관리 서비스
+
+### 2. **세무 컨설턴트** (위촉직)
+- **부서**: 세무팀  
+- **경력**: 5년 이상
+- **자격**: 세무사 자격증 필수
+- **업무**: 기업 및 개인 세무 컨설팅
+
+### 3. **부동산 투자 매니저** (위촉직)
+- **부서**: 투자팀
+- **경력**: 3년 이상
+- **업무**: 부동산 투자 상품 개발 및 관리
+
+### 4. **기업재무전문가** (위촉직)
+- **부서**: 기업재무팀
+- **경력**: 3년 이상
+- **업무**: 중소중견기업 재무 컨설팅 및 자금조달 지원
+
+### 5. **기업재무컨설턴트** (위촉직)
+- **부서**: 컨설팅팀
+- **경력**: 5년 이상
+- **업무**: 기업 재무 전략 수립 및 실행 지원
+
+## 🎯 **우대사항**
+- 관련 자격증 보유자 (세무사, 공인회계사, 투자상담사 등)
+- 영어 회화 가능자
+- 데이터 분석 능력
+- 국제세무 경험자
+- 삼성생명GFC 경험자 우대
+- 기업재무 컨설팅 경험자 우대
+
+## 💼 **복지혜택**
+- 경쟁력 있는 연봉
+- 성과 인센티브
+- 전문성 개발 지원
+- 유연한 근무 환경
+- 삼성생명 제휴 혜택
+
+## 🤝 **파트너십**
+FamilyOffice S는 **삼성생명GFC**와의 전략적 파트너십을 통해 중소중견기업을 위한 종합 금융 서비스를 제공합니다.
+
+## 📞 **지원 방법**
+더 자세한 채용 정보와 지원 방법을 확인하시려면:
+
+**→ [채용 페이지 바로가기](https://recruit.familyoffices.vip)**
+
+채용 페이지에서 상세한 포지션 정보, 지원 자격, 복지혜택 등을 확인하실 수 있습니다.
+
+궁금한 점이 있으시면 언제든 문의해주세요! ✨`;
+
+    return {
+      id: consultationId,
+      query: query,
+      response: response,
+      ai_used: 'claude-opus',
+      strategy_used: 'single_ai',
+      response_time: Date.now() - startTime,
+      cost: 0,
+      confidence: 0.95,
+      korean_cultural_context: {
+        formality_level: 'business',
+        hierarchy_considerations: ['구직자 대상 친근하면서도 전문적인 어조'],
+        cultural_recommendations: ['한국 기업 채용 문화 반영', '명확한 정보 제공'],
+        relationship_building_notes: ['긍정적이고 격려하는 톤', '전문성과 인간미의 조화']
+      },
+      follow_up_suggestions: [
+        '채용 페이지 방문',
+        '이력서 작성 가이드 요청',
+        '면접 준비 조언 요청'
+      ],
+      expert_escalation_recommended: false,
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  /**
+   * 세미나/이벤트 응답 생성
+   */
+  private generateSeminarEventResponse(
+    query: string,
+    clientProfile: ClientProfile,
+    consultationId: string,
+    startTime: number
+  ): ConsultationResponse {
+    const response = `안녕하세요! FamilyOffice S 세미나/이벤트에 관심을 가져주셔서 감사합니다. 📚
+
+## 🎯 **다가오는 주요 세미나**
+
+### 1. **100년 CEO 프로젝트** (정기 세미나)
+- **주제**: 백년영속을 위한 가업승계 전략
+- **대상**: 중소중견기업 CEO 및 경영진
+- **형태**: 하이브리드 (온라인 + 오프라인)
+- **특징**: 10년+ 노하우 공유, 실무 사례 분석
+
+### 2. **ART Asset Class** (전문 세미나)
+- **주제**: 예술 자산을 통한 포트폴리오 다각화
+- **대상**: 자산가, 투자자, 컬렉터
+- **형태**: 프리미엄 오프라인 세미나
+- **특징**: 아트 투자 전문가 강연, 네트워킹
+
+### 3. **기업재무 컨설팅** (월간 세미나)
+- **주제**: 중소중견기업 재무 최적화 전략
+- **대상**: 기업 재무담당자, 경영진
+- **형태**: 온라인 웨비나
+- **특징**: 삼성생명GFC 전문가 참여
+
+### 4. **세무 최적화** (분기별 세미나)
+- **주제**: 법인세 및 개인세 절세 전략
+- **대상**: 기업 세무담당자, 개인사업자
+- **형태**: 오프라인 + 온라인
+- **특징**: 실무 중심, Q&A 세션
+
+## 📅 **세미나 특징**
+
+### **다양한 형태**
+- **오프라인**: 서울 강남 본사, 프리미엄 환경
+- **온라인**: 실시간 스트리밍, 인터랙티브
+- **하이브리드**: 온오프라인 동시 진행
+
+### **전문성**
+- **전문가 강연**: 60+ Big 4 출신 전문가
+- **실무 사례**: 1,500+ M&A 플랫폼 사례
+- **맞춤형 컨텐츠**: 업종별, 규모별 차별화
+
+### **네트워킹**
+- **CEO 네트워크**: 동종업계 CEO들과의 교류
+- **전문가 멘토링**: 1:1 상담 기회
+- **후속 서비스**: 세미나 후 전문 컨설팅 연결
+
+## 💡 **참가 혜택**
+
+### **즉시 혜택**
+- 최신 트렌드 및 실무 정보 습득
+- 전문가 네트워크 구축
+- 실무 사례 및 솔루션 공유
+
+### **후속 혜택**
+- 세미나 참가자 전용 컨설팅 할인
+- VIP 멤버십 우선 신청권
+- 맞춤형 솔루션 제안
+
+## 📞 **세미나 정보 및 신청**
+
+더 자세한 세미나 정보와 신청 방법을 확인하시려면:
+
+**→ [세미나 페이지 바로가기](https://seminar.familyoffices.vip)**
+
+세미나 페이지에서 상세한 일정, 주제, 강사 정보, 신청 방법 등을 확인하실 수 있습니다.
+
+궁금한 점이 있으시면 언제든 문의해주세요! ✨`;
+
+    return {
+      id: consultationId,
+      query: query,
+      response: response,
+      ai_used: 'claude-opus',
+      strategy_used: 'single_ai',
+      response_time: Date.now() - startTime,
+      cost: 0,
+      confidence: 0.95,
+      korean_cultural_context: {
+        formality_level: 'business',
+        hierarchy_considerations: ['CEO 및 경영진 대상 전문적 어조'],
+        cultural_recommendations: ['한국 기업 문화 반영', '교육적 가치 강조'],
+        relationship_building_notes: ['지식 공유와 네트워킹 중시', '전문성과 접근성의 조화']
+      },
+      follow_up_suggestions: [
+        '세미나 페이지 방문',
+        '특정 세미나 상세 정보 요청',
+        '세미나 신청 방법 문의'
+      ],
+      expert_escalation_recommended: false,
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  /**
    * 메인 컨설팅 처리 함수
    */
   async processConsultation(
@@ -98,6 +435,18 @@ export class FamilyOfficeTripleAI {
     const consultationId = this.generateConsultationId();
 
     try {
+      // 구직자 관련 질문 우선 확인
+      if (this.isJobSeekerQuery(query)) {
+        console.log('[Triple-AI] 구직자 질문 감지: 채용 페이지 연결 응답 생성');
+        return this.generateJobSeekerResponse(query, clientProfile, consultationId, startTime);
+      }
+
+      // 세미나/이벤트 관련 질문 확인
+      if (this.isSeminarEventQuery(query)) {
+        console.log('[Triple-AI] 세미나/이벤트 질문 감지: 세미나 페이지 연결 응답 생성');
+        return this.generateSeminarEventResponse(query, clientProfile, consultationId, startTime);
+      }
+
       // API 클라이언트 상태 확인
       console.log('[Triple-AI] 클라이언트 상태:', {
         claude: !!this.claudeClient,
@@ -360,12 +709,12 @@ export class FamilyOfficeTripleAI {
   ): Promise<AIResponse> {
     console.log('[Triple-AI] 합의 투표 분석 시작...');
     
-    // 모든 AI 병렬 실행
-    const [claudeResult, gptResult, geminiResult] = await Promise.all([
-      this.executeSingleAI(AIModel.CLAUDE_OPUS, query, analysis, koreanContext, clientProfile, attachments),
-      this.executeSingleAI(AIModel.GPT4_TURBO, query, analysis, koreanContext, clientProfile, attachments),
-      this.executeSingleAI(AIModel.GEMINI_PRO, query, analysis, koreanContext, clientProfile, attachments)
-    ]);
+          // 모든 AI 병렬 실행
+      const [claudeResult, gptResult, geminiResult] = await Promise.all([
+        this.executeSingleAI(AIModel.CLAUDE_OPUS, query, analysis, koreanContext, clientProfile, attachments),
+        this.executeSingleAI(AIModel.GPT4_TURBO, query, analysis, koreanContext, clientProfile, attachments),
+        this.executeSingleAI(AIModel.GEMINI_PRO, query, analysis, koreanContext, clientProfile, attachments)
+      ]);
 
     // 합의점 찾기 및 통합
     return this.synthesizeConsensusResults([claudeResult, gptResult, geminiResult]);
@@ -628,6 +977,16 @@ FamilyOffice S AI 컨설턴트로서 한국의 패밀리오피스 전문가 관�
     consultationId: string,
     startTime: number
   ): ConsultationResponse {
+    // 구직자 관련 질문 우선 확인
+    if (this.isJobSeekerQuery(query)) {
+      return this.generateJobSeekerResponse(query, clientProfile, consultationId, startTime);
+    }
+
+    // 세미나/이벤트 관련 질문 확인
+    if (this.isSeminarEventQuery(query)) {
+      return this.generateSeminarEventResponse(query, clientProfile, consultationId, startTime);
+    }
+
     const mockResponses = {
       '가업승계': `안녕하세요! 가업승계에 대한 질문을 해주셨네요.
 
@@ -748,6 +1107,16 @@ FamilyOffice S의 1,500+ M&A 플랫폼을 통해 최적의 파트너를 찾을 �
     startTime: number
   ): Promise<ConsultationResponse> {
     try {
+      // 구직자 관련 질문 우선 확인
+      if (this.isJobSeekerQuery(query)) {
+        return this.generateJobSeekerResponse(query, clientProfile, consultationId, startTime);
+      }
+
+      // 세미나/이벤트 관련 질문 확인
+      if (this.isSeminarEventQuery(query)) {
+        return this.generateSeminarEventResponse(query, clientProfile, consultationId, startTime);
+      }
+
       // 대화 히스토리 확인 (세션 내 질문 횟수)
       const sessionQuestions = clientProfile.consultation_history?.length || 0;
       const isComplexQuery = this.isComplexQuery(query);
@@ -837,6 +1206,16 @@ FamilyOffice S의 1,500+ M&A 플랫폼을 통해 최적의 파트너를 찾을 �
     startTime: number
   ): Promise<ConsultationResponse> {
     try {
+      // 구직자 관련 질문 우선 확인
+      if (this.isJobSeekerQuery(query)) {
+        return this.generateJobSeekerResponse(query, clientProfile, consultationId, startTime);
+      }
+
+      // 세미나/이벤트 관련 질문 확인
+      if (this.isSeminarEventQuery(query)) {
+        return this.generateSeminarEventResponse(query, clientProfile, consultationId, startTime);
+      }
+
       const sessionQuestions = clientProfile.consultation_history?.length || 0;
       const isComplexQuery = this.isComplexQuery(query);
       
@@ -919,6 +1298,16 @@ Claude의 강점인 깊이 있는 분석과 구조화된 답변으로 전문적�
     startTime: number
   ): Promise<ConsultationResponse> {
     try {
+      // 구직자 관련 질문 우선 확인
+      if (this.isJobSeekerQuery(query)) {
+        return this.generateJobSeekerResponse(query, clientProfile, consultationId, startTime);
+      }
+
+      // 세미나/이벤트 관련 질문 확인
+      if (this.isSeminarEventQuery(query)) {
+        return this.generateSeminarEventResponse(query, clientProfile, consultationId, startTime);
+      }
+
       const sessionQuestions = clientProfile.consultation_history?.length || 0;
       const isComplexQuery = this.isComplexQuery(query);
       

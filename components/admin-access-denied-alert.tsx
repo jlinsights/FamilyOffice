@@ -12,18 +12,23 @@ import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
-// FamilyOffice S - 관리자 접근 거부 알림 컴포넌트
-// URL 파라미터를 통해 관리자 접근 거부 메시지를 표시하는 컴포넌트
-
-// FamilyOffice S - 관리자 접근 거부 알림 컴포넌트
-// URL 파라미터를 통해 관리자 접근 거부 메시지를 표시하는 컴포넌트
-
 function AdminAccessDeniedAlertContent() {
-  const searchParams = useSearchParams();
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState('');
+  const [mounted, setMounted] = useState(false);
+  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
 
   useEffect(() => {
+    setMounted(true);
+    // 클라이언트 사이드에서만 URLSearchParams 사용
+    if (typeof window !== 'undefined') {
+      setSearchParams(new URLSearchParams(window.location.search));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !searchParams) return;
+
     const error = searchParams.get('error');
 
     if (error) {
@@ -48,7 +53,12 @@ function AdminAccessDeniedAlertContent() {
       setMessage(errorMessage);
       setShow(true);
     }
-  }, [searchParams]);
+  }, [searchParams, mounted]);
+
+  // 서버와 클라이언트 렌더링을 일치시키기 위해 항상 동일한 구조 반환
+  if (!mounted) {
+    return null;
+  }
 
   if (!show) return null;
 

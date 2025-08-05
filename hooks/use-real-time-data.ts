@@ -40,6 +40,16 @@ export function useRealTimeData<T>(
 
   const abortControllerRef = useRef<AbortController | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // 콜백 함수들을 ref로 관리하여 의존성 배열 안정화
+  const onErrorRef = useRef(onError);
+  const onSuccessRef = useRef(onSuccess);
+
+  // ref 업데이트
+  useEffect(() => {
+    onErrorRef.current = onError;
+    onSuccessRef.current = onSuccess;
+  }, [onError, onSuccess]);
 
   const fetchData = useCallback(
     async (isRetry = false) => {
@@ -82,7 +92,7 @@ export function useRealTimeData<T>(
           retryCount: 0,
         }));
 
-        onSuccess?.(result);
+        onSuccessRef.current?.(result);
       } catch (error) {
         if (error instanceof Error && error.name === 'AbortError') {
           return; // 요청이 취소된 경우
@@ -98,7 +108,7 @@ export function useRealTimeData<T>(
           retryCount: prev.retryCount + 1,
         }));
 
-        onError?.(error as Error);
+        onErrorRef.current?.(error as Error);
 
         // 재시도 로직
         if (!isRetry && state.retryCount < retryAttempts) {
@@ -116,8 +126,6 @@ export function useRealTimeData<T>(
       enabled,
       retryAttempts,
       retryDelay,
-      onError,
-      onSuccess,
       state.retryCount,
     ]
   );

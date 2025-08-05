@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // 전역 타입 확장
 declare global {
@@ -11,7 +11,17 @@ declare global {
 }
 
 export function ClientScripts() {
+  const [mounted, setMounted] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !isClient) return;
+
     // HubSpot 스크립트 로드
     const loadHubSpotScript = () => {
       if (typeof window !== 'undefined' && !window.hbspt) {
@@ -41,7 +51,21 @@ export function ClientScripts() {
     // 스크립트 로드
     loadHubSpotScript();
     loadGTMScript();
-  }, []);
+  }, [mounted, isClient]);
+
+  // SSR 방지: 마운트되기 전에는 noscript만 반환
+  if (!mounted || !isClient) {
+    return (
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-MP3HPPMN"
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        />
+      </noscript>
+    );
+  }
 
   return (
     <>

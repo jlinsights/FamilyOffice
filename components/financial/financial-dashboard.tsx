@@ -210,7 +210,7 @@ export default function FinancialDashboard({
               </div>
               <div>
                 <p className="text-gray-500">마지막 업데이트</p>
-                <p className="font-semibold">
+                <p className="font-semibold" suppressHydrationWarning>
                   {lastStatusUpdate?.toLocaleTimeString('ko-KR', {
                     hour: '2-digit',
                     minute: '2-digit',

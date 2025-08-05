@@ -63,8 +63,8 @@ class ComplianceTestSuite {
         regulation: 'Korean FSCMA',
         severity: 'CRITICAL',
         checkFunction: transaction => {
-          const violations = [];
-          const recommendations = [];
+          const violations: any[] = [];
+          const recommendations: any[] = [];
 
           if (
             transaction.currency === 'KRW' &&
@@ -99,8 +99,8 @@ class ComplianceTestSuite {
         regulation: 'US SEC Rule 13d',
         severity: 'HIGH',
         checkFunction: portfolio => {
-          const violations = [];
-          const recommendations = [];
+          const violations: any[] = [];
+          const recommendations: any[] = [];
 
           portfolio.positions?.forEach((position: any) => {
             // Mock check - in real implementation would check against total shares outstanding
@@ -135,8 +135,8 @@ class ComplianceTestSuite {
         regulation: 'AML/KYC',
         severity: 'CRITICAL',
         checkFunction: transactions => {
-          const violations = [];
-          const recommendations = [];
+          const violations: any[] = [];
+          const recommendations: any[] = [];
 
           if (Array.isArray(transactions)) {
             // Check for structuring (multiple transactions just under reporting threshold)
@@ -200,8 +200,8 @@ class ComplianceTestSuite {
         regulation: 'EU GDPR',
         severity: 'HIGH',
         checkFunction: userData => {
-          const violations = [];
-          const recommendations = [];
+          const violations: any[] = [];
+          const recommendations: any[] = [];
 
           if (userData.lastLoginDate) {
             const daysSinceLogin =
@@ -236,8 +236,8 @@ class ComplianceTestSuite {
         regulation: 'Fiduciary Duty',
         severity: 'HIGH',
         checkFunction: execution => {
-          const violations = [];
-          const recommendations = [];
+          const violations: any[] = [];
+          const recommendations: any[] = [];
 
           if (execution.executedPrice && execution.benchmarkPrice) {
             const priceDeviation =

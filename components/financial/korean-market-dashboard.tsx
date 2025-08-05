@@ -153,7 +153,7 @@ export function KoreanMarketDashboard() {
         </div>
         <div className="flex items-center gap-2">
           {lastUpdated && (
-            <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground" suppressHydrationWarning>
               마지막 업데이트: {lastUpdated.toLocaleTimeString('ko-KR')}
             </span>
           )}

@@ -1,31 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import Script from 'next/script';
 
 export default function ExternalScripts() {
-  const channelIOKey = process.env.NEXT_PUBLIC_CHANNEL_IO_KEY;
-
-  useEffect(() => {
-    // Channel Talk 초기화
-    if (channelIOKey && typeof window !== 'undefined') {
-      // ChannelIO 로더 스크립트
-      if (!window.ChannelIO) {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-        script.async = true;
-        script.onload = () => {
-          if (window.ChannelIO) {
-            window.ChannelIO('boot', {
-              pluginKey: channelIOKey,
-            });
-          }
-        };
-        document.head.appendChild(script);
-      }
-    }
-  }, [channelIOKey]);
 
   return (
     <>

@@ -50,8 +50,8 @@ describe('RateLimiter', () => {
     const request1 = { ...mockRequest };
     const request2 = { ...mockRequest };
 
-    await rateLimiter.check(request1);
-    const result = await rateLimiter.check(request2);
+    await rateLimiter.check(request1 as any);
+    const result = await rateLimiter.check(request2 as any);
 
     expect(result.remaining).toBe(8); // Should be decremented
   });
@@ -73,8 +73,8 @@ describe('RateLimiter', () => {
       }),
     } as NextRequest;
 
-    await rateLimiter.check(request1);
-    const result = await rateLimiter.check(request2);
+    await rateLimiter.check(request1 as any);
+    const result = await rateLimiter.check(request2 as any);
 
     expect(result.remaining).toBe(9); // Should not be decremented
   });

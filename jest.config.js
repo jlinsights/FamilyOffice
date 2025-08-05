@@ -19,6 +19,10 @@ const customJestConfig = {
     '<rootDir>/tests/setup/financial-mocks.js',
   ],
 
+  // TypeScript configuration
+  preset: 'ts-jest/presets/default-esm',
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+
   // Module name mapping
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',

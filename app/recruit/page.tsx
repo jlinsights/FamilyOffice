@@ -15,7 +15,7 @@ import {
   Users,
 } from 'lucide-react';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -29,6 +29,9 @@ import { Header } from '@/components/header';
 
 export default function RecruitPage() {
   const [startAnimation, setStartAnimation] = useState(false);
+
+  // easing 함수를 메모이제이션
+  const easingFunction = useCallback((t: number) => 1 - Math.pow(1 - t, 3), []);
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후 애니메이션 시작
@@ -173,7 +176,7 @@ export default function RecruitPage() {
                     suffix="%"
                     startAnimation={startAnimation}
                     duration={1500}
-                    easingFunction={t => 1 - Math.pow(1 - t, 3)}
+                    easingFunction={easingFunction}
                   />
                 </div>
                 <div className="text-sm text-muted-foreground">직원 만족도</div>
@@ -185,7 +188,7 @@ export default function RecruitPage() {
                     suffix="개월"
                     startAnimation={startAnimation}
                     duration={1800}
-                    easingFunction={t => 1 - Math.pow(1 - t, 3)}
+                    easingFunction={easingFunction}
                   />
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -199,7 +202,7 @@ export default function RecruitPage() {
                     suffix="%"
                     startAnimation={startAnimation}
                     duration={1600}
-                    easingFunction={t => 1 - Math.pow(1 - t, 3)}
+                    easingFunction={easingFunction}
                   />
                 </div>
                 <div className="text-sm text-muted-foreground">내부 승진률</div>
@@ -211,7 +214,7 @@ export default function RecruitPage() {
                     suffix="개"
                     startAnimation={startAnimation}
                     duration={1200}
-                    easingFunction={t => 1 - Math.pow(1 - t, 3)}
+                    easingFunction={easingFunction}
                   />
                 </div>
                 <div className="text-sm text-muted-foreground">

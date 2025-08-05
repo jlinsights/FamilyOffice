@@ -636,7 +636,9 @@ export default function AssetManagementDashboard({
       {lastUpdated && (
         <div className="text-center text-sm text-gray-500">
           <Calendar className="h-4 w-4 inline mr-1" />
-          마지막 업데이트: {lastUpdated.toLocaleString('ko-KR')}
+          <span suppressHydrationWarning>
+            마지막 업데이트: {lastUpdated.toLocaleString('ko-KR')}
+          </span>
         </div>
       )}
     </div>

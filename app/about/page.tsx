@@ -1,224 +1,55 @@
-'use client';
-
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  Shield,
   TrendingUp,
-  Users,
-  Award,
-  Target,
-  CheckCircle,
   Star,
   Building,
-  Briefcase,
+  Award,
   ArrowRight,
   Phone,
-  Factory,
-  Hammer,
-  Cpu,
+  Briefcase,
+  Users,
+  Target,
+  Shield,
+  CheckCircle,
 } from 'lucide-react';
-
-import { useEffect, useState } from 'react';
-
 import Link from 'next/link';
-
-import { Badge } from '@/components/ui/badge';
-
-import { AnimatedCounter } from '@/components/animated-counter';
-import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
+import { AnimatedCounter } from '@/components/animated-counter';
 
 export default function AboutPage() {
-  const [startAnimation, setStartAnimation] = useState(false);
-
-  useEffect(() => {
-    // 컴포넌트가 마운트된 후 애니메이션 시작
-    const timer = setTimeout(() => {
-      setStartAnimation(true);
-    }, 500); // 500ms 지연 후 애니메이션 시작
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const stats = [
-    {
-      label: '자산관리 실적',
-      value: 500,
-      suffix: '억원+',
-      icon: TrendingUp,
-      color: 'text-primary',
-    },
-    {
-      label: '법인 대표 만족도',
-      value: 98,
-      suffix: '%',
-      icon: Star,
-      color: 'text-primary',
-    },
-    {
-      label: '법인 고객사',
-      value: 500,
-      suffix: '+',
-      icon: Building,
-      color: 'text-primary',
-    },
-    {
-      label: '중소중견기업 전문경험',
-      value: 20,
-      suffix: '년+',
-      icon: Award,
-      color: 'text-primary',
-    },
-  ];
-
-  const values = [
-    {
-      icon: Shield,
-      title: '고객 우선주의',
-      description:
-        '법인 대표님의 일정과 업무 패턴을 최우선으로 고려한 맞춤형 서비스를 제공합니다.',
-      color: 'text-primary',
-    },
-    {
-      icon: Target,
-      title: '상품이 아닌 고객 중심',
-      description:
-        '특정 금융상품 판매가 아닌 고객의 목표와 철학을 바탕으로 한 재무전략을 수립합니다.',
-      color: 'text-primary',
-    },
-    {
-      icon: Users,
-      title: '전담 전문가 시스템',
-      description:
-        '중앙집중형 데이터 관리를 통해 한 명의 전문가가 지속적으로 서비스를 제공합니다.',
-      color: 'text-primary',
-    },
-    {
-      icon: TrendingUp,
-      title: '통합 자산관리',
-      description:
-        '법인-개인 자산을 체계적으로 통합 관리하는 자체 개발 시스템을 운영합니다.',
-      color: 'text-primary',
-    },
-  ];
-
-  const specialties = [
-    {
-      icon: Factory,
-      title: '제조업 특화',
-      description:
-        '전통 제조업부터 첨단 제조업까지 업종별 특성을 반영한 자산관리',
-      features: [
-        '중대재해처벌법 대응',
-        '생산설비 보험',
-        '원자재 리스크 헤지',
-        'ESG 경영 지원',
-      ],
-    },
-    {
-      icon: Hammer,
-      title: '건설·위험업종',
-      description: '건설업 등 위험업종의 특수성을 고려한 전문 자산관리 서비스',
-      features: [
-        '기업재해보장보험',
-        '시공보증보험',
-        '하도급 리스크 관리',
-        '프로젝트 파이낸싱',
-      ],
-    },
-    {
-      icon: Cpu,
-      title: 'IT·벤처기업',
-      description: '기술기업의 성장 단계별 맞춤형 자산관리 및 투자 전략',
-      features: [
-        '정책자금 활용',
-        '핵심인재 보험',
-        '스톡옵션 설계',
-        'IPO 준비 지원',
-      ],
-    },
-    {
-      icon: Building,
-      title: '가족법인·MSO',
-      description: '가족법인 설립부터 MSO 운영까지 세대를 넘나드는 자산관리',
-      features: [
-        '법인 구조 설계',
-        '경영권 승계',
-        '세무 최적화',
-        '자녀 교육 펀드',
-      ],
-    },
-  ];
-
-  const promise = [
-    {
-      title: '개인 맞춤형 서비스',
-      description:
-        '법인 대표님의 일정과 시간을 고려한 개인 맞춤형 자산관리 서비스를 제공해 드립니다.',
-      detail:
-        '고객이 언제나 우선입니다. 고객에게 모든 것을 맞추어 최선의 서비스를 제공합니다.',
-    },
-    {
-      title: '체계적인 상담 프로세스',
-      description:
-        '자산관리 프로세스에 입각한 체계적인 상담진행으로 법인 대표님의 목표와 철학을 고려한 재무전략을 수립합니다.',
-      detail:
-        '특정 회사에 얽매이지 않는 다양한 포트폴리오를 통해 상품중심이 아닌 철저한 고객중심 서비스를 제공합니다.',
-    },
-    {
-      title: '밀착 코칭 상담',
-      description: '충분한 대화를 통한 밀착 과외식, 코칭식 상담을 진행합니다.',
-      detail:
-        '법인 대표님의 금융지식수준을 높여 현명한 판단을 할 수 있도록 도와드립니다.',
-    },
-    {
-      title: '중앙집중형 관리',
-      description:
-        '중앙집중형 Data 관리 시스템과 History 관리를 통해 지속적인 고객관리를 진행합니다.',
-      detail: '한 명의 전문가가 지속적으로 자산관리 서비스를 제공합니다.',
-    },
-  ];
-
   return (
     <div className="min-h-screen">
       <Header />
 
       <main className="pt-20">
         {/* 히어로 섹션 */}
-        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
-          {/* 배경 그라데이션 효과 */}
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
-            {/* 상단 태그 */}
             <div className="flex justify-center mb-8">
-              <Badge
-                variant="outline"
-                className="animate-fade-in bg-background/80 backdrop-blur-sm"
-              >
-                <Building className="h-3 w-3 mr-1" />
+              <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80">
+                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
                 About FamilyOffice S
-              </Badge>
+              </span>
             </div>
 
-            {/* 메인 헤드라인 */}
-            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-              중소중견기업 대표님의{'\n'}
+            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line">
+              중소중견기업의{'\n'}
               <span className="text-foreground">성공적인 자산관리</span>
               {'\n'}파트너
             </h1>
 
-            {/* 서브 헤드라인 */}
-            <p
-              className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
-              style={{ animationDelay: '200ms' }}
-            >
+            <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
               중소중견기업 전문 자산관리
             </p>
 
-            <p
-              className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
-              style={{ animationDelay: '300ms' }}
-            >
+            <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
               <span className="font-semibold text-foreground">
                 법인 대표님을 위한 전문적인 자산관리
               </span>{' '}
@@ -229,26 +60,28 @@ export default function AboutPage() {
               를 제공합니다
             </p>
 
-            {/* CTA 버튼 */}
-            <div
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
-              style={{ animationDelay: '500ms' }}
-            >
-              <Link
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <a
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-lg"
+                className="inline-flex items-center justify-center rounded-xl text-lg font-bold h-12 px-8 py-4 bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-lg transition-colors"
               >
-                <Phone className="mr-2 h-5 w-5" />
+                <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
                 상담 신청
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link
+                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a
                 href="/services"
-                className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-lg"
+                className="inline-flex items-center justify-center rounded-xl text-lg font-bold h-12 px-8 py-4 border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-lg transition-colors"
               >
-                <Briefcase className="mr-2 h-5 w-5" />
+                <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                </svg>
                 서비스 보기
-              </Link>
+              </a>
             </div>
           </div>
         </section>
@@ -257,22 +90,61 @@ export default function AboutPage() {
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {stats.map((stat, index) => (
+              {[
+                {
+                  label: '자산관리 실적',
+                  value: 500,
+                  suffix: '억원+',
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: '법인 대표 만족도',
+                  value: 98,
+                  suffix: '%',
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: '법인 고객사',
+                  value: 500,
+                  suffix: '+',
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: '중소중견기업 전문경험',
+                  value: 20,
+                  suffix: '년+',
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
+                  ),
+                },
+              ].map((stat, index) => (
                 <div
                   key={index}
-                  className="card-modern p-6 text-center animate-up"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="p-6 text-center bg-background rounded-lg shadow-sm border border-border"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary mx-auto mb-4">
-                    <stat.icon className="h-6 w-6" />
+                    {stat.icon}
                   </div>
                   <div className="text-2xl font-bold mb-2">
                     <AnimatedCounter
                       end={stat.value}
                       suffix={stat.suffix}
-                      startAnimation={startAnimation}
+                      startAnimation={true}
                       duration={1500 + index * 200}
-                      easingFunction={t => 1 - Math.pow(1 - t, 3)}
                     />
                   </div>
                   <div className="text-muted-foreground text-sm">
@@ -284,306 +156,166 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 소개 섹션 */}
-        <section className="py-24">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-4xl mx-auto">
-              <Badge variant="secondary" className="mb-4">
-                About Us
-              </Badge>
-
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                <span className="text-primary playfair-display-bold">
-                  FamilyOffice S
-                </span>{' '}
-                소개
-              </h2>
-
-              <div className="space-y-6 text-lg text-muted-foreground max-w-3xl mx-auto text-left">
-                <p className="text-center">
-                  <span className="playfair-display-bold">FamilyOffice S</span>
-                  는{' '}
-                  <span className="font-semibold text-foreground">
-                    중소중견기업 전문
-                  </span>
-                  <span className="font-semibold text-foreground">
-                    자산관리 서비스 팀
-                  </span>
-                  입니다.
-                </p>
-                <p className="text-center">
-                  중소중견기업 법인 대표님들의 복잡한 자산관리 니즈를 전문적으로
-                  해결하기 위해 설립된 전문 프로젝트 팀으로, 세무 최적화부터
-                  가업승계 설계까지 통합적인 패밀리오피스 서비스를 제공합니다.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 우리의 약속 섹션 */}
-        <section className="py-24 bg-muted/30">
+        {/* 전문가 팀 섹션 - 숨김 처리 */}
+        {/* <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <Badge variant="secondary" className="mb-4">
-                Our Promise
-              </Badge>
-
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                법인 대표님의 마음을 아는{' '}
-                <span className="text-primary playfair-display-bold">
-                  FamilyOffice S
-                </span>
-                <br />
-                <span className="text-foreground">우리는 약속합니다</span>
-              </h2>
-
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                중소중견기업 법인 대표님들의 고유한 우선순위를 이해하고 최고의
-                서비스를 제공하겠습니다
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {promise.map((item, index) => (
-                <div
-                  key={index}
-                  className="card-modern p-8 animate-up"
-                  style={{ animationDelay: `${index * 150}ms` }}
-                >
-                  <h3 className="text-xl font-semibold mb-4 text-primary">
-                    {item.title}
-                  </h3>
-                  <p className="text-foreground font-medium mb-3">
-                    {item.description}
-                  </p>
-                  <p className="text-muted-foreground text-pretty">
-                    {item.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 우리의 가치 */}
-        <section className="py-24">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <Badge variant="secondary" className="mb-4">
-                Our Values
-              </Badge>
-
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                고객 중심의 핵심 가치
-              </h2>
-
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                모든 서비스와 의사결정의 기준이 되는 우리의 핵심 가치입니다
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {values.map((value, index) => (
-                <div
-                  key={index}
-                  className="card-modern p-6 text-center animate-up"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary mx-auto mb-4">
-                    <value.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-3">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm text-pretty">
-                    {value.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 업종별 전문성 */}
-        <section className="py-24 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <Badge variant="secondary" className="mb-4">
-                Industry Expertise
-              </Badge>
-
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                업종별 전문 자산관리
-              </h2>
-
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                각 업종의 특성과 리스크를 정확히 이해하는 전문적인 서비스
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {specialties.map((specialty, index) => (
-                <div
-                  key={index}
-                  className="card-modern p-8 animate-up"
-                  style={{ animationDelay: `${index * 150}ms` }}
-                >
-                  <div className="flex items-start space-x-4 mb-6">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0">
-                      <specialty.icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">
-                        {specialty.title}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {specialty.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    {specialty.features.map((feature, featureIndex) => (
-                      <div
-                        key={featureIndex}
-                        className="flex items-center space-x-2"
-                      >
-                        <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                        <span className="text-sm text-muted-foreground">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 전문가 팀 */}
-        <section className="py-24">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <Badge variant="secondary" className="mb-4">
+              <Badge variant="outline" className="mb-4">
+                <Users className="h-3 w-3 mr-1" />
                 Expert Team
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 중소중견기업 전문가 팀
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                20년 이상의 경험을 보유한 중소중견기업 자산관리 전문가들이
-                함께합니다
+                20년 이상의 경험을 보유한 중소중견기업 자산관리 전문가들이 함께합니다
               </p>
             </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {/* 임재홍 */}
-              <div
-                className="card-modern p-8 text-center animate-up"
-                style={{ animationDelay: `0ms` }}
-              >
-                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Users className="h-12 w-12 text-primary" />
-                </div>
-                <h3 className="font-semibold text-lg mb-1">임재홍</h3>
-                <p className="text-primary font-medium mb-1">
-                  대표 컨설턴트 / 수석
-                </p>
-                <p className="text-sm text-muted-foreground mb-2">
-                  중소중견기업 전문, 패밀리오피스 설계
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  대형 금융그룹 출신으로 중소중견기업 자산관리 경험과 전문성
-                  보유
-                </p>
-              </div>
-              {/* 장현오 */}
-              <div
-                className="card-modern p-8 text-center animate-up"
-                style={{ animationDelay: `150ms` }}
-              >
-                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Users className="h-12 w-12 text-primary" />
-                </div>
-                <h3 className="font-semibold text-lg mb-1">장현오</h3>
-                <p className="text-primary font-medium mb-1 playfair-display-bold">
-                  FamilyOffice S
-                </p>
-                <p className="text-sm text-muted-foreground mb-2">
-                  제조업·건설업 전문, 중대재해처벌법 대응
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  위험업종 전문 보험설계 및 기업재해보장보험 설계 전문가
-                </p>
-              </div>
-              {/* 박병학 */}
-              <div
-                className="card-modern p-8 text-center animate-up"
-                style={{ animationDelay: `300ms` }}
-              >
-                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Users className="h-12 w-12 text-primary" />
-                </div>
-                <h3 className="font-semibold text-lg mb-1">박병학</h3>
-                <p className="text-primary font-medium mb-1">
-                  세무 회계 본부장
-                </p>
-                <p className="text-sm text-muted-foreground mb-2">
-                  가족법인 설립, 승계 설계, MSO 구조화
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  Big4 회계법인 출신으로 중소중견기업 세무 및 승계 전문가
-                </p>
-              </div>
-              {/* 주상미 */}
-              <div
-                className="card-modern p-8 text-center animate-up"
-                style={{ animationDelay: `450ms` }}
-              >
-                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Users className="h-12 w-12 text-primary" />
-                </div>
-                <h3 className="font-semibold text-lg mb-1">주상미</h3>
-                <p className="text-primary font-medium mb-1">
-                  FP (Financial Planner)
-                </p>
-                <p className="text-sm text-muted-foreground mb-2">
-                  투자 포트폴리오 관리, 리스크 헤지
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  투자은행 출신으로 중소중견기업 맞춤형 투자전략 설계 전문가
-                </p>
-              </div>
+              {[
+                {
+                  name: '임재홍',
+                  position: '대표 컨설턴트 / 수석',
+                  specialty: '중소중견기업 전문, 패밀리오피스 설계',
+                  description: '대형 금융그룹 출신으로 중소중견기업 자산관리 경험과 전문성 보유',
+                },
+                {
+                  name: '장현오',
+                  position: 'FamilyOffice S',
+                  specialty: '제조업·건설업 전문, 중대재해처벌법 대응',
+                  description: '위험업종 전문 보험설계 및 기업재해보장보험 설계 전문가',
+                },
+                {
+                  name: '박병학',
+                  position: '세무 회계 본부장',
+                  specialty: '가족법인 설립, 승계 설계, MSO 구조화',
+                  description: 'Big4 회계법인 출신으로 중소중견기업 세무 및 승계 전문가',
+                },
+                {
+                  name: '주상미',
+                  position: 'FP (Financial Planner)',
+                  specialty: '투자 포트폴리오 관리, 리스크 헤지',
+                  description: '투자은행 출신으로 중소중견기업 맞춤형 투자전략 설계 전문가',
+                },
+              ].map((expert, index) => (
+                <Card key={index} className="text-center">
+                  <CardHeader>
+                    <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
+                      <Users className="h-12 w-12 text-primary" />
+                    </div>
+                    <CardTitle className="text-lg">{expert.name}</CardTitle>
+                    <p className="text-primary font-medium">{expert.position}</p>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {expert.specialty}
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      {expert.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section> */}
+
+        {/* 핵심 가치 섹션 */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4">
+                <Target className="h-3 w-3 mr-1" />
+                Core Values
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                FamilyOffice S의 <span className="text-primary">핵심 가치</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <Shield className="h-8 w-8" />,
+                  title: '신뢰와 투명성',
+                  description: '고객의 자산을 내 자산처럼 소중히 여기며, 모든 거래와 운용 과정을 투명하게 공개합니다.',
+                  features: [
+                    '실시간 자산 현황 공개',
+                    '투명한 수수료 구조',
+                    '정기적인 운용 보고서 제공',
+                  ],
+                },
+                {
+                  icon: <Users className="h-8 w-8" />,
+                  title: '전문성과 경험',
+                  description: '20년 이상의 중소중견기업 전문 경험을 바탕으로 최적의 자산관리 솔루션을 제공합니다.',
+                  features: [
+                    '중소중견기업 특화 노하우',
+                    '업종별 맞춤 전략',
+                    '지속적인 전문가 교육',
+                  ],
+                },
+                {
+                  icon: <Target className="h-8 w-8" />,
+                  title: '맞춤형 서비스',
+                  description: '획일화된 서비스가 아닌, 각 기업의 특성과 목표에 맞는 개별화된 서비스를 제공합니다.',
+                  features: [
+                    '개별 기업 분석',
+                    '맞춤형 포트폴리오 구성',
+                    '전담 전문가 배정',
+                  ],
+                },
+              ].map((value, index) => (
+                <Card key={index} className="text-center h-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg dark:hover:shadow-xl">
+                  <CardHeader>
+                    <div className="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center text-primary">
+                      {value.icon}
+                    </div>
+                    <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">{value.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex flex-col">
+                    <p className="text-muted-foreground dark:text-gray-300 mb-6 flex-1 transition-colors duration-300">
+                      {value.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {value.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm">
+                          <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0" />
+                          <span className="text-gray-700 dark:text-gray-300 transition-colors duration-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
 
         {/* CTA 섹션 */}
-        <section className="py-24 bg-primary text-primary-foreground">
+        <section className="py-20 bg-gradient-to-r from-primary/5 to-primary/10">
           <div className="container mx-auto px-4 text-center">
+            <Badge variant="outline" className="mb-4">
+              <Phone className="h-3 w-3 mr-1" />
+              Contact Us
+            </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              지금 바로 시작하세요
+              중소중견기업 전문 자산관리 상담
             </h2>
-
-            <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
-              중소중견기업 전문가와의 1:1 무료 상담을 통해 맞춤형 패밀리오피스
-              솔루션을 확인해보세요
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              귀하의 기업에 최적화된 자산관리 전략을 함께 설계해보세요
             </p>
-
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-lg"
-              >
-                무료 상담 신청
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-
-              <Link
-                href="/services"
-                className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 border border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary shadow-lg"
-              >
-                서비스 자세히 보기
-              </Link>
+              <Button size="lg" asChild>
+                <Link href="/contact" className="flex items-center">
+                  무료 상담 신청
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link href="/services">서비스 자세히 보기</Link>
+              </Button>
             </div>
           </div>
         </section>

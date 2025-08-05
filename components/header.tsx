@@ -2,7 +2,7 @@
 
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 
-import { useState, useCallback, memo } from 'react';
+import { useState, useCallback, memo, useEffect } from 'react';
 import type { MouseEventHandler, KeyboardEvent } from 'react';
 
 import Link from 'next/link';
@@ -25,6 +25,13 @@ export const Header = memo(function Header({
   isScrolled = false,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsClient(true);
+  }, []);
 
   const toggleMobileMenu: MouseEventHandler<HTMLButtonElement> = useCallback(
     e => {
@@ -48,6 +55,23 @@ export const Header = memo(function Header({
     [isMobileMenuOpen]
   );
 
+  // SSR 방지: 마운트되기 전에는 기본 헤더만 표시
+  if (!mounted || !isClient) {
+    return (
+      <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-3">
+            <div className="flex justify-start lg:w-0 lg:flex-1">
+              <a href="/" className="transition-opacity hover:opacity-80">
+                <span className="sr-only">FamilyOffice S</span>
+                <MinimalFamilyOfficeLogo className="h-10 w-auto" />
+              </a>
+            </div>
+          </div>
+        </nav>
+      </header>
+    );
+  }
 
   return (
     <header
@@ -175,7 +199,7 @@ export const Header = memo(function Header({
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 space-x-4">
             <ThemeToggle />
 
-            {/* 컨설팅 신청 버튼 - hydration 오류 방지를 위해 Link 직접 사용 */}
+            {/* 컨설팅 신청 버튼 */}
             <Link
               href="/contact"
               className="inline-flex items-center justify-center rounded-xl text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-9 px-3 bg-primary text-primary-foreground shadow hover:bg-primary/90"
