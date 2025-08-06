@@ -77,7 +77,7 @@ export const Header = memo(function Header({
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-200 border-b ${
         isScrolled || isMobileMenuOpen
-          ? 'bg-background/80 backdrop-blur-md border-border'
+          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-gray-200 dark:border-gray-800'
           : 'bg-transparent border-transparent'
       }`}
       role="banner"
@@ -107,7 +107,7 @@ export const Header = memo(function Header({
               variant="ghost"
               onClick={toggleMobileMenu}
               onKeyDown={handleKeyDown}
-              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary hover:bg-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 dark:text-gray-100 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary transition-colors"
               aria-label={isMobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
@@ -117,7 +117,7 @@ export const Header = memo(function Header({
               </span>
               <ClientOnlyIcon
                 icon={isMobileMenuOpen ? X : Menu}
-                className="h-6 w-6"
+                className="h-6 w-6 text-gray-900 dark:text-gray-100"
                 aria-hidden="true"
               />
             </Button>
@@ -216,7 +216,7 @@ export const Header = memo(function Header({
       {isMobileMenuOpen && (
         <div
           id="mobile-menu"
-          className="md:hidden bg-background/95 backdrop-blur-sm border-t border-border"
+          className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800"
           role="navigation"
           aria-label="모바일 메뉴"
         >
@@ -225,7 +225,7 @@ export const Header = memo(function Header({
               <div key={item.href}>
                 {item.submenu ? (
                   <div className="space-y-1">
-                    <div className="px-3 py-2 text-base font-medium text-foreground">
+                    <div className="px-3 py-2 text-base font-medium text-gray-900 dark:text-gray-100">
                       {item.label}
                     </div>
                     <div className="pl-4 space-y-1">
@@ -239,7 +239,7 @@ export const Header = memo(function Header({
                               ? 'noopener noreferrer'
                               : undefined
                           }
-                          className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                          className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
                           onClick={handleMobileLinkClick}
                           aria-label={
                             subItem.isExternal
@@ -257,7 +257,7 @@ export const Header = memo(function Header({
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                    className="block px-3 py-2 text-base font-medium text-gray-900 dark:text-gray-100 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
                     onClick={handleMobileLinkClick}
                     aria-label={
                       item.isExternal
@@ -272,9 +272,9 @@ export const Header = memo(function Header({
             ))}
 
             {/* 모바일 테마 토글과 컨설팅 신청 버튼 */}
-            <div className="pt-4 border-t border-border space-y-3">
+            <div className="pt-4 border-t border-gray-200 dark:border-gray-800 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-foreground">
+                <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                   테마 설정
                 </span>
                 <ThemeToggle />
