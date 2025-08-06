@@ -45,20 +45,20 @@ export function HeroSection() {
         </div>
 
         {/* 메인 헤드라인 */}
-        <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+        <h1 className="font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
           百年永續
         </h1>
 
         {/* 서브 헤드라인 */}
         <p
-          className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
+          className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
           style={{ animationDelay: '200ms' }}
         >
           기업의 가치를 다음 세대로
         </p>
 
         <p
-          className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed px-4"
           style={{ animationDelay: '300ms' }}
         >
           성공적인 가업승계는 百年永續의 시작입니다
@@ -66,11 +66,11 @@ export function HeroSection() {
 
         {/* 핵심 성과 지표 */}
         <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 animate-slide-up"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12 animate-slide-up px-4"
           style={{ animationDelay: '400ms' }}
         >
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-2">
               <AnimatedCounter
                 end={10}
                 suffix="년+"
@@ -79,10 +79,10 @@ export function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-sm text-muted-foreground">가업승계 노하우</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">가업승계 노하우</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
               <AnimatedCounter
                 end={1500}
                 suffix="+"
@@ -91,14 +91,14 @@ export function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-xs sm:text-sm text-muted-foreground">
               M&A 플랫폼
-              <br />
-              잠재 매수기업
+              <br className="hidden sm:inline" />
+              <span className="sm:hidden"> </span>잠재 매수기업
             </div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-violet-600 dark:text-violet-400 mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-violet-600 dark:text-violet-400 mb-2">
               <AnimatedCounter
                 end={60}
                 suffix="+"
@@ -107,14 +107,14 @@ export function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-xs sm:text-sm text-muted-foreground">
               Big 4 출신
-              <br />
-              전문가 컨소시엄
+              <br className="hidden sm:inline" />
+              <span className="sm:hidden"> </span>전문가 컨소시엄
             </div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">
               <AnimatedCounter
                 end={88}
                 suffix="%"
@@ -123,22 +123,22 @@ export function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-xs sm:text-sm text-muted-foreground">
               법인 CEO
-              <br />
-              고정자산 비중
+              <br className="hidden sm:inline" />
+              <span className="sm:hidden"> </span>고정자산 비중
             </div>
           </div>
         </div>
 
         {/* CTA 버튼 */}
         <div
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-16 animate-slide-up px-4"
           style={{ animationDelay: '500ms' }}
         >
           <Button
             size="lg"
-            className="font-bold px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white shadow-lg"
+            className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white shadow-lg"
             onClick={() => {
               document.getElementById('ai-consulting')?.scrollIntoView({
                 behavior: 'smooth',
@@ -152,7 +152,7 @@ export function HeroSection() {
           <Button
             size="lg"
             variant="outline"
-            className="font-semibold px-8 py-4 text-lg"
+            className="font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
             onClick={() => {
               document.getElementById('services')?.scrollIntoView({
                 behavior: 'smooth',

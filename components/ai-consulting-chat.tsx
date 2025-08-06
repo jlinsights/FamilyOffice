@@ -268,12 +268,12 @@ export function AIConsultingChat({
         {/* 메시지 영역 */}
         <ScrollArea 
           ref={scrollAreaRef}
-          className="flex-1 p-4"
+          className="flex-1 p-2 sm:p-4"
           style={{ maxHeight }}
         >
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {messages.map((message) => (
-              <div key={message.id} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={message.id} className={`flex gap-2 sm:gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'assistant' && (
                   <div className="flex-shrink-0">
                     {message.loading ? (
@@ -288,7 +288,7 @@ export function AIConsultingChat({
                   </div>
                 )}
 
-                <div className={`max-w-[80%] ${message.role === 'user' ? 'order-first' : ''}`}>
+                <div className={`max-w-[85%] sm:max-w-[80%] ${message.role === 'user' ? 'order-first' : ''}`}>
                   {message.role === 'user' && (
                     <div className="flex items-center gap-2 mb-1 justify-end">
                       <span className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300" suppressHydrationWarning>
@@ -298,7 +298,7 @@ export function AIConsultingChat({
                     </div>
                   )}
 
-                  <div className={`p-3 rounded-lg transition-colors duration-300 ${
+                  <div className={`p-2 sm:p-3 rounded-lg transition-colors duration-300 ${
                     message.role === 'user' 
                       ? 'bg-blue-600 dark:bg-blue-700 text-white ml-auto shadow-sm' 
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-600'
@@ -316,7 +316,7 @@ export function AIConsultingChat({
                   {/* AI 응답 메타데이터 */}
                   {message.consultation && (
                     <div className="mt-2 space-y-2">
-                      <div className="flex flex-wrap gap-2 text-xs">
+                      <div className="flex flex-wrap gap-1 sm:gap-2 text-xs">
                         <Badge variant="outline" className="gap-1 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 transition-colors duration-300">
                           <Brain className="h-3 w-3" />
                           {formatAIModel(message.consultation.ai_used)}
@@ -382,7 +382,7 @@ export function AIConsultingChat({
         </ScrollArea>
 
         {/* 입력 영역 */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300">
+        <div className="p-2 sm:p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300">
           <div className="flex gap-2">
             <div className="flex-1">
               <Textarea
@@ -409,9 +409,9 @@ export function AIConsultingChat({
             </Button>
           </div>
           
-          <div className="flex items-center justify-between mt-2 text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-2 gap-1 text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">
             <span>Shift + Enter로 줄바꿈</span>
-            <span>최신 AI 기술 기반 전문 컨설팅</span>
+            <span className="text-right">최신 AI 기술 기반 전문 컨설팅</span>
           </div>
         </div>
       </CardContent>
