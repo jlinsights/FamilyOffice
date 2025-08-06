@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 
 import { useEffect, useState, useCallback } from 'react';
+import Script from 'next/script';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -316,35 +317,66 @@ export default function RecruitPage() {
 
             {/* 2x1 Grid Layout: Luma Calendar + Job Positions */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              {/* Left Grid: Luma Calendar */}
+              {/* Left Grid: Recruitment Calendar & Consultation */}
               <Card className="h-fit dark:bg-gray-800 dark:border-gray-700">
                 <CardHeader>
                   <CardTitle className="text-xl text-center text-foreground dark:text-white">
-                    📅 채용 일정 및 상담 예약
+                    🚀 채용 프로그램 & 개별 상담
                   </CardTitle>
+                  <p className="text-sm text-center text-muted-foreground dark:text-gray-300 mt-2">
+                    잡페어 참석 및 개별 인터뷰 상담을 예약하세요
+                  </p>
                 </CardHeader>
-                <CardContent className="p-6">
-                  <div className="w-full flex justify-center">
-                    <iframe
-                      src="https://lu.ma/embed/calendar/cal-u8wu7qsSnM6rstO/events"
-                      width="100%"
-                      height="500"
-                      className="w-full max-w-full"
-                      style={{
-                        border: '1px solid #bfcbda88',
-                        borderRadius: '8px',
-                        minHeight: '500px'
-                      }}
-                      frameBorder="0"
-                      allowFullScreen
-                      aria-hidden="false"
-                      tabIndex={0}
-                      title="FamilyOffice 채용 일정"
-                    />
+                <CardContent className="p-6 space-y-6">
+                  {/* Job Fair Calendar */}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-foreground dark:text-white flex items-center">
+                      <Users className="h-5 w-5 mr-2 text-primary" />
+                      잡페어 일정
+                    </h3>
+                    <div className="w-full flex justify-center">
+                      <iframe
+                        src="https://lu.ma/embed/calendar/cal-u8wu7qsSnM6rstO/events"
+                        width="100%"
+                        height="400"
+                        className="w-full max-w-full"
+                        style={{
+                          border: '1px solid #bfcbda88',
+                          borderRadius: '8px',
+                          minHeight: '400px'
+                        }}
+                        frameBorder="0"
+                        allowFullScreen
+                        aria-hidden="false"
+                        tabIndex={0}
+                        title="FamilyOffice 잡페어 일정"
+                      />
+                    </div>
+                    <p className="text-sm text-muted-foreground dark:text-gray-300 mt-2 text-center">
+                      📍 위 캘린더에서 잡페어 일정을 확인하고 참석 신청하실 수 있습니다
+                    </p>
                   </div>
-                  <div className="mt-4 text-center">
-                    <p className="text-sm text-muted-foreground dark:text-gray-300">
-                      위 캘린더에서 면접 및 상담 일정을 확인하고 예약하실 수 있습니다.
+
+                  {/* Divider */}
+                  <div className="flex items-center">
+                    <div className="flex-1 border-t border-gray-200 dark:border-gray-600"></div>
+                    <div className="px-4 text-sm text-muted-foreground dark:text-gray-400">또는</div>
+                    <div className="flex-1 border-t border-gray-200 dark:border-gray-600"></div>
+                  </div>
+
+                  {/* Individual Consultation */}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-foreground dark:text-white flex items-center">
+                      <Briefcase className="h-5 w-5 mr-2 text-primary" />
+                      개별 인터뷰 상담
+                    </h3>
+                    <div 
+                      style={{width:'100%', height:'500px', overflow:'scroll'}} 
+                      id="my-cal-inline-recruit"
+                      className="border border-gray-200 dark:border-gray-600 rounded-lg"
+                    />
+                    <p className="text-sm text-muted-foreground dark:text-gray-300 mt-2 text-center">
+                      💼 구직자 개별 상담 및 인터뷰 일정을 직접 예약하실 수 있습니다
                     </p>
                   </div>
                 </CardContent>
@@ -467,6 +499,59 @@ export default function RecruitPage() {
       </main>
 
       <Footer />
+
+      {/* Cal.com Script for Individual Consultation */}
+      <Script
+        id="cal-embed-script"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function (C, A, L) { 
+              let p = function (a, ar) { a.q.push(ar); }; 
+              let d = C.document; 
+              C.Cal = C.Cal || function () { 
+                let cal = C.Cal; 
+                let ar = arguments; 
+                if (!cal.loaded) { 
+                  cal.ns = {}; 
+                  cal.q = cal.q || []; 
+                  d.head.appendChild(d.createElement("script")).src = A; 
+                  cal.loaded = true; 
+                } 
+                if (ar[0] === L) { 
+                  const api = function () { p(api, arguments); }; 
+                  const namespace = ar[1]; 
+                  api.q = api.q || []; 
+                  if(typeof namespace === "string"){
+                    cal.ns[namespace] = cal.ns[namespace] || api;
+                    p(cal.ns[namespace], ar);
+                    p(cal, ["initNamespace", namespace]);
+                  } else p(cal, ar); 
+                  return;
+                } 
+                p(cal, ar); 
+              }; 
+            })(window, "https://app.cal.com/embed/embed.js", "init");
+            
+            Cal("init", "recruit", {origin:"https://app.cal.com"});
+            
+            Cal.ns.recruit("inline", {
+              elementOrSelector:"#my-cal-inline-recruit",
+              config: {"layout":"month_view"},
+              calLink: "familyoffice/recruit",
+            });
+            
+            Cal.ns.recruit("ui", {
+              "cssVarsPerTheme": {
+                "light": {"cal-brand":"#000000"},
+                "dark": {"cal-brand":"#ffffff"}
+              },
+              "hideEventTypeDetails": false,
+              "layout": "month_view"
+            });
+          `
+        }}
+      />
     </div>
   );
 }
