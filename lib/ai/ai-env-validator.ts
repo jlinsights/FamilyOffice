@@ -41,7 +41,7 @@ export class AIEnvironmentValidator {
     results.overall = results.claude.valid || results.openai.valid || results.gemini.valid;
 
     this.validationCache.set(cacheKey, {
-      valid: results,
+      valid: results.overall,
       timestamp: Date.now()
     });
 
