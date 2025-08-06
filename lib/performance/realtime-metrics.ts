@@ -39,7 +39,7 @@ class RealTimePerformanceMonitor {
             case 'layout-shift':
               if (!(entry as any).hadRecentInput) {
                 this.metrics.cls = (this.metrics.cls || 0) + (entry as any).value;
-                this.reportMetric('CLS', this.metrics.cls);
+                this.reportMetric('CLS', this.metrics.cls || 0);
               }
               break;
           }

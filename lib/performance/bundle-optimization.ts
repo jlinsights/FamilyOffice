@@ -21,29 +21,29 @@ export const LazyDatePicker = () => {
   return import('react-day-picker');
 };
 
-// Selective icon imports (대신 전체 lucide-react import)
+// Selective icon imports - dynamically import lucide-react icons
 export const optimizedIconImports = {
-  // 자주 사용되는 아이콘만 선별 import
-  Calendar: () => import('lucide-react/dist/esm/icons/calendar').then(m => m.Calendar),
-  TrendingUp: () => import('lucide-react/dist/esm/icons/trending-up').then(m => m.TrendingUp),
-  DollarSign: () => import('lucide-react/dist/esm/icons/dollar-sign').then(m => m.DollarSign),
-  User: () => import('lucide-react/dist/esm/icons/user').then(m => m.User),
-  Settings: () => import('lucide-react/dist/esm/icons/settings').then(m => m.Settings),
+  // 자주 사용되는 아이콘만 선별 import (일반적인 방식 사용)
+  Calendar: () => import('lucide-react').then(m => ({ Calendar: m.Calendar })),
+  TrendingUp: () => import('lucide-react').then(m => ({ TrendingUp: m.TrendingUp })),
+  DollarSign: () => import('lucide-react').then(m => ({ DollarSign: m.DollarSign })),
+  User: () => import('lucide-react').then(m => ({ User: m.User })),
+  Settings: () => import('lucide-react').then(m => ({ Settings: m.Settings })),
 };
 
-// Chart.js 최적화 (recharts 대안)
-export const LazyChart = () => {
-  return import('chart.js/auto').then(Chart => ({
-    Chart: Chart.default,
-    CategoryScale: Chart.CategoryScale,
-    LinearScale: Chart.LinearScale,
-    PointElement: Chart.PointElement,
-    LineElement: Chart.LineElement,
-    Title: Chart.Title,
-    Tooltip: Chart.Tooltip,
-    Legend: Chart.Legend,
-  }));
-};
+// Chart.js 최적화 (recharts 대안) - 필요시 설치 후 사용
+// export const LazyChart = () => {
+//   return import('chart.js/auto').then(Chart => ({
+//     Chart: Chart.default,
+//     CategoryScale: Chart.CategoryScale,
+//     LinearScale: Chart.LinearScale,
+//     PointElement: Chart.PointElement,
+//     LineElement: Chart.LineElement,
+//     Title: Chart.Title,
+//     Tooltip: Chart.Tooltip,
+//     Legend: Chart.Legend,
+//   }));
+// };
 
 // Korean font optimization
 export const optimizeKoreanFonts = () => {
@@ -121,7 +121,10 @@ export const memoryOptimizer = {
   optimizeReactRendering: () => {
     // React DevTools Production profiling
     if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
-      window.__REACT_DEVTOOLS_GLOBAL_HOOK__?.onCommitFiberRoot = () => {};
+      const hook = (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__;
+      if (hook && hook.onCommitFiberRoot) {
+        hook.onCommitFiberRoot = () => {};
+      }
     }
   }
 };
@@ -131,7 +134,6 @@ export default {
   LazyCalComEmbed,
   LazyDatePicker,
   optimizedIconImports,
-  LazyChart,
   optimizeKoreanFonts,
   imageOptimizations,
   setupServiceWorker,
