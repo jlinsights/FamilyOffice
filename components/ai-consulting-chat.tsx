@@ -251,7 +251,7 @@ export function AIConsultingChat({
         <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 transition-colors duration-300">
           <div className="flex items-center gap-2">
             <Brain className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-            <h3 className="font-semibold text-gray-900 dark:text-white transition-colors duration-300">FamilyOffice S AI Consulting</h3>
+            <h3 className="font-semibold text-gray-900 dark:text-white transition-colors duration-300">Wealth Advisor</h3>
             <Badge variant="secondary" className="ml-auto bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-colors duration-300">
               Premium AI
             </Badge>
