@@ -58,8 +58,8 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div className="max-w-4xl mx-auto">
-            <AIConsultingChat />
+          <div className="max-w-6xl mx-auto">
+            <AIConsultingChat maxHeight="800px" />
           </div>
         </div>
       </section>

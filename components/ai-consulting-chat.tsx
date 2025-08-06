@@ -21,7 +21,8 @@ import {
   CheckCircle,
   Loader2,
   FileText,
-  BarChart3
+  BarChart3,
+  ChevronUp
 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { ConsultationResponse } from '@/lib/ai/types';
@@ -44,7 +45,7 @@ interface AIConsultingChatProps {
 export function AIConsultingChat({ 
   className = '', 
   placeholder = '예: 우리 회사 상황에서 가장 효과적인 가업승계 방법은 무엇인가요?',
-  maxHeight = '600px'
+  maxHeight = '800px'
 }: AIConsultingChatProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -58,15 +59,17 @@ export function AIConsultingChat({
   const [isLoading, setIsLoading] = useState(false);
   const [rateLimitInfo, setRateLimitInfo] = useState<{remaining: number; reset: number} | null>(null);
   const [sessionQuestionCount, setSessionQuestionCount] = useState(0);
+  const [isUserScrolling, setIsUserScrolling] = useState(false);
+  const [lastMessageCount, setLastMessageCount] = useState(1);
   
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // 부드러운 자동 스크롤 (새 메시지가 추가될 때마다)
+  // 스마트 자동 스크롤 (사용자가 수동 스크롤하지 않은 경우에만)
   useEffect(() => {
     const scrollToBottom = () => {
-      if (messagesEndRef.current) {
+      if (messagesEndRef.current && !isUserScrolling) {
         messagesEndRef.current.scrollIntoView({ 
           behavior: 'smooth',
           block: 'end'
@@ -74,11 +77,39 @@ export function AIConsultingChat({
       }
     };
 
-    // 약간의 지연을 두어 DOM 업데이트 완료 후 스크롤
-    const timeoutId = setTimeout(scrollToBottom, 100);
+    // 새 메시지가 추가된 경우에만 스크롤
+    if (messages.length > lastMessageCount) {
+      const timeoutId = setTimeout(scrollToBottom, 100);
+      setLastMessageCount(messages.length);
+      return () => clearTimeout(timeoutId);
+    }
     
-    return () => clearTimeout(timeoutId);
-  }, [messages]);
+    // cleanup function을 항상 반환
+    return () => {};
+  }, [messages, isUserScrolling, lastMessageCount]);
+
+  // 스크롤 이벤트 감지
+  useEffect(() => {
+    const scrollArea = scrollAreaRef.current?.querySelector('[data-radix-scroll-area-viewport]');
+    if (!scrollArea) return;
+
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = scrollArea;
+      const isAtBottom = scrollHeight - scrollTop - clientHeight < 50;
+      
+      // 사용자가 맨 아래가 아닌 곳으로 스크롤한 경우 자동 스크롤 비활성화
+      if (!isAtBottom && !isUserScrolling) {
+        setIsUserScrolling(true);
+      }
+      // 사용자가 다시 맨 아래로 스크롤한 경우 자동 스크롤 활성화
+      else if (isAtBottom && isUserScrolling) {
+        setIsUserScrolling(false);
+      }
+    };
+
+    scrollArea.addEventListener('scroll', handleScroll);
+    return () => scrollArea.removeEventListener('scroll', handleScroll);
+  }, [isUserScrolling]);
 
   // 엔터키 전송 (Shift+Enter는 줄바꿈)
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -246,7 +277,7 @@ export function AIConsultingChat({
 
   return (
     <Card className={`w-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-all duration-300 ${className}`}>
-      <CardContent className="h-full flex flex-col p-0">
+      <CardContent className="h-full flex flex-col p-0 relative">
         {/* 헤더 */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 transition-colors duration-300">
           <div className="flex items-center gap-2">
@@ -268,8 +299,8 @@ export function AIConsultingChat({
         {/* 메시지 영역 */}
         <ScrollArea 
           ref={scrollAreaRef}
-          className="flex-1 p-2 sm:p-4"
-          style={{ maxHeight }}
+          className="flex-1 p-3 sm:p-6"
+          style={{ maxHeight, minHeight: '500px' }}
         >
           <div className="space-y-3 sm:space-y-4">
             {messages.map((message) => (
@@ -380,6 +411,24 @@ export function AIConsultingChat({
             <div ref={messagesEndRef} className="h-0" />
           </div>
         </ScrollArea>
+
+        {/* 스크롤 상단으로 버튼 - 사용자가 스크롤했을 때 표시 */}
+        {isUserScrolling && (
+          <div className="absolute bottom-20 right-4 z-10">
+            <Button
+              size="sm"
+              variant="outline"
+              className="rounded-full h-10 w-10 p-0 bg-white dark:bg-gray-800 shadow-lg border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
+              onClick={() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                setIsUserScrolling(false);
+              }}
+              title="최신 메시지로 이동"
+            >
+              <ChevronUp className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
 
         {/* 입력 영역 */}
         <div className="p-2 sm:p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300">
