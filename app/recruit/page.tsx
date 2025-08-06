@@ -314,78 +314,116 @@ export default function RecruitPage() {
               </p>
             </div>
 
-            <div className="space-y-6">
-              {positions.map((position, index) => (
-                <Card
-                  key={index}
-                  className="hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:border-gray-700"
-                >
-                  <CardHeader>
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <CardTitle className="text-xl mb-2 text-foreground dark:text-white">
-                          {position.title}
-                        </CardTitle>
-                        <div className="flex flex-wrap gap-2">
-                          <Badge
-                            variant="outline"
-                            className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
-                          >
-                            <Building className="h-3 w-3 mr-1" />
-                            {position.department}
-                          </Badge>
-                          <Badge
-                            variant="secondary"
-                            className="dark:bg-primary/80 dark:text-white dark:border-primary/60"
-                          >
-                            {position.type}
-                          </Badge>
-                          <Badge
-                            variant="outline"
-                            className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
-                          >
-                            <Clock className="h-3 w-3 mr-1" />
-                            {position.experience}
-                          </Badge>
-                          <Badge
-                            variant="outline"
-                            className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
-                          >
-                            <MapPin className="h-3 w-3 mr-1" />
-                            {position.location}
-                          </Badge>
-                        </div>
-                      </div>
-                      <Button
-                        className="mt-4 md:mt-0 dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
-                        onClick={() =>
-                          window.open(
-                            'https://cal.com/familyoffice/recruit',
-                            '_blank'
-                          )
-                        }
-                      >
-                        지원하기
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4 dark:text-gray-200">
-                      {position.description}
+            {/* 2x1 Grid Layout: Luma Calendar + Job Positions */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Left Grid: Luma Calendar */}
+              <Card className="h-fit dark:bg-gray-800 dark:border-gray-700">
+                <CardHeader>
+                  <CardTitle className="text-xl text-center text-foreground dark:text-white">
+                    📅 채용 일정 및 상담 예약
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <div className="w-full flex justify-center">
+                    <iframe
+                      src="https://lu.ma/embed/calendar/cal-u8wu7qsSnM6rstO/events"
+                      width="100%"
+                      height="500"
+                      className="w-full max-w-full"
+                      style={{
+                        border: '1px solid #bfcbda88',
+                        borderRadius: '8px',
+                        minHeight: '500px'
+                      }}
+                      frameBorder="0"
+                      allowFullScreen
+                      aria-hidden="false"
+                      tabIndex={0}
+                      title="FamilyOffice 채용 일정"
+                    />
+                  </div>
+                  <div className="mt-4 text-center">
+                    <p className="text-sm text-muted-foreground dark:text-gray-300">
+                      위 캘린더에서 면접 및 상담 일정을 확인하고 예약하실 수 있습니다.
                     </p>
-                    <div>
-                      <h4 className="font-semibold mb-2 text-foreground dark:text-white">
-                        지원 자격
-                      </h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground dark:text-gray-200">
-                        {position.requirements.map((req, reqIndex) => (
-                          <li key={reqIndex}>{req}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Right Grid: Job Positions */}
+              <div className="space-y-6">
+                {positions.map((position, index) => (
+                  <Card
+                    key={index}
+                    className="hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <CardHeader>
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                          <CardTitle className="text-xl mb-2 text-foreground dark:text-white">
+                            {position.title}
+                          </CardTitle>
+                          <div className="flex flex-wrap gap-2">
+                            <Badge
+                              variant="outline"
+                              className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                            >
+                              <Building className="h-3 w-3 mr-1" />
+                              {position.department}
+                            </Badge>
+                            <Badge
+                              variant="secondary"
+                              className="dark:bg-primary/80 dark:text-white dark:border-primary/60"
+                            >
+                              {position.type}
+                            </Badge>
+                            <Badge
+                              variant="outline"
+                              className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                            >
+                              <Clock className="h-3 w-3 mr-1" />
+                              {position.experience}
+                            </Badge>
+                            <Badge
+                              variant="outline"
+                              className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                            >
+                              <MapPin className="h-3 w-3 mr-1" />
+                              {position.location}
+                            </Badge>
+                          </div>
+                        </div>
+                        <Button
+                          className="mt-4 md:mt-0 dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
+                          onClick={() =>
+                            window.open(
+                              'https://cal.com/familyoffice/recruit',
+                              '_blank'
+                            )
+                          }
+                        >
+                          지원하기
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground mb-4 dark:text-gray-200">
+                        {position.description}
+                      </p>
+                      <div>
+                        <h4 className="font-semibold mb-2 text-foreground dark:text-white">
+                          지원 자격
+                        </h4>
+                        <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground dark:text-gray-200">
+                          {position.requirements.map((req, reqIndex) => (
+                            <li key={reqIndex}>{req}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </section>

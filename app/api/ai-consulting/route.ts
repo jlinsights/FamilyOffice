@@ -1,9 +1,10 @@
 // Triple-AI 컨설팅 API 엔드포인트
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
-import { createClient } from '@/lib/supabase/server';
-import { checkRateLimit, rateLimiters } from '@/lib/rate-limit';
+import { AIEnvironmentValidator } from '@/lib/ai/ai-env-validator';
 import type { ClientProfile, FileAttachment } from '@/lib/ai/types';
+import { checkRateLimit, rateLimiters } from '@/lib/rate-limit';
+import { createClient } from '@/lib/supabase/server';
+import { auth } from '@clerk/nextjs/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 // Lazy load AI service to avoid build-time initialization
 let tripleAI: any = null;
@@ -44,7 +45,12 @@ export async function POST(request: NextRequest) {
               error: 'Rate limit exceeded - 요청 한도를 초과했습니다',
               limit: rateLimitResult.total,
               remaining: rateLimitResult.remaining,
-              resetTime: rateLimitResult.reset
+              resetTime: rateLimitResult.reset,
+              cta: {
+                type: 'contact',
+                message: '긴급한 문의사항이 있으시면 직접 상담을 예약해주세요.',
+                link: '/contact'
+              }
             }, 
             { status: 429 }
           );
@@ -61,14 +67,28 @@ export async function POST(request: NextRequest) {
 
     if (!query || typeof query !== 'string' || query.trim().length === 0) {
       return NextResponse.json(
-        { error: 'Invalid query - 질문을 입력해주세요' }, 
+        { 
+          error: 'Invalid query - 질문을 입력해주세요',
+          cta: {
+            type: 'contact',
+            message: '구체적인 문의사항이 있으시면 상담을 예약해주세요.',
+            link: '/contact'
+          }
+        }, 
         { status: 400 }
       );
     }
 
     if (query.length > 5000) {
       return NextResponse.json(
-        { error: 'Query too long - 질문이 너무 깁니다 (최대 5000자)' }, 
+        { 
+          error: 'Query too long - 질문이 너무 깁니다 (최대 5000자)',
+          cta: {
+            type: 'contact',
+            message: '긴 문의사항은 상담을 통해 도움을 받으실 수 있습니다.',
+            link: '/contact'
+          }
+        }, 
         { status: 400 }
       );
     }
@@ -102,7 +122,14 @@ export async function POST(request: NextRequest) {
       if (userError || !userData) {
         console.error('User profile fetch error:', userError);
         return NextResponse.json(
-          { error: 'User profile not found - 사용자 정보를 찾을 수 없습니다' }, 
+          { 
+            error: 'User profile not found - 사용자 정보를 찾을 수 없습니다',
+            cta: {
+              type: 'contact',
+              message: '계정 문제가 있으시면 고객센터로 문의해주세요.',
+              link: '/contact'
+            }
+          }, 
           { status: 404 }
         );
       }
@@ -126,7 +153,14 @@ export async function POST(request: NextRequest) {
       for (const attachment of attachments.slice(0, 5)) { // 최대 5개
         if (attachment.size && attachment.size > 10 * 1024 * 1024) { // 10MB 제한
           return NextResponse.json(
-            { error: 'File too large - 파일 크기는 10MB 이하여야 합니다' }, 
+            { 
+              error: 'File too large - 파일 크기는 10MB 이하여야 합니다',
+              cta: {
+                type: 'contact',
+                message: '큰 파일은 상담을 통해 전달해주세요.',
+                link: '/contact'
+              }
+            }, 
             { status: 400 }
           );
         }
@@ -136,6 +170,16 @@ export async function POST(request: NextRequest) {
 
     // 6. Triple-AI 컨설팅 처리
     console.log(`[AI-Consulting] 컨설팅 시작: User=${effectiveUserId}, Query=${query.substring(0, 50)}...`);
+    
+    // AI 환경 검증
+    const envValidator = AIEnvironmentValidator.getInstance();
+    const envSummary = envValidator.getEnvironmentSummary();
+    
+    console.log('[AI-Consulting] AI 환경 상태:', {
+      isDevelopment: envSummary.isDevelopment,
+      availableServices: envSummary.availableServices,
+      missingServices: envSummary.missingServices
+    });
     
     let consultation;
     try {
@@ -182,7 +226,40 @@ export async function POST(request: NextRequest) {
           timestamp: new Date().toISOString()
         };
       } else {
-        throw aiError; // 프로덕션에서는 에러를 다시 던짐
+        // 프로덕션 환경에서는 상세한 오류 정보와 함께 CTA 제공
+        const errorDetails = aiError instanceof Error ? aiError.message : 'Unknown AI error';
+        console.error('[AI-Consulting] 상세 오류:', errorDetails);
+        
+        // 환경 상태에 따른 맞춤형 메시지
+        let errorMessage = '잠시 후 다시 시도해주시거나, 긴급한 경우 직접 상담을 예약해주세요.';
+        let ctaMessage = '전문 상담사와 직접 상담하시겠습니까?';
+        
+        if (envSummary.availableServices.length === 0) {
+          errorMessage = 'AI 서비스가 일시적으로 사용할 수 없습니다. 전문 상담사와 직접 상담해주세요.';
+          ctaMessage = '전문 상담사와 즉시 상담하시겠습니까?';
+        } else if (envSummary.missingServices.length > 0) {
+          errorMessage = `일부 AI 서비스(${envSummary.missingServices.join(', ')})가 사용할 수 없습니다. 전문 상담사와 상담해주세요.`;
+          ctaMessage = '더 정확한 답변을 위해 전문 상담사와 상담하시겠습니까?';
+        }
+        
+        return NextResponse.json(
+          { 
+            error: 'AI 컨설팅 처리 중 오류가 발생했습니다',
+            message: errorMessage,
+            details: isDevelopment ? errorDetails : undefined,
+            environment: {
+              availableServices: envSummary.availableServices,
+              missingServices: envSummary.missingServices
+            },
+            cta: {
+              type: 'contact',
+              message: ctaMessage,
+              link: '/contact',
+              buttonText: '상담 예약하기'
+            }
+          }, 
+          { status: 500 }
+        );
       }
     }
 
@@ -215,7 +292,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 8. 성공 응답
+    // 8. 성공 응답 (CTA 포함)
     console.log(`[AI-Consulting] 컨설팅 완료: ${consultation.id} (${consultation.response_time}ms)`);
     
     return NextResponse.json({
@@ -224,6 +301,12 @@ export async function POST(request: NextRequest) {
       rate_limit: {
         remaining: isDevelopment ? 999 : rateLimitResult.remaining,
         reset: isDevelopment ? Date.now() + 3600000 : rateLimitResult.reset
+      },
+      cta: {
+        type: 'contact',
+        message: '더 자세한 상담이 필요하시면 전문 상담사와 직접 상담하실 수 있습니다.',
+        link: '/contact',
+        buttonText: '상담 예약하기'
       }
     });
 
@@ -242,7 +325,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         error: 'Internal server error - 서버 오류가 발생했습니다',
-        message: errorMessage
+        message: errorMessage,
+        cta: {
+          type: 'contact',
+          message: '긴급한 문의사항이 있으시면 직접 상담을 예약해주세요.',
+          link: '/contact',
+          buttonText: '상담 예약하기'
+        }
       }, 
       { status: 500 }
     );

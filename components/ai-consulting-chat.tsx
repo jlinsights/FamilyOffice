@@ -1,31 +1,28 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { 
-  Send, 
-  Bot, 
-  User, 
-  Brain, 
-  Clock, 
-  DollarSign, 
-  TrendingUp,
-  AlertCircle,
-  CheckCircle,
-  Loader2,
-  FileText,
-  BarChart3,
-  ChevronUp
-} from 'lucide-react';
-import { toast } from 'sonner';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
 import type { ConsultationResponse } from '@/lib/ai/types';
+import {
+    AlertCircle,
+    BarChart3,
+    Bot,
+    Brain,
+    CheckCircle,
+    ChevronUp,
+    Clock,
+    DollarSign,
+    Loader2,
+    Send,
+    TrendingUp,
+    User
+} from 'lucide-react';
+import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 interface Message {
   id: string;
@@ -34,6 +31,12 @@ interface Message {
   timestamp: string;
   consultation?: ConsultationResponse;
   loading?: boolean;
+  cta?: {
+    type: 'contact';
+    message: string;
+    link: string;
+    buttonText?: string;
+  };
 }
 
 interface AIConsultingChatProps {
@@ -90,7 +93,7 @@ export function AIConsultingChat({
 
   // 스크롤 이벤트 감지
   useEffect(() => {
-    const scrollArea = scrollAreaRef.current?.querySelector('[data-radix-scroll-area-viewport]');
+    const scrollArea = scrollAreaRef.current;
     if (!scrollArea) return;
 
     const handleScroll = () => {
@@ -154,12 +157,14 @@ export function AIConsultingChat({
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || '컨설팅 요청 실패');
+        // 오류 응답에서 CTA 정보 추출
+        const cta = data.cta;
+        throw new Error(data.error || '컨설팅 요청 실패');
       }
 
-      const data = await response.json();
       const consultation = data.consultation as ConsultationResponse;
       
       // Rate limit 정보 업데이트
@@ -172,7 +177,8 @@ export function AIConsultingChat({
         role: 'assistant',
         content: consultation.response,
         timestamp: consultation.timestamp,
-        consultation: consultation
+        consultation: consultation,
+        cta: data.cta // 성공 응답의 CTA 정보
       };
 
       setMessages(prev => prev.slice(0, -1).concat([assistantMessage]));
@@ -184,11 +190,32 @@ export function AIConsultingChat({
     } catch (error: any) {
       console.error('AI 컨설팅 오류:', error);
       
+      // 오류 응답에서 CTA 정보 추출 시도
+      let ctaInfo = null;
+      try {
+        const errorResponse = await fetch('/api/ai-consulting', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: userMessage.content })
+        });
+        const errorData = await errorResponse.json();
+        ctaInfo = errorData.cta;
+      } catch (e) {
+        // CTA 정보 추출 실패시 기본값 사용
+        ctaInfo = {
+          type: 'contact',
+          message: '긴급한 문의사항이 있으시면 직접 상담을 예약해주세요.',
+          link: '/contact',
+          buttonText: '상담 예약하기'
+        };
+      }
+      
       const errorMessage: Message = {
         id: `error-${Date.now()}`,
         role: 'assistant',
         content: `죄송합니다. 컨설팅 처리 중 오류가 발생했습니다.\n\n${error.message}\n\n잠시 후 다시 시도해주시거나, 긴급한 경우 직접 상담을 예약해주세요.`,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        cta: ctaInfo
       };
 
       setMessages(prev => prev.slice(0, -1).concat([errorMessage]));
@@ -277,7 +304,7 @@ export function AIConsultingChat({
 
   return (
     <Card className={`w-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-all duration-300 ${className}`}>
-      <CardContent className="h-full flex flex-col p-0 relative">
+      <CardContent className="h-full flex flex-col p-0 relative" style={{ height: maxHeight }}>
         {/* 헤더 */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 transition-colors duration-300">
           <div className="flex items-center gap-2">
@@ -296,14 +323,19 @@ export function AIConsultingChat({
           )}
         </div>
 
-        {/* 메시지 영역 */}
-        <ScrollArea 
+        {/* 메시지 영역 - 향상된 스크롤 기능 */}
+        <div 
           ref={scrollAreaRef}
-          className="flex-1 p-3 sm:p-6"
-          style={{ maxHeight, minHeight: '500px' }}
+          className="flex-1 overflow-y-auto overflow-x-hidden ai-chat-scrollbar"
+          style={{ 
+            minHeight: '400px',
+            maxHeight: 'calc(100% - 200px)',
+            scrollBehavior: 'smooth'
+          }}
         >
-          <div className="space-y-3 sm:space-y-4">
-            {messages.map((message) => (
+          <div className="p-3 sm:p-6">
+            <div className="space-y-3 sm:space-y-4 pb-4">
+              {messages.map((message) => (
               <div key={message.id} className={`flex gap-2 sm:gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'assistant' && (
                   <div className="flex-shrink-0">
@@ -404,13 +436,40 @@ export function AIConsultingChat({
                       {new Date(message.timestamp).toLocaleTimeString('ko-KR')}
                     </div>
                   )}
+
+                  {/* CTA 버튼 */}
+                  {message.cta && message.cta.type === 'contact' && (
+                    <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <div className="flex-shrink-0">
+                          <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                            <User className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                            {message.cta.message}
+                          </p>
+                          <Link href={message.cta.link}>
+                            <Button 
+                              size="sm" 
+                              className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white transition-colors duration-300"
+                            >
+                              {message.cta.buttonText || '상담 예약하기'}
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
-            {/* 스크롤 앵커 - 항상 최신 메시지로 스크롤 */}
-            <div ref={messagesEndRef} className="h-0" />
+              {/* 스크롤 앵커 - 항상 최신 메시지로 스크롤 */}
+              <div ref={messagesEndRef} className="h-0" />
+            </div>
           </div>
-        </ScrollArea>
+        </div>
 
         {/* 스크롤 상단으로 버튼 - 사용자가 스크롤했을 때 표시 */}
         {isUserScrolling && (
