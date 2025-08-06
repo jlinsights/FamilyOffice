@@ -42,6 +42,16 @@ export function UpcomingSeminarsSection() {
     return SEMINAR_CATEGORIES.find(cat => cat.key === categoryKey);
   };
 
+  const isDatePassed = (dateString: string): boolean => {
+    const seminarDate = new Date(dateString);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set to start of today
+    return seminarDate < today;
+  };
+
+  // Filter out seminars with past dates
+  const upcomingSeminars = UPCOMING_SEMINARS.filter(seminar => !isDatePassed(seminar.date));
+
   const getLocationIcon = (type: string) => {
     switch (type) {
       case 'online':
@@ -90,8 +100,18 @@ export function UpcomingSeminarsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {UPCOMING_SEMINARS.map((seminar, index) => {
+        {upcomingSeminars.length === 0 ? (
+          <div className="text-center py-16">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+              현재 예정된 세미나가 없습니다
+            </h3>
+            <p className="text-muted-foreground dark:text-gray-300">
+              새로운 세미나 일정이 공지되면 안내해드리겠습니다.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {upcomingSeminars.map((seminar, index) => {
             const categoryInfo = getCategoryInfo(seminar.category);
             const LocationIcon = getLocationIcon(seminar.location.type);
 
@@ -293,7 +313,8 @@ export function UpcomingSeminarsSection() {
               </Card>
             );
           })}
-        </div>
+          </div>
+        )}
 
         {/* View All Button */}
         <div
