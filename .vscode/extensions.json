@@ -1,0 +1,47 @@
+{
+  "recommendations": [
+    // 필수 익스텐션
+    "ms-vscode.vscode-typescript-next",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "ms-playwright.playwright",
+    "ms-vscode.vscode-json",
+    
+    // Next.js & React
+    "burkeholland.simple-react-snippets",
+    "steoates.autoimport-es6-ts",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    
+    // 코드 품질
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "stylelint.vscode-stylelint",
+    "orta.vscode-jest",
+    
+    // 개발자 경험
+    "pkief.material-icon-theme",
+    "github.github-vscode-theme",
+    "streetsidesoftware.code-spell-checker",
+    "ms-vscode.live-server",
+    
+    // 금융 플랫폼 특화
+    "humao.rest-client",
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "ms-vscode.vscode-markdown",
+    
+    // 성능 & 모니터링
+    "ms-vscode.vscode-webpack-analyzer",
+    "ms-vscode.vscode-chrome-debug",
+    "ms-vscode.vscode-node-debug2",
+    
+    // AI 도우미 (선택사항)
+    "github.copilot",
+    "continue.continue"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript",
+    "hookyqr.beautify"
+  ]
+}

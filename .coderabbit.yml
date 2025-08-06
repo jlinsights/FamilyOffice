@@ -1,0 +1,135 @@
+# CodeRabbit Configuration for FamilyOffice
+# AI-powered code review and analysis settings
+
+# Review settings
+reviews:
+  # Profile: assertive (thorough), chill (gentle feedback)
+  profile: assertive
+  
+  # Request changes workflow in PRs
+  request_changes_workflow: true
+  
+  # High-level summary of changes
+  high_level_summary: true
+  
+  # Poem-style review summaries (optional fun feature)
+  poem: false
+  
+  # Focus areas for this financial platform
+  focus:
+    - security          # Critical for financial data
+    - performance       # Fast loading for user experience
+    - accessibility     # Inclusive design
+    - type-safety      # Strong TypeScript usage
+    - testing          # Comprehensive test coverage
+
+# Chat settings
+chat:
+  # Automatic replies to user questions
+  auto_reply: true
+
+# Language preference
+language: ko
+
+# Project-specific rules
+rules:
+  # Financial platform security requirements
+  security:
+    # Strict security checks for financial data handling
+    strict_mode: true
+    # Check for hardcoded secrets (API keys, passwords)
+    check_secrets: true
+    # Validate authentication flows
+    auth_validation: true
+    
+  # Performance requirements for premium UX  
+  performance:
+    # Bundle size monitoring
+    bundle_analysis: true
+    # Check for performance anti-patterns
+    anti_patterns: true
+    # Memory leak detection
+    memory_leaks: true
+    
+  # Code quality standards
+  quality:
+    # Enforce TypeScript strict mode
+    typescript_strict: true
+    # Check for proper error handling
+    error_handling: true
+    # Validate proper async/await usage
+    async_patterns: true
+    
+  # Next.js specific checks
+  nextjs:
+    # App Router best practices
+    app_router: true
+    # Server/Client component patterns
+    component_patterns: true
+    # SEO optimization
+    seo_optimization: true
+
+# File patterns to focus on
+include:
+  - "**/*.ts"
+  - "**/*.tsx" 
+  - "**/*.js"
+  - "**/*.jsx"
+  - "app/**/*"
+  - "components/**/*"
+  - "lib/**/*"
+
+# Files to exclude from review
+exclude:
+  - "node_modules/**"
+  - ".next/**"
+  - "coverage/**"
+  - "*.config.js"
+  - "*.config.ts"
+  - "public/**"
+
+# Custom prompts for financial domain
+prompts:
+  security: |
+    This is a premium wealth management platform handling sensitive financial data.
+    Pay special attention to:
+    - PII (Personally Identifiable Information) handling
+    - Authentication and authorization flows
+    - API security and rate limiting
+    - Clerk webhook signature validation
+    - Supabase RLS (Row Level Security) policies
+    
+  performance: |
+    This platform serves high-net-worth individuals who expect premium performance.
+    Focus on:
+    - Core Web Vitals optimization
+    - Financial API caching strategies
+    - Image optimization for Korean content
+    - Cal.com integration performance
+    - Real-time data loading patterns
+    
+  korean_localization: |
+    This is a Korean-focused financial platform.
+    Consider:
+    - Korean text rendering and typography
+    - Right-to-left number formatting for KRW
+    - Korean business hours and timezone handling
+    - Cultural appropriateness of financial terms
+    
+# Integration settings
+integrations:
+  # GitHub integration
+  github:
+    # Enable PR comments
+    pr_comments: true
+    # Enable issue creation for major findings
+    create_issues: false
+    # Auto-assign reviewers for security issues
+    auto_assign_security: true
+    
+  # Slack notifications (if configured)
+  slack:
+    enabled: false
+    # channels:
+    #   - "#development"
+    #   - "#security-alerts"

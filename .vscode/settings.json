@@ -1,0 +1,91 @@
+{
+  // TypeScript 최적화
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  
+  // Next.js 최적화
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  
+  // 한국어 개발 환경
+  "files.encoding": "utf8",
+  "files.autoGuessEncoding": true,
+  
+  // 성능 최적화
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/coverage/**": true,
+    "**/playwright-report/**": true
+  },
+  
+  // 자동 포맷팅
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  
+  // 금융 플랫폼 특화 설정
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": true,
+  "editor.minimap.scale": 2,
+  
+  // 디버깅 개선
+  "debug.inlineValues": "auto",
+  "debug.toolBarLocation": "floating",
+  
+  // 터미널 최적화
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontFamily": "Monaco, 'Courier New', monospace",
+  
+  // 익스텐션 추천
+  "extensions.showRecommendationsOnlyOnDemand": false,
+  
+  // 검색 최적화
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/coverage": true,
+    "**/.git": true,
+    "**/playwright-report": true
+  },
+  
+  // 파일 아이콘
+  "workbench.iconTheme": "material-icon-theme",
+  
+  // 색상 테마 (개발자 경험)
+  "workbench.colorTheme": "GitHub Dark",
+  
+  // 자동 완성 개선
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.suggest.showKeywords": true,
+  "editor.suggest.showSnippets": true,
+  
+  // Git 최적화
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  
+  // Playwright 지원
+  "[playwright]": {
+    "editor.defaultFormatter": "ms-playwright.playwright"
+  },
+  
+  // 한국어 맞춤법 검사 (선택사항)
+  "cSpell.language": "en,ko",
+  "cSpell.words": [
+    "familyoffice",
+    "supabase",
+    "playwright",
+    "coderabbit",
+    "nextjs"
+  ]
+}

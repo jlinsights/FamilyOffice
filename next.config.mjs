@@ -1,5 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // 개발 성능 최적화
+  experimental: {
+    turbo: {
+      enabled: process.env.NODE_ENV === 'development',
+    },
+    optimizePackageImports: [
+      '@radix-ui/react-icons',
+      'lucide-react',
+      'recharts',
+    ],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
