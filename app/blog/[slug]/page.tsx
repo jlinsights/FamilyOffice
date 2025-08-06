@@ -10,227 +10,10 @@ import { Card, CardContent } from '@/components/ui/card';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { blogPosts } from '@/lib/blog-data';
+import { NewsletterSubscription } from '@/components/newsletter-subscription';
 
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  category: string;
-  author: string;
-  date: string;
-  readTime: string;
-  tags: string[];
-  slug: string;
-}
-
-// This would typically come from a CMS or database
-const blogPosts: Record<string, BlogPost> = {
-  'korea-financial-services-opportunities': {
-    id: '1',
-    title:
-      "Korea's Financial Services Sector: Opportunities for Global Asset Managers",
-    excerpt:
-      '한국 금융 서비스 시장의 최신 동향과 글로벌 자산 운용사들을 위한 기회를 분석합니다.',
-    content: `
-# Korea's Financial Services Sector: A Gateway for Global Asset Managers
-
-Korea's financial services sector presents unprecedented opportunities for global asset managers looking to establish a presence in Asia's fourth-largest economy. With over **₩3,000 trillion** in institutional assets under management and a growing ultra-high net worth population, the market offers significant potential for strategic partnerships.
-
-## Market Overview
-
-The Korean financial services landscape has evolved dramatically over the past decade. Key developments include:
-
-### Regulatory Environment
-- **Financial Services Commission (FSC)** has streamlined foreign investment procedures
-- New regulations favor **institutional-grade** investment products
-- Enhanced **ESG reporting requirements** create opportunities for specialized funds
-
-### Market Dynamics
-- **Institutional investors** are increasingly seeking international diversification
-- **Family offices** are emerging as key decision-makers in asset allocation
-- **Pension funds** are mandated to increase alternative investment allocations
-
-## Strategic Entry Points
-
-### 1. Institutional Partnerships
-Global asset managers can establish partnerships with:
-- **National Pension Service (NPS)** - Korea's largest institutional investor
-- **Korea Investment Corporation (KIC)** - The sovereign wealth fund
-- **Major life insurance companies** seeking yield enhancement
-
-### 2. Family Office Network
-Korea's ultra-high net worth segment includes:
-- **Conglomerate founding families** (Chaebol)
-- **Technology entrepreneurs** from companies like Samsung, LG, and Naver
-- **Second-generation wealth** seeking professional management
-
-### 3. Distribution Channels
-Effective market entry requires understanding Korean distribution:
-- **Private banking units** of major banks
-- **Independent wealth managers** serving UHNW clients
-- **Multi-family offices** providing comprehensive services
-
-## Cultural Considerations
-
-Success in Korea requires understanding local business culture:
-
-### Relationship Building (관계)
-- **Long-term commitment** is valued over short-term gains
-- **Face-to-face meetings** remain crucial for trust-building
-- **Proper introductions** through mutual connections accelerate partnerships
-
-### Communication Style
-- **Hierarchical respect** in business interactions
-- **Consensus-building** approach to decision-making
-- **Cultural sensitivity** in marketing and service delivery
-
-## Implementation Strategy
-
-### Phase 1: Market Assessment (3-6 months)
-- Conduct comprehensive regulatory review
-- Identify key potential partners and clients
-- Establish local legal and tax advisory relationships
-
-### Phase 2: Partnership Development (6-12 months)
-- Initiate discussions with strategic partners
-- Develop Korea-specific investment products
-- Build local compliance and operations framework
-
-### Phase 3: Market Launch (12-18 months)
-- Launch pilot programs with select partners
-- Implement full-scale marketing and client acquisition
-- Establish permanent local presence
-
-## Success Factors
-
-Based on our experience with **15+ successful market entries**, key success factors include:
-
-1. **Local Partnership** - Collaborate with established Korean firms
-2. **Regulatory Compliance** - Ensure full compliance with FSC requirements
-3. **Cultural Adaptation** - Adapt investment products to local preferences
-4. **Long-term Commitment** - Demonstrate commitment to the Korean market
-
-## Conclusion
-
-Korea's financial services sector offers substantial opportunities for global asset managers willing to invest in proper market entry strategies. The combination of institutional demand, growing private wealth, and favorable regulatory environment creates an ideal backdrop for strategic partnerships.
-
-**Success requires patience, cultural understanding, and commitment to building long-term relationships in one of Asia's most sophisticated financial markets.**
-
----
-
-*For more insights on Korea market entry strategies and strategic partnerships, contact our team at [info@familyoffices.vip](mailto:info@familyoffices.vip)*
-    `,
-    category: 'Financial Services',
-    author: 'Jaehong Lim',
-    date: '2024-01-15',
-    readTime: '5 min read',
-    tags: [
-      'Financial Services',
-      'Asset Management',
-      'Korea Market',
-      'Strategic Partnerships',
-    ],
-    slug: 'korea-financial-services-opportunities',
-  },
-  'korean-business-culture-success-factors': {
-    id: '2',
-    title: 'Understanding Korean Business Culture: Key Success Factors',
-    excerpt:
-      '한국 비즈니스 문화를 이해하고 성공적인 파트너십을 구축하는 핵심 요소들을 살펴봅니다.',
-    content: `
-# Understanding Korean Business Culture: Key Success Factors
-
-Successful business partnerships in Korea require deep understanding of local culture, relationship dynamics, and business etiquette. This comprehensive guide explores the essential elements for building lasting business relationships in Korea.
-
-## Core Cultural Principles
-
-### Hierarchy and Respect (계급)
-Korean business culture is built on Confucian principles of hierarchy and respect:
-- **Age and seniority** play crucial roles in business interactions
-- **Proper titles and honorifics** must be used consistently
-- **Decision-making authority** often rests with senior executives
-
-### Relationship Building (관계)
-Long-term relationships are the foundation of Korean business:
-- **Trust-building** precedes transactional discussions
-- **Personal connections** often determine business outcomes
-- **Mutual obligations** create lasting partnerships
-
-## Business Etiquette Essentials
-
-### Meeting Protocols
-- **Punctuality** is highly valued and expected
-- **Business cards** should be exchanged with both hands
-- **Seating arrangements** follow hierarchical order
-- **Agenda adherence** shows respect for participants' time
-
-### Communication Style
-- **Indirect communication** is preferred over direct confrontation
-- **Saving face** is crucial for all parties involved
-- **Consensus building** takes precedence over individual opinions
-
-## Building Strategic Partnerships
-
-### Initial Approach
-1. **Proper introductions** through mutual connections
-2. **Research and preparation** about the partner company
-3. **Long-term vision** presentation rather than short-term gains
-4. **Cultural sensitivity** in all communications
-
-### Relationship Development
-- **Regular face-to-face meetings** to build trust
-- **Social interactions** outside formal business settings
-- **Consistent follow-through** on commitments
-- **Patience** with decision-making processes
-
-## Common Mistakes to Avoid
-
-### Cultural Missteps
-- **Rushing business discussions** without relationship building
-- **Ignoring hierarchy** in meetings and communications
-- **Over-aggressive negotiation** tactics
-- **Insufficient preparation** for cultural differences
-
-### Communication Errors
-- **Direct rejection** without providing alternatives
-- **Public criticism** or confrontation
-- **Impatience** with consensus-building processes
-- **Inadequate follow-up** on commitments
-
-## Success Strategies
-
-### For Global Companies
-1. **Invest in cultural training** for key personnel
-2. **Establish local representation** or partnerships
-3. **Adapt products/services** to local preferences
-4. **Demonstrate long-term commitment** to the market
-
-### For Individual Executives
-- **Learn basic Korean phrases** for relationship building
-- **Understand gift-giving customs** and appropriate occasions
-- **Respect work-life balance** expectations
-- **Show genuine interest** in Korean culture and history
-
-## Conclusion
-
-Understanding Korean business culture is essential for successful market entry and partnership development. Companies that invest time in cultural understanding and relationship building consistently outperform those that focus solely on transactional approaches.
-
-**Success in Korea requires patience, respect, and genuine commitment to building long-term relationships.**
-    `,
-    category: 'Cultural Insights',
-    author: 'Jaehong Lim',
-    date: '2024-01-10',
-    readTime: '7 min read',
-    tags: [
-      'Business Culture',
-      'Korea Market',
-      'Relationship Building',
-      'Cultural Insights',
-    ],
-    slug: 'korean-business-culture-success-factors',
-  },
-};
+// BlogPost interface and data imported from lib/blog-data
 
 export async function generateMetadata({
   params,
@@ -368,6 +151,14 @@ export default async function BlogPostPage({
                 </CardContent>
               </Card>
 
+              {/* Newsletter Subscription - Inline */}
+              <div className="mt-8">
+                <NewsletterSubscription 
+                  source={`blog-post-${slug}`}
+                  variant="inline"
+                />
+              </div>
+
               {/* Author Bio */}
               <Card className="mt-8 shadow-lg">
                 <CardContent className="p-8">
@@ -452,11 +243,11 @@ export default async function BlogPostPage({
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-2xl mx-auto">
               <h2 className="text-3xl font-bold text-white mb-4">
-                Ready to Enter the Korean Market?
+                FamilyOffice S 뉴스레터 구독하기
               </h2>
               <p className="text-xl text-blue-100 mb-8">
-                Get expert guidance on strategic partnerships and market entry
-                strategies.
+                매주 월·수·금 오전 9시 30분에 발송되는<br/>
+                패밀리오피스 전문 인사이트를 받아보세요.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
@@ -464,7 +255,9 @@ export default async function BlogPostPage({
                   className="bg-white text-blue-600 hover:bg-gray-100"
                   asChild
                 >
-                  <Link href="/contact">Schedule Consultation</Link>
+                  <Link href="https://newsletter.familyoffices.vip" target="_blank" rel="noopener noreferrer">
+                    뉴스레터 구독하기 →
+                  </Link>
                 </Button>
                 <Button
                   size="lg"
@@ -472,9 +265,12 @@ export default async function BlogPostPage({
                   className="border-white text-white hover:bg-white/10"
                   asChild
                 >
-                  <Link href="/services">Learn More About Our Services</Link>
+                  <Link href="/contact">무료 상담 신청</Link>
                 </Button>
               </div>
+              <p className="text-sm text-blue-100 mt-4 opacity-90">
+                매주 월·수·금 오전 9:30 정기 발송 | 500+ 중견기업 경영진 구독 중
+              </p>
             </div>
           </div>
         </section>

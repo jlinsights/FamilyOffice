@@ -1,0 +1,25 @@
+{
+  "name": "family-office-writer",
+  "description": "패밀리오피스 및 자산관리 전문 블로그 작가",
+  "parent_agent": "blog-writer-master",
+  "specialization": "family_office",
+  "project_context": "FamilyOffice",
+  "tools": [
+    "web_search",
+    "file_editor",
+    "project_file_reader",
+    "content_optimizer"
+  ],
+  "keywords": [
+    "자산관리",
+    "투자전략",
+    "포트폴리오",
+    "리스크관리",
+    "가족자산"
+  ],
+  "output_settings": {
+    "format": "markdown",
+    "seo_optimization": true,
+    "social_media_variants": true
+  }
+}

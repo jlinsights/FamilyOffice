@@ -31,6 +31,32 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       },
     ],
   },
+  {
+    href: '/blog',
+    label: '블로그',
+    submenu: [
+      {
+        href: '/blog',
+        label: '전체 포스트',
+        description: '자산관리 전문가의 최신 인사이트와 전략 분석',
+      },
+      {
+        href: '/blog?category=세무최적화',
+        label: '세무 최적화',
+        description: '상속세 절세와 세무 구조 개선 전략',
+      },
+      {
+        href: '/blog?category=투자전략',
+        label: '투자 전략',
+        description: '포트폴리오 최적화와 자산 배분 가이드',
+      },
+      {
+        href: '/blog?category=패밀리오피스',
+        label: '패밀리오피스',
+        description: '가족 자산관리와 승계 전략 인사이트',
+      },
+    ],
+  },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김

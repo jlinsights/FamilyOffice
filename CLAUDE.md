@@ -34,6 +34,16 @@ npm run vercel-build # Vercel-specific build process
 ### Key Integrations
 
 - **Cal.com** for consultation booking (`@calcom/embed-react`)
+- **Newsletter**: Beehiiv platform (https://newsletter.familyoffices.vip)
+  - 매주 월·수·금 오전 9:30 정기 발송
+  - API 통합으로 블로그에서 직접 구독 가능
+  - 태그 기반 세분화 및 추적
+- **Blog System**: /blog 페이지에서 자산관리 인사이트 제공
+  - **발행 일정**: 화요일 오후 2:30 (실무 가이드) + 목요일 저녁 8:00 (전략 분석)
+  - **콘텐츠 전략**: 교육형(화) + 분석형(목)
+  - SEO 최적화된 콘텐츠 관리
+  - Shield.io 배지 통합
+  - 뉴스레터 구독 연동
 - **v0 AI** integration for content generation
 - **Google Analytics 4** with structured data markup
 - **Financial APIs**: Yahoo Finance + Alpha Vantage for real-time stock/forex data
@@ -45,6 +55,7 @@ npm run vercel-build # Vercel-specific build process
 app/
 ├── api/webhooks/clerk/     # Clerk webhook for user sync
 ├── admin/                  # Admin dashboard (protected)
+├── blog/                   # Blog system (/blog + /blog/[slug])
 ├── (marketing pages)/      # Public pages with Korean content
 ├── layout.tsx             # Root layout with providers
 └── globals.css            # Tailwind base styles
@@ -57,6 +68,7 @@ components/
 
 lib/
 ├── supabase/              # Database client/server setup
+├── blog-data.ts           # Centralized blog content management
 ├── financial/             # Financial APIs & caching system
 │   ├── financial-service.ts  # Main service with failover
 │   ├── yahoo-finance.ts      # Yahoo Finance API client
@@ -66,6 +78,10 @@ lib/
 ├── user-sync.ts           # Clerk→Supabase sync logic
 ├── env.ts                 # Environment validation with Zod
 └── utils.ts               # Utility functions
+
+types/
+├── blog.ts                # Blog system type definitions
+└── (other type files)/    # Additional TypeScript types
 
 constants/
 ├── services.ts            # Service definitions by industry
