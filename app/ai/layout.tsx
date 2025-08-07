@@ -26,6 +26,10 @@ export const metadata: Metadata = generateMetadata(
     '인공지능 컨설턴트',
     'AI 기업컨설팅',
     'AI 법인상담',
+    'Instagram AI 상담',
+    'Threads AI 컨설팅',
+    '소셜미디어 AI 상담',
+    'SNS AI 컨설턴트',
   ]
 );
 

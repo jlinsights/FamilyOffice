@@ -45,6 +45,7 @@ export default function AIPage() {
   const shareOnSocialMedia = (platform: string) => {
     const text = 'FamilyOffice S AI 컨설턴트 - 24시간 가업승계, 자산관리 전문 상담';
     const url = shareUrl;
+    const hashtags = '#패밀리오피스 #AI컨설턴트 #가업승계 #자산관리 #CEO플랜';
     
     let shareLink = '';
     
@@ -57,10 +58,19 @@ export default function AIPage() {
         shareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         break;
       case 'twitter':
-        shareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        shareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent('패밀리오피스,AI컨설턴트,가업승계,자산관리')}`;
         break;
       case 'linkedin':
         shareLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        break;
+      case 'instagram':
+        // Instagram은 직접 링크 공유가 제한적이므로 클립보드 복사 후 안내
+        copyToClipboard();
+        alert('링크가 복사되었습니다!\n\nInstagram 스토리나 게시물에서 링크를 붙여넣어 주세요.\n\n추천 해시태그:\n' + hashtags);
+        return;
+      case 'threads':
+        // Threads 웹 공유 (Meta의 새로운 플랫폼)
+        shareLink = `https://www.threads.net/intent/post?text=${encodeURIComponent(text + '\n\n' + url + '\n\n' + hashtags)}`;
         break;
       default:
         return;
@@ -226,7 +236,7 @@ export default function AIPage() {
               <code className="text-primary font-mono text-lg break-all">{shareUrl}</code>
             </div>
             
-            <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:flex lg:flex-wrap justify-center gap-3">
               <Button 
                 variant="outline" 
                 onClick={() => shareOnSocialMedia('kakao')}
@@ -250,6 +260,20 @@ export default function AIPage() {
               </Button>
               <Button 
                 variant="outline" 
+                onClick={() => shareOnSocialMedia('instagram')}
+                className="bg-gradient-to-r from-pink-50 to-purple-50 hover:from-pink-100 hover:to-purple-100 border-pink-200 text-pink-800 dark:from-pink-900/20 dark:to-purple-900/20 dark:border-pink-800 dark:text-pink-400"
+              >
+                📷 인스타그램
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={() => shareOnSocialMedia('threads')}
+                className="bg-gray-50 hover:bg-gray-100 border-gray-200 text-gray-800 dark:bg-gray-900/20 dark:border-gray-700 dark:text-gray-400"
+              >
+                🧵 Threads
+              </Button>
+              <Button 
+                variant="outline" 
                 onClick={() => shareOnSocialMedia('linkedin')}
                 className="bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-800 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-400"
               >
@@ -257,9 +281,12 @@ export default function AIPage() {
               </Button>
             </div>
             
-            <div className="mt-6 text-center">
+            <div className="mt-6 text-center space-y-2">
               <p className="text-sm text-muted-foreground">
                 💡 <strong>Pro Tip:</strong> 북마크에 저장하면 언제든 쉽게 AI 상담을 받을 수 있어요!
+              </p>
+              <p className="text-xs text-muted-foreground">
+                📱 인스타그램: 클릭하면 링크가 복사됩니다 (스토리/게시물에 붙여넣기)
               </p>
             </div>
           </div>
