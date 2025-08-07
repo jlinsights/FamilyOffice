@@ -55,8 +55,9 @@ export default function BlogPage() {
             <Badge className="mb-4 bg-background/80 backdrop-blur-sm animate-fade-in">
               FamilyOffice S 인사이트
             </Badge>
-            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-              자산관리 전문가{'\\n'}
+            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary animate-slide-up">
+              자산관리 전문가
+              <br />
               <span className="text-foreground">인사이트 & 전략</span>
             </h1>
             <p
