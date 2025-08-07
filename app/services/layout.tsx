@@ -1,24 +1,27 @@
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
+import { generateMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: '중소중견기업 전문 자산관리 서비스 | FamilyOffice S',
-  description:
-    '제조업, 건설업, IT벤처기업 등 업종별 특화 자산관리. 중대재해처벌법 대응부터 가족법인 설립, 승계 설계까지 통합 솔루션.',
-  keywords: [
-    '중소중견기업 자산관리',
-    '제조업 자산관리',
-    '건설업 보험',
-    '벤처기업 정책자금',
-    '중대재해처벌법',
-    '가족법인 설립',
-  ],
-  openGraph: {
-    title: '중소중견기업 전문 자산관리 서비스 | FamilyOffice S',
-    description:
-      '제조업, 건설업, IT벤처기업 등 업종별 특화 자산관리. 중대재해처벌법 대응부터 가족법인 설립, 승계 설계까지 통합 솔루션.',
-    type: 'website',
-  },
-};
+export const metadata: Metadata = generateMetadata(
+  '자산관리 서비스 | 패밀리오피스, 가업승계, CEO플랜',
+  '중소중견기업 CEO를 위한 종합 자산관리 서비스. 패밀리오피스, 가업승계, 자산이전, 경영인정기보험, 절세 전략까지 맞춤형 CEO플랜을 제공합니다.',
+  [
+    '자산관리 서비스',
+    '패밀리오피스 서비스',
+    '가업승계 컨설팅',
+    'CEO플랜',
+    '자산이전 전략',
+    '경영인정기보험',
+    '보장자산 구축',
+    '상속 설계',
+    '증여 전략',
+    '절세 컨설팅',
+    '중소기업 자산관리',
+    '성실신고대상자 컨설팅',
+    '법인 자산관리',
+    '개인사업자 재무설계',
+    '프리미엄 자산관리',
+  ]
+);
 
 export default function ServicesLayout({
   children,

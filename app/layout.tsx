@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Analytics } from '@/components/analytics';
-import { ExternalScripts } from '@/components/external-scripts';
+import ExternalScripts from '@/components/external-scripts';
 
 import { defaultMetadata } from '@/lib/seo';
 
@@ -14,10 +14,6 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  other: {
-    ...defaultMetadata.other,
-    'canonical': 'https://familyoffices.vip',
-  },
 };
 
 export default function RootLayout({
