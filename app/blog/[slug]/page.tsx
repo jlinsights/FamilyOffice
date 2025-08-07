@@ -66,64 +66,64 @@ export default async function BlogPostPage({
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20 bg-gradient-to-br from-slate-50 to-blue-50">
+      <main className="pt-20 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950">
         {/* Hero Section */}
-        <section className="pb-8 bg-gradient-to-r from-blue-900 to-slate-900">
+        <section className="pb-8 bg-gradient-to-r from-blue-900 to-slate-900 dark:from-slate-900 dark:to-blue-900">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <Button
                 variant="outline"
-                className="mb-6 border-white/20 text-white hover:bg-white/10"
+                className="mb-6 border-white/20 text-white hover:bg-white/10 dark:border-white/30 dark:text-white dark:hover:bg-white/20"
                 asChild
               >
                 <Link href="/blog">
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Blog
+                  블로그로 돌아가기
                 </Link>
               </Button>
 
               <div className="flex flex-wrap items-center gap-4 mb-6">
-                <Badge className="bg-blue-600 text-white">
+                <Badge className="bg-blue-600 text-white dark:bg-blue-700 dark:text-white">
                   {post.category}
                 </Badge>
-                <div className="flex items-center gap-2 text-blue-100">
+                <div className="flex items-center gap-2 text-blue-100 dark:text-blue-200">
                   <CalendarDays className="h-4 w-4" />
-                  {new Date(post.date).toLocaleDateString('en-US', {
+                  {new Date(post.date).toLocaleDateString('ko-KR', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}
                 </div>
-                <div className="flex items-center gap-2 text-blue-100">
+                <div className="flex items-center gap-2 text-blue-100 dark:text-blue-200">
                   <Clock className="h-4 w-4" />
                   {post.readTime}
                 </div>
-                <div className="flex items-center gap-2 text-blue-100">
+                <div className="flex items-center gap-2 text-blue-100 dark:text-blue-200">
                   <User className="h-4 w-4" />
                   {post.author}
                 </div>
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold text-white dark:text-white mb-6">
                 {post.title}
               </h1>
 
-              <p className="text-xl text-blue-100 mb-8">{post.excerpt}</p>
+              <p className="text-xl text-blue-100 dark:text-blue-200 mb-8">{post.excerpt}</p>
 
               <div className="flex items-center gap-4">
                 <Button
                   variant="outline"
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-white/20 text-white hover:bg-white/10 dark:border-white/30 dark:text-white dark:hover:bg-white/20"
                 >
                   <Share2 className="mr-2 h-4 w-4" />
-                  Share Article
+                  아티클 공유
                 </Button>
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map(tag => (
                     <Badge
                       key={tag}
                       variant="outline"
-                      className="border-white/20 text-white/80"
+                      className="border-white/20 text-white/80 dark:border-white/30 dark:text-white/90"
                     >
                       {tag}
                     </Badge>
@@ -233,20 +233,20 @@ export default async function BlogPostPage({
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800">
+        <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-800 dark:to-slate-800">
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-2xl mx-auto">
-              <h2 className="text-3xl font-bold text-white mb-4">
+              <h2 className="text-3xl font-bold text-white dark:text-white mb-4">
                 FamilyOffice S 뉴스레터 구독하기
               </h2>
-              <p className="text-xl text-blue-100 mb-8">
+              <p className="text-xl text-blue-100 dark:text-blue-200 mb-8">
                 매주 월·수·금 오전 9시 30분에 발송되는<br/>
                 패밀리오피스 전문 인사이트를 받아보세요.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
-                  className="bg-white text-blue-600 hover:bg-gray-100"
+                  className="bg-white text-blue-600 hover:bg-gray-100 dark:bg-white dark:text-blue-600 dark:hover:bg-gray-100"
                   asChild
                 >
                   <Link href="https://newsletter.familyoffices.vip" target="_blank" rel="noopener noreferrer">
@@ -256,13 +256,13 @@ export default async function BlogPostPage({
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white text-white hover:bg-white/10"
+                  className="border-white text-white hover:bg-white/10 dark:border-white dark:text-white dark:hover:bg-white/20"
                   asChild
                 >
                   <Link href="/contact">무료 상담 신청</Link>
                 </Button>
               </div>
-              <p className="text-sm text-blue-100 mt-4 opacity-90">
+              <p className="text-sm text-blue-100 dark:text-blue-200 mt-4 opacity-90">
                 매주 월·수·금 오전 9:30 정기 발송 | 500+ 중견기업 경영진 구독 중
               </p>
             </div>
