@@ -8,7 +8,6 @@ import type { MouseEventHandler, KeyboardEvent } from 'react';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { ClientOnlyIcon } from '@/components/ui/client-only-icon';
 
 import { MinimalFamilyOfficeLogo } from '@/components/logo';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -107,7 +106,7 @@ export const Header = memo(function Header({
               variant="ghost"
               onClick={toggleMobileMenu}
               onKeyDown={handleKeyDown}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 dark:text-gray-100 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary transition-colors"
+              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary hover:bg-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary transition-colors"
               aria-label={isMobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
@@ -115,11 +114,11 @@ export const Header = memo(function Header({
               <span className="sr-only">
                 {isMobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
               </span>
-              <ClientOnlyIcon
-                icon={isMobileMenuOpen ? X : Menu}
-                className="h-6 w-6 text-gray-900 dark:text-gray-100"
-                aria-hidden="true"
-              />
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6 text-foreground" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6 text-foreground" aria-hidden="true" />
+              )}
             </Button>
           </div>
 
