@@ -19,12 +19,12 @@ export default function NotFound() {
             요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <Link
               href="/"
               className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 bg-primary hover:bg-primary/90 text-white shadow-lg"
             >
               홈으로 돌아가기
-            </a>
+            </Link>
             <a
               href="/contact"
               className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-lg"

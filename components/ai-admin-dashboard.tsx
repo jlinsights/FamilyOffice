@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -81,7 +81,7 @@ export function AIAdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       // 시스템 헬스 확인
       const healthResponse = await fetch('/api/ai-consulting/health?detailed=true');
@@ -106,11 +106,11 @@ export function AIAdminDashboard() {
       setLoading(false);
       setRefreshing(false);
     }
-  };
+  }, [period]);
 
   useEffect(() => {
     fetchData();
-  }, [period]);
+  }, [period, fetchData]);
 
   const handleRefresh = () => {
     setRefreshing(true);

@@ -32,7 +32,7 @@ describe('RateLimiter', () => {
         'user-agent': 'test-agent',
       }),
       ip: '127.0.0.1',
-    } as NextRequest;
+    } as unknown as NextRequest;
 
     jest.clearAllMocks();
   });
@@ -63,7 +63,7 @@ describe('RateLimiter', () => {
         'x-forwarded-for': '127.0.0.1',
         'user-agent': 'test-agent',
       }),
-    } as NextRequest;
+    } as unknown as NextRequest;
 
     const request2 = {
       ...mockRequest,
@@ -71,7 +71,7 @@ describe('RateLimiter', () => {
         'x-forwarded-for': '192.168.1.1',
         'user-agent': 'test-agent',
       }),
-    } as NextRequest;
+    } as unknown as NextRequest;
 
     await rateLimiter.check(request1 as any);
     const result = await rateLimiter.check(request2 as any);
@@ -84,7 +84,7 @@ describe('RateLimiter', () => {
       headers: new Headers({
         'user-agent': 'test-agent',
       }),
-    } as NextRequest;
+    } as unknown as NextRequest;
 
     const result = await rateLimiter.check(requestWithoutIP);
 
@@ -140,7 +140,7 @@ describe('withRateLimit', () => {
         'user-agent': 'test-agent',
       }),
       ip: '127.0.0.1',
-    } as NextRequest;
+    } as unknown as NextRequest;
   });
 
   it('calls handler when rate limit not exceeded', async () => {
@@ -173,7 +173,7 @@ describe('IPRateLimiter', () => {
         'x-forwarded-for': '127.0.0.1',
       }),
       ip: '127.0.0.1',
-    } as NextRequest;
+    } as unknown as NextRequest;
   });
 
   it('extracts IP from request', () => {
@@ -184,7 +184,7 @@ describe('IPRateLimiter', () => {
   it('handles missing IP', () => {
     const requestWithoutIP = {
       headers: new Headers(),
-    } as NextRequest;
+    } as unknown as NextRequest;
 
     const ip = ipRateLimiter.getIP(requestWithoutIP);
     expect(ip).toBe('unknown');

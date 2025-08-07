@@ -62,10 +62,10 @@ export const Header = memo(function Header({
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3">
             <div className="flex justify-start lg:w-0 lg:flex-1">
-              <a href="/" className="transition-opacity hover:opacity-80">
+              <Link href="/" className="transition-opacity hover:opacity-80">
                 <span className="sr-only">FamilyOffice S</span>
                 <MinimalFamilyOfficeLogo className="h-10 w-auto" />
-              </a>
+              </Link>
             </div>
           </div>
         </nav>

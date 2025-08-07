@@ -129,7 +129,7 @@ export const memoryOptimizer = {
   }
 };
 
-export default {
+const bundleOptimizations = {
   LazyFinancialCharts,
   LazyCalComEmbed,
   LazyDatePicker,
@@ -139,3 +139,5 @@ export default {
   setupServiceWorker,
   memoryOptimizer,
 };
+
+export default bundleOptimizations;

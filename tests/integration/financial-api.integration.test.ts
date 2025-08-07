@@ -41,9 +41,9 @@ describe('Financial API Integration Tests', () => {
       const result = await financialService.getStockData('005930.KS');
 
       expect(result).toEqual(MOCK_STOCK_DATA['005930.KS']);
-      expect(result.symbol).toBe('005930.KS');
-      expect(result.name).toBe('삼성전자');
-      expect(result.currency).toBe('KRW');
+      expect((result as any).symbol).toBe('005930.KS');
+      expect((result as any).name).toBe('삼성전자');
+      expect((result as any).currency).toBe('KRW');
     });
 
     test('should fetch US stock data successfully', async () => {
@@ -60,8 +60,8 @@ describe('Financial API Integration Tests', () => {
       const result = await financialService.getStockData('AAPL');
 
       expect(result).toEqual(MOCK_STOCK_DATA['AAPL']);
-      expect(result.symbol).toBe('AAPL');
-      expect(result.currency).toBe('USD');
+      expect((result as any).symbol).toBe('AAPL');
+      expect((result as any).currency).toBe('USD');
     });
 
     test('should handle API rate limiting with retry', async () => {
@@ -126,12 +126,12 @@ describe('Financial API Integration Tests', () => {
 
     test('should handle multiple stock symbols in batch', async () => {
       const symbols = ['AAPL', 'TSLA', '005930.KS'];
-      const mockResults = symbols.map(symbol => MOCK_STOCK_DATA[symbol]);
+      const mockResults = symbols.map(symbol => (MOCK_STOCK_DATA as any)[symbol]);
 
       (financialService.getStockData as jest.Mock).mockImplementation(
         async symbol => {
           await mockAsyncDelay(50);
-          return MOCK_STOCK_DATA[symbol];
+          return (MOCK_STOCK_DATA as any)[symbol];
         }
       );
 
@@ -140,9 +140,9 @@ describe('Financial API Integration Tests', () => {
       );
 
       expect(results).toHaveLength(3);
-      expect(results[0].symbol).toBe('AAPL');
-      expect(results[1].symbol).toBe('TSLA');
-      expect(results[2].symbol).toBe('005930.KS');
+      expect((results[0] as any).symbol).toBe('AAPL');
+      expect((results[1] as any).symbol).toBe('TSLA');
+      expect((results[2] as any).symbol).toBe('005930.KS');
     });
   });
 
@@ -161,9 +161,9 @@ describe('Financial API Integration Tests', () => {
       const result = await financialService.getForexData('USD', 'KRW');
 
       expect(result).toEqual(MOCK_FOREX_DATA['USD/KRW']);
-      expect(result.from).toBe('USD');
-      expect(result.to).toBe('KRW');
-      expect(result.rate).toBeGreaterThan(0);
+      expect((result as any).from).toBe('USD');
+      expect((result as any).to).toBe('KRW');
+      expect((result as any).rate).toBeGreaterThan(0);
     });
 
     test('should handle major currency pairs', async () => {
@@ -173,7 +173,7 @@ describe('Financial API Integration Tests', () => {
         async (from, to) => {
           const pair = `${from}/${to}`;
           await mockAsyncDelay(30);
-          return MOCK_FOREX_DATA[pair];
+          return (MOCK_FOREX_DATA as any)[pair];
         }
       );
 
@@ -181,9 +181,9 @@ describe('Financial API Integration Tests', () => {
       const eurKrw = await financialService.getForexData('EUR', 'KRW');
       const jpyKrw = await financialService.getForexData('JPY', 'KRW');
 
-      expect(usdKrw.rate).toBeGreaterThan(1000); // USD/KRW typically > 1000
-      expect(eurKrw.rate).toBeGreaterThan(1000); // EUR/KRW typically > 1000
-      expect(jpyKrw.rate).toBeLessThan(100); // JPY/KRW typically < 100
+      expect((usdKrw as any).rate).toBeGreaterThan(1000); // USD/KRW typically > 1000
+      expect((eurKrw as any).rate).toBeGreaterThan(1000); // EUR/KRW typically > 1000
+      expect((jpyKrw as any).rate).toBeLessThan(100); // JPY/KRW typically < 100
     });
 
     test('should handle forex API failures with fallback', async () => {
@@ -223,8 +223,8 @@ describe('Financial API Integration Tests', () => {
       expect(result).toHaveProperty('to');
       expect(result).toHaveProperty('rate');
       expect(result).toHaveProperty('timestamp');
-      expect(typeof result.rate).toBe('number');
-      expect(result.rate).toBeGreaterThan(0);
+      expect(typeof (result as any).rate).toBe('number');
+      expect((result as any).rate).toBeGreaterThan(0);
     });
   });
 
@@ -247,11 +247,11 @@ describe('Financial API Integration Tests', () => {
         },
       };
 
-      (financialService.getMarketData as jest.Mock).mockResolvedValueOnce(
+      ((financialService as any).getMarketData as jest.Mock).mockResolvedValueOnce(
         mockMarketData
       );
 
-      const result = await financialService.getMarketData();
+      const result = await (financialService as any).getMarketData();
 
       expect(result.indices).toHaveProperty('KOSPI');
       expect(result.indices).toHaveProperty('S&P500');
@@ -271,11 +271,11 @@ describe('Financial API Integration Tests', () => {
         },
       };
 
-      (financialService.getMarketData as jest.Mock).mockResolvedValueOnce(
+      ((financialService as any).getMarketData as jest.Mock).mockResolvedValueOnce(
         partialData
       );
 
-      const result = await financialService.getMarketData();
+      const result = await (financialService as any).getMarketData();
 
       expect(result.indices).toHaveProperty('KOSPI');
       expect(result.indices.KOSPI).toBeDefined();
@@ -291,11 +291,11 @@ describe('Financial API Integration Tests', () => {
         overall: 'healthy',
       };
 
-      (financialService.healthCheck as jest.Mock).mockResolvedValueOnce(
+      ((financialService as any).healthCheck as jest.Mock).mockResolvedValueOnce(
         healthData
       );
 
-      const result = await financialService.healthCheck();
+      const result = await (financialService as any).healthCheck();
 
       expect(result.overall).toBe('healthy');
       expect(result.yahoo.status).toBe('healthy');
@@ -311,11 +311,11 @@ describe('Financial API Integration Tests', () => {
         overall: 'degraded',
       };
 
-      (financialService.healthCheck as jest.Mock).mockResolvedValueOnce(
+      ((financialService as any).healthCheck as jest.Mock).mockResolvedValueOnce(
         healthData
       );
 
-      const result = await financialService.healthCheck();
+      const result = await (financialService as any).healthCheck();
 
       expect(result.overall).toBe('degraded');
       expect(result.alphaVantage.status).toBe('degraded');
@@ -380,9 +380,9 @@ describe('Financial API Integration Tests', () => {
 
       const result = await financialService.getStockData('AAPL');
 
-      expect(typeof result.price).toBe('number');
-      expect(typeof result.change).toBe('number');
-      expect(typeof result.volume).toBe('number');
+      expect(typeof (result as any).price).toBe('number');
+      expect(typeof (result as any).change).toBe('number');
+      expect(typeof (result as any).volume).toBe('number');
     });
   });
 
@@ -408,13 +408,13 @@ describe('Financial API Integration Tests', () => {
         .mockResolvedValueOnce({ ...MOCK_STOCK_DATA['AAPL'], price: 185 });
 
       const result1 = await financialService.getStockData('AAPL');
-      expect(result1.price).toBe(180);
+      expect((result1 as any).price).toBe(180);
 
       // Simulate cache expiry
       await mockAsyncDelay(100);
 
       const result2 = await financialService.getStockData('AAPL');
-      expect(result2.price).toBe(185);
+      expect((result2 as any).price).toBe(185);
     });
   });
 
