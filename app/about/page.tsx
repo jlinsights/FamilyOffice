@@ -49,7 +49,7 @@ export default function AboutPage() {
               중소중견기업 전문 자산관리
             </p>
 
-            <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">
               <span className="font-semibold text-foreground">
                 법인 대표님을 위한 전문적인 자산관리
               </span>{' '}
@@ -58,6 +58,12 @@ export default function AboutPage() {
                 가업승계 설계 서비스
               </span>
               를 제공합니다
+            </p>
+
+            <p className="text-md md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed bg-primary/5 rounded-lg p-4 border border-primary/10">
+              <span className="font-bold text-primary">FamilyOffice S</span>는{' '}
+              <span className="font-semibold text-foreground">삼성생명 기업컨설팅센터</span>의{' '}
+              <span className="text-primary font-semibold">VIP 고객 전담 프로젝트팀</span>입니다
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">

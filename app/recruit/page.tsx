@@ -49,7 +49,7 @@ export default function RecruitPage() {
       department: '자산관리팀',
       type: '위촉직',
       experience: '경력 3년 이상',
-      location: '서울 강남',
+      location: '서울',
       description: '고액자산가 대상 종합자산관리 서비스 제공',
       requirements: [
         '금융 관련 학과 졸업 또는 동등한 경력',
@@ -63,7 +63,7 @@ export default function RecruitPage() {
       department: '세무팀',
       type: '위촉직',
       experience: '경력 5년 이상',
-      location: '서울 강남',
+      location: '서울',
       description: '기업 및 개인 세무 컨설팅 업무',
       requirements: [
         '세무사 자격증 보유 필수',
@@ -77,7 +77,7 @@ export default function RecruitPage() {
       department: '투자팀',
       type: '위촉직',
       experience: '경력 3년 이상',
-      location: '서울 강남',
+      location: '서울',
       description: '부동산 투자 상품 개발 및 관리',
       requirements: [
         '부동산 관련 학과 졸업 또는 동등한 경력',
@@ -91,7 +91,7 @@ export default function RecruitPage() {
   const benefits = [
     {
       icon: TrendingUp,
-      title: '경쟁력 있는 연봉',
+      title: '경쟁력 있는 소득체계',
       description: '업계 최고 수준의 보상 체계',
     },
     {
@@ -101,8 +101,8 @@ export default function RecruitPage() {
     },
     {
       icon: Globe,
-      title: '글로벌 네트워크',
-      description: '해외 파트너사와의 협업 기회',
+      title: '전문가 그룹 네트워크',
+      description: '삼성생명 FP와 패밀리오피스와의 협업 기회',
     },
     {
       icon: Lightbulb,
@@ -117,7 +117,7 @@ export default function RecruitPage() {
     {
       icon: Building,
       title: '프리미엄 오피스',
-      description: '강남 핵심지역 최고급 사무환경',
+      description: '서울 중심지 사무환경',
     },
   ];
 
