@@ -240,7 +240,7 @@ export default async function BlogPostPage({
                 FamilyOffice S 뉴스레터 구독하기
               </h2>
               <p className="text-xl text-blue-100 dark:text-blue-200 mb-8">
-                매주 월·수·금 오전 9시 30분에 발송되는<br/>
+                매주 월·수·금 오전 7시 30분에 발송되는<br/>
                 패밀리오피스 전문 인사이트를 받아보세요.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -263,7 +263,7 @@ export default async function BlogPostPage({
                 </Button>
               </div>
               <p className="text-sm text-blue-100 dark:text-blue-200 mt-4 opacity-90">
-                매주 월·수·금 오전 9:30 정기 발송 | 500+ 중견기업 경영진 구독 중
+                매주 월·수·금 오전 7:30 정기 발송 | 500+ 중견기업 경영진 구독 중
               </p>
             </div>
           </div>
