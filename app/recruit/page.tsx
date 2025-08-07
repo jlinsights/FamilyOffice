@@ -157,12 +157,11 @@ export default function RecruitPage() {
             </p>
 
             <p
-              className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
+              className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed whitespace-pre-line"
               style={{ animationDelay: '300ms' }}
             >
-              글로벌 자산관리 전문가로 성장하고 싶은 분들을 기다립니다.{' '}
-              <span className="playfair-display-bold">FamilyOffice S</span>에서
-              당신의 커리어를 한 단계 높여보세요
+              금융전문가로서의 내일, 시작부터 달라야 합니다.{'\n'}
+              당신의 경쟁력을 높여주는 이름, 삼성생명과 함께 당신의 커리어를 한 단계 업그레이드 하세요!
             </p>
 
             {/* 핵심 성과 지표 - 메인 페이지와 동일한 스타일 */}
@@ -455,6 +454,33 @@ export default function RecruitPage() {
                     </CardContent>
                   </Card>
                 ))}
+                
+                {/* Samsung Life GFC Card */}
+                <Card className="hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:border-gray-700">
+                  <CardHeader>
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                      <div>
+                        <CardTitle className="text-xl mb-2 text-foreground dark:text-white">
+                          법인컨설팅 동반자, 삼성생명GFC
+                        </CardTitle>
+                        <p className="text-muted-foreground dark:text-gray-300">
+                          Group Financial Consultant
+                        </p>
+                      </div>
+                      <Button
+                        className="mt-4 md:mt-0 dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
+                        onClick={() =>
+                          window.open(
+                            'https://pub-66c6dc2fd6894c5687d260702159ac9a.r2.dev/20250123%20GFC%20%E1%84%87%E1%85%B3%E1%84%85%E1%85%A9%E1%84%89%E1%85%A7.pdf',
+                            '_blank'
+                          )
+                        }
+                      >
+                        열어보기
+                      </Button>
+                    </div>
+                  </CardHeader>
+                </Card>
               </div>
             </div>
           </div>
