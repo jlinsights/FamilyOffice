@@ -100,8 +100,8 @@ export const Header = memo(function Header({
             </Link>
           </div>
 
-          {/* 모바일 메뉴 버튼 */}
-          <div className="-mr-2 -my-2 md:hidden">
+          {/* 모바일 메뉴 버튼 - 랜드스케이프 모드에서도 표시 */}
+          <div className="-mr-2 -my-2 lg:hidden">
             <Button
               variant="ghost"
               onClick={toggleMobileMenu}
@@ -122,9 +122,9 @@ export const Header = memo(function Header({
             </Button>
           </div>
 
-          {/* 데스크톱 네비게이션 */}
+          {/* 데스크톱 네비게이션 - 더 큰 화면에서만 표시 */}
           <nav
-            className="hidden md:flex space-x-10"
+            className="hidden lg:flex space-x-10"
             role="navigation"
             aria-label="주 메뉴"
           >
@@ -194,8 +194,8 @@ export const Header = memo(function Header({
             ))}
           </nav>
 
-          {/* 데스크톱 우측 버튼들 */}
-          <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 space-x-4">
+          {/* 데스크톱 우측 버튼들 - 더 큰 화면에서만 표시 */}
+          <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-4">
             <ThemeToggle />
 
             {/* 컨설팅 신청 버튼 */}
@@ -211,11 +211,11 @@ export const Header = memo(function Header({
         </div>
       </nav>
 
-      {/* 모바일 메뉴 */}
+      {/* 모바일 메뉴 - 랜드스케이프 모드에서도 표시 */}
       {isMobileMenuOpen && (
         <div
           id="mobile-menu"
-          className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800"
+          className="lg:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800"
           role="navigation"
           aria-label="모바일 메뉴"
         >

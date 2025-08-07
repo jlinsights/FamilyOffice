@@ -12,6 +12,7 @@ import {
   Sparkles,
   Minimize2,
   Maximize2,
+  Calendar,
 } from 'lucide-react';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -191,18 +192,16 @@ export function AIChatFloating() {
         setMessages(prev => [...prev, assistantMessage]);
         setSessionQuestionCount(prev => prev + 1);
         
-        // CTA 메시지 추가 (선택적)
-        if (data.cta && sessionQuestionCount >= 2) {
-          const ctaMessage: ChatMessage = {
-            id: `cta-${Date.now()}`,
-            type: 'assistant',
-            content: `💡 **${data.cta.message}**\n\n[${data.cta.buttonText || '상담 예약하기'}](${data.cta.link})`,
-            timestamp: new Date(Date.now() + 1000),
-          };
-          setTimeout(() => {
-            setMessages(prev => [...prev, ctaMessage]);
-          }, 2000);
-        }
+        // 상담 예약 버튼 항상 추가 (coffeechat 링크로 변경)
+        const consultationMessage: ChatMessage = {
+          id: `consultation-${Date.now()}`,
+          type: 'assistant',
+          content: `💼 **더 자세한 상담이 필요하시다면?**\n\n전문 컨설턴트와 1:1 맞춤 상담을 예약하세요!\n\n[📅 상담 예약하기](https://cal.com/familyoffice/coffeechat)`,
+          timestamp: new Date(Date.now() + 1500),
+        };
+        setTimeout(() => {
+          setMessages(prev => [...prev, consultationMessage]);
+        }, 2000);
       } else {
         // 에러 처리
         const errorMessage: ChatMessage = {
@@ -214,17 +213,16 @@ export function AIChatFloating() {
 
         setMessages(prev => [...prev, errorMessage]);
         
-        if (data.cta) {
-          const ctaMessage: ChatMessage = {
-            id: `cta-error-${Date.now()}`,
-            type: 'assistant',
-            content: `💼 **${data.cta.message}**\n\n[${data.cta.buttonText || '상담하기'}](${data.cta.link})`,
-            timestamp: new Date(Date.now() + 1000),
-          };
-          setTimeout(() => {
-            setMessages(prev => [...prev, ctaMessage]);
-          }, 1500);
-        }
+        // 에러 시에도 상담 예약 버튼 추가
+        const consultationMessage: ChatMessage = {
+          id: `consultation-error-${Date.now()}`,
+          type: 'assistant',
+          content: `💼 **기술적 문제가 발생했습니다**\n\n전문 컨설턴트와 직접 상담을 받아보세요!\n\n[📅 상담 예약하기](https://cal.com/familyoffice/coffeechat)`,
+          timestamp: new Date(Date.now() + 1000),
+        };
+        setTimeout(() => {
+          setMessages(prev => [...prev, consultationMessage]);
+        }, 1500);
       }
     } catch (err) {
       console.error('AI Chat error:', err);
@@ -238,6 +236,17 @@ export function AIChatFloating() {
       };
 
       setMessages(prev => [...prev, errorMessage]);
+      
+      // 네트워크 오류 시에도 상담 예약 버튼 추가
+      const consultationMessage: ChatMessage = {
+        id: `consultation-network-${Date.now()}`,
+        type: 'assistant',
+        content: `💼 **연결 문제가 발생했습니다**\n\n전문 컨설턴트와 직접 상담을 받아보세요!\n\n[📅 상담 예약하기](https://cal.com/familyoffice/coffeechat)`,
+        timestamp: new Date(Date.now() + 1000),
+      };
+      setTimeout(() => {
+        setMessages(prev => [...prev, consultationMessage]);
+      }, 1500);
     } finally {
       setIsLoading(false);
     }
