@@ -18,10 +18,36 @@ import Link from 'next/link';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { AnimatedCounter } from '@/components/animated-counter';
+import { generateStructuredData } from '@/lib/seo';
+import { StructuredData } from '@/components/structured-data';
+
+export { metadata } from './metadata';
 
 export default function AboutPage() {
+  const structuredData = generateStructuredData('Organization');
+  const breadcrumbData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: '홈',
+        item: 'https://familyoffices.vip',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: '회사 소개',
+        item: 'https://familyoffices.vip/about',
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen">
+      <StructuredData data={structuredData} />
+      <StructuredData data={breadcrumbData} />
       <Header />
 
       <main className="pt-20">

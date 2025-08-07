@@ -9,9 +9,30 @@ export const defaultMetadata: Metadata = {
     template: '%s | FamilyOffice S',
   },
   description:
-    '비상장기업, 기술기업, 제조업 등 다양한 업종 법인 대표를 위한 프리미엄 자산관리. 정책자금부터 단체보험, 경영인정기보험, 중대재해처벌법 대응까지 500억원+ 관리 실적의 FamilyOffice S',
+    '40-60대 중소중견기업 CEO, 성실신고대상자, 고액자산가를 위한 패밀리오피스 서비스. 가업승계, 자산이전, 경영인정기보험, 절세 전략, CEO플랜부터 비상장기업 자산관리, 중대재해처벌법 대응까지 500억원+ 관리 실적의 삼성생명 FamilyOffice S',
 
   keywords: [
+    // 핵심 타겟 키워드
+    '패밀리오피스',
+    '자산관리',
+    '가업승계',
+    '자산이전',
+    '경영인정기보험',
+    '보장자산',
+    '상속',
+    '증여',
+    '절세',
+    'CEO플랜',
+    
+    // 타겟 고객 관련
+    '중소중견기업 CEO',
+    '중소기업 대표',
+    '성실신고대상자',
+    '개인사업자 자산관리',
+    '자산가 재무설계',
+    '고액자산가',
+    
+    // 기존 키워드
     '비상장기업 자산관리',
     '비상장기업 대표 재무설계',
     '매출 50억~300억 비상장기업',
@@ -39,7 +60,6 @@ export const defaultMetadata: Metadata = {
     '제조업 단체보험',
     '건설업 단체보험',
     '위험업종 보험설계',
-    '경영인정기보험',
     'CEO 정기보험',
     '임원진 보험설계',
     '경영진 생명보험',
@@ -49,8 +69,6 @@ export const defaultMetadata: Metadata = {
     '중대재해 예방',
     '중대재해 보험',
     '중대재해 리스크 관리',
-    '패밀리오피스',
-    '비상장기업 자산관리',
     '상속설계',
     '재무설계',
     '투자자문',
@@ -60,9 +78,9 @@ export const defaultMetadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'FamilyOffice S',
-    title: 'FamilyOffice S | 중소중견기업 법인 대표 전용 자산관리',
+    title: 'FamilyOffice S | 패밀리오피스, 가업승계, CEO플랜 전문',
     description:
-      '비상장기업, 기술기업, 제조업 등 다양한 업종 법인 대표를 위한 프리미엄 자산관리. 중대재해처벌법 대응까지',
+      '40-60대 중소중견기업 CEO, 성실신고대상자를 위한 패밀리오피스. 가업승계, 자산이전, 경영인정기보험, 절세, CEO플랜부터 비상장기업 자산관리, 중대재해처벌법 대응까지 삼성생명 전문팀',
     url: 'https://familyoffices.vip',
     images: [
       {
@@ -78,9 +96,9 @@ export const defaultMetadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@familyoffices',
-    title: 'FamilyOffice S | 중소중견기업 법인 대표 전용 자산관리',
+    title: 'FamilyOffice S | 패밀리오피스, 가업승계, CEO플랜 전문',
     description:
-      '비상장기업, 기술기업, 제조업 등 다양한 업종 법인 대표를 위한 프리미엄 자산관리. 중대재해처벌법 대응까지',
+      '40-60대 중소중견기업 CEO, 성실신고대상자를 위한 패밀리오피스. 가업승계, 자산이전, 경영인정기보험, 절세, CEO플랜부터 비상장기업 자산관리, 중대재해처벌법 대응까지',
     images: ['/og-image.jpg'],
   },
 
@@ -141,7 +159,7 @@ export function generateMetadata(
 
 // 구조화된 데이터 생성
 export function generateStructuredData(
-  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage'
+  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList'
 ) {
   const baseData = {
     '@context': 'https://schema.org',
@@ -154,12 +172,15 @@ export function generateStructuredData(
       '@type': 'PostalAddress',
       addressCountry: 'KR',
       addressLocality: 'Seoul',
+      addressRegion: '서울특별시',
+      streetAddress: '서울특별시 중구',
     },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
-      telephone: '+82-2-1234-5678',
-      email: 'contact@familyoffices.vip',
+      telephone: '+82-502-5550-8700',
+      email: 'cs@familyoffices.vip',
+      availableLanguage: ['Korean', 'English'],
     },
   };
 
@@ -234,10 +255,26 @@ export function generateStructuredData(
         mainEntity: [
           {
             '@type': 'Question',
-            name: '비상장기업 자산관리는 어떻게 하나요?',
+            name: '패밀리오피스 서비스란 무엇인가요?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: '비상장기업의 특성을 고려한 맞춤형 자산관리 전략을 수립합니다. 개인자산과 법인자산 분리, 세무최적화, 상속설계 등을 종합적으로 제공합니다.',
+              text: '패밀리오피스는 중소중견기업 CEO와 고액자산가를 위한 종합 자산관리 서비스입니다. 가업승계, 자산이전, 절세 전략을 포함한 맞춤형 솔루션을 제공합니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'CEO플랜이란 무엇인가요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'CEO플랜은 기업 대표를 위한 종합 재무설계 프로그램입니다. 경영인정기보험, 보장자산 구축, 상속 및 증여 계획을 포함합니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '가업승계는 어떻게 준비하나요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '가업승계는 기업가치 평가, 지분 이전 계획, 상속세 및 증여세 최적화, 경영권 안정화 방안을 종합적으로 검토하여 준비합니다.',
             },
           },
           {
@@ -247,6 +284,89 @@ export function generateStructuredData(
               '@type': 'Answer',
               text: '중대재해처벌법에 따른 경영책임자 처벌 대비를 위한 보험설계와 안전관리체계 구축을 지원합니다.',
             },
+          },
+        ],
+      };
+
+    case 'LocalBusiness':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        '@id': 'https://familyoffices.vip',
+        name: 'FamilyOffice S - 삼성생명 기업컨설팅센터',
+        image: 'https://familyoffices.vip/og-image.jpg',
+        logo: 'https://familyoffices.vip/logo.png',
+        url: 'https://familyoffices.vip',
+        telephone: '+82-502-5550-8700',
+        email: 'cs@familyoffices.vip',
+        priceRange: '₩₩₩₩',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: '서울특별시 중구',
+          addressLocality: '서울',
+          addressRegion: '서울특별시',
+          postalCode: '04527',
+          addressCountry: 'KR',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 37.5665,
+          longitude: 126.9780,
+        },
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            opens: '09:00',
+            closes: '18:00',
+          },
+        ],
+        sameAs: [
+          'https://www.samsunglife.com',
+          'https://newsletter.familyoffices.vip',
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: '패밀리오피스 서비스',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'CEO플랜',
+                description: '중소중견기업 CEO를 위한 종합 자산관리 플랜',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: '가업승계 컨설팅',
+                description: '체계적인 가업승계 및 자산이전 설계',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: '절세 전략',
+                description: '상속세, 증여세 최적화 및 세무 플래닝',
+              },
+            },
+          ],
+        },
+      };
+
+    case 'BreadcrumbList':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: '홈',
+            item: 'https://familyoffices.vip',
           },
         ],
       };

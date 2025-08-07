@@ -1,5 +1,3 @@
-'use client';
-
 import {
   CheckCircle,
   ArrowRight,
@@ -12,8 +10,6 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-import { useEffect, useState, useRef } from 'react';
-
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
@@ -25,13 +21,18 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 import { SERVICE_CATEGORIES } from '@/constants/services';
+import { generateStructuredData } from '@/lib/seo';
+import { StructuredData } from '@/components/structured-data';
+import React from 'react';
 
-export default function ServicePage() {
-  const [startAnimation, setStartAnimation] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const statsSectionRef = useRef<HTMLDivElement>(null);
+export { metadata } from './metadata';
 
-  useEffect(() => {
+const ServicePageContent = () => {
+  const [startAnimation, setStartAnimation] = React.useState(false);
+  const [selectedCategory, setSelectedCategory] = React.useState('all');
+  const statsSectionRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -622,5 +623,35 @@ export default function ServicePage() {
 
       <Footer />
     </div>
+  );
+};
+
+export default function ServicePage() {
+  const structuredData = generateStructuredData('Service');
+  const breadcrumbData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: '홈',
+        item: 'https://familyoffices.vip',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: '서비스',
+        item: 'https://familyoffices.vip/services',
+      },
+    ],
+  };
+
+  return (
+    <>
+      <StructuredData data={structuredData} />
+      <StructuredData data={breadcrumbData} />
+      <ServicePageContent />
+    </>
   );
 }

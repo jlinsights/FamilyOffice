@@ -16,6 +16,8 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 import { CUSTOMER_CONCERNS, FAQ_CATEGORIES } from '@/constants/faq';
+import { generateStructuredData } from '@/lib/seo';
+import { StructuredData } from '@/components/structured-data';
 
 import FAQAccordion from './faq-accordion';
 
@@ -32,8 +34,30 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 export default function FAQPage() {
+  const faqStructuredData = generateStructuredData('FAQPage');
+  const breadcrumbData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: '홈',
+        item: 'https://familyoffices.vip',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'FAQ',
+        item: 'https://familyoffices.vip/faq',
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen">
+      <StructuredData data={faqStructuredData} />
+      <StructuredData data={breadcrumbData} />
       <Header />
 
       <main className="pt-20">

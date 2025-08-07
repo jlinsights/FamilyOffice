@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 
-import { generateMetadata } from '@/lib/seo';
+import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
 import { AIConsultingChat } from '@/components/ai-consulting-chat';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Badge } from '@/components/ui/badge';
+import { StructuredData } from '@/components/structured-data';
 
 // 페이지별 메타데이터 - 가업승계 전문 서비스로 업데이트
 export const metadata: Metadata = generateMetadata(
@@ -32,8 +33,15 @@ export const metadata: Metadata = generateMetadata(
 );
 
 export default function HomePage() {
+  const organizationData = generateStructuredData('Organization');
+  const localBusinessData = generateStructuredData('LocalBusiness');
+  const websiteData = generateStructuredData('WebSite');
+
   return (
     <div className="min-h-screen bg-background">
+      <StructuredData data={organizationData} />
+      <StructuredData data={localBusinessData} />
+      <StructuredData data={websiteData} />
       <Header />
       
       {/* Hero Section */}
