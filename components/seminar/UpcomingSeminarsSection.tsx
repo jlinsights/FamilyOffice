@@ -49,8 +49,10 @@ export function UpcomingSeminarsSection() {
     return seminarDate < today;
   };
 
-  // Filter out seminars with past dates
-  const upcomingSeminars = UPCOMING_SEMINARS.filter(seminar => !isDatePassed(seminar.date));
+  // Filter out seminars with past dates and sort by date
+  const upcomingSeminars = UPCOMING_SEMINARS
+    .filter(seminar => !isDatePassed(seminar.date))
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   const getLocationIcon = (type: string) => {
     switch (type) {
@@ -239,7 +241,7 @@ export function UpcomingSeminarsSection() {
                 </CardContent>
 
                 <CardFooter className="pt-4">
-                  <div className="w-full space-y-2">
+                  <div className="w-full">
                     {seminar.registrationUrl ? (
                       <a
                         href={seminar.registrationUrl}
@@ -282,30 +284,6 @@ export function UpcomingSeminarsSection() {
                             <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
                           </>
                         )}
-                      </Button>
-                    )}
-                    {seminar.detailsUrl ? (
-                      <a
-                        href={seminar.detailsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ textDecoration: 'none' }}
-                      >
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700"
-                        >
-                          자세히 보기
-                        </Button>
-                      </a>
-                    ) : (
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700"
-                      >
-                        자세히 보기
                       </Button>
                     )}
                   </div>

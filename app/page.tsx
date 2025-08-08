@@ -47,8 +47,8 @@ export default function HomePage() {
       {/* Hero Section */}
       <HeroSection />
       
-      {/* AI Consulting Chat Section */}
-      <section id="ai-consulting" className="py-20 bg-muted/30">
+      {/* AI Consulting Chat Section - 임시 주석 처리 */}
+      {/* <section id="ai-consulting" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-6">
@@ -70,7 +70,7 @@ export default function HomePage() {
             <AIConsultingChat maxHeight="800px" />
           </div>
         </div>
-      </section>
+      </section> */}
       
       {/* Services Section */}
       <ServicesSection />

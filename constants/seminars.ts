@@ -176,6 +176,60 @@ export const FEATURED_SPEAKERS: Speaker[] = [
 
 export const UPCOMING_SEMINARS: Seminar[] = [
   {
+    id: 'vvip-asset-management-new-horizon',
+    title: 'VVIP 고객초청 세미나',
+    subtitle: '자산 관리의 새로운 지평',
+    description:
+      '성공적인 가업승계와 절세 플랜을 위한 법인 정관개정과 금융상품 활용 전략을 심도 있게 다룹니다. 대표님의 사업과 가정에 실질적인 도움을 드릴 수 있는 특별한 세미나입니다.',
+    speaker: {
+      id: 'familyoffice-expert',
+      name: '패밀리오피스 전문가팀',
+      title: '전문 컨설턴트',
+      company: '패밀리오피스',
+      bio: '가업승계와 자산관리 분야의 전문가로서 기업오너와 고액자산가를 위한 맞춤형 솔루션을 제공합니다.',
+      expertise: ['가업승계', '절세전략', '법인정관', '금융상품'],
+    },
+    date: '2025-09-17',
+    time: '10:30',
+    duration: '3시간',
+    location: {
+      type: 'offline',
+      venue: '그랜드워커힐 서울',
+      address: '서울시 광진구 워커힐로 177 (4층 아트홀)',
+      capacity: 30,
+    },
+    category: 'succession',
+    targetAudience: ['VVIP 고객', '기업 경영진', '고액자산가'],
+    capacity: 30,
+    registeredCount: 5,
+    price: 50000,
+    isPremium: true,
+    status: 'upcoming',
+    tags: ['법인정관', '금융상품', '가업승계', '절세전략'],
+    registrationUrl: 'https://lu.ma/b6av2oyu',
+    detailsUrl: 'https://lu.ma/b6av2oyu',
+    agenda: [
+      {
+        time: '10:30',
+        title: '등록 및 Welcome Coffee',
+        duration: 30,
+      },
+      {
+        time: '11:00',
+        title: '법인 정관개정과 금융상품 활용 전략',
+        description: '법인 정관개정을 통한 가업승계 준비와 최적의 금융상품 활용 방안',
+        speaker: '패밀리오피스 전문가팀',
+        duration: 90,
+      },
+      {
+        time: '12:30',
+        title: '호텔 오찬 및 개별 상담',
+        description: '전문가와 함께하는 1:1 맞춤 상담 및 네트워킹',
+        duration: 60,
+      },
+    ],
+  },
+  {
     id: 'vvip-seminar-grand-hyatt-july',
     title: 'VVIP 고객초청 세미나',
     subtitle: '미래를 준비하는 가업승계 전략',
