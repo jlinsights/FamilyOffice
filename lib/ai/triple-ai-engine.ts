@@ -16,6 +16,7 @@ import {
   RoutingDecision,
   KoreanContextualData
 } from './types';
+import { DevelopmentFallbackAI } from './development-fallback';
 
 export class FamilyOfficeTripleAI {
   private claudeClient: Anthropic | null = null;
@@ -26,6 +27,7 @@ export class FamilyOfficeTripleAI {
   private performanceMetrics: PerformanceMetrics;
   private cache: Map<string, any>;
   private isDevelopment: boolean;
+  private fallbackAI: DevelopmentFallbackAI;
 
   constructor() {
     this.isDevelopment = process.env.NODE_ENV === 'development';
@@ -77,6 +79,7 @@ export class FamilyOfficeTripleAI {
     this.router = new IntelligentRouter();
     this.koreanOptimizer = new KoreanContextOptimizer();
     this.cache = new Map();
+    this.fallbackAI = new DevelopmentFallbackAI();
 
     // 성능 메트릭 초기화
     this.performanceMetrics = {
@@ -573,8 +576,40 @@ FamilyOffice S는 **삼성생명GFC**와의 전략적 파트너십을 통해 중
 
     } catch (error) {
       console.error('[Triple-AI] 컨설팅 처리 오류:', error);
+      
+      // 개발 환경이거나 API 크레딧 문제인 경우 fallback 사용
+      if (this.isDevelopment || this.isAPICreditsError(error)) {
+        console.log('[Triple-AI] Fallback AI로 전환...');
+        try {
+          return await this.fallbackAI.generateConsultation(query, clientProfile);
+        } catch (fallbackError) {
+          console.error('[Triple-AI] Fallback AI도 실패:', fallbackError);
+          throw this.handleConsultationError(error, consultationId, startTime);
+        }
+      }
+      
       throw this.handleConsultationError(error, consultationId, startTime);
     }
+  }
+
+  /**
+   * API 크레딧 오류 감지
+   */
+  private isAPICreditsError(error: any): boolean {
+    const errorMessage = error?.message?.toLowerCase() || '';
+    const errorString = String(error).toLowerCase();
+    
+    return (
+      errorMessage.includes('credit balance is too low') ||
+      errorMessage.includes('quota') ||
+      errorMessage.includes('billing') ||
+      errorMessage.includes('rate limit') ||
+      errorMessage.includes('too many requests') ||
+      errorMessage.includes('insufficient') ||
+      errorString.includes('credit') ||
+      errorString.includes('quota') ||
+      errorString.includes('429')
+    );
   }
 
   /**

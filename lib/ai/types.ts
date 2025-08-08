@@ -25,7 +25,8 @@ export interface ConsultationRecord {
 export const AIModel = {
   CLAUDE_OPUS: 'claude-opus',
   GPT4_TURBO: 'gpt4-turbo',
-  GEMINI_PRO: 'gemini-pro'
+  GEMINI_PRO: 'gemini-pro',
+  DEVELOPMENT_FALLBACK: 'development-fallback'
 } as const;
 
 export type AIModel = typeof AIModel[keyof typeof AIModel];
@@ -58,7 +59,8 @@ export const ExecutionStrategy = {
   SINGLE_AI: 'single_ai',
   PARALLEL_HYBRID: 'parallel_hybrid',
   SEQUENTIAL_CASCADE: 'sequential_cascade',
-  CONSENSUS_VOTING: 'consensus_voting'
+  CONSENSUS_VOTING: 'consensus_voting',
+  KEYWORD_MATCHING: 'keyword-matching'
 } as const;
 
 export type ExecutionStrategy = typeof ExecutionStrategy[keyof typeof ExecutionStrategy];
