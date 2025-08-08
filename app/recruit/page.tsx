@@ -86,6 +86,20 @@ export default function RecruitPage() {
         '국제세무 및 기업구조조정 경험자 우대',
       ],
     },
+    {
+      title: '기업재무컨설턴트(GFC) - 투자금융 전문가',
+      department: '삼성생명GFC',
+      type: '위촉직',
+      experience: '경력 3년 이상',
+      location: '서울',
+      description: '기업 자금조달 및 투자금융 전문 컨설팅 서비스',
+      requirements: [
+        '투자은행 또는 금융 관련 학과 졸업',
+        '투자금융 또는 기업금융 경력 3년 이상',
+        'IB, 기업금융, M&A 관련 업무 경험',
+        'CFA, FRM 등 투자 관련 자격증 우대',
+      ],
+    },
   ];
 
   const benefits = [
@@ -161,7 +175,7 @@ export default function RecruitPage() {
               style={{ animationDelay: '300ms' }}
             >
               삼성생명 Group Financial Consultant(GFC)로서{'\n'}
-              가업승계, 자산관리, 세무회계 전문가의 길을 열어가세요!
+              가업승계, 자산관리, 세무회계, 투자금융 전문가의 길을 열어가세요!
             </p>
 
             {/* 핵심 성과 지표 - 메인 페이지와 동일한 스타일 */}
@@ -210,7 +224,7 @@ export default function RecruitPage() {
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">
                   <AnimatedCounter
-                    end={3}
+                    end={4}
                     suffix="개"
                     startAnimation={startAnimation}
                     duration={1200}
@@ -310,7 +324,7 @@ export default function RecruitPage() {
                 채용 포지션
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
-                가업승계, 자산관리, 세무회계 전문가로 함께할 기업재무컨설턴트를 모집합니다
+                가업승계, 자산관리, 세무회계, 투자금융 전문가로 함께할 기업재무컨설턴트를 모집합니다
               </p>
             </div>
 

@@ -176,7 +176,7 @@ export class IntelligentRouter {
 
   private classifyQueryType(query: string): QueryType {
     const typePatterns = {
-      [QueryType.FAQ]: ['문의', '안내', '서비스', '비용', '예약', 'FAQ', 'information', '채용', '구인', '입사', '경력', '지원', '면접', 'GFC', '기업재무컨설턴트'],
+      [QueryType.FAQ]: ['문의', '안내', '서비스', '비용', '예약', 'FAQ', 'information', '채용', '구인', '입사', '경력', '지원', '면접', 'GFC', '기업재무컨설턴트', '투자금융', 'IB', 'M&A'],
       [QueryType.TAX_CALCULATION]: ['세금', '상속세', '증여세', '절세', '세무', 'tax', 'calculation'],
       [QueryType.SUCCESSION_STRATEGY]: ['승계', '후계', '상속', '가업', 'succession', 'inheritance'],
       [QueryType.DOCUMENT_ANALYSIS]: ['분석', '검토', '문서', '계약서', 'analysis', 'document', 'review'],
