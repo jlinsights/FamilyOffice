@@ -45,45 +45,45 @@ export default function RecruitPage() {
 
   const positions = [
     {
-      title: '자산관리 어드바이저',
-      department: '자산관리팀',
-      type: '위촉직',
-      experience: '경력 3년 이상',
-      location: '서울',
-      description: '고액자산가 대상 종합자산관리 서비스 제공',
-      requirements: [
-        '금융 관련 학과 졸업 또는 동등한 경력',
-        '자산관리 관련 경력 3년 이상',
-        '금융투자분석사, CFP 등 관련 자격증 우대',
-        '영어 회화 가능자 우대',
-      ],
-    },
-    {
-      title: '세무 컨설턴트',
-      department: '세무팀',
+      title: '기업재무컨설턴트(GFC) - 가업승계 전문가',
+      department: '삼성생명GFC',
       type: '위촉직',
       experience: '경력 5년 이상',
       location: '서울',
-      description: '기업 및 개인 세무 컨설팅 업무',
+      description: '가족기업의 체계적인 가업승계 설계 및 실행 지원',
       requirements: [
-        '세무사 자격증 보유 필수',
-        '세무 컨설팅 경력 5년 이상',
-        '기업세무 및 개인세무 경험',
-        '국제세무 경험자 우대',
+        '금융/경영 관련 학과 졸업 또는 동등한 경력',
+        '기업재무 또는 가업승계 컨설팅 경력 5년 이상',
+        'CFP, 세무사, 변호사 등 전문 자격증 우대',
+        '가족기업 및 상속/증여 관련 업무 경험 필수',
       ],
     },
     {
-      title: '부동산 투자 매니저',
-      department: '투자팀',
+      title: '기업재무컨설턴트(GFC) - 자산관리 전문가',
+      department: '삼성생명GFC',
       type: '위촉직',
       experience: '경력 3년 이상',
       location: '서울',
-      description: '부동산 투자 상품 개발 및 관리',
+      description: '고액자산가 및 기업의 종합자산관리 서비스 제공',
       requirements: [
-        '부동산 관련 학과 졸업 또는 동등한 경력',
-        '부동산 투자 경력 3년 이상',
-        '공인중개사 자격증 우대',
-        '데이터 분석 능력 필수',
+        '금융 관련 학과 졸업 또는 동등한 경력',
+        '자산관리 또는 기업재무 경력 3년 이상',
+        '금융투자분석사, CFP, CFA 등 관련 자격증 우대',
+        '법인 자산관리 및 포트폴리오 운용 경험',
+      ],
+    },
+    {
+      title: '기업재무컨설턴트(GFC) - 세무회계 전문가',
+      department: '삼성생명GFC',
+      type: '위촉직',
+      experience: '경력 5년 이상',
+      location: '서울',
+      description: '기업 세무전략 수립 및 절세 컨설팅 업무',
+      requirements: [
+        '세무사 자격증 보유 필수',
+        '기업세무 컨설팅 경력 5년 이상',
+        '법인세무 및 상속증여세 전문 경험',
+        '국제세무 및 기업구조조정 경험자 우대',
       ],
     },
   ];
@@ -91,33 +91,33 @@ export default function RecruitPage() {
   const benefits = [
     {
       icon: TrendingUp,
-      title: '경쟁력 있는 소득체계',
-      description: '업계 최고 수준의 보상 체계',
+      title: '삼성생명 GFC 브랜드',
+      description: '국내 최고 보험사의 신뢰할 수 있는 브랜드 파워',
     },
     {
       icon: Award,
-      title: '성과 인센티브',
-      description: '개인 및 팀 성과에 따른 추가 보상',
+      title: '성과 기반 보상',
+      description: '개인 및 팀 성과에 따른 차별화된 인센티브',
     },
     {
       icon: Globe,
-      title: '전문가 그룹 네트워크',
-      description: '삼성생명 FP와 패밀리오피스와의 협업 기회',
+      title: '전문가 네트워크',
+      description: '삼성생명 FP 및 전국 GFC와의 협업 기회',
     },
     {
       icon: Lightbulb,
-      title: '전문성 개발',
-      description: '지속적인 교육 및 자격증 취득 지원',
+      title: '전문성 개발 지원',
+      description: '체계적인 교육 프로그램 및 자격증 취득 지원',
     },
     {
       icon: Heart,
-      title: '워라밸',
-      description: '유연근무제 및 복리후생',
+      title: '워라밸 보장',
+      description: '유연근무제 및 삼성생명 복리후생 혜택',
     },
     {
       icon: Building,
-      title: '프리미엄 오피스',
-      description: '서울 중심지 사무환경',
+      title: '삼성생명 백업 시스템',
+      description: '체계적인 영업 지원 및 상품 백업 시스템',
     },
   ];
 
@@ -160,8 +160,8 @@ export default function RecruitPage() {
               className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed whitespace-pre-line"
               style={{ animationDelay: '300ms' }}
             >
-              금융전문가로서의 내일, 시작부터 달라야 합니다.{'\n'}
-              당신의 경쟁력을 높여주는 이름, 삼성생명과 함께 당신의 커리어를 한 단계 업그레이드 하세요!
+              삼성생명 Group Financial Consultant(GFC)로서{'\n'}
+              가업승계, 자산관리, 세무회계 전문가의 길을 열어가세요!
             </p>
 
             {/* 핵심 성과 지표 - 메인 페이지와 동일한 스타일 */}
@@ -306,11 +306,11 @@ export default function RecruitPage() {
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-                <span className="text-primary dark:text-emerald-300">채용</span>{' '}
-                포지션
+                <span className="text-primary dark:text-emerald-300">삼성생명GFC</span>{' '}
+                채용 포지션
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
-                현재 모집 중인 포지션을 확인하고 지원해보세요
+                가업승계, 자산관리, 세무회계 전문가로 함께할 기업재무컨설턴트를 모집합니다
               </p>
             </div>
 
