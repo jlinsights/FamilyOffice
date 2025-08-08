@@ -139,15 +139,12 @@ export function HeroSection() {
           <Button
             size="lg"
             className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white shadow-lg"
-            onClick={() => {
-              document.getElementById('ai-consulting')?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              });
-            }}
+            asChild
           >
-            지금 바로 물어보세요
-            <ClientOnlyIcon icon={ArrowRight} className="ml-2 h-5 w-5" />
+            <Link href="/contact">
+              지금 바로 물어보세요
+              <ClientOnlyIcon icon={ArrowRight} className="ml-2 h-5 w-5" />
+            </Link>
           </Button>
           <Button
             size="lg"
