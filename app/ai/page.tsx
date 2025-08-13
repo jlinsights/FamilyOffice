@@ -12,13 +12,11 @@ import { AIChatFloating } from '@/components/ai-chat-floating';
 import { MinimalFamilyOfficeLogo } from '@/components/logo';
 
 export default function AIPage() {
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [showCopied, setShowCopied] = useState(false);
 
   // 페이지 로드시 채팅 자동 열기
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsChatOpen(true);
       // AI 채팅 컴포넌트의 상태를 직접 제어할 수 없으므로
       // 버튼 클릭을 시뮬레이션합니다
       const chatButton = document.querySelector('[aria-label="AI 컨설팅 채팅 열기"]') as HTMLButtonElement;

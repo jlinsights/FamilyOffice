@@ -1,10 +1,10 @@
 // FamilyOffice S - Clerk 웹훅 처리
 // Clerk 사용자 이벤트를 받아 Supabase에 동기화하는 API 엔드포인트
-import { createClient } from '@supabase/supabase-js';
-import { Webhook } from 'svix';
 
-import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { headers } from 'next/headers';
+import { Webhook } from 'svix';
+import { createClient } from '@supabase/supabase-js';
 
 // Clerk 웹훅 이벤트 타입 정의
 type ClerkWebhookEvent = {
@@ -34,9 +34,7 @@ export async function POST(req: NextRequest) {
 
     if (!supabaseUrl || !supabaseServiceKey) {
       console.error('Missing required Supabase environment variables');
-      return new NextResponse('Error: Missing Supabase configuration', {
-        status: 500,
-      });
+      return new NextResponse('Error: Missing Supabase configuration', { status: 500 });
     }
 
     if (!webhookSecret) {
@@ -64,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     // 웹훅 서명 검증
     const wh = new Webhook(webhookSecret);
-
+    
     let evt: ClerkWebhookEvent;
     try {
       evt = wh.verify(body, {
@@ -109,14 +107,9 @@ export async function POST(req: NextRequest) {
 }
 
 // 사용자 생성 처리
-async function handleUserCreated(
-  userData: ClerkWebhookEvent['data'],
-  supabase: any
-) {
+async function handleUserCreated(userData: ClerkWebhookEvent['data'], supabase: any) {
   try {
-    const primaryEmail = userData.email_addresses.find(
-      email => email.id === userData.email_addresses[0]?.id
-    );
+    const primaryEmail = userData.email_addresses.find(email => email.id === userData.email_addresses[0]?.id);
     const primaryPhone = userData.phone_numbers?.[0];
 
     if (!primaryEmail) {
@@ -131,18 +124,20 @@ async function handleUserCreated(
       clerk_updated_at: userData.updated_at,
     };
 
-    const { data, error } = await supabase.from('users').insert({
-      clerk_id: userData.id,
-      email: primaryEmail.email_address,
-      first_name: userData.first_name || null,
-      last_name: userData.last_name || null,
-      image_url: userData.image_url || null,
-      phone_number: primaryPhone?.phone_number || null,
-      last_sign_in_at: userData.last_sign_in_at
-        ? new Date(userData.last_sign_in_at).toISOString()
-        : null,
-      metadata: metadata,
-    });
+    const { data, error } = await supabase
+      .from('users')
+      .insert({
+        clerk_id: userData.id,
+        email: primaryEmail.email_address,
+        first_name: userData.first_name || null,
+        last_name: userData.last_name || null,
+        image_url: userData.image_url || null,
+        phone_number: primaryPhone?.phone_number || null,
+        last_sign_in_at: userData.last_sign_in_at 
+          ? new Date(userData.last_sign_in_at).toISOString() 
+          : null,
+        metadata: metadata,
+      });
 
     if (error) {
       throw new Error(`Supabase insert error: ${error.message}`);
@@ -156,14 +151,9 @@ async function handleUserCreated(
 }
 
 // 사용자 업데이트 처리
-async function handleUserUpdated(
-  userData: ClerkWebhookEvent['data'],
-  supabase: any
-) {
+async function handleUserUpdated(userData: ClerkWebhookEvent['data'], supabase: any) {
   try {
-    const primaryEmail = userData.email_addresses.find(
-      email => email.id === userData.email_addresses[0]?.id
-    );
+    const primaryEmail = userData.email_addresses.find(email => email.id === userData.email_addresses[0]?.id);
     const primaryPhone = userData.phone_numbers?.[0];
 
     if (!primaryEmail) {
@@ -208,7 +198,7 @@ async function handleUserDeleted(userId: string, supabase: any) {
     const { data, error } = await supabase
       .from('users')
       .update({
-        metadata: { deleted: true, deleted_at: new Date().toISOString() },
+        metadata: { deleted: true, deleted_at: new Date().toISOString() }
       })
       .eq('clerk_id', userId);
 
@@ -229,7 +219,7 @@ async function handleSignIn(userId: string, supabase: any) {
     const { data, error } = await supabase
       .from('users')
       .update({
-        last_sign_in_at: new Date().toISOString(),
+        last_sign_in_at: new Date().toISOString()
       })
       .eq('clerk_id', userId);
 
@@ -242,4 +232,4 @@ async function handleSignIn(userId: string, supabase: any) {
     console.error('Error recording sign in in Supabase:', error);
     throw error;
   }
-}
+} 

@@ -2,10 +2,10 @@
 // Some third-party libs assume `self` is defined even on SSR.
 // This file MUST be imported before any vendor code executes.
 
-// @ts-ignore
+// @ts-expect-error - self polyfill for SSR
 if (typeof globalThis.self === 'undefined') {
-  // @ts-ignore
+  // @ts-expect-error - self polyfill for SSR
   globalThis.self = globalThis;
 }
 
-export {};
+export {}; 

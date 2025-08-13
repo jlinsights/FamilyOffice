@@ -24,7 +24,6 @@ export async function POST(request: NextRequest) {
 
     // 개발 환경에서는 테스트용 사용자 ID 사용
     const effectiveUserId = userId || 'dev-test-user';
-    const identifier = `${effectiveUserId}-ai-consulting`;
 
     // 2. Rate limiting (개발 환경에서는 완화)
     let rateLimitResult = { success: true, total: 100, remaining: 99, reset: Date.now() + 3600000 };

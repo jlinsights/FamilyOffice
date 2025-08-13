@@ -1,12 +1,10 @@
 // Triple-AI 통계 및 분석 API
 import { NextRequest, NextResponse } from 'next/server';
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import { createClient } from '@/lib/supabase/server';
 
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = await auth();
-    
     // 관리자 권한 확인
     const user = await currentUser();
     const primaryEmail = user?.emailAddresses.find(

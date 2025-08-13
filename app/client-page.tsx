@@ -16,7 +16,6 @@ import { PerformanceMonitor } from '@/components/performance-monitor';
 import { HubSpotIntegration } from '@/components/hubspot-integration';
 import { Providers } from '@/components/providers';
 
-import { generateStructuredData } from '@/lib/seo';
 
 export default function ClientPage() {
   const [mounted, setMounted] = useState(false);
@@ -87,7 +86,7 @@ export default function ClientPage() {
         />
       </noscript>
 
-      <ErrorBoundary fallback={undefined}>
+      <ErrorBoundary>
         <Providers>
           <div className="min-h-screen">
             <AdminAccessDeniedAlert />
@@ -98,8 +97,7 @@ export default function ClientPage() {
             <HubSpotIntegration />
 
             {/* 구조화된 데이터 */}
-            <StructuredData data={generateStructuredData('Organization')} />
-            <StructuredData data={generateStructuredData('WebSite')} />
+            <StructuredData />
 
             <main id="main-content" className="pt-20">
               <HeroSection />

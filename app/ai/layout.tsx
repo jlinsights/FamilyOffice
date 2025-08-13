@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { generateMetadata, generateStructuredData } from '@/lib/seo';
+import { generateMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata(
   'AI 컨설턴트 | 24시간 가업승계·자산관리 전문상담',

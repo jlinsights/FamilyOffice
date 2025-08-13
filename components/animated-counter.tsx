@@ -1,127 +1,71 @@
-'use client';
+"use client"
 
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react'
 
 interface AnimatedCounterProps {
-  end: number;
-  start?: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-  className?: string;
-  startAnimation?: boolean;
-  easingFunction?: (t: number) => number;
-  formatNumber?: (num: number) => string;
-  onComplete?: () => void;
-  locale?: string;
-  ariaLabel?: string;
+  end: number
+  duration?: number
+  prefix?: string
+  suffix?: string
+  className?: string
+  startAnimation?: boolean
 }
 
-export function AnimatedCounter({
-  end,
-  start = 0,
-  duration = 2000,
-  prefix = '',
-  suffix = '',
-  className = '',
-  startAnimation = false,
-  easingFunction,
-  formatNumber,
-  onComplete,
-  locale = 'ko-KR',
-  ariaLabel,
+export function AnimatedCounter({ 
+  end, 
+  duration = 2000, 
+  prefix = "", 
+  suffix = "", 
+  className = "",
+  startAnimation = false 
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(start);
-  const [isMounted, setIsMounted] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+  const [count, setCount] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const counterRef = useRef<HTMLSpanElement>(null)
 
-  // ref를 사용하여 최신 함수들을 참조
-  const easingFunctionRef = useRef(easingFunction);
-  const onCompleteRef = useRef(onComplete);
-
-  // ref 업데이트
   useEffect(() => {
-    easingFunctionRef.current = easingFunction;
-    onCompleteRef.current = onComplete;
-  }, [easingFunction, onComplete]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
 
-  // 클라이언트 사이드 마운트 확인
+    if (counterRef.current) {
+      observer.observe(counterRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
   useEffect(() => {
-    setIsMounted(true);
-    setIsClient(true);
-  }, []);
+    if (isVisible || startAnimation) {
+      const startTime = Date.now()
+      const endTime = startTime + duration
 
-  // 숫자 포맷팅 함수
-  const formatDisplayNumber = useCallback(
-    (num: number): string => {
-      if (formatNumber) {
-        return formatNumber(num);
-      }
-      return Math.floor(num).toLocaleString(locale);
-    },
-    [formatNumber, locale]
-  );
+      const timer = setInterval(() => {
+        const now = Date.now()
+        const remaining = Math.max(endTime - now, 0)
+        const progress = Math.min((duration - remaining) / duration, 1)
 
-  // 애니메이션 로직
-  useEffect(() => {
-    if (!isMounted || !isClient || !startAnimation) return;
+        // 이징 함수 적용 (ease-out)
+        const easeOut = 1 - Math.pow(1 - progress, 3)
+        setCount(Math.floor(easeOut * end))
 
-    let animationFrame: number;
-    const startTime = Date.now();
-    const difference = end - start;
+        if (progress === 1) {
+          clearInterval(timer)
+        }
+      }, 16) // 60fps
 
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // ref를 통해 최신 easing 함수 사용
-      const currentEasingFunction = easingFunctionRef.current;
-      const easedProgress = currentEasingFunction 
-        ? currentEasingFunction(progress) 
-        : 1 - Math.pow(1 - progress, 3);
-      
-      const currentCount = start + difference * easedProgress;
-
-      setCount(currentCount);
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      } else {
-        setCount(end);
-        onCompleteRef.current?.();
-      }
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
-    };
-  }, [isMounted, isClient, startAnimation, start, end, duration]);
-
-  // SSR 방지: 마운트되기 전에는 시작 값 표시
-  if (!isMounted || !isClient) {
-    return (
-      <span className={className}>
-        {prefix}
-        {formatDisplayNumber(start)}
-        {suffix}
-      </span>
-    );
-  }
+      return () => clearInterval(timer)
+    }
+  }, [isVisible, startAnimation, end, duration])
 
   return (
-    <span
-      className={className}
-      aria-label={
-        ariaLabel || `${prefix}${formatDisplayNumber(count)}${suffix}`
-      }
-    >
-      {prefix}
-      {formatDisplayNumber(count)}
-      {suffix}
+    <span ref={counterRef} className={className}>
+      {prefix}{count.toLocaleString()}{suffix}
     </span>
-  );
-}
+  )
+} 

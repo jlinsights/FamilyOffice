@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils"
 
 function Skeleton({
   className,
@@ -6,10 +6,10 @@ function Skeleton({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('animate-pulse rounded-md bg-muted', className)}
+      className={cn("animate-pulse rounded-md bg-muted", className)}
       {...props}
     />
-  );
+  )
 }
 
 // 서비스 카드용 스켈레톤
@@ -21,7 +21,7 @@ function ServiceCardSkeleton() {
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-2/3" />
     </div>
-  );
+  )
 }
 
 // 헤더용 스켈레톤
@@ -44,7 +44,7 @@ function HeaderSkeleton() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 // 페이지 로딩용 스켈레톤
@@ -64,7 +64,7 @@ function PageSkeleton() {
               <Skeleton className="h-12 w-32" />
             </div>
           </div>
-
+          
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
@@ -74,7 +74,7 @@ function PageSkeleton() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export { Skeleton, ServiceCardSkeleton, HeaderSkeleton, PageSkeleton };
+export { Skeleton, ServiceCardSkeleton, HeaderSkeleton, PageSkeleton }

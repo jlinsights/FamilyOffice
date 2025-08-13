@@ -1,219 +1,87 @@
-'use client';
+"use client"
 
-import { CheckCircle, AlertCircle } from 'lucide-react';
+import type React from "react"
 
-import type React from 'react';
-import { useState } from 'react';
-
-// import { createClient } from "@/lib/supabase/client"
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { createClient } from "@/lib/supabase/client"
 
 export function ConsultationForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
-  const [formSuccess, setFormSuccess] = useState(false);
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setFormError(null);
-    setFieldErrors({});
+    event.preventDefault()
+    setIsSubmitting(true)
+    setFormError(null)
 
-    const formData = new FormData(event.currentTarget);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const service = formData.get('service') as string;
-    const message = formData.get('message') as string;
-
-    // 필드별 검증
-    const errors: Record<string, string> = {};
-
-    if (!name?.trim()) {
-      errors.name = '성함을 입력해주세요.';
-    }
-
-    if (!email?.trim()) {
-      errors.email = '이메일을 입력해주세요.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errors.email = '올바른 이메일 형식을 입력해주세요.';
-    }
-
-    if (!phone?.trim()) {
-      errors.phone = '연락처를 입력해주세요.';
-    } else if (!/^[0-9-+\s()]+$/.test(phone)) {
-      errors.phone = '올바른 전화번호 형식을 입력해주세요.';
-    }
-
-    if (Object.keys(errors).length > 0) {
-      setFieldErrors(errors);
-      setIsSubmitting(false);
-      return;
-    }
+    const formData = new FormData(event.currentTarget)
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const phone = formData.get("phone") as string
+    const service = formData.get("service") as string
+    const message = formData.get("message") as string
 
     try {
-      // 임시로 콘솔에 폼 데이터 출력 (실제 환경에서는 Supabase에 저장)
-      console.log('Form submission:', {
-        name: name.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-        service_type: service || null,
-        message: message?.trim() || null,
-        status: 'pending',
-      });
+      const supabase = createClient()
 
-      // 임시 성공 처리
-      setFormSuccess(true);
-      event.currentTarget.reset();
+      const { error } = await supabase.from("consultations").insert({
+        name,
+        email,
+        phone,
+        service_type: service,
+        message,
+        status: "pending",
+      })
+
+      if (error) throw error
+
+      setFormSuccess(true)
+      event.currentTarget.reset()
 
       // 3초 후 성공 메시지 숨기기
       setTimeout(() => {
-        setFormSuccess(false);
-      }, 3000);
+        setFormSuccess(false)
+      }, 3000)
     } catch (error) {
-      console.error('Error submitting form:', error);
-
-      let errorMessage = '상담 신청 중 오류가 발생했습니다.';
-
-      if (error instanceof Error) {
-        errorMessage = error.message;
-      } else if (error && typeof error === 'object' && 'message' in error) {
-        errorMessage = String(error.message);
-      }
-
-      setFormError(errorMessage);
+      console.error("Error submitting form:", error)
+      setFormError("상담 신청 중 오류가 발생했습니다. 다시 시도해 주세요.")
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      {/* 성공 메시지 */}
-      {formSuccess && (
-        <Alert className="border-green-200 bg-green-50">
-          <CheckCircle className="h-4 w-4 text-green-600" />
-          <AlertDescription className="text-green-800">
-            상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
-          </AlertDescription>
-        </Alert>
-      )}
-
-      {/* 오류 메시지 */}
-      {formError && (
-        <Alert className="border-red-200 bg-red-50">
-          <AlertCircle className="h-4 w-4 text-red-600" />
-          <AlertDescription className="text-red-800">
-            {formError}
-          </AlertDescription>
-        </Alert>
-      )}
-
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
-          <label
-            htmlFor="name"
-            className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium"
-          >
-            성함{' '}
-            <span className="text-red-500" aria-label="필수 항목">
-              *
-            </span>
+          <label htmlFor="name" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
+            성함 *
           </label>
-          <Input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="성함을 입력해주세요"
-            required
-            aria-describedby={fieldErrors.name ? 'name-error' : undefined}
-            aria-invalid={!!fieldErrors.name}
-            className={fieldErrors.name ? 'border-red-500' : ''}
-          />
-          {fieldErrors.name && (
-            <p
-              id="name-error"
-              className="text-red-500 text-sm mt-1"
-              role="alert"
-            >
-              {fieldErrors.name}
-            </p>
-          )}
+          <Input type="text" id="name" name="name" placeholder="성함을 입력해주세요" required />
         </div>
         <div>
-          <label
-            htmlFor="phone"
-            className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium"
-          >
-            연락처{' '}
-            <span className="text-red-500" aria-label="필수 항목">
-              *
-            </span>
+          <label htmlFor="phone" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
+            연락처 *
           </label>
-          <Input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="연락 가능한 번호를 입력해주세요"
-            required
-            aria-describedby={fieldErrors.phone ? 'phone-error' : undefined}
-            aria-invalid={!!fieldErrors.phone}
-            className={fieldErrors.phone ? 'border-red-500' : ''}
-          />
-          {fieldErrors.phone && (
-            <p
-              id="phone-error"
-              className="text-red-500 text-sm mt-1"
-              role="alert"
-            >
-              {fieldErrors.phone}
-            </p>
-          )}
+          <Input type="tel" id="phone" name="phone" placeholder="연락 가능한 번호를 입력해주세요" required />
         </div>
       </div>
       <div>
-        <label
-          htmlFor="email"
-          className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium"
-        >
-          이메일{' '}
-          <span className="text-red-500" aria-label="필수 항목">
-            *
-          </span>
+        <label htmlFor="email" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
+          이메일 *
         </label>
-        <Input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="이메일 주소를 입력해주세요"
-          required
-          aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-          aria-invalid={!!fieldErrors.email}
-          className={fieldErrors.email ? 'border-red-500' : ''}
-        />
-        {fieldErrors.email && (
-          <p
-            id="email-error"
-            className="text-red-500 text-sm mt-1"
-            role="alert"
-          >
-            {fieldErrors.email}
-          </p>
-        )}
+        <Input type="email" id="email" name="email" placeholder="이메일 주소를 입력해주세요" required />
       </div>
       <div>
-        <label
-          htmlFor="service"
-          className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium"
-        >
+        <label htmlFor="service" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
           관심 서비스
         </label>
-        <select
-          id="service"
+        <select 
+          id="service" 
           name="service"
           className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         >
@@ -227,10 +95,7 @@ export function ConsultationForm() {
         </select>
       </div>
       <div>
-        <label
-          htmlFor="message"
-          className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm font-medium"
-        >
+        <label htmlFor="message" className="block text-light-text-secondary dark:text-dark-text-secondary mb-2 text-sm">
           문의사항
         </label>
         <Textarea
@@ -243,20 +108,26 @@ export function ConsultationForm() {
       </div>
       <div className="flex items-start">
         <input type="checkbox" id="privacy" className="mt-1 mr-2" required />
-        <label
-          htmlFor="privacy"
-          className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary"
-        >
-          개인정보 수집 및 이용에 동의합니다. 수집된 정보는 상담 목적으로만
-          사용되며, 관련 법령에 따라 보호됩니다.
+        <label htmlFor="privacy" className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
+          개인정보 수집 및 이용에 동의합니다. 수집된 정보는 상담 목적으로만 사용되며, 관련 법령에 따라 보호됩니다.
         </label>
       </div>
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? '처리 중...' : '상담 신청하기'}
+      {formError && (
+        <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-3 rounded-md text-sm">
+          {formError}
+        </div>
+      )}
+
+      {formSuccess && (
+        <div className="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 p-3 rounded-md text-sm">
+          상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
+        </div>
+      )}
+
+      <Button type="submit" variant="primary" className="w-full" disabled={isSubmitting}>
+        {isSubmitting ? "처리 중..." : "상담 신청하기"}
       </Button>
     </form>
-  );
+  )
 }
-
-export default ConsultationForm;

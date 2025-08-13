@@ -1,11 +1,9 @@
 // Triple-AI 시스템 헬스체크 API
 import { NextRequest, NextResponse } from 'next/server';
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = await auth();
-    
     // 기본 헬스체크는 공개, 상세 정보는 관리자만
     const { searchParams } = new URL(request.url);
     const detailed = searchParams.get('detailed') === 'true';

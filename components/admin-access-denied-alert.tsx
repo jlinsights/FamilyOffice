@@ -3,45 +3,29 @@
 
 'use client';
 
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState, Suspense } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { X, Shield } from 'lucide-react';
 
-import { useEffect, useState, Suspense } from 'react';
-
-import { useSearchParams } from 'next/navigation';
-
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-
 function AdminAccessDeniedAlertContent() {
+  const searchParams = useSearchParams();
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState('');
-  const [mounted, setMounted] = useState(false);
-  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
 
   useEffect(() => {
-    setMounted(true);
-    // 클라이언트 사이드에서만 URLSearchParams 사용
-    if (typeof window !== 'undefined') {
-      setSearchParams(new URLSearchParams(window.location.search));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || !searchParams) return;
-
     const error = searchParams.get('error');
-
+    
     if (error) {
       let errorMessage = '';
-
+      
       switch (error) {
         case 'admin_access_denied':
-          errorMessage =
-            '관리자 페이지에 접근할 권한이 없습니다. jhlim725@gmail.com 계정으로 로그인해주세요.';
+          errorMessage = '관리자 페이지에 접근할 권한이 없습니다. jhlim725@gmail.com 계정으로 로그인해주세요.';
           break;
         case 'admin_check_failed':
-          errorMessage =
-            '관리자 권한 확인 중 오류가 발생했습니다. 다시 시도해주세요.';
+          errorMessage = '관리자 권한 확인 중 오류가 발생했습니다. 다시 시도해주세요.';
           break;
         case 'unauthorized':
           errorMessage = '로그인이 필요합니다.';
@@ -49,16 +33,11 @@ function AdminAccessDeniedAlertContent() {
         default:
           errorMessage = '접근 중 오류가 발생했습니다.';
       }
-
+      
       setMessage(errorMessage);
       setShow(true);
     }
-  }, [searchParams, mounted]);
-
-  // 서버와 클라이언트 렌더링을 일치시키기 위해 항상 동일한 구조 반환
-  if (!mounted) {
-    return null;
-  }
+  }, [searchParams]);
 
   if (!show) return null;
 
@@ -79,7 +58,9 @@ function AdminAccessDeniedAlertContent() {
           <div className="flex items-start gap-3">
             <Shield className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-sm text-destructive">{message}</p>
+              <p className="text-sm text-destructive">
+                {message}
+              </p>
             </div>
             <Button
               variant="ghost"
@@ -102,4 +83,4 @@ export function AdminAccessDeniedAlert() {
       <AdminAccessDeniedAlertContent />
     </Suspense>
   );
-}
+} 

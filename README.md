@@ -96,7 +96,7 @@ UPSTASH_REDIS_REST_TOKEN=your_redis_token
 # 외부 서비스
 NEXT_PUBLIC_CAL_COM_API_KEY=your_cal_com_api_key
 NEXT_PUBLIC_HUBSPOT_PORTAL_ID=your_hubspot_portal_id
-NEXT_PUBLIC_CHANNEL_IO_KEY=your_channel_io_key
+NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY=4c0cca0c-7cf1-4441-8f11-3e04995a4a78
 ```
 
 ## 🔧 최근 해결된 기술적 이슈

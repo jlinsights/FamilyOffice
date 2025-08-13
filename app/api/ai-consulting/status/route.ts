@@ -3,9 +3,9 @@
  * GET /api/ai-consulting/status
  */
 import { AIEnvironmentValidator } from '@/lib/ai/ai-env-validator';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const envValidator = AIEnvironmentValidator.getInstance();
     const envSummary = envValidator.getEnvironmentSummary();

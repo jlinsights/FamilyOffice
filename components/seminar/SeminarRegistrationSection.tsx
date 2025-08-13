@@ -37,7 +37,7 @@ export default function SeminarRegistrationSection() {
     (async function () {
       try {
         const { getCalApi } = await import('@calcom/embed-react');
-        const cal = await getCalApi({ namespace: 'consulting' });
+        const cal = await getCalApi({ namespace: 'coffeechat' });
         cal('ui', {
           cssVarsPerTheme: {
             light: { 'cal-brand': '#000000' },
@@ -95,7 +95,7 @@ export default function SeminarRegistrationSection() {
       title: '온라인 예약',
       description: 'Cal.com을 통한 즉시 예약',
       action: '예약하기',
-      href: 'https://cal.com/familyoffice/consultation',
+      href: 'https://cal.com/familyoffice/coffeechat',
     },
   ];
 
@@ -279,8 +279,8 @@ export default function SeminarRegistrationSection() {
               </div>
               <div className="p-6">
                 <Cal
-                  namespace="consulting"
-                  calLink="familyoffice/consultation"
+                  namespace="coffeechat"
+                  calLink="familyoffice/coffeechat"
                   style={{ width: '100%', height: '600px', overflow: 'scroll' }}
                   config={{ layout: 'month_view' }}
                 />

@@ -34,7 +34,7 @@ export default function CalComEmbed({ className, style }: CalComEmbedProps) {
 
   return (
     <iframe
-      src="https://cal.com/familyoffice/consulting"
+      src="https://cal.com/familyoffice/coffeechat"
       width="100%"
       height="100%"
       style={{
