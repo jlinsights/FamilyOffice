@@ -86,7 +86,20 @@ export function ClientApp() {
         />
       </noscript>
 
-      <ErrorBoundary fallback={undefined}>
+      <ErrorBoundary fallback={({ error, reset }) => (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold mb-2">Something went wrong</h2>
+            <p className="text-gray-600 mb-4">An error occurred while loading the page.</p>
+            <button 
+              onClick={reset}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Try again
+            </button>
+          </div>
+        </div>
+      )}>
         <Providers>
           <div className="min-h-screen">
             <AdminAccessDeniedAlert />
@@ -97,8 +110,7 @@ export function ClientApp() {
             <HubSpotIntegration />
 
             {/* 구조화된 데이터 */}
-            <StructuredData data={generateStructuredData('Organization')} />
-            <StructuredData data={generateStructuredData('WebSite')} />
+            <StructuredData />
 
             <main id="main-content" className="pt-20">
               <HeroSection />

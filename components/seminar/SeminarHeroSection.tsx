@@ -81,7 +81,6 @@ export function SeminarHeroSection() {
                 suffix="+"
                 startAnimation={startAnimation}
                 duration={2000}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-sm text-muted-foreground">참여 CEO</div>
@@ -93,7 +92,6 @@ export function SeminarHeroSection() {
                 suffix="+"
                 startAnimation={startAnimation}
                 duration={1500}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-sm text-muted-foreground">연간 세미나</div>
@@ -105,7 +103,6 @@ export function SeminarHeroSection() {
                 suffix="%"
                 startAnimation={startAnimation}
                 duration={1800}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-sm text-muted-foreground">만족도</div>
@@ -117,7 +114,6 @@ export function SeminarHeroSection() {
                 suffix="시간"
                 startAnimation={startAnimation}
                 duration={1500}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-sm text-muted-foreground">연간 교육시간</div>

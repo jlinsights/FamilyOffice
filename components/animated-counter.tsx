@@ -61,6 +61,7 @@ export function AnimatedCounter({
 
       return () => clearInterval(timer)
     }
+    return undefined
   }, [isVisible, startAnimation, end, duration])
 
   return (

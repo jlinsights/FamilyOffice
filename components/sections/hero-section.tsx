@@ -76,7 +76,6 @@ export function HeroSection() {
                 suffix="년+"
                 startAnimation={startAnimation}
                 duration={1500}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground">가업승계 노하우</div>
@@ -88,7 +87,6 @@ export function HeroSection() {
                 suffix="+"
                 startAnimation={startAnimation}
                 duration={2000}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground">
@@ -104,7 +102,6 @@ export function HeroSection() {
                 suffix="+"
                 startAnimation={startAnimation}
                 duration={1500}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground">
@@ -120,7 +117,6 @@ export function HeroSection() {
                 suffix="%"
                 startAnimation={startAnimation}
                 duration={1800}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground">

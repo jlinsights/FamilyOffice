@@ -5,13 +5,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { 
   Activity,
   Brain,
-  BarChart3,
   Clock,
   DollarSign,
   Users,
@@ -359,7 +357,6 @@ export function AIAdminDashboard() {
                 {dailyTrends.map((trend, index) => {
                   const prevTrend = index > 0 ? dailyTrends[index - 1] : null;
                   const consultationChange = prevTrend ? trend.consultations - prevTrend.consultations : 0;
-                  const responseTimeChange = prevTrend ? trend.avg_response_time - prevTrend.avg_response_time : 0;
                   
                   return (
                     <div key={trend.date} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">

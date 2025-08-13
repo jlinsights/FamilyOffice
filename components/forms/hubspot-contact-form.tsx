@@ -28,7 +28,7 @@ export function HubSpotContactForm({
   formId,
 }: HubSpotContactFormProps) {
   return (
-    <HubSpotForm className={className}>
+    <HubSpotForm className={className || ''}>
       <form
         action={`https://api.hubapi.com/submissions/v3/integration/submit/${formId || 'default-form-id'}`}
         method="POST"
@@ -235,7 +235,7 @@ export function HubSpotApiContactForm({
 }: HubSpotContactFormProps) {
   return (
     <HubSpotApiForm
-      className={className}
+      className={className || ''}
       formUrl={`https://api.hubapi.com/submissions/v3/integration/submit/${formId || 'default-form-id'}`}
     >
       <form className="space-y-6">
