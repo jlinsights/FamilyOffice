@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
-import { AIConsultingChat } from '@/components/ai-consulting-chat';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Badge } from '@/components/ui/badge';

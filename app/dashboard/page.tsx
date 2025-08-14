@@ -21,8 +21,6 @@ import {
   CheckCircle,
   AlertTriangle,
   Shield,
-  Brain,
-  Bot,
 } from 'lucide-react';
 
 import { useState } from 'react';
@@ -31,8 +29,6 @@ import Link from 'next/link';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { AIConsultingChat } from '@/components/ai-consulting-chat';
-import { AIAdminDashboard } from '@/components/ai-admin-dashboard';
 
 // 메타데이터는 클라이언트 컴포넌트에서 제거
 
@@ -241,8 +237,6 @@ const DashboardContent = () => {
             <div className="flex border-b border-gray-200 dark:border-gray-700">
               {[
                 { id: 'overview', label: '개요' },
-                { id: 'ai-consulting', label: 'AI 컨설팅' },
-                { id: 'ai-admin', label: 'AI 관리' },
                 { id: 'clients', label: '고객관리' },
                 { id: 'projects', label: '프로젝트' },
                 { id: 'analytics', label: '분석' },
@@ -391,50 +385,6 @@ const DashboardContent = () => {
                 </div>
               )}
 
-              {/* AI 컨설팅 탭 */}
-              {selectedTab === 'ai-consulting' && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
-                      <Brain className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                        Triple-AI 컨설팅 시스템
-                      </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Claude Opus 4 + GPT-4 + Gemini 2.5 Pro 하이브리드 컨설팅
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <AIConsultingChat 
-                    className="max-w-full"
-                    maxHeight="500px"
-                  />
-                </div>
-              )}
-
-              {/* AI 관리 탭 */}
-              {selectedTab === 'ai-admin' && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-green-600 to-teal-600 flex items-center justify-center">
-                      <Bot className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                        AI 시스템 관리 대시보드
-                      </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        AI 컨설팅 시스템 성능 모니터링 및 관리
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <AIAdminDashboard />
-                </div>
-              )}
 
               {/* 고객관리 탭 */}
               {selectedTab === 'clients' && (
