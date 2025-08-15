@@ -17,7 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
-import { ConsultationForm } from '@/components/forms/consultation-form';
+import { CalComInline } from '@/components/cal-com-inline';
 import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
@@ -159,8 +159,8 @@ export default function ContactPage() {
                 className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
               >
                 <Link href="#consultation-form" className="flex items-center">
-                  폼으로 신청하기
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  무료 상담 예약하기
+                  <Calendar className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button
@@ -239,7 +239,11 @@ export default function ContactPage() {
                     </p>
                   </div>
                   <div className="card-modern p-8">
-                    <ConsultationForm />
+                    <CalComInline 
+                      calLink="familyoffice" 
+                      height="600px"
+                      showHeader={false}
+                    />
                   </div>
                 </div>
 
