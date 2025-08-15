@@ -1,1 +1,1 @@
-✨ feat: /contact 페이지 무료 상담 신청을 Cal.com 예약 시스템으로 교체
+🔧 chore: Cal.com API key를 환경 변수 스키마에 추가
