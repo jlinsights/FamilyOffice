@@ -363,18 +363,73 @@
     color: #ffffff !important;
   }
 
+  /* Enhanced Cal.com forced dark mode */
+  .cal-com-iframe-forced-dark {
+    background: #000000 !important;
+  }
+
   /* Cal.com specific branded elements */
   iframe[src*="cal.com"] [class*="bg-white"],
   iframe[src*="cal.com"] [class*="bg-gray-50"],
-  iframe[src*="cal.com"] [class*="bg-gray-100"] {
+  iframe[src*="cal.com"] [class*="bg-gray-100"],
+  iframe[src*="cal.com"] [class*="bg-neutral-50"],
+  iframe[src*="cal.com"] [class*="bg-neutral-100"],
+  iframe[src*="cal.com"] [class*="bg-slate-50"],
+  iframe[src*="cal.com"] [class*="bg-slate-100"],
+  iframe[src*="cal.com"] [style*="background-color: white"],
+  iframe[src*="cal.com"] [style*="background-color: #ffffff"],
+  iframe[src*="cal.com"] [style*="background-color: #fff"],
+  iframe[src*="cal.com"] [style*="background: white"],
+  iframe[src*="cal.com"] [style*="background: #ffffff"],
+  iframe[src*="cal.com"] [style*="background: #fff"] {
     background-color: #000000 !important;
+    background: #000000 !important;
   }
 
   /* Cal.com text color overrides */
   iframe[src*="cal.com"] [class*="text-black"],
   iframe[src*="cal.com"] [class*="text-gray-900"],
-  iframe[src*="cal.com"] [class*="text-gray-800"] {
+  iframe[src*="cal.com"] [class*="text-gray-800"],
+  iframe[src*="cal.com"] [class*="text-neutral-900"],
+  iframe[src*="cal.com"] [class*="text-neutral-800"],
+  iframe[src*="cal.com"] [class*="text-slate-900"],
+  iframe[src*="cal.com"] [class*="text-slate-800"],
+  iframe[src*="cal.com"] [style*="color: black"],
+  iframe[src*="cal.com"] [style*="color: #000000"],
+  iframe[src*="cal.com"] [style*="color: #000"] {
     color: #ffffff !important;
+  }
+
+  /* Force Cal.com calendar and booking components */
+  iframe[src*="cal.com"] [data-testid],
+  iframe[src*="cal.com"] [class*="calendar"],
+  iframe[src*="cal.com"] [class*="booking"],
+  iframe[src*="cal.com"] [class*="event"],
+  iframe[src*="cal.com"] [class*="time"],
+  iframe[src*="cal.com"] [class*="date"],
+  iframe[src*="cal.com"] section,
+  iframe[src*="cal.com"] article,
+  iframe[src*="cal.com"] aside,
+  iframe[src*="cal.com"] header,
+  iframe[src*="cal.com"] footer,
+  iframe[src*="cal.com"] nav {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* Ultra-force all backgrounds to black */
+  iframe[src*="cal.com"] * {
+    background-color: transparent !important;
+  }
+
+  iframe[src*="cal.com"] body,
+  iframe[src*="cal.com"] html,
+  iframe[src*="cal.com"] #root,
+  iframe[src*="cal.com"] #__next,
+  iframe[src*="cal.com"] [data-cal-namespace] {
+    background-color: #000000 !important;
+    background: #000000 !important;
   }
 
   /* Firefox scrollbar */

@@ -112,40 +112,27 @@ export function CalComPopup({
       <DialogTrigger asChild>
         {trigger || DefaultTrigger}
       </DialogTrigger>
-      <DialogContent className="max-w-4xl w-full h-[80vh] p-0 bg-background text-foreground">
-        <DialogHeader className="p-6 pb-4 border-b">
+      <DialogContent className="max-w-5xl w-full h-[85vh] p-0 bg-background text-foreground">
+        <DialogHeader className="p-4 pb-3 border-b">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Calendar className="h-5 w-5 text-primary" />
+              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Calendar className="h-4 w-4 text-primary" />
               </div>
               <div>
-                <DialogTitle className="text-xl font-bold">{config.title}</DialogTitle>
-                <p className="text-sm text-muted-foreground">{config.description}</p>
+                <DialogTitle className="text-lg font-bold">{config.title}</DialogTitle>
+                <div className="flex items-center space-x-4 mt-1">
+                  <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3" />
+                    <span>{config.duration}</span>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+                    <Users className="h-3 w-3" />
+                    <span>1:1 전문가 상담</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          
-          {/* Quick Info */}
-          <div className="flex items-center space-x-6 mt-4">
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4" />
-              <span>{config.duration}</span>
-            </div>
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <Users className="h-4 w-4" />
-              <span>1:1 전문가 상담</span>
-            </div>
-          </div>
-
-          {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
-            {config.features.map((feature, index) => (
-              <div key={index} className="flex items-center space-x-2 text-sm">
-                <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                <span>{feature}</span>
-              </div>
-            ))}
           </div>
         </DialogHeader>
 
@@ -159,9 +146,9 @@ export function CalComPopup({
             </div>
           )}
 
-          <div className="h-full p-6">
-            {/* Cal.com iframe container */}
-            <div className="w-full h-full rounded-lg overflow-hidden border bg-background">
+          <div className="h-full p-3">
+            {/* Cal.com iframe container with enhanced dark mode */}
+            <div className="w-full h-full rounded-lg overflow-hidden bg-black">
               <iframe
                 src={fullCalLink}
                 width="100%"
@@ -170,7 +157,9 @@ export function CalComPopup({
                   border: 'none',
                   background: '#000000',
                   colorScheme: 'dark',
+                  filter: 'invert(0) contrast(1.2) brightness(0.9)',
                 }}
+                className="cal-com-iframe-forced-dark"
                 title={config.title}
                 onLoad={() => setIsLoading(false)}
                 allow="camera; microphone"
@@ -179,12 +168,12 @@ export function CalComPopup({
           </div>
 
           {/* Alternative action button */}
-          <div className="absolute bottom-6 right-6">
+          <div className="absolute bottom-3 right-3">
             <Button
               variant="outline"
               size="sm"
               onClick={handleExternalLink}
-              className="bg-background/80 backdrop-blur-sm"
+              className="bg-background/90 backdrop-blur-sm text-xs"
             >
               새 창에서 열기
             </Button>
