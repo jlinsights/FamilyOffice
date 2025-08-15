@@ -36,7 +36,7 @@ export function CalComPopup({
       title: '무료 상담 예약',
       description: '패밀리오피스 전문가와의 1:1 맞춤 상담',
       duration: '60분',
-      features: ['맞춤형 자산관리 전략', '세무 최적화 방안', '승계 계획 수립'],
+      features: ['맞춤형 자산관리 전략', '세무 최적화 방안', '승계 계획 수립', '직업 커리어 상담'],
       calPath: 'familyoffice',
     },
     seminar: {
@@ -113,7 +113,7 @@ export function CalComPopup({
         {trigger || DefaultTrigger}
       </DialogTrigger>
       <DialogContent className="max-w-5xl w-full h-[85vh] p-0 bg-background text-foreground">
-        <DialogHeader className="p-4 pb-3 border-b">
+        <DialogHeader className="p-4 pb-3 border-b bg-background">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -134,6 +134,16 @@ export function CalComPopup({
               </div>
             </div>
           </div>
+          
+          {/* 컴팩트한 상담 분야 표시 */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-3">
+            {config.features.map((feature, index) => (
+              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded-full px-2 py-1">
+                <CheckCircle className="h-3 w-3 text-green-500 flex-shrink-0" />
+                <span className="text-muted-foreground">{feature}</span>
+              </div>
+            ))}
+          </div>
         </DialogHeader>
 
         <div className="flex-1 relative">
@@ -146,9 +156,9 @@ export function CalComPopup({
             </div>
           )}
 
-          <div className="h-full p-3">
+          <div className="h-full p-2 bg-background">
             {/* Cal.com iframe container with enhanced dark mode */}
-            <div className="w-full h-full rounded-lg overflow-hidden bg-black">
+            <div className="w-full h-full rounded-lg overflow-hidden bg-black border border-border">
               <iframe
                 src={fullCalLink}
                 width="100%"
@@ -168,12 +178,12 @@ export function CalComPopup({
           </div>
 
           {/* Alternative action button */}
-          <div className="absolute bottom-3 right-3">
+          <div className="absolute bottom-2 right-2">
             <Button
               variant="outline"
               size="sm"
               onClick={handleExternalLink}
-              className="bg-background/90 backdrop-blur-sm text-xs"
+              className="bg-background/95 backdrop-blur-sm text-xs border-border hover:bg-muted/80"
             >
               새 창에서 열기
             </Button>

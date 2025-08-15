@@ -432,6 +432,44 @@
     background: #000000 !important;
   }
 
+  /* Force all possible Cal.com white areas to black */
+  iframe[src*="cal.com"] [class*="white"],
+  iframe[src*="cal.com"] [class*="light"],
+  iframe[src*="cal.com"] [class*="50"],
+  iframe[src*="cal.com"] [class*="100"],
+  iframe[src*="cal.com"] [style*="rgb(255"],
+  iframe[src*="cal.com"] [style*="rgba(255"],
+  iframe[src*="cal.com"] form,
+  iframe[src*="cal.com"] .form,
+  iframe[src*="cal.com"] [role="form"],
+  iframe[src*="cal.com"] fieldset,
+  iframe[src*="cal.com"] legend {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* Special handling for Cal.com modal and overlays */
+  iframe[src*="cal.com"] [role="dialog"],
+  iframe[src*="cal.com"] [role="modal"],
+  iframe[src*="cal.com"] .modal,
+  iframe[src*="cal.com"] .overlay,
+  iframe[src*="cal.com"] .popup {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* Force all containers and wrappers */
+  iframe[src*="cal.com"] .container,
+  iframe[src*="cal.com"] .wrapper,
+  iframe[src*="cal.com"] .content,
+  iframe[src*="cal.com"] .main,
+  iframe[src*="cal.com"] .app {
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
+
   /* Firefox scrollbar */
   * {
     scrollbar-width: thin;
