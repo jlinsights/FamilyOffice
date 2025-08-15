@@ -1,31 +1,54 @@
-# Robots.txt for FamilyOffice S
+# FamilyOffice S Robots.txt
+# 패밀리오피스 가업승계 자산관리 전문
+# https://familyoffices.vip
+
 # 모든 검색엔진 허용
 User-agent: *
 Allow: /
-
-# 크롤링 제외 경로
-Disallow: /admin/
 Disallow: /api/
+Disallow: /admin/
 Disallow: /_next/
 Disallow: /private/
 Disallow: /.well-known/
 
-# 특정 검색엔진 설정
+# 구글 검색로봇
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
+Allow: /*.js
+Allow: /*.css
+Crawl-delay: 0
 
-User-agent: NaverBot
+# 네이버 검색로봇
+User-agent: Yeti
 Allow: /
 Crawl-delay: 1
 
-User-agent: DaumBot
+# 다음 검색로봇
+User-agent: Daumoa
 Allow: /
 Crawl-delay: 1
 
-# Sitemap 위치
+# 빙 검색로봇
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# AI 검색엔진
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 2
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 2
+
+# 사이트맵 위치
 Sitemap: https://familyoffices.vip/sitemap.xml
-Sitemap: https://familyoffices.vip/sitemap-index.xml
+Sitemap: https://familyoffices.vip/sitemap-blog.xml
 
-# 호스트 명시 (Naver 최적화)
-Host: familyoffices.vip 
+# 호스트 지정
+Host: https://familyoffices.vip 

@@ -8,27 +8,23 @@ import { Header } from '@/components/header';
 import { Badge } from '@/components/ui/badge';
 import { StructuredData } from '@/components/structured-data';
 
-// 페이지별 메타데이터 - 가업승계 전문 서비스로 업데이트
+// 페이지별 메타데이터 - SEO 최적화
 export const metadata: Metadata = generateMetadata(
-  '백년영속의 시작 | 가업승계 전문 FamilyOffice S',
-  '기업의 가치를 다음 세대로. 10년+ 가업승계 노하우, 1,500+ M&A 플랫폼, 60+ Big 4 출신 전문가 컨소시엄. 성공적인 가업승계는 백년영속의 시작입니다.',
+  '패밀리오피스 가업승계 자산관리 전문',
+  '패밀리오피스 전문 상담. 가업승계, 상속증여 절세, CEO 자산관리, 경영인정기보험. 중소중견기업 대표 맞춤 컨설팅. 삼성생명 500억+ 운용. 무료상담 ☎0502-5550-8700',
   [
-    '가업승계',
-    '패밀리오피스',
-    '헤리티지 플래닝',
-    '기업승계',
-    '가족법인',
-    '자산이전',
-    '상속계획',
-    '승계전략',
-    '백년영속',
-    '비상장기업 승계',
-    '중소기업 승계',
+    '패밀리오피스 추천',
     '가업승계 컨설팅',
-    '기업승계 전략',
-    '상속세 최적화',
+    '상속세 절세 방법',
+    '증여세 절세 방법',
+    'CEO 자산관리',
+    '경영인정기보험',
+    '중소기업 절세',
+    '서울 패밀리오피스',
+    '강남 패밀리오피스',
+    '삼성생명 자산관리',
   ],
-  '/og-image-succession.jpg'
+  '/og-image.jpg'
 );
 
 export default function HomePage() {
