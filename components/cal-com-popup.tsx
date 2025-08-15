@@ -112,16 +112,16 @@ export function CalComPopup({
       <DialogTrigger asChild>
         {trigger || DefaultTrigger}
       </DialogTrigger>
-      <DialogContent className="max-w-6xl w-full h-[95vh] p-0 bg-background text-foreground">
-        <DialogHeader className="px-3 py-2 pb-1 border-b bg-background">
+      <DialogContent className="max-w-6xl w-full h-[98vh] p-0 bg-background text-foreground">
+        <DialogHeader className="px-4 pt-3 pb-2 border-b bg-background">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Calendar className="h-4 w-4 text-primary" />
               </div>
               <div>
-                <DialogTitle className="text-base font-bold">{config.title}</DialogTitle>
-                <div className="flex items-center space-x-3 mt-0.5">
+                <DialogTitle className="text-lg font-bold">{config.title}</DialogTitle>
+                <div className="flex items-center space-x-4 mt-1">
                   <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                     <Clock className="h-3 w-3" />
                     <span>{config.duration}</span>
@@ -136,10 +136,10 @@ export function CalComPopup({
           </div>
           
           {/* 컴팩트한 상담 분야 표시 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mt-1.5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 mt-2">
             {config.features.map((feature, index) => (
-              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/20 rounded-md px-1.5 py-0.5">
-                <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
+              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded-md px-2 py-1">
+                <CheckCircle className="h-3 w-3 text-green-500 flex-shrink-0" />
                 <span className="text-muted-foreground text-xs">{feature}</span>
               </div>
             ))}
