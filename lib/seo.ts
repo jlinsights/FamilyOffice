@@ -238,14 +238,6 @@ export const defaultMetadata: Metadata = {
     
     // 소셜 미디어 최적화 - 중년 타겟
     locale: 'ko_KR',
-    'article:section': '40대 이상 기업오너 전용',
-    'article:tag': ['40대CEO', '50대기업가', '중년경영진', '가업승계', '자산관리'],
-    'business:contact_data:locality': '서울',
-    'business:contact_data:region': '강남',
-    'business:contact_data:country_name': '대한민국',
-    'og:audience': '40-60대 법인 대표',
-    'og:target_audience': '중소중견기업 CEO',
-    'og:content_tier': 'Premium',
     url: 'https://familyoffices.vip',
     images: [
       {
@@ -255,7 +247,6 @@ export const defaultMetadata: Metadata = {
         alt: '패밀리오피스 가업승계 자산관리 전문 FamilyOffice S',
       },
     ],
-    locale: 'ko_KR',
   },
 
   twitter: {
@@ -357,7 +348,7 @@ export function generateMetadata(
       ...defaultMetadata.openGraph,
       title: intentOptimizedTitle,
       description,
-      'article:tag': [...(defaultMetadata.openGraph as any)['article:tag'] || [], ...ageSpecificKeywords],
+      // article:tag는 OpenGraph 표준에서 지원되지 않음
       images: image
         ? [
             {

@@ -1,1 +1,1 @@
-🔧 브랜드 페이지 TypeScript 오류 수정 - 누락된 아이콘 임포트 추가
+🔧 Next.js 15 메타데이터 경고 완전 해결 - colorScheme viewport 분리

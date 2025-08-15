@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   // 글로벌 메타태그 강화
   verification: {
     google: 'your-google-verification-code',
-    naver: 'your-naver-verification-code',
     other: {
       'naver-site-verification': 'your-naver-verification-code',
       'msvalidate.01': 'your-bing-verification-code'
@@ -37,9 +36,13 @@ export const metadata: Metadata = {
   generator: 'SuperClaude SEO Framework v2.0',
   applicationName: 'FamilyOffice S - 40대 이상 CEO 전용',
   referrer: 'origin-when-cross-origin',
-  colorScheme: 'light dark',
   creator: 'SuperClaude + BMAD Method + AgentOS',
   publisher: 'FamilyOffice S Premium Services'
+};
+
+// Next.js 15: colorScheme을 별도 viewport export로 분리
+export const viewport: Viewport = {
+  colorScheme: 'light dark'
 };
 
 export default function RootLayout({
