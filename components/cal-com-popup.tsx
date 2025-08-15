@@ -112,22 +112,22 @@ export function CalComPopup({
       <DialogTrigger asChild>
         {trigger || DefaultTrigger}
       </DialogTrigger>
-      <DialogContent className="max-w-6xl w-full h-[98vh] p-0 bg-background text-foreground">
-        <DialogHeader className="px-4 pt-3 pb-2 border-b bg-background">
+      <DialogContent className="max-w-6xl w-full h-[99vh] p-0 bg-background text-foreground">
+        <DialogHeader className="px-3 pt-2 pb-1 border-b bg-background flex-shrink-0">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Calendar className="h-4 w-4 text-primary" />
+            <div className="flex items-center space-x-2">
+              <div className="h-6 w-6 rounded bg-primary/10 flex items-center justify-center">
+                <Calendar className="h-3 w-3 text-primary" />
               </div>
               <div>
-                <DialogTitle className="text-lg font-bold">{config.title}</DialogTitle>
-                <div className="flex items-center space-x-4 mt-1">
+                <DialogTitle className="text-base font-bold leading-tight">{config.title}</DialogTitle>
+                <div className="flex items-center space-x-3 mt-0.5">
                   <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3" />
+                    <Clock className="h-2.5 w-2.5" />
                     <span>{config.duration}</span>
                   </div>
                   <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-                    <Users className="h-3 w-3" />
+                    <Users className="h-2.5 w-2.5" />
                     <span>1:1 전문가 상담</span>
                   </div>
                 </div>
@@ -135,12 +135,12 @@ export function CalComPopup({
             </div>
           </div>
           
-          {/* 컴팩트한 상담 분야 표시 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 mt-2">
+          {/* 더 컴팩트한 상담 분야 표시 */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mt-1.5">
             {config.features.map((feature, index) => (
-              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded-md px-2 py-1">
-                <CheckCircle className="h-3 w-3 text-green-500 flex-shrink-0" />
-                <span className="text-muted-foreground text-xs">{feature}</span>
+              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/20 rounded px-1.5 py-0.5">
+                <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
+                <span className="text-muted-foreground text-xs leading-none">{feature}</span>
               </div>
             ))}
           </div>

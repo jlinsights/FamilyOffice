@@ -372,6 +372,54 @@
     display: block !important;
   }
 
+  /* Minimize Cal.com empty space and maximize content */
+  iframe[src*="cal.com"] [class*="container"],
+  iframe[src*="cal.com"] [class*="wrapper"],
+  iframe[src*="cal.com"] [class*="layout"],
+  iframe[src*="cal.com"] main,
+  iframe[src*="cal.com"] .main-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-height: 100vh !important;
+    height: 100% !important;
+  }
+
+  /* Force Cal.com calendar to fill available space */
+  iframe[src*="cal.com"] [class*="calendar"],
+  iframe[src*="cal.com"] [class*="booking"],
+  iframe[src*="cal.com"] [class*="schedule"],
+  iframe[src*="cal.com"] [role="grid"],
+  iframe[src*="cal.com"] table {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 4px !important;
+  }
+
+  /* Remove excessive padding/margins from Cal.com components */
+  iframe[src*="cal.com"] [class*="py-"],
+  iframe[src*="cal.com"] [class*="px-"],
+  iframe[src*="cal.com"] [class*="p-"],
+  iframe[src*="cal.com"] [class*="mt-"],
+  iframe[src*="cal.com"] [class*="mb-"],
+  iframe[src*="cal.com"] [class*="mx-"],
+  iframe[src*="cal.com"] [class*="my-"],
+  iframe[src*="cal.com"] [class*="m-"] {
+    margin: 2px !important;
+    padding: 2px !important;
+  }
+
+  /* Cal.com header and navigation compacting */
+  iframe[src*="cal.com"] header,
+  iframe[src*="cal.com"] nav,
+  iframe[src*="cal.com"] [class*="header"],
+  iframe[src*="cal.com"] [class*="navigation"] {
+    padding: 4px 8px !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 32px !important;
+  }
+
   /* Cal.com specific branded elements */
   iframe[src*="cal.com"] [class*="bg-white"],
   iframe[src*="cal.com"] [class*="bg-gray-50"],
