@@ -13,6 +13,11 @@ import {
   ArrowRight,
   Briefcase,
   Users,
+  CheckCircle,
+  Star,
+  Phone,
+  Calendar,
+  GraduationCap,
 } from 'lucide-react';
 
 import { useEffect, useState, useCallback } from 'react';
@@ -21,6 +26,7 @@ import Script from 'next/script';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CalComPopup } from '@/components/cal-com-popup';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 import { Footer } from '@/components/footer';
@@ -159,7 +165,7 @@ export default function RecruitPage() {
 
             {/* 메인 헤드라인 */}
             <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-              함께 성장할{'\n'}인재를 찾습니다
+              삼성생명 GFC{'\n'}채용
             </h1>
 
             {/* 서브 헤드라인 */}
@@ -167,15 +173,15 @@ export default function RecruitPage() {
               className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
               style={{ animationDelay: '200ms' }}
             >
-              당신의 꿈이 현실이 되는 곳
+              기업재무컨설턴트로 성공의 기회를 잡으세요
             </p>
 
             <p
               className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed whitespace-pre-line"
               style={{ animationDelay: '300ms' }}
             >
-              삼성생명 Group Financial Consultant(GFC)로서{'\n'}
-              가업승계, 자산관리, 세무회계, 투자금융 전문가의 길을 열어가세요!
+              가업승계·패밀리오피스 전문가가 되는 길{'\n'}
+              삼성생명의 신뢰와 함께 높은 수입과 전문성을 겸비하세요
             </p>
 
             {/* 핵심 성과 지표 - 메인 페이지와 동일한 스타일 */}
@@ -242,19 +248,22 @@ export default function RecruitPage() {
               className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
               style={{ animationDelay: '500ms' }}
             >
-              <Button
+              <CalComPopup
+                buttonText="GFC 채용 상담 신청"
+                variant="default"
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
-                onClick={() => {
-                  const positionsSection =
-                    document.getElementById('positions-section');
-                  if (positionsSection) {
-                    positionsSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                className="font-bold shadow-lg px-8 py-4 text-lg"
+              />
+              <Button
+                variant="outline"
+                size="lg"
+                className="font-bold shadow-lg px-8 py-4 text-lg"
+                asChild
               >
-                채용 포지션 보기
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <a href="tel:0502-5550-8700">
+                  <Phone className="mr-2 h-5 w-5" />
+                  ☎ 0502-5550-8700
+                </a>
               </Button>
               <Button
                 variant="outline"
@@ -271,43 +280,212 @@ export default function RecruitPage() {
           </div>
         </section>
 
+        {/* GFC 소개 섹션 */}
+        <section className="py-20">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                GFC(기업재무컨설턴트)란?
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                삼성생명의 프리미엄 기업재무컨설턴트로서<br />
+                중소중견기업 CEO들에게 가업승계, 자산관리, 절세전략 등<br />
+                종합적인 재무컨설팅을 제공하는 전문가입니다.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Building className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">기업 전문</h3>
+                <p className="text-muted-foreground">
+                  중소중견기업 CEO<br />
+                  맞춤형 컨설팅
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">높은 수입</h3>
+                <p className="text-muted-foreground">
+                  프리미엄 고객<br />
+                  고수익 보장
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Award className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">전문 브랜드</h3>
+                <p className="text-muted-foreground">
+                  삼성생명의<br />
+                  신뢰와 명성
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <GraduationCap className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">체계적 교육</h3>
+                <p className="text-muted-foreground">
+                  전문가 양성<br />
+                  교육 시스템
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 채용 조건 섹션 */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+                GFC 자격조건 및 우대사항
+              </h2>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="bg-background rounded-lg p-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
+                    기본 자격조건
+                  </h3>
+                  <ul className="space-y-2 text-muted-foreground">
+                    <li>• 4년제 대졸 이상</li>
+                    <li>• 금융/경영/회계 관련 전공 우대</li>
+                    <li>• 기본적인 PC 활용 능력</li>
+                    <li>• 원활한 의사소통 능력</li>
+                    <li>• 성실하고 책임감 있는 성격</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-background rounded-lg p-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Star className="h-5 w-5 text-yellow-500 mr-2" />
+                    우대사항
+                  </h3>
+                  <ul className="space-y-2 text-muted-foreground">
+                    <li>• 금융업계 경험자</li>
+                    <li>• 보험/증권/은행 근무 경력</li>
+                    <li>• 자산관리/재무설계 경험</li>
+                    <li>• 영업/컨설팅 경험</li>
+                    <li>• 관련 자격증 보유자</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Benefits Section */}
         <section className="py-20">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-                <span className="text-primary dark:text-emerald-300 playfair-display-bold">
-                  FamilyOffice S
-                </span>
-                와 함께하는 이유
+                GFC 혜택 및 지원사항
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
-                최고의 환경에서 전문성을 키우고 성장할 수 있는 기회를 제공합니다
+                삼성생명 GFC로서 누릴 수 있는 다양한 혜택과 지원을 확인하세요
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {benefits.map((benefit, index) => {
-                const Icon = benefit.icon;
-                return (
-                  <Card
-                    key={index}
-                    className="group hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  >
-                    <CardContent className="p-6 text-center">
-                      <div className="w-16 h-16 bg-primary/10 dark:bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors">
-                        <Icon className="h-8 w-8 text-primary dark:text-primary" />
-                      </div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground dark:text-white">
-                        {benefit.title}
-                      </h3>
-                      <p className="text-muted-foreground dark:text-gray-200">
-                        {benefit.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">높은 수수료</h3>
+                <p className="text-muted-foreground">
+                  프리미엄 고객 대상<br />
+                  고수익 수수료 체계
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">전문 교육</h3>
+                <p className="text-muted-foreground">
+                  체계적인 교육과정<br />
+                  전문가 멘토링
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Building className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">브랜드 지원</h3>
+                <p className="text-muted-foreground">
+                  삼성생명 브랜드<br />
+                  마케팅 지원
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 채용 프로세스 */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              채용 프로세스
+            </h2>
+            
+            <div className="max-w-4xl mx-auto">
+              <div className="space-y-8">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                    1
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-2">지원서 접수</h3>
+                    <p className="text-muted-foreground">
+                      온라인 지원서 작성 및 제출. 경력사항과 자기소개서 작성
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                    2
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-2">서류 심사</h3>
+                    <p className="text-muted-foreground">
+                      지원서류 검토 및 기본 자격요건 확인 (3-5일 소요)
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                    3
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-2">면접 진행</h3>
+                    <p className="text-muted-foreground">
+                      1차 실무진 면접, 2차 임원 면접 (개별 일정 조율)
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                    4
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-2">최종 선발</h3>
+                    <p className="text-muted-foreground">
+                      위촉계약 체결 및 교육 과정 안내
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -500,6 +678,32 @@ export default function RecruitPage() {
           </div>
         </section>
 
+        {/* CTA Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl p-8 md:p-12 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                삼성생명 GFC로 성공하세요
+              </h2>
+              <p className="text-xl mb-8 opacity-90">
+                전문적인 기업재무컨설턴트로서<br />
+                높은 수입과 안정적인 커리어를 만들어가세요
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <CalComPopup
+                  buttonText="GFC 채용 상담 예약"
+                  variant="secondary"
+                  size="lg"
+                />
+                <Button variant="outline" size="lg" className="bg-white/10 border-white/20 hover:bg-white/20">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  잡페어 일정 확인
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Contact Section */}
         <section className="py-20">
           <div className="container mx-auto px-6 text-center">
@@ -511,27 +715,21 @@ export default function RecruitPage() {
             </p>
 
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-              <Button
+              <CalComPopup
+                buttonText="무료 상담 예약"
+                variant="default"
                 size="lg"
-                asChild
-                className="dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
-              >
-                <a
-                  href="https://cal.com/familyoffice/recruit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Mail className="h-5 w-5 mr-2" />
-                  무료 상담 예약
-                </a>
-              </Button>
+              />
               <Button
                 size="lg"
                 variant="outline"
                 asChild
                 className="dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700"
               >
-                <a href="tel:0502-5550-8700">전화 문의: 0502-5550-8700</a>
+                <a href="tel:0502-5550-8700">
+                  <Phone className="mr-2 h-4 w-4" />
+                  전화 문의: 0502-5550-8700
+                </a>
               </Button>
             </div>
           </div>
