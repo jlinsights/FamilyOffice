@@ -1,18 +1,59 @@
 import type { Metadata } from 'next';
 
-// 기본 메타데이터 설정
+// SuperClaude 통합 SEO 프레임워크 - 40+ 법인 대표 타겟 최적화
 export const defaultMetadata: Metadata = {
   metadataBase: new URL('https://familyoffices.vip'),
 
   title: {
-    default: '패밀리오피스 | 가업승계 자산관리 전문 FamilyOffice S',
-    template: '%s | 패밀리오피스 FamilyOffice S',
+    default: '40-50대 CEO 전용 패밀리오피스 | 가업승계 자산관리 전문 FamilyOffice S',
+    template: '%s | 40-50대 법인대표 전용 패밀리오피스 S',
   },
   description:
-    '패밀리오피스 가업승계 전문. 중소중견기업 CEO 자산관리, 상속증여 절세전략, 경영인정기보험. 삼성생명 500억+ 운용실적. 무료상담 ☎0502-5550-8700',
+    '40-50대 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 중소중견기업 CEO 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
+  
+  // BMAD Method 기반 메타 타겟팅
+  authors: [{ name: 'FamilyOffice S 전문 컨설턴트' }],
+  category: '40대 이상 기업오너 전용 자산관리',
+  classification: 'CEO 전용 프리미엄 서비스',
 
   keywords: [
-    // 네이버/다음 최적화 핵심 키워드
+    // BMAD Method 1: Behavioral (행동 기반) - 40-50대 CEO 실제 검색어
+    '40대 CEO 자산관리',
+    '50대 기업오너 가업승계',
+    '법인대표 은퇴설계',
+    '중년 기업가 재산관리',
+    '40-50대 경영인 투자전략',
+    '기업오너 노후준비',
+    '법인대표 자녀교육비',
+    '중년 CEO 부동산 투자',
+    '기업가 해외이민 자금',
+    '법인대표 의료비 대비',
+    
+    // BMAD Method 2: Motivational (동기 기반) - 성취와 성장 욕구
+    '기업가치 극대화',
+    '대를 이을 가업승계',
+    '성공한 CEO 자산관리법',
+    '부의 대물림 전략',
+    '기업오너 레거시 구축',
+    '법인대표 사회적 성공',
+    '기업가 명예 보전',
+    'CEO 리더십 유산',
+    '가문의 영속성',
+    '기업가정신 계승',
+    
+    // BMAD Method 3: Aspirational (열망 기반) - 미래 비전과 꿈
+    '세계적인 기업가문',
+    '글로벌 패밀리오피스',
+    '차세대 기업가 양성',
+    '국제적 자산분산',
+    '명문가 자산관리',
+    '기업오너 품격',
+    '최고급 자산관리 서비스',
+    'VVIP 전용 컨설팅',
+    '프리미엄 라이프스타일',
+    '엘리트 기업가 네트워크',
+    
+    // BMAD Method 4: Decisional (결정 기반) - 구체적 실행 요소
     '패밀리오피스',
     '패밀리오피스란',
     '패밀리오피스 서비스',
@@ -28,8 +69,27 @@ export const defaultMetadata: Metadata = {
     '상속세 절세',
     '증여세 절세',
     '절세전략',
+    '삼성생명 패밀리오피스',
+    'GFC 기업재무컨설턴트',
     
-    // Google/Perplexity 롱테일 키워드
+    // AgentOS 다중관점 분석 - Google/Perplexity 최적화
+    // 관점 1: 재무관점 - 수익성과 비용효율성
+    '40대 CEO 세후수익 극대화',
+    '중견기업 자산관리 비용',
+    '법인대표 투자수익률 개선',
+    '기업오너 절세효과 계산기',
+    '가업승계 비용 시뮬레이션',
+    '패밀리오피스 ROI 분석',
+    
+    // 관점 2: 리스크관점 - 위험관리와 보장
+    '40-50대 기업가 리스크 관리',
+    '법인대표 중대재해 보장',
+    '경영진 개인보증 해결',
+    '기업오너 건강악화 대비',
+    '가업승계 실패 사례',
+    '중견기업 도산 위험 관리',
+    
+    // 관점 3: 시장관점 - 경쟁우위와 기회
     '중소기업 가업승계 방법',
     '패밀리오피스 비용',
     '가업승계 세금 줄이는 방법',
@@ -39,15 +99,39 @@ export const defaultMetadata: Metadata = {
     '경영인정기보험 가입조건',
     '상속세 계산기',
     '증여세 면제한도',
+    '동종업계 M&A 동향',
+    '업계 1위 기업 승계사례',
     
-    // 타겟 고객 키워드
+    // 관점 4: 성장관점 - 혁신과 발전
+    '기업가치 배수 향상법',
+    'ESG 경영과 가업승계',
+    '디지털 전환 자금 조달',
+    '차세대 기업가 역량개발',
+    '글로벌 진출 자금계획',
+    
+    // SuperClaude 타겟 고객 세분화 - 40-60대 법인 대표
+    // 연령별 세분화
+    '40대 기업대표 자산관리',
+    '50대 법인오너 가업승계',
+    '60대 기업가 은퇴설계',
+    '중년 CEO 재무전략',
+    '베이비부머 기업가 자산이전',
+    
+    // 기존 키워드 유지
     '중소중견기업 CEO',
-    '중소기업 대표',
+    '중소기업 대표', 
     '중견기업 오너',
     '성실신고대상자',
     '고액자산가',
     '개인사업자',
     '법인대표',
+    
+    // 심리적 상태 키워드
+    '성공한 기업가의 고민',
+    '중년 기업인 미래불안',
+    '경영진 책임부담',
+    '자녀 교육비 걱정',
+    '노후준비 부족 스트레스',
     
     // 서비스 키워드
     'CEO플랜',
@@ -60,12 +144,20 @@ export const defaultMetadata: Metadata = {
     '재무설계',
     '투자자문',
     
-    // 산업별 키워드
+    // 업종별 맞춤 키워드 - 40+ 대표 집중 업계
     '제조업 자산관리',
-    '건설업 자산관리',
+    '건설업 자산관리', 
     'IT기업 자산관리',
     '벤처기업 자산관리',
     '스타트업 자산관리',
+    '유통업 CEO 자산관리',
+    '서비스업 오너 가업승계',
+    '도소매업 대표 절세전략',
+    '음식업 사장 재무설계',
+    '부동산업 대표 투자전략',
+    '물류업 CEO 위험관리',
+    '의료업 원장 자산관리',
+    '교육업 대표 상속설계',
     
     // 지역 키워드
     '서울 패밀리오피스',
@@ -96,9 +188,9 @@ export const defaultMetadata: Metadata = {
     'GFC 수입',
     'GFC 연봉',
     
-    // 세미나/교육 키워드
+    // 세미나/교육 키워드 - 40+ 타겟 특화
     '세미나',
-    'VVIP 세미나',
+    'VVIP 세미나', 
     'CEO 세미나',
     '자산관리 세미나',
     '패밀리오피스 세미나',
@@ -106,7 +198,7 @@ export const defaultMetadata: Metadata = {
     'The 멋진 하루',
     'VVIP 자산관리',
     'VVIP 고객',
-    'VVIP 서비스',
+    'VVIP 서비스', 
     '서울FP센터',
     '강남FP센터',
     '삼성생명FP센터',
@@ -127,14 +219,33 @@ export const defaultMetadata: Metadata = {
     '중소기업 CEO 세미나',
     '중견기업 세미나',
     '패밀리오피스 교육',
+    
+    // 40+ 특화 교육 키워드
+    '40대 기업가 리더십',
+    '50대 CEO 성공전략',
+    '중년 경영진 멘토링',
+    '시니어 기업가 네트워킹',
+    '베테랑 CEO 클럽',
+    '성숙한 기업인 모임',
   ],
 
   openGraph: {
     type: 'website',
-    siteName: '패밀리오피스 FamilyOffice S',
-    title: '패밀리오피스 | 가업승계 자산관리 전문 - FamilyOffice S',
+    siteName: '40-50대 CEO 전용 패밀리오피스 FamilyOffice S',
+    title: '40-50대 법인대표 전용 패밀리오피스 | 가업승계 자산관리 완전해결 - FamilyOffice S',
     description:
-      '패밀리오피스 가업승계 전문. 중소중견기업 CEO 자산관리, 상속증여 절세전략, 경영인정기보험. 삼성생명 500억+ 운용실적. 무료상담 ☎0502-5550-8700',
+      '40-50대 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 중년 CEO 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적, 성공사례 300+ ☎0502-5550-8700',
+    
+    // 소셜 미디어 최적화 - 중년 타겟
+    locale: 'ko_KR',
+    'article:section': '40대 이상 기업오너 전용',
+    'article:tag': ['40대CEO', '50대기업가', '중년경영진', '가업승계', '자산관리'],
+    'business:contact_data:locality': '서울',
+    'business:contact_data:region': '강남',
+    'business:contact_data:country_name': '대한민국',
+    'og:audience': '40-60대 법인 대표',
+    'og:target_audience': '중소중견기업 CEO',
+    'og:content_tier': 'Premium',
     url: 'https://familyoffices.vip',
     images: [
       {
@@ -150,9 +261,10 @@ export const defaultMetadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@familyoffices',
-    title: '패밀리오피스 | 가업승계 자산관리 전문',
+    title: '40-50대 CEO 전용 패밀리오피스 | 가업승계 완전해결',
     description:
-      '패밀리오피스 가업승계 전문. 중소중견기업 CEO 자산관리, 상속증여 절세전략. 삼성생명 500억+ 운용실적. ☎0502-5550-8700',
+      '40-50대 법인대표 전용. 가업승계·승계세무 완전해결, 중년 CEO 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
+    creator: '@FamilyOfficeS_CEO',
     images: ['/og-image.jpg'],
   },
 
@@ -172,47 +284,94 @@ export const defaultMetadata: Metadata = {
     locale: 'ko_KR',
     'naver-site-verification': 'your-naver-verification-code',
     NaverBot: 'All',
-    Yeti: 'index,follow',
+    Yeti: 'index,follow', 
     Daumoa: 'index,follow',
     'format-detection': 'telephone=no',
-    author: 'FamilyOffice S',
+    author: 'FamilyOffice S - 40대 이상 CEO 전문',
     publisher: 'FamilyOffice S',
     copyright: 'FamilyOffice S',
     'og:phone_number': '+82-502-5550-8700',
     'og:email': 'cs@familyoffices.vip',
-    'article:author': 'FamilyOffice S',
+    'article:author': 'FamilyOffice S 전문 컨설턴트',
+    
+    // SuperClaude 프레임워크 특화 메타태그
+    'target-audience': '40-60세 법인 대표',
+    'business-sector': '중소중견기업',
+    'service-tier': 'Premium VVIP',
+    'expertise-level': '전문가급',
+    'decision-stage': '고려-결정 단계',
+    'search-intent': '상업적 문의',
+    'customer-lifecycle': '신규-기존 고객',
+    'geographic-focus': '서울 강남 중심',
+    'language-preference': '한국어',
+    'device-optimization': '모바일-데스크톱',
+    
+    // BMAD Method 메타데이터
+    'bmad-behavioral': '검색 기반 문제 해결',
+    'bmad-motivational': '성취와 성장 동기',
+    'bmad-aspirational': '미래 비전과 목표',
+    'bmad-decisional': '실행 가능한 솔루션',
+    
+    // AgentOS 다중관점 메타데이터
+    'agentios-financial': '재무 효율성',
+    'agentios-risk': '위험 관리',
+    'agentios-market': '시장 기회',
+    'agentios-growth': '성장 전략',
   },
 };
 
-// 페이지별 메타데이터 생성 함수
+// SuperClaude 통합 메타데이터 생성 함수 - BMAD Method 적용
 export function generateMetadata(
   title: string,
   description: string,
   keywords: string[] = [],
-  image?: string
+  image?: string,
+  targetAge?: '40대' | '50대' | '40-50대' | '40-60대',
+  businessStage?: '성장기' | '성숙기' | '승계준비',
+  searchIntent?: 'informational' | 'commercial' | 'transactional'
 ): Metadata {
+  // SuperClaude 적응형 메타데이터 생성
+  const ageSpecificKeywords = targetAge ? [
+    `${targetAge} 기업대표`,
+    `${targetAge} CEO 전용`,
+    `${targetAge} 맞춤 자산관리`
+  ] : [];
+  
+  const stageSpecificKeywords = businessStage ? [
+    businessStage === '성장기' ? '성장기업 자산관리' : 
+    businessStage === '성숙기' ? '성숙기업 승계준비' : '가업승계 실행'
+  ] : [];
+  
+  const intentOptimizedTitle = searchIntent === 'transactional' 
+    ? `${title} | 즉시 상담 가능` 
+    : searchIntent === 'commercial'
+    ? `${title} | 전문 컨설팅`
+    : title;
+
   return {
-    title,
+    title: intentOptimizedTitle,
     description,
-    keywords: [...defaultMetadata.keywords!, ...keywords],
+    keywords: [...defaultMetadata.keywords!, ...keywords, ...ageSpecificKeywords, ...stageSpecificKeywords],
+    category: targetAge ? `${targetAge} 전용 서비스` : defaultMetadata.category,
     openGraph: {
       ...defaultMetadata.openGraph,
-      title,
+      title: intentOptimizedTitle,
       description,
+      'article:tag': [...(defaultMetadata.openGraph as any)['article:tag'] || [], ...ageSpecificKeywords],
       images: image
         ? [
             {
               url: image,
               width: 1200,
               height: 630,
-              alt: title,
+              alt: `${title} - ${targetAge || '40-50대'} CEO 전용`,
             },
           ]
         : defaultMetadata.openGraph?.images,
     },
     twitter: {
       ...defaultMetadata.twitter,
-      title,
+      title: intentOptimizedTitle,
       description,
       images: image ? [image] : defaultMetadata.twitter?.images,
     },

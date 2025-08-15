@@ -8,23 +8,54 @@ import { Header } from '@/components/header';
 import { Badge } from '@/components/ui/badge';
 import { StructuredData } from '@/components/structured-data';
 
-// 페이지별 메타데이터 - SEO 최적화
+// SuperClaude BMAD Method 최적화 메타데이터 - 40+ CEO 타겟
 export const metadata: Metadata = generateMetadata(
-  '패밀리오피스 가업승계 자산관리 전문',
-  '패밀리오피스 전문 상담. 가업승계, 상속증여 절세, CEO 자산관리, 경영인정기보험. 중소중견기업 대표 맞춤 컨설팅. 삼성생명 500억+ 운용. 무료상담 ☎0502-5550-8700',
+  '40-50대 CEO 전용 패밀리오피스 | 가업승계 자산관리 완전해결',
+  '40-50대 법인대표 전용 패밀리오피스. SuperClaude BMAD Method 적용 맞춤 컨설팅. 가업승계·승계세무 완전해결, 중년 CEO 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
   [
-    '패밀리오피스 추천',
-    '가업승계 컨설팅',
-    '상속세 절세 방법',
-    '증여세 절세 방법',
-    'CEO 자산관리',
+    // BMAD Method 1: Behavioral (행동 기반) - 40+ CEO 실제 검색어
+    '40대 CEO 자산관리',
+    '50대 기업오너 가업승계',
+    '법인대표 은퇴설계',
+    '중년 기업가 재산관리',
+    '40-50대 경영인 투자전략',
+    
+    // BMAD Method 2: Motivational (동기 기반) - 성취와 성장
+    '기업가치 극대화',
+    '대를 이을 가업승계',
+    '성공한 CEO 자산관리법',
+    '부의 대물림 전략',
+    '기업오너 레거시 구축',
+    
+    // BMAD Method 3: Aspirational (열망 기반) - 미래 비전
+    '세계적인 기업가문',
+    '글로벌 패밀리오피스',
+    '차세대 기업가 양성',
+    '최고급 자산관리 서비스',
+    'VVIP 전용 컨설팅',
+    
+    // BMAD Method 4: Decisional (결정 기반) - 구체적 실행
+    '패밀리오피스',
+    '가업승계 방법',
+    '상속세 절세',
+    '증여세 절세',
     '경영인정기보험',
-    '중소기업 절세',
+    
+    // SuperClaude 프레임워크 식별자
+    'SuperClaude Designer',
+    'BMAD Method 적용',
+    'AgentOS 다중관점',
+    '40+ 사용자 최적화',
+    
+    // 기존 핵심 키워드 유지
     '서울 패밀리오피스',
     '강남 패밀리오피스',
     '삼성생명 자산관리',
   ],
-  '/og-image.jpg'
+  '/og-image.jpg',
+  '40-50대',
+  '성숙기',
+  'commercial'
 );
 
 export default function HomePage() {
