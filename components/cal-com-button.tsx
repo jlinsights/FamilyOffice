@@ -1,6 +1,7 @@
 'use client';
 
 import { Calendar } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 import { Button } from '@/components/ui/button';
 
@@ -19,11 +20,17 @@ export function CalComButton({
   variant = 'default',
   size = 'lg',
 }: CalComButtonProps) {
+  const { resolvedTheme } = useTheme();
+  
   const handleClick = () => {
-    // 단순히 외부 링크로 이동
+    // Theme-aware external link
+    const isDark = resolvedTheme === 'dark';
+    const calTheme = isDark ? 'dark' : 'light';
+    const themeParams = `?theme=${calTheme}&bg=${isDark ? '1a1a1a' : 'ffffff'}&text=${isDark ? 'ffffff' : '000000'}`;
+    
     if (typeof window !== 'undefined') {
       window.open(
-        `https://cal.com/${calLink}`,
+        `https://cal.com/${calLink}${themeParams}`,
         '_blank',
         'noopener,noreferrer'
       );

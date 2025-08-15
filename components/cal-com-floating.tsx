@@ -1,8 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useTheme } from 'next-themes';
 
 export function CalComFloating() {
+  const { resolvedTheme } = useTheme();
+  
   useEffect(() => {
     // Cal.com 플로팅 버튼을 더 간단하고 확실하게 생성
     const createFloatingButton = () => {
@@ -69,9 +72,12 @@ export function CalComFloating() {
         button.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.4)';
       });
 
-      // 클릭 이벤트
+      // 클릭 이벤트 with theme support
       button.addEventListener('click', () => {
-        window.open('https://cal.com/familyoffice', '_blank');
+        const isDark = resolvedTheme === 'dark';
+        const calTheme = isDark ? 'dark' : 'light';
+        const themeParams = `?theme=${calTheme}&bg=${isDark ? '1a1a1a' : 'ffffff'}&text=${isDark ? 'ffffff' : '000000'}`;
+        window.open(`https://cal.com/familyoffice${themeParams}`, '_blank');
       });
 
       buttonContainer.appendChild(button);
@@ -93,7 +99,7 @@ export function CalComFloating() {
         button.remove();
       }
     };
-  }, []);
+  }, [resolvedTheme]); // Re-create button when theme changes
 
   return null;
 }

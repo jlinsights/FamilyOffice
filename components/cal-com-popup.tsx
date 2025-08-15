@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Calendar, X, Clock, Users, CheckCircle } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -27,6 +28,7 @@ export function CalComPopup({
 }: CalComPopupProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { theme, resolvedTheme } = useTheme();
 
   // Event type specific configurations
   const eventConfigs = {
@@ -61,7 +63,11 @@ export function CalComPopup({
   };
 
   const config = eventConfigs[eventType];
-  const fullCalLink = `https://cal.com/${config.calPath}`;
+  
+  // Cal.com theme configuration based on current theme
+  const isDark = resolvedTheme === 'dark';
+  const calTheme = isDark ? 'dark' : 'light';
+  const fullCalLink = `https://cal.com/${config.calPath}?embed=1&theme=${calTheme}&bg=${isDark ? '1a1a1a' : 'ffffff'}&text=${isDark ? 'ffffff' : '000000'}`;
 
   useEffect(() => {
     if (isOpen) {
@@ -73,6 +79,17 @@ export function CalComPopup({
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
+
+  // Reload iframe when theme changes
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [resolvedTheme, isOpen]);
 
   const handleExternalLink = () => {
     window.open(fullCalLink, '_blank', 'noopener,noreferrer');
@@ -95,7 +112,7 @@ export function CalComPopup({
       <DialogTrigger asChild>
         {trigger || DefaultTrigger}
       </DialogTrigger>
-      <DialogContent className="max-w-4xl w-full h-[80vh] p-0">
+      <DialogContent className="max-w-4xl w-full h-[80vh] p-0 bg-background text-foreground">
         <DialogHeader className="p-6 pb-4 border-b">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -144,17 +161,19 @@ export function CalComPopup({
 
           <div className="h-full p-6">
             {/* Cal.com iframe container */}
-            <div className="w-full h-full rounded-lg overflow-hidden border">
+            <div className="w-full h-full rounded-lg overflow-hidden border bg-background">
               <iframe
                 src={fullCalLink}
                 width="100%"
                 height="100%"
                 style={{
                   border: 'none',
-                  background: 'white',
+                  background: isDark ? '#1a1a1a' : '#ffffff',
+                  colorScheme: isDark ? 'dark' : 'light',
                 }}
                 title={config.title}
                 onLoad={() => setIsLoading(false)}
+                allow="camera; microphone"
               />
             </div>
           </div>

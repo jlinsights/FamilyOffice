@@ -298,6 +298,59 @@
     @apply bg-border/80;
   }
 
+  /* Cal.com iframe styling for better visibility */
+  iframe[src*="cal.com"] {
+    color-scheme: light dark;
+  }
+
+  /* Force Cal.com text visibility in dark mode */
+  .dark iframe[src*="cal.com"] {
+    background: #1a1a1a !important;
+    color-scheme: dark;
+  }
+
+  /* Light mode Cal.com styling */
+  .light iframe[src*="cal.com"] {
+    background: #ffffff !important;
+    color-scheme: light;
+  }
+
+  /* Cal.com dialog content improvements */
+  [data-cal-namespace] {
+    color: inherit !important;
+  }
+
+  /* Ensure text is visible in Cal.com embed */
+  iframe[src*="cal.com"] * {
+    color: inherit !important;
+  }
+
+  /* Additional Cal.com styling for better visibility */
+  .dark iframe[src*="cal.com"] {
+    filter: invert(1) hue-rotate(180deg) contrast(0.9) brightness(1.1);
+  }
+
+  /* Override specific Cal.com elements for better contrast */
+  iframe[src*="cal.com"] [data-testid*="text"],
+  iframe[src*="cal.com"] input,
+  iframe[src*="cal.com"] button,
+  iframe[src*="cal.com"] select,
+  iframe[src*="cal.com"] textarea {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+  }
+
+  /* Dark mode specific overrides */
+  .dark iframe[src*="cal.com"] [data-testid*="text"],
+  .dark iframe[src*="cal.com"] input,
+  .dark iframe[src*="cal.com"] button,
+  .dark iframe[src*="cal.com"] select,
+  .dark iframe[src*="cal.com"] textarea {
+    color: #ffffff !important;
+    background-color: #1a1a1a !important;
+    border-color: #404040 !important;
+  }
+
   /* Firefox scrollbar */
   * {
     scrollbar-width: thin;

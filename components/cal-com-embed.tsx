@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 interface CalComEmbedProps {
   className?: string;
@@ -9,6 +10,7 @@ interface CalComEmbedProps {
 
 export default function CalComEmbed({ className, style }: CalComEmbedProps) {
   const [isLoading, setIsLoading] = useState(true);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     // 로딩 상태를 잠시 후 해제
@@ -18,6 +20,11 @@ export default function CalComEmbed({ className, style }: CalComEmbedProps) {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Theme-aware Cal.com URL
+  const isDark = resolvedTheme === 'dark';
+  const calTheme = isDark ? 'dark' : 'light';
+  const calUrl = `https://cal.com/familyoffice/consulting?embed=1&theme=${calTheme}&bg=${isDark ? '1a1a1a' : 'ffffff'}&text=${isDark ? 'ffffff' : '000000'}`;
 
   if (isLoading) {
     return (
@@ -34,16 +41,19 @@ export default function CalComEmbed({ className, style }: CalComEmbedProps) {
 
   return (
     <iframe
-      src="https://cal.com/familyoffice/consulting"
+      src={calUrl}
       width="100%"
       height="100%"
       style={{
         border: 'none',
         borderRadius: '8px',
+        background: isDark ? '#1a1a1a' : '#ffffff',
+        colorScheme: isDark ? 'dark' : 'light',
         ...style,
       }}
       className={className}
       title="상담 예약"
+      allow="camera; microphone"
     />
   );
 }
