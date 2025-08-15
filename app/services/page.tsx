@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { AnimatedCounter } from '@/components/animated-counter';
+import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
@@ -66,7 +67,7 @@ const ServicePageContent = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative w-full min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
@@ -77,19 +78,19 @@ const ServicePageContent = () => {
               </Badge>
             </div>
 
-            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+            <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 text-primary whitespace-pre-line animate-slide-up">
               프리미엄 자산관리{'\n'}서비스
             </h1>
 
             <p
-              className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
+              className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-4 sm:mb-6 animate-slide-up"
               style={{ animationDelay: '200ms' }}
             >
               당신의 성공을 다음 세대까지
             </p>
 
             <p
-              className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
               style={{ animationDelay: '300ms' }}
             >
               중소중견기업 CEO와 고액자산가를 위한 맞춤형 서비스로{' '}
@@ -100,16 +101,17 @@ const ServicePageContent = () => {
             </p>
 
             <div
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-12 sm:mb-16 animate-slide-up"
               style={{ animationDelay: '400ms' }}
             >
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg" asChild>
-                <Link href="/contact">
-                  무료 상담 신청
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" className="font-bold shadow-lg px-8 py-4 text-lg" asChild>
+              <CalComPopup
+                buttonText="무료 상담 신청"
+                variant="default"
+                size="lg"
+                className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
+                eventType="consultation"
+              />
+              <Button variant="outline" size="lg" className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg" asChild>
                 <Link href="/faq">자주 묻는 질문</Link>
               </Button>
             </div>
@@ -256,17 +258,23 @@ const ServicePageContent = () => {
                       ))}
                     </div>
 
-                    <Button
+                    <CalComPopup
+                      buttonText="상담 신청"
                       variant="outline"
                       size="sm"
                       className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
-                      asChild
-                    >
-                      <Link href="/contact">
-                        상담 신청
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
+                      eventType="consultation"
+                      trigger={
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
+                        >
+                          상담 신청
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      }
+                    />
                   </div>
                 ))
               )}
@@ -284,12 +292,18 @@ const ServicePageContent = () => {
               당신의 성공적인 미래를 위한 맞춤 솔루션을 함께 설계해보세요
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link href="/contact">
-                  무료 상담 신청
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+              <CalComPopup
+                buttonText="무료 상담 신청"
+                variant="default"
+                size="lg"
+                eventType="consultation"
+                trigger={
+                  <Button size="lg">
+                    무료 상담 신청
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                }
+              />
               <Button size="lg" variant="outline" asChild>
                 <Link
                   href="http://pf.kakao.com/_gsxkxdG/chat"

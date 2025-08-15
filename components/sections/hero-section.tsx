@@ -1,14 +1,13 @@
 'use client';
 
-import { ArrowRight, Crown, ArrowDown } from 'lucide-react';
+import { Crown, ArrowDown } from 'lucide-react';
 
 import { useEffect, useState } from 'react';
-
-import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ClientOnlyIcon } from '@/components/ui/client-only-icon';
+import { CalComPopup } from '@/components/cal-com-popup';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 
@@ -27,38 +26,38 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20"
+      className="relative w-full min-h-screen lg:min-h-[100vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-16 lg:pt-20"
     >
       {/* 배경 그라데이션 효과 */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
 
-      <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+      <div className="relative z-10 text-center max-w-7xl mx-auto px-6 py-8 lg:py-12">
         {/* 상단 태그 */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-6 lg:mb-10">
           <Badge
             variant="outline"
-            className="animate-fade-in bg-background/80 backdrop-blur-sm"
+            className="animate-fade-in bg-background/80 backdrop-blur-sm text-sm lg:text-base px-4 py-2"
           >
-            <ClientOnlyIcon icon={Crown} className="h-3 w-3 mr-1" />
+            <ClientOnlyIcon icon={Crown} className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
             Heritage Planning Solution
           </Badge>
         </div>
 
         {/* 메인 헤드라인 */}
-        <h1 className="font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl leading-tight mb-6 sm:mb-8 lg:mb-10 text-primary whitespace-pre-line animate-slide-up">
           百年永續
         </h1>
 
         {/* 서브 헤드라인 */}
         <p
-          className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground mb-4 sm:mb-6 lg:mb-8 animate-slide-up"
           style={{ animationDelay: '200ms' }}
         >
           기업의 가치를 다음 세대로
         </p>
 
         <p
-          className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed px-4"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto animate-slide-up leading-relaxed"
           style={{ animationDelay: '300ms' }}
         >
           성공적인 가업승계는 百年永續의 시작입니다
@@ -66,11 +65,11 @@ export function HeroSection() {
 
         {/* 핵심 성과 지표 */}
         <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12 animate-slide-up px-4"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 mb-10 sm:mb-12 md:mb-14 lg:mb-20 animate-slide-up"
           style={{ animationDelay: '400ms' }}
         >
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2 lg:mb-3">
               <AnimatedCounter
                 end={10}
                 suffix="년+"
@@ -79,10 +78,10 @@ export function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground">가업승계 노하우</div>
+            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">가업승계 노하우</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-600 dark:text-green-400 mb-2 lg:mb-3">
               <AnimatedCounter
                 end={1500}
                 suffix="+"
@@ -91,14 +90,14 @@ export function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground">
+            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">
               M&A 플랫폼
               <br className="hidden sm:inline" />
               <span className="sm:hidden"> </span>잠재 매수기업
             </div>
           </div>
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-violet-600 dark:text-violet-400 mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-violet-600 dark:text-violet-400 mb-2 lg:mb-3">
               <AnimatedCounter
                 end={60}
                 suffix="+"
@@ -107,14 +106,14 @@ export function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground">
+            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">
               Big 4 출신
               <br className="hidden sm:inline" />
               <span className="sm:hidden"> </span>전문가 컨소시엄
             </div>
           </div>
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-orange-600 dark:text-orange-400 mb-2 lg:mb-3">
               <AnimatedCounter
                 end={88}
                 suffix="%"
@@ -123,7 +122,7 @@ export function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground">
+            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">
               법인 CEO
               <br className="hidden sm:inline" />
               <span className="sm:hidden"> </span>고정자산 비중
@@ -133,23 +132,20 @@ export function HeroSection() {
 
         {/* CTA 버튼 */}
         <div
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-16 animate-slide-up px-4"
+          className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center mb-12 sm:mb-16 lg:mb-20 animate-slide-up"
           style={{ animationDelay: '500ms' }}
         >
-          <Button
+          <CalComPopup
+            buttonText="지금 바로 상담 예약"
+            variant="default"
             size="lg"
-            className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white shadow-lg"
-            asChild
-          >
-            <Link href="/contact">
-              지금 바로 물어보세요
-              <ClientOnlyIcon icon={ArrowRight} className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+            className="px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
+            eventType="consultation"
+          />
           <Button
             size="lg"
             variant="outline"
-            className="font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
+            className="font-bold px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl shadow-lg"
             onClick={() => {
               document.getElementById('services')?.scrollIntoView({
                 behavior: 'smooth',
@@ -162,10 +158,10 @@ export function HeroSection() {
         </div>
 
         {/* 스크롤 인디케이터 */}
-        <div className="animate-bounce">
+        <div className="animate-bounce mt-8 lg:mt-12">
           <ClientOnlyIcon
             icon={ArrowDown}
-            className="h-6 w-6 text-muted-foreground mx-auto"
+            className="h-6 w-6 lg:h-8 lg:w-8 text-muted-foreground mx-auto"
           />
         </div>
       </div>

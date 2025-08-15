@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
+import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { blogPosts } from '@/lib/blog-data';
@@ -179,9 +180,12 @@ export default async function BlogPostPage({
                         <Button variant="outline" size="sm" asChild>
                           <Link href="/about">회사 소개</Link>
                         </Button>
-                        <Button variant="outline" size="sm" asChild>
-                          <Link href="/contact">상담 신청</Link>
-                        </Button>
+                        <CalComPopup
+                          buttonText="상담 신청"
+                          variant="outline"
+                          size="sm"
+                          eventType="consultation"
+                        />
                       </div>
                     </div>
                   </div>
@@ -253,14 +257,13 @@ export default async function BlogPostPage({
                     뉴스레터 구독하기 →
                   </Link>
                 </Button>
-                <Button
-                  size="lg"
+                <CalComPopup
+                  buttonText="무료 상담 신청"
                   variant="outline"
+                  size="lg"
                   className="border-white text-white hover:bg-white/10 dark:border-white dark:text-white dark:hover:bg-white/20"
-                  asChild
-                >
-                  <Link href="/contact">무료 상담 신청</Link>
-                </Button>
+                  eventType="consultation"
+                />
               </div>
               <p className="text-sm text-blue-100 dark:text-blue-200 mt-4 opacity-90">
                 매주 월·수·금 오전 7:30 정기 발송 | 500+ 중견기업 경영진 구독 중

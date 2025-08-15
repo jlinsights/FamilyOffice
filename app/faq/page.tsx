@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
+import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
@@ -108,17 +109,23 @@ export default function FAQPage() {
               className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
               style={{ animationDelay: '500ms' }}
             >
-              <Button
+              <CalComPopup
+                buttonText="전문가에게 질문하기"
+                variant="default"
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
-                asChild
-              >
-                <Link href="/contact">
-                  <Phone className="mr-2 h-5 w-5" />
-                  전문가에게 질문하기
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+                eventType="consultation"
+                trigger={
+                  <Button
+                    size="lg"
+                    className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
+                  >
+                    <Phone className="mr-2 h-5 w-5" />
+                    전문가에게 질문하기
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                }
+              />
               <Button
                 size="lg"
                 variant="outline"
@@ -256,12 +263,18 @@ export default function FAQPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" asChild>
-                <Link href="/contact">
-                  무료 상담 신청
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <CalComPopup
+                buttonText="무료 상담 신청"
+                variant="secondary"
+                size="lg"
+                eventType="consultation"
+                trigger={
+                  <Button size="lg" variant="secondary">
+                    무료 상담 신청
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                }
+              />
 
               <Button
                 size="lg"

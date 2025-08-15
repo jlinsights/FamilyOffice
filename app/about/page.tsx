@@ -15,6 +15,7 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import Link from 'next/link';
+import { CalComPopup } from '@/components/cal-com-popup';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { AnimatedCounter } from '@/components/animated-counter';
@@ -57,25 +58,29 @@ export default function AboutPage() {
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
             <div className="flex justify-center mb-8">
-              <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80">
-                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+              <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+                <Building className="h-3 w-3 mr-1" />
                 About FamilyOffice S
-              </span>
+              </Badge>
             </div>
 
-            <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line">
+            <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 text-primary whitespace-pre-line animate-slide-up">
               중소중견기업의{'\n'}
               <span className="text-foreground">성공적인 자산관리</span>
               {'\n'}파트너
             </h1>
 
-            <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
+            <p 
+              className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-4 sm:mb-6 animate-slide-up"
+              style={{ animationDelay: '200ms' }}
+            >
               중소중견기업 전문 자산관리
             </p>
 
-            <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">
+            <p 
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed animate-slide-up"
+              style={{ animationDelay: '300ms' }}
+            >
               <span className="font-semibold text-foreground">
                 법인 대표님을 위한 전문적인 자산관리
               </span>{' '}
@@ -86,34 +91,47 @@ export default function AboutPage() {
               를 제공합니다
             </p>
 
-            <p className="text-md md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed bg-primary/5 rounded-lg p-4 border border-primary/10">
+            <p 
+              className="text-sm sm:text-base md:text-lg text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed bg-primary/5 rounded-lg p-4 border border-primary/10 animate-slide-up"
+              style={{ animationDelay: '400ms' }}
+            >
               <span className="font-bold text-primary">FamilyOffice S</span>는{' '}
               <span className="font-semibold text-foreground">삼성생명 기업컨설팅센터</span>의{' '}
               <span className="text-primary font-semibold">VIP 고객 전담 프로젝트팀</span>입니다
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-xl text-lg font-bold h-12 px-8 py-4 bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-lg transition-colors"
+            <div 
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-12 sm:mb-16 animate-slide-up"
+              style={{ animationDelay: '500ms' }}
+            >
+              <CalComPopup
+                buttonText="상담 신청"
+                variant="default"
+                size="lg"
+                className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
+                eventType="consultation"
+                trigger={
+                  <Button
+                    size="lg"
+                    className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
+                  >
+                    <Phone className="mr-2 h-4 w-4" />
+                    상담 신청
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                }
+              />
+              <Button
+                variant="outline"
+                size="lg"
+                className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
+                asChild
               >
-                <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                상담 신청
-                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-              <a
-                href="/services"
-                className="inline-flex items-center justify-center rounded-xl text-lg font-bold h-12 px-8 py-4 border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-lg transition-colors"
-              >
-                <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
-                </svg>
-                서비스 보기
-              </a>
+                <Link href="/services">
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  서비스 보기
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
@@ -339,12 +357,18 @@ export default function AboutPage() {
               귀하의 기업에 최적화된 자산관리 전략을 함께 설계해보세요
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link href="/contact" className="flex items-center">
-                  무료 상담 신청
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+              <CalComPopup
+                buttonText="무료 상담 신청"
+                variant="default"
+                size="lg"
+                eventType="consultation"
+                trigger={
+                  <Button size="lg">
+                    무료 상담 신청
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                }
+              />
               <Button size="lg" variant="outline" asChild>
                 <Link href="/services">서비스 자세히 보기</Link>
               </Button>
