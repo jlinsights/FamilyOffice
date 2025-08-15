@@ -113,8 +113,8 @@ export function CalComPopup({
         {trigger || DefaultTrigger}
       </DialogTrigger>
       <DialogContent className="max-w-6xl w-full h-[99vh] p-0 bg-background text-foreground">
-        <DialogHeader className="px-3 pt-2 pb-1 border-b bg-background flex-shrink-0">
-          <div className="flex items-center justify-between">
+        <DialogHeader className="px-3 pt-3 pb-3 border-b bg-background flex-shrink-0">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-2">
               <div className="h-6 w-6 rounded bg-primary/10 flex items-center justify-center">
                 <Calendar className="h-3 w-3 text-primary" />
@@ -135,8 +135,8 @@ export function CalComPopup({
             </div>
           </div>
           
-          {/* 더 컴팩트한 상담 분야 표시 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mt-1.5">
+          {/* 균형감 있게 배치된 상담 분야 표시 */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5">
             {config.features.map((feature, index) => (
               <div key={index} className="flex items-center space-x-1 text-xs bg-muted/20 rounded px-1.5 py-0.5">
                 <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
