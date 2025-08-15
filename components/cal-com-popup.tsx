@@ -112,16 +112,16 @@ export function CalComPopup({
       <DialogTrigger asChild>
         {trigger || DefaultTrigger}
       </DialogTrigger>
-      <DialogContent className="max-w-5xl w-full h-[90vh] p-0 bg-background text-foreground">
-        <DialogHeader className="px-4 py-3 pb-2 border-b bg-background">
+      <DialogContent className="max-w-6xl w-full h-[95vh] p-0 bg-background text-foreground">
+        <DialogHeader className="px-3 py-2 pb-1 border-b bg-background">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Calendar className="h-4 w-4 text-primary" />
               </div>
               <div>
-                <DialogTitle className="text-lg font-bold">{config.title}</DialogTitle>
-                <div className="flex items-center space-x-4 mt-1">
+                <DialogTitle className="text-base font-bold">{config.title}</DialogTitle>
+                <div className="flex items-center space-x-3 mt-0.5">
                   <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                     <Clock className="h-3 w-3" />
                     <span>{config.duration}</span>
@@ -136,54 +136,53 @@ export function CalComPopup({
           </div>
           
           {/* 컴팩트한 상담 분야 표시 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 mt-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mt-1.5">
             {config.features.map((feature, index) => (
-              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded-full px-2 py-0.5">
-                <CheckCircle className="h-3 w-3 text-green-500 flex-shrink-0" />
-                <span className="text-muted-foreground">{feature}</span>
+              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/20 rounded-md px-1.5 py-0.5">
+                <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
+                <span className="text-muted-foreground text-xs">{feature}</span>
               </div>
             ))}
           </div>
         </DialogHeader>
 
-        <div className="flex-1 relative">
+        <div className="flex-1 relative overflow-hidden">
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-sm z-10">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-                <p className="text-sm text-muted-foreground">예약 시스템을 불러오는 중...</p>
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto mb-2"></div>
+                <p className="text-xs text-muted-foreground">예약 시스템 로딩 중...</p>
               </div>
             </div>
           )}
 
-          <div className="h-full p-1 bg-background">
-            {/* Cal.com iframe container with enhanced dark mode */}
-            <div className="w-full h-full rounded-lg overflow-hidden bg-black border border-border">
-              <iframe
-                src={fullCalLink}
-                width="100%"
-                height="100%"
-                style={{
-                  border: 'none',
-                  background: '#000000',
-                  colorScheme: 'dark',
-                  filter: 'invert(0) contrast(1.2) brightness(0.9)',
-                }}
-                className="cal-com-iframe-forced-dark"
-                title={config.title}
-                onLoad={() => setIsLoading(false)}
-                allow="camera; microphone"
-              />
-            </div>
+          {/* Cal.com iframe 전체 영역 활용 */}
+          <div className="w-full h-full bg-black">
+            <iframe
+              src={fullCalLink}
+              width="100%"
+              height="100%"
+              style={{
+                border: 'none',
+                background: '#000000',
+                colorScheme: 'dark',
+                filter: 'invert(0) contrast(1.2) brightness(0.9)',
+                display: 'block',
+              }}
+              className="cal-com-iframe-forced-dark w-full h-full"
+              title={config.title}
+              onLoad={() => setIsLoading(false)}
+              allow="camera; microphone"
+            />
           </div>
 
           {/* Alternative action button */}
-          <div className="absolute bottom-2 right-2">
+          <div className="absolute bottom-1 right-1">
             <Button
               variant="outline"
               size="sm"
               onClick={handleExternalLink}
-              className="bg-background/95 backdrop-blur-sm text-xs border-border hover:bg-muted/80"
+              className="bg-background/95 backdrop-blur-sm text-xs border-border hover:bg-muted/80 h-7 px-2"
             >
               새 창에서 열기
             </Button>

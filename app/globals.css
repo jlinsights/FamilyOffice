@@ -366,6 +366,10 @@
   /* Enhanced Cal.com forced dark mode */
   .cal-com-iframe-forced-dark {
     background: #000000 !important;
+    min-height: 100% !important;
+    height: 100% !important;
+    width: 100% !important;
+    display: block !important;
   }
 
   /* Cal.com specific branded elements */
