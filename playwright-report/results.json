@@ -1,0 +1,1380 @@
+{
+  "config": {
+    "configFile": "/Users/jaehong/Developer/Projects/FamilyOffice/playwright.config.ts",
+    "rootDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e/global-setup.ts",
+    "globalTeardown": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e/global-teardown.ts",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "project": "FamilyOffice",
+      "version": "0.1.1",
+      "environment": "development",
+      "author": "FamilyOffice Development Team"
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "playwright-report/results.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/jaehong/Developer/Projects/FamilyOffice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "FamilyOffice",
+          "version": "0.1.1",
+          "environment": "development",
+          "author": "FamilyOffice Development Team"
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/cypress/**"
+        ],
+        "testMatch": [
+          "**/*.spec.ts",
+          "**/*.test.ts",
+          "**/*.e2e.ts"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/jaehong/Developer/Projects/FamilyOffice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "FamilyOffice",
+          "version": "0.1.1",
+          "environment": "development",
+          "author": "FamilyOffice Development Team"
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/cypress/**"
+        ],
+        "testMatch": [
+          "**/*.spec.ts",
+          "**/*.test.ts",
+          "**/*.e2e.ts"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/jaehong/Developer/Projects/FamilyOffice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "FamilyOffice",
+          "version": "0.1.1",
+          "environment": "development",
+          "author": "FamilyOffice Development Team"
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/cypress/**"
+        ],
+        "testMatch": [
+          "**/*.spec.ts",
+          "**/*.test.ts",
+          "**/*.e2e.ts"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/jaehong/Developer/Projects/FamilyOffice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "FamilyOffice",
+          "version": "0.1.1",
+          "environment": "development",
+          "author": "FamilyOffice Development Team"
+        },
+        "id": "mobile-chrome",
+        "name": "mobile-chrome",
+        "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/cypress/**"
+        ],
+        "testMatch": [
+          "**/*.spec.ts",
+          "**/*.test.ts",
+          "**/*.e2e.ts"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/jaehong/Developer/Projects/FamilyOffice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "FamilyOffice",
+          "version": "0.1.1",
+          "environment": "development",
+          "author": "FamilyOffice Development Team"
+        },
+        "id": "mobile-safari",
+        "name": "mobile-safari",
+        "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/cypress/**"
+        ],
+        "testMatch": [
+          "**/*.spec.ts",
+          "**/*.test.ts",
+          "**/*.e2e.ts"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/jaehong/Developer/Projects/FamilyOffice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "FamilyOffice",
+          "version": "0.1.1",
+          "environment": "development",
+          "author": "FamilyOffice Development Team"
+        },
+        "id": "financial-desktop",
+        "name": "financial-desktop",
+        "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/cypress/**"
+        ],
+        "testMatch": [
+          "**/*.spec.ts",
+          "**/*.test.ts",
+          "**/*.e2e.ts"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/jaehong/Developer/Projects/FamilyOffice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "FamilyOffice",
+          "version": "0.1.1",
+          "environment": "development",
+          "author": "FamilyOffice Development Team"
+        },
+        "id": "financial-mobile",
+        "name": "financial-mobile",
+        "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/cypress/**"
+        ],
+        "testMatch": [
+          "**/*.spec.ts",
+          "**/*.test.ts",
+          "**/*.e2e.ts"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.2",
+    "workers": 4,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:3000",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "homepage.spec.ts",
+      "file": "homepage.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "FamilyOffice Homepage",
+          "file": "homepage.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should load homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-5d4e945fb8af3b87d460",
+              "file": "homepage.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "should display Korean content correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-7a43d27472c56e633531",
+              "file": "homepage.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "should have responsive design",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-d038a38a76370f0a62bd",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should navigate to key sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-fc31771da6fa6b68539c",
+              "file": "homepage.spec.ts",
+              "line": 53,
+              "column": 7
+            },
+            {
+              "title": "should load financial data widgets",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-c46fa7600289b85377c2",
+              "file": "homepage.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "should handle Cal.com integration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-7821cae93e292bad76f6",
+              "file": "homepage.spec.ts",
+              "line": 89,
+              "column": 7
+            },
+            {
+              "title": "should have proper SEO meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-d84ce6fe16a15504af5a",
+              "file": "homepage.spec.ts",
+              "line": 103,
+              "column": 7
+            },
+            {
+              "title": "should handle theme switching",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-e237f5f777ad4c0b6bee",
+              "file": "homepage.spec.ts",
+              "line": 118,
+              "column": 7
+            },
+            {
+              "title": "should load homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-56e175e287a7a6741bc8",
+              "file": "homepage.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "should display Korean content correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-2f7553a4bf091821413a",
+              "file": "homepage.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "should have responsive design",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-5ebb1dc2573ccde1dcd6",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should navigate to key sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-4dd53f2e559cc5844846",
+              "file": "homepage.spec.ts",
+              "line": 53,
+              "column": 7
+            },
+            {
+              "title": "should load financial data widgets",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-d7d57b7feaf79fd93f38",
+              "file": "homepage.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "should handle Cal.com integration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-3d2cad1496d1209e87ce",
+              "file": "homepage.spec.ts",
+              "line": 89,
+              "column": 7
+            },
+            {
+              "title": "should have proper SEO meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-e51202ce08d588376af1",
+              "file": "homepage.spec.ts",
+              "line": 103,
+              "column": 7
+            },
+            {
+              "title": "should handle theme switching",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-c3d267776462d50a9c51",
+              "file": "homepage.spec.ts",
+              "line": 118,
+              "column": 7
+            },
+            {
+              "title": "should load homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-cb03bac0dcc62eb390bb",
+              "file": "homepage.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "should display Korean content correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-56a09bc91f9243aebf65",
+              "file": "homepage.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "should have responsive design",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-76c77fffd806cab3a3ff",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should navigate to key sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-e69f75b81a7c2ae4d47a",
+              "file": "homepage.spec.ts",
+              "line": 53,
+              "column": 7
+            },
+            {
+              "title": "should load financial data widgets",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-f342afa2b8f5d2cf2176",
+              "file": "homepage.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "should handle Cal.com integration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-3e3e095472c11e82a0d4",
+              "file": "homepage.spec.ts",
+              "line": 89,
+              "column": 7
+            },
+            {
+              "title": "should have proper SEO meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-0c5ce24c207e63967ea9",
+              "file": "homepage.spec.ts",
+              "line": 103,
+              "column": 7
+            },
+            {
+              "title": "should handle theme switching",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-2ad3727ea717876b669c",
+              "file": "homepage.spec.ts",
+              "line": 118,
+              "column": 7
+            },
+            {
+              "title": "should load homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-6c562698ad790202155c",
+              "file": "homepage.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "should display Korean content correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-2837161b8aa5c08b2742",
+              "file": "homepage.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "should have responsive design",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-321e42b212fb633e0758",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should navigate to key sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-4509139fc884b30daa13",
+              "file": "homepage.spec.ts",
+              "line": 53,
+              "column": 7
+            },
+            {
+              "title": "should load financial data widgets",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-d83e32ba1685a5d336e5",
+              "file": "homepage.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "should handle Cal.com integration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-9dfd3396be6736413a4c",
+              "file": "homepage.spec.ts",
+              "line": 89,
+              "column": 7
+            },
+            {
+              "title": "should have proper SEO meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-ffdbf96397fca2c6eb58",
+              "file": "homepage.spec.ts",
+              "line": 103,
+              "column": 7
+            },
+            {
+              "title": "should handle theme switching",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-870096e30768e069af42",
+              "file": "homepage.spec.ts",
+              "line": 118,
+              "column": 7
+            },
+            {
+              "title": "should load homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-7141c4a137601151036d",
+              "file": "homepage.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "should display Korean content correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-f948e5834246c3cf876a",
+              "file": "homepage.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "should have responsive design",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-b329539a0cf1fe958b14",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should navigate to key sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-a051ca74e04c03728d73",
+              "file": "homepage.spec.ts",
+              "line": 53,
+              "column": 7
+            },
+            {
+              "title": "should load financial data widgets",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-d91cc967dc7cbf5721d4",
+              "file": "homepage.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "should handle Cal.com integration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-c1ab2da41e4a8e81feaa",
+              "file": "homepage.spec.ts",
+              "line": 89,
+              "column": 7
+            },
+            {
+              "title": "should have proper SEO meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-7b8ef729eacd89346e92",
+              "file": "homepage.spec.ts",
+              "line": 103,
+              "column": 7
+            },
+            {
+              "title": "should handle theme switching",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-0b8f05d033dead464efd",
+              "file": "homepage.spec.ts",
+              "line": 118,
+              "column": 7
+            },
+            {
+              "title": "should load homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-desktop",
+                  "projectName": "financial-desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-b8672819c624d218f9b4",
+              "file": "homepage.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "should display Korean content correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-desktop",
+                  "projectName": "financial-desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-de333567cd3e0a804cfe",
+              "file": "homepage.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "should have responsive design",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-desktop",
+                  "projectName": "financial-desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-1a067872dc66b816abc4",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should navigate to key sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-desktop",
+                  "projectName": "financial-desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-15efb18f684c3233f66f",
+              "file": "homepage.spec.ts",
+              "line": 53,
+              "column": 7
+            },
+            {
+              "title": "should load financial data widgets",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-desktop",
+                  "projectName": "financial-desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-49d389d83c57ec029255",
+              "file": "homepage.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "should handle Cal.com integration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-desktop",
+                  "projectName": "financial-desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-9f52c4aeb8d2d528e460",
+              "file": "homepage.spec.ts",
+              "line": 89,
+              "column": 7
+            },
+            {
+              "title": "should have proper SEO meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-desktop",
+                  "projectName": "financial-desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-d1cae1f4fa6aaec1d0cc",
+              "file": "homepage.spec.ts",
+              "line": 103,
+              "column": 7
+            },
+            {
+              "title": "should handle theme switching",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-desktop",
+                  "projectName": "financial-desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-bb7ef0df54595974d9e2",
+              "file": "homepage.spec.ts",
+              "line": 118,
+              "column": 7
+            },
+            {
+              "title": "should load homepage successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-mobile",
+                  "projectName": "financial-mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-5cd91188832d835ba022",
+              "file": "homepage.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "should display Korean content correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-mobile",
+                  "projectName": "financial-mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-307c17e46a4f5fb96b51",
+              "file": "homepage.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "should have responsive design",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-mobile",
+                  "projectName": "financial-mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-c9df8ddf5d345acdc7c0",
+              "file": "homepage.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should navigate to key sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-mobile",
+                  "projectName": "financial-mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-18de87d57211812a0776",
+              "file": "homepage.spec.ts",
+              "line": 53,
+              "column": 7
+            },
+            {
+              "title": "should load financial data widgets",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-mobile",
+                  "projectName": "financial-mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-888f41130ca3e447a240",
+              "file": "homepage.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "should handle Cal.com integration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-mobile",
+                  "projectName": "financial-mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-00a7cbb0d75de54c1b44",
+              "file": "homepage.spec.ts",
+              "line": 89,
+              "column": 7
+            },
+            {
+              "title": "should have proper SEO meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-mobile",
+                  "projectName": "financial-mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-efa10ac02fb260e85ffa",
+              "file": "homepage.spec.ts",
+              "line": 103,
+              "column": 7
+            },
+            {
+              "title": "should handle theme switching",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "financial-mobile",
+                  "projectName": "financial-mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-65a0231bd980cb8bfc85",
+              "file": "homepage.spec.ts",
+              "line": 118,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-15T09:33:58.946Z",
+    "duration": 122.34799999999996,
+    "expected": 0,
+    "skipped": 56,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

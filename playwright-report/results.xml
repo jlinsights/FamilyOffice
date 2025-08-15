@@ -1,0 +1,240 @@
+<testsuites id="" name="" tests="56" failures="0" skipped="56" errors="0" time="0.12234799999999996">
+<testsuite name="homepage.spec.ts" timestamp="2025-08-15T09:33:59.066Z" hostname="chromium" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="FamilyOffice Homepage › should load homepage successfully" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should display Korean content correctly" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have responsive design" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should navigate to key sections" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should load financial data widgets" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle Cal.com integration" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have proper SEO meta tags" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle theme switching" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="homepage.spec.ts" timestamp="2025-08-15T09:33:59.066Z" hostname="firefox" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="FamilyOffice Homepage › should load homepage successfully" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should display Korean content correctly" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have responsive design" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should navigate to key sections" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should load financial data widgets" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle Cal.com integration" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have proper SEO meta tags" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle theme switching" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="homepage.spec.ts" timestamp="2025-08-15T09:33:59.066Z" hostname="webkit" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="FamilyOffice Homepage › should load homepage successfully" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should display Korean content correctly" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have responsive design" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should navigate to key sections" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should load financial data widgets" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle Cal.com integration" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have proper SEO meta tags" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle theme switching" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="homepage.spec.ts" timestamp="2025-08-15T09:33:59.066Z" hostname="mobile-chrome" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="FamilyOffice Homepage › should load homepage successfully" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should display Korean content correctly" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have responsive design" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should navigate to key sections" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should load financial data widgets" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle Cal.com integration" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have proper SEO meta tags" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle theme switching" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="homepage.spec.ts" timestamp="2025-08-15T09:33:59.066Z" hostname="mobile-safari" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="FamilyOffice Homepage › should load homepage successfully" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should display Korean content correctly" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have responsive design" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should navigate to key sections" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should load financial data widgets" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle Cal.com integration" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have proper SEO meta tags" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle theme switching" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="homepage.spec.ts" timestamp="2025-08-15T09:33:59.066Z" hostname="financial-desktop" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="FamilyOffice Homepage › should load homepage successfully" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should display Korean content correctly" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have responsive design" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should navigate to key sections" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should load financial data widgets" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle Cal.com integration" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have proper SEO meta tags" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle theme switching" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="homepage.spec.ts" timestamp="2025-08-15T09:33:59.066Z" hostname="financial-mobile" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="FamilyOffice Homepage › should load homepage successfully" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should display Korean content correctly" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have responsive design" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should navigate to key sections" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should load financial data widgets" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle Cal.com integration" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should have proper SEO meta tags" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="FamilyOffice Homepage › should handle theme switching" classname="homepage.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>

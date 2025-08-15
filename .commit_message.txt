@@ -1,1 +1,1 @@
-🔧 Next.js 15 메타데이터 경고 완전 해결 - colorScheme viewport 분리
+🔧 punycode deprecation 경고 완전 해결 - NODE_OPTIONS 설정
