@@ -136,32 +136,30 @@ export function CalComPopup({
           </div>
         </DialogHeader>
 
-        <div className="flex-1 relative overflow-hidden">
-          {isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-sm z-10">
-              <div className="text-center">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto mb-2"></div>
-                <p className="text-xs text-muted-foreground">예약 시스템 로딩 중...</p>
-              </div>
-            </div>
-          )}
-
-          {/* 상담 분야 오버레이 - 헤더 바로 아래 표시 */}
-          <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-            <div className="bg-background/95 backdrop-blur-sm px-4 py-2 border-b border-border/30">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                {config.features.map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded px-2 py-0.5">
-                    <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
-                    <span className="text-muted-foreground text-xs">{feature}</span>
-                  </div>
-                ))}
-              </div>
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* 상담 분야 표시 - 고정 위치 */}
+          <div className="bg-background/95 backdrop-blur-sm px-4 py-2 border-b border-border/30 flex-shrink-0">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {config.features.map((feature, index) => (
+                <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded px-2 py-0.5">
+                  <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
+                  <span className="text-muted-foreground text-xs">{feature}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Cal.com iframe 전체 영역 활용 */}
-          <div className="w-full h-full bg-black">
+          {/* Cal.com iframe 컨테이너 - 상담 분야 아래 전체 영역 */}
+          <div className="flex-1 relative bg-black">
+            {isLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-sm z-10">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto mb-2"></div>
+                  <p className="text-xs text-muted-foreground">예약 시스템 로딩 중...</p>
+                </div>
+              </div>
+            )}
+
             <iframe
               src={fullCalLink}
               width="100%"
