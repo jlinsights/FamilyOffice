@@ -17,7 +17,7 @@ export function SeminarCategoriesSection() {
     <section className="py-20 bg-gradient-to-b from-muted/20 to-background dark:from-gray-900 dark:to-gray-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <Badge className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60">
+          <Badge variant="outline" size="default" animation="fade">
             <BookOpen className="h-3 w-3 mr-1" />
             Seminar Categories
           </Badge>

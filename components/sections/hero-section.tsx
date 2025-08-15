@@ -36,7 +36,8 @@ export function HeroSection() {
         <div className="flex justify-center mb-6 lg:mb-10">
           <Badge
             variant="outline"
-            className="animate-fade-in bg-background/80 backdrop-blur-sm text-sm lg:text-base px-4 py-2"
+            size="lg"
+            animation="fade"
           >
             <ClientOnlyIcon icon={Crown} className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
             Heritage Planning Solution

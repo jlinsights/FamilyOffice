@@ -69,12 +69,12 @@ export function UpcomingSeminarsSection() {
 
   const getStatusBadge = (seminar: Seminar) => {
     if (seminar.registeredCount >= seminar.capacity) {
-      return <Badge variant="destructive">마감</Badge>;
+      return <Badge variant="destructive" size="sm">마감</Badge>;
     }
     if (seminar.registeredCount / seminar.capacity > 0.8) {
-      return <Badge variant="secondary">마감 임박</Badge>;
+      return <Badge variant="warning" size="sm">마감 임박</Badge>;
     }
-    return <Badge variant="default">접수 중</Badge>;
+    return <Badge variant="success" size="sm">접수 중</Badge>;
   };
 
   return (

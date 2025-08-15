@@ -58,7 +58,7 @@ export default function AboutPage() {
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
             <div className="flex justify-center mb-8">
-              <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+              <Badge variant="outline" size="lg" animation="fade">
                 <Building className="h-3 w-3 mr-1" />
                 About FamilyOffice S
               </Badge>
@@ -275,7 +275,7 @@ export default function AboutPage() {
         <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <Badge variant="outline" className="mb-4">
+              <Badge variant="outline" size="default">
                 <Target className="h-3 w-3 mr-1" />
                 Core Values
               </Badge>
@@ -346,7 +346,7 @@ export default function AboutPage() {
         {/* CTA 섹션 */}
         <section className="py-20 bg-gradient-to-r from-primary/5 to-primary/10">
           <div className="container mx-auto px-4 text-center">
-            <Badge variant="outline" className="mb-4">
+            <Badge variant="outline" size="default">
               <Phone className="h-3 w-3 mr-1" />
               Contact Us
             </Badge>

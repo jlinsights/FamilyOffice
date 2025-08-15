@@ -13,7 +13,7 @@ export function ExclusiveProgramsSection({
     <section className="section bg-gradient-to-b from-muted/30 to-background">
       <div className="container">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 animate-fade-in">
+          <Badge variant="outline" size="default" animation="fade">
             <Briefcase className="h-3 w-3 mr-1" aria-hidden />
             Exclusive Programs
           </Badge>
@@ -46,7 +46,7 @@ export function ExclusiveProgramsSection({
                         <h4 className="font-semibold text-lg">
                           {program.name}
                         </h4>
-                        <Badge variant="secondary" className="text-xs">
+                        <Badge variant="secondary" size="xs">
                           {program.frequency}
                         </Badge>
                       </div>

@@ -41,7 +41,8 @@ export function SeminarHeroSection() {
         <div className="flex justify-center mb-8">
           <Badge
             variant="outline"
-            className="animate-fade-in bg-background/80 backdrop-blur-sm"
+            size="lg"
+            animation="fade"
           >
             <GraduationCap className="h-3 w-3 mr-1" />
             Premium Education Program

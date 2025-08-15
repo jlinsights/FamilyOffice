@@ -52,7 +52,7 @@ export default function BlogPage() {
         <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Badge className="mb-4 bg-background/80 backdrop-blur-sm animate-fade-in">
+            <Badge variant="outline" size="lg" animation="fade">
               FamilyOffice S 인사이트
             </Badge>
             <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary animate-slide-up">
@@ -141,7 +141,7 @@ export default function BlogPage() {
                     <p className="text-sm text-muted-foreground mb-4">
                       {category.description}
                     </p>
-                    <Badge variant="outline">{category.count} posts</Badge>
+                    <Badge variant="ghost" size="xs">{category.count} posts</Badge>
                   </div>
                 </Link>
               ))}

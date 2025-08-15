@@ -32,7 +32,7 @@ export function BlogCategoryFilter() {
       >
         전체
         {selectedCategory === '' && (
-          <Badge variant="secondary" className="ml-1 text-xs">
+          <Badge variant="ghost" size="xs">
             All
           </Badge>
         )}
@@ -47,7 +47,7 @@ export function BlogCategoryFilter() {
           className="flex items-center gap-2"
         >
           {category.name}
-          <Badge variant="secondary" className="ml-1 text-xs">
+          <Badge variant="ghost" size="xs">
             {category.count}
           </Badge>
         </Button>

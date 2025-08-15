@@ -209,7 +209,7 @@ export default function StockCard({
               {stockData.symbol}
             </CardTitle>
             {stockData.cached && (
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="ghost" size="xs">
                 캐시
               </Badge>
             )}

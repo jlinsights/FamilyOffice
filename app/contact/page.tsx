@@ -116,7 +116,8 @@ export default function ContactPage() {
             <div className="flex justify-center mb-8">
               <Badge
                 variant="outline"
-                className="animate-fade-in bg-background/80 backdrop-blur-sm"
+                size="lg"
+                animation="fade"
               >
                 <Phone className="h-3 w-3 mr-1" />
                 Free Consultation

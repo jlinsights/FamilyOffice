@@ -59,8 +59,8 @@ const ColorPalette = ({
                 {color.name}
               </h4>
               <Badge
-                variant="outline"
-                className="text-xs border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 transition-colors duration-300"
+                variant="ghost"
+                size="xs"
               >
                 {color.hex}
               </Badge>

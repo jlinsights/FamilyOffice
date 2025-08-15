@@ -72,7 +72,8 @@ export default function FAQPage() {
             <div className="flex justify-center mb-8">
               <Badge
                 variant="outline"
-                className="animate-fade-in bg-background/80 backdrop-blur-sm"
+                size="lg"
+                animation="fade"
               >
                 <MessageSquare className="h-3 w-3 mr-1" />
                 FAQ & Solutions
@@ -145,7 +146,7 @@ export default function FAQPage() {
         <section className="py-24 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <Badge variant="secondary" className="mb-4">
+              <Badge variant="secondary" size="default">
                 Customer Concerns
               </Badge>
 
@@ -201,7 +202,7 @@ export default function FAQPage() {
         <section className="py-24">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <Badge variant="secondary" className="mb-4">
+              <Badge variant="secondary" size="default">
                 Frequently Asked Questions
               </Badge>
 

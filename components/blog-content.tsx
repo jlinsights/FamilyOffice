@@ -78,7 +78,7 @@ export function BlogContent({ className }: BlogContentProps) {
             </p>
           </div>
           {selectedCategory && (
-            <Badge variant="outline" className="px-3 py-1">
+            <Badge variant="outline" size="default">
               {selectedCategory}
             </Badge>
           )}
@@ -156,9 +156,9 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
       </div>
       <div className="p-6">
         <div className="flex items-center justify-between mb-3">
-          <Badge variant="outline">{post.category}</Badge>
+          <Badge variant="ghost" size="sm">{post.category}</Badge>
           {featured && (
-            <Badge className="bg-primary/10 text-primary">추천</Badge>
+            <Badge variant="success" size="sm">추천</Badge>
           )}
         </div>
         <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
@@ -208,7 +208,7 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
         </div>
         <div className="md:w-3/4 p-6">
           <div className="flex items-center gap-4 mb-3 flex-wrap">
-            <Badge variant="outline">{post.category}</Badge>
+            <Badge variant="ghost" size="sm">{post.category}</Badge>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <CalendarDays className="h-4 w-4" />
               {new Date(post.date).toLocaleDateString('ko-KR', {

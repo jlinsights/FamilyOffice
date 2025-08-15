@@ -51,7 +51,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-6">
-              <Badge variant="outline" className="bg-background/80 backdrop-blur-sm text-sm px-3 py-1">
+              <Badge variant="outline" size="lg" animation="fade">
                 Premium AI Consulting
               </Badge>
             </div>

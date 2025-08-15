@@ -72,7 +72,7 @@ const ServicePageContent = () => {
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
             <div className="flex justify-center mb-8">
-              <Badge variant="outline" className="animate-fade-in bg-background/80 backdrop-blur-sm">
+              <Badge variant="outline" size="lg" animation="fade">
                 <Briefcase className="h-3 w-3 mr-1" />
                 Premium Services
               </Badge>
@@ -237,7 +237,7 @@ const ServicePageContent = () => {
                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                         <category.icon className="h-6 w-6 text-primary" />
                       </div>
-                      <Badge variant="secondary" className="text-xs">
+                      <Badge variant="secondary" size="xs">
                         {category.title}
                       </Badge>
                     </div>

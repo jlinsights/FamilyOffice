@@ -84,7 +84,7 @@ export default async function BlogPostPage({
               </Button>
 
               <div className="flex flex-wrap items-center gap-4 mb-6">
-                <Badge className="bg-blue-600 text-white dark:bg-blue-700 dark:text-white">
+                <Badge variant="info" size="default">
                   {post.category}
                 </Badge>
                 <div className="flex items-center gap-2 text-blue-100 dark:text-blue-200">

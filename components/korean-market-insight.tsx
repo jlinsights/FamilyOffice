@@ -455,8 +455,8 @@ export default function KoreanMarketInsight({
                     AI 수요 증가로 HBM 관련주 주목
                   </p>
                   <div className="flex gap-2 mt-2">
-                    <Badge variant="outline">삼성전자</Badge>
-                    <Badge variant="outline">SK하이닉스</Badge>
+                    <Badge variant="ghost" size="xs">삼성전자</Badge>
+                    <Badge variant="ghost" size="xs">SK하이닉스</Badge>
                   </div>
                 </div>
 
@@ -466,8 +466,8 @@ export default function KoreanMarketInsight({
                     전기차 수요 확대 지속
                   </p>
                   <div className="flex gap-2 mt-2">
-                    <Badge variant="outline">LG화학</Badge>
-                    <Badge variant="outline">삼성SDI</Badge>
+                    <Badge variant="ghost" size="xs">LG화학</Badge>
+                    <Badge variant="ghost" size="xs">삼성SDI</Badge>
                   </div>
                 </div>
               </CardContent>
