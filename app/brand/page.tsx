@@ -1,6 +1,6 @@
 'use client';
 
-import { Copy, Check, Palette, ArrowRight } from 'lucide-react';
+import { Copy, Check, Palette, ArrowRight, Building2, Calendar, Shield, Target, TrendingUp, Briefcase } from 'lucide-react';
 
 import { useState } from 'react';
 
@@ -1053,78 +1053,271 @@ export default function BrandPage() {
             <TabsContent value="components" className="space-y-8">
               <div>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-300">
-                  UI 컴포넌트
+                  UI 컴포넌트 시스템
                 </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                  FamilyOffice S에서 사용하는 재사용 가능한 UI 컴포넌트들과 디자인 패턴을 소개합니다.
+                </p>
+
+                {/* 서비스 카드 (4x2 그리드) */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      <Building2 className="h-5 w-5 text-primary" />
+                      서비스 카드 컴포넌트 (4x2 그리드)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                      {[
+                        { icon: '🏢', title: '법인 지배구조', desc: '정관 설계부터 임원 운영까지' },
+                        { icon: '👥', title: '인사 & 고용지원', desc: '인재 확보부터 복지까지' },
+                        { icon: '💰', title: '세무 & 회계', desc: '세무 최적화 전문 서비스' },
+                        { icon: '📈', title: '투자 & 금융', desc: '투자 전략과 금융 솔루션' }
+                      ].map((service, index) => (
+                        <Card key={index} className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border/50 hover:border-primary/30 dark:bg-gray-800 dark:border-gray-700">
+                          <CardHeader className="pb-4">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors text-lg">
+                                {service.icon}
+                              </div>
+                              <Badge variant="secondary" className="text-xs dark:bg-gray-700 dark:text-gray-200">
+                                4개 서비스
+                              </Badge>
+                            </div>
+                            <CardTitle className="text-sm font-semibold text-foreground dark:text-white group-hover:text-primary dark:group-hover:text-emerald-300 transition-colors">
+                              {service.title}
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent className="pt-0">
+                            <p className="text-xs text-muted-foreground dark:text-gray-200">{service.desc}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                      <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`{/* 4x2 그리드 + 글래스모피즘 호버 효과 */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <Card className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 
+                   border-border/50 hover:border-primary/30 dark:bg-gray-800">
+    <CardHeader>
+      <div className="h-10 w-10 rounded-lg bg-primary/10 
+                      group-hover:bg-primary/20 transition-colors">
+        <Icon className="h-5 w-5 text-primary" />
+      </div>
+    </CardHeader>
+  </Card>
+</div>`}
+                      </pre>
+                    </div>
+                  </CardContent>
+                </Card>
 
                 {/* 버튼 컴포넌트 */}
                 <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
                   <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-                    <CardTitle className="text-gray-900 dark:text-white">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      <ArrowRight className="h-5 w-5 text-primary" />
                       Button Components
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <div className="space-y-4">
-                      <div className="flex flex-wrap gap-4">
-                        <Button>Primary Button</Button>
-                        <Button variant="secondary">Secondary Button</Button>
-                        <Button variant="outline">Outline Button</Button>
-                        <Button variant="ghost">Ghost Button</Button>
+                    <div className="space-y-6">
+                      {/* Primary Buttons */}
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">Primary 버튼 (상담 신청용)</h4>
+                        <div className="flex flex-wrap gap-4 mb-4">
+                          <Button className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg">
+                            무료 상담 신청
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                          <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg">
+                            서비스 자세히 보기
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                          </Button>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded text-sm text-gray-800 dark:text-gray-200">
+                          <code>{`<Button className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg">`}</code>
+                        </div>
                       </div>
-                      <div className="flex flex-wrap gap-4">
-                        <Button size="sm">Small</Button>
-                        <Button size="default">Default</Button>
-                        <Button size="lg">Large</Button>
+
+                      {/* Floating Button */}
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">Floating Action Button</h4>
+                        <div className="flex gap-4 mb-4">
+                          <Button className="shadow-xl hover:shadow-2xl transition-all duration-300 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full w-16 h-16">
+                            <Calendar className="h-6 w-6" />
+                          </Button>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded text-sm text-gray-800 dark:text-gray-200">
+                          <code>{`<Button className="shadow-xl hover:shadow-2xl transition-all duration-300 rounded-full w-16 h-16">`}</code>
+                        </div>
+                      </div>
+
+                      {/* Secondary & Outline */}
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">Secondary & Outline</h4>
+                        <div className="flex flex-wrap gap-4">
+                          <Button variant="secondary">Secondary Button</Button>
+                          <Button variant="outline" className="shadow-lg dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800">
+                            Outline Button
+                          </Button>
+                          <Button variant="ghost">Ghost Button</Button>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* 카드 컴포넌트 */}
+                {/* 카드 컴포넌트 with 실제 패턴 */}
                 <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
                   <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-                    <CardTitle className="text-gray-900 dark:text-white">
-                      Card Components
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      <Copy className="h-5 w-5 text-primary" />
+                      Card Component System
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-md dark:hover:shadow-xl transition-all duration-300">
-                        <CardHeader>
-                          <CardTitle className="text-lg text-gray-900 dark:text-white">
-                            기본 카드
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            기본 카드 스타일입니다.
-                          </p>
-                        </CardContent>
-                      </Card>
-                      <Card className="border-blue-200 dark:border-blue-700 shadow-md dark:bg-gray-800">
-                        <CardHeader>
-                          <CardTitle className="text-lg text-gray-900 dark:text-white">
-                            강조 카드
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            강조된 카드 스타일입니다.
-                          </p>
-                        </CardContent>
-                      </Card>
-                      <Card className="bg-blue-50 dark:bg-blue-900/20">
-                        <CardHeader>
-                          <CardTitle className="text-lg text-gray-900 dark:text-white">
-                            배경 카드
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            배경색이 있는 카드입니다.
-                          </p>
-                        </CardContent>
-                      </Card>
+                    <div className="space-y-6">
+                      {/* 글래스모피즘 카드 */}
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">글래스모피즘 호버 효과</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <Card className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm">
+                            <CardHeader>
+                              <CardTitle className="text-sm font-semibold group-hover:text-primary transition-colors">
+                                Interactive Card
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <p className="text-xs text-gray-600 dark:text-gray-300">
+                                호버 시 shadow-lg + transform 효과
+                              </p>
+                            </CardContent>
+                          </Card>
+                          <Card className="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 border-primary/20">
+                            <CardHeader>
+                              <CardTitle className="text-sm font-semibold text-primary">
+                                Gradient Background
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <p className="text-xs text-gray-700 dark:text-gray-200">
+                                통계 및 강조 섹션용 그라데이션
+                              </p>
+                            </CardContent>
+                          </Card>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded text-sm text-gray-800 dark:text-gray-200">
+                          <code>{`className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300"`}</code>
+                        </div>
+                      </div>
+
+                      {/* 브랜드 카드 패턴 */}
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">브랜드 스타일 카드</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <Card className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
+                            <div className="text-center">
+                              <div className="h-12 w-12 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center mx-auto mb-3">
+                                <Shield className="h-6 w-6 text-primary dark:text-emerald-300" />
+                              </div>
+                              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">신뢰성</h4>
+                              <p className="text-sm text-gray-600 dark:text-gray-300">안전한 자산관리</p>
+                            </div>
+                          </Card>
+                          <Card className="border-blue-200 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20 p-6">
+                            <div className="text-center">
+                              <div className="h-12 w-12 rounded-lg bg-primary flex items-center justify-center mx-auto mb-3">
+                                <Target className="h-6 w-6 text-white" />
+                              </div>
+                              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">전문성</h4>
+                              <p className="text-sm text-gray-600 dark:text-gray-300">20년 노하우</p>
+                            </div>
+                          </Card>
+                          <Card className="bg-gradient-to-r from-primary to-primary/80 text-white p-6">
+                            <div className="text-center">
+                              <div className="h-12 w-12 rounded-lg bg-white/20 flex items-center justify-center mx-auto mb-3">
+                                <TrendingUp className="h-6 w-6 text-white" />
+                              </div>
+                              <h4 className="font-semibold mb-2">성장</h4>
+                              <p className="text-sm opacity-90">지속가능한 번영</p>
+                            </div>
+                          </Card>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Badge & 상태 표시 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      <Badge variant="outline" className="text-primary border-primary">
+                        Badge
+                      </Badge>
+                      Badge & Status Components
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">Service Count Badges</h4>
+                        <div className="flex flex-wrap gap-3 mb-3">
+                          <Badge variant="secondary" className="text-xs dark:bg-gray-700 dark:text-gray-200">4개 서비스</Badge>
+                          <Badge variant="outline" className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60">
+                            <Briefcase className="h-3 w-3 mr-1" />
+                            Professional Services
+                          </Badge>
+                          <Badge variant="ghost" size="xs">Version 1.0 | 2025</Badge>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">Status Indicators</h4>
+                        <div className="flex flex-wrap gap-3">
+                          <Badge className="bg-green-100 text-green-700 border-green-200">Active</Badge>
+                          <Badge className="bg-blue-100 text-blue-700 border-blue-200">Professional</Badge>
+                          <Badge className="bg-orange-100 text-orange-700 border-orange-200">Premium</Badge>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* 그리드 시스템 */}
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      📐 Grid System & Layout
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">반응형 그리드 패턴</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`/* 서비스 섹션: 모바일 1열 → 태블릿 2열 → 데스크톱 4열 */
+grid-cols-1 md:grid-cols-2 lg:grid-cols-4
+
+/* 통계 섹션: 모바일 2열 → 데스크톱 4열 */
+grid-cols-2 md:grid-cols-4
+
+/* 3분할 레이아웃 */
+grid-cols-1 md:grid-cols-3`}
+                          </pre>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">간격 시스템</h4>
+                        <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                          <p><code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">gap-4</code>: 16px - 기본 카드 간격</p>
+                          <p><code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">gap-6</code>: 24px - 서비스 카드 그리드</p>
+                          <p><code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">gap-8</code>: 32px - 섹션 간격</p>
+                        </div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -1137,72 +1330,364 @@ export default function BrandPage() {
             <TabsContent value="code" className="space-y-8">
               <div>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-300">
-                  코드 가이드라인
+                  코드 가이드라인 & 베스트 프랙티스
                 </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                  FamilyOffice S 프로젝트에서 사용하는 개발 패턴과 코딩 표준을 소개합니다.
+                </p>
 
+                {/* Next.js 13+ App Router 패턴 */}
                 <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
                   <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-                    <CardTitle className="text-gray-900 dark:text-white">
-                      Tailwind CSS 클래스 명명 규칙
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      ⚡ Next.js 15+ App Router 패턴
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4 border border-gray-200 dark:border-gray-600 transition-colors duration-300">
-                      <pre className="text-sm text-gray-800 dark:text-gray-200">
-                        {'// 기본 구조\n'}
-                        {'<div className="container mx-auto px-4">\n'}
-                        {
-                          '  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">\n'
-                        }
-                        {'    제목\n'}
-                        {'  </h1>\n'}
-                        {
-                          '  <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">\n'
-                        }
-                        {'    본문 내용\n'}
-                        {'  </p>\n'}
-                        {'</div>'}
-                      </pre>
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Server Components (기본값)</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// app/services/page.tsx - Server Component (기본값)
+import { ServicesSection } from '@/components/sections/services-section'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '8개 분야 34개 전문 서비스 | FamilyOffice S',
+  description: '중소중견기업 대표님을 위한 포괄적 자산관리 서비스'
+}
+
+export default function ServicesPage() {
+  return (
+    <main className="min-h-screen">
+      <ServicesSection />
+    </main>
+  )
+}`}
+                          </pre>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Client Components (최소한으로 사용)</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`'use client' // 상호작용이 필요한 경우에만
+
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+
+export function InteractiveComponent() {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  return (
+    <Button onClick={() => setIsOpen(!isOpen)}>
+      {isOpen ? '닫기' : '열기'}
+    </Button>
+  )
+}`}
+                          </pre>
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                      일관된 스타일링을 위해 Tailwind CSS 유틸리티 클래스를
-                      사용합니다.
-                    </p>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                {/* Tailwind CSS 디자인 시스템 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
                   <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-                    <CardTitle className="text-gray-900 dark:text-white">
-                      컴포넌트 구조
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      🎨 Tailwind CSS 디자인 시스템
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
-                      <pre className="text-sm text-gray-800 dark:text-gray-200">
-                        {'// 재사용 가능한 컴포넌트 예시\n'}
-                        {'interface CardProps {\n'}
-                        {'  title: string;\n'}
-                        {'  description: string;\n'}
-                        {'  className?: string;\n'}
-                        {'}\n\n'}
-                        {
-                          'export function CustomCard({ title, description, className }: CardProps) {\n'
-                        }
-                        {'  return (\n'}
-                        {'    <Card className={`p-6 \\${className}`}>\n'}
-                        {'      <CardHeader>\n'}
-                        {'        <CardTitle>\\{title\\}</CardTitle>\n'}
-                        {'      </CardHeader>\n'}
-                        {'      <CardContent>\n'}
-                        {
-                          '        <p className="text-gray-600">\\{description\\}</p>\n'
-                        }
-                        {'      </CardContent>\n'}
-                        {'    </Card>\n'}
-                        {'  );\n'}
-                        {'}'}
-                      </pre>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">다크모드 지원 패턴</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// 모든 컴포넌트에 다크모드 지원
+<div className="bg-white dark:bg-gray-900 transition-colors duration-300">
+  <h1 className="text-gray-900 dark:text-white">제목</h1>
+  <p className="text-gray-600 dark:text-gray-300">본문</p>
+  <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+    // 카드 내용
+  </Card>
+</div>`}
+                          </pre>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">반응형 그리드 패턴</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// 서비스 섹션 4x2 그리드 (복원된 패턴)
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  {services.map((service, index) => (
+    <Card 
+      key={service.id}
+      className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 
+                 border-border/50 hover:border-primary/30"
+      style={{ animationDelay: \`\${index * 100}ms\` }}
+    >
+      // 카드 내용
+    </Card>
+  ))}
+</div>`}
+                          </pre>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">애니메이션 시스템</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// CSS 애니메이션 클래스 (globals.css)
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+// 사용 예시
+<h1 className="animate-slide-up" style={{ animationDelay: '200ms' }}>
+  제목
+</h1>`}
+                          </pre>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* TypeScript 패턴 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      🔷 TypeScript 패턴 & 타입 정의
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">인터페이스 정의</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// types/service.ts
+export interface ServiceCategory {
+  id: string
+  icon: LucideIcon
+  title: string
+  description: string
+  serviceCount: number
+  keyFeatures: string[]
+}
+
+// 컴포넌트에서 사용
+interface ServicesProps {
+  categories: ServiceCategory[]
+  className?: string
+}
+
+export function ServicesGrid({ categories, className }: ServicesProps) {
+  return (
+    <div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6", className)}>
+      {categories.map((category) => (
+        <ServiceCard key={category.id} category={category} />
+      ))}
+    </div>
+  )
+}`}
+                          </pre>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* shadcn/ui 컴포넌트 활용 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      📦 shadcn/ui 컴포넌트 확장 패턴
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">기본 컴포넌트 래핑</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// components/service-card.tsx
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
+
+interface ServiceCardProps {
+  title: string
+  description: string
+  serviceCount: number
+  icon: React.ReactNode
+  className?: string
+}
+
+export function ServiceCard({ 
+  title, 
+  description, 
+  serviceCount, 
+  icon, 
+  className 
+}: ServiceCardProps) {
+  return (
+    <Card className={cn(
+      "group hover:shadow-lg hover:-translate-y-2 transition-all duration-300",
+      "border-border/50 hover:border-primary/30 dark:bg-gray-800",
+      className
+    )}>
+      <CardHeader className="pb-4">
+        <div className="flex items-center justify-between mb-3">
+          <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/30 
+                          flex items-center justify-center 
+                          group-hover:bg-primary/20 dark:group-hover:bg-primary/40 
+                          transition-colors">
+            {icon}
+          </div>
+          <Badge variant="secondary" className="text-xs">
+            {serviceCount}개 서비스
+          </Badge>
+        </div>
+        <CardTitle className="text-lg font-semibold group-hover:text-primary 
+                             dark:group-hover:text-emerald-300 transition-colors">
+          {title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-muted-foreground dark:text-gray-200">
+          {description}
+        </p>
+      </CardContent>
+    </Card>
+  )
+}`}
+                          </pre>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* 상태관리 및 데이터 페칭 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      🗄️ 데이터 관리 패턴
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">상수 데이터 관리</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// lib/constants.ts - 중앙화된 데이터 관리
+export const MAIN_PAGE_SERVICES = [
+  {
+    id: 'corporate-governance',
+    icon: Gavel,
+    title: '법인 지배구조 & 컨설팅',
+    description: '정관 설계부터 임원 운영까지 법인 경영의 모든 영역',
+    serviceCount: 4,
+    keyFeatures: [
+      '정관 및 배당 컨설팅',
+      'CEO유고시 리스크 관리',
+      '임원소득보장플랜',
+      '법인 운영 컨설팅'
+    ]
+  },
+  // ... 더 많은 서비스
+] as const
+
+// 타입 추론
+export type MainPageService = typeof MAIN_PAGE_SERVICES[number]`}
+                          </pre>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">환경변수 관리 (Zod 검증)</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// lib/env.ts
+import { z } from 'zod'
+
+const envSchema = z.object({
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+  CLERK_SECRET_KEY: z.string().min(1),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
+})
+
+export const env = envSchema.parse(process.env)`}
+                          </pre>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* 파일 구조 및 네이밍 */}
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      📁 파일 구조 & 네이밍 규칙
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">디렉토리 구조</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`app/
+├── (marketing)/          # 퍼블릭 마케팅 페이지
+│   ├── page.tsx         # 홈페이지
+│   ├── about/           # 회사소개
+│   └── services/        # 서비스 안내
+├── admin/              # 관리자 페이지 (보호됨)
+├── api/                # API 라우트
+└── globals.css         # 전역 스타일
+
+components/
+├── ui/                 # shadcn/ui 기본 컴포넌트
+├── sections/           # 페이지 섹션 컴포넌트
+│   ├── hero-section.tsx
+│   └── services-section.tsx
+├── forms/              # 폼 관련 컴포넌트
+└── layout/             # 레이아웃 컴포넌트
+
+lib/
+├── supabase/           # 데이터베이스 관련
+├── utils.ts            # 유틸리티 함수
+└── constants.ts        # 상수 정의`}
+                          </pre>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">네이밍 규칙</h4>
+                        <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                          <p><code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">kebab-case</code>: 파일명, 디렉토리명</p>
+                          <p><code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PascalCase</code>: React 컴포넌트, 타입, 인터페이스</p>
+                          <p><code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">camelCase</code>: 함수, 변수, 프로퍼티</p>
+                          <p><code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">SCREAMING_SNAKE_CASE</code>: 상수</p>
+                        </div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -1215,112 +1700,534 @@ export default function BrandPage() {
             <TabsContent value="examples" className="space-y-8">
               <div>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-300">
-                  활용 사례
+                  실제 활용 사례 & 레이아웃 예시
                 </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                  FamilyOffice S 브랜드 가이드라인이 실제 프로젝트에서 어떻게 적용되는지 확인해보세요.
+                </p>
+
+                {/* 홈페이지 히어로 섹션 예시 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      🏠 홈페이지 히어로 섹션
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background p-8 rounded-lg mb-4 border border-gray-200 dark:border-gray-600">
+                      <div className="text-center">
+                        <Badge variant="outline" className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white">
+                          <Building2 className="h-3 w-3 mr-1" />
+                          Professional Services
+                        </Badge>
+                        <h1 className="font-bold text-3xl leading-tight mb-4 text-primary whitespace-pre-line animate-slide-up">
+                          百年永續
+                        </h1>
+                        <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+                          중소중견기업 법인 대표님을 위한 <span className="font-semibold text-primary">포괄적 자산관리</span> 서비스
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                          <Button className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg">
+                            무료 상담 신청
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                          <Button variant="outline" className="shadow-lg">
+                            서비스 자세히 보기
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      그라데이션 배경, 브랜드 컬러, 한국어 타이포그라피가 조화를 이루는 메인 히어로 섹션
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* 서비스 그리드 레이아웃 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      🗂️ 서비스 그리드 (4x2 레이아웃)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-semibold text-center mb-4 text-gray-900 dark:text-white">
+                        <span className="text-primary">8개 분야 34개</span> 전문 서비스
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        {[
+                          { icon: '🏢', title: '법인 지배구조', count: 4 },
+                          { icon: '👥', title: '인사 & 고용지원', count: 4 },
+                          { icon: '💰', title: '세무 & 회계', count: 4 },
+                          { icon: '📈', title: '투자 & 금융', count: 4 },
+                          { icon: '🏛️', title: '자산관리 & 보험', count: 4 },
+                          { icon: '🎯', title: '가업승계 & M&A', count: 4 },
+                          { icon: '🔒', title: '법인구조 & 설립', count: 4 },
+                          { icon: '🔍', title: '분석 & 전략수립', count: 6 }
+                        ].map((service, index) => (
+                          <Card key={index} className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border/50 hover:border-primary/30">
+                            <CardHeader className="pb-3">
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors text-sm">
+                                  {service.icon}
+                                </div>
+                                <Badge variant="secondary" className="text-xs">
+                                  {service.count}개
+                                </Badge>
+                              </div>
+                              <CardTitle className="text-xs font-semibold group-hover:text-primary transition-colors">
+                                {service.title}
+                              </CardTitle>
+                            </CardHeader>
+                          </Card>
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      복원된 4x2 그리드 레이아웃, 글래스모피즘 호버 효과, 일관된 브랜드 컬러 적용
+                    </p>
+                  </CardContent>
+                </Card>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* 통계 섹션 */}
                   <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
                     <CardHeader className="border-b border-gray-200 dark:border-gray-700">
                       <CardTitle className="text-gray-900 dark:text-white">
-                        웹사이트 헤더
+                        📊 통계 표시 섹션
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-6">
-                      <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4 border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                      <div className="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-2xl p-6 mb-4">
+                        <h3 className="text-lg font-bold mb-4 text-center text-foreground dark:text-white">
+                          <span className="text-primary">검증된 실적</span>과 <span className="text-primary">전문성</span>
+                        </h3>
+                        <div className="grid grid-cols-2 gap-4 text-center">
+                          {[
+                            { value: '500억원+', label: '자산관리 실적' },
+                            { value: '500+', label: '법인 고객사' },
+                            { value: '20년+', label: '전문 경험' },
+                            { value: '98%', label: '고객 만족도' }
+                          ].map((stat, index) => (
+                            <div key={index}>
+                              <div className="text-lg font-bold text-primary mb-1">
+                                {stat.value}
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {stat.label}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        그라데이션 배경과 브랜드 컬러로 강조된 실적 통계
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  {/* 웹사이트 헤더 */}
+                  <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                    <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                      <CardTitle className="text-gray-900 dark:text-white">
+                        🧭 내비게이션 헤더
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-6">
+                      <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 p-4 rounded-lg mb-4">
                         <div className="flex items-center justify-between">
-                          <FamilyOfficeLogo className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                          <div className="flex space-x-4">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="text-gray-600 dark:text-gray-300"
-                            >
-                              서비스
+                          <FamilyOfficeLogo className="h-8 w-auto" />
+                          <div className="hidden md:flex space-x-6 text-sm">
+                            <span className="text-foreground hover:text-primary cursor-pointer">서비스</span>
+                            <span className="text-foreground hover:text-primary cursor-pointer">소개</span>
+                            <span className="text-foreground hover:text-primary cursor-pointer">블로그</span>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                              🌙
+                            </div>
+                            <Button size="sm" className="text-sm">
+                              무료 상담 신청
+                              <ArrowRight className="ml-2 h-3 w-3" />
                             </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="text-gray-600 dark:text-gray-300"
-                            >
-                              소개
-                            </Button>
-                            <Button size="sm">문의하기</Button>
                           </div>
                         </div>
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                        웹사이트 상단 내비게이션에서의 로고와 버튼 활용 예시
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        투명도와 블러 효과, 다크모드 토글, 일관된 브랜딩
                       </p>
                     </CardContent>
                   </Card>
 
+                  {/* 플로팅 버튼 */}
                   <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
                     <CardHeader className="border-b border-gray-200 dark:border-gray-700">
                       <CardTitle className="text-gray-900 dark:text-white">
-                        명함 디자인
+                        🎈 플로팅 액션 버튼
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-6">
-                      <div className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 text-white p-6 rounded-lg mb-4 shadow-lg">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h4 className="font-bold">김패밀리</h4>
-                            <p className="text-sm opacity-90">
-                              자산관리 전문가
-                            </p>
-                            <p className="text-xs opacity-75 mt-2">
-                              contact@familyoffice.co.kr
-                            </p>
-                          </div>
-                          <FamilyOfficeLogo className="w-12 h-12 text-white" />
+                      <div className="relative bg-gray-50 dark:bg-gray-700 p-8 rounded-lg mb-4 min-h-32">
+                        <div className="absolute bottom-4 right-4">
+                          <Button className="shadow-xl hover:shadow-2xl transition-all duration-300 bg-primary hover:bg-primary/90 rounded-full w-14 h-14">
+                            <Calendar className="h-5 w-5" />
+                          </Button>
                         </div>
-                      </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                        브랜드 컬러를 활용한 명함 디자인 예시
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
-                    <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-                      <CardTitle className="text-gray-900 dark:text-white">
-                        소셜 미디어
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-6">
-                      <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-4 text-center border border-blue-200 dark:border-blue-800 transition-colors duration-300">
-                        <FamilyOfficeLogo className="w-16 h-16 mx-auto mb-4 text-blue-600 dark:text-blue-400" />
-                        <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">
-                          FamilyOffice S
-                        </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          가족의 미래를 위한 자산관리
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          페이지 우하단에 고정된 상담 예약 버튼
                         </p>
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                        SNS 프로필 및 포스트에서의 브랜드 활용 방법
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        원형 디자인, 강한 그림자 효과, 호버 애니메이션
                       </p>
                     </CardContent>
                   </Card>
 
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>프레젠테이션</CardTitle>
+                  {/* 소셜 미디어 */}
+                  <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                    <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                      <CardTitle className="text-gray-900 dark:text-white">
+                        📱 소셜 미디어 포스트
+                      </CardTitle>
                     </CardHeader>
-                    <CardContent>
-                      <div className="bg-white border-2 border-gray-200 p-6 rounded-lg mb-4">
+                    <CardContent className="pt-6">
+                      <div className="bg-gradient-to-r from-primary to-primary/80 text-white p-6 rounded-lg mb-4 shadow-lg">
                         <div className="flex items-center mb-4">
-                          <FamilyOfficeLogo className="w-8 h-8 mr-3" />
-                          <h4 className="font-bold">자산관리 전략 제안서</h4>
+                          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                            <FamilyOfficeLogo className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">FamilyOffice S</h4>
+                            <p className="text-xs opacity-80">@familyoffice_kr</p>
+                          </div>
                         </div>
-                        <div className="h-20 bg-gray-100 rounded"></div>
+                        <p className="text-sm mb-3">
+                          중소중견기업 대표님들의 성공적인 자산관리를 위한 
+                          맞춤형 솔루션을 제공합니다. 📈
+                        </p>
+                        <div className="flex items-center text-xs opacity-80">
+                          <span>💬 12</span>
+                          <span className="ml-4">🔄 8</span>
+                          <span className="ml-4">❤️ 24</span>
+                        </div>
                       </div>
-                      <p className="text-sm text-gray-600">
-                        비즈니스 프레젠테이션에서의 브랜드 요소 활용
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        브랜드 컬러 그라데이션, 프로필 이미지, 일관된 메시징
                       </p>
                     </CardContent>
                   </Card>
                 </div>
+
+                {/* 프레젠테이션 슬라이드 */}
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      🎯 프레젠테이션 슬라이드
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="bg-white border-2 border-gray-200 dark:border-gray-600 rounded-lg p-8 mb-4 dark:bg-gray-700">
+                      <div className="flex items-center justify-between mb-6">
+                        <FamilyOfficeLogo className="h-8 w-auto" />
+                        <Badge variant="outline">Confidential</Badge>
+                      </div>
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                        중소중견기업을 위한 <span className="text-primary">통합 자산관리</span> 솔루션
+                      </h2>
+                      <div className="grid grid-cols-3 gap-4 mb-6">
+                        {['법인 지배구조', '세무 최적화', '투자 전략'].map((item, index) => (
+                          <div key={index} className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg text-center">
+                            <div className="text-2xl mb-2">💼</div>
+                            <div className="text-sm font-semibold text-gray-900 dark:text-white">{item}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="text-right text-sm text-gray-500 dark:text-gray-400">
+                        2025.01.15 | FamilyOffice S
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      비즈니스 프레젠테이션에서의 브랜드 적용: 로고 위치, 컬러 활용, 레이아웃 구성
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+              {/* === Brand Excellence 안내 섹션 (공통) === */}
+              <BrandExcellenceSection />
+            </TabsContent>
+
+            {/* 웹디자인 시스템 탭 */}
+            <TabsContent value="webdesign" className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-300">
+                  웹디자인 시스템
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                  FamilyOffice S의 종합적인 웹디자인 시스템 - 그리드, 레이아웃, 반응형 디자인 가이드라인
+                </p>
+
+                {/* 그리드 시스템 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      📐 그리드 시스템
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">핵심 그리드 패턴</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+                          <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                            <div className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">4열 서비스 그리드</div>
+                            <div className="grid grid-cols-4 gap-1 mb-2">
+                              {Array.from({ length: 8 }).map((_, i) => (
+                                <div key={i} className="bg-primary/20 h-6 rounded"></div>
+                              ))}
+                            </div>
+                            <code className="text-xs text-gray-600 dark:text-gray-400">
+                              grid-cols-1 md:grid-cols-2 lg:grid-cols-4
+                            </code>
+                          </div>
+                          
+                          <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                            <div className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">3열 콘텐츠 그리드</div>
+                            <div className="grid grid-cols-3 gap-1 mb-2">
+                              {Array.from({ length: 6 }).map((_, i) => (
+                                <div key={i} className="bg-blue-200 h-6 rounded"></div>
+                              ))}
+                            </div>
+                            <code className="text-xs text-gray-600 dark:text-gray-400">
+                              grid-cols-1 md:grid-cols-3
+                            </code>
+                          </div>
+                          
+                          <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                            <div className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">2열 통계 그리드</div>
+                            <div className="grid grid-cols-2 gap-1 mb-2">
+                              {Array.from({ length: 4 }).map((_, i) => (
+                                <div key={i} className="bg-green-200 h-6 rounded"></div>
+                              ))}
+                            </div>
+                            <code className="text-xs text-gray-600 dark:text-gray-400">
+                              grid-cols-2 md:grid-cols-4
+                            </code>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">간격 시스템</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-4">
+                            <div className="w-20 text-sm font-mono">gap-4</div>
+                            <div className="flex gap-4">
+                              <div className="w-8 h-8 bg-primary/30 rounded"></div>
+                              <div className="w-8 h-8 bg-primary/30 rounded"></div>
+                              <div className="w-8 h-8 bg-primary/30 rounded"></div>
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">16px - 기본 카드 간격</div>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            <div className="w-20 text-sm font-mono">gap-6</div>
+                            <div className="flex gap-6">
+                              <div className="w-8 h-8 bg-primary/50 rounded"></div>
+                              <div className="w-8 h-8 bg-primary/50 rounded"></div>
+                              <div className="w-8 h-8 bg-primary/50 rounded"></div>
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">24px - 서비스 그리드</div>
+                          </div>
+                          <div className="flex items-center gap-8">
+                            <div className="w-20 text-sm font-mono">gap-8</div>
+                            <div className="flex gap-8">
+                              <div className="w-8 h-8 bg-primary/70 rounded"></div>
+                              <div className="w-8 h-8 bg-primary/70 rounded"></div>
+                              <div className="w-8 h-8 bg-primary/70 rounded"></div>
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">32px - 섹션 간격</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* 반응형 디자인 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      📱 반응형 디자인 시스템
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">브레이크포인트</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                          {[
+                            { name: 'Mobile', size: '< 768px', cols: '1열', example: 'grid-cols-1' },
+                            { name: 'Tablet', size: '768px+', cols: '2열', example: 'md:grid-cols-2' },
+                            { name: 'Desktop', size: '1024px+', cols: '4열', example: 'lg:grid-cols-4' },
+                            { name: 'Large', size: '1280px+', cols: '4열+', example: 'xl:grid-cols-4' }
+                          ].map((bp, index) => (
+                            <div key={index} className="border border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center">
+                              <div className="text-sm font-semibold mb-1 text-gray-900 dark:text-white">{bp.name}</div>
+                              <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">{bp.size}</div>
+                              <div className="text-xs font-mono bg-gray-100 dark:bg-gray-700 p-1 rounded">{bp.example}</div>
+                              <div className="text-xs text-primary mt-1">{bp.cols}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">모바일 우선 접근법</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                          <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// 모바일 우선 (Mobile First) CSS 클래스 순서
+<div className="
+  grid grid-cols-1          // 모바일: 1열
+  md:grid-cols-2           // 태블릿: 2열 
+  lg:grid-cols-4           // 데스크톱: 4열
+  gap-4 md:gap-6           // 반응형 간격
+  px-4 md:px-6 lg:px-8     // 반응형 패딩
+">
+  {/* 서비스 카드들 */}
+</div>`}
+                          </pre>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* 레이아웃 패턴 */}
+                <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      🏗️ 레이아웃 패턴
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">섹션 레이아웃</h4>
+                        <div className="space-y-4">
+                          <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                            <div className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">히어로 섹션</div>
+                            <div className="bg-gradient-to-r from-primary/10 to-primary/20 h-24 rounded mb-2 flex items-center justify-center">
+                              <span className="text-sm text-gray-700 dark:text-gray-200">Full-width Hero + 중앙 정렬 콘텐츠</span>
+                            </div>
+                            <code className="text-xs text-gray-600 dark:text-gray-400">
+                              min-h-[90vh] + flex items-center justify-center
+                            </code>
+                          </div>
+                          
+                          <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                            <div className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">콘텐츠 섹션</div>
+                            <div className="bg-gray-100 dark:bg-gray-700 h-20 rounded mb-2 flex items-center justify-center">
+                              <span className="text-sm text-gray-700 dark:text-gray-200">Container + 그리드 시스템</span>
+                            </div>
+                            <code className="text-xs text-gray-600 dark:text-gray-400">
+                              container mx-auto px-4 + grid system
+                            </code>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">컨테이너 시스템</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                            <div className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">기본 컨테이너</div>
+                            <code className="text-xs bg-gray-100 dark:bg-gray-700 p-2 rounded block">
+                              container mx-auto px-4
+                            </code>
+                            <div className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                              최대 너비 제한 + 중앙 정렬
+                            </div>
+                          </div>
+                          
+                          <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                            <div className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">풀 너비 섹션</div>
+                            <code className="text-xs bg-gray-100 dark:bg-gray-700 p-2 rounded block">
+                              w-full bg-gradient-to-br
+                            </code>
+                            <div className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                              히어로, 배경 섹션용
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* 애니메이션 & 인터랙션 */}
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-700">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                      ✨ 애니메이션 & 인터랙션
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">글래스모피즘 호버 효과</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <Card className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+                            <CardContent className="p-6 text-center">
+                              <div className="text-2xl mb-2">🏢</div>
+                              <div className="font-semibold group-hover:text-primary transition-colors">호버해보세요!</div>
+                              <div className="text-sm text-gray-600 mt-2">shadow-lg + -translate-y-2</div>
+                            </CardContent>
+                          </Card>
+                          <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                            <pre className="text-xs text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`group hover:shadow-lg 
+hover:-translate-y-2 
+transition-all duration-300`}
+                            </pre>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">페이지 로드 애니메이션</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-4">
+                            <div className="w-24 text-sm font-mono">slide-up</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">opacity: 0 → 1, translateY(20px) → 0</div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="w-24 text-sm font-mono">fade-in</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">opacity: 0 → 1</div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="w-24 text-sm font-mono">delay</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">animationDelay: '100ms'</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">색상 전환 시스템</h4>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                          <pre className="text-xs text-gray-800 dark:text-gray-200 overflow-x-auto">
+{`// 모든 색상 변화에 부드러운 전환 적용
+transition-colors duration-300
+
+// 다크모드 지원 색상 패턴
+text-gray-900 dark:text-white
+bg-white dark:bg-gray-800  
+border-gray-200 dark:border-gray-700`}
+                          </pre>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
               {/* === Brand Excellence 안내 섹션 (공통) === */}
               <BrandExcellenceSection />
