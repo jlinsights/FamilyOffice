@@ -112,8 +112,8 @@ export function CalComPopup({
       <DialogTrigger asChild>
         {trigger || DefaultTrigger}
       </DialogTrigger>
-      <DialogContent className="max-w-5xl w-full h-[85vh] p-0 bg-background text-foreground">
-        <DialogHeader className="p-4 pb-3 border-b bg-background">
+      <DialogContent className="max-w-5xl w-full h-[90vh] p-0 bg-background text-foreground">
+        <DialogHeader className="px-4 py-3 pb-2 border-b bg-background">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -136,9 +136,9 @@ export function CalComPopup({
           </div>
           
           {/* 컴팩트한 상담 분야 표시 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 mt-2">
             {config.features.map((feature, index) => (
-              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded-full px-2 py-1">
+              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded-full px-2 py-0.5">
                 <CheckCircle className="h-3 w-3 text-green-500 flex-shrink-0" />
                 <span className="text-muted-foreground">{feature}</span>
               </div>
@@ -156,7 +156,7 @@ export function CalComPopup({
             </div>
           )}
 
-          <div className="h-full p-2 bg-background">
+          <div className="h-full p-1 bg-background">
             {/* Cal.com iframe container with enhanced dark mode */}
             <div className="w-full h-full rounded-lg overflow-hidden bg-black border border-border">
               <iframe
