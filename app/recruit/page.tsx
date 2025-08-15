@@ -3,20 +3,16 @@
 import {
   TrendingUp,
   Award,
-  Globe,
   Mail,
   MapPin,
   Clock,
   Building,
   Heart,
-  Lightbulb,
-  ArrowRight,
   Briefcase,
   Users,
   CheckCircle,
   Star,
   Phone,
-  Calendar,
   GraduationCap,
 } from 'lucide-react';
 
@@ -108,37 +104,44 @@ export default function RecruitPage() {
     },
   ];
 
-  const benefits = [
+  // GFC 핵심 혜택 (중복 제거를 위해 통합)
+  const gfcBenefits = [
+    {
+      icon: Building,
+      title: '기업 전문',
+      description: '중소중견기업 CEO 맞춤형 컨설팅',
+      color: 'blue'
+    },
     {
       icon: TrendingUp,
-      title: '삼성생명 GFC 브랜드',
-      description: '국내 최고 보험사의 신뢰할 수 있는 브랜드 파워',
+      title: '높은 수입',
+      description: '프리미엄 고객 대상 고수익 보장',
+      color: 'green'
     },
     {
       icon: Award,
-      title: '성과 기반 보상',
-      description: '개인 및 팀 성과에 따른 차별화된 인센티브',
+      title: '전문 브랜드',
+      description: '삼성생명의 신뢰와 명성',
+      color: 'yellow'
     },
     {
-      icon: Globe,
+      icon: GraduationCap,
+      title: '체계적 교육',
+      description: '전문가 양성 교육 시스템',
+      color: 'purple'
+    },
+    {
+      icon: Users,
       title: '전문가 네트워크',
-      description: '삼성생명 FP 및 전국 GFC와의 협업 기회',
-    },
-    {
-      icon: Lightbulb,
-      title: '전문성 개발 지원',
-      description: '체계적인 교육 프로그램 및 자격증 취득 지원',
+      description: '삼성생명 FP 및 전국 GFC 협업',
+      color: 'indigo'
     },
     {
       icon: Heart,
       title: '워라밸 보장',
-      description: '유연근무제 및 삼성생명 복리후생 혜택',
-    },
-    {
-      icon: Building,
-      title: '삼성생명 백업 시스템',
-      description: '체계적인 영업 지원 및 상품 백업 시스템',
-    },
+      description: '유연근무제 및 복리후생 혜택',
+      color: 'pink'
+    }
   ];
 
   return (
@@ -280,10 +283,10 @@ export default function RecruitPage() {
           </div>
         </section>
 
-        {/* GFC 소개 섹션 */}
+        {/* GFC 소개 & 혜택 통합 섹션 */}
         <section className="py-20">
           <div className="container mx-auto px-6">
-            <div className="max-w-3xl mx-auto text-center mb-12">
+            <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 GFC(기업재무컨설턴트)란?
               </h2>
@@ -294,47 +297,28 @@ export default function RecruitPage() {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Building className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">기업 전문</h3>
-                <p className="text-muted-foreground">
-                  중소중견기업 CEO<br />
-                  맞춤형 컨설팅
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">높은 수입</h3>
-                <p className="text-muted-foreground">
-                  프리미엄 고객<br />
-                  고수익 보장
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Award className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">전문 브랜드</h3>
-                <p className="text-muted-foreground">
-                  삼성생명의<br />
-                  신뢰와 명성
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <GraduationCap className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">체계적 교육</h3>
-                <p className="text-muted-foreground">
-                  전문가 양성<br />
-                  교육 시스템
-                </p>
-              </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {gfcBenefits.map((benefit, index) => {
+                const Icon = benefit.icon;
+                const colorClasses = {
+                  blue: 'bg-blue-100 text-blue-600',
+                  green: 'bg-green-100 text-green-600',
+                  yellow: 'bg-yellow-100 text-yellow-600',
+                  purple: 'bg-purple-100 text-purple-600',
+                  indigo: 'bg-indigo-100 text-indigo-600',
+                  pink: 'bg-pink-100 text-pink-600'
+                }[benefit.color as keyof typeof colorClasses] || 'bg-primary/10 text-primary';
+                
+                return (
+                  <div key={index} className="text-center group hover:transform hover:scale-105 transition-all duration-300">
+                    <div className={`w-16 h-16 ${colorClasses} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg`}>
+                      <Icon className="h-8 w-8" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                    <p className="text-muted-foreground">{benefit.description}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -380,54 +364,6 @@ export default function RecruitPage() {
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-                GFC 혜택 및 지원사항
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
-                삼성생명 GFC로서 누릴 수 있는 다양한 혜택과 지원을 확인하세요
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="h-10 w-10 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">높은 수수료</h3>
-                <p className="text-muted-foreground">
-                  프리미엄 고객 대상<br />
-                  고수익 수수료 체계
-                </p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-10 w-10 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">전문 교육</h3>
-                <p className="text-muted-foreground">
-                  체계적인 교육과정<br />
-                  전문가 멘토링
-                </p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Building className="h-10 w-10 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">브랜드 지원</h3>
-                <p className="text-muted-foreground">
-                  삼성생명 브랜드<br />
-                  마케팅 지원
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* 채용 프로세스 */}
         <section className="py-20 bg-muted/30">
@@ -678,10 +614,11 @@ export default function RecruitPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* 통합 CTA & Contact Section */}
         <section className="py-20">
           <div className="container mx-auto px-6">
-            <div className="max-w-3xl mx-auto bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl p-8 md:p-12 text-center">
+            {/* 강력한 CTA */}
+            <div className="max-w-3xl mx-auto bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl p-8 md:p-12 text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 삼성생명 GFC로 성공하세요
               </h2>
@@ -695,42 +632,47 @@ export default function RecruitPage() {
                   variant="secondary"
                   size="lg"
                 />
-                <Button variant="outline" size="lg" className="bg-white/10 border-white/20 hover:bg-white/20">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  잡페어 일정 확인
+                <Button variant="outline" size="lg" className="bg-white/10 border-white/20 hover:bg-white/20" asChild>
+                  <a href="tel:0502-5550-8700">
+                    <Phone className="mr-2 h-4 w-4" />
+                    ☎ 0502-5550-8700
+                  </a>
                 </Button>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Contact Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-              지원 문의
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8 dark:text-gray-200">
-              채용 관련 문의사항이 있으시면 언제든 연락주세요
-            </p>
-
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-              <CalComPopup
-                buttonText="무료 상담 예약"
-                variant="default"
-                size="lg"
-              />
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className="dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700"
-              >
-                <a href="tel:0502-5550-8700">
-                  <Phone className="mr-2 h-4 w-4" />
-                  전화 문의: 0502-5550-8700
-                </a>
-              </Button>
+            {/* 추가 지원 옵션 */}
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                다양한 지원 방법
+              </h3>
+              <p className="text-muted-foreground mb-6 dark:text-gray-200">
+                가장 편리한 방법으로 지원하고 상담받으세요
+              </p>
+              <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="font-bold shadow-lg"
+                  onClick={() =>
+                    window.open('https://recruit.familyoffices.vip', '_blank')
+                  }
+                >
+                  <Users className="mr-2 h-5 w-5" />
+                  잡페어 참석하기
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="font-bold shadow-lg"
+                  asChild
+                >
+                  <a href="mailto:recruit@familyoffices.vip">
+                    <Mail className="mr-2 h-5 w-5" />
+                    이메일 문의
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
