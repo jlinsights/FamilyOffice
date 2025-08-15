@@ -298,57 +298,83 @@
     @apply bg-border/80;
   }
 
-  /* Cal.com iframe styling for better visibility */
+  /* Cal.com iframe complete dark mode override */
   iframe[src*="cal.com"] {
-    color-scheme: light dark;
+    background: #000000 !important;
+    color-scheme: dark;
   }
 
-  /* Force Cal.com text visibility in dark mode */
+  /* Force all Cal.com content to be dark */
   .dark iframe[src*="cal.com"] {
-    background: #1a1a1a !important;
-    color-scheme: dark;
+    background: #000000 !important;
+    color-scheme: dark !important;
+    filter: none !important;
   }
 
   /* Light mode Cal.com styling */
   .light iframe[src*="cal.com"] {
     background: #ffffff !important;
-    color-scheme: light;
+    color-scheme: light !important;
   }
 
-  /* Cal.com dialog content improvements */
-  [data-cal-namespace] {
-    color: inherit !important;
+  /* Force Cal.com container background */
+  iframe[src*="cal.com"] body,
+  iframe[src*="cal.com"] html,
+  iframe[src*="cal.com"] #__next,
+  iframe[src*="cal.com"] [data-cal-namespace],
+  iframe[src*="cal.com"] main,
+  iframe[src*="cal.com"] div {
+    background-color: #000000 !important;
+    color: #ffffff !important;
   }
 
-  /* Ensure text is visible in Cal.com embed */
-  iframe[src*="cal.com"] * {
-    color: inherit !important;
+  /* Cal.com dark mode text and elements */
+  iframe[src*="cal.com"] *,
+  iframe[src*="cal.com"] p,
+  iframe[src*="cal.com"] span,
+  iframe[src*="cal.com"] h1,
+  iframe[src*="cal.com"] h2,
+  iframe[src*="cal.com"] h3,
+  iframe[src*="cal.com"] h4,
+  iframe[src*="cal.com"] h5,
+  iframe[src*="cal.com"] h6,
+  iframe[src*="cal.com"] label,
+  iframe[src*="cal.com"] li,
+  iframe[src*="cal.com"] td,
+  iframe[src*="cal.com"] th {
+    color: #ffffff !important;
+    background-color: transparent !important;
   }
 
-  /* Additional Cal.com styling for better visibility */
-  .dark iframe[src*="cal.com"] {
-    filter: invert(1) hue-rotate(180deg) contrast(0.9) brightness(1.1);
-  }
-
-  /* Override specific Cal.com elements for better contrast */
-  iframe[src*="cal.com"] [data-testid*="text"],
+  /* Cal.com form elements dark styling */
   iframe[src*="cal.com"] input,
   iframe[src*="cal.com"] button,
   iframe[src*="cal.com"] select,
   iframe[src*="cal.com"] textarea {
-    color: #000000 !important;
-    background-color: #ffffff !important;
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    border-color: #404040 !important;
+    border: 1px solid #404040 !important;
   }
 
-  /* Dark mode specific overrides */
-  .dark iframe[src*="cal.com"] [data-testid*="text"],
-  .dark iframe[src*="cal.com"] input,
-  .dark iframe[src*="cal.com"] button,
-  .dark iframe[src*="cal.com"] select,
-  .dark iframe[src*="cal.com"] textarea {
+  /* Cal.com button hover states */
+  iframe[src*="cal.com"] button:hover {
+    background-color: #2a2a2a !important;
     color: #ffffff !important;
-    background-color: #1a1a1a !important;
-    border-color: #404040 !important;
+  }
+
+  /* Cal.com specific branded elements */
+  iframe[src*="cal.com"] [class*="bg-white"],
+  iframe[src*="cal.com"] [class*="bg-gray-50"],
+  iframe[src*="cal.com"] [class*="bg-gray-100"] {
+    background-color: #000000 !important;
+  }
+
+  /* Cal.com text color overrides */
+  iframe[src*="cal.com"] [class*="text-black"],
+  iframe[src*="cal.com"] [class*="text-gray-900"],
+  iframe[src*="cal.com"] [class*="text-gray-800"] {
+    color: #ffffff !important;
   }
 
   /* Firefox scrollbar */

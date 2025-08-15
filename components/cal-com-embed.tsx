@@ -21,10 +21,8 @@ export default function CalComEmbed({ className, style }: CalComEmbedProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Theme-aware Cal.com URL
-  const isDark = resolvedTheme === 'dark';
-  const calTheme = isDark ? 'dark' : 'light';
-  const calUrl = `https://cal.com/familyoffice/consulting?embed=1&theme=${calTheme}&bg=${isDark ? '1a1a1a' : 'ffffff'}&text=${isDark ? 'ffffff' : '000000'}`;
+  // Force dark theme for better visibility
+  const calUrl = `https://cal.com/familyoffice/consulting?embed=1&theme=dark&bg=000000&text=ffffff&layout=month_view`;
 
   if (isLoading) {
     return (
@@ -47,8 +45,8 @@ export default function CalComEmbed({ className, style }: CalComEmbedProps) {
       style={{
         border: 'none',
         borderRadius: '8px',
-        background: isDark ? '#1a1a1a' : '#ffffff',
-        colorScheme: isDark ? 'dark' : 'light',
+        background: '#000000',
+        colorScheme: 'dark',
         ...style,
       }}
       className={className}

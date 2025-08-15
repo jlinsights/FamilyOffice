@@ -72,11 +72,9 @@ export function CalComFloating() {
         button.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.4)';
       });
 
-      // 클릭 이벤트 with theme support
+      // 클릭 이벤트 with forced dark theme
       button.addEventListener('click', () => {
-        const isDark = resolvedTheme === 'dark';
-        const calTheme = isDark ? 'dark' : 'light';
-        const themeParams = `?theme=${calTheme}&bg=${isDark ? '1a1a1a' : 'ffffff'}&text=${isDark ? 'ffffff' : '000000'}`;
+        const themeParams = `?theme=dark&bg=000000&text=ffffff&layout=month_view`;
         window.open(`https://cal.com/familyoffice${themeParams}`, '_blank');
       });
 

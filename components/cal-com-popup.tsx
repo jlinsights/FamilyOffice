@@ -64,10 +64,10 @@ export function CalComPopup({
 
   const config = eventConfigs[eventType];
   
-  // Cal.com theme configuration based on current theme
+  // Cal.com theme configuration - force dark mode for better visibility
   const isDark = resolvedTheme === 'dark';
   const calTheme = isDark ? 'dark' : 'light';
-  const fullCalLink = `https://cal.com/${config.calPath}?embed=1&theme=${calTheme}&bg=${isDark ? '1a1a1a' : 'ffffff'}&text=${isDark ? 'ffffff' : '000000'}`;
+  const fullCalLink = `https://cal.com/${config.calPath}?embed=1&theme=dark&bg=000000&text=ffffff&layout=month_view`;
 
   useEffect(() => {
     if (isOpen) {
@@ -168,8 +168,8 @@ export function CalComPopup({
                 height="100%"
                 style={{
                   border: 'none',
-                  background: isDark ? '#1a1a1a' : '#ffffff',
-                  colorScheme: isDark ? 'dark' : 'light',
+                  background: '#000000',
+                  colorScheme: 'dark',
                 }}
                 title={config.title}
                 onLoad={() => setIsLoading(false)}
