@@ -113,15 +113,15 @@ export function CalComPopup({
         {trigger || DefaultTrigger}
       </DialogTrigger>
       <DialogContent className="max-w-6xl w-full h-[99vh] p-0 bg-background text-foreground">
-        <DialogHeader className="px-3 pt-3 pb-3 border-b bg-background flex-shrink-0">
-          <div className="flex items-center justify-between mb-4">
+        <DialogHeader className="px-3 pt-2 pb-2 border-b bg-background flex-shrink-0">
+          <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="h-6 w-6 rounded bg-primary/10 flex items-center justify-center">
-                <Calendar className="h-3 w-3 text-primary" />
+              <div className="h-5 w-5 rounded bg-primary/10 flex items-center justify-center">
+                <Calendar className="h-2.5 w-2.5 text-primary" />
               </div>
-              <div>
-                <DialogTitle className="text-base font-bold leading-tight">{config.title}</DialogTitle>
-                <div className="flex items-center space-x-3 mt-0.5">
+              <div className="flex items-center space-x-4">
+                <DialogTitle className="text-sm font-bold">{config.title}</DialogTitle>
+                <div className="flex items-center space-x-3">
                   <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                     <Clock className="h-2.5 w-2.5" />
                     <span>{config.duration}</span>
@@ -134,16 +134,6 @@ export function CalComPopup({
               </div>
             </div>
           </div>
-          
-          {/* 균형감 있게 배치된 상담 분야 표시 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5">
-            {config.features.map((feature, index) => (
-              <div key={index} className="flex items-center space-x-1 text-xs bg-muted/20 rounded px-1.5 py-0.5">
-                <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
-                <span className="text-muted-foreground text-xs leading-none">{feature}</span>
-              </div>
-            ))}
-          </div>
         </DialogHeader>
 
         <div className="flex-1 relative overflow-hidden">
@@ -155,6 +145,20 @@ export function CalComPopup({
               </div>
             </div>
           )}
+
+          {/* 상담 분야 오버레이 - Cal.com 위에 표시 */}
+          <div className="absolute top-2 left-2 right-2 z-20 pointer-events-none">
+            <div className="bg-background/95 backdrop-blur-sm rounded-lg p-2 shadow-sm">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
+                {config.features.map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded px-1.5 py-0.5">
+                    <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
+                    <span className="text-foreground text-xs leading-none">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
           {/* Cal.com iframe 전체 영역 활용 */}
           <div className="w-full h-full bg-black">
@@ -177,7 +181,7 @@ export function CalComPopup({
           </div>
 
           {/* Alternative action button */}
-          <div className="absolute bottom-1 right-1">
+          <div className="absolute bottom-1 right-1 z-20">
             <Button
               variant="outline"
               size="sm"
