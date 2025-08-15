@@ -146,14 +146,14 @@ export function CalComPopup({
             </div>
           )}
 
-          {/* 상담 분야 오버레이 - Cal.com 위에 표시 */}
-          <div className="absolute top-2 left-2 right-2 z-20 pointer-events-none">
-            <div className="bg-background/95 backdrop-blur-sm rounded-lg p-2 shadow-sm">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
+          {/* 상담 분야 오버레이 - Cal.com 중간 위치에 표시 */}
+          <div className="absolute top-1/3 left-4 right-4 z-20 pointer-events-none">
+            <div className="bg-background/90 backdrop-blur-md rounded-lg p-3 shadow-lg border border-border/50">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {config.features.map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded px-1.5 py-0.5">
-                    <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
-                    <span className="text-foreground text-xs leading-none">{feature}</span>
+                  <div key={index} className="flex items-center space-x-1.5 text-xs bg-muted/40 rounded-md px-2 py-1">
+                    <CheckCircle className="h-3 w-3 text-green-500 flex-shrink-0" />
+                    <span className="text-foreground text-xs font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
