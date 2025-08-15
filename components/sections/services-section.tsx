@@ -25,7 +25,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-
 // 메인 페이지용 서비스 카테고리 요약
 const mainPageServices = [
   {
@@ -133,19 +132,19 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="section bg-gradient-to-b from-muted/30 to-background dark:from-gray-900 dark:to-gray-900 py-20"
+      className="section bg-gradient-to-b from-muted/30 to-background dark:from-gray-900 dark:to-gray-900"
     >
-      <div className="container px-4 mx-auto">
+      <div className="container">
         <div className="text-center mb-16">
           <Badge
             variant="outline"
-            className="mb-6 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60"
+            className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60"
           >
-            <Briefcase className="h-4 w-4 mr-2" />
+            <Briefcase className="h-3 w-3 mr-1" />
             Professional Services
           </Badge>
 
-          <h2 className="mb-6 text-3xl md:text-4xl font-bold text-balance animate-slide-up text-gray-900 dark:text-white">
+          <h2 className="mb-6 font-bold text-balance animate-slide-up text-gray-900 dark:text-white">
             <span className="text-primary dark:text-emerald-300">
               8개 분야 34개
             </span>{' '}
@@ -153,7 +152,7 @@ export function ServicesSection() {
           </h2>
 
           <p
-            className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance animate-slide-up dark:text-gray-200"
+            className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance animate-slide-up leading-relaxed dark:text-gray-200"
             style={{ animationDelay: '100ms' }}
           >
             기업가의 모든 고민을 해결하는 체계적이고 전문적인 서비스 포트폴리오
@@ -161,17 +160,17 @@ export function ServicesSection() {
         </div>
 
         {/* 서비스 카테고리 그리드 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {mainPageServices.map((service, index) => (
             <Card
               key={service.id}
-              className="group bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300 p-6 space-y-4 animate-slide-up border-border/50 hover:border-primary/30 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+              className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 animate-slide-up border-border/50 hover:border-primary/30 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <CardHeader className="pb-4">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="h-12 w-12 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors duration-300">
-                    <service.icon className="h-6 w-6 text-primary dark:text-emerald-300" />
+                <div className="flex items-center justify-between mb-3">
+                  <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors">
+                    <service.icon className="h-5 w-5 text-primary dark:text-emerald-300" />
                   </div>
                   <Badge
                     variant="secondary"
@@ -180,10 +179,10 @@ export function ServicesSection() {
                     {service.serviceCount}개 서비스
                   </Badge>
                 </div>
-                <CardTitle className="text-lg font-semibold text-foreground dark:text-white group-hover:text-primary dark:group-hover:text-emerald-300 transition-colors duration-300">
+                <CardTitle className="text-lg font-semibold text-foreground dark:text-white group-hover:text-primary dark:group-hover:text-emerald-300 transition-colors">
                   {service.title}
                 </CardTitle>
-                <CardDescription className="text-sm text-muted-foreground dark:text-gray-200">
+                <CardDescription className="text-sm text-muted-foreground dark:text-gray-200 leading-relaxed">
                   {service.description}
                 </CardDescription>
               </CardHeader>
@@ -191,7 +190,7 @@ export function ServicesSection() {
                 <div className="space-y-2">
                   {service.keyFeatures.slice(0, 3).map((feature, idx) => (
                     <div key={idx} className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 text-primary dark:text-emerald-300 mr-2 flex-shrink-0" />
+                      <CheckCircle className="h-3 w-3 text-primary dark:text-emerald-300 mr-2 flex-shrink-0" />
                       <span className="text-muted-foreground dark:text-gray-200">
                         {feature}
                       </span>
@@ -199,7 +198,7 @@ export function ServicesSection() {
                   ))}
                   {service.keyFeatures.length > 3 && (
                     <div className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 text-primary dark:text-emerald-300 mr-2 flex-shrink-0" />
+                      <CheckCircle className="h-3 w-3 text-primary dark:text-emerald-300 mr-2 flex-shrink-0" />
                       <span className="text-muted-foreground dark:text-gray-200">
                         +{service.keyFeatures.length - 3}개 더
                       </span>
@@ -212,7 +211,7 @@ export function ServicesSection() {
         </div>
 
         {/* 통계 섹션 */}
-        <div className="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-2xl p-8 mb-16 dark:bg-gray-800/50">
+        <div className="bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-2xl p-8 mb-12 dark:bg-gray-800/50">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold mb-4 text-foreground dark:text-white">
               <span className="text-primary dark:text-emerald-300">
@@ -221,7 +220,7 @@ export function ServicesSection() {
               과{' '}
               <span className="text-primary dark:text-emerald-300">전문성</span>
             </h3>
-            <p className="text-lg text-muted-foreground dark:text-gray-200 max-w-2xl mx-auto">
+            <p className="text-muted-foreground dark:text-gray-200 max-w-2xl mx-auto">
               500억원+ 관리 실적과 20년+ 전문 경험을 바탕으로 중소중견기업
               대표님의 모든 고민을 해결합니다
             </p>
@@ -235,7 +234,7 @@ export function ServicesSection() {
               { value: '98%', label: '고객 만족도', icon: Target },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-primary dark:text-emerald-300 mb-2">
+                <div className="text-2xl font-bold text-primary dark:text-emerald-300 mb-1">
                   {stat.value}
                 </div>
                 <div className="text-sm text-muted-foreground dark:text-gray-200">
@@ -251,7 +250,7 @@ export function ServicesSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Link
               href="/services"
-              className="inline-flex items-center justify-center px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg shadow-lg transition-colors duration-200 dark:bg-emerald-600 dark:hover:bg-emerald-700"
+              className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 bg-primary hover:bg-primary/90 text-white shadow-lg dark:bg-emerald-600 dark:hover:bg-emerald-700"
             >
               <Search className="mr-2 h-5 w-5" />
               서비스 자세히 보기
@@ -259,13 +258,13 @@ export function ServicesSection() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-semibold rounded-lg shadow-sm transition-colors duration-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+              className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-lg dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800"
             >
               무료 상담 신청
             </Link>
           </div>
 
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-sm text-muted-foreground dark:text-gray-300">
             각 서비스별 상세 내용과 혜택을 확인하시고, 맞춤형 솔루션을
             경험해보세요
           </p>
