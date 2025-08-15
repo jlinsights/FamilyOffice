@@ -194,36 +194,12 @@ export const Header = memo(function Header({
             ))}
           </nav>
 
-          {/* SuperClaude 40+ CEO 타겟 데스크톱 우측 버튼들 */}
-          <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
-            {/* 전화번호 직접 표시 - BMAD Decisional */}
-            <a 
-              href="tel:0502-5550-8700"
-              className="flex items-center text-lg font-semibold text-primary hover:text-primary/80 
-                         transition-colors duration-200 px-3 py-2 rounded-lg
-                         hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary
-                         min-w-[180px] justify-center"
-              aria-label="전화로 상담 말하기"
-            >
-              <Phone className="mr-2 h-4 w-4" aria-hidden="true" />
-              0502-5550-8700
-            </a>
-            
-            <div className="w-px h-6 bg-gray-300" aria-hidden="true" />
-            
+          {/* 데스크톱 우측 버튼들 */}
+          <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-4">
             <ThemeToggle />
-
-            {/* 컨설팅 신청 버튼 - 40+ 친화적 사이즈 */}
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-xl 
-                         text-base font-semibold focus-visible:outline-none 
-                         focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
-                         disabled:pointer-events-none disabled:opacity-50 ring-offset-background 
-                         transition-colors focus-visible:ring-offset-2 
-                         min-h-[48px] px-6 bg-primary text-primary-foreground 
-                         shadow-lg hover:shadow-xl hover:bg-primary/90
-                         hover:scale-105 active:scale-95 transition-all duration-200"
+              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
               aria-label="무료 상담 신청 페이지로 이동"
             >
               무료 상담 신청
@@ -292,41 +268,18 @@ export const Header = memo(function Header({
               </div>
             ))}
 
-            {/* SuperClaude 40+ 모바일 최적화 옵션 */}
+            {/* 모바일 버튼 및 설정 */}
             <div className="pt-4 border-t border-gray-200 dark:border-gray-800 space-y-4">
-              {/* 전화상담 버튼 - 언제든 접근 가능하도록 상단 고정 */}
-              <a
-                href="tel:0502-5550-8700"
-                onClick={handleMobileLinkClick}
-                className="flex items-center justify-center w-full 
-                           bg-primary text-primary-foreground font-bold 
-                           rounded-xl min-h-[56px] px-6 shadow-lg
-                           hover:bg-primary/90 transition-colors duration-200
-                           focus:outline-none focus:ring-2 focus:ring-primary
-                           text-lg"
-                aria-label="전화로 상담 받기"
-              >
-                <Phone className="mr-3 h-5 w-5" aria-hidden="true" />
-                지금 전화상담
-              </a>
-              
-              {/* 온라인 상담 신청 */}
               <Link
                 href="/contact"
                 onClick={handleMobileLinkClick}
-                className="flex items-center justify-center w-full 
-                           bg-white border-2 border-primary text-primary font-semibold 
-                           rounded-xl min-h-[48px] px-6 shadow
-                           hover:bg-primary/5 transition-colors duration-200
-                           focus:outline-none focus:ring-2 focus:ring-primary
-                           text-base"
-                aria-label="온라인으로 상담 신청"
+                className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
+                aria-label="무료 상담 신청"
               >
-                온라인 상담 신청
+                무료 상담 신청
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </Link>
               
-              {/* 테마 설정 */}
               <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-800">
                 <span className="text-base font-medium text-gray-900 dark:text-gray-100">
                   테마 설정
