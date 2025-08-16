@@ -42,12 +42,12 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       },
       {
         href: '/insights/market-intelligence',
-        label: '블로그',
+        label: '시장 분석',
         description: '자산관리 전문가의 최신 인사이트와 전략 분석',
       },
       {
         href: '/insights/weekly-brief',
-        label: '뉴스레터',
+        label: '주간 브리프',
         description: '주간 시장 동향과 투자 인사이트를 이메일로 받아보세요',
       },
       {
