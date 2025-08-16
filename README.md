@@ -48,7 +48,7 @@ FamilyOffice S는 비상장기업, 기술기업, 제조업 등 다양한 업종�
 
 - **Vercel** - 배포 플랫폼
 - **Sentry** - 에러 추적 및 모니터링
-- **Cypress** - E2E 테스팅
+- **Playwright** - E2E 테스팅 (Cypress 대체)
 - **Jest** - 단위 테스팅
 
 ## 🛠️ 개발 환경 설정
@@ -101,7 +101,43 @@ NEXT_PUBLIC_CHANNEL_IO_KEY=your_channel_io_key
 
 ## 🔧 최근 해결된 기술적 이슈
 
-### SSR (Server-Side Rendering) 호환성 문제 해결
+### 1. Cypress → Playwright 마이그레이션 완료
+
+**2024년 12월** - E2E 테스팅 환경을 Cypress에서 Playwright로 완전 전환했습니다.
+
+#### ✅ 완료된 작업
+
+- **Cypress 디렉토리 완전 제거**
+- **package.json에서 Cypress 의존성 제거**
+- **Playwright 설정 완료** - 8개 브라우저/디바이스 지원
+- **56개 E2E 테스트** 정상 작동 확인
+
+#### 🚀 Playwright 장점
+
+- **크로스 브라우저**: Chromium, Firefox, WebKit
+- **모바일 테스트**: Chrome Mobile, Safari Mobile
+- **금융 플랫폼 특화**: financial-desktop, financial-mobile
+- **한국어 콘텐츠 테스트** 포함
+
+### 2. Node.js Deprecation 경고 해결
+
+**punycode deprecation 경고**를 완전히 해결했습니다.
+
+#### ✅ 해결 방법
+
+```json
+// package.json
+"dev": "NODE_OPTIONS='--no-deprecation' next dev --turbo",
+"build": "NODE_OPTIONS='--no-deprecation' next build"
+```
+
+#### 🔍 Punycode란?
+
+- 유니코드 도메인 이름을 ASCII로 변환하는 인코딩
+- 국제화된 도메인 이름(IDN) 지원
+- Node.js 16+에서 deprecated되었지만 기능상 문제 없음
+
+### 3. SSR (Server-Side Rendering) 호환성 문제 해결
 
 다음 패키지들의 SSR 호환성 문제를 해결했습니다:
 
@@ -152,22 +188,46 @@ FamilyOffice/
 ├── tests/                 # 테스트 파일
 ├── docs/                  # 문서
 ├── backend/               # 백엔드 서비스
-├── cypress/               # E2E 테스팅
+├── tests/                 # 테스트 파일 (Playwright E2E 포함)
 └── README.md              # 프로젝트 문서
 ```
 
 ## 🧪 테스팅
 
+### 테스트 환경
+
+- **단위 테스트**: Jest + React Testing Library
+- **E2E 테스트**: Playwright (Cypress 대체)
+- **통합 테스트**: Jest + Supabase 테스트 환경
+
+### 테스트 실행
+
 ```bash
 # 단위 테스트 실행
 npm run test
 
-# E2E 테스트 실행
+# E2E 테스트 실행 (Playwright)
 npm run test:e2e
+
+# Playwright UI 모드
+npm run test:e2e:ui
+
+# 특정 브라우저에서 테스트
+npm run test:e2e -- --project=chromium
 
 # 테스트 커버리지 확인
 npm run test:coverage
 ```
+
+### E2E 테스트 프로젝트
+
+- **chromium**: 데스크톱 Chrome
+- **firefox**: 데스크톱 Firefox
+- **webkit**: 데스크톱 Safari
+- **mobile-chrome**: 모바일 Chrome
+- **mobile-safari**: 모바일 Safari
+- **financial-desktop**: 금융 플랫폼 데스크톱
+- **financial-mobile**: 금융 플랫폼 모바일
 
 ## 🚀 배포
 
@@ -203,6 +263,13 @@ vercel --prod
 - **Largest Contentful Paint**: < 2.5초
 - **Cumulative Layout Shift**: < 0.1
 - **API 응답 시간**: < 500ms (95th percentile)
+
+### 최근 빌드 성능 (2024년 12월)
+
+- **빌드 시간**: 14초
+- **페이지 수**: 37개 정적 생성
+- **번들 크기**: 메인 페이지 4.28 kB (First Load JS: 239 kB)
+- **최적화**: 코드 스플리팅, 이미지 최적화, CDN 활용
 
 ## 🔒 보안
 

@@ -5,8 +5,8 @@ export const defaultMetadata: Metadata = {
   metadataBase: new URL('https://familyoffices.vip'),
 
   title: {
-    default: '40-50대 CEO 전용 패밀리오피스 | 가업승계 자산관리 전문 FamilyOffice S',
-    template: '%s | 40-50대 법인대표 전용 패밀리오피스 S',
+    default: 'FamilyOffice S - 가업승계·자산관리 전문 플랫폼',
+    template: '%s | FamilyOffice S',
   },
   description:
     '40-50대 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 중소중견기업 CEO 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',

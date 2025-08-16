@@ -10,10 +10,12 @@ FamilyOffice S is a premium wealth management platform targeting Korean mid-mark
 
 ```bash
 # Development
-npm run dev          # Start development server (localhost:3000)
-npm run build        # Production build
-npm run start        # Start production server
-npm run lint         # ESLint code analysis
+npm run dev          # Start development server (localhost:3000) - No deprecation warnings
+npm run dev:mobile  # Mobile development server (0.0.0.0:3000)
+npm run dev:inspect # Development with Node.js inspector
+npm run build       # Production build - No deprecation warnings
+npm run start       # Start production server
+npm run lint        # ESLint code analysis
 npm run vercel-build # Vercel-specific build process
 ```
 
@@ -21,9 +23,10 @@ npm run vercel-build # Vercel-specific build process
 
 ### Core Framework
 
-- **Next.js 15.2.4** with App Router and TypeScript 5.4.5
+- **Next.js 15.4.6** with App Router and TypeScript 5.8.3
 - **Tailwind CSS 3.4.17** + shadcn/ui components
 - **ESLint** + **Prettier** for code quality
+- **Playwright** for E2E testing (replaced Cypress)
 
 ### Authentication & Database
 
@@ -51,7 +54,7 @@ npm run vercel-build # Vercel-specific build process
 
 ## Project Structure
 
-```
+````
 app/
 ├── api/webhooks/clerk/     # Clerk webhook for user sync
 ├── admin/                  # Admin dashboard (protected)
@@ -87,7 +90,12 @@ constants/
 ├── services.ts            # Service definitions by industry
 ├── programs.ts            # Educational program data
 └── faq.ts                 # FAQ content structure
-```
+
+tests/
+├── e2e/                   # Playwright E2E tests (replaced Cypress)
+├── unit/                  # Jest unit tests
+├── integration/           # Integration tests
+└── performance/           # Performance tests
 
 ## Authentication System
 
@@ -103,7 +111,7 @@ constants/
 -- Key Supabase tables
 users (id, email, name, created_at, updated_at)
 -- Additional tables as needed for consultations, analytics
-```
+````
 
 ## Environment Variables
 
@@ -225,9 +233,81 @@ GET /api/financial/status?detailed=true
 - **Environment**: Production variables set in Vercel dashboard
 - **Domain**: Custom domain with Korean SSL certificate
 
+## Testing & Quality Assurance
+
+### E2E Testing with Playwright
+
+**Migration from Cypress completed (December 2024)**
+
+- **56 E2E tests** across 8 browser/device configurations
+- **Cross-browser support**: Chromium, Firefox, WebKit
+- **Mobile testing**: Chrome Mobile, Safari Mobile
+- **Financial platform specific**: financial-desktop, financial-mobile projects
+- **Korean content testing** included
+
+### Test Commands
+
+```bash
+npm run test:e2e          # Run all E2E tests
+npm run test:e2e:ui       # Playwright UI mode
+npm run test:e2e:headed   # Headed mode for debugging
+npm run test:e2e:debug    # Debug mode with inspector
+npm run test:e2e:report   # View test reports
+```
+
+### Test Coverage
+
+- **Unit tests**: Jest + React Testing Library
+- **Integration tests**: Supabase test environment
+- **Performance tests**: Artillery load testing
+- **Security tests**: Automated security scanning
+
+## Recent Technical Improvements
+
+### 1. Cypress → Playwright Migration
+
+- ✅ Complete removal of Cypress dependencies
+- ✅ Package.json cleanup (133 packages removed)
+- ✅ Playwright configuration with Korean market focus
+- ✅ 8 browser/device test matrix
+
+### 2. Node.js Deprecation Warnings Resolution
+
+- ✅ `punycode` deprecation warnings eliminated
+- ✅ NODE_OPTIONS='--no-deprecation' configuration
+- ✅ Clean development and build processes
+
+### 3. Build Performance Optimization
+
+- ✅ **Build time**: 14 seconds
+- ✅ **37 static pages** generated
+- ✅ **Bundle optimization**: Main page 4.28 kB (First Load JS: 239 kB)
+- ✅ **Code splitting** and **image optimization**
+
 ## Analytics & Monitoring
 
 - **Google Analytics 4**: Enhanced ecommerce tracking
 - **Supabase Analytics**: Real-time database insights
 - **Vercel Analytics**: Performance and usage metrics
 - **Error Tracking**: Built-in Next.js error boundaries
+
+---
+
+## 📝 Document Update History
+
+**Last Updated**: December 2024
+
+### Recent Changes
+
+- ✅ **Cypress → Playwright Migration**: Complete E2E testing environment overhaul
+- ✅ **Node.js Deprecation Resolution**: punycode warnings eliminated
+- ✅ **Build Performance**: 14-second build time, 37 static pages
+- ✅ **Package Cleanup**: 133 unused packages removed
+- ✅ **Korean Market Focus**: Enhanced testing for Korean content and mobile usage
+
+### Next Steps
+
+- 🚀 **Vercel Production Deployment**: Ready for production deployment
+- 🔍 **Performance Monitoring**: Core Web Vitals tracking
+- 📱 **Mobile Optimization**: Korean mobile user experience enhancement
+- 🌏 **Internationalization**: Korean language support optimization

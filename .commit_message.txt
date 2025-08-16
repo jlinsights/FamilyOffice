@@ -1,1 +1,1 @@
-🔧 punycode deprecation 경고 완전 해결 - NODE_OPTIONS 설정
+✨ 브랜드 로고 시스템 태그라인을 'Your Trusted Financial Partner for Life'로 통일

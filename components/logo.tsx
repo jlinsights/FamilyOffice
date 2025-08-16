@@ -81,7 +81,7 @@ export const FamilyOfficeLogo: React.FC<LogoProps> = ({
           <p
             className={`${currentSize.tagline} text-muted-foreground font-light tracking-wider whitespace-nowrap select-none transition-opacity duration-200 hover:opacity-75`}
           >
-            중소중견기업 전문 자산관리 파트너
+            Your Trusted Financial Partner for Life
           </p>
         </div>
       )}
@@ -186,7 +186,7 @@ export const PremiumFamilyOfficeLogo: React.FC<
       {showTagline && (
         <div className="flex justify-center">
           <p className="text-[9px] text-muted-foreground font-extralight tracking-[0.15em] whitespace-nowrap opacity-90 transition-opacity duration-300 hover:opacity-100">
-            중소중견기업 전문 자산관리 파트너
+            Your Trusted Financial Partner for Life
           </p>
         </div>
       )}
