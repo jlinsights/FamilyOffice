@@ -13,9 +13,15 @@ import {
   Target,
   Shield,
   CheckCircle,
+  ChevronDown,
+  AlertCircle,
+  Factory,
+  Hammer,
+  Cpu,
+  Medal,
 } from 'lucide-react';
 import Link from 'next/link';
-import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComPopup } from '@/components/cal-com-popup';\nimport { CalComButton } from '@/components/cal-com-button';\nimport { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';\nimport { FAQ_CATEGORIES } from '@/constants/faq';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { AnimatedCounter } from '@/components/animated-counter';
@@ -23,6 +29,18 @@ import { generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/structured-data';
 
 export { metadata } from './metadata';
+
+// 아이콘 매핑 헬퍼 함수
+const getIcon = (iconName: string) => {
+  const icons: { [key: string]: React.ComponentType<any> } = {
+    'Building': Building,
+    'Factory': Factory,
+    'Hammer': Hammer,
+    'Cpu': Cpu,
+    'Medal': Medal,
+  };
+  return icons[iconName] || Building;
+};
 
 export default function AboutPage() {
   const structuredData = generateStructuredData('Organization');
@@ -376,6 +394,77 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
+      
+      {/* FAQ 섹션 */}
+      <div className="bg-muted/30 dark:bg-muted/20">
+        <div className="container section-lg">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              자주 묻는 질문
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              FamilyOffice S 서비스에 대해 궁금한 점들을 확인해보세요
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {FAQ_CATEGORIES.map((category, categoryIndex) => {
+              const IconComponent = getIcon(category.icon);
+              return (
+                <div key={categoryIndex} className="space-y-6">
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 dark:bg-primary/20 mb-4">
+                      <IconComponent className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">
+                      {category.title}
+                    </h3>
+                  </div>
+                  
+                  <Accordion type="single" collapsible className="space-y-2">
+                    {category.faqs.map((item, itemIndex) => (
+                      <AccordionItem 
+                        key={itemIndex} 
+                        value={`${categoryIndex}-${itemIndex}`}
+                        className="border border-border/40 rounded-lg bg-background/80 dark:bg-background/60"
+                      >
+                        <AccordionTrigger className="px-4 py-3 text-left hover:no-underline hover:bg-accent/50 rounded-t-lg">
+                          <span className="font-medium text-foreground">
+                            {item.question}
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4 pb-4 text-muted-foreground">
+                          <div className="whitespace-pre-line leading-relaxed">
+                            {item.answer}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </div>
+              );
+            })}
+          </div>
+          
+          <div className="text-center mt-16">
+            <div className="bg-background/80 dark:bg-background/60 border border-border/40 rounded-xl p-8">
+              <h3 className="text-xl font-semibold text-foreground mb-4">
+                추가 문의사항이 있으신가요?
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                전문 상담사가 맞춤형 답변을 제공해드립니다
+              </p>
+              <CalComButton
+                variant="default"
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                무료 상담 신청하기
+              </CalComButton>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <Footer />
     </div>

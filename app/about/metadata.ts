@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { generateMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata(
-  'FamilyOffice S 소개 | 삼성생명 기업컨설팅센터 VIP 전담팀',
-  '삼성생명 기업컨설팅센터 소속 FamilyOffice S는 중소중견기업 CEO와 고액자산가를 위한 종합 자산관리 서비스를 제공합니다. 패밀리오피스, 가업승계, CEO플랜 전문팀입니다.',
+  'About Us & FAQ | FamilyOffice S 소개 및 자주 묻는 질문',
+  '삼성생명 기업컨설팅센터 소속 FamilyOffice S 소개와 중소중견기업 CEO가 자주 묻는 자산관리, 세무, 보험 관련 질문과 답변을 확인하세요.',
   [
     'FamilyOffice S 소개',
     '삼성생명 기업컨설팅센터',

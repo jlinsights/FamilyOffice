@@ -210,6 +210,21 @@ export const Header = memo(function Header({
 
           {/* 데스크톱 우측 버튼들 */}
           <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-4">
+            <Link
+              href="http://pf.kakao.com/_gsxkxdG"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+              aria-label="카카오톡 채널 연결"
+            >
+              <Image
+                src="/SVG/SimpleIconsKakao.svg"
+                alt="Kakao"
+                width={20}
+                height={20}
+                className="w-5 h-5"
+              />
+            </Link>
             <ThemeToggle />
             <Link
               href="/contact"
@@ -293,6 +308,27 @@ export const Header = memo(function Header({
                 무료 상담 신청
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </Link>
+              
+              <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-800">
+                <span className="text-base font-medium text-gray-900 dark:text-gray-100">
+                  고객지원
+                </span>
+                <Link
+                  href="http://pf.kakao.com/_gsxkxdG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                  aria-label="카카오톡 채널 연결"
+                >
+                  <Image
+                    src="/SVG/SimpleIconsKakao.svg"
+                    alt="Kakao"
+                    width={20}
+                    height={20}
+                    className="w-5 h-5"
+                  />
+                </Link>
+              </div>
               
               <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-800">
                 <span className="text-base font-medium text-gray-900 dark:text-gray-100">
