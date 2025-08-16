@@ -285,7 +285,7 @@ export default function ResourcesPage() {
                     <h3 className="text-lg font-semibold text-foreground mb-3">
                       무료 자료
                     </h3>
-                    <p className="text-muted-foreground mb-4">
+                    <p className="text-card-foreground/80 mb-4">
                       회원 가입 후 무료로 다운로드 가능한 자료입니다. 시장 동향, 기본 투자 가이드 등 유용한 정보를 제공합니다.
                     </p>
                     <Button variant="outline" size="sm">
@@ -299,7 +299,7 @@ export default function ResourcesPage() {
                     <h3 className="text-lg font-semibold text-foreground mb-3">
                       프리미엄 자료
                     </h3>
-                    <p className="text-muted-foreground mb-4">
+                    <p className="text-card-foreground/80 mb-4">
                       FamilyOffice S 회원 전용 자료입니다. 심층 분석 리포트, 실무 가이드북 등 차별화된 콘텐츠를 제공합니다.
                     </p>
                     <div className="flex gap-2">
@@ -318,7 +318,7 @@ export default function ResourcesPage() {
                     <h3 className="text-lg font-semibold text-foreground mb-3">
                       맞춤 자료 요청
                     </h3>
-                    <p className="text-muted-foreground mb-4">
+                    <p className="text-card-foreground/80 mb-4">
                       특정 주제나 업종에 대한 맞춤형 자료가 필요하신가요? 전문가가 직접 작성하는 맞춤 리포트를 요청하세요.
                     </p>
                     <Button variant="outline" size="sm">
@@ -340,8 +340,8 @@ export default function ResourcesPage() {
                     key={index}
                     className="flex items-start gap-3 p-3 bg-card rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer border"
                   >
-                    <div className="w-8 h-8 bg-muted rounded flex items-center justify-center flex-shrink-0">
-                      <span className="text-sm font-semibold text-muted-foreground">
+                    <div className="w-8 h-8 bg-primary/20 rounded flex items-center justify-center flex-shrink-0">
+                      <span className="text-sm font-semibold text-primary">
                         {index + 1}
                       </span>
                     </div>
@@ -358,7 +358,7 @@ export default function ResourcesPage() {
                 <h4 className="font-semibold text-foreground mb-2">
                   💡 알고 계셨나요?
                 </h4>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground/70">
                   매월 첫째 주에는 새로운 시장 분석 리포트가 업데이트됩니다. 
                   뉴스레터 구독자는 신규 자료 알림을 가장 먼저 받아보실 수 있습니다.
                 </p>
