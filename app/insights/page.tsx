@@ -105,7 +105,7 @@ export default function InsightsPage() {
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
               인사이트 센터
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
               자산관리 전문가의 깊이 있는 분석과 실용적인 전략을 만나보세요.
               <br />
               시장의 변화를 앞서가는 인사이트로 여러분의 투자 결정을 도와드립니다.
@@ -132,7 +132,7 @@ export default function InsightsPage() {
                   <CardContent>
                     <ul className="space-y-2 mb-6">
                       {section.features.map((feature, index) => (
-                        <li key={index} className="flex items-center text-muted-foreground">
+                        <li key={index} className="flex items-center text-foreground/80">
                           <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3"></span>
                           {feature}
                         </li>
@@ -159,7 +159,7 @@ export default function InsightsPage() {
             <h2 className="text-3xl font-bold text-foreground mb-4">
               최신 인사이트
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-foreground/70">
               자산관리 전문가들이 전하는 최신 시장 분석과 투자 전략
             </p>
           </div>
@@ -172,7 +172,7 @@ export default function InsightsPage() {
                     <span className="text-sm font-medium text-primary">
                       {insight.category}
                     </span>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-foreground/60">
                       {insight.readTime} 읽기
                     </span>
                   </div>
@@ -183,7 +183,7 @@ export default function InsightsPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-foreground/60">
                       {insight.date}
                     </span>
                     <Link href="/insights/market-intelligence" className="text-sm font-medium text-primary hover:text-primary/80">
@@ -215,28 +215,28 @@ export default function InsightsPage() {
                 <TrendingUp className="w-10 h-10 text-primary" />
               </div>
               <div className="text-3xl font-bold text-foreground mb-2">500+</div>
-              <div className="text-muted-foreground">게시된 인사이트</div>
+              <div className="text-foreground/70">게시된 인사이트</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <Users className="w-10 h-10 text-blue-600" />
               </div>
               <div className="text-3xl font-bold text-foreground mb-2">10K+</div>
-              <div className="text-muted-foreground">구독자</div>
+              <div className="text-foreground/70">구독자</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <Mail className="w-10 h-10 text-green-600" />
               </div>
               <div className="text-3xl font-bold text-foreground mb-2">주 2회</div>
-              <div className="text-muted-foreground">뉴스레터 발송</div>
+              <div className="text-foreground/70">뉴스레터 발송</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <BookOpen className="w-10 h-10 text-orange-600" />
               </div>
               <div className="text-3xl font-bold text-foreground mb-2">100+</div>
-              <div className="text-muted-foreground">다운로드 자료</div>
+              <div className="text-foreground/70">다운로드 자료</div>
             </div>
           </div>
         </div>
