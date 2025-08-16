@@ -58,7 +58,7 @@ export function BlogContent({ className }: BlogContentProps) {
           다른 카테고리를 선택하거나 전체 포스트를 확인해보세요.
         </p>
         <Button asChild>
-          <Link href="/blog">전체 포스트 보기</Link>
+          <Link href="/insights/market-intelligence">전체 포스트 보기</Link>
         </Button>
       </div>
     );
@@ -162,7 +162,7 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
           )}
         </div>
         <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
         </h3>
         <p className="text-muted-foreground mb-4 line-clamp-2">
           {post.excerpt}
@@ -186,7 +186,7 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
           })}
         </div>
         <Button className="w-full" variant="outline" asChild>
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={`/insights/market-intelligence/${post.slug}`}>
             자세히 보기
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
@@ -223,7 +223,7 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
             </div>
           </div>
           <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
-            <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+            <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
           </h3>
           <p className="text-muted-foreground mb-4 line-clamp-2">
             {post.excerpt}
@@ -234,7 +234,7 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
               {post.author}
             </div>
             <Button variant="outline" size="sm" asChild>
-              <Link href={`/blog/${post.slug}`}>
+              <Link href={`/insights/market-intelligence/${post.slug}`}>
                 자세히 보기
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
