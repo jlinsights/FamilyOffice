@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, FileText, Mail, Download, TrendingUp, Users, BookOpen } from 'lucide-react';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: '인사이트 센터 | 기업승계 전문 분석 | FamilyOffice S',
@@ -93,15 +95,17 @@ const latestInsights = [
 
 export default function InsightsPage() {
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
+      <Header />
+      <main className="pt-20">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <section className="relative py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
               인사이트 센터
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               자산관리 전문가의 깊이 있는 분석과 실용적인 전략을 만나보세요.
               <br />
               시장의 변화를 앞서가는 인사이트로 여러분의 투자 결정을 도와드립니다.
@@ -117,7 +121,7 @@ export default function InsightsPage() {
             {insightSections.map((section) => {
               const Icon = section.icon;
               return (
-                <Card key={section.title} className="group hover:shadow-xl transition-all duration-300 border-gray-200 dark:border-gray-700">
+                <Card key={section.title} className="group hover:shadow-xl transition-all duration-300">
                   <CardHeader>
                     <div className={`w-14 h-14 rounded-lg bg-gradient-to-br ${section.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                       <Icon className="w-7 h-7 text-white" />
@@ -128,8 +132,8 @@ export default function InsightsPage() {
                   <CardContent>
                     <ul className="space-y-2 mb-6">
                       {section.features.map((feature, index) => (
-                        <li key={index} className="flex items-center text-gray-600 dark:text-gray-400">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3"></span>
+                        <li key={index} className="flex items-center text-muted-foreground">
+                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3"></span>
                           {feature}
                         </li>
                       ))}
@@ -149,13 +153,13 @@ export default function InsightsPage() {
       </section>
 
       {/* Latest Insights */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
               최신 인사이트
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
+            <p className="text-lg text-muted-foreground">
               자산관리 전문가들이 전하는 최신 시장 분석과 투자 전략
             </p>
           </div>
@@ -165,10 +169,10 @@ export default function InsightsPage() {
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300 cursor-pointer">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                    <span className="text-sm font-medium text-primary">
                       {insight.category}
                     </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="text-sm text-muted-foreground">
                       {insight.readTime} 읽기
                     </span>
                   </div>
@@ -179,10 +183,10 @@ export default function InsightsPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="text-sm text-muted-foreground">
                       {insight.date}
                     </span>
-                    <Link href="/insights/market-intelligence" className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+                    <Link href="/insights/market-intelligence" className="text-sm font-medium text-primary hover:text-primary/80">
                       읽어보기 →
                     </Link>
                   </div>
@@ -208,43 +212,43 @@ export default function InsightsPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <TrendingUp className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+                <TrendingUp className="w-10 h-10 text-primary" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">500+</div>
-              <div className="text-gray-600 dark:text-gray-400">게시된 인사이트</div>
+              <div className="text-3xl font-bold text-foreground mb-2">500+</div>
+              <div className="text-muted-foreground">게시된 인사이트</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <Users className="w-10 h-10 text-purple-600 dark:text-purple-400" />
+                <Users className="w-10 h-10 text-blue-600" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">10K+</div>
-              <div className="text-gray-600 dark:text-gray-400">구독자</div>
+              <div className="text-3xl font-bold text-foreground mb-2">10K+</div>
+              <div className="text-muted-foreground">구독자</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <Mail className="w-10 h-10 text-green-600 dark:text-green-400" />
+                <Mail className="w-10 h-10 text-green-600" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">주 2회</div>
-              <div className="text-gray-600 dark:text-gray-400">뉴스레터 발송</div>
+              <div className="text-3xl font-bold text-foreground mb-2">주 2회</div>
+              <div className="text-muted-foreground">뉴스레터 발송</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <BookOpen className="w-10 h-10 text-orange-600 dark:text-orange-400" />
+                <BookOpen className="w-10 h-10 text-orange-600" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">100+</div>
-              <div className="text-gray-600 dark:text-gray-400">다운로드 자료</div>
+              <div className="text-3xl font-bold text-foreground mb-2">100+</div>
+              <div className="text-muted-foreground">다운로드 자료</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
+      <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             주간 인사이트를 놓치지 마세요
           </h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-primary-foreground/90 mb-8">
             매주 월·금, 엄선된 투자 정보와 시장 분석을 이메일로 받아보세요
           </p>
           <Link href="/insights/weekly-brief">
@@ -255,6 +259,8 @@ export default function InsightsPage() {
           </Link>
         </div>
       </section>
+      </main>
+      <Footer />
     </div>
   );
 }

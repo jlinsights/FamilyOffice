@@ -195,10 +195,10 @@ export function Footer() {
                 </Link>
               </div>
 
-              {/* FamilyOffice S Newsletter 구독 폼 */}
+              {/* Weekly Brief 구독 폼 */}
               <div className="p-4 bg-muted/30 dark:bg-muted/20 rounded-lg border border-border/40">
                 <h5 className="font-semibold text-sm mb-3 text-foreground text-left">
-                  FamilyOffice S Newsletter
+                  Weekly Brief
                 </h5>
                 <p className="text-xs text-muted-foreground mb-3 text-left">
                   중소중견기업 자산관리 인사이트를 받아보세요

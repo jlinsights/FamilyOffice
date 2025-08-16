@@ -36,6 +36,11 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     label: '인사이트',
     submenu: [
       {
+        href: '/insights',
+        label: '인사이트',
+        description: '자산관리 전문가의 깊이 있는 분석과 실용적인 전략',
+      },
+      {
         href: '/insights/market-intelligence',
         label: '블로그',
         description: '자산관리 전문가의 최신 인사이트와 전략 분석',

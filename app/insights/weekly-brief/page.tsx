@@ -25,18 +25,18 @@ import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-  description: '매주 금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다. 5분 내 독서 완료, 실무 적용 가능한 전문가 네트워크 독점 인사이트.',
+  description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다. 5분 내 독서 완료, 실무 적용 가능한 전문가 인사이트.',
   keywords: '주간 브리프, 기업승계 뉴스레터, CEO 뉴스레터, 상속세 절세, 가업승계, 중견기업, 패밀리오피스, 자산관리 인사이트',
   openGraph: {
     title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-    description: '매주 금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
+    description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
     type: 'website',
     locale: 'ko_KR',
   },
   twitter: {
     card: 'summary_large_image',
     title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-    description: '매주 금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
+    description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
   },
   alternates: {
     canonical: '/insights/weekly-brief',
@@ -151,12 +151,12 @@ export default function WeeklyBriefPage() {
       <section className="weekly-brief relative py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Badge variant="outline" className="mb-6 text-lg px-4 py-2">매주 금요일 오전 7:30 발송</Badge>
+            <Badge variant="outline" className="mb-6 text-lg px-4 py-2">매주 월·금요일 오전 7:30 발송</Badge>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
               주간 브리프
             </h1>
             <p className="subtitle text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
-              매주 금요일 오전 7:30, 
+              매주 월·금요일 오전 7:30, 
               <br className="hidden sm:block" />
               기업승계와 자산관리 핵심 인사이트를 전달합니다
             </p>
@@ -186,12 +186,10 @@ export default function WeeklyBriefPage() {
             {/* Platform Info & Subscription */}
             <div className="subscription-form max-w-2xl mx-auto mb-16">
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border">
-                <div className="flex items-center justify-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
-                    <Mail className="w-4 h-4 text-orange-600" />
-                  </div>
+                <div className="flex items-center justify-center mb-6">
+                  <Mail className="w-6 h-6 text-primary mr-2" />
                   <span className="text-sm font-medium text-muted-foreground">
-                    Powered by <span className="text-orange-600 font-semibold">beehiiv</span>
+                    전문 뉴스레터 서비스
                   </span>
                 </div>
                 
@@ -240,7 +238,7 @@ export default function WeeklyBriefPage() {
                 <div className="mt-6 pt-6 border-t text-center">
                   <p className="text-sm text-muted-foreground">
                     📧 <strong>newsletter.familyoffices.vip</strong>에서 관리되는 전문 뉴스레터<br />
-                    🔒 beehiiv 플랫폼의 엔터프라이즈급 보안과 전송 안정성
+                    🔒 엔터프라이즈급 보안과 전송 안정성
                   </p>
                 </div>
               </div>
@@ -289,10 +287,8 @@ export default function WeeklyBriefPage() {
                       읽는 시간: {issue.readTime}
                     </div>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <div className="w-4 h-4 bg-orange-100 rounded flex items-center justify-center">
-                        <span className="text-orange-600 font-bold text-xs">b</span>
-                      </div>
-                      beehiiv
+                      <Mail className="w-3 h-3" />
+                      뉴스레터
                     </div>
                   </div>
                   
@@ -332,24 +328,24 @@ export default function WeeklyBriefPage() {
       </section>
 
       {/* Recent Topics */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+              <h2 className="text-3xl font-bold text-foreground mb-6">
                 최근 다룬 주요 주제
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+              <p className="text-lg text-muted-foreground mb-8">
                 실무에 바로 적용 가능한 인사이트와 전략을 제공합니다
               </p>
               
               <div className="space-y-4">
                 {recentTopics.map((topic, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                    <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
                       {index + 1}
                     </div>
-                    <p className="text-gray-700 dark:text-gray-300">{topic}</p>
+                    <p className="text-foreground">{topic}</p>
                   </div>
                 ))}
               </div>
@@ -397,15 +393,15 @@ export default function WeeklyBriefPage() {
         </div>
       </section>
 
-      {/* Platform & Technology Section */}
+      {/* Newsletter Statistics Section */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">
-              신뢰할 수 있는 뉴스레터 플랫폼
+              신뢰받는 Weekly Brief
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              전문 뉴스레터 플랫폼 beehiiv를 통해 안정적이고 전문적인 뉴스레터 서비스를 제공합니다
+              기업승계와 자산관리 전문가들이 검증한 양질의 콘텐츠를 정기적으로 제공합니다
             </p>
           </div>
           
@@ -433,46 +429,45 @@ export default function WeeklyBriefPage() {
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <Clock className="w-10 h-10 text-orange-600" />
+                <Clock className="w-10 h-10 text-blue-600" />
               </div>
-              <div className="text-3xl font-bold text-foreground mb-2">주 1회</div>
-              <div className="text-muted-foreground">금요일 발송</div>
+              <div className="text-3xl font-bold text-foreground mb-2">주 2회</div>
+              <div className="text-muted-foreground">월·금 발송</div>
             </div>
           </div>
           
           <div className="bg-card rounded-2xl p-8 max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                <Mail className="w-6 h-6 text-orange-600" />
+              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <Mail className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-foreground">beehiiv 플랫폼 활용</h3>
-                <p className="text-muted-foreground">전문 뉴스레터 발행을 위한 최적화된 환경</p>
+                <h3 className="text-xl font-semibold text-foreground">전문 뉴스레터 서비스</h3>
+                <p className="text-muted-foreground">기업승계와 자산관리 전문 인사이트 제공</p>
               </div>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
                 <Shield className="w-8 h-8 text-primary mx-auto mb-2" />
-                <h4 className="font-semibold text-foreground mb-2">엔터프라이즈 보안</h4>
-                <p className="text-sm text-muted-foreground">GDPR 및 CAN-SPAM 완전 준수</p>
+                <h4 className="font-semibold text-foreground mb-2">전문 콘텐츠</h4>
+                <p className="text-sm text-muted-foreground">변호사, 회계사, 투자 전문가 검증</p>
               </div>
               <div className="text-center">
                 <TrendingUp className="w-8 h-8 text-primary mx-auto mb-2" />
-                <h4 className="font-semibold text-foreground mb-2">99.9% 전송 성공률</h4>
-                <p className="text-sm text-muted-foreground">안정적인 이메일 전송 보장</p>
+                <h4 className="font-semibold text-foreground mb-2">실무 중심</h4>
+                <p className="text-sm text-muted-foreground">즉시 적용 가능한 실용적 인사이트</p>
               </div>
               <div className="text-center">
                 <Target className="w-8 h-8 text-primary mx-auto mb-2" />
-                <h4 className="font-semibold text-foreground mb-2">고급 분석</h4>
-                <p className="text-sm text-muted-foreground">상세한 구독자 인사이트 제공</p>
+                <h4 className="font-semibold text-foreground mb-2">맞춤형 분석</h4>
+                <p className="text-sm text-muted-foreground">중견기업 CEO를 위한 특화 콘텐츠</p>
               </div>
             </div>
             
             <div className="mt-8 pt-6 border-t text-center">
               <p className="text-sm text-muted-foreground">
                 <strong>newsletter.familyoffices.vip</strong> • 
-                Powered by <span className="text-orange-600 font-semibold">beehiiv</span> • 
                 {newsletterStats.establishedYear}년부터 서비스 제공
               </p>
             </div>
@@ -487,7 +482,7 @@ export default function WeeklyBriefPage() {
             지금 바로 구독하고 다음 호를 받아보세요
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8">
-            매주 금요일 오전 7시 30분, 당신의 투자 결정을 돕는 인사이트가 도착합니다
+            매주 월·금요일 오전 7시 30분, 당신의 투자 결정을 돕는 인사이트가 도착합니다
           </p>
           
           <div className="space-y-4 max-w-md mx-auto">
@@ -514,10 +509,8 @@ export default function WeeklyBriefPage() {
           
           <div className="mt-8 pt-6 border-t border-white/20">
             <div className="flex items-center justify-center gap-2 text-sm text-primary-foreground/80 mb-2">
-              <div className="w-4 h-4 bg-orange-100 rounded flex items-center justify-center">
-                <span className="text-orange-600 font-bold text-xs">b</span>
-              </div>
-              beehiiv 플랫폼으로 안전하게 관리됩니다
+              <Mail className="w-4 h-4" />
+              전문 뉴스레터 플랫폼으로 안전하게 관리됩니다
             </div>
             <p className="text-sm text-primary-foreground/70">
               구독 신청 즉시 환영 이메일과 함께 최신 뉴스레터를 보내드립니다<br />

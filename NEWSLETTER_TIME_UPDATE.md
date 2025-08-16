@@ -1,4 +1,4 @@
-# ⏰ FamilyOffice S 뉴스레터 발송 시간 변경 완료
+# ⏰ Weekly Brief 발송 시간 변경 완료
 
 ## ✅ 변경사항 요약
 

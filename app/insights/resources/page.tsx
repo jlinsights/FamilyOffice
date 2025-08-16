@@ -148,13 +148,13 @@ export default function ResourcesPage() {
       <Header />
       <main className="pt-20">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-green-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <section className="relative py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
               자료실
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
               투자 전략, 시장 분석, 세무 가이드 등 FamilyOffice S가 엄선한
               <br />
               프리미엄 자료를 다운로드하여 실무에 활용하세요.
@@ -179,7 +179,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Categories */}
-      <section className="py-12 border-b border-gray-200 dark:border-gray-700">
+      <section className="py-12 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {resourceCategories.map((category, index) => {
@@ -187,14 +187,14 @@ export default function ResourcesPage() {
               return (
                 <div
                   key={index}
-                  className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer"
+                  className="flex items-center gap-3 p-4 bg-card rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer border"
                 >
                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center`}>
                     <Icon className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">{category.title}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{category.count}개 자료</p>
+                    <h3 className="font-semibold text-foreground">{category.title}</h3>
+                    <p className="text-sm text-muted-foreground">{category.count}개 자료</p>
                   </div>
                 </div>
               );
@@ -207,7 +207,7 @@ export default function ResourcesPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl font-bold text-foreground">
               추천 자료
             </h2>
             <div className="flex gap-2">
@@ -234,7 +234,7 @@ export default function ResourcesPage() {
                   <CardDescription className="line-clamp-2">{resource.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                     <div className="flex items-center gap-4">
                       <span className="flex items-center gap-1">
                         <FileText className="w-4 h-4" />
@@ -249,7 +249,7 @@ export default function ResourcesPage() {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="text-sm text-muted-foreground">
                       {resource.date}
                     </span>
                     <Button size="sm" className="hover:scale-105 transition-transform duration-300">
@@ -271,21 +271,21 @@ export default function ResourcesPage() {
       </section>
 
       {/* Recent Downloads */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              <h2 className="text-2xl font-bold text-foreground mb-6">
                 자료실 이용 안내
               </h2>
               
               <div className="space-y-6">
                 <Card>
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
                       무료 자료
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-muted-foreground mb-4">
                       회원 가입 후 무료로 다운로드 가능한 자료입니다. 시장 동향, 기본 투자 가이드 등 유용한 정보를 제공합니다.
                     </p>
                     <Button variant="outline" size="sm">
@@ -296,10 +296,10 @@ export default function ResourcesPage() {
 
                 <Card>
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
                       프리미엄 자료
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-muted-foreground mb-4">
                       FamilyOffice S 회원 전용 자료입니다. 심층 분석 리포트, 실무 가이드북 등 차별화된 콘텐츠를 제공합니다.
                     </p>
                     <div className="flex gap-2">
@@ -315,10 +315,10 @@ export default function ResourcesPage() {
 
                 <Card>
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
                       맞춤 자료 요청
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-muted-foreground mb-4">
                       특정 주제나 업종에 대한 맞춤형 자료가 필요하신가요? 전문가가 직접 작성하는 맞춤 리포트를 요청하세요.
                     </p>
                     <Button variant="outline" size="sm">
@@ -330,7 +330,7 @@ export default function ResourcesPage() {
             </div>
 
             <div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+              <h3 className="text-xl font-bold text-foreground mb-6">
                 최근 인기 자료
               </h3>
               
@@ -338,15 +338,15 @@ export default function ResourcesPage() {
                 {recentDownloads.map((title, index) => (
                   <div
                     key={index}
-                    className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer"
+                    className="flex items-start gap-3 p-3 bg-card rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer border"
                   >
-                    <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                    <div className="w-8 h-8 bg-muted rounded flex items-center justify-center flex-shrink-0">
+                      <span className="text-sm font-semibold text-muted-foreground">
                         {index + 1}
                       </span>
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">
+                      <p className="text-sm font-medium text-foreground line-clamp-2">
                         {title}
                       </p>
                     </div>
@@ -354,11 +354,11 @@ export default function ResourcesPage() {
                 ))}
               </div>
 
-              <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+              <div className="mt-8 p-6 bg-primary/10 rounded-lg">
+                <h4 className="font-semibold text-foreground mb-2">
                   💡 알고 계셨나요?
                 </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   매월 첫째 주에는 새로운 시장 분석 리포트가 업데이트됩니다. 
                   뉴스레터 구독자는 신규 자료 알림을 가장 먼저 받아보실 수 있습니다.
                 </p>
@@ -369,19 +369,19 @@ export default function ResourcesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             더 많은 자료가 필요하신가요?
           </h2>
-          <p className="text-xl text-green-100 mb-8">
+          <p className="text-xl text-primary-foreground/90 mb-8">
             FamilyOffice S 회원이 되시면 모든 프리미엄 자료를 무제한으로 이용하실 수 있습니다
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" className="hover:scale-105 transition-transform duration-300">
               회원 가입하기
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">
+            <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10 dark:text-white dark:border-white">
               자료 요청하기
             </Button>
           </div>

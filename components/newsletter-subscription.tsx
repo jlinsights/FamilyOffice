@@ -51,7 +51,7 @@ export function NewsletterSubscription({
       }
 
       setIsSubscribed(true);
-      toast.success('뉴스레터 구독이 완료되었습니다!');
+      toast.success('Weekly Brief 구독이 완료되었습니다!');
       
       // GA4 이벤트 추적
       if (typeof window !== 'undefined' && window.gtag) {
@@ -73,7 +73,7 @@ export function NewsletterSubscription({
     return (
       <div className={`flex items-center gap-2 text-green-600 dark:text-green-400 ${className}`}>
         <CheckCircle className="h-5 w-5" />
-        <span className="font-medium">뉴스레터 구독이 완료되었습니다!</span>
+        <span className="font-medium">Weekly Brief 구독이 완료되었습니다!</span>
       </div>
     );
   }
@@ -107,9 +107,9 @@ export function NewsletterSubscription({
         <div className="flex items-start gap-3">
           <Mail className="h-5 w-5 text-primary mt-0.5" />
           <div className="flex-1">
-            <h4 className="font-semibold text-sm mb-1">뉴스레터 구독하기</h4>
+            <h4 className="font-semibold text-sm mb-1">Weekly Brief 구독하기</h4>
             <p className="text-xs text-muted-foreground mb-2">
-              매주 금요일 오전 7:30 발송
+              매주 월·금요일 오전 7:30 발송
             </p>
             <form onSubmit={handleSubmit} className="flex gap-2">
               <Input
@@ -140,10 +140,10 @@ export function NewsletterSubscription({
     <div className={`bg-primary text-primary-foreground rounded-lg p-8 text-center ${className}`}>
       <Mail className="h-12 w-12 mx-auto mb-4 opacity-90" />
       <h3 className="text-2xl font-bold mb-2">
-        FamilyOffice S 뉴스레터
+        Weekly Brief
       </h3>
       <p className="text-lg mb-6 opacity-90">
-        매주 금요일 오전 7:30에 발송되는<br/>
+        매주 월·금요일 오전 7:30에 발송되는<br/>
         기업승계와 자산관리 전문 인사이트를 받아보세요
       </p>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
