@@ -269,7 +269,6 @@ export const defaultMetadata: Metadata = {
 
   // 🎯 BMAD Method 지역 SEO 및 소셜 신호 강화
   other: {
-    ...defaultMetadata.other,
     // 지역 비즈니스 최적화
     'geo.region': 'KR-11', // 서울특별시 ISO 코드
     'geo.placename': '서울특별시 중구',
@@ -815,19 +814,7 @@ export function generateSitemapUrls() {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/success-stories`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
-    {
       url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/faq`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
@@ -843,12 +830,6 @@ export function generateSitemapUrls() {
       lastModified: new Date(),
       changeFrequency: 'yearly' as const,
       priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/ai`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.9,
     },
   ];
 }

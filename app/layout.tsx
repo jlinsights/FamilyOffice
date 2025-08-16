@@ -10,13 +10,17 @@ import ExternalScripts from '@/components/external-scripts';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
 import { CalComFloating } from '@/components/cal-com-floating';
 
-import { defaultMetadata } from '@/lib/seo';
+// import { defaultMetadata } from '@/lib/seo';
 
 const inter = Inter({ subsets: ['latin'] });
 
 // SuperClaude 통합 SEO 프레임워크 적용
 export const metadata: Metadata = {
-  ...defaultMetadata,
+  title: {
+    default: 'FamilyOffice S - 가업승계·자산관리 전문 플랫폼',
+    template: '%s | FamilyOffice S',
+  },
+  description: '성공한 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 중소중견기업 CEO 맞춤 자산관리, 경영위험 완전보장.',
   // 글로벌 메타태그 강화
   verification: {
     google: 'your-google-verification-code',
