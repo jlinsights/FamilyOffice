@@ -33,18 +33,52 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
-# AI 검색엔진
+# 🤖 AI 검색엔진 최적화 - SuperClaude Framework
 User-agent: PerplexityBot
 Allow: /
-Crawl-delay: 2
+Allow: /services
+Allow: /program  
+Allow: /seminar
+Allow: /about
+Allow: /contact
+Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
-Crawl-delay: 2
+Allow: /services
+Allow: /program
+Allow: /seminar
+Allow: /about
+Allow: /contact
+Crawl-delay: 1
 
 User-agent: Claude-Web
 Allow: /
-Crawl-delay: 2
+Allow: /services
+Allow: /program
+Allow: /seminar
+Allow: /about
+Allow: /contact
+Crawl-delay: 1
+
+# 🎯 BMAD Method 지역 검색 최적화
+User-agent: NaverBot
+Allow: /
+Allow: /services
+Allow: /program
+Allow: /seminar
+Allow: /about
+Allow: /contact
+Crawl-delay: 1
+
+User-agent: DaumBot
+Allow: /
+Allow: /services
+Allow: /program
+Allow: /seminar
+Allow: /about
+Allow: /contact
+Crawl-delay: 1
 
 # 사이트맵 위치
 Sitemap: https://familyoffices.vip/sitemap.xml

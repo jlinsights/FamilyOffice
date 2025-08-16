@@ -2,14 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Playfair Display 폰트 클래스 - Hydration Safe */
+/* 🚀 Core Web Vitals 최적화 - AgentOS Performance Framework */
+/* Critical CSS 인라인 최적화 및 리소스 로딩 개선 */
 @layer base {
+  /* 폰트 로딩 최적화 - LCP 개선 */
   .playfair-display {
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     font-display: swap;
+    /* 폰트 로딩 중 레이아웃 이동 방지 */
+    size-adjust: 100%;
+    ascent-override: 90%;
+    descent-override: 20%;
+    line-gap-override: 0%;
   }
 
   .playfair-display-medium {
@@ -55,6 +62,27 @@
   .font-playfair {
     font-family: 'Playfair Display', ui-serif, Georgia, serif !important;
     font-display: swap;
+  }
+  
+  /* 🚀 SuperClaude Performance Optimizations */
+  .hero-section-optimized {
+    /* LCP 최적화 - 중요 콘텐츠 우선 렌더링 */
+    contain: layout style paint;
+    content-visibility: auto;
+    contain-intrinsic-size: 100vh;
+  }
+  
+  .cls-safe {
+    /* CLS 방지 - 레이아웃 안정성 */
+    min-height: 100vh;
+    transition: none; /* 초기 로드 시 전환 효과 제거 */
+  }
+  
+  .interaction-ready {
+    /* FID/INP 최적화 - 빠른 상호작용 */
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -109,6 +137,13 @@
       system-ui,
       -apple-system,
       sans-serif;
+    /* 🚀 Core Web Vitals 최적화 */
+    /* CLS 방지 - 초기 레이아웃 안정화 */
+    min-height: 100vh;
+    /* GPU 가속 활성화 - 스크롤 성능 개선 */
+    will-change: auto;
+    /* 리페인트 최적화 */
+    contain: layout style paint;
   }
 }
 
@@ -696,37 +731,78 @@
 }
 
 @layer utilities {
-  /* Modern animations */
+  /* 🚀 Core Web Vitals 최적화 애니메이션 - FID/INP 개선 */
+  /* GPU 가속 애니메이션으로 메인 스레드 부하 감소 */
   .animate-in {
-    animation: fade-in 0.5s ease-out;
+    animation: fade-in 0.3s ease-out;
+    transform: translateZ(0); /* GPU 레이어 강제 생성 */
+    will-change: opacity;
   }
 
   .animate-up {
-    animation: slide-up 0.5s ease-out;
+    animation: slide-up 0.3s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
 
   .animate-down {
-    animation: slide-down 0.3s ease-out;
+    animation: slide-down 0.2s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
 
   .animate-fade-in {
-    animation: fade-in 0.5s ease-out;
+    animation: fade-in 0.3s ease-out;
+    transform: translateZ(0);
+    will-change: opacity;
   }
 
   .animate-slide-up {
-    animation: slide-up 0.5s ease-out;
+    animation: slide-up 0.3s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
 
   .animate-slide-down {
-    animation: slide-down 0.3s ease-out;
+    animation: slide-down 0.2s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
 
   .animate-scale-in {
-    animation: scale-in 0.3s ease-out;
+    animation: scale-in 0.2s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
 
   .animate-bounce-in {
-    animation: bounce-in 0.6s ease-out;
+    animation: bounce-in 0.4s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  /* 성능 최적화 - 애니메이션 완료 후 will-change 제거 */
+  .animate-in,
+  .animate-up,
+  .animate-down,
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-down,
+  .animate-scale-in,
+  .animate-bounce-in {
+    animation-fill-mode: both;
+  }
+
+  /* 중요 콘텐츠 우선 로딩 - LCP 최적화 */
+  .priority-content {
+    content-visibility: visible;
+    contain-intrinsic-size: auto 1000px;
+  }
+
+  /* 지연 로딩 콘텐츠 - 초기 로딩 성능 개선 */
+  .lazy-content {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
   }
 
   /* Focus utilities */

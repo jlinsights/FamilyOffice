@@ -113,13 +113,27 @@ export default function AboutPage() {
             </p>
 
             <p 
-              className="text-sm sm:text-base md:text-lg text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed bg-primary/5 rounded-lg p-4 border border-primary/10 animate-slide-up"
+              className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed bg-primary/5 rounded-lg p-4 border border-primary/10 animate-slide-up"
               style={{ animationDelay: '400ms' }}
             >
               <span className="font-bold text-primary">FamilyOffice S</span>는{' '}
               <span className="font-semibold text-foreground">삼성생명 기업컨설팅센터</span>의{' '}
               <span className="text-primary font-semibold">VIP 고객 전담 프로젝트팀</span>입니다
             </p>
+
+            <div 
+              className="text-xs sm:text-sm text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed space-y-2 animate-slide-up"
+              style={{ animationDelay: '450ms' }}
+            >
+              <p className="bg-muted/50 rounded-lg px-4 py-3 border border-border/50">
+                <span className="font-semibold text-foreground">삼성생명/삼성화재 공식 파트너</span>로서{' '}
+                <span className="text-primary">독립적 관점</span>에서 작성되었습니다.
+              </p>
+              <p className="bg-muted/50 rounded-lg px-4 py-3 border border-border/50">
+                상품 추천 시에는 항상{' '}
+                <span className="font-semibold text-foreground">복수의 대안을 함께 검토</span>하여 제안드립니다.
+              </p>
+            </div>
 
             <div 
               className="flex flex-col sm:flex-row gap-4 justify-center mb-12 sm:mb-16 animate-slide-up"
@@ -305,7 +319,8 @@ export default function AboutPage() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* 첫 번째 행: 기본 3개 핵심 가치 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
               {[
                 {
                   icon: <Shield className="h-8 w-8" />,
@@ -360,6 +375,71 @@ export default function AboutPage() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            {/* 두 번째 행: 차별화된 접근 방식 */}
+            <div className="mt-12 pt-8 border-t border-border/20">
+              <div className="text-center mb-8">
+                <Badge variant="outline" size="default">
+                  <CheckCircle className="h-3 w-3 mr-1" />
+                  Differentiated Approach
+                </Badge>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                  차별화된 <span className="text-primary">접근 방식</span>
+                </h3>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  고객의 이익을 최우선으로 하는 독립적이고 객관적인 자산관리 서비스
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                {[
+                  {
+                    icon: <CheckCircle className="h-8 w-8" />,
+                    title: '다양한 솔루션 제시',
+                    description: '보험만이 답은 아닙니다. 상황에 따라 다른 방법이 더 적합할 수 있어요.',
+                    features: [
+                      '보험 외 대안 솔루션 제시',
+                      '상황별 최적 방법 분석',
+                      '종합적 접근 방식',
+                    ],
+                    highlight: true,
+                  },
+                  {
+                    icon: <TrendingUp className="h-8 w-8" />,
+                    title: '객관적 비교 분석',
+                    description: '각 금융사별 장단점을 객관적으로 비교 분석해드립니다.',
+                    features: [
+                      '다수 금융사 상품 비교',
+                      '객관적 장단점 분석',
+                      '투명한 평가 기준',
+                    ],
+                    highlight: true,
+                  },
+                ].map((approach, index) => (
+                  <Card key={index} className="text-center h-full bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 transition-all duration-300 hover:shadow-xl hover:scale-105">
+                    <CardHeader>
+                      <div className="w-16 h-16 bg-primary/20 dark:bg-primary/30 rounded-full mx-auto mb-4 flex items-center justify-center text-primary">
+                        {approach.icon}
+                      </div>
+                      <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">{approach.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-1 flex flex-col">
+                      <p className="text-foreground font-medium mb-6 flex-1 transition-colors duration-300 leading-relaxed">
+                        {approach.description}
+                      </p>
+                      <ul className="space-y-2">
+                        {approach.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center text-sm">
+                            <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0" />
+                            <span className="text-foreground font-medium transition-colors duration-300">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </section>

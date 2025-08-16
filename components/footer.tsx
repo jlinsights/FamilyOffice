@@ -416,6 +416,39 @@ export function Footer() {
             </div>
           </div>
 
+          {/* 독립성 및 투명성 고지 */}
+          <div className="border-t pt-8">
+            <div className="bg-muted/30 dark:bg-muted/20 rounded-lg p-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div className="flex items-start space-x-3">
+                  <div className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
+                    <Shield className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-foreground font-medium mb-1">독립성 보장</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">
+                      <span className="font-semibold">삼성생명/삼성화재 공식 파트너</span>로서{' '}
+                      <span className="text-primary">독립적 관점</span>에서 작성되었습니다.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
+                    <Award className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-foreground font-medium mb-1">투명한 상품 추천</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">
+                      상품 추천 시에는 항상{' '}
+                      <span className="font-semibold">복수의 대안을 함께 검토</span>하여 제안드립니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* 저작권 */}
           <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-// SuperClaude 통합 SEO 프레임워크 - 40+ 법인 대표 타겟 최적화
+// SuperClaude 통합 SEO 프레임워크 - 성공한 법인 대표 타겟 최적화
 export const defaultMetadata: Metadata = {
   metadataBase: new URL('https://familyoffices.vip'),
 
@@ -9,23 +9,23 @@ export const defaultMetadata: Metadata = {
     template: '%s | FamilyOffice S',
   },
   description:
-    '40-50대 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 중소중견기업 CEO 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
+    '성공한 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 중소중견기업 CEO 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
   
   // BMAD Method 기반 메타 타겟팅
   authors: [{ name: 'FamilyOffice S 전문 컨설턴트' }],
-  category: '40대 이상 기업오너 전용 자산관리',
+  category: '성공한 기업오너 전용 자산관리',
   classification: 'CEO 전용 프리미엄 서비스',
 
   keywords: [
-    // BMAD Method 1: Behavioral (행동 기반) - 40-50대 CEO 실제 검색어
-    '40대 CEO 자산관리',
-    '50대 기업오너 가업승계',
+    // BMAD Method 1: Behavioral (행동 기반) - 성공한 기업가 실제 검색어
+    '기업가 자산관리',
+    '법인대표 가업승계',
     '법인대표 은퇴설계',
-    '중년 기업가 재산관리',
-    '40-50대 경영인 투자전략',
+    '성공한 기업가 재산관리',
+    '기업 경영인 투자전략',
     '기업오너 노후준비',
     '법인대표 자녀교육비',
-    '중년 CEO 부동산 투자',
+    '성공한 CEO 부동산 투자',
     '기업가 해외이민 자금',
     '법인대표 의료비 대비',
     
@@ -74,7 +74,7 @@ export const defaultMetadata: Metadata = {
     
     // AgentOS 다중관점 분석 - Google/Perplexity 최적화
     // 관점 1: 재무관점 - 수익성과 비용효율성
-    '40대 CEO 세후수익 극대화',
+    '기업가 세후수익 극대화',
     '중견기업 자산관리 비용',
     '법인대표 투자수익률 개선',
     '기업오너 절세효과 계산기',
@@ -82,7 +82,7 @@ export const defaultMetadata: Metadata = {
     '패밀리오피스 ROI 분석',
     
     // 관점 2: 리스크관점 - 위험관리와 보장
-    '40-50대 기업가 리스크 관리',
+    '성공한 기업가 리스크 관리',
     '법인대표 중대재해 보장',
     '경영진 개인보증 해결',
     '기업오너 건강악화 대비',
@@ -109,13 +109,13 @@ export const defaultMetadata: Metadata = {
     '차세대 기업가 역량개발',
     '글로벌 진출 자금계획',
     
-    // SuperClaude 타겟 고객 세분화 - 40-60대 법인 대표
-    // 연령별 세분화
-    '40대 기업대표 자산관리',
-    '50대 법인오너 가업승계',
-    '60대 기업가 은퇴설계',
-    '중년 CEO 재무전략',
-    '베이비부머 기업가 자산이전',
+    // SuperClaude 타겟 고객 세분화 - 성공한 법인 대표
+    // 경력별 세분화
+    '경험 많은 기업대표 자산관리',
+    '성공한 법인오너 가업승계',
+    '원로 기업가 은퇴설계',
+    '숙련된 CEO 재무전략',
+    '선배 기업가 자산이전',
     
     // 기존 키워드 유지
     '중소중견기업 CEO',
@@ -128,7 +128,7 @@ export const defaultMetadata: Metadata = {
     
     // 심리적 상태 키워드
     '성공한 기업가의 고민',
-    '중년 기업인 미래불안',
+    '성공한 기업인 미래불안',
     '경영진 책임부담',
     '자녀 교육비 걱정',
     '노후준비 부족 스트레스',
@@ -144,7 +144,7 @@ export const defaultMetadata: Metadata = {
     '재무설계',
     '투자자문',
     
-    // 업종별 맞춤 키워드 - 40+ 대표 집중 업계
+    // 업종별 맞춤 키워드 - 성공한 대표 집중 업계
     '제조업 자산관리',
     '건설업 자산관리', 
     'IT기업 자산관리',
@@ -188,7 +188,7 @@ export const defaultMetadata: Metadata = {
     'GFC 수입',
     'GFC 연봉',
     
-    // 세미나/교육 키워드 - 40+ 타겟 특화
+    // 세미나/교육 키워드 - 성공한 기업가 특화
     '세미나',
     'VVIP 세미나', 
     'CEO 세미나',
@@ -220,21 +220,21 @@ export const defaultMetadata: Metadata = {
     '중견기업 세미나',
     '패밀리오피스 교육',
     
-    // 40+ 특화 교육 키워드
-    '40대 기업가 리더십',
-    '50대 CEO 성공전략',
-    '중년 경영진 멘토링',
-    '시니어 기업가 네트워킹',
+    // 성공한 기업가 특화 교육 키워드
+    '성공한 기업가 리더십',
+    '기업가 성공전략',
+    '경험 많은 경영진 멘토링',
+    '원로 기업가 네트워킹',
     '베테랑 CEO 클럽',
     '성숙한 기업인 모임',
   ],
 
   openGraph: {
     type: 'website',
-    siteName: '40-50대 CEO 전용 패밀리오피스 FamilyOffice S',
-    title: '40-50대 법인대표 전용 패밀리오피스 | 가업승계 자산관리 완전해결 - FamilyOffice S',
+    siteName: '성공한 CEO 전용 패밀리오피스 FamilyOffice S',
+    title: '성공한 법인대표 전용 패밀리오피스 | 가업승계 자산관리 완전해결 - FamilyOffice S',
     description:
-      '40-50대 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 중년 CEO 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적, 성공사례 300+ ☎0502-5550-8700',
+      '성공한 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 기업가 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적, 성공사례 300+ ☎0502-5550-8700',
     
     // 소셜 미디어 최적화 - 중년 타겟
     locale: 'ko_KR',
@@ -244,7 +244,15 @@ export const defaultMetadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: '패밀리오피스 가업승계 자산관리 전문 FamilyOffice S',
+        alt: '성공한 CEO 전용 패밀리오피스 가업승계 자산관리 전문 FamilyOffice S',
+        type: 'image/jpeg',
+      },
+      {
+        url: '/logo.png',
+        width: 400,
+        height: 400,
+        alt: 'FamilyOffice S 로고 - 성공한 기업가 전용',
+        type: 'image/png',
       },
     ],
   },
@@ -252,11 +260,63 @@ export const defaultMetadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@familyoffices',
-    title: '40-50대 CEO 전용 패밀리오피스 | 가업승계 완전해결',
+    title: '성공한 CEO 전용 패밀리오피스 | 가업승계 완전해결',
     description:
-      '40-50대 법인대표 전용. 가업승계·승계세무 완전해결, 중년 CEO 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
+      '성공한 법인대표 전용. 가업승계·승계세무 완전해결, 기업가 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
     creator: '@FamilyOfficeS_CEO',
     images: ['/og-image.jpg'],
+  },
+
+  // 🎯 BMAD Method 지역 SEO 및 소셜 신호 강화
+  other: {
+    ...defaultMetadata.other,
+    // 지역 비즈니스 최적화
+    'geo.region': 'KR-11', // 서울특별시 ISO 코드
+    'geo.placename': '서울특별시 중구',
+    'geo.position': '37.5665;126.9780',
+    'ICBM': '37.5665, 126.9780',
+    'location': '서울 중구 패밀리오피스',
+    
+    // 소셜 미디어 최적화 - 중년 성공한 기업가 타겟
+    'kakao:title': '성공한 CEO 전용 패밀리오피스 | 가업승계 자산관리',
+    'kakao:description': '성공한 법인대표를 위한 프리미엄 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리. 삼성생명 1000억+ 운용실적',
+    'kakao:image': 'https://familyoffices.vip/og-image.jpg',
+    'kakao:url': 'https://familyoffices.vip',
+    
+    // 네이버 블로그/카페 최적화
+    'naver:title': '성공한 기업가 전용 패밀리오피스 | FamilyOffice S',
+    'naver:description': 'SuperClaude BMAD Method 적용 패밀리오피스. 성공한 법인대표 전용 가업승계·자산관리 완전해결',
+    'naver:image': 'https://familyoffices.vip/og-image.jpg',
+    
+    // LinkedIn 비즈니스 네트워크 최적화
+    'linkedin:title': '성공한 CEO를 위한 패밀리오피스 | 가업승계 전문',
+    'linkedin:description': '중소중견기업 CEO 전용 프리미엄 자산관리. 가업승계부터 세무최적화까지 원스톱 솔루션',
+    'linkedin:image': 'https://familyoffices.vip/og-image.jpg',
+    
+    // YouTube 동영상 최적화 (향후 콘텐츠용)
+    'youtube:title': '성공한 기업가의 자산관리 노하우 | 패밀리오피스',
+    'youtube:description': '경험 많은 기업가들이 선택하는 자산관리 방법. 가업승계 성공사례와 실제 노하우 공개',
+    
+    // 지역 비즈니스 신뢰성 향상
+    'business:contact_data:street_address': '서울특별시 중구',
+    'business:contact_data:locality': '서울',
+    'business:contact_data:region': '서울특별시',
+    'business:contact_data:postal_code': '04527',
+    'business:contact_data:country_name': '대한민국',
+    'business:contact_data:phone_number': '+82-502-5550-8700',
+    'business:contact_data:email': 'cs@familyoffices.vip',
+    
+    // 타겟 고객 세분화 - BMAD Method
+    'audience:behavioral': '성공한 기업가, 경험 많은 CEO, 자산관리 필요성 인식',
+    'audience:motivational': '성취지향, 성장욕구, 레거시 구축 의지',
+    'audience:aspirational': '프리미엄 서비스, 최고급 품질, 차별화된 경험',
+    'audience:decisional': '즉시 상담, 맞춤 솔루션, 구체적 실행방안',
+    
+    // 검색엔진별 최적화
+    'google-site-verification': 'your-google-verification-code',
+    'naver-site-verification': 'your-naver-verification-code',
+    'msvalidate.01': 'your-bing-verification-code',
+    'yandex-verification': 'your-yandex-verification-code',
   },
 
   robots: {
@@ -278,7 +338,7 @@ export const defaultMetadata: Metadata = {
     Yeti: 'index,follow', 
     Daumoa: 'index,follow',
     'format-detection': 'telephone=no',
-    author: 'FamilyOffice S - 40대 이상 CEO 전문',
+    author: 'FamilyOffice S - 성공한 CEO 전문',
     publisher: 'FamilyOffice S',
     copyright: 'FamilyOffice S',
     'og:phone_number': '+82-502-5550-8700',
@@ -286,7 +346,7 @@ export const defaultMetadata: Metadata = {
     'article:author': 'FamilyOffice S 전문 컨설턴트',
     
     // SuperClaude 프레임워크 특화 메타태그
-    'target-audience': '40-60세 법인 대표',
+    'target-audience': '성공한 법인 대표',
     'business-sector': '중소중견기업',
     'service-tier': 'Premium VVIP',
     'expertise-level': '전문가급',
@@ -317,15 +377,15 @@ export function generateMetadata(
   description: string,
   keywords: string[] = [],
   image?: string,
-  targetAge?: '40대' | '50대' | '40-50대' | '40-60대',
+  targetExperience?: '성장기' | '성숙기' | '전문가급' | '리더급',
   businessStage?: '성장기' | '성숙기' | '승계준비',
   searchIntent?: 'informational' | 'commercial' | 'transactional'
 ): Metadata {
   // SuperClaude 적응형 메타데이터 생성
-  const ageSpecificKeywords = targetAge ? [
-    `${targetAge} 기업대표`,
-    `${targetAge} CEO 전용`,
-    `${targetAge} 맞춤 자산관리`
+  const experienceSpecificKeywords = targetExperience ? [
+    `${targetExperience} 기업대표`,
+    `${targetExperience} CEO 전용`,
+    `${targetExperience} 맞춤 자산관리`
   ] : [];
   
   const stageSpecificKeywords = businessStage ? [
@@ -342,8 +402,8 @@ export function generateMetadata(
   return {
     title: intentOptimizedTitle,
     description,
-    keywords: [...defaultMetadata.keywords!, ...keywords, ...ageSpecificKeywords, ...stageSpecificKeywords],
-    category: targetAge ? `${targetAge} 전용 서비스` : defaultMetadata.category,
+    keywords: [...defaultMetadata.keywords!, ...keywords, ...experienceSpecificKeywords, ...stageSpecificKeywords],
+    category: targetExperience ? `${targetExperience} 전용 서비스` : defaultMetadata.category,
     openGraph: {
       ...defaultMetadata.openGraph,
       title: intentOptimizedTitle,
@@ -355,7 +415,7 @@ export function generateMetadata(
               url: image,
               width: 1200,
               height: 630,
-              alt: `${title} - ${targetAge || '40-50대'} CEO 전용`,
+              alt: `${title} - ${targetExperience || '성공한'} CEO 전용`,
             },
           ]
         : defaultMetadata.openGraph?.images,
@@ -369,9 +429,44 @@ export function generateMetadata(
   };
 }
 
+// 🤖 AI 검색엔진 최적화 - SuperClaude Framework
+// Perplexity, ChatGPT, Claude 등 AI 검색엔진에 최적화된 구조화 데이터
+
+// AI 검색엔진용 리치 스니펫 생성 함수
+export function generateAIOptimizedContent() {
+  return {
+    // 즉문즉답형 질문-답변 세트
+    instantAnswers: [
+      {
+        question: "패밀리오피스가 뭔가요?",
+        answer: "성공한 기업가와 CEO를 위한 종합 자산관리 서비스입니다. 가업승계부터 세무최적화까지 원스톱으로 제공합니다.",
+        context: "SuperClaude BMAD Method 적용"
+      },
+      {
+        question: "가업승계 비용은 얼마인가요?",
+        answer: "기업 규모와 자산 규모에 따라 차이가 있으며, 무료 상담을 통해 맞춤 견적을 제공합니다. 일반적으로 절세 효과로 비용 이상의 가치를 창출합니다.",
+        context: "성공한 기업가 맞춤 컨설팅"
+      },
+      {
+        question: "중소기업도 패밀리오피스가 필요한가요?",
+        answer: "연매출 100억 이상 또는 자산 50억 이상의 중소중견기업이라면 패밀리오피스를 통해 상당한 절세와 리스크 관리 효과를 얻을 수 있습니다.",
+        context: "BMAD Method 기업 규모별 분석"
+      }
+    ],
+    
+    // AI 검색엔진용 키워드 클러스터
+    aiSearchClusters: {
+      behavioral: ["실제 경험", "성공 사례", "검증된 방법", "실무 적용"],
+      motivational: ["성취감", "성공", "발전", "성장", "목표 달성"],
+      aspirational: ["최고급", "프리미엄", "VVIP", "엘리트", "차별화"],
+      decisional: ["즉시 상담", "무료 분석", "맞춤 제안", "구체적 방법"]
+    }
+  };
+}
+
 // 구조화된 데이터 생성
 export function generateStructuredData(
-  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList'
+  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList' | 'AIOptimized'
 ) {
   const baseData = {
     '@context': 'https://schema.org',
@@ -497,7 +592,103 @@ export function generateStructuredData(
               text: '중대재해처벌법에 따른 경영책임자 처벌 대비를 위한 보험설계와 안전관리체계 구축을 지원합니다.',
             },
           },
+          // 🤖 AI 검색엔진 최적화 FAQ 추가
+          {
+            '@type': 'Question',
+            name: '패밀리오피스 비용은 얼마인가요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '기업 규모와 자산 규모에 따라 맞춤 견적을 제공합니다. 무료 상담을 통해 정확한 비용을 안내받으실 수 있으며, 일반적으로 절세 효과로 비용 이상의 가치를 창출합니다. ☎0502-5550-8700',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '중소기업도 패밀리오피스가 필요한가요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '연매출 100억 이상 또는 자산 50억 이상의 중소중견기업이라면 패밀리오피스를 통해 상당한 절세와 리스크 관리 효과를 얻을 수 있습니다. BMAD Method 기반 기업별 맞춤 분석을 제공합니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '가업승계 세금을 줄이는 방법은?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '증여세 면제한도 활용, 경영권 프리미엄 할인, 납부유예 제도 등을 종합적으로 활용하여 세부담을 최소화합니다. 삼성생명 1000억+ 운용실적 기반의 검증된 절세 전략을 제공합니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '성공한 기업가들은 어떻게 자산관리를 하나요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '성공한 기업가들은 ①리스크 분산 ②세무 최적화 ③가업승계 준비를 동시에 진행합니다. 우리는 300+ 성공사례 기반의 검증된 방법론으로 기업가만의 맞춤 전략을 설계합니다.',
+            },
+          },
         ],
+      };
+
+    // 🤖 AI 검색엔진 최적화 전용 스키마
+    case 'AIOptimized':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'ProfessionalService',
+        name: 'FamilyOffice S - 성공한 기업가 전용 자산관리',
+        description: 'SuperClaude BMAD Method 적용 성공한 법인대표 전용 패밀리오피스. AI 최적화 상담, 가업승계 완전해결, 삼성생명 1000억+ 검증된 운용실적',
+        url: 'https://familyoffices.vip',
+        telephone: '+82-502-5550-8700',
+        email: 'cs@familyoffices.vip',
+        areaServed: '대한민국',
+        serviceType: 'Family Office Services',
+        category: 'Financial Planning & Wealth Management',
+        priceRange: '₩₩₩₩',
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'AI 최적화 BMAD Method 서비스',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              name: 'SuperClaude 기반 자산분석',
+              description: 'AI와 전문가가 협업하는 차세대 자산분석 시스템',
+              category: 'Behavioral Analysis'
+            },
+            {
+              '@type': 'Offer', 
+              name: '성공동기 기반 승계설계',
+              description: '기업가 개인의 성취동기를 분석한 맞춤 가업승계 로드맵',
+              category: 'Motivational Planning'
+            },
+            {
+              '@type': 'Offer',
+              name: '미래비전 실현 자산전략', 
+              description: '10년-30년 장기 비전 실현을 위한 체계적 자산계획',
+              category: 'Aspirational Strategy'
+            },
+            {
+              '@type': 'Offer',
+              name: '즉시실행 세무최적화',
+              description: '지금 당장 실행 가능한 구체적 절세 방안 제시',
+              category: 'Decisional Implementation'
+            }
+          ]
+        },
+        knowsAbout: [
+          'SuperClaude AI 자산분석',
+          'BMAD Method 적용 패밀리오피스',
+          '성공한 기업가 전용 서비스',
+          '차세대 디지털 자산관리',
+          'AI 기반 가업승계 설계'
+        ],
+        targetAudience: {
+          '@type': 'PeopleAudience',
+          audienceType: '성공한 법인 대표',
+          suggestedMinAge: 40,
+          suggestedMaxAge: 70,
+          geographicArea: {
+            '@type': 'Country',
+            name: '대한민국'
+          }
+        }
       };
 
     case 'LocalBusiness':
