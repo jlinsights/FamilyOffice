@@ -214,7 +214,7 @@ export const Header = memo(function Header({
               href="http://pf.kakao.com/_gsxkxdG"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+              className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/40 bg-yellow-400 dark:bg-yellow-500 hover:bg-yellow-500 dark:hover:bg-yellow-400 transition-all hover:scale-105"
               aria-label="카카오톡 채널 연결"
             >
               <Image
@@ -222,7 +222,7 @@ export const Header = memo(function Header({
                 alt="Kakao"
                 width={20}
                 height={20}
-                className="w-5 h-5"
+                className="w-5 h-5 dark:invert"
               />
             </Link>
             <ThemeToggle />
@@ -317,7 +317,7 @@ export const Header = memo(function Header({
                   href="http://pf.kakao.com/_gsxkxdG"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/40 bg-yellow-400 dark:bg-yellow-500 hover:bg-yellow-500 dark:hover:bg-yellow-400 transition-all hover:scale-105"
                   aria-label="카카오톡 채널 연결"
                 >
                   <Image
@@ -325,7 +325,7 @@ export const Header = memo(function Header({
                     alt="Kakao"
                     width={20}
                     height={20}
-                    className="w-5 h-5"
+                    className="w-5 h-5 dark:invert"
                   />
                 </Link>
               </div>
