@@ -80,11 +80,11 @@ export function Footer() {
               <div className="mb-6 flex justify-start">
                 <Link href="/" className="transition-opacity hover:opacity-80">
                   <Image
-                    src="/SVG/FamilyOfficeS_blue.svg"
-                    alt="FamilyOffice S"
-                    width={200}
-                    height={44}
-                    className="h-11 w-auto transition-transform hover:scale-105"
+                    src="/SVG/FamilyOfficeS_blue_tagline.svg"
+                    alt="FamilyOffice S - Your Trusted Financial Partner for Life"
+                    width={180}
+                    height={50}
+                    className="h-12 w-auto transition-transform hover:scale-105"
                   />
                 </Link>
               </div>
