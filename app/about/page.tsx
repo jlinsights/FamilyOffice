@@ -21,7 +21,10 @@ import {
   Medal,
 } from 'lucide-react';
 import Link from 'next/link';
-import { CalComPopup } from '@/components/cal-com-popup';\nimport { CalComButton } from '@/components/cal-com-button';\nimport { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';\nimport { FAQ_CATEGORIES } from '@/constants/faq';
+import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComButton } from '@/components/cal-com-button';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { FAQ_CATEGORIES } from '@/constants/faq';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { AnimatedCounter } from '@/components/animated-counter';
