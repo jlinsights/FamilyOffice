@@ -43,6 +43,18 @@ const SubstackIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const NaverIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M16.273 12.845 7.376 0H0v24h7.726V11.156L16.624 24H24V0h-7.727v12.845z" />
+  </svg>
+);
+
+const BrunchIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M7.79 12.51c-.42 0-.79-.37-.79-.82 0-.45.37-.82.79-.82s.79.37.79.82c0 .45-.37.82-.79.82zm8.42 0c-.42 0-.79-.37-.79-.82 0-.45.37-.82.79-.82s.79.37.79.82c0 .45-.37.82-.79.82zM12 24C5.37 24 0 18.63 0 12S5.37 0 12 0s12 5.37 12 12-5.37 12-12 12zm0-21.6C6.48 2.4 2.4 6.48 2.4 12s4.08 9.6 9.6 9.6 9.6-4.08 9.6-9.6-4.08-9.6-9.6-9.6zm5.5 13.8c0 1.32-1.08 2.4-2.4 2.4H8.9c-1.32 0-2.4-1.08-2.4-2.4V9.8c0-1.32 1.08-2.4 2.4-2.4h6.2c1.32 0 2.4 1.08 2.4 2.4v6.4z" />
+  </svg>
+);
+
 export function Footer() {
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -153,6 +165,24 @@ export function Footer() {
                 >
                   <Youtube className="h-4 w-4" />
                   <span className="sr-only">YouTube</span>
+                </Link>
+                <Link
+                  href="https://blog.naver.com/lim_jaehong"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                >
+                  <NaverIcon className="h-4 w-4" />
+                  <span className="sr-only">Naver Blog</span>
+                </Link>
+                <Link
+                  href="https://brunch.co.kr/@familyoffice"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                >
+                  <BrunchIcon className="h-4 w-4" />
+                  <span className="sr-only">Brunch</span>
                 </Link>
                 <Link
                   href="http://pf.kakao.com/_gsxkxdG/friend"
