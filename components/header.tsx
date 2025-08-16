@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 
-import { MinimalFamilyOfficeLogo } from '@/components/logo';
+import Image from 'next/image';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
@@ -63,7 +63,14 @@ export const Header = memo(function Header({
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/" className="transition-opacity hover:opacity-80">
                 <span className="sr-only">FamilyOffice S</span>
-                <MinimalFamilyOfficeLogo className="h-10 w-auto" />
+                <Image
+                  src="/SVG/FamilyOfficeS_blue.svg"
+                  alt="FamilyOffice S"
+                  width={180}
+                  height={40}
+                  className="h-10 w-auto"
+                  priority
+                />
               </Link>
             </div>
           </div>
@@ -96,7 +103,14 @@ export const Header = memo(function Header({
               aria-label="FamilyOffice S 홈페이지로 이동"
             >
               <span className="sr-only">FamilyOffice S</span>
-              <MinimalFamilyOfficeLogo className="h-10 w-auto" />
+              <Image
+                src="/SVG/FamilyOfficeS_blue.svg"
+                alt="FamilyOffice S"
+                width={180}
+                height={40}
+                className="h-10 w-auto transition-transform hover:scale-105"
+                priority
+              />
             </Link>
           </div>
 

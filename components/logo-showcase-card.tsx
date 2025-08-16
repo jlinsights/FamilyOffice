@@ -1,8 +1,9 @@
 import React from 'react';
+import { SVGLogoDisplay } from './svg-logo-display';
 
 /**
  * 완전한 로고(권장) - 태그라인 포함 풀 브랜드 로고 예시 카드
- * - 실제 렌더링, 코드 예시, 설명, 코드 복사 버튼 포함
+ * - 실제 SVG 파일 렌더링, 다크모드 지원, 설명 포함
  */
 const LogoShowcaseCard: React.FC = () => (
   <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg p-8 mb-10 max-w-xl mx-auto">
@@ -13,78 +14,40 @@ const LogoShowcaseCard: React.FC = () => (
     <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
       태그라인이 포함된 풀 브랜드 로고
     </p>
-    {/* 실제 렌더링 */}
+    
+    {/* 실제 SVG 렌더링 */}
     <div className="flex flex-col items-center mb-6">
-      {/* 실제 로고 구현 */}
-      <div className="flex flex-col items-center space-y-3">
-        <div className="inline-flex items-center space-x-2">
-          <div className="text-xl font-playfair font-bold text-foreground">
-            FamilyOffice
-          </div>
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-xl">S</span>
-          </div>
+      <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 flex items-center justify-center">
+        {/* 라이트 모드용 블루 로고 */}
+        <div className="block dark:hidden">
+          <SVGLogoDisplay
+            src="/SVG/FamilyOfficeS_blue_tagline.svg"
+            alt="FamilyOffice S - 태그라인 포함 로고"
+            width={240}
+            height={80}
+          />
         </div>
-        <div className="w-full max-w-[240px]">
-          <p
-            className="text-xs text-muted-foreground font-light tracking-wide text-center"
-            style={{ fontSize: '10px', letterSpacing: '0.08em' }}
-          >
-            Your Trusted Financial Partner for Life
-          </p>
+        {/* 다크 모드용 블랙 로고 */}
+        <div className="hidden dark:block">
+          <SVGLogoDisplay
+            src="/SVG/FamilyOfficeS_black_tagline.svg"
+            alt="FamilyOffice S - 태그라인 포함 로고 (다크모드)"
+            width={240}
+            height={80}
+          />
         </div>
       </div>
     </div>
-    {/* 코드 블록 */}
-    <div className="relative bg-gray-50 dark:bg-gray-800 rounded-lg p-4 overflow-x-auto text-xs font-mono">
-      {/* 코드 복사 버튼 */}
-      <button
-        className="absolute top-2 right-2 text-gray-400 hover:text-blue-500"
-        aria-label="코드 복사"
-        onClick={() =>
-          navigator.clipboard
-            .writeText(`<div className=\"flex flex-col items-center space-y-3\">
-  <div className=\"inline-flex items-center space-x-2\">
-    <div className=\"text-xl font-playfair font-bold text-foreground\">FamilyOffice</div>
-    <div className=\"h-8 w-8 rounded-lg bg-primary flex items-center justify-center\">
-      <span className=\"text-primary-foreground font-bold text-xl\">S</span>
-    </div>
-  </div>
-  <div className=\"w-full max-w-[240px]\">
-    <p className=\"text-xs text-muted-foreground font-light tracking-wide text-center\" style={{ fontSize: '10px', letterSpacing: '0.08em' }}>
-      Your Trusted Financial Partner for Life
-    </p>
-  </div>
-</div>`)
-        }
-        title="코드 복사"
-      >
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 20 20"
-        >
-          <rect x="7" y="7" width="9" height="9" rx="2" />
-          <path d="M3 13V5a2 2 0 0 1 2-2h8" />
-        </svg>
-      </button>
-      <pre>
-        {`<div className="flex flex-col items-center space-y-3">
-  <div className="inline-flex items-center space-x-2">
-    <div className="text-xl font-playfair font-bold text-foreground">FamilyOffice</div>
-    <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-      <span className="text-primary-foreground font-bold text-xl">S</span>
-    </div>
-  </div>
-  <div className="w-full max-w-[240px]">
-    <p className="text-xs text-muted-foreground font-light tracking-wide text-center" style={{ fontSize: '10px', letterSpacing: '0.08em' }}>
-      Your Trusted Financial Partner for Life
-    </p>
-  </div>
-</div>`}
-      </pre>
+    
+    {/* 사용 가이드 */}
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 text-xs space-y-2">
+      <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">사용 가이드</h4>
+      <ul className="space-y-1 text-gray-600 dark:text-gray-400">
+        <li>• 최소 크기: 너비 180px 이상 유지</li>
+        <li>• 여백: 로고 주변 최소 20px 확보</li>
+        <li>• 배경: 밝은 배경에는 블루, 어두운 배경에는 블랙 버전 사용</li>
+        <li>• 형식: SVG 파일로 확대/축소 시에도 선명도 유지</li>
+      </ul>
     </div>
   </div>
 );

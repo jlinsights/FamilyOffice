@@ -1,1 +1,1 @@
-✨ 브랜드 로고 시스템 태그라인을 'Your Trusted Financial Partner for Life'로 통일
+✨ 브랜드 페이지 로고 시스템을 실제 SVG 파일로 업데이트 - 다크모드 지원 및 사용 가이드라인 포함

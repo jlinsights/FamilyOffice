@@ -19,8 +19,7 @@ import {
 import { useState, useEffect } from 'react';
 
 import Link from 'next/link';
-
-import { FamilyOfficeLogo } from '@/components/logo';
+import Image from 'next/image';
 
 import { ClientScripts } from './client-scripts';
 
@@ -79,7 +78,15 @@ export function Footer() {
             {/* 회사 정보 및 뉴스레터 */}
             <div>
               <div className="mb-6 flex justify-start">
-                <FamilyOfficeLogo size="large" showTagline={true} />
+                <Link href="/" className="transition-opacity hover:opacity-80">
+                  <Image
+                    src="/SVG/FamilyOfficeS_blue.svg"
+                    alt="FamilyOffice S"
+                    width={200}
+                    height={44}
+                    className="h-11 w-auto transition-transform hover:scale-105"
+                  />
+                </Link>
               </div>
               
               {/* 소셜 미디어 */}

@@ -14,6 +14,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { FamilyOfficeLogo } from '@/components/logo';
 import LogoShowcaseCard from '@/components/logo-showcase-card';
+import { SVGLogoDisplay, LogoVariantCard } from '@/components/svg-logo-display';
 
 import { BRAND_COLORS, TYPOGRAPHY_SYSTEM } from '@/constants/brand';
 import type { BrandColorSystem, TypographyCategory } from '@/types/brand';
@@ -832,10 +833,27 @@ export default function BrandPage() {
                   <div className="flex flex-col items-center mt-6 md:mt-0">
                     {/* 대표 로고 (라이트/다크 자동 전환) */}
                     <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 flex items-center justify-center">
-                      <FamilyOfficeLogo className="w-56 h-16" />
+                      {/* 라이트 모드용 블루 로고 */}
+                      <div className="block dark:hidden">
+                        <SVGLogoDisplay
+                          src="/SVG/FamilyOfficeS_blue_tagline.svg"
+                          alt="FamilyOffice S - 대표 로고"
+                          width={224}
+                          height={64}
+                        />
+                      </div>
+                      {/* 다크 모드용 블랙 로고 */}
+                      <div className="hidden dark:block">
+                        <SVGLogoDisplay
+                          src="/SVG/FamilyOfficeS_black_tagline.svg"
+                          alt="FamilyOffice S - 대표 로고 (다크모드)"
+                          width={224}
+                          height={64}
+                        />
+                      </div>
                     </div>
                     <div className="text-xs text-gray-400 dark:text-gray-500 mt-2">
-                      라이트/다크 모드 자동 적용형 로고
+                      라이트/다크 모드 자동 적용형 SVG 로고
                     </div>
                   </div>
                 </div>
@@ -898,46 +916,66 @@ export default function BrandPage() {
                     </ul>
                   </div>
                 </div>
-                {/* === React 컴포넌트 안내 === */}
+                {/* === 로고 변형 안내 === */}
                 <div className="mb-4">
                   <div className="font-bold text-lg text-gray-900 dark:text-white mb-1">
-                    React 컴포넌트
+                    로고 변형
                   </div>
                   <div className="text-gray-500 dark:text-gray-300 text-base mb-2">
-                    재사용 가능한 React 로고 컴포넌트들
+                    확장 가능한 SVG 로고 파일들
                   </div>
                 </div>
-                {/* === 3종류 로고 카드 === */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* === SVG 로고 변형 카드 === */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* 태그라인 포함 로고 (권장) */}
+                  <LogoVariantCard
+                    title="태그라인 포함 로고"
+                    description="브랜드 정체성을 완전히 표현하는 권장 형태"
+                    logoSrc="/SVG/FamilyOfficeS_blue_tagline.svg"
+                    darkModeSrc="/SVG/FamilyOfficeS_black_tagline.svg"
+                    width={200}
+                    height={64}
+                  />
                   {/* 기본 로고 */}
-                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-center shadow-sm">
-                    <div className="font-bold text-base text-gray-900 dark:text-white mb-1">
-                      기본 로고
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">
-                      태그라인 포함, 다국어 지원
-                    </div>
-                    <FamilyOfficeLogo className="w-40 h-12" />
+                  <LogoVariantCard
+                    title="기본 로고"
+                    description="헤더, 내비게이션, 일반 사용용"
+                    logoSrc="/SVG/FamilyOfficeS_blue.svg"
+                    darkModeSrc="/SVG/FamilyOfficeS_black.svg"
+                    width={160}
+                    height={48}
+                  />
+                  {/* 카카오 아이콘 */}
+                  <LogoVariantCard
+                    title="소셜 아이콘"
+                    description="카카오톡, 소셜 미디어용 아이콘"
+                    logoSrc="/SVG/SimpleIconsKakao.svg"
+                    width={48}
+                    height={48}
+                  />
+                </div>
+                
+                {/* === 로고 사용 가이드 === */}
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
+                    <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-3">✅ 권장 사항</h4>
+                    <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                      <li>• SVG 형식 사용으로 모든 크기에서 선명도 유지</li>
+                      <li>• 밝은 배경에는 블루 버전, 어두운 배경에는 블랙 버전</li>
+                      <li>• 태그라인 포함 로고를 메인 브랜딩에 우선 사용</li>
+                      <li>• 최소 크기: 태그라인 포함 시 180px 이상</li>
+                      <li>• 로고 주변 충분한 여백 확보</li>
+                    </ul>
                   </div>
-                  {/* 미니멀 로고 */}
-                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-center shadow-sm">
-                    <div className="font-bold text-base text-gray-900 dark:text-white mb-1">
-                      미니멀 로고
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">
-                      헤더, 내비게이션용
-                    </div>
-                    <FamilyOfficeLogo className="w-32 h-10" />
-                  </div>
-                  {/* 프리미엄 로고 */}
-                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 flex flex-col items-center shadow-sm">
-                    <div className="font-bold text-base text-gray-900 dark:text-white mb-1">
-                      프리미엄 로고
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">
-                      특별한 페이지, 랜딩용
-                    </div>
-                    <FamilyOfficeLogo className="w-48 h-14" />
+                  <div className="border rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm">
+                    <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-3">❌ 주의 사항</h4>
+                    <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                      <li>• 로고 비율 변경 금지</li>
+                      <li>• 색상 변경 또는 필터 적용 금지</li>
+                      <li>• 배경과 대비가 부족한 색상 조합 피하기</li>
+                      <li>• 복잡한 배경 위에 직접 배치 금지</li>
+                      <li>• 다른 요소와 겹치지 않도록 배치</li>
+                    </ul>
                   </div>
                 </div>
               </section>
