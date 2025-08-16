@@ -417,22 +417,22 @@ export default function AboutPage() {
                     highlight: true,
                   },
                 ].map((approach, index) => (
-                  <Card key={index} className="text-center h-full bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 border-primary/20 dark:border-primary/40 transition-all duration-300 hover:shadow-xl hover:scale-105">
+                  <Card key={index} className="text-center h-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg dark:hover:shadow-xl hover:scale-105">
                     <CardHeader>
-                      <div className="w-16 h-16 bg-primary/20 dark:bg-primary/30 rounded-full mx-auto mb-4 flex items-center justify-center text-primary dark:text-primary">
+                      <div className="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center text-primary">
                         {approach.icon}
                       </div>
-                      <CardTitle className="text-xl text-foreground transition-colors duration-300">{approach.title}</CardTitle>
+                      <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">{approach.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="flex-1 flex flex-col">
-                      <p className="text-foreground/90 dark:text-foreground/95 font-medium mb-6 flex-1 transition-colors duration-300 leading-relaxed">
+                      <p className="text-muted-foreground dark:text-gray-300 mb-6 flex-1 transition-colors duration-300">
                         {approach.description}
                       </p>
                       <ul className="space-y-2">
                         {approach.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-center text-sm">
-                            <CheckCircle className="h-4 w-4 text-primary dark:text-primary mr-2 flex-shrink-0" />
-                            <span className="text-foreground/80 dark:text-foreground/90 font-medium transition-colors duration-300">{feature}</span>
+                            <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0" />
+                            <span className="text-gray-700 dark:text-gray-300 transition-colors duration-300">{feature}</span>
                           </li>
                         ))}
                       </ul>
