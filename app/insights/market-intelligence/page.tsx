@@ -12,6 +12,9 @@ import {
   Users,
   TrendingUp,
   Cpu,
+  Building,
+  Scale,
+  Briefcase,
 } from 'lucide-react';
 
 import { Suspense } from 'react';
@@ -142,6 +145,10 @@ export default function BlogPage() {
                         {category.icon === 'FileText' && <FileText className="h-5 w-5 text-primary" />}
                         {category.icon === 'Users' && <Users className="h-5 w-5 text-primary" />}
                         {category.icon === 'Cpu' && <Cpu className="h-5 w-5 text-primary" />}
+                        {category.icon === 'Building' && <Building className="h-5 w-5 text-primary" />}
+                        {category.icon === 'Scale' && <Scale className="h-5 w-5 text-primary" />}
+                        {category.icon === 'Globe' && <Globe className="h-5 w-5 text-primary" />}
+                        {category.icon === 'Briefcase' && <Briefcase className="h-5 w-5 text-primary" />}
                       </div>
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">

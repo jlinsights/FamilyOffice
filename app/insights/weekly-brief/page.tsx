@@ -20,47 +20,96 @@ import {
   Target
 } from 'lucide-react';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
-  title: '기업승계 Weekly Brief | CEO 전용 뉴스레터 | FamilyOffice S',
-  description: '매주 월·금, 기업승계와 상속세 절세에 관한 핵심 인사이트를 CEO에게 직접 전달합니다. 500+ 중견기업 경영진이 구독하는 프리미엄 뉴스레터.',
-  keywords: '기업승계 뉴스레터, CEO 뉴스레터, 상속세 절세, 가업승계, 중견기업, 패밀리오피스, 경영진 인사이트',
+  title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
+  description: '매주 금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다. 5분 내 독서 완료, 실무 적용 가능한 전문가 네트워크 독점 인사이트.',
+  keywords: '주간 브리프, 기업승계 뉴스레터, CEO 뉴스레터, 상속세 절세, 가업승계, 중견기업, 패밀리오피스, 자산관리 인사이트',
   openGraph: {
-    title: '기업승계 Weekly Brief | CEO 전용 뉴스레터 | FamilyOffice S',
-    description: '매주 월·금, 기업승계와 상속세 절세에 관한 핵심 인사이트를 CEO에게 직접 전달합니다.',
+    title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
+    description: '매주 금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
     type: 'website',
     locale: 'ko_KR',
   },
   twitter: {
     card: 'summary_large_image',
-    title: '기업승계 Weekly Brief | CEO 전용 뉴스레터 | FamilyOffice S',
-    description: '매주 월·금, 기업승계와 상속세 절세에 관한 핵심 인사이트를 CEO에게 직접 전달합니다.',
+    title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
+    description: '매주 금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
   },
   alternates: {
     canonical: '/insights/weekly-brief',
   },
 };
 
-const newsletterBenefits = [
+const valuePropositions = [
   {
-    icon: TrendingUp,
-    title: '시장 동향 분석',
-    description: '국내외 금융시장의 주요 동향과 투자 기회를 전문가의 시각으로 분석',
-  },
-  {
-    icon: Building2,
-    title: '업종별 인사이트',
-    description: '제조, 건설, IT, 유통 등 업종별 맞춤형 투자 전략과 리스크 관리',
-  },
-  {
-    icon: Shield,
-    title: '세무·법률 가이드',
-    description: '최신 세법 개정사항과 절세 전략, 상속·증여 관련 실무 팁',
+    icon: Clock,
+    title: '5분 내 독서 완료',
+    description: '바쁜 CEO를 위한 핵심 요약 형태로 구성된 간결한 콘텐츠',
   },
   {
     icon: Target,
-    title: 'CEO 필독 자료',
-    description: '경영진을 위한 핵심 이슈 브리핑과 의사결정 참고 자료',
+    title: '실무 적용 가능한 정보',
+    description: '이론이 아닌 실제 경영 현장에서 바로 활용할 수 있는 실용적 인사이트',
+  },
+  {
+    icon: Users,
+    title: '전문가 네트워크 독점 인사이트',
+    description: '변호사, 회계사, 투자전문가들의 검증된 분석과 조언',
+  },
+  {
+    icon: Shield,
+    title: '무료 구독, 언제든 해지 가능',
+    description: '부담 없이 시작하고, 원할 때 언제든 구독을 중단할 수 있습니다',
+  },
+];
+
+const newsletterStats = {
+  subscribers: '1,200+',
+  openRate: '52%',
+  issues: '50+',
+  establishedYear: '2024',
+  platform: 'beehiiv'
+};
+
+const recentIssues = [
+  {
+    issueNumber: '#50',
+    date: '2025.01.17',
+    title: '2025년 상속세법 개정안 핵심 포인트',
+    excerpt: '상속세 과세표준 구간 조정과 세율 변화가 중견기업에 미치는 영향을 분석했습니다.',
+    readTime: '4분',
+    categories: ['세무', '법률', '기업승계'],
+    url: 'https://newsletter.familyoffices.vip',
+  },
+  {
+    issueNumber: '#49',
+    date: '2025.01.10',
+    title: 'AI 시대 기업 밸류에이션의 새로운 기준',
+    excerpt: '전통적인 기업 가치 평가 방식에서 벗어나 AI 역량을 반영한 새로운 평가 모델을 제시합니다.',
+    readTime: '5분',
+    categories: ['투자', '기업가치', 'AI'],
+    url: 'https://newsletter.familyoffices.vip',
+  },
+  {
+    issueNumber: '#48',
+    date: '2025.01.03',
+    title: '2025년 글로벌 경제 전망과 자산배분 전략',
+    excerpt: '새해를 맞아 주요 투자은행들의 경제 전망을 종합하여 한국 중견기업을 위한 자산배분 가이드를 정리했습니다.',
+    readTime: '6분',
+    categories: ['투자전략', '자산배분', '글로벌'],
+    url: 'https://newsletter.familyoffices.vip',
+  },
+  {
+    issueNumber: '#47',
+    date: '2024.12.27',
+    title: '패밀리오피스 설립 시 고려사항 총정리',
+    excerpt: '자산 규모별 패밀리오피스 형태와 설립 과정에서 반드시 체크해야 할 법적, 세무적 요소들을 정리했습니다.',
+    readTime: '5분',
+    categories: ['패밀리오피스', '자산관리', '설립'],
+    url: 'https://newsletter.familyoffices.vip',
   },
 ];
 
@@ -95,78 +144,104 @@ const recentTopics = [
 
 export default function WeeklyBriefPage() {
   return (
-    <div className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-purple-50 to-white dark:from-gray-900 dark:to-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge variant="outline" className="mb-4">매주 월·금 오전 7:30 발송</Badge>
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                CEO를 위한<br />
-                프리미엄 투자 뉴스레터
-              </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-                500+ 중견기업 경영진이 신뢰하는 FamilyOffice S의<br />
-                독점 투자 인사이트를 매주 2회 받아보세요.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-gray-700 dark:text-gray-300">무료 구독</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-gray-700 dark:text-gray-300">언제든 해지 가능</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-gray-700 dark:text-gray-300">스팸 없음</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-gray-700 dark:text-gray-300">실무 중심 콘텐츠</span>
-                </div>
-              </div>
-
-              <NewsletterSubscription 
-                source="weekly-brief-hero"
-                variant="default"
-                showDescription={false}
-              />
-            </div>
+    <div className="min-h-screen">
+      <Header />
+      <main className="pt-20">
+      {/* Weekly Brief Main Section */}
+      <section className="weekly-brief relative py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-6 text-lg px-4 py-2">매주 금요일 오전 7:30 발송</Badge>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+              주간 브리프
+            </h1>
+            <p className="subtitle text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
+              매주 금요일 오전 7:30, 
+              <br className="hidden sm:block" />
+              기업승계와 자산관리 핵심 인사이트를 전달합니다
+            </p>
             
-            <div className="relative">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
-                <div className="flex items-center justify-between mb-6">
+            {/* Value Propositions */}
+            <div className="value-props bg-card rounded-2xl p-8 shadow-lg mb-12 max-w-4xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-6">
+                {valuePropositions.map((prop, index) => {
+                  const Icon = prop.icon;
+                  return (
+                    <div key={index} className="flex items-start gap-4 text-left">
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-primary" />
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-foreground mb-2">{prop.title}</h3>
+                        <p className="text-sm text-muted-foreground">{prop.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Platform Info & Subscription */}
+            <div className="subscription-form max-w-2xl mx-auto mb-16">
+              <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border">
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Mail className="w-4 h-4 text-orange-600" />
+                  </div>
+                  <span className="text-sm font-medium text-muted-foreground">
+                    Powered by <span className="text-orange-600 font-semibold">beehiiv</span>
+                  </span>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 text-center">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">최신호 미리보기</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">2025년 1월 17일 (금요일)</p>
+                    <div className="text-2xl font-bold text-foreground">{newsletterStats.subscribers}</div>
+                    <div className="text-sm text-muted-foreground">구독자</div>
                   </div>
-                  <Mail className="w-8 h-8 text-purple-600" />
+                  <div>
+                    <div className="text-2xl font-bold text-foreground">{newsletterStats.openRate}</div>
+                    <div className="text-sm text-muted-foreground">열람률</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-foreground">{newsletterStats.issues}</div>
+                    <div className="text-sm text-muted-foreground">발행호</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-foreground">{newsletterStats.establishedYear}</div>
+                    <div className="text-sm text-muted-foreground">시작년도</div>
+                  </div>
                 </div>
-                
+
                 <div className="space-y-4">
-                  <div className="border-l-4 border-purple-600 pl-4">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">주요 뉴스</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">한국은행 기준금리 동결, 투자 전략 재점검 필요</p>
+                  <div className="flex gap-3">
+                    <Link 
+                      href="https://newsletter.familyoffices.vip" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex-1"
+                    >
+                      <Button size="lg" className="w-full">
+                        newsletter.familyoffices.vip에서 구독하기
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
                   </div>
-                  <div className="border-l-4 border-blue-600 pl-4">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">투자 인사이트</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">2025년 주목해야 할 5가지 투자 트렌드</p>
-                  </div>
-                  <div className="border-l-4 border-green-600 pl-4">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">CEO 브리핑</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">디지털 전환 시대의 리더십 전략</p>
+                  
+                  <div className="text-center">
+                    <NewsletterSubscription 
+                      source="weekly-brief-main"
+                      variant="compact"
+                    />
                   </div>
                 </div>
                 
-                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500 dark:text-gray-400">구독자 10,000+</span>
-                    <span className="text-gray-500 dark:text-gray-400">평균 열람률 45%</span>
-                  </div>
+                <div className="mt-6 pt-6 border-t text-center">
+                  <p className="text-sm text-muted-foreground">
+                    📧 <strong>newsletter.familyoffices.vip</strong>에서 관리되는 전문 뉴스레터<br />
+                    🔒 beehiiv 플랫폼의 엔터프라이즈급 보안과 전송 안정성
+                  </p>
                 </div>
               </div>
             </div>
@@ -174,37 +249,84 @@ export default function WeeklyBriefPage() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20">
+      {/* Recent Issues Section */}
+      <section className="recent-issues py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              뉴스레터 구독 혜택
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              FamilyOffice S 뉴스레터만의 차별화된 콘텐츠를 만나보세요
+            <h3 className="text-3xl font-bold text-foreground mb-4">
+              최근 발행호
+            </h3>
+            <p className="text-lg text-muted-foreground">
+              지난 주간 브리프에서 다뤘던 핵심 주제들을 확인해보세요
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {newsletterBenefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {recentIssues.map((issue, index) => (
+              <Card key={index} className="card-modern hover:shadow-lg transition-all duration-300 overflow-hidden group">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge variant="outline" size="sm" className="text-xs font-mono">
+                      {issue.issueNumber}
+                    </Badge>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="w-4 h-4" />
+                      {issue.date}
                     </div>
-                    <CardTitle className="text-xl">{benefit.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base">
-                      {benefit.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                  </div>
+                  <CardTitle className="text-xl leading-tight group-hover:text-primary transition-colors">
+                    {issue.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base mb-4 leading-relaxed">
+                    {issue.excerpt}
+                  </CardDescription>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Clock className="w-4 h-4" />
+                      읽는 시간: {issue.readTime}
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <div className="w-4 h-4 bg-orange-100 rounded flex items-center justify-center">
+                        <span className="text-orange-600 font-bold text-xs">b</span>
+                      </div>
+                      beehiiv
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {issue.categories.map((category, catIndex) => (
+                      <Badge key={catIndex} variant="secondary" size="sm">
+                        {category}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <Link 
+                    href={issue.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <Button variant="outline" size="sm" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                      newsletter.familyoffices.vip에서 읽기
+                      <ArrowRight className="ml-2 h-3 w-3" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link href="https://newsletter.familyoffices.vip" target="_blank" rel="noopener noreferrer">
+              <Button size="lg" variant="outline">
+                전체 백로그 보기
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -275,65 +397,137 @@ export default function WeeklyBriefPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20">
+      {/* Platform & Technology Section */}
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              신뢰할 수 있는 뉴스레터 플랫폼
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              전문 뉴스레터 플랫폼 beehiiv를 통해 안정적이고 전문적인 뉴스레터 서비스를 제공합니다
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <Users className="w-10 h-10 text-purple-600 dark:text-purple-400" />
+                <Users className="w-10 h-10 text-primary" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">10,000+</div>
-              <div className="text-gray-600 dark:text-gray-400">활성 구독자</div>
+              <div className="text-3xl font-bold text-foreground mb-2">{newsletterStats.subscribers}</div>
+              <div className="text-muted-foreground">활성 구독자</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <Calendar className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+                <BarChart className="w-10 h-10 text-green-600" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">3년+</div>
-              <div className="text-gray-600 dark:text-gray-400">발행 기간</div>
+              <div className="text-3xl font-bold text-foreground mb-2">{newsletterStats.openRate}</div>
+              <div className="text-muted-foreground">평균 열람률</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <BarChart className="w-10 h-10 text-green-600 dark:text-green-400" />
+                <Mail className="w-10 h-10 text-blue-600" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">45%</div>
-              <div className="text-gray-600 dark:text-gray-400">평균 열람률</div>
+              <div className="text-3xl font-bold text-foreground mb-2">{newsletterStats.issues}</div>
+              <div className="text-muted-foreground">총 발행호</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <Clock className="w-10 h-10 text-orange-600 dark:text-orange-400" />
+                <Clock className="w-10 h-10 text-orange-600" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">주 2회</div>
-              <div className="text-gray-600 dark:text-gray-400">정기 발송</div>
+              <div className="text-3xl font-bold text-foreground mb-2">주 1회</div>
+              <div className="text-muted-foreground">금요일 발송</div>
+            </div>
+          </div>
+          
+          <div className="bg-card rounded-2xl p-8 max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                <Mail className="w-6 h-6 text-orange-600" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-foreground">beehiiv 플랫폼 활용</h3>
+                <p className="text-muted-foreground">전문 뉴스레터 발행을 위한 최적화된 환경</p>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <Shield className="w-8 h-8 text-primary mx-auto mb-2" />
+                <h4 className="font-semibold text-foreground mb-2">엔터프라이즈 보안</h4>
+                <p className="text-sm text-muted-foreground">GDPR 및 CAN-SPAM 완전 준수</p>
+              </div>
+              <div className="text-center">
+                <TrendingUp className="w-8 h-8 text-primary mx-auto mb-2" />
+                <h4 className="font-semibold text-foreground mb-2">99.9% 전송 성공률</h4>
+                <p className="text-sm text-muted-foreground">안정적인 이메일 전송 보장</p>
+              </div>
+              <div className="text-center">
+                <Target className="w-8 h-8 text-primary mx-auto mb-2" />
+                <h4 className="font-semibold text-foreground mb-2">고급 분석</h4>
+                <p className="text-sm text-muted-foreground">상세한 구독자 인사이트 제공</p>
+              </div>
+            </div>
+            
+            <div className="mt-8 pt-6 border-t text-center">
+              <p className="text-sm text-muted-foreground">
+                <strong>newsletter.familyoffices.vip</strong> • 
+                Powered by <span className="text-orange-600 font-semibold">beehiiv</span> • 
+                {newsletterStats.establishedYear}년부터 서비스 제공
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-purple-700">
+      <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             지금 바로 구독하고 다음 호를 받아보세요
           </h2>
-          <p className="text-xl text-purple-100 mb-8">
-            매주 월·금 오전 7시 30분, 당신의 투자 결정을 돕는 인사이트가 도착합니다
+          <p className="text-xl text-primary-foreground/90 mb-8">
+            매주 금요일 오전 7시 30분, 당신의 투자 결정을 돕는 인사이트가 도착합니다
           </p>
           
-          <div className="max-w-md mx-auto">
+          <div className="space-y-4 max-w-md mx-auto">
+            <Link 
+              href="https://newsletter.familyoffices.vip" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" variant="secondary" className="w-full mb-4">
+                newsletter.familyoffices.vip에서 구독하기
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            
+            <div className="text-sm text-primary-foreground/70">
+              또는
+            </div>
+            
             <NewsletterSubscription 
               source="weekly-brief-cta"
-              variant="inline"
-              buttonVariant="secondary"
+              variant="compact"
             />
           </div>
           
-          <p className="text-sm text-purple-200 mt-6">
-            구독 신청 즉시 환영 이메일과 함께 최신 뉴스레터를 보내드립니다
-          </p>
+          <div className="mt-8 pt-6 border-t border-white/20">
+            <div className="flex items-center justify-center gap-2 text-sm text-primary-foreground/80 mb-2">
+              <div className="w-4 h-4 bg-orange-100 rounded flex items-center justify-center">
+                <span className="text-orange-600 font-bold text-xs">b</span>
+              </div>
+              beehiiv 플랫폼으로 안전하게 관리됩니다
+            </div>
+            <p className="text-sm text-primary-foreground/70">
+              구독 신청 즉시 환영 이메일과 함께 최신 뉴스레터를 보내드립니다<br />
+              🔒 개인정보 보호 • 📧 스팸 없음 • ✋ 언제든 해지 가능
+            </p>
+          </div>
         </div>
       </section>
+      </main>
+      <Footer />
     </div>
   );
 }

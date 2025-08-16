@@ -109,7 +109,7 @@ export function NewsletterSubscription({
           <div className="flex-1">
             <h4 className="font-semibold text-sm mb-1">뉴스레터 구독하기</h4>
             <p className="text-xs text-muted-foreground mb-2">
-              매주 월·금 오전 7:30 발송
+              매주 금요일 오전 7:30 발송
             </p>
             <form onSubmit={handleSubmit} className="flex gap-2">
               <Input
@@ -143,8 +143,8 @@ export function NewsletterSubscription({
         FamilyOffice S 뉴스레터
       </h3>
       <p className="text-lg mb-6 opacity-90">
-        매주 월·금 오전 7:30에 발송되는<br/>
-        패밀리오피스 전문 인사이트를 받아보세요
+        매주 금요일 오전 7:30에 발송되는<br/>
+        기업승계와 자산관리 전문 인사이트를 받아보세요
       </p>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
         <div className="flex gap-2">

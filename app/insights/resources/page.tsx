@@ -21,6 +21,8 @@ import {
   Briefcase,
   Lock
 } from 'lucide-react';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: '기업승계 자료실 | CEO 필수 가이드북 | FamilyOffice S',
@@ -142,7 +144,9 @@ const recentDownloads = [
 
 export default function ResourcesPage() {
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
+      <Header />
+      <main className="pt-20">
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-green-50 to-white dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -383,6 +387,8 @@ export default function ResourcesPage() {
           </div>
         </div>
       </section>
+      </main>
+      <Footer />
     </div>
   );
 }
