@@ -1,1 +1,1 @@
-🎨 About 페이지 차별화된 접근방식 섹션: 핵심 가치 섹션과 동일한 카드 스타일 적용
+🎨 Insights 페이지 카드 배경색 통일: bg-white dark:bg-gray-800 적용
