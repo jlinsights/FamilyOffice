@@ -162,7 +162,7 @@ export default function WeeklyBriefPage() {
             </p>
             
             {/* Value Propositions */}
-            <div className="value-props bg-card rounded-2xl p-8 shadow-lg mb-12 max-w-4xl mx-auto">
+            <div className="value-props bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg mb-12 max-w-4xl mx-auto">
               <div className="grid md:grid-cols-2 gap-6">
                 {valuePropositions.map((prop, index) => {
                   const Icon = prop.icon;
@@ -261,7 +261,7 @@ export default function WeeklyBriefPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {recentIssues.map((issue, index) => (
-              <Card key={index} className="card-modern hover:shadow-lg transition-all duration-300 overflow-hidden group">
+              <Card key={index} className="card-modern bg-white dark:bg-gray-800 hover:shadow-lg transition-all duration-300 overflow-hidden group">
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between mb-2">
                     <Badge variant="outline" size="sm" className="text-xs font-mono">
@@ -365,7 +365,7 @@ export default function WeeklyBriefPage() {
                 구독자 후기
               </h3>
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="hover:shadow-md transition-shadow duration-300">
+                <Card key={index} className="bg-white dark:bg-gray-800 hover:shadow-md transition-shadow duration-300">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-1 mb-3">
                       {[...Array(testimonial.rating)].map((_, i) => (
@@ -436,7 +436,7 @@ export default function WeeklyBriefPage() {
             </div>
           </div>
           
-          <div className="bg-card rounded-2xl p-8 max-w-4xl mx-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                 <Mail className="w-6 h-6 text-primary" />

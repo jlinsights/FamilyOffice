@@ -1,1 +1,1 @@
-🎨 Insights 페이지 카드 배경색 통일: bg-white dark:bg-gray-800 적용
+🎨 자료실 페이지 카드 배경색 통일: bg-white dark:bg-gray-800 적용
