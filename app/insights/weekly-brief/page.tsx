@@ -361,7 +361,7 @@ export default function WeeklyBriefPage() {
             </div>
             
             <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              <h3 className="text-2xl font-bold text-foreground mb-6">
                 구독자 후기
               </h3>
               {testimonials.map((testimonial, index) => (
@@ -372,15 +372,15 @@ export default function WeeklyBriefPage() {
                         <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4 italic">
+                    <p className="text-muted-foreground mb-4 italic">
                       "{testimonial.content}"
                     </p>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-semibold text-gray-900 dark:text-white">
+                        <p className="font-semibold text-foreground">
                           {testimonial.name}
                         </p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-sm text-muted-foreground">
                           {testimonial.company}
                         </p>
                       </div>
