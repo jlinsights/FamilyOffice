@@ -160,7 +160,7 @@ export function NewsletterSubscription({
           <Button 
             type="submit" 
             disabled={isLoading}
-            className="bg-background text-foreground hover:bg-background/90"
+            className="bg-white text-primary hover:bg-white/90 dark:bg-background dark:text-foreground dark:hover:bg-background/90"
           >
             {isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />

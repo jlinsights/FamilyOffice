@@ -128,7 +128,7 @@ export default async function BlogPostPage({
                     <Badge
                       key={tag}
                       variant="outline"
-                      className="border-white/20 text-white/80 dark:border-white/30 dark:text-white/90"
+                      className="border-white/30 text-white bg-white/10 hover:bg-white/20 dark:border-white/30 dark:text-white/90 dark:bg-white/10"
                     >
                       {tag}
                     </Badge>
@@ -265,7 +265,7 @@ export default async function BlogPostPage({
                   buttonText="무료 상담 신청"
                   variant="outline"
                   size="lg"
-                  className="border-white text-white hover:bg-white/10 dark:border-white dark:text-white dark:hover:bg-white/20"
+                  className="border-white/50 text-white bg-white/10 hover:bg-white/20 dark:border-white dark:text-white dark:hover:bg-white/20"
                   eventType="consultation"
                 />
               </div>

@@ -427,42 +427,6 @@ export const blogPosts: Record<string, BlogPost> = {
     featured: true,
   },
 
-  'investment-strategy-2025': {
-    id: 'investment-strategy-2025',
-    title: '2025년 투자 전망과 전략',
-    excerpt: '새로운 해를 맞아 주목해야 할 투자 기회와 리스크 관리 방안을 제시합니다.',
-    content: `# 2025년 투자 전망과 전략
-
-글로벌 경제의 불확실성이 지속되는 가운데, 2025년 투자 전략은 신중함과 기회 포착의 균형이 중요합니다.
-
-## 2025년 투자 환경
-
-### 주요 특징
-- 금리 정책의 변화
-- 인플레이션 관리
-- 지정학적 리스크
-- 기술 혁신의 가속화
-
-## 권장 투자 전략
-
-### 1. 핵심-위성 전략
-안정적인 핵심 자산과 성장 가능성이 높은 위성 자산의 조합
-
-### 2. ESG 투자 확대
-지속가능한 투자에 대한 관심 증가와 정부 정책 지원
-
-### 3. 대체투자 검토
-전통적인 자산 외에 부동산, 사모투자 등 대체투자 기회 탐색
-
-투자 결정은 개인의 재정 상황과 목표에 따라 달라지므로 전문가와의 상담이 필요합니다.`,
-    category: '투자전략',
-    author: 'FamilyOffice S',
-    date: '2024-12-05',
-    readTime: '5분',
-    tags: ['투자전략', '2025전망', 'ESG투자'],
-    slug: 'investment-strategy-2025',
-    featured: false,
-  },
 
   'succession-planning-guide': {
     id: 'succession-planning-guide',
