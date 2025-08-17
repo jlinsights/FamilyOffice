@@ -1,6 +1,7 @@
 import { CalendarDays, Clock, User, ArrowLeft, Share2 } from 'lucide-react';
 
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -168,17 +169,27 @@ export default async function BlogPostPage({
               <Card className="mt-8 shadow-lg bg-background border-border">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <User className="h-8 w-8 text-primary" />
+                    <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-800">
+                      <Image 
+                        src="/images/profile.jpeg" 
+                        alt="임재홍 수석 컨설턴트"
+                        width={64}
+                        height={64}
+                        className="w-full h-full object-cover"
+                        priority
+                      />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-bold mb-2 text-foreground">
-                        {post.author} 소개
+                        {post.author} 수석 컨설턴트
                       </h3>
+                      <p className="text-sm text-primary mb-2 font-medium">
+                        FamilyOffice S 대표 컨설턴트 / 수석
+                      </p>
                       <p className="text-muted-foreground mb-4">
-                        FamilyOffice S는 한국 중견기업을 위한 전문 패밀리오피스 서비스를 제공합니다. 
-                        자산관리, 세무최적화, 승계계획 등 통합적인 솔루션으로 기업과 가족의 지속가능한 
-                        성장을 지원합니다.
+                        대형 금융그룹 출신으로 중견기업 자산관리 경험과 전문성을 보유하고 있습니다. 
+                        패밀리오피스 설계, 가업승계 전략, 세무최적화 등 통합적인 솔루션으로 
+                        기업과 가족의 지속가능한 성장을 지원합니다.
                       </p>
                       <div className="flex items-center gap-4">
                         <Button variant="outline" size="sm" asChild>

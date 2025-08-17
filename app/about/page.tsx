@@ -20,6 +20,7 @@ import {
   Cpu,
   Medal,
 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { CalComPopup } from '@/components/cal-com-popup';
 import { CalComButton } from '@/components/cal-com-button';
@@ -241,8 +242,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 전문가 팀 섹션 - 숨김 처리 */}
-        {/* <section className="py-20 bg-background">
+        {/* 전문가 팀 섹션 */}
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4">
@@ -286,8 +287,20 @@ export default function AboutPage() {
               ].map((expert, index) => (
                 <Card key={index} className="text-center">
                   <CardHeader>
-                    <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full mx-auto mb-6 flex items-center justify-center">
-                      <Users className="h-12 w-12 text-primary" />
+                    <div className="w-24 h-24 rounded-full mx-auto mb-6 overflow-hidden bg-gray-100 dark:bg-gray-800">
+                      {expert.name === '임재홍' ? (
+                        <Image 
+                          src="/images/profile.jpeg" 
+                          alt="임재홍 수석 컨설턴트"
+                          width={96}
+                          height={96}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                          <Users className="h-12 w-12 text-primary" />
+                        </div>
+                      )}
                     </div>
                     <CardTitle className="text-lg">{expert.name}</CardTitle>
                     <p className="text-primary font-medium">{expert.position}</p>
@@ -304,7 +317,7 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* 핵심 가치 섹션 */}
         <section className="py-20 bg-muted/30 dark:bg-muted/20">

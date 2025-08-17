@@ -357,7 +357,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 </div>`,
     category: '패밀리오피스',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-08-13',
     readTime: '12분',
     tags: ['패밀리오피스', '가업승계', '자산관리', '상속세', '중견기업', 'MFO', '디지털패밀리오피스', '가문경영', '세무전략', '투자다각화'],
@@ -388,7 +388,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 전문적인 자산관리를 위해서는 신뢰할 수 있는 파트너와의 협력이 중요합니다. FamilyOffice S는 이러한 체계적인 자산관리를 지원합니다.`,
     category: '자산관리',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2024-12-10',
     readTime: '4분',
     tags: ['자산관리', '포트폴리오', '투자전략'],
@@ -419,7 +419,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 세무 최적화는 복잡한 법률과 세제를 다루므로 반드시 전문가와 함께 진행해야 합니다.`,
     category: '세무최적화',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2024-12-08',
     readTime: '6분',
     tags: ['절세', '상속세', '증여세', '가업승계'],
@@ -457,7 +457,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 승계는 10년 이상의 장기적인 과정입니다. 충분한 시간을 두고 체계적으로 준비하는 것이 중요합니다.`,
     category: '승계전략',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2024-12-01',
     readTime: '7분',
     tags: ['기업승계', '가업승계', '거버넌스'],
@@ -494,7 +494,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 디지털 기술을 활용한 자산관리는 더 이상 대기업의 전유물이 아닙니다. 중견기업도 이러한 혁신을 통해 효율적이고 전문적인 자산관리가 가능합니다.`,
     category: '디지털혁신',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2024-11-28',
     readTime: '4분',
     tags: ['디지털혁신', '핀테크', 'AI', '자산관리'],
@@ -532,7 +532,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 최근 조사에 따르면, 성공적인 가업승계를 이룬 기업들의 공통점은 '준비된 승계'입니다. 단순한 지분 이전이 아닌, 경영 철학과 기업 문화까지 포함한 종합적 접근이 핵심입니다.`,
     category: '기업승계 분석',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-01-15',
     readTime: '6분',
     tags: ['기업승계', '가업승계', '경영권 이양', '차세대 경영'],
@@ -573,7 +573,7 @@ export const blogPosts: Record<string, BlogPost> = {
 ### 2. 외부 전문가 활용
 패밀리오피스나 전문 컨설팅을 통해 객관적이고 체계적인 승계 계획을 수립해야 합니다.`,
     category: '기업승계 분석',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-01-12',
     readTime: '7분',
     tags: ['중견기업', '승계 이슈', '해결방안', '경영 전략'],
@@ -623,7 +623,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 개정안의 혜택을 최대한 활용하기 위해서는 사전 준비가 핵심입니다. 특히 가업승계 요건을 충족하기 위한 준비 작업이 중요합니다.`,
     category: '세무·법무 인사이트',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-01-10',
     readTime: '8분',
     tags: ['상속세', '세법 개정', '가업승계', '세무 전략'],
@@ -672,7 +672,7 @@ export const blogPosts: Record<string, BlogPost> = {
 3. 단계별 실행 계획
 4. 모니터링 및 개선`,
     category: '세무·법무 인사이트',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-01-08',
     readTime: '9분',
     tags: ['지배구조', '가족기업', '이사회', '경영 투명성'],
@@ -727,7 +727,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 싱가포르 패밀리오피스 모델은 한국의 중견기업 가족들에게도 유용한 참고 자료가 됩니다. 특히 글로벌 분산 투자와 차세대 참여 유도 방안에서 배울 점이 많습니다.`,
     category: '글로벌 트렌드',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-01-06',
     readTime: '7분',
     tags: ['싱가포르', '패밀리오피스', '글로벌 트렌드', '아시아'],
@@ -791,7 +791,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 미국 신탁은 복잡한 구조이므로 반드시 전문가의 도움을 받아 설립하는 것이 중요합니다.`,
     category: '글로벌 트렌드',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-01-04',
     readTime: '8분',
     tags: ['미국 신탁', '글로벌 자산관리', '세무 최적화', '자산 보호'],
@@ -872,7 +872,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 성공적인 부동산 포트폴리오는 장기적 관점에서 체계적으로 구축해야 합니다.`,
     category: '자산관리 전략',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-01-02',
     readTime: '10분',
     tags: ['부동산 투자', '포트폴리오', '고액자산가', '자산 배분'],
@@ -976,7 +976,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 대체투자는 높은 수익 가능성과 함께 상당한 리스크를 수반하므로, 반드시 전문가와 상담 후 신중하게 접근해야 합니다.`,
     category: '자산관리 전략',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2024-12-30',
     readTime: '11분',
     tags: ['대체투자', '프라이빗 에쿼티', '헤지펀드', '투자 전략'],
@@ -1121,7 +1121,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 </div>`,
     category: '투자전략',
-    author: 'FamilyOffice S',
+    author: '임재홍',
     date: '2025-08-18',
     readTime: '20분',
     tags: ['2025년 투자 전망', '지정학적 리스크', 'AI 투자', '포트폴리오 전략', '자산 다변화'],
