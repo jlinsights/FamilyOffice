@@ -242,82 +242,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 전문가 팀 섹션 */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <Badge variant="outline" className="mb-4">
-                <Users className="h-3 w-3 mr-1" />
-                Expert Team
-              </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                중소중견기업 전문가 팀
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                20년 이상의 경험을 보유한 중소중견기업 자산관리 전문가들이 함께합니다
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  name: '임재홍',
-                  position: '대표 컨설턴트 / 수석',
-                  specialty: '중소중견기업 전문, 패밀리오피스 설계',
-                  description: '국내 대기업 및 글로벌 외국계 기업 출신으로 중소중견기업 자산관리 경험과 전문성 보유',
-                },
-                {
-                  name: '장현오',
-                  position: '삼성패밀리오피스',
-                  specialty: '제조업·건설업 전문, 중대재해처벌법 대응',
-                  description: '위험업종 전문 보험설계 및 기업재해보장보험 설계 전문가',
-                },
-                {
-                  name: '박병학',
-                  position: '세무 회계 본부장',
-                  specialty: '가족법인 설립, 승계 설계, MSO 구조화',
-                  description: 'Big4 회계법인 출신으로 중소중견기업 세무 및 승계 전문가',
-                },
-                {
-                  name: '주상미',
-                  position: 'FP (Financial Planner)',
-                  specialty: '투자 포트폴리오 관리, 리스크 헤지',
-                  description: '투자은행 출신으로 중소중견기업 맞춤형 투자전략 설계 전문가',
-                },
-              ].map((expert, index) => (
-                <Card key={index} className="group text-center h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border-white/20 dark:border-gray-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 dark:hover:shadow-xl hover:scale-105 hover:bg-white/80 dark:hover:bg-gray-800/80 hover:backdrop-blur-md">
-                  <CardHeader>
-                    <div className="w-24 h-32 rounded-full mx-auto mb-6 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-4 border-primary/20 dark:border-primary/30 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
-                      {expert.name === '임재홍' ? (
-                        <Image 
-                          src="/Images/profile.jpeg" 
-                          alt="임재홍 수석 컨설턴트"
-                          width={96}
-                          height={128}
-                          className="w-full h-full object-cover object-top scale-110 -translate-y-1"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:from-primary/30 group-hover:to-primary/10 transition-all duration-300">
-                          <Users className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" />
-                        </div>
-                      )}
-                    </div>
-                    <CardTitle className="text-xl text-gray-900 dark:text-white transition-all duration-300 group-hover:text-primary dark:group-hover:text-primary">{expert.name}</CardTitle>
-                    <p className="text-primary font-medium mb-4 group-hover:font-semibold transition-all duration-300">{expert.position}</p>
-                  </CardHeader>
-                  <CardContent className="flex-1 flex flex-col">
-                    <p className="text-sm text-muted-foreground dark:text-gray-300 mb-4 font-medium transition-all duration-300 group-hover:text-gray-700 dark:group-hover:text-gray-200">
-                      {expert.specialty}
-                    </p>
-                    <p className="text-muted-foreground dark:text-gray-300 text-sm flex-1 transition-all duration-300 group-hover:text-gray-600 dark:group-hover:text-gray-200 leading-relaxed">
-                      {expert.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* 핵심 가치 섹션 */}
         <section className="py-20 bg-muted/30 dark:bg-muted/20">
@@ -556,6 +480,83 @@ export default function AboutPage() {
                   </Button>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 전문가 팀 섹션 */}
+        <section className="py-20 bg-muted/30 dark:bg-muted/20">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4">
+                <Users className="h-3 w-3 mr-1" />
+                Expert Team
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                중소중견기업 전문가 팀
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                20년 이상의 경험을 보유한 중소중견기업 자산관리 전문가들이 함께합니다
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  name: '임재홍',
+                  position: '대표 컨설턴트 / 수석',
+                  specialty: '중소중견기업 전문, 패밀리오피스 설계',
+                  description: '국내 대기업 및 글로벌 외국계 기업 출신으로 중소중견기업 자산관리 경험과 전문성 보유',
+                },
+                {
+                  name: '장현오',
+                  position: '삼성패밀리오피스',
+                  specialty: '제조업·건설업 전문, 중대재해처벌법 대응',
+                  description: '위험업종 전문 보험설계 및 기업재해보장보험 설계 전문가',
+                },
+                {
+                  name: '박병학',
+                  position: '세무 회계 본부장',
+                  specialty: '가족법인 설립, 승계 설계, MSO 구조화',
+                  description: 'Big4 회계법인 출신으로 중소중견기업 세무 및 승계 전문가',
+                },
+                {
+                  name: '주상미',
+                  position: 'FP (Financial Planner)',
+                  specialty: '투자 포트폴리오 관리, 리스크 헤지',
+                  description: '투자은행 출신으로 중소중견기업 맞춤형 투자전략 설계 전문가',
+                },
+              ].map((expert, index) => (
+                <Card key={index} className="group text-center h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border-white/20 dark:border-gray-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 dark:hover:shadow-xl hover:scale-105 hover:bg-white/80 dark:hover:bg-gray-800/80 hover:backdrop-blur-md">
+                  <CardHeader>
+                    <div className="w-24 h-32 rounded-full mx-auto mb-6 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-4 border-primary/20 dark:border-primary/30 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
+                      {expert.name === '임재홍' ? (
+                        <Image 
+                          src="/Images/profile.jpeg" 
+                          alt="임재홍 수석 컨설턴트"
+                          width={96}
+                          height={128}
+                          className="w-full h-full object-cover object-top scale-110 -translate-y-1"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:from-primary/30 group-hover:to-primary/10 transition-all duration-300">
+                          <Users className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" />
+                        </div>
+                      )}
+                    </div>
+                    <CardTitle className="text-xl text-gray-900 dark:text-white transition-all duration-300 group-hover:text-primary dark:group-hover:text-primary">{expert.name}</CardTitle>
+                    <p className="text-primary font-medium mb-4 group-hover:font-semibold transition-all duration-300">{expert.position}</p>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex flex-col">
+                    <p className="text-sm text-muted-foreground dark:text-gray-300 mb-4 font-medium transition-all duration-300 group-hover:text-gray-700 dark:group-hover:text-gray-200">
+                      {expert.specialty}
+                    </p>
+                    <p className="text-muted-foreground dark:text-gray-300 text-sm flex-1 transition-all duration-300 group-hover:text-gray-600 dark:group-hover:text-gray-200 leading-relaxed">
+                      {expert.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
