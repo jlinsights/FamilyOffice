@@ -151,7 +151,7 @@ export default async function BlogPostPage({
                       dangerouslySetInnerHTML={{
                         __html: post.content.replace(/\n/g, '<br/>'),
                       }}
-                      className="blog-content text-foreground"
+                      className="blog-content text-foreground max-h-[600px] md:max-h-[700px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800"
                     />
                   </div>
                 </CardContent>

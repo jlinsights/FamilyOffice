@@ -307,7 +307,7 @@ export default function WeeklyBriefPage() {
                     className="block"
                   >
                     <Button variant="outline" size="sm" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                      newsletter.familyoffices.vip에서 읽기
+                      열어보기
                       <ArrowRight className="ml-2 h-3 w-3" />
                     </Button>
                   </Link>
