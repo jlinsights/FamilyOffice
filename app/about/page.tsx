@@ -315,7 +315,7 @@ export default function AboutPage() {
                 Core Values
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4 mt-4">
-                FamilyOffice S의 <span className="text-primary">핵심 가치</span>
+                <span className="text-primary">핵심 가치</span>
               </h2>
             </div>
 
