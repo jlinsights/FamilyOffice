@@ -80,184 +80,178 @@ export const blogPosts: Record<string, BlogPost> = {
     id: 'family-office-basics-guide',
     title: '🏰 더 이상 "남의 이야기"가 아니다! 중견기업 CEO를 위한 패밀리오피스 완전 정복',
     excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
-    content: `# 🏰 더 이상 "남의 이야기"가 아니다! 중견기업 CEO를 위한 패밀리오피스 완전 정복
-
-## 💡 들어가며: "자식에게는 회사가 아닌 행복을 물려주고 싶다"
-
-최근 한 중견기업 CEO께서 하신 이 말씀이 깊은 울림을 주었습니다. **과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산**되고 있는 이유가 바로 여기에 있습니다.
-
-단순히 부(富)를 물려주는 것이 아니라, **대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 것** - 이것이 바로 현대적 패밀리오피스의 진정한 의미입니다.
-
----
-
-## 🤔 패밀리오피스, 왜 지금 다시 주목받고 있을까요?
-
-### **기존 방식의 한계를 느끼셨나요?**
-
-대표님, 혹시 이런 경험 있으시지 않나요?
-- **자산 관리는 은행 PB에게**
-- **세무는 세무법인에**  
-- **법률 자문은 로펌에**
-
-각 분야 전문가들이 모여도 정작 **대표님 가문 전체의 큰 그림을 봐주는 곳은 없다**는 아쉬움. 많은 분들이 공감하는 지점입니다.
-
-### **패밀리오피스 = 가문의 최고재무책임자(CFO)**
-
-패밀리오피스는 개별 금융 상품 추천을 넘어, **가문의 자산을 통합적으로 관리**하고, 가업승계와 상속, 세금 문제, 법률 리스크까지 아우르는 **"가문의 최고재무책임자(CFO)" 역할**을 수행합니다.
-
----
-
-## 📊 2025년 패밀리오피스 시장 트렌드
-
-### **멀티 패밀리오피스(MFO)의 부상**
-
-**과거**: 한 가문만을 위한 "싱글 패밀리오피스(SFO)"
-- 설립·유지 비용: 수십억 원
-- 대상: 일부 대기업 오너 가문
-
-**현재**: 여러 가문이 공동 이용하는 "멀티 패밀리오피스(MFO)"
-- 합리적인 비용 구조
-- 중견기업 CEO, IT/바이오 창업 성공자들의 적극적 진입
-
-### **2025년 주요 지표**
-- **국내 패밀리오피스 시장 규모**: 약 70조 원 돌파 예상
-- **MFO 성장률**: 연평균 15% 이상 성장 전망
-- **관심 분야 변화**: 가업승계(35%) → 글로벌 대체투자(40%)로 이동
-
----
-
-## 🎯 우리 회사에 맞는 패밀리오피스 시작하기
-
-### **패밀리오피스의 핵심 기능 5가지**
-
-**1️⃣ 통합 자산관리**
-- 개인 자산, 법인 자산, 부동산, 해외 투자 등 전체 포트폴리오 관리
-- 실시간 자산 현황 분석 및 리스크 시뮬레이션
-
-**2️⃣ 가업승계 설계**
-- 상속세 최적화 전략 수립
-- 세대생략증여, 공익법인 설립 등 통합 솔루션
-- 2세, 3세 경영 참여 및 교육 계획
-
-**3️⃣ 세무 전략**
-- 개인과 법인의 세무 리스크 통합 점검
-- 가업상속공제 등 제도 활용 전략
-- 국제 조세 최적화
-
-**4️⃣ 투자 다각화**
-- 글로벌 대체투자 포트폴리오 구성
-- ESG 투자 및 임팩트 투자
-- 부동산, 프라이빗 에쿼티 등 전문 투자
-
-**5️⃣ 사회공헌·거버넌스**
-- 가문의 가치와 철학 정립
-- 사회공헌 활동 기획·실행
-- 가족 헌법(家憲) 수립
-
----
-
-## ⏰ 지금 바로 시작하는 3단계 액션 플랜
-
-### **STEP 1: 3분 자가진단**
-
-**✅ 가족 회의 개최**
-- 가문의 자산 현황과 미래 비전에 대해 가족 구성원들과 공식적인 대화 시작
-
-**✅ 자산 지도 그리기**  
-- 개인 자산, 법인 자산, 부동산, 금융 투자, 해외 자산 등을 한 장의 표로 정리
-
-**✅ 전문가 인터뷰**
-- 은행 PB, 세무사, 변호사가 아닌 "패밀리오피스 전문가"와 만남
-
-### **STEP 2: 실무 체크리스트**
-
-□ **우리 가문의 "가헌(家憲)"이 있는가?**  
-□ **비상장주식 가치평가를 정기적으로 하고 있는가?**  
-□ **2세, 3세의 경영 참여 및 교육 계획이 수립되어 있는가?**  
-□ **개인과 법인의 세무 리스크를 통합적으로 점검했는가?**
-
-### **STEP 3: 전문가 컨설팅**
-
-패밀리오피스는 가문마다 다른 맞춤형 솔루션이 필요합니다. 표준화된 상품이 아닌, **우리 가문만의 고유한 설계**가 핵심입니다.
-
----
-
-## 🌟 실제 성공 사례: K대표님의 변화
-
-### **Before: 조각난 퍼즐 같은 고민들**
-- **상황**: 경기도 소재 2대째 제조업 운영
-- **고민**: 5년 내 자녀 가업승계 계획이지만 상속세 재원 마련 문제
-- **문제**: 각기 다른 금융사, 세무법인의 단편적 조언으로 혼란 가중
-
-### **Solution: MFO 모델을 통한 통합 솔루션**
-1. **법인 지배구조 개편**
-2. **세대생략증여 전략**
-3. **공익법인 설립**
-4. **승계 시뮬레이션을 통한 최적 실행 시점 도출**
-
-### **After: 명확한 로드맵과 안정적 미래**
-- **결과 1**: 예상 상속세 부담 **약 40% 절감**
-- **결과 2**: 2세 경영권 분쟁 리스크 **사전 차단**
-- **결과 3**: 승계 이후 자산운용·사회공헌 활동 계획 수립 완료
-
-**💬 클라이언트 후기**: "조각난 퍼즐이 맞춰지는 기분이었습니다. 나무가 아닌 숲을 보게 되니, 지난 10년간의 고민이 해결되었습니다."
-
----
-
-## 💎 디지털 패밀리오피스의 혁신
-
-### **기술이 가져온 변화**
-
-**실시간 통합 대시보드**
-- 전 세계 분산된 자산의 실시간 모니터링
-- 리스크 지표 및 수익률 분석
-- 시나리오별 시뮬레이션
-
-**AI 기반 의사결정 지원**
-- 시장 상황 분석 및 투자 기회 발굴
-- 세무 최적화 자동 알고리즘
-- 승계 타이밍 최적화
-
-**투명한 거버넌스**
-- 가족 구성원 간 정보 공유 시스템
-- 의사결정 과정 투명화
-- 차세대 교육 프로그램 통합
-
----
-
-## 🔮 주목할 이슈: 2025년 세법개정의 영향
-
-### **가업상속공제 제도 개편**
-- 현행 제도의 까다로운 요건 완화 예상
-- 사전 준비 없이는 혜택 받기 어려운 구조 유지
-- **패밀리오피스를 통한 장기적 준비 전략의 중요성 부각**
-
-### **금융투자소득세 시행**
-- 대주주 및 고액 투자자 세부담 증가 예상
-- 글로벌 투자 포트폴리오 재구성 필요
-- **세무 전략과 투자 전략의 통합적 접근 필수**
-
----
-
-## 🚀 결론: 선택이 아닌 필수의 시대
-
-패밀리오피스는 더 이상 **"그들만의 리그"**가 아닙니다. 복잡한 가업승계, 세무 리스크, 투자 다각화 등 **기업과 가문의 문제를 통합적으로 관리할 수 있는 가장 효과적인 해결책**으로 부상했습니다.
-
-### **지금 시작해야 하는 이유**
-✅ **정부 세법개정과 맞물린 절호의 타이밍**  
-✅ **MFO 모델로 합리적 비용 구조 실현**  
-✅ **디지털 기술로 더욱 정교하고 투명한 관리**  
-✅ **차세대 교육과 사회공헌까지 통합 설계**
-
-### **패밀리오피스의 진정한 가치**
-단순히 부(富)를 이전하는 것을 넘어, **대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 것** - 이것이 현대적 패밀리오피스의 본질입니다.
-
-**가문의 지속가능성**을 목표로 하는 통합 솔루션, 이제는 선택이 아닌 **필수**입니다.
-
----
-
-**💬 전문가 상담 및 문의**  
-패밀리오피스 도입과 가업승계 전략에 대한 더 자세한 정보나 개별 상담을 원하시는 분들은 댓글이나 메시지로 연락주세요. 대표님 가문만의 맞춤형 솔루션을 함께 설계해드리겠습니다! 🏰`,
+    content: `<div style="font-family: 'Noto Sans KR', sans-serif; line-height: 1.7; max-width: 600px; margin: 0 auto; font-size: 16px; color: #333; background-color: #ffffff;">
+    <div style="background: linear-gradient(135deg, #1e3a8a, #3730a3); color: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; text-align: center;">
+        <h1 style="margin: 0 0 10px; font-size: 20px; font-weight: 700;">🏰 더 이상 "남의 이야기"가 아니다!</h1>
+        <p style="margin: 0; font-size: 14px; opacity: 0.9; line-height: 1.5;">과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보겠습니다.</p>
+    </div>
+    
+    <div style="background-color: #f8f9ff; border-left: 4px solid #4f46e5; padding: 20px; border-radius: 0 8px 8px 0; margin-bottom: 25px;">
+        <h2 style="color: #4f46e5; margin: 0 0 15px; font-size: 18px; font-weight: 600;">🔥 이번 주 핵심 인사이트</h2>
+        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+            <strong style="color: #1e293b; font-size: 16px; display: block; margin-bottom: 8px;">"그들만의 리그"였던 패밀리오피스, 이제는 중견기업의 필수 전략입니다.</strong>
+            <ul style="margin: 0; padding-left: 20px; color: #4a5568; font-size: 14px;">
+                <li style="margin-bottom: 6px;"><strong>현상</strong>: 패밀리오피스가 중견기업 및 성공한 창업가 사이에서 빠르게 확산되고 있습니다.</li>
+                <li style="margin-bottom: 6px;"><strong>영향</strong>: 복잡한 가업승계, 세무 리스크, 투자 다각화 등 기업과 가문의 문제를 통합적으로 관리하는 효과적인 해결책으로 부상하고 있습니다.</li>
+                <li style="margin-bottom: 6px;"><strong>액션</strong>: 더 이상 "남의 이야기"가 아닙니다. 우리 회사와 가문에 맞는 패밀리오피스 모델을 진지하게 고민하고 준비를 시작해야 할 때입니다.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div style="padding: 10px;">
+        <h2 style="font-size: 20px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">💡 들어가며: "자식에게는 회사가 아닌 행복을 물려주고 싶다"</h2>
+        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">최근 한 중견기업 CEO께서 하신 이 말씀이 깊은 울림을 주었습니다. 과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있는 이유가 바로 여기에 있습니다.</p>
+        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">단순히 부(富)를 물려주는 것이 아니라, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 것 - 이것이 바로 현대적 패밀리오피스의 진정한 의미입니다.</p>
+    </div>
+    
+    <div style="padding: 10px;">
+        <h2 style="font-size: 20px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">🤔 패밀리오피스, 왜 지금 다시 주목받고 있습니까?</h2>
+        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">대표님, 혹시 "자산 관리는 은행 PB에게, 세무는 세무법인에, 법률 자문은 로펌에" 맡기는 방식에 한계를 느끼신 적 없으신가요? 각 분야 전문가들이 모여도 정작 대표님 가문 전체의 큰 그림을 봐주는 곳은 없다는 아쉬움, 많은 분들이 공감하는 지점입니다.</p>
+        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">패밀리오피스는 개별 금융 상품 추천을 넘어, 가문의 자산을 통합적으로 관리하고, 가업승계와 상속, 세금 문제, 법률 리스크까지 아우르는 "가문의 최고재무책임자(CFO)" 역할을 수행합니다.</p>
+        
+        <div style="background-color: #f8f9ff; border-left: 4px solid #4f46e5; padding: 15px; margin: 25px 0; border-radius: 0 8px 8px 0;">
+            <strong style="color: #4f46e5; font-size: 15px; display: block; margin-bottom: 5px;">💡 패밀리오피스의 핵심 기능</strong>
+            <p style="margin: 0; font-size: 14px; color: #4a5568;">단순 자산관리를 넘어 가문의 "지속가능성"을 목표로 투자, 세무, 법률, 승계, 사회공헌까지 모든 것을 관리하는 종합 솔루션입니다.</p>
+        </div>
+    </div>
+    
+    <div style="background-color: #f0f9ff; border: 1px solid #0ea5e9; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <h3 style="color: #0c4a6e; margin: 0 0 15px; font-size: 16px; font-weight: 600;">📊 2025년 패밀리오피스 시장 트렌드</h3>
+        <div style="margin-bottom: 15px;">
+            <h4 style="color: #1e293b; margin: 0 0 8px; font-size: 15px;">멀티 패밀리오피스(MFO)의 부상과 디지털 전환</h4>
+            <p style="margin: 0 0 12px; color: #475569; font-size: 14px; line-height: 1.6;">과거에는 한 가문만을 위한 "싱글 패밀리오피스(SFO)"가 일반적이었습니다. 하지만 수십억 원에 달하는 높은 설립 및 유지 비용 때문에 일부 대기업 오너 가문의 전유물이었습니다. 최근에는 여러 가문이 하나의 패밀리오피스를 공동으로 이용하는 "멀티 패밀리오피스(MFO)"가 합리적인 대안으로 떠오르며, 중견기업 CEO와 IT/바이오 창업 성공자들의 시장 진입을 이끌고 있습니다.</p>
+        </div>
+        
+        <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 12px;">
+            <strong style="color: #0c4a6e; font-size: 14px;">📈 주요 지표 (2025년 전망)</strong>
+            <ul style="margin: 8px 0 0; padding-left: 18px; color: #64748b; font-size: 13px;">
+                <li style="margin-bottom: 4px;">국내 패밀리오피스 시장 규모: 약 70조 원 돌파 예상</li>
+                <li style="margin-bottom: 4px;">멀티 패밀리오피스(MFO) 성장률: 연평균 15% 이상 성장 전망</li>
+                <li style="margin-bottom: 4px;">주요 관심 분야: 가업승계(35%) → 글로벌 대체투자(40%)로 관심 이동 예상</li>
+            </ul>
+        </div>
+        
+        <div style="background: white; padding: 15px; border-radius: 6px;">
+            <strong style="color: #0c4a6e; font-size: 14px;">💡 FamilyOffice S 인사이트</strong>
+            <p style="margin: 8px 0 0; color: #64748b; font-size: 13px; line-height: 1.5;">정부의 가업상속공제 제도 개편 논의와 맞물려, 세대교체를 앞둔 중견기업의 패밀리오피스 도입은 선택이 아닌 필수가 될 것으로 전망됩니다. 특히 IT 기술을 접목한 "디지털 패밀리오피스"는 실시간 자산 현황 분석, 리스크 시뮬레이션 등을 통해 훨씬 더 정교하고 투명한 의사결정을 지원하게 될 것입니다.</p>
+        </div>
+    </div>
+    
+    <div style="padding: 10px;">
+        <h2 style="font-size: 20px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">🎯 우리 회사에 맞는 패밀리오피스, 어떻게 시작할까요?</h2>
+        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">패밀리오피스는 거창한 것이 아닙니다. 가문의 자산과 철학을 다음 세대로 온전히 물려주기 위한 "시스템"을 만드는 과정입니다. 처음부터 모든 것을 갖춘 완벽한 조직을 만들기보다, 핵심 기능부터 하나씩 갖추어 나가는 단계적 접근이 중요합니다.</p>
+    </div>
+    
+    <div style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 20px; border-radius: 12px; margin: 25px 0;">
+        <h3 style="margin: 0 0 15px; font-size: 16px; font-weight: 600;">🎯 이번 주 실무 팁</h3>
+        <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+            <strong style="font-size: 14px; display: block; margin-bottom: 8px;">⏰ 3분 액션: 패밀리오피스 준비 1단계</strong>
+            <ol style="margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.5;">
+                <li style="margin-bottom: 4px;"><strong>가족 회의 개최:</strong> 가문의 자산 현황과 미래 비전에 대해 가족 구성원들과 처음으로 공식적인 대화를 나눠보세요.</li>
+                <li style="margin-bottom: 4px;"><strong>자산 지도 그리기:</strong> 개인 자산, 법인 자산, 부동산, 금융 투자, 해외 자산 등을 한 장의 표로 정리하여 전체 자산 현황을 파악합니다.</li>
+                <li style="margin-bottom: 4px;"><strong>전문가 인터뷰:</strong> 은행 PB, 세무사, 변호사가 아닌 "패밀리오피스 전문가"를 만나 우리 가문에 필요한 서비스가 무엇인지 진단받아 보세요.</li>
+            </ol>
+        </div>
+        <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px;">
+            <strong style="font-size: 14px; display: block; margin-bottom: 8px;">🔧 실무 체크리스트</strong>
+            <ul style="margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.5; list-style: none;">
+                <li style="margin-bottom: 4px;">□ 우리 가문의 "가헌(家憲)"이 있는가?</li>
+                <li style="margin-bottom: 4px;">□ 비상장주식 가치평가를 정기적으로 하고 있는가?</li>
+                <li style="margin-bottom: 4px;">□ 2세, 3세의 경영 참여 및 교육 계획이 수립되어 있는가?</li>
+                <li style="margin-bottom: 4px;">□ 개인과 법인의 세무 리스크를 통합적으로 점검했는가?</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div style="background-color: #f0fdf4; border-left: 4px solid #22c55e; padding: 20px; border-radius: 0 8px 8px 0; margin: 25px 0;">
+        <h3 style="color: #15803d; margin: 0 0 15px; font-size: 16px; font-weight: 600;">📈 성공 사례 스포트라이트</h3>
+        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+            <strong style="color: #374151; font-size: 14px;">배경:</strong>
+            <p style="margin: 8px 0 0; color: #6b7280; font-size: 13px; line-height: 1.6;">경기도 소재 2대째 제조업을 운영 중인 K대표님. 5년 내 자녀에게 가업을 승계할 계획이었으나, 상속세 재원 마련과 비상장주식 증여 문제로 고민이 깊었습니다. 각기 다른 금융사와 세무법인에서 받은 단편적인 조언들로 혼란만 가중된 상태였습니다.</p>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+            <strong style="color: #374151; font-size: 14px;">전략:</strong>
+            <p style="margin: 8px 0 0; color: #6b7280; font-size: 13px; line-height: 1.6;">FamilyOffice S는 MFO 모델을 통해 가업승계 로드맵을 재설계했습니다. 법인 지배구조 개편, 세대생략증여, 공익법인 설립을 결합한 통합 솔루션을 제시하고, 승계 시뮬레이션을 통해 최적의 실행 시점을 도출했습니다.</p>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+            <strong style="color: #374151; font-size: 14px;">결과:</strong>
+            <p style="margin: 8px 0 0; color: #6b7280; font-size: 13px; line-height: 1.6;">예상 상속세 부담을 약 40% 절감했으며, 2세 경영권 분쟁 리스크를 사전에 차단했습니다. 현재는 승계 이후의 자산운용과 사회공헌 활동 계획을 수립하는 2단계 컨설팅을 진행 중입니다.</p>
+        </div>
+        <div style="background: #e6fffa; padding: 12px; border-radius: 6px; border-left: 3px solid #22c55e;">
+            <p style="margin: 0; font-size: 13px; color: #065f46; font-style: italic;">💬 <strong>클라이언트 후기</strong>: "조각난 퍼즐이 맞춰지는 기분이었습니다. 나무가 아닌 숲을 보게 되니, 지난 10년간의 고민이 해결되었습니다."</p>
+        </div>
+    </div>
+    
+    <div style="background-color: #fffbeb; border: 1px solid #f59e0b; padding: 18px; border-radius: 8px; margin: 25px 0;">
+        <h3 style="color: #92400e; margin: 0 0 12px; font-size: 16px; font-weight: 600;">🔮 다음 주 주목할 이슈</h3>
+        <p style="margin: 0 0 12px; font-size: 14px; color: #78350f; line-height: 1.6;"><strong>2025년 세법개정안 후속 시행령 발표</strong>: 가업상속공제, 금융투자소득세 등 패밀리오피스 운영에 직접적인 영향을 미칠 세법 시행령 개정안이 발표될 예정입니다. FamilyOffice S에서 가장 빠르고 정확하게 분석하여 다음 뉴스레터에서 상세히 다루겠습니다.</p>
+        <div style="background-color: #fffbeb; border: 1px solid #f59e0b; padding: 12px; border-radius: 6px; margin: 10px 0;">
+            <p style="margin: 0; font-size: 12px; color: #92400e;">⚠ 본 전망은 현재 시점 분석으로, 실제 상황은 달라질 수 있습니다.</p>
+        </div>
+    </div>
+    
+    <div style="background-color: #fafafa; padding: 20px; border-radius: 10px; margin: 25px 0; border: 1px solid #e0e0e0;">
+        <h3 style="color: #2d3748; margin: 0 0 15px; font-size: 16px; font-weight: 600;">💡 이번 주 추천</h3>
+        <div style="margin-bottom: 15px;">
+            <h4 style="color: #4a5568; margin: 0 0 8px; font-size: 14px; font-weight: 600;">📚 추천 읽을거리</h4>
+            <div style="background: white; padding: 12px; border-radius: 6px; border-left: 3px solid #4f46e5;">
+                <strong style="color: #4f46e5; font-size: 13px;">블로그:</strong> <span style="color: #4a5568; font-size: 13px;">"성공적인 가업승계를 위한 3가지 황금열쇠" - 패밀리오피스가 왜 승계의 핵심인지 구체적인 사례를 통해 확인해 보세요.</span>
+            </div>
+        </div>
+        <div>
+            <h4 style="color: #4a5568; margin: 0 0 8px; font-size: 14px; font-weight: 600;">🎯 이번 주 이벤트</h4>
+            <div style="background: white; padding: 12px; border-radius: 6px; border-left: 3px solid #059669;">
+                <p style="margin: 0; color: #4a5568; font-size: 13px; line-height: 1.5;">
+                    <strong style="color: #059669;">세미나:</strong> [중견기업 CEO를 위한 디지털 패밀리오피스 전략] - 9월 10일(화) 오후 2시, 소수 정예로 진행되는 프라이빗 세미나에 대표님을 초대합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div style="background: linear-gradient(135deg, #1e3a8a, #3730a3); color: white; padding: 30px 20px; border-radius: 16px; margin: 30px 0; text-align: center;">
+        <h3 style="margin: 0 0 15px; font-size: 18px; font-weight: 700;">📞 전문가와 연결</h3>
+        <p style="margin: 0 0 20px; font-size: 14px; opacity: 0.9; line-height: 1.5;">가업승계, 자산관리, 세무 문제 등 복잡한 고민의 해답을 찾고 계신가요? 지금 바로 FamilyOffice S의 전문가와 상의하십시오.</p>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+            <a href="https://seminar.familyoffices.vip" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">🎯 세미나 참석 신청</a>
+            <a href="https://cal.com/familyoffice" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: white; color: #1e3a8a; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">📅 무료 상담 예약</a>
+            <a href="http://pf.kakao.com/_gsxkxdG/chat" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: #fee500; color: #3c1e1e; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">💬 카카오 간편 상담</a>
+        </div>
+        <p style="margin: 0; font-size: 12px; opacity: 0.7;">📞 전화상담: ☎ 0502-5550-8700 | 평일 10:00-18:00</p>
+    </div>
+    
+    <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <h3 style="color: #475569; margin: 0 0 12px; font-size: 16px; font-weight: 600;">💬 P.S.</h3>
+        <p style="margin: 0 0 15px; color: #64748b; font-size: 14px; line-height: 1.6;">얼마 전 한 대표님께서 "자식에게는 회사가 아닌 '행복'을 물려주고 싶다"는 말씀을 하셨습니다. 저희가 하는 일은 단순히 부(富)를 이전하는 것을 넘어, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 것이라 믿습니다. 항상 그 믿음 잃지 않고 최선을 다하겠습니다.</p>
+        <div style="background: white; padding: 15px; border-radius: 6px; text-align: center;">
+            <strong style="color: #4a5568; font-size: 14px;">📝 FamilyOffice S 연락하기</strong>
+            <p style="margin: 8px 0 0; color: #64748b; font-size: 13px;">이번 뉴스레터는 어떠셨나요? <a href="https://familyoffices.vip/contact" style="color: #4f46e5; text-decoration: none;">소중한 의견을 남겨주세요.</a></p>
+        </div>
+    </div>
+    
+    <div style="background-color: #1e293b; color: white; padding: 25px 20px; border-radius: 12px; margin: 30px 0; text-align: center;">
+        <div style="margin-bottom: 15px;">
+            <strong style="font-size: 16px;">FamilyOffice S 드림</strong>
+        </div>
+        <div style="margin-bottom: 10px; font-size: 13px; opacity: 0.8;">📞 ☎ 0502-5550-8700 | 📧 contact@familyoffices.vip</div>
+        <div style="margin-bottom: 15px; font-size: 13px; opacity: 0.8;">
+            <a href="https://familyoffices.vip" style="color: #60a5fa; text-decoration: none;">웹사이트</a> | <a href="https://blog.naver.com/familyoffices" style="color: #60a5fa; text-decoration: none;">블로그</a>
+        </div>
+        <div style="font-size: 12px; opacity: 0.6;">
+            <a href="#" style="color: #94a3b8; text-decoration: none;">구독 취소</a> | <a href="#" style="color: #94a3b8; text-decoration: none;">설정 변경</a>
+        </div>
+    </div>
+    
+    <div style="background-color: #f1f5f9; border: 1px solid #cbd5e1; padding: 18px; border-radius: 8px; margin: 25px 0;">
+        <h4 style="color: #475569; margin: 0 0 10px; font-size: 14px; font-weight: 600;">📋 중요 고지사항</h4>
+        <ul style="margin: 0; padding-left: 18px; color: #64748b; font-size: 12px; line-height: 1.5;">
+            <li style="margin-bottom: 4px;">본 자료는 일반적인 정보 제공을 목적으로 작성되었으며, 개별 상황에 따라 다를 수 있습니다.</li>
+            <li style="margin-bottom: 4px;">투자 결정은 개인의 판단과 책임하에 이루어져야 하며, 투자 전 전문가와 상담하시기 바랍니다.</li>
+            <li style="margin-bottom: 4px;">세법 및 관련 규정은 변경될 수 있으므로 최신 정보를 확인하시기 바랍니다.</li>
+            <li style="margin-bottom: 4px;">예측 및 전망 정보는 현재 시점 분석으로, 향후 정책 변화에 따라 달라질 수 있습니다.</li>
+            <li>본 뉴스레터 내용의 활용으로 인한 직간접적 손해에 대해 책임지지 않습니다.</li>
+        </ul>
+    </div>
+</div>`,
     category: '패밀리오피스',
     author: 'FamilyOffice S',
     date: '2025-01-17',
