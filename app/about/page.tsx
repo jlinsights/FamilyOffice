@@ -264,7 +264,7 @@ export default function AboutPage() {
                   name: '임재홍',
                   position: '대표 컨설턴트 / 수석',
                   specialty: '중소중견기업 전문, 패밀리오피스 설계',
-                  description: '대형 금융그룹 출신으로 중소중견기업 자산관리 경험과 전문성 보유',
+                  description: '대기업 및 글로벌 기업 출신으로 중소중견기업 자산관리 경험과 전문성 보유',
                 },
                 {
                   name: '장현오',
@@ -290,7 +290,7 @@ export default function AboutPage() {
                     <div className="w-24 h-24 rounded-full mx-auto mb-6 overflow-hidden bg-gray-100 dark:bg-gray-800">
                       {expert.name === '임재홍' ? (
                         <Image 
-                          src="/images/profile.jpeg" 
+                          src="/Images/profile.jpeg" 
                           alt="임재홍 수석 컨설턴트"
                           width={96}
                           height={96}
