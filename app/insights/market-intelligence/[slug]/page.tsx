@@ -169,13 +169,13 @@ export default async function BlogPostPage({
               <Card className="mt-8 shadow-lg bg-background border-border">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-800">
+                    <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-800">
                       <Image 
                         src="/Images/profile.jpeg" 
                         alt="임재홍 수석 컨설턴트"
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover"
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover object-center"
                         priority
                       />
                     </div>
@@ -187,7 +187,7 @@ export default async function BlogPostPage({
                         대표 컨설턴트 / 수석
                       </p>
                       <p className="text-muted-foreground mb-4">
-                        대기업 및 글로벌 기업 출신으로 중견기업 자산관리 경험과 전문성을 보유하고 있습니다. 
+                        국내 대기업 및 글로벌 외국계 기업 출신으로 중견기업 자산관리 경험과 전문성을 보유하고 있습니다. 
                         패밀리오피스 설계, 가업승계 전략, 세무최적화 등 통합적인 솔루션으로 
                         기업과 가족의 지속가능한 성장을 지원합니다.
                       </p>

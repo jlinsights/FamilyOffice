@@ -264,7 +264,7 @@ export default function AboutPage() {
                   name: '임재홍',
                   position: '대표 컨설턴트 / 수석',
                   specialty: '중소중견기업 전문, 패밀리오피스 설계',
-                  description: '대기업 및 글로벌 기업 출신으로 중소중견기업 자산관리 경험과 전문성 보유',
+                  description: '국내 대기업 및 글로벌 외국계 기업 출신으로 중소중견기업 자산관리 경험과 전문성 보유',
                 },
                 {
                   name: '장현오',
@@ -287,14 +287,14 @@ export default function AboutPage() {
               ].map((expert, index) => (
                 <Card key={index} className="text-center">
                   <CardHeader>
-                    <div className="w-24 h-24 rounded-full mx-auto mb-6 overflow-hidden bg-gray-100 dark:bg-gray-800">
+                    <div className="w-28 h-28 rounded-full mx-auto mb-6 overflow-hidden bg-gray-100 dark:bg-gray-800">
                       {expert.name === '임재홍' ? (
                         <Image 
                           src="/Images/profile.jpeg" 
                           alt="임재홍 수석 컨설턴트"
-                          width={96}
-                          height={96}
-                          className="w-full h-full object-cover"
+                          width={112}
+                          height={112}
+                          className="w-full h-full object-cover object-center"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
