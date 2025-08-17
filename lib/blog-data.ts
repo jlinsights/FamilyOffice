@@ -13,7 +13,7 @@ export const blogCategories: BlogCategory[] = [
     name: '투자전략',
     slug: 'investment-strategy',
     icon: 'TrendingUp',
-    count: 2,
+    count: 3,
     description: '포트폴리오 최적화와 투자 전략 가이드',
   },
   {
@@ -1018,5 +1018,150 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['대체투자', '프라이빗 에쿼티', '헤지펀드', '투자 전략'],
     slug: 'alternative-investment-market-outlook',
     featured: false,
+  },
+
+  'investment-strategy-2025': {
+    id: 'investment-strategy-2025',
+    title: '2025년 투자 전망: CEO를 위한 지정학적 리스크 돌파 전략',
+    excerpt: 'AI, 금리, 지정학적 변수 속에서 대표님의 자산을 지키고 불리는 핵심 인사이트. 2025년 글로벌 경제 환경 변화에 대응하는 포트폴리오 전략을 제시합니다.',
+    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-gray-800 dark:text-gray-200 bg-gradient-to-br from-emerald-50 to-white dark:from-gray-900 dark:to-gray-800 min-h-screen px-5">
+
+<header className="text-center mb-10 py-8 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30 border border-white/50 dark:border-gray-700/50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:bg-white/40 dark:hover:bg-gray-800/40">
+    <h1 className="text-emerald-800 dark:text-emerald-300 text-3xl lg:text-4xl font-bold leading-tight mb-4 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors duration-300">[FamilyOffice S] 2025년 투자 전망: CEO를 위한 지정학적 리스크 돌파 전략</h1>
+    <p className="text-orange-700 dark:text-orange-300 text-lg lg:text-xl leading-relaxed">AI, 금리, 지정학적 변수 속에서 대표님의 자산을 지키고 불리는 핵심 인사이트</p>
+    <div className="mt-5 text-gray-400 dark:text-gray-500 text-sm backdrop-blur-sm bg-white/20 dark:bg-gray-700/20 rounded-lg px-4 py-2 inline-block">
+        작성일: 2025년 8월 18일 | 예상 읽기 시간: 20분 | 카테고리: 투자전략, 글로벌 경제
+    </div>
+</header>
+
+<div className="backdrop-blur-sm bg-gradient-to-br from-emerald-600/90 to-emerald-700/90 dark:from-emerald-800/90 dark:to-emerald-900/90 text-white p-8 rounded-3xl mb-10 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border border-white/20 dark:border-gray-600/20">
+    <h2 className="text-white text-xl font-bold mb-5">📋 Executive Summary</h2>
+    <div className="backdrop-blur-sm bg-white/20 dark:bg-black/30 p-5 rounded-2xl mb-5 hover:bg-white/30 dark:hover:bg-black/40 transition-all duration-300 border border-white/30 dark:border-gray-600/30">
+        <h3 className="text-white text-base font-semibold mb-3">🎯 핵심 포인트 3줄 요약</h3>
+        <ul className="text-white text-sm leading-relaxed space-y-2">
+            <li className="hover:text-yellow-200 transition-colors duration-200">2025년 글로벌 경제는 완만한 성장 속 지정학적 리스크와 무역 갈등이 최고 위험 요인으로 부상하며, 자산 방어 전략이 중요해질 것으로 전망됩니다.</li>
+            <li className="hover:text-yellow-200 transition-colors duration-200">AI·반도체 섹터의 구조적 성장은 지속될 것으로 예상되며, 금리 인하 사이클 진입은 채권 및 고정수익 자산의 매력도를 높일 가능성이 높습니다.</li>
+            <li className="hover:text-yellow-200 transition-colors duration-200">성공적인 자산 관리를 위해서는 미국 중심의 포트폴리오를 다변화하고, 사모펀드·부동산 등 대체 투자를 활용한 중장기적 방어 및 성장 전략이 필요합니다.</li>
+        </ul>
+    </div>
+    <div className="backdrop-blur-sm bg-white/20 dark:bg-black/30 p-5 rounded-2xl hover:bg-white/30 dark:hover:bg-black/40 transition-all duration-300 border border-white/30 dark:border-gray-600/30">
+        <h3 className="text-white text-base font-semibold mb-3">📑 목차</h3>
+        <ol className="text-white text-sm leading-relaxed space-y-1.5 list-decimal list-inside">
+            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">현황 분석: 2025년 글로벌 경제 및 투자 환경</li>
+            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">문제점 진단: CEO가 직면한 핵심 리스크</li>
+            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">실무 가이드: 자산별 투자 전략 상세 분석</li>
+            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">사례 연구: 리스크 대응 포트폴리오 재편 성공 사례</li>
+            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">미래 전망 및 실행 액션 플랜</li>
+        </ol>
+    </div>
+</div>
+
+<section className="mb-12">
+    <h2 className="text-gray-800 dark:text-gray-200 text-2xl font-bold border-b-2 border-gray-200 dark:border-gray-700 pb-2.5 mb-6">📊 현황 분석: 2025년 글로벌 경제 및 투자 환경</h2>
+    
+    <div className="backdrop-blur-sm bg-emerald-50/80 dark:bg-emerald-900/30 border border-emerald-500/50 dark:border-emerald-600/50 p-6 rounded-2xl mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-emerald-50/90 dark:hover:bg-emerald-900/40 hover:scale-[1.01]">
+        <h3 className="text-emerald-800 dark:text-emerald-300 text-lg font-semibold mb-4">📈 글로벌 경제 데이터</h3>
+        <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed mb-4">2025년 글로벌 경제는 여러 도전 과제 속에서 완만한 성장세를 이어갈 것으로 보입니다. 주요 국제기구 및 금융기관의 데이터를 종합해 보면, 대표님께서 주목하셔야 할 몇 가지 핵심 지표가 있습니다.</p>
+        
+        <div className="backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 p-5 rounded-xl border-l-4 border-emerald-500 hover:bg-white/90 dark:hover:bg-gray-800/90 transition-all duration-300 hover:shadow-md border border-white/50 dark:border-gray-700/50">
+            <h4 className="text-emerald-700 dark:text-emerald-300 text-base font-semibold mb-2.5">주요 경제 전망 (Green & Yellow Zone)</h4>
+            <ul className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed space-y-2">
+                <li className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200">✅ <strong>세계 경제성장률 (확정 정보)</strong>: IMF는 2025년 전 세계 경제성장률을 3.0%로 전망했으며, 2026년에는 3.1%로 소폭 개선될 것으로 발표했습니다.</li>
+                <li className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200">⚠ <strong>주요국 성장률 (예상 정보)</strong>: 도이치뱅크 자산운용에 따르면, 중국은 4.2% 성장률이 예상되나 과거 대비 둔화된 수치이며, 미국은 1.7%로 2024년 대비 성장세가 크게 둔화될 것으로 전망됩니다.</li>
+                <li className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200">⚠ <strong>한국 경제성장률 (예상 정보)</strong>: KDI 등 국내 주요 연구기관들은 2025년 한국 경제가 내수 부진과 수출 증가세 둔화로 1.6% 성장에 그칠 것으로 예상하고 있습니다.</li>
+            </ul>
+        </div>
+        <div className="backdrop-blur-sm bg-amber-50/80 dark:bg-amber-900/30 border border-amber-400/50 dark:border-amber-600/50 p-3 rounded-xl my-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-amber-50/90 dark:hover:bg-amber-900/40">
+            <p className="text-amber-800 dark:text-amber-200 text-xs m-0">
+                ⚠ <span className="font-semibold">정보 안내</span>: 본 내용은 현재까지 공개된 정보를 바탕으로 한 전망으로, 
+                최종 확정 전까지 변경될 수 있습니다. 실제 의사결정 시 최신 공식 정보를 반드시 확인하시기 바랍니다.
+            </p>
+        </div>
+    </div>
+    
+    <div className="backdrop-blur-sm bg-orange-50/80 dark:bg-orange-900/30 border border-orange-500/50 dark:border-orange-600/50 p-6 rounded-2xl mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50/90 dark:hover:bg-orange-900/40 hover:scale-[1.01]">
+        <h3 className="text-orange-800 dark:text-orange-300 text-lg font-semibold mb-4">🏛 통화 정책 동향: 금리 인하 사이클 진입</h3>
+        <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">글로벌 인플레이션이 점진적으로 안정화되면서 각국 중앙은행의 통화정책 또한 완화 기조로 전환될 가능성이 높습니다. OECD는 2025년 OECD 전체 인플레이션을 4.2%로 예상하며 점진적 안정화를 전망했습니다. 이에 따라, 한국은행과 미국 연준 모두 단계적인 금리 인하를 단행할 것으로 예상되며, 이는 시장 유동성 증가로 이어져 자산 시장에 중요한 변수가 될 것입니다.</p>
+        <div className="backdrop-blur-sm bg-amber-50/80 dark:bg-amber-900/30 border border-amber-400/50 dark:border-amber-600/50 p-3 rounded-xl my-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-amber-50/90 dark:hover:bg-amber-900/40">
+            <p className="text-amber-800 dark:text-amber-200 text-xs m-0">
+                ⚠ <span className="font-semibold">정보 안내</span>: 본 내용은 현재까지 공개된 정보를 바탕으로 한 전망으로, 
+                최종 확정 전까지 변경될 수 있습니다. 실제 의사결정 시 최신 공식 정보를 반드시 확인하시기 바랍니다.
+            </p>
+        </div>
+    </div>
+    
+    <div className="backdrop-blur-sm bg-emerald-50/80 dark:bg-emerald-900/30 border border-emerald-500/50 dark:border-emerald-600/50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-emerald-50/90 dark:hover:bg-emerald-900/40 hover:scale-[1.01]">
+        <h3 className="text-emerald-800 dark:text-emerald-300 text-lg font-semibold mb-4">🏢 패밀리오피스 동향: 대체투자 비중 확대</h3>
+        <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">✅ BNY Mellon의 보고서에 따르면, 전 세계 패밀리오피스들은 불확실성에 대응하기 위해 대체투자 비중을 꾸준히 늘리고 있습니다. 포트폴리오에서 사모펀드가 28%로 가장 큰 비중을 차지했으며, 부동산(18%)과 벤처캐피털 투자가 그 뒤를 잇고 있습니다. 이는 전통 자산을 넘어 안정성과 장기적 고수익을 동시에 추구하려는 움직임으로 해석됩니다.</p>
+    </div>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-gray-800 dark:text-gray-200 text-2xl font-bold border-b-2 border-gray-200 dark:border-gray-700 pb-2.5 mb-6">🔍 문제점 진단: CEO가 직면한 핵심 리스크</h2>
+    
+    <div className="backdrop-blur-sm bg-red-50/80 dark:bg-red-900/30 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-r-2xl mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-red-50/90 dark:hover:bg-red-900/40 hover:scale-[1.01] border border-red-200/50 dark:border-red-700/50">
+        <h3 className="text-red-600 dark:text-red-400 text-lg font-semibold mb-4">⚠ 현재 이슈: 심화되는 지정학적 리스크</h3>
+        <p className="text-red-800 dark:text-red-300 text-base leading-relaxed">✅ UBS의 2025년 글로벌 패밀리오피스 보고서에 따르면, 응답자들이 꼽은 가장 큰 투자 리스크는 '무역전쟁'과 같은 지정학적 갈등이었습니다. 미국의 관세 정책 변화와 각국의 공급망 재편 움직임은 대표님 기업의 실적뿐만 아니라 개인 자산 포트폴리오에도 직접적인 영향을 미칠 수 있는 중대한 변수입니다.</p>
+    </div>
+    
+    <div className="backdrop-blur-sm bg-amber-50/80 dark:bg-amber-900/30 border-l-4 border-amber-500 dark:border-amber-400 p-6 rounded-r-2xl mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-amber-50/90 dark:hover:bg-amber-900/40 hover:scale-[1.01] border border-amber-200/50 dark:border-amber-700/50">
+        <h3 className="text-amber-600 dark:text-amber-400 text-lg font-semibold mb-4">🚨 위험 요소: 특정 자산 및 지역 편중의 함정</h3>
+        <p className="text-amber-800 dark:text-amber-300 text-base leading-relaxed">그동안 높은 수익률을 안겨주었던 미국 기술주 중심의 포트폴리오는 2025년에도 유효할 수 있으나, 그 변동성은 더욱 커질 것으로 예상됩니다. 특정 자산, 특정 지역에 대한 과도한 집중은 예상치 못한 외부 충격에 포트폴리오 전체를 위험에 빠뜨릴 수 있는 잠재적 위험 요소입니다.</p>
+    </div>
+    
+    <div className="backdrop-blur-sm bg-emerald-50/80 dark:bg-emerald-900/30 border-l-4 border-emerald-500 dark:border-emerald-400 p-6 rounded-r-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-emerald-50/90 dark:hover:bg-emerald-900/40 hover:scale-[1.01] border border-emerald-200/50 dark:border-emerald-700/50">
+        <h3 className="text-emerald-600 dark:text-emerald-400 text-lg font-semibold mb-4">🎯 기회 요소: 구조적 성장 테마와 자산 다변화</h3>
+        <p className="text-emerald-800 dark:text-emerald-300 text-base leading-relaxed">위기 속에서도 기회는 존재합니다. AI 및 반도체 산업의 구조적 성장은 여전히 유효한 투자 테마로 평가됩니다. 또한, 금리 인하 시기에는 채권 등 고정수익 자산의 가치가 부각될 수 있으며, 사모펀드와 같은 대체 투자를 통해 새로운 성장 동력을 발굴할 기회가 열릴 수 있습니다.</p>
+    </div>
+</section>
+
+<div className="backdrop-blur-sm bg-gradient-to-br from-emerald-800/90 to-emerald-700/90 dark:from-emerald-900/90 dark:to-emerald-800/90 text-white p-10 rounded-3xl my-10 text-center shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border border-white/20 dark:border-gray-600/20">
+    <h2 className="text-white text-2xl font-bold mb-5">📞 전문가 상담 문의</h2>
+    <p className="text-base opacity-90 leading-relaxed mb-8">
+        2025년의 복잡한 시장 환경, 혼자 고민하지 마십시오.<br />
+        FamilyOffice S의 금융/세무/IT 전문가 그룹이 대표님만을 위한 맞춤형 전략을 제시해 드립니다.
+    </p>
+    
+    <div className="flex gap-4 justify-center flex-wrap mb-8">
+        <a href="https://seminar.familyoffices.vip" target="_blank" className="group inline-flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-orange-500/90 to-orange-600/90 dark:from-orange-600/90 dark:to-orange-700/90 text-white px-6 py-4 rounded-2xl no-underline font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:from-orange-400 hover:to-orange-500 dark:hover:from-orange-500 dark:hover:to-orange-600 border border-white/30 dark:border-gray-600/30">
+            <span className="group-hover:animate-pulse">🎯</span> 세미나 신청
+        </a>
+        <a href="https://cal.com/familyoffice" target="_blank" className="group inline-flex items-center gap-2 backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 text-emerald-800 dark:text-emerald-300 px-6 py-4 rounded-2xl no-underline font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-gray-700 border border-white/50 dark:border-gray-600/50">
+            <span className="group-hover:animate-pulse">📅</span> 1:1 맞춤 상담
+        </a>
+        <a href="https://pf.kakao.com/_gsxkxdG/chat" target="_blank" className="group inline-flex items-center gap-2 backdrop-blur-sm bg-yellow-400/90 dark:bg-yellow-500/90 text-gray-800 dark:text-gray-900 px-6 py-4 rounded-2xl no-underline font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-yellow-300 dark:hover:bg-yellow-400 border border-white/50 dark:border-gray-600/50">
+            <span className="group-hover:animate-pulse">💬</span> 카카오톡 문의
+        </a>
+    </div>
+    
+    <div className="border-t border-white/30 dark:border-gray-600/30 pt-5">
+        <p className="text-sm opacity-80 backdrop-blur-sm bg-white/10 dark:bg-black/20 rounded-lg px-4 py-2 inline-block">
+            📞 전화상담: ☎ 0502-5550-8700 (평일 10:00-18:00)
+        </p>
+    </div>
+</div>
+
+<div className="backdrop-blur-sm bg-slate-100/80 dark:bg-slate-800/80 border-2 border-slate-300/50 dark:border-slate-600/50 p-6 rounded-2xl my-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-slate-100/90 dark:hover:bg-slate-800/90">
+    <h3 className="text-slate-600 dark:text-slate-400 text-lg font-bold mb-4">⚠ 중요 고지사항</h3>
+    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+        본 자료는 일반적인 정보 제공을 목적으로 작성되었으며, 개별 상황에 따라 다를 수 있습니다. 
+        구체적인 실행은 반드시 전문가의 자문을 받으신 후 개인의 판단과 책임하에 이루어져야 합니다.
+    </p>
+    <ul className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed space-y-1.5">
+        <li className="hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200">투자 결정은 개인의 판단과 책임하에 이루어져야 하며, 투자 전 전문가와 상담하시기 바랍니다.</li>
+        <li className="hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200">세법 및 관련 규정은 변경될 수 있으므로 최신 정보를 확인하시기 바랍니다.</li>
+        <li className="hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200">예측 및 전망 정보는 현재 시점 분석으로, 향후 정책 변화에 따라 달라질 수 있습니다.</li>
+        <li className="hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200">본 블로그 내용의 활용으로 인한 직간접적 손해에 대해 책임지지 않습니다.</li>
+    </ul>
+</div>
+
+</div>`,
+    category: '투자전략',
+    author: 'FamilyOffice S',
+    date: '2025-08-18',
+    readTime: '20분',
+    tags: ['2025년 투자 전망', '지정학적 리스크', 'AI 투자', '포트폴리오 전략', '자산 다변화'],
+    slug: 'investment-strategy-2025',
+    featured: true,
   },
 };
