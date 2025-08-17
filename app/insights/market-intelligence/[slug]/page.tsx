@@ -171,12 +171,14 @@ export default async function BlogPostPage({
                   <div className="flex items-start gap-4">
                     <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-800">
                       <Image 
-                        src="/images/profile.png" 
+                        src="/images/profile-optimized.png" 
                         alt="임재홍 수석 컨설턴트"
-                        width={80}
-                        height={80}
+                        width={256}
+                        height={256}
                         className="w-full h-full object-cover object-center"
-                        priority
+                        quality={90}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                       />
                     </div>
                     <div className="flex-1">

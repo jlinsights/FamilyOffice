@@ -485,14 +485,21 @@ export default function WeeklyBriefPage() {
                 <div className="p-8 md:p-12 flex items-center">
                   <div className="flex items-start gap-6">
                     <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-primary/10 to-primary/5 border-4 border-primary/20">
-                      <Image 
-                        src="/images/profile.png" 
-                        alt="임재홍 수석 컨설턴트"
-                        width={128}
-                        height={128}
-                        className="w-full h-full object-cover object-center"
-                        priority
-                      />
+                      <picture>
+                        <source srcSet="/images/profile-optimized.webp" type="image/webp" />
+                        <source srcSet="/images/profile-optimized.png" type="image/png" />
+                        <Image 
+                          src="/images/profile-optimized.png" 
+                          alt="임재홍 수석 컨설턴트"
+                          width={256}
+                          height={256}
+                          className="w-full h-full object-cover object-center"
+                          priority
+                          quality={90}
+                          placeholder="blur"
+                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                        />
+                      </picture>
                     </div>
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold mb-2 text-foreground">
