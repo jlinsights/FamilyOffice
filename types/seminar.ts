@@ -16,6 +16,8 @@ export interface Seminar {
   registeredCount: number;
   price: number;
   isPremium: boolean;
+  deposit?: number;
+  depositNote?: string;
   status: SeminarStatus;
   tags: string[];
   agenda: AgendaItem[];

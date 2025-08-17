@@ -216,6 +216,16 @@ export function UpcomingSeminarsSection() {
                         )}
                       </span>
                     </div>
+                    {seminar.deposit && (
+                      <div className="mt-2 p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                        <div className="text-xs text-blue-700 dark:text-blue-300 font-medium mb-1">
+                          참가보증금: {formatPrice(seminar.deposit)}
+                        </div>
+                        <div className="text-xs text-blue-600 dark:text-blue-400">
+                          {seminar.depositNote}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Tags */}

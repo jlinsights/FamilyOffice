@@ -16,6 +16,9 @@ const envSchema = z.object({
   V0_API_KEY: z.string().optional(),
   // Cal.com API Key
   NEXT_PUBLIC_CALCOM_API_KEY: z.string().optional(),
+  // Logs.so Monitoring
+  LOGS_SO_API_KEY: z.string().optional(),
+  LOGS_SO_WORKSPACE_ID: z.string().optional(),
 });
 
 type EnvSchema = z.infer<typeof envSchema>;
@@ -40,6 +43,9 @@ export function getEnv(): EnvSchema {
       V0_API_KEY: process.env.V0_API_KEY,
       // Cal.com API Key
       NEXT_PUBLIC_CALCOM_API_KEY: process.env.NEXT_PUBLIC_CALCOM_API_KEY,
+      // Logs.so Monitoring
+      LOGS_SO_API_KEY: process.env.LOGS_SO_API_KEY,
+      LOGS_SO_WORKSPACE_ID: process.env.LOGS_SO_WORKSPACE_ID,
     };
 
     cachedEnv = envSchema.parse(env);

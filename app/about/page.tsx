@@ -484,7 +484,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 전문가 팀 섹션 */}
+        {/* 전문가 팀 섹션 - 임시 비활성화 (팀 보강 후 재활성화 예정) */}
+        {/*
         <section className="py-20 bg-muted/30 dark:bg-muted/20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
@@ -560,6 +561,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+        */}
       </main>
 
       <Footer />
