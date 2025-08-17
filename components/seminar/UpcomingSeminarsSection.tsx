@@ -88,7 +88,7 @@ export function UpcomingSeminarsSection() {
             <Calendar className="h-3 w-3 mr-1" />
             Upcoming Seminars
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-slide-up text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 mt-4 animate-slide-up text-gray-900 dark:text-white">
             <span className="text-primary dark:text-emerald-300">
               예정된 세미나
             </span>{' '}

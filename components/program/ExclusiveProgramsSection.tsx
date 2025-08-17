@@ -17,7 +17,7 @@ export function ExclusiveProgramsSection({
             <Briefcase className="h-3 w-3 mr-1" aria-hidden />
             Exclusive Programs
           </Badge>
-          <h2 className="mb-6 font-bold text-balance animate-slide-up">
+          <h2 className="mb-4 mt-4 font-bold text-balance animate-slide-up">
             멤버 전용 <span className="text-primary">프리미엄 프로그램</span>
           </h2>
         </div>

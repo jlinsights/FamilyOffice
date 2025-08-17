@@ -44,7 +44,7 @@ function HeroSection() {
 
       <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
         {/* 상단 태그 */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-6 lg:mb-10">
           <Badge
             variant="outline"
             className="animate-fade-in bg-background/80 backdrop-blur-sm"

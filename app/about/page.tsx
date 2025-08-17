@@ -78,7 +78,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-6 lg:mb-10">
               <Badge variant="outline" size="lg" animation="fade">
                 <Building className="h-3 w-3 mr-1" />
                 About Us
@@ -314,7 +314,7 @@ export default function AboutPage() {
                 <Target className="h-3 w-3 mr-1" />
                 Core Values
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 mt-4">
                 FamilyOffice S의 <span className="text-primary">핵심 가치</span>
               </h2>
             </div>
@@ -384,7 +384,7 @@ export default function AboutPage() {
                   <CheckCircle className="h-3 w-3 mr-1" />
                   Differentiated Approach
                 </Badge>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 mt-4">
                   차별화된 <span className="text-primary">접근 방식</span>
                 </h3>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -452,7 +452,7 @@ export default function AboutPage() {
                 <AlertCircle className="h-3 w-3 mr-1" />
                 FAQ
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 mt-4">
                 자주 묻는 질문
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -505,7 +505,7 @@ export default function AboutPage() {
                   <Phone className="h-3 w-3 mr-1" />
                   Contact Us
                 </Badge>
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 mt-4">
                   중소중견기업 전문 자산관리 상담
                 </h3>
                 <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">

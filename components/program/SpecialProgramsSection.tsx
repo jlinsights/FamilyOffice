@@ -52,7 +52,7 @@ export function SpecialProgramsSection({
           >
             VIP & CEO 특화 프로그램
           </Badge>
-          <h2 className="mb-6 font-bold text-3xl md:text-4xl text-balance animate-slide-up">
+          <h2 className="mb-4 mt-4 font-bold text-3xl md:text-4xl text-balance animate-slide-up">
             <span className="text-primary">VIP & CEO 고객님만을 위한</span>{' '}
             프리미엄 프로그램
           </h2>
