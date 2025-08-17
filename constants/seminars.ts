@@ -430,7 +430,7 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     price: 0,
     isPremium: true,
     deposit: 30000,
-    depositNote: '예약 확정을 위한 보증금 (행사 종료 후 환불, 노쇼 시 환불 불가)',
+    depositNote: '노쇼 방지를 위한 참가보증금 (세미나 참가 확인 시 즉시 환불)',
     status: 'upcoming',
     tags: ['2025년세제개편', '가업승계', '절세전략', '삼성생명'],
     registrationUrl: 'https://lu.ma/a6346rvz',
