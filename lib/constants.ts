@@ -9,7 +9,7 @@ import { NavigationItem, ServiceItem } from '@/types/globals';
 // 네비게이션 메뉴 데이터
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/about', label: '소개' },
-  { href: '/services', label: '서비스' },
+  { href: '/solutions', label: '솔루션' },
   {
     href: '/program',
     label: '프로그램',
@@ -75,7 +75,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     title: '통합 자산관리',
     description:
       '자산 전체를 아우르는 통합적 관점에서 효율적인 자산관리 전략을 수립하고 실행합니다.',
-    href: '/services#wealth-management',
+    href: '/solutions#wealth-management',
   },
   {
     id: 'inheritance',
@@ -83,7 +83,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     title: '상속·증여 설계',
     description:
       '가족의 미래와 다음 세대를 위한 체계적인 자산 이전 전략을 설계합니다.',
-    href: '/services#inheritance',
+    href: '/solutions#inheritance',
   },
   {
     id: 'tax-legal',
@@ -91,7 +91,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     title: '세무·법률 자문',
     description:
       '복잡한 세무 및 법률 이슈를 효과적으로 해결하고, 최적의 구조를 설계합니다.',
-    href: '/services#tax-legal',
+    href: '/solutions#tax-legal',
   },
 ] as const;
 

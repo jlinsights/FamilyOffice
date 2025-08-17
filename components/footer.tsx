@@ -220,16 +220,16 @@ export function Footer() {
               </div>
             </div>
 
-            {/* 서비스 */}
+            {/* 솔루션 */}
             <div>
               <h4 className="font-semibold mb-4 flex items-center">
                 <Sparkles className="h-4 w-4 mr-2 text-primary" />
-                서비스
+                솔루션
               </h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
-                    href="/services#core-services"
+                    href="/solutions#core-services"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
                     세무 최적화
@@ -237,7 +237,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/services#core-services"
+                    href="/solutions#core-services"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
                     투자 관리
@@ -245,7 +245,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/services#core-services"
+                    href="/solutions#core-services"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
                     승계 설계
@@ -253,7 +253,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/services#industry-services"
+                    href="/solutions#industry-services"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
                     중대재해처벌법 대응
@@ -261,7 +261,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/services#industry-services"
+                    href="/solutions#industry-services"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
                     가족법인 설립
@@ -284,10 +284,10 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/services"
+                    href="/solutions"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
-                    업종별 특화 서비스
+                    업종별 특화 솔루션
                   </Link>
                 </li>
                 <li>

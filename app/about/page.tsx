@@ -81,7 +81,7 @@ export default function AboutPage() {
             <div className="flex justify-center mb-8">
               <Badge variant="outline" size="lg" animation="fade">
                 <Building className="h-3 w-3 mr-1" />
-                About FamilyOffice S
+                About Us
               </Badge>
             </div>
 
@@ -162,7 +162,7 @@ export default function AboutPage() {
                 className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
                 asChild
               >
-                <Link href="/services">
+                <Link href="/solutions">
                   <Briefcase className="mr-2 h-4 w-4" />
                   서비스 보기
                 </Link>
@@ -527,7 +527,7 @@ export default function AboutPage() {
                     }
                   />
                   <Button size="lg" variant="outline" className="px-8 py-4 text-lg" asChild>
-                    <Link href="/services">
+                    <Link href="/solutions">
                       서비스 자세히 보기
                     </Link>
                   </Button>

@@ -170,9 +170,9 @@ export default function ContactPage() {
                 asChild
                 className="font-bold shadow-lg px-8 py-4 text-lg"
               >
-                <Link href="/services" className="flex items-center">
+                <Link href="/solutions" className="flex items-center">
                   <Phone className="mr-2 h-5 w-5" />
-                  서비스 자세히 보기
+                  솔루션 자세히 보기
                 </Link>
               </Button>
             </div>

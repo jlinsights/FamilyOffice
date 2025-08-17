@@ -249,11 +249,11 @@ export function ServicesSection() {
         <div className="text-center">
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Link
-              href="/services"
+              href="/solutions"
               className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 bg-primary hover:bg-primary/90 text-white shadow-lg dark:bg-emerald-600 dark:hover:bg-emerald-700"
             >
               <Search className="mr-2 h-5 w-5" />
-              서비스 자세히 보기
+              솔루션 자세히 보기
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link

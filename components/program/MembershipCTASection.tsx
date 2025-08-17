@@ -42,8 +42,8 @@ export function MembershipCTASection() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/services" aria-label="서비스 자세히 보기">
-                서비스 자세히 보기
+              <Link href="/solutions" aria-label="솔루션 자세히 보기">
+                솔루션 자세히 보기
               </Link>
             </Button>
           </div>
