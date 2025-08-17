@@ -257,44 +257,47 @@ export default function ContactPage() {
                     >
                       Contact Information
                     </Badge>
-                    <h3 className="text-2xl font-bold mb-4">연락처 안내</h3>
-                    <p className="text-muted-foreground">
-                      다양한 방법으로 상담을 신청하실 수 있습니다
+                    <h3 className="text-3xl md:text-4xl font-bold mb-4">연락처 안내</h3>
+                    <p className="text-muted-foreground text-lg">
+                      편리한 방법을 선택하여<br />
+                      전문가와 상담을 예약하세요
                     </p>
                   </div>
 
-                  <div className="space-y-6">
-                    {contactInfo.map((info, index) => (
-                      <div
-                        key={index}
-                        className="card-modern p-6 animate-up"
-                        style={{ animationDelay: `${300 + index * 100}ms` }}
-                      >
-                        <div className="flex items-start space-x-4">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0">
-                            <info.icon className="h-5 w-5" />
-                          </div>
-                          <div>
-                            <h4 className="font-semibold mb-1">{info.title}</h4>
-                            {info.title === '전화 상담' ? (
-                              <a
-                                href="tel:0502-5550-8700"
-                                className="text-foreground font-medium mb-1 hover:text-primary transition-colors block"
-                              >
-                                {info.content}
-                              </a>
-                            ) : (
-                              <p className="text-foreground font-medium mb-1 whitespace-pre-line">
-                                {info.content}
+                  <div className="card-modern p-8">
+                    <div className="space-y-6">
+                      {contactInfo.map((info, index) => (
+                        <div
+                          key={index}
+                          className="animate-up"
+                          style={{ animationDelay: `${300 + index * 100}ms` }}
+                        >
+                          <div className="flex items-start space-x-4">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0">
+                              <info.icon className="h-5 w-5" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold mb-1">{info.title}</h4>
+                              {info.title === '전화 상담' ? (
+                                <a
+                                  href="tel:0502-5550-8700"
+                                  className="text-foreground font-medium mb-1 hover:text-primary transition-colors block"
+                                >
+                                  {info.content}
+                                </a>
+                              ) : (
+                                <p className="text-foreground font-medium mb-1 whitespace-pre-line">
+                                  {info.content}
+                                </p>
+                              )}
+                              <p className="text-muted-foreground text-sm">
+                                {info.description}
                               </p>
-                            )}
-                            <p className="text-muted-foreground text-sm">
-                              {info.description}
-                            </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
