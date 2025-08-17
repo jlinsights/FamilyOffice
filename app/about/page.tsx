@@ -268,7 +268,7 @@ export default function AboutPage() {
                 },
                 {
                   name: '장현오',
-                  position: 'FamilyOffice S',
+                  position: '삼성패밀리오피스',
                   specialty: '제조업·건설업 전문, 중대재해처벌법 대응',
                   description: '위험업종 전문 보험설계 및 기업재해보장보험 설계 전문가',
                 },
@@ -287,14 +287,14 @@ export default function AboutPage() {
               ].map((expert, index) => (
                 <Card key={index} className="group text-center h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border-white/20 dark:border-gray-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 dark:hover:shadow-xl hover:scale-105 hover:bg-white/80 dark:hover:bg-gray-800/80 hover:backdrop-blur-md">
                   <CardHeader>
-                    <div className="w-28 h-28 rounded-full mx-auto mb-6 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-4 border-primary/20 dark:border-primary/30 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
+                    <div className="w-24 h-32 rounded-full mx-auto mb-6 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-4 border-primary/20 dark:border-primary/30 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
                       {expert.name === '임재홍' ? (
                         <Image 
                           src="/Images/profile.jpeg" 
                           alt="임재홍 수석 컨설턴트"
-                          width={112}
-                          height={112}
-                          className="w-full h-full object-cover object-top scale-110 -translate-y-2"
+                          width={96}
+                          height={128}
+                          className="w-full h-full object-cover object-top scale-110 -translate-y-1"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:from-primary/30 group-hover:to-primary/10 transition-all duration-300">
