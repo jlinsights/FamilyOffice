@@ -228,9 +228,9 @@ export const Header = memo(function Header({
             <Link
               href="/contact"
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-              aria-label="무료 상담 신청 페이지로 이동"
+              aria-label="상담 신청 페이지로 이동"
             >
-              무료 상담 신청
+              상담 신청
               <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </Link>
             <ThemeToggle />
@@ -303,9 +303,9 @@ export const Header = memo(function Header({
                 href="/contact"
                 onClick={handleMobileLinkClick}
                 className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
-                aria-label="무료 상담 신청"
+                aria-label="상담 신청"
               >
-                무료 상담 신청
+                상담 신청
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </Link>
               
