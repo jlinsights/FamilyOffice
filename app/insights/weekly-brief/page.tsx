@@ -475,6 +475,72 @@ export default function WeeklyBriefPage() {
         </div>
       </section>
 
+      {/* Consultation CTA Section */}
+      <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Card className="overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/5 border-primary/20">
+            <CardContent className="p-0">
+              <div className="grid md:grid-cols-2 gap-0">
+                {/* Left side - Consultant Info */}
+                <div className="p-8 md:p-12 flex items-center">
+                  <div className="flex items-start gap-6">
+                    <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-primary/10 to-primary/5 border-4 border-primary/20">
+                      <Image 
+                        src="/images/profile.png" 
+                        alt="임재홍 수석 컨설턴트"
+                        width={128}
+                        height={128}
+                        className="w-full h-full object-cover object-center"
+                        priority
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold mb-2 text-foreground">
+                        임재홍 <span className="text-muted-foreground font-normal">수석 컨설턴트</span>
+                      </h3>
+                      <p className="text-lg text-primary font-medium mb-4">
+                        대표 컨설턴트 / 수석
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed">
+                        국내 대기업 및 글로벌 외국계 기업 출신으로 중견기업 자산관리 경험과 전문성을 보유하고 있습니다. 
+                        패밀리오피스 설계, 가업승계 전략, 세무최적화 등 통합적인 솔루션으로 기업과 가족의 지속가능한 성장을 지원합니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Right side - CTA */}
+                <div className="bg-primary/5 p-8 md:p-12 flex flex-col justify-center">
+                  <h3 className="text-2xl font-bold mb-4 text-foreground">
+                    Weekly Brief 구독하기
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    매주 월·금요일, 중소중견기업 CEO를 위한 맞춤형 인사이트를 제공합니다. 
+                    5분 내 읽을 수 있는 핵심 정보로 경영 의사결정을 지원합니다.
+                  </p>
+                  <div className="space-y-4">
+                    <Link 
+                      href="https://cal.com/familyoffice" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <Button size="lg" className="w-full">
+                        <Calendar className="mr-2 h-5 w-5" />
+                        상담 신청
+                      </Button>
+                    </Link>
+                    <div className="text-center text-sm text-muted-foreground">
+                      무료 상담을 통해 맞춤형 솔루션을 제안드립니다
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
