@@ -64,10 +64,10 @@ export function CalComPopup({
 
   const config = eventConfigs[eventType];
   
-  // Cal.com theme configuration - force dark mode for better visibility
+  // Cal.com theme configuration - adaptive theme based on current mode
   const isDark = resolvedTheme === 'dark';
   const calTheme = isDark ? 'dark' : 'light';
-  const fullCalLink = `https://cal.com/${config.calPath}?embed=1&theme=dark&bg=000000&text=ffffff&layout=month_view`;
+  const fullCalLink = `https://cal.com/${config.calPath}?embed=1&theme=${calTheme}&layout=month_view`;
 
   useEffect(() => {
     if (isOpen) {
@@ -150,7 +150,7 @@ export function CalComPopup({
           </div>
 
           {/* Cal.com iframe 컨테이너 - 상담 분야 아래 전체 영역 */}
-          <div className="flex-1 relative bg-black min-h-0">
+          <div className={`flex-1 relative min-h-0 ${isDark ? 'bg-black' : 'bg-white'}`}>
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-sm z-10">
                 <div className="text-center">
@@ -166,13 +166,12 @@ export function CalComPopup({
               height="100%"
               style={{
                 border: 'none',
-                background: '#000000',
-                colorScheme: 'dark',
-                filter: 'invert(0) contrast(1.2) brightness(0.9)',
+                background: isDark ? '#000000' : '#ffffff',
+                colorScheme: isDark ? 'dark' : 'light',
                 display: 'block',
                 minHeight: '500px',
               }}
-              className="cal-com-iframe-forced-dark w-full h-full"
+              className={`w-full h-full ${isDark ? 'cal-com-iframe-dark' : 'cal-com-iframe-light'}`}
               title={config.title}
               onLoad={() => setIsLoading(false)}
               allow="camera; microphone"
