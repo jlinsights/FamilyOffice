@@ -112,22 +112,22 @@ export function CalComPopup({
       <DialogTrigger asChild>
         {trigger || DefaultTrigger}
       </DialogTrigger>
-      <DialogContent className="max-w-6xl w-full h-[99vh] p-0 bg-background text-foreground">
-        <DialogHeader className="px-3 pt-2 pb-2 border-b bg-background flex-shrink-0">
+      <DialogContent className="max-w-5xl w-[95vw] h-[95vh] sm:h-[90vh] p-0 bg-background text-foreground overflow-hidden">
+        <DialogHeader className="px-4 pt-3 pb-3 border-b bg-background flex-shrink-0">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="h-5 w-5 rounded bg-primary/10 flex items-center justify-center">
-                <Calendar className="h-2.5 w-2.5 text-primary" />
+            <div className="flex items-center space-x-3">
+              <div className="h-6 w-6 rounded bg-primary/10 flex items-center justify-center">
+                <Calendar className="h-3 w-3 text-primary" />
               </div>
-              <div className="flex items-center space-x-4">
-                <DialogTitle className="text-sm font-bold">{config.title}</DialogTitle>
-                <div className="flex items-center space-x-3">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                <DialogTitle className="text-base font-bold">{config.title}</DialogTitle>
+                <div className="flex items-center space-x-3 mt-1 sm:mt-0">
                   <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-                    <Clock className="h-2.5 w-2.5" />
+                    <Clock className="h-3 w-3" />
                     <span>{config.duration}</span>
                   </div>
                   <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-                    <Users className="h-2.5 w-2.5" />
+                    <Users className="h-3 w-3" />
                     <span>1:1 전문가 상담</span>
                   </div>
                 </div>
@@ -136,26 +136,26 @@ export function CalComPopup({
           </div>
         </DialogHeader>
 
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden min-h-0">
           {/* 상담 분야 표시 - 고정 위치 */}
-          <div className="bg-background/95 backdrop-blur-sm px-4 py-2 border-b border-border/30 flex-shrink-0">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <div className="bg-background/95 backdrop-blur-sm px-4 py-3 border-b border-border/30 flex-shrink-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
               {config.features.map((feature, index) => (
-                <div key={index} className="flex items-center space-x-1 text-xs bg-muted/30 rounded px-2 py-0.5">
-                  <CheckCircle className="h-2.5 w-2.5 text-green-500 flex-shrink-0" />
-                  <span className="text-muted-foreground text-xs">{feature}</span>
+                <div key={index} className="flex items-center space-x-2 text-sm bg-muted/30 rounded px-3 py-1.5">
+                  <CheckCircle className="h-3 w-3 text-green-500 flex-shrink-0" />
+                  <span className="text-muted-foreground text-sm">{feature}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Cal.com iframe 컨테이너 - 상담 분야 아래 전체 영역 */}
-          <div className="flex-1 relative bg-black">
+          <div className="flex-1 relative bg-black min-h-0">
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-sm z-10">
                 <div className="text-center">
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto mb-2"></div>
-                  <p className="text-xs text-muted-foreground">예약 시스템 로딩 중...</p>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-3"></div>
+                  <p className="text-sm text-muted-foreground">예약 시스템 로딩 중...</p>
                 </div>
               </div>
             )}
@@ -170,6 +170,7 @@ export function CalComPopup({
                 colorScheme: 'dark',
                 filter: 'invert(0) contrast(1.2) brightness(0.9)',
                 display: 'block',
+                minHeight: '500px',
               }}
               className="cal-com-iframe-forced-dark w-full h-full"
               title={config.title}
@@ -179,12 +180,12 @@ export function CalComPopup({
           </div>
 
           {/* Alternative action button */}
-          <div className="absolute bottom-1 right-1 z-20">
+          <div className="absolute bottom-3 right-3 z-20">
             <Button
               variant="outline"
               size="sm"
               onClick={handleExternalLink}
-              className="bg-background/95 backdrop-blur-sm text-xs border-border hover:bg-muted/80 h-7 px-2"
+              className="bg-background/95 backdrop-blur-sm text-sm border-border hover:bg-muted/80 h-8 px-3"
             >
               새 창에서 열기
             </Button>
