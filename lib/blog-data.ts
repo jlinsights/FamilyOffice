@@ -80,17 +80,17 @@ export const blogPosts: Record<string, BlogPost> = {
     id: 'family-office-basics-guide',
     title: '🏰 더 이상 "남의 이야기"가 아니다! 중견기업 CEO를 위한 패밀리오피스 완전 정복',
     excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
-    content: `<div style="font-family: 'Noto Sans KR', sans-serif; line-height: 1.7; max-width: 600px; margin: 0 auto; font-size: 16px; color: #333; background-color: #ffffff;">
+    content: `<div style="font-family: 'Noto Sans KR', sans-serif; line-height: 1.7; max-width: 100%; margin: 0; font-size: 16px; color: #333; background-color: transparent;">
     <div style="background: linear-gradient(135deg, #1e3a8a, #3730a3); color: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; text-align: center;">
-        <h1 style="margin: 0 0 10px; font-size: 20px; font-weight: 700;">🏰 더 이상 "남의 이야기"가 아니다!</h1>
-        <p style="margin: 0; font-size: 14px; opacity: 0.9; line-height: 1.5;">과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보겠습니다.</p>
+        <h1 style="margin: 0 0 16px; font-size: 28px; font-weight: 700;">🏰 더 이상 "남의 이야기"가 아니다!</h1>
+        <p style="margin: 0; font-size: 18px; opacity: 0.9; line-height: 1.6;">과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보겠습니다.</p>
     </div>
     
     <div style="background-color: #f8f9ff; border-left: 4px solid #4f46e5; padding: 20px; border-radius: 0 8px 8px 0; margin-bottom: 25px;">
-        <h2 style="color: #4f46e5; margin: 0 0 15px; font-size: 18px; font-weight: 600;">🔥 이번 주 핵심 인사이트</h2>
+        <h2 style="color: #4f46e5; margin: 0 0 15px; font-size: 24px; font-weight: 600;">🔥 이번 주 핵심 인사이트</h2>
         <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
-            <strong style="color: #1e293b; font-size: 16px; display: block; margin-bottom: 8px;">"그들만의 리그"였던 패밀리오피스, 이제는 중견기업의 필수 전략입니다.</strong>
-            <ul style="margin: 0; padding-left: 20px; color: #4a5568; font-size: 14px;">
+            <strong style="color: #1e293b; font-size: 18px; display: block; margin-bottom: 8px;">"그들만의 리그"였던 패밀리오피스, 이제는 중견기업의 필수 전략입니다.</strong>
+            <ul style="margin: 0; padding-left: 20px; color: #4a5568; font-size: 16px;">
                 <li style="margin-bottom: 6px;"><strong>현상</strong>: 패밀리오피스가 중견기업 및 성공한 창업가 사이에서 빠르게 확산되고 있습니다.</li>
                 <li style="margin-bottom: 6px;"><strong>영향</strong>: 복잡한 가업승계, 세무 리스크, 투자 다각화 등 기업과 가문의 문제를 통합적으로 관리하는 효과적인 해결책으로 부상하고 있습니다.</li>
                 <li style="margin-bottom: 6px;"><strong>액션</strong>: 더 이상 "남의 이야기"가 아닙니다. 우리 회사와 가문에 맞는 패밀리오피스 모델을 진지하게 고민하고 준비를 시작해야 할 때입니다.</li>
@@ -99,15 +99,15 @@ export const blogPosts: Record<string, BlogPost> = {
     </div>
     
     <div style="padding: 10px;">
-        <h2 style="font-size: 20px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">💡 들어가며: "자식에게는 회사가 아닌 행복을 물려주고 싶다"</h2>
-        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">최근 한 중견기업 CEO께서 하신 이 말씀이 깊은 울림을 주었습니다. 과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있는 이유가 바로 여기에 있습니다.</p>
-        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">단순히 부(富)를 물려주는 것이 아니라, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 것 - 이것이 바로 현대적 패밀리오피스의 진정한 의미입니다.</p>
+        <h2 style="font-size: 26px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">💡 들어가며: "자식에게는 회사가 아닌 행복을 물려주고 싶다"</h2>
+        <p style="margin-bottom: 20px; font-size: 18px; color: #475569;">최근 한 중견기업 CEO께서 하신 이 말씀이 깊은 울림을 주었습니다. 과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있는 이유가 바로 여기에 있습니다.</p>
+        <p style="margin-bottom: 20px; font-size: 18px; color: #475569;">단순히 부(富)를 물려주는 것이 아니라, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 것 - 이것이 바로 현대적 패밀리오피스의 진정한 의미입니다.</p>
     </div>
     
     <div style="padding: 10px;">
-        <h2 style="font-size: 20px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">🤔 패밀리오피스, 왜 지금 다시 주목받고 있습니까?</h2>
-        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">대표님, 혹시 "자산 관리는 은행 PB에게, 세무는 세무법인에, 법률 자문은 로펌에" 맡기는 방식에 한계를 느끼신 적 없으신가요? 각 분야 전문가들이 모여도 정작 대표님 가문 전체의 큰 그림을 봐주는 곳은 없다는 아쉬움, 많은 분들이 공감하는 지점입니다.</p>
-        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">패밀리오피스는 개별 금융 상품 추천을 넘어, 가문의 자산을 통합적으로 관리하고, 가업승계와 상속, 세금 문제, 법률 리스크까지 아우르는 "가문의 최고재무책임자(CFO)" 역할을 수행합니다.</p>
+        <h2 style="font-size: 26px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">🤔 패밀리오피스, 왜 지금 다시 주목받고 있습니까?</h2>
+        <p style="margin-bottom: 20px; font-size: 18px; color: #475569;">대표님, 혹시 "자산 관리는 은행 PB에게, 세무는 세무법인에, 법률 자문은 로펌에" 맡기는 방식에 한계를 느끼신 적 없으신가요? 각 분야 전문가들이 모여도 정작 대표님 가문 전체의 큰 그림을 봐주는 곳은 없다는 아쉬움, 많은 분들이 공감하는 지점입니다.</p>
+        <p style="margin-bottom: 20px; font-size: 18px; color: #475569;">패밀리오피스는 개별 금융 상품 추천을 넘어, 가문의 자산을 통합적으로 관리하고, 가업승계와 상속, 세금 문제, 법률 리스크까지 아우르는 "가문의 최고재무책임자(CFO)" 역할을 수행합니다.</p>
         
         <div style="background-color: #f8f9ff; border-left: 4px solid #4f46e5; padding: 15px; margin: 25px 0; border-radius: 0 8px 8px 0;">
             <strong style="color: #4f46e5; font-size: 15px; display: block; margin-bottom: 5px;">💡 패밀리오피스의 핵심 기능</strong>
@@ -138,8 +138,8 @@ export const blogPosts: Record<string, BlogPost> = {
     </div>
     
     <div style="padding: 10px;">
-        <h2 style="font-size: 20px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">🎯 우리 회사에 맞는 패밀리오피스, 어떻게 시작할까요?</h2>
-        <p style="margin-bottom: 20px; font-size: 15px; color: #475569;">패밀리오피스는 거창한 것이 아닙니다. 가문의 자산과 철학을 다음 세대로 온전히 물려주기 위한 "시스템"을 만드는 과정입니다. 처음부터 모든 것을 갖춘 완벽한 조직을 만들기보다, 핵심 기능부터 하나씩 갖추어 나가는 단계적 접근이 중요합니다.</p>
+        <h2 style="font-size: 26px; color: #1e3a8a; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">🎯 우리 회사에 맞는 패밀리오피스, 어떻게 시작할까요?</h2>
+        <p style="margin-bottom: 20px; font-size: 18px; color: #475569;">패밀리오피스는 거창한 것이 아닙니다. 가문의 자산과 철학을 다음 세대로 온전히 물려주기 위한 "시스템"을 만드는 과정입니다. 처음부터 모든 것을 갖춘 완벽한 조직을 만들기보다, 핵심 기능부터 하나씩 갖추어 나가는 단계적 접근이 중요합니다.</p>
     </div>
     
     <div style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 20px; border-radius: 12px; margin: 25px 0;">
