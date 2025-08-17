@@ -285,31 +285,31 @@ export default function AboutPage() {
                   description: '투자은행 출신으로 중소중견기업 맞춤형 투자전략 설계 전문가',
                 },
               ].map((expert, index) => (
-                <Card key={index} className="text-center h-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg dark:hover:shadow-xl">
+                <Card key={index} className="group text-center h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border-white/20 dark:border-gray-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 dark:hover:shadow-xl hover:scale-105 hover:bg-white/80 dark:hover:bg-gray-800/80 hover:backdrop-blur-md">
                   <CardHeader>
-                    <div className="w-24 h-24 rounded-full mx-auto mb-6 overflow-hidden bg-gray-100 dark:bg-gray-800 border-4 border-primary/10 dark:border-primary/20">
+                    <div className="w-28 h-28 rounded-full mx-auto mb-6 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-4 border-primary/20 dark:border-primary/30 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
                       {expert.name === '임재홍' ? (
                         <Image 
                           src="/Images/profile.jpeg" 
                           alt="임재홍 수석 컨설턴트"
-                          width={96}
-                          height={96}
-                          className="w-full h-full object-cover object-center"
+                          width={112}
+                          height={112}
+                          className="w-full h-full object-cover object-top scale-110 -translate-y-2"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                          <Users className="h-10 w-10 text-primary" />
+                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:from-primary/30 group-hover:to-primary/10 transition-all duration-300">
+                          <Users className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" />
                         </div>
                       )}
                     </div>
-                    <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">{expert.name}</CardTitle>
-                    <p className="text-primary font-medium mb-4">{expert.position}</p>
+                    <CardTitle className="text-xl text-gray-900 dark:text-white transition-all duration-300 group-hover:text-primary dark:group-hover:text-primary">{expert.name}</CardTitle>
+                    <p className="text-primary font-medium mb-4 group-hover:font-semibold transition-all duration-300">{expert.position}</p>
                   </CardHeader>
                   <CardContent className="flex-1 flex flex-col">
-                    <p className="text-sm text-muted-foreground dark:text-gray-300 mb-4 font-medium transition-colors duration-300">
+                    <p className="text-sm text-muted-foreground dark:text-gray-300 mb-4 font-medium transition-all duration-300 group-hover:text-gray-700 dark:group-hover:text-gray-200">
                       {expert.specialty}
                     </p>
-                    <p className="text-muted-foreground dark:text-gray-300 text-sm flex-1 transition-colors duration-300">
+                    <p className="text-muted-foreground dark:text-gray-300 text-sm flex-1 transition-all duration-300 group-hover:text-gray-600 dark:group-hover:text-gray-200 leading-relaxed">
                       {expert.description}
                     </p>
                   </CardContent>
