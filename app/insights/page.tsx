@@ -29,20 +29,20 @@ export const metadata: Metadata = {
 
 const insightSections = [
   {
-    title: '블로그',
+    title: '시장 분석',
     description: '자산관리 전문가의 최신 인사이트와 전략 분석',
     href: '/insights/market-intelligence',
     icon: FileText,
     gradient: 'from-blue-500 to-blue-600',
     features: [
-      '주 2회 정기 업데이트',
+      '매주 수요일 정기 업데이트',
       '시장 동향 분석',
       '투자 전략 가이드',
       '세무 최적화 팁',
     ],
   },
   {
-    title: '뉴스레터',
+    title: '주간 브리프',
     description: '주간 시장 동향과 투자 인사이트를 이메일로 받아보세요',
     href: '/insights/weekly-brief',
     icon: Mail,
@@ -228,8 +228,8 @@ export default function InsightsPage() {
               <div className="flex justify-center mb-4">
                 <Mail className="w-10 h-10 text-green-600" />
               </div>
-              <div className="text-3xl font-bold text-foreground mb-2">주 2회</div>
-              <div className="text-foreground/70">뉴스레터 발송</div>
+              <div className="text-3xl font-bold text-foreground mb-2">주 1회</div>
+              <div className="text-foreground/70">시장 분석 업데이트</div>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
@@ -246,14 +246,14 @@ export default function InsightsPage() {
       <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            주간 인사이트를 놓치지 마세요
+            주간 브리프를 놓치지 마세요
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8">
             매주 월·금, 엄선된 투자 정보와 시장 분석을 이메일로 받아보세요
           </p>
           <Link href="/insights/weekly-brief">
             <Button size="lg" variant="secondary" className="hover:scale-105 transition-transform duration-300">
-              뉴스레터 구독하기
+              주간 브리프 구독하기
               <Mail className="ml-2 h-5 w-5" />
             </Button>
           </Link>
