@@ -20,6 +20,7 @@ import {
   Target
 } from 'lucide-react';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
+import { CalComPopup } from '@/components/cal-com-popup';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
@@ -526,17 +527,19 @@ export default function WeeklyBriefPage() {
                     5분 내 읽을 수 있는 핵심 정보로 경영 의사결정을 지원합니다.
                   </p>
                   <div className="space-y-4">
-                    <Link 
-                      href="https://cal.com/familyoffice" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="block"
-                    >
-                      <Button size="lg" className="w-full">
-                        <Calendar className="mr-2 h-5 w-5" />
-                        상담 신청
-                      </Button>
-                    </Link>
+                    <CalComPopup
+                      buttonText="상담 신청"
+                      variant="default"
+                      size="lg"
+                      className="w-full"
+                      eventType="consultation"
+                      trigger={
+                        <Button size="lg" className="w-full">
+                          <Calendar className="mr-2 h-5 w-5" />
+                          상담 신청
+                        </Button>
+                      }
+                    />
                     <div className="text-center text-sm text-muted-foreground">
                       무료 상담을 통해 맞춤형 솔루션을 제안드립니다
                     </div>
