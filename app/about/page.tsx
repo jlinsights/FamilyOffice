@@ -408,7 +408,7 @@ export default function AboutPage() {
                   {
                     icon: <TrendingUp className="h-8 w-8" />,
                     title: '객관적 비교 분석',
-                    description: '각 금융사별 장단점을\\n객관적으로 비교 분석해드립니다.',
+                    description: '각 금융사별(삼성생명, 삼성화재) 장단점을\\n객관적으로 비교 분석하여 드립니다.',
                     features: [
                       '다수 금융사 상품 비교',
                       '객관적 장단점 분석',
