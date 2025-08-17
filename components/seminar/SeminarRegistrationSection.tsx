@@ -95,7 +95,7 @@ export default function SeminarRegistrationSection() {
       title: '온라인 예약',
       description: 'Cal.com을 통한 즉시 예약',
       action: '예약하기',
-      href: 'https://cal.com/familyoffice/consultation',
+      href: 'https://cal.com/familyoffice/coffeechat',
     },
   ];
 
@@ -280,7 +280,7 @@ export default function SeminarRegistrationSection() {
               <div className="p-6">
                 <Cal
                   namespace="consulting"
-                  calLink="familyoffice/consultation"
+                  calLink="familyoffice/coffeechat"
                   style={{ width: '100%', height: '600px', overflow: 'scroll' }}
                   config={{ layout: 'month_view' }}
                 />
