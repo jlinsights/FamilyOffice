@@ -397,7 +397,7 @@ export default function AboutPage() {
                   {
                     icon: <CheckCircle className="h-8 w-8" />,
                     title: '다양한 솔루션 제시',
-                    description: '보험만이 답은 아닙니다. 상황에 따라 다른 방법이 더 적합할 수 있어요.',
+                    description: '보험만이 답은 아닙니다.\\n상황에 따라 다른 방법이 더 적합할 수 있어요.',
                     features: [
                       '보험 외 대안 솔루션 제시',
                       '상황별 최적 방법 분석',
@@ -408,7 +408,7 @@ export default function AboutPage() {
                   {
                     icon: <TrendingUp className="h-8 w-8" />,
                     title: '객관적 비교 분석',
-                    description: '각 금융사별 장단점을 객관적으로 비교 분석해드립니다.',
+                    description: '각 금융사별 장단점을\\n객관적으로 비교 분석해드립니다.',
                     features: [
                       '다수 금융사 상품 비교',
                       '객관적 장단점 분석',
@@ -425,7 +425,7 @@ export default function AboutPage() {
                       <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">{approach.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="flex-1 flex flex-col">
-                      <p className="text-muted-foreground dark:text-gray-300 mb-6 flex-1 transition-colors duration-300">
+                      <p className="text-muted-foreground dark:text-gray-300 mb-6 flex-1 transition-colors duration-300 whitespace-pre-line">
                         {approach.description}
                       </p>
                       <ul className="space-y-2">
