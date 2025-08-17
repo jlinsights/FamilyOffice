@@ -137,42 +137,60 @@ export function NewsletterSubscription({
 
   // Default variant
   return (
-    <div className={`bg-primary text-primary-foreground rounded-lg p-8 text-center ${className}`}>
-      <Mail className="h-12 w-12 mx-auto mb-4 opacity-90" />
-      <h3 className="text-2xl font-bold mb-2">
-        Weekly Brief
+    <div className={`bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground rounded-xl p-8 text-center shadow-lg ${className}`}>
+      <div className="bg-white/10 backdrop-blur-sm rounded-full w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+        <Mail className="h-8 w-8" />
+      </div>
+      
+      <h3 className="text-2xl font-bold mb-2 tracking-tight">
+        Weekly Brief 구독하기
       </h3>
-      <p className="text-lg mb-6 opacity-90">
-        매주 월·금요일 오전 7:30에 발송되는<br/>
-        기업승계와 자산관리 전문 인사이트를 받아보세요
+      <p className="text-base mb-8 opacity-90 leading-relaxed max-w-sm mx-auto">
+        매주 월·금요일 오전 7:30 발송<br/>
+        기업승계와 자산관리 전문 인사이트
       </p>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-        <div className="flex gap-2">
-          <Input
-            type="email"
-            placeholder="이메일 주소를 입력하세요"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={isLoading}
-            className="bg-background/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/70"
-            required
-          />
-          <Button 
-            type="submit" 
-            disabled={isLoading}
-            className="bg-white text-primary hover:bg-white/90 dark:bg-background dark:text-foreground dark:hover:bg-background/90"
-          >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              '구독하기'
-            )}
-          </Button>
+      
+      <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
+        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 mb-4">
+          <div className="flex gap-1">
+            <div className="flex-1 relative">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary-foreground/60" />
+              <Input
+                type="email"
+                placeholder="이메일 주소"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
+                className="bg-transparent border-0 text-primary-foreground placeholder:text-primary-foreground/60 pl-10 h-11 focus:ring-0 focus:ring-offset-0"
+                required
+              />
+            </div>
+            <Button 
+              type="submit" 
+              disabled={isLoading}
+              size="lg"
+              className="bg-white text-primary hover:bg-white/90 dark:bg-white dark:text-primary dark:hover:bg-white/90 font-semibold px-6 h-11"
+            >
+              {isLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                '구독'
+              )}
+            </Button>
+          </div>
         </div>
       </form>
-      <p className="text-sm mt-4 opacity-80">
-        500+ 중견기업 경영진이 구독 중 | 언제든 구독 취소 가능
-      </p>
+      
+      <div className="flex items-center justify-center gap-6 text-xs opacity-80">
+        <div className="flex items-center gap-1">
+          <CheckCircle className="h-3 w-3" />
+          <span>1,200+ 경영진 구독</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <CheckCircle className="h-3 w-3" />
+          <span>언제든 구독 취소</span>
+        </div>
+      </div>
     </div>
   );
 }
