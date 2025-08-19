@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -17,32 +20,46 @@ import {
   Clock,
   ArrowRight,
   Shield,
-  Target
+  Target,
+  Loader2
 } from 'lucide-react';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { CalComPopup } from '@/components/cal-com-popup';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export const metadata: Metadata = {
-  title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-  description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다. 5분 내 독서 완료, 실무 적용 가능한 전문가 인사이트.',
-  keywords: '주간 브리프, 기업승계 뉴스레터, CEO 뉴스레터, 상속세 절세, 가업승계, 중견기업, 패밀리오피스, 자산관리 인사이트',
-  openGraph: {
-    title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-    description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
-    type: 'website',
-    locale: 'ko_KR',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-    description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
-  },
-  alternates: {
-    canonical: '/insights/weekly-brief',
-  },
-};
+// Metadata는 서버 컴포넌트에서만 사용 가능하므로 주석 처리
+// export const metadata: Metadata = {
+//   title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
+//   description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다. 5분 내 독서 완료, 실무 적용 가능한 전문가 인사이트.',
+//   keywords: '주간 브리프, 기업승계 뉴스레터, CEO 뉴스레터, 상속세 절세, 가업승계, 중견기업, 패밀리오피스, 자산관리 인사이트',
+//   openGraph: {
+//     title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
+//     description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
+//     type: 'website',
+//     locale: 'ko_KR',
+//   },
+//   twitter: {
+//     card: 'summary_large_image',
+//     title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
+//     description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
+//   },
+//   alternates: {
+//     canonical: '/insights/weekly-brief',
+//   },
+// };
+
+interface NewsletterPost {
+  issueNumber: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  readTime: string;
+  categories: string[];
+  url: string;
+  thumbnail?: string;
+}
 
 const valuePropositions = [
   {
@@ -144,6 +161,30 @@ const recentTopics = [
 ];
 
 export default function WeeklyBriefPage() {
+  const [recentPosts, setRecentPosts] = useState<NewsletterPost[]>(recentIssues);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // API에서 최신 뉴스레터 가져오기
+    const fetchRecentPosts = async () => {
+      try {
+        const response = await fetch('/api/newsletter/posts?limit=4');
+        const data = await response.json();
+        
+        if (data.success && data.posts.length > 0) {
+          setRecentPosts(data.posts);
+        }
+      } catch (error) {
+        console.error('Failed to fetch newsletter posts:', error);
+        // 에러 시 기본 데이터 유지
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchRecentPosts();
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -261,7 +302,36 @@ export default function WeeklyBriefPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {recentIssues.map((issue, index) => (
+            {isLoading ? (
+              // 로딩 스켈레톤
+              [...Array(4)].map((_, index) => (
+                <Card key={index} className="overflow-hidden">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Skeleton className="h-5 w-12" />
+                      <Skeleton className="h-4 w-24" />
+                    </div>
+                    <Skeleton className="h-6 w-full mb-2" />
+                    <Skeleton className="h-6 w-3/4" />
+                  </CardHeader>
+                  <CardContent>
+                    <Skeleton className="h-4 w-full mb-2" />
+                    <Skeleton className="h-4 w-5/6 mb-4" />
+                    <div className="flex items-center justify-between mb-4">
+                      <Skeleton className="h-4 w-20" />
+                      <Skeleton className="h-4 w-16" />
+                    </div>
+                    <div className="flex gap-2 mb-4">
+                      <Skeleton className="h-6 w-16" />
+                      <Skeleton className="h-6 w-16" />
+                      <Skeleton className="h-6 w-16" />
+                    </div>
+                    <Skeleton className="h-9 w-full" />
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              recentPosts.map((issue, index) => (
               <Card key={index} className="card-modern bg-white dark:bg-gray-800 hover:shadow-lg transition-all duration-300 overflow-hidden group">
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between mb-2">
@@ -314,7 +384,8 @@ export default function WeeklyBriefPage() {
                   </Link>
                 </CardContent>
               </Card>
-            ))}
+              ))
+            )}
           </div>
           
           <div className="text-center mt-12">
@@ -487,10 +558,10 @@ export default function WeeklyBriefPage() {
                   <div className="flex items-start gap-6">
                     <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-primary/10 to-primary/5 border-4 border-primary/20">
                       <picture>
-                        <source srcSet="/images/profile-optimized.webp" type="image/webp" />
-                        <source srcSet="/images/profile-optimized.png" type="image/png" />
+                        <source srcSet="/images/ai_profile.png" type="image/webp" />
+                        <source srcSet="/images/ai_profile.png" type="image/png" />
                         <Image 
-                          src="/images/profile-optimized.png" 
+                          src="/images/ai_profile.png" 
                           alt="임재홍 수석 컨설턴트"
                           width={256}
                           height={256}

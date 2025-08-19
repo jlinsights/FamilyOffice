@@ -171,7 +171,7 @@ export default async function BlogPostPage({
                   <div className="flex items-start gap-4">
                     <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-800">
                       <Image 
-                        src="/images/profile-optimized.png" 
+                        src="/images/ai_profile.png" 
                         alt="임재홍 수석 컨설턴트"
                         width={256}
                         height={256}
