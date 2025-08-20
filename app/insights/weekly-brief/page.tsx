@@ -87,7 +87,7 @@ const valuePropositions = [
 const newsletterStats = {
   subscribers: '1,200+',
   openRate: '52%',
-  issues: '50+',
+  issues: '52+',
   establishedYear: '2024',
   platform: 'beehiiv'
 };
