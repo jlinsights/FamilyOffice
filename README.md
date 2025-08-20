@@ -328,4 +328,4 @@ vercel --prod
 
 **FamilyOffice S** - 중소중견기업 법인 대표를 위한 프리미엄 자산관리 플랫폼
 
-© 2024 FamilyOffice S. All rights reserved.
+© 2025 FamilyOffice. All rights reserved.

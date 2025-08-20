@@ -27,16 +27,23 @@ export const newsletterPosts = [
     categories: ['세무', '자기주식', '법인세'],
     url: 'https://newsletter.familyoffices.vip/p/corporate-treasury-stock-retirement-tax-saving-strategy-korea',
   },
-  // 실제 존재하는 뉴스레터만 포함하도록 임시 제거
-  // 추가 실제 뉴스레터 URL이 확인되면 여기에 추가
+  {
+    issueNumber: '#49',
+    date: '2025.08.09',
+    title: 'CEO 유고시 리스크 관리: 기업생명보험 활용 전략',
+    excerpt: 'CEO의 갑작스러운 부재에 대비한 기업생명보험 설계와 리스크 관리 방안을 제시합니다.',
+    readTime: '5분',
+    categories: ['리스크관리', '기업보험', 'CEO'],
+    url: 'https://newsletter.familyoffices.vip/p/ceo-contingency-plan-corporate-life-insurance',
+  },
 ];
 
 // 통계 데이터
 export const newsletterStats = {
   subscribers: '1,200+',
   openRate: '52%',
-  issues: '50+',
-  establishedYear: '2024',
+  issues: '52+',
+  establishedYear: '2025',
   platform: 'beehiiv',
   frequency: '매주 월·금요일',
   time: '오전 7:30',

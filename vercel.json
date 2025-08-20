@@ -43,5 +43,11 @@
   "regions": ["icn1"],
   "github": {
     "silent": true
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/sync-newsletter",
+      "schedule": "30 7 * * 1,5"
+    }
+  ]
 }
