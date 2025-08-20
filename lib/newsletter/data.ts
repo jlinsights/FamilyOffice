@@ -12,7 +12,7 @@ export const newsletterPosts = [
   {
     issueNumber: '#51',
     date: '2025.08.17',
-    title: '대표님의 숨은 자산, '이익잉여금'을 깨울 시간입니다',
+    title: '대표님의 숨은 자산, "이익잉여금"을 깨울 시간입니다',
     excerpt: '기업의 이익잉여금을 효과적으로 활용하여 개인 자산화하는 전략과 절세 방안을 제시합니다.',
     readTime: '4분',
     categories: ['법인자산', '배당전략', '절세'],
