@@ -27,40 +27,15 @@ export const newsletterPosts = [
     categories: ['세무', '자기주식', '법인세'],
     url: 'https://newsletter.familyoffices.vip/p/corporate-treasury-stock-retirement-tax-saving-strategy-korea',
   },
-  {
-    issueNumber: '#49',
-    date: '2025.08.10',
-    title: 'AI 시대 기업 밸류에이션의 새로운 기준',
-    excerpt: '전통적인 기업 가치 평가 방식에서 벗어나 AI 역량을 반영한 새로운 평가 모델을 제시합니다.',
-    readTime: '5분',
-    categories: ['투자', '기업가치', 'AI'],
-    url: 'https://newsletter.familyoffices.vip',
-  },
-  {
-    issueNumber: '#48',
-    date: '2025.08.05',
-    title: '2025년 하반기 글로벌 경제 전망과 자산배분 전략',
-    excerpt: '주요 투자은행들의 경제 전망을 종합하여 한국 중견기업을 위한 자산배분 가이드를 정리했습니다.',
-    readTime: '6분',
-    categories: ['투자전략', '자산배분', '글로벌'],
-    url: 'https://newsletter.familyoffices.vip',
-  },
-  {
-    issueNumber: '#47',
-    date: '2025.07.29',
-    title: '패밀리오피스 설립 시 고려사항 총정리',
-    excerpt: '자산 규모별 패밀리오피스 형태와 설립 과정에서 반드시 체크해야 할 법적, 세무적 요소들을 정리했습니다.',
-    readTime: '5분',
-    categories: ['패밀리오피스', '자산관리', '설립'],
-    url: 'https://newsletter.familyoffices.vip',
-  },
+  // 실제 존재하는 뉴스레터만 포함하도록 임시 제거
+  // 추가 실제 뉴스레터 URL이 확인되면 여기에 추가
 ];
 
 // 통계 데이터
 export const newsletterStats = {
   subscribers: '1,200+',
   openRate: '52%',
-  issues: '52+',
+  issues: '50+',
   establishedYear: '2024',
   platform: 'beehiiv',
   frequency: '매주 월·금요일',
