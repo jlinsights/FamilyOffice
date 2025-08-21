@@ -1,57 +1,39 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
+import { Calendar } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface CalComEmbedProps {
   className?: string;
   style?: React.CSSProperties;
+  calLink?: string;
 }
 
-export default function CalComEmbed({ className, style }: CalComEmbedProps) {
-  const [isLoading, setIsLoading] = useState(true);
-  const { resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    // 로딩 상태를 잠시 후 해제
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Force dark theme for better visibility
-  const calUrl = `https://cal.com/familyoffice/consulting?embed=1&theme=dark&bg=000000&text=ffffff&layout=month_view`;
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center" style={style}>
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-sm text-muted-foreground">
-            예약 시스템을 불러오는 중...
-          </p>
-        </div>
-      </div>
-    );
-  }
+export default function CalComEmbed({ 
+  className = '', 
+  style,
+  calLink = 'familyoffice'
+}: CalComEmbedProps) {
+  const handleClick = () => {
+    window.open(`https://cal.com/${calLink}`, '_blank', 'noopener,noreferrer');
+  };
 
   return (
-    <iframe
-      src={calUrl}
-      width="100%"
-      height="100%"
-      style={{
-        border: 'none',
-        borderRadius: '8px',
-        background: '#000000',
-        colorScheme: 'dark',
-        ...style,
-      }}
-      className={className}
-      title="상담 예약"
-      allow="camera; microphone"
-    />
+    <div 
+      className={`flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 rounded-lg border border-gray-200 dark:border-gray-700 ${className}`} 
+      style={style}
+    >
+      <div className="text-center p-8">
+        <Calendar className="h-16 w-16 text-primary mx-auto mb-4" />
+        <h3 className="text-xl font-bold mb-4">전문가 상담 예약</h3>
+        <p className="text-muted-foreground mb-6">
+          Cal.com에서 편리하게 상담 일정을 예약하세요
+        </p>
+        <Button onClick={handleClick} size="lg" className="font-bold">
+          <Calendar className="mr-2 h-4 w-4" />
+          상담 예약하기
+        </Button>
+      </div>
+    </div>
   );
 }

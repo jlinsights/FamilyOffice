@@ -173,8 +173,8 @@ export default async function BlogPostPage({
                       <Image 
                         src="/images/ai_profile.png" 
                         alt="임재홍 수석 컨설턴트"
-                        width={256}
-                        height={256}
+                        width={512}
+                        height={512}
                         className="w-full h-full object-cover object-center"
                         quality={90}
                         placeholder="blur"
