@@ -53,7 +53,7 @@ export const metadata: Metadata = generateMetadata(
     '삼성생명 자산관리',
   ],
   '/og-image.jpg',
-  '성공한 기업가',
+  '전문가급',
   '성장기',
   'commercial'
 );

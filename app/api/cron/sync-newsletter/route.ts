@@ -6,7 +6,7 @@ import { beehiiv } from '@/lib/beehiiv/client';
 export async function GET(request: NextRequest) {
   try {
     // Verify the request is from Vercel Cron
-    const authHeader = headers().get('authorization');
+    const authHeader = (await headers()).get('authorization');
     if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

@@ -1303,7 +1303,6 @@ export const blogPosts: Record<string, BlogPost> = {
     date: '2025-08-22',
     author: '임재홍',
     category: '자산관리',
-    categorySlug: 'asset-management',
     readTime: '5분',
     tags: ['예금자보호', '금융정책', '자산보호', '1억원', '정책변경'],
     slug: 'deposit-protection-update',

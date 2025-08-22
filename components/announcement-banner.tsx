@@ -15,13 +15,16 @@ export function AnnouncementBanner() {
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     // Set CSS variable for announcement banner height
-    if (currentAnnouncement) {
+    if (activeAnnouncements.length > 0 && activeAnnouncements[currentIndex]) {
       document.documentElement.style.setProperty('--announcement-height', '3rem');
     } else {
       document.documentElement.style.setProperty('--announcement-height', '0px');
     }
-  }, [currentAnnouncement]);
+  }, [activeAnnouncements.length, currentIndex]);
 
   useEffect(() => {
     // Auto-rotate announcements every 10 seconds
@@ -31,6 +34,7 @@ export function AnnouncementBanner() {
       }, 10000);
       return () => clearInterval(timer);
     }
+    return undefined;
   }, [activeAnnouncements.length]);
 
   const currentAnnouncement = activeAnnouncements[currentIndex];

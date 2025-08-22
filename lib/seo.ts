@@ -330,7 +330,7 @@ export const defaultMetadata: Metadata = {
     },
   },
 
-  other: {
+  verification: {
     locale: 'ko_KR',
     'naver-site-verification': 'your-naver-verification-code',
     NaverBot: 'All',
