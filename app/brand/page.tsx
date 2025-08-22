@@ -356,21 +356,21 @@ export default function BrandPage() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <Card className="p-6">
                     <h4 className="text-lg font-semibold mb-4">CSS Design Tokens</h4>
-                    <div className="bg-muted p-4 rounded-lg text-sm font-mono space-y-1">
-                      <p>--primary: hsl(221, 83%, 53%);</p>
-                      <p>--primary-foreground: hsl(210, 40%, 98%);</p>
-                      <p>--secondary: hsl(210, 40%, 96%);</p>
-                      <p>--muted: hsl(210, 40%, 96%);</p>
-                      <p>--accent: hsl(210, 40%, 96%);</p>
+                    <div className="bg-muted p-4 rounded-lg text-sm font-mono space-y-1 text-muted-foreground dark:text-foreground">
+                      <p className="text-foreground dark:text-foreground">--primary: hsl(221, 83%, 53%);</p>
+                      <p className="text-foreground dark:text-foreground">--primary-foreground: hsl(210, 40%, 98%);</p>
+                      <p className="text-foreground dark:text-foreground">--secondary: hsl(210, 40%, 96%);</p>
+                      <p className="text-foreground dark:text-foreground">--muted: hsl(210, 40%, 96%);</p>
+                      <p className="text-foreground dark:text-foreground">--accent: hsl(210, 40%, 96%);</p>
                     </div>
                   </Card>
                   <Card className="p-6">
                     <h4 className="text-lg font-semibold mb-4">Accessibility Standards</h4>
                     <ul className="space-y-2 text-sm">
-                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600" />WCAG 2.1 AA 준수</li>
-                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600" />4.5:1 최소 대비율</li>
-                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600" />키보드 네비게이션 지원</li>
-                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600" />스크린 리더 호환성</li>
+                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600 dark:text-green-400" />WCAG 2.1 AA 준수</li>
+                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600 dark:text-green-400" />4.5:1 최소 대비율</li>
+                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600 dark:text-green-400" />키보드 네비게이션 지원</li>
+                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600 dark:text-green-400" />스크린 리더 호환성</li>
                     </ul>
                   </Card>
                 </div>
@@ -381,19 +381,19 @@ export default function BrandPage() {
                     <div>
                       <h5 className="font-medium mb-3">Design Requirements</h5>
                       <ul className="space-y-2 text-sm">
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3" />브랜드 컬러 시스템 사용</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3" />타이포그래피 스케일 준수</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3" />일관된 스페이싱 적용</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3" />반응형 디자인 구현</li>
+                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />브랜드 컬러 시스템 사용</li>
+                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />타이포그래피 스케일 준수</li>
+                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />일관된 스페이싱 적용</li>
+                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />반응형 디자인 구현</li>
                       </ul>
                     </div>
                     <div>
                       <h5 className="font-medium mb-3">Content Guidelines</h5>
                       <ul className="space-y-2 text-sm">
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3" />프리미엄 톤앤매너 유지</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3" />전문용어 적절한 사용</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3" />한글 맞춤법 검수</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3" />삼성생명 파트너십 명시</li>
+                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />프리미엄 톤앤매너 유지</li>
+                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />전문용어 적절한 사용</li>
+                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />한글 맞춤법 검수</li>
+                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />삼성생명 파트너십 명시</li>
                       </ul>
                     </div>
                   </div>
