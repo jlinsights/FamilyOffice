@@ -144,6 +144,8 @@
     will-change: auto;
     /* 리페인트 최적화 */
     contain: layout style paint;
+    /* 고정 헤더와 announcement banner를 위한 상단 여백 */
+    padding-top: calc(4rem + var(--announcement-height, 0px));
   }
 }
 

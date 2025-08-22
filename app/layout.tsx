@@ -9,6 +9,7 @@ import { Analytics } from '@/components/analytics';
 import ExternalScripts from '@/components/external-scripts';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
 import { CalComFloating } from '@/components/cal-com-floating';
+import { AnnouncementBanner } from '@/components/announcement-banner';
 
 // import { defaultMetadata } from '@/lib/seo';
 
@@ -332,6 +333,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <AnnouncementBanner />
             {children}
             {/* <AIChatFloating /> */}
             <CalComFloating />

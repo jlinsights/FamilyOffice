@@ -57,7 +57,10 @@ export const Header = memo(function Header({
   // SSR 방지: 마운트되기 전에는 기본 헤더만 표시
   if (!mounted || !isClient) {
     return (
-      <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <header 
+        className="fixed w-full z-50 bg-background/80 backdrop-blur-md border-b border-border"
+        style={{ top: 'var(--announcement-height, 0px)' }}
+      >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3">
             <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -81,11 +84,12 @@ export const Header = memo(function Header({
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-200 border-b ${
+      className={`fixed w-full z-50 transition-all duration-200 border-b ${
         isScrolled || isMobileMenuOpen
           ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-gray-200 dark:border-gray-800'
           : 'bg-transparent border-transparent'
       }`}
+      style={{ top: 'var(--announcement-height, 0px)' }}
       role="banner"
       aria-label="사이트 헤더"
     >
