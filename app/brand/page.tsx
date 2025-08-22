@@ -60,15 +60,28 @@ const BrandIdentity = () => (
         <div className="space-y-4">
           <div>
             <span className="text-sm font-medium text-muted-foreground">Primary:</span>
-            <p className="text-2xl font-bold text-primary">FamilyOffice S</p>
+            <p className="text-2xl font-bold text-primary" style={{ fontFamily: 'Playfair Display, serif' }}>FamilyOffice S</p>
+            <div className="mt-2 text-sm text-muted-foreground space-y-1">
+              <p><strong>Font:</strong> Playfair Display</p>
+              <p><strong>Weight:</strong> Bold (700)</p>
+              <p><strong>Style:</strong> Serif, Premium Typography</p>
+              <p><strong>Usage:</strong> 로고, 브랜드명 전용</p>
+            </div>
           </div>
           <div>
             <span className="text-sm font-medium text-muted-foreground">Subtitle:</span>
-            <p className="text-lg">삼성생명 글로벌금융컨설팅</p>
+            <div className="flex items-center gap-3 mt-2">
+              <img 
+                src="/samsung-financial-networks-logo.png" 
+                alt="Samsung Financial Networks" 
+                className="h-8 w-auto"
+              />
+              <p className="text-lg font-medium">Samsung Financial Networks</p>
+            </div>
           </div>
           <div>
             <span className="text-sm font-medium text-muted-foreground">Tagline:</span>
-            <p className="text-base font-medium">"Professional, Personal, Prosperity"</p>
+            <p className="text-base font-medium">"Your Trusted Financial Partner for Life"</p>
           </div>
         </div>
       </Card>
@@ -309,14 +322,20 @@ export default function BrandPage() {
                   copyToClipboard={copyToClipboard} 
                 />
                 <ColorPalette 
-                  colors={brandColors.secondary} 
-                  title="Secondary Colors" 
+                  colors={brandColors.accent} 
+                  title="Accent Colors" 
                   copiedColor={copiedColor} 
                   copyToClipboard={copyToClipboard} 
                 />
                 <ColorPalette 
                   colors={brandColors.neutral} 
                   title="Neutral Colors" 
+                  copiedColor={copiedColor} 
+                  copyToClipboard={copyToClipboard} 
+                />
+                <ColorPalette 
+                  colors={brandColors.status} 
+                  title="Status Colors" 
                   copiedColor={copiedColor} 
                   copyToClipboard={copyToClipboard} 
                 />

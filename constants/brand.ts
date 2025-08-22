@@ -106,7 +106,7 @@ export const BRAND_COLORS = {
 export const TYPOGRAPHY_SYSTEM = [
   {
     category: 'Display',
-    variants: [
+    styles: [
       {
         name: 'Display Large',
         font: 'Pretendard',
@@ -135,7 +135,7 @@ export const TYPOGRAPHY_SYSTEM = [
   },
   {
     category: 'Heading',
-    variants: [
+    styles: [
       {
         name: 'H1',
         font: 'Pretendard',
@@ -164,7 +164,7 @@ export const TYPOGRAPHY_SYSTEM = [
   },
   {
     category: 'Body',
-    variants: [
+    styles: [
       {
         name: 'Large',
         font: 'Pretendard',

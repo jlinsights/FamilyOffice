@@ -11,6 +11,7 @@ export interface BrandColorSystem {
   neutral: BrandColor[];
   accent: BrandColor[];
   status: BrandColor[];
+  secondary?: BrandColor[];
 }
 
 // 타이포그라피 타입
@@ -25,7 +26,7 @@ export interface TypographyVariant {
 
 export interface TypographyCategory {
   category: string;
-  variants: TypographyVariant[];
+  styles: TypographyVariant[];
 }
 
 // 브랜드 가치 타입
