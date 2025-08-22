@@ -4,7 +4,7 @@
 
 ## 시스템 개요
 
-매주 월요일과 금요일 오전 7:30 AM (KST)에 Beehiiv에서 발행되는 뉴스레터를 자동으로 동기화하는 시스템입니다.
+매주 화요일 오전 9:30 AM (KST)과 금요일 오전 7:30 AM (KST)에 Beehiiv에서 발행되는 뉴스레터를 자동으로 동기화하는 시스템입니다.
 
 ### 핵심 기능
 
@@ -17,7 +17,7 @@
 ## 시스템 아키텍처
 
 ```
-Vercel Cron Job (7:30 AM KST, Mon/Fri)
+Vercel Cron Job (Tue 9:30 AM KST, Fri 7:30 AM KST)
     ↓
 /api/cron/sync-newsletter
     ↓
@@ -88,18 +88,24 @@ CRON_SECRET → Production 환경에 설정
 **스케줄 해석**:
 - `30 7 * * 1,5` = 매주 월요일(1)과 금요일(5) 오전 7:30 (UTC)
 - KST 기준: 오후 4:30 (UTC+9)
-- **조정 필요**: KST 오전 7:30을 원한다면 `30 22 * * 0,4` (일요일 22:30, 목요일 22:30 UTC)
+- **조정 필요**: 
+  - 화요일 오전 9:30 KST = 화요일 오전 0:30 UTC = `30 0 * * 2`
+  - 금요일 오전 7:30 KST = 목요일 오후 10:30 UTC = `30 22 * * 4`
 
 ### 3. Cron 스케줄 수정 (KST 기준)
 
-KST 오전 7:30에 실행하려면:
+화요일 오전 9:30 KST, 금요일 오전 7:30 KST에 실행하려면:
 
 ```json
 {
   "crons": [
     {
       "path": "/api/cron/sync-newsletter",
-      "schedule": "30 22 * * 0,4"
+      "schedule": "30 0 * * 2"
+    },
+    {
+      "path": "/api/cron/sync-newsletter",
+      "schedule": "30 22 * * 4"
     }
   ]
 }
