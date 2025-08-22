@@ -1295,7 +1295,7 @@ export const blogPosts: Record<string, BlogPost> = {
 <footer className="mt-16 pt-8 border-t-2 border-slate-200 dark:border-slate-700">
     <p className="text-center text-sm text-muted-foreground">
         본 자료는 FamilyOffice S가 공식 발표한 내용으로, 예금자보호법 개정에 따른 정확한 정보 전달을 목적으로 작성되었습니다.<br/>
-        <strong>© 2025 FamilyOffice S. All rights reserved.</strong>
+        <strong>© 2025 FamilyOffice. All rights reserved.</strong>
     </p>
 </footer>
 

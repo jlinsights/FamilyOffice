@@ -1,1 +1,1 @@
-🐛 TypeScript 오류 수정 및 코드 품질 개선 - SuperClaude AgentOS 분석 결과 반영
+📝 Copyright 텍스트 수정 - FamilyOffice S → FamilyOffice
