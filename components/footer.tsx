@@ -13,7 +13,6 @@ import {
   Award,
   Shield,
   Youtube,
-  MessageCircle,
 } from 'lucide-react';
 
 import { useState, useEffect } from 'react';
@@ -24,13 +23,6 @@ import Image from 'next/image';
 import { ClientScripts } from './client-scripts';
 
 // 커스텀 아이콘 컴포넌트들
-const ThreadsIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.01c0-3.693.85-6.547 2.518-8.497C5.851 1.205 8.604.024 12.186 0h.007c3.581.024 6.334 1.205 8.184 3.509C22.024 5.56 22.5 8.414 22.5 11.99c0 3.693-.85 6.547-2.518 8.497C18.349 22.795 15.596 23.976 12.186 24zM12 2.25c-2.896 0-5.284.938-6.896 2.713C3.791 6.737 3 9.035 3 12.01s.791 5.273 2.104 7.047C6.716 20.812 9.104 21.75 12 21.75s5.284-.938 6.896-2.713C20.209 17.263 21 14.965 21 11.99s-.791-5.273-2.104-7.047C17.284 3.188 14.896 2.25 12 2.25z" />
-    <path d="M16.5 12c0 2.485-2.015 4.5-4.5 4.5S7.5 14.485 7.5 12 9.515 7.5 12 7.5s4.5 2.015 4.5 4.5zm-7 0c0 1.381 1.119 2.5 2.5 2.5s2.5-1.119 2.5-2.5S13.381 9.5 12 9.5 9.5 10.619 9.5 12z" />
-  </svg>
-);
-
 const XIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -46,12 +38,6 @@ const SubstackIcon = ({ className }: { className?: string }) => (
 const NaverIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path d="M16.273 12.845 7.376 0H0v24h7.726V11.156L16.624 24H24V0h-7.727v12.845z" />
-  </svg>
-);
-
-const BrunchIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M7.79 12.51c-.42 0-.79-.37-.79-.82 0-.45.37-.82.79-.82s.79.37.79.82c0 .45-.37.82-.79.82zm8.42 0c-.42 0-.79-.37-.79-.82 0-.45.37-.82.79-.82s.79.37.79.82c0 .45-.37.82-.79.82zM12 24C5.37 24 0 18.63 0 12S5.37 0 12 0s12 5.37 12 12-5.37 12-12 12zm0-21.6C6.48 2.4 2.4 6.48 2.4 12s4.08 9.6 9.6 9.6 9.6-4.08 9.6-9.6-4.08-9.6-9.6-9.6zm5.5 13.8c0 1.32-1.08 2.4-2.4 2.4H8.9c-1.32 0-2.4-1.08-2.4-2.4V9.8c0-1.32 1.08-2.4 2.4-2.4h6.2c1.32 0 2.4 1.08 2.4 2.4v6.4z" />
   </svg>
 );
 
@@ -122,15 +108,6 @@ export function Footer() {
                   <span className="sr-only">Instagram</span>
                 </Link>
                 <Link
-                  href="https://www.threads.com/@_familyoffice_"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
-                >
-                  <ThreadsIcon className="h-4 w-4" />
-                  <span className="sr-only">Threads</span>
-                </Link>
-                <Link
                   href="https://www.linkedin.com/in/jaehonglim/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -174,24 +151,6 @@ export function Footer() {
                 >
                   <NaverIcon className="h-4 w-4" />
                   <span className="sr-only">Naver Blog</span>
-                </Link>
-                <Link
-                  href="https://brunch.co.kr/@familyoffice"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
-                >
-                  <BrunchIcon className="h-4 w-4" />
-                  <span className="sr-only">Brunch</span>
-                </Link>
-                <Link
-                  href="http://pf.kakao.com/_gsxkxdG/friend"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  <span className="sr-only">Kakao</span>
                 </Link>
               </div>
 
