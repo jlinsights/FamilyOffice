@@ -64,9 +64,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//cal.com" />
         <link rel="dns-prefetch" href="//analytics.google.com" />
         
-        {/* Critical 리소스 우선 로딩 */}
-        <link rel="preload" href="/og-image.jpg" as="image" type="image/jpeg" />
-        <link rel="preload" href="/logo.png" as="image" type="image/png" />
+        {/* Critical 리소스 우선 로딩 - 실제 존재하는 파일로 변경 */}
+        <link rel="preload" href="/SVG/FamilyOfficeS_blue.svg" as="image" type="image/svg+xml" />
         
         <link rel="canonical" href="https://familyoffices.vip" />
         <meta name="geo.region" content="KR" />
@@ -116,18 +115,18 @@ export default function RootLayout({
         {/* 카카오톡 공유 최적화 */}
         <meta property="kakao:title" content="성공한 CEO 전용 패밀리오피스 | 가업승계 자산관리" />
         <meta property="kakao:description" content="성공한 법인대표를 위한 프리미엄 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리. 삼성생명 1000억+ 운용실적" />
-        <meta property="kakao:image" content="https://familyoffices.vip/og-image.jpg" />
+        <meta property="kakao:image" content="https://familyoffices.vip/images/ai_profile.png" />
         <meta property="kakao:url" content="https://familyoffices.vip" />
         
         {/* 네이버 블로그/카페 최적화 */}
         <meta name="naver:title" content="성공한 기업가 전용 패밀리오피스 | FamilyOffice S" />
         <meta name="naver:description" content="SuperClaude BMAD Method 적용 패밀리오피스. 성공한 법인대표 전용 가업승계·자산관리 완전해결" />
-        <meta name="naver:image" content="https://familyoffices.vip/og-image.jpg" />
+        <meta name="naver:image" content="https://familyoffices.vip/images/ai_profile.png" />
         
         {/* LinkedIn 비즈니스 네트워크 최적화 */}
         <meta property="linkedin:title" content="성공한 CEO를 위한 패밀리오피스 | 가업승계 전문" />
         <meta property="linkedin:description" content="중소중견기업 CEO 전용 프리미엄 자산관리. 가업승계부터 세무최적화까지 원스톱 솔루션" />
-        <meta property="linkedin:image" content="https://familyoffices.vip/og-image.jpg" />
+        <meta property="linkedin:image" content="https://familyoffices.vip/images/ai_profile.png" />
         
         {/* 지역 비즈니스 신뢰성 향상 */}
         <meta name="business:contact_data:street_address" content="서울특별시 중구" />
