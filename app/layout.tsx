@@ -10,6 +10,7 @@ import ExternalScripts from '@/components/external-scripts';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
 import { CalComFloating } from '@/components/cal-com-floating';
 import { AnnouncementBanner } from '@/components/announcement-banner';
+import { DebugStyles } from './debug-styles';
 
 // import { defaultMetadata } from '@/lib/seo';
 
@@ -339,6 +340,7 @@ export default function RootLayout({
             <Toaster />
             <Analytics />
             <ExternalScripts />
+            <DebugStyles />
             
             {/* SuperClaude 성능 추적 스크립트 */}
             <script

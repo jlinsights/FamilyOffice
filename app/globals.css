@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /* 🚀 Core Web Vitals 최적화 - AgentOS Performance Framework */
 /* Critical CSS 인라인 최적화 및 리소스 로딩 개선 */

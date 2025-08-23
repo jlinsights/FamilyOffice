@@ -38,6 +38,11 @@ const nextConfig = {
   compress: true,
   trailingSlash: false,
   poweredByHeader: false,
+  
+  // 정적 자산 경로 설정
+  assetPrefix: process.env.NODE_ENV === 'production' && process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}` 
+    : undefined,
 
   // 웹팩 설정 최적화
   webpack: (config, { dev, isServer }) => {
@@ -146,7 +151,11 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self' https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https: wss:;"
+            value: "default-src 'self' https:; style-src 'self' 'unsafe-inline' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https: wss:;"
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
           },
         ],
       },
