@@ -142,8 +142,8 @@
     min-height: 100vh;
     /* GPU 가속 활성화 - 스크롤 성능 개선 */
     will-change: auto;
-    /* 리페인트 최적화 */
-    contain: layout style paint;
+    /* 리페인트 최적화 - fixed 요소에 영향 주지 않도록 paint 제거 */
+    contain: layout style;
     /* 고정 헤더와 announcement banner를 위한 상단 여백 */
     padding-top: calc(4rem + var(--announcement-height, 0px));
   }
@@ -1289,6 +1289,72 @@ button.btn-consultation:hover,
 
 .animate-pulse-ring {
   animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Force floating calendar button to always be visible */
+.cal-com-floating-force {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 999999 !important;
+  pointer-events: auto !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 64px !important;
+  height: 64px !important;
+  transform: translateZ(0) !important;
+  will-change: transform !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  contain: layout style !important;
+}
+
+/* Ensure the button is rendered in its own layer */
+.cal-com-floating-force::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Ensure floating button is above all possible overlays */
+.cal-com-floating-force,
+.cal-com-floating-force * {
+  z-index: 999999 !important;
+}
+
+/* Mobile optimization for floating button */
+@media (max-width: 768px) {
+  .cal-com-floating-force {
+    bottom: 20px !important;
+    right: 20px !important;
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
+
+/* Ensure button stays above modals, overlays, and other fixed elements */
+.cal-com-floating-force {
+  isolation: isolate !important;
+}
+
+/* Override any parent container styles that might affect fixed positioning */
+body > .cal-com-floating-force,
+html > .cal-com-floating-force {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 999999 !important;
+}
+
+/* Ensure no parent transform affects the button */
+* .cal-com-floating-force {
+  transform: translateZ(0) !important;
 }
 
 /* Print styles */

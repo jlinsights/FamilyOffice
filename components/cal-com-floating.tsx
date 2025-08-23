@@ -3,13 +3,43 @@
 import { Calendar } from 'lucide-react';
 import { CalComPopup } from './cal-com-popup';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function CalComFloating() {
   const [isHovered, setIsHovered] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // Force a reflow to ensure proper positioning
+    const button = document.querySelector('.cal-com-floating-force');
+    if (button) {
+      // Force browser to recalculate position
+      (button as HTMLElement).style.display = 'none';
+      (button as HTMLElement).offsetHeight; // Trigger reflow
+      (button as HTMLElement).style.display = 'block';
+    }
+  }, []);
+
+  if (!mounted) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 group">
+    <div 
+      className="cal-com-floating-force group"
+      style={{ 
+        zIndex: 999999,
+        position: 'fixed',
+        bottom: '24px',
+        right: '24px',
+        pointerEvents: 'auto',
+        // Force rendering context
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        // Ensure it's not affected by parent transforms
+        containIntrinsicSize: 'auto',
+        contain: 'layout style'
+      }}
+    >
       {/* 호버 시 나타나는 툴팁 텍스트 */}
       <div 
         className={`absolute bottom-20 right-0 bg-gray-900 dark:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg transition-all duration-300 transform ${
@@ -29,6 +59,7 @@ export function CalComFloating() {
             size="lg"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            style={{ zIndex: 999999 }}
             className={`
               relative overflow-hidden
               shadow-2xl hover:shadow-3xl 

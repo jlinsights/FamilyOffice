@@ -8,7 +8,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Analytics } from '@/components/analytics';
 import ExternalScripts from '@/components/external-scripts';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
-import { CalComFloating } from '@/components/cal-com-floating';
+import { CalComFloatingSimple } from '@/components/cal-com-floating-simple';
 import { AnnouncementBanner } from '@/components/announcement-banner';
 import { DebugStyles } from './debug-styles';
 
@@ -336,7 +336,7 @@ export default function RootLayout({
             <AnnouncementBanner />
             {children}
             {/* <AIChatFloating /> */}
-            <CalComFloating />
+            <CalComFloatingSimple />
             <Toaster />
             <Analytics />
             <ExternalScripts />
