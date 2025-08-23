@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
+import { PopupManager } from '@/components/popup/popup-manager';
 
 import type { NavigationItem, NavigationSubItem } from '@/types/globals';
 
@@ -65,10 +66,10 @@ export const Header = memo(function Header({
           <div className="flex justify-between items-center py-3">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/" className="transition-opacity hover:opacity-80">
-                <span className="sr-only">FamilyOffice S</span>
+                <span className="sr-only">Samsung Financial Networks</span>
                 <Image
-                  src="/SVG/FamilyOfficeS_blue.svg"
-                  alt="FamilyOffice S"
+                  src="/SVG/samsung-financial-networks.svg"
+                  alt="Samsung Financial Networks"
                   width={140}
                   height={32}
                   className="h-8 w-auto"
@@ -104,12 +105,12 @@ export const Header = memo(function Header({
             <Link
               href="/"
               className="transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
-              aria-label="FamilyOffice S 홈페이지로 이동"
+              aria-label="Samsung Financial Networks 홈페이지로 이동"
             >
-              <span className="sr-only">FamilyOffice S</span>
+              <span className="sr-only">Samsung Financial Networks</span>
               <Image
-                src="/SVG/FamilyOfficeS_blue.svg"
-                alt="FamilyOffice S"
+                src="/SVG/samsung-financial-networks.svg"
+                alt="Samsung Financial Networks"
                 width={140}
                 height={32}
                 className="h-8 w-auto transition-transform hover:scale-105"
@@ -344,6 +345,13 @@ export const Header = memo(function Header({
           </div>
         </div>
       )}
+
+      {/* Sophisticated Dual-Popup System with AgentOS Optimization */}
+      <PopupManager 
+        enableDualPopup={true}
+        maxConcurrentPopups={2}
+        debugMode={process.env.NODE_ENV === 'development'}
+      />
     </header>
   );
 });

@@ -73,6 +73,17 @@ const resourceCategories = [
 
 const featuredResources = [
   {
+    category: 'CEO 보장자산',
+    title: '가정과 회사의 중심인 CEO는 보장자산이 필요합니다',
+    description: '산재 혜택을 받지 못하는 CEO를 위한 보장자산 가이드. 건강보험, 재직中 보험료 납입, 수익자 지정 전략',
+    fileSize: '4.5 MB',
+    format: 'PDF',
+    date: '2025.01.15',
+    downloads: 890,
+    isPremium: true,
+    isHighlight: true,
+  },
+  {
     category: '투자 가이드',
     title: '2025년 글로벌 자산배분 전략 가이드',
     description: '불확실한 시장 환경에서 안정적인 수익을 추구하는 포트폴리오 구성 전략',
