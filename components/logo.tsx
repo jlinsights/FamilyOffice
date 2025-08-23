@@ -1,4 +1,59 @@
 import React from 'react';
+import { useTheme } from 'next-themes';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+
+// Samsung Financial Networks 로고 컴포넌트 - 테마 기반 자동 전환
+interface SamsungFinancialNetworksLogoProps {
+  width?: number;
+  height?: number;
+  className?: string;
+  priority?: boolean;
+}
+
+export const SamsungFinancialNetworksLogo: React.FC<SamsungFinancialNetworksLogoProps> = ({
+  width = 140,
+  height = 32,
+  className = '',
+  priority = false,
+}) => {
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // 서버 렌더링 중에는 기본 로고 표시
+  if (!mounted) {
+    return (
+      <Image
+        src="/SVG/samsung-financial-networks.svg"
+        alt="Samsung Financial Networks"
+        width={width}
+        height={height}
+        className={className}
+        priority={priority}
+      />
+    );
+  }
+
+  const isDarkMode = resolvedTheme === 'dark' || theme === 'dark';
+
+  return (
+    <Image
+      src={isDarkMode 
+        ? "/SVG/samsung-financial-networks-white.svg" 
+        : "/SVG/samsung-financial-networks.svg"
+      }
+      alt="Samsung Financial Networks"
+      width={width}
+      height={height}
+      className={className}
+      priority={priority}
+    />
+  );
+};
 
 interface LogoProps {
   size?: 'small' | 'default' | 'large';

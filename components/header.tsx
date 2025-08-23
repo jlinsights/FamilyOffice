@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 
 import Image from 'next/image';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { SamsungFinancialNetworksLogo } from '@/components/logo';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 import { PopupManager } from '@/components/popup/popup-manager';
@@ -67,12 +68,10 @@ export const Header = memo(function Header({
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/" className="transition-opacity hover:opacity-80">
                 <span className="sr-only">Samsung Financial Networks</span>
-                <Image
-                  src="/SVG/samsung-financial-networks.svg"
-                  alt="Samsung Financial Networks"
+                <SamsungFinancialNetworksLogo
                   width={140}
                   height={32}
-                  className="h-8 w-auto"
+                  className="h-8 w-auto transition-transform hover:scale-105"
                   priority
                 />
               </Link>
@@ -108,9 +107,7 @@ export const Header = memo(function Header({
               aria-label="Samsung Financial Networks 홈페이지로 이동"
             >
               <span className="sr-only">Samsung Financial Networks</span>
-              <Image
-                src="/SVG/samsung-financial-networks.svg"
-                alt="Samsung Financial Networks"
+              <SamsungFinancialNetworksLogo
                 width={140}
                 height={32}
                 className="h-8 w-auto transition-transform hover:scale-105"
