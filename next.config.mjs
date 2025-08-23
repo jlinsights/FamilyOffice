@@ -21,6 +21,7 @@ const nextConfig = {
     minimumCacheTTL: 60,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    domains: ['familyoffices.vip', 'localhost'],
   },
 
   // 실험적 기능 제거 (안정성을 위해)
@@ -99,6 +100,24 @@ const nextConfig = {
   // Output 설정 제거 (빌드 시간 단축)
   // output: 'standalone',
   
+  // HTTPS 리다이렉트 추가
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: '(?!https).*',
+          },
+        ],
+        destination: 'https://familyoffices.vip/:path*',
+        permanent: true,
+      },
+    ];
+  },
+
   // 보안 헤더
   async headers() {
     return [
@@ -124,6 +143,10 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin'
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self' https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https: wss:;"
           },
         ],
       },

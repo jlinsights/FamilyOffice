@@ -263,7 +263,7 @@ export default function WeeklyBriefPage() {
                       className="flex-1"
                     >
                       <Button size="lg" className="w-full">
-                        newsletter.familyoffices.vip에서 구독하기
+                        뉴스레터에서 구독하기
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </Link>
@@ -635,7 +635,7 @@ export default function WeeklyBriefPage() {
               rel="noopener noreferrer"
             >
               <Button size="lg" variant="secondary" className="w-full mb-4">
-                newsletter.familyoffices.vip에서 구독하기
+                뉴스레터에서 구독하기
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

@@ -1,22 +1,50 @@
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-
-const isProtectedRoute = createRouteMatcher([
-  '/admin(.*)',
-  '/dashboard(.*)',
-  '/api/admin(.*)',
-]);
-
-export default clerkMiddleware(async (auth, req) => {
-  // Handle authentication for protected routes
-  if (isProtectedRoute(req)) {
-    auth.protect();
+export function middleware(request: NextRequest) {
+  // Force HTTPS in production
+  const host = request.headers.get('host');
+  const protocol = request.headers.get('x-forwarded-proto') || 'http';
+  
+  if (
+    process.env.NODE_ENV === 'production' &&
+    protocol !== 'https' &&
+    host?.includes('familyoffices.vip')
+  ) {
+    return NextResponse.redirect(
+      `https://${host}${request.nextUrl.pathname}${request.nextUrl.search}`,
+      301
+    );
   }
 
-  return NextResponse.next();
-});
+  // Add security headers
+  const response = NextResponse.next();
+  
+  // Ensure proper content type for CSS files
+  if (request.nextUrl.pathname.startsWith('/_next/static/css/')) {
+    response.headers.set('Content-Type', 'text/css; charset=utf-8');
+  }
+  
+  // Add CORS headers for static assets
+  if (request.nextUrl.pathname.startsWith('/_next/static/')) {
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'GET');
+  }
+  
+  return response;
+}
 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    // Also match static files to add proper headers
+    '/_next/static/(.*)',
+  ],
 };
