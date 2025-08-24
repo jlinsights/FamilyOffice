@@ -3,12 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getKakaoAuthService } from '@/lib/auth/kakao-auth';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/lib/supabase/client';
 import { CheckCircle, Loader2, LogOut, XCircle } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 
-export default function LogoutPage() {
+function LogoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
@@ -19,7 +19,7 @@ export default function LogoutPage() {
     const handleLogout = async () => {
       try {
         // 1. Supabase 로그아웃
-        const supabase = createClientComponentClient();
+        const supabase = createClient();
         await supabase.auth.signOut();
 
         // 2. 카카오 로그아웃 (카카오싱크 사용 시)
@@ -171,5 +171,29 @@ export default function LogoutPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function LogoutPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
+          <CardHeader className="text-center space-y-4">
+            <div className="flex justify-center">
+              <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+            </div>
+            <CardTitle className="text-2xl font-bold text-blue-600">
+              로그아웃 준비 중
+            </CardTitle>
+            <CardDescription className="text-base">
+              로그아웃 페이지를 준비하고 있습니다...
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+    }>
+      <LogoutContent />
+    </Suspense>
   );
 }

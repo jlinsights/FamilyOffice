@@ -1,16 +1,17 @@
-🌍 Production URL 설정 - familyoffices.vip 도메인 적용
+🔧 Supabase import 수정 및 Suspense 경계 추가
 
-✅ App URL 프로덕션 설정
-- NEXT_PUBLIC_APP_URL: http://localhost:3000 → https://familyoffices.vip
-- 프로덕션 도메인으로 완전 전환
-- SEO, OpenGraph, 카노니컬 URL 최적화
+✅ 로그아웃 페이지 수정
+- @supabase/auth-helpers-nextjs → @/lib/supabase/client 경로 수정
+- createClientComponentClient() → createClient() 함수 변경
+- Next.js 15.4.6 호환성 확보
 
-🔧 .env.example 업데이트
-- 프로덕션 URL 예시로 가이드라인 개선
-- 개발자를 위한 명확한 설정 가이드
+🔄 Suspense 경계 추가
+- /auth/logout 페이지에 Suspense 래퍼 추가
+- useSearchParams 오류 해결
+- 로그아웃 준비 중 로딩 UI 개선
 
-✅ 빌드 검증 완료
-- 빌드 성공: 11.0초, 49페이지 정적 생성
-- 프로덕션 URL 검증 완료
-- 환경변수 시스템 정상 작동
-- https://familyoffices.vip 도메인 준비 완료
+✅ 빌드 성공 확인
+- 빌드 성공: 8.0초, 50페이지 정적 생성 (1페이지 추가)
+- /auth/logout 페이지: 1.54 kB (최적화됨)
+- 모든 Suspense 오류 해결 완료
+- 프로덕션 배포 준비 완료
