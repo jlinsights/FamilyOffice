@@ -58,9 +58,6 @@ export const serverEnvSchema = z.object({
   LOGS_SO_WORKSPACE_ID: z.string().optional(),
   
   // Kakao Business - 선택사항 but format validation
-  KAKAO_BUSINESS_API_KEY: z.string()
-    .min(1, 'KAKAO_BUSINESS_API_KEY cannot be empty if provided')
-    .optional(),
   KAKAO_REST_API_KEY: z.string()
     .regex(/^[a-f0-9]{32}$/, 'Invalid Kakao REST API key format')
     .optional(),
@@ -102,9 +99,6 @@ export const clientEnvSchema = z.object({
     .optional(),
   
   // Kakao Business - 클라이언트 전용
-  NEXT_PUBLIC_KAKAO_PIXEL_ID: z.string()
-    .min(1, 'NEXT_PUBLIC_KAKAO_PIXEL_ID cannot be empty if provided')
-    .optional(),
   NEXT_PUBLIC_KAKAO_CHANNEL_ID: z.string()
     .min(1, 'NEXT_PUBLIC_KAKAO_CHANNEL_ID cannot be empty if provided')
     .optional(),
@@ -144,7 +138,6 @@ export function createEnv() {
       NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
       NEXT_PUBLIC_CALCOM_API_KEY: process.env.NEXT_PUBLIC_CALCOM_API_KEY,
       NEXT_PUBLIC_CALCOM_NAMESPACE: process.env.NEXT_PUBLIC_CALCOM_NAMESPACE,
-      NEXT_PUBLIC_KAKAO_PIXEL_ID: process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID,
       NEXT_PUBLIC_KAKAO_CHANNEL_ID: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID,
       NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY,
     });
@@ -166,7 +159,6 @@ export function createEnv() {
         BEEHIIV_PUBLICATION_ID: process.env.BEEHIIV_PUBLICATION_ID,
         LOGS_SO_API_KEY: process.env.LOGS_SO_API_KEY,
         LOGS_SO_WORKSPACE_ID: process.env.LOGS_SO_WORKSPACE_ID,
-        KAKAO_BUSINESS_API_KEY: process.env.KAKAO_BUSINESS_API_KEY,
         KAKAO_REST_API_KEY: process.env.KAKAO_REST_API_KEY,
         KAKAO_APP_KEY: process.env.KAKAO_APP_KEY,
         KAKAO_JAVASCRIPT_KEY: process.env.KAKAO_JAVASCRIPT_KEY,
@@ -268,10 +260,8 @@ export const validateEnvGroup = (group: 'clerk' | 'supabase' | 'redis' | 'analyt
       NEXT_PUBLIC_GA_MEASUREMENT_ID: clientEnvSchema.shape.NEXT_PUBLIC_GA_MEASUREMENT_ID,
     }),
     kakao: z.object({
-      NEXT_PUBLIC_KAKAO_PIXEL_ID: clientEnvSchema.shape.NEXT_PUBLIC_KAKAO_PIXEL_ID,
       NEXT_PUBLIC_KAKAO_CHANNEL_ID: clientEnvSchema.shape.NEXT_PUBLIC_KAKAO_CHANNEL_ID,
       NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: clientEnvSchema.shape.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY,
-      KAKAO_BUSINESS_API_KEY: serverEnvSchema.shape.KAKAO_BUSINESS_API_KEY.optional(),
       KAKAO_REST_API_KEY: serverEnvSchema.shape.KAKAO_REST_API_KEY.optional(),
       KAKAO_APP_KEY: serverEnvSchema.shape.KAKAO_APP_KEY.optional(),
       KAKAO_JAVASCRIPT_KEY: serverEnvSchema.shape.KAKAO_JAVASCRIPT_KEY.optional(),

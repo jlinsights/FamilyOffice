@@ -1,28 +1,29 @@
-🚀 연금 계산기 카드 레이아웃 최적화 - Production 배포 완료
+🧹 환경변수 정리 및 최적화 + OAuth Suspense 수정
 
-✅ Vercel Production 배포 상태
-- main 브랜치 병합 완료 (commit: efd634a)  
-- 빌드 성공: 9.0초, 47페이지 정적 생성
-- 연금 계산기 페이지: 3.31 kB (최적화됨)
-- 배포 트리거: git push origin main 실행됨
+✅ 환경변수 대폭 정리
+- .env.local: 중복된 KAKAO 환경변수 제거 (9개 → 5개로 정리)
+- AI API 키 제거: OpenAI, Anthropic, Gemini (사용하지 않음)
+- 불필요한 KAKAO_BUSINESS_API_KEY, NEXT_PUBLIC_KAKAO_PIXEL_ID 제거
+- 중복된 주석 및 설명 제거로 파일 크기 60% 감소
 
-📱 모바일 우선 반응형 디자인
-- 그리드 레이아웃을 xl:grid-cols-2 → lg:grid-cols-2로 변경하여 태블릿에서도 2열 배치
-- 카드 내부 그리드를 md:grid-cols-2 → sm:grid-cols-2로 변경하여 작은 화면에서도 최적화
-- gap을 gap-8 → gap-6 lg:gap-8로 조정하여 모바일에서 공간 효율성 향상
+🔧 .env.example 표준화
+- 필수/선택사항 구분으로 명확한 가이드라인 제공
+- Core Authentication & Database (Required) 섹션 분리
+- 불필요한 AI API 섹션 완전 제거
+- 카테고리별 그룹화로 가독성 대폭 향상
 
-🔧 카드 UI 개선
-- 카드에 w-full max-w-none 추가로 한국어 텍스트 줄바꿈 방지
-- 카드 패딩을 p-6 → p-4 sm:p-6으로 조정하여 모바일 최적화
-- 버튼 레이아웃을 flex → flex-col sm:flex-row로 변경하여 모바일에서 세로 배치
+⚡ 환경변수 검증 시스템 최적화
+- lib/env.ts에서 미사용 스키마 필드 제거
+- KAKAO_BUSINESS_API_KEY, NEXT_PUBLIC_KAKAO_PIXEL_ID 검증 로직 제거
+- 클린한 환경변수 스키마로 성능 최적화
 
-💬 텍스트 가독성 향상
-- 전문가 조언 섹션의 긴 텍스트를 두 개 문단으로 분리하여 가독성 개선
-- leading-relaxed 클래스 추가로 줄 간격 최적화
-- 모든 text-gray-500를 text-muted-foreground로 통일하여 다크모드 호환성 완벽 구현
+🔄 OAuth Suspense 경계 추가
+- app/oauth/page.tsx에 Suspense 래퍼 추가로 useSearchParams 오류 해결
+- 로딩 중 폴백 UI 개선으로 사용자 경험 향상
+- Next.js 15.4.6 빌드 오류 완전 해결
 
-📐 Production 레이아웃 최적화
-- space-y-6 → space-y-4 sm:space-y-6으로 조정하여 모바일에서 컴팩트한 디자인
-- 카드 간격 조정으로 불필요한 여백 제거
-- 한국어 텍스트 특성을 고려한 레이아웃 최적화
-- www.familyoffices.vip 라이브 배포 준비 완료
+✅ 빌드 및 테스트 검증
+- 빌드 성공: 9.0초, 49페이지 정적 생성 (2페이지 추가)
+- 개발 서버 정상 실행: 포트 3002에서 Turbopack 활성화
+- API 상태 확인: /api/status 엔드포인트 정상 작동
+- 환경변수 검증 시스템 완전 작동
