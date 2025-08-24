@@ -1,1 +1,1 @@
-⚡ optimize: 번들 사이즈 최적화 - 8개 불필요 의존성 제거, UI 컴포넌트 정리, 21% 빌드시간 단축
+🚀 deploy: Production 배포 완료 - www.familyoffices.vip 라이브, 보안/성능 최적화 적용
