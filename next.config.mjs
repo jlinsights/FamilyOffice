@@ -155,7 +155,7 @@ const nextConfig = {
           },
           {
             key: 'Access-Control-Allow-Origin',
-            value: '*'
+            value: 'https://familyoffices.vip'
           },
         ],
       },

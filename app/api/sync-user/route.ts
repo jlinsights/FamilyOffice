@@ -2,7 +2,7 @@
 // 로그인한 사용자를 Supabase에 자동 동기화하는 엔드포인트
 import { NextResponse } from 'next/server';
 
-import { withRateLimit, rateLimiters } from '@/lib/rate-limit';
+import { withRateLimit } from '@/lib/rate-limit';
 import { syncCurrentUser } from '@/lib/user-sync';
 import { logAPI, logAuth, LogChannel } from '@/lib/logs-so';
 
@@ -52,5 +52,5 @@ async function handler() {
   }
 }
 
-// Apply rate limiting to the handler (use contact limiter since general is null)
-export const POST = withRateLimit(handler, rateLimiters.contact);
+// Apply rate limiting to the handler
+export const POST = withRateLimit(handler, 'auth');

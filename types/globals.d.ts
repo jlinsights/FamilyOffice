@@ -7,9 +7,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string;
     CLERK_SECRET_KEY: string;
 
-    // v0 API Key
-    V0_API_KEY?: string;
-    NEXT_PUBLIC_V0_API_KEY?: string; // 클라이언트에서 접근이 필요한 경우 (권장하지 않음)
 
     // Analytics
     NEXT_PUBLIC_GTM_ID?: string;
