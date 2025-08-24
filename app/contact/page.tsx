@@ -20,6 +20,7 @@ import { Footer } from '@/components/footer';
 import { CalComInline } from '@/components/cal-com-inline';
 import { CalComPopup } from '@/components/cal-com-popup';
 import { Header } from '@/components/header';
+import { ContactPageTracking } from '@/components/kakao/contact-page-tracking';
 
 export const metadata: Metadata = {
   title: '상담 신청 | FamilyOffice S - 중소중견기업 전문 자산관리',
@@ -104,6 +105,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen">
+      <ContactPageTracking />
       <Header />
 
       <main className="pt-20">

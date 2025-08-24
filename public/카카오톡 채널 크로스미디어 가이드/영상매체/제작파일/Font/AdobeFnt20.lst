@@ -1,0 +1,31 @@
+%!Adobe-FontList 1.20
+%Locale:0x412
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:CID
+FontName:NotoSansCJKkr-Medium
+FamilyName:Noto Sans CJK KR
+StyleName:Medium
+FullName:Noto Sans CJK KR Medium
+MenuName:Noto Sans CJK KR Medium
+StyleBits:0
+FamilyNameNative:Noto Sans CJK KR
+StyleNameNative:Medium
+FullNameNative:Noto Sans CJK KR Medium
+WritingScript:Korean
+OutlineFileName:C:\Users\User\Desktop\재압축\카카오톡 채널 크로스미디어\제작파일\Font\NotoSansCJKkr-Medium.otf
+DataFormat:sfntData
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:16534292
+FileModTime:1434347344
+WeightClass:500
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Noto Sans CJK KR Medium
+NameArray:0,Win,1,Noto Sans CJK KR Medium
+NameArray:0,Win,16,Noto Sans CJK KR
+%EndFont
+

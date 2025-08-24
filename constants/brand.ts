@@ -84,6 +84,13 @@ export const BRAND_COLORS = {
       usage: '배경 강조',
     },
   ],
+  social: [
+    {
+      name: 'KakaoTalk Channel',
+      url: 'https://pf.kakao.com/_your_channel_id',
+      usage: '카카오톡 문의 채널',
+    },
+  ],
   status: [
     {
       name: 'Success',

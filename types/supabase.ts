@@ -41,6 +41,53 @@ export interface Database {
           status?: 'pending' | 'contacted' | 'completed';
         };
       };
+      users: {
+        Row: {
+          id: string;
+          email: string | null;
+          name: string | null;
+          avatar_url: string | null;
+          company_name: string | null;
+          phone: string | null;
+          kakao_id: string | null;
+          kakao_access_token: string | null;
+          provider: string | null;
+          marketing_consent: boolean | null;
+          last_sign_in_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          email?: string | null;
+          name?: string | null;
+          avatar_url?: string | null;
+          company_name?: string | null;
+          phone?: string | null;
+          kakao_id?: string | null;
+          kakao_access_token?: string | null;
+          provider?: string | null;
+          marketing_consent?: boolean | null;
+          last_sign_in_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          email?: string | null;
+          name?: string | null;
+          avatar_url?: string | null;
+          company_name?: string | null;
+          phone?: string | null;
+          kakao_id?: string | null;
+          kakao_access_token?: string | null;
+          provider?: string | null;
+          marketing_consent?: boolean | null;
+          last_sign_in_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;

@@ -20,6 +20,14 @@ export function formatNumber(num: number): string {
   return num.toLocaleString('ko-KR');
 }
 
+// 포맷된 숫자 문자열을 숫자로 변환
+export function parseNumber(formattedNumber: string): number {
+  // 쉼표 제거하고 숫자로 변환
+  const cleanedNumber = formattedNumber.replace(/,/g, '');
+  const parsed = parseInt(cleanedNumber, 10);
+  return isNaN(parsed) ? 0 : parsed;
+}
+
 // 통화 포맷팅 (Korean locale)
 export function formatCurrency(
   amount: number,

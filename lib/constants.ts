@@ -55,6 +55,11 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
         label: '자료실',
         description: '투자 가이드, 시장 보고서, 교육 자료 다운로드',
       },
+      {
+        href: '/pension-calculator',
+        label: '연금 계산기',
+        description: '정확한 노후 설계를 위한 맞춤형 연금 계산 도구',
+      },
     ],
   },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김

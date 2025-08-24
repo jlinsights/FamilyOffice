@@ -12,6 +12,8 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { SamsungFinancialNetworksLogo } from '@/components/logo';
+import { UserProfileDropdown } from '@/components/auth/user-profile-dropdown';
+import { useKakaoAuth } from '@/hooks/use-kakao-auth';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 import { PopupManager } from '@/components/popup/popup-manager';
@@ -28,6 +30,7 @@ export const Header = memo(function Header({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { isAuthenticated, isLoading } = useKakaoAuth();
 
   useEffect(() => {
     setMounted(true);
@@ -98,7 +101,7 @@ export const Header = memo(function Header({
         role="navigation"
         aria-label="주 네비게이션"
       >
-        <div className="flex justify-between items-center py-3 md:justify-start md:space-x-10">
+        <div className="flex justify-between items-center py-3 md:justify-start md:space-x-6">
           {/* 로고 */}
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link
@@ -140,7 +143,7 @@ export const Header = memo(function Header({
 
           {/* 데스크톱 네비게이션 - 더 큰 화면에서만 표시 */}
           <nav
-            className="hidden lg:flex space-x-10"
+            className="hidden lg:flex space-x-6"
             role="navigation"
             aria-label="주 메뉴"
           >
@@ -149,7 +152,7 @@ export const Header = memo(function Header({
                 {item.submenu ? (
                   <>
                     <button
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1 flex items-center gap-1 h-9"
+                      className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1 py-1 flex items-center gap-1 h-9"
                       aria-label={`${item.label} 메뉴`}
                     >
                       {item.label}
@@ -196,7 +199,7 @@ export const Header = memo(function Header({
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1 flex items-center h-9"
+                    className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1 py-1 flex items-center h-9"
                     aria-label={
                       item.isExternal
                         ? `${item.label} (새 창에서 열림)`
@@ -211,30 +214,31 @@ export const Header = memo(function Header({
           </nav>
 
           {/* 데스크톱 우측 버튼들 */}
-          <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-4">
-            <Link
-              href="http://pf.kakao.com/_gsxkxdG"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/40 bg-yellow-400 dark:bg-yellow-500 hover:bg-yellow-500 dark:hover:bg-yellow-400 transition-all hover:scale-105"
-              aria-label="카카오톡 채널 연결"
-            >
-              <Image
-                src="/SVG/SimpleIconsKakao.svg"
-                alt="Kakao"
-                width={20}
-                height={20}
-                className="w-5 h-5 dark:invert"
-              />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-              aria-label="상담 신청 페이지로 이동"
-            >
-              상담 신청
-              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-            </Link>
+          <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
+            {/* 인증 상태에 따른 버튼 표시 */}
+            {isAuthenticated ? (
+              <UserProfileDropdown className="mr-2" />
+            ) : (
+              !isLoading && (
+                <>
+                  <Link
+                    href="/auth/sign-in"
+                    className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                    aria-label="로그인 페이지로 이동"
+                  >
+                    로그인
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                    aria-label="상담 신청 페이지로 이동"
+                  >
+                    상담 신청
+                    <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
+                  </Link>
+                </>
+              )
+            )}
             <ThemeToggle />
           </div>
         </div>
@@ -301,36 +305,39 @@ export const Header = memo(function Header({
 
             {/* 모바일 버튼 및 설정 */}
             <div className="pt-4 border-t border-gray-200 dark:border-gray-800 space-y-4">
-              <Link
-                href="/contact"
-                onClick={handleMobileLinkClick}
-                className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
-                aria-label="상담 신청"
-              >
-                상담 신청
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-              </Link>
-              
-              <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-800">
-                <span className="text-base font-medium text-gray-900 dark:text-gray-100">
-                  고객지원
-                </span>
+              {/* 인증 상태에 따른 모바일 버튼 */}
+              {isAuthenticated ? (
                 <Link
-                  href="http://pf.kakao.com/_gsxkxdG"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/40 bg-yellow-400 dark:bg-yellow-500 hover:bg-yellow-500 dark:hover:bg-yellow-400 transition-all hover:scale-105"
-                  aria-label="카카오톡 채널 연결"
+                  href="/dashboard"
+                  onClick={handleMobileLinkClick}
+                  className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
+                  aria-label="대시보드로 이동"
                 >
-                  <Image
-                    src="/SVG/SimpleIconsKakao.svg"
-                    alt="Kakao"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5 dark:invert"
-                  />
+                  내 대시보드
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Link>
-              </div>
+              ) : (
+                <>
+                  <Link
+                    href="/auth/sign-in"
+                    onClick={handleMobileLinkClick}
+                    className="flex items-center justify-center w-full border border-primary text-primary font-semibold rounded-lg px-4 py-3 hover:bg-primary hover:text-white transition-colors duration-200"
+                    aria-label="로그인"
+                  >
+                    로그인
+                  </Link>
+                  <Link
+                    href="/contact"
+                    onClick={handleMobileLinkClick}
+                    className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
+                    aria-label="상담 신청"
+                  >
+                    상담 신청
+                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </>
+              )}
+              
               
               <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-800">
                 <span className="text-base font-medium text-gray-900 dark:text-gray-100">

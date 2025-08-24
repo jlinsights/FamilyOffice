@@ -7,8 +7,11 @@ import { Toaster } from '@/components/ui/sonner';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Analytics } from '@/components/analytics';
 import ExternalScripts from '@/components/external-scripts';
+import { KakaoPixel } from '@/components/kakao/kakao-pixel';
+import { KakaoSDK } from '@/components/kakao/kakao-sdk';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
-import { CalComFloatingSimple } from '@/components/cal-com-floating-simple';
+import { FloatingActionButtons } from '@/components/floating-action-buttons';
+import { ScrollToTopFloating } from '@/components/scroll-to-top-floating';
 import { AnnouncementBanner } from '@/components/announcement-banner';
 import { DebugStyles } from './debug-styles';
 
@@ -64,6 +67,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//cal.com" />
         <link rel="dns-prefetch" href="//analytics.google.com" />
+        
+        {/* 파비콘 및 앱 아이콘 설정 */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         
         {/* Critical 리소스 우선 로딩 - 실제 존재하는 파일로 변경 */}
         <link rel="preload" href="/SVG/FamilyOfficeS_blue.svg" as="image" type="image/svg+xml" />
@@ -336,9 +345,18 @@ export default function RootLayout({
             <AnnouncementBanner />
             {children}
             {/* <AIChatFloating /> */}
-            <CalComFloatingSimple />
+            <ScrollToTopFloating />
+            <FloatingActionButtons />
             <Toaster />
             <Analytics />
+            <KakaoPixel 
+              pixelId={process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || 'your_kakao_pixel_id'} 
+              debug={process.env.NODE_ENV === 'development'} 
+            />
+            <KakaoSDK
+              javascriptKey={process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || 'a1c218e1d0a96ce64bf734eafda420b1'}
+              debug={process.env.NODE_ENV === 'development'}
+            />
             <ExternalScripts />
             <DebugStyles />
             

@@ -3,7 +3,7 @@
  * Redis 기반 고성능 rate limiting with fallback to memory
  */
 import { NextRequest } from 'next/server';
-import { env } from '@/lib/env';
+// import { env } from '@/lib/env';
 
 // Rate limit configuration per endpoint type
 export const rateLimitConfig = {
@@ -253,7 +253,7 @@ export function withRateLimit(
 ) {
   return async (request: NextRequest, context: any) => {
     // Skip rate limiting in development (optional)
-    if (env.NODE_ENV === 'development' && process.env.SKIP_RATE_LIMIT === 'true') {
+    if (process.env.NODE_ENV === 'development' && process.env.SKIP_RATE_LIMIT === 'true') {
       return handler(request, context);
     }
     

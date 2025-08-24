@@ -49,13 +49,30 @@ export const serverEnvSchema = z.object({
   
   // Newsletter
   BEEHIIV_API_KEY: z.string()
-    .startsWith('bh_', 'BEEHIIV_API_KEY must start with bh_')
+    .min(1, 'BEEHIIV_API_KEY cannot be empty')
     .optional(),
   BEEHIIV_PUBLICATION_ID: z.string().optional(),
   
   // Monitoring - 선택사항
   LOGS_SO_API_KEY: z.string().optional(),
   LOGS_SO_WORKSPACE_ID: z.string().optional(),
+  
+  // Kakao Business - 선택사항 but format validation
+  KAKAO_BUSINESS_API_KEY: z.string()
+    .min(1, 'KAKAO_BUSINESS_API_KEY cannot be empty if provided')
+    .optional(),
+  KAKAO_REST_API_KEY: z.string()
+    .regex(/^[a-f0-9]{32}$/, 'Invalid Kakao REST API key format')
+    .optional(),
+  KAKAO_APP_KEY: z.string()
+    .regex(/^[a-f0-9]{32}$/, 'Invalid Kakao App key format')
+    .optional(),
+  KAKAO_JAVASCRIPT_KEY: z.string()
+    .regex(/^[a-f0-9]{32}$/, 'Invalid Kakao JavaScript key format')
+    .optional(),
+  KAKAO_ADMIN_KEY: z.string()
+    .regex(/^[a-f0-9]{32}$/, 'Invalid Kakao Admin key format')
+    .optional(),
 });
 
 // 클라이언트 전용 환경변수 스키마 (NEXT_PUBLIC_*)
@@ -82,6 +99,17 @@ export const clientEnvSchema = z.object({
   NEXT_PUBLIC_CALCOM_API_KEY: z.string().optional(),
   NEXT_PUBLIC_CALCOM_NAMESPACE: z.string()
     .default('familyoffice')
+    .optional(),
+  
+  // Kakao Business - 클라이언트 전용
+  NEXT_PUBLIC_KAKAO_PIXEL_ID: z.string()
+    .min(1, 'NEXT_PUBLIC_KAKAO_PIXEL_ID cannot be empty if provided')
+    .optional(),
+  NEXT_PUBLIC_KAKAO_CHANNEL_ID: z.string()
+    .min(1, 'NEXT_PUBLIC_KAKAO_CHANNEL_ID cannot be empty if provided')
+    .optional(),
+  NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: z.string()
+    .regex(/^[a-f0-9]{32}$/, 'Invalid Kakao JavaScript key format')
     .optional(),
 });
 
@@ -116,6 +144,9 @@ export function createEnv() {
       NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
       NEXT_PUBLIC_CALCOM_API_KEY: process.env.NEXT_PUBLIC_CALCOM_API_KEY,
       NEXT_PUBLIC_CALCOM_NAMESPACE: process.env.NEXT_PUBLIC_CALCOM_NAMESPACE,
+      NEXT_PUBLIC_KAKAO_PIXEL_ID: process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID,
+      NEXT_PUBLIC_KAKAO_CHANNEL_ID: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID,
+      NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY,
     });
 
     // 3. 서버 환경변수 검증 (서버에서만)
@@ -135,6 +166,11 @@ export function createEnv() {
         BEEHIIV_PUBLICATION_ID: process.env.BEEHIIV_PUBLICATION_ID,
         LOGS_SO_API_KEY: process.env.LOGS_SO_API_KEY,
         LOGS_SO_WORKSPACE_ID: process.env.LOGS_SO_WORKSPACE_ID,
+        KAKAO_BUSINESS_API_KEY: process.env.KAKAO_BUSINESS_API_KEY,
+        KAKAO_REST_API_KEY: process.env.KAKAO_REST_API_KEY,
+        KAKAO_APP_KEY: process.env.KAKAO_APP_KEY,
+        KAKAO_JAVASCRIPT_KEY: process.env.KAKAO_JAVASCRIPT_KEY,
+        KAKAO_ADMIN_KEY: process.env.KAKAO_ADMIN_KEY,
       });
     }
 
@@ -210,7 +246,7 @@ export const validateEnvOnStartup = () => {
 };
 
 // 특정 환경변수 그룹 검증
-export const validateEnvGroup = (group: 'clerk' | 'supabase' | 'redis' | 'analytics') => {
+export const validateEnvGroup = (group: 'clerk' | 'supabase' | 'redis' | 'analytics' | 'kakao') => {
   const schemas = {
     clerk: z.object({
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: clientEnvSchema.shape.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
@@ -230,6 +266,16 @@ export const validateEnvGroup = (group: 'clerk' | 'supabase' | 'redis' | 'analyt
     }),
     analytics: z.object({
       NEXT_PUBLIC_GA_MEASUREMENT_ID: clientEnvSchema.shape.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+    }),
+    kakao: z.object({
+      NEXT_PUBLIC_KAKAO_PIXEL_ID: clientEnvSchema.shape.NEXT_PUBLIC_KAKAO_PIXEL_ID,
+      NEXT_PUBLIC_KAKAO_CHANNEL_ID: clientEnvSchema.shape.NEXT_PUBLIC_KAKAO_CHANNEL_ID,
+      NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: clientEnvSchema.shape.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY,
+      KAKAO_BUSINESS_API_KEY: serverEnvSchema.shape.KAKAO_BUSINESS_API_KEY.optional(),
+      KAKAO_REST_API_KEY: serverEnvSchema.shape.KAKAO_REST_API_KEY.optional(),
+      KAKAO_APP_KEY: serverEnvSchema.shape.KAKAO_APP_KEY.optional(),
+      KAKAO_JAVASCRIPT_KEY: serverEnvSchema.shape.KAKAO_JAVASCRIPT_KEY.optional(),
+      KAKAO_ADMIN_KEY: serverEnvSchema.shape.KAKAO_ADMIN_KEY.optional(),
     }),
   };
 
@@ -270,7 +316,7 @@ export const env = getEnv();
 
 // 타입 정의
 export type Env = ReturnType<typeof createEnv>;
-export type EnvGroup = 'clerk' | 'supabase' | 'redis' | 'analytics';
+export type EnvGroup = 'clerk' | 'supabase' | 'redis' | 'analytics' | 'kakao';
 
 // 레거시 호환성을 위한 함수들
 export const validateEnv = validateEnvOnStartup;
