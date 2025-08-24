@@ -4,7 +4,7 @@
  */
 
 import { createClient } from '@/lib/supabase/client';
-import type { AuthError, User } from '@supabase/supabase-js';
+import type { User } from '@supabase/supabase-js';
 
 export interface KakaoUser {
   id: number;
@@ -56,6 +56,16 @@ export class KakaoAuthService {
   private isInitialized = false;
 
   constructor() {
+    // 환경 변수 검증
+    if (typeof window !== 'undefined') {
+      const javascriptKey = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
+      if (!javascriptKey) {
+        console.error('❌ NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY가 설정되지 않았습니다.');
+        console.error('   카카오 로그인이 작동하지 않습니다.');
+        return;
+      }
+    }
+    
     this.initializeKakaoSDK();
   }
 
@@ -339,6 +349,100 @@ export class KakaoAuthService {
       return {
         success: false,
         error: error instanceof Error ? error.message : '프로필 업데이트 중 오류가 발생했습니다.'
+      };
+    }
+  }
+
+  /**
+   * OAuth 콜백 처리 (카카오싱크용)
+   */
+  async handleOAuthCallback(code: string): Promise<KakaoAuthResult> {
+    try {
+      // 인증 코드로 액세스 토큰 교환
+      const tokenResponse = await fetch('https://kauth.kakao.com/oauth/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          grant_type: 'authorization_code',
+          client_id: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || '',
+          redirect_uri: `${process.env.NEXT_PUBLIC_APP_URL}/oauth`,
+          code: code,
+        }),
+      });
+
+      if (!tokenResponse.ok) {
+        throw new Error('액세스 토큰 교환에 실패했습니다.');
+      }
+
+      const tokenData = await tokenResponse.json();
+      const accessToken = tokenData.access_token;
+
+      if (!accessToken) {
+        throw new Error('액세스 토큰을 받지 못했습니다.');
+      }
+
+      // 카카오 사용자 정보 가져오기
+      const kakaoUser = await this.getKakaoUserInfo(accessToken);
+      if (!kakaoUser) {
+        throw new Error('카카오 사용자 정보를 가져올 수 없습니다.');
+      }
+
+      // Supabase에 사용자 등록/로그인
+      const supabaseResult = await this.signInOrCreateUser(kakaoUser, accessToken);
+      
+      return {
+        success: true,
+        user: supabaseResult.user,
+        kakaoUser,
+        isNewUser: supabaseResult.isNewUser
+      };
+
+    } catch (error) {
+      console.error('OAuth 콜백 처리 오류:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'OAuth 처리 중 오류가 발생했습니다.'
+      };
+    }
+  }
+
+  /**
+   * 카카오 로그아웃 (카카오싱크 사용 시)
+   */
+  async signOutFromKakao(): Promise<{ success: boolean; error?: string }> {
+    try {
+      if (typeof window === 'undefined' || !window.Kakao) {
+        console.warn('카카오 SDK가 로드되지 않았습니다.');
+        return { success: true }; // SDK가 없어도 성공으로 처리
+      }
+
+      // 카카오 로그아웃 처리
+      if (window.Kakao.Auth.getAccessToken()) {
+        // 액세스 토큰이 있으면 카카오 서버에 로그아웃 요청
+        try {
+          await fetch('https://kapi.kakao.com/v1/user/logout', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${window.Kakao.Auth.getAccessToken()}`,
+            },
+          });
+        } catch (error) {
+          console.warn('카카오 서버 로그아웃 실패:', error);
+          // 서버 로그아웃 실패해도 클라이언트 로그아웃은 진행
+        }
+      }
+
+      // 클라이언트 측 토큰 정리
+      window.Kakao.Auth.logout();
+
+      return { success: true };
+    } catch (error) {
+      console.error('카카오 로그아웃 오류:', error);
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : '카카오 로그아웃 중 오류가 발생했습니다.' 
       };
     }
   }

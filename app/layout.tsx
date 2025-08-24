@@ -2,17 +2,17 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/sonner';
-import { ErrorBoundary } from '@/components/error-boundary';
 import { Analytics } from '@/components/analytics';
+import { ErrorBoundary } from '@/components/error-boundary';
 import ExternalScripts from '@/components/external-scripts';
 import { KakaoPixel } from '@/components/kakao/kakao-pixel';
 import { KakaoSDK } from '@/components/kakao/kakao-sdk';
+import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
+import { AnnouncementBanner } from '@/components/announcement-banner';
 import { FloatingActionButtons } from '@/components/floating-action-buttons';
 import { ScrollToTopFloating } from '@/components/scroll-to-top-floating';
-import { AnnouncementBanner } from '@/components/announcement-banner';
 import { DebugStyles } from './debug-styles';
 
 // import { defaultMetadata } from '@/lib/seo';
@@ -350,12 +350,12 @@ export default function RootLayout({
             <Toaster />
             <Analytics />
             <KakaoPixel 
-              pixelId={process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || 'your_kakao_pixel_id'} 
+              pixelId={process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || ''} 
               debug={process.env.NODE_ENV === 'development'} 
             />
             <KakaoSDK
-              javascriptKey={process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || 'a1c218e1d0a96ce64bf734eafda420b1'}
-              debug={process.env.NODE_ENV === 'development'}
+              javascriptKey={process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || ''}
+              debug={true}
             />
             <ExternalScripts />
             <DebugStyles />

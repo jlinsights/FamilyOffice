@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { MessageCircle, LogIn, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { getKakaoAuthService, type KakaoAuthResult } from '@/lib/auth/kakao-auth';
+import { Loader2, MessageCircle } from 'lucide-react';
+import { useState } from 'react';
 
 interface KakaoLoginButtonProps {
   onSuccess?: (result: KakaoAuthResult) => void;
@@ -33,26 +33,26 @@ export function KakaoLoginButton({
     setIsLoading(true);
     
     try {
-      const result = await kakaoAuth.signInWithKakao();
+      // 카카오싱크 방식으로 리다이렉트
+      const redirectUri = `${process.env.NEXT_PUBLIC_APP_URL}/oauth`;
+      const clientId = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
       
-      if (result.success) {
-        toast({
-          title: result.isNewUser ? '회원가입 완료!' : '로그인 성공!',
-          description: result.isNewUser 
-            ? `환영합니다! ${result.kakaoUser?.kakao_account.profile?.nickname || '회원'}님`
-            : `다시 오신 것을 환영합니다, ${result.kakaoUser?.kakao_account.profile?.nickname || '회원'}님!`,
-        });
-        onSuccess?.(result);
-      } else {
-        const errorMessage = result.error || '로그인에 실패했습니다.';
-        toast({
-          title: '로그인 실패',
-          description: errorMessage,
-          variant: 'destructive',
-        });
-        onError?.(errorMessage);
+      if (!clientId) {
+        throw new Error('카카오 JavaScript 키가 설정되지 않았습니다.');
       }
+
+      // 카카오 OAuth URL 생성
+      const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?` +
+        `client_id=${clientId}&` +
+        `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+        `response_type=code&` +
+        `state=${Math.random().toString(36).substring(7)}`;
+
+      // 카카오 인증 페이지로 리다이렉트
+      window.location.href = kakaoAuthUrl;
+      
     } catch (error) {
+      setIsLoading(false);
       const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
       toast({
         title: '로그인 오류',
@@ -60,8 +60,6 @@ export function KakaoLoginButton({
         variant: 'destructive',
       });
       onError?.(errorMessage);
-    } finally {
-      setIsLoading(false);
     }
   };
 
