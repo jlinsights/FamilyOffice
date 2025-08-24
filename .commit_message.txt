@@ -1,29 +1,16 @@
-🧹 환경변수 정리 및 최적화 + OAuth Suspense 수정
+🌍 Production URL 설정 - familyoffices.vip 도메인 적용
 
-✅ 환경변수 대폭 정리
-- .env.local: 중복된 KAKAO 환경변수 제거 (9개 → 5개로 정리)
-- AI API 키 제거: OpenAI, Anthropic, Gemini (사용하지 않음)
-- 불필요한 KAKAO_BUSINESS_API_KEY, NEXT_PUBLIC_KAKAO_PIXEL_ID 제거
-- 중복된 주석 및 설명 제거로 파일 크기 60% 감소
+✅ App URL 프로덕션 설정
+- NEXT_PUBLIC_APP_URL: http://localhost:3000 → https://familyoffices.vip
+- 프로덕션 도메인으로 완전 전환
+- SEO, OpenGraph, 카노니컬 URL 최적화
 
-🔧 .env.example 표준화
-- 필수/선택사항 구분으로 명확한 가이드라인 제공
-- Core Authentication & Database (Required) 섹션 분리
-- 불필요한 AI API 섹션 완전 제거
-- 카테고리별 그룹화로 가독성 대폭 향상
+🔧 .env.example 업데이트
+- 프로덕션 URL 예시로 가이드라인 개선
+- 개발자를 위한 명확한 설정 가이드
 
-⚡ 환경변수 검증 시스템 최적화
-- lib/env.ts에서 미사용 스키마 필드 제거
-- KAKAO_BUSINESS_API_KEY, NEXT_PUBLIC_KAKAO_PIXEL_ID 검증 로직 제거
-- 클린한 환경변수 스키마로 성능 최적화
-
-🔄 OAuth Suspense 경계 추가
-- app/oauth/page.tsx에 Suspense 래퍼 추가로 useSearchParams 오류 해결
-- 로딩 중 폴백 UI 개선으로 사용자 경험 향상
-- Next.js 15.4.6 빌드 오류 완전 해결
-
-✅ 빌드 및 테스트 검증
-- 빌드 성공: 9.0초, 49페이지 정적 생성 (2페이지 추가)
-- 개발 서버 정상 실행: 포트 3002에서 Turbopack 활성화
-- API 상태 확인: /api/status 엔드포인트 정상 작동
-- 환경변수 검증 시스템 완전 작동
+✅ 빌드 검증 완료
+- 빌드 성공: 11.0초, 49페이지 정적 생성
+- 프로덕션 URL 검증 완료
+- 환경변수 시스템 정상 작동
+- https://familyoffices.vip 도메인 준비 완료
