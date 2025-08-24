@@ -1,1 +1,21 @@
-🚀 deploy: Production 배포 완료 - www.familyoffices.vip 라이브, 보안/성능 최적화 적용
+🎨 연금 계산기 카드 레이아웃 최적화 및 모바일 반응형 개선
+
+📱 모바일 우선 반응형 디자인
+- 그리드 레이아웃을 xl:grid-cols-2 → lg:grid-cols-2로 변경하여 태블릿에서도 2열 배치
+- 카드 내부 그리드를 md:grid-cols-2 → sm:grid-cols-2로 변경하여 작은 화면에서도 최적화
+- gap을 gap-8 → gap-6 lg:gap-8로 조정하여 모바일에서 공간 효율성 향상
+
+🔧 카드 UI 개선
+- 카드에 w-full max-w-none 추가로 한국어 텍스트 줄바꿈 방지
+- 카드 패딩을 p-6 → p-4 sm:p-6으로 조정하여 모바일 최적화
+- 버튼 레이아웃을 flex → flex-col sm:flex-row로 변경하여 모바일에서 세로 배치
+
+💬 텍스트 가독성 향상
+- 전문가 조언 섹션의 긴 텍스트를 두 개 문단으로 분리하여 가독성 개선
+- leading-relaxed 클래스 추가로 줄 간격 최적화
+- 모든 text-gray-500를 text-muted-foreground로 통일하여 다크모드 호환성 완벽 구현
+
+📐 레이아웃 최적화
+- space-y-6 → space-y-4 sm:space-y-6으로 조정하여 모바일에서 컴팩트한 디자인
+- 카드 간격 조정으로 불필요한 여백 제거
+- 한국어 텍스트 특성을 고려한 레이아웃 최적화
