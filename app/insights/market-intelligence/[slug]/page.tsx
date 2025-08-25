@@ -14,6 +14,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { blogPosts } from '@/lib/blog-data';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
+import BlogPodcastConnection from '@/components/blog-podcast-connection';
 
 // BlogPost interface and data imported from lib/blog-data
 
@@ -164,6 +165,13 @@ export default async function BlogPostPage({
                   variant="inline"
                 />
               </div>
+
+              {/* Related Podcast Episodes */}
+              <BlogPodcastConnection
+                blogCategory={post.category}
+                blogTags={post.tags}
+                blogTitle={post.title}
+              />
 
               {/* Author Bio */}
               <Card className="mt-8 shadow-lg bg-background border-border">

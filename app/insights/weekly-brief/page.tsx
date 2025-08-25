@@ -23,6 +23,7 @@ import { CalComPopup } from '@/components/cal-com-popup';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Skeleton } from '@/components/ui/skeleton';
+import SpotifyPodcastPlayer from '@/components/spotify-podcast-player';
 
 // Metadata는 서버 컴포넌트에서만 사용 가능하므로 주석 처리
 // export const metadata: Metadata = {
@@ -393,6 +394,9 @@ export default function WeeklyBriefPage() {
           </div>
         </div>
       </section>
+
+      {/* Spotify Podcast Section */}
+      <SpotifyPodcastPlayer className="bg-muted/30" />
 
       {/* Recent Topics */}
       <section className="py-20 bg-muted/30">
