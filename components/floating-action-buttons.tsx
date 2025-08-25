@@ -19,8 +19,10 @@ export function FloatingActionButtons() {
   const handleKakaoTalk = () => {
     // 카카오톡 채널 추가 또는 1:1 채팅 시작
     if (typeof window !== 'undefined') {
-      const kakaoChannelUrl = BRAND_COLORS.social[0].url;
-      window.open(kakaoChannelUrl, '_blank');
+      const kakaoChannelUrl = BRAND_COLORS.social[0]?.url;
+      if (kakaoChannelUrl) {
+        window.open(kakaoChannelUrl, '_blank');
+      }
     }
   };
 

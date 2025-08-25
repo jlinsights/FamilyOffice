@@ -1,8 +1,6 @@
 import {
   FileText,
   Search,
-  ArrowRight,
-  BookOpen,
   Globe,
   BarChart3,
   Target,
@@ -24,7 +22,7 @@ import { Input } from '@/components/ui/input';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { blogCategories, blogPosts } from '@/lib/blog-data';
+import { blogCategories } from '@/lib/blog-data';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { BlogCategoryFilter, BlogCategoryFilterSkeleton } from '@/components/blog-category-filter';
 import { BlogContent } from '@/components/blog-content';

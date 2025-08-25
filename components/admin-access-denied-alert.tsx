@@ -7,8 +7,6 @@ import { X, Shield } from 'lucide-react';
 
 import { useEffect, useState, Suspense } from 'react';
 
-import { useSearchParams } from 'next/navigation';
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Shield, TrendingUp, Bell, Sparkles } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 export interface Announcement {
   id: string;

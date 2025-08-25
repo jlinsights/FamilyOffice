@@ -6,8 +6,8 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
 } from 'recharts';
 import { 
-  TrendingUp, TrendingDown, Eye, MousePointer, Target, 
-  Users, Clock, Smartphone, Monitor, Tablet, Calendar,
+  TrendingUp, Eye, MousePointer, Target, 
+  Users, Smartphone, Monitor, Tablet, Calendar,
   AlertCircle, CheckCircle, Info, Filter
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';

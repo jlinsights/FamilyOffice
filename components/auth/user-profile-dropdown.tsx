@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { User, Settings, LogOut, MessageCircle, Shield, ChevronDown } from 'lucide-react';
+import { User, Settings, LogOut, MessageCircle, ChevronDown } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,7 +23,6 @@ interface UserProfileDropdownProps {
 export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps) {
   const { 
     user, 
-    kakaoUser, 
     isAuthenticated, 
     isLoading, 
     displayName, 
@@ -49,7 +48,7 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
 
   const userInitials = displayName
     .split(' ')
-    .map(name => name[0])
+    .map((name: string) => name[0])
     .join('')
     .toUpperCase()
     .slice(0, 2);

@@ -300,14 +300,15 @@ export default function RecruitPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {gfcBenefits.map((benefit, index) => {
                 const Icon = benefit.icon;
-                const colorClasses = {
+                const colorClassesMap = {
                   blue: 'bg-blue-100 text-blue-600',
                   green: 'bg-green-100 text-green-600',
                   yellow: 'bg-yellow-100 text-yellow-600',
                   purple: 'bg-purple-100 text-purple-600',
                   indigo: 'bg-indigo-100 text-indigo-600',
                   pink: 'bg-pink-100 text-pink-600'
-                }[benefit.color as keyof typeof colorClasses] || 'bg-primary/10 text-primary';
+                };
+                const colorClasses = colorClassesMap[benefit.color as keyof typeof colorClassesMap] || 'bg-primary/10 text-primary';
                 
                 return (
                   <div key={index} className="text-center group hover:transform hover:scale-105 transition-all duration-300">

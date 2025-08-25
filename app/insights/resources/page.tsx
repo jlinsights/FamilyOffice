@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -10,14 +9,8 @@ import {
   BookOpen, 
   PresentationIcon, 
   FileBarChart,
-  Shield,
-  Target,
-  Users,
   Search,
   Filter,
-  Calendar,
-  TrendingUp,
-  Building,
   Briefcase,
   Lock
 } from 'lucide-react';

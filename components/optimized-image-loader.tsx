@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface OptimizedImageProps {
@@ -93,8 +93,7 @@ export function OptimizedImage({
       <Image
         src={getOptimizedSrc(src)}
         alt={alt}
-        width={fill ? undefined : width}
-        height={fill ? undefined : height}
+        {...(fill ? {} : { width, height })}
         className={cn(
           'transition-opacity duration-300',
           isLoading ? 'opacity-0' : 'opacity-100'

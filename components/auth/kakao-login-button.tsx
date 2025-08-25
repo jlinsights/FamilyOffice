@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { getKakaoAuthService, type KakaoAuthResult } from '@/lib/auth/kakao-auth';
+import { type KakaoAuthResult } from '@/lib/auth/kakao-auth';
 import { Loader2, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 
@@ -27,7 +27,6 @@ export function KakaoLoginButton({
 }: KakaoLoginButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const kakaoAuth = getKakaoAuthService();
 
   const handleKakaoLogin = async () => {
     setIsLoading(true);
@@ -50,6 +49,13 @@ export function KakaoLoginButton({
 
       // 카카오 인증 페이지로 리다이렉트
       window.location.href = kakaoAuthUrl;
+      
+      // onSuccess 콜백 호출 (리다이렉트 전)
+      if (onSuccess) {
+        onSuccess({
+          success: true
+        });
+      }
       
     } catch (error) {
       setIsLoading(false);

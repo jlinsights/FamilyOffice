@@ -31,7 +31,10 @@ export function CalComAvailability({
   const [availability, setAvailability] = useState<AvailabilitySlot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
+  const [selectedDate, setSelectedDate] = useState<string>(() => {
+    const dateStr = new Date().toISOString().split('T')[0];
+    return dateStr || new Date().toISOString().substring(0, 10);
+  });
 
   // Generate date range
   const generateDates = () => {
@@ -40,7 +43,7 @@ export function CalComAvailability({
       const date = new Date();
       date.setDate(date.getDate() + i);
       dates.push({
-        value: date.toISOString().split('T')[0],
+        value: date.toISOString().split('T')[0] || date.toISOString().substring(0, 10),
         label: date.toLocaleDateString('ko-KR', { 
           month: 'short', 
           day: 'numeric',
@@ -62,6 +65,7 @@ export function CalComAvailability({
     try {
       // This would be replaced with actual Cal.com API call
       // const response = await fetch(`/api/cal-com/availability?date=${date}&eventTypeId=${eventTypeId}`);
+      console.log('Fetching availability for date:', date); // Use the date parameter
       
       // Mock data for demonstration
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay

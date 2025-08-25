@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -10,13 +10,8 @@ import {
   TrendingUp, 
   TrendingDown, 
   Target, 
-  Users, 
   MousePointer, 
-  MessageSquare,
   DollarSign,
-  Eye,
-  Clock,
-  Zap,
   RefreshCw
 } from 'lucide-react';
 import { formatNumber, formatCurrency } from '@/lib/utils';
@@ -166,7 +161,7 @@ const mockData: MarketingMetrics = {
 };
 
 export default function KakaoMarketingDashboard() {
-  const [data, setData] = useState<MarketingMetrics>(mockData);
+  const [data] = useState<MarketingMetrics>(mockData);
   const [isLoading, setIsLoading] = useState(false);
   const [lastRefresh, setLastRefresh] = useState(new Date());
 

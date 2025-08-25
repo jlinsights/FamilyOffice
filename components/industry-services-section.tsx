@@ -13,7 +13,7 @@ export function IndustryServicesTabsSection() {
       <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-200 mb-8 text-center">
         업종별 특화 전문 서비스
       </h2>
-      <Tabs defaultValue={INDUSTRY_SERVICES[0].title} className="w-full">
+      <Tabs defaultValue={INDUSTRY_SERVICES[0]?.title || ''} className="w-full">
         {/* 탭 리스트: 업종별 대표 아이콘+타이틀 */}
         <TabsList className="flex flex-wrap gap-3 justify-center mb-8">
           {INDUSTRY_SERVICES.map(item => (

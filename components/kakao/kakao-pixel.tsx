@@ -136,6 +136,7 @@ export const kakaoPixelTrack = {
 export function useKakaoPixel(pixelId?: string) {
   const track = (event: KakaoPixelEvent) => {
     if (typeof window !== 'undefined' && window.kakaoPixel) {
+      console.log('Tracking with pixel ID:', pixelId); // Use the pixelId parameter
       window.kakaoPixel.push(['track', event.event_name, event.parameters]);
     }
   };
@@ -151,6 +152,7 @@ export function useKakaoPixel(pixelId?: string) {
   };
 
   const trackContact = (source?: string) => {
+    console.log('Tracking contact from source:', source); // Use the source parameter
     track({
       event_name: 'Contact',
       parameters: {

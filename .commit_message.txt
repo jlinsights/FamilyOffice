@@ -1,1 +1,17 @@
-↩️ 카카오 채널 ID 원복
+🧹 TypeScript 엄격모드 미사용 import 및 변수 대량 정리
+
+- user-profile-dropdown.tsx: map 함수 name 매개변수 타입 명시
+- cal-com-availability.tsx: 날짜 문자열 분리 안전성 강화 및 date 매개변수 사용
+- cal-com-button.tsx: useTheme import 제거
+- cal-com-floating-simple.tsx: useEffect import 제거
+- error-boundary.tsx: useState, useEffect import 제거
+- floating-action-buttons.tsx: BRAND_COLORS.social 안전 접근 추가
+- hubspot-contact-form.tsx: className 기본값 설정
+- header.tsx: Phone, Image import 제거
+- industry-services-section.tsx: 배열 첫 번째 요소 안전 접근
+- kakao-pixel.tsx: pixelId, source 매개변수 활용
+- lazy-loading/LazyComponents.tsx: IntersectionObserver entry 안전성 검사
+- mobile-nav.tsx: icon 컴포넌트 타입 단순화
+- optimized-image-loader.tsx: Next.js Image 조건부 props 처리
+- pension-calculator-form.tsx: useEffect import 제거
+- popup-analytics-dashboard.tsx: TrendingDown, Clock, Calendar import 제거

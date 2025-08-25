@@ -1,27 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 import { 
   Mail, 
-  CheckCircle, 
   Calendar, 
   Users, 
   TrendingUp, 
   BarChart, 
-  Building2,
   Star,
   Clock,
   ArrowRight,
   Shield,
-  Target,
-  Loader2
+  Target
 } from 'lucide-react';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { CalComPopup } from '@/components/cal-com-popup';

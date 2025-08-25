@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { generateMetadata, generateStructuredData } from '@/lib/seo';
+import { generateMetadata } from '@/lib/seo';
 import { StructuredData } from '@/components/structured-data';
 
 import { Footer } from '@/components/footer';

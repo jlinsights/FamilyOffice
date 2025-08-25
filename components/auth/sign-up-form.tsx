@@ -9,7 +9,6 @@ import * as z from 'zod';
 import { Eye, EyeOff, Mail, Lock, User, Loader2, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -369,7 +368,7 @@ export function SignUpForm({
               <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                 <FormControl>
                   <Checkbox
-                    checked={field.value}
+                    checked={field.value || false}
                     onCheckedChange={field.onChange}
                     disabled={isLoading}
                   />
@@ -393,7 +392,7 @@ export function SignUpForm({
               <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                 <FormControl>
                   <Checkbox
-                    checked={field.value}
+                    checked={field.value || false}
                     onCheckedChange={field.onChange}
                     disabled={isLoading}
                   />
@@ -417,7 +416,7 @@ export function SignUpForm({
               <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                 <FormControl>
                   <Checkbox
-                    checked={field.value}
+                    checked={field.value || false}
                     onCheckedChange={field.onChange}
                     disabled={isLoading}
                   />

@@ -3,7 +3,7 @@
 import { Calendar } from 'lucide-react';
 import { CalComPopup } from './cal-com-popup';
 import { Button } from '@/components/ui/button';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export function CalComFloatingSimple() {
   const [isHovered, setIsHovered] = useState(false);

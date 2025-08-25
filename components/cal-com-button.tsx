@@ -1,7 +1,6 @@
 'use client';
 
 import { Calendar } from 'lucide-react';
-import { useTheme } from 'next-themes';
 
 import { Button } from '@/components/ui/button';
 
@@ -20,8 +19,6 @@ export function CalComButton({
   variant = 'default',
   size = 'lg',
 }: CalComButtonProps) {
-  const { resolvedTheme } = useTheme();
-  
   const handleClick = () => {
     // Force dark theme for better visibility
     const themeParams = `?theme=dark&bg=000000&text=ffffff&layout=month_view`;

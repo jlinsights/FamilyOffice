@@ -3,13 +3,6 @@
 import {
   CheckCircle,
   ArrowRight,
-  Building,
-  TrendingUp,
-  Award,
-  Users,
-  Phone,
-  Search,
-  ChevronRight,
   Briefcase,
 } from 'lucide-react';
 
@@ -18,7 +11,6 @@ import React from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 import { CalComPopup } from '@/components/cal-com-popup';
@@ -37,7 +29,7 @@ const ServicePageContent = () => {
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry && entry.isIntersecting) {
           setStartAnimation(true);
         }
       },

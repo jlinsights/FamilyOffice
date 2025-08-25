@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 
 import { useState, useCallback, memo, useEffect } from 'react';
 import type { MouseEventHandler, KeyboardEvent } from 'react';
@@ -9,7 +9,6 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 
-import Image from 'next/image';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { SamsungFinancialNetworksLogo } from '@/components/logo';
 import { UserProfileDropdown } from '@/components/auth/user-profile-dropdown';

@@ -24,7 +24,7 @@ interface HubSpotContactFormProps {
  * 이메일 도메인 차단, 체크박스 유효성 검사 기능 포함
  */
 export function HubSpotContactForm({
-  className,
+  className = '',
   formId,
 }: HubSpotContactFormProps) {
   return (
@@ -230,7 +230,7 @@ export function HubSpotContactForm({
  * HubSpot API를 사용하는 연락처 폼
  */
 export function HubSpotApiContactForm({
-  className,
+  className = '',
   formId,
 }: HubSpotContactFormProps) {
   return (

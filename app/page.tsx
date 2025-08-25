@@ -5,7 +5,6 @@ import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { Badge } from '@/components/ui/badge';
 import { StructuredData } from '@/components/structured-data';
 
 // 🚀 SuperClaude BMAD Method + AI 검색엔진 최적화 메타데이터 - 성공한 기업가 타겟
