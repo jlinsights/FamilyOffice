@@ -16,6 +16,15 @@ export const metadata: Metadata = {
     description: '일관된 사용자 경험을 위한 디자인 시스템과 브랜드 가이드라인',
     type: 'website',
   },
+  // 파비콘 및 앱 아이콘 설정 (메인 레이아웃과 동일하게)
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    apple: { url: '/apple-touch-icon.png' }
+  },
+  manifest: '/site.webmanifest'
 };
 
 export default function BrandGuidelinesLayout({

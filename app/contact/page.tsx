@@ -6,7 +6,7 @@ import {
   Users,
   Shield,
   Award,
-  ArrowRight,
+
   Calendar,
 } from 'lucide-react';
 

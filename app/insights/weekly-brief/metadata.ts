@@ -18,4 +18,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/insights/weekly-brief',
   },
+  // 파비콘 및 앱 아이콘 설정 (메인 레이아웃과 동일하게)
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    apple: { url: '/apple-touch-icon.png' }
+  },
+  manifest: '/site.webmanifest'
 };

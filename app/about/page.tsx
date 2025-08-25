@@ -1,36 +1,31 @@
+import { AnimatedCounter } from '@/components/animated-counter';
+import { CalComPopup } from '@/components/cal-com-popup';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import { StructuredData } from '@/components/structured-data';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  TrendingUp,
-  Star,
-  Building,
-  Award,
-  ArrowRight,
-  Phone,
-  Briefcase,
-  Users,
-  Target,
-  Shield,
-  CheckCircle,
-  ChevronDown,
-  AlertCircle,
-  Factory,
-  Hammer,
-  Cpu,
-  Medal,
-} from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { CalComPopup } from '@/components/cal-com-popup';
-import { CalComButton } from '@/components/cal-com-button';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { FAQ_CATEGORIES } from '@/constants/faq';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { AnimatedCounter } from '@/components/animated-counter';
 import { generateStructuredData } from '@/lib/seo';
-import { StructuredData } from '@/components/structured-data';
+import {
+    AlertCircle,
+    ArrowRight,
+    Briefcase,
+    Building,
+    CheckCircle,
+    Cpu,
+    Factory,
+    Hammer,
+    Medal,
+    Phone,
+    Shield,
+    Target,
+    TrendingUp,
+    Users
+} from 'lucide-react';
+import Link from 'next/link';
 
 export { metadata } from './metadata';
 

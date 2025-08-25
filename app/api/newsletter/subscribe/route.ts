@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
         utmSource: source,
         utmCampaign: source === 'blog' ? 'blog-subscription' : 'footer_signup',
         utmMedium: 'website',
-        referrer: request.headers.get('referer') || undefined,
+        referrer: request.headers.get('referer') || '',
       });
 
       // 성공적으로 구독 처리됨

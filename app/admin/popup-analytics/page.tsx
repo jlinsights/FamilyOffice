@@ -1,25 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Shield, TrendingUp, Eye, Target, Settings, Play, Pause, 
-  BarChart3, Users, Clock, Smartphone, AlertCircle, CheckCircle 
+import {
+  CheckCircle,
+  Clock,
+  Pause,
+  Play,
+  Settings,
+  Shield, TrendingUp,
+  Users
 } from 'lucide-react';
+import { useState } from 'react';
 
 // Admin page for popup analytics and management
 export default function PopupAnalyticsPage() {
   const [testMode, setTestMode] = useState(false);
 
   // Campaign data - Until further notice (indefinite)
-  const CAMPAIGN_END_DATE = new Date('2099-12-31T23:59:59+09:00');
   const isCampaignActive = true; // Always active until further notice
-  const timeRemaining = CAMPAIGN_END_DATE.getTime() - new Date().getTime();
-  const daysRemaining = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-  const hoursRemaining = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
   // Mock metrics data
   const ceoMetrics = { ctr: 8.0 };

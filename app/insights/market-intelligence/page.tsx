@@ -1,7 +1,4 @@
 import {
-  CalendarDays,
-  Clock,
-  User,
   FileText,
   Search,
   ArrowRight,

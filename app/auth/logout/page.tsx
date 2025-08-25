@@ -5,12 +5,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { getKakaoAuthService } from '@/lib/auth/kakao-auth';
 import { createClient } from '@/lib/supabase/client';
 import { CheckCircle, Loader2, LogOut, XCircle } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState, Suspense } from 'react';
 
 function LogoutContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [message, setMessage] = useState<string>('로그아웃 처리 중...');
   const [error, setError] = useState<string>('');

@@ -2,9 +2,9 @@
 // 로그인한 사용자를 Supabase에 자동 동기화하는 엔드포인트
 import { NextResponse } from 'next/server';
 
+import { logAPI, logAuth } from '@/lib/logs-so';
 import { withRateLimit } from '@/lib/rate-limit';
 import { syncCurrentUser } from '@/lib/user-sync';
-import { logAPI, logAuth, LogChannel } from '@/lib/logs-so';
 
 async function handler() {
   const startTime = Date.now();

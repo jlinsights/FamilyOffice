@@ -1,6 +1,6 @@
 'use client';
 
-import { Copy, Check, Eye, Download, Code, Palette, Award, Target, Shield, TrendingUp, Users, Building2, Sparkles } from 'lucide-react';
+import { Copy, Check, Eye, Download, Award, Target, Shield, TrendingUp, Users, Building2, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 
 import { Badge } from '@/components/ui/badge';

@@ -118,7 +118,7 @@ export default function SignUpPage() {
                   <KakaoLoginButton 
                     fullWidth
                     size="lg"
-                    onSuccess={(result) => {
+                    onSuccess={() => {
                       // 회원가입 성공 시 대시보드로 리다이렉트
                       window.location.href = '/dashboard';
                     }}

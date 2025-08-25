@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { beehiiv } from '@/lib/beehiiv/client';
 
 // Vercel Cron Job handler for newsletter synchronization
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Verify the request is from Vercel Cron
     const authHeader = (await headers()).get('authorization');
@@ -60,6 +60,6 @@ export async function GET(request: NextRequest) {
 }
 
 // Handle POST requests (Vercel Cron also supports POST)
-export async function POST(request: NextRequest) {
-  return GET(request);
+export async function POST() {
+  return GET();
 }

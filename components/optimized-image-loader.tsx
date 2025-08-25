@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback, memo } from 'react';
-
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
 
 interface OptimizedImageProps {
   src: string;
@@ -13,190 +13,174 @@ interface OptimizedImageProps {
   priority?: boolean;
   quality?: number;
   placeholder?: 'blur' | 'empty';
-  blurDataURL?: string;
   sizes?: string;
   fill?: boolean;
-  loading?: 'lazy' | 'eager';
+  onLoad?: () => void;
+  onError?: () => void;
 }
 
-const OptimizedImage = memo(function OptimizedImage({
+export function OptimizedImage({
   src,
   alt,
   width,
   height,
-  className = '',
+  className,
   priority = false,
   quality = 85,
   placeholder = 'empty',
-  blurDataURL,
-  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+  sizes = '100vw',
   fill = false,
-  loading = 'lazy',
+  onLoad,
+  onError,
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  const handleLoad = useCallback(() => {
-    setIsLoading(false);
-  }, []);
+  // WebP/AVIF 지원 확인
+  const supportsWebP = typeof window !== 'undefined' && 
+    document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
 
-  const handleError = useCallback(() => {
-    setIsLoading(false);
-    setHasError(true);
-  }, []);
-
-  // WebP 지원 체크
-  const [supportsWebP, setSupportsWebP] = useState(false);
-
-  useEffect(() => {
-    const checkWebPSupport = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 1;
-      canvas.height = 1;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        const dataURL = canvas.toDataURL('image/webp');
-        setSupportsWebP(dataURL.indexOf('data:image/webp') === 0);
-      }
-    };
-
-    checkWebPSupport();
-  }, []);
-
-  // 최적화된 src 생성
-  const getOptimizedSrc = useCallback(
-    (originalSrc: string) => {
-      if (originalSrc.startsWith('http') && supportsWebP) {
-        // 외부 이미지의 경우 WebP 변환 서비스 사용 (예: Cloudinary, ImageKit 등)
-        return originalSrc;
-      }
+  // 최적화된 이미지 URL 생성
+  const getOptimizedSrc = (originalSrc: string) => {
+    if (!originalSrc || originalSrc.startsWith('data:')) return originalSrc;
+    
+    // 외부 이미지인 경우 Next.js Image Optimization 사용
+    if (originalSrc.startsWith('http')) return originalSrc;
+    
+    // 로컬 이미지인 경우 WebP 변환 고려
+    if (supportsWebP && originalSrc.match(/\.(jpg|jpeg|png)$/i)) {
+      // Next.js가 자동으로 WebP 변환을 처리
       return originalSrc;
-    },
-    [supportsWebP]
-  );
+    }
+    
+    return originalSrc;
+  };
 
+  const handleLoad = () => {
+    setIsLoading(false);
+    onLoad?.();
+  };
+
+  const handleError = () => {
+    setHasError(true);
+    setIsLoading(false);
+    onError?.();
+  };
+
+  // 에러 상태일 때 fallback 이미지 표시
   if (hasError) {
     return (
-      <div
-        className={`flex items-center justify-center bg-gray-100 ${className}`}
-        style={{ width, height }}
+      <div 
+        className={cn(
+          'flex items-center justify-center bg-gray-100 dark:bg-gray-800',
+          'text-gray-500 dark:text-gray-400 text-sm',
+          className
+        )}
+        style={{ width: width || '100%', height: height || 'auto' }}
       >
-        <span className="text-gray-400 text-sm">
-          이미지를 불러올 수 없습니다
-        </span>
+        <div className="text-center">
+          <svg className="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <p>이미지를 불러올 수 없습니다</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={cn('relative', className)}>
       <Image
         src={getOptimizedSrc(src)}
         alt={alt}
-        width={width}
-        height={height}
-        fill={fill}
-        quality={quality}
+        width={fill ? undefined : width}
+        height={fill ? undefined : height}
+        className={cn(
+          'transition-opacity duration-300',
+          isLoading ? 'opacity-0' : 'opacity-100'
+        )}
         priority={priority}
+        quality={quality}
         placeholder={placeholder}
-        blurDataURL={blurDataURL}
         sizes={sizes}
-        loading={loading}
+        fill={fill}
         onLoad={handleLoad}
         onError={handleError}
-        className={`transition-opacity duration-300 ${
-          isLoading ? 'opacity-0' : 'opacity-100'
-        }`}
+        loading={priority ? 'eager' : 'lazy'}
+        // 한국 시장 최적화
+        unoptimized={false}
+        // 성능 최적화
         style={{
           objectFit: 'cover',
-          objectPosition: 'center',
         }}
       />
-
+      
+      {/* 로딩 스켈레톤 */}
       {isLoading && (
-        <div
-          className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center"
-          style={{ width, height }}
-        >
-          <div className="w-6 h-6 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-        </div>
+        <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded" />
       )}
     </div>
   );
-});
-
-export { OptimizedImage };
-
-// 이미지 프리로딩 훅
-export function useImagePreloader(imageUrls: string[]) {
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-
-  useEffect(() => {
-    const preloadImages = async () => {
-      const promises = imageUrls.map(url => {
-        return new Promise<string>((resolve, reject) => {
-          const img = document.createElement('img');
-          img.onload = () => resolve(url);
-          img.onerror = () => reject(url);
-          img.src = url;
-        });
-      });
-
-      try {
-        const loaded = await Promise.allSettled(promises);
-        const successful = loaded
-          .filter(result => result.status === 'fulfilled')
-          .map(result => (result as PromiseFulfilledResult<string>).value);
-
-        setLoadedImages(new Set(successful));
-      } catch (error) {
-        console.warn('일부 이미지 프리로딩 실패:', error);
-      }
-    };
-
-    if (imageUrls.length > 0) {
-      preloadImages();
-    }
-  }, [imageUrls]);
-
-  return {
-    loadedImages,
-    isImageLoaded: (url: string) => loadedImages.has(url),
-  };
 }
 
-// 뷰포트 감지 기반 지연 로딩 컴포넌트
-export const LazyImageLoader = memo(function LazyImageLoader({
+// 특정 용도별 최적화된 이미지 컴포넌트들
+export function HeroImage(props: OptimizedImageProps) {
+  return (
+    <OptimizedImage
+      {...props}
+      priority={true}
+      quality={90}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+    />
+  );
+}
+
+export function ThumbnailImage(props: OptimizedImageProps) {
+  return (
+    <OptimizedImage
+      {...props}
+      quality={75}
+      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px"
+    />
+  );
+}
+
+export function AvatarImage(props: OptimizedImageProps) {
+  return (
+    <OptimizedImage
+      {...props}
+      quality={80}
+      sizes="(max-width: 768px) 40px, 60px"
+    />
+  );
+}
+
+// 배경 이미지 최적화
+export function BackgroundImage({
+  src,
+  alt,
+  className,
   children,
-  threshold = 0.1,
-  rootMargin = '50px',
-  fallback = <div className="w-full h-64 bg-gray-200 animate-pulse" />,
 }: {
-  children: React.ReactNode;
-  threshold?: number;
-  rootMargin?: string;
-  fallback?: React.ReactNode;
+  src: string;
+  alt: string;
+  className?: string;
+  children?: React.ReactNode;
 }) {
-  const [isInView, setIsInView] = useState(false);
-  const [element, setElement] = useState<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!element || isInView) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold, rootMargin }
-    );
-
-    observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [element, isInView, threshold, rootMargin]);
-
-  return <div ref={setElement}>{isInView ? children : fallback}</div>;
-});
+  return (
+    <div className={cn('relative overflow-hidden', className)}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        priority={false}
+        quality={85}
+        sizes="100vw"
+      />
+      <div className="relative z-10">
+        {children}
+      </div>
+    </div>
+  );
+}
