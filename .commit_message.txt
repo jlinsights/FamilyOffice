@@ -1,8 +1,5 @@
-🔧 TypeScript strict mode 완전 해결 및 빌드 성공
+🔧 카카오 플러스친구 플로팅 버튼 채널 ID 수정
 
-- noUncheckedIndexedAccess 설정으로 인한 30+ 타입 오류 수정 완료
-- 배열/객체 접근 안전성: undefined 체크 및 기본값 제공
-- 선택적 속성 처리: 조건부 스프레드 연산자 활용
-- 미사용 변수/import 정리: _ 접두사 및 불필요한 코드 제거
-- Next.js Metadata API 호환성: verification 객체 구조 수정
-- Middleware, Test 파일, Security 모듈 전반적 타입 안전성 확보
+- Kakao SDK 채널 ID를 올바른 _gsxkxdG로 통일
+- 브라우저 링크와 SDK 채널이 모두 http://pf.kakao.com/_gsxkxdG로 연결되도록 수정
+- 우측 하단 플로팅 버튼 링크 정상화
