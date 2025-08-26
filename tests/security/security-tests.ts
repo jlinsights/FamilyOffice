@@ -35,7 +35,7 @@ class SecurityTester {
         'Content-Type': 'application/json',
         ...config.headers,
       },
-      body: config.payload ? JSON.stringify(config.payload) : undefined,
+      ...(config.payload && { body: JSON.stringify(config.payload) }),
     });
 
     return response;
@@ -575,7 +575,7 @@ describe('Security Vulnerability Assessment', () => {
       // In real implementation, this would analyze package.json and check against vulnerability databases
       const mockVulnerabilityCheck = (packageName: string) => {
         return vulnerablePackages.some(vuln =>
-          vuln.includes(packageName.split('@')[0])
+          vuln.includes(packageName.split('@')[0] || packageName)
         );
       };
 
@@ -703,7 +703,7 @@ describe('Security Vulnerability Assessment', () => {
       ];
 
       for (const operation of sensitiveOperations) {
-        const response = await securityTester.testEndpoint(operation);
+        await securityTester.testEndpoint(operation);
 
         // Check if audit log entry was created
         const auditResponse = await securityTester.testEndpoint({

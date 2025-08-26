@@ -153,6 +153,54 @@ export const bmadContentStrategy = {
         '의사결정 지원'
       ]
     }
+  },
+
+  navigational: {
+    // Behavioral: 직접 탐색 행동
+    behavioral: {
+      primaryKeywords: [
+        '삼성생명 패밀리오피스',
+        'FamilyOffice S 로그인',
+        '서비스 문의',
+        '고객센터',
+        '지점 찾기'
+      ],
+      contentStructure: {
+        navigation: '빠른 메뉴 및 링크',
+        contact: '연락처 및 위치 정보',
+        access: '로그인 및 회원 정보',
+        support: '고객 지원 및 FAQ',
+        cta: '직접 연결 및 바로 가기'
+      },
+      usabilityFeatures: [
+        '검색 기능 최적화',
+        '메뉴 구조 간소화',
+        '연락처 원클릭',
+        '모바일 최적화'
+      ]
+    },
+    
+    // Motivational: 직접 접근 동기
+    motivational: {
+      accessNeeds: [
+        '빠른 정보 확인',
+        '직접 상담 연결',
+        '서비스 이용 방법',
+        '계정 관리 필요'
+      ],
+      navigationGoals: [
+        '원하는 페이지 직접 이동',
+        '담당자 즉시 연결',
+        '서비스 현황 확인',
+        '문제 해결 방법 찾기'
+      ],
+      convenienceFactors: [
+        '간편한 접근성',
+        '직관적 인터페이스',
+        '빠른 응답 시간',
+        '모바일 친화적'
+      ]
+    }
   }
 };
 

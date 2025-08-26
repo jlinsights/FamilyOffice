@@ -7,7 +7,6 @@ import {
   TrendingUp,
   Shield,
   Calculator,
-  BookOpen,
   Gavel,
   BrainCircuit,
   Target,

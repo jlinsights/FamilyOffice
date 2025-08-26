@@ -134,7 +134,7 @@ export class AuditService {
 
   // 권한 변경 감사 로그
   static async logPermissionChange(
-    userId: string,
+    _userId: string,
     tenantId: string,
     targetUserId: string,
     oldPermissions: string[],
@@ -212,7 +212,7 @@ export class AuditService {
     const events = await this.queryEvents({
       startDate,
       endDate,
-      tenantId,
+      ...(tenantId && { tenantId }),
     });
 
     return this.generateReportFromEvents(events);

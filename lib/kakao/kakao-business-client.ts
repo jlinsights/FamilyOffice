@@ -12,14 +12,14 @@ let kakaoClient: KakaoBusinessAPI | null = null;
  * 환경변수에서 Kakao Business 설정을 가져오는 함수
  */
 function getKakaoBusinessConfig(): KakaoBusinessConfig | null {
-  const config = {
+  const config: KakaoBusinessConfig = {
     apiKey: process.env.KAKAO_BUSINESS_API_KEY || '',
     pixelId: process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || '',
     channelId: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID || '',
     appKey: process.env.KAKAO_APP_KEY || '',
     restApiKey: process.env.KAKAO_REST_API_KEY || '',
     javascriptKey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || process.env.KAKAO_JAVASCRIPT_KEY || '',
-    adminKey: process.env.KAKAO_ADMIN_KEY,
+    ...(process.env.KAKAO_ADMIN_KEY && { adminKey: process.env.KAKAO_ADMIN_KEY }),
   };
 
   // 최소 필수 값들이 있는지 확인
@@ -82,6 +82,9 @@ export function checkKakaoBusinessStatus(): {
   hasApiKey: boolean;
   hasPixelId: boolean;
   hasChannelId: boolean;
+  hasJavaScriptKey: boolean;
+  hasAppKey: boolean;
+  hasRestApiKey: boolean;
   isClientReady: boolean;
 } {
   const config = getKakaoBusinessConfig();
@@ -174,17 +177,22 @@ export const kakaoBusinessHelpers = {
     }
 
     try {
+      if (!params.userId) {
+        console.warn('userId가 필요합니다.');
+        return false;
+      }
+
       await client.trackConversion({
         eventName,
         userId: params.userId,
         sessionId: params.sessionId,
         parameters: {
-          content_category: params.contentCategory as any,
-          content_ids: params.contentIds,
-          value: params.value,
+          ...(params.contentCategory && { content_category: params.contentCategory as any }),
+          ...(params.contentIds && { content_ids: params.contentIds }),
+          ...(params.value !== undefined && { value: params.value }),
           currency: 'KRW',
           page_url: window.location.href,
-          referrer: document.referrer,
+          ...(document.referrer && { referrer: document.referrer }),
           user_agent: navigator.userAgent,
         },
         timestamp: new Date().toISOString(),

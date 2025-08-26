@@ -79,7 +79,7 @@ function getClientId(request: NextRequest): string {
   // Get real IP address (considering proxies)
   const forwarded = request.headers.get('x-forwarded-for');
   const realIp = request.headers.get('x-real-ip');
-  const ip = forwarded?.split(',')[0] || realIp || request.ip || 'unknown';
+  const ip = forwarded?.split(',')[0] || realIp || 'unknown';
   
   // Fallback to User-Agent hash for localhost development
   if (ip === 'unknown' || ip === '127.0.0.1' || ip === '::1') {
@@ -94,8 +94,8 @@ function getClientId(request: NextRequest): string {
  * Redis-based rate limiting (if available)
  */
 async function checkRateLimitRedis(
-  key: string,
-  config: typeof rateLimitConfig[RateLimitType]
+  _key: string,
+  _config: typeof rateLimitConfig[RateLimitType]
 ): Promise<{
   success: boolean;
   limit: number;

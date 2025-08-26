@@ -19,11 +19,6 @@ interface BeehiivSubscriber {
   referrer?: string;
 }
 
-interface BeehiivWebhookEvent {
-  event: 'subscriber.created' | 'subscriber.updated' | 'post.created' | 'email.sent';
-  data: Record<string, any>;
-  timestamp: string;
-}
 
 export class BeehiivClient {
   private config: BeehiivConfig;

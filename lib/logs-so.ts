@@ -64,7 +64,7 @@ export async function log(options: LogOptions): Promise<void> {
     await logsClient.track({
       channel: options.channel,
       event: options.event,
-      description: options.description,
+      description: options.description || '',
       icon: iconMap[options.level || LogLevel.INFO],
       notify: options.notify || (options.level === LogLevel.ERROR),
       tags: {
@@ -73,7 +73,7 @@ export async function log(options: LogOptions): Promise<void> {
         timestamp: new Date().toISOString(),
         ...options.tags
       },
-      user_id: options.userId,
+      ...(options.userId && { user_id: options.userId }),
       keywords: options.keywords || [options.channel, options.level || LogLevel.INFO]
     });
   } catch (error) {
@@ -142,7 +142,7 @@ export const logAPI = {
       channel: LogChannel.API,
       event: 'api-request',
       level: LogLevel.INFO,
-      userId,
+      ...(userId && { userId }),
       tags: { endpoint, method }
     }),
   
@@ -151,7 +151,7 @@ export const logAPI = {
       channel: LogChannel.API,
       event: 'api-response',
       level: statusCode >= 400 ? LogLevel.ERROR : LogLevel.INFO,
-      userId,
+      ...(userId && { userId }),
       tags: { endpoint, statusCode, duration },
       notify: statusCode >= 500
     }),
@@ -161,7 +161,7 @@ export const logAPI = {
       channel: LogChannel.API,
       event: 'api-error',
       level: LogLevel.ERROR,
-      userId,
+      ...(userId && { userId }),
       description: error.message || 'Unknown error',
       tags: { endpoint, error: error.stack || error.toString() },
       notify: true
@@ -199,7 +199,7 @@ export const logSecurity = {
       channel: LogChannel.SECURITY,
       event: 'security-threat',
       level: LogLevel.ERROR,
-      userId,
+      ...(userId && { userId }),
       description: `Security threat detected: ${type}`,
       tags: { type, details },
       notify: true
@@ -210,7 +210,7 @@ export const logSecurity = {
       channel: LogChannel.SECURITY,
       event: 'access-denied',
       level: LogLevel.WARNING,
-      userId,
+      ...(userId && { userId }),
       description: `Access denied to resource: ${resource}`,
       tags: { resource }
     })

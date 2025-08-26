@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useMemo } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Play, ExternalLink, Calendar, Clock, Volume2 } from 'lucide-react';
+import { Play, Calendar, Clock, Volume2 } from 'lucide-react';
 import { PodcastEpisode, BlogPodcastConnectionProps } from '@/types/podcast';
 import { 
   DEFAULT_PODCAST_EPISODES,
@@ -27,11 +27,9 @@ export function BlogPodcastConnection({
   blogCategory,
   blogTags,
   blogTitle,
-  blogSlug,
   maxEpisodes = DISPLAY_CONFIG.MAX_EPISODES_DEFAULT,
   className = ""
 }: BlogPodcastConnectionProps) {
-  const [selectedEpisode, setSelectedEpisode] = useState<PodcastEpisode | null>(null);
 
   // 관련 에피소드 추천 로직
   const relatedEpisodes = useMemo(() => {
@@ -83,7 +81,6 @@ export function BlogPodcastConnection({
   };
 
   const handleEpisodePlay = (episode: PodcastEpisode) => {
-    setSelectedEpisode(episode);
     window.open(episode.spotifyUrl, '_blank', 'noopener,noreferrer');
   };
 

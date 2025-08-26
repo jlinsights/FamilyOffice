@@ -186,7 +186,9 @@ export class CacheManager {
       const converted: Record<string, T | undefined> = {};
       keys.forEach((originalKey, index) => {
         const prefixedKey = prefixedKeys[index];
-        converted[originalKey] = result[prefixedKey] as T | undefined;
+        if (prefixedKey) {
+          converted[originalKey] = result[prefixedKey] as T | undefined;
+        }
       });
 
       return converted;
@@ -233,8 +235,8 @@ export function cached<T extends (...args: any[]) => any>(
   ttl?: number
 ) {
   return function (
-    target: any,
-    propertyKey: string,
+    _target: any,
+    _propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;

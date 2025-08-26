@@ -50,8 +50,10 @@ export function measureWebVitals() {
   const lcpObserver = new PerformanceObserver(list => {
     const entries = list.getEntries();
     const lastEntry = entries[entries.length - 1];
-    metrics.lcp = lastEntry.startTime;
-    reportMetric('lcp', lastEntry.startTime);
+    if (lastEntry) {
+      metrics.lcp = lastEntry.startTime;
+      reportMetric('lcp', lastEntry.startTime);
+    }
   });
 
   // FID (First Input Delay) 측정

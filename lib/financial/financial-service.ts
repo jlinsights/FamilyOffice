@@ -447,6 +447,8 @@ export async function getMajorForexRates(): Promise<ApiResponse<ForexData[]>> {
 
     for (const pair of majorPairs) {
       const [from, to] = pair.split('/');
+      if (!from || !to) continue;
+      
       const forexResult = await getForexData(from, to);
 
       if (forexResult.success && forexResult.data) {

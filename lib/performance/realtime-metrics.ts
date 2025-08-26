@@ -82,6 +82,8 @@ class RealTimePerformanceMonitor {
     if (longTasks.length === 0) return this.metrics.fcp || 0;
     
     const lastLongTask = longTasks[longTasks.length - 1];
+    if (!lastLongTask) return this.metrics.fcp || 0;
+    
     return Math.max(lastLongTask.startTime + lastLongTask.duration, this.metrics.fcp || 0);
   }
 
@@ -164,8 +166,11 @@ class RealTimePerformanceMonitor {
     const threshold = thresholds[name as keyof typeof thresholds];
     if (!threshold) return 'good';
 
-    if (value <= threshold[0]) return 'good';
-    if (value <= threshold[1]) return 'needs-improvement';
+    const goodThreshold = threshold[0];
+    const improvementThreshold = threshold[1];
+    
+    if (goodThreshold !== undefined && value <= goodThreshold) return 'good';
+    if (improvementThreshold !== undefined && value <= improvementThreshold) return 'needs-improvement';
     return 'poor';
   }
 

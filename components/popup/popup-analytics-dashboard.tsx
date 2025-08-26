@@ -7,11 +7,10 @@ import {
 } from 'recharts';
 import { 
   TrendingUp, Eye, MousePointer, Target, 
-  Users, Smartphone, Monitor, Tablet, Calendar,
-  AlertCircle, CheckCircle, Info, Filter
+  Users, Smartphone, Monitor, Tablet,
+  AlertCircle, CheckCircle, Info
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -197,7 +196,7 @@ const generateMockData = () => {
     const conversions = Math.floor(clicks * (0.08 + Math.random() * 0.20));
     
     return {
-      date: date.toISOString().split('T')[0],
+      date: date.toISOString().split('T')[0] || '',
       impressions: baseImpressions,
       clicks,
       conversions,
@@ -217,13 +216,13 @@ interface PopupAnalyticsDashboardProps {
 }
 
 export const PopupAnalyticsDashboard: React.FC<PopupAnalyticsDashboardProps> = ({
-  dateRange = '30d',
+  dateRange: _dateRange = '30d',
   autoRefresh = true,
   refreshInterval = 300000, // 5 minutes
 }) => {
   const [data, setData] = useState(generateMockData());
   const [selectedPopup, setSelectedPopup] = useState<string>('all');
-  const [selectedSegment, setSelectedSegment] = useState<string>('all');
+  const [_selectedSegment, _setSelectedSegment] = useState<string>('all');
   const [lastUpdated, setLastUpdated] = useState(new Date());
 
   // Auto-refresh data
@@ -270,9 +269,9 @@ export const PopupAnalyticsDashboard: React.FC<PopupAnalyticsDashboardProps> = (
     if (!threshold) return 'info';
 
     if (metric === 'bounceRateImpact') {
-      return value <= threshold.good ? 'success' : value <= threshold.concerning ? 'warning' : 'error';
+      return value <= threshold.good ? 'success' : value <= (threshold as any).concerning ? 'warning' : 'error';
     } else {
-      return value >= threshold.excellent ? 'success' : value >= threshold.good ? 'warning' : 'error';
+      return value >= (threshold as any).excellent ? 'success' : value >= threshold.good ? 'warning' : 'error';
     }
   };
 

@@ -316,30 +316,16 @@ export const defaultMetadata: Metadata = {
     'naver-site-verification': 'your-naver-verification-code',
     'msvalidate.01': 'your-bing-verification-code',
     'yandex-verification': 'your-yandex-verification-code',
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-
-  verification: {
-    locale: 'ko_KR',
-    'naver-site-verification': 'your-naver-verification-code',
-    NaverBot: 'All',
-    Yeti: 'index,follow', 
-    Daumoa: 'index,follow',
+    
+    // Format detection
     'format-detection': 'telephone=no',
+    
+    // Author and publisher info
     author: 'FamilyOffice S - 성공한 CEO 전문',
     publisher: 'FamilyOffice S',
     copyright: 'FamilyOffice S',
+    
+    // Additional contact info
     'og:phone_number': '+82-502-5550-8700',
     'og:email': 'cs@familyoffices.vip',
     'article:author': 'FamilyOffice S 전문 컨설턴트',
@@ -367,6 +353,22 @@ export const defaultMetadata: Metadata = {
     'agentios-risk': '위험 관리',
     'agentios-market': '시장 기회',
     'agentios-growth': '성장 전략',
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
+  verification: {
+    google: 'your-google-verification-code',
   },
 };
 

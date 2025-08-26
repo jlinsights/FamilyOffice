@@ -757,6 +757,8 @@ export function startTestDataGeneration(): void {
 
   setInterval(() => {
     const symbol = testSymbols[Math.floor(Math.random() * testSymbols.length)];
+    if (!symbol) return;
+    
     const price = Math.random() * 1000;
     const change = (Math.random() - 0.5) * 10;
 

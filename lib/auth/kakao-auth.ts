@@ -312,10 +312,11 @@ export class KakaoAuthService {
       kakaoUser = await this.getKakaoUserInfo(userData.kakao_access_token) || undefined;
     }
 
-    return {
-      user,
-      kakaoUser
-    };
+    const result: { user: User | null; kakaoUser?: KakaoUser } = { user };
+    if (kakaoUser) {
+      result.kakaoUser = kakaoUser;
+    }
+    return result;
   }
 
   /**

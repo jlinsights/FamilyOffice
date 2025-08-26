@@ -259,8 +259,8 @@ export async function setCachedData<T>(
 
   try {
     const results = await Promise.allSettled(promises);
-    const memorySuccess = results[0].status === 'fulfilled' && results[0].value;
-    const redisSuccess = results[1].status === 'fulfilled' && results[1].value;
+    const memorySuccess = results[0]?.status === 'fulfilled' && results[0]?.value;
+    const redisSuccess = results[1]?.status === 'fulfilled' && results[1]?.value;
 
     if (memorySuccess || redisSuccess) {
       console.log(

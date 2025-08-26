@@ -140,6 +140,8 @@ export function calculateCapitalGains(
 
       while (remainingShares > 0 && symbolHoldings.length > 0) {
         const holding = symbolHoldings[0];
+        if (!holding) break;
+        
         const sharesToSell = Math.min(remainingShares, holding.shares);
 
         // Calculate gain/loss

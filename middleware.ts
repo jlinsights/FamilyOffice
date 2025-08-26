@@ -63,7 +63,7 @@ export async function middleware(request: NextRequest) {
   // 보안 강화된 CORS 헤더 설정
   if (request.nextUrl.pathname.startsWith('/_next/static/')) {
     // Static assets는 허용된 도메인에서만 접근 가능
-    if (isAllowedOrigin(origin)) {
+    if (origin && isAllowedOrigin(origin)) {
       response.headers.set('Access-Control-Allow-Origin', origin);
     } else {
       // 기본적으로 자체 도메인 허용
@@ -75,7 +75,7 @@ export async function middleware(request: NextRequest) {
 
   // API 요청에 대한 CORS 헤더 추가
   if (request.nextUrl.pathname.startsWith('/api/')) {
-    if (isAllowedOrigin(origin)) {
+    if (origin && isAllowedOrigin(origin)) {
       response.headers.set('Access-Control-Allow-Origin', origin);
     }
     response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');

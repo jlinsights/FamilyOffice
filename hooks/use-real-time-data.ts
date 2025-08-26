@@ -255,7 +255,7 @@ export function useWebSocket<T = any>(options: WebSocketOptions) {
         onError?.(error);
       };
 
-      ws.onclose = event => {
+      ws.onclose = _event => {
         setState(prev => ({
           ...prev,
           isConnected: false,

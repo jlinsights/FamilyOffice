@@ -215,14 +215,17 @@ export class NetworkSecurityService {
       return null;
     }
 
-    this.firewallRules[ruleIndex] = {
-      ...this.firewallRules[ruleIndex],
-      ...updates,
-      updatedAt: new Date(),
-    };
+    const existingRule = this.firewallRules[ruleIndex];
+    if (existingRule) {
+      this.firewallRules[ruleIndex] = {
+        ...existingRule,
+        ...updates,
+        updatedAt: new Date(),
+      };
+    }
 
     console.log('Updated firewall rule:', ruleId);
-    return this.firewallRules[ruleIndex];
+    return this.firewallRules[ruleIndex] || null;
   }
 
   // 방화벽 규칙 삭제
@@ -323,6 +326,10 @@ export class NetworkSecurityService {
     }
 
     const [network, bits] = cidr.split('/');
+    if (!network || !bits) {
+      return false;
+    }
+    
     const networkParts = network.split('.').map(Number);
     const ipParts = ip.split('.').map(Number);
 
@@ -330,7 +337,14 @@ export class NetworkSecurityService {
     const networkMask = (1 << (32 - mask)) - 1;
 
     for (let i = 0; i < 4; i++) {
-      if ((networkParts[i] & networkMask) !== (ipParts[i] & networkMask)) {
+      const networkPart = networkParts[i];
+      const ipPart = ipParts[i];
+      
+      if (networkPart === undefined || ipPart === undefined) {
+        return false;
+      }
+      
+      if ((networkPart & networkMask) !== (ipPart & networkMask)) {
         return false;
       }
     }
@@ -351,7 +365,7 @@ export class NetworkSecurityService {
       connectedAt: new Date(),
       lastActivity: new Date(),
       sessionId: crypto.randomUUID(),
-      deviceInfo,
+      ...(deviceInfo && { deviceInfo }),
       status: 'active',
     };
 
@@ -375,14 +389,17 @@ export class NetworkSecurityService {
       return null;
     }
 
-    this.vpnConnections[connectionIndex] = {
-      ...this.vpnConnections[connectionIndex],
-      ...updates,
-      lastActivity: new Date(),
-    };
+    const existingConnection = this.vpnConnections[connectionIndex];
+    if (existingConnection) {
+      this.vpnConnections[connectionIndex] = {
+        ...existingConnection,
+        ...updates,
+        lastActivity: new Date(),
+      };
+    }
 
     console.log('Updated VPN connection:', connectionId);
-    return this.vpnConnections[connectionIndex];
+    return this.vpnConnections[connectionIndex] || null;
   }
 
   // VPN 연결 종료

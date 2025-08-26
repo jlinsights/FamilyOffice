@@ -127,7 +127,9 @@ class HubSpotFormIntegration {
     const id = pathParts[pathParts.length - 1];
 
     // 블록리스트 로드
-    await this.loadBlockList(id);
+    if (id) {
+      await this.loadBlockList(id);
+    }
 
     // 이메일 도메인 차단 기능 설정
     this.setupEmailDomainBlocking(form);
@@ -183,7 +185,7 @@ class HubSpotFormIntegration {
         const existingWarningMessage =
           input.parentNode?.querySelector('.warning-message');
 
-        if (this.blockedDomains.includes(emailDomain)) {
+        if (emailDomain && this.blockedDomains.includes(emailDomain)) {
           submitButton.disabled = true;
           submitButton.style.cursor = 'not-allowed';
           submitButton.style.backgroundColor = 'grey';
@@ -308,7 +310,9 @@ class HubSpotFormIntegration {
     const id = pathParts[pathParts.length - 1];
 
     // 블록리스트 로드
-    await this.loadBlockList(id);
+    if (id) {
+      await this.loadBlockList(id);
+    }
 
     // 이메일 도메인 차단 기능 설정
     this.setupEmailDomainBlocking(form);

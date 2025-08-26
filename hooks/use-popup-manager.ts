@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 interface PopupManagerHookOptions {
   enableDualPopup?: boolean;
@@ -12,7 +12,7 @@ interface PopupState {
   performanceMetrics: Record<string, any>;
 }
 
-export const usePopupManager = (options: PopupManagerHookOptions = {}) => {
+export const usePopupManager = (_options: PopupManagerHookOptions = {}) => {
   const [state, setState] = useState<PopupState>({
     activePopups: [],
     dismissedPopups: [],

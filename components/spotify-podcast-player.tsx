@@ -9,8 +9,7 @@ import { PodcastEpisode, PodcastPlayerProps } from '@/types/podcast';
 import { 
   DEFAULT_PODCAST_EPISODES, 
   SPOTIFY_CONFIG, 
-  PODCAST_CATEGORIES,
-  SPOTIFY_BRAND_COLORS 
+  PODCAST_CATEGORIES
 } from '@/constants/podcasts';
 
 // 기본 에피소드 데이터는 constants에서 가져옴
@@ -26,7 +25,7 @@ export function SpotifyPodcastPlayer({
   showUrl = SPOTIFY_CONFIG.showUrl,
   className = ""
 }: PodcastPlayerProps) {
-  const [selectedEpisode, setSelectedEpisode] = useState<PodcastEpisode | null>(null);
+  const [_selectedEpisode, setSelectedEpisode] = useState<PodcastEpisode | null>(null);
 
   const getCategoryColor = (category: string) => {
     return PODCAST_CATEGORIES[category as keyof typeof PODCAST_CATEGORIES]?.color || 

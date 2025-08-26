@@ -386,14 +386,4 @@ export function getKakaoBusinessClient(): KakaoBusinessAPI {
   return kakaoBusinessInstance;
 }
 
-// 타입 내보내기
-export type {
-  KakaoBusinessConfig,
-  CampaignConfig,
-  ConversionEvent,
-  AnalyticsParams,
-  Campaign,
-  Analytics,
-  AudienceConfig,
-  MessagingTemplate,
-};
+// 모든 타입은 이미 interface로 export됨

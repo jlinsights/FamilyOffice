@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { X, Shield, TrendingUp, AlertCircle, Eye, Clock, Target } from 'lucide-react';
+import { X, Shield, TrendingUp, Clock, Target } from 'lucide-react';
 import Link from 'next/link';
 import { analytics } from '@/lib/analytics';
 
@@ -30,26 +30,6 @@ interface AgentOSOptimizationConfig {
   emergencyFallback: boolean;
 }
 
-// SuperClaude Framework Integration
-interface SuperClaudeFramework {
-  personas: {
-    analyzer: boolean;
-    performance: boolean;
-    frontend: boolean;
-    security: boolean;
-  };
-  wave: {
-    enabled: boolean;
-    stage: 'review' | 'planning' | 'implementation' | 'validation';
-    progressPercent: number;
-  };
-  qualityGates: {
-    accessibility: boolean;
-    performance: boolean;
-    security: boolean;
-    userExperience: boolean;
-  };
-}
 
 // Sub Agent Personalization
 interface SubAgentPersonalization {
@@ -148,7 +128,7 @@ interface PopupManagerProps {
 export const PopupManager: React.FC<PopupManagerProps> = ({
   enableDualPopup = true,
   maxConcurrentPopups = 2,
-  globalConfig,
+  globalConfig: _globalConfig,
   debugMode = false,
 }) => {
   // State Management
@@ -304,7 +284,7 @@ export const PopupManager: React.FC<PopupManagerProps> = ({
   }, []);
 
   // AgentOS Optimization - Adaptive Timing Logic
-  const calculateOptimalTiming = useCallback((popupConfig: PopupConfig, behavior: BMAPBehaviorMetrics): number => {
+  const calculateOptimalTiming = useCallback((_popupConfig: PopupConfig, behavior: BMAPBehaviorMetrics): number => {
     let baseDelay = 3000; // 3 seconds base
 
     // Adjust based on user segment
@@ -370,28 +350,6 @@ export const PopupManager: React.FC<PopupManagerProps> = ({
     return strategy;
   }, []);
 
-  // SuperClaude Framework Quality Gates
-  const validatePopupQuality = useCallback((popupConfig: PopupConfig): SuperClaudeFramework => {
-    return {
-      personas: {
-        analyzer: true, // Behavior analysis active
-        performance: true, // Performance monitoring active
-        frontend: true, // UI/UX optimization active
-        security: false, // Basic popup, no security concerns
-      },
-      wave: {
-        enabled: true,
-        stage: 'implementation',
-        progressPercent: 75,
-      },
-      qualityGates: {
-        accessibility: true, // ARIA labels, keyboard navigation
-        performance: true, // <100ms render time
-        security: true, // XSS protection, safe links
-        userExperience: true, // Korean UX optimization
-      },
-    };
-  }, []);
 
   // A/B Testing Implementation
   const selectABVariant = useCallback((popupConfig: PopupConfig): string => {
@@ -404,15 +362,15 @@ export const PopupManager: React.FC<PopupManagerProps> = ({
     let cumulativeWeight = 0;
     
     for (let i = 0; i < popupConfig.abTest.variants.length; i++) {
-      cumulativeWeight += popupConfig.abTest.trafficSplit[i];
+      cumulativeWeight += popupConfig.abTest?.trafficSplit[i] || 0;
       if (random <= cumulativeWeight) {
-        const selectedVariant = popupConfig.abTest.variants[i];
+        const selectedVariant = popupConfig.abTest?.variants[i] || 'default';
         setCurrentABTests(prev => ({ ...prev, [popupConfig.id]: selectedVariant }));
         return selectedVariant;
       }
     }
     
-    return popupConfig.abTest.variants[0];
+    return popupConfig.abTest?.variants[0] || 'default';
   }, [currentABTests]);
 
   // Analytics Tracking
@@ -565,7 +523,7 @@ export const PopupManager: React.FC<PopupManagerProps> = ({
       eligiblePopups.slice(0, maxConcurrentPopups).forEach(popup => showPopup(popup));
     } else if (strategy.popupStrategy === 'contextual') {
       // Show popups based on specific user actions or context
-      if (behaviorMetrics.scrollDepth > 30) {
+      if (behaviorMetrics.scrollDepth > 30 && eligiblePopups[0]) {
         showPopup(eligiblePopups[0]);
       }
     }
@@ -756,8 +714,8 @@ export const PopupManager: React.FC<PopupManagerProps> = ({
 
 // Performance Analytics Dashboard Hook
 export const usePopupAnalytics = () => {
-  const [metrics, setMetrics] = useState<Record<string, PopupPerformanceMetrics>>({});
-  const [abTestResults, setABTestResults] = useState<Record<string, any>>({});
+  const [metrics, _setMetrics] = useState<Record<string, PopupPerformanceMetrics>>({});
+  const [abTestResults, _setABTestResults] = useState<Record<string, any>>({});
 
   const getPopupPerformance = useCallback((popupId: string) => {
     return metrics[popupId] || null;

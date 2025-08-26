@@ -175,12 +175,12 @@ export class ErrorMonitor {
 
     // Send to Sentry DSN
     await fetch(
-      `https://sentry.io/api/0/projects/${monitoringConfig.sentry.dsn.split('@')[1]}/store/`,
+      `https://sentry.io/api/0/projects/${monitoringConfig.sentry.dsn.split('@')[1] || ''}/store/`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Sentry-Auth': `Sentry sentry_version=7, sentry_key=${monitoringConfig.sentry.dsn.split('@')[0].split('//')[1]}`,
+          'X-Sentry-Auth': `Sentry sentry_version=7, sentry_key=${monitoringConfig.sentry.dsn.split('@')[0]?.split('//')[1] || ''}`,
         },
         body: JSON.stringify(sentryPayload),
       }

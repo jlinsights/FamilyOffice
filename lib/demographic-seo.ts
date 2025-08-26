@@ -337,27 +337,30 @@ export function calculateDemographicScore(
   industry: string,
   searchIntent: string
 ): number {
-  const ageWeight = {
+  const ageWeightMap: Record<string, number> = {
     '40-45': 0.8,
     '45-50': 1.0,  // 최적 타겟
     '50-55': 0.9,
     '55-60': 0.7,
     '60+': 0.6
-  }[ageGroup as keyof typeof ageWeight] || 0.5;
+  };
+  const ageWeight = ageWeightMap[ageGroup] || 0.5;
 
-  const industryWeight = {
+  const industryWeightMap: Record<string, number> = {
     '제조업': 0.9,
     '건설업': 0.8,
     'IT서비스업': 0.9,
     '유통업': 0.7,
     '의료업': 0.8
-  }[industry as keyof typeof industryWeight] || 0.6;
+  };
+  const industryWeight = industryWeightMap[industry] || 0.6;
 
-  const intentWeight = {
+  const intentWeightMap: Record<string, number> = {
     'informational': 0.6,
     'commercial': 0.8,
     'transactional': 1.0
-  }[searchIntent as keyof typeof intentWeight] || 0.5;
+  };
+  const intentWeight = intentWeightMap[searchIntent] || 0.5;
 
   return Math.round((ageWeight * industryWeight * intentWeight) * 100);
 }

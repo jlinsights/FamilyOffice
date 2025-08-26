@@ -352,7 +352,7 @@ export function getResponsiveText(size: keyof typeof typography40Plus.fontSizes)
   return `${typography40Plus.fontSizes[size]} ${typography40Plus.lineHeights.normal} ${typography40Plus.fontWeights.medium}`;
 }
 
-export function getTouchFriendlyButton(importance: 'primary' | 'secondary' | 'tertiary' = 'secondary'): string {
+export function getTouchFriendlyButton(_importance: 'primary' | 'secondary' | 'tertiary' = 'secondary'): string {
   const baseClasses = `${touchTargets40Plus.recommended.width} ${touchTargets40Plus.recommended.height} ${touchTargets40Plus.recommended.padding}`;
   const focusClasses = animations40Plus.focus.ring;
   const hoverClasses = `${animations40Plus.hover.scale} ${animations40Plus.hover.shadow}`;

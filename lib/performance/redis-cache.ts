@@ -411,7 +411,7 @@ export class RedisCache {
       return 0;
     }
     const match = info.match(/used_memory:(\d+)/);
-    return match ? parseInt(match[1]) : 0;
+    return match && match[1] ? parseInt(match[1]) : 0;
   }
 
   private parseKeyCount(keyspace: string): number {
@@ -419,7 +419,7 @@ export class RedisCache {
       return 0;
     }
     const match = keyspace.match(/keys=(\d+)/);
-    return match ? parseInt(match[1]) : 0;
+    return match && match[1] ? parseInt(match[1]) : 0;
   }
 
   private async getHitRate(): Promise<number> {
@@ -431,8 +431,8 @@ export class RedisCache {
       const hitsMatch = stats.match(/keyspace_hits:(\d+)/);
       const missesMatch = stats.match(/keyspace_misses:(\d+)/);
 
-      const hits = hitsMatch ? parseInt(hitsMatch[1]) : 0;
-      const misses = missesMatch ? parseInt(missesMatch[1]) : 0;
+      const hits = hitsMatch && hitsMatch[1] ? parseInt(hitsMatch[1]) : 0;
+      const misses = missesMatch && missesMatch[1] ? parseInt(missesMatch[1]) : 0;
 
       return hits + misses > 0 ? (hits / (hits + misses)) * 100 : 0;
     } catch {
@@ -497,7 +497,9 @@ export class FinancialDataCache {
     const stockData: Record<string, any> = {};
     symbols.forEach((symbol, index) => {
       const key = keys[index];
-      stockData[symbol] = results[key];
+      if (key) {
+        stockData[symbol] = results[key];
+      }
     });
 
     return stockData;
@@ -596,8 +598,6 @@ export class FinancialDataCache {
 
 // CDN 캐시 관리
 export class CDNCacheManager {
-  private readonly CDN_BASE_URL = process.env.CDN_BASE_URL || '';
-
   // 정적 자산 캐시 설정
   static getOptimizedHeaders(fileType: string): Record<string, string> {
     const headers: Record<string, string> = {

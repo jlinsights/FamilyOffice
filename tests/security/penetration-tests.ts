@@ -4,7 +4,7 @@
  */
 import { describe, test, expect, beforeAll, afterAll } from '@jest/globals';
 
-import { SecurityTester, VulnerabilityReport } from './security-tests';
+import { SecurityTester } from './security-tests';
 
 interface AttackScenario {
   name: string;
@@ -77,9 +77,9 @@ class PenetrationTester extends SecurityTester {
   }
 
   private async executeAttackStep(
-    scenarioName: string,
+    _scenarioName: string,
     step: AttackStep,
-    stepIndex: number
+    _stepIndex: number
   ): Promise<boolean> {
     switch (step.action) {
       case 'REQUEST':
@@ -101,7 +101,7 @@ class PenetrationTester extends SecurityTester {
     const response = await this.testEndpoint({
       endpoint: step.endpoint,
       method: step.method || 'GET',
-      headers: step.headers,
+      headers: step.headers || {},
       payload: step.payload,
     });
 

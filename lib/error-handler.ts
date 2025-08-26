@@ -307,8 +307,12 @@ export class AppError extends Error {
     this.name = this.constructor.name;
     this.type = type;
     this.statusCode = getStatusCode(type);
-    this.code = code;
-    this.details = details;
+    if (code !== undefined) {
+      this.code = code;
+    }
+    if (details !== undefined) {
+      this.details = details;
+    }
     
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, this.constructor);

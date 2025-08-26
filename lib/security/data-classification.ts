@@ -312,7 +312,7 @@ export class GDPRService {
       id: crypto.randomUUID(),
       type,
       name,
-      email,
+      ...(email && { email }),
       gdprRights: this.getDefaultGDPRRights(),
       dataProcessing: [],
       consentHistory: [],

@@ -130,8 +130,8 @@ export class PAMService {
 
   // 권한 검증
   static async validateAccess(
-    userId: string,
-    resource: string,
+    _userId: string,
+    _resource: string,
     permission: string
   ): Promise<boolean> {
     const activeAccess = await this.getActivePrivilegedAccess();

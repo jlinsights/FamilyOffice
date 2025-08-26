@@ -172,7 +172,7 @@ export function createEnv() {
       console.log('📊 설정된 환경변수:');
       console.log(`  - NODE_ENV: ${publicEnv.NODE_ENV}`);
       console.log(`  - VERCEL_ENV: ${publicEnv.VERCEL_ENV || 'N/A'}`);
-      console.log(`  - Clerk: ${clientEnv.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.substring(0, 20)}...`);
+      console.log(`  - Clerk: ${clientEnv.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.substring(0, 20) || 'N/A'}...`);
       console.log(`  - Supabase: ${clientEnv.NEXT_PUBLIC_SUPABASE_URL}`);
       console.log(`  - Analytics: ${clientEnv.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'N/A'}`);
       
