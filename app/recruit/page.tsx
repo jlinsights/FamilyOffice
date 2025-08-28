@@ -386,7 +386,7 @@ export default function RecruitPage() {
                     </div>
                   </div>
 
-                  <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-border/50">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-border/50">
                     <h4 className="font-semibold text-foreground mb-3">
                       🎯 주요 내용
                     </h4>
@@ -454,7 +454,7 @@ export default function RecruitPage() {
                     </div>
                   </div>
 
-                  <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-border/50">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-border/50">
                     <h4 className="font-semibold text-foreground mb-3">
                       🎙️ 에피소드 하이라이트
                     </h4>
