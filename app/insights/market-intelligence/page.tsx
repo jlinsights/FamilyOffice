@@ -195,37 +195,37 @@ export default function BlogPage() {
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
                     <YouTubeEmbed
-                      videoId="Pm27aGULsZk"
-                      title="중대재해법 시대, 마지막 방패"
+                      videoId="zaDX0OYo_iM"
+                      title="The Most Important Thing About Investing | Howard Marks"
                       className="w-full aspect-video rounded-lg overflow-hidden"
                     />
                     <div className="mt-4 p-6 bg-card rounded-lg border">
                       <p className="text-muted-foreground mb-4">
-                        중대재해처벌법 시대, 산재보험으로 없었질 수 없는 민사배상금 리스크. CEO 개인과 법인 모두를 지키는 마지막 방패를 준비하세요.
+                        세계적인 투자 전문가 하워드 마크스가 투자에서 가장 중요한 원칙을 설명합니다. 시장 사이클 이해와 리스크 관리의 핵심을 배워보세요.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">중대재해처벌법</Badge>
-                        <Badge variant="secondary">민사배상 리스크</Badge>
-                        <Badge variant="secondary">기업재해보장</Badge>
-                        <Badge variant="secondary">CEO 필수</Badge>
+                        <Badge variant="secondary">투자철학</Badge>
+                        <Badge variant="secondary">리스크관리</Badge>
+                        <Badge variant="secondary">시장사이클</Badge>
+                        <Badge variant="secondary">하워드마크스</Badge>
                       </div>
                     </div>
                   </div>
                   <div>
                     <YouTubeEmbed
-                      videoId="Ufk5FHmG0LA"
-                      title="중견기업 경영진, 자산관리 전략가이드"
+                      videoId="T0Rzi6Na-c4"
+                      title="Ray Dalio's INVESTING Strategy Will Make You RICH"
                       className="w-full aspect-video rounded-lg overflow-hidden"
                     />
                     <div className="mt-4 p-6 bg-card rounded-lg border">
                       <p className="text-muted-foreground mb-4">
-                        개별 전문가에서 &apos;전문가 팀&apos;으로. 중견기업 경영진의 복잡한 자산을 오케스트라처럼 조화롭게 관리하는 패밀리오피스 전략.
+                        브리지워터 설립자 레이 달리오의 투자 전략과 분산투자 원칙. 패밀리오피스 운영에 필수적인 포트폴리오 구성 방법을 익혀보세요.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">패밀리오피스</Badge>
-                        <Badge variant="secondary">전문가 팀</Badge>
-                        <Badge variant="secondary">통합 자산관리</Badge>
-                        <Badge variant="secondary">경영진 필수</Badge>
+                        <Badge variant="secondary">레이달리오</Badge>
+                        <Badge variant="secondary">분산투자</Badge>
+                        <Badge variant="secondary">포트폴리오</Badge>
+                        <Badge variant="secondary">자산배분</Badge>
                       </div>
                     </div>
                   </div>
@@ -250,37 +250,37 @@ export default function BlogPage() {
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
                     <SpotifyEmbed
-                      uri="spotify:episode:1xVE4lGeiPlHlb2IOXZRzG"
-                      title="중대재처벌과 산재 리스크"
+                      uri="spotify:episode:4TIOexLCcQD6RQNLUI3qf3"
+                      title="가족 자산관리와 토스가들이 배울 수 있는 10가지 교훈"
                       className="w-full rounded-lg overflow-hidden"
                     />
                     <div className="mt-4 p-6 bg-card rounded-lg border">
                       <p className="text-muted-foreground mb-4">
-                        실제 중견기업 CEO들의 자산관리 여정과 성공 전략을 심층 인터뷰로 공유합니다. 구체적인 실무 노하우와 시행착오 경험담을 들어보세요.
+                        토스거의 배드맨 저자 에드 해트웨이의 대형 인터뷰에서 가족 자산관리에 대한 심층 인사이트를 얻어보세요. 세대 간 부의 전수와 성공적인 법인 구조 운영 전략을 배워보세요.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">CEO 인터뷰</Badge>
-                        <Badge variant="secondary">성공사례</Badge>
-                        <Badge variant="secondary">실무노하우</Badge>
-                        <Badge variant="secondary">자산관리</Badge>
+                        <Badge variant="secondary">가족자산관리</Badge>
+                        <Badge variant="secondary">토스거</Badge>
+                        <Badge variant="secondary">에드해트웨이</Badge>
+                        <Badge variant="secondary">부의전수</Badge>
                       </div>
                     </div>
                   </div>
                   <div>
                     <SpotifyEmbed
-                      uri="spotify:episode:2X1KIsTYtKNAfvrVgVLoJw"
-                      title="CEO를 위한 금융 드림팀, '패밀리오피스'가 필요한 이유"
+                      uri="spotify:episode:6JXsT6X9g9dHfFMPKy8z2J"
+                      title="비트코인에서 ESG 투자까지: 새로운 자산 클래스들"
                       className="w-full rounded-lg overflow-hidden"
                     />
                     <div className="mt-4 p-6 bg-card rounded-lg border">
                       <p className="text-muted-foreground mb-4">
-                        급변하는 글로벌 경제 환경 속에서 패밀리오피스가 주목해야 할 투자 트렌드와 리스크 관리 전략을 전문가가 분석합니다.
+                        새로운 자산 클래스의 등장과 투자 기회를 전문가와 함께 논의합니다. 암호화폐부터 ESG 투자까지, 변화하는 투자 패러다임에 대비하는 방법을 알아보세요.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">글로벌투자</Badge>
-                        <Badge variant="secondary">2025 전망</Badge>
-                        <Badge variant="secondary">리스크관리</Badge>
-                        <Badge variant="secondary">전문가분석</Badge>
+                        <Badge variant="secondary">대체투자</Badge>
+                        <Badge variant="secondary">비트코인</Badge>
+                        <Badge variant="secondary">ESG투자</Badge>
+                        <Badge variant="secondary">새로운자산</Badge>
                       </div>
                     </div>
                   </div>
