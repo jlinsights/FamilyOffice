@@ -150,15 +150,6 @@ export function Footer() {
                   <span className="sr-only">YouTube</span>
                 </Link>
                 <Link
-                  href="https://blog.naver.com/lim_jaehong"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
-                >
-                  <NaverIcon className="h-4 w-4" />
-                  <span className="sr-only">Naver Blog</span>
-                </Link>
-                <Link
                   href="https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=FYutRxkCTLiMK9vckK26Bg"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -166,6 +157,15 @@ export function Footer() {
                 >
                   <SpotifyIcon className="h-4 w-4" />
                   <span className="sr-only">Spotify Podcast</span>
+                </Link>
+                <Link
+                  href="https://blog.naver.com/lim_jaehong"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                >
+                  <NaverIcon className="h-4 w-4" />
+                  <span className="sr-only">Naver Blog</span>
                 </Link>
               </div>
 

@@ -66,6 +66,17 @@ const resourceCategories = [
 
 const featuredResources = [
   {
+    category: '기업 위험관리',
+    title: '기업 Risk관리를 위한 가치 제안서',
+    description: '산업재해로 인한 리스크 관리 전략과 솔루션, 기업재해보장보험 등 리스크 관리 방안 제시',
+    fileSize: '2.8 MB',
+    format: 'PDF',
+    date: '2025.01.28',
+    downloads: 125,
+    isPremium: false,
+    downloadPath: '/insurance-products/samsung-life/product-guides/proposal-for-corporate-risk-management.pdf',
+  },
+  {
     category: 'CEO 보장자산',
     title: '가정과 회사의 중심인 CEO는 보장자산이 필요합니다',
     description: '산재 혜택을 받지 못하는 CEO를 위한 보장자산 가이드. 건강보험, 재직中 보험료 납입, 수익자 지정 전략',
@@ -256,7 +267,20 @@ export default function ResourcesPage() {
                     <span className="text-sm text-muted-foreground">
                       {resource.date}
                     </span>
-                    <Button size="sm" className="hover:scale-105 transition-transform duration-300">
+                    <Button 
+                      size="sm" 
+                      className="hover:scale-105 transition-transform duration-300"
+                      onClick={() => {
+                        if (resource.downloadPath) {
+                          const link = document.createElement('a');
+                          link.href = resource.downloadPath;
+                          link.download = `${resource.title}.pdf`;
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                        }
+                      }}
+                    >
                       <Download className="w-4 h-4 mr-2" />
                       다운로드
                     </Button>
