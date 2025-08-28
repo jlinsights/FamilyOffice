@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, FileText, Mail, Download, TrendingUp, Users, BookOpen } from 'lucide-react';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import SpotifyPodcastPlayer from '@/components/spotify-podcast-player';
 
 export const metadata: Metadata = {
   title: '인사이트 센터 | 기업승계 전문 분석 | FamilyOffice S',
@@ -48,7 +47,7 @@ const insightSections = [
     icon: Mail,
     gradient: 'from-purple-500 to-purple-600',
     features: [
-      '매주 월·금 발송',
+      '매주 화·금 발송',
       '독점 투자 정보',
       '전문가 인터뷰',
       '맞춤형 콘텐츠',
@@ -206,8 +205,6 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* Spotify Podcast Section */}
-      <SpotifyPodcastPlayer />
 
       {/* Stats Section */}
       <section className="py-20">
@@ -252,7 +249,7 @@ export default function InsightsPage() {
             주간 브리프를 놓치지 마세요
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8">
-            매주 월·금, 엄선된 투자 정보와 시장 분석을 이메일로 받아보세요
+            매주 화·금, 엄선된 투자 정보와 시장 분석을 이메일로 받아보세요
           </p>
           <Link href="/insights/weekly-brief">
             <Button size="lg" variant="secondary" className="hover:scale-105 transition-transform duration-300">

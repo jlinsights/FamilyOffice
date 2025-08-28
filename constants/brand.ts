@@ -87,8 +87,18 @@ export const BRAND_COLORS = {
   social: [
     {
       name: 'KakaoTalk Channel',
-      url: 'https://pf.kakao.com/_your_channel_id',
+      url: 'http://pf.kakao.com/_gsxkxdG',
       usage: '카카오톡 문의 채널',
+    },
+    {
+      name: 'YouTube Channel',
+      url: 'https://www.youtube.com/@FamilyOffice-S',
+      usage: '동영상 콘텐츠 채널',
+    },
+    {
+      name: 'Spotify Podcast',
+      url: 'https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=865eb414b88d4449',
+      usage: '팟캐스트 채널',
     },
   ],
   status: [

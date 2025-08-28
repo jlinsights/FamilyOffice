@@ -109,7 +109,7 @@ export function NewsletterSubscription({
           <div className="flex-1">
             <h4 className="font-semibold text-sm mb-1">Weekly Brief 구독하기</h4>
             <p className="text-xs text-muted-foreground mb-2">
-              매주 월·금요일 오전 7:30 발송
+              매주 화·금요일 오전 7:30 발송
             </p>
             <form onSubmit={handleSubmit} className="flex gap-2">
               <Input
@@ -146,7 +146,7 @@ export function NewsletterSubscription({
         Weekly Brief 구독하기
       </h3>
       <p className="text-base mb-8 opacity-90 leading-relaxed max-w-sm mx-auto">
-        매주 월·금요일 오전 7:30 발송<br/>
+        매주 화·금요일 오전 7:30 발송<br/>
         기업승계와 자산관리 전문 인사이트
       </p>
       

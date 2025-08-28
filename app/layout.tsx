@@ -10,7 +10,6 @@ import { KakaoSDK } from '@/components/kakao/kakao-sdk';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
-import { AnnouncementBanner } from '@/components/announcement-banner';
 import { FloatingActionButtons } from '@/components/floating-action-buttons';
 import { ScrollToTopFloating } from '@/components/scroll-to-top-floating';
 import { DebugStyles } from './debug-styles';
@@ -342,7 +341,6 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <AnnouncementBanner />
             {children}
             {/* <AIChatFloating /> */}
             <ScrollToTopFloating />

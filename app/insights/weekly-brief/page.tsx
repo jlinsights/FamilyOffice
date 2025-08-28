@@ -16,30 +16,35 @@ import {
   Clock,
   ArrowRight,
   Shield,
-  Target
+  Target,
+  Play,
+  Headphones,
+  ChevronRight
 } from 'lucide-react';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { CalComPopup } from '@/components/cal-com-popup';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Skeleton } from '@/components/ui/skeleton';
-import SpotifyPodcastPlayer from '@/components/spotify-podcast-player';
+import { YouTubeEmbed } from '@/components/media/youtube-embed';
+import { SpotifyEmbed } from '@/components/media/spotify-embed';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Metadata는 서버 컴포넌트에서만 사용 가능하므로 주석 처리
 // export const metadata: Metadata = {
 //   title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-//   description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다. 5분 내 독서 완료, 실무 적용 가능한 전문가 인사이트.',
+//   description: '매주 화·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다. 5분 내 독서 완료, 실무 적용 가능한 전문가 인사이트.',
 //   keywords: '주간 브리프, 기업승계 뉴스레터, CEO 뉴스레터, 상속세 절세, 가업승계, 중견기업, 패밀리오피스, 자산관리 인사이트',
 //   openGraph: {
 //     title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-//     description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
+//     description: '매주 화·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
 //     type: 'website',
 //     locale: 'ko_KR',
 //   },
 //   twitter: {
 //     card: 'summary_large_image',
 //     title: '주간 브리프 | 기업승계와 자산관리 핵심 인사이트 | FamilyOffice S',
-//     description: '매주 월·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
+//     description: '매주 화·금요일 오전 7:30, 기업승계와 자산관리 핵심 인사이트를 전달합니다.',
 //   },
 //   alternates: {
 //     canonical: '/insights/weekly-brief',
@@ -285,6 +290,131 @@ export default function WeeklyBriefPage() {
         </div>
       </section>
 
+      {/* Featured Media Content */}
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              미디어로 만나는 인사이트
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              영상과 팟캐스트로 더 깊이 있는 전문가 분석을 만나보세요
+            </p>
+          </div>
+
+          <Tabs defaultValue="video" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-8">
+              <TabsTrigger value="video" className="flex items-center gap-2">
+                <Play className="h-4 w-4" />
+                최신 영상
+              </TabsTrigger>
+              <TabsTrigger value="podcast" className="flex items-center gap-2">
+                <Headphones className="h-4 w-4" />
+                팟캐스트
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="video" className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <YouTubeEmbed
+                    videoId="Pm27aGULsZk"
+                    title="중대재해법 시대, 마지막 방패"
+                    className="w-full aspect-video rounded-lg overflow-hidden mb-4"
+                  />
+                  <p className="text-muted-foreground mb-3">
+                    중대재해처벌법 시대, 산재보험으로 없었질 수 없는 민사배상금 리스크. CEO 개인과 법인 모두를 지키는 마지막 방패를 준비하세요.
+                  </p>
+                  <div className="flex gap-2">
+                    <Badge variant="secondary">중대재해처벌법</Badge>
+                    <Badge variant="secondary">민사배상 리스크</Badge>
+                    <Badge variant="secondary">기업재해보장</Badge>
+                  </div>
+                </div>
+                <div>
+                  <YouTubeEmbed
+                    videoId="Ufk5FHmG0LA"
+                    title="중견기업 경영진, 자산관리 전략가이드"
+                    className="w-full aspect-video rounded-lg overflow-hidden mb-4"
+                  />
+                  <p className="text-muted-foreground mb-3">
+                    개별 전문가에서 '전문가 팀'으로. 중견기업 경영진의 복잡한 자산을 오케스트라처럼 조화롭게 관리하는 패밀리오피스 전략.
+                  </p>
+                  <div className="flex gap-2">
+                    <Badge variant="secondary">패밀리오피스</Badge>
+                    <Badge variant="secondary">전문가 팀</Badge>
+                    <Badge variant="secondary">통합 자산관리</Badge>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <Button variant="outline" size="lg" asChild>
+                  <Link 
+                    href="https://youtube.com/@FamilyOffice-S" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2"
+                  >
+                    전체 영상 보기
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="podcast" className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <SpotifyEmbed
+                    uri="spotify:episode:1xVE4lGeiPlHlb2IOXZRzG"
+                    title="중대재처벌과 산재 리스크"
+                    className="w-full rounded-lg overflow-hidden mb-4"
+                  />
+                  <p className="text-muted-foreground mb-3">
+                    이번 주 뉴스레터 핵심 내용을 오디오로 들으며 더 깊이 있는 전문가 분석과 해설을 제공합니다. 통근길이나 운동 중에도 편리하게 들어보세요.
+                  </p>
+                  <div className="flex gap-2">
+                    <Badge variant="secondary">오디오 버전</Badge>
+                    <Badge variant="secondary">심층 해설</Badge>
+                    <Badge variant="secondary">전문가 분석</Badge>
+                  </div>
+                </div>
+                <div>
+                  <SpotifyEmbed
+                    uri="spotify:episode:2X1KIsTYtKNAfvrVgVLoJw"
+                    title="CEO를 위한 금융 드림팀, '패밀리오피스'가 필요한 이유"
+                    className="w-full rounded-lg overflow-hidden mb-4"
+                  />
+                  <p className="text-muted-foreground mb-3">
+                    여러 중견기업 CEO들과 전문가가 함께하는 라운드테이블 토론입니다. 2025년 자산관리 전략과 시장 전망에 대한 다양한 관점을 나눕니다.
+                  </p>
+                  <div className="flex gap-2">
+                    <Badge variant="secondary">라운드테이블</Badge>
+                    <Badge variant="secondary">CEO 토론</Badge>
+                    <Badge variant="secondary">2025 전략</Badge>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <Button variant="outline" size="lg" asChild>
+                  <Link 
+                    href="https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2"
+                  >
+                    전체 에피소드 듣기
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
       {/* Recent Issues Section */}
       <section className="recent-issues py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -395,8 +525,6 @@ export default function WeeklyBriefPage() {
         </div>
       </section>
 
-      {/* Spotify Podcast Section */}
-      <SpotifyPodcastPlayer className="bg-muted/30" />
 
       {/* Recent Topics */}
       <section className="py-20 bg-muted/30">

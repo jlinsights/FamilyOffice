@@ -1,4 +1,4 @@
-// Analytics library for PopupManager system
+// Analytics library for tracking system events
 export const analytics = {
   track: (eventName: string, properties: Record<string, any>) => {
     // In development, log to console
@@ -13,7 +13,7 @@ export const analytics = {
     
     // Store in localStorage for debugging
     try {
-      const stored = JSON.parse(localStorage.getItem('popup_analytics') || '[]');
+      const stored = JSON.parse(localStorage.getItem('site_analytics') || '[]');
       stored.push({
         event: eventName,
         properties,
@@ -23,7 +23,7 @@ export const analytics = {
       if (stored.length > 100) {
         stored.splice(0, stored.length - 100);
       }
-      localStorage.setItem('popup_analytics', JSON.stringify(stored));
+      localStorage.setItem('site_analytics', JSON.stringify(stored));
     } catch (error) {
       // Ignore localStorage errors
     }

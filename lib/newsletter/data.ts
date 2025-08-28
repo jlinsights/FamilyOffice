@@ -45,6 +45,6 @@ export const newsletterStats = {
   issues: '52+',
   establishedYear: '2025',
   platform: 'beehiiv',
-  frequency: '매주 월·금요일',
+  frequency: '매주 화·금요일',
   time: '오전 7:30',
 };

@@ -15,7 +15,6 @@ import { UserProfileDropdown } from '@/components/auth/user-profile-dropdown';
 import { useKakaoAuth } from '@/hooks/use-kakao-auth';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
-import { PopupManager } from '@/components/popup/popup-manager';
 
 import type { NavigationItem, NavigationSubItem } from '@/types/globals';
 
@@ -349,12 +348,7 @@ export const Header = memo(function Header({
         </div>
       )}
 
-      {/* Sophisticated Dual-Popup System with AgentOS Optimization */}
-      <PopupManager 
-        enableDualPopup={true}
-        maxConcurrentPopups={2}
-        debugMode={process.env.NODE_ENV === 'development'}
-      />
+
     </header>
   );
 });

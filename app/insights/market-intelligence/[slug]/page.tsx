@@ -14,7 +14,6 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { blogPosts } from '@/lib/blog-data';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
-import BlogPodcastConnection from '@/components/blog-podcast-connection';
 
 // BlogPost interface and data imported from lib/blog-data
 
@@ -166,12 +165,6 @@ export default async function BlogPostPage({
                 />
               </div>
 
-              {/* Related Podcast Episodes */}
-              <BlogPodcastConnection
-                blogCategory={post.category}
-                blogTags={post.tags}
-                blogTitle={post.title}
-              />
 
               {/* Author Bio */}
               <Card className="mt-8 shadow-lg bg-background border-border">
@@ -266,7 +259,7 @@ export default async function BlogPostPage({
                 Weekly Brief 구독하기
               </h2>
               <p className="text-xl text-blue-100 dark:text-blue-200 mb-8">
-                매주 월·금요일 오전 7시 30분에 발송되는<br/>
+                매주 화·금요일 오전 7시 30분에 발송되는<br/>
                 기업승계와 자산관리 전문 인사이트를 받아보세요.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -288,7 +281,7 @@ export default async function BlogPostPage({
                 />
               </div>
               <p className="text-sm text-blue-100 dark:text-blue-200 mt-4 opacity-90">
-                매주 월·금요일 오전 7:30 정기 발송 | 1,200+ 중견기업 경영진 구독 중
+                매주 화·금요일 오전 7:30 정기 발송 | 1,200+ 중견기업 경영진 구독 중
               </p>
             </div>
           </div>
