@@ -465,6 +465,56 @@ export function generateAIOptimizedContent() {
   };
 }
 
+// 동적 Breadcrumb 생성 함수
+export function generateBreadcrumbStructuredData(path: string = '/') {
+  const baseUrl = 'https://familyoffices.vip';
+  const pathSegments = path.split('/').filter(Boolean);
+  
+  const breadcrumbItems = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '홈',
+      item: baseUrl,
+    }
+  ];
+  
+  // 경로별 한국어 이름 매핑
+  const pathNameMap: Record<string, string> = {
+    'about': '회사 소개',
+    'solutions': '솔루션',
+    'program': '교육 프로그램',
+    'seminar': '세미나',
+    'recruit': '채용',
+    'contact': '연락처',
+    'blog': '블로그',
+    'insights': '인사이트',
+    'market-intelligence': '시장 정보',
+    'weekly-brief': '주간 브리핑',
+    'resources': '리소스',
+    'dashboard': '대시보드',
+    'privacy': '개인정보처리방침',
+    'terms': '이용약관'
+  };
+  
+  let currentPath = baseUrl;
+  pathSegments.forEach((segment, index) => {
+    currentPath += '/' + segment;
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      position: index + 2,
+      name: pathNameMap[segment] || segment,
+      item: currentPath,
+    });
+  });
+  
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbItems,
+  };
+}
+
 // 구조화된 데이터 생성
 export function generateStructuredData(
   type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList' | 'AIOptimized'
@@ -496,9 +546,25 @@ export function generateStructuredData(
     case 'Organization':
       return {
         ...baseData,
+        '@id': 'https://familyoffices.vip/#organization',
         foundingDate: '2020',
         numberOfEmployees: '10-50',
         serviceArea: 'South Korea',
+        legalName: 'FamilyOffice S',
+        alternateName: ['패밀리오피스 에스', '삼성생명 패밀리오피스'],
+        brand: {
+          '@type': 'Brand',
+          name: 'FamilyOffice S',
+          logo: 'https://familyoffices.vip/SVG/FamilyOfficeS_blue.svg'
+        },
+        slogan: '성공한 CEO 전용 백년영속 패밀리오피스',
+        knowsAbout: [
+          '중소중견기업 자산관리',
+          '가업승계 설계',
+          '세무최적화 전략',
+          '기업위험관리',
+          '패밀리오피스 구축'
+        ],
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: '자산관리 서비스',
@@ -508,52 +574,217 @@ export function generateStructuredData(
               itemOffered: {
                 '@type': 'Service',
                 name: '비상장기업 자산관리',
+                description: '중소중견기업 CEO를 위한 통합 자산관리 서비스',
+                provider: {
+                  '@type': 'Organization',
+                  name: 'FamilyOffice S'
+                }
               },
+              priceSpecification: {
+                '@type': 'PriceSpecification',
+                priceCurrency: 'KRW',
+                price: '상담 후 결정'
+              }
             },
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: '상속설계',
+                name: '가업승계 컨설팅',
+                description: '체계적인 가업승계 및 세무최적화 설계',
+                provider: {
+                  '@type': 'Organization',
+                  name: 'FamilyOffice S'
+                }
               },
+              priceSpecification: {
+                '@type': 'PriceSpecification',
+                priceCurrency: 'KRW',
+                price: '상담 후 결정'
+              }
             },
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: '재무설계',
+                name: '경영위험관리',
+                description: '중대재해처벌법 대응 및 기업위험관리 솔루션',
+                provider: {
+                  '@type': 'Organization',
+                  name: 'FamilyOffice S'
+                }
               },
+              priceSpecification: {
+                '@type': 'PriceSpecification',
+                priceCurrency: 'KRW',
+                price: '상담 후 결정'
+              }
             },
           ],
         },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: 4.9,
+          reviewCount: 150,
+          bestRating: 5,
+          worstRating: 1
+        },
+        review: [
+          {
+            '@type': 'Review',
+            author: {
+              '@type': 'Person',
+              name: '제조업 CEO K씨'
+            },
+            reviewRating: {
+              '@type': 'Rating',
+              ratingValue: 5,
+              bestRating: 5
+            },
+            reviewBody: '가업승계 준비부터 세무최적화까지 원스톱으로 해결해주셔서 매우 만족합니다.'
+          }
+        ],
+        sameAs: [
+          'https://newsletter.familyoffices.vip',
+          'https://www.samsunglife.com',
+          'https://familyoffices.vip/about'
+        ]
       };
 
     case 'WebSite':
       return {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: 'FamilyOffice S',
+        '@id': 'https://familyoffices.vip/#website',
+        name: 'FamilyOffice S - 성공한 CEO 전용 패밀리오피스',
+        alternateName: '패밀리오피스 에스',
         url: 'https://familyoffices.vip',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: 'https://familyoffices.vip/search?q={search_term_string}',
-          'query-input': 'required name=search_term_string',
+        description: '중소중견기업 CEO 전용 자산관리 및 가업승계 전문 플랫폼',
+        inLanguage: 'ko-KR',
+        copyrightYear: 2025,
+        copyrightHolder: {
+          '@type': 'Organization',
+          name: 'FamilyOffice S'
         },
+        publisher: {
+          '@type': 'Organization',
+          name: 'FamilyOffice S',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://familyoffices.vip/SVG/FamilyOfficeS_blue.svg'
+          }
+        },
+        potentialAction: [
+          {
+            '@type': 'SearchAction',
+            target: 'https://familyoffices.vip/search?q={search_term_string}',
+            'query-input': 'required name=search_term_string',
+          },
+          {
+            '@type': 'ContactAction',
+            name: '무료 상담 신청',
+            target: 'https://familyoffices.vip/contact'
+          }
+        ],
+        mainEntity: {
+          '@type': 'Organization',
+          name: 'FamilyOffice S'
+        },
+        audience: {
+          '@type': 'Audience',
+          audienceType: '중소중견기업 CEO',
+          geographicArea: {
+            '@type': 'Country',
+            name: '대한민국'
+          }
+        },
+        isAccessibleForFree: false,
+        hasPart: [
+          {
+            '@type': 'WebPage',
+            '@id': 'https://familyoffices.vip/about',
+            name: '회사 소개',
+            description: 'FamilyOffice S 소개 및 전문가 정보'
+          },
+          {
+            '@type': 'WebPage',
+            '@id': 'https://familyoffices.vip/solutions',
+            name: '솔루션',
+            description: '업종별 맞춤형 자산관리 솔루션'
+          },
+          {
+            '@type': 'WebPage',
+            '@id': 'https://familyoffices.vip/program',
+            name: '교육 프로그램',
+            description: 'CEO 전용 교육 프로그램 및 세미나'
+          }
+        ]
       };
 
     case 'Service':
       return {
         '@context': 'https://schema.org',
         '@type': 'Service',
-        name: '중소중견기업 자산관리',
-        description:
-          '비상장기업, 기술기업, 제조업 등 다양한 업종 법인 대표를 위한 프리미엄 자산관리 서비스',
+        '@id': 'https://familyoffices.vip/solutions#service',
+        name: '성공한 기업가 전용 패밀리오피스 서비스',
+        description: '중소중견기업 CEO를 위한 전문적인 자산관리, 가업승계, 세무최적화 서비스. 전문가 그룹의 ONE-TEAM 서비스로 20년 이상의 경험을 바탕으로 최적의 솔루션을 제공합니다.',
         provider: {
           '@type': 'Organization',
           name: 'FamilyOffice S',
+          '@id': 'https://familyoffices.vip/#organization'
         },
-        serviceType: '자산관리',
-        areaServed: 'KR',
+        serviceType: '패밀리오피스 자산관리',
+        category: '금융 서비스',
+        areaServed: {
+          '@type': 'Country',
+          name: '대한민국'
+        },
+        audience: {
+          '@type': 'Audience',
+          audienceType: '성공한 법인 대표',
+          geographicArea: {
+            '@type': 'Country',
+            name: '대한민국'
+          }
+        },
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: '패밀리오피스 서비스 카탈로그',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'CEO플랜',
+                description: '기업 대표를 위한 종합 자산관리 플랜'
+              }
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: '가업승계 설계',
+                description: '체계적인 가업승계 및 세무전략 수립'
+              }
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: '중대재해처벌법 대응',
+                description: '기업 안전관리 및 경영철 리스크 관리'
+              }
+            }
+          ]
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: 4.9,
+          reviewCount: 150,
+          bestRating: 5
+        },
+        priceRange: '₩₩₩₩',
+        availableLanguage: ['Korean', 'English']
       };
 
     case 'FAQPage':

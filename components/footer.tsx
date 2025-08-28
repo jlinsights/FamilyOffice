@@ -1,24 +1,24 @@
 'use client';
 
 import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Sparkles,
-  TrendingUp,
-  Users,
-  Award,
-  Shield,
-  Youtube,
+    Award,
+    Facebook,
+    Instagram,
+    Linkedin,
+    Mail,
+    MapPin,
+    Phone,
+    Shield,
+    Sparkles,
+    TrendingUp,
+    Users,
+    Youtube,
 } from 'lucide-react';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { ClientScripts } from './client-scripts';
 
@@ -266,7 +266,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/faq"
+                    href="/about#faq"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
                     자주 묻는 질문

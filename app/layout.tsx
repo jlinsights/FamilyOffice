@@ -66,6 +66,13 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//cal.com" />
         <link rel="dns-prefetch" href="//analytics.google.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="//connect.facebook.net" />
+        <link rel="dns-prefetch" href="//static.doubleclick.net" />
+        
+        {/* Critical CSS 최적화 - 폰트 로딩 */}
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
         
         {/* 파비콘 및 앱 아이콘 설정 */}
         <link rel="icon" href="/favicon.ico" sizes="any" />

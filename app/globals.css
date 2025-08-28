@@ -5,6 +5,11 @@
 /* 🚀 Core Web Vitals 최적화 - AgentOS Performance Framework */
 /* Critical CSS 인라인 최적화 및 리소스 로딩 개선 */
 @layer base {
+  /* 부드러운 스크롤 효과 */
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* 폰트 로딩 최적화 - LCP 개선 */
   .playfair-display {
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
