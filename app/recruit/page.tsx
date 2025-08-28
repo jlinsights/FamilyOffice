@@ -649,7 +649,7 @@ export default function RecruitPage() {
                 
                 {/* Step 4 */}
                 <div className="group">
-                  <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/50 bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-900/20 dark:to-green-800/10">
+                  <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/50">
                     <CardContent className="p-6">
                       <div className="flex justify-center mb-4">
                         <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg animate-pulse">
@@ -695,7 +695,7 @@ export default function RecruitPage() {
                   }
                 ].map((step, index) => (
                   <div key={index} className="relative">
-                    <Card className={`hover:shadow-lg transition-all duration-300 ${step.isLast ? 'bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-900/20 dark:to-green-800/10' : ''}`}>
+                    <Card className="hover:shadow-lg transition-all duration-300">
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
                           <div className={`flex-shrink-0 w-14 h-14 bg-gradient-to-br ${step.color} rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg ${step.isLast ? 'animate-pulse' : ''}`}>
