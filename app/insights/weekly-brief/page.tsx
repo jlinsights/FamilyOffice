@@ -338,7 +338,7 @@ export default function WeeklyBriefPage() {
                     className="w-full aspect-video rounded-lg overflow-hidden mb-4"
                   />
                   <p className="text-muted-foreground mb-3">
-                    개별 전문가에서 '전문가 팀'으로. 중견기업 경영진의 복잡한 자산을 오케스트라처럼 조화롭게 관리하는 패밀리오피스 전략.
+                    개별 전문가에서 &apos;전문가 팀&apos;으로. 중견기업 경영진의 복잡한 자산을 오케스트라처럼 조화롭게 관리하는 패밀리오피스 전략.
                   </p>
                   <div className="flex gap-2">
                     <Badge variant="secondary">패밀리오피스</Badge>
@@ -572,7 +572,7 @@ export default function WeeklyBriefPage() {
                       ))}
                     </div>
                     <p className="text-muted-foreground mb-4 italic">
-                      "{testimonial.content}"
+                      &quot;{testimonial.content}&quot;
                     </p>
                     <div className="flex items-center justify-between">
                       <div>

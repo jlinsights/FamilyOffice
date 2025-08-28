@@ -124,7 +124,7 @@ export default function DebugPage() {
         <div className="mt-8 bg-blue-50 p-6 rounded-lg">
           <h3 className="text-lg font-semibold mb-3">📝 디버그 가이드</h3>
           <ul className="space-y-2 text-sm text-gray-700">
-            <li>• 환경 변수가 'NOT SET'으로 표시되면 .env.local 파일을 확인하세요</li>
+            <li>• 환경 변수가 &apos;NOT SET&apos;으로 표시되면 .env.local 파일을 확인하세요</li>
             <li>• 카카오 SDK가 초기화되지 않으면 JavaScript Key가 올바른지 확인하세요</li>
             <li>• 개발자 도구 콘솔에서 추가 에러 메시지를 확인하세요</li>
             <li>• 이 페이지는 개발 중에만 사용하고, 프로덕션에서는 제거하세요</li>

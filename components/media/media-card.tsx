@@ -3,6 +3,7 @@
 import { Play, Headphones, FileText } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
 
 export type MediaType = 'youtube' | 'spotify' | 'article';
 
@@ -54,10 +55,12 @@ export function MediaCard({
       <a href={link} target={type !== 'article' ? '_blank' : '_self'} rel="noopener noreferrer" className="block">
         {thumbnail && (
           <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
-            <img
+            <Image
               src={thumbnail}
               alt={title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             {duration && (
               <span className="absolute bottom-2 right-2 px-2 py-1 text-xs font-medium bg-black/80 text-white rounded">

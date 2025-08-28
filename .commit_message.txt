@@ -1,6 +1,6 @@
-📁 자료실에 기업 Risk관리 자료 카드 추가 및 다운로드 기능 구현
+🔧 ESLint 경고 해결 및 코드 품질 개선
 
-- featuredResources에 '기업 Risk관리를 위한 가치 제안서' 카드 추가
-- downloadPath 속성으로 PDF 다운로드 기능 구현
-- 클릭 시 /insurance-products/samsung-life/product-guides/proposal-for-corporate-risk-management.pdf 다운로드
-- 산업재해 리스크 관리 전략 및 기업재해보장보험 솔루션 안내
+- <img> 태그를 Next.js <Image /> 컴포넌트로 교체하여 성능 최적화
+- JSX 내 unescaped quotes/apostrophes를 HTML entities로 변환  
+- brand, debug, insights, media-card 컴포넌트 ESLint 규칙 준수
+- 코드 품질 향상 및 Next.js 모범 사례 적용

@@ -2,6 +2,7 @@
 
 import { Copy, Check, Eye, Download, Award, Target, Shield, TrendingUp, Users, Building2, Sparkles } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -71,9 +72,11 @@ const BrandIdentity = () => (
           <div>
             <span className="text-sm font-medium text-muted-foreground">Subtitle:</span>
             <div className="flex items-center gap-3 mt-2">
-              <img 
+              <Image 
                 src="/samsung-financial-networks-logo.png" 
                 alt="Samsung Financial Networks" 
+                width={120}
+                height={32}
                 className="h-8 w-auto"
               />
               <p className="text-lg font-medium">Samsung Financial Networks</p>
@@ -81,7 +84,7 @@ const BrandIdentity = () => (
           </div>
           <div>
             <span className="text-sm font-medium text-muted-foreground">Tagline:</span>
-            <p className="text-base font-medium">"Your Trusted Financial Partner for Life"</p>
+            <p className="text-base font-medium">&quot;Your Trusted Financial Partner for Life&quot;</p>
           </div>
         </div>
       </Card>

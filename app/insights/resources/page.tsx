@@ -1,4 +1,5 @@
-import { Metadata } from 'next';
+'use client';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,25 +18,8 @@ import {
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
-export const metadata: Metadata = {
-  title: '기업승계 자료실 | CEO 필수 가이드북 | FamilyOffice S',
-  description: '기업승계, 상속세 절세, 가업승계에 필요한 실무 가이드와 전문 자료를 다운로드하세요. 중견기업 CEO를 위한 검증된 실무 중심 콘텐츠.',
-  keywords: '기업승계 가이드, 상속세 절세 자료, 가업승계 매뉴얼, CEO 가이드북, 중견기업 자료, 패밀리오피스 가이드',
-  openGraph: {
-    title: '기업승계 자료실 | CEO 필수 가이드북 | FamilyOffice S',
-    description: '기업승계, 상속세 절세, 가업승계에 필요한 실무 가이드와 전문 자료를 다운로드하세요.',
-    type: 'website',
-    locale: 'ko_KR',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: '기업승계 자료실 | CEO 필수 가이드북 | FamilyOffice S',
-    description: '기업승계, 상속세 절세, 가업승계에 필요한 실무 가이드와 전문 자료를 다운로드하세요.',
-  },
-  alternates: {
-    canonical: '/insights/resources',
-  },
-};
+// Client component로 변경되어 metadata 주석 처리
+// SEO metadata는 layout.tsx에서 처리됩니다
 
 const resourceCategories = [
   {
