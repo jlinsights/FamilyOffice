@@ -58,7 +58,7 @@ const featuredResources = [
     date: '2025.01.28',
     downloads: 125,
     isPremium: false,
-    downloadPath: '/insurance-products/samsung-life/product-guides/proposal-for-corporate-risk-management.pdf',
+    downloadUrl: 'https://pub-66c6dc2fd6894c5687d260702159ac9a.r2.dev/23%200228_%20%EB%8B%A8%EC%B2%B4%20%EC%A0%9C%EC%95%88%EC%84%9C(%EC%8A%B9%EC%9D%B8%E5%AE%8C).pdf',
   },
   {
     category: 'CEO 보장자산',
@@ -255,7 +255,11 @@ export default function ResourcesPage() {
                       size="sm" 
                       className="hover:scale-105 transition-transform duration-300"
                       onClick={() => {
-                        if (resource.downloadPath) {
+                        if (resource.downloadUrl) {
+                          // Cloudflare R2 외부 링크는 새 탭에서 열기
+                          window.open(resource.downloadUrl, '_blank');
+                        } else if (resource.downloadPath) {
+                          // 로컬 파일은 다운로드
                           const link = document.createElement('a');
                           link.href = resource.downloadPath;
                           link.download = `${resource.title}.pdf`;
