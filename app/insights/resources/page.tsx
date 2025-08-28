@@ -255,13 +255,14 @@ export default function ResourcesPage() {
                       size="sm" 
                       className="hover:scale-105 transition-transform duration-300"
                       onClick={() => {
-                        if (resource.downloadUrl) {
+                        const resourceWithUrl = resource as any;
+                        if (resourceWithUrl.downloadUrl) {
                           // Cloudflare R2 외부 링크는 새 탭에서 열기
-                          window.open(resource.downloadUrl, '_blank');
-                        } else if (resource.downloadPath) {
+                          window.open(resourceWithUrl.downloadUrl, '_blank');
+                        } else if (resourceWithUrl.downloadPath) {
                           // 로컬 파일은 다운로드
                           const link = document.createElement('a');
-                          link.href = resource.downloadPath;
+                          link.href = resourceWithUrl.downloadPath;
                           link.download = `${resource.title}.pdf`;
                           document.body.appendChild(link);
                           link.click();
