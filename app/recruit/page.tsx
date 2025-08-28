@@ -287,6 +287,10 @@ export default function RecruitPage() {
         <section className="py-20">
           <div className="container mx-auto px-6">
             <div className="max-w-3xl mx-auto text-center mb-16">
+              <Badge variant="outline" className="mb-4">
+                <Briefcase className="h-3 w-3 mr-1" />
+                Group Financial Consultant
+              </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 GFC(기업재무컨설턴트)란?
               </h2>
@@ -311,11 +315,20 @@ export default function RecruitPage() {
                 const colorClasses = colorClassesMap[benefit.color as keyof typeof colorClassesMap] || 'bg-primary/10 text-primary';
                 
                 return (
-                  <div key={index} className="text-center group hover:transform hover:scale-105 transition-all duration-300">
-                    <div className={`w-16 h-16 ${colorClasses} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg`}>
+                  <div 
+                    key={index} 
+                    className="text-center group cursor-pointer"
+                    onClick={() => {
+                      window.open(
+                        'https://pub-66c6dc2fd6894c5687d260702159ac9a.r2.dev/20250123%20GFC%20%E1%84%87%E1%85%B3%E1%84%85%E1%85%A9%E1%84%89%E1%85%A7.pdf',
+                        '_blank'
+                      );
+                    }}
+                  >
+                    <div className={`w-16 h-16 ${colorClasses} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:scale-110 transition-all duration-300`}>
                       <Icon className="h-8 w-8" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{benefit.title}</h3>
                     <p className="text-muted-foreground">{benefit.description}</p>
                   </div>
                 );
