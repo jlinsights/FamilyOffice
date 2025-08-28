@@ -122,14 +122,15 @@ const featuredResources = [
     isPremium: false,
   },
   {
-    category: '시장 보고서',
-    title: 'AI 산업 투자 기회 분석 리포트',
-    description: '국내외 AI 산업 동향과 유망 투자 분야 심층 분석',
-    fileSize: '6.2 MB',
+    category: '퇴직연금',
+    title: '삼성생명 퇴직연금 제안서',
+    description: '기업 퇴직연금 운용 전략과 임직원 노후준비 솔루션 가이드',
+    fileSize: '4.1 MB',
     format: 'PDF',
-    date: '2024.12.10',
-    downloads: 1450,
-    isPremium: true,
+    date: '2025.01.28',
+    downloads: 320,
+    isPremium: false,
+    downloadUrl: 'https://pub-66c6dc2fd6894c5687d260702159ac9a.r2.dev/%E1%84%89%E1%85%A1%E1%86%B7%E1%84%89%E1%85%A5%E1%86%BC%E1%84%89%E1%85%A2%E1%86%BC%E1%84%86%E1%85%A7%E1%86%BC%20%E1%84%90%E1%85%AC%E1%84%8C%E1%85%B5%E1%86%A8%E1%84%8B%E1%85%A7%E1%86%AB%E1%84%80%E1%85%B3%E1%86%B7%E1%84%8C%E1%85%A6%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%89%E1%85%A5_%E1%84%8B%E1%85%B5%E1%86%B7%E1%84%8C%E1%85%A2%E1%84%92%E1%85%A9%E1%86%BC.pdf',
   },
 ];
 
@@ -137,7 +138,7 @@ const recentDownloads = [
   '가족법인 설립 실무 가이드북',
   '2025년 글로벌 자산배분 전략 가이드',
   '중대재해처벌법 대응 전략 세미나',
-  'AI 산업 투자 기회 분석 리포트',
+  '삼성생명 퇴직연금 제안서',
   '2025년 1분기 한국 부동산 시장 전망',
 ];
 
