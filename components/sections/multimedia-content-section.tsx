@@ -188,7 +188,7 @@ const MultimediaContentSection = memo(() => {
                   <iframe 
                     data-testid="embed-iframe" 
                     style={{borderRadius: '12px'}} 
-                    src="https://open.spotify.com/embed/episode/4NsRHqfYlCSidJ5sd0Xvye?utm_source=generator" 
+                    src="https://open.spotify.com/embed/episode/5aIG8p9AWFuzBSlnIYiL4E?utm_source=generator" 
                     width="100%" 
                     height="152" 
                     frameBorder="0" 
@@ -244,10 +244,17 @@ const MultimediaContentSection = memo(() => {
               </div>
 
               <div className="flex gap-2">
-                <Button className="flex-1 bg-green-500 hover:bg-green-600 text-white">
+                <Button 
+                  className="flex-1 bg-green-500 hover:bg-green-600 text-white"
+                  onClick={() => window.open('https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=1736cfee52584a98', '_blank')}
+                >
                   🎧 팔로우하고 알림받기
                 </Button>
-                <Button variant="outline" className="flex-1 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/20">
+                <Button 
+                  variant="outline" 
+                  className="flex-1 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/20"
+                  onClick={() => window.open('https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=1736cfee52584a98', '_blank')}
+                >
                   전체 에피소드 듣기
                 </Button>
               </div>
