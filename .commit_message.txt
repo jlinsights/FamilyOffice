@@ -1,6 +1,6 @@
-🖼️ Market Intelligence: YouTube 썸네일 추가
+🎨 Market Intelligence UI 통일성 개선
 
-- 🎥 **YouTube 썸네일**: maxresdefault 고화질 썸네일 자동 표시
-- 🎨 **UI 개선**: 호버 효과, 재생 버튼, 제목 오버레이 추가
-- 🏷️ **배지 통합**: 태그를 컴포넌트 내부로 이동하여 깔끔한 구조
-- 🌐 **Next.js 설정**: YouTube 이미지 도메인 허용 (img.youtube.com)
+- 📐 **레이아웃 통일**: weekly-brief 페이지와 동일한 구조로 변경
+- 🎯 **컴포넌트 표준화**: YouTubeEmbed, SpotifyEmbed 재사용
+- 📍 **일관된 스타일**: mb-4 간격, mb-3 설명, gap-2 배지 레이아웃
+- 🧹 **코드 정리**: 불필요한 MarketIntelligenceVideo 컴포넌트 제거

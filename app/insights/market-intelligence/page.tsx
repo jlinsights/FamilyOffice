@@ -38,7 +38,6 @@ import { BlogCategoryFilter, BlogCategoryFilterSkeleton } from '@/components/blo
 import { BlogContent } from '@/components/blog-content';
 import { YouTubeEmbed } from '@/components/media/youtube-embed';
 import { SpotifyEmbed } from '@/components/media/spotify-embed';
-import { MarketIntelligenceVideo } from '@/components/market-intelligence-video';
 
 // Categories and posts are imported from @/lib/blog-data
 // Dynamic rendering will be handled by BlogContent component based on URL parameters
@@ -178,33 +177,36 @@ export default function BlogPage() {
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="video" className="space-y-8">
-                <div className="grid lg:grid-cols-2 gap-8">
+              <TabsContent value="video" className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <MarketIntelligenceVideo
-                      title="숨겨진 지뢰, 미처분이익잉여금"
-                      url="https://youtu.be/0FCO9TQBok0"
+                    <YouTubeEmbed
                       videoId="0FCO9TQBok0"
-                      description="비상장기업의 '숨겨진 지뢰' 미처분이익잉여금. 성공의 결과물이자 심각한 재무적 위험을 초래할 수 있는 이익잉여금의 올바른 관리 방법과 세금 폭탄 방지 전략을 전문가가 상세히 분석합니다."
-                      badges={['미처분이익잉여금', '상속증여세', '세무조사', '기업가치', '법인청산', '세금최적화']}
+                      title="숨겨진 지뢰, 미처분이익잉여금"
+                      className="w-full aspect-video rounded-lg overflow-hidden mb-4"
                     />
+                    <p className="text-muted-foreground mb-3">
+                      비상장기업의 &lsquo;숨겨진 지뢰&rsquo; 미처분이익잉여금. 성공의 결과물이자 심각한 재무적 위험을 초래할 수 있는 이익잉여금의 올바른 관리 방법과 세금 폭탄 방지 전략을 전문가가 상세히 분석합니다.
+                    </p>
+                    <div className="flex gap-2">
+                      <Badge variant="secondary">미처분이익잉여금</Badge>
+                      <Badge variant="secondary">상속증여세</Badge>
+                      <Badge variant="secondary">세무조사</Badge>
+                    </div>
                   </div>
                   <div>
                     <YouTubeEmbed
                       videoId="T0Rzi6Na-c4"
                       title="Ray Dalio's INVESTING Strategy Will Make You RICH"
-                      className="w-full aspect-video rounded-lg overflow-hidden"
+                      className="w-full aspect-video rounded-lg overflow-hidden mb-4"
                     />
-                    <div className="mt-4 p-6 bg-card rounded-lg border">
-                      <p className="text-muted-foreground mb-4">
-                        브리지워터 설립자 레이 달리오의 투자 전략과 분산투자 원칙. 패밀리오피스 운영에 필수적인 포트폴리오 구성 방법을 익혀보세요.
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">레이달리오</Badge>
-                        <Badge variant="secondary">분산투자</Badge>
-                        <Badge variant="secondary">포트폴리오</Badge>
-                        <Badge variant="secondary">자산배분</Badge>
-                      </div>
+                    <p className="text-muted-foreground mb-3">
+                      브리지워터 설립자 레이 달리오의 투자 전략과 분산투자 원칙. 패밀리오피스 운영에 필수적인 포트폴리오 구성 방법을 익혀보세요.
+                    </p>
+                    <div className="flex gap-2">
+                      <Badge variant="secondary">레이달리오</Badge>
+                      <Badge variant="secondary">분산투자</Badge>
+                      <Badge variant="secondary">포트폴리오</Badge>
                     </div>
                   </div>
                 </div>
@@ -224,51 +226,36 @@ export default function BlogPage() {
                 </div>
               </TabsContent>
 
-              <TabsContent value="podcast" className="space-y-8">
-                <div className="grid lg:grid-cols-2 gap-8">
+              <TabsContent value="podcast" className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <div className="w-full rounded-lg overflow-hidden border border-border/50 bg-card/50 p-4">
-                      <iframe 
-                        data-testid="embed-iframe" 
-                        style={{borderRadius: '12px'}} 
-                        src="https://open.spotify.com/embed/episode/3oWSt9SMetN4Zw3NXFL36H?utm_source=generator" 
-                        width="100%" 
-                        height="152" 
-                        frameBorder="0" 
-                        allowFullScreen
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="mt-4 p-6 bg-card rounded-lg border">
-                      <p className="text-muted-foreground mb-4">
-                        패밀리오피스 전문가가 직접 들려주는 자산관리와 기업승계의 핵심 인사이트. 실무진이 꼭 알아야 할 
-                        세무 최적화 전략과 성공한 기업가들의 자산관리 노하우를 상세히 다룹니다.
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">패밀리오피스</Badge>
-                        <Badge variant="secondary">자산관리</Badge>
-                        <Badge variant="secondary">기업승계</Badge>
-                        <Badge variant="secondary">세무최적화</Badge>
-                      </div>
+                    <SpotifyEmbed
+                      uri="spotify:episode:3oWSt9SMetN4Zw3NXFL36H"
+                      title="패밀리오피스 자산관리 핵심 전략"
+                      className="w-full rounded-lg overflow-hidden mb-4"
+                    />
+                    <p className="text-muted-foreground mb-3">
+                      패밀리오피스 전문가가 직접 들려주는 자산관리와 기업승계의 핵심 인사이트. 실무진이 꼭 알아야 할 세무 최적화 전략과 성공한 기업가들의 자산관리 노하우를 상세히 다룹니다.
+                    </p>
+                    <div className="flex gap-2">
+                      <Badge variant="secondary">패밀리오피스</Badge>
+                      <Badge variant="secondary">자산관리</Badge>
+                      <Badge variant="secondary">기업승계</Badge>
                     </div>
                   </div>
                   <div>
                     <SpotifyEmbed
                       uri="spotify:episode:6JXsT6X9g9dHfFMPKy8z2J"
                       title="비트코인에서 ESG 투자까지: 새로운 자산 클래스들"
-                      className="w-full rounded-lg overflow-hidden"
+                      className="w-full rounded-lg overflow-hidden mb-4"
                     />
-                    <div className="mt-4 p-6 bg-card rounded-lg border">
-                      <p className="text-muted-foreground mb-4">
-                        새로운 자산 클래스의 등장과 투자 기회를 전문가와 함께 논의합니다. 암호화폐부터 ESG 투자까지, 변화하는 투자 패러다임에 대비하는 방법을 알아보세요.
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">대체투자</Badge>
-                        <Badge variant="secondary">비트코인</Badge>
-                        <Badge variant="secondary">ESG투자</Badge>
-                        <Badge variant="secondary">새로운자산</Badge>
-                      </div>
+                    <p className="text-muted-foreground mb-3">
+                      새로운 자산 클래스의 등장과 투자 기회를 전문가와 함께 논의합니다. 암호화폐부터 ESG 투자까지, 변화하는 투자 패러다임에 대비하는 방법을 알아보세요.
+                    </p>
+                    <div className="flex gap-2">
+                      <Badge variant="secondary">대체투자</Badge>
+                      <Badge variant="secondary">비트코인</Badge>
+                      <Badge variant="secondary">ESG투자</Badge>
                     </div>
                   </div>
                 </div>
