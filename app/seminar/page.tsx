@@ -9,6 +9,7 @@ import { SeminarCategoriesSection } from '@/components/seminar/SeminarCategories
 import { SeminarHeroSection } from '@/components/seminar/SeminarHeroSection';
 import SeminarRegistrationSection from '@/components/seminar/SeminarRegistrationSection';
 import { UpcomingSeminarsSection } from '@/components/seminar/UpcomingSeminarsSection';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 // SEO 최적화 메타데이터
 export const metadata: Metadata = generateMetadata(
@@ -148,6 +149,7 @@ export default function SeminarPage() {
         <UpcomingSeminarsSection />
         <SeminarCategoriesSection />
         <PastSeminarsSection />
+        <CompactMultimediaSection />
         <SeminarRegistrationSection />
       </main>
 

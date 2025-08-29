@@ -20,6 +20,7 @@ import { Header } from '@/components/header';
 import { SERVICE_CATEGORIES } from '@/constants/services';
 import { generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/structured-data';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 const ServicePageContent = () => {
   const [startAnimation, setStartAnimation] = React.useState(false);
@@ -308,6 +309,9 @@ const ServicePageContent = () => {
             </div>
           </div>
         </section>
+
+        {/* Multimedia Content Section */}
+        <CompactMultimediaSection />
       </main>
 
       <Footer />

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, FileText, Mail, Download, TrendingUp, Users, BookOpen } from 'lucide-react';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 export const metadata: Metadata = {
   title: '인사이트 센터 | 기업승계 전문 분석 | FamilyOffice S',
@@ -241,6 +242,9 @@ export default function InsightsPage() {
           </div>
         </div>
       </section>
+
+      {/* Multimedia Content Section */}
+      <CompactMultimediaSection />
 
       {/* Newsletter CTA */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary/80">

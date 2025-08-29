@@ -23,6 +23,7 @@ import {
   CEO_PROGRAMS,
   ASSET_PROGRAMS,
 } from '@/constants/programs';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 export const metadata: Metadata = {
   title: '프로그램 | 중소중견기업 대표 프리미엄 프로그램 안내',
@@ -127,6 +128,7 @@ export default function ProgramPage() {
           assetPrograms={ASSET_PROGRAMS}
         />
         <EducationScheduleSection educationPrograms={EDUCATION_PROGRAMS} />
+        <CompactMultimediaSection />
         <MembershipCTASection />
       </main>
       <Footer />

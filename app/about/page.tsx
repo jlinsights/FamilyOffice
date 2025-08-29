@@ -26,6 +26,7 @@ import {
     Users
 } from 'lucide-react';
 import Link from 'next/link';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 export { metadata } from './metadata';
 
@@ -560,6 +561,9 @@ export default function AboutPage() {
           </div>
         </section>
         */}
+
+        {/* Multimedia Content Section */}
+        <CompactMultimediaSection />
       </main>
 
       <Footer />
