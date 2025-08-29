@@ -54,7 +54,7 @@ export const metadata: Metadata = generateMetadata(
     '강남 패밀리오피스',
     '삼성생명 자산관리',
   ],
-  '/og-image.jpg',
+  'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
   '전문가급',
   '성장기',
   'commercial'

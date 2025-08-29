@@ -241,7 +241,7 @@ export const defaultMetadata: Metadata = {
     url: 'https://familyoffices.vip',
     images: [
       {
-        url: '/og-image.jpg',
+        url: 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
         width: 1200,
         height: 630,
         alt: '성공한 CEO 전용 패밀리오피스 가업승계 자산관리 전문 FamilyOffice S',
@@ -264,7 +264,7 @@ export const defaultMetadata: Metadata = {
     description:
       '성공한 법인대표 전용. 가업승계·승계세무 완전해결, 기업가 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
     creator: '@FamilyOfficeS_CEO',
-    images: ['/og-image.jpg'],
+    images: ['https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain'],
   },
 
   // 🎯 BMAD Method 지역 SEO 및 소셜 신호 강화
@@ -279,18 +279,18 @@ export const defaultMetadata: Metadata = {
     // 소셜 미디어 최적화 - 중년 성공한 기업가 타겟
     'kakao:title': '성공한 CEO 전용 패밀리오피스 | 가업승계 자산관리',
     'kakao:description': '성공한 법인대표를 위한 프리미엄 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리. 삼성생명 1000억+ 운용실적',
-    'kakao:image': 'https://familyoffices.vip/og-image.jpg',
+    'kakao:image': 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
     'kakao:url': 'https://familyoffices.vip',
     
     // 네이버 블로그/카페 최적화
     'naver:title': '성공한 기업가 전용 패밀리오피스 | FamilyOffice S',
     'naver:description': 'SuperClaude BMAD Method 적용 패밀리오피스. 성공한 법인대표 전용 가업승계·자산관리 완전해결',
-    'naver:image': 'https://familyoffices.vip/og-image.jpg',
+    'naver:image': 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
     
     // LinkedIn 비즈니스 네트워크 최적화
     'linkedin:title': '성공한 CEO를 위한 패밀리오피스 | 가업승계 전문',
     'linkedin:description': '중소중견기업 CEO 전용 프리미엄 자산관리. 가업승계부터 세무최적화까지 원스톱 솔루션',
-    'linkedin:image': 'https://familyoffices.vip/og-image.jpg',
+    'linkedin:image': 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
     
     // YouTube 동영상 최적화 (향후 콘텐츠용)
     'youtube:title': '성공한 기업가의 자산관리 노하우 | 패밀리오피스',
@@ -929,7 +929,7 @@ export function generateStructuredData(
         '@type': 'LocalBusiness',
         '@id': 'https://familyoffices.vip',
         name: 'FamilyOffice S - 삼성생명 기업컨설팅센터',
-        image: 'https://familyoffices.vip/og-image.jpg',
+        image: 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
         logo: 'https://familyoffices.vip/logo.png',
         url: 'https://familyoffices.vip',
         telephone: '+82-502-5550-8700',

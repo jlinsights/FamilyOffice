@@ -84,7 +84,7 @@ const MultimediaContentSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50/30">
+    <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -107,7 +107,7 @@ const MultimediaContentSection = () => {
         {/* Content Cards */}
         <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* YouTube Section */}
-          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-0 bg-white/80 backdrop-blur-sm">
+          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-card/50 backdrop-blur-sm border border-border/50">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-red-500 rounded-lg">
@@ -134,11 +134,11 @@ const MultimediaContentSection = () => {
               {youtubeVideos.map((video) => (
                 <div 
                   key={video.id} 
-                  className="flex gap-3 p-3 rounded-lg hover:bg-gray-50/80 transition-colors cursor-pointer group/item"
+                  className="flex gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer group/item"
                 >
                   <div className="relative flex-shrink-0">
-                    <div className="w-20 h-12 bg-gray-200 rounded-md flex items-center justify-center">
-                      <Play className="h-4 w-4 text-gray-500 group-hover/item:text-red-500 transition-colors" />
+                    <div className="w-20 h-12 bg-muted rounded-md flex items-center justify-center">
+                      <Play className="h-4 w-4 text-muted-foreground group-hover/item:text-red-500 transition-colors" />
                     </div>
                     {video.isNew && (
                       <Badge className="absolute -top-2 -right-2 text-xs bg-red-500">
@@ -168,9 +168,9 @@ const MultimediaContentSection = () => {
               ))}
 
               {/* Regular Schedule */}
-              <div className="bg-red-50/50 p-4 rounded-lg mt-4">
-                <h4 className="text-sm font-medium text-red-700 mb-2">📌 정기 프로그램</h4>
-                <div className="space-y-2 text-xs text-red-600">
+              <div className="bg-red-500/5 dark:bg-red-500/10 p-4 rounded-lg mt-4 border border-red-500/20">
+                <h4 className="text-sm font-medium text-red-600 dark:text-red-400 mb-2">📌 정기 프로그램</h4>
+                <div className="space-y-2 text-xs text-red-600 dark:text-red-400">
                   <div>✅ 매주 월요일: &quot;5분 가업승계 클리닉&quot;</div>
                   <div>✅ 매주 수요일: &quot;백년기업 성공스토리&quot;</div>
                   <div>✅ 매주 금요일: &quot;법인보험 마스터클래스&quot;</div>
@@ -181,7 +181,7 @@ const MultimediaContentSection = () => {
                 <Button className="flex-1 bg-red-500 hover:bg-red-600 text-white">
                   🔔 구독하고 알림받기
                 </Button>
-                <Button variant="outline" className="flex-1 text-red-600 border-red-200 hover:bg-red-50">
+                <Button variant="outline" className="flex-1 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20">
                   전체 영상 보기
                 </Button>
               </div>
@@ -189,7 +189,7 @@ const MultimediaContentSection = () => {
           </Card>
 
           {/* Spotify Section */}
-          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-0 bg-white/80 backdrop-blur-sm">
+          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-card/50 backdrop-blur-sm border border-border/50">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-green-500 rounded-lg">
@@ -216,11 +216,11 @@ const MultimediaContentSection = () => {
               {podcastEpisodes.map((episode) => (
                 <div 
                   key={episode.id} 
-                  className="flex gap-3 p-3 rounded-lg hover:bg-gray-50/80 transition-colors cursor-pointer group/item"
+                  className="flex gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer group/item"
                 >
                   <div className="relative flex-shrink-0">
-                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                      <Headphones className="h-5 w-5 text-green-600 group-hover/item:text-green-700 transition-colors" />
+                    <div className="w-12 h-12 bg-green-500/10 dark:bg-green-500/20 rounded-full flex items-center justify-center">
+                      <Headphones className="h-5 w-5 text-green-600 dark:text-green-400 group-hover/item:text-green-700 dark:group-hover/item:text-green-300 transition-colors" />
                     </div>
                     {episode.isNew && (
                       <Badge className="absolute -top-1 -right-1 text-xs bg-green-500">
@@ -230,7 +230,7 @@ const MultimediaContentSection = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <Badge variant="outline" className="text-xs text-green-600 border-green-200">
+                      <Badge variant="outline" className="text-xs text-green-600 dark:text-green-400 border-green-200 dark:border-green-800">
                         {episode.publishedAt}
                       </Badge>
                       <span className="text-xs text-muted-foreground">{episode.show}</span>
@@ -252,9 +252,9 @@ const MultimediaContentSection = () => {
               ))}
 
               {/* Schedule */}
-              <div className="bg-green-50/50 p-4 rounded-lg mt-4">
-                <h4 className="text-sm font-medium text-green-700 mb-2">🗓️ 주간 방송 스케줄</h4>
-                <div className="space-y-2 text-xs text-green-600">
+              <div className="bg-green-500/5 dark:bg-green-500/10 p-4 rounded-lg mt-4 border border-green-500/20">
+                <h4 className="text-sm font-medium text-green-600 dark:text-green-400 mb-2">🗓️ 주간 방송 스케줄</h4>
+                <div className="space-y-2 text-xs text-green-600 dark:text-green-400">
                   <div>🔹 월요일 오전 7시: &quot;Monday Morning CEO&quot;</div>
                   <div>🔹 수요일 오후 12시: &quot;승계의 정석&quot;</div>
                   <div>🔹 금요일 오후 5시: &quot;Friday Finance&quot;</div>
@@ -265,7 +265,7 @@ const MultimediaContentSection = () => {
                 <Button className="flex-1 bg-green-500 hover:bg-green-600 text-white">
                   🎧 팔로우하고 알림받기
                 </Button>
-                <Button variant="outline" className="flex-1 text-green-600 border-green-200 hover:bg-green-50">
+                <Button variant="outline" className="flex-1 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/20">
                   전체 에피소드 듣기
                 </Button>
               </div>
@@ -282,40 +282,40 @@ const MultimediaContentSection = () => {
             
             <div className="grid md:grid-cols-5 gap-6 mt-8">
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <TrendingUp className="h-6 w-6 text-blue-600" />
+                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">실무 중심</h4>
                 <p className="text-xs text-muted-foreground">바로 적용 가능한 실전 솔루션</p>
               </div>
               
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Badge className="w-6 h-6 bg-blue-600" />
+                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Badge className="w-6 h-6 bg-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">검증된 전문성</h4>
                 <p className="text-xs text-muted-foreground">삼성생명 파트너 빅4 전문가</p>
               </div>
               
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Clock className="h-6 w-6 text-blue-600" />
+                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Clock className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">시간 효율성</h4>
                 <p className="text-xs text-muted-foreground">5분 요약부터 40분 심층분석</p>
               </div>
               
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Play className="h-6 w-6 text-blue-600" />
+                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Play className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">멀티 플랫폼</h4>
                 <p className="text-xs text-muted-foreground">YouTube, Spotify 원하는 방식으로</p>
               </div>
               
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Calendar className="h-6 w-6 text-blue-600" />
+                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Calendar className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">정기 업데이트</h4>
                 <p className="text-xs text-muted-foreground">매주 3회 신규 콘텐츠</p>

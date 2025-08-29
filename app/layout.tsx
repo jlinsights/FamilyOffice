@@ -129,18 +129,18 @@ export default function RootLayout({
         {/* 카카오톡 공유 최적화 */}
         <meta property="kakao:title" content="성공한 CEO 전용 패밀리오피스 | 가업승계 자산관리" />
         <meta property="kakao:description" content="성공한 법인대표를 위한 프리미엄 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리. 삼성생명 1000억+ 운용실적" />
-        <meta property="kakao:image" content="https://familyoffices.vip/images/ai_profile.png" />
+        <meta property="kakao:image" content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain" />
         <meta property="kakao:url" content="https://familyoffices.vip" />
         
         {/* 네이버 블로그/카페 최적화 */}
         <meta name="naver:title" content="성공한 기업가 전용 패밀리오피스 | FamilyOffice S" />
         <meta name="naver:description" content="법인보험 × 가업승계 통합솔루션 적용 패밀리오피스. 성공한 법인대표 전용 가업승계·자산관리 완전해결" />
-        <meta name="naver:image" content="https://familyoffices.vip/images/ai_profile.png" />
+        <meta name="naver:image" content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain" />
         
         {/* LinkedIn 비즈니스 네트워크 최적화 */}
         <meta property="linkedin:title" content="성공한 CEO를 위한 패밀리오피스 | 가업승계 전문" />
         <meta property="linkedin:description" content="중소중견기업 CEO 전용 프리미엄 자산관리. 가업승계부터 세무최적화까지 원스톱 솔루션" />
-        <meta property="linkedin:image" content="https://familyoffices.vip/images/ai_profile.png" />
+        <meta property="linkedin:image" content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain" />
         
         {/* 지역 비즈니스 신뢰성 향상 */}
         <meta name="business:contact_data:street_address" content="서울특별시 중구" />
