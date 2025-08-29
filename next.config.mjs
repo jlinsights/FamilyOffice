@@ -21,7 +21,7 @@ const nextConfig = {
     minimumCacheTTL: 60,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    domains: ['familyoffices.vip', 'localhost'],
+    domains: ['familyoffices.vip', 'localhost', 'img.youtube.com', 'i.ytimg.com'],
   },
 
   // 실험적 기능 제거 (안정성을 위해)

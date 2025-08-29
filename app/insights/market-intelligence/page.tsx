@@ -184,18 +184,10 @@ export default function BlogPage() {
                     <MarketIntelligenceVideo
                       title="숨겨진 지뢰, 미처분이익잉여금"
                       url="https://youtu.be/0FCO9TQBok0"
+                      videoId="0FCO9TQBok0"
                       description="비상장기업의 '숨겨진 지뢰' 미처분이익잉여금. 성공의 결과물이자 심각한 재무적 위험을 초래할 수 있는 이익잉여금의 올바른 관리 방법과 세금 폭탄 방지 전략을 전문가가 상세히 분석합니다."
+                      badges={['미처분이익잉여금', '상속증여세', '세무조사', '기업가치', '법인청산', '세금최적화']}
                     />
-                    <div className="mt-4">
-                      <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">미처분이익잉여금</Badge>
-                        <Badge variant="secondary">상속증여세</Badge>
-                        <Badge variant="secondary">세무조사</Badge>
-                        <Badge variant="secondary">기업가치</Badge>
-                        <Badge variant="secondary">법인청산</Badge>
-                        <Badge variant="secondary">세금최적화</Badge>
-                      </div>
-                    </div>
                   </div>
                   <div>
                     <YouTubeEmbed
