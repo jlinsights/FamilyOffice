@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
+import MultimediaContentSection from '@/components/sections/multimedia-content-section';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
@@ -106,6 +107,9 @@ export default function HomePage() {
       
       {/* Services Section */}
       <ServicesSection />
+      
+      {/* Multimedia Content Section */}
+      <MultimediaContentSection />
       
       {/* Test Button Section - 숨김 처리 */}
       {/* <section className="py-20 bg-background">
