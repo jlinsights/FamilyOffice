@@ -1,6 +1,6 @@
-🔄 재수정: Spotify 임베드 코드 정확한 형식으로 적용
+🔗 버튼연결: YouTube 채널 구독 버튼 기능화
 
-- 🎯 **임베드 코드**: 제공된 정확한 HTML 코드 적용
-- 🔗 **URL 표준화**: utm_source=generator만 포함 (si 파라미터 제거)
-- ✅ **동일한 형식**: 다른 에피소드들과 일치하는 구조
-- 🎵 **에피소드 ID**: 5aIG8p9AWFuzBSlnIYiL4E
+- 🔔 **구독하고 알림받기**: https://www.youtube.com/@FamilyOffice-S 연결
+- 📺 **전체 영상 보기**: 동일한 YouTube 채널로 연결  
+- 🎯 **채널 이동**: 원클릭으로 FamilyOffice-S 채널 방문
+- ✨ **사용자 경험**: 구독과 전체 영상 시청이 원활하게 가능

@@ -13,6 +13,7 @@ interface VideoContent {
   views: string;
   thumbnail: string;
   isNew?: boolean;
+  url?: string;
 }
 
 
@@ -22,28 +23,31 @@ const MultimediaContentSection = memo(() => {
   const youtubeVideos: VideoContent[] = [
     {
       id: '1',
-      title: '2025 세법개정, 기업이 꼭 알아야 할 3가지',
+      title: '2025년 세제개편안 심층 분석',
       description: '가업상속공제 600억, 이렇게 활용하세요',
       duration: '5:47',
       views: '15.2K',
       thumbnail: '/images/video-thumb-1.jpg',
-      isNew: true
+      isNew: true,
+      url: 'https://youtu.be/Wj-q-Xmg41Q'
     },
     {
       id: '2',
-      title: '중대재해처벌법 대응, A사의 완벽 준비과정',
+      title: '百年永續 100년 기업을 향한 여정',
       description: '기업재해보장보험으로 리스크 제로 달성',
       duration: '12:30',
       views: '8.7K',
-      thumbnail: '/images/video-thumb-2.jpg'
+      thumbnail: '/images/video-thumb-2.jpg',
+      url: 'https://youtu.be/sKeFgAEAO1M'
     },
     {
       id: '3',
-      title: '법인종신보험 200% 활용법 [CFO 필수 시청]',
+      title: '중견기업 경영진 자산관리 전략 가이드',
       description: '퇴직금 준비하며 승계자금까지 한번에',
       duration: '8:15',
       views: '12.1K',
-      thumbnail: '/images/video-thumb-3.jpg'
+      thumbnail: '/images/video-thumb-3.jpg',
+      url: 'https://youtu.be/Ufk5FHmG0LA'
     }
   ];
 
@@ -100,6 +104,7 @@ const MultimediaContentSection = memo(() => {
                 <div 
                   key={video.id} 
                   className="flex gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer group/item"
+                  onClick={() => video.url && window.open(video.url, '_blank')}
                 >
                   <div className="relative flex-shrink-0">
                     <div className="w-20 h-12 bg-muted rounded-md flex items-center justify-center">
@@ -143,10 +148,17 @@ const MultimediaContentSection = memo(() => {
               </div>
 
               <div className="flex gap-2">
-                <Button className="flex-1 bg-red-500 hover:bg-red-600 text-white">
+                <Button 
+                  className="flex-1 bg-red-500 hover:bg-red-600 text-white"
+                  onClick={() => window.open('https://www.youtube.com/@FamilyOffice-S', '_blank')}
+                >
                   🔔 구독하고 알림받기
                 </Button>
-                <Button variant="outline" className="flex-1 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20">
+                <Button 
+                  variant="outline" 
+                  className="flex-1 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20"
+                  onClick={() => window.open('https://www.youtube.com/@FamilyOffice-S', '_blank')}
+                >
                   전체 영상 보기
                 </Button>
               </div>
