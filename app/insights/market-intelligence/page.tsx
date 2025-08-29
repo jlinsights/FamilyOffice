@@ -16,8 +16,14 @@ import {
 } from 'lucide-react';
 
 import { Suspense } from 'react';
-import type { Metadata } from 'next';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '시장 인텔리전스 - 전문가 미디어 콘텐츠',
+  description: '패밀리오피스 및 자산관리의 최신 인사이트를 영상과 팟캐스트로 만나보세요. 전문가가 직접 분석하는 시장 동향과 투자 전략을 확인하세요.',
+  keywords: '시장 분석, 자산관리, 패밀리오피스, 투자 전략, 전문가 콘텐츠',
+};
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -32,26 +38,7 @@ import { BlogCategoryFilter, BlogCategoryFilterSkeleton } from '@/components/blo
 import { BlogContent } from '@/components/blog-content';
 import { YouTubeEmbed } from '@/components/media/youtube-embed';
 import { SpotifyEmbed } from '@/components/media/spotify-embed';
-
-export const metadata: Metadata = {
-  title: 'Market Intelligence | 기업승계 전문 인사이트 | FamilyOffice S',
-  description: '기업승계, 상속세 절세, 패밀리오피스 운영에 관한 전문가 분석과 시장 인사이트를 제공합니다.',
-  keywords: '기업승계, 상속세 절세, 패밀리오피스, 자산관리, 중견기업, 가업승계, 세무최적화, 투자전략, 차세대 승계',
-  openGraph: {
-    title: 'Market Intelligence | 기업승계 전문 인사이트 | FamilyOffice S',
-    description: '기업승계, 상속세 절세, 패밀리오피스 운영에 관한 전문가 분석과 시장 인사이트를 제공합니다.',
-    type: 'website',
-    locale: 'ko_KR',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Market Intelligence | 기업승계 전문 인사이트 | FamilyOffice S',
-    description: '기업승계, 상속세 절세, 패밀리오피스 운영에 관한 전문가 분석과 시장 인사이트를 제공합니다.',
-  },
-  alternates: {
-    canonical: '/insights/market-intelligence',
-  },
-};
+import { MarketIntelligenceVideo } from '@/components/market-intelligence-video';
 
 // Categories and posts are imported from @/lib/blog-data
 // Dynamic rendering will be handled by BlogContent component based on URL parameters
@@ -194,25 +181,12 @@ export default function BlogPage() {
               <TabsContent value="video" className="space-y-8">
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <div 
-                      className="w-full aspect-video rounded-lg overflow-hidden cursor-pointer"
-                      onClick={() => window.open('https://youtu.be/0FCO9TQBok0', '_blank')}
-                    >
-                      <div className="w-full h-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center relative group hover:from-red-600 hover:to-red-700 transition-all duration-300">
-                        <div className="absolute inset-0 bg-black/20"></div>
-                        <div className="relative z-10 text-center">
-                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
-                            <Play className="h-8 w-8 text-red-600 ml-1" />
-                          </div>
-                          <h3 className="text-white text-lg font-semibold">숨겨진 지뢰, 미처분이익잉여금</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-4 p-6 bg-card rounded-lg border">
-                      <p className="text-muted-foreground mb-4">
-                        비상장기업의 '숨겨진 지뢰' 미처분이익잉여금. 성공의 결과물이자 심각한 재무적 위험을 초래할 수 있는 
-                        이익잉여금의 올바른 관리 방법과 세금 폭탄 방지 전략을 전문가가 상세히 분석합니다.
-                      </p>
+                    <MarketIntelligenceVideo
+                      title="숨겨진 지뢰, 미처분이익잉여금"
+                      url="https://youtu.be/0FCO9TQBok0"
+                      description="비상장기업의 '숨겨진 지뢰' 미처분이익잉여금. 성공의 결과물이자 심각한 재무적 위험을 초래할 수 있는 이익잉여금의 올바른 관리 방법과 세금 폭탄 방지 전략을 전문가가 상세히 분석합니다."
+                    />
+                    <div className="mt-4">
                       <div className="flex flex-wrap gap-2">
                         <Badge variant="secondary">미처분이익잉여금</Badge>
                         <Badge variant="secondary">상속증여세</Badge>

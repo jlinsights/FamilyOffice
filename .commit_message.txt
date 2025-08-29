@@ -1,6 +1,6 @@
-🎙️ 미디어 통합: Market Intelligence에 Spotify 팟캐스트 추가
+🔧 Market Intelligence 빌드 에러 수정
 
-- 📺 **YouTube**: "숨겨진 지뢰, 미처분이익잉여금" 커스텀 UI
-- 🎧 **Spotify**: 에피소드 3oWSt9SMetN4Zw3NXFL36H 실제 iframe
-- 🎯 **전문 콘텐츠**: 패밀리오피스, 자산관리, 기업승계, 세무최적화
-- ✨ **완전 통합**: YouTube + Spotify 전문가 미디어 섹션 완성
+- ✅ **Server Component 구조 수정**: 메타데이터 export 호환성 복원
+- 🎯 **Client Component 분리**: onClick 핸들러를 별도 컴포넌트로 분리
+- 📱 **MarketIntelligenceVideo**: 재사용 가능한 비디오 컴포넌트 생성
+- 🛠️ **Next.js 15 호환**: Server/Client Component 제대로 구분
