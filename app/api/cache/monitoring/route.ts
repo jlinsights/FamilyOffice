@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
 }
 
 // 캐시 메트릭 리셋 (관리자만 가능)
-export async function DELETE(request: NextRequest) {
+export async function DELETE() {
   try {
     const hasPermission = await checkAdminPermissions();
     if (!hasPermission) {

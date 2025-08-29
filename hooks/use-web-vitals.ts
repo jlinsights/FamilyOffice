@@ -25,8 +25,8 @@ export function useWebVitals() {
                 name: 'LCP',
                 value: lastEntry.startTime,
                 id: `lcp-${Date.now()}`,
-                delta: lastEntry.startTime,
-              });
+                delta: 0,
+              } as any);
             }
           });
           
@@ -48,8 +48,8 @@ export function useWebVitals() {
                   name: 'FCP',
                   value: entry.startTime,
                   id: `fcp-${Date.now()}`,
-                  delta: entry.startTime,
-                });
+                  delta: 0,
+                } as any);
               }
             });
           });
@@ -80,7 +80,9 @@ export function useWebVitals() {
 
                 // 새로운 세션이거나 기존 세션 내에서 발생한 경우
                 if (sessionValue && 
+                    lastSessionEntry &&
                     entry.startTime - lastSessionEntry.startTime < maxSessionGap &&
+                    firstSessionEntry &&
                     entry.startTime - firstSessionEntry.startTime < maxWindowGap) {
                   sessionValue += entry.value;
                   sessionEntries.push(entry);
@@ -100,8 +102,8 @@ export function useWebVitals() {
               name: 'CLS',
               value: clsValue,
               id: `cls-${Date.now()}`,
-              delta: clsValue,
-            });
+              delta: 0,
+            } as any);
           });
           
           observer.observe({ type: 'layout-shift', buffered: true });
@@ -118,12 +120,13 @@ export function useWebVitals() {
             const firstEntry = entries[0];
             
             if (firstEntry) {
+              const fidEntry = firstEntry as any;
               reportWebVitals({
                 name: 'FID',
-                value: firstEntry.processingStart - firstEntry.startTime,
+                value: fidEntry.processingStart - fidEntry.startTime,
                 id: `fid-${Date.now()}`,
-                delta: firstEntry.processingStart - firstEntry.startTime,
-              });
+                delta: 0,
+              } as any);
             }
           });
           
@@ -145,8 +148,8 @@ export function useWebVitals() {
               name: 'TTFB',
               value: ttfb,
               id: `ttfb-${Date.now()}`,
-              delta: ttfb,
-            });
+              delta: 0,
+            } as any);
           }
         } catch (error) {
           console.warn('TTFB 측정 실패:', error);
@@ -167,8 +170,8 @@ export function useWebVitals() {
                   name: 'INP',
                   value: inp,
                   id: `inp-${Date.now()}`,
-                  delta: inp,
-                });
+                  delta: 0,
+                } as any);
               }
             });
           });
@@ -207,8 +210,8 @@ export function useWebVitals() {
               name: 'CLS',
               value: finalCLS,
               id: `cls-final-${Date.now()}`,
-              delta: finalCLS,
-            });
+              delta: 0,
+            } as any);
           }
         });
 
@@ -239,11 +242,12 @@ export function useWebVitals() {
       window.addEventListener('load', () => {
         setTimeout(() => {
           const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+          const nav = navigation as any;
           console.log('📊 페이지 성능 요약:', {
-            'DOM 로드': `${Math.round(navigation.domContentLoadedEventEnd - navigation.navigationStart)}ms`,
-            '페이지 로드': `${Math.round(navigation.loadEventEnd - navigation.navigationStart)}ms`,
+            'DOM 로드': `${Math.round(navigation.domContentLoadedEventEnd - (nav.navigationStart || 0))}ms`,
+            '페이지 로드': `${Math.round(navigation.loadEventEnd - (nav.navigationStart || 0))}ms`,
             'TTFB': `${Math.round(navigation.responseStart - navigation.requestStart)}ms`,
-            '네트워크': navigation.effectiveType || 'unknown',
+            '네트워크': nav.effectiveType || 'unknown',
           });
         }, 1000);
       });

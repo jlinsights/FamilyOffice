@@ -120,7 +120,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE() {
   try {
     // 관리자 권한 확인
     const hasPermission = await checkAdminPermissions();

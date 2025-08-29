@@ -60,7 +60,7 @@ class CacheMonitoringService {
       type,
       timestamp: Date.now(),
       responseTime,
-      dataSize,
+      dataSize: dataSize || 0,
     };
 
     this.metrics.push(metric);

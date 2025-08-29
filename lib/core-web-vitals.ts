@@ -137,7 +137,7 @@ class WebVitalsMonitoring {
       name: metric.name as any,
       value: metric.value,
       rating: this.calculateRating(metric.name, metric.value),
-      delta: metric.delta || 0,
+      delta: (metric as any).delta || 0,
       timestamp: Date.now(),
       url: typeof window !== 'undefined' ? window.location.pathname : '',
       userAgent: typeof window !== 'undefined' ? navigator.userAgent : '',
@@ -325,7 +325,7 @@ class WebVitalsMonitoring {
       if (!groups[metric.url]) {
         groups[metric.url] = [];
       }
-      groups[metric.url].push(metric);
+      groups[metric.url]!.push(metric);
       return groups;
     }, {} as Record<string, WebVitalsMetric[]>);
 
@@ -457,7 +457,7 @@ export function reportWebVitals(metric: NextWebVitalsMetric): void {
       value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
       metric_id: metric.id,
       metric_value: metric.value,
-      metric_delta: metric.delta,
+      metric_delta: (metric as any).delta || 0,
     });
   }
 }

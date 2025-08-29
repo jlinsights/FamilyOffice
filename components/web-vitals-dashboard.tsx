@@ -19,7 +19,6 @@ import {
   Gauge,
   RefreshCw,
   TrendingUp,
-  TrendingDown,
   Zap
 } from 'lucide-react';
 
@@ -128,6 +127,7 @@ export function WebVitalsDashboard() {
       const interval = setInterval(fetchData, 30000); // 30초마다 새로고침
       return () => clearInterval(interval);
     }
+    return undefined;
   }, [autoRefresh]);
 
   const getMetricIcon = (metric: string) => {
