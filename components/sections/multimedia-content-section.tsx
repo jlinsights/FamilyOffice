@@ -100,38 +100,77 @@ const MultimediaContentSection = memo(() => {
                 🎥 이번 주 인기 영상
               </div>
               
-              {youtubeVideos.map((video) => (
-                <div 
-                  key={video.id} 
-                  className="flex gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer group/item"
-                  onClick={() => video.url && window.open(video.url, '_blank')}
-                >
-                  <div className="relative flex-shrink-0">
-                    <div className="w-20 h-12 bg-muted rounded-md flex items-center justify-center">
-                      <Play className="h-4 w-4 text-muted-foreground group-hover/item:text-red-500 transition-colors" />
-                    </div>
-                    {video.isNew && (
-                      <Badge className="absolute -top-2 -right-2 text-xs bg-red-500">
-                        NEW
-                      </Badge>
-                    )}
+              {/* Featured YouTube Video - NEW */}
+              {youtubeVideos.filter(v => v.isNew).map((video) => (
+                <div key={video.id} className="mb-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Badge className="text-xs bg-red-500">NEW</Badge>
+                    <span className="text-sm font-medium text-red-600 dark:text-red-400">🎬 최신 영상</span>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-medium text-foreground line-clamp-2 mb-1">
-                      {video.title}
-                    </h4>
-                    <p className="text-xs text-muted-foreground line-clamp-1 mb-2">
-                      {video.description}
-                    </p>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        {video.duration}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Users className="h-3 w-3" />
-                        {video.views}
-                      </span>
+                  <div 
+                    className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4 cursor-pointer hover:bg-red-500/10 dark:hover:bg-red-500/15 transition-colors"
+                    onClick={() => video.url && window.open(video.url, '_blank')}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gradient-to-br from-red-500 to-red-600">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Play className="h-10 w-10 text-white" fill="white" />
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-base font-semibold text-foreground mb-2 line-clamp-2">
+                          {video.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                          {video.description}
+                        </p>
+                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-4 w-4" />
+                            {video.duration}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Users className="h-4 w-4" />
+                            조회수 {video.views}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* Other YouTube Videos */}
+              {youtubeVideos.filter(v => !v.isNew).map((video) => (
+                <div key={video.id} className="mb-4">
+                  <div 
+                    className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4 cursor-pointer hover:bg-red-500/10 dark:hover:bg-red-500/15 transition-colors"
+                    onClick={() => video.url && window.open(video.url, '_blank')}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gradient-to-br from-red-500 to-red-600">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Play className="h-10 w-10 text-white" fill="white" />
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-base font-semibold text-foreground mb-2 line-clamp-2">
+                          {video.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                          {video.description}
+                        </p>
+                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-4 w-4" />
+                            {video.duration}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Users className="h-4 w-4" />
+                            조회수 {video.views}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
