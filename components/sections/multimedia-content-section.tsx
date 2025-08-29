@@ -1,6 +1,6 @@
 'use client';
 import React, { memo } from 'react';
-import { Play, Headphones, Calendar, Clock, Users, TrendingUp } from 'lucide-react';
+import { Play, Headphones, Calendar, Clock, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -29,7 +29,7 @@ const MultimediaContentSection = memo(() => {
       views: '247',
       thumbnail: '/images/video-thumb-1.jpg',
       isNew: true,
-      url: 'https://youtu.be/Wj-q-Xmg41Q'
+      url: 'Wj-q-Xmg41Q' // YouTube video ID
     },
     {
       id: '2',
@@ -38,7 +38,7 @@ const MultimediaContentSection = memo(() => {
       duration: '13:28',
       views: '312',
       thumbnail: '/images/video-thumb-2.jpg',
-      url: 'https://youtu.be/sKeFgAEAO1M'
+      url: 'sKeFgAEAO1M' // YouTube video ID
     },
     {
       id: '3',
@@ -47,7 +47,7 @@ const MultimediaContentSection = memo(() => {
       duration: '11:55',
       views: '189',
       thumbnail: '/images/video-thumb-3.jpg',
-      url: 'https://youtu.be/Ufk5FHmG0LA'
+      url: 'Ufk5FHmG0LA' // YouTube video ID
     }
   ];
 
@@ -107,35 +107,18 @@ const MultimediaContentSection = memo(() => {
                     <Badge className="text-xs bg-red-500">NEW</Badge>
                     <span className="text-sm font-medium text-red-600 dark:text-red-400">🎬 최신 영상</span>
                   </div>
-                  <div 
-                    className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4 cursor-pointer hover:bg-red-500/10 dark:hover:bg-red-500/15 transition-colors"
-                    onClick={() => video.url && window.open(video.url, '_blank')}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gradient-to-br from-red-500 to-red-600">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Play className="h-10 w-10 text-white" fill="white" />
-                        </div>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-base font-semibold text-foreground mb-2 line-clamp-2">
-                          {video.title}
-                        </h4>
-                        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-                          {video.description}
-                        </p>
-                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {video.duration}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Users className="h-4 w-4" />
-                            조회수 {video.views}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
+                    <iframe 
+                      data-testid="embed-iframe" 
+                      style={{borderRadius: '12px'}} 
+                      src={`https://www.youtube.com/embed/${video.url}`}
+                      width="100%" 
+                      height="152" 
+                      frameBorder="0" 
+                      allowFullScreen
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                      loading="lazy"
+                    />
                   </div>
                 </div>
               ))}
@@ -143,35 +126,18 @@ const MultimediaContentSection = memo(() => {
               {/* Other YouTube Videos */}
               {youtubeVideos.filter(v => !v.isNew).map((video) => (
                 <div key={video.id} className="mb-4">
-                  <div 
-                    className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4 cursor-pointer hover:bg-red-500/10 dark:hover:bg-red-500/15 transition-colors"
-                    onClick={() => video.url && window.open(video.url, '_blank')}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gradient-to-br from-red-500 to-red-600">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Play className="h-10 w-10 text-white" fill="white" />
-                        </div>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-base font-semibold text-foreground mb-2 line-clamp-2">
-                          {video.title}
-                        </h4>
-                        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-                          {video.description}
-                        </p>
-                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {video.duration}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Users className="h-4 w-4" />
-                            조회수 {video.views}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
+                    <iframe 
+                      data-testid="embed-iframe" 
+                      style={{borderRadius: '12px'}} 
+                      src={`https://www.youtube.com/embed/${video.url}`}
+                      width="100%" 
+                      height="152" 
+                      frameBorder="0" 
+                      allowFullScreen
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                      loading="lazy"
+                    />
                   </div>
                 </div>
               ))}
