@@ -316,7 +316,7 @@ const MultimediaContentSection = memo(() => {
                   <Play className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">멀티 플랫폼</h4>
-                <p className="text-xs text-muted-foreground">YouTube, Spotify 원하는 방식으로</p>
+                <p className="text-xs text-muted-foreground">YouTube, Spotify 플랫폼</p>
               </div>
               
               <div className="text-center">

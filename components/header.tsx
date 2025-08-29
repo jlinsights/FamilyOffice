@@ -159,7 +159,7 @@ export const Header = memo(function Header({
 
                     {/* 서브메뉴 드롭다운 - CSS group hover 사용 */}
                     <div className="absolute top-full left-0 pt-2 w-80 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-[60]">
-                      <div className="bg-card border border-border rounded-lg shadow-xl">
+                      <div className="bg-background/95 dark:bg-gray-900/95 backdrop-blur-md border border-border rounded-lg shadow-xl">
                         <div className="p-2">
                           {item.submenu.map((subItem: NavigationSubItem) => (
                             <Link
