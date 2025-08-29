@@ -1,6 +1,6 @@
-🎨 Market Intelligence UI 통일성 개선
+🖼️ YouTube 썸네일 표시 문제 해결
 
-- 📐 **레이아웃 통일**: weekly-brief 페이지와 동일한 구조로 변경
-- 🎯 **컴포넌트 표준화**: YouTubeEmbed, SpotifyEmbed 재사용
-- 📍 **일관된 스타일**: mb-4 간격, mb-3 설명, gap-2 배지 레이아웃
-- 🧹 **코드 정리**: 불필요한 MarketIntelligenceVideo 컴포넌트 제거
+- 🎬 **YouTubeThumbnail 컴포넌트**: 썸네일 먼저 보이고 클릭시 재생
+- 📸 **이미지 우선 표시**: iframe 대신 YouTube 썸네일 이미지 사용
+- ▶️ **인터랙티브 재생**: 클릭하면 비디오로 전환되어 자동재생
+- 🎨 **시각적 개선**: 재생 버튼, 호버 효과, 제목 오버레이 포함

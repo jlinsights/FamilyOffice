@@ -36,7 +36,7 @@ import { blogCategories } from '@/lib/blog-data';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { BlogCategoryFilter, BlogCategoryFilterSkeleton } from '@/components/blog-category-filter';
 import { BlogContent } from '@/components/blog-content';
-import { YouTubeEmbed } from '@/components/media/youtube-embed';
+import { YouTubeThumbnail } from '@/components/media/youtube-thumbnail';
 import { SpotifyEmbed } from '@/components/media/spotify-embed';
 
 // Categories and posts are imported from @/lib/blog-data
@@ -180,10 +180,10 @@ export default function BlogPage() {
               <TabsContent value="video" className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <YouTubeEmbed
+                    <YouTubeThumbnail
                       videoId="0FCO9TQBok0"
                       title="숨겨진 지뢰, 미처분이익잉여금"
-                      className="w-full aspect-video rounded-lg overflow-hidden mb-4"
+                      className="w-full mb-4"
                     />
                     <p className="text-muted-foreground mb-3">
                       비상장기업의 &lsquo;숨겨진 지뢰&rsquo; 미처분이익잉여금. 성공의 결과물이자 심각한 재무적 위험을 초래할 수 있는 이익잉여금의 올바른 관리 방법과 세금 폭탄 방지 전략을 전문가가 상세히 분석합니다.
@@ -195,10 +195,10 @@ export default function BlogPage() {
                     </div>
                   </div>
                   <div>
-                    <YouTubeEmbed
+                    <YouTubeThumbnail
                       videoId="T0Rzi6Na-c4"
                       title="Ray Dalio's INVESTING Strategy Will Make You RICH"
-                      className="w-full aspect-video rounded-lg overflow-hidden mb-4"
+                      className="w-full mb-4"
                     />
                     <p className="text-muted-foreground mb-3">
                       브리지워터 설립자 레이 달리오의 투자 전략과 분산투자 원칙. 패밀리오피스 운영에 필수적인 포트폴리오 구성 방법을 익혀보세요.
