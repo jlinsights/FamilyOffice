@@ -25,8 +25,8 @@ const MultimediaContentSection = memo(() => {
       id: '1',
       title: '2025년 세제개편안 심층 분석',
       description: '가업상속공제 600억, 이렇게 활용하세요',
-      duration: '5:47',
-      views: '15.2K',
+      duration: '16:42',
+      views: '247',
       thumbnail: '/images/video-thumb-1.jpg',
       isNew: true,
       url: 'https://youtu.be/Wj-q-Xmg41Q'
@@ -35,8 +35,8 @@ const MultimediaContentSection = memo(() => {
       id: '2',
       title: '百年永續 100년 기업을 향한 여정',
       description: '기업재해보장보험으로 리스크 제로 달성',
-      duration: '12:30',
-      views: '8.7K',
+      duration: '13:28',
+      views: '312',
       thumbnail: '/images/video-thumb-2.jpg',
       url: 'https://youtu.be/sKeFgAEAO1M'
     },
@@ -44,8 +44,8 @@ const MultimediaContentSection = memo(() => {
       id: '3',
       title: '중견기업 경영진 자산관리 전략 가이드',
       description: '퇴직금 준비하며 승계자금까지 한번에',
-      duration: '8:15',
-      views: '12.1K',
+      duration: '11:55',
+      views: '189',
       thumbnail: '/images/video-thumb-3.jpg',
       url: 'https://youtu.be/Ufk5FHmG0LA'
     }

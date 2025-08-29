@@ -194,20 +194,32 @@ export default function BlogPage() {
               <TabsContent value="video" className="space-y-8">
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <YouTubeEmbed
-                      videoId="zaDX0OYo_iM"
-                      title="The Most Important Thing About Investing | Howard Marks"
-                      className="w-full aspect-video rounded-lg overflow-hidden"
-                    />
+                    <div 
+                      className="w-full aspect-video rounded-lg overflow-hidden cursor-pointer"
+                      onClick={() => window.open('https://youtu.be/0FCO9TQBok0', '_blank')}
+                    >
+                      <div className="w-full h-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center relative group hover:from-red-600 hover:to-red-700 transition-all duration-300">
+                        <div className="absolute inset-0 bg-black/20"></div>
+                        <div className="relative z-10 text-center">
+                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                            <Play className="h-8 w-8 text-red-600 ml-1" />
+                          </div>
+                          <h3 className="text-white text-lg font-semibold">숨겨진 지뢰, 미처분이익잉여금</h3>
+                        </div>
+                      </div>
+                    </div>
                     <div className="mt-4 p-6 bg-card rounded-lg border">
                       <p className="text-muted-foreground mb-4">
-                        세계적인 투자 전문가 하워드 마크스가 투자에서 가장 중요한 원칙을 설명합니다. 시장 사이클 이해와 리스크 관리의 핵심을 배워보세요.
+                        비상장기업의 '숨겨진 지뢰' 미처분이익잉여금. 성공의 결과물이자 심각한 재무적 위험을 초래할 수 있는 
+                        이익잉여금의 올바른 관리 방법과 세금 폭탄 방지 전략을 전문가가 상세히 분석합니다.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">투자철학</Badge>
-                        <Badge variant="secondary">리스크관리</Badge>
-                        <Badge variant="secondary">시장사이클</Badge>
-                        <Badge variant="secondary">하워드마크스</Badge>
+                        <Badge variant="secondary">미처분이익잉여금</Badge>
+                        <Badge variant="secondary">상속증여세</Badge>
+                        <Badge variant="secondary">세무조사</Badge>
+                        <Badge variant="secondary">기업가치</Badge>
+                        <Badge variant="secondary">법인청산</Badge>
+                        <Badge variant="secondary">세금최적화</Badge>
                       </div>
                     </div>
                   </div>
@@ -249,20 +261,29 @@ export default function BlogPage() {
               <TabsContent value="podcast" className="space-y-8">
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <SpotifyEmbed
-                      uri="spotify:episode:4TIOexLCcQD6RQNLUI3qf3"
-                      title="가족 자산관리와 토스가들이 배울 수 있는 10가지 교훈"
-                      className="w-full rounded-lg overflow-hidden"
-                    />
+                    <div className="w-full rounded-lg overflow-hidden border border-border/50 bg-card/50 p-4">
+                      <iframe 
+                        data-testid="embed-iframe" 
+                        style={{borderRadius: '12px'}} 
+                        src="https://open.spotify.com/embed/episode/3oWSt9SMetN4Zw3NXFL36H?utm_source=generator" 
+                        width="100%" 
+                        height="152" 
+                        frameBorder="0" 
+                        allowFullScreen
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy"
+                      />
+                    </div>
                     <div className="mt-4 p-6 bg-card rounded-lg border">
                       <p className="text-muted-foreground mb-4">
-                        토스거의 배드맨 저자 에드 해트웨이의 대형 인터뷰에서 가족 자산관리에 대한 심층 인사이트를 얻어보세요. 세대 간 부의 전수와 성공적인 법인 구조 운영 전략을 배워보세요.
+                        패밀리오피스 전문가가 직접 들려주는 자산관리와 기업승계의 핵심 인사이트. 실무진이 꼭 알아야 할 
+                        세무 최적화 전략과 성공한 기업가들의 자산관리 노하우를 상세히 다룹니다.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">가족자산관리</Badge>
-                        <Badge variant="secondary">토스거</Badge>
-                        <Badge variant="secondary">에드해트웨이</Badge>
-                        <Badge variant="secondary">부의전수</Badge>
+                        <Badge variant="secondary">패밀리오피스</Badge>
+                        <Badge variant="secondary">자산관리</Badge>
+                        <Badge variant="secondary">기업승계</Badge>
+                        <Badge variant="secondary">세무최적화</Badge>
                       </div>
                     </div>
                   </div>

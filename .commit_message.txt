@@ -1,6 +1,6 @@
-🔗 버튼연결: YouTube 채널 구독 버튼 기능화
+🎙️ 미디어 통합: Market Intelligence에 Spotify 팟캐스트 추가
 
-- 🔔 **구독하고 알림받기**: https://www.youtube.com/@FamilyOffice-S 연결
-- 📺 **전체 영상 보기**: 동일한 YouTube 채널로 연결  
-- 🎯 **채널 이동**: 원클릭으로 FamilyOffice-S 채널 방문
-- ✨ **사용자 경험**: 구독과 전체 영상 시청이 원활하게 가능
+- 📺 **YouTube**: "숨겨진 지뢰, 미처분이익잉여금" 커스텀 UI
+- 🎧 **Spotify**: 에피소드 3oWSt9SMetN4Zw3NXFL36H 실제 iframe
+- 🎯 **전문 콘텐츠**: 패밀리오피스, 자산관리, 기업승계, 세무최적화
+- ✨ **완전 통합**: YouTube + Spotify 전문가 미디어 섹션 완성
