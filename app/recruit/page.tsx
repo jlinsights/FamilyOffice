@@ -386,7 +386,7 @@ export default function RecruitPage() {
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-border/50">
+                  <div className="bg-card rounded-xl p-6 border border-border/50">
                     <h4 className="font-semibold text-foreground mb-3">
                       🎯 주요 내용
                     </h4>
@@ -436,7 +436,7 @@ export default function RecruitPage() {
 
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-                    <div className="relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-2xl">
+                    <div className="relative bg-card rounded-xl overflow-hidden shadow-2xl">
                       <div className="p-4">
                         <iframe 
                           data-testid="embed-iframe" 
@@ -454,7 +454,7 @@ export default function RecruitPage() {
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-border/50">
+                  <div className="bg-card rounded-xl p-6 border border-border/50">
                     <h4 className="font-semibold text-foreground mb-3">
                       🎙️ 에피소드 하이라이트
                     </h4>

@@ -159,7 +159,7 @@ export const Header = memo(function Header({
 
                     {/* 서브메뉴 드롭다운 - CSS group hover 사용 */}
                     <div className="absolute top-full left-0 pt-2 w-80 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-[60]">
-                      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl">
+                      <div className="bg-card border border-border rounded-lg shadow-xl">
                         <div className="p-2">
                           {item.submenu.map((subItem: NavigationSubItem) => (
                             <Link
@@ -246,7 +246,7 @@ export const Header = memo(function Header({
       {isMobileMenuOpen && (
         <div
           id="mobile-menu"
-          className="lg:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800"
+          className="lg:hidden bg-background/95 backdrop-blur-sm border-t border-border"
           role="navigation"
           aria-label="모바일 메뉴"
         >
@@ -255,7 +255,7 @@ export const Header = memo(function Header({
               <div key={item.href}>
                 {item.submenu ? (
                   <div className="space-y-1">
-                    <div className="px-3 py-2 text-base font-medium text-gray-900 dark:text-gray-100">
+                    <div className="px-3 py-2 text-base font-medium text-foreground">
                       {item.label}
                     </div>
                     <div className="pl-4 space-y-1">

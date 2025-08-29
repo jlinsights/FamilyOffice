@@ -27,7 +27,7 @@ function ServiceCardSkeleton() {
 // 헤더용 스켈레톤
 function HeaderSkeleton() {
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/80 dark:bg-navy-primary/80 border-b border-white/20">
+    <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/20">
       <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
         <div className="flex items-center justify-between">
           <Skeleton className="h-8 w-32" />

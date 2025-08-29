@@ -1,12 +1,17 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
-import MultimediaContentSection from '@/components/sections/multimedia-content-section';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
+
+// Dynamic import for multimedia section (optional content)
+const MultimediaContentSection = dynamic(() => import('@/components/sections/multimedia-content-section'), {
+  loading: () => <div className="py-20 bg-background"><div className="container mx-auto px-6 text-center">멀티미디어 콘텐츠 로딩 중...</div></div>
+});
 
 export const metadata: Metadata = generateMetadata(
   '성공한 기업가 전용 패밀리오피스 | 법인보험 가업승계 통합솔루션',

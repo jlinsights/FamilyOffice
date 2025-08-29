@@ -148,20 +148,20 @@ const DashboardContent = () => {
   const [selectedTab, setSelectedTab] = useState('overview');
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
         <div className="container mx-auto px-6 py-8 space-y-8 max-w-7xl">
           {/* 헤더 섹션 */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-6">
+          <div className="bg-card rounded-lg shadow-sm border border-border p-6">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="h-12 w-12 rounded-lg bg-blue-600/10 dark:bg-blue-500/20 flex items-center justify-center">
-                    <BarChart3 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <BarChart3 className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                    <h1 className="text-3xl font-bold text-foreground">
                       관리자 대시보드
                     </h1>
                     <p className="text-gray-600 dark:text-gray-300">
@@ -192,11 +192,11 @@ const DashboardContent = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-6 relative overflow-hidden"
+                  className="bg-card rounded-lg shadow-sm border border-border p-6 relative overflow-hidden"
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-blue-600/10 dark:bg-blue-500/20 flex items-center justify-center">
-                      <IconComponent className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <IconComponent className="h-5 w-5 text-primary" />
                     </div>
                     <div
                       className={`flex items-center text-xs gap-1 font-medium ${
@@ -233,8 +233,8 @@ const DashboardContent = () => {
           </div>
 
           {/* 탭 네비게이션 */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700">
-            <div className="flex border-b border-gray-200 dark:border-gray-700">
+          <div className="bg-card rounded-lg shadow-sm border border-border">
+            <div className="flex border-b border-border">
               {[
                 { id: 'overview', label: '개요' },
                 { id: 'clients', label: '고객관리' },

@@ -1,5 +1,6 @@
 'use client';
 
+import nextDynamic from 'next/dynamic';
 import { Shield, Brain, TrendingUp, Users, BarChart3, Calendar, Search } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -11,9 +12,28 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { AISearchDashboard } from '@/components/admin/ai-search-dashboard';
-import { ContentCalendarDashboard } from '@/components/admin/content-calendar-dashboard';
-import { GoogleSearchConsoleDashboard } from '@/components/admin/google-search-console-dashboard';
+
+// Dynamic imports for heavy dashboard components
+const AISearchDashboard = nextDynamic(
+  () => import('@/components/admin/ai-search-dashboard').then(mod => ({ default: mod.AISearchDashboard })),
+  { 
+    loading: () => <div className="flex items-center justify-center h-64">AI 검색 대시보드 로딩 중...</div>
+  }
+);
+
+const ContentCalendarDashboard = nextDynamic(
+  () => import('@/components/admin/content-calendar-dashboard').then(mod => ({ default: mod.ContentCalendarDashboard })),
+  { 
+    loading: () => <div className="flex items-center justify-center h-64">콘텐츠 캘린더 로딩 중...</div>
+  }
+);
+
+const GoogleSearchConsoleDashboard = nextDynamic(
+  () => import('@/components/admin/google-search-console-dashboard').then(mod => ({ default: mod.GoogleSearchConsoleDashboard })),
+  { 
+    loading: () => <div className="flex items-center justify-center h-64">Google Search Console 로딩 중...</div>
+  }
+);
 
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';

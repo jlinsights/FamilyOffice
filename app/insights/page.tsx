@@ -120,7 +120,7 @@ export default function InsightsPage() {
             {insightSections.map((section) => {
               const Icon = section.icon;
               return (
-                <Card key={section.title} className="group bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300">
+                <Card key={section.title} className="group bg-card border-border hover:shadow-xl transition-all duration-300">
                   <CardHeader>
                     <div className={`w-14 h-14 rounded-lg bg-gradient-to-br ${section.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                       <Icon className="w-7 h-7 text-white" />
@@ -165,7 +165,7 @@ export default function InsightsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {latestInsights.map((insight, index) => (
-              <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+              <Card key={index} className="bg-card border-border hover:shadow-lg transition-shadow duration-300 cursor-pointer">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-primary">

@@ -377,7 +377,7 @@ export function GoogleSearchConsoleDashboard() {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
                     <div>
-                      <div className="font-medium">"가업승계 컨설팅" 키워드 상승</div>
+                      <div className="font-medium">&quot;가업승계 컨설팅&quot; 키워드 상승</div>
                       <div className="text-sm text-muted-foreground">
                         지난 달 대비 +45% 클릭 증가, 평균 순위 3.8위 달성
                       </div>
@@ -388,7 +388,7 @@ export function GoogleSearchConsoleDashboard() {
                     <div>
                       <div className="font-medium">브랜드 키워드 순위 개선</div>
                       <div className="text-sm text-muted-foreground">
-                        "패밀리오피스" 7위 → 4위로 3단계 상승
+                        &quot;패밀리오피스&quot; 7위 → 4위로 3단계 상승
                       </div>
                     </div>
                   </div>
@@ -417,7 +417,7 @@ export function GoogleSearchConsoleDashboard() {
                     <div>
                       <div className="font-medium">롱테일 키워드 확대</div>
                       <div className="text-sm text-muted-foreground">
-                        "성공한 CEO 자산관리" 등 구체적 키워드 콘텐츠 보강
+                        &quot;성공한 CEO 자산관리&quot; 등 구체적 키워드 콘텐츠 보강
                       </div>
                     </div>
                   </div>
@@ -501,7 +501,7 @@ export function GoogleSearchConsoleDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>브랜드 키워드 목표</CardTitle>
-                <CardDescription>"패밀리오피스" 상위 3위 진입</CardDescription>
+                <CardDescription>&quot;패밀리오피스&quot; 상위 3위 진입</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">

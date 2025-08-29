@@ -65,7 +65,7 @@ export default function SignInPage() {
             {benefits.map((benefit, index) => (
               <div
                 key={index}
-                className="flex items-start space-x-3 p-4 rounded-lg bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-white/20"
+                className="flex items-start space-x-3 p-4 rounded-lg bg-card/50 backdrop-blur-sm border border-border/20"
               >
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0">
                   <benefit.icon className="h-5 w-5" />
@@ -79,7 +79,7 @@ export default function SignInPage() {
           </div>
 
           {/* 통계 */}
-          <div className="grid grid-cols-3 gap-4 p-6 bg-white/30 dark:bg-slate-800/30 backdrop-blur-sm rounded-lg border border-white/20">
+          <div className="grid grid-cols-3 gap-4 p-6 bg-card/30 backdrop-blur-sm rounded-lg border border-border/20">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">500+</div>
               <div className="text-sm text-muted-foreground">법인 고객</div>
@@ -97,7 +97,7 @@ export default function SignInPage() {
 
         {/* 우측: 로그인 폼 */}
         <div className="w-full max-w-md mx-auto lg:mx-0">
-          <Card className="shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
+          <Card className="shadow-2xl bg-card/80 backdrop-blur-sm border border-border/50">
             <CardHeader className="space-y-4 text-center">
               <CardTitle className="text-2xl font-bold">환영합니다</CardTitle>
               <CardDescription className="text-base">

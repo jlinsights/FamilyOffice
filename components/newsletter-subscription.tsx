@@ -71,7 +71,7 @@ export function NewsletterSubscription({
 
   if (isSubscribed) {
     return (
-      <div className={`flex items-center gap-2 text-green-600 dark:text-green-400 ${className}`}>
+      <div className={`flex items-center gap-2 text-emerald-600 dark:text-emerald-400 ${className}`}>
         <CheckCircle className="h-5 w-5" />
         <span className="font-medium">Weekly Brief 구독이 완료되었습니다!</span>
       </div>

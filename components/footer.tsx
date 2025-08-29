@@ -1,5 +1,7 @@
 'use client';
 
+import React, { useEffect, useState, memo } from 'react';
+
 import {
     Award,
     Facebook,
@@ -14,8 +16,6 @@ import {
     Users,
     Youtube,
 } from 'lucide-react';
-
-import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,7 +47,7 @@ const SpotifyIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export function Footer() {
+export const Footer = memo(function Footer() {
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
@@ -449,4 +449,4 @@ export function Footer() {
       </footer>
     </>
   );
-}
+});

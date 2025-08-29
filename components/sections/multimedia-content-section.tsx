@@ -1,4 +1,5 @@
 'use client';
+import React, { memo } from 'react';
 import { Play, Headphones, Calendar, Clock, Users, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -24,7 +25,7 @@ interface PodcastEpisode {
   isNew?: boolean;
 }
 
-const MultimediaContentSection = () => {
+const MultimediaContentSection = memo(() => {
 
   // Mock data - 실제 구현 시 API에서 가져올 예정
   const youtubeVideos: VideoContent[] = [
@@ -326,6 +327,8 @@ const MultimediaContentSection = () => {
       </div>
     </section>
   );
-};
+});
+
+MultimediaContentSection.displayName = 'MultimediaContentSection';
 
 export default MultimediaContentSection;

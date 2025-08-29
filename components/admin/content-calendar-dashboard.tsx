@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -44,11 +44,7 @@ export function ContentCalendarDashboard() {
   const [selectedYear] = useState(new Date().getFullYear());
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadContentData();
-  }, [selectedMonth, selectedYear]);
-
-  const loadContentData = async () => {
+  const loadContentData = useCallback(async () => {
     try {
       setLoading(true);
       
@@ -87,7 +83,11 @@ export function ContentCalendarDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedMonth, selectedYear]);
+
+  useEffect(() => {
+    loadContentData();
+  }, [loadContentData]);
 
   const getEventIcon = (type: string) => {
     return type === 'newsletter' ? <Mail className="h-4 w-4" /> : <FileText className="h-4 w-4" />;

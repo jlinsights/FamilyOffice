@@ -285,12 +285,12 @@ export default function AboutPage() {
                   ],
                 },
               ].map((value, index) => (
-                <Card key={index} className="text-center h-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg dark:hover:shadow-xl">
+                <Card key={index} className="text-center h-full bg-card border-border transition-all duration-300 hover:shadow-lg">
                   <CardHeader>
                     <div className="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center text-primary">
                       {value.icon}
                     </div>
-                    <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">{value.title}</CardTitle>
+                    <CardTitle className="text-xl text-foreground transition-colors duration-300">{value.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex-1 flex flex-col">
                     <p className="text-muted-foreground dark:text-gray-300 mb-6 flex-1 transition-colors duration-300">
@@ -359,12 +359,12 @@ export default function AboutPage() {
                     highlight: true,
                   },
                 ].map((approach, index) => (
-                  <Card key={index} className="text-center h-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg dark:hover:shadow-xl hover:scale-105">
+                  <Card key={index} className="text-center h-full bg-card border-border transition-all duration-300 hover:shadow-lg hover:scale-105">
                     <CardHeader>
                       <div className="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center text-primary">
                         {approach.icon}
                       </div>
-                      <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">{approach.title}</CardTitle>
+                      <CardTitle className="text-xl text-foreground transition-colors duration-300">{approach.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="flex-1 flex flex-col">
                       <p className="text-muted-foreground dark:text-gray-300 mb-6 flex-1 transition-colors duration-300">
@@ -523,7 +523,7 @@ export default function AboutPage() {
                   description: '투자은행 출신으로 중소중견기업 맞춤형 투자전략 설계 전문가',
                 },
               ].map((expert, index) => (
-                <Card key={index} className="group text-center h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border-white/20 dark:border-gray-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 dark:hover:shadow-xl hover:scale-105 hover:bg-white/80 dark:hover:bg-gray-800/80 hover:backdrop-blur-md">
+                <Card key={index} className="group text-center h-full bg-card/70 backdrop-blur-sm border-border/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:scale-105 hover:bg-card/80 hover:backdrop-blur-md">
                   <CardHeader>
                     <div className="w-24 h-32 rounded-full mx-auto mb-6 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-4 border-primary/20 dark:border-primary/30 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
                       {expert.name === '임재홍' ? (

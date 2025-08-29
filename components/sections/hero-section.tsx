@@ -1,8 +1,8 @@
 'use client';
 
-import { Crown, ArrowDown } from 'lucide-react';
+import React, { useEffect, useState, memo } from 'react';
 
-import { useEffect, useState } from 'react';
+import { Crown, ArrowDown } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,7 @@ import { CalComPopup } from '@/components/cal-com-popup';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 
-export function HeroSection() {
+export const HeroSection = memo(function HeroSection() {
   const [startAnimation, setStartAnimation] = useState(false);
 
   useEffect(() => {
@@ -168,4 +168,4 @@ export function HeroSection() {
       </div>
     </section>
   );
-}
+});

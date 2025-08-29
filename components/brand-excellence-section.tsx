@@ -7,9 +7,9 @@ import React from 'react';
  */
 const BrandExcellenceSection: React.FC = () => {
   return (
-    <section className="w-full max-w-3xl mx-auto py-16 px-4 flex flex-col items-center border-t border-gray-200 dark:border-gray-700 mt-16">
+    <section className="w-full max-w-3xl mx-auto py-16 px-4 flex flex-col items-center border-t border-border mt-16">
       {/* 상단 pill 라벨 */}
-      <span className="inline-flex items-center px-4 py-1 mb-4 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm font-semibold gap-1">
+      <span className="inline-flex items-center px-4 py-1 mb-4 rounded-full bg-muted text-muted-foreground text-sm font-semibold gap-1">
         {/* 아이콘 (예: Sparkles) */}
         <svg
           className="w-4 h-4 text-orange-500"
@@ -27,13 +27,13 @@ const BrandExcellenceSection: React.FC = () => {
         Brand Excellence
       </span>
       {/* 메인 타이틀 */}
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-4">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center text-foreground mb-4">
         일관된 브랜드 경험을 위해
       </h2>
       {/* 설명 */}
-      <p className="text-lg text-center text-gray-500 dark:text-gray-300 mb-8 max-w-2xl">
+      <p className="text-lg text-center text-muted-foreground mb-8 max-w-2xl">
         이 가이드라인을 통해{' '}
-        <span className="font-semibold text-gray-800 dark:text-white playfair-display-bold">
+        <span className="font-semibold text-foreground playfair-display-bold">
           FamilyOffice S
         </span>
         의 브랜드 아이덴티티를 일관되게 표현하고, 사용자에게 신뢰할 수 있는
@@ -64,7 +64,7 @@ const BrandExcellenceSection: React.FC = () => {
         {/* 서비스 알아보기(흰색) */}
         <button
           type="button"
-          className="w-full md:w-auto px-8 py-4 rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-bold text-lg shadow transition-colors flex items-center justify-center gap-2"
+          className="w-full md:w-auto px-8 py-4 rounded-xl bg-background border border-border text-foreground font-bold text-lg shadow transition-colors flex items-center justify-center gap-2 hover:bg-accent hover:text-accent-foreground"
         >
           서비스 알아보기
         </button>

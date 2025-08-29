@@ -187,7 +187,7 @@ export default function ResourcesPage() {
               return (
                 <div
                   key={index}
-                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer border"
+                  className="flex items-center gap-3 p-4 bg-card rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer border border-border"
                 >
                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center`}>
                     <Icon className="w-5 h-5 text-white" />
@@ -219,7 +219,7 @@ export default function ResourcesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredResources.map((resource, index) => (
-              <Card key={index} className="bg-white dark:bg-gray-800 hover:shadow-xl transition-shadow duration-300">
+              <Card key={index} className="bg-card hover:shadow-xl transition-shadow duration-300">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <Badge variant="outline">{resource.category}</Badge>
@@ -298,7 +298,7 @@ export default function ResourcesPage() {
               </h2>
               
               <div className="space-y-6">
-                <Card className="bg-white dark:bg-gray-800">
+                <Card className="bg-card">
                   <CardContent className="p-6">
                     <h3 className="text-lg font-semibold text-foreground mb-3">
                       무료 자료
@@ -312,7 +312,7 @@ export default function ResourcesPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white dark:bg-gray-800">
+                <Card className="bg-card">
                   <CardContent className="p-6">
                     <h3 className="text-lg font-semibold text-foreground mb-3">
                       프리미엄 자료
@@ -331,7 +331,7 @@ export default function ResourcesPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white dark:bg-gray-800">
+                <Card className="bg-card">
                   <CardContent className="p-6">
                     <h3 className="text-lg font-semibold text-foreground mb-3">
                       맞춤 자료 요청
@@ -356,7 +356,7 @@ export default function ResourcesPage() {
                 {recentDownloads.map((title, index) => (
                   <div
                     key={index}
-                    className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer border"
+                    className="flex items-start gap-3 p-3 bg-card rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer border border-border"
                   >
                     <div className="w-8 h-8 bg-primary/20 rounded flex items-center justify-center flex-shrink-0">
                       <span className="text-sm font-semibold text-primary">
