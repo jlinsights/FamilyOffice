@@ -15,15 +15,6 @@ interface VideoContent {
   isNew?: boolean;
 }
 
-interface PodcastEpisode {
-  id: string;
-  title: string;
-  show: string;
-  duration: string;
-  description: string;
-  publishedAt: string;
-  isNew?: boolean;
-}
 
 const MultimediaContentSection = memo(() => {
 
@@ -56,33 +47,6 @@ const MultimediaContentSection = memo(() => {
     }
   ];
 
-  const podcastEpisodes: PodcastEpisode[] = [
-    {
-      id: '1',
-      title: '삼성전자 협력사 K사, 3대 승계 완벽 준비기',
-      show: 'Monday Morning CEO',
-      duration: '25분',
-      description: '10년 준비로 승계세 45% 절감한 비결',
-      publishedAt: 'EP.127',
-      isNew: true
-    },
-    {
-      id: '2',
-      title: '빅4 세무전문가가 말하는 2025 절세 전략',
-      show: '승계의 정석',
-      duration: '42분',
-      description: '법인보험 + 가업승계 시너지 극대화 방법',
-      publishedAt: 'EP.89'
-    },
-    {
-      id: '3',
-      title: '경영인정기보험, 정말 필요한가요?',
-      show: 'Friday Finance',
-      duration: '18분',
-      description: 'CEO 리스크 관리의 핵심 솔루션',
-      publishedAt: 'EP.56'
-    }
-  ];
 
   return (
     <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background">
@@ -214,43 +178,60 @@ const MultimediaContentSection = memo(() => {
                 🎙️ 이번 주 필청 에피소드
               </div>
               
-              {podcastEpisodes.map((episode) => (
-                <div 
-                  key={episode.id} 
-                  className="flex gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer group/item"
-                >
-                  <div className="relative flex-shrink-0">
-                    <div className="w-12 h-12 bg-green-500/10 dark:bg-green-500/20 rounded-full flex items-center justify-center">
-                      <Headphones className="h-5 w-5 text-green-600 dark:text-green-400 group-hover/item:text-green-700 dark:group-hover/item:text-green-300 transition-colors" />
-                    </div>
-                    {episode.isNew && (
-                      <Badge className="absolute -top-1 -right-1 text-xs bg-green-500">
-                        NEW
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Badge variant="outline" className="text-xs text-green-600 dark:text-green-400 border-green-200 dark:border-green-800">
-                        {episode.publishedAt}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">{episode.show}</span>
-                    </div>
-                    <h4 className="text-sm font-medium text-foreground line-clamp-2 mb-1">
-                      {episode.title}
-                    </h4>
-                    <p className="text-xs text-muted-foreground line-clamp-1 mb-2">
-                      {episode.description}
-                    </p>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        {episode.duration}
-                      </span>
-                    </div>
-                  </div>
+{/* Featured Spotify Episode - NEW */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <Badge className="text-xs bg-green-500">NEW</Badge>
+                  <span className="text-sm font-medium text-green-600 dark:text-green-400">🎙️ 최신 에피소드</span>
                 </div>
-              ))}
+                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
+                  <iframe 
+                    data-testid="embed-iframe" 
+                    style={{borderRadius: '12px'}} 
+                    src="https://open.spotify.com/embed/episode/4NsRHqfYlCSidJ5sd0Xvye?utm_source=generator" 
+                    width="100%" 
+                    height="152" 
+                    frameBorder="0" 
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* 2nd Spotify Episode */}
+              <div className="mb-4">
+                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
+                  <iframe 
+                    data-testid="embed-iframe" 
+                    style={{borderRadius: '12px'}} 
+                    src="https://open.spotify.com/embed/episode/5G9JHBLEfR9L6CKLMr86Sm?utm_source=generator" 
+                    width="100%" 
+                    height="152" 
+                    frameBorder="0" 
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* 3rd Spotify Episode */}
+              <div className="mb-4">
+                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
+                  <iframe 
+                    data-testid="embed-iframe" 
+                    style={{borderRadius: '12px'}} 
+                    src="https://open.spotify.com/embed/episode/2X1KIsTYtKNAfvrVgVLoJw?utm_source=generator" 
+                    width="100%" 
+                    height="152" 
+                    frameBorder="0" 
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy"
+                  />
+                </div>
+              </div>
 
               {/* Schedule */}
               <div className="bg-green-500/5 dark:bg-green-500/10 p-4 rounded-lg mt-4 border border-green-500/20">
