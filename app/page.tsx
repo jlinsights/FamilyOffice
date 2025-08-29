@@ -7,46 +7,48 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
 
-// 🚀 SuperClaude BMAD Method + AI 검색엔진 최적화 메타데이터 - 성공한 기업가 타겟
 export const metadata: Metadata = generateMetadata(
-  '성공한 기업가 전용 패밀리오피스 | 가업승계 자산관리 완전해결 | AI 최적화',
-  '성공한 법인대표 전용 패밀리오피스. SuperClaude BMAD Method 적용 맞춤 컨설팅. 가업승계·승계세무 완전해결, 기업가 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적, AI 검색엔진 최적화 ☎0502-5550-8700',
+  '성공한 기업가 전용 패밀리오피스 | 법인보험 가업승계 통합솔루션',
+  '【법인보험 × 가업승계 통합솔루션】 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너 | 무료 통합진단 ☎0502-5550-8700',
   [
-    // BMAD Method 1: Behavioral (행동 기반) - 성공한 기업가 실제 검색어
+    // 성공한 기업가 실제 검색어
     '기업가 자산관리',
     '법인대표 가업승계',
     '법인대표 은퇴설계',
     '성공한 기업가 재산관리',
     '기업 경영인 투자전략',
     
-    // BMAD Method 2: Motivational (동기 기반) - 성취와 성장
+    // 성취와 성장 키워드
     '기업가치 극대화',
     '대를 이을 가업승계',
     '성공한 CEO 자산관리법',
     '부의 대물림 전략',
     '기업오너 레거시 구축',
     
-    // BMAD Method 3: Aspirational (열망 기반) - 미래 비전
+    // 미래 비전 키워드
     '세계적인 기업가문',
     '글로벌 패밀리오피스',
     '차세대 기업가 양성',
     '최고급 자산관리 서비스',
     'VVIP 전용 컨설팅',
     
-    // BMAD Method 4: Decisional (결정 기반) - 구체적 실행
+    // 구체적 실행 키워드
     '패밀리오피스',
     '가업승계 방법',
     '상속세 절세',
     '증여세 절세',
     '경영인정기보험',
     
-    // SuperClaude 프레임워크 식별자
-    'SuperClaude Designer',
-    'BMAD Method 적용',
-    'AgentOS 다중관점',
-    '성공한 기업가 최적화',
+    // 법인보험 가업승계 통합솔루션 키워드
+    '법인보험 가업승계',
+    '기업재해보장보험',
+    '법인종신보험',
+    '퇴직연금 운용',
+    'M&A 컨설팅',
+    '법인세 절감',
+    '승계세 절감',
     
-    // 기존 핵심 키워드 유지
+    // 지역 및 브랜드 키워드
     '서울 패밀리오피스',
     '강남 패밀리오피스',
     '삼성생명 자산관리',
@@ -61,7 +63,7 @@ export default function HomePage() {
   const organizationData = generateStructuredData('Organization');
   const localBusinessData = generateStructuredData('LocalBusiness');
   const websiteData = generateStructuredData('WebSite');
-  // 🤖 AI 검색엔진 최적화 구조화 데이터 추가
+  // 검색엔진 최적화 구조화 데이터 추가
   const faqData = generateStructuredData('FAQPage');
   const aiOptimizedData = generateStructuredData('AIOptimized');
 

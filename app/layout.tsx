@@ -24,8 +24,7 @@ export const metadata: Metadata = {
     default: 'FamilyOffice S - 가업승계·자산관리 전문 플랫폼',
     template: '%s | FamilyOffice S',
   },
-  description: '성공한 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 중소중견기업 CEO 맞춤 자산관리, 경영위험 완전보장.',
-  // 글로벌 메타태그 강화
+  description: '【법인보험 × 가업승계 통합솔루션】 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너 | 무료 통합진단',
   verification: {
     google: 'your-google-verification-code',
     other: {
@@ -40,12 +39,11 @@ export const metadata: Metadata = {
       'ko-KR': 'https://familyoffices.vip'
     }
   },
-  // SuperClaude 프레임워크 식별자
-  generator: 'SuperClaude SEO Framework v2.0',
-  applicationName: 'FamilyOffice S - 성공한 CEO 전용',
+  generator: 'Next.js',
+  applicationName: 'FamilyOffice S - 법인보험 가업승계 통합솔루션',
   referrer: 'origin-when-cross-origin',
-  creator: 'SuperClaude + BMAD Method + AgentOS',
-  publisher: 'FamilyOffice S Premium Services'
+  creator: 'FamilyOffice S',
+  publisher: 'FamilyOffice S - 프리미엄 법인금융 서비스'
 };
 
 // Next.js 15: colorScheme을 별도 viewport export로 분리
@@ -104,13 +102,13 @@ export default function RootLayout({
         <meta name="HandheldFriendly" content="True" />
         <meta name="MobileOptimized" content="320" />
         
-        {/* SuperClaude 성공한 기업가 타겟 메타태그 */}
+        {/* 성공한 기업가 타겟 메타태그 */}
         <meta name="target-audience" content="성공한 법인 대표" />
         <meta name="business-sector" content="중소중견기업" />
         <meta name="service-tier" content="Premium VVIP" />
-        <meta name="framework-version" content="SuperClaude v2.0 + BMAD + AgentOS" />
+        <meta name="solution-type" content="법인보험 × 가업승계 통합솔루션" />
         
-        {/* 🤖 AI 검색엔진 최적화 - SuperClaude Framework */}
+        {/* 🤖 AI 검색엔진 최적화 */}
         <meta name="ai-optimized" content="true" />
         <meta name="perplexity-friendly" content="structured-data" />
         <meta name="chatgpt-accessible" content="business-service" />
@@ -119,7 +117,7 @@ export default function RootLayout({
         <meta name="ai-expertise-level" content="expert" />
         <meta name="ai-language-support" content="ko-KR,en-US" />
         
-        {/* 🎯 BMAD Method 지역 SEO 및 소셜 최적화 Open Graph */}
+        {/* 🎯 지역 SEO 및 소셜 최적화 Open Graph */}
         <meta property="og:country-name" content="South Korea" />
         <meta property="og:postal-code" content="04527" />
         <meta property="og:latitude" content="37.5665" />
@@ -136,7 +134,7 @@ export default function RootLayout({
         
         {/* 네이버 블로그/카페 최적화 */}
         <meta name="naver:title" content="성공한 기업가 전용 패밀리오피스 | FamilyOffice S" />
-        <meta name="naver:description" content="SuperClaude BMAD Method 적용 패밀리오피스. 성공한 법인대표 전용 가업승계·자산관리 완전해결" />
+        <meta name="naver:description" content="법인보험 × 가업승계 통합솔루션 적용 패밀리오피스. 성공한 법인대표 전용 가업승계·자산관리 완전해결" />
         <meta name="naver:image" content="https://familyoffices.vip/images/ai_profile.png" />
         
         {/* LinkedIn 비즈니스 네트워크 최적화 */}
@@ -157,7 +155,7 @@ export default function RootLayout({
         <meta name="rating" content="general" />
         <meta name="revisit-after" content="7 days" />
         
-        {/* 🤖 AI 검색엔진 최적화 구조화 데이터 - SuperClaude + BMAD Method */}
+        {/* 🤖 AI 검색엔진 최적화 구조화 데이터 */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -165,7 +163,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "FinancialService",
               "name": "성공한 CEO 전용 패밀리오피스 FamilyOffice S",
-              "description": "SuperClaude AI + BMAD Method 기반 성공한 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 기업가 맞춤 자산관리, 삼성생명 1000억+ 운용실적",
+              "description": "법인보험 × 가업승계 통합솔루션 기반 성공한 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 기업가 맞춤 자산관리, 삼성생명 1000억+ 운용실적",
               "url": "https://familyoffices.vip",
               "telephone": "+82-502-5550-8700",
               "address": {
@@ -183,48 +181,48 @@ export default function RootLayout({
                 "geographicArea": "대한민국"
               },
               "knowsAbout": [
-                "SuperClaude AI 자산분석",
+                "법인보험 통합솔루션",
                 "성공한 CEO 자산관리",
                 "경험많은 기업가 가업승계",
                 "VVIP 전용 패밀리오피스",
                 "법인대표 세무전략",
                 "기업오너 승계준비",
-                "AI 기반 재무설계",
-                "차세대 디지털 자산관리"
+                "기업재해보장보험",
+                "차세대 자산관리"
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "SuperClaude AI + BMAD Method 맞춤 서비스",
+                "name": "법인보험 × 가업승계 통합솔루션 맞춤 서비스",
                 "itemListElement": [
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "SuperClaude AI 자산분석",
-                      "description": "AI와 전문가가 협업하는 차세대 자산분석 시스템"
+                      "name": "법인보험 통합 자산분석",
+                      "description": "전문가가 협업하는 차세대 법인보험 자산분석 시스템"
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Behavioral 분석 기반 자산관리",
-                      "description": "실제 행동 패턴 분석을 통한 맞춤형 투자전략"
+                      "name": "기업재해보장보험 최적화",
+                      "description": "실제 기업 위험 분석을 통한 맞춤형 보장전략"
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Motivational 동기 기반 승계설계",
-                      "description": "성취동기 분석을 통한 가업승계 로드맵"
+                      "name": "경영인정기보험 승계설계",
+                      "description": "성장동기 분석을 통한 가업승계 로드맵"
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Aspirational 비전 기반 자산전략",
+                      "name": "법인종신보험 자산전략",
                       "description": "미래 비전 실현을 위한 장기 자산계획"
                     }
                   },
@@ -232,7 +230,7 @@ export default function RootLayout({
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Decisional 실행 기반 세무최적화",
+                      "name": "M&A 실행 기반 세무최적화",
                       "description": "즉시 실행 가능한 구체적 세무절세 방안"
                     }
                   }
@@ -288,7 +286,7 @@ export default function RootLayout({
                   "name": "가업승계 세금을 줄이는 가장 효과적인 방법은?",
                   "acceptedAnswer": {
                     "@type": "Answer", 
-                    "text": "1) 기업가치 하락 시점에 지분 이전, 2) 가업상속공제 최대 활용(500억원), 3) 경영권 프리미엄 할인, 4) 신주발행 등을 통한 지분 희석이 핵심입니다. SuperClaude BMAD Method로 최적 타이밍을 분석합니다."
+                    "text": "1) 기업가치 하락 시점에 지분 이전, 2) 가업상속공제 최대 활용(500억원), 3) 경영권 프리미엄 할인, 4) 신주발행 등을 통한 지분 희석이 핵심입니다. 법인보험 × 가업승계 통합솔루션으로 최적 타이밍을 분석합니다."
                   }
                 },
                 {
@@ -304,7 +302,7 @@ export default function RootLayout({
           }}
         />
         
-        {/* AgentOS 다중관점 구조화 데이터 */}
+        {/* 다중관점 구조화 데이터 */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -312,7 +310,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebPage",
               "name": "성공한 CEO 전용 패밀리오피스",
-              "description": "SuperClaude + BMAD Method + AgentOS 통합 SEO 최적화",
+              "description": "법인보험 × 가업승계 통합솔루션 SEO 최적화",
               "mainEntity": {
                 "@type": "Organization",
                 "name": "FamilyOffice S",
@@ -365,29 +363,29 @@ export default function RootLayout({
             <ExternalScripts />
             <DebugStyles />
             
-            {/* SuperClaude 성능 추적 스크립트 */}
+            {/* 사용자 행동 추적 스크립트 */}
             <script
               dangerouslySetInnerHTML={{
                 __html: `
-                  // SuperClaude SEO 성능 모니터링
+                  // 사용자 행동 분석 모니터링
                   if (typeof window !== 'undefined') {
-                    window.SuperClaudeSEO = {
-                      version: '2.0',
-                      framework: 'BMAD + AgentOS',
+                    window.FamilyOfficeSEO = {
+                      version: '1.0',
+                      solution: '법인보험 × 가업승계 통합솔루션',
                       target: '성공한 법인 대표',
                       initialized: new Date().toISOString()
                     };
                     
-                    // BMAD 사용자 행동 추적
+                    // 사용자 행동 추적
                     window.addEventListener('load', function() {
-                      const target = {
-                        behavioral: document.referrer || 'direct',
-                        motivational: navigator.userAgent.includes('Mobile') ? 'mobile' : 'desktop',
-                        aspirational: window.innerWidth > 1920 ? 'premium' : 'standard',
-                        decisional: performance.now() < 3000 ? 'fast' : 'slow'
+                      const userProfile = {
+                        referral: document.referrer || 'direct',
+                        device: navigator.userAgent.includes('Mobile') ? 'mobile' : 'desktop',
+                        screen: window.innerWidth > 1920 ? 'premium' : 'standard',
+                        performance: performance.now() < 3000 ? 'fast' : 'slow'
                       };
                       
-                      console.log('SuperClaude BMAD Profile:', target);
+                      console.log('FamilyOffice User Profile:', userProfile);
                     });
                   }
                 `

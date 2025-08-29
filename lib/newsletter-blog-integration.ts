@@ -1,5 +1,5 @@
 // Newsletter-Blog Integration System
-// SuperClaude Framework + BMAD Method + Phase 3 Implementation
+// Phase 3 Implementation - Content Marketing Strategy
 
 import { WEEKLY_CONTENT_SCHEDULE, CONTENT_TEMPLATES, ContentGenerator } from './content-strategy';
 
@@ -31,14 +31,14 @@ export const NEWSLETTER_CONFIGS: Record<string, NewsletterConfig> = {
   tuesday: {
     apiEndpoint: 'https://api.beehiiv.com/v2/publications/familyoffice-s',
     apiKey: process.env.BEEHIIV_API_KEY || '',
-    segmentTags: ['실무가이드', '중소중견기업CEO', 'behavioral', 'decisional'],
+    segmentTags: ['실무가이드', '중소중견기업CEO', '법인보험', '가업승계'],
     sendTime: '07:30',
     templateId: 'tuesday-newsletter'
   },
   friday: {
     apiEndpoint: 'https://api.beehiiv.com/v2/publications/familyoffice-s',
     apiKey: process.env.BEEHIIV_API_KEY || '',
-    segmentTags: ['시장분석', '투자인사이트', 'behavioral', 'aspirational'],
+    segmentTags: ['시장분석', '투자인사이트', '자산관리', '전략분석'],
     sendTime: '07:30',
     templateId: 'friday-newsletter'
   }
@@ -110,7 +110,7 @@ export class ContentDistributionSystem {
     const template = CONTENT_TEMPLATES.find(t => t.id === config.templateId);
     if (!template) throw new Error(`Template not found: ${config.templateId}`);
 
-    // 주제 생성 (BMAD Method 기반)
+    // 주제 생성 (고객 중심 기반)
     const topic = this.generateWeeklyTopic(schedule.category, publishDate);
     
     // 콘텐츠 구조 생성
@@ -128,7 +128,7 @@ export class ContentDistributionSystem {
       subject: contentStructure.title,
       htmlContent,
       config,
-      bmdFocus: schedule.bmdFocus,
+      focusArea: schedule.focusArea,
       segmentTags: config.segmentTags,
       scheduledTime: `${publishDate.toISOString().split('T')[0]}T${config.sendTime}:00.000Z`
     };
@@ -161,7 +161,7 @@ export class ContentDistributionSystem {
       markdownContent,
       metaDescription: contentStructure.metaDescription,
       keywords: contentStructure.keywords,
-      bmdFocus: schedule.bmdFocus,
+      focusArea: schedule.focusArea,
       category: schedule.category,
       scheduledTime: `${publishDate.toISOString().split('T')[0]}T${BLOG_CONFIG.publishTime}:00.000Z`
     };
@@ -231,7 +231,7 @@ export class ContentDistributionSystem {
           description: blogData.metaDescription,
           keywords: blogData.keywords.join(', ')
         },
-        bmadCategory: blogData.bmdFocus
+        focusArea: blogData.focusArea
       };
 
       // 자동 소셜 미디어 배포
@@ -392,7 +392,7 @@ export class ContentDistributionSystem {
 ## ${section.section}
 
 ${section.content}
-${section.bmdElement ? `\n> **BMAD 포인트**: ${section.bmdElement}\n` : ''}
+${section.keyPoint ? `\n> **핵심 포인트**: ${section.keyPoint}\n` : ''}
 `).join('\n');
     
     return `---
@@ -401,7 +401,7 @@ description: "${contentStructure.metaDescription}"
 publishedAt: "${new Date().toISOString()}"
 tags: [${contentStructure.keywords.map((k: string) => `"${k}"`).join(', ')}]
 category: "strategic"
-bmadCategory: ["motivational", "aspirational"]
+focusArea: ["성장전략", "미래비전"]
 ---
 
 # ${contentStructure.title}
