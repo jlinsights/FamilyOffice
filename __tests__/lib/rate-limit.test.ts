@@ -164,8 +164,6 @@ describe('Rate Limit System', () => {
       Date.now = mockDateNow;
       
       // Clear any existing memory store entries for this request
-      const clientId = 'ua:dGVzdC1hZ2VudA=='; // base64 of 'test-agent'
-      const key = `ratelimit:form:${clientId}`;
       
       // Exhaust limit
       for (let i = 0; i < rateLimitConfig.form.max; i++) {

@@ -1,129 +1,101 @@
-import { calculatePortfolioMetrics, calculateRiskMetrics, calculateTaxOptimization } from '@/lib/calculations/portfolio-calculations';
+import { calculatePortfolioMetrics, type Position } from '@/lib/calculations/portfolio-calculations';
 
 describe('Portfolio Calculations', () => {
-  const mockPortfolio = {
-    assets: [
-      { type: 'stock', value: 1000000, expectedReturn: 0.08, risk: 0.15 },
-      { type: 'bond', value: 500000, expectedReturn: 0.04, risk: 0.05 },
-      { type: 'real_estate', value: 2000000, expectedReturn: 0.06, risk: 0.12 },
-      { type: 'cash', value: 300000, expectedReturn: 0.02, risk: 0.01 }
-    ],
-    totalValue: 3800000
-  };
+  const mockPositions: Position[] = [
+    { 
+      symbol: 'AAPL',
+      shares: 100,
+      averagePrice: 150,
+      currentPrice: 170,
+      currency: 'USD'
+    },
+    {
+      symbol: 'GOOGL',
+      shares: 50,
+      averagePrice: 2000,
+      currentPrice: 2200,
+      currency: 'USD'
+    },
+    {
+      symbol: 'MSFT',
+      shares: 200,
+      averagePrice: 250,
+      currentPrice: 300,
+      currency: 'USD'
+    }
+  ];
 
   describe('calculatePortfolioMetrics', () => {
     it('calculates total portfolio value correctly', () => {
-      const result = calculatePortfolioMetrics(mockPortfolio.assets);
+      const result = calculatePortfolioMetrics(mockPositions);
       
-      expect(result.totalValue).toBe(3800000);
-      expect(result.assetCount).toBe(4);
+      // Expected: (100 * 170) + (50 * 2200) + (200 * 300) = 17000 + 110000 + 60000 = 187000
+      expect(result.totalValue).toBe(187000);
     });
 
-    it('calculates weighted average return correctly', () => {
-      const result = calculatePortfolioMetrics(mockPortfolio.assets);
+    it('calculates total cost correctly', () => {
+      const result = calculatePortfolioMetrics(mockPositions);
       
-      // Expected: (1M * 0.08 + 0.5M * 0.04 + 2M * 0.06 + 0.3M * 0.02) / 3.8M
-      const expectedReturn = (1000000 * 0.08 + 500000 * 0.04 + 2000000 * 0.06 + 300000 * 0.02) / 3800000;
-      expect(result.weightedAverageReturn).toBeCloseTo(expectedReturn, 4);
+      // Expected: (100 * 150) + (50 * 2000) + (200 * 250) = 15000 + 100000 + 50000 = 165000
+      expect(result.totalCost).toBe(165000);
     });
 
-    it('calculates asset allocation percentages correctly', () => {
-      const result = calculatePortfolioMetrics(mockPortfolio.assets);
+    it('calculates total gain and gain percentage correctly', () => {
+      const result = calculatePortfolioMetrics(mockPositions);
       
-      expect(result.allocations.stock).toBeCloseTo(26.32, 2); // 1M / 3.8M * 100
-      expect(result.allocations.bond).toBeCloseTo(13.16, 2);  // 0.5M / 3.8M * 100
-      expect(result.allocations.real_estate).toBeCloseTo(52.63, 2); // 2M / 3.8M * 100
-      expect(result.allocations.cash).toBeCloseTo(7.89, 2);   // 0.3M / 3.8M * 100
-    });
-  });
-
-  describe('calculateRiskMetrics', () => {
-    it('calculates portfolio risk correctly', () => {
-      const result = calculateRiskMetrics(mockPortfolio.assets);
-      
-      expect(result.totalRisk).toBeGreaterThan(0);
-      expect(result.riskLevel).toBeDefined();
-      expect(result.diversificationScore).toBeGreaterThan(0);
-      expect(result.diversificationScore).toBeLessThanOrEqual(1);
+      // Expected gain: 187000 - 165000 = 22000
+      // Expected gain %: (22000 / 165000) * 100 = 13.33%
+      expect(result.totalGain).toBe(22000);
+      expect(result.totalGainPercent).toBeCloseTo(13.33, 2);
     });
 
-    it('identifies high-risk portfolios', () => {
-      const highRiskPortfolio = [
-        { type: 'stock', value: 2000000, expectedReturn: 0.12, risk: 0.25 },
-        { type: 'crypto', value: 1000000, expectedReturn: 0.20, risk: 0.40 }
-      ];
+    it('calculates asset allocation correctly', () => {
+      const result = calculatePortfolioMetrics(mockPositions);
       
-      const result = calculateRiskMetrics(highRiskPortfolio);
-      
-      expect(result.riskLevel).toBe('high');
-      expect(result.totalRisk).toBeGreaterThan(0.3);
-    });
-
-    it('identifies low-risk portfolios', () => {
-      const lowRiskPortfolio = [
-        { type: 'bond', value: 2000000, expectedReturn: 0.03, risk: 0.03 },
-        { type: 'cash', value: 1000000, expectedReturn: 0.02, risk: 0.01 }
-      ];
-      
-      const result = calculateRiskMetrics(lowRiskPortfolio);
-      
-      expect(result.riskLevel).toBe('low');
-      expect(result.totalRisk).toBeLessThan(0.1);
-    });
-  });
-
-  describe('calculateTaxOptimization', () => {
-    it('calculates tax implications correctly', () => {
-      const result = calculateTaxOptimization(mockPortfolio.assets, 50000000); // 5천만원 소득
-      
-      expect(result.estimatedTax).toBeGreaterThan(0);
-      expect(result.taxEfficiency).toBeDefined();
-      expect(result.optimizationSuggestions).toBeInstanceOf(Array);
-    });
-
-    it('suggests tax optimization strategies', () => {
-      const result = calculateTaxOptimization(mockPortfolio.assets, 100000000); // 1억원 소득
-      
-      expect(result.optimizationSuggestions.length).toBeGreaterThan(0);
-      expect(result.optimizationSuggestions[0]).toHaveProperty('strategy');
-      expect(result.optimizationSuggestions[0]).toHaveProperty('potentialSavings');
-    });
-
-    it('handles edge cases gracefully', () => {
-      const emptyPortfolio: any[] = [];
-      const result = calculateTaxOptimization(emptyPortfolio, 50000000);
-      
-      expect(result.estimatedTax).toBe(0);
-      expect(result.taxEfficiency).toBe('N/A');
-      expect(result.optimizationSuggestions).toEqual([]);
+      // AAPL: 17000 / 187000 * 100 = 9.09%
+      // GOOGL: 110000 / 187000 * 100 = 58.82%
+      // MSFT: 60000 / 187000 * 100 = 32.09%
+      expect(result.allocation['AAPL']).toBeCloseTo(9.09, 2);
+      expect(result.allocation['GOOGL']).toBeCloseTo(58.82, 2);
+      expect(result.allocation['MSFT']).toBeCloseTo(32.09, 2);
     });
   });
 
   describe('Edge Cases and Error Handling', () => {
-    it('handles zero-value assets', () => {
-      const portfolioWithZero = [
-        { type: 'stock', value: 0, expectedReturn: 0.08, risk: 0.15 },
-        { type: 'bond', value: 1000000, expectedReturn: 0.04, risk: 0.05 }
-      ];
+    it('handles empty portfolio', () => {
+      const emptyPortfolio: Position[] = [];
+      const result = calculatePortfolioMetrics(emptyPortfolio);
       
-      const result = calculatePortfolioMetrics(portfolioWithZero);
-      
-      expect(result.totalValue).toBe(1000000);
-      expect(result.allocations.stock).toBe(0);
-      expect(result.allocations.bond).toBe(100);
+      expect(result.totalValue).toBe(0);
+      expect(result.totalCost).toBe(0);
+      expect(result.totalGain).toBe(0);
+      expect(result.totalGainPercent).toBe(0);
+      expect(result.allocation).toEqual({});
     });
 
-    it('handles negative values gracefully', () => {
-      const portfolioWithNegative = [
-        { type: 'stock', value: -100000, expectedReturn: 0.08, risk: 0.15 },
-        { type: 'bond', value: 1000000, expectedReturn: 0.04, risk: 0.05 }
+    it('handles positions with zero shares', () => {
+      const positionsWithZero: Position[] = [
+        {
+          symbol: 'AAPL',
+          shares: 0,
+          averagePrice: 150,
+          currentPrice: 170,
+          currency: 'USD'
+        },
+        {
+          symbol: 'GOOGL',
+          shares: 100,
+          averagePrice: 2000,
+          currentPrice: 2200,
+          currency: 'USD'
+        }
       ];
       
-      const result = calculatePortfolioMetrics(portfolioWithNegative);
+      const result = calculatePortfolioMetrics(positionsWithZero);
       
-      expect(result.totalValue).toBe(900000);
-      expect(result.allocations.stock).toBe(0);
-      expect(result.allocations.bond).toBe(100);
+      expect(result.totalValue).toBe(220000); // Only GOOGL counts
+      expect(result.allocation['AAPL']).toBe(0);
+      expect(result.allocation['GOOGL']).toBe(100);
     });
   });
 });

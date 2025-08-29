@@ -6,7 +6,6 @@ import * as financialService from '../../lib/financial/financial-service';
 import {
   MOCK_STOCK_DATA,
   MOCK_FOREX_DATA,
-  MOCK_API_ERRORS,
   mockAsyncDelay,
 } from '../setup/financial-mocks';
 
@@ -126,7 +125,6 @@ describe('Financial API Integration Tests', () => {
 
     test('should handle multiple stock symbols in batch', async () => {
       const symbols = ['AAPL', 'TSLA', '005930.KS'];
-      const mockResults = symbols.map(symbol => (MOCK_STOCK_DATA as any)[symbol]);
 
       (financialService.getStockData as jest.Mock).mockImplementation(
         async symbol => {
@@ -167,7 +165,6 @@ describe('Financial API Integration Tests', () => {
     });
 
     test('should handle major currency pairs', async () => {
-      const majorPairs = ['USD/KRW', 'EUR/KRW', 'JPY/KRW'];
 
       (financialService.getForexData as jest.Mock).mockImplementation(
         async (from, to) => {

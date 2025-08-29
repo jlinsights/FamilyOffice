@@ -33,7 +33,7 @@ describe('Validation Schemas', () => {
       const result = consultationSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '이름은 2자 이상 입력해주세요'
         );
       }
@@ -44,7 +44,7 @@ describe('Validation Schemas', () => {
       const result = consultationSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '올바른 이메일 주소를 입력해주세요'
         );
       }
@@ -55,7 +55,7 @@ describe('Validation Schemas', () => {
       const result = consultationSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '올바른 휴대폰 번호를 입력해주세요 (예: 010-1234-5678)'
         );
       }
@@ -83,7 +83,7 @@ describe('Validation Schemas', () => {
       const result = consultationSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '관심 서비스를 선택해주세요'
         );
       }
@@ -94,7 +94,7 @@ describe('Validation Schemas', () => {
       const result = consultationSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '개인정보 수집 및 이용에 동의해주세요'
         );
       }
@@ -133,7 +133,7 @@ describe('Validation Schemas', () => {
       const result = contactSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '메시지는 10자 이상 입력해주세요'
         );
       }
@@ -144,7 +144,7 @@ describe('Validation Schemas', () => {
       const result = contactSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '메시지는 1000자 이하로 입력해주세요'
         );
       }
@@ -155,7 +155,7 @@ describe('Validation Schemas', () => {
       const result = contactSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '개인정보 수집 및 이용에 동의해주세요'
         );
       }
@@ -185,7 +185,7 @@ describe('Validation Schemas', () => {
       const result = adminUserSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '올바른 역할을 선택해주세요'
         );
       }
@@ -196,7 +196,7 @@ describe('Validation Schemas', () => {
       const result = adminUserSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           '올바른 이메일 주소를 입력해주세요'
         );
       }

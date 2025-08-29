@@ -6,7 +6,6 @@ import { describe, test, expect, beforeEach, afterEach } from '@jest/globals';
 
 import {
   FINANCIAL_SCENARIOS,
-  scenarioManager,
 } from '../fixtures/financial-scenarios';
 
 interface AuditLogEntry {
@@ -321,28 +320,33 @@ class ComplianceTestSuite {
 
     if (filters) {
       if (filters.startDate) {
+        const startDate = filters.startDate;
         filteredLogs = filteredLogs.filter(
-          log => log.timestamp >= filters.startDate!
+          log => log.timestamp >= startDate
         );
       }
       if (filters.endDate) {
+        const endDate = filters.endDate;
         filteredLogs = filteredLogs.filter(
-          log => log.timestamp <= filters.endDate!
+          log => log.timestamp <= endDate
         );
       }
       if (filters.userId) {
+        const userId = filters.userId;
         filteredLogs = filteredLogs.filter(
-          log => log.userId === filters.userId
+          log => log.userId === userId
         );
       }
       if (filters.action) {
+        const action = filters.action;
         filteredLogs = filteredLogs.filter(
-          log => log.action === filters.action
+          log => log.action === action
         );
       }
       if (filters.resource) {
+        const resource = filters.resource;
         filteredLogs = filteredLogs.filter(
-          log => log.resource === filters.resource
+          log => log.resource === resource
         );
       }
     }
@@ -434,6 +438,7 @@ describe('Compliance and Audit Trail Testing', () => {
   describe('Audit Trail Functionality', () => {
     test('should log portfolio creation events', () => {
       const scenario = FINANCIAL_SCENARIOS.FAMILY_OFFICE_DIVERSIFIED;
+      if (!scenario) throw new Error('Scenario not found');
 
       complianceSuite.logAuditEvent({
         userId: 'user-123',
@@ -454,14 +459,15 @@ describe('Compliance and Audit Trail Testing', () => {
       });
 
       expect(auditTrail).toHaveLength(1);
-      expect(auditTrail[0].action).toBe('CREATE_PORTFOLIO');
-      expect(auditTrail[0].resource).toBe('portfolio');
-      expect(auditTrail[0].userId).toBe('user-123');
+      expect(auditTrail[0]?.action).toBe('CREATE_PORTFOLIO');
+      expect(auditTrail[0]?.resource).toBe('portfolio');
+      expect(auditTrail[0]?.userId).toBe('user-123');
     });
 
     test('should log transaction execution with before/after values', () => {
-      const transaction =
-        FINANCIAL_SCENARIOS.FAMILY_OFFICE_DIVERSIFIED.transactions[0];
+      const scenario = FINANCIAL_SCENARIOS.FAMILY_OFFICE_DIVERSIFIED;
+      if (!scenario?.transactions?.[0]) throw new Error('Transaction not found');
+      const transaction = scenario.transactions[0];
 
       complianceSuite.logAuditEvent({
         userId: 'user-123',
@@ -488,9 +494,9 @@ describe('Compliance and Audit Trail Testing', () => {
       });
 
       expect(auditTrail).toHaveLength(1);
-      expect(auditTrail[0].oldValues.status).toBe('PENDING');
-      expect(auditTrail[0].newValues.status).toBe('COMPLETED');
-      expect(auditTrail[0].newValues.shares).toBe(transaction.shares);
+      expect(auditTrail[0]?.oldValues?.status).toBe('PENDING');
+      expect(auditTrail[0]?.newValues?.status).toBe('COMPLETED');
+      expect(auditTrail[0]?.newValues?.shares).toBe(transaction.shares);
     });
 
     test('should filter audit logs by date range', () => {
@@ -533,14 +539,15 @@ describe('Compliance and Audit Trail Testing', () => {
 
       const auditTrail = complianceSuite.getAuditTrail();
       const originalEntry = auditTrail[0];
+      if (!originalEntry) throw new Error('No audit entry found');
       const originalTimestamp = originalEntry.timestamp;
 
       // Attempt to modify the audit entry (should not affect original)
       originalEntry.action = 'MODIFIED_ACTION';
 
       const freshAuditTrail = complianceSuite.getAuditTrail();
-      expect(freshAuditTrail[0].timestamp).toBe(originalTimestamp);
-      expect(freshAuditTrail[0].action).toBe('SENSITIVE_OPERATION');
+      expect(freshAuditTrail[0]?.timestamp).toBe(originalTimestamp);
+      expect(freshAuditTrail[0]?.action).toBe('SENSITIVE_OPERATION');
     });
   });
 
@@ -560,11 +567,11 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(false);
-      expect(results[0].violations).toContain(
+      expect(results[0]?.compliant).toBe(false);
+      expect(results[0]?.violations).toContain(
         expect.stringMatching(/Large transaction not reported within 24 hours/)
       );
-      expect(results[0].riskLevel).toBe('CRITICAL');
+      expect(results[0]?.riskLevel).toBe('CRITICAL');
     });
 
     test('should pass compliance for timely reported transactions', () => {
@@ -582,9 +589,9 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(true);
-      expect(results[0].violations).toHaveLength(0);
-      expect(results[0].riskLevel).toBe('LOW');
+      expect(results[0]?.compliant).toBe(true);
+      expect(results[0]?.violations).toHaveLength(0);
+      expect(results[0]?.riskLevel).toBe('LOW');
     });
   });
 
@@ -607,11 +614,11 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(false);
-      expect(results[0].violations).toContain(
+      expect(results[0]?.compliant).toBe(false);
+      expect(results[0]?.violations).toContain(
         expect.stringMatching(/AAPL: 6\.00% ownership requires 13D filing/)
       );
-      expect(results[0].recommendations).toContain(
+      expect(results[0]?.recommendations).toContain(
         expect.stringMatching(/File Schedule 13D for AAPL within 10 days/)
       );
     });
@@ -634,8 +641,8 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(true);
-      expect(results[0].violations).toHaveLength(0);
+      expect(results[0]?.compliant).toBe(true);
+      expect(results[0]?.violations).toHaveLength(0);
     });
   });
 
@@ -657,14 +664,14 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(false);
-      expect(results[0].violations).toContain(
+      expect(results[0]?.compliant).toBe(false);
+      expect(results[0]?.violations).toContain(
         expect.stringMatching(/Potential structuring detected/)
       );
-      expect(results[0].recommendations).toContain(
+      expect(results[0]?.recommendations).toContain(
         'File Suspicious Activity Report (SAR)'
       );
-      expect(results[0].riskLevel).toBe('CRITICAL');
+      expect(results[0]?.riskLevel).toBe('CRITICAL');
     });
 
     test('should detect high frequency trading patterns', () => {
@@ -677,7 +684,7 @@ describe('Compliance and Audit Trail Testing', () => {
 
       expect(results).toHaveLength(1);
       // Should detect high frequency patterns
-      const hasHighFrequencyViolation = results[0].violations.some(v =>
+      const hasHighFrequencyViolation = results[0]?.violations?.some(v =>
         v.includes('High frequency trading pattern')
       );
       expect(hasHighFrequencyViolation).toBe(true);
@@ -715,8 +722,8 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(true);
-      expect(results[0].riskLevel).toBe('LOW');
+      expect(results[0]?.compliant).toBe(true);
+      expect(results[0]?.riskLevel).toBe('LOW');
     });
   });
 
@@ -732,13 +739,13 @@ describe('Compliance and Audit Trail Testing', () => {
       const results = complianceSuite.checkCompliance(oldUserData, 'GDPR-001');
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(false);
-      expect(results[0].violations).toContain(
+      expect(results[0]?.compliant).toBe(false);
+      expect(results[0]?.violations).toContain(
         expect.stringMatching(
           /User data retained for \d+ days without activity/
         )
       );
-      expect(results[0].recommendations).toContain(
+      expect(results[0]?.recommendations).toContain(
         'Consider data anonymization or deletion for inactive users'
       );
     });
@@ -757,8 +764,8 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(true);
-      expect(results[0].riskLevel).toBe('LOW');
+      expect(results[0]?.compliant).toBe(true);
+      expect(results[0]?.riskLevel).toBe('LOW');
     });
   });
 
@@ -776,9 +783,9 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(false);
-      expect(results[0].violations.length).toBeGreaterThan(0);
-      expect(results[0].riskLevel).toBe('HIGH');
+      expect(results[0]?.compliant).toBe(false);
+      expect(results[0]?.violations?.length).toBeGreaterThan(0);
+      expect(results[0]?.riskLevel).toBe('HIGH');
     });
 
     test('should pass compliance for good execution', () => {
@@ -794,8 +801,8 @@ describe('Compliance and Audit Trail Testing', () => {
       );
 
       expect(results).toHaveLength(1);
-      expect(results[0].compliant).toBe(true);
-      expect(results[0].riskLevel).toBe('LOW');
+      expect(results[0]?.compliant).toBe(true);
+      expect(results[0]?.riskLevel).toBe('LOW');
     });
   });
 

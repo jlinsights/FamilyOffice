@@ -1,7 +1,7 @@
 'use client';
 
 import nextDynamic from 'next/dynamic';
-import { Shield, Brain, TrendingUp, Users, BarChart3, Calendar, Search } from 'lucide-react';
+import { Shield, Brain, TrendingUp, Users, BarChart3, Calendar, Search, Gauge } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import {
@@ -35,6 +35,13 @@ const GoogleSearchConsoleDashboard = nextDynamic(
   }
 );
 
+const WebVitalsDashboard = nextDynamic(
+  () => import('@/components/web-vitals-dashboard').then(mod => ({ default: mod.WebVitalsDashboard })),
+  { 
+    loading: () => <div className="flex items-center justify-center h-64">웹 성능 대시보드 로딩 중...</div>
+  }
+);
+
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -53,8 +60,12 @@ export default function AdminDashboard() {
           </Badge>
         </div>
 
-        <Tabs defaultValue="content-calendar" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
+        <Tabs defaultValue="web-vitals" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-7">
+            <TabsTrigger value="web-vitals" className="flex items-center gap-2">
+              <Gauge className="h-4 w-4" />
+              웹 성능
+            </TabsTrigger>
             <TabsTrigger value="content-calendar" className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               콘텐츠 캘린더
@@ -80,6 +91,10 @@ export default function AdminDashboard() {
               성과
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="web-vitals">
+            <WebVitalsDashboard />
+          </TabsContent>
 
           <TabsContent value="content-calendar">
             <ContentCalendarDashboard />

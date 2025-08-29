@@ -18,8 +18,6 @@ import {
   calculatePerformanceMetrics,
   calculateRebalancing,
   Position,
-  PortfolioMetrics,
-  PerformanceMetrics,
 } from '../../lib/calculations/portfolio-calculations';
 
 describe('Portfolio Calculations', () => {
@@ -435,10 +433,12 @@ describe('Portfolio Calculations', () => {
       let benchmarkVariance = 0;
 
       for (let i = 0; i < portfolioReturns.length; i++) {
-        covariance +=
-          (portfolioReturns[i] - portfolioMean) *
-          (benchmarkReturns[i] - benchmarkMean);
-        benchmarkVariance += Math.pow(benchmarkReturns[i] - benchmarkMean, 2);
+        const portfolioReturn = portfolioReturns[i];
+        const benchmarkReturn = benchmarkReturns[i];
+        if (portfolioReturn !== undefined && benchmarkReturn !== undefined) {
+          covariance += (portfolioReturn - portfolioMean) * (benchmarkReturn - benchmarkMean);
+          benchmarkVariance += Math.pow(benchmarkReturn - benchmarkMean, 2);
+        }
       }
 
       covariance /= 4;
@@ -569,8 +569,8 @@ describe('Portfolio Calculations', () => {
         threshold
       );
 
-      expect(rebalancing[0].action).toBe('HOLD');
-      expect(rebalancing[0].amount).toBe(0);
+      expect(rebalancing[0]?.action).toBe('HOLD');
+      expect(rebalancing[0]?.amount).toBe(0);
     });
 
     test('should handle missing current allocation', () => {
@@ -584,8 +584,8 @@ describe('Portfolio Calculations', () => {
         totalValue
       );
 
-      expect(rebalancing[0].action).toBe('BUY');
-      expect(rebalancing[0].amount).toBe(50000); // Need to buy 50% worth
+      expect(rebalancing[0]?.action).toBe('BUY');
+      expect(rebalancing[0]?.amount).toBe(50000); // Need to buy 50% worth
     });
   });
 

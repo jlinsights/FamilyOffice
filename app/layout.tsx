@@ -9,6 +9,7 @@ import { KakaoPixel } from '@/components/kakao/kakao-pixel';
 import { KakaoSDK } from '@/components/kakao/kakao-sdk';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import { WebVitalsTracker } from '@/components/web-vitals-tracker';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
 import { FloatingActionButtons } from '@/components/floating-action-buttons';
 import { ScrollToTopFloating } from '@/components/scroll-to-top-floating';
@@ -72,7 +73,6 @@ export default function RootLayout({
         
         {/* 파비콘 및 앱 아이콘 설정 */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         
@@ -350,6 +350,7 @@ export default function RootLayout({
             <FloatingActionButtons />
             <Toaster />
             <Analytics />
+            <WebVitalsTracker />
             <KakaoPixel 
               pixelId={process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || ''} 
               debug={process.env.NODE_ENV === 'development'} 

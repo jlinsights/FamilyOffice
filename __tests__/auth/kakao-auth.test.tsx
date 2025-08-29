@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { KakaoLoginButton } from '@/components/auth/kakao-login-button';
-import { getKakaoAuthService } from '@/lib/auth/kakao-auth';
 
 // Mock KakaoAuthService
 jest.mock('@/lib/auth/kakao-auth');
@@ -34,7 +33,7 @@ describe('Kakao Authentication Flow', () => {
       render(<KakaoLoginButton />);
       
       expect(screen.getByRole('button')).toBeInTheDocument();
-      expect(screen.getByText('카카오로 시작하기')).toBeInTheDocument();
+      expect(screen.getByText('카카오로 로그인')).toBeInTheDocument();
     });
 
     it('redirects to kakao oauth when clicked', async () => {

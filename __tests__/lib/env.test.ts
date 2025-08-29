@@ -237,7 +237,10 @@ describe('Environment Validation System', () => {
   describe('createEnv', () => {
     it('should skip validation when SKIP_ENV_VALIDATION is true', () => {
       process.env.SKIP_ENV_VALIDATION = 'true';
-      process.env.NODE_ENV = 'development';
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'development',
+        configurable: true
+      });
       process.env.NEXT_PUBLIC_APP_URL = 'http://localhost:3000';
       
       expect(() => createEnv()).not.toThrow();
@@ -245,8 +248,14 @@ describe('Environment Validation System', () => {
 
     it('should provide development defaults when skipping validation', () => {
       process.env.SKIP_ENV_VALIDATION = 'true';
-      delete process.env.NODE_ENV;
-      delete process.env.NEXT_PUBLIC_APP_URL;
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: undefined,
+        configurable: true
+      });
+      Object.defineProperty(process.env, 'NEXT_PUBLIC_APP_URL', {
+        value: undefined,
+        configurable: true
+      });
       
       const result = createEnv();
       
@@ -256,7 +265,10 @@ describe('Environment Validation System', () => {
 
     it('should handle production build phase', () => {
       process.env.NEXT_PHASE = 'phase-production-build';
-      process.env.NODE_ENV = 'production';
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'production',
+        configurable: true
+      });
       
       const result = createEnv();
       
@@ -289,7 +301,7 @@ describe('Environment Validation System', () => {
       } catch (error) {
         expect(error).toBeInstanceOf(z.ZodError);
         const zodError = error as z.ZodError;
-        expect(zodError.errors[0].message).toContain('Invalid enum value');
+        expect(zodError.errors[0]?.message).toContain('Invalid enum value');
       }
     });
 
@@ -301,7 +313,7 @@ describe('Environment Validation System', () => {
       } catch (error) {
         expect(error).toBeInstanceOf(z.ZodError);
         const zodError = error as z.ZodError;
-        expect(zodError.errors[0].message).toContain('Invalid GA4 measurement ID format');
+        expect(zodError.errors[0]?.message).toContain('Invalid GA4 measurement ID format');
       }
     });
   });

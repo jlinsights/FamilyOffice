@@ -2,7 +2,7 @@
  * 글로벌 에러 핸들러 테스트
  * 표준화된 에러 응답 시스템 검증
  */
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { ZodError, z } from 'zod';
 import {
   ErrorType,
@@ -153,7 +153,7 @@ describe('Global Error Handler', () => {
   describe('createErrorResponse', () => {
     it('should create error response with correct status', () => {
       const error = new Error('Test error');
-      const response = createErrorResponse(error);
+      createErrorResponse(error);
 
       expect(NextResponse.json).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -174,7 +174,7 @@ describe('Global Error Handler', () => {
       const error = new Error('Test error');
       error.stack = 'Test stack trace';
       
-      const response = createErrorResponse(error);
+      createErrorResponse(error);
 
       // In test environment, it behaves like production (no debug info)
       expect(NextResponse.json).toHaveBeenCalledWith(
@@ -216,7 +216,7 @@ describe('Global Error Handler', () => {
       const mockHandler = jest.fn().mockRejectedValue(new Error('Handler error'));
       const wrappedHandler = withErrorHandler(mockHandler);
 
-      const result = await wrappedHandler('arg1', 'arg2');
+      await wrappedHandler('arg1', 'arg2');
 
       expect(NextResponse.json).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -233,7 +233,7 @@ describe('Global Error Handler', () => {
       });
       const wrappedHandler = withErrorHandler(mockHandler);
 
-      const result = await wrappedHandler('arg1');
+      await wrappedHandler('arg1');
 
       expect(NextResponse.json).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -385,7 +385,7 @@ describe('Global Error Handler', () => {
     describe('createSuccessResponse', () => {
       it('should create success response', () => {
         const data = { id: 1, name: 'Test' };
-        const response = createSuccessResponse(data, 'Success message');
+        createSuccessResponse(data, 'Success message');
 
         expect(NextResponse.json).toHaveBeenCalledWith(
           {
@@ -399,7 +399,7 @@ describe('Global Error Handler', () => {
       });
 
       it('should use custom status code', () => {
-        const response = createSuccessResponse({}, undefined, 201);
+        createSuccessResponse({}, undefined, 201);
 
         expect(NextResponse.json).toHaveBeenCalledWith(
           expect.anything(),
@@ -411,7 +411,7 @@ describe('Global Error Handler', () => {
     describe('createPaginatedResponse', () => {
       it('should create paginated response', () => {
         const data = [{ id: 1 }, { id: 2 }];
-        const response = createPaginatedResponse(data, 10, 2, 5);
+        createPaginatedResponse(data, 10, 2, 5);
 
         expect(NextResponse.json).toHaveBeenCalledWith({
           success: true,
@@ -430,7 +430,7 @@ describe('Global Error Handler', () => {
       });
 
       it('should calculate pagination correctly', () => {
-        const response = createPaginatedResponse([], 25, 1, 10);
+        createPaginatedResponse([], 25, 1, 10);
 
         expect(NextResponse.json).toHaveBeenCalledWith(
           expect.objectContaining({

@@ -262,7 +262,7 @@ describe('Tax Calculations', () => {
 
       const result = calculateCapitalGains(insufficientTransactions);
       // Should only process 50 shares (what was available)
-      expect(result.details[0].gain).toBeCloseTo(50 * (120 - 100) - 11.5, 1);
+      expect(result.details[0]?.gain).toBeCloseTo(50 * (120 - 100) - 11.5, 1);
     });
   });
 
@@ -585,7 +585,7 @@ describe('Tax Calculations', () => {
       );
       if (sellRecommendations.length > 0) {
         const firstSell = sellRecommendations[0];
-        expect(firstSell.unrealizedLoss).toBeGreaterThan(1000);
+        expect(firstSell?.unrealizedLoss).toBeGreaterThan(1000);
       }
     });
 

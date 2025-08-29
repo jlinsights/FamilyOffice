@@ -8,6 +8,7 @@ import type {
   IndexData,
   CacheKeyType,
 } from '../types/financial';
+import { recordCacheHit, recordCacheMiss } from './cache-monitoring';
 
 // SSR 안전성을 위한 dynamic imports
 let NodeCache: any = null;
@@ -124,6 +125,8 @@ function generateCacheKey(type: CacheKeyType, identifier: string): string {
  * 메모리 캐시에서 데이터 가져오기
  */
 async function getFromMemoryCache<T>(key: string): Promise<T | null> {
+  const startTime = Date.now();
+  
   try {
     const cache = await initializeNodeCache();
     if (!cache) {
@@ -131,8 +134,12 @@ async function getFromMemoryCache<T>(key: string): Promise<T | null> {
     }
 
     const cached = cache.get(key) as T | undefined;
+    const responseTime = Date.now() - startTime;
+    
     if (cached) {
       console.log(`🎯 메모리 캐시 히트: ${key}`);
+      const dataSize = JSON.stringify(cached).length;
+      recordCacheHit(key, 'memory', responseTime, dataSize);
       return cached;
     }
 
@@ -172,6 +179,8 @@ async function setToMemoryCache<T>(
  * Redis에서 데이터 가져오기
  */
 async function getFromRedisCache<T>(key: string): Promise<T | null> {
+  const startTime = Date.now();
+  
   if (!redisClient) {
     redisClient = await initializeRedis();
   }
@@ -180,9 +189,14 @@ async function getFromRedisCache<T>(key: string): Promise<T | null> {
 
   try {
     const cached = await redisClient.get(key);
+    const responseTime = Date.now() - startTime;
+    
     if (cached) {
       console.log(`🎯 Redis 캐시 히트: ${key}`);
-      return JSON.parse(cached);
+      const data = JSON.parse(cached);
+      const dataSize = cached.length;
+      recordCacheHit(key, 'redis', responseTime, dataSize);
+      return data;
     }
     return null;
   } catch (error) {
@@ -222,6 +236,7 @@ export async function getCachedData<T>(
   identifier: string
 ): Promise<T | null> {
   const key = generateCacheKey(type, identifier);
+  const startTime = Date.now();
 
   // 1. 메모리 캐시 확인 (가장 빠름)
   const memoryData = await getFromMemoryCache<T>(key);
@@ -237,6 +252,10 @@ export async function getCachedData<T>(
     return redisData;
   }
 
+  // 3. 캐시 미스 기록
+  const responseTime = Date.now() - startTime;
+  recordCacheMiss(key, responseTime);
+  
   return null;
 }
 
@@ -332,7 +351,7 @@ export async function setCachedIndexData(
 }
 
 /**
- * 캐시 통계 정보
+ * 캐시 통계 정보 (기존 호환성을 위해 유지)
  */
 export async function getCacheStats() {
   try {
@@ -373,6 +392,30 @@ export async function getCacheStats() {
       redis: { connected: false, keys: 0 },
     };
   }
+}
+
+/**
+ * 고급 캐시 모니터링 통계 (새로운 모니터링 시스템 사용)
+ */
+export async function getAdvancedCacheStats(windowMs?: number) {
+  const { getCacheStats: getMonitoringStats } = await import('./cache-monitoring');
+  return getMonitoringStats(windowMs);
+}
+
+/**
+ * 실시간 히트율 조회
+ */
+export async function getRealTimeCacheHitRate() {
+  const { getRealTimeHitRate } = await import('./cache-monitoring');
+  return getRealTimeHitRate();
+}
+
+/**
+ * 캐시 성능 알림 확인
+ */
+export async function checkCachePerformanceAlerts() {
+  const { checkCacheAlerts } = await import('./cache-monitoring');
+  return checkCacheAlerts();
 }
 
 /**

@@ -643,7 +643,7 @@ export const swaggerUIConfig = {
     .swagger-ui .scheme-container { background: #f8fafc; padding: 1rem; border-radius: 0.5rem }
   `,
   customSiteTitle: 'FamilyOffice S API Documentation',
-  customfavIcon: '/favicon-32x32.png',
+  customfavIcon: '/favicon.ico',
   swaggerOptions: {
     persistAuthorization: true,
     displayRequestDuration: true,
