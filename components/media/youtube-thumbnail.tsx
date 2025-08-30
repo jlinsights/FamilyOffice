@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { Play } from 'lucide-react';
 
 interface YouTubeThumbnailProps {
@@ -41,13 +40,11 @@ export function YouTubeThumbnail({
         className="relative w-full aspect-video rounded-lg overflow-hidden cursor-pointer"
         onClick={() => setShowVideo(true)}
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={thumbnailUrl}
           alt={title || 'YouTube video thumbnail'}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         
         {/* 오버레이 */}
