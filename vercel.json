@@ -61,7 +61,6 @@
   "env": {
     "NODE_ENV": "production"
   },
-  "regions": ["iad1", "icn1"],
   "github": {
     "silent": true
   },
