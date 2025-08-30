@@ -1,0 +1,1399 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* 🚀 Core Web Vitals 최적화 - AgentOS Performance Framework */
+/* Critical CSS 인라인 최적화 및 리소스 로딩 개선 */
+@layer base {
+  /* 부드러운 스크롤 효과 */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* 폰트 로딩 최적화 - LCP 개선 */
+  .playfair-display {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    /* 폰트 로딩 중 레이아웃 이동 방지 */
+    size-adjust: 100%;
+    ascent-override: 90%;
+    descent-override: 20%;
+    line-gap-override: 0%;
+  }
+
+  .playfair-display-medium {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .playfair-display-semibold {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .playfair-display-bold {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .playfair-display-black {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .playfair-display-italic {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+  /* Tailwind font-playfair utility with hydration safety */
+  .font-playfair {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif !important;
+    font-display: swap;
+  }
+
+  /* 플로팅 버튼 모바일 최적화 */
+  .floating-buttons-mobile {
+    @media (max-width: 768px) {
+      bottom: 16px !important;
+      right: 16px !important;
+    }
+    /* 항상 보이도록 강제 설정 */
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+  }
+
+  .scroll-to-top-mobile {
+    @media (max-width: 768px) {
+      bottom: 16px !important;
+      right: 16px !important;
+    }
+  }
+
+  /* 🚀 SuperClaude Performance Optimizations */
+  .hero-section-optimized {
+    /* LCP 최적화 - 중요 콘텐츠 우선 렌더링 */
+    contain: layout style paint;
+    content-visibility: auto;
+    contain-intrinsic-size: 100vh;
+  }
+
+  .cls-safe {
+    /* CLS 방지 - 레이아웃 안정성 */
+    min-height: 100vh;
+    transition: none; /* 초기 로드 시 전환 효과 제거 */
+  }
+
+  .interaction-ready {
+    /* FID/INP 최적화 - 빠른 상호작용 */
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* 기본 변수 설정 - 외부 폰트 참조 없음 */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 217 91% 60%;
+    --radius: 0.5rem;
+    /* 접근성 색상 변수 */
+    --focus-ring: 217 91% 60%;
+    --error: 0 84% 60%;
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 217 91% 60%;
+    /* 다크 모드 접근성 색상 */
+    --focus-ring: 217 91% 60%;
+    --error: 0 84% 60%;
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+    /* 🚀 Core Web Vitals 최적화 */
+    /* CLS 방지 - 초기 레이아웃 안정화 */
+    min-height: 100vh;
+    /* GPU 가속 활성화 - 스크롤 성능 개선 */
+    will-change: auto;
+    /* 리페인트 최적화 - fixed 요소에 영향 주지 않도록 paint 제거 */
+    contain: layout style;
+    /* 고정 헤더와 announcement banner를 위한 상단 여백 */
+    padding-top: calc(4rem + var(--announcement-height, 0px));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+      Arial, sans-serif;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1,
+      'kern' 1;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Enhanced typography */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    line-height: 1.1;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+    line-height: 1.2;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+    line-height: 1.25;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+    line-height: 1.3;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl;
+    line-height: 1.4;
+  }
+
+  h6 {
+    @apply text-base md:text-lg;
+    line-height: 1.4;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  /* 접근성 개선 */
+
+  /* 포커스 표시 개선 */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--focus-ring));
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  /* 스크린 리더 전용 텍스트 */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* 접근성 색상 대비 개선 */
+  .text-error {
+    color: hsl(var(--error));
+  }
+
+  .text-success {
+    color: hsl(var(--success));
+  }
+
+  .text-warning {
+    color: hsl(var(--warning));
+  }
+
+  /* 폼 요소 접근성 */
+  input:invalid,
+  textarea:invalid,
+  select:invalid {
+    border-color: hsl(var(--error));
+  }
+
+  input:invalid:focus,
+  textarea:invalid:focus,
+  select:invalid:focus {
+    box-shadow: 0 0 0 2px hsl(var(--error) / 0.2);
+  }
+
+  /* 버튼 접근성 */
+  button:focus-visible,
+  [role='button']:focus-visible {
+    outline: 2px solid hsl(var(--focus-ring));
+    outline-offset: 2px;
+  }
+
+  /* 링크 접근성 */
+  a:focus-visible {
+    outline: 2px solid hsl(var(--focus-ring));
+    outline-offset: 2px;
+    text-decoration: underline;
+  }
+
+  /* 스킵 링크 */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+  }
+
+  .skip-link:focus {
+    top: 6px;
+  }
+
+  /* 고대비 모드 지원 */
+  @media (prefers-contrast: high) {
+    * {
+      border-color: currentColor !important;
+    }
+
+    button,
+    [role='button'] {
+      border: 2px solid currentColor !important;
+    }
+  }
+
+  /* 모션 감소 설정 지원 */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Improved scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-border/80;
+  }
+
+  /* Cal.com iframe complete dark mode override */
+  iframe[src*='cal.com'] {
+    background: #000000 !important;
+    color-scheme: dark;
+  }
+
+  /* Force all Cal.com content to be dark */
+  .dark iframe[src*='cal.com'] {
+    background: #000000 !important;
+    color-scheme: dark !important;
+    filter: none !important;
+  }
+
+  /* Light mode Cal.com styling */
+  .light iframe[src*='cal.com'] {
+    background: #ffffff !important;
+    color-scheme: light !important;
+  }
+
+  /* Force Cal.com container background */
+  iframe[src*='cal.com'] body,
+  iframe[src*='cal.com'] html,
+  iframe[src*='cal.com'] #__next,
+  iframe[src*='cal.com'] [data-cal-namespace],
+  iframe[src*='cal.com'] main,
+  iframe[src*='cal.com'] div {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* Cal.com dark mode text and elements */
+  iframe[src*='cal.com'] *,
+  iframe[src*='cal.com'] p,
+  iframe[src*='cal.com'] span,
+  iframe[src*='cal.com'] h1,
+  iframe[src*='cal.com'] h2,
+  iframe[src*='cal.com'] h3,
+  iframe[src*='cal.com'] h4,
+  iframe[src*='cal.com'] h5,
+  iframe[src*='cal.com'] h6,
+  iframe[src*='cal.com'] label,
+  iframe[src*='cal.com'] li,
+  iframe[src*='cal.com'] td,
+  iframe[src*='cal.com'] th {
+    color: #ffffff !important;
+    background-color: transparent !important;
+  }
+
+  /* Cal.com form elements dark styling */
+  iframe[src*='cal.com'] input,
+  iframe[src*='cal.com'] button,
+  iframe[src*='cal.com'] select,
+  iframe[src*='cal.com'] textarea {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    border-color: #404040 !important;
+    border: 1px solid #404040 !important;
+  }
+
+  /* Cal.com button hover states */
+  iframe[src*='cal.com'] button:hover {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+  }
+
+  /* Enhanced Cal.com forced dark mode */
+  .cal-com-iframe-forced-dark {
+    background: #000000 !important;
+    min-height: 100% !important;
+    height: 100% !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  /* Minimize Cal.com empty space and maximize content */
+  iframe[src*='cal.com'] [class*='container'],
+  iframe[src*='cal.com'] [class*='wrapper'],
+  iframe[src*='cal.com'] [class*='layout'],
+  iframe[src*='cal.com'] main,
+  iframe[src*='cal.com'] .main-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-height: 100vh !important;
+    height: 100% !important;
+  }
+
+  /* Force Cal.com calendar to fill available space */
+  iframe[src*='cal.com'] [class*='calendar'],
+  iframe[src*='cal.com'] [class*='booking'],
+  iframe[src*='cal.com'] [class*='schedule'],
+  iframe[src*='cal.com'] [role='grid'],
+  iframe[src*='cal.com'] table {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 4px !important;
+  }
+
+  /* Remove excessive padding/margins from Cal.com components */
+  iframe[src*='cal.com'] [class*='py-'],
+  iframe[src*='cal.com'] [class*='px-'],
+  iframe[src*='cal.com'] [class*='p-'],
+  iframe[src*='cal.com'] [class*='mt-'],
+  iframe[src*='cal.com'] [class*='mb-'],
+  iframe[src*='cal.com'] [class*='mx-'],
+  iframe[src*='cal.com'] [class*='my-'],
+  iframe[src*='cal.com'] [class*='m-'] {
+    margin: 2px !important;
+    padding: 2px !important;
+  }
+
+  /* Cal.com header and navigation compacting */
+  iframe[src*='cal.com'] header,
+  iframe[src*='cal.com'] nav,
+  iframe[src*='cal.com'] [class*='header'],
+  iframe[src*='cal.com'] [class*='navigation'] {
+    padding: 4px 8px !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 32px !important;
+  }
+
+  /* Cal.com specific branded elements */
+  iframe[src*='cal.com'] [class*='bg-white'],
+  iframe[src*='cal.com'] [class*='bg-gray-50'],
+  iframe[src*='cal.com'] [class*='bg-gray-100'],
+  iframe[src*='cal.com'] [class*='bg-neutral-50'],
+  iframe[src*='cal.com'] [class*='bg-neutral-100'],
+  iframe[src*='cal.com'] [class*='bg-slate-50'],
+  iframe[src*='cal.com'] [class*='bg-slate-100'],
+  iframe[src*='cal.com'] [style*='background-color: white'],
+  iframe[src*='cal.com'] [style*='background-color: #ffffff'],
+  iframe[src*='cal.com'] [style*='background-color: #fff'],
+  iframe[src*='cal.com'] [style*='background: white'],
+  iframe[src*='cal.com'] [style*='background: #ffffff'],
+  iframe[src*='cal.com'] [style*='background: #fff'] {
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
+
+  /* Cal.com text color overrides */
+  iframe[src*='cal.com'] [class*='text-black'],
+  iframe[src*='cal.com'] [class*='text-gray-900'],
+  iframe[src*='cal.com'] [class*='text-gray-800'],
+  iframe[src*='cal.com'] [class*='text-neutral-900'],
+  iframe[src*='cal.com'] [class*='text-neutral-800'],
+  iframe[src*='cal.com'] [class*='text-slate-900'],
+  iframe[src*='cal.com'] [class*='text-slate-800'],
+  iframe[src*='cal.com'] [style*='color: black'],
+  iframe[src*='cal.com'] [style*='color: #000000'],
+  iframe[src*='cal.com'] [style*='color: #000'] {
+    color: #ffffff !important;
+  }
+
+  /* Force Cal.com calendar and booking components */
+  iframe[src*='cal.com'] [data-testid],
+  iframe[src*='cal.com'] [class*='calendar'],
+  iframe[src*='cal.com'] [class*='booking'],
+  iframe[src*='cal.com'] [class*='event'],
+  iframe[src*='cal.com'] [class*='time'],
+  iframe[src*='cal.com'] [class*='date'],
+  iframe[src*='cal.com'] section,
+  iframe[src*='cal.com'] article,
+  iframe[src*='cal.com'] aside,
+  iframe[src*='cal.com'] header,
+  iframe[src*='cal.com'] footer,
+  iframe[src*='cal.com'] nav {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* Ultra-force all backgrounds to black */
+  iframe[src*='cal.com'] * {
+    background-color: transparent !important;
+  }
+
+  iframe[src*='cal.com'] body,
+  iframe[src*='cal.com'] html,
+  iframe[src*='cal.com'] #root,
+  iframe[src*='cal.com'] #__next,
+  iframe[src*='cal.com'] [data-cal-namespace] {
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
+
+  /* Force all possible Cal.com white areas to black */
+  iframe[src*='cal.com'] [class*='white'],
+  iframe[src*='cal.com'] [class*='light'],
+  iframe[src*='cal.com'] [class*='50'],
+  iframe[src*='cal.com'] [class*='100'],
+  iframe[src*='cal.com'] [style*='rgb(255'],
+  iframe[src*='cal.com'] [style*='rgba(255'],
+  iframe[src*='cal.com'] form,
+  iframe[src*='cal.com'] .form,
+  iframe[src*='cal.com'] [role='form'],
+  iframe[src*='cal.com'] fieldset,
+  iframe[src*='cal.com'] legend {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* Special handling for Cal.com modal and overlays */
+  iframe[src*='cal.com'] [role='dialog'],
+  iframe[src*='cal.com'] [role='modal'],
+  iframe[src*='cal.com'] .modal,
+  iframe[src*='cal.com'] .overlay,
+  iframe[src*='cal.com'] .popup {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* Force all containers and wrappers */
+  iframe[src*='cal.com'] .container,
+  iframe[src*='cal.com'] .wrapper,
+  iframe[src*='cal.com'] .content,
+  iframe[src*='cal.com'] .main,
+  iframe[src*='cal.com'] .app {
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Modern button variants */
+  .btn {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  /* Enhanced consultation button with maximum visibility guarantee */
+  .btn-consultation {
+    @apply btn border shadow-sm hover:shadow-md font-semibold transition-all duration-200;
+    /* Force styles with highest specificity */
+    background-color: hsl(var(--primary)) !important;
+    border-color: hsl(var(--primary)) !important;
+    color: #ffffff !important;
+  }
+
+  .btn-consultation:hover {
+    background-color: hsl(var(--primary) / 0.9) !important;
+    color: #ffffff !important;
+    transform: scale(1.02) !important;
+  }
+
+  .btn-consultation:active {
+    transform: scale(0.98) !important;
+  }
+
+  .btn-consultation a,
+  .btn-consultation a:visited,
+  .btn-consultation a:link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  .btn-consultation:hover a,
+  .btn-consultation:hover a:visited,
+  .btn-consultation:hover a:link {
+    color: #ffffff !important;
+  }
+
+  /* Ensure all nested elements are white */
+  .btn-consultation *,
+  .btn-consultation span,
+  .btn-consultation .text-white {
+    color: #ffffff !important;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply btn border border-input bg-background hover:bg-accent hover:text-accent-foreground hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn hover:bg-accent hover:text-accent-foreground hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  /* Enhanced auth button styles for optimal visibility across themes */
+  .btn-auth-login {
+    @apply btn bg-transparent border border-border/40 hover:bg-accent hover:border-border hover:scale-[1.02] active:scale-[0.98] transition-all duration-200;
+    /* Force consistent text color for visibility */
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .btn-auth-login:hover {
+    color: hsl(var(--accent-foreground)) !important;
+  }
+
+  .btn-auth-signup {
+    @apply btn bg-primary border border-primary hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md transition-all duration-200;
+    /* Force white text for maximum contrast */
+    color: white !important;
+  }
+
+  .btn-auth-signup:hover {
+    color: white !important;
+  }
+
+  .btn-auth-signup-outline {
+    @apply btn bg-transparent border-2 border-primary hover:bg-primary hover:scale-[1.02] active:scale-[0.98] font-semibold transition-all duration-200;
+    /* Force primary color for text, white on hover */
+    color: hsl(var(--primary)) !important;
+    background-color: transparent !important;
+  }
+
+  .btn-auth-signup-outline:hover {
+    color: white !important;
+    background-color: hsl(var(--primary)) !important;
+  }
+
+  /* Modern card styles */
+  .card {
+    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+  }
+
+  .card-modern {
+    @apply card backdrop-blur-sm bg-card/80 border-border/50;
+  }
+
+  .card-interactive {
+    @apply card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:-translate-y-1 hover:border-border/80 cursor-pointer;
+  }
+
+  .card-gradient {
+    @apply card bg-gradient-to-br from-card to-card/50 border-border/50;
+  }
+
+  /* Enhanced input styles */
+  .input {
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200;
+  }
+
+  .input:focus {
+    @apply border-ring;
+  }
+
+  /* Modern badge styles */
+  .badge {
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors;
+  }
+
+  .badge-default {
+    @apply badge border-transparent bg-primary text-primary-foreground hover:bg-primary/80;
+  }
+
+  .badge-secondary {
+    @apply badge border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  .badge-outline {
+    @apply badge text-foreground border-border;
+  }
+
+  /* Glass morphism */
+  .glass {
+    @apply backdrop-blur-md bg-background/70 border-border/50;
+  }
+
+  .glass-card {
+    @apply glass rounded-lg shadow-xl;
+  }
+
+  /* Modern navigation */
+  .nav-link {
+    @apply relative inline-flex items-center px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground;
+  }
+
+  .nav-link-active {
+    @apply nav-link text-foreground;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300;
+    content: '';
+  }
+
+  .nav-link:hover::after,
+  .nav-link-active::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  /* 🚀 Core Web Vitals 최적화 애니메이션 - FID/INP 개선 */
+  /* GPU 가속 애니메이션으로 메인 스레드 부하 감소 */
+  .animate-in {
+    animation: fade-in 0.3s ease-out;
+    transform: translateZ(0); /* GPU 레이어 강제 생성 */
+    will-change: opacity;
+  }
+
+  .animate-up {
+    animation: slide-up 0.3s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  .animate-down {
+    animation: slide-down 0.2s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+    transform: translateZ(0);
+    will-change: opacity;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  .animate-slide-down {
+    animation: slide-down 0.2s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.2s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.4s ease-out;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  /* 성능 최적화 - 애니메이션 완료 후 will-change 제거 */
+  .animate-in,
+  .animate-up,
+  .animate-down,
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-down,
+  .animate-scale-in,
+  .animate-bounce-in {
+    animation-fill-mode: both;
+  }
+
+  /* 중요 콘텐츠 우선 로딩 - LCP 최적화 */
+  .priority-content {
+    content-visibility: visible;
+    contain-intrinsic-size: auto 1000px;
+  }
+
+  /* 지연 로딩 콘텐츠 - 초기 로딩 성능 개선 */
+  .lazy-content {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+  }
+
+  /* Focus utilities */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+
+  /* Typography utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Layout utilities */
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .section-sm {
+    @apply py-8 md:py-12 lg:py-16;
+  }
+
+  /* Grid utilities */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  /* Gradient utilities */
+  .gradient-primary {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--primary) / 0.8)
+    );
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--secondary)),
+      hsl(var(--secondary) / 0.8)
+    );
+  }
+
+  .gradient-muted {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--muted)),
+      hsl(var(--muted) / 0.5)
+    );
+  }
+
+  /* Force white utility */
+  .force-white,
+  .force-white *,
+  .force-white svg,
+  .force-white path {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 서브메뉴 애니메이션 */
+@keyframes dropdown-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submenu-dropdown {
+  animation: dropdown-fade-in 0.2s ease-out;
+}
+
+/* 서브메뉴 호버 효과 */
+.submenu-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.submenu-item:hover {
+  transform: translateX(4px);
+}
+
+/* 서브메뉴 화살표 회전 애니메이션 */
+.chevron-rotate {
+  transition: transform 0.2s ease-in-out;
+}
+
+.chevron-rotate.rotated {
+  transform: rotate(180deg);
+}
+
+/* 서브메뉴 배경 블러 효과 */
+.submenu-backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* 서브메뉴 그림자 효과 */
+.submenu-shadow {
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .submenu-shadow {
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* 서브메뉴 마우스 이동 경로 개선 */
+.submenu-gap {
+  padding-top: 0.5rem;
+}
+
+.submenu-gap::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+  background: transparent;
+}
+
+/* 서브메뉴 아이템 호버 상태 */
+.submenu-item-hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.submenu-item-hover .submenu-title {
+  color: hsl(var(--primary));
+}
+
+.submenu-item-hover .submenu-description {
+  color: hsl(var(--muted-foreground) / 0.8);
+}
+
+/* 서브메뉴 반응형 개선 */
+@media (max-width: 768px) {
+  .submenu-dropdown {
+    animation: none;
+  }
+
+  .submenu-item:hover {
+    transform: none;
+  }
+}
+
+/* 서브메뉴 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+  .submenu-dropdown {
+    animation: none;
+  }
+
+  .chevron-rotate {
+    transition: none;
+  }
+
+  .submenu-item {
+    transition: none;
+  }
+
+  .submenu-item:hover {
+    transform: none;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .card-modern {
+    @apply bg-card border-border;
+  }
+
+  .glass {
+    @apply bg-background border-border;
+  }
+
+  /* Enhanced button visibility for high contrast mode */
+  .btn-auth-login {
+    border-width: 2px !important;
+  }
+
+  .btn-auth-signup-outline {
+    border-width: 3px !important;
+  }
+
+  .btn-consultation {
+    border-width: 2px !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* Dark mode specific enhancements */
+.dark .btn-auth-login {
+  border-color: hsl(var(--border)) !important;
+  background-color: hsl(var(--background) / 0.5) !important;
+}
+
+.dark .btn-auth-login:hover {
+  background-color: hsl(var(--accent)) !important;
+  border-color: hsl(var(--accent)) !important;
+}
+
+.dark .btn-auth-signup-outline {
+  border-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary)) !important;
+  background-color: transparent !important;
+}
+
+.dark .btn-auth-signup-outline:hover {
+  background-color: hsl(var(--primary)) !important;
+  color: #ffffff !important;
+  border-color: hsl(var(--primary)) !important;
+}
+
+/* Ultimate consultation button visibility for dark mode - MAXIMUM POWER */
+.dark .btn-consultation,
+html.dark .btn-consultation,
+[data-theme='dark'] .btn-consultation,
+.btn-consultation {
+  background-color: hsl(var(--primary)) !important;
+  border-color: hsl(var(--primary)) !important;
+  color: #ffffff !important;
+  /* 절대적 보장을 위한 직접 색상 지정 */
+  background: #3b82f6 !important;
+  border: 1px solid #3b82f6 !important;
+}
+
+.dark .btn-consultation:hover,
+html.dark .btn-consultation:hover,
+[data-theme='dark'] .btn-consultation:hover,
+.btn-consultation:hover {
+  background-color: hsl(var(--primary) / 0.9) !important;
+  color: #ffffff !important;
+  /* 호버시에도 직접 색상 지정 */
+  background: #2563eb !important;
+  border: 1px solid #2563eb !important;
+}
+
+.dark .btn-consultation a,
+.dark .btn-consultation a:visited,
+.dark .btn-consultation a:link,
+html.dark .btn-consultation a,
+html.dark .btn-consultation a:visited,
+html.dark .btn-consultation a:link,
+[data-theme='dark'] .btn-consultation a,
+[data-theme='dark'] .btn-consultation a:visited,
+[data-theme='dark'] .btn-consultation a:link {
+  color: #ffffff !important;
+}
+
+.dark .btn-consultation:hover a,
+.dark .btn-consultation:hover a:visited,
+.dark .btn-consultation:hover a:link,
+html.dark .btn-consultation:hover a,
+html.dark .btn-consultation:hover a:visited,
+html.dark .btn-consultation:hover a:link,
+[data-theme='dark'] .btn-consultation:hover a,
+[data-theme='dark'] .btn-consultation:hover a:visited,
+[data-theme='dark'] .btn-consultation:hover a:link {
+  color: #ffffff !important;
+}
+
+/* Force all nested elements to be white in dark mode */
+.dark .btn-consultation *,
+.dark .btn-consultation span,
+.dark .btn-consultation .text-white,
+.dark .btn-consultation .lucide,
+.dark .btn-consultation svg,
+html.dark .btn-consultation *,
+html.dark .btn-consultation span,
+html.dark .btn-consultation .text-white,
+html.dark .btn-consultation .lucide,
+html.dark .btn-consultation svg,
+[data-theme='dark'] .btn-consultation *,
+[data-theme='dark'] .btn-consultation span,
+[data-theme='dark'] .btn-consultation .text-white,
+[data-theme='dark'] .btn-consultation .lucide,
+[data-theme='dark'] .btn-consultation svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Additional fallback for all modes - ULTIMATE OVERRIDE */
+.btn-consultation,
+.btn-consultation *,
+.btn-consultation a,
+.btn-consultation a *,
+.btn-consultation span,
+.btn-consultation .lucide,
+.btn-consultation svg,
+.btn-consultation path,
+button.btn-consultation,
+button.btn-consultation *,
+button.btn-consultation a,
+button.btn-consultation span,
+.dark .btn-consultation,
+.dark .btn-consultation *,
+.dark .btn-consultation a,
+.dark .btn-consultation span {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* 버튼 자체에 대한 절대적 스타일 */
+button.btn-consultation,
+.btn-consultation button {
+  background: #3b82f6 !important;
+  border: 1px solid #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* 호버 상태 */
+button.btn-consultation:hover,
+.btn-consultation button:hover {
+  background: #2563eb !important;
+  border: 1px solid #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* AI Consulting Chat Scrollbar Styles */
+.ai-chat-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.5) hsl(var(--muted) / 0.3);
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.ai-chat-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.ai-chat-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 4px;
+}
+
+.ai-chat-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.5);
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.ai-chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.7);
+}
+
+/* Dark mode scrollbar adjustments */
+.dark .ai-chat-scrollbar {
+  scrollbar-color: hsl(var(--muted-foreground) / 0.4) hsl(var(--muted) / 0.2);
+}
+
+.dark .ai-chat-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--muted) / 0.2);
+}
+
+.dark .ai-chat-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+.dark .ai-chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.6);
+}
+
+/* Enhanced shadow utilities for floating elements */
+.shadow-3xl {
+  box-shadow:
+    0 35px 60px -12px rgba(0, 0, 0, 0.25),
+    0 25px 25px -15px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+.dark .shadow-3xl {
+  box-shadow:
+    0 35px 60px -12px rgba(0, 0, 0, 0.6),
+    0 25px 25px -15px rgba(0, 0, 0, 0.4),
+    0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* Pulse animation for floating elements */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Force floating calendar button to always be visible */
+.cal-com-floating-force {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 999999 !important;
+  pointer-events: auto !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 64px !important;
+  height: 64px !important;
+  transform: translateZ(0) !important;
+  will-change: transform !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  contain: layout style !important;
+}
+
+/* Ensure the button is rendered in its own layer */
+.cal-com-floating-force::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Ensure floating button is above all possible overlays */
+.cal-com-floating-force,
+.cal-com-floating-force * {
+  z-index: 999999 !important;
+}
+
+/* Mobile optimization for floating button */
+@media (max-width: 768px) {
+  .cal-com-floating-force {
+    bottom: 20px !important;
+    right: 20px !important;
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
+
+/* Ensure button stays above modals, overlays, and other fixed elements */
+.cal-com-floating-force {
+  isolation: isolate !important;
+}
+
+/* Override any parent container styles that might affect fixed positioning */
+body > .cal-com-floating-force,
+html > .cal-com-floating-force {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 999999 !important;
+}
+
+/* Ensure no parent transform affects the button */
+* .cal-com-floating-force {
+  transform: translateZ(0) !important;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  * {
+    @apply text-black bg-white;
+  }
+}

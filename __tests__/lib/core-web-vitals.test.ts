@@ -39,7 +39,7 @@ const mockPerformance = {
 };
 
 // Mock PerformanceObserver
-const mockPerformanceObserver = jest.fn().mockImplementation((callback) => ({
+const mockPerformanceObserver = jest.fn().mockImplementation((_callback) => ({
   observe: jest.fn(),
   disconnect: jest.fn()
 }));
@@ -236,7 +236,10 @@ describe('Core Web Vitals System', () => {
       });
 
       // Restore location
-      window.location = originalLocation;
+      Object.defineProperty(window, 'location', {
+        writable: true,
+        value: originalLocation
+      });
 
       const analytics = webVitalsMonitoring.getAnalytics();
       
@@ -319,8 +322,7 @@ describe('Core Web Vitals System', () => {
     test('should filter metrics by time window', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
       
-      // Mock older timestamp
-      const oldTimestamp = Date.now() - 25 * 60 * 60 * 1000; // 25 hours ago
+      // Test focuses on time window filtering behavior
       
       webVitalsMonitoring.recordMetric({
         name: 'LCP',
