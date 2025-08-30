@@ -26,6 +26,11 @@ export const metadata: Metadata = {
     template: '%s | FamilyOffice S',
   },
   description: '【법인보험 × 가업승계 통합솔루션】 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너 | 무료 통합진단',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.png',
+  },
   verification: {
     google: 'your-google-verification-code',
     other: {
