@@ -194,6 +194,7 @@ export const CEO_PROGRAMS: SpecialProgram[] = [
     place: '서울 세미나룸',
     target: '가업승계 재직 중인 경영 2,3세',
     freq: '연1회',
+    href: '/program/100-years-ceo',
   },
   {
     title: 'Global Insight Program',
@@ -213,6 +214,7 @@ export const ASSET_PROGRAMS: SpecialProgram[] = [
     place: '서울 세미나룸',
     target: '예술에 관심이 있는 VIP 고객',
     freq: '반기 1회',
+    href: '/program/art-asset-class',
   },
   {
     title: 'WM 부동산 아카데미',

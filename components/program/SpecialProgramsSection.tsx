@@ -1,4 +1,8 @@
+'use client';
+
+import React from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 import { SpecialProgram } from '@/types/program';
 
@@ -9,9 +13,21 @@ function ProgramCard({
   place,
   target,
   freq,
+  href = '/contact',
 }: SpecialProgram) {
+  const handleCardClick = (e: React.MouseEvent) => {
+    // 버튼 클릭 시 카드 클릭 이벤트 방지
+    if ((e.target as HTMLElement).closest('button, a[role="button"]')) {
+      return;
+    }
+    window.location.href = href;
+  };
+
   return (
-    <div className="rounded-xl border border-muted/30 bg-white/5 shadow-lg p-6 flex flex-col min-h-[280px] transition-transform duration-200 hover:scale-105 hover:shadow-2xl">
+    <div 
+      className="rounded-xl border border-muted/30 bg-white/5 shadow-lg p-6 flex flex-col min-h-[340px] transition-transform duration-200 hover:scale-105 hover:shadow-2xl cursor-pointer"
+      onClick={handleCardClick}
+    >
       <h4 className="font-bold text-lg text-primary mb-2">{title}</h4>
       {subtitle && (
         <div className="text-xs text-muted-foreground mb-2">{subtitle}</div>
@@ -30,6 +46,23 @@ function ProgramCard({
         <Badge variant="default" className="bg-muted/80 text-muted-foreground">
           진행: {freq}
         </Badge>
+      </div>
+      <div className="flex gap-2 mt-4">
+        <Button
+          asChild
+          className="flex-1 bg-primary hover:bg-primary/90 text-white"
+          size="sm"
+        >
+          <a href={href}>더 알아보기</a>
+        </Button>
+        <Button
+          asChild
+          variant="outline"
+          className="flex-1 border-primary text-primary hover:bg-primary hover:text-white"
+          size="sm"
+        >
+          <a href="https://cal.com/familyoffice" target="_blank" rel="noopener noreferrer">상담 신청</a>
+        </Button>
       </div>
     </div>
   );

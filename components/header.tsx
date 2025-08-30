@@ -158,9 +158,13 @@ export const Header = memo(function Header({
                     </button>
 
                     {/* 서브메뉴 드롭다운 - CSS group hover 사용 */}
-                    <div className="absolute top-full left-0 pt-2 w-80 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-[60]">
+                    <div className={`absolute top-full left-0 pt-2 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-[60] ${
+                      item.label === '솔루션' ? 'w-96' : 'w-80'
+                    }`}>
                       <div className="bg-background/70 dark:bg-gray-900/70 backdrop-blur-md border border-border rounded-lg shadow-xl">
-                        <div className="p-2">
+                        <div className={`p-2 ${
+                          item.label === '솔루션' ? 'max-h-[70vh] overflow-y-auto' : ''
+                        }`}>
                           {item.submenu.map((subItem: NavigationSubItem) => (
                             <Link
                               key={subItem.href}

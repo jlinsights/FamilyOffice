@@ -170,6 +170,12 @@ const ServicePageContent = () => {
         <section className="py-20">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
+              <div className="flex justify-center mb-6">
+                <Badge variant="outline" size="lg" animation="fade">
+                  <Briefcase className="h-3 w-3 mr-1" />
+                  전문 솔루션
+                </Badge>
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
                 <span className="text-primary">전문</span> 솔루션
               </h2>
@@ -251,23 +257,34 @@ const ServicePageContent = () => {
                       ))}
                     </div>
 
-                    <CalComPopup
-                      buttonText="상담 신청"
-                      variant="outline"
-                      size="sm"
-                      className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
-                      eventType="consultation"
-                      trigger={
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
-                        >
-                          상담 신청
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                      }
-                    />
+                    <div className="flex gap-2 mt-4">
+                      <Button
+                        asChild
+                        className="flex-1 bg-primary hover:bg-primary/90 text-white"
+                        size="sm"
+                      >
+                        <Link href={`/solutions/${category.id}/${service.title.replace(/\s+/g, '-').toLowerCase()}`}>
+                          더 알아보기
+                        </Link>
+                      </Button>
+                      <CalComPopup
+                        buttonText="상담 신청"
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 border-primary text-primary hover:bg-primary hover:text-white"
+                        eventType="consultation"
+                        trigger={
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 border-primary text-primary hover:bg-primary hover:text-white"
+                          >
+                            상담 신청
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        }
+                      />
+                    </div>
                   </div>
                 ))
               )}

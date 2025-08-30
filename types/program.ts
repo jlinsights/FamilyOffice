@@ -39,4 +39,5 @@ export interface SpecialProgram {
   place: string;
   target: string;
   freq: string;
+  href?: string;
 }

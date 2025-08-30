@@ -10,58 +10,8 @@ import { NavigationItem, ServiceItem } from '@/types/globals';
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/about', label: '소개' },
   { href: '/solutions', label: '솔루션' },
-  {
-    href: '/program',
-    label: '프로그램',
-    submenu: [
-      {
-        href: '/program',
-        label: '프로그램 전체',
-        description: '모든 교육 프로그램 및 세미나 정보',
-      },
-      {
-        href: '/program/100-years-ceo',
-        label: '100년 기업 차세대 CEO 과정',
-        description: '지속가능한 경영을 위한 특별 과정',
-      },
-      {
-        href: '/program/art-asset-class',
-        label: '예술자산클래스ART',
-        description: 'VIP 고객 예술 투자 및 문화 교육 프로그램',
-      },
-    ],
-  },
-  {
-    href: '/insights',
-    label: '인사이트',
-    submenu: [
-      {
-        href: '/insights',
-        label: '인사이트',
-        description: '자산관리 전문가의 깊이 있는 분석과 실용적인 전략',
-      },
-      {
-        href: '/insights/market-intelligence',
-        label: '시장 분석',
-        description: '자산관리 전문가의 최신 인사이트와 전략 분석',
-      },
-      {
-        href: '/insights/weekly-brief',
-        label: '주간 브리프',
-        description: '주간 시장 동향과 투자 인사이트를 이메일로 받아보세요',
-      },
-      {
-        href: '/insights/resources',
-        label: '자료실',
-        description: '투자 가이드, 시장 보고서, 교육 자료 다운로드',
-      },
-      {
-        href: '/pension-calculator',
-        label: '연금 계산기',
-        description: '정확한 노후 설계를 위한 맞춤형 연금 계산 도구',
-      },
-    ],
-  },
+  { href: '/program', label: '프로그램' },
+  { href: '/insights', label: '인사이트' },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
