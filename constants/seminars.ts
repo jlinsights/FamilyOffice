@@ -176,6 +176,57 @@ export const FEATURED_SPEAKERS: Speaker[] = [
 
 export const UPCOMING_SEMINARS: Seminar[] = [
   {
+    id: 'vvip-critical-disaster-law-seminar',
+    title: 'VVIP 고객초청 세미나',
+    subtitle: '🎉🌟 자산 관리의 새로운 지평을 여는 VVIP 고객초청 세미나에 여러분을 초대합니다! 🌟🎉',
+    description:
+      '바쁘신 일정에도 시간을 내주셔서 성공적인 가업승계와 절세 플랜을 시작하는 첫걸음을 함께해 주시길 바랍니다. 본 세미나는 대표님의 사업과 가정에 실질적인 도움을 드릴 수 있는 특별한 자리로 준비되었습니다.',
+    speaker: {
+      id: 'familyoffice-legal-expert',
+      name: '패밀리오피스 법무팀',
+      title: '전문 컨설턴트',
+      company: '패밀리오피스',
+      bio: '중대재해처벌법 및 기업 법무 전문가로서 기업의 법적 리스크 관리와 대응 전략 수립을 담당합니다.',
+      expertise: ['중대재해처벌법', '기업법무', '리스크관리', '컴플라이언스'],
+    },
+    date: '2025-09-15',
+    time: '10:30',
+    duration: '2시간',
+    location: {
+      type: 'offline',
+      venue: '그랜드 하얏트 서울',
+      address: '서울시 용산구 소월로 322 (2층 남산 III룸)',
+      capacity: 30,
+    },
+    category: 'legal',
+    targetAudience: ['VVIP 고객', '기업 경영진', '고액자산가'],
+    capacity: 30,
+    registeredCount: 3,
+    price: 0,
+    isPremium: true,
+    deposit: 50000,
+    depositNote: '세미나 참석 시 전액 환불',
+    status: 'upcoming',
+    tags: ['중대재해처벌법', '법인전략', '리스크관리', '컴플라이언스'],
+    registrationUrl: 'https://lu.ma/18f21nx2',
+    detailsUrl: 'https://lu.ma/18f21nx2',
+    agenda: [
+      {
+        time: '10:30',
+        title: '중대재해 발생기업 제재 강화에 따른 법인 전략',
+        description: '중대재해처벌법 강화에 대응하는 기업의 법적 대응 전략',
+        speaker: '패밀리오피스 법무팀',
+        duration: 120,
+      },
+      {
+        time: '12:30',
+        title: '호텔 오찬 및 개별 상담',
+        description: '전문가와 함께하는 1:1 맞춤 상담 및 네트워킹',
+        duration: 60,
+      },
+    ],
+  },
+  {
     id: 'vvip-asset-management-new-horizon',
     title: 'VVIP 고객초청 세미나',
     subtitle: '자산 관리의 새로운 지평',

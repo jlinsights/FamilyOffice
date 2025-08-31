@@ -110,7 +110,7 @@ export default function SignInPage() {
               <div className="space-y-4">
                 <Suspense fallback={<div>로딩 중...</div>}>
                   <KakaoLoginButton 
-                    fullWidth
+                    fullWidth={false}
                     size="lg"
                     onSuccess={() => {
                       // 로그인 성공 시 대시보드로 리다이렉트
