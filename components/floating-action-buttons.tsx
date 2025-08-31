@@ -67,8 +67,9 @@ export function FloatingActionButtons() {
             relative overflow-hidden
             shadow-2xl hover:shadow-3xl 
             transition-all duration-500 ease-out
-            bg-white hover:bg-gray-50
-            border-2 border-yellow-400 hover:border-yellow-500
+            bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 
+            hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700
+            border-0
             text-white 
             font-semibold 
             rounded-full 
@@ -77,23 +78,29 @@ export function FloatingActionButtons() {
             hover:rotate-[5deg]
             focus:outline-none focus:ring-4 focus:ring-yellow-400/30
             active:scale-95
-            before:absolute before:inset-0 
-            before:bg-yellow-400/10 before:rounded-full 
-            before:opacity-0 before:transition-opacity before:duration-300
-            hover:before:opacity-100
+            p-2
+            flex items-center justify-center
           `}
         >
-          <Image 
-            src="/images/KAKAO/kakaotalk_sharing_btn/kakaotalk_sharing_btn_small.png" 
-            alt="카카오톡" 
-            width={32} 
-            height={32} 
-            className={`
-              transition-all duration-300 
-              ${isHovered === 'kakao' ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}
-              drop-shadow-sm
-            `} 
-          />
+          <div className="relative w-8 h-8 flex items-center justify-center">
+            <Image 
+              src="/images/KAKAO/kakaotalk_sharing_btn/kakaotalk_sharing_btn_small.png" 
+              alt="카카오톡" 
+              width={28} 
+              height={28} 
+              className={`
+                transition-all duration-300 
+                ${isHovered === 'kakao' ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}
+                drop-shadow-sm
+                object-contain
+              `} 
+              style={{
+                filter: 'none',
+                maxWidth: '100%',
+                height: 'auto'
+              }}
+            />
+          </div>
         </Button>
 
         {/* 맥동 효과 */}

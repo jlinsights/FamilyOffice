@@ -380,7 +380,6 @@ export default function RecruitPage() {
                     <div className="relative">
                       <YouTubeEmbed
                         videoId="YK1IRyUrxtk"
-                        title="삼성생명 GFC 성공 스토리"
                         className="w-full aspect-video rounded-xl overflow-hidden shadow-2xl"
                       />
                     </div>
