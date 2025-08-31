@@ -165,8 +165,8 @@ export class AuthMonitoringService {
     if (severity >= 0.7) {
       this.sendCriticalAlert({
         event: metric.action,
-        error: metric.error,
-        userId: metric.userId,
+        ...(metric.error && { error: metric.error }),
+        ...(metric.userId && { userId: metric.userId }),
         timestamp: metric.timestamp,
         severity
       });
@@ -365,9 +365,9 @@ export class AuthMonitoringService {
 
     metrics.forEach(metric => {
       const hour = new Date(metric.timestamp).getHours();
-      hours[hour].events++;
+      hours[hour]!.events++;
       if (!metric.success) {
-        hours[hour].errors++;
+        hours[hour]!.errors++;
       }
     });
 
@@ -535,11 +535,11 @@ export class AuthMonitoringService {
     // 실제 구현에서는 모니터링 대시보드로 전송
   }
 
-  private sendToSlack(alert: any) {
+  private sendToSlack(_alert: any) {
     // Slack 웹훅 연동
   }
 
-  private sendToPagerDuty(alert: any) {
+  private sendToPagerDuty(_alert: any) {
     // PagerDuty 연동
   }
 

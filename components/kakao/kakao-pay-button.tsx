@@ -6,7 +6,6 @@
  */
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, CreditCard } from 'lucide-react';

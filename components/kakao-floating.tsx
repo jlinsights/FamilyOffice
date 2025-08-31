@@ -1,6 +1,5 @@
 'use client';
 
-import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';

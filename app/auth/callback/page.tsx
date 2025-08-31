@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Loader2, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getSupabaseKakaoAuthService } from '@/lib/auth/supabase-kakao-auth';
+import { AlertCircle, CheckCircle, Loader2, XCircle } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
 
 function AuthCallbackContent() {
   const router = useRouter();
@@ -24,7 +24,7 @@ function AuthCallbackContent() {
         const error = searchParams.get('error');
         const errorDescription = searchParams.get('error_description');
         const accessToken = searchParams.get('access_token');
-        const refreshToken = searchParams.get('refresh_token');
+        // refreshToken은 디버그 섹션에서 사용됨
 
         if (error) {
           setStatus('error');

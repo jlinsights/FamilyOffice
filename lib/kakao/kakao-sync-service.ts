@@ -6,7 +6,7 @@
 import { createClient } from '@/lib/supabase/client';
 import { Database } from '@/types/supabase';
 
-type UserRecord = Database['public']['Tables']['users']['Row'];
+// type UserRecord = Database['public']['Tables']['users']['Row']; // 미사용
 type ConsultationRecord = Database['public']['Tables']['consultations']['Row'];
 
 interface KakaoMessageTemplate {
@@ -114,7 +114,7 @@ export class KakaoSyncService {
   /**
    * 카카오톡 채널 추가 안내
    */
-  async promoteChannelSubscription(userId: string): Promise<boolean> {
+  async promoteChannelSubscription(_userId: string): Promise<boolean> {
     if (!this.isEnabled || !this.channelId) return false;
 
     try {

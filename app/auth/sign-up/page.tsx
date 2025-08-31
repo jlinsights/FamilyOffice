@@ -1,6 +1,6 @@
 'use client';
 
-import KakaoLoginButton from '@/components/auth/kakao-login-button';
+import KakaoSignUpButton from '@/components/auth/kakao-signup-button';
 import { SignUpForm } from '@/components/auth/sign-up-form';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -115,16 +115,14 @@ export default function SignUpPage() {
               {/* 카카오 회원가입 */}
               <div className="space-y-4">
                 <Suspense fallback={<div>로딩 중...</div>}>
-                  <KakaoLoginButton 
+                  <KakaoSignUpButton 
                     fullWidth
                     size="lg"
                     onSuccess={() => {
                       // 회원가입 성공 시 대시보드로 리다이렉트
                       window.location.href = '/dashboard';
                     }}
-                  >
-                    카카오로 간편 회원가입
-                  </KakaoLoginButton>
+                  />
                 </Suspense>
                 
                 <p className="text-xs text-center text-muted-foreground">

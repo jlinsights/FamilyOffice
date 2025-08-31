@@ -8,7 +8,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Share2, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
 interface KakaoShareButtonProps {

@@ -20,13 +20,6 @@ interface AuthCache {
   expiresAt: number;
 }
 
-interface AuthMetrics {
-  loginAttempts: number;
-  lastLoginTime?: number;
-  failureCount: number;
-  lastFailureTime?: number;
-}
-
 export class EnhancedKakaoAuthService {
   private supabase;
   private cache = new Map<string, AuthCache>();
@@ -148,7 +141,7 @@ export class EnhancedKakaoAuthService {
         
         return {
           success: true,
-          expiresAt: data.session.expires_at
+          expiresAt: data.session.expires_at || Math.floor(Date.now() / 1000) + 3600
         };
       }
 
@@ -351,7 +344,7 @@ export class EnhancedKakaoAuthService {
     operationName: string,
     maxRetries = this.MAX_RETRY_ATTEMPTS
   ): Promise<T> {
-    let lastError: Error;
+    let lastError: Error = new Error('Unknown error');
     
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
@@ -456,14 +449,14 @@ export class EnhancedKakaoAuthService {
     }
   };
 
-  private sendToLoggingService(level: string, event: string, data?: any): void {
+  private sendToLoggingService(_level: string, _event: string, _data?: any): void {
     // 실제 구현 시 Sentry, LogRocket, DataDog 등 연동
     if (process.env.NODE_ENV === 'production') {
       // 로깅 서비스 연동 코드
     }
   }
 
-  private sendToErrorMonitoring(event: string, error: Error, data?: any): void {
+  private sendToErrorMonitoring(_event: string, _error: Error, _data?: any): void {
     // 실제 구현 시 에러 모니터링 서비스 연동
     if (process.env.NODE_ENV === 'production') {
       // 에러 모니터링 서비스 연동 코드

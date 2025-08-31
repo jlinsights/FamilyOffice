@@ -10,7 +10,6 @@ import { useToast } from '@/hooks/use-toast';
 import { getKakaoSyncService } from '@/lib/kakao/kakao-sync-service';
 import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 import {
-  MessageCircle,
   Bell,
   Users,
   Share2,
@@ -104,13 +103,8 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
   };
 
   const handleShare = () => {
-    const shareContent = {
-      title: 'FamilyOffice S - 성공한 CEO 전용 패밀리오피스',
-      description: '법인보험 × 가업승계 통합솔루션으로 성공한 기업가의 미래를 설계합니다.',
-      linkUrl: process.env.NEXT_PUBLIC_APP_URL
-    };
-
-    const success = getKakaoSyncService().constructor.shareToKakao(shareContent);
+    // 카카오톡 공유 기능은 향후 구현 예정
+    const success = false; // getKakaoSyncService().shareToKakao(shareContent);
     
     if (success) {
       toast({

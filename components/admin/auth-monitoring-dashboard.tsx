@@ -15,17 +15,14 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { 
   Activity, 
   Users, 
-  Shield, 
   AlertTriangle, 
   CheckCircle, 
   XCircle, 
   Clock, 
-  TrendingUp,
   RefreshCw,
   Eye,
   EyeOff,
-  Download,
-  Settings
+  Download
 } from 'lucide-react';
 import Image from 'next/image';
 import { getAuthMonitoringService } from '@/lib/monitoring/auth-monitoring';

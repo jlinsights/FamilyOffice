@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { BRAND_COLORS } from '@/constants/brand';
-import { Calendar, MessageCircle } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CalComPopup } from './cal-com-popup';
 import Image from 'next/image';

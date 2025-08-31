@@ -45,7 +45,7 @@ export class SupabaseKakaoAuthService {
    */
   async signInWithKakao(): Promise<SupabaseKakaoAuthResult> {
     try {
-      const { data, error } = await this.supabase.auth.signInWithOAuth({
+      const { data: _data, error } = await this.supabase.auth.signInWithOAuth({
         provider: 'kakao',
         options: {
           redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
@@ -282,7 +282,7 @@ export class SupabaseKakaoAuthService {
    * 인증 상태 변경 리스너 등록
    */
   onAuthStateChange(callback: (user: User | null, userRecord: UserRecord | null) => void) {
-    return this.supabase.auth.onAuthStateChange(async (event, session) => {
+    return this.supabase.auth.onAuthStateChange(async (_event, session) => {
       if (session?.user) {
         // 로그인 시 사용자 레코드 동기화
         const userRecord = await this.syncKakaoUserToDatabase(session.user);

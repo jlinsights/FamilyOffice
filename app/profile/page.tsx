@@ -16,7 +16,6 @@ import {
   Mail, 
   Calendar, 
   Shield, 
-  MessageCircle,
   Edit3,
   Save,
   X,

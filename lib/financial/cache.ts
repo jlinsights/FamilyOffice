@@ -10,7 +10,7 @@ import type {
 } from '../types/financial';
 import { recordCacheHit, recordCacheMiss } from './cache-monitoring';
 
-// SSR 안전성을 위한 dynamic imports
+// SSR 안전성을 위한 조건부 import
 let NodeCache: any = null;
 let memoryCache: any = null;
 let redisClient: any = null;
@@ -26,8 +26,9 @@ async function initializeNodeCache() {
 
   if (!NodeCache) {
     try {
-      const NodeCacheModule = await import('node-cache');
-      NodeCache = NodeCacheModule.default;
+      // node-cache 모듈을 직접 import
+      const NodeCacheModule = require('node-cache');
+      NodeCache = NodeCacheModule;
       memoryCache = new NodeCache({
         stdTTL: 300, // 5분 기본 TTL
         checkperiod: 60, // 1분마다 만료된 키 정리
