@@ -46,25 +46,9 @@ export function ScrollToTopFloating() {
 
   return (
     <div 
-      className={`scroll-to-top-floating-force scroll-to-top-mobile group transition-all duration-300 ${
+      className={`scroll-to-top-mobile group transition-all duration-300 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
-      style={{ 
-        zIndex: 999995,
-        position: 'fixed',
-        bottom: '24px', // 상담 예약 & 카카오톡 버튼과 적절한 간격
-        right: '16px',
-        pointerEvents: isVisible ? 'auto' : 'none',
-        // Force rendering context
-        transform: 'translateZ(0)',
-        willChange: 'transform',
-        // Ensure it's not affected by parent transforms
-        containIntrinsicSize: 'auto',
-        contain: 'layout style',
-        // 모바일에서도 항상 보이도록 설정
-        minHeight: 'auto',
-        maxHeight: 'none',
-      }}
     >
       {/* 호버 시 나타나는 툴팁 텍스트 */}
       <div 

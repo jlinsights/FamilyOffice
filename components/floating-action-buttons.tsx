@@ -28,21 +28,7 @@ export function FloatingActionButtons() {
   };
 
   return (
-    <div 
-      className="fixed bottom-20 right-4 md:bottom-24 md:right-6 z-[999999] flex flex-col gap-5 pointer-events-none floating-buttons-mobile"
-      style={{ 
-        position: 'fixed',
-        bottom: '120px', // Scroll to Top 버튼 위에 배치 (더 위쪽으로)
-        right: '16px',
-        zIndex: 999999,
-        // 모바일에서도 항상 보이도록 설정
-        minHeight: 'auto',
-        maxHeight: 'none',
-        // 항상 보이도록 설정
-        visibility: 'visible',
-        opacity: '1',
-      }}
-    >
+    <div className="floating-buttons-mobile">
       {/* 카카오톡 문의 버튼 */}
       <div className="relative group pointer-events-auto">
         {/* 호버 툴팁 */}
@@ -61,14 +47,18 @@ export function FloatingActionButtons() {
         <Button
           size="lg"
           onClick={handleKakaoTalk}
-          onMouseEnter={() => setIsHovered('kakao')}
-          onMouseLeave={() => setIsHovered(null)}
+          onMouseEnter={(e) => {
+            setIsHovered('kakao');
+            e.currentTarget.style.backgroundColor = '#FFED00';
+          }}
+          onMouseLeave={(e) => {
+            setIsHovered(null);
+            e.currentTarget.style.backgroundColor = '#FEE500';
+          }}
           className={`
             relative overflow-hidden
             shadow-2xl hover:shadow-3xl 
             transition-all duration-500 ease-out
-            bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 
-            hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700
             border-0
             text-white 
             font-semibold 
@@ -76,18 +66,22 @@ export function FloatingActionButtons() {
             w-14 h-14 md:w-16 md:h-16
             group-hover:scale-110 
             hover:rotate-[5deg]
-            focus:outline-none focus:ring-4 focus:ring-yellow-400/30
+            focus:outline-none focus:ring-4 focus:ring-[#FEE500]/30
             active:scale-95
             p-2
             flex items-center justify-center
           `}
+          style={{
+            backgroundColor: '#FEE500',
+            backgroundImage: 'none'
+          }}
         >
-          <div className="relative w-8 h-8 flex items-center justify-center">
+          <div className="relative w-10 h-10 flex items-center justify-center">
             <Image 
               src="/images/KAKAO/kakaotalk_sharing_btn/kakaotalk_sharing_btn_small.png" 
               alt="카카오톡" 
-              width={28} 
-              height={28} 
+              width={36} 
+              height={36} 
               className={`
                 transition-all duration-300 
                 ${isHovered === 'kakao' ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}
@@ -104,17 +98,24 @@ export function FloatingActionButtons() {
         </Button>
 
         {/* 맥동 효과 */}
-        <div className="absolute inset-0 rounded-full border-2 border-yellow-400/40 animate-pulse-ring pointer-events-none" />
         <div 
-          className="absolute inset-0 rounded-full border-2 border-yellow-400/20 animate-pulse-ring pointer-events-none"
-          style={{ animationDelay: '1s' }}
+          className="absolute inset-0 rounded-full border-2 animate-pulse-ring pointer-events-none" 
+          style={{ borderColor: '#FEE500', opacity: 0.4 }}
+        />
+        <div 
+          className="absolute inset-0 rounded-full border-2 animate-pulse-ring pointer-events-none"
+          style={{ 
+            borderColor: '#FEE500', 
+            opacity: 0.2,
+            animationDelay: '1s' 
+          }}
         />
         
         {/* 글로우 효과 */}
         <div 
           className={`
             absolute inset-0 rounded-full 
-            bg-yellow-400/20 blur-xl
+            blur-xl
             transition-all duration-500
             pointer-events-none
             ${isHovered === 'kakao' 
@@ -122,6 +123,10 @@ export function FloatingActionButtons() {
               : 'scale-100 opacity-30'
             }
           `}
+          style={{
+            backgroundColor: '#FEE500',
+            opacity: isHovered === 'kakao' ? 0.6 : 0.3
+          }}
         />
       </div>
 

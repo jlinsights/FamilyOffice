@@ -69,23 +69,32 @@
     font-display: swap;
   }
 
-  /* 플로팅 버튼 모바일 최적화 */
+  /* 플로팅 버튼 최적화 - 모든 디바이스에서 고정 위치 */
   .floating-buttons-mobile {
-    @media (max-width: 768px) {
-      bottom: 16px !important;
-      right: 16px !important;
-    }
+    position: fixed !important;
+    bottom: 100px !important;
+    right: 16px !important;
+    z-index: 9999 !important;
     /* 항상 보이도록 강제 설정 */
     visibility: visible !important;
     opacity: 1 !important;
     display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    pointer-events: none !important;
+    /* GPU 가속 */
+    transform: translateZ(0) !important;
+    will-change: transform !important;
   }
 
   .scroll-to-top-mobile {
-    @media (max-width: 768px) {
-      bottom: 16px !important;
-      right: 16px !important;
-    }
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 16px !important;
+    z-index: 9998 !important;
+    /* GPU 가속 */
+    transform: translateZ(0) !important;
+    will-change: transform !important;
   }
 
   /* 🚀 SuperClaude Performance Optimizations */
