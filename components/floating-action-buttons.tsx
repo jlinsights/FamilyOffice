@@ -4,18 +4,11 @@ import { Button } from '@/components/ui/button';
 import { BRAND_COLORS } from '@/constants/brand';
 import { Calendar } from 'lucide-react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CalComPopup } from './cal-com-popup';
 
 export function FloatingActionButtons() {
   const [isHovered, setIsHovered] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   const handleKakaoTalk = () => {
     // 카카오톡 채널 추가 또는 1:1 채팅 시작
@@ -56,6 +49,7 @@ export function FloatingActionButtons() {
             e.currentTarget.style.backgroundColor = '#FEE500';
           }}
           className={`
+            mobile-touch-target
             relative overflow-hidden
             shadow-2xl hover:shadow-3xl 
             transition-all duration-500 ease-out
@@ -151,28 +145,29 @@ export function FloatingActionButtons() {
               size="lg"
               onMouseEnter={() => setIsHovered('consultation')}
               onMouseLeave={() => setIsHovered(null)}
-                          className={`
-              relative overflow-hidden
-              shadow-2xl hover:shadow-3xl 
-              transition-all duration-500 ease-out
-              bg-gradient-to-br from-primary via-primary to-primary/80 
-              hover:from-primary/90 hover:via-primary hover:to-primary/70
-              text-primary-foreground 
-              font-semibold 
-              rounded-full 
-              w-14 h-16 md:w-16 md:h-16
-              group-hover:scale-110 
-              hover:rotate-[5deg]
-              focus:outline-none focus:ring-4 focus:ring-primary/30
-              active:scale-95
-              before:absolute before:inset-0 
-              before:bg-white/10 before:rounded-full 
-              before:opacity-0 before:transition-opacity before:duration-300
-              hover:before:opacity-100
-              after:absolute after:inset-0 
-              after:bg-gradient-to-tr after:from-transparent after:via-white/5 after:to-white/10
-              after:rounded-full after:pointer-events-none
-            `}
+              className={`
+                mobile-touch-target
+                relative overflow-hidden
+                shadow-2xl hover:shadow-3xl 
+                transition-all duration-500 ease-out
+                bg-gradient-to-br from-primary via-primary to-primary/80 
+                hover:from-primary/90 hover:via-primary hover:to-primary/70
+                text-primary-foreground 
+                font-semibold 
+                rounded-full 
+                w-14 h-14 md:w-16 md:h-16
+                group-hover:scale-110 
+                hover:rotate-[5deg]
+                focus:outline-none focus:ring-4 focus:ring-primary/30
+                active:scale-95
+                before:absolute before:inset-0 
+                before:bg-white/10 before:rounded-full 
+                before:opacity-0 before:transition-opacity before:duration-300
+                hover:before:opacity-100
+                after:absolute after:inset-0 
+                after:bg-gradient-to-tr after:from-transparent after:via-white/5 after:to-white/10
+                after:rounded-full after:pointer-events-none
+              `}
             >
               <Calendar 
                 className={`

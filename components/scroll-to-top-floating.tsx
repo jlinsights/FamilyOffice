@@ -70,14 +70,15 @@ export function ScrollToTopFloating() {
         onMouseLeave={() => setIsHovered(false)}
         style={{ zIndex: 999995 }}
         className={`
+          mobile-touch-target
           relative overflow-hidden
           shadow-2xl hover:shadow-3xl 
           transition-all duration-500 ease-out
           bg-[#3B4455] hover:bg-[#2A3142]
           text-white 
           font-semibold 
-                        rounded-full 
-              w-14 h-14 md:w-16 md:h-16
+          rounded-full 
+          w-14 h-14 md:w-16 md:h-16
           group-hover:scale-110 
           hover:rotate-[5deg]
           focus:outline-none focus:ring-4 focus:ring-[#3B4455]/30

@@ -74,7 +74,7 @@ export default function HomePage() {
   const aiOptimizedData = generateStructuredData('AIOptimized');
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="mobile-scroll-smooth cls-safe min-h-screen bg-background">
       <StructuredData data={organizationData} />
       <StructuredData data={localBusinessData} />
       <StructuredData data={websiteData} />
@@ -94,10 +94,10 @@ export default function HomePage() {
                 Premium AI Consulting
               </Badge>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="mobile-text-optimize text-3xl md:text-4xl font-bold text-foreground mb-4">
               지금 바로 물어보세요
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="mobile-text-optimize text-lg text-muted-foreground max-w-2xl mx-auto">
               복잡한 가업승계, 세무전략, M&A 구조화까지. 
               귀사만의 고유한 상황을 이해하고 최적화된 해법을 제시합니다.
               전문가의 통찰력을 AI가 24시간 제공합니다.
@@ -120,7 +120,7 @@ export default function HomePage() {
       {/* <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-8">
+            <h2 className="mobile-text-optimize text-3xl font-bold text-foreground mb-8">
               클라이언트 기능 테스트
             </h2>
             <TestButton />
@@ -128,7 +128,9 @@ export default function HomePage() {
         </div>
       </section> */}
       
-      <Footer />
+      <div className="safe-area-bottom">
+        <Footer />
+      </div>
     </div>
   );
 }

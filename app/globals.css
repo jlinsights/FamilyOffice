@@ -85,6 +85,13 @@
     /* GPU 가속 */
     transform: translateZ(0) !important;
     will-change: transform !important;
+    /* 모바일 터치 최적화 */
+    touch-action: manipulation !important;
+  }
+
+  /* 플로팅 버튼 내부 요소는 터치 이벤트 활성화 */
+  .floating-buttons-mobile > * {
+    pointer-events: auto !important;
   }
 
   .scroll-to-top-mobile {
@@ -116,6 +123,74 @@
     touch-action: manipulation;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 📱 모바일 터치 최적화 */
+  .mobile-touch-target {
+    /* 최소 터치 타겟 크기: 44px × 44px (Apple HIG 기준) */
+    min-width: 44px !important;
+    min-height: 44px !important;
+    /* 터치 영역 확장 */
+    padding: 8px !important;
+    /* 터치 피드백 개선 */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    -webkit-touch-callout: none;
+    /* 터치 딜레이 제거 */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* 모바일 텍스트 가독성 개선 */
+  .mobile-text-optimize {
+    /* 한국어 텍스트 최적화 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* 모바일 최적화 line-height */
+    line-height: 1.6;
+    /* 모바일에서 텍스트 크기 조정 방지 */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* 모바일 스크롤 최적화 */
+  .mobile-scroll-smooth {
+    /* iOS Safari 부드러운 스크롤 */
+    -webkit-overflow-scrolling: touch;
+    /* 스크롤 성능 최적화 */
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+
+  /* 한국 모바일 환경 특화 */
+  @media screen and (max-width: 768px) {
+    /* 갤럭시 S 시리즈 대응 (360px-414px) */
+    .korean-mobile-text {
+      font-size: 16px !important; /* iOS Safari 줌 방지 */
+      line-height: 1.5 !important;
+    }
+    
+    /* 모바일 버튼 간격 개선 */
+    .mobile-button-spacing {
+      margin: 12px 8px !important;
+    }
+    
+    /* 모바일 카드 패딩 최적화 */
+    .mobile-card-padding {
+      padding: 16px 12px !important;
+    }
+  }
+
+  /* 아이폰 X 이상 Safe Area 대응 */
+  @supports (padding: max(0px)) {
+    .safe-area-bottom {
+      padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
+    }
+    
+    .safe-area-top {
+      padding-top: max(16px, env(safe-area-inset-top)) !important;
+    }
   }
 }
 

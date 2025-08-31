@@ -26,7 +26,7 @@ export const HeroSection = memo(function HeroSection() {
   return (
     <section
       id="hero"
-      className="priority-content relative w-full min-h-screen lg:min-h-[100vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-16 lg:pt-20"
+      className="mobile-scroll-smooth hero-section-optimized priority-content relative w-full min-h-screen lg:min-h-[100vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-16 lg:pt-20 safe-area-top"
     >
       {/* 배경 그라데이션 효과 */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
@@ -45,7 +45,7 @@ export const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* 메인 헤드라인 */}
-        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl leading-tight mb-6 sm:mb-8 lg:mb-10 text-primary whitespace-pre-line animate-slide-up">
+        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl leading-tight mb-6 sm:mb-8 lg:mb-10 text-primary whitespace-pre-line animate-slide-up">
           百年永續
         </h1>
 
