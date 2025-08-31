@@ -189,7 +189,7 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       bio: '중대재해처벌법 및 기업 법무 전문가로서 기업의 법적 리스크 관리와 대응 전략 수립을 담당합니다.',
       expertise: ['중대재해처벌법', '기업법무', '리스크관리', '컴플라이언스'],
     },
-    date: '2025-09-15',
+    date: '2025-10-17',
     time: '10:30',
     duration: '2시간',
     location: {
