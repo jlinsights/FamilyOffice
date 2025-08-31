@@ -13,8 +13,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
-import { useKakaoAuth } from '@/hooks/use-kakao-auth';
+import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface UserProfileDropdownProps {
   className?: string;
@@ -30,7 +31,7 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
     email,
     signOut,
     isKakaoUser
-  } = useKakaoAuth();
+  } = useSupabaseKakaoAuth();
   const [isSigningOut, setIsSigningOut] = useState(false);
 
   const handleSignOut = async () => {
@@ -73,10 +74,16 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
                 {displayName}
               </span>
               {isKakaoUser && (
-                <Badge variant="secondary" className="h-4 px-1 text-xs mt-1">
-                  <MessageCircle className="h-2 w-2 mr-1" />
-                  카카오
-                </Badge>
+                <div className="h-4 px-1 text-xs mt-1 bg-[#FEE500] text-[#3C1E1E] rounded flex items-center space-x-1">
+                  <Image 
+                    src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
+                    alt="카카오" 
+                    width={8} 
+                    height={8} 
+                    className="rounded-sm"
+                  />
+                  <span>카카오</span>
+                </div>
               )}
             </div>
             <ChevronDown className="h-4 w-4 text-muted-foreground" />
@@ -103,10 +110,16 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
                 )}
                 {isKakaoUser && (
                   <div className="flex items-center mt-1">
-                    <Badge variant="secondary" className="h-4 px-1 text-xs">
-                      <MessageCircle className="h-2 w-2 mr-1" />
-                      카카오 연동됨
-                    </Badge>
+                    <div className="h-4 px-1 text-xs bg-[#FEE500] text-[#3C1E1E] rounded flex items-center space-x-1">
+                      <Image 
+                        src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
+                        alt="카카오" 
+                        width={8} 
+                        height={8} 
+                        className="rounded-sm"
+                      />
+                      <span>카카오 연동됨</span>
+                    </div>
                   </div>
                 )}
               </div>
@@ -142,7 +155,13 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
                 }
               }}
             >
-              <MessageCircle className="mr-2 h-4 w-4" />
+              <Image 
+                src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
+                alt="카카오" 
+                width={16} 
+                height={16} 
+                className="mr-2 rounded-sm"
+              />
               <span>카카오톡 상담</span>
             </button>
           </DropdownMenuItem>

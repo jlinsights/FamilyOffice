@@ -2,13 +2,12 @@
 
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { type KakaoAuthResult } from '@/lib/auth/kakao-auth';
+import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 import { Loader2 } from 'lucide-react';
-import { useState } from 'react';
 import Image from 'next/image';
 
-interface KakaoLoginButtonProps {
-  onSuccess?: (result: KakaoAuthResult) => void;
+interface SupabaseKakaoLoginButtonProps {
+  onSuccess?: () => void;
   onError?: (error: string) => void;
   variant?: 'default' | 'outline' | 'secondary' | 'kakao';
   size?: 'sm' | 'default' | 'lg';
@@ -18,7 +17,7 @@ interface KakaoLoginButtonProps {
   children?: React.ReactNode;
 }
 
-export function KakaoLoginButton({
+export function SupabaseKakaoLoginButton({
   onSuccess,
   onError,
   variant = 'kakao',
@@ -27,41 +26,29 @@ export function KakaoLoginButton({
   showIcon = true,
   useOfficialImage = true,
   children
-}: KakaoLoginButtonProps) {
-  const [isLoading, setIsLoading] = useState(false);
+}: SupabaseKakaoLoginButtonProps) {
+  const { signInWithKakao, isLoading } = useSupabaseKakaoAuth();
   const { toast } = useToast();
 
   const handleKakaoLogin = async () => {
-    setIsLoading(true);
-    
     try {
-      // 카카오싱크 방식으로 리다이렉트
-      const redirectUri = `${process.env.NEXT_PUBLIC_APP_URL}/oauth`;
-      const clientId = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
+      const result = await signInWithKakao();
       
-      if (!clientId) {
-        throw new Error('카카오 JavaScript 키가 설정되지 않았습니다.');
-      }
-
-      // 카카오 OAuth URL 생성
-      const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?` +
-        `client_id=${clientId}&` +
-        `redirect_uri=${encodeURIComponent(redirectUri)}&` +
-        `response_type=code&` +
-        `state=${Math.random().toString(36).substring(7)}`;
-
-      // 카카오 인증 페이지로 리다이렉트
-      window.location.href = kakaoAuthUrl;
-      
-      // onSuccess 콜백 호출 (리다이렉트 전)
-      if (onSuccess) {
-        onSuccess({
-          success: true
+      if (result.success) {
+        toast({
+          title: '카카오 로그인',
+          description: '카카오 인증 페이지로 이동합니다.',
         });
+        onSuccess?.();
+      } else {
+        toast({
+          title: '로그인 오류',
+          description: result.error || '카카오 로그인에 실패했습니다.',
+          variant: 'destructive',
+        });
+        onError?.(result.error || '알 수 없는 오류');
       }
-      
     } catch (error) {
-      setIsLoading(false);
       const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
       toast({
         title: '로그인 오류',
@@ -146,4 +133,4 @@ export function KakaoLoginButton({
   );
 }
 
-export default KakaoLoginButton;
+export default SupabaseKakaoLoginButton;

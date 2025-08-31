@@ -5,6 +5,7 @@ import { BRAND_COLORS } from '@/constants/brand';
 import { Calendar, MessageCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CalComPopup } from './cal-com-popup';
+import Image from 'next/image';
 
 export function FloatingActionButtons() {
   const [isHovered, setIsHovered] = useState<string | null>(null);
@@ -85,9 +86,12 @@ export function FloatingActionButtons() {
               after:rounded-full after:pointer-events-none
             `}
         >
-          <MessageCircle 
+          <Image 
+            src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
+            alt="카카오톡" 
+            width={24} 
+            height={24} 
             className={`
-              h-6 w-6 md:h-7 md:w-7 
               transition-all duration-300 
               ${isHovered === 'kakao' ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}
               drop-shadow-sm

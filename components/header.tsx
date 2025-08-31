@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { SamsungFinancialNetworksLogo } from '@/components/logo';
 import { UserProfileDropdown } from '@/components/auth/user-profile-dropdown';
-import { useKakaoAuth } from '@/hooks/use-kakao-auth';
+import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 
@@ -28,7 +28,7 @@ export const Header = memo(function Header({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const { isAuthenticated, isLoading } = useKakaoAuth();
+  const { isAuthenticated, isLoading } = useSupabaseKakaoAuth();
 
   useEffect(() => {
     setMounted(true);
