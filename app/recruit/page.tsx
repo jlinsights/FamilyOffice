@@ -1,31 +1,31 @@
 'use client';
 
 import {
-  TrendingUp,
-  Award,
-  Mail,
-  MapPin,
-  Clock,
-  Building,
-  Heart,
-  Briefcase,
-  Users,
-  CheckCircle,
-  Star,
-  Phone,
-  GraduationCap,
-  Play,
-  Headphones,
-  ExternalLink,
+    Award,
+    Briefcase,
+    Building,
+    CheckCircle,
+    Clock,
+    ExternalLink,
+    GraduationCap,
+    Headphones,
+    Heart,
+    Mail,
+    MapPin,
+    Phone,
+    Play,
+    Star,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
-import { useEffect, useState, useCallback } from 'react';
 import Script from 'next/script';
+import { useCallback, useEffect, useState } from 'react';
 
+import { CalComPopup } from '@/components/cal-com-popup';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalComPopup } from '@/components/cal-com-popup';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 import { Footer } from '@/components/footer';
@@ -380,6 +380,7 @@ export default function RecruitPage() {
                     <div className="relative">
                       <YouTubeEmbed
                         videoId="YK1IRyUrxtk"
+                        title="삼성생명 GFC 성공 스토리"
                         className="w-full aspect-video rounded-xl overflow-hidden shadow-2xl"
                       />
                     </div>
