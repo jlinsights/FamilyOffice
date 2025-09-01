@@ -328,7 +328,7 @@ export default function PolicyFundsPage() {
                         <AnimatedCounter
                           end={stat.value}
                           duration={2000}
-                          start={startAnimation}
+                          startAnimation={startAnimation}
                           suffix={stat.suffix}
                           easingFunction={easingFunction}
                         />
@@ -342,11 +342,9 @@ export default function PolicyFundsPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <CalComPopup
                   calLink="samsung-life-gfc-qjwjd4vhnr3cklsf"
+                  buttonText="정책자금 무료 상담"
                   className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <Phone className="w-5 h-5 mr-2" />
-                  정책자금 무료 상담
-                </CalComPopup>
+                />
                 
                 <Button 
                   variant="outline" 
@@ -569,11 +567,9 @@ export default function PolicyFundsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <CalComPopup
                 calLink="samsung-life-gfc-qjwjd4vhnr3cklsf"
+                buttonText="무료 정책자금 상담 예약"
                 className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                무료 정책자금 상담 예약
-              </CalComPopup>
+              />
               
               <Button 
                 variant="outline" 

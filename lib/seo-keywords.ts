@@ -228,7 +228,7 @@ export function calculateSEOScore(content: string, targetKeyword: string): {
 
   // 제목 태그 확인
   const h1Match = content.match(/<h1[^>]*>(.*?)<\/h1>/i);
-  if (h1Match && h1Match[1].toLowerCase().includes(targetKeyword.toLowerCase())) {
+  if (h1Match && h1Match[1]?.toLowerCase().includes(targetKeyword.toLowerCase())) {
     score += 25;
   } else {
     suggestions.push('H1 태그에 타겟 키워드를 포함해주세요');
@@ -236,7 +236,7 @@ export function calculateSEOScore(content: string, targetKeyword: string): {
 
   // 메타 설명 길이 확인 (120-160자 권장)
   const metaDesc = content.match(/description.*?content=['"]([^'"]*)['"]/i);
-  if (metaDesc) {
+  if (metaDesc && metaDesc[1]) {
     const descLength = metaDesc[1].length;
     if (descLength >= 120 && descLength <= 160) {
       score += 15;
@@ -358,7 +358,7 @@ export function getContentRecommendations(currentKeywords: string[]): {
 } {
   const allTargetKeywords = Object.keys(targetKeywords);
   const missingPages = allTargetKeywords.filter(keyword => 
-    !currentKeywords.includes(targetKeywords[keyword].primary)
+    !currentKeywords.includes(targetKeywords[keyword]?.primary || '')
   );
 
   const contentGaps = [

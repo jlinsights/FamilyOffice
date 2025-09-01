@@ -244,10 +244,10 @@ export default function GroupInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={100} 
+                        start={0} 
+                        end={100} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}%
                   </div>
@@ -257,10 +257,10 @@ export default function GroupInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={95} 
+                        start={0} 
+                        end={95} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}%
                   </div>
@@ -270,10 +270,10 @@ export default function GroupInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={30} 
+                        start={0} 
+                        end={30} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}%
                   </div>
@@ -283,10 +283,10 @@ export default function GroupInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={1} 
+                        start={0} 
+                        end={1} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}만원
                   </div>

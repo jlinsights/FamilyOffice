@@ -201,10 +201,10 @@ export default function KeyPersonInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={60} 
+                        start={0} 
+                        end={60} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}%
                   </div>
@@ -214,10 +214,10 @@ export default function KeyPersonInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={50} 
+                        start={0} 
+                        end={50} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}억
                   </div>
@@ -227,12 +227,11 @@ export default function KeyPersonInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={3.5} 
+                        start={0} 
+                        end={3.5} 
                         duration={2000}
-                        easing={easingFunction}
-                        decimals={1}
-                      />
+                        easingFunction={easingFunction}
+                                              />
                     )}%
                   </div>
                   <p className="text-sm text-blue-200">예상 수익률</p>
@@ -241,10 +240,10 @@ export default function KeyPersonInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={55} 
+                        start={0} 
+                        end={55} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}세
                   </div>

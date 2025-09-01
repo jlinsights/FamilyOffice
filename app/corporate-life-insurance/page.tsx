@@ -266,8 +266,7 @@ export default function CorporateLifeInsurancePage() {
                         end={27.5} 
                         duration={2000}
                         easingFunction={easingFunction}
-                        decimals={1}
-                      />
+                                              />
                     )}%
                   </div>
                   <p className="text-sm text-blue-200">법인세율</p>
@@ -293,8 +292,7 @@ export default function CorporateLifeInsurancePage() {
                         end={3.8} 
                         duration={2000}
                         easingFunction={easingFunction}
-                        decimals={1}
-                      />
+                                              />
                     )}%
                   </div>
                   <p className="text-sm text-blue-200">예상수익률</p>

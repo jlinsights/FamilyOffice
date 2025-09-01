@@ -300,10 +300,10 @@ export default function InheritanceGiftPage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={50} 
+                        start={0} 
+                        end={50} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}%
                   </div>
@@ -313,10 +313,10 @@ export default function InheritanceGiftPage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={6} 
+                        start={0} 
+                        end={6} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}억
                   </div>
@@ -326,10 +326,10 @@ export default function InheritanceGiftPage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={300} 
+                        start={0} 
+                        end={300} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}억
                   </div>
@@ -339,10 +339,10 @@ export default function InheritanceGiftPage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={60} 
+                        start={0} 
+                        end={60} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}%
                   </div>
