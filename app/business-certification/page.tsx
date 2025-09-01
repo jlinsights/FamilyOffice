@@ -448,7 +448,7 @@ export default function BusinessCertificationPage() {
                         <AnimatedCounter
                           end={stat.value}
                           duration={2000}
-                          start={startAnimation}
+                          startAnimation={startAnimation}
                           suffix={stat.suffix}
                           easingFunction={easingFunction}
                         />
@@ -462,11 +462,9 @@ export default function BusinessCertificationPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <CalComPopup
                   calLink="samsung-life-gfc-qjwjd4vhnr3cklsf"
+                  buttonText="기업인증 무료 상담"
                   className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
-                >
-                  <Phone className="w-5 h-5 mr-2" />
-                  기업인증 무료 상담
-                </CalComPopup>
+                />
                 
                 <Button 
                   variant="outline" 
@@ -778,11 +776,9 @@ export default function BusinessCertificationPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <CalComPopup
                 calLink="samsung-life-gfc-qjwjd4vhnr3cklsf"
+                buttonText="무료 기업인증 상담 예약"
                 className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                무료 기업인증 상담 예약
-              </CalComPopup>
+              />
               
               <Button 
                 variant="outline" 

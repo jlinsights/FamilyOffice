@@ -262,10 +262,10 @@ export default function CorporateLifeInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={27.5} 
+                        start={0} 
+                        end={27.5} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                         decimals={1}
                       />
                     )}%
@@ -276,10 +276,10 @@ export default function CorporateLifeInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={100} 
+                        start={0} 
+                        end={100} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}%
                   </div>
@@ -289,10 +289,10 @@ export default function CorporateLifeInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={3.8} 
+                        start={0} 
+                        end={3.8} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                         decimals={1}
                       />
                     )}%
@@ -303,10 +303,10 @@ export default function CorporateLifeInsurancePage() {
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
-                        from={0} 
-                        to={100} 
+                        start={0} 
+                        end={100} 
                         duration={2000}
-                        easing={easingFunction}
+                        easingFunction={easingFunction}
                       />
                     )}억
                   </div>
