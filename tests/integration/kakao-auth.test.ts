@@ -8,7 +8,6 @@ import { createClient } from '@/lib/supabase/client';
 import { getEnhancedKakaoAuthService } from '@/lib/auth/enhanced-kakao-auth';
 import { getKakaoBusinessAPIService } from '@/lib/kakao/kakao-business-api';
 import { getAuthMonitoringService } from '@/lib/monitoring/auth-monitoring';
-import type { User } from '@supabase/supabase-js';
 
 // 테스트용 Mock 데이터
 const mockKakaoProfile = {
@@ -27,19 +26,6 @@ const mockKakaoProfile = {
       profile_image_url: 'https://example.com/profile.jpg'
     }
   }
-};
-
-const mockUser: Partial<User> = {
-  id: 'test-user-id',
-  email: 'test@example.com',
-  user_metadata: {
-    full_name: '홍길동',
-    avatar_url: 'https://example.com/profile.jpg',
-    provider_id: '12345678'
-  },
-  app_metadata: {},
-  aud: 'authenticated',
-  created_at: new Date().toISOString()
 };
 
 describe('카카오 인증 시스템 통합 테스트', () => {
@@ -82,14 +68,6 @@ describe('카카오 인증 시스템 통합 테스트', () => {
     });
 
     test('토큰 갱신 메커니즘', async () => {
-      // Mock session with near-expiry token
-      const mockSession = {
-        access_token: 'mock-token',
-        refresh_token: 'mock-refresh',
-        expires_at: Math.floor(Date.now() / 1000) + 200, // 3분 20초 후 만료
-        user: mockUser as User
-      };
-
       // 토큰 만료 확인 및 갱신 테스트
       const needsRefresh = await authService.ensureValidToken();
       
@@ -138,8 +116,7 @@ describe('카카오 인증 시스템 통합 테스트', () => {
 
     test('프로필 업데이트 및 롤백', async () => {
       const testUserId = 'test-update-user';
-      const originalData = { display_name: '원본 이름' };
-      const updatedData = { display_name: '수정된 이름' };
+      const updatedData = { name: '수정된 이름' };
       
       // 프로필 업데이트 시도
       const updateResult = await authService.updateProfileWithRollback(
@@ -342,7 +319,7 @@ describe('카카오 인증 시스템 통합 테스트', () => {
       
       const result = await authService.updateProfileWithRollback(
         'test-user',
-        { display_name: maliciousInput }
+        { name: maliciousInput }
       );
       
       // Supabase는 자동으로 SQL 인젝션을 방지함

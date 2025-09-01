@@ -83,15 +83,6 @@ const createLazyComponent = (
 };
 
 // Heavy components with lazy loading and error handling
-export const LazyFinancialDashboard = createLazyComponent(
-  () => import('@/components/asset-management-dashboard'),
-  'FinancialDashboard'
-);
-
-export const LazyAssetManagementDashboard = createLazyComponent(
-  () => import('@/components/asset-management-dashboard'),
-  'AssetManagementDashboard'
-);
 
 export const LazyKoreanMarketInsight = createLazyComponent(
   () => import('@/components/korean-market-insight'),
@@ -242,8 +233,6 @@ export const loadFeature = async (
 
   try {
     switch (featureName) {
-      case 'financial':
-        return await import('@/components/asset-management-dashboard');
       case 'consulting':
         return await import('@/components/forms/consultation-form');
       case 'analytics':
