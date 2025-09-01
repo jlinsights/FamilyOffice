@@ -26,17 +26,30 @@ import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
-import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
+import { generateMetadata } from '@/lib/seo';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return generateSEOMetadata({
-    title: '퇴직연금 컨설팅 | 확정기여형·확정급여형 | 패밀리오피스',
-    description: '개인형퇴직연금(IRP)부터 기업형 퇴직연금(DC/DB)까지. 퇴직연금 설계, 운용, 이전 등 종합 컨설팅 서비스를 제공합니다.',
-    keywords: '퇴직연금, IRP, 개인형퇴직연금, 확정기여형, 확정급여형, DC형, DB형, 퇴직연금 운용, 퇴직연금 이전',
-    businessStage: '성숙기',
-    path: '/retirement-pension'
-  });
-}
+export const metadata: Metadata = generateMetadata(
+  '퇴직연금 컨설팅 | 확정기여형·확정급여형 | 패밀리오피스',
+  '개인형퇴직연금(IRP)부터 기업형 퇴직연금(DC/DB)까지. 퇴직연금 설계, 운용, 이전 등 종합 컨설팅 서비스를 제공합니다.',
+  [
+    '퇴직연금',
+    'IRP',
+    '개인형퇴직연금',
+    '확정기여형',
+    '확정급여형',
+    'DC형',
+    'DB형',
+    '퇴직연금 운용',
+    '퇴직연금 이전',
+    '세액공제',
+    '은퇴설계',
+    '노후준비'
+  ],
+  undefined,
+  '전문가급',
+  '성숙기',
+  'commercial'
+);
 
 export default function RetirementPensionPage() {
   const structuredData = {

@@ -23,17 +23,30 @@ import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
-import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
+import { generateMetadata } from '@/lib/seo';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return generateSEOMetadata({
-    title: '개인/법인 건강보험 | 맞춤형 건강보장 솔루션 | 패밀리오피스',
-    description: '개인과 법인을 위한 종합 건강보험 솔루션. 질병보험, 실손의료비, 건강관리서비스까지 원스톱 건강보장 설계를 제공합니다.',
-    keywords: '건강보험, 실손의료비, 질병보험, 법인건강보험, 단체건강보험, 건강관리, 의료비보장, 건강검진',
-    businessStage: '성장기',
-    path: '/health-insurance'
-  });
-}
+export const metadata: Metadata = generateMetadata(
+  '개인/법인 건강보험 | 맞춤형 건강보장 솔루션 | 패밀리오피스',
+  '개인과 법인을 위한 종합 건강보험 솔루션. 질병보험, 실손의료비, 건강관리서비스까지 원스톱 건강보장 설계를 제공합니다.',
+  [
+    '건강보험',
+    '실손의료비',
+    '질병보험',
+    '법인건강보험',
+    '단체건강보험',
+    '건강관리',
+    '의료비보장',
+    '건강검진',
+    '개인건강보험',
+    '중대질병보험',
+    '의료비절감',
+    '건강보험료최적화'
+  ],
+  undefined,
+  '전문가급',
+  '성장기',
+  'commercial'
+);
 
 export default function HealthInsurancePage() {
   const structuredData = {
