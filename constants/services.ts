@@ -57,6 +57,38 @@ export interface IndustryService {
 }
 
 /**
+ * SEO 페이지 매핑 정의
+ */
+export const SEO_PAGE_MAPPING: { [key: string]: string } = {
+  '가업승계지원 제도 컨설팅': '/business-succession',
+  '가업주식증여특례': '/business-succession',
+  '가업상속공제': '/business-succession',
+  '자녀법인 활용 전략': '/business-succession',
+  '창업자금증여특례': '/business-succession',
+  '법인계약 세무회계': '/tax-planning',
+  '보험계약 상증세법 컨설팅': '/tax-planning',
+  '개인사업자 법인전환': '/tax-planning',
+  '경정청구 컨설팅': '/tax-planning',
+  '가지급금 컨설팅': '/estate-planning',
+  '자기주식 컨설팅': '/estate-planning',
+  '차명주식 컨설팅': '/estate-planning',
+  '법인종합재무 컨설팅': '/estate-planning',
+  '상환전환우선주 발행': '/investment-advisory',
+  '중소기업 자금조달': '/investment-advisory',
+  '비상장주식 가치평가': '/investment-advisory',
+  '기업연구소 및 정책자금 컨설팅': '/policy-funds',
+  '유상증자 컨설팅': '/asset-diversification',
+  '스톡옵션 설계': '/asset-diversification',
+  '기업인증 컨설팅': '/business-certification',
+  '법인 재무제표 분석': '/portfolio-optimization',
+  '양수도거래 컨설팅': '/portfolio-optimization',
+  '세법개정안 분석': '/portfolio-optimization',
+  '세무조정계산서의 이해': '/portfolio-optimization',
+  '고액자산가 자산관리': '/wealth-consulting',
+  '부유층 자산관리 컨설팅': '/wealth-consulting'
+};
+
+/**
  * 전문 서비스 카테고리별 상세 서비스
  */
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -557,6 +589,51 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         benefits: ['세무신고 정확성 제고', '절세 기회 확대', '세무 역량 강화'],
         targetClient: '세무조정에 어려움을 겪는 기업',
+      },
+    ],
+  },
+  {
+    id: 'wealth-management',
+    title: '고액자산가 & 부유층 관리',
+    description: '고액자산가를 위한 전문적인 자산관리 및 부유층 맞춤 서비스',
+    icon: TrendingUp,
+    services: [
+      {
+        title: '고액자산가 자산관리',
+        description: '100억원 이상 고액자산가를 위한 종합 자산관리 서비스',
+        features: [
+          '개인별 맞춤형 포트폴리오 구성',
+          '글로벌 자산 배분 전략',
+          '세무 최적화 방안',
+          '위험 관리 솔루션',
+        ],
+        benefits: [
+          '체계적인 자산 보전',
+          '수익성 극대화',
+          '세무 효율성 제고',
+        ],
+        targetClient: '100억원 이상 고액자산가',
+        caseStudy: {
+          situation: '제조업 오너 D씨, 500억원 자산의 체계적 관리 필요',
+          solution: '글로벌 자산배분, 세무최적화, 리스크헤지를 통한 통합 자산관리',
+          result: '연 15% 수익률 달성, 세금 부담 30% 절감',
+        },
+      },
+      {
+        title: '부유층 자산관리 컨설팅',
+        description: '중상류층을 위한 전문적이고 체계적인 자산관리 컨설팅',
+        features: [
+          '자산 규모별 맞춤 전략',
+          '다양한 투자 상품 포트폴리오',
+          '세대간 자산 승계 설계',
+          '정기적인 자산 점검',
+        ],
+        benefits: [
+          '안정적인 자산 증식',
+          '리스크 분산',
+          '승계 준비',
+        ],
+        targetClient: '50억원 이상 중상류층',
       },
     ],
   },

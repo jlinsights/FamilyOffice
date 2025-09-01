@@ -17,7 +17,7 @@ import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
-import { SERVICE_CATEGORIES } from '@/constants/services';
+import { SERVICE_CATEGORIES, SEO_PAGE_MAPPING } from '@/constants/services';
 import { generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/structured-data';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
@@ -219,6 +219,13 @@ const ServicePageContent = () => {
                 >
                   투자금융
                 </Button>
+                <Button
+                  variant={selectedCategory === 'wealth-management' ? 'default' : 'outline'}
+                  onClick={() => setSelectedCategory('wealth-management')}
+                  className="font-semibold"
+                >
+                  고액자산가
+                </Button>
               </div>
             </div>
 
@@ -263,7 +270,7 @@ const ServicePageContent = () => {
                         className="flex-1 bg-primary hover:bg-primary/90 text-white"
                         size="sm"
                       >
-                        <Link href={`/solutions/${category.id}/${service.title.replace(/\s+/g, '-').toLowerCase()}`}>
+                        <Link href={SEO_PAGE_MAPPING[service.title] || `/solutions/${category.id}/${service.title.replace(/\s+/g, '-').toLowerCase()}`}>
                           더 알아보기
                         </Link>
                       </Button>
