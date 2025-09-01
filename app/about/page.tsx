@@ -123,8 +123,9 @@ export default function AboutPage() {
               style={{ animationDelay: '450ms' }}
             >
               <p className="bg-muted/50 rounded-lg px-4 py-3 border border-border/50">
-                <span className="font-semibold text-foreground">삼성생명/삼성화재 공식 파트너</span>로서{' '}
-                <span className="text-primary">독립적 관점</span>에서 작성되었습니다.
+                <span className="font-semibold text-foreground">삼성생명 소속</span>으로{' '}
+                <span className="text-primary">대한민국 최고 보험사의 전문성</span>을 바탕으로 작성되었습니다.{' '}
+                <span className="text-sm text-muted-foreground">(삼성화재 교차 판매 가능)</span>
               </p>
               <p className="bg-muted/50 rounded-lg px-4 py-3 border border-border/50">
                 상품 추천 시에는 항상{' '}

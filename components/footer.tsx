@@ -399,10 +399,11 @@ export const Footer = memo(function Footer() {
                     <Shield className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <p className="text-foreground font-medium mb-1">독립성 보장</p>
+                    <p className="text-foreground font-medium mb-1">전문성 보장</p>
                     <p className="text-muted-foreground text-xs leading-relaxed">
-                      <span className="font-semibold">삼성생명/삼성화재 공식 파트너</span>로서{' '}
-                      <span className="text-primary">독립적 관점</span>에서 작성되었습니다.
+                      <span className="font-semibold">삼성생명 소속</span>으로{' '}
+                      <span className="text-primary">대한민국 최고 보험사의 전문성</span>을 바탕으로 작성되었습니다.{' '}
+                      <span className="text-xs opacity-80">(삼성화재 교차 판매 가능)</span>
                     </p>
                   </div>
                 </div>
