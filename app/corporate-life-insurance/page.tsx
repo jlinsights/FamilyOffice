@@ -5,6 +5,7 @@ import {
   BarChart3,
   Building,
   Calculator,
+  Calendar,
   CheckCircle,
   Clock,
   CreditCard,

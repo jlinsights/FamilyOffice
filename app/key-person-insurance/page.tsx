@@ -4,6 +4,7 @@ import {
   Award,
   Building,
   Calculator,
+  Calendar,
   CheckCircle,
   Clock,
   DollarSign,

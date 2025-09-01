@@ -3,7 +3,6 @@
 import {
   Award,
   Building,
-  Calculator,
   CheckCircle,
   Clock,
   CreditCard,

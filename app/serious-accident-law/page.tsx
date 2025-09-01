@@ -17,7 +17,6 @@ import {
   Star,
   Target,
   Users,
-  Warning,
   Zap,
 } from 'lucide-react';
 import Script from 'next/script';
@@ -398,7 +397,7 @@ export default function SeriousAccidentLawPage() {
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4">
-                <Warning className="h-3 w-3 mr-1" />
+                <AlertTriangle className="h-3 w-3 mr-1" />
                 Risk Analysis
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">

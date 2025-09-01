@@ -1,7 +1,7 @@
 'use client';
 
 import nextDynamic from 'next/dynamic';
-import { Shield, Brain, TrendingUp, Users, Search, Gauge, Phone } from 'lucide-react';
+import { Shield, Brain, TrendingUp, Search, Gauge, Phone } from 'lucide-react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
