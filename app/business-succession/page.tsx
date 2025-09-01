@@ -7,6 +7,8 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { CheckCircle2, AlertCircle, ArrowRight, Calculator, FileText, Users, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { StructuredData } from '@/components/structured-data';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = generateMetadata(
   '가업승계 완벽 가이드 | 중소기업 CEO를 위한 단계별 전략',
@@ -118,6 +120,7 @@ export default function BusinessSuccessionPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       <StructuredData data={faqData} />
       <StructuredData data={howToData} />
 
@@ -465,6 +468,8 @@ export default function BusinessSuccessionPage() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

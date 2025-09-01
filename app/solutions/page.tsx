@@ -192,6 +192,13 @@ const ServicePageContent = () => {
                   전체 솔루션
                 </Button>
                 <Button
+                  variant={selectedCategory === 'corporate-insurance-finance' ? 'default' : 'outline'}
+                  onClick={() => setSelectedCategory('corporate-insurance-finance')}
+                  className="font-semibold"
+                >
+                  🏢 기업보험·금융
+                </Button>
+                <Button
                   variant={selectedCategory === 'business-succession' ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory('business-succession')}
                   className="font-semibold"

@@ -10,6 +10,9 @@ import {
   Gavel,
   BrainCircuit,
   Target,
+  Heart,
+  AlertTriangle,
+  Banknote,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
@@ -60,6 +63,16 @@ export interface IndustryService {
  * SEO 페이지 매핑 정의
  */
 export const SEO_PAGE_MAPPING: { [key: string]: string } = {
+  // 기업보험 & 금융솔루션
+  '기업인증 컨설팅': '/business-certification',
+  '법인종신보험': '/corporate-life-insurance',
+  '단체보험 & 기업보장보험': '/group-insurance',
+  '상속·증여 컨설팅': '/inheritance-gift',
+  '경영진정기보험': '/key-person-insurance',
+  '정책자금 컨설팅': '/policy-funds',
+  '중대재해처벌법 대응': '/serious-accident-law',
+  
+  // 기존 SEO 페이지 매핑
   '가업승계지원 제도 컨설팅': '/business-succession',
   '가업주식증여특례': '/business-succession',
   '가업상속공제': '/business-succession',
@@ -79,7 +92,6 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
   '기업연구소 및 정책자금 컨설팅': '/policy-funds',
   '유상증자 컨설팅': '/asset-diversification',
   '스톡옵션 설계': '/asset-diversification',
-  '기업인증 컨설팅': '/business-certification',
   '법인 재무제표 분석': '/portfolio-optimization',
   '양수도거래 컨설팅': '/portfolio-optimization',
   '세법개정안 분석': '/portfolio-optimization',
@@ -92,6 +104,168 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
  * 전문 서비스 카테고리별 상세 서비스
  */
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
+  {
+    id: 'corporate-insurance-finance',
+    title: '기업보험 & 금융솔루션',
+    description: '기업의 리스크 관리와 금융 최적화를 위한 종합 솔루션을 제공합니다.',
+    icon: Shield,
+    services: [
+      {
+        title: '기업인증 컨설팅',
+        description: '벤처기업, 이노비즈 등 각종 기업인증 취득을 통한 정책 혜택 극대화',
+        features: [
+          '벤처기업 인증 지원',
+          '이노비즈 인증 컨설팅',
+          'ISO 인증 지원',
+          '정부지원사업 연계'
+        ],
+        benefits: [
+          '세제혜택 최대 30% 절감',
+          '정부지원사업 우선선정',
+          '금융지원 우대조건',
+          '기업 신뢰도 향상'
+        ],
+        targetClient: '성장기 중소기업, 스타트업',
+        caseStudy: {
+          situation: 'IT 스타트업 A사, 벤처기업 인증 필요',
+          solution: '벤처기업 요건 분석 및 인증 절차 지원',
+          result: '벤처기업 인증 취득, 연간 3억원 세제혜택 확보'
+        }
+      },
+      {
+        title: '법인종신보험',
+        description: '경영진의 사망보험금을 활용한 기업 자금조달 및 세무최적화 전략',
+        features: [
+          '경영진 사망보장',
+          '기업 유동성 확보',
+          '세무최적화 설계',
+          '상속세 절감 효과'
+        ],
+        benefits: [
+          '낮은 실효세율 적용',
+          '기업 유동성 개선',
+          '상속세 부담 경감',
+          '안정적 자금 확보'
+        ],
+        targetClient: '대표이사, 주요 임원진',
+        caseStudy: {
+          situation: '제조업 B사 대표, 상속세 부담 우려',
+          solution: '법인종신보험을 통한 세무최적화 설계',
+          result: '상속세 30% 절감 및 기업 안정성 확보'
+        }
+      },
+      {
+        title: '단체보험 & 기업보장보험',
+        description: '임직원 보장과 기업 리스크를 동시에 관리하는 종합보험 솔루션',
+        features: [
+          '임직원 단체보험',
+          '기업배상책임보험',
+          '중대재해처벌법 대응',
+          '맞춤형 보장설계'
+        ],
+        benefits: [
+          '임직원 복리후생 향상',
+          '기업 리스크 전이',
+          '법적 책임 보호',
+          '보험료 손금처리'
+        ],
+        targetClient: '중소중견기업, 제조업체',
+        caseStudy: {
+          situation: '건설업 C사, 중대재해처벌법 대응 필요',
+          solution: '종합적인 기업보장보험 설계',
+          result: '법적 리스크 최소화 및 임직원 만족도 향상'
+        }
+      },
+      {
+        title: '상속·증여 컨설팅',
+        description: '가족 자산의 효율적 이전과 세무최적화를 위한 종합 상속증여 전략',
+        features: [
+          '상속세 절세 전략',
+          '증여세 최적화',
+          '가업승계 설계',
+          '자산이전 구조화'
+        ],
+        benefits: [
+          '상속세 부담 최소화',
+          '가족 갈등 예방',
+          '체계적 자산관리',
+          '세대간 부의 이전'
+        ],
+        targetClient: '고액자산가, 기업 오너가',
+        caseStudy: {
+          situation: '유통업 D사 회장, 100억 자산 상속 계획',
+          solution: '단계적 증여와 신탁 활용 전략',
+          result: '상속세 50억 → 15억으로 70% 절감'
+        }
+      },
+      {
+        title: '경영진정기보험',
+        description: '핵심 경영진의 유고시 기업 안정성 확보를 위한 전문 보험 솔루션',
+        features: [
+          'Key Person 보장',
+          '기업 연속성 보장',
+          '대출담보 활용',
+          '세무효율성 극대화'
+        ],
+        benefits: [
+          '경영 공백 최소화',
+          '기업가치 보호',
+          '금융기관 신뢰도 향상',
+          '세무상 혜택 확보'
+        ],
+        targetClient: '중견기업, 창업기업 CEO',
+        caseStudy: {
+          situation: 'IT기업 E사 대표, 핵심인력 보장 필요',
+          solution: '경영진정기보험을 통한 리스크 헤지',
+          result: '기업 신용도 향상 및 대출한도 확대'
+        }
+      },
+      {
+        title: '정책자금 컨설팅',
+        description: '정부 및 공공기관의 다양한 정책자금 확보를 위한 전문 컨설팅',
+        features: [
+          '정책자금 발굴',
+          '신청서류 작성',
+          '심사 대응 지원',
+          '사후관리 서비스'
+        ],
+        benefits: [
+          '저리 자금 확보',
+          '신청 성공률 향상',
+          '행정 부담 경감',
+          '자금조달 다각화'
+        ],
+        targetClient: '성장기업, 혁신기업',
+        caseStudy: {
+          situation: '바이오기업 F사, 연구개발 자금 필요',
+          solution: '정책자금 매칭 및 신청 지원',
+          result: '15억원 정책자금 확보, 금리 2% 절감'
+        }
+      },
+      {
+        title: '중대재해처벌법 대응',
+        description: '중대재해처벌법 완전 대응을 위한 법률·보험·관리시스템 통합 솔루션',
+        features: [
+          '법적 요건 점검',
+          '안전관리시스템 구축',
+          '배상책임보험 설계',
+          '정기 모니터링'
+        ],
+        benefits: [
+          '법적 처벌 위험 제거',
+          '안전관리 체계화',
+          '보험을 통한 리스크 전가',
+          '기업 이미지 보호'
+        ],
+        targetClient: '제조업, 건설업, 물류업',
+        caseStudy: {
+          situation: '물류기업 G사, 중대재해처벌법 완전 대응 필요',
+          solution: '법률·보험·시스템 통합 솔루션 제공',
+          result: '100% 법적 요건 충족 및 산업재해 50% 감소'
+        }
+      }
+    ]
+  },
   {
     id: 'corporate-governance',
     title: '법인 지배구조 & 컨설팅',
