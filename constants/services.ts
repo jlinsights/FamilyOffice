@@ -13,6 +13,7 @@ import {
   Heart,
   AlertTriangle,
   Banknote,
+  PiggyBank,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
@@ -66,11 +67,13 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
   // 기업보험 & 금융솔루션
   '기업인증 컨설팅': '/business-certification',
   '법인종신보험': '/corporate-life-insurance',
-  '단체보험 & 기업보장보험': '/group-insurance',
+  '단체보험 - 기업보장보험': '/group-insurance',
   '상속·증여 컨설팅': '/inheritance-gift',
-  '경영진정기보험': '/key-person-insurance',
+  '경영인정기보험': '/key-person-insurance',
   '정책자금 컨설팅': '/policy-funds',
   '중대재해처벌법 대응': '/serious-accident-law',
+  '개인/법인 건강보험': '/health-insurance',
+  '퇴직연금 컨설팅': '/retirement-pension',
   
   // 기존 SEO 페이지 매핑
   '가업승계지원 제도 컨설팅': '/business-succession',
@@ -155,7 +158,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         }
       },
       {
-        title: '단체보험 & 기업보장보험',
+        title: '단체보험 - 기업보장보험',
         description: '임직원 보장과 기업 리스크를 동시에 관리하는 종합보험 솔루션',
         features: [
           '임직원 단체보험',
@@ -199,7 +202,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         }
       },
       {
-        title: '경영진정기보험',
+        title: '경영인정기보험',
         description: '핵심 경영진의 유고시 기업 안정성 확보를 위한 전문 보험 솔루션',
         features: [
           'Key Person 보장',
@@ -262,6 +265,50 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           situation: '물류기업 G사, 중대재해처벌법 완전 대응 필요',
           solution: '법률·보험·시스템 통합 솔루션 제공',
           result: '100% 법적 요건 충족 및 산업재해 50% 감소'
+        }
+      },
+      {
+        title: '개인/법인 건강보험',
+        description: '개인과 기업을 위한 종합 건강보험 및 의료비 보장 솔루션',
+        features: [
+          '맞춤형 건강보험 설계',
+          '실손의료비 최적화',
+          '법인 단체보험 구성',
+          '건강관리 서비스 연계'
+        ],
+        benefits: [
+          '의료비 부담 최소화',
+          '종합적 건강 보장',
+          '임직원 복리후생 향상',
+          '예방 중심 건강관리'
+        ],
+        targetClient: '개인, 중소중견기업',
+        caseStudy: {
+          situation: '제조업 H사, 임직원 건강관리 및 의료비 절감 필요',
+          solution: '법인 단체건강보험 + 개인별 맞춤 건강관리 프로그램',
+          result: '의료비 40% 절감, 직원 만족도 95% 향상'
+        }
+      },
+      {
+        title: '퇴직연금 컨설팅',
+        description: '개인형퇴직연금(IRP)부터 기업형 퇴직연금까지 종합 컨설팅 서비스',
+        features: [
+          'IRP/DC/DB형 맞춤 설계',
+          '세제혜택 극대화',
+          '퇴직연금 운용관리',
+          '퇴직연금 이전 서비스'
+        ],
+        benefits: [
+          '연 최대 270만원 세액공제',
+          '운용수익 과세이연',
+          '퇴직소득세 우대',
+          '안정적 노후자금 확보'
+        ],
+        targetClient: '개인, 기업 임직원',
+        caseStudy: {
+          situation: '40대 직장인, 퇴직금 3억원 IRP 이전 필요',
+          solution: 'IRP 계좌 개설 + 안정형 포트폴리오 + 세액공제 최적화',
+          result: '연 105만원 절세 + 5% 안정수익, 10년간 1,500만원 절약'
         }
       }
     ]
