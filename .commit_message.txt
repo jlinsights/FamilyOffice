@@ -1,1 +1,1 @@
-🔄 기존 도메인 samsunglife.vip에서 familyoffices.vip로 301 리다이렉트 및 사용자 안내 배너 추가
+✅ 도메인 마이그레이션 완료 - samsunglife.vip → familyoffices.vip 301 리다이렉트 정상 작동
