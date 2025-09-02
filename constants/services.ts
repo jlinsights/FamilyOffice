@@ -114,6 +114,50 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: Shield,
     services: [
       {
+        title: '개인/법인 건강보험',
+        description: '개인과 기업을 위한 종합 건강보험 및 의료비 보장 솔루션',
+        features: [
+          '맞춤형 건강보험 설계',
+          '실손의료비 최적화',
+          '법인 단체보험 구성',
+          '건강관리 서비스 연계'
+        ],
+        benefits: [
+          '의료비 부담 최소화',
+          '종합적 건강 보장',
+          '임직원 복리후생 향상',
+          '예방 중심 건강관리'
+        ],
+        targetClient: '개인, 중소중견기업',
+        caseStudy: {
+          situation: '제조업 H사, 임직원 건강관리 및 의료비 절감 필요',
+          solution: '법인 단체건강보험 + 개인별 맞춤 건강관리 프로그램',
+          result: '의료비 40% 절감, 직원 만족도 95% 향상'
+        }
+      },
+      {
+        title: '경영인정기보험',
+        description: '핵심 경영진의 유고시 기업 안정성 확보를 위한 전문 보험 솔루션',
+        features: [
+          'Key Person 보장',
+          '기업 연속성 보장',
+          '대출담보 활용',
+          '세무효율성 극대화'
+        ],
+        benefits: [
+          '경영 공백 최소화',
+          '기업가치 보호',
+          '금융기관 신뢰도 향상',
+          '세무상 혜택 확보'
+        ],
+        targetClient: '중견기업, 창업기업 CEO',
+        caseStudy: {
+          situation: 'IT기업 E사 대표, 핵심인력 보장 필요',
+          solution: '경영진정기보험을 통한 리스크 헤지',
+          result: '기업 신용도 향상 및 대출한도 확대'
+        }
+      },
+      {
         title: '기업인증 컨설팅',
         description: '벤처기업, 이노비즈 등 각종 기업인증 취득을 통한 정책 혜택 극대화',
         features: [
@@ -133,28 +177,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           situation: 'IT 스타트업 A사, 벤처기업 인증 필요',
           solution: '벤처기업 요건 분석 및 인증 절차 지원',
           result: '벤처기업 인증 취득, 연간 3억원 세제혜택 확보'
-        }
-      },
-      {
-        title: '법인종신보험',
-        description: '경영진의 사망보험금을 활용한 기업 자금조달 및 세무최적화 전략',
-        features: [
-          '경영진 사망보장',
-          '기업 유동성 확보',
-          '세무최적화 설계',
-          '상속세 절감 효과'
-        ],
-        benefits: [
-          '낮은 실효세율 적용',
-          '기업 유동성 개선',
-          '상속세 부담 경감',
-          '안정적 자금 확보'
-        ],
-        targetClient: '대표이사, 주요 임원진',
-        caseStudy: {
-          situation: '제조업 B사 대표, 상속세 부담 우려',
-          solution: '법인종신보험을 통한 세무최적화 설계',
-          result: '상속세 30% 절감 및 기업 안정성 확보'
         }
       },
       {
@@ -180,6 +202,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         }
       },
       {
+        title: '법인종신보험',
+        description: '경영진의 사망보험금을 활용한 기업 자금조달 및 세무최적화 전략',
+        features: [
+          '경영진 사망보장',
+          '기업 유동성 확보',
+          '세무최적화 설계',
+          '상속세 절감 효과'
+        ],
+        benefits: [
+          '낮은 실효세율 적용',
+          '기업 유동성 개선',
+          '상속세 부담 경감',
+          '안정적 자금 확보'
+        ],
+        targetClient: '대표이사, 주요 임원진',
+        caseStudy: {
+          situation: '제조업 B사 대표, 상속세 부담 우려',
+          solution: '법인종신보험을 통한 세무최적화 설계',
+          result: '상속세 30% 절감 및 기업 안정성 확보'
+        }
+      },
+      {
         title: '상속·증여 컨설팅',
         description: '가족 자산의 효율적 이전과 세무최적화를 위한 종합 상속증여 전략',
         features: [
@@ -199,28 +243,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           situation: '유통업 D사 회장, 100억 자산 상속 계획',
           solution: '단계적 증여와 신탁 활용 전략',
           result: '상속세 50억 → 15억으로 70% 절감'
-        }
-      },
-      {
-        title: '경영인정기보험',
-        description: '핵심 경영진의 유고시 기업 안정성 확보를 위한 전문 보험 솔루션',
-        features: [
-          'Key Person 보장',
-          '기업 연속성 보장',
-          '대출담보 활용',
-          '세무효율성 극대화'
-        ],
-        benefits: [
-          '경영 공백 최소화',
-          '기업가치 보호',
-          '금융기관 신뢰도 향상',
-          '세무상 혜택 확보'
-        ],
-        targetClient: '중견기업, 창업기업 CEO',
-        caseStudy: {
-          situation: 'IT기업 E사 대표, 핵심인력 보장 필요',
-          solution: '경영진정기보험을 통한 리스크 헤지',
-          result: '기업 신용도 향상 및 대출한도 확대'
         }
       },
       {
@@ -268,28 +290,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         }
       },
       {
-        title: '개인/법인 건강보험',
-        description: '개인과 기업을 위한 종합 건강보험 및 의료비 보장 솔루션',
-        features: [
-          '맞춤형 건강보험 설계',
-          '실손의료비 최적화',
-          '법인 단체보험 구성',
-          '건강관리 서비스 연계'
-        ],
-        benefits: [
-          '의료비 부담 최소화',
-          '종합적 건강 보장',
-          '임직원 복리후생 향상',
-          '예방 중심 건강관리'
-        ],
-        targetClient: '개인, 중소중견기업',
-        caseStudy: {
-          situation: '제조업 H사, 임직원 건강관리 및 의료비 절감 필요',
-          solution: '법인 단체건강보험 + 개인별 맞춤 건강관리 프로그램',
-          result: '의료비 40% 절감, 직원 만족도 95% 향상'
-        }
-      },
-      {
         title: '퇴직연금 컨설팅',
         description: '개인형퇴직연금(IRP)부터 기업형 퇴직연금까지 종합 컨설팅 서비스',
         features: [
@@ -319,28 +319,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: '정관 설계부터 임원 운영까지 법인 경영의 모든 영역',
     icon: Gavel,
     services: [
-      {
-        title: '정관 및 배당 컨설팅',
-        description:
-          '법인 운영의 기본틀이 되는 정관 설계와 최적화된 배당정책 수립',
-        features: [
-          '맞춤형 정관 설계 및 개정',
-          '배당정책 최적화 전략',
-          '주주권리 보호 조항 설계',
-          '정관변경 등기 실무',
-        ],
-        benefits: [
-          '법인 운영 리스크 최소화',
-          '세무 효율성 극대화',
-          '주주간 분쟁 사전 예방',
-        ],
-        targetClient: '법인 설립 초기 단계 또는 정관 개정이 필요한 기업',
-        caseStudy: {
-          situation: '가족기업 A사, 2세 승계를 위한 정관 개정 필요',
-          solution: '차등의결권 도입 및 배당정책 최적화를 통한 정관 전면 개정',
-          result: '승계과정에서 30% 세무비용 절감 및 경영권 안정화 달성',
-        },
-      },
       {
         title: 'CEO유고시 리스크 관리',
         description: '경영진 유고 상황에 대비한 종합적 리스크 관리체계 구축',
@@ -373,6 +351,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         targetClient: '핵심임원 이탈 우려가 있는 성장기업',
       },
+      {
+        title: '정관 및 배당 컨설팅',
+        description:
+          '법인 운영의 기본틀이 되는 정관 설계와 최적화된 배당정책 수립',
+        features: [
+          '맞춤형 정관 설계 및 개정',
+          '배당정책 최적화 전략',
+          '주주권리 보호 조항 설계',
+          '정관변경 등기 실무',
+        ],
+        benefits: [
+          '법인 운영 리스크 최소화',
+          '세무 효율성 극대화',
+          '주주간 분쟁 사전 예방',
+        ],
+        targetClient: '법인 설립 초기 단계 또는 정관 개정이 필요한 기업',
+        caseStudy: {
+          situation: '가족기업 A사, 2세 승계를 위한 정관 개정 필요',
+          solution: '차등의결권 도입 및 배당정책 최적화를 통한 정관 전면 개정',
+          result: '승계과정에서 30% 세무비용 절감 및 경영권 안정화 달성',
+        },
+      },
     ],
   },
   {
@@ -381,18 +381,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: '중소기업 특화 인사관리부터 정부지원금까지',
     icon: Users,
     services: [
-      {
-        title: '중소기업 노무관리',
-        description: '중소기업 맞춤형 인사노무 시스템 구축 및 운영 지원',
-        features: [
-          '노무관리 시스템 구축',
-          '근로계약서 및 취업규칙 정비',
-          '급여체계 설계',
-          '노무 리스크 관리',
-        ],
-        benefits: ['노무 분쟁 사전 예방', '인건비 최적화', '직원 만족도 향상'],
-        targetClient: '50인 이하 중소기업 CEO',
-      },
       {
         title: '고용지원금 컨설팅',
         description: '다양한 정부 고용지원금 신청 및 관리 전문 서비스',
@@ -421,6 +409,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         benefits: ['법인세 절감효과', '직원 복리후생 향상', '기업 이미지 제고'],
         targetClient: '직원 복리후생 개선이 필요한 성장기업',
       },
+      {
+        title: '중소기업 노무관리',
+        description: '중소기업 맞춤형 인사노무 시스템 구축 및 운영 지원',
+        features: [
+          '노무관리 시스템 구축',
+          '근로계약서 및 취업규칙 정비',
+          '급여체계 설계',
+          '노무 리스크 관리',
+        ],
+        benefits: ['노무 분쟁 사전 예방', '인건비 최적화', '직원 만족도 향상'],
+        targetClient: '50인 이하 중소기업 CEO',
+      },
     ],
   },
   {
@@ -429,30 +429,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: '법인 세무부터 개인 절세까지 통합 세무 솔루션',
     icon: Calculator,
     services: [
-      {
-        title: '법인계약 세무회계',
-        description: '법인의 모든 세무업무를 전문가가 직접 관리',
-        features: [
-          '월별 세무신고 및 관리',
-          '연말정산 및 종합소득세 신고',
-          '부가가치세 신고',
-          '세무조정 및 신고서 작성',
-        ],
-        benefits: ['세무 리스크 최소화', '절세 기회 발굴', '업무 효율성 향상'],
-        targetClient: '세무업무 전담인력이 없는 중소기업',
-      },
-      {
-        title: '보험계약 상증세법 컨설팅',
-        description: '보험계약과 관련된 상속증여세 최적화 전략',
-        features: [
-          '보험계약 세무 설계',
-          '상속증여세 절감 전략',
-          '보험금 수령 최적화',
-          '세무조사 대응',
-        ],
-        benefits: ['상속세 부담 경감', '보험 활용 극대화', '세무 안정성 확보'],
-        targetClient: '고액 보험계약을 보유한 자산가',
-      },
       {
         title: '개인사업자 법인전환',
         description: '개인사업자의 법인 전환을 통한 절세 및 사업 확장',
@@ -486,6 +462,30 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         benefits: ['과납세액 환급', '세무 정확성 제고', '향후 절세 기회 발굴'],
         targetClient: '세무신고 오류로 과다 납부 가능성이 있는 기업',
       },
+      {
+        title: '법인계약 세무회계',
+        description: '법인의 모든 세무업무를 전문가가 직접 관리',
+        features: [
+          '월별 세무신고 및 관리',
+          '연말정산 및 종합소득세 신고',
+          '부가가치세 신고',
+          '세무조정 및 신고서 작성',
+        ],
+        benefits: ['세무 리스크 최소화', '절세 기회 발굴', '업무 효율성 향상'],
+        targetClient: '세무업무 전담인력이 없는 중소기업',
+      },
+      {
+        title: '보험계약 상증세법 컨설팅',
+        description: '보험계약과 관련된 상속증여세 최적화 전략',
+        features: [
+          '보험계약 세무 설계',
+          '상속증여세 절감 전략',
+          '보험금 수령 최적화',
+          '세무조사 대응',
+        ],
+        benefits: ['상속세 부담 경감', '보험 활용 극대화', '세무 안정성 확보'],
+        targetClient: '고액 보험계약을 보유한 자산가',
+      },
     ],
   },
   {
@@ -494,6 +494,34 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: '자본시장 활용부터 가치평가까지 금융 전문 서비스',
     icon: TrendingUp,
     services: [
+      {
+        title: '기업연구소 및 정책자금 컨설팅',
+        description: '연구개발 지원제도 활용 및 기업부설연구소 설립 지원',
+        features: [
+          '기업부설연구소 설립',
+          'R&D 과제 기획 및 신청',
+          '정부지원사업 발굴',
+          '연구개발비 세액공제 최적화',
+        ],
+        benefits: ['R&D 지원금 확보', '세액공제 혜택', '기술개발 역량 강화'],
+        targetClient: '기술개발 투자를 계획하는 제조업 및 IT기업',
+      },
+      {
+        title: '비상장주식 가치평가',
+        description: '전문적이고 객관적인 기업가치 평가 서비스',
+        features: [
+          'DCF, 시장비교법 등 다각적 평가',
+          '업종별 특성 반영',
+          '세무목적 평가서 작성',
+          'M&A 목적 평가',
+        ],
+        benefits: [
+          '객관적 기업가치 산정',
+          '세무 리스크 최소화',
+          'M&A 협상력 강화',
+        ],
+        targetClient: '주식 거래, 증여, 상속이 예정된 기업',
+      },
       {
         title: '상환전환우선주 발행',
         description: '투자 유치 및 자금 조달을 위한 우선주 발행 전문 서비스',
@@ -526,34 +554,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         targetClient: '운영자금 또는 투자자금이 필요한 중소기업',
       },
-      {
-        title: '비상장주식 가치평가',
-        description: '전문적이고 객관적인 기업가치 평가 서비스',
-        features: [
-          'DCF, 시장비교법 등 다각적 평가',
-          '업종별 특성 반영',
-          '세무목적 평가서 작성',
-          'M&A 목적 평가',
-        ],
-        benefits: [
-          '객관적 기업가치 산정',
-          '세무 리스크 최소화',
-          'M&A 협상력 강화',
-        ],
-        targetClient: '주식 거래, 증여, 상속이 예정된 기업',
-      },
-      {
-        title: '기업연구소 및 정책자금 컨설팅',
-        description: '연구개발 지원제도 활용 및 기업부설연구소 설립 지원',
-        features: [
-          '기업부설연구소 설립',
-          'R&D 과제 기획 및 신청',
-          '정부지원사업 발굴',
-          '연구개발비 세액공제 최적화',
-        ],
-        benefits: ['R&D 지원금 확보', '세액공제 혜택', '기술개발 역량 강화'],
-        targetClient: '기술개발 투자를 계획하는 제조업 및 IT기업',
-      },
     ],
   },
   {
@@ -584,6 +584,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         },
       },
       {
+        title: '법인종합재무 컨설팅',
+        description: '기업의 재무전략 수립부터 실행까지 종합 컨설팅',
+        features: [
+          '재무전략 수립',
+          '자본구조 최적화',
+          '배당정책 설계',
+          '재무 리스크 관리',
+        ],
+        benefits: ['재무 효율성 극대화', '기업가치 제고', '투자자 신뢰 확보'],
+        targetClient: '재무전략 고도화가 필요한 중견기업',
+      },
+      {
         title: '자기주식 컨설팅',
         description: '자기주식 취득 및 처분을 통한 재무구조 최적화',
         features: [
@@ -607,18 +619,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         benefits: ['법적 리스크 해소', '경영권 안정화', '세무 투명성 확보'],
         targetClient: '차명주식 문제를 해결해야 하는 기업',
       },
-      {
-        title: '법인종합재무 컨설팅',
-        description: '기업의 재무전략 수립부터 실행까지 종합 컨설팅',
-        features: [
-          '재무전략 수립',
-          '자본구조 최적화',
-          '배당정책 설계',
-          '재무 리스크 관리',
-        ],
-        benefits: ['재무 효율성 극대화', '기업가치 제고', '투자자 신뢰 확보'],
-        targetClient: '재무전략 고도화가 필요한 중견기업',
-      },
     ],
   },
   {
@@ -627,6 +627,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: '세대를 잇는 체계적인 승계 설계 및 실행',
     icon: Target,
     services: [
+      {
+        title: '가업상속공제',
+        description: '가업용 자산 상속시 상속세 부담을 대폭 경감',
+        features: [
+          '가업상속 요건 분석',
+          '공제한도 최적화',
+          '상속세 신고',
+          '사후의무 관리',
+        ],
+        benefits: ['상속세 대폭 절감', '가업 연속성 보장', '경영 안정성 확보'],
+        targetClient: '가업상속이 예상되는 기업가 가족',
+      },
       {
         title: '가업승계지원 제도 컨설팅',
         description: '중소기업 가업승계 지원제도를 활용한 최적화된 승계 설계',
@@ -654,18 +666,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         benefits: ['증여세 납부유예', '조건 충족시 면제', '체계적 승계 실행'],
         targetClient: '중소기업 또는 중견기업 가업승계 대상자',
-      },
-      {
-        title: '가업상속공제',
-        description: '가업용 자산 상속시 상속세 부담을 대폭 경감',
-        features: [
-          '가업상속 요건 분석',
-          '공제한도 최적화',
-          '상속세 신고',
-          '사후의무 관리',
-        ],
-        benefits: ['상속세 대폭 절감', '가업 연속성 보장', '경영 안정성 확보'],
-        targetClient: '가업상속이 예상되는 기업가 가족',
       },
       {
         title: '자녀법인 활용 전략',
@@ -704,6 +704,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: FileText,
     services: [
       {
+        title: '기업인증 컨설팅',
+        description: '벤처기업, 이노비즈 등 각종 기업인증 획득 지원',
+        features: [
+          '인증 요건 분석',
+          '신청서류 작성',
+          '심사 대응 지원',
+          '사후관리',
+        ],
+        benefits: ['정부지원 자격 확보', '세제혜택 획득', '기업 신뢰도 향상'],
+        targetClient: '기업인증 취득이 필요한 중소기업',
+      },
+      {
         title: '법인설립등기 및 사업자등록 실무',
         description: '법인설립부터 각종 인허가까지 원스톱 서비스',
         features: [
@@ -714,18 +726,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         benefits: ['신속한 사업 시작', '법적 리스크 최소화', '행정업무 효율화'],
         targetClient: '법인설립을 준비하는 예비창업자',
-      },
-      {
-        title: '유상증자 컨설팅',
-        description: '유상증자를 통한 자금조달 및 자본구조 개선',
-        features: [
-          '증자 방식 결정',
-          '주주총회 결의',
-          '증자 실행',
-          '등기 및 신고',
-        ],
-        benefits: ['자금조달 성공', '자본구조 개선', '재무 안정성 확보'],
-        targetClient: '자금조달이 필요한 성장기업',
       },
       {
         title: '스톡옵션 설계',
@@ -740,16 +740,16 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         targetClient: '핵심인재 확보가 중요한 성장기업',
       },
       {
-        title: '기업인증 컨설팅',
-        description: '벤처기업, 이노비즈 등 각종 기업인증 획득 지원',
+        title: '유상증자 컨설팅',
+        description: '유상증자를 통한 자금조달 및 자본구조 개선',
         features: [
-          '인증 요건 분석',
-          '신청서류 작성',
-          '심사 대응 지원',
-          '사후관리',
+          '증자 방식 결정',
+          '주주총회 결의',
+          '증자 실행',
+          '등기 및 신고',
         ],
-        benefits: ['정부지원 자격 확보', '세제혜택 획득', '기업 신뢰도 향상'],
-        targetClient: '기업인증 취득이 필요한 중소기업',
+        benefits: ['자금조달 성공', '자본구조 개선', '재무 안정성 확보'],
+        targetClient: '자금조달이 필요한 성장기업',
       },
     ],
   },
@@ -770,18 +770,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         benefits: ['경영현황 정확한 파악', '개선영역 식별', '투자자 신뢰 확보'],
         targetClient: '재무분석이 필요한 모든 기업',
-      },
-      {
-        title: '양수도거래 컨설팅',
-        description: '기업 인수합병 과정의 전문적 지원 및 컨설팅',
-        features: [
-          '기업가치 평가',
-          'Due Diligence 지원',
-          '거래구조 설계',
-          '계약 협상 지원',
-        ],
-        benefits: ['성공적 M&A 실행', '거래가격 최적화', '리스크 최소화'],
-        targetClient: 'M&A를 추진하는 기업',
       },
       {
         title: '세법개정안 분석',
@@ -810,6 +798,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         benefits: ['세무신고 정확성 제고', '절세 기회 확대', '세무 역량 강화'],
         targetClient: '세무조정에 어려움을 겪는 기업',
+      },
+      {
+        title: '양수도거래 컨설팅',
+        description: '기업 인수합병 과정의 전문적 지원 및 컨설팅',
+        features: [
+          '기업가치 평가',
+          'Due Diligence 지원',
+          '거래구조 설계',
+          '계약 협상 지원',
+        ],
+        benefits: ['성공적 M&A 실행', '거래가격 최적화', '리스크 최소화'],
+        targetClient: 'M&A를 추진하는 기업',
       },
     ],
   },
