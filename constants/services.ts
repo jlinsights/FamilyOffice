@@ -14,6 +14,9 @@ import {
   AlertTriangle,
   Banknote,
   PiggyBank,
+  Lightbulb,
+  HandshakeIcon,
+  ClipboardCheck,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
@@ -100,7 +103,22 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
   '세법개정안 분석': '/portfolio-optimization',
   '세무조정계산서의 이해': '/portfolio-optimization',
   '고액자산가 자산관리': '/wealth-consulting',
-  '부유층 자산관리 컨설팅': '/wealth-consulting'
+  '부유층 자산관리 컨설팅': '/wealth-consulting',
+  
+  // 특허 & 창업지원
+  '사업계획서 작성': '/patent-startup/business-plan',
+  '창업 컨설팅': '/patent-startup/startup-consulting',
+  '특허출원 지원': '/patent-startup/patent-application',
+  
+  // 인수합병 & 부실채권
+  '부실채권 정리': '/ma-debt/debt-restructuring',
+  '인수합병(M&A) 컨설팅': '/ma-debt/ma-consulting',
+  '기업구조조정 지원': '/ma-debt/corporate-restructuring',
+  
+  // 재무·세무·노무 통합관리
+  '가지급금 해결 방안': '/finance-tax-labor/provisional-payment',
+  '경정청구 전문 서비스': '/finance-tax-labor/tax-refund',
+  '고용지원금 활용 컨설팅': '/finance-tax-labor/employment-subsidy'
 };
 
 /**
@@ -855,6 +873,198 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           '승계 준비',
         ],
         targetClient: '50억원 이상 중상류층',
+      },
+    ],
+  },
+  {
+    id: 'patent-startup',
+    title: '특허 & 창업지원',
+    description: '사업계획서 작성부터 특허출원, 창업까지 원스톱 지원',
+    icon: Lightbulb,
+    services: [
+      {
+        title: '사업계획서 작성',
+        description: '투자유치와 정책자금 확보를 위한 전문 사업계획서 작성 서비스',
+        features: [
+          '시장분석 및 경쟁력 분석',
+          '사업모델 구체화',
+          '재무계획 수립',
+          '투자제안서 작성',
+        ],
+        benefits: [
+          '투자유치 성공률 향상',
+          '정책자금 확보 가능성 증대',
+          '사업 방향성 명확화',
+          '전문적인 프레젠테이션 자료',
+        ],
+        targetClient: '스타트업, 신규사업 추진 기업',
+        caseStudy: {
+          situation: '바이오 스타트업 P사, Series A 투자유치 필요',
+          solution: '시장분석, 기술경쟁력, 재무계획을 포함한 전문 사업계획서 작성',
+          result: '50억원 Series A 투자유치 성공',
+        },
+      },
+      {
+        title: '창업 컨설팅',
+        description: '창업 초기부터 성장기까지 단계별 맞춤 컨설팅',
+        features: [
+          '창업 아이템 검증',
+          '법인설립 지원',
+          '창업지원사업 연계',
+          '초기 운영 컨설팅',
+        ],
+        benefits: [
+          '창업 성공률 제고',
+          '정부지원 최대 활용',
+          '초기 리스크 최소화',
+          '안정적 사업 기반 구축',
+        ],
+        targetClient: '예비창업자, 초기 스타트업',
+      },
+      {
+        title: '특허출원 지원',
+        description: '기술 특허부터 비즈니스 모델 특허까지 종합 지원',
+        features: [
+          '특허 가능성 검토',
+          '특허 명세서 작성',
+          '출원 절차 대행',
+          '특허 포트폴리오 구축',
+        ],
+        benefits: [
+          '지식재산권 확보',
+          '기술경쟁력 강화',
+          '투자 가치 상승',
+          '라이선스 수익 창출',
+        ],
+        targetClient: '기술기반 기업, R&D 중심 기업',
+      },
+    ],
+  },
+  {
+    id: 'ma-debt',
+    title: '인수합병 & 부실채권',
+    description: 'M&A 전략수립부터 부실채권 정리까지 전문 솔루션',
+    icon: HandshakeIcon,
+    services: [
+      {
+        title: '기업구조조정 지원',
+        description: '재무적 어려움을 겪는 기업의 회생을 위한 종합 지원',
+        features: [
+          '재무구조 개선 방안',
+          '사업구조 재편 전략',
+          '채권자 협상 지원',
+          '정부지원제도 활용',
+        ],
+        benefits: [
+          '기업 회생 가능성 제고',
+          '채무 부담 경감',
+          '사업 정상화',
+          '고용 유지',
+        ],
+        targetClient: '재무적 어려움을 겪는 기업',
+      },
+      {
+        title: '부실채권 정리',
+        description: '부실채권 매입, 정리, 회수를 위한 전문 컨설팅',
+        features: [
+          '부실채권 실사 및 평가',
+          '채권 회수 전략 수립',
+          '법적 절차 진행 지원',
+          '채권 매각 중개',
+        ],
+        benefits: [
+          '자산 건전성 개선',
+          '현금 유동성 확보',
+          '재무구조 개선',
+          '신용등급 상승',
+        ],
+        targetClient: '부실채권 보유 기업, 금융기관',
+        caseStudy: {
+          situation: '중견기업 Q사, 거래처 부도로 30억 부실채권 발생',
+          solution: '채권 실사, 회수전략 수립, 일부 매각을 통한 단계적 정리',
+          result: '18개월 내 70% 회수, 재무건전성 회복',
+        },
+      },
+      {
+        title: '인수합병(M&A) 컨설팅',
+        description: 'M&A 전 과정에 대한 종합적인 자문 서비스',
+        features: [
+          'M&A 전략 수립',
+          '대상기업 발굴 및 평가',
+          'Due Diligence 지원',
+          'PMI(Post Merger Integration) 컨설팅',
+        ],
+        benefits: [
+          '성공적인 M&A 실행',
+          '시너지 효과 극대화',
+          '인수가격 최적화',
+          '통합 리스크 최소화',
+        ],
+        targetClient: 'M&A를 고려하는 중소중견기업',
+      },
+    ],
+  },
+  {
+    id: 'finance-tax-labor',
+    title: '재무·세무·노무 통합관리',
+    description: '가지급금 해결부터 고용지원금, 경정청구까지 통합 솔루션',
+    icon: ClipboardCheck,
+    services: [
+      {
+        title: '가지급금 해결 방안',
+        description: '가지급금 문제의 근본적 해결과 재발 방지 시스템 구축',
+        features: [
+          '가지급금 현황 정밀 분석',
+          '단계별 정리 계획 수립',
+          '세무상 불이익 최소화 방안',
+          '내부통제 시스템 구축',
+        ],
+        benefits: [
+          '세무조사 리스크 해소',
+          '재무건전성 회복',
+          '금융기관 신용도 개선',
+          '경영 투명성 확보',
+        ],
+        targetClient: '가지급금 문제로 고민하는 중소기업',
+        caseStudy: {
+          situation: 'IT기업 R사, 대표이사 가지급금 8억원으로 세무리스크 상존',
+          solution: '3년 단계별 정리계획 수립, 급여/배당 조정, 내부통제 강화',
+          result: '가지급금 완전 정리, 의제배당 회피로 2억원 절세',
+        },
+      },
+      {
+        title: '경정청구 전문 서비스',
+        description: '과다납부 세금의 체계적 분석과 환급 절차 지원',
+        features: [
+          '5년간 세무신고 정밀 검토',
+          '경정청구 사유 발굴',
+          '증빙자료 준비 및 신청',
+          '세무서 대응 및 환급 지원',
+        ],
+        benefits: [
+          '과납세액 환급',
+          '세무 정확성 향상',
+          '현금 유동성 개선',
+          '세무 전문성 확보',
+        ],
+        targetClient: '세무신고 실수가 의심되는 모든 기업',
+      },
+      {
+        title: '고용지원금 활용 컨설팅',
+        description: '정부 고용지원금 발굴부터 신청, 사후관리까지 원스톱 서비스',
+        features: [
+          '기업별 활용 가능 지원금 발굴',
+          '신청서류 작성 및 제출',
+          '지원금 수령 후 관리',
+          '추가 지원제도 연계',
+        ],
+        benefits: [
+          '인건비 부담 대폭 경감',
+          '고용 창출 활성화',
+          '기업 경쟁력 강화',
+          '정부정책 혜택 극대화',
+        ],
+        targetClient: '신규채용 계획이 있는 모든 기업',
       },
     ],
   },
