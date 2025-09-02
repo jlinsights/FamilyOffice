@@ -125,9 +125,33 @@ const nextConfig = {
   // Output 설정 제거 (빌드 시간 단축)
   // output: 'standalone',
   
-  // HTTPS 리다이렉트 추가
+  // 도메인 리다이렉트 및 HTTPS 강제
   async redirects() {
     return [
+      // 기존 도메인에서 새 도메인으로 301 리다이렉트
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'samsunglife.vip',
+          },
+        ],
+        destination: 'https://familyoffices.vip/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.samsunglife.vip',
+          },
+        ],
+        destination: 'https://www.familyoffices.vip/:path*',
+        permanent: true,
+      },
+      // HTTPS 강제 리다이렉트
       {
         source: '/:path*',
         has: [

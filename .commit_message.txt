@@ -1,1 +1,1 @@
-🔧 Google Analytics 환경변수명 수정 및 측정 ID 연결 (G-DB6TXRZLTK)
+🔄 기존 도메인 samsunglife.vip에서 familyoffices.vip로 301 리다이렉트 및 사용자 안내 배너 추가
