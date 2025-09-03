@@ -1230,3 +1230,21 @@ export function getAllServiceTitles(): string[] {
     category.services.map(service => service.title)
   );
 }
+
+/**
+ * 서비스 통계 정보 조회 함수
+ */
+export function getServiceStats() {
+  const totalCategories = SERVICE_CATEGORIES.length;
+  const totalServices = SERVICE_CATEGORIES.reduce((total, category) => total + category.services.length, 0);
+  
+  return {
+    totalCategories,
+    totalServices,
+    categories: SERVICE_CATEGORIES.map(category => ({
+      id: category.id,
+      title: category.title,
+      serviceCount: category.services.length
+    }))
+  };
+}
