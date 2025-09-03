@@ -347,7 +347,7 @@ export default function RootLayout({
           <DomainMigrationBanner />
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
