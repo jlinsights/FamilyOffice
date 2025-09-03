@@ -1,13 +1,10 @@
 'use client';
 
 import {
-  Building2,
   CheckCircle,
   TrendingUp,
+  Building2,
   Shield,
-  Calculator,
-  Users,
-  Gavel,
   Target,
   ArrowRight,
   Search,
@@ -24,109 +21,27 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { SERVICE_CATEGORIES } from '@/constants/services';
 
-// 메인 페이지용 서비스 카테고리 요약
-const mainPageServices = [
-  {
-    id: 'corporate-governance',
-    icon: Gavel,
-    title: '법인 지배구조 & 컨설팅',
-    description: '정관 설계부터 임원 운영까지 법인 경영의 모든 영역',
-    serviceCount: 4,
-    keyFeatures: [
-      '정관 및 배당 컨설팅',
-      'CEO유고시 리스크 관리',
-      '임원소득보장플랜',
-      '법인 운영 컨설팅',
-    ],
-  },
-  {
-    id: 'hr-support',
-    icon: Users,
-    title: '인사 & 고용지원',
-    description: '인재 확보부터 복지까지 기업의 인사 전략',
-    serviceCount: 4,
-    keyFeatures: [
-      '고용지원금 컨설팅',
-      '노무관리 컨설팅',
-      '사내근로복지기금',
-      '인사제도 설계',
-    ],
-  },
-  {
-    id: 'tax-accounting',
-    icon: Calculator,
-    title: '세무 & 회계',
-    description: '세무 최적화부터 회계 시스템까지 전문 서비스',
-    serviceCount: 4,
-    keyFeatures: [
-      '세무조정계산서',
-      '법인세 최적화',
-      '개인세 최적화',
-      '세무 리스크 관리',
-    ],
-  },
-  {
-    id: 'investment-finance',
-    icon: TrendingUp,
-    title: '투자 & 금융',
-    description: '기업 성장을 위한 투자 전략과 금융 솔루션',
-    serviceCount: 4,
-    keyFeatures: [
-      '투자 포트폴리오 관리',
-      '정책자금 활용',
-      '자금조달 최적화',
-      '리스크 헤지',
-    ],
-  },
-  {
-    id: 'asset-management',
-    icon: Building2,
-    title: '자산관리 & 보험',
-    description: '기업 자산의 효율적 관리와 보험 설계',
-    serviceCount: 4,
-    keyFeatures: [
-      '자산 구조 최적화',
-      '보험 설계',
-      '자산 분산 전략',
-      '리스크 관리',
-    ],
-  },
-  {
-    id: 'business-succession',
-    icon: Target,
-    title: '가업승계 & M&A',
-    description: '기업 가치를 다음 세대로 전달하는 전문 서비스',
-    serviceCount: 4,
-    keyFeatures: [
-      '승계 전략 수립',
-      'M&A Advisory',
-      '지배구조 최적화',
-      '세대 간 갈등 해결',
-    ],
-  },
-  {
-    id: 'corporate-structure',
-    icon: Shield,
-    title: '법인구조 & 설립',
-    description: '효율적인 법인 구조 설계와 설립 지원',
-    serviceCount: 4,
-    keyFeatures: [
-      '가족법인 설립',
-      '자녀법인 설립',
-      'MSO 구조화',
-      '법인 구조 재편',
-    ],
-  },
-  {
-    id: 'analysis-planning',
-    icon: Search,
-    title: '분석 & 전략수립',
-    description: '데이터 기반의 전략적 의사결정 지원',
-    serviceCount: 6,
-    keyFeatures: ['기업가치 평가', '전략 수립', '리스크 분석', '성과 측정'],
-  },
-];
+// 솔루션 페이지 데이터를 기반으로 메인 페이지용 서비스 자동 생성
+function generateMainPageServices() {
+  const totalServices = SERVICE_CATEGORIES.reduce((total, category) => total + category.services.length, 0);
+  const totalCategories = SERVICE_CATEGORIES.length;
+  
+  // 주요 카테고리들을 홈페이지용으로 변환 (상위 8개 카테고리 표시)
+  const mainPageServices = SERVICE_CATEGORIES.slice(0, 8).map((category) => ({
+    id: category.id,
+    icon: category.icon,
+    title: category.title,
+    description: category.description,
+    serviceCount: category.services.length,
+    keyFeatures: category.services.slice(0, 4).map(service => service.title)
+  }));
+
+  return { mainPageServices, totalCategories, totalServices };
+}
+
+const { mainPageServices, totalCategories, totalServices } = generateMainPageServices();
 
 export function ServicesSection() {
   return (
@@ -146,7 +61,7 @@ export function ServicesSection() {
 
           <h2 className="mb-6 font-bold text-balance animate-slide-up text-foreground">
             <span className="text-primary dark:text-emerald-300">
-              8개 분야 34개
+              {totalCategories}개 분야 {totalServices}개
             </span>{' '}
             전문 서비스
           </h2>
@@ -155,7 +70,7 @@ export function ServicesSection() {
             className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance animate-slide-up leading-relaxed"
             style={{ animationDelay: '100ms' }}
           >
-            기업가의 모든 고민을 해결하는 체계적이고 전문적인 서비스 포트폴리오
+            중소중견기업 CEO를 위한 <span className="font-bold text-primary">체계화된 전문 솔루션</span>으로 맞춤형 컨설팅을 제공합니다
           </p>
         </div>
 
