@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     default: 'FamilyOffice S - 가업승계·자산관리 전문 플랫폼',
     template: '%s | FamilyOffice S',
   },
-  description: '【법인보험 × 가업승계 통합솔루션】 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너 | 무료 통합진단',
+  description: '【9개 분야 42개 전문 솔루션】 법인보험 × 가업승계 통합솔루션 | 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',

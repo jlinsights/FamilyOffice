@@ -177,61 +177,75 @@ const ServicePageContent = () => {
                 </Badge>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">전문</span> 솔루션
+                <span className="text-primary">9개 분야</span> 42개 전문 솔루션
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                업종별 특화된 솔루션과 맞춤형 컨설팅을 제공합니다
+                중소중견기업 CEO를 위한 <span className="font-bold text-primary">체계화된 전문 솔루션</span>으로 맞춤형 컨설팅을 제공합니다
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4 mb-12">
+              <div className="flex flex-wrap justify-center gap-3 mb-12">
                 <Button
                   variant={selectedCategory === 'all' ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory('all')}
-                  className="font-semibold"
+                  className="font-semibold text-sm"
                 >
-                  전체 솔루션
+                  전체 (42개)
                 </Button>
                 <Button
                   variant={selectedCategory === 'corporate-insurance-finance' ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory('corporate-insurance-finance')}
-                  className="font-semibold"
+                  className="font-semibold text-sm"
                 >
-                  🏢 기업보험·금융
+                  🏢 기업보험·금융 (9개)
                 </Button>
                 <Button
                   variant={selectedCategory === 'business-succession' ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory('business-succession')}
-                  className="font-semibold"
+                  className="font-semibold text-sm"
                 >
-                  가업승계
+                  🔄 가업승계 (5개)
                 </Button>
                 <Button
                   variant={selectedCategory === 'asset-management' ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory('asset-management')}
-                  className="font-semibold"
+                  className="font-semibold text-sm"
                 >
-                  자산관리
+                  💼 자산관리 (4개)
                 </Button>
                 <Button
                   variant={selectedCategory === 'tax-accounting' ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory('tax-accounting')}
-                  className="font-semibold"
+                  className="font-semibold text-sm"
                 >
-                  세무회계
+                  💰 세무회계 (4개)
                 </Button>
                 <Button
                   variant={selectedCategory === 'investment-finance' ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory('investment-finance')}
-                  className="font-semibold"
+                  className="font-semibold text-sm"
                 >
-                  투자금융
+                  📈 투자금융 (4개)
                 </Button>
                 <Button
-                  variant={selectedCategory === 'wealth-management' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('wealth-management')}
-                  className="font-semibold"
+                  variant={selectedCategory === 'patent-startup' ? 'default' : 'outline'}
+                  onClick={() => setSelectedCategory('patent-startup')}
+                  className="font-semibold text-sm"
                 >
-                  고액자산가
+                  💡 특허·창업 (3개)
+                </Button>
+                <Button
+                  variant={selectedCategory === 'ma-debt' ? 'default' : 'outline'}
+                  onClick={() => setSelectedCategory('ma-debt')}
+                  className="font-semibold text-sm"
+                >
+                  🤝 M&A·부실채권 (3개)
+                </Button>
+                <Button
+                  variant={selectedCategory === 'finance-tax-labor' ? 'default' : 'outline'}
+                  onClick={() => setSelectedCategory('finance-tax-labor')}
+                  className="font-semibold text-sm"
+                >
+                  📋 통합관리 (3개)
                 </Button>
               </div>
             </div>
