@@ -109,6 +109,7 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
   '사업계획서 작성': '/patent-startup/business-plan',
   '창업 컨설팅': '/patent-startup/startup-consulting',
   '특허출원 지원': '/patent-startup/patent-application',
+  '홈페이지 제작 지원': '/patent-startup/homepage-creation',
   
   // 인수합병 & 부실채권
   '부실채권 정리': '/ma-debt/debt-restructuring',
@@ -937,6 +938,32 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           '라이선스 수익 창출',
         ],
         targetClient: '기술기반 기업, R&D 중심 기업',
+      },
+      {
+        title: '홈페이지 제작 지원',
+        description: '전문적인 기업 홈페이지부터 브랜딩까지 원스톱 디지털 마케팅 솔루션',
+        features: [
+          '맞춤형 홈페이지 기획 및 설계',
+          '반응형 웹사이트 제작',
+          'SEO 최적화 및 검색엔진 등록',
+          '브랜드 아이덴티티 디자인',
+          '콘텐츠 관리 시스템 구축',
+          '유지보수 및 업데이트 지원'
+        ],
+        benefits: [
+          '전문적인 기업 이미지 구축',
+          '온라인 마케팅 효과 극대화',
+          '고객 접근성 향상',
+          '브랜드 신뢰도 제고',
+          '비용 효율적인 마케팅',
+          '24시간 온라인 홍보 창구'
+        ],
+        targetClient: '스타트업, 중소기업, 리브랜딩 필요 기업',
+        caseStudy: {
+          situation: '제조업 Q사, 온라인 마케팅 강화 및 브랜드 이미지 개선 필요',
+          solution: '기업 특성을 반영한 전문 홈페이지 제작 및 SEO 최적화',
+          result: '온라인 문의 300% 증가, 브랜드 인지도 대폭 향상'
+        }
       },
     ],
   },
