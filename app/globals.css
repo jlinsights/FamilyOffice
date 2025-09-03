@@ -228,16 +228,16 @@
   }
 
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 240 10% 3.9%; /* 깊은 네이비 톤으로 변경 */
     --foreground: 0 0% 98%;
     --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%; /* 일관된 네이비 계열 */
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
+    --muted: 240 3.7% 15.9%; /* secondary와 동일하게 통일 */
+    --muted-foreground: 215 20.2% 65.1%;
+    --border: 240 3.7% 15.9%; /* 테두리도 통일 */
+    --input: 240 3.7% 15.9%;
     --ring: 217 91% 60%;
     /* 다크 모드 접근성 색상 */
     --focus-ring: 217 91% 60%;
