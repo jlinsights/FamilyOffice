@@ -146,8 +146,8 @@ export const Header = memo(function Header({
             aria-label="주 메뉴"
           >
             {NAVIGATION_ITEMS.map((item: NavigationItem) => (
-              <div key={item.href} className="relative group">
-                {item.submenu ? (
+              <div key={item.href || item.label} className="relative group">
+                {item.submenu && item.submenu.length > 0 ? (
                   <>
                     <button
                       className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1 py-1 flex items-center gap-1 h-9"
@@ -201,7 +201,7 @@ export const Header = memo(function Header({
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1 py-1 flex items-center h-9"
+                    className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2 flex items-center h-9"
                     aria-label={
                       item.isExternal
                         ? `${item.label} (새 창에서 열림)`
@@ -256,8 +256,8 @@ export const Header = memo(function Header({
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
             {NAVIGATION_ITEMS.map((item: NavigationItem) => (
-              <div key={item.href}>
-                {item.submenu ? (
+              <div key={item.href || item.label}>
+                {item.submenu && item.submenu.length > 0 ? (
                   <div className="space-y-1">
                     <div className="px-3 py-2 text-base font-medium text-foreground">
                       {item.label}
@@ -291,7 +291,7 @@ export const Header = memo(function Header({
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="block px-3 py-2 text-base font-medium text-gray-900 dark:text-gray-100 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
                     onClick={handleMobileLinkClick}
                     aria-label={
                       item.isExternal
