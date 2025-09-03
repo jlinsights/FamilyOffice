@@ -28,9 +28,16 @@ export const metadata: Metadata = {
   },
   description: '【9개 분야 42개 전문 솔루션】 법인보험 × 가업승계 통합솔루션 | 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너',
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.png',
+    icon: [
+      { url: '/favicon.ico?v=2025', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/favicon.png?v=2025', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico?v=2025',
+    apple: { url: '/favicon.png?v=2025', sizes: '180x180' },
+    other: [
+      { rel: 'icon', url: '/favicon.ico?v=2025', sizes: 'any' },
+      { rel: 'apple-touch-icon', url: '/favicon.png?v=2025', sizes: '180x180' },
+    ],
   },
   verification: {
     google: 'your-google-verification-code',
@@ -77,10 +84,12 @@ export default function RootLayout({
         
         {/* Critical CSS 최적화 - Inter 폰트는 next/font/google로 이미 최적화 로딩 중 */}
         
-        {/* 파비콘 및 앱 아이콘 설정 */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        {/* 파비콘 및 앱 아이콘 설정 - 캐시 우회를 위한 버전 추가 */}
+        <link rel="icon" href="/favicon.ico?v=2025" sizes="16x16 32x32 48x48" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico?v=2025" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/favicon.png?v=2025" sizes="180x180" />
+        <link rel="icon" href="/favicon.png?v=2025" sizes="192x192" type="image/png" />
+        <link rel="manifest" href="/site.webmanifest?v=2025" />
         
         {/* Critical 리소스 우선 로딩 - 실제 존재하는 파일로 변경 */}
         <link rel="preload" href="/SVG/FamilyOfficeS_blue.svg" as="image" type="image/svg+xml" />
