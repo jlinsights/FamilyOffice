@@ -253,16 +253,33 @@ const ServicePageContent = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredServices.flatMap((category) =>
-                category.services.map((service, serviceIndex) => (
-                  <div
-                    key={`${category.id}-${serviceIndex}`}
-                    className="group relative bg-background border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/50"
-                    style={{
-                      animationDelay: `${serviceIndex * 100}ms`,
-                    }}
-                  >
+            <div className="space-y-12">
+              {filteredServices.map((category) => (
+                <div key={category.id} id={category.id} className="scroll-mt-20">
+                  {selectedCategory === 'all' && (
+                    <div className="mb-8">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                          <category.icon className="h-5 w-5 text-primary" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
+                        <Badge variant="outline" className="text-sm">
+                          {category.services.length}개 서비스
+                        </Badge>
+                      </div>
+                      <p className="text-muted-foreground mb-6">{category.description}</p>
+                    </div>
+                  )}
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {category.services.map((service, serviceIndex) => (
+                      <div
+                        key={`${category.id}-${serviceIndex}`}
+                        className="group relative bg-background border border-border rounded-lg p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/50"
+                        style={{
+                          animationDelay: `${serviceIndex * 100}ms`,
+                        }}
+                      >
                     <div className="flex items-start justify-between mb-4">
                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                         <category.icon className="h-6 w-6 text-primary" />
@@ -316,9 +333,11 @@ const ServicePageContent = () => {
                         }
                       />
                     </div>
+                      </div>
+                    ))}
                   </div>
-                ))
-              )}
+                </div>
+              ))}
             </div>
           </div>
         </section>

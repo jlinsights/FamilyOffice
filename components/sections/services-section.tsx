@@ -77,51 +77,60 @@ export function ServicesSection() {
         {/* 서비스 카테고리 그리드 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {mainPageServices.map((service, index) => (
-            <Card
+            <Link
               key={service.id}
-              className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 animate-slide-up border-border/50 hover:border-primary/30 bg-card text-card-foreground"
-              style={{ animationDelay: `${index * 100}ms` }}
+              href={`/solutions#${service.id}`}
+              className="block"
             >
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors">
-                    <service.icon className="h-5 w-5 text-primary dark:text-emerald-300" />
+              <Card
+                className="group hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-slide-up border-border/50 hover:border-primary/50 bg-card text-card-foreground cursor-pointer hover:bg-accent/5"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-all duration-300 group-hover:scale-110">
+                      <service.icon className="h-5 w-5 text-primary dark:text-emerald-300 transition-transform duration-300 group-hover:scale-110" />
+                    </div>
+                    <Badge
+                      variant="secondary"
+                      className="text-xs transition-all duration-300 group-hover:bg-primary group-hover:text-white dark:group-hover:bg-emerald-600"
+                    >
+                      {service.serviceCount}개 서비스
+                    </Badge>
                   </div>
-                  <Badge
-                    variant="secondary"
-                    className="text-xs"
-                  >
-                    {service.serviceCount}개 서비스
-                  </Badge>
-                </div>
-                <CardTitle className="text-lg font-semibold text-foreground dark:text-white group-hover:text-primary dark:group-hover:text-emerald-300 transition-colors">
-                  {service.title}
-                </CardTitle>
-                <CardDescription className="text-sm text-muted-foreground leading-relaxed">
-                  {service.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="space-y-2">
-                  {service.keyFeatures.slice(0, 3).map((feature, idx) => (
-                    <div key={idx} className="flex items-center text-sm">
-                      <CheckCircle className="h-3 w-3 text-primary dark:text-emerald-300 mr-2 flex-shrink-0" />
-                      <span className="text-muted-foreground">
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
-                  {service.keyFeatures.length > 3 && (
-                    <div className="flex items-center text-sm">
-                      <CheckCircle className="h-3 w-3 text-primary dark:text-emerald-300 mr-2 flex-shrink-0" />
-                      <span className="text-muted-foreground">
-                        +{service.keyFeatures.length - 3}개 더
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+                  <CardTitle className="text-lg font-semibold text-foreground dark:text-white group-hover:text-primary dark:group-hover:text-emerald-300 transition-colors duration-300">
+                    {service.title}
+                  </CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground leading-relaxed">
+                    {service.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="space-y-2">
+                    {service.keyFeatures.slice(0, 3).map((feature, idx) => (
+                      <div key={idx} className="flex items-center text-sm">
+                        <CheckCircle className="h-3 w-3 text-primary dark:text-emerald-300 mr-2 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                        <span className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                    {service.keyFeatures.length > 3 && (
+                      <div className="flex items-center text-sm">
+                        <CheckCircle className="h-3 w-3 text-primary dark:text-emerald-300 mr-2 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                        <span className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
+                          +{service.keyFeatures.length - 3}개 더
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="mt-4 flex items-center justify-end text-primary dark:text-emerald-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-medium">자세히 보기</span>
+                    <ArrowRight className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 
