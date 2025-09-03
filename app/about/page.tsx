@@ -162,7 +162,7 @@ export default function AboutPage() {
               >
                 <Link href="/solutions">
                   <Briefcase className="mr-2 h-4 w-4" />
-                  서비스 보기
+                  솔루션
                 </Link>
               </Button>
             </div>
