@@ -20,9 +20,20 @@ import { generateStructuredData } from '@/lib/seo';
 
 export default function ClientPage() {
   const [mounted, setMounted] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   if (!mounted) {
@@ -91,7 +102,7 @@ export default function ClientPage() {
         <Providers>
           <div className="min-h-screen">
             <AdminAccessDeniedAlert />
-            <Header />
+            <Header isScrolled={isScrolled} />
             <SmoothScroll />
             <SkipLinks />
             <PerformanceMonitor />

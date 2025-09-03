@@ -61,8 +61,12 @@ export const Header = memo(function Header({
   if (!mounted || !isClient) {
     return (
       <header 
-        className="fixed w-full z-50 bg-background/80 backdrop-blur-md border-b border-border"
-        style={{ top: 'var(--announcement-height, 0px)' }}
+        className="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800"
+        style={{ 
+          top: 'var(--announcement-height, 0px)',
+          willChange: 'transform, opacity',
+          backfaceVisibility: 'hidden'
+        }}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3">
@@ -85,12 +89,16 @@ export const Header = memo(function Header({
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-200 border-b ${
+      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
         isScrolled || isMobileMenuOpen
-          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-gray-200 dark:border-gray-800'
-          : 'bg-transparent border-transparent'
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-gray-200 dark:border-gray-800 shadow-sm'
+          : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-transparent'
       }`}
-      style={{ top: 'var(--announcement-height, 0px)' }}
+      style={{ 
+        top: 'var(--announcement-height, 0px)',
+        willChange: 'transform, opacity',
+        backfaceVisibility: 'hidden'
+      }}
       role="banner"
       aria-label="사이트 헤더"
     >

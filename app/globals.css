@@ -10,6 +10,17 @@
     scroll-behavior: smooth;
   }
 
+  /* 헤더 스티키 최적화 */
+  header[role="banner"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
   /* 폰트 로딩 최적화 - LCP 개선 */
   .playfair-display {
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
