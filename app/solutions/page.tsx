@@ -17,7 +17,7 @@ import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
-import { SERVICE_CATEGORIES, SEO_PAGE_MAPPING } from '@/constants/services';
+import { SERVICE_CATEGORIES, SEO_PAGE_MAPPING, getServiceStats } from '@/constants/services';
 import { generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/structured-data';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
@@ -26,6 +26,9 @@ const ServicePageContent = () => {
   const [startAnimation, setStartAnimation] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = React.useState('all');
   const statsSectionRef = React.useRef<HTMLDivElement>(null);
+  
+  // 서비스 통계 정보 동적 계산
+  const { totalCategories, totalServices } = getServiceStats();
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -177,7 +180,7 @@ const ServicePageContent = () => {
                 </Badge>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">9개 분야</span> 42개 전문 솔루션
+                <span className="text-primary">{totalCategories}개 분야</span> {totalServices}개 전문 솔루션
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
                 중소중견기업 CEO를 위한 <span className="font-bold text-primary">체계화된 전문 솔루션</span>으로 맞춤형 컨설팅을 제공합니다
@@ -189,7 +192,7 @@ const ServicePageContent = () => {
                   onClick={() => setSelectedCategory('all')}
                   className="font-semibold text-sm"
                 >
-                  전체 (42개)
+                  전체 ({totalServices}개)
                 </Button>
                 <Button
                   variant={selectedCategory === 'corporate-insurance-finance' ? 'default' : 'outline'}
