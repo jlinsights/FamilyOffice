@@ -231,13 +231,14 @@ export const Header = memo(function Header({
             ) : (
               !isLoading && (
                 <>
-                  <Link
+                  {/* 로그인 버튼 임시 숨김 */}
+                  {/* <Link
                     href="/auth/sign-in"
                     className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
                     aria-label="로그인 페이지로 이동"
                   >
                     로그인
-                  </Link>
+                  </Link> */}
                   <Link
                     href="/contact"
                     className="inline-flex items-center justify-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
@@ -328,14 +329,15 @@ export const Header = memo(function Header({
                 </Link>
               ) : (
                 <>
-                  <Link
+                  {/* 모바일 로그인 버튼 임시 숨김 */}
+                  {/* <Link
                     href="/auth/sign-in"
                     onClick={handleMobileLinkClick}
                     className="flex items-center justify-center w-full border border-primary text-primary font-semibold rounded-lg px-4 py-3 hover:bg-primary hover:text-white transition-colors duration-200"
                     aria-label="로그인"
                   >
                     로그인
-                  </Link>
+                  </Link> */}
                   <Link
                     href="/contact"
                     onClick={handleMobileLinkClick}
