@@ -6,6 +6,7 @@ import { ArrowRight, FileText, Mail, Download, Calculator, TrendingUp, Users, Bo
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
+import InsightsFeed from '@/components/insights-feed';
 
 export const metadata: Metadata = {
   title: '인사이트 센터 | 기업승계 전문 분석 | FamilyOffice S',
@@ -82,29 +83,6 @@ const insightSections = [
   },
 ];
 
-const latestInsights = [
-  {
-    category: '투자전략',
-    title: '2025년 글로벌 투자 전망과 포트폴리오 전략',
-    excerpt: '불확실한 시장 환경에서 안정적인 수익을 추구하는 자산 배분 전략을 소개합니다.',
-    date: '2025.1.15',
-    readTime: '5분',
-  },
-  {
-    category: '세무최적화',
-    title: '가족법인 설립을 통한 절세 전략 완벽 가이드',
-    excerpt: '합법적인 세무 구조 개선을 통해 상속·증여세를 절감하는 방법을 알아봅니다.',
-    date: '2025.1.12',
-    readTime: '8분',
-  },
-  {
-    category: '패밀리오피스',
-    title: '성공적인 가업승계를 위한 5가지 핵심 전략',
-    excerpt: '100년 기업으로 나아가기 위한 체계적인 승계 계획 수립 방법을 제시합니다.',
-    date: '2025.1.10',
-    readTime: '6분',
-  },
-];
 
 export default function InsightsPage() {
   return (
@@ -176,59 +154,8 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* Latest Insights */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              최신 인사이트
-            </h2>
-            <p className="text-lg text-foreground/70">
-              자산관리 전문가들이 전하는 최신 시장 분석과 투자 전략
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {latestInsights.map((insight, index) => (
-              <Card key={index} className="bg-card border-border hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-primary">
-                      {insight.category}
-                    </span>
-                    <span className="text-sm text-foreground/60">
-                      {insight.readTime} 읽기
-                    </span>
-                  </div>
-                  <CardTitle className="text-xl line-clamp-2">{insight.title}</CardTitle>
-                  <CardDescription className="text-base line-clamp-3 mt-2">
-                    {insight.excerpt}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-foreground/60">
-                      {insight.date}
-                    </span>
-                    <Link href="/insights/market-intelligence" className="text-sm font-medium text-primary hover:text-primary/80">
-                      읽어보기 →
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link href="/insights/market-intelligence">
-              <Button size="lg" variant="outline">
-                모든 글 보기
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Latest Insights - RSS 피드 통합 */}
+      <InsightsFeed limit={6} showHeader={true} showViewAll={true} />
 
 
       {/* Stats Section */}

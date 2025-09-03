@@ -414,8 +414,8 @@ export default function WeeklyBriefPage() {
         </div>
       </section>
 
-      {/* Recent Issues Section */}
-      <section className="recent-issues py-20 bg-muted/30">
+      {/* Recent Issues Section - RSS 피드 통합 */}
+      <div className="recent-issues py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-foreground mb-4">
@@ -425,92 +425,63 @@ export default function WeeklyBriefPage() {
               지난 주간 브리프에서 다뤘던 핵심 주제들을 확인해보세요
             </p>
           </div>
-
+          
+          {/* beehiiv 뉴스레터만 표시하고 fallback으로 기존 데이터 사용 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {isLoading ? (
-              // 로딩 스켈레톤
-              [...Array(4)].map((_, index) => (
-                <Card key={index} className="overflow-hidden">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <Skeleton className="h-5 w-12" />
-                      <Skeleton className="h-4 w-24" />
-                    </div>
-                    <Skeleton className="h-6 w-full mb-2" />
-                    <Skeleton className="h-6 w-3/4" />
-                  </CardHeader>
-                  <CardContent>
-                    <Skeleton className="h-4 w-full mb-2" />
-                    <Skeleton className="h-4 w-5/6 mb-4" />
-                    <div className="flex items-center justify-between mb-4">
-                      <Skeleton className="h-4 w-20" />
-                      <Skeleton className="h-4 w-16" />
-                    </div>
-                    <div className="flex gap-2 mb-4">
-                      <Skeleton className="h-6 w-16" />
-                      <Skeleton className="h-6 w-16" />
-                      <Skeleton className="h-6 w-16" />
-                    </div>
-                    <Skeleton className="h-9 w-full" />
-                  </CardContent>
-                </Card>
-              ))
-            ) : (
-              recentPosts.map((issue, index) => (
-              <Card key={index} className="card-modern bg-card hover:shadow-lg transition-all duration-300 overflow-hidden group">
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant="outline" size="sm" className="text-xs font-mono">
-                      {issue.issueNumber}
+            {recentPosts.map((issue, index) => (
+            <Card key={index} className="card-modern bg-card hover:shadow-lg transition-all duration-300 overflow-hidden group">
+              <CardHeader className="pb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <Badge variant="outline" size="sm" className="text-xs font-mono">
+                    {issue.issueNumber}
+                  </Badge>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Calendar className="w-4 h-4" />
+                    {issue.date}
+                  </div>
+                </div>
+                <CardTitle className="text-xl leading-tight group-hover:text-primary transition-colors">
+                  {issue.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base mb-4 leading-relaxed">
+                  {issue.excerpt}
+                </CardDescription>
+                
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Clock className="w-4 h-4" />
+                    읽는 시간: {issue.readTime}
+                  </div>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Mail className="w-3 h-3" />
+                    뉴스레터
+                  </div>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {issue.categories.map((category, catIndex) => (
+                    <Badge key={catIndex} variant="secondary" size="sm">
+                      {category}
                     </Badge>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Calendar className="w-4 h-4" />
-                      {issue.date}
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl leading-tight group-hover:text-primary transition-colors">
-                    {issue.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base mb-4 leading-relaxed">
-                    {issue.excerpt}
-                  </CardDescription>
-                  
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Clock className="w-4 h-4" />
-                      읽는 시간: {issue.readTime}
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <Mail className="w-3 h-3" />
-                      뉴스레터
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {issue.categories.map((category, catIndex) => (
-                      <Badge key={catIndex} variant="secondary" size="sm">
-                        {category}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  <Link 
-                    href={issue.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <Button variant="outline" size="sm" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                      열어보기
-                      <ArrowRight className="ml-2 h-3 w-3" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-              ))
-            )}
+                  ))}
+                </div>
+                
+                <Link 
+                  href={issue.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <Button variant="outline" size="sm" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    열어보기
+                    <ArrowRight className="ml-2 h-3 w-3" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+            ))}
           </div>
           
           <div className="text-center mt-12">
@@ -522,7 +493,7 @@ export default function WeeklyBriefPage() {
             </Link>
           </div>
         </div>
-      </section>
+      </div>
 
 
       {/* Recent Topics */}
