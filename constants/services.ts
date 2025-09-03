@@ -119,7 +119,10 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
   // 재무·세무·노무 통합관리
   '가지급금 해결 방안': '/finance-tax-labor/provisional-payment',
   '경정청구 전문 서비스': '/finance-tax-labor/tax-refund',
-  '고용지원금 활용 컨설팅': '/finance-tax-labor/employment-subsidy'
+  '고용지원금 활용 컨설팅': '/finance-tax-labor/employment-subsidy',
+  
+  // HR 지원
+  '중소기업 노무관리': '/labor-management'
 };
 
 /**
