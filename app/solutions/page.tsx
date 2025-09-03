@@ -365,8 +365,8 @@ const ServicePageContent = () => {
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         
                         {/* Premium Badge */}
-                        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <Badge variant="outline" size="xs" className="bg-primary/10 text-primary border-primary/30">
+                        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                          <Badge variant="outline" size="xs" className="bg-white/95 dark:bg-gray-900/95 text-primary border-primary/50 shadow-lg backdrop-blur-sm">
                             Premium
                           </Badge>
                         </div>
@@ -376,7 +376,7 @@ const ServicePageContent = () => {
                             <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                               <category.icon className="h-7 w-7 text-primary" />
                             </div>
-                            <div className="text-right">
+                            <div className="text-right mt-3">
                               <Badge variant="secondary" size="xs" className="mb-1">
                                 {category.title}
                               </Badge>
