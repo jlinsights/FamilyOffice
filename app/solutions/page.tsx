@@ -108,7 +108,7 @@ const ServicePageContent = () => {
                 eventType="consultation"
               />
               <Button variant="outline" size="lg" className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg" asChild>
-                <Link href="/about">회사 소개</Link>
+                <Link href="/about">소개</Link>
               </Button>
             </div>
           </div>
