@@ -174,21 +174,38 @@ export default function InsightsFeed({
                   </div>
                 </div>
                 
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className="w-full group-hover:border-primary group-hover:text-primary"
-                >
-                  <a 
-                    href={item.url || '#'} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                <div className="flex gap-2">
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 group-hover:border-primary group-hover:text-primary"
                   >
-                    읽어보기
-                    <ExternalLink className="ml-2 h-3 w-3" />
-                  </a>
-                </Button>
+                    <Link href="/insights/market-intelligence">
+                      읽어보기
+                      <ArrowRight className="ml-2 h-3 w-3" />
+                    </Link>
+                  </Button>
+                  
+                  {item.url && (
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="group-hover:border-primary group-hover:text-primary"
+                    >
+                      <a 
+                        href={item.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        title="원본 보기"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        <span className="ml-1">원본</span>
+                      </a>
+                    </Button>
+                  )}
+                </div>
               </CardContent>
             </Card>
           ))}
