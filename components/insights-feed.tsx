@@ -79,7 +79,7 @@ export default function InsightsFeed({
       case 'beehiiv':
         return 'default';
       case 'naver-blog':
-        return 'secondary';
+        return 'default'; // 블로그도 뉴스레터와 동일한 디자인
       default:
         return 'outline';
     }
@@ -236,7 +236,7 @@ const fallbackContent: RSSItem[] = [
     excerpt: '불확실한 시장 환경에서 안정적인 수익을 추구하는 자산 배분 전략을 소개합니다.',
     url: '/insights/market-intelligence',
     publishedAt: '2025-01-15T00:00:00Z',
-    author: '패밀리오피스 에디터',
+    author: 'Editor',
     source: 'beehiiv',
     category: '투자전략',
     tags: ['투자', '전략', '포트폴리오'],
@@ -249,7 +249,7 @@ const fallbackContent: RSSItem[] = [
     excerpt: '합법적인 세무 구조 개선을 통해 상속·증여세를 절감하는 방법을 알아봅니다.',
     url: '/insights/market-intelligence',
     publishedAt: '2025-01-12T00:00:00Z',
-    author: '패밀리오피스 에디터',
+    author: 'Editor',
     source: 'beehiiv',
     category: '세무최적화',
     tags: ['세무', '절세', '가족법인'],
@@ -262,7 +262,7 @@ const fallbackContent: RSSItem[] = [
     excerpt: '100년 기업으로 나아가기 위한 체계적인 승계 계획 수립 방법을 제시합니다.',
     url: '/insights/market-intelligence',
     publishedAt: '2025-01-10T00:00:00Z',
-    author: '패밀리오피스 에디터',
+    author: 'Editor',
     source: 'beehiiv',
     category: '패밀리오피스',
     tags: ['가업승계', '전략', '기업경영'],

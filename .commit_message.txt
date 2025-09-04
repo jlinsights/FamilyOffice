@@ -1,1 +1,1 @@
-🐛 RSS aggregator cache 모듈 import 오류 수정 및 API 라우트 호환성 개선
+🚀 Production deployment: RSS 피드 통합 완료, 네이버 블로그 연동, TypeScript 호환성 개선

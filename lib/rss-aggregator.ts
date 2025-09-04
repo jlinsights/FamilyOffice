@@ -68,7 +68,7 @@ export class RSSAggregator {
         excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
         url: item.link || '',
         publishedAt: item.pubDate || new Date().toISOString(),
-        author: item.author || item.creator || '패밀리오피스 에디터',
+        author: this.normalizeAuthorName(item.author || item.creator || '패밀리오피스 에디터'),
         source: 'beehiiv' as const,
         category: this.extractCategory(item.categories),
         tags: this.extractTags(item.categories || []),
@@ -111,7 +111,7 @@ export class RSSAggregator {
         excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
         url: item.link || '',
         publishedAt: item.pubDate || new Date().toISOString(),
-        author: item.author || item.creator || '패밀리오피스 블로거',
+        author: this.normalizeAuthorName(item.author || item.creator || '패밀리오피스 블로거'),
         source: 'naver-blog' as const,
         category: this.extractCategory(item.categories),
         tags: this.extractTags(item.categories || []),
@@ -228,6 +228,23 @@ export class RSSAggregator {
     const wordCount = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
     const minutes = Math.ceil(wordCount / wordsPerMinute);
     return `${minutes}분 읽기`;
+  }
+
+  /**
+   * 작성자 이름 정규화
+   */
+  private normalizeAuthorName(author: string): string {
+    // lim_jaehong, Jaehong LIM 등을 'Editor'로 변환
+    if (author.toLowerCase().includes('lim_jaehong') || 
+        author.toLowerCase().includes('jaehong') || 
+        author.toLowerCase().includes('lim')) {
+      return 'Editor';
+    }
+    // 패밀리오피스 에디터/블로거도 'Editor'로 통일
+    if (author.includes('패밀리오피스')) {
+      return 'Editor';
+    }
+    return author;
   }
 
   private extractImageUrl(item: ParsedFeedItem): string | undefined {
