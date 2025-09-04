@@ -89,6 +89,9 @@ function getSourceBadgeVariant(source: string) {
 export default async function InsightContentPage({ params }: InsightContentPageProps) {
   const { source, slug } = await params;
   
+  // 디버깅을 위해 로그 추가
+  console.log('Fetching content for:', { source, slug });
+  
   try {
     const content = await rssAggregator.getContentById(slug);
     

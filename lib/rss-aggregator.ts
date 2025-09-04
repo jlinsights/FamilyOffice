@@ -59,7 +59,14 @@ export class RSSAggregator {
 
       // RSS 피드 파싱
       const feedUrl = 'https://rss.beehiiv.com/feeds/Ur0inYkjHr.xml';
-      const feed = await this.parser.parseURL(feedUrl);
+      let feed;
+      try {
+        feed = await this.parser.parseURL(feedUrl);
+      } catch (parseError) {
+        console.error('RSS 파싱 오류:', parseError);
+        // 파싱 실패 시 빈 배열 반환
+        return [];
+      }
       
       const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
         id: this.generateId('beehiiv', item.guid || item.link || '', index),
@@ -102,7 +109,14 @@ export class RSSAggregator {
 
       // 네이버 블로그 RSS URL
       const feedUrl = `https://rss.blog.naver.com/${blogId}.xml`;
-      const feed = await this.parser.parseURL(feedUrl);
+      let feed;
+      try {
+        feed = await this.parser.parseURL(feedUrl);
+      } catch (parseError) {
+        console.error('네이버 RSS 파싱 오류:', parseError);
+        // 파싱 실패 시 빈 배열 반환
+        return [];
+      }
       
       const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
         id: this.generateId('naver', item.guid || item.link || '', index),
@@ -173,20 +187,33 @@ export class RSSAggregator {
    */
   async getContentById(id: string): Promise<RSSItem | null> {
     try {
+      console.log('Getting content by ID:', id);
+      
       // beehiiv에서 먼저 찾기
-      const beehiivPosts = await this.getBeehiivPosts(50);
-      const beehiivPost = beehiivPosts.find(post => post.id === id);
-      if (beehiivPost) return beehiivPost;
+      try {
+        const beehiivPosts = await this.getBeehiivPosts(50);
+        const beehiivPost = beehiivPosts.find(post => post.id === id);
+        if (beehiivPost) {
+          console.log('Found beehiiv post:', beehiivPost.title);
+          return beehiivPost;
+        }
+      } catch (error) {
+        console.error('beehiiv 조회 실패:', error);
+      }
 
       // 네이버 블로그에서 찾기
       try {
         const naverPosts = await this.getNaverBlogPosts('lim_jaehong', 50);
         const naverPost = naverPosts.find(post => post.id === id);
-        if (naverPost) return naverPost;
+        if (naverPost) {
+          console.log('Found naver post:', naverPost.title);
+          return naverPost;
+        }
       } catch (naverError) {
-        console.warn('네이버 블로그 조회 실패:', naverError);
+        console.error('네이버 블로그 조회 실패:', naverError);
       }
 
+      console.log('Content not found for ID:', id);
       return null;
     } catch (error) {
       console.error('콘텐츠 ID 조회 오류:', error);

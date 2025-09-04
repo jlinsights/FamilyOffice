@@ -1,1 +1,1 @@
-🚀 Production deployment: RSS 피드 통합 완료, 네이버 블로그 연동, TypeScript 호환성 개선
+🐛 RSS 피드 오류 해결: 읽어보기 버튼을 외부 링크로 직접 연결, 에러 처리 개선

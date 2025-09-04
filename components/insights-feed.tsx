@@ -45,21 +45,24 @@ export default function InsightsFeed({
       const response = await fetch(`/api/insights?${params.toString()}`);
       
       if (!response.ok) {
-        throw new Error('Failed to fetch insights');
+        console.warn('API response not ok, using fallback data');
+        setContent(fallbackContent.slice(0, limit));
+        return;
       }
 
       const data = await response.json();
       
-      if (data.success) {
+      if (data.success && data.data && data.data.length > 0) {
         setContent(data.data);
       } else {
-        throw new Error(data.message || 'Failed to fetch insights');
+        console.warn('No data from API, using fallback');
+        setContent(fallbackContent.slice(0, limit));
       }
     } catch (err) {
-      console.error('Insights feed error:', err);
+      console.warn('Insights feed error, using fallback:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
       // 에러 시 fallback 데이터 사용
-      setContent(fallbackContent);
+      setContent(fallbackContent.slice(0, limit));
     } finally {
       setLoading(false);
     }
@@ -125,11 +128,6 @@ export default function InsightsFeed({
             <p className="text-lg text-foreground/70">
               자산관리 전문가들이 전하는 최신 시장 분석과 투자 전략
             </p>
-            {error && (
-              <p className="text-orange-600 text-sm mt-2">
-                ⚠️ 일부 콘텐츠를 불러올 수 없어 기본 콘텐츠를 표시합니다.
-              </p>
-            )}
           </div>
         )}
 
@@ -176,37 +174,21 @@ export default function InsightsFeed({
                   </div>
                 </div>
                 
-                <div className="flex gap-2">
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 group-hover:border-primary group-hover:text-primary"
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="w-full group-hover:border-primary group-hover:text-primary"
+                >
+                  <a 
+                    href={item.url || '#'} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                   >
-                    <Link href={`/insights/${item.source}/${item.id}`}>
-                      읽어보기
-                      <ArrowRight className="ml-2 h-3 w-3" />
-                    </Link>
-                  </Button>
-                  
-                  {item.url && (
-                    <Button
-                      asChild
-                      variant="ghost"
-                      size="sm"
-                      className="px-3"
-                    >
-                      <a 
-                        href={item.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        title="원본 보기"
-                      >
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    </Button>
-                  )}
-                </div>
+                    읽어보기
+                    <ExternalLink className="ml-2 h-3 w-3" />
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           ))}
@@ -234,10 +216,10 @@ const fallbackContent: RSSItem[] = [
     title: '2025년 글로벌 투자 전망과 포트폴리오 전략',
     content: '',
     excerpt: '불확실한 시장 환경에서 안정적인 수익을 추구하는 자산 배분 전략을 소개합니다.',
-    url: '/insights/market-intelligence',
+    url: 'https://blog.naver.com/lim_jaehong',
     publishedAt: '2025-01-15T00:00:00Z',
     author: 'Editor',
-    source: 'beehiiv',
+    source: 'naver-blog',
     category: '투자전략',
     tags: ['투자', '전략', '포트폴리오'],
     readTime: '5분 읽기'
@@ -247,7 +229,7 @@ const fallbackContent: RSSItem[] = [
     title: '가족법인 설립을 통한 절세 전략 완벽 가이드',
     content: '',
     excerpt: '합법적인 세무 구조 개선을 통해 상속·증여세를 절감하는 방법을 알아봅니다.',
-    url: '/insights/market-intelligence',
+    url: 'https://newsletter.familyoffices.vip',
     publishedAt: '2025-01-12T00:00:00Z',
     author: 'Editor',
     source: 'beehiiv',
@@ -260,7 +242,7 @@ const fallbackContent: RSSItem[] = [
     title: '성공적인 가업승계를 위한 5가지 핵심 전략',
     content: '',
     excerpt: '100년 기업으로 나아가기 위한 체계적인 승계 계획 수립 방법을 제시합니다.',
-    url: '/insights/market-intelligence',
+    url: 'https://newsletter.familyoffices.vip',
     publishedAt: '2025-01-10T00:00:00Z',
     author: 'Editor',
     source: 'beehiiv',
