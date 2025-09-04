@@ -1,5 +1,5 @@
 import Parser from 'rss-parser';
-import { cache } from './cache';
+import { cacheManagers } from './cache';
 
 export interface RSSItem {
   id: string;
@@ -52,9 +52,9 @@ export class RSSAggregator {
     
     try {
       // 캐시 확인
-      const cached = await cache.get(cacheKey);
+      const cached = await cacheManagers.content.get<string>(cacheKey);
       if (cached) {
-        return JSON.parse(cached as string).slice(0, limit);
+        return JSON.parse(cached).slice(0, limit);
       }
 
       // RSS 피드 파싱
@@ -78,7 +78,7 @@ export class RSSAggregator {
       }));
 
       // 캐시 저장
-      await cache.setex(cacheKey, this.cacheDuration, JSON.stringify(posts));
+      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
 
       return posts.slice(0, limit);
     } catch (error) {
@@ -95,9 +95,9 @@ export class RSSAggregator {
     
     try {
       // 캐시 확인
-      const cached = await cache.get(cacheKey);
+      const cached = await cacheManagers.content.get<string>(cacheKey);
       if (cached) {
-        return JSON.parse(cached as string).slice(0, limit);
+        return JSON.parse(cached).slice(0, limit);
       }
 
       // 네이버 블로그 RSS URL
@@ -121,7 +121,7 @@ export class RSSAggregator {
       }));
 
       // 캐시 저장
-      await cache.setex(cacheKey, this.cacheDuration, JSON.stringify(posts));
+      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
 
       return posts.slice(0, limit);
     } catch (error) {
@@ -178,10 +178,14 @@ export class RSSAggregator {
       const beehiivPost = beehiivPosts.find(post => post.id === id);
       if (beehiivPost) return beehiivPost;
 
-      // 여러 네이버 블로그에서 찾기 (필요시 확장)
-      // const naverPosts = await this.getNaverBlogPosts('your-blog-id', 50);
-      // const naverPost = naverPosts.find(post => post.id === id);
-      // if (naverPost) return naverPost;
+      // 네이버 블로그에서 찾기
+      try {
+        const naverPosts = await this.getNaverBlogPosts('lim_jaehong', 50);
+        const naverPost = naverPosts.find(post => post.id === id);
+        if (naverPost) return naverPost;
+      } catch (naverError) {
+        console.warn('네이버 블로그 조회 실패:', naverError);
+      }
 
       return null;
     } catch (error) {

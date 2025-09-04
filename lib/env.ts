@@ -53,6 +53,11 @@ export const serverEnvSchema = z.object({
     .optional(),
   BEEHIIV_PUBLICATION_ID: z.string().optional(),
   
+  // Blog Integration
+  NAVER_BLOG_ID: z.string()
+    .min(1, 'NAVER_BLOG_ID cannot be empty')
+    .optional(),
+  
   // Monitoring - 선택사항
   LOGS_SO_API_KEY: z.string().optional(),
   LOGS_SO_WORKSPACE_ID: z.string().optional(),
@@ -157,6 +162,7 @@ export function createEnv() {
         REDIS_PASSWORD: process.env.REDIS_PASSWORD,
         BEEHIIV_API_KEY: process.env.BEEHIIV_API_KEY,
         BEEHIIV_PUBLICATION_ID: process.env.BEEHIIV_PUBLICATION_ID,
+        NAVER_BLOG_ID: process.env.NAVER_BLOG_ID,
         LOGS_SO_API_KEY: process.env.LOGS_SO_API_KEY,
         LOGS_SO_WORKSPACE_ID: process.env.LOGS_SO_WORKSPACE_ID,
         KAKAO_REST_API_KEY: process.env.KAKAO_REST_API_KEY,

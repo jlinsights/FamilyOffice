@@ -1,1 +1,1 @@
-🚀 beehiiv RSS 피드 통합으로 인사이트 페이지 완성
+🐛 RSS aggregator cache 모듈 import 오류 수정 및 API 라우트 호환성 개선

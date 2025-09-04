@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { rssAggregator } from '@/lib/rss-aggregator';
+import { env } from '@/lib/env';
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,7 +9,7 @@ export async function GET(request: NextRequest) {
     // 쿼리 파라미터 추출
     const source = searchParams.get('source') as 'beehiiv' | 'naver-blog' | null;
     const limit = parseInt(searchParams.get('limit') || '20');
-    const blogId = searchParams.get('blog_id'); // 네이버 블로그 ID
+    const blogId = searchParams.get('blog_id') || env.NAVER_BLOG_ID; // 환경변수에서 기본값 가져오기
     const category = searchParams.get('category');
     
     let content;
@@ -17,8 +18,8 @@ export async function GET(request: NextRequest) {
       // 특정 소스의 콘텐츠만 가져오기
       content = await rssAggregator.getContentBySource(source, blogId || undefined, limit);
     } else {
-      // 통합 콘텐츠 가져오기
-      content = await rssAggregator.getIntegratedContent(blogId || undefined, limit);
+      // 통합 콘텐츠 가져오기 (beehiiv + 네이버 블로그)
+      content = await rssAggregator.getIntegratedContent(blogId, limit);
     }
     
     // 카테고리 필터링

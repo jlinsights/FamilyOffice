@@ -7,9 +7,9 @@ interface RouteContext {
   };
 }
 
-export async function GET(request: NextRequest, context: RouteContext) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const { id } = context.params;
+    const { id } = params;
     
     if (!id) {
       return NextResponse.json(

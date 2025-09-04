@@ -40,6 +40,7 @@ export default function InsightsFeed({
       if (source) params.append('source', source);
       if (category) params.append('category', category);
       params.append('limit', limit.toString());
+      // 네이버 블로그 ID는 서버에서 환경변수로 자동 처리
 
       const response = await fetch(`/api/insights?${params.toString()}`);
       

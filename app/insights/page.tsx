@@ -154,8 +154,8 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* Latest Insights - RSS 피드 통합 */}
-      <InsightsFeed limit={6} showHeader={true} showViewAll={true} />
+      {/* Latest Insights - RSS 피드 통합 (beehiiv + 네이버 블로그) */}
+      <InsightsFeed limit={9} showHeader={true} showViewAll={true} />
 
 
       {/* Stats Section */}
