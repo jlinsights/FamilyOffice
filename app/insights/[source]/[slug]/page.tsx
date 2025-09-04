@@ -10,15 +10,15 @@ import { ArrowLeft, Calendar, Clock, ExternalLink, Share2, User } from 'lucide-r
 import { rssAggregator } from '@/lib/rss-aggregator';
 
 interface InsightContentPageProps {
-  params: {
+  params: Promise<{
     source: string;
     slug: string;
-  };
+  }>;
 }
 
 // 메타데이터 생성
 export async function generateMetadata({ params }: InsightContentPageProps): Promise<Metadata> {
-  const { source, slug } = params;
+  const { source, slug } = await params;
   
   try {
     const content = await rssAggregator.getContentById(slug);
@@ -87,7 +87,7 @@ function getSourceBadgeVariant(source: string) {
 }
 
 export default async function InsightContentPage({ params }: InsightContentPageProps) {
-  const { source, slug } = params;
+  const { source, slug } = await params;
   
   try {
     const content = await rssAggregator.getContentById(slug);
@@ -136,7 +136,7 @@ export default async function InsightContentPage({ params }: InsightContentPageP
     };
 
     if (content.imageUrl) {
-      articleSchema["image"] = {
+      (articleSchema as any).image = {
         "@type": "ImageObject",
         "url": content.imageUrl
       };

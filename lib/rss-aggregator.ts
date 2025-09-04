@@ -14,7 +14,7 @@ export interface RSSItem {
   tags: string[];
   readTime?: string;
   featured?: boolean;
-  imageUrl?: string;
+  imageUrl?: string | undefined;
 }
 
 export interface ParsedFeedItem {
@@ -73,7 +73,7 @@ export class RSSAggregator {
         category: this.extractCategory(item.categories),
         tags: this.extractTags(item.categories || []),
         readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item),
+        imageUrl: this.extractImageUrl(item) || undefined,
         featured: index === 0 // 첫 번째 글을 featured로 설정
       }));
 
@@ -116,7 +116,7 @@ export class RSSAggregator {
         category: this.extractCategory(item.categories),
         tags: this.extractTags(item.categories || []),
         readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item),
+        imageUrl: this.extractImageUrl(item) || undefined,
         featured: false
       }));
 
@@ -215,7 +215,7 @@ export class RSSAggregator {
 
   private extractCategory(categories?: string[]): string {
     if (!categories || categories.length === 0) return '일반';
-    return categories[0];
+    return categories[0] || '일반';
   }
 
   private extractTags(categories: string[]): string[] {
