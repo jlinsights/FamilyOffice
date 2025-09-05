@@ -35,6 +35,7 @@ import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
 
 import { CalComPopup } from '@/components/cal-com-popup';
+import Link from 'next/link';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -676,12 +677,12 @@ export default function PolicyFundsPage() {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <Card className="border-purple-200 dark:border-purple-400/30 shadow-lg hover:shadow-xl transition-all duration-300">
+                <Card className="border border-border/40 bg-background/80 dark:bg-background/60 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <CardHeader>
                     <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4">
                       <Percent className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                     </div>
-                    <CardTitle className="text-xl">세액공제 40%</CardTitle>
+                    <CardTitle className="text-xl text-foreground">세액공제 40%</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground mb-4">
@@ -689,12 +690,12 @@ export default function PolicyFundsPage() {
                     </p>
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span>일반기업</span>
-                        <span className="font-semibold">25%</span>
+                        <span className="text-muted-foreground">일반기업</span>
+                        <span className="font-semibold text-foreground">25%</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span>중소기업</span>
-                        <span className="font-semibold text-purple-600">40%</span>
+                        <span className="text-muted-foreground">중소기업</span>
+                        <span className="font-semibold text-purple-600 dark:text-purple-400">40%</span>
                       </div>
                       <div className="text-xs text-muted-foreground mt-2">
                         연간 최대 2억원까지 공제 가능
@@ -703,12 +704,12 @@ export default function PolicyFundsPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-green-200 dark:border-green-400/30 shadow-lg hover:shadow-xl transition-all duration-300">
+                <Card className="border border-border/40 bg-background/80 dark:bg-background/60 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <CardHeader>
                     <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4">
                       <Gift className="w-6 h-6 text-green-600 dark:text-green-400" />
                     </div>
-                    <CardTitle className="text-xl">무상지원금</CardTitle>
+                    <CardTitle className="text-xl text-foreground">무상지원금</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground mb-4">
@@ -716,12 +717,12 @@ export default function PolicyFundsPage() {
                     </p>
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span>설립지원금</span>
-                        <span className="font-semibold">최대 10억원</span>
+                        <span className="text-muted-foreground">설립지원금</span>
+                        <span className="font-semibold text-foreground">최대 10억원</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span>장비구입비</span>
-                        <span className="font-semibold">최대 20억원</span>
+                        <span className="text-muted-foreground">장비구입비</span>
+                        <span className="font-semibold text-foreground">최대 20억원</span>
                       </div>
                       <div className="text-xs text-muted-foreground mt-2">
                         연구개발 목적 장비에 한함
@@ -730,12 +731,12 @@ export default function PolicyFundsPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-blue-200 dark:border-blue-400/30 shadow-lg hover:shadow-xl transition-all duration-300">
+                <Card className="border border-border/40 bg-background/80 dark:bg-background/60 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <CardHeader>
                     <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
                       <Award className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <CardTitle className="text-xl">우선 지원</CardTitle>
+                    <CardTitle className="text-xl text-foreground">우선 지원</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground mb-4">
@@ -743,12 +744,12 @@ export default function PolicyFundsPage() {
                     </p>
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span>R&D 지원사업</span>
-                        <span className="font-semibold">10점 가점</span>
+                        <span className="text-muted-foreground">R&D 지원사업</span>
+                        <span className="font-semibold text-foreground">10점 가점</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span>정책자금 금리</span>
-                        <span className="font-semibold">0.5%p 우대</span>
+                        <span className="text-muted-foreground">정책자금 금리</span>
+                        <span className="font-semibold text-foreground">0.5%p 우대</span>
                       </div>
                       <div className="text-xs text-muted-foreground mt-2">
                         기술보증기금 우선 보증 대상
@@ -788,11 +789,12 @@ export default function PolicyFundsPage() {
                       <div className="bg-white/10 rounded-lg p-6">
                         <div className="text-4xl font-bold mb-2">95%</div>
                         <div className="text-lg mb-4">설립 성공률</div>
-                        <CalComPopup
-                          calLink="samsung-life-gfc-qjwjd4vhnr3cklsf"
-                          buttonText="연구소 설립 상담"
-                          className="bg-white text-purple-600 hover:bg-gray-100 px-6 py-3 font-semibold rounded-lg transition-all duration-300"
-                        />
+                        <Link 
+                          href="/contact"
+                          className="inline-block bg-white text-purple-600 hover:bg-gray-100 px-6 py-3 font-semibold rounded-lg transition-all duration-300"
+                        >
+                          연구소 설립 상담
+                        </Link>
                       </div>
                     </div>
                   </div>
