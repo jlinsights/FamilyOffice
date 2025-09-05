@@ -473,16 +473,16 @@ export default function PolicyFundsPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {changes2025.map((change, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300 border-l-4 border-l-blue-500">
+                <Card key={index} className="border border-border/40 bg-background/80 dark:bg-background/60 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-l-primary">
                   <CardHeader>
-                    <div className={`w-12 h-12 bg-${change.color}-100 rounded-lg flex items-center justify-center mb-4`}>
-                      <change.icon className={`w-6 h-6 text-${change.color}-600`} />
+                    <div className={`w-12 h-12 bg-${change.color}-100 dark:bg-${change.color}-900/30 rounded-lg flex items-center justify-center mb-4`}>
+                      <change.icon className={`w-6 h-6 text-${change.color}-600 dark:text-${change.color}-400`} />
                     </div>
-                    <CardTitle className="text-lg">{change.title}</CardTitle>
+                    <CardTitle className="text-lg text-foreground">{change.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 mb-3">{change.description}</p>
-                    <Badge className={`bg-${change.color}-100 text-${change.color}-700`}>
+                    <p className="text-muted-foreground mb-3">{change.description}</p>
+                    <Badge className={`bg-${change.color}-100 dark:bg-${change.color}-900/30 text-${change.color}-700 dark:text-${change.color}-300`}>
                       {change.impact}
                     </Badge>
                   </CardContent>
@@ -510,35 +510,35 @@ export default function PolicyFundsPage() {
 
             <div className="grid lg:grid-cols-2 gap-8">
               {policyFundCategories.map((category, index) => (
-                <Card key={index} className="hover:shadow-xl transition-all duration-300">
+                <Card key={index} className="border border-border/40 bg-background/80 dark:bg-background/60 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <CardHeader>
                     <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 bg-${category.color}-100 rounded-lg flex items-center justify-center`}>
-                        <category.icon className={`w-6 h-6 text-${category.color}-600`} />
+                      <div className={`w-12 h-12 bg-${category.color}-100 dark:bg-${category.color}-900/30 rounded-lg flex items-center justify-center`}>
+                        <category.icon className={`w-6 h-6 text-${category.color}-600 dark:text-${category.color}-400`} />
                       </div>
-                      <Badge className={`bg-${category.color}-100 text-${category.color}-700`}>
+                      <Badge className={`bg-${category.color}-100 dark:bg-${category.color}-900/30 text-${category.color}-700 dark:text-${category.color}-300`}>
                         {category.badge}
                       </Badge>
                     </div>
-                    <CardTitle className="text-xl">{category.title}</CardTitle>
-                    <p className="text-gray-600">{category.description}</p>
+                    <CardTitle className="text-xl text-foreground">{category.title}</CardTitle>
+                    <p className="text-muted-foreground">{category.description}</p>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
                       {category.funds.map((fund, fundIndex) => (
-                        <div key={fundIndex} className="p-4 bg-gray-50 rounded-lg">
+                        <div key={fundIndex} className="p-4 bg-accent/20 dark:bg-accent/10 rounded-lg border border-border/20">
                           <div className="flex justify-between items-start mb-2">
-                            <h4 className="font-semibold text-gray-900">{fund.name}</h4>
-                            <Badge variant="outline" className="text-green-600 border-green-600">
+                            <h4 className="font-semibold text-foreground">{fund.name}</h4>
+                            <Badge variant="outline" className="text-green-600 dark:text-green-400 border-green-600 dark:border-green-400">
                               {fund.rate}
                             </Badge>
                           </div>
-                          <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                          <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
                             <div>
-                              <span className="font-medium">한도:</span> {fund.limit}
+                              <span className="font-medium text-foreground">한도:</span> {fund.limit}
                             </div>
                             <div>
-                              <span className="font-medium">기간:</span> {fund.period}
+                              <span className="font-medium text-foreground">기간:</span> {fund.period}
                             </div>
                           </div>
                         </div>
@@ -569,36 +569,36 @@ export default function PolicyFundsPage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {guaranteeInstitutions.map((institution, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+                <Card key={index} className="border border-border/40 bg-background/80 dark:bg-background/60 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <CardHeader>
                     <div className="flex items-center justify-between mb-2">
-                      <CardTitle className="text-lg">{institution.name}</CardTitle>
-                      <Badge variant="secondary">{institution.abbr}</Badge>
+                      <CardTitle className="text-lg text-foreground">{institution.name}</CardTitle>
+                      <Badge variant="secondary" className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground">{institution.abbr}</Badge>
                     </div>
-                    <p className="text-gray-600">{institution.description}</p>
+                    <p className="text-muted-foreground">{institution.description}</p>
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div>
-                        <p className="text-sm text-gray-500">보증비율</p>
-                        <p className="font-semibold text-blue-600">{institution.guaranteeRate}</p>
+                        <p className="text-sm text-muted-foreground">보증비율</p>
+                        <p className="font-semibold text-primary">{institution.guaranteeRate}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">최대한도</p>
-                        <p className="font-semibold text-blue-600">{institution.maxAmount}</p>
+                        <p className="text-sm text-muted-foreground">최대한도</p>
+                        <p className="font-semibold text-primary">{institution.maxAmount}</p>
                       </div>
                     </div>
                     <div className="mb-4">
-                      <p className="text-sm text-gray-500 mb-2">주요 특징</p>
+                      <p className="text-sm text-muted-foreground mb-2">주요 특징</p>
                       <div className="flex flex-wrap gap-2">
                         {institution.features.map((feature, featureIndex) => (
-                          <Badge key={featureIndex} variant="outline" className="text-xs">
+                          <Badge key={featureIndex} variant="outline" className="text-xs border-border/40 text-muted-foreground hover:bg-accent/50">
                             {feature}
                           </Badge>
                         ))}
                       </div>
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
+                    <div className="flex items-center text-sm text-muted-foreground">
                       <Phone className="w-4 h-4 mr-2" />
                       <span>{institution.contact}</span>
                     </div>
@@ -610,13 +610,13 @@ export default function PolicyFundsPage() {
         </section>
 
         {/* 신청 프로세스 */}
-        <section className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
+        <section className="py-16 bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 정책자금 신청 프로세스
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 체계적인 4단계 프로세스로 신속하게 정책자금을 지원받으세요
               </p>
             </div>
@@ -624,26 +624,26 @@ export default function PolicyFundsPage() {
             <div className="max-w-4xl mx-auto">
               <div className="grid md:grid-cols-2 gap-8">
                 {applicationProcess.map((process, index) => (
-                  <Card key={index} className="hover:shadow-lg transition-shadow duration-300 relative">
+                  <Card key={index} className="border border-border/40 bg-background/80 dark:bg-background/60 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative">
                     <CardHeader>
                       <div className="flex items-center mb-4">
-                        <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">
+                        <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg mr-4">
                           {process.step}
                         </div>
                         <div>
-                          <CardTitle className="text-lg">{process.title}</CardTitle>
-                          <Badge variant="outline" className="mt-1">
+                          <CardTitle className="text-lg text-foreground">{process.title}</CardTitle>
+                          <Badge variant="outline" className="mt-1 border-border/40 text-muted-foreground">
                             소요시간: {process.duration}
                           </Badge>
                         </div>
                       </div>
-                      <p className="text-gray-600">{process.description}</p>
+                      <p className="text-muted-foreground">{process.description}</p>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-2">
                         {process.details.map((detail, detailIndex) => (
-                          <div key={detailIndex} className="flex items-center text-sm text-gray-600">
-                            <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+                          <div key={detailIndex} className="flex items-center text-sm text-muted-foreground">
+                            <CheckCircle className="w-4 h-4 mr-2 text-green-600 dark:text-green-400" />
                             <span>{detail}</span>
                           </div>
                         ))}
