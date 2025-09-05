@@ -1,1 +1,1 @@
-🐛 fix: insights-feed 컴포넌트의 TypeScript 오류 수정 (fetchContent 중복 정의 제거)
+✨ feat: 채용 페이지 FAQ 섹션을 2열 아코디언 방식으로 개선 및 다크모드 일관성 향상

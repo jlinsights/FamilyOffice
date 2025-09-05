@@ -17,12 +17,16 @@ import {
     Star,
     TrendingUp,
     Users,
+    Info,
+    DollarSign,
+    FileText,
 } from 'lucide-react';
 
 import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
 
 import { CalComPopup } from '@/components/cal-com-popup';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -32,7 +36,110 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { YouTubeEmbed } from '@/components/media/youtube-embed';
 
-// 클라이언트 컴포넌트에서는 서버 전용 설정 제거
+// GFC 채용 FAQ 카테고리 데이터
+const recruitFaqCategories = [
+  {
+    title: 'GFC 기본 정보',
+    icon: 'Info',
+    faqs: [
+      {
+        id: 'basic-1',
+        question: '삼성생명 GFC란 무엇인가요?',
+        answer: '삼성생명 GFC(Group Financial Consultant)는 기업재무컨설턴트로서, 중소중견기업 CEO와 고액자산가를 대상으로 가업승계, 자산관리, 세무최적화, 리스크관리 등 종합적인 재무컨설팅을 제공하는 전문가입니다. 삼성생명의 프리미엄 브랜드와 전문성을 바탕으로 고품질 서비스를 제공합니다.'
+      },
+      {
+        id: 'basic-2',
+        question: '기업재무컨설턴트와 일반 보험설계사의 차이점은?',
+        answer: '일반 보험설계사는 주로 개인 고객 대상 보험상품 판매에 집중하는 반면, 기업재무컨설턴트(GFC)는 중소중견기업 CEO와 고액자산가를 대상으로 종합적인 재무컨설팅을 제공합니다. 가업승계, 절세전략, 기업보험, 자산관리 등 복합적이고 전문적인 서비스로 훨씬 높은 수수료와 안정적인 고객관계를 유지합니다.'
+      },
+      {
+        id: 'basic-3',
+        question: 'GFC의 주요 업무 영역은 무엇인가요?',
+        answer: 'GFC의 주요 업무는 ①가업승계 설계 및 실행 지원 ②기업 및 개인 자산관리 ③세무최적화 전략 수립 ④기업보험 및 리스크관리 ⑤투자 포트폴리오 관리 등입니다. 고객의 니즈에 맞는 맞춤형 통합 솔루션을 제공하는 것이 핵심입니다.'
+      }
+    ]
+  },
+  {
+    title: '채용 조건 및 자격',
+    icon: 'FileText', 
+    faqs: [
+      {
+        id: 'requirements-1',
+        question: '삼성생명 GFC 채용 자격조건은 어떻게 되나요?',
+        answer: '기본적으로 4년제 대졸 이상, 금융/경영/회계 관련 전공자를 우대합니다. 가업승계 전문가는 관련 경력 5년 이상, 자산관리 전문가는 3년 이상의 경력이 필요합니다. CFP, CFA, 세무사, 변호사 등 관련 자격증 보유자는 우대하며, 무엇보다 성실하고 책임감 있는 성격이 중요합니다.'
+      },
+      {
+        id: 'requirements-2',
+        question: '경력이 부족한 경우에도 지원할 수 있나요?',
+        answer: '경력이 부족하더라도 관련 자격증이나 전공, 그리고 학습 의지가 뛰어난 분은 지원 가능합니다. 삼성생명에서 24개월간의 체계적인 교육과정을 제공하므로, 열정과 성장 가능성이 더 중요한 평가 기준입니다.'
+      },
+      {
+        id: 'requirements-3',
+        question: '필요한 자격증이나 전문지식은 무엇인가요?',
+        answer: 'CFP(Certified Financial Planner), CFA(Chartered Financial Analyst), 세무사, 변호사 등의 자격증이 있으면 유리하지만 필수는 아닙니다. 금융, 세무, 법무에 대한 기본 지식과 지속적인 학습 의지가 더 중요합니다.'
+      }
+    ]
+  },
+  {
+    title: '급여 및 처우',
+    icon: 'DollarSign',
+    faqs: [
+      {
+        id: 'compensation-1', 
+        question: '삼성생명 GFC 연봉은 얼마나 되나요?',
+        answer: '삼성생명 GFC는 위촉직으로 고정급과 성과급을 결합한 보수체계를 운영합니다. 경력과 실력에 따라 연봉 상위 1% 수준의 높은 수입이 가능하며, 프리미엄 고객 대상으로 고단가 서비스를 제공하여 일반 설계사 대비 3-5배 높은 수익을 기대할 수 있습니다. 자세한 조건은 면접 시 상담받으실 수 있습니다.'
+      },
+      {
+        id: 'compensation-2',
+        question: 'GFC의 수입 구조는 어떻게 되나요?',
+        answer: '기본급 + 성과급 구조로 운영됩니다. 기본급은 안정적인 생활을 보장하고, 성과급은 개인의 실력과 노력에 따라 무제한으로 가능합니다. 특히 장기적인 고객 관계를 통한 지속적인 수수료 수입이 특징입니다.'
+      },
+      {
+        id: 'compensation-3',
+        question: '복리후생이나 교육 지원은 어떤 것들이 있나요?',
+        answer: '삼성생명 임직원과 동일한 복리후생 혜택을 받을 수 있으며, 24개월간의 전문 교육과정은 전액 회사 부담입니다. 교육 기간 중에도 기본급을 지급하며, 지속적인 재교육과 전문성 향상을 위한 지원을 제공합니다.'
+      }
+    ]
+  },
+  {
+    title: '채용 과정 및 교육',
+    icon: 'GraduationCap',
+    faqs: [
+      {
+        id: 'process-1',
+        question: 'GFC 채용 과정은 어떻게 진행되나요?',
+        answer: '채용 과정은 ①지원서 접수 → ②서류심사(3-5일) → ③면접진행(1차 실무진, 2차 임원) → ④최종선발 순으로 진행됩니다. 전체 과정은 약 2-3주 소요되며, 합격 시 위촉계약을 체결하고 24개월간의 체계적인 교육과정을 제공받게 됩니다. 온라인 지원과 잡페어 참석, 두 가지 방법으로 지원 가능합니다.'
+      },
+      {
+        id: 'process-2',
+        question: '삼성생명 GFC 교육 시스템은 어떻게 운영되나요?',
+        answer: '삼성생명 GFC는 24개월간의 체계적인 교육과정을 제공합니다. 기본 금융지식부터 고급 컨설팅 스킬, 세무·법무 전문지식까지 단계별 커리큘럼으로 구성되어 있습니다. 삼성생명 본사 전문 강사진과 외부 전문가가 참여하며, 실무 중심의 OJT(On the Job Training)도 병행합니다. 교육비는 전액 회사 부담이며, 교육 기간 중에도 기본급을 지급합니다.'
+      },
+      {
+        id: 'process-3',
+        question: '신입자도 성공할 수 있는 지원 시스템이 있나요?',
+        answer: '네, 멘토링 시스템과 단계별 목표 관리를 통해 신입자도 체계적으로 성장할 수 있도록 지원합니다. 선배 컨설턴트의 1:1 멘토링, 정기적인 피드백, 그리고 개인별 맞춤형 교육 계획을 통해 성공적인 커리어를 만들어갈 수 있습니다.'
+      }
+    ]
+  }
+];
+
+// 아이콘 매핑 함수
+const getIcon = (iconName: string) => {
+  const iconMap: { [key: string]: any } = {
+    Info: Info,
+    FileText: FileText,
+    DollarSign: DollarSign,
+    GraduationCap: GraduationCap,
+    Building: Building,
+    Users: Users,
+    Award: Award,
+    Star: Star,
+    TrendingUp: TrendingUp
+  };
+  return iconMap[iconName] || Info;
+};
+
 
 export default function RecruitPage() {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -911,9 +1018,9 @@ export default function RecruitPage() {
         </section>
 
         {/* GFC 채용 FAQ 섹션 */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
                 <Badge variant="outline" className="mb-4">
                   <CheckCircle className="h-3 w-3 mr-1" />
@@ -929,127 +1036,43 @@ export default function RecruitPage() {
                 </p>
               </div>
 
-              <div className="space-y-6">
-                {/* FAQ 1 */}
-                <Card className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {recruitFaqCategories.map((category, categoryIndex) => {
+                  const IconComponent = getIcon(category.icon);
+                  return (
+                    <div key={categoryIndex} className="space-y-6">
+                      <div className="text-center">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 dark:bg-primary/20 mb-4">
+                          <IconComponent className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground mb-2">
+                          {category.title}
+                        </h3>
+                      </div>
+                      
+                      <Accordion type="single" collapsible className="space-y-2">
+                        {category.faqs.map((item, itemIndex) => (
+                          <AccordionItem 
+                            key={itemIndex} 
+                            value={`${categoryIndex}-${itemIndex}`}
+                            className="border border-border/40 rounded-lg bg-background/80 dark:bg-background/60"
+                          >
+                            <AccordionTrigger className="px-4 py-3 text-left hover:no-underline hover:bg-accent/50 rounded-t-lg">
+                              <span className="font-medium text-foreground text-sm">
+                                {item.question}
+                              </span>
+                            </AccordionTrigger>
+                            <AccordionContent className="px-4 pb-4 text-muted-foreground">
+                              <div className="whitespace-pre-line leading-relaxed text-sm">
+                                {item.answer}
+                              </div>
+                            </AccordionContent>
+                          </AccordionItem>
+                        ))}
+                      </Accordion>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        삼성생명 GFC란 무엇인가요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        삼성생명 GFC(Group Financial Consultant)는 기업재무컨설턴트로서, 
-                        중소중견기업 CEO와 고액자산가를 대상으로 가업승계, 자산관리, 세무최적화, 
-                        리스크관리 등 종합적인 재무컨설팅을 제공하는 전문가입니다.
-                        삼성생명의 프리미엄 브랜드와 전문성을 바탕으로 고품질 서비스를 제공합니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 2 */}
-                <Card className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        삼성생명 GFC 채용 자격조건은 어떻게 되나요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        기본적으로 4년제 대졸 이상, 금융/경영/회계 관련 전공자를 우대합니다.
-                        가업승계 전문가는 관련 경력 5년 이상, 자산관리 전문가는 3년 이상의 경력이 필요합니다.
-                        CFP, CFA, 세무사, 변호사 등 관련 자격증 보유자는 우대하며,
-                        무엇보다 성실하고 책임감 있는 성격이 중요합니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 3 */}
-                <Card className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        삼성생명 GFC 연봉은 얼마나 되나요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        삼성생명 GFC는 위촉직으로 고정급과 성과급을 결합한 보수체계를 운영합니다.
-                        경력과 실력에 따라 연봉 상위 1% 수준의 높은 수입이 가능하며,
-                        프리미엄 고객 대상으로 고단가 서비스를 제공하여 일반 설계사 대비
-                        3-5배 높은 수익을 기대할 수 있습니다. 자세한 조건은 면접 시 상담받으실 수 있습니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 4 */}
-                <Card className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        GFC 채용 과정은 어떻게 진행되나요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        채용 과정은 ①지원서 접수 → ②서류심사(3-5일) → ③면접진행(1차 실무진, 2차 임원) → ④최종선발 
-                        순으로 진행됩니다. 전체 과정은 약 2-3주 소요되며,
-                        합격 시 위촉계약을 체결하고 24개월간의 체계적인 교육과정을 제공받게 됩니다.
-                        온라인 지원과 잡페어 참석, 두 가지 방법으로 지원 가능합니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 5 */}
-                <Card className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        기업재무컨설턴트와 일반 보험설계사의 차이점은?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        일반 보험설계사는 주로 개인 고객 대상 보험상품 판매에 집중하는 반면,
-                        기업재무컨설턴트(GFC)는 중소중견기업 CEO와 고액자산가를 대상으로
-                        종합적인 재무컨설팅을 제공합니다. 가업승계, 절세전략, 기업보험, 자산관리 등
-                        복합적이고 전문적인 서비스로 훨씬 높은 수수료와 안정적인 고객관계를 유지합니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 6 */}
-                <Card className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        삼성생명 GFC 교육 시스템은 어떻게 운영되나요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        삼성생명 GFC는 24개월간의 체계적인 교육과정을 제공합니다.
-                        기본 금융지식부터 고급 컨설팅 스킬, 세무·법무 전문지식까지
-                        단계별 커리큘럼으로 구성되어 있습니다. 삼성생명 본사 전문 강사진과
-                        외부 전문가가 참여하며, 실무 중심의 OJT(On the Job Training)도 병행합니다.
-                        교육비는 전액 회사 부담이며, 교육 기간 중에도 기본급을 지급합니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
+                  );
+                })}
               </div>
 
               {/* FAQ CTA */}
