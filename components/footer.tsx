@@ -48,13 +48,9 @@ const SpotifyIcon = ({ className }: { className?: string }) => (
 );
 
 const KakaoIcon = ({ className }: { className?: string }) => (
-  <Image
-    src="/images/KAKAO/kakaotalk_sharing_btn/kakaotalk_sharing_btn_small.png"
-    alt="카카오톡"
-    width={16}
-    height={16}
-    className={`${className} dark:filter dark:invert dark:brightness-0 dark:contrast-100 filter-none brightness-100 contrast-100`}
-  />
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 2c5.523 0 10 3.862 10 8.625 0 2.685-1.471 5.097-3.78 6.67l.822 3.704c.094.423-.333.756-.693.542L13.956 19.35c-.651.09-1.307.15-1.956.15-5.523 0-10-3.862-10-8.625S6.477 2 12 2z"/>
+  </svg>
 );
 
 export const Footer = memo(function Footer() {
