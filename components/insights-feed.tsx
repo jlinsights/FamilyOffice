@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -17,56 +17,80 @@ interface InsightsFeedProps {
 }
 
 export default function InsightsFeed({
-  limit = 6,
+  limit = 9,
   source,
   category,
   showHeader = true,
   showViewAll = true
 }: InsightsFeedProps) {
   const [content, setContent] = useState<RSSItem[]>([]);
+  const [filteredContent, setFilteredContent] = useState<RSSItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<'all' | 'beehiiv' | 'naver-blog'>('all');
 
   useEffect(() => {
     fetchContent();
-  }, [source, category, limit]);
+    // 5분마다 자동 갱신
+    const interval = setInterval(() => {
+      fetchContent();
+    }, 5 * 60 * 1000);
+    
+    return () => clearInterval(interval);
+  }, [fetchContent, limit]); // fetchContent dependency added
 
-  const fetchContent = async () => {
+  useEffect(() => {
+    // 필터링 적용
+    console.log('Filtering content:', { activeFilter, contentLength: content.length });
+    if (activeFilter === 'all') {
+      setFilteredContent(content);
+    } else {
+      const filtered = content.filter(item => {
+        console.log('Item source:', item.source, 'Filter:', activeFilter);
+        return item.source === activeFilter;
+      });
+      console.log('Filtered result:', filtered.length);
+      setFilteredContent(filtered);
+    }
+  }, [activeFilter, content]);
+
+  const fetchContent = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
+      // source 파라미터를 제거하여 모든 콘텐츠(beehiiv + naver-blog)를 가져오도록 수정
       const params = new URLSearchParams();
-      if (source) params.append('source', source);
       if (category) params.append('category', category);
-      params.append('limit', limit.toString());
-      // 네이버 블로그 ID는 서버에서 환경변수로 자동 처리
+      params.append('limit', '20'); // 충분한 양의 데이터를 가져와서 필터링
 
       const response = await fetch(`/api/insights?${params.toString()}`);
       
       if (!response.ok) {
         console.warn('API response not ok, using fallback data');
-        setContent(fallbackContent.slice(0, limit));
+        setContent(fallbackContent);
         return;
       }
 
       const data = await response.json();
+      console.log('API response data:', data);
       
       if (data.success && data.data && data.data.length > 0) {
+        console.log('Setting content from API:', data.data.length, 'items');
         setContent(data.data);
       } else {
         console.warn('No data from API, using fallback');
-        setContent(fallbackContent.slice(0, limit));
+        setContent(fallbackContent);
       }
     } catch (err) {
       console.warn('Insights feed error, using fallback:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
       // 에러 시 fallback 데이터 사용
-      setContent(fallbackContent.slice(0, limit));
+      setContent(fallbackContent);
     } finally {
       setLoading(false);
     }
-  };
+  }, [category]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -131,8 +155,36 @@ export default function InsightsFeed({
           </div>
         )}
 
+        {/* 필터 버튼 */}
+        <div className="flex justify-center gap-2 mb-8">
+          <Button
+            variant={activeFilter === 'all' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setActiveFilter('all')}
+            className="px-6"
+          >
+            전체 ({content.length})
+          </Button>
+          <Button
+            variant={activeFilter === 'naver-blog' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setActiveFilter('naver-blog')}
+            className="px-6"
+          >
+            블로그 ({content.filter(item => item.source === 'naver-blog').length})
+          </Button>
+          <Button
+            variant={activeFilter === 'beehiiv' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setActiveFilter('beehiiv')}
+            className="px-6"
+          >
+            뉴스레터 ({content.filter(item => item.source === 'beehiiv').length})
+          </Button>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {content.map((item, index) => (
+          {filteredContent.slice(0, 9).map((item, index) => (
             <Card 
               key={item.id} 
               className="bg-card border-border hover:shadow-lg transition-all duration-300 cursor-pointer group"
@@ -266,5 +318,83 @@ const fallbackContent: RSSItem[] = [
     category: '패밀리오피스',
     tags: ['가업승계', '전략', '기업경영'],
     readTime: '6분 읽기'
+  },
+  {
+    id: 'fallback-4',
+    title: 'CEO 경영권 방어를 위한 법적 조치 가이드',
+    content: '',
+    excerpt: '적대적 M&A와 경영권 위협으로부터 기업을 보호하는 실전 전략을 소개합니다.',
+    url: 'https://newsletter.familyoffices.vip',
+    publishedAt: '2025-01-08T00:00:00Z',
+    author: 'Editor',
+    source: 'beehiiv',
+    category: '경영전략',
+    tags: ['M&A', '경영권', '법무'],
+    readTime: '10분 읽기'
+  },
+  {
+    id: 'fallback-5',
+    title: '부동산 PF 투자의 리스크 관리 방안',
+    content: '',
+    excerpt: '프로젝트 파이낸싱 투자 시 고려해야 할 핵심 리스크 요소와 대응 전략을 다룹니다.',
+    url: 'https://blog.naver.com/lim_jaehong',
+    publishedAt: '2025-01-06T00:00:00Z',
+    author: 'Editor',
+    source: 'naver-blog',
+    category: '부동산',
+    tags: ['부동산', 'PF', '투자'],
+    readTime: '6분 읽기'
+  },
+  {
+    id: 'fallback-6',
+    title: 'ESG 경영이 기업가치에 미치는 영향',
+    content: '',
+    excerpt: '지속가능경영이 장기적 기업가치 향상에 미치는 영향을 데이터로 분석합니다.',
+    url: 'https://newsletter.familyoffices.vip',
+    publishedAt: '2025-01-04T00:00:00Z',
+    author: 'Editor',
+    source: 'beehiiv',
+    category: 'ESG',
+    tags: ['ESG', '지속가능경영', '기업가치'],
+    readTime: '8분 읽기'
+  },
+  {
+    id: 'fallback-7',
+    title: '가족신탁을 활용한 자산관리 전략',
+    content: '',
+    excerpt: '고액자산가를 위한 신탁 구조 설계와 세무 최적화 방법을 상세히 안내합니다.',
+    url: 'https://blog.naver.com/lim_jaehong',
+    publishedAt: '2025-01-02T00:00:00Z',
+    author: 'Editor',
+    source: 'naver-blog',
+    category: '자산관리',
+    tags: ['신탁', '자산관리', '절세'],
+    readTime: '9분 읽기'
+  },
+  {
+    id: 'fallback-8',
+    title: '주식시장 변동성 대응 전략: 헤지펀드 투자의 모든 것',
+    content: '',
+    excerpt: '시장 불확실성 속에서 안정적인 수익을 추구하는 헤지펀드 투자 전략을 분석합니다.',
+    url: 'https://blog.naver.com/lim_jaehong',
+    publishedAt: '2024-12-30T00:00:00Z',
+    author: 'Editor',
+    source: 'naver-blog',
+    category: '투자전략',
+    tags: ['헤지펀드', '투자', '리스크관리'],
+    readTime: '7분 읽기'
+  },
+  {
+    id: 'fallback-9',
+    title: '2025년 기업 인수합병(M&A) 시장 전망',
+    content: '',
+    excerpt: '국내외 M&A 시장의 주요 트렌드와 기회 요인을 전문가 시각에서 분석합니다.',
+    url: 'https://newsletter.familyoffices.vip',
+    publishedAt: '2024-12-28T00:00:00Z',
+    author: 'Editor',
+    source: 'beehiiv',
+    category: 'M&A',
+    tags: ['M&A', '시장전망', '투자기회'],
+    readTime: '12분 읽기'
   }
 ];

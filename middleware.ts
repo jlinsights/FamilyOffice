@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { globalRateLimit } from '@/lib/rate-limit';
+import { currentUser } from '@clerk/nextjs/server';
 
 // 허용된 도메인 목록 - 보안 강화
 const ALLOWED_ORIGINS = [
@@ -11,13 +12,62 @@ const ALLOWED_ORIGINS = [
   ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : [])
 ];
 
+// 슈퍼 관리자 이메일 목록
+const SUPER_ADMIN_EMAILS = ['jhlim725@gmail.com'];
+
+// 보호된 API 경로 패턴
+const PROTECTED_API_PATTERNS = [
+  /^\/api\/admin\//,
+  /^\/api\/financial\/admin\//,
+  /^\/api\/internal\//
+];
+
 function isAllowedOrigin(origin: string | null): boolean {
   if (!origin) return false;
   return ALLOWED_ORIGINS.includes(origin);
 }
 
+function isProtectedApiRoute(pathname: string): boolean {
+  return PROTECTED_API_PATTERNS.some(pattern => pattern.test(pathname));
+}
+
+async function checkAdminPermission(request: NextRequest): Promise<boolean> {
+  try {
+    const user = await currentUser();
+    if (!user) return false;
+
+    const primaryEmail = user.emailAddresses.find(
+      email => email.id === user.primaryEmailAddressId
+    );
+
+    if (!primaryEmail) return false;
+
+    return SUPER_ADMIN_EMAILS.includes(
+      primaryEmail.emailAddress.toLowerCase()
+    );
+  } catch (error) {
+    console.error('Admin permission check error:', error);
+    return false;
+  }
+}
+
 export async function middleware(request: NextRequest) {
-  // 1. Rate limiting 검사 (API 요청에 대해서만)
+  // 1. 보호된 API 경로에 대한 인증 검사
+  if (isProtectedApiRoute(request.nextUrl.pathname)) {
+    const isAuthorized = await checkAdminPermission(request);
+    if (!isAuthorized) {
+      return NextResponse.json(
+        { 
+          error: 'Unauthorized access to protected route',
+          timestamp: new Date().toISOString(),
+          path: request.nextUrl.pathname
+        },
+        { status: 403 }
+      );
+    }
+  }
+
+  // 2. Rate limiting 검사 (API 요청에 대해서만)
   if (request.nextUrl.pathname.startsWith('/api/')) {
     const rateLimitResponse = await globalRateLimit(request);
     if (rateLimitResponse && rateLimitResponse instanceof Response) {
@@ -26,7 +76,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 2. Force HTTPS in production
+  // 3. Force HTTPS in production
   const host = request.headers.get('host');
   const protocol = request.headers.get('x-forwarded-proto') || 'http';
   
@@ -41,11 +91,11 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  // 3. Create response and add security headers
+  // 4. Create response and add security headers
   const response = NextResponse.next();
   const origin = request.headers.get('origin');
   
-  // 4. Rate limit headers 추가 (성공한 요청에 대해)
+  // 5. Rate limit headers 추가 (성공한 요청에 대해)
   if (request.nextUrl.pathname.startsWith('/api/')) {
     const rateLimitHeaders = await globalRateLimit(request);
     if (rateLimitHeaders && typeof rateLimitHeaders === 'object') {

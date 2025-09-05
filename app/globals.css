@@ -80,39 +80,22 @@
     font-display: swap;
   }
 
-  /* 플로팅 버튼 최적화 - 모든 디바이스에서 고정 위치 */
-  .floating-buttons-mobile {
+
+  /* 헤더 고정 및 채널톡 표시 개선 */
+  body {
+    padding-top: 64px; /* 헤더 높이만큼 padding 추가 */
+  }
+
+  /* 채널톡 z-index 우선순위 설정 */
+  #ch-plugin {
+    z-index: 99999 !important; /* 모든 요소보다 위에 표시 */
+  }
+
+  /* 헤더 고정 강화 */
+  header[role="banner"] {
     position: fixed !important;
-    bottom: 100px !important;
-    right: 16px !important;
+    top: 0 !important;
     z-index: 9999 !important;
-    /* 항상 보이도록 강제 설정 */
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
-    pointer-events: none !important;
-    /* GPU 가속 */
-    transform: translateZ(0) !important;
-    will-change: transform !important;
-    /* 모바일 터치 최적화 */
-    touch-action: manipulation !important;
-  }
-
-  /* 플로팅 버튼 내부 요소는 터치 이벤트 활성화 */
-  .floating-buttons-mobile > * {
-    pointer-events: auto !important;
-  }
-
-  .scroll-to-top-mobile {
-    position: fixed !important;
-    bottom: 24px !important;
-    right: 16px !important;
-    z-index: 9998 !important;
-    /* GPU 가속 */
-    transform: translateZ(0) !important;
-    will-change: transform !important;
   }
 
   /* 🚀 SuperClaude Performance Optimizations */

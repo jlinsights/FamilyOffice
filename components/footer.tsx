@@ -47,6 +47,12 @@ const SpotifyIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const KakaoIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.442 1.17 4.617 3 6.1l-1.4 5.15c-.16.59.43 1.06.94.75l5.73-2.87c1.24.35 2.54.37 3.73 0l5.73 2.87c.51.31 1.1-.16.94-.75L18.3 16.6c1.83-1.483 2.7-3.658 2.7-6.1C21 6.477 16.523 3 12 3z"/>
+  </svg>
+);
+
 export const Footer = memo(function Footer() {
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -166,6 +172,15 @@ export const Footer = memo(function Footer() {
                 >
                   <NaverIcon className="h-4 w-4" />
                   <span className="sr-only">Naver Blog</span>
+                </Link>
+                <Link
+                  href="http://pf.kakao.com/_gsxkxdG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-yellow-400 hover:text-yellow-900 transition-all hover:scale-105"
+                >
+                  <KakaoIcon className="h-4 w-4" />
+                  <span className="sr-only">카카오톡 채널</span>
                 </Link>
               </div>
 

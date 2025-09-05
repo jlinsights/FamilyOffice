@@ -63,7 +63,6 @@ export const Header = memo(function Header({
       <header 
         className="fixed top-0 w-full z-50 bg-white/80 dark:bg-background/80 backdrop-blur-sm border-b border-gray-200 dark:border-border"
         style={{ 
-          top: 'var(--announcement-height, 0px)',
           willChange: 'transform, opacity',
           backfaceVisibility: 'hidden'
         }}
@@ -95,7 +94,6 @@ export const Header = memo(function Header({
           : 'bg-white/80 dark:bg-background/80 backdrop-blur-sm border-transparent'
       }`}
       style={{ 
-        top: 'var(--announcement-height, 0px)',
         willChange: 'transform, opacity',
         backfaceVisibility: 'hidden'
       }}

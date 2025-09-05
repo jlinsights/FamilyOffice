@@ -508,7 +508,7 @@ const ServicePageContent = () => {
                     <Badge variant="outline" size="xs">{testimonial.service}</Badge>
                   </div>
                   <blockquote className="text-muted-foreground mb-4 leading-relaxed">
-                    "{testimonial.review}"
+                    &ldquo;{testimonial.review}&rdquo;
                   </blockquote>
                   <div className="border-t pt-4">
                     <div className="font-semibold text-foreground">{testimonial.name}</div>

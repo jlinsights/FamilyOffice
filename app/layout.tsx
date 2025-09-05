@@ -12,8 +12,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { WebVitalsTracker } from '@/components/web-vitals-tracker';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
-import { FloatingActionButtons } from '@/components/floating-action-buttons';
-import { ScrollToTopFloating } from '@/components/scroll-to-top-floating';
+import { ChannelTalk } from '@/components/channel-talk';
 import { DebugStyles } from './debug-styles';
 
 // import { defaultMetadata } from '@/lib/seo';
@@ -362,8 +361,7 @@ export default function RootLayout({
           >
             {children}
             {/* <AIChatFloating /> */}
-            <ScrollToTopFloating />
-            <FloatingActionButtons />
+            <ChannelTalk />
             <Toaster />
             <Analytics />
             <WebVitalsTracker />

@@ -293,7 +293,7 @@ export default async function InsightContentPage({ params }: InsightContentPageP
                     <div className="text-foreground/70">
                       <p className="mb-4">{content.excerpt}</p>
                       <p className="text-sm">
-                        전체 내용을 보시려면 위의 "원문 보기" 버튼을 클릭해주세요.
+                        전체 내용을 보시려면 위의 &ldquo;원문 보기&rdquo; 버튼을 클릭해주세요.
                       </p>
                     </div>
                   )}

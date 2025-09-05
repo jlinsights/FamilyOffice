@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const nextConfig = {
   // 개발 성능 최적화
   experimental: {
@@ -9,10 +13,10 @@ const nextConfig = {
     ],
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false, // Enable ESLint validation during builds
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,  // Enable TypeScript error checking during builds
   },
 
   // 이미지 최적화
@@ -195,7 +199,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self' https:; style-src 'self' 'unsafe-inline' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https: wss:;"
+            value: "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.cal.com https://app.cal.com 'nonce-*'; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://api.beehiiv.com https://api.cal.com https://vitals.vercel-insights.com https://www.google-analytics.com https://api.anthropic.com wss: https:; frame-src https://cal.com https://app.cal.com; object-src 'none'; base-uri 'self'; form-action 'self';"
           },
           {
             key: 'Access-Control-Allow-Origin',
@@ -207,4 +211,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
