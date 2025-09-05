@@ -205,6 +205,11 @@ export default function PolicyFundsPage() {
       description: '업종, 매출, 신용등급 등 기본 자격 검토',
       duration: '1일',
       icon: CheckCircle,
+      badges: [
+        { text: '필수단계', variant: 'destructive' as const },
+        { text: '빠른처리', variant: 'secondary' as const },
+        { text: '온라인가능', variant: 'outline' as const }
+      ],
       details: [
         '중소기업 확인서 확인',
         '업력 6개월 이상',
@@ -218,6 +223,11 @@ export default function PolicyFundsPage() {
       description: '신용보증기금 등 보증기관에 보증서 신청',
       duration: '5-7일',
       icon: FileText,
+      badges: [
+        { text: '핵심단계', variant: 'default' as const },
+        { text: '서류준비', variant: 'secondary' as const },
+        { text: '전문상담', variant: 'outline' as const }
+      ],
       details: [
         '보증신청서 작성',
         '재무제표 제출',
@@ -231,6 +241,11 @@ export default function PolicyFundsPage() {
       description: '보증서를 바탕으로 은행에 대출 신청',
       duration: '3-5일',
       icon: Building,
+      badges: [
+        { text: '대출신청', variant: 'default' as const },
+        { text: '협상가능', variant: 'secondary' as const },
+        { text: '조건확정', variant: 'outline' as const }
+      ],
       details: [
         '대출신청서 작성',
         '보증서 제출',
@@ -244,6 +259,11 @@ export default function PolicyFundsPage() {
       description: '최종 승인 후 정책자금 지급 및 사후관리',
       duration: '2-3일',
       icon: CreditCard,
+      badges: [
+        { text: '완료단계', variant: 'default' as const },
+        { text: '자금지급', variant: 'secondary' as const },
+        { text: '사후관리', variant: 'outline' as const }
+      ],
       details: [
         '대출약정 체결',
         '자금 지급',
@@ -631,14 +651,33 @@ export default function PolicyFundsPage() {
                         <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg mr-4">
                           {process.step}
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <CardTitle className="text-lg text-foreground">{process.title}</CardTitle>
                           <Badge variant="outline" className="mt-1 border-border/40 text-muted-foreground">
                             소요시간: {process.duration}
                           </Badge>
                         </div>
                       </div>
-                      <p className="text-muted-foreground">{process.description}</p>
+                      <p className="text-muted-foreground mb-4">{process.description}</p>
+                      
+                      {/* 프로세스 배지 */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {process.badges.map((badge, badgeIndex) => (
+                          <Badge 
+                            key={badgeIndex} 
+                            variant={badge.variant}
+                            className={`text-xs ${
+                              badge.variant === 'destructive' 
+                                ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' 
+                                : badge.variant === 'secondary'
+                                ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300'
+                                : 'border-green-600 text-green-600 dark:border-green-400 dark:text-green-400'
+                            }`}
+                          >
+                            {badge.text}
+                          </Badge>
+                        ))}
+                      </div>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-2">
