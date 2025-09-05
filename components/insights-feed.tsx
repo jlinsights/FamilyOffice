@@ -29,6 +29,39 @@ export default function InsightsFeed({
   const [error, setError] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<'all' | 'beehiiv' | 'naver-blog'>('all');
 
+  const fetchContent = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // source 파라미터를 제거하여 모든 콘텐츠(beehiiv + naver-blog)를 가져오도록 수정
+      const params = new URLSearchParams();
+      if (category) params.append('category', category);
+      params.append('limit', (limit * 2).toString()); // 필터링을 위해 더 많은 데이터 가져오기
+
+      const response = await fetch(`/api/insights-rss?${params}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('Fetched content:', data);
+      
+      if (data.items && Array.isArray(data.items)) {
+        setContent(data.items);
+      } else {
+        console.warn('No items found in response');
+        setContent([]);
+      }
+    } catch (error: any) {
+      console.error('RSS 피드 로딩 오류:', error);
+      setError(error.message || 'RSS 피드를 불러오는데 실패했습니다.');
+      setContent([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [category, limit]);
+
   useEffect(() => {
     fetchContent();
     // 5분마다 자동 갱신
@@ -37,7 +70,7 @@ export default function InsightsFeed({
     }, 5 * 60 * 1000);
     
     return () => clearInterval(interval);
-  }, [fetchContent, limit]); // fetchContent dependency added
+  }, [fetchContent]); // fetchContent dependency added
 
   useEffect(() => {
     // 필터링 적용
@@ -54,43 +87,6 @@ export default function InsightsFeed({
     }
   }, [activeFilter, content]);
 
-  const fetchContent = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      // source 파라미터를 제거하여 모든 콘텐츠(beehiiv + naver-blog)를 가져오도록 수정
-      const params = new URLSearchParams();
-      if (category) params.append('category', category);
-      params.append('limit', '20'); // 충분한 양의 데이터를 가져와서 필터링
-
-      const response = await fetch(`/api/insights?${params.toString()}`);
-      
-      if (!response.ok) {
-        console.warn('API response not ok, using fallback data');
-        setContent(fallbackContent);
-        return;
-      }
-
-      const data = await response.json();
-      console.log('API response data:', data);
-      
-      if (data.success && data.data && data.data.length > 0) {
-        console.log('Setting content from API:', data.data.length, 'items');
-        setContent(data.data);
-      } else {
-        console.warn('No data from API, using fallback');
-        setContent(fallbackContent);
-      }
-    } catch (err) {
-      console.warn('Insights feed error, using fallback:', err);
-      setError(err instanceof Error ? err.message : 'Unknown error');
-      // 에러 시 fallback 데이터 사용
-      setContent(fallbackContent);
-    } finally {
-      setLoading(false);
-    }
-  }, [category]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
