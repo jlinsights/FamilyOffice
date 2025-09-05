@@ -639,9 +639,15 @@ export default function RecruitPage() {
         <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-                GFC 자격조건 및 우대사항
-              </h2>
+              <div className="text-center mb-12">
+                <Badge variant="outline" className="mb-4">
+                  <CheckCircle className="h-3 w-3 mr-1" />
+                  Requirements & Benefits
+                </Badge>
+                <h2 className="text-3xl md:text-4xl font-bold">
+                  GFC 자격조건 및 우대사항
+                </h2>
+              </div>
               
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="bg-background rounded-lg p-6">
@@ -680,12 +686,18 @@ export default function RecruitPage() {
         {/* 채용 프로세스 */}
         <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              채용 프로세스
-            </h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              간단하고 신속한 채용 프로세스로 여러분의 커리어를 시작하세요
-            </p>
+            <div className="text-center mb-12">
+              <Badge variant="outline" className="mb-4">
+                <Clock className="h-3 w-3 mr-1" />
+                Recruitment Process
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                채용 프로세스
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                간단하고 신속한 채용 프로세스로 여러분의 커리어를 시작하세요
+              </p>
+            </div>
             
             <div className="max-w-7xl mx-auto">
               {/* Desktop View - Horizontal Cards */}
@@ -836,6 +848,10 @@ export default function RecruitPage() {
         >
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4">
+                <Briefcase className="h-3 w-3 mr-1" />
+                Job Positions
+              </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
                 <span className="text-primary dark:text-emerald-300">삼성생명GFC</span>{' '}
                 채용 포지션
