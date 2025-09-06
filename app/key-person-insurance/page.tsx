@@ -52,84 +52,92 @@ export default function KeyPersonInsurancePage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // 주요 혜택
+  // 주요 혜택 (CEO보장정기보험 특화)
   const keyBenefits = [
     {
       icon: PiggyBank,
-      title: '퇴직급여 절세',
-      description: '퇴직소득세 0원, 연금수령시 연금소득세 적용',
-      saving: '최대 40%',
-      color: 'green'
+      title: 'CEO 퇴직급여 절세',
+      description: '법인명의 가입으로 전액 손금처리, 퇴직소득세 최대 절약',
+      saving: '최대 50%',
+      color: 'green',
+      details: ['법인 손금처리 100%', '퇴직소득세 비과세', '임원 퇴직급여 대용']
     },
     {
-      icon: Gift,
-      title: '상속세 절세',
-      description: '보험수익금 상속세 감면, 증여세 절약',
-      saving: '최대 60%',
-      color: 'blue'
+      icon: Building,
+      title: '기업 연속성 보장',
+      description: '핵심인재 사망시 기업 운영자금 확보 및 경영승계 지원',
+      saving: '운영자금',
+      color: 'blue',
+      details: ['운영자금 확보', '신규채용 비용', '업무 공백 보상']
     },
     {
       icon: Trophy,
-      title: '연금 전환',
-      description: '만 55세부터 종신연금 전환 가능',
-      saving: '평생보장',
-      color: 'purple'
+      title: '임원 전용 혜택',
+      description: '고액 보장한도와 우대 보험료율 적용',
+      saving: '특별 요율',
+      color: 'purple',
+      details: ['최대 50억 보장', '우대 보험료율', '건강체 할인']
     },
     {
       icon: Shield,
-      title: '원금보장',
-      description: '최소보증이율 적용, 원금손실 위험 ZERO',
-      saving: '100% 보장',
-      color: 'orange'
+      title: '법인세 절약',
+      description: '보험료 전액 손금처리로 법인세 부담 경감',
+      saving: '100% 손금',
+      color: 'orange',
+      details: ['보험료 손금처리', '법인세 절약', '현금흐름 개선']
     }
   ];
 
-  // 상품 비교
+  // CEO보장정기보험 상품 비교
   const insuranceProducts = [
     {
       company: '삼성생명',
-      product: 'CEO 정기보험',
-      targetReturn: '3.5%',
+      product: 'CEO보장정기보험',
+      premium: '월 50만원~',
       minAmount: '1억원',
       maxAmount: '50억원',
-      taxBenefit: '소득공제 100%',
-      pensionAge: '55세',
-      features: ['원금보장', '연금전환', '중도인출'],
+      taxBenefit: '법인 손금처리 100%',
+      term: '1년 갱신형',
+      features: ['고액보장', '우대요율', '건강체할인', '법인손금'],
       rating: 5,
-      popular: true
+      popular: true,
+      highlight: '업계 최고 보장한도'
     },
     {
       company: '한화생명',
-      product: '임원전용 정기보험',
-      targetReturn: '3.2%',
+      product: '임원정기보험',
+      premium: '월 40만원~',
       minAmount: '5천만원',
       maxAmount: '30억원',
-      taxBenefit: '소득공제 90%',
-      pensionAge: '60세',
-      features: ['원금보장', '연금전환'],
-      rating: 4
+      taxBenefit: '법인 손금처리 95%',
+      term: '1년 갱신형',
+      features: ['고액보장', '우대요율', '법인손금'],
+      rating: 4,
+      highlight: '합리적 보험료'
     },
     {
       company: '교보생명',
-      product: '경영자 연금보험',
-      targetReturn: '3.0%',
+      product: '경영진보장보험',
+      premium: '월 45만원~',
       minAmount: '3천만원',
-      maxAmount: '20억원',
-      taxBenefit: '소득공제 80%',
-      pensionAge: '55세',
-      features: ['연금전환', '중도인출'],
-      rating: 4
+      maxAmount: '25억원',
+      taxBenefit: '법인 손금처리 90%',
+      term: '1년 갱신형',
+      features: ['고액보장', '법인손금', '중도인출'],
+      rating: 4,
+      highlight: '유연한 보장설계'
     },
     {
-      company: 'KB생명',
-      product: '핵심인재 보험',
-      targetReturn: '2.8%',
+      company: '메리츠생명',
+      product: '핵심인재보험',
+      premium: '월 35만원~',
       minAmount: '2천만원',
-      maxAmount: '15억원',
-      taxBenefit: '소득공제 70%',
-      pensionAge: '60세',
-      features: ['원금보장'],
-      rating: 3
+      maxAmount: '20억원',
+      taxBenefit: '법인 손금처리 85%',
+      term: '1년 갱신형',
+      features: ['고액보장', '법인손금'],
+      rating: 3,
+      highlight: '기본형 보장'
     }
   ];
 
@@ -190,9 +198,9 @@ export default function KeyPersonInsurancePage() {
                 <span className="text-yellow-400">완벽 가이드</span>
               </h1>
               <p className="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed">
-                CEO·핵심임직원 전용 보험상품으로
+                법인 명의 가입으로 <strong className="text-yellow-300">보험료 전액 손금처리</strong>
                 <br />
-                <strong className="text-yellow-300">퇴직금·상속세 절세</strong>와 <strong className="text-yellow-300">연금보험 전환</strong> 혜택까지
+                CEO·핵심임원 사망시 <strong className="text-yellow-300">기업 연속성 보장</strong> 및 <strong className="text-yellow-300">법인세 절약</strong>
               </p>
               
               {/* 핵심 통계 */}
@@ -208,7 +216,7 @@ export default function KeyPersonInsurancePage() {
                       />
                     )}%
                   </div>
-                  <p className="text-sm text-blue-200">최대 절세효과</p>
+                  <p className="text-sm text-blue-200">법인세 절약효과</p>
                 </div>
                 <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
@@ -221,33 +229,33 @@ export default function KeyPersonInsurancePage() {
                       />
                     )}억
                   </div>
-                  <p className="text-sm text-blue-200">최대 가입한도</p>
+                  <p className="text-sm text-blue-200">최대 보장한도</p>
                 </div>
                 <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                   <div className="text-3xl font-bold text-yellow-400 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
-                        end={3.5} 
-                        duration={2000}
-                        easingFunction={easingFunction}
-                                              />
-                    )}%
-                  </div>
-                  <p className="text-sm text-blue-200">예상 수익률</p>
-                </div>
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
-                    {startAnimation && (
-                      <AnimatedCounter 
-                        start={0} 
-                        end={55} 
+                        end={100} 
                         duration={2000}
                         easingFunction={easingFunction}
                       />
-                    )}세
+                    )}%
                   </div>
-                  <p className="text-sm text-blue-200">연금수령 시작</p>
+                  <p className="text-sm text-blue-200">손금처리 비율</p>
+                </div>
+                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                    {startAnimation && (
+                      <AnimatedCounter 
+                        start={0} 
+                        end={1} 
+                        duration={2000}
+                        easingFunction={easingFunction}
+                      />
+                    )}년
+                  </div>
+                  <p className="text-sm text-blue-200">갱신 보장기간</p>
                 </div>
               </div>
 
@@ -278,15 +286,133 @@ export default function KeyPersonInsurancePage() {
           </div>
         </section>
 
+        {/* CEO보장정기보험 특징 섹션 */}
+        <section className="py-16 bg-gradient-to-r from-gray-50 to-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  CEO보장정기보험이 <span className="text-blue-600">특별한 이유</span>
+                </h2>
+                <p className="text-xl text-gray-600">
+                  법인 명의 가입으로 얻는 세무적 장점과 기업 보호 효과
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-16">
+                <Card className="border-l-4 border-l-green-500 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-green-700">
+                      <Building className="w-6 h-6 mr-3" />
+                      법인세 절약 효과
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                        보험료 전액 <strong>손금처리</strong> (법인세법 제19조)
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                        법인세율 22~25% 절약 효과
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                        현금흐름 개선 및 자금운용 효율성 증대
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-l-4 border-l-blue-500 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-blue-700">
+                      <Shield className="w-6 h-6 mr-3" />
+                      기업 연속성 보장
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
+                        핵심인재 사망시 <strong>운영자금 확보</strong>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
+                        신규채용 및 교육비용 보상
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
+                        업무공백으로 인한 매출손실 방지
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-l-4 border-l-purple-500 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-purple-700">
+                      <Trophy className="w-6 h-6 mr-3" />
+                      임원 전용 우대혜택
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-purple-500 mr-2 mt-1 flex-shrink-0" />
+                        <strong>최대 50억원</strong> 고액 보장한도
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-purple-500 mr-2 mt-1 flex-shrink-0" />
+                        CEO/임원 전용 우대 보험료율
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-purple-500 mr-2 mt-1 flex-shrink-0" />
+                        건강체 할인 및 단체할인 적용
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-l-4 border-l-orange-500 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-orange-700">
+                      <Zap className="w-6 h-6 mr-3" />
+                      간편한 관리 시스템
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-orange-500 mr-2 mt-1 flex-shrink-0" />
+                        <strong>1년 갱신형</strong>으로 유연한 보장관리
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-orange-500 mr-2 mt-1 flex-shrink-0" />
+                        법인 회계처리 간소화
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-orange-500 mr-2 mt-1 flex-shrink-0" />
+                        연간 보험료 조정 가능
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 핵심 혜택 섹션 */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                경영인정기보험 <span className="text-blue-600">핵심 혜택</span>
+                CEO보장정기보험 <span className="text-blue-600">핵심 혜택</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                CEO와 핵심임직원만이 누릴 수 있는 특별한 혜택들
+                법인과 CEO 모두에게 도움이 되는 실질적 혜택들
               </p>
             </div>
 
@@ -306,13 +432,21 @@ export default function KeyPersonInsurancePage() {
                   </CardHeader>
                   <CardContent className="text-center">
                     <p className="text-gray-600 mb-4">{benefit.description}</p>
-                    <div className={`inline-block px-4 py-2 rounded-full text-sm font-bold ${
+                    <div className={`inline-block px-4 py-2 rounded-full text-sm font-bold mb-4 ${
                       benefit.color === 'green' ? 'bg-green-100 text-green-800' :
                       benefit.color === 'blue' ? 'bg-blue-100 text-blue-800' :
                       benefit.color === 'purple' ? 'bg-purple-100 text-purple-800' :
                       'bg-orange-100 text-orange-800'
                     }`}>
                       {benefit.saving}
+                    </div>
+                    <div className="space-y-1">
+                      {benefit.details.map((detail, detailIndex) => (
+                        <div key={detailIndex} className="flex items-center text-xs text-gray-600">
+                          <CheckCircle className="w-3 h-3 mr-2 text-green-500 flex-shrink-0" />
+                          {detail}
+                        </div>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
@@ -356,8 +490,8 @@ export default function KeyPersonInsurancePage() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">예상 수익률</span>
-                      <span className="font-bold text-green-600">{product.targetReturn}</span>
+                      <span className="text-gray-600">보험료</span>
+                      <span className="font-bold text-green-600">{product.premium}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">최소 가입</span>
@@ -372,8 +506,11 @@ export default function KeyPersonInsurancePage() {
                       <span className="font-bold text-blue-600">{product.taxBenefit}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">연금수령</span>
-                      <span className="font-semibold">{product.pensionAge}</span>
+                      <span className="text-gray-600">보험기간</span>
+                      <span className="font-semibold">{product.term}</span>
+                    </div>
+                    <div className="mt-2 p-2 bg-yellow-50 rounded text-xs text-center">
+                      <span className="font-semibold text-yellow-800">{product.highlight}</span>
                     </div>
                     <div className="pt-2 border-t">
                       <div className="text-sm text-gray-600 mb-2">주요 특징</div>
