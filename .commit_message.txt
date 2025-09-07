@@ -1,1 +1,1 @@
-🔧 fix: 채널톡 모바일 검은색 화면 문제 해결 - 완전한 모바일 최적화 구현
+✨ feat: 시장 인텔리전스 페이지 완전한 4개 전문가 플랫폼 통합 - BMAD×SuperClaude×AgentOS×SubAgent
