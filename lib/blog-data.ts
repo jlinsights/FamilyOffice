@@ -80,8 +80,6 @@ export const blogPosts: Record<string, BlogPost> = {
     id: 'family-office-basics-guide',
     title: '패밀리오피스란 무엇인가',
     excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
-    platform: 'naver-premium',
-    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -406,8 +404,6 @@ export const blogPosts: Record<string, BlogPost> = {
     id: 'tax-optimization-basics',
     title: '중견기업을 위한 절세 전략',
     excerpt: '합법적이고 효과적인 절세 방법과 상속세 대비 전략을 알아봅니다.',
-    platform: 'naver-blog',
-    externalUrl: 'https://blog.naver.com/lim_jaehong',
     content: `# 중견기업을 위한 절세 전략
 
 세무 최적화는 합법적인 방법을 통해 세부담을 줄이고 기업과 가족의 재정 효율성을 높이는 것입니다.
@@ -442,8 +438,6 @@ export const blogPosts: Record<string, BlogPost> = {
     id: 'succession-planning-guide',
     title: '성공적인 기업 승계를 위한 준비',
     excerpt: '기업 승계 과정에서 고려해야 할 법적, 세무적, 경영적 요소들을 정리했습니다.',
-    platform: 'naver-premium',
-    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
     content: `# 성공적인 기업 승계를 위한 준비
 
 기업 승계는 단순한 소유권 이전이 아닙니다. 기업의 지속가능성과 가족의 화합을 위한 종합적인 계획이 필요합니다.
