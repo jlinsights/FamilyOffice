@@ -199,7 +199,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.cal.com https://app.cal.com 'nonce-*'; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://api.beehiiv.com https://api.cal.com https://vitals.vercel-insights.com https://www.google-analytics.com https://api.anthropic.com wss: https:; frame-src https://cal.com https://app.cal.com; object-src 'none'; base-uri 'self'; form-action 'self';"
+            value: "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.channel.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.cal.com https://app.cal.com https://cdn.channel.io https://channel.io 'nonce-*'; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com https://cdn.channel.io data:; connect-src 'self' https://api.beehiiv.com https://api.cal.com https://vitals.vercel-insights.com https://www.google-analytics.com https://api.anthropic.com https://channel.io https://api.channel.io wss: https: wss://ws.channel.io; frame-src https://cal.com https://app.cal.com https://channel.io https://api.channel.io; object-src 'none'; base-uri 'self'; form-action 'self';"
           },
           {
             key: 'Access-Control-Allow-Origin',
