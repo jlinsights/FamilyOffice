@@ -79,7 +79,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'family-office-basics-guide': {
     id: 'family-office-basics-guide',
     title: '패밀리오피스란 무엇인가',
-    excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
+    excerpt: '프리미엄 전문 컨텐츠 | CEO를 위한 심화 전략 가이드. 과거 초고액 자산가만의 전유물에서 중견기업 필수 전략으로 진화한 패밀리오피스의 고도화된 구축 노하우와 운영 전략을 전문가 글 레벨의 유료 콘텐츠로 제공합니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -370,7 +370,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'asset-management-strategy': {
     id: 'asset-management-strategy',
     title: '체계적인 자산관리 전략',
-    excerpt: '분산된 자산을 체계적으로 관리하기 위한 전략과 방법을 소개합니다.',
+    excerpt: '네이버 블로그 | 광범위한 일반 독자를 위한 실용적 가이드. 분산된 자산을 하나로 통합하여 관리하는 실무적 전략과 중견기업 CEO가 알아야 할 기본 원리들을 쉽게 이해할 수 있도록 정리한 교육 컨텐츠입니다.',
     content: `# 체계적인 자산관리 전략
 
 중견기업 경영진의 자산은 대개 기업 지분, 부동산, 금융자산 등 다양한 형태로 구성되어 있습니다. 이러한 복합적인 자산을 효과적으로 관리하기 위해서는 체계적인 접근이 필요합니다.
@@ -402,8 +402,8 @@ export const blogPosts: Record<string, BlogPost> = {
 
   'tax-optimization-basics': {
     id: 'tax-optimization-basics',
-    title: '중견기업을 위한 절세 전략',
-    excerpt: '합법적이고 효과적인 절세 방법과 상속세 대비 전략을 알아봅니다.',
+    title: 'Tax Optimization Strategies for Mid-Market Companies',
+    excerpt: 'Substack 글로벌 플랫폼 | 영문 전문 컨텐츠로 해외 거주 한국인 및 글로벌 독자를 대상으로 한 중견기업의 합법적 세무 최적화 전략. International tax planning and succession strategies presented in professional English for Korean business leaders worldwide.',
     content: `# 중견기업을 위한 절세 전략
 
 세무 최적화는 합법적인 방법을 통해 세부담을 줄이고 기업과 가족의 재정 효율성을 높이는 것입니다.
@@ -437,7 +437,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'succession-planning-guide': {
     id: 'succession-planning-guide',
     title: '성공적인 기업 승계를 위한 준비',
-    excerpt: '기업 승계 과정에서 고려해야 할 법적, 세무적, 경영적 요소들을 정리했습니다.',
+    excerpt: '네이버 프리미엄 | 전문가 심화 전략 가이드. 고도화된 기업 승계 전략과 법적/세무적 요소들의 심층 분석. 프리미엄 구독자를 위한 전문성 기반의 고가치 전략 컨텐츠로 제공됩니다.',
     content: `# 성공적인 기업 승계를 위한 준비
 
 기업 승계는 단순한 소유권 이전이 아닙니다. 기업의 지속가능성과 가족의 화합을 위한 종합적인 계획이 필요합니다.
@@ -475,8 +475,8 @@ export const blogPosts: Record<string, BlogPost> = {
 
   'digital-transformation-finance': {
     id: 'digital-transformation-finance',
-    title: '금융업계의 디지털 혁신',
-    excerpt: '핀테크와 디지털 기술이 자산관리 업계에 가져온 변화와 기회를 살펴봅니다.',
+    title: '디지털 혁신의 미래, 자산관리의 변화',
+    excerpt: '브런치 인문교양 | 에세이 형식의 사색과 통찰. 기술이 바꾸는 금융의 지형도를 인문학적 시각에서 바라보는 성찰적 에세이. AI와 빅데이터가 만들어가는 새로운 금융 패러다임을 철학적 사유로 탐구합니다.',
     content: `# 금융업계의 디지털 혁신
 
 디지털 기술의 발전은 자산관리 업계에 근본적인 변화를 가져오고 있습니다. 인공지능, 빅데이터, 블록체인 등의 기술이 새로운 서비스와 기회를 창출하고 있습니다.
@@ -516,7 +516,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'business-succession-2024-analysis': {
     id: 'business-succession-2024-analysis',
     title: '2024년 가업승계 성공 요인 분석',
-    excerpt: '성공적인 가업승계를 위한 핵심 요소들과 2024년 트렌드를 분석합니다.',
+    excerpt: '네이버 프리미엄 | 전문가 급 주요 트렌드 분석. 2024년 가업승계 성공 요인의 데이터 기반 심층 분석과 체계적 전략 가이드. 프리미엄 구독자만이 접근할 수 있는 고가치 전문 인사이트입니다.',
     content: `# 2024년 가업승계 성공 요인 분석
 
 2024년은 한국 중견기업들에게 가업승계의 중요한 전환점이 되는 해입니다. 창업 1세대에서 2세대로의 경영권 이양이 본격화되는 시기로, 성공적인 승계를 위한 전략이 그 어느 때보다 중요합니다.
@@ -554,8 +554,8 @@ export const blogPosts: Record<string, BlogPost> = {
 
   'mid-sized-company-succession-issues': {
     id: 'mid-sized-company-succession-issues',
-    title: '중견기업 승계 시 주요 이슈와 해결방안',
-    excerpt: '중견기업이 직면하는 승계 과정의 핵심 문제점과 실무적 해결책을 제시합니다.',
+    title: '승계에 얽힌 감정들 - CEO의 고민',
+    excerpt: '브런치 에세이 | 인문학적 사유로 들여다보는 그 감정들. 기업 승계를 마주한 CEO들의 복잡한 내면과 감정의 지형도를 문학적 필치로 그려낸 심층 에세이. 이성과 감성 사이에서 삶의 의미를 찾는 현대 경영인들의 이야기입니다.',
     content: `# 중견기업 승계 시 주요 이슈와 해결방안
 
 중견기업의 가업승계는 대기업과는 다른 고유한 특성과 과제를 가지고 있습니다. 규모의 한계와 자원의 제약 속에서도 성공적인 승계를 이루기 위한 전략이 필요합니다.
@@ -701,8 +701,8 @@ export const blogPosts: Record<string, BlogPost> = {
   // 글로벌 트렌드 카테고리
   'singapore-family-office-trends': {
     id: 'singapore-family-office-trends',
-    title: '싱가포르 패밀리오피스 최신 동향',
-    excerpt: '아시아 패밀리오피스 허브로 부상한 싱가포르의 최신 동향과 시사점을 분석합니다.',
+    title: '싱가포르에서 만난 한 가족의 이야기',
+    excerpt: '브런치 에세이 | 글로벌 자본의 서사를 따라가는 인간적 이야기. 싱가포르 서클 로드에서 만난 한 가족의 3대에 걸친 자산 승계 이야기를 통해 본 패밀리오피스의 진짜 모습. 수치와 전략을 넘어 사람과 가치에 대한 성찰.',
     content: `# 싱가포르 패밀리오피스 최신 동향
 
 싱가포르는 아시아 태평양 지역의 대표적인 패밀리오피스 허브로 자리잡고 있습니다. 2024년 현재 400개 이상의 패밀리오피스가 설립되어 운영 중이며, 이들이 관리하는 자산 규모는 3,000억 달러를 넘어섰습니다.
@@ -825,7 +825,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'high-net-worth-real-estate-portfolio': {
     id: 'high-net-worth-real-estate-portfolio',
     title: '고액자산가 부동산 포트폴리오 구성법',
-    excerpt: '고액자산가를 위한 전략적 부동산 포트폴리오 구성 방법과 리스크 관리 전략을 제시합니다.',
+    excerpt: '네이버 프리미엄 | 전문가 급 고도 전략 가이드. 최고 수준의 부동산 포트폴리오 구성 전략과 리스크 관리 노하우. 고액 자산가만이 알아야 할 전문적 인사이트를 프리미엄 컨텐츠로 제공합니다.',
     content: `# 고액자산가 부동산 포트폴리오 구성법
 
 부동산은 고액자산가들의 포트폴리오에서 핵심적인 역할을 합니다. 안정적인 현금흐름과 인플레이션 헤지 효과, 그리고 장기적인 자산 가치 상승을 기대할 수 있는 투자처입니다.
@@ -906,8 +906,8 @@ export const blogPosts: Record<string, BlogPost> = {
 
   'alternative-investment-market-outlook': {
     id: 'alternative-investment-market-outlook',
-    title: '대체투자 시장 전망과 기회',
-    excerpt: '2025년 대체투자 시장의 주요 트렌드와 고액자산가를 위한 투자 기회를 분석합니다.',
+    title: 'Alternative Investment Outlook 2025',
+    excerpt: 'Substack Global Platform | Professional English analysis for international Korean investors. Comprehensive market analysis covering private equity, real estate funds, hedge funds, and emerging alternative assets with data-driven insights and strategic recommendations for sophisticated investors worldwide.',
     content: `# 대체투자 시장 전망과 기회
 
 전통적인 주식과 채권을 넘어서는 대체투자는 고액자산가들의 포트폴리오에서 점점 중요한 비중을 차지하고 있습니다. 2025년 대체투자 시장의 전망과 주요 기회를 살펴보겠습니다.
@@ -1013,7 +1013,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'investment-strategy-2025': {
     id: 'investment-strategy-2025',
     title: '2025년 투자 전망: CEO를 위한 지정학적 리스크 돌파 전략',
-    excerpt: 'AI, 금리, 지정학적 변수 속에서 대표님의 자산을 지키고 불리는 핵심 인사이트. 2025년 글로벌 경제 환경 변화에 대응하는 포트폴리오 전략을 제시합니다.',
+    excerpt: '네이버 프리미엄 | 전문가 최고 등급 전략 분석. AI, 금리, 지정학적 변수의 복합적 영향을 심층 분석한 고도 전문 컨텐츠. CEO를 위한 맞춤형 리스크 관리와 수익 창출 전략을 프리미엄등급으로 제공.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-gray-800 dark:text-gray-200 bg-gradient-to-br from-emerald-50 to-white dark:from-gray-900 dark:to-gray-800 min-h-screen px-5">
 
 <header className="text-center mb-10 py-8 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30 border border-white/50 dark:border-gray-700/50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:bg-white/40 dark:hover:bg-gray-800/40">

@@ -144,15 +144,55 @@ interface PostCardProps {
 }
 
 function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps) {
+  const getPlatformStyle = () => {
+    switch (post.platform) {
+      case 'naver-premium':
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-xl transition-all duration-300 animate-slide-up ring-2 ring-blue-200 dark:ring-blue-800 bg-gradient-to-br from-blue-50 to-white dark:from-blue-950 dark:to-gray-900',
+          headerClass: 'aspect-video bg-gradient-to-br from-blue-500/20 to-blue-600/10 flex items-center justify-center relative',
+          icon: '💎'
+        };
+      case 'substack':
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-xl transition-all duration-300 animate-slide-up ring-2 ring-red-200 dark:ring-red-800 bg-gradient-to-br from-red-50 to-white dark:from-red-950 dark:to-gray-900',
+          headerClass: 'aspect-video bg-gradient-to-br from-red-500/20 to-red-600/10 flex items-center justify-center relative',
+          icon: '🌍'
+        };
+      case 'brunch':
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-xl transition-all duration-300 animate-slide-up ring-2 ring-amber-200 dark:ring-amber-800 bg-gradient-to-br from-amber-50 to-white dark:from-amber-950 dark:to-gray-900',
+          headerClass: 'aspect-video bg-gradient-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center relative',
+          icon: '✨'
+        };
+      case 'naver-blog':
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-lg transition-all duration-300 animate-slide-up ring-1 ring-green-200 dark:ring-green-800 bg-gradient-to-br from-green-50 to-white dark:from-green-950 dark:to-gray-900',
+          headerClass: 'aspect-video bg-gradient-to-br from-green-500/20 to-green-600/10 flex items-center justify-center relative',
+          icon: '📚'
+        };
+      default:
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-lg transition-all duration-300 animate-slide-up',
+          headerClass: 'aspect-video bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center',
+          icon: '🏠'
+        };
+    }
+  };
+
+  const style = getPlatformStyle();
+
   return (
     <div
-      className={`card-modern overflow-hidden hover:shadow-lg transition-all duration-300 animate-slide-up ${
-        featured ? 'ring-1 ring-primary/20' : ''
-      }`}
+      className={`${style.cardClass} ${featured ? 'ring-1 ring-primary/20' : ''}`}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
-      <div className="aspect-video bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-        <BookOpen className="h-12 w-12 text-primary" />
+      <div className={style.headerClass}>
+        <div className="text-4xl opacity-80">{style.icon}</div>
+        <div className="absolute top-2 right-2">
+          <Badge variant={post.platform === 'naver-premium' ? 'default' : post.platform === 'brunch' ? 'secondary' : post.platform === 'substack' ? 'destructive' : 'outline'} size="sm">
+            {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : post.platform === 'brunch' ? '브런치' : post.platform === 'substack' ? 'Substack' : '내부'}
+          </Badge>
+        </div>
       </div>
       <div className="p-6">
         <div className="flex items-center justify-between mb-3">
@@ -162,11 +202,7 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
           )}
         </div>
         <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
-          {post.externalUrl ? (
-            <Link href={post.externalUrl} target="_blank" rel="noopener noreferrer">{post.title}</Link>
-          ) : (
-            <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
-          )}
+          <Link href={post.externalUrl || '#'} target="_blank" rel="noopener noreferrer">{post.title}</Link>
         </h3>
         <p className="text-muted-foreground mb-4 line-clamp-2">
           {post.excerpt}
@@ -189,25 +225,11 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
             day: 'numeric',
           })}
         </div>
-        <div className="flex items-center gap-2 mb-4">
-          {post.platform && (
-            <Badge variant={post.platform === 'naver-premium' ? 'default' : post.platform === 'brunch' ? 'secondary' : post.platform === 'substack' ? 'destructive' : 'outline'} size="sm">
-              {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : post.platform === 'brunch' ? '브런치' : post.platform === 'substack' ? 'Substack' : '내부'}
-            </Badge>
-          )}
-        </div>
         <Button className="w-full" variant="outline" asChild>
-          {post.externalUrl ? (
-            <Link href={post.externalUrl} target="_blank" rel="noopener noreferrer">
-              자세히 보기
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          ) : (
-            <Link href={`/insights/market-intelligence/${post.slug}`}>
-              자세히 보기
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          )}
+          <Link href={post.externalUrl || '#'} target="_blank" rel="noopener noreferrer">
+            {post.platform === 'naver-premium' ? '프리미엄 콘텐츠 보기' : post.platform === 'substack' ? 'Read on Substack' : post.platform === 'brunch' ? '브런치에서 읽기' : post.platform === 'naver-blog' ? '블로그에서 보기' : '자세히 보기'}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
         </Button>
       </div>
     </div>
@@ -215,14 +237,51 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
 }
 
 function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
+  const getPlatformStyle = () => {
+    switch (post.platform) {
+      case 'naver-premium':
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-xl transition-all duration-300 animate-slide-up ring-1 ring-blue-200 dark:ring-blue-800 bg-gradient-to-br from-blue-50 to-white dark:from-blue-950 dark:to-gray-900',
+          iconAreaClass: 'md:w-1/4 aspect-video md:aspect-square bg-gradient-to-br from-blue-500/20 to-blue-600/10 flex items-center justify-center relative',
+          icon: '💎'
+        };
+      case 'substack':
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-xl transition-all duration-300 animate-slide-up ring-1 ring-red-200 dark:ring-red-800 bg-gradient-to-br from-red-50 to-white dark:from-red-950 dark:to-gray-900',
+          iconAreaClass: 'md:w-1/4 aspect-video md:aspect-square bg-gradient-to-br from-red-500/20 to-red-600/10 flex items-center justify-center relative',
+          icon: '🌍'
+        };
+      case 'brunch':
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-xl transition-all duration-300 animate-slide-up ring-1 ring-amber-200 dark:ring-amber-800 bg-gradient-to-br from-amber-50 to-white dark:from-amber-950 dark:to-gray-900',
+          iconAreaClass: 'md:w-1/4 aspect-video md:aspect-square bg-gradient-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center relative',
+          icon: '✨'
+        };
+      case 'naver-blog':
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-lg transition-all duration-300 animate-slide-up ring-1 ring-green-200 dark:ring-green-800 bg-gradient-to-br from-green-50 to-white dark:from-green-950 dark:to-gray-900',
+          iconAreaClass: 'md:w-1/4 aspect-video md:aspect-square bg-gradient-to-br from-green-500/20 to-green-600/10 flex items-center justify-center relative',
+          icon: '📚'
+        };
+      default:
+        return {
+          cardClass: 'card-modern overflow-hidden hover:shadow-lg transition-all duration-300 animate-slide-up',
+          iconAreaClass: 'md:w-1/4 aspect-video md:aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center',
+          icon: '🏠'
+        };
+    }
+  };
+
+  const style = getPlatformStyle();
+
   return (
     <div
-      className="card-modern overflow-hidden hover:shadow-lg transition-all duration-300 animate-slide-up"
+      className={style.cardClass}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
       <div className="md:flex">
-        <div className="md:w-1/4 aspect-video md:aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-          <FileText className="h-8 w-8 text-primary" />
+        <div className={style.iconAreaClass}>
+          <div className="text-3xl opacity-80">{style.icon}</div>
         </div>
         <div className="md:w-3/4 p-6">
           <div className="flex items-center gap-4 mb-3 flex-wrap">
@@ -241,11 +300,7 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
             </div>
           </div>
           <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
-            {post.externalUrl ? (
-              <Link href={post.externalUrl} target="_blank" rel="noopener noreferrer">{post.title}</Link>
-            ) : (
-              <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
-            )}
+            <Link href={post.externalUrl || '#'} target="_blank" rel="noopener noreferrer">{post.title}</Link>
           </h3>
           <p className="text-muted-foreground mb-4 line-clamp-2">
             {post.excerpt}
@@ -256,24 +311,12 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
                 <User className="h-4 w-4" />
                 {post.author}
               </div>
-              {post.platform && (
-                <Badge variant={post.platform === 'naver-premium' ? 'default' : post.platform === 'brunch' ? 'secondary' : post.platform === 'substack' ? 'destructive' : 'outline'} size="sm">
-                  {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : post.platform === 'brunch' ? '브런치' : post.platform === 'substack' ? 'Substack' : '내부'}
-                </Badge>
-              )}
             </div>
             <Button variant="outline" size="sm" asChild>
-              {post.externalUrl ? (
-                <Link href={post.externalUrl} target="_blank" rel="noopener noreferrer">
-                  자세히 보기
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              ) : (
-                <Link href={`/insights/market-intelligence/${post.slug}`}>
-                  자세히 보기
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              )}
+              <Link href={post.externalUrl || '#'} target="_blank" rel="noopener noreferrer">
+                {post.platform === 'naver-premium' ? '프리미엄 보기' : post.platform === 'substack' ? 'Read More' : post.platform === 'brunch' ? '브런치' : post.platform === 'naver-blog' ? '블로그' : '보기'}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>
