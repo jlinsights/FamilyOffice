@@ -127,19 +127,19 @@ export default function AIMarketIntelligencePage() {
       <main className="pt-20">
         {/* Hero Section - AI Expert Platform */}
         <section className="relative w-full min-h-[100vh] flex flex-col items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-purple-500/10"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-background/50 to-background"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-purple-500/10 dark:from-primary/5 dark:to-purple-500/5"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-background/50 to-background dark:via-background/70"></div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="animate-slide-up">
-              <Badge variant="outline" size="lg" className="mb-6 bg-gradient-to-r from-primary/10 to-purple-500/10 border-primary/20">
+              <Badge variant="outline" size="lg" className="mb-6 bg-gradient-to-r from-primary/10 to-purple-500/10 dark:from-primary/20 dark:to-purple-500/20 border-primary/20 dark:border-primary/30">
                 <Globe className="w-4 h-4 mr-2" />
                 Multi-Platform Intelligence Hub
               </Badge>
             </div>
             
             <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight mb-8 animate-slide-up">
-              <span className="bg-gradient-to-r from-primary via-purple-600 to-green-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary via-purple-600 to-green-600 text-gradient-safe">
                 4개 플랫폼 통합
               </span>
               <br />
@@ -163,7 +163,7 @@ export default function AIMarketIntelligencePage() {
                 <Link
                   key={platform.id}
                   href={`#${platform.id}`}
-                  className="group relative p-4 rounded-lg bg-background/40 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+                  className="group relative p-4 rounded-lg card-platform hover:shadow-lg"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-r ${platform.color} opacity-0 group-hover:opacity-10 rounded-lg transition-opacity`}></div>
                   <platform.icon className="w-6 h-6 mx-auto mb-2 text-primary group-hover:scale-110 transition-transform" />
@@ -208,7 +208,7 @@ export default function AIMarketIntelligencePage() {
                 </div>
                 
                 <h2 className="text-3xl md:text-5xl font-bold mb-4 animate-slide-up">
-                  <span className={`bg-gradient-to-r ${platform.color} bg-clip-text text-transparent`}>
+                  <span className={`bg-gradient-to-r ${platform.color} text-gradient-safe`}>
                     {platform.name}
                   </span>
                 </h2>
@@ -224,7 +224,7 @@ export default function AIMarketIntelligencePage() {
                 {/* Platform Badges */}
                 <div className="flex flex-wrap justify-center gap-2 mb-8 animate-slide-up">
                   {platform.badges.map((badge, badgeIndex) => (
-                    <Badge key={badgeIndex} variant="outline" className="bg-background/50">
+                    <Badge key={badgeIndex} variant="outline" className="badge-modern">
                       {badge}
                     </Badge>
                   ))}
@@ -236,7 +236,7 @@ export default function AIMarketIntelligencePage() {
                 {platform.keyInsights.map((insight, insightIndex) => (
                   <Card 
                     key={insightIndex}
-                    className="animate-slide-up group hover:shadow-lg transition-all duration-300"
+                    className="card-insight animate-slide-up group"
                     style={{ animationDelay: `${insightIndex * 100 + 200}ms` }}
                   >
                     <CardHeader className="pb-3">
@@ -256,8 +256,8 @@ export default function AIMarketIntelligencePage() {
 
               {/* Platform Access Card */}
               <div className="max-w-4xl mx-auto">
-                <Card className={`overflow-hidden border-2 border-transparent bg-gradient-to-r ${platform.color} p-[1px] animate-slide-up`}>
-                  <div className="bg-background rounded-lg p-8">
+                <Card className={`overflow-hidden border-2 border-transparent bg-gradient-to-r ${platform.color} p-[1px] animate-slide-up dark:brightness-110`}>
+                  <div className="bg-background dark:bg-card/90 rounded-lg p-8">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                       <div>
                         <h4 className="text-2xl font-bold mb-4">
@@ -293,7 +293,7 @@ export default function AIMarketIntelligencePage() {
                       
                       <div className="relative">
                         <div className={`absolute inset-0 bg-gradient-to-r ${platform.color} opacity-20 rounded-lg blur-xl`}></div>
-                        <div className="relative bg-muted/50 rounded-lg p-6 text-center">
+                        <div className="relative bg-muted/50 dark:bg-muted/30 rounded-lg p-6 text-center">
                           <platform.icon className={`w-16 h-16 mx-auto mb-4 text-gradient-to-r ${platform.color}`} />
                           <p className="text-sm text-muted-foreground font-medium">
                             전문가 인사이트 플랫폼
@@ -323,7 +323,7 @@ export default function AIMarketIntelligencePage() {
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-slide-up">
                 영상 & 오디오로 만나는 
                 <br />
-                <span className="bg-gradient-to-r from-primary via-purple-600 to-green-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary via-purple-600 to-green-600 text-gradient-safe">
                   플랫폼별 전문가 인사이트
                 </span>
               </h2>
@@ -348,7 +348,7 @@ export default function AIMarketIntelligencePage() {
 
               <TabsContent value="video" className="space-y-8">
                 <div className="grid md:grid-cols-2 gap-12">
-                  <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300">
+                  <Card className="card-modern overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <div className="relative">
                       <YouTubeThumbnail
                         videoId="0FCO9TQBok0"
@@ -375,7 +375,7 @@ export default function AIMarketIntelligencePage() {
                     </CardContent>
                   </Card>
 
-                  <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300">
+                  <Card className="card-modern overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <div className="relative">
                       <YouTubeThumbnail
                         videoId="XCB4ys-IU4s"
@@ -421,13 +421,13 @@ export default function AIMarketIntelligencePage() {
 
               <TabsContent value="podcast" className="space-y-8">
                 <div className="grid md:grid-cols-2 gap-12">
-                  <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300">
+                  <Card className="card-modern overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-4">
                         <Badge variant="default" className="bg-gradient-to-r from-orange-500 to-orange-600">
                           Substack
                         </Badge>
-                        <Badge variant="outline" size="sm">EP.1</Badge>
+                        <Badge variant="outline" size="sm" className="dark:bg-muted/20 dark:border-border/50">EP.1</Badge>
                       </div>
                       <SpotifyEmbed
                         uri="spotify:episode:3oWSt9SMetN4Zw3NXFL36H"
@@ -447,13 +447,13 @@ export default function AIMarketIntelligencePage() {
                     </CardContent>
                   </Card>
 
-                  <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300">
+                  <Card className="card-modern overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-4">
                         <Badge variant="default" className="bg-gradient-to-r from-purple-500 to-purple-600">
                           브런치스토리
                         </Badge>
-                        <Badge variant="outline" size="sm">EP.2</Badge>
+                        <Badge variant="outline" size="sm" className="dark:bg-muted/20 dark:border-border/50">EP.2</Badge>
                       </div>
                       <SpotifyEmbed
                         uri="spotify:episode:6GdSlo5AkFiYB4G5Sib1xJ"
@@ -497,13 +497,13 @@ export default function AIMarketIntelligencePage() {
         <section id="blog-content" className="section bg-muted/20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <Badge variant="outline" size="lg" className="mb-6 bg-gradient-to-r from-primary/10 to-purple-500/10">
+              <Badge variant="outline" size="lg" className="mb-6 bg-gradient-to-r from-primary/10 to-purple-500/10 dark:from-primary/20 dark:to-purple-500/20 border-primary/20 dark:border-primary/30">
                 <Bot className="w-4 h-4 mr-2" />
                 AI 통합 컨텐츠 플랫폼
               </Badge>
               
               <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-slide-up">
-                <span className="bg-gradient-to-r from-primary via-purple-600 to-green-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary via-purple-600 to-green-600 text-gradient-safe">
                   4개 플랫폼 통합
                 </span>
                 <br />
@@ -528,7 +528,7 @@ export default function AIMarketIntelligencePage() {
               {contentPlatforms.map((platform, index) => (
                 <Card 
                   key={platform.id}
-                  className="text-center group hover:shadow-lg transition-all duration-300 animate-slide-up"
+                  className="card-modern text-center group hover:shadow-lg transition-all duration-300 animate-slide-up"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <CardContent className="p-6">
@@ -572,7 +572,7 @@ export default function AIMarketIntelligencePage() {
         {/* AI Newsletter Signup - Enhanced */}
         <section className="section bg-gradient-to-br from-primary/5 via-background to-purple-500/5">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-r from-primary/5 to-purple-500/5">
+            <Card className="card-modern overflow-hidden border-2 border-primary/20 dark:border-primary/10 bg-gradient-to-r from-primary/5 to-purple-500/5 dark:from-primary/10 dark:to-purple-500/10">
               <CardContent className="p-8 text-center">
                 <div className="mb-6">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 mb-4">
@@ -589,9 +589,9 @@ export default function AIMarketIntelligencePage() {
                   className="animate-slide-up max-w-md mx-auto"
                 />
                 <div className="flex justify-center gap-2 mt-6">
-                  <Badge variant="outline" size="sm">AI 자동화 트렌드</Badge>
-                  <Badge variant="outline" size="sm">전문가 독점 인사이트</Badge>
-                  <Badge variant="outline" size="sm">실전 활용 가이드</Badge>
+                  <Badge variant="outline" size="sm" className="dark:bg-muted/20 dark:border-border/50">AI 자동화 트렌드</Badge>
+                  <Badge variant="outline" size="sm" className="dark:bg-muted/20 dark:border-border/50">전문가 독점 인사이트</Badge>
+                  <Badge variant="outline" size="sm" className="dark:bg-muted/20 dark:border-border/50">실전 활용 가이드</Badge>
                 </div>
               </CardContent>
             </Card>

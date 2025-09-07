@@ -669,6 +669,37 @@
 }
 
 @layer components {
+  /* Card Dark Mode Consistency */
+  .card-modern {
+    @apply bg-card border-border hover:border-primary/50;
+    @apply dark:bg-card/50 dark:border-border/50;
+    @apply transition-all duration-300;
+  }
+
+  .card-insight {
+    @apply bg-card border border-border;
+    @apply dark:bg-card/80 dark:border-border/50;
+    @apply hover:shadow-lg dark:hover:shadow-primary/5;
+    @apply transition-all duration-300;
+  }
+
+  .card-platform {
+    @apply bg-background/95 dark:bg-background/50;
+    @apply backdrop-blur-sm border border-border/50;
+    @apply dark:border-border/30;
+  }
+
+  .badge-modern {
+    @apply bg-muted/50 dark:bg-muted/30;
+    @apply text-foreground dark:text-foreground/90;
+    @apply border-border/50 dark:border-border/30;
+  }
+
+  .text-gradient-safe {
+    @apply bg-clip-text text-transparent;
+    @apply dark:brightness-125 dark:contrast-125;
+  }
+
   /* Modern button variants */
   .btn {
     @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
