@@ -80,6 +80,8 @@ export const blogPosts: Record<string, BlogPost> = {
     id: 'family-office-basics-guide',
     title: '패밀리오피스란 무엇인가',
     excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -363,6 +365,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['패밀리오피스', '가업승계', '자산관리', '상속세', '중견기업', 'MFO', '디지털패밀리오피스', '가문경영', '세무전략', '투자다각화'],
     slug: 'family-office-basics-guide',
     featured: true,
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
   },
 
   'asset-management-strategy': {
@@ -394,12 +398,16 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['자산관리', '포트폴리오', '투자전략'],
     slug: 'asset-management-strategy',
     featured: true,
+    platform: 'naver-blog',
+    externalUrl: 'https://blog.naver.com/lim_jaehong',
   },
 
   'tax-optimization-basics': {
     id: 'tax-optimization-basics',
     title: '중견기업을 위한 절세 전략',
     excerpt: '합법적이고 효과적인 절세 방법과 상속세 대비 전략을 알아봅니다.',
+    platform: 'naver-blog',
+    externalUrl: 'https://blog.naver.com/lim_jaehong',
     content: `# 중견기업을 위한 절세 전략
 
 세무 최적화는 합법적인 방법을 통해 세부담을 줄이고 기업과 가족의 재정 효율성을 높이는 것입니다.
@@ -425,6 +433,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['절세', '상속세', '증여세', '가업승계'],
     slug: 'tax-optimization-basics',
     featured: true,
+    platform: 'naver-blog',
+    externalUrl: 'https://blog.naver.com/lim_jaehong',
   },
 
 
@@ -432,6 +442,8 @@ export const blogPosts: Record<string, BlogPost> = {
     id: 'succession-planning-guide',
     title: '성공적인 기업 승계를 위한 준비',
     excerpt: '기업 승계 과정에서 고려해야 할 법적, 세무적, 경영적 요소들을 정리했습니다.',
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
     content: `# 성공적인 기업 승계를 위한 준비
 
 기업 승계는 단순한 소유권 이전이 아닙니다. 기업의 지속가능성과 가족의 화합을 위한 종합적인 계획이 필요합니다.
@@ -463,6 +475,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['기업승계', '가업승계', '거버넌스'],
     slug: 'succession-planning-guide',
     featured: false,
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
   },
 
   'digital-transformation-finance': {
@@ -500,6 +514,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['디지털혁신', '핀테크', 'AI', '자산관리'],
     slug: 'digital-transformation-finance',
     featured: false,
+    platform: 'naver-blog',
+    externalUrl: 'https://blog.naver.com/lim_jaehong',
   },
 
   // 기업승계 분석 카테고리
@@ -538,6 +554,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['기업승계', '가업승계', '경영권 이양', '차세대 경영'],
     slug: 'business-succession-2024-analysis',
     featured: true,
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
   },
 
   'mid-sized-company-succession-issues': {
@@ -579,6 +597,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['중견기업', '승계 이슈', '해결방안', '경영 전략'],
     slug: 'mid-sized-company-succession-issues',
     featured: false,
+    platform: 'naver-blog',
+    externalUrl: 'https://blog.naver.com/lim_jaehong',
   },
 
   // 세무·법무 인사이트 카테고리
@@ -629,6 +649,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['상속세', '세법 개정', '가업승계', '세무 전략'],
     slug: 'inheritance-tax-reform-analysis',
     featured: false,
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
   },
 
   'family-business-governance-optimization': {
@@ -678,6 +700,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['지배구조', '가족기업', '이사회', '경영 투명성'],
     slug: 'family-business-governance-optimization',
     featured: false,
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
   },
 
   // 글로벌 트렌드 카테고리
@@ -733,6 +757,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['싱가포르', '패밀리오피스', '글로벌 트렌드', '아시아'],
     slug: 'singapore-family-office-trends',
     featured: false,
+    platform: 'naver-blog',
+    externalUrl: 'https://blog.naver.com/lim_jaehong',
   },
 
   'us-trust-strategies': {
@@ -797,6 +823,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['미국 신탁', '글로벌 자산관리', '세무 최적화', '자산 보호'],
     slug: 'us-trust-strategies',
     featured: false,
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
   },
 
   // 자산관리 전략 카테고리
@@ -878,6 +906,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['부동산 투자', '포트폴리오', '고액자산가', '자산 배분'],
     slug: 'high-net-worth-real-estate-portfolio',
     featured: true,
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
   },
 
   'alternative-investment-market-outlook': {
@@ -982,6 +1012,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['대체투자', '프라이빗 에쿼티', '헤지펀드', '투자 전략'],
     slug: 'alternative-investment-market-outlook',
     featured: false,
+    platform: 'naver-blog',
+    externalUrl: 'https://blog.naver.com/lim_jaehong',
   },
 
   'investment-strategy-2025': {
@@ -1127,5 +1159,7 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['2025년 투자 전망', '지정학적 리스크', 'AI 투자', '포트폴리오 전략', '자산 다변화'],
     slug: 'investment-strategy-2025',
     featured: true,
+    platform: 'naver-premium',
+    externalUrl: 'https://contents.premium.naver.com/familyoffice/fo',
   },
 };

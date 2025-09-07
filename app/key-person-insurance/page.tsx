@@ -88,58 +88,6 @@ export default function KeyPersonInsurancePage() {
     }
   ];
 
-  // CEO보장정기보험 상품 비교
-  const insuranceProducts = [
-    {
-      company: '삼성생명',
-      product: 'CEO보장정기보험',
-      premium: '월 50만원~',
-      minAmount: '1억원',
-      maxAmount: '50억원',
-      taxBenefit: '법인 손금처리 100%',
-      term: '1년 갱신형',
-      features: ['고액보장', '우대요율', '건강체할인', '법인손금'],
-      rating: 5,
-      popular: true,
-      highlight: '업계 최고 보장한도'
-    },
-    {
-      company: '한화생명',
-      product: '임원정기보험',
-      premium: '월 40만원~',
-      minAmount: '5천만원',
-      maxAmount: '30억원',
-      taxBenefit: '법인 손금처리 95%',
-      term: '1년 갱신형',
-      features: ['고액보장', '우대요율', '법인손금'],
-      rating: 4,
-      highlight: '합리적 보험료'
-    },
-    {
-      company: '교보생명',
-      product: '경영진보장보험',
-      premium: '월 45만원~',
-      minAmount: '3천만원',
-      maxAmount: '25억원',
-      taxBenefit: '법인 손금처리 90%',
-      term: '1년 갱신형',
-      features: ['고액보장', '법인손금', '중도인출'],
-      rating: 4,
-      highlight: '유연한 보장설계'
-    },
-    {
-      company: '메리츠생명',
-      product: '핵심인재보험',
-      premium: '월 35만원~',
-      minAmount: '2천만원',
-      maxAmount: '20억원',
-      taxBenefit: '법인 손금처리 85%',
-      term: '1년 갱신형',
-      features: ['고액보장', '법인손금'],
-      rating: 3,
-      highlight: '기본형 보장'
-    }
-  ];
 
   // 가입 절차
   const enrollmentProcess = [
@@ -274,12 +222,11 @@ export default function KeyPersonInsurancePage() {
                   size="lg" 
                   className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 text-lg"
                   onClick={() => {
-                    const element = document.getElementById('product-comparison');
-                    element?.scrollIntoView({ behavior: 'smooth' });
+                    window.scrollTo({ top: window.innerHeight * 2.5, behavior: 'smooth' });
                   }}
                 >
                   <FileText className="mr-2 h-5 w-5" />
-                  상품 비교하기
+                  가입절차 안내
                 </Button>
               </div>
             </div>
@@ -455,88 +402,6 @@ export default function KeyPersonInsurancePage() {
           </div>
         </section>
 
-        {/* 상품 비교 섹션 */}
-        <section id="product-comparison" className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                경영인정기보험 <span className="text-blue-600">상품 비교</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                주요 생명보험사 CEO 전용 상품 완전 비교분석
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {insuranceProducts.map((product, index) => (
-                <Card key={index} className={`relative overflow-hidden ${product.popular ? 'ring-2 ring-yellow-400' : ''} hover:shadow-xl transition-all duration-300`}>
-                  {product.popular && (
-                    <div className="absolute top-0 right-0 bg-gradient-to-l from-yellow-400 to-yellow-500 text-yellow-900 px-3 py-1 text-sm font-bold rounded-bl-lg">
-                      <Star className="w-3 h-3 inline mr-1" />
-                      추천
-                    </div>
-                  )}
-                  <CardHeader className="text-center">
-                    <div className="text-lg font-bold text-gray-900">{product.company}</div>
-                    <CardTitle className="text-blue-600">{product.product}</CardTitle>
-                    <div className="flex justify-center mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`w-4 h-4 ${i < product.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                        />
-                      ))}
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">보험료</span>
-                      <span className="font-bold text-green-600">{product.premium}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">최소 가입</span>
-                      <span className="font-semibold">{product.minAmount}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">최대 가입</span>
-                      <span className="font-semibold">{product.maxAmount}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">세제혜택</span>
-                      <span className="font-bold text-blue-600">{product.taxBenefit}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">보험기간</span>
-                      <span className="font-semibold">{product.term}</span>
-                    </div>
-                    <div className="mt-2 p-2 bg-yellow-50 rounded text-xs text-center">
-                      <span className="font-semibold text-yellow-800">{product.highlight}</span>
-                    </div>
-                    <div className="pt-2 border-t">
-                      <div className="text-sm text-gray-600 mb-2">주요 특징</div>
-                      <div className="flex flex-wrap gap-1">
-                        {product.features.map((feature, fIndex) => (
-                          <Badge key={fIndex} variant="secondary" className="text-xs">
-                            {feature}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <CalComPopup
-                      trigger={
-                        <Button className="w-full mt-4" variant={product.popular ? "default" : "outline"}>
-                          <FileText className="mr-2 h-4 w-4" />
-                          상품 상담
-                        </Button>
-                      }
-                      calLink="familyoffices/key-person-insurance"
-                    />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* 가입 절차 섹션 */}
         <section className="py-20 bg-white">

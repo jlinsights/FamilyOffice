@@ -11,6 +11,8 @@ export interface BlogPost {
   slug: string;
   featured?: boolean;
   image?: string;
+  externalUrl?: string;
+  platform?: 'naver-blog' | 'naver-premium' | 'internal';
 }
 
 export interface BlogCategory {

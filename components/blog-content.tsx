@@ -162,7 +162,11 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
           )}
         </div>
         <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
-          <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
+          {post.externalUrl ? (
+            <Link href={post.externalUrl} target="_blank" rel="noopener noreferrer">{post.title}</Link>
+          ) : (
+            <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
+          )}
         </h3>
         <p className="text-muted-foreground mb-4 line-clamp-2">
           {post.excerpt}
@@ -185,11 +189,25 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
             day: 'numeric',
           })}
         </div>
+        <div className="flex items-center gap-2 mb-4">
+          {post.platform && (
+            <Badge variant={post.platform === 'naver-premium' ? 'default' : 'outline'} size="sm">
+              {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : '내부'}
+            </Badge>
+          )}
+        </div>
         <Button className="w-full" variant="outline" asChild>
-          <Link href={`/insights/market-intelligence/${post.slug}`}>
-            자세히 보기
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
+          {post.externalUrl ? (
+            <Link href={post.externalUrl} target="_blank" rel="noopener noreferrer">
+              자세히 보기
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          ) : (
+            <Link href={`/insights/market-intelligence/${post.slug}`}>
+              자세히 보기
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          )}
         </Button>
       </div>
     </div>
@@ -223,21 +241,39 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
             </div>
           </div>
           <h3 className="text-xl font-semibold text-foreground mb-3 hover:text-primary transition-colors">
-            <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
+            {post.externalUrl ? (
+              <Link href={post.externalUrl} target="_blank" rel="noopener noreferrer">{post.title}</Link>
+            ) : (
+              <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
+            )}
           </h3>
           <p className="text-muted-foreground mb-4 line-clamp-2">
             {post.excerpt}
           </p>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <User className="h-4 w-4" />
-              {post.author}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <User className="h-4 w-4" />
+                {post.author}
+              </div>
+              {post.platform && (
+                <Badge variant={post.platform === 'naver-premium' ? 'default' : 'outline'} size="sm">
+                  {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : '내부'}
+                </Badge>
+              )}
             </div>
             <Button variant="outline" size="sm" asChild>
-              <Link href={`/insights/market-intelligence/${post.slug}`}>
-                자세히 보기
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+              {post.externalUrl ? (
+                <Link href={post.externalUrl} target="_blank" rel="noopener noreferrer">
+                  자세히 보기
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              ) : (
+                <Link href={`/insights/market-intelligence/${post.slug}`}>
+                  자세히 보기
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              )}
             </Button>
           </div>
         </div>

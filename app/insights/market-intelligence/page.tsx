@@ -196,17 +196,17 @@ export default function BlogPage() {
                   </div>
                   <div>
                     <YouTubeThumbnail
-                      videoId="T0Rzi6Na-c4"
-                      title="Ray Dalio's INVESTING Strategy Will Make You RICH"
+                      videoId="XCB4ys-IU4s"
+                      title="기업 자산관리 핵심 전략"
                       className="w-full mb-4"
                     />
                     <p className="text-muted-foreground mb-3">
-                      브리지워터 설립자 레이 달리오의 투자 전략과 분산투자 원칙. 패밀리오피스 운영에 필수적인 포트폴리오 구성 방법을 익혀보세요.
+                      중견기업 CEO를 위한 자산관리 핵심 전략과 실무 가이드. 기업과 개인 자산의 균형잡힌 관리를 통해 장기적인 재무 안정성을 확보하는 방법을 상세히 알아봅니다.
                     </p>
                     <div className="flex gap-2">
-                      <Badge variant="secondary">레이달리오</Badge>
-                      <Badge variant="secondary">분산투자</Badge>
-                      <Badge variant="secondary">포트폴리오</Badge>
+                      <Badge variant="secondary">자산관리</Badge>
+                      <Badge variant="secondary">재무전략</Badge>
+                      <Badge variant="secondary">CEO가이드</Badge>
                     </div>
                   </div>
                 </div>
@@ -245,17 +245,17 @@ export default function BlogPage() {
                   </div>
                   <div>
                     <SpotifyEmbed
-                      uri="spotify:episode:6JXsT6X9g9dHfFMPKy8z2J"
-                      title="비트코인에서 ESG 투자까지: 새로운 자산 클래스들"
+                      uri="spotify:episode:6GdSlo5AkFiYB4G5Sib1xJ"
+                      title="CEO 보장정기보험과 퇴직금 플랜 완벽 가이드"
                       className="w-full rounded-lg overflow-hidden mb-4"
                     />
                     <p className="text-muted-foreground mb-3">
-                      새로운 자산 클래스의 등장과 투자 기회를 전문가와 함께 논의합니다. 암호화폐부터 ESG 투자까지, 변화하는 투자 패러다임에 대비하는 방법을 알아보세요.
+                      CEO의 유고 리스크와 상속세 대비를 위한 보장정기보험의 활용법을 상세히 분석합니다. 법인세 절감과 퇴직소득 인정을 위한 CEO Plan의 정관 정비, 세무 처리, 그리고 2020년 개정된 임원 퇴직소득 한도까지 전문가가 체계적으로 해설합니다.
                     </p>
                     <div className="flex gap-2">
-                      <Badge variant="secondary">대체투자</Badge>
-                      <Badge variant="secondary">비트코인</Badge>
-                      <Badge variant="secondary">ESG투자</Badge>
+                      <Badge variant="secondary">CEO보장보험</Badge>
+                      <Badge variant="secondary">퇴직금플랜</Badge>
+                      <Badge variant="secondary">법인세절감</Badge>
                     </div>
                   </div>
                 </div>
