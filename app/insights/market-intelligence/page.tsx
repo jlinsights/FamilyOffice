@@ -34,9 +34,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'AI 기반 시장 인텔리전스 - BMAD × SuperClaude × AgentOS 전문가 플랫폼',
-  description: 'BMAD Method, SuperClaude AI, AgentOS 시스템, Sub Agent 기반 전문가 인사이트. 4개 플랫폼을 통한 차세대 자산관리 및 핀테크 전략 분석.',
-  keywords: 'BMAD Method, SuperClaude, AgentOS, Sub Agent, AI 자산관리, 핀테크 전략, 시장 분석, 전문가 플랫폼',
+  title: '시장 인텔리전스 플랫폼 - 전문가 인사이트 & 자산관리 전략',
+  description: '네이버 프리미엄, Substack, 네이버 블로그, 브런치스토리를 통한 전문가 인사이트. 4개 플랫폼 통합 자산관리 및 핀테크 전략 분석.',
+  keywords: '시장 인텔리전스, 자산관리 전략, 전문가 인사이트, 네이버 프리미엄, Substack, 브런치스토리, 투자 분석',
 };
 
 import { Badge } from '@/components/ui/badge';
@@ -54,68 +54,68 @@ import { BlogContent } from '@/components/blog-content';
 import { YouTubeThumbnail } from '@/components/media/youtube-thumbnail';
 import { SpotifyEmbed } from '@/components/media/spotify-embed';
 
-// Expert Insight Platform Categories
-const expertPlatforms = [
+// Market Intelligence Platform Categories
+const contentPlatforms = [
   {
-    id: 'bmad',
-    name: 'BMAD Method',
-    subtitle: '비즈니스 모델 분석 & 의사결정 프레임워크',
-    description: '체계적 시장 분석과 데이터 기반 의사결정을 통한 전략적 자산관리',
-    icon: Brain,
-    color: 'from-blue-500 to-blue-600',
-    platformUrl: 'https://contents.premium.naver.com/familyoffice/fo',
-    badges: ['전략 분석', '의사결정 프레임워크', '시장 인텔리전스'],
-    keyInsights: ['BMAD 방법론 기반 포트폴리오 분석', 'AI 기반 위험 평가 모델', '차세대 투자 전략 설계']
-  },
-  {
-    id: 'superclaude',
-    name: 'SuperClaude AI',
-    subtitle: 'AI 기반 금융 분석 & 자동화 솔루션',
-    description: 'SuperClaude 프레임워크를 활용한 지능형 자산관리 및 핀테크 혁신',
-    icon: Sparkles,
-    color: 'from-purple-500 to-purple-600',
-    platformUrl: 'https://jaehong.substack.com',
-    badges: ['AI 자동화', '핀테크 혁신', '지능형 분석'],
-    keyInsights: ['Claude Code 기반 금융 자동화', 'MCP 서버 활용 투자 분석', '차세대 AI 자산관리']
-  },
-  {
-    id: 'agentos',
-    name: 'AgentOS',
-    subtitle: '분산 시스템 아키텍처 & 플랫폼 전략',
-    description: 'AgentOS 생태계를 통한 확장 가능한 자산관리 플랫폼 구축 - 마이크로서비스 아키텍처와 AI 에이전트 오케스트레이션',
-    icon: Network,
+    id: 'naver-premium',
+    name: '네이버 프리미엄',
+    subtitle: '프리미엄 전문 컨텐츠 & 심화 전략 가이드',
+    description: '네이버 프리미엄 콘텐츠를 통한 체계적 시장 분석과 데이터 기반 의사결정 전략적 자산관리',
+    icon: Building,
     color: 'from-green-500 to-green-600',
+    platformUrl: 'https://contents.premium.naver.com/familyoffice/fo',
+    badges: ['프리미엄 콘텐츠', '전략 분석', '의사결정 프레임워크', '시장 인텔리전스'],
+    keyInsights: ['전문가 수준의 포트폴리오 분석', '데이터 기반 위험 평가 모델', '차세대 투자 전략 설계']
+  },
+  {
+    id: 'substack',
+    name: 'Substack',
+    subtitle: '글로벌 인사이트 & 핀테크 혁신 분석',
+    description: 'Substack 플랫폼을 통한 지능형 자산관리 및 글로벌 핀테크 트렌드 분석',
+    icon: Globe,
+    color: 'from-orange-500 to-orange-600',
+    platformUrl: 'https://jaehong.substack.com',
+    badges: ['글로벌 인사이트', '핀테크 혁신', '지능형 분석', '국제 투자'],
+    keyInsights: ['글로벌 금융 트렌드 분석', '해외 투자 전략 및 기회 발굴', '차세대 자산관리 솔루션']
+  },
+  {
+    id: 'naver-blog',
+    name: '네이버 블로그',
+    subtitle: '실전 투자 가이드 & 플랫폼 전략',
+    description: '네이버 블로그를 통한 확장 가능한 자산관리 시스템 구축 및 실전 투자 전략',
+    icon: FileText,
+    color: 'from-blue-500 to-blue-600',
     platformUrl: 'https://blog.naver.com/lim_jaehong',
-    badges: ['시스템 아키텍처', '마이크로서비스', '플랫폼 확장성', 'AI 오케스트레이션', '생태계 전략'],
+    badges: ['실전 가이드', '투자 전략', '플랫폼 분석', '시스템 구축', '실무 적용'],
     keyInsights: [
-      'AgentOS 기반 분산 자산관리 시스템 - 실시간 포트폴리오 분석',
-      '확장 가능한 마이크로서비스 플랫폼 설계 - 컨테이너화된 금융 서비스',
-      'AI 에이전트 네트워크를 통한 오픈 생태계 구축 - 협업형 투자 전략',
-      '클라우드 네이티브 아키텍처 - 무한 확장 가능한 인프라',
-      'Event-Driven Architecture - 실시간 시장 데이터 처리',
-      'GraphQL Federation - 통합된 데이터 레이어 구축'
+      '분산 투자 시스템 - 실시간 포트폴리오 분석',
+      '확장 가능한 투자 플랫폼 설계 - 개인화된 금융 서비스',
+      '투자자 네트워크를 통한 정보 공유 생태계 구축',
+      '클라우드 기반 자산관리 - 무한 확장 가능한 인프라',
+      '실시간 시장 데이터 처리 및 분석',
+      '통합된 투자 정보 시스템 구축'
     ]
   },
   {
-    id: 'subagent',
-    name: 'Sub Agent',
-    subtitle: '전문 영역별 세분화 & 특화 솔루션',
-    description: '도메인별 전문 에이전트를 통한 맞춤형 자산관리 및 컨설팅 - Architect, Frontend, Backend, Security, Performance 등 11개 전문 페르소나',
-    icon: Bot,
-    color: 'from-amber-500 to-amber-600',
+    id: 'brunch',
+    name: '브런치스토리',
+    subtitle: '전문 영역별 세분화 & 특화 인사이트',
+    description: '브런치스토리를 통한 도메인별 전문 분석 및 맞춤형 자산관리 컨설팅',
+    icon: Users,
+    color: 'from-purple-500 to-purple-600',
     platformUrl: 'https://brunch.co.kr/@familyoffice',
-    badges: ['도메인 특화', '11개 전문 페르소나', '맞춤형 솔루션', '전문 컨설팅', '다중 에이전트'],
+    badges: ['도메인 특화', '전문 분석', '맞춤형 솔루션', '개인 컨설팅', '세분화 전략'],
     keyInsights: [
-      'Architect Agent - 시스템 설계 및 장기 아키텍처 전략',
-      'Frontend Agent - UX 최적화 및 사용자 중심 자산관리 인터페이스',
-      'Backend Agent - 안정성 및 보안 중심의 서버사이드 금융 시스템',
-      'Security Agent - 위협 모델링 및 컴플라이언스 전문 분석',
-      'Performance Agent - 포트폴리오 최적화 및 성과 분석',
-      'Analyzer Agent - 근본 원인 분석 및 투자 패턴 발견',
-      'QA Agent - 품질 보증 및 리스크 검증 시스템',
-      'DevOps Agent - 인프라 자동화 및 배포 전략',
-      'Mentor Agent - 교육 및 지식 전수 전문가',
-      'Scribe Agent - 전문 문서화 및 다국어 현지화'
+      '자산관리 전략 - 체계적 설계 및 장기 전략 수립',
+      'UX 중심의 투자 플랫폼 - 사용자 친화적 자산관리 인터페이스',
+      '안정성 중심의 투자 시스템 - 보안 및 리스크 관리',
+      '투자 위험 모델링 - 컴플라이언스 및 규제 대응',
+      '포트폴리오 최적화 - 수익성 및 성과 분석',
+      '투자 패턴 분석 - 데이터 기반 의사결정 지원',
+      '품질 중심의 투자 검증 - 리스크 평가 시스템',
+      '자동화된 투자 전략 - 효율적 자산 배분',
+      '투자 교육 및 컨설팅 - 전문 지식 전수',
+      '투자 문서화 및 리포팅 - 체계적 성과 관리'
     ]
   }
 ];
@@ -133,25 +133,25 @@ export default function AIMarketIntelligencePage() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="animate-slide-up">
               <Badge variant="outline" size="lg" className="mb-6 bg-gradient-to-r from-primary/10 to-purple-500/10 border-primary/20">
-                <Brain className="w-4 h-4 mr-2" />
-                AI × Expert Intelligence Platform
+                <Globe className="w-4 h-4 mr-2" />
+                Multi-Platform Intelligence Hub
               </Badge>
             </div>
             
             <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight mb-8 animate-slide-up">
               <span className="bg-gradient-to-r from-primary via-purple-600 to-green-600 bg-clip-text text-transparent">
-                차세대 AI 기반
+                4개 플랫폼 통합
               </span>
               <br />
-              <span className="text-foreground">전문가 인사이트 플랫폼</span>
+              <span className="text-foreground">시장 인텔리전스 허브</span>
             </h1>
             
             <p
               className="text-lg md:text-xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-slide-up leading-relaxed"
               style={{ animationDelay: '200ms' }}
             >
-              <strong>BMAD Method</strong>, <strong>SuperClaude AI</strong>, <strong>AgentOS</strong>, <strong>Sub Agent</strong><br/>
-              4개 전문가 플랫폼을 통한 체계적 자산관리 및 핀테크 전략 분석
+              <strong>네이버 프리미엄</strong>, <strong>Substack</strong>, <strong>네이버 블로그</strong>, <strong>브런치스토리</strong><br/>
+              4개 플랫폼을 통한 전문가 인사이트 및 체계적 자산관리 전략 분석
             </p>
 
             {/* Platform Quick Navigation */}
@@ -159,7 +159,7 @@ export default function AIMarketIntelligencePage() {
               className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto mb-12 animate-slide-up"
               style={{ animationDelay: '400ms' }}
             >
-              {expertPlatforms.map((platform, index) => (
+              {contentPlatforms.map((platform, index) => (
                 <Link
                   key={platform.id}
                   href={`#${platform.id}`}
@@ -192,7 +192,7 @@ export default function AIMarketIntelligencePage() {
         </section>
 
         {/* Expert Platform Sections */}
-        {expertPlatforms.map((platform, index) => (
+        {contentPlatforms.map((platform, index) => (
           <section 
             key={platform.id} 
             id={platform.id}
@@ -324,13 +324,13 @@ export default function AIMarketIntelligencePage() {
                 영상 & 오디오로 만나는 
                 <br />
                 <span className="bg-gradient-to-r from-primary via-purple-600 to-green-600 bg-clip-text text-transparent">
-                  AI 기반 전문가 인사이트
+                  플랫폼별 전문가 인사이트
                 </span>
               </h2>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-slide-up leading-relaxed">
-                전문가가 직접 설명하는 BMAD, SuperClaude, AgentOS, Sub Agent 활용법과 
-                실전 자산관리 전략을 영상과 팟캐스트로 만나보세요
+                네이버 프리미엄, Substack, 네이버 블로그, 브런치스토리 플랫폼별 특화된 
+                전문가 인사이트와 실전 자산관리 전략을 영상과 팟캐스트로 만나보세요
               </p>
             </div>
 
@@ -338,7 +338,7 @@ export default function AIMarketIntelligencePage() {
               <TabsList className="grid w-full grid-cols-2 mb-12 bg-muted/50">
                 <TabsTrigger value="video" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/10 data-[state=active]:to-purple-500/10">
                   <Play className="h-4 w-4" />
-                  AI 분석 비디오
+                  전문가 분석 비디오
                 </TabsTrigger>
                 <TabsTrigger value="podcast" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/10 data-[state=active]:to-purple-500/10">
                   <Headphones className="h-4 w-4" />
@@ -352,24 +352,24 @@ export default function AIMarketIntelligencePage() {
                     <div className="relative">
                       <YouTubeThumbnail
                         videoId="0FCO9TQBok0"
-                        title="BMAD Method: AI 기반 위험 평가 모델"
+                        title="네이버 프리미엄: 전문가 수준의 위험 평가 분석"
                         className="w-full mb-4"
                       />
                       <div className="absolute top-2 right-2">
-                        <Badge variant="default" className="bg-gradient-to-r from-blue-500 to-blue-600">
-                          BMAD Method
+                        <Badge variant="default" className="bg-gradient-to-r from-green-500 to-green-600">
+                          네이버 프리미엄
                         </Badge>
                       </div>
                     </div>
                     <CardContent className="p-6">
                       <h4 className="text-lg font-semibold mb-3">숨겨진 지뢰, 미처분이익잉여금</h4>
                       <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                        BMAD 방법론을 활용한 비상장기업의 숨겨진 위험 요소 분석. SuperClaude AI와 연계된 
-                        지능형 위험 평가 모델을 통해 이익잉여금 관리 전략을 제시합니다.
+                        네이버 프리미엄 콘텐츠를 통한 비상장기업의 숨겨진 위험 요소 분석. 전문가 수준의 
+                        위험 평가 모델을 통해 이익잉여금 관리 전략을 제시합니다.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary" size="sm">BMAD 분석</Badge>
-                        <Badge variant="secondary" size="sm">AI 위험평가</Badge>
+                        <Badge variant="secondary" size="sm">프리미엄 분석</Badge>
+                        <Badge variant="secondary" size="sm">전문가 평가</Badge>
                         <Badge variant="secondary" size="sm">세무전략</Badge>
                       </div>
                     </CardContent>
@@ -379,25 +379,25 @@ export default function AIMarketIntelligencePage() {
                     <div className="relative">
                       <YouTubeThumbnail
                         videoId="XCB4ys-IU4s"
-                        title="AgentOS 플랫폼: 확장가능한 자산관리 시스템"
+                        title="네이버 블로그: 실전 투자 플랫폼 구축 가이드"
                         className="w-full mb-4"
                       />
                       <div className="absolute top-2 right-2">
-                        <Badge variant="default" className="bg-gradient-to-r from-green-500 to-green-600">
-                          AgentOS
+                        <Badge variant="default" className="bg-gradient-to-r from-blue-500 to-blue-600">
+                          네이버 블로그
                         </Badge>
                       </div>
                     </div>
                     <CardContent className="p-6">
-                      <h4 className="text-lg font-semibold mb-3">AgentOS 기반 자산관리 플랫폼</h4>
+                      <h4 className="text-lg font-semibold mb-3">네이버 블로그 기반 자산관리 플랫폼</h4>
                       <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                        AgentOS 생태계를 활용한 확장 가능한 자산관리 시스템 구축 방법론. 
-                        Sub Agent들과의 연계를 통한 개인화된 투자 전략을 실전 사례로 설명합니다.
+                        네이버 블로그를 활용한 확장 가능한 자산관리 시스템 구축 방법론. 
+                        실전 투자 가이드를 통한 개인화된 투자 전략을 실제 사례로 설명합니다.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary" size="sm">플랫폼 설계</Badge>
-                        <Badge variant="secondary" size="sm">시스템 확장성</Badge>
-                        <Badge variant="secondary" size="sm">개인화 전략</Badge>
+                        <Badge variant="secondary" size="sm">실전 가이드</Badge>
+                        <Badge variant="secondary" size="sm">투자 전략</Badge>
+                        <Badge variant="secondary" size="sm">개인화 솔루션</Badge>
                       </div>
                     </CardContent>
                   </Card>
@@ -412,7 +412,7 @@ export default function AIMarketIntelligencePage() {
                       className="inline-flex items-center gap-2"
                     >
                       <Rocket className="w-5 h-5" />
-                      AI 전문가 채널 구독
+                      전문가 플랫폼 채널 구독
                       <ExternalLink className="h-4 w-4" />
                     </Link>
                   </Button>
@@ -424,24 +424,24 @@ export default function AIMarketIntelligencePage() {
                   <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-4">
-                        <Badge variant="default" className="bg-gradient-to-r from-purple-500 to-purple-600">
-                          SuperClaude AI
+                        <Badge variant="default" className="bg-gradient-to-r from-orange-500 to-orange-600">
+                          Substack
                         </Badge>
                         <Badge variant="outline" size="sm">EP.1</Badge>
                       </div>
                       <SpotifyEmbed
                         uri="spotify:episode:3oWSt9SMetN4Zw3NXFL36H"
-                        title="SuperClaude 기반 자동화된 자산관리 전략"
+                        title="Substack 기반 글로벌 자산관리 전략"
                         className="w-full rounded-lg overflow-hidden mb-4"
                       />
-                      <h4 className="text-lg font-semibold mb-3">SuperClaude AI 자산관리 혁신</h4>
+                      <h4 className="text-lg font-semibold mb-3">Substack 글로벌 자산관리 혁신</h4>
                       <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                        Claude Code와 MCP 서버를 활용한 지능형 자산관리 자동화 시스템. 
-                        BMAD Method와 연계된 AI 기반 투자 분석 및 포트폴리오 최적화 전략을 상세히 다룹니다.
+                        Substack 플랫폼을 활용한 지능형 글로벌 자산관리 전략. 
+                        해외 투자 기회 발굴과 연계된 핀테크 혁신 분석 및 포트폴리오 최적화 전략을 상세히 다룹니다.
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary" size="sm">AI 자동화</Badge>
-                        <Badge variant="secondary" size="sm">MCP 서버</Badge>
+                        <Badge variant="secondary" size="sm">글로벌 투자</Badge>
+                        <Badge variant="secondary" size="sm">핀테크 혁신</Badge>
                         <Badge variant="secondary" size="sm">포트폴리오 최적화</Badge>
                       </div>
                     </CardContent>
@@ -450,20 +450,20 @@ export default function AIMarketIntelligencePage() {
                   <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-4">
-                        <Badge variant="default" className="bg-gradient-to-r from-amber-500 to-amber-600">
-                          Sub Agent
+                        <Badge variant="default" className="bg-gradient-to-r from-purple-500 to-purple-600">
+                          브런치스토리
                         </Badge>
                         <Badge variant="outline" size="sm">EP.2</Badge>
                       </div>
                       <SpotifyEmbed
                         uri="spotify:episode:6GdSlo5AkFiYB4G5Sib1xJ"
-                        title="Sub Agent 전문화: 도메인별 맞춤 컨설팅"
+                        title="브런치스토리 전문화: 도메인별 맞춤 컨설팅"
                         className="w-full rounded-lg overflow-hidden mb-4"
                       />
-                      <h4 className="text-lg font-semibold mb-3">Sub Agent 전문 영역별 세분화</h4>
+                      <h4 className="text-lg font-semibold mb-3">브런치스토리 전문 영역별 세분화</h4>
                       <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                        CEO 보장정기보험과 퇴직금 플랜을 중심으로 한 Sub Agent 전문화 전략. 
-                        각 도메인별 특화된 에이전트들의 협업을 통한 통합 솔루션 제공 방법론을 설명합니다.
+                        CEO 보장정기보험과 퇴직금 플랜을 중심으로 한 브런치스토리 전문화 전략. 
+                        각 도메인별 특화된 전문가 분석을 통한 맞춤형 솔루션 제공 방법론을 설명합니다.
                       </p>
                       <div className="flex flex-wrap gap-2">
                         <Badge variant="secondary" size="sm">도메인 특화</Badge>
@@ -525,7 +525,7 @@ export default function AIMarketIntelligencePage() {
 
             {/* Platform Integration Cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-              {expertPlatforms.map((platform, index) => (
+              {contentPlatforms.map((platform, index) => (
                 <Card 
                   key={platform.id}
                   className="text-center group hover:shadow-lg transition-all duration-300 animate-slide-up"

@@ -1,1 +1,1 @@
-✨ feat: 시장 인텔리전스 페이지 완전한 4개 전문가 플랫폼 통합 - BMAD×SuperClaude×AgentOS×SubAgent
+🔄 refactor: 플랫폼 중심 시장 인텔리전스 페이지 재구성 - 네이버프리미엄×Substack×네이버블로그×브런치스토리
