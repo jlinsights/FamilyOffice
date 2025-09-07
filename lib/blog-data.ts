@@ -514,8 +514,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['디지털혁신', '핀테크', 'AI', '자산관리'],
     slug: 'digital-transformation-finance',
     featured: false,
-    platform: 'naver-blog',
-    externalUrl: 'https://blog.naver.com/lim_jaehong',
+    platform: 'brunch',
+    externalUrl: 'https://brunch.co.kr/@familyoffice',
   },
 
   // 기업승계 분석 카테고리
@@ -597,8 +597,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['중견기업', '승계 이슈', '해결방안', '경영 전략'],
     slug: 'mid-sized-company-succession-issues',
     featured: false,
-    platform: 'naver-blog',
-    externalUrl: 'https://blog.naver.com/lim_jaehong',
+    platform: 'brunch',
+    externalUrl: 'https://brunch.co.kr/@familyoffice',
   },
 
   // 세무·법무 인사이트 카테고리
@@ -757,8 +757,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['싱가포르', '패밀리오피스', '글로벌 트렌드', '아시아'],
     slug: 'singapore-family-office-trends',
     featured: false,
-    platform: 'naver-blog',
-    externalUrl: 'https://blog.naver.com/lim_jaehong',
+    platform: 'brunch',
+    externalUrl: 'https://brunch.co.kr/@familyoffice',
   },
 
   'us-trust-strategies': {
