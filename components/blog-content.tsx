@@ -191,8 +191,8 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
         </div>
         <div className="flex items-center gap-2 mb-4">
           {post.platform && (
-            <Badge variant={post.platform === 'naver-premium' ? 'default' : post.platform === 'brunch' ? 'secondary' : 'outline'} size="sm">
-              {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : post.platform === 'brunch' ? '브런치' : '내부'}
+            <Badge variant={post.platform === 'naver-premium' ? 'default' : post.platform === 'brunch' ? 'secondary' : post.platform === 'substack' ? 'destructive' : 'outline'} size="sm">
+              {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : post.platform === 'brunch' ? '브런치' : post.platform === 'substack' ? 'Substack' : '내부'}
             </Badge>
           )}
         </div>
@@ -257,8 +257,8 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
                 {post.author}
               </div>
               {post.platform && (
-                <Badge variant={post.platform === 'naver-premium' ? 'default' : post.platform === 'brunch' ? 'secondary' : 'outline'} size="sm">
-                  {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : post.platform === 'brunch' ? '브런치' : '내부'}
+                <Badge variant={post.platform === 'naver-premium' ? 'default' : post.platform === 'brunch' ? 'secondary' : post.platform === 'substack' ? 'destructive' : 'outline'} size="sm">
+                  {post.platform === 'naver-premium' ? '프리미엄' : post.platform === 'naver-blog' ? '네이버 블로그' : post.platform === 'brunch' ? '브런치' : post.platform === 'substack' ? 'Substack' : '내부'}
                 </Badge>
               )}
             </div>

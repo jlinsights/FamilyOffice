@@ -433,8 +433,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['절세', '상속세', '증여세', '가업승계'],
     slug: 'tax-optimization-basics',
     featured: true,
-    platform: 'naver-blog',
-    externalUrl: 'https://blog.naver.com/lim_jaehong',
+    platform: 'substack',
+    externalUrl: 'https://jaehong.substack.com',
   },
 
 
@@ -1012,8 +1012,8 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['대체투자', '프라이빗 에쿼티', '헤지펀드', '투자 전략'],
     slug: 'alternative-investment-market-outlook',
     featured: false,
-    platform: 'naver-blog',
-    externalUrl: 'https://blog.naver.com/lim_jaehong',
+    platform: 'substack',
+    externalUrl: 'https://jaehong.substack.com',
   },
 
   'investment-strategy-2025': {

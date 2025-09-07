@@ -12,7 +12,7 @@ export interface BlogPost {
   featured?: boolean;
   image?: string;
   externalUrl?: string;
-  platform?: 'naver-blog' | 'naver-premium' | 'brunch' | 'internal';
+  platform?: 'naver-blog' | 'naver-premium' | 'brunch' | 'substack' | 'internal';
 }
 
 export interface BlogCategory {
