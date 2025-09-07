@@ -975,7 +975,7 @@ export default function RecruitPage() {
                           className="mt-4 md:mt-0 dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
                           onClick={() =>
                             window.open(
-                              'https://cal.com/familyoffice/recruit',
+                              'https://samsunglife.recruit.roundhr.com/',
                               '_blank'
                             )
                           }
