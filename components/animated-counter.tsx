@@ -34,6 +34,7 @@ export function AnimatedCounter({
   const [count, setCount] = useState(start);
   const [isMounted, setIsMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   // ref를 사용하여 최신 함수들을 참조
   const easingFunctionRef = useRef(easingFunction);
@@ -62,9 +63,9 @@ export function AnimatedCounter({
     [formatNumber, locale]
   );
 
-  // 애니메이션 로직
+  // 애니메이션 로직 - 한 번만 실행
   useEffect(() => {
-    if (!isMounted || !isClient || !startAnimation) return;
+    if (!isMounted || !isClient || !startAnimation || hasAnimated) return;
 
     let animationFrame: number;
     const startTime = Date.now();
@@ -88,6 +89,7 @@ export function AnimatedCounter({
         animationFrame = requestAnimationFrame(animate);
       } else {
         setCount(end);
+        setHasAnimated(true); // 애니메이션 완료 표시
         onCompleteRef.current?.();
       }
     };
@@ -99,7 +101,7 @@ export function AnimatedCounter({
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [isMounted, isClient, startAnimation, start, end, duration]);
+  }, [isMounted, isClient, startAnimation, hasAnimated, start, end, duration]);
 
   // SSR 방지: 마운트되기 전에는 시작 값 표시
   if (!isMounted || !isClient) {
