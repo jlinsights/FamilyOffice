@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef, memo } from 'react';
 
 interface AnimatedCounterProps {
   end: number;
@@ -17,7 +17,7 @@ interface AnimatedCounterProps {
   ariaLabel?: string;
 }
 
-export function AnimatedCounter({
+function AnimatedCounterComponent({
   end,
   start = 0,
   duration = 2000,
@@ -34,7 +34,9 @@ export function AnimatedCounter({
   const [count, setCount] = useState(start);
   const [isMounted, setIsMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const hasAnimatedRef = useRef(false);
+  const animationFrameRef = useRef<number | null>(null);
+  const animationIdRef = useRef<string>('');
 
   // ref를 사용하여 최신 함수들을 참조
   const easingFunctionRef = useRef(easingFunction);
@@ -65,9 +67,18 @@ export function AnimatedCounter({
 
   // 애니메이션 로직 - 한 번만 실행
   useEffect(() => {
-    if (!isMounted || !isClient || !startAnimation || hasAnimated) return;
-
-    let animationFrame: number;
+    if (!isMounted || !isClient || !startAnimation) return;
+    
+    // 고유 ID 생성하여 중복 애니메이션 방지
+    const currentAnimationId = `${end}-${start}-${duration}`;
+    
+    // 이미 동일한 애니메이션이 실행되었으면 중단
+    if (hasAnimatedRef.current && animationIdRef.current === currentAnimationId) return;
+    
+    // 애니메이션 시작 표시
+    hasAnimatedRef.current = true;
+    animationIdRef.current = currentAnimationId;
+    
     const startTime = Date.now();
     const difference = end - start;
 
@@ -86,29 +97,30 @@ export function AnimatedCounter({
       setCount(currentCount);
 
       if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
+        animationFrameRef.current = requestAnimationFrame(animate);
       } else {
         setCount(end);
-        setHasAnimated(true); // 애니메이션 완료 표시
         onCompleteRef.current?.();
       }
     };
 
-    animationFrame = requestAnimationFrame(animate);
+    animationFrameRef.current = requestAnimationFrame(animate);
 
+    // Cleanup function
     return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
       }
     };
-  }, [isMounted, isClient, startAnimation, hasAnimated, start, end, duration]);
+  }, [isMounted, isClient, startAnimation, start, end, duration]);
 
-  // SSR 방지: 마운트되기 전에는 시작 값 표시
+  // SSR 방지: 마운트되기 전에는 최종 값 표시하여 hydration mismatch 방지
   if (!isMounted || !isClient) {
     return (
       <span className={className}>
         {prefix}
-        {formatDisplayNumber(start)}
+        {formatDisplayNumber(end)}
         {suffix}
       </span>
     );
@@ -127,3 +139,6 @@ export function AnimatedCounter({
     </span>
   );
 }
+
+// Memoize the component to prevent unnecessary re-renders
+export const AnimatedCounter = memo(AnimatedCounterComponent);
