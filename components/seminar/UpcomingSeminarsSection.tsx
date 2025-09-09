@@ -239,6 +239,7 @@ export function UpcomingSeminarsSection() {
                       </div>
                     )}
                     
+                    {/* Only show verification note for seminars that explicitly require it */}
                     {seminar.requiresVerification && seminar.verificationNote && (
                       <div className="mt-2 p-2 bg-amber-50 dark:bg-amber-900/30 rounded-lg border border-amber-200 dark:border-amber-800">
                         <div className="text-xs text-amber-700 dark:text-amber-300 font-medium mb-1">
@@ -250,6 +251,7 @@ export function UpcomingSeminarsSection() {
                       </div>
                     )}
                     
+                    {/* Only show special notes for seminars that have important attendance info */}
                     {seminar.specialNotes && seminar.specialNotes.length > 0 && (
                       <div className="mt-2 p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
                         <div className="text-xs text-gray-700 dark:text-gray-300 font-medium mb-1">

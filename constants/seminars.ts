@@ -209,8 +209,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     depositNote: '예약 확정을 위한 보증금 (행사 종료 후 환불되며, 노쇼 시 환불되지 않습니다)',
     status: 'upcoming',
     tags: ['종신보험', '법인CEO', '자산승계', '가업승계'],
-    registrationUrl: 'https://cal.com/familyoffice/vvip-september',
-    detailsUrl: 'https://cal.com/familyoffice/vvip-september',
+    registrationUrl: 'https://luma.com/mxr640ws',
+    detailsUrl: 'https://luma.com/mxr640ws',
     agenda: [
       {
         time: '10:30',
@@ -226,16 +226,6 @@ export const UPCOMING_SEMINARS: Seminar[] = [
         duration: 60,
       },
     ],
-    specialNotes: [
-      'Dress Code: 정장 또는 비즈니스 캐주얼',
-      'RSVP: 좌석이 한정된 관계로 사전 예약 후 반드시 참석 부탁드립니다.',
-      '예약 확정을 위한 보증금: 5만원 (카카오뱅크 3333-26-9880585)',
-      '기한: 예약 신청 후 48시간 이내',
-      '보증금은 행사 종료 후 환불되며, 노쇼 시 보증금은 환불되지 않습니다.',
-      '담당자 연락처: ☎︎ 0502-5550-8700',
-    ],
-    requiresVerification: true,
-    verificationNote: '처음 참가하시는 분에게는 세미나의 전문성과 보안을 위해 비대면 고객동의를 요청 드리게 되어 있습니다. 이는 금융당국 규정에 따른 필수 절차로, 고객님의 자산을 보호하기 위한 조치이오니 담당자가 문자메세지 혹은 전화로 안내 드릴 예정입니다.',
   },
   // 10월 17일 세미나 (9월 17일 이후에만 표시)
   {
