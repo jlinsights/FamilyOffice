@@ -49,9 +49,21 @@ export function UpcomingSeminarsSection() {
     return seminarDate < today;
   };
 
-  // Filter out seminars with past dates and sort by date
+  // Filter out seminars with past dates and check visibility dates
   const upcomingSeminars = UPCOMING_SEMINARS
-    .filter(seminar => !isDatePassed(seminar.date))
+    .filter(seminar => {
+      // Check if seminar date has passed
+      if (isDatePassed(seminar.date)) return false;
+      
+      // Check if seminar has visibleAfter date restriction
+      if (seminar.visibleAfter) {
+        const today = new Date();
+        const visibleAfterDate = new Date(seminar.visibleAfter);
+        if (today < visibleAfterDate) return false;
+      }
+      
+      return true;
+    })
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   const getLocationIcon = (type: string) => {
@@ -224,6 +236,32 @@ export function UpcomingSeminarsSection() {
                         <div className="text-xs text-blue-600 dark:text-blue-400">
                           {seminar.depositNote}
                         </div>
+                      </div>
+                    )}
+                    
+                    {seminar.requiresVerification && seminar.verificationNote && (
+                      <div className="mt-2 p-2 bg-amber-50 dark:bg-amber-900/30 rounded-lg border border-amber-200 dark:border-amber-800">
+                        <div className="text-xs text-amber-700 dark:text-amber-300 font-medium mb-1">
+                          📋 본인확인 절차 안내
+                        </div>
+                        <div className="text-xs text-amber-600 dark:text-amber-400">
+                          {seminar.verificationNote}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {seminar.specialNotes && seminar.specialNotes.length > 0 && (
+                      <div className="mt-2 p-2 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div className="text-xs text-gray-700 dark:text-gray-300 font-medium mb-1">
+                          참석 안내사항
+                        </div>
+                        <ul className="space-y-1">
+                          {seminar.specialNotes.slice(0, 3).map((note, index) => (
+                            <li key={index} className="text-xs text-gray-600 dark:text-gray-400">
+                              • {note}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     )}
                   </div>

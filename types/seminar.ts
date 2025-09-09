@@ -27,6 +27,10 @@ export interface Seminar {
   detailsUrl?: string;
   videoUrl?: string;
   presentationUrl?: string;
+  specialNotes?: string[];
+  requiresVerification?: boolean;
+  verificationNote?: string;
+  visibleAfter?: string;
 }
 
 export interface Speaker {

@@ -175,12 +175,75 @@ export const FEATURED_SPEAKERS: Speaker[] = [
 ];
 
 export const UPCOMING_SEMINARS: Seminar[] = [
+  // 9월 25일 신라호텔 VVIP 세미나
   {
-    id: 'vvip-critical-disaster-law-seminar',
+    id: 'vvip-asset-succession-shilla-september',
     title: 'VVIP 고객초청 세미나',
     subtitle: '🎉🌟 자산 관리의 새로운 지평을 여는 VVIP 고객초청 세미나에 여러분을 초대합니다! 🌟🎉',
     description:
       '바쁘신 일정에도 시간을 내주셔서 성공적인 가업승계와 절세 플랜을 시작하는 첫걸음을 함께해 주시길 바랍니다. 본 세미나는 대표님의 사업과 가정에 실질적인 도움을 드릴 수 있는 특별한 자리로 준비되었습니다.',
+    speaker: {
+      id: 'familyoffice-expert-team',
+      name: '패밀리오피스 전문가팀',
+      title: '전문 컨설턴트',
+      company: '패밀리오피스',
+      bio: '가업승계와 자산관리 분야의 최고 전문가들로 구성된 팀입니다.',
+      expertise: ['가업승계', '절세전략', '종신보험', '자산승계'],
+    },
+    date: '2025-09-25',
+    time: '10:30',
+    duration: '3시간',
+    location: {
+      type: 'offline',
+      venue: '서울 신라호텔',
+      address: '서울시 중구 동호로 249 (3층 오키드룸)',
+      capacity: 30,
+    },
+    category: 'succession',
+    targetAudience: ['VVIP 고객', '기업 CEO', '고액자산가'],
+    capacity: 30,
+    registeredCount: 7,
+    price: 0,
+    isPremium: true,
+    deposit: 50000,
+    depositNote: '예약 확정을 위한 보증금 (행사 종료 후 환불되며, 노쇼 시 환불되지 않습니다)',
+    status: 'upcoming',
+    tags: ['종신보험', '법인CEO', '자산승계', '가업승계'],
+    registrationUrl: 'https://cal.com/familyoffice/vvip-september',
+    detailsUrl: 'https://cal.com/familyoffice/vvip-september',
+    agenda: [
+      {
+        time: '10:30',
+        title: '종신보험을 활용한 법인 CEO 일가 자산 승계 방안',
+        description: '종신보험을 활용한 효과적인 자산 승계 전략 및 절세 방안',
+        speaker: '패밀리오피스 전문가팀',
+        duration: 90,
+      },
+      {
+        time: '12:30',
+        title: '호텔 오찬 및 개별 상담',
+        description: '전문가와 함께하는 1:1 맞춤 상담 및 네트워킹',
+        duration: 60,
+      },
+    ],
+    specialNotes: [
+      'Dress Code: 정장 또는 비즈니스 캐주얼',
+      'RSVP: 좌석이 한정된 관계로 사전 예약 후 반드시 참석 부탁드립니다.',
+      '예약 확정을 위한 보증금: 5만원 (카카오뱅크 3333-26-9880585)',
+      '기한: 예약 신청 후 48시간 이내',
+      '보증금은 행사 종료 후 환불되며, 노쇼 시 보증금은 환불되지 않습니다.',
+      '담당자 연락처: ☎︎ 0502-5550-8700',
+    ],
+    requiresVerification: true,
+    verificationNote: '처음 참가하시는 분에게는 세미나의 전문성과 보안을 위해 비대면 고객동의를 요청 드리게 되어 있습니다. 이는 금융당국 규정에 따른 필수 절차로, 고객님의 자산을 보호하기 위한 조치이오니 담당자가 문자메세지 혹은 전화로 안내 드릴 예정입니다.',
+  },
+  // 10월 17일 세미나 (9월 17일 이후에만 표시)
+  {
+    id: 'vvip-critical-disaster-law-seminar',
+    title: 'VVIP 고객초청 세미나',
+    subtitle: '중대재해처벌법 대응 전략 세미나',
+    description:
+      '중대재해처벌법 강화에 따른 기업의 법적 리스크 관리와 대응 전략을 심도 있게 다룹니다.',
     speaker: {
       id: 'familyoffice-legal-expert',
       name: '패밀리오피스 법무팀',
@@ -225,6 +288,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
         duration: 60,
       },
     ],
+    // 9월 17일 이후에만 표시되도록 설정
+    visibleAfter: '2025-09-17',
   },
   {
     id: 'vvip-asset-management-new-horizon',
