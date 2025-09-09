@@ -6,6 +6,8 @@ import { Analytics } from '@/components/analytics';
 import { DomainMigrationBanner } from '@/components/domain-migration-banner';
 import { ErrorBoundary } from '@/components/error-boundary';
 import ExternalScripts from '@/components/external-scripts';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
 import { KakaoPixel } from '@/components/kakao/kakao-pixel';
 import { KakaoSDK } from '@/components/kakao/kakao-sdk';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -359,7 +361,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <Header />
+            <main>
+              {children}
+            </main>
+            <Footer />
             {/* <AIChatFloating /> */}
             <ChannelTalk />
             <Toaster />

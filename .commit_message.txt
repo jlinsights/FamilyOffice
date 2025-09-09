@@ -1,1 +1,1 @@
-✅ 완전한 환경변수 복원 - KAKAO, GA, Cal.com, 뉴스레터 등 모든 기존 키 보존 + HubSpot 인바운드 마케팅 통합 완료
+🔧 헤더/푸터 복원 및 HubSpot 환경변수 수정 - layout.tsx에 Header/Footer 컴포넌트 추가, 빌드 환경변수 문제 해결
