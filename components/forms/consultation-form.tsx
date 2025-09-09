@@ -56,17 +56,37 @@ export function ConsultationForm() {
     }
 
     try {
-      // 임시로 콘솔에 폼 데이터 출력 (실제 환경에서는 Supabase에 저장)
-      console.log('Form submission:', {
-        name: name.trim(),
+      // HubSpot 연락처 생성 데이터 준비
+      const contactData = {
+        firstName: name.trim().split(' ')[0],
+        lastName: name.trim().split(' ').slice(1).join(' ') || undefined,
         email: email.trim(),
-        phone: phone.trim(),
-        service_type: service || null,
-        message: message?.trim() || null,
-        status: 'pending',
+        phone: phone.trim() || undefined,
+        serviceType: service || '일반 상담',
+        message: message?.trim() || undefined,
+        context: {
+          hutk: typeof window !== 'undefined' ? (window as any).hbspt?.utils?.getCookie('hubspotutk') || undefined : undefined,
+          pageUri: typeof window !== 'undefined' ? window.location.href : undefined,
+          pageName: typeof document !== 'undefined' ? document.title : undefined,
+        }
+      };
+
+      // 내부 API 엔드포인트 호출
+      const response = await fetch('/api/hubspot/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData)
       });
 
-      // 임시 성공 처리
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || `API 호출 실패: ${response.status}`);
+      }
+
+      // 성공 처리
       setFormSuccess(true);
       event.currentTarget.reset();
 
@@ -74,6 +94,15 @@ export function ConsultationForm() {
       setTimeout(() => {
         setFormSuccess(false);
       }, 3000);
+
+      // 개발 환경에서는 콘솔에도 출력
+      if (process.env.NODE_ENV === 'development') {
+        console.log('HubSpot 연락처 생성/업데이트 성공:', {
+          action: result.action,
+          message: result.message,
+          data: contactData
+        });
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
 

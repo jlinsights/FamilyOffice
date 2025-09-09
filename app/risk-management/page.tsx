@@ -263,128 +263,197 @@ export default function RiskManagementPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <main className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900 pt-20">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-24">
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-          <div className="container relative mx-auto px-4">
-            <div className="text-center max-w-4xl mx-auto">
-              <Badge className="bg-blue-500 text-white px-4 py-2 text-sm font-semibold mb-6">
-                <Shield className="w-4 h-4 mr-1" />
-                기업 리스크 통합 관리
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+          <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+            <div className="flex justify-center mb-8">
+              <Badge variant="outline" size="lg" className="animate-fade">
+                <Shield className="h-3 w-3 mr-1" />
+                Risk Management
               </Badge>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                CEO를 위한
-                <br />
-                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  종합 리스크 관리 솔루션
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 text-slate-200">
-                경영자 개인부터 기업 전체까지
-                <br />
-                <strong>60명의 전문가</strong>가 함께하는 통합 리스크 관리
-              </p>
+            </div>
+            <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 text-primary whitespace-pre-line animate-slide-up">
+              종합 리스크 관리{'\n'}솔루션
+            </h1>
+            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-4 sm:mb-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
+              CEO를 위한 통합 위험 관리
+            </p>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed" style={{ animationDelay: '300ms' }}>
+              경영자 개인부터 기업 전체까지{' '}
+              <span className="font-semibold text-primary">
+                60명의 전문가
+              </span>
+              가 함께하는 통합 리스크 관리
+            </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <CalComPopup
-                  trigger={
-                    <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-6 text-lg font-semibold">
-                      <Shield className="mr-2 h-5 w-5" />
-                      무료 리스크 진단
-                    </Button>
-                  }
-                  calLink="familyoffices/risk-assessment"
-                />
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-slate-900 px-8 py-6 text-lg"
-                  onClick={() => {
-                    document.getElementById('risk-categories')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  <BarChart3 className="mr-2 h-5 w-5" />
-                  리스크 카테고리 보기
-                </Button>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 sm:mb-16 animate-slide-up" style={{ animationDelay: '400ms' }}>
+              <CalComPopup
+                trigger={
+                  <Button size="lg" className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg px-8 py-4 text-lg font-semibold">
+                    <Shield className="mr-2 h-5 w-5" />
+                    무료 리스크 진단
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                }
+                calLink="familyoffices/risk-assessment"
+              />
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-4 text-lg"
+                onClick={() => {
+                  document.getElementById('risk-categories')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                <BarChart3 className="mr-2 h-5 w-5" />
+                리스크 카테고리 보기
+              </Button>
+            </div>
 
-              {/* 핵심 지표 */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-3xl font-bold text-blue-400 mb-1">500억+</div>
-                  <p className="text-sm text-slate-300">누적 관리자산</p>
+            {/* 핵심 지표 */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '500ms' }}>
+              {[
+                {
+                  value: 500,
+                  suffix: '억+',
+                  label: '누적 관리자산',
+                  color: 'text-blue-600 dark:text-blue-400',
+                },
+                {
+                  value: 60,
+                  suffix: '명',
+                  label: '전문가 네트워크',
+                  color: 'text-green-600 dark:text-green-400',
+                },
+                {
+                  value: 300,
+                  suffix: '+',
+                  label: '기업 고객',
+                  color: 'text-purple-600 dark:text-purple-400',
+                },
+                {
+                  value: 95,
+                  suffix: '%',
+                  label: '고객 만족도',
+                  color: 'text-orange-600 dark:text-orange-400',
+                },
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className={`text-4xl sm:text-5xl font-bold mb-2 ${stat.color}`}>
+                    {stat.value}{stat.suffix}
+                  </div>
+                  <p className="text-sm sm:text-base text-muted-foreground font-medium">
+                    {stat.label}
+                  </p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-3xl font-bold text-green-400 mb-1">60명</div>
-                  <p className="text-sm text-slate-300">전문가 네트워크</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-3xl font-bold text-purple-400 mb-1">300+</div>
-                  <p className="text-sm text-slate-300">기업 고객</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-3xl font-bold text-orange-400 mb-1">95%</div>
-                  <p className="text-sm text-slate-300">고객 만족도</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* 리스크 카테고리 */}
-        <section id="risk-categories" className="py-20 bg-white">
-          <div className="container mx-auto px-4">
+        <section id="risk-categories" className="py-20 bg-gradient-to-b from-muted/20 to-background">
+          <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                6대 핵심 <span className="text-blue-600">리스크 관리 영역</span>
+              <div className="flex justify-center mb-6">
+                <Badge variant="outline" size="lg">
+                  <Target className="h-3 w-3 mr-1" />
+                  Risk Categories
+                </Badge>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                6대 핵심 <span className="text-primary">리스크 관리 영역</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 기업 경영에 필수적인 모든 리스크를 체계적으로 관리합니다
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {riskCategories.map((category, index) => (
-                <Card key={index} className="relative overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${category.color}`}></div>
-                  <CardHeader>
-                    <div className={`w-14 h-14 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <category.icon className="h-7 w-7 text-white" />
-                    </div>
-                    <CardTitle className="text-xl font-bold text-gray-900">{category.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 mb-4">{category.description}</p>
-                    <div className="space-y-2 mb-6">
-                      {category.solutions.map((solution, sIndex) => (
-                        <div key={sIndex} className="flex items-center text-sm text-gray-700">
-                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                          {solution}
+                <div
+                  key={index}
+                  className="group relative bg-gradient-to-br from-background to-background/50 border border-border rounded-xl p-6 hover:shadow-2xl transition-all duration-500 hover:border-primary/50 hover:-translate-y-2 overflow-hidden"
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                  }}
+                >
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Premium Badge */}
+                  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                    <Badge variant="outline" size="xs" className="bg-white/95 dark:bg-gray-900/95 text-primary border-primary/50 shadow-lg backdrop-blur-sm">
+                      전문 관리
+                    </Badge>
+                  </div>
+
+                  <div className="relative z-10 h-full flex flex-col">
+                    {/* Icon and header */}
+                    <div className="mb-4">
+                      <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <category.icon className="h-7 w-7 text-primary" />
+                      </div>
+                      <div className="text-right mt-3">
+                        <div className={`inline-block px-2 py-1 rounded text-xs font-medium bg-gradient-to-r ${category.color} text-white`}>
+                          {category.solutions.length}개 솔루션
                         </div>
-                      ))}
+                      </div>
                     </div>
+
+                    {/* Content */}
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                        {category.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-4 leading-relaxed">
+                        {category.description}
+                      </p>
+
+                      {/* Solutions list */}
+                      <div className="space-y-2 mb-6">
+                        {category.solutions.map((solution, sIndex) => (
+                          <div key={sIndex} className="flex items-center text-sm text-muted-foreground">
+                            <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
+                            {solution}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
                     <Link href={category.link}>
-                      <Button variant="outline" className="w-full group-hover:bg-blue-50">
+                      <Button
+                        className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        size="sm"
+                      >
                         자세히 보기
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* 업종별 시나리오 */}
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
+        <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+          <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                업종별 <span className="text-blue-600">맞춤 솔루션</span>
+              <div className="flex justify-center mb-6">
+                <Badge variant="outline" size="lg">
+                  <Briefcase className="h-3 w-3 mr-1" />
+                  Industry Solutions
+                </Badge>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                업종별 <span className="text-primary">맞춤 솔루션</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 각 업종의 특성에 맞는 종합적인 리스크 관리 전략을 제공합니다
               </p>
             </div>
@@ -397,28 +466,28 @@ export default function RiskManagementPage() {
               </TabsList>
 
               <TabsContent value={activeScenario} className="mt-8">
-                <Card className="overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 py-8">
+                <div className="bg-gradient-to-br from-background to-background/50 border border-border rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  <div className="bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 py-8 px-8">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-2xl font-bold text-gray-900">{currentScenario.title}</h3>
-                        <p className="text-gray-600 mt-1">{currentScenario.company}</p>
+                        <h3 className="text-2xl font-bold text-foreground">{currentScenario.title}</h3>
+                        <p className="text-muted-foreground mt-1">{currentScenario.company}</p>
                       </div>
-                      <Briefcase className="w-12 h-12 text-blue-600" />
+                      <Briefcase className="w-12 h-12 text-primary" />
                     </div>
-                  </CardHeader>
-                  <CardContent className="p-8">
+                  </div>
+                  <div className="p-8">
                     {/* 도전과제 */}
                     <div className="mb-8">
-                      <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                        <AlertTriangle className="w-5 h-5 text-red-500 mr-2" />
+                      <h4 className="text-lg font-bold text-foreground mb-4 flex items-center">
+                        <AlertTriangle className="w-5 h-5 text-destructive mr-2" />
                         주요 리스크 요인
                       </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {currentScenario.challenges.map((challenge, index) => (
                           <div key={index} className="flex items-start">
-                            <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <p className="text-gray-700">{challenge}</p>
+                            <div className="w-2 h-2 bg-destructive rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p className="text-muted-foreground">{challenge}</p>
                           </div>
                         ))}
                       </div>
@@ -426,22 +495,22 @@ export default function RiskManagementPage() {
 
                     {/* 솔루션 */}
                     <div className="mb-8">
-                      <h4 className="text-lg font-bold text-gray-900 mb-6 flex items-center">
-                        <Target className="w-5 h-5 text-green-500 mr-2" />
+                      <h4 className="text-lg font-bold text-foreground mb-6 flex items-center">
+                        <Target className="w-5 h-5 text-primary mr-2" />
                         통합 리스크 관리 솔루션
                       </h4>
                       
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                          <h5 className="font-semibold text-gray-800 mb-4">핵심 대응 전략</h5>
+                          <h5 className="font-semibold text-foreground mb-4">핵심 대응 전략</h5>
                           <div className="space-y-4">
                             {currentScenario.solutions.primary.map((solution, index) => (
-                              <div key={index} className="bg-blue-50 p-4 rounded-lg">
-                                <h6 className="font-semibold text-blue-900 mb-2">{solution.title}</h6>
+                              <div key={index} className="bg-primary/5 dark:bg-primary/10 p-4 rounded-lg border border-primary/20">
+                                <h6 className="font-semibold text-primary mb-2">{solution.title}</h6>
                                 <ul className="space-y-1">
                                   {solution.items.map((item, iIndex) => (
-                                    <li key={iIndex} className="text-sm text-blue-700 flex items-center">
-                                      <CheckCircle className="w-3 h-3 mr-2 flex-shrink-0" />
+                                    <li key={iIndex} className="text-sm text-foreground flex items-center">
+                                      <CheckCircle className="w-3 h-3 mr-2 flex-shrink-0 text-primary" />
                                       {item}
                                     </li>
                                   ))}
@@ -451,15 +520,15 @@ export default function RiskManagementPage() {
                           </div>
                         </div>
                         <div>
-                          <h5 className="font-semibold text-gray-800 mb-4">보완 전략</h5>
+                          <h5 className="font-semibold text-foreground mb-4">보완 전략</h5>
                           <div className="space-y-4">
                             {currentScenario.solutions.secondary.map((solution, index) => (
-                              <div key={index} className="bg-gray-50 p-4 rounded-lg">
-                                <h6 className="font-semibold text-gray-800 mb-2">{solution.title}</h6>
+                              <div key={index} className="bg-primary/5 dark:bg-primary/10 p-4 rounded-lg border border-primary/20">
+                                <h6 className="font-semibold text-primary mb-2">{solution.title}</h6>
                                 <ul className="space-y-1">
                                   {solution.items.map((item, iIndex) => (
-                                    <li key={iIndex} className="text-sm text-gray-600 flex items-center">
-                                      <CheckCircle className="w-3 h-3 mr-2 flex-shrink-0" />
+                                    <li key={iIndex} className="text-sm text-foreground flex items-center">
+                                      <CheckCircle className="w-3 h-3 mr-2 flex-shrink-0 text-primary" />
                                       {item}
                                     </li>
                                   ))}
@@ -472,60 +541,69 @@ export default function RiskManagementPage() {
                     </div>
 
                     {/* 기대효과 */}
-                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-lg">
-                      <h4 className="font-bold text-green-900 mb-2 flex items-center">
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-lg border border-green-200 dark:border-green-800">
+                      <h4 className="font-bold text-green-900 dark:text-green-300 mb-2 flex items-center">
                         <TrendingUp className="w-5 h-5 mr-2" />
                         기대 효과
                       </h4>
-                      <p className="text-green-800">{currentScenario.expectedResult}</p>
+                      <p className="text-green-800 dark:text-green-200">{currentScenario.expectedResult}</p>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
         </section>
 
         {/* 전문가 네트워크 */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-20 bg-gradient-to-b from-muted/20 to-background">
+          <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                60명의 <span className="text-blue-600">전문가 네트워크</span>
+              <div className="flex justify-center mb-6">
+                <Badge variant="outline" size="lg">
+                  <Users className="h-3 w-3 mr-1" />
+                  Expert Network
+                </Badge>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                60명의 <span className="text-primary">전문가 네트워크</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 각 분야 최고의 전문가들이 통합 솔루션을 제공합니다
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
               {expertNetwork.map((expert, index) => (
-                <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
-                  <CardContent className="py-6">
-                    <div className="text-3xl font-bold text-blue-600 mb-2">{expert.count}명</div>
-                    <h3 className="font-semibold text-gray-900 mb-2">{expert.category}</h3>
-                    <p className="text-sm text-gray-600 mb-3">{expert.credentials}</p>
+                <div key={index} className="group relative bg-gradient-to-br from-background to-background/50 border border-border rounded-xl p-6 text-center hover:shadow-2xl transition-all duration-500 hover:border-primary/50 hover:-translate-y-2 overflow-hidden">
+                  {/* Background Pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative z-10">
+                    <div className="text-3xl font-bold text-primary mb-2">{expert.count}명</div>
+                    <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{expert.category}</h3>
+                    <p className="text-sm text-muted-foreground mb-3">{expert.credentials}</p>
                     <div className="space-y-1">
                       {expert.specialties.map((specialty, sIndex) => (
-                        <Badge key={sIndex} variant="secondary" className="text-xs">
+                        <Badge key={sIndex} variant="secondary" size="xs" className="text-xs">
                           {specialty}
                         </Badge>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
             </div>
 
             <div className="text-center">
-              <p className="text-gray-600 mb-6">
+              <p className="text-muted-foreground mb-6">
                 Big4 회계법인, 대형 로펌, 글로벌 컨설팅사 출신 전문가들이
                 <br />
                 고객사의 모든 리스크 관리를 위해 협업합니다
               </p>
               <CalComPopup
                 trigger={
-                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                  <Button size="lg" className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg">
                     <Users className="mr-2 h-5 w-5" />
                     전문가 상담 예약
                   </Button>
@@ -537,48 +615,35 @@ export default function RiskManagementPage() {
         </section>
 
         {/* 프로세스 */}
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
+        <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+          <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                체계적인 <span className="text-blue-600">리스크 관리 프로세스</span>
+              <div className="flex justify-center mb-6">
+                <Badge variant="outline" size="lg">
+                  <CheckCircle className="h-3 w-3 mr-1" />
+                  컴설팅 프로세스
+                </Badge>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                체계적인 <span className="text-primary">리스크 관리 프로세스</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 4단계 프로세스를 통해 완벽한 리스크 관리 체계를 구축합니다
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20">
               {processSteps.map((step, index) => (
-                <div key={index} className="relative">
+                <div key={index} className="relative text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center text-2xl font-bold text-primary">
+                    {step.step < 10 ? `0${step.step}` : step.step}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{step.description}</p>
+                  <Badge variant="outline" size="xs">{step.duration}</Badge>
                   {index < processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute top-12 left-full w-full">
-                      <ChevronRight className="w-8 h-8 text-gray-300 -ml-4" />
-                    </div>
+                    <ArrowRight className="hidden md:block absolute top-8 -right-4 h-5 w-5 text-primary/50" />
                   )}
-                  <Card className="h-full hover:shadow-lg transition-all duration-300">
-                    <CardHeader className="text-center">
-                      <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                        {step.step}
-                      </div>
-                      <CardTitle className="text-xl">{step.title}</CardTitle>
-                      <Badge variant="outline" className="mt-2">
-                        <Clock className="w-3 h-3 mr-1" />
-                        {step.duration}
-                      </Badge>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-600 mb-4">{step.description}</p>
-                      <ul className="space-y-2">
-                        {step.activities.map((activity, aIndex) => (
-                          <li key={aIndex} className="text-sm text-gray-700 flex items-center">
-                            <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                            {activity}
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
                 </div>
               ))}
             </div>
@@ -586,34 +651,25 @@ export default function RiskManagementPage() {
         </section>
 
         {/* CTA 섹션 */}
-        <section className="py-20 bg-gradient-to-r from-blue-900 to-indigo-900 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              기업의 모든 리스크, <span className="text-blue-300">한 곳에서 관리하세요</span>
+        <section className="py-20 bg-gradient-to-r from-primary/5 to-primary/10">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+              기업의 모든 리스크, <span className="text-primary">한 곳에서 관리하세요</span>
             </h2>
-            <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 text-muted-foreground max-w-2xl mx-auto">
               60명의 전문가가 귀사의 리스크를 진단하고
               <br />
               최적의 통합 솔루션을 제공합니다
             </p>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 max-w-3xl mx-auto mb-8">
-              <h3 className="text-2xl font-bold mb-4">무료 리스크 진단 혜택</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                <div>
-                  <Award className="w-8 h-8 text-blue-300 mb-2" />
-                  <h4 className="font-semibold mb-1">종합 진단 보고서</h4>
-                  <p className="text-sm text-blue-200">6대 리스크 영역 완전 분석</p>
+            {/* 긴급성 표시기 */}
+            <div className="flex justify-center mb-8">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 max-w-md">
+                <div className="flex items-center justify-center text-red-600 dark:text-red-400 mb-2">
+                  ⏰ <span className="ml-2 font-semibold">한정 무료 진단</span>
                 </div>
-                <div>
-                  <Calculator className="w-8 h-8 text-blue-300 mb-2" />
-                  <h4 className="font-semibold mb-1">비용 절감 분석</h4>
-                  <p className="text-sm text-blue-200">예상 절세액 및 비용 절감액 산출</p>
-                </div>
-                <div>
-                  <Brain className="w-8 h-8 text-blue-300 mb-2" />
-                  <h4 className="font-semibold mb-1">맞춤 전략 제안</h4>
-                  <p className="text-sm text-blue-200">업종별 최적화 솔루션 설계</p>
+                <div className="text-sm text-red-600 dark:text-red-400">
+                  매월 선착순 20분 한정 · 전문가 직접 진단
                 </div>
               </div>
             </div>
@@ -621,9 +677,10 @@ export default function RiskManagementPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <CalComPopup
                 trigger={
-                  <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                  <Button size="lg" className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg px-8 py-4 text-lg font-semibold">
                     <Phone className="mr-2 h-5 w-5" />
-                    무료 진단 신청하기
+                    무료 리스크 진단 (20분 한정)
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 }
                 calLink="familyoffices/risk-assessment"
@@ -631,12 +688,16 @@ export default function RiskManagementPage() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 text-lg"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-4 text-lg"
                 onClick={() => window.open('tel:0502-5550-8700')}
               >
                 <Phone className="mr-2 h-5 w-5" />
-                0502-5550-8700
+                카카오톡 간편 상담
               </Button>
+            </div>
+            
+            <div className="text-sm text-muted-foreground mt-6">
+              💡 평균 진단 시간: 45분 | 맞춤 솔루션 제안: 100% | 추가 비용: 없음
             </div>
           </div>
         </section>

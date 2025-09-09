@@ -3,13 +3,15 @@
 import Script from 'next/script';
 
 export default function ExternalScripts() {
+  // HubSpot Portal ID from environment variable
+  const hubspotPortalId = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || '43932435';
 
   return (
     <>
       {/* HubSpot Embed Code */}
       <Script
         id="hubspot-loader"
-        src="//js.hs-scripts.com/43932435.js"
+        src={`//js.hs-scripts.com/${hubspotPortalId}.js`}
         async
         defer
         strategy="afterInteractive"

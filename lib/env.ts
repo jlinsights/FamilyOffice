@@ -75,6 +75,14 @@ export const serverEnvSchema = z.object({
   KAKAO_ADMIN_KEY: z.string()
     .regex(/^[a-f0-9]{32}$/, 'Invalid Kakao Admin key format')
     .optional(),
+  
+  // HubSpot Integration - 선택사항 but format validation
+  HUBSPOT_API_KEY: z.string()
+    .regex(/^[a-f0-9-]{36}$/, 'Invalid HubSpot API key format (UUID)')
+    .optional(),
+  HUBSPOT_PRIVATE_ACCESS_TOKEN: z.string()
+    .min(1, 'HubSpot Private Access Token cannot be empty if provided')
+    .optional(),
 });
 
 // 클라이언트 전용 환경변수 스키마 (NEXT_PUBLIC_*)
@@ -103,6 +111,11 @@ export const clientEnvSchema = z.object({
     .default('familyoffice')
     .optional(),
   
+  // HubSpot Integration - 선택사항
+  NEXT_PUBLIC_HUBSPOT_PORTAL_ID: z.string()
+    .regex(/^\d{8}$/, 'Invalid HubSpot Portal ID format (8 digits)')
+    .optional(),
+  
   // Kakao Business - 클라이언트 전용
   NEXT_PUBLIC_KAKAO_CHANNEL_ID: z.string()
     .min(1, 'NEXT_PUBLIC_KAKAO_CHANNEL_ID cannot be empty if provided')
@@ -118,11 +131,22 @@ export function createEnv() {
   const isDev = process.env.NODE_ENV === 'development';
   const isBuild = process.env.NEXT_PHASE === 'phase-production-build';
   
-  // 빌드 시에는 기본값 반환
+  // 빌드 시에는 모든 환경변수를 포함한 기본값 반환
   if (isBuild || process.env.SKIP_ENV_VALIDATION === 'true') {
     return {
       NODE_ENV: (process.env.NODE_ENV || 'development') as 'development' | 'production' | 'test',
       NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+      // HubSpot keys
+      HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
+      HUBSPOT_PRIVATE_ACCESS_TOKEN: process.env.HUBSPOT_PRIVATE_ACCESS_TOKEN,
+      NEXT_PUBLIC_HUBSPOT_PORTAL_ID: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID,
+      // Other commonly used keys
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+      CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+      CLERK_WEBHOOK_SECRET: process.env.CLERK_WEBHOOK_SECRET,
+      NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     };
   }
   
@@ -143,6 +167,7 @@ export function createEnv() {
       NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
       NEXT_PUBLIC_CALCOM_API_KEY: process.env.NEXT_PUBLIC_CALCOM_API_KEY,
       NEXT_PUBLIC_CALCOM_NAMESPACE: process.env.NEXT_PUBLIC_CALCOM_NAMESPACE,
+      NEXT_PUBLIC_HUBSPOT_PORTAL_ID: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID,
       NEXT_PUBLIC_KAKAO_CHANNEL_ID: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID,
       NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY,
     });
@@ -169,6 +194,8 @@ export function createEnv() {
         KAKAO_APP_KEY: process.env.KAKAO_APP_KEY,
         KAKAO_JAVASCRIPT_KEY: process.env.KAKAO_JAVASCRIPT_KEY,
         KAKAO_ADMIN_KEY: process.env.KAKAO_ADMIN_KEY,
+        HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
+        HUBSPOT_PRIVATE_ACCESS_TOKEN: process.env.HUBSPOT_PRIVATE_ACCESS_TOKEN,
       });
     }
 
@@ -244,7 +271,7 @@ export const validateEnvOnStartup = () => {
 };
 
 // 특정 환경변수 그룹 검증
-export const validateEnvGroup = (group: 'clerk' | 'supabase' | 'redis' | 'analytics' | 'kakao') => {
+export const validateEnvGroup = (group: 'clerk' | 'supabase' | 'redis' | 'analytics' | 'kakao' | 'hubspot') => {
   const schemas = {
     clerk: z.object({
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: clientEnvSchema.shape.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
@@ -272,6 +299,11 @@ export const validateEnvGroup = (group: 'clerk' | 'supabase' | 'redis' | 'analyt
       KAKAO_APP_KEY: serverEnvSchema.shape.KAKAO_APP_KEY.optional(),
       KAKAO_JAVASCRIPT_KEY: serverEnvSchema.shape.KAKAO_JAVASCRIPT_KEY.optional(),
       KAKAO_ADMIN_KEY: serverEnvSchema.shape.KAKAO_ADMIN_KEY.optional(),
+    }),
+    hubspot: z.object({
+      NEXT_PUBLIC_HUBSPOT_PORTAL_ID: clientEnvSchema.shape.NEXT_PUBLIC_HUBSPOT_PORTAL_ID,
+      HUBSPOT_API_KEY: serverEnvSchema.shape.HUBSPOT_API_KEY.optional(),
+      HUBSPOT_PRIVATE_ACCESS_TOKEN: serverEnvSchema.shape.HUBSPOT_PRIVATE_ACCESS_TOKEN.optional(),
     }),
   };
 
@@ -312,7 +344,7 @@ export const env = getEnv();
 
 // 타입 정의
 export type Env = ReturnType<typeof createEnv>;
-export type EnvGroup = 'clerk' | 'supabase' | 'redis' | 'analytics' | 'kakao';
+export type EnvGroup = 'clerk' | 'supabase' | 'redis' | 'analytics' | 'kakao' | 'hubspot';
 
 // 레거시 호환성을 위한 함수들
 export const validateEnv = validateEnvOnStartup;

@@ -22,18 +22,7 @@ export function ClientScripts() {
   useEffect(() => {
     if (!mounted || !isClient) return;
 
-    // HubSpot 스크립트 로드
-    const loadHubSpotScript = () => {
-      if (typeof window !== 'undefined' && !window.hbspt) {
-        const script = document.createElement('script');
-        script.id = 'hs-script-loader';
-        script.src = '//js.hs-scripts.com/43932435.js';
-        script.async = true;
-        document.head.appendChild(script);
-      }
-    };
-
-    // Google Tag Manager 스크립트 로드
+    // Google Tag Manager 스크립트 로드 (HubSpot은 ExternalScripts에서 처리)
     const loadGTMScript = () => {
       if (typeof window !== 'undefined' && !window.dataLayer) {
         const script = document.createElement('script');
@@ -49,7 +38,6 @@ export function ClientScripts() {
     };
 
     // 스크립트 로드
-    loadHubSpotScript();
     loadGTMScript();
   }, [mounted, isClient]);
 
