@@ -24,8 +24,10 @@ import {
   Trophy,
   Users,
   Zap,
+  ArrowRight,
 } from 'lucide-react';
 import Script from 'next/script';
+import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 
 import { CalComPopup } from '@/components/cal-com-popup';
@@ -150,6 +152,21 @@ export default function KeyPersonInsurancePage() {
                 <br />
                 CEO·핵심임원 사망시 <strong className="text-yellow-300">기업 연속성 보장</strong> 및 <strong className="text-yellow-300">법인세 절약</strong>
               </p>
+              
+              {/* 통합 리스크 관리 안내 */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
+                <p className="text-blue-100 mb-4">
+                  <Heart className="w-5 h-5 inline mr-2 text-yellow-300" />
+                  경영인정기보험은 <strong className="text-yellow-300">CEO 건강 리스크 관리</strong>의 핵심 솔루션입니다
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Link href="/risk-management" className="inline-flex items-center justify-center px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white transition-colors">
+                    <Shield className="w-4 h-4 mr-2" />
+                    통합 리스크 관리 보기
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </div>
+              </div>
               
               {/* 핵심 통계 */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">

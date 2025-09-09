@@ -9,7 +9,17 @@ import { NavigationItem, ServiceItem } from '@/types/globals';
 // 네비게이션 메뉴 데이터
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/about', label: '소개' },
-  { href: '/solutions', label: '솔루션' },
+  { 
+    href: '/solutions', 
+    label: '솔루션',
+    submenu: [
+      { href: '/solutions', label: '전체 솔루션', description: '9개 분야 42개 전문 솔루션' },
+      { href: '/risk-management', label: '리스크 관리', description: '6대 핵심 리스크 통합 관리' },
+      { href: '/corporate-life-insurance', label: '법인종신보험', description: '법인세 절세 + 상속세 대비' },
+      { href: '/key-person-insurance', label: '경영인정기보험', description: 'CEO 건강 리스크 관리' },
+      { href: '/inheritance-gift', label: '상속증여 컨설팅', description: '가업승계 및 세대간 이전' }
+    ]
+  },
   { href: '/program', label: '프로그램' },
   { href: '/insights', label: '인사이트' },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
