@@ -105,21 +105,18 @@ export default function SeminarRegistrationSection() {
         <div className="text-center mb-16">
           <Badge
             variant="secondary"
-            className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60"
+            className="mb-4 dark:bg-primary/80 dark:text-white dark:border-primary/60"
           >
             <UserPlus className="h-3 w-3 mr-1" />
             Registration & Contact
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-slide-up text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
             <span className="text-primary dark:text-emerald-300">
               세미나 신청
             </span>{' '}
             및 문의
           </h2>
-          <p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-up dark:text-gray-200"
-            style={{ animationDelay: '200ms' }}
-          >
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
             다양한 방법으로 세미나 신청 및 상담 예약이 가능합니다
           </p>
         </div>
@@ -128,10 +125,7 @@ export default function SeminarRegistrationSection() {
           {/* Left Column - Benefits and Contact Methods */}
           <div className="space-y-8">
             {/* Member Benefits */}
-            <div
-              className="animate-slide-up"
-              style={{ animationDelay: '300ms' }}
-            >
+            <div>
               <h3 className="text-2xl font-bold mb-6 flex items-center text-foreground dark:text-white">
                 <Gift className="h-6 w-6 text-primary dark:text-primary mr-3" />
                 멤버 전용 혜택
@@ -166,10 +160,7 @@ export default function SeminarRegistrationSection() {
             </div>
 
             {/* Contact Methods */}
-            <div
-              className="animate-slide-up"
-              style={{ animationDelay: '400ms' }}
-            >
+            <div>
               <h3 className="text-2xl font-bold mb-6 flex items-center text-foreground dark:text-white">
                 <Phone className="h-6 w-6 text-primary dark:text-primary mr-3" />
                 문의 방법
@@ -225,10 +216,7 @@ export default function SeminarRegistrationSection() {
             </div>
 
             {/* Quick Stats */}
-            <div
-              className="bg-primary/5 dark:bg-primary/10 border border-primary/20 dark:border-primary/30 rounded-lg p-6 animate-slide-up"
-              style={{ animationDelay: '500ms' }}
-            >
+            <div className="bg-primary/5 dark:bg-primary/10 border border-primary/20 dark:border-primary/30 rounded-lg p-6">
               <h4 className="font-semibold mb-4 flex items-center text-foreground dark:text-white">
                 <CheckCircle className="h-5 w-5 text-primary dark:text-primary mr-2" />
                 신청 현황
@@ -263,7 +251,7 @@ export default function SeminarRegistrationSection() {
           </div>
 
           {/* Right Column - Cal.com Integration */}
-          <div className="animate-slide-up" style={{ animationDelay: '600ms' }}>
+          <div>
             <div
               id="booking"
               className="bg-background dark:bg-background rounded-lg border shadow-lg overflow-hidden"

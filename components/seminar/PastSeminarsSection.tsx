@@ -22,21 +22,18 @@ export function PastSeminarsSection() {
         <div className="text-center mb-16">
           <Badge
             variant="secondary"
-            className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60"
+            className="mb-4 dark:bg-primary/80 dark:text-white dark:border-primary/60"
           >
             <Archive className="h-3 w-3 mr-1" />
             Premium Archive
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-slide-up text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
             <span className="text-primary dark:text-emerald-300">
               프리미엄 세미나
             </span>{' '}
             아카이브
           </h2>
-          <p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-up dark:text-gray-200"
-            style={{ animationDelay: '200ms' }}
-          >
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
             전문가들과 함께하는 프리미엄 세미나 일정을 확인하고 참여해보세요
           </p>
         </div>

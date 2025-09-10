@@ -21,16 +21,13 @@ export function SeminarCategoriesSection() {
             <BookOpen className="h-3 w-3 mr-1" />
             Seminar Categories
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-slide-up text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
             <span className="text-primary dark:text-emerald-300">
               전문 분야별
             </span>{' '}
             세미나 카테고리
           </h2>
-          <p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-up dark:text-gray-200"
-            style={{ animationDelay: '200ms' }}
-          >
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
             다양한 전문 분야의 세미나를 통해 체계적으로 역량을 개발하세요
           </p>
         </div>
@@ -42,8 +39,7 @@ export function SeminarCategoriesSection() {
             return (
               <Card
                 key={category.key}
-                className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer animate-slide-up dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="group hover:shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 onClick={handleCardClick}
                 role="button"
                 tabIndex={0}
@@ -82,10 +78,7 @@ export function SeminarCategoriesSection() {
         </div>
 
         {/* Featured Categories Stats */}
-        <div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 animate-slide-up"
-          style={{ animationDelay: '500ms' }}
-        >
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center">
             <div className="text-3xl font-bold text-primary dark:text-emerald-300 mb-2">
               10+

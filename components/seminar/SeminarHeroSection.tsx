@@ -50,31 +50,22 @@ export function SeminarHeroSection() {
         </div>
 
         {/* 메인 헤드라인 */}
-        <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
+        <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line">
           전문가와 함께하는{'\n'}프리미엄 세미나
         </h1>
 
         {/* 서브 헤드라인 */}
-        <p
-          className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
-          style={{ animationDelay: '200ms' }}
-        >
+        <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
           지식이 경쟁력이 되는 시대
         </p>
 
-        <p
-          className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
-          style={{ animationDelay: '300ms' }}
-        >
+        <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
           업계 최고 전문가들과 함께하는 맞춤형 교육 프로그램으로 경영 역량을
           강화하고 네트워크를 확장하세요
         </p>
 
         {/* 핵심 성과 지표 - 메인 페이지와 동일한 스타일 */}
-        <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 animate-slide-up"
-          style={{ animationDelay: '400ms' }}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           <div className="text-center">
             <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
               <AnimatedCounter
@@ -126,10 +117,7 @@ export function SeminarHeroSection() {
         </div>
 
         {/* CTA 버튼 - 메인 페이지와 동일한 스타일 */}
-        <div
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
-          style={{ animationDelay: '500ms' }}
-        >
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <a
             href="https://seminar.familyoffices.vip"
             target="_blank"
