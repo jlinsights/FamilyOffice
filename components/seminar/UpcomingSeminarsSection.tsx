@@ -95,21 +95,18 @@ export function UpcomingSeminarsSection() {
         <div className="text-center mb-16">
           <Badge
             variant="secondary"
-            className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60"
+            className="mb-4 dark:bg-primary/80 dark:text-white dark:border-primary/60"
           >
             <Calendar className="h-3 w-3 mr-1" />
             Upcoming Seminars
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 mt-4 animate-slide-up text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 mt-4 text-gray-900 dark:text-white">
             <span className="text-primary dark:text-emerald-300">
               예정된 세미나
             </span>{' '}
             프로그램
           </h2>
-          <p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-up dark:text-gray-200"
-            style={{ animationDelay: '200ms' }}
-          >
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
             업계 최고 전문가들과 함께하는 프리미엄 교육 프로그램에 참여하세요
           </p>
         </div>
@@ -132,8 +129,7 @@ export function UpcomingSeminarsSection() {
             return (
               <Card
                 key={seminar.id}
-                className="group hover:shadow-lg transition-all duration-300 animate-slide-up dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                style={{ animationDelay: `${index * 150}ms` }}
+                className="group hover:shadow-lg transition-shadow duration-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
               >
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between mb-3">
@@ -345,10 +341,7 @@ export function UpcomingSeminarsSection() {
         )}
 
         {/* View All Button */}
-        <div
-          className="text-center mt-12 animate-slide-up"
-          style={{ animationDelay: '600ms' }}
-        >
+        <div className="text-center mt-12">
           <a
             href="https://seminar.familyoffices.vip"
             target="_blank"
