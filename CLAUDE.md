@@ -1,6 +1,29 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides comprehensive guidance to Claude Code (claude.ai/code) when working with code in this repository. For AI agents, see **[AGENTS.md](./AGENTS.md)** for optimized, agent-specific instructions.
+
+## 🚀 Quick Start (Agent-Friendly)
+
+### Essential Commands
+```bash
+# Development (DO NOT use npm run build during dev sessions)
+npm run dev          # Start development server with HMR
+npm run dev:mobile   # Mobile development server
+
+# Quality Checks  
+npm run lint         # ESLint analysis
+npm run typecheck    # TypeScript validation
+
+# Testing
+npm run test:e2e     # Playwright E2E tests (56 tests)
+```
+
+### Key Project Facts
+- **Framework**: Next.js 15.4.6 + TypeScript + Tailwind CSS
+- **Target**: Korean mid-market company CEOs
+- **Admin**: `jhlim725@gmail.com` (super admin)
+- **Database**: Supabase PostgreSQL with Clerk sync
+- **Testing**: Playwright (replaced Cypress, 8 browser/device configs)
 
 ## Project Overview
 
@@ -8,14 +31,21 @@ FamilyOffice S is a premium wealth management platform targeting Korean mid-mark
 
 ## Development Commands
 
+⚠️ **AGENT WARNING**: Never run `npm run build` during development sessions - it breaks HMR and leaves the dev server in an inconsistent state.
+
 ```bash
-# Development
+# Development (Use these during agent sessions)
 npm run dev          # Start development server (localhost:3000) - No deprecation warnings
-npm run dev:mobile  # Mobile development server (0.0.0.0:3000)
-npm run dev:inspect # Development with Node.js inspector
-npm run build       # Production build - No deprecation warnings
-npm run start       # Start production server
-npm run lint        # ESLint code analysis
+npm run dev:mobile   # Mobile development server (0.0.0.0:3000)
+npm run dev:inspect  # Development with Node.js inspector
+
+# Quality Assurance (Run before commits)
+npm run lint         # ESLint code analysis  
+npm run typecheck    # TypeScript type checking
+
+# Build Commands (Use outside agent sessions only)
+npm run build        # Production build - No deprecation warnings
+npm run start        # Start production server  
 npm run vercel-build # Vercel-specific build process
 ```
 

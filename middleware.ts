@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { globalRateLimit } from '@/lib/rate-limit';
 import { currentUser } from '@clerk/nextjs/server';
+import { detectSuspiciousActivity, autoSecurityResponse, logSecurityEvent } from '@/lib/security/security-monitor';
 
 // 허용된 도메인 목록 - 보안 강화
 const ALLOWED_ORIGINS = [
@@ -52,10 +53,27 @@ async function checkAdminPermission(request: NextRequest): Promise<boolean> {
 }
 
 export async function middleware(request: NextRequest) {
+  // 0. 의심스러운 활동 감지 및 자동 대응
+  const suspiciousActivity = detectSuspiciousActivity(request);
+  if (suspiciousActivity.isSuspicious) {
+    const securityResponse = await autoSecurityResponse(request, suspiciousActivity);
+    if (securityResponse) {
+      return securityResponse; // 자동 차단
+    }
+  }
+
   // 1. 보호된 API 경로에 대한 인증 검사
   if (isProtectedApiRoute(request.nextUrl.pathname)) {
     const isAuthorized = await checkAdminPermission(request);
     if (!isAuthorized) {
+      // 무단 접근 시도 로깅
+      await logSecurityEvent({
+        type: 'invalid_auth',
+        severity: 'high',
+        description: `Unauthorized access attempt to ${request.nextUrl.pathname}`,
+        additional_data: { path: request.nextUrl.pathname }
+      }, request);
+
       return NextResponse.json(
         { 
           error: 'Unauthorized access to protected route',
@@ -64,6 +82,14 @@ export async function middleware(request: NextRequest) {
         },
         { status: 403 }
       );
+    } else {
+      // 관리자 접근 로깅
+      await logSecurityEvent({
+        type: 'admin_access',
+        severity: 'medium',
+        description: `Admin access to ${request.nextUrl.pathname}`,
+        additional_data: { path: request.nextUrl.pathname }
+      }, request);
     }
   }
 
@@ -71,7 +97,17 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/api/')) {
     const rateLimitResponse = await globalRateLimit(request);
     if (rateLimitResponse && rateLimitResponse instanceof Response) {
-      // Rate limit exceeded
+      // Rate limit 위반 로깅
+      await logSecurityEvent({
+        type: 'rate_limit_exceeded',
+        severity: 'medium',
+        description: `Rate limit exceeded for ${request.nextUrl.pathname}`,
+        additional_data: { 
+          path: request.nextUrl.pathname,
+          method: request.method
+        }
+      }, request);
+
       return rateLimitResponse;
     }
   }

@@ -34,6 +34,7 @@
     "test:all": "npm run test:unit && npm run test:integration && npm run test:security && npm run test:e2e && npm run test:performance",
     "test:coverage:report": "jest --coverage && open coverage/lcov-report/index.html",
     "test:cron": "node scripts/test-cron.js",
+    "typecheck": "tsc --noEmit",
     "type-check": "tsc --noEmit",
     "analyze": "cross-env ANALYZE=true next build",
     "vercel-build": "next build",
@@ -42,6 +43,8 @@
     "bundle:size": "npm run build && npx @next/bundle-analyzer",
     "optimize:images": "next build && npx imagemin public/images --out-dir=public/images/optimized",
     "cache:clear": "rm -rf .next && rm -rf node_modules/.cache",
+    "agent:check": "npm run lint && npm run typecheck",
+    "agent:test": "npm run agent:check && npm run test:e2e",
     "performance:monitor": "npm run dev & sleep 10 && npm run lighthouse && pkill -f 'next dev'"
   },
   "dependencies": {

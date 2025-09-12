@@ -17,6 +17,7 @@ export const serverEnvSchema = z.object({
   // Supabase - 필수 (but relaxed for development)
   SUPABASE_SERVICE_ROLE_KEY: z.string()
     .min(1, 'SUPABASE_SERVICE_ROLE_KEY is required')
+    .regex(/^eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/, 'Invalid Supabase Service Role Key format')
     .optional(),
   
   // Clerk - 필수 (but relaxed for development) 
@@ -87,9 +88,11 @@ export const clientEnvSchema = z.object({
   // Supabase - 필수 (but relaxed for development)
   NEXT_PUBLIC_SUPABASE_URL: z.string()
     .url('Invalid Supabase URL format')
+    .regex(/^https:\/\/[a-z]{20}\.supabase\.co$/, 'Invalid Supabase URL format')
     .optional(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string()
     .min(1, 'NEXT_PUBLIC_SUPABASE_ANON_KEY is required')
+    .regex(/^eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/, 'Invalid Supabase Anon Key format')
     .optional(),
   
   // Analytics - 선택사항

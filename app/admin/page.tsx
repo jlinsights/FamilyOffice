@@ -1,7 +1,7 @@
 'use client';
 
 import nextDynamic from 'next/dynamic';
-import { Shield, Brain, TrendingUp, Search, Gauge, Phone } from 'lucide-react';
+import { Shield, Brain, TrendingUp, Search, Gauge, Phone, Target } from 'lucide-react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
@@ -37,6 +37,20 @@ const WebVitalsDashboard = nextDynamic(
   }
 );
 
+const SecurityDashboard = nextDynamic(
+  () => import('@/components/admin/security-dashboard'),
+  { 
+    loading: () => <div className="flex items-center justify-center h-64">보안 대시보드 로딩 중...</div>
+  }
+);
+
+const InboundMarketingDashboard = nextDynamic(
+  () => import('@/components/admin/inbound-marketing-dashboard').then(mod => ({ default: mod.InboundMarketingDashboard })),
+  { 
+    loading: () => <div className="flex items-center justify-center h-64">인바운드 마케팅 대시보드 로딩 중...</div>
+  }
+);
+
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -56,7 +70,7 @@ export default function AdminDashboard() {
         </div>
 
         <Tabs defaultValue="performance" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="performance" className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
               SEO 성과
@@ -76,6 +90,14 @@ export default function AdminDashboard() {
             <TabsTrigger value="web-vitals" className="flex items-center gap-2">
               <Gauge className="h-4 w-4" />
               웹 성능
+            </TabsTrigger>
+            <TabsTrigger value="security" className="flex items-center gap-2">
+              <Shield className="h-4 w-4" />
+              보안 상태
+            </TabsTrigger>
+            <TabsTrigger value="marketing" className="flex items-center gap-2">
+              <Target className="h-4 w-4" />
+              마케팅 자동화
             </TabsTrigger>
           </TabsList>
 
@@ -168,6 +190,14 @@ export default function AdminDashboard() {
 
           <TabsContent value="web-vitals">
             <WebVitalsDashboard />
+          </TabsContent>
+
+          <TabsContent value="security">
+            <SecurityDashboard />
+          </TabsContent>
+
+          <TabsContent value="marketing">
+            <InboundMarketingDashboard />
           </TabsContent>
         </Tabs>
       </div>
