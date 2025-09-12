@@ -91,18 +91,19 @@ const CompactMultimediaSection = memo(() => {
                       <span className="text-sm font-medium text-red-600 dark:text-red-400">🎬 최신 영상</span>
                     </div>
                   )}
-                  <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
-                    <iframe 
-                      data-testid="embed-iframe" 
-                      style={{borderRadius: '12px'}} 
-                      src={`https://www.youtube.com/embed/${video.url}`}
-                      width="100%" 
-                      height="152" 
-                      frameBorder="0" 
-                      allowFullScreen
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                      loading="lazy"
-                    />
+                  <div className="relative rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
+                    <div className="relative w-full pb-[56.25%]">
+                      <iframe 
+                        data-testid="youtube-embed-iframe" 
+                        className="absolute inset-0 w-full h-full rounded-lg"
+                        style={{border: 'none'}} 
+                        src={`https://www.youtube.com/embed/${video.url}?rel=0&modestbranding=1&autoplay=0`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -146,34 +147,36 @@ const CompactMultimediaSection = memo(() => {
                   <Badge className="text-xs bg-green-500">NEW</Badge>
                   <span className="text-sm font-medium text-green-600 dark:text-green-400">🎙️ 최신 에피소드</span>
                 </div>
-                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
+                <div className="relative rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
                   <iframe 
-                    data-testid="embed-iframe" 
-                    style={{borderRadius: '12px'}} 
-                    src="https://open.spotify.com/embed/episode/5aIG8p9AWFuzBSlnIYiL4E?utm_source=generator" 
+                    data-testid="spotify-embed-iframe" 
+                    className="w-full rounded-lg"
+                    style={{border: 'none', minHeight: '232px'}} 
+                    src="https://open.spotify.com/embed/episode/5aIG8p9AWFuzBSlnIYiL4E?utm_source=generator&theme=0" 
                     width="100%" 
-                    height="152" 
-                    frameBorder="0" 
+                    height="232" 
                     allowFullScreen
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                     loading="lazy"
+                    title="최신 Spotify 에피소드"
                   />
                 </div>
               </div>
 
               {/* 2nd Spotify Episode */}
               <div className="mb-4">
-                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
+                <div className="relative rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
                   <iframe 
-                    data-testid="embed-iframe" 
-                    style={{borderRadius: '12px'}} 
-                    src="https://open.spotify.com/embed/episode/5G9JHBLEfR9L6CKLMr86Sm?utm_source=generator" 
+                    data-testid="spotify-embed-iframe" 
+                    className="w-full rounded-lg"
+                    style={{border: 'none', minHeight: '232px'}} 
+                    src="https://open.spotify.com/embed/episode/5G9JHBLEfR9L6CKLMr86Sm?utm_source=generator&theme=0" 
                     width="100%" 
-                    height="152" 
-                    frameBorder="0" 
+                    height="232" 
                     allowFullScreen
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                     loading="lazy"
+                    title="Spotify 에피소드"
                   />
                 </div>
               </div>

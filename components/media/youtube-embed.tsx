@@ -28,11 +28,12 @@ export function YouTubeEmbed({
       )}
       <div className={`relative w-full ${aspectRatioClasses[aspectRatio]} overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800`}>
         <iframe
-          src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+          src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=0`}
           title={title || 'YouTube video'}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
-          className="absolute inset-0 w-full h-full border-0"
+          className="absolute inset-0 w-full h-full"
+          style={{ border: 'none' }}
           loading="lazy"
         />
       </div>

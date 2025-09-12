@@ -29,13 +29,14 @@ export function SpotifyEmbed({
           {title}
         </h3>
       )}
-      <div className="overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
+      <div className="relative overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
         <iframe
           src={embedUrl}
           width="100%"
           height={height}
-          style={{ border: 'none' }}
-          allow="encrypted-media"
+          style={{ border: 'none', minHeight: `${height}px` }}
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          allowFullScreen
           loading="lazy"
           className="w-full"
           title={title || 'Spotify podcast'}

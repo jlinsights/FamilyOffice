@@ -666,6 +666,26 @@
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--border)) transparent;
   }
+
+  /* YouTube and Spotify Embed Fixes */
+  iframe[src*='youtube.com'],
+  iframe[src*='spotify.com'] {
+    position: relative;
+    z-index: 10;
+    background: transparent;
+  }
+
+  /* Ensure iframes are clickable and not blocked */
+  .relative iframe {
+    pointer-events: auto !important;
+  }
+
+  /* Fix for iframe container positioning */
+  div:has(> iframe[src*='youtube.com']),
+  div:has(> iframe[src*='spotify.com']) {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 @layer components {
