@@ -36,7 +36,7 @@ interface HubSpotWebhookEvent {
 export async function POST(request: NextRequest) {
   try {
     // 1. Rate limiting 체크
-    const rateLimitResult = await globalRateLimit(request, 'form');
+    const rateLimitResult = await globalRateLimit(request);
     if (rateLimitResult instanceof Response) {
       return rateLimitResult;
     }

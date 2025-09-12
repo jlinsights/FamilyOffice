@@ -190,7 +190,8 @@ export class AIContentEngine {
       if (!contact) return null;
 
       // 2. 최근 활동 조회 (30일)
-      const { data: activities } = await this.supabase
+      const supabase = await this.supabase;
+      const { data: activities } = await supabase
         .from('lead_activities')
         .select('*')
         .eq('hubspot_contact_id', contactId)
@@ -199,7 +200,7 @@ export class AIContentEngine {
         .limit(50);
 
       // 3. 리드 스코어 조회
-      const { data: leadScore } = await this.supabase
+      const { data: leadScore } = await supabase
         .from('lead_scores')
         .select('total_score')
         .eq('hubspot_contact_id', contactId)
@@ -209,10 +210,11 @@ export class AIContentEngine {
       const serviceInterests = this.extractServiceInterests(contact, activities || []);
 
       // 5. 회사 프로필 정보
+      const industryInfo = this.inferIndustry(contact);
       const companyProfile = {
-        size: contact.properties.company_size,
-        industry: this.inferIndustry(contact),
-        revenue_range: contact.properties.revenue_range,
+        ...(contact.properties.company_size && { size: contact.properties.company_size }),
+        ...(industryInfo && { industry: industryInfo }),
+        ...(contact.properties.revenue_range && { revenue_range: contact.properties.revenue_range }),
       };
 
       return {
@@ -540,7 +542,8 @@ export class AIContentEngine {
         created_at: new Date().toISOString(),
       }));
 
-      const { error } = await this.supabase
+      const supabase = await this.supabase;
+      const { error } = await supabase
         .from('content_recommendations')
         .insert(recommendationRows);
 
@@ -636,7 +639,8 @@ export class AIContentEngine {
           break;
       }
 
-      const { error } = await this.supabase
+      const supabase = await this.supabase;
+      const { error } = await supabase
         .from('content_recommendations')
         .update(updateData)
         .eq('id', recommendationId);
@@ -655,7 +659,8 @@ export class AIContentEngine {
    */
   async getRecommendationAnalytics(daysBack: number = 30) {
     try {
-      const { data, error } = await this.supabase
+      const supabase = await this.supabase;
+      const { data, error } = await supabase
         .from('content_recommendations')
         .select('*')
         .gte('created_at', new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString());

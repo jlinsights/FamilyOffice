@@ -74,7 +74,7 @@ export default function SecurityDashboard() {
       const data: SecurityAuditResponse = await response.json();
 
       if (!data.success) {
-        throw new Error(data.error || '보안 감사에 실패했습니다.');
+        throw new Error((data as any).error || '보안 감사에 실패했습니다.');
       }
 
       setReport(data.data.report);

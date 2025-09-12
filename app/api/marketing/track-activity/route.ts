@@ -18,7 +18,7 @@ interface TrackingRequest {
 export async function POST(request: NextRequest) {
   try {
     // 1. Rate limiting 체크
-    const rateLimitResult = await globalRateLimit(request, 'form');
+    const rateLimitResult = await globalRateLimit(request);
     if (rateLimitResult instanceof Response) {
       return rateLimitResult;
     }
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
     
     await scoringEngine.trackActivity({
       hubspot_contact_id: contact_id,
-      user_id,
+      ...(user_id && { user_id }),
       activity_type,
       activity_data: enrichedActivityData,
     });
@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
 
     // 보안 이벤트 로깅
     await logSecurityEvent({
-      type: 'data_processing_error',
+      type: 'data_breach_attempt',
       severity: 'medium',
       description: `Lead activity tracking failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
       additional_data: { endpoint: '/api/marketing/track-activity' }
@@ -141,7 +141,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Rate limiting
-    const rateLimitResult = await globalRateLimit(request, 'api');
+    const rateLimitResult = await globalRateLimit(request);
     if (rateLimitResult instanceof Response) {
       return rateLimitResult;
     }
@@ -152,9 +152,9 @@ export async function GET(request: NextRequest) {
     await scoringEngine.trackWebActivity({
       contactId,
       pageUrl,
-      pageTitle: pageTitle || undefined,
-      sessionId: sessionId || undefined,
-      referrer: request.headers.get('referer') || undefined,
+      ...(pageTitle && { pageTitle }),
+      ...(sessionId && { sessionId }),
+      ...(request.headers.get('referer') && { referrer: request.headers.get('referer')! }),
     });
 
     // 1x1 투명 픽셀 이미지 응답 (트래킹 픽셀용)

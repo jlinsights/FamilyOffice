@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -84,11 +84,7 @@ export function InboundMarketingDashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [selectedPeriod, setSelectedPeriod] = useState(30);
 
-  useEffect(() => {
-    fetchAnalytics();
-  }, [selectedPeriod]);
-
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     try {
       setRefreshing(true);
       const response = await fetch(`/api/marketing/analytics?days_back=${selectedPeriod}&include_details=true`);
@@ -108,7 +104,11 @@ export function InboundMarketingDashboard() {
       setLoading(false);
       setRefreshing(false);
     }
-  };
+  }, [selectedPeriod]);
+
+  useEffect(() => {
+    fetchAnalytics();
+  }, [selectedPeriod, fetchAnalytics]);
 
   const getHealthScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-600';

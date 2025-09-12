@@ -13,7 +13,7 @@ import { getAIContentEngine } from '@/lib/marketing/ai-content-engine';
 export async function GET(request: NextRequest) {
   try {
     // 1. Rate limiting 체크
-    const rateLimitResult = await globalRateLimit(request, 'api');
+    const rateLimitResult = await globalRateLimit(request);
     if (rateLimitResult instanceof Response) {
       return rateLimitResult;
     }
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
     ]);
 
     // 5. 종합 분석 데이터 구성
-    const analytics = {
+    const analytics: any = {
       period: {
         days_back: daysBack,
         start_date: new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString(),
@@ -384,7 +384,7 @@ function analyzeActivityTrends(activities: any[]) {
   }, {} as Record<string, number>);
 
   return Object.entries(activityTypes)
-    .map(([type, count]) => ({ type, count }))
-    .sort((a, b) => b.count - a.count)
+    .map(([type, count]) => ({ type, count: count as number }))
+    .sort((a, b) => (b.count as number) - (a.count as number))
     .slice(0, 10);
 }

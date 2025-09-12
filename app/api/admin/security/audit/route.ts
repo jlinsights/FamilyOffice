@@ -11,7 +11,7 @@ import { globalRateLimit } from '@/lib/rate-limit';
 export async function GET(request: NextRequest) {
   try {
     // 1. Rate limiting 체크
-    const rateLimitResult = await globalRateLimit(request, 'admin');
+    const rateLimitResult = await globalRateLimit(request);
     if (rateLimitResult instanceof Response) {
       return rateLimitResult;
     }
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // POST는 보안 이슈 해결 액션 트리거용
-    const rateLimitResult = await globalRateLimit(request, 'admin');
+    const rateLimitResult = await globalRateLimit(request);
     if (rateLimitResult instanceof Response) {
       return rateLimitResult;
     }

@@ -51,7 +51,7 @@ export function TrackingScript({
     try {
       const tracker = initializeBehavioralTracker({
         contactId: effectiveContactId,
-        userId: user?.id,
+        ...(user?.id && { userId: user.id }),
         sessionId: sessionIdRef.current,
         enablePageTracking,
         enableScrollTracking,
@@ -225,6 +225,7 @@ export function AdvancedTrackingScript({
       document.addEventListener('click', handleLinkClick);
       return () => document.removeEventListener('click', handleLinkClick);
     }
+    return () => {}; // 빈 cleanup 함수
   }, [customEvents.trackOutboundLinks, trackEvent]);
 
   useEffect(() => {
@@ -250,6 +251,7 @@ export function AdvancedTrackingScript({
       document.addEventListener('click', handleDownloadClick);
       return () => document.removeEventListener('click', handleDownloadClick);
     }
+    return () => {}; // 빈 cleanup 함수
   }, [customEvents.trackFileDownloads, trackEvent]);
 
   useEffect(() => {
@@ -279,6 +281,7 @@ export function AdvancedTrackingScript({
         window.removeEventListener('unhandledrejection', handleUnhandledRejection);
       };
     }
+    return () => {}; // 빈 cleanup 함수
   }, [customEvents.trackErrorEvents, trackEvent]);
 
   return <TrackingScript {...props} />;
@@ -289,5 +292,5 @@ export function AdvancedTrackingScript({
  */
 function getFileExtension(url: string): string {
   const match = url.match(/\.([a-zA-Z0-9]+)(?:\?|$)/);
-  return match ? match[1].toLowerCase() : 'unknown';
+  return match?.[1]?.toLowerCase() || 'unknown';
 }
