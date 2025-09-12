@@ -80,7 +80,8 @@ export class LeadScoringEngine {
       const scoreImpact = this.calculateActivityScore(activity.activity_type, activity.activity_data);
 
       // 2. 활동 데이터베이스 저장
-      const { error: activityError } = await this.supabase
+      const supabase = await this.supabase;
+      const { error: activityError } = await supabase
         .from('lead_activities')
         .insert({
           ...activity,
