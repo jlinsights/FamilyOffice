@@ -25,23 +25,23 @@ export const MEMBERSHIP_STATS: MembershipStat[] = [
     icon: Users,
     value: '500+',
     label: '프리미엄 멤버',
-    description: '검증된 중소중견기업 CEO들',
+    description: '검증된 기업가와 고액자산가들',
   },
   {
     icon: TrendingUp,
-    value: '50억원+',
+    value: '100억원+',
     label: '평균 관리 자산',
-    description: '수준 높은 자산관리 니즈',
+    description: '기업자산 + 개인자산 통합관리',
   },
   {
     icon: Building2,
-    value: '5개',
-    label: '주요 업종',
-    description: '업종별 전문 네트워킹',
+    value: '30억+',
+    label: '개인자산 최소기준',
+    description: '고액자산가 전용 자산관리',
   },
   {
     icon: Crown,
-    value: 'VIP',
+    value: 'VVIP',
     label: '멤버십 등급',
     description: '배타적 프리미엄 서비스',
   },
@@ -83,6 +83,12 @@ export const MEMBER_BENEFITS: MemberBenefit[] = [
     title: '차세대 경영진 교육',
     description: '자녀 및 후계자를 위한 체계적 경영 교육 프로그램',
     details: ['리더십 개발 과정', '해외 연수 프로그램', '멘토링 시스템'],
+  },
+  {
+    icon: Target,
+    title: '개인자산가 전용 서비스',
+    description: '30억+ 고액자산가를 위한 맞춤형 자산관리 및 상속계획',
+    details: ['가족신탁 설립 지원', '상속세 최적화 컨설팅', '해외자산 관리 자문'],
   },
 ];
 
@@ -150,6 +156,27 @@ export const EXCLUSIVE_PROGRAMS: ExclusiveProgramCategory[] = [
       },
     ],
   },
+  {
+    category: '자산가 전용',
+    icon: Crown,
+    programs: [
+      {
+        name: '고액자산가 비공개 모임',
+        frequency: '월 1회',
+        description: '개인자산 30억+ 자산가들만의 프라이빗 네트워킹',
+      },
+      {
+        name: '가족신탁 설립 워크숍',
+        frequency: '분기 1회',
+        description: '가족신탁 및 상속계획 전문가 집중 교육',
+      },
+      {
+        name: '해외자산 관리 세미나',
+        frequency: '반기 1회',
+        description: '글로벌 자산배분 및 해외 투자 전략 공유',
+      },
+    ],
+  },
 ];
 
 export const EDUCATION_PROGRAMS: EducationPrograms = {
@@ -157,16 +184,19 @@ export const EDUCATION_PROGRAMS: EducationPrograms = {
     '최신 세법 변화와 대응 전략',
     '중대재해처벌법 완전 정복',
     'ESG 경영과 투자 기회',
+    '개인자산가 상속세 절세 전략',
   ],
   quarterly: [
     '업종별 리스크 관리 전략',
     '가족법인 설립 실무',
     '해외 투자 진출 가이드',
+    '가족신탁과 자산보전 전략',
   ],
   annual: [
     '패밀리오피스 트렌드 분석',
     '차세대 승계 전략 수립',
     '글로벌 자산 배분 전략',
+    '고액자산가 통합자산관리 마스터클래스',
   ],
 };
 
@@ -239,5 +269,32 @@ export const ASSET_PROGRAMS: SpecialProgram[] = [
     place: '각 지역별 주요 골프CC',
     target: 'VIP 고객',
     freq: '운영 사업부별 연 1회',
+  },
+  {
+    title: '개인자산가 전용 패밀리오피스 아카데미',
+    subtitle: '30억+ 고액자산가를 위한 통합자산관리 교육',
+    desc: '개인자산 30억원 이상의 고액자산가를 위한 전문 교육 과정입니다. 가족신탁, 상속세 최적화, 해외자산 관리, 프라이빗 뱅킹 등 고액자산가만의 특별한 니즈에 맞춘 체계적인 교육을 제공합니다.',
+    place: '서울 프리미엄 세미나룸',
+    target: '개인자산 30억원 이상 고액자산가',
+    freq: '연 2회',
+    href: '/program/private-wealth-academy',
+  },
+  {
+    title: '가족신탁 설립 마스터클래스',
+    subtitle: '고액자산가를 위한 Family Trust 전문 과정',
+    desc: '가족자산의 체계적 보전과 승계를 위한 가족신탁 설립 전문 교육입니다. 신탁 구조 설계, 세무 최적화, 수익자 관리, 운영 실무까지 가족신탁의 모든 것을 다루는 고급 과정입니다.',
+    place: '서울 세미나룸',
+    target: '자산보전 및 승계 계획이 있는 고액자산가',
+    freq: '분기 1회',
+    href: '/program/family-trust-masterclass',
+  },
+  {
+    title: '글로벌 자산배분 전략 세미나',
+    subtitle: '해외투자 및 국제 자산관리 전문 과정',
+    desc: '국내 자산만으로는 한계가 있는 고액자산가를 위한 글로벌 자산배분 전략 교육입니다. 해외 부동산, 프라이빗 에쿼티, 헤지펀드 등 다양한 대체투자 기회와 리스크 관리 방법을 제공합니다.',
+    place: '서울 세미나룸 및 해외 현지',
+    target: '해외투자에 관심있는 고액자산가',
+    freq: '반기 1회',
+    href: '/program/global-asset-allocation',
   },
 ];

@@ -59,6 +59,20 @@ const CONTENT_CATALOG: ContentItem[] = [
     performance_score: 85
   },
   {
+    id: 'private-wealth-management-2024',
+    title: '개인자산 30억+ 맞춤 자산관리 전략',
+    type: 'whitepaper',
+    category: 'asset_management',
+    description: '고액자산가를 위한 체계적인 개인자산관리 및 상속세 최적화 방안',
+    url: '/resources/private-wealth-management-2024.pdf',
+    tags: ['개인자산관리', '상속세최적화', '자산배분', '고액자산가'],
+    target_audience: ['고액자산가', '개인자산30억이상', '자산가'],
+    difficulty_level: 'advanced',
+    reading_time_minutes: 50,
+    created_at: '2024-01-20T00:00:00Z',
+    performance_score: 88
+  },
+  {
     id: 'asset-diversification-strategy',
     title: '자산배분 다각화 전략',
     type: 'blog_post',
@@ -127,6 +141,48 @@ const CONTENT_CATALOG: ContentItem[] = [
     reading_time_minutes: 15,
     created_at: '2024-02-20T00:00:00Z',
     performance_score: 83
+  },
+  {
+    id: 'inheritance-tax-optimization-guide',
+    title: '상속세 50% 절약하는 실전 가이드',
+    type: 'guide',
+    category: 'tax_strategy',
+    description: '고액자산가를 위한 상속세 최적화 및 절세 전략 완전 해부',
+    url: '/guides/inheritance-tax-optimization',
+    tags: ['상속세절약', '증여세', '상속계획', '절세전략'],
+    target_audience: ['고액자산가', '개인자산30억이상', '자산가가족'],
+    difficulty_level: 'advanced',
+    reading_time_minutes: 35,
+    created_at: '2024-02-25T00:00:00Z',
+    performance_score: 91
+  },
+  {
+    id: 'family-trust-setup-guide',
+    title: '가족신탁 설립 완전 가이드',
+    type: 'whitepaper',
+    category: 'succession_planning',
+    description: '고액자산가를 위한 가족신탁(Family Trust) 설립 및 운영 전략',
+    url: '/resources/family-trust-setup-guide.pdf',
+    tags: ['가족신탁', '자산보전', '상속계획', '세무효율성'],
+    target_audience: ['고액자산가', '자산가', '다음세대준비'],
+    difficulty_level: 'advanced',
+    reading_time_minutes: 40,
+    created_at: '2024-03-01T00:00:00Z',
+    performance_score: 89
+  },
+  {
+    id: 'private-wealth-webinar-series',
+    title: '개인자산가 전용 웨비나 시리즈',
+    type: 'webinar',
+    category: 'education',
+    description: '월 1회 진행되는 고액자산가 전용 자산관리 실무 웨비나',
+    url: '/webinars/private-wealth-series',
+    tags: ['개인자산관리', '고액자산가교육', '웨비나', '실무'],
+    target_audience: ['고액자산가', '자산가', '개인자산30억이상'],
+    difficulty_level: 'intermediate',
+    reading_time_minutes: 60,
+    created_at: '2024-03-05T00:00:00Z',
+    performance_score: 87
   },
 ];
 

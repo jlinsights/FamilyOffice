@@ -54,14 +54,14 @@ export const HeroSection = memo(function HeroSection() {
           className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground mb-4 sm:mb-6 lg:mb-8 animate-slide-up"
           style={{ animationDelay: '200ms' }}
         >
-          기업의 가치를 다음 세대로
+          성공한 기업가·자산가를 위한 전용 솔루션
         </p>
 
         <p
           className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto animate-slide-up leading-relaxed"
           style={{ animationDelay: '300ms' }}
         >
-          성공적인 가업승계는 百年永續의 시작입니다
+          가업승계부터 개인자산관리까지, 百年永續의 기반을 함께 구축합니다
         </p>
 
         {/* 핵심 성과 지표 */}
@@ -116,17 +116,17 @@ export const HeroSection = memo(function HeroSection() {
           <div className="text-center">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-orange-600 dark:text-orange-400 mb-2 lg:mb-3">
               <AnimatedCounter
-                end={88}
-                suffix="%"
+                end={30}
+                suffix="억+"
                 startAnimation={startAnimation}
                 duration={1800}
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">
-              법인 CEO
+              개인자산 관리
               <br className="hidden sm:inline" />
-              <span className="sm:hidden"> </span>고정자산 비중
+              <span className="sm:hidden"> </span>최소 기준
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ export const HeroSection = memo(function HeroSection() {
               });
             }}
           >
-            헤리티지 플래닝 알아보기
+            통합 자산관리 솔루션 알아보기
           </Button>
         </div>
 

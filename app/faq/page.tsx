@@ -5,22 +5,24 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { HelpCircle, FileText, Users, Shield, Calculator, Building } from 'lucide-react';
+import { HelpCircle, FileText, Users, Shield, Calculator, Building, Wallet } from 'lucide-react';
 import Link from 'next/link';
 import { StructuredData } from '@/components/structured-data';
 
 export const metadata: Metadata = generateMetadata(
-  '자주 묻는 질문 | 패밀리오피스·가업승계·법인보험 완벽 가이드',
-  '패밀리오피스, 가업승계, 상속증여, 기업인증, 정책자금, 법인보험까지. 중소중견기업 CEO가 가장 많이 묻는 질문과 전문가 답변. 삼성생명 GFC가 제공하는 명쾌한 해답.',
+  '자주 묻는 질문 | 패밀리오피스·가업승계·개인자산관리 완벽 가이드',
+  '패밀리오피스, 가업승계, 상속증여, 개인자산관리, 가족신탁, 법인보험까지. 성공한 기업가와 개인자산 30억+ 고액자산가가 가장 많이 묻는 질문과 전문가 답변. 맞춤형 통합자산관리 솔루션.',
   [
     '패밀리오피스 FAQ',
     '가업승계 질문',
     '상속증여 상담',
-    '기업인증 방법',
-    '정책자금 신청',
+    '개인자산관리',
+    '고액자산가 자산관리',
+    '개인자산 30억 이상',
+    '가족신탁 설립',
     '법인보험 가입',
     '중대재해처벌법 대응',
-    '삼성생명 GFC',
+    '자산가 상속계획',
   ]
 );
 
@@ -52,11 +54,34 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: '어느 정도 자산이 있어야 패밀리오피스가 필요한가요?',
-        answer: '일반적으로 순자산 50억원 이상부터 패밀리오피스 설립을 권장합니다. 다만 가업승계 준비, 복잡한 세무구조, 해외자산 보유 등 특별한 니즈가 있다면 더 적은 규모에서도 충분한 효용이 있습니다.'
+        answer: '기업자산의 경우 순자산 50억원 이상, 개인자산의 경우 30억원 이상부터 패밀리오피스 서비스를 권장합니다. 다만 가업승계 준비, 복잡한 세무구조, 해외자산 보유 등 특별한 니즈가 있다면 더 적은 규모에서도 충분한 효용이 있습니다.'
       },
       {
         question: '싱글 패밀리오피스와 멀티 패밀리오피스의 차이는?',
         answer: '싱글 패밀리오피스(SFO)는 단일 가문 전용으로 완전한 맞춤형 서비스와 절대적 기밀성을 제공합니다. 멀티 패밀리오피스(MFO)는 여러 가문이 공동으로 이용하여 비용 효율적이며 전문가 네트워크를 공유할 수 있습니다.'
+      }
+    ]
+  },
+  {
+    id: 'private-wealth',
+    title: '개인자산관리',
+    icon: <Wallet className="h-5 w-5" />,
+    items: [
+      {
+        question: '개인자산 30억 이상일 때 어떤 서비스를 받을 수 있나요?',
+        answer: '개인자산 30억원 이상의 고액자산가를 위한 전문 서비스로 가족신탁 설립, 상속세 최적화, 해외자산 관리, 프라이빗 뱅킹, 대체투자 자문 등 VVIP 맞춤형 통합자산관리 서비스를 제공합니다.'
+      },
+      {
+        question: '가족신탁이란 무엇이고 언제 필요한가요?',
+        answer: '가족신탁은 자산을 신탁회사에 맡겨 가족 구성원을 위해 관리·운용하는 제도입니다. 상속세 절감, 자산보전, 차세대 교육 등이 목적일 때 설립하며, 개인자산 30억원 이상에서 효율적입니다.'
+      },
+      {
+        question: '개인자산가도 상속세 절세가 가능한가요?',
+        answer: '네, 매우 효과적입니다. 가족신탁, 증여세 과세특례, 부동산 절세 구조, 해외자산 배치 등을 통해 상속세를 30~50% 절감할 수 있습니다. 사전 계획이 핵심이므로 조기 상담을 권합니다.'
+      },
+      {
+        question: '해외자산 관리 시 주의사항은?',
+        answer: '해외자산은 국내 신고 의무가 있으며, 상속세 과세 대상입니다. CRS 자동정보교환으로 투명성이 높아졌으므로 합법적인 절세 구조와 체계적인 관리가 필요합니다.'
       }
     ]
   },
@@ -208,8 +233,8 @@ export default function FAQPage() {
               자주 묻는 질문
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              패밀리오피스부터 가업승계, 법인보험까지<br />
-              CEO님들이 가장 궁금해하는 모든 것
+              패밀리오피스부터 가업승계, 개인자산관리, 법인보험까지<br />
+              성공한 기업가와 고액자산가가 가장 궁금해하는 모든 것
             </p>
             <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
               <HelpCircle className="h-5 w-5" />
@@ -224,7 +249,7 @@ export default function FAQPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <Tabs defaultValue="family-office" className="w-full">
-              <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto">
+              <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 h-auto">
                 {faqCategories.map((category) => (
                   <TabsTrigger
                     key={category.id}

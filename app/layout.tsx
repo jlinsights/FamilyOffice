@@ -22,10 +22,10 @@ const inter = Inter({ subsets: ['latin'] });
 // SuperClaude 통합 SEO 프레임워크 적용
 export const metadata: Metadata = {
   title: {
-    default: 'FamilyOffice S - 가업승계·자산관리 전문 플랫폼',
+    default: 'FamilyOffice S - 성공한 기업가·자산가를 위한 가업승계·자산관리 전문 플랫폼',
     template: '%s | FamilyOffice S',
   },
-  description: '【9개 분야 42개 전문 솔루션】 법인보험 × 가업승계 통합솔루션 | 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너',
+  description: '【성공한 기업가·고액자산가 전용】 법인보험 × 가업승계 통합솔루션 | 개인자산 30억+ 맞춤 설계 | 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너',
   icons: {
     icon: [
       { url: '/favicon.ico?v=2025', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     }
   },
   generator: 'Next.js',
-  applicationName: 'FamilyOffice S - 법인보험 가업승계 통합솔루션',
+  applicationName: 'FamilyOffice S - 성공한 기업가·자산가를 위한 법인보험 가업승계 통합솔루션',
   referrer: 'origin-when-cross-origin',
   creator: 'FamilyOffice S',
   publisher: 'FamilyOffice S - 프리미엄 법인금융 서비스'
@@ -100,11 +100,11 @@ export default function RootLayout({
         <meta name="ICBM" content="37.5665, 126.9780" />
         
         {/* 네이버/다음 SEO */}
-        <meta name="subject" content="패밀리오피스 가업승계 자산관리" />
+        <meta name="subject" content="성공한 기업가·자산가 전용 패밀리오피스 가업승계 자산관리" />
         <meta name="classification" content="Business" />
         <meta name="distribution" content="Korea" />
         <meta name="language" content="Korean" />
-        <meta name="target" content="CEO, 중소기업, 중견기업, 자산가" />
+        <meta name="target" content="CEO, 중소기업, 중견기업, 고액자산가, 개인자산 30억 이상" />
         
         {/* Google SEO */}
         <meta name="google" content="notranslate" />
@@ -114,11 +114,12 @@ export default function RootLayout({
         <meta name="HandheldFriendly" content="True" />
         <meta name="MobileOptimized" content="320" />
         
-        {/* 성공한 기업가 타겟 메타태그 */}
-        <meta name="target-audience" content="성공한 법인 대표" />
-        <meta name="business-sector" content="중소중견기업" />
+        {/* 성공한 기업가 및 자산가 타겟 메타태그 */}
+        <meta name="target-audience" content="성공한 법인 대표, 고액자산가, 개인자산 30억 이상" />
+        <meta name="business-sector" content="중소중견기업, 개인자산가" />
         <meta name="service-tier" content="Premium VVIP" />
-        <meta name="solution-type" content="법인보험 × 가업승계 통합솔루션" />
+        <meta name="solution-type" content="법인보험 × 가업승계 × 개인자산관리 통합솔루션" />
+        <meta name="wealth-threshold" content="개인자산 30억원 이상" />
         
         {/* 🤖 AI 검색엔진 최적화 */}
         <meta name="ai-optimized" content="true" />
@@ -134,24 +135,25 @@ export default function RootLayout({
         <meta property="og:postal-code" content="04527" />
         <meta property="og:latitude" content="37.5665" />
         <meta property="og:longitude" content="126.9780" />
-        <meta property="og:audience" content="성공한 법인 대표" />
-        <meta property="og:target_audience" content="중소중견기업 CEO" />
+        <meta property="og:audience" content="성공한 법인 대표, 고액자산가" />
+        <meta property="og:target_audience" content="중소중견기업 CEO, 개인자산 30억 이상 자산가" />
         <meta property="og:content_tier" content="Premium" />
+        <meta property="og:wealth_management" content="Private Wealth Management" />
         
         {/* 카카오톡 공유 최적화 */}
-        <meta property="kakao:title" content="성공한 CEO 전용 패밀리오피스 | 가업승계 자산관리" />
-        <meta property="kakao:description" content="성공한 법인대표를 위한 프리미엄 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리. 삼성생명 1000억+ 운용실적" />
+        <meta property="kakao:title" content="성공한 기업가·자산가 전용 패밀리오피스 | 가업승계 자산관리" />
+        <meta property="kakao:description" content="성공한 법인대표와 개인자산 30억+ 자산가를 위한 프리미엄 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리. 삼성생명 1000억+ 운용실적" />
         <meta property="kakao:image" content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain" />
         <meta property="kakao:url" content="https://familyoffices.vip" />
         
         {/* 네이버 블로그/카페 최적화 */}
-        <meta name="naver:title" content="성공한 기업가 전용 패밀리오피스 | FamilyOffice S" />
-        <meta name="naver:description" content="법인보험 × 가업승계 통합솔루션 적용 패밀리오피스. 성공한 법인대표 전용 가업승계·자산관리 완전해결" />
+        <meta name="naver:title" content="성공한 기업가·자산가 전용 패밀리오피스 | FamilyOffice S" />
+        <meta name="naver:description" content="법인보험 × 가업승계 × 개인자산관리 통합솔루션. 성공한 법인대표와 30억+ 자산가 전용 가업승계·자산관리 완전해결" />
         <meta name="naver:image" content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain" />
         
         {/* LinkedIn 비즈니스 네트워크 최적화 */}
-        <meta property="linkedin:title" content="성공한 CEO를 위한 패밀리오피스 | 가업승계 전문" />
-        <meta property="linkedin:description" content="중소중견기업 CEO 전용 프리미엄 자산관리. 가업승계부터 세무최적화까지 원스톱 솔루션" />
+        <meta property="linkedin:title" content="성공한 기업가·자산가를 위한 패밀리오피스 | 가업승계 전문" />
+        <meta property="linkedin:description" content="중소중견기업 CEO와 개인자산 30억+ 자산가 전용 프리미엄 자산관리. 가업승계부터 세무최적화까지 원스톱 솔루션" />
         <meta property="linkedin:image" content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain" />
         
         {/* 지역 비즈니스 신뢰성 향상 */}
@@ -174,8 +176,8 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FinancialService",
-              "name": "성공한 CEO 전용 패밀리오피스 FamilyOffice S",
-              "description": "법인보험 × 가업승계 통합솔루션 기반 성공한 법인대표 전용 패밀리오피스. 가업승계·승계세무 완전해결, 기업가 맞춤 자산관리, 삼성생명 1000억+ 운용실적",
+              "name": "성공한 기업가·자산가 전용 패밀리오피스 FamilyOffice S",
+              "description": "법인보험 × 가업승계 × 개인자산관리 통합솔루션. 성공한 법인대표와 개인자산 30억+ 자산가 전용 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리, 삼성생명 1000억+ 운용실적",
               "url": "https://familyoffices.vip",
               "telephone": "+82-502-5550-8700",
               "address": {
@@ -204,7 +206,7 @@ export default function RootLayout({
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "법인보험 × 가업승계 통합솔루션 맞춤 서비스",
+                "name": "법인보험 × 가업승계 × 개인자산관리 통합솔루션",
                 "itemListElement": [
                   {
                     "@type": "Offer",
@@ -308,6 +310,22 @@ export default function RootLayout({
                     "@type": "Answer",
                     "text": "1) 기업자산과 개인자산 분리 관리, 2) 글로벌 분산투자 포트폴리오, 3) 세금 효율적 구조 설계, 4) 차세대 교육과 승계 준비가 핵심입니다. 우리는 VVIP 고객들의 성공 패턴을 분석하여 맞춤 전략을 제공합니다."
                   }
+                },
+                {
+                  "@type": "Question",
+                  "name": "개인자산 30억 이상 자산가도 패밀리오피스가 필요한가요?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "개인자산 30억 이상 고액자산가에게는 패밀리오피스가 필수입니다. 상속세 최적화, 글로벌 분산투자, 차세대 교육, 자산 보전 전략 등 복합적인 서비스가 필요하기 때문입니다. 특히 상속세율 50%를 고려하면 전문적인 세무설계가 매우 중요합니다."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "자산가를 위한 상속세 절약 방법은 무엇인가요?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "1) 생전증여를 통한 단계적 재산이전, 2) 가족신탁(Family Trust) 설립, 3) 증여세 비과세 한도 최대 활용, 4) 부동산 공시가격 대비 실거래가 차이 활용, 5) 생명보험을 통한 상속세 납부자금 준비가 핵심입니다. 자산 규모별 맞춤 전략을 제공합니다."
+                  }
                 }
               ]
             })
@@ -338,9 +356,19 @@ export default function RootLayout({
                   "@type": "Thing",
                   "name": "성공한 CEO 가업승계",
                   "sameAs": "https://familyoffices.vip/program"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "고액자산가 전용 자산관리",
+                  "description": "개인자산 30억원 이상 자산가 맞춤 솔루션"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "자산가 상속세 최적화",
+                  "description": "개인자산 상속세 절약 및 세무설계"
                 }
               ],
-              "keywords": "성공한 CEO, 기업가, 경영진, 가업승계, 자산관리, VVIP, 패밀리오피스",
+              "keywords": "성공한 CEO, 기업가, 경영진, 고액자산가, 개인자산 30억, 가업승계, 자산관리, 상속세 최적화, VVIP, 패밀리오피스",
               "inLanguage": "ko-KR",
               "isPartOf": {
                 "@type": "WebSite",

@@ -89,11 +89,11 @@ const ServicePageContent = () => {
               className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
               style={{ animationDelay: '300ms' }}
             >
-              중소중견기업 CEO와 고액자산가를 위한 맞춤형 솔루션으로{' '}
+              성공한 기업가와 개인자산 30억+ 자산가를 위한 맞춤형 솔루션으로{' '}
               <span className="font-semibold text-primary">
-                가업승계부터 자산관리까지
+                가업승계부터 개인자산관리까지
               </span>{' '}
-              토탈 솔루션을 제공합니다
+              통합 자산관리 솔루션을 제공합니다
             </p>
 
             <div
@@ -129,15 +129,15 @@ const ServicePageContent = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
                 {
-                  value: 500,
+                  value: 1000,
                   suffix: '억원+',
-                  label: '자산관리 실적',
+                  label: '통합자산 관리실적',
                   color: 'text-blue-600 dark:text-blue-400',
                 },
                 {
-                  value: 98,
-                  suffix: '%',
-                  label: '고객 만족도',
+                  value: 30,
+                  suffix: '억+',
+                  label: '개인자산 관리기준',
                   color: 'text-green-600 dark:text-green-400',
                 },
                 {
@@ -147,9 +147,9 @@ const ServicePageContent = () => {
                   color: 'text-purple-600 dark:text-purple-400',
                 },
                 {
-                  value: 500,
+                  value: 800,
                   suffix: '+',
-                  label: '법인 고객',
+                  label: '기업·자산가 고객',
                   color: 'text-orange-600 dark:text-orange-400',
                 },
               ].map((stat, index) => (
@@ -249,7 +249,7 @@ const ServicePageContent = () => {
                 <span className="text-primary">{totalCategories}개 분야</span> {totalServices}개 전문 솔루션
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                중소중견기업 CEO를 위한 <span className="font-bold text-primary">체계화된 전문 솔루션</span>으로 맞춤형 컨설팅을 제공합니다
+                성공한 기업가와 고액자산가를 위한 <span className="font-bold text-primary">체계화된 전문 솔루션</span>으로 맞춤형 통합 자산관리 컨설팅을 제공합니다
               </p>
               
               {/* Success Rate Indicators */}
@@ -549,8 +549,8 @@ const ServicePageContent = () => {
                   answer: "프로젝트 복잡도에 따라 4-12주 소요됩니다. 현황진단(1-2주) → 전략수립(2-3주) → 실행계획(1-2주) → 사후관리(지속적) 순으로 진행됩니다."
                 },
                 {
-                  question: "어떤 기업이 서비스를 받을 수 있나요?",
-                  answer: "매출 10억 이상의 중소중견기업, 자산 50억 이상의 고액자산가, 가업승계를 준비하는 기업가분들께 최적화된 서비스를 제공합니다."
+                  question: "어떤 분들이 서비스를 받을 수 있나요?",
+                  answer: "매출 10억 이상의 중소중견기업 CEO, 개인자산 30억 이상의 고액자산가, 가업승계를 준비하는 성공한 기업가분들께 최적화된 통합 자산관리 서비스를 제공합니다."
                 },
                 {
                   question: "실제 절세 효과는 어느 정도인가요?",

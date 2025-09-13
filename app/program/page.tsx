@@ -26,11 +26,11 @@ import {
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 export const metadata: Metadata = {
-  title: '프로그램 | 중소중견기업 대표 프리미엄 프로그램 안내',
+  title: '프로그램 | 성공한 기업가·자산가 전용 프리미엄 프로그램 안내',
   description:
-    '중소중견기업 대표를 위한 프리미엄 프로그램. 네트워킹, 투자, 승계, 교육 등 다양한 맞춤형 혜택 제공.',
+    '성공한 기업가와 개인자산 30억+ 고액자산가를 위한 프리미엄 프로그램. 네트워킹, 투자, 승계, 자산관리, 가족신탁 등 다양한 맞춤형 혜택 제공.',
   keywords:
-    '프로그램, 중소중견기업 네트워킹, 경영진 모임, 투자 정보, 승계 전략, 패밀리오피스 교육',
+    '프로그램, 기업가 네트워킹, 고액자산가 모임, 자산가 교육, 개인자산 30억 이상, 패밀리오피스 프로그램, 상속계획, 가족신탁, 자산관리 교육, VIP 자산가 모임',
 };
 
 // Disable static generation for this page
@@ -55,14 +55,14 @@ function HeroSection() {
           </Badge>
         </div>
         <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-          중소중견기업{'\n'}CEO들만의{'\n'}
+          성공한 기업가·{'\n'}자산가들만의{'\n'}
           <span className="text-foreground">특별한 공간</span>
         </h1>
         <p
           className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
           style={{ animationDelay: '200ms' }}
         >
-          프리미엄 네트워킹 & 자산관리 클럽
+          프리미엄 네트워킹 & 통합자산관리 클럽
         </p>
 
         <p
@@ -70,10 +70,10 @@ function HeroSection() {
           style={{ animationDelay: '300ms' }}
         >
           검증된{' '}
-          <span className="font-semibold text-primary">500+ 법인 대표님들</span>
-          과 함께하는 특별한 공간에서
+          <span className="font-semibold text-primary">500+ 기업가와 개인자산 30억+ 자산가</span>
+          가 함께하는 특별한 공간에서
           <br />
-          최고의 네트워킹과 전문 자산관리 서비스를 경험하세요
+          최고의 네트워킹과 전문 통합자산관리 서비스를 경험하세요
         </p>
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"

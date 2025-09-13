@@ -83,8 +83,8 @@ export default function AboutPage() {
             </div>
 
             <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 text-primary whitespace-pre-line animate-slide-up">
-              중소중견기업의{'\n'}
-              <span className="text-foreground">성공적인 자산관리</span>
+              성공한 기업가·자산가의{'\n'}
+              <span className="text-foreground">통합자산관리</span>
               {'\n'}파트너
             </h1>
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
               className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-4 sm:mb-6 animate-slide-up"
               style={{ animationDelay: '200ms' }}
             >
-              중소중견기업 전문 자산관리
+              기업가·자산가 전문 통합자산관리
             </p>
 
             <p 
@@ -100,11 +100,11 @@ export default function AboutPage() {
               style={{ animationDelay: '300ms' }}
             >
               <span className="font-semibold text-foreground">
-                법인 대표님을 위한 전문적인 자산관리
-              </span>{' '}
-              및{' '}
+                성공한 기업가와 개인자산 30억+ 고액자산가
+              </span>
+              를 위한{' '}
               <span className="font-semibold text-primary">
-                가업승계 설계 서비스
+                통합자산관리 및 가업승계 설계 서비스
               </span>
               를 제공합니다
             </p>
@@ -175,8 +175,8 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
-                  label: '자산관리 실적',
-                  value: 500,
+                  label: '통합자산 관리실적',
+                  value: 1000,
                   suffix: '억원+',
                   icon: (
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,7 +185,7 @@ export default function AboutPage() {
                   ),
                 },
                 {
-                  label: '법인 대표 만족도',
+                  label: '고객 만족도',
                   value: 98,
                   suffix: '%',
                   icon: (
@@ -195,8 +195,8 @@ export default function AboutPage() {
                   ),
                 },
                 {
-                  label: '법인 고객사',
-                  value: 500,
+                  label: '기업가·자산가 고객',
+                  value: 800,
                   suffix: '+',
                   icon: (
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,7 +205,7 @@ export default function AboutPage() {
                   ),
                 },
                 {
-                  label: '중소중견기업 전문경험',
+                  label: '자산관리 전문경험',
                   value: 20,
                   suffix: '년+',
                   icon: (
@@ -269,19 +269,19 @@ export default function AboutPage() {
                 {
                   icon: <Users className="h-8 w-8" />,
                   title: '전문성과 경험',
-                  description: '20년 이상의 중소중견기업 전문 경험을 바탕으로 최적의 자산관리 솔루션을 제공합니다.',
+                  description: '20년 이상의 기업가와 고액자산가 전문 경험을 바탕으로 최적의 통합자산관리 솔루션을 제공합니다.',
                   features: [
-                    '중소중견기업 특화 노하우',
-                    '업종별 맞춤 전략',
+                    '기업가·자산가 특화 노하우',
+                    '자산규모별 맞춤 전략',
                     '지속적인 전문가 교육',
                   ],
                 },
                 {
                   icon: <Target className="h-8 w-8" />,
                   title: '맞춤형 서비스',
-                  description: '획일화된 서비스가 아닌, 각 기업의 특성과 목표에 맞는 개별화된 서비스를 제공합니다.',
+                  description: '획일화된 서비스가 아닌, 각 고객의 자산 특성과 목표에 맞는 개별화된 서비스를 제공합니다.',
                   features: [
-                    '개별 기업 분석',
+                    '개별 자산 구조 분석',
                     '맞춤형 포트폴리오 구성',
                     '전담 전문가 배정',
                   ],
@@ -450,10 +450,10 @@ export default function AboutPage() {
                   Contact Us
                 </Badge>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 mt-4">
-                  중소중견기업 전문 자산관리 상담
+                  성공한 기업가·자산가 전문 상담
                 </h3>
                 <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  귀하의 기업에 최적화된 자산관리 전략을 함께 설계해보세요.<br />
+                  귀하의 기업과 개인자산에 최적화된 통합자산관리 전략을 함께 설계해보세요.<br />
                   전문 상담사가 맞춤형 답변을 제공해드립니다.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
