@@ -15,6 +15,8 @@ import { WebVitalsTracker } from '@/components/web-vitals-tracker';
 import { ChannelTalk } from '@/components/channel-talk';
 import { DebugStyles } from './debug-styles';
 import { PreloadCriticalResources } from '@/components/preload-critical-resources';
+import { OrganizationStructuredData } from '@/components/seo/structured-data';
+import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
 
 // import { defaultMetadata } from '@/lib/seo';
 
@@ -410,6 +412,18 @@ export default function RootLayout({
             />
             <ExternalScripts />
             <DebugStyles />
+            {/* SEO 구조화 데이터 */}
+            <OrganizationStructuredData />
+            
+            {/* SEO 성과 추적 시스템 */}
+            <SEOTrackerInit 
+              config={{
+                gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+                customDomain: 'familyoffices.vip',
+                trackingEnabled: process.env.NODE_ENV === 'production',
+                reportingInterval: 'daily'
+              }}
+            />
             
             {/* 사용자 행동 추적 스크립트 */}
             <script

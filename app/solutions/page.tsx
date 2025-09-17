@@ -16,11 +16,15 @@ import { AnimatedCounter } from '@/components/animated-counter';
 import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
+import { ContentOptimizer } from '@/components/seo/content-optimizer';
 
 import { SERVICE_CATEGORIES, SEO_PAGE_MAPPING, getServiceStats } from '@/constants/services';
 import { generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/structured-data';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
+import { generateInternalLinks } from '@/lib/seo/content-optimizer';
+import { KEYWORD_CLUSTERS } from '@/lib/seo/keyword-strategy';
 
 const ServicePageContent = () => {
   const [startAnimation, setStartAnimation] = React.useState(false);
@@ -29,6 +33,19 @@ const ServicePageContent = () => {
   
   // 서비스 통계 정보 동적 계산
   const { totalCategories, totalServices } = getServiceStats();
+  
+  // SEO 최적화된 페이지 컨텐츠
+  const pageContent = React.useMemo(() => {
+    const baseContent = `
+      프리미엄 자산관리 솔루션. 성공한 기업가와 개인자산 30억+ 자산가를 위한 맞춤형 패밀리오피스 서비스.
+      가업승계부터 개인자산관리까지 통합 자산관리 솔루션. 포트폴리오 관리, 투자자문, 세무 컨설팅, 보험설계까지 원스톱 서비스.
+      삼성생명 1000억+ 운용실적을 바탕으로 한 맞춤형 자산관리 솔루션. 중견기업 CEO와 고액자산가 전용 프리미엄 패밀리오피스.
+      기업승계 전략, 세무최적화, 리스크관리를 통한 체계적인 자산관리. ${totalCategories}개 분야 ${totalServices}개 전문 솔루션 제공.
+      성공률 98%, 평균 절세 40%, 완료 프로젝트 500+ 실적. 20년 경력의 전문가들이 검증된 프로세스로 최적의 솔루션 제공.
+    `;
+    
+    return generateInternalLinks(baseContent, '/solutions');
+  }, [totalCategories, totalServices]);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -62,6 +79,13 @@ const ServicePageContent = () => {
       <Header />
 
       <main className="pt-20">
+        {/* 브레드크럼 네비게이션 */}
+        <div className="container mx-auto px-6 py-4">
+          <BreadcrumbNavigation customItems={[
+            { name: '홈', url: 'https://familyoffices.vip' },
+            { name: '솔루션', url: 'https://familyoffices.vip/solutions', isCurrentPage: true }
+          ]} />
+        </div>
         {/* Hero Section */}
         <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
@@ -75,25 +99,25 @@ const ServicePageContent = () => {
             </div>
 
             <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 text-primary whitespace-pre-line animate-slide-up">
-              프리미엄 자산관리{'\n'}솔루션
+              프리미엄 <strong>자산관리 솔루션</strong>{'\n'}<span className="text-blue-600">패밀리오피스</span>
             </h1>
 
             <p
               className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-4 sm:mb-6 animate-slide-up"
               style={{ animationDelay: '200ms' }}
             >
-              당신의 성공을 다음 세대까지
+              <strong>개인자산 30억+ 고액자산가</strong> 전용 솔루션
             </p>
 
             <p
               className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
               style={{ animationDelay: '300ms' }}
             >
-              성공한 기업가와 개인자산 30억+ 자산가를 위한 맞춤형 솔루션으로{' '}
+              <strong>중견기업 CEO</strong>와 <strong>고액자산가</strong>를 위한 맞춤형 <strong>패밀리오피스 서비스</strong>.{' '}
               <span className="font-semibold text-primary">
-                가업승계부터 개인자산관리까지
+                포트폴리오 관리, 투자자문, 세무 컨설팅, 보험설계
               </span>{' '}
-              통합 자산관리 솔루션을 제공합니다
+              까지 원스톱 <strong>자산관리 솔루션</strong>을 제공합니다
             </p>
 
             <div
@@ -101,7 +125,7 @@ const ServicePageContent = () => {
               style={{ animationDelay: '400ms' }}
             >
               <CalComPopup
-                buttonText="무료 상담 신청"
+                buttonText="무료 자산관리 상담"
                 variant="default"
                 size="lg"
                 className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
@@ -119,10 +143,10 @@ const ServicePageContent = () => {
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">신뢰할 수 있는</span> 파트너
+                <span className="text-primary">삼성생명 프리미엄</span> 패밀리오피스 파트너
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                수치로 확인하는 전문성과 신뢰도
+                <strong>1000억+ 자산관리 실적</strong>과 <strong>20년+ 전문 경력</strong>으로 검증된 신뢰성
               </p>
             </div>
 
@@ -246,10 +270,10 @@ const ServicePageContent = () => {
                 </Badge>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">{totalCategories}개 분야</span> {totalServices}개 전문 솔루션
+                <span className="text-primary">{totalCategories}개 분야</span> {totalServices}개 프리미엄 <strong>자산관리 서비스</strong>
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                성공한 기업가와 고액자산가를 위한 <span className="font-bold text-primary">체계화된 전문 솔루션</span>으로 맞춤형 통합 자산관리 컨설팅을 제공합니다
+                <strong>개인자산 30억+ 고액자산가</strong>와 <strong>중견기업 CEO</strong>를 위한 <span className="font-bold text-primary">맞춤형 패밀리오피스 솔루션</span>. 포트폴리오 관리부터 세무최적화까지 통합 <strong>자산관리 컨설팅</strong>을 제공합니다
               </p>
               
               {/* Success Rate Indicators */}
@@ -580,10 +604,10 @@ const ServicePageContent = () => {
         <section className="py-20 bg-gradient-to-r from-primary/5 to-primary/10">
           <div className="container mx-auto px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-              프리미엄 자산관리 상담
+              <strong>고액자산가 전용</strong> 프리미엄 자산관리 상담
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              당신의 성공적인 미래를 위한 맞춤 솔루션을 함께 설계해보세요
+              <strong>개인자산 30억+</strong> 고객님의 성공적인 미래를 위한 <strong>맞춤형 패밀리오피스 솔루션</strong>을 함께 설계해보세요
             </p>
             
             {/* Urgency Indicator */}
@@ -600,13 +624,13 @@ const ServicePageContent = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <CalComPopup
-                buttonText="무료 상담 신청"
+                buttonText="무료 자산관리 상담"
                 variant="default"
                 size="lg"
                 eventType="consultation"
                 trigger={
                   <Button size="lg" className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg">
-                    무료 상담 신청 (20분 한정)
+                    무료 자산관리 상담 (월 20분 한정)
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 }
@@ -628,6 +652,15 @@ const ServicePageContent = () => {
           </div>
         </section>
 
+        {/* SEO 컨텐츠 최적화 섹션 */}
+        <section className="py-12 bg-muted/10">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto">
+              <div className="hidden" dangerouslySetInnerHTML={{ __html: pageContent }} />
+            </div>
+          </div>
+        </section>
+        
         {/* Multimedia Content Section */}
         <CompactMultimediaSection />
       </main>
