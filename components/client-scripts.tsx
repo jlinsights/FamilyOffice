@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 declare global {
   interface Window {
     hbspt?: any;
-    dataLayer?: any[];
+    dataLayer: any[];
   }
 }
 

@@ -45,7 +45,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
           alt: config.title,
         }
       ],
-      type: config.openGraph?.type || 'website',
+      type: (config.openGraph?.type as any) || 'website',
       locale: 'ko_KR',
     },
 
@@ -328,13 +328,13 @@ export function generatePageMetadata(
   const config = PAGE_SEO_CONFIGS[pageKey] || PAGE_SEO_CONFIGS.home;
   
   // 커스텀 데이터와 병합
-  const finalConfig: SEOConfig = {
+  const finalConfig = {
     ...config,
     ...customData,
-    keywords: [...config.keywords, ...(customData?.keywords || [])],
+    keywords: [...(config?.keywords || []), ...(customData?.keywords || [])],
   };
 
-  return generateMetadata(finalConfig);
+  return generateMetadata(finalConfig as SEOConfig);
 }
 
 export default {

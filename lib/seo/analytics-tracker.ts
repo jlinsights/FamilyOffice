@@ -194,20 +194,25 @@ export class SEOAnalyticsTracker {
       const entries = entryList.getEntries();
       const lastEntry = entries[entries.length - 1];
       
-      this.trackEvent('core_web_vital_lcp', {
-        value: lastEntry.startTime,
-        rating: this.getRating(lastEntry.startTime, [2500, 4000])
-      });
+      if (lastEntry) {
+        this.trackEvent('core_web_vital_lcp', {
+          value: lastEntry.startTime,
+          rating: this.getRating(lastEntry.startTime, [2500, 4000])
+        });
+      }
     }).observe({ entryTypes: ['largest-contentful-paint'] });
 
     // FID (First Input Delay) 측정
     new PerformanceObserver((entryList) => {
       const entries = entryList.getEntries();
       entries.forEach((entry) => {
-        this.trackEvent('core_web_vital_fid', {
-          value: entry.processingStart - entry.startTime,
-          rating: this.getRating(entry.processingStart - entry.startTime, [100, 300])
-        });
+        const fidEntry = entry as any; // Type assertion for PerformanceEventTiming
+        if (fidEntry.processingStart && fidEntry.startTime) {
+          this.trackEvent('core_web_vital_fid', {
+            value: fidEntry.processingStart - fidEntry.startTime,
+            rating: this.getRating(fidEntry.processingStart - fidEntry.startTime, [100, 300])
+          });
+        }
       });
     }).observe({ entryTypes: ['first-input'] });
 
@@ -216,8 +221,9 @@ export class SEOAnalyticsTracker {
     new PerformanceObserver((entryList) => {
       const entries = entryList.getEntries();
       entries.forEach((entry) => {
-        if (!entry.hadRecentInput) {
-          clsValue += entry.value;
+        const clsEntry = entry as any; // Type assertion for PerformanceLayoutShift
+        if (!clsEntry.hadRecentInput && clsEntry.value) {
+          clsValue += clsEntry.value;
         }
       });
       
@@ -571,12 +577,10 @@ export function initializeSEOTracker(config: AnalyticsConfig): SEOAnalyticsTrack
   return tracker;
 }
 
-// 타입 확장
+// 타입 확장 - 기존 Window 확장과 충돌 방지
 declare global {
   interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
-    seoTracker: SEOAnalyticsTracker;
+    seoTracker?: SEOAnalyticsTracker;
   }
 }
 

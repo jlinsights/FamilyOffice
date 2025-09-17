@@ -23,7 +23,7 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
 
     // 기본 설정
     const defaultConfig: AnalyticsConfig = {
-      gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+      ...(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && { gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID }),
       gscPropertyUrl: 'https://familyoffices.vip',
       customDomain: 'familyoffices.vip',
       trackingEnabled: process.env.NODE_ENV === 'production',

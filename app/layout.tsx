@@ -418,7 +418,7 @@ export default function RootLayout({
             {/* SEO 성과 추적 시스템 */}
             <SEOTrackerInit 
               config={{
-                gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+                ...(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && { gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID }),
                 customDomain: 'familyoffices.vip',
                 trackingEnabled: process.env.NODE_ENV === 'production',
                 reportingInterval: 'daily'

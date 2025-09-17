@@ -164,9 +164,9 @@ function extractHeadingStructure(content: string): HeadingStructure[] {
   let match;
 
   while ((match = headingRegex.exec(content)) !== null) {
-    const level = parseInt(match[1]);
-    const id = match[2];
-    const text = match[3].trim();
+    const level = parseInt(match[1] || '1');
+    const id = match[2] || '';
+    const text = (match[3] || '').trim();
     const keywords = extractKeywordsFromText(text);
 
     headings.push({
@@ -190,11 +190,11 @@ function extractLinks(content: string): { internalLinks: InternalLink[], externa
   let match;
 
   while ((match = linkRegex.exec(content)) !== null) {
-    const url = match[1];
-    const text = match[2].trim();
-    const context = extractLinkContext(content, match.index);
+    const url = match[1] || '';
+    const text = (match[2] || '').trim();
+    const context = extractLinkContext(content, match.index || 0);
 
-    if (url.startsWith('/') || url.includes('familyoffices.vip')) {
+    if (url && (url.startsWith('/') || url.includes('familyoffices.vip'))) {
       // 내부 링크
       const relevanceScore = calculateLinkRelevance(text, context);
       internalLinks.push({
@@ -203,7 +203,7 @@ function extractLinks(content: string): { internalLinks: InternalLink[], externa
         context,
         relevanceScore
       });
-    } else {
+    } else if (url) {
       // 외부 링크
       const domain = new URL(url).hostname;
       const rel = url.includes('nofollow') ? 'nofollow' : 'follow';

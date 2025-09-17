@@ -122,7 +122,7 @@ export default async function AdminSEOPage() {
         {/* 실시간 SEO 추적 시스템 */}
         <SEOTrackerInit 
           config={{
-            gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+            ...(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && { gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID }),
             customDomain: 'familyoffices.vip',
             trackingEnabled: true,
             reportingInterval: 'daily'

@@ -187,7 +187,8 @@ function generateContentTitle(
   };
 
   const templates = titleTemplates[type];
-  return templates[Math.floor(Math.random() * templates.length)];
+  const selectedTemplate = templates[Math.floor(Math.random() * templates.length)];
+  return selectedTemplate || `${keyword} 전문 가이드`;
 }
 
 /**
@@ -291,27 +292,37 @@ export function generateContentCalendar(
     if (pattern) {
       const keyword = targetKeywords[Math.floor(Math.random() * targetKeywords.length)] || '자산관리';
       
-      calendar.push({
-        date: currentDate.toISOString().split('T')[0],
-        title: `${pattern.title}: ${keyword}`,
-        type: pattern.type,
-        status: 'planned',
-        targetKeywords: [keyword],
-        dueDate: new Date(currentDate.getTime() - 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 하루 전 마감
-      });
+      const dateString = currentDate.toISOString().split('T')[0];
+      const dueDateString = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+      
+      if (dateString && dueDateString) {
+        calendar.push({
+          date: dateString,
+          title: `${pattern.title}: ${keyword}`,
+          type: pattern.type,
+          status: 'planned',
+          targetKeywords: [keyword],
+          dueDate: dueDateString // 하루 전 마감
+        });
+      }
     }
 
     // 월별 특별 컨텐츠 확인
     const monthlyPattern = monthlyContent.find(p => p.week === weekOfMonth && dayOfWeek === 3); // 수요일
     if (monthlyPattern) {
-      calendar.push({
-        date: currentDate.toISOString().split('T')[0],
-        title: monthlyPattern.title,
-        type: monthlyPattern.type,
-        status: 'planned',
-        targetKeywords: ['패밀리오피스', '자산관리'],
-        dueDate: new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 일주일 전 마감
-      });
+      const monthlyDateString = currentDate.toISOString().split('T')[0];
+      const monthlyDueDateString = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+      
+      if (monthlyDateString && monthlyDueDateString) {
+        calendar.push({
+          date: monthlyDateString,
+          title: monthlyPattern.title,
+          type: monthlyPattern.type,
+          status: 'planned',
+          targetKeywords: ['패밀리오피스', '자산관리'],
+          dueDate: monthlyDueDateString // 일주일 전 마감
+        });
+      }
     }
 
     currentDate.setDate(currentDate.getDate() + 1);

@@ -155,9 +155,10 @@ function generateBreadcrumbItems(pathname: string, showHome: boolean): Breadcrum
     pathParts.forEach((part, index) => {
       currentPath += `/${part}`;
       
-      if (pathMapping[currentPath]) {
+      const pathName = pathMapping[currentPath];
+      if (pathName) {
         items.push({
-          name: pathMapping[currentPath],
+          name: pathName,
           url: `${baseUrl}${currentPath}`
         });
       }
@@ -170,7 +171,7 @@ function generateBreadcrumbItems(pathname: string, showHome: boolean): Breadcrum
     });
     
     const slug = pathname.split('/')[2];
-    const postTitle = getPostTitle(slug); // 실제 구현에서는 블로그 데이터에서 가져오기
+    const postTitle = slug ? getPostTitle(slug) : '블로그 포스트'; // 실제 구현에서는 블로그 데이터에서 가져오기
     
     items.push({
       name: postTitle,
