@@ -63,7 +63,7 @@ export interface Metric {
 }
 
 // API 응답 타입
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -146,7 +146,7 @@ export interface SeoProps {
 export interface AppError {
   code: string;
   message: string;
-  details?: any;
+  details?: unknown;
   timestamp: Date;
 }
 
@@ -154,7 +154,7 @@ export interface AppError {
 export interface LogEntry {
   level: 'info' | 'warn' | 'error' | 'debug';
   message: string;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
   timestamp: Date;
   userId?: string;
 }

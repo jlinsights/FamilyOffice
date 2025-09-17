@@ -109,7 +109,7 @@ function MetricCard({
   title: string;
   value: string | number;
   description: string;
-  icon: any;
+  icon: React.ElementType;
   trend?: string;
   className?: string;
 }) {

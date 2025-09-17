@@ -80,6 +80,126 @@
     font-display: swap;
   }
 
+  /* 🏛️ Family Office Premium Brand Identity */
+  /* 고급스럽고 전통적인 패밀리오피스 브랜딩 */
+  
+  /* 프리미엄 골드 그라데이션 */
+  .bg-premium-gold {
+    background: linear-gradient(135deg, 
+      #f7e7d3 0%, 
+      #e6c79a 25%, 
+      #d4a574 50%, 
+      #c8965f 75%, 
+      #b8854a 100%
+    );
+  }
+
+  /* 네이비 블루 그라데이션 */
+  .bg-premium-navy {
+    background: linear-gradient(135deg, 
+      #1e3a8a 0%, 
+      #1e40af 25%, 
+      #1d4ed8 50%, 
+      #2563eb 75%, 
+      #3b82f6 100%
+    );
+  }
+
+  /* 세레니티 화이트 그라데이션 */
+  .bg-premium-white {
+    background: linear-gradient(135deg, 
+      #ffffff 0%, 
+      #f8fafc 25%, 
+      #f1f5f9 50%, 
+      #e2e8f0 75%, 
+      #cbd5e1 100%
+    );
+  }
+
+  /* 프리미엄 텍스트 그라데이션 */
+  .text-premium-gold {
+    background: linear-gradient(135deg, #d4a574 0%, #b8854a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-premium-navy {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* 럭셔리 쉐도우 효과 */
+  .shadow-premium {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .shadow-premium-gold {
+    box-shadow: 
+      0 8px 32px rgba(212, 165, 116, 0.2),
+      0 4px 16px rgba(184, 133, 74, 0.15),
+      0 2px 8px rgba(200, 150, 95, 0.1);
+  }
+
+  .shadow-premium-navy {
+    box-shadow: 
+      0 8px 32px rgba(30, 58, 138, 0.2),
+      0 4px 16px rgba(59, 130, 246, 0.15),
+      0 2px 8px rgba(29, 78, 216, 0.1);
+  }
+
+  /* 고급 유리 효과 (Glassmorphism) */
+  .glass-premium {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* 프리미엄 호버 효과 */
+  .hover-premium {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-premium:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+      0 20px 40px -8px rgba(0, 0, 0, 0.15),
+      0 8px 16px -4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 고급 테두리 스타일 */
+  .border-premium-gold {
+    border-image: linear-gradient(135deg, #d4a574, #b8854a) 1;
+  }
+
+  /* 애니메이션 효과 */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 20px rgba(212, 165, 116, 0.3); }
+    to { text-shadow: 0 0 30px rgba(212, 165, 116, 0.6); }
+  }
+
 
   /* 헤더 고정 및 채널톡 표시 개선 */
   body {

@@ -1,0 +1,718 @@
+'use client';
+
+import {
+  Crown,
+  Shield,
+  Gem,
+  Users,
+  Building2,
+  TrendingUp,
+  Globe,
+  Award,
+  Star,
+  Heart,
+  Target,
+  BookOpen,
+  Sparkles,
+  ChevronRight,
+  ArrowRight,
+  Phone,
+  Mail,
+  Clock,
+  CheckCircle2,
+  Diamond,
+  Coins,
+  Scale,
+  PiggyBank,
+  Briefcase,
+  TreePine,
+  HandHeart,
+  Mountain,
+  Sunrise,
+  Palette,
+  Zap,
+  Infinity,
+  Eye,
+  Lock,
+  Landmark,
+} from 'lucide-react';
+
+import Link from 'next/link';
+import React from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+import { CalComPopup } from '@/components/cal-com-popup';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+
+// 패밀리오피스 핵심 서비스 영역
+const familyOfficeServices = {
+  wealth: {
+    title: '자산관리 Excellence',
+    icon: Diamond,
+    subtitle: 'Wealth Management',
+    description: '세대를 초월하는 자산 보전과 성장 전략',
+    features: [
+      '글로벌 자산 배분 및 포트폴리오 관리',
+      '대안투자 기회 발굴 및 접근',
+      '리스크 헤지 및 자산 보전 전략',
+      '세무 최적화 통합 솔루션',
+      '유동성 관리 및 현금흐름 최적화'
+    ],
+    benefits: [
+      '세대간 자산 보전 및 성장',
+      '시장 변동성 대응력 강화',
+      '세무 효율성 극대화',
+      '글로벌 투자 기회 접근'
+    ],
+    targetAssets: '30억원 이상',
+    philosophy: '資産保全 · 世代傳承'
+  },
+  succession: {
+    title: '가업승계 Mastery',
+    icon: Crown,
+    subtitle: 'Business Succession',
+    description: '기업과 가문의 지속가능한 발전을 위한 승계 설계',
+    features: [
+      '가업승계 마스터플랜 수립',
+      '차세대 경영자 육성 프로그램',
+      '지분 구조 최적화 및 경영권 보호',
+      '가족 거버넌스 체계 구축',
+      '상속·증여세 최적화 전략'
+    ],
+    benefits: [
+      '안정적 경영권 승계',
+      '세무 부담 최소화',
+      '가족 갈등 예방',
+      '기업 지속성 확보'
+    ],
+    targetAssets: '기업가치 50억원 이상',
+    philosophy: '家業永續 · 經營承繼'
+  },
+  governance: {
+    title: '가족 Governance',
+    icon: Landmark,
+    subtitle: 'Family Governance',
+    description: '체계적인 가족 경영과 의사결정 시스템',
+    features: [
+      '가족헌장 및 가족협의회 구성',
+      '차세대 교육 및 리더십 개발',
+      '가족 자산 통합 관리',
+      '갈등 조정 및 의사결정 시스템',
+      '패밀리오피스 운영 체계'
+    ],
+    benefits: [
+      '체계적 가족 경영',
+      '세대간 소통 강화',
+      '합리적 의사결정',
+      '가족 유대 강화'
+    ],
+    targetAssets: '가족 자산 100억원 이상',
+    philosophy: '家族經營 · 和諧統一'
+  },
+  legacy: {
+    title: 'Legacy Building',
+    icon: Mountain,
+    subtitle: 'Wealth Legacy',
+    description: '세대를 관통하는 가문의 유산 구축',
+    features: [
+      '가문의 미션과 비전 수립',
+      '사회적 영향력 확대 전략',
+      '자선 활동 및 사회공헌 설계',
+      '문화적 유산 보전 및 계승',
+      '글로벌 네트워크 구축'
+    ],
+    benefits: [
+      '지속가능한 가문 발전',
+      '사회적 명성 구축',
+      '가치 기반 경영 실현',
+      '차세대 자긍심 제고'
+    ],
+    targetAssets: '총 자산 500억원 이상',
+    philosophy: '百年永續 · 社會貢獻'
+  }
+};
+
+// 패밀리오피스의 차별화된 가치 제안
+const uniqueValuePropositions = [
+  {
+    icon: Eye,
+    title: '독점적 정보 접근',
+    subtitle: 'Exclusive Intelligence',
+    description: '일반인이 접근할 수 없는 프리미엄 투자 기회와 시장 정보를 독점 제공',
+    details: ['글로벌 프라이빗 마켓 정보', 'UHNW 네트워크 인사이트', '정책 변화 선행 정보']
+  },
+  {
+    icon: Lock,
+    title: '최고 수준의 보안',
+    subtitle: 'Ultimate Privacy',
+    description: '완벽한 프라이버시 보호와 최고 수준의 정보 보안 시스템',
+    details: ['익명성 보장 시스템', '암호화된 통신', '기밀 유지 협약']
+  },
+  {
+    icon: Users,
+    title: '전담 전문가팀',
+    subtitle: 'Dedicated Experts',
+    description: '고객 한 분을 위한 전담 멀티패밀리오피스 전문가팀 구성',
+    details: ['CIO, CFO급 전문가', '24/7 전담 서비스', '글로벌 네트워크']
+  },
+  {
+    icon: Globe,
+    title: '글로벌 플랫폼',
+    subtitle: 'Global Platform',
+    description: '세계 주요 금융 허브와 연결된 통합 자산관리 플랫폼',
+    details: ['해외 자산 통합 관리', 'Cross-border 최적화', '다중 통화 관리']
+  },
+  {
+    icon: Zap,
+    title: '혁신적 솔루션',
+    subtitle: 'Innovation Edge',
+    description: '최신 핀테크와 AI를 활용한 차세대 자산관리 솔루션',
+    details: ['AI 기반 포트폴리오 관리', 'Real-time 리스크 모니터링', 'Advanced Analytics']
+  },
+  {
+    icon: Infinity,
+    title: '세대간 연속성',
+    subtitle: 'Generational Continuity',
+    description: '100년을 바라보는 장기적 관점의 세대간 자산 승계',
+    details: ['세대별 맞춤 전략', '교육 및 멘토링', '가문 유산 보전']
+  }
+];
+
+// 성공 사례 - 고급 자산가/기업가 중심
+const premiumSuccessCases = [
+  {
+    icon: Crown,
+    title: '글로벌 제조업 그룹',
+    category: '대기업 오너가',
+    assets: '자산규모 1,000억원',
+    challenge: '복잡한 국제 지분 구조와 다세대 승계 계획 필요',
+    solution: '글로벌 패밀리오피스 설립 + 단계적 승계 전략 + 차세대 교육',
+    result: '상속세 70% 절감, 안정적 경영권 승계, 글로벌 확장 기반 구축',
+    period: '7년간 지속',
+    satisfaction: '★★★★★'
+  },
+  {
+    icon: Gem,
+    title: 'IT 유니콘 창업자',
+    category: '성공한 기업가',
+    assets: '자산규모 500억원',
+    challenge: '급성장한 기업 가치와 개인 자산의 통합 관리 필요',
+    solution: '자산 다각화 + 세무 최적화 + 사회공헌 재단 설립',
+    result: '연 수익률 15% 달성, 세무 부담 50% 절감, 사회적 명성 구축',
+    period: '5년간 지속',
+    satisfaction: '★★★★★'
+  },
+  {
+    icon: Mountain,
+    title: '전통 가문 4세',
+    category: '다세대 가문',
+    assets: '자산규모 2,000억원',
+    challenge: '흩어진 가족 자산 통합과 4세대 갈등 조정 필요',
+    solution: '가족 거버넌스 + 통합 자산관리 + 차세대 리더십 개발',
+    result: '가족 화합 달성, 통합 수익률 12% 달성, 차세대 성공적 육성',
+    period: '10년간 지속',
+    satisfaction: '★★★★★'
+  }
+];
+
+// 패밀리오피스 서비스 레벨
+const serviceTiers = [
+  {
+    name: 'Heritage Elite',
+    icon: Crown,
+    minAssets: '1,000억원+',
+    color: 'text-yellow-600',
+    bgColor: 'bg-gradient-to-br from-yellow-50 to-amber-100',
+    borderColor: 'border-yellow-200',
+    features: [
+      '전담 패밀리오피스 설립',
+      'CIO/CFO급 전문가 배정',
+      '글로벌 투자 기회 독점 제공',
+      '차세대 글로벌 교육 프로그램',
+      '24/7 프리미엄 컨시어지 서비스'
+    ]
+  },
+  {
+    name: 'Legacy Premium',
+    icon: Diamond,
+    minAssets: '500억원+',
+    color: 'text-blue-600',
+    bgColor: 'bg-gradient-to-br from-blue-50 to-indigo-100',
+    borderColor: 'border-blue-200',
+    features: [
+      '멀티패밀리오피스 서비스',
+      '전담 팀장급 전문가',
+      '프리미엄 투자 상품 접근',
+      '가업승계 전문 컨설팅',
+      '우선 상담 및 전용 라운지'
+    ]
+  },
+  {
+    name: 'Wealth Select',
+    icon: Gem,
+    minAssets: '100억원+',
+    color: 'text-green-600',
+    bgColor: 'bg-gradient-to-br from-green-50 to-emerald-100',
+    borderColor: 'border-green-200',
+    features: [
+      '통합 자산관리 서비스',
+      '시니어급 전문가 배정',
+      '고수익 투자 기회 제공',
+      '세무/법률 통합 자문',
+      '정기 자산 리뷰 미팅'
+    ]
+  }
+];
+
+const FamilyOfficeCenterPage = () => {
+  const [selectedService, setSelectedService] = React.useState('wealth');
+  const [selectedCase, setSelectedCase] = React.useState(0);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-amber-50/20 to-blue-50/20 dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
+      <Header />
+
+      <main className="pt-20">
+        {/* Premium Hero Section */}
+        <section className="relative py-20 px-4 md:py-32 overflow-hidden">
+          {/* 배경 효과 */}
+          <div className="absolute inset-0 bg-premium-navy opacity-5"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-premium-gold opacity-10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500 opacity-10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
+
+          <div className="relative z-10 max-w-7xl mx-auto text-center">
+            <Badge variant="outline" size="lg" className="mb-8 glass-premium hover-premium">
+              <Crown className="h-4 w-4 mr-2 text-amber-600" />
+              Family Office Excellence
+            </Badge>
+
+            <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold mb-8 animate-glow">
+              <span className="text-premium-navy">Family Office</span>
+              <span className="block mt-4 text-3xl md:text-5xl lg:text-6xl font-light tracking-wider text-premium-gold">
+                百年永續의 기반
+              </span>
+            </h1>
+
+            <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">
+              최고 자산가와 성공한 기업가를 위한
+              <span className="block mt-2 font-medium text-premium-navy">
+                차별화된 전용 솔루션
+              </span>
+            </p>
+
+            <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto font-light">
+              자산 보전부터 가업승계, 차세대 육성까지
+              <span className="block mt-1">
+                세대를 관통하는 가문의 유산을 함께 구축합니다
+              </span>
+            </p>
+
+            {/* Premium Statistics */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+              <div className="glass-premium rounded-2xl p-6 hover-premium">
+                <div className="text-4xl font-bold text-premium-gold mb-2">20+</div>
+                <div className="text-sm text-gray-600 font-light">년 전문 경험</div>
+              </div>
+              <div className="glass-premium rounded-2xl p-6 hover-premium">
+                <div className="text-4xl font-bold text-premium-navy mb-2">100+</div>
+                <div className="text-sm text-gray-600 font-light">VIP 고객</div>
+              </div>
+              <div className="glass-premium rounded-2xl p-6 hover-premium">
+                <div className="text-4xl font-bold text-green-600 mb-2">10조+</div>
+                <div className="text-sm text-gray-600 font-light">관리 자산</div>
+              </div>
+              <div className="glass-premium rounded-2xl p-6 hover-premium">
+                <div className="text-4xl font-bold text-purple-600 mb-2">98%</div>
+                <div className="text-sm text-gray-600 font-light">고객 만족도</div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <CalComPopup
+                className="inline-flex items-center justify-center px-8 py-4 bg-premium-navy text-white text-lg font-semibold rounded-2xl hover:shadow-premium-navy transition-all duration-300 hover:scale-105"
+                buttonText="VIP 전용 상담 신청"
+                eventType="consultation"
+                trigger={
+                  <div className="inline-flex items-center">
+                    <Crown className="h-6 w-6 mr-2" />
+                    VIP 전용 상담 신청
+                  </div>
+                }
+              />
+
+              <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-2 border-amber-200 hover:bg-amber-50 rounded-2xl" asChild>
+                <Link href="#services">
+                  <BookOpen className="h-6 w-6 mr-2" />
+                  서비스 포트폴리오 보기
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Premium Services Portfolio */}
+        <section id="services" className="py-20 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-6">
+                <Sparkles className="h-4 w-4 mr-2" />
+                Premium Services Portfolio
+              </Badge>
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-premium-navy">
+                패밀리오피스 핵심 서비스
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+                세대를 초월하는 자산관리와 가업승계의 완벽한 솔루션
+              </p>
+            </div>
+
+            <Tabs value={selectedService} onValueChange={setSelectedService} className="w-full">
+              <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full mb-12 h-auto p-2 bg-gray-50 rounded-2xl">
+                {Object.entries(familyOfficeServices).map(([key, service]) => (
+                  <TabsTrigger 
+                    key={key} 
+                    value={key} 
+                    className="flex flex-col items-center p-4 text-sm font-medium rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-premium"
+                  >
+                    <service.icon className="h-8 w-8 mb-2" />
+                    <span>{service.title}</span>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
+              {Object.entries(familyOfficeServices).map(([key, service]) => {
+                const Icon = service.icon;
+                return (
+                  <TabsContent key={key} value={key}>
+                    <Card className="border-0 shadow-premium-gold rounded-3xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-amber-50/50 to-blue-50/50 border-b-0 pb-8">
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="p-4 bg-premium-gold rounded-2xl shadow-premium-gold">
+                            <Icon className="h-10 w-10 text-white" />
+                          </div>
+                          <div>
+                            <CardTitle className="text-3xl font-playfair text-premium-navy">
+                              {service.title}
+                            </CardTitle>
+                            <CardDescription className="text-lg text-premium-gold font-medium">
+                              {service.subtitle}
+                            </CardDescription>
+                          </div>
+                          <div className="ml-auto text-right">
+                            <Badge variant="outline" className="bg-white/80 backdrop-blur-sm">
+                              {service.targetAssets}
+                            </Badge>
+                          </div>
+                        </div>
+                        <p className="text-lg text-gray-600 leading-relaxed font-light">
+                          {service.description}
+                        </p>
+                        <div className="text-center mt-4 p-3 bg-white/60 rounded-xl backdrop-blur-sm">
+                          <p className="text-lg font-medium text-premium-navy font-playfair">
+                            {service.philosophy}
+                          </p>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-8">
+                        <div className="grid md:grid-cols-2 gap-12">
+                          <div>
+                            <h4 className="font-semibold text-lg mb-4 text-premium-navy flex items-center gap-2">
+                              <CheckCircle2 className="h-6 w-6 text-green-600" />
+                              핵심 서비스
+                            </h4>
+                            <ul className="space-y-3">
+                              {service.features.map((feature, index) => (
+                                <li key={index} className="flex items-start gap-3">
+                                  <Star className="h-5 w-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                                  <span className="text-gray-700 leading-relaxed">{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-lg mb-4 text-green-700 flex items-center gap-2">
+                              <Target className="h-6 w-6 text-green-600" />
+                              기대 가치
+                            </h4>
+                            <ul className="space-y-3">
+                              {service.benefits.map((benefit, index) => (
+                                <li key={index} className="flex items-start gap-3">
+                                  <Gem className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                                  <span className="text-gray-700 leading-relaxed">{benefit}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                );
+              })}
+            </Tabs>
+          </div>
+        </section>
+
+        {/* Unique Value Propositions */}
+        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-6">
+                <Diamond className="h-4 w-4 mr-2" />
+                Exclusive Value
+              </Badge>
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-premium-navy">
+                차별화된 가치 제안
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+                일반적인 금융 서비스를 뛰어넘는 패밀리오피스만의 독창적 가치
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {uniqueValuePropositions.map((proposition, index) => {
+                const Icon = proposition.icon;
+                return (
+                  <Card key={index} className="h-full hover-premium shadow-premium rounded-2xl border-0 bg-white/80 backdrop-blur-sm">
+                    <CardHeader className="pb-6">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl">
+                          <Icon className="h-8 w-8 text-blue-600" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-xl text-premium-navy">{proposition.title}</CardTitle>
+                          <CardDescription className="text-premium-gold font-medium">
+                            {proposition.subtitle}
+                          </CardDescription>
+                        </div>
+                      </div>
+                      <p className="text-gray-600 leading-relaxed font-light">
+                        {proposition.description}
+                      </p>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {proposition.details.map((detail, i) => (
+                          <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                            <CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" />
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Service Tiers */}
+        <section className="py-20 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-6">
+                <Award className="h-4 w-4 mr-2" />
+                Service Excellence
+              </Badge>
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-premium-navy">
+                서비스 등급별 포트폴리오
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+                자산 규모와 니즈에 따른 차별화된 패밀리오피스 서비스
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              {serviceTiers.map((tier, index) => {
+                const Icon = tier.icon;
+                return (
+                  <Card key={index} className={`h-full ${tier.bgColor} ${tier.borderColor} border-2 hover-premium shadow-premium-gold rounded-3xl overflow-hidden`}>
+                    <CardHeader className="text-center pb-6">
+                      <div className="flex justify-center mb-4">
+                        <div className="p-4 bg-white rounded-2xl shadow-lg">
+                          <Icon className={`h-12 w-12 ${tier.color}`} />
+                        </div>
+                      </div>
+                      <CardTitle className="text-2xl font-playfair text-gray-900 mb-2">
+                        {tier.name}
+                      </CardTitle>
+                      <CardDescription className="text-lg font-semibold text-gray-700">
+                        자산규모 {tier.minAssets}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-4">
+                        {tier.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700 leading-relaxed">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-8">
+                        <CalComPopup
+                          className={`w-full py-3 px-6 ${tier.color === 'text-yellow-600' ? 'bg-premium-gold text-white' : tier.color === 'text-blue-600' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'} rounded-xl font-semibold hover:shadow-lg transition-all duration-300`}
+                          buttonText="전용 상담 신청"
+                          eventType="consultation"
+                          trigger={
+                            <div className="w-full text-center">
+                              전용 상담 신청
+                            </div>
+                          }
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Premium Success Cases */}
+        <section className="py-20 px-4 bg-gradient-to-br from-amber-50/30 to-blue-50/30">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-6">
+                <Crown className="h-4 w-4 mr-2" />
+                Success Stories
+              </Badge>
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-premium-navy">
+                패밀리오피스 성공 사례
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+                최고 자산가들의 실제 성공 스토리
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              {premiumSuccessCases.map((caseItem, index) => {
+                const Icon = caseItem.icon;
+                return (
+                  <Card key={index} className="h-full glass-premium hover-premium rounded-3xl border-0 shadow-premium">
+                    <CardHeader>
+                      <div className="flex items-center gap-3 mb-4">
+                        <Icon className="h-10 w-10 text-amber-600" />
+                        <div>
+                          <CardTitle className="text-xl text-premium-navy">{caseItem.title}</CardTitle>
+                          <Badge variant="outline" className="mt-1 bg-white/80 backdrop-blur-sm">
+                            {caseItem.category}
+                          </Badge>
+                        </div>
+                      </div>
+                      <p className="font-medium text-premium-gold">{caseItem.assets}</p>
+                      <p className="text-sm text-gray-600">{caseItem.period} · {caseItem.satisfaction}</p>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-sm text-red-600 mb-1">도전과제</h4>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {caseItem.challenge}
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-sm text-blue-600 mb-1">솔루션</h4>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {caseItem.solution}
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-sm text-green-600 mb-1">성과</h4>
+                          <p className="text-sm text-green-700 font-medium leading-relaxed">
+                            {caseItem.result}
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Premium CTA Section */}
+        <section className="py-20 px-4 bg-premium-navy relative overflow-hidden">
+          {/* 배경 효과 */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/50 via-indigo-900/50 to-purple-900/50"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-premium-gold opacity-20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-white opacity-10 rounded-full blur-3xl"></div>
+
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
+            <Badge variant="outline" className="mb-8 border-white/20 bg-white/10 text-white backdrop-blur-sm">
+              <Sparkles className="h-4 w-4 mr-2" />
+              Join the Elite
+            </Badge>
+
+            <h3 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-white">
+              百年永續의 여정을
+              <span className="block mt-2 text-amber-300">
+                함께 시작하세요
+              </span>
+            </h3>
+
+            <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+              최고 자산가와 성공한 기업가만을 위한 독점적 패밀리오피스 서비스
+              <span className="block mt-2">
+                세대를 관통하는 가문의 유산을 함께 구축합니다
+              </span>
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+              <CalComPopup
+                className="inline-flex items-center justify-center px-10 py-4 bg-premium-gold text-white text-lg font-semibold rounded-2xl hover:shadow-premium-gold transition-all duration-300 hover:scale-105"
+                buttonText="VIP 전용 상담 예약"
+                eventType="consultation"
+                trigger={
+                  <div className="inline-flex items-center">
+                    <Crown className="h-6 w-6 mr-2" />
+                    VIP 전용 상담 예약
+                  </div>
+                }
+              />
+
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-10 py-4 border-2 border-white/20 text-white hover:bg-white/10 rounded-2xl backdrop-blur-sm" 
+                asChild
+              >
+                <Link href="/fp-center">
+                  <Briefcase className="h-6 w-6 mr-2" />
+                  FP센터 보기
+                </Link>
+              </Button>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 text-blue-100">
+              <div className="flex items-center justify-center gap-3">
+                <Phone className="h-5 w-5 text-amber-300" />
+                <span className="font-medium">VIP 전용: 0502-5550-8700</span>
+              </div>
+              <div className="flex items-center justify-center gap-3">
+                <Clock className="h-5 w-5 text-amber-300" />
+                <span>24시간 전담 서비스</span>
+              </div>
+              <div className="flex items-center justify-center gap-3">
+                <Shield className="h-5 w-5 text-amber-300" />
+                <span>완벽한 기밀 보장</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default FamilyOfficeCenterPage;

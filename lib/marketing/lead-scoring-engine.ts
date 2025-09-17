@@ -162,8 +162,9 @@ export class LeadScoringEngine {
    */
   async recalculateLeadScore(contactId: string): Promise<LeadScore> {
     try {
+      const supabase = await this.supabase;
       // 1. Supabase 함수를 사용한 스코어 계산
-      const { data: scoreData, error: scoreError } = await this.supabase
+      const { data: scoreData, error: scoreError } = await supabase
         .rpc('calculate_lead_score', { contact_id: contactId });
 
       if (scoreError) {
@@ -171,7 +172,7 @@ export class LeadScoringEngine {
       }
 
       // 2. 계산된 스코어 조회
-      const { data: leadScore, error: fetchError } = await this.supabase
+      const { data: leadScore, error: fetchError } = await supabase
         .from('lead_scores')
         .select('*')
         .eq('hubspot_contact_id', contactId)
@@ -211,8 +212,9 @@ export class LeadScoringEngine {
    */
   private async handleHighScoreActions(contactId: string): Promise<void> {
     try {
+      const supabase = await this.supabase;
       // 1. 현재 스코어 조회
-      const { data: leadScore } = await this.supabase
+      const { data: leadScore } = await supabase
         .from('lead_scores')
         .select('total_score, score_grade')
         .eq('hubspot_contact_id', contactId)
@@ -240,8 +242,9 @@ export class LeadScoringEngine {
    */
   private async triggerHighScoreWorkflow(contactId: string, score: number): Promise<void> {
     try {
+      const supabase = await this.supabase;
       // 1. 영업팀 알림 로그
-      await this.supabase
+      await supabase
         .from('lead_activities')
         .insert({
           hubspot_contact_id: contactId,
@@ -295,8 +298,9 @@ export class LeadScoringEngine {
     context: Record<string, any>
   ): Promise<void> {
     try {
+      const supabase = await this.supabase;
       // 1. 워크플로우 조회
-      const { data: workflow } = await this.supabase
+      const { data: workflow } = await supabase
         .from('marketing_workflows')
         .select('*')
         .eq('name', workflowName)
@@ -309,7 +313,7 @@ export class LeadScoringEngine {
       }
 
       // 2. 워크플로우 실행 로그 생성
-      const { error: executionError } = await this.supabase
+      const { error: executionError } = await supabase
         .from('workflow_executions')
         .insert({
           workflow_id: workflow.id,
@@ -327,7 +331,7 @@ export class LeadScoringEngine {
       }
 
       // 워크플로우 카운터 증가
-      await this.supabase
+      await supabase
         .from('marketing_workflows')
         .update({ 
           enrolled_count: workflow.enrolled_count + 1 
@@ -356,7 +360,7 @@ export class LeadScoringEngine {
     
     await this.trackActivity({
       hubspot_contact_id: params.contactId,
-      user_id: params.userId,
+      ...(params.userId && { user_id: params.userId }),
       activity_type: 'page_view',
       activity_data: {
         page_url: params.pageUrl,
@@ -381,7 +385,8 @@ export class LeadScoringEngine {
    * 재방문 체크
    */
   private async checkRepeatVisit(contactId: string, pageUrl: string): Promise<boolean> {
-    const { data } = await this.supabase
+    const supabase = await this.supabase;
+    const { data } = await supabase
       .from('lead_activities')
       .select('id')
       .eq('hubspot_contact_id', contactId)
@@ -405,7 +410,7 @@ export class LeadScoringEngine {
   }): Promise<void> {
     await this.trackActivity({
       hubspot_contact_id: params.contactId,
-      user_id: params.userId,
+      ...(params.userId && { user_id: params.userId }),
       activity_type: 'form_submit',
       activity_data: {
         form_type: params.formType,
@@ -443,7 +448,8 @@ export class LeadScoringEngine {
    * 리드 스코어 조회
    */
   async getLeadScore(contactId: string): Promise<LeadScore | null> {
-    const { data, error } = await this.supabase
+    const supabase = await this.supabase;
+    const { data, error } = await supabase
       .from('lead_scores')
       .select('*')
       .eq('hubspot_contact_id', contactId)
@@ -460,7 +466,8 @@ export class LeadScoringEngine {
    * 마케팅 성과 메트릭 조회
    */
   async getMarketingMetrics(daysBack = 30) {
-    const { data, error } = await this.supabase
+    const supabase = await this.supabase;
+    const { data, error } = await supabase
       .rpc('get_marketing_metrics', { days_back: daysBack });
 
     if (error) {

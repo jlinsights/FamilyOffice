@@ -1,9 +1,13 @@
 'use client';
 
 import Script from 'next/script';
+import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
+import { createLogger } from '@/lib/security/secure-logger';
+
+const logger = createLogger('StructuredData');
 
 interface StructuredDataProps {
-  data: any;
+  data: unknown;
 }
 
 export function StructuredData({ data }: StructuredDataProps) {
@@ -13,8 +17,8 @@ export function StructuredData({ data }: StructuredDataProps) {
   }
 
   try {
-    // JSON.stringify가 실패할 수 있으므로 try-catch로 감싸기
-    const jsonData = JSON.stringify(data);
+    // Securely serialize and validate structured data
+    const jsonData = sanitizeStructuredData(data);
     
     return (
       <Script
@@ -27,7 +31,7 @@ export function StructuredData({ data }: StructuredDataProps) {
       />
     );
   } catch (error) {
-    console.error('StructuredData serialization error:', error);
+    logger.error('StructuredData validation failed', error);
     return null;
   }
 }

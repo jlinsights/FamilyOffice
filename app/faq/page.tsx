@@ -40,7 +40,7 @@ interface FAQCategory {
 
 const faqCategories: FAQCategory[] = [
   {
-    id: 'family-office',
+    id: 'family-office-center',
     title: '패밀리오피스',
     icon: <Building className="h-5 w-5" />,
     items: [
@@ -248,7 +248,7 @@ export default function FAQPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <Tabs defaultValue="family-office" className="w-full">
+            <Tabs defaultValue="family-office-center" className="w-full">
               <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 h-auto">
                 {faqCategories.map((category) => (
                   <TabsTrigger

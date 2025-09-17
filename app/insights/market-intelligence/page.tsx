@@ -1,23 +1,8 @@
-import {
-  FileText,
-  Search,
-  Globe,
-  BarChart3,
-  Target,
-  Users,
-  TrendingUp,
-  Cpu,
-  Building,
-  Scale,
-  Briefcase,
-  Play,
-  Headphones,
-  ChevronRight,
-} from 'lucide-react';
-
-import { Suspense } from 'react';
+import { Search, ChevronRight } from 'lucide-react';
+import { Suspense, lazy } from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
   title: '시장 인텔리전스 - 전문가 미디어 콘텐츠',
@@ -28,16 +13,50 @@ export const metadata: Metadata = {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { blogCategories } from '@/lib/blog-data';
-import { NewsletterSubscription } from '@/components/newsletter-subscription';
-import { BlogCategoryFilter, BlogCategoryFilterSkeleton } from '@/components/blog-category-filter';
-import { BlogContent } from '@/components/blog-content';
-import { YouTubeThumbnail } from '@/components/media/youtube-thumbnail';
-import { SpotifyEmbed } from '@/components/media/spotify-embed';
+
+// Dynamic imports for heavy components
+const Tabs = dynamic(() => import('@/components/ui/tabs').then(mod => ({ default: mod.Tabs })), {
+  loading: () => <div className="h-12 bg-muted animate-pulse rounded" />
+});
+const TabsContent = dynamic(() => import('@/components/ui/tabs').then(mod => ({ default: mod.TabsContent })));
+const TabsList = dynamic(() => import('@/components/ui/tabs').then(mod => ({ default: mod.TabsList })));
+const TabsTrigger = dynamic(() => import('@/components/ui/tabs').then(mod => ({ default: mod.TabsTrigger })));
+
+const NewsletterSubscription = dynamic(() => import('@/components/newsletter-subscription').then(mod => ({ default: mod.NewsletterSubscription })), {
+  loading: () => <div className="h-32 bg-muted animate-pulse rounded" />
+});
+const BlogCategoryFilter = dynamic(() => import('@/components/blog-category-filter').then(mod => ({ default: mod.BlogCategoryFilter })), {
+  loading: () => <div className="h-16 bg-muted animate-pulse rounded" />
+});
+const BlogContent = dynamic(() => import('@/components/blog-content').then(mod => ({ default: mod.BlogContent })), {
+  loading: () => (
+    <div className="text-center py-12">
+      <div className="animate-pulse space-y-8">
+        <div className="h-8 bg-muted rounded w-64 mx-auto"></div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="h-96 bg-muted rounded-lg"></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+});
+const YouTubeThumbnail = dynamic(() => import('@/components/media/youtube-thumbnail').then(mod => ({ default: mod.YouTubeThumbnail })), {
+  loading: () => <div className="w-full aspect-video bg-muted animate-pulse rounded" />
+});
+const SpotifyEmbed = dynamic(() => import('@/components/media/spotify-embed').then(mod => ({ default: mod.SpotifyEmbed })), {
+  loading: () => <div className="w-full h-32 bg-muted animate-pulse rounded" />
+});
+
+// Dynamic component for category icons - only load when needed
+const CategoryIcon = dynamic(() => import('./category-icon'), {
+  loading: () => <div className="w-5 h-5 bg-muted animate-pulse rounded" />
+});
 
 // Categories and posts are imported from @/lib/blog-data
 // Dynamic rendering will be handled by BlogContent component based on URL parameters
@@ -109,9 +128,7 @@ export default function BlogPage() {
               
               {/* Category Filter */}
               <div className="animate-slide-up" style={{ animationDelay: '400ms' }}>
-                <Suspense fallback={<BlogCategoryFilterSkeleton />}>
-                  <BlogCategoryFilter />
-                </Suspense>
+                <BlogCategoryFilter />
               </div>
             </div>
             
@@ -126,16 +143,7 @@ export default function BlogPage() {
                   <div className="text-center">
                     <div className="flex justify-center mb-4">
                       <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        {category.icon === 'Target' && <Target className="h-5 w-5 text-primary" />}
-                        {category.icon === 'BarChart3' && <BarChart3 className="h-5 w-5 text-primary" />}
-                        {category.icon === 'TrendingUp' && <TrendingUp className="h-5 w-5 text-primary" />}
-                        {category.icon === 'FileText' && <FileText className="h-5 w-5 text-primary" />}
-                        {category.icon === 'Users' && <Users className="h-5 w-5 text-primary" />}
-                        {category.icon === 'Cpu' && <Cpu className="h-5 w-5 text-primary" />}
-                        {category.icon === 'Building' && <Building className="h-5 w-5 text-primary" />}
-                        {category.icon === 'Scale' && <Scale className="h-5 w-5 text-primary" />}
-                        {category.icon === 'Globe' && <Globe className="h-5 w-5 text-primary" />}
-                        {category.icon === 'Briefcase' && <Briefcase className="h-5 w-5 text-primary" />}
+                        <CategoryIcon iconName={category.icon} />
                       </div>
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -168,11 +176,15 @@ export default function BlogPage() {
             <Tabs defaultValue="video" className="w-full animate-slide-up" style={{ animationDelay: '400ms' }}>
               <TabsList className="grid w-full grid-cols-2 mb-8">
                 <TabsTrigger value="video" className="flex items-center gap-2">
-                  <Play className="h-4 w-4" />
+                  <Suspense fallback={<div className="w-4 h-4 bg-muted animate-pulse rounded" />}>
+                    <CategoryIcon iconName="Play" />
+                  </Suspense>
                   비디오 콘텐츠
                 </TabsTrigger>
                 <TabsTrigger value="podcast" className="flex items-center gap-2">
-                  <Headphones className="h-4 w-4" />
+                  <Suspense fallback={<div className="w-4 h-4 bg-muted animate-pulse rounded" />}>
+                    <CategoryIcon iconName="Headphones" />
+                  </Suspense>
                   팟캐스트
                 </TabsTrigger>
               </TabsList>
@@ -281,20 +293,7 @@ export default function BlogPage() {
         {/* Blog Content with Category Support */}
         <section className="section">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Suspense fallback={
-              <div className="text-center py-12">
-                <div className="animate-pulse space-y-8">
-                  <div className="h-8 bg-muted rounded w-64 mx-auto"></div>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="h-96 bg-muted rounded-lg"></div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            }>
-              <BlogContent className="animate-slide-up" />
-            </Suspense>
+            <BlogContent className="animate-slide-up" />
           </div>
         </section>
 

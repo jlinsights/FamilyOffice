@@ -9,6 +9,7 @@ import {
   ArrowRight,
   Search,
   Briefcase,
+  Crown,
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -53,24 +54,24 @@ export function ServicesSection() {
         <div className="text-center mb-16">
           <Badge
             variant="outline"
-            className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60"
+            className="mb-4 animate-fade-in border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 shadow-lg backdrop-blur-sm"
           >
             <Briefcase className="h-3 w-3 mr-1" />
-            Professional Services
+            Family Office Excellence
           </Badge>
 
-          <h2 className="mb-6 font-bold text-balance animate-slide-up text-foreground">
-            <span className="text-primary dark:text-emerald-300">
-              {totalCategories}개 분야 {totalServices}개
+          <h2 className="mb-6 font-bold text-balance animate-slide-up text-foreground font-playfair">
+            <span className="text-premium-gold">
+              차별화된 패밀리오피스
             </span>{' '}
-            전문 서비스
+            <span className="text-premium-navy">전용 솔루션</span>
           </h2>
 
           <p
             className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance animate-slide-up leading-relaxed"
             style={{ animationDelay: '100ms' }}
           >
-            중소중견기업 CEO를 위한 <span className="font-bold text-primary">체계화된 전문 솔루션</span>으로 맞춤형 컨설팅을 제공합니다
+            최고 자산가와 성공한 기업가를 위한 <span className="font-bold text-premium-navy">프리미엄 서비스 포트폴리오</span>로 세대를 잇는 자산관리를 실현합니다
           </p>
         </div>
 
@@ -135,33 +136,32 @@ export function ServicesSection() {
         </div>
 
         {/* 통계 섹션 */}
-        <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-8 mb-12">
+        <div className="bg-gradient-to-r from-amber-50/50 to-blue-50/50 rounded-3xl p-8 mb-12 shadow-premium">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-4 text-foreground dark:text-white">
-              <span className="text-primary dark:text-emerald-300">
-                검증된 실적
-              </span>
-              과{' '}
-              <span className="text-primary dark:text-emerald-300">전문성</span>
+            <h3 className="text-2xl font-bold mb-4 text-foreground font-playfair">
+              <span className="text-premium-gold">
+                Family Office의
+              </span>{' '}
+              <span className="text-premium-navy">탁월한 성과</span>
             </h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              500억원+ 관리 실적과 20년+ 전문 경험을 바탕으로 중소중견기업
-              대표님의 모든 고민을 해결합니다
+              최고 자산가들이 신뢰하는 패밀리오피스의 검증된 실적과 
+              <span className="font-bold text-premium-navy"> 차별화된 전문성</span>
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: '500억원+', label: '자산관리 실적', icon: TrendingUp },
-              { value: '500+', label: '법인 고객사', icon: Building2 },
-              { value: '20년+', label: '전문 경험', icon: Shield },
-              { value: '98%', label: '고객 만족도', icon: Target },
+              { value: '10조+', label: '관리 자산 규모', icon: TrendingUp, color: 'text-premium-gold' },
+              { value: '100+', label: 'VIP 패밀리 고객', icon: Building2, color: 'text-premium-navy' },
+              { value: '20년+', label: 'Family Office 경험', icon: Shield, color: 'text-green-600' },
+              { value: '98%', label: '고객 만족도', icon: Target, color: 'text-purple-600' },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl font-bold text-primary dark:text-emerald-300 mb-1">
+              <div key={index} className="text-center glass-premium rounded-2xl p-4 hover-premium">
+                <div className={`text-2xl font-bold mb-1 ${stat.color}`}>
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-muted-foreground font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -173,24 +173,24 @@ export function ServicesSection() {
         <div className="text-center">
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Link
-              href="/solutions"
-              className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 bg-primary hover:bg-primary/90 text-white shadow-lg dark:bg-emerald-600 dark:hover:bg-emerald-700"
+              href="/family-office-center"
+              className="inline-flex items-center justify-center rounded-2xl text-lg font-bold px-8 py-4 bg-premium-navy text-white hover:shadow-premium-navy transition-all duration-300 hover:scale-105"
             >
-              <Search className="mr-2 h-5 w-5" />
-              솔루션 자세히 보기
+              <Crown className="mr-2 h-5 w-5" />
+              패밀리오피스 센터
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-xl text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background transition-colors focus-visible:ring-offset-2 h-12 px-8 py-4 border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-lg"
+              href="/solutions"
+              className="inline-flex items-center justify-center rounded-2xl text-lg font-bold px-8 py-4 border-2 border-amber-200 hover:bg-amber-50 transition-all duration-300"
             >
-              무료 상담 신청
+              <Search className="mr-2 h-5 w-5" />
+              전체 솔루션 보기
             </Link>
           </div>
 
           <p className="text-sm text-muted-foreground">
-            각 서비스별 상세 내용과 혜택을 확인하시고, 맞춤형 솔루션을
-            경험해보세요
+            최고 자산가를 위한 차별화된 패밀리오피스 서비스를 경험해보세요
           </p>
         </div>
       </div>

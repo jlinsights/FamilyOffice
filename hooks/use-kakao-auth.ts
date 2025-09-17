@@ -13,7 +13,21 @@ export interface AuthState {
   error: string | null;
 }
 
-export function useKakaoAuth() {
+export function useKakaoAuth(): AuthState & {
+  signIn: () => Promise<KakaoAuthResult>;
+  signOut: () => Promise<{ success: boolean; error?: string }>;
+  updateProfile: (updates: {
+    name?: string;
+    avatar_url?: string;
+    phone?: string;
+  }) => Promise<{ success: boolean; error?: string }>;
+  unlinkKakaoAccount: () => Promise<{ success: boolean; error?: string }>;
+  refreshUser: () => Promise<void>;
+  isKakaoUser: boolean;
+  displayName: string;
+  profileImage?: string | undefined;
+  email?: string | undefined;
+} {
   const [state, setState] = useState<AuthState>({
     user: null,
     kakaoUser: null,

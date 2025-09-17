@@ -20,7 +20,10 @@ interface RealTimeDataState<T> {
 export function useRealTimeData<T>(
   endpoint: string,
   options: RealTimeDataOptions = {}
-) {
+): RealTimeDataState<T> & {
+  refetch: () => void;
+  reset: () => void;
+} {
   const {
     refreshInterval = 30000,
     enabled = true,
@@ -330,7 +333,10 @@ export function useWebSocket<T = any>(options: WebSocketOptions) {
 }
 
 // 실시간 포트폴리오 데이터 훅
-export function usePortfolioData() {
+export function usePortfolioData(): RealTimeDataState<any> & {
+  refetch: () => void;
+  reset: () => void;
+} {
   return useRealTimeData('/api/portfolio', {
     refreshInterval: 30000, // 30초마다 갱신
     retryAttempts: 3,
@@ -341,7 +347,10 @@ export function usePortfolioData() {
 }
 
 // 실시간 시장 데이터 훅
-export function useMarketData() {
+export function useMarketData(): RealTimeDataState<any> & {
+  refetch: () => void;
+  reset: () => void;
+} {
   return useRealTimeData('/api/market-data', {
     refreshInterval: 10000, // 10초마다 갱신
     retryAttempts: 5,
@@ -352,7 +361,14 @@ export function useMarketData() {
 }
 
 // 실시간 알림 데이터 훅
-export function useNotifications() {
+export function useNotifications(): {
+  isConnected: boolean;
+  data: any;
+  error: string | null;
+  reconnectCount: number;
+  send: (data: any) => void;
+  disconnect: () => void;
+} {
   return useWebSocket({
     url: '/api/notifications',
     reconnectAttempts: 10,

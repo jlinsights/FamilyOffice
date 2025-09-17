@@ -84,10 +84,11 @@ export class WorkflowEngine {
     triggerData: Record<string, any> = {}
   ): Promise<void> {
     try {
+      const supabase = await this.supabase;
       console.log(`🔄 워크플로우 트리거 체크: ${triggerType} for ${contactId}`);
 
       // 1. 활성 워크플로우 조회
-      const { data: workflows, error } = await this.supabase
+      const { data: workflows, error } = await supabase
         .from('marketing_workflows')
         .select('*')
         .eq('is_active', true)
@@ -131,6 +132,7 @@ export class WorkflowEngine {
     triggerData: Record<string, any>
   ): Promise<boolean> {
     try {
+      const supabase = await this.supabase;
       const trigger = workflow.trigger_conditions;
 
       // 1. 기본 트리거 타입 매칭
@@ -139,7 +141,7 @@ export class WorkflowEngine {
       }
 
       // 2. 이미 실행 중인 워크플로우 체크
-      const { data: existingExecution } = await this.supabase
+      const { data: existingExecution } = await supabase
         .from('workflow_executions')
         .select('id')
         .eq('workflow_id', workflow.id)
@@ -246,10 +248,11 @@ export class WorkflowEngine {
     triggerData: Record<string, any>
   ): Promise<void> {
     try {
+      const supabase = await this.supabase;
       console.log(`🚀 워크플로우 시작: ${workflow.name} for ${contactId}`);
 
       // 1. 실행 로그 생성
-      const { data: execution, error: executionError } = await this.supabase
+      const { data: execution, error: executionError } = await supabase
         .from('workflow_executions')
         .insert({
           workflow_id: workflow.id,
@@ -273,7 +276,7 @@ export class WorkflowEngine {
       }
 
       // 2. 워크플로우 등록 수 증가
-      await this.supabase
+      await supabase
         .from('marketing_workflows')
         .update({ 
           enrolled_count: workflow.enrolled_count + 1 
@@ -281,7 +284,10 @@ export class WorkflowEngine {
         .eq('id', workflow.id);
 
       // 3. 첫 번째 단계 실행 스케줄링
-      await this.scheduleNextStep(execution.id, workflow.workflow_steps[0]);
+      const firstStep = workflow.workflow_steps[0];
+      if (firstStep) {
+        await this.scheduleNextStep(execution.id, firstStep);
+      }
 
     } catch (error) {
       console.error('워크플로우 실행 시작 실패:', error);
@@ -296,9 +302,10 @@ export class WorkflowEngine {
     step: WorkflowStep
   ): Promise<void> {
     try {
+      const supabase = await this.supabase;
       const nextActionTime = new Date(Date.now() + step.delay_hours * 60 * 60 * 1000);
 
-      await this.supabase
+      await supabase
         .from('workflow_executions')
         .update({
           next_action_at: nextActionTime.toISOString(),
@@ -322,10 +329,11 @@ export class WorkflowEngine {
    */
   async executeScheduledWorkflows(): Promise<void> {
     try {
+      const supabase = await this.supabase;
       console.log('🔄 예정된 워크플로우 단계 실행 시작');
 
       // 실행 예정 워크플로우 조회
-      const { data: executions, error } = await this.supabase
+      const { data: executions, error } = await supabase
         .from('workflow_executions')
         .select(`
           *,
@@ -361,8 +369,9 @@ export class WorkflowEngine {
    */
   async executeWorkflowStep(executionId: string): Promise<void> {
     try {
+      const supabase = await this.supabase;
       // 1. 실행 정보 조회
-      const { data: execution, error: executionError } = await this.supabase
+      const { data: execution, error: executionError } = await supabase
         .from('workflow_executions')
         .select(`
           *,
@@ -384,6 +393,12 @@ export class WorkflowEngine {
       }
 
       const step = workflow.workflow_steps[currentStepIndex];
+      
+      if (!step) {
+        console.error('워크플로우 단계를 찾을 수 없음:', currentStepIndex);
+        await this.completeWorkflow(execution);
+        return;
+      }
 
       console.log(`▶️ 워크플로우 단계 실행: ${workflow.name} - Step ${step.step} (${step.type})`);
 
@@ -401,8 +416,14 @@ export class WorkflowEngine {
         } else {
           // 다음 단계 준비
           const nextStep = workflow.workflow_steps[nextStepIndex];
+          
+          if (!nextStep) {
+            console.error('다음 워크플로우 단계를 찾을 수 없음:', nextStepIndex);
+            await this.completeWorkflow(execution);
+            return;
+          }
 
-          await this.supabase
+          await supabase
             .from('workflow_executions')
             .update({
               current_step: nextStepIndex,
@@ -426,7 +447,7 @@ export class WorkflowEngine {
         }
       } else {
         // 실행 실패 처리
-        await this.supabase
+        await supabase
           .from('workflow_executions')
           .update({
             status: 'failed',
@@ -440,14 +461,19 @@ export class WorkflowEngine {
     } catch (error) {
       console.error('워크플로우 단계 실행 실패:', error);
       
-      // 실행 상태를 실패로 업데이트
-      await this.supabase
+      try {
+        const supabase = await this.supabase;
+        // 실행 상태를 실패로 업데이트
+        await supabase
         .from('workflow_executions')
         .update({
           status: 'failed',
           error_message: error instanceof Error ? error.message : '알 수 없는 오류',
         })
         .eq('id', executionId);
+      } catch (updateError) {
+        console.error('실행 상태 업데이트 실패:', updateError);
+      }
     }
   }
 
@@ -710,8 +736,9 @@ export class WorkflowEngine {
    */
   private async completeWorkflow(execution: WorkflowExecution): Promise<void> {
     try {
+      const supabase = await this.supabase;
       // 1. 실행 상태 완료로 업데이트
-      await this.supabase
+      await supabase
         .from('workflow_executions')
         .update({
           status: 'completed',
@@ -720,12 +747,10 @@ export class WorkflowEngine {
         .eq('id', execution.id);
 
       // 2. 워크플로우 완료 수 증가
-      await this.supabase
-        .from('marketing_workflows')
-        .update({ 
-          completed_count: execution.workflow?.completed_count + 1 || 1 
-        })
-        .eq('id', execution.workflow_id);
+      await supabase
+        .rpc('increment_workflow_completed_count', { 
+          workflow_id: execution.workflow_id 
+        });
 
       console.log(`🎉 워크플로우 완료: ${execution.execution_data.workflow_name} for ${execution.hubspot_contact_id}`);
 
@@ -739,7 +764,8 @@ export class WorkflowEngine {
    */
   async getWorkflowAnalytics(workflowId?: string, daysBack: number = 30) {
     try {
-      let query = this.supabase
+      const supabase = await this.supabase;
+      let query = supabase
         .from('workflow_executions')
         .select('*')
         .gte('started_at', new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString());

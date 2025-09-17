@@ -1,17 +1,28 @@
 'use client';
 
 import {
+  AlertTriangle,
+  ArrowRight,
   Award,
+  Banknote,
   BarChart3,
+  BookOpen,
+  Briefcase,
   Building,
+  Building2,
   Calculator,
   Calendar,
   CheckCircle,
+  CheckCircle2,
+  ChevronRight,
   Clock,
   CreditCard,
+  Crown,
   DollarSign,
+  Download,
   ExternalLink,
   FileText,
+  Gem,
   Gift,
   GraduationCap,
   Heart,
@@ -21,6 +32,7 @@ import {
   Percent,
   Phone,
   PieChart,
+  PiggyBank,
   PlusCircle,
   Shield,
   Star,
@@ -29,8 +41,10 @@ import {
   TrendingUp,
   Users,
   Wallet,
+  XCircle,
   Zap,
 } from 'lucide-react';
+import Link from 'next/link';
 import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -820,6 +834,73 @@ export default function CorporateLifeInsurancePage() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Premium Family Office Upgrade Section */}
+        <section className="py-16 bg-gradient-to-br from-amber-50/50 to-blue-50/50">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <Badge variant="outline" className="mb-6 border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 shadow-lg backdrop-blur-sm">
+                <Crown className="h-4 w-4 mr-2" />
+                Family Office Excellence
+              </Badge>
+              
+              <h3 className="text-3xl md:text-4xl font-bold mb-4 font-playfair">
+                <span className="text-premium-gold">법인종신보험</span>을 넘어선{' '}
+                <span className="text-premium-navy">패밀리오피스</span>
+              </h3>
+              
+              <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+                개별 보험 상품에서 <span className="font-bold text-premium-navy">통합 리스크관리 솔루션</span>으로 업그레이드하세요.
+                성공한 기업가들이 선택한 차별화된 패밀리오피스 서비스를 경험해보세요.
+              </p>
+              
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-amber-100 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl mb-4 mx-auto">
+                    <Shield className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-bold text-lg mb-2 text-premium-navy">종합 리스크관리</h4>
+                  <p className="text-muted-foreground text-sm">보험·세무·투자를 통합한 원스톱 리스크관리 솔루션</p>
+                </div>
+                
+                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl mb-4 mx-auto">
+                    <Building className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-bold text-lg mb-2 text-premium-navy">기업·개인 통합설계</h4>
+                  <p className="text-muted-foreground text-sm">법인보험과 개인보험을 통합한 최적의 보장체계 구축</p>
+                </div>
+                
+                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-purple-100 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl mb-4 mx-auto">
+                    <Calculator className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-bold text-lg mb-2 text-premium-navy">절세 최적화</h4>
+                  <p className="text-muted-foreground text-sm">법인세·소득세·상속세 통합 절세 전략 수립</p>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="/family-office-center" 
+                  className="inline-flex items-center justify-center px-8 py-4 bg-premium-navy text-white text-lg font-semibold rounded-2xl hover:shadow-premium-navy transition-all duration-300 hover:scale-105"
+                >
+                  <Crown className="h-6 w-6 mr-2" />
+                  패밀리오피스 센터 보기
+                  <ChevronRight className="h-6 w-6 ml-2" />
+                </Link>
+                
+                <Link 
+                  href="/fp-center" 
+                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-premium-navy text-premium-navy text-lg font-semibold rounded-2xl hover:bg-premium-navy hover:text-white transition-all duration-300"
+                >
+                  <Users className="h-6 w-6 mr-2" />
+                  전문 FP 상담
+                </Link>
+              </div>
             </div>
           </div>
         </section>

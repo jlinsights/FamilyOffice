@@ -1,11 +1,6 @@
-/**
- * 주식 정보 카드 컴포넌트
- */
-
 'use client';
 
 import { TrendingUp, TrendingDown, RefreshCw } from 'lucide-react';
-
 import { useState, useEffect, useCallback } from 'react';
 
 import { Badge } from '@/components/ui/badge';
@@ -16,20 +11,48 @@ import { Skeleton } from '@/components/ui/skeleton';
 import type { StockData } from '@/lib/types/financial';
 
 /**
- * 주식 정보 카드 컴포넌트
+ * Props for the StockCard component
+ * @interface StockCardProps
  */
-
-/**
- * 주식 정보 카드 컴포넌트
- */
-
 interface StockCardProps {
+  /** Stock symbol (e.g., '005930.KS' for Samsung Electronics) */
   symbol: string;
+  /** Enable automatic refresh */
   autoRefresh?: boolean;
+  /** Refresh interval in milliseconds */
   refreshInterval?: number;
+  /** Additional CSS classes */
   className?: string;
 }
 
+/**
+ * Stock information card component with real-time data and auto-refresh.
+ * Displays Korean and international stock data with market indicators.
+ * 
+ * Features:
+ * - Real-time price updates
+ * - Auto-refresh capability
+ * - Korean market optimization (KRX stocks)
+ * - Visual change indicators
+ * - Error handling with retry
+ * - Loading states
+ * 
+ * @example
+ * ```tsx
+ * // Samsung Electronics stock
+ * <StockCard 
+ *   symbol="005930.KS" 
+ *   autoRefresh 
+ *   refreshInterval={300000} 
+ * />
+ * 
+ * // Apple stock
+ * <StockCard symbol="AAPL" />
+ * ```
+ * 
+ * @param props - The component props
+ * @returns JSX element with stock information card
+ */
 export default function StockCard({
   symbol,
   autoRefresh = false,

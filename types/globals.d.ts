@@ -75,7 +75,7 @@ export interface NavigationSubItem {
 }
 
 // 폼 상태 타입
-export interface FormState<T = any> {
+export interface FormState<T = Record<string, unknown>> {
   data: T;
   errors: Record<string, string>;
   isLoading: boolean;
@@ -83,7 +83,7 @@ export interface FormState<T = any> {
 }
 
 // API 응답 타입
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -110,8 +110,8 @@ export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
 
 declare global {
   interface Window {
-    Cal?: ((command: string, ...args: any[]) => any) & {
-      ns?: Record<string, (...args: any[]) => any>;
+    Cal?: ((command: string, ...args: unknown[]) => void) & {
+      ns?: Record<string, (...args: unknown[]) => void>;
     };
   }
 }

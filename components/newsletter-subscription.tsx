@@ -6,12 +6,35 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Loader2, Mail, CheckCircle } from 'lucide-react';
 
+/**
+ * Props for the NewsletterSubscription component
+ * @interface NewsletterSubscriptionProps
+ */
 interface NewsletterSubscriptionProps {
+  /** Source identifier for analytics tracking */
   source?: string;
+  /** Visual variant of the component */
   variant?: 'default' | 'compact' | 'inline';
+  /** Additional CSS classes */
   className?: string;
 }
 
+/**
+ * Newsletter subscription component with email validation and Beehiiv integration.
+ * Supports multiple variants and tracking sources for analytics.
+ * 
+ * @example
+ * ```tsx
+ * <NewsletterSubscription 
+ *   source="blog-page"
+ *   variant="default"
+ *   className="my-4"
+ * />
+ * ```
+ * 
+ * @param props - The component props
+ * @returns JSX element with newsletter subscription form
+ */
 export function NewsletterSubscription({ 
   source = 'blog',
   variant = 'default',
@@ -71,9 +94,9 @@ export function NewsletterSubscription({
 
   if (isSubscribed) {
     return (
-      <div className={`flex items-center gap-2 text-emerald-600 dark:text-emerald-400 ${className}`}>
+      <div className={`flex items-center gap-2 text-emerald-600 dark:text-emerald-400 ${className}`} role="status">
         <CheckCircle className="h-5 w-5" />
-        <span className="font-medium">Weekly Brief 구독이 완료되었습니다!</span>
+        <span className="font-medium">구독 완료!</span>
       </div>
     );
   }
@@ -90,11 +113,11 @@ export function NewsletterSubscription({
           className="max-w-xs"
           required
         />
-        <Button type="submit" disabled={isLoading} size="sm">
+        <Button type="submit" disabled={isLoading} size="sm" aria-disabled={isLoading}>
           {isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <Loader2 className="h-4 w-4 animate-spin" data-testid="loading-spinner" />
           ) : (
-            '구독'
+            '구독하기'
           )}
         </Button>
       </form>
@@ -121,11 +144,11 @@ export function NewsletterSubscription({
                 className="h-8 text-sm"
                 required
               />
-              <Button type="submit" disabled={isLoading} size="sm" className="h-8">
+              <Button type="submit" disabled={isLoading} size="sm" className="h-8" aria-disabled={isLoading}>
                 {isLoading ? (
-                  <Loader2 className="h-3 w-3 animate-spin" />
+                  <Loader2 className="h-3 w-3 animate-spin" data-testid="loading-spinner" />
                 ) : (
-                  '구독'
+                  '이메일로 받아보기'
                 )}
               </Button>
             </form>
@@ -143,7 +166,7 @@ export function NewsletterSubscription({
       </div>
       
       <h3 className="text-2xl font-bold mb-2 tracking-tight">
-        Weekly Brief 구독하기
+        자산관리 전문가 인사이트 구독
       </h3>
       <p className="text-base mb-8 opacity-90 leading-relaxed max-w-sm mx-auto">
         매주 화·금요일 오전 7:30 발송<br/>
@@ -170,11 +193,12 @@ export function NewsletterSubscription({
               disabled={isLoading}
               size="lg"
               className="bg-white text-primary hover:bg-white/90 dark:bg-white dark:text-primary dark:hover:bg-white/90 font-semibold px-6 h-11"
+              aria-disabled={isLoading}
             >
               {isLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-4 w-4 animate-spin" data-testid="loading-spinner" />
               ) : (
-                '구독'
+                '무료 구독하기'
               )}
             </Button>
           </div>

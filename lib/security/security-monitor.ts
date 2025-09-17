@@ -50,7 +50,7 @@ const rateLimitViolations = new Map<string, number>();
  */
 export async function logSecurityEvent(event: SecurityEvent, request?: NextRequest): Promise<void> {
   try {
-    const ip = request?.ip || request?.headers.get('x-forwarded-for') || 'unknown';
+    const ip = request?.headers.get('x-forwarded-for') || request?.headers.get('x-real-ip') || 'unknown';
     const userAgent = request?.headers.get('user-agent') || 'unknown';
 
     // Supabase에 보안 로그 저장
@@ -147,7 +147,7 @@ export function detectSuspiciousActivity(request: NextRequest): {
   riskLevel: 'low' | 'medium' | 'high' | 'critical';
 } {
   const reasons: string[] = [];
-  const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+  const ip =  request.headers.get('x-forwarded-for') || 'unknown';
   const userAgent = request.headers.get('user-agent') || '';
   
   // 1. 알려진 의심스러운 IP 확인
@@ -217,7 +217,7 @@ export async function autoSecurityResponse(
     return null;
   }
   
-  const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+  const ip =  request.headers.get('x-forwarded-for') || 'unknown';
   
   // 로그 기록
   await logSecurityEvent({

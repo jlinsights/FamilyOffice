@@ -10,7 +10,20 @@ const nextConfig = {
       '@radix-ui/react-icons',
       'lucide-react',
       'recharts',
+      '@clerk/nextjs',
+      '@supabase/supabase-js',
+      'framer-motion',
+      'react-hook-form',
+      '@hookform/resolvers',
+      'zod',
+      'clsx',
+      'class-variance-authority',
+      'tailwind-merge'
     ],
+    // Enable server components optimization
+    serverComponentsExternalPackages: ['@clerk/nextjs', '@supabase/supabase-js'],
+    // Better tree shaking
+    optimizeCss: true,
   },
   eslint: {
     ignoreDuringBuilds: false, // Enable ESLint validation during builds
@@ -96,16 +109,46 @@ const nextConfig = {
       { module: /node_modules\/punycode/ },
     ];
 
-    // Optimize chunk splitting
+    // Optimize chunk splitting with granular vendor splitting
     if (!dev && !isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
+        maxInitialRequests: 25,
+        maxAsyncRequests: 20,
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
             chunks: 'all',
             priority: 10,
+          },
+          // Split out React and related packages
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+            name: 'react',
+            chunks: 'all',
+            priority: 20,
+          },
+          // Split out UI libraries
+          ui: {
+            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|class-variance-authority|clsx|tailwind-merge)[\\/]/,
+            name: 'ui',
+            chunks: 'all',
+            priority: 15,
+          },
+          // Split out Clerk
+          clerk: {
+            test: /[\\/]node_modules[\\/]@clerk[\\/]/,
+            name: 'clerk',
+            chunks: 'async',
+            priority: 18,
+          },
+          // Split out Supabase
+          supabase: {
+            test: /[\\/]node_modules[\\/]@supabase[\\/]/,
+            name: 'supabase',
+            chunks: 'async',
+            priority: 17,
           },
           common: {
             name: 'common',
@@ -168,6 +211,37 @@ const nextConfig = {
         destination: 'https://familyoffices.vip/:path*',
         permanent: true,
       },
+      // 🔄 중복 페이지 통합 리다이렉트 
+      {
+        source: '/inheritance-gift',
+        destination: '/inheritance-gift-tax',
+        permanent: true,
+      },
+      {
+        source: '/estate-planning',
+        destination: '/inheritance-gift-tax',
+        permanent: true,
+      },
+      {
+        source: '/business-succession',
+        destination: '/business-succession-strategy',
+        permanent: true,
+      },
+      {
+        source: '/tax-planning',
+        destination: '/tax-strategy',
+        permanent: true,
+      },
+      {
+        source: '/family-office',
+        destination: '/family-office-center',
+        permanent: true,
+      },
+      {
+        source: '/labor-management',
+        destination: '/hr-labor-management',
+        permanent: true,
+      },
     ];
   },
 
@@ -187,7 +261,7 @@ const nextConfig = {
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'DENY'
           },
           {
             key: 'X-Content-Type-Options',
@@ -195,11 +269,19 @@ const nextConfig = {
           },
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
+            value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), payment=(self)'
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.cal.com https://app.cal.com 'nonce-*'; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://api.beehiiv.com https://api.cal.com https://vitals.vercel-insights.com https://www.google-analytics.com https://api.anthropic.com wss: https:; frame-src https://cal.com https://app.cal.com; object-src 'none'; base-uri 'self'; form-action 'self';"
+            value: "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://js.hs-scripts.com https://forms.hubspot.com https://app.cal.com https://cal.com 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://js.hs-scripts.com https://forms.hubspot.com https://api.github.com https://vitals.vercel-insights.com; frame-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://app.cal.com https://cal.com https://js.stripe.com https://checkout.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
           },
           {
             key: 'Access-Control-Allow-Origin',

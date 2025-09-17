@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { auth } from '@clerk/nextjs/server';
 
-export async function requireAuth() {
+export async function requireAuth(): Promise<string | NextResponse> {
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -10,7 +10,7 @@ export async function requireAuth() {
   return userId;
 }
 
-export async function requireAdmin() {
+export async function requireAdmin(): Promise<string | NextResponse> {
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -32,7 +32,7 @@ export async function requireAdmin() {
 
 type AuthHandler = (req: Request, userId: string) => Promise<NextResponse>;
 
-export function withAuth(handler: AuthHandler) {
+export function withAuth(handler: AuthHandler): (req: Request) => Promise<NextResponse> {
   return async (req: Request) => {
     const authResult = await requireAuth();
     if (authResult instanceof NextResponse) {
@@ -42,7 +42,7 @@ export function withAuth(handler: AuthHandler) {
   };
 }
 
-export function withAdmin(handler: AuthHandler) {
+export function withAdmin(handler: AuthHandler): (req: Request) => Promise<NextResponse> {
   return async (req: Request) => {
     const authResult = await requireAdmin();
     if (authResult instanceof NextResponse) {

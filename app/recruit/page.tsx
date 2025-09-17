@@ -125,8 +125,8 @@ const recruitFaqCategories = [
 ];
 
 // 아이콘 매핑 함수
-const getIcon = (iconName: string) => {
-  const iconMap: { [key: string]: any } = {
+const getIcon = (iconName: string): React.ElementType => {
+  const iconMap: Record<string, React.ElementType> = {
     Info: Info,
     FileText: FileText,
     DollarSign: DollarSign,

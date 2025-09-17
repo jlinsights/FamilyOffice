@@ -85,13 +85,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/family-office`,
+      url: `${baseUrl}/family-office-center`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
-      priority: 0.9,
+      priority: 1.0,
     },
     {
-      url: `${baseUrl}/business-succession`,
+      url: `${baseUrl}/business-succession-strategy`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
@@ -116,16 +116,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/tax-planning`,
+      url: `${baseUrl}/tax-strategy`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/estate-planning`,
+      url: `${baseUrl}/inheritance-gift-tax`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/hr-labor-management`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/business-certification`,

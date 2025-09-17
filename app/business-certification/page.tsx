@@ -576,8 +576,8 @@ export default function BusinessCertificationPage() {
   ];
 
   // 아이콘 매핑 함수
-  const getIcon = (iconName: string) => {
-    const icons: { [key: string]: any } = {
+  const getIcon = (iconName: string): React.ElementType => {
+    const icons: Record<string, React.ElementType> = {
       Award,
       FileText,
       Building,

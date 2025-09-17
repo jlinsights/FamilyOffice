@@ -5,6 +5,23 @@ import { CalComPopup } from './cal-com-popup';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 
+/**
+ * Floating Cal.com booking widget positioned at bottom-right of screen.
+ * Provides quick access to consultation booking across all pages.
+ * 
+ * Features:
+ * - Responsive hover animations
+ * - Korean timezone optimization
+ * - Anti-flicker mounting strategy
+ * - High z-index for overlay positioning
+ * 
+ * @example
+ * ```tsx
+ * <CalComFloating />
+ * ```
+ * 
+ * @returns Fixed-position floating booking button
+ */
 export function CalComFloating() {
   const [isHovered, setIsHovered] = useState(false);
   const [mounted, setMounted] = useState(false);

@@ -222,7 +222,7 @@ export function ConsultationForm() {
           <option value="inheritance">상속·증여 설계</option>
           <option value="tax-legal">세무·법률 자문</option>
           <option value="real-estate">부동산 포트폴리오</option>
-          <option value="business-succession">가업승계</option>
+          <option value="business-succession-strategy">가업승계</option>
           <option value="global-assets">해외 자산 관리</option>
         </select>
       </div>

@@ -4,21 +4,56 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
+/**
+ * Props for the OptimizedImage component
+ * @interface OptimizedImageProps
+ */
 interface OptimizedImageProps {
+  /** Image source URL */
   src: string;
+  /** Alt text for accessibility */
   alt: string;
+  /** Image width in pixels */
   width?: number;
+  /** Image height in pixels */
   height?: number;
+  /** Additional CSS classes */
   className?: string;
+  /** Whether to prioritize loading (for above-fold images) */
   priority?: boolean;
+  /** Image quality (1-100) */
   quality?: number;
+  /** Placeholder type during loading */
   placeholder?: 'blur' | 'empty';
+  /** Responsive sizes attribute */
   sizes?: string;
+  /** Whether to fill parent container */
   fill?: boolean;
+  /** Callback fired when image loads */
   onLoad?: () => void;
+  /** Callback fired when image fails to load */
   onError?: () => void;
 }
 
+/**
+ * An optimized image component with WebP/AVIF support, loading states, and error handling.
+ * Automatically detects WebP support and provides fallback mechanisms.
+ * 
+ * @example
+ * ```tsx
+ * <OptimizedImage
+ *   src="/hero-image.jpg"
+ *   alt="Hero image"
+ *   width={800}
+ *   height={400}
+ *   priority
+ *   quality={90}
+ * />
+ * ```
+ * 
+ * @param props - The component props
+ * @returns JSX element with optimized image loading
+ */
 export function OptimizedImage({
   src,
   alt,
@@ -122,7 +157,11 @@ export function OptimizedImage({
   );
 }
 
-// 특정 용도별 최적화된 이미지 컴포넌트들
+/**
+ * Optimized image component for hero sections with high quality and priority loading
+ * @param props - OptimizedImage props
+ * @returns Hero image with optimized settings
+ */
 export function HeroImage(props: OptimizedImageProps) {
   return (
     <OptimizedImage
@@ -134,6 +173,11 @@ export function HeroImage(props: OptimizedImageProps) {
   );
 }
 
+/**
+ * Optimized image component for thumbnails with reduced quality and responsive sizes
+ * @param props - OptimizedImage props
+ * @returns Thumbnail image with optimized settings
+ */
 export function ThumbnailImage(props: OptimizedImageProps) {
   return (
     <OptimizedImage
@@ -144,6 +188,11 @@ export function ThumbnailImage(props: OptimizedImageProps) {
   );
 }
 
+/**
+ * Optimized image component for user avatars with small size optimization
+ * @param props - OptimizedImage props
+ * @returns Avatar image with optimized settings
+ */
 export function AvatarImage(props: OptimizedImageProps) {
   return (
     <OptimizedImage
@@ -154,7 +203,14 @@ export function AvatarImage(props: OptimizedImageProps) {
   );
 }
 
-// 배경 이미지 최적화
+/**
+ * Optimized background image component with overlay support
+ * @param src - Image source URL
+ * @param alt - Alt text for accessibility
+ * @param className - Additional CSS classes
+ * @param children - Content to overlay on the background image
+ * @returns Background image container with overlay content
+ */
 export function BackgroundImage({
   src,
   alt,

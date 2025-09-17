@@ -14,10 +14,16 @@ import { WebVitalsTracker } from '@/components/web-vitals-tracker';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
 import { ChannelTalk } from '@/components/channel-talk';
 import { DebugStyles } from './debug-styles';
+import { PreloadCriticalResources } from '@/components/preload-critical-resources';
 
 // import { defaultMetadata } from '@/lib/seo';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter'
+});
 
 // SuperClaude 통합 SEO 프레임워크 적용
 export const metadata: Metadata = {
@@ -72,6 +78,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
+        <PreloadCriticalResources />
         {/* 🚀 Core Web Vitals 최적화 - 리소스 힌트 */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -378,7 +385,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} ${inter.variable}`} style={{ fontOpticalSizing: 'auto' }}>
         <ErrorBoundary>
           <DomainMigrationBanner />
           <ThemeProvider

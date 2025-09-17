@@ -190,7 +190,13 @@ export async function checkUserAdmin(clerkId: string): Promise<boolean> {
 /**
  * 사용자 통계 조회
  */
-export async function getUserStats() {
+export async function getUserStats(): Promise<{
+  total: number;
+  admins: number;
+  active: number;
+  deleted: number;
+  recent: any[];
+}> {
   try {
     const { data, error } = await supabaseAdmin
       .from('users')

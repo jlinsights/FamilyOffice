@@ -168,10 +168,34 @@ function getPerformanceGrade(score: number): string {
   return 'F';
 }
 
+interface WebVitalsAnalytics {
+  summary: {
+    performanceScore: number;
+    totalSamples: number;
+    averageScores: {
+      lcp: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      fid: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      cls: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      fcp: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      ttfb: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      inp: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+    };
+  };
+  pageBreakdown: unknown[];
+}
+
+interface PerformanceAlert {
+  type: 'critical' | 'warning' | 'info';
+  metric: string;
+  message: string;
+  value: number;
+  threshold: number;
+}
+
 /**
  * 성능 개선 권장사항 생성
  */
-function generateRecommendations(analytics: any, alerts: any[]): string[] {
+function generateRecommendations(analytics: WebVitalsAnalytics, alerts: PerformanceAlert[]): string[] {
   const recommendations: string[] = [];
   const { averageScores } = analytics.summary;
 

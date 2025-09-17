@@ -48,13 +48,20 @@ export async function GET(request: NextRequest) {
       );
 
       if (result.success) {
-        return NextResponse.json({
+        const response = NextResponse.json({
           success: true,
           data: result.data,
           fromCache: !forceRefresh,
           timestamp: result.timestamp,
           count: result.data?.length || 0,
         });
+        
+        // HTTP caching headers
+        response.headers.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=60');
+        response.headers.set('CDN-Cache-Control', 'max-age=300');
+        response.headers.set('Vary', 'Accept-Encoding');
+        
+        return response;
       } else {
         return NextResponse.json(
           {
@@ -105,7 +112,7 @@ export async function GET(request: NextRequest) {
       );
 
       if (result.success) {
-        return NextResponse.json({
+        const response = NextResponse.json({
           success: true,
           data: result.data,
           fromCache: !forceRefresh,
@@ -113,6 +120,13 @@ export async function GET(request: NextRequest) {
           count: result.data?.length || 0,
           requested: symbolArray.length,
         });
+        
+        // HTTP caching headers
+        response.headers.set('Cache-Control', 'public, max-age=180, stale-while-revalidate=60');
+        response.headers.set('CDN-Cache-Control', 'max-age=180');
+        response.headers.set('Vary', 'Accept-Encoding');
+        
+        return response;
       } else {
         return NextResponse.json(
           {
@@ -143,12 +157,19 @@ export async function GET(request: NextRequest) {
       );
 
       if (result.success) {
-        return NextResponse.json({
+        const response = NextResponse.json({
           success: true,
           data: result.data,
           fromCache: !forceRefresh,
           timestamp: result.timestamp,
         });
+        
+        // HTTP caching headers
+        response.headers.set('Cache-Control', 'public, max-age=120, stale-while-revalidate=60');
+        response.headers.set('CDN-Cache-Control', 'max-age=120');
+        response.headers.set('Vary', 'Accept-Encoding');
+        
+        return response;
       } else {
         return NextResponse.json(
           {

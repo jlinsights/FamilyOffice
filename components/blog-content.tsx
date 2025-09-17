@@ -17,10 +17,34 @@ import { Button } from '@/components/ui/button';
 import { blogPosts } from '@/lib/blog-data';
 import type { BlogPost } from '@/types/blog';
 
+/**
+ * Props for the BlogContent component
+ * @interface BlogContentProps
+ */
 interface BlogContentProps {
+  /** Additional CSS classes */
   className?: string;
 }
 
+/**
+ * Blog content component that displays filtered blog posts with category support.
+ * Handles URL-based category filtering and separates featured from regular posts.
+ * 
+ * Features:
+ * - URL parameter-based category filtering
+ * - Featured posts section
+ * - Responsive grid layout
+ * - Korean content optimization
+ * - SEO-friendly structure
+ * 
+ * @example
+ * ```tsx
+ * <BlogContent className="animate-slide-up" />
+ * ```
+ * 
+ * @param props - The component props
+ * @returns JSX element with blog post grid
+ */
 export function BlogContent({ className }: BlogContentProps) {
   const searchParams = useSearchParams();
   const selectedCategory = searchParams.get('category') || '';

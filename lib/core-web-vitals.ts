@@ -26,12 +26,12 @@ export interface WebVitalsData {
   summary: {
     totalSamples: number;
     averageScores: {
-      lcp: { value: number; rating: string };
-      fid: { value: number; rating: string };
-      cls: { value: number; rating: string };
-      fcp: { value: number; rating: string };
-      ttfb: { value: number; rating: string };
-      inp: { value: number; rating: string };
+      lcp: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      fid: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      cls: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      fcp: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      ttfb: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
+      inp: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
     };
     performanceScore: number;
   };
@@ -116,7 +116,11 @@ class WebVitalsMonitoring {
   private getConnectionInfo(): string | null {
     if (typeof window === 'undefined' || !('navigator' in window)) return null;
 
-    const nav = navigator as any;
+    const nav = navigator as Navigator & {
+      connection?: { effectiveType: string; downlink: number; rtt: number };
+      mozConnection?: { effectiveType: string; downlink: number; rtt: number };
+      webkitConnection?: { effectiveType: string; downlink: number; rtt: number };
+    };
     const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
     
     if (!connection) return null;
@@ -134,10 +138,10 @@ class WebVitalsMonitoring {
   recordMetric(metric: NextWebVitalsMetric): void {
     const webVitalsMetric: WebVitalsMetric = {
       id: metric.id,
-      name: metric.name as any,
+      name: metric.name as 'CLS' | 'FCP' | 'FID' | 'LCP' | 'TTFB' | 'INP',
       value: metric.value,
       rating: this.calculateRating(metric.name, metric.value),
-      delta: (metric as any).delta || 0,
+      delta: (metric as { delta?: number }).delta || 0,
       timestamp: Date.now(),
       url: typeof window !== 'undefined' ? window.location.pathname : '',
       userAgent: typeof window !== 'undefined' ? navigator.userAgent : '',
@@ -246,7 +250,7 @@ class WebVitalsMonitoring {
   private calculateAverageForMetric(
     metrics: WebVitalsMetric[],
     metricName: WebVitalsMetric['name']
-  ): { value: number; rating: string } {
+  ): { value: number; rating: 'good' | 'needs-improvement' | 'poor' } {
     const filteredMetrics = metrics.filter(m => m.name === metricName);
     
     if (filteredMetrics.length === 0) {
@@ -262,7 +266,7 @@ class WebVitalsMonitoring {
   /**
    * 전체 성능 점수 계산 (Google Lighthouse 스타일)
    */
-  private calculatePerformanceScore(averageScores: any): number {
+  private calculatePerformanceScore(averageScores: Record<string, { value: number; rating: string }>): number {
     const weights = {
       lcp: 0.25,  // 25%
       fid: 0.10,  // 10%
@@ -380,7 +384,13 @@ class WebVitalsMonitoring {
     threshold: number;
   }> {
     const recentMetrics = this.metrics.slice(-100); // 최근 100개 메트릭
-    const alerts: any[] = [];
+    const alerts: Array<{
+      type: 'critical' | 'warning' | 'info';
+      metric: string;
+      message: string;
+      value: number;
+      threshold: number;
+    }> = [];
 
     // 각 메트릭별 최근 평균 계산
     const metricTypes = ['LCP', 'FID', 'CLS', 'FCP', 'TTFB', 'INP'] as const;

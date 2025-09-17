@@ -38,30 +38,40 @@ export const HeroSection = memo(function HeroSection() {
             variant="outline"
             size="lg"
             animation="fade"
+            className="border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 dark:border-amber-800 dark:from-amber-950/80 dark:to-amber-900/50 dark:text-amber-200 shadow-lg backdrop-blur-sm"
           >
             <ClientOnlyIcon icon={Crown} className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
-            Heritage Planning Solution
+            Family Office Excellence
           </Badge>
         </div>
 
         {/* 메인 헤드라인 */}
-        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl leading-tight mb-6 sm:mb-8 lg:mb-10 text-primary whitespace-pre-line animate-slide-up">
-          百年永續
+        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent whitespace-pre-line animate-slide-up">
+          Family Office
+          <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-wider">
+            세대를 잇는 자산관리
+          </span>
         </h1>
 
         {/* 서브 헤드라인 */}
         <p
-          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground mb-4 sm:mb-6 lg:mb-8 animate-slide-up"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 animate-slide-up"
           style={{ animationDelay: '200ms' }}
         >
-          성공한 기업가·자산가를 위한 전용 솔루션
+          최고 자산가와 성공한 기업가를 위한
+          <span className="block mt-1 font-light text-muted-foreground">
+            차별화된 전용 솔루션
+          </span>
         </p>
 
         <p
-          className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto animate-slide-up leading-relaxed"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto animate-slide-up leading-relaxed font-light"
           style={{ animationDelay: '300ms' }}
         >
-          가업승계부터 개인자산관리까지, 百年永續의 기반을 함께 구축합니다
+          자산 보전부터 가업승계, 차세대 육성까지
+          <span className="block mt-1">
+            百年永續의 기반을 함께 구축합니다
+          </span>
         </p>
 
         {/* 핵심 성과 지표 */}
@@ -69,64 +79,64 @@ export const HeroSection = memo(function HeroSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 mb-10 sm:mb-12 md:mb-14 lg:mb-20 animate-slide-up"
           style={{ animationDelay: '400ms' }}
         >
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2 lg:mb-3">
+          <div className="text-center glass-premium rounded-2xl p-6 hover-premium">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-gold mb-2 lg:mb-3">
               <AnimatedCounter
-                end={10}
+                end={20}
                 suffix="년+"
                 startAnimation={startAnimation}
                 duration={1500}
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">가업승계 노하우</div>
+            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground font-medium">Family Office 전문 경험</div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-600 dark:text-green-400 mb-2 lg:mb-3">
+          <div className="text-center glass-premium rounded-2xl p-6 hover-premium">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-navy mb-2 lg:mb-3">
               <AnimatedCounter
-                end={1500}
+                end={100}
                 suffix="+"
                 startAnimation={startAnimation}
                 duration={2000}
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">
-              M&A 플랫폼
+            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground font-medium">
+              VIP 고객
               <br className="hidden sm:inline" />
-              <span className="sm:hidden"> </span>잠재 매수기업
+              <span className="sm:hidden"> </span>패밀리 서비스
             </div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-violet-600 dark:text-violet-400 mb-2 lg:mb-3">
+          <div className="text-center glass-premium rounded-2xl p-6 hover-premium">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-600 dark:text-green-400 mb-2 lg:mb-3">
               <AnimatedCounter
-                end={60}
-                suffix="+"
+                end={10}
+                suffix="조+"
                 startAnimation={startAnimation}
                 duration={1500}
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">
-              Big 4 출신
+            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground font-medium">
+              관리 자산
               <br className="hidden sm:inline" />
-              <span className="sm:hidden"> </span>전문가 컨소시엄
+              <span className="sm:hidden"> </span>규모
             </div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-orange-600 dark:text-orange-400 mb-2 lg:mb-3">
+          <div className="text-center glass-premium rounded-2xl p-6 hover-premium">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2 lg:mb-3">
               <AnimatedCounter
-                end={30}
-                suffix="억+"
+                end={98}
+                suffix="%"
                 startAnimation={startAnimation}
                 duration={1800}
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground">
-              개인자산 관리
+            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground font-medium">
+              고객 만족도
               <br className="hidden sm:inline" />
-              <span className="sm:hidden"> </span>최소 기준
+              <span className="sm:hidden"> </span>평가
             </div>
           </div>
         </div>

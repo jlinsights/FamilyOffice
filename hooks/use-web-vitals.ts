@@ -5,7 +5,7 @@
 import { useEffect } from 'react';
 import { reportWebVitals } from '@/lib/core-web-vitals';
 
-export function useWebVitals() {
+export function useWebVitals(): void {
   useEffect(() => {
     // Web Performance Observer를 사용하여 메트릭 수집
     const observeWebVitals = () => {

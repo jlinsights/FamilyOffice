@@ -6,6 +6,11 @@ import { Slot } from '@radix-ui/react-slot';
 
 import { cn } from '@/lib/utils';
 
+/**
+ * Button component variants and styling configuration
+ * Supports multiple visual variants, sizes, and Korean market optimization
+ */
+
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-xl text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden group',
   {
@@ -47,12 +52,38 @@ const buttonVariants = cva(
   }
 );
 
+/**
+ * Button component props interface
+ * @interface ButtonProps
+ */
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  /** Render as child component (using Radix Slot) */
   asChild?: boolean;
 }
 
+/**
+ * Custom Button component with enhanced styling and Korean market optimization.
+ * 
+ * Features:
+ * - 12 variant styles including Korean business themes
+ * - Responsive hover animations with scale effects
+ * - Support for consultation and emerald luxury variants
+ * - Radix Slot integration for composition
+ * - Full accessibility support
+ * 
+ * @example
+ * ```tsx
+ * <Button variant="consultation" size="lg">
+ *   무료 상담 예약
+ * </Button>
+ * 
+ * <Button asChild>
+ *   <Link href="/contact">연락하기</Link>
+ * </Button>
+ * ```
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
