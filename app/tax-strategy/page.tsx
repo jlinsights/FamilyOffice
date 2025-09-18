@@ -175,15 +175,15 @@ const TaxStrategyPage = () => {
                   color: "purple"
                 }
               ].map((item, index) => (
-                <Card key={index} className="relative overflow-hidden hover:shadow-2xl transition-all duration-500 group">
+                <Card key={index} className="relative overflow-hidden bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5 transition-all duration-500 group">
                   <div className={`absolute inset-0 bg-gradient-to-br from-${item.color}-500/5 to-${item.color}-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   
                   <CardHeader className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 bg-${item.color}-100 dark:bg-${item.color}-900/20 rounded-lg flex items-center justify-center`}>
-                        <item.icon className={`h-6 w-6 text-${item.color}-600`} />
+                      <div className={`w-12 h-12 bg-${item.color}-100 dark:bg-${item.color}-900/30 rounded-lg flex items-center justify-center`}>
+                        <item.icon className={`h-6 w-6 text-${item.color}-600 dark:text-${item.color}-400`} />
                       </div>
-                      <Badge variant="secondary" className={`bg-${item.color}-100 text-${item.color}-700`}>
+                      <Badge variant="secondary" className={`bg-${item.color}-100 dark:bg-${item.color}-900/30 text-${item.color}-700 dark:text-${item.color}-300`}>
                         {item.savingRate}% 절세
                       </Badge>
                     </div>
@@ -201,14 +201,14 @@ const TaxStrategyPage = () => {
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground">절세 후</span>
-                        <span className={`font-bold text-${item.color}-600`}>
+                        <span className={`font-bold text-${item.color}-600 dark:text-${item.color}-400`}>
                           {(item.afterTax / 10000).toLocaleString()}만원
                         </span>
                       </div>
                       <div className="border-t pt-4">
                         <div className="flex justify-between items-center">
                           <span className="font-semibold">절세 금액</span>
-                          <span className={`text-xl font-bold text-${item.color}-600`}>
+                          <span className={`text-xl font-bold text-${item.color}-600 dark:text-${item.color}-400`}>
                             <AnimatedCounter
                               end={(item.beforeTax - item.afterTax) / 10000}
                               suffix="만원"
@@ -359,15 +359,15 @@ const TaxStrategyPage = () => {
                       color: "indigo"
                     }
                   ].map((strategy, index) => (
-                    <Card key={index} className="group hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
+                    <Card key={index} className="group bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5 transition-all duration-500 relative overflow-hidden">
                       <div className={`absolute inset-0 bg-gradient-to-br from-${strategy.color}-500/5 to-${strategy.color}-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                       
                       <CardHeader className="relative z-10">
                         <div className="flex items-center justify-between mb-4">
-                          <div className={`w-12 h-12 bg-${strategy.color}-100 dark:bg-${strategy.color}-900/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                            <strategy.icon className={`h-6 w-6 text-${strategy.color}-600`} />
+                          <div className={`w-12 h-12 bg-${strategy.color}-100 dark:bg-${strategy.color}-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                            <strategy.icon className={`h-6 w-6 text-${strategy.color}-600 dark:text-${strategy.color}-400`} />
                           </div>
-                          <Badge variant="outline" className={`text-${strategy.color}-700 border-${strategy.color}-200`}>
+                          <Badge variant="outline" className={`text-${strategy.color}-700 dark:text-${strategy.color}-300 border-${strategy.color}-200 dark:border-${strategy.color}-700`}>
                             절세 전략
                           </Badge>
                         </div>
@@ -391,19 +391,19 @@ const TaxStrategyPage = () => {
                         </div>
 
                         <div className="space-y-3 mb-6">
-                          <div className={`p-3 bg-${strategy.color}-50 dark:bg-${strategy.color}-900/20 rounded-lg`}>
+                          <div className={`p-3 bg-${strategy.color}-50 dark:bg-${strategy.color}-900/30 rounded-lg`}>
                             <div className="text-xs font-semibold text-muted-foreground mb-1">예상 절세 효과</div>
-                            <div className={`text-lg font-bold text-${strategy.color}-600`}>{strategy.expectedSaving}</div>
+                            <div className={`text-lg font-bold text-${strategy.color}-600 dark:text-${strategy.color}-400`}>{strategy.expectedSaving}</div>
                           </div>
                           
-                          <div className="p-3 bg-muted/30 rounded-lg">
+                          <div className="p-3 bg-muted/30 dark:bg-muted/20 rounded-lg">
                             <div className="text-xs font-semibold text-muted-foreground mb-1">성공 사례</div>
                             <div className="text-sm text-foreground">{strategy.caseStudy}</div>
                           </div>
                         </div>
 
                         <div className="flex gap-2">
-                          <Button asChild className={`flex-1 bg-${strategy.color}-600 hover:bg-${strategy.color}-700 text-white`} size="sm">
+                          <Button asChild className={`flex-1 bg-${strategy.color}-600 hover:bg-${strategy.color}-700 dark:bg-${strategy.color}-600 dark:hover:bg-${strategy.color}-700 text-white`} size="sm">
                             <Link href={`/solutions/${strategy.title.replace(/\s+/g, '-').toLowerCase()}`}>
                               자세히 보기
                             </Link>
@@ -412,7 +412,7 @@ const TaxStrategyPage = () => {
                             buttonText="상담"
                             variant="outline"
                             size="sm"
-                            className={`border-${strategy.color}-200 text-${strategy.color}-700 hover:bg-${strategy.color}-50`}
+                            className={`border-${strategy.color}-200 dark:border-${strategy.color}-700 text-${strategy.color}-700 dark:text-${strategy.color}-300 hover:bg-${strategy.color}-50 dark:hover:bg-${strategy.color}-900/30`}
                             eventType="consultation"
                             trigger={
                               <Button variant="outline" size="sm">
@@ -471,13 +471,13 @@ const TaxStrategyPage = () => {
                       icon: TrendingDown
                     }
                   ].map((strategy, index) => (
-                    <Card key={index} className="group hover:shadow-lg transition-all duration-300">
+                    <Card key={index} className="group bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-lg dark:hover:shadow-white/5 transition-all duration-300">
                       <CardHeader>
                         <div className="flex items-center justify-between mb-4">
-                          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
-                            <strategy.icon className="h-6 w-6 text-blue-600" />
+                          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+                            <strategy.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                           </div>
-                          <Badge variant="outline" className="text-blue-700">
+                          <Badge variant="outline" className="text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700">
                             개인 절세
                           </Badge>
                         </div>
@@ -496,12 +496,12 @@ const TaxStrategyPage = () => {
                         </div>
 
                         <div className="space-y-3 mb-6">
-                          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                          <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
                             <div className="text-xs font-semibold text-muted-foreground mb-1">절세 효과</div>
-                            <div className="text-lg font-bold text-blue-600">{strategy.expectedSaving}</div>
+                            <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{strategy.expectedSaving}</div>
                           </div>
                           
-                          <div className="p-3 bg-muted/30 rounded-lg">
+                          <div className="p-3 bg-muted/30 dark:bg-muted/20 rounded-lg">
                             <div className="text-xs font-semibold text-muted-foreground mb-1">추천 고객</div>
                             <div className="text-sm text-foreground">{strategy.targetClient}</div>
                           </div>
@@ -511,7 +511,7 @@ const TaxStrategyPage = () => {
                           buttonText="맞춤 상담 신청"
                           variant="outline"
                           size="sm"
-                          className="w-full border-blue-200 text-blue-700 hover:bg-blue-50"
+                          className="w-full border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/30"
                           eventType="consultation"
                         />
                       </CardContent>
@@ -565,13 +565,13 @@ const TaxStrategyPage = () => {
                       ]
                     }
                   ].map((strategy, index) => (
-                    <Card key={index} className="group hover:shadow-xl transition-all duration-500">
+                    <Card key={index} className="group bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-xl dark:hover:shadow-white/5 transition-all duration-500">
                       <CardHeader>
                         <div className="flex items-center justify-between mb-4">
-                          <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-xl flex items-center justify-center">
-                            <strategy.icon className="h-6 w-6 text-purple-600" />
+                          <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center">
+                            <strategy.icon className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                           </div>
-                          <Badge variant="outline" className="text-purple-700">
+                          <Badge variant="outline" className="text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-700">
                             승계 절세
                           </Badge>
                         </div>
@@ -583,7 +583,7 @@ const TaxStrategyPage = () => {
                         <div className="space-y-6">
                           {/* 핵심 혜택 */}
                           <div>
-                            <h4 className="font-semibold text-sm mb-3 text-purple-700">핵심 혜택</h4>
+                            <h4 className="font-semibold text-sm mb-3 text-purple-700 dark:text-purple-300">핵심 혜택</h4>
                             <div className="space-y-2">
                               {strategy.benefits.map((benefit, benefitIndex) => (
                                 <div key={benefitIndex} className="flex items-start text-sm">
@@ -596,12 +596,12 @@ const TaxStrategyPage = () => {
 
                           {/* 절세 효과 및 성공 사례 */}
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                            <div className="p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg">
                               <div className="text-xs font-semibold text-muted-foreground mb-1">절세 효과</div>
-                              <div className="text-lg font-bold text-purple-600">{strategy.expectedSaving}</div>
+                              <div className="text-lg font-bold text-purple-600 dark:text-purple-400">{strategy.expectedSaving}</div>
                             </div>
                             
-                            <div className="p-4 bg-muted/30 rounded-lg">
+                            <div className="p-4 bg-muted/30 dark:bg-muted/20 rounded-lg">
                               <div className="text-xs font-semibold text-muted-foreground mb-2">성공 사례</div>
                               <div className="text-sm text-foreground">{strategy.caseStudy}</div>
                             </div>
@@ -609,7 +609,7 @@ const TaxStrategyPage = () => {
 
                           {/* 요건 사항 */}
                           <div>
-                            <h4 className="font-semibold text-sm mb-3 text-orange-600 flex items-center">
+                            <h4 className="font-semibold text-sm mb-3 text-orange-600 dark:text-orange-400 flex items-center">
                               <AlertTriangle className="h-4 w-4 mr-1" />
                               주요 요건
                             </h4>
@@ -624,14 +624,14 @@ const TaxStrategyPage = () => {
 
                           {/* 진행 단계 */}
                           <div>
-                            <h4 className="font-semibold text-sm mb-3 text-blue-600">진행 단계</h4>
+                            <h4 className="font-semibold text-sm mb-3 text-blue-600 dark:text-blue-400">진행 단계</h4>
                             <div className="grid grid-cols-2 gap-2">
                               {strategy.processSteps.map((step, stepIndex) => (
-                                <div key={stepIndex} className="flex items-center text-xs p-2 bg-blue-50 dark:bg-blue-900/20 rounded">
+                                <div key={stepIndex} className="flex items-center text-xs p-2 bg-blue-50 dark:bg-blue-900/30 rounded">
                                   <span className="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold mr-2">
                                     {stepIndex + 1}
                                   </span>
-                                  <span className="text-blue-700">{step}</span>
+                                  <span className="text-blue-700 dark:text-blue-300">{step}</span>
                                 </div>
                               ))}
                             </div>
@@ -639,7 +639,7 @@ const TaxStrategyPage = () => {
 
                           {/* 액션 버튼 */}
                           <div className="flex gap-2 pt-4 border-t">
-                            <Button asChild className="flex-1 bg-purple-600 hover:bg-purple-700 text-white" size="sm">
+                            <Button asChild className="flex-1 bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-700 text-white" size="sm">
                               <Link href={`/business-succession`}>
                                 자세한 정보
                                 <ArrowRight className="ml-1 h-4 w-4" />
@@ -649,7 +649,7 @@ const TaxStrategyPage = () => {
                               buttonText="승계 상담"
                               variant="outline"
                               size="sm"
-                              className="border-purple-200 text-purple-700 hover:bg-purple-50"
+                              className="border-purple-200 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30"
                               eventType="consultation"
                               trigger={
                                 <Button variant="outline" size="sm">
@@ -731,12 +731,12 @@ const TaxStrategyPage = () => {
                   testimonial: "오랜 숙제였던 가지급금 문제를 말끔히 해결하고 오히려 환급까지 받았습니다."
                 }
               ].map((story, index) => (
-                <Card key={index} className="group hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
+                <Card key={index} className="group bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5 transition-all duration-500 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <CardHeader className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
-                      <Badge variant="secondary" className="bg-primary/10 text-primary">
+                      <Badge variant="secondary" className="bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary">
                         {story.industry}
                       </Badge>
                       <div className="text-sm text-muted-foreground">
@@ -753,7 +753,7 @@ const TaxStrategyPage = () => {
                     <div className="space-y-4">
                       {/* 솔루션 */}
                       <div>
-                        <h4 className="text-sm font-semibold text-blue-600 mb-2 flex items-center">
+                        <h4 className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2 flex items-center">
                           <Lightbulb className="h-4 w-4 mr-1" />
                           적용 솔루션
                         </h4>
@@ -763,28 +763,28 @@ const TaxStrategyPage = () => {
                       </div>
 
                       {/* 결과 */}
-                      <div className="p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg">
-                        <h4 className="text-sm font-semibold text-green-600 mb-3">절세 결과</h4>
+                      <div className="p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/30 dark:to-blue-900/30 rounded-lg">
+                        <h4 className="text-sm font-semibold text-green-600 dark:text-green-400 mb-3">절세 결과</h4>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
                             <span className="text-muted-foreground">절세 전:</span>
-                            <span className="font-medium text-red-600">{story.results.before}</span>
+                            <span className="font-medium text-red-600 dark:text-red-400">{story.results.before}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-muted-foreground">절세 후:</span>
-                            <span className="font-medium text-blue-600">{story.results.after}</span>
+                            <span className="font-medium text-blue-600 dark:text-blue-400">{story.results.after}</span>
                           </div>
                           <div className="border-t pt-2">
                             <div className="flex justify-between font-bold">
                               <span>절세 효과:</span>
-                              <span className="text-green-600">{story.results.saving}</span>
+                              <span className="text-green-600 dark:text-green-400">{story.results.saving}</span>
                             </div>
                           </div>
                         </div>
                       </div>
 
                       {/* 고객 후기 */}
-                      <div className="p-3 bg-muted/50 rounded-lg">
+                      <div className="p-3 bg-muted/50 dark:bg-muted/30 rounded-lg">
                         <blockquote className="text-sm text-muted-foreground italic leading-relaxed mb-2">
                           &ldquo;{story.testimonial}&rdquo;
                         </blockquote>
@@ -893,7 +893,7 @@ const TaxStrategyPage = () => {
                 { icon: "📋", text: "실행 계획" },
                 { icon: "🎯", text: "성과 보장" }
               ].map((benefit, index) => (
-                <div key={index} className="p-3 bg-white/60 dark:bg-gray-900/60 rounded-lg backdrop-blur-sm">
+                <div key={index} className="p-3 bg-white/60 dark:bg-card/60 rounded-lg backdrop-blur-sm">
                   <div className="text-2xl mb-1">{benefit.icon}</div>
                   <div className="text-sm font-medium">{benefit.text}</div>
                 </div>
