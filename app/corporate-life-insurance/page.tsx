@@ -110,49 +110,49 @@ export default function CorporateLifeInsurancePage() {
   // 상품 비교
   const insuranceProducts = [
     {
-      company: '삼성생명',
-      product: '법인종신보험 프리미엄',
-      returnRate: '3.8%',
+      product: '착한종신보험',
+      returnRate: '4.0%',
       minPremium: '월 100만원',
       maxCoverage: '100억원',
       taxBenefit: '손비처리 100%',
       surrender: '10년 후 100%',
-      features: ['원금보장', '배당형', '중도인출', '연금전환'],
+      features: ['원금보장', '배당형', '중도인출', '연금전환', '보험료 할인'],
+      description: '기업가를 위한 착한 가격, 착한 혜택의 종신보험',
       rating: 5,
       popular: true
     },
     {
-      company: '한화생명',
-      product: '기업종신보험 플러스',
-      returnRate: '3.5%',
-      minPremium: '월 50만원',
-      maxCoverage: '50억원',
-      taxBenefit: '손비처리 95%',
+      product: '행복종신보험',
+      returnRate: '3.8%',
+      minPremium: '월 80만원',
+      maxCoverage: '80억원',
+      taxBenefit: '손비처리 100%',
       surrender: '12년 후 100%',
-      features: ['원금보장', '배당형', '중도인출'],
-      rating: 4
+      features: ['원금보장', '배당형', '가족보장', '상속설계'],
+      description: '가족의 행복한 미래를 위한 종신보험',
+      rating: 5
     },
     {
-      company: '교보생명',
-      product: '법인보험 스마트',
-      returnRate: '3.2%',
-      minPremium: '월 30만원',
-      maxCoverage: '30억원',
-      taxBenefit: '손비처리 90%',
+      product: '올백종신',
+      returnRate: '3.5%',
+      minPremium: '월 150만원',
+      maxCoverage: '150억원',
+      taxBenefit: '손비처리 100%',
       surrender: '15년 후 100%',
-      features: ['원금보장', '연금전환'],
+      features: ['고액보장', '퇴직준비', '사업승계', 'VIP서비스'],
+      description: '100% 만족을 위한 올백 종신보험',
       rating: 4
     },
     {
-      company: 'KB생명',
-      product: '기업보험 베이직',
-      returnRate: '2.9%',
-      minPremium: '월 20만원',
-      maxCoverage: '20억원',
-      taxBenefit: '손비처리 85%',
+      product: '골든종신보험',
+      returnRate: '3.2%',
+      minPremium: '월 200만원',
+      maxCoverage: '200억원',
+      taxBenefit: '손비처리 100%',
       surrender: '20년 후 100%',
-      features: ['원금보장'],
-      rating: 3
+      features: ['고액보장', '자산보전', '세대이전', '프리미엄서비스'],
+      description: '황금빛 노후를 위한 최고급 종신보험',
+      rating: 4
     }
   ];
 
@@ -247,14 +247,14 @@ export default function CorporateLifeInsurancePage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-background dark:to-background/95">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white py-20">
-          <div className="absolute inset-0 bg-black/20"></div>
+        <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 dark:from-blue-950 dark:via-blue-900 dark:to-blue-950 text-white py-20">
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
           <div className="container relative mx-auto px-4">
             <div className="text-center max-w-4xl mx-auto">
               <div className="flex justify-center mb-6">
-                <Badge className="bg-yellow-500 text-yellow-900 px-4 py-2 text-sm font-semibold">
+                <Badge className="bg-yellow-500 text-yellow-900 dark:bg-yellow-600 dark:text-yellow-100 px-4 py-2 text-sm font-semibold">
                   <Shield className="w-4 h-4 mr-1" />
                   절세 포커스 상품
                 </Badge>
@@ -264,16 +264,16 @@ export default function CorporateLifeInsurancePage() {
                 <br />
                 <span className="text-yellow-400">비교 분석</span>
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed">
-                <strong className="text-yellow-300">법인세 절세</strong>부터 <strong className="text-yellow-300">상속세 대비</strong>까지
+              <p className="text-xl md:text-2xl mb-8 text-blue-100 dark:text-blue-200 leading-relaxed">
+                <strong className="text-yellow-300 dark:text-yellow-200">법인세 절세</strong>부터 <strong className="text-yellow-300 dark:text-yellow-200">상속세 대비</strong>까지
                 <br />
                 기업과 개인의 이중 혜택을 누리세요
               </p>
               
               {/* 핵심 통계 */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                <div className="bg-white/10 dark:bg-white/5 rounded-lg p-4 backdrop-blur-sm border border-white/20 dark:border-white/10">
+                  <div className="text-3xl font-bold text-yellow-400 dark:text-yellow-300 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
@@ -283,10 +283,10 @@ export default function CorporateLifeInsurancePage() {
                                               />
                     )}%
                   </div>
-                  <p className="text-sm text-blue-200">법인세율</p>
+                  <p className="text-sm text-blue-200 dark:text-blue-300">법인세율</p>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                <div className="bg-white/10 dark:bg-white/5 rounded-lg p-4 backdrop-blur-sm border border-white/20 dark:border-white/10">
+                  <div className="text-3xl font-bold text-yellow-400 dark:text-yellow-300 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
@@ -296,10 +296,10 @@ export default function CorporateLifeInsurancePage() {
                       />
                     )}%
                   </div>
-                  <p className="text-sm text-blue-200">손비처리</p>
+                  <p className="text-sm text-blue-200 dark:text-blue-300">손비처리</p>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                <div className="bg-white/10 dark:bg-white/5 rounded-lg p-4 backdrop-blur-sm border border-white/20 dark:border-white/10">
+                  <div className="text-3xl font-bold text-yellow-400 dark:text-yellow-300 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
@@ -309,10 +309,10 @@ export default function CorporateLifeInsurancePage() {
                                               />
                     )}%
                   </div>
-                  <p className="text-sm text-blue-200">예상수익률</p>
+                  <p className="text-sm text-blue-200 dark:text-blue-300">예상수익률</p>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                <div className="bg-white/10 dark:bg-white/5 rounded-lg p-4 backdrop-blur-sm border border-white/20 dark:border-white/10">
+                  <div className="text-3xl font-bold text-yellow-400 dark:text-yellow-300 mb-1">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
@@ -322,14 +322,14 @@ export default function CorporateLifeInsurancePage() {
                       />
                     )}억
                   </div>
-                  <p className="text-sm text-blue-200">최대보장</p>
+                  <p className="text-sm text-blue-200 dark:text-blue-300">최대보장</p>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <CalComPopup
                   trigger={
-                    <Button size="lg" className="bg-yellow-500 text-yellow-900 hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+                    <Button size="lg" className="bg-yellow-500 text-yellow-900 hover:bg-yellow-400 dark:bg-yellow-600 dark:text-yellow-100 dark:hover:bg-yellow-500 px-8 py-4 text-lg font-semibold">
                       <Calculator className="mr-2 h-5 w-5" />
                       절세 효과 계산
                     </Button>
@@ -339,7 +339,7 @@ export default function CorporateLifeInsurancePage() {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 text-lg"
+                  className="border-white text-white hover:bg-white hover:text-blue-900 dark:border-white/70 dark:text-white dark:hover:bg-white/10 dark:hover:text-white px-8 py-4 text-lg"
                   onClick={() => {
                     const element = document.getElementById('product-comparison');
                     element?.scrollIntoView({ behavior: 'smooth' });
@@ -354,20 +354,20 @@ export default function CorporateLifeInsurancePage() {
         </section>
 
         {/* 절세 혜택 섹션 */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-background/50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                법인종신보험 <span className="text-blue-600">절세 혜택</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                법인종신보험 <span className="text-blue-600 dark:text-blue-400">절세 혜택</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 기업과 개인이 동시에 누릴 수 있는 4가지 핵심 혜택
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {taxBenefits.map((benefit, index) => (
-                <Card key={index} className="relative overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <Card key={index} className="relative overflow-hidden hover:shadow-xl dark:hover:shadow-white/5 transition-all duration-300 group bg-card dark:bg-card/80 border-border/40 dark:border-border">
                   <CardHeader className="text-center pb-4">
                     <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${
                       benefit.color === 'green' ? 'from-green-400 to-green-600' :
@@ -377,19 +377,19 @@ export default function CorporateLifeInsurancePage() {
                     } flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                       <benefit.icon className="h-8 w-8 text-white" />
                     </div>
-                    <CardTitle className="text-xl font-bold text-gray-900">{benefit.title}</CardTitle>
+                    <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">{benefit.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <p className="text-gray-600 mb-4">{benefit.description}</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{benefit.description}</p>
                     <div className={`inline-block px-4 py-2 rounded-full text-sm font-bold mb-4 ${
-                      benefit.color === 'green' ? 'bg-green-100 text-green-800' :
-                      benefit.color === 'blue' ? 'bg-blue-100 text-blue-800' :
-                      benefit.color === 'purple' ? 'bg-purple-100 text-purple-800' :
-                      'bg-orange-100 text-orange-800'
+                      benefit.color === 'green' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                      benefit.color === 'blue' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' :
+                      benefit.color === 'purple' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300' :
+                      'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300'
                     }`}>
                       {benefit.savingRate}
                     </div>
-                    <ul className="text-sm text-gray-600 space-y-1 text-left">
+                    <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1 text-left">
                       {benefit.details.map((detail, detailIndex) => (
                         <li key={detailIndex} className="flex items-center">
                           <CheckCircle className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" />
@@ -405,30 +405,31 @@ export default function CorporateLifeInsurancePage() {
         </section>
 
         {/* 상품 비교 섹션 */}
-        <section id="product-comparison" className="py-20 bg-gray-50">
+        <section id="product-comparison" className="py-20 bg-gray-50 dark:bg-background/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                법인종신보험 <span className="text-blue-600">상품 비교</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                삼성생명 법인종신보험 <span className="text-blue-600 dark:text-blue-400">상품별 특징 비교</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                주요 생명보험사 법인종신보험 상품 완전 분석
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                착한종신, 행복종신, 올백종신, 골든종신<br />
+                경영인을 위한 삼성생명 맞춤형 종신보험 완전 분석
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {insuranceProducts.map((product, index) => (
-                <Card key={index} className={`relative overflow-hidden ${product.popular ? 'ring-2 ring-yellow-400' : ''} hover:shadow-xl transition-all duration-300`}>
+                <Card key={index} className={`relative overflow-hidden ${product.popular ? 'ring-2 ring-yellow-400 dark:ring-yellow-500' : ''} hover:shadow-xl dark:hover:shadow-white/5 transition-all duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border`}>
                   {product.popular && (
-                    <div className="absolute top-0 right-0 bg-gradient-to-l from-yellow-400 to-yellow-500 text-yellow-900 px-3 py-1 text-sm font-bold rounded-bl-lg">
+                    <div className="absolute top-0 right-0 bg-gradient-to-l from-yellow-400 to-yellow-500 dark:from-yellow-500 dark:to-yellow-600 text-yellow-900 dark:text-yellow-100 px-3 py-1 text-sm font-bold rounded-bl-lg">
                       <Star className="w-3 h-3 inline mr-1" />
                       추천
                     </div>
                   )}
                   <CardHeader className="text-center">
-                    <div className="text-lg font-bold text-gray-900">{product.company}</div>
-                    <CardTitle className="text-blue-600">{product.product}</CardTitle>
-                    <div className="flex justify-center mb-2">
+                    <CardTitle className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-3">{product.product}</CardTitle>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">{product.description}</p>
+                    <div className="flex justify-center">
                       {[...Array(5)].map((_, i) => (
                         <Star 
                           key={i} 
@@ -439,27 +440,27 @@ export default function CorporateLifeInsurancePage() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">예상수익률</span>
-                      <span className="font-bold text-green-600">{product.returnRate}</span>
+                      <span className="text-gray-600 dark:text-gray-400">예상수익률</span>
+                      <span className="font-bold text-green-600 dark:text-green-400">{product.returnRate}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">최소 보험료</span>
-                      <span className="font-semibold">{product.minPremium}</span>
+                      <span className="text-gray-600 dark:text-gray-400">최소 보험료</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">{product.minPremium}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">최대 보장</span>
-                      <span className="font-semibold">{product.maxCoverage}</span>
+                      <span className="text-gray-600 dark:text-gray-400">최대 보장</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">{product.maxCoverage}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">세제혜택</span>
-                      <span className="font-bold text-blue-600">{product.taxBenefit}</span>
+                      <span className="text-gray-600 dark:text-gray-400">세제혜택</span>
+                      <span className="font-bold text-blue-600 dark:text-blue-400">{product.taxBenefit}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">원금회복</span>
-                      <span className="font-semibold">{product.surrender}</span>
+                      <span className="text-gray-600 dark:text-gray-400">원금회복</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">{product.surrender}</span>
                     </div>
-                    <div className="pt-2 border-t">
-                      <div className="text-sm text-gray-600 mb-2">주요 특징</div>
+                    <div className="pt-2 border-t border-border/40 dark:border-border">
+                      <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">주요 특징</div>
                       <div className="flex flex-wrap gap-1">
                         {product.features.map((feature, fIndex) => (
                           <Badge key={fIndex} variant="secondary" className="text-xs">
@@ -485,54 +486,54 @@ export default function CorporateLifeInsurancePage() {
         </section>
 
         {/* 활용 시나리오 섹션 */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-background/50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                법인종신보험 <span className="text-blue-600">활용 시나리오</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                법인종신보험 <span className="text-blue-600 dark:text-blue-400">활용 시나리오</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 실제 상황별 법인종신보험 활용 사례와 절세 효과
               </p>
             </div>
 
             <div className="space-y-8">
               {useCases.map((useCase, index) => (
-                <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300">
+                <Card key={index} className="overflow-hidden hover:shadow-xl dark:hover:shadow-white/5 transition-all duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border">
                   <div className={`h-2 bg-gradient-to-r ${useCase.color}`}></div>
                   <CardContent className="p-8">
                     <div className="grid md:grid-cols-3 gap-8">
                       {/* 시나리오 설명 */}
                       <div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4">{useCase.title}</h3>
-                        <p className="text-gray-600 mb-6">{useCase.description}</p>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">{useCase.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-6">{useCase.description}</p>
                         <div className="space-y-3">
                           <div className="flex items-start">
                             <Target className="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
                             <div>
-                              <div className="font-semibold text-gray-900">상황</div>
-                              <div className="text-gray-600 text-sm">{useCase.scenario.situation}</div>
+                              <div className="font-semibold text-gray-900 dark:text-gray-100">상황</div>
+                              <div className="text-gray-600 dark:text-gray-300 text-sm">{useCase.scenario.situation}</div>
                             </div>
                           </div>
                           <div className="flex items-start">
                             <Lightbulb className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
                             <div>
-                              <div className="font-semibold text-gray-900">솔루션</div>
-                              <div className="text-gray-600 text-sm">{useCase.scenario.solution}</div>
+                              <div className="font-semibold text-gray-900 dark:text-gray-100">솔루션</div>
+                              <div className="text-gray-600 dark:text-gray-300 text-sm">{useCase.scenario.solution}</div>
                             </div>
                           </div>
                           <div className="flex items-start">
                             <Award className="w-5 h-5 text-yellow-600 mr-2 mt-0.5 flex-shrink-0" />
                             <div>
-                              <div className="font-semibold text-gray-900">효과</div>
-                              <div className="text-gray-600 text-sm">{useCase.scenario.benefit}</div>
+                              <div className="font-semibold text-gray-900 dark:text-gray-100">효과</div>
+                              <div className="text-gray-600 dark:text-gray-300 text-sm">{useCase.scenario.benefit}</div>
                             </div>
                           </div>
                           <div className="flex items-start">
                             <Clock className="w-5 h-5 text-purple-600 mr-2 mt-0.5 flex-shrink-0" />
                             <div>
-                              <div className="font-semibold text-gray-900">기간</div>
-                              <div className="text-gray-600 text-sm">{useCase.scenario.period}</div>
+                              <div className="font-semibold text-gray-900 dark:text-gray-100">기간</div>
+                              <div className="text-gray-600 dark:text-gray-300 text-sm">{useCase.scenario.period}</div>
                             </div>
                           </div>
                         </div>
@@ -540,7 +541,7 @@ export default function CorporateLifeInsurancePage() {
 
                       {/* 비교 분석 */}
                       <div className="md:col-span-2">
-                        <h4 className="text-xl font-bold text-gray-900 mb-4">절세 효과 비교</h4>
+                        <h4 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">절세 효과 비교</h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div className="bg-red-50 p-4 rounded-lg border border-red-200">
                             <div className="flex items-center mb-2">
@@ -574,26 +575,26 @@ export default function CorporateLifeInsurancePage() {
         </section>
 
         {/* 가입 절차 섹션 */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gray-50 dark:bg-background/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                법인종신보험 <span className="text-blue-600">가입 절차</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                법인종신보험 <span className="text-blue-600 dark:text-blue-400">가입 절차</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 전문가와 함께하는 체계적인 4단계 가입 프로세스
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {processSteps.map((step, index) => (
-                <Card key={index} className="relative overflow-hidden hover:shadow-xl transition-all duration-300">
+                <Card key={index} className="relative overflow-hidden hover:shadow-xl dark:hover:shadow-white/5 transition-all duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border">
                   <div className={`absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${step.color}`}></div>
                   <CardHeader className="text-center pt-6">
                     <div className={`w-12 h-12 mx-auto rounded-full bg-gradient-to-r ${step.color} flex items-center justify-center text-white text-xl font-bold mb-3`}>
                       {step.step}
                     </div>
-                    <CardTitle className="text-xl font-bold text-gray-900">{step.title}</CardTitle>
+                    <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">{step.title}</CardTitle>
                     <Badge variant="outline" className="w-fit mx-auto">
                       <Clock className="w-3 h-3 mr-1" />
                       {step.duration}
@@ -617,26 +618,26 @@ export default function CorporateLifeInsurancePage() {
         </section>
 
         {/* FAQ 섹션 */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-background/50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                법인종신보험 <span className="text-blue-600">FAQ</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                법인종신보험 <span className="text-blue-600 dark:text-blue-400">FAQ</span>
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 dark:text-gray-300">
                 법인종신보험에 대한 자주 묻는 질문들
               </p>
             </div>
 
             <div className="max-w-4xl mx-auto space-y-6">
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg dark:hover:shadow-white/5 transition-shadow duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border">
                 <CardHeader>
                   <CardTitle className="flex items-start gap-3 text-lg">
                     <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
                     법인종신보험의 세제 혜택은 무엇인가요?
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-gray-700">
+                <CardContent className="text-gray-700 dark:text-gray-300">
                   <p className="mb-3">법인종신보험은 다음과 같은 세제 혜택을 제공합니다:</p>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
@@ -659,14 +660,14 @@ export default function CorporateLifeInsurancePage() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg dark:hover:shadow-white/5 transition-shadow duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border">
                 <CardHeader>
                   <CardTitle className="flex items-start gap-3 text-lg">
                     <DollarSign className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
                     법인종신보험료를 손비로 처리할 수 있나요?
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-gray-700">
+                <CardContent className="text-gray-700 dark:text-gray-300">
                   <p className="mb-3">법인종신보험료의 손비처리는 다음 조건을 만족해야 합니다:</p>
                   <div className="bg-yellow-50 p-4 rounded-lg">
                     <ul className="space-y-2">
@@ -691,14 +692,14 @@ export default function CorporateLifeInsurancePage() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg dark:hover:shadow-white/5 transition-shadow duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border">
                 <CardHeader>
                   <CardTitle className="flex items-start gap-3 text-lg">
                     <Shield className="w-5 h-5 text-purple-600 flex-shrink-0 mt-1" />
                     중도해지 시 세무상 문제는 없나요?
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-gray-700">
+                <CardContent className="text-gray-700 dark:text-gray-300">
                   <p className="mb-3">법인종신보험 중도해지 시 다음과 같은 세무처리가 필요합니다:</p>
                   <div className="space-y-3">
                     <div className="flex items-center p-3 bg-blue-50 rounded-lg">
@@ -726,14 +727,14 @@ export default function CorporateLifeInsurancePage() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg dark:hover:shadow-white/5 transition-shadow duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border">
                 <CardHeader>
                   <CardTitle className="flex items-start gap-3 text-lg">
                     <Users className="w-5 h-5 text-orange-600 flex-shrink-0 mt-1" />
                     임원 퇴직 시 보험은 어떻게 처리되나요?
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-gray-700">
+                <CardContent className="text-gray-700 dark:text-gray-300">
                   <p className="mb-3">임원 퇴직 시 법인종신보험 처리방법:</p>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="bg-green-50 p-4 rounded-lg">
@@ -756,14 +757,14 @@ export default function CorporateLifeInsurancePage() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg dark:hover:shadow-white/5 transition-shadow duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border">
                 <CardHeader>
                   <CardTitle className="flex items-start gap-3 text-lg">
                     <BarChart3 className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
                     법인종신보험과 개인연금의 차이점은?
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-gray-700">
+                <CardContent className="text-gray-700 dark:text-gray-300">
                   <p className="mb-3">법인종신보험과 개인연금의 주요 차이점:</p>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
@@ -801,14 +802,14 @@ export default function CorporateLifeInsurancePage() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg dark:hover:shadow-white/5 transition-shadow duration-300 bg-card dark:bg-card/80 border-border/40 dark:border-border">
                 <CardHeader>
                   <CardTitle className="flex items-start gap-3 text-lg">
                     <Phone className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
                     법인종신보험 상담은 어떻게 받나요?
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-gray-700">
+                <CardContent className="text-gray-700 dark:text-gray-300">
                   <p className="mb-4">삼성생명 GFC 전문가와 법인종신보험 상담을 받으실 수 있습니다:</p>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -906,12 +907,12 @@ export default function CorporateLifeInsurancePage() {
         </section>
 
         {/* CTA 섹션 */}
-        <section className="py-20 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+        <section className="py-20 bg-gradient-to-r from-blue-900 to-blue-800 dark:from-blue-950 dark:to-blue-900 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               지금 시작하는 <span className="text-yellow-400">법인종신보험</span>
             </h2>
-            <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 text-blue-100 dark:text-blue-200 max-w-2xl mx-auto">
               법인세 절세와 상속세 대비를 동시에
               <br />
               <strong>이중 혜택</strong>으로 기업 자산을 최적화하세요
@@ -919,7 +920,7 @@ export default function CorporateLifeInsurancePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <CalComPopup
                 trigger={
-                  <Button size="lg" className="bg-yellow-500 text-yellow-900 hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+                  <Button size="lg" className="bg-yellow-500 text-yellow-900 hover:bg-yellow-400 dark:bg-yellow-600 dark:text-yellow-100 dark:hover:bg-yellow-500 px-8 py-4 text-lg font-semibold">
                     <Phone className="mr-2 h-5 w-5" />
                     무료 상담 예약
                   </Button>
@@ -929,7 +930,7 @@ export default function CorporateLifeInsurancePage() {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 text-lg"
+                className="border-white text-white hover:bg-white hover:text-blue-900 dark:border-white/70 dark:text-white dark:hover:bg-white/10 dark:hover:text-white px-8 py-4 text-lg"
                 onClick={() => window.open('tel:0502-5550-8700')}
               >
                 <Phone className="mr-2 h-5 w-5" />
