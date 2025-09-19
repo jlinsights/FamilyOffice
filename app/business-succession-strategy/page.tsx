@@ -303,7 +303,7 @@ const BusinessSuccessionPage = () => {
 
             {/* Key Statistics */}
             <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
-              <Card>
+              <Card className="bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg">상속세 절감</CardTitle>
                 </CardHeader>
@@ -313,32 +313,32 @@ const BusinessSuccessionPage = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg">승계 성공률</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-green-600 mb-2">95%</div>
+                  <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">95%</div>
                   <div className="text-sm text-muted-foreground">체계적 준비 시</div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg">준비 기간</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-orange-600 mb-2">3-5</div>
+                  <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">3-5</div>
                   <div className="text-sm text-muted-foreground">년 권장</div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg">진행률</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-blue-600 mb-2">
+                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                     {Math.round(overallProgress)}%
                   </div>
                   <Progress value={overallProgress} className="h-2" />
@@ -371,7 +371,7 @@ const BusinessSuccessionPage = () => {
 
               {successionRoadmap.map((phase) => (
                 <TabsContent key={phase.phase} value={phase.phase.toString()}>
-                  <Card className={`${phase.critical ? 'border-primary' : 'border-muted'}`}>
+                  <Card className={`bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5 ${phase.critical ? 'border-primary dark:border-primary/70' : 'border-muted dark:border-muted/70'}`}>
                     <CardHeader>
                       <div className="flex items-center gap-3">
                         <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
@@ -427,7 +427,7 @@ const BusinessSuccessionPage = () => {
             </Tabs>
 
             {/* 로드맵 시각화 */}
-            <Card className="mt-8">
+            <Card className="mt-8 bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
               <CardHeader>
                 <CardTitle>전체 로드맵 Overview</CardTitle>
               </CardHeader>
@@ -486,7 +486,7 @@ const BusinessSuccessionPage = () => {
                 const Icon = method.icon;
                 return (
                   <TabsContent key={key} value={key}>
-                    <Card>
+                    <Card className="bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                       <CardHeader>
                         <div className="flex items-center gap-3">
                           <Icon className="h-8 w-8 text-primary" />
@@ -564,7 +564,7 @@ const BusinessSuccessionPage = () => {
               {Object.entries(familyGovernance).map(([key, governance]) => {
                 const Icon = governance.icon;
                 return (
-                  <Card key={key} className="h-full">
+                  <Card key={key} className="h-full bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                     <CardHeader>
                       <div className="flex items-center gap-3">
                         <Icon className="h-8 w-8 text-primary" />
@@ -611,28 +611,28 @@ const BusinessSuccessionPage = () => {
               </p>
               
               <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-amber-100 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-amber-100 dark:border-amber-300/20 shadow-sm hover:shadow-md dark:hover:shadow-white/5 transition-all duration-300">
                   <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl mb-4 mx-auto">
                     <Building2 className="h-6 w-6" />
                   </div>
-                  <h4 className="font-bold text-lg mb-2 text-premium-navy">기업 + 개인자산 통합</h4>
-                  <p className="text-muted-foreground text-sm">기업자산과 개인자산을 통합하여 최적의 승계 구조 설계</p>
+                  <h4 className="font-bold text-lg mb-2 text-premium-navy dark:text-amber-300">기업 + 개인자산 통합</h4>
+                  <p className="text-muted-foreground dark:text-slate-300 text-sm">기업자산과 개인자산을 통합하여 최적의 승계 구조 설계</p>
                 </div>
                 
-                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-blue-100 dark:border-blue-300/20 shadow-sm hover:shadow-md dark:hover:shadow-white/5 transition-all duration-300">
                   <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl mb-4 mx-auto">
                     <Users className="h-6 w-6" />
                   </div>
-                  <h4 className="font-bold text-lg mb-2 text-premium-navy">차세대 교육 프로그램</h4>
-                  <p className="text-muted-foreground text-sm">후계자 역량 개발과 가족 거버넌스 체계 구축</p>
+                  <h4 className="font-bold text-lg mb-2 text-premium-navy dark:text-blue-300">차세대 교육 프로그램</h4>
+                  <p className="text-muted-foreground dark:text-slate-300 text-sm">후계자 역량 개발과 가족 거버넌스 체계 구축</p>
                 </div>
                 
-                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-purple-100 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-purple-100 dark:border-purple-300/20 shadow-sm hover:shadow-md dark:hover:shadow-white/5 transition-all duration-300">
                   <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl mb-4 mx-auto">
                     <TrendingUp className="h-6 w-6" />
                   </div>
-                  <h4 className="font-bold text-lg mb-2 text-premium-navy">지속가능 성장전략</h4>
-                  <p className="text-muted-foreground text-sm">승계 이후 장기 성장을 위한 투자 및 운영 전략</p>
+                  <h4 className="font-bold text-lg mb-2 text-premium-navy dark:text-purple-300">지속가능 성장전략</h4>
+                  <p className="text-muted-foreground dark:text-slate-300 text-sm">승계 이후 장기 성장을 위한 투자 및 운영 전략</p>
                 </div>
               </div>
               
@@ -661,7 +661,7 @@ const BusinessSuccessionPage = () => {
         {/* CTA Section */}
         <section className="py-12 px-4 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10">
           <div className="max-w-4xl mx-auto">
-            <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-transparent">
+            <Card className="border-primary/20 dark:border-primary/30 bg-gradient-to-r from-primary/5 to-transparent dark:from-primary/10 dark:to-transparent bg-card dark:bg-card/80 hover:shadow-2xl dark:hover:shadow-white/5">
               <CardContent className="pt-8 pb-8">
                 <div className="text-center space-y-6">
                   <div>
@@ -752,9 +752,11 @@ const BusinessSuccessionPage = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <Card>
+              <Card className="bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                 <CardHeader>
-                  <Award className="h-8 w-8 text-yellow-600 mb-2" />
+                  <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center mb-3">
+                    <Award className="h-8 w-8 text-yellow-600 dark:text-yellow-400" />
+                  </div>
                   <CardTitle>제조업 A사</CardTitle>
                   <CardDescription>매출 300억원, 직원 150명</CardDescription>
                 </CardHeader>
@@ -782,9 +784,11 @@ const BusinessSuccessionPage = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                 <CardHeader>
-                  <Gem className="h-8 w-8 text-purple-600 mb-2" />
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-3">
+                    <Gem className="h-8 w-8 text-purple-600 dark:text-purple-400" />
+                  </div>
                   <CardTitle>유통업 B사</CardTitle>
                   <CardDescription>매출 500억원, 직원 250명</CardDescription>
                 </CardHeader>
@@ -812,9 +816,11 @@ const BusinessSuccessionPage = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
                 <CardHeader>
-                  <TreePine className="h-8 w-8 text-green-600 mb-2" />
+                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
+                    <TreePine className="h-8 w-8 text-green-600 dark:text-green-400" />
+                  </div>
                   <CardTitle>건설업 C사</CardTitle>
                   <CardDescription>매출 1,000억원, 직원 400명</CardDescription>
                 </CardHeader>
