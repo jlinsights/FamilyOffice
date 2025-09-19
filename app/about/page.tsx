@@ -530,7 +530,7 @@ export default function AboutPage() {
                     <div className="w-24 h-32 rounded-full mx-auto mb-6 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-4 border-primary/20 dark:border-primary/30 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
                       {expert.name === '임재홍' ? (
                         <Image 
-                          src="/images/ai_profile.png" 
+                          src="/Images/Profile Image-3-1080 x 1080 px.png" 
                           alt="임재홍 수석 컨설턴트"
                           width={512}
                           height={512}

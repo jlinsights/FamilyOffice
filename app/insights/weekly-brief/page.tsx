@@ -635,7 +635,7 @@ export default function WeeklyBriefPage() {
                   <div className="flex items-start gap-6">
                     <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-primary/10 to-primary/5 border-4 border-primary/20">
                       <Image 
-                        src="/images/ai_profile.png" 
+                        src="/Images/Profile Image-3-1080 x 1080 px.png" 
                         alt="임재홍 수석 컨설턴트"
                         width={512}
                         height={512}
