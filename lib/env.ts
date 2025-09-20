@@ -3,6 +3,7 @@
  * 필수 환경변수 누락 시 애플리케이션 실행 중단
  */
 import { z } from 'zod';
+import { logger } from './debug-logger';
 
 // 공용 (클라이언트/서버) 환경변수 스키마
 export const publicEnvSchema = z.object({
@@ -177,19 +178,19 @@ export function createEnv() {
 
     // 4. 성공 시 로깅 (개발 환경에서만)
     if (isDev && isServer) {
-      console.log('✅ 환경변수 검증 완료');
-      console.log('📊 설정된 환경변수:');
-      console.log(`  - NODE_ENV: ${publicEnv.NODE_ENV}`);
-      console.log(`  - VERCEL_ENV: ${publicEnv.VERCEL_ENV || 'N/A'}`);
-      console.log(`  - Clerk: ${clientEnv.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.substring(0, 20) || 'N/A'}...`);
-      console.log(`  - Supabase: ${clientEnv.NEXT_PUBLIC_SUPABASE_URL}`);
-      console.log(`  - Analytics: ${clientEnv.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'N/A'}`);
+      logger.server('✅ 환경변수 검증 완료');
+      logger.server('📊 설정된 환경변수:');
+      logger.server(`  - NODE_ENV: ${publicEnv.NODE_ENV}`);
+      logger.server(`  - VERCEL_ENV: ${publicEnv.VERCEL_ENV || 'N/A'}`);
+      logger.server(`  - Clerk: ${clientEnv.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.substring(0, 20) || 'N/A'}...`);
+      logger.server(`  - Supabase: ${clientEnv.NEXT_PUBLIC_SUPABASE_URL}`);
+      logger.server(`  - Analytics: ${clientEnv.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'N/A'}`);
       
       if (serverEnv) {
         const serverKeys = Object.keys(serverEnv).filter(key => 
           serverEnv[key as keyof typeof serverEnv] !== undefined
         );
-        console.log(`  - Server keys: ${serverKeys.length} configured`);
+        logger.server(`  - Server keys: ${serverKeys.length} configured`);
       }
     }
 
@@ -201,7 +202,7 @@ export function createEnv() {
 
   } catch (error) {
     // 환경변수 검증 실패 시 상세 오류 정보 제공
-    console.error('🚨 환경변수 검증 실패');
+    logger.error('🚨 환경변수 검증 실패');
     
     if (error instanceof z.ZodError) {
       const missingVars = error.errors.map(err => ({
@@ -210,18 +211,18 @@ export function createEnv() {
         code: err.code,
       }));
       
-      console.error('❌ 오류 상세:', JSON.stringify(missingVars, null, 2));
+      logger.error('❌ 오류 상세:', JSON.stringify(missingVars, null, 2));
       
       // 개발 환경에서는 구체적인 가이드 제공
       if (isDev) {
-        console.error('\n📝 .env.local 파일 설정 가이드:');
-        console.error('필수 환경변수를 설정해주세요:');
+        logger.error('\n📝 .env.local 파일 설정 가이드:');
+        logger.error('필수 환경변수를 설정해주세요:');
         missingVars.forEach(({ path, message }) => {
-          console.error(`  ${path}: ${message}`);
+          logger.error(`  ${path}: ${message}`);
         });
       }
     } else {
-      console.error('❌ 알 수 없는 오류:', error);
+      logger.error('❌ 알 수 없는 오류:', error);
     }
 
     // 프로덕션에서는 일반적인 메시지로 처리

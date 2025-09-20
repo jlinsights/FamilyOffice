@@ -1,6 +1,7 @@
 // Advanced caching strategies for Next.js
 import { unstable_cache } from 'next/cache';
 import { revalidateTag, revalidatePath } from 'next/cache';
+import { logger } from '../debug-logger';
 
 // Cache duration constants
 export const CACHE_DURATIONS = {
@@ -28,6 +29,8 @@ class MemoryCache {
     { data: any; timestamp: number; ttl: number }
   >();
   private maxSize = 100;
+  private hits = 0;
+  private misses = 0;
 
   set(key: string, data: any, ttl: number = CACHE_DURATIONS.SHORT * 1000) {
     // Remove oldest entries if cache is full
@@ -48,14 +51,19 @@ class MemoryCache {
   get(key: string): any | null {
     const entry = this.cache.get(key);
 
-    if (!entry) return null;
+    if (!entry) {
+      this.misses++;
+      return null;
+    }
 
     // Check if expired
     if (Date.now() - entry.timestamp > entry.ttl) {
       this.cache.delete(key);
+      this.misses++;
       return null;
     }
 
+    this.hits++;
     return entry.data;
   }
 
@@ -69,6 +77,22 @@ class MemoryCache {
 
   size() {
     return this.cache.size;
+  }
+
+  getStats() {
+    const total = this.hits + this.misses;
+    return {
+      hits: this.hits,
+      misses: this.misses,
+      hitRate: total > 0 ? (this.hits / total) * 100 : 0,
+      missRate: total > 0 ? (this.misses / total) * 100 : 0,
+      total,
+    };
+  }
+
+  resetStats() {
+    this.hits = 0;
+    this.misses = 0;
   }
 }
 
@@ -143,7 +167,7 @@ export const createClientCache = <T extends any[], R>(
       if (options.enableMemoryCache && typeof window !== 'undefined') {
         const cachedResult = memoryCache.get(cacheKey);
         if (cachedResult !== null) {
-          console.warn('Returning cached data due to error:', error);
+          logger.warn('Returning cached data due to error:', error);
           return cachedResult;
         }
       }
@@ -222,13 +246,13 @@ export const preloadCriticalData = async () => {
           memoryCache.set(endpoint, data, CACHE_DURATIONS.SHORT * 1000);
         }
       } catch (error) {
-        console.warn(`Failed to preload ${endpoint}:`, error);
+        logger.warn(`Failed to preload ${endpoint}:`, error);
       }
     });
 
     await Promise.allSettled(preloadPromises);
   } catch (error) {
-    console.warn('Failed to preload critical data:', error);
+    logger.warn('Failed to preload critical data:', error);
   }
 };
 
@@ -258,7 +282,7 @@ export const warmCache = async (endpoints: string[]) => {
         memoryCache.set(endpoint, data, CACHE_DURATIONS.LONG * 1000);
       }
     } catch (error) {
-      console.warn(`Failed to warm cache for ${endpoint}:`, error);
+      logger.warn(`Failed to warm cache for ${endpoint}:`, error);
     }
   });
 
@@ -278,13 +302,15 @@ export const createISRFunction = <T extends any[], R>(
 
 // Cache metrics and monitoring
 export const getCacheMetrics = () => {
+  const stats = memoryCache.getStats();
   return {
     memoryCache: {
       size: memoryCache.size(),
       maxSize: 100,
+      ...stats,
     },
-    hitRate: 0, // TODO: Implement hit rate tracking
-    missRate: 0, // TODO: Implement miss rate tracking
+    hitRate: stats.hitRate,
+    missRate: stats.missRate,
   };
 };
 

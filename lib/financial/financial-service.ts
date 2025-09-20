@@ -33,6 +33,7 @@ import {
   getYahooMultipleStocks,
   checkYahooFinanceStatus,
 } from './yahoo-finance';
+import { logger } from '../debug-logger';
 
 // 기본 설정
 const DEFAULT_CONFIG: FinancialDataConfig = {
@@ -52,7 +53,7 @@ export function updateFinancialConfig(
   config: Partial<FinancialDataConfig>
 ): void {
   currentConfig = { ...currentConfig, ...config };
-  console.log('⚙️ 금융 데이터 서비스 설정 업데이트:', currentConfig);
+  logger.log('⚙️ 금융 데이터 서비스 설정 업데이트:', currentConfig);
 }
 
 /**
@@ -63,7 +64,7 @@ export async function getStockData(
   forceRefresh: boolean = false
 ): Promise<ApiResponse<StockData>> {
   try {
-    console.log(
+    logger.log(
       `📈 주식 데이터 요청: ${symbol} (강제새로고침: ${forceRefresh})`
     );
 
@@ -71,7 +72,7 @@ export async function getStockData(
     if (!forceRefresh) {
       const cachedData = await getCachedStockData(symbol);
       if (cachedData) {
-        console.log(`🎯 캐시된 주식 데이터 반환: ${symbol}`);
+        logger.log(`🎯 캐시된 주식 데이터 반환: ${symbol}`);
         return {
           success: true,
           data: cachedData,
@@ -90,7 +91,7 @@ export async function getStockData(
       return result;
     }
 
-    console.log(`⚠️ Yahoo Finance 실패, Alpha Vantage로 Failover: ${symbol}`);
+    logger.log(`⚠️ Yahoo Finance 실패, Alpha Vantage로 Failover: ${symbol}`);
 
     // 3. Alpha Vantage Failover
     result = await getAlphaVantageStockData(symbol);
@@ -105,7 +106,7 @@ export async function getStockData(
     if (currentConfig.fallbackToCache) {
       const cachedData = await getCachedStockData(symbol);
       if (cachedData) {
-        console.log(`🔄 API 실패로 캐시 데이터 사용: ${symbol}`);
+        logger.log(`🔄 API 실패로 캐시 데이터 사용: ${symbol}`);
         return {
           success: true,
           data: cachedData,
@@ -160,7 +161,7 @@ export async function getForexData(
   forceRefresh: boolean = false
 ): Promise<ApiResponse<ForexData>> {
   try {
-    console.log(
+    logger.log(
       `💱 환율 데이터 요청: ${fromCurrency}/${toCurrency} (강제새로고침: ${forceRefresh})`
     );
 
@@ -168,7 +169,7 @@ export async function getForexData(
     if (!forceRefresh) {
       const cachedData = await getCachedForexData(fromCurrency, toCurrency);
       if (cachedData) {
-        console.log(
+        logger.log(
           `🎯 캐시된 환율 데이터 반환: ${fromCurrency}/${toCurrency}`
         );
         return {
@@ -193,7 +194,7 @@ export async function getForexData(
       return result;
     }
 
-    console.log(
+    logger.log(
       `⚠️ Yahoo Finance 환율 실패, Alpha Vantage로 Failover: ${fromCurrency}/${toCurrency}`
     );
 
@@ -214,7 +215,7 @@ export async function getForexData(
     if (currentConfig.fallbackToCache) {
       const cachedData = await getCachedForexData(fromCurrency, toCurrency);
       if (cachedData) {
-        console.log(
+        logger.log(
           `🔄 API 실패로 캐시 환율 데이터 사용: ${fromCurrency}/${toCurrency}`
         );
         return {
@@ -271,13 +272,13 @@ export async function getIndexData(
   forceRefresh: boolean = false
 ): Promise<ApiResponse<IndexData>> {
   try {
-    console.log(`📊 지수 데이터 요청: ${symbol}`);
+    logger.log(`📊 지수 데이터 요청: ${symbol}`);
 
     // 1. 캐시 확인
     if (!forceRefresh) {
       const cachedData = await getCachedIndexData(symbol);
       if (cachedData) {
-        console.log(`🎯 캐시된 지수 데이터 반환: ${symbol}`);
+        logger.log(`🎯 캐시된 지수 데이터 반환: ${symbol}`);
         return {
           success: true,
           data: cachedData,
@@ -299,7 +300,7 @@ export async function getIndexData(
     if (currentConfig.fallbackToCache) {
       const cachedData = await getCachedIndexData(symbol);
       if (cachedData) {
-        console.log(`🔄 API 실패로 캐시 지수 데이터 사용: ${symbol}`);
+        logger.log(`🔄 API 실패로 캐시 지수 데이터 사용: ${symbol}`);
         return {
           success: true,
           data: cachedData,
@@ -337,7 +338,7 @@ export async function getMultipleStocks(
   symbols: string[]
 ): Promise<ApiResponse<StockData[]>> {
   try {
-    console.log(`📈 복수 주식 데이터 요청: [${symbols.join(', ')}]`);
+    logger.log(`📈 복수 주식 데이터 요청: [${symbols.join(', ')}]`);
 
     // Yahoo Finance 일괄 요청 시도
     const result = await getYahooMultipleStocks(symbols);
@@ -355,7 +356,7 @@ export async function getMultipleStocks(
     }
 
     // 실패 시 개별 요청으로 Fallback
-    console.log('⚠️ 일괄 요청 실패, 개별 요청으로 Fallback');
+    logger.log('⚠️ 일괄 요청 실패, 개별 요청으로 Fallback');
 
     const stockDataArray: StockData[] = [];
     const errors: string[] = [];
@@ -508,7 +509,7 @@ export async function getMajorForexRates(): Promise<ApiResponse<ForexData[]>> {
  * API 상태 확인
  */
 export async function checkApiStatus() {
-  console.log('🔍 API 상태 확인 중...');
+  logger.log('🔍 API 상태 확인 중...');
 
   const [yahooStatus, alphaVantageStatus] = await Promise.allSettled([
     checkYahooFinanceStatus(),
@@ -535,7 +536,7 @@ export async function checkApiStatus() {
     config: currentConfig,
   };
 
-  console.log('📊 API 상태:', status);
+  logger.log('📊 API 상태:', status);
   return status;
 }
 

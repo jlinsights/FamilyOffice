@@ -1,7 +1,7 @@
 'use client';
 
 import { TrendingUp, TrendingDown, RefreshCw } from 'lucide-react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -53,7 +53,7 @@ interface StockCardProps {
  * @param props - The component props
  * @returns JSX element with stock information card
  */
-export default function StockCard({
+function StockCard({
   symbol,
   autoRefresh = false,
   refreshInterval = 300000, // 5분
@@ -98,7 +98,7 @@ export default function StockCard({
         setStockData(data);
       } catch (error) {
         setError('주식 데이터를 불러오는데 실패했습니다.');
-        console.error('주식 데이터 로딩 실패:', error);
+        // Error already handled with UI feedback
       } finally {
         setLoading(false);
       }
@@ -122,37 +122,48 @@ export default function StockCard({
     return () => clearInterval(interval);
   }, [autoRefresh, refreshInterval, fetchStockData]);
 
-  // 수동 새로고침
-  const handleRefresh = () => {
+  // 수동 새로고침 (메모화)
+  const handleRefresh = useCallback(() => {
     fetchStockData(true);
-  };
+  }, [fetchStockData]);
 
-  // 가격 변화 색상 결정
-  const getPriceChangeColor = (change: number) => {
+  // 가격 변화 색상 결정 (메모화)
+  const getPriceChangeColor = useCallback((change: number) => {
     if (change > 0) return 'text-green-600';
     if (change < 0) return 'text-red-600';
     return 'text-gray-600';
-  };
+  }, []);
 
-  // 가격 변화 아이콘
-  const getPriceChangeIcon = (change: number) => {
+  // 가격 변화 아이콘 (메모화)
+  const getPriceChangeIcon = useCallback((change: number) => {
     if (change > 0) return <TrendingUp className="h-4 w-4" />;
     if (change < 0) return <TrendingDown className="h-4 w-4" />;
     return null;
-  };
+  }, []);
 
-  // 숫자 포맷팅
-  const formatNumber = (num: number, decimals = 2) => {
+  // 숫자 포맷터 (메모화)
+  const numberFormatter = useMemo(() => {
+    return new Intl.NumberFormat('ko-KR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }, []);
+
+  // 숫자 포맷팅 (메모화)
+  const formatNumber = useCallback((num: number, decimals = 2) => {
+    if (decimals === 2) {
+      return numberFormatter.format(num);
+    }
     return new Intl.NumberFormat('ko-KR', {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
     }).format(num);
-  };
+  }, [numberFormatter]);
 
-  // 퍼센트 포맷팅
-  const formatPercent = (num: number) => {
+  // 퍼센트 포맷팅 (메모화)
+  const formatPercent = useCallback((num: number) => {
     return `${num >= 0 ? '+' : ''}${formatNumber(num, 2)}%`;
-  };
+  }, [formatNumber]);
 
   // 로딩 상태
   if (loading && !stockData) {
@@ -328,3 +339,6 @@ export default function StockCard({
     </Card>
   );
 }
+
+// Memoize the component to prevent unnecessary re-renders
+export default memo(StockCard);

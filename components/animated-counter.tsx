@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef, memo } from 'react';
 
 interface AnimatedCounterProps {
   end: number;
@@ -17,7 +17,7 @@ interface AnimatedCounterProps {
   ariaLabel?: string;
 }
 
-export function AnimatedCounter({
+function AnimatedCounterComponent({
   end,
   start = 0,
   duration = 2000,
@@ -125,3 +125,6 @@ export function AnimatedCounter({
     </span>
   );
 }
+
+// Memoize the component to prevent unnecessary re-renders  
+export const AnimatedCounter = memo(AnimatedCounterComponent);

@@ -5,6 +5,7 @@ import { Webhook } from 'svix';
 
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/debug-logger';
 
 // Clerk 웹훅 이벤트 타입 정의
 type ClerkWebhookEvent = {
@@ -79,7 +80,7 @@ export async function POST(req: NextRequest) {
 
     // 이벤트 타입에 따른 처리
     const { type, data } = evt;
-    console.log(`Clerk webhook received: ${type} for user ${data.id}`);
+    logger.security(`Clerk webhook received: ${type} for user ${data.id}`);
 
     switch (type) {
       case 'user.created':
@@ -95,7 +96,7 @@ export async function POST(req: NextRequest) {
         await handleSignIn(data.id, supabase);
         break;
       default:
-        console.log(`Unhandled webhook type: ${type}`);
+        logger.warn(`Unhandled webhook type: ${type}`);
     }
 
     return NextResponse.json({ message: 'Webhook processed successfully' });
@@ -148,7 +149,7 @@ async function handleUserCreated(
       throw new Error(`Supabase insert error: ${error.message}`);
     }
 
-    console.log(`User created in Supabase:`, data);
+    logger.security(`User created in Supabase:`, data);
   } catch (error) {
     console.error('Error creating user in Supabase:', error);
     throw error;
@@ -194,7 +195,7 @@ async function handleUserUpdated(
       throw new Error(`Supabase update error: ${error.message}`);
     }
 
-    console.log(`User updated in Supabase:`, data);
+    logger.security(`User updated in Supabase:`, data);
   } catch (error) {
     console.error('Error updating user in Supabase:', error);
     throw error;
@@ -216,7 +217,7 @@ async function handleUserDeleted(userId: string, supabase: any) {
       throw new Error(`Supabase soft delete error: ${error.message}`);
     }
 
-    console.log(`User soft deleted in Supabase:`, data);
+    logger.security(`User soft deleted in Supabase:`, data);
   } catch (error) {
     console.error('Error soft deleting user in Supabase:', error);
     throw error;
@@ -237,7 +238,7 @@ async function handleSignIn(userId: string, supabase: any) {
       throw new Error(`Supabase sign in update error: ${error.message}`);
     }
 
-    console.log(`User sign in recorded in Supabase:`, data);
+    logger.security(`User sign in recorded in Supabase:`, data);
   } catch (error) {
     console.error('Error recording sign in in Supabase:', error);
     throw error;
