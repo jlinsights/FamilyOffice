@@ -347,9 +347,9 @@ export class AdvancedSEOEngine {
     performanceData: Record<string, number>
   ): any {
     return {
-      topPerformers: keywords.filter(k => performanceData[k] > 80),
-      underPerformers: keywords.filter(k => performanceData[k] < 50),
-      opportunities: keywords.filter(k => performanceData[k] >= 50 && performanceData[k] <= 80),
+      topPerformers: keywords.filter(k => (performanceData[k] || 0) > 80),
+      underPerformers: keywords.filter(k => (performanceData[k] || 0) < 50),
+      opportunities: keywords.filter(k => (performanceData[k] || 0) >= 50 && (performanceData[k] || 0) <= 80),
       averageScore: Object.values(performanceData).reduce((a, b) => a + b, 0) / Object.keys(performanceData).length
     };
   }
