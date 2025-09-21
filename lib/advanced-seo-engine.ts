@@ -226,10 +226,10 @@ export class AdvancedSEOEngine {
         google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
         yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
         other: {
-          'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_VERIFICATION,
-          'msvalidate.01': process.env.NEXT_PUBLIC_BING_VERIFICATION,
-          'facebook-domain-verification': process.env.NEXT_PUBLIC_FACEBOOK_VERIFICATION,
-          'p:domain_verify': process.env.NEXT_PUBLIC_PINTEREST_VERIFICATION,
+          'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_VERIFICATION || '',
+          'msvalidate.01': process.env.NEXT_PUBLIC_BING_VERIFICATION || '',
+          'facebook-domain-verification': process.env.NEXT_PUBLIC_FACEBOOK_VERIFICATION || '',
+          'p:domain_verify': process.env.NEXT_PUBLIC_PINTEREST_VERIFICATION || '',
         }
       },
       
