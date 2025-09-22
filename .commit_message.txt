@@ -1,1 +1,1 @@
-💡 라이트 모드를 기본값으로 설정 (시스템 설정 무시)
+🐛 automated-content-optimization.ts의 타입스크립트 오류 수정 - performanceAlerts 배열에 올바른 union 타입 적용

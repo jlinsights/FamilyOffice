@@ -113,7 +113,7 @@ export class IntelligentCrossDomainRouter {
     // 기본값 설정
     const enrichedProfile: UserProfile = {
       assetSize: userProfile.assetSize || 0,
-      businessType: userProfile.businessType || 'unknown',
+      businessType: userProfile.businessType || 'individual',
       industry: userProfile.industry || 'other',
       preference: userProfile.preference || 'stability',
       region: userProfile.region || 'seoul',
