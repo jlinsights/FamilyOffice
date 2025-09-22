@@ -167,9 +167,25 @@ export class AIKeywordOptimizationEngine {
     }[];
   }> {
 
-    const alerts = [];
-    const insights = [];
-    const automatedActions = [];
+    const alerts: {
+      type: 'ranking_drop' | 'opportunity' | 'trend_change' | 'competitor_movement';
+      keyword: string;
+      severity: 'critical' | 'high' | 'medium' | 'low';
+      message: string;
+      recommendation: string;
+    }[] = [];
+    const insights: {
+      category: string;
+      finding: string;
+      impact: number;
+      actionRequired: boolean;
+    }[] = [];
+    const automatedActions: {
+      action: string;
+      keywords: string[];
+      executed: boolean;
+      result?: string;
+    }[] = [];
 
     // 키워드별 성과 분석
     for (const keyword of keywords) {
