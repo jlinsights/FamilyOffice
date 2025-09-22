@@ -107,7 +107,14 @@ export const CROSS_DOMAIN_REFERENCES = {
 
 // 구조화 데이터 스키마
 export function generateDomainStructuredData(domain: string) {
-  const config = DOMAIN_CONFIGS[domain] || DOMAIN_CONFIGS['familyoffices.vip'];
+  const config = DOMAIN_CONFIGS[domain] || DOMAIN_CONFIGS['familyoffices.vip'] || {
+    brandName: 'FamilyOffice S',
+    positioning: '독립 전문가의 개인맞춤 패밀리오피스 서비스',
+    targetAudience: '개인사업자, 중소기업 오너, 신규 부유층',
+    targetKeywords: ['독립 자산관리', '개인맞춤 설계'],
+    domain: 'familyoffices.vip',
+    differentiator: '독립성 + 개인화 + 전문성'
+  };
   
   return {
     "@context": "https://schema.org",
