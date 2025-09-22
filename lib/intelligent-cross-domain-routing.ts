@@ -114,7 +114,7 @@ export class IntelligentCrossDomainRouter {
     const enrichedProfile: UserProfile = {
       assetSize: userProfile.assetSize || 0,
       businessType: userProfile.businessType || 'individual',
-      industry: userProfile.industry || 'other',
+      industry: userProfile.industry || 'tech',
       preference: userProfile.preference || 'stability',
       region: userProfile.region || 'seoul',
       experience: userProfile.experience || 'intermediate',
