@@ -153,7 +153,7 @@ export const FAMILYOFFICES_VIP_SEO = {
 
 // FamilyOffices VIP 전용 메타데이터 생성 함수
 export function generateFamilyOfficesVIPMetadata(pageName?: string): Metadata {
-  const config = pageName ? FAMILYOFFICES_VIP_SEO.pageConfigs[pageName] : null;
+  const config = pageName ? (FAMILYOFFICES_VIP_SEO.pageConfigs as any)[pageName] : null;
   const base = FAMILYOFFICES_VIP_SEO.metadataTemplate;
   
   return {
