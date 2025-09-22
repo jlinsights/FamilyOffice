@@ -157,18 +157,26 @@ export class IntelligentCrossDomainRouter {
     
     const headersList = headers();
     
-    return {
+    const result: ContextData = {
       domain,
       userAgent: contextData?.userAgent || headersList.get('user-agent') || 'unknown',
       referrer: contextData?.referrer || headersList.get('referer') || '',
-      searchQuery: contextData?.searchQuery,
-      sessionData: contextData?.sessionData,
       timeOfVisit: contextData?.timeOfVisit || Date.now(),
       deviceType: contextData?.deviceType || this.detectDeviceType(headersList.get('user-agent')),
       geoLocation: contextData?.geoLocation || 'KR',
       previousPages: contextData?.previousPages || [],
       engagementLevel: contextData?.engagementLevel || 0
     };
+
+    // Optional 필드들 추가
+    if (contextData?.searchQuery !== undefined) {
+      result.searchQuery = contextData.searchQuery;
+    }
+    if (contextData?.sessionData !== undefined) {
+      result.sessionData = contextData.sessionData;
+    }
+
+    return result;
   }
 
   // ML 기반 사용자 세그먼트 분류
