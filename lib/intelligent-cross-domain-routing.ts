@@ -457,7 +457,10 @@ export class IntelligentCrossDomainRouter {
     return 'intermediate';
   }
 
-  private analyzeBehaviorPattern(previousPages: string[]): Partial<UserProfile> {
+  private analyzeBehaviorPattern(previousPages: string[]): {
+    riskTolerance: UserProfile['riskTolerance'];
+    experience: UserProfile['experience'];
+  } {
     const analysis = {
       riskTolerance: 'moderate' as UserProfile['riskTolerance'],
       experience: 'intermediate' as UserProfile['experience']
