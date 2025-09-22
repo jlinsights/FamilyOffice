@@ -162,7 +162,7 @@ export class IntelligentCrossDomainRouter {
       userAgent: contextData?.userAgent || headersList.get('user-agent') || 'unknown',
       referrer: contextData?.referrer || headersList.get('referer') || '',
       timeOfVisit: contextData?.timeOfVisit || Date.now(),
-      deviceType: contextData?.deviceType || this.detectDeviceType(headersList.get('user-agent')),
+      deviceType: contextData?.deviceType || this.detectDeviceType(headersList.get('user-agent') || undefined),
       geoLocation: contextData?.geoLocation || 'KR',
       previousPages: contextData?.previousPages || [],
       engagementLevel: contextData?.engagementLevel || 0
