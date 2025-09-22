@@ -107,7 +107,7 @@ export const CROSS_DOMAIN_REFERENCES = {
 
 // 구조화 데이터 스키마
 export function generateDomainStructuredData(domain: string) {
-  const config = DOMAIN_CONFIGS[domain];
+  const config = DOMAIN_CONFIGS[domain] || DOMAIN_CONFIGS['familyoffices.vip'];
   
   return {
     "@context": "https://schema.org",
