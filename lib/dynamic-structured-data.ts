@@ -299,7 +299,7 @@ export class DynamicStructuredDataEngine {
         opens: '09:00',
         closes: '18:00'
       },
-      offers: services.offers.map(offer => ({
+      offers: services.offers.map((offer: any) => ({
         '@type': 'Offer',
         name: offer.name,
         description: offer.description,
