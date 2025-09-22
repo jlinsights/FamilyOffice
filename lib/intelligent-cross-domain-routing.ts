@@ -124,12 +124,15 @@ export class IntelligentCrossDomainRouter {
 
     // 컨텍스트 기반 추론
     if (contextData?.searchQuery) {
-      enrichedProfile.businessType = this.inferBusinessTypeFromSearch(contextData.searchQuery);
-      enrichedProfile.preference = this.inferPreferenceFromSearch(contextData.searchQuery);
+      const inferredBusinessType = this.inferBusinessTypeFromSearch(contextData.searchQuery);
+      const inferredPreference = this.inferPreferenceFromSearch(contextData.searchQuery);
+      if (inferredBusinessType) enrichedProfile.businessType = inferredBusinessType;
+      if (inferredPreference) enrichedProfile.preference = inferredPreference;
     }
 
     if (contextData?.referrer) {
-      enrichedProfile.experience = this.inferExperienceFromReferrer(contextData.referrer);
+      const inferredExperience = this.inferExperienceFromReferrer(contextData.referrer);
+      if (inferredExperience) enrichedProfile.experience = inferredExperience;
     }
 
     if (contextData?.deviceType === 'mobile') {
@@ -139,8 +142,8 @@ export class IntelligentCrossDomainRouter {
     // 행동 패턴 기반 추론
     if (contextData?.previousPages) {
       const behaviorAnalysis = this.analyzeBehaviorPattern(contextData.previousPages);
-      enrichedProfile.riskTolerance = behaviorAnalysis.riskTolerance;
-      enrichedProfile.experience = behaviorAnalysis.experience;
+      if (behaviorAnalysis.riskTolerance) enrichedProfile.riskTolerance = behaviorAnalysis.riskTolerance;
+      if (behaviorAnalysis.experience) enrichedProfile.experience = behaviorAnalysis.experience;
     }
 
     return enrichedProfile;
