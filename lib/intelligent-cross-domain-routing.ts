@@ -155,7 +155,7 @@ export class IntelligentCrossDomainRouter {
     contextData?: Partial<ContextData>
   ): Promise<ContextData> {
     
-    const headersList = headers();
+    const headersList = await headers();
     
     const result: ContextData = {
       domain,
