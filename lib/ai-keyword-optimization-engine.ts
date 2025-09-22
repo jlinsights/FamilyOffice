@@ -748,7 +748,7 @@ export class AIKeywordOptimizationEngine {
 
     return months.map((month, index) => {
       const season = ['winter', 'winter', 'spring', 'spring', 'spring', 'summer',
-                      'summer', 'summer', 'autumn', 'autumn', 'autumn', 'winter'][index];
+                      'summer', 'summer', 'autumn', 'autumn', 'autumn', 'winter'][index] as string;
       
       return {
         month,
