@@ -211,9 +211,25 @@ export class AutomatedContentOptimization {
     }[];
   }> {
 
-    const performanceAlerts = [];
-    const optimizationOpportunities = [];
-    const automatedActions = [];
+    const performanceAlerts: Array<{
+      url: string;
+      alertType: 'performance_drop' | 'ranking_change' | 'engagement_low' | 'technical_issue';
+      severity: 'critical' | 'high' | 'medium' | 'low';
+      message: string;
+      recommendedAction: string;
+    }> = [];
+    const optimizationOpportunities: Array<{
+      url: string;
+      opportunity: string;
+      potentialGain: string;
+      implementationEffort: string;
+    }> = [];
+    const automatedActions: Array<{
+      url: string;
+      action: string;
+      status: 'completed' | 'in_progress' | 'failed';
+      result?: string;
+    }> = [];
 
     for (const url of contentUrls) {
       const analysis = await this.analyzeContent(url, '', []);
