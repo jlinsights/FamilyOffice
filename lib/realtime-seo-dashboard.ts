@@ -670,11 +670,12 @@ export class RealtimeSEODashboard {
   private async analyzeTrends(timeframe: string): Promise<TrendData> {
     // 샘플 트렌드 데이터
     const days = timeframe === '7days' ? 7 : timeframe === '30days' ? 30 : 90;
-    const dates: string[] = Array.from({length: days}).map((_, i) => {
+    const dates: string[] = [];
+    for (let i = 0; i < days; i++) {
       const date = new Date();
       date.setDate(date.getDate() - (days - 1 - i));
-      return date.toISOString().split('T')[0];
-    });
+      dates.push(date.toISOString().split('T')[0]);
+    }
 
     return {
       timeframe: timeframe as any,
