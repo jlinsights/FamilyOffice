@@ -140,7 +140,7 @@ export const SAMSUNGLIFE_VIP_SEO = {
 
 // Samsung Life VIP 전용 메타데이터 생성 함수
 export function generateSamsungLifeVIPMetadata(pageName?: string): Metadata {
-  const config = pageName ? SAMSUNGLIFE_VIP_SEO.pageConfigs[pageName] : null;
+  const config = pageName ? (SAMSUNGLIFE_VIP_SEO.pageConfigs as any)[pageName] : null;
   const base = SAMSUNGLIFE_VIP_SEO.metadataTemplate;
   
   return {
