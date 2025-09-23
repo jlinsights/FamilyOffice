@@ -674,7 +674,10 @@ export class RealtimeSEODashboard {
     for (let i = 0; i < days; i++) {
       const date = new Date();
       date.setDate(date.getDate() - (days - 1 - i));
-      dates.push(date.toISOString().split('T')[0]);
+      const dateString = date.toISOString().split('T')[0];
+      if (dateString) {
+        dates.push(dateString);
+      }
     }
 
     return {
