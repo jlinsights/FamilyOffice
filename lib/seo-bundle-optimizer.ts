@@ -11,8 +11,8 @@ export const dynamicSEOImports = {
     }
     
     try {
-      const module = await import('./advanced-seo-engine');
-      return module.advancedSEOEngine;
+      const seoModule = await import('./advanced-seo-engine');
+      return seoModule.advancedSEOEngine;
     } catch (error) {
       console.error('Failed to load advanced SEO engine:', error);
       return null;
@@ -26,8 +26,8 @@ export const dynamicSEOImports = {
     }
     
     try {
-      const module = await import('./ai-keyword-optimization-engine');
-      return module.aiKeywordOptimizationEngine;
+      const keywordModule = await import('./ai-keyword-optimization-engine');
+      return keywordModule.aiKeywordOptimizationEngine;
     } catch (error) {
       console.error('Failed to load AI keyword engine:', error);
       return null;
@@ -41,8 +41,8 @@ export const dynamicSEOImports = {
     }
     
     try {
-      const module = await import('./dynamic-structured-data');
-      return module.dynamicStructuredDataEngine;
+      const structuredModule = await import('./dynamic-structured-data');
+      return structuredModule.dynamicStructuredDataEngine;
     } catch (error) {
       console.error('Failed to load structured data engine:', error);
       return null;
@@ -56,23 +56,29 @@ export const dynamicSEOImports = {
     }
     
     try {
-      const module = await import('./automated-content-optimization');
-      return module.automatedContentOptimization;
+      const contentModule = await import('./automated-content-optimization');
+      return contentModule.automatedContentOptimization;
     } catch (error) {
       console.error('Failed to load content optimizer:', error);
       return null;
     }
   },
 
-  // Cross-Domain Routing
+  // Cross-Domain Routing (server-side only)
   async loadCrossDomainRouter() {
     if (!isFeatureEnabled('enableCrossDomainRouting')) {
       return null;
     }
     
+    // Only load on server-side to avoid next/headers import issues
+    if (typeof window !== 'undefined') {
+      console.warn('Cross-domain router is server-side only');
+      return null;
+    }
+    
     try {
-      const module = await import('./intelligent-cross-domain-routing');
-      return module.intelligentCrossDomainRouter;
+      const routingModule = await import('./intelligent-cross-domain-routing');
+      return routingModule.intelligentCrossDomainRouter;
     } catch (error) {
       console.error('Failed to load cross-domain router:', error);
       return null;
@@ -86,8 +92,8 @@ export const dynamicSEOImports = {
     }
     
     try {
-      const module = await import('./realtime-seo-dashboard');
-      return module.realtimeSEODashboard;
+      const dashboardModule = await import('./realtime-seo-dashboard');
+      return dashboardModule.realtimeSEODashboard;
     } catch (error) {
       console.error('Failed to load realtime dashboard:', error);
       return null;
@@ -169,7 +175,8 @@ export async function preloadCriticalSEOModules(): Promise<void> {
     );
   }
   
-  if (isFeatureEnabled('enableCrossDomainRouting')) {
+  // Cross-domain routing is server-side only, skip preloading
+  if (isFeatureEnabled('enableCrossDomainRouting') && typeof window === 'undefined') {
     promises.push(
       BundleSizeMonitor.trackImportTime(
         'intelligent-cross-domain-routing',

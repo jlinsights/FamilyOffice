@@ -1,8 +1,4 @@
 // 지능형 크로스 도메인 라우팅 시스템 - AI 기반 사용자 여정 최적화
-import { headers } from 'next/headers';
-import { CROSS_DOMAIN_STRATEGY, getCrossDomainRecommendation } from './cross-domain-strategy';
-import { advancedSEOEngine } from './advanced-seo-engine';
-import { dynamicStructuredDataEngine } from './dynamic-structured-data';
 
 interface UserProfile {
   assetSize?: number;
@@ -155,14 +151,12 @@ export class IntelligentCrossDomainRouter {
     contextData?: Partial<ContextData>
   ): Promise<ContextData> {
     
-    const headersList = await headers();
-    
     const result: ContextData = {
       domain,
-      userAgent: contextData?.userAgent || headersList.get('user-agent') || 'unknown',
-      referrer: contextData?.referrer || headersList.get('referer') || '',
+      userAgent: contextData?.userAgent || 'unknown',
+      referrer: contextData?.referrer || '',
       timeOfVisit: contextData?.timeOfVisit || Date.now(),
-      deviceType: contextData?.deviceType || this.detectDeviceType(headersList.get('user-agent') || undefined),
+      deviceType: contextData?.deviceType || this.detectDeviceType(contextData?.userAgent),
       geoLocation: contextData?.geoLocation || 'KR',
       previousPages: contextData?.previousPages || [],
       engagementLevel: contextData?.engagementLevel || 0
