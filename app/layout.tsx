@@ -5,6 +5,7 @@ import './globals.css';
 import { Analytics } from '@/components/analytics';
 import { DomainMigrationBanner } from '@/components/domain-migration-banner';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { SEOErrorBoundary } from '@/components/seo-error-boundary';
 import ExternalScripts from '@/components/external-scripts';
 import { KakaoPixel } from '@/components/kakao/kakao-pixel';
 import { KakaoSDK } from '@/components/kakao/kakao-sdk';
@@ -17,8 +18,7 @@ import { DebugStyles } from './debug-styles';
 import { PreloadCriticalResources } from '@/components/preload-critical-resources';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
 import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
-
-// import { defaultMetadata } from '@/lib/seo';
+import { safeMetadata } from '@/lib/safe-seo-engine';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -27,8 +27,9 @@ const inter = Inter({
   variable: '--font-inter'
 });
 
-// SuperClaude 통합 SEO 프레임워크 적용
+// Safe SEO metadata with fallback support
 export const metadata: Metadata = {
+  ...safeMetadata.default,
   title: {
     default: 'FamilyOffice S - 성공한 기업가·자산가를 위한 가업승계·자산관리 전문 플랫폼',
     template: '%s | FamilyOffice S',
@@ -396,7 +397,9 @@ export default function RootLayout({
             enableSystem={false}
             disableTransitionOnChange
           >
-            {children}
+            <SEOErrorBoundary>
+              {children}
+            </SEOErrorBoundary>
             {/* <AIChatFloating /> */}
             <ChannelTalk />
             <Toaster />
