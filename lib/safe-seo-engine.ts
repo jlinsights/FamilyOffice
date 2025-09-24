@@ -1,7 +1,10 @@
 // Safe wrapper for SEO engine with feature flags and error handling
 import { Metadata } from 'next';
 import { isFeatureEnabled } from './feature-flags';
-import { SEOErrorBoundary } from '@/components/seo-error-boundary';
+import { dynamicSEOImports, BundleSizeMonitor } from './seo-bundle-optimizer';
+import { performanceMonitor } from './performance-monitor';
+import { aiCacheOperations } from './enhanced-seo-cache';
+import { SEOErrorHandler, inputSanitizer } from './seo-error-handling';
 
 // Type definitions
 interface SafeSEOMetadata extends Metadata {
@@ -25,27 +28,7 @@ const defaultMetadata: SafeSEOMetadata = {
   _fallbackUsed: true,
 };
 
-// Lazy import for advanced SEO features
-const loadAdvancedSEO = () => {
-  if (isFeatureEnabled('enableAdvancedSEO')) {
-    return import('./advanced-seo-engine');
-  }
-  return null;
-};
-
-const loadAIKeywords = () => {
-  if (isFeatureEnabled('enableAIKeywordOptimization')) {
-    return import('./ai-keyword-optimization-engine');
-  }
-  return null;
-};
-
-const loadStructuredData = () => {
-  if (isFeatureEnabled('enableDynamicStructuredData')) {
-    return import('./dynamic-structured-data');
-  }
-  return null;
-};
+// Dynamic imports now handled by bundle optimizer
 
 // Safe metadata generation with fallbacks
 export async function generateSafeMetadata(
@@ -68,30 +51,53 @@ export async function generateSafeMetadata(
       };
     }
 
-    // Try to load and use advanced SEO engine
-    const advancedSEOModule = await loadAdvancedSEO();
-    if (advancedSEOModule) {
-      const { advancedSEOEngine } = advancedSEOModule;
-      const metadata = await advancedSEOEngine.generateContextualMetadata(
-        options?.domain || 'familyoffices.vip',
-        pageName,
-        { 
-          domain: options?.domain || 'familyoffices.vip',
-          userAgent: 'safe-seo-engine',
-          referrer: '',
-          location: 'KR',
-          timeOfDay: Date.now(),
-          deviceType: 'desktop',
-          userSegment: 'individual'
-        }
-      );
+    // Try to load and use advanced SEO engine with enhanced caching
+    const context = { 
+      domain: options?.domain || 'familyoffices.vip',
+      userAgent: 'safe-seo-engine',
+      referrer: '',
+      location: 'KR',
+      timeOfDay: Date.now(),
+      deviceType: 'desktop' as const,
+      userSegment: 'individual' as const
+    };
+
+    const metadata = await SEOErrorHandler.safeAIOperation(
+      async () => {
+        return await aiCacheOperations.generateAdvancedMetadata(
+          options?.domain || 'familyoffices.vip',
+          pageName,
+          context,
+          async () => {
+            const advancedSEOEngine = await BundleSizeMonitor.trackImportTime(
+              'advanced-seo-engine',
+              () => dynamicSEOImports.loadAdvancedSEOEngine()
+            );
+            
+            if (!advancedSEOEngine) {
+              throw new Error('Advanced SEO engine failed to load');
+            }
+
+            return await advancedSEOEngine.generateContextualMetadata(
+              options?.domain || 'familyoffices.vip',
+              pageName,
+              context
+            );
+          }
+        );
+      },
+      defaultMetadata, // Fallback
+      {
+        module: 'safe-seo-engine',
+        operationName: 'generateAdvancedMetadata'
+      }
+    );
       
-      return {
-        ...metadata,
-        _isSafe: true,
-        _fallbackUsed: false,
-      };
-    }
+    return {
+      ...metadata,
+      _isSafe: true,
+      _fallbackUsed: false,
+    };
 
     // Fallback if module fails to load
     return defaultMetadata;
@@ -122,14 +128,25 @@ export async function generateSafeStructuredData(
       };
     }
 
-    const structuredDataModule = await loadStructuredData();
-    if (structuredDataModule) {
-      const { dynamicStructuredDataEngine } = structuredDataModule;
-      return await dynamicStructuredDataEngine.generateDynamicStructuredData({
-        pageName,
-        domain: 'familyoffices.vip',
-        ...pageData
-      });
+    const structuredDataEngine = await performanceMonitor.trackAsyncOperation(
+      'seo_structured_data_generation',
+      () => BundleSizeMonitor.trackImportTime(
+        'structured-data-engine',
+        () => dynamicSEOImports.loadStructuredDataEngine()
+      ),
+      { feature: 'structuredData' }
+    );
+    
+    if (structuredDataEngine) {
+      return await performanceMonitor.trackAsyncOperation(
+        'seo_generate_structured_data',
+        () => structuredDataEngine.generateDynamicStructuredData({
+          pageName,
+          domain: 'familyoffices.vip',
+          ...pageData
+        }),
+        { operation: 'generateDynamicStructuredData' }
+      );
     }
 
     return null;
@@ -149,19 +166,42 @@ export async function optimizeKeywordsSafely(
       return keywords; // Return original keywords
     }
 
-    const keywordModule = await loadAIKeywords();
-    if (keywordModule) {
-      const { aiKeywordOptimizationEngine } = keywordModule;
-      const result = await aiKeywordOptimizationEngine.optimizeKeywords(
-        'familyoffices.vip',
-        keywords,
-        'hybrid',
-        'conversion'
-      );
-      return result.recommendations?.map(r => r.keyword) || keywords;
-    }
+    // Sanitize keywords input
+    const sanitizedKeywords = inputSanitizer.sanitizeKeywords(keywords);
+    
+    // Use enhanced caching for AI keyword optimization with error handling
+    const result = await SEOErrorHandler.safeAIOperation(
+      async () => {
+        return await aiCacheOperations.optimizeKeywords(
+          'familyoffices.vip',
+          sanitizedKeywords,
+          async () => {
+            const keywordEngine = await BundleSizeMonitor.trackImportTime(
+              'ai-keyword-engine',
+              () => dynamicSEOImports.loadAIKeywordEngine()
+            );
+            
+            if (!keywordEngine) {
+              throw new Error('AI keyword engine failed to load');
+            }
 
-    return keywords;
+            return await keywordEngine.optimizeKeywords(
+              'familyoffices.vip',
+              sanitizedKeywords,
+              'hybrid',
+              'conversion'
+            );
+          }
+        );
+      },
+      { recommendations: sanitizedKeywords.map(k => ({ keyword: k })) }, // Fallback structure
+      {
+        module: 'safe-seo-engine',
+        operationName: 'optimizeKeywords'
+      }
+    );
+    
+    return result.recommendations?.map((r: any) => r.keyword) || sanitizedKeywords;
   } catch (error) {
     console.error('Keyword Optimization Error:', error);
     return keywords;

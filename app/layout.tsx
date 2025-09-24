@@ -19,6 +19,7 @@ import { PreloadCriticalResources } from '@/components/preload-critical-resource
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
 import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
 import { safeMetadata } from '@/lib/safe-seo-engine';
+import { SEOModulePreloader } from '@/components/seo-module-preloader';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -427,6 +428,9 @@ export default function RootLayout({
                 reportingInterval: 'daily'
               }}
             />
+            
+            {/* SEO 모듈 백그라운드 프리로딩 */}
+            <SEOModulePreloader />
             
             {/* 사용자 행동 추적 스크립트 */}
             <script
