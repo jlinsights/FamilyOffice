@@ -120,13 +120,14 @@ export const Footer = memo(function Footer() {
                   <span className="sr-only">Instagram</span>
                 </Link>
                 <Link
-                  href="https://www.linkedin.com/in/jaehonglim/"
+                  href="https://litt.ly/familyoffice"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                  title="임재홍 수석 컨설턴트 프로필"
                 >
                   <Linkedin className="h-4 w-4" />
-                  <span className="sr-only">LinkedIn</span>
+                  <span className="sr-only">임재홍 수석 컨설턴트 프로필</span>
                 </Link>
                 <Link
                   href="https://x.com/jaehong_lim"

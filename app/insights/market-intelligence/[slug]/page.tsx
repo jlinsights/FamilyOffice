@@ -170,22 +170,36 @@ export default async function BlogPostPage({
               <Card className="mt-8 shadow-lg bg-background border-border">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-4">
-                    <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-800">
-                      <Image 
-                        src="/Images/Profile Image-3-1080 x 1080 px.png" 
-                        alt="임재홍 수석 컨설턴트"
-                        width={512}
-                        height={512}
-                        className="w-full h-full object-cover object-center"
-                        quality={90}
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      />
-                    </div>
+                    <Link 
+                      href="https://litt.ly/familyoffice" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group block"
+                    >
+                      <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-800 group-hover:ring-4 group-hover:ring-primary/30 transition-all duration-300 group-hover:scale-105">
+                        <Image 
+                          src="/Images/Profile Image-3-1080 x 1080 px.png" 
+                          alt="임재홍 수석 컨설턴트"
+                          width={512}
+                          height={512}
+                          className="w-full h-full object-cover object-center"
+                          quality={90}
+                          placeholder="blur"
+                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                        />
+                      </div>
+                    </Link>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-2 text-foreground">
-                        {post.author} 수석 컨설턴트
-                      </h3>
+                      <Link 
+                        href="https://litt.ly/familyoffice" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="group block"
+                      >
+                        <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
+                          {post.author} 수석 컨설턴트
+                        </h3>
+                      </Link>
                       <p className="text-sm text-primary mb-2 font-medium">
                         대표 컨설턴트 / 수석
                       </p>

@@ -481,8 +481,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 전문가 팀 섹션 - 임시 비활성화 (팀 보강 후 재활성화 예정) */}
-        {/*
+        {/* 전문가 팀 섹션 */}
         <section className="py-20 bg-muted/30 dark:bg-muted/20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
@@ -529,23 +528,31 @@ export default function AboutPage() {
                   <CardHeader>
                     <div className="w-24 h-32 rounded-full mx-auto mb-6 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-4 border-primary/20 dark:border-primary/30 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
                       {expert.name === '임재홍' ? (
-                        <Image 
-                          src="/Images/Profile Image-3-1080 x 1080 px.png" 
-                          alt="임재홍 수석 컨설턴트"
-                          width={512}
-                          height={512}
-                          className="w-full h-full object-cover object-top scale-110 -translate-y-1"
-                          quality={90}
-                          placeholder="blur"
-                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                        />
+                        <Link href="https://litt.ly/familyoffice" target="_blank" rel="noopener noreferrer" className="block w-full h-full group/link">
+                          <Image 
+                            src="/Images/Profile Image-3-1080 x 1080 px.png" 
+                            alt="임재홍 수석 컨설턴트"
+                            width={512}
+                            height={512}
+                            className="w-full h-full object-cover object-top scale-110 -translate-y-1 transition-transform duration-300 group-hover/link:scale-125"
+                            quality={90}
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                          />
+                        </Link>
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:from-primary/30 group-hover:to-primary/10 transition-all duration-300">
                           <Users className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" />
                         </div>
                       )}
                     </div>
-                    <CardTitle className="text-xl text-gray-900 dark:text-white transition-all duration-300 group-hover:text-primary dark:group-hover:text-primary">{expert.name}</CardTitle>
+                    {expert.name === '임재홍' ? (
+                      <Link href="https://litt.ly/familyoffice" target="_blank" rel="noopener noreferrer" className="group/name">
+                        <CardTitle className="text-xl text-gray-900 dark:text-white transition-all duration-300 group-hover:text-primary dark:group-hover:text-primary group-hover/name:text-blue-600 dark:group-hover/name:text-blue-400">{expert.name}</CardTitle>
+                      </Link>
+                    ) : (
+                      <CardTitle className="text-xl text-gray-900 dark:text-white transition-all duration-300 group-hover:text-primary dark:group-hover:text-primary">{expert.name}</CardTitle>
+                    )}
                     <p className="text-primary font-medium mb-4 group-hover:font-semibold transition-all duration-300">{expert.position}</p>
                   </CardHeader>
                   <CardContent className="flex-1 flex flex-col">
@@ -561,7 +568,6 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-        */}
 
         {/* Multimedia Content Section */}
         <CompactMultimediaSection />

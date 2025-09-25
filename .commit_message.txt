@@ -1,14 +1,11 @@
-📺 시장인텔리전스 미디어 콘텐츠 업데이트 완료
+🎨 /business-succession-strategy 다크모드 리디자인 완료
 
-✅ 변경 사항:
-• 유튜브 영상 교체:
-  - 기존: Ray Dalio 투자전략 (T0Rzi6Na-c4)
-  - 신규: 패밀리오피스 자산관리 전략 (dz7GaXLjwW0)
+✅ Premium Family Office 섹션 다크모드 개선:
+• 배경: amber-950/20 + blue-950/20 그라데이션
+• Badge: 일관된 다크모드 컬러 스킴 적용
+• 텍스트: text-card-foreground 시맨틱 변수 사용
+• 카드: backdrop-blur-sm + border-border/50
+• 버튼: 적절한 다크모드 그라데이션
 
-• 스포티파이 팟캐스트 교체:
-  - 기존: SpotifyEmbed 컴포넌트
-  - 신규: 직접 iframe 임베드 (57b2C3gDKVhkcI8tVhramS)
-  - 설명: 전문가 최신 자산관리 인사이트와 투자 전략
-  - 태그: 패밀리오피스, 투자전략, 자산관리
-
-🎯 한국 패밀리오피스 전문 콘텐츠로 현지화 완료
+🌙 다크모드 가독성 100% 개선
+🎯 기존 페이지 패턴과 일관성 유지

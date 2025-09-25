@@ -633,7 +633,13 @@ export default function WeeklyBriefPage() {
                 {/* Left side - Consultant Info */}
                 <div className="p-8 md:p-12 flex items-center">
                   <div className="flex items-start gap-6">
-                    <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-primary/10 to-primary/5 border-4 border-primary/20">
+                    <Link 
+                      href="https://litt.ly/familyoffice" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group block"
+                    >
+                      <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-primary/10 to-primary/5 border-4 border-primary/20 group-hover:border-primary/40 transition-all duration-300 group-hover:scale-105">
                       <Image 
                         src="/Images/Profile Image-3-1080 x 1080 px.png" 
                         alt="임재홍 수석 컨설턴트"
@@ -644,12 +650,20 @@ export default function WeeklyBriefPage() {
                         quality={90}
                         placeholder="blur"
                         blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/9QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      />
-                    </div>
+                        />
+                      </div>
+                    </Link>
                     <div className="flex-1">
-                      <h3 className="text-2xl font-bold mb-2 text-foreground">
-                        임재홍 <span className="text-muted-foreground font-normal">수석 컨설턴트</span>
-                      </h3>
+                      <Link 
+                        href="https://litt.ly/familyoffice" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="group block"
+                      >
+                        <h3 className="text-2xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
+                          임재홍 <span className="text-muted-foreground font-normal">수석 컨설턴트</span>
+                        </h3>
+                      </Link>
                       <p className="text-lg text-primary font-medium mb-4">
                         대표 컨설턴트 / 수석
                       </p>
