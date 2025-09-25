@@ -659,79 +659,112 @@ const BusinessSuccessionPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 px-4 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10">
-          <div className="max-w-4xl mx-auto">
-            <Card className="border-primary/20 dark:border-primary/30 bg-gradient-to-r from-primary/5 to-transparent dark:from-primary/10 dark:to-transparent bg-card dark:bg-card/80 hover:shadow-2xl dark:hover:shadow-white/5">
-              <CardContent className="pt-8 pb-8">
-                <div className="text-center space-y-6">
+        <section className="py-12 px-4 bg-gradient-to-r from-blue-50/30 via-slate-50/20 to-blue-50/30 dark:from-blue-950/30 dark:via-slate-950/20 dark:to-blue-950/30">
+          <div className="max-w-5xl mx-auto">
+            <Card className="border-2 border-blue-200/50 dark:border-blue-400/20 bg-gradient-to-br from-blue-50/50 via-white/80 to-blue-50/50 dark:from-slate-900/50 dark:via-slate-800/80 dark:to-blue-900/50 shadow-xl dark:shadow-blue-500/10 hover:shadow-2xl dark:hover:shadow-blue-400/20 backdrop-blur-sm transition-all duration-300">
+              <CardContent className="pt-10 pb-10">
+                <div className="text-center space-y-8">
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">
+                    <h3 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">
                       맞춤형 가업승계 전략 상담을 받아보세요
                     </h3>
-                    <p className="text-lg text-muted-foreground">
+                    <p className="text-lg text-slate-700 dark:text-slate-200">
                       {overallProgress < 20 && '승계 준비가 시급합니다. 전문가와의 전략 수립이 필요합니다.'}
                       {overallProgress >= 20 && overallProgress < 60 && '기본적인 준비는 되어있으나 전문적인 검토가 필요합니다.'}
                       {overallProgress >= 60 && '좋은 수준의 준비가 되어있습니다. 세부 전략 최적화를 진행하세요.'}
                     </p>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-4xl mx-auto">
+                    {/* 무료 승계 전략 상담 - Primary Button */}
                     <CalComPopup
-                      className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors"
+                      className="col-span-2 sm:col-span-3 lg:col-span-4 inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-600 dark:to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:hover:from-blue-700 dark:hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                       buttonText="무료 승계 전략 상담"
                       eventType="consultation"
                       trigger={
                         <div className="flex items-center">
-                          <Crown className="h-5 w-5 mr-2" />
+                          <Crown className="h-6 w-6 mr-2" />
                           무료 승계 전략 상담
                         </div>
                       }
                     />
 
-                    <Button variant="outline" size="lg" asChild>
+                    {/* Secondary Buttons with Enhanced Dark Mode Styling */}
+                    <Button 
+                      variant="outline" 
+                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      asChild
+                    >
                       <Link href="/ceo-checklist">
-                        <Briefcase className="h-5 w-5 mr-2" />
-                        CEO 경영 진단
+                        <Briefcase className="h-6 w-6 mb-1" />
+                        <span className="text-xs font-medium text-center">CEO<br/>경영진단</span>
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button 
+                      variant="outline" 
+                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      asChild
+                    >
                       <Link href="/corporate-life-insurance">
-                        <Shield className="h-5 w-5 mr-2" />
-                        법인종신보험
+                        <Shield className="h-6 w-6 mb-1" />
+                        <span className="text-xs font-medium text-center">법인<br/>종신보험</span>
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button 
+                      variant="outline" 
+                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      asChild
+                    >
                       <Link href="/tax-strategy">
-                        <Calculator className="h-5 w-5 mr-2" />
-                        절세 전략 보기
+                        <Calculator className="h-6 w-6 mb-1" />
+                        <span className="text-xs font-medium text-center">절세<br/>전략</span>
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button 
+                      variant="outline" 
+                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      asChild
+                    >
                       <Link href="/inheritance-gift-tax">
-                        <Heart className="h-5 w-5 mr-2" />
-                        상속·증여세 가이드
+                        <Heart className="h-6 w-6 mb-1" />
+                        <span className="text-xs font-medium text-center">증여세<br/>가이드</span>
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button 
+                      variant="outline" 
+                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      asChild
+                    >
                       <Link href="/fp-center">
-                        <Users className="h-5 w-5 mr-2" />
-                        FP센터 재무설계
+                        <Users className="h-6 w-6 mb-1" />
+                        <span className="text-xs font-medium text-center">FP센터<br/>재무설계</span>
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg">
-                      <Download className="h-5 w-5 mr-2" />
-                      승계 체크리스트 다운로드
+                    <Button 
+                      variant="outline" 
+                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                    >
+                      <Download className="h-6 w-6 mb-1" />
+                      <span className="text-xs font-medium text-center">체크리스트<br/>다운로드</span>
                     </Button>
                   </div>
 
-                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                    <Phone className="h-4 w-4" />
-                    <span>긴급 상담: 0502-5550-8700</span>
+                  <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
+                    <div className="flex items-center justify-center gap-3 text-base text-slate-700 dark:text-slate-200 font-medium">
+                      <Phone className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                      <span>긴급 상담: </span>
+                      <a 
+                        href="tel:0502-5550-8700" 
+                        className="text-blue-600 dark:text-blue-400 font-bold hover:underline"
+                      >
+                        0502-5550-8700
+                      </a>
+                    </div>
                   </div>
                 </div>
               </CardContent>

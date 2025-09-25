@@ -1,11 +1,11 @@
-🎨 /business-succession-strategy 다크모드 리디자인 완료
+🎨 CTA 섹션 다크모드 가독성 개선
 
-✅ Premium Family Office 섹션 다크모드 개선:
-• 배경: amber-950/20 + blue-950/20 그라데이션
-• Badge: 일관된 다크모드 컬러 스킴 적용
-• 텍스트: text-card-foreground 시맨틱 변수 사용
-• 카드: backdrop-blur-sm + border-border/50
-• 버튼: 적절한 다크모드 그라데이션
+✅ 가업승계 CTA 카드 리디자인:
+• 배경: 명확한 dark:from-slate-900/50 dark:via-slate-800/80
+• 버튼: 2x3 그리드 레이아웃 + 다크모드 전용 스타일링
+• 텍스트: text-slate-700 dark:text-slate-200로 가독성 향상
+• 전화번호: 강조된 blue-600 dark:blue-400 컬러
+• hover 상태: 명확한 다크모드 피드백
 
-🌙 다크모드 가독성 100% 개선
-🎯 기존 페이지 패턴과 일관성 유지
+🌙 다크모드에서 100% 가독성 보장
+📱 반응형 그리드 레이아웃 적용
