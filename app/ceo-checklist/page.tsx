@@ -165,9 +165,9 @@ const CEOChecklistPage = () => {
 
             {/* Progress Overview */}
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">전체 진행률</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">전체 진행률</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-bold text-primary mb-2">
@@ -177,32 +177,38 @@ const CEOChecklistPage = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-orange-200 bg-orange-50/80 backdrop-blur-sm dark:border-orange-800/30 dark:bg-orange-950/20">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">핵심 항목 완료율</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">핵심 항목 완료율</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-orange-600 mb-2">
+                  <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
                     {Math.round(criticalProgress)}%
                   </div>
-                  <Progress value={criticalProgress} className="h-2 bg-orange-100" />
+                  <Progress value={criticalProgress} className="h-2 bg-orange-100 dark:bg-orange-950/50" />
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">리스크 레벨</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">리스크 레벨</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-red-600 mb-2">
+                  <div className={`text-3xl font-bold mb-2 ${
+                    criticalProgress < 50 
+                      ? 'text-red-600 dark:text-red-400' 
+                      : criticalProgress < 80 
+                      ? 'text-yellow-600 dark:text-yellow-400' 
+                      : 'text-green-600 dark:text-green-400'
+                  }`}>
                     {criticalProgress < 50 ? '높음' : criticalProgress < 80 ? '보통' : '낮음'}
                   </div>
                   <div className="flex items-center gap-1">
-                    {criticalProgress < 50 && <AlertCircle className="h-5 w-5 text-red-600" />}
+                    {criticalProgress < 50 && <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400" />}
                     {criticalProgress >= 50 && criticalProgress < 80 && (
-                      <AlertCircle className="h-5 w-5 text-yellow-600" />
+                      <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
                     )}
-                    {criticalProgress >= 80 && <CheckCircle2 className="h-5 w-5 text-green-600" />}
+                    {criticalProgress >= 80 && <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />}
                   </div>
                 </CardContent>
               </Card>
@@ -229,12 +235,12 @@ const CEOChecklistPage = () => {
                   const progress = calculateCategoryProgress(key as keyof typeof checklistCategories);
 
                   return (
-                    <Card key={key} className="overflow-hidden">
-                      <CardHeader className="bg-muted/50">
+                    <Card key={key} className="overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm">
+                      <CardHeader className="bg-muted/30 dark:bg-muted/20">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <Icon className="h-6 w-6 text-primary" />
-                            <CardTitle>{category.title}</CardTitle>
+                            <CardTitle className="text-card-foreground">{category.title}</CardTitle>
                           </div>
                           <div className="text-sm text-muted-foreground">
                             {Math.round(progress)}% 완료
@@ -285,11 +291,11 @@ const CEOChecklistPage = () => {
 
               {Object.entries(checklistCategories).map(([key, category]) => (
                 <TabsContent key={key} value={key} className="space-y-6">
-                  <Card>
+                  <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                     <CardHeader>
                       <div className="flex items-center gap-3">
                         <category.icon className="h-6 w-6 text-primary" />
-                        <CardTitle>{category.title}</CardTitle>
+                        <CardTitle className="text-card-foreground">{category.title}</CardTitle>
                       </div>
                       <CardDescription>
                         진행률: {Math.round(calculateCategoryProgress(key as keyof typeof checklistCategories))}%
@@ -341,10 +347,10 @@ const CEOChecklistPage = () => {
             </Tabs>
 
             {/* Premium Family Office Upgrade Section */}
-            <section className="py-16 bg-gradient-to-br from-amber-50/50 to-blue-50/50 rounded-2xl mt-12">
+            <section className="py-16 bg-gradient-to-br from-amber-50/50 to-blue-50/50 dark:from-amber-950/30 dark:to-blue-950/30 rounded-2xl mt-12">
               <div className="container mx-auto px-6">
                 <div className="max-w-4xl mx-auto text-center">
-                  <Badge variant="outline" className="mb-6 border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 shadow-lg backdrop-blur-sm">
+                  <Badge variant="outline" className="mb-6 border-amber-200 dark:border-amber-700/50 bg-gradient-to-r from-amber-50/80 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/50 text-amber-800 dark:text-amber-300 shadow-lg backdrop-blur-sm">
                     <Crown className="h-4 w-4 mr-2" />
                     Family Office Excellence
                   </Badge>
@@ -360,27 +366,27 @@ const CEOChecklistPage = () => {
                   </p>
                   
                   <div className="grid md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-amber-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-white/60 dark:bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-amber-100 dark:border-amber-900/30 shadow-sm hover:shadow-md transition-all duration-300">
                       <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl mb-4 mx-auto">
                         <Briefcase className="h-6 w-6" />
                       </div>
-                      <h4 className="font-bold text-lg mb-2 text-premium-navy">경영·재무 통합관리</h4>
+                      <h4 className="font-bold text-lg mb-2 text-premium-navy dark:text-amber-300">경영·재무 통합관리</h4>
                       <p className="text-muted-foreground text-sm">기업 경영진단부터 자산관리까지 원스톱 통합 솔루션</p>
                     </div>
                     
-                    <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-white/60 dark:bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-blue-100 dark:border-blue-900/30 shadow-sm hover:shadow-md transition-all duration-300">
                       <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl mb-4 mx-auto">
                         <Target className="h-6 w-6" />
                       </div>
-                      <h4 className="font-bold text-lg mb-2 text-premium-navy">전략적 성장지원</h4>
+                      <h4 className="font-bold text-lg mb-2 text-premium-navy dark:text-blue-300">전략적 성장지원</h4>
                       <p className="text-muted-foreground text-sm">CEO 개인 자산과 기업 성장을 동시에 고려한 장기 전략</p>
                     </div>
                     
-                    <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-purple-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-white/60 dark:bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-purple-100 dark:border-purple-900/30 shadow-sm hover:shadow-md transition-all duration-300">
                       <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl mb-4 mx-auto">
                         <Shield className="h-6 w-6" />
                       </div>
-                      <h4 className="font-bold text-lg mb-2 text-premium-navy">리스크 총괄관리</h4>
+                      <h4 className="font-bold text-lg mb-2 text-premium-navy dark:text-purple-300">리스크 총괄관리</h4>
                       <p className="text-muted-foreground text-sm">경영·세무·법무·보험을 통합한 종합 리스크관리</p>
                     </div>
                   </div>
@@ -502,13 +508,13 @@ const CEOChecklistPage = () => {
             <div className="grid md:grid-cols-3 gap-6 mt-12">
               {criticalProgress < 50 && (
                 <>
-                  <Card className="border-red-200 bg-red-50/50 dark:bg-red-950/20">
+                  <Card className="border-red-200 bg-red-50/50 backdrop-blur-sm dark:border-red-800/30 dark:bg-red-950/20">
                     <CardHeader>
-                      <AlertCircle className="h-8 w-8 text-red-600 mb-2" />
-                      <CardTitle>긴급 대응 필요</CardTitle>
+                      <AlertCircle className="h-8 w-8 text-red-600 dark:text-red-400 mb-2" />
+                      <CardTitle className="text-card-foreground">긴급 대응 필요</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         중대재해처벌법, 세무 리스크 등 법적 위험에 노출되어 있습니다.
                       </p>
                       <Button variant="destructive" size="sm" className="w-full" asChild>
@@ -520,13 +526,13 @@ const CEOChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-orange-200 bg-orange-50/50 dark:bg-orange-950/20">
+                  <Card className="border-orange-200 bg-orange-50/50 backdrop-blur-sm dark:border-orange-800/30 dark:bg-orange-950/20">
                     <CardHeader>
-                      <Target className="h-8 w-8 text-orange-600 mb-2" />
-                      <CardTitle>가업승계 준비</CardTitle>
+                      <Target className="h-8 w-8 text-orange-600 dark:text-orange-400 mb-2" />
+                      <CardTitle className="text-card-foreground">가업승계 준비</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         체계적인 승계 계획 수립으로 상속세를 50% 이상 절감할 수 있습니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full" asChild>
@@ -538,13 +544,13 @@ const CEOChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-blue-200 bg-blue-50/50 dark:bg-blue-950/20">
+                  <Card className="border-blue-200 bg-blue-50/50 backdrop-blur-sm dark:border-blue-800/30 dark:bg-blue-950/20">
                     <CardHeader>
-                      <Shield className="h-8 w-8 text-blue-600 mb-2" />
-                      <CardTitle>보험 최적화</CardTitle>
+                      <Shield className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-2" />
+                      <CardTitle className="text-card-foreground">보험 최적화</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         기업 리스크 관리와 절세를 동시에 해결하는 맞춤형 보험 설계가 필요합니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full" asChild>
@@ -560,13 +566,13 @@ const CEOChecklistPage = () => {
 
               {criticalProgress >= 50 && criticalProgress < 80 && (
                 <>
-                  <Card className="border-yellow-200 bg-yellow-50/50 dark:bg-yellow-950/20">
+                  <Card className="border-yellow-200 bg-yellow-50/50 backdrop-blur-sm dark:border-yellow-800/30 dark:bg-yellow-950/20">
                     <CardHeader>
-                      <TrendingUp className="h-8 w-8 text-yellow-700 mb-2" />
-                      <CardTitle>성장 전략 강화</CardTitle>
+                      <TrendingUp className="h-8 w-8 text-yellow-700 dark:text-yellow-400 mb-2" />
+                      <CardTitle className="text-card-foreground">성장 전략 강화</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         디지털 전환과 ESG 경영으로 지속가능한 성장 기반을 구축하세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -576,13 +582,13 @@ const CEOChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-green-200 bg-green-50/50 dark:bg-green-950/20">
+                  <Card className="border-green-200 bg-green-50/50 backdrop-blur-sm dark:border-green-800/30 dark:bg-green-950/20">
                     <CardHeader>
-                      <Calculator className="h-8 w-8 text-green-700 mb-2" />
-                      <CardTitle>세무 최적화</CardTitle>
+                      <Calculator className="h-8 w-8 text-green-700 dark:text-green-400 mb-2" />
+                      <CardTitle className="text-card-foreground">세무 최적화</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         법인세와 소득세를 동시에 절감하는 통합 세무 전략을 수립하세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full" asChild>
@@ -594,13 +600,13 @@ const CEOChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-purple-200 bg-purple-50/50 dark:bg-purple-950/20">
+                  <Card className="border-purple-200 bg-purple-50/50 backdrop-blur-sm dark:border-purple-800/30 dark:bg-purple-950/20">
                     <CardHeader>
-                      <Users className="h-8 w-8 text-purple-700 mb-2" />
-                      <CardTitle>승계 계획 정교화</CardTitle>
+                      <Users className="h-8 w-8 text-purple-700 dark:text-purple-400 mb-2" />
+                      <CardTitle className="text-card-foreground">승계 계획 정교화</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         차세대 경영자 교육과 지분 구조 최적화로 안정적인 승계를 준비하세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -614,13 +620,13 @@ const CEOChecklistPage = () => {
 
               {criticalProgress >= 80 && (
                 <>
-                  <Card className="border-green-300 bg-green-50/70 dark:bg-green-950/30">
+                  <Card className="border-green-300 bg-green-50/70 backdrop-blur-sm dark:border-green-700/40 dark:bg-green-950/30">
                     <CardHeader>
-                      <CheckCircle2 className="h-8 w-8 text-green-700 mb-2" />
-                      <CardTitle>우수 경영 관리</CardTitle>
+                      <CheckCircle2 className="h-8 w-8 text-green-700 dark:text-green-400 mb-2" />
+                      <CardTitle className="text-card-foreground">우수 경영 관리</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         훌륭한 경영 관리 수준입니다. 지속적인 모니터링과 개선을 추천드립니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -630,13 +636,13 @@ const CEOChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-blue-300 bg-blue-50/70 dark:bg-blue-950/30">
+                  <Card className="border-blue-300 bg-blue-50/70 backdrop-blur-sm dark:border-blue-700/40 dark:bg-blue-950/30">
                     <CardHeader>
-                      <Building className="h-8 w-8 text-blue-700 mb-2" />
-                      <CardTitle>M&A 기회 탐색</CardTitle>
+                      <Building className="h-8 w-8 text-blue-700 dark:text-blue-400 mb-2" />
+                      <CardTitle className="text-card-foreground">M&A 기회 탐색</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         안정적인 경영 기반 위에 외부 성장 기회를 적극적으로 탐색해보세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -646,13 +652,13 @@ const CEOChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-purple-300 bg-purple-50/70 dark:bg-purple-950/30">
+                  <Card className="border-purple-300 bg-purple-50/70 backdrop-blur-sm dark:border-purple-700/40 dark:bg-purple-950/30">
                     <CardHeader>
-                      <Heart className="h-8 w-8 text-purple-700 mb-2" />
-                      <CardTitle>가족 자산 설계</CardTitle>
+                      <Heart className="h-8 w-8 text-purple-700 dark:text-purple-400 mb-2" />
+                      <CardTitle className="text-card-foreground">가족 자산 설계</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         기업 자산과 개인 자산의 균형잡힌 포트폴리오를 구축하세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">

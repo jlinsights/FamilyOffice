@@ -221,10 +221,10 @@ const HRLaborManagementPage = () => {
 
   // 컴플라이언스 위험도 평가
   const getComplianceRisk = () => {
-    if (criticalProgress < 30) return { level: '매우 위험', color: 'text-red-700', bgColor: 'bg-red-50' };
-    if (criticalProgress < 60) return { level: '위험', color: 'text-orange-600', bgColor: 'bg-orange-50' };
-    if (criticalProgress < 80) return { level: '주의', color: 'text-yellow-600', bgColor: 'bg-yellow-50' };
-    return { level: '안전', color: 'text-green-600', bgColor: 'bg-green-50' };
+    if (criticalProgress < 30) return { level: '매우 위험', color: 'text-red-700 dark:text-red-400', bgColor: 'bg-red-50', darkBgColor: 'dark:bg-red-950/20', darkBorderColor: 'dark:border-red-800/30' };
+    if (criticalProgress < 60) return { level: '위험', color: 'text-orange-600 dark:text-orange-400', bgColor: 'bg-orange-50', darkBgColor: 'dark:bg-orange-950/20', darkBorderColor: 'dark:border-orange-800/30' };
+    if (criticalProgress < 80) return { level: '주의', color: 'text-yellow-600 dark:text-yellow-400', bgColor: 'bg-yellow-50', darkBgColor: 'dark:bg-yellow-950/20', darkBorderColor: 'dark:border-yellow-800/30' };
+    return { level: '안전', color: 'text-green-600 dark:text-green-400', bgColor: 'bg-green-50', darkBgColor: 'dark:bg-green-950/20', darkBorderColor: 'dark:border-green-800/30' };
   };
 
   const complianceRisk = getComplianceRisk();
@@ -237,16 +237,16 @@ const HRLaborManagementPage = () => {
         {/* Hero Section */}
         <section className="relative py-16 px-4 md:py-24">
           <div className="max-w-6xl mx-auto text-center">
-            <Badge variant="outline" size="lg" className="mb-6">
+            <Badge variant="outline" size="lg" className="mb-6" animation="fade">
               <BookOpen className="h-3 w-3 mr-1" />
               삼성생명 인사노무 핵심포인트
             </Badge>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground animate-slide-up">
               인사노무 관리 완벽 가이드
             </h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-slide-up" style={{ animationDelay: '100ms' }}>
               중소기업을 위한
               <span className="block mt-2 text-primary font-semibold">
                 법정 의무사항 및 리스크 관리 체크리스트
@@ -255,9 +255,9 @@ const HRLaborManagementPage = () => {
 
             {/* Status Dashboard */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">전체 준수율</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">전체 준수율</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-bold text-primary mb-2">
@@ -267,40 +267,40 @@ const HRLaborManagementPage = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-orange-200 bg-orange-50/80 backdrop-blur-sm dark:border-orange-800/30 dark:bg-orange-950/20">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">필수 항목</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">필수 항목</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-orange-600 mb-2">
+                  <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
                     {Math.round(criticalProgress)}%
                   </div>
-                  <Progress value={criticalProgress} className="h-2" />
+                  <Progress value={criticalProgress} className="h-2 bg-orange-100 dark:bg-orange-950/50" />
                 </CardContent>
               </Card>
 
-              <Card className={complianceRisk.bgColor}>
+              <Card className={`${complianceRisk.bgColor} ${complianceRisk.darkBgColor} ${complianceRisk.darkBorderColor} backdrop-blur-sm`}>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">컴플라이언스</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">컴플라이언스</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className={`text-2xl font-bold ${complianceRisk.color} mb-2`}>
                     {complianceRisk.level}
                   </div>
                   <div className="flex items-center gap-1">
-                    {complianceRisk.level.includes('위험') && <AlertTriangle className="h-5 w-5 text-red-600" />}
-                    {complianceRisk.level === '주의' && <AlertCircle className="h-5 w-5 text-yellow-600" />}
-                    {complianceRisk.level === '안전' && <CheckCircle2 className="h-5 w-5 text-green-600" />}
+                    {complianceRisk.level.includes('위험') && <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400" />}
+                    {complianceRisk.level === '주의' && <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />}
+                    {complianceRisk.level === '안전' && <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />}
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">고위험 항목</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">고위험 항목</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-red-600 mb-2">
+                  <div className="text-2xl font-bold text-red-600 dark:text-red-400 mb-2">
                     {riskDistribution.critical + riskDistribution.high}개
                   </div>
                   <div className="text-xs text-muted-foreground">즉시 점검 필요</div>
@@ -563,7 +563,7 @@ const HRLaborManagementPage = () => {
             </Tabs>
 
             {/* Action Section */}
-            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10">
+            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 backdrop-blur-sm">
               <CardContent className="pt-8 pb-8">
                 <div className="text-center space-y-6">
                   <div>
@@ -617,13 +617,13 @@ const HRLaborManagementPage = () => {
             <div className="grid md:grid-cols-3 gap-6 mt-12">
               {criticalProgress < 60 && (
                 <>
-                  <Card className="border-red-200 bg-red-50/50 dark:bg-red-950/20">
+                  <Card className="border-red-200 bg-red-50/50 dark:border-red-800/30 dark:bg-red-950/20 backdrop-blur-sm">
                     <CardHeader>
-                      <AlertTriangle className="h-8 w-8 text-red-600 mb-2" />
-                      <CardTitle>법적 리스크 관리</CardTitle>
+                      <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400 mb-2" />
+                      <CardTitle className="text-card-foreground">법적 리스크 관리</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         근로기준법, 산업안전보건법 등 법적 의무사항 위반 위험이 높습니다.
                       </p>
                       <Button variant="destructive" size="sm" className="w-full">
@@ -633,13 +633,13 @@ const HRLaborManagementPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-orange-200 bg-orange-50/50 dark:bg-orange-950/20">
+                  <Card className="border-orange-200 bg-orange-50/50 dark:border-orange-800/30 dark:bg-orange-950/20 backdrop-blur-sm">
                     <CardHeader>
-                      <Shield className="h-8 w-8 text-orange-600 mb-2" />
-                      <CardTitle>안전보건 강화</CardTitle>
+                      <Shield className="h-8 w-8 text-orange-600 dark:text-orange-400 mb-2" />
+                      <CardTitle className="text-card-foreground">안전보건 강화</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         산업재해 예방과 근로자 안전을 위한 체계적인 관리가 필요합니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -649,13 +649,13 @@ const HRLaborManagementPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-blue-200 bg-blue-50/50 dark:bg-blue-950/20">
+                  <Card className="border-blue-200 bg-blue-50/50 dark:border-blue-800/30 dark:bg-blue-950/20 backdrop-blur-sm">
                     <CardHeader>
-                      <Scale className="h-8 w-8 text-blue-600 mb-2" />
-                      <CardTitle>취업규칙 정비</CardTitle>
+                      <Scale className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-2" />
+                      <CardTitle className="text-card-foreground">취업규칙 정비</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         취업규칙 작성·변경 및 신고 의무를 준수하고 내용을 정비해야 합니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -669,13 +669,13 @@ const HRLaborManagementPage = () => {
 
               {criticalProgress >= 60 && (
                 <>
-                  <Card className="border-green-200 bg-green-50/50 dark:bg-green-950/20">
+                  <Card className="border-green-200 bg-green-50/50 dark:border-green-800/30 dark:bg-green-950/20 backdrop-blur-sm">
                     <CardHeader>
-                      <CheckCircle2 className="h-8 w-8 text-green-600 mb-2" />
-                      <CardTitle>우수한 관리 수준</CardTitle>
+                      <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400 mb-2" />
+                      <CardTitle className="text-card-foreground">우수한 관리 수준</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         체계적인 인사노무 관리가 이루어지고 있습니다. 지속적인 개선이 중요합니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -685,13 +685,13 @@ const HRLaborManagementPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-blue-200 bg-blue-50/50 dark:bg-blue-950/20">
+                  <Card className="border-blue-200 bg-blue-50/50 dark:border-blue-800/30 dark:bg-blue-950/20 backdrop-blur-sm">
                     <CardHeader>
-                      <TrendingUp className="h-8 w-8 text-blue-600 mb-2" />
-                      <CardTitle>HR 시스템 개선</CardTitle>
+                      <TrendingUp className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-2" />
+                      <CardTitle className="text-card-foreground">HR 시스템 개선</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         디지털 HR 시스템과 데이터 기반 인사관리로 효율성을 높여보세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -701,13 +701,13 @@ const HRLaborManagementPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-purple-200 bg-purple-50/50 dark:bg-purple-950/20">
+                  <Card className="border-purple-200 bg-purple-50/50 dark:border-purple-800/30 dark:bg-purple-950/20 backdrop-blur-sm">
                     <CardHeader>
-                      <Award className="h-8 w-8 text-purple-600 mb-2" />
-                      <CardTitle>조직문화 개선</CardTitle>
+                      <Award className="h-8 w-8 text-purple-600 dark:text-purple-400 mb-2" />
+                      <CardTitle className="text-card-foreground">조직문화 개선</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         법적 준수를 넘어 건강한 조직문화 구축으로 경쟁력을 강화하세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">

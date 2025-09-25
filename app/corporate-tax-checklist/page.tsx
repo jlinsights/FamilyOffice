@@ -178,9 +178,9 @@ const CorporateTaxChecklistPage = () => {
 
   // 위험도 평가
   const getRiskLevel = () => {
-    if (criticalProgress < 50) return { level: '높음', color: 'text-red-600', bgColor: 'bg-red-50' };
-    if (criticalProgress < 80) return { level: '보통', color: 'text-yellow-600', bgColor: 'bg-yellow-50' };
-    return { level: '낮음', color: 'text-green-600', bgColor: 'bg-green-50' };
+    if (criticalProgress < 50) return { level: '높음', color: 'text-red-600 dark:text-red-400', bgColor: 'bg-red-50', darkBgColor: 'dark:bg-red-950/20', darkBorderColor: 'dark:border-red-800/30' };
+    if (criticalProgress < 80) return { level: '보통', color: 'text-yellow-600 dark:text-yellow-400', bgColor: 'bg-yellow-50', darkBgColor: 'dark:bg-yellow-950/20', darkBorderColor: 'dark:border-yellow-800/30' };
+    return { level: '낮음', color: 'text-green-600 dark:text-green-400', bgColor: 'bg-green-50', darkBgColor: 'dark:bg-green-950/20', darkBorderColor: 'dark:border-green-800/30' };
   };
 
   const riskLevel = getRiskLevel();
@@ -193,16 +193,16 @@ const CorporateTaxChecklistPage = () => {
         {/* Hero Section */}
         <section className="relative py-16 px-4 md:py-24">
           <div className="max-w-6xl mx-auto text-center">
-            <Badge variant="outline" size="lg" className="mb-6">
+            <Badge variant="outline" size="lg" className="mb-6" animation="fade">
               <BookOpen className="h-3 w-3 mr-1" />
               삼성생명 법인세 세일즈북
             </Badge>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground animate-slide-up">
               결산 후 필수 점검 포인트
             </h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-slide-up" style={{ animationDelay: '100ms' }}>
               법인 결산 완료 후 놓치기 쉬운
               <span className="block mt-2 text-primary font-semibold">
                 세무 및 재무 핵심 체크포인트
@@ -211,9 +211,9 @@ const CorporateTaxChecklistPage = () => {
 
             {/* Current Status Overview */}
             <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">전체 진행률</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">전체 진행률</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-bold text-primary mb-2">
@@ -223,37 +223,37 @@ const CorporateTaxChecklistPage = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-orange-200 bg-orange-50/80 backdrop-blur-sm dark:border-orange-800/30 dark:bg-orange-950/20">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">필수 항목</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">필수 항목</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-orange-600 mb-2">
+                  <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
                     {Math.round(criticalProgress)}%
                   </div>
-                  <Progress value={criticalProgress} className="h-2" />
+                  <Progress value={criticalProgress} className="h-2 bg-orange-100 dark:bg-orange-950/50" />
                 </CardContent>
               </Card>
 
-              <Card className={riskLevel.bgColor}>
+              <Card className={`${riskLevel.bgColor} ${riskLevel.darkBgColor} ${riskLevel.darkBorderColor} backdrop-blur-sm`}>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">위험도</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">위험도</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className={`text-3xl font-bold ${riskLevel.color} mb-2`}>
                     {riskLevel.level}
                   </div>
                   <div className="flex items-center gap-1">
-                    {riskLevel.level === '높음' && <AlertTriangle className="h-5 w-5 text-red-600" />}
-                    {riskLevel.level === '보통' && <Clock className="h-5 w-5 text-yellow-600" />}
-                    {riskLevel.level === '낮음' && <CheckCircle2 className="h-5 w-5 text-green-600" />}
+                    {riskLevel.level === '높음' && <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400" />}
+                    {riskLevel.level === '보통' && <Clock className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />}
+                    {riskLevel.level === '낮음' && <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />}
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">D-Day</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">D-Day</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-red-600 mb-2">
@@ -300,10 +300,10 @@ const CorporateTaxChecklistPage = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {settlementSchedule.map((schedule, index) => (
-                <Card key={index} className={`relative overflow-hidden ${
-                  schedule.priority === 'critical' ? 'border-red-200 bg-red-50/50' :
-                  schedule.priority === 'high' ? 'border-orange-200 bg-orange-50/50' :
-                  'border-blue-200 bg-blue-50/50'
+                <Card key={index} className={`relative overflow-hidden backdrop-blur-sm ${
+                  schedule.priority === 'critical' ? 'border-red-200 bg-red-50/50 dark:border-red-800/30 dark:bg-red-950/20' :
+                  schedule.priority === 'high' ? 'border-orange-200 bg-orange-50/50 dark:border-orange-800/30 dark:bg-orange-950/20' :
+                  'border-blue-200 bg-blue-50/50 dark:border-blue-800/30 dark:bg-blue-950/20'
                 }`}>
                   <CardHeader>
                     <div className="flex items-center justify-between">
@@ -362,12 +362,12 @@ const CorporateTaxChecklistPage = () => {
                   const progress = calculateCategoryProgress(key as keyof typeof postSettlementChecklist);
 
                   return (
-                    <Card key={key} className="overflow-hidden">
-                      <CardHeader className="bg-muted/50">
+                    <Card key={key} className="overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm">
+                      <CardHeader className="bg-muted/30 dark:bg-muted/20">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <Icon className="h-6 w-6 text-primary" />
-                            <CardTitle className="flex items-center gap-2">
+                            <CardTitle className="flex items-center gap-2 text-card-foreground">
                               {category.title}
                               {category.critical && (
                                 <Badge variant="destructive" size="sm">필수</Badge>
@@ -412,9 +412,9 @@ const CorporateTaxChecklistPage = () => {
                               </div>
                               <div className="flex items-center">
                                 {checkedItems.has(item.id) ? (
-                                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                  <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
                                 ) : (
-                                  <XCircle className="h-5 w-5 text-gray-300" />
+                                  <XCircle className="h-5 w-5 text-gray-300 dark:text-gray-600" />
                                 )}
                               </div>
                             </div>
@@ -428,11 +428,11 @@ const CorporateTaxChecklistPage = () => {
 
               {Object.entries(postSettlementChecklist).map(([key, category]) => (
                 <TabsContent key={key} value={key} className="space-y-6">
-                  <Card>
+                  <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                     <CardHeader>
                       <div className="flex items-center gap-3">
                         <category.icon className="h-6 w-6 text-primary" />
-                        <CardTitle className="flex items-center gap-2">
+                        <CardTitle className="flex items-center gap-2 text-card-foreground">
                           {category.title}
                           {category.critical && (
                             <Badge variant="destructive" size="sm">필수 영역</Badge>
@@ -479,9 +479,9 @@ const CorporateTaxChecklistPage = () => {
                             </div>
                             <div className="flex items-center">
                               {checkedItems.has(item.id) ? (
-                                <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
                               ) : (
-                                <XCircle className="h-5 w-5 text-gray-300" />
+                                <XCircle className="h-5 w-5 text-gray-300 dark:text-gray-600" />
                               )}
                             </div>
                           </div>
@@ -494,7 +494,7 @@ const CorporateTaxChecklistPage = () => {
             </Tabs>
 
             {/* Action Section based on progress */}
-            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10">
+            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 backdrop-blur-sm">
               <CardContent className="pt-8 pb-8">
                 <div className="text-center space-y-6">
                   <div>
@@ -548,13 +548,13 @@ const CorporateTaxChecklistPage = () => {
             <div className="grid md:grid-cols-3 gap-6 mt-12">
               {criticalProgress < 70 && (
                 <>
-                  <Card className="border-red-200 bg-red-50/50 dark:bg-red-950/20">
+                  <Card className="border-red-200 bg-red-50/50 backdrop-blur-sm dark:border-red-800/30 dark:bg-red-950/20">
                     <CardHeader>
-                      <AlertTriangle className="h-8 w-8 text-red-600 mb-2" />
-                      <CardTitle>신고기한 임박</CardTitle>
+                      <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400 mb-2" />
+                      <CardTitle className="text-card-foreground">신고기한 임박</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         법인세 신고 마감일이 다가오고 있습니다. 빠른 대응이 필요합니다.
                       </p>
                       <Button variant="destructive" size="sm" className="w-full">
@@ -564,13 +564,13 @@ const CorporateTaxChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-orange-200 bg-orange-50/50 dark:bg-orange-950/20">
+                  <Card className="border-orange-200 bg-orange-50/50 backdrop-blur-sm dark:border-orange-800/30 dark:bg-orange-950/20">
                     <CardHeader>
-                      <Shield className="h-8 w-8 text-orange-600 mb-2" />
-                      <CardTitle>절세 기회 검토</CardTitle>
+                      <Shield className="h-8 w-8 text-orange-600 dark:text-orange-400 mb-2" />
+                      <CardTitle className="text-card-foreground">절세 기회 검토</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         신고 전 마지막 절세 기회를 놓치지 마세요. 전문가 검토가 중요합니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full" asChild>
@@ -582,13 +582,13 @@ const CorporateTaxChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-blue-200 bg-blue-50/50 dark:bg-blue-950/20">
+                  <Card className="border-blue-200 bg-blue-50/50 backdrop-blur-sm dark:border-blue-800/30 dark:bg-blue-950/20">
                     <CardHeader>
-                      <Users className="h-8 w-8 text-blue-600 mb-2" />
-                      <CardTitle>전문가 지원</CardTitle>
+                      <Users className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-2" />
+                      <CardTitle className="text-card-foreground">전문가 지원</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         복잡한 세무 이슈는 전문가와 함께 해결하는 것이 안전합니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -602,13 +602,13 @@ const CorporateTaxChecklistPage = () => {
 
               {criticalProgress >= 70 && (
                 <>
-                  <Card className="border-green-200 bg-green-50/50 dark:bg-green-950/20">
+                  <Card className="border-green-200 bg-green-50/50 backdrop-blur-sm dark:border-green-800/30 dark:bg-green-950/20">
                     <CardHeader>
-                      <CheckCircle2 className="h-8 w-8 text-green-600 mb-2" />
-                      <CardTitle>우수한 준비도</CardTitle>
+                      <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400 mb-2" />
+                      <CardTitle className="text-card-foreground">우수한 준비도</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         체계적인 결산 후 관리가 이루어지고 있습니다. 지속적인 관리가 중요합니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -618,13 +618,13 @@ const CorporateTaxChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-blue-200 bg-blue-50/50 dark:bg-blue-950/20">
+                  <Card className="border-blue-200 bg-blue-50/50 backdrop-blur-sm dark:border-blue-800/30 dark:bg-blue-950/20">
                     <CardHeader>
-                      <Target className="h-8 w-8 text-blue-600 mb-2" />
-                      <CardTitle>고도화 전략</CardTitle>
+                      <Target className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-2" />
+                      <CardTitle className="text-card-foreground">고도화 전략</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         기본적인 관리를 넘어서 전략적 세무관리로 발전시켜보세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -634,13 +634,13 @@ const CorporateTaxChecklistPage = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-purple-200 bg-purple-50/50 dark:bg-purple-950/20">
+                  <Card className="border-purple-200 bg-purple-50/50 backdrop-blur-sm dark:border-purple-800/30 dark:bg-purple-950/20">
                     <CardHeader>
-                      <Lightbulb className="h-8 w-8 text-purple-600 mb-2" />
-                      <CardTitle>차기년도 준비</CardTitle>
+                      <Lightbulb className="h-8 w-8 text-purple-600 dark:text-purple-400 mb-2" />
+                      <CardTitle className="text-card-foreground">차기년도 준비</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm mb-4">
+                      <p className="text-sm mb-4 text-card-foreground/80">
                         다음 결산을 위한 사전 계획과 시스템 구축을 시작하세요.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
@@ -671,7 +671,7 @@ const CorporateTaxChecklistPage = () => {
                   <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <Calculator className="h-6 w-6 text-blue-600" />
                   </div>
-                  <CardTitle className="text-xl">절세의 미학</CardTitle>
+                  <CardTitle className="text-xl text-card-foreground">절세의 미학</CardTitle>
                   <CardDescription>
                     법인세, 소득세, 상속세 절세를 위한 체계적인 전략과 시뮬레이션
                   </CardDescription>
@@ -705,7 +705,7 @@ const CorporateTaxChecklistPage = () => {
                   <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <Users className="h-6 w-6 text-green-600" />
                   </div>
-                  <CardTitle className="text-xl">CEO 경영진단</CardTitle>
+                  <CardTitle className="text-xl text-card-foreground">CEO 경영진단</CardTitle>
                   <CardDescription>
                     5대 핵심영역 30개 항목으로 진단하는 종합적인 경영 건전성 평가
                   </CardDescription>
@@ -739,7 +739,7 @@ const CorporateTaxChecklistPage = () => {
                   <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <Users className="h-6 w-6 text-purple-600" />
                   </div>
-                  <CardTitle className="text-xl">인사노무 관리</CardTitle>
+                  <CardTitle className="text-xl text-card-foreground">인사노무 관리</CardTitle>
                   <CardDescription>
                     6개 영역 36개 항목으로 구성된 완벽한 인사노무 컴플라이언스 가이드
                   </CardDescription>
@@ -773,7 +773,7 @@ const CorporateTaxChecklistPage = () => {
                   <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <Building className="h-6 w-6 text-indigo-600" />
                   </div>
-                  <CardTitle className="text-xl">통합 솔루션</CardTitle>
+                  <CardTitle className="text-xl text-card-foreground">통합 솔루션</CardTitle>
                   <CardDescription>
                     패밀리오피스 전체 솔루션으로 완벽한 자산관리 체계 구축
                   </CardDescription>

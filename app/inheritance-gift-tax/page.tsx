@@ -280,16 +280,19 @@ const InheritanceGiftTaxPage = () => {
         {/* Hero Section */}
         <section className="relative py-16 px-4 md:py-24">
           <div className="max-w-6xl mx-auto text-center">
-            <Badge variant="outline" size="lg" className="mb-6">
+            <Badge variant="outline" size="lg" className="mb-6" animation="fade">
               <Receipt className="h-3 w-3 mr-1" />
               국세청 공식 자료 기반
             </Badge>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground animate-slide-up">
               상속·증여세 완벽 가이드
             </h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p 
+              className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-slide-up"
+              style={{ animationDelay: '200ms' }}
+            >
               국세청 세금상식 Q&A를 바탕으로 한
               <span className="block mt-2 text-primary font-semibold">
                 상속·증여세의 모든 것
@@ -298,43 +301,43 @@ const InheritanceGiftTaxPage = () => {
 
             {/* Key Statistics */}
             <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">최고 세율</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">최고 세율</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-red-600 mb-2">50%</div>
-                  <div className="text-sm text-muted-foreground">30억원 초과 시</div>
+                  <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">50%</div>
+                  <div className="text-sm text-card-foreground/80">30억원 초과 시</div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">기초공제</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">기초공제</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-blue-600 mb-2">2억원</div>
-                  <div className="text-sm text-muted-foreground">상속세 기본</div>
+                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">2억원</div>
+                  <div className="text-sm text-card-foreground/80">상속세 기본</div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">신고기한</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">신고기한</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-green-600 mb-2">6개월</div>
-                  <div className="text-sm text-muted-foreground">상속 개시일로부터</div>
+                  <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">6개월</div>
+                  <div className="text-sm text-card-foreground/80">상속 개시일로부터</div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">분납기간</CardTitle>
+                  <CardTitle className="text-lg text-card-foreground">분납기간</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-purple-600 mb-2">최대5년</div>
-                  <div className="text-sm text-muted-foreground">2천만원 초과 시</div>
+                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">최대5년</div>
+                  <div className="text-sm text-card-foreground/80">2천만원 초과 시</div>
                 </CardContent>
               </Card>
             </div>
