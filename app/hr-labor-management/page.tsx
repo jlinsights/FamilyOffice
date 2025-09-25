@@ -344,10 +344,10 @@ const HRLaborManagementPage = () => {
 
             <div className="grid md:grid-cols-2 gap-6">
               {recentLegalUpdates.map((update, index) => (
-                <Card key={index} className={`relative overflow-hidden ${
-                  update.impact === 'critical' ? 'border-red-200 bg-red-50/50' :
-                  update.impact === 'high' ? 'border-orange-200 bg-orange-50/50' :
-                  'border-blue-200 bg-blue-50/50'
+                <Card key={index} className={`relative overflow-hidden backdrop-blur-sm ${
+                  update.impact === 'critical' ? 'border-red-200 bg-red-50/50 dark:border-red-800/30 dark:bg-red-950/20' :
+                  update.impact === 'high' ? 'border-orange-200 bg-orange-50/50 dark:border-orange-800/30 dark:bg-orange-950/20' :
+                  'border-blue-200 bg-blue-50/50 dark:border-blue-800/30 dark:bg-blue-950/20'
                 }`}>
                   <CardHeader>
                     <div className="flex items-center justify-between">
@@ -358,15 +358,15 @@ const HRLaborManagementPage = () => {
                         {update.impact === 'critical' ? '긴급' :
                          update.impact === 'high' ? '중요' : '일반'}
                       </Badge>
-                      <span className="text-sm text-muted-foreground">{update.date}</span>
+                      <span className="text-sm text-card-foreground/60">{update.date}</span>
                     </div>
-                    <CardTitle className="text-lg">{update.title}</CardTitle>
-                    <CardDescription>{update.content}</CardDescription>
+                    <CardTitle className="text-lg text-card-foreground">{update.title}</CardTitle>
+                    <CardDescription className="text-card-foreground/80">{update.content}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="bg-white/50 p-3 rounded-lg">
-                      <h4 className="font-semibold text-sm mb-1">조치사항</h4>
-                      <p className="text-sm text-muted-foreground">{update.action}</p>
+                    <div className="bg-white/50 dark:bg-card/50 p-3 rounded-lg border dark:border-border/30">
+                      <h4 className="font-semibold text-sm mb-1 text-card-foreground">조치사항</h4>
+                      <p className="text-sm text-card-foreground/80">{update.action}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -379,8 +379,8 @@ const HRLaborManagementPage = () => {
         <section id="checklist" className="py-16 px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">인사노무 상세 체크리스트</h2>
-              <p className="text-lg text-muted-foreground">
+              <h2 className="text-3xl font-bold mb-4 text-card-foreground">인사노무 상세 체크리스트</h2>
+              <p className="text-lg text-card-foreground/80">
                 6개 영역 36개 항목으로 구성된 종합 인사노무 관리 체크리스트
               </p>
             </div>
@@ -404,12 +404,12 @@ const HRLaborManagementPage = () => {
                                        category.priority === 'high' ? 'secondary' : 'default';
 
                   return (
-                    <Card key={key} className="overflow-hidden">
-                      <CardHeader className="bg-muted/50">
+                    <Card key={key} className="overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm">
+                      <CardHeader className="bg-muted/50 dark:bg-card/30">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <Icon className="h-6 w-6 text-primary" />
-                            <CardTitle className="flex items-center gap-2">
+                            <CardTitle className="flex items-center gap-2 text-card-foreground">
                               {category.title}
                               <Badge variant={priorityBadge} size="sm">
                                 {category.priority === 'critical' ? '매우중요' :
@@ -417,7 +417,7 @@ const HRLaborManagementPage = () => {
                               </Badge>
                             </CardTitle>
                           </div>
-                          <div className="text-sm text-muted-foreground">
+                          <div className="text-sm text-card-foreground/60">
                             {Math.round(progress)}% 완료
                           </div>
                         </div>
@@ -431,7 +431,7 @@ const HRLaborManagementPage = () => {
                             return (
                               <div
                                 key={item.id}
-                                className="flex items-start space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
+                                className="flex items-start space-x-3 p-3 rounded-lg hover:bg-muted/50 dark:hover:bg-card/50 transition-colors"
                               >
                                 <Checkbox
                                   id={item.id}
@@ -444,7 +444,7 @@ const HRLaborManagementPage = () => {
                                     className="cursor-pointer select-none block"
                                   >
                                     <div className="flex items-center gap-2 mb-1">
-                                      <span className={item.critical ? 'font-medium' : ''}>
+                                      <span className={`${item.critical ? 'font-medium' : ''} text-card-foreground`}>
                                         {item.label}
                                       </span>
                                       {item.critical && (
@@ -458,16 +458,16 @@ const HRLaborManagementPage = () => {
                                         {riskLevel.label}
                                       </Badge>
                                     </div>
-                                    <div className="text-sm text-muted-foreground">
+                                    <div className="text-sm text-card-foreground/70">
                                       시점: {item.deadline}
                                     </div>
                                   </label>
                                 </div>
                                 <div className="flex items-center">
                                   {checkedItems.has(item.id) ? (
-                                    <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
                                   ) : (
-                                    <XCircle className="h-5 w-5 text-gray-300" />
+                                    <XCircle className="h-5 w-5 text-gray-300 dark:text-gray-600" />
                                   )}
                                 </div>
                               </div>
