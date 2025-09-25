@@ -287,26 +287,26 @@ const FamilyOfficeCenterPage = () => {
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500 opacity-10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
 
           <div className="relative z-10 max-w-7xl mx-auto text-center">
-            <Badge variant="outline" size="lg" className="mb-8 glass-premium hover-premium">
-              <Crown className="h-4 w-4 mr-2 text-amber-600" />
+            <Badge variant="outline" size="lg" className="mb-8 glass-premium hover-premium" animation="fade">
+              <Crown className="h-4 w-4 mr-2 text-amber-600 dark:text-amber-400" />
               Family Office Excellence
             </Badge>
 
-            <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold mb-8 animate-glow">
-              <span className="text-premium-navy">Family Office</span>
-              <span className="block mt-4 text-3xl md:text-5xl lg:text-6xl font-light tracking-wider text-premium-gold">
+            <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold mb-8 animate-glow animate-slide-up">
+              <span className="text-premium-navy dark:text-blue-300">Family Office</span>
+              <span className="block mt-4 text-3xl md:text-5xl lg:text-6xl font-light tracking-wider text-premium-gold dark:text-amber-400">
                 百年永續의 기반
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl lg:text-3xl font-light text-card-foreground/90 mb-6 max-w-4xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '200ms' }}>
               최고 자산가와 성공한 기업가를 위한
-              <span className="block mt-2 font-medium text-premium-navy">
+              <span className="block mt-2 font-medium text-premium-navy dark:text-blue-300">
                 차별화된 전용 솔루션
               </span>
             </p>
 
-            <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto font-light">
+            <p className="text-lg md:text-xl text-card-foreground/80 mb-12 max-w-3xl mx-auto font-light animate-slide-up" style={{ animationDelay: '400ms' }}>
               자산 보전부터 가업승계, 차세대 육성까지
               <span className="block mt-1">
                 세대를 관통하는 가문의 유산을 함께 구축합니다
@@ -315,21 +315,21 @@ const FamilyOfficeCenterPage = () => {
 
             {/* Premium Statistics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-              <div className="glass-premium rounded-2xl p-6 hover-premium">
-                <div className="text-4xl font-bold text-premium-gold mb-2">20+</div>
-                <div className="text-sm text-gray-600 font-light">년 전문 경험</div>
+              <div className="glass-premium rounded-2xl p-6 hover-premium border-border/50 bg-card/80 backdrop-blur-sm">
+                <div className="text-4xl font-bold text-premium-gold dark:text-amber-400 mb-2">20+</div>
+                <div className="text-sm text-card-foreground/80 font-light">년 전문 경험</div>
               </div>
-              <div className="glass-premium rounded-2xl p-6 hover-premium">
-                <div className="text-4xl font-bold text-premium-navy mb-2">100+</div>
-                <div className="text-sm text-gray-600 font-light">VIP 고객</div>
+              <div className="glass-premium rounded-2xl p-6 hover-premium border-border/50 bg-card/80 backdrop-blur-sm">
+                <div className="text-4xl font-bold text-premium-navy dark:text-blue-400 mb-2">100+</div>
+                <div className="text-sm text-card-foreground/80 font-light">VIP 고객</div>
               </div>
-              <div className="glass-premium rounded-2xl p-6 hover-premium">
-                <div className="text-4xl font-bold text-green-600 mb-2">10조+</div>
-                <div className="text-sm text-gray-600 font-light">관리 자산</div>
+              <div className="glass-premium rounded-2xl p-6 hover-premium border-border/50 bg-card/80 backdrop-blur-sm">
+                <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">10조+</div>
+                <div className="text-sm text-card-foreground/80 font-light">관리 자산</div>
               </div>
-              <div className="glass-premium rounded-2xl p-6 hover-premium">
-                <div className="text-4xl font-bold text-purple-600 mb-2">98%</div>
-                <div className="text-sm text-gray-600 font-light">고객 만족도</div>
+              <div className="glass-premium rounded-2xl p-6 hover-premium border-border/50 bg-card/80 backdrop-blur-sm">
+                <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">98%</div>
+                <div className="text-sm text-card-foreground/80 font-light">고객 만족도</div>
               </div>
             </div>
 
@@ -360,27 +360,27 @@ const FamilyOfficeCenterPage = () => {
         <section id="services" className="py-20 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <Badge variant="outline" className="mb-6">
-                <Sparkles className="h-4 w-4 mr-2" />
+              <Badge variant="outline" className="mb-6" animation="fade">
+                <Sparkles className="h-4 w-4 mr-2 text-amber-600 dark:text-amber-400" />
                 Premium Services Portfolio
               </Badge>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-premium-navy">
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-card-foreground animate-slide-up">
                 패밀리오피스 핵심 서비스
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+              <p className="text-xl text-card-foreground/80 max-w-3xl mx-auto font-light animate-slide-up" style={{ animationDelay: '200ms' }}>
                 세대를 초월하는 자산관리와 가업승계의 완벽한 솔루션
               </p>
             </div>
 
             <Tabs value={selectedService} onValueChange={setSelectedService} className="w-full">
-              <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full mb-12 h-auto p-2 bg-gray-50 rounded-2xl">
+              <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full mb-12 h-auto p-2 bg-card/80 dark:bg-card/40 backdrop-blur-sm border border-border/50 rounded-2xl">
                 {Object.entries(familyOfficeServices).map(([key, service]) => (
                   <TabsTrigger 
                     key={key} 
                     value={key} 
-                    className="flex flex-col items-center p-4 text-sm font-medium rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-premium"
+                    className="flex flex-col items-center p-4 text-sm font-medium rounded-xl data-[state=active]:bg-card data-[state=active]:shadow-white/5 data-[state=active]:border data-[state=active]:border-border/50 text-card-foreground/80 data-[state=active]:text-card-foreground"
                   >
-                    <service.icon className="h-8 w-8 mb-2" />
+                    <service.icon className="h-8 w-8 mb-2 text-amber-600 dark:text-amber-400" />
                     <span>{service.title}</span>
                   </TabsTrigger>
                 ))}
@@ -390,31 +390,31 @@ const FamilyOfficeCenterPage = () => {
                 const Icon = service.icon;
                 return (
                   <TabsContent key={key} value={key}>
-                    <Card className="border-0 shadow-premium-gold rounded-3xl overflow-hidden">
-                      <CardHeader className="bg-gradient-to-r from-amber-50/50 to-blue-50/50 border-b-0 pb-8">
+                    <Card className="border-border/50 bg-card/80 backdrop-blur-sm shadow-white/5 rounded-3xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-amber-50/30 to-blue-50/30 dark:from-amber-950/20 dark:to-blue-950/20 border-b-0 pb-8">
                         <div className="flex items-center gap-4 mb-4">
-                          <div className="p-4 bg-premium-gold rounded-2xl shadow-premium-gold">
+                          <div className="p-4 bg-gradient-to-br from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 rounded-2xl shadow-lg">
                             <Icon className="h-10 w-10 text-white" />
                           </div>
                           <div>
-                            <CardTitle className="text-3xl font-playfair text-premium-navy">
+                            <CardTitle className="text-3xl font-playfair text-card-foreground">
                               {service.title}
                             </CardTitle>
-                            <CardDescription className="text-lg text-premium-gold font-medium">
+                            <CardDescription className="text-lg text-amber-600 dark:text-amber-400 font-medium">
                               {service.subtitle}
                             </CardDescription>
                           </div>
                           <div className="ml-auto text-right">
-                            <Badge variant="outline" className="bg-white/80 backdrop-blur-sm">
+                            <Badge variant="outline" className="bg-card/80 dark:bg-card/60 backdrop-blur-sm border-border/50">
                               {service.targetAssets}
                             </Badge>
                           </div>
                         </div>
-                        <p className="text-lg text-gray-600 leading-relaxed font-light">
+                        <p className="text-lg text-card-foreground/80 leading-relaxed font-light">
                           {service.description}
                         </p>
-                        <div className="text-center mt-4 p-3 bg-white/60 rounded-xl backdrop-blur-sm">
-                          <p className="text-lg font-medium text-premium-navy font-playfair">
+                        <div className="text-center mt-4 p-3 bg-card/60 dark:bg-card/40 rounded-xl backdrop-blur-sm border border-border/30">
+                          <p className="text-lg font-medium text-card-foreground font-playfair">
                             {service.philosophy}
                           </p>
                         </div>
@@ -422,29 +422,29 @@ const FamilyOfficeCenterPage = () => {
                       <CardContent className="p-8">
                         <div className="grid md:grid-cols-2 gap-12">
                           <div>
-                            <h4 className="font-semibold text-lg mb-4 text-premium-navy flex items-center gap-2">
-                              <CheckCircle2 className="h-6 w-6 text-green-600" />
+                            <h4 className="font-semibold text-lg mb-4 text-card-foreground flex items-center gap-2">
+                              <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400" />
                               핵심 서비스
                             </h4>
                             <ul className="space-y-3">
                               {service.features.map((feature, index) => (
                                 <li key={index} className="flex items-start gap-3">
-                                  <Star className="h-5 w-5 text-amber-500 mt-0.5 flex-shrink-0" />
-                                  <span className="text-gray-700 leading-relaxed">{feature}</span>
+                                  <Star className="h-5 w-5 text-amber-500 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+                                  <span className="text-card-foreground/80 leading-relaxed">{feature}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
                           <div>
-                            <h4 className="font-semibold text-lg mb-4 text-green-700 flex items-center gap-2">
-                              <Target className="h-6 w-6 text-green-600" />
+                            <h4 className="font-semibold text-lg mb-4 text-green-700 dark:text-green-400 flex items-center gap-2">
+                              <Target className="h-6 w-6 text-green-600 dark:text-green-400" />
                               기대 가치
                             </h4>
                             <ul className="space-y-3">
                               {service.benefits.map((benefit, index) => (
                                 <li key={index} className="flex items-start gap-3">
-                                  <Gem className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                                  <span className="text-gray-700 leading-relaxed">{benefit}</span>
+                                  <Gem className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                                  <span className="text-card-foreground/80 leading-relaxed">{benefit}</span>
                                 </li>
                               ))}
                             </ul>
@@ -460,17 +460,17 @@ const FamilyOfficeCenterPage = () => {
         </section>
 
         {/* Unique Value Propositions */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-white">
+        <section className="py-20 px-4 bg-gradient-to-br from-card/20 to-background dark:from-gray-900/50 dark:to-gray-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <Badge variant="outline" className="mb-6">
-                <Diamond className="h-4 w-4 mr-2" />
+              <Badge variant="outline" className="mb-6" animation="fade">
+                <Diamond className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
                 Exclusive Value
               </Badge>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-premium-navy">
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-card-foreground animate-slide-up">
                 차별화된 가치 제안
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+              <p className="text-xl text-card-foreground/80 max-w-3xl mx-auto font-light animate-slide-up" style={{ animationDelay: '200ms' }}>
                 일반적인 금융 서비스를 뛰어넘는 패밀리오피스만의 독창적 가치
               </p>
             </div>
@@ -479,28 +479,28 @@ const FamilyOfficeCenterPage = () => {
               {uniqueValuePropositions.map((proposition, index) => {
                 const Icon = proposition.icon;
                 return (
-                  <Card key={index} className="h-full hover-premium shadow-premium rounded-2xl border-0 bg-white/80 backdrop-blur-sm">
+                  <Card key={index} className="h-full border-border/50 bg-card/80 backdrop-blur-sm shadow-white/5 rounded-2xl">
                     <CardHeader className="pb-6">
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl">
-                          <Icon className="h-8 w-8 text-blue-600" />
+                        <div className="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/50 dark:to-indigo-900/50 rounded-2xl">
+                          <Icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
                         </div>
                         <div>
-                          <CardTitle className="text-xl text-premium-navy">{proposition.title}</CardTitle>
-                          <CardDescription className="text-premium-gold font-medium">
+                          <CardTitle className="text-xl text-card-foreground">{proposition.title}</CardTitle>
+                          <CardDescription className="text-amber-600 dark:text-amber-400 font-medium">
                             {proposition.subtitle}
                           </CardDescription>
                         </div>
                       </div>
-                      <p className="text-gray-600 leading-relaxed font-light">
+                      <p className="text-card-foreground/80 leading-relaxed font-light">
                         {proposition.description}
                       </p>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2">
                         {proposition.details.map((detail, i) => (
-                          <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
-                            <CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" />
+                          <li key={i} className="flex items-center gap-2 text-sm text-card-foreground/80">
+                            <CheckCircle2 className="h-4 w-4 text-green-500 dark:text-green-400 flex-shrink-0" />
                             {detail}
                           </li>
                         ))}
@@ -517,14 +517,14 @@ const FamilyOfficeCenterPage = () => {
         <section className="py-20 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <Badge variant="outline" className="mb-6">
-                <Award className="h-4 w-4 mr-2" />
+              <Badge variant="outline" className="mb-6" animation="fade">
+                <Award className="h-4 w-4 mr-2 text-amber-600 dark:text-amber-400" />
                 Service Excellence
               </Badge>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-premium-navy">
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-card-foreground animate-slide-up">
                 서비스 등급별 포트폴리오
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+              <p className="text-xl text-card-foreground/80 max-w-3xl mx-auto font-light animate-slide-up" style={{ animationDelay: '200ms' }}>
                 자산 규모와 니즈에 따른 차별화된 패밀리오피스 서비스
               </p>
             </div>
@@ -533,17 +533,17 @@ const FamilyOfficeCenterPage = () => {
               {serviceTiers.map((tier, index) => {
                 const Icon = tier.icon;
                 return (
-                  <Card key={index} className={`h-full ${tier.bgColor} ${tier.borderColor} border-2 hover-premium shadow-premium-gold rounded-3xl overflow-hidden`}>
+                  <Card key={index} className={`h-full ${tier.bgColor} dark:bg-card/40 ${tier.borderColor} dark:border-border/50 border-2 shadow-white/5 backdrop-blur-sm rounded-3xl overflow-hidden`}>
                     <CardHeader className="text-center pb-6">
                       <div className="flex justify-center mb-4">
-                        <div className="p-4 bg-white rounded-2xl shadow-lg">
+                        <div className="p-4 bg-card dark:bg-card/80 rounded-2xl shadow-lg backdrop-blur-sm border border-border/30">
                           <Icon className={`h-12 w-12 ${tier.color}`} />
                         </div>
                       </div>
-                      <CardTitle className="text-2xl font-playfair text-gray-900 mb-2">
+                      <CardTitle className="text-2xl font-playfair text-card-foreground mb-2">
                         {tier.name}
                       </CardTitle>
-                      <CardDescription className="text-lg font-semibold text-gray-700">
+                      <CardDescription className="text-lg font-semibold text-card-foreground/80">
                         자산규모 {tier.minAssets}
                       </CardDescription>
                     </CardHeader>
@@ -551,8 +551,8 @@ const FamilyOfficeCenterPage = () => {
                       <ul className="space-y-4">
                         {tier.features.map((feature, i) => (
                           <li key={i} className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700 leading-relaxed">{feature}</span>
+                            <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <span className="text-card-foreground/80 leading-relaxed">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -577,17 +577,17 @@ const FamilyOfficeCenterPage = () => {
         </section>
 
         {/* Premium Success Cases */}
-        <section className="py-20 px-4 bg-gradient-to-br from-amber-50/30 to-blue-50/30">
+        <section className="py-20 px-4 bg-gradient-to-br from-amber-50/30 to-blue-50/30 dark:from-amber-950/20 dark:to-blue-950/20">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <Badge variant="outline" className="mb-6">
-                <Crown className="h-4 w-4 mr-2" />
+              <Badge variant="outline" className="mb-6" animation="fade">
+                <Crown className="h-4 w-4 mr-2 text-amber-600 dark:text-amber-400" />
                 Success Stories
               </Badge>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-premium-navy">
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-card-foreground animate-slide-up">
                 패밀리오피스 성공 사례
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+              <p className="text-xl text-card-foreground/80 max-w-3xl mx-auto font-light animate-slide-up" style={{ animationDelay: '200ms' }}>
                 최고 자산가들의 실제 성공 스토리
               </p>
             </div>
@@ -596,37 +596,37 @@ const FamilyOfficeCenterPage = () => {
               {premiumSuccessCases.map((caseItem, index) => {
                 const Icon = caseItem.icon;
                 return (
-                  <Card key={index} className="h-full glass-premium hover-premium rounded-3xl border-0 shadow-premium">
+                  <Card key={index} className="h-full border-border/50 bg-card/80 backdrop-blur-sm shadow-white/5 rounded-3xl">
                     <CardHeader>
                       <div className="flex items-center gap-3 mb-4">
-                        <Icon className="h-10 w-10 text-amber-600" />
+                        <Icon className="h-10 w-10 text-amber-600 dark:text-amber-400" />
                         <div>
-                          <CardTitle className="text-xl text-premium-navy">{caseItem.title}</CardTitle>
-                          <Badge variant="outline" className="mt-1 bg-white/80 backdrop-blur-sm">
+                          <CardTitle className="text-xl text-card-foreground">{caseItem.title}</CardTitle>
+                          <Badge variant="outline" className="mt-1 bg-card/80 dark:bg-card/60 backdrop-blur-sm border-border/50">
                             {caseItem.category}
                           </Badge>
                         </div>
                       </div>
-                      <p className="font-medium text-premium-gold">{caseItem.assets}</p>
-                      <p className="text-sm text-gray-600">{caseItem.period} · {caseItem.satisfaction}</p>
+                      <p className="font-medium text-amber-600 dark:text-amber-400">{caseItem.assets}</p>
+                      <p className="text-sm text-card-foreground/80">{caseItem.period} · {caseItem.satisfaction}</p>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         <div>
-                          <h4 className="font-semibold text-sm text-red-600 mb-1">도전과제</h4>
-                          <p className="text-sm text-gray-700 leading-relaxed">
+                          <h4 className="font-semibold text-sm text-red-600 dark:text-red-400 mb-1">도전과제</h4>
+                          <p className="text-sm text-card-foreground/80 leading-relaxed">
                             {caseItem.challenge}
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-sm text-blue-600 mb-1">솔루션</h4>
-                          <p className="text-sm text-gray-700 leading-relaxed">
+                          <h4 className="font-semibold text-sm text-blue-600 dark:text-blue-400 mb-1">솔루션</h4>
+                          <p className="text-sm text-card-foreground/80 leading-relaxed">
                             {caseItem.solution}
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-sm text-green-600 mb-1">성과</h4>
-                          <p className="text-sm text-green-700 font-medium leading-relaxed">
+                          <h4 className="font-semibold text-sm text-green-600 dark:text-green-400 mb-1">성과</h4>
+                          <p className="text-sm text-green-700 dark:text-green-400 font-medium leading-relaxed">
                             {caseItem.result}
                           </p>
                         </div>

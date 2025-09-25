@@ -208,17 +208,17 @@ export default function BlogPage() {
                   </div>
                   <div>
                     <YouTubeThumbnail
-                      videoId="T0Rzi6Na-c4"
-                      title="Ray Dalio's INVESTING Strategy Will Make You RICH"
+                      videoId="dz7GaXLjwW0"
+                      title="패밀리오피스 자산관리 전략"
                       className="w-full mb-4"
                     />
                     <p className="text-muted-foreground mb-3">
-                      브리지워터 설립자 레이 달리오의 투자 전략과 분산투자 원칙. 패밀리오피스 운영에 필수적인 포트폴리오 구성 방법을 익혀보세요.
+                      패밀리오피스 전문가가 직접 설명하는 자산관리 핵심 전략과 실무 노하우. 성공한 기업가들의 자산 보전 및 승계 방법을 상세히 다룹니다.
                     </p>
                     <div className="flex gap-2">
-                      <Badge variant="secondary">레이달리오</Badge>
-                      <Badge variant="secondary">분산투자</Badge>
-                      <Badge variant="secondary">포트폴리오</Badge>
+                      <Badge variant="secondary">패밀리오피스</Badge>
+                      <Badge variant="secondary">자산관리</Badge>
+                      <Badge variant="secondary">기업승계</Badge>
                     </div>
                   </div>
                 </div>
@@ -256,18 +256,25 @@ export default function BlogPage() {
                     </div>
                   </div>
                   <div>
-                    <SpotifyEmbed
-                      uri="spotify:episode:6JXsT6X9g9dHfFMPKy8z2J"
-                      title="비트코인에서 ESG 투자까지: 새로운 자산 클래스들"
-                      className="w-full rounded-lg overflow-hidden mb-4"
+                    <iframe 
+                      data-testid="embed-iframe" 
+                      style={{borderRadius: '12px'}} 
+                      src="https://open.spotify.com/embed/episode/57b2C3gDKVhkcI8tVhramS?utm_source=generator" 
+                      width="100%" 
+                      height="152" 
+                      frameBorder="0" 
+                      allowFullScreen={true}
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                      loading="lazy"
+                      className="mb-4"
                     />
                     <p className="text-muted-foreground mb-3">
-                      새로운 자산 클래스의 등장과 투자 기회를 전문가와 함께 논의합니다. 암호화폐부터 ESG 투자까지, 변화하는 투자 패러다임에 대비하는 방법을 알아보세요.
+                      패밀리오피스 전문가가 들려주는 최신 자산관리 인사이트와 투자 전략. 실무진이 알아야 할 핵심 노하우와 성공 사례를 상세히 다룹니다.
                     </p>
                     <div className="flex gap-2">
-                      <Badge variant="secondary">대체투자</Badge>
-                      <Badge variant="secondary">비트코인</Badge>
-                      <Badge variant="secondary">ESG투자</Badge>
+                      <Badge variant="secondary">패밀리오피스</Badge>
+                      <Badge variant="secondary">투자전략</Badge>
+                      <Badge variant="secondary">자산관리</Badge>
                     </div>
                   </div>
                 </div>
