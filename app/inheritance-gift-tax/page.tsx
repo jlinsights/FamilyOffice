@@ -348,10 +348,10 @@ const InheritanceGiftTaxPage = () => {
         <section className="py-12 px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
                 상속·증여세율표
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-card-foreground/80">
                 2024년 현재 적용되는 세율 구간
               </p>
             </div>
@@ -441,32 +441,32 @@ const InheritanceGiftTaxPage = () => {
         <section className="py-12 px-4 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
                 공제 제도
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-card-foreground/80">
                 상속·증여세 부담을 완화하는 각종 공제 제도
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* 상속세 공제 */}
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-card-foreground">
+                    <Users className="h-5 w-5 text-primary dark:text-blue-400" />
                     상속세 공제
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {Object.entries(deductionLimits.inheritance).map(([key, item]) => (
-                      <div key={key} className="border-l-4 border-primary pl-4">
-                        <div className="font-semibold">{item.title}</div>
-                        <div className="text-2xl font-bold text-primary mb-1">
+                      <div key={key} className="border-l-4 border-primary dark:border-blue-400 pl-4">
+                        <div className="font-semibold text-card-foreground">{item.title}</div>
+                        <div className="text-2xl font-bold text-primary dark:text-blue-400 mb-1">
                           {item.amount > 0 ? `${(item.amount / 100000000).toFixed(1)}억원` : '실비'}
                         </div>
-                        <div className="text-sm text-muted-foreground">{item.description}</div>
+                        <div className="text-sm text-card-foreground/80">{item.description}</div>
                       </div>
                     ))}
                   </div>
@@ -474,22 +474,22 @@ const InheritanceGiftTaxPage = () => {
               </Card>
 
               {/* 증여세 공제 */}
-              <Card>
+              <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Heart className="h-5 w-5 text-red-500" />
+                  <CardTitle className="flex items-center gap-2 text-card-foreground">
+                    <Heart className="h-5 w-5 text-red-500 dark:text-red-400" />
                     증여세 공제
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {Object.entries(deductionLimits.gift).map(([key, item]) => (
-                      <div key={key} className="border-l-4 border-red-400 pl-4">
-                        <div className="font-semibold">{item.title}</div>
-                        <div className="text-2xl font-bold text-red-600 mb-1">
+                      <div key={key} className="border-l-4 border-red-400 dark:border-red-400 pl-4">
+                        <div className="font-semibold text-card-foreground">{item.title}</div>
+                        <div className="text-2xl font-bold text-red-600 dark:text-red-400 mb-1">
                           {(item.amount / 100000000).toFixed(1)}억원
                         </div>
-                        <div className="text-sm text-muted-foreground">{item.description}</div>
+                        <div className="text-sm text-card-foreground/80">{item.description}</div>
                       </div>
                     ))}
                   </div>
@@ -503,18 +503,18 @@ const InheritanceGiftTaxPage = () => {
         <section className="py-12 px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
                 신고·납부 일정
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-card-foreground/80">
                 놓치면 안되는 중요한 세무 일정
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="border-blue-200">
+              <Card className="border-blue-200 dark:border-blue-800/30 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="bg-blue-50 dark:bg-blue-950/20">
-                  <CardTitle className="flex items-center gap-2 text-blue-700">
+                  <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
                     <Calendar className="h-5 w-5" />
                     상속세 일정
                   </CardTitle>
@@ -523,10 +523,10 @@ const InheritanceGiftTaxPage = () => {
                   <div className="space-y-4">
                     {Object.entries(taxSchedule.inheritance).map(([key, value]) => (
                       <div key={key} className="flex items-start gap-3">
-                        <Clock className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
+                        <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-1 flex-shrink-0" />
                         <div>
-                          <div className="font-semibold capitalize">{key.replace(/([A-Z])/g, ' $1')}</div>
-                          <div className="text-sm text-muted-foreground">{value}</div>
+                          <div className="font-semibold capitalize text-card-foreground">{key.replace(/([A-Z])/g, ' $1')}</div>
+                          <div className="text-sm text-card-foreground/80">{value}</div>
                         </div>
                       </div>
                     ))}
@@ -534,9 +534,9 @@ const InheritanceGiftTaxPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-green-200">
+              <Card className="border-green-200 dark:border-green-800/30 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="bg-green-50 dark:bg-green-950/20">
-                  <CardTitle className="flex items-center gap-2 text-green-700">
+                  <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-300">
                     <Calendar className="h-5 w-5" />
                     증여세 일정
                   </CardTitle>
@@ -545,10 +545,10 @@ const InheritanceGiftTaxPage = () => {
                   <div className="space-y-4">
                     {Object.entries(taxSchedule.gift).map(([key, value]) => (
                       <div key={key} className="flex items-start gap-3">
-                        <Clock className="h-5 w-5 text-green-600 mt-1 flex-shrink-0" />
+                        <Clock className="h-5 w-5 text-green-600 dark:text-green-400 mt-1 flex-shrink-0" />
                         <div>
-                          <div className="font-semibold capitalize">{key.replace(/([A-Z])/g, ' $1')}</div>
-                          <div className="text-sm text-muted-foreground">{value}</div>
+                          <div className="font-semibold capitalize text-card-foreground">{key.replace(/([A-Z])/g, ' $1')}</div>
+                          <div className="text-sm text-card-foreground/80">{value}</div>
                         </div>
                       </div>
                     ))}
@@ -563,10 +563,10 @@ const InheritanceGiftTaxPage = () => {
         <section className="py-12 px-4 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
                 주요 절세 전략
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-card-foreground/80">
                 합법적이고 효과적인 상속·증여세 절세 방법
               </p>
             </div>
@@ -575,17 +575,17 @@ const InheritanceGiftTaxPage = () => {
               {taxStrategies.map((strategy, index) => (
                 <Card 
                   key={index} 
-                  className={`cursor-pointer transition-all duration-300 ${
-                    selectedStrategy === index ? 'ring-2 ring-primary shadow-lg' : 'hover:shadow-md'
+                  className={`cursor-pointer transition-all duration-300 border-border/50 bg-card/80 backdrop-blur-sm ${
+                    selectedStrategy === index ? 'ring-2 ring-primary shadow-lg' : 'hover:shadow-md dark:hover:shadow-white/5'
                   }`}
                   onClick={() => setSelectedStrategy(index)}
                 >
                   <CardHeader>
                     <div className="flex items-center gap-3">
-                      <strategy.icon className="h-8 w-8 text-primary" />
+                      <strategy.icon className="h-8 w-8 text-primary dark:text-blue-400" />
                       <div>
-                        <CardTitle>{strategy.category}</CardTitle>
-                        <CardDescription>{strategy.description}</CardDescription>
+                        <CardTitle className="text-card-foreground">{strategy.category}</CardTitle>
+                        <CardDescription className="text-card-foreground/80">{strategy.description}</CardDescription>
                       </div>
                     </div>
                     <div className="flex items-center gap-4 mt-4">
@@ -604,13 +604,13 @@ const InheritanceGiftTaxPage = () => {
             </div>
 
             {/* 선택된 전략 상세 정보 */}
-            <Card className="border-primary">
+            <Card className="border-primary dark:border-blue-400 bg-card/80 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  {taxStrategies[selectedStrategy] && React.createElement(taxStrategies[selectedStrategy].icon, { className: "h-6 w-6 text-primary" })}
+                <CardTitle className="flex items-center gap-2 text-card-foreground">
+                  {taxStrategies[selectedStrategy] && React.createElement(taxStrategies[selectedStrategy].icon, { className: "h-6 w-6 text-primary dark:text-blue-400" })}
                   {taxStrategies[selectedStrategy]?.category} 상세 전략
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-card-foreground/80">
                   권장 준비 기간: {taxStrategies[selectedStrategy]?.period}
                 </CardDescription>
               </CardHeader>
@@ -618,8 +618,8 @@ const InheritanceGiftTaxPage = () => {
                 <ul className="space-y-3">
                   {taxStrategies[selectedStrategy]?.strategies?.map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span>{item}</span>
+                      <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-card-foreground/90">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -632,10 +632,10 @@ const InheritanceGiftTaxPage = () => {
         <section className="py-12 px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
                 자주 묻는 질문
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-card-foreground/80">
                 국세청 공식 Q&A 기반 핵심 질문과 답변
               </p>
             </div>
@@ -645,17 +645,17 @@ const InheritanceGiftTaxPage = () => {
                 {frequentQuestions.map((faq, index) => (
                   <Card 
                     key={index}
-                    className={`cursor-pointer transition-all duration-200 ${
-                      selectedQuestion === index ? 'ring-2 ring-primary' : 'hover:shadow-md'
+                    className={`cursor-pointer transition-all duration-200 border-border/50 bg-card/80 backdrop-blur-sm ${
+                      selectedQuestion === index ? 'ring-2 ring-primary' : 'hover:shadow-md dark:hover:shadow-white/5'
                     }`}
                     onClick={() => setSelectedQuestion(index)}
                   >
                     <CardHeader className="pb-3">
                       <div className="flex items-start gap-3">
-                        <HelpCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <HelpCircle className="h-5 w-5 text-primary dark:text-blue-400 mt-1 flex-shrink-0" />
                         <div>
                           <Badge variant="outline" className="mb-2">{faq.category}</Badge>
-                          <CardTitle className="text-lg leading-tight">{faq.question}</CardTitle>
+                          <CardTitle className="text-lg leading-tight text-card-foreground">{faq.question}</CardTitle>
                         </div>
                       </div>
                     </CardHeader>
@@ -663,17 +663,17 @@ const InheritanceGiftTaxPage = () => {
                 ))}
               </div>
 
-              <Card className="border-primary h-fit sticky top-24">
+              <Card className="border-primary dark:border-blue-400 bg-card/80 backdrop-blur-sm h-fit sticky top-24">
                 <CardHeader>
                   <Badge variant="outline" className="w-fit">
                     {frequentQuestions[selectedQuestion]?.category}
                   </Badge>
-                  <CardTitle className="text-lg">
+                  <CardTitle className="text-lg text-card-foreground">
                     {frequentQuestions[selectedQuestion]?.question}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
+                  <p className="text-card-foreground/80 leading-relaxed mb-4">
                     {frequentQuestions[selectedQuestion]?.answer}
                   </p>
                   <div className="flex flex-wrap gap-2">
