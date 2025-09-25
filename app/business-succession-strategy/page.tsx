@@ -675,82 +675,100 @@ const BusinessSuccessionPage = () => {
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-4xl mx-auto">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
                     {/* 무료 승계 전략 상담 - Primary Button */}
                     <CalComPopup
-                      className="col-span-2 sm:col-span-3 lg:col-span-4 inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-600 dark:to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:hover:from-blue-700 dark:hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                      className="col-span-1 sm:col-span-2 lg:col-span-3 inline-flex items-center justify-center px-8 py-6 text-xl font-bold rounded-2xl text-white bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-600 dark:to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:hover:from-blue-700 dark:hover:to-blue-800 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 min-h-[80px]"
                       buttonText="무료 승계 전략 상담"
                       eventType="consultation"
                       trigger={
                         <div className="flex items-center">
-                          <Crown className="h-6 w-6 mr-2" />
+                          <Crown className="h-7 w-7 mr-3" />
                           무료 승계 전략 상담
                         </div>
                       }
                     />
 
-                    {/* Secondary Buttons with Enhanced Dark Mode Styling */}
+                    {/* Secondary Buttons with Improved Layout */}
                     <Button 
                       variant="outline" 
-                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      className="flex flex-col items-center justify-center min-h-[120px] p-6 border-2 border-slate-300 dark:border-slate-600 bg-white/95 dark:bg-slate-800/95 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl"
                       asChild
                     >
                       <Link href="/ceo-checklist">
-                        <Briefcase className="h-6 w-6 mb-1" />
-                        <span className="text-xs font-medium text-center">CEO<br/>경영진단</span>
+                        <Briefcase className="h-8 w-8 mb-3" />
+                        <div className="text-center">
+                          <div className="text-sm font-bold">CEO</div>
+                          <div className="text-sm font-bold">경영진단</div>
+                        </div>
                       </Link>
                     </Button>
 
                     <Button 
                       variant="outline" 
-                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      className="flex flex-col items-center justify-center min-h-[120px] p-6 border-2 border-slate-300 dark:border-slate-600 bg-white/95 dark:bg-slate-800/95 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl"
                       asChild
                     >
                       <Link href="/corporate-life-insurance">
-                        <Shield className="h-6 w-6 mb-1" />
-                        <span className="text-xs font-medium text-center">법인<br/>종신보험</span>
+                        <Shield className="h-8 w-8 mb-3" />
+                        <div className="text-center">
+                          <div className="text-sm font-bold">법인</div>
+                          <div className="text-sm font-bold">종신보험</div>
+                        </div>
                       </Link>
                     </Button>
 
                     <Button 
                       variant="outline" 
-                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      className="flex flex-col items-center justify-center min-h-[120px] p-6 border-2 border-slate-300 dark:border-slate-600 bg-white/95 dark:bg-slate-800/95 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl"
                       asChild
                     >
                       <Link href="/tax-strategy">
-                        <Calculator className="h-6 w-6 mb-1" />
-                        <span className="text-xs font-medium text-center">절세<br/>전략</span>
+                        <Calculator className="h-8 w-8 mb-3" />
+                        <div className="text-center">
+                          <div className="text-sm font-bold">절세</div>
+                          <div className="text-sm font-bold">전략</div>
+                        </div>
                       </Link>
                     </Button>
 
                     <Button 
                       variant="outline" 
-                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      className="flex flex-col items-center justify-center min-h-[120px] p-6 border-2 border-slate-300 dark:border-slate-600 bg-white/95 dark:bg-slate-800/95 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl"
                       asChild
                     >
                       <Link href="/inheritance-gift-tax">
-                        <Heart className="h-6 w-6 mb-1" />
-                        <span className="text-xs font-medium text-center">증여세<br/>가이드</span>
+                        <Heart className="h-8 w-8 mb-3" />
+                        <div className="text-center">
+                          <div className="text-sm font-bold">증여세</div>
+                          <div className="text-sm font-bold">가이드</div>
+                        </div>
                       </Link>
                     </Button>
 
                     <Button 
                       variant="outline" 
-                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      className="flex flex-col items-center justify-center min-h-[120px] p-6 border-2 border-slate-300 dark:border-slate-600 bg-white/95 dark:bg-slate-800/95 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl"
                       asChild
                     >
                       <Link href="/fp-center">
-                        <Users className="h-6 w-6 mb-1" />
-                        <span className="text-xs font-medium text-center">FP센터<br/>재무설계</span>
+                        <Users className="h-8 w-8 mb-3" />
+                        <div className="text-center">
+                          <div className="text-sm font-bold">센터</div>
+                          <div className="text-sm font-bold">재무설계</div>
+                        </div>
                       </Link>
                     </Button>
 
                     <Button 
                       variant="outline" 
-                      className="flex flex-col items-center justify-center h-24 p-3 border-2 border-slate-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-sm hover:shadow-md transition-all duration-300"
+                      className="flex flex-col items-center justify-center min-h-[120px] p-6 border-2 border-slate-300 dark:border-slate-600 bg-white/95 dark:bg-slate-800/95 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl"
                     >
-                      <Download className="h-6 w-6 mb-1" />
-                      <span className="text-xs font-medium text-center">체크리스트<br/>다운로드</span>
+                      <Download className="h-8 w-8 mb-3" />
+                      <div className="text-center">
+                        <div className="text-sm font-bold">체크리스트</div>
+                        <div className="text-sm font-bold">다운로드</div>
+                      </div>
                     </Button>
                   </div>
 
