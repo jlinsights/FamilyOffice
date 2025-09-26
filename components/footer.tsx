@@ -21,6 +21,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { ClientScripts } from './client-scripts';
+import { useTheme } from 'next-themes';
 
 // 커스텀 아이콘 컴포넌트들
 const XIcon = ({ className }: { className?: string }) => (
@@ -53,15 +54,10 @@ const KakaoIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const BrunchIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M5.5 2c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5c.4 0 .8-.2 1.1-.5L18.9 16.8c.4.4.9.6 1.4.6.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5c-.4 0-.8.2-1.1.5L6.9 2.6c-.4-.4-.9-.6-1.4-.6zM2 20h20v2H2v-2z"/>
-  </svg>
-);
-
 export const Footer = memo(function Footer() {
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -193,9 +189,15 @@ export const Footer = memo(function Footer() {
                   href="https://brunch.co.kr/@familyoffice"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105 overflow-hidden"
                 >
-                  <BrunchIcon className="h-4 w-4" />
+                  <Image 
+                    src={theme === 'dark' ? "/images/brunch-logo-dark.svg" : "/images/brunch-logo-light.svg"}
+                    alt="Brunch"
+                    width={24}
+                    height={24}
+                    className="h-6 w-6 object-contain"
+                  />
                   <span className="sr-only">Brunch</span>
                 </Link>
               </div>
