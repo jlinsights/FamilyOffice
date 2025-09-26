@@ -71,7 +71,12 @@ export const metadata: Metadata = {
 
 // Next.js 15: colorScheme을 별도 viewport export로 분리
 export const viewport: Viewport = {
-  colorScheme: 'light dark'
+  colorScheme: 'light dark',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover' // iPhone X 이상 Safe Area 지원
 };
 
 export default function RootLayout({
