@@ -483,8 +483,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 전문가 팀 섹션 */}
-        <section className="py-20 bg-muted/30 dark:bg-muted/20">
+        {/* 전문가 팀 섹션 - 숨김 처리 */}
+        <section className="py-20 bg-muted/30 dark:bg-muted/20 hidden">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4">
