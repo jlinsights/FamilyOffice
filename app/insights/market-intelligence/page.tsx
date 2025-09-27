@@ -267,7 +267,9 @@ export default function BlogPage() {
                       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                       loading="lazy"
                       className="mb-4"
+                      title="비상장 벤처기업 스톡옵션"
                     />
+                    <h3 className="text-lg font-semibold text-foreground mb-2">비상장 벤처기업 스톡옵션</h3>
                     <p className="text-muted-foreground mb-3">
                       패밀리오피스 전문가가 들려주는 최신 자산관리 인사이트와 투자 전략. 실무진이 알아야 할 핵심 노하우와 성공 사례를 상세히 다룹니다.
                     </p>
