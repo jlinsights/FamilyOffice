@@ -10,6 +10,20 @@
     scroll-behavior: smooth;
   }
 
+  /* Grid Pattern Background */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  
+  .dark .bg-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(203, 213, 225, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(203, 213, 225, 0.05) 1px, transparent 1px);
+  }
+
   /* 헤더 스티키 최적화 */
   header[role="banner"] {
     position: fixed !important;

@@ -23,16 +23,20 @@ export function BlogCategoryFilter() {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 mb-8">
+    <div className="flex flex-wrap gap-2 justify-center">
       <Button
-        variant={selectedCategory === '' ? 'default' : 'outline'}
+        variant={selectedCategory === '' ? 'default' : 'ghost'}
         size="sm"
         onClick={() => handleCategoryChange('')}
-        className="flex items-center gap-2"
+        className={`flex items-center gap-2 rounded-xl transition-all duration-200 ${
+          selectedCategory === '' 
+            ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm' 
+            : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300'
+        }`}
       >
         전체
         {selectedCategory === '' && (
-          <Badge variant="ghost" size="xs">
+          <Badge variant="secondary" size="xs" className="bg-blue-500 text-white">
             All
           </Badge>
         )}
@@ -41,13 +45,25 @@ export function BlogCategoryFilter() {
       {blogCategories.map((category) => (
         <Button
           key={category.slug}
-          variant={selectedCategory === category.name ? 'default' : 'outline'}
+          variant={selectedCategory === category.name ? 'default' : 'ghost'}
           size="sm"
           onClick={() => handleCategoryChange(category.name)}
-          className="flex items-center gap-2"
+          className={`flex items-center gap-2 rounded-xl transition-all duration-200 ${
+            selectedCategory === category.name 
+              ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm' 
+              : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300'
+          }`}
         >
           {category.name}
-          <Badge variant="ghost" size="xs">
+          <Badge 
+            variant="secondary" 
+            size="xs"
+            className={
+              selectedCategory === category.name 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300'
+            }
+          >
             {category.count}
           </Badge>
         </Button>
