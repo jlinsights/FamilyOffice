@@ -26,9 +26,9 @@ export function BlogPostToc({ content, className }: BlogPostTocProps) {
 
     while ((match = headingRegex.exec(content)) !== null) {
       items.push({
-        id: match[2],
-        text: match[3].replace(/<[^>]*>/g, ''), // Remove HTML tags
-        level: parseInt(match[1]),
+        id: match[2] || '',
+        text: (match[3] || '').replace(/<[^>]*>/g, ''), // Remove HTML tags
+        level: parseInt(match[1] || '2'),
       });
     }
 

@@ -192,10 +192,13 @@ export function InfiniteScrollTrigger({ onLoadMore }: { onLoadMore: () => void }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsIntersecting(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          onLoadMore();
+      (entries) => {
+        const entry = entries[0];
+        if (entry) {
+          setIsIntersecting(entry.isIntersecting);
+          if (entry.isIntersecting) {
+            onLoadMore();
+          }
         }
       },
       { threshold: 0.1 }

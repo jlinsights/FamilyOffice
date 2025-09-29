@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 const BlogContentAdvanced = dynamic(
   () => import('@/components/blog/blog-content-advanced').then(mod => ({ default: mod.BlogContentAdvanced })),
   { 
-    loading: () => <BlogContentSkeleton />,
-    ssr: false 
+    loading: () => <BlogContentSkeleton />
   }
 );
 
