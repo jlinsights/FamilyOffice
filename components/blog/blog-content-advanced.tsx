@@ -180,7 +180,7 @@ export function BlogContentAdvanced({
     return (
       <div className={`text-center py-12 ${className || ''}`}>
         <FileText className="h-16 w-16 text-muted-foreground/50 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-foreground mb-2">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
           검색 결과가 없습니다
         </h3>
         <p className="text-muted-foreground mb-6">
@@ -222,7 +222,7 @@ export function BlogContentAdvanced({
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl">
                 <TrendingUp className="h-5 w-5 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                 추천 포스트
               </h3>
             </div>
@@ -338,7 +338,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
               </span>
             </div>
             
-            <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
               <Link href={`/insights/market-intelligence/${post.slug}`}>
                 {post.title}
               </Link>
@@ -412,7 +412,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
           </span>
         </div>
         
-        <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors line-clamp-2">
           <Link href={`/insights/market-intelligence/${post.slug}`}>
             {post.title}
           </Link>

@@ -9,6 +9,7 @@ import { NavigationItem, ServiceItem } from '@/types/globals';
 // 네비게이션 메뉴 데이터
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/about', label: '소개' },
+  { href: '/program', label: '프로그램' },
   { 
     href: '/solutions', 
     label: '솔루션',
@@ -75,7 +76,6 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       }
     ]
   },
-  { href: '/program', label: '프로그램' },
   { href: '/insights', label: '인사이트' },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
