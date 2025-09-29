@@ -32,7 +32,7 @@ const NewsletterSubscription = dynamic(() => import('@/components/newsletter-sub
 const BlogCategoryFilter = dynamic(() => import('@/components/blog-category-filter').then(mod => ({ default: mod.BlogCategoryFilter })), {
   loading: () => <div className="h-16 bg-muted animate-pulse rounded" />
 });
-const BlogContent = dynamic(() => import('@/components/blog-content').then(mod => ({ default: mod.BlogContent })), {
+const BlogContentAdvanced = dynamic(() => import('@/components/blog/blog-content-advanced').then(mod => ({ default: mod.BlogContentAdvanced })), {
   loading: () => (
     <div className="text-center py-12">
       <div className="animate-pulse space-y-8">
@@ -138,24 +138,6 @@ export default function BlogPage() {
               </div>
             </div>
 
-            {/* Search Bar */}
-            <div
-              className="max-w-lg mx-auto animate-slide-up"
-              style={{ animationDelay: '400ms' }}
-            >
-              <div className="relative">
-                <Input
-                  placeholder="자산관리 인사이트 검색..."
-                  className="h-12 pl-4 pr-12 text-base bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <Button 
-                  size="sm" 
-                  className="absolute right-2 top-2 h-8 w-8 p-0 bg-blue-600 hover:bg-blue-700 rounded-lg"
-                >
-                  <Search className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -180,15 +162,6 @@ export default function BlogPage() {
               </p>
             </div>
 
-            {/* Category Filter - Enhanced Design */}
-            <div 
-              className="flex justify-center mb-16 animate-slide-up"
-              style={{ animationDelay: '200ms' }}
-            >
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-2 shadow-sm border border-slate-200 dark:border-slate-700">
-                <BlogCategoryFilter />
-              </div>
-            </div>
             
             {/* Category Grid - Modern Card Design */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
@@ -388,9 +361,16 @@ export default function BlogPage() {
               </p>
             </div>
             
-            {/* Enhanced Blog Content */}
+            {/* Advanced Blog Content with Modern Features */}
             <div className="animate-slide-up" style={{ animationDelay: '200ms' }}>
-              <BlogContent className="" />
+              <BlogContentAdvanced 
+                className="" 
+                showSearch={true}
+                showFilters={true}
+                showViewToggle={true}
+                infiniteScroll={false}
+                itemsPerPage={12}
+              />
             </div>
           </div>
         </section>

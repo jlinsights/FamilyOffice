@@ -5,12 +5,17 @@ export interface BlogPost {
   content: string;
   category: string;
   author: string;
+  authorImage?: string;
   date: string;
   readTime: string;
   tags: string[];
   slug: string;
   featured?: boolean;
   image?: string;
+  views?: number;
+  likes?: number;
+  shares?: number;
+  coverImage?: string;
 }
 
 export interface BlogCategory {
