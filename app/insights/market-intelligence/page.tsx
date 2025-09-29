@@ -5,9 +5,17 @@ import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
-  title: '시장 인텔리전스 - 전문가 미디어 콘텐츠',
-  description: '패밀리오피스 및 자산관리의 최신 인사이트를 영상과 팟캐스트로 만나보세요. 전문가가 직접 분석하는 시장 동향과 투자 전략을 확인하세요.',
-  keywords: '시장 분석, 자산관리, 패밀리오피스, 투자 전략, 전문가 콘텐츠',
+  title: '인사이트 & 블로그 - 패밀리오피스 전문 콘텐츠',
+  description: '패밀리오피스 및 자산관리의 최신 인사이트와 전문가 분석을 만나보세요. 영상, 팟캐스트, 실무 가이드부터 전략 분석까지 다양한 콘텐츠를 제공합니다.',
+  keywords: '블로그, 인사이트, 시장 분석, 자산관리, 패밀리오피스, 투자 전략, 전문가 콘텐츠, 세무최적화, 기업승계',
+  openGraph: {
+    title: '인사이트 & 블로그 - 패밀리오피스 전문 콘텐츠',
+    description: '한국 중견기업 CEO를 위한 패밀리오피스 전문가의 최신 분석과 실무 가이드',
+    images: ['/og-image.jpg'],
+  },
+  alternates: {
+    canonical: '/insights/market-intelligence',
+  },
 };
 
 import { Badge } from '@/components/ui/badge';
@@ -61,10 +69,32 @@ const CategoryIcon = dynamic(() => import('./category-icon'), {
 // Categories and posts are imported from @/lib/blog-data
 // Dynamic rendering will be handled by BlogContent component based on URL parameters
 
+// 구조화된 데이터 추가
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: '인사이트 & 블로그 - FamilyOffice S',
+  description: '한국 중견기업 CEO를 위한 패밀리오피스 전문가의 최신 분석과 실무 가이드',
+  url: 'https://www.samsunglife.vip/insights/market-intelligence',
+  publisher: {
+    '@type': 'Organization',
+    name: 'FamilyOffice S',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://www.samsunglife.vip/logo.png'
+    }
+  },
+  blogPost: [] // 동적으로 포스트 추가 가능
+};
+
 export default function BlogPage() {
   return (
     <div className="min-h-screen">
       <Header />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <main className="pt-20">
         {/* Hero Section - Modern Magazine Style */}
         <section className="relative w-full min-h-[75vh] flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
@@ -75,10 +105,29 @@ export default function BlogPage() {
           
           {/* Content */}
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            {/* Breadcrumb */}
-            <div className="mb-6 animate-slide-up">
+            {/* Breadcrumb Navigation */}
+            <nav className="mb-8 animate-slide-up" aria-label="Breadcrumb">
+              <ol className="flex items-center justify-center space-x-1 text-sm">
+                <li>
+                  <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
+                    홈
+                  </Link>
+                </li>
+                <li className="text-muted-foreground">/</li>
+                <li>
+                  <Link href="/insights" className="text-muted-foreground hover:text-primary transition-colors">
+                    인사이트
+                  </Link>
+                </li>
+                <li className="text-muted-foreground">/</li>
+                <li className="text-primary font-medium">시장 인텔리전스</li>
+              </ol>
+            </nav>
+            
+            {/* Breadcrumb Badge */}
+            <div className="mb-6 animate-slide-up" style={{ animationDelay: '50ms' }}>
               <Badge variant="outline" className="text-xs font-medium bg-white/50 dark:bg-gray-800/50 border-slate-200 dark:border-gray-700">
-                💡 FamilyOffice S 인사이트
+                💡 FamilyOffice S 인사이트 & 블로그
               </Badge>
             </div>
             
@@ -346,19 +395,37 @@ export default function BlogPage() {
         </section>
 
         {/* Blog Content with Category Support - Modern Magazine Layout */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-20 bg-white dark:bg-gray-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section Header */}
             <div className="text-center mb-16 animate-slide-up">
-              <Badge variant="outline" className="mb-6 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+              <Badge variant="outline" className="mb-6 bg-slate-50 dark:bg-gray-800 border-slate-200 dark:border-gray-700">
                 📚 인사이트 아카이브
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                최신 자산관리 인사이트
+                최신 자산관리 인사이트 & 블로그
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 전문가가 직접 분석한 최신 시장 동향과 실무 가이드를 확인하세요
               </p>
+              
+              {/* Quick Stats */}
+              <div className="flex items-center justify-center gap-6 mt-8">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">50+</div>
+                  <div className="text-sm text-muted-foreground">전문 콘텐츠</div>
+                </div>
+                <div className="w-px h-10 bg-border"></div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">매주 2회</div>
+                  <div className="text-sm text-muted-foreground">정기 업데이트</div>
+                </div>
+                <div className="w-px h-10 bg-border"></div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">5개</div>
+                  <div className="text-sm text-muted-foreground">전문 카테고리</div>
+                </div>
+              </div>
             </div>
             
             {/* Advanced Blog Content with Modern Features */}

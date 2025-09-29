@@ -175,6 +175,17 @@ const nextConfig = {
   // 도메인 리다이렉트 및 HTTPS 강제
   async redirects() {
     return [
+      // /blog를 /insights/market-intelligence로 301 리다이렉트
+      {
+        source: '/blog',
+        destination: '/insights/market-intelligence',
+        permanent: true,
+      },
+      {
+        source: '/blog/:slug',
+        destination: '/insights/market-intelligence/:slug',
+        permanent: true,
+      },
       // 기존 도메인에서 새 도메인으로 301 리다이렉트
       {
         source: '/:path*',
