@@ -67,7 +67,7 @@ export default function BlogPage() {
       <Header />
       <main className="pt-20">
         {/* Hero Section - Modern Magazine Style */}
-        <section className="relative w-full min-h-[75vh] flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 overflow-hidden">
+        <section className="relative w-full min-h-[75vh] flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
             <div className="absolute inset-0 bg-grid-pattern"></div>
@@ -77,7 +77,7 @@ export default function BlogPage() {
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Breadcrumb */}
             <div className="mb-6 animate-slide-up">
-              <Badge variant="outline" className="text-xs font-medium bg-white/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700">
+              <Badge variant="outline" className="text-xs font-medium bg-white/50 dark:bg-gray-800/50 border-slate-200 dark:border-gray-700">
                 💡 FamilyOffice S 인사이트
               </Badge>
             </div>
@@ -85,13 +85,13 @@ export default function BlogPage() {
             {/* Main Title */}
             <div className="mb-8 animate-slide-up" style={{ animationDelay: '100ms' }}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-                <span className="text-slate-900 dark:text-white">자산관리 전문가</span>
+                <span className="text-foreground">자산관리 전문가</span>
                 <br />
                 <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   인사이트 & 전략
                 </span>
               </h1>
-              <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 한국 중견기업 CEO를 위한 패밀리오피스, 자산관리, 투자전략, 
                 세무최적화의 최신 인사이트와 성공 사례를 제공합니다.
               </p>
@@ -103,22 +103,22 @@ export default function BlogPage() {
               style={{ animationDelay: '200ms' }}
             >
               <div className="text-center">
-                <div className="text-2xl font-bold text-slate-900 dark:text-white">50+</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">전문 아티클</div>
+                <div className="text-2xl font-bold text-foreground">50+</div>
+                <div className="text-sm text-muted-foreground">전문 아티클</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-slate-900 dark:text-white">5개</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">전문 영역</div>
+                <div className="text-2xl font-bold text-foreground">5개</div>
+                <div className="text-sm text-muted-foreground">전문 영역</div>
               </div>
               <div className="text-center col-span-2 md:col-span-1">
-                <div className="text-2xl font-bold text-slate-900 dark:text-white">매주 2회</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">정기 발행</div>
+                <div className="text-2xl font-bold text-foreground">매주 2회</div>
+                <div className="text-sm text-muted-foreground">정기 발행</div>
               </div>
             </div>
 
             {/* Publication Schedule */}
             <div 
-              className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 max-w-2xl mx-auto mb-8 animate-slide-up border border-blue-100 dark:border-slate-600"
+              className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 max-w-2xl mx-auto mb-8 animate-slide-up border border-blue-100 dark:border-gray-700"
               style={{ animationDelay: '300ms' }}
             >
               <div className="flex items-center justify-center mb-3">
@@ -128,12 +128,12 @@ export default function BlogPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div className="text-center">
-                  <div className="font-semibold text-slate-900 dark:text-white">화요일 오후 2:30</div>
-                  <div className="text-slate-600 dark:text-slate-400">실무 가이드</div>
+                  <div className="font-semibold text-foreground">화요일 오후 2:30</div>
+                  <div className="text-muted-foreground">실무 가이드</div>
                 </div>
                 <div className="text-center">
-                  <div className="font-semibold text-slate-900 dark:text-white">목요일 저녁 8:00</div>
-                  <div className="text-slate-600 dark:text-slate-400">전략 분석</div>
+                  <div className="font-semibold text-foreground">목요일 저녁 8:00</div>
+                  <div className="text-muted-foreground">전략 분석</div>
                 </div>
               </div>
             </div>
@@ -142,20 +142,20 @@ export default function BlogPage() {
         </section>
 
         {/* Categories & Filter - Modern Grid Design */}
-        <section className="py-16 bg-slate-50/50 dark:bg-slate-900/50">
+        <section className="py-16 bg-slate-50/50 dark:bg-gray-900/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section Header */}
             <div className="text-center mb-16">
               <div className="mb-6 animate-slide-up">
-                <Badge variant="outline" className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <Badge variant="outline" className="bg-white dark:bg-gray-800 border-slate-200 dark:border-gray-700">
                   🎯 전문 영역
                 </Badge>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 animate-slide-up">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-slide-up">
                 전문 분야별 인사이트
               </h2>
               <p
-                className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto animate-slide-up leading-relaxed"
+                className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-up leading-relaxed"
                 style={{ animationDelay: '100ms' }}
               >
                 패밀리오피스 및 자산관리의 다양한 전문 영역별 심층 분석을 확인하세요
@@ -172,7 +172,7 @@ export default function BlogPage() {
                   className="group block animate-slide-up"
                   style={{ animationDelay: `${index * 100 + 300}ms` }}
                 >
-                  <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                  <div className="bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 hover:-translate-y-2">
                     {/* Icon */}
                     <div className="flex justify-center mb-4">
                       <div className="w-14 h-14 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-xl flex items-center justify-center group-hover:from-blue-100 group-hover:to-indigo-100 dark:group-hover:from-blue-800/40 dark:group-hover:to-indigo-800/40 transition-all duration-300">
@@ -302,7 +302,7 @@ export default function BlogPage() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">비상장 벤처기업 스톡옵션</h3>
+                    <h3 className="text-sm font-medium text-foreground mb-3">비상장 벤처기업 스톡옵션</h3>
                     <iframe 
                       data-testid="embed-iframe" 
                       style={{borderRadius: '12px'}} 
@@ -353,10 +353,10 @@ export default function BlogPage() {
               <Badge variant="outline" className="mb-6 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 📚 인사이트 아카이브
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 최신 자산관리 인사이트
               </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 전문가가 직접 분석한 최신 시장 동향과 실무 가이드를 확인하세요
               </p>
             </div>
@@ -376,16 +376,16 @@ export default function BlogPage() {
         </section>
 
         {/* Newsletter Subscription - Modern CTA Design */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
+        <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 animate-slide-up">
-              <Badge variant="outline" className="mb-6 bg-white dark:bg-slate-800 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300">
+              <Badge variant="outline" className="mb-6 bg-white dark:bg-gray-800 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300">
                 📬 뉴스레터 구독
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 전문가 인사이트를 받아보세요
               </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 매주 화요일과 목요일, 패밀리오피스 전문가의 최신 분석과 실무 가이드를 이메일로 받아보세요
               </p>
             </div>

@@ -1,7 +1,7 @@
-🎨 다크모드 블로그 카드 UI 개선 - 기존 디자인 톤과 매너에 맞춤
+🎨 /insights/market-intelligence 다크모드 UI 최적화
 
-• 카드 배경: 기존 스타일에 맞는 그라데이션 (from-card to-card/50)
-• 다크모드 배경: gray-800/700 계열로 통일
-• 텍스트 색상: muted-foreground 시스템 색상으로 일관성 확보
-• 호버 효과: 기존 shadow-black/white 패턴 적용
-• 아이콘 색상: primary 색상으로 브랜드 일관성 유지
+• Hero 섹션: dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 적용
+• Badge 배경: dark:bg-gray-800/50 및 dark:border-gray-700로 통일
+• 텍스트 시스템: text-foreground와 text-muted-foreground로 일관성 확보
+• 카테고리 카드: 기존 service-card와 동일한 그라데이션 패턴 적용
+• 섹션 배경: slate-900 → gray-900 계열로 전체 통일
