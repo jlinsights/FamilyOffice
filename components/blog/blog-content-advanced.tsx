@@ -179,11 +179,11 @@ export function BlogContentAdvanced({
   if (filteredPosts.length === 0) {
     return (
       <div className={`text-center py-12 ${className || ''}`}>
-        <FileText className="h-16 w-16 text-slate-400 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+        <FileText className="h-16 w-16 text-muted-foreground/50 mx-auto mb-4" />
+        <h3 className="text-xl font-semibold text-foreground mb-2">
           검색 결과가 없습니다
         </h3>
-        <p className="text-slate-600 dark:text-slate-400 mb-6">
+        <p className="text-muted-foreground mb-6">
           다른 검색어나 필터를 사용해보세요
         </p>
         <Button asChild>
@@ -222,11 +222,11 @@ export function BlogContentAdvanced({
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl">
                 <TrendingUp className="h-5 w-5 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+              <h3 className="text-2xl font-bold text-foreground">
                 추천 포스트
               </h3>
             </div>
-            <p className="text-slate-600 dark:text-slate-400 text-lg">
+            <p className="text-muted-foreground text-lg">
               전문가가 선정한 주요 인사이트
             </p>
           </div>
@@ -317,11 +317,11 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
 
   if (viewMode === 'list') {
     return (
-      <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
+      <Card className="overflow-hidden hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 hover:-translate-y-1 transition-all duration-300 group bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30 border-border/60 dark:border-gray-700">
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/3 relative h-48 md:h-auto">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 flex items-center justify-center">
-              <BookOpen className="h-10 w-10 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-indigo-100/80 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
+              <BookOpen className="h-10 w-10 text-primary group-hover:scale-110 transition-transform duration-300" />
             </div>
             {featured && (
               <Badge className="absolute top-3 left-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0">
@@ -333,18 +333,18 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
           <div className="md:w-2/3 p-6">
             <div className="flex items-center gap-3 mb-3">
               <Badge variant="secondary">{post.category}</Badge>
-              <span className="text-sm text-slate-500 dark:text-slate-400">
+              <span className="text-sm text-muted-foreground/70">
                 {new Date(post.date).toLocaleDateString('ko-KR')}
               </span>
             </div>
             
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
               <Link href={`/insights/market-intelligence/${post.slug}`}>
                 {post.title}
               </Link>
             </h3>
             
-            <p className="text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
+            <p className="text-muted-foreground mb-4 line-clamp-2">
               {post.excerpt}
             </p>
             
@@ -354,11 +354,11 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
                   <Avatar className="h-8 w-8">
                     <AvatarFallback>{post.author[0]}</AvatarFallback>
                   </Avatar>
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
+                  <span className="text-sm text-muted-foreground">
                     {post.author}
                   </span>
                 </div>
-                <span className="text-sm text-slate-500 dark:text-slate-400">
+                <span className="text-sm text-muted-foreground/70">
                   {post.readTime}
                 </span>
               </div>
@@ -366,20 +366,20 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleLike}
-                  className="flex items-center gap-1 text-slate-500 hover:text-red-500 transition-colors"
+                  className="flex items-center gap-1 text-muted-foreground/70 hover:text-red-500 transition-colors"
                 >
                   <Heart className={cn('h-4 w-4', isLiked && 'fill-current text-red-500')} />
                   <span className="text-sm">{likes}</span>
                 </button>
                 {post.views && (
-                  <div className="flex items-center gap-1 text-slate-500">
+                  <div className="flex items-center gap-1 text-muted-foreground/70">
                     <Eye className="h-4 w-4" />
                     <span className="text-sm">{post.views}</span>
                   </div>
                 )}
                 <button
                   onClick={handleShare}
-                  className="text-slate-500 hover:text-blue-500 transition-colors"
+                  className="text-muted-foreground/70 hover:text-primary transition-colors"
                 >
                   <Share2 className="h-4 w-4" />
                 </button>
@@ -392,10 +392,10 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
   }
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+    <Card className="overflow-hidden hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 hover:-translate-y-2 transition-all duration-300 group bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30 border-border/60 dark:border-gray-700">
       <CardHeader className="p-0">
-        <div className="relative h-48 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 flex items-center justify-center">
-          <BookOpen className="h-12 w-12 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+        <div className="relative h-48 bg-gradient-to-br from-blue-50/80 to-indigo-100/80 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
+          <BookOpen className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" />
           {featured && (
             <Badge className="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0">
               ⭐ 추천
@@ -407,18 +407,18 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-3">
           <Badge variant="secondary">{post.category}</Badge>
-          <span className="text-xs text-slate-500 dark:text-slate-400">
+          <span className="text-xs text-muted-foreground/70">
             {new Date(post.date).toLocaleDateString('ko-KR')}
           </span>
         </div>
         
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+        <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
           <Link href={`/insights/market-intelligence/${post.slug}`}>
             {post.title}
           </Link>
         </h3>
         
-        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
           {post.excerpt}
         </p>
         
@@ -433,7 +433,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
           </div>
         )}
         
-        <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-4">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
           <Avatar className="h-6 w-6">
             <AvatarFallback>{post.author[0]}</AvatarFallback>
           </Avatar>
@@ -448,13 +448,13 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
           <div className="flex items-center gap-3">
             <button
               onClick={handleLike}
-              className="flex items-center gap-1 text-slate-500 hover:text-red-500 transition-colors"
+              className="flex items-center gap-1 text-muted-foreground/70 hover:text-red-500 transition-colors"
             >
               <Heart className={cn('h-4 w-4', isLiked && 'fill-current text-red-500')} />
               <span className="text-sm">{likes}</span>
             </button>
             {post.views && (
-              <div className="flex items-center gap-1 text-slate-500">
+              <div className="flex items-center gap-1 text-muted-foreground/70">
                 <Eye className="h-4 w-4" />
                 <span className="text-sm">{post.views}</span>
               </div>
@@ -465,7 +465,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
             variant="ghost"
             size="sm"
             onClick={handleShare}
-            className="text-slate-500 hover:text-blue-500"
+            className="text-muted-foreground/70 hover:text-primary"
           >
             <Share2 className="h-4 w-4" />
           </Button>

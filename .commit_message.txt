@@ -1,1 +1,7 @@
-🐛 Next.js 15 호환성 수정 - 블로그 페이지 dynamic import SSR 설정 제거
+🎨 다크모드 블로그 카드 UI 개선 - 기존 디자인 톤과 매너에 맞춤
+
+• 카드 배경: 기존 스타일에 맞는 그라데이션 (from-card to-card/50)
+• 다크모드 배경: gray-800/700 계열로 통일
+• 텍스트 색상: muted-foreground 시스템 색상으로 일관성 확보
+• 호버 효과: 기존 shadow-black/white 패턴 적용
+• 아이콘 색상: primary 색상으로 브랜드 일관성 유지
