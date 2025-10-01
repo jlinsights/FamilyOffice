@@ -27,6 +27,26 @@ export interface Seminar {
   detailsUrl?: string;
   videoUrl?: string;
   presentationUrl?: string;
+  specialInfo?: SeminarSpecialInfo;
+}
+
+export interface SeminarSpecialInfo {
+  dresscode?: string;
+  capacity?: string;
+  participationFee?: string;
+  depositDetails?: {
+    amount: number;
+    account: string;
+    deadline: string;
+    refund: string;
+  };
+  verification?: string;
+  contactPhone?: string;
+  benefits?: string[];
+  registrationDeadline?: string;
+  requiredInfo?: string[];
+  transportation?: string;
+  hybridOption?: string;
 }
 
 export interface Speaker {
