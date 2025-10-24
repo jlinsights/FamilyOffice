@@ -9,7 +9,13 @@ jest.mock('next/image', () => {
     onLoad, 
     onError, 
     ...props 
-  }: any) {
+  }: {
+    src: string;
+    alt: string;
+    onLoad?: () => void;
+    onError?: () => void;
+    [key: string]: unknown;
+  }) {
     return (
       <img
         src={src}

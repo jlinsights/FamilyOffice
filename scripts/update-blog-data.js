@@ -88,9 +88,11 @@ function optimizeBlogData() {
   }
   
   try {
-    // JavaScript 객체로 평가 (주의: 실제 운영 환경에서는 더 안전한 파싱 방법 사용)
+    // 안전한 JSON 파싱 사용 (eval 대신)
     const blogPostsString = blogPostsMatch[1];
-    const blogPosts = eval(`(${blogPostsString})`);
+    // JSON 형태로 변환하여 안전하게 파싱
+    const jsonString = blogPostsString.replace(/(\w+):/g, '"$1":').replace(/'/g, '"');
+    const blogPosts = JSON.parse(jsonString);
     
     // 카테고리 업데이트
     const updatedCategories = updateBlogCategories(blogPosts);
@@ -170,7 +172,10 @@ function validateBlogData() {
     const blogPostsMatch = blogDataContent.match(/export const blogPosts: Record<string, BlogPost> = ({[\s\S]*?});/);
     
     if (blogPostsMatch) {
-      const blogPosts = eval(`(${blogPostsMatch[1]})`);
+      // 안전한 JSON 파싱 사용 (eval 대신)
+      const blogPostsString = blogPostsMatch[1];
+      const jsonString = blogPostsString.replace(/(\w+):/g, '"$1":').replace(/'/g, '"');
+      const blogPosts = JSON.parse(jsonString);
       const requiredFields = ['id', 'title', 'slug', 'excerpt', 'content', 'date', 'author', 'category'];
       
       let validationErrors = [];

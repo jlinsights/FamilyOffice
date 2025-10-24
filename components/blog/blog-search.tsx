@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -14,9 +14,9 @@ export function BlogSearch() {
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [isSearching, setIsSearching] = useState(false);
 
-  // 디바운스된 검색 함수
-  const debouncedSearch = useCallback(
-    debounce((query: string) => {
+  // 디바운스된 검색 함수 - useMemo로 debounce 함수를 메모화
+  const debouncedSearchFn = useMemo(
+    () => debounce((query: string) => {
       const url = new URL(window.location.href);
       
       if (query) {
@@ -30,6 +30,8 @@ export function BlogSearch() {
     }, 500),
     [router]
   );
+
+  const debouncedSearch = useCallback(debouncedSearchFn, [debouncedSearchFn]);
 
   const handleSearchChange = (value: string) => {
     setSearchQuery(value);

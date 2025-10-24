@@ -63,12 +63,12 @@ export function BlogContentAdvanced({
   const [loadedPages, setLoadedPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
-  // URL parameters
-  const selectedCategory = searchParams.get('category') || '';
-  const searchQuery = searchParams.get('search') || '';
-  const selectedTags = searchParams.get('tags')?.split(',').filter(Boolean) || [];
-  const sortBy = (searchParams.get('sort') as SortOption) || 'latest';
-  const dateRange = searchParams.get('date') || 'all';
+  // URL parameters - memoize to prevent unnecessary re-renders
+  const selectedCategory = useMemo(() => searchParams.get('category') || '', [searchParams]);
+  const searchQuery = useMemo(() => searchParams.get('search') || '', [searchParams]);
+  const selectedTags = useMemo(() => searchParams.get('tags')?.split(',').filter(Boolean) || [], [searchParams]);
+  const sortBy = useMemo(() => (searchParams.get('sort') as SortOption) || 'latest', [searchParams]);
+  const dateRange = useMemo(() => searchParams.get('date') || 'all', [searchParams]);
 
   // Filter and sort posts
   const filteredPosts = useMemo(() => {
