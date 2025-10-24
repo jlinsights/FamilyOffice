@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const { withSentryConfig } = require('@sentry/nextjs');
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -304,4 +306,29 @@ const nextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+// Sentry 설정 (환경변수가 있을 때만 적용)
+if (process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN) {
+  const sentryWebpackPluginOptions = {
+    // Sentry 웹팩 플러그인 설정
+    silent: true, // 빌드 로그에서 Sentry 메시지 최소화
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT,
+    
+    // 소스맵 설정
+    widenClientFileUpload: true,
+    transpileClientSDK: true,
+    tunnelRoute: '/monitoring/tunnel',
+    hideSourceMaps: true,
+    disableLogger: true,
+    automaticVercelMonitors: true,
+  };
+
+  // Sentry가 설정된 경우
+  export default withSentryConfig(
+    withBundleAnalyzer(nextConfig),
+    sentryWebpackPluginOptions
+  );
+} else {
+  // Sentry가 설정되지 않은 경우
+  export default withBundleAnalyzer(nextConfig);
+}

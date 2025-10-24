@@ -93,7 +93,6 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
   '법인세 절세 전략': '/tax-strategy#corporate',
   '개인세 절세 전략': '/tax-strategy#personal',
   '승계세 절세 전략': '/tax-strategy#succession',
-  '법인종신보험 절세': '/tax-strategy#corporate-life-insurance',
   '가지급금 절세 솔루션': '/tax-strategy#provisional-payment',
   '자기주식 절세 활용': '/tax-strategy#treasury-stock',
   
@@ -115,23 +114,6 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
   '승계 세무 최적화': '/business-succession-strategy',
   '경영권 안정화': '/business-succession-strategy',
   
-  // 법인종신보험 전략
-  '법인명의 종신보험': '/corporate-life-insurance',
-  '법인종신보험': '/corporate-life-insurance',
-  '법인보험': '/corporate-life-insurance',
-  '기업보험': '/corporate-life-insurance',
-  '임원보험': '/corporate-life-insurance',
-  '퇴직금보험': '/corporate-life-insurance',
-  '절세보험': '/corporate-life-insurance',
-  '법인세 절세보험': '/corporate-life-insurance',
-  '상속세 대비보험': '/corporate-life-insurance',
-  '유동성 확보보험': '/corporate-life-insurance',
-  '자산보전보험': '/corporate-life-insurance',
-  '삼성생명 법인보험': '/corporate-life-insurance',
-  '변액종신보험': '/corporate-life-insurance#variable',
-  '유니버셜보험': '/corporate-life-insurance#universal',
-  '보험료 손금처리': '/corporate-life-insurance',
-  '계약자대출': '/corporate-life-insurance',
   
   // 기업보험 & 금융솔루션
   '기업인증 컨설팅': '/business-certification',
@@ -351,28 +333,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           situation: '건설업 C사, 중대재해처벌법 대응 필요',
           solution: '종합적인 기업보장보험 설계',
           result: '법적 리스크 최소화 및 임직원 만족도 향상'
-        }
-      },
-      {
-        title: '법인종신보험',
-        description: '경영진의 사망보험금을 활용한 기업 자금조달 및 세무최적화 전략',
-        features: [
-          '경영진 사망보장',
-          '기업 유동성 확보',
-          '세무최적화 설계',
-          '상속세 절감 효과'
-        ],
-        benefits: [
-          '낮은 실효세율 적용',
-          '기업 유동성 개선',
-          '상속세 부담 경감',
-          '안정적 자금 확보'
-        ],
-        targetClient: '대표이사, 주요 임원진',
-        caseStudy: {
-          situation: '제조업 B사 대표, 상속세 부담 우려',
-          solution: '법인종신보험을 통한 세무최적화 설계',
-          result: '상속세 30% 절감 및 기업 안정성 확보'
         }
       },
       {

@@ -158,18 +158,6 @@ export const targetKeywords: Record<string, KeywordData> = {
     metaDescription: '경영인정기보험으로 기업 핵심인물 리스크 완전 보장. 사망·질병 시 기업 손실 보상, 보험료 손금처리, 해약환급금 활용. 맞춤 설계 상담.'
   },
 
-  corporateLifeInsurance: {
-    primary: '법인종신보험',
-    secondary: ['법인종신보험 절세', '법인보험 해약환급금', '퇴직금 준비', '법인보험 손금'],
-    intent: 'commercial',
-    difficulty: 'medium',
-    priority: 2,
-    monthlyVolume: 600,
-    targetPosition: 5,
-    landingPage: '/corporate-life-insurance',
-    metaTitle: '법인종신보험 | 평생보장부터 퇴직금 준비까지',
-    metaDescription: '법인종신보험 완벽 활용법. 평생보장, 보험료 손금처리, 해약환급금으로 퇴직금 준비, 상속재원 확보까지. 절세와 보장을 동시에.'
-  },
 
   healthInsurance: {
     primary: '건강보험',

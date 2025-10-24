@@ -40,11 +40,6 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
         description: '체계적인 승계 전략으로 상속세 50% 절감과 경영권 안정화'
       },
       {
-        href: '/corporate-life-insurance',
-        label: '법인종신보험',
-        description: '법인세 절세와 자금 확보를 동시에 실현하는 보험 솔루션'
-      },
-      {
         href: '/inheritance-gift-tax',
         label: '상속·증여세 가이드',
         description: '국세청 공식 자료 기반 상속·증여세 완벽 해설과 절세 전략'

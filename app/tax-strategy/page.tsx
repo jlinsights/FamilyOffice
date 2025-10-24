@@ -275,20 +275,6 @@ const TaxStrategyPage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {[
                     {
-                      title: "법인종신보험 활용",
-                      description: "법인계약 종신보험을 통한 세무효율성 극대화",
-                      benefits: [
-                        "법인세법상 손금인정 100%",
-                        "상속세 부담 대폭 경감",
-                        "기업 유동성 개선 효과",
-                        "낮은 실효세율 적용"
-                      ],
-                      expectedSaving: "연 2,000만원",
-                      caseStudy: "제조업 B사: 상속세 30% 절감 달성",
-                      icon: Shield,
-                      color: "emerald"
-                    },
-                    {
                       title: "가지급금 정리 전략",
                       description: "가지급금 해소를 통한 세무리스크 제거",
                       benefits: [
@@ -692,7 +678,7 @@ const TaxStrategyPage = () => {
                   company: "제조업 K사",
                   industry: "자동차부품 제조",
                   challenge: "가업승계 과정에서 높은 세금 부담 우려",
-                  solution: "가업상속공제 + 단계적 증여 + 법인종신보험 활용",
+                  solution: "가업상속공제 + 단계적 증여 활용",
                   results: {
                     before: "예상 상속세 50억원",
                     after: "실제 상속세 15억원", 
@@ -706,7 +692,7 @@ const TaxStrategyPage = () => {
                   company: "IT기업 S사",
                   industry: "소프트웨어 개발",
                   challenge: "급성장으로 인한 법인세 부담 급증",
-                  solution: "법인종신보험 + 경영인정기보험 + 연구개발비 최적화",
+                  solution: "경영인정기보험 + 연구개발비 최적화",
                   results: {
                     before: "연간 법인세 8억원",
                     after: "연간 법인세 5.6억원",

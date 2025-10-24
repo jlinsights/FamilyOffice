@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 import { Analytics } from '@/components/analytics';
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { DomainMigrationBanner } from '@/components/domain-migration-banner';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { SEOErrorBoundary } from '@/components/seo-error-boundary';
@@ -12,6 +14,7 @@ import { KakaoSDK } from '@/components/kakao/kakao-sdk';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { WebVitalsTracker } from '@/components/web-vitals-tracker';
+import { KoreanPerformanceTracker } from '@/components/korean-performance-tracker';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
 import { ChannelTalk } from '@/components/channel-talk';
 import { DebugStyles } from './debug-styles';
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
     default: 'FamilyOffice S - 성공한 기업가·자산가를 위한 가업승계·자산관리 전문 플랫폼',
     template: '%s | FamilyOffice S',
   },
-  description: '【성공한 기업가·고액자산가 전용】 법인보험 × 가업승계 통합솔루션 | 개인자산 30억+ 맞춤 설계 | 기업재해보장·경영인정기·법인종신보험·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너',
+  description: '【성공한 기업가·고액자산가 전용】 법인보험 × 가업승계 통합솔루션 | 개인자산 30억+ 맞춤 설계 | 기업재해보장·경영인정기·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너',
   icons: {
     icon: [
       { url: '/favicon.ico?v=2025', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
@@ -252,14 +255,6 @@ export default function RootLayout({
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "법인종신보험 자산전략",
-                      "description": "미래 비전 실현을 위한 장기 자산계획"
-                    }
-                  },
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
                       "name": "M&A 실행 기반 세무최적화",
                       "description": "즉시 실행 가능한 구체적 세무절세 방안"
                     }
@@ -411,6 +406,7 @@ export default function RootLayout({
             <Toaster />
             <Analytics />
             <WebVitalsTracker />
+            <KoreanPerformanceTracker />
             <KakaoPixel 
               pixelId={process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || ''} 
               debug={process.env.NODE_ENV === 'development'} 
@@ -467,6 +463,10 @@ export default function RootLayout({
             />
           </ThemeProvider>
         </ErrorBoundary>
+        
+        {/* Vercel Analytics & Speed Insights */}
+        <VercelAnalytics />
+        <SpeedInsights />
       </body>
     </html>
   );

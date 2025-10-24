@@ -132,7 +132,6 @@ function generateBreadcrumbItems(pathname: string, showHome: boolean): Breadcrum
     '/services': '서비스',
     '/business-succession-strategy': '기업승계 전략',
     '/tax-strategy': '세무최적화',
-    '/corporate-life-insurance': '기업임원 생명보험',
     '/key-person-insurance': '핵심인력보험',
     '/program': 'CEO 교육 프로그램',
     '/seminar': '세미나',

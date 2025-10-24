@@ -469,12 +469,6 @@ const CEOChecklistPage = () => {
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
-                      <Link href="/corporate-life-insurance">
-                        <Shield className="h-5 w-5 mr-2" />
-                        법인종신보험
-                      </Link>
-                    </Button>
 
                     <Button variant="outline" size="lg" asChild>
                       <Link href="/inheritance-gift-tax">

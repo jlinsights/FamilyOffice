@@ -1,5 +1,10 @@
 {
   "version": 2,
+  "functions": {
+    "app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
   "headers": [
     {
       "source": "/api/(.*)",
@@ -70,7 +75,7 @@
       "schedule": "30 0 * * 2"
     },
     {
-      "path": "/api/cron/sync-newsletter",
+      "path": "/api/cron/sync-newsletter", 
       "schedule": "30 22 * * 4"
     }
   ]

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '절세의 미학 | Smart Tax Strategy | FamilyOffice S',
-  description: '삼성생명과 함께하는 체계적인 절세 전략으로 법인세 30%, 소득세 40%, 상속세 50% 절감을 경험하세요. 법인종신보험, 가업승계, 자기주식 활용 등 검증된 절세 솔루션을 제공합니다.',
+  description: '삼성생명과 함께하는 체계적인 절세 전략으로 법인세 30%, 소득세 40%, 상속세 50% 절감을 경험하세요. 가업승계, 자기주식 활용 등 검증된 절세 솔루션을 제공합니다.',
   keywords: [
     '절세의 미학',
     '절세 전략',
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     '소득세 절세', 
     '상속세 절세',
     '삼성생명',
-    '법인종신보험',
     '가업승계',
     '자기주식',
     '경정청구',
