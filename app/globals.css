@@ -145,6 +145,65 @@
     background-clip: text;
   }
 
+  /* 다크모드 시인성 개선을 위한 향상된 텍스트 색상 */
+  .text-premium-gold-enhanced {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .text-premium-gold-enhanced {
+    background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: brightness(1.2) contrast(1.1);
+  }
+
+  .text-premium-navy-enhanced {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .text-premium-navy-enhanced {
+    background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: brightness(1.1) contrast(1.05);
+  }
+
+  .text-green-enhanced {
+    color: #16a34a;
+  }
+
+  .dark .text-green-enhanced {
+    color: #4ade80;
+    filter: brightness(1.1) contrast(1.05);
+  }
+
+  .text-purple-enhanced {
+    color: #9333ea;
+  }
+
+  .dark .text-purple-enhanced {
+    color: #c084fc;
+    filter: brightness(1.1) contrast(1.05);
+  }
+
+  /* 통계 설명 텍스트 시인성 개선 */
+  .text-stat-description {
+    color: rgb(107 114 128);
+  }
+
+  .dark .text-stat-description {
+    color: rgb(209 213 219);
+    font-weight: 500;
+  }
+
   /* 럭셔리 쉐도우 효과 */
   .shadow-premium {
     box-shadow: 
@@ -176,6 +235,28 @@
     box-shadow: 
       0 8px 32px 0 rgba(31, 38, 135, 0.15),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* 다크모드 시인성 개선을 위한 향상된 유리 효과 */
+  .glass-premium-enhanced {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .dark .glass-premium-enhanced {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 12px 40px 0 rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   /* 프리미엄 호버 효과 */

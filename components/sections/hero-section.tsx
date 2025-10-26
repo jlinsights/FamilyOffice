@@ -79,8 +79,8 @@ export const HeroSection = memo(function HeroSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 mb-10 sm:mb-12 md:mb-14 lg:mb-20 animate-slide-up"
           style={{ animationDelay: '400ms' }}
         >
-          <div className="text-center glass-premium rounded-2xl p-6 hover-premium">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-gold mb-2 lg:mb-3">
+          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-gold-enhanced mb-2 lg:mb-3">
               <AnimatedCounter
                 end={20}
                 suffix="년+"
@@ -89,10 +89,10 @@ export const HeroSection = memo(function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground font-medium">Family Office 전문 경험</div>
+            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">Family Office 전문 경험</div>
           </div>
-          <div className="text-center glass-premium rounded-2xl p-6 hover-premium">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-navy mb-2 lg:mb-3">
+          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-navy-enhanced mb-2 lg:mb-3">
               <AnimatedCounter
                 end={100}
                 suffix="+"
@@ -101,14 +101,14 @@ export const HeroSection = memo(function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground font-medium">
+            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
               VIP 고객
               <br className="hidden sm:inline" />
               <span className="sm:hidden"> </span>패밀리 서비스
             </div>
           </div>
-          <div className="text-center glass-premium rounded-2xl p-6 hover-premium">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-600 dark:text-green-400 mb-2 lg:mb-3">
+          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-enhanced mb-2 lg:mb-3">
               <AnimatedCounter
                 end={10}
                 suffix="조+"
@@ -117,14 +117,14 @@ export const HeroSection = memo(function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground font-medium">
+            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
               관리 자산
               <br className="hidden sm:inline" />
               <span className="sm:hidden"> </span>규모
             </div>
           </div>
-          <div className="text-center glass-premium rounded-2xl p-6 hover-premium">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2 lg:mb-3">
+          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-purple-enhanced mb-2 lg:mb-3">
               <AnimatedCounter
                 end={98}
                 suffix="%"
@@ -133,7 +133,7 @@ export const HeroSection = memo(function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-muted-foreground font-medium">
+            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
               고객 만족도
               <br className="hidden sm:inline" />
               <span className="sm:hidden"> </span>평가
