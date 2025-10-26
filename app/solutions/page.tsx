@@ -115,7 +115,7 @@ const ServicePageContent = () => {
             >
               <strong>중견기업 CEO</strong>와 <strong>고액자산가</strong>를 위한 맞춤형 <strong>패밀리오피스 서비스</strong>.{' '}
               <span className="font-semibold text-primary">
-                포트폴리오 관리, 투자자문, 세무 컨설팅, 보험설계
+                법인종신보험 설계, 포트폴리오 관리, 투자자문, 세무 컨설팅
               </span>{' '}
               까지 원스톱 <strong>자산관리 솔루션</strong>을 제공합니다
             </p>
@@ -273,7 +273,7 @@ const ServicePageContent = () => {
                 <span className="text-primary">{totalCategories}개 분야</span> {totalServices}개 프리미엄 <strong>자산관리 서비스</strong>
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                <strong>개인자산 30억+ 고액자산가</strong>와 <strong>중견기업 CEO</strong>를 위한 <span className="font-bold text-primary">맞춤형 패밀리오피스 솔루션</span>. 포트폴리오 관리부터 세무최적화까지 통합 <strong>자산관리 컨설팅</strong>을 제공합니다
+                <strong>개인자산 30억+ 고액자산가</strong>와 <strong>중견기업 CEO</strong>를 위한 <span className="font-bold text-primary">맞춤형 패밀리오피스 솔루션</span>. <strong>법인종신보험</strong> 설계부터 포트폴리오 관리, 세무최적화까지 통합 <strong>자산관리 컨설팅</strong>을 제공합니다
               </p>
               
               {/* Success Rate Indicators */}
@@ -563,7 +563,15 @@ const ServicePageContent = () => {
             </div>
 
             <div className="max-w-3xl mx-auto space-y-4">
-              {[
+              [
+                {
+                  question: "법인종신보험이 자산관리에 꼭 필요한가요?",
+                  answer: "법인종신보험은 CEO의 유고시 리스크 관리와 세무 최적화를 동시에 해결하는 핵심 도구입니다. 사망보장을 통한 기업 안정성 확보, 해약환급금을 통한 퇴직금 준비, 상속세 납부 재원 확보 등 다목적 활용이 가능하여 성공한 기업가에게 필수적입니다."
+                },
+                {
+                  question: "법인종신보험의 세무상 혜택은 무엇인가요?",
+                  answer: "법인에서 납입하는 보험료는 손금 처리가 가능하고, 사망보험금은 비과세로 수령할 수 있습니다. 또한 해약환급금은 퇴직금 지급 재원으로 활용하여 법인의 현금 흐름을 개선하고, 가업승계 시 상속세 납부 재원으로도 활용 가능합니다."
+                },
                 {
                   question: "컨설팅 비용은 어떻게 되나요?",
                   answer: "기업 규모와 서비스 범위에 따라 맞춤 견적을 제공합니다. 초기 상담은 무료이며, 구체적인 비용은 현황 분석 후 투명하게 안내드립니다."
