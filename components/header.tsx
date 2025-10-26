@@ -26,6 +26,7 @@ export const Header = memo(function Header({
   isScrolled = false,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileSubmenus, setMobileSubmenus] = useState<{ [key: string]: boolean }>({});
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { isAuthenticated, isLoading } = useSupabaseKakaoAuth();
@@ -38,13 +39,28 @@ export const Header = memo(function Header({
   const toggleMobileMenu: MouseEventHandler<HTMLButtonElement> = useCallback(
     e => {
       e.preventDefault();
-      setIsMobileMenuOpen(prev => !prev);
+      setIsMobileMenuOpen(prev => {
+        const newState = !prev;
+        // 메뉴를 닫을 때 모든 서브메뉴도 닫기
+        if (!newState) {
+          setMobileSubmenus({});
+        }
+        return newState;
+      });
     },
     []
   );
 
   const handleMobileLinkClick = useCallback(() => {
     setIsMobileMenuOpen(false);
+    setMobileSubmenus({});
+  }, []);
+
+  const toggleMobileSubmenu = useCallback((label: string) => {
+    setMobileSubmenus(prev => ({
+      ...prev,
+      [label]: !prev[label]
+    }));
   }, []);
 
   // 키보드 네비게이션 처리
@@ -52,6 +68,7 @@ export const Header = memo(function Header({
     (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
+        setMobileSubmenus({});
       }
     },
     [isMobileMenuOpen]
@@ -266,32 +283,44 @@ export const Header = memo(function Header({
               <div key={item.href || item.label}>
                 {item.submenu && item.submenu.length > 0 ? (
                   <div className="space-y-1">
-                    <div className="px-3 py-2 text-base font-medium text-foreground">
+                    <button
+                      onClick={() => toggleMobileSubmenu(item.label)}
+                      className="w-full flex items-center justify-between px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                      aria-expanded={mobileSubmenus[item.label] || false}
+                      aria-label={`${item.label} 메뉴 ${mobileSubmenus[item.label] ? '접기' : '펼치기'}`}
+                    >
                       {item.label}
-                    </div>
-                    <div className="pl-4 space-y-1">
-                      {item.submenu.map((subItem: NavigationSubItem) => (
-                        <Link
-                          key={subItem.href}
-                          href={subItem.href}
-                          target={subItem.isExternal ? '_blank' : undefined}
-                          rel={
-                            subItem.isExternal
-                              ? 'noopener noreferrer'
-                              : undefined
-                          }
-                          className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
-                          onClick={handleMobileLinkClick}
-                          aria-label={
-                            subItem.isExternal
-                              ? `${subItem.label} (새 창에서 열림)`
-                              : subItem.label
-                          }
-                        >
-                          {subItem.label}
-                        </Link>
-                      ))}
-                    </div>
+                      <ChevronDown 
+                        className={`h-4 w-4 transition-transform duration-200 ${
+                          mobileSubmenus[item.label] ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </button>
+                    {mobileSubmenus[item.label] && (
+                      <div className="pl-4 space-y-1 animate-in slide-in-from-top-2 duration-200">
+                        {item.submenu.map((subItem: NavigationSubItem) => (
+                          <Link
+                            key={subItem.href}
+                            href={subItem.href}
+                            target={subItem.isExternal ? '_blank' : undefined}
+                            rel={
+                              subItem.isExternal
+                                ? 'noopener noreferrer'
+                                : undefined
+                            }
+                            className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                            onClick={handleMobileLinkClick}
+                            aria-label={
+                              subItem.isExternal
+                                ? `${subItem.label} (새 창에서 열림)`
+                                : subItem.label
+                            }
+                          >
+                            {subItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <Link
