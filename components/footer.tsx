@@ -54,6 +54,12 @@ const KakaoIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const TistoryIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-5.334 0-9.347-4.504-8.164-8.544C2.92 5.604 6.966 2.783 12 2.783c5.034 0 9.08 2.821 10.066 6.862zM8.5 8c.828 0 1.5.672 1.5 1.5S9.328 11 8.5 11 7 10.328 7 9.5 7.672 8 8.5 8zm3 0c.828 0 1.5.672 1.5 1.5S12.328 11 11.5 11 10 10.328 10 9.5 10.672 8 11.5 8zm3 0c.828 0 1.5.672 1.5 1.5S15.328 11 14.5 11 13 10.328 13 9.5 13.672 8 14.5 8z"/>
+  </svg>
+);
+
 export const Footer = memo(function Footer() {
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -186,19 +192,13 @@ export const Footer = memo(function Footer() {
                   <span className="sr-only">카카오톡 채널</span>
                 </Link>
                 <Link
-                  href="https://brunch.co.kr/@familyoffice"
+                  href="https://family-office.tistory.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105 overflow-hidden"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-orange-500 hover:text-white transition-all hover:scale-105"
                 >
-                  <Image 
-                    src={theme === 'dark' ? "/images/brunch-logo-dark.svg" : "/images/brunch-logo-light.svg"}
-                    alt="Brunch"
-                    width={24}
-                    height={24}
-                    className="h-6 w-6 object-contain"
-                  />
-                  <span className="sr-only">Brunch</span>
+                  <TistoryIcon className="h-4 w-4" />
+                  <span className="sr-only">Tistory Blog</span>
                 </Link>
               </div>
 
