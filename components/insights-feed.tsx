@@ -39,7 +39,7 @@ export default function InsightsFeed({
       if (category) params.append('category', category);
       params.append('limit', (limit * 2).toString()); // 필터링을 위해 더 많은 데이터 가져오기
 
-      const response = await fetch(`/api/insights-rss?${params}`);
+      const response = await fetch(`/api/insights?${params}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -47,8 +47,15 @@ export default function InsightsFeed({
       const data = await response.json();
       console.log('Fetched content:', data);
       
-      if (data.items && Array.isArray(data.items)) {
-        setContent(data.items);
+      // API 응답 형식에 맞게 수정: data.data 또는 data.items
+      const items = data.data || data.items || [];
+      
+      if (Array.isArray(items)) {
+        // 중복 ID 제거 (같은 ID를 가진 첫 번째 항목만 유지)
+        const uniqueItems = Array.from(
+          new Map(items.map(item => [item.id, item])).values()
+        );
+        setContent(uniqueItems);
       } else {
         console.warn('No items found in response');
         setContent([]);

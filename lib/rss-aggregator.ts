@@ -225,8 +225,17 @@ export class RSSAggregator {
    * 유틸리티 메소드들
    */
   private generateId(source: string, guid: string, index: number): string {
+    // 고유한 ID를 생성하기 위해 hash 함수 사용
     const base = guid || `${source}-${index}-${Date.now()}`;
-    return `${source}-${Buffer.from(base).toString('base64').slice(0, 16)}`;
+    let hash = 0;
+    for (let i = 0; i < base.length; i++) {
+      const char = base.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    // 음수를 양수로 변환하고 hex로 변환
+    const hashHex = Math.abs(hash).toString(36);
+    return `${source}-${hashHex}-${index}`;
   }
 
   private extractContent(item: ParsedFeedItem): string {
