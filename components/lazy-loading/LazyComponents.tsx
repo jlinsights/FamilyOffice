@@ -90,15 +90,7 @@ export const LazyKoreanMarketInsight = createLazyComponent(
   ChartSkeleton
 );
 
-export const LazyStockCard = createLazyComponent(
-  () => import('@/components/financial/stock-card'),
-  'StockCard'
-);
-
-export const LazyForexCard = createLazyComponent(
-  () => import('@/components/financial/forex-card'),
-  'ForexCard'
-);
+// 금융 카드 제거됨
 
 // Cal.com components with lazy loading
 export const LazyCalComInline = createLazyComponent(

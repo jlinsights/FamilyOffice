@@ -1,6 +1,5 @@
 // 고도화된 SEO 엔진 - AI 기반 메타데이터 최적화
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 
 interface SEOContext {
   domain: string;

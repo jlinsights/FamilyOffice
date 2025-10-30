@@ -23,6 +23,7 @@ import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
 
 import { CalComPopup } from '@/components/cal-com-popup';
+import { SelfCheckSafety } from '@/components/forms/self-check-safety';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -294,7 +295,7 @@ export default function SeriousAccidentLawPage() {
 
               <div className="grid md:grid-cols-2 gap-8 mb-12">
                 {/* 적용 대상 */}
-                <Card className="border-2 border-red-200 dark:border-red-800">
+                <Card className="border-2 border-red-200 dark:border-red-800 bg-card text-card-foreground">
                   <CardHeader>
                     <CardTitle className="flex items-center text-red-700 dark:text-red-400">
                       <Building className="h-5 w-5 mr-2" />
@@ -324,7 +325,7 @@ export default function SeriousAccidentLawPage() {
                 </Card>
 
                 {/* 처벌 수준 */}
-                <Card className="border-2 border-orange-200 dark:border-orange-800">
+                <Card className="border-2 border-orange-200 dark:border-orange-800 bg-card text-card-foreground">
                   <CardHeader>
                     <CardTitle className="flex items-center text-orange-700 dark:text-orange-400">
                       <Scale className="h-5 w-5 mr-2" />
@@ -355,16 +356,16 @@ export default function SeriousAccidentLawPage() {
               </div>
 
               {/* 중대재해 정의 */}
-              <Card className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/10 dark:to-orange-900/10 border-red-200 dark:border-red-800">
+              <Card className="bg-card text-card-foreground border border-border">
                 <CardHeader>
-                  <CardTitle className="text-center text-red-700 dark:text-red-400">
+                  <CardTitle className="text-center text-foreground">
                     중대재해의 정의
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold mb-3 text-red-600 dark:text-red-400">
+                      <h4 className="font-semibold mb-3 text-red-700 dark:text-red-400">
                         📍 중대산업재해
                       </h4>
                       <ul className="text-sm space-y-2 text-muted-foreground">
@@ -375,7 +376,7 @@ export default function SeriousAccidentLawPage() {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-3 text-orange-600 dark:text-orange-400">
+                      <h4 className="font-semibold mb-3 text-orange-700 dark:text-orange-400">
                         📍 중대시민재해
                       </h4>
                       <ul className="text-sm space-y-2 text-muted-foreground">
@@ -422,7 +423,7 @@ export default function SeriousAccidentLawPage() {
                 const colorClasses = colorClassesMap[risk.color as keyof typeof colorClassesMap];
 
                 return (
-                  <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-card text-card-foreground border border-border">
                     <CardContent className="p-6 text-center">
                       <div className={`w-16 h-16 ${colorClasses} rounded-full flex items-center justify-center mx-auto mb-4`}>
                         <Icon className="h-8 w-8" />
@@ -440,57 +441,7 @@ export default function SeriousAccidentLawPage() {
 
             {/* 위험도 자가진단 */}
             <div id="risk-assessment" className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold mb-4 text-blue-700 dark:text-blue-400">
-                  위험도 자가진단 체크리스트
-                </h3>
-                <p className="text-blue-600 dark:text-blue-300">
-                  3개 이상 해당되면 즉시 전문가 상담이 필요합니다.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-blue-700 dark:text-blue-400 mb-4">📋 안전관리 현황</h4>
-                  {[
-                    '안전보건관리책임자가 지정되어 있지 않다',
-                    '안전보건관리규정이 없거나 최신화되지 않았다',
-                    '정기 안전교육이 제대로 실시되지 않고 있다',
-                    '작업환경측정을 정기적으로 하지 않는다',
-                    '안전점검 기록이 체계적으로 관리되지 않는다'
-                  ].map((item, index) => (
-                    <label key={index} className="flex items-start space-x-3 cursor-pointer">
-                      <input type="checkbox" className="mt-1 rounded border-blue-300" />
-                      <span className="text-sm">{item}</span>
-                    </label>
-                  ))}
-                </div>
-
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-blue-700 dark:text-blue-400 mb-4">⚠️ 위험 요소</h4>
-                  {[
-                    '기계설비나 전기설비가 노후화되었다',
-                    '화학물질을 취급하고 있다',
-                    '고소작업이나 중량물 취급이 빈번하다',
-                    '최근 1년 내 안전사고가 발생한 적이 있다',
-                    '임원배상책임보험 등 관련 보험이 없다'
-                  ].map((item, index) => (
-                    <label key={index} className="flex items-start space-x-3 cursor-pointer">
-                      <input type="checkbox" className="mt-1 rounded border-blue-300" />
-                      <span className="text-sm">{item}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-8 text-center">
-                <CalComPopup
-                  buttonText="진단 결과 전문가 상담"
-                  variant="default"
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700"
-                />
-              </div>
+              <SelfCheckSafety />
             </div>
           </div>
         </section>
@@ -514,7 +465,7 @@ export default function SeriousAccidentLawPage() {
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-8">
                 {responseSteps.map((step, index) => (
-                  <Card key={index} className="hover:shadow-xl transition-all duration-300">
+                  <Card key={index} className="hover:shadow-xl transition-all duration-300 bg-card text-card-foreground border border-border">
                     <CardHeader>
                       <div className="flex items-center gap-4">
                         <div className={`w-16 h-16 bg-gradient-to-r ${step.color} rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg`}>
@@ -576,7 +527,7 @@ export default function SeriousAccidentLawPage() {
 
             <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {insuranceProducts.map((product, index) => (
-                <Card key={index} className="hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                <Card key={index} className="hover:shadow-xl transition-all duration-300 relative overflow-hidden bg-card text-card-foreground border border-border">
                   {index === 1 && (
                     <div className="absolute top-0 right-0 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-1 text-xs font-bold rounded-bl-lg">
                       추천
@@ -668,7 +619,7 @@ export default function SeriousAccidentLawPage() {
 
               <div className="space-y-6">
                 {/* FAQ 1 */}
-                <Card className="p-6">
+                <Card className="p-6 bg-card text-card-foreground border border-border">
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <span className="text-primary font-bold text-sm">Q</span>
@@ -687,7 +638,7 @@ export default function SeriousAccidentLawPage() {
                 </Card>
 
                 {/* FAQ 2 */}
-                <Card className="p-6">
+                <Card className="p-6 bg-card text-card-foreground border border-border">
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <span className="text-primary font-bold text-sm">Q</span>
@@ -706,7 +657,7 @@ export default function SeriousAccidentLawPage() {
                 </Card>
 
                 {/* FAQ 3 */}
-                <Card className="p-6">
+                <Card className="p-6 bg-card text-card-foreground border border-border">
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <span className="text-primary font-bold text-sm">Q</span>
@@ -725,7 +676,7 @@ export default function SeriousAccidentLawPage() {
                 </Card>
 
                 {/* FAQ 4 */}
-                <Card className="p-6">
+                <Card className="p-6 bg-card text-card-foreground border border-border">
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <span className="text-primary font-bold text-sm">Q</span>
@@ -745,7 +696,7 @@ export default function SeriousAccidentLawPage() {
                 </Card>
 
                 {/* FAQ 5 */}
-                <Card className="p-6">
+                <Card className="p-6 bg-card text-card-foreground border border-border">
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <span className="text-primary font-bold text-sm">Q</span>
@@ -765,7 +716,7 @@ export default function SeriousAccidentLawPage() {
                 </Card>
 
                 {/* FAQ 6 */}
-                <Card className="p-6">
+                <Card className="p-6 bg-card text-card-foreground border border-border">
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <span className="text-primary font-bold text-sm">Q</span>

@@ -7,7 +7,7 @@ This directory contains all reusable components for the FamilyOffice S platform,
 ```
 components/
 ├── ui/                     # shadcn/ui base components
-├── financial/              # Financial data & market components  
+├── financial/              # (removed) 이전 금융 컴포넌트 디렉터리  
 ├── forms/                  # Contact & consultation forms
 ├── icons/                  # Custom SVG icons
 ├── lazy-loading/           # Performance optimization components
@@ -37,9 +37,7 @@ components/
 - **`NewsletterSubscription`** - Beehiiv newsletter integration
 
 ### Financial Components
-- **`StockCard`** - Real-time stock data display
-- **`FinancialDashboard`** - Market overview dashboard
-- **`ForexCard`** - Currency exchange rates
+Removed. 실시간 금융 기능은 프로젝트 범위에서 제외되었습니다.
 
 ### Optimization Components
 - **`OptimizedImage`** - Enhanced image loading with WebP support
@@ -152,8 +150,7 @@ import { Card } from '@/components/ui/card';
 import { OptimizedImage } from '@/components/optimized-image-loader';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 
-// Financial components
-import StockCard from '@/components/financial/stock-card';
+// Financial components (removed)
 ```
 
 ### Styling Conventions

@@ -136,7 +136,7 @@ export function ServicesSection() {
         </div>
 
         {/* 통계 섹션 */}
-        <div className="bg-gradient-to-r from-amber-50/50 to-blue-50/50 rounded-3xl p-8 mb-12 shadow-premium">
+        <div className="rounded-3xl p-8 mb-12 shadow-premium bg-card text-card-foreground border border-border dark:bg-card">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold mb-4 text-foreground font-playfair">
               <span className="text-premium-gold">
@@ -157,8 +157,8 @@ export function ServicesSection() {
               { value: '20년+', label: 'Family Office 경험', icon: Shield, color: 'text-green-600' },
               { value: '98%', label: '고객 만족도', icon: Target, color: 'text-purple-600' },
             ].map((stat, index) => (
-              <div key={index} className="text-center glass-premium rounded-2xl p-4 hover-premium">
-                <div className={`text-2xl font-bold mb-1 ${stat.color}`}>
+              <div key={index} className="text-center rounded-2xl p-4 hover-premium bg-background/40 dark:bg-background/30 border border-border">
+                <div className={`text-2xl font-bold mb-1 ${stat.color} drop-shadow-sm`}>
                   {stat.value}
                 </div>
                 <div className="text-sm text-muted-foreground font-medium">

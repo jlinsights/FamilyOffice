@@ -20,8 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import ForexCard from './financial/forex-card';
-import StockCard from './financial/stock-card';
+// 금융 API 제거에 따라 실시간 카드 의존성 제거
 
 /**
  * 한국 시장 인사이트 컴포넌트 - FamilyOffice S 특화 기능
@@ -281,7 +280,7 @@ export default function KoreanMarketInsight({
         {/* 시장 현황 */}
         <TabsContent value="market" className="space-y-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* 주요 주식 */}
+            {/* 주요 주식 (데모 표기) */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
@@ -289,14 +288,18 @@ export default function KoreanMarketInsight({
                   대형주 현황
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <StockCard symbol="005930.KS" autoRefresh={autoRefresh} />
-                <StockCard symbol="000660.KS" autoRefresh={autoRefresh} />
-                <StockCard symbol="035420.KS" autoRefresh={autoRefresh} />
+              <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[{s:'005930',p:74500,c:1.2},{s:'000660',p:153000,c:-0.8},{s:'035420',p:183000,c:0.4}].map((it,idx)=> (
+                  <div key={idx} className="rounded-lg border p-3 bg-card/60">
+                    <div className="text-sm text-muted-foreground">{it.s}</div>
+                    <div className="text-xl font-bold">{it.p.toLocaleString()}원</div>
+                    <div className={`text-sm ${it.c>0?'text-green-600':'text-red-600'}`}>{it.c>0?'+':''}{it.c}%</div>
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
-            {/* 환율 */}
+            {/* 환율 (데모 표기) */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
@@ -304,22 +307,14 @@ export default function KoreanMarketInsight({
                   주요 환율
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <ForexCard
-                  fromCurrency="USD"
-                  toCurrency="KRW"
-                  autoRefresh={autoRefresh}
-                />
-                <ForexCard
-                  fromCurrency="EUR"
-                  toCurrency="KRW"
-                  autoRefresh={autoRefresh}
-                />
-                <ForexCard
-                  fromCurrency="JPY"
-                  toCurrency="KRW"
-                  autoRefresh={autoRefresh}
-                />
+              <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[{p:'USD/KRW',r:1361.5,c:0.2},{p:'EUR/KRW',r:1458.3,c:-0.1},{p:'JPY/KRW',r:9.12,c:0.05}].map((fx,idx)=> (
+                  <div key={idx} className="rounded-lg border p-3 bg-card/60">
+                    <div className="text-sm text-muted-foreground">{fx.p}</div>
+                    <div className="text-xl font-bold">{fx.r.toLocaleString()}</div>
+                    <div className={`text-sm ${fx.c>0?'text-green-600':'text-red-600'}`}>{fx.c>0?'+':''}{fx.c}%</div>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </div>

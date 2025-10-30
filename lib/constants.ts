@@ -59,16 +59,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
         label: '통합 자산관리',
         description: '자산 전체를 아우르는 통합적 관리 전략'
       },
-      {
-        href: '/inheritance-gift-tax',
-        label: '상속·증여 설계',
-        description: '가족의 미래를 위한 체계적인 자산 이전'
-      },
-      {
-        href: '/tax-strategy',
-        label: '세무·법률 자문',
-        description: '복잡한 세무 및 법률 이슈 해결'
-      }
+      // 중복 항목 제거됨: 상속·증여 설계, 세무·법률 자문은 상단 항목과 중복
     ]
   },
   { href: '/insights', label: '인사이트' },

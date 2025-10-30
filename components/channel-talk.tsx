@@ -63,8 +63,8 @@ export function ChannelTalk() {
                   setTimeout(() => {
                     const channelButton = document.querySelector('#ch-plugin > div:first-child');
                     if (channelButton) {
-                      (channelButton as HTMLElement).style.bottom = 'max(20px, env(safe-area-inset-bottom))';
-                      (channelButton as HTMLElement).style.right = 'max(20px, env(safe-area-inset-right))';
+                      channelButton.style.bottom = 'max(20px, env(safe-area-inset-bottom))';
+                      channelButton.style.right = 'max(20px, env(safe-area-inset-right))';
                     }
                   }, 1000);
                 }

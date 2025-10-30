@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
+import { DualPillarSection } from '@/components/sections/dual-pillar-section';
+import { SelfCheckCTASection } from '@/components/sections/self-check-cta';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
@@ -126,6 +128,8 @@ export default function HomePage() {
       </section> */}
       
       {/* Services Section */}
+      <DualPillarSection />
+      <SelfCheckCTASection />
       <ServicesSection />
       
       {/* Multimedia Content Section */}
