@@ -1,1 +1,1 @@
-🔧 Vercel 설정 최소화로 배포 문제 해결 시도
+🔒 Playwright 보안 취약점 해결 및 dependencies 업데이트

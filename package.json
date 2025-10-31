@@ -29,7 +29,6 @@
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:report": "playwright show-report",
     "test:performance": "node tests/performance/load-tests.js",
-    
     "test:performance:standard": "artillery run artillery.yml",
     "test:all": "npm run test:unit && npm run test:integration && npm run test:security && npm run test:e2e && npm run test:performance",
     "test:coverage:report": "jest --coverage && open coverage/lcov-report/index.html",
@@ -119,8 +118,11 @@
     "svix": "^1.67.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "1.0.7",
-    
     "zod": "3.24.1"
+  },
+  "overrides": {
+    "playwright": "^1.56.1",
+    "@playwright/test": "^1.56.1"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
@@ -137,7 +139,7 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "@types/ws": "^8.18.1",
-    "artillery": "^2.0.20",
+    "artillery": "^2.0.26",
     "critters": "^0.0.23",
     "cross-env": "^7.0.3",
     "eslint": "9.31.0",
