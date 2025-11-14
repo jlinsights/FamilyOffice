@@ -234,7 +234,14 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
   '고용지원금 활용 컨설팅': '/finance-tax-labor/employment-subsidy',
   
   // HR 지원 (기존 항목 유지)
-  '중소기업 노무관리': '/hr-labor-management'
+  '중소기업 노무관리': '/hr-labor-management',
+  
+  // 종신보험 관련
+  '개인/법인 종신보험': '/life-insurance',
+  '법인종신보험 설계': '/life-insurance#corporate',
+  '개인종신보험 설계': '/life-insurance#personal',
+  '상속세 납부재원 종신보험': '/life-insurance#inheritance',
+  '퇴직금 종신보험 활용': '/life-insurance#retirement'
 };
 
 /**
@@ -247,6 +254,30 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: '기업의 리스크 관리와 금융 최적화를 위한 종합 솔루션을 제공합니다.',
     icon: Shield,
     services: [
+      {
+        title: '개인/법인 종신보험',
+        description: 'CEO 및 가족을 위한 평생보장 종신보험과 법인명의 종신보험을 통한 세무최적화 솔루션',
+        features: [
+          '평생보장 사망보험금',
+          '해약환급금 퇴직금 활용',
+          '상속세 납부재원 확보',
+          '법인 손금처리 가능',
+          '비과세 보험금 수령',
+          '가업승계 연계설계'
+        ],
+        benefits: [
+          'CEO 유고시 리스크 완전 차단',
+          '법인 현금흐름 개선',
+          '상속·증여세 절세효과',
+          '안정적 자산증식 수단'
+        ],
+        targetClient: '중견기업 CEO, 고액자산가 (개인자산 30억+)',
+        caseStudy: {
+          situation: '제조업 K사 대표(55세), 가업승계 준비 및 상속세 납부재원 확보 필요',
+          solution: '법인명의 종신보험 10억 + 개인명의 종신보험 5억 설계',
+          result: '연 2억 보험료로 상속세 50% 절감 + 퇴직금 15억 확보'
+        }
+      },
       {
         title: '개인/법인 건강보험',
         description: '개인과 기업을 위한 종합 건강보험 및 의료비 보장 솔루션',

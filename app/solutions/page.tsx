@@ -304,7 +304,7 @@ const ServicePageContent = () => {
                   onClick={() => setSelectedCategory('corporate-insurance-finance')}
                   className="font-semibold text-sm"
                 >
-                  🏢 기업보험·금융 (9개)
+                  🏢 기업보험·금융 (10개)
                 </Button>
                 <Button
                   variant={selectedCategory === 'business-succession' ? 'default' : 'outline'}
