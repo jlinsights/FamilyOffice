@@ -18,10 +18,11 @@ export function DualPillarSection() {
             한국 중견·패밀리기업 전용 리스크·세무 통합
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            법적 리스크와 세무 리스크, 두 축으로 줄입니다
+            이중 방어선으로 완성하는 기업 지속성
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            중대재해처벌법 대응(Compliance+Insurance)과 상속·증여(법인명의) 유동성 설계를 통합 제공합니다
+            중대재해처벌법 통합 대응 × 승계세무 최적화<br />
+            <span className="text-base font-medium text-primary">Compliance + Insurance + Tax Engineering = 차세대 경영 기반</span>
           </p>
         </div>
 
