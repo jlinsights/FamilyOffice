@@ -20,13 +20,11 @@ const SelfCheckCTASection = dynamic(() => import('@/components/sections/self-che
 });
 
 const Footer = dynamic(() => import('@/components/footer').then(mod => ({ default: mod.Footer })), {
-  loading: () => <div className="py-12 bg-muted animate-pulse"><div className="container mx-auto px-6 h-16 bg-background/50 rounded"></div></div>,
-  ssr: false // Footer can be client-side only
+  loading: () => <div className="py-12 bg-muted animate-pulse"><div className="container mx-auto px-6 h-16 bg-background/50 rounded"></div></div>
 });
 
 const MultimediaContentSection = dynamic(() => import('@/components/sections/multimedia-content-section'), {
-  loading: () => <div className="py-20 bg-background animate-pulse"><div className="container mx-auto px-6 h-64 bg-muted/50 rounded"></div></div>,
-  ssr: false // Multimedia content can be loaded after page load
+  loading: () => <div className="py-20 bg-background animate-pulse"><div className="container mx-auto px-6 h-64 bg-muted/50 rounded"></div></div>
 });
 
 export const metadata: Metadata = generateMetadata(
