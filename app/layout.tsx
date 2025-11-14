@@ -467,6 +467,36 @@ export default function RootLayout({
         {/* Vercel Analytics & Speed Insights */}
         <VercelAnalytics />
         <SpeedInsights />
+        
+        {/* Vercel Toolbar 비활성화 JavaScript */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Vercel Toolbar 완전 제거
+              if (typeof window !== 'undefined') {
+                // 기존 toolbar 요소 제거
+                const removeToolbar = () => {
+                  const toolbars = document.querySelectorAll('[data-vercel-toolbar], #vercel-toolbar, .vercel-toolbar, iframe[src*="vercel"]');
+                  toolbars.forEach(el => el.remove());
+                };
+                
+                // 페이지 로드 시 실행
+                document.addEventListener('DOMContentLoaded', removeToolbar);
+                window.addEventListener('load', removeToolbar);
+                
+                // MutationObserver로 동적 생성 감지 및 제거
+                if (window.MutationObserver) {
+                  const observer = new MutationObserver(() => removeToolbar());
+                  observer.observe(document.body, { childList: true, subtree: true });
+                }
+                
+                // Vercel 관련 전역 변수 차단
+                window.NEXT_PUBLIC_FLAGS = window.NEXT_PUBLIC_FLAGS || {};
+                window.NEXT_PUBLIC_FLAGS.vercel_toolbar = false;
+              }
+            `
+          }}
+        />
       </body>
     </html>
   );

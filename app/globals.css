@@ -2,6 +2,30 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* Vercel Toolbar 완전 비활성화 */
+[data-vercel-toolbar] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Vercel Toolbar 모든 가능한 선택자 차단 */
+#vercel-toolbar,
+.vercel-toolbar,
+[id*="vercel-toolbar"],
+[class*="vercel-toolbar"],
+iframe[src*="vercel"],
+iframe[src*="toolbar"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+}
+
 /* Aceternity UI Animations */
 @layer utilities {
   .animate-scroll {
