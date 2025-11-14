@@ -1,5 +1,5 @@
 // Beehiiv API Client for Newsletter Integration
-// https://newsletter.familyoffices.vip - 매주 화요일 오전 9:30, 금요일 오전 7:30 발송
+// https://newsletter.familyoffices.vip - 매주 월요일 오전 7:30, 금요일 오전 7:30 발송
 
 interface BeehiivConfig {
   apiKey: string;

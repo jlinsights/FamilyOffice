@@ -174,12 +174,12 @@ export default function WeeklyBriefPage() {
       <section className="weekly-brief relative py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <Badge variant="outline" className="mb-6 text-lg px-4 py-2">매주 화요일과 금요일 오전 7:30 발송</Badge>
+            <Badge variant="outline" className="mb-6 text-lg px-4 py-2">매주 월요일과 금요일 오전 7:30 발송</Badge>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
               주간 브리프
             </h1>
             <p className="subtitle text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
-              매주 화요일과 금요일 오전 7:30, 
+              매주 월요일과 금요일 오전 7:30, 
               <br className="hidden sm:block" />
               기업승계와 자산관리 핵심 인사이트를 전달합니다
             </p>
@@ -681,7 +681,7 @@ export default function WeeklyBriefPage() {
                     Weekly Brief 구독하기
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    매주 화요일과 금요일 오전 7:30, 중소중견기업 CEO를 위한 맞춤형 인사이트를 제공합니다. 
+                    매주 월요일과 금요일 오전 7:30, 중소중견기업 CEO를 위한 맞춤형 인사이트를 제공합니다. 
                     5분 내 읽을 수 있는 핵심 정보로 경영 의사결정을 지원합니다.
                   </p>
                   <div className="space-y-4">
@@ -716,7 +716,7 @@ export default function WeeklyBriefPage() {
             지금 바로 구독하고 다음 호를 받아보세요
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8">
-            매주 화요일과 금요일 오전 7시 30분, 당신의 투자 결정을 돕는 인사이트가 도착합니다
+            매주 월요일과 금요일 오전 7시 30분, 당신의 투자 결정을 돕는 인사이트가 도착합니다
           </p>
           
           <div className="space-y-4 max-w-md mx-auto">

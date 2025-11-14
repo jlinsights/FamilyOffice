@@ -68,12 +68,12 @@ npm run vercel-build # Vercel-specific build process
 
 - **Cal.com** for consultation booking (`@calcom/embed-react`)
 - **Newsletter**: Beehiiv platform (https://newsletter.familyoffices.vip)
-  - 매주 화요일 오전 9:30, 금요일 오전 7:30 정기 발송
+  - 매주 월요일 오전 7:30, 금요일 오전 7:30 정기 발송
   - API 통합으로 블로그에서 직접 구독 가능
   - 태그 기반 세분화 및 추적
 - **Blog System**: /blog 페이지에서 자산관리 인사이트 제공
-  - **발행 일정**: 화요일 오후 2:30 (실무 가이드) + 목요일 저녁 8:00 (전략 분석)
-  - **콘텐츠 전략**: 교육형(화) + 분석형(목)
+  - **발행 일정**: 수요일 발행 (주간 금융 인사이트)
+  - **콘텐츠 전략**: 실무 중심 가이드 및 시장 분석
   - SEO 최적화된 콘텐츠 관리
   - Shield.io 배지 통합
   - 뉴스레터 구독 연동

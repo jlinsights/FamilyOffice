@@ -175,14 +175,10 @@ export default function BlogPage() {
                   📅 정기 발행 일정
                 </Badge>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 gap-4 text-sm">
                 <div className="text-center">
-                  <div className="font-semibold text-foreground">화요일 오후 2:30</div>
-                  <div className="text-muted-foreground">실무 가이드</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-semibold text-foreground">목요일 저녁 8:00</div>
-                  <div className="text-muted-foreground">전략 분석</div>
+                  <div className="font-semibold text-foreground">수요일 발행</div>
+                  <div className="text-muted-foreground">주간 금융 인사이트</div>
                 </div>
               </div>
             </div>
@@ -453,7 +449,7 @@ export default function BlogPage() {
                 전문가 인사이트를 받아보세요
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                매주 화요일과 목요일, 패밀리오피스 전문가의 최신 분석과 실무 가이드를 이메일로 받아보세요
+                매주 수요일과 주요 뉴스레터 발송일, 패밀리오피스 전문가의 최신 분석과 실무 가이드를 이메일로 받아보세요
               </p>
             </div>
             
