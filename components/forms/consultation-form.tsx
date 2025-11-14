@@ -3,7 +3,7 @@
 import { CheckCircle, AlertCircle } from 'lucide-react';
 
 import type React from 'react';
-import { useState } from 'react';
+import { useState, useCallback, memo } from 'react';
 
 // import { createClient } from "@/lib/supabase/client"
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -11,13 +11,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
-export function ConsultationForm() {
+export const ConsultationForm = memo(function ConsultationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     setFormError(null);
@@ -56,15 +56,17 @@ export function ConsultationForm() {
     }
 
     try {
-      // 임시로 콘솔에 폼 데이터 출력 (실제 환경에서는 Supabase에 저장)
-      console.log('Form submission:', {
+      // TODO: 실제 환경에서는 Supabase에 저장
+      const formData = {
         name: name.trim(),
         email: email.trim(),
         phone: phone.trim(),
         service_type: service || null,
         message: message?.trim() || null,
         status: 'pending',
-      });
+      };
+      // 실제 API 엔드포인트로 전송
+      // await submitConsultationForm(formData);
 
       // 임시 성공 처리
       setFormSuccess(true);
@@ -89,7 +91,7 @@ export function ConsultationForm() {
     } finally {
       setIsSubmitting(false);
     }
-  }
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
@@ -257,6 +259,6 @@ export function ConsultationForm() {
       </Button>
     </form>
   );
-}
+});
 
 export default ConsultationForm;

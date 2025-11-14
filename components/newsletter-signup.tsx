@@ -2,18 +2,18 @@
 
 import { Mail, Send, CheckCircle } from 'lucide-react';
 
-import { useState } from 'react';
+import { useState, useCallback, memo } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export default function NewsletterSignup() {
+const NewsletterSignup = memo(function NewsletterSignup() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
@@ -51,7 +51,7 @@ export default function NewsletterSignup() {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [email]);
 
   if (isSuccess) {
     return (
@@ -123,4 +123,6 @@ export default function NewsletterSignup() {
       </div>
     </div>
   );
-}
+});
+
+export default NewsletterSignup;

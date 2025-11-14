@@ -3,16 +3,30 @@ import dynamic from 'next/dynamic';
 
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { HeroSection } from '@/components/sections/hero-section';
-import { ServicesSection } from '@/components/sections/services-section';
-import { DualPillarSection } from '@/components/sections/dual-pillar-section';
-import { SelfCheckCTASection } from '@/components/sections/self-check-cta';
-import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
 
-// Dynamic import for multimedia section (optional content)
+// Dynamic imports for better performance - load non-critical sections lazily
+const ServicesSection = dynamic(() => import('@/components/sections/services-section').then(mod => ({ default: mod.ServicesSection })), {
+  loading: () => <div className="py-20 bg-background animate-pulse"><div className="container mx-auto px-6 h-20 bg-muted/50 rounded"></div></div>
+});
+
+const DualPillarSection = dynamic(() => import('@/components/sections/dual-pillar-section').then(mod => ({ default: mod.DualPillarSection })), {
+  loading: () => <div className="py-20 bg-muted/30 animate-pulse"><div className="container mx-auto px-6 h-32 bg-background/50 rounded"></div></div>
+});
+
+const SelfCheckCTASection = dynamic(() => import('@/components/sections/self-check-cta').then(mod => ({ default: mod.SelfCheckCTASection })), {
+  loading: () => <div className="py-16 bg-background animate-pulse"><div className="container mx-auto px-6 h-24 bg-muted/50 rounded"></div></div>
+});
+
+const Footer = dynamic(() => import('@/components/footer').then(mod => ({ default: mod.Footer })), {
+  loading: () => <div className="py-12 bg-muted animate-pulse"><div className="container mx-auto px-6 h-16 bg-background/50 rounded"></div></div>,
+  ssr: false // Footer can be client-side only
+});
+
 const MultimediaContentSection = dynamic(() => import('@/components/sections/multimedia-content-section'), {
-  loading: () => <div className="py-20 bg-background"><div className="container mx-auto px-6 text-center">멀티미디어 콘텐츠 로딩 중...</div></div>
+  loading: () => <div className="py-20 bg-background animate-pulse"><div className="container mx-auto px-6 h-64 bg-muted/50 rounded"></div></div>,
+  ssr: false // Multimedia content can be loaded after page load
 });
 
 export const metadata: Metadata = generateMetadata(

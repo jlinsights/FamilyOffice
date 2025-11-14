@@ -5,6 +5,17 @@
 import { useEffect } from 'react';
 import { reportWebVitals } from '@/lib/core-web-vitals';
 
+// Performance API 타입 정의
+interface LayoutShift extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+  processingEnd: number;
+}
+
 export function useWebVitals(): void {
   useEffect(() => {
     // Web Performance Observer를 사용하여 메트릭 수집
@@ -25,7 +36,6 @@ export function useWebVitals(): void {
                 name: 'LCP',
                 value: lastEntry.startTime,
                 id: `lcp-${Date.now()}`,
-                delta: 0,
               } as any);
             }
           });
@@ -48,7 +58,6 @@ export function useWebVitals(): void {
                   name: 'FCP',
                   value: entry.startTime,
                   id: `fcp-${Date.now()}`,
-                  delta: 0,
                 } as any);
               }
             });
@@ -70,25 +79,26 @@ export function useWebVitals(): void {
           const maxWindowGap = 5000; // 5초
 
           const observer = new PerformanceObserver((entryList) => {
-            const entries = entryList.getEntries() as any[];
+            const entries = entryList.getEntries() as PerformanceEntry[];
             
             entries.forEach((entry) => {
+              const layoutEntry = entry as LayoutShift;
               // 레이아웃 시프트가 사용자 입력 직후에 발생했다면 제외
-              if (!entry.hadRecentInput) {
+              if (!layoutEntry.hadRecentInput) {
                 const firstSessionEntry = sessionEntries[0];
                 const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
 
                 // 새로운 세션이거나 기존 세션 내에서 발생한 경우
                 if (sessionValue && 
                     lastSessionEntry &&
-                    entry.startTime - lastSessionEntry.startTime < maxSessionGap &&
+                    layoutEntry.startTime - lastSessionEntry.startTime < maxSessionGap &&
                     firstSessionEntry &&
-                    entry.startTime - firstSessionEntry.startTime < maxWindowGap) {
-                  sessionValue += entry.value;
-                  sessionEntries.push(entry);
+                    layoutEntry.startTime - firstSessionEntry.startTime < maxWindowGap) {
+                  sessionValue += layoutEntry.value;
+                  sessionEntries.push(layoutEntry);
                 } else {
-                  sessionValue = entry.value;
-                  sessionEntries = [entry];
+                  sessionValue = layoutEntry.value;
+                  sessionEntries = [layoutEntry];
                 }
 
                 // 최대값 업데이트
@@ -102,7 +112,6 @@ export function useWebVitals(): void {
               name: 'CLS',
               value: clsValue,
               id: `cls-${Date.now()}`,
-              delta: 0,
             } as any);
           });
           
@@ -120,12 +129,11 @@ export function useWebVitals(): void {
             const firstEntry = entries[0];
             
             if (firstEntry) {
-              const fidEntry = firstEntry as any;
+              const fidEntry = firstEntry as PerformanceEventTiming;
               reportWebVitals({
                 name: 'FID',
                 value: fidEntry.processingStart - fidEntry.startTime,
                 id: `fid-${Date.now()}`,
-                delta: 0,
               } as any);
             }
           });
@@ -148,7 +156,6 @@ export function useWebVitals(): void {
               name: 'TTFB',
               value: ttfb,
               id: `ttfb-${Date.now()}`,
-              delta: 0,
             } as any);
           }
         } catch (error) {
@@ -162,15 +169,15 @@ export function useWebVitals(): void {
           const observer = new PerformanceObserver((entryList) => {
             const entries = entryList.getEntries();
             
-            entries.forEach((entry: any) => {
-              if (entry.processingStart && entry.processingEnd) {
-                const inp = entry.processingEnd - entry.startTime;
+            entries.forEach((entry) => {
+              const eventEntry = entry as PerformanceEventTiming;
+              if (eventEntry.processingStart && eventEntry.processingEnd) {
+                const inp = eventEntry.processingEnd - eventEntry.startTime;
                 
                 reportWebVitals({
                   name: 'INP',
                   value: inp,
                   id: `inp-${Date.now()}`,
-                  delta: 0,
                 } as any);
               }
             });
@@ -199,9 +206,10 @@ export function useWebVitals(): void {
           const entries = entryList.getEntries();
           let finalCLS = 0;
           
-          entries.forEach((entry: any) => {
-            if (!entry.hadRecentInput) {
-              finalCLS += entry.value;
+          entries.forEach((entry) => {
+            const layoutEntry = entry as LayoutShift;
+            if (!layoutEntry.hadRecentInput) {
+              finalCLS += layoutEntry.value;
             }
           });
 
@@ -210,7 +218,6 @@ export function useWebVitals(): void {
               name: 'CLS',
               value: finalCLS,
               id: `cls-final-${Date.now()}`,
-              delta: 0,
             } as any);
           }
         });
@@ -242,12 +249,10 @@ export function useWebVitals(): void {
       window.addEventListener('load', () => {
         setTimeout(() => {
           const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-          const nav = navigation as any;
           console.log('📊 페이지 성능 요약:', {
-            'DOM 로드': `${Math.round(navigation.domContentLoadedEventEnd - (nav.navigationStart || 0))}ms`,
-            '페이지 로드': `${Math.round(navigation.loadEventEnd - (nav.navigationStart || 0))}ms`,
+            'DOM 로드': `${Math.round(navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart)}ms`,
+            '페이지 로드': `${Math.round(navigation.loadEventEnd - navigation.loadEventStart)}ms`,
             'TTFB': `${Math.round(navigation.responseStart - navigation.requestStart)}ms`,
-            '네트워크': nav.effectiveType || 'unknown',
           });
         }, 1000);
       });

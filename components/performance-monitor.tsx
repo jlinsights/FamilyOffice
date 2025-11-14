@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, memo } from 'react';
 
 interface PerformanceMetrics {
   fcp: number | null;
@@ -11,7 +11,7 @@ interface PerformanceMetrics {
   inp: number | null;
 }
 
-export function PerformanceMonitor() {
+export const PerformanceMonitor = memo(function PerformanceMonitor() {
   const measureWebVitals = useCallback(() => {
     // 브라우저가 PerformanceObserver를 지원하는지 확인
     if (typeof window === 'undefined' || !('PerformanceObserver' in window)) {
@@ -37,7 +37,6 @@ export function PerformanceMonitor() {
         );
         if (fcpEntry) {
           metrics.fcp = fcpEntry.startTime;
-          console.log('FCP:', metrics.fcp);
         }
       });
       fcpObserver.observe({ type: 'paint', buffered: true });
@@ -52,7 +51,6 @@ export function PerformanceMonitor() {
         const lastEntry = entries[entries.length - 1];
         if (lastEntry) {
           metrics.lcp = lastEntry.startTime;
-          console.log('LCP:', metrics.lcp);
         }
       });
       lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
@@ -67,7 +65,6 @@ export function PerformanceMonitor() {
         entries.forEach((entry: any) => {
           if (entry.processingStart && entry.startTime) {
             metrics.fid = entry.processingStart - entry.startTime;
-            console.log('FID:', metrics.fid);
           }
         });
       });
@@ -87,7 +84,6 @@ export function PerformanceMonitor() {
           }
         });
         metrics.cls = clsValue;
-        console.log('CLS:', metrics.cls);
       });
       clsObserver.observe({ type: 'layout-shift', buffered: true });
     } catch (error) {
@@ -101,7 +97,6 @@ export function PerformanceMonitor() {
         const navigationEntry = navigationEntries[0] as PerformanceNavigationTiming;
         if (navigationEntry && navigationEntry.responseStart && navigationEntry.requestStart) {
           metrics.ttfb = navigationEntry.responseStart - navigationEntry.requestStart;
-          console.log('TTFB:', metrics.ttfb);
         }
       }
     } catch (error) {
@@ -111,7 +106,7 @@ export function PerformanceMonitor() {
     // 성능 메트릭을 서버로 전송 (선택사항)
     if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
       // 실제 구현에서는 분석 서비스로 전송
-      console.log('Performance Metrics:', metrics);
+      // Performance metrics are now sent via the PerformanceMonitor class
     }
   }, []);
 
@@ -125,10 +120,10 @@ export function PerformanceMonitor() {
   }, [measureWebVitals]);
 
   return null; // 이 컴포넌트는 UI를 렌더링하지 않음
-}
+});
 
 // 성능 최적화를 위한 지연 로딩 컴포넌트
-export function LazyLoadComponent({
+export const LazyLoadComponent = memo(function LazyLoadComponent({
   children,
   threshold = 0.1,
   rootMargin = '50px',
@@ -160,7 +155,7 @@ export function LazyLoadComponent({
   }, [threshold, rootMargin]);
 
   return <>{children}</>;
-}
+});
 
 // 이미지 지연 로딩 훅
 export function useLazyImage(src: string, fallback?: string) {

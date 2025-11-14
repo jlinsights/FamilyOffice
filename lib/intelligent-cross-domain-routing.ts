@@ -11,12 +11,19 @@ interface UserProfile {
   riskTolerance?: 'conservative' | 'moderate' | 'aggressive';
 }
 
+interface SessionData {
+  visitCount: number;
+  lastVisit?: number;
+  preferences?: Record<string, string>;
+  interactions?: string[];
+}
+
 interface ContextData {
   domain: string;
   userAgent: string;
   referrer: string;
   searchQuery?: string;
-  sessionData?: any;
+  sessionData?: SessionData;
   timeOfVisit: number;
   deviceType: 'mobile' | 'tablet' | 'desktop';
   geoLocation?: string;
@@ -26,8 +33,8 @@ interface ContextData {
 
 interface RoutingDecision {
   shouldRoute: boolean;
-  targetDomain?: string;
-  targetPath?: string;
+  targetDomain?: string | undefined;
+  targetPath?: string | undefined;
   routingReason: string;
   confidence: number;
   seoImpact: {
@@ -39,10 +46,67 @@ interface RoutingDecision {
   businessValue: number;
 }
 
+interface MLModel {
+  version: string;
+  accuracy: number;
+  lastTrained: number;
+  features: string[];
+  predictions?: Record<string, number>;
+}
+
+interface UserBehaviorPattern {
+  segments: string[];
+  conversionRates: Record<string, number>;
+  preferredPaths: string[];
+  avgSessionDuration: number;
+  bounceRate: number;
+}
+
+interface UserSegmentClassification {
+  primarySegment: string;
+  secondarySegments: string[];
+  confidence: number;
+  characteristics: string[];
+}
+
+interface DomainFitnessResult {
+  currentDomainScore: number;
+  alternativeDomainScore: number;
+  gap: number;
+  reasons: string[];
+}
+
+interface CrossDomainOpportunity {
+  opportunityScore: number;
+  targetDomain: string;
+  targetPath: string;
+  conversionProbability: number;
+  seoValue: number;
+  userValue: number;
+}
+
+interface BusinessImpactResult {
+  revenueImpact: number;
+  seoImpact: number;
+  brandImpact: number;
+  longTermValue: number;
+  riskScore: number;
+}
+
+interface DomainConfig {
+  targetAssetSize: readonly [number, number];
+  preferredBusinessTypes: readonly (UserProfile['businessType'])[];
+  preferredIndustries: readonly (UserProfile['industry'])[];
+  preferredRiskTolerance: readonly (UserProfile['riskTolerance'])[];
+  brandStrength: number;
+  stabilityScore: number;
+  personalizationScore: number;
+}
+
 export class IntelligentCrossDomainRouter {
-  private mlModelCache = new Map<string, any>();
-  private userBehaviorPatterns = new Map<string, any>();
-  private routingHistory = new Map<string, RoutingDecision[]>();
+  private mlModelCache = new Map<string, MLModel>();
+  private userBehaviorPatterns = new Map<string, UserBehaviorPattern>();
+  private routingHistory = new Map<string, (RoutingDecision & { timestamp: number })[]>();
 
   // 메인 라우팅 결정 엔진
   async routeUser(
@@ -177,12 +241,7 @@ export class IntelligentCrossDomainRouter {
   private async classifyUserSegment(
     userProfile: UserProfile,
     contextData: ContextData
-  ): Promise<{
-    primarySegment: string;
-    secondarySegments: string[];
-    confidence: number;
-    characteristics: string[];
-  }> {
+  ): Promise<UserSegmentClassification> {
     
     // 특성 벡터 생성
     const featureVector = this.createFeatureVector(userProfile, contextData);
@@ -201,14 +260,9 @@ export class IntelligentCrossDomainRouter {
   private async calculateDomainFitness(
     currentDomain: string,
     userProfile: UserProfile,
-    userSegment: any,
+    userSegment: UserSegmentClassification,
     contextData: ContextData
-  ): Promise<{
-    currentDomainScore: number;
-    alternativeDomainScore: number;
-    gap: number;
-    reasons: string[];
-  }> {
+  ): Promise<DomainFitnessResult> {
     
     const domainConfigs = {
       'samsunglife.vip': {
@@ -236,32 +290,25 @@ export class IntelligentCrossDomainRouter {
     const alternativeConfig = domainConfigs[alternativeDomain as keyof typeof domainConfigs];
 
     // 현재 도메인 적합성 스코어
-    const currentScore = this.calculateFitnessScore(userProfile, userSegment, currentConfig);
+    const currentScore = this.calculateFitnessScore(userProfile, userSegment, currentConfig as unknown as DomainConfig);
     
     // 대안 도메인 적합성 스코어
-    const alternativeScore = this.calculateFitnessScore(userProfile, userSegment, alternativeConfig);
+    const alternativeScore = this.calculateFitnessScore(userProfile, userSegment, alternativeConfig as unknown as DomainConfig);
 
     return {
       currentDomainScore: currentScore,
       alternativeDomainScore: alternativeScore,
       gap: alternativeScore - currentScore,
-      reasons: this.generateFitnessReasons(userProfile, currentConfig, alternativeConfig)
+      reasons: this.generateFitnessReasons(userProfile, currentConfig as unknown as DomainConfig, alternativeConfig as unknown as DomainConfig)
     };
   }
 
   // 크로스 도메인 기회 분석
   private async analyzeCrossDomainOpportunity(
     currentDomain: string,
-    domainFitness: any,
-    userSegment: any
-  ): Promise<{
-    opportunityScore: number;
-    targetDomain: string;
-    targetPath: string;
-    conversionProbability: number;
-    seoValue: number;
-    userValue: number;
-  }> {
+    domainFitness: DomainFitnessResult,
+    userSegment: UserSegmentClassification
+  ): Promise<CrossDomainOpportunity> {
     
     // 기회 점수 계산
     const opportunityScore = Math.max(0, domainFitness.gap);
@@ -310,14 +357,8 @@ export class IntelligentCrossDomainRouter {
     sourceDomain: string,
     targetDomain: string,
     userProfile: UserProfile,
-    userSegment: any
-  ): Promise<{
-    revenueImpact: number;
-    seoImpact: number;
-    brandImpact: number;
-    longTermValue: number;
-    riskScore: number;
-  }> {
+    userSegment: UserSegmentClassification
+  ): Promise<BusinessImpactResult> {
     
     // 수익 임팩트
     const revenueImpact = this.calculateRevenueImpact(userProfile, userSegment);
@@ -347,10 +388,10 @@ export class IntelligentCrossDomainRouter {
   private makeRoutingDecision(
     currentDomain: string,
     currentPath: string,
-    domainFitness: any,
-    crossDomainOpportunity: any,
-    businessImpact: any,
-    userSegment: any
+    domainFitness: DomainFitnessResult,
+    crossDomainOpportunity: CrossDomainOpportunity,
+    businessImpact: BusinessImpactResult,
+    userSegment: UserSegmentClassification
   ): RoutingDecision {
     
     // 가중치 기반 스코어 계산
@@ -400,10 +441,11 @@ export class IntelligentCrossDomainRouter {
     const existingHistory = this.routingHistory.get(profileKey) || [];
     
     // 새 결정 추가
-    existingHistory.push({
+    const timestampedDecision: RoutingDecision & { timestamp: number } = {
       ...routingDecision,
       timestamp: Date.now()
-    } as any);
+    };
+    existingHistory.push(timestampedDecision);
     
     // 최대 100개 기록 유지
     if (existingHistory.length > 100) {
@@ -496,16 +538,17 @@ export class IntelligentCrossDomainRouter {
     ];
   }
 
-  private async applyMLClassification(featureVector: number[]): Promise<any> {
+  private async applyMLClassification(featureVector: number[]): Promise<UserSegmentClassification> {
     // 실제 구현에서는 ML 모델 API 호출
     return {
       primarySegment: 'high_value_individual',
+      secondarySegments: [],
       confidence: 0.85,
       characteristics: ['tech_savvy', 'growth_oriented']
     };
   }
 
-  private applyRuleBasedClassification(userProfile: UserProfile, contextData: ContextData): any {
+  private applyRuleBasedClassification(userProfile: UserProfile, contextData: ContextData): UserSegmentClassification {
     const segments = [];
     
     if (userProfile.assetSize && userProfile.assetSize > 10000000000) {
@@ -528,7 +571,7 @@ export class IntelligentCrossDomainRouter {
     };
   }
 
-  private combineClassifications(mlResult: any, ruleResult: any): any {
+  private combineClassifications(mlResult: UserSegmentClassification, ruleResult: UserSegmentClassification): UserSegmentClassification {
     return {
       primarySegment: mlResult.primarySegment,
       secondarySegments: [...new Set([...mlResult.characteristics, ...ruleResult.secondarySegments])],
@@ -537,7 +580,7 @@ export class IntelligentCrossDomainRouter {
     };
   }
 
-  private calculateFitnessScore(userProfile: UserProfile, userSegment: any, domainConfig: any): number {
+  private calculateFitnessScore(userProfile: UserProfile, userSegment: UserSegmentClassification, domainConfig: DomainConfig): number {
     let score = 0;
     
     // 자산 규모 적합성
@@ -568,7 +611,7 @@ export class IntelligentCrossDomainRouter {
     return Math.min(100, score);
   }
 
-  private generateFitnessReasons(userProfile: UserProfile, currentConfig: any, alternativeConfig: any): string[] {
+  private generateFitnessReasons(userProfile: UserProfile, currentConfig: DomainConfig, alternativeConfig: DomainConfig): string[] {
     const reasons = [];
     
     if (userProfile.assetSize && userProfile.assetSize < currentConfig.targetAssetSize[0]) {
@@ -586,7 +629,7 @@ export class IntelligentCrossDomainRouter {
     return reasons;
   }
 
-  private determineOptimalLandingPage(targetDomain: string, userSegment: any): string {
+  private determineOptimalLandingPage(targetDomain: string, userSegment: UserSegmentClassification): string {
     const landingPages = {
       'samsunglife.vip': {
         'ultra_high_net_worth': '/enterprise-services',
@@ -608,7 +651,7 @@ export class IntelligentCrossDomainRouter {
     return Math.min(1, (gap * 0.01) * confidence * (opportunityScore * 0.01));
   }
 
-  private calculateSEOValue(sourceDomain: string, targetDomain: string, userSegment: any): number {
+  private calculateSEOValue(sourceDomain: string, targetDomain: string, userSegment: UserSegmentClassification): number {
     const baseValue = 60;
     const segmentMultiplier = userSegment.confidence;
     const domainAuthorityBonus = sourceDomain === 'samsunglife.vip' ? 10 : 5;
@@ -616,18 +659,18 @@ export class IntelligentCrossDomainRouter {
     return Math.min(100, baseValue * segmentMultiplier + domainAuthorityBonus);
   }
 
-  private calculateUserValue(gap: number, userSegment: any): number {
+  private calculateUserValue(gap: number, userSegment: UserSegmentClassification): number {
     return Math.min(100, gap * userSegment.confidence);
   }
 
-  private calculateRevenueImpact(userProfile: UserProfile, userSegment: any): number {
+  private calculateRevenueImpact(userProfile: UserProfile, userSegment: UserSegmentClassification): number {
     const baseRevenue = 70;
     const assetMultiplier = userProfile.assetSize ? Math.log10(userProfile.assetSize) * 5 : 50;
     
     return Math.min(100, baseRevenue + assetMultiplier);
   }
 
-  private async calculateSEOImpact(sourceDomain: string, targetDomain: string, userSegment: any): Promise<number> {
+  private async calculateSEOImpact(sourceDomain: string, targetDomain: string, userSegment: UserSegmentClassification): Promise<number> {
     // 도메인 권위도 전달 계산
     const authorityTransfer = sourceDomain === 'samsunglife.vip' ? 80 : 70;
     const relevanceScore = userSegment.confidence * 100;
@@ -641,7 +684,7 @@ export class IntelligentCrossDomainRouter {
     return 75;
   }
 
-  private calculateLongTermValue(userProfile: UserProfile, userSegment: any): number {
+  private calculateLongTermValue(userProfile: UserProfile, userSegment: UserSegmentClassification): number {
     const baseValue = 65;
     const assetBonus = userProfile.assetSize && userProfile.assetSize > 5000000000 ? 20 : 10;
     const segmentBonus = userSegment.confidence * 15;
@@ -658,7 +701,7 @@ export class IntelligentCrossDomainRouter {
     return Math.min(100, risk);
   }
 
-  private generateRoutingReason(domainFitness: any, crossDomainOpportunity: any, businessImpact: any): string {
+  private generateRoutingReason(domainFitness: DomainFitnessResult, crossDomainOpportunity: CrossDomainOpportunity, businessImpact: BusinessImpactResult): string {
     if (!crossDomainOpportunity.opportunityScore || crossDomainOpportunity.opportunityScore < 50) {
       return '현재 도메인이 사용자 프로필에 최적화되어 있습니다';
     }

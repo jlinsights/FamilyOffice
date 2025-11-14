@@ -227,9 +227,9 @@ const serviceTiers = [
     name: 'Heritage Elite',
     icon: Crown,
     minAssets: '1,000억원+',
-    color: 'text-yellow-600',
-    bgColor: 'bg-gradient-to-br from-yellow-50 to-amber-100',
-    borderColor: 'border-yellow-200',
+    color: 'text-yellow-600 dark:text-yellow-400',
+    bgColor: 'bg-gradient-to-br from-yellow-50 to-amber-100 dark:from-gray-900/80 dark:to-yellow-950/40',
+    borderColor: 'border-yellow-200 dark:border-yellow-600/30',
     features: [
       '전담 패밀리오피스 설립',
       'CIO/CFO급 전문가 배정',
@@ -242,9 +242,9 @@ const serviceTiers = [
     name: 'Legacy Premium',
     icon: Diamond,
     minAssets: '500억원+',
-    color: 'text-blue-600',
-    bgColor: 'bg-gradient-to-br from-blue-50 to-indigo-100',
-    borderColor: 'border-blue-200',
+    color: 'text-blue-600 dark:text-blue-400',
+    bgColor: 'bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900/80 dark:to-blue-950/40',
+    borderColor: 'border-blue-200 dark:border-blue-600/30',
     features: [
       '멀티패밀리오피스 서비스',
       '전담 팀장급 전문가',
@@ -257,9 +257,9 @@ const serviceTiers = [
     name: 'Wealth Select',
     icon: Gem,
     minAssets: '100억원+',
-    color: 'text-green-600',
-    bgColor: 'bg-gradient-to-br from-green-50 to-emerald-100',
-    borderColor: 'border-green-200',
+    color: 'text-green-600 dark:text-green-400',
+    bgColor: 'bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900/80 dark:to-green-950/40',
+    borderColor: 'border-green-200 dark:border-green-600/30',
     features: [
       '통합 자산관리 서비스',
       '시니어급 전문가 배정',
@@ -533,10 +533,10 @@ const FamilyOfficeCenterPage = () => {
               {serviceTiers.map((tier, index) => {
                 const Icon = tier.icon;
                 return (
-                  <Card key={index} className={`h-full ${tier.bgColor} dark:bg-card/40 ${tier.borderColor} dark:border-border/50 border-2 shadow-white/5 backdrop-blur-sm rounded-3xl overflow-hidden`}>
+                  <Card key={index} className={`h-full ${tier.bgColor} ${tier.borderColor} border-2 shadow-white/5 backdrop-blur-sm rounded-3xl overflow-hidden`}>
                     <CardHeader className="text-center pb-6">
                       <div className="flex justify-center mb-4">
-                        <div className="p-4 bg-card dark:bg-card/80 rounded-2xl shadow-lg backdrop-blur-sm border border-border/30">
+                        <div className="p-4 bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-lg backdrop-blur-sm border border-border/30">
                           <Icon className={`h-12 w-12 ${tier.color}`} />
                         </div>
                       </div>
@@ -558,7 +558,7 @@ const FamilyOfficeCenterPage = () => {
                       </ul>
                       <div className="mt-8">
                         <CalComPopup
-                          className={`w-full py-3 px-6 ${tier.color === 'text-yellow-600' ? 'bg-premium-gold text-white' : tier.color === 'text-blue-600' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'} rounded-xl font-semibold hover:shadow-lg transition-all duration-300`}
+                          className={`w-full py-3 px-6 ${tier.color.includes('yellow') ? 'bg-yellow-600 hover:bg-yellow-700 dark:bg-yellow-500 dark:hover:bg-yellow-600 text-white' : tier.color.includes('blue') ? 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white' : 'bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white'} rounded-xl font-semibold hover:shadow-lg transition-all duration-300`}
                           buttonText="전용 상담 신청"
                           eventType="consultation"
                           trigger={
