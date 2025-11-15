@@ -1,1 +1,1 @@
-🚫 Vercel Toolbar 완전 비활성화 - 프로덕션 환경에서 개발도구 제거
+🎨 다크모드 UI 개선 - /life-insurance 페이지 카드 색상 최적화

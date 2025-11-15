@@ -138,7 +138,7 @@ const LifeInsurancePage = () => {
               </Badge>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-primary">평생보장</span> + <span className="text-blue-600">세무최적화</span><br />
+                <span className="text-primary">평생보장</span> + <span className="text-blue-600 dark:text-blue-400">세무최적화</span><br />
                 <span className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground">
                   CEO를 위한 <strong>개인/법인 종신보험</strong>
                 </span>
@@ -167,15 +167,15 @@ const LifeInsurancePage = () => {
                   <div className="text-sm text-muted-foreground">보장기간</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-green-600 mb-1">100%</div>
+                  <div className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400 mb-1">100%</div>
                   <div className="text-sm text-muted-foreground">손금처리</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1">50%+</div>
+                  <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">50%+</div>
                   <div className="text-sm text-muted-foreground">평균 절세</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-orange-600 mb-1">1000억+</div>
+                  <div className="text-2xl md:text-3xl font-bold text-orange-600 dark:text-orange-400 mb-1">1000억+</div>
                   <div className="text-sm text-muted-foreground">설계 실적</div>
                 </div>
               </div>
@@ -197,12 +197,12 @@ const LifeInsurancePage = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <Card className="text-center hover:shadow-xl transition-all duration-300">
+              <Card className="text-center hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5 transition-all duration-300 bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30">
                 <CardHeader>
                   <div className="w-16 h-16 mx-auto bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mb-4">
-                    <AlertTriangle className="h-8 w-8 text-red-600" />
+                    <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400" />
                   </div>
-                  <CardTitle className="text-xl text-red-600">CEO 유고시 리스크</CardTitle>
+                  <CardTitle className="text-xl text-red-600 dark:text-red-400">CEO 유고시 리스크</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
@@ -210,25 +210,25 @@ const LifeInsurancePage = () => {
                     <strong>기업가치 급락</strong> 및 <strong>경영 공백</strong>
                   </p>
                   <div className="text-sm space-y-2">
-                    <div className="flex items-center justify-center text-red-500">
+                    <div className="flex items-center justify-center text-red-500 dark:text-red-400">
                       ⚠️ 주가 하락 (평균 30-50%)
                     </div>
-                    <div className="flex items-center justify-center text-red-500">
+                    <div className="flex items-center justify-center text-red-500 dark:text-red-400">
                       ⚠️ 금융기관 신용도 하락
                     </div>
-                    <div className="flex items-center justify-center text-red-500">
+                    <div className="flex items-center justify-center text-red-500 dark:text-red-400">
                       ⚠️ 핵심 사업 중단 위험
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="text-center hover:shadow-xl transition-all duration-300">
+              <Card className="text-center hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5 transition-all duration-300 bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30">
                 <CardHeader>
                   <div className="w-16 h-16 mx-auto bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mb-4">
-                    <DollarSign className="h-8 w-8 text-orange-600" />
+                    <DollarSign className="h-8 w-8 text-orange-600 dark:text-orange-400" />
                   </div>
-                  <CardTitle className="text-xl text-orange-600">상속세 부담</CardTitle>
+                  <CardTitle className="text-xl text-orange-600 dark:text-orange-400">상속세 부담</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
@@ -236,20 +236,20 @@ const LifeInsurancePage = () => {
                     <strong>상속세율 최대 50%</strong> 부담
                   </p>
                   <div className="text-sm space-y-2">
-                    <div className="flex items-center justify-center text-orange-500">
+                    <div className="flex items-center justify-center text-orange-500 dark:text-orange-400">
                       💰 자산 100억 → 상속세 30억+
                     </div>
-                    <div className="flex items-center justify-center text-orange-500">
+                    <div className="flex items-center justify-center text-orange-500 dark:text-orange-400">
                       💰 현금 부족 시 자산 매각
                     </div>
-                    <div className="flex items-center justify-center text-orange-500">
+                    <div className="flex items-center justify-center text-orange-500 dark:text-orange-400">
                       💰 가업승계 계획 차질
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="text-center hover:shadow-xl transition-all duration-300 border-primary">
+              <Card className="text-center hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5 transition-all duration-300 border-primary/50 dark:border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20">
                 <CardHeader>
                   <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
                     <Shield className="h-8 w-8 text-primary" />
@@ -262,13 +262,13 @@ const LifeInsurancePage = () => {
                     모든 리스크를 <strong>완벽 차단</strong>
                   </p>
                   <div className="text-sm space-y-2">
-                    <div className="flex items-center justify-center text-green-500">
+                    <div className="flex items-center justify-center text-green-500 dark:text-green-400">
                       ✅ CEO 유고시 보험금 즉시 지급
                     </div>
-                    <div className="flex items-center justify-center text-green-500">
+                    <div className="flex items-center justify-center text-green-500 dark:text-green-400">
                       ✅ 상속세 납부재원 확보
                     </div>
-                    <div className="flex items-center justify-center text-green-500">
+                    <div className="flex items-center justify-center text-green-500 dark:text-green-400">
                       ✅ 법인 손금처리 세무혜택
                     </div>
                   </div>
@@ -283,7 +283,7 @@ const LifeInsurancePage = () => {
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                <span className="text-primary">개인</span> vs <span className="text-blue-600">법인</span> 종신보험 완벽 비교
+                <span className="text-primary">개인</span> vs <span className="text-blue-600 dark:text-blue-400">법인</span> 종신보험 완벽 비교
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 개인명의와 법인명의 종신보험의 <strong>차이점과 장단점</strong>을 정확히 이해하고<br />
@@ -315,8 +315,8 @@ const LifeInsurancePage = () => {
                         <tr className="border-b">
                           <th className="text-left py-4 px-4 font-semibold">비교 항목</th>
                           <th className="text-center py-4 px-4 font-semibold text-primary">개인종신보험</th>
-                          <th className="text-center py-4 px-4 font-semibold text-blue-600">법인종신보험</th>
-                          <th className="text-center py-4 px-4 font-semibold text-green-600">통합의 장점</th>
+                          <th className="text-center py-4 px-4 font-semibold text-blue-600 dark:text-blue-400">법인종신보험</th>
+                          <th className="text-center py-4 px-4 font-semibold text-green-600 dark:text-green-400">통합의 장점</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -478,11 +478,11 @@ const LifeInsurancePage = () => {
               </div>
 
               {/* 선택된 사례 상세 */}
-              <Card className="bg-gradient-to-br from-primary/5 to-blue-50 dark:from-primary/10 dark:to-blue-900/20 border-primary/20">
+              <Card className="bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30 border-border/50 dark:border-border/30 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 transition-all duration-300">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-xl font-bold">{successCases[selectedCase]?.title}</CardTitle>
-                    <Badge variant="secondary" className="bg-primary text-white">
+                    <Badge variant="secondary" className="bg-primary/10 dark:bg-primary/20 text-primary border border-primary/20 dark:border-primary/30">
                       검증된 성공사례
                     </Badge>
                   </div>
@@ -492,21 +492,21 @@ const LifeInsurancePage = () => {
                     <div className="space-y-6">
                       <div>
                         <h4 className="font-semibold mb-2 flex items-center">
-                          <AlertTriangle className="h-4 w-4 mr-2 text-orange-500" />
+                          <AlertTriangle className="h-4 w-4 mr-2 text-orange-500 dark:text-orange-400" />
                           상황 분석
                         </h4>
                         <p className="text-muted-foreground">{successCases[selectedCase]?.situation}</p>
                       </div>
                       <div>
                         <h4 className="font-semibold mb-2 flex items-center">
-                          <Target className="h-4 w-4 mr-2 text-blue-500" />
+                          <Target className="h-4 w-4 mr-2 text-blue-500 dark:text-blue-400" />
                           맞춤 솔루션
                         </h4>
                         <p className="text-muted-foreground">{successCases[selectedCase]?.solution}</p>
                       </div>
                       <div>
                         <h4 className="font-semibold mb-2 flex items-center">
-                          <Award className="h-4 w-4 mr-2 text-green-500" />
+                          <Award className="h-4 w-4 mr-2 text-green-500 dark:text-green-400" />
                           달성 결과
                         </h4>
                         <p className="text-muted-foreground font-medium">{successCases[selectedCase]?.result}</p>
@@ -523,11 +523,11 @@ const LifeInsurancePage = () => {
                           </div>
                           <div className="flex justify-between items-center">
                             <span className="text-sm text-muted-foreground">세무혜택</span>
-                            <span className="font-semibold text-green-600">{successCases[selectedCase]?.taxBenefit}</span>
+                            <span className="font-semibold text-green-600 dark:text-green-400">{successCases[selectedCase]?.taxBenefit}</span>
                           </div>
                           <div className="flex justify-between items-center">
                             <span className="text-sm text-muted-foreground">수익률</span>
-                            <span className="font-semibold text-blue-600">{successCases[selectedCase]?.roi}</span>
+                            <span className="font-semibold text-blue-600 dark:text-blue-400">{successCases[selectedCase]?.roi}</span>
                           </div>
                         </div>
                       </div>
@@ -611,10 +611,10 @@ const LifeInsurancePage = () => {
                   details: ["연 1회 정기점검", "세법 변화 대응", "보장 최적화", "가업승계 연계"]
                 }
               ].map((process, index) => (
-                <Card key={index} className="hover:shadow-lg transition-all duration-300 group">
+                <Card key={index} className="hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 transition-all duration-300 group bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30">
                   <CardHeader>
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                      <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white dark:group-hover:bg-primary transition-colors">
                         {process.icon}
                       </div>
                       <div>
@@ -628,7 +628,7 @@ const LifeInsurancePage = () => {
                     <div className="space-y-2">
                       {process.details.map((detail, idx) => (
                         <div key={idx} className="flex items-center text-sm text-muted-foreground">
-                          <CheckCircle className="h-3 w-3 mr-2 text-green-500 flex-shrink-0" />
+                          <CheckCircle className="h-3 w-3 mr-2 text-green-500 dark:text-green-400 flex-shrink-0" />
                           {detail}
                         </div>
                       ))}
@@ -680,7 +680,7 @@ const LifeInsurancePage = () => {
                   answer: "대부분의 종신보험은 계약 후에도 보장금액 증액, 납입방법 변경, 수익자 변경 등이 가능합니다. 다만, 증액의 경우 재심사가 필요하고, 변경 시 세무상 영향을 검토해야 하므로 전문가와 상담 후 진행하시는 것을 권합니다."
                 }
               ].map((faq, index) => (
-                <Card key={index} className="hover:shadow-md transition-shadow">
+                <Card key={index} className="hover:shadow-md hover:shadow-black/5 dark:hover:shadow-white/5 transition-shadow bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30">
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-lg mb-3 flex items-start">
                       <span className="text-primary font-bold mr-3 mt-1">Q.</span>
