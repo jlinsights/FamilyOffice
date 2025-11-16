@@ -291,10 +291,10 @@ export default function HealthInsurancePage() {
                     color: 'teal'
                   }
                 ].map((service, index) => (
-                  <Card key={index} className="group relative border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
+                  <Card key={index} className="group relative border-2 hover:border-primary/50 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5 transition-all duration-300 bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors">
                           <service.icon className="h-6 w-6 text-primary" />
                         </div>
                         <Badge variant="secondary" size="xs">{service.color === 'green' ? '개인' : service.color === 'blue' ? '법인' : '전문'}</Badge>
@@ -310,7 +310,7 @@ export default function HealthInsurancePage() {
                       <div className="space-y-2 mb-6">
                         {service.features.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center text-sm">
-                            <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                            <CheckCircle className="h-4 w-4 text-green-500 dark:text-green-400 mr-2 flex-shrink-0" />
                             <span className="text-muted-foreground">{feature}</span>
                           </div>
                         ))}
@@ -376,10 +376,10 @@ export default function HealthInsurancePage() {
                     savings: '연 15억원 절약'
                   }
                 ].map((case_study, index) => (
-                  <Card key={index} className="border-2 hover:border-primary/50 transition-all duration-300">
+                  <Card key={index} className="border-2 hover:border-primary/50 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 transition-all duration-300 bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30">
                     <CardContent className="p-6">
                       <div className="mb-4">
-                        <Badge variant="outline" className="text-primary border-primary/20">
+                        <Badge variant="outline" className="text-primary border-primary/20 dark:border-primary/30">
                           {case_study.category}
                         </Badge>
                       </div>
@@ -434,7 +434,7 @@ export default function HealthInsurancePage() {
                       { step: 5, title: '전문가 상담', description: '맞춤형 설계 및 최종 결정' }
                     ].map((item, index) => (
                       <div key={index} className="flex items-start space-x-4">
-                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <div className="w-8 h-8 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
                           <span className="text-primary font-bold text-sm">{item.step}</span>
                         </div>
                         <div>
@@ -455,7 +455,7 @@ export default function HealthInsurancePage() {
                       { step: 5, title: '도입 및 관리', description: '가입 절차 및 지속적인 관리 체계' }
                     ].map((item, index) => (
                       <div key={index} className="flex items-start space-x-4">
-                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <div className="w-8 h-8 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
                           <span className="text-primary font-bold text-sm">{item.step}</span>
                         </div>
                         <div>
@@ -471,11 +471,11 @@ export default function HealthInsurancePage() {
           </section>
 
           {/* CTA 섹션 */}
-          <section className="py-20 bg-gradient-to-r from-primary/5 to-primary/10">
+          <section className="py-20 bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20">
             <div className="container mx-auto px-6 text-center">
               <div className="max-w-3xl mx-auto">
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center">
                     <Phone className="h-8 w-8 text-primary" />
                   </div>
                 </div>

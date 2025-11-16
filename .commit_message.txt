@@ -1,1 +1,1 @@
-🎨 다크모드 UI 개선 - /life-insurance 페이지 카드 색상 최적화
+🎨 다크모드 UI 개선 - /health-insurance 페이지 카드 색상 최적화
