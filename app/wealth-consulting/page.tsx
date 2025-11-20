@@ -1,15 +1,15 @@
-import type { Metadata } from 'next';
-import { generateMetadata } from '@/lib/seo';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { CheckCircle2, AlertCircle, ArrowRight, TrendingUp, Shield, Users, Award, Target, DollarSign } from 'lucide-react';
-import Link from 'next/link';
-import { StructuredData } from '@/components/structured-data';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
 import { CalComPopup } from '@/components/cal-com-popup';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import { StructuredData } from '@/components/structured-data';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { generateMetadata } from '@/lib/seo/metadata';
+import { Award, CheckCircle2, DollarSign, Shield, Target, TrendingUp, Users } from 'lucide-react';
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = generateMetadata(
   '고액자산가 자산관리 전문 컨설팅 | 100억원 이상 VIP 전용 서비스',

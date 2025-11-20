@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
-import { generateMetadata, generateStructuredData } from '@/lib/seo';
+import { StructuredData } from '@/components/structured-data';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { HelpCircle, FileText, Users, Shield, Calculator, Building, Wallet } from 'lucide-react';
+import { generateMetadata } from '@/lib/seo/metadata';
+import { Building, Calculator, FileText, HelpCircle, Shield, Users, Wallet } from 'lucide-react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { StructuredData } from '@/components/structured-data';
 
 export const metadata: Metadata = generateMetadata(
   '자주 묻는 질문 | 패밀리오피스·가업승계·개인자산관리 완벽 가이드',

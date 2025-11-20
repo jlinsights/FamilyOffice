@@ -1,9 +1,9 @@
 'use client';
 
 import {
-  CheckCircle,
-  ArrowRight,
-  Briefcase,
+    ArrowRight,
+    Briefcase,
+    CheckCircle,
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -17,14 +17,12 @@ import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
-import { ContentOptimizer } from '@/components/seo/content-optimizer';
 
-import { SERVICE_CATEGORIES, SEO_PAGE_MAPPING, getServiceStats } from '@/constants/services';
-import { generateStructuredData } from '@/lib/seo';
-import { StructuredData } from '@/components/structured-data';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
+import { StructuredData } from '@/components/structured-data';
+import { SEO_PAGE_MAPPING, SERVICE_CATEGORIES, getServiceStats } from '@/constants/services';
 import { generateInternalLinks } from '@/lib/seo/content-optimizer';
-import { KEYWORD_CLUSTERS } from '@/lib/seo/keyword-strategy';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 const ServicePageContent = () => {
   const [startAnimation, setStartAnimation] = React.useState(false);

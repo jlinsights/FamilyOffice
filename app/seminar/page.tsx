@@ -1,15 +1,15 @@
-import { Metadata } from 'next';
-import { generateMetadata } from '@/lib/seo';
 import { StructuredData } from '@/components/structured-data';
+import { generateMetadata } from '@/lib/seo/metadata';
+import { Metadata } from 'next';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { PastSeminarsSection } from '@/components/seminar/PastSeminarsSection';
 import { SeminarCategoriesSection } from '@/components/seminar/SeminarCategoriesSection';
 import { SeminarHeroSection } from '@/components/seminar/SeminarHeroSection';
 import SeminarRegistrationSection from '@/components/seminar/SeminarRegistrationSection';
 import { UpcomingSeminarsSection } from '@/components/seminar/UpcomingSeminarsSection';
-import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 // SEO 최적화 메타데이터 - 검색 의도별 키워드 전략
 export const metadata: Metadata = generateMetadata(

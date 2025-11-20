@@ -4,13 +4,13 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
 
-import Image from 'next/image';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FAQ_CATEGORIES } from '@/constants/faq';
-import { generateStructuredData } from '@/lib/seo';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 import {
     AlertCircle,
     ArrowRight,
@@ -27,8 +27,8 @@ import {
     TrendingUp,
     Users
 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
-import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 export { metadata } from './metadata';
 

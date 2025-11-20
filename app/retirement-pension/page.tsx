@@ -1,22 +1,21 @@
-import { Metadata } from 'next';
 import {
-  TrendingUp,
-  Shield,
-  Users,
-  Calculator,
-  CheckCircle,
-  ArrowRight,
-  PiggyBank,
-  Building,
-  User,
-  Clock,
-  Target,
-  Award,
-  Phone,
-  Briefcase,
-  BarChart3,
-  Coins
+    ArrowRight,
+    Award,
+    BarChart3,
+    Briefcase,
+    Building,
+    Calculator,
+    CheckCircle,
+    Coins,
+    Phone,
+    PiggyBank,
+    Shield,
+    Target,
+    TrendingUp,
+    User,
+    Users
 } from 'lucide-react';
+import { Metadata } from 'next';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -26,7 +25,7 @@ import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
-import { generateMetadata } from '@/lib/seo';
+import { generateMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = generateMetadata(
   '퇴직연금 컨설팅 | 확정기여형·확정급여형 | 패밀리오피스',

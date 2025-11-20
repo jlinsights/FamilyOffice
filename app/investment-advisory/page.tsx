@@ -1,15 +1,15 @@
-import type { Metadata } from 'next';
-import { generateMetadata } from '@/lib/seo';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { CheckCircle2, AlertCircle, ArrowRight, TrendingUp, Shield, Target, BarChart3, PieChart, Globe, Star } from 'lucide-react';
-import Link from 'next/link';
-import { StructuredData } from '@/components/structured-data';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
 import { CalComPopup } from '@/components/cal-com-popup';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import { StructuredData } from '@/components/structured-data';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { generateMetadata } from '@/lib/seo/metadata';
+import { BarChart3, CheckCircle2, Globe, PieChart, Shield, Star, Target, TrendingUp } from 'lucide-react';
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = generateMetadata(
   '투자자문 전문 서비스 | 개인 맞춤형 자산관리 및 투자전략',

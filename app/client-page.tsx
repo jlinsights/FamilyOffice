@@ -1,22 +1,22 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Script from 'next/script';
+import { useEffect, useState } from 'react';
 
-import { ErrorBoundary } from '@/components/error-boundary';
 import { AdminAccessDeniedAlert } from '@/components/admin-access-denied-alert';
+import { ErrorBoundary } from '@/components/error-boundary';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { HubSpotIntegration } from '@/components/hubspot-integration';
+import { PerformanceMonitor } from '@/components/performance-monitor';
+import { Providers } from '@/components/providers';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
+import { SkipLinks } from '@/components/skip-links';
 import { SmoothScroll } from '@/components/smooth-scroll';
 import { StructuredData } from '@/components/structured-data';
-import { SkipLinks } from '@/components/skip-links';
-import { PerformanceMonitor } from '@/components/performance-monitor';
-import { HubSpotIntegration } from '@/components/hubspot-integration';
-import { Providers } from '@/components/providers';
 
-import { generateStructuredData } from '@/lib/seo';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 export default function ClientPage() {
   const [mounted, setMounted] = useState(false);

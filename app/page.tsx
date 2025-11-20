@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
-import { generateMetadata, generateStructuredData } from '@/lib/seo';
-import { HeroSection } from '@/components/sections/hero-section';
 import { Header } from '@/components/header';
+import { HeroSection } from '@/components/sections/hero-section';
 import { StructuredData } from '@/components/structured-data';
+import { generateMetadata } from '@/lib/seo/metadata';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 // Dynamic imports for better performance - load non-critical sections lazily
 const ServicesSection = dynamic(() => import('@/components/sections/services-section').then(mod => ({ default: mod.ServicesSection })), {

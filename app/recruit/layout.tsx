@@ -1,5 +1,5 @@
+import { generateMetadata } from '@/lib/seo/metadata';
 import type { Metadata } from 'next';
-import { generateMetadata } from '@/lib/seo';
 
 // 채용 페이지 SEO 최적화 메타데이터
 export const metadata: Metadata = {

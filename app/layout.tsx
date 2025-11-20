@@ -3,26 +3,26 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 import { Analytics } from '@/components/analytics';
-import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { DomainMigrationBanner } from '@/components/domain-migration-banner';
 import { ErrorBoundary } from '@/components/error-boundary';
-import { SEOErrorBoundary } from '@/components/seo-error-boundary';
 import ExternalScripts from '@/components/external-scripts';
 import { KakaoPixel } from '@/components/kakao/kakao-pixel';
 import { KakaoSDK } from '@/components/kakao/kakao-sdk';
+import { KoreanPerformanceTracker } from '@/components/korean-performance-tracker';
+import { SEOErrorBoundary } from '@/components/seo-error-boundary';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { WebVitalsTracker } from '@/components/web-vitals-tracker';
-import { KoreanPerformanceTracker } from '@/components/korean-performance-tracker';
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 // import { AIChatFloating } from '@/components/ai-chat-floating';
 import { ChannelTalk } from '@/components/channel-talk';
-import { DebugStyles } from './debug-styles';
 import { PreloadCriticalResources } from '@/components/preload-critical-resources';
-import { OrganizationStructuredData } from '@/components/seo/structured-data';
-import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
-import { safeMetadata } from '@/lib/safe-seo-engine';
 import { SEOModulePreloader } from '@/components/seo-module-preloader';
+import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
+import { OrganizationStructuredData } from '@/components/seo/structured-data';
+import { safeMetadata } from '@/lib/safe-seo-engine';
+import { DebugStyles } from './debug-styles';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -52,10 +52,10 @@ export const metadata: Metadata = {
     ],
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || 'your-google-verification-code',
     other: {
-      'naver-site-verification': 'your-naver-verification-code',
-      'msvalidate.01': 'your-bing-verification-code'
+      'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_VERIFICATION || 'your-naver-verification-code',
+      'msvalidate.01': process.env.NEXT_PUBLIC_BING_VERIFICATION || 'your-bing-verification-code'
     }
   },
   alternates: {

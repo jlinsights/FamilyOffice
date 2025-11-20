@@ -1,5 +1,5 @@
+import { generateMetadata } from '@/lib/seo/metadata';
 import { Metadata } from 'next';
-import { generateMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata(
   'About Us & FAQ | FamilyOffice S 소개 및 자주 묻는 질문',
