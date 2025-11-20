@@ -55,7 +55,7 @@ export const targetKeywords: Record<string, KeywordData> = {
     metaDescription: '정책자금 신청 성공률 95%! 연 1.5~3.5% 저금리 대출, 보조금 신청까지. 전문가가 최적 정책자금 매칭. 무료 상담으로 즉시 확인.'
   },
 
-  corporateCertification: {
+  businessCertification: {
     primary: '기업인증',
     secondary: ['기업인증 종류', '기업인증 혜택', '기업인증 신청', '벤처기업인증', '이노비즈 인증'],
     intent: 'informational',
@@ -240,6 +240,10 @@ export const relatedKeywords: Record<string, string[]> = {
   policyFunding: [
     '정책금융', '정부지원금', '창업자금', '시설자금', '운전자금',
     '기술보증기금', '신용보증기금', '소상공인진흥공단', '중소벤처기업진흥공단', '저금리대출'
+  ],
+  businessCertification: [
+    '벤처확인서', '이노비즈인증', '기업부설연구소', '연구개발전담부서', 'ISO인증',
+    '가족친화기업', 'WE기업', '청년친화강소기업', '일학습병행기업', '강소기업'
   ],
   corporateCertification: [
     '벤처확인서', '이노비즈인증', '기업부설연구소', '연구개발전담부서', 'ISO인증',
