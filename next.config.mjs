@@ -171,6 +171,8 @@ const nextConfig = {
     CUSTOM_KEY: process.env.NODE_ENV,
     // Vercel Toolbar 비활성화
     NEXT_PUBLIC_VERCEL_ENV: process.env.VERCEL_ENV,
+    NEXT_PUBLIC_FLAGS_vercel_toolbar: 'false',
+    VERCEL_TOOLBAR: 'false',
   },
 
   // Vercel Toolbar 완전 비활성화

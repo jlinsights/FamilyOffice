@@ -15,6 +15,59 @@ export interface KeywordData {
 
 // 타겟 키워드 데이터베이스
 export const targetKeywords: Record<string, KeywordData> = {
+  // 🎯 핵심 타겟 키워드 확장
+  taxPlan: {
+    primary: '절세플랜',
+    secondary: ['절세플랜 설계', '절세플랜 컨설팅', '맞춤형 절세플랜', 'CEO 절세플랜', '기업가 절세플랜'],
+    intent: 'commercial',
+    difficulty: 'medium',
+    priority: 1,
+    monthlyVolume: 1800,
+    targetPosition: 3,
+    landingPage: '/tax-plan',
+    metaTitle: '절세플랜 전문가 | CEO·기업가 맞춤형 세무최적화 전략',
+    metaDescription: '성공한 기업가를 위한 맞춤형 절세플랜. 법인세·소득세·상속세 통합 최적화로 세금 40% 절감. 전문가 무료 진단으로 최적 절세전략 설계.'
+  },
+
+  familyCorporation: {
+    primary: '가족법인',
+    secondary: ['가족법인 설립', '가족법인 운영', '가족법인 세무', '가족법인 장점', '가족법인 절세'],
+    intent: 'commercial',
+    difficulty: 'medium',
+    priority: 1,
+    monthlyVolume: 2200,
+    targetPosition: 5,
+    landingPage: '/family-corporation',
+    metaTitle: '가족법인 설립 완벽 가이드 | 절세 효과부터 운영 전략까지',
+    metaDescription: '가족법인으로 상속세 50% 절감! 설립부터 운영, 세무관리까지 완벽 가이드. 전문가 상담으로 최적 가족법인 구조 설계. 성공사례 200+건 보유.'
+  },
+
+  policyFunding: {
+    primary: '정책자금',
+    secondary: ['정책자금 신청', '정책자금 컨설팅', '정책자금 종류', '중소기업 정책자금', '창업 정책자금'],
+    intent: 'commercial',
+    difficulty: 'medium',
+    priority: 1,
+    monthlyVolume: 6500,
+    targetPosition: 8,
+    landingPage: '/policy-funding',
+    metaTitle: '정책자금 신청 전문가 | 저금리 대출부터 보조금까지',
+    metaDescription: '정책자금 신청 성공률 95%! 연 1.5~3.5% 저금리 대출, 보조금 신청까지. 전문가가 최적 정책자금 매칭. 무료 상담으로 즉시 확인.'
+  },
+
+  corporateCertification: {
+    primary: '기업인증',
+    secondary: ['기업인증 종류', '기업인증 혜택', '기업인증 신청', '벤처기업인증', '이노비즈 인증'],
+    intent: 'informational',
+    difficulty: 'medium',
+    priority: 2,
+    monthlyVolume: 1800,
+    targetPosition: 10,
+    landingPage: '/corporate-certification',
+    metaTitle: '기업인증 완벽 가이드 | 벤처·이노비즈 인증 혜택부터 신청까지',
+    metaDescription: '기업인증으로 세제혜택 극대화! 벤처기업, 이노비즈, ISO 인증별 혜택 비교. 정책자금 우대, 세액공제까지. 전문가 무료 컨설팅.'
+  },
+
   familyOffice: {
     primary: '패밀리오피스',
     secondary: ['패밀리오피스란', '패밀리오피스 서비스', '패밀리오피스 비용', '패밀리오피스 설립'],
@@ -173,8 +226,25 @@ export const targetKeywords: Record<string, KeywordData> = {
   }
 };
 
-// 키워드별 관련 키워드 매핑
+// 키워드별 관련 키워드 매핑 (타겟 키워드 확장)
 export const relatedKeywords: Record<string, string[]> = {
+  // 🎯 새로운 타겟 키워드 클러스터
+  taxPlan: [
+    '절세전략', '세무최적화', '세무설계', '세금절약', '절세상품',
+    '소득세절세', '법인세절세', '상속세절세', '증여세절세', '종합소득세'
+  ],
+  familyCorporation: [
+    '가족회사', '동족회사', '법인설립', '지주회사', '가족신탁',
+    '법인전환', '개인사업자법인전환', '가족지분', '법인세무', '법인운영'
+  ],
+  policyFunding: [
+    '정책금융', '정부지원금', '창업자금', '시설자금', '운전자금',
+    '기술보증기금', '신용보증기금', '소상공인진흥공단', '중소벤처기업진흥공단', '저금리대출'
+  ],
+  corporateCertification: [
+    '벤처확인서', '이노비즈인증', '기업부설연구소', '연구개발전담부서', 'ISO인증',
+    '가족친화기업', 'WE기업', '청년친화강소기업', '일학습병행기업', '강소기업'
+  ],
   familyOffice: [
     '웰스매니지먼트', '프라이빗뱅킹', '자산관리회사', '투자자문', 
     '고액자산가', 'UHNW', '자산배분', '포트폴리오관리'
@@ -302,27 +372,55 @@ export const localKeywords = {
   분당: ['분당 패밀리오피스', '판교 자산관리']
 };
 
-// AI 검색엔진 최적화 키워드
+// AI 검색엔진 최적화 키워드 (타겟 키워드 확장)
 export const aiSearchKeywords = [
-  // 자연어 질문 형식
+  // 🎯 타겟 키워드 자연어 질문 형식
+  '절세플랜 어떻게 세워야 하나요',
+  '가족법인 설립해야 하나요',
+  '정책자금 신청 조건이 뭔가요',
+  '기업인증 어떤 게 좋을까요',
+  '가업승계 언제 시작해야 하나요',
+  
+  // 기존 자연어 질문 형식
   '패밀리오피스가 뭐예요',
   '가업승계 어떻게 해야 하나요',
   '상속세 얼마나 내야 하나요',
   '경영인정기보험 필요한가요',
   '중대재해처벌법 어떻게 대응하나요',
   
-  // 대화형 키워드
+  // 🎯 타겟 키워드 대화형 키워드
+  '절세플랜 수립 방법',
+  '가족법인 vs 개인법인',
+  '정책자금 vs 은행대출',
+  '기업인증 종류별 비교',
+  '가업승계 체크리스트',
+  
+  // 기존 대화형 키워드
   '패밀리오피스 장단점',
   '가업승계 성공 방법',
   '절세 전략 알려줘',
   '법인보험 추천',
   '정책자금 신청방법',
   
-  // 비교 검색
+  // 🎯 타겟 키워드 비교 검색
+  '절세플랜 vs 절세상품',
+  '가족법인 vs 가족신탁',
+  '정책자금 vs 민간대출',
+  '벤처인증 vs 이노비즈',
+  '가업승계 vs 매각',
+  
+  // 기존 비교 검색
   '패밀리오피스 vs 프라이빗뱅킹',
   '상속 vs 증여 장단점',
   '정기보험 vs 종신보험',
-  'SFO vs MFO 차이점'
+  'SFO vs MFO 차이점',
+  
+  // 🎯 실무 검색 키워드
+  '절세플랜 실행 단계',
+  '가족법인 실무 가이드',
+  '정책자금 신청 팁',
+  '기업인증 성공 사례',
+  '가업승계 실무 매뉴얼'
 ];
 
 // 키워드 우선순위 계산

@@ -35,10 +35,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   ...safeMetadata.default,
   title: {
-    default: 'FamilyOffice S - 성공한 기업가·자산가를 위한 가업승계·자산관리 전문 플랫폼',
+    default: 'FamilyOffice S - 절세플랜·가업승계·가족법인·정책자금·기업인증 전문 통합솔루션',
     template: '%s | FamilyOffice S',
   },
-  description: '【성공한 기업가·고액자산가 전용】 법인보험 × 가업승계 통합솔루션 | 개인자산 30억+ 맞춤 설계 | 기업재해보장·경영인정기·퇴직연금 + M&A 1500+ | 법인세 30% + 승계세 40% 동시절감 | 삼성생명 프리미엄 파트너',
+  description: '【절세플랜·가업승계·가족법인 전문】 성공한 기업가를 위한 통합솔루션 | 정책자금·기업인증 컨설팅 | 세금 40% 절감 + 승계세 50% 절감 + 정책자금 신청 95% 성공률 | 삼성생명 프리미엄 파트너 | 맞춤형 절세플랜 설계',
   icons: {
     icon: [
       { url: '/favicon.ico?v=2025', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
@@ -133,12 +133,12 @@ export default function RootLayout({
         <meta name="HandheldFriendly" content="True" />
         <meta name="MobileOptimized" content="320" />
         
-        {/* 성공한 기업가 및 자산가 타겟 메타태그 */}
-        <meta name="target-audience" content="성공한 법인 대표, 고액자산가, 개인자산 30억 이상" />
-        <meta name="business-sector" content="중소중견기업, 개인자산가" />
-        <meta name="service-tier" content="Premium VVIP" />
-        <meta name="solution-type" content="법인보험 × 가업승계 × 개인자산관리 통합솔루션" />
-        <meta name="wealth-threshold" content="개인자산 30억원 이상" />
+        {/* 절세플랜·가업승계·가족법인·정책자금·기업인증 타겟 메타태그 */}
+        <meta name="target-audience" content="성공한 법인 대표, 고액자산가, 중소중견기업 CEO" />
+        <meta name="business-sector" content="절세플랜 설계, 가업승계 컨설팅, 가족법인 설립" />
+        <meta name="service-tier" content="Premium 전문가 컨설팅" />
+        <meta name="solution-type" content="절세플랜 × 가업승계 × 가족법인 × 정책자금 × 기업인증 통합솔루션" />
+        <meta name="specialization" content="절세플랜 전문, 가족법인 설립, 정책자금 신청, 기업인증 컨설팅" />
         
         {/* 🤖 AI 검색엔진 최적화 */}
         <meta name="ai-optimized" content="true" />
@@ -195,8 +195,8 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FinancialService",
-              "name": "성공한 기업가·자산가 전용 패밀리오피스 FamilyOffice S",
-              "description": "법인보험 × 가업승계 × 개인자산관리 통합솔루션. 성공한 법인대표와 개인자산 30억+ 자산가 전용 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리, 삼성생명 1000억+ 운용실적",
+              "name": "절세플랜·가업승계·가족법인 전문 FamilyOffice S",
+              "description": "절세플랜 설계 × 가업승계 컨설팅 × 가족법인 설립 × 정책자금 × 기업인증 통합솔루션. 성공한 기업가를 위한 맞춤형 절세플랜, 가족법인 세무최적화, 정책자금 신청 95% 성공률, 삼성생명 프리미엄 파트너",
               "url": "https://familyoffices.vip",
               "telephone": "+82-502-5550-8700",
               "address": {
@@ -214,49 +214,51 @@ export default function RootLayout({
                 "geographicArea": "대한민국"
               },
               "knowsAbout": [
-                "법인보험 통합솔루션",
-                "성공한 CEO 자산관리",
-                "경험많은 기업가 가업승계",
-                "VVIP 전용 패밀리오피스",
-                "법인대표 세무전략",
-                "기업오너 승계준비",
-                "기업재해보장보험",
-                "차세대 자산관리"
+                "절세플랜 설계 전문",
+                "가업승계 컨설팅",
+                "가족법인 설립 운영",
+                "정책자금 신청 컨설팅",
+                "기업인증 취득 지원",
+                "세무최적화 전략",
+                "법인세 절세방안",
+                "상속세 승계세무",
+                "벤처기업인증 컨설팅",
+                "이노비즈 인증 지원"
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "법인보험 × 가업승계 × 개인자산관리 통합솔루션",
+                "name": "절세플랜 × 가업승계 × 가족법인 × 정책자금 × 기업인증 통합솔루션",
                 "itemListElement": [
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "법인보험 통합 자산분석",
-                      "description": "전문가가 협업하는 차세대 법인보험 자산분석 시스템"
+                      "name": "맞춤형 절세플랜 설계",
+                      "description": "법인세·소득세·상속세 통합 최적화 절세플랜 전문 설계"
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "기업재해보장보험 최적화",
-                      "description": "실제 기업 위험 분석을 통한 맞춤형 보장전략"
+                      "name": "가족법인 설립 컨설팅",
+                      "description": "상속세 50% 절감 가능한 최적 가족법인 구조 설계"
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "경영인정기보험 승계설계",
-                      "description": "성장동기 분석을 통한 가업승계 로드맵"
+                      "name": "정책자금 신청 지원",
+                      "description": "95% 성공률의 정책자금 신청 전문 컨설팅 서비스"
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "M&A 실행 기반 세무최적화",
-                      "description": "즉시 실행 가능한 구체적 세무절세 방안"
+                      "name": "기업인증 취득 컨설팅",
+                      "description": "벤처·이노비즈 등 기업인증 취득으로 세제혜택 극대화"
                     }
                   }
                 ]
@@ -472,13 +474,46 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Vercel Toolbar 완전 제거
+              // Vercel Toolbar 완전 제거 및 차단
               if (typeof window !== 'undefined') {
+                // 환경 변수로 비활성화
+                window.VERCEL_TOOLBAR_ENABLED = false;
+                window.__NEXT_DATA__ = window.__NEXT_DATA__ || {};
+                window.__NEXT_DATA__.env = window.__NEXT_DATA__.env || {};
+                window.__NEXT_DATA__.env.VERCEL_TOOLBAR = false;
+                
+                // Flag 설정으로 비활성화
+                window.NEXT_PUBLIC_FLAGS = window.NEXT_PUBLIC_FLAGS || {};
+                window.NEXT_PUBLIC_FLAGS.vercel_toolbar = false;
+                window.__vercel_toolbar_disabled = true;
+                
+                // Vercel 스크립트 로딩 차단
+                const originalCreateElement = document.createElement;
+                document.createElement = function(tagName) {
+                  const element = originalCreateElement.call(this, tagName);
+                  if (tagName.toLowerCase() === 'script' && element.src && element.src.includes('vercel')) {
+                    element.src = '';
+                    return element;
+                  }
+                  return element;
+                };
+                
                 // 기존 toolbar 요소 제거
                 const removeToolbar = () => {
-                  const toolbars = document.querySelectorAll('[data-vercel-toolbar], #vercel-toolbar, .vercel-toolbar, iframe[src*="vercel"]');
-                  toolbars.forEach(el => el.remove());
+                  const toolbars = document.querySelectorAll('[data-vercel-toolbar], #vercel-toolbar, .vercel-toolbar, iframe[src*="vercel"], script[src*="vercel"], [class*="vercel-toolbar"]');
+                  toolbars.forEach(el => {
+                    el.remove();
+                    el.style.display = 'none !important';
+                  });
+                  
+                  // Remove any Vercel-related classes from body
+                  if (document.body) {
+                    document.body.classList.remove('vercel-toolbar-enabled');
+                  }
                 };
+                
+                // 즉시 실행
+                removeToolbar();
                 
                 // 페이지 로드 시 실행
                 document.addEventListener('DOMContentLoaded', removeToolbar);
@@ -486,13 +521,31 @@ export default function RootLayout({
                 
                 // MutationObserver로 동적 생성 감지 및 제거
                 if (window.MutationObserver) {
-                  const observer = new MutationObserver(() => removeToolbar());
-                  observer.observe(document.body, { childList: true, subtree: true });
+                  const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                      mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1 && (
+                          node.hasAttribute && node.hasAttribute('data-vercel-toolbar') ||
+                          node.id === 'vercel-toolbar' ||
+                          node.className && node.className.includes('vercel-toolbar') ||
+                          (node.tagName === 'SCRIPT' && node.src && node.src.includes('vercel')) ||
+                          (node.tagName === 'IFRAME' && node.src && node.src.includes('vercel'))
+                        )) {
+                          node.remove();
+                        }
+                      });
+                    });
+                  });
+                  observer.observe(document.documentElement, { 
+                    childList: true, 
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['data-vercel-toolbar', 'class', 'id']
+                  });
                 }
                 
-                // Vercel 관련 전역 변수 차단
-                window.NEXT_PUBLIC_FLAGS = window.NEXT_PUBLIC_FLAGS || {};
-                window.NEXT_PUBLIC_FLAGS.vercel_toolbar = false;
+                // 주기적 검사
+                setInterval(removeToolbar, 1000);
               }
             `
           }}
