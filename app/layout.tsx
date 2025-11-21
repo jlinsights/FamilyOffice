@@ -470,83 +470,204 @@ export default function RootLayout({
         <VercelAnalytics />
         <SpeedInsights />
         
-        {/* Vercel Toolbar 비활성화 JavaScript */}
+        {/* Vercel Toolbar 완전 차단 JavaScript */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Vercel Toolbar 완전 제거 및 차단
-              if (typeof window !== 'undefined') {
-                // 환경 변수로 비활성화
+              // Vercel Toolbar 완전 제거 및 차단 (강화된 버전)
+              (function() {
+                'use strict';
+                
+                if (typeof window === 'undefined') return;
+                
+                // 1. 환경 변수 및 플래그 완전 비활성화
                 window.VERCEL_TOOLBAR_ENABLED = false;
+                window.VERCEL_TOOLBAR = false;
+                window.FLAGS_vercel_toolbar = false;
+                window.__NEXT_DISABLE_TOOLBAR = true;
+                window.DISABLE_VERCEL_TOOLBAR = true;
+                
+                // Next.js 데이터 설정
                 window.__NEXT_DATA__ = window.__NEXT_DATA__ || {};
                 window.__NEXT_DATA__.env = window.__NEXT_DATA__.env || {};
                 window.__NEXT_DATA__.env.VERCEL_TOOLBAR = false;
+                window.__NEXT_DATA__.env.NEXT_PUBLIC_FLAGS_vercel_toolbar = false;
                 
-                // Flag 설정으로 비활성화
+                // 플래그 설정
                 window.NEXT_PUBLIC_FLAGS = window.NEXT_PUBLIC_FLAGS || {};
                 window.NEXT_PUBLIC_FLAGS.vercel_toolbar = false;
                 window.__vercel_toolbar_disabled = true;
                 
-                // Vercel 스크립트 로딩 차단
+                // 2. Vercel 관련 네트워크 요청 차단
+                const originalFetch = window.fetch;
+                window.fetch = function(url, options) {
+                  if (typeof url === 'string' && url.includes('vercel') && url.includes('toolbar')) {
+                    return Promise.reject(new Error('Vercel toolbar blocked'));
+                  }
+                  return originalFetch.apply(this, arguments);
+                };
+                
+                // 3. 스크립트 및 iframe 생성 차단
                 const originalCreateElement = document.createElement;
                 document.createElement = function(tagName) {
                   const element = originalCreateElement.call(this, tagName);
-                  if (tagName.toLowerCase() === 'script' && element.src && element.src.includes('vercel')) {
-                    element.src = '';
-                    return element;
+                  
+                  if (tagName.toLowerCase() === 'script') {
+                    const originalSetAttribute = element.setAttribute;
+                    element.setAttribute = function(name, value) {
+                      if (name === 'src' && typeof value === 'string' && 
+                          (value.includes('vercel') && value.includes('toolbar'))) {
+                        return; // 차단
+                      }
+                      return originalSetAttribute.call(this, name, value);
+                    };
+                    
+                    Object.defineProperty(element, 'src', {
+                      get: function() { return this._src || ''; },
+                      set: function(value) {
+                        if (typeof value === 'string' && 
+                            (value.includes('vercel') && value.includes('toolbar'))) {
+                          this._src = '';
+                          return;
+                        }
+                        this._src = value;
+                        return originalSetAttribute.call(this, 'src', value);
+                      }
+                    });
                   }
+                  
+                  if (tagName.toLowerCase() === 'iframe') {
+                    const originalSetAttribute = element.setAttribute;
+                    element.setAttribute = function(name, value) {
+                      if (name === 'src' && typeof value === 'string' && 
+                          value.includes('vercel')) {
+                        return; // 차단
+                      }
+                      return originalSetAttribute.call(this, name, value);
+                    };
+                  }
+                  
                   return element;
                 };
                 
-                // 기존 toolbar 요소 제거
-                const removeToolbar = () => {
-                  const toolbars = document.querySelectorAll('[data-vercel-toolbar], #vercel-toolbar, .vercel-toolbar, iframe[src*="vercel"], script[src*="vercel"], [class*="vercel-toolbar"]');
-                  toolbars.forEach(el => {
-                    el.remove();
-                    el.style.display = 'none !important';
-                  });
+                // 4. DOM에서 Vercel Toolbar 요소 제거
+                function removeVercelElements() {
+                  const selectors = [
+                    '[data-vercel-toolbar]',
+                    '#vercel-toolbar', 
+                    '.vercel-toolbar',
+                    'iframe[src*="vercel"]',
+                    'script[src*="vercel-toolbar"]',
+                    '[class*="vercel-toolbar"]',
+                    'div[id*="vercel"]',
+                    'div[class*="vercel"]'
+                  ];
                   
-                  // Remove any Vercel-related classes from body
-                  if (document.body) {
-                    document.body.classList.remove('vercel-toolbar-enabled');
-                  }
-                };
-                
-                // 즉시 실행
-                removeToolbar();
-                
-                // 페이지 로드 시 실행
-                document.addEventListener('DOMContentLoaded', removeToolbar);
-                window.addEventListener('load', removeToolbar);
-                
-                // MutationObserver로 동적 생성 감지 및 제거
-                if (window.MutationObserver) {
-                  const observer = new MutationObserver((mutations) => {
-                    mutations.forEach((mutation) => {
-                      mutation.addedNodes.forEach((node) => {
-                        if (node.nodeType === 1 && (
-                          node.hasAttribute && node.hasAttribute('data-vercel-toolbar') ||
-                          node.id === 'vercel-toolbar' ||
-                          node.className && node.className.includes('vercel-toolbar') ||
-                          (node.tagName === 'SCRIPT' && node.src && node.src.includes('vercel')) ||
-                          (node.tagName === 'IFRAME' && node.src && node.src.includes('vercel'))
-                        )) {
-                          node.remove();
+                  selectors.forEach(selector => {
+                    try {
+                      const elements = document.querySelectorAll(selector);
+                      elements.forEach(el => {
+                        if (el && el.parentNode) {
+                          el.parentNode.removeChild(el);
                         }
                       });
-                    });
+                    } catch (e) {
+                      // 무시
+                    }
                   });
+                  
+                  // body 클래스 정리
+                  if (document.body) {
+                    document.body.classList.remove('vercel-toolbar-enabled');
+                    document.body.style.removeProperty('--vercel-toolbar-height');
+                  }
+                  
+                  // html 클래스 정리
+                  if (document.documentElement) {
+                    document.documentElement.classList.remove('vercel-toolbar-enabled');
+                  }
+                }
+                
+                // 5. 즉시 실행 및 이벤트 리스너
+                removeVercelElements();
+                
+                // DOM 준비 시
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', removeVercelElements);
+                } else {
+                  removeVercelElements();
+                }
+                
+                // 윈도우 로드 시
+                window.addEventListener('load', removeVercelElements);
+                
+                // 6. MutationObserver로 동적 생성 감지
+                if (window.MutationObserver) {
+                  const observer = new MutationObserver((mutations) => {
+                    let needsCleanup = false;
+                    
+                    mutations.forEach((mutation) => {
+                      if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach((node) => {
+                          if (node.nodeType === 1) { // Element node
+                            const element = node;
+                            
+                            // Vercel 관련 요소 체크
+                            if (element.hasAttribute && (
+                              element.hasAttribute('data-vercel-toolbar') ||
+                              element.id === 'vercel-toolbar' ||
+                              (element.className && element.className.includes('vercel-toolbar')) ||
+                              (element.tagName === 'SCRIPT' && element.src && element.src.includes('vercel')) ||
+                              (element.tagName === 'IFRAME' && element.src && element.src.includes('vercel'))
+                            )) {
+                              needsCleanup = true;
+                            }
+                            
+                            // 하위 요소도 체크
+                            if (element.querySelector) {
+                              const vercelElements = element.querySelectorAll('[data-vercel-toolbar], #vercel-toolbar, .vercel-toolbar, iframe[src*="vercel"], script[src*="vercel"]');
+                              if (vercelElements.length > 0) {
+                                needsCleanup = true;
+                              }
+                            }
+                          }
+                        });
+                      }
+                      
+                      // 속성 변경 감지
+                      if (mutation.type === 'attributes') {
+                        const target = mutation.target;
+                        if (target.hasAttribute && target.hasAttribute('data-vercel-toolbar')) {
+                          needsCleanup = true;
+                        }
+                      }
+                    });
+                    
+                    if (needsCleanup) {
+                      setTimeout(removeVercelElements, 0);
+                    }
+                  });
+                  
                   observer.observe(document.documentElement, { 
                     childList: true, 
                     subtree: true,
                     attributes: true,
-                    attributeFilter: ['data-vercel-toolbar', 'class', 'id']
+                    attributeFilter: ['data-vercel-toolbar', 'class', 'id', 'src']
                   });
                 }
                 
-                // 주기적 검사
-                setInterval(removeToolbar, 1000);
-              }
+                // 7. 주기적 검사 (더 빈번하게)
+                setInterval(removeVercelElements, 500);
+                
+                // 8. 페이지 가시성 변경 시에도 검사
+                if (typeof document.visibilityState !== 'undefined') {
+                  document.addEventListener('visibilitychange', function() {
+                    if (!document.hidden) {
+                      setTimeout(removeVercelElements, 100);
+                    }
+                  });
+                }
+              })();
             `
           }}
         />
