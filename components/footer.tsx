@@ -39,7 +39,7 @@ const SubstackIcon = ({ className }: { className?: string }) => (
 
 const NaverIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M16.273 12.845 7.376 0H0v24h7.726V11.156L16.624 24H24V0h-7.727v12.845z" />
+    <path d="M2 2v20h6.5V12.5l7.5 9.5H22V2h-6.5v9.5L8 2H2z" />
   </svg>
 );
 
@@ -178,7 +178,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
                 >
-                  <NaverIcon className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
+                  <NaverIcon className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
                   <span className="sr-only">Naver Blog</span>
                 </Link>
                 <Link
