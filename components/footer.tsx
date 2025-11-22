@@ -128,7 +128,7 @@ export const Footer = memo(function Footer() {
                   <span className="sr-only">Instagram</span>
                 </Link>
                 <Link
-                  href="https://litt.ly/familyoffice"
+                  href="https://linkedin.com/in/jaehonglim"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
@@ -197,7 +197,16 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-orange-500 hover:text-white transition-all hover:scale-105"
                 >
-                  <TistoryIcon className="h-4 w-4" />
+                  <div className="h-4 w-4 relative">
+                    <Image
+                      src="https://www.basicincomeparty.kr/wp-content/uploads/2020/11/tistory-logo-fill_white.png"
+                      alt="Tistory"
+                      width={16}
+                      height={16}
+                      className="h-4 w-4 hidden dark:block"
+                    />
+                    <TistoryIcon className="h-4 w-4 text-black block dark:hidden" />
+                  </div>
                   <span className="sr-only">Tistory Blog</span>
                 </Link>
               </div>
