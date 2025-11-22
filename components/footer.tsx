@@ -9,6 +9,7 @@ import {
     Linkedin,
     Mail,
     MapPin,
+    MessageSquare,
     Phone,
     Shield,
     Sparkles,
@@ -48,11 +49,6 @@ const SpotifyIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const KakaoIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12 2c5.523 0 10 3.862 10 8.625 0 2.685-1.471 5.097-3.78 6.67l.822 3.704c.094.423-.333.756-.693.542L13.956 19.35c-.651.09-1.307.15-1.956.15-5.523 0-10-3.862-10-8.625S6.477 2 12 2z"/>
-  </svg>
-);
 
 const TistoryIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 459 459" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
@@ -191,7 +187,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-yellow-400 hover:text-yellow-900 transition-all hover:scale-105"
                 >
-                  <KakaoIcon className="h-4 w-4" />
+                  <MessageSquare className="h-4 w-4 text-yellow-600 dark:text-yellow-400 hover:text-yellow-900" />
                   <span className="sr-only">카카오톡 채널</span>
                 </Link>
                 <Link
