@@ -55,8 +55,11 @@ const KakaoIcon = ({ className }: { className?: string }) => (
 );
 
 const TistoryIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-5.334 0-9.347-4.504-8.164-8.544C2.92 5.604 6.966 2.783 12 2.783c5.034 0 9.08 2.821 10.066 6.862zM8.5 8c.828 0 1.5.672 1.5 1.5S9.328 11 8.5 11 7 10.328 7 9.5 7.672 8 8.5 8zm3 0c.828 0 1.5.672 1.5 1.5S12.328 11 11.5 11 10 10.328 10 9.5 10.672 8 11.5 8zm3 0c.828 0 1.5.672 1.5 1.5S15.328 11 14.5 11 13 10.328 13 9.5 13.672 8 14.5 8z"/>
+  <svg viewBox="0 0 459 459" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+    <title>티스토리 로고</title>
+    <g>
+      <path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z"/>
+    </g>
   </svg>
 );
 
@@ -197,16 +200,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-orange-500 hover:text-white transition-all hover:scale-105"
                 >
-                  <div className="h-4 w-4 relative">
-                    <Image
-                      src="https://www.basicincomeparty.kr/wp-content/uploads/2020/11/tistory-logo-fill_white.png"
-                      alt="Tistory"
-                      width={16}
-                      height={16}
-                      className="h-4 w-4 hidden dark:block"
-                    />
-                    <TistoryIcon className="h-4 w-4 text-black block dark:hidden" />
-                  </div>
+                  <TistoryIcon className="h-4 w-4 text-gray-700 dark:text-gray-200 hover:text-white" />
                   <span className="sr-only">Tistory Blog</span>
                 </Link>
               </div>
