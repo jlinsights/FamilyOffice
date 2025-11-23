@@ -114,7 +114,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
                 >
-                  <Facebook className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
+                  <Facebook className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
                   <span className="sr-only">Facebook</span>
                 </Link>
                 <Link
@@ -123,7 +123,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
                 >
-                  <Instagram className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
+                  <Instagram className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
                   <span className="sr-only">Instagram</span>
                 </Link>
                 <Link
@@ -133,7 +133,7 @@ export const Footer = memo(function Footer() {
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
                   title="임재홍 수석 컨설턴트 프로필"
                 >
-                  <Linkedin className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
+                  <Linkedin className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
                   <span className="sr-only">임재홍 수석 컨설턴트 프로필</span>
                 </Link>
                 <Link
@@ -142,7 +142,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
                 >
-                  <XIcon className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
+                  <XIcon className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
                   <span className="sr-only">X (Twitter)</span>
                 </Link>
                 <Link
@@ -151,7 +151,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
                 >
-                  <SubstackIcon className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
+                  <SubstackIcon className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
                   <span className="sr-only">Substack</span>
                 </Link>
                 <Link
@@ -160,7 +160,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
                 >
-                  <Youtube className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
+                  <Youtube className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
                   <span className="sr-only">YouTube</span>
                 </Link>
                 <Link
@@ -169,7 +169,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-green-500 hover:text-white transition-all hover:scale-105"
                 >
-                  <SpotifyIcon className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-white" />
+                  <SpotifyIcon className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-white" />
                   <span className="sr-only">Spotify Podcast</span>
                 </Link>
                 <Link
@@ -187,7 +187,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-accent hover:text-accent-foreground transition-all hover:scale-105"
                 >
-                  <MessageSquare className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
+                  <MessageSquare className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-accent-foreground" />
                   <span className="sr-only">카카오톡 채널</span>
                 </Link>
                 <Link
@@ -196,7 +196,7 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/40 bg-background/80 dark:bg-background/60 hover:bg-orange-500 hover:text-white transition-all hover:scale-105"
                 >
-                  <TistoryIcon className="h-4 w-4 text-muted-foreground dark:text-muted-foreground hover:text-white" />
+                  <TistoryIcon className="h-3.5 w-3.5 text-muted-foreground dark:text-muted-foreground hover:text-white" />
                   <span className="sr-only">Tistory Blog</span>
                 </Link>
               </div>
