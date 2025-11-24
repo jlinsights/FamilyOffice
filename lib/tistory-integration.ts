@@ -90,7 +90,7 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
    */
   private static extractCaseStudy(content: BlogPost): string {
     // 카테고리별 대표 사례 템플릿
-    const caseTemplates = {
+    const caseTemplates: Record<string, string> = {
       '리스크관리': '실제 중견기업 A사가 CEO 건강 이슈로 위기를 겪었지만, 사전 준비된 리스크 관리 시스템으로 안정적 경영을 유지한 사례',
       '의료법인': 'B 종합병원이 MSO 도입으로 연간 2억원 절세 효과를 달성한 성공 사례',
       '법인자산': 'C 제조업체가 150억 이익잉여금을 단계적 배당으로 3억원 세금을 절약한 사례',
@@ -106,7 +106,7 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
    */
   private static extractActionItems(content: BlogPost): string[] {
     // 카테고리별 실행 방법 템플릿
-    const actionTemplates = {
+    const actionTemplates: Record<string, string[]> = {
       '리스크관리': [
         '현재 리스크 수준 정확한 진단',
         '적정 보험 설계 및 가입',
@@ -163,7 +163,7 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
   private static simplifyTags(tags: string[]): string[] {
     return tags.map(tag => {
       // 복잡한 전문용어를 일반 용어로 변환
-      const simplifications = {
+      const simplifications: Record<string, string> = {
         'CEO 유고': 'CEO위기',
         '기업생명보험': '기업보험',
         '의제배당': '배당세',
@@ -179,7 +179,7 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
    * 티스토리 카테고리 매핑
    */
   private static mapToTistoryCategory(originalCategory: string): string {
-    const categoryMap = {
+    const categoryMap: Record<string, string> = {
       '리스크관리': '보험',
       '의료법인': 'Family Office',
       '법인자산': 'Family Office', 
@@ -199,7 +199,7 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
    */
   private static extractNaverKeywords(content: BlogPost): string[] {
     // 네이버에서 검색량이 높은 키워드들로 매핑
-    const naverKeywords = {
+    const naverKeywords: Record<string, string[]> = {
       '리스크관리': ['CEO위기', '기업위험', '보험가입', '위기관리'],
       '의료법인': ['병원경영', '의료세무', '병원절세', 'MSO'],
       '법인자산': ['배당금', '회사돈', '법인세', '절세'],
@@ -214,11 +214,7 @@ export class TistoryPublisher {
   private config: TistoryConfig;
 
   constructor(config: TistoryConfig) {
-    this.config = {
-      blogName: 'family-office',
-      baseUrl: 'https://family-office.tistory.com',
-      ...config
-    };
+    this.config = config;
   }
 
   /**
@@ -336,7 +332,7 @@ export class ContentSyncManager {
       content: newsletterData.content,
       category: newsletterData.category,
       author: 'FamilyOffice S 편집팀',
-      date: new Date().toISOString().split('T')[0],
+      date: new Date().toISOString().split('T')[0] as string,
       readTime: newsletterData.readTime || '5분',
       tags: newsletterData.keywords || [],
       slug: this.generateSlug(newsletterData.title),
@@ -370,6 +366,13 @@ export class ContentSyncManager {
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '');
   }
+
+  /**
+   * 기존 블로그 포스트를 티스토리용으로 일괄 변환 (공개 메서드)
+   */
+  async convertExistingPosts(blogPosts: BlogPost[]): Promise<TistoryPost[]> {
+    return this.tistoryPublisher.convertExistingPosts(blogPosts);
+  }
 }
 
 // 사용 예시
@@ -377,11 +380,11 @@ export async function initTistoryIntegration() {
   const syncManager = new ContentSyncManager();
   
   // 기존 4개 블로그 포스트를 티스토리로 변환 예시
-  const existingPosts = [
+  const existingPosts: BlogPost[] = [
     // 여기에 기존 생성된 4개 포스트 데이터
   ];
 
-  const tistoryPosts = await syncManager.tistoryPublisher.convertExistingPosts(existingPosts as BlogPost[]);
+  const tistoryPosts = await syncManager.convertExistingPosts(existingPosts);
   
   console.log('Generated Tistory posts:', tistoryPosts.length);
   return tistoryPosts;

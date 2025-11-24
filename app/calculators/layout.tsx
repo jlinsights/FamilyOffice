@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: '세무 계산기 | FamilyOffice S',
@@ -17,9 +18,9 @@ export default function CalculatorsLayout({
       <div className="bg-white border-b border-slate-200">
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center space-x-4 text-sm">
-            <a href="/" className="text-slate-600 hover:text-blue-600">홈</a>
+            <Link href="/" className="text-slate-600 hover:text-blue-600">홈</Link>
             <span className="text-slate-400">/</span>
-            <a href="/calculators" className="text-slate-600 hover:text-blue-600">계산기</a>
+            <Link href="/calculators" className="text-slate-600 hover:text-blue-600">계산기</Link>
             <span className="text-slate-400">/</span>
             <span className="text-slate-900 font-medium">세무 계산기</span>
           </nav>

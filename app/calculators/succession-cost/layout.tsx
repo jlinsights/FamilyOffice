@@ -38,3 +38,11 @@ export const metadata: Metadata = {
     canonical: 'https://familyoffices.vip/calculators/succession-cost'
   }
 };
+
+export default function SuccessionCostCalculatorLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return children;
+}
