@@ -63,6 +63,27 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     ]
   },
   { href: '/insights', label: '인사이트' },
+  { 
+    href: '/calculators', 
+    label: '계산기',
+    submenu: [
+      {
+        href: '/calculators/inheritance-tax',
+        label: '상속세 계산기',
+        description: '2025년 최신 세법 기준 상속세 계산 및 절세 방안'
+      },
+      {
+        href: '/calculators/gift-tax',
+        label: '증여세 계산기',
+        description: '관계별 공제 한도와 분할증여 최적화 시뮬레이션'
+      },
+      {
+        href: '/calculators/succession-cost',
+        label: '가업승계 비용 계산기',
+        description: '승계 방법별 비용 분석 및 가업승계 특례 적용'
+      }
+    ]
+  },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김

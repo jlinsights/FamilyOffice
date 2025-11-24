@@ -72,6 +72,35 @@ export const blogCategories: BlogCategory[] = [
     count: 2,
     description: '고액자산가 포트폴리오 구성과 대체투자 기회',
   },
+  // 새로 추가된 뉴스레터 기반 카테고리들
+  {
+    name: '리스크관리',
+    slug: 'risk-management',
+    icon: 'Shield',
+    count: 1,
+    description: 'CEO 리스크 관리와 기업보호 전략',
+  },
+  {
+    name: '의료법인',
+    slug: 'medical-corporation',
+    icon: 'Stethoscope',
+    count: 1,
+    description: '병원경영과 의료법인 최적화 전략',
+  },
+  {
+    name: '법인자산',
+    slug: 'corporate-assets',
+    icon: 'CreditCard',
+    count: 1,
+    description: '법인자산 활용과 배당 최적화',
+  },
+  {
+    name: '세무',
+    slug: 'tax-affairs',
+    icon: 'Calculator',
+    count: 1,
+    description: '세무전략과 절세 방안',
+  },
 ];
 
 // FamilyOffice S 블로그 포스트 (발행 준비된 콘텐츠)
@@ -1127,5 +1156,62 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['2025년 투자 전망', '지정학적 리스크', 'AI 투자', '포트폴리오 전략', '자산 다변화'],
     slug: 'investment-strategy-2025',
     featured: true,
+  },
+
+  // 새로 추가된 뉴스레터 기반 블로그 포스트들
+  'corporate-life-insurance-ceo-risk-management': {
+    id: 'corporate-life-insurance-ceo-risk-management',
+    title: '중견기업 CEO 유고시 대비 리스크 관리 완전 가이드',
+    excerpt: 'CEO의 갑작스러운 부재에 대비한 기업생명보험 설계와 리스크 관리 방안. 실제 케이스 분석과 절세 전략까지 한번에 해결하세요.',
+    content: '', // 실제 콘텐츠는 별도 마크다운 파일에서 로드
+    category: '리스크관리',
+    author: 'FamilyOffice S 편집팀',
+    date: '2025-08-09',
+    readTime: '5분',
+    tags: ['CEO 유고', '리스크 관리', '기업생명보험', '중견기업', '비상계획', '승계계획'],
+    slug: 'corporate-life-insurance-ceo-risk-management',
+    featured: true,
+  },
+
+  'hospital-mso-guide-tax-saving-strategy': {
+    id: 'hospital-mso-guide-tax-saving-strategy',
+    title: '병원장 필독: 성공하는 MSO의 3가지 조건',
+    excerpt: 'MSO 설립시 반드시 고려해야 할 세무, 승계 계획, 리스크 관리 전략을 상세히 분석했습니다.',
+    content: '', // 실제 콘텐츠는 별도 마크다운 파일에서 로드
+    category: '의료법인',
+    author: 'FamilyOffice S 편집팀',
+    date: '2025-08-19',
+    readTime: '5분',
+    tags: ['MSO', '의료법인', '병원 절세', '의료진 승계', '병원경영', '의료 세무'],
+    slug: 'hospital-mso-guide-tax-saving-strategy',
+    featured: true,
+  },
+
+  'retained-earnings-dividend-strategy-ceo-asset-optimization': {
+    id: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
+    title: '대표님의 숨은 자산 이익잉여금을 깨울 시간입니다',
+    excerpt: '기업의 이익잉여금을 효과적으로 활용하여 개인 자산화하는 전략과 절세 방안을 제시합니다.',
+    content: '', // 실제 콘텐츠는 별도 마크다운 파일에서 로드
+    category: '법인자산',
+    author: 'FamilyOffice S 편집팀',
+    date: '2025-08-17',
+    readTime: '4분',
+    tags: ['이익잉여금', '배당전략', '법인세', '개인자산화', '중견기업', 'CEO 자산관리'],
+    slug: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
+    featured: false,
+  },
+
+  'corporate-treasury-stock-retirement-2025-tax-analysis': {
+    id: 'corporate-treasury-stock-retirement-2025-tax-analysis',
+    title: '2025년 세법 기준 자기주식 소각의 진짜 세율과 치명적 리스크',
+    excerpt: '자기주식 소각시 발생하는 세금과 리스크를 2025년 최신 세법 기준으로 분석했습니다.',
+    content: '', // 실제 콘텐츠는 별도 마크다운 파일에서 로드
+    category: '세무',
+    author: 'FamilyOffice S 편집팀',
+    date: '2025-08-12',
+    readTime: '6분',
+    tags: ['자기주식 소각', '의제배당', '양도소득세', '2025년 세법', '법인세법', '중견기업'],
+    slug: 'corporate-treasury-stock-retirement-2025-tax-analysis',
+    featured: false,
   },
 };
