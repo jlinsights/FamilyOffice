@@ -3,8 +3,8 @@
  * 의심스러운 활동 감지 및 자동 대응
  */
 
-import { NextRequest } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { NextRequest } from 'next/server';
 
 interface SecurityEvent {
   type: 'suspicious_login' | 'rate_limit_exceeded' | 'invalid_auth' | 'admin_access' | 'data_breach_attempt';
@@ -310,7 +310,11 @@ export async function unblockIP(ip: string, adminUserId: string): Promise<boolea
       .eq('id', adminUserId)
       .single();
       
-    if (!admin || admin.email !== 'jhlim725@gmail.com') {
+    const adminEmails = (process.env.ADMIN_EMAILS || 'jhlim725@gmail.com')
+      .split(',')
+      .map(e => e.trim().toLowerCase());
+
+    if (!admin || !adminEmails.includes(admin.email.toLowerCase())) {
       return false;
     }
     

@@ -123,50 +123,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <HeroSection />
       
-      {/* AI Consulting Chat Section - 임시 주석 처리 */}
-      {/* <section id="ai-consulting" className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-6">
-              <Badge variant="outline" size="lg" animation="fade">
-                Premium AI Consulting
-              </Badge>
-            </div>
-            <h2 className="mobile-text-optimize text-3xl md:text-4xl font-bold text-foreground mb-4">
-              지금 바로 물어보세요
-            </h2>
-            <p className="mobile-text-optimize text-lg text-muted-foreground max-w-2xl mx-auto">
-              복잡한 가업승계, 세무전략, M&A 구조화까지. 
-              귀사만의 고유한 상황을 이해하고 최적화된 해법을 제시합니다.
-              전문가의 통찰력을 AI가 24시간 제공합니다.
-            </p>
-          </div>
-          
-          <div className="max-w-6xl mx-auto">
-            <AIConsultingChat maxHeight="800px" />
-          </div>
-        </div>
-      </section> */}
-      
-      {/* Services Section */}
-      <DualPillarSection />
-      <SelfCheckCTASection />
-      <ServicesSection />
-      
-      {/* Multimedia Content Section */}
-      <MultimediaContentSection />
-      
-      {/* Test Button Section - 숨김 처리 */}
-      {/* <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="mobile-text-optimize text-3xl font-bold text-foreground mb-8">
-              클라이언트 기능 테스트
-            </h2>
-            <TestButton />
-          </div>
-        </div>
-      </section> */}
+
       
       <div className="safe-area-bottom">
         <Footer />

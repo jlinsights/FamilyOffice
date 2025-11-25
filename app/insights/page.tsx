@@ -1,12 +1,12 @@
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import InsightsFeed from '@/components/insights-feed';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { BookOpen, Download, FileText, Mail, TrendingUp, Users } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText, Mail, Download, Calculator, TrendingUp, Users, BookOpen } from 'lucide-react';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
-import InsightsFeed from '@/components/insights-feed';
 
 export const metadata: Metadata = {
   title: '인사이트 센터 | 기업승계 전문 분석 | FamilyOffice S',
@@ -68,19 +68,6 @@ const insightSections = [
       'CEO 필독 자료',
     ],
   },
-  {
-    title: '연금 계산기',
-    description: '정확한 노후 설계를 위한 맞춤형 연금 계산 도구',
-    href: '/pension-calculator',
-    icon: Calculator,
-    gradient: 'from-orange-500 to-orange-600',
-    features: [
-      '정확한 수익률 계산',
-      '맞춤형 연금 설계',
-      '세금 절약 효과',
-      '노후 자금 시뮬레이션',
-    ],
-  },
 ];
 
 
@@ -108,7 +95,7 @@ export default function InsightsPage() {
       {/* Main Sections */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {insightSections.map((section) => {
               const Icon = section.icon;
               return (

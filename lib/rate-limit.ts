@@ -90,12 +90,22 @@ function getClientId(request: NextRequest): string {
   return `ip:${ip}`;
 }
 
+import { Redis } from '@upstash/redis';
+
+// Redis client initialization
+const redis = process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+  ? new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    })
+  : null;
+
 /**
  * Redis-based rate limiting (if available)
  */
 async function checkRateLimitRedis(
-  _key: string,
-  _config: typeof rateLimitConfig[RateLimitType]
+  key: string,
+  config: typeof rateLimitConfig[RateLimitType]
 ): Promise<{
   success: boolean;
   limit: number;
@@ -103,10 +113,48 @@ async function checkRateLimitRedis(
   reset: number;
   retryAfter?: number;
 } | null> {
+  if (!redis) return null;
+
   try {
-    // Redis implementation would go here
-    // For now, return null to fallback to memory store
-    return null;
+    const now = Date.now();
+    const windowStart = now - config.windowMs;
+    
+    // Use a transaction to ensure atomicity
+    // 1. Remove old requests
+    // 2. Add current request
+    // 3. Count requests in window
+    // 4. Set expiry
+    const multi = redis.multi();
+    multi.zremrangebyscore(key, 0, windowStart);
+    multi.zadd(key, { score: now, member: `${now}-${Math.random()}` });
+    multi.zcard(key);
+    multi.expire(key, Math.ceil(config.windowMs / 1000));
+    
+    const results = await multi.exec();
+    const requestCount = results[2] as number;
+    
+    if (requestCount > config.max) {
+      // Calculate retry after
+      const oldestRequest = await redis.zrange(key, 0, 0, { withScores: true });
+      const resetTime = oldestRequest.length > 0 
+        ? (oldestRequest[0] as unknown as { score: number }).score + config.windowMs 
+        : now + config.windowMs;
+        
+      return {
+        success: false,
+        limit: config.max,
+        remaining: 0,
+        reset: resetTime,
+        retryAfter: Math.ceil((resetTime - now) / 1000),
+      };
+    }
+    
+    return {
+      success: true,
+      limit: config.max,
+      remaining: Math.max(0, config.max - requestCount),
+      reset: now + config.windowMs,
+    };
   } catch (error) {
     console.warn('Redis rate limit check failed, falling back to memory store:', error);
     return null;

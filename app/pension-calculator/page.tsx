@@ -1,9 +1,10 @@
-import { Metadata } from 'next';
-import { Calculator, TrendingUp, PiggyBank, Shield } from 'lucide-react';
-import PensionCalculatorForm from '@/components/pension/pension-calculator-form';
-import { PensionCalculatorTracking } from '@/components/kakao/pension-calculator-tracking';
-import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import { PensionCalculatorTracking } from '@/components/kakao/pension-calculator-tracking';
+import PensionCalculatorForm from '@/components/pension/pension-calculator-form';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { AlertCircle, Calculator, CheckCircle, PiggyBank, Shield, Target, TrendingUp } from 'lucide-react';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '연금 계산기 - 정확한 노후 준비 계산',
@@ -21,142 +22,137 @@ export default function PensionCalculatorPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 dark:from-slate-950 dark:via-slate-900/50 dark:to-slate-800/30 pt-20">
         <PensionCalculatorTracking />
-        {/* Hero Section */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10 pt-20">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"></div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-            <div className="text-center">
-              <div className="flex justify-center mb-6">
-                <div className="bg-primary/10 backdrop-blur-sm rounded-full p-4">
-                  <Calculator className="h-12 w-12 text-primary" />
-              </div>
-              </div>
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-foreground">
-                정확한 <span className="text-primary">연금 계산기</span>
-              </h1>
-              <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              성공한 CEO를 위한 종합적인 노후 설계
-              <br />
-              개인연금, 퇴직연금, 세금혜택까지 한번에
-            </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
-                <div className="bg-card border border-border backdrop-blur-sm rounded-lg p-6">
-                  <TrendingUp className="h-8 w-8 text-primary mb-3 mx-auto" />
-                  <h3 className="font-semibold mb-2 text-card-foreground">정확한 수익률 계산</h3>
-                  <p className="text-sm text-muted-foreground">복리 효과와 세금 혜택을 고려한 정밀 계산</p>
+        
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          
+          {/* 🎯 BMAD Method: Behavioral Header - 전문성과 신뢰성 강조 */}
+          <div className="relative overflow-hidden bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-3xl shadow-2xl dark:shadow-slate-900/50 mb-16">
+            <div className="absolute inset-0 bg-grid-pattern opacity-20 dark:opacity-10"></div>
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-emerald-400/10 via-teal-400/10 to-cyan-400/10 dark:from-emerald-300/5 dark:via-teal-300/5 dark:to-cyan-300/5 rounded-full blur-3xl"></div>
+            
+            <div className="relative px-8 py-12 text-center">
+              <div className="flex items-center justify-center gap-6 mb-8">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 dark:from-emerald-400/20 dark:to-teal-400/20 rounded-2xl blur-xl animate-pulse"></div>
+                  <div className="relative p-4 bg-gradient-to-br from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-500 rounded-2xl shadow-lg">
+                    <Calculator className="w-12 h-12 text-white" />
+                  </div>
                 </div>
-                <div className="bg-card border border-border backdrop-blur-sm rounded-lg p-6">
-                  <PiggyBank className="h-8 w-8 text-primary mb-3 mx-auto" />
-                  <h3 className="font-semibold mb-2 text-card-foreground">맞춤형 연금 설계</h3>
-                  <p className="text-sm text-muted-foreground">개인 상황에 최적화된 연금 포트폴리오</p>
+                <div className="flex flex-col items-start">
+                  <h1 className="text-6xl font-black bg-gradient-to-r from-slate-900 via-emerald-800 to-teal-900 dark:from-slate-100 dark:via-emerald-200 dark:to-teal-200 bg-clip-text text-transparent leading-tight">
+                    연금 계산기
+                  </h1>
+                  <div className="flex items-center gap-3 mt-3">
+                    <span className="px-4 py-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-sm font-bold rounded-full border border-emerald-200 dark:border-emerald-700">
+                      💰 복리 효과 분석
+                    </span>
+                    <span className="px-4 py-2 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-sm font-bold rounded-full border border-blue-200 dark:border-blue-700">
+                      📉 세액공제 계산
+                    </span>
+                    <span className="px-4 py-2 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-sm font-bold rounded-full border border-purple-200 dark:border-purple-700">
+                      ⚡ AI 은퇴 설계
+                    </span>
+                  </div>
                 </div>
-                <div className="bg-card border border-border backdrop-blur-sm rounded-lg p-6">
-                  <Shield className="h-8 w-8 text-primary mb-3 mx-auto" />
-                  <h3 className="font-semibold mb-2 text-card-foreground">세금 절약 효과</h3>
-                  <p className="text-sm text-muted-foreground">연금저축과 퇴직연금의 세액공제 분석</p>
+              </div>
+              
+              <div className="max-w-5xl mx-auto mb-8">
+                <p className="text-2xl text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                  <span className="font-bold text-emerald-600 dark:text-emerald-400">성공적인 노후</span>를 위한 정밀 시뮬레이션
+                </p>
+                <p className="text-xl text-slate-500 dark:text-slate-400 leading-relaxed">
+                  개인연금, 퇴직연금, 세금혜택까지 <span className="font-semibold text-teal-600 dark:text-teal-400">한 번에 계산</span>하세요
+                </p>
+              </div>
+              
+              {/* 🎯 BMAD Method: Motivational - 핵심 가치 제안 */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                <div className="group p-6 bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm rounded-2xl border border-emerald-200/50 dark:border-emerald-700/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <TrendingUp className="w-8 h-8 text-emerald-600 dark:text-emerald-400 mb-3 mx-auto" />
+                  <h3 className="font-bold text-emerald-900 dark:text-emerald-100 mb-2">수익률 분석</h3>
+                  <p className="text-sm text-emerald-700 dark:text-emerald-300">복리 효과 정밀 계산</p>
+                </div>
+                <div className="group p-6 bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm rounded-2xl border border-blue-200/50 dark:border-blue-700/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <PiggyBank className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-3 mx-auto" />
+                  <h3 className="font-bold text-blue-900 dark:text-blue-100 mb-2">맞춤형 설계</h3>
+                  <p className="text-sm text-blue-700 dark:text-blue-300">개인별 최적 포트폴리오</p>
+                </div>
+                <div className="group p-6 bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm rounded-2xl border border-purple-200/50 dark:border-purple-700/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <Shield className="w-8 h-8 text-purple-600 dark:text-purple-400 mb-3 mx-auto" />
+                  <h3 className="font-bold text-purple-900 dark:text-purple-100 mb-2">세금 절약</h3>
+                  <p className="text-sm text-purple-700 dark:text-purple-300">세액공제 효과 분석</p>
+                </div>
+                <div className="group p-6 bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm rounded-2xl border border-amber-200/50 dark:border-amber-700/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <Target className="w-8 h-8 text-amber-600 dark:text-amber-400 mb-3 mx-auto" />
+                  <h3 className="font-bold text-amber-900 dark:text-amber-100 mb-2">목표 달성</h3>
+                  <p className="text-sm text-amber-700 dark:text-amber-300">은퇴 자금 시뮬레이션</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Main Calculator Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          {/* Main Calculator Section */}
           <PensionCalculatorForm />
-        </div>
 
-        {/* Information Section */}
-        <div className="bg-card py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-card-foreground mb-4">
-                연금 계산기 사용 가이드
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                정확한 노후 설계를 위한 단계별 가이드
+          {/* 🎯 2025년 연금 세제 혜택 정보 */}
+          <div className="mt-16">
+            <Card className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-xl dark:shadow-slate-900/50">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-500 rounded-xl text-white">
+                    <CheckCircle className="w-5 h-5" />
+                  </div>
+                  <span className="text-slate-900 dark:text-slate-100">2025년 연금 세제 혜택 주요 포인트</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 text-sm">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-start gap-3 p-4 bg-emerald-50/80 dark:bg-emerald-900/20 rounded-xl">
+                    <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-emerald-800 dark:text-emerald-200 block">세액공제 한도 확대</span>
+                      <span className="text-emerald-700 dark:text-emerald-300">연금저축 + IRP 합산 최대 900만원</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-4 bg-blue-50/80 dark:bg-blue-900/20 rounded-xl">
+                    <CheckCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-blue-800 dark:text-blue-200 block">연금소득세 저율 과세</span>
+                      <span className="text-blue-700 dark:text-blue-300">연령에 따라 3.3% ~ 5.5% 적용</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-4 bg-purple-50/80 dark:bg-purple-900/20 rounded-xl">
+                    <CheckCircle className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-purple-800 dark:text-purple-200 block">사적연금 분리과세</span>
+                      <span className="text-purple-700 dark:text-purple-300">연 1,500만원 이하 분리과세 선택 가능</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-4 bg-amber-50/80 dark:bg-amber-900/20 rounded-xl">
+                    <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-amber-800 dark:text-amber-200 block">ISA 만기 자금 전환</span>
+                      <span className="text-amber-700 dark:text-amber-300">추가 세액공제 혜택 (전환금액의 10%)</span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* 🎯 하단 면책 고지 */}
+          <div className="mt-16 text-center">
+            <div className="max-w-4xl mx-auto p-6 bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                ⚠️ <strong className="text-slate-800 dark:text-slate-200">면책 고지</strong>: 본 계산기는 일반적인 연금 수령액 예상 금액 산출을 위한 도구입니다. 
+                실제 수령액은 투자 수익률, 물가상승률, 세법 변경 등에 따라 달라질 수 있으므로 
+                정확한 노후 설계 수립을 위해서는 반드시 <strong className="text-slate-800 dark:text-slate-200">전문가와 상담</strong>하시기 바랍니다.
               </p>
             </div>
-          
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-xl font-semibold text-card-foreground mb-6">
-                  📊 계산 항목 설명
-                </h3>
-                <div className="space-y-4">
-                  <div className="border-l-4 border-primary pl-4">
-                    <h4 className="font-medium text-card-foreground">현재 나이</h4>
-                    <p className="text-muted-foreground text-sm">연금 수령까지의 투자 기간 계산 기준</p>
-                  </div>
-                  <div className="border-l-4 border-green-600 dark:border-green-400 pl-4">
-                    <h4 className="font-medium text-card-foreground">월 납입액</h4>
-                    <p className="text-muted-foreground text-sm">매월 납입할 연금 금액 (개인연금 + 퇴직연금)</p>
-                  </div>
-                  <div className="border-l-4 border-purple-600 dark:border-purple-400 pl-4">
-                    <h4 className="font-medium text-card-foreground">연간 수익률</h4>
-                    <p className="text-muted-foreground text-sm">예상 투자 수익률 (일반적으로 3-7%)</p>
-                  </div>
-                  <div className="border-l-4 border-red-600 dark:border-red-400 pl-4">
-                    <h4 className="font-medium text-card-foreground">연금 수령 나이</h4>
-                    <p className="text-muted-foreground text-sm">연금을 받기 시작할 나이 (55세 이상)</p>
-                </div>
-              </div>
-            </div>
-            
-              <div>
-                <h3 className="text-xl font-semibold text-card-foreground mb-6">
-                  💡 계산 결과 활용법
-                </h3>
-                <div className="space-y-4">
-                  <div className="bg-muted/50 rounded-lg p-4">
-                    <h4 className="font-medium text-card-foreground mb-2">
-                      1. 목표 설정
-                    </h4>
-                    <p className="text-muted-foreground text-sm">
-                    현재 생활비의 70-80% 수준의 노후 생활비를 목표로 설정
-                  </p>
-                  </div>
-                  <div className="bg-muted/50 rounded-lg p-4">
-                    <h4 className="font-medium text-card-foreground mb-2">
-                      2. 납입액 조정
-                    </h4>
-                    <p className="text-muted-foreground text-sm">
-                    목표액 달성을 위해 월 납입액을 점진적으로 증액
-                  </p>
-                  </div>
-                  <div className="bg-muted/50 rounded-lg p-4">
-                    <h4 className="font-medium text-card-foreground mb-2">
-                      3. 세금 혜택 극대화
-                    </h4>
-                    <p className="text-muted-foreground text-sm">
-                    연금저축 세액공제 한도(연 700만원)를 최대한 활용
-                  </p>
-                  </div>
-                  <div className="bg-muted/50 rounded-lg p-4">
-                    <h4 className="font-medium text-card-foreground mb-2">
-                      4. 정기적 점검
-                    </h4>
-                    <p className="text-muted-foreground text-sm">
-                    연 1-2회 계산을 다시 해보며 계획을 업데이트
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
-          
-            <div className="mt-12 p-6 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
-              <h3 className="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-2">
-                ⚠️ 중요한 고려사항
-              </h3>
-              <ul className="text-amber-700 dark:text-amber-300 text-sm space-y-1">
-              <li>• 인플레이션률을 고려하여 실질 구매력을 계산해야 합니다</li>
-              <li>• 의료비 등 노후 추가 비용을 별도로 준비하는 것이 좋습니다</li>
-              <li>• 연금 수령 방식(일시금 vs 연금)에 따라 세금이 다를 수 있습니다</li>
-              <li>• 전문 상담을 통해 개인별 최적 전략을 수립하시기 바랍니다</li>
-              </ul>
-            </div>
-          </div>
+
         </div>
       </div>
       <Footer />

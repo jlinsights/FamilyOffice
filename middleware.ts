@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import { globalRateLimit } from '@/lib/rate-limit';
+import { autoSecurityResponse, detectSuspiciousActivity, logSecurityEvent } from '@/lib/security/security-monitor';
 import { currentUser } from '@clerk/nextjs/server';
-import { detectSuspiciousActivity, autoSecurityResponse, logSecurityEvent } from '@/lib/security/security-monitor';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 // 허용된 도메인 목록 - 보안 강화
 const ALLOWED_ORIGINS = [
@@ -14,7 +14,7 @@ const ALLOWED_ORIGINS = [
 ];
 
 // 슈퍼 관리자 이메일 목록
-const SUPER_ADMIN_EMAILS = ['jhlim725@gmail.com'];
+const SUPER_ADMIN_EMAILS = (process.env.ADMIN_EMAILS || 'jhlim725@gmail.com').split(',').map(email => email.trim());
 
 // 보호된 API 경로 패턴
 const PROTECTED_API_PATTERNS = [
@@ -182,13 +182,12 @@ export const config = {
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
-     * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
-    // Also match static files to add proper headers
-    '/_next/static/(.*)',
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+    // Explicitly match API routes to ensure they are covered
+    '/api/:path*',
   ],
 };

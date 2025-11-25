@@ -1,14 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { AnimatedCounter } from '@/components/animated-counter';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { Calculator, PieChart, TrendingUp, Wallet, Calendar, Target, RotateCcw } from 'lucide-react';
 import { formatNumber, parseNumber } from '@/lib/utils';
-import { AnimatedCounter } from '@/components/animated-counter';
+import { Calculator, Calendar, DollarSign, Lightbulb, Percent, PieChart, RotateCcw, Target, TrendingUp, User, Wallet } from 'lucide-react';
+import { useState } from 'react';
 
 interface PensionInputs {
   currentAge: number;
@@ -98,9 +98,9 @@ export default function PensionCalculatorForm() {
       
       // Tax benefit calculation (assuming 15% tax deduction on contributions)
       const annualContribution = inputs.monthlyContribution * 12;
-      const taxDeductionLimit = 7000000; // 700만원 세액공제 한도
+      const taxDeductionLimit = 9000000; // 2025년 기준 900만원 세액공제 한도 (연금저축+IRP)
       const deductibleAmount = Math.min(annualContribution, taxDeductionLimit);
-      const taxBenefit = deductibleAmount * 0.15 * yearsToRetirement;
+      const taxBenefit = deductibleAmount * 0.165 * yearsToRetirement; // 16.5% 가정 (총급여 5,500만원 이하)
       
       // Real purchasing power (adjusted for inflation)
       const realPurchasingPower = monthlyPension / 
@@ -121,344 +121,345 @@ export default function PensionCalculatorForm() {
     }, 1000);
   };
 
-  // 자동 계산 비활성화 - 수동 계산만 허용
-  // useEffect(() => {
-  //   // Auto-calculate when inputs change (with debounce)
-  //   const timeoutId = setTimeout(() => {
-  //     if (inputs.currentAge < inputs.retirementAge && 
-  //         inputs.monthlyContribution > 0 && 
-  //         inputs.annualReturn >= 0) {
-  //       calculatePension();
-  //     }
-  //   }, 500);
-
-  //   return () => clearTimeout(timeoutId);
-  // }, [inputs]);
-
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+    <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
       {/* Input Form */}
-      <Card className="shadow-2xl border-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm w-full max-w-none">
-        <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 border-b border-border">
-          <CardTitle className="flex items-center gap-2 text-card-foreground">
-            <Calculator className="h-5 w-5 text-primary" />
-            연금 계산 입력
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="currentAge" className="text-sm font-medium">
-                현재 나이
-              </Label>
-              <div className="relative">
-                <Input
-                  id="currentAge"
-                  type="number"
-                  value={inputs.currentAge}
-                  onChange={(e) => handleInputChange('currentAge', e.target.value)}
-                  className="pr-12"
-                  min="20"
-                  max="70"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                  세
-                </span>
+      <div className="xl:col-span-5 space-y-8">
+        <Card className="group bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50 shadow-2xl dark:shadow-slate-900/50 hover:shadow-3xl transition-all duration-500 hover:-translate-y-2">
+          <CardHeader className="pb-6">
+            <CardTitle className="flex items-center gap-4">
+              <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 rounded-2xl text-white shadow-lg">
+                <Calculator className="w-6 h-6" />
               </div>
-            </div>
-            
-            <div>
-              <Label htmlFor="retirementAge" className="text-sm font-medium">
-                연금 수령 나이
-              </Label>
-              <div className="relative">
-                <Input
-                  id="retirementAge"
-                  type="number"
-                  value={inputs.retirementAge}
-                  onChange={(e) => handleInputChange('retirementAge', e.target.value)}
-                  className="pr-12"
-                  min="55"
-                  max="80"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                  세
-                </span>
+              <div>
+                <span className="text-slate-900 dark:text-slate-100 text-xl font-bold">연금 정보 입력</span>
+                <p className="text-sm text-slate-500 dark:text-slate-400 font-normal">현재 상황과 목표를 입력해주세요</p>
               </div>
-            </div>
-          </div>
-
-          <div>
-            <Label htmlFor="initialAmount" className="text-sm font-medium">
-              초기 투자금액
-            </Label>
-            <div className="relative">
-              <Input
-                id="initialAmount"
-                type="text"
-                value={formatNumber(inputs.initialAmount)}
-                onChange={(e) => handleInputChange('initialAmount', e.target.value)}
-                className="pr-12"
-                placeholder="0"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                원
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <Label htmlFor="monthlyContribution" className="text-sm font-medium">
-              월 납입액
-            </Label>
-            <div className="relative">
-              <Input
-                id="monthlyContribution"
-                type="text"
-                value={formatNumber(inputs.monthlyContribution)}
-                onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
-                className="pr-12"
-                placeholder="1,000,000"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                원
-              </span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              연금저축과 퇴직연금 합계 금액을 입력하세요
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="annualReturn" className="text-sm font-medium">
-                연간 예상 수익률
-              </Label>
-              <div className="relative">
-                <Input
-                  id="annualReturn"
-                  type="number"
-                  value={inputs.annualReturn}
-                  onChange={(e) => handleInputChange('annualReturn', e.target.value)}
-                  className="pr-12"
-                  step="0.1"
-                  min="0"
-                  max="15"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                  %
-                </span>
-              </div>
-            </div>
-            
-            <div>
-              <Label htmlFor="inflationRate" className="text-sm font-medium">
-                물가상승률
-              </Label>
-              <div className="relative">
-                <Input
-                  id="inflationRate"
-                  type="number"
-                  value={inputs.inflationRate}
-                  onChange={(e) => handleInputChange('inflationRate', e.target.value)}
-                  className="pr-12"
-                  step="0.1"
-                  min="0"
-                  max="10"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                  %
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button 
-              onClick={resetToDefaults}
-              variant="outline"
-              className="flex-1"
-              disabled={isCalculating}
-            >
-              <RotateCcw className="h-4 w-4 mr-2" />
-              초기화 하기
-            </Button>
-            
-            <Button 
-              onClick={calculatePension} 
-              className="flex-1"
-              disabled={isCalculating}
-            >
-              {isCalculating ? (
-                <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                  계산 중...
-                </>
-              ) : (
-                <>
-                  <Calculator className="h-4 w-4 mr-2" />
-                  연금 계산하기
-                </>
-              )}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Results */}
-      <Card className="shadow-2xl border-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm w-full max-w-none">
-        <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10 border-b border-border">
-          <CardTitle className="flex items-center gap-2 text-card-foreground">
-            <PieChart className="h-5 w-5 text-primary" />
-            계산 결과
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-4 sm:p-6">
-          {results ? (
-            <div className="space-y-6">
-              {/* 핵심 결과 */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="text-center p-4 bg-primary/5 dark:bg-primary/10 rounded-lg border border-primary/10 dark:border-primary/20">
-                  <Target className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground mb-1">총 연금 자산</p>
-                  <p className="text-2xl font-bold text-primary">
-                    <AnimatedCounter
-                      end={Math.round(results.totalSavings)}
-                      startAnimation={shouldAnimate}
-                      duration={2000}
-                      formatNumber={formatNumber}
-                      suffix="원"
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <Label htmlFor="currentAge" className="text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-2">
+                    <User className="w-4 h-4 text-emerald-500" />
+                    현재 나이
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="currentAge"
+                      type="number"
+                      value={inputs.currentAge}
+                      onChange={(e) => handleInputChange('currentAge', e.target.value)}
+                      className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-emerald-500/20 dark:focus:ring-emerald-400/20 rounded-xl transition-all duration-200 pr-12"
+                      min="20"
+                      max="70"
                     />
-                  </p>
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">세</span>
+                  </div>
                 </div>
                 
-                <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
-                  <Wallet className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground mb-1">월 예상 연금</p>
-                  <p className="text-2xl font-bold text-green-600 dark:text-green-400">
-                    <AnimatedCounter
-                      end={Math.round(results.monthlyPension)}
-                      startAnimation={shouldAnimate}
-                      duration={2500}
-                      formatNumber={formatNumber}
-                      suffix="원"
+                <div className="space-y-3">
+                  <Label htmlFor="retirementAge" className="text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-blue-500" />
+                    은퇴 나이
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="retirementAge"
+                      type="number"
+                      value={inputs.retirementAge}
+                      onChange={(e) => handleInputChange('retirementAge', e.target.value)}
+                      className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 rounded-xl transition-all duration-200 pr-12"
+                      min="55"
+                      max="80"
                     />
-                  </p>
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">세</span>
+                  </div>
                 </div>
               </div>
 
-              <Separator />
-
-              {/* 상세 결과 */}
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">총 납입원금</span>
-                  <span className="font-medium">
-                    <AnimatedCounter
-                      end={Math.round(results.totalContributions)}
-                      startAnimation={shouldAnimate}
-                      duration={1800}
-                      formatNumber={formatNumber}
-                      suffix="원"
-                    />
-                  </span>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">투자 수익</span>
-                  <span className="font-medium text-primary">
-                    <AnimatedCounter
-                      end={Math.round(results.totalInterest)}
-                      startAnimation={shouldAnimate}
-                      duration={2200}
-                      formatNumber={formatNumber}
-                      prefix="+"
-                      suffix="원"
-                    />
-                  </span>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">예상 세액공제 혜택</span>
-                  <span className="font-medium text-green-600">
-                    <AnimatedCounter
-                      end={Math.round(results.taxBenefit)}
-                      startAnimation={shouldAnimate}
-                      duration={1600}
-                      formatNumber={formatNumber}
-                      suffix="원"
-                    />
-                  </span>
-                </div>
-                
-                <Separator />
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">실질 구매력 (현재 가치)</span>
-                  <span className="font-medium text-orange-600">
-                    <AnimatedCounter
-                      end={Math.round(results.realPurchasingPower)}
-                      startAnimation={shouldAnimate}
-                      duration={2800}
-                      formatNumber={formatNumber}
-                      suffix="원/월"
-                    />
-                  </span>
+              <div className="space-y-3">
+                <Label htmlFor="initialAmount" className="text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-2">
+                  <Wallet className="w-4 h-4 text-purple-500" />
+                  초기 투자금액
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="initialAmount"
+                    type="text"
+                    value={formatNumber(inputs.initialAmount)}
+                    onChange={(e) => handleInputChange('initialAmount', e.target.value)}
+                    className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-purple-500/20 dark:focus:ring-purple-400/20 rounded-xl transition-all duration-200 pr-12"
+                    placeholder="0"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">원</span>
                 </div>
               </div>
 
-              {/* 투자 기간 정보 */}
-              <div className="bg-muted/50 dark:bg-slate-800/50 rounded-lg p-4 border border-border">
-                <div className="flex items-center gap-2 mb-2">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm font-medium text-card-foreground">투자 계획 요약</span>
+              <div className="space-y-3">
+                <Label htmlFor="monthlyContribution" className="text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-2">
+                  <DollarSign className="w-4 h-4 text-amber-500" />
+                  월 납입액
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="monthlyContribution"
+                    type="text"
+                    value={formatNumber(inputs.monthlyContribution)}
+                    onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
+                    className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-amber-500 dark:focus:border-amber-400 focus:ring-amber-500/20 dark:focus:ring-amber-400/20 rounded-xl transition-all duration-200 pr-12"
+                    placeholder="1,000,000"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">원</span>
                 </div>
-                <div className="text-sm text-muted-foreground space-y-1">
-                  <p>• 투자 기간: {inputs.retirementAge - inputs.currentAge}년</p>
-                  <p>• 월 납입액: {formatNumber(inputs.monthlyContribution)}원</p>
-                  <p>• 예상 수익률: {inputs.annualReturn}% (연간)</p>
-                  <p>• 물가상승률: {inputs.inflationRate}% (연간)</p>
-                </div>
+                <p className="text-xs text-slate-500 mt-1 ml-1">
+                  * 연금저축 + 퇴직연금(IRP) 합산 금액 권장
+                </p>
               </div>
 
-              {/* 추천 메시지 */}
-              <div className="bg-primary/5 dark:bg-primary/10 border border-primary/20 dark:border-primary/30 rounded-lg p-4">
-                <div className="flex items-start gap-3">
-                  <TrendingUp className="h-5 w-5 text-primary mt-0.5" />
-                  <div>
-                    <p className="text-sm font-medium text-primary mb-1">
-                      전문가 조언
-                    </p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      현재 계획으로 월{' '}
-                      <AnimatedCounter
-                        end={Math.round(results.realPurchasingPower)}
-                        startAnimation={shouldAnimate}
-                        duration={2800}
-                        formatNumber={formatNumber}
-                        suffix="원"
-                      />{' '}
-                      (현재 구매력 기준)의 연금을 받을 수 있습니다.
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                      더 풍족한 노후를 위해 월 납입액을 늘리거나 수익률이 높은 상품을 고려해보세요.
-                    </p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <Label htmlFor="annualReturn" className="text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-red-500" />
+                    예상 수익률
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="annualReturn"
+                      type="number"
+                      value={inputs.annualReturn}
+                      onChange={(e) => handleInputChange('annualReturn', e.target.value)}
+                      className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500/20 dark:focus:ring-red-400/20 rounded-xl transition-all duration-200 pr-12"
+                      step="0.1"
+                      min="0"
+                      max="15"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">%</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-3">
+                  <Label htmlFor="inflationRate" className="text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-2">
+                    <Percent className="w-4 h-4 text-indigo-500" />
+                    물가상승률
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="inflationRate"
+                      type="number"
+                      value={inputs.inflationRate}
+                      onChange={(e) => handleInputChange('inflationRate', e.target.value)}
+                      className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500/20 dark:focus:ring-indigo-400/20 rounded-xl transition-all duration-200 pr-12"
+                      step="0.1"
+                      min="0"
+                      max="10"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">%</span>
                   </div>
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="text-center py-12 text-muted-foreground">
-              <div className="bg-muted/30 dark:bg-slate-800/30 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4">
-                <Calculator className="h-12 w-12 opacity-50" />
-              </div>
-              <p className="text-lg font-medium mb-2">계산 대기 중</p>
-              <p className="text-sm">좌측 입력란에 정보를 입력하고</p>
-              <p className="text-sm">연금 계산하기 버튼을 눌러주세요.</p>
+
+            <div className="flex gap-3 pt-2">
+              <Button 
+                onClick={resetToDefaults}
+                variant="outline"
+                className="flex-1 h-12 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
+                disabled={isCalculating}
+              >
+                <RotateCcw className="h-4 w-4 mr-2" />
+                초기화
+              </Button>
+              
+              <Button 
+                onClick={calculatePension} 
+                className="flex-[2] h-12 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                disabled={isCalculating}
+              >
+                {isCalculating ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                    계산 중...
+                  </>
+                ) : (
+                  <>
+                    <Calculator className="h-4 w-4 mr-2" />
+                    연금 계산하기
+                  </>
+                )}
+              </Button>
             </div>
-          )}
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Results */}
+      <div className="xl:col-span-7 space-y-8">
+        <Card className="relative overflow-hidden bg-gradient-to-br from-white via-emerald-50/40 to-teal-50/30 dark:from-slate-800 dark:via-slate-800/90 dark:to-slate-700/60 border-2 border-emerald-200/60 dark:border-emerald-700/60 shadow-3xl dark:shadow-slate-900/70 h-full">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-400/10 via-teal-400/10 to-cyan-400/10 dark:from-emerald-300/5 dark:via-teal-300/5 dark:to-cyan-300/5 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-br from-blue-400/5 via-emerald-400/5 to-teal-400/5 dark:from-blue-300/3 dark:via-emerald-300/3 dark:to-teal-300/3 rounded-full blur-3xl"></div>
+          
+          <CardHeader className="relative pb-8">
+            <CardTitle className="flex items-center gap-4">
+              <div className="p-4 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 dark:from-emerald-400 dark:via-teal-400 dark:to-cyan-500 rounded-3xl text-white shadow-2xl">
+                <PieChart className="w-8 h-8" />
+              </div>
+              <div>
+                <span className="text-3xl font-black text-slate-900 dark:text-slate-100">계산 결과</span>
+                <p className="text-sm text-emerald-600 dark:text-emerald-400 font-semibold mt-1">2025년 세법 기준 • 복리 효과 반영</p>
+              </div>
+            </CardTitle>
+          </CardHeader>
+          
+          <CardContent className="relative space-y-8">
+            {results ? (
+              <div className="space-y-6">
+                {/* 핵심 결과 */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-6 bg-gradient-to-br from-emerald-50 to-emerald-100/80 dark:from-emerald-900/20 dark:to-emerald-800/10 rounded-2xl border border-emerald-200/50 dark:border-emerald-700/50">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-3 h-3 bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full animate-pulse"></div>
+                      <span className="text-emerald-800 dark:text-emerald-200 font-bold">총 연금 자산</span>
+                    </div>
+                    <p className="text-3xl font-black text-emerald-700 dark:text-emerald-300">
+                      <AnimatedCounter
+                        end={Math.round(results.totalSavings)}
+                        startAnimation={shouldAnimate}
+                        duration={2000}
+                        formatNumber={formatNumber}
+                        suffix="원"
+                      />
+                    </p>
+                  </div>
+                  
+                  <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100/80 dark:from-blue-900/20 dark:to-blue-800/10 rounded-2xl border border-blue-200/50 dark:border-blue-700/50">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full"></div>
+                      <span className="text-blue-800 dark:text-blue-200 font-bold">월 예상 수령액</span>
+                    </div>
+                    <p className="text-3xl font-black text-blue-700 dark:text-blue-300">
+                      <AnimatedCounter
+                        end={Math.round(results.monthlyPension)}
+                        startAnimation={shouldAnimate}
+                        duration={2500}
+                        formatNumber={formatNumber}
+                        suffix="원"
+                      />
+                    </p>
+                  </div>
+                </div>
+
+                {/* 상세 분석 */}
+                <div className="p-6 bg-white/60 dark:bg-slate-800/60 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">총 납입원금</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200">
+                      <AnimatedCounter
+                        end={Math.round(results.totalContributions)}
+                        startAnimation={shouldAnimate}
+                        duration={1800}
+                        formatNumber={formatNumber}
+                        suffix="원"
+                      />
+                    </span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">투자 수익 (이자)</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                      <AnimatedCounter
+                        end={Math.round(results.totalInterest)}
+                        startAnimation={shouldAnimate}
+                        duration={2200}
+                        formatNumber={formatNumber}
+                        prefix="+"
+                        suffix="원"
+                      />
+                    </span>
+                  </div>
+                  
+                  <Separator className="bg-slate-200 dark:bg-slate-700" />
+                  
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-600 dark:text-slate-400 font-medium">예상 세액공제 혜택</span>
+                      <span className="px-2 py-0.5 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs font-bold rounded-full">Total</span>
+                    </div>
+                    <span className="font-bold text-purple-600 dark:text-purple-400">
+                      <AnimatedCounter
+                        end={Math.round(results.taxBenefit)}
+                        startAnimation={shouldAnimate}
+                        duration={1600}
+                        formatNumber={formatNumber}
+                        suffix="원"
+                      />
+                    </span>
+                  </div>
+                </div>
+
+                {/* AI 인사이트 */}
+                <div className="p-6 bg-gradient-to-br from-amber-50 via-yellow-50/90 to-orange-50/60 dark:from-amber-900/20 dark:via-yellow-900/20 dark:to-orange-900/20 border border-amber-200/50 dark:border-amber-700/50 rounded-2xl">
+                  <div className="flex items-start gap-4">
+                    <div className="p-2 bg-amber-500/10 dark:bg-amber-400/20 rounded-xl">
+                      <Lightbulb className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-amber-900 dark:text-amber-100 text-lg mb-2">💡 AI 은퇴 설계 제안</h4>
+                      <div className="space-y-2 text-sm text-amber-800 dark:text-amber-200">
+                        <p className="leading-relaxed">
+                          현재 물가상승률({inputs.inflationRate}%)을 고려했을 때, 은퇴 시점의 실질 구매력은 월{' '}
+                          <strong className="text-amber-700 dark:text-amber-300">
+                            {formatNumber(Math.round(results.realPurchasingPower))}원
+                          </strong>{' '}
+                          수준입니다.
+                        </p>
+                        <p className="leading-relaxed mt-2">
+                          더 풍요로운 노후를 위해 <strong className="text-amber-700 dark:text-amber-300">월 납입액을 10% 증액</strong>하거나, 
+                          <strong className="text-amber-700 dark:text-amber-300">ISA 계좌 만기 자금</strong>을 연금으로 전환하여 추가 세액공제를 받는 것을 추천합니다.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                  <Button className="h-14 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" size="lg">
+                    <a href="/contact?service=pension" className="w-full flex items-center justify-center gap-2">
+                      <Target className="w-5 h-5" />
+                      전문가 무료 상담 신청
+                    </a>
+                  </Button>
+                  <Button variant="outline" className="h-14 border-2 border-blue-200 dark:border-blue-700 hover:border-blue-300 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 font-semibold rounded-xl transition-all duration-200" size="lg">
+                    <a href="/calculators/tax-strategy" className="w-full flex items-center justify-center gap-2">
+                      <TrendingUp className="w-5 h-5" />
+                      절세 전략 더보기
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center p-8">
+                <div className="bg-slate-100 dark:bg-slate-800/50 rounded-full p-8 mb-6 animate-pulse">
+                  <Calculator className="h-16 w-16 text-slate-400 dark:text-slate-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-700 dark:text-slate-300 mb-2">
+                  연금 계산을 시작해보세요
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-8">
+                  좌측 입력란에 현재 나이, 은퇴 목표, 납입 계획을 입력하시면
+                  복리 효과가 적용된 예상 연금 수령액을 분석해드립니다.
+                </p>
+                <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 font-medium bg-emerald-50 dark:bg-emerald-900/20 px-4 py-2 rounded-full">
+                  <Target className="w-4 h-4" />
+                  <span>2025년 세법 개정안 반영 완료</span>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

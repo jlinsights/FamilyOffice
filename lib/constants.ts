@@ -81,6 +81,11 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
         href: '/calculators/succession-cost',
         label: '가업승계 비용 계산기',
         description: '승계 방법별 비용 분석 및 가업승계 특례 적용'
+      },
+      {
+        href: '/pension-calculator',
+        label: '연금 계산기',
+        description: '개인연금, 퇴직연금, 국민연금 종합 계산 및 절세 효과 분석'
       }
     ]
   },
@@ -89,7 +94,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   { href: '/seminar', label: '세미나' },
   { href: '/recruit', label: '채용' },
-] as const;
+];
 
 // 위 4개 메뉴는 미완성 상태이므로 주석 처리하여 숨깁니다.
 // 추후 완성 시 주석을 해제하면 바로 노출됩니다.
@@ -120,7 +125,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       '복잡한 세무 및 법률 이슈를 효과적으로 해결하고, 최적의 구조를 설계합니다.',
     href: '/solutions#tax-legal',
   },
-] as const;
+]
 
 // 프로그램 데이터 (familyoffices.vip 벤치마킹)
 export const PROGRAM_DATA = {
