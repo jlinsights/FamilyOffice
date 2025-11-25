@@ -1,15 +1,16 @@
 'use client';
 
 import {
-    ArrowRight,
-    Briefcase,
-    CheckCircle,
+  ArrowRight,
+  Briefcase,
+  CheckCircle,
+  Crown,
+  Star
 } from 'lucide-react';
 
 import Link from 'next/link';
 import React from 'react';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 import { AnimatedCounter } from '@/components/animated-counter';
@@ -73,7 +74,7 @@ const ServicePageContent = () => {
   const filteredServices = filterServices(selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <Header />
 
       <main className="pt-20">
@@ -84,67 +85,74 @@ const ServicePageContent = () => {
             { name: '솔루션', url: 'https://familyoffices.vip/solutions', isCurrentPage: true }
           ]} />
         </div>
+        
         {/* Hero Section */}
-        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+        <section className="relative w-full py-24 md:py-32 flex flex-col items-center justify-center overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-emerald-400/10 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
             <div className="flex justify-center mb-8">
-              <Badge variant="outline" size="lg" animation="fade">
-                <Briefcase className="h-3 w-3 mr-1" />
-                Premium Solutions
-              </Badge>
+              <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full shadow-sm animate-fade-in">
+                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full mr-2">Premium Solutions</span>
+                <span className="text-sm text-slate-600 dark:text-slate-300 pr-2 flex items-center">
+                  <Briefcase className="h-3 w-3 mr-1" />
+                  전문가 솔루션
+                </span>
+              </div>
             </div>
 
-            <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 text-primary whitespace-pre-line animate-slide-up">
-              프리미엄 <strong>자산관리 솔루션</strong>{'\n'}<span className="text-blue-600">패밀리오피스</span>
+            <h1 className="font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-8 text-slate-900 dark:text-white whitespace-pre-line animate-slide-up tracking-tight">
+              프리미엄 <span className="bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">자산관리 솔루션</span>{'\n'}패밀리오피스
             </h1>
 
             <p
-              className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-4 sm:mb-6 animate-slide-up"
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-700 dark:text-slate-300 mb-6 animate-slide-up"
               style={{ animationDelay: '200ms' }}
             >
-              <strong>개인자산 30억+ 고액자산가</strong> 전용 솔루션
+              <span className="text-blue-600 dark:text-blue-400">개인자산 30억+ 고액자산가</span> 전용 솔루션
             </p>
 
             <p
-              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
+              className="text-lg text-slate-600 dark:text-slate-400 mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed font-light"
               style={{ animationDelay: '300ms' }}
             >
-              <strong>중견기업 CEO</strong>와 <strong>고액자산가</strong>를 위한 맞춤형 <strong>패밀리오피스 서비스</strong>.{' '}
-              <span className="font-semibold text-primary">
+              <strong className="font-semibold text-slate-900 dark:text-white">중견기업 CEO</strong>와 <strong className="font-semibold text-slate-900 dark:text-white">고액자산가</strong>를 위한 맞춤형 <strong className="font-semibold text-slate-900 dark:text-white">패밀리오피스 서비스</strong>.<br className="hidden md:block" />
+              <span className="font-semibold text-blue-600 dark:text-blue-400">
                 법인종신보험 설계, 포트폴리오 관리, 투자자문, 세무 컨설팅
-              </span>{' '}
-              까지 원스톱 <strong>자산관리 솔루션</strong>을 제공합니다
+              </span>
+              까지<br className="hidden md:block" /> 원스톱 <strong className="font-semibold text-slate-900 dark:text-white">자산관리 솔루션</strong>을 제공합니다
             </p>
 
             <div
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-12 sm:mb-16 animate-slide-up"
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
               style={{ animationDelay: '400ms' }}
             >
               <CalComPopup
                 buttonText="무료 자산관리 상담"
                 variant="default"
                 size="lg"
-                className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
+                className="px-8 py-4 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl rounded-full"
                 eventType="consultation"
               />
-              <Button variant="outline" size="lg" className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg" asChild>
-                <Link href="/about">소개</Link>
+              <Button variant="outline" size="lg" className="font-bold px-8 py-4 text-lg shadow-lg rounded-full border-2 hover:bg-slate-100 dark:hover:bg-slate-800" asChild>
+                <Link href="/about">소개 보기</Link>
               </Button>
             </div>
           </div>
         </section>
 
         {/* Stats Section */}
-        <section ref={statsSectionRef} className="py-20 bg-muted/20">
-          <div className="container mx-auto px-6">
+        <section ref={statsSectionRef} className="py-20 bg-slate-900 dark:bg-slate-950 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] pointer-events-none"></div>
+          <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">삼성생명 프리미엄</span> 패밀리오피스 파트너
+              <h2 className="text-3xl md:text-4xl font-black mb-6">
+                <span className="text-blue-400">삼성생명 프리미엄</span> 패밀리오피스 파트너
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                <strong>1000억+ 자산관리 실적</strong>과 <strong>20년+ 전문 경력</strong>으로 검증된 신뢰성
+              <p className="text-lg text-slate-300 max-w-2xl mx-auto font-light">
+                <strong className="text-white">1000억+ 자산관리 실적</strong>과 <strong className="text-white">20년+ 전문 경력</strong>으로 검증된 신뢰성
               </p>
             </div>
 
@@ -154,29 +162,29 @@ const ServicePageContent = () => {
                   value: 1000,
                   suffix: '억원+',
                   label: '통합자산 관리실적',
-                  color: 'text-blue-600 dark:text-blue-400',
+                  color: 'text-blue-400',
                 },
                 {
                   value: 30,
                   suffix: '억+',
                   label: '개인자산 관리기준',
-                  color: 'text-green-600 dark:text-green-400',
+                  color: 'text-emerald-400',
                 },
                 {
                   value: 20,
                   suffix: '년+',
                   label: '평균 경력',
-                  color: 'text-purple-600 dark:text-purple-400',
+                  color: 'text-purple-400',
                 },
                 {
                   value: 800,
                   suffix: '+',
                   label: '기업·자산가 고객',
-                  color: 'text-orange-600 dark:text-orange-400',
+                  color: 'text-amber-400',
                 },
               ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className={`text-3xl md:text-4xl font-bold mb-2 ${stat.color}`}>
+                <div key={index} className="text-center p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
+                  <div className={`text-3xl md:text-4xl font-black mb-2 ${stat.color}`}>
                     <AnimatedCounter
                       end={stat.value}
                       suffix={stat.suffix}
@@ -184,7 +192,7 @@ const ServicePageContent = () => {
                       duration={1500 + index * 200}
                     />
                   </div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="text-sm text-slate-400 font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -192,24 +200,25 @@ const ServicePageContent = () => {
         </section>
 
         {/* Process Overview Section */}
-        <section className="py-20 bg-gradient-to-b from-muted/20 to-background">
+        <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <div className="flex justify-center mb-6">
-                <Badge variant="outline" size="lg" animation="fade">
-                  <CheckCircle className="h-3 w-3 mr-1" />
-                  컨설팅 프로세스
-                </Badge>
+              <div className="inline-flex items-center justify-center p-2 bg-white dark:bg-slate-800 rounded-full mb-6 shadow-sm">
+                <CheckCircle className="h-4 w-4 mr-2 text-blue-600" />
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">Process</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">체계적인</span> 컨설팅 프로세스
+              <h2 className="text-3xl md:text-4xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
+                <span className="text-blue-600 dark:text-blue-400">체계적인</span> 컨설팅 프로세스
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
+              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-12 font-light">
                 20년 경력의 전문가들이 검증된 프로세스로 최적의 솔루션을 제공합니다
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20 relative">
+               {/* Connecting Line (Desktop) */}
+               <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-700 z-0"></div>
+
               {[
                 {
                   step: "01",
@@ -240,17 +249,14 @@ const ServicePageContent = () => {
                   duration: "지속적"
                 }
               ].map((process, index) => (
-                <div key={index} className="relative text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center text-2xl">
+                <div key={index} className="relative text-center z-10">
+                  <div className="w-24 h-24 mx-auto mb-6 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-3xl shadow-lg border-4 border-slate-50 dark:border-slate-900">
                     {process.icon}
                   </div>
-                  <div className="text-xs font-bold text-primary mb-2">{process.step}</div>
-                  <h3 className="text-lg font-semibold mb-2">{process.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-2">{process.description}</p>
-                  <Badge variant="outline" size="xs">{process.duration}</Badge>
-                  {index < 3 && (
-                    <ArrowRight className="hidden md:block absolute top-8 -right-4 h-5 w-5 text-primary/50" />
-                  )}
+                  <div className="text-sm font-bold text-blue-600 dark:text-blue-400 mb-2 tracking-widest">STEP {process.step}</div>
+                  <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">{process.title}</h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">{process.description}</p>
+                  <span className="inline-block px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold rounded-full">{process.duration}</span>
                 </div>
               ))}
             </div>
@@ -258,119 +264,81 @@ const ServicePageContent = () => {
         </section>
 
         {/* Services Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-6">
+        <section className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
+          <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <div className="flex justify-center mb-6">
-                <Badge variant="outline" size="lg" animation="fade">
-                  <Briefcase className="h-3 w-3 mr-1" />
-                  전문 솔루션
-                </Badge>
+              <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-6 shadow-sm">
+                <Briefcase className="h-4 w-4 mr-2 text-blue-600" />
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">Solutions</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">{totalCategories}개 분야</span> {totalServices}개 프리미엄 <strong>자산관리 서비스</strong>
+              <h2 className="text-3xl md:text-4xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
+                <span className="text-blue-600 dark:text-blue-400">{totalCategories}개 분야</span> {totalServices}개 프리미엄 <span className="bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">자산관리 서비스</span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                <strong>개인자산 30억+ 고액자산가</strong>와 <strong>중견기업 CEO</strong>를 위한 <span className="font-bold text-primary">맞춤형 패밀리오피스 솔루션</span>. <strong>법인종신보험</strong> 설계부터 포트폴리오 관리, 세무최적화까지 통합 <strong>자산관리 컨설팅</strong>을 제공합니다
+              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
+                <strong className="font-semibold text-slate-900 dark:text-white">개인자산 30억+ 고액자산가</strong>와 <strong className="font-semibold text-slate-900 dark:text-white">중견기업 CEO</strong>를 위한 <span className="font-bold text-blue-600 dark:text-blue-400">맞춤형 패밀리오피스 솔루션</span>.<br />
+                <strong>법인종신보험</strong> 설계부터 포트폴리오 관리, 세무최적화까지 통합 <strong>자산관리 컨설팅</strong>을 제공합니다
               </p>
               
               {/* Success Rate Indicators */}
-              <div className="flex flex-wrap justify-center gap-6 mb-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg">
+              <div className="flex flex-wrap justify-center gap-6 mb-12 p-8 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl shadow-lg max-w-4xl mx-auto">
                 {[
                   { label: "성공률", value: "98%", icon: "🎯" },
                   { label: "평균 절세", value: "40%", icon: "💰" },
                   { label: "완료 프로젝트", value: "500+", icon: "✅" }
                 ].map((metric, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <span className="text-xl">{metric.icon}</span>
-                    <span className="font-bold text-primary">{metric.value}</span>
-                    <span className="text-sm text-muted-foreground">{metric.label}</span>
+                  <div key={index} className="flex items-center gap-3 px-4">
+                    <span className="text-2xl">{metric.icon}</span>
+                    <div className="text-left">
+                      <div className="font-black text-2xl text-slate-900 dark:text-white">{metric.value}</div>
+                      <div className="text-sm text-slate-500 dark:text-slate-400 font-medium">{metric.label}</div>
+                    </div>
                   </div>
                 ))}
               </div>
 
-              <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <div className="flex flex-wrap justify-center gap-3 mb-16">
                 <Button
                   variant={selectedCategory === 'all' ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory('all')}
-                  className="font-semibold text-sm"
+                  className={`font-bold text-sm rounded-full px-6 py-2 transition-all duration-300 ${selectedCategory === 'all' ? 'bg-slate-900 text-white shadow-lg scale-105' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'}`}
                 >
                   전체 ({totalServices}개)
                 </Button>
-                <Button
-                  variant={selectedCategory === 'corporate-insurance-finance' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('corporate-insurance-finance')}
-                  className="font-semibold text-sm"
-                >
-                  🏢 기업보험·금융 (10개)
-                </Button>
-                <Button
-                  variant={selectedCategory === 'business-succession' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('business-succession')}
-                  className="font-semibold text-sm"
-                >
-                  🔄 가업승계 (5개)
-                </Button>
-                <Button
-                  variant={selectedCategory === 'asset-management' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('asset-management')}
-                  className="font-semibold text-sm"
-                >
-                  💼 자산관리 (4개)
-                </Button>
-                <Button
-                  variant={selectedCategory === 'tax-accounting' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('tax-accounting')}
-                  className="font-semibold text-sm"
-                >
-                  💰 세무회계 (4개)
-                </Button>
-                <Button
-                  variant={selectedCategory === 'investment-finance' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('investment-finance')}
-                  className="font-semibold text-sm"
-                >
-                  📈 투자금융 (4개)
-                </Button>
-                <Button
-                  variant={selectedCategory === 'patent-startup' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('patent-startup')}
-                  className="font-semibold text-sm"
-                >
-                  💡 특허·창업 (3개)
-                </Button>
-                <Button
-                  variant={selectedCategory === 'ma-debt' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('ma-debt')}
-                  className="font-semibold text-sm"
-                >
-                  🤝 M&A·부실채권 (3개)
-                </Button>
-                <Button
-                  variant={selectedCategory === 'finance-tax-labor' ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory('finance-tax-labor')}
-                  className="font-semibold text-sm"
-                >
-                  📋 통합관리 (3개)
-                </Button>
+                {[
+                  { id: 'corporate-insurance-finance', label: '🏢 기업보험·금융', count: 10 },
+                  { id: 'business-succession', label: '🔄 가업승계', count: 5 },
+                  { id: 'asset-management', label: '💼 자산관리', count: 4 },
+                  { id: 'tax-accounting', label: '💰 세무회계', count: 4 },
+                  { id: 'investment-finance', label: '📈 투자금융', count: 4 },
+                  { id: 'patent-startup', label: '💡 특허·창업', count: 3 },
+                  { id: 'ma-debt', label: '🤝 M&A·부실채권', count: 3 },
+                  { id: 'finance-tax-labor', label: '📋 통합관리', count: 3 },
+                ].map((cat) => (
+                  <Button
+                    key={cat.id}
+                    variant={selectedCategory === cat.id ? 'default' : 'outline'}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`font-bold text-sm rounded-full px-6 py-2 transition-all duration-300 ${selectedCategory === cat.id ? 'bg-blue-600 text-white shadow-lg scale-105 border-transparent' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'}`}
+                  >
+                    {cat.label} ({cat.count}개)
+                  </Button>
+                ))}
               </div>
             </div>
 
-            <div className="space-y-12">
+            <div className="space-y-16">
               {filteredServices.map((category) => (
-                <div key={category.id} id={category.id} className="scroll-mt-20">
+                <div key={category.id} id={category.id} className="scroll-mt-24">
                   {selectedCategory === 'all' && (
-                    <div className="mb-8">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                          <category.icon className="h-5 w-5 text-primary" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
-                        <Badge variant="outline" className="text-sm">
+                    <div className="mb-10 pl-4 border-l-4 border-blue-600 dark:border-blue-400">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-2xl font-black text-slate-900 dark:text-white">{category.title}</h3>
+                        <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-md">
                           {category.services.length}개 서비스
-                        </Badge>
+                        </span>
                       </div>
-                      <p className="text-muted-foreground mb-6">{category.description}</p>
+                      <p className="text-slate-600 dark:text-slate-400">{category.description}</p>
                     </div>
                   )}
                   
@@ -378,70 +346,65 @@ const ServicePageContent = () => {
                     {category.services.map((service, serviceIndex) => (
                       <div
                         key={`${category.id}-${serviceIndex}`}
-                        className="group relative bg-gradient-to-br from-background to-background/50 border border-border rounded-xl p-6 hover:shadow-2xl transition-all duration-500 hover:border-primary/50 hover:-translate-y-2 overflow-hidden"
+                        className="group relative bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
                         style={{
                           animationDelay: `${serviceIndex * 100}ms`,
                         }}
                       >
                         {/* Background Pattern */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-transparent dark:from-blue-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         
                         {/* Premium Badge */}
-                        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                          <Badge variant="outline" size="xs" className="bg-white/95 dark:bg-gray-900/95 text-primary border-primary/50 shadow-lg backdrop-blur-sm">
+                        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                          <span className="px-2 py-1 bg-gradient-to-r from-amber-200 to-yellow-400 text-amber-900 text-[10px] font-black uppercase tracking-wider rounded-sm shadow-sm">
                             Premium
-                          </Badge>
+                          </span>
                         </div>
 
                         <div className="relative z-10">
                           <div className="flex items-start justify-between mb-6">
-                            <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                              <category.icon className="h-7 w-7 text-primary" />
+                            <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md border border-slate-100 dark:border-slate-700">
+                              <category.icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
                             </div>
-                            <div className="text-right mt-3">
-                              <Badge variant="secondary" size="xs" className="mb-1">
+                            <div className="text-right mt-2">
+                              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Category</div>
+                              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md inline-block">
                                 {category.title}
-                              </Badge>
-                              <div className="text-xs text-muted-foreground">
-                                전문 컨설팅
                               </div>
                             </div>
                           </div>
 
-                          <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
+                          <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                             {service.title}
                           </h3>
-                          <p className="text-muted-foreground mb-5 text-sm leading-relaxed line-clamp-2">
+                          <p className="text-slate-500 dark:text-slate-400 mb-6 text-sm leading-relaxed line-clamp-2 h-10">
                             {service.description}
                           </p>
 
                           {/* Key Benefits */}
-                          <div className="space-y-2 mb-6">
-                            <div className="text-xs font-semibold text-primary mb-2">핵심 혜택</div>
+                          <div className="space-y-3 mb-8 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
+                            <div className="text-xs font-bold text-slate-900 dark:text-white mb-2 flex items-center">
+                              <Star className="h-3 w-3 text-amber-400 mr-1 fill-amber-400" /> 핵심 혜택
+                            </div>
                             {service.features.slice(0, 3).map((feature, featureIndex) => (
                               <div key={featureIndex} className="flex items-start text-sm">
-                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                                <span className="text-muted-foreground leading-tight">{feature}</span>
+                                <CheckCircle className="h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5" />
+                                <span className="text-slate-600 dark:text-slate-300 leading-tight text-xs">{feature}</span>
                               </div>
                             ))}
-                            {service.features.length > 3 && (
-                              <div className="text-xs text-primary font-medium">
-                                +{service.features.length - 3}개 추가 혜택
-                              </div>
-                            )}
                           </div>
 
                           {/* Client Type */}
-                          <div className="mb-6 p-3 bg-muted/30 rounded-lg">
-                            <div className="text-xs font-semibold text-primary mb-1">추천 고객</div>
-                            <div className="text-xs text-muted-foreground">{service.targetClient}</div>
+                          <div className="mb-6">
+                            <div className="text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">추천 고객</div>
+                            <div className="text-sm font-medium text-slate-700 dark:text-slate-300">{service.targetClient}</div>
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="flex flex-col gap-3 mt-6">
+                          <div className="flex flex-col gap-3 mt-auto">
                             <Button
                               asChild
-                              className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                              className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 font-bold shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl py-5"
                               size="sm"
                             >
                               <Link href={SEO_PAGE_MAPPING[service.title] || `/solutions/${category.id}/${service.title.replace(/\s+/g, '-').toLowerCase()}`}>
@@ -453,17 +416,8 @@ const ServicePageContent = () => {
                               buttonText="무료 상담 신청"
                               variant="outline"
                               size="sm"
-                              className="w-full border-primary/60 text-primary hover:bg-primary hover:text-white font-semibold transition-all duration-300"
+                              className="w-full border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 font-bold transition-all duration-300 rounded-xl py-5"
                               eventType="consultation"
-                              trigger={
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full border-primary/60 text-primary hover:bg-primary hover:text-white font-semibold transition-all duration-300"
-                                >
-                                  무료 상담 신청 →
-                                </Button>
-                              }
                             />
                           </div>
                         </div>
@@ -477,18 +431,17 @@ const ServicePageContent = () => {
         </section>
 
         {/* Client Testimonials Section */}
-        <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+        <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <div className="flex justify-center mb-6">
-                <Badge variant="outline" size="lg" animation="fade">
-                  ⭐ 고객 후기
-                </Badge>
+              <div className="inline-flex items-center justify-center p-2 bg-white dark:bg-slate-800 rounded-full mb-6 shadow-sm">
+                <Crown className="h-4 w-4 mr-2 text-amber-500" />
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">Testimonials</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">성공한 CEO들</span>이 말하는 FamilyOffice S
+              <h2 className="text-3xl md:text-4xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
+                <span className="text-blue-600 dark:text-blue-400">성공한 CEO들</span>이 말하는 FamilyOffice S
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
+              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-12 font-light">
                 실제 고객들의 솔직한 후기를 확인해보세요
               </p>
             </div>
@@ -520,24 +473,24 @@ const ServicePageContent = () => {
                   rating: 5
                 }
               ].map((testimonial, index) => (
-                <div key={index} className="bg-background border border-border rounded-xl p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-center mb-4">
-                    <div className="flex text-yellow-400 mr-2">
+                <div key={index} className="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex text-amber-400">
                       {Array.from({ length: testimonial.rating }).map((_, i) => (
-                        <span key={i}>⭐</span>
+                        <Star key={i} className="h-4 w-4 fill-amber-400" />
                       ))}
                     </div>
-                    <Badge variant="outline" size="xs">{testimonial.service}</Badge>
+                    <span className="text-xs font-bold text-blue-600 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-md">{testimonial.service}</span>
                   </div>
-                  <blockquote className="text-muted-foreground mb-4 leading-relaxed">
+                  <blockquote className="text-slate-700 dark:text-slate-300 mb-6 leading-relaxed font-medium">
                     &ldquo;{testimonial.review}&rdquo;
                   </blockquote>
-                  <div className="border-t pt-4">
-                    <div className="font-semibold text-foreground">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground mb-2">{testimonial.company}</div>
-                    <div className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm font-medium text-green-600">{testimonial.result}</span>
+                  <div className="border-t border-slate-100 dark:border-slate-700 pt-6">
+                    <div className="font-bold text-slate-900 dark:text-white text-lg">{testimonial.name}</div>
+                    <div className="text-sm text-slate-500 dark:text-slate-400 mb-3">{testimonial.company}</div>
+                    <div className="flex items-center bg-green-50 dark:bg-green-900/20 px-3 py-2 rounded-lg w-fit">
+                      <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mr-2" />
+                      <span className="text-sm font-bold text-green-700 dark:text-green-300">{testimonial.result}</span>
                     </div>
                   </div>
                 </div>
@@ -547,16 +500,14 @@ const ServicePageContent = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20">
+        <section className="py-24">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <div className="flex justify-center mb-6">
-                <Badge variant="outline" size="lg" animation="fade">
-                  ❓ 자주 묻는 질문
-                </Badge>
+              <div className="inline-flex items-center justify-center p-2 bg-white dark:bg-slate-800 rounded-full mb-6 shadow-sm">
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 px-2">FAQ</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                <span className="text-primary">궁금한</span> 모든 것에 답변드립니다
+              <h2 className="text-3xl md:text-4xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
+                <span className="text-blue-600 dark:text-blue-400">궁금한</span> 모든 것에 답변드립니다
               </h2>
             </div>
 
@@ -591,13 +542,13 @@ const ServicePageContent = () => {
                   answer: "네, 사후관리 서비스를 통해 지속적으로 모니터링하고 변화하는 세법에 따른 업데이트를 제공합니다. 1년간 무료 사후지원이 포함됩니다."
                 }
               ].map((faq, index) => (
-                <div key={index} className="bg-background border border-border rounded-lg p-6 hover:border-primary/50 transition-colors">
-                  <h3 className="font-semibold text-foreground mb-3 flex items-start">
-                    <span className="text-primary font-bold mr-2">Q.</span>
+                <div key={index} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 hover:border-blue-300 dark:hover:border-blue-700 transition-colors shadow-sm">
+                  <h3 className="font-bold text-slate-900 dark:text-white mb-3 flex items-start text-lg">
+                    <span className="text-blue-600 dark:text-blue-400 font-black mr-3">Q.</span>
                     {faq.question}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed pl-6">
-                    <span className="text-primary font-bold mr-2">A.</span>
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed pl-8">
+                    <span className="text-slate-400 font-bold mr-2">A.</span>
                     {faq.answer}
                   </p>
                 </div>
@@ -607,23 +558,23 @@ const ServicePageContent = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary/5 to-primary/10">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-              <strong>고액자산가 전용</strong> 프리미엄 자산관리 상담
+        <section className="py-24 bg-gradient-to-br from-slate-900 to-blue-900 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
+          
+          <div className="container mx-auto px-6 text-center relative z-10">
+            <h2 className="text-3xl md:text-4xl font-black mb-6">
+              <strong className="text-blue-300">고액자산가 전용</strong> 프리미엄 자산관리 상담
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              <strong>개인자산 30억+</strong> 고객님의 성공적인 미래를 위한 <strong>맞춤형 패밀리오피스 솔루션</strong>을 함께 설계해보세요
+            <p className="text-xl text-blue-100/80 mb-10 max-w-2xl mx-auto font-light">
+              <strong className="text-white">개인자산 30억+</strong> 고객님의 성공적인 미래를 위한 <strong className="text-white">맞춤형 패밀리오피스 솔루션</strong>을 함께 설계해보세요
             </p>
             
             {/* Urgency Indicator */}
-            <div className="flex justify-center mb-8">
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 max-w-md">
-                <div className="flex items-center justify-center text-red-600 dark:text-red-400 mb-2">
-                  ⏰ <span className="ml-2 font-semibold">한정 무료 상담</span>
-                </div>
-                <div className="text-sm text-red-600 dark:text-red-400">
-                  매월 선착순 20분 한정 · 전문가 직접 상담
+            <div className="flex justify-center mb-10">
+              <div className="bg-white/10 border border-white/20 rounded-full px-6 py-2 backdrop-blur-sm">
+                <div className="flex items-center justify-center text-white text-sm font-bold">
+                  ⏰ <span className="ml-2">매월 선착순 20분 한정 · 전문가 직접 상담</span>
                 </div>
               </div>
             </div>
@@ -635,13 +586,13 @@ const ServicePageContent = () => {
                 size="lg"
                 eventType="consultation"
                 trigger={
-                  <Button size="lg" className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg">
+                  <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-bold shadow-xl rounded-full px-8 py-6 text-lg border-none">
                     무료 자산관리 상담 (월 20분 한정)
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 }
               />
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full px-8 py-6 text-lg font-bold" asChild>
                 <Link
                   href="http://pf.kakao.com/_gsxkxdG/chat"
                   target="_blank"
@@ -652,14 +603,14 @@ const ServicePageContent = () => {
               </Button>
             </div>
             
-            <div className="text-sm text-muted-foreground mt-6">
+            <div className="text-sm text-blue-200/60 mt-8 font-medium">
               💡 평균 상담 시간: 45분 | 맞춤 솔루션 제안: 100% | 추가 비용: 없음
             </div>
           </div>
         </section>
 
         {/* SEO 컨텐츠 최적화 섹션 */}
-        <section className="py-12 bg-muted/10">
+        <section className="py-12 bg-slate-50 dark:bg-slate-900/30">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <div className="hidden" dangerouslySetInnerHTML={{ __html: pageContent }} />

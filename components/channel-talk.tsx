@@ -48,6 +48,7 @@ export function ChannelTalk() {
                     website: 'familyoffices.vip',
                     serviceType: 'Premium Family Office'
                   },
+                  hideChannelButtonOnBoot: false,
                   // 모바일 최적화 설정
                   appearance: {
                     zIndex: 1000000,
@@ -56,18 +57,6 @@ export function ChannelTalk() {
                   // 모바일 환경 감지 및 최적화
                   mobileMessengerMode: 'overlay'
                 });
-                
-                // 모바일 환경에서 추가 최적화
-                if (/Mobi|Android/i.test(navigator.userAgent)) {
-                  // 모바일에서 채널톡 위치 조정
-                  setTimeout(() => {
-                    const channelButton = document.querySelector('#ch-plugin > div:first-child');
-                    if (channelButton) {
-                      channelButton.style.bottom = 'max(20px, env(safe-area-inset-bottom))';
-                      channelButton.style.right = 'max(20px, env(safe-area-inset-right))';
-                    }
-                  }, 1000);
-                }
                 
                 console.log('채널톡이 초기화되었습니다');
               }

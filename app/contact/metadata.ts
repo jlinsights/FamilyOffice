@@ -1,4 +1,3 @@
-import ContactPageContent from '@/components/contact/contact-page-content';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,7 +15,3 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
-
-export default function ContactPage() {
-  return <ContactPageContent />;
-}

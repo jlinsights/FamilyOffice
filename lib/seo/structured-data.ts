@@ -85,7 +85,7 @@ export function generateBreadcrumbStructuredData(path: string = '/') {
 
 // 구조화된 데이터 생성
 export function generateStructuredData(
-  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList' | 'AIOptimized'
+  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList' | 'AIOptimized' | 'ContactPage'
 ) {
   const baseData = {
     '@context': 'https://schema.org',
@@ -572,6 +572,21 @@ export function generateStructuredData(
             item: 'https://familyoffices.vip',
           },
         ],
+      };
+
+    case 'ContactPage':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: '상담 문의 - FamilyOffice S',
+        description: '중소중견기업 법인 대표님을 위한 전문 자산관리 상담 신청',
+        url: 'https://familyoffices.vip/contact',
+        mainEntity: {
+          '@type': 'Organization',
+          name: 'FamilyOffice S',
+          telephone: '+82-502-5550-8700',
+          email: 'cs@familyoffices.vip',
+        }
       };
 
     default:
