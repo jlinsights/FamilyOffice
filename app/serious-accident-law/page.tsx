@@ -1,28 +1,27 @@
 'use client';
 
 import {
-  AlertTriangle,
-  Building,
-  CheckCircle,
-  Clock,
-  ExternalLink,
-  FileText,
-  Gavel,
-  HardHat,
-  Heart,
-  Info,
-  Phone,
-  Scale,
-  Shield,
-  Star,
-  Target,
-  Users,
-  Zap,
+    AlertTriangle,
+    Building,
+    CheckCircle,
+    Clock,
+    Gavel,
+    HardHat,
+    Heart,
+    Info,
+    Phone,
+    Scale,
+    Shield,
+    Star,
+    Target,
+    Users,
+    Zap
 } from 'lucide-react';
 import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
 
 import { CalComPopup } from '@/components/cal-com-popup';
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { SelfCheckSafety } from '@/components/forms/self-check-safety';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -31,6 +30,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnimatedCounter } from '@/components/animated-counter';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { StructuredData } from '@/components/structured-data';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 export default function SeriousAccidentLawPage() {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -140,8 +141,38 @@ export default function SeriousAccidentLawPage() {
     }
   ];
 
+  // 검색엔진 최적화 구조화 데이터 추가
+  const faqItems = [
+    {
+      question: "우리 회사도 중대재해처벌법 적용 대상인가요?",
+      answer: "상시근로자 5인 이상 사업장이면 모두 적용됩니다. 2022년부터 50인 이상, 2024년부터 5인 이상으로 확대되었습니다. 중대시민재해의 경우 사업장 규모와 관계없이 모든 사업장에 적용됩니다. 건설업, 제조업뿐만 아니라 서비스업, 유통업 등 모든 업종이 대상입니다."
+    },
+    {
+      question: "안전관리체계는 어떻게 구축해야 하나요?",
+      answer: "①안전보건관리책임자 지정 ②안전보건관리체계 구축 ③안전보건목표·계획 수립 ④안전보건관리규정 제정·시행 ⑤안전보건교육 실시 ⑥작업환경측정 등 안전보건조치 이행 ⑦중대재해 발생 시 재발방지 조치 등 7가지 핵심 요소를 모두 갖춰야 합니다. 전문가의 도움 없이는 완벽한 구축이 어렵습니다."
+    },
+    {
+      question: "보험으로 모든 처벌을 피할 수 있나요?",
+      answer: "보험은 형사처벌 자체를 피할 수 없지만, 변호비용과 벌금, 손해배상 등 재정적 부담을 크게 줄여줍니다. 더 중요한 것은 사전에 안전관리체계를 완벽히 구축하여 중대재해를 예방하는 것입니다. 보험은 만약의 사태에 대비한 최후의 안전장치입니다."
+    },
+    {
+      question: "대응 비용은 얼마나 드나요?",
+      answer: "기업 규모와 업종에 따라 다르지만, 컨설팅 비용은 500만원~2000만원, 보험료는 연간 100만원~1000만원 수준입니다. 하지만 중대재해 발생 시 경영진 개인이 부담해야 할 비용(변호비용, 벌금, 손해배상 등)은 수십억원에 달할 수 있어 사전 대비 비용과 비교할 수 없습니다."
+    },
+    {
+      question: "협력업체나 하청업체 사고도 우리 책임인가요?",
+      answer: "원청업체는 하청업체 근로자의 안전에 대해서도 책임을 집니다. 특히 건설업의 경우 하청업체 관리가 매우 중요하며, 하청업체 안전교육, 안전장비 지급, 작업환경 점검 등을 철저히 해야 합니다. 하청업체와의 계약서에 안전관리 조항을 명시하고 정기 점검을 실시해야 합니다."
+    },
+    {
+      question: "지금부터 준비해도 늦지 않나요?",
+      answer: "중대재해처벌법은 이미 시행 중이며, 언제든 사고가 발생할 수 있습니다. 하루라도 빨리 안전관리체계를 구축하고 보험에 가입하는 것이 중요합니다. 완벽한 준비까지는 4-8주가 걸리므로, 지금 즉시 시작하시기 바랍니다. 전문가의 무료 진단부터 시작하여 단계적으로 준비하실 수 있습니다."
+    }
+  ];
+  const faqData = generateStructuredData('FAQPage', faqItems);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
+      <StructuredData data={faqData} />
       <Header />
 
       <main className="pt-20">
@@ -617,124 +648,34 @@ export default function SeriousAccidentLawPage() {
                 </p>
               </div>
 
-              <div className="space-y-6">
-                {/* FAQ 1 */}
-                <Card className="p-6 bg-card text-card-foreground border border-border">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        우리 회사도 중대재해처벌법 적용 대상인가요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        상시근로자 5인 이상 사업장이면 모두 적용됩니다. 2022년부터 50인 이상, 2024년부터 5인 이상으로 확대되었습니다.
-                        중대시민재해의 경우 사업장 규모와 관계없이 모든 사업장에 적용됩니다.
-                        건설업, 제조업뿐만 아니라 서비스업, 유통업 등 모든 업종이 대상입니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 2 */}
-                <Card className="p-6 bg-card text-card-foreground border border-border">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        안전관리체계는 어떻게 구축해야 하나요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        ①안전보건관리책임자 지정 ②안전보건관리체계 구축 ③안전보건목표·계획 수립 ④안전보건관리규정 제정·시행
-                        ⑤안전보건교육 실시 ⑥작업환경측정 등 안전보건조치 이행 ⑦중대재해 발생 시 재발방지 조치 등
-                        7가지 핵심 요소를 모두 갖춰야 합니다. 전문가의 도움 없이는 완벽한 구축이 어렵습니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 3 */}
-                <Card className="p-6 bg-card text-card-foreground border border-border">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        보험으로 모든 처벌을 피할 수 있나요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        보험은 형사처벌 자체를 피할 수 없지만, 변호비용과 벌금, 손해배상 등 재정적 부담을 크게 줄여줍니다.
-                        더 중요한 것은 사전에 안전관리체계를 완벽히 구축하여 중대재해를 예방하는 것입니다.
-                        보험은 만약의 사태에 대비한 최후의 안전장치입니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 4 */}
-                <Card className="p-6 bg-card text-card-foreground border border-border">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        대응 비용은 얼마나 드나요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        기업 규모와 업종에 따라 다르지만, 컨설팅 비용은 500만원~2000만원, 
-                        보험료는 연간 100만원~1000만원 수준입니다.
-                        하지만 중대재해 발생 시 경영진 개인이 부담해야 할 비용(변호비용, 벌금, 손해배상 등)은
-                        수십억원에 달할 수 있어 사전 대비 비용과 비교할 수 없습니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 5 */}
-                <Card className="p-6 bg-card text-card-foreground border border-border">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        협력업체나 하청업체 사고도 우리 책임인가요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        원청업체는 하청업체 근로자의 안전에 대해서도 책임을 집니다.
-                        특히 건설업의 경우 하청업체 관리가 매우 중요하며, 하청업체 안전교육, 
-                        안전장비 지급, 작업환경 점검 등을 철저히 해야 합니다.
-                        하청업체와의 계약서에 안전관리 조항을 명시하고 정기 점검을 실시해야 합니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* FAQ 6 */}
-                <Card className="p-6 bg-card text-card-foreground border border-border">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-primary font-bold text-sm">Q</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-3 text-foreground">
-                        지금부터 준비해도 늦지 않나요?
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        중대재해처벌법은 이미 시행 중이며, 언제든 사고가 발생할 수 있습니다.
-                        하루라도 빨리 안전관리체계를 구축하고 보험에 가입하는 것이 중요합니다.
-                        완벽한 준비까지는 4-8주가 걸리므로, 지금 즉시 시작하시기 바랍니다.
-                        전문가의 무료 진단부터 시작하여 단계적으로 준비하실 수 있습니다.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
+              <PremiumFAQ
+                items={[
+                  {
+                    question: "우리 회사도 중대재해처벌법 적용 대상인가요?",
+                    answer: "상시근로자 5인 이상 사업장이면 모두 적용됩니다. 2022년부터 50인 이상, 2024년부터 5인 이상으로 확대되었습니다. 중대시민재해의 경우 사업장 규모와 관계없이 모든 사업장에 적용됩니다. 건설업, 제조업뿐만 아니라 서비스업, 유통업 등 모든 업종이 대상입니다."
+                  },
+                  {
+                    question: "안전관리체계는 어떻게 구축해야 하나요?",
+                    answer: "①안전보건관리책임자 지정 ②안전보건관리체계 구축 ③안전보건목표·계획 수립 ④안전보건관리규정 제정·시행 ⑤안전보건교육 실시 ⑥작업환경측정 등 안전보건조치 이행 ⑦중대재해 발생 시 재발방지 조치 등 7가지 핵심 요소를 모두 갖춰야 합니다. 전문가의 도움 없이는 완벽한 구축이 어렵습니다."
+                  },
+                  {
+                    question: "보험으로 모든 처벌을 피할 수 있나요?",
+                    answer: "보험은 형사처벌 자체를 피할 수 없지만, 변호비용과 벌금, 손해배상 등 재정적 부담을 크게 줄여줍니다. 더 중요한 것은 사전에 안전관리체계를 완벽히 구축하여 중대재해를 예방하는 것입니다. 보험은 만약의 사태에 대비한 최후의 안전장치입니다."
+                  },
+                  {
+                    question: "대응 비용은 얼마나 드나요?",
+                    answer: "기업 규모와 업종에 따라 다르지만, 컨설팅 비용은 500만원~2000만원, 보험료는 연간 100만원~1000만원 수준입니다. 하지만 중대재해 발생 시 경영진 개인이 부담해야 할 비용(변호비용, 벌금, 손해배상 등)은 수십억원에 달할 수 있어 사전 대비 비용과 비교할 수 없습니다."
+                  },
+                  {
+                    question: "협력업체나 하청업체 사고도 우리 책임인가요?",
+                    answer: "원청업체는 하청업체 근로자의 안전에 대해서도 책임을 집니다. 특히 건설업의 경우 하청업체 관리가 매우 중요하며, 하청업체 안전교육, 안전장비 지급, 작업환경 점검 등을 철저히 해야 합니다. 하청업체와의 계약서에 안전관리 조항을 명시하고 정기 점검을 실시해야 합니다."
+                  },
+                  {
+                    question: "지금부터 준비해도 늦지 않나요?",
+                    answer: "중대재해처벌법은 이미 시행 중이며, 언제든 사고가 발생할 수 있습니다. 하루라도 빨리 안전관리체계를 구축하고 보험에 가입하는 것이 중요합니다. 완벽한 준비까지는 4-8주가 걸리므로, 지금 즉시 시작하시기 바랍니다. 전문가의 무료 진단부터 시작하여 단계적으로 준비하실 수 있습니다."
+                  }
+                ]}
+              />
 
               {/* FAQ CTA */}
               <div className="mt-12 text-center">

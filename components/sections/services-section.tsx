@@ -1,25 +1,25 @@
 'use client';
 
 import {
-    ArrowRight,
-    Briefcase,
-    Building2,
-    Crown,
-    Search,
-    Shield,
-    Target,
-    TrendingUp
+  ArrowRight,
+  Briefcase,
+  Building2,
+  Crown,
+  Search,
+  Shield,
+  Target,
+  TrendingUp
 } from 'lucide-react';
 
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { SERVICE_CATEGORIES } from '@/constants/services';
 
@@ -154,10 +154,10 @@ export function ServicesSection() {
 
           <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: '10조+', label: '관리 자산 규모', icon: TrendingUp, color: 'text-blue-400' },
-              { value: '100+', label: 'VIP 패밀리 고객', icon: Building2, color: 'text-purple-400' },
-              { value: '20년+', label: 'Family Office 경험', icon: Shield, color: 'text-green-400' },
-              { value: '98%', label: '고객 만족도', icon: Target, color: 'text-yellow-400' },
+              { value: '500억원+', label: '자산관리 실적', icon: TrendingUp, color: 'text-blue-400' },
+              { value: '500+', label: '법인 고객사', icon: Building2, color: 'text-purple-400' },
+              { value: '20년+', label: '전문 경험', icon: Shield, color: 'text-green-400' },
+              { value: '98%', label: '만족도', icon: Target, color: 'text-yellow-400' },
             ].map((stat, index) => (
               <div key={index} className="text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors duration-300">
                 <div className="flex justify-center mb-4">

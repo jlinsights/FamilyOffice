@@ -12,16 +12,16 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { generateStructuredData } from '@/lib/seo/structured-data';
 import {
-    ArrowRight,
-    Building,
-    Clock,
-    Mail,
-    MapPin,
-    MessageSquare,
-    Phone,
-    Shield,
-    Target,
-    User
+  ArrowRight,
+  Building,
+  Clock,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Shield,
+  Target,
+  User
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -178,10 +178,10 @@ export default function ContactPageContent() {
                         <Phone className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">전화 상담</h3>
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">상담 전화</h3>
                         <p className="text-slate-600 dark:text-slate-400 mb-2">평일 09:00 - 18:00</p>
-                        <a href="tel:010-3635-0365" className="text-xl font-black text-blue-600 dark:text-blue-400 hover:underline">
-                          010-3635-0365
+                        <a href="tel:0502-5550-8700" className="text-xl font-black text-blue-600 dark:text-blue-400 hover:underline">
+                          0502-5550-8700
                         </a>
                       </div>
                     </CardContent>
@@ -193,10 +193,10 @@ export default function ContactPageContent() {
                         <Mail className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">이메일 문의</h3>
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">이메일</h3>
                         <p className="text-slate-600 dark:text-slate-400 mb-2">24시간 접수 가능</p>
-                        <a href="mailto:jaehong.lim@samsunglife.com" className="text-lg font-bold text-purple-600 dark:text-purple-400 hover:underline break-all">
-                          jaehong.lim@samsunglife.com
+                        <a href="mailto:cs@familyoffices.vip" className="text-lg font-bold text-purple-600 dark:text-purple-400 hover:underline break-all">
+                          cs@familyoffices.vip
                         </a>
                       </div>
                     </CardContent>
@@ -210,8 +210,9 @@ export default function ContactPageContent() {
                       <div>
                         <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">오시는 길</h3>
                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                          서울특별시 서초구 서초대로 74길 11<br />
-                          삼성전자 서초사옥
+                          <a href="https://naver.me/x1Vz2wUe" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            서울시 중구 세종대로 73 태평로빌딩
+                          </a>
                         </p>
                       </div>
                     </CardContent>

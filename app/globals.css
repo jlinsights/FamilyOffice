@@ -358,64 +358,16 @@ iframe[src*='vercel.com/toolbar'] {
     padding-top: 64px; /* 헤더 높이만큼 padding 추가 */
   }
 
-  /* 채널톡 z-index 우선순위 설정 및 모바일 개선 */
+  /* 채널톡 모바일 최적화 - 기본 스타일 유지 */
+  @media (max-width: 768px) {
+    #ch-plugin {
+      z-index: 1000000 !important;
+    }
+  }
+
+  /* 채널톡 위치 고정 강제 (스크롤 시 따라오도록) */
   #ch-plugin {
-    z-index: 1000000 !important; /* 모든 요소보다 위에 표시 */
-  }
-
-  /* 채널톡 모바일 최적화 */
-  #ch-plugin iframe,
-  #ch-plugin div {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-
-  /* 모바일 환경에서 채널톡 버튼 터치 영역 개선 */
-  @media (max-width: 768px) {
-    #ch-plugin {
-      touch-action: manipulation !important;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      user-select: none;
-    }
-
-    /* 채널톡 버튼 모바일 Safe Area 대응 */
-    #ch-plugin > div:first-child {
-      bottom: max(20px, env(safe-area-inset-bottom)) !important;
-      right: max(20px, env(safe-area-inset-right)) !important;
-    }
-  }
-
-  /* 채널톡 팝업 모바일 최적화 */
-  @media (max-width: 768px) and (max-height: 800px) {
-    #ch-plugin iframe[src*='channel.io'] {
-      max-height: 90vh !important;
-      max-width: 95vw !important;
-    }
-  }
-
-  /* 모바일 디버깅: 채널톡 가시성 강제 보장 */
-  @media (max-width: 768px) {
-    #ch-plugin {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      pointer-events: auto !important;
-    }
-
-    /* 채널톡 버튼 클릭 영역 확대 */
-    #ch-plugin > div:first-child {
-      min-width: 60px !important;
-      min-height: 60px !important;
-      border-radius: 50% !important;
-    }
-
-    /* 모바일에서 채널톡이 다른 요소에 가려지지 않도록 */
-    #ch-plugin * {
-      position: relative !important;
-    }
+    position: fixed !important;
   }
 
   /* 헤더 고정 강화 */
@@ -570,9 +522,8 @@ iframe[src*='vercel.com/toolbar'] {
     /* CLS 방지 - 초기 레이아웃 안정화 */
     min-height: 100vh;
     /* GPU 가속 활성화 - 스크롤 성능 개선 */
-    will-change: auto;
     /* 리페인트 최적화 - fixed 요소에 영향 주지 않도록 paint 제거 */
-    contain: layout style;
+    /* contain: layout style; -> 제거: fixed 요소가 body에 갇히는 문제 해결 */
     /* 고정 헤더와 announcement banner를 위한 상단 여백 */
     padding-top: calc(4rem + var(--announcement-height, 0px));
   }

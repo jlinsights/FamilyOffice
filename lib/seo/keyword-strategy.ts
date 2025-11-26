@@ -341,7 +341,7 @@ export const SEASONAL_KEYWORDS = {
   Q4: ['연말정산', '절세상품', '내년 투자계획', '보험료 세액공제']
 };
 
-export default {
+const keywordStrategy = {
   KEYWORD_CLUSTERS,
   CONTENT_KEYWORD_MAPPING,
   calculateKeywordPriority,
@@ -350,3 +350,5 @@ export default {
   COMPETITOR_ANALYSIS,
   SEASONAL_KEYWORDS
 };
+
+export default keywordStrategy;

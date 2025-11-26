@@ -1,37 +1,25 @@
 'use client';
 
 import {
-  Activity,
-  Award,
-  Building,
-  Calculator,
-  Calendar,
-  CheckCircle,
-  Clock,
-  CreditCard,
-  DollarSign,
-  ExternalLink,
-  FileText,
-  Gift,
-  GraduationCap,
-  Heart,
-  HeartPulse,
-  Home,
-  Info,
-  Lightbulb,
-  MapPin,
-  Percent,
-  Phone,
-  PieChart,
-  Shield,
-  Star,
-  Stethoscope,
-  Target,
-  TrendingUp,
-  Users,
-  UserCheck,
-  Wallet,
-  Zap,
+    Activity,
+    Award,
+    Calculator,
+    Calendar,
+    CheckCircle,
+    Clock,
+    DollarSign,
+    FileText,
+    Heart,
+    HeartPulse,
+    Info,
+    Lightbulb,
+    Phone,
+    Shield,
+    Star,
+    Stethoscope,
+    UserCheck,
+    Users,
+    Zap
 } from 'lucide-react';
 import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
@@ -40,11 +28,13 @@ import { CalComPopup } from '@/components/cal-com-popup';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 
 import { AnimatedCounter } from '@/components/animated-counter';
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { StructuredData } from '@/components/structured-data';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 export default function GroupInsurancePage() {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -212,8 +202,34 @@ export default function GroupInsurancePage() {
     }
   ];
 
+  // 검색엔진 최적화 구조화 데이터 추가
+  const faqItems = [
+    {
+      question: "단체보험 가입 최소 인원은 몇 명인가요?",
+      answer: "보험사별, 상품별로 상이하지만 일반적으로 5인 이상이면 가입 가능합니다. 단체상해보험은 5인 이상, 단체건강보험은 10인 이상, 단체생명보험은 7인 이상이 일반적입니다."
+    },
+    {
+      question: "기존 직원과 신입직원 보장은 어떻게 되나요?",
+      answer: "기존 직원은 일괄 가입으로 동일한 보장을 받으며, 신입직원은 입사 즉시 또는 일정 기간 후 자동으로 가입됩니다. 퇴직 직원은 퇴사 시 자동으로 제외되며 개인 실손보험으로 전환도 가능합니다."
+    },
+    {
+      question: "보험료는 어떻게 결정되나요?",
+      answer: "업종 및 위험도, 가입 인원 수, 연령 구성, 보장 내용 및 한도, 과거 사고 이력 등을 종합하여 결정됩니다. 단체할인, 무사고할인 등 다양한 할인 혜택을 적용받을 수 있습니다."
+    },
+    {
+      question: "보험금 청구 절차는 어떻게 되나요?",
+      answer: "사고 접수 후 서류를 제출하면 심사를 거쳐 보험금이 지급됩니다. 전담 직원이 청구부터 지급까지 전 과정을 지원하므로 간편하게 처리하실 수 있습니다."
+    },
+    {
+      question: "단체보험 상담은 어떻게 받나요?",
+      answer: "전화 상담(0502-5550-8700), 온라인 예약, 방문 상담 등 다양한 채널을 통해 전문가의 무료 상담을 받으실 수 있습니다. 위험도 분석부터 상품 설계, 견적 비교까지 원스톱으로 제공합니다."
+    }
+  ];
+  const faqData = generateStructuredData('FAQPage', faqItems);
+
   return (
-    <>
+    <div className="min-h-screen bg-background">
+      <StructuredData data={faqData} />
       <Header />
       <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
         {/* Hero Section */}
@@ -571,214 +587,189 @@ export default function GroupInsurancePage() {
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto space-y-6">
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
-                    단체보험의 세제 혜택은 무엇인가요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">기업 단체보험은 다음과 같은 세제 혜택을 제공합니다:</p>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <h4 className="font-semibold text-green-600 mb-2">법인 혜택</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• 복리후생비 100% 손비처리</li>
-                        <li>• 법인세 즉시 절감 (27.5%)</li>
-                        <li>• 현금흐름 개선</li>
-                        <li>• 임직원 만족도 향상</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-blue-600 mb-2">임직원 혜택</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• 개인부담 0원 또는 최소화</li>
-                        <li>• 단체할인 혜택</li>
-                        <li>• 가족 확대 보장</li>
-                        <li>• 건강관리 서비스</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Users className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
-                    최소 가입 인원이 있나요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">단체보험 가입을 위한 최소 인원 기준은 다음과 같습니다:</p>
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <ul className="space-y-2">
-                      <li className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-blue-500 mr-2" />
-                        <strong>단체상해보험</strong>: 최소 5인 이상
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-blue-500 mr-2" />
-                        <strong>단체건강보험</strong>: 최소 10인 이상
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-blue-500 mr-2" />
-                        <strong>단체생명보험</strong>: 최소 7인 이상
-                      </li>
-                      <li className="flex items-center">
-                        <Info className="w-4 h-4 text-yellow-600 mr-2" />
-                        <span className="text-sm text-gray-600">보험사별로 차이가 있을 수 있습니다</span>
-                      </li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Shield className="w-5 h-5 text-purple-600 flex-shrink-0 mt-1" />
-                    기존 직원과 신입직원 보장은 어떻게 되나요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">단체보험의 직원 보장 범위와 신규 가입 절차:</p>
-                  <div className="space-y-3">
-                    <div className="flex items-center p-3 bg-green-50 rounded-lg">
-                      <UserCheck className="w-5 h-5 text-green-600 mr-3" />
-                      <div>
-                        <div className="font-semibold">기존 직원</div>
-                        <div className="text-sm text-gray-600">일괄 가입으로 전 직원 동일 보장</div>
+            <div className="max-w-4xl mx-auto">
+              <PremiumFAQ
+                items={[
+                  {
+                    question: "단체보험의 세제 혜택은 무엇인가요?",
+                    answer: (
+                      <div className="space-y-4">
+                        <p>기업 단체보험은 다음과 같은 세제 혜택을 제공합니다:</p>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <h4 className="font-semibold text-green-600 mb-2">법인 혜택</h4>
+                            <ul className="space-y-1 text-sm list-disc list-inside text-gray-700">
+                              <li>복리후생비 100% 손비처리</li>
+                              <li>법인세 즉시 절감 (27.5%)</li>
+                              <li>현금흐름 개선</li>
+                              <li>임직원 만족도 향상</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-blue-600 mb-2">임직원 혜택</h4>
+                            <ul className="space-y-1 text-sm list-disc list-inside text-gray-700">
+                              <li>개인부담 0원 또는 최소화</li>
+                              <li>단체할인 혜택</li>
+                              <li>가족 확대 보장</li>
+                              <li>건강관리 서비스</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center p-3 bg-blue-50 rounded-lg">
-                      <Users className="w-5 h-5 text-blue-600 mr-3" />
-                      <div>
-                        <div className="font-semibold">신입직원</div>
-                        <div className="text-sm text-gray-600">입사 즉시 또는 일정 기간 후 자동 가입</div>
+                    )
+                  },
+                  {
+                    question: "최소 가입 인원이 있나요?",
+                    answer: (
+                      <div className="space-y-3">
+                        <p>단체보험 가입을 위한 최소 인원 기준은 다음과 같습니다:</p>
+                        <ul className="space-y-2 text-gray-700">
+                          <li className="flex items-center">
+                            <CheckCircle className="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" />
+                            <span><strong>단체상해보험</strong>: 최소 5인 이상</span>
+                          </li>
+                          <li className="flex items-center">
+                            <CheckCircle className="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" />
+                            <span><strong>단체건강보험</strong>: 최소 10인 이상</span>
+                          </li>
+                          <li className="flex items-center">
+                            <CheckCircle className="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" />
+                            <span><strong>단체생명보험</strong>: 최소 7인 이상</span>
+                          </li>
+                        </ul>
+                        <p className="text-sm text-gray-500 flex items-center mt-2">
+                          <Info className="w-4 h-4 mr-1" /> 보험사별로 차이가 있을 수 있습니다
+                        </p>
                       </div>
-                    </div>
-                    <div className="flex items-center p-3 bg-yellow-50 rounded-lg">
-                      <Activity className="w-5 h-5 text-yellow-600 mr-3" />
-                      <div>
-                        <div className="font-semibold">퇴직직원</div>
-                        <div className="text-sm text-gray-600">퇴사 시 자동 제외, 개인전환 가능</div>
+                    )
+                  },
+                  {
+                    question: "기존 직원과 신입직원 보장은 어떻게 되나요?",
+                    answer: (
+                      <div className="space-y-3">
+                        <p>단체보험의 직원 보장 범위와 신규 가입 절차:</p>
+                        <div className="space-y-3">
+                          <div className="flex items-center p-3 bg-green-50 rounded-lg">
+                            <UserCheck className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
+                            <div>
+                              <div className="font-semibold text-gray-900">기존 직원</div>
+                              <div className="text-sm text-gray-600">일괄 가입으로 전 직원 동일 보장</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center p-3 bg-blue-50 rounded-lg">
+                            <Users className="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" />
+                            <div>
+                              <div className="font-semibold text-gray-900">신입직원</div>
+                              <div className="text-sm text-gray-600">입사 즉시 또는 일정 기간 후 자동 가입</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center p-3 bg-yellow-50 rounded-lg">
+                            <Activity className="w-5 h-5 text-yellow-600 mr-3 flex-shrink-0" />
+                            <div>
+                              <div className="font-semibold text-gray-900">퇴직직원</div>
+                              <div className="text-sm text-gray-600">퇴사 시 자동 제외, 개인전환 가능</div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <DollarSign className="w-5 h-5 text-orange-600 flex-shrink-0 mt-1" />
-                    보험료는 어떻게 결정되나요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">단체보험료 결정 요소와 할인 혜택:</p>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-gray-800 mb-2">보험료 결정 요소</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• 업종 및 위험도</li>
-                        <li>• 가입 인원 수</li>
-                        <li>• 연령 구성</li>
-                        <li>• 보장 내용 및 한도</li>
-                        <li>• 과거 사고 이력</li>
-                      </ul>
-                    </div>
-                    <div className="bg-green-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-green-600 mb-2">할인 혜택</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• 단체할인: 10-30%</li>
-                        <li>• 무사고할인: 5-20%</li>
-                        <li>• 다계약할인: 5-15%</li>
-                        <li>• 우량단체할인: 추가 할인</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Heart className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" />
-                    보험금 청구 절차는 어떻게 되나요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">간편하고 신속한 보험금 청구 프로세스:</p>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      <div className="bg-blue-50 p-3 rounded-lg text-center">
-                        <div className="font-semibold text-blue-800">1단계</div>
-                        <div className="text-sm text-gray-600">사고 접수</div>
-                        <div className="text-xs text-gray-500">24시간 접수</div>
+                    )
+                  },
+                  {
+                    question: "보험료는 어떻게 결정되나요?",
+                    answer: (
+                      <div className="space-y-4">
+                        <p>단체보험료 결정 요소와 할인 혜택:</p>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <h4 className="font-semibold text-gray-800 mb-2">보험료 결정 요소</h4>
+                            <ul className="space-y-1 text-sm list-disc list-inside text-gray-600">
+                              <li>업종 및 위험도</li>
+                              <li>가입 인원 수</li>
+                              <li>연령 구성</li>
+                              <li>보장 내용 및 한도</li>
+                              <li>과거 사고 이력</li>
+                            </ul>
+                          </div>
+                          <div className="bg-green-50 p-4 rounded-lg">
+                            <h4 className="font-semibold text-green-600 mb-2">할인 혜택</h4>
+                            <ul className="space-y-1 text-sm list-disc list-inside text-gray-600">
+                              <li>단체할인: 10-30%</li>
+                              <li>무사고할인: 5-20%</li>
+                              <li>다계약할인: 5-15%</li>
+                              <li>우량단체할인: 추가 할인</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
-                      <div className="bg-green-50 p-3 rounded-lg text-center">
-                        <div className="font-semibold text-green-800">2단계</div>
-                        <div className="text-sm text-gray-600">서류 제출</div>
-                        <div className="text-xs text-gray-500">온라인 가능</div>
+                    )
+                  },
+                  {
+                    question: "보험금 청구 절차는 어떻게 되나요?",
+                    answer: (
+                      <div className="space-y-4">
+                        <p>간편하고 신속한 보험금 청구 프로세스:</p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          <div className="bg-blue-50 p-3 rounded-lg text-center">
+                            <div className="font-semibold text-blue-800">1단계</div>
+                            <div className="text-sm text-gray-600">사고 접수</div>
+                            <div className="text-xs text-gray-500">24시간 접수</div>
+                          </div>
+                          <div className="bg-green-50 p-3 rounded-lg text-center">
+                            <div className="font-semibold text-green-800">2단계</div>
+                            <div className="text-sm text-gray-600">서류 제출</div>
+                            <div className="text-xs text-gray-500">온라인 가능</div>
+                          </div>
+                          <div className="bg-purple-50 p-3 rounded-lg text-center">
+                            <div className="font-semibold text-purple-800">3단계</div>
+                            <div className="text-sm text-gray-600">보험금 지급</div>
+                            <div className="text-xs text-gray-500">3-7일 소요</div>
+                          </div>
+                        </div>
+                        <div className="bg-yellow-50 p-3 rounded-lg flex items-start">
+                          <Lightbulb className="w-5 h-5 text-yellow-600 mr-2 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <span className="font-semibold text-yellow-800">전담 서비스</span>
+                            <p className="text-sm text-gray-600 mt-1">전담 직원이 청구부터 지급까지 전 과정을 지원합니다</p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="bg-purple-50 p-3 rounded-lg text-center">
-                        <div className="font-semibold text-purple-800">3단계</div>
-                        <div className="text-sm text-gray-600">보험금 지급</div>
-                        <div className="text-xs text-gray-500">3-7일 소요</div>
+                    )
+                  },
+                  {
+                    question: "단체보험 상담은 어떻게 받나요?",
+                    answer: (
+                      <div className="space-y-3">
+                        <p>전문가와 함께하는 기업 단체보험 상담:</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="font-semibold text-gray-700">전화 상담</span>
+                            <a href="tel:0502-5550-8700" className="text-blue-600 font-mono font-bold hover:underline">0502-5550-8700</a>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="font-semibold text-gray-700">온라인 예약</span>
+                            <CalComPopup
+                              trigger={
+                                <Button variant="outline" size="sm" className="h-8">
+                                  <Calendar className="mr-2 h-3 w-3" />
+                                  예약하기
+                                </Button>
+                              }
+                              calLink="familyoffices/group-insurance"
+                            />
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="font-semibold text-gray-700">방문 상담</span>
+                            <span className="text-sm text-gray-600">서울시 중구 세종대로 73 태평로빌딩</span>
+                          </div>
+                          <div className="bg-blue-50 p-3 rounded-lg text-center text-sm text-blue-800">
+                            <strong>무료 서비스:</strong> 위험도 분석, 상품 설계, 견적 비교까지 모두 무료로 제공됩니다
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="bg-yellow-50 p-3 rounded-lg">
-                      <div className="flex items-center">
-                        <Lightbulb className="w-4 h-4 text-yellow-600 mr-2" />
-                        <span className="font-semibold text-yellow-800">전담 서비스</span>
-                      </div>
-                      <p className="text-sm text-gray-600 mt-1">전담 직원이 청구부터 지급까지 전 과정을 지원합니다</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Phone className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
-                    단체보험 상담은 어떻게 받나요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-4">전문가와 함께하는 기업 단체보험 상담:</p>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="font-semibold">전화 상담</span>
-                      <span className="text-blue-600 font-mono">0502-5550-8700</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="font-semibold">온라인 예약</span>
-                      <CalComPopup
-                        trigger={
-                          <Button variant="outline" size="sm">
-                            <Calendar className="mr-2 h-4 w-4" />
-                            예약하기
-                          </Button>
-                        }
-                        calLink="familyoffices/group-insurance"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="font-semibold">방문 상담</span>
-                      <span className="text-sm text-gray-600">서울 중구 세종대로 124</span>
-                    </div>
-                    <div className="bg-blue-50 p-3 rounded-lg">
-                      <div className="font-semibold text-blue-800 mb-1">무료 서비스</div>
-                      <div className="text-sm text-gray-600">위험도 분석, 상품 설계, 견적 비교까지 모두 무료로 제공됩니다</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    )
+                  }
+                ]}
+              />
             </div>
           </div>
         </section>
@@ -865,7 +856,7 @@ export default function GroupInsurancePage() {
                 "telephone": "+82-502-5550-8700",
                 "address": {
                   "@type": "PostalAddress",
-                  "streetAddress": "세종대로 124",
+                  "streetAddress": "세종대로 73 태평로빌딩",
                   "addressLocality": "중구",
                   "addressRegion": "서울",
                   "addressCountry": "KR"
@@ -933,7 +924,7 @@ export default function GroupInsurancePage() {
                   "name": "단체보험 상담은 어떻게 받나요?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "전화상담(0502-5550-8700), 온라인 예약, 방문상담(서울 중구 세종대로 124)을 통해 위험도 분석부터 상품 설계까지 무료로 상담받을 수 있습니다."
+                    "text": "전화상담(0502-5550-8700), 온라인 예약, 방문상담(서울시 중구 세종대로 73 태평로빌딩)을 통해 위험도 분석부터 상품 설계까지 무료로 상담받을 수 있습니다."
                   }
                 }
               ]
@@ -943,6 +934,6 @@ export default function GroupInsurancePage() {
       </Script>
 
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,10 +1,12 @@
+import { PremiumFAQ } from '@/components/faq/premium-faq';
+import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { generateMetadata } from '@/lib/seo/metadata';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 import { Building, Calculator, FileText, HelpCircle, Shield, Users, Wallet } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -214,10 +216,19 @@ export default function FAQPage() {
     )
   };
 
-  return (
-    <div className="min-h-screen bg-background">
-      <StructuredData data={faqStructuredData} />
+  // 검색엔진 최적화 구조화 데이터 추가
+  const faqItems = faqCategories.flatMap(category => 
+    category.items.map(item => ({
+      question: item.question,
+      answer: item.answer
+    }))
+  );
+  const faqData = generateStructuredData('FAQPage', faqItems);
 
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
+      <StructuredData data={faqData} />
+      <Header />
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-primary/10 to-primary/5">
         <div className="container mx-auto px-4">
@@ -271,18 +282,7 @@ export default function FAQPage() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Accordion type="single" collapsible className="w-full">
-                        {category.items.map((item, index) => (
-                          <AccordionItem key={index} value={`item-${index}`}>
-                            <AccordionTrigger className="text-left">
-                              {item.question}
-                            </AccordionTrigger>
-                            <AccordionContent className="text-muted-foreground">
-                              {item.answer}
-                            </AccordionContent>
-                          </AccordionItem>
-                        ))}
-                      </Accordion>
+                      <PremiumFAQ items={category.items} />
                     </CardContent>
                   </Card>
                 </TabsContent>

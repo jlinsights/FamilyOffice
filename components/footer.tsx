@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import {
     Award,
@@ -21,8 +21,8 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ClientScripts } from './client-scripts';
 import { useTheme } from 'next-themes';
+import { ClientScripts } from './client-scripts';
 
 // 커스텀 아이콘 컴포넌트들
 const XIcon = ({ className }: { className?: string }) => (
@@ -336,7 +336,9 @@ export const Footer = memo(function Footer() {
                   <div className="text-sm">
                     <p className="font-medium mb-1">찾아오시는 곳</p>
                     <p className="text-muted-foreground leading-relaxed">
-                      서울시 중구 세종대로 73 태평로빌딩
+                      <a href="https://naver.me/x1Vz2wUe" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                        서울시 중구 세종대로 73 태평로빌딩
+                      </a>
                     </p>
                   </div>
                 </div>

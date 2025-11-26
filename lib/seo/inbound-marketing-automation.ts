@@ -3,9 +3,7 @@
  * SEO 최적화된 컨텐츠 자동 생성 및 배포
  */
 
-import { KEYWORD_CLUSTERS, CONTENT_KEYWORD_MAPPING } from './keyword-strategy';
-import { generateMetadata, optimizeMetaDescription } from './metadata-generator';
-import { analyzeContent, generateInternalLinks } from './content-optimizer';
+import { CONTENT_KEYWORD_MAPPING, KEYWORD_CLUSTERS } from './keyword-strategy';
 
 export interface ContentTemplate {
   type: 'blog' | 'guide' | 'case-study' | 'faq' | 'landing-page';
@@ -512,7 +510,7 @@ export function calculateMarketingROI(
   };
 }
 
-export default {
+const inboundMarketingAutomation = {
   generateContentTemplate,
   createAutomationRule,
   generateContentCalendar,
@@ -520,3 +518,5 @@ export default {
   generateInternalLinkSuggestions,
   calculateMarketingROI
 };
+
+export default inboundMarketingAutomation;

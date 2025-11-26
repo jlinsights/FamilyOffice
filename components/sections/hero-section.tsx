@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useEffect, useState, memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 
-import { Crown, ArrowDown } from 'lucide-react';
+import { ArrowDown, Crown } from 'lucide-react';
 
+import { CalComPopup } from '@/components/cal-com-popup';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ClientOnlyIcon } from '@/components/ui/client-only-icon';
-import { CalComPopup } from '@/components/cal-com-popup';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 
@@ -82,19 +82,19 @@ export const HeroSection = memo(function HeroSection() {
           <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-gold-enhanced mb-2 lg:mb-3">
               <AnimatedCounter
-                end={20}
-                suffix="년+"
+                end={500}
+                suffix="억원+"
                 startAnimation={startAnimation}
                 duration={1500}
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">Family Office 전문 경험</div>
+            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">자산관리 실적</div>
           </div>
           <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-navy-enhanced mb-2 lg:mb-3">
               <AnimatedCounter
-                end={100}
+                end={500}
                 suffix="+"
                 startAnimation={startAnimation}
                 duration={2000}
@@ -102,25 +102,21 @@ export const HeroSection = memo(function HeroSection() {
               />
             </div>
             <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-              VIP 고객
-              <br className="hidden sm:inline" />
-              <span className="sm:hidden"> </span>패밀리 서비스
+              법인 고객사
             </div>
           </div>
           <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-enhanced mb-2 lg:mb-3">
               <AnimatedCounter
-                end={10}
-                suffix="조+"
+                end={20}
+                suffix="년+"
                 startAnimation={startAnimation}
                 duration={1500}
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
             <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-              관리 자산
-              <br className="hidden sm:inline" />
-              <span className="sm:hidden"> </span>규모
+              전문 경험
             </div>
           </div>
           <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium">
@@ -134,9 +130,7 @@ export const HeroSection = memo(function HeroSection() {
               />
             </div>
             <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-              고객 만족도
-              <br className="hidden sm:inline" />
-              <span className="sm:hidden"> </span>평가
+              만족도
             </div>
           </div>
         </div>

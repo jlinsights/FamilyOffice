@@ -4,7 +4,6 @@
  */
 
 import { Metadata } from 'next';
-import { KEYWORD_CLUSTERS, CONTENT_KEYWORD_MAPPING } from './keyword-strategy';
 
 export interface SEOConfig {
   title: string;
@@ -337,7 +336,7 @@ export function generatePageMetadata(
   return generateMetadata(finalConfig as SEOConfig);
 }
 
-export default {
+const metadataGenerator = {
   generateMetadata,
   PAGE_SEO_CONFIGS,
   generateStructuredData,
@@ -345,3 +344,5 @@ export default {
   optimizeMetaDescription,
   generatePageMetadata
 };
+
+export default metadataGenerator;

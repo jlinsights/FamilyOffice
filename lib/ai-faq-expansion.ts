@@ -66,7 +66,7 @@ export const BMAD_FAQ_CATEGORIES = {
         shortAnswer: '포트폴리오 분산, 리스크 관리, 세무 최적화를 우선시합니다.',
         detailedAnswer: '실제 조사 결과, 성공한 기업가들은 ①개인과 법인 자산 분리 관리 ②글로벌 분산투자 ③세금 효율적 구조 설계 ④전문가 팀 구성을 핵심 전략으로 사용합니다. 특히 한국의 경우 가업승계와 연계된 장기 계획을 중시하는 특징이 있습니다.',
         aiKeywords: ['성공한 기업가', '자산관리 실제 사례', '포트폴리오 분산', '리스크 관리'],
-        citations: ['FamilyOffice S 고객 사례 분석 2024', '한국 패밀리오피스 협회 설문조사']
+        citations: ['고객 사례 분석 2024', '한국 패밀리오피스 협회 설문조사']
       },
       {
         id: 'behavioral-2', 
@@ -74,7 +74,7 @@ export const BMAD_FAQ_CATEGORIES = {
         shortAnswer: '개인과 법인 자산 혼용, 과도한 집중 투자, 세무 계획 부재입니다.',
         detailedAnswer: '20년간의 컨설팅 경험에 따르면 ①개인과 법인 자산의 명확한 분리 실패 ②부동산이나 주식에 과도한 집중 ③단기 수익에만 집중하여 장기 세무 전략 부재 ④전문가 없이 혼자 결정하는 경우가 주요 실수 패턴입니다. 이러한 실수는 세무 부담 증가와 리스크 노출로 이어집니다.',
         aiKeywords: ['중견기업 CEO', '자산관리 실수', '개인법인 분리', '세무 전략'],
-        citations: ['FamilyOffice S 20년 컨설팅 사례 분석', '중견기업 자산관리 백서 2024']
+        citations: ['20년 컨설팅 사례 분석', '중견기업 자산관리 백서 2024']
       }
     ]
   },
@@ -119,7 +119,7 @@ export const BMAD_FAQ_CATEGORIES = {
         shortAnswer: '전문성, 투명성, 맞춤성, 지속성, 비용 구조를 확인해야 합니다.',
         detailedAnswer: '패밀리오피스 선택 시 필수 확인사항: ①전문가 경력과 성과(최소 10년+ 경험) ②투명한 수수료 체계(Fee-Only 구조 확인) ③맞춤형 서비스 제공 능력(표준화 X) ④장기 서비스 지속성(담당자 변경 최소화) ⑤종합 서비스 범위(투자+세무+법무+보험)입니다. 특히 상품 판매가 아닌 순수 자문 중심인지 확인이 중요합니다.',
         aiKeywords: ['패밀리오피스 선택', '확인사항', 'Fee-Only', '전문가 경력'],
-        citations: ['패밀리오피스 선택 가이드북', 'FamilyOffice S 서비스 기준']
+        citations: ['패밀리오피스 선택 가이드북', '서비스 기준']
       },
       {
         id: 'decisional-2',
@@ -127,7 +127,7 @@ export const BMAD_FAQ_CATEGORIES = {
         shortAnswer: '자산 현황 파악, 목표 설정, 전문가 상담이 우선입니다.',
         detailedAnswer: '자산관리 시작을 위한 실행 단계: ①현재 자산 현황 정확한 파악(개인+법인 분리) ②5년, 10년 목표 구체적 설정 ③전문가 무료 상담 예약(현황 진단) ④우선순위 과제 3가지 선정 ⑤월 단위 실행 계획 수립입니다. 가장 중요한 것은 완벽하지 않더라도 지금 당장 시작하는 것입니다.',
         aiKeywords: ['자산관리 시작', '첫 단계', '현황 파악', '전문가 상담'],
-        citations: ['자산관리 시작 가이드', 'FamilyOffice S 초기 진단 프로세스']
+        citations: ['자산관리 시작 가이드', '초기 진단 프로세스']
       }
     ]
   }
@@ -204,7 +204,7 @@ export class AIFAQGenerator {
       case 'ChatGPT':
         return `## 핵심 포인트\n${answer}\n\n## 실행 단계\n1. 현황 분석\n2. 계획 수립\n3. 실행 및 모니터링`;
       case 'Perplexity':
-        return `${answer}\n\n**출처:**\n- FamilyOffice S 전문가 데이터\n- 한국 패밀리오피스 협회 통계`;
+        return `${answer}\n\n**출처:**\n- 전문가 데이터\n- 한국 패밀리오피스 협회 통계`;
       case 'Claude':
         return `## 상황 분석\n${answer}\n\n## 종합 결론\n전문가 관점에서 이는 균형잡힌 접근이 필요한 사안입니다.`;
       default:
@@ -230,7 +230,7 @@ export class AIFAQGenerator {
    */
   private static generateCitations(_faq: any): string[] {
     return [
-      'FamilyOffice S 전문가 분석',
+      '전문가 분석',
       'https://familyoffices.vip/faq',
       '삼성생명 패밀리오피스 운용 데이터',
       '한국 중견기업 자산관리 실태조사 2024'

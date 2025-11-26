@@ -1,32 +1,32 @@
 'use client';
 
 import {
-    Award,
-    Briefcase,
-    Building,
-    CheckCircle,
-    Clock,
-    ExternalLink,
-    GraduationCap,
-    Headphones,
-    Heart,
-    Mail,
-    MapPin,
-    Phone,
-    Play,
-    Star,
-    TrendingUp,
-    Users,
-    Info,
-    DollarSign,
-    FileText,
+  Award,
+  Briefcase,
+  Building,
+  CheckCircle,
+  Clock,
+  DollarSign,
+  ExternalLink,
+  FileText,
+  GraduationCap,
+  Headphones,
+  Heart,
+  Info,
+  Mail,
+  MapPin,
+  Phone,
+  Play,
+  Star,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
 
 import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
 
 import { CalComPopup } from '@/components/cal-com-popup';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -1066,26 +1066,12 @@ export default function RecruitPage() {
                         </h3>
                       </div>
                       
-                      <Accordion type="single" collapsible className="space-y-2">
-                        {category.faqs.map((item, itemIndex) => (
-                          <AccordionItem 
-                            key={itemIndex} 
-                            value={`${categoryIndex}-${itemIndex}`}
-                            className="border border-border/40 rounded-lg bg-background/80 dark:bg-background/60"
-                          >
-                            <AccordionTrigger className="px-4 py-3 text-left hover:no-underline hover:bg-accent/50 rounded-t-lg">
-                              <span className="font-medium text-foreground text-sm">
-                                {item.question}
-                              </span>
-                            </AccordionTrigger>
-                            <AccordionContent className="px-4 pb-4 text-muted-foreground">
-                              <div className="whitespace-pre-line leading-relaxed text-sm">
-                                {item.answer}
-                              </div>
-                            </AccordionContent>
-                          </AccordionItem>
-                        ))}
-                      </Accordion>
+                      <PremiumFAQ
+                        items={category.faqs.map(item => ({
+                          question: item.question,
+                          answer: item.answer
+                        }))}
+                      />
                     </div>
                   );
                 })}

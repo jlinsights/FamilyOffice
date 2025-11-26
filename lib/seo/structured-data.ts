@@ -85,7 +85,8 @@ export function generateBreadcrumbStructuredData(path: string = '/') {
 
 // 구조화된 데이터 생성
 export function generateStructuredData(
-  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList' | 'AIOptimized' | 'ContactPage'
+  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList' | 'AIOptimized' | 'ContactPage',
+  faqItems?: { question: string; answer: string }[]
 ) {
   const baseData = {
     '@context': 'https://schema.org',
@@ -99,7 +100,7 @@ export function generateStructuredData(
       addressCountry: 'KR',
       addressLocality: 'Seoul',
       addressRegion: '서울특별시',
-      streetAddress: '서울특별시 중구',
+      streetAddress: '세종대로 73 태평로빌딩',
     },
     contactPoint: {
       '@type': 'ContactPoint',
@@ -356,6 +357,20 @@ export function generateStructuredData(
       };
 
     case 'FAQPage':
+      if (faqItems && faqItems.length > 0) {
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqItems.map(item => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: item.answer,
+            },
+          })),
+        };
+      }
       return {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
@@ -505,7 +520,7 @@ export function generateStructuredData(
         priceRange: '₩₩₩₩',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: '서울특별시 중구',
+      streetAddress: '세종대로 73 태평로빌딩',
           addressLocality: '서울',
           addressRegion: '서울특별시',
           postalCode: '04527',

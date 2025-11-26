@@ -1,5 +1,8 @@
+import { PremiumFAQ } from '@/components/faq/premium-faq';
+import { StructuredData } from '@/components/structured-data';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 import { ArrowRight, Building2, Calculator, CheckCircle, Gift, PieChart, PiggyBank, Shield, TrendingUp } from 'lucide-react';
 import { Metadata } from 'next';
 
@@ -188,8 +191,30 @@ export default function CalculatorsPage() {
     }
   };
 
+  // 검색엔진 최적화 구조화 데이터 추가
+  const faqItems = [
+    {
+      question: "계산 결과의 정확도는 어느 정도인가요?",
+      answer: "2025년 최신 세법을 반영하여 99.9% 이상의 정확도를 제공합니다. 단, 개별 사안의 특수성이나 법령 해석에 따라 실제 세액은 다를 수 있으므로 정확한 계획 수립을 위해서는 전문가 상담을 권장합니다."
+    },
+    {
+      question: "계산 결과를 바탕으로 실제 절세가 가능한가요?",
+      answer: "네, 가능합니다. 계산기에서 제시하는 절세 방안들은 실제 적용 가능한 합법적인 방법들입니다. 다만 개인별 상황에 따라 적용 방법이 달라질 수 있어 전문가 상담을 통한 맞춤형 계획 수립을 추천드립니다."
+    },
+    {
+      question: "상담 신청 후 어떤 서비스를 받을 수 있나요?",
+      answer: "첫 상담에서는 계산 결과 검토, 개인별 맞춤 전략 제안, 실행 방안 및 일정 수립을 진행합니다. 이후 필요에 따라 세무사, 변호사 등 전문가 네트워크를 통한 종합적인 패밀리오피스 서비스를 제공받으실 수 있습니다."
+    }
+  ];
+  const faqData = generateStructuredData('FAQPage', faqItems);
+  const aiOptimizedData = generateStructuredData('AIOptimized');
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-slate-950 text-white selection:bg-blue-500/30">
+      <StructuredData data={faqData} />
+      <StructuredData data={aiOptimizedData} />
+      
+      {/* 배경 효과 */}
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         
         {/* 헤더 섹션 */}
@@ -378,49 +403,22 @@ export default function CalculatorsPage() {
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">자주 묻는 질문</h2>
           
-          <div className="space-y-6">
-            <Card className="border-0 shadow-lg bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 flex items-start gap-3">
-                  <span className="text-blue-600 dark:text-blue-400">Q.</span>
-                  계산 결과의 정확도는 어느 정도인가요?
-                </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed pl-7">
-                  2025년 최신 세법을 반영하여 99.9% 이상의 정확도를 제공합니다. 
-                  단, 개별 사안의 특수성이나 법령 해석에 따라 실제 세액은 다를 수 있으므로 
-                  정확한 계획 수립을 위해서는 전문가 상담을 권장합니다.
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-0 shadow-lg bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 flex items-start gap-3">
-                  <span className="text-blue-600 dark:text-blue-400">Q.</span>
-                  계산 결과를 바탕으로 실제 절세가 가능한가요?
-                </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed pl-7">
-                  네, 가능합니다. 계산기에서 제시하는 절세 방안들은 실제 적용 가능한 합법적인 방법들입니다. 
-                  다만 개인별 상황에 따라 적용 방법이 달라질 수 있어 전문가 상담을 통한 
-                  맞춤형 계획 수립을 추천드립니다.
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-0 shadow-lg bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 flex items-start gap-3">
-                  <span className="text-blue-600 dark:text-blue-400">Q.</span>
-                  상담 신청 후 어떤 서비스를 받을 수 있나요?
-                </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed pl-7">
-                  첫 상담에서는 계산 결과 검토, 개인별 맞춤 전략 제안, 실행 방안 및 일정 수립을 진행합니다. 
-                  이후 필요에 따라 세무사, 변호사 등 전문가 네트워크를 통한 종합적인 
-                  패밀리오피스 서비스를 제공받으실 수 있습니다.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <PremiumFAQ
+            items={[
+              {
+                question: "계산 결과의 정확도는 어느 정도인가요?",
+                answer: "2025년 최신 세법을 반영하여 99.9% 이상의 정확도를 제공합니다. 단, 개별 사안의 특수성이나 법령 해석에 따라 실제 세액은 다를 수 있으므로 정확한 계획 수립을 위해서는 전문가 상담을 권장합니다."
+              },
+              {
+                question: "계산 결과를 바탕으로 실제 절세가 가능한가요?",
+                answer: "네, 가능합니다. 계산기에서 제시하는 절세 방안들은 실제 적용 가능한 합법적인 방법들입니다. 다만 개인별 상황에 따라 적용 방법이 달라질 수 있어 전문가 상담을 통한 맞춤형 계획 수립을 추천드립니다."
+              },
+              {
+                question: "상담 신청 후 어떤 서비스를 받을 수 있나요?",
+                answer: "첫 상담에서는 계산 결과 검토, 개인별 맞춤 전략 제안, 실행 방안 및 일정 수립을 진행합니다. 이후 필요에 따라 세무사, 변호사 등 전문가 네트워크를 통한 종합적인 패밀리오피스 서비스를 제공받으실 수 있습니다."
+              }
+            ]}
+          />
         </div>
       </div>
     </div>

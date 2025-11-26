@@ -123,7 +123,11 @@ export default function HomePage() {
       {/* Hero Section */}
       <HeroSection />
       
-
+      {/* Main Content Sections */}
+      <ServicesSection />
+      <DualPillarSection />
+      <MultimediaContentSection />
+      <SelfCheckCTASection />
       
       <div className="safe-area-bottom">
         <Footer />

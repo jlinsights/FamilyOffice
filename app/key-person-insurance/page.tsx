@@ -1,29 +1,19 @@
 'use client';
 
 import {
-  Award,
-  Building,
-  Calculator,
-  Calendar,
-  CheckCircle,
-  Clock,
-  DollarSign,
-  ExternalLink,
-  FileText,
-  Gift,
-  GraduationCap,
-  Heart,
-  Info,
-  Lightbulb,
-  Phone,
-  PiggyBank,
-  Shield,
-  Star,
-  Target,
-  TrendingUp,
-  Trophy,
-  Users,
-  Zap,
+    Building,
+    Calculator,
+    Calendar,
+    CheckCircle,
+    Clock,
+    FileText,
+    Phone,
+    PiggyBank,
+    Shield,
+    Star,
+    TrendingUp,
+    Trophy,
+    Zap
 } from 'lucide-react';
 import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
@@ -34,8 +24,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { AnimatedCounter } from '@/components/animated-counter';
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { StructuredData } from '@/components/structured-data';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 export default function KeyPersonInsurancePage() {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -177,8 +170,38 @@ export default function KeyPersonInsurancePage() {
     }
   ];
 
+  // 검색엔진 최적화 구조화 데이터 추가
+  const faqItems = [
+    {
+      question: "경영인정기보험 가입 자격은 어떻게 되나요?",
+      answer: "법인 대표이사 및 임원, 연봉 1억 이상 또는 지분 보유 핵심 인재, 사업자등록증을 보유한 개인사업자, 전문직 종사자 등이 가입 가능합니다."
+    },
+    {
+      question: "어떤 세제 혜택을 받을 수 있나요?",
+      answer: "납입 시 법인세 비용처리 및 소득공제 혜택이 있으며, 수령 시 퇴직소득세(일시수령) 또는 연금소득세(연금수령) 적용으로 절세 효과가 있습니다. 또한 상속세 재원 마련에도 유리합니다."
+    },
+    {
+      question: "연금 전환은 언제부터 가능한가요?",
+      answer: "일반적으로 만 55세부터 연금 전환이 가능하며, 종신연금, 확정연금, 상속연금 등 다양한 수령 방식을 선택할 수 있습니다. 연금소득세가 적용되어 세금 부담을 줄일 수 있습니다."
+    },
+    {
+      question: "원금 손실 위험은 없나요?",
+      answer: "경영인정기보험은 최저보증이율이 적용되고 납입원금 100%가 보장되는 안전한 상품입니다. 예금자보호법 적용 및 금융감독원의 관리감독을 받아 안심하고 가입하실 수 있습니다."
+    },
+    {
+      question: "중도해지 시 손해는 어느 정도인가요?",
+      answer: "초기 5년 이내 해지 시 해지환급금이 납입원금보다 적을 수 있습니다. 하지만 5년 이후부터 환급률이 상승하며, 10년 이상 유지 시 원금 회복 및 이익이 발생합니다."
+    },
+    {
+      question: "경영인정기보험 가입 상담은 어떻게 받나요?",
+      answer: "삼성생명 GFC 전문가와 1:1 맞춤 상담이 가능합니다. 전화(0502-5550-8700), 온라인 예약, 방문 상담을 통해 기업 상황에 맞는 최적의 플랜을 제안받으실 수 있습니다."
+    }
+  ];
+  const faqData = generateStructuredData('FAQPage', faqItems);
+
   return (
     <>
+      <StructuredData data={faqData} />
       <Header />
       <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
         {/* Hero Section */}
@@ -593,180 +616,171 @@ export default function KeyPersonInsurancePage() {
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto space-y-6">
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
-                    경영인정기보험 가입 자격 조건은 무엇인가요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">경영인정기보험은 다음 조건을 만족하는 분들이 가입 가능합니다:</p>
-                  <ul className="space-y-2 list-disc list-inside ml-4">
-                    <li><strong>법인 대표이사, 임원</strong>: 등기부등본상 확인 가능한 임원</li>
-                    <li><strong>핵심 인재</strong>: 연봉 1억 이상 또는 지분 보유 임직원</li>
-                    <li><strong>개인사업자</strong>: 사업자등록증 보유 및 일정 소득 증명</li>
-                    <li><strong>전문직</strong>: 의사, 변호사, 회계사 등 전문 자격증 보유자</li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <DollarSign className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
-                    어떤 세제 혜택을 받을 수 있나요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <h4 className="font-semibold text-green-600 mb-2">납입 시 혜택</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• 소득공제: 연 400만원 한도</li>
-                        <li>• 법인세 비용처리 가능</li>
-                        <li>• 증여세 절약 효과</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-blue-600 mb-2">수령 시 혜택</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• 퇴직소득세 0% (일시수령)</li>
-                        <li>• 연금소득세 적용 (연금수령)</li>
-                        <li>• 상속세 절세 혜택</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <PiggyBank className="w-5 h-5 text-purple-600 flex-shrink-0 mt-1" />
-                    연금 전환은 언제부터 가능한가요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">경영인정기보험의 연금전환 조건은 다음과 같습니다:</p>
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <ul className="space-y-2">
-                      <li className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                        <strong>연금개시 연령</strong>: 만 55세부터 가능 (상품에 따라 차이)
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                        <strong>연금종류</strong>: 종신연금, 확정연금, 상속연금 선택
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                        <strong>세제혜택</strong>: 연금소득세 적용으로 절세 효과
-                      </li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Shield className="w-5 h-5 text-orange-600 flex-shrink-0 mt-1" />
-                    원금 손실 위험은 없나요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">경영인정기보험은 원금보장 상품으로 다음과 같은 안전장치가 있습니다:</p>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <h4 className="font-semibold text-green-600 mb-2">원금 보장</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• 최소보증이율 적용</li>
-                        <li>• 납입원금 100% 보장</li>
-                        <li>• 생명보험사 지급여력비율</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-blue-600 mb-2">추가 보장</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• 예금자보호법 적용</li>
-                        <li>• 보험업감독규정 준수</li>
-                        <li>• 금융감독원 관리감독</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Calculator className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" />
-                    중도해지 시 손해는 어느 정도인가요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-3">경영인정기보험 중도해지 시 다음과 같은 영향이 있습니다:</p>
-                  <div className="space-y-3">
-                    <div className="flex items-center p-3 bg-yellow-50 rounded-lg">
-                      <Zap className="w-5 h-5 text-yellow-600 mr-3" />
-                      <div>
-                        <div className="font-semibold">초기 5년</div>
-                        <div className="text-sm text-gray-600">해지환급금이 납입원금보다 적을 수 있음</div>
+            <div className="max-w-4xl mx-auto">
+              <PremiumFAQ
+                items={[
+                  {
+                    question: "경영인정기보험 가입 자격 조건은 무엇인가요?",
+                    answer: (
+                      <div className="space-y-3">
+                        <p>경영인정기보험은 다음 조건을 만족하는 분들이 가입 가능합니다:</p>
+                        <ul className="space-y-2 text-gray-700">
+                          <li className="flex items-start">
+                            <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
+                            <span><strong>법인 대표이사, 임원</strong>: 등기부등본상 확인 가능한 임원</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
+                            <span><strong>핵심 인재</strong>: 연봉 1억 이상 또는 지분 보유 임직원</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
+                            <span><strong>개인사업자</strong>: 사업자등록증 보유 및 일정 소득 증명</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
+                            <span><strong>전문직</strong>: 의사, 변호사, 회계사 등 전문 자격증 보유자</span>
+                          </li>
+                        </ul>
                       </div>
-                    </div>
-                    <div className="flex items-center p-3 bg-green-50 rounded-lg">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <div>
-                        <div className="font-semibold">5년 이후</div>
-                        <div className="text-sm text-gray-600">점진적으로 해지환급률 상승</div>
+                    )
+                  },
+                  {
+                    question: "어떤 세제 혜택을 받을 수 있나요?",
+                    answer: (
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <h4 className="font-semibold text-green-600 mb-2">납입 시 혜택</h4>
+                          <ul className="space-y-1 text-sm list-disc list-inside text-gray-700">
+                            <li>소득공제: 연 400만원 한도</li>
+                            <li>법인세 비용처리 가능</li>
+                            <li>증여세 절약 효과</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-blue-600 mb-2">수령 시 혜택</h4>
+                          <ul className="space-y-1 text-sm list-disc list-inside text-gray-700">
+                            <li>퇴직소득세 0% (일시수령)</li>
+                            <li>연금소득세 적용 (연금수령)</li>
+                            <li>상속세 절세 혜택</li>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center p-3 bg-blue-50 rounded-lg">
-                      <TrendingUp className="w-5 h-5 text-blue-600 mr-3" />
-                      <div>
-                        <div className="font-semibold">10년 이후</div>
-                        <div className="text-sm text-gray-600">납입원금 회복 및 이익 발생</div>
+                    )
+                  },
+                  {
+                    question: "연금 전환은 언제부터 가능한가요?",
+                    answer: (
+                      <div className="space-y-3">
+                        <p>경영인정기보험의 연금전환 조건은 다음과 같습니다:</p>
+                        <div className="bg-blue-50 p-4 rounded-lg">
+                          <ul className="space-y-2 text-gray-700">
+                            <li className="flex items-center">
+                              <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                              <span><strong>연금개시 연령</strong>: 만 55세부터 가능 (상품에 따라 차이)</span>
+                            </li>
+                            <li className="flex items-center">
+                              <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                              <span><strong>연금종류</strong>: 종신연금, 확정연금, 상속연금 선택</span>
+                            </li>
+                            <li className="flex items-center">
+                              <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                              <span><strong>세제혜택</strong>: 연금소득세 적용으로 절세 효과</span>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <Phone className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
-                    경영인정기보험 가입 상담은 어떻게 받나요?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-700">
-                  <p className="mb-4">삼성생명 GFC 전문가와 1:1 맞춤 상담을 받으실 수 있습니다:</p>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="font-semibold">전화 상담</span>
-                      <span className="text-blue-600 font-mono">0502-5550-8700</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="font-semibold">온라인 예약</span>
-                      <CalComPopup
-                        trigger={
-                          <Button variant="outline" size="sm">
-                            <Calendar className="mr-2 h-4 w-4" />
-                            예약하기
-                          </Button>
-                        }
-                        calLink="familyoffices/key-person-insurance"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="font-semibold">방문 상담</span>
-                      <span className="text-sm text-gray-600">서울 중구 세종대로 124</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    )
+                  },
+                  {
+                    question: "원금 손실 위험은 없나요?",
+                    answer: (
+                      <div className="space-y-4">
+                        <p>경영인정기보험은 원금보장 상품으로 다음과 같은 안전장치가 있습니다:</p>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <h4 className="font-semibold text-green-600 mb-2">원금 보장</h4>
+                            <ul className="space-y-1 text-sm list-disc list-inside text-gray-700">
+                              <li>최소보증이율 적용</li>
+                              <li>납입원금 100% 보장</li>
+                              <li>생명보험사 지급여력비율</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-blue-600 mb-2">추가 보장</h4>
+                            <ul className="space-y-1 text-sm list-disc list-inside text-gray-700">
+                              <li>예금자보호법 적용</li>
+                              <li>보험업감독규정 준수</li>
+                              <li>금융감독원 관리감독</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  },
+                  {
+                    question: "중도해지 시 손해는 어느 정도인가요?",
+                    answer: (
+                      <div className="space-y-3">
+                        <p>경영인정기보험 중도해지 시 다음과 같은 영향이 있습니다:</p>
+                        <div className="space-y-3">
+                          <div className="flex items-center p-3 bg-yellow-50 rounded-lg">
+                            <Zap className="w-5 h-5 text-yellow-600 mr-3 flex-shrink-0" />
+                            <div>
+                              <div className="font-semibold text-gray-900">초기 5년</div>
+                              <div className="text-sm text-gray-600">해지환급금이 납입원금보다 적을 수 있음</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center p-3 bg-green-50 rounded-lg">
+                            <CheckCircle className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
+                            <div>
+                              <div className="font-semibold text-gray-900">5년 이후</div>
+                              <div className="text-sm text-gray-600">점진적으로 해지환급률 상승</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center p-3 bg-blue-50 rounded-lg">
+                            <TrendingUp className="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" />
+                            <div>
+                              <div className="font-semibold text-gray-900">10년 이후</div>
+                              <div className="text-sm text-gray-600">납입원금 회복 및 이익 발생</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  },
+                  {
+                    question: "경영인정기보험 가입 상담은 어떻게 받나요?",
+                    answer: (
+                      <div className="space-y-3">
+                        <p>삼성생명 GFC 전문가와 1:1 맞춤 상담을 받으실 수 있습니다:</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="font-semibold text-gray-700">전화 상담</span>
+                            <a href="tel:0502-5550-8700" className="text-blue-600 font-mono font-bold hover:underline">0502-5550-8700</a>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="font-semibold text-gray-700">온라인 예약</span>
+                            <CalComPopup
+                              trigger={
+                                <Button variant="outline" size="sm" className="h-8">
+                                  <Calendar className="mr-2 h-3 w-3" />
+                                  예약하기
+                                </Button>
+                              }
+                              calLink="familyoffices/key-person-insurance"
+                            />
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="font-semibold text-gray-700">방문 상담</span>
+                            <span className="text-sm text-gray-600">서울시 중구 세종대로 73 태평로빌딩</span>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  }
+                ]}
+              />
             </div>
           </div>
         </section>
@@ -853,7 +867,7 @@ export default function KeyPersonInsurancePage() {
                 "telephone": "+82-502-5550-8700",
                 "address": {
                   "@type": "PostalAddress",
-                  "streetAddress": "세종대로 124",
+                  "streetAddress": "세종대로 73 태평로빌딩",
                   "addressLocality": "중구",
                   "addressRegion": "서울",
                   "addressCountry": "KR"
@@ -921,7 +935,7 @@ export default function KeyPersonInsurancePage() {
                   "name": "경영인정기보험 가입 상담은 어떻게 받나요?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "전화상담(0502-5550-8700), 온라인 예약, 방문상담(서울 중구 세종대로 124)을 통해 삼성생명 GFC 전문가와 1:1 맞춤 상담받으실 수 있습니다."
+                    "text": "전화상담(0502-5550-8700), 온라인 예약, 방문상담(서울시 중구 세종대로 73 태평로빌딩)을 통해 삼성생명 GFC 전문가와 1:1 맞춤 상담받으실 수 있습니다."
                   }
                 }
               ]

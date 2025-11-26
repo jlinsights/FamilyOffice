@@ -1,37 +1,36 @@
 'use client';
 
 import {
-  Shield,
-  TrendingUp,
-  Building,
-  Crown,
-  CheckCircle,
-  ArrowRight,
-  Calculator,
-  Heart,
-  Target,
-  AlertTriangle,
-  DollarSign,
-  Users,
-  Clock,
-  Award,
-  FileCheck,
-  Briefcase,
-  Star
+    AlertTriangle,
+    Award,
+    Building,
+    Calculator,
+    CheckCircle,
+    Clock,
+    Crown,
+    DollarSign,
+    FileCheck,
+    Heart,
+    Shield,
+    Target,
+    TrendingUp,
+    Users
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
 import { CalComPopup } from '@/components/cal-com-popup';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
 import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
 import { StructuredData } from '@/components/structured-data';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 const LifeInsurancePage = () => {
   const [selectedCase, setSelectedCase] = useState(0);
@@ -113,9 +112,38 @@ const LifeInsurancePage = () => {
     "serviceType": "종신보험 설계 컨설팅"
   };
 
+  // 검색엔진 최적화 구조화 데이터 추가
+  const faqItems = [
+    {
+      question: "개인종신보험과 법인종신보험 중 어떤 것이 더 유리한가요?",
+      answer: "일반적으로 두 가지를 조합하는 것이 가장 유리합니다. 법인종신보험으로 보험료 손금처리 혜택을 받고, 개인종신보험으로 상속세 비과세 혜택을 확보하는 것이 세무상 최적입니다. 구체적인 비율은 기업 규모, 개인 자산, 상속세 예상액 등을 종합 분석하여 결정합니다."
+    },
+    {
+      question: "법인명의 종신보험의 보험료가 정말 100% 손금처리 가능한가요?",
+      answer: "네, 법인이 임직원을 피보험자로 하여 가입한 종신보험의 보험료는 현행 법인세법상 100% 손금처리가 가능합니다. 다만, 수익자 지정 방법과 약관 조건에 따라 세무상 취급이 달라질 수 있어 전문가와 상담 후 설계하시는 것이 중요합니다."
+    },
+    {
+      question: "종신보험으로 상속세를 어떻게 절감할 수 있나요?",
+      answer: "종신보험은 두 가지 방법으로 상속세를 절감합니다. 첫째, 개인명의 종신보험의 사망보험금은 상속세 과세대상에서 제외됩니다. 둘째, 상속 발생 시 즉시 현금화가 가능해 상속세 납부재원으로 활용할 수 있어 다른 자산을 매각할 필요가 없습니다."
+    },
+    {
+      question: "건강상 문제가 있어도 종신보험 가입이 가능한가요?",
+      answer: "기존 질병이 있더라도 가입 가능한 상품들이 있습니다. 간편심사형 상품, 무진단형 상품 등 다양한 선택지가 있으며, 보험사별로 인수기준이 다르므로 여러 보험사를 비교 검토하여 최적의 상품을 찾을 수 있습니다."
+    },
+    {
+      question: "종신보험의 해약환급금을 퇴직금으로 활용할 때 세무상 혜택이 있나요?",
+      answer: "법인명의 종신보험의 해약환급금을 임원 퇴직금으로 지급할 경우, 퇴직소득세 과세대상이 되어 근로소득세보다 낮은 세율이 적용됩니다. 또한 퇴직소득 공제 혜택도 받을 수 있어 세무상 매우 유리합니다."
+    },
+    {
+      question: "종신보험 가입 후 보장내용을 변경할 수 있나요?",
+      answer: "대부분의 종신보험은 계약 후에도 보장금액 증액, 납입방법 변경, 수익자 변경 등이 가능합니다. 다만, 증액의 경우 재심사가 필요하고, 변경 시 세무상 영향을 검토해야 하므로 전문가와 상담 후 진행하시는 것을 권합니다."
+    }
+  ];
+  const faqData = generateStructuredData('FAQPage', faqItems);
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
       <StructuredData data={structuredData} />
+      <StructuredData data={faqData} />
       <Header />
 
       <main className="pt-20">
@@ -653,48 +681,35 @@ const LifeInsurancePage = () => {
               </h2>
             </div>
 
-            <div className="max-w-4xl mx-auto space-y-6">
-              {[
-                {
-                  question: "개인종신보험과 법인종신보험 중 어떤 것이 더 유리한가요?",
-                  answer: "일반적으로 두 가지를 조합하는 것이 가장 유리합니다. 법인종신보험으로 보험료 손금처리 혜택을 받고, 개인종신보험으로 상속세 비과세 혜택을 확보하는 것이 세무상 최적입니다. 구체적인 비율은 기업 규모, 개인 자산, 상속세 예상액 등을 종합 분석하여 결정합니다."
-                },
-                {
-                  question: "법인명의 종신보험의 보험료가 정말 100% 손금처리 가능한가요?",
-                  answer: "네, 법인이 임직원을 피보험자로 하여 가입한 종신보험의 보험료는 현행 법인세법상 100% 손금처리가 가능합니다. 다만, 수익자 지정 방법과 약관 조건에 따라 세무상 취급이 달라질 수 있어 전문가와 상담 후 설계하시는 것이 중요합니다."
-                },
-                {
-                  question: "종신보험으로 상속세를 어떻게 절감할 수 있나요?",
-                  answer: "종신보험은 두 가지 방법으로 상속세를 절감합니다. 첫째, 개인명의 종신보험의 사망보험금은 상속세 과세대상에서 제외됩니다. 둘째, 상속 발생 시 즉시 현금화가 가능해 상속세 납부재원으로 활용할 수 있어 다른 자산을 매각할 필요가 없습니다."
-                },
-                {
-                  question: "건강상 문제가 있어도 종신보험 가입이 가능한가요?",
-                  answer: "기존 질병이 있더라도 가입 가능한 상품들이 있습니다. 간편심사형 상품, 무진단형 상품 등 다양한 선택지가 있으며, 보험사별로 인수기준이 다르므로 여러 보험사를 비교 검토하여 최적의 상품을 찾을 수 있습니다."
-                },
-                {
-                  question: "종신보험의 해약환급금을 퇴직금으로 활용할 때 세무상 혜택이 있나요?",
-                  answer: "법인명의 종신보험의 해약환급금을 임원 퇴직금으로 지급할 경우, 퇴직소득세 과세대상이 되어 근로소득세보다 낮은 세율이 적용됩니다. 또한 퇴직소득 공제 혜택도 받을 수 있어 세무상 매우 유리합니다."
-                },
-                {
-                  question: "종신보험 가입 후 보장내용을 변경할 수 있나요?",
-                  answer: "대부분의 종신보험은 계약 후에도 보장금액 증액, 납입방법 변경, 수익자 변경 등이 가능합니다. 다만, 증액의 경우 재심사가 필요하고, 변경 시 세무상 영향을 검토해야 하므로 전문가와 상담 후 진행하시는 것을 권합니다."
-                }
-              ].map((faq, index) => (
-                <Card key={index} className="hover:shadow-md hover:shadow-black/5 dark:hover:shadow-white/5 transition-shadow bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-lg mb-3 flex items-start">
-                      <span className="text-primary font-bold mr-3 mt-1">Q.</span>
-                      {faq.question}
-                    </h3>
-                    <div className="pl-8">
-                      <p className="text-muted-foreground leading-relaxed">
-                        <span className="text-primary font-bold mr-3">A.</span>
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="max-w-4xl mx-auto">
+              <PremiumFAQ
+                items={[
+                  {
+                    question: "개인종신보험과 법인종신보험 중 어떤 것이 더 유리한가요?",
+                    answer: "일반적으로 두 가지를 조합하는 것이 가장 유리합니다. 법인종신보험으로 보험료 손금처리 혜택을 받고, 개인종신보험으로 상속세 비과세 혜택을 확보하는 것이 세무상 최적입니다. 구체적인 비율은 기업 규모, 개인 자산, 상속세 예상액 등을 종합 분석하여 결정합니다."
+                  },
+                  {
+                    question: "법인명의 종신보험의 보험료가 정말 100% 손금처리 가능한가요?",
+                    answer: "네, 법인이 임직원을 피보험자로 하여 가입한 종신보험의 보험료는 현행 법인세법상 100% 손금처리가 가능합니다. 다만, 수익자 지정 방법과 약관 조건에 따라 세무상 취급이 달라질 수 있어 전문가와 상담 후 설계하시는 것이 중요합니다."
+                  },
+                  {
+                    question: "종신보험으로 상속세를 어떻게 절감할 수 있나요?",
+                    answer: "종신보험은 두 가지 방법으로 상속세를 절감합니다. 첫째, 개인명의 종신보험의 사망보험금은 상속세 과세대상에서 제외됩니다. 둘째, 상속 발생 시 즉시 현금화가 가능해 상속세 납부재원으로 활용할 수 있어 다른 자산을 매각할 필요가 없습니다."
+                  },
+                  {
+                    question: "건강상 문제가 있어도 종신보험 가입이 가능한가요?",
+                    answer: "기존 질병이 있더라도 가입 가능한 상품들이 있습니다. 간편심사형 상품, 무진단형 상품 등 다양한 선택지가 있으며, 보험사별로 인수기준이 다르므로 여러 보험사를 비교 검토하여 최적의 상품을 찾을 수 있습니다."
+                  },
+                  {
+                    question: "종신보험의 해약환급금을 퇴직금으로 활용할 때 세무상 혜택이 있나요?",
+                    answer: "법인명의 종신보험의 해약환급금을 임원 퇴직금으로 지급할 경우, 퇴직소득세 과세대상이 되어 근로소득세보다 낮은 세율이 적용됩니다. 또한 퇴직소득 공제 혜택도 받을 수 있어 세무상 매우 유리합니다."
+                  },
+                  {
+                    question: "종신보험 가입 후 보장내용을 변경할 수 있나요?",
+                    answer: "대부분의 종신보험은 계약 후에도 보장금액 증액, 납입방법 변경, 수익자 변경 등이 가능합니다. 다만, 증액의 경우 재심사가 필요하고, 변경 시 세무상 영향을 검토해야 하므로 전문가와 상담 후 진행하시는 것을 권합니다."
+                  }
+                ]}
+              />
             </div>
           </div>
         </section>

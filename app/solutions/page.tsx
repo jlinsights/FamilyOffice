@@ -19,6 +19,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
 
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { StructuredData } from '@/components/structured-data';
 import { SEO_PAGE_MAPPING, SERVICE_CATEGORIES, getServiceStats } from '@/constants/services';
@@ -118,11 +119,11 @@ const ServicePageContent = () => {
               className="text-lg text-slate-600 dark:text-slate-400 mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed font-light"
               style={{ animationDelay: '300ms' }}
             >
-              <strong className="font-semibold text-slate-900 dark:text-white">중견기업 CEO</strong>와 <strong className="font-semibold text-slate-900 dark:text-white">고액자산가</strong>를 위한 맞춤형 <strong className="font-semibold text-slate-900 dark:text-white">패밀리오피스 서비스</strong>.<br className="hidden md:block" />
+              <strong className="font-semibold text-slate-900 dark:text-white">중견기업 CEO</strong>와 <strong className="font-semibold text-slate-900 dark:text-white">고액자산가</strong>를 위한 <strong className="font-semibold text-slate-900 dark:text-white">프리미엄 패밀리오피스</strong>.<br className="hidden md:block" />
               <span className="font-semibold text-blue-600 dark:text-blue-400">
-                법인종신보험 설계, 포트폴리오 관리, 투자자문, 세무 컨설팅
+                법인 자산관리, 가업승계, 세무 최적화, 리스크 관리
               </span>
-              까지<br className="hidden md:block" /> 원스톱 <strong className="font-semibold text-slate-900 dark:text-white">자산관리 솔루션</strong>을 제공합니다
+              를 아우르는<br className="hidden md:block" /> <strong className="font-semibold text-slate-900 dark:text-white">통합 자산관리 생태계</strong>를 제공합니다
             </p>
 
             <div
@@ -152,16 +153,16 @@ const ServicePageContent = () => {
                 <span className="text-blue-400">삼성생명 프리미엄</span> 패밀리오피스 파트너
               </h2>
               <p className="text-lg text-slate-300 max-w-2xl mx-auto font-light">
-                <strong className="text-white">1000억+ 자산관리 실적</strong>과 <strong className="text-white">20년+ 전문 경력</strong>으로 검증된 신뢰성
+                <strong className="text-white">500억원+ 자산관리 실적</strong>과 <strong className="text-white">20년+ 전문 경력</strong>으로 검증된 신뢰성
               </p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
                 {
-                  value: 1000,
+                  value: 500,
                   suffix: '억원+',
-                  label: '통합자산 관리실적',
+                  label: '자산관리 실적',
                   color: 'text-blue-400',
                 },
                 {
@@ -173,13 +174,13 @@ const ServicePageContent = () => {
                 {
                   value: 20,
                   suffix: '년+',
-                  label: '평균 경력',
+                  label: '전문 경험',
                   color: 'text-purple-400',
                 },
                 {
-                  value: 800,
+                  value: 500,
                   suffix: '+',
-                  label: '기업·자산가 고객',
+                  label: '법인 고객사',
                   color: 'text-amber-400',
                 },
               ].map((stat, index) => (
@@ -511,48 +512,39 @@ const ServicePageContent = () => {
               </h2>
             </div>
 
-            <div className="max-w-3xl mx-auto space-y-4">
-              {[
-                {
-                  question: "법인종신보험이 자산관리에 꼭 필요한가요?",
-                  answer: "법인종신보험은 CEO의 유고시 리스크 관리와 세무 최적화를 동시에 해결하는 핵심 도구입니다. 사망보장을 통한 기업 안정성 확보, 해약환급금을 통한 퇴직금 준비, 상속세 납부 재원 확보 등 다목적 활용이 가능하여 성공한 기업가에게 필수적입니다."
-                },
-                {
-                  question: "법인종신보험의 세무상 혜택은 무엇인가요?",
-                  answer: "법인에서 납입하는 보험료는 손금 처리가 가능하고, 사망보험금은 비과세로 수령할 수 있습니다. 또한 해약환급금은 퇴직금 지급 재원으로 활용하여 법인의 현금 흐름을 개선하고, 가업승계 시 상속세 납부 재원으로도 활용 가능합니다."
-                },
-                {
-                  question: "컨설팅 비용은 어떻게 되나요?",
-                  answer: "기업 규모와 서비스 범위에 따라 맞춤 견적을 제공합니다. 초기 상담은 무료이며, 구체적인 비용은 현황 분석 후 투명하게 안내드립니다."
-                },
-                {
-                  question: "컨설팅 기간은 얼마나 걸리나요?",
-                  answer: "프로젝트 복잡도에 따라 4-12주 소요됩니다. 현황진단(1-2주) → 전략수립(2-3주) → 실행계획(1-2주) → 사후관리(지속적) 순으로 진행됩니다."
-                },
-                {
-                  question: "어떤 분들이 서비스를 받을 수 있나요?",
-                  answer: "매출 10억 이상의 중소중견기업 CEO, 개인자산 30억 이상의 고액자산가, 가업승계를 준비하는 성공한 기업가분들께 최적화된 통합 자산관리 서비스를 제공합니다."
-                },
-                {
-                  question: "실제 절세 효과는 어느 정도인가요?",
-                  answer: "평균적으로 30-40%의 절세 효과를 기대할 수 있으며, 일부 사례에서는 50% 이상의 절세를 달성했습니다. 개별 기업 상황에 따라 차이가 있습니다."
-                },
-                {
-                  question: "서비스 완료 후에도 지원받을 수 있나요?",
-                  answer: "네, 사후관리 서비스를 통해 지속적으로 모니터링하고 변화하는 세법에 따른 업데이트를 제공합니다. 1년간 무료 사후지원이 포함됩니다."
-                }
-              ].map((faq, index) => (
-                <div key={index} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 hover:border-blue-300 dark:hover:border-blue-700 transition-colors shadow-sm">
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-3 flex items-start text-lg">
-                    <span className="text-blue-600 dark:text-blue-400 font-black mr-3">Q.</span>
-                    {faq.question}
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed pl-8">
-                    <span className="text-slate-400 font-bold mr-2">A.</span>
-                    {faq.answer}
-                  </p>
-                </div>
-              ))}
+            <div className="max-w-3xl mx-auto">
+              <PremiumFAQ
+                items={[
+                  {
+                    question: "법인종신보험이 자산관리에 꼭 필요한가요?",
+                    answer: "법인종신보험은 CEO의 유고시 리스크 관리와 세무 최적화를 동시에 해결하는 핵심 도구입니다. 사망보장을 통한 기업 안정성 확보, 해약환급금을 통한 퇴직금 준비, 상속세 납부 재원 확보 등 다목적 활용이 가능하여 성공한 기업가에게 필수적입니다."
+                  },
+                  {
+                    question: "법인종신보험의 세무상 혜택은 무엇인가요?",
+                    answer: "법인에서 납입하는 보험료는 손금 처리가 가능하고, 사망보험금은 비과세로 수령할 수 있습니다. 또한 해약환급금은 퇴직금 지급 재원으로 활용하여 법인의 현금 흐름을 개선하고, 가업승계 시 상속세 납부 재원으로도 활용 가능합니다."
+                  },
+                  {
+                    question: "컨설팅 비용은 어떻게 되나요?",
+                    answer: "기업 규모와 서비스 범위에 따라 맞춤 견적을 제공합니다. 초기 상담은 무료이며, 구체적인 비용은 현황 분석 후 투명하게 안내드립니다."
+                  },
+                  {
+                    question: "컨설팅 기간은 얼마나 걸리나요?",
+                    answer: "프로젝트 복잡도에 따라 4-12주 소요됩니다. 현황진단(1-2주) → 전략수립(2-3주) → 실행계획(1-2주) → 사후관리(지속적) 순으로 진행됩니다."
+                  },
+                  {
+                    question: "어떤 분들이 서비스를 받을 수 있나요?",
+                    answer: "매출 10억 이상의 중소중견기업 CEO, 개인자산 30억 이상의 고액자산가, 가업승계를 준비하는 성공한 기업가분들께 최적화된 통합 자산관리 서비스를 제공합니다."
+                  },
+                  {
+                    question: "실제 절세 효과는 어느 정도인가요?",
+                    answer: "평균적으로 30-40%의 절세 효과를 기대할 수 있으며, 일부 사례에서는 50% 이상의 절세를 달성했습니다. 개별 기업 상황에 따라 차이가 있습니다."
+                  },
+                  {
+                    question: "서비스 완료 후에도 지원받을 수 있나요?",
+                    answer: "네, 사후관리 서비스를 통해 지속적으로 모니터링하고 변화하는 세법에 따른 업데이트를 제공합니다. 1년간 무료 사후지원이 포함됩니다."
+                  }
+                ]}
+              />
             </div>
           </div>
         </section>
@@ -648,10 +640,44 @@ export default function ServicePage() {
     ],
   };
 
+  // 검색엔진 최적화 구조화 데이터 추가
+  const faqItems = [
+    {
+      question: "법인종신보험이 자산관리에 꼭 필요한가요?",
+      answer: "법인종신보험은 CEO의 유고시 리스크 관리와 세무 최적화를 동시에 해결하는 핵심 도구입니다. 사망보장을 통한 기업 안정성 확보, 해약환급금을 통한 퇴직금 준비, 상속세 납부 재원 확보 등 다목적 활용이 가능하여 성공한 기업가에게 필수적입니다."
+    },
+    {
+      question: "법인종신보험의 세무상 혜택은 무엇인가요?",
+      answer: "법인에서 납입하는 보험료는 손금 처리가 가능하고, 사망보험금은 비과세로 수령할 수 있습니다. 또한 해약환급금은 퇴직금 지급 재원으로 활용하여 법인의 현금 흐름을 개선하고, 가업승계 시 상속세 납부 재원으로도 활용 가능합니다."
+    },
+    {
+      question: "컨설팅 비용은 어떻게 되나요?",
+      answer: "기업 규모와 서비스 범위에 따라 맞춤 견적을 제공합니다. 초기 상담은 무료이며, 구체적인 비용은 현황 분석 후 투명하게 안내드립니다."
+    },
+    {
+      question: "컨설팅 기간은 얼마나 걸리나요?",
+      answer: "프로젝트 복잡도에 따라 4-12주 소요됩니다. 현황진단(1-2주) → 전략수립(2-3주) → 실행계획(1-2주) → 사후관리(지속적) 순으로 진행됩니다."
+    },
+    {
+      question: "어떤 분들이 서비스를 받을 수 있나요?",
+      answer: "매출 10억 이상의 중소중견기업 CEO, 개인자산 30억 이상의 고액자산가, 가업승계를 준비하는 성공한 기업가분들께 최적화된 통합 자산관리 서비스를 제공합니다."
+    },
+    {
+      question: "실제 절세 효과는 어느 정도인가요?",
+      answer: "평균적으로 30-40%의 절세 효과를 기대할 수 있으며, 일부 사례에서는 50% 이상의 절세를 달성했습니다. 개별 기업 상황에 따라 차이가 있습니다."
+    },
+    {
+      question: "서비스 완료 후에도 지원받을 수 있나요?",
+      answer: "네, 사후관리 서비스를 통해 지속적으로 모니터링하고 변화하는 세법에 따른 업데이트를 제공합니다. 1년간 무료 사후지원이 포함됩니다."
+    }
+  ];
+  const faqData = generateStructuredData('FAQPage', faqItems);
+
   return (
     <>
       <StructuredData data={structuredData} />
       <StructuredData data={breadcrumbData} />
+      <StructuredData data={faqData} />
       <ServicePageContent />
     </>
   );

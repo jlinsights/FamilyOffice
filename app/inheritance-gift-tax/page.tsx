@@ -1,40 +1,27 @@
 'use client';
 
 import {
-  FileText,
-  Calculator,
-  Users,
-  Building,
-  Heart,
-  Shield,
-  AlertTriangle,
-  CheckCircle2,
-  XCircle,
-  Clock,
-  DollarSign,
-  Percent,
-  TrendingUp,
-  TrendingDown,
-  Target,
   Award,
-  BookOpen,
-  Phone,
-  Download,
-  Info,
-  HelpCircle,
-  PiggyBank,
-  Banknote,
-  Lightbulb,
-  Star,
-  Crown,
-  ChevronRight,
+  Building,
+  Calculator,
   Calendar,
+  CheckCircle2,
+  ChevronRight,
+  Clock,
+  Crown,
+  Download,
+  Heart,
+  Info,
+  Phone,
   Receipt,
+  Shield,
+  Users
 } from 'lucide-react';
 
 import Link from 'next/link';
 import React from 'react';
 
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -42,9 +29,11 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { CalComPopup } from '@/components/cal-com-popup';
-import { SelfCheckSuccession } from '@/components/forms/self-check-succession';
 import { Footer } from '@/components/footer';
+import { SelfCheckSuccession } from '@/components/forms/self-check-succession';
 import { Header } from '@/components/header';
+import { StructuredData } from '@/components/structured-data';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 
 // 상속세율 구간
@@ -273,8 +262,16 @@ const InheritanceGiftTaxPage = () => {
   const [selectedStrategy, setSelectedStrategy] = React.useState(0);
   const [selectedQuestion, setSelectedQuestion] = React.useState(0);
 
+  // 검색엔진 최적화 구조화 데이터 추가
+  const faqItems = frequentQuestions.map(q => ({
+    question: q.question,
+    answer: q.answer
+  }));
+  const faqData = generateStructuredData('FAQPage', faqItems);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
+      <StructuredData data={faqData} />
       <Header />
 
       <main className="pt-20">
@@ -619,7 +616,7 @@ const InheritanceGiftTaxPage = () => {
             <Card className="border-primary dark:border-blue-400 bg-card text-card-foreground">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-card-foreground">
-                  {taxStrategies[selectedStrategy] && React.createElement(taxStrategies[selectedStrategy].icon, { className: "h-6 w-6 text-primary dark:text-blue-400" })}
+                  {taxStrategies[selectedStrategy] && React.createElement(taxStrategies[selectedStrategy]!.icon, { className: "h-6 w-6 text-primary dark:text-blue-400" })}
                   {taxStrategies[selectedStrategy]?.category} 상세 전략
                 </CardTitle>
                 <CardDescription className="text-card-foreground/80">
@@ -642,7 +639,7 @@ const InheritanceGiftTaxPage = () => {
 
         {/* FAQ 섹션 */}
         <section className="py-12 px-4">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-card-foreground mb-4">
                 자주 묻는 질문
@@ -652,52 +649,28 @@ const InheritanceGiftTaxPage = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-3">
-                {frequentQuestions.map((faq, index) => (
-                  <Card 
-                    key={index}
-                    className={`cursor-pointer transition-all duration-200 border-border/50 bg-card/80 backdrop-blur-sm ${
-                      selectedQuestion === index ? 'ring-2 ring-primary' : 'hover:shadow-md dark:hover:shadow-white/5'
-                    }`}
-                    onClick={() => setSelectedQuestion(index)}
-                  >
-                    <CardHeader className="pb-3">
-                      <div className="flex items-start gap-3">
-                        <HelpCircle className="h-5 w-5 text-primary dark:text-blue-400 mt-1 flex-shrink-0" />
-                        <div>
-                          <Badge variant="outline" className="mb-2">{faq.category}</Badge>
-                          <CardTitle className="text-lg leading-tight text-card-foreground">{faq.question}</CardTitle>
-                        </div>
-                      </div>
-                    </CardHeader>
-                  </Card>
-                ))}
-              </div>
-
-              <Card className="border-primary dark:border-blue-400 bg-card/80 backdrop-blur-sm h-fit sticky top-24">
-                <CardHeader>
-                  <Badge variant="outline" className="w-fit">
-                    {frequentQuestions[selectedQuestion]?.category}
-                  </Badge>
-                  <CardTitle className="text-lg text-card-foreground">
-                    {frequentQuestions[selectedQuestion]?.question}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-card-foreground/80 leading-relaxed mb-4">
-                    {frequentQuestions[selectedQuestion]?.answer}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {frequentQuestions[selectedQuestion]?.tags?.map((tag, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs">
-                        {tag}
+            <PremiumFAQ
+              items={frequentQuestions.map(faq => ({
+                question: faq.question,
+                answer: (
+                  <div className="space-y-4">
+                    <p className="leading-relaxed text-slate-600 dark:text-slate-300">
+                      {faq.answer}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800">
+                        {faq.category}
                       </Badge>
-                    ))}
+                      {faq.tags?.map((tag, index) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                )
+              }))}
+            />
           </div>
         </section>
 

@@ -363,9 +363,11 @@ export function generateMetaKeywords(content: string, targetKeywords: string[]):
   return metaKeywords.slice(0, 10); // 최대 10개
 }
 
-export default {
+const contentOptimizer = {
   INTERNAL_LINK_STRATEGY,
   analyzeContent,
   generateInternalLinks,
   generateMetaKeywords
 };
+
+export default contentOptimizer;

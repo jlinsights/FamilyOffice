@@ -6,27 +6,27 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
 
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FAQ_CATEGORIES } from '@/constants/faq';
 import { generateStructuredData } from '@/lib/seo/structured-data';
 import {
-    AlertCircle,
-    ArrowRight,
-    Briefcase,
-    Building,
-    CheckCircle,
-    Cpu,
-    Factory,
-    Hammer,
-    Medal,
-    Phone,
-    Shield,
-    Target,
-    TrendingUp,
-    Users
+  AlertCircle,
+  ArrowRight,
+  Briefcase,
+  Building,
+  CheckCircle,
+  Cpu,
+  Factory,
+  Hammer,
+  Medal,
+  Phone,
+  Shield,
+  Target,
+  TrendingUp,
+  Users
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -424,26 +424,7 @@ export default function AboutPageContent() {
                       </div>
                     </div>
                     
-                    <Accordion type="single" collapsible className="space-y-4">
-                      {category.faqs.map((item, itemIndex) => (
-                        <AccordionItem 
-                          key={itemIndex} 
-                          value={`${categoryIndex}-${itemIndex}`}
-                          className="border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 overflow-hidden shadow-sm"
-                        >
-                          <AccordionTrigger className="px-6 py-4 text-left hover:no-underline hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                            <span className="font-bold text-slate-800 dark:text-slate-200 text-base">
-                              {item.question}
-                            </span>
-                          </AccordionTrigger>
-                          <AccordionContent className="px-6 pb-6 pt-2 text-slate-600 dark:text-slate-400 bg-slate-50/50 dark:bg-slate-800/50">
-                            <div className="whitespace-pre-line leading-relaxed text-base">
-                              {item.answer}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
+                    <PremiumFAQ items={category.faqs} />
                   </div>
                 );
               })}

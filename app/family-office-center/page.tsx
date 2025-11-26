@@ -1,40 +1,27 @@
 'use client';
 
 import {
-  Crown,
-  Shield,
-  Gem,
-  Users,
-  Building2,
-  TrendingUp,
-  Globe,
-  Award,
-  Star,
-  Heart,
-  Target,
-  BookOpen,
-  Sparkles,
-  ChevronRight,
-  ArrowRight,
-  Phone,
-  Mail,
-  Clock,
-  CheckCircle2,
-  Diamond,
-  Coins,
-  Scale,
-  PiggyBank,
-  Briefcase,
-  TreePine,
-  HandHeart,
-  Mountain,
-  Sunrise,
-  Palette,
-  Zap,
-  Infinity,
-  Eye,
-  Lock,
-  Landmark,
+    Award,
+    BookOpen,
+    Briefcase,
+    CheckCircle2,
+    Clock,
+    Crown,
+    Diamond,
+    Eye,
+    Gem,
+    Globe,
+    Infinity,
+    Landmark,
+    Lock,
+    Mountain,
+    Phone,
+    Shield,
+    Sparkles,
+    Star,
+    Target,
+    Users,
+    Zap
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -43,7 +30,6 @@ import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { CalComPopup } from '@/components/cal-com-popup';
@@ -231,11 +217,11 @@ const serviceTiers = [
     bgColor: 'bg-gradient-to-br from-yellow-50 to-amber-100 dark:from-gray-900/80 dark:to-yellow-950/40',
     borderColor: 'border-yellow-200 dark:border-yellow-600/30',
     features: [
-      '전담 패밀리오피스 설립',
-      'CIO/CFO급 전문가 배정',
-      '글로벌 투자 기회 독점 제공',
-      '차세대 글로벌 교육 프로그램',
-      '24/7 프리미엄 컨시어지 서비스'
+      '가문 전담 패밀리오피스 설립',
+      'CIO/CFO급 전담 전문가 배정',
+      '글로벌 대체투자 독점 기회',
+      '차세대 글로벌 리더십 프로그램',
+      '24/7 프라이빗 컨시어지'
     ]
   },
   {
@@ -246,11 +232,11 @@ const serviceTiers = [
     bgColor: 'bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900/80 dark:to-blue-950/40',
     borderColor: 'border-blue-200 dark:border-blue-600/30',
     features: [
-      '멀티패밀리오피스 서비스',
-      '전담 팀장급 전문가',
-      '프리미엄 투자 상품 접근',
-      '가업승계 전문 컨설팅',
-      '우선 상담 및 전용 라운지'
+      '멀티패밀리오피스(MFO) 서비스',
+      '자산배분 및 포트폴리오 최적화',
+      '가업승계 마스터플랜 수립',
+      '법인 자금 운용 및 절세 전략',
+      '전용 라운지 및 우선 상담'
     ]
   },
   {
@@ -261,11 +247,11 @@ const serviceTiers = [
     bgColor: 'bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900/80 dark:to-green-950/40',
     borderColor: 'border-green-200 dark:border-green-600/30',
     features: [
-      '통합 자산관리 서비스',
-      '시니어급 전문가 배정',
-      '고수익 투자 기회 제공',
-      '세무/법률 통합 자문',
-      '정기 자산 리뷰 미팅'
+      '통합 자산관리 솔루션',
+      '시니어 전문가 전담 배정',
+      '투자/세무/법률 원스톱 자문',
+      '정기 자산 리밸런싱',
+      '프리미엄 세미나 초청'
     ]
   }
 ];
@@ -316,20 +302,20 @@ const FamilyOfficeCenterPage = () => {
             {/* Premium Statistics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
               <div className="glass-premium rounded-2xl p-6 hover-premium border-border/50 bg-card/80 backdrop-blur-sm">
-                <div className="text-4xl font-bold text-premium-gold dark:text-amber-400 mb-2">20+</div>
-                <div className="text-sm text-card-foreground/80 font-light">년 전문 경험</div>
+                <div className="text-4xl font-bold text-premium-gold dark:text-amber-400 mb-2">500억원+</div>
+                <div className="text-sm text-card-foreground/80 font-light">자산관리 실적</div>
               </div>
               <div className="glass-premium rounded-2xl p-6 hover-premium border-border/50 bg-card/80 backdrop-blur-sm">
-                <div className="text-4xl font-bold text-premium-navy dark:text-blue-400 mb-2">100+</div>
-                <div className="text-sm text-card-foreground/80 font-light">VIP 고객</div>
+                <div className="text-4xl font-bold text-premium-navy dark:text-blue-400 mb-2">500+</div>
+                <div className="text-sm text-card-foreground/80 font-light">법인 고객사</div>
               </div>
               <div className="glass-premium rounded-2xl p-6 hover-premium border-border/50 bg-card/80 backdrop-blur-sm">
-                <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">10조+</div>
-                <div className="text-sm text-card-foreground/80 font-light">관리 자산</div>
+                <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">20년+</div>
+                <div className="text-sm text-card-foreground/80 font-light">전문 경험</div>
               </div>
               <div className="glass-premium rounded-2xl p-6 hover-premium border-border/50 bg-card/80 backdrop-blur-sm">
                 <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">98%</div>
-                <div className="text-sm text-card-foreground/80 font-light">고객 만족도</div>
+                <div className="text-sm text-card-foreground/80 font-light">만족도</div>
               </div>
             </div>
 

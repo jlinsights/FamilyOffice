@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { LayoutGrid, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { LayoutGrid, List } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export type ViewMode = 'grid' | 'list';
 
@@ -22,7 +22,7 @@ export function BlogViewToggle({ defaultView = 'grid', onViewChange }: BlogViewT
       setView(savedView);
       onViewChange?.(savedView);
     }
-  }, []);
+  }, [onViewChange]);
 
   const handleViewChange = (newView: ViewMode) => {
     setView(newView);

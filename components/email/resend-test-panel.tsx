@@ -3,16 +3,16 @@
  */
 'use client';
 
-import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { Loader2, Send, CheckCircle, XCircle, Info } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { CheckCircle, Info, Loader2, Send, XCircle } from 'lucide-react';
+import { useState } from 'react';
 
 interface EmailStatus {
   configured: boolean;
@@ -180,7 +180,7 @@ export function ResendTestPanel() {
               </div>
             </div>
           ) : (
-            <p className="text-sm text-muted-foreground">상태를 확인하려면 '상태 확인' 버튼을 클릭하세요.</p>
+            <p className="text-sm text-muted-foreground">상태를 확인하려면 &apos;상태 확인&apos; 버튼을 클릭하세요.</p>
           )}
         </CardContent>
       </Card>
