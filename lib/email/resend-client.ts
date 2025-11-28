@@ -6,8 +6,9 @@ import { Resend } from 'resend';
 import { env } from '@/lib/env';
 import { logger } from '@/lib/debug-logger';
 
-// Resend 클라이언트 초기화
-const resend = new Resend((env as any).RESEND_API_KEY || process.env.RESEND_API_KEY);
+// Resend 클라이언트 초기화 (조건부)
+const apiKey = (env as any).RESEND_API_KEY || process.env.RESEND_API_KEY;
+const resend = new Resend(apiKey || 'dummy-key-for-build');
 
 // 기본 발송자 이메일
 export const DEFAULT_FROM_EMAIL = (env as any).NEXT_PUBLIC_RESEND_FROM_EMAIL || process.env.NEXT_PUBLIC_RESEND_FROM_EMAIL || 'noreply@email.familyoffices.vip';

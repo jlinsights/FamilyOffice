@@ -82,7 +82,12 @@ async function testSupabaseConnection() {
     }
 
     // JWT 디코딩 테스트
-    const payload = JSON.parse(Buffer.from(serviceRoleKey.split('.')[1], 'base64').toString());
+    const jwtParts = serviceRoleKey.split('.');
+    if (jwtParts.length < 2 || !jwtParts[1]) {
+      console.log('   ⚠️ Supabase Service Role Key: 유효하지 않은 JWT 형식입니다');
+      return;
+    }
+    const payload = JSON.parse(Buffer.from(jwtParts[1]!, 'base64').toString());
     
     if (payload.role !== 'service_role') {
       console.log('   ⚠️ Supabase Service Role Key: 역할이 service_role이 아닙니다');
@@ -90,7 +95,7 @@ async function testSupabaseConnection() {
     }
 
     console.log('   ✅ Supabase 설정 검증 통과');
-  } catch (error) {
+  } catch (error: any) {
     console.log(`   ❌ Supabase 테스트 실패: ${error.message}`);
   }
 }
@@ -111,7 +116,7 @@ async function testClerkConfiguration() {
     }
 
     console.log('   ✅ Clerk 설정 검증 통과');
-  } catch (error) {
+  } catch (error: any) {
     console.log(`   ❌ Clerk 테스트 실패: ${error.message}`);
   }
 }

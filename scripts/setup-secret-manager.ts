@@ -95,7 +95,7 @@ async function testSecrets() {
     try {
       const result = await test();
       console.log(result ? `   ✅ ${name}` : `   ⚠️ ${name} (형식 확인 필요)`);
-    } catch (error) {
+    } catch (error: any) {
       console.log(`   ❌ ${name}: ${error.message}`);
     }
   }

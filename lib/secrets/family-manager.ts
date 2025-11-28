@@ -283,7 +283,7 @@ ${secrets.integrations.hubspotToken ? `HUBSPOT_ACCESS_TOKEN="${secrets.integrati
 ${secrets.integrations.resendApiKey ? `RESEND_API_KEY="${secrets.integrations.resendApiKey}"` : '# RESEND_API_KEY=your_api_key_here'}
 ${secrets.integrations.beehiivApiKey ? `BEEHIIV_API_KEY="${secrets.integrations.beehiivApiKey}"` : '# BEEHIIV_API_KEY=your_api_key_here'}`;
 
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(`Failed to generate development environment: ${error.message}`);
     }
   }
