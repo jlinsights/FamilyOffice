@@ -44,7 +44,15 @@
     "cache:clear": "rm -rf .next && rm -rf node_modules/.cache",
     "agent:check": "npm run lint && npm run typecheck",
     "agent:test": "npm run agent:check && npm run test:e2e",
-    "performance:monitor": "npm run dev & sleep 10 && npm run lighthouse && pkill -f 'next dev'"
+    "performance:monitor": "npm run dev & sleep 10 && npm run lighthouse && pkill -f 'next dev'",
+    "secrets:setup": "tsx scripts/setup-secret-manager.ts",
+    "secrets:sync": "tsx scripts/setup-secret-manager.ts",
+    "secrets:validate": "tsx scripts/validate-secrets.ts",
+    "secrets:migrate": "./scripts/migrate-secrets.sh",
+    "dev:1p": "npm run secrets:sync && npm run dev",
+    "build:1p": "npm run secrets:sync && npm run build",
+    "1password:login": "op signin",
+    "1password:setup": "./scripts/setup-1password.sh"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

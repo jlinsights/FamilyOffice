@@ -1,1 +1,7 @@
-🚀 BMAD Method + Agent OS 전문가급 계산기 시스템 완성 - SEO 및 Funnel 최적화 포함
+🔐 1Password Family 통합으로 시크릿 관리 시스템 구현 완료
+
+- 긴급 보안 조치: .env.production 파일 제거
+- FamilySecretManager 클래스 구현 (캐싱, 검증 포함)
+- 1Password CLI v2 통합 및 자동화 스크립트
+- npm 워크플로우 통합 (dev:1p, secrets:sync)
+- 모든 시크릿이 1Password에 안전하게 저장됨

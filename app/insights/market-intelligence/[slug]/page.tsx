@@ -1,4 +1,4 @@
-import { ArrowLeft, CalendarDays, Clock, Share2 } from 'lucide-react';
+/import { ArrowLeft, CalendarDays, Clock, Share2 } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Image from 'next/image';
