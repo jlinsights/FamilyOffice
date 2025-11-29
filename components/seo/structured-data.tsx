@@ -1,26 +1,26 @@
 /**
- * SEO 구조화 데이터 컴포넌트
+ * SEO 구조화 데이터 컴포넌트 - 네이버 검색 최적화
  * JSON-LD 형식의 구조화 데이터를 페이지에 삽입
  */
 
-import { generateStructuredData } from '@/lib/seo/metadata-generator';
+import Script from 'next/script';
 
 interface StructuredDataProps {
-  type: string;
   data: any;
+  id?: string;
 }
 
 /**
- * 구조화 데이터 JSON-LD 컴포넌트
+ * 구조화 데이터 JSON-LD 컴포넌트 - Next.js Script 컴포넌트 사용
  */
-export function StructuredData({ type, data }: StructuredDataProps) {
-  const structuredData = generateStructuredData(type, data);
-
+export function StructuredData({ data, id = 'structured-data' }: StructuredDataProps) {
   return (
-    <script
+    <Script
+      id={id}
       type="application/ld+json"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData, null, 2)
+        __html: JSON.stringify(data, null, 0)
       }}
     />
   );

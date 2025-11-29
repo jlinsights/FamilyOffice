@@ -1,16 +1,31 @@
 // 🎯 SEO 키워드 관리 시스템 - SuperClaude Framework
+// 네이버 블로그 전략과 통합된 키워드 시스템
 
 export interface KeywordData {
   primary: string;
   secondary: string[];
+  longTail: string[];
   intent: 'informational' | 'commercial' | 'transactional' | 'navigational';
   difficulty: 'low' | 'medium' | 'high';
   priority: 1 | 2 | 3;
   monthlyVolume: number;
+  competition: 'low' | 'medium' | 'high';
   targetPosition: number;
   landingPage: string;
   metaTitle: string;
   metaDescription: string;
+  localRelevance: number; // 1-10 (한국 시장 연관성)
+  naverBlogKeywords: string[]; // 네이버 블로그 전용 키워드
+}
+
+export interface SEOPage {
+  url: string;
+  title: string;
+  description: string;
+  keywords: KeywordData;
+  content: string;
+  lastUpdated: string;
+  structuredData?: any;
 }
 
 // 타겟 키워드 데이터베이스
