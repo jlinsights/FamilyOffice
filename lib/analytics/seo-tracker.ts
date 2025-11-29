@@ -221,7 +221,8 @@ function calculateKeywordScore(rankings: KeywordRanking[]): number {
   
   let totalScore = 0;
   relevantRankings.forEach(ranking => {
-    const target = SEO_TARGETS.keywordRankings[ranking.keyword]?.target || 20;
+    const keywordTarget = (SEO_TARGETS.keywordRankings as Record<string, any>)[ranking.keyword];
+    const target = keywordTarget?.target || 20;
     const score = Math.max(0, 100 - (ranking.currentRank - target) * 5);
     totalScore += score;
   });
@@ -373,7 +374,13 @@ export function generateSEORecommendations(metrics: SEOMetrics): {
 // 실시간 알림 시스템
 export class SEOAlertSystem {
   static checkRankingChanges(current: KeywordRanking[], previous: KeywordRanking[]) {
-    const alerts = [];
+    const alerts: Array<{
+      type: 'ranking_drop' | 'ranking_gain' | 'new_keyword';
+      keyword: string;
+      message: string;
+      severity: 'low' | 'medium' | 'high';
+      timestamp: string;
+    }> = [];
     
     current.forEach(curr => {
       const prev = previous.find(p => p.keyword === curr.keyword);
@@ -381,15 +388,19 @@ export class SEOAlertSystem {
         const change = prev.currentRank - curr.currentRank;
         if (change >= 5) {
           alerts.push({
-            type: 'success',
+            type: 'ranking_gain',
+            keyword: curr.keyword,
             message: `"${curr.keyword}" 키워드 ${change}위 상승! (${curr.currentRank}위)`,
-            action: '유지 전략 수립'
+            severity: 'low',
+            timestamp: new Date().toISOString()
           });
         } else if (change <= -5) {
           alerts.push({
-            type: 'warning',
+            type: 'ranking_drop',
+            keyword: curr.keyword,
             message: `"${curr.keyword}" 키워드 ${Math.abs(change)}위 하락 (${curr.currentRank}위)`,
-            action: '개선 전략 필요'
+            severity: 'high',
+            timestamp: new Date().toISOString()
           });
         }
       }

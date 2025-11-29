@@ -100,8 +100,8 @@ export function generateNaverOptimizedMeta(
     keywords: [
       keywords.primary,
       ...keywords.secondary,
-      ...keywords.longTail,
-      ...keywords.naverBlogKeywords || []
+      ...(keywords.longTail || []),
+      ...(keywords.naverBlogKeywords || [])
     ].join(', '),
     
     // Open Graph 최적화
@@ -212,7 +212,7 @@ function generateOptimizedDescription(keywords: KeywordData): string {
   if (intent === 'commercial') {
     baseDescription += ` ${secondary.slice(0, 2).join(', ')} 전문 컨설팅으로 고객 맞춤형 솔루션을 제공합니다.`;
   } else if (intent === 'informational') {
-    baseDescription += ` ${longTail[0] || secondary[0]}에 대한 완벽한 가이드를 제공합니다.`;
+    baseDescription += ` ${(longTail && longTail[0]) || secondary[0]}에 대한 완벽한 가이드를 제공합니다.`;
   }
 
   baseDescription += ` 15년 경험의 전문가와 무료 상담으로 최적의 해결책을 찾아보세요.`;

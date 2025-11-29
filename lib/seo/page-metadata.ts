@@ -12,6 +12,9 @@ import { targetKeywords } from '../seo-keywords';
  */
 export function generateHomeMetadata(): Metadata {
   const config = PAGE_META_CONFIGS['/'];
+  if (!config?.keywords) {
+    throw new Error('Home page keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/', config.keywords, config.customContent);
 }
 
@@ -20,6 +23,9 @@ export function generateHomeMetadata(): Metadata {
  */
 export function generateServicesMetadata(): Metadata {
   const config = PAGE_META_CONFIGS['/services'];
+  if (!config?.keywords) {
+    throw new Error('Services page keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/services', config.keywords, config.customContent);
 }
 
@@ -28,6 +34,9 @@ export function generateServicesMetadata(): Metadata {
  */
 export function generateProgramMetadata(): Metadata {
   const config = PAGE_META_CONFIGS['/program'];
+  if (!config?.keywords) {
+    throw new Error('Program page keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/program', config.keywords, config.customContent);
 }
 
@@ -36,6 +45,9 @@ export function generateProgramMetadata(): Metadata {
  */
 export function generateContactMetadata(): Metadata {
   const config = PAGE_META_CONFIGS['/contact'];
+  if (!config?.keywords) {
+    throw new Error('Contact page keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/contact', config.keywords, config.customContent);
 }
 
@@ -44,6 +56,9 @@ export function generateContactMetadata(): Metadata {
  */
 export function generateBlogMetadata(slug?: string): Metadata {
   const keywords = targetKeywords.businessSuccession;
+  if (!keywords) {
+    throw new Error('Blog keywords configuration not found');
+  }
   const isSpecificPost = Boolean(slug);
   
   if (isSpecificPost) {
@@ -64,6 +79,9 @@ export function generateBlogMetadata(slug?: string): Metadata {
  */
 export function generateSeminarMetadata(): Metadata {
   const keywords = targetKeywords.businessSuccession;
+  if (!keywords) {
+    throw new Error('Seminar keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/seminar', keywords, {
     title: '가업승계 세미나 | CEO·후계자 전문 교육 과정 - 패밀리오피스 S',
     description: 'CEO와 후계자를 위한 가업승계 전문 세미나. 실무 중심 교육과 1:1 멘토링으로 성공적인 승계를 준비하세요. 매월 개최, 사전 예약 필수.'
@@ -75,6 +93,9 @@ export function generateSeminarMetadata(): Metadata {
  */
 export function generateAboutMetadata(): Metadata {
   const keywords = targetKeywords.familyOffice;
+  if (!keywords) {
+    throw new Error('About keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/about', keywords, {
     title: '패밀리오피스 S 소개 | 15년 경험의 전문가팀 - 패밀리오피스 S',
     description: '15년 경험의 전문가팀이 제공하는 프리미엄 패밀리오피스 서비스. 300개 기업 성공 사례, 검증된 노하우로 고객의 자산을 안전하게 관리합니다.'
@@ -86,6 +107,9 @@ export function generateAboutMetadata(): Metadata {
  */
 export function generateBrandMetadata(): Metadata {
   const keywords = targetKeywords.familyOffice;
+  if (!keywords) {
+    throw new Error('Brand keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/brand', keywords, {
     title: '브랜드 스토리 | 성공한 기업가들의 신뢰받는 파트너 - 패밀리오피스 S',
     description: '성공한 기업가들이 선택한 프리미엄 패밀리오피스. 우리의 브랜드 스토리와 고객 중심 서비스 철학을 소개합니다.'
@@ -97,6 +121,9 @@ export function generateBrandMetadata(): Metadata {
  */
 export function generateFAQMetadata(): Metadata {
   const keywords = targetKeywords.familyOffice;
+  if (!keywords) {
+    throw new Error('FAQ keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/faq', keywords, {
     title: '자주묻는질문 | 패밀리오피스 서비스 FAQ - 패밀리오피스 S',
     description: '패밀리오피스 서비스에 대한 자주묻는질문과 답변. 서비스 이용 방법, 수수료, 절차 등 궁금한 모든 것을 확인하세요.'
@@ -108,6 +135,9 @@ export function generateFAQMetadata(): Metadata {
  */
 export function generatePrivacyMetadata(): Metadata {
   const keywords = targetKeywords.familyOffice;
+  if (!keywords) {
+    throw new Error('Privacy keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/privacy', keywords, {
     title: '개인정보처리방침 | 고객 정보보호 정책 - 패밀리오피스 S',
     description: '패밀리오피스 S의 개인정보처리방침. 고객의 소중한 개인정보를 안전하게 보호하는 정책과 절차를 안내합니다.'
@@ -119,6 +149,9 @@ export function generatePrivacyMetadata(): Metadata {
  */
 export function generateTermsMetadata(): Metadata {
   const keywords = targetKeywords.familyOffice;
+  if (!keywords) {
+    throw new Error('Terms keywords configuration not found');
+  }
   return generateNaverOptimizedMeta('/terms', keywords, {
     title: '서비스 이용약관 | 패밀리오피스 서비스 약관 - 패밀리오피스 S',
     description: '패밀리오피스 S 서비스 이용약관. 서비스 이용 시 적용되는 약관과 조건을 안내합니다.'
@@ -136,6 +169,10 @@ export function generateDynamicMetadata(
 ): Metadata {
   // 기본 키워드 설정
   const defaultKeywords = targetKeywords.familyOffice;
+  
+  if (!defaultKeywords) {
+    throw new Error('Default keywords configuration not found');
+  }
   
   // 키워드 확장
   const extendedKeywords = {

@@ -7,14 +7,20 @@ import { google } from 'googleapis';
 
 const searchconsole = google.searchconsole('v1');
 
-// Google 인증 설정
-const auth = new google.auth.GoogleAuth({
-  credentials: {
-    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-  },
-  scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
-});
+// Google 인증 설정 - 환경변수가 있을 때만 생성
+function createAuth() {
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+    return null;
+  }
+  
+  return new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    },
+    scopes: ['https://www.googleapis.com/auth/webmasters.readonly'],
+  });
+}
 
 export interface SearchConsoleData {
   queries: Array<{
@@ -62,10 +68,15 @@ export class GoogleSearchConsoleAPI {
     dimensions: ('query' | 'page' | 'country' | 'device')[] = ['query']
   ): Promise<SearchConsoleData> {
     try {
+      const auth = createAuth();
+      if (!auth) {
+        throw new Error('Google 인증 설정이 없습니다.');
+      }
+      
       const authClient = await auth.getClient();
       
       const response = await searchconsole.searchanalytics.query({
-        auth: authClient,
+        auth: authClient as any,
         siteUrl: this.siteUrl,
         requestBody: {
           startDate,
@@ -169,6 +180,10 @@ export class GoogleSearchConsoleAPI {
       const startDate = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
       const midDate = new Date(Date.now() - Math.floor(days/2) * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
+      if (!endDate || !startDate || !midDate) {
+        throw new Error('날짜 생성 실패');
+      }
+
       // 최근 데이터와 이전 데이터 모두 가져오기
       const [recentData, previousData] = await Promise.all([
         this.getKeywordRankings(midDate, endDate, ['query']),
@@ -223,17 +238,26 @@ export class GoogleSearchConsoleAPI {
       const endDate = new Date().toISOString().split('T')[0];
       const startDate = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
+      if (!endDate || !startDate) {
+        throw new Error('날짜 생성 실패');
+      }
+
       // 페이지별 데이터
       const pageData = await this.getKeywordRankings(startDate, endDate, ['page']);
       
       // 각 페이지의 키워드 가져오기
+      const auth = createAuth();
+      if (!auth) {
+        throw new Error('Google 인증 설정이 없습니다.');
+      }
+
       const results = await Promise.all(
         pageData.pages.slice(0, 20).map(async (page) => {
           try {
             const authClient = await auth.getClient();
             
             const keywordResponse = await searchconsole.searchanalytics.query({
-              auth: authClient,
+              auth: authClient as any,
               siteUrl: this.siteUrl,
               requestBody: {
                 startDate,
@@ -286,10 +310,15 @@ export class GoogleSearchConsoleAPI {
   // 사이트맵 제출
   async submitSitemap(sitemapUrl: string): Promise<{ success: boolean; message: string }> {
     try {
+      const auth = createAuth();
+      if (!auth) {
+        throw new Error('Google 인증 설정이 없습니다.');
+      }
+      
       const authClient = await auth.getClient();
       
       await searchconsole.sitemaps.submit({
-        auth: authClient,
+        auth: authClient as any,
         siteUrl: this.siteUrl,
         feedpath: sitemapUrl,
       });
@@ -315,6 +344,11 @@ export class GoogleSearchConsoleAPI {
     message: string;
   }>> {
     try {
+      const auth = createAuth();
+      if (!auth) {
+        throw new Error('Google 인증 설정이 없습니다.');
+      }
+      
       const indexing = google.indexing('v3');
       const authClient = await auth.getClient();
 
@@ -322,7 +356,7 @@ export class GoogleSearchConsoleAPI {
         urls.map(async (url) => {
           try {
             await indexing.urlNotifications.publish({
-              auth: authClient,
+              auth: authClient as any,
               requestBody: {
                 url,
                 type: 'URL_UPDATED'
@@ -358,19 +392,24 @@ export class GoogleSearchConsoleAPI {
     desktop: { lcp: number; fid: number; cls: number; };
   }> {
     try {
+      const auth = createAuth();
+      if (!auth) {
+        throw new Error('Google 인증 설정이 없습니다.');
+      }
+      
       // PageSpeed Insights API 사용
       const pageSpeed = google.pagespeedonline('v5');
       const authClient = await auth.getClient();
 
       const [mobileResult, desktopResult] = await Promise.all([
         pageSpeed.pagespeedapi.runpagespeed({
-          auth: authClient,
+          auth: authClient as any,
           url: this.siteUrl,
           strategy: 'mobile',
           category: ['performance']
         }),
         pageSpeed.pagespeedapi.runpagespeed({
-          auth: authClient,
+          auth: authClient as any,
           url: this.siteUrl,
           strategy: 'desktop',
           category: ['performance']

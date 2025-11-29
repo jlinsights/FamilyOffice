@@ -30,12 +30,48 @@ export function StructuredData({ data, id = 'structured-data' }: StructuredDataP
  * 조직 정보 구조화 데이터
  */
 export function OrganizationStructuredData() {
-  return (
-    <StructuredData
-      type="Organization"
-      data={{}}
-    />
-  );
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "FamilyOffice S",
+    "alternateName": "패밀리오피스 S",
+    "url": "https://familyoffices.vip",
+    "logo": "https://familyoffices.vip/favicon.ico",
+    "sameAs": [
+      "https://blog.naver.com/lim_jaehong"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+82-502-555-0870",
+      "contactType": "Customer Service",
+      "areaServed": "KR",
+      "availableLanguage": "Korean"
+    }
+  };
+
+  return <StructuredData data={organizationData} id="organization-schema" />;
+}
+
+/**
+ * 웹사이트 구조화 데이터
+ */
+export function WebsiteStructuredData() {
+  const websiteData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FamilyOffice S",
+    "url": "https://familyoffices.vip",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://familyoffices.vip/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  return <StructuredData data={websiteData} id="website-schema" />;
 }
 
 /**
@@ -52,16 +88,15 @@ export function ServiceStructuredData({
   description, 
   serviceType 
 }: ServiceStructuredDataProps) {
-  return (
-    <StructuredData
-      type="Service"
-      data={{
-        name,
-        description,
-        serviceType
-      }}
-    />
-  );
+  const serviceData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": name,
+    "description": description,
+    "serviceType": serviceType
+  };
+
+  return <StructuredData data={serviceData} id="service-schema" />;
 }
 
 /**
@@ -84,19 +119,18 @@ export function ArticleStructuredData({
   modifiedDate,
   url
 }: ArticleStructuredDataProps) {
-  return (
-    <StructuredData
-      type="Article"
-      data={{
-        title,
-        description,
-        image,
-        publishDate,
-        modifiedDate,
-        url
-      }}
-    />
-  );
+  const articleData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "image": image,
+    "datePublished": publishDate,
+    "dateModified": modifiedDate,
+    "url": url
+  };
+
+  return <StructuredData data={articleData} id="article-schema" />;
 }
 
 /**
@@ -110,12 +144,20 @@ interface FAQStructuredDataProps {
 }
 
 export function FAQStructuredData({ questions }: FAQStructuredDataProps) {
-  return (
-    <StructuredData
-      type="FAQ"
-      data={{ questions }}
-    />
-  );
+  const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": questions.map(q => ({
+      "@type": "Question",
+      "name": q.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": q.answer
+      }
+    }))
+  };
+
+  return <StructuredData data={faqData} id="faq-schema" />;
 }
 
 /**
@@ -129,12 +171,18 @@ interface BreadcrumbStructuredDataProps {
 }
 
 export function BreadcrumbStructuredData({ items }: BreadcrumbStructuredDataProps) {
-  return (
-    <StructuredData
-      type="BreadcrumbList"
-      data={{ items }}
-    />
-  );
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url
+    }))
+  };
+
+  return <StructuredData data={breadcrumbData} id="breadcrumb-schema" />;
 }
 
 /**

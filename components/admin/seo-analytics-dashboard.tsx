@@ -692,7 +692,7 @@ export function SEOAnalyticsDashboard() {
             <div className="flex items-center p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
               <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
               <div>
-                <span className="font-medium text-green-800">"가업승계 컨설팅" 키워드 7위 상승!</span>
+                <span className="font-medium text-green-800">&ldquo;가업승계 컨설팅&rdquo; 키워드 7위 상승!</span>
                 <span className="text-sm text-green-700 ml-2">15위 → 8위</span>
               </div>
             </div>

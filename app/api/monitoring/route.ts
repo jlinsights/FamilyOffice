@@ -157,9 +157,16 @@ async function checkSEOService() {
     const searchConsole = new GoogleSearchConsoleAPI();
     
     // 간단한 상태 체크 (실제로는 더 복잡한 헬스체크)
+    const startDate = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const endDate = new Date().toISOString().split('T')[0];
+    
+    if (!startDate || !endDate) {
+      throw new Error('날짜 생성 실패');
+    }
+    
     const testQuery = await searchConsole.getKeywordRankings(
-      new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      new Date().toISOString().split('T')[0],
+      startDate,
+      endDate,
       ['query']
     );
 
@@ -210,6 +217,10 @@ async function collectRealTimeMetrics() {
     
     const endDate = new Date().toISOString().split('T')[0];
     const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    
+    if (!startDate || !endDate) {
+      throw new Error('날짜 생성 실패');
+    }
     
     const keywordData = await searchConsole.getKeywordRankings(startDate, endDate, ['query']);
     const pageData = await searchConsole.getKeywordRankings(startDate, endDate, ['page']);

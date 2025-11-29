@@ -143,12 +143,19 @@ export async function GET(request: NextRequest) {
     // 엔진별 필터링
     let responseData = mockAEOData;
     if (engine !== 'all') {
-      responseData = {
-        ...mockAEOData,
-        aiEnginePerformance: {
-          [engine]: mockAEOData.aiEnginePerformance[engine as keyof typeof mockAEOData.aiEnginePerformance]
-        }
-      };
+      const engineKey = engine as keyof typeof mockAEOData.aiEnginePerformance;
+      if (mockAEOData.aiEnginePerformance[engineKey]) {
+        responseData = {
+          ...mockAEOData,
+          aiEnginePerformance: {
+            chatgpt: engine === 'chatgpt' ? mockAEOData.aiEnginePerformance.chatgpt : mockAEOData.aiEnginePerformance.chatgpt,
+            claude: engine === 'claude' ? mockAEOData.aiEnginePerformance.claude : mockAEOData.aiEnginePerformance.chatgpt,
+            bard: engine === 'bard' ? mockAEOData.aiEnginePerformance.bard : mockAEOData.aiEnginePerformance.chatgpt,
+            hyperclova: engine === 'hyperclova' ? mockAEOData.aiEnginePerformance.hyperclova : mockAEOData.aiEnginePerformance.chatgpt,
+            perplexity: engine === 'perplexity' ? mockAEOData.aiEnginePerformance.perplexity : mockAEOData.aiEnginePerformance.chatgpt
+          }
+        };
+      }
     }
 
     // AEO 점수 계산

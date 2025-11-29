@@ -228,7 +228,7 @@ export function IntegratedMonitoring() {
     return <span className="h-4 w-4 bg-gray-300 rounded-full"></span>;
   };
 
-  const toggleAutomation = (key: keyof typeof data.automationStatus) => {
+  const toggleAutomation = (key: keyof MonitoringData['automationStatus']) => {
     if (!data) return;
     
     setData(prev => prev ? {
@@ -540,7 +540,7 @@ export function IntegratedMonitoring() {
                       {enabled ? <Play className="h-4 w-4 text-green-500" /> : <Pause className="h-4 w-4 text-gray-400" />}
                       <Switch 
                         checked={enabled}
-                        onCheckedChange={() => toggleAutomation(key as keyof typeof data.automationStatus)}
+                        onCheckedChange={() => toggleAutomation(key as keyof MonitoringData['automationStatus'])}
                       />
                     </div>
                   </div>

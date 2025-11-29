@@ -4,18 +4,18 @@
 export interface KeywordData {
   primary: string;
   secondary: string[];
-  longTail: string[];
+  longTail?: string[];
   intent: 'informational' | 'commercial' | 'transactional' | 'navigational';
   difficulty: 'low' | 'medium' | 'high';
   priority: 1 | 2 | 3;
   monthlyVolume: number;
-  competition: 'low' | 'medium' | 'high';
+  competition?: 'low' | 'medium' | 'high';
   targetPosition: number;
   landingPage: string;
   metaTitle: string;
   metaDescription: string;
-  localRelevance: number; // 1-10 (한국 시장 연관성)
-  naverBlogKeywords: string[]; // 네이버 블로그 전용 키워드
+  localRelevance?: number; // 1-10 (한국 시장 연관성)
+  naverBlogKeywords?: string[]; // 네이버 블로그 전용 키워드
 }
 
 export interface SEOPage {
@@ -34,27 +34,35 @@ export const targetKeywords: Record<string, KeywordData> = {
   taxPlan: {
     primary: '절세플랜',
     secondary: ['절세플랜 설계', '절세플랜 컨설팅', '맞춤형 절세플랜', 'CEO 절세플랜', '기업가 절세플랜'],
+    longTail: ['중견기업 CEO 절세플랜', '가족법인 절세플랜 설계', '패밀리오피스 절세전략'],
     intent: 'commercial',
     difficulty: 'medium',
+    competition: 'medium',
     priority: 1,
     monthlyVolume: 1800,
     targetPosition: 3,
     landingPage: '/tax-plan',
     metaTitle: '절세플랜 전문가 | CEO·기업가 맞춤형 세무최적화 전략',
-    metaDescription: '성공한 기업가를 위한 맞춤형 절세플랜. 법인세·소득세·상속세 통합 최적화로 세금 40% 절감. 전문가 무료 진단으로 최적 절세전략 설계.'
+    metaDescription: '성공한 기업가를 위한 맞춤형 절세플랜. 법인세·소득세·상속세 통합 최적화로 세금 40% 절감. 전문가 무료 진단으로 최적 절세전략 설계.',
+    localRelevance: 9,
+    naverBlogKeywords: ['절세플랜', 'CEO 절세', '세무최적화', '절세전략']
   },
 
   familyCorporation: {
     primary: '가족법인',
     secondary: ['가족법인 설립', '가족법인 운영', '가족법인 세무', '가족법인 장점', '가족법인 절세'],
+    longTail: ['가족법인 설립 절차', '가족법인 세무혜택', '가족법인 상속세 절감'],
     intent: 'commercial',
     difficulty: 'medium',
+    competition: 'medium',
     priority: 1,
     monthlyVolume: 2200,
     targetPosition: 5,
     landingPage: '/family-corporation',
     metaTitle: '가족법인 설립 완벽 가이드 | 절세 효과부터 운영 전략까지',
-    metaDescription: '가족법인으로 상속세 50% 절감! 설립부터 운영, 세무관리까지 완벽 가이드. 전문가 상담으로 최적 가족법인 구조 설계. 성공사례 200+건 보유.'
+    metaDescription: '가족법인으로 상속세 50% 절감! 설립부터 운영, 세무관리까지 완벽 가이드. 전문가 상담으로 최적 가족법인 구조 설계. 성공사례 200+건 보유.',
+    localRelevance: 9,
+    naverBlogKeywords: ['가족법인', '가족회사', '절세', '상속세']
   },
 
   policyFunding: {
