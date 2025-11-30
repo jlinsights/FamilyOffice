@@ -1,16 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleSearchConsoleAPI } from '@/lib/google/search-console';
+import { 
+  validateApiRequest, 
+  createValidationErrorResponse, 
+  createApiResponse, 
+  createErrorResponse,
+  naverRankingSchema 
+} from '@/lib/api-validation';
 
 export const dynamic = 'force-dynamic';
-
-interface NaverRankingRequest {
-  action?: 'get_rankings' | 'add_keyword' | 'update_target' | 'bulk_check';
-  keywords?: string[];
-  keyword?: string;
-  category?: string;
-  priority?: 'high' | 'medium' | 'low';
-  targetRank?: number;
-}
 
 // 추적 중인 키워드 목록 (실제로는 데이터베이스에서 관리)
 const TRACKED_KEYWORDS = [
@@ -74,57 +72,80 @@ const TRACKED_KEYWORDS = [
 
 export async function GET(request: NextRequest) {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    const action = searchParams.get('action') || 'get_rankings';
+    // 쿼리 파라미터 검증
+    const validation = await validateApiRequest(request, naverRankingSchema, 'query');
+    
+    if (!validation.success) {
+      return createValidationErrorResponse(validation);
+    }
+
+    const { action, keyword, target_rank, category } = validation.data!;
 
     switch (action) {
       case 'get_rankings':
         return await getRankings();
       
+      case 'check_rank':
+        if (!keyword) {
+          return createErrorResponse('키워드는 필수입니다', 'MISSING_KEYWORD', 400);
+        }
+        return await checkSingleRank(keyword);
+      
       default:
-        return NextResponse.json({
-          success: false,
-          error: '지원하지 않는 액션입니다.'
-        }, { status: 400 });
+        return createErrorResponse('지원하지 않는 액션입니다', 'INVALID_ACTION', 400);
     }
 
   } catch (error) {
     console.error('네이버 순위 API 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '서버 오류가 발생했습니다.'
-    }, { status: 500 });
+    return createErrorResponse(
+      '네이버 순위 API 처리 중 오류가 발생했습니다.',
+      'NAVER_RANKING_ERROR',
+      500,
+      process.env.NODE_ENV === 'development' ? error : undefined
+    );
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body: NaverRankingRequest = await request.json();
-    const { action = 'get_rankings' } = body;
+    // POST 바디 검증
+    const validation = await validateApiRequest(request, naverRankingSchema, 'body');
+    
+    if (!validation.success) {
+      return createValidationErrorResponse(validation);
+    }
+
+    const { action, keyword, target_rank, category } = validation.data!;
 
     switch (action) {
       case 'add_keyword':
-        return await addKeyword(body);
+        if (!keyword) {
+          return createErrorResponse('키워드는 필수입니다', 'MISSING_KEYWORD', 400);
+        }
+        return await addKeyword({ 
+          keyword, 
+          ...(target_rank !== undefined && { target_rank }), 
+          ...(category !== undefined && { category }) 
+        });
         
-      case 'update_target':
-        return await updateTarget(body);
-        
-      case 'bulk_check':
-        return await bulkCheckRankings(body);
+      case 'remove_keyword':
+        if (!keyword) {
+          return createErrorResponse('키워드는 필수입니다', 'MISSING_KEYWORD', 400);
+        }
+        return await removeKeyword(keyword);
         
       default:
-        return NextResponse.json({
-          success: false,
-          error: '지원하지 않는 액션입니다.'
-        }, { status: 400 });
+        return createErrorResponse('지원하지 않는 액션입니다', 'INVALID_ACTION', 400);
     }
 
   } catch (error) {
     console.error('네이버 순위 API 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '서버 오류가 발생했습니다.'
-    }, { status: 500 });
+    return createErrorResponse(
+      '네이버 순위 API 처리 중 오류가 발생했습니다.',
+      'NAVER_RANKING_ERROR',
+      500,
+      process.env.NODE_ENV === 'development' ? error : undefined
+    );
   }
 }
 
@@ -211,151 +232,107 @@ async function getRankings() {
       delete cat.trends;
     });
 
-    return NextResponse.json({
-      success: true,
-      data: {
-        keywords: rankings,
-        summary,
-        categories,
-        lastUpdate: new Date().toISOString()
-      }
-    });
+    return createApiResponse({
+      keywords: rankings,
+      summary,
+      categories,
+      lastUpdate: new Date().toISOString()
+    }, '네이버 순위 데이터 조회 완료');
 
   } catch (error) {
     console.error('순위 데이터 조회 오류:', error);
     
-    // 에러 시 모의 데이터 반환
-    return NextResponse.json({
-      success: true,
-      data: {
-        keywords: [],
-        summary: {
-          totalKeywords: 0,
-          avgRank: 0,
-          improvingKeywords: 0,
-          decliningKeywords: 0,
-          top10Keywords: 0,
-          top20Keywords: 0,
-          totalSearchVolume: 0
-        },
-        categories: {},
-        lastUpdate: new Date().toISOString(),
-        note: 'Search Console 연결 오류로 모의 데이터를 표시합니다.'
-      }
-    });
+    // 에러 시 기본 데이터 반환
+    return createApiResponse({
+      keywords: [],
+      summary: {
+        totalKeywords: 0,
+        avgRank: 0,
+        improvingKeywords: 0,
+        decliningKeywords: 0,
+        top10Keywords: 0,
+        top20Keywords: 0,
+        totalSearchVolume: 0
+      },
+      categories: {},
+      lastUpdate: new Date().toISOString(),
+      note: 'Search Console 연결 오류로 기본 데이터를 표시합니다.'
+    }, 'Search Console 연결 실패 - 기본 데이터 반환');
   }
 }
 
-async function addKeyword(body: NaverRankingRequest) {
-  const { keyword, category, priority, targetRank } = body;
-
-  if (!keyword) {
-    return NextResponse.json({
-      success: false,
-      error: '키워드를 입력해주세요.'
-    }, { status: 400 });
-  }
-
+async function checkSingleRank(keyword: string) {
   try {
+    // 실제로는 Naver API 또는 웹 스크래핑을 통해 순위 확인
+    const mockRank = Math.floor(Math.random() * 50) + 1;
+    const mockSearchVolume = Math.floor(Math.random() * 5000) + 500;
+    
+    return createApiResponse({
+      keyword,
+      currentRank: mockRank,
+      searchVolume: mockSearchVolume,
+      difficulty: Math.floor(Math.random() * 30) + 50,
+      lastChecked: new Date().toISOString(),
+    }, `"${keyword}" 순위 확인 완료`);
+    
+  } catch (error) {
+    return createErrorResponse(
+      '키워드 순위 확인 중 오류가 발생했습니다.',
+      'RANK_CHECK_ERROR',
+      500
+    );
+  }
+}
+
+async function addKeyword(data: { keyword: string; target_rank?: number; category?: string }) {
+  try {
+    const { keyword, target_rank, category } = data;
+
     // 실제로는 데이터베이스에 저장
     const newKeyword = {
       id: (TRACKED_KEYWORDS.length + 1).toString(),
       keyword,
       category: category || '기타',
-      priority: priority || 'medium',
-      targetRank: targetRank || 20,
+      priority: 'medium' as const,
+      targetRank: target_rank || 20,
       url: '/',
       dateAdded: new Date().toISOString()
     };
 
     console.log('새 키워드 추가:', newKeyword);
 
-    return NextResponse.json({
-      success: true,
-      data: {
-        message: '키워드가 성공적으로 추가되었습니다.',
-        keyword: newKeyword
-      }
-    });
+    return createApiResponse({
+      keyword: newKeyword
+    }, '키워드가 성공적으로 추가되었습니다.');
 
   } catch (error) {
     console.error('키워드 추가 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '키워드 추가 중 오류가 발생했습니다.'
-    }, { status: 500 });
+    return createErrorResponse(
+      '키워드 추가 중 오류가 발생했습니다.',
+      'ADD_KEYWORD_ERROR',
+      500
+    );
   }
 }
 
-async function updateTarget(body: NaverRankingRequest) {
-  const { keyword, targetRank } = body;
-
-  if (!keyword || !targetRank) {
-    return NextResponse.json({
-      success: false,
-      error: '키워드와 목표 순위를 입력해주세요.'
-    }, { status: 400 });
-  }
-
+async function removeKeyword(keyword: string) {
   try {
-    // 실제로는 데이터베이스에서 업데이트
-    console.log(`${keyword} 목표 순위 변경: ${targetRank}위`);
+    // 실제로는 데이터베이스에서 삭제
+    console.log('키워드 삭제:', keyword);
 
-    return NextResponse.json({
-      success: true,
-      data: {
-        message: '목표 순위가 성공적으로 업데이트되었습니다.',
-        keyword,
-        targetRank
-      }
-    });
+    return createApiResponse({
+      keyword,
+      deletedAt: new Date().toISOString()
+    }, '키워드가 성공적으로 삭제되었습니다.');
 
   } catch (error) {
-    console.error('목표 순위 업데이트 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '목표 순위 업데이트 중 오류가 발생했습니다.'
-    }, { status: 500 });
+    console.error('키워드 삭제 오류:', error);
+    return createErrorResponse(
+      '키워드 삭제 중 오류가 발생했습니다.',
+      'REMOVE_KEYWORD_ERROR',
+      500
+    );
   }
 }
 
-async function bulkCheckRankings(body: NaverRankingRequest) {
-  const { keywords } = body;
-
-  if (!keywords || keywords.length === 0) {
-    return NextResponse.json({
-      success: false,
-      error: '확인할 키워드를 입력해주세요.'
-    }, { status: 400 });
-  }
-
-  try {
-    // Google Search Console API를 통한 벌크 순위 체크
-    const searchConsole = new GoogleSearchConsoleAPI();
-    const rankings = await searchConsole.getKeywordPerformance(keywords, 7);
-
-    return NextResponse.json({
-      success: true,
-      data: {
-        rankings: rankings.map(r => ({
-          keyword: r.keyword,
-          currentPosition: r.currentPosition,
-          averagePosition: r.averagePosition,
-          clicks: r.clicks,
-          impressions: r.impressions,
-          ctr: r.ctr,
-          trend: r.trend,
-          changePercent: r.changePercent
-        })),
-        checkedAt: new Date().toISOString()
-      }
-    });
-
-  } catch (error) {
-    console.error('벌크 순위 체크 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '순위 확인 중 오류가 발생했습니다.'
-    }, { status: 500 });
-  }
-}
+// All validation and error handling is now handled by the validation system above

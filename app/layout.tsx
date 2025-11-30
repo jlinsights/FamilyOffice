@@ -22,6 +22,7 @@ import { SEOModulePreloader } from '@/components/seo-module-preloader';
 import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
 import { safeMetadata } from '@/lib/safe-seo-engine';
+import { sanitizeStructuredData, createUserTrackingScript } from '@/lib/security/html-sanitizer';
 import { DebugStyles } from './debug-styles';
 
 const inter = Inter({ 
@@ -192,7 +193,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: sanitizeStructuredData({
               "@context": "https://schema.org",
               "@type": "FinancialService",
               "name": "절세플랜·가업승계·가족법인 전문 FamilyOffice S",
@@ -288,7 +289,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: sanitizeStructuredData({
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [
@@ -349,7 +350,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: sanitizeStructuredData({
               "@context": "https://schema.org",
               "@type": "WebPage",
               "name": "성공한 CEO 전용 패밀리오피스",
@@ -438,29 +439,7 @@ export default function RootLayout({
             {/* 사용자 행동 추적 스크립트 */}
             <script
               dangerouslySetInnerHTML={{
-                __html: `
-                  // 사용자 행동 분석 모니터링
-                  if (typeof window !== 'undefined') {
-                    window.FamilyOfficeSEO = {
-                      version: '1.0',
-                      solution: '법인보험 × 가업승계 통합솔루션',
-                      target: '성공한 법인 대표',
-                      initialized: new Date().toISOString()
-                    };
-                    
-                    // 사용자 행동 추적
-                    window.addEventListener('load', function() {
-                      const userProfile = {
-                        referral: document.referrer || 'direct',
-                        device: navigator.userAgent.includes('Mobile') ? 'mobile' : 'desktop',
-                        screen: window.innerWidth > 1920 ? 'premium' : 'standard',
-                        performance: performance.now() < 3000 ? 'fast' : 'slow'
-                      };
-                      
-                      console.log('FamilyOffice User Profile:', userProfile);
-                    });
-                  }
-                `
+                __html: createUserTrackingScript()
               }}
             />
           </ThemeProvider>

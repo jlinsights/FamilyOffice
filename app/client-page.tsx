@@ -17,6 +17,7 @@ import { SmoothScroll } from '@/components/smooth-scroll';
 import { StructuredData } from '@/components/structured-data';
 
 import { generateStructuredData } from '@/lib/seo/structured-data';
+import { createAnalyticsScript, createGTMScript, isAllowedScriptSource } from '@/lib/security/html-sanitizer';
 
 export default function ClientPage() {
   const [mounted, setMounted] = useState(false);
@@ -56,13 +57,7 @@ export default function ClientPage() {
         id="gtm"
         strategy="lazyOnload"
         dangerouslySetInnerHTML={{
-          __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-MP3HPPMN');
-          `,
+          __html: createGTMScript('GTM-MP3HPPMN'),
         }}
       />
 
@@ -71,22 +66,13 @@ export default function ClientPage() {
         src="https://www.googletagmanager.com/gtag/js?id=G-DB6TXRZLTK"
         strategy="lazyOnload"
       />
-      <Script id="ga" strategy="lazyOnload">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-DB6TXRZLTK', {
-            page_title: document.title,
-            page_location: window.location.href,
-            send_page_view: false
-          });
-          gtag('event', 'page_view', {
-            page_title: document.title,
-            page_location: window.location.href
-          });
-        `}
-      </Script>
+      <Script
+        id="ga" 
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: createAnalyticsScript('G-DB6TXRZLTK'),
+        }}
+      />
 
       {/* Google Tag Manager (noscript) */}
       <noscript>

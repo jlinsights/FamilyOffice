@@ -159,3 +159,81 @@ export function validateCSPNonce(nonce?: string): string | undefined {
   
   return nonce;
 }
+
+/**
+ * Sanitizes HTML content for safe rendering in dangerouslySetInnerHTML
+ * Removes dangerous elements and attributes while preserving basic formatting
+ */
+export function sanitizeHTMLContent(content: string): string {
+  if (!content || typeof content !== 'string') {
+    return '';
+  }
+
+  // Remove all script tags and their content
+  let sanitized = content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  
+  // Remove dangerous attributes
+  sanitized = sanitized.replace(/\s+on\w+\s*=\s*["'][^"']*["']/gi, ''); // onclick, onload, etc.
+  sanitized = sanitized.replace(/\s+javascript\s*:\s*[^"'\s>]*/gi, ''); // javascript: URLs
+  
+  // Remove dangerous tags completely
+  const dangerousTags = ['iframe', 'object', 'embed', 'form', 'input', 'textarea', 'button'];
+  dangerousTags.forEach(tag => {
+    const regex = new RegExp(`<${tag}\\b[^>]*>.*?<\\/${tag}>`, 'gi');
+    sanitized = sanitized.replace(regex, '');
+    // Also remove self-closing versions
+    const selfClosingRegex = new RegExp(`<${tag}\\b[^>]*\\/>`, 'gi');
+    sanitized = sanitized.replace(selfClosingRegex, '');
+  });
+  
+  // Remove style attributes that could contain malicious CSS
+  sanitized = sanitized.replace(/\s+style\s*=\s*["'][^"']*["']/gi, '');
+  
+  // Clean up any remaining whitespace/newlines
+  sanitized = sanitized.replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
+  
+  return sanitized;
+}
+
+/**
+ * Validates if content is safe for SEO purposes (text content only)
+ * Returns true if content contains only safe text content
+ */
+export function isTextOnlyContent(content: string): boolean {
+  // Check if content has no HTML tags except basic formatting
+  const allowedTags = /^[^<>]*(?:<\/?(?:p|br|strong|em|b|i|u|span|div|h[1-6])\b[^>]*>[^<>]*)*$/i;
+  return allowedTags.test(content) && !content.includes('<script');
+}
+
+/**
+ * Creates a safe user tracking script with validated parameters
+ * Only logs basic user behavior for SEO optimization
+ */
+export function createUserTrackingScript(): string {
+  return `
+    // Safe user behavior analysis
+    if (typeof window !== 'undefined') {
+      window.FamilyOfficeSEO = {
+        version: '1.0',
+        solution: 'Family Office Services',
+        target: 'Business Leaders',
+        initialized: new Date().toISOString()
+      };
+      
+      // Basic user behavior tracking (no PII)
+      window.addEventListener('load', function() {
+        const userProfile = {
+          referral: document.referrer ? 'external' : 'direct',
+          device: navigator.userAgent.includes('Mobile') ? 'mobile' : 'desktop',
+          screen: window.innerWidth > 1920 ? 'premium' : 'standard',
+          performance: performance.now() < 3000 ? 'fast' : 'slow'
+        };
+        
+        // Console logging only in development
+        if (process.env.NODE_ENV === 'development') {
+          console.log('User Profile:', userProfile);
+        }
+      });
+    }
+  `.trim();
+}

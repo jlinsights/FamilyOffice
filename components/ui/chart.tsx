@@ -5,9 +5,69 @@ import * as RechartsPrimitive from 'recharts';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
+import { sanitizeHTMLContent } from '@/lib/security/html-sanitizer';
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const;
+
+/**
+ * Validates and sanitizes CSS color values for chart styling
+ * Only allows safe color formats: hex, rgb, hsl, named colors
+ */
+function sanitizeCSSColor(color: string): string | null {
+  if (!color || typeof color !== 'string') {
+    return null;
+  }
+
+  // Allowed color patterns
+  const colorPatterns = [
+    /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, // hex colors
+    /^rgb\((\s*\d+\s*,){2}\s*\d+\s*\)$/, // rgb(r,g,b)
+    /^rgba\((\s*\d+\s*,){3}\s*(0|1|0\.\d+)\s*\)$/, // rgba(r,g,b,a)
+    /^hsl\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*\)$/, // hsl(h,s,l)
+    /^hsla\(\s*\d+\s*,(\s*\d+%\s*,){2}\s*(0|1|0\.\d+)\s*\)$/, // hsla(h,s,l,a)
+  ];
+
+  // Common safe named colors
+  const namedColors = [
+    'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown',
+    'black', 'white', 'gray', 'grey', 'transparent', 'currentColor'
+  ];
+
+  const trimmedColor = color.trim();
+  
+  // Check against patterns
+  if (colorPatterns.some(pattern => pattern.test(trimmedColor))) {
+    return trimmedColor;
+  }
+  
+  // Check against named colors
+  if (namedColors.includes(trimmedColor.toLowerCase())) {
+    return trimmedColor;
+  }
+
+  // Invalid color - return null
+  return null;
+}
+
+/**
+ * Validates CSS custom property names for chart styling
+ * Only allows alphanumeric chars, hyphens, and underscores
+ */
+function sanitizeCSSPropertyName(name: string): string | null {
+  if (!name || typeof name !== 'string') {
+    return null;
+  }
+
+  // CSS custom property names: --[a-zA-Z0-9_-]+
+  const validPattern = /^[a-zA-Z0-9_-]+$/;
+  
+  if (validPattern.test(name)) {
+    return name;
+  }
+
+  return null;
+}
 
 export type ChartConfig = {
   [k in string]: {
@@ -77,25 +137,61 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
     return null;
   }
 
+  // Generate secure CSS with validated colors and property names
+  const generateSecureCSS = () => {
+    return Object.entries(THEMES)
+      .map(([theme, prefix]) => {
+        const cssRules = colorConfig
+          .map(([key, itemConfig]) => {
+            // Validate property name
+            const sanitizedKey = sanitizeCSSPropertyName(key);
+            if (!sanitizedKey) {
+              console.warn(`Invalid CSS property name: ${key}`);
+              return null;
+            }
+
+            // Get and validate color value
+            const color =
+              itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
+              itemConfig.color;
+            
+            if (!color) return null;
+            
+            const sanitizedColor = sanitizeCSSColor(color);
+            if (!sanitizedColor) {
+              console.warn(`Invalid color value for ${key}: ${color}`);
+              return null;
+            }
+
+            return `  --color-${sanitizedKey}: ${sanitizedColor};`;
+          })
+          .filter(Boolean)
+          .join('\n');
+
+        if (!cssRules) return '';
+
+        // Sanitize chart ID (should only contain safe characters)
+        const sanitizedId = id.replace(/[^a-zA-Z0-9_-]/g, '');
+        
+        return `
+${prefix} [data-chart="${sanitizedId}"] {
+${cssRules}
+}`;
+      })
+      .filter(Boolean)
+      .join('\n');
+  };
+
+  const secureCSS = generateSecureCSS();
+  
+  if (!secureCSS) {
+    return null;
+  }
+
   return (
     <style
       dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
-          .map(
-            ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color;
-    return color ? `  --color-${key}: ${color};` : null;
-  })
-  .join('\n')}
-}
-`
-          )
-          .join('\n'),
+        __html: secureCSS,
       }}
     />
   );

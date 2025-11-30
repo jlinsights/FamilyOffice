@@ -95,20 +95,257 @@ User-Agent: ${userAgent}
 
   console.warn('SECURITY ALERT:', alertMessage);
 
-  // TODO: 실제 운영 시 아래 알림 채널들을 활성화
-  // - 슬랙/디스코드 웹훅
-  // - 이메일 알림
-  // - SMS 알림 (긴급 시)
-  
-  // 개발 환경에서는 콘솔 로그만
+  // 병렬로 모든 알림 채널에 전송
+  const alertPromises = [];
+
+  // 1. 슬랙 웹훅 알림
+  if (process.env.SLACK_SECURITY_WEBHOOK_URL) {
+    alertPromises.push(sendSlackAlert(event, ip, userAgent, alertMessage));
+  }
+
+  // 2. 디스코드 웹훅 알림
+  if (process.env.DISCORD_SECURITY_WEBHOOK_URL) {
+    alertPromises.push(sendDiscordAlert(event, ip, userAgent, alertMessage));
+  }
+
+  // 3. 이메일 알림 (critical/high 등급만)
+  if ((event.severity === 'critical' || event.severity === 'high') && process.env.ADMIN_EMAIL) {
+    alertPromises.push(sendEmailAlert(event, ip, userAgent, alertMessage));
+  }
+
+  // 4. SMS 알림 (critical 등급만, 업무시간 외)
+  if (event.severity === 'critical' && shouldSendUrgentSMS()) {
+    alertPromises.push(sendSMSAlert(event, ip, alertMessage));
+  }
+
+  // 모든 알림 전송 (실패해도 계속 진행)
+  try {
+    await Promise.allSettled(alertPromises);
+  } catch (error) {
+    console.error('Alert sending failed:', error);
+  }
+
+  // 개발 환경에서는 상세 로그
   if (process.env.NODE_ENV === 'development') {
     console.error('SECURITY ALERT:', {
       event,
       ip,
       userAgent,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      alertChannels: {
+        slack: !!process.env.SLACK_SECURITY_WEBHOOK_URL,
+        discord: !!process.env.DISCORD_SECURITY_WEBHOOK_URL,
+        email: !!process.env.ADMIN_EMAIL,
+        sms: event.severity === 'critical'
+      }
     });
   }
+}
+
+/**
+ * 슬랙 웹훅 알림 전송
+ */
+async function sendSlackAlert(event: SecurityEvent, ip: string, userAgent: string, alertMessage: string): Promise<void> {
+  try {
+    const webhookUrl = process.env.SLACK_SECURITY_WEBHOOK_URL;
+    if (!webhookUrl) return;
+
+    const payload = {
+      text: "🚨 보안 경고",
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `*🚨 보안 경고*\n\n*유형:* ${event.type}\n*심각도:* ${event.severity}\n*설명:* ${event.description}`
+          }
+        },
+        {
+          type: "section",
+          fields: [
+            {
+              type: "mrkdwn",
+              text: `*IP 주소:*\n${ip}`
+            },
+            {
+              type: "mrkdwn",
+              text: `*User-Agent:*\n${userAgent}`
+            },
+            {
+              type: "mrkdwn",
+              text: `*시간:*\n${new Date().toLocaleString('ko-KR')}`
+            },
+            {
+              type: "mrkdwn",
+              text: `*사용자 ID:*\n${event.user_id || '알 수 없음'}`
+            }
+          ]
+        }
+      ],
+      attachments: [
+        {
+          color: event.severity === 'critical' ? 'danger' : 
+                 event.severity === 'high' ? 'warning' : 'good',
+          fields: [
+            {
+              title: "추가 정보",
+              value: JSON.stringify(event.additional_data || {}, null, 2),
+              short: false
+            }
+          ]
+        }
+      ]
+    };
+
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (error) {
+    console.error('Slack alert failed:', error);
+  }
+}
+
+/**
+ * 디스코드 웹훅 알림 전송
+ */
+async function sendDiscordAlert(event: SecurityEvent, ip: string, userAgent: string, alertMessage: string): Promise<void> {
+  try {
+    const webhookUrl = process.env.DISCORD_SECURITY_WEBHOOK_URL;
+    if (!webhookUrl) return;
+
+    const embed = {
+      title: "🚨 보안 경고",
+      description: event.description,
+      color: event.severity === 'critical' ? 0xff0000 : 
+             event.severity === 'high' ? 0xff8c00 : 0xffd700,
+      fields: [
+        { name: "유형", value: event.type, inline: true },
+        { name: "심각도", value: event.severity, inline: true },
+        { name: "IP 주소", value: ip, inline: true },
+        { name: "사용자 ID", value: event.user_id || '알 수 없음', inline: true },
+        { name: "시간", value: new Date().toLocaleString('ko-KR'), inline: true },
+        { name: "User-Agent", value: userAgent.substring(0, 100) + (userAgent.length > 100 ? '...' : ''), inline: false }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: { text: "FamilyOffice Security System" }
+    };
+
+    if (event.additional_data && Object.keys(event.additional_data).length > 0) {
+      embed.fields.push({
+        name: "추가 정보",
+        value: "```json\n" + JSON.stringify(event.additional_data, null, 2).substring(0, 1000) + "\n```",
+        inline: false
+      });
+    }
+
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ embeds: [embed] })
+    });
+  } catch (error) {
+    console.error('Discord alert failed:', error);
+  }
+}
+
+/**
+ * 이메일 알림 전송 (critical/high 등급만)
+ */
+async function sendEmailAlert(event: SecurityEvent, ip: string, userAgent: string, alertMessage: string): Promise<void> {
+  try {
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (!adminEmail) return;
+
+    // 이메일 서비스가 설정되지 않은 경우 콘솔 로그로 대체
+    if (!process.env.SMTP_HOST) {
+      console.warn('[EMAIL ALERT] SMTP not configured. Alert details:', {
+        to: adminEmail,
+        subject: `🚨 [${event.severity.toUpperCase()}] 보안 경고 - ${event.type}`,
+        event,
+        ip,
+        userAgent
+      });
+      return;
+    }
+
+    // 실제 이메일 전송 로직 (SMTP 설정 시)
+    const emailBody = `
+보안 경고가 발생했습니다.
+
+유형: ${event.type}
+심각도: ${event.severity}
+설명: ${event.description}
+IP 주소: ${ip}
+User-Agent: ${userAgent}
+사용자 ID: ${event.user_id || '알 수 없음'}
+시간: ${new Date().toLocaleString('ko-KR')}
+
+추가 정보:
+${JSON.stringify(event.additional_data || {}, null, 2)}
+
+즉시 확인이 필요합니다.
+
+FamilyOffice 보안 시스템
+`;
+
+    // TODO: SMTP 이메일 전송 구현
+    console.log('[EMAIL ALERT] Would send email:', {
+      to: adminEmail,
+      subject: `🚨 [${event.severity.toUpperCase()}] 보안 경고`,
+      body: emailBody
+    });
+
+  } catch (error) {
+    console.error('Email alert failed:', error);
+  }
+}
+
+/**
+ * SMS 알림 전송 (critical 등급만, 업무시간 외)
+ */
+async function sendSMSAlert(event: SecurityEvent, ip: string, alertMessage: string): Promise<void> {
+  try {
+    const adminPhone = process.env.ADMIN_PHONE;
+    if (!adminPhone) return;
+
+    // SMS 서비스가 설정되지 않은 경우 콘솔 로그로 대체
+    if (!process.env.SMS_API_KEY) {
+      console.warn('[SMS ALERT] SMS service not configured. Alert details:', {
+        to: adminPhone,
+        message: `🚨 CRITICAL 보안 경고: ${event.description}. IP: ${ip}. 즉시 확인 필요.`,
+        event
+      });
+      return;
+    }
+
+    const smsMessage = `🚨 FamilyOffice 보안 경고\n${event.description}\nIP: ${ip}\n시간: ${new Date().toLocaleString('ko-KR')}\n즉시 확인 필요`;
+
+    // TODO: SMS API 호출 (Twilio, AWS SNS 등)
+    console.log('[SMS ALERT] Would send SMS:', {
+      to: adminPhone,
+      message: smsMessage
+    });
+
+  } catch (error) {
+    console.error('SMS alert failed:', error);
+  }
+}
+
+/**
+ * 긴급 SMS 발송 여부 확인 (업무시간 외 판단)
+ */
+function shouldSendUrgentSMS(): boolean {
+  const now = new Date();
+  const hour = now.getHours();
+  const day = now.getDay(); // 0 = Sunday, 6 = Saturday
+  
+  // 주말 또는 업무시간 외 (오후 6시 - 오전 9시)
+  const isWeekend = day === 0 || day === 6;
+  const isAfterHours = hour < 9 || hour >= 18;
+  
+  return isWeekend || isAfterHours;
 }
 
 /**

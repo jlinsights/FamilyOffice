@@ -25,6 +25,7 @@ import { StructuredData } from '@/components/structured-data';
 import { SEO_PAGE_MAPPING, SERVICE_CATEGORIES, getServiceStats } from '@/constants/services';
 import { generateInternalLinks } from '@/lib/seo/content-optimizer';
 import { generateStructuredData } from '@/lib/seo/structured-data';
+import { sanitizeHTMLContent, isTextOnlyContent } from '@/lib/security/html-sanitizer';
 
 const ServicePageContent = () => {
   const [startAnimation, setStartAnimation] = React.useState(false);
@@ -605,7 +606,10 @@ const ServicePageContent = () => {
         <section className="py-12 bg-slate-50 dark:bg-slate-900/30">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="hidden" dangerouslySetInnerHTML={{ __html: pageContent }} />
+              {/* Security: sanitize HTML content before rendering */}
+              <div className="hidden" dangerouslySetInnerHTML={{ 
+                __html: sanitizeHTMLContent(pageContent) 
+              }} />
             </div>
           </div>
         </section>
