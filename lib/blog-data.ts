@@ -1198,19 +1198,6 @@ export const blogPosts: Record<string, BlogPost> = {
     featured: true,
   },
 
-  'retained-earnings-dividend-strategy-ceo-asset-optimization': {
-    id: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
-    title: '대표님의 숨은 자산 이익잉여금을 깨울 시간입니다',
-    excerpt: '기업의 이익잉여금을 효과적으로 활용하여 개인 자산화하는 전략과 절세 방안을 제시합니다.',
-    content: '', // 실제 콘텐츠는 별도 마크다운 파일에서 로드
-    category: '법인자산',
-    author: 'FamilyOffice S 편집팀',
-    date: '2025-08-17',
-    readTime: '4분',
-    tags: ['이익잉여금', '배당전략', '법인세', '개인자산화', '중견기업', 'CEO 자산관리'],
-    slug: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
-    featured: false,
-  },
 
   'corporate-treasury-stock-retirement-2025-tax-analysis': {
     id: 'corporate-treasury-stock-retirement-2025-tax-analysis',
