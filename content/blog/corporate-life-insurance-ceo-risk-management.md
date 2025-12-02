@@ -79,14 +79,39 @@ canonicalUrl: 'https://familyoffice.jlinsights.com/insights/market-intelligence/
                     <strong className="text-slate-800 dark:text-slate-200">비용 처리:</strong> 납입 보험료를 비용(손금)으로 인정받아 법인세 절감 가능 (상품 및 가입 시기에 따라 손금 인정 비율 상이)
                 </div>
             </li>
-            <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">3</span>
-                <div>
-                    <strong className="text-slate-800 dark:text-slate-200">유동성 확보:</strong> CEO 은퇴 시점에는 해지환급금을 퇴직금 재원으로 활용하고, 유고 시에는 사망보험금을 수령하여 긴급 자금으로 활용
-                </div>
-            </li>
-        </ul>
-    </div>
+ ## CEO 경영인 정기보험의 핵심 구조와 특징
+
+![CEO Insurance Structure](https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80)
+
+경영인 정기보험은 일반 개인 보험과는 다른 독특한 구조를 가지고 있습니다. 법인이 계약자이자 수익자가 되고, CEO가 피보험자가 되는 형태입니다.
+
+### 1. 계약 구조
+
+- **계약자**: 법인 (보험료 납입 주체)
+- **피보험자**: CEO (대표이사)
+- **수익자**: 법인 (보험금 수령 주체)
+
+### 2. 주요 특징
+
+- **손비 처리**: 법인이 납입하는 보험료는 세법상 요건을 충족할 경우 비용(손금)으로 인정받아 법인세를 절감할 수 있습니다.
+- **만기 환급금**: 만기 시 또는 중도 해지 시 환급금이 발생하며, 이는 법인의 자산으로 귀속되거나 퇴직금 재원으로 활용될 수 있습니다.
+- **유동성 확보**: 긴급 자금 필요 시 약관 대출 등을 통해 법인의 유동성을 확보하는 수단으로도 활용 가능합니다.
+
+---
+
+## 3가지 핵심 활용 가치 (3-Way Strategy)
+
+![Strategic Value](https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80)
+
+단순한 보험 가입을 넘어, 기업의 재무 전략 차원에서 다음 3가지 핵심 가치를 창출합니다.<li className="flex items-start gap-3">
+<span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">3</span>
+<div>
+<strong className="text-slate-800 dark:text-slate-200">유동성 확보:</strong> CEO 은퇴 시점에는 해지환급금을 퇴직금 재원으로 활용하고, 유고 시에는 사망보험금을 수령하여 긴급 자금으로 활용
+</div>
+</li>
+</ul>
+</div>
+
 </section>
 
 <section className="mb-12">

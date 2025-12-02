@@ -88,25 +88,46 @@ canonicalUrl: 'https://familyoffice.jlinsights.com/insights/market-intelligence/
             </div>
         </div>
 
-        {/* Strategy 2 */}
-        <div className="flex flex-col md:flex-row gap-6 items-start">
-            <div className="w-full md:w-1/3 bg-purple-100 dark:bg-purple-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
-                <span className="text-4xl mb-3">📈</span>
-                <h3 className="text-purple-800 dark:text-purple-300 font-bold text-lg">주식 (Equity)</h3>
-                <p className="text-sm text-purple-600 dark:text-purple-400 mt-2">"Quality over Quantity"</p>
-            </div>
-            <div className="w-full md:w-2/3">
-                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">퀄리티 성장주와 배당 성장주</h4>
-                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
-                    유동성 장세가 끝난 지금, 실적 없는 기대감만으로 오르는 주식은 위험합니다. 강력한 현금 흐름과 시장 지배력을 가진 '퀄리티 기업'에 집중해야 합니다.
-                </p>
-                <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-1">
-                    <li><strong>AI 인프라 & 소프트웨어:</strong> 빅테크 및 실질적 수혜 기업</li>
-                    <li><strong>헬스케어:</strong> 고령화 트렌드와 신약 개발 혁신</li>
-                    <li><strong>배당 성장주:</strong> 금리 하락기, 채권 대안으로서의 매력</li>
-                </ul>
-            </div>
-        </div>
+## 2025년 거시경제 전망: '3저(低)' 시대의 종언과 새로운 균형
+
+![Global Economy Outlook](https://images.unsplash.com/photo-1611974765270-ca1258634369?auto=format&fit=crop&w=1200&q=80)
+
+2025년 세계 경제는 인플레이션 압력이 다소 완화되겠지만, 과거와 같은 저금리·저물가 시대로의 회귀는 어려울 것으로 전망됩니다. 주요 키워드는 **'중금리 고착화'**와 **'지정학적 분절화'**입니다.
+
+### 1. 금리 및 통화 정책
+
+미 연준(Fed)의 금리 인하 사이클이 시작되었으나, 그 속도는 시장의 기대보다 완만할 것입니다. 중립 금리 수준 자체가 상향 조정되었으며, 이는 자산 가격 재평가의 기준점이 달라짐을 의미합니다. 한국은행 또한 가계부채 문제와 환율 변동성을 고려하여 신중한 통화 정책을 유지할 것으로 보입니다.
+
+### 2. 성장률 둔화와 양극화
+
+선진국의 성장률 둔화가 뚜렷해지는 가운데, 신흥국 간의 차별화도 심화될 것입니다. 특히 AI 및 반도체 산업을 중심으로 한 기술 패권 경쟁이 국가 간, 기업 간 성장 격차를 확대시키는 주요 요인이 될 것입니다.
+
+---
+
+## 핵심 투자 전략: '방어'와 '성장'의 바벨 전략
+
+![Investment Strategy](https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1200&q=80)
+
+불확실성이 높은 시기일수록 극단적인 쏠림보다는 균형 잡힌 포트폴리오가 필수적입니다. 안전 자산으로 하방을 지지하고, 구조적 성장 섹터로 초과 수익을 추구하는 **바벨 전략(Barbell Strategy)**을 제안합니다.
+{/_ Strategy 2 _/}
+<div className="flex flex-col md:flex-row gap-6 items-start">
+<div className="w-full md:w-1/3 bg-purple-100 dark:bg-purple-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
+<span className="text-4xl mb-3">📈</span>
+<h3 className="text-purple-800 dark:text-purple-300 font-bold text-lg">주식 (Equity)</h3>
+<p className="text-sm text-purple-600 dark:text-purple-400 mt-2">"Quality over Quantity"</p>
+</div>
+<div className="w-full md:w-2/3">
+<h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">퀄리티 성장주와 배당 성장주</h4>
+<p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+유동성 장세가 끝난 지금, 실적 없는 기대감만으로 오르는 주식은 위험합니다. 강력한 현금 흐름과 시장 지배력을 가진 '퀄리티 기업'에 집중해야 합니다.
+</p>
+<ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+<li><strong>AI 인프라 & 소프트웨어:</strong> 빅테크 및 실질적 수혜 기업</li>
+<li><strong>헬스케어:</strong> 고령화 트렌드와 신약 개발 혁신</li>
+<li><strong>배당 성장주:</strong> 금리 하락기, 채권 대안으로서의 매력</li>
+</ul>
+</div>
+</div>
 
         {/* Strategy 3 */}
         <div className="flex flex-col md:flex-row gap-6 items-start">
