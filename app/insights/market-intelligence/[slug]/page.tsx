@@ -6,7 +6,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { ShareButton } from '@/components/share-button';
-import { Badge } from '@/components/ui/badge';
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import { Button } from '@/components/ui/button';
 
 import { CalComPopup } from '@/components/cal-com-popup';
@@ -328,18 +334,18 @@ export default async function BlogPostPage({
                   <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white flex items-center gap-2">
                     <span className="text-blue-600">❓</span> 자주 묻는 질문 (FAQ)
                   </h3>
-                  <div className="space-y-6">
+                  <Accordion type="single" collapsible className="w-full">
                     {post.faq.map((item, index) => (
-                      <div key={index} className="border-b border-slate-100 dark:border-slate-800 last:border-0 pb-6 last:pb-0">
-                        <h4 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-2">
+                      <AccordionItem key={index} value={`item-${index}`} className="border-slate-100 dark:border-slate-800">
+                        <AccordionTrigger className="text-lg font-bold text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left">
                           Q. {item.question}
-                        </h4>
-                        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        </AccordionTrigger>
+                        <AccordionContent className="text-slate-600 dark:text-slate-400 leading-relaxed text-base bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg mt-2">
                           A. {item.answer}
-                        </p>
-                      </div>
+                        </AccordionContent>
+                      </AccordionItem>
                     ))}
-                  </div>
+                  </Accordion>
                 </div>
                 
                 {/* FAQ Schema */}
