@@ -228,7 +228,7 @@ export default function AssetDiversificationPage() {
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700 transition-colors hover:bg-muted/50 dark:hover:bg-slate-700/50">
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -262,7 +262,7 @@ export default function AssetDiversificationPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700 transition-colors hover:bg-muted/50 dark:hover:bg-slate-700/50">
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -296,7 +296,7 @@ export default function AssetDiversificationPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700 transition-colors hover:bg-muted/50 dark:hover:bg-slate-700/50">
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -330,7 +330,7 @@ export default function AssetDiversificationPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700 transition-colors hover:bg-muted/50 dark:hover:bg-slate-700/50">
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">

@@ -575,47 +575,7 @@ export const blogPosts: Record<string, BlogPost> = {
     featured: true,
   },
 
-  'mid-sized-company-succession-issues': {
-    id: 'mid-sized-company-succession-issues',
-    title: '중견기업 승계 시 주요 이슈와 해결방안',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '중견기업이 직면하는 승계 과정의 핵심 문제점과 실무적 해결책을 제시합니다.',
-    content: `# 중견기업 승계 시 주요 이슈와 해결방안
 
-중견기업의 가업승계는 대기업과는 다른 고유한 특성과 과제를 가지고 있습니다. 규모의 한계와 자원의 제약 속에서도 성공적인 승계를 이루기 위한 전략이 필요합니다.
-
-## 주요 이슈
-
-### 1. 상속세 부담
-- 기업 가치 상승으로 인한 세부담 증가
-- 현금 유동성 부족 문제
-- 지분 매각 압력
-
-### 2. 전문 경영진 확보 어려움
-- 제한된 인재 풀
-- 경쟁력 있는 보상 체계 부족
-- 가족 구성원과의 갈등 가능성
-
-### 3. 지배구조 복잡성
-- 소유와 경영의 분리 필요성
-- 가족 구성원 간 이해관계 조정
-- 의사결정 체계 정립
-
-## 해결방안
-
-### 1. 단계적 승계 전략
-조기 승계 준비를 통해 세무 부담을 최소화하고, 차세대 경영진의 역량을 단계적으로 강화하는 것이 중요합니다.
-
-### 2. 외부 전문가 활용
-패밀리오피스나 전문 컨설팅을 통해 객관적이고 체계적인 승계 계획을 수립해야 합니다.`,
-    category: '기업승계 분석',
-    author: '임재홍',
-    date: '2025-01-12',
-    readTime: '7분',
-    tags: ['중견기업', '승계 이슈', '해결방안', '경영 전략'],
-    slug: 'mid-sized-company-succession-issues',
-    featured: false,
-  },
 
   // 세무·법무 인사이트 카테고리
   'inheritance-tax-reform-analysis': {
@@ -772,6 +732,22 @@ export const blogPosts: Record<string, BlogPost> = {
     tags: ['싱가포르', '패밀리오피스', '글로벌 트렌드', '아시아'],
     slug: 'singapore-family-office-trends',
     featured: false,
+  },
+
+  // 의료법인 카테고리
+  'hospital-mso-guide-tax-saving-strategy': {
+    id: 'hospital-mso-guide-tax-saving-strategy',
+    title: '병원경영지원회사(MSO) 설립 가이드와 절세 전략',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop',
+    excerpt: '병원의 수익성 개선과 세금 절감을 위한 MSO 설립의 모든 것. 10년 차 컨설턴트가 전하는 실무 가이드.',
+    content: ``, // Content is loaded from markdown file
+    category: '의료법인',
+    author: '임재홍',
+    date: '2025-02-15',
+    readTime: '15분',
+    tags: ['MSO', '병원경영', '절세전략', '의료법인', '자산관리'],
+    slug: 'hospital-mso-guide-tax-saving-strategy',
+    featured: true,
   },
 
   'us-trust-strategies': {
@@ -1024,194 +1000,189 @@ export const blogPosts: Record<string, BlogPost> = {
     featured: false,
   },
 
+  // 자산관리 카테고리
   'investment-strategy-2025': {
     id: 'investment-strategy-2025',
-    title: '2025년 투자 전망: CEO를 위한 지정학적 리스크 돌파 전략',
-    excerpt: 'AI, 금리, 지정학적 변수 속에서 대표님의 자산을 지키고 불리는 핵심 인사이트. 2025년 글로벌 경제 환경 변화에 대응하는 포트폴리오 전략을 제시합니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-gray-800 dark:text-gray-200 bg-gradient-to-br from-emerald-50 to-white dark:from-gray-900 dark:to-gray-800 min-h-screen px-5">
+    title: '2025년 자산관리 트렌드와 고액자산가를 위한 투자 전략',
+    image: 'https://images.unsplash.com/photo-1611974765270-ca1258634369?q=80&w=1000&auto=format&fit=crop',
+    excerpt: '금리 인하 사이클의 본격화와 지정학적 리스크의 공존. 2025년, 고액자산가가 주목해야 할 투자 트렌드와 변동성을 이기는 자산 배분 전략을 심층 분석합니다.',
+    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
-<header className="text-center mb-10 py-8 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30 border border-white/50 dark:border-gray-700/50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:bg-white/40 dark:hover:bg-gray-800/40">
-    <h1 className="text-emerald-800 dark:text-emerald-300 text-3xl lg:text-4xl font-bold leading-tight mb-4 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors duration-300">[FamilyOffice S] 2025년 투자 전망: CEO를 위한 지정학적 리스크 돌파 전략</h1>
-    <p className="text-orange-700 dark:text-orange-300 text-lg lg:text-xl leading-relaxed">AI, 금리, 지정학적 변수 속에서 대표님의 자산을 지키고 불리는 핵심 인사이트</p>
-    <div className="mt-5 text-gray-400 dark:text-gray-500 text-sm backdrop-blur-sm bg-white/20 dark:bg-gray-700/20 rounded-lg px-4 py-2 inline-block">
-        작성일: 2025년 8월 18일 | 예상 읽기 시간: 20분 | 카테고리: 투자전략, 글로벌 경제
+<header className="text-center mb-10 py-8 border-b-4 border-primary">
+    <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">2025년 투자 전망:<br/>'변곡점(Inflection Point)'에서의 생존과 성장</h1>
+    <p className="text-muted-foreground text-lg font-normal leading-relaxed">금리 인하, AI 혁명, 그리고 지정학적 긴장 속에서<br/>당신의 자산은 안녕하십니까?</p>
+    <div className="mt-5 text-muted-foreground text-sm">
+        작성일: 2025년 1월 10일 | 예상 읽기 시간: 12분 | 카테고리: 자산관리 및 투자전략
     </div>
 </header>
 
-<div className="backdrop-blur-sm bg-gradient-to-br from-emerald-600/90 to-emerald-700/90 dark:from-emerald-800/90 dark:to-emerald-900/90 text-white p-8 rounded-3xl mb-10 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border border-white/20 dark:border-gray-600/20">
-    <h2 className="text-white text-xl font-bold mb-5">📋 Executive Summary</h2>
-    <div className="backdrop-blur-sm bg-white/20 dark:bg-black/30 p-5 rounded-2xl mb-5 hover:bg-white/30 dark:hover:bg-black/40 transition-all duration-300 border border-white/30 dark:border-gray-600/30">
-        <h3 className="text-white text-base font-semibold mb-3">🎯 핵심 포인트 3줄 요약</h3>
-        <ul className="text-white text-sm leading-relaxed space-y-2">
-            <li className="hover:text-yellow-200 transition-colors duration-200">2025년 글로벌 경제는 완만한 성장 속 지정학적 리스크와 무역 갈등이 최고 위험 요인으로 부상하며, 자산 방어 전략이 중요해질 것으로 전망됩니다.</li>
-            <li className="hover:text-yellow-200 transition-colors duration-200">AI·반도체 섹터의 구조적 성장은 지속될 것으로 예상되며, 금리 인하 사이클 진입은 채권 및 고정수익 자산의 매력도를 높일 가능성이 높습니다.</li>
-            <li className="hover:text-yellow-200 transition-colors duration-200">성공적인 자산 관리를 위해서는 미국 중심의 포트폴리오를 다변화하고, 사모펀드·부동산 등 대체 투자를 활용한 중장기적 방어 및 성장 전략이 필요합니다.</li>
-        </ul>
-    </div>
-    <div className="backdrop-blur-sm bg-white/20 dark:bg-black/30 p-5 rounded-2xl hover:bg-white/30 dark:hover:bg-black/40 transition-all duration-300 border border-white/30 dark:border-gray-600/30">
-        <h3 className="text-white text-base font-semibold mb-3">📑 목차</h3>
-        <ol className="text-white text-sm leading-relaxed space-y-1.5 list-decimal list-inside">
-            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">현황 분석: 2025년 글로벌 경제 및 투자 환경</li>
-            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">문제점 진단: CEO가 직면한 핵심 리스크</li>
-            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">실무 가이드: 자산별 투자 전략 상세 분석</li>
-            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">사례 연구: 리스크 대응 포트폴리오 재편 성공 사례</li>
-            <li className="hover:text-yellow-200 transition-colors duration-200 cursor-pointer">미래 전망 및 실행 액션 플랜</li>
-        </ol>
+<div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-8 rounded-2xl mb-10 shadow-xl">
+    <h2 className="text-white mb-5 text-xl font-bold">🚀 2025 Key Takeaways</h2>
+    <div className="grid md:grid-cols-3 gap-6">
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-blue-300 font-bold mb-2">📉 금리 인하 사이클</h3>
+            <p className="text-sm opacity-90">본격적인 금리 인하 기조 속에서 채권 투자의 매력도 상승과 리츠(REITs) 등 이자율 민감 자산의 회복.</p>
+        </div>
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-purple-300 font-bold mb-2">🤖 AI & Quality Growth</h3>
+            <p className="text-sm opacity-90">AI 거품론을 넘어 실질적인 수익을 창출하는 '퀄리티 성장주'로의 옥석 가리기 심화.</p>
+        </div>
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-amber-300 font-bold mb-2">🛡️ 대체투자 & 사모신용</h3>
+            <p className="text-sm opacity-90">전통 자산(주식/채권)의 상관관계를 낮추고 안정적인 현금 흐름을 창출하는 사모 대출(Private Credit)의 부상.</p>
+        </div>
     </div>
 </div>
 
 <section className="mb-12">
-    <h2 className="text-gray-800 dark:text-gray-200 text-2xl font-bold border-b-2 border-gray-200 dark:border-gray-700 pb-2.5 mb-6">📊 현황 분석: 2025년 글로벌 경제 및 투자 환경</h2>
-    
-    <div className="backdrop-blur-sm bg-emerald-50/80 dark:bg-emerald-900/30 border border-emerald-500/50 dark:border-emerald-600/50 p-6 rounded-2xl mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-emerald-50/90 dark:hover:bg-emerald-900/40 hover:scale-[1.01]">
-        <h3 className="text-emerald-800 dark:text-emerald-300 text-lg font-semibold mb-4">📈 글로벌 경제 데이터</h3>
-        <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed mb-4">2025년 글로벌 경제는 여러 도전 과제 속에서 완만한 성장세를 이어갈 것으로 보입니다. 주요 국제기구 및 금융기관의 데이터를 종합해 보면, 대표님께서 주목하셔야 할 몇 가지 핵심 지표가 있습니다.</p>
-        
-        <div className="backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 p-5 rounded-xl border-l-4 border-emerald-500 hover:bg-white/90 dark:hover:bg-gray-800/90 transition-all duration-300 hover:shadow-md border border-white/50 dark:border-gray-700/50">
-            <h4 className="text-emerald-700 dark:text-emerald-300 text-base font-semibold mb-2.5">주요 경제 전망 (Green & Yellow Zone)</h4>
-            <ul className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed space-y-2">
-                <li className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200">✅ <strong>세계 경제성장률 (확정 정보)</strong>: IMF는 2025년 전 세계 경제성장률을 3.0%로 전망했으며, 2026년에는 3.1%로 소폭 개선될 것으로 발표했습니다.</li>
-                <li className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200">⚠ <strong>주요국 성장률 (예상 정보)</strong>: 도이치뱅크 자산운용에 따르면, 중국은 4.2% 성장률이 예상되나 과거 대비 둔화된 수치이며, 미국은 1.7%로 2024년 대비 성장세가 크게 둔화될 것으로 전망됩니다.</li>
-                <li className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200">⚠ <strong>한국 경제성장률 (예상 정보)</strong>: KDI 등 국내 주요 연구기관들은 2025년 한국 경제가 내수 부진과 수출 증가세 둔화로 1.6% 성장에 그칠 것으로 예상하고 있습니다.</li>
-            </ul>
-        </div>
-        <div className="backdrop-blur-sm bg-amber-50/80 dark:bg-amber-900/30 border border-amber-400/50 dark:border-amber-600/50 p-3 rounded-xl my-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-amber-50/90 dark:hover:bg-amber-900/40">
-            <p className="text-amber-800 dark:text-amber-200 text-xs m-0">
-                ⚠ <span className="font-semibold">정보 안내</span>: 본 내용은 현재까지 공개된 정보를 바탕으로 한 전망으로, 
-                최종 확정 전까지 변경될 수 있습니다. 실제 의사결정 시 최신 공식 정보를 반드시 확인하시기 바랍니다.
-            </p>
-        </div>
-    </div>
-    
-    <div className="backdrop-blur-sm bg-orange-50/80 dark:bg-orange-900/30 border border-orange-500/50 dark:border-orange-600/50 p-6 rounded-2xl mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50/90 dark:hover:bg-orange-900/40 hover:scale-[1.01]">
-        <h3 className="text-orange-800 dark:text-orange-300 text-lg font-semibold mb-4">🏛 통화 정책 동향: 금리 인하 사이클 진입</h3>
-        <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">글로벌 인플레이션이 점진적으로 안정화되면서 각국 중앙은행의 통화정책 또한 완화 기조로 전환될 가능성이 높습니다. OECD는 2025년 OECD 전체 인플레이션을 4.2%로 예상하며 점진적 안정화를 전망했습니다. 이에 따라, 한국은행과 미국 연준 모두 단계적인 금리 인하를 단행할 것으로 예상되며, 이는 시장 유동성 증가로 이어져 자산 시장에 중요한 변수가 될 것입니다.</p>
-        <div className="backdrop-blur-sm bg-amber-50/80 dark:bg-amber-900/30 border border-amber-400/50 dark:border-amber-600/50 p-3 rounded-xl my-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-amber-50/90 dark:hover:bg-amber-900/40">
-            <p className="text-amber-800 dark:text-amber-200 text-xs m-0">
-                ⚠ <span className="font-semibold">정보 안내</span>: 본 내용은 현재까지 공개된 정보를 바탕으로 한 전망으로, 
-                최종 확정 전까지 변경될 수 있습니다. 실제 의사결정 시 최신 공식 정보를 반드시 확인하시기 바랍니다.
-            </p>
-        </div>
-    </div>
-    
-    <div className="backdrop-blur-sm bg-emerald-50/80 dark:bg-emerald-900/30 border border-emerald-500/50 dark:border-emerald-600/50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-emerald-50/90 dark:hover:bg-emerald-900/40 hover:scale-[1.01]">
-        <h3 className="text-emerald-800 dark:text-emerald-300 text-lg font-semibold mb-4">🏢 패밀리오피스 동향: 대체투자 비중 확대</h3>
-        <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">✅ BNY Mellon의 보고서에 따르면, 전 세계 패밀리오피스들은 불확실성에 대응하기 위해 대체투자 비중을 꾸준히 늘리고 있습니다. 포트폴리오에서 사모펀드가 28%로 가장 큰 비중을 차지했으며, 부동산(18%)과 벤처캐피털 투자가 그 뒤를 잇고 있습니다. 이는 전통 자산을 넘어 안정성과 장기적 고수익을 동시에 추구하려는 움직임으로 해석됩니다.</p>
-    </div>
-</section>
-
-<section className="mb-12">
-    <h2 className="text-gray-800 dark:text-gray-200 text-2xl font-bold border-b-2 border-gray-200 dark:border-gray-700 pb-2.5 mb-6">🔍 문제점 진단: CEO가 직면한 핵심 리스크</h2>
-    
-    <div className="backdrop-blur-sm bg-red-50/80 dark:bg-red-900/30 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-r-2xl mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-red-50/90 dark:hover:bg-red-900/40 hover:scale-[1.01] border border-red-200/50 dark:border-red-700/50">
-        <h3 className="text-red-600 dark:text-red-400 text-lg font-semibold mb-4">⚠ 현재 이슈: 심화되는 지정학적 리스크</h3>
-        <p className="text-red-800 dark:text-red-300 text-base leading-relaxed">✅ UBS의 2025년 글로벌 패밀리오피스 보고서에 따르면, 응답자들이 꼽은 가장 큰 투자 리스크는 '무역전쟁'과 같은 지정학적 갈등이었습니다. 미국의 관세 정책 변화와 각국의 공급망 재편 움직임은 대표님 기업의 실적뿐만 아니라 개인 자산 포트폴리오에도 직접적인 영향을 미칠 수 있는 중대한 변수입니다.</p>
-    </div>
-    
-    <div className="backdrop-blur-sm bg-amber-50/80 dark:bg-amber-900/30 border-l-4 border-amber-500 dark:border-amber-400 p-6 rounded-r-2xl mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-amber-50/90 dark:hover:bg-amber-900/40 hover:scale-[1.01] border border-amber-200/50 dark:border-amber-700/50">
-        <h3 className="text-amber-600 dark:text-amber-400 text-lg font-semibold mb-4">🚨 위험 요소: 특정 자산 및 지역 편중의 함정</h3>
-        <p className="text-amber-800 dark:text-amber-300 text-base leading-relaxed">그동안 높은 수익률을 안겨주었던 미국 기술주 중심의 포트폴리오는 2025년에도 유효할 수 있으나, 그 변동성은 더욱 커질 것으로 예상됩니다. 특정 자산, 특정 지역에 대한 과도한 집중은 예상치 못한 외부 충격에 포트폴리오 전체를 위험에 빠뜨릴 수 있는 잠재적 위험 요소입니다.</p>
-    </div>
-    
-    <div className="backdrop-blur-sm bg-emerald-50/80 dark:bg-emerald-900/30 border-l-4 border-emerald-500 dark:border-emerald-400 p-6 rounded-r-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-emerald-50/90 dark:hover:bg-emerald-900/40 hover:scale-[1.01] border border-emerald-200/50 dark:border-emerald-700/50">
-        <h3 className="text-emerald-600 dark:text-emerald-400 text-lg font-semibold mb-4">🎯 기회 요소: 구조적 성장 테마와 자산 다변화</h3>
-        <p className="text-emerald-800 dark:text-emerald-300 text-base leading-relaxed">위기 속에서도 기회는 존재합니다. AI 및 반도체 산업의 구조적 성장은 여전히 유효한 투자 테마로 평가됩니다. 또한, 금리 인하 시기에는 채권 등 고정수익 자산의 가치가 부각될 수 있으며, 사모펀드와 같은 대체 투자를 통해 새로운 성장 동력을 발굴할 기회가 열릴 수 있습니다.</p>
-    </div>
-</section>
-
-<div className="backdrop-blur-sm bg-gradient-to-br from-emerald-800/90 to-emerald-700/90 dark:from-emerald-900/90 dark:to-emerald-800/90 text-white p-10 rounded-3xl my-10 text-center shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border border-white/20 dark:border-gray-600/20">
-    <h2 className="text-white text-2xl font-bold mb-5">📞 전문가 상담 문의</h2>
-    <p className="text-base opacity-90 leading-relaxed mb-8">
-        2025년의 복잡한 시장 환경, 혼자 고민하지 마십시오.<br />
-        FamilyOffice S의 금융/세무/IT 전문가 그룹이 대표님만을 위한 맞춤형 전략을 제시해 드립니다.
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">1. 매크로 전망: '연착륙'과 '노랜딩' 사이</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        2024년이 '고금리의 정점'을 확인하는 해였다면, 2025년은 '새로운 균형점'을 찾아가는 해가 될 것입니다. 미 연준(Fed)을 비롯한 주요국 중앙은행들의 피벗(Pivot)은 이미 시작되었지만, 과거와 같은 제로 금리 시대로의 회귀는 기대하기 어렵습니다.
     </p>
-    
-    <div className="flex gap-4 justify-center flex-wrap mb-8">
-        <a href="https://seminar.familyoffices.vip" target="_blank" className="group inline-flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-orange-500/90 to-orange-600/90 dark:from-orange-600/90 dark:to-orange-700/90 text-white px-6 py-4 rounded-2xl no-underline font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:from-orange-400 hover:to-orange-500 dark:hover:from-orange-500 dark:hover:to-orange-600 border border-white/30 dark:border-gray-600/30">
-            <span className="group-hover:animate-pulse">🎯</span> 세미나 신청
-        </a>
-        <a href="https://cal.com/familyoffice" target="_blank" className="group inline-flex items-center gap-2 backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 text-emerald-800 dark:text-emerald-300 px-6 py-4 rounded-2xl no-underline font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-gray-700 border border-white/50 dark:border-gray-600/50">
-            <span className="group-hover:animate-pulse">📅</span> 1:1 맞춤 상담
-        </a>
-        <a href="https://pf.kakao.com/_gsxkxdG/chat" target="_blank" className="group inline-flex items-center gap-2 backdrop-blur-sm bg-yellow-400/90 dark:bg-yellow-500/90 text-gray-800 dark:text-gray-900 px-6 py-4 rounded-2xl no-underline font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-yellow-300 dark:hover:bg-yellow-400 border border-white/50 dark:border-gray-600/50">
-            <span className="group-hover:animate-pulse">💬</span> 카카오톡 문의
-        </a>
-    </div>
-    
-    <div className="border-t border-white/30 dark:border-gray-600/30 pt-5">
-        <p className="text-sm opacity-80 backdrop-blur-sm bg-white/10 dark:bg-black/20 rounded-lg px-4 py-2 inline-block">
-            📞 전화상담: ☎ 0502-5550-8700 (평일 10:00-18:00)
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        우리는 여전히 3%~4% 수준의 '중금리' 환경에 적응해야 합니다. 인플레이션은 2% 목표치에 근접하겠지만, 탈세계화와 공급망 재편 비용으로 인해 구조적인 물가 상승 압력은 잔존할 것입니다. 이러한 환경에서 경제는 침체 없는 성장 둔화, 즉 '연착륙(Soft Landing)' 시나리오가 유력하지만, 예상보다 강한 소비와 고용으로 인한 '노랜딩(No Landing)' 가능성도 배제할 수 없습니다.
+    </p>
+    <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 my-6">
+        <p className="font-bold text-amber-800 dark:text-amber-300">💡 Insight for HNWI</p>
+        <p className="text-sm text-amber-900 dark:text-amber-200 mt-1">
+            예측보다는 대응이 중요합니다. 특정 시나리오에 올인하기보다는, 어떤 상황에서도 회복 탄력성(Resilience)을 가질 수 있는 '올웨더(All-Weather) 포트폴리오' 구축이 필수적입니다.
         </p>
     </div>
-</div>
+</section>
 
-<div className="backdrop-blur-sm bg-slate-100/80 dark:bg-slate-800/80 border-2 border-slate-300/50 dark:border-slate-600/50 p-6 rounded-2xl my-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-slate-100/90 dark:hover:bg-slate-800/90">
-    <h3 className="text-slate-600 dark:text-slate-400 text-lg font-bold mb-4">⚠ 중요 고지사항</h3>
-    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-        본 자료는 일반적인 정보 제공을 목적으로 작성되었으며, 개별 상황에 따라 다를 수 있습니다. 
-        구체적인 실행은 반드시 전문가의 자문을 받으신 후 개인의 판단과 책임하에 이루어져야 합니다.
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">2. 핵심 투자 전략: 3가지 기둥 (Three Pillars)</h2>
+    
+    <div className="space-y-8">
+        {/* Strategy 1 */}
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-blue-100 dark:bg-blue-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
+                <span className="text-4xl mb-3">🏛️</span>
+                <h3 className="text-blue-800 dark:text-blue-300 font-bold text-lg">채권 (Fixed Income)</h3>
+                <p className="text-sm text-blue-600 dark:text-blue-400 mt-2">"Income is Back"</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">우량 채권으로 '확정 수익' 확보</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    금리 인하 시기에는 채권 가격 상승(자본 차익)과 이자 수익(인컴)을 동시에 누릴 수 있습니다. 특히 국채와 투자등급(IG) 회사채는 포트폴리오의 든든한 버팀목이 됩니다.
+                </p>
+                <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <li><strong>장기 국채:</strong> 경기 둔화 헷지 및 자본 차익 기대</li>
+                    <li><strong>우량 회사채:</strong> 안정적인 이자 수익 확보 (5%~6% 수준)</li>
+                    <li><strong>신흥국 채권:</strong> 선별적인 접근 필요 (달러 약세 시 기회)</li>
+                </ul>
+            </div>
+        </div>
+
+        {/* Strategy 2 */}
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-purple-100 dark:bg-purple-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
+                <span className="text-4xl mb-3">📈</span>
+                <h3 className="text-purple-800 dark:text-purple-300 font-bold text-lg">주식 (Equity)</h3>
+                <p className="text-sm text-purple-600 dark:text-purple-400 mt-2">"Quality over Quantity"</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">퀄리티 성장주와 배당 성장주</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    유동성 장세가 끝난 지금, 실적 없는 기대감만으로 오르는 주식은 위험합니다. 강력한 현금 흐름과 시장 지배력을 가진 '퀄리티 기업'에 집중해야 합니다.
+                </p>
+                <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <li><strong>AI 인프라 & 소프트웨어:</strong> 빅테크 및 실질적 수혜 기업</li>
+                    <li><strong>헬스케어:</strong> 고령화 트렌드와 신약 개발 혁신</li>
+                    <li><strong>배당 성장주:</strong> 금리 하락기, 채권 대안으로서의 매력</li>
+                </ul>
+            </div>
+        </div>
+
+        {/* Strategy 3 */}
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-emerald-100 dark:bg-emerald-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
+                <span className="text-4xl mb-3">🏗️</span>
+                <h3 className="text-emerald-800 dark:text-emerald-300 font-bold text-lg">대체투자 (Alternatives)</h3>
+                <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-2">"Diversification"</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">사모 시장(Private Market)의 기회</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    공모 시장의 변동성을 피하고, 비유동성 프리미엄(Illiquidity Premium)을 수취하는 전략이 유효합니다. 기관 투자자들의 전유물이었던 사모 자산이 개인 자산가들에게도 열리고 있습니다.
+                </p>
+                <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <li><strong>Private Credit (사모대출):</strong> 은행 대출 축소에 따른 반사이익, 중위험 중수익</li>
+                    <li><strong>Secondaries (세컨더리):</strong> 할인된 가격에 우량 자산 매입 기회</li>
+                    <li><strong>Core Real Estate:</strong> 금리 안정화에 따른 우량 입지 부동산 회복 기대</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">3. 리스크 관리: 변동성을 이기는 힘</h2>
+    <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
+        <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+            2025년은 미국 대선 이후의 정책 변화, 중동 및 우크라이나의 지정학적 갈등 등 예측 불가능한 변수들이 산재해 있습니다. 따라서 공격적인 수익 추구만큼이나 방어적인 리스크 관리가 중요합니다.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div className="flex items-start gap-3">
+                <div className="bg-yellow-100 dark:bg-yellow-900/50 p-2 rounded-lg text-yellow-600 dark:text-yellow-400">🪙</div>
+                <div>
+                    <h4 className="font-bold text-sm mb-1">금(Gold) 비중 확대</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">화폐 가치 하락과 지정학적 위기에 대비한 최후의 안전 자산.</p>
+                </div>
+            </div>
+            <div className="flex items-start gap-3">
+                <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded-lg text-green-600 dark:text-green-400">💵</div>
+                <div>
+                    <h4 className="font-bold text-sm mb-1">현금성 자산 확보</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">시장 급락 시 저가 매수 기회를 잡기 위한 'Dry Powder' 유지.</p>
+                </div>
+            </div>
+            <div className="flex items-start gap-3">
+                <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded-lg text-red-600 dark:text-red-400">📉</div>
+                <div>
+                    <h4 className="font-bold text-sm mb-1">통화 분산 (Currency Diversification)</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">달러 자산과 원화 자산의 적절한 배분을 통한 환율 변동성 헷지.</p>
+                </div>
+            </div>
+            <div className="flex items-start gap-3">
+                <div className="bg-indigo-100 dark:bg-indigo-900/50 p-2 rounded-lg text-indigo-600 dark:text-indigo-400">⚖️</div>
+                <div>
+                    <h4 className="font-bold text-sm mb-1">정기적인 리밸런싱</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">분기별 자산 비중 점검 및 조정을 통한 '고점 매도, 저점 매수' 자동화.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div className="bg-slate-100 dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 p-6 rounded-xl my-10">
+    <h3 className="text-slate-600 dark:text-slate-400 mb-4 text-lg font-bold">💡 맺음말: 10년을 내다보는 안목</h3>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        투자의 세계에서 유일한 상수는 '변화'입니다. 2025년은 과거의 성공 방정식이 통하지 않는 새로운 국면이 될 수 있습니다. 단기적인 시황에 일희일비하기보다는, 긴 호흡으로 자산의 본질 가치에 집중하는 투자가 필요합니다.
     </p>
-    <ul className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed space-y-1.5">
-        <li className="hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200">투자 결정은 개인의 판단과 책임하에 이루어져야 하며, 투자 전 전문가와 상담하시기 바랍니다.</li>
-        <li className="hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200">세법 및 관련 규정은 변경될 수 있으므로 최신 정보를 확인하시기 바랍니다.</li>
-        <li className="hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200">예측 및 전망 정보는 현재 시점 분석으로, 향후 정책 변화에 따라 달라질 수 있습니다.</li>
-        <li className="hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200">본 블로그 내용의 활용으로 인한 직간접적 손해에 대해 책임지지 않습니다.</li>
-    </ul>
+    <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        저희 패밀리오피스는 고객님의 자산이 세대를 이어 단단하게 성장할 수 있도록, 가장 신뢰할 수 있는 파트너로서 곁을 지키겠습니다. 2025년, 현명한 투자로 풍요로운 미래를 준비하시기 바랍니다.
+    </p>
 </div>
 
 </div>`,
-    category: '투자전략',
+    category: '자산관리',
     author: '임재홍',
-    date: '2025-08-18',
-    readTime: '20분',
-    tags: ['2025년 투자 전망', '지정학적 리스크', 'AI 투자', '포트폴리오 전략', '자산 다변화'],
+    date: '2025-01-10',
+    readTime: '12분',
+    tags: ['2025전망', '자산배분', '투자전략', '패밀리오피스', '대체투자'],
     slug: 'investment-strategy-2025',
     featured: true,
   },
 
+
+
   // 새로 추가된 뉴스레터 기반 블로그 포스트들
-  'corporate-life-insurance-ceo-risk-management': {
-    id: 'corporate-life-insurance-ceo-risk-management',
-    title: '중견기업 CEO 유고시 대비 리스크 관리 완전 가이드',
-    excerpt: 'CEO의 갑작스러운 부재에 대비한 기업생명보험 설계와 리스크 관리 방안. 실제 케이스 분석과 절세 전략까지 한번에 해결하세요.',
-    content: '', // 실제 콘텐츠는 별도 마크다운 파일에서 로드
-    category: '리스크관리',
-    author: 'FamilyOffice S 편집팀',
-    date: '2025-08-09',
-    readTime: '5분',
-    tags: ['CEO 유고', '리스크 관리', '기업생명보험', '중견기업', '비상계획', '승계계획'],
-    slug: 'corporate-life-insurance-ceo-risk-management',
-    featured: true,
-  },
-
-  'hospital-mso-guide-tax-saving-strategy': {
-    id: 'hospital-mso-guide-tax-saving-strategy',
-    title: '병원장 필독: 성공하는 MSO의 3가지 조건',
-    excerpt: 'MSO 설립시 반드시 고려해야 할 세무, 승계 계획, 리스크 관리 전략을 상세히 분석했습니다.',
-    content: '', // 실제 콘텐츠는 별도 마크다운 파일에서 로드
-    category: '의료법인',
-    author: 'FamilyOffice S 편집팀',
-    date: '2025-08-19',
-    readTime: '5분',
-    tags: ['MSO', '의료법인', '병원 절세', '의료진 승계', '병원경영', '의료 세무'],
-    slug: 'hospital-mso-guide-tax-saving-strategy',
-    featured: true,
-  },
 
 
-  'corporate-treasury-stock-retirement-2025-tax-analysis': {
-    id: 'corporate-treasury-stock-retirement-2025-tax-analysis',
-    title: '2025년 세법 기준 자기주식 소각의 진짜 세율과 치명적 리스크',
-    excerpt: '자기주식 소각시 발생하는 세금과 리스크를 2025년 최신 세법 기준으로 분석했습니다.',
-    content: '', // 실제 콘텐츠는 별도 마크다운 파일에서 로드
-    category: '세무',
-    author: 'FamilyOffice S 편집팀',
-    date: '2025-08-12',
-    readTime: '6분',
-    tags: ['자기주식 소각', '의제배당', '양도소득세', '2025년 세법', '법인세법', '중견기업'],
-    slug: 'corporate-treasury-stock-retirement-2025-tax-analysis',
-    featured: false,
-  },
+
+
 
   'retained-earnings-dividend-strategy-ceo-asset-optimization': {
     id: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
@@ -1426,6 +1397,572 @@ export const blogPosts: Record<string, BlogPost> = {
     readTime: '15분',
     tags: ['이익잉여금', '배당전략', '차등배당', '자사주매입', 'CEO자산최적화', '상속세절세', '가업승계'],
     slug: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
+    featured: true,
+  },
+  'corporate-treasury-stock-retirement-2025-tax-analysis': {
+    id: 'corporate-treasury-stock-retirement-2025-tax-analysis',
+    title: '[2025 세법] 자기주식 이익소각: CEO를 위한 가장 확실한 엑시트(Exit) 전략인가?',
+    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
+    excerpt: '배당보다 낮은 세율로 잉여금을 회수하고, 가지급금 문제까지 해결할 수 있는 자기주식 이익소각. 하지만 국세청의 검증은 더욱 강화되고 있습니다. 2025년, 안전하고 효과적인 실행을 위한 전문가의 심층 분석.',
+    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+
+<header className="text-center mb-10 py-8 border-b-4 border-primary">
+    <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">[2025 세법] 자기주식 이익소각:<br/>CEO를 위한 가장 확실한 엑시트(Exit) 전략인가?</h1>
+    <p className="text-muted-foreground text-lg font-normal leading-relaxed">가지급금 해결과 이익잉여금 회수, 두 마리 토끼를 잡는 법<br/>그리고 국세청 사후검증을 넘어서는 디테일</p>
+    <div className="mt-5 text-muted-foreground text-sm">
+        작성일: 2025년 1월 15일 | 예상 읽기 시간: 15분 | 카테고리: 세무최적화 및 기업승계
+    </div>
+</header>
+
+<div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-8 rounded-2xl mb-10 shadow-xl">
+    <h2 className="text-white mb-5 text-xl font-bold">🚀 Executive Summary</h2>
+    <div className="grid md:grid-cols-3 gap-6">
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-blue-300 font-bold mb-2">💰 세금 절감 효과</h3>
+            <p className="text-sm opacity-90">배당소득세(최고 49.5%) 대신 양도소득세(20~25%) 적용으로 실효 세율을 획기적으로 낮출 수 있습니다.</p>
+        </div>
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-purple-300 font-bold mb-2">⚖️ 가지급금 해결</h3>
+            <p className="text-sm opacity-90">CEO가 보유한 주식을 법인에 매각하여 확보한 현금으로 누적된 가지급금을 상환할 수 있는 합법적인 루트입니다.</p>
+        </div>
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-amber-300 font-bold mb-2">⚠️ 사후검증 주의</h3>
+            <p className="text-sm opacity-90">상법상 절차 준수 여부와 '소각 목적'의 진정성이 입증되지 않으면 업무무관 가지급금으로 간주될 위험이 있습니다.</p>
+        </div>
+    </div>
+</div>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">1. 서론: 2025년, 왜 다시 '자기주식 이익소각'인가?</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        지난 10년간 수많은 중견기업 CEO분들을 만나 뵙며 가장 많이 듣는 고민은 단연 '이익잉여금'과 '가지급금'입니다. 회사가 성장하여 이익이 쌓여도, 이를 개인화(CEO의 자산으로 회수)하는 과정에서 발생하는 막대한 세금 때문에 망설이게 됩니다. 급여나 배당을 늘리자니 최고 49.5%(지방소득세 포함)의 소득세가 부담스럽고, 그렇다고 마냥 쌓아두자니 비상장주식 가치가 상승하여 향후 상속세 폭탄이 예고되어 있기 때문입니다.
+    </p>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        이러한 진퇴양난의 상황에서 **'자기주식 이익소각(Treasury Stock Retirement)'**은 여전히 가장 매력적인 솔루션입니다. 2025년 세법 개정안 논의 과정에서도 대주주 양도소득세 관련 이슈가 뜨거웠지만, 자기주식 소각을 통한 이익 회수는 여전히 **분류과세(양도소득세)**의 영역에 남아 있어 종합소득세 합산을 피할 수 있는 몇 안 되는 카드이기 때문입니다.
+    </p>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">2. 메커니즘: 감자(Capital Reduction) vs 이익소각</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        많은 분들이 혼동하시는 것이 '감자'와 '이익소각'의 차이입니다. 결과적으로 주식 수가 줄어들고 자본이 감소하는 효과는 비슷해 보이지만, 그 재원과 절차, 그리고 세무적 효과는 완전히 다릅니다.
+    </p>
+    
+    <div className="overflow-x-auto">
+        <table className="w-full border-collapse border border-slate-200 dark:border-slate-700 mb-6 text-sm md:text-base">
+            <thead>
+                <tr className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                    <th className="border border-slate-200 dark:border-slate-700 p-3 text-center">구분</th>
+                    <th className="border border-slate-200 dark:border-slate-700 p-3 text-center">유상감자 (Capital Reduction)</th>
+                    <th className="border border-slate-200 dark:border-slate-700 p-3 text-center">이익소각 (Profit Retirement)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3 font-bold text-center bg-slate-50 dark:bg-slate-900">재원</td>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3">자본금 (Capital)</td>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3 text-blue-600 dark:text-blue-400 font-bold">이익잉여금 (Retained Earnings)</td>
+                </tr>
+                <tr>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3 font-bold text-center bg-slate-50 dark:bg-slate-900">자본금 변동</td>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3">감소함</td>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3">변동 없음 (자본금 유지)</td>
+                </tr>
+                <tr>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3 font-bold text-center bg-slate-50 dark:bg-slate-900">채권자 보호</td>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3">필수 절차 (엄격함)</td>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3">상대적으로 간소화 가능</td>
+                </tr>
+                <tr>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3 font-bold text-center bg-slate-50 dark:bg-slate-900">세무 이슈</td>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3">의제배당 (배당소득세)</td>
+                    <td className="border border-slate-200 dark:border-slate-700 p-3 text-blue-600 dark:text-blue-400 font-bold">양도소득세 (분류과세)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        핵심은 <strong>'이익잉여금'을 재원으로 하여 주식을 소각한다</strong>는 점입니다. 자본금을 건드리지 않기 때문에 채권자 보호 절차 등 상법상 절차가 상대적으로 유연하며, 무엇보다 주주(CEO) 입장에서는 주식을 회사에 '양도'하는 거래로 인정받아 배당소득세가 아닌 양도소득세를 적용받을 수 있는 길이 열립니다.
+    </p>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">3. 세금의 마법: 49.5% vs 20%</h2>
+    <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
+        <h3 className="text-lg font-bold mb-4 text-slate-800 dark:text-slate-200">💰 10억 원을 회수할 때의 세금 차이 (예시)</h3>
+        <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 rounded-lg border border-red-200 dark:border-red-900/50">
+                <div>
+                    <span className="block text-sm text-slate-500 dark:text-slate-400">급여/상여/배당 수령 시</span>
+                    <span className="text-xl font-bold text-red-600 dark:text-red-400">종합소득세 (최고 49.5%)</span>
+                </div>
+                <div className="text-right">
+                    <span className="block text-sm text-slate-500 dark:text-slate-400">예상 세액</span>
+                    <span className="text-xl font-bold text-slate-800 dark:text-slate-200">약 4.5억 ~ 4.9억</span>
+                </div>
+            </div>
+            <div className="flex items-center justify-center text-slate-400">
+                <span className="text-2xl">⬇️</span>
+            </div>
+            <div className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 rounded-lg border border-blue-200 dark:border-blue-900/50 shadow-md">
+                <div>
+                    <span className="block text-sm text-slate-500 dark:text-slate-400">자기주식 이익소각 시</span>
+                    <span className="text-xl font-bold text-blue-600 dark:text-blue-400">양도소득세 (20% ~ 25%)</span>
+                </div>
+                <div className="text-right">
+                    <span className="block text-sm text-slate-500 dark:text-slate-400">예상 세액</span>
+                    <span className="text-xl font-bold text-slate-800 dark:text-slate-200">약 2.2억 ~ 2.7억</span>
+                </div>
+            </div>
+        </div>
+        <p className="mt-4 text-sm text-slate-500 dark:text-slate-400 text-right">* 지방소득세 별도, 증권거래세 등 기타 비용 제외 단순 추산치입니다.</p>
+    </div>
+    <p className="mt-6 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        단순 계산으로도 <strong>2억 원 이상의 세금 차이</strong>가 발생합니다. 여기에 더해, 배우자 증여 공제(6억 원)를 활용한 이익소각 전략을 병행한다면 세금은 '0원'에 수렴할 수도 있습니다. (단, 이 경우 국세청의 부당행위계산부인 규정 적용 가능성을 면밀히 검토해야 합니다.)
+    </p>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">4. 리스크 관리: 국세청은 무엇을 보는가?</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        "세금이 이렇게 줄어드는데, 안 할 이유가 없지 않나요?"라고 물으신다면, 저는 <strong>"제대로 하지 않으면 안 하느니만 못합니다"</strong>라고 답합니다. 국세청은 자기주식 거래를 '변칙적인 자금 대여'나 '조세 회피' 수단으로 의심하고 현미경 검증을 하고 있기 때문입니다.
+    </p>
+    
+    <div className="grid md:grid-cols-2 gap-6 mt-6">
+        <div className="bg-red-50 dark:bg-red-900/20 p-5 rounded-xl border-l-4 border-red-500">
+            <h3 className="font-bold text-red-800 dark:text-red-300 mb-2">🚩 Risk 1: 업무무관 가지급금 의제</h3>
+            <p className="text-sm text-slate-700 dark:text-slate-300">
+                소각 목적이 불분명하거나, 장기간 소각하지 않고 보유만 하다가 재매각하는 경우, 국세청은 이를 회사가 주주에게 자금을 빌려준 것(가지급금)으로 봅니다. 이 경우 인정이자 발생 및 지급이자 손금 불산입 등 법인세 폭탄을 맞게 됩니다.
+            </p>
+        </div>
+        <div className="bg-red-50 dark:bg-red-900/20 p-5 rounded-xl border-l-4 border-red-500">
+            <h3 className="font-bold text-red-800 dark:text-red-300 mb-2">🚩 Risk 2: 의제배당 과세</h3>
+            <p className="text-sm text-slate-700 dark:text-slate-300">
+                상법상 절차(주주총회 결의, 주주 통지 등)에 하자가 있거나, 특정 주주에게만 특혜를 주기 위한 불공정 소각으로 판단될 경우, 양도소득세가 아닌 배당소득세가 부과될 수 있습니다.
+            </p>
+        </div>
+        <div className="bg-red-50 dark:bg-red-900/20 p-5 rounded-xl border-l-4 border-red-500">
+            <h3 className="font-bold text-red-800 dark:text-red-300 mb-2">🚩 Risk 3: 시가 평가의 적정성</h3>
+            <p className="text-sm text-slate-700 dark:text-slate-300">
+                비상장주식의 가치(시가)를 상속세 및 증여세법에 따라 정확하게 평가하지 않고 임의의 가격으로 거래할 경우, 부당행위계산부인 규정이 적용되어 세금이 추징됩니다.
+            </p>
+        </div>
+        <div className="bg-red-50 dark:bg-red-900/20 p-5 rounded-xl border-l-4 border-red-500">
+            <h3 className="font-bold text-red-800 dark:text-red-300 mb-2">🚩 Risk 4: 재원 규제 위반</h3>
+            <p className="text-sm text-slate-700 dark:text-slate-300">
+                배당가능이익 한도를 초과하여 자기주식을 취득하거나 소각하는 것은 상법 위반으로 무효가 될 수 있습니다. 직전 결산기 대차대조표상 순자산액에서 자본금 등을 뺀 금액 내에서만 가능합니다.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">5. 2025년 실행을 위한 Action Plan</h2>
+    <div className="space-y-6">
+        <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">1</div>
+            <div>
+                <h3 className="font-bold text-lg text-slate-800 dark:text-slate-200">정관 정비 및 배당가능이익 확인</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
+                    회사의 정관에 자기주식 취득 및 소각에 관한 규정이 명시되어 있는지 확인하고, 직전 결산기 기준 배당가능이익이 충분한지 검토해야 합니다.
+                </p>
+            </div>
+        </div>
+        <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">2</div>
+            <div>
+                <h3 className="font-bold text-lg text-slate-800 dark:text-slate-200">정확한 주식 가치 평가</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
+                    세무 전문가를 통해 상증세법상 보충적 평가방법 등으로 주식 가치를 정확히 산정해야 합니다. 평가 시점에 따라 세금이 크게 달라질 수 있으므로 타이밍이 중요합니다.
+                </p>
+            </div>
+        </div>
+        <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">3</div>
+            <div>
+                <h3 className="font-bold text-lg text-slate-800 dark:text-slate-200">상법 절차의 완벽한 이행</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
+                    이사회 결의, 주주총회 소집 통지, 주주총회 결의, 주식 양도 신청 기간 부여 등 상법이 정한 절차를 하나도 빠짐없이 문서화(Evidence)해야 합니다.
+                </p>
+            </div>
+        </div>
+        <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">4</div>
+            <div>
+                <h3 className="font-bold text-lg text-slate-800 dark:text-slate-200">소각 등기 및 세무 신고</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
+                    취득한 자기주식은 지체 없이 소각하고 변경 등기를 마쳐야 합니다. 이후 양도소득세 및 증권거래세 신고를 기한 내에 완료해야 합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div className="bg-slate-100 dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 p-6 rounded-xl my-10">
+    <h3 className="text-slate-600 dark:text-slate-400 mb-4 text-lg font-bold">💡 맺음말: 전문가의 조력이 필수적인 이유</h3>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        자기주식 이익소각은 '양날의 검'과 같습니다. 잘 쓰면 기업과 CEO 모두에게 최고의 절세 전략이 되지만, 잘못 쓰면 감당하기 힘든 세무 리스크로 돌아옵니다. 특히 2025년은 과세 당국의 전산 시스템 고도화로 인해 사후 검증이 그 어느 때보다 정교해질 것입니다.
+    </p>
+    <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        단순히 세금을 줄이는 것을 넘어, 기업의 재무 구조를 건전하게 만들고 향후 가업 승계까지 고려한 큰 그림을 그려야 합니다. 10년 이상의 경험을 가진 패밀리오피스 전문가와 함께, 귀사에 딱 맞는 안전하고 확실한 출구 전략을 설계하시기 바랍니다.
+    </p>
+</div>
+
+</div>`,
+    category: '세무최적화',
+    author: '임재홍',
+    date: '2025-01-15',
+    readTime: '15분',
+    tags: ['자기주식소각', '이익소각', '가지급금해결', '이익잉여금', '양도소득세', '의제배당', '2025세법'],
+    slug: 'corporate-treasury-stock-retirement-2025-tax-analysis',
+    featured: true,
+  },
+  'corporate-life-insurance-ceo-risk-management': {
+    id: 'corporate-life-insurance-ceo-risk-management',
+    title: 'CEO의 부재(不在), 기업의 위기가 되지 않으려면: 경영인 정기보험(CEO Plan)의 재발견',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop',
+    excerpt: 'CEO의 갑작스러운 유고는 기업 생존을 위협하는 최대의 리스크입니다. 유족 보상금, 상속세 재원, 그리고 법인세 절세까지. 경영인 정기보험이 단순한 보험을 넘어 기업의 필수 안전장치인 이유를 10년 차 컨설턴트가 분석합니다.',
+    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+
+<header className="text-center mb-10 py-8 border-b-4 border-primary">
+    <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">CEO의 부재(不在), 기업의 위기가 되지 않으려면:<br/>경영인 정기보험(CEO Plan)의 재발견</h1>
+    <p className="text-muted-foreground text-lg font-normal leading-relaxed">단순한 비용이 아닌, 기업의 생존을 위한 필수 투자<br/>법인세 절감부터 상속 재원 마련까지 한 번에 해결하는 전략</p>
+    <div className="mt-5 text-muted-foreground text-sm">
+        작성일: 2025년 2월 10일 | 예상 읽기 시간: 14분 | 카테고리: 승계전략 및 리스크관리
+    </div>
+</header>
+
+<div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-8 rounded-2xl mb-10 shadow-xl">
+    <h2 className="text-white mb-5 text-xl font-bold">🚀 Executive Summary</h2>
+    <div className="grid md:grid-cols-3 gap-6">
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-blue-300 font-bold mb-2">🛡️ 리스크 헷지</h3>
+            <p className="text-sm opacity-90">CEO 유고 시 발생하는 긴급 자금(대출 상환, 유족 보상금 등)을 보험금으로 즉시 확보하여 기업 도산을 방지합니다.</p>
+        </div>
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-purple-300 font-bold mb-2">💰 법인세 절세</h3>
+            <p className="text-sm opacity-90">납입 보험료를 비용(손금) 처리하여 매년 법인세를 절감하고, 장부상 이익을 조절하여 주식 가치 상승을 억제합니다.</p>
+        </div>
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-amber-300 font-bold mb-2">👨‍👩‍👧‍👦 상속 재원 마련</h3>
+            <p className="text-sm opacity-90">CEO 퇴직금 재원으로 활용하거나, 유고 시 유족들이 납부해야 할 막대한 상속세 재원을 현금으로 마련해 줍니다.</p>
+        </div>
+    </div>
+</div>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">1. 서론: "설마 나에게 그런 일이?"라는 안일함이 가장 큰 위험</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        중견기업 컨설팅 현장에서 만나는 대표님들은 대부분 건강에 자신감이 넘치시고, 본인의 부재 상황을 구체적으로 상상하기 싫어하십니다. 하지만 기업의 역사를 돌아보면, 수많은 우량 기업들이 창업주의 갑작스러운 유고로 인해 흑자 도산하거나 경영권 분쟁에 휘말려 공중분해 되는 사례를 목격하게 됩니다.
+    </p>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        CEO의 부재는 단순한 리더십의 공백이 아닙니다. **① 금융권의 대출 회수 압박, ② 거래처의 거래 중단 및 결제 조건 강화, ③ 유족들의 상속세 납부 재원 부족**이라는 '삼중고(三重苦)'가 동시에 닥쳐오는 쓰나미와 같습니다. 이때 기업을 지켜주는 유일하고도 가장 강력한 방파제가 바로 **'경영인 정기보험(CEO Plan)'**입니다.
+    </p>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">2. 경영인 정기보험이란 무엇인가?</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        경영인 정기보험은 법인이 계약자 및 수익자가 되고, CEO(임원)를 피보험자로 하여 가입하는 보장성 보험입니다. 만기 환급금이 없거나 적은 일반 정기보험과 달리, 일정 시점까지 해지환급금이 증가하다가 만기에 가까워질수록 감소하는 구조를 가지고 있어, **보장(Protection)과 퇴직금 재원 마련(Savings)**의 두 가지 목적을 동시에 달성할 수 있도록 설계된 상품입니다.
+    </p>
+    
+    <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 mt-6">
+        <h3 className="text-lg font-bold mb-4 text-slate-800 dark:text-slate-200">📊 핵심 구조 및 특징</h3>
+        <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">1</span>
+                <div>
+                    <strong className="text-slate-800 dark:text-slate-200">계약 형태:</strong> 계약자(법인), 수익자(법인), 피보험자(CEO)
+                </div>
+            </li>
+            <li className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">2</span>
+                <div>
+                    <strong className="text-slate-800 dark:text-slate-200">비용 처리:</strong> 납입 보험료를 비용(손금)으로 인정받아 법인세 절감 가능 (상품 및 가입 시기에 따라 손금 인정 비율 상이)
+                </div>
+            </li>
+            <li className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">3</span>
+                <div>
+                    <strong className="text-slate-800 dark:text-slate-200">유동성 확보:</strong> CEO 은퇴 시점에는 해지환급금을 퇴직금 재원으로 활용하고, 유고 시에는 사망보험금을 수령하여 긴급 자금으로 활용
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">3. 왜 지금 경영인 정기보험인가? (3가지 핵심 가치)</h2>
+    
+    <div className="space-y-8">
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-red-100 dark:bg-red-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[160px]">
+                <span className="text-4xl mb-3">🚨</span>
+                <h3 className="text-red-800 dark:text-red-300 font-bold text-lg">Risk Management</h3>
+                <p className="text-sm text-red-600 dark:text-red-400 mt-2">유동성 위기 방어</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">긴급 자금(Emergency Fund) 확보</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    CEO 유고 시 은행은 대출 연장을 거부하고 일시 상환을 요구하는 경우가 많습니다. 이때 수십억 원의 사망보험금은 회사의 부채를 상환하고, 남은 유가족들이 경영권을 안정적으로 승계하거나 회사를 매각할 때까지 버틸 수 있는 '생명줄'이 됩니다.
+                </p>
+            </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-blue-100 dark:bg-blue-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[160px]">
+                <span className="text-4xl mb-3">📉</span>
+                <h3 className="text-blue-800 dark:text-blue-300 font-bold text-lg">Tax Saving</h3>
+                <p className="text-sm text-blue-600 dark:text-blue-400 mt-2">법인세 절감 & 주가 관리</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">비용 처리를 통한 절세 효과</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    납입 보험료가 비용으로 처리되면 당기순이익이 감소하여 법인세가 줄어듭니다. 또한, 순이익 감소는 비상장주식 가치 상승을 억제하는 효과가 있어, 향후 자녀에게 지분을 증여하거나 상속할 때 세금 부담을 낮추는 간접적인 효과도 있습니다.
+                </p>
+            </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-green-100 dark:bg-green-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[160px]">
+                <span className="text-4xl mb-3">💵</span>
+                <h3 className="text-green-800 dark:text-green-300 font-bold text-lg">Exit Plan</h3>
+                <p className="text-sm text-green-600 dark:text-green-400 mt-2">퇴직금 재원 마련</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">CEO 퇴직금의 현실적 대안</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    대부분의 중소기업은 현금 유동성이 부족하여 CEO가 은퇴할 때 막대한 퇴직금을 일시에 지급하기 어렵습니다. 경영인 정기보험의 해지환급금은 CEO의 퇴직 시점에 맞춰 목돈을 마련해 주는 가장 확실한 '퇴직금 주머니' 역할을 합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">4. 오해와 진실: "보험료는 다 날리는 돈 아닌가요?"</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        과거에는 "보험은 비용이다"라는 인식이 강했지만, 경영인 정기보험은 다릅니다. 납입 기간 중에는 '보장 자산'으로, 만기 시점에는 '현금 자산'으로 전환되는 하이브리드 성격을 가집니다.
+    </p>
+    
+    <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-5 rounded-r-xl my-6">
+        <h3 className="text-amber-800 dark:text-amber-300 font-bold mb-2">💡 Check Point: 환급률(Return Rate)의 비밀</h3>
+        <p className="text-sm text-amber-900 dark:text-amber-200">
+            최근 출시되는 상품들은 납입 완료 시점(예: 10년, 15년 등)에 환급률이 100%에 육박하거나 이를 상회하도록 설계된 경우가 많습니다. 즉, 회사는 보장을 받으면서도 원금 이상의 자금을 회수할 수 있는 것입니다. (단, 중도 해지 시에는 원금 손실 가능성이 있으므로 가입 시 해지환급금 예시표를 꼼꼼히 확인해야 합니다.)
+        </p>
+    </div>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">5. 2025년 성공적인 CEO Plan 실행 가이드</h2>
+    <div className="space-y-6">
+        <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">1</div>
+            <div>
+                <h3 className="font-bold text-lg text-slate-800 dark:text-slate-200">정관 변경 (임원 퇴직금 규정 정비)</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
+                    보험 가입보다 중요한 것은 '나중에 돈을 어떻게 빼낼 것인가'입니다. 정관에 임원 퇴직금 지급 규정(지급 배수 등)이 명확하게 명시되어 있어야, 나중에 해지환급금을 퇴직금으로 수령할 때 세무적 불이익(손금 불산입)을 피할 수 있습니다.
+                </p>
+            </div>
+        </div>
+        <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">2</div>
+            <div>
+                <h3 className="font-bold text-lg text-slate-800 dark:text-slate-200">적정 보험료 산정</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
+                    무리한 보험료 납입은 오히려 회사의 유동성을 악화시킬 수 있습니다. 회사의 연간 영업이익, 현금 흐름, 그리고 CEO의 예상 은퇴 시점을 고려하여 감당 가능한 수준에서 보험료를 책정해야 합니다.
+                </p>
+            </div>
+        </div>
+        <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">3</div>
+            <div>
+                <h3 className="font-bold text-lg text-slate-800 dark:text-slate-200">상품 비교 및 포트폴리오 구성</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
+                    보험사마다 환급률, 납입 기간, 추가 납입 기능 등이 천차만별입니다. 특정 보험사에 얽매이지 않고, 여러 회사의 상품을 비교 분석하여 우리 회사에 가장 유리한 조건의 상품을 선택해야 합니다.
+                </p>
+            </div>
+        </div>
+        <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">4</div>
+            <div>
+                <h3 className="font-bold text-lg text-slate-800 dark:text-slate-200">출구 전략(Exit Strategy) 수립</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
+                    가입 시점부터 '언제, 어떻게 해지하여, 어떤 명목으로 수령할 것인가'에 대한 계획이 있어야 합니다. 퇴직금, 유족 보상금, 혹은 법인 자금 활용 등 다양한 시나리오별 세금 효과를 미리 시뮬레이션해야 합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div className="bg-slate-100 dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 p-6 rounded-xl my-10">
+    <h3 className="text-slate-600 dark:text-slate-400 mb-4 text-lg font-bold">💡 맺음말: 리더의 책임은 '끝까지' 지키는 것입니다</h3>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        경영인 정기보험은 단순히 CEO 개인을 위한 보험이 아닙니다. 그것은 직원들의 고용 안정, 거래처와의 신뢰 유지, 그리고 사랑하는 가족들의 미래를 지키기 위한 '기업의 안전벨트'입니다.
+    </p>
+    <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        "호미로 막을 것을 가래로 막는다"는 말이 있습니다. 건강하고 회사가 잘 나갈 때 준비하는 것이 가장 저렴하고 확실합니다. 10년 이상의 노하우를 가진 전문가와 함께, 귀사의 상황에 딱 맞는 최적의 CEO Plan을 설계해 보시기 바랍니다.
+    </p>
+</div>
+
+</div>`,
+    category: '승계전략',
+    author: '임재홍',
+    date: '2025-02-10',
+    readTime: '14분',
+    tags: ['CEO유고', '경영인정기보험', 'CEO플랜', '법인세절세', '상속세재원', '가지급금상환', '기업리스크관리'],
+    slug: 'corporate-life-insurance-ceo-risk-management',
+    featured: true,
+  },
+  'mid-sized-company-succession-issues': {
+    id: 'mid-sized-company-succession-issues',
+    title: '중견기업 승계, \'세금\'보다 무서운 것은 \'준비 없는 이별\'입니다: 10년 차 컨설턴트의 제언',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
+    excerpt: '상속세 최고세율 60%의 공포, 그리고 경영권 분쟁의 리스크. 중견기업 승계의 성공과 실패를 가르는 결정적 차이와 골든타임 전략을 심층 분석합니다.',
+    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+
+<header className="text-center mb-10 py-8 border-b-4 border-primary">
+    <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">중견기업 승계, '세금'보다 무서운 것은<br/>'준비 없는 이별'입니다</h1>
+    <p className="text-muted-foreground text-lg font-normal leading-relaxed">상속세 최고세율 60%의 공포를 넘어<br/>100년 기업으로 가는 '아름다운 바통 터치'의 기술</p>
+    <div className="mt-5 text-muted-foreground text-sm">
+        작성일: 2025년 2월 20일 | 예상 읽기 시간: 16분 | 카테고리: 가업승계 및 지배구조
+    </div>
+</header>
+
+<div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-8 rounded-2xl mb-10 shadow-xl">
+    <h2 className="text-white mb-5 text-xl font-bold">🚀 Executive Summary</h2>
+    <div className="grid md:grid-cols-3 gap-6">
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-blue-300 font-bold mb-2">💸 Tax Risk (세금)</h3>
+            <p className="text-sm opacity-90">OECD 최고 수준인 상속세율(최대 60%)은 기업의 지배력을 송두리째 흔들 수 있습니다. 가업상속공제 등 제도의 전략적 활용이 필수입니다.</p>
+        </div>
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-purple-300 font-bold mb-2">⚔️ Family Risk (분쟁)</h3>
+            <p className="text-sm opacity-90">준비 없는 상속은 필연적으로 유류분 반환 청구 소송 등 가족 간 분쟁을 야기하며, 이는 기업 경영권 위협으로 직결됩니다.</p>
+        </div>
+        <div className="bg-white/10 p-4 rounded-xl border border-white/20">
+            <h3 className="text-amber-300 font-bold mb-2">👑 Governance (지배구조)</h3>
+            <p className="text-sm opacity-90">단순한 지분 이전을 넘어, 후계자가 안정적으로 경영권을 행사할 수 있도록 지주회사 전환 등 지배구조의 현대화가 필요합니다.</p>
+        </div>
+    </div>
+</div>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">1. 서론: 승계는 '이벤트'가 아니라 '프로세스'입니다</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        "내가 죽으면 알아서들 하겠지." 혹은 "아직 건강한데 벌써부터 무슨 상속 이야기인가?"
+    </p>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        지난 10년간 현장에서 만난 수많은 창업주분들이 하셨던 말씀입니다. 하지만 안타깝게도, '알아서 잘 되는' 승계는 단 한 번도 본 적이 없습니다. 승계는 어느 날 갑자기 일어나는 이벤트가 되어서는 안 됩니다. 최소 10년 이상의 시간을 두고 치밀하게 준비해야 하는 장기 프로젝트, 즉 '프로세스(Process)'여야 합니다.
+    </p>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        특히 기업 가치가 수백억, 수천억 원에 달하는 중견기업의 경우, 준비 없는 승계는 곧 **'기업의 해체'**를 의미합니다. 막대한 상속세를 납부하기 위해 알짜 자산을 매각하거나, 경영권 방어에 실패하여 사모펀드(PEF)에 회사를 넘기는 사례가 비일비재하기 때문입니다.
+    </p>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">2. 중견기업 승계를 가로막는 3가지 거대한 장벽</h2>
+    
+    <div className="space-y-8">
+        {/* Risk 1 */}
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-red-100 dark:bg-red-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
+                <span className="text-4xl mb-3">📉</span>
+                <h3 className="text-red-800 dark:text-red-300 font-bold text-lg">살인적인 상속세율</h3>
+                <p className="text-sm text-red-600 dark:text-red-400 mt-2">최고 60% (할증평가 포함)</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">지분 절반을 국가에 헌납하시겠습니까?</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    대한민국의 상속세율은 OECD 국가 중 최상위권입니다. 최대주주 할증평가(20%)까지 더해지면 실질 세율은 60%에 육박합니다. 1,000억 원 가치의 기업을 물려주려면 600억 원을 세금으로 내야 한다는 뜻입니다. 현금성 자산이 부족한 대부분의 기업 오너에게 이는 '재앙'과도 같습니다.
+                </p>
+            </div>
+        </div>
+
+        {/* Risk 2 */}
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-orange-100 dark:bg-orange-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
+                <span className="text-4xl mb-3">⚔️</span>
+                <h3 className="text-orange-800 dark:text-orange-300 font-bold text-lg">가족 간의 분쟁</h3>
+                <p className="text-sm text-orange-600 dark:text-orange-400 mt-2">유류분 & 경영권 다툼</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">"피는 물보다 진하다"는 옛말입니다</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    창업주 사후, 형제자매 간의 경영권 분쟁이나 소외된 상속인들의 유류분 반환 청구 소송은 이제 뉴스에서나 보는 일이 아닙니다. 이러한 분쟁은 기업의 대외 신인도를 추락시키고, 임직원들의 사기를 저하시키며, 결국 기업 경쟁력을 갉아먹습니다.
+                </p>
+            </div>
+        </div>
+
+        {/* Risk 3 */}
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="w-full md:w-1/3 bg-slate-100 dark:bg-slate-800 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
+                <span className="text-4xl mb-3">🧩</span>
+                <h3 className="text-slate-800 dark:text-slate-300 font-bold text-lg">복잡한 지배구조</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">순환출자 & 차명주식</p>
+            </div>
+            <div className="w-full md:w-2/3">
+                <h4 className="text-lg font-bold mb-2 text-slate-800 dark:text-slate-200">과거의 유산이 발목을 잡습니다</h4>
+                <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+                    과거 성장이 우선시되던 시절 만들어진 복잡한 순환출자 고리나, 명의신탁 주식(차명주식) 문제는 승계 과정에서 반드시 터지는 시한폭탄입니다. 이를 정리하지 않고는 투명한 승계도, 가업상속공제 혜택도 불가능합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">3. 골든타임을 놓치지 않는 3가지 필승 전략</h2>
+    
+    <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 mb-8">
+        <h3 className="text-lg font-bold mb-4 text-slate-800 dark:text-slate-200">Strategy 1: 사전 증여와 과세특례제도의 활용</h3>
+        <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+            주가가 낮을 때 미리 증여하는 것이 최고의 절세입니다. 특히 **'가업승계 주식에 대한 증여세 과세특례'** 제도를 활용하면, 최대 600억 원(2025년 세법 개정안 기준 검토 필요)까지 10%(과표 구간에 따라 20%)의 낮은 세율로 주식을 증여할 수 있습니다. 이는 사후 상속세 부담을 획기적으로 줄여주는 핵심 키(Key)입니다.
+        </p>
+        <div className="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-700">
+            <strong className="text-blue-600 dark:text-blue-400">💡 Tip:</strong> 증여 후 10년(상속인 외는 5년)이 지나면 상속 재산 합산에서 배제되는 일반 증여와 달리, 과세특례 증여분은 기간에 관계없이 상속세 정산 대상이 됩니다. 하지만 증여 시점의 낮은 주가로 고정되어 합산되므로, 기업 가치가 상승할수록 절세 효과는 극대화됩니다.
+        </div>
+    </div>
+
+    <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 mb-8">
+        <h3 className="text-lg font-bold mb-4 text-slate-800 dark:text-slate-200">Strategy 2: 지배구조 개편 (Holding Company)</h3>
+        <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+            여러 계열사가 복잡하게 얽혀 있다면, **지주회사(Holding Company)** 체제로의 전환을 고려해야 합니다. 오너 일가는 지주회사의 지분만 확보하면, 지주회사를 통해 전체 계열사를 지배할 수 있어 적은 지분으로도 경영권을 공고히 할 수 있습니다. 또한, 이 과정에서 발생하는 주식 양도차익에 대한 과세 이연 혜택도 누릴 수 있습니다.
+        </p>
+    </div>
+
+    <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
+        <h3 className="text-lg font-bold mb-4 text-slate-800 dark:text-slate-200">Strategy 3: 가족 헌장(Family Constitution) 제정</h3>
+        <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+            법적인 구속력은 없지만, 가족 간의 합의를 문서화하는 **'가족 헌장'**은 분쟁 예방에 큰 효과가 있습니다. 경영 참여의 원칙, 주식 보유 및 처분 제한, 가족 모임 정례화, 사회 공헌 등의 내용을 담아 가족 모두가 동의하는 '가문의 룰'을 만드는 것입니다. 이는 승계 이후에도 가문의 결속력을 유지하는 정신적 지주가 됩니다.
+        </p>
+    </div>
+</section>
+
+<section className="mb-12">
+    <h2 className="text-slate-800 dark:text-slate-200 mb-6 text-2xl font-bold border-b-2 border-slate-200 dark:border-slate-700 pb-3">4. 맺음말: 100년 기업을 향한 위대한 여정</h2>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        승계는 단순히 부(富)의 이전이 아닙니다. 창업주의 철학과 땀이 서린 기업가 정신을 다음 세대로 계승하는 숭고한 과정입니다. 세금 문제는 기술적인 부분일 뿐, 더 중요한 것은 후계자가 리더로서 인정받고 조직을 이끌어갈 수 있는 '준비된 리더십'을 갖추는 것입니다.
+    </p>
+    <p className="mb-4 text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        시간은 기다려주지 않습니다. 지금이 가장 빠를 때입니다. 10년 앞을 내다보는 혜안으로, 전문가와 함께 당신만의 '승계 로드맵'을 그리십시오. 그것이 당신이 일군 기업을 영원히 지키는 유일한 길입니다.
+    </p>
+</section>
+
+<div className="bg-slate-100 dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 p-6 rounded-xl my-10">
+    <h3 className="text-slate-600 dark:text-slate-400 mb-4 text-lg font-bold">📞 전문가 상담 안내</h3>
+    <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+        중견기업 승계는 세무, 법무, 노무, 그리고 금융이 복합적으로 얽힌 고차방정식입니다. 패밀리오피스 전문가 그룹의 심층 진단을 통해 귀사에 최적화된 솔루션을 제안받으시기 바랍니다.
+    </p>
+</div>
+
+</div>`,
+    category: '승계전략',
+    author: '임재홍',
+    date: '2025-02-20',
+    readTime: '16분',
+    tags: ['가업승계', '상속세', '증여세과세특례', '경영권방어', '지배구조개편', '유류분반환청구', '패밀리오피스'],
+    slug: 'mid-sized-company-succession-issues',
     featured: true,
   },
 };
