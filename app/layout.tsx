@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 import { Analytics } from '@/components/analytics';
-import { DomainMigrationBanner } from '@/components/domain-migration-banner';
 import { ErrorBoundary } from '@/components/error-boundary';
 import ExternalScripts from '@/components/external-scripts';
 import { KakaoPixel } from '@/components/kakao/kakao-pixel';
@@ -22,7 +21,7 @@ import { SEOModulePreloader } from '@/components/seo-module-preloader';
 import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
 import { safeMetadata } from '@/lib/safe-seo-engine';
-import { sanitizeStructuredData, createUserTrackingScript } from '@/lib/security/html-sanitizer';
+import { createUserTrackingScript, sanitizeStructuredData } from '@/lib/security/html-sanitizer';
 import { DebugStyles } from './debug-styles';
 
 const inter = Inter({ 
@@ -394,7 +393,6 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} ${inter.variable}`} style={{ fontOpticalSizing: 'auto' }}>
         <ErrorBoundary>
-          <DomainMigrationBanner />
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
