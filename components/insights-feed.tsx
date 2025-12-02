@@ -165,8 +165,11 @@ export default function InsightsFeed({
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               탐색하기
             </h2>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-slate-600 dark:text-slate-400 mb-1">
               원하는 주제의 인사이트를 쉽고 빠르게 찾아보세요.
+            </p>
+            <p className="text-sm text-slate-500 dark:text-slate-500">
+              📅 발행 일정: 전문가 칼럼(월/목), 뉴스레터(화/금), 블로그(수) 오전 7:30
             </p>
           </div>
 
