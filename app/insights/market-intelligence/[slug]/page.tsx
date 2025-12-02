@@ -1,10 +1,11 @@
-import { ArrowLeft, CalendarDays, Clock, Share2 } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Clock } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { ShareButton } from '@/components/share-button';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -146,14 +147,11 @@ export default async function BlogPostPage({
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="rounded-full border-white/20 text-white hover:bg-white/10 bg-transparent"
-                  >
-                    <Share2 className="mr-2 h-4 w-4" />
-                    공유하기
-                  </Button>
+                  <ShareButton 
+                    title={post.title}
+                    description={post.excerpt}
+                    image={post.image || post.coverImage || ''}
+                  />
                 </div>
               </div>
             </div>
