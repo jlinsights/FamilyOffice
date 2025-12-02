@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { X, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ExternalLink, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export function DomainMigrationBanner() {
   const [isVisible, setIsVisible] = useState(false);
@@ -39,7 +39,7 @@ export function DomainMigrationBanner() {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg">
+    <div className="hidden md:block fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
