@@ -255,7 +255,7 @@ export default async function BlogPostPage({
                           className="group"
                         >
                           <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex items-center gap-2">
-                            {post.author} 수석 컨설턴트
+                            {post.author}
                             <ArrowLeft className="w-4 h-4 rotate-180 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                           </h3>
                         </Link>
