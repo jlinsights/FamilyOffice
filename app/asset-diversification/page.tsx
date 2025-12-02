@@ -168,7 +168,7 @@ export default function AssetDiversificationPage() {
               </p>
             </div>
             <div className="grid md:grid-cols-4 gap-6">
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-4xl font-bold text-primary">50%</CardTitle>
                   <CardDescription>변동성 감소</CardDescription>
@@ -179,7 +179,7 @@ export default function AssetDiversificationPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-4xl font-bold text-primary">12%</CardTitle>
                   <CardDescription>연평균 안정 수익률</CardDescription>
@@ -190,7 +190,7 @@ export default function AssetDiversificationPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-4xl font-bold text-primary">-15%</CardTitle>
                   <CardDescription>최대 손실 제한</CardDescription>
@@ -201,7 +201,7 @@ export default function AssetDiversificationPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-4xl font-bold text-primary">80%</CardTitle>
                   <CardDescription>목표 달성률</CardDescription>
@@ -379,7 +379,7 @@ export default function AssetDiversificationPage() {
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Shield className="h-5 w-5 text-green-600" />
@@ -415,7 +415,7 @@ export default function AssetDiversificationPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Target className="h-5 w-5 text-blue-600" />
@@ -451,7 +451,7 @@ export default function AssetDiversificationPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <TrendingUp className="h-5 w-5 text-purple-600" />
@@ -498,7 +498,7 @@ export default function AssetDiversificationPage() {
             <h2 className="text-3xl font-bold text-center mb-12">
               자산분산 성공 사례
             </h2>
-            <Card>
+            <Card className="dark:bg-slate-800 dark:border-slate-700">
               <CardContent className="p-8">
                 <div className="grid md:grid-cols-3 gap-8">
                   <div>
@@ -549,7 +549,7 @@ export default function AssetDiversificationPage() {
               안정적이면서도 성장하는 포트폴리오를 만들어보세요.
             </p>
             <div className="grid md:grid-cols-3 gap-4 mb-8">
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardContent className="pt-6">
                   <Shield className="h-8 w-8 text-primary mx-auto mb-2" />
                   <h3 className="font-semibold mb-2">리스크 최소화</h3>
@@ -558,7 +558,7 @@ export default function AssetDiversificationPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardContent className="pt-6">
                   <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
                   <h3 className="font-semibold mb-2">수익률 안정화</h3>
@@ -567,7 +567,7 @@ export default function AssetDiversificationPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="dark:bg-slate-800 dark:border-slate-700">
                 <CardContent className="pt-6">
                   <Globe className="h-8 w-8 text-primary mx-auto mb-2" />
                   <h3 className="font-semibold mb-2">글로벌 기회</h3>
