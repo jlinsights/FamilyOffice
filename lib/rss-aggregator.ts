@@ -45,6 +45,31 @@ export class RSSAggregator {
     });
   }
 
+  // Fallback images for business/finance context
+  private fallbackImages = [
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1565514020176-dbf2277f2416?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=800&q=80'
+  ];
+
+  private getFallbackImage(id: string): string {
+    // Generate a deterministic index based on the ID string
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+      hash = ((hash << 5) - hash) + id.charCodeAt(i);
+      hash = hash & hash;
+    }
+    const index = Math.abs(hash) % this.fallbackImages.length;
+    return this.fallbackImages[index]!;
+  }
+
   /**
    * beehiiv RSS 피드에서 뉴스레터 가져오기
    */
@@ -81,7 +106,7 @@ export class RSSAggregator {
         category: this.extractCategory(item.categories),
         tags: this.extractTags(item.categories || []),
         readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item) || undefined,
+        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('beehiiv', item.guid || item.link || '', index)),
         featured: index === 0 // 첫 번째 글을 featured로 설정
       }));
 
@@ -131,7 +156,7 @@ export class RSSAggregator {
         category: this.extractCategory(item.categories),
         tags: this.extractTags(item.categories || []),
         readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item) || undefined,
+        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('naver', item.guid || item.link || '', index)),
         featured: false
       }));
 
