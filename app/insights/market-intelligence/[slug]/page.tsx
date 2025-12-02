@@ -259,9 +259,9 @@ export default async function BlogPostPage({
                             <ArrowLeft className="w-4 h-4 rotate-180 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                           </h3>
                         </Link>
-                        <p className="text-blue-600 dark:text-blue-400 font-medium text-sm mt-1">
-                          FamilyOffice S 대표 컨설턴트
-                        </p>
+                        <div className="text-sm text-blue-200 mb-4">
+                          FamilyOffice S 수석 컨설턴트
+                        </div>
                       </div>
                       <CalComPopup
                         buttonText="전문가 상담 신청"
