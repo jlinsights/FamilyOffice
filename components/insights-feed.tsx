@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { blogCategories } from '@/lib/blog-data';
 import { RSSItem } from '@/lib/rss-aggregator';
-import { ArrowRight, Calendar, Clock, Loader2, Search, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, Clock, Loader2, Search, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -31,6 +31,10 @@ export default function InsightsFeed({
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 9;
 
   const fetchContent = useCallback(async () => {
     try {
@@ -101,6 +105,11 @@ export default function InsightsFeed({
     });
   }, [content, activeTab, selectedCategory, searchQuery]);
 
+  // Reset pagination when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab, selectedCategory, searchQuery]);
+
   // Featured Content (Top 3 items with featured: true, or just top 3 latest if none)
   const featuredContent = useMemo(() => {
     if (searchQuery || activeTab !== 'all' || selectedCategory !== 'all') return [];
@@ -120,6 +129,13 @@ export default function InsightsFeed({
     }
     return filteredContent;
   }, [filteredContent, featuredContent]);
+
+  // Pagination Logic
+  const totalPages = Math.ceil(mainFeedContent.length / ITEMS_PER_PAGE);
+  const paginatedContent = mainFeedContent.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE, 
+    currentPage * ITEMS_PER_PAGE
+  );
 
   const formatDate = (dateString: string) => {
     try {
@@ -252,9 +268,9 @@ export default function InsightsFeed({
         )}
 
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mainFeedContent.length > 0 ? (
-            mainFeedContent.map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="insights-grid">
+          {paginatedContent.length > 0 ? (
+            paginatedContent.map((item) => (
               <Card 
                 key={item.id} 
                 className="group flex flex-col h-full border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-800 overflow-hidden"
@@ -338,15 +354,48 @@ export default function InsightsFeed({
           )}
         </div>
 
-        {/* View All Button (if limited) */}
-        {showViewAll && mainFeedContent.length > 0 && (
-          <div className="text-center mt-16">
-            <Link href="/insights/market-intelligence">
-              <Button size="lg" variant="outline" className="px-8 h-12 text-base">
-                모든 인사이트 보기
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-4 mt-16">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setCurrentPage(p => Math.max(1, p - 1));
+                document.getElementById('insights-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              disabled={currentPage === 1}
+              className="w-10 h-10 p-0 rounded-full"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+            
+            <div className="flex items-center gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <Button
+                  key={page}
+                  variant={currentPage === page ? "default" : "ghost"}
+                  onClick={() => {
+                    setCurrentPage(page);
+                    document.getElementById('insights-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }}
+                  className={`w-10 h-10 p-0 rounded-full ${currentPage === page ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
+                >
+                  {page}
+                </Button>
+              ))}
+            </div>
+
+            <Button
+              variant="outline"
+              onClick={() => {
+                setCurrentPage(p => Math.min(totalPages, p + 1));
+                document.getElementById('insights-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              disabled={currentPage === totalPages}
+              className="w-10 h-10 p-0 rounded-full"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </Button>
           </div>
         )}
       </div>
