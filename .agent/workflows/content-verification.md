@@ -18,6 +18,9 @@ Before publishing a new Expert Column, perform the following checks:
     - Confirm if the content aligns with the latest government guidelines.
 3.  **Data Accuracy**:
     - Verify all statistics, rates (e.g., tax rates, interest rates), and figures against official sources.
+4.  **Source Citation**:
+    - If the content references specific laws, reports, or external data, add them to the `sources` field.
+    - Format: `{ title: "Source Title", url: "https://..." }`.
 
 ## 2. Content Revision (Post-Publication)
 

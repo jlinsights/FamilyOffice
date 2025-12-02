@@ -191,6 +191,34 @@ export default async function BlogPostPage({
                 </div>
               </div>
 
+              {/* References Section */}
+              {post.sources && post.sources.length > 0 && (
+                <div className="mt-8 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                    <span className="text-slate-400">📚</span> 참고 문헌 및 출처
+                  </h4>
+                  <ul className="space-y-2">
+                    {post.sources.map((source, index) => (
+                      <li key={index} className="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
+                        <span className="text-slate-400 mt-0.5">•</span>
+                        {source.url ? (
+                          <a 
+                            href={source.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:text-blue-600 dark:hover:text-blue-400 hover:underline transition-colors"
+                          >
+                            {source.title}
+                          </a>
+                        ) : (
+                          <span>{source.title}</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Newsletter Subscription - Inline */}
               <div className="mt-12">
                 <NewsletterSubscription 

@@ -23,6 +23,10 @@ export interface BlogPost {
   lastUpdated?: string; // 최종 수정일 (ISO Date string)
   revisionNote?: string; // 수정 사유 (예: 2025년 세법 개정 반영)
   verificationStatus?: 'verified' | 'needs_revision' | 'outdated'; // 팩트 체크 상태
+  sources?: { // 출처
+    title: string;
+    url?: string;
+  }[];
 }
 
 export interface BlogCategory {
