@@ -260,7 +260,7 @@ export default async function BlogPostPage({
                           </h3>
                         </Link>
                         <div className="text-sm text-blue-200 mb-4">
-                          FamilyOffice S 수석 컨설턴트
+                          수석 컨설턴트
                         </div>
                       </div>
                       <CalComPopup
