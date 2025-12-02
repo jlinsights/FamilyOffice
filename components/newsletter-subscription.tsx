@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { CheckCircle, Loader2, Mail } from 'lucide-react';
+import { useState } from 'react';
 import { toast } from 'sonner';
-import { Loader2, Mail, CheckCircle } from 'lucide-react';
 
 /**
  * Props for the NewsletterSubscription component
@@ -126,33 +126,38 @@ export function NewsletterSubscription({
 
   if (variant === 'inline') {
     return (
-      <div className={`bg-muted/50 rounded-lg p-4 ${className}`}>
-        <div className="flex items-start gap-3">
-          <Mail className="h-5 w-5 text-primary mt-0.5" />
-          <div className="flex-1">
-            <h4 className="font-semibold text-sm mb-1">Weekly Brief 구독하기</h4>
-            <p className="text-xs text-muted-foreground mb-2">
-              매주 화·금요일 오전 7:30 발송
-            </p>
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <Input
-                type="email"
-                placeholder="이메일 주소"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={isLoading}
-                className="h-8 text-sm"
-                required
-              />
-              <Button type="submit" disabled={isLoading} size="sm" className="h-8" aria-disabled={isLoading}>
-                {isLoading ? (
-                  <Loader2 className="h-3 w-3 animate-spin" data-testid="loading-spinner" />
-                ) : (
-                  '이메일로 받아보기'
-                )}
-              </Button>
-            </form>
+      <div className={`bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 ${className}`}>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <div className="bg-primary/10 p-2 rounded-lg shrink-0">
+              <Mail className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100 mb-1">Weekly Brief 구독하기</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                매주 화·금요일 오전 7:30, 자산관리 인사이트를 보내드립니다.
+              </p>
+            </div>
           </div>
+          
+          <form onSubmit={handleSubmit} className="flex gap-2 w-full sm:w-auto sm:max-w-md shrink-0">
+            <Input
+              type="email"
+              placeholder="이메일 주소"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={isLoading}
+              className="h-10 text-sm bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 min-w-[200px]"
+              required
+            />
+            <Button type="submit" disabled={isLoading} size="sm" className="h-10 px-4 whitespace-nowrap" aria-disabled={isLoading}>
+              {isLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" data-testid="loading-spinner" />
+              ) : (
+                '구독하기'
+              )}
+            </Button>
+          </form>
         </div>
       </div>
     );

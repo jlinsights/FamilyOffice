@@ -108,7 +108,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'family-office-basics-guide': {
     id: 'family-office-basics-guide',
     title: '패밀리오피스란 무엇인가',
-    image: '/images/blog/family-office.png',
+    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop',
     excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
@@ -398,7 +398,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'asset-management-strategy': {
     id: 'asset-management-strategy',
     title: '체계적인 자산관리 전략',
-    image: '/images/blog/investment.png',
+    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1000&auto=format&fit=crop',
     excerpt: '분산된 자산을 체계적으로 관리하기 위한 전략과 방법을 소개합니다.',
     content: `# 체계적인 자산관리 전략
 
@@ -430,7 +430,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'tax-optimization-basics': {
     id: 'tax-optimization-basics',
     title: '중견기업을 위한 절세 전략',
-    image: '/images/blog/tax-legal.png',
+    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
     excerpt: '합법적이고 효과적인 절세 방법과 상속세 대비 전략을 알아봅니다.',
     content: `# 중견기업을 위한 절세 전략
 
@@ -463,7 +463,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'succession-planning-guide': {
     id: 'succession-planning-guide',
     title: '성공적인 기업 승계를 위한 준비',
-    image: '/images/blog/succession.png',
+    image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=1000&auto=format&fit=crop',
     excerpt: '기업 승계 과정에서 고려해야 할 법적, 세무적, 경영적 요소들을 정리했습니다.',
     content: `# 성공적인 기업 승계를 위한 준비
 
@@ -501,7 +501,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'digital-transformation-finance': {
     id: 'digital-transformation-finance',
     title: '금융업계의 디지털 혁신',
-    image: '/images/blog/digital.png',
+    image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=1000&auto=format&fit=crop',
     excerpt: '핀테크와 디지털 기술이 자산관리 업계에 가져온 변화와 기회를 살펴봅니다.',
     content: `# 금융업계의 디지털 혁신
 
@@ -540,7 +540,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'business-succession-2024-analysis': {
     id: 'business-succession-2024-analysis',
     title: '2024년 가업승계 성공 요인 분석',
-    image: '/images/blog/succession.png',
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1000&auto=format&fit=crop',
     excerpt: '성공적인 가업승계를 위한 핵심 요소들과 2024년 트렌드를 분석합니다.',
     content: `# 2024년 가업승계 성공 요인 분석
 
@@ -578,7 +578,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'mid-sized-company-succession-issues': {
     id: 'mid-sized-company-succession-issues',
     title: '중견기업 승계 시 주요 이슈와 해결방안',
-    image: '/images/blog/succession.png',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
     excerpt: '중견기업이 직면하는 승계 과정의 핵심 문제점과 실무적 해결책을 제시합니다.',
     content: `# 중견기업 승계 시 주요 이슈와 해결방안
 
@@ -621,7 +621,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'inheritance-tax-reform-analysis': {
     id: 'inheritance-tax-reform-analysis',
     title: '상속세법 개정안 영향 분석',
-    image: '/images/blog/tax-legal.png',
+    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop',
     excerpt: '최근 상속세법 개정안이 중견기업 가업승계에 미치는 영향을 상세히 분석합니다.',
     content: `# 상속세법 개정안 영향 분석
 
@@ -671,7 +671,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'family-business-governance-optimization': {
     id: 'family-business-governance-optimization',
     title: '가족기업 지배구조 최적화 방안',
-    image: '/images/blog/family-office.png',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop',
     excerpt: '가족기업의 효율적인 지배구조 구축을 위한 실무적 가이드라인을 제공합니다.',
     content: `# 가족기업 지배구조 최적화 방안
 
@@ -722,7 +722,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'singapore-family-office-trends': {
     id: 'singapore-family-office-trends',
     title: '싱가포르 패밀리오피스 최신 동향',
-    image: '/images/blog/investment.png',
+    image: 'https://images.unsplash.com/photo-1565967511849-76a60a516170?q=80&w=1000&auto=format&fit=crop',
     excerpt: '아시아 패밀리오피스 허브로 부상한 싱가포르의 최신 동향과 시사점을 분석합니다.',
     content: `# 싱가포르 패밀리오피스 최신 동향
 
@@ -777,7 +777,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'us-trust-strategies': {
     id: 'us-trust-strategies',
     title: '미국 신탁 제도 활용 전략',
-    image: '/images/blog/tax-legal.png',
+    image: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1000&auto=format&fit=crop',
     excerpt: '미국의 다양한 신탁 제도를 활용한 자산 보전 및 승계 전략을 소개합니다.',
     content: `# 미국 신탁 제도 활용 전략
 

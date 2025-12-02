@@ -1,37 +1,33 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
 import {
-  CalendarDays,
-  Clock,
-  User,
-  FileText,
-  ArrowRight,
-  BookOpen,
-  Eye,
-  Heart,
-  Share2,
-  Tag,
-  TrendingUp,
+    BookOpen,
+    Eye,
+    FileText,
+    Heart,
+    Share2,
+    Tag,
+    TrendingUp
 } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { blogPosts } from '@/lib/blog-data';
-import type { BlogPost } from '@/types/blog';
 import { cn } from '@/lib/utils';
+import type { BlogPost } from '@/types/blog';
 
 // Import our new components
-import { BlogSearch } from './blog-search';
-import { BlogViewToggle, ViewMode } from './blog-view-toggle';
 import { BlogFilters, SortOption } from './blog-filters';
 import { BlogPagination, InfiniteScrollTrigger } from './blog-pagination';
+import { BlogSearch } from './blog-search';
+import { BlogViewToggle, ViewMode } from './blog-view-toggle';
 
 interface BlogContentAdvancedProps {
   className?: string;
@@ -317,14 +313,26 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
 
   if (viewMode === 'list') {
     return (
-      <Card className="overflow-hidden hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 hover:-translate-y-1 transition-all duration-300 group bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30 border-border/60 dark:border-gray-700">
+      <Card className="overflow-hidden hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 hover:-translate-y-1 transition-all duration-300 group bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
         <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/3 relative h-48 md:h-auto">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-indigo-100/80 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
-              <BookOpen className="h-10 w-10 text-primary group-hover:scale-110 transition-transform duration-300" />
-            </div>
+          <div className="md:w-1/3 relative h-48 md:h-auto overflow-hidden">
+            {post.image ? (
+              <div className="relative w-full h-full">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+              </div>
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-indigo-100/80 dark:from-slate-700 dark:to-slate-600 flex items-center justify-center">
+                <BookOpen className="h-10 w-10 text-primary group-hover:scale-110 transition-transform duration-300" />
+              </div>
+            )}
             {featured && (
-              <Badge className="absolute top-3 left-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0">
+              <Badge className="absolute top-3 left-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0 z-10">
                 ⭐ 추천
               </Badge>
             )}
@@ -332,13 +340,13 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
           
           <div className="md:w-2/3 p-6">
             <div className="flex items-center gap-3 mb-3">
-              <Badge variant="secondary">{post.category}</Badge>
+              <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">{post.category}</Badge>
               <span className="text-sm text-muted-foreground/70">
                 {new Date(post.date).toLocaleDateString('ko-KR')}
               </span>
             </div>
             
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
               <Link href={`/insights/market-intelligence/${post.slug}`}>
                 {post.title}
               </Link>
@@ -392,12 +400,26 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
   }
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 hover:-translate-y-2 transition-all duration-300 group bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30 border-border/60 dark:border-gray-700">
+    <Card className="overflow-hidden hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-white/5 hover:-translate-y-2 transition-all duration-300 group bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
       <CardHeader className="p-0">
-        <div className="relative h-48 bg-gradient-to-br from-blue-50/80 to-indigo-100/80 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
-          <BookOpen className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" />
+        <div className="relative h-48 overflow-hidden">
+          {post.image ? (
+            <div className="relative w-full h-full">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+            </div>
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-indigo-100/80 dark:from-slate-700 dark:to-slate-600 flex items-center justify-center">
+              <BookOpen className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" />
+            </div>
+          )}
           {featured && (
-            <Badge className="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0">
+            <Badge className="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0 z-10">
               ⭐ 추천
             </Badge>
           )}
@@ -406,26 +428,26 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
       
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-3">
-          <Badge variant="secondary">{post.category}</Badge>
+          <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">{post.category}</Badge>
           <span className="text-xs text-muted-foreground/70">
             {new Date(post.date).toLocaleDateString('ko-KR')}
           </span>
         </div>
         
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors line-clamp-2">
           <Link href={`/insights/market-intelligence/${post.slug}`}>
             {post.title}
           </Link>
         </h3>
         
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+        <p className="text-sm text-slate-600 dark:text-slate-300 mb-4 line-clamp-3 leading-relaxed">
           {post.excerpt}
         </p>
         
         {post.tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mb-4">
             {post.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant="outline" className="text-xs">
+              <Badge key={tag} variant="outline" className="text-xs border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400">
                 <Tag className="h-3 w-3 mr-1" />
                 {tag}
               </Badge>
