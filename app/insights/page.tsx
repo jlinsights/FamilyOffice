@@ -6,97 +6,9 @@ import { Header } from '@/components/header';
 import InsightsFeed from '@/components/insights-feed';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, BookOpen, Download, Lightbulb, LineChart, Mail, TrendingUp, Users } from 'lucide-react';
+import { BookOpen, Lightbulb, Mail, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
-interface ColorClasses {
-  icon: string;
-  border: string;
-  bg: string;
-  button: string;
-  gradient: string;
-}
-
-const insightSections = [
-  {
-    title: '시장 분석',
-    description: '자산관리 전문가의 최신 인사이트와 전략 분석을 통해 시장의 흐름을 읽고 선제적으로 대응하세요.',
-    href: '/insights/market-intelligence',
-    icon: LineChart,
-    color: 'blue',
-    features: [
-      '매주 수요일 정기 업데이트',
-      '글로벌 시장 동향 분석',
-      '섹터별 투자 전략 가이드',
-      '거시경제 및 환율 전망',
-    ],
-  },
-  {
-    title: '주간 브리프',
-    description: '한 주간의 핵심 시장 이슈와 투자 인사이트를 엄선하여 이메일로 편리하게 받아보세요.',
-    href: '/insights/weekly-brief',
-    icon: Mail,
-    color: 'purple',
-    features: [
-      '매주 화·금 아침 발송',
-      '독점 투자 정보 및 분석',
-      '전문가 심층 인터뷰',
-      '고객 맞춤형 큐레이션',
-    ],
-  },
-  {
-    title: '자료실',
-    description: '투자 가이드북, 시장 분석 보고서, 세미나 발표 자료 등 깊이 있는 전문 자료를 제공합니다.',
-    href: '/insights/resources',
-    icon: Download,
-    color: 'green',
-    features: [
-      '프리미엄 투자 가이드북',
-      '심층 시장 분석 보고서',
-      '세미나/웨비나 발표 자료',
-      'CEO 필독 경영/세무 자료',
-    ],
-  },
-];
-
-const getColorClasses = (color: string): ColorClasses => {
-  switch (color) {
-    case 'blue':
-      return {
-        icon: 'text-blue-600 dark:text-blue-400',
-        border: 'border-blue-200 dark:border-blue-800',
-        bg: 'bg-blue-50/50 dark:bg-blue-900/10',
-        button: 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700',
-        gradient: 'from-blue-500/20 to-indigo-500/20'
-      };
-    case 'green':
-      return {
-        icon: 'text-green-600 dark:text-green-400',
-        border: 'border-green-200 dark:border-green-800',
-        bg: 'bg-green-50/50 dark:bg-green-900/10',
-        button: 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700',
-        gradient: 'from-green-500/20 to-emerald-500/20'
-      };
-    case 'purple':
-      return {
-        icon: 'text-purple-600 dark:text-purple-400',
-        border: 'border-purple-200 dark:border-purple-800',
-        bg: 'bg-purple-50/50 dark:bg-purple-900/10',
-        button: 'bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700',
-        gradient: 'from-purple-500/20 to-violet-500/20'
-      };
-    default:
-      return {
-        icon: 'text-slate-600 dark:text-slate-400',
-        border: 'border-slate-200 dark:border-slate-800',
-        bg: 'bg-slate-50/50 dark:bg-slate-900/10',
-        button: 'bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800',
-        gradient: 'from-slate-500/20 to-slate-600/20'
-      };
-  }
-};
 
 export default function InsightsPage() {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -137,71 +49,8 @@ export default function InsightsPage() {
           </div>
         </section>
 
-        {/* Main Sections */}
-        <section className="py-10 pb-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {insightSections.map((section, index) => {
-                const Icon = section.icon;
-                const colorClasses = getColorClasses(section.color);
-                
-                return (
-                  <Card 
-                    key={section.title} 
-                    className={`relative overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer border ${colorClasses.border} ${colorClasses.bg} group backdrop-blur-sm animate-slide-up`}
-                    style={{ animationDelay: `${300 + index * 100}ms` }}
-                  >
-                    <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${colorClasses.gradient} rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700`}></div>
-                    
-                    <CardHeader className="relative pb-4">
-                      <div className={`w-14 h-14 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className={`w-7 h-7 ${colorClasses.icon}`} />
-                      </div>
-                      <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
-                        {section.title}
-                      </CardTitle>
-                      <CardDescription className="text-base text-slate-600 dark:text-slate-400 leading-relaxed min-h-[80px]">
-                        {section.description}
-                      </CardDescription>
-                    </CardHeader>
-                    
-                    <CardContent className="relative">
-                      <ul className="space-y-3 mb-8">
-                        {section.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
-                            <div className={`w-1.5 h-1.5 rounded-full mr-3 ${colorClasses.icon.split(' ')[0]!.replace('text-', 'bg-')}`}></div>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                      
-                      <div className="flex gap-3">
-                        <Button
-                          asChild
-                          className={`flex-1 ${colorClasses.button} text-white shadow-md hover:shadow-lg transition-all duration-300`}
-                        >
-                          <Link href={section.href} className="flex items-center justify-center">
-                            더 알아보기 <ArrowRight className="ml-2 w-4 h-4" />
-                          </Link>
-                        </Button>
-                        <Button
-                          asChild
-                          variant="outline"
-                          className="flex-1 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
-                        >
-                          <a href="https://cal.com/familyoffice" target="_blank" rel="noopener noreferrer">상담 신청</a>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Latest Insights - RSS 피드 통합 */}
-        <InsightsFeed limit={9} showHeader={true} showViewAll={true} />
+        {/* Main Content Feed */}
+        <InsightsFeed limit={100} showHeader={false} showViewAll={false} />
 
         {/* Stats Section */}
         <section className="py-24 bg-slate-50 dark:bg-slate-900/50">

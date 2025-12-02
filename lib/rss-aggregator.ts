@@ -1,4 +1,5 @@
 import Parser from 'rss-parser';
+import { blogPosts } from './blog-data';
 import { cacheManagers } from './cache';
 
 export interface RSSItem {
@@ -9,7 +10,7 @@ export interface RSSItem {
   url: string;
   publishedAt: string;
   author: string;
-  source: 'beehiiv' | 'naver-blog';
+  source: 'beehiiv' | 'naver-blog' | 'local';
   category?: string;
   tags: string[];
   readTime?: string;
@@ -145,12 +146,44 @@ export class RSSAggregator {
   }
 
   /**
-   * 통합 콘텐츠 가져오기 (beehiiv + 네이버 블로그)
+   * 로컬 블로그 포스트 가져오기 (lib/blog-data.ts)
+   */
+  async getLocalPosts(limit = 10): Promise<RSSItem[]> {
+    try {
+      const posts = Object.values(blogPosts).map(post => ({
+        id: post.id || post.slug,
+        title: post.title,
+        content: post.content,
+        excerpt: post.excerpt,
+        url: `/insights/market-intelligence/${post.slug}`,
+        publishedAt: new Date(post.date).toISOString(),
+        author: post.author || 'Editor',
+        source: 'local' as const,
+        category: post.category,
+        tags: post.tags || [],
+        readTime: post.readTime,
+        imageUrl: post.image,
+        featured: post.featured ?? false
+      }));
+
+      // 날짜순 정렬
+      return posts
+        .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+        .slice(0, limit);
+    } catch (error) {
+      console.error('로컬 포스트 가져오기 오류:', error);
+      return [];
+    }
+  }
+
+  /**
+   * 통합 콘텐츠 가져오기 (beehiiv + 네이버 블로그 + 로컬 포스트)
    */
   async getIntegratedContent(naverBlogId?: string, limit = 20): Promise<RSSItem[]> {
     try {
       const promises: Promise<RSSItem[]>[] = [
-        this.getBeehiivPosts(limit / 2)
+        this.getBeehiivPosts(limit / 2),
+        this.getLocalPosts(limit)
       ];
 
       if (naverBlogId) {
@@ -173,11 +206,13 @@ export class RSSAggregator {
   /**
    * 특정 소스의 콘텐츠만 가져오기
    */
-  async getContentBySource(source: 'beehiiv' | 'naver-blog', identifier?: string, limit = 10): Promise<RSSItem[]> {
+  async getContentBySource(source: 'beehiiv' | 'naver-blog' | 'local', identifier?: string, limit = 10): Promise<RSSItem[]> {
     if (source === 'beehiiv') {
       return this.getBeehiivPosts(limit);
     } else if (source === 'naver-blog' && identifier) {
       return this.getNaverBlogPosts(identifier, limit);
+    } else if (source === 'local') {
+      return this.getLocalPosts(limit);
     }
     return [];
   }

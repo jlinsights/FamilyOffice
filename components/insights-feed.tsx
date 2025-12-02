@@ -1,43 +1,44 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Calendar, Clock, ExternalLink, Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { blogCategories } from '@/lib/blog-data';
 import { RSSItem } from '@/lib/rss-aggregator';
+import { ArrowRight, Calendar, Clock, Loader2, Search, Sparkles } from 'lucide-react';
+import Link from 'next/link';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 interface InsightsFeedProps {
   limit?: number;
-  source?: 'beehiiv' | 'naver-blog';
-  category?: string;
   showHeader?: boolean;
   showViewAll?: boolean;
 }
 
 export default function InsightsFeed({
-  limit = 9,
-  source,
-  category,
+  limit = 100, // Fetch more items for client-side filtering
   showHeader = true,
-  showViewAll = true
+  showViewAll = false
 }: InsightsFeedProps) {
   const [content, setContent] = useState<RSSItem[]>([]);
-  const [filteredContent, setFilteredContent] = useState<RSSItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeFilter, setActiveFilter] = useState<'all' | 'beehiiv' | 'naver-blog'>('all');
+  
+  // Filter States
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   const fetchContent = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
-      // source 파라미터를 제거하여 모든 콘텐츠(beehiiv + naver-blog)를 가져오도록 수정
       const params = new URLSearchParams();
-      if (category) params.append('category', category);
-      params.append('limit', (limit * 2).toString()); // 필터링을 위해 더 많은 데이터 가져오기
+      params.append('limit', limit.toString());
 
       const response = await fetch(`/api/insights?${params}`);
       if (!response.ok) {
@@ -45,232 +46,301 @@ export default function InsightsFeed({
       }
       
       const data = await response.json();
-      console.log('Fetched content:', data);
-      
-      // API 응답 형식에 맞게 수정: data.data 또는 data.items
       const items = data.data || data.items || [];
       
       if (Array.isArray(items)) {
-        // 중복 ID 제거 (같은 ID를 가진 첫 번째 항목만 유지)
+        // Remove duplicates
         const uniqueItems = Array.from(
-          new Map(items.map(item => [item.id, item])).values()
+          new Map(items.map((item: RSSItem) => [item.id, item])).values()
         );
         setContent(uniqueItems);
       } else {
-        console.warn('No items found in response');
         setContent([]);
       }
     } catch (error: any) {
-      console.error('RSS 피드 로딩 오류:', error);
-      setError(error.message || 'RSS 피드를 불러오는데 실패했습니다.');
+      console.error('Failed to fetch insights:', error);
+      setError(error.message || 'Failed to load content.');
       setContent([]);
     } finally {
       setLoading(false);
     }
-  }, [category, limit]);
+  }, [limit]);
 
   useEffect(() => {
     fetchContent();
-    // 5분마다 자동 갱신
-    const interval = setInterval(() => {
-      fetchContent();
-    }, 5 * 60 * 1000);
+  }, [fetchContent]);
+
+  // Filter Logic
+  const filteredContent = useMemo(() => {
+    return content.filter(item => {
+      // 1. Source Filter
+      if (activeTab !== 'all') {
+        if (activeTab === 'local' && item.source !== 'local') return false;
+        if (activeTab === 'newsletter' && item.source !== 'beehiiv') return false;
+        if (activeTab === 'blog' && item.source !== 'naver-blog') return false;
+      }
+
+      // 2. Category Filter
+      if (selectedCategory !== 'all') {
+        // Simple string match for category or tags
+        const categoryMatch = item.category?.toLowerCase().includes(selectedCategory.toLowerCase());
+        const tagMatch = item.tags?.some(tag => tag.toLowerCase().includes(selectedCategory.toLowerCase()));
+        if (!categoryMatch && !tagMatch) return false;
+      }
+
+      // 3. Search Filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const titleMatch = item.title.toLowerCase().includes(query);
+        const excerptMatch = item.excerpt?.toLowerCase().includes(query);
+        const contentMatch = item.content?.toLowerCase().includes(query);
+        if (!titleMatch && !excerptMatch && !contentMatch) return false;
+      }
+
+      return true;
+    });
+  }, [content, activeTab, selectedCategory, searchQuery]);
+
+  // Featured Content (Top 3 items with featured: true, or just top 3 latest if none)
+  const featuredContent = useMemo(() => {
+    if (searchQuery || activeTab !== 'all' || selectedCategory !== 'all') return [];
     
-    return () => clearInterval(interval);
-  }, [fetchContent]); // fetchContent dependency added
+    const featured = content.filter(item => item.featured);
+    if (featured.length > 0) return featured.slice(0, 3);
+    
+    // Fallback to top 3 latest local posts if no explicit featured posts
+    return content.filter(item => item.source === 'local').slice(0, 3);
+  }, [content, searchQuery, activeTab, selectedCategory]);
 
-  useEffect(() => {
-    // 필터링 적용
-    console.log('Filtering content:', { activeFilter, contentLength: content.length });
-    if (activeFilter === 'all') {
-      setFilteredContent(content);
-    } else {
-      const filtered = content.filter(item => {
-        console.log('Item source:', item.source, 'Filter:', activeFilter);
-        return item.source === activeFilter;
-      });
-      console.log('Filtered result:', filtered.length);
-      setFilteredContent(filtered);
+  // Main Feed Content (Exclude featured if showing featured section)
+  const mainFeedContent = useMemo(() => {
+    if (featuredContent.length > 0) {
+      const featuredIds = new Set(featuredContent.map(item => item.id));
+      return filteredContent.filter(item => !featuredIds.has(item.id));
     }
-  }, [activeFilter, content]);
-
+    return filteredContent;
+  }, [filteredContent, featuredContent]);
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric'
-    });
-  };
-
-  const getSourceBadgeVariant = (source: string) => {
-    switch (source) {
-      case 'beehiiv':
-        return 'default';
-      case 'naver-blog':
-        return 'default'; // 블로그도 뉴스레터와 동일한 디자인
-      default:
-        return 'outline';
+    try {
+      return new Date(dateString).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    } catch (e) {
+      return dateString;
     }
   };
 
-  const getSourceLabel = (source: string) => {
+  const getSourceBadge = (source: string) => {
     switch (source) {
+      case 'local':
+        return <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 border-blue-200">전문가 칼럼</Badge>;
       case 'beehiiv':
-        return '뉴스레터';
+        return <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-300 border-purple-200">뉴스레터</Badge>;
       case 'naver-blog':
-        return '블로그';
+        return <Badge className="bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 border-green-200">네이버 블로그</Badge>;
       default:
-        return '인사이트';
+        return <Badge variant="outline">인사이트</Badge>;
     }
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-        <span className="ml-2 text-foreground/70">콘텐츠를 불러오는 중...</span>
-      </div>
-    );
-  }
-
-  if (error && content.length === 0) {
-    return (
-      <div className="text-center py-20">
-        <p className="text-foreground/70 mb-4">콘텐츠를 불러올 수 없습니다.</p>
-        <Button onClick={fetchContent} variant="outline">다시 시도</Button>
+      <div className="flex flex-col items-center justify-center py-32">
+        <Loader2 className="w-10 h-10 animate-spin text-primary mb-4" />
+        <span className="text-lg text-muted-foreground">최신 인사이트를 불러오는 중입니다...</span>
       </div>
     );
   }
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-12 bg-slate-50/50 dark:bg-slate-900/50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {showHeader && (
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              최신 인사이트
+        
+        {/* Header & Search Controls */}
+        <div className="flex flex-col md:flex-row justify-between items-end md:items-center gap-6 mb-12">
+          <div>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              탐색하기
             </h2>
-            <p className="text-lg text-foreground/70">
-              자산관리 전문가들이 전하는 최신 시장 분석과 투자 전략
+            <p className="text-slate-600 dark:text-slate-400">
+              원하는 주제의 인사이트를 쉽고 빠르게 찾아보세요.
             </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <div className="relative w-full md:w-80">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input 
+                placeholder="검색어 입력 (제목, 내용)" 
+                className="pl-10 bg-white dark:bg-slate-800"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <SelectTrigger className="w-full md:w-48 bg-white dark:bg-slate-800">
+                <SelectValue placeholder="카테고리 선택" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">모든 카테고리</SelectItem>
+                {blogCategories.map(cat => (
+                  <SelectItem key={cat.slug} value={cat.name}>{cat.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="mb-10">
+          <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-4 max-w-2xl bg-white dark:bg-slate-800 p-1 border border-slate-200 dark:border-slate-700 rounded-xl">
+              <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-slate-100 dark:data-[state=active]:bg-slate-700">전체</TabsTrigger>
+              <TabsTrigger value="local" className="rounded-lg data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 dark:data-[state=active]:bg-blue-900/30 dark:data-[state=active]:text-blue-300">전문가 칼럼</TabsTrigger>
+              <TabsTrigger value="newsletter" className="rounded-lg data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 dark:data-[state=active]:bg-purple-900/30 dark:data-[state=active]:text-purple-300">뉴스레터</TabsTrigger>
+              <TabsTrigger value="blog" className="rounded-lg data-[state=active]:bg-green-50 data-[state=active]:text-green-700 dark:data-[state=active]:bg-green-900/30 dark:data-[state=active]:text-green-300">블로그</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+
+        {/* Featured Section (Only visible when no filters active) */}
+        {featuredContent.length > 0 && (
+          <div className="mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="flex items-center gap-2 mb-6">
+              <Sparkles className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Featured Insights</h3>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {featuredContent.map((item, idx) => (
+                <Link key={item.id} href={item.url} className={`group ${idx === 0 ? 'lg:col-span-2 lg:row-span-2' : ''}`}>
+                  <Card className="h-full overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white dark:bg-slate-800 relative">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+                    {item.imageUrl && (
+                      <img 
+                        src={item.imageUrl} 
+                        alt={item.title} 
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    )}
+                    <CardContent className="relative z-20 h-full flex flex-col justify-end p-6 md:p-8">
+                      <div className="mb-3 flex gap-2">
+                        {getSourceBadge(item.source)}
+                        {item.category && <Badge variant="secondary" className="bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border-0">{item.category}</Badge>}
+                      </div>
+                      <h3 className={`font-bold text-white mb-3 leading-tight group-hover:text-blue-200 transition-colors ${idx === 0 ? 'text-3xl md:text-4xl' : 'text-xl'}`}>
+                        {item.title}
+                      </h3>
+                      <p className="text-slate-200 line-clamp-2 mb-4 text-sm md:text-base font-light">
+                        {item.excerpt}
+                      </p>
+                      <div className="flex items-center text-slate-300 text-xs md:text-sm gap-4">
+                        <span className="flex items-center"><Calendar className="w-4 h-4 mr-1" /> {formatDate(item.publishedAt)}</span>
+                        <span className="flex items-center"><Clock className="w-4 h-4 mr-1" /> {item.readTime || '5분 읽기'}</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* 필터 버튼 */}
-        <div className="flex justify-center gap-2 mb-8">
-          <Button
-            variant={activeFilter === 'all' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setActiveFilter('all')}
-            className="px-6"
-          >
-            전체 ({content.length})
-          </Button>
-          <Button
-            variant={activeFilter === 'naver-blog' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setActiveFilter('naver-blog')}
-            className="px-6"
-          >
-            블로그 ({content.filter(item => item.source === 'naver-blog').length})
-          </Button>
-          <Button
-            variant={activeFilter === 'beehiiv' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setActiveFilter('beehiiv')}
-            className="px-6"
-          >
-            뉴스레터 ({content.filter(item => item.source === 'beehiiv').length})
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredContent.slice(0, 9).map((item, index) => (
-            <Card 
-              key={item.id} 
-              className="bg-card border-border hover:shadow-lg transition-all duration-300 cursor-pointer group"
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <Badge variant={getSourceBadgeVariant(item.source)}>
-                    {getSourceLabel(item.source)}
-                  </Badge>
-                  <div className="flex items-center text-foreground/60 text-sm">
-                    <Clock className="w-3 h-3 mr-1" />
-                    {item.readTime}
-                  </div>
-                </div>
-                
-                {item.category && (
-                  <div className="text-sm font-medium text-primary mb-2">
-                    {item.category}
-                  </div>
-                )}
-                
-                <CardTitle className="text-xl line-clamp-2 group-hover:text-primary transition-colors">
-                  {item.title}
-                </CardTitle>
-                
-                <CardDescription className="text-base line-clamp-3 mt-2">
-                  {item.excerpt}
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center text-foreground/60 text-sm">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    {formatDate(item.publishedAt)}
-                  </div>
-                  <div className="text-sm text-foreground/60">
-                    {item.author}
-                  </div>
-                </div>
-                
-                <div className="flex gap-2">
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 group-hover:border-primary group-hover:text-primary"
-                  >
-                    <Link href="/insights/market-intelligence">
-                      읽어보기
-                      <ArrowRight className="ml-2 h-3 w-3" />
-                    </Link>
-                  </Button>
-                  
-                  {item.url && (
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="sm"
-                      className="group-hover:border-primary group-hover:text-primary"
-                    >
-                      <a 
-                        href={item.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        title="원본 보기"
-                      >
-                        <ExternalLink className="h-3 w-3" />
-                        <span className="ml-1">원본</span>
-                      </a>
-                    </Button>
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {mainFeedContent.length > 0 ? (
+            mainFeedContent.map((item) => (
+              <Card 
+                key={item.id} 
+                className="group flex flex-col h-full border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-800 overflow-hidden"
+              >
+                <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-900">
+                  {item.imageUrl ? (
+                    <img 
+                      src={item.imageUrl} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-slate-300 dark:text-slate-600">
+                      <span className="text-4xl">📄</span>
+                    </div>
                   )}
+                  <div className="absolute top-4 left-4">
+                    {getSourceBadge(item.source)}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between mb-2 text-xs text-muted-foreground">
+                    <span className="flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                      {item.category || '일반'}
+                    </span>
+                    <span className="flex items-center">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      {formatDate(item.publishedAt)}
+                    </span>
+                  </div>
+                  <CardTitle className="text-lg font-bold line-clamp-2 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
+                    <Link href={item.url} target={item.source === 'local' ? '_self' : '_blank'}>
+                      {item.title}
+                    </Link>
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="flex-grow pb-3">
+                  <CardDescription className="line-clamp-3 text-sm leading-relaxed">
+                    {item.excerpt}
+                  </CardDescription>
+                </CardContent>
+
+                <CardFooter className="pt-0 pb-5 border-t border-slate-50 dark:border-slate-800/50 mt-auto">
+                  <div className="flex items-center justify-between w-full mt-4">
+                    <div className="flex items-center text-xs text-muted-foreground">
+                      <Clock className="w-3 h-3 mr-1" />
+                      {item.readTime || '5분 읽기'}
+                    </div>
+                    <Button asChild variant="ghost" size="sm" className="hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 p-0 h-auto font-medium">
+                      <Link href={item.url} target={item.source === 'local' ? '_self' : '_blank'} className="flex items-center">
+                        Read More <ArrowRight className="ml-1 w-3 h-3" />
+                      </Link>
+                    </Button>
+                  </div>
+                </CardFooter>
+              </Card>
+            ))
+          ) : (
+            <div className="col-span-full py-20 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 mb-4">
+                <Search className="w-8 h-8 text-slate-400" />
+              </div>
+              <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">검색 결과가 없습니다</h3>
+              <p className="text-slate-500 dark:text-slate-400">
+                다른 검색어나 카테고리를 선택해보세요.
+              </p>
+              <Button 
+                variant="outline" 
+                className="mt-6"
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveTab('all');
+                  setSelectedCategory('all');
+                }}
+              >
+                필터 초기화
+              </Button>
+            </div>
+          )}
         </div>
 
-        {showViewAll && (
-          <div className="text-center mt-12">
+        {/* View All Button (if limited) */}
+        {showViewAll && mainFeedContent.length > 0 && (
+          <div className="text-center mt-16">
             <Link href="/insights/market-intelligence">
-              <Button size="lg" variant="outline">
-                모든 글 보기
+              <Button size="lg" variant="outline" className="px-8 h-12 text-base">
+                모든 인사이트 보기
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -280,124 +350,3 @@ export default function InsightsFeed({
     </section>
   );
 }
-
-// Fallback 데이터 (RSS 피드가 실패했을 때 사용)
-const fallbackContent: RSSItem[] = [
-  {
-    id: 'fallback-1',
-    title: '2025년 글로벌 투자 전망과 포트폴리오 전략',
-    content: '',
-    excerpt: '불확실한 시장 환경에서 안정적인 수익을 추구하는 자산 배분 전략을 소개합니다.',
-    url: 'https://blog.naver.com/lim_jaehong',
-    publishedAt: '2025-01-15T00:00:00Z',
-    author: 'Editor',
-    source: 'naver-blog',
-    category: '투자전략',
-    tags: ['투자', '전략', '포트폴리오'],
-    readTime: '5분 읽기'
-  },
-  {
-    id: 'fallback-2',
-    title: '가족법인 설립을 통한 절세 전략 완벽 가이드',
-    content: '',
-    excerpt: '합법적인 세무 구조 개선을 통해 상속·증여세를 절감하는 방법을 알아봅니다.',
-    url: 'https://newsletter.familyoffices.vip',
-    publishedAt: '2025-01-12T00:00:00Z',
-    author: 'Editor',
-    source: 'beehiiv',
-    category: '세무최적화',
-    tags: ['세무', '절세', '가족법인'],
-    readTime: '8분 읽기'
-  },
-  {
-    id: 'fallback-3',
-    title: '성공적인 가업승계를 위한 5가지 핵심 전략',
-    content: '',
-    excerpt: '100년 기업으로 나아가기 위한 체계적인 승계 계획 수립 방법을 제시합니다.',
-    url: 'https://newsletter.familyoffices.vip',
-    publishedAt: '2025-01-10T00:00:00Z',
-    author: 'Editor',
-    source: 'beehiiv',
-    category: '패밀리오피스',
-    tags: ['가업승계', '전략', '기업경영'],
-    readTime: '6분 읽기'
-  },
-  {
-    id: 'fallback-4',
-    title: 'CEO 경영권 방어를 위한 법적 조치 가이드',
-    content: '',
-    excerpt: '적대적 M&A와 경영권 위협으로부터 기업을 보호하는 실전 전략을 소개합니다.',
-    url: 'https://newsletter.familyoffices.vip',
-    publishedAt: '2025-01-08T00:00:00Z',
-    author: 'Editor',
-    source: 'beehiiv',
-    category: '경영전략',
-    tags: ['M&A', '경영권', '법무'],
-    readTime: '10분 읽기'
-  },
-  {
-    id: 'fallback-5',
-    title: '부동산 PF 투자의 리스크 관리 방안',
-    content: '',
-    excerpt: '프로젝트 파이낸싱 투자 시 고려해야 할 핵심 리스크 요소와 대응 전략을 다룹니다.',
-    url: 'https://blog.naver.com/lim_jaehong',
-    publishedAt: '2025-01-06T00:00:00Z',
-    author: 'Editor',
-    source: 'naver-blog',
-    category: '부동산',
-    tags: ['부동산', 'PF', '투자'],
-    readTime: '6분 읽기'
-  },
-  {
-    id: 'fallback-6',
-    title: 'ESG 경영이 기업가치에 미치는 영향',
-    content: '',
-    excerpt: '지속가능경영이 장기적 기업가치 향상에 미치는 영향을 데이터로 분석합니다.',
-    url: 'https://newsletter.familyoffices.vip',
-    publishedAt: '2025-01-04T00:00:00Z',
-    author: 'Editor',
-    source: 'beehiiv',
-    category: 'ESG',
-    tags: ['ESG', '지속가능경영', '기업가치'],
-    readTime: '8분 읽기'
-  },
-  {
-    id: 'fallback-7',
-    title: '가족신탁을 활용한 자산관리 전략',
-    content: '',
-    excerpt: '고액자산가를 위한 신탁 구조 설계와 세무 최적화 방법을 상세히 안내합니다.',
-    url: 'https://blog.naver.com/lim_jaehong',
-    publishedAt: '2025-01-02T00:00:00Z',
-    author: 'Editor',
-    source: 'naver-blog',
-    category: '자산관리',
-    tags: ['신탁', '자산관리', '절세'],
-    readTime: '9분 읽기'
-  },
-  {
-    id: 'fallback-8',
-    title: '주식시장 변동성 대응 전략: 헤지펀드 투자의 모든 것',
-    content: '',
-    excerpt: '시장 불확실성 속에서 안정적인 수익을 추구하는 헤지펀드 투자 전략을 분석합니다.',
-    url: 'https://blog.naver.com/lim_jaehong',
-    publishedAt: '2024-12-30T00:00:00Z',
-    author: 'Editor',
-    source: 'naver-blog',
-    category: '투자전략',
-    tags: ['헤지펀드', '투자', '리스크관리'],
-    readTime: '7분 읽기'
-  },
-  {
-    id: 'fallback-9',
-    title: '2025년 기업 인수합병(M&A) 시장 전망',
-    content: '',
-    excerpt: '국내외 M&A 시장의 주요 트렌드와 기회 요인을 전문가 시각에서 분석합니다.',
-    url: 'https://newsletter.familyoffices.vip',
-    publishedAt: '2024-12-28T00:00:00Z',
-    author: 'Editor',
-    source: 'beehiiv',
-    category: 'M&A',
-    tags: ['M&A', '시장전망', '투자기회'],
-    readTime: '12분 읽기'
-  }
-];
