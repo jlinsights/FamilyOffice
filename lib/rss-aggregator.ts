@@ -16,6 +16,7 @@ export interface RSSItem {
   readTime?: string;
   featured?: boolean;
   imageUrl?: string | undefined;
+  lastUpdated?: string | undefined;
 }
 
 export interface ParsedFeedItem {
@@ -188,7 +189,8 @@ export class RSSAggregator {
         tags: post.tags || [],
         readTime: post.readTime,
         imageUrl: post.image,
-        featured: post.featured ?? false
+        featured: post.featured ?? false,
+        lastUpdated: post.lastUpdated
       }));
 
       // 날짜순 정렬

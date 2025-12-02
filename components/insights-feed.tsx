@@ -299,7 +299,13 @@ export default function InsightsFeed({
                     </span>
                     <span className="flex items-center">
                       <Calendar className="w-3 h-3 mr-1" />
-                      {formatDate(item.publishedAt)}
+                      {item.lastUpdated ? (
+                        <span className="text-blue-600 dark:text-blue-400 font-semibold" title={`최초 발행: ${formatDate(item.publishedAt)}`}>
+                          {formatDate(item.lastUpdated)} (Updated)
+                        </span>
+                      ) : (
+                        formatDate(item.publishedAt)
+                      )}
                     </span>
                   </div>
                   <CardTitle className="text-lg font-bold line-clamp-2 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
