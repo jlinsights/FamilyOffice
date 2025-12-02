@@ -293,6 +293,52 @@ export default async function BlogPostPage({
           </div>
         </section>
 
+        {/* FAQ Section (AEO Optimized) */}
+        {post.faq && post.faq.length > 0 && (
+          <section className="pb-20">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 md:p-12 shadow-lg">
+                  <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white flex items-center gap-2">
+                    <span className="text-blue-600">❓</span> 자주 묻는 질문 (FAQ)
+                  </h3>
+                  <div className="space-y-6">
+                    {post.faq.map((item, index) => (
+                      <div key={index} className="border-b border-slate-100 dark:border-slate-800 last:border-0 pb-6 last:pb-0">
+                        <h4 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-2">
+                          Q. {item.question}
+                        </h4>
+                        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                          A. {item.answer}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* FAQ Schema */}
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                      '@context': 'https://schema.org',
+                      '@type': 'FAQPage',
+                      mainEntity: post.faq.map(item => ({
+                        '@type': 'Question',
+                        name: item.question,
+                        acceptedAnswer: {
+                          '@type': 'Answer',
+                          text: item.answer,
+                        },
+                      })),
+                    }),
+                  }}
+                />
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* CTA Section */}
         <section className="py-24 bg-slate-900 relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />

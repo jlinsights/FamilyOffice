@@ -16,6 +16,10 @@ export interface BlogPost {
   likes?: number;
   shares?: number;
   coverImage?: string;
+  faq?: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export interface BlogCategory {
