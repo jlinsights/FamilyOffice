@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Parser from 'rss-parser';
 import { blogPosts } from './blog-data';
 import { cacheManagers } from './cache';
@@ -44,6 +45,30 @@ export class RSSAggregator {
         item: ['content:encoded', 'description', 'dc:creator']
       }
     });
+  }
+
+  /**
+   * RSS 피드 데이터 가져오기 (헤더 처리 포함)
+   */
+  private async fetchFeed(url: string, isBrunch: boolean = false): Promise<any> {
+    try {
+      const userAgent = isBrunch 
+        ? 'curl/7.68.0' 
+        : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
+      const response = await axios.get(url, {
+        headers: {
+          'User-Agent': userAgent,
+          'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
+        },
+        timeout: 5000
+      });
+
+      return await this.parser.parseString(response.data);
+    } catch (error) {
+      console.error(`Feed fetch error for ${url}:`, error);
+      throw error;
+    }
   }
 
   // Fallback images for business/finance context
@@ -188,14 +213,14 @@ export class RSSAggregator {
       const feedUrl = `https://${blogName}.tistory.com/rss`;
       let feed;
       try {
-        feed = await this.parser.parseURL(feedUrl);
+        feed = await this.fetchFeed(feedUrl);
       } catch (parseError) {
         console.error('티스토리 RSS 파싱 오류:', parseError);
         // 파싱 실패 시 빈 배열 반환
         return [];
       }
       
-      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
+      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index: number) => ({
         id: this.generateId('tistory', item.guid || item.link || '', index),
         title: item.title || '제목 없음',
         content: this.extractContent(item),
@@ -235,17 +260,19 @@ export class RSSAggregator {
       }
 
       // 브런치 RSS URL (@@ID 형태)
-      const feedUrl = `https://brunch.co.kr/rss/@@${brunchId}`;
+      // familyoffice 요청 시 실제 ID인 2fh2로 매핑
+      const realId = brunchId === 'familyoffice' ? '2fh2' : brunchId;
+      const feedUrl = `https://brunch.co.kr/rss/@@${realId}`;
       let feed;
       try {
-        feed = await this.parser.parseURL(feedUrl);
+        feed = await this.fetchFeed(feedUrl, true);
       } catch (parseError) {
         console.error('브런치 RSS 파싱 오류:', parseError);
         // 파싱 실패 시 빈 배열 반환
         return [];
       }
       
-      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
+      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index: number) => ({
         id: this.generateId('brunch', item.guid || item.link || '', index),
         title: item.title || '제목 없음',
         content: this.extractContent(item),
@@ -288,14 +315,14 @@ export class RSSAggregator {
       const feedUrl = `https://${substackId}.substack.com/feed`;
       let feed;
       try {
-        feed = await this.parser.parseURL(feedUrl);
+        feed = await this.fetchFeed(feedUrl);
       } catch (parseError) {
         console.error('Substack RSS 파싱 오류:', parseError);
         // 파싱 실패 시 빈 배열 반환
         return [];
       }
       
-      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
+      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index: number) => ({
         id: this.generateId('substack', item.guid || item.link || '', index),
         title: item.title || '제목 없음',
         content: this.extractContent(item),
@@ -524,7 +551,7 @@ export class RSSAggregator {
 
     try {
       // beehiiv 상태 확인
-      await this.parser.parseURL('https://rss.beehiiv.com/feeds/Ur0inYkjHr.xml');
+      await this.fetchFeed('https://rss.beehiiv.com/feeds/Ur0inYkjHr.xml');
       status.beehiiv = true;
     } catch (error) {
       console.error('beehiiv RSS 피드 상태 오류:', error);
@@ -532,7 +559,7 @@ export class RSSAggregator {
 
     try {
       // 티스토리 상태 확인
-      await this.parser.parseURL('https://family-office.tistory.com/rss');
+      await this.fetchFeed('https://family-office.tistory.com/rss');
       status.tistory = true;
     } catch (error) {
       console.error('티스토리 RSS 피드 상태 오류:', error);
@@ -540,7 +567,7 @@ export class RSSAggregator {
 
     try {
       // 브런치 상태 확인
-      await this.parser.parseURL('https://brunch.co.kr/rss/@@familyoffice');
+      await this.fetchFeed('https://brunch.co.kr/rss/@@2fh2', true);
       status.brunch = true;
     } catch (error) {
       console.error('브런치 RSS 피드 상태 오류:', error);
@@ -548,7 +575,7 @@ export class RSSAggregator {
 
     try {
       // Substack 상태 확인
-      await this.parser.parseURL('https://jaehong.substack.com/feed');
+      await this.fetchFeed('https://jaehong.substack.com/feed');
       status.substack = true;
     } catch (error) {
       console.error('Substack RSS 피드 상태 오류:', error);
