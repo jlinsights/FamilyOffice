@@ -225,14 +225,14 @@ export default function InsightsFeed({
         {/* Tabs */}
         <div className="mb-10">
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-7 max-w-5xl bg-white dark:bg-slate-800 p-1 border border-slate-200 dark:border-slate-700 rounded-xl">
-              <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-slate-100 dark:data-[state=active]:bg-slate-700">전체</TabsTrigger>
-              <TabsTrigger value="local" className="rounded-lg data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 dark:data-[state=active]:bg-blue-900/30 dark:data-[state=active]:text-blue-300">전문가 칼럼</TabsTrigger>
-              <TabsTrigger value="newsletter" className="rounded-lg data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 dark:data-[state=active]:bg-purple-900/30 dark:data-[state=active]:text-purple-300">뉴스레터</TabsTrigger>
-              <TabsTrigger value="blog" className="rounded-lg data-[state=active]:bg-green-50 data-[state=active]:text-green-700 dark:data-[state=active]:bg-green-900/30 dark:data-[state=active]:text-green-300">블로그</TabsTrigger>
-              <TabsTrigger value="tistory" className="rounded-lg data-[state=active]:bg-orange-50 data-[state=active]:text-orange-700 dark:data-[state=active]:bg-orange-900/30 dark:data-[state=active]:text-orange-300">티스토리</TabsTrigger>
-              <TabsTrigger value="brunch" className="rounded-lg data-[state=active]:bg-teal-50 data-[state=active]:text-teal-700 dark:data-[state=active]:bg-teal-900/30 dark:data-[state=active]:text-teal-300">브런치</TabsTrigger>
-              <TabsTrigger value="substack" className="rounded-lg data-[state=active]:bg-orange-50 data-[state=active]:text-orange-700 dark:data-[state=active]:bg-orange-900/30 dark:data-[state=active]:text-orange-300">Substack</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-7 h-auto gap-2 max-w-5xl bg-white dark:bg-slate-800 p-2 border border-slate-200 dark:border-slate-700 rounded-xl">
+              <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-slate-100 dark:data-[state=active]:bg-slate-700 py-2">전체</TabsTrigger>
+              <TabsTrigger value="local" className="rounded-lg data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 dark:data-[state=active]:bg-blue-900/30 dark:data-[state=active]:text-blue-300 py-2">전문가 칼럼</TabsTrigger>
+              <TabsTrigger value="newsletter" className="rounded-lg data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 dark:data-[state=active]:bg-purple-900/30 dark:data-[state=active]:text-purple-300 py-2">뉴스레터</TabsTrigger>
+              <TabsTrigger value="blog" className="rounded-lg data-[state=active]:bg-green-50 data-[state=active]:text-green-700 dark:data-[state=active]:bg-green-900/30 dark:data-[state=active]:text-green-300 py-2">블로그</TabsTrigger>
+              <TabsTrigger value="tistory" className="rounded-lg data-[state=active]:bg-orange-50 data-[state=active]:text-orange-700 dark:data-[state=active]:bg-orange-900/30 dark:data-[state=active]:text-orange-300 py-2">티스토리</TabsTrigger>
+              <TabsTrigger value="brunch" className="rounded-lg data-[state=active]:bg-teal-50 data-[state=active]:text-teal-700 dark:data-[state=active]:bg-teal-900/30 dark:data-[state=active]:text-teal-300 py-2">브런치</TabsTrigger>
+              <TabsTrigger value="substack" className="rounded-lg data-[state=active]:bg-orange-50 data-[state=active]:text-orange-700 dark:data-[state=active]:bg-orange-900/30 dark:data-[state=active]:text-orange-300 py-2">Substack</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
