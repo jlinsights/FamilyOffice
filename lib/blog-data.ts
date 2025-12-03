@@ -2766,7 +2766,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
 </div>`,
     category: '법인자산',
-    author: '임재홍 수석 컨설턴트',
+    author: '임재홍',
     date: '2025-12-02',
     readTime: '15분',
     tags: ['이익잉여금', '배당전략', '차등배당', '자사주매입', 'CEO자산최적화', '상속세절세', '가업승계'],
