@@ -287,7 +287,7 @@ export default function InsightsFeed({
                 key={item.id} 
                 className="group flex flex-col h-full border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-800 overflow-hidden"
               >
-                <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-900">
+                <div className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-900">
                   {item.imageUrl ? (
                     <img 
                       src={item.imageUrl} 
@@ -295,8 +295,8 @@ export default function InsightsFeed({
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate-300 dark:text-slate-600">
-                      <span className="text-4xl">📄</span>
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
+                      <span className="text-4xl opacity-20">📄</span>
                     </div>
                   )}
                   <div className="absolute top-4 left-4">

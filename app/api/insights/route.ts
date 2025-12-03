@@ -8,17 +8,24 @@ export async function GET(request: NextRequest) {
     // 쿼리 파라미터 추출
     const source = searchParams.get('source') as 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | 'substack' | null;
     const limit = parseInt(searchParams.get('limit') || '20');
-    const blogId = searchParams.get('blog_id') || process.env.NAVER_BLOG_ID || 'lim_jaehong'; // 환경변수에서 기본값 가져오기
+    const blogId = searchParams.get('blog_id');
     const category = searchParams.get('category');
     
     let content;
     
     if (source) {
       // 특정 소스의 콘텐츠만 가져오기
-      content = await rssAggregator.getContentBySource(source, blogId || undefined, limit);
+      // 네이버 블로그인 경우에만 기본 ID 적용 (다른 소스는 각자의 기본값 사용)
+      const targetId = (source === 'naver-blog' && !blogId) 
+        ? (process.env.NAVER_BLOG_ID || 'lim_jaehong') 
+        : (blogId || undefined);
+        
+      content = await rssAggregator.getContentBySource(source, targetId, limit);
     } else {
       // 통합 콘텐츠 가져오기 (beehiiv + 네이버 블로그)
-      content = await rssAggregator.getIntegratedContent(blogId, limit);
+      // 통합 모드에서는 네이버 블로그 ID 기본값 적용
+      const targetId = blogId || process.env.NAVER_BLOG_ID || 'lim_jaehong';
+      content = await rssAggregator.getIntegratedContent(targetId, limit);
     }
     
     // 카테고리 필터링

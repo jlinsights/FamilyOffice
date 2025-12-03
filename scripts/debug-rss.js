@@ -7,7 +7,7 @@ async function testFeed(name, url) {
   try {
     const response = await axios.get(url, {
       headers: {
-        'User-Agent': name.includes('Brunch') ? 'curl/7.68.0' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'User-Agent': 'curl/7.68.0',
         'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
       },
       timeout: 5000,
@@ -21,6 +21,7 @@ async function testFeed(name, url) {
     }
     
     if (response.status === 200) {
+       console.log('   Request Headers:', response.config.headers);
        const feed = await parser.parseString(response.data);
        console.log(`✅ ${name} Success! Found ${feed.items.length} items.`);
     }
@@ -34,10 +35,34 @@ async function testFeed(name, url) {
   console.log('---');
 }
 
+async function testFetch(name, url) {
+  console.log(`Testing ${name} feed with FETCH: ${url}`);
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'curl/7.68.0',
+        'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
+      }
+    });
+    console.log(`   Status: ${response.status}`);
+    if (response.ok) {
+        const text = await response.text();
+        const feed = await parser.parseString(text);
+        console.log(`✅ ${name} FETCH Success! Found ${feed.items.length} items.`);
+    } else {
+        console.log(`❌ ${name} FETCH Failed: ${response.status} ${response.statusText}`);
+    }
+  } catch (error) {
+    console.error(`❌ ${name} FETCH Error:`, error.message);
+  }
+  console.log('---');
+}
+
 async function run() {
-  await testFeed('Tistory', 'https://family-office.tistory.com/rss');
-  await testFeed('Brunch (@@2fh2)', 'https://brunch.co.kr/rss/@@2fh2');
-  await testFeed('Substack', 'https://jaehong.substack.com/feed');
+  // await testFeed('Tistory', 'https://family-office.tistory.com/rss');
+  await testFetch('Tistory', 'https://family-office.tistory.com/rss');
+  // await testFeed('Brunch (@@2fh2)', 'https://brunch.co.kr/rss/@@2fh2');
+  await testFetch('Brunch (@@2fh2)', 'https://brunch.co.kr/rss/@@2fh2');
 }
 
 run();

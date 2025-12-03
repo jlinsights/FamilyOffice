@@ -35,6 +35,10 @@ export interface ParsedFeedItem {
 }
 
 export class RSSAggregator {
+  private readonly TISTORY_RSS_URL = 'https://family-office.tistory.com/rss';
+  private readonly BRUNCH_RSS_URL = 'https://brunch.co.kr/rss/@@2fh2';
+  private readonly SUBSTACK_RSS_URL = 'https://jaehong.substack.com/feed';
+
   private parser: Parser;
   private cachePrefix = 'rss_feed';
   private cacheDuration = 3600; // 1시간
@@ -42,27 +46,46 @@ export class RSSAggregator {
   constructor() {
     this.parser = new Parser({
       customFields: {
-        item: ['content:encoded', 'description', 'dc:creator']
-      }
+        item: [
+          ['content:encoded', 'contentEncoded'],
+          ['description', 'description'],
+          ['dc:creator', 'creator'],
+        ],
+      },
     });
   }
 
   /**
    * RSS 피드 데이터 가져오기 (헤더 처리 포함)
    */
-  private async fetchFeed(url: string, isBrunch: boolean = false): Promise<any> {
+  private async fetchFeed(url: string): Promise<any> {
     try {
-      const userAgent = isBrunch 
-        ? 'curl/7.68.0' 
-        : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+      const userAgent = 'curl/7.68.0';
 
       const response = await axios.get(url, {
         headers: {
           'User-Agent': userAgent,
           'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
         },
-        timeout: 5000
+        timeout: 5000,
+        maxRedirects: 0,
+        validateStatus: (status: number) => status >= 200 && status < 400
       });
+
+      if (response.status >= 300) {
+        console.warn(`Redirect detected for ${url}: ${response.status} to ${response.headers.location}`);
+        if (response.headers.location) {
+             const redirectResponse = await axios.get(response.headers.location, {
+                headers: {
+                    'User-Agent': userAgent,
+                    'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
+                },
+                timeout: 5000,
+                maxRedirects: 0
+             });
+             return await this.parser.parseString(redirectResponse.data);
+        }
+      }
 
       return await this.parser.parseString(response.data);
     } catch (error) {
@@ -73,6 +96,7 @@ export class RSSAggregator {
 
   // Fallback images for business/finance context
   private fallbackImages = [
+    // Business & Finance
     'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=800&q=80',
@@ -82,7 +106,60 @@ export class RSSAggregator {
     'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=800&q=80'
+    'https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1664575602276-acd073f104c1?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1664575602554-208c62506fca?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1665686376173-ada7a0031a85?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1664575600850-c4b712e6e2bf?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1664575599736-c5197c91766a?auto=format&fit=crop&w=800&q=80',
+    
+    // Technology & Innovation
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1531297461136-82bf563baa38?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80',
+
+    // Architecture & City
+    'https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1470723710355-95304d8aece4?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1435686858161-59da32dfd4b4?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1470075801209-17f9ec0cade6?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80',
+
+    // Abstract & Minimal
+    'https://images.unsplash.com/photo-1506259091721-347f798196d4?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1476842634003-7dcca8f832de?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+
+    // Lifestyle & Office
+    'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1491975474562-1f4e30bc9468?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80'
   ];
 
   private getFallbackImage(id: string): string {
@@ -265,7 +342,7 @@ export class RSSAggregator {
       const feedUrl = `https://brunch.co.kr/rss/@@${realId}`;
       let feed;
       try {
-        feed = await this.fetchFeed(feedUrl, true);
+        feed = await this.fetchFeed(feedUrl);
       } catch (parseError) {
         console.error('브런치 RSS 파싱 오류:', parseError);
         // 파싱 실패 시 빈 배열 반환
@@ -567,7 +644,7 @@ export class RSSAggregator {
 
     try {
       // 브런치 상태 확인
-      await this.fetchFeed('https://brunch.co.kr/rss/@@2fh2', true);
+      await this.fetchFeed('https://brunch.co.kr/rss/@@2fh2');
       status.brunch = true;
     } catch (error) {
       console.error('브런치 RSS 피드 상태 오류:', error);

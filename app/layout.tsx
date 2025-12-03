@@ -1,28 +1,16 @@
-import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-import { Analytics } from '@/components/analytics';
 import { ErrorBoundary } from '@/components/error-boundary';
-import ExternalScripts from '@/components/external-scripts';
-import { KakaoPixel } from '@/components/kakao/kakao-pixel';
-import { KakaoSDK } from '@/components/kakao/kakao-sdk';
-import { KoreanPerformanceTracker } from '@/components/korean-performance-tracker';
-import { SEOErrorBoundary } from '@/components/seo-error-boundary';
-import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/sonner';
-import { WebVitalsTracker } from '@/components/web-vitals-tracker';
-import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-// import { AIChatFloating } from '@/components/ai-chat-floating';
-import { ChannelTalk } from '@/components/channel-talk';
 import { PreloadCriticalResources } from '@/components/preload-critical-resources';
-import { SEOModulePreloader } from '@/components/seo-module-preloader';
-import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
+import { SEOErrorBoundary } from '@/components/seo-error-boundary';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
-import { safeMetadata } from '@/lib/safe-seo-engine';
-import { createUserTrackingScript, sanitizeStructuredData } from '@/lib/security/html-sanitizer';
+import { ThemeProvider } from '@/components/theme-provider';
+import { ThirdPartyIntegration } from '@/components/third-party-integration';
+import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
 import { DebugStyles } from './debug-styles';
+
+export { metadata, viewport } from '@/lib/metadata';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -30,57 +18,6 @@ const inter = Inter({
   preload: true,
   variable: '--font-inter'
 });
-
-// Safe SEO metadata with fallback support
-export const metadata: Metadata = {
-  ...safeMetadata.default,
-  title: {
-    default: 'FamilyOffice S - 절세플랜·가업승계·가족법인·정책자금·기업인증 전문 통합솔루션',
-    template: '%s | FamilyOffice S',
-  },
-  description: '【절세플랜·가업승계·가족법인 전문】 성공한 기업가를 위한 통합솔루션 | 정책자금·기업인증 컨설팅 | 세금 40% 절감 + 승계세 50% 절감 + 정책자금 신청 95% 성공률 | 삼성생명 프리미엄 파트너 | 맞춤형 절세플랜 설계',
-  icons: {
-    icon: [
-      { url: '/favicon.ico?v=2025', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
-      { url: '/favicon.png?v=2025', sizes: '192x192', type: 'image/png' },
-    ],
-    shortcut: '/favicon.ico?v=2025',
-    apple: { url: '/favicon.png?v=2025', sizes: '180x180' },
-    other: [
-      { rel: 'icon', url: '/favicon.ico?v=2025', sizes: 'any' },
-      { rel: 'apple-touch-icon', url: '/favicon.png?v=2025', sizes: '180x180' },
-    ],
-  },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || 'your-google-verification-code',
-    other: {
-      'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_VERIFICATION || 'your-naver-verification-code',
-      'msvalidate.01': process.env.NEXT_PUBLIC_BING_VERIFICATION || 'your-bing-verification-code'
-    }
-  },
-  alternates: {
-    canonical: 'https://familyoffices.vip',
-    languages: {
-      'ko': 'https://familyoffices.vip',
-      'ko-KR': 'https://familyoffices.vip'
-    }
-  },
-  generator: 'Next.js',
-  applicationName: 'FamilyOffice S - 성공한 기업가·자산가를 위한 법인보험 가업승계 통합솔루션',
-  referrer: 'origin-when-cross-origin',
-  creator: 'FamilyOffice S',
-  publisher: 'FamilyOffice S - 프리미엄 법인금융 서비스'
-};
-
-// Next.js 15: colorScheme을 별도 viewport export로 분리
-export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-  viewportFit: 'cover' // iPhone X 이상 Safe Area 지원
-};
 
 export default function RootLayout({
   children,
@@ -402,53 +339,14 @@ export default function RootLayout({
             <SEOErrorBoundary>
               {children}
             </SEOErrorBoundary>
-            {/* <AIChatFloating /> */}
-            <ChannelTalk />
-            <Toaster />
-            <Analytics />
-            <WebVitalsTracker />
-            <KoreanPerformanceTracker />
-            <KakaoPixel 
-              pixelId={process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || ''} 
-              debug={process.env.NODE_ENV === 'development'} 
-            />
-            <KakaoSDK
-              javascriptKey={process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || ''}
-              debug={true}
-            />
-            <ExternalScripts />
+            
+            <ThirdPartyIntegration />
             <DebugStyles />
+            
             {/* SEO 구조화 데이터 */}
             <OrganizationStructuredData />
-            
-            {/* SEO 성과 추적 시스템 */}
-            <SEOTrackerInit 
-              config={{
-                ...(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && { gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID }),
-                customDomain: 'familyoffices.vip',
-                trackingEnabled: process.env.NODE_ENV === 'production',
-                reportingInterval: 'daily'
-              }}
-            />
-            
-            {/* SEO 모듈 백그라운드 프리로딩 */}
-            <SEOModulePreloader />
-            
-            {/* 사용자 행동 추적 스크립트 */}
-            <script
-              dangerouslySetInnerHTML={{
-                __html: createUserTrackingScript()
-              }}
-            />
           </ThemeProvider>
         </ErrorBoundary>
-        
-        {/* Vercel Analytics & Speed Insights */}
-        <VercelAnalytics />
-        <SpeedInsights />
-        
-        {/* Vercel Toolbar 완전 차단 JavaScript */}
-
       </body>
     </html>
   );
