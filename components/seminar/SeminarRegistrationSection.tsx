@@ -5,6 +5,7 @@ import {
     Calendar,
     CheckCircle,
     Clock,
+    CreditCard,
     Gift,
     Mail,
     Phone,
@@ -322,6 +323,18 @@ export default function SeminarRegistrationSection() {
                   </h4>
                   <p className="text-sm text-green-700 dark:text-green-300">
                     예약 완료 후 이메일과 SMS로 상담 일정을 확인해 드립니다.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800/30 rounded-lg">
+                <CreditCard className="h-5 w-5 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-purple-900 dark:text-purple-300 mb-1">
+                    예약 확정 및 보증금 안내
+                  </h4>
+                  <p className="text-sm text-purple-700 dark:text-purple-300">
+                    원활한 행사 진행과 노쇼(No-Show) 방지를 위해, 예약 확정 시 소정의 보증금(Deposit)이 발생할 수 있습니다. (참석 시 전액 환불)
                   </p>
                 </div>
               </div>
