@@ -1,6 +1,6 @@
 'use client';
 
-import { Calendar, Users, GraduationCap } from 'lucide-react';
+import { Calendar, GraduationCap, Users } from 'lucide-react';
 
 import { useEffect, useState } from 'react';
 
@@ -61,6 +61,20 @@ export function SeminarHeroSection() {
         >
           지식이 경쟁력이 되는 시대
         </p>
+
+        {/* 참석 자격 기준 배지 */}
+        <div 
+          className="mb-8 animate-slide-up"
+          style={{ animationDelay: '250ms' }}
+        >
+          <Badge 
+            variant="secondary" 
+            className="px-4 py-2 text-sm md:text-base bg-amber-100 text-amber-900 border-amber-200 dark:bg-amber-900/30 dark:text-amber-100 dark:border-amber-800"
+          >
+            <Users className="w-4 h-4 mr-2" />
+            참석 기준: 순자산 50억 이상 or 순이익 3억 이상 오너 일가 한정
+          </Badge>
+        </div>
 
         <p
           className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"

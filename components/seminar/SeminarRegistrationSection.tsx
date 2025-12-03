@@ -1,22 +1,23 @@
 'use client';
 
 import {
-  UserPlus,
-  Calendar,
-  Phone,
-  Mail,
-  Clock,
-  CheckCircle,
-  ArrowRight,
-  Gift,
-  Users,
-  Star,
+    ArrowRight,
+    Calendar,
+    CheckCircle,
+    Clock,
+    Gift,
+    Mail,
+    Phone,
+    Star,
+    UserPlus,
+    Users,
 } from 'lucide-react';
 
 import { useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -122,6 +123,17 @@ export default function SeminarRegistrationSection() {
           >
             다양한 방법으로 세미나 신청 및 상담 예약이 가능합니다
           </p>
+        </div>
+
+        {/* 참석 자격 기준 안내 */}
+        <div className="max-w-3xl mx-auto mb-16 animate-slide-up" style={{ animationDelay: '250ms' }}>
+          <Alert className="bg-amber-50 border-amber-200 dark:bg-amber-900/20 dark:border-amber-800">
+            <Users className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+            <AlertTitle className="text-amber-800 dark:text-amber-300 font-semibold ml-2">참석 자격 기준 안내</AlertTitle>
+            <AlertDescription className="text-amber-700 dark:text-amber-400 ml-2 mt-1">
+              본 세미나는 <strong>순자산 50억 이상</strong> 또는 <strong>순이익 3억 이상</strong>인 기업 오너 일가만 참석 가능합니다.
+            </AlertDescription>
+          </Alert>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
