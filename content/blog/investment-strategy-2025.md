@@ -1,5 +1,5 @@
 ---
-title: '2025년 자산관리 트렌드와 고액자산가를 위한 투자 전략'
+title: '2025년 자산관리 트렌드와 UHNW(초고액자산가)를 위한 투자 전략'
 description: '불확실성의 시대, 자산을 지키고 키우는 2025년 핵심 투자 키워드와 포트폴리오 전략. 10년 차 컨설턴트가 제안하는 자산 배분의 정석.'
 date: '2025-01-10'
 category: '자산관리'
@@ -15,7 +15,7 @@ keywords:
   ]
 author: '임재홍'
 readTime: '12분'
-excerpt: '금리 인하 사이클의 본격화와 지정학적 리스크의 공존. 2025년, 고액자산가가 주목해야 할 투자 트렌드와 변동성을 이기는 자산 배분 전략을 심층 분석합니다.'
+excerpt: '금리 인하 사이클의 본격화와 지정학적 리스크의 공존. 2025년, UHNW(초고액자산가)가 주목해야 할 투자 트렌드와 변동성을 이기는 자산 배분 전략을 심층 분석합니다.'
 ogImage: 'https://images.unsplash.com/photo-1611974765270-ca1258634369?q=80&w=1000&auto=format&fit=crop'
 canonicalUrl: 'https://familyoffice.jlinsights.com/insights/market-intelligence/investment-strategy-2025'
 ---
@@ -57,9 +57,13 @@ canonicalUrl: 'https://familyoffice.jlinsights.com/insights/market-intelligence/
         우리는 여전히 3%~4% 수준의 '중금리' 환경에 적응해야 합니다. 인플레이션은 2% 목표치에 근접하겠지만, 탈세계화와 공급망 재편 비용으로 인해 구조적인 물가 상승 압력은 잔존할 것입니다. 이러한 환경에서 경제는 침체 없는 성장 둔화, 즉 '연착륙(Soft Landing)' 시나리오가 유력하지만, 예상보다 강한 소비와 고용으로 인한 '노랜딩(No Landing)' 가능성도 배제할 수 없습니다.
     </p>
     <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 my-6">
-        <p className="font-bold text-amber-800 dark:text-amber-300">💡 Insight for HNWI</p>
+        <p className="font-bold text-amber-800 dark:text-amber-300">💡 Insight for UHNWI</p>
+        <div className="text-sm text-amber-900 dark:text-amber-200 mt-2 mb-3 p-3 bg-amber-100 dark:bg-amber-900/40 rounded-lg">
+            <strong>UHNW(Ultra High Net Worth)란?</strong><br/>
+            일반적으로 순자산 또는 투자 가능 자산이 3,000만 달러(약 400억 원) 이상인 초고액자산가를 의미합니다. 금융·WM업계에서 HNW(High Net Worth)보다 한 단계 상위의 최상위 부유층 세그먼트를 지칭하는 전문 용어입니다.
+        </div>
         <p className="text-sm text-amber-900 dark:text-amber-200 mt-1">
-            예측보다는 대응이 중요합니다. 특정 시나리오에 올인하기보다는, 어떤 상황에서도 회복 탄력성(Resilience)을 가질 수 있는 '올웨더(All-Weather) 포트폴리오' 구축이 필수적입니다.
+            예측보다는 대응이 중요합니다. 단순한 자산 증식을 넘어, 가문의 레거시(Legacy)를 지키고 승계하기 위해서는 어떤 상황에서도 회복 탄력성(Resilience)을 가질 수 있는 '올웨더(All-Weather) 포트폴리오' 구축이 필수적입니다.
         </p>
     </div>
 </section>
@@ -110,6 +114,7 @@ canonicalUrl: 'https://familyoffice.jlinsights.com/insights/market-intelligence/
 
 불확실성이 높은 시기일수록 극단적인 쏠림보다는 균형 잡힌 포트폴리오가 필수적입니다. 안전 자산으로 하방을 지지하고, 구조적 성장 섹터로 초과 수익을 추구하는 **바벨 전략(Barbell Strategy)**을 제안합니다.
 {/_ Strategy 2 _/}
+
 <div className="flex flex-col md:flex-row gap-6 items-start">
 <div className="w-full md:w-1/3 bg-purple-100 dark:bg-purple-900/40 rounded-xl p-6 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
 <span className="text-4xl mb-3">📈</span>
