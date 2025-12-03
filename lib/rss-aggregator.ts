@@ -10,7 +10,7 @@ export interface RSSItem {
   url: string;
   publishedAt: string;
   author: string;
-  source: 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | 'local';
+  source: 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | 'substack' | 'local';
   category?: string;
   tags: string[];
   readTime?: string;
@@ -272,6 +272,56 @@ export class RSSAggregator {
   }
 
   /**
+   * Substack RSS 피드에서 포스트 가져오기
+   */
+  async getSubstackPosts(substackId: string = 'jaehong', limit = 10): Promise<RSSItem[]> {
+    const cacheKey = `${this.cachePrefix}:substack:${substackId}`;
+    
+    try {
+      // 캐시 확인
+      const cached = await cacheManagers.content.get<string>(cacheKey);
+      if (cached) {
+        return JSON.parse(cached).slice(0, limit);
+      }
+
+      // Substack RSS URL
+      const feedUrl = `https://${substackId}.substack.com/feed`;
+      let feed;
+      try {
+        feed = await this.parser.parseURL(feedUrl);
+      } catch (parseError) {
+        console.error('Substack RSS 파싱 오류:', parseError);
+        // 파싱 실패 시 빈 배열 반환
+        return [];
+      }
+      
+      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
+        id: this.generateId('substack', item.guid || item.link || '', index),
+        title: item.title || '제목 없음',
+        content: this.extractContent(item),
+        excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
+        url: item.link || '',
+        publishedAt: item.pubDate || new Date().toISOString(),
+        author: this.normalizeAuthorName(item.author || item.creator || 'Substack Writer'),
+        source: 'substack' as const,
+        category: this.extractCategory(item.categories),
+        tags: this.extractTags(item.categories || []),
+        readTime: this.calculateReadTime(this.extractContent(item)),
+        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('substack', item.guid || item.link || '', index)),
+        featured: false
+      }));
+
+      // 캐시 저장
+      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
+
+      return posts.slice(0, limit);
+    } catch (error) {
+      console.error('Substack RSS 피드 파싱 오류:', error);
+      return [];
+    }
+  }
+
+  /**
    * 로컬 블로그 포스트 가져오기 (lib/blog-data.ts)
    */
   async getLocalPosts(limit = 10): Promise<RSSItem[]> {
@@ -323,6 +373,9 @@ export class RSSAggregator {
       // 브런치 추가 (기본값: familyoffice)
       promises.push(this.getBrunchPosts('familyoffice', limit / 2));
 
+      // Substack 추가 (기본값: jaehong)
+      promises.push(this.getSubstackPosts('jaehong', limit / 2));
+
       const results = await Promise.all(promises);
       const allPosts = results.flat();
 
@@ -339,7 +392,7 @@ export class RSSAggregator {
   /**
    * 특정 소스의 콘텐츠만 가져오기
    */
-  async getContentBySource(source: 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | 'local', identifier?: string, limit = 10): Promise<RSSItem[]> {
+  async getContentBySource(source: 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | 'substack' | 'local', identifier?: string, limit = 10): Promise<RSSItem[]> {
     if (source === 'beehiiv') {
       return this.getBeehiivPosts(limit);
     } else if (source === 'naver-blog' && identifier) {
@@ -350,6 +403,8 @@ export class RSSAggregator {
       return this.getTistoryPosts(identifier || 'family-office', limit);
     } else if (source === 'brunch') {
       return this.getBrunchPosts(identifier || 'familyoffice', limit);
+    } else if (source === 'substack') {
+      return this.getSubstackPosts(identifier || 'jaehong', limit);
     }
     return [];
   }
@@ -464,8 +519,8 @@ export class RSSAggregator {
   /**
    * RSS 피드 상태 확인
    */
-  async checkFeedHealth(): Promise<{ beehiiv: boolean; naver?: boolean; tistory?: boolean; brunch?: boolean }> {
-    const status = { beehiiv: false, naver: false, tistory: false, brunch: false };
+  async checkFeedHealth(): Promise<{ beehiiv: boolean; naver?: boolean; tistory?: boolean; brunch?: boolean; substack?: boolean }> {
+    const status = { beehiiv: false, naver: false, tistory: false, brunch: false, substack: false };
 
     try {
       // beehiiv 상태 확인
@@ -489,6 +544,14 @@ export class RSSAggregator {
       status.brunch = true;
     } catch (error) {
       console.error('브런치 RSS 피드 상태 오류:', error);
+    }
+
+    try {
+      // Substack 상태 확인
+      await this.parser.parseURL('https://jaehong.substack.com/feed');
+      status.substack = true;
+    } catch (error) {
+      console.error('Substack RSS 피드 상태 오류:', error);
     }
 
     return status;
