@@ -83,6 +83,7 @@ export default function InsightsFeed({
         if (activeTab === 'newsletter' && item.source !== 'beehiiv') return false;
         if (activeTab === 'blog' && item.source !== 'naver-blog') return false;
         if (activeTab === 'tistory' && item.source !== 'tistory') return false;
+        if (activeTab === 'brunch' && item.source !== 'brunch') return false;
       }
 
       // 2. Category Filter
@@ -160,6 +161,8 @@ export default function InsightsFeed({
         return <Badge className="bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 border-green-200">네이버 블로그</Badge>;
       case 'tistory':
         return <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-200 dark:bg-orange-900/30 dark:text-orange-300 border-orange-200">티스토리</Badge>;
+      case 'brunch':
+        return <Badge className="bg-teal-100 text-teal-800 hover:bg-teal-200 dark:bg-teal-900/30 dark:text-teal-300 border-teal-200">브런치</Badge>;
       default:
         return <Badge variant="outline">인사이트</Badge>;
     }
@@ -219,12 +222,13 @@ export default function InsightsFeed({
         {/* Tabs */}
         <div className="mb-10">
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-5 max-w-3xl bg-white dark:bg-slate-800 p-1 border border-slate-200 dark:border-slate-700 rounded-xl">
+            <TabsList className="grid w-full grid-cols-6 max-w-4xl bg-white dark:bg-slate-800 p-1 border border-slate-200 dark:border-slate-700 rounded-xl">
               <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-slate-100 dark:data-[state=active]:bg-slate-700">전체</TabsTrigger>
               <TabsTrigger value="local" className="rounded-lg data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 dark:data-[state=active]:bg-blue-900/30 dark:data-[state=active]:text-blue-300">전문가 칼럼</TabsTrigger>
               <TabsTrigger value="newsletter" className="rounded-lg data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 dark:data-[state=active]:bg-purple-900/30 dark:data-[state=active]:text-purple-300">뉴스레터</TabsTrigger>
               <TabsTrigger value="blog" className="rounded-lg data-[state=active]:bg-green-50 data-[state=active]:text-green-700 dark:data-[state=active]:bg-green-900/30 dark:data-[state=active]:text-green-300">블로그</TabsTrigger>
               <TabsTrigger value="tistory" className="rounded-lg data-[state=active]:bg-orange-50 data-[state=active]:text-orange-700 dark:data-[state=active]:bg-orange-900/30 dark:data-[state=active]:text-orange-300">티스토리</TabsTrigger>
+              <TabsTrigger value="brunch" className="rounded-lg data-[state=active]:bg-teal-50 data-[state=active]:text-teal-700 dark:data-[state=active]:bg-teal-900/30 dark:data-[state=active]:text-teal-300">브런치</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>

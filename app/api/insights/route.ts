@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     
     // 쿼리 파라미터 추출
-    const source = searchParams.get('source') as 'beehiiv' | 'naver-blog' | 'tistory' | null;
+    const source = searchParams.get('source') as 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | null;
     const limit = parseInt(searchParams.get('limit') || '20');
     const blogId = searchParams.get('blog_id') || process.env.NAVER_BLOG_ID || 'lim_jaehong'; // 환경변수에서 기본값 가져오기
     const category = searchParams.get('category');
