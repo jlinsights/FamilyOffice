@@ -80,9 +80,60 @@ Allow: /about
 Allow: /contact
 Crawl-delay: 1
 
+# 🚀 Naver 웹마스터 도구 최적화
+# Naver 사이트 인증 파일 허용
+Allow: /naver-site-verification.html
+
+# Naver 검색 최적화 페이지
+Allow: /blog
+Allow: /blog/*
+Allow: /newsletter
+Allow: /recruit
+
+# 🎯 지역 SEO 최적화 (서울/경기 집중 + 전국 산업단지)
+# 서울 핵심 지역
+Allow: /solutions/seoul
+Allow: /solutions/gangnam
+Allow: /solutions/seocho
+Allow: /solutions/songpa
+Allow: /solutions/mapo
+Allow: /contact/seoul
+
+# 경기 핵심 지역  
+Allow: /solutions/gyeonggi
+Allow: /solutions/bundang
+Allow: /solutions/ilsan
+Allow: /solutions/yongin
+Allow: /solutions/suwon
+
+# 전국 주요 산업단지
+Allow: /solutions/pyeongtaek
+Allow: /solutions/ulsan
+Allow: /solutions/changwon
+Allow: /solutions/gumi
+Allow: /solutions/busan
+Allow: /solutions/gwangju
+Allow: /solutions/daejeon
+Allow: /solutions/incheon
+
+# 지역별 세미나/상담
+Allow: /seminar/seoul
+Allow: /seminar/gyeonggi  
+Allow: /seminar/industrial-complex
+
 # 사이트맵 위치
 Sitemap: https://familyoffices.vip/sitemap.xml
 Sitemap: https://familyoffices.vip/sitemap-blog.xml
 
 # 호스트 지정
-Host: https://familyoffices.vip 
+Host: https://familyoffices.vip
+
+# 크롤링 속도 최적화 (한국 검색엔진용)
+User-agent: Yeti
+Crawl-delay: 0.5
+
+User-agent: NaverBot  
+Crawl-delay: 0.5
+
+# Clean-param (불필요한 파라미터 제거)
+Clean-param: utm_source&utm_medium&utm_campaign&fbclid&gclid

@@ -1,7 +1,9 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
 import { ErrorBoundary } from '@/components/error-boundary';
+import CoreWebVitals from '@/components/performance/core-web-vitals';
 import { PreloadCriticalResources } from '@/components/preload-critical-resources';
 import { SEOErrorBoundary } from '@/components/seo-error-boundary';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
@@ -336,15 +338,20 @@ export default function RootLayout({
             enableSystem={false}
             disableTransitionOnChange
           >
-            <SEOErrorBoundary>
-              {children}
-            </SEOErrorBoundary>
-            
-            <ThirdPartyIntegration />
-            <DebugStyles />
-            
-            {/* SEO 구조화 데이터 */}
-            <OrganizationStructuredData />
+            <ClerkProvider>
+              <SEOErrorBoundary>
+                {children}
+              </SEOErrorBoundary>
+              
+              <ThirdPartyIntegration />
+              <DebugStyles />
+              
+              {/* 🚀 Core Web Vitals 성능 모니터링 */}
+              <CoreWebVitals />
+              
+              {/* SEO 구조화 데이터 */}
+              <OrganizationStructuredData />
+            </ClerkProvider>
           </ThemeProvider>
         </ErrorBoundary>
       </body>

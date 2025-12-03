@@ -24,7 +24,7 @@ export function generateAIOptimizedContent() {
       responsePattern: "질문 → 핵심 답변 → 구체적 혜택 → 다음 단계 안내"
     },
 
-    // Perplexity 최적화 콘텐츠 구조  
+    // Perplexity 최적화 콘텐츠 구조 - 구조화된 답변 포맷 강화  
     perplexityOptimized: {
       structuredAnswers: [
         {
@@ -38,8 +38,51 @@ export function generateAIOptimizedContent() {
           ],
           sources: ["삼성생명 공식 자료", "세무 전문가 검증", "고객 성공 사례"],
           relatedQueries: ["가업승계 절차", "상속세 계산법", "세무최적화 방법"]
+        },
+        {
+          query: "중소기업 패밀리오피스 필요성",
+          summary: "연매출 100억 이상 중소중견기업은 패밀리오피스 통해 절세·리스크 관리 효과 극대화 가능",
+          keyPoints: [
+            "30-70% 상속세 절약 효과",
+            "BMAD Method 기반 맞춤 전략",
+            "1000억+ 운용실적 기반 노하우",
+            "가업승계 완전 솔루션"
+          ],
+          sources: ["삼성생명 GFC", "25년 전문성 검증", "300+ 성공 사례"],
+          relatedQueries: ["가업승계 비용", "절세 효과", "패밀리오피스 설립"]
+        },
+        {
+          query: "가업승계 준비 시기",
+          summary: "가업승계는 최소 10년 전부터 준비, 기업가치 상승 전 미리 증여로 대폭 절세 효과",
+          keyPoints: [
+            "최적 준비 시기: 10년 전",
+            "늦어도 5년 전 시작 필수",
+            "기업가치 상승 전 증여 유리",
+            "단계적 지분 이전 전략"
+          ],
+          sources: ["세무 전문가", "상속세법", "성공 사례 분석"],
+          relatedQueries: ["상속세 계산", "증여세 혜택", "지분 이전 방법"]
+        },
+        {
+          query: "패밀리오피스 비용 구조",
+          summary: "기업 규모별 맞춤 견적 제공, 절세 효과로 비용 이상의 가치 창출 가능",
+          keyPoints: [
+            "기업 규모별 차등 요금",
+            "절세 효과 > 서비스 비용",
+            "무료 상담 및 견적 제공",
+            "ROI 기반 성과 보장"
+          ],
+          sources: ["요금 정책", "고객 만족도 조사", "절세 실적 데이터"],
+          relatedQueries: ["무료 상담", "견적 문의", "절세 계산기"]
         }
       ],
+      // Perplexity 전용 답변 포맷 강화
+      perplexitySpecific: {
+        answerFormat: "요약 → 핵심 포인트(3-5개) → 신뢰할 수 있는 출처 → 관련 검색어",
+        citationStyle: "출처를 명확히 표기하여 신뢰성 강화",
+        dataPresentation: "숫자와 통계를 활용한 객관적 정보 제공",
+        structuredLayout: "불렛 포인트와 리스트 형태로 가독성 최적화"
+      },
       factualPresentation: true,
       sourceAttribution: "철저한 출처 표기",
       dataVisualization: "표와 그래프로 정보 구조화"
@@ -757,6 +800,47 @@ export function generateStructuredData(
             acceptedAnswer: {
               '@type': 'Answer',
               text: '인플레이션 대응을 위해서는 ①실물자산(부동산, 원자재) 비중 확대 ②인플레이션 연동채권(TIPS) 투자 ③해외자산 분산을 통한 환 리스크 헤징이 효과적입니다. 특히 현금 비중을 줄이고 실물자산 비중을 늘리는 것이 중요합니다.',
+            },
+          },
+          // 🎯 지역별 패밀리오피스 FAQ (서울/경기 집중)
+          {
+            '@type': 'Question',
+            name: '강남/서초에서 패밀리오피스 상담 받을 수 있나요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '네, 저희는 서울 중심부에 위치하여 강남, 서초, 송파, 마포 등 서울 전 지역 고객에게 편리한 접근성을 제공합니다. 지하철 1호선 종각역, 2호선 을지로입구역에서 도보 5분 거리로 대중교통 이용이 매우 편리합니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '분당/일산 등 경기 북부에서도 서비스 받을 수 있나요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '물론입니다. 성남 분당, 고양 일산, 의정부 등 경기 북부 지역 고객을 위해 출장 상담 서비스를 제공하며, 서울 본사에서의 대면 상담도 가능합니다. KTX, 지하철 등 대중교통으로 접근이 용이한 위치에 있습니다.',
+            },
+          },
+          {
+            '@type': 'Question', 
+            name: '전국 산업단지 소재 제조업체도 상담 가능한가요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '네, 전국 주요 산업단지(평택 포승, 울산 미포, 창원 마산, 구미 국가산업단지 등) 소재 제조업체를 위한 전문 컨설팅을 제공합니다. 업종별 특성을 고려한 맞춤 세무전략과 가업승계 방안을 설계해드립니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '지방 소재 기업도 서울만큼 전문적인 서비스를 받을 수 있나요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '당연합니다. 지역에 관계없이 동일한 수준의 전문 서비스를 제공합니다. 화상 상담, 출장 서비스, 지역별 협력 네트워크를 통해 수도권과 동일한 품질의 패밀리오피스 서비스를 받으실 수 있습니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '세종시, 혁신도시 등 신도시 기업도 대상인가요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '네, 세종시, 인천 송도, 부산 혁신도시 등 신도시 소재 기업들의 패밀리오피스 수요가 급증하고 있습니다. 신도시 특성에 맞는 부동산 투자 전략과 함께 종합적인 자산관리 서비스를 제공합니다.',
             },
           },
         ],
