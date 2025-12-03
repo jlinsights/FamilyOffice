@@ -1,13 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { rssAggregator } from '@/lib/rss-aggregator';
-import { env } from '@/lib/env';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     
     // 쿼리 파라미터 추출
-    const source = searchParams.get('source') as 'beehiiv' | 'naver-blog' | null;
+    const source = searchParams.get('source') as 'beehiiv' | 'naver-blog' | 'tistory' | null;
     const limit = parseInt(searchParams.get('limit') || '20');
     const blogId = searchParams.get('blog_id') || process.env.NAVER_BLOG_ID || 'lim_jaehong'; // 환경변수에서 기본값 가져오기
     const category = searchParams.get('category');

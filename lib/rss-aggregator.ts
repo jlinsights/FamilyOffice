@@ -10,7 +10,7 @@ export interface RSSItem {
   url: string;
   publishedAt: string;
   author: string;
-  source: 'beehiiv' | 'naver-blog' | 'local';
+  source: 'beehiiv' | 'naver-blog' | 'tistory' | 'local';
   category?: string;
   tags: string[];
   readTime?: string;
@@ -172,6 +172,56 @@ export class RSSAggregator {
   }
 
   /**
+   * 티스토리 블로그 RSS 피드에서 포스트 가져오기
+   */
+  async getTistoryPosts(blogName: string = 'family-office', limit = 10): Promise<RSSItem[]> {
+    const cacheKey = `${this.cachePrefix}:tistory:${blogName}`;
+    
+    try {
+      // 캐시 확인
+      const cached = await cacheManagers.content.get<string>(cacheKey);
+      if (cached) {
+        return JSON.parse(cached).slice(0, limit);
+      }
+
+      // 티스토리 블로그 RSS URL
+      const feedUrl = `https://${blogName}.tistory.com/rss`;
+      let feed;
+      try {
+        feed = await this.parser.parseURL(feedUrl);
+      } catch (parseError) {
+        console.error('티스토리 RSS 파싱 오류:', parseError);
+        // 파싱 실패 시 빈 배열 반환
+        return [];
+      }
+      
+      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
+        id: this.generateId('tistory', item.guid || item.link || '', index),
+        title: item.title || '제목 없음',
+        content: this.extractContent(item),
+        excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
+        url: item.link || '',
+        publishedAt: item.pubDate || new Date().toISOString(),
+        author: this.normalizeAuthorName(item.author || item.creator || '패밀리오피스 에디터'),
+        source: 'tistory' as const,
+        category: this.extractCategory(item.categories),
+        tags: this.extractTags(item.categories || []),
+        readTime: this.calculateReadTime(this.extractContent(item)),
+        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('tistory', item.guid || item.link || '', index)),
+        featured: false
+      }));
+
+      // 캐시 저장
+      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
+
+      return posts.slice(0, limit);
+    } catch (error) {
+      console.error('티스토리 블로그 RSS 피드 파싱 오류:', error);
+      return [];
+    }
+  }
+
+  /**
    * 로컬 블로그 포스트 가져오기 (lib/blog-data.ts)
    */
   async getLocalPosts(limit = 10): Promise<RSSItem[]> {
@@ -217,6 +267,9 @@ export class RSSAggregator {
         promises.push(this.getNaverBlogPosts(naverBlogId, limit / 2));
       }
 
+      // 티스토리 추가 (기본값: family-office)
+      promises.push(this.getTistoryPosts('family-office', limit / 2));
+
       const results = await Promise.all(promises);
       const allPosts = results.flat();
 
@@ -233,13 +286,15 @@ export class RSSAggregator {
   /**
    * 특정 소스의 콘텐츠만 가져오기
    */
-  async getContentBySource(source: 'beehiiv' | 'naver-blog' | 'local', identifier?: string, limit = 10): Promise<RSSItem[]> {
+  async getContentBySource(source: 'beehiiv' | 'naver-blog' | 'tistory' | 'local', identifier?: string, limit = 10): Promise<RSSItem[]> {
     if (source === 'beehiiv') {
       return this.getBeehiivPosts(limit);
     } else if (source === 'naver-blog' && identifier) {
       return this.getNaverBlogPosts(identifier, limit);
     } else if (source === 'local') {
       return this.getLocalPosts(limit);
+    } else if (source === 'tistory') {
+      return this.getTistoryPosts(identifier || 'family-office', limit);
     }
     return [];
   }
@@ -354,8 +409,8 @@ export class RSSAggregator {
   /**
    * RSS 피드 상태 확인
    */
-  async checkFeedHealth(): Promise<{ beehiiv: boolean; naver?: boolean }> {
-    const status = { beehiiv: false, naver: false };
+  async checkFeedHealth(): Promise<{ beehiiv: boolean; naver?: boolean; tistory?: boolean }> {
+    const status = { beehiiv: false, naver: false, tistory: false };
 
     try {
       // beehiiv 상태 확인
@@ -363,6 +418,14 @@ export class RSSAggregator {
       status.beehiiv = true;
     } catch (error) {
       console.error('beehiiv RSS 피드 상태 오류:', error);
+    }
+
+    try {
+      // 티스토리 상태 확인
+      await this.parser.parseURL('https://family-office.tistory.com/rss');
+      status.tistory = true;
+    } catch (error) {
+      console.error('티스토리 RSS 피드 상태 오류:', error);
     }
 
     return status;
