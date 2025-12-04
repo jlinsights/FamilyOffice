@@ -1,5 +1,6 @@
 'use client';
 
+import { CUSTOMER_SEGMENTS } from '@/lib/customer-segmentation';
 import {
     Award,
     BookOpen,
@@ -20,6 +21,7 @@ import {
     Sparkles,
     Star,
     Target,
+    TrendingUp,
     Users,
     Zap
 } from 'lucide-react';
@@ -338,6 +340,52 @@ const FamilyOfficeCenterPage = () => {
                   서비스 포트폴리오 보기
                 </Link>
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* 🏆 Ultra Premium 자격 기준 */}
+        <section className="py-16 px-4 bg-white dark:bg-gray-900">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4 text-card-foreground">패밀리오피스 자격 기준</h2>
+              <p className="text-gray-600 dark:text-gray-400">UHNW(Ultra High Net Worth) 고객을 위한 전용 서비스</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <Card className="border-2 border-amber-200 dark:border-amber-800 bg-card">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-card-foreground">
+                    <TrendingUp className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                    순자산 기준
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                    {CUSTOMER_SEGMENTS['family-office'].criteria.netWorth}억원 이상
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    부동산, 금융자산, 사업자산 등 총 순자산
+                  </p>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-2 border-amber-200 dark:border-amber-800 bg-card">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-card-foreground">
+                    <Star className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                    순이익 기준
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                    {CUSTOMER_SEGMENTS['family-office'].criteria.netIncome}억원 이상
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    연간 순이익(세후소득) 기준
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
