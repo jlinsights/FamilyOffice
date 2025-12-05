@@ -1,7 +1,6 @@
 import { globalRateLimit } from '@/lib/rate-limit';
 import { autoSecurityResponse, detectSuspiciousActivity, logSecurityEvent } from '@/lib/security/security-monitor';
-import { currentUser } from '@clerk/nextjs/server';
-import type { NextRequest } from 'next/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 // 허용된 도메인 목록 - 보안 강화
@@ -13,46 +12,19 @@ const ALLOWED_ORIGINS = [
   ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : [])
 ];
 
-// 슈퍼 관리자 이메일 목록
-const SUPER_ADMIN_EMAILS = (process.env.ADMIN_EMAILS || 'jhlim725@gmail.com').split(',').map(email => email.trim());
-
 // 보호된 API 경로 패턴
-const PROTECTED_API_PATTERNS = [
-  /^\/api\/admin\//,
-  /^\/api\/financial\/admin\//,
-  /^\/api\/internal\//
-];
+const isProtectedApiRoute = createRouteMatcher([
+  '/api/admin(.*)',
+  '/api/financial/admin(.*)',
+  '/api/internal(.*)'
+]);
 
 function isAllowedOrigin(origin: string | null): boolean {
   if (!origin) return false;
   return ALLOWED_ORIGINS.includes(origin);
 }
 
-function isProtectedApiRoute(pathname: string): boolean {
-  return PROTECTED_API_PATTERNS.some(pattern => pattern.test(pathname));
-}
-
-async function checkAdminPermission(request: NextRequest): Promise<boolean> {
-  try {
-    const user = await currentUser();
-    if (!user) return false;
-
-    const primaryEmail = user.emailAddresses.find(
-      email => email.id === user.primaryEmailAddressId
-    );
-
-    if (!primaryEmail) return false;
-
-    return SUPER_ADMIN_EMAILS.includes(
-      primaryEmail.emailAddress.toLowerCase()
-    );
-  } catch (error) {
-    console.error('Admin permission check error:', error);
-    return false;
-  }
-}
-
-export async function middleware(request: NextRequest) {
+export default clerkMiddleware(async (auth, request) => {
   // 0. 의심스러운 활동 감지 및 자동 대응
   const suspiciousActivity = detectSuspiciousActivity(request);
   if (suspiciousActivity.isSuspicious) {
@@ -63,9 +35,9 @@ export async function middleware(request: NextRequest) {
   }
 
   // 1. 보호된 API 경로에 대한 인증 검사
-  if (isProtectedApiRoute(request.nextUrl.pathname)) {
-    const isAuthorized = await checkAdminPermission(request);
-    if (!isAuthorized) {
+  if (isProtectedApiRoute(request)) {
+    const { userId } = await auth();
+    if (!userId) {
       // 무단 접근 시도 로깅
       await logSecurityEvent({
         type: 'invalid_auth',
@@ -80,15 +52,16 @@ export async function middleware(request: NextRequest) {
           timestamp: new Date().toISOString(),
           path: request.nextUrl.pathname
         },
-        { status: 403 }
+        { status: 401 }
       );
     } else {
-      // 관리자 접근 로깅
+      // 관리자 접근 로깅 (인증된 사용자)
+      // 실제 관리자 권한 확인은 API Route 내부에서 수행해야 함
       await logSecurityEvent({
         type: 'admin_access',
         severity: 'medium',
-        description: `Admin access to ${request.nextUrl.pathname}`,
-        additional_data: { path: request.nextUrl.pathname }
+        description: `Authenticated access to ${request.nextUrl.pathname}`,
+        additional_data: { path: request.nextUrl.pathname, userId }
       }, request);
     }
   }
@@ -136,7 +109,7 @@ export async function middleware(request: NextRequest) {
     const rateLimitHeaders = await globalRateLimit(request);
     if (rateLimitHeaders && typeof rateLimitHeaders === 'object') {
       Object.entries(rateLimitHeaders).forEach(([key, value]) => {
-        response.headers.set(key, value);
+        response.headers.set(key, value as string);
       });
     }
   }
@@ -176,7 +149,7 @@ export async function middleware(request: NextRequest) {
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   
   return response;
-}
+});
 
 export const config = {
   matcher: [

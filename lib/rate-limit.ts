@@ -81,10 +81,10 @@ function getClientId(request: NextRequest): string {
   const realIp = request.headers.get('x-real-ip');
   const ip = forwarded?.split(',')[0] || realIp || 'unknown';
   
-  // Fallback to User-Agent hash for localhost development
+    // Fallback to User-Agent hash for localhost development
   if (ip === 'unknown' || ip === '127.0.0.1' || ip === '::1') {
     const userAgent = request.headers.get('user-agent') || 'unknown';
-    return `ua:${Buffer.from(userAgent).toString('base64').slice(0, 10)}`;
+    return `ua:${btoa(userAgent).slice(0, 10)}`;
   }
   
   return `ip:${ip}`;

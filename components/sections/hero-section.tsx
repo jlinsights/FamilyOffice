@@ -46,21 +46,21 @@ export const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* 메인 헤드라인 */}
-        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent whitespace-pre-line animate-slide-up">
-          Family Office
-          <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-wider">
-            세대를 잇는 자산관리
+        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent whitespace-pre-line animate-slide-up font-serif">
+          百年永續
+          <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-wider font-sans">
+            가문의 영원한 번영을 위한 약속
           </span>
         </h1>
 
-        {/* 서브 헤드라인 */}
+        {/* 서브 헤드라인 (SEO: Family Office 키워드 포함) */}
         <p
           className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 animate-slide-up"
           style={{ animationDelay: '200ms' }}
         >
-          최고 자산가와 성공한 기업가를 위한
+          대한민국 0.1%를 위한
           <span className="block mt-1 font-light text-muted-foreground">
-            차별화된 전용 솔루션
+            프라이빗 패밀리 오피스
           </span>
         </p>
 
@@ -68,9 +68,9 @@ export const HeroSection = memo(function HeroSection() {
           className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto animate-slide-up leading-relaxed font-light"
           style={{ animationDelay: '300ms' }}
         >
-          자산 보전부터 가업승계, 차세대 육성까지
+          자산의 보전을 넘어,
           <span className="block mt-1">
-            百年永續의 기반을 함께 구축합니다
+            위대한 유산이 세대를 이어갈 수 있도록 돕습니다
           </span>
         </p>
 
