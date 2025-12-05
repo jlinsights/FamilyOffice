@@ -1,7 +1,6 @@
-/** @type {import('next').NextConfig} */
-// const { withSentryConfig } = require('@sentry/nextjs');
+import withBundleAnalyzer from '@next/bundle-analyzer';
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
@@ -23,9 +22,10 @@ const nextConfig = {
       'tailwind-merge'
     ],
     // Enable server components optimization
-    serverComponentsExternalPackages: ['@clerk/nextjs', '@supabase/supabase-js'],
     // Better tree shaking
     optimizeCss: true,
+    // Vercel Toolbar 제거
+    webpackBuildWorker: true,
   },
   eslint: {
     ignoreDuringBuilds: false, // Enable ESLint validation during builds
@@ -171,19 +171,11 @@ const nextConfig = {
     CUSTOM_KEY: process.env.NODE_ENV,
     // Vercel Toolbar 완전 비활성화
     NEXT_PUBLIC_VERCEL_ENV: 'production',
-    NEXT_PUBLIC_FLAGS_vercel_toolbar: false,
-    VERCEL_TOOLBAR: false,
-    VERCEL_TOOLBAR_ENABLED: false,
-    FLAGS_vercel_toolbar: false,
-    __NEXT_DISABLE_TOOLBAR: true,
-    DISABLE_VERCEL_TOOLBAR: true,
-  },
-
-  // Vercel Toolbar 완전 비활성화
-  experimental: {
-    ...nextConfig.experimental,
-    // Vercel Toolbar 제거
-    webpackBuildWorker: true,
+    NEXT_PUBLIC_FLAGS_vercel_toolbar: 'false',
+    VERCEL_TOOLBAR: 'false',
+    VERCEL_TOOLBAR_ENABLED: 'false',
+    FLAGS_vercel_toolbar: 'false',
+    DISABLE_VERCEL_TOOLBAR: 'true',
   },
 
   // Output 설정 제거 (빌드 시간 단축)
@@ -322,4 +314,4 @@ const nextConfig = {
 };
 
 // Sentry 설정 비활성화 (배포 안정성을 위해)
-export default withBundleAnalyzer(nextConfig);
+export default bundleAnalyzer(nextConfig);

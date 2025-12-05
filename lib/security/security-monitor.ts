@@ -3,7 +3,6 @@
  * 의심스러운 활동 감지 및 자동 대응
  */
 
-import { createClient } from '@supabase/supabase-js';
 import { NextRequest } from 'next/server';
 
 interface SecurityEvent {
@@ -27,12 +26,6 @@ interface SecurityMetrics {
   admin_access_attempts: number;
 }
 
-// Supabase 관리자 클라이언트
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 // 메모리 기반 보안 메트릭스 (Redis로 이전 가능)
 const securityMetrics: SecurityMetrics = {
   failed_logins: 0,
@@ -46,28 +39,37 @@ const suspiciousIPs = new Set<string>();
 const rateLimitViolations = new Map<string, number>();
 
 /**
- * 보안 이벤트 로깅
+ * 보안 이벤트 로깅 (Edge Runtime 호환 - fetch 사용)
  */
 export async function logSecurityEvent(event: SecurityEvent, request?: NextRequest): Promise<void> {
   try {
     const ip = request?.headers.get('x-forwarded-for') || request?.headers.get('x-real-ip') || 'unknown';
     const userAgent = request?.headers.get('user-agent') || 'unknown';
 
-    // Supabase에 보안 로그 저장
-    const { error } = await supabaseAdmin.rpc('log_security_event', {
-      event_type: event.type,
-      event_description: event.description,
-      user_id_param: event.user_id || null,
-      severity_level: event.severity.toUpperCase(),
-      additional_data: {
-        ip_address: ip,
-        user_agent: userAgent,
-        ...event.additional_data
-      }
-    });
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (error) {
-      console.error('Failed to log security event:', error);
+    if (supabaseUrl && supabaseKey) {
+      // Supabase REST API 호출 (RPC)
+      await fetch(`${supabaseUrl}/rest/v1/rpc/log_security_event`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`
+        },
+        body: JSON.stringify({
+          event_type: event.type,
+          event_description: event.description,
+          user_id_param: event.user_id || null,
+          severity_level: event.severity.toUpperCase(),
+          additional_data: {
+            ip_address: ip,
+            user_agent: userAgent,
+            ...event.additional_data
+          }
+        })
+      });
     }
 
     // 심각한 이벤트인 경우 즉시 알림
@@ -540,16 +542,26 @@ export function resetSecurityMetrics(): void {
  */
 export async function unblockIP(ip: string, adminUserId: string): Promise<boolean> {
   try {
-    // 관리자 권한 확인
-    const { data: admin } = await supabaseAdmin
-      .from('users')
-      .select('email')
-      .eq('id', adminUserId)
-      .single();
-      
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
     const adminEmails = (process.env.ADMIN_EMAILS || 'jhlim725@gmail.com')
       .split(',')
       .map(e => e.trim().toLowerCase());
+
+    if (!supabaseUrl || !supabaseKey) return false;
+
+    // 관리자 권한 확인 (REST API)
+    const response = await fetch(`${supabaseUrl}/rest/v1/users?id=eq.${adminUserId}&select=email`, {
+      headers: {
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`
+      }
+    });
+    
+    if (!response.ok) return false;
+    
+    const users = await response.json();
+    const admin = users[0];
 
     if (!admin || !adminEmails.includes(admin.email.toLowerCase())) {
       return false;
