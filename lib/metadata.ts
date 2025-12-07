@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from 'next';
 // Safe SEO metadata with fallback support
 export const metadata: Metadata = {
   ...safeMetadata.default,
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip'),
   title: {
     default: 'FamilyOffice S - 절세플랜·가업승계·가족법인·정책자금·기업인증 전문 통합솔루션',
     template: '%s | FamilyOffice S',

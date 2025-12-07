@@ -1,5 +1,5 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { OptimizedImage, HeroImage, ThumbnailImage, AvatarImage, BackgroundImage } from '../optimized-image-loader';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { AvatarImage, BackgroundImage, HeroImage, OptimizedImage, ThumbnailImage } from '../optimized-image-loader';
 
 // Mock Next.js Image component
 jest.mock('next/image', () => {
@@ -17,6 +17,7 @@ jest.mock('next/image', () => {
     [key: string]: unknown;
   }) {
     return (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={src}
         alt={alt}
