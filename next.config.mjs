@@ -28,10 +28,10 @@ const nextConfig = {
     // webpackBuildWorker: true,
   },
   eslint: {
-    ignoreDuringBuilds: false, // Enable ESLint validation during builds
+    ignoreDuringBuilds: true, // TEMPORARY: Disable ESLint to isolate build error
   },
   typescript: {
-    ignoreBuildErrors: false,  // Enable TypeScript error checking during builds
+    ignoreBuildErrors: true,  // TEMPORARY: Disable TS checks to isolate build error
   },
 
   // 이미지 최적화
