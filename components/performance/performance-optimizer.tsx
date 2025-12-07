@@ -18,7 +18,7 @@ import { Progress } from '@/components/ui/progress'
 import {
     AlertTriangle,
     CheckCircle,
-    Image,
+    Image as ImageIcon,
     Layout,
     Loader2,
     TrendingUp,
@@ -47,7 +47,7 @@ export default function PerformanceOptimizer() {
       estimated_improvement: 'LCP -400ms',
       status: 'pending',
       function: optimizeImages,
-      icon: <Image className="w-4 h-4" />
+      icon: <ImageIcon className="w-4 h-4" />
     },
     {
       id: 'reduce-cls',

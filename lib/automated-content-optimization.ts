@@ -1,7 +1,3 @@
-// 자동화된 콘텐츠 최적화 시스템 - AI 기반 콘텐츠 분석 및 실시간 최적화
-import { advancedSEOEngine } from './advanced-seo-engine';
-import { aiKeywordOptimizationEngine } from './ai-keyword-optimization-engine';
-import { realtimeSEODashboard } from './realtime-seo-dashboard';
 
 interface ContentAnalysis {
   contentId: string;

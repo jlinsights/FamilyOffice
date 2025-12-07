@@ -1,16 +1,9 @@
+import { ALLOWED_ORIGINS } from '@/lib/config';
 import { globalRateLimit } from '@/lib/rate-limit';
 import { autoSecurityResponse, detectSuspiciousActivity, logSecurityEvent } from '@/lib/security/security-monitor';
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
-// 허용된 도메인 목록 - 보안 강화
-const ALLOWED_ORIGINS = [
-  'https://familyoffices.vip',
-  'https://www.familyoffices.vip',
-  'https://familyoffice-jet.vercel.app',
-  'https://familyoffice-jlinsights-projects.vercel.app',
-  ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : [])
-];
 
 // 보호된 API 경로 패턴
 const isProtectedApiRoute = createRouteMatcher([

@@ -4,35 +4,6 @@ import { isFeatureEnabled } from './feature-flags';
 
 // Dynamic import wrapper with loading fallbacks
 export const dynamicSEOImports = {
-  // Advanced SEO Engine
-  async loadAdvancedSEOEngine() {
-    if (!isFeatureEnabled('enableAdvancedSEO')) {
-      return null;
-    }
-    
-    try {
-      const seoModule = await import('./advanced-seo-engine');
-      return seoModule.advancedSEOEngine;
-    } catch (error) {
-      console.error('Failed to load advanced SEO engine:', error);
-      return null;
-    }
-  },
-
-  // AI Keyword Optimization
-  async loadAIKeywordEngine() {
-    if (!isFeatureEnabled('enableAIKeywordOptimization')) {
-      return null;
-    }
-    
-    try {
-      const keywordModule = await import('./ai-keyword-optimization-engine');
-      return keywordModule.aiKeywordOptimizationEngine;
-    } catch (error) {
-      console.error('Failed to load AI keyword engine:', error);
-      return null;
-    }
-  },
 
   // Dynamic Structured Data
   async loadStructuredDataEngine() {
@@ -85,20 +56,6 @@ export const dynamicSEOImports = {
     }
   },
 
-  // Realtime SEO Dashboard
-  async loadRealtimeDashboard() {
-    if (!isFeatureEnabled('enableRealtimeSEODashboard')) {
-      return null;
-    }
-    
-    try {
-      const dashboardModule = await import('./realtime-seo-dashboard');
-      return dashboardModule.realtimeSEODashboard;
-    } catch (error) {
-      console.error('Failed to load realtime dashboard:', error);
-      return null;
-    }
-  },
 
 };
 
@@ -147,14 +104,6 @@ export async function preloadCriticalSEOModules(): Promise<void> {
   const promises: Promise<any>[] = [];
   
   // Only preload enabled features
-  if (isFeatureEnabled('enableAdvancedSEO')) {
-    promises.push(
-      BundleSizeMonitor.trackImportTime(
-        'advanced-seo-engine',
-        () => import('./advanced-seo-engine')
-      )
-    );
-  }
   
   if (isFeatureEnabled('enableDynamicStructuredData')) {
     promises.push(
@@ -165,15 +114,6 @@ export async function preloadCriticalSEOModules(): Promise<void> {
     );
   }
   
-  // Week 4 Features - Preload if enabled
-  if (isFeatureEnabled('enableRealtimeSEODashboard')) {
-    promises.push(
-      BundleSizeMonitor.trackImportTime(
-        'realtime-seo-dashboard',
-        () => import('./realtime-seo-dashboard')
-      )
-    );
-  }
   
   // Cross-domain routing is server-side only, skip preloading
   if (isFeatureEnabled('enableCrossDomainRouting') && typeof window === 'undefined') {

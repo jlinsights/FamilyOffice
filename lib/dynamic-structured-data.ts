@@ -1,5 +1,4 @@
 // 동적 구조화 데이터 생성 시스템 - AI 기반 스키마 최적화
-import { advancedSEOEngine } from './advanced-seo-engine';
 
 interface StructuredDataContext {
   domain: string;

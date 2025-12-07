@@ -44,3 +44,12 @@ export function ensureHttps(url: string): string {
   }
   return url;
 }
+
+// Allowed Origins for CORS and Security
+export const ALLOWED_ORIGINS = [
+  'https://familyoffices.vip',
+  'https://www.familyoffices.vip',
+  'https://familyoffice-jet.vercel.app',
+  'https://familyoffice-jlinsights-projects.vercel.app',
+  ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : [])
+];

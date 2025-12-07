@@ -9,6 +9,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { blogCategories } from '@/lib/blog-data';
 import { RSSItem } from '@/lib/rss-aggregator';
 import { ArrowLeft, ArrowRight, Calendar, Clock, Loader2, Search, Sparkles } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -250,10 +251,12 @@ export default function InsightsFeed({
                   <Card className="h-full overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white dark:bg-slate-800 relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
                     {item.imageUrl && (
-                      <img 
+                      <Image 
                         src={item.imageUrl} 
-                        alt={item.title} 
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        alt={item.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     )}
                     <CardContent className="relative z-20 h-full flex flex-col justify-end p-6 md:p-8">
@@ -289,10 +292,12 @@ export default function InsightsFeed({
               >
                 <div className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-900">
                   {item.imageUrl ? (
-                    <img 
+                    <Image 
                       src={item.imageUrl} 
-                      alt={item.title} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">

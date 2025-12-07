@@ -66,7 +66,7 @@ export default function RootLayout({
         
         {/* Google SEO */}
         <meta name="google" content="notranslate" />
-        <meta name="google-site-verification" content="your-google-verification-code" />
+        <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION} />
         
         {/* 모바일 최적화 */}
         <meta name="HandheldFriendly" content="True" />

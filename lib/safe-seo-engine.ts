@@ -1,10 +1,8 @@
 // Safe wrapper for SEO engine with feature flags and error handling
 import { Metadata } from 'next';
 import { isFeatureEnabled } from './feature-flags';
-import { dynamicSEOImports, BundleSizeMonitor } from './seo-bundle-optimizer';
 import { performanceMonitor } from './performance-monitor';
-import { aiCacheOperations } from './enhanced-seo-cache';
-import { SEOErrorHandler, inputSanitizer } from './seo-error-handling';
+import { BundleSizeMonitor, dynamicSEOImports } from './seo-bundle-optimizer';
 
 // Type definitions
 interface SafeSEOMetadata extends Metadata {
@@ -51,56 +49,13 @@ export async function generateSafeMetadata(
       };
     }
 
-    // Try to load and use advanced SEO engine with enhanced caching
-    const context = { 
-      domain: options?.domain || 'familyoffices.vip',
-      userAgent: 'safe-seo-engine',
-      referrer: '',
-      location: 'KR',
-      timeOfDay: Date.now(),
-      deviceType: 'desktop' as const,
-      userSegment: 'individual' as const
-    };
-
-    const metadata = await SEOErrorHandler.safeAIOperation(
-      async () => {
-        return await aiCacheOperations.generateAdvancedMetadata(
-          options?.domain || 'familyoffices.vip',
-          pageName,
-          context,
-          async () => {
-            const advancedSEOEngine = await BundleSizeMonitor.trackImportTime(
-              'advanced-seo-engine',
-              () => dynamicSEOImports.loadAdvancedSEOEngine()
-            );
-            
-            if (!advancedSEOEngine) {
-              throw new Error('Advanced SEO engine failed to load');
-            }
-
-            return await advancedSEOEngine.generateContextualMetadata(
-              options?.domain || 'familyoffices.vip',
-              pageName,
-              context
-            );
-          }
-        );
-      },
-      defaultMetadata, // Fallback
-      {
-        module: 'safe-seo-engine',
-        operationName: 'generateAdvancedMetadata'
-      }
-    );
-      
-    return {
-      ...metadata,
-      _isSafe: true,
-      _fallbackUsed: false,
-    };
-
-    // Fallback if module fails to load
-    return defaultMetadata;
+    // Simplified SEO logic (since advanced engine was removed)
+      return {
+        ...defaultMetadata,
+        title: options?.title || defaultMetadata.title,
+        description: options?.description || defaultMetadata.description,
+        keywords: options?.keywords || defaultMetadata.keywords,
+      };
   } catch (error) {
     // Log error in development
     if (process.env.NODE_ENV === 'development') {
@@ -162,46 +117,8 @@ export async function optimizeKeywordsSafely(
   options?: any
 ): Promise<string[]> {
   try {
-    if (!isFeatureEnabled('enableAIKeywordOptimization')) {
-      return keywords; // Return original keywords
-    }
-
-    // Sanitize keywords input
-    const sanitizedKeywords = inputSanitizer.sanitizeKeywords(keywords);
-    
-    // Use enhanced caching for AI keyword optimization with error handling
-    const result = await SEOErrorHandler.safeAIOperation(
-      async () => {
-        return await aiCacheOperations.optimizeKeywords(
-          'familyoffices.vip',
-          sanitizedKeywords,
-          async () => {
-            const keywordEngine = await BundleSizeMonitor.trackImportTime(
-              'ai-keyword-engine',
-              () => dynamicSEOImports.loadAIKeywordEngine()
-            );
-            
-            if (!keywordEngine) {
-              throw new Error('AI keyword engine failed to load');
-            }
-
-            return await keywordEngine.optimizeKeywords(
-              'familyoffices.vip',
-              sanitizedKeywords,
-              'hybrid',
-              'conversion'
-            );
-          }
-        );
-      },
-      { recommendations: sanitizedKeywords.map(k => ({ keyword: k })) }, // Fallback structure
-      {
-        module: 'safe-seo-engine',
-        operationName: 'optimizeKeywords'
-      }
-    );
-    
-    return result.recommendations?.map((r: any) => r.keyword) || sanitizedKeywords;
+    // Return original keywords since AI engine is removed
+    return keywords;
   } catch (error) {
     console.error('Keyword Optimization Error:', error);
     return keywords;
