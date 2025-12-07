@@ -610,7 +610,7 @@ export function generateExpertMetadata(expertId: string) {
   };
 }
 
-export default {
+const expertProfiles = {
   expertTeam,
   generateEATSignals,
   calculateTeamEATScore,
@@ -619,3 +619,5 @@ export default {
   generateTeamStructuredData,
   generateExpertMetadata
 };
+
+export default expertProfiles;

@@ -3,9 +3,9 @@
  * 실시간 SEO 성과 모니터링 및 개선 추천
  */
 
-import { allKeywords, keywordMetrics } from './korean-keywords';
+import { calculateTeamEATScore, expertTeam } from './expert-profiles';
 import { instantAnswerDB } from './instant-answers';
-import { expertTeam, calculateTeamEATScore } from './expert-profiles';
+import { keywordMetrics } from './korean-keywords';
 
 // SEO 스코어 인터페이스
 export interface SEOScore {
@@ -444,9 +444,11 @@ export class SEOAlertSystem {
 
 export const seoAlerts = new SEOAlertSystem();
 
-export default {
+const seoDashboardExports = {
   SEODashboard,
   seoDashboard,
   SEOAlertSystem,
   seoAlerts
 };
+
+export default seoDashboardExports;

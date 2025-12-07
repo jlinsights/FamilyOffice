@@ -385,7 +385,7 @@ export const keywordMetrics = {
   aiOptimizedRatio: Math.round((aiOptimizedKeywords.length / allKeywords.length) * 100)
 };
 
-export default {
+const koreanKeywords = {
   primaryKeywords,
   longTailKeywords,
   industryKeywords,
@@ -399,3 +399,5 @@ export default {
   allKeywords,
   keywordMetrics
 };
+
+export default koreanKeywords;

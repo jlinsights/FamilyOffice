@@ -3,7 +3,6 @@
  * ChatGPT, Perplexity, Claude 등을 위한 구조화된 답변 시스템
  */
 
-import { allKeywords, keywordContentMapping } from './korean-keywords';
 
 // 즉문즉답 답변 인터페이스
 export interface InstantAnswer {
@@ -339,8 +338,10 @@ export function generateFAQStructuredData(): any {
 // AI 검색엔진용 최적화된 답변 데이터베이스
 export const instantAnswerDB = new InstantAnswerSystem();
 
-export default {
+const instantAnswers = {
   InstantAnswerSystem,
   generateFAQStructuredData,
   instantAnswerDB
 };
+
+export default instantAnswers;

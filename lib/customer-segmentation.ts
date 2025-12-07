@@ -378,7 +378,7 @@ function getSegmentCaseStudies(segment: CustomerSegment) {
   }
 }
 
-export default {
+const customerSegmentation = {
   CUSTOMER_SEGMENTS,
   classifyCustomer,
   generateTargetingMessage,
@@ -387,3 +387,5 @@ export default {
   assessCustomerQualification,
   generateDynamicContent
 };
+
+export default customerSegmentation;
