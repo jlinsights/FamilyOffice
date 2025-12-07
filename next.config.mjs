@@ -23,9 +23,9 @@ const nextConfig = {
     ],
     // Enable server components optimization
     // Better tree shaking
-    optimizeCss: true,
+    // optimizeCss: true,
     // Vercel Toolbar 제거
-    webpackBuildWorker: true,
+    // webpackBuildWorker: true,
   },
   eslint: {
     ignoreDuringBuilds: false, // Enable ESLint validation during builds
