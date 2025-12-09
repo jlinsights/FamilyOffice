@@ -1,5 +1,3 @@
 {
-  "version": 2,
-  "buildCommand": "echo 'FORCE_BUILD_RUNNING' && npm run build",
-  "outputDirectory": ".next"
+  "version": 2
 }

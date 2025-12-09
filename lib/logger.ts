@@ -33,8 +33,8 @@ export interface LogEntry {
 
 class Logger {
   private readonly serviceName: string = 'familyoffice-platform';
-  private readonly version: string = process.env.npm_package_version || '1.0.0';
-  private readonly environment: string = process.env.NODE_ENV || 'development';
+  private readonly version: string = (typeof process !== 'undefined' && process.env.npm_package_version) || '1.0.0';
+  private readonly environment: string = (typeof process !== 'undefined' && process.env.NODE_ENV) || 'development';
 
   private createLogEntry(
     level: LogLevel,

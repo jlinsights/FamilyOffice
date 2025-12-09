@@ -19,7 +19,7 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   profilesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
   
   // 릴리즈 정보
-  release: process.env.VERCEL_GIT_COMMIT_SHA || 'development',
+  release: (typeof process !== 'undefined' && process.env.VERCEL_GIT_COMMIT_SHA) || 'development',
   
   // 사용자 컨텍스트
   beforeSend(event) {

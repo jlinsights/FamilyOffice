@@ -63,8 +63,8 @@ export const clientEnvSchema = z.object({
 export function createEnv() {
   const isServer = typeof window === 'undefined';
   const isDev = process.env.NODE_ENV === 'development';
-  const isBuild = process.env.NEXT_PHASE === 'phase-production-build';
-  const skipValidation = process.env.SKIP_ENV_VALIDATION === 'true';
+  const isBuild = typeof process !== 'undefined' && process.env.NEXT_PHASE === 'phase-production-build';
+  const skipValidation = typeof process !== 'undefined' && process.env.SKIP_ENV_VALIDATION === 'true';
   
   // 빌드 시에는 기본값 반환
   if (isBuild) {
@@ -77,8 +77,8 @@ export function createEnv() {
   // 공용 환경변수 수집
   const publicEnv = {
     NODE_ENV: (process.env.NODE_ENV || 'development') as 'development' | 'production' | 'test',
-    VERCEL_ENV: process.env.VERCEL_ENV,
-    VERCEL_URL: process.env.VERCEL_URL,
+    VERCEL_ENV: typeof process !== 'undefined' ? process.env.VERCEL_ENV : undefined,
+    VERCEL_URL: typeof process !== 'undefined' ? process.env.VERCEL_URL : undefined,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   };
   
