@@ -1,6 +1,9 @@
 /**
  * 리드 스코어링 엔진
  * 행동 추적, 스코어 계산, 자동화 트리거를 처리하는 핵심 엔진
+ *
+ * NOTE: Experimental feature with TypeScript type inference limitations.
+ * See workflow-engine.ts for detailed explanation.
  */
 
 import { createClient } from '@/lib/supabase/server';

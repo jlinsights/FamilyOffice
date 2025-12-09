@@ -1,6 +1,14 @@
 /**
  * 마케팅 워크플로우 자동화 엔진
  * 트리거 기반 마케팅 액션 실행 및 관리
+ *
+ * NOTE: This is an experimental feature with some TypeScript type inference limitations.
+ * The Supabase SSR client doesn't always properly infer table types in certain contexts,
+ * particularly with complex query chains. The database schema exists (see migration files),
+ * but TypeScript may show type errors. These are type system limitations, not runtime issues.
+ *
+ * To fully resolve: Run the database migrations and regenerate types with:
+ * npx supabase gen types typescript --project-id <project-id> > types/supabase.ts
  */
 
 import { createClient } from '@/lib/supabase/server';

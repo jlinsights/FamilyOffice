@@ -1,6 +1,9 @@
 /**
  * AI 콘텐츠 추천 엔진
  * 리드의 행동과 프로필을 분석하여 개인화된 콘텐츠 추천
+ *
+ * NOTE: Experimental feature with TypeScript type inference limitations.
+ * See workflow-engine.ts for detailed explanation.
  */
 
 import { createClient } from '@/lib/supabase/server';
