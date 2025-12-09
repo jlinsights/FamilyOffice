@@ -79,9 +79,10 @@ const nextConfig = {
   poweredByHeader: false,
   
   // 정적 자산 경로 설정
-  assetPrefix: process.env.NODE_ENV === 'production' && process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}` 
-    : undefined,
+  // 정적 자산 경로 설정
+  // assetPrefix: process.env.NODE_ENV === 'production' && process.env.VERCEL_URL 
+  //   ? `https://${process.env.VERCEL_URL}` 
+  //   : undefined,
 
   // 웹팩 설정 최적화
   webpack: (config, { dev, isServer }) => {
@@ -303,7 +304,7 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: process.env.NODE_ENV === 'development'
               ? "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data: blob:; font-src * data:; connect-src *; frame-src *; worker-src 'self' blob:;"
-              : "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://*.clerk.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://js.hs-scripts.com https://forms.hubspot.com https://app.cal.com https://cal.com https://t1.kakaocdn.net https://developers.kakao.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://*.clerk.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://fonts.googleapis.com https://img.clerk.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://js.hs-scripts.com https://forms.hubspot.com https://api.github.com https://vitals.vercel-insights.com; frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://www.googletagmanager.com https://www.google-analytics.com https://app.cal.com https://cal.com https://js.stripe.com https://checkout.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+              : "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://*.clerk.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://js.hs-scripts.com https://forms.hubspot.com https://app.cal.com https://cal.com https://t1.kakaocdn.net https://developers.kakao.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://*.clerk.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://fonts.googleapis.com https://img.clerk.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://js.hs-scripts.com https://forms.hubspot.com https://api.github.com https://vitals.vercel-insights.com; frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://www.googletagmanager.com https://www.google-analytics.com https://app.cal.com https://cal.com https://js.stripe.com https://checkout.stripe.com https://www.youtube.com https://open.spotify.com https://lu.ma https://*.youtube.com https://*.spotify.com https://*.lu.ma; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
           },
           {
             key: 'Access-Control-Allow-Origin',
