@@ -2,6 +2,10 @@
 
 import React from 'react';
 
+// Extract environment variables at module level for client components
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
 interface Props {
   children: React.ReactNode;
   fallback?: React.ReactNode;
@@ -25,7 +29,7 @@ export class SEOErrorBoundary extends React.Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
+    if (IS_DEVELOPMENT) {
       console.error('SEO Error Boundary caught:', error, errorInfo);
     }
 
@@ -35,7 +39,7 @@ export class SEOErrorBoundary extends React.Component<Props, State> {
     }
 
     // In production, log to error tracking service
-    if (process.env.NODE_ENV === 'production') {
+    if (IS_PRODUCTION) {
       // TODO: Integrate with error tracking service (Sentry, etc.)
       console.error('SEO component error:', {
         message: error.message,

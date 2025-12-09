@@ -8,6 +8,10 @@
 import { useEffect } from 'react';
 import { onCLS, onFCP, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
 
+// Extract environment variables at module level for client components
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
 interface WebVitalsMetric {
   id: string;
   name: string;
@@ -45,18 +49,18 @@ function sendToAnalytics(metric: WebVitalsMetric) {
       non_interaction: true,
     });
   }
-  
+
   // 개발 환경에서 콘솔 로깅
-  if (process.env.NODE_ENV === 'development') {
+  if (IS_DEVELOPMENT) {
     console.group(`🎯 Web Vitals: ${metric.name}`);
     console.log(`Value: ${metric.value}`);
     console.log(`Rating: ${metric.rating}`);
     console.log(`Delta: ${metric.delta}`);
     console.groupEnd();
   }
-  
+
   // Vercel Analytics로 전송 (프로덕션)
-  if (process.env.NODE_ENV === 'production' && window.va) {
+  if (IS_PRODUCTION && window.va) {
     window.va('Web Vitals', {
       metric: metric.name,
       value: metric.value,

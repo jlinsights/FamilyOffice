@@ -7,6 +7,9 @@
 import { useEffect } from 'react';
 import { koreanPerformanceMonitor } from '@/lib/korean-performance-monitor';
 
+// Extract environment variables at module level for client components
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+
 export function KoreanPerformanceTracker() {
   useEffect(() => {
     // 페이지 로드 후 성능 모니터링 시작
@@ -14,9 +17,9 @@ export function KoreanPerformanceTracker() {
       try {
         // 모니터링 시작
         koreanPerformanceMonitor.startMonitoring();
-        
+
         // 5초 후 초기 성능 리포트 생성 (개발 환경)
-        if (process.env.NODE_ENV === 'development') {
+        if (IS_DEVELOPMENT) {
           setTimeout(() => {
             const report = koreanPerformanceMonitor.generatePerformanceReport();
             console.log('📊 한국 시장 성능 리포트:', report);

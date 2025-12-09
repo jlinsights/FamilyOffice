@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { createAnalyticsScript, createGTMScript, isAllowedScriptSource } from '@/lib/security/html-sanitizer';
 import { createLogger, securityLogger } from '@/lib/security/secure-logger';
 
+// Extract environment variables at module level for client components
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-MP3HPPMN';
 const logger = createLogger('Analytics');

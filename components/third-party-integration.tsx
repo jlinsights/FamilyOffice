@@ -14,6 +14,14 @@ import { createUserTrackingScript } from '@/lib/security/html-sanitizer';
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
+// Extract environment variables at module level for client components
+// In client components, NEXT_PUBLIC_ env vars are replaced at build time
+const KAKAO_PIXEL_ID = process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || '';
+const KAKAO_JAVASCRIPT_KEY = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || 'a1c218e1d0a96ce64bf734eafda420b1';
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
 export function ThirdPartyIntegration() {
   return (
     <>
@@ -21,23 +29,23 @@ export function ThirdPartyIntegration() {
       <Analytics />
       <WebVitalsTracker />
       <KoreanPerformanceTracker />
-      <KakaoPixel 
-        pixelId={process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID || ''} 
-        debug={process.env.NODE_ENV === 'development'} 
+      <KakaoPixel
+        pixelId={KAKAO_PIXEL_ID}
+        debug={IS_DEVELOPMENT}
       />
       <KakaoSDK
-        javascriptKey={process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || ''}
-        debug={true}
+        javascriptKey={KAKAO_JAVASCRIPT_KEY}
+        debug={IS_DEVELOPMENT}
       />
       <ExternalScripts />
       <ChannelTalk />
-      
+
       {/* SEO 성과 추적 시스템 */}
-      <SEOTrackerInit 
+      <SEOTrackerInit
         config={{
-          ...(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && { gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID }),
+          ...(GA_MEASUREMENT_ID && { gaTrackingId: GA_MEASUREMENT_ID }),
           customDomain: 'familyoffices.vip',
-          trackingEnabled: process.env.NODE_ENV === 'production',
+          trackingEnabled: IS_PRODUCTION,
           reportingInterval: 'daily'
         }}
       />

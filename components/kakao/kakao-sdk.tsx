@@ -38,37 +38,28 @@ export function KakaoSDK({ javascriptKey, debug = false }: KakaoSDKProps) {
   }, [javascriptKey, debug]);
 
   return (
-    <>
-      {debug && (
-        <div style={{ display: 'none' }}>
-          <p>KakaoSDK Debug Info:</p>
-          <p>javascriptKey: {javascriptKey ? `${javascriptKey.substring(0, 10)}...` : 'NOT SET'}</p>
-          <p>NODE_ENV: {process.env.NODE_ENV}</p>
-        </div>
-      )}
-      <Script
-        id="kakao-sdk"
-        strategy="afterInteractive"
-        src="https://developers.kakao.com/sdk/js/kakao.js"
-        onLoad={() => {
-          if (window.Kakao && !window.Kakao.isInitialized()) {
-            if (javascriptKey) {
-              window.Kakao.init(javascriptKey);
-              
-              if (debug) {
-                console.log('✅ Kakao SDK script loaded and initialized');
-                console.log('🔑 Using key:', javascriptKey.substring(0, 10) + '...');
-              }
-            } else {
-              console.error('❌ Kakao JavaScript Key가 설정되지 않았습니다.');
+    <Script
+      id="kakao-sdk"
+      strategy="afterInteractive"
+      src="https://developers.kakao.com/sdk/js/kakao.js"
+      onLoad={() => {
+        if (window.Kakao && !window.Kakao.isInitialized()) {
+          if (javascriptKey) {
+            window.Kakao.init(javascriptKey);
+
+            if (debug) {
+              console.log('✅ Kakao SDK script loaded and initialized');
+              console.log('🔑 Using key:', javascriptKey.substring(0, 10) + '...');
             }
+          } else {
+            console.error('❌ Kakao JavaScript Key가 설정되지 않았습니다.');
           }
-        }}
-        onError={(error) => {
-          console.error('❌ Kakao SDK script loading failed:', error);
-        }}
-      />
-    </>
+        }
+      }}
+      onError={(error) => {
+        console.error('❌ Kakao SDK script loading failed:', error);
+      }}
+    />
   );
 }
 

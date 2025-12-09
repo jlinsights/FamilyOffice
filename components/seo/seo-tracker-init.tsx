@@ -8,6 +8,10 @@
 import { useEffect } from 'react';
 import { initializeSEOTracker, type AnalyticsConfig } from '@/lib/seo/analytics-tracker';
 
+// Extract environment variables at module level for client components
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
 interface SEOTrackerInitProps {
   config?: Partial<AnalyticsConfig>;
 }
@@ -23,10 +27,10 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
 
     // 기본 설정
     const defaultConfig: AnalyticsConfig = {
-      ...(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && { gaTrackingId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID }),
+      ...(GA_MEASUREMENT_ID && { gaTrackingId: GA_MEASUREMENT_ID }),
       gscPropertyUrl: 'https://familyoffices.vip',
       customDomain: 'familyoffices.vip',
-      trackingEnabled: process.env.NODE_ENV === 'production',
+      trackingEnabled: IS_PRODUCTION,
       reportingInterval: 'daily',
       ...config
     };
