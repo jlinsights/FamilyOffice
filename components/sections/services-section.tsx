@@ -1,25 +1,25 @@
 'use client';
 
 import {
-  ArrowRight,
-  Briefcase,
-  Building2,
-  Crown,
-  Search,
-  Shield,
-  Target,
-  TrendingUp
+    ArrowRight,
+    Briefcase,
+    Building2,
+    Crown,
+    Search,
+    Shield,
+    Target,
+    TrendingUp
 } from 'lucide-react';
 
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { SERVICE_CATEGORIES } from '@/constants/services';
 
@@ -145,7 +145,7 @@ export function ServicesSection() {
 
           <div className="relative z-10 text-center mb-12">
             <h3 className="text-3xl font-bold mb-4">
-              <span className="text-blue-300">Family Office</span>의 탁월한 성과
+              <span className="text-blue-300">패밀리오피스</span>의 탁월한 성과
             </h3>
             <p className="text-slate-300 max-w-2xl mx-auto text-lg font-light">
               최고 자산가들이 신뢰하는 패밀리오피스의 검증된 실적과 <span className="font-bold text-white">차별화된 전문성</span>
