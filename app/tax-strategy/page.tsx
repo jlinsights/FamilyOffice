@@ -1,21 +1,21 @@
 'use client';
 
 import {
-  Calculator,
-  TrendingDown,
-  Shield,
-  FileText,
-  CheckCircle,
-  ArrowRight,
-  DollarSign,
-  Building,
-  Users,
-  Trophy,
-  Target,
-  AlertTriangle,
-  Lightbulb,
-  Crown,
-  Star,
+    AlertTriangle,
+    ArrowRight,
+    Building,
+    Calculator,
+    CheckCircle,
+    Crown,
+    DollarSign,
+    FileText,
+    Lightbulb,
+    Shield,
+    Star,
+    Target,
+    TrendingDown,
+    Trophy,
+    Users,
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -797,28 +797,28 @@ const TaxStrategyPage = () => {
         </section>
 
         {/* Premium Family Office Upgrade Section */}
-        <section className="py-16 bg-gradient-to-br from-amber-50/50 to-blue-50/50">
+        <section className="py-16 bg-gradient-to-br from-amber-50/50 to-blue-50/50 dark:from-slate-900/50 dark:to-slate-800/50">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge variant="outline" className="mb-6 border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 shadow-lg backdrop-blur-sm">
+              <Badge variant="outline" className="mb-6 border-amber-200 dark:border-amber-700/50 bg-gradient-to-r from-amber-50/80 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/50 text-amber-800 dark:text-amber-300 shadow-lg backdrop-blur-sm">
                 <Crown className="h-4 w-4 mr-2" />
                 Family Office Excellence
               </Badge>
               
-              <h3 className="text-3xl md:text-4xl font-bold mb-4 font-playfair">
-                <span className="text-premium-gold">절세 전략</span>을 넘어선{' '}
-                <span className="text-premium-navy">패밀리오피스</span>
+              <h3 className="text-3xl md:text-4xl font-bold mb-4 font-playfair text-foreground dark:text-white">
+                <span className="text-amber-600 dark:text-amber-400">절세 전략</span>을 넘어선{' '}
+                <span className="text-indigo-900 dark:text-indigo-300">패밀리오피스</span>
               </h3>
               
-              <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-                개별 절세 전략에서 <span className="font-bold text-premium-navy">통합 자산관리 솔루션</span>으로 업그레이드하세요.
+              <p className="text-xl text-muted-foreground dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+                개별 절세 전략에서 <span className="font-bold text-indigo-900 dark:text-indigo-300">통합 자산관리 솔루션</span>으로 업그레이드하세요.
                 최고 자산가들이 선택한 차별화된 패밀리오피스 서비스를 경험해보세요.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Link
                   href="/family-office-center"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-premium-navy text-white text-lg font-semibold rounded-2xl hover:shadow-premium-navy transition-all duration-300 hover:scale-105"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-indigo-900 dark:bg-indigo-600 text-white text-lg font-semibold rounded-2xl hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   <Crown className="h-6 w-6 mr-2" />
                   패밀리오피스 센터 보기
@@ -829,22 +829,22 @@ const TaxStrategyPage = () => {
                   buttonText="VIP 전용 상담 신청"
                   variant="outline"
                   size="lg"
-                  className="text-lg px-8 py-4 border-2 border-amber-200 hover:bg-amber-50 rounded-2xl"
+                  className="text-lg px-8 py-4 border-2 border-amber-200 dark:border-amber-700 hover:bg-amber-50 dark:hover:bg-amber-900/20 text-foreground dark:text-amber-100 rounded-2xl"
                   eventType="consultation"
                 />
               </div>
               
-              <div className="grid md:grid-cols-3 gap-4 max-w-2xl mx-auto text-sm text-muted-foreground">
+              <div className="grid md:grid-cols-3 gap-4 max-w-2xl mx-auto text-sm text-muted-foreground dark:text-gray-400">
                 <div className="flex items-center justify-center gap-2">
-                  <Shield className="h-4 w-4 text-premium-gold" />
+                  <Shield className="h-4 w-4 text-amber-500 dark:text-amber-400" />
                   <span>100억+ 자산 전용</span>
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                  <Users className="h-4 w-4 text-premium-navy" />
+                  <Users className="h-4 w-4 text-indigo-700 dark:text-indigo-400" />
                   <span>전담 전문가팀</span>
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                  <Star className="h-4 w-4 text-green-600" />
+                  <Star className="h-4 w-4 text-green-600 dark:text-green-400" />
                   <span>98% 고객 만족도</span>
                 </div>
               </div>
