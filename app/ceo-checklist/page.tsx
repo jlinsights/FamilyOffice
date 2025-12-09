@@ -1,22 +1,22 @@
 'use client';
 
 import {
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
-  FileCheck,
-  Shield,
-  Building,
-  Users,
-  TrendingUp,
-  Calculator,
-  Heart,
-  Briefcase,
-  Target,
-  ChevronRight,
-  Download,
-  Phone,
-  Crown,
+    AlertCircle,
+    Briefcase,
+    Building,
+    Calculator,
+    CheckCircle2,
+    ChevronRight,
+    Crown,
+    Download,
+    FileCheck,
+    Heart,
+    Phone,
+    Shield,
+    Target,
+    TrendingUp,
+    Users,
+    XCircle,
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -414,23 +414,23 @@ const CEOChecklistPage = () => {
             </section>
 
             {/* Action Section */}
-            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10">
+            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 backdrop-blur-sm border border-primary/10 dark:border-primary/20">
               <CardContent className="pt-8 pb-8">
-                <div className="text-center space-y-6">
+                <div className="text-center space-y-8">
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">
+                    <h3 className="text-2xl font-bold mb-3 text-foreground dark:text-white">
                       체크리스트 결과를 바탕으로 맞춤형 솔루션을 제안해드립니다
                     </h3>
-                    <p className="text-lg text-muted-foreground">
+                    <p className="text-lg text-muted-foreground dark:text-gray-300">
                       {criticalProgress < 50 && '필수 항목의 준비가 시급합니다. 전문가 상담을 권해드립니다.'}
                       {criticalProgress >= 50 && criticalProgress < 80 && '양호한 수준이나 몇 가지 개선이 필요합니다.'}
                       {criticalProgress >= 80 && '우수한 경영 관리 수준입니다. 지속적인 관리가 중요합니다.'}
                     </p>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
                     <CalComPopup
-                      className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors"
+                      className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors w-full h-full min-h-[3.5rem]"
                       buttonText="무료 경영진단 상담"
                       eventType="consultation"
                       trigger={
@@ -441,56 +441,55 @@ const CEOChecklistPage = () => {
                       }
                     />
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Link href="/tax-strategy">
                         <Calculator className="h-5 w-5 mr-2" />
                         절세 전략 보기
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Link href="/corporate-tax-checklist">
                         <FileCheck className="h-5 w-5 mr-2" />
                         법인세 결산 체크리스트
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Link href="/hr-labor-management">
                         <Users className="h-5 w-5 mr-2" />
                         인사노무 관리 가이드
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Link href="/business-succession-strategy">
                         <Crown className="h-5 w-5 mr-2" />
                         전략적 가업승계
                       </Link>
                     </Button>
 
-
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Link href="/inheritance-gift-tax">
                         <Heart className="h-5 w-5 mr-2" />
                         상속·증여세 가이드
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Link href="/fp-center">
                         <Users className="h-5 w-5 mr-2" />
                         FP센터 종합진단
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg">
+                    <Button variant="outline" size="lg" className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Download className="h-5 w-5 mr-2" />
                       체크리스트 다운로드
                     </Button>
                   </div>
 
-                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground dark:text-gray-400">
                     <Phone className="h-4 w-4" />
                     <span>긴급 상담: 0502-5550-8700</span>
                   </div>
