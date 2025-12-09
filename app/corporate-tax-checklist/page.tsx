@@ -1,26 +1,24 @@
 'use client';
 
 import {
-  Calculator,
-  FileCheck,
-  AlertTriangle,
-  CheckCircle2,
-  XCircle,
-  Building,
-  TrendingUp,
-  Shield,
-  FileText,
-  Calendar,
-  DollarSign,
-  Clock,
-  Target,
-  Users,
-  Lightbulb,
-  ArrowRight,
-  Download,
-  Phone,
-  BookOpen,
-  Briefcase,
+    AlertTriangle,
+    ArrowRight,
+    BookOpen,
+    Briefcase,
+    Building,
+    Calculator,
+    CheckCircle2,
+    Clock,
+    Download,
+    FileCheck,
+    FileText,
+    Lightbulb,
+    Phone,
+    Shield,
+    Target,
+    TrendingUp,
+    Users,
+    XCircle
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -494,16 +492,16 @@ const CorporateTaxChecklistPage = () => {
             </Tabs>
 
             {/* Action Section based on progress */}
-            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 backdrop-blur-sm">
+            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 backdrop-blur-sm border border-primary/10 dark:border-primary/20">
               <CardContent className="pt-8 pb-8">
                 <div className="text-center space-y-6">
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">
+                    <h3 className="text-2xl font-bold mb-3 text-foreground dark:text-white">
                       {criticalProgress < 50 && '긴급 대응이 필요합니다'}
                       {criticalProgress >= 50 && criticalProgress < 80 && '잘 진행되고 있습니다'}
                       {criticalProgress >= 80 && '완벽한 준비 상태입니다'}
                     </h3>
-                    <p className="text-lg text-muted-foreground">
+                    <p className="text-lg text-muted-foreground dark:text-gray-300">
                       {criticalProgress < 50 && '필수 항목들의 즉시 완료가 필요합니다. 전문가 상담을 권해드립니다.'}
                       {criticalProgress >= 50 && criticalProgress < 80 && '몇 가지 항목만 더 완료하시면 됩니다.'}
                       {criticalProgress >= 80 && '모든 필수 항목이 완료되어 세무리스크가 최소화되었습니다.'}
@@ -523,20 +521,20 @@ const CorporateTaxChecklistPage = () => {
                       }
                     />
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Link href="/tax-strategy">
                         <TrendingUp className="h-5 w-5 mr-2" />
                         절세 전략 보기
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg">
+                    <Button variant="outline" size="lg" className="dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Download className="h-5 w-5 mr-2" />
                       체크리스트 다운로드
                     </Button>
                   </div>
 
-                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground dark:text-gray-400">
                     <Phone className="h-4 w-4" />
                     <span>긴급 세무 상담: 0502-5550-8700</span>
                   </div>
