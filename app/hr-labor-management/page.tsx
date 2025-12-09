@@ -1,31 +1,24 @@
 'use client';
 
 import {
-  Users,
-  Shield,
-  FileCheck,
-  AlertTriangle,
-  CheckCircle2,
-  XCircle,
-  Clock,
-  Building,
-  Scale,
-  Heart,
-  BookOpen,
-  Target,
-  TrendingUp,
-  Calculator,
-  Gavel,
-  UserCheck,
-  ClipboardList,
-  Award,
-  Briefcase,
-  Phone,
-  ArrowRight,
-  Download,
-  Calendar,
-  DollarSign,
-  AlertCircle,
+    AlertCircle,
+    AlertTriangle,
+    ArrowRight,
+    Award,
+    BookOpen,
+    CheckCircle2,
+    Clock,
+    DollarSign,
+    Download,
+    FileCheck,
+    Phone,
+    Scale,
+    Shield,
+    Target,
+    TrendingUp,
+    UserCheck,
+    Users,
+    XCircle
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -563,16 +556,16 @@ const HRLaborManagementPage = () => {
             </Tabs>
 
             {/* Action Section */}
-            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 backdrop-blur-sm">
+            <Card className="mt-12 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 backdrop-blur-sm border border-primary/10 dark:border-primary/20">
               <CardContent className="pt-8 pb-8">
                 <div className="text-center space-y-6">
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">
+                    <h3 className="text-2xl font-bold mb-3 text-foreground dark:text-white">
                       {criticalProgress < 50 && '긴급 인사노무 점검이 필요합니다'}
                       {criticalProgress >= 50 && criticalProgress < 80 && '양호한 관리 수준입니다'}
                       {criticalProgress >= 80 && '훌륭한 인사노무 관리 상태입니다'}
                     </h3>
-                    <p className="text-lg text-muted-foreground">
+                    <p className="text-lg text-muted-foreground dark:text-gray-300">
                       {criticalProgress < 50 && '법적 리스크가 높습니다. 즉시 전문가 상담이 필요합니다.'}
                       {criticalProgress >= 50 && criticalProgress < 80 && '몇 가지 영역의 개선이 필요합니다.'}
                       {criticalProgress >= 80 && '지속적인 관리로 법적 리스크를 최소화하고 있습니다.'}
@@ -592,20 +585,20 @@ const HRLaborManagementPage = () => {
                       }
                     />
 
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Link href="/ceo-checklist">
                         <Target className="h-5 w-5 mr-2" />
                         CEO 경영진단 보기
                       </Link>
                     </Button>
 
-                    <Button variant="outline" size="lg">
+                    <Button variant="outline" size="lg" className="dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">
                       <Download className="h-5 w-5 mr-2" />
                       체크리스트 다운로드
                     </Button>
                   </div>
 
-                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground dark:text-gray-400">
                     <Phone className="h-4 w-4" />
                     <span>긴급 인사노무 상담: 0502-5550-8700</span>
                   </div>
