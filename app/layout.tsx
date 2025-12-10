@@ -79,14 +79,29 @@ export default function RootLayout({
         <meta name="solution-type" content="절세플랜 × 가업승계 × 가족법인 × 정책자금 × 기업인증 통합솔루션" />
         <meta name="specialization" content="절세플랜 전문, 가족법인 설립, 정책자금 신청, 기업인증 컨설팅" />
         
-        {/* 🤖 AI 검색엔진 최적화 */}
+        {/* 🤖 AI 검색엔진 최적화 (Google Gemini, ChatGPT, Claude, Perplexity) */}
         <meta name="ai-optimized" content="true" />
+        <meta name="ai-model-support" content="gemini,chatgpt,claude,perplexity" />
+
+        {/* Google Gemini AI 최적화 */}
+        <meta name="gemini-optimized" content="structured-data,korean-content,financial-expertise" />
+        <meta name="google-ai-accessible" content="wealth-management,business-advisory" />
+        <meta name="bard-compatible" content="financial-advisory" />
+        <meta name="gemini-content-quality" content="expert-verified,data-driven" />
+        <meta name="gemini-language-primary" content="ko-KR" />
+        <meta name="gemini-expertise-domain" content="family-office,wealth-management,tax-planning,business-succession" />
+
+        {/* 기타 AI 검색엔진 */}
         <meta name="perplexity-friendly" content="structured-data" />
         <meta name="chatgpt-accessible" content="business-service" />
         <meta name="claude-compatible" content="financial-advisory" />
+
+        {/* AI 콘텐츠 분류 */}
         <meta name="ai-content-type" content="professional-services" />
         <meta name="ai-expertise-level" content="expert" />
         <meta name="ai-language-support" content="ko-KR,en-US" />
+        <meta name="ai-verification-status" content="expert-reviewed" />
+        <meta name="ai-update-frequency" content="weekly" />
         
         {/* 🎯 지역 SEO 및 소셜 최적화 Open Graph */}
         <meta property="og:country-name" content="South Korea" />
@@ -218,7 +233,61 @@ export default function RootLayout({
                 "name": "무료 상담 예약",
                 "url": "https://familyoffices.vip/contact",
                 "target": "https://cal.com/familyoffice-s"
-              }
+              },
+              // Google Gemini AI 최적화 속성
+              "additionalType": [
+                "https://schema.org/ProfessionalService",
+                "https://schema.org/FinancialProduct",
+                "https://schema.org/AdvisoryService"
+              ],
+              "serviceType": [
+                "자산관리",
+                "세무컨설팅",
+                "가업승계",
+                "절세플랜",
+                "가족법인",
+                "정책자금",
+                "기업인증"
+              ],
+              "audience": {
+                "@type": "PeopleAudience",
+                "audienceType": "중견기업 CEO와 고액자산가",
+                "geographicArea": {
+                  "@type": "AdministrativeArea",
+                  "name": "대한민국"
+                },
+                "requiredMinAge": 35,
+                "suggestedMinAge": 40
+              },
+              "award": [
+                "삼성생명 프리미엄 파트너",
+                "전문 패밀리오피스 컨설턴트",
+                "정책자금 신청 95% 성공률"
+              ],
+              "slogan": "성공한 기업가의 자산을 지키고 키우는 전문가 파트너",
+              "foundingDate": "2020",
+              "knowsLanguage": {
+                "@type": "Language",
+                "name": "Korean",
+                "alternateName": "ko-KR"
+              },
+              "makesOffer": [
+                {
+                  "@type": "Offer",
+                  "name": "무료 초기 상담",
+                  "price": "0",
+                  "priceCurrency": "KRW"
+                },
+                {
+                  "@type": "Offer",
+                  "name": "맞춤형 절세플랜",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "priceCurrency": "KRW",
+                    "price": "협의"
+                  }
+                }
+              ]
             })
           }}
         />

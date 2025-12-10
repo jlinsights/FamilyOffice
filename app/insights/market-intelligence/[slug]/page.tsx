@@ -164,6 +164,88 @@ export default async function BlogPostPage({
           </div>
         </section>
 
+        {/* Article Schema for SEO/AEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Article',
+              headline: post.title,
+              description: post.excerpt,
+              image: post.image || post.coverImage || 'https://familyoffices.vip/og-image.jpg',
+              datePublished: post.date,
+              dateModified: post.lastUpdated || post.date,
+              author: {
+                '@type': 'Person',
+                name: post.author,
+                jobTitle: '수석 컨설턴트',
+                image: '/Images/Profile Image-3-1080 x 1080 px.png',
+                url: 'https://litt.ly/familyoffice'
+              },
+              publisher: {
+                '@type': 'Organization',
+                name: 'FamilyOffice S',
+                url: 'https://familyoffices.vip',
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://familyoffices.vip/logo.png'
+                }
+              },
+              mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': `https://familyoffices.vip/insights/market-intelligence/${post.slug}`
+              },
+              articleSection: post.category,
+              keywords: post.tags.join(', '),
+              wordCount: post.content.split(' ').length,
+              inLanguage: 'ko-KR',
+              isAccessibleForFree: true,
+              about: {
+                '@type': 'Thing',
+                name: '패밀리오피스 및 자산관리',
+                sameAs: 'https://ko.wikipedia.org/wiki/패밀리_오피스'
+              }
+            })
+          }}
+        />
+
+        {/* Breadcrumb Schema for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: '홈',
+                  item: 'https://familyoffices.vip'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: '인사이트',
+                  item: 'https://familyoffices.vip/insights/market-intelligence'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: post.category,
+                  item: `https://familyoffices.vip/insights/market-intelligence?category=${encodeURIComponent(post.category)}`
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 4,
+                  name: post.title
+                }
+              ]
+            })
+          }}
+        />
+
         {/* Content */}
         <section className="pb-20">
           <div className="container mx-auto px-4">

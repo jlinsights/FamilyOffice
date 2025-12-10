@@ -75,16 +75,36 @@ const jsonLd = {
   '@type': 'Blog',
   name: '인사이트 & 블로그 - FamilyOffice S',
   description: '한국 중견기업 CEO를 위한 패밀리오피스 전문가의 최신 분석과 실무 가이드',
-  url: 'https://www.samsunglife.vip/insights/market-intelligence',
+  url: 'https://www.familyoffices.vip/insights/market-intelligence',
   publisher: {
     '@type': 'Organization',
     name: 'FamilyOffice S',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://www.samsunglife.vip/logo.png'
+      url: 'https://www.familyoffices.vip/logo.png'
     }
   },
   blogPost: [] // 동적으로 포스트 추가 가능
+};
+
+// Breadcrumb Schema 추가
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '홈',
+      item: 'https://familyoffices.vip'
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: '인사이트 & 블로그',
+      item: 'https://familyoffices.vip/insights/market-intelligence'
+    }
+  ]
 };
 
 export default function BlogPage() {
@@ -94,6 +114,10 @@ export default function BlogPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <main className="pt-20">
         {/* Hero Section - Modern Magazine Style */}

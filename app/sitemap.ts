@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { blogCategories } from '@/lib/blog-data';
+import { blogCategories, blogPosts } from '@/lib/blog-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://familyoffices.vip';
@@ -166,6 +166,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }));
-  
-  return [...staticPages, ...categoryPages];
+
+  // 개별 블로그 포스트 페이지 추가 (SEO 최적화)
+  const blogPostPages = Object.values(blogPosts).map(post => ({
+    url: `${baseUrl}/insights/market-intelligence/${post.slug}`,
+    lastModified: post.lastUpdated ? new Date(post.lastUpdated) : new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  // RSS Feed 및 API 엔드포인트 추가
+  const rssAndApiPages = [
+    {
+      url: `${baseUrl}/api/insights`,
+      lastModified: currentDate,
+      changeFrequency: 'daily' as const,
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/api/insights?source=beehiiv`,
+      lastModified: currentDate,
+      changeFrequency: 'daily' as const,
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/api/insights?source=naver-blog`,
+      lastModified: currentDate,
+      changeFrequency: 'daily' as const,
+      priority: 0.4,
+    },
+  ];
+
+  return [...staticPages, ...categoryPages, ...blogPostPages, ...rssAndApiPages];
 }
