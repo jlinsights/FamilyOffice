@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
 export async function HEAD() {
   try {
     const status = await rssAggregator.checkFeedHealth();
-    
+
     return new NextResponse(null, {
       status: status.beehiiv ? 200 : 503,
       headers: {
@@ -76,5 +76,55 @@ export async function HEAD() {
     });
   } catch (error) {
     return new NextResponse(null, { status: 503 });
+  }
+}
+
+// 수동 캐시 새로고침 엔드포인트
+export async function POST(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const action = searchParams.get('action');
+
+    if (action === 'refresh-cache') {
+      // 캐시 키 삭제하여 새로고침 트리거
+      const sources = ['beehiiv', 'naver-blog', 'tistory', 'brunch', 'substack', 'local'];
+
+      // 실제 캐시 삭제는 rss-aggregator 내부에서 처리
+      // 새로운 데이터를 가져와서 자동으로 캐시 갱신
+      const refreshedContent = await rssAggregator.getIntegratedContent(
+        process.env.NAVER_BLOG_ID || 'lim_jaehong',
+        50
+      );
+
+      return NextResponse.json({
+        success: true,
+        message: 'Cache refreshed successfully',
+        data: {
+          refreshedAt: new Date().toISOString(),
+          itemsCount: refreshedContent.length,
+          sources: Array.from(new Set(refreshedContent.map(item => item.source)))
+        }
+      });
+    }
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Invalid action. Use ?action=refresh-cache'
+      },
+      { status: 400 }
+    );
+
+  } catch (error) {
+    console.error('Cache refresh error:', error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to refresh cache',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      },
+      { status: 500 }
+    );
   }
 }

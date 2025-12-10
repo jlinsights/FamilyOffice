@@ -41,7 +41,7 @@ export class RSSAggregator {
 
   private parser: Parser;
   private cachePrefix = 'rss_feed';
-  private cacheDuration = 3600; // 1시간
+  private cacheDuration = 900; // 15분 (새 콘텐츠 빠른 반영)
 
   constructor() {
     this.parser = new Parser({

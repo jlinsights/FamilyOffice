@@ -1,1 +1,12 @@
-✨ TypeScript 타입 개선: Supabase 타입 정의 확장, 에러 34% 감소 (141→93개)
+✨ Iconify 아이콘 시스템 추가 + RSS 피드 최적화
+
+**Iconify 통합:**
+- @iconify/react 설치 (150,000+ 오픈소스 아이콘)
+- 기존 Lucide 아이콘과 함께 사용 가능
+- 예제 컴포넌트 생성: 금융/비즈니스, 한국 관련 아이콘 포함
+- components/icons/iconify-example.tsx
+
+**RSS 피드 개선:**
+- RSS 캐시: 1시간 → 15분 단축으로 새 콘텐츠 빠른 반영
+- POST /api/insights?action=refresh-cache: 수동 캐시 새로고침 API 추가
+- Vercel 환경변수: NAVER_BLOG_ID=lim_jaehong 설정 완료
