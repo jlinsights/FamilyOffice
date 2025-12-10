@@ -75,6 +75,19 @@ export default async function BlogPostPage({
     notFound();
   }
 
+  // 관련 포스트 추천: 같은 카테고리에서 최대 3개 (SEO & 내부 링크 강화)
+  const relatedPosts = Object.values(blogPosts)
+    .filter(p => p.category === post.category && p.slug !== slug)
+    .slice(0, 3);
+
+  // 관련 포스트가 3개 미만이면 다른 카테고리에서 채우기
+  if (relatedPosts.length < 3) {
+    const additionalPosts = Object.values(blogPosts)
+      .filter(p => p.slug !== slug && !relatedPosts.includes(p))
+      .slice(0, 3 - relatedPosts.length);
+    relatedPosts.push(...additionalPosts);
+  }
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -368,41 +381,40 @@ export default async function BlogPostPage({
                 </div>
               </div>
 
-              {/* Related Posts */}
-              <div className="mt-12">
-                <h3 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white flex items-center gap-2">
-                  <span className="w-1 h-8 bg-blue-600 rounded-full block" />
-                  관련 인사이트
-                </h3>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Link href="/insights/market-intelligence/asset-management-strategy" className="group">
-                    <div className="h-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-xl hover:border-blue-500/30 transition-all duration-300">
-                      <Badge variant="outline" className="mb-3 border-blue-200 text-blue-700 dark:border-blue-900 dark:text-blue-300">
-                        자산관리
-                      </Badge>
-                      <h4 className="text-lg font-bold mb-2 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        체계적인 자산관리 전략
-                      </h4>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
-                        분산된 자산을 체계적으로 관리하기 위한 전략과 방법을 소개합니다.
-                      </p>
-                    </div>
-                  </Link>
-                  <Link href="/insights/market-intelligence/tax-optimization-basics" className="group">
-                    <div className="h-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-xl hover:border-blue-500/30 transition-all duration-300">
-                      <Badge variant="outline" className="mb-3 border-blue-200 text-blue-700 dark:border-blue-900 dark:text-blue-300">
-                        세무최적화
-                      </Badge>
-                      <h4 className="text-lg font-bold mb-2 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        중견기업을 위한 절세 전략
-                      </h4>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
-                        합법적이고 효과적인 절세 방법과 상속세 대비 전략을 알아봅니다.
-                      </p>
-                    </div>
-                  </Link>
+              {/* Related Posts - Dynamic Recommendation System */}
+              {relatedPosts.length > 0 && (
+                <div className="mt-12">
+                  <h3 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white flex items-center gap-2">
+                    <span className="w-1 h-8 bg-blue-600 rounded-full block" />
+                    관련 인사이트
+                  </h3>
+                  <div className={`grid gap-6 ${relatedPosts.length === 1 ? 'md:grid-cols-1' : relatedPosts.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
+                    {relatedPosts.map((relatedPost) => (
+                      <Link
+                        key={relatedPost.slug}
+                        href={`/insights/market-intelligence/${relatedPost.slug}`}
+                        className="group"
+                      >
+                        <div className="h-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-xl hover:border-blue-500/30 transition-all duration-300">
+                          <Badge variant="outline" className="mb-3 border-blue-200 text-blue-700 dark:border-blue-900 dark:text-blue-300">
+                            {relatedPost.category}
+                          </Badge>
+                          <h4 className="text-lg font-bold mb-2 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                            {relatedPost.title}
+                          </h4>
+                          <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
+                            {relatedPost.excerpt}
+                          </p>
+                          <div className="mt-4 flex items-center gap-2 text-xs text-slate-400">
+                            <Clock className="h-3 w-3" />
+                            {relatedPost.readTime}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </section>
