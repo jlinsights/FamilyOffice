@@ -240,7 +240,7 @@ export class RSSAggregator {
       const feedUrl = `https://rss.blog.naver.com/${blogId}.xml`;
       let feed;
       try {
-        feed = await this.parser.parseURL(feedUrl);
+        feed = await this.fetchFeed(feedUrl);
       } catch (parseError) {
         console.error('네이버 RSS 파싱 오류:', parseError);
         // 파싱 실패 시 빈 배열 반환
