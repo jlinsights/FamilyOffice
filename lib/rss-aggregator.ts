@@ -32,6 +32,22 @@ export interface ParsedFeedItem {
   categories?: string[];
   'content:encoded'?: string;
   description?: string;
+  enclosure?: {
+    url?: string;
+    type?: string;
+    length?: string;
+  };
+  'media:content'?: {
+    $?: {
+      url?: string;
+      medium?: string;
+    };
+  };
+  'media:thumbnail'?: {
+    $?: {
+      url?: string;
+    };
+  };
 }
 
 export class RSSAggregator {
@@ -50,6 +66,9 @@ export class RSSAggregator {
           ['content:encoded', 'contentEncoded'],
           ['description', 'description'],
           ['dc:creator', 'creator'],
+          ['media:content', 'media:content', { keepArray: false }],
+          ['media:thumbnail', 'media:thumbnail', { keepArray: false }],
+          ['enclosure', 'enclosure'],
         ],
       },
     });
@@ -614,10 +633,49 @@ export class RSSAggregator {
     return author;
   }
 
+  /**
+   * 다중 소스 썸네일 이미지 추출
+   * 우선순위: RSS enclosure > media:thumbnail > media:content > OG image > Twitter image > img tag
+   */
   private extractImageUrl(item: ParsedFeedItem): string | undefined {
+    // 1. RSS enclosure (이미지 첨부 파일)
+    if (item.enclosure?.url && item.enclosure.type?.startsWith('image/')) {
+      return item.enclosure.url;
+    }
+
+    // 2. Media RSS thumbnail
+    if (item['media:thumbnail']?.$?.url) {
+      return item['media:thumbnail'].$.url;
+    }
+
+    // 3. Media RSS content
+    if (item['media:content']?.$?.url &&
+        (item['media:content'].$?.medium === 'image' || !item['media:content'].$?.medium)) {
+      return item['media:content'].$.url;
+    }
+
     const content = this.extractContent(item);
+
+    // 4. Open Graph image meta tag
+    const ogImageMatch = content.match(/<meta\s+(?:property|name)="og:image"\s+content="([^">]+)"/i);
+    if (ogImageMatch) {
+      return ogImageMatch[1];
+    }
+
+    // 5. Twitter Card image meta tag
+    const twitterImageMatch = content.match(/<meta\s+(?:property|name)="twitter:image"\s+content="([^">]+)"/i);
+    if (twitterImageMatch) {
+      return twitterImageMatch[1];
+    }
+
+    // 6. 첫 번째 img 태그
     const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-    return imgMatch ? imgMatch[1] : undefined;
+    if (imgMatch) {
+      return imgMatch[1];
+    }
+
+    // 7. 모두 실패시 undefined 반환 (fallback 이미지는 호출하는 쪽에서 처리)
+    return undefined;
   }
 
   /**
