@@ -92,7 +92,7 @@ const ServicePageContent = () => {
         <section className="relative w-full py-24 md:py-32 flex flex-col items-center justify-center overflow-hidden">
           {/* Background Elements */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-emerald-400/10 rounded-full blur-3xl -z-10"></div>
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[url('/Images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
             <div className="flex justify-center mb-8">
@@ -147,7 +147,7 @@ const ServicePageContent = () => {
 
         {/* Stats Section */}
         <section ref={statsSectionRef} className="py-20 bg-slate-900 dark:bg-slate-950 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[url('/Images/grid-pattern.svg')] opacity-[0.05] pointer-events-none"></div>
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-black mb-6">
@@ -267,7 +267,7 @@ const ServicePageContent = () => {
 
         {/* Services Section */}
         <section className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[url('/Images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-6 shadow-sm">
