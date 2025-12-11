@@ -1,8 +1,25 @@
-🎨 전문가 칼럼 블로그 포스트 대표 이미지 Unsplash로 업데이트
+✨ 브런치 스토리 스타일 블로그 레이아웃 리디자인
 
-5개 블로그 포스트의 대표 이미지를 컨텐츠에 맞는 Unsplash 이미지로 교체:
-- tax-optimization-basics: 세무 서류 이미지로 변경
-- family-business-governance-optimization: 현대적 오피스 이미지로 변경
-- retained-earnings-dividend-strategy: 로컬 이미지를 기업 재무 이미지로 변경
-- corporate-treasury-stock-retirement: 주식 거래 이미지로 변경
-- super-rich-inheritance-trends: 고급/부유층 이미지로 변경
+전문가 칼럼 블로그를 Brunch Story의 미니멀리즘 디자인으로 전면 개편:
+
+**타이포그래피 시스템**
+- Serif 폰트 헤딩으로 우아한 가독성 구현
+- 본문 텍스트 1.8 line-height로 넉넉한 호흡
+- 18-20px 기본 폰트 크기로 편안한 독서 경험
+
+**레이아웃 개선**
+- 720px 최적 읽기 폭으로 집중력 향상
+- 무거운 그라데이션 제거, 깔끔한 흰색 배경
+- 풀사이즈 히어로 이미지로 자연스러운 프레젠테이션
+- 80-120px 섹션 간격으로 시각적 호흡 공간 확보
+
+**사용자 경험**
+- 심플한 메타데이터 디스플레이
+- 미니멀 스타일 참고문헌 및 관련 글 섹션
+- 부드러운 호버 효과 및 트랜지션
+- 모바일 최적화 24px 마진
+
+코드 변경:
+- app/insights/market-intelligence/[slug]/page.tsx 전면 리팩토링
+- Prose 스타일 완전히 재구성 (line-height, font-size, spacing)
+- 모든 UI 컴포넌트 미니멀리즘 디자인 적용
