@@ -821,7 +821,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'tax-optimization-basics': {
     id: 'tax-optimization-basics',
     title: '중견기업을 위한 절세 전략',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&auto=format&fit=crop',
     excerpt: '합법적이고 효과적인 절세 방법과 상속세 대비 전략을 알아봅니다.',
     content: `# 중견기업을 위한 절세 전략
 
@@ -1022,7 +1022,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'family-business-governance-optimization': {
     id: 'family-business-governance-optimization',
     title: '가족기업 지배구조 최적화 방안',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=1000&auto=format&fit=crop',
     excerpt: '가족기업의 효율적인 지배구조 구축을 위한 실무적 가이드라인을 제공합니다.',
     content: `# 가족기업 지배구조 최적화 방안
 
@@ -2561,7 +2561,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'retained-earnings-dividend-strategy-ceo-asset-optimization': {
     id: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
     title: '대표님의 숨은 자산 이익잉여금을 깨울 시간입니다',
-    image: '/images/blog/retained-earnings.png',
+    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1000&auto=format&fit=crop',
     excerpt: '기업의 이익잉여금을 효과적으로 활용하여 개인 자산화하는 전략과 절세 방안을 제시합니다. 회사는 부자인데, 왜 대표님은 현금이 없으십니까? 평생을 바쳐 회사를 키운 대표님께서 정작 본인의 노후 자금이나 자녀 승계 자금이 부족해 고민하는 "부자 기업, 가난한 사장"의 역설을 해결하는 전략적 출구 전략입니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
@@ -2776,7 +2776,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'corporate-treasury-stock-retirement-2025-tax-analysis': {
     id: 'corporate-treasury-stock-retirement-2025-tax-analysis',
     title: '[2025 세법] 자기주식 이익소각: CEO를 위한 가장 확실한 엑시트(Exit) 전략인가?',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop',
     excerpt: '배당보다 낮은 세율로 잉여금을 회수하고, 가지급금 문제까지 해결할 수 있는 자기주식 이익소각. 하지만 국세청의 검증은 더욱 강화되고 있습니다. 2025년, 안전하고 효과적인 실행을 위한 전문가의 심층 분석.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
@@ -3370,7 +3370,7 @@ export const blogPosts: Record<string, BlogPost> = {
   'super-rich-inheritance-trends-2025': {
     id: 'super-rich-inheritance-trends-2025',
     title: '부자들의 상속 준비 트렌드 분석',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000&auto=format&fit=crop',
     excerpt: '2025년 대한민국 슈퍼리치의 상속 및 자산 승계 전략을 종합 분석한 전문가 보고서입니다. 세법 개정 무산, 감정평가 확대 등 급변하는 환경 속에서 부자들이 선택한 실전 전략을 공개합니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
