@@ -32,6 +32,12 @@ export async function generateMetadata({ params }: InsightContentPageProps): Pro
 
     const sourceLabel = getSourceLabel(source);
 
+    // 절대 URL 생성 (소셜 미디어 플랫폼은 절대 URL 필요)
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://familyoffices.vip';
+    const imageUrl = content.imageUrl
+      ? (content.imageUrl.startsWith('http') ? content.imageUrl : `${baseUrl}${content.imageUrl}`)
+      : undefined;
+
     return {
       title: `${content.title} | ${sourceLabel} | FamilyOffice S`,
       description: content.excerpt,
@@ -43,13 +49,23 @@ export async function generateMetadata({ params }: InsightContentPageProps): Pro
         publishedTime: content.publishedAt,
         authors: [content.author],
         tags: content.tags,
-        images: content.imageUrl ? [{ url: content.imageUrl }] : undefined,
+        images: imageUrl ? [{
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: content.title,
+        }] : undefined,
+        url: `${baseUrl}/insights/${source}/${slug}`,
+        siteName: 'FamilyOffice S',
+        locale: 'ko_KR',
       },
       twitter: {
         card: 'summary_large_image',
         title: content.title,
         description: content.excerpt,
-        images: content.imageUrl ? [content.imageUrl] : undefined,
+        images: imageUrl ? [imageUrl] : undefined,
+        creator: '@familyoffices',
+        site: '@familyoffices',
       },
       alternates: {
         canonical: `/insights/${source}/${slug}`,

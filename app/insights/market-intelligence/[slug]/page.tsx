@@ -38,6 +38,12 @@ export async function generateMetadata({
     };
   }
 
+  // 절대 URL 생성 (소셜 미디어 플랫폼은 절대 URL 필요)
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://familyoffices.vip';
+  const imageUrl = post.image.startsWith('http')
+    ? post.image
+    : `${baseUrl}${post.image}`;
+
   return {
     title: `${post.title} | Market Intelligence | FamilyOffice S`,
     description: `${post.excerpt} - 기업승계와 상속세 절세 전문가의 심층 분석`,
@@ -51,11 +57,24 @@ export async function generateMetadata({
       authors: [post.author],
       tags: [...post.tags, '기업승계', '상속세절세', '패밀리오피스'],
       locale: 'ko_KR',
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      url: `${baseUrl}/insights/market-intelligence/${post.slug}`,
+      siteName: 'FamilyOffice S',
     },
     twitter: {
       card: 'summary_large_image',
       title: `${post.title} | Market Intelligence | FamilyOffice S`,
       description: `${post.excerpt} - 기업승계와 상속세 절세 전문가의 심층 분석`,
+      images: [imageUrl],
+      creator: '@familyoffices',
+      site: '@familyoffices',
     },
     alternates: {
       canonical: `/insights/market-intelligence/${post.slug}`,

@@ -1,10 +1,23 @@
-🔧 부자들의 상속 준비 트렌드 분석 블로그 날짜 수정
+✨ Open Graph 및 Twitter Card 썸네일 이미지 메타데이터 개선
 
-super-rich-inheritance-trends-2025 포스트의 작성일을 올바르게 수정:
+뉴스레터, 브런치, Substack 등 모든 인사이트 콘텐츠의 소셜 미디어 공유 시 썸네일 이미지가 제대로 표시되도록 메타데이터 개선:
 
-**날짜 수정**
-- 작성일: 2025년 2월 21일 → 2025년 12월 12일 (오늘)
-- date 메타데이터: 2025-02-21 → 2025-12-12
+**Open Graph 메타데이터 강화**
+- images 속성 추가 (url, width: 1200, height: 630, alt)
+- url 속성 추가 (절대 URL)
+- siteName 속성 추가
+- locale 속성 추가 (ko_KR)
+
+**Twitter Card 메타데이터 강화**
+- images 속성 추가
+- creator 속성 추가 (@familyoffices)
+- site 속성 추가 (@familyoffices)
+
+**절대 URL 처리**
+- 소셜 미디어 플랫폼 요구사항에 맞춰 절대 URL 생성
+- baseUrl 환경변수 또는 기본값 사용
+- 상대/절대 URL 자동 감지 및 변환
 
 코드 변경:
-- lib/blog-data.ts 날짜 정보 업데이트
+- app/insights/market-intelligence/[slug]/page.tsx 메타데이터 개선
+- app/insights/[source]/[slug]/page.tsx 메타데이터 개선
