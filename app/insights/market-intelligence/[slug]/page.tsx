@@ -166,9 +166,9 @@ export default async function BlogPostPage({
             </div>
           </div>
 
-          {/* Hero Image - Full Width, Natural */}
+          {/* Hero Image - Full Width, Natural (Brunch Style) */}
           {post.image && (
-            <div className="relative -mx-6 md:-mx-8 mb-16 aspect-video md:aspect-[21/9] overflow-hidden">
+            <div className="relative -mx-6 md:-mx-8 mb-12 aspect-video overflow-hidden">
               <Image
                 src={post.image}
                 alt={post.title}
@@ -265,19 +265,19 @@ export default async function BlogPostPage({
 
         {/* Content - Brunch Style: Clean Typography, Generous Spacing */}
         <article className="max-w-[720px] mx-auto px-6 md:px-8">
-          {/* Main Content with Beautiful Typography */}
+          {/* Main Content with Beautiful Typography - Brunch Optimized */}
           <div className="prose prose-lg md:prose-xl max-w-none
             prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:tracking-tight
-            prose-h2:text-3xl md:prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:leading-[1.3]
-            prose-h3:text-2xl md:prose-h3:text-3xl prose-h3:mt-12 prose-h3:mb-4 prose-h3:leading-[1.3]
-            prose-p:text-lg md:prose-p:text-xl prose-p:leading-[1.8] prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-p:mb-6 prose-p:font-light
+            prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-5 prose-h2:leading-[1.4]
+            prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:leading-[1.4]
+            prose-p:text-lg md:prose-p:text-xl prose-p:leading-[1.8] prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-p:mb-5 prose-p:font-light
             prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-a:transition-all
             prose-strong:font-semibold prose-strong:text-slate-900 dark:prose-strong:text-white
             prose-blockquote:border-l-4 prose-blockquote:border-blue-600 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-slate-600 dark:prose-blockquote:text-slate-400
             prose-code:text-sm prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
             prose-pre:bg-slate-900 dark:prose-pre:bg-slate-800 prose-pre:text-slate-100 prose-pre:rounded-lg prose-pre:p-6
-            prose-ul:my-8 prose-li:my-2 prose-li:text-lg prose-li:leading-[1.8] prose-li:text-slate-700 dark:prose-li:text-slate-300
-            prose-img:rounded-none prose-img:my-12 prose-img:w-full
+            prose-ul:my-6 prose-li:my-2 prose-li:text-lg prose-li:leading-[1.8] prose-li:text-slate-700 dark:prose-li:text-slate-300
+            prose-img:rounded-none prose-img:my-10 prose-img:w-full
             dark:prose-invert">
             <div
               dangerouslySetInnerHTML={{
@@ -288,7 +288,7 @@ export default async function BlogPostPage({
           </div>
 
           {/* Tags - Minimal Style */}
-          <div className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
+          <div className="mt-12 pt-10 border-t border-slate-200 dark:border-slate-800">
             <div className="flex flex-wrap gap-2">
               {post.tags.map(tag => (
                 <span
@@ -304,7 +304,7 @@ export default async function BlogPostPage({
 
         {/* References - Minimal Style */}
         {post.sources && post.sources.length > 0 && (
-          <article className="max-w-[720px] mx-auto px-6 md:px-8 mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
+          <article className="max-w-[720px] mx-auto px-6 md:px-8 mt-12 pt-12 border-t border-slate-200 dark:border-slate-800">
             <h4 className="text-sm font-medium text-slate-400 dark:text-slate-500 mb-4">참고 문헌</h4>
             <ul className="space-y-3">
               {post.sources.map((source, index) => (
@@ -328,7 +328,7 @@ export default async function BlogPostPage({
         )}
 
         {/* Newsletter - Clean CTA */}
-        <div className="max-w-[720px] mx-auto px-6 md:px-8 mt-20">
+        <div className="max-w-[720px] mx-auto px-6 md:px-8 mt-16">
           <NewsletterSubscription
             source={`blog-post-${slug}`}
             variant="inline"
@@ -336,7 +336,7 @@ export default async function BlogPostPage({
         </div>
 
         {/* Author Bio - Minimal Card */}
-        <article className="max-w-[720px] mx-auto px-6 md:px-8 mt-20 py-12 border-y border-slate-200 dark:border-slate-800">
+        <article className="max-w-[720px] mx-auto px-6 md:px-8 mt-16 py-10 border-y border-slate-200 dark:border-slate-800">
           <div className="flex flex-col sm:flex-row items-start gap-6">
             <Link
               href="https://litt.ly/familyoffice"
@@ -386,8 +386,8 @@ export default async function BlogPostPage({
 
         {/* Related Posts - Minimal Grid */}
         {relatedPosts.length > 0 && (
-          <div className="max-w-[720px] mx-auto px-6 md:px-8 mt-20 pb-24">
-            <h3 className="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-8">
+          <div className="max-w-[720px] mx-auto px-6 md:px-8 mt-16 pb-20">
+            <h3 className="text-xl font-serif font-bold text-slate-900 dark:text-white mb-6">
               관련 글
             </h3>
             <div className="space-y-6">
@@ -421,8 +421,8 @@ export default async function BlogPostPage({
 
         {/* FAQ Section - Minimal Style */}
         {post.faq && post.faq.length > 0 && (
-          <div className="max-w-[720px] mx-auto px-6 md:px-8 mt-20 pb-24">
-            <h3 className="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-8">
+          <div className="max-w-[720px] mx-auto px-6 md:px-8 mt-16 pb-20">
+            <h3 className="text-xl font-serif font-bold text-slate-900 dark:text-white mb-6">
               자주 묻는 질문
             </h3>
             <Accordion type="single" collapsible className="w-full space-y-4">
@@ -464,13 +464,13 @@ export default async function BlogPostPage({
         )}
 
         {/* CTA Section - Clean & Minimal */}
-        <section className="py-24 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+        <section className="py-20 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
           <div className="max-w-[720px] mx-auto px-6 md:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+            <h2 className="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-5 leading-tight">
               매주 화·금요일 아침,<br/>
               성공한 기업가의 인사이트를 받아보세요
             </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 leading-relaxed max-w-xl mx-auto">
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-xl mx-auto">
               1,200+ 명의 CEO가 선택한 프리미엄 뉴스레터.<br className="hidden sm:block" />
               기업승계, 자산관리, 세무 전략 등 깊이 있는 정보를 전해드립니다.
             </p>
