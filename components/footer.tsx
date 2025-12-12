@@ -20,6 +20,7 @@ import {
 
 import Image from 'next/image';
 import Link from 'next/link';
+import Script from 'next/script';
 
 import { useTheme } from 'next-themes';
 import { ClientScripts } from './client-scripts';
@@ -422,6 +423,42 @@ export const Footer = memo(function Footer() {
                 <p className="text-xs text-muted-foreground">만족도</p>
               </div>
             </div>
+          </div>
+
+          {/* Curator.io 소셜 미디어 피드 */}
+          <div className="border-t mt-12 pt-8 mb-8">
+            <div className="text-center mb-6">
+              <h4 className="text-xl font-semibold mb-2">최신 소식</h4>
+              <p className="text-sm text-muted-foreground">
+                인스타그램과 스레드에서 공유되는 최신 인사이트를 확인하세요
+              </p>
+            </div>
+
+            {/* Curator.io Feed Container */}
+            <div id="curator-feed-default-feed-layout" className="max-w-6xl mx-auto">
+              <a href="https://curator.io" target="_blank" rel="noopener noreferrer" className="crt-logo crt-tag">
+                Powered by Curator.io
+              </a>
+            </div>
+
+            {/* Curator.io Script */}
+            <Script
+              id="curator-feed-script"
+              strategy="lazyOnload"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  (function(){
+                    var i,e,d=document,s="script";
+                    i=d.createElement("script");
+                    i.async=1;
+                    i.charset="UTF-8";
+                    i.src="https://cdn.curator.io/published/76a9212f-2e3d-43e8-9555-760155d6bd6f.js";
+                    e=d.getElementsByTagName(s)[0];
+                    e.parentNode.insertBefore(i, e);
+                  })();
+                `,
+              }}
+            />
           </div>
 
           {/* 독립성 및 투명성 고지 */}

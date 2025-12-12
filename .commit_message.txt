@@ -1,22 +1,24 @@
-✨ 맨 위로 가기(Scroll to Top) 버튼 추가
+✨ 푸터에 Curator.io 소셜 미디어 피드 추가
 
-모든 페이지에서 300px 이상 스크롤 시 자동으로 나타나는 맨 위로 가기 버튼 구현:
+모든 페이지 푸터에 인스타그램 및 스레드 피드를 표시하는 Curator.io 위젯 통합:
 
-**기능 구현**
-- 300px 이상 스크롤 시 버튼 자동 표시
-- 클릭 시 부드러운 스크롤 애니메이션으로 최상단 이동
-- 채널톡 위에 배치 (z-index 40, bottom-32)
+**추가된 기능**
+- Curator.io 소셜 미디어 피드 컨테이너
+- 인스타그램과 스레드 최신 게시물 표시
+- 통계 섹션 다음에 새로운 "최신 소식" 섹션 추가
 
-**디자인 특징**
-- ArrowUp 아이콘 사용 (lucide-react)
-- 다크모드 지원 (bg-slate-800/bg-slate-200)
-- 호버 애니메이션 (scale-110 효과)
-- 반응형 디자인 (모바일/데스크톱 위치 최적화)
+**기술 구현**
+- Next.js Script 컴포넌트 사용 (strategy="lazyOnload")
+- 성능 최적화를 위한 지연 로딩
+- 반응형 디자인 (max-w-6xl mx-auto)
+- 다크모드 호환
 
-**접근성**
-- aria-label="맨 위로 가기" 추가
-- 키보드 접근 가능
+**사용자 경험**
+- 제목: "최신 소식"
+- 설명: "인스타그램과 스레드에서 공유되는 최신 인사이트를 확인하세요"
+- Curator.io 브랜딩 링크 포함
 
 코드 변경:
-- components/scroll-to-top.tsx 신규 생성 (클라이언트 컴포넌트)
-- app/layout.tsx에 ScrollToTop 컴포넌트 추가
+- components/footer.tsx에 Curator.io 피드 섹션 추가
+- next/script import 추가
+- Curator.io 스크립트 통합
