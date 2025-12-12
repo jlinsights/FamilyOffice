@@ -3378,7 +3378,7 @@ export const blogPosts: Record<string, BlogPost> = {
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">2025 대한민국 슈퍼리치 상속 및 자산 승계 전략 보고서</h1>
     <p className="text-muted-foreground text-lg font-normal leading-relaxed">대전환기의 거버넌스와 포트폴리오 재편 - 세법 개정 무산과 감정평가 확대 시대의 생존 전략</p>
     <div className="mt-5 text-muted-foreground text-sm">
-        작성일: 2025년 2월 21일 | 예상 읽기 시간: 45분 | 카테고리: 세무·법무 인사이트
+        작성일: 2025년 12월 12일 | 예상 읽기 시간: 45분 | 카테고리: 세무·법무 인사이트
     </div>
 </header>
 
@@ -3897,7 +3897,7 @@ export const blogPosts: Record<string, BlogPost> = {
 </div>`,
     category: '세무·법무 인사이트',
     author: '임재홍',
-    date: '2025-02-21',
+    date: '2025-12-12',
     readTime: '45분',
     tags: ['상속세', '증여세', '세대생략증여', '유언대용신탁', '가족법인', '패밀리오피스', '감정평가', '절세전략', '부동산증여', '슈퍼리치'],
     slug: 'super-rich-inheritance-trends-2025',
