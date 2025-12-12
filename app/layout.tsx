@@ -5,6 +5,7 @@ import './globals.css';
 import { ErrorBoundary } from '@/components/error-boundary';
 import CoreWebVitals from '@/components/performance/core-web-vitals';
 import { PreloadCriticalResources } from '@/components/preload-critical-resources';
+import { ScrollToTop } from '@/components/scroll-to-top';
 import { SEOErrorBoundary } from '@/components/seo-error-boundary';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -583,12 +584,15 @@ export default function RootLayout({
               
               <ThirdPartyIntegration />
               <DebugStyles />
-              
+
               {/* 🚀 Core Web Vitals 성능 모니터링 */}
               <CoreWebVitals />
-              
+
               {/* SEO 구조화 데이터 */}
               <OrganizationStructuredData />
+
+              {/* 맨 위로 가기 버튼 (채널톡 위에 표시) */}
+              <ScrollToTop />
             </ClerkProvider>
           </ThemeProvider>
         </ErrorBoundary>

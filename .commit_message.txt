@@ -1,23 +1,22 @@
-✨ Open Graph 및 Twitter Card 썸네일 이미지 메타데이터 개선
+✨ 맨 위로 가기(Scroll to Top) 버튼 추가
 
-뉴스레터, 브런치, Substack 등 모든 인사이트 콘텐츠의 소셜 미디어 공유 시 썸네일 이미지가 제대로 표시되도록 메타데이터 개선:
+모든 페이지에서 300px 이상 스크롤 시 자동으로 나타나는 맨 위로 가기 버튼 구현:
 
-**Open Graph 메타데이터 강화**
-- images 속성 추가 (url, width: 1200, height: 630, alt)
-- url 속성 추가 (절대 URL)
-- siteName 속성 추가
-- locale 속성 추가 (ko_KR)
+**기능 구현**
+- 300px 이상 스크롤 시 버튼 자동 표시
+- 클릭 시 부드러운 스크롤 애니메이션으로 최상단 이동
+- 채널톡 위에 배치 (z-index 40, bottom-32)
 
-**Twitter Card 메타데이터 강화**
-- images 속성 추가
-- creator 속성 추가 (@familyoffices)
-- site 속성 추가 (@familyoffices)
+**디자인 특징**
+- ArrowUp 아이콘 사용 (lucide-react)
+- 다크모드 지원 (bg-slate-800/bg-slate-200)
+- 호버 애니메이션 (scale-110 효과)
+- 반응형 디자인 (모바일/데스크톱 위치 최적화)
 
-**절대 URL 처리**
-- 소셜 미디어 플랫폼 요구사항에 맞춰 절대 URL 생성
-- baseUrl 환경변수 또는 기본값 사용
-- 상대/절대 URL 자동 감지 및 변환
+**접근성**
+- aria-label="맨 위로 가기" 추가
+- 키보드 접근 가능
 
 코드 변경:
-- app/insights/market-intelligence/[slug]/page.tsx 메타데이터 개선
-- app/insights/[source]/[slug]/page.tsx 메타데이터 개선
+- components/scroll-to-top.tsx 신규 생성 (클라이언트 컴포넌트)
+- app/layout.tsx에 ScrollToTop 컴포넌트 추가
