@@ -1,23 +1,16 @@
-🔒 Curator.io 소셜 피드 CSP 정책 수정
+🎨 Curator.io 피드 위치를 푸터 최상단으로 이동
 
-Content Security Policy에 Curator.io 도메인 허용 추가:
+소셜 미디어 피드를 푸터의 제일 상단에 배치:
 
-**문제 해결**
-- CSP 차단으로 Curator.io 스크립트 로드 실패
-- cdn.curator.io 및 *.curator.io 도메인 화이트리스트 추가
-- 소셜 미디어 피드 정상 표시 가능
+**변경 사항**
+- Curator.io 피드 섹션을 통계 영역 아래에서 푸터 최상단으로 이동
+- 중복된 피드 섹션 제거 (단일 인스턴스 유지)
+- 스타일 조정: border-top 제거, 간격 최적화
 
-**CSP 정책 업데이트**
-- script-src: cdn.curator.io, *.curator.io 추가
-- style-src: cdn.curator.io 추가
-- img-src: cdn.curator.io, *.curator.io 추가
-- connect-src: cdn.curator.io, *.curator.io 추가
-- frame-src: cdn.curator.io, *.curator.io 추가
-
-**보안 강화**
-- 필요한 도메인만 선택적 허용
-- 기존 보안 정책 유지
-- 외부 스크립트 안전한 로딩 보장
+**UI/UX 개선**
+- 사용자가 피드를 더 빨리 발견할 수 있음
+- 푸터 구조의 명확한 계층 구조
+- 최신 소식을 먼저 노출하여 참여도 향상
 
 코드 변경:
-- next.config.mjs CSP 헤더 업데이트
+- components/footer.tsx 레이아웃 재구성
