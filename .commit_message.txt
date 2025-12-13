@@ -1,16 +1,23 @@
-🔄 Curator.io 소셜 피드 스크립트 포맷 최적화
+🔒 Curator.io 소셜 피드 CSP 정책 수정
 
-Curator.io 공식 스크립트 포맷으로 정확히 일치하도록 업데이트:
+Content Security Policy에 Curator.io 도메인 허용 추가:
 
-**코드 최적화**
-- IIFE 클로저 포맷 최적화 (})(); 한 줄로 정리)
-- 스크립트 실행 효율성 향상
-- Curator.io 공식 권장 포맷 준수
+**문제 해결**
+- CSP 차단으로 Curator.io 스크립트 로드 실패
+- cdn.curator.io 및 *.curator.io 도메인 화이트리스트 추가
+- 소셜 미디어 피드 정상 표시 가능
 
-**기술 구현**
-- Next.js Script 컴포넌트 유지
-- lazyOnload 전략으로 성능 최적화
-- 푸터의 "최신 소식" 섹션에 통합
+**CSP 정책 업데이트**
+- script-src: cdn.curator.io, *.curator.io 추가
+- style-src: cdn.curator.io 추가
+- img-src: cdn.curator.io, *.curator.io 추가
+- connect-src: cdn.curator.io, *.curator.io 추가
+- frame-src: cdn.curator.io, *.curator.io 추가
+
+**보안 강화**
+- 필요한 도메인만 선택적 허용
+- 기존 보안 정책 유지
+- 외부 스크립트 안전한 로딩 보장
 
 코드 변경:
-- components/footer.tsx Curator.io 스크립트 포맷 정리
+- next.config.mjs CSP 헤더 업데이트
