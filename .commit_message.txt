@@ -1,23 +1,16 @@
-🐛 Scroll-to-Top 버튼 아이콘 표시 문제 수정
+🔄 Curator.io 소셜 피드 코드 업데이트
 
-아이콘이 보이지 않던 문제를 inline SVG로 해결:
+최신 버전 Curator.io 피드 스크립트로 교체:
 
-**문제 수정**
-- Iconify Icon 컴포넌트 렌더링 이슈로 아이콘 미표시
-- inline SVG 직접 사용으로 안정적인 렌더링 보장
-- 다크모드와 라이트모드 모두에서 정상 표시
-
-**디자인 개선**
-- 세련된 업 화살표 SVG 아이콘
-- 버튼 크기: 48px (h-12 w-12) - 채널톡과 조화
-- 아이콘 크기: 20px, strokeWidth 2.5 (선명한 표시)
-- currentColor 사용으로 테마 자동 대응
+**코드 개선**
+- type="text/javascript" 속성 추가
+- /* curator-feed-default-feed-layout */ 식별자 주석 추가
+- 스크립트 초기화 코드 최적화
 
 **기술 구현**
-- Iconify 의존성 제거, 순수 SVG 사용
-- stroke 기반 아이콘으로 선명도 향상
-- 반응형 및 다크모드 완벽 지원
-- 호버 효과 및 애니메이션 유지
+- Next.js Script 컴포넌트 사용
+- lazyOnload 전략으로 성능 최적화
+- 푸터의 "최신 소식" 섹션에 통합
 
 코드 변경:
-- components/scroll-to-top.tsx SVG 아이콘 직접 구현
+- components/footer.tsx Curator.io 스크립트 업데이트

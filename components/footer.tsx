@@ -444,17 +444,15 @@ export const Footer = memo(function Footer() {
             {/* Curator.io Script */}
             <Script
               id="curator-feed-script"
+              type="text/javascript"
               strategy="lazyOnload"
               dangerouslySetInnerHTML={{
                 __html: `
+                  /* curator-feed-default-feed-layout */
                   (function(){
-                    var i,e,d=document,s="script";
-                    i=d.createElement("script");
-                    i.async=1;
-                    i.charset="UTF-8";
-                    i.src="https://cdn.curator.io/published/76a9212f-2e3d-43e8-9555-760155d6bd6f.js";
-                    e=d.getElementsByTagName(s)[0];
-                    e.parentNode.insertBefore(i, e);
+                  var i,e,d=document,s="script";i=d.createElement("script");i.async=1;i.charset="UTF-8";
+                  i.src="https://cdn.curator.io/published/76a9212f-2e3d-43e8-9555-760155d6bd6f.js";
+                  e=d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
                   })();
                 `,
               }}
