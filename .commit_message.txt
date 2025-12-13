@@ -1,24 +1,18 @@
-✨ 푸터에 Curator.io 소셜 미디어 피드 추가
+✨ Scroll-to-Top 버튼 디자인 개선
 
-모든 페이지 푸터에 인스타그램 및 스레드 피드를 표시하는 Curator.io 위젯 통합:
+채널톡 아이콘 크기에 맞춰 Scroll-to-Top 버튼을 세련되게 개선:
 
-**추가된 기능**
-- Curator.io 소셜 미디어 피드 컨테이너
-- 인스타그램과 스레드 최신 게시물 표시
-- 통계 섹션 다음에 새로운 "최신 소식" 섹션 추가
+**디자인 개선**
+- Iconify의 Material Symbols 아이콘으로 교체 (arrow-upward-rounded)
+- 버튼 크기 축소: 56px → 48px (h-14 w-14 → h-12 w-12)
+- 아이콘 크기 조정: 24px → 20px (h-6 w-6 → h-5 w-5)
+- 채널톡 버튼과 시각적 일관성 확보
 
 **기술 구현**
-- Next.js Script 컴포넌트 사용 (strategy="lazyOnload")
-- 성능 최적화를 위한 지연 로딩
-- 반응형 디자인 (max-w-6xl mx-auto)
-- 다크모드 호환
-
-**사용자 경험**
-- 제목: "최신 소식"
-- 설명: "인스타그램과 스레드에서 공유되는 최신 인사이트를 확인하세요"
-- Curator.io 브랜딩 링크 포함
+- lucide-react에서 @iconify/react로 전환
+- Material Symbols의 rounded 스타일 사용
+- 반응형 및 다크모드 지원 유지
+- 호버 효과 및 애니메이션 보존
 
 코드 변경:
-- components/footer.tsx에 Curator.io 피드 섹션 추가
-- next/script import 추가
-- Curator.io 스크립트 통합
+- components/scroll-to-top.tsx 아이콘 및 크기 최적화
