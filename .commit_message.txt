@@ -1,16 +1,16 @@
-🔄 Curator.io 소셜 피드 코드 업데이트
+🔄 Curator.io 소셜 피드 스크립트 포맷 최적화
 
-최신 버전 Curator.io 피드 스크립트로 교체:
+Curator.io 공식 스크립트 포맷으로 정확히 일치하도록 업데이트:
 
-**코드 개선**
-- type="text/javascript" 속성 추가
-- /* curator-feed-default-feed-layout */ 식별자 주석 추가
-- 스크립트 초기화 코드 최적화
+**코드 최적화**
+- IIFE 클로저 포맷 최적화 (})(); 한 줄로 정리)
+- 스크립트 실행 효율성 향상
+- Curator.io 공식 권장 포맷 준수
 
 **기술 구현**
-- Next.js Script 컴포넌트 사용
+- Next.js Script 컴포넌트 유지
 - lazyOnload 전략으로 성능 최적화
 - 푸터의 "최신 소식" 섹션에 통합
 
 코드 변경:
-- components/footer.tsx Curator.io 스크립트 업데이트
+- components/footer.tsx Curator.io 스크립트 포맷 정리
