@@ -1,18 +1,23 @@
-✨ Scroll-to-Top 버튼 디자인 개선
+🐛 Scroll-to-Top 버튼 아이콘 표시 문제 수정
 
-채널톡 아이콘 크기에 맞춰 Scroll-to-Top 버튼을 세련되게 개선:
+아이콘이 보이지 않던 문제를 inline SVG로 해결:
+
+**문제 수정**
+- Iconify Icon 컴포넌트 렌더링 이슈로 아이콘 미표시
+- inline SVG 직접 사용으로 안정적인 렌더링 보장
+- 다크모드와 라이트모드 모두에서 정상 표시
 
 **디자인 개선**
-- Iconify의 Material Symbols 아이콘으로 교체 (arrow-upward-rounded)
-- 버튼 크기 축소: 56px → 48px (h-14 w-14 → h-12 w-12)
-- 아이콘 크기 조정: 24px → 20px (h-6 w-6 → h-5 w-5)
-- 채널톡 버튼과 시각적 일관성 확보
+- 세련된 업 화살표 SVG 아이콘
+- 버튼 크기: 48px (h-12 w-12) - 채널톡과 조화
+- 아이콘 크기: 20px, strokeWidth 2.5 (선명한 표시)
+- currentColor 사용으로 테마 자동 대응
 
 **기술 구현**
-- lucide-react에서 @iconify/react로 전환
-- Material Symbols의 rounded 스타일 사용
-- 반응형 및 다크모드 지원 유지
-- 호버 효과 및 애니메이션 보존
+- Iconify 의존성 제거, 순수 SVG 사용
+- stroke 기반 아이콘으로 선명도 향상
+- 반응형 및 다크모드 완벽 지원
+- 호버 효과 및 애니메이션 유지
 
 코드 변경:
-- components/scroll-to-top.tsx 아이콘 및 크기 최적화
+- components/scroll-to-top.tsx SVG 아이콘 직접 구현

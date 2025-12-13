@@ -1,6 +1,5 @@
 'use client';
 
-import { Icon } from '@iconify/react';
 import { useEffect, useState } from 'react';
 
 export function ScrollToTop() {
@@ -40,7 +39,19 @@ export function ScrollToTop() {
           className="fixed bottom-32 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-white shadow-lg transition-all duration-300 hover:scale-110 hover:bg-slate-700 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-slate-300 md:bottom-36 md:right-8"
           aria-label="맨 위로 가기"
         >
-          <Icon icon="material-symbols:arrow-upward-rounded" className="h-5 w-5" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
         </button>
       )}
     </>
