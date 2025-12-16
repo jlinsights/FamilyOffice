@@ -2,37 +2,41 @@
  * Sentry Client Configuration for FamilyOffice
  * 클라이언트사이드 에러 트래킹 및 성능 모니터링
  *
- * Note: This file runs in the browser, so we must be careful with environment variables
+ * Note: Next.js replaces process.env.NEXT_PUBLIC_* at build time
+ * We must reference them directly for static replacement
  */
 import * as Sentry from '@sentry/nextjs';
 
-// Safely access environment variables (Turbopack compatible)
-const getEnvVar = (key: string): string | undefined => {
-  if (typeof process !== 'undefined' && process.env) {
-    return process.env[key];
-  }
-  return undefined;
+// Environment variables - these are replaced at build time by Next.js
+declare const process: {
+  env: {
+    NEXT_PUBLIC_SENTRY_DSN?: string;
+    NODE_ENV?: string;
+    NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?: string;
+  };
 };
 
 // Only initialize if DSN is provided
-const sentryDsn = getEnvVar('NEXT_PUBLIC_SENTRY_DSN');
-const isProduction = getEnvVar('NODE_ENV') === 'production';
+// @ts-ignore - Next.js will replace this at build time
+const sentryDsn = process.env.NEXT_PUBLIC_SENTRY_DSN;
 
 if (sentryDsn) {
   Sentry.init({
     dsn: sentryDsn,
 
   // 환경 설정
-  environment: isProduction ? 'production' : 'development',
+  // @ts-ignore - Next.js will replace this at build time
+  environment: process.env.NODE_ENV || 'production',
 
-  // 성능 모니터링 (프로덕션에서는 10%, 개발에서는 100%)
-  tracesSampleRate: isProduction ? 0.1 : 1.0,
+  // 성능 모니터링 (개발/프로덕션 모두 10% 샘플링)
+  tracesSampleRate: 0.1,
 
   // 프로파일링 (성능 최적화)
-  profilesSampleRate: isProduction ? 0.1 : 1.0,
+  profilesSampleRate: 0.1,
 
   // 릴리즈 정보 (Vercel 환경변수 사용)
-  release: getEnvVar('NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA') || 'development',
+  // @ts-ignore - Next.js will replace this at build time
+  release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || 'development',
   
   // 사용자 컨텍스트
   beforeSend(event) {

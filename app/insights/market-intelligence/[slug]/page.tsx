@@ -19,6 +19,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { blogPosts } from '@/lib/blog-data';
+import { env } from '@/lib/env';
 
 // BlogPost interface and data imported from lib/blog-data
 
@@ -38,7 +39,7 @@ export async function generateMetadata({
   }
 
   // 절대 URL 생성 (소셜 미디어 플랫폼은 절대 URL 필요)
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://familyoffices.vip';
+  const baseUrl = env.NEXT_PUBLIC_SITE_URL || env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip';
   const imageUrl = post.image.startsWith('http')
     ? post.image
     : `${baseUrl}${post.image}`;

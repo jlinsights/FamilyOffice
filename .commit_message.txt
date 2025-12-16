@@ -1,1 +1,1 @@
-🐛 Turbopack 호환성 수정 - Sentry 클라이언트 설정에서 process 안전하게 접근
+🐛 Turbopack process 오류 완전 해결 - 모든 페이지에서 안전한 env 시스템 사용

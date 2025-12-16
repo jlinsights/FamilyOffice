@@ -45,16 +45,17 @@ export const clientEnvSchema = z.object({
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1, 'Clerk Publishable Key is required'),
   NEXT_PUBLIC_SUPABASE_URL: z.string().url('Invalid Supabase URL'),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1, 'Supabase Anon Key is required'),
-  
+
   // 선택적 클라이언트 환경변수
   NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().optional(),
   NEXT_PUBLIC_APP_URL: z.string().url().optional(),
+  NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
   NEXT_PUBLIC_CALCOM_API_KEY: z.string().optional(),
   NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: z.string().optional(),
   NEXT_PUBLIC_KAKAO_CHANNEL_ID: z.string().optional(),
   NEXT_PUBLIC_KAKAO_PIXEL_ID: z.string().optional(),
   NEXT_PUBLIC_HUBSPOT_PORTAL_ID: z.string().optional(),
-  
+
   // Resend Email Domain - 추가됨
   NEXT_PUBLIC_RESEND_FROM_EMAIL: z.string().email().optional(),
 });
@@ -88,6 +89,7 @@ export function createEnv() {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_CALCOM_API_KEY: process.env.NEXT_PUBLIC_CALCOM_API_KEY,
     NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY,
     NEXT_PUBLIC_KAKAO_CHANNEL_ID: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID,

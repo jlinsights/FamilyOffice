@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ArrowLeft, Calendar, Clock, ExternalLink, Share2, User } from 'lucide-react';
 import { rssAggregator } from '@/lib/rss-aggregator';
+import { env } from '@/lib/env';
 
 interface InsightContentPageProps {
   params: Promise<{
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: InsightContentPageProps): Pro
     const sourceLabel = getSourceLabel(source);
 
     // 절대 URL 생성 (소셜 미디어 플랫폼은 절대 URL 필요)
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://familyoffices.vip';
+    const baseUrl = env.NEXT_PUBLIC_SITE_URL || env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip';
     const imageUrl = content.imageUrl
       ? (content.imageUrl.startsWith('http') ? content.imageUrl : `${baseUrl}${content.imageUrl}`)
       : undefined;
