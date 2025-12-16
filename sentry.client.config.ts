@@ -1,25 +1,38 @@
 /**
  * Sentry Client Configuration for FamilyOffice
  * 클라이언트사이드 에러 트래킹 및 성능 모니터링
+ *
+ * Note: This file runs in the browser, so we must be careful with environment variables
  */
 import * as Sentry from '@sentry/nextjs';
 
+// Safely access environment variables (Turbopack compatible)
+const getEnvVar = (key: string): string | undefined => {
+  if (typeof process !== 'undefined' && process.env) {
+    return process.env[key];
+  }
+  return undefined;
+};
+
 // Only initialize if DSN is provided
-if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+const sentryDsn = getEnvVar('NEXT_PUBLIC_SENTRY_DSN');
+const isProduction = getEnvVar('NODE_ENV') === 'production';
+
+if (sentryDsn) {
   Sentry.init({
-    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-  
+    dsn: sentryDsn,
+
   // 환경 설정
-  environment: process.env.NODE_ENV,
-  
-  // 성능 모니터링
-  tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-  
+  environment: isProduction ? 'production' : 'development',
+
+  // 성능 모니터링 (프로덕션에서는 10%, 개발에서는 100%)
+  tracesSampleRate: isProduction ? 0.1 : 1.0,
+
   // 프로파일링 (성능 최적화)
-  profilesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-  
-  // 릴리즈 정보
-  release: (typeof process !== 'undefined' && process.env.VERCEL_GIT_COMMIT_SHA) || 'development',
+  profilesSampleRate: isProduction ? 0.1 : 1.0,
+
+  // 릴리즈 정보 (Vercel 환경변수 사용)
+  release: getEnvVar('NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA') || 'development',
   
   // 사용자 컨텍스트
   beforeSend(event) {
