@@ -15,7 +15,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from '@/components/ui/button';
 
-import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
@@ -386,13 +385,16 @@ export default async function BlogPostPage({
                   </Link>
                   <div className="text-sm text-slate-500 dark:text-slate-400 mt-1">수석 컨설턴트</div>
                 </div>
-                <CalComPopup
-                  buttonText="상담 신청"
+                <Button
                   variant="outline"
                   size="sm"
-                  eventType="consultation"
                   className="border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
-                />
+                  asChild
+                >
+                  <Link href="/structure-check#request-form">
+                    구조 점검 요청
+                  </Link>
+                </Button>
               </div>
               <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.7]">
                 국내 대기업 및 글로벌 외국계 기업 출신으로 중견기업 자산관리 경험과 전문성을 보유하고 있습니다.
@@ -504,13 +506,16 @@ export default async function BlogPostPage({
                   뉴스레터 구독하기
                 </Link>
               </Button>
-              <CalComPopup
-                buttonText="전문가 상담"
+              <Button
                 variant="outline"
                 size="lg"
                 className="w-full sm:w-auto border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-3 rounded-lg font-medium"
-                eventType="consultation"
-              />
+                asChild
+              >
+                <Link href="/structure-check#request-form">
+                  구조 점검 요청
+                </Link>
+              </Button>
             </div>
 
             <p className="text-sm text-slate-500 dark:text-slate-600 mt-8">

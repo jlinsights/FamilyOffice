@@ -22,7 +22,6 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
-import { CalComPopup } from '@/components/cal-com-popup';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -685,21 +684,14 @@ export default function WeeklyBriefPage() {
                     5분 내 읽을 수 있는 핵심 정보로 경영 의사결정을 지원합니다.
                   </p>
                   <div className="space-y-4">
-                    <CalComPopup
-                      buttonText="상담 신청"
-                      variant="default"
-                      size="lg"
-                      className="w-full"
-                      eventType="consultation"
-                      trigger={
-                        <Button size="lg" className="w-full">
-                          <Calendar className="mr-2 h-5 w-5" />
-                          상담 신청
-                        </Button>
-                      }
-                    />
+                    <Button size="lg" className="w-full" asChild>
+                      <Link href="/structure-check#request-form">
+                        <Calendar className="mr-2 h-5 w-5" />
+                        구조 점검 요청
+                      </Link>
+                    </Button>
                     <div className="text-center text-sm text-muted-foreground">
-                      무료 상담을 통해 맞춤형 솔루션을 제안드립니다
+                      월 20분 한정 - 전문가의 구조 점검을 받아보세요
                     </div>
                   </div>
                 </div>
