@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { z } from 'zod';
+import { sendStructureCheckConfirmation } from '@/lib/email/resend-client';
 
 // Request validation schema
 const structureCheckRequestSchema = z.object({
@@ -73,8 +74,25 @@ export async function POST(request: NextRequest) {
       throw error;
     }
 
-    // TODO: Send automatic response email
-    // await sendConfirmationEmail(validatedData.email, data.id);
+    // Send automatic confirmation email (non-blocking)
+    // Don't fail the request if email fails
+    try {
+      const emailResult = await sendStructureCheckConfirmation(
+        validatedData.email,
+        validatedData.name,
+        data.id,
+        qualificationScore
+      );
+
+      if (!emailResult.success) {
+        console.error('Email send failed (non-critical):', emailResult.error);
+      } else {
+        console.log('Confirmation email sent successfully:', emailResult.id);
+      }
+    } catch (emailError) {
+      console.error('Email send error (non-critical):', emailError);
+      // Continue execution - email failure shouldn't block the user
+    }
 
     return NextResponse.json(
       {
