@@ -1,6 +1,7 @@
 'use client';
 
 import { memo, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { ArrowDown, Crown } from 'lucide-react';
 
@@ -12,6 +13,7 @@ import { ClientOnlyIcon } from '@/components/ui/client-only-icon';
 import { AnimatedCounter } from '@/components/animated-counter';
 
 export const HeroSection = memo(function HeroSection() {
+  const router = useRouter();
   const [startAnimation, setStartAnimation] = useState(false);
 
   useEffect(() => {
@@ -140,13 +142,14 @@ export const HeroSection = memo(function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center mb-12 sm:mb-16 lg:mb-20 animate-slide-up"
           style={{ animationDelay: '500ms' }}
         >
-          <CalComPopup
-            buttonText="지금 바로 상담 예약"
-            variant="default"
+          <Button
             size="lg"
+            variant="default"
             className="interaction-ready px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-colors duration-200"
-            eventType="consultation"
-          />
+            onClick={() => router.push('/structure-check#request-form')}
+          >
+            이 문제, 혼자 판단하셔도 되는 단계인가요?
+          </Button>
           <Button
             size="lg"
             variant="outline"

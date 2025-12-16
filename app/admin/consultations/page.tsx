@@ -2,6 +2,9 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 import { createClient } from '@/lib/supabase/server';
+import { Database } from '@/types/supabase';
+
+type ConsultationRow = Database['public']['Tables']['consultations']['Row'];
 
 // 동적 렌더링 강제
 export const dynamic = 'force-dynamic';
@@ -35,6 +38,9 @@ export default async function ConsultationsPage() {
     .from('consultations')
     .select('*')
     .order('created_at', { ascending: false });
+
+  // 타입 안전성을 위한 타입 단언
+  const typedConsultations: ConsultationRow[] = (consultations || []) as ConsultationRow[];
 
   if (error) {
     console.error('Error fetching consultations:', error);
@@ -82,8 +88,8 @@ export default async function ConsultationsPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-light-border dark:divide-dark-border">
-                  {consultations && consultations.length > 0 ? (
-                    consultations.map(consultation => (
+                  {typedConsultations && typedConsultations.length > 0 ? (
+                    typedConsultations.map(consultation => (
                       <tr
                         key={consultation.id}
                         className="hover:bg-light-bg-tertiary dark:hover:bg-dark-bg-tertiary"

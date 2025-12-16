@@ -340,10 +340,10 @@ export const Footer = memo(function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/contact"
+                    href="/structure-check#request-form"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
-                    무료 상담 신청
+                    구조 점검 요청
                   </Link>
                 </li>
                 <li>

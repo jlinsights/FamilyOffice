@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { createClient } from '@/lib/supabase/server';
+import { Database } from '@/types/supabase';
+
+type PerformanceMetricInsert = Database['public']['Tables']['performance_metrics']['Insert'];
 
 // Performance metrics endpoint
 export async function POST(request: NextRequest) {
@@ -18,19 +21,19 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient();
 
     // Store performance metric in database
+    const insertData: PerformanceMetricInsert = {
+      metric_name: body.name,
+      metric_value: body.value,
+      metric_type: body.type || 'custom',
+      url: body.url || null,
+      user_agent: request.headers.get('user-agent') || null,
+      timestamp: new Date().toISOString(),
+      metadata: body.context || {},
+    };
+
     const { data, error } = await supabase
       .from('performance_metrics')
-      .insert([
-        {
-          metric_name: body.name,
-          metric_value: body.value,
-          metric_type: body.type || 'custom',
-          url: body.url,
-          user_agent: request.headers.get('user-agent'),
-          timestamp: new Date().toISOString(),
-          metadata: body.context || {},
-        },
-      ])
+      .insert([insertData])
       .select()
       .single();
 

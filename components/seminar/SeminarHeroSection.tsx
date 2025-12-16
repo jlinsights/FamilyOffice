@@ -158,14 +158,14 @@ export function SeminarHeroSection() {
               <Calendar className="ml-2 h-5 w-5" />
             </Button>
           </a>
-          <a href="/contact" style={{ textDecoration: 'none' }}>
+          <a href="/structure-check#request-form" style={{ textDecoration: 'none' }}>
             <Button
               variant="outline"
               size="lg"
               className="font-bold shadow-lg px-8 py-4 text-lg"
             >
               <Users className="mr-2 h-5 w-5" />
-              멤버십 문의하기
+              구조 점검 요청
             </Button>
           </a>
         </div>

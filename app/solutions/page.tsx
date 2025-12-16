@@ -131,13 +131,14 @@ const ServicePageContent = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
               style={{ animationDelay: '400ms' }}
             >
-              <CalComPopup
-                buttonText="무료 자산관리 상담"
+              <Button
                 variant="default"
                 size="lg"
                 className="px-8 py-4 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl rounded-full"
-                eventType="consultation"
-              />
+                asChild
+              >
+                <Link href="/structure-check#request-form">구조 점검 요청</Link>
+              </Button>
               <Button variant="outline" size="lg" className="font-bold px-8 py-4 text-lg shadow-lg rounded-full border-2 hover:bg-slate-100 dark:hover:bg-slate-800" asChild>
                 <Link href="/about">소개 보기</Link>
               </Button>
@@ -414,13 +415,14 @@ const ServicePageContent = () => {
                                 <ArrowRight className="ml-2 h-4 w-4" />
                               </Link>
                             </Button>
-                            <CalComPopup
-                              buttonText="무료 상담 신청"
+                            <Button
                               variant="outline"
                               size="sm"
                               className="w-full border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 font-bold transition-all duration-300 rounded-xl py-5"
-                              eventType="consultation"
-                            />
+                              asChild
+                            >
+                              <Link href="/structure-check#request-form">구조 점검 요청</Link>
+                            </Button>
                           </div>
                         </div>
                       </div>
@@ -557,10 +559,11 @@ const ServicePageContent = () => {
           
           <div className="container mx-auto px-6 text-center relative z-10">
             <h2 className="text-3xl md:text-4xl font-black mb-6">
-              <strong className="text-blue-300">고액자산가 전용</strong> 프리미엄 자산관리 상담
+              이 문제, <strong className="text-blue-300">혼자 판단하셔도</strong> 되는 단계인가요?
             </h2>
             <p className="text-xl text-blue-100/80 mb-10 max-w-2xl mx-auto font-light">
-              <strong className="text-white">개인자산 30억+</strong> 고객님의 성공적인 미래를 위한 <strong className="text-white">맞춤형 패밀리오피스 솔루션</strong>을 함께 설계해보세요
+              <strong className="text-white">기업을 운영하고 자산이 커질수록</strong>, 결정은 늦어지고 리스크는 커집니다.<br />
+              지금 상황에서 <strong className="text-white">무엇을 결정해야 하는지</strong> 함께 정리해보세요
             </p>
             
             {/* Urgency Indicator */}
@@ -573,18 +576,12 @@ const ServicePageContent = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CalComPopup
-                buttonText="무료 자산관리 상담"
-                variant="default"
-                size="lg"
-                eventType="consultation"
-                trigger={
-                  <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-bold shadow-xl rounded-full px-8 py-6 text-lg border-none">
-                    무료 자산관리 상담 (월 20분 한정)
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                }
-              />
+              <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-bold shadow-xl rounded-full px-8 py-6 text-lg border-none" asChild>
+                <Link href="/structure-check#request-form">
+                  구조 점검 요청 (월 20분 한정)
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
               <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full px-8 py-6 text-lg font-bold" asChild>
                 <Link
                   href="http://pf.kakao.com/_gsxkxdG/chat"

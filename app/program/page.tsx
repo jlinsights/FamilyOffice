@@ -85,11 +85,11 @@ function HeroSection() {
             className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
           >
             <Link
-              href="/contact"
+              href="/structure-check#request-form"
               className="flex items-center"
-              aria-label="멤버십 신청하기"
+              aria-label="구조 점검 요청"
             >
-              멤버십 신청하기
+              구조 점검 요청
               <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
             </Link>
           </Button>

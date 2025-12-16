@@ -30,11 +30,11 @@ export function MembershipCTASection() {
           >
             <Button size="lg" asChild className="btn-primary group">
               <Link
-                href="/contact"
+                href="/structure-check#request-form"
                 className="flex items-center"
-                aria-label="멤버십 신청하기"
+                aria-label="구조 점검 요청"
               >
-                멤버십 신청하기
+                구조 점검 요청
                 <ArrowRight
                   className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
                   aria-hidden

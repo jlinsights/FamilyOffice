@@ -1,4 +1,4 @@
-import { CalComPopup } from '@/components/cal-com-popup';
+  import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
