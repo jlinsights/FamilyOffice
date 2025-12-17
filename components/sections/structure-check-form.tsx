@@ -1,8 +1,8 @@
 'use client';
 
-import { memo } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
 import { StructureCheckRequestForm } from '@/components/forms/structure-check-request-form';
+import { Card, CardContent } from '@/components/ui/card';
+import { memo } from 'react';
 
 export const StructureCheckFormSection = memo(function StructureCheckFormSection() {
   return (
@@ -22,7 +22,7 @@ export const StructureCheckFormSection = memo(function StructureCheckFormSection
         </div>
 
         {/* Form Card */}
-        <Card className="shadow-xl">
+        <Card className="shadow-xl bg-white dark:bg-slate-900/90 backdrop-blur-sm border-slate-200 dark:border-slate-700">
           <CardContent className="p-8 md:p-12">
             <StructureCheckRequestForm />
           </CardContent>
@@ -54,9 +54,7 @@ export const StructureCheckFormSection = memo(function StructureCheckFormSection
         {/* Footer Info */}
         <div className="mt-12 text-center text-muted-foreground">
           <p className="text-sm mb-2">기업 오너·자산가를 위한 구조 중심 자문</p>
-          <p className="font-semibold text-foreground text-lg mb-4">
-            Family Office S │ 임재홍
-          </p>
+
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-sm">
             <p>📍 서울시 중구 세종대로 73 태평로빌딩</p>
             <p className="hidden md:block">|</p>

@@ -96,6 +96,18 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'substack-post-media.s3.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.beehiiv.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 

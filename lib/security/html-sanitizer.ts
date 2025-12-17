@@ -210,6 +210,8 @@ export function isTextOnlyContent(content: string): boolean {
  * Only logs basic user behavior for SEO optimization
  */
 export function createUserTrackingScript(): string {
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  
   return `
     // Safe user behavior analysis
     if (typeof window !== 'undefined') {
@@ -230,7 +232,7 @@ export function createUserTrackingScript(): string {
         };
         
         // Console logging only in development
-        if (process.env.NODE_ENV === 'development') {
+        if (${isDevelopment}) {
           console.log('User Profile:', userProfile);
         }
       });

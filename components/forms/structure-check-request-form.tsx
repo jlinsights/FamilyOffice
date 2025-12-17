@@ -1,18 +1,18 @@
 'use client';
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Card, CardContent } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CheckCircle2, Loader2 } from 'lucide-react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { Loader2, CheckCircle2 } from 'lucide-react';
+import * as z from 'zod';
 
 // Form validation schema
 const structureCheckSchema = z.object({
@@ -144,7 +144,7 @@ export function StructureCheckRequestForm() {
 
       {/* 연락처 정보 */}
       <div className="space-y-4">
-        <h3 className="text-xl font-bold">연락처 정보</h3>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">연락처 정보</h3>
 
         <div className="space-y-2">
           <Label htmlFor="name">이름 *</Label>
@@ -197,8 +197,8 @@ export function StructureCheckRequestForm() {
       </div>
 
       {/* 필수 질문 */}
-      <div className="space-y-6 border-t pt-8">
-        <h3 className="text-xl font-bold">사전 질문 (필수)</h3>
+      <div className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">사전 질문 (필수)</h3>
 
         {/* Q1 */}
         <div className="space-y-3">
@@ -371,8 +371,8 @@ export function StructureCheckRequestForm() {
       </div>
 
       {/* 선택 질문 */}
-      <div className="space-y-6 border-t pt-8">
-        <h3 className="text-xl font-bold">선택 질문 (선택)</h3>
+      <div className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">선택 질문 (선택)</h3>
 
         {/* Q6 */}
         <div className="space-y-3">

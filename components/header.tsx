@@ -1,17 +1,17 @@
 'use client';
 
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
 
-import { useState, useCallback, memo, useEffect } from 'react';
-import type { MouseEventHandler, KeyboardEvent } from 'react';
+import type { KeyboardEvent, MouseEventHandler } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 
-import { ThemeToggle } from '@/components/theme-toggle';
-import { SamsungFinancialNetworksLogo } from '@/components/logo';
 import { UserProfileDropdown } from '@/components/auth/user-profile-dropdown';
+import { SamsungFinancialNetworksLogo } from '@/components/logo';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
@@ -255,11 +255,11 @@ export const Header = memo(function Header({
                     로그인
                   </Link> */}
                   <Link
-                    href="/contact"
+                    href="/structure-check#request-form"
                     className="inline-flex items-center justify-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                    aria-label="상담 신청 페이지로 이동"
+                    aria-label="구조 점검 요청 페이지로 이동"
                   >
-                    상담 신청
+                    구조 점검 요청
                     <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
                   </Link>
                 </>
@@ -366,12 +366,12 @@ export const Header = memo(function Header({
                     로그인
                   </Link> */}
                   <Link
-                    href="/contact"
+                    href="/structure-check#request-form"
                     onClick={handleMobileLinkClick}
                     className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
-                    aria-label="상담 신청"
+                    aria-label="구조 점검 요청"
                   >
-                    상담 신청
+                    구조 점검 요청
                     <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Link>
                 </>
