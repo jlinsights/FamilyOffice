@@ -1,12 +1,12 @@
 'use client';
 
-import KakaoSignUpButton from '@/components/auth/kakao-signup-button';
+// import KakaoSignUpButton from '@/components/auth/kakao-signup-button';
 import { SignUpForm } from '@/components/auth/sign-up-form';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+// import { Separator } from '@/components/ui/separator';
 import { Crown, Shield, TrendingUp, Users } from 'lucide-react';
 import { Suspense, useEffect } from 'react';
 
@@ -16,7 +16,7 @@ export default function SignUpPage() {
     document.title = '회원가입 | FamilyOffice S - 百年永續 기업의 가치를 다음 세대로';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', '중소중견기업 법인대표를 위한 百年永續 솔루션. 기업의 가치를 다음 세대로 이어가는 전문 서비스입니다.');
+      metaDescription.setAttribute('content', '중소중견기업 법인대표를 위한 百年永續 솔루션에 가입하세요. 기업의 가치를 다음 세대로 이어가는 전문 서비스입니다.');
     }
   }, []);
   const features = [
@@ -112,10 +112,10 @@ export default function SignUpPage() {
             </CardHeader>
 
             <CardContent className="space-y-6">
-              {/* 카카오 회원가입 */}
-              <div className="space-y-4">
+              {/* 카카오 회원가입 숨김 처리 */}
+              {/* <div className="space-y-4">
                 <Suspense fallback={<div>로딩 중...</div>}>
-                  <KakaoSignUpButton 
+                  <KakaoSignUpButton
                     fullWidth
                     size="lg"
                     onSuccess={() => {
@@ -124,7 +124,7 @@ export default function SignUpPage() {
                     }}
                   />
                 </Suspense>
-                
+
                 <p className="text-xs text-center text-muted-foreground">
                   카카오 계정으로 빠르고 안전하게 가입하세요
                 </p>
@@ -139,7 +139,7 @@ export default function SignUpPage() {
                     또는
                   </span>
                 </div>
-              </div>
+              </div> */}
 
               {/* 기존 회원가입 폼 (이메일/패스워드) */}
               <Suspense fallback={<div>로딩 중...</div>}>
