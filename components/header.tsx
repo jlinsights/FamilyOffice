@@ -6,11 +6,10 @@ import type { KeyboardEvent, MouseEventHandler } from 'react';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 import Link from 'next/link';
-import { SignInButton, useAuth } from '@clerk/nextjs';
+import { SignInButton, UserButton, useAuth } from '@clerk/nextjs';
 
 import { Button } from '@/components/ui/button';
 
-import { UserProfileDropdown } from '@/components/auth/user-profile-dropdown';
 import { SamsungFinancialNetworksLogo } from '@/components/logo';
 import { ThemeToggle } from '@/components/theme-toggle';
 
@@ -74,7 +73,7 @@ export const Header = memo(function Header({
     [isMobileMenuOpen]
   );
 
-  // SSR 방지: 마운트되기 전에는 기본 헤더와 로그인 버튼 표시 (깜빡임 방지)
+  // SSR 방지: 마운트되기 전에는 기본 헤더와 로딩 스켈레톤 표시
   if (!mounted || !isClient) {
     return (
       <header
@@ -97,24 +96,9 @@ export const Header = memo(function Header({
                 />
               </Link>
             </div>
-            {/* 데스크톱 우측 버튼들 - 초기 렌더링 시 로그인 버튼 표시 */}
+            {/* 데스크톱 우측 버튼들 - 초기 렌더링 시 로딩 스켈레톤 표시 */}
             <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
-              <SignInButton mode="modal">
-                <button
-                  className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                  aria-label="로그인"
-                >
-                  로그인
-                </button>
-              </SignInButton>
-              <Link
-                href="/structure-check#request-form"
-                className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                aria-label="구조 점검 요청"
-                title="구조 점검 요청"
-              >
-                <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
-              </Link>
+              <div className="h-9 w-9 rounded-full bg-muted animate-pulse" />
               <ThemeToggle />
             </div>
           </div>
@@ -260,29 +244,41 @@ export const Header = memo(function Header({
 
           {/* 데스크톱 우측 버튼들 */}
           <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
-            {isLoaded && isSignedIn ? (
-              // 로그인 상태: 사용자 프로필 표시
-              <UserProfileDropdown className="mr-2" />
-            ) : (
-              // 로그아웃 상태: 로그인 버튼 + 구조 점검 요청 표시
-              <>
-                <SignInButton mode="modal">
-                  <button
-                    className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                    aria-label="로그인"
+            {isLoaded ? (
+              isSignedIn ? (
+                // 로그인 상태: Clerk UserButton 표시
+                <UserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      avatarBox: "h-9 w-9"
+                    }
+                  }}
+                />
+              ) : (
+                // 로그아웃 상태: 로그인 버튼 + 구조 점검 요청 표시
+                <>
+                  <SignInButton mode="modal">
+                    <button
+                      className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                      aria-label="로그인"
+                    >
+                      로그인
+                    </button>
+                  </SignInButton>
+                  <Link
+                    href="/structure-check#request-form"
+                    className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                    aria-label="구조 점검 요청"
+                    title="구조 점검 요청"
                   >
-                    로그인
-                  </button>
-                </SignInButton>
-                <Link
-                  href="/structure-check#request-form"
-                  className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                  aria-label="구조 점검 요청"
-                  title="구조 점검 요청"
-                >
-                  <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
-                </Link>
-              </>
+                    <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
+                  </Link>
+                </>
+              )
+            ) : (
+              // 로딩 중: 스켈레톤 표시
+              <div className="h-9 w-9 rounded-full bg-muted animate-pulse" />
             )}
             <ThemeToggle />
           </div>
