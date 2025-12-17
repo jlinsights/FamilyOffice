@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, ClipboardCheck, Menu, X } from 'lucide-react';
 
 import type { KeyboardEvent, MouseEventHandler } from 'react';
 import { memo, useCallback, useEffect, useState } from 'react';
@@ -255,11 +255,11 @@ export const Header = memo(function Header({
                   </Link>
                   <Link
                     href="/structure-check#request-form"
-                    className="inline-flex items-center justify-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                    aria-label="구조 점검 요청 페이지로 이동"
+                    className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                    aria-label="구조 점검 요청"
+                    title="구조 점검 요청"
                   >
-                    구조 점검 요청
-                    <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
+                    <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
                   </Link>
                 </>
               )
@@ -368,9 +368,10 @@ export const Header = memo(function Header({
                     onClick={handleMobileLinkClick}
                     className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
                     aria-label="구조 점검 요청"
+                    title="구조 점검 요청"
                   >
+                    <ClipboardCheck className="h-5 w-5 mr-2" aria-hidden="true" />
                     구조 점검 요청
-                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Link>
                 </>
               )}
