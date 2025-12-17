@@ -1,12 +1,12 @@
 'use client';
 
-import KakaoLoginButton from '@/components/auth/kakao-login-button';
+// import KakaoLoginButton from '@/components/auth/kakao-login-button';
 import { SignInForm } from '@/components/auth/sign-in-form';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+// import { Separator } from '@/components/ui/separator';
 import { Shield, TrendingUp, Users } from 'lucide-react';
 import { Suspense, useEffect } from 'react';
 
@@ -16,7 +16,7 @@ export default function SignInPage() {
     document.title = '로그인 | FamilyOffice S - 중소중견기업 전문 자산관리';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', '중소중견기업 법인대표를 위한 전문적인 자산관리 서비스. 카카오로 간편하게 로그인하세요.');
+      metaDescription.setAttribute('content', '중소중견기업 법인대표를 위한 전문적인 자산관리 서비스에 로그인하세요.');
     }
   }, []);
   const benefits = [
@@ -106,10 +106,10 @@ export default function SignInPage() {
             </CardHeader>
 
             <CardContent className="space-y-6">
-              {/* 카카오 로그인 */}
-              <div className="space-y-4">
+              {/* 카카오 로그인 숨김 처리 */}
+              {/* <div className="space-y-4">
                 <Suspense fallback={<div>로딩 중...</div>}>
-                  <KakaoLoginButton 
+                  <KakaoLoginButton
                     fullWidth={false}
                     size="lg"
                     onSuccess={() => {
@@ -120,7 +120,7 @@ export default function SignInPage() {
                     카카오로 간편 로그인
                   </KakaoLoginButton>
                 </Suspense>
-                
+
                 <p className="text-xs text-center text-muted-foreground">
                   카카오 계정으로 빠르고 안전하게 로그인하세요
                 </p>
@@ -135,7 +135,7 @@ export default function SignInPage() {
                     또는
                   </span>
                 </div>
-              </div>
+              </div> */}
 
               {/* 기존 로그인 폼 (이메일/패스워드) */}
               <Suspense fallback={<div>로딩 중...</div>}>
