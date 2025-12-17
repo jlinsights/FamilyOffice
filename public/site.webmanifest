@@ -10,12 +10,6 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/favicon.png?v=2025",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "apple"
-    },
-    {
       "src": "/favicon.ico?v=2025",
       "sizes": "16x16 32x32 48x48",
       "type": "image/x-icon"
