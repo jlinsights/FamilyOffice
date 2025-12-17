@@ -31,9 +31,9 @@ export const Header = memo(function Header({
   const [isClient, setIsClient] = useState(false);
   const { isSignedIn, isLoaded } = useAuth();
 
-  // Clerk가 완전히 로드되고 실제로 로그인된 경우만 인증된 것으로 간주
-  const isAuthenticated = isLoaded && isSignedIn;
+  // 로딩 상태 및 인증 상태 (명확한 로직으로 변경)
   const isLoading = !isLoaded;
+  const isAuthenticated = isLoaded && isSignedIn;
 
   useEffect(() => {
     setMounted(true);
@@ -264,8 +264,8 @@ export const Header = memo(function Header({
 
           {/* 데스크톱 우측 버튼들 */}
           <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
-            {/* 인증 상태에 따른 버튼 표시 */}
-            {isAuthenticated ? (
+            {/* 인증 상태에 따른 버튼 표시 - 로딩 중이거나 로그아웃 상태면 로그인 버튼 표시 */}
+            {isLoaded && isSignedIn ? (
               <UserProfileDropdown className="mr-2" />
             ) : (
               <>
@@ -365,8 +365,8 @@ export const Header = memo(function Header({
 
             {/* 모바일 버튼 및 설정 */}
             <div className="pt-4 border-t border-border space-y-4">
-              {/* 인증 상태에 따른 모바일 버튼 */}
-              {isAuthenticated ? (
+              {/* 인증 상태에 따른 모바일 버튼 - 로딩 중이거나 로그아웃 상태면 로그인 버튼 표시 */}
+              {isLoaded && isSignedIn ? (
                 <Link
                   href="/dashboard"
                   onClick={handleMobileLinkClick}
