@@ -1,1 +1,1 @@
-🔧 CSP에 Supabase 도메인 추가하여 회원가입/로그인 API 호출 허용
+✨ Supabase 인증을 Clerk로 완전 전환하여 UX 개선 및 CSP 문제 해결
