@@ -4,23 +4,23 @@
  * Core Web Vitals 대시보드 컴포넌트
  * 실시간 웹 성능 모니터링 및 분석 대시보드
  */
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { 
-  Activity, 
-  AlertCircle, 
-  CheckCircle2, 
-  Clock, 
-  Eye, 
-  Gauge,
-  RefreshCw,
-  TrendingUp,
-  Zap
+import {
+    Activity,
+    AlertCircle,
+    CheckCircle2,
+    Clock,
+    Eye,
+    Gauge,
+    RefreshCw,
+    TrendingUp,
+    Zap
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface WebVitalsAlert {
   type: 'critical' | 'warning' | 'info';
@@ -143,21 +143,21 @@ export function WebVitalsDashboard() {
 
   const getRatingColor = (rating: string) => {
     switch (rating) {
-      case 'good': return 'text-green-600 bg-green-100';
-      case 'needs-improvement': return 'text-yellow-600 bg-yellow-100';
-      case 'poor': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'good': return 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/40';
+      case 'needs-improvement': return 'text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900/40';
+      case 'poor': return 'text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/40';
+      default: return 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800';
     }
   };
 
   const getGradeColor = (grade: string) => {
     switch (grade) {
-      case 'A': return 'text-green-600 bg-green-100';
-      case 'B': return 'text-blue-600 bg-blue-100';
-      case 'C': return 'text-yellow-600 bg-yellow-100';
-      case 'D': return 'text-orange-600 bg-orange-100';
-      case 'F': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'A': return 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/40';
+      case 'B': return 'text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/40';
+      case 'C': return 'text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900/40';
+      case 'D': return 'text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/40';
+      case 'F': return 'text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/40';
+      default: return 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800';
     }
   };
 
@@ -250,7 +250,7 @@ export function WebVitalsDashboard() {
             variant="outline"
             size="sm"
             onClick={() => setAutoRefresh(!autoRefresh)}
-            className={autoRefresh ? 'bg-green-50 text-green-700' : ''}
+            className={autoRefresh ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300' : ''}
           >
             {autoRefresh ? <TrendingUp className="w-4 h-4 mr-1" /> : <RefreshCw className="w-4 h-4 mr-1" />}
             {autoRefresh ? '자동 새로고침' : '수동 새로고침'}
@@ -300,7 +300,7 @@ export function WebVitalsDashboard() {
             <Alert 
               key={index} 
               variant={alert.type === 'critical' ? 'destructive' : 'default'}
-              className={alert.type === 'warning' ? 'border-yellow-200 bg-yellow-50' : ''}
+              className={alert.type === 'warning' ? 'border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20' : ''}
             >
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>
@@ -348,7 +348,7 @@ export function WebVitalsDashboard() {
           <CardContent>
             <div className="space-y-3">
               {data.analytics.pageBreakdown.slice(0, 10).map((page, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <Badge className={getGradeColor(page.performanceGrade)}>
                     {page.performanceGrade}
                   </Badge>

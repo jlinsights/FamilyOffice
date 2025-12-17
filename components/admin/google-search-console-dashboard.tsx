@@ -1,23 +1,23 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { 
-  Search, 
-  TrendingUp, 
-  Target, 
-  BarChart3, 
-  Globe, 
-  MousePointer, 
-  Eye, 
-  AlertTriangle,
-  CheckCircle,
-  Clock
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+    AlertTriangle,
+    BarChart3,
+    CheckCircle,
+    Clock,
+    Eye,
+    Globe,
+    MousePointer,
+    Search,
+    Target,
+    TrendingUp
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 /**
  * Google Search Console 대시보드 컴포넌트
@@ -145,15 +145,15 @@ export function GoogleSearchConsoleDashboard() {
   };
 
   const getTrendIcon = (change: number) => {
-    if (change > 0) return <TrendingUp className="h-4 w-4 text-green-600" />;
-    if (change < 0) return <TrendingUp className="h-4 w-4 text-red-600 rotate-180" />;
+    if (change > 0) return <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />;
+    if (change < 0) return <TrendingUp className="h-4 w-4 text-red-600 dark:text-red-400 rotate-180" />;
     return <Target className="h-4 w-4 text-gray-400" />;
   };
 
   const getPositionBadge = (position: number) => {
-    if (position <= 3) return <Badge className="bg-green-100 text-green-800">상위 3위</Badge>;
-    if (position <= 5) return <Badge className="bg-yellow-100 text-yellow-800">상위 5위</Badge>;
-    if (position <= 10) return <Badge className="bg-blue-100 text-blue-800">1페이지</Badge>;
+    if (position <= 3) return <Badge className="bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300">상위 3위</Badge>;
+    if (position <= 5) return <Badge className="bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300">상위 5위</Badge>;
+    if (position <= 10) return <Badge className="bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">1페이지</Badge>;
     return <Badge variant="outline">개선 필요</Badge>;
   };
 
@@ -163,9 +163,9 @@ export function GoogleSearchConsoleDashboard() {
 
   const getRankingStatus = () => {
     if (brandRanking.current <= brandRanking.target) {
-      return { icon: CheckCircle, color: 'text-green-600', status: '목표 달성' };
+      return { icon: CheckCircle, color: 'text-green-600 dark:text-green-400', status: '목표 달성' };
     }
-    return { icon: Clock, color: 'text-orange-600', status: '진행 중' };
+    return { icon: Clock, color: 'text-orange-600 dark:text-orange-400', status: '진행 중' };
   };
 
   if (loading) {
@@ -288,7 +288,7 @@ export function GoogleSearchConsoleDashboard() {
                         {getPositionBadge(metric.position)}
                         <div className="flex items-center gap-1">
                           {getTrendIcon(metric.change)}
-                          <span className={`text-sm ${metric.change > 0 ? 'text-green-600' : metric.change < 0 ? 'text-red-600' : 'text-gray-500'}`}>
+                          <span className={`text-sm ${metric.change > 0 ? 'text-green-600 dark:text-green-400' : metric.change < 0 ? 'text-red-600 dark:text-red-400' : 'text-gray-500 dark:text-gray-400'}`}>
                             {metric.change > 0 ? '+' : ''}{metric.change}%
                           </span>
                         </div>
@@ -375,7 +375,7 @@ export function GoogleSearchConsoleDashboard() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
                     <div>
                       <div className="font-medium">&quot;가업승계 컨설팅&quot; 키워드 상승</div>
                       <div className="text-sm text-muted-foreground">
@@ -384,7 +384,7 @@ export function GoogleSearchConsoleDashboard() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
                     <div>
                       <div className="font-medium">브랜드 키워드 순위 개선</div>
                       <div className="text-sm text-muted-foreground">
@@ -393,7 +393,7 @@ export function GoogleSearchConsoleDashboard() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <TrendingUp className="h-5 w-5 text-blue-600 mt-0.5" />
+                    <TrendingUp className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
                     <div>
                       <div className="font-medium">검색 트래픽 꾸준한 성장</div>
                       <div className="text-sm text-muted-foreground">
@@ -413,7 +413,7 @@ export function GoogleSearchConsoleDashboard() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="h-5 w-5 text-orange-600 mt-0.5" />
+                    <AlertTriangle className="h-5 w-5 text-orange-600 dark:text-orange-400 mt-0.5" />
                     <div>
                       <div className="font-medium">롱테일 키워드 확대</div>
                       <div className="text-sm text-muted-foreground">
@@ -422,7 +422,7 @@ export function GoogleSearchConsoleDashboard() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Target className="h-5 w-5 text-blue-600 mt-0.5" />
+                    <Target className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
                     <div>
                       <div className="font-medium">CTR 최적화</div>
                       <div className="text-sm text-muted-foreground">
@@ -431,7 +431,7 @@ export function GoogleSearchConsoleDashboard() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <BarChart3 className="h-5 w-5 text-purple-600 mt-0.5" />
+                    <BarChart3 className="h-5 w-5 text-purple-600 dark:text-purple-400 mt-0.5" />
                     <div>
                       <div className="font-medium">콘텐츠 업데이트</div>
                       <div className="text-sm text-muted-foreground">

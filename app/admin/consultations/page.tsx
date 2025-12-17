@@ -1,7 +1,7 @@
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import { Database } from '@/types/supabase';
 
 type ConsultationRow = Database['public']['Tables']['consultations']['Row'];
@@ -13,7 +13,7 @@ export default async function ConsultationsPage() {
   // 환경변수가 없으면 에러 페이지 표시
   if (
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    !process.env.SUPABASE_SERVICE_ROLE_KEY
   ) {
     return (
       <div className="min-h-screen font-body text-navy-primary dark:text-white">
@@ -24,7 +24,7 @@ export default async function ConsultationsPage() {
               상담 신청 목록
             </h1>
             <div className="bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 p-4 rounded-md mb-6">
-              Supabase 환경변수가 설정되지 않았습니다. 관리자에게 문의하세요.
+              Supabase 관리자 키(SERVICE_ROLE_KEY)가 설정되지 않았습니다. 환경변수를 확인해주세요.
             </div>
           </div>
         </section>
@@ -33,7 +33,7 @@ export default async function ConsultationsPage() {
     );
   }
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data: consultations, error } = await supabase
     .from('consultations')
     .select('*')
@@ -43,7 +43,7 @@ export default async function ConsultationsPage() {
   const typedConsultations: ConsultationRow[] = (consultations || []) as ConsultationRow[];
 
   if (error) {
-    console.error('Error fetching consultations:', error);
+    console.error('Error fetching consultations:', JSON.stringify(error, null, 2));
   }
 
   return (
@@ -62,7 +62,7 @@ export default async function ConsultationsPage() {
             </div>
           )}
 
-          <div className="bg-white dark:bg-dark-bg-secondary rounded-md shadow-medium overflow-hidden">
+          <div className="bg-card rounded-md shadow-sm overflow-hidden border">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>

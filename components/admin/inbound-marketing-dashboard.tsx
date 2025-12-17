@@ -5,34 +5,29 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  Users, 
-  Target, 
-  Zap,
-  BookOpen,
-  Activity,
-  BarChart3,
-  Clock,
-  CheckCircle,
-  XCircle,
-  ArrowUp,
-  ArrowDown,
-  RefreshCw,
-  Download,
-  Mail,
-  MousePointer,
-  Eye,
-  Star
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+    Activity,
+    BarChart3,
+    BookOpen,
+    CheckCircle,
+    Clock,
+    Eye,
+    MousePointer,
+    RefreshCw,
+    Star,
+    Target,
+    TrendingUp,
+    Users,
+    XCircle,
+    Zap
 } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface MarketingAnalytics {
   period: {
@@ -111,10 +106,10 @@ export function InboundMarketingDashboard() {
   }, [selectedPeriod, fetchAnalytics]);
 
   const getHealthScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600';
-    if (score >= 60) return 'text-yellow-600';
-    if (score >= 40) return 'text-orange-600';
-    return 'text-red-600';
+    if (score >= 80) return 'text-green-600 dark:text-green-400';
+    if (score >= 60) return 'text-yellow-600 dark:text-yellow-400';
+    if (score >= 40) return 'text-orange-600 dark:text-orange-400';
+    return 'text-red-600 dark:text-red-400';
   };
 
   const getHealthScoreBadgeVariant = (score: number): "default" | "secondary" | "destructive" | "outline" => {
@@ -296,13 +291,13 @@ export function InboundMarketingDashboard() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">콘텐츠 클릭률</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">콘텐츠 클릭률</p>
                 <p className="text-2xl font-bold">{analytics.content_recommendations.click_rate}</p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-500 dark:text-gray-400">
                   {analytics.content_recommendations.total_recommendations}개 추천
                 </p>
               </div>
-              <BookOpen className="h-8 w-8 text-indigo-500" />
+              <BookOpen className="h-8 w-8 text-indigo-500 dark:text-indigo-400" />
             </div>
           </CardContent>
         </Card>
@@ -330,12 +325,12 @@ export function InboundMarketingDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {analytics.summary.key_insights.map((insight, index) => (
-                    <div key={index} className="flex items-start gap-2 p-3 bg-blue-50 rounded-lg">
-                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-xs font-semibold text-blue-600">{index + 1}</span>
+                  {(analytics.summary?.key_insights || []).map((insight, index) => (
+                    <div key={index} className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                      <div className="w-6 h-6 bg-blue-100 dark:bg-blue-800 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-xs font-semibold text-blue-600 dark:text-blue-200">{index + 1}</span>
                       </div>
-                      <p className="text-sm text-blue-800">{insight}</p>
+                      <p className="text-sm text-blue-800 dark:text-blue-100">{insight}</p>
                     </div>
                   ))}
                 </div>
@@ -352,12 +347,12 @@ export function InboundMarketingDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {analytics.summary.recommendations.map((recommendation, index) => (
-                    <div key={index} className="flex items-start gap-2 p-3 bg-amber-50 rounded-lg">
-                      <div className="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-xs font-semibold text-amber-600">{index + 1}</span>
+                  {(analytics.summary?.recommendations || []).map((recommendation, index) => (
+                    <div key={index} className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+                      <div className="w-6 h-6 bg-amber-100 dark:bg-amber-800 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-xs font-semibold text-amber-600 dark:text-amber-200">{index + 1}</span>
                       </div>
-                      <p className="text-sm text-amber-800">{recommendation}</p>
+                      <p className="text-sm text-amber-800 dark:text-amber-100">{recommendation}</p>
                     </div>
                   ))}
                 </div>
@@ -381,19 +376,21 @@ export function InboundMarketingDashboard() {
                   </div>
                   
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">전환율</span>
-                    <span className="font-semibold text-green-600">{analytics.lead_scoring.conversion_rate}</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">전환율</span>
+                    <span className="font-semibold text-green-600 dark:text-green-400">
+                      {analytics.lead_scoring?.conversion_rate || '0%'}
+                    </span>
                   </div>
 
                   <div className="pt-2">
-                    <div className="text-sm text-gray-600 mb-2">리드 전환 현황</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">리드 전환 현황</div>
                     <Progress 
-                      value={parseFloat(analytics.lead_scoring.conversion_rate.replace('%', ''))} 
+                      value={parseFloat((analytics.lead_scoring?.conversion_rate || '0').replace('%', ''))} 
                       className="h-2"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
-                      <span>{analytics.lead_scoring.qualified_leads} 자격</span>
-                      <span>{analytics.lead_scoring.total_leads} 총계</span>
+                    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      <span>{analytics.lead_scoring?.qualified_leads || 0} 자격</span>
+                      <span>{analytics.lead_scoring?.total_leads || 0} 총계</span>
                     </div>
                   </div>
                 </div>
@@ -406,7 +403,7 @@ export function InboundMarketingDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {analytics.lead_scoring.top_activities.map((activity, index) => (
+                  {(analytics.lead_scoring?.top_activities || []).map((activity, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
                         <span className="text-sm font-semibold">{index + 1}</span>
@@ -492,7 +489,7 @@ export function InboundMarketingDashboard() {
                     <span>실패: {analytics.workflow_performance.failure_rate}</span>
                   </div>
                   <Progress 
-                    value={parseFloat(analytics.workflow_performance.completion_rate.replace('%', ''))} 
+                    value={parseFloat((analytics.workflow_performance?.completion_rate || '0').replace('%', ''))} 
                     className="h-2"
                   />
                 </div>
@@ -551,7 +548,7 @@ export function InboundMarketingDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {analytics.content_recommendations.top_performing_content.map((content, index) => (
+                  {(analytics.content_recommendations?.top_performing_content || []).map((content, index) => (
                     <div key={content.content_id} className="p-3 border rounded-lg">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">

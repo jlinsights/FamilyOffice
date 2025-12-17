@@ -27,15 +27,8 @@ export async function createConsultationsTable() {
     -- RLS 활성화
     ALTER TABLE consultations ENABLE ROW LEVEL SECURITY;
     
-    -- 정책 생성
-    DROP POLICY IF EXISTS "Anyone can insert consultations" ON consultations;
-    DROP POLICY IF EXISTS "Admin can view all consultations" ON consultations;
-    
-    CREATE POLICY "Anyone can insert consultations" ON consultations
-      FOR INSERT WITH CHECK (true);
-      
-    CREATE POLICY "Admin can view all consultations" ON consultations
-      FOR SELECT USING (true);
+    -- 주의: 실제 보안 정책은 rls-policies.sql 파일에서 관리됩니다.
+    -- 이 함수는 테이블 구조만 생성합니다.
   `;
 
   try {

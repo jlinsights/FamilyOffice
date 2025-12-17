@@ -90,16 +90,16 @@ export class HubSpotAPIClient {
 
   constructor(accessToken?: string) {
     this.accessToken = accessToken || process.env.HUBSPOT_ACCESS_TOKEN || '';
-    
-    if (!this.accessToken) {
-      throw new Error('HubSpot access token is required');
-    }
   }
 
   private async makeRequest<T>(
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
+    if (!this.accessToken) {
+      throw new Error('HubSpot access token is required');
+    }
+
     const url = `${this.baseURL}${endpoint}`;
     
     const response = await fetch(url, {

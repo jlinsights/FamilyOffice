@@ -1,24 +1,24 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Brain, 
-  Search, 
-  TrendingUp, 
-  Eye, 
-  Target, 
-  BarChart3, 
-  RefreshCw,
-  AlertCircle,
-  CheckCircle,
-  Clock,
-  Zap
+import {
+    AlertCircle,
+    BarChart3,
+    Brain,
+    CheckCircle,
+    Clock,
+    Eye,
+    RefreshCw,
+    Search,
+    Target,
+    TrendingUp,
+    Zap
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 /**
  * AI 검색엔진 최적화 모니터링 대시보드
@@ -176,7 +176,7 @@ export function AISearchDashboard() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">
+            <div className="text-2xl font-bold text-green-600 dark:text-green-400">
               +{data.overview.improvementRate}%
             </div>
             <p className="text-xs text-muted-foreground">
@@ -305,7 +305,7 @@ export function AISearchDashboard() {
               <div className="space-y-4">
                 {data.recommendations.map((recommendation, index) => (
                   <div key={index} className="flex items-start space-x-3">
-                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0" />
                     <div className="flex-1">
                       <p className="text-sm leading-relaxed">{recommendation}</p>
                     </div>

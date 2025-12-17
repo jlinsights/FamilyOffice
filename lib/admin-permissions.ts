@@ -3,25 +3,22 @@
  * Clerk 인증과 연동하여 관리자 권한을 검증
  */
 
-import { auth } from '@clerk/nextjs/server';
+import { auth, currentUser } from '@clerk/nextjs/server';
 
 /**
  * 현재 사용자가 관리자인지 확인
  */
 export async function checkAdminPermissions(): Promise<boolean> {
   try {
-    const { userId } = await auth();
-    
-    // 로그인하지 않은 경우
-    if (!userId) {
-      return false;
+    // 개발 환경에서는 디버깅을 위해 권한 체크 패스
+    if (process.env.NODE_ENV === 'development') {
+      return true;
     }
 
-    // 사용자 정보 가져오기
-    const user = await auth();
+    const user = await currentUser();
     
-    // 이메일이 없는 경우
-    if (!user.sessionClaims?.email) {
+    // 로그인하지 않은 경우
+    if (!user) {
       return false;
     }
 
@@ -32,7 +29,9 @@ export async function checkAdminPermissions(): Promise<boolean> {
     ];
 
     // 관리자 이메일인지 확인
-    return adminEmails.includes(user.sessionClaims.email as string);
+    return user.emailAddresses.some((email: { emailAddress: string }) => 
+      adminEmails.includes(email.emailAddress)
+    );
     
   } catch (error) {
     console.error('관리자 권한 확인 중 오류:', error);
@@ -44,6 +43,11 @@ export async function checkAdminPermissions(): Promise<boolean> {
  * 관리자가 아닌 경우 에러 응답 반환
  */
 export async function requireAdminPermissions(): Promise<boolean> {
+  // 개발 환경 bypass 추가
+  if (process.env.NODE_ENV === 'development') {
+    return true;
+  }
+
   const isAdmin = await checkAdminPermissions();
   
   if (!isAdmin) {

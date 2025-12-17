@@ -65,6 +65,7 @@ DROP POLICY IF EXISTS "Users can view own consultations" ON consultations;
 DROP POLICY IF EXISTS "Users can create consultations" ON consultations;
 DROP POLICY IF EXISTS "Admin can view all consultations" ON consultations;
 DROP POLICY IF EXISTS "Admin can manage all consultations" ON consultations;
+DROP POLICY IF EXISTS "Anyone can insert consultations" ON consultations;
 
 -- 1. 사용자는 자신의 상담 내역만 조회 가능 (이메일 기준)
 CREATE POLICY "Users can view own consultations" ON consultations
@@ -101,6 +102,96 @@ CREATE POLICY "Admin can manage all consultations" ON consultations
       AND email = 'jhlim725@gmail.com'
     )
   );
+
+-- ===========================
+-- Performance Metrics 테이블 보안 정책
+-- ===========================
+
+ALTER TABLE performance_metrics ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Anyone can insert metrics" ON performance_metrics;
+DROP POLICY IF EXISTS "Admin can view all metrics" ON performance_metrics;
+
+-- 1. 누구나 메트릭 데이터 삽입 가능 (익명 사용자 포함)
+CREATE POLICY "Anyone can insert metrics" ON performance_metrics
+  FOR INSERT 
+  WITH CHECK (true);
+
+-- 2. 관리자만 메트릭 조회 가능
+CREATE POLICY "Admin can view all metrics" ON performance_metrics
+  FOR SELECT 
+  USING (
+    EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND email = 'jhlim725@gmail.com'
+    )
+  );
+
+-- ===========================
+-- Content Recommendations 테이블 보안 정책
+-- ===========================
+
+ALTER TABLE content_recommendations ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Users can view own recommendations" ON content_recommendations;
+DROP POLICY IF EXISTS "Admin can view all recommendations" ON content_recommendations;
+DROP POLICY IF EXISTS "Service role can manage recommendations" ON content_recommendations;
+
+-- 1. 사용자는 자신의 추천 내역만 조회 가능
+CREATE POLICY "Users can view own recommendations" ON content_recommendations
+  FOR SELECT 
+  USING (
+    user_id::uuid = auth.uid()
+  );
+
+-- 2. 관리자는 모든 추천 내역 조회 가능
+CREATE POLICY "Admin can view all recommendations" ON content_recommendations
+  FOR SELECT 
+  USING (
+    EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND email = 'jhlim725@gmail.com'
+    )
+  );
+
+-- ===========================
+-- Workflow Executions & Lead Activities (내부 데이터)
+-- ===========================
+
+ALTER TABLE workflow_executions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE lead_activities ENABLE ROW LEVEL SECURITY;
+
+-- 기존 정책 삭제
+DROP POLICY IF EXISTS "Admin can view workflows" ON workflow_executions;
+DROP POLICY IF EXISTS "Admin can view activities" ON lead_activities;
+
+-- 1. 관리자만 워크플로우 실행 내역 조회
+CREATE POLICY "Admin can view workflows" ON workflow_executions
+  FOR SELECT 
+  USING (
+    EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND email = 'jhlim725@gmail.com'
+    )
+  );
+
+-- 2. 관리자만 리드 활동 내역 조회
+CREATE POLICY "Admin can view activities" ON lead_activities
+  FOR SELECT 
+  USING (
+    EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND email = 'jhlim725@gmail.com'
+    )
+  );
+
+-- 주의: INSERT/UPDATE는 Service Role Key(백엔드)를 통해서만 수행되므로
+-- 별도의 INSERT 정책을 만들지 않으면 기본적으로 차단됨 (올바른 동작)
+
 
 -- ===========================
 -- 보안 함수 및 트리거
@@ -202,26 +293,19 @@ CREATE INDEX IF NOT EXISTS idx_consultations_status ON consultations(status);
 CREATE INDEX IF NOT EXISTS idx_consultations_created_at ON consultations(created_at);
 CREATE INDEX IF NOT EXISTS idx_consultations_service_type ON consultations(service_type);
 
--- ===========================
--- 실행 가이드 주석
--- ===========================
+-- Performance Metrics 인덱스
+CREATE INDEX IF NOT EXISTS idx_performance_metrics_created_at ON performance_metrics(created_at);
+CREATE INDEX IF NOT EXISTS idx_performance_metrics_metric_name ON performance_metrics(metric_name);
 
+-- Content Recommendations 인덱스
+CREATE INDEX IF NOT EXISTS idx_content_recommendations_user_id ON content_recommendations(user_id);
+CREATE INDEX IF NOT EXISTS idx_content_recommendations_content_id ON content_recommendations(content_id);
+
+-- 실행 가이드 주석
 /*
 이 SQL 파일을 실행하는 방법:
-
 1. Supabase 대시보드 접속
 2. SQL Editor로 이동
 3. 이 파일의 내용을 붙여넣기
 4. 실행 버튼 클릭
-
-주의사항:
-- 프로덕션 환경에서 실행 시 데이터 백업 필수
-- RLS 정책이 활성화되면 기존 쿼리에 영향을 줄 수 있음
-- 관리자 이메일(jhlim725@gmail.com)은 실제 환경에 맞게 수정 필요
-- 토큰 암호화는 실제 운영 시 더 강력한 암호화 방식 사용 권장
-
-테스트 방법:
-1. 일반 사용자로 로그인하여 자신의 데이터만 접근 가능한지 확인
-2. 다른 사용자 데이터 접근 시도 시 에러 발생하는지 확인
-3. 관리자 계정으로 모든 데이터 접근 가능한지 확인
 */

@@ -1,5 +1,5 @@
 import { ClerkProvider } from '@clerk/nextjs';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -23,6 +23,13 @@ const inter = Inter({
   variable: '--font-inter'
 });
 
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-playfair'
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -33,15 +40,12 @@ export default function RootLayout({
       <head>
         <PreloadCriticalResources />
         {/* 🚀 Core Web Vitals 최적화 - 리소스 힌트 */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Fonts are now handled by next/font/google */}
         <link rel="dns-prefetch" href="//cal.com" />
         <link rel="dns-prefetch" href="//analytics.google.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <link rel="dns-prefetch" href="//connect.facebook.net" />
         <link rel="dns-prefetch" href="//static.doubleclick.net" />
-        
-        {/* Critical CSS 최적화 - Inter 폰트는 next/font/google로 이미 최적화 로딩 중 */}
         
         {/* 파비콘 및 앱 아이콘 설정 - 캐시 우회를 위한 버전 추가 */}
         <link rel="icon" href="/favicon.ico?v=2025" sizes="16x16 32x32 48x48" type="image/x-icon" />
@@ -374,7 +378,7 @@ export default function RootLayout({
                   "name": "패밀리오피스 서비스 비용은 얼마인가요?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "성공한 기업가님의 자산 규모와 서비스 범위에 따라 맞춤 설계됩니다. 기본 컨설팅은 무료이며, 종합 패키지는 연간 자산 규모의 0.5-1.5% 수준입니다. 삼성생명 1000억+ 운용 실적을 바탕으로 투명한 수수료 체계를 제공합니다."
+                    "text": "성공한 기업가님의 자산 규모와 서비스 범위에 따라 맞춤 설계됩니다. 기본 컨설팅은 무료이며, 종합 패키지는 연간 자산 규모의 0.5-1.5% 수준입니다. 삼성생명 1000억+ 운용실적을 바탕으로 투명한 수수료 체계를 제공합니다."
                   }
                 },
                 {
@@ -570,7 +574,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} ${inter.variable}`} style={{ fontOpticalSizing: 'auto' }}>
+      <body className={`${inter.className} ${inter.variable} ${playfair.variable}`} style={{ fontOpticalSizing: 'auto' }}>
         <ErrorBoundary>
           <ThemeProvider
             attribute="class"

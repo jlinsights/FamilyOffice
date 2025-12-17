@@ -5,13 +5,13 @@
  * 실시간 보안 상태 모니터링 및 경고 관리
  */
 
-import React, { useState, useEffect } from 'react';
-import { RefreshCw, Shield, AlertTriangle, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Clock, RefreshCw, Shield, XCircle } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface SecurityCheck {
@@ -97,10 +97,10 @@ export default function SecurityDashboard() {
 
   // 보안 점수에 따른 상태 표시
   const getScoreStatus = (score: number) => {
-    if (score >= 90) return { color: 'text-green-600', bg: 'bg-green-50', label: '우수', icon: CheckCircle };
-    if (score >= 70) return { color: 'text-yellow-600', bg: 'bg-yellow-50', label: '양호', icon: Clock };
-    if (score >= 50) return { color: 'text-orange-600', bg: 'bg-orange-50', label: '주의', icon: AlertTriangle };
-    return { color: 'text-red-600', bg: 'bg-red-50', label: '위험', icon: XCircle };
+    if (score >= 90) return { color: 'text-green-600 dark:text-green-400', bg: 'bg-green-50 dark:bg-green-900/20', label: '우수', icon: CheckCircle };
+    if (score >= 70) return { color: 'text-yellow-600 dark:text-yellow-400', bg: 'bg-yellow-50 dark:bg-yellow-900/20', label: '양호', icon: Clock };
+    if (score >= 50) return { color: 'text-orange-600 dark:text-orange-400', bg: 'bg-orange-50 dark:bg-orange-900/20', label: '주의', icon: AlertTriangle };
+    return { color: 'text-red-600 dark:text-red-400', bg: 'bg-red-50 dark:bg-red-900/20', label: '위험', icon: XCircle };
   };
 
   // 심각도에 따른 배지 색상
@@ -152,13 +152,13 @@ export default function SecurityDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Supabase 보안 대시보드</h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             실시간 보안 상태 모니터링 및 취약점 관리
           </p>
         </div>
         <div className="flex items-center gap-2">
           {lastUpdated && (
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-500 dark:text-gray-400">
               마지막 업데이트: {lastUpdated.toLocaleString('ko-KR')}
             </span>
           )}
@@ -217,12 +217,12 @@ export default function SecurityDashboard() {
               </div>
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-green-600">{report.summary.passed}</div>
-                  <div className="text-sm text-gray-600">통과</div>
+                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">{report.summary.passed}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">통과</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-red-600">{report.summary.failed}</div>
-                  <div className="text-sm text-gray-600">실패</div>
+                  <div className="text-2xl font-bold text-red-600 dark:text-red-400">{report.summary.failed}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">실패</div>
                 </div>
               </div>
             </div>
@@ -272,9 +272,9 @@ export default function SecurityDashboard() {
                 </CardHeader>
                 {check.recommendation && (
                   <CardContent>
-                    <div className="bg-blue-50 p-3 rounded">
-                      <p className="text-sm font-medium text-blue-800">권장사항:</p>
-                      <p className="text-sm text-blue-700 mt-1">{check.recommendation}</p>
+                    <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded">
+                      <p className="text-sm font-medium text-blue-800 dark:text-blue-300">권장사항:</p>
+                      <p className="text-sm text-blue-700 dark:text-blue-200 mt-1">{check.recommendation}</p>
                     </div>
                   </CardContent>
                 )}
@@ -297,9 +297,9 @@ export default function SecurityDashboard() {
                 </CardHeader>
                 {check.recommendation && (
                   <CardContent>
-                    <div className="bg-red-50 p-3 rounded border border-red-200">
-                      <p className="text-sm font-medium text-red-800">즉시 조치 필요:</p>
-                      <p className="text-sm text-red-700 mt-1">{check.recommendation}</p>
+                    <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded border border-red-200 dark:border-red-800">
+                      <p className="text-sm font-medium text-red-800 dark:text-red-300">즉시 조치 필요:</p>
+                      <p className="text-sm text-red-700 dark:text-red-200 mt-1">{check.recommendation}</p>
                     </div>
                   </CardContent>
                 )}
@@ -325,9 +325,9 @@ export default function SecurityDashboard() {
                     </CardHeader>
                     {check.recommendation && (
                       <CardContent>
-                        <div className="bg-blue-50 p-3 rounded">
-                          <p className="text-sm font-medium text-blue-800">권장사항:</p>
-                          <p className="text-sm text-blue-700 mt-1">{check.recommendation}</p>
+                        <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded">
+                          <p className="text-sm font-medium text-blue-800 dark:text-blue-300">권장사항:</p>
+                          <p className="text-sm text-blue-700 dark:text-blue-200 mt-1">{check.recommendation}</p>
                         </div>
                       </CardContent>
                     )}

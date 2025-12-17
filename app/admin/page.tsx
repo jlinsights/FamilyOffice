@@ -1,19 +1,22 @@
 'use client';
 
+import { Brain, Gauge, Phone, Search, Shield, Target, TrendingUp } from 'lucide-react';
 import nextDynamic from 'next/dynamic';
-import { Shield, Brain, TrendingUp, Search, Gauge, Phone, Target } from 'lucide-react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
+
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
 
 // Dynamic imports for heavy dashboard components
 const AISearchDashboard = nextDynamic(
@@ -46,8 +49,15 @@ const SecurityDashboard = nextDynamic(
 
 const InboundMarketingDashboard = nextDynamic(
   () => import('@/components/admin/inbound-marketing-dashboard').then(mod => ({ default: mod.InboundMarketingDashboard })),
-  { 
+  {
     loading: () => <div className="flex items-center justify-center h-64">인바운드 마케팅 대시보드 로딩 중...</div>
+  }
+);
+
+const MarketingPerformanceDashboard = nextDynamic(
+  () => import('@/components/admin/marketing-performance-dashboard'),
+  {
+    loading: () => <div className="flex items-center justify-center h-64">마케팅 퍼포먼스 대시보드 로딩 중...</div>
   }
 );
 
@@ -55,152 +65,198 @@ const InboundMarketingDashboard = nextDynamic(
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+// ... (previous imports)
+import { useEffect, useState } from 'react';
+import { getAdminStats } from './actions';
+
+// ... (dynamic imports)
+
 export default function AdminDashboard() {
+  const [stats, setStats] = useState({
+    consultations: {
+      total: 0,
+      today: 0,
+      pending: 0,
+    },
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadStats() {
+      const { data, error } = await getAdminStats();
+      if (data) {
+        setStats(data);
+      } else {
+        console.error('Failed to load admin stats:', error);
+      }
+      setLoading(false);
+    }
+    loadStats();
+  }, []);
+
   return (
-    <div className="min-h-screen p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Shield className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold">관리자 대시보드</h1>
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header />
+      <div className="flex-1 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <Shield className="h-8 w-8 text-primary" />
+              <h1 className="text-3xl font-bold">관리자 대시보드</h1>
+            </div>
+            <Badge variant="outline" className="mb-4">
+              프리미엄 관리자 대시보드
+            </Badge>
           </div>
-          <Badge variant="outline" className="mb-4">
-            프리미엄 관리자 대시보드
-          </Badge>
+
+          <Tabs defaultValue="marketing-performance" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8">
+              <TabsTrigger value="marketing-performance" className="flex items-center gap-2">
+                <TrendingUp className="h-4 w-4" />
+                마케팅 퍼포먼스
+              </TabsTrigger>
+              <TabsTrigger value="performance" className="flex items-center gap-2">
+                <TrendingUp className="h-4 w-4" />
+                SEO 성과
+              </TabsTrigger>
+              <TabsTrigger value="consultations" className="flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                상담 관리
+              </TabsTrigger>
+              <TabsTrigger value="search-console" className="flex items-center gap-2">
+                <Search className="h-4 w-4" />
+                Search Console
+              </TabsTrigger>
+              <TabsTrigger value="ai-search" className="flex items-center gap-2">
+                <Brain className="h-4 w-4" />
+                AI 검색엔진
+              </TabsTrigger>
+              <TabsTrigger value="web-vitals" className="flex items-center gap-2">
+                <Gauge className="h-4 w-4" />
+                웹 성능
+              </TabsTrigger>
+              <TabsTrigger value="security" className="flex items-center gap-2">
+                <Shield className="h-4 w-4" />
+                보안 상태
+              </TabsTrigger>
+              <TabsTrigger value="marketing" className="flex items-center gap-2">
+                <Target className="h-4 w-4" />
+                마케팅 자동화
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="marketing-performance">
+              <MarketingPerformanceDashboard />
+            </TabsContent>
+
+            <TabsContent value="performance" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>SEO 성과 지표</CardTitle>
+                  <CardDescription>검색엔진 최적화 및 트래픽 성과</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-primary">4위</div>
+                      <p className="text-sm text-muted-foreground">패밀리오피스 검색순위</p>
+                      <p className="text-xs text-green-600 dark:text-green-400">↗ 3단계 상승</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-green-600 dark:text-green-400">+187%</div>
+                      <p className="text-sm text-muted-foreground">검색 트래픽 증가</p>
+                      <p className="text-xs text-muted-foreground">목표: 300%</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-violet-600 dark:text-violet-400">5개</div>
+                      <p className="text-sm text-muted-foreground">AI 플랫폼 노출</p>
+                      <p className="text-xs text-muted-foreground">ChatGPT, Claude 등</p>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <h4 className="font-semibold mb-2">최근 SEO 개선 사항</h4>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center gap-2">
+                          <span className="text-green-600 dark:text-green-400">✓</span>
+                          <span>8개 고가치 키워드 랜딩 페이지 생성 완료</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="text-green-600 dark:text-green-400">✓</span>
+                          <span>구조화된 데이터 마크업 100% 적용</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <span className="text-green-600 dark:text-green-400">✓</span>
+                          <span>Core Web Vitals 모든 지표 녹색 달성</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="consultations" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>상담 관리</CardTitle>
+                  <CardDescription>예약된 상담 및 문의 현황</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-primary">
+                        {loading ? '-' : stats.consultations.total}
+                      </div>
+                      <p className="text-sm text-muted-foreground">이번 달 상담</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-green-600 dark:text-green-400">
+                        {loading ? '-' : stats.consultations.today}
+                      </div>
+                      <p className="text-sm text-muted-foreground">오늘 접수</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
+                        {loading ? '-' : stats.consultations.pending}
+                      </div>
+                      <p className="text-sm text-muted-foreground">대기 중</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    <Button asChild>
+                      <Link href="/admin/consultations">
+                        상담 목록 보기
+                      </Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="search-console">
+              <GoogleSearchConsoleDashboard />
+            </TabsContent>
+
+            <TabsContent value="ai-search">
+              <AISearchDashboard />
+            </TabsContent>
+
+            <TabsContent value="web-vitals">
+              <WebVitalsDashboard />
+            </TabsContent>
+
+            <TabsContent value="security">
+              <SecurityDashboard />
+            </TabsContent>
+
+            <TabsContent value="marketing">
+              <InboundMarketingDashboard />
+            </TabsContent>
+          </Tabs>
         </div>
-
-        <Tabs defaultValue="performance" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="performance" className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4" />
-              SEO 성과
-            </TabsTrigger>
-            <TabsTrigger value="consultations" className="flex items-center gap-2">
-              <Phone className="h-4 w-4" />
-              상담 관리
-            </TabsTrigger>
-            <TabsTrigger value="search-console" className="flex items-center gap-2">
-              <Search className="h-4 w-4" />
-              Search Console
-            </TabsTrigger>
-            <TabsTrigger value="ai-search" className="flex items-center gap-2">
-              <Brain className="h-4 w-4" />
-              AI 검색엔진
-            </TabsTrigger>
-            <TabsTrigger value="web-vitals" className="flex items-center gap-2">
-              <Gauge className="h-4 w-4" />
-              웹 성능
-            </TabsTrigger>
-            <TabsTrigger value="security" className="flex items-center gap-2">
-              <Shield className="h-4 w-4" />
-              보안 상태
-            </TabsTrigger>
-            <TabsTrigger value="marketing" className="flex items-center gap-2">
-              <Target className="h-4 w-4" />
-              마케팅 자동화
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="performance" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>SEO 성과 지표</CardTitle>
-                <CardDescription>검색엔진 최적화 및 트래픽 성과</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">4위</div>
-                    <p className="text-sm text-muted-foreground">패밀리오피스 검색순위</p>
-                    <p className="text-xs text-green-600">↗ 3단계 상승</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600">+187%</div>
-                    <p className="text-sm text-muted-foreground">검색 트래픽 증가</p>
-                    <p className="text-xs text-muted-foreground">목표: 300%</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-violet-600">5개</div>
-                    <p className="text-sm text-muted-foreground">AI 플랫폼 노출</p>
-                    <p className="text-xs text-muted-foreground">ChatGPT, Claude 등</p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="p-4 bg-muted/50 rounded-lg">
-                    <h4 className="font-semibold mb-2">최근 SEO 개선 사항</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex items-center gap-2">
-                        <span className="text-green-600">✓</span>
-                        <span>8개 고가치 키워드 랜딩 페이지 생성 완료</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="text-green-600">✓</span>
-                        <span>구조화된 데이터 마크업 100% 적용</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="text-green-600">✓</span>
-                        <span>Core Web Vitals 모든 지표 녹색 달성</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="consultations" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>상담 관리</CardTitle>
-                <CardDescription>예약된 상담 및 문의 현황</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">67</div>
-                    <p className="text-sm text-muted-foreground">이번 달 상담</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600">12</div>
-                    <p className="text-sm text-muted-foreground">오늘 예정</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-orange-600">5</div>
-                    <p className="text-sm text-muted-foreground">대기 중</p>
-                  </div>
-                </div>
-                <div className="flex justify-center">
-                  <Button asChild>
-                    <Link href="/admin/consultations">
-                      상담 목록 보기
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="search-console">
-            <GoogleSearchConsoleDashboard />
-          </TabsContent>
-
-          <TabsContent value="ai-search">
-            <AISearchDashboard />
-          </TabsContent>
-
-          <TabsContent value="web-vitals">
-            <WebVitalsDashboard />
-          </TabsContent>
-
-          <TabsContent value="security">
-            <SecurityDashboard />
-          </TabsContent>
-
-          <TabsContent value="marketing">
-            <InboundMarketingDashboard />
-          </TabsContent>
-        </Tabs>
       </div>
+      <Footer />
     </div>
   );
 }
