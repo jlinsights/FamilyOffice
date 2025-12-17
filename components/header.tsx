@@ -31,7 +31,8 @@ export const Header = memo(function Header({
   const [isClient, setIsClient] = useState(false);
   const { isSignedIn, isLoaded } = useAuth();
 
-  const isAuthenticated = isSignedIn;
+  // Clerk가 완전히 로드되고 실제로 로그인된 경우만 인증된 것으로 간주
+  const isAuthenticated = isLoaded && isSignedIn;
   const isLoading = !isLoaded;
 
   useEffect(() => {
