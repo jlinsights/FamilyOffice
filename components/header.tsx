@@ -6,13 +6,13 @@ import type { KeyboardEvent, MouseEventHandler } from 'react';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 import Link from 'next/link';
+import { SignInButton, useAuth } from '@clerk/nextjs';
 
 import { Button } from '@/components/ui/button';
 
 import { UserProfileDropdown } from '@/components/auth/user-profile-dropdown';
 import { SamsungFinancialNetworksLogo } from '@/components/logo';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 
@@ -29,7 +29,10 @@ export const Header = memo(function Header({
   const [mobileSubmenus, setMobileSubmenus] = useState<{ [key: string]: boolean }>({});
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const { isAuthenticated, isLoading } = useSupabaseKakaoAuth();
+  const { isSignedIn, isLoaded } = useAuth();
+
+  const isAuthenticated = isSignedIn;
+  const isLoading = !isLoaded;
 
   useEffect(() => {
     setMounted(true);
@@ -246,13 +249,14 @@ export const Header = memo(function Header({
             ) : (
               !isLoading && (
                 <>
-                  <Link
-                    href="/auth/sign-in"
-                    className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                    aria-label="로그인 페이지로 이동"
-                  >
-                    로그인
-                  </Link>
+                  <SignInButton mode="modal">
+                    <button
+                      className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                      aria-label="로그인"
+                    >
+                      로그인
+                    </button>
+                  </SignInButton>
                   <Link
                     href="/structure-check#request-form"
                     className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
@@ -355,14 +359,14 @@ export const Header = memo(function Header({
                 </Link>
               ) : (
                 <>
-                  <Link
-                    href="/auth/sign-in"
-                    onClick={handleMobileLinkClick}
-                    className="flex items-center justify-center w-full border border-primary text-primary font-semibold rounded-lg px-4 py-3 hover:bg-primary hover:text-white transition-colors duration-200"
-                    aria-label="로그인"
-                  >
-                    로그인
-                  </Link>
+                  <SignInButton mode="modal">
+                    <button
+                      className="flex items-center justify-center w-full border border-primary text-primary font-semibold rounded-lg px-4 py-3 hover:bg-primary hover:text-white transition-colors duration-200"
+                      aria-label="로그인"
+                    >
+                      로그인
+                    </button>
+                  </SignInButton>
                   <Link
                     href="/structure-check#request-form"
                     onClick={handleMobileLinkClick}
