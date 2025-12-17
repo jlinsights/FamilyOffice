@@ -2,6 +2,7 @@ import {
     sendStructureCheckConfirmation,
     sendSystemNotification
 } from '@/lib/email/resend-client';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -38,7 +39,35 @@ export async function POST(request: NextRequest) {
     // Generate a unique request ID (simple timestamp-based for now)
     const requestId = `REQ-${Date.now().toString(36).toUpperCase()}`;
 
-    // 1. Send Admin Notification
+    // 1. Save to Database (using Admin Client for security override)
+    const supabase = createAdminClient();
+    const { error: dbError } = await supabase
+      .from('structure_check_requests')
+      .insert({
+        name: validatedData.name,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        company: validatedData.company,
+        q1_decision_made: validatedData.q1_decision_made,
+        q1_decision_detail: validatedData.q1_decision_detail,
+        q2_documented: validatedData.q2_documented,
+        q3_authority_clear: validatedData.q3_authority_clear,
+        q4_cash_plan: validatedData.q4_cash_plan,
+        q5_deadline: validatedData.q5_deadline,
+        q6_concerns: validatedData.q6_concerns,
+        q7_advisors: validatedData.q7_advisors,
+        additional_notes: validatedData.additional_notes,
+        qualification_score: qualificationScore,
+        status: 'pending_review'
+      });
+
+    if (dbError) {
+      console.error('Failed to save structure check request:', dbError);
+      // We continue to send emails even if DB fails, or should we throw?
+      // For now, log critical error but try to notify admin via email at least.
+    }
+
+    // 2. Send Admin Notification
     const adminMessage = formatAdminMessage(validatedData, qualificationScore, requestId);
     await sendSystemNotification(
       `새로운 구조 점검 요청 (${validatedData.name})`,

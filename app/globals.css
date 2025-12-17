@@ -203,11 +203,11 @@ iframe[src*='vercel.com/toolbar'] {
   }
 
   .dark .text-premium-gold-enhanced {
-    background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 100%);
+    background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: brightness(1.2) contrast(1.1);
+    filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.2));
   }
 
   .text-premium-navy-enhanced {

@@ -156,6 +156,7 @@ CREATE POLICY "Admin can view all recommendations" ON content_recommendations
     )
   );
 
+
 -- ===========================
 -- Workflow Executions & Lead Activities (내부 데이터)
 -- ===========================
@@ -189,8 +190,47 @@ CREATE POLICY "Admin can view activities" ON lead_activities
     )
   );
 
--- 주의: INSERT/UPDATE는 Service Role Key(백엔드)를 통해서만 수행되므로
--- 별도의 INSERT 정책을 만들지 않으면 기본적으로 차단됨 (올바른 동작)
+-- ===========================
+-- Structure Check Requests (구조 점검)
+-- ===========================
+
+ALTER TABLE structure_check_requests ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Anyone can submit structure check requests" ON structure_check_requests;
+DROP POLICY IF EXISTS "Admins can view all structure check requests" ON structure_check_requests;
+DROP POLICY IF EXISTS "Admins can update structure check requests" ON structure_check_requests;
+
+-- 1. 누구나 요청 제출 가능 (INSERT)
+-- 주의: API Route에서 Admin Key로 처리하더라도, 만약 클라이언트 직접 전송을 허용하려면 필요함.
+-- 현재는 API Route(Admin Key) 사용 예정이므로, 아래 정책은 '비상용' 또는 '클라이언트 직접 전송 전환 시' 유용.
+-- 보안 강화를 위해, API Route 방식이 확정되면 이 INSERT 정책은 제거하거나 authenticated로 제한할 수 있음.
+-- 여기서는 유연성을 위해 Anon Key 허용을 유지하되, 추후 API Route 전용으로 전환 시 삭제 권장.
+CREATE POLICY "Anyone can submit structure check requests" ON structure_check_requests
+  FOR INSERT 
+  WITH CHECK (true);
+
+-- 2. 관리자만 조회 가능
+CREATE POLICY "Admins can view all structure check requests" ON structure_check_requests
+  FOR SELECT 
+  USING (
+    EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND email = 'jhlim725@gmail.com'
+    )
+  );
+
+-- 3. 관리자만 업데이트 가능
+CREATE POLICY "Admins can update structure check requests" ON structure_check_requests
+  FOR UPDATE 
+  USING (
+    EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND email = 'jhlim725@gmail.com'
+    )
+  );
+
 
 
 -- ===========================
