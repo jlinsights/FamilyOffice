@@ -264,30 +264,32 @@ export const Header = memo(function Header({
 
           {/* 데스크톱 우측 버튼들 */}
           <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
-            {/* 인증 상태에 따른 버튼 표시 - 로딩 중이거나 로그아웃 상태면 로그인 버튼 표시 */}
-            {isLoaded && isSignedIn ? (
-              <UserProfileDropdown className="mr-2" />
-            ) : (
-              <>
-                <SignInButton mode="modal">
-                  <button
-                    className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                    aria-label="로그인"
-                  >
-                    로그인
-                  </button>
-                </SignInButton>
-                <Link
-                  href="/structure-check#request-form"
-                  className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                  aria-label="구조 점검 요청"
-                  title="구조 점검 요청"
+            {/* 디버깅: 항상 로그인 버튼 표시 (인증 상태 무시) */}
+            <>
+              <SignInButton mode="modal">
+                <button
+                  className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                  aria-label="로그인"
                 >
-                  <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
-                </Link>
-              </>
-            )}
+                  로그인
+                </button>
+              </SignInButton>
+              <Link
+                href="/structure-check#request-form"
+                className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                aria-label="구조 점검 요청"
+                title="구조 점검 요청"
+              >
+                <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
+              </Link>
+            </>
             <ThemeToggle />
+            {/* 디버그 정보 출력 */}
+            {process.env.NODE_ENV === 'development' && (
+              <div className="text-xs text-muted-foreground ml-2">
+                [{isLoaded ? '로드됨' : '로딩중'} / {isSignedIn ? '로그인' : '로그아웃'}]
+              </div>
+            )}
           </div>
         </div>
       </nav>
