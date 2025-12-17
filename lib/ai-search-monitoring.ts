@@ -5,11 +5,11 @@ import { FAQ_CATEGORIES } from '@/constants/faq';
 
 /**
  * AI 검색엔진별 특성 분석 데이터
- * ChatGPT, Perplexity, Claude, Bard 등 각 플랫폼 특화 최적화
+ * ChatGPT, Perplexity, Claude, Gemini 등 각 플랫폼 특화 최적화
  */
 export interface AISearchEngine {
   name: string;
-  platform: 'chatgpt' | 'perplexity' | 'claude' | 'bard' | 'bing-copilot';
+  platform: 'chatgpt' | 'perplexity' | 'claude' | 'gemini' | 'bing-copilot';
   contentPreference: 'structured' | 'conversational' | 'detailed' | 'concise';
   citationFormat: string;
   optimalLength: number;
@@ -42,12 +42,12 @@ export const AI_SEARCH_ENGINES: AISearchEngine[] = [
     keyFeatures: ['깊이 있는 분석', '다각도 관점', '논리적 구조', '전문성']
   },
   {
-    name: 'Bard',
-    platform: 'bard',
+    name: 'Gemini',
+    platform: 'gemini',
     contentPreference: 'concise',
     citationFormat: 'Google-style web citations',
     optimalLength: 1200,
-    keyFeatures: ['간결함', '빠른 답변', '구글 연동', '다양한 형태']
+    keyFeatures: ['간결함', '빠른 답변', '구글 연동', '다중모달 지원', 'Gemini 1.5 Pro']
   },
   {
     name: 'Bing Copilot',
@@ -176,8 +176,8 @@ export function optimizeContentForAI(content: string, targetEngine: AISearchEngi
       // Claude: 분석적이고 상세한 설명
       optimized = addAnalyticalDepth(content);
       break;
-    case 'bard':
-      // Bard: 간결하고 핵심적인 내용
+    case 'gemini':
+      // Gemini: 간결하고 핵심적인 내용
       optimized = makeConciseAndDirect(content);
       break;
     case 'bing-copilot':
@@ -283,18 +283,18 @@ export function generateAIOptimizedContent(topic: string, targetAudience: string
   chatgptVersion: string;
   perplexityVersion: string;
   claudeVersion: string;
-  bardVersion: string;
+  geminiVersion: string;
   bingCopilotVersion: string;
 } {
   const baseContent = `${topic}에 대한 ${targetAudience}를 위한 전문 가이드`;
-  
+
   const getEngine = (platform: string) => AI_SEARCH_ENGINES.find(e => e.platform === platform) as AISearchEngine;
-  
+
   return {
     chatgptVersion: optimizeContentForAI(baseContent, getEngine('chatgpt')),
-    perplexityVersion: optimizeContentForAI(baseContent, getEngine('perplexity')), 
+    perplexityVersion: optimizeContentForAI(baseContent, getEngine('perplexity')),
     claudeVersion: optimizeContentForAI(baseContent, getEngine('claude')),
-    bardVersion: optimizeContentForAI(baseContent, getEngine('bard')),
+    geminiVersion: optimizeContentForAI(baseContent, getEngine('gemini')),
     bingCopilotVersion: optimizeContentForAI(baseContent, getEngine('bing-copilot'))
   };
 }

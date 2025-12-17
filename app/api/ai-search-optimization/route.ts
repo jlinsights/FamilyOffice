@@ -151,7 +151,7 @@ export async function GET(request: NextRequest) {
               '🤖 ChatGPT 최적화: 구조화된 Q&A 형태 콘텐츠 확대',
               '🔍 Perplexity 대응: 출처와 인용이 명확한 전문가 콘텐츠 강화', 
               '🧠 Claude 친화적: 깊이 있는 분석형 롱폼 콘텐츠 제작',
-              '⚡ Bard 최적화: 핵심 정보 중심의 간결한 답변 형태 개선',
+              '⚡ Gemini 최적화: 핵심 정보 중심의 간결한 답변 형태 개선 (다중모달 지원)',
               '💼 Bing Copilot: 비즈니스 실용성을 강조한 솔루션 중심 콘텐츠',
               '📊 BMAD Method 활용: Decisional 키워드 성과가 높으므로 실행 중심 콘텐츠 확대'
             ],

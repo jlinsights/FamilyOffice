@@ -1,6 +1,6 @@
 /**
  * AEO (Answer Engine Optimization) 전략 시스템
- * AI 검색엔진, 음성검색, ChatGPT/Bard/Claude 최적화
+ * AI 검색엔진, 음성검색, ChatGPT/Gemini/Claude 최적화
  */
 
 export interface AEOStrategy {
@@ -30,7 +30,7 @@ export interface VoiceSearchConfig {
 }
 
 export interface AIEngineTarget {
-  engine: 'chatgpt' | 'bard' | 'claude' | 'bing_chat' | 'perplexity' | 'naver_hyperclova';
+  engine: 'chatgpt' | 'gemini' | 'claude' | 'bing_chat' | 'perplexity' | 'naver_hyperclova';
   contentFormat: string;
   optimizationRules: string[];
   trainingDataStyle: string;
