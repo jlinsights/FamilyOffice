@@ -10,6 +10,7 @@ import { SEOErrorBoundary } from '@/components/seo-error-boundary';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ThirdPartyIntegration } from '@/components/third-party-integration';
+import { Toaster } from '@/components/ui/toaster';
 import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
 import { DebugStyles } from './debug-styles';
 
@@ -584,6 +585,7 @@ export default function RootLayout({
               
               <ThirdPartyIntegration />
               <DebugStyles />
+              <Toaster />
 
               {/* 🚀 Core Web Vitals 성능 모니터링 */}
               <CoreWebVitals />
