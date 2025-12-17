@@ -113,8 +113,6 @@ export default function SignUpPage() {
                   socialButtonsVariant: "blockButton",
                 },
               }}
-              routing="path"
-              path="/auth/sign-up"
               signInUrl="/auth/sign-in"
               fallbackRedirectUrl="/dashboard"
             />

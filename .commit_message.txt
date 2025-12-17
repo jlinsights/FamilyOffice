@@ -1,1 +1,1 @@
-🔧 Clerk 리다이렉트 설정 추가 및 콘솔 경고 수정
+🔧 Clerk catch-all route로 변경하여 라우팅 오류 해결
