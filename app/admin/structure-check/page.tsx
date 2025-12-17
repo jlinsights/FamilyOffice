@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation';
 import { currentUser } from '@clerk/nextjs/server';
 import { createClient } from '@/lib/supabase/server';
 import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: '구조 점검 요청 관리 | Admin',
@@ -30,19 +32,23 @@ export default async function StructureCheckAdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-slate-950 dark:via-blue-950 dark:to-slate-900">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-2">
-            구조 점검 요청 관리
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400">
-            가망고객의 구조 점검 요청을 확인하고 관리합니다
-          </p>
-        </div>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-slate-950 dark:via-blue-950 dark:to-slate-900 pt-20">
+        <div className="container mx-auto px-4 py-8">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-2">
+              구조 점검 요청 관리
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400">
+              가망고객의 구조 점검 요청을 확인하고 관리합니다
+            </p>
+          </div>
 
-        <StructureCheckDashboard initialRequests={requests || []} />
-      </div>
+          <StructureCheckDashboard initialRequests={requests || []} />
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }
