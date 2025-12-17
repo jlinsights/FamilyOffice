@@ -31,10 +31,6 @@ export const Header = memo(function Header({
   const [isClient, setIsClient] = useState(false);
   const { isSignedIn, isLoaded } = useAuth();
 
-  // 로딩 상태 및 인증 상태 (명확한 로직으로 변경)
-  const isLoading = !isLoaded;
-  const isAuthenticated = isLoaded && isSignedIn;
-
   useEffect(() => {
     setMounted(true);
     setIsClient(true);
@@ -367,41 +363,35 @@ export const Header = memo(function Header({
 
             {/* 모바일 버튼 및 설정 */}
             <div className="pt-4 border-t border-border space-y-4">
-              {/* 인증 상태에 따른 모바일 버튼 - 로딩 중이거나 로그아웃 상태면 로그인 버튼 표시 */}
-              {isLoaded && isSignedIn ? (
+              {/* 디버깅: 항상 로그인 버튼 표시 (모바일) */}
+              <>
+                <SignInButton mode="modal">
+                  <button
+                    className="flex items-center justify-center w-full border border-primary text-primary font-semibold rounded-lg px-4 py-3 hover:bg-primary hover:text-white transition-colors duration-200"
+                    aria-label="로그인"
+                  >
+                    로그인
+                  </button>
+                </SignInButton>
                 <Link
-                  href="/dashboard"
+                  href="/structure-check#request-form"
                   onClick={handleMobileLinkClick}
                   className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
-                  aria-label="대시보드로 이동"
+                  aria-label="구조 점검 요청"
+                  title="구조 점검 요청"
                 >
-                  내 대시보드
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                  <ClipboardCheck className="h-5 w-5 mr-2" aria-hidden="true" />
+                  구조 점검 요청
                 </Link>
-              ) : (
-                <>
-                  <SignInButton mode="modal">
-                    <button
-                      className="flex items-center justify-center w-full border border-primary text-primary font-semibold rounded-lg px-4 py-3 hover:bg-primary hover:text-white transition-colors duration-200"
-                      aria-label="로그인"
-                    >
-                      로그인
-                    </button>
-                  </SignInButton>
-                  <Link
-                    href="/structure-check#request-form"
-                    onClick={handleMobileLinkClick}
-                    className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
-                    aria-label="구조 점검 요청"
-                    title="구조 점검 요청"
-                  >
-                    <ClipboardCheck className="h-5 w-5 mr-2" aria-hidden="true" />
-                    구조 점검 요청
-                  </Link>
-                </>
+              </>
+
+              {/* 디버그 정보 출력 (모바일) */}
+              {process.env.NODE_ENV === 'development' && (
+                <div className="text-xs text-center text-muted-foreground py-2 border border-border rounded-md bg-accent/50">
+                  Clerk: [{isLoaded ? '로드됨' : '로딩중'} / {isSignedIn ? '로그인' : '로그아웃'}]
+                </div>
               )}
-              
-              
+
               <div className="flex items-center justify-between pt-2 border-t border-border">
                 <span className="text-base font-medium text-foreground">
                   테마 설정
