@@ -1,6 +1,6 @@
 'use client';
 
-import { Brain, Gauge, Phone, Search, Shield, Target, TrendingUp } from 'lucide-react';
+import { Brain, Gauge, Phone, Search, Shield, Target, TrendingUp, ClipboardCheck } from 'lucide-react';
 import nextDynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -17,6 +17,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
 
 // Dynamic imports for heavy dashboard components
 const AISearchDashboard = nextDynamic(
@@ -67,7 +68,7 @@ export const runtime = 'nodejs';
 
 // ... (previous imports)
 import { useEffect, useState } from 'react';
-import { getAdminStats } from './actions';
+import { getAdminStats, getStructureCheckRequests, type StructureCheckRequest } from './actions';
 
 // ... (dynamic imports)
 
@@ -78,8 +79,15 @@ export default function AdminDashboard() {
       today: 0,
       pending: 0,
     },
+    structureChecks: {
+      total: 0,
+      today: 0,
+      pending: 0,
+    },
   });
   const [loading, setLoading] = useState(true);
+  const [structureCheckRequests, setStructureCheckRequests] = useState<StructureCheckRequest[]>([]);
+  const [loadingRequests, setLoadingRequests] = useState(true);
 
   useEffect(() => {
     async function loadStats() {
@@ -92,6 +100,19 @@ export default function AdminDashboard() {
       setLoading(false);
     }
     loadStats();
+  }, []);
+
+  useEffect(() => {
+    async function loadStructureCheckRequests() {
+      const { data, error } = await getStructureCheckRequests();
+      if (data) {
+        setStructureCheckRequests(data);
+      } else {
+        console.error('Failed to load structure check requests:', error);
+      }
+      setLoadingRequests(false);
+    }
+    loadStructureCheckRequests();
   }, []);
 
   return (
@@ -110,7 +131,7 @@ export default function AdminDashboard() {
           </div>
 
           <Tabs defaultValue="marketing-performance" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8">
+            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9">
               <TabsTrigger value="marketing-performance" className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4" />
                 마케팅 퍼포먼스
@@ -122,6 +143,10 @@ export default function AdminDashboard() {
               <TabsTrigger value="consultations" className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
                 상담 관리
+              </TabsTrigger>
+              <TabsTrigger value="structure-check" className="flex items-center gap-2">
+                <ClipboardCheck className="h-4 w-4" />
+                구조 점검
               </TabsTrigger>
               <TabsTrigger value="search-console" className="flex items-center gap-2">
                 <Search className="h-4 w-4" />
@@ -232,6 +257,18 @@ export default function AdminDashboard() {
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="structure-check" className="space-y-6">
+              {loadingRequests ? (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <p className="text-muted-foreground">구조 점검 요청 목록을 불러오는 중...</p>
+                  </CardContent>
+                </Card>
+              ) : (
+                <StructureCheckDashboard initialRequests={structureCheckRequests} />
+              )}
             </TabsContent>
 
             <TabsContent value="search-console">

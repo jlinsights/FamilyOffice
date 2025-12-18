@@ -5,6 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { generateStructuredData } from '@/lib/seo/structured-data';
 import { ArrowRight, Building2, Calculator, CheckCircle, Gift, PieChart, PiggyBank, Shield, TrendingUp } from 'lucide-react';
 import { Metadata } from 'next';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 // 🎯 BMAD Method SEO 최적화: 계산기 허브 페이지
 export const metadata: Metadata = {
@@ -86,7 +88,14 @@ interface ColorClasses {
   gradient: string;
 }
 
-export default function CalculatorsPage() {
+export default async function CalculatorsPage() {
+  // 인증 확인 - 로그인하지 않은 사용자는 로그인 페이지로 리다이렉트
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect('/auth/sign-in?redirect_url=/calculators');
+  }
+
   const calculators = [
     {
       title: '상속세 계산기',

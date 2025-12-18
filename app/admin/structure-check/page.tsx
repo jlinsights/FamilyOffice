@@ -1,10 +1,10 @@
+import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import { createAdminClient } from '@/lib/supabase/admin-client';
+import { currentUser } from '@clerk/nextjs/server';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { currentUser } from '@clerk/nextjs/server';
-import { createClient } from '@/lib/supabase/server';
-import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: '구조 점검 요청 관리 | Admin',
@@ -20,8 +20,8 @@ export default async function StructureCheckAdminPage() {
     redirect('/');
   }
 
-  // Supabase에서 구조 점검 요청 목록 가져오기
-  const supabase = await createClient();
+  // Supabase에서 구조 점검 요청 목록 가져오기 (Admin Client 사용)
+  const supabase = createAdminClient();
   const { data: requests, error } = await supabase
     .from('structure_check_requests')
     .select('*')

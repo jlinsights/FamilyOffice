@@ -1,6 +1,6 @@
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { auth } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import {
     ChevronRight,
     CreditCard,
@@ -14,14 +14,14 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 export default async function DashboardPage() {
-  const { userId, sessionClaims } = await auth();
+  const user = await currentUser();
 
-  if (!userId) {
+  if (!user) {
     redirect('/auth/sign-in');
   }
 
-  const email = sessionClaims?.email as string;
-  const fullName = sessionClaims?.fullName as string || '회원';
+  const email = user.emailAddresses[0]?.emailAddress;
+  const fullName = `${user.lastName || ''}${user.firstName || ''}`.trim() || user.fullName || '회원';
 
   // Admin redirect
   if (email === 'jhlim725@gmail.com') {

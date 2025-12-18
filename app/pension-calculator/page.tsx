@@ -5,6 +5,8 @@ import PensionCalculatorForm from '@/components/pension/pension-calculator-form'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle, Calculator, CheckCircle, PiggyBank, Shield, Target, TrendingUp } from 'lucide-react';
 import { Metadata } from 'next';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: '연금 계산기 - 정확한 노후 준비 계산',
@@ -18,7 +20,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PensionCalculatorPage() {
+export default async function PensionCalculatorPage() {
+  // 인증 확인 - 로그인하지 않은 사용자는 로그인 페이지로 리다이렉트
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect('/auth/sign-in?redirect_url=/pension-calculator');
+  }
+
   return (
     <>
       <Header />

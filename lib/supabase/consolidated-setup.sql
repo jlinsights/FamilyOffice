@@ -45,6 +45,83 @@ CREATE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 
+-- 0.1 Create Consultations Table
+CREATE TABLE IF NOT EXISTS consultations (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  service_type TEXT,
+  message TEXT,
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'contacted', 'completed'))
+);
+
+-- 0.2 Create Performance Metrics Table
+CREATE TABLE IF NOT EXISTS performance_metrics (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  metric_name TEXT NOT NULL,
+  metric_value NUMERIC NOT NULL,
+  metric_type TEXT NOT NULL,
+  url TEXT,
+  user_agent TEXT,
+  timestamp TIMESTAMPTZ DEFAULT NOW(),
+  metadata JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 0.3 Create Content Recommendations Table
+CREATE TABLE IF NOT EXISTS content_recommendations (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES users(id),
+  hubspot_contact_id TEXT,
+  content_id TEXT NOT NULL,
+  content_title TEXT NOT NULL,
+  content_type TEXT NOT NULL,
+  content_url TEXT NOT NULL,
+  relevance_score NUMERIC NOT NULL,
+  ai_confidence NUMERIC NOT NULL,
+  recommendation_reason TEXT,
+  status TEXT DEFAULT 'recommended',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  viewed_at TIMESTAMPTZ,
+  clicked_at TIMESTAMPTZ
+);
+
+-- 0.4 Create Workflow Executions Table
+CREATE TABLE IF NOT EXISTS workflow_executions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  workflow_id TEXT NOT NULL,
+  workflow JSONB,
+  workflow_steps JSONB,
+  hubspot_contact_id TEXT NOT NULL,
+  status TEXT DEFAULT 'pending',
+  current_step INTEGER DEFAULT 0,
+  total_steps INTEGER DEFAULT 0,
+  execution_data JSONB,
+  error_message TEXT,
+  started_at TIMESTAMPTZ DEFAULT NOW(),
+  completed_at TIMESTAMPTZ,
+  next_action_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  enrolled_count INTEGER DEFAULT 0
+);
+
+-- 0.5 Create Lead Activities Table
+CREATE TABLE IF NOT EXISTS lead_activities (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  hubspot_contact_id TEXT NOT NULL,
+  user_id UUID REFERENCES users(id),
+  activity_type TEXT NOT NULL,
+  activity_data JSONB NOT NULL,
+  score_impact INTEGER DEFAULT 0,
+  total_score INTEGER DEFAULT 0,
+  score_grade TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
 -- 1. Create structure_check_requests Table
 CREATE TABLE IF NOT EXISTS structure_check_requests (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,

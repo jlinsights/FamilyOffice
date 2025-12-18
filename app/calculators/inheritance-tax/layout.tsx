@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: '상속세 계산기 | FamilyOffice S - 2025년 최신 세법 기준 정확한 계산',
@@ -39,10 +41,17 @@ export const metadata: Metadata = {
   }
 };
 
-export default function InheritanceTaxCalculatorLayout({
+export default async function InheritanceTaxCalculatorLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // 인증 확인 - 로그인하지 않은 사용자는 로그인 페이지로 리다이렉트
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect('/auth/sign-in?redirect_url=/calculators/inheritance-tax');
+  }
+
   return children;
 }

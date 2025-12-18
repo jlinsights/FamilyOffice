@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: '증여세 계산기 | FamilyOffice S - 관계별 공제 한도와 분할증여 최적화',
@@ -39,10 +41,17 @@ export const metadata: Metadata = {
   }
 };
 
-export default function GiftTaxCalculatorLayout({
+export default async function GiftTaxCalculatorLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // 인증 확인 - 로그인하지 않은 사용자는 로그인 페이지로 리다이렉트
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect('/auth/sign-in?redirect_url=/calculators/gift-tax');
+  }
+
   return children;
 }

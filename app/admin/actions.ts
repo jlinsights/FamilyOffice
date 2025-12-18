@@ -8,6 +8,55 @@ export interface AdminStats {
     today: number;
     pending: number;
   };
+  structureChecks: {
+    total: number;
+    today: number;
+    pending: number;
+  };
+}
+
+export interface StructureCheckRequest {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  company?: string;
+  q1_decision_made: 'yes' | 'no';
+  q1_decision_detail?: string;
+  q2_documented: 'yes' | 'no';
+  q3_authority_clear: 'clear' | 'partial' | 'unclear';
+  q4_cash_plan: 'structure_exists' | 'rough_idea' | 'not_considered';
+  q5_deadline: 'within_6m' | '1_2y' | 'when_needed';
+  q6_concerns?: string[];
+  q7_advisors?: string[];
+  additional_notes?: string;
+  qualification_score: number;
+  status: 'pending_review' | 'low_priority' | 'contacted' | 'completed';
+  submitted_at: string;
+}
+
+export async function getStructureCheckRequests(): Promise<{
+  data: StructureCheckRequest[] | null;
+  error: string | null
+}> {
+  try {
+    const supabase = createAdminClient();
+
+    const { data, error } = await supabase
+      .from('structure_check_requests')
+      .select('*')
+      .order('submitted_at', { ascending: false });
+
+    if (error) throw error;
+
+    return {
+      data: data || [],
+      error: null,
+    };
+  } catch (error: any) {
+    console.error('Error fetching structure check requests:', error);
+    return { data: null, error: error.message || 'Failed to fetch structure check requests' };
+  }
 }
 
 export async function getAdminStats(): Promise<{ data: AdminStats | null; error: string | null }> {
@@ -50,12 +99,39 @@ export async function getAdminStats(): Promise<{ data: AdminStats | null; error:
 
     if (pendingError) throw pendingError;
 
+    // Fetch Structure Check Requests Statistics
+    const { count: structureMonthCount, error: structureMonthError } = await supabase
+      .from('structure_check_requests')
+      .select('*', { count: 'exact', head: true })
+      .gte('submitted_at', startOfMonth);
+
+    if (structureMonthError) throw structureMonthError;
+
+    const { count: structureTodayCount, error: structureTodayError } = await supabase
+      .from('structure_check_requests')
+      .select('*', { count: 'exact', head: true })
+      .gte('submitted_at', startOfDay);
+
+    if (structureTodayError) throw structureTodayError;
+
+    const { count: structurePendingCount, error: structurePendingError } = await supabase
+      .from('structure_check_requests')
+      .select('*', { count: 'exact', head: true })
+      .eq('status', 'pending_review');
+
+    if (structurePendingError) throw structurePendingError;
+
     return {
       data: {
         consultations: {
           total: monthCount || 0,
           today: todayCount || 0,
           pending: pendingCount || 0,
+        },
+        structureChecks: {
+          total: structureMonthCount || 0,
+          today: structureTodayCount || 0,
+          pending: structurePendingCount || 0,
         },
       },
       error: null,
