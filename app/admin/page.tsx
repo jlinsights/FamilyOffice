@@ -1,23 +1,23 @@
 'use client';
 
-import { Brain, Gauge, Phone, Search, Shield, Target, TrendingUp, ClipboardCheck } from 'lucide-react';
+import { Brain, ClipboardCheck, Gauge, Phone, Search, Shield, Target, TrendingUp } from 'lucide-react';
 import nextDynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
 
 // Dynamic imports for heavy dashboard components
 const AISearchDashboard = nextDynamic(
@@ -59,6 +59,13 @@ const MarketingPerformanceDashboard = nextDynamic(
   () => import('@/components/admin/marketing-performance-dashboard'),
   {
     loading: () => <div className="flex items-center justify-center h-64">마케팅 퍼포먼스 대시보드 로딩 중...</div>
+  }
+);
+
+const SeoOverviewDashboard = nextDynamic(
+  () => import('@/components/admin/seo-overview-dashboard').then(mod => ({ default: mod.SeoOverviewDashboard })),
+  {
+    loading: () => <div className="flex items-center justify-center h-64">SEO 성과 대시보드 로딩 중...</div>
   }
 );
 
@@ -175,50 +182,7 @@ export default function AdminDashboard() {
             </TabsContent>
 
             <TabsContent value="performance" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>SEO 성과 지표</CardTitle>
-                  <CardDescription>검색엔진 최적화 및 트래픽 성과</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-primary">4위</div>
-                      <p className="text-sm text-muted-foreground">패밀리오피스 검색순위</p>
-                      <p className="text-xs text-green-600 dark:text-green-400">↗ 3단계 상승</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-green-600 dark:text-green-400">+187%</div>
-                      <p className="text-sm text-muted-foreground">검색 트래픽 증가</p>
-                      <p className="text-xs text-muted-foreground">목표: 300%</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-violet-600 dark:text-violet-400">5개</div>
-                      <p className="text-sm text-muted-foreground">AI 플랫폼 노출</p>
-                      <p className="text-xs text-muted-foreground">ChatGPT, Claude 등</p>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-2">최근 SEO 개선 사항</h4>
-                      <ul className="space-y-2 text-sm">
-                        <li className="flex items-center gap-2">
-                          <span className="text-green-600 dark:text-green-400">✓</span>
-                          <span>8개 고가치 키워드 랜딩 페이지 생성 완료</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="text-green-600 dark:text-green-400">✓</span>
-                          <span>구조화된 데이터 마크업 100% 적용</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="text-green-600 dark:text-green-400">✓</span>
-                          <span>Core Web Vitals 모든 지표 녹색 달성</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <SeoOverviewDashboard />
             </TabsContent>
 
             <TabsContent value="consultations" className="space-y-6">
