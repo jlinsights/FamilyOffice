@@ -369,16 +369,28 @@ export const Header = memo(function Header({
             {/* 모바일 버튼 및 설정 */}
             <div className="pt-4 border-t border-border space-y-4">
               {isLoaded && isSignedIn ? (
-                // 로그인 상태: 대시보드 링크 표시
-                <Link
-                  href="/dashboard"
-                  onClick={handleMobileLinkClick}
-                  className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
-                  aria-label="대시보드로 이동"
-                >
-                  내 대시보드
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                </Link>
+                // 로그인 상태: 대시보드 링크 + 구조 점검 요청 표시
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={handleMobileLinkClick}
+                    className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
+                    aria-label="대시보드로 이동"
+                  >
+                    내 대시보드
+                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                  </Link>
+                  <Link
+                    href="/structure-check#request-form"
+                    onClick={handleMobileLinkClick}
+                    className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
+                    aria-label="구조 점검 요청"
+                    title="구조 점검 요청"
+                  >
+                    <ClipboardCheck className="h-5 w-5 mr-2" aria-hidden="true" />
+                    구조 점검 요청
+                  </Link>
+                </>
               ) : (
                 // 로그아웃 상태: 로그인 버튼 + 구조 점검 요청 표시
                 <>
