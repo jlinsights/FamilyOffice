@@ -1,4 +1,4 @@
-import { ArrowLeft, CalendarDays, Clock } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -18,13 +18,13 @@ import { Button } from '@/components/ui/button';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
+import {
+    extractAIOptimizedKeywords,
+    generateAIOptimizedFAQ,
+    generateAIOptimizedMetadata
+} from '@/lib/blog-ai-optimization';
 import { blogPosts } from '@/lib/blog-data';
 import { env } from '@/lib/env';
-import {
-  generateAIOptimizedFAQ,
-  generateAIOptimizedMetadata,
-  extractAIOptimizedKeywords
-} from '@/lib/blog-ai-optimization';
 
 // BlogPost interface and data imported from lib/blog-data
 
@@ -97,6 +97,20 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  
+  // SEO 블로그 포스트 목록 (실제 /blog/ 경로에 있는 페이지들)
+  const seoBlogSlugs = [
+    'successful-ceo-asset-management',
+    'inheritance-tax-calculator-2025',
+    'business-succession-checklist'
+  ];
+
+  // SEO 블로그는 /blog/ 경로로 리다이렉트
+  if (seoBlogSlugs.includes(slug)) {
+    const { redirect } = await import('next/navigation');
+    redirect(`/blog/${slug}`);
+  }
+
   const post = blogPosts[slug];
 
   if (!post) {
