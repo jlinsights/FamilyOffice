@@ -1,11 +1,84 @@
-✨ 관리자 대시보드 구조 점검 탭 기능 개선
+🐛 Supabase 마이그레이션 SQL 수정: PostgreSQL 예약어 position 컬럼명 이스케이프
 
-- /admin 페이지의 구조 점검 탭에서 전체 대시보드 직접 표시
-- getStructureCheckRequests server action 추가
-- StructureCheckDashboard 컴포넌트 임베드
-- 통계, 필터링, 검색, 상세보기 기능 모두 탭 내에서 사용 가능
-- 별도 페이지 이동 없이 한 곳에서 모든 관리 가능
+## 문제 상황
+Supabase SQL Editor에서 마이그레이션 실행 시 반복적인 오류 발생:
+```
+ERROR: 42601: syntax error at or near "position" LINE 100: position INTEGER, ^
+```
 
-🐛 구조 점검 요청 통계 조회 오류 수정
-- status 필터 값을 'pending'에서 'pending_review'로 수정
-- 데이터베이스 스키마와 일치하도록 변경
+## 근본 원인
+`position`이 PostgreSQL 예약어(reserved keyword)로 지정되어 있어, 컬럼명으로 사용 시 큰따옴표 이스케이프 필요
+
+## 수정 사항
+**파일**: `/supabase/migrations/20250101_create_keyword_rankings.sql`
+
+**총 3곳 수정** (모든 `position INTEGER` → `"position" INTEGER`):
+
+1. **Line 18 (CREATE TABLE)**:
+```sql
+-- BEFORE
+position INTEGER,
+
+-- AFTER
+"position" INTEGER,
+```
+
+2. **Line 100 (get_keyword_trend 함수)**:
+```sql
+-- BEFORE
+RETURNS TABLE (
+  date DATE,
+  position INTEGER,
+  found BOOLEAN,
+  url TEXT
+)
+
+-- AFTER
+RETURNS TABLE (
+  date DATE,
+  "position" INTEGER,
+  found BOOLEAN,
+  url TEXT
+)
+```
+
+3. **Line 129 (get_top_performing_keywords 함수)**:
+```sql
+-- BEFORE
+RETURNS TABLE (
+  keyword TEXT,
+  position INTEGER,
+  bmad_category TEXT,
+  created_at TIMESTAMP WITH TIME ZONE
+)
+
+-- AFTER
+RETURNS TABLE (
+  keyword TEXT,
+  "position" INTEGER,
+  bmad_category TEXT,
+  created_at TIMESTAMP WITH TIME ZONE
+)
+```
+
+## 기술 설명
+- PostgreSQL 예약어 목록: `position`, `user`, `table`, `select` 등
+- 식별자(identifier)로 사용 시 반드시 큰따옴표(`"`) 이스케이프 필요
+- 테이블명.컬럼명 참조 시(`keyword_rankings.position`)는 이스케이프 불필요
+- 뷰, 코멘트 등의 다른 참조는 qualified name 사용으로 문제없음
+
+## 영향 범위
+- ✅ CREATE TABLE 문 정상 실행 가능
+- ✅ 함수 RETURNS TABLE 정의 정상 실행 가능
+- ✅ 기존 뷰/함수 로직 변경 없음 (qualified name 사용)
+- ✅ 마이그레이션 전체 실행 가능
+
+## 다음 단계
+1. Supabase Dashboard → SQL Editor 접속
+2. 수정된 마이그레이션 SQL 전체 복사 & 실행
+3. 검증 SQL 실행 (`verify_migration.sql`)
+4. Vercel 환경 변수 설정 진행
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
