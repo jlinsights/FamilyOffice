@@ -35,7 +35,8 @@ export const metadata: Metadata = generateMetadata(
   undefined,
   '전문가급',
   '성숙기',
-  'commercial'
+  'commercial',
+  '/asset-diversification'
 );
 
 export default function AssetDiversificationPage() {

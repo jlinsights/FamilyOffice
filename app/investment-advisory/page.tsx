@@ -35,7 +35,8 @@ export const metadata: Metadata = generateMetadata(
   undefined,
   '전문가급',
   '성장기',
-  'commercial'
+  'commercial',
+  '/investment-advisory'
 );
 
 export default function InvestmentAdvisoryPage() {
