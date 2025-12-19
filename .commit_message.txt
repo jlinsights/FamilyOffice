@@ -1,10 +1,10 @@
-🔧 Fix: Google Analytics Data API 패키지 의존성 추가
+🔄 Fix: Vercel 빌드 캐시 무효화 (v0.1.2)
 
-package-lock.json에 @google-analytics/data 패키지 추가하여 Vercel 빌드 오류 해결
+Vercel 빌드 캐시 문제 해결을 위한 버전 업데이트
 
-- @google-analytics/data@5.2.1 및 의존성 패키지 추가
-- google-gax, @grpc/* 관련 패키지 포함
-- Vercel 빌드 시 "Module not found" 오류 해결
+- package.json 버전: 0.1.1 → 0.1.2
+- 빌드 캐시 강제 무효화로 @google-analytics/data 패키지 정상 설치 유도
+- 이전 빌드에서 캐시된 node_modules에 패키지가 없어 발생한 오류 해결
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
