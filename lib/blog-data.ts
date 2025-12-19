@@ -3925,4 +3925,53 @@ export const blogPosts: Record<string, BlogPost> = {
       }
     ],
   },
+  
+  // SEO 최적화 블로그 포스트 (2025-12-20 추가)
+  'successful-ceo-asset-management': {
+    id: 'successful-ceo-asset-management',
+    title: '성공한 CEO 자산관리 방법 7가지',
+    slug: 'successful-ceo-asset-management',
+    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1000&auto=format&fit=crop',
+    excerpt: '20년 경력 세무사가 알려주는 CEO 자산관리 핵심 전략. 법인과 개인 자산 최적화부터 절세까지, 실전 노하우를 공개합니다.',
+    content: 'CEO 자산관리의 7가지 핵심 전략을 다룬 포괄적 가이드입니다.',
+    category: '자산관리',
+    author: 'Editor',
+    date: '2025-12-20',
+    readTime: '8분',
+    tags: ['CEO', '자산관리', '절세', '법인자산', '개인자산'],
+    featured: true,
+    lastUpdated: '2025-12-20'
+  },
+  
+  'inheritance-tax-calculator-2025': {
+    id: 'inheritance-tax-calculator-2025',
+    title: '2025년 상속세 계산기 사용법 완벽 가이드',
+    slug: 'inheritance-tax-calculator-2025',
+    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
+    excerpt: '2025년 최신 상속세율과 공제한도로 계산하는 방법! 상속세 계산기 사용법부터 절세 전략까지 세무사가 직접 알려드립니다.',
+    content: '2025년 상속세율표, 공제 항목, 계산 방법을 단계별로 설명한 완벽 가이드입니다.',
+    category: '세무최적화',
+    author: 'Editor',
+    date: '2025-12-20',
+    readTime: '10분',
+    tags: ['상속세', '상속세 계산기', '상속세율', '상속공제', '2025 세법'],
+    featured: true,
+    lastUpdated: '2025-12-20'
+  },
+  
+  'business-succession-checklist': {
+    id: 'business-succession-checklist',
+    title: '가업승계 체크리스트 완벽 가이드',
+    slug: 'business-succession-checklist',
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&auto=format&fit=crop',
+    excerpt: '5-10년 장기 계획이 필요한 가업승계, 단계별 준비사항을 체크리스트로 정리했습니다. 무료 PDF 다운로드 제공.',
+    content: '10년 전부터 승계 완료까지 5단계 체크리스트와 실용적인 가업승계 전략 가이드입니다.',
+    category: '승계전략',
+    author: 'Editor',
+    date: '2025-12-20',
+    readTime: '12분',
+    tags: ['가업승계', '가업승계 체크리스트', '가업상속공제', '후계자 교육', '절세 전략'],
+    featured: true,
+    lastUpdated: '2025-12-20'
+  }
 };
