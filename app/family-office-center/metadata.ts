@@ -16,6 +16,6 @@ export const metadata: Metadata = {
     description: '최고 자산가와 성공한 기업가를 위한 차별화된 패밀리오피스 서비스',
   },
   alternates: {
-    canonical: '/family-office-center',
+    canonical: 'https://familyoffices.vip/family-office-center',
   },
 };

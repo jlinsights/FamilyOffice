@@ -67,7 +67,12 @@ export const metadata: Metadata = {
       '기업평가',
       '성장성 평가',
       '혁신성 평가',
-    ]
+    ],
+    undefined,
+    '전문가급',
+    '성장기',
+    'commercial',
+    '/business-certification'
   ),
   // 파비콘 및 앱 아이콘 설정
   icons: {

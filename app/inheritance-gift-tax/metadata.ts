@@ -16,6 +16,6 @@ export const metadata: Metadata = {
     description: '국세청 공식 자료 기반 상속·증여세 완벽 해설과 절세 전략',
   },
   alternates: {
-    canonical: '/inheritance-gift-tax',
+    canonical: 'https://familyoffices.vip/inheritance-gift-tax',
   },
 };
