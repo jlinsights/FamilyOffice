@@ -16,6 +16,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
+import { BMADKeywordDashboard } from '@/components/admin/bmad-keyword-dashboard';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
@@ -138,7 +139,7 @@ export default function AdminDashboard() {
           </div>
 
           <Tabs defaultValue="marketing-performance" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9">
+            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-10">
               <TabsTrigger value="marketing-performance" className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4" />
                 마케팅 퍼포먼스
@@ -174,6 +175,10 @@ export default function AdminDashboard() {
               <TabsTrigger value="marketing" className="flex items-center gap-2">
                 <Target className="h-4 w-4" />
                 마케팅 자동화
+              </TabsTrigger>
+              <TabsTrigger value="bmad" className="flex items-center gap-2">
+                <Target className="h-4 w-4" />
+                BMAD 추적
               </TabsTrigger>
             </TabsList>
 
@@ -253,6 +258,10 @@ export default function AdminDashboard() {
 
             <TabsContent value="marketing">
               <InboundMarketingDashboard />
+            </TabsContent>
+
+            <TabsContent value="bmad">
+              <BMADKeywordDashboard />
             </TabsContent>
           </Tabs>
         </div>

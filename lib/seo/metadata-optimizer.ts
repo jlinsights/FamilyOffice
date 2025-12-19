@@ -393,8 +393,8 @@ export const PAGE_META_CONFIGS = {
   '/': {
     keywords: targetKeywords.familyOffice,
     customContent: {
-      title: '패밀리오피스 전문 서비스 | 중소기업 CEO 맞춤 자산관리 - 패밀리오피스 S',
-      description: '중소기업 CEO를 위한 전문 패밀리오피스 서비스. 가업승계, 절세전략, 자산관리를 원스톱으로 제공. 15년 경험 전문가와 무료 상담으로 최적 솔루션을 확인하세요.'
+      title: '성공한 CEO를 위한 프라이빗 패밀리오피스 | 상속세 & 자산관리 솔루션',
+      description: '성공한 기업가와 30억 이상 자산가를 위한 프라이빗 패밀리오피스. 상속세 50% 절감, 법인 자금 유동화, 글로벌 자산배분. 삼성생명 1000억+ 운용 실적.'
     }
   },
   '/services': {

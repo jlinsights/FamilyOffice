@@ -20,6 +20,11 @@ import { Header } from '@/components/header';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { blogPosts } from '@/lib/blog-data';
 import { env } from '@/lib/env';
+import {
+  generateAIOptimizedFAQ,
+  generateAIOptimizedMetadata,
+  extractAIOptimizedKeywords
+} from '@/lib/blog-ai-optimization';
 
 // BlogPost interface and data imported from lib/blog-data
 
@@ -38,6 +43,10 @@ export async function generateMetadata({
     };
   }
 
+  // AI 최적화 메타데이터 생성
+  const aiOptimizedMetadata = generateAIOptimizedMetadata(post);
+  const aiKeywords = extractAIOptimizedKeywords(post);
+
   // 절대 URL 생성 (소셜 미디어 플랫폼은 절대 URL 필요)
   const baseUrl = env.NEXT_PUBLIC_SITE_URL || env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip';
   const imageUrl = post.image.startsWith('http')
@@ -45,9 +54,9 @@ export async function generateMetadata({
     : `${baseUrl}${post.image}`;
 
   return {
-    title: `${post.title} | Market Intelligence | FamilyOffice S`,
-    description: `${post.excerpt} - 기업승계와 상속세 절세 전문가의 심층 분석`,
-    keywords: `${post.tags.join(', ')}, 기업승계, 상속세 절세, 패밀리오피스, 중견기업`,
+    title: aiOptimizedMetadata.title,
+    description: aiOptimizedMetadata.description,
+    keywords: aiKeywords.join(', '),
     authors: [{ name: post.author }],
     openGraph: {
       title: `${post.title} | Market Intelligence | FamilyOffice S`,
@@ -93,6 +102,10 @@ export default async function BlogPostPage({
   if (!post) {
     notFound();
   }
+
+  // AI 최적화 FAQ 생성 (기존 FAQ가 없거나 부족한 경우)
+  const aiOptimizedFAQ = generateAIOptimizedFAQ(post);
+  const displayFAQ = post.faq && post.faq.length > 0 ? post.faq : aiOptimizedFAQ;
 
   // 관련 포스트 추천: 같은 카테고리에서 최대 3개 (SEO & 내부 링크 강화)
   const relatedPosts = Object.values(blogPosts)
@@ -233,8 +246,19 @@ export default async function BlogPostPage({
                 '@id': `https://familyoffices.vip/insights/market-intelligence/${post.slug}`
               },
               articleSection: post.category,
-              keywords: post.tags.join(', '),
+              keywords: extractAIOptimizedKeywords(post).join(', '),
               wordCount: post.content.split(' ').length,
+              // AI 검색엔진 최적화 추가 필드
+              educationalLevel: 'Professional',
+              educationalUse: 'CEO 자산관리 가이드',
+              audience: {
+                '@type': 'Audience',
+                audienceType: '중견기업 CEO, 고액자산가',
+                geographicArea: {
+                  '@type': 'Country',
+                  name: 'South Korea'
+                }
+              },
               inLanguage: 'ko-KR',
               isAccessibleForFree: true,
               about: {
@@ -441,14 +465,19 @@ export default async function BlogPostPage({
           </div>
         )}
 
-        {/* FAQ Section - Minimal Style */}
-        {post.faq && post.faq.length > 0 && (
+        {/* FAQ Section - AI Optimized */}
+        {displayFAQ && displayFAQ.length > 0 && (
           <div className="max-w-[720px] mx-auto px-6 md:px-8 mt-16 pb-20">
-            <h3 className="text-xl font-serif font-bold text-slate-900 dark:text-white mb-6">
-              자주 묻는 질문
-            </h3>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-serif font-bold text-slate-900 dark:text-white">
+                자주 묻는 질문
+              </h3>
+              <Badge variant="secondary" className="text-xs">
+                AI 검색엔진 최적화
+              </Badge>
+            </div>
             <Accordion type="single" collapsible className="w-full space-y-4">
-              {post.faq.map((item, index) => (
+              {displayFAQ.map((item, index) => (
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
@@ -464,14 +493,14 @@ export default async function BlogPostPage({
               ))}
             </Accordion>
 
-            {/* FAQ Schema */}
+            {/* FAQ Schema - AI Optimized */}
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{
                 __html: JSON.stringify({
                   '@context': 'https://schema.org',
                   '@type': 'FAQPage',
-                  mainEntity: post.faq.map(item => ({
+                  mainEntity: displayFAQ.map(item => ({
                     '@type': 'Question',
                     name: item.question,
                     acceptedAnswer: {
