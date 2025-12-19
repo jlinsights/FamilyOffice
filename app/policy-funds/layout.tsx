@@ -52,7 +52,12 @@ export const metadata: Metadata = {
       '정책자금 상담',
       '정책자금 신청방법',
       '정책자금 서류',
-    ]
+    ],
+    undefined,
+    '전문가급',
+    '성장기',
+    'commercial',
+    '/policy-funds'
   ),
   // 파비콘 및 앱 아이콘 설정
   icons: {
