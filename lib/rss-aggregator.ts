@@ -449,12 +449,22 @@ export class RSSAggregator {
    */
   async getLocalPosts(limit = 10): Promise<RSSItem[]> {
     try {
+      // SEO 블로그 포스트 slug 목록 (실제 /blog/ 경로에 있는 페이지들)
+      const seoBlogSlugs = [
+        'successful-ceo-asset-management',
+        'inheritance-tax-calculator-2025',
+        'business-succession-checklist'
+      ];
+
       const posts = Object.values(blogPosts).map(post => ({
         id: post.id || post.slug,
         title: post.title,
         content: post.content,
         excerpt: post.excerpt,
-        url: `/insights/market-intelligence/${post.slug}`,
+        // SEO 블로그는 /blog/ 경로로, 기존 포스트는 /insights/market-intelligence/ 경로로
+        url: seoBlogSlugs.includes(post.slug) 
+          ? `/blog/${post.slug}` 
+          : `/insights/market-intelligence/${post.slug}`,
         publishedAt: new Date(post.date).toISOString(),
         author: post.author || 'Editor',
         source: 'local' as const,
