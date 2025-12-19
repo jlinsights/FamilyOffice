@@ -170,7 +170,8 @@ export function generateMetadata(
   image?: string,
   targetExperience?: '성장기' | '성숙기' | '전문가급' | '리더급',
   businessStage?: '성장기' | '성숙기' | '승계준비',
-  searchIntent?: 'informational' | 'commercial' | 'transactional'
+  searchIntent?: 'informational' | 'commercial' | 'transactional',
+  canonicalPath?: string
 ): Metadata {
   // SuperClaude 적응형 메타데이터 생성
   const experienceSpecificKeywords = targetExperience ? [
@@ -190,15 +191,22 @@ export function generateMetadata(
     ? `${title} | 전문 컨설팅`
     : title;
 
+  const baseUrl = 'https://familyoffices.vip';
+  const canonicalUrl = canonicalPath ? `${baseUrl}${canonicalPath}` : baseUrl;
+
   return {
     title: intentOptimizedTitle,
     description,
     keywords: [...(defaultMetadata.keywords || []), ...keywords, ...experienceSpecificKeywords, ...stageSpecificKeywords],
     category: targetExperience ? `${targetExperience} 전용 서비스` : defaultMetadata.category,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       ...defaultMetadata.openGraph,
       title: intentOptimizedTitle,
       description,
+      url: canonicalUrl,
       // article:tag는 OpenGraph 표준에서 지원되지 않음
       images: image
         ? [

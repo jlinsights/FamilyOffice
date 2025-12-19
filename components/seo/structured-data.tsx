@@ -306,6 +306,185 @@ export function PageStructuredData({ pathname }: { pathname: string }) {
     );
   }
 
+  // 자산관리 컨설팅
+  if (pathname === '/wealth-consulting') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="자산관리 컨설팅"
+          description="고액자산가를 위한 맞춤형 자산관리 및 재무설계 서비스"
+          serviceType="WealthManagement"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '서비스', url: `${baseUrl}/services` },
+            { name: '자산관리 컨설팅', url: `${baseUrl}/wealth-consulting` }
+          ]}
+        />
+      </>
+    );
+  }
+
+  // 투자자문
+  if (pathname === '/investment-advisory') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="투자자문 서비스"
+          description="전문가의 맞춤형 투자 전략 및 포트폴리오 관리"
+          serviceType="InvestmentAdvisory"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '서비스', url: `${baseUrl}/services` },
+            { name: '투자자문', url: `${baseUrl}/investment-advisory` }
+          ]}
+        />
+      </>
+    );
+  }
+
+  // 정책자금
+  if (pathname === '/policy-funds') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="정책자금 신청 컨설팅"
+          description="정부 정책자금 신청 지원 및 컨설팅 서비스"
+          serviceType="BusinessConsulting"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '서비스', url: `${baseUrl}/services` },
+            { name: '정책자금', url: `${baseUrl}/policy-funds` }
+          ]}
+        />
+      </>
+    );
+  }
+
+  // 기업인증
+  if (pathname === '/business-certification') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="기업인증 컨설팅"
+          description="벤처기업, 이노비즈 등 기업인증 취득 지원"
+          serviceType="BusinessConsulting"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '서비스', url: `${baseUrl}/services` },
+            { name: '기업인증', url: `${baseUrl}/business-certification` }
+          ]}
+        />
+      </>
+    );
+  }
+
+  // 인사노무
+  if (pathname === '/hr-labor-management') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="인사노무 컨설팅"
+          description="기업 인사노무 관리 및 컴플라이언스 지원"
+          serviceType="HRConsulting"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '서비스', url: `${baseUrl}/services` },
+            { name: '인사노무', url: `${baseUrl}/hr-labor-management` }
+          ]}
+        />
+      </>
+    );
+  }
+
+  // 자산분산
+  if (pathname === '/asset-diversification') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="자산분산 전략"
+          description="리스크 분산을 위한 자산 배분 및 다각화 전략"
+          serviceType="WealthManagement"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '서비스', url: `${baseUrl}/services` },
+            { name: '자산분산', url: `${baseUrl}/asset-diversification` }
+          ]}
+        />
+      </>
+    );
+  }
+
+  // 포트폴리오 최적화
+  if (pathname === '/portfolio-optimization') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="포트폴리오 최적화"
+          description="데이터 기반 포트폴리오 분석 및 최적화 서비스"
+          serviceType="InvestmentAdvisory"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '서비스', url: `${baseUrl}/services` },
+            { name: '포트폴리오 최적화', url: `${baseUrl}/portfolio-optimization` }
+          ]}
+        />
+      </>
+    );
+  }
+
+  // 패밀리오피스 센터
+  if (pathname === '/family-office-center') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="패밀리오피스 센터"
+          description="종합 패밀리오피스 서비스 및 자산관리 솔루션"
+          serviceType="FinancialService"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '패밀리오피스 센터', url: `${baseUrl}/family-office-center` }
+          ]}
+        />
+      </>
+    );
+  }
+
+  // 상속증여세
+  if (pathname === '/inheritance-gift-tax') {
+    return (
+      <>
+        <ServiceStructuredData
+          name="상속증여세 컨설팅"
+          description="상속세 및 증여세 절세 전략 및 세무 컨설팅"
+          serviceType="TaxConsulting"
+        />
+        <BreadcrumbStructuredData
+          items={[
+            { name: '홈', url: baseUrl },
+            { name: '서비스', url: `${baseUrl}/services` },
+            { name: '상속증여세', url: `${baseUrl}/inheritance-gift-tax` }
+          ]}
+        />
+      </>
+    );
+  }
+
   // 기본 구조화 데이터
   return <OrganizationStructuredData />;
 }
