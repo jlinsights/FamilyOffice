@@ -97,20 +97,6 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  
-  // SEO 블로그 포스트 목록 (실제 /blog/ 경로에 있는 페이지들)
-  const seoBlogSlugs = [
-    'successful-ceo-asset-management',
-    'inheritance-tax-calculator-2025',
-    'business-succession-checklist'
-  ];
-
-  // SEO 블로그는 /blog/ 경로로 리다이렉트
-  if (seoBlogSlugs.includes(slug)) {
-    const { redirect } = await import('next/navigation');
-    redirect(`/blog/${slug}`);
-  }
-
   const post = blogPosts[slug];
 
   if (!post) {

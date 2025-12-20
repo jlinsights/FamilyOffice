@@ -449,32 +449,34 @@ export class RSSAggregator {
    */
   async getLocalPosts(limit = 10): Promise<RSSItem[]> {
     try {
-      // SEO 블로그 포스트 slug 목록 (실제 /blog/ 경로에 있는 페이지들)
+      // SEO 블로그 포스트 slug 목록 (Insights에서 제외, /blog/에서만 독립적으로 사용)
       const seoBlogSlugs = [
         'successful-ceo-asset-management',
         'inheritance-tax-calculator-2025',
         'business-succession-checklist'
       ];
 
-      const posts = Object.values(blogPosts).map(post => ({
-        id: post.id || post.slug,
-        title: post.title,
-        content: post.content,
-        excerpt: post.excerpt,
-        // SEO 블로그는 /blog/ 경로로, 기존 포스트는 /insights/market-intelligence/ 경로로
-        url: seoBlogSlugs.includes(post.slug) 
-          ? `/blog/${post.slug}` 
-          : `/insights/market-intelligence/${post.slug}`,
-        publishedAt: new Date(post.date).toISOString(),
-        author: post.author || 'Editor',
-        source: 'local' as const,
-        category: post.category,
-        tags: post.tags || [],
-        readTime: post.readTime,
-        imageUrl: post.image,
-        featured: post.featured ?? false,
-        lastUpdated: post.lastUpdated
-      }));
+      const allPosts = Object.values(blogPosts);
+      
+      // SEO 블로그는 Insights 피드에서 제외
+      const posts = allPosts
+        .filter(post => !seoBlogSlugs.includes(post.slug))
+        .map(post => ({
+          id: post.id || post.slug,
+          title: post.title,
+          content: post.content,
+          excerpt: post.excerpt,
+          url: `/insights/market-intelligence/${post.slug}`,
+          publishedAt: new Date(post.date).toISOString(),
+          author: post.author || 'Editor',
+          source: 'local' as const,
+          category: post.category,
+          tags: post.tags || [],
+          readTime: post.readTime,
+          imageUrl: post.image,
+          featured: post.featured ?? false,
+          lastUpdated: post.lastUpdated
+        }));
 
       // 날짜순 정렬
       return posts
