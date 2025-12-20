@@ -1,14 +1,7 @@
 export function PreloadCriticalResources() {
   return (
     <>
-      {/* Critical fonts */}
-      <link
-        rel="preload"
-        href="/_next/static/media/inter-latin-100-normal.woff2"
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous"
-      />
+      {/* Critical fonts - Only weights actually used in design */}
       <link
         rel="preload"
         href="/_next/static/media/inter-latin-400-normal.woff2"
@@ -22,28 +15,6 @@ export function PreloadCriticalResources() {
         as="font"
         type="font/woff2"
         crossOrigin="anonymous"
-      />
-      
-      {/* Critical CSS - handled by Next.js */}
-      
-      {/* Critical images */}
-      <link
-        rel="preload"
-        href="/SVG/FamilyOfficeS_blue.svg"
-        as="image"
-        type="image/svg+xml"
-      />
-      
-      {/* Critical scripts */}
-      <link
-        rel="preload"
-        href="/_next/static/chunks/main.js"
-        as="script"
-      />
-      <link
-        rel="preload"
-        href="/_next/static/chunks/webpack.js"
-        as="script"
       />
       
       {/* DNS prefetch for external resources */}
