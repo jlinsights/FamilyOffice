@@ -43,10 +43,6 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <head>
         <PreloadCriticalResources />
-        {/* 🚀 Core Web Vitals 최적화 - 리소스 힌트 */}
-        {/* Fonts are now handled by next/font/google */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//cal.com" />
         <link rel="dns-prefetch" href="//analytics.google.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
@@ -57,9 +53,6 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png?v=2025" sizes="180x180" />
         <link rel="icon" href="/favicon.png?v=2025" sizes="192x192" type="image/png" />
         <link rel="manifest" href="/site.webmanifest?v=2025" />
-        
-        {/* Critical 리소스 우선 로딩 - LCP 최적화 */}
-        <link rel="preload" href="/SVG/FamilyOfficeS_blue.svg" as="image" type="image/svg+xml" fetchpriority="high" />
         
         <link rel="canonical" href="https://familyoffices.vip" />
         {/* 다중 지역 SEO - 서울/경기/충청권 */}

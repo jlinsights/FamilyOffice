@@ -20,8 +20,6 @@ export function PreloadCriticalResources() {
       {/* DNS prefetch for external resources */}
       <link rel="dns-prefetch" href="//googletagmanager.com" />
       <link rel="dns-prefetch" href="//google-analytics.com" />
-      <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-      <link rel="dns-prefetch" href="//fonts.gstatic.com" />
       <link rel="dns-prefetch" href="//cal.com" />
       <link rel="dns-prefetch" href="//static.doubleclick.net" />
     </>
