@@ -20,14 +20,18 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
-  variable: '--font-inter'
+  variable: '--font-inter',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+  adjustFontFallback: true
 });
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
-  preload: true,
-  variable: '--font-playfair'
+  preload: false, // Only preload primary font
+  variable: '--font-playfair',
+  fallback: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
+  adjustFontFallback: true
 });
 
 export default function RootLayout({
@@ -41,11 +45,11 @@ export default function RootLayout({
         <PreloadCriticalResources />
         {/* 🚀 Core Web Vitals 최적화 - 리소스 힌트 */}
         {/* Fonts are now handled by next/font/google */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//cal.com" />
         <link rel="dns-prefetch" href="//analytics.google.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="//connect.facebook.net" />
-        <link rel="dns-prefetch" href="//static.doubleclick.net" />
         
         {/* 파비콘 및 앱 아이콘 설정 - 캐시 우회를 위한 버전 추가 */}
         <link rel="icon" href="/favicon.ico?v=2025" sizes="16x16 32x32 48x48" type="image/x-icon" />
@@ -54,8 +58,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.png?v=2025" sizes="192x192" type="image/png" />
         <link rel="manifest" href="/site.webmanifest?v=2025" />
         
-        {/* Critical 리소스 우선 로딩 - 실제 존재하는 파일로 변경 */}
-        <link rel="preload" href="/SVG/FamilyOfficeS_blue.svg" as="image" type="image/svg+xml" />
+        {/* Critical 리소스 우선 로딩 - LCP 최적화 */}
+        <link rel="preload" href="/SVG/FamilyOfficeS_blue.svg" as="image" type="image/svg+xml" fetchpriority="high" />
         
         <link rel="canonical" href="https://familyoffices.vip" />
         {/* 다중 지역 SEO - 서울/경기/충청권 */}

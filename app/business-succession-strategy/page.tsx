@@ -30,6 +30,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { StructuredData } from '@/components/structured-data';
+import { businessSuccessionHowTo } from '@/lib/seo/howto-data';
 
 
 // 5단계 가업승계 로드맵
@@ -264,8 +266,27 @@ const BusinessSuccessionPage = () => {
 
   const overallProgress = calculateProgress();
 
+  // HowTo Schema.org Structured Data
+  const howToStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: businessSuccessionHowTo.name,
+    description: businessSuccessionHowTo.description,
+    totalTime: businessSuccessionHowTo.totalTime,
+    step: businessSuccessionHowTo.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      url: step.url
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
+      {/* HowTo Structured Data */}
+      <StructuredData data={howToStructuredData} />
+      
       <Header />
 
       <main className="pt-20">

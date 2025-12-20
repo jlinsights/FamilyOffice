@@ -1,13 +1,17 @@
 'use client';
 
 import { AnimatedCounter } from '@/components/animated-counter';
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import InsightsFeed from '@/components/insights-feed';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
+import { StructuredData } from '@/components/structured-data';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { BarChart3, BookOpen, Briefcase, Calendar, FileText, Lightbulb, Mail, Shield, TrendingUp, Users } from 'lucide-react';
+import { insightsFAQ } from '@/lib/seo/insights-faq-data';
+import { BarChart3, BookOpen, Briefcase, Calendar, FileText, HelpCircle, Lightbulb, Mail, Shield, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -21,14 +25,31 @@ export default function InsightsPage() {
     return () => clearTimeout(timer);
   }, []);
 
+  // FAQ Schema.org Structured Data
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: insightsFAQ.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      {/* FAQ Structured Data */}
+      <StructuredData data={faqStructuredData} />
+      
       <Header />
       
       <main className="pt-20">
         {/* Hero Section */}
         <section className="relative py-20 lg:py-32 overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-emerald-400/10 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-emerald-400/10 rounded-full blur-xl -z-10 will-change-transform"></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-8 shadow-sm animate-slide-up">
@@ -154,6 +175,40 @@ export default function InsightsPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16 bg-white dark:bg-slate-900">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <Badge variant="outline" className="mb-4 text-sm px-4 py-1">
+                <HelpCircle className="w-3.5 h-3.5 mr-1.5 inline" />
+                자주 묻는 질문
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                Insights FAQ
+              </h2>
+              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                인사이트 콘텐츠와 구독에 관해 자주 묻는 질문입니다
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-slate-800/50 dark:to-slate-900/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+              <PremiumFAQ items={insightsFAQ} />
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+                찾으시는 답변이 없으신가요?
+              </p>
+              <Link href="/contact">
+                <Button variant="outline" size="sm">
+                  <HelpCircle className="mr-2 h-4 w-4" />
+                  1:1 문의하기
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
