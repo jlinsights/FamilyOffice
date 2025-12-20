@@ -466,7 +466,7 @@ export class RSSAggregator {
           title: post.title,
           content: post.content,
           excerpt: post.excerpt,
-          url: `/insights/market-intelligence/${post.slug}`,
+          url: `/insights/${post.slug}`,
           publishedAt: new Date(post.date).toISOString(),
           author: post.author || 'Editor',
           source: 'local' as const,

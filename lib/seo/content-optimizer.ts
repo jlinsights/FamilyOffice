@@ -98,7 +98,7 @@ export const INTERNAL_LINK_STRATEGY = {
       linkCount: 5
     },
     {
-      url: '/insights/market-intelligence',
+      url: '/insights',
       title: '마켓 인텔리전스',
       keywords: ['마켓 인텔리전스', '시장분석'],
       priority: 'low',

@@ -137,7 +137,7 @@ function generateBreadcrumbItems(pathname: string, showHome: boolean): Breadcrum
     '/seminar': '세미나',
     '/blog': '블로그',
     '/insights': '인사이트',
-    '/insights/market-intelligence': '마켓 인텔리전스',
+    '/insights': '마켓 인텔리전스',
     '/contact': '문의하기',
     '/about': '회사 소개',
     '/faq': '자주묻는질문',

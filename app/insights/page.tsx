@@ -6,7 +6,8 @@ import { Header } from '@/components/header';
 import InsightsFeed from '@/components/insights-feed';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Lightbulb, Mail, TrendingUp, Users } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { BarChart3, BookOpen, Briefcase, Calendar, FileText, Lightbulb, Mail, Shield, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -51,6 +52,111 @@ export default function InsightsPage() {
 
         {/* Main Content Feed */}
         <InsightsFeed limit={100} showHeader={false} showViewAll={false} />
+
+        {/* Category Grid Section */}
+        <section className="py-16 bg-white dark:bg-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                카테고리별 인사이트 탐색
+              </h2>
+              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                관심있는 주제를 선택하여 전문적인 인사이트를 확인해보세요
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {/* 재무 설계 */}
+              <Link href="/insights?category=재무설계">
+                <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer h-full border-2 hover:border-blue-500">
+                  <CardContent className="p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
+                      <FileText className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">재무설계</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">체계적인 자산관리 전략</p>
+                  </CardContent>
+                </Card>
+              </Link>
+
+              {/* 세무 전략 */}
+              <Link href="/insights?category=세무전략">
+                <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer h-full border-2 hover:border-green-500">
+                  <CardContent className="p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
+                      <BarChart3 className="w-8 h-8 text-green-600 dark:text-green-400" />
+                    </div>
+                    <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">세무전략</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">절세와 효율적 운영</p>
+                  </CardContent>
+                </Card>
+              </Link>
+
+              {/* 가업승계 */}
+              <Link href="/insights?category=가업승계">
+                <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer h-full border-2 hover:border-purple-500">
+                  <CardContent className="p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
+                      <Briefcase className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                    </div>
+                    <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">가업승계</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">백년영속 기업 준비</p>
+                  </CardContent>
+                </Card>
+              </Link>
+
+              {/* 리스크 관리 */}
+              <Link href="/insights?category=리스크관리">
+                <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer h-full border-2 hover:border-orange-500">
+                  <CardContent className="p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
+                      <Shield className="w-8 h-8 text-orange-600 dark:text-orange-400" />
+                    </div>
+                    <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">리스크관리</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">안정적 자산 보호</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Publishing Schedule */}
+        <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white dark:bg-slate-800/50 rounded-3xl p-8 shadow-xl border border-slate-200 dark:border-slate-700">
+              <div className="flex items-start gap-6">
+                <div className="flex-shrink-0">
+                  <div className="p-4 bg-blue-100 dark:bg-blue-900/30 rounded-2xl">
+                    <Calendar className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                    정기 발행 일정
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="flex-shrink-0 w-20">
+                        <span className="inline-block px-3 py-1 bg-blue-600 text-white text-sm font-bold rounded-lg">화요일</span>
+                      </div>
+                      <p className="text-slate-700 dark:text-slate-300">재무설계 및 세무 전략</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="flex-shrink-0 w-20">
+                        <span className="inline-block px-3 py-1 bg-green-600 text-white text-sm font-bold rounded-lg">금요일</span>
+                      </div>
+                      <p className="text-slate-700 dark:text-slate-300">시장 동향 및 투자 인사이트</p>
+                    </div>
+                  </div>
+                  <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
+                    매주 2회, 검증된 전문가의 인사이트를 정기적으로 발행합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Stats Section */}
         <section className="py-24 bg-slate-50 dark:bg-slate-900/50">

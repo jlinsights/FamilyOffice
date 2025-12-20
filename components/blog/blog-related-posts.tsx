@@ -68,7 +68,7 @@ export function BlogRelatedPosts({ currentPost, maxPosts = 3 }: BlogRelatedPosts
               </Badge>
               
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-                <Link href={`/insights/market-intelligence/${post.slug}`}>
+                <Link href={`/insights/${post.slug}`}>
                   {post.title}
                 </Link>
               </h3>
@@ -105,7 +105,7 @@ export function BlogRelatedPosts({ currentPost, maxPosts = 3 }: BlogRelatedPosts
 
       <div className="text-center">
         <Button variant="outline" asChild className="rounded-xl">
-          <Link href="/insights/market-intelligence">
+          <Link href="/insights">
             더 많은 포스트 보기
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>

@@ -222,7 +222,7 @@ export const CONTENT_KEYWORD_MAPPING: ContentMapping[] = [
     priority: 'high'
   },
   {
-    url: '/insights/market-intelligence',
+    url: '/insights',
     title: '마켓 인텔리전스 | 자산관리 시장 분석',
     keywords: ['마켓 인텔리전스', '자산관리 시장분석', '투자 트렌드'],
     cluster: 'wealthManagement',

@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: InsightContentPageProps): Pro
           height: 630,
           alt: content.title,
         }] : undefined,
-        url: `${baseUrl}/insights/${source}/${slug}`,
+        url: `${baseUrl}/insights/external/${source}/${slug}`,
         siteName: 'FamilyOffice S',
         locale: 'ko_KR',
       },
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: InsightContentPageProps): Pro
         site: '@familyoffices',
       },
       alternates: {
-        canonical: `/insights/${source}/${slug}`,
+        canonical: `/insights/external/${source}/${slug}`,
       },
     };
   } catch (error) {
@@ -148,10 +148,10 @@ export default async function InsightContentPage({ params }: InsightContentPageP
       "dateModified": content.publishedAt,
       "articleSection": content.category,
       "keywords": content.tags.join(', '),
-      "url": `https://familyoffices.vip/insights/${source}/${slug}`,
+      "url": `https://familyoffices.vip/insights/external/${source}/${slug}`,
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://familyoffices.vip/insights/${source}/${slug}`
+        "@id": `https://familyoffices.vip/insights/external/${source}/${slug}`
       }
     };
 

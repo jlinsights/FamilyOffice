@@ -82,7 +82,7 @@ export function BlogContent({ className }: BlogContentProps) {
           다른 카테고리를 선택하거나 전체 포스트를 확인해보세요.
         </p>
         <Button asChild>
-          <Link href="/insights/market-intelligence">전체 포스트 보기</Link>
+          <Link href="/insights">전체 포스트 보기</Link>
         </Button>
       </div>
     );
@@ -210,7 +210,7 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
         
         {/* Title */}
         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-          <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
+          <Link href={`/insights/${post.slug}`}>{post.title}</Link>
         </h3>
         
         {/* Excerpt */}
@@ -242,7 +242,7 @@ function PostCard({ post, featured = false, animationDelay = 0 }: PostCardProps)
         
         {/* CTA Button */}
         <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl" asChild>
-          <Link href={`/insights/market-intelligence/${post.slug}`}>
+          <Link href={`/insights/${post.slug}`}>
             자세히 보기
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
@@ -287,7 +287,7 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
           
           {/* Title */}
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-            <Link href={`/insights/market-intelligence/${post.slug}`}>{post.title}</Link>
+            <Link href={`/insights/${post.slug}`}>{post.title}</Link>
           </h3>
           
           {/* Excerpt */}
@@ -307,7 +307,7 @@ function PostListItem({ post, animationDelay = 0 }: PostCardProps) {
               className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-xl" 
               asChild
             >
-              <Link href={`/insights/market-intelligence/${post.slug}`}>
+              <Link href={`/insights/${post.slug}`}>
                 자세히 보기
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>

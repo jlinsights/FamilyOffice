@@ -6,5 +6,5 @@ export default async function BlogSlugPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  redirect(`/insights/market-intelligence/${slug}`);
+  redirect(`/insights/${slug}`);
 }

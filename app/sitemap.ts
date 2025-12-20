@@ -1,5 +1,5 @@
-import { MetadataRoute } from 'next';
 import { blogCategories, blogPosts } from '@/lib/blog-data';
+import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://familyoffices.vip';
@@ -53,12 +53,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'daily' as const,
       priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/insights/market-intelligence`,
-      lastModified: currentDate,
-      changeFrequency: 'daily' as const,
-      priority: 0.8,
     },
     {
       url: `${baseUrl}/insights/weekly-brief`,
@@ -161,7 +155,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 블로그 카테고리별 페이지 추가
   const categoryPages = blogCategories.map(category => ({
-    url: `${baseUrl}/insights/market-intelligence?category=${encodeURIComponent(category.name)}`,
+    url: `${baseUrl}/insights?category=${encodeURIComponent(category.name)}`,
     lastModified: currentDate,
     changeFrequency: 'weekly' as const,
     priority: 0.6,
@@ -169,7 +163,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 개별 블로그 포스트 페이지 추가 (SEO 최적화)
   const blogPostPages = Object.values(blogPosts).map(post => ({
-    url: `${baseUrl}/insights/market-intelligence/${post.slug}`,
+    url: `${baseUrl}/insights/${post.slug}`,
     lastModified: post.lastUpdated ? new Date(post.lastUpdated) : new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,

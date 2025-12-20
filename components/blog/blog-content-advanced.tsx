@@ -183,7 +183,7 @@ export function BlogContentAdvanced({
           다른 검색어나 필터를 사용해보세요
         </p>
         <Button asChild>
-          <Link href="/insights/market-intelligence">전체 포스트 보기</Link>
+          <Link href="/insights">전체 포스트 보기</Link>
         </Button>
       </div>
     );
@@ -306,7 +306,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
       navigator.share({
         title: post.title,
         text: post.excerpt,
-        url: `/insights/market-intelligence/${post.slug}`,
+        url: `/insights/${post.slug}`,
       });
     }
   };
@@ -347,7 +347,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
             </div>
             
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
-              <Link href={`/insights/market-intelligence/${post.slug}`}>
+              <Link href={`/insights/${post.slug}`}>
                 {post.title}
               </Link>
             </h3>
@@ -435,7 +435,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
         </div>
         
         <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-          <Link href={`/insights/market-intelligence/${post.slug}`}>
+          <Link href={`/insights/${post.slug}`}>
             {post.title}
           </Link>
         </h3>

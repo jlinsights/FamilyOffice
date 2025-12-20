@@ -101,7 +101,7 @@ export function usePageKeywords(pathname: string): string[] {
       '/program': ['CEO 자산관리 교육', '차세대 경영진 교육', '패밀리오피스 세미나'],
       '/seminar': ['자산관리 세미나', '기업가 금융교육', '자산관리교육'],
       '/blog': ['자산관리 블로그', '패밀리오피스 인사이트', '투자 전략'],
-      '/insights/market-intelligence': ['마켓 인텔리전스', '자산관리 시장분석', '투자 트렌드']
+      '/insights': ['마켓 인텔리전스', '자산관리 시장분석', '투자 트렌드']
     };
 
     // 현재 경로에 맞는 키워드 설정
