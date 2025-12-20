@@ -7,16 +7,16 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
 import { BMADKeywordDashboard } from '@/components/admin/bmad-keyword-dashboard';
+import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
@@ -128,57 +128,67 @@ export default function AdminDashboard() {
       <Header />
       <div className="flex-1 p-6">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <Shield className="h-8 w-8 text-primary" />
-              <h1 className="text-3xl font-bold">관리자 대시보드</h1>
+          <div className="mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+              <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+              <h1 className="text-2xl sm:text-3xl font-bold">관리자 대시보드</h1>
             </div>
-            <Badge variant="outline" className="mb-4">
+            <Badge variant="outline" className="text-xs sm:text-sm">
               프리미엄 관리자 대시보드
             </Badge>
           </div>
 
           <Tabs defaultValue="marketing-performance" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-10">
-              <TabsTrigger value="marketing-performance" className="flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
-                마케팅 퍼포먼스
+            <TabsList className="flex flex-wrap gap-2 w-full justify-start p-1">
+              <TabsTrigger value="marketing-performance" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">마케팅 퍼포먼스</span>
+                <span className="sm:hidden">마케팅</span>
               </TabsTrigger>
-              <TabsTrigger value="performance" className="flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
-                SEO 성과
+              <TabsTrigger value="performance" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">SEO 성과</span>
+                <span className="sm:hidden">SEO</span>
               </TabsTrigger>
-              <TabsTrigger value="consultations" className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                상담 관리
+              <TabsTrigger value="consultations" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <Phone className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">상담 관리</span>
+                <span className="sm:hidden">상담</span>
               </TabsTrigger>
-              <TabsTrigger value="structure-check" className="flex items-center gap-2">
-                <ClipboardCheck className="h-4 w-4" />
-                구조 점검
+              <TabsTrigger value="structure-check" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <ClipboardCheck className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">구조 점검</span>
+                <span className="sm:hidden">구조</span>
               </TabsTrigger>
-              <TabsTrigger value="search-console" className="flex items-center gap-2">
-                <Search className="h-4 w-4" />
-                Search Console
+              <TabsTrigger value="search-console" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <Search className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden md:inline">Search Console</span>
+                <span className="md:hidden">검색</span>
               </TabsTrigger>
-              <TabsTrigger value="ai-search" className="flex items-center gap-2">
-                <Brain className="h-4 w-4" />
-                AI 검색엔진
+              <TabsTrigger value="ai-search" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <Brain className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">AI 검색엔진</span>
+                <span className="sm:hidden">AI</span>
               </TabsTrigger>
-              <TabsTrigger value="web-vitals" className="flex items-center gap-2">
-                <Gauge className="h-4 w-4" />
-                웹 성능
+              <TabsTrigger value="web-vitals" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <Gauge className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">웹 성능</span>
+                <span className="sm:hidden">성능</span>
               </TabsTrigger>
-              <TabsTrigger value="security" className="flex items-center gap-2">
-                <Shield className="h-4 w-4" />
-                보안 상태
+              <TabsTrigger value="security" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <Shield className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">보안 상태</span>
+                <span className="sm:hidden">보안</span>
               </TabsTrigger>
-              <TabsTrigger value="marketing" className="flex items-center gap-2">
-                <Target className="h-4 w-4" />
-                마케팅 자동화
+              <TabsTrigger value="marketing" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <Target className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden md:inline">마케팅 자동화</span>
+                <span className="md:hidden">자동화</span>
               </TabsTrigger>
-              <TabsTrigger value="bmad" className="flex items-center gap-2">
-                <Target className="h-4 w-4" />
-                BMAD 추적
+              <TabsTrigger value="bmad" className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm">
+                <Target className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">BMAD 추적</span>
+                <span className="sm:hidden">BMAD</span>
               </TabsTrigger>
             </TabsList>
 
