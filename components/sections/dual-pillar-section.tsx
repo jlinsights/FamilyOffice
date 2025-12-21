@@ -79,7 +79,7 @@ export function DualPillarSection() {
             </CardContent>
           </Card>
 
-          {/* Pillar 2: 승계·증여(법인명의) */}
+          {/* Pillar 2: 승계·증여 */}
           <Card className="group relative overflow-hidden transition-all duration-500 hover:shadow-2xl border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md hover:-translate-y-2">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
@@ -89,7 +89,7 @@ export function DualPillarSection() {
                   <Building className="h-7 w-7" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">승계·증여(법인명의) 설계</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">승계·증여 설계</CardTitle>
                   <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">세후 유동성 확보 + 비상장주식 가치/거버넌스 설계</p>
                 </div>
               </div>
