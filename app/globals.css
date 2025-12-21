@@ -353,6 +353,90 @@ iframe[src*='vercel.com/toolbar'] {
     }
   }
 
+  /* 🌟 Phase 1: Premium Border Glow & Shimmer Effects */
+  /* Slash.financial-inspired fintech aesthetics */
+
+  .border-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(251, 191, 36, 0.6),
+      transparent
+    );
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: borderSweep 2s linear infinite;
+    pointer-events: none;
+  }
+
+  .border-glow:hover::before {
+    opacity: 1;
+  }
+
+  .dark .border-glow::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(251, 191, 36, 0.8),
+      transparent
+    );
+  }
+
+  @keyframes borderSweep {
+    0% {
+      transform: translateX(-100%) rotate(0deg);
+    }
+    100% {
+      transform: translateX(100%) rotate(0deg);
+    }
+  }
+
+  /* Shimmer animation for premium buttons */
+  .animate-shimmer {
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  /* Gradient border for premium cards */
+  .gradient-border {
+    position: relative;
+    background:
+      linear-gradient(var(--bg-color, white), var(--bg-color, white))
+        padding-box,
+      linear-gradient(135deg, rgba(251, 191, 36, 0.5), rgba(59, 130, 246, 0.5))
+        border-box;
+    border: 1px solid transparent;
+  }
+
+  .dark .gradient-border {
+    background:
+      linear-gradient(
+          var(--bg-color, hsl(240 10% 3.9%)),
+          var(--bg-color, hsl(240 10% 3.9%))
+        )
+        padding-box,
+      linear-gradient(135deg, rgba(251, 191, 36, 0.7), rgba(59, 130, 246, 0.7))
+        border-box;
+  }
+
   /* 헤더 고정 및 채널톡 표시 개선 */
   body {
     padding-top: 64px; /* 헤더 높이만큼 padding 추가 */

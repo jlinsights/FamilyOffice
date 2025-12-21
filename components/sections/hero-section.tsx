@@ -78,7 +78,7 @@ export const HeroSection = memo(function HeroSection() {
         <div
           className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 mb-10 sm:mb-12 md:mb-14 lg:mb-20 min-h-[160px]"
         >
-          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-100">
+          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-100 border-glow">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-gold-enhanced mb-2 lg:mb-3 tabular-nums">
               <AnimatedCounter
                 end={500}
@@ -90,7 +90,7 @@ export const HeroSection = memo(function HeroSection() {
             </div>
             <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">자산관리 실적</div>
           </div>
-          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-200">
+          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-200 border-glow">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-navy-enhanced mb-2 lg:mb-3 tabular-nums">
               <AnimatedCounter
                 end={500}
@@ -104,7 +104,7 @@ export const HeroSection = memo(function HeroSection() {
               법인 고객사
             </div>
           </div>
-          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-300">
+          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-300 border-glow">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-enhanced mb-2 lg:mb-3 tabular-nums">
               <AnimatedCounter
                 end={20}
@@ -118,7 +118,7 @@ export const HeroSection = memo(function HeroSection() {
               전문 경험
             </div>
           </div>
-          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-400">
+          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-400 border-glow">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-purple-enhanced mb-2 lg:mb-3 tabular-nums">
               <AnimatedCounter
                 end={98}
