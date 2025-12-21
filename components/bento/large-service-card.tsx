@@ -82,12 +82,36 @@ export function LargeServiceCard({ service, className = '' }: LargeServiceCardPr
 
           {/* Stats (if available) */}
           {service.stats && (
-            <div className="bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-800/80 dark:to-slate-800/50 rounded-2xl p-5 mb-8 border border-slate-200 dark:border-slate-700/50">
+            <div className="bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-800/80 dark:to-slate-800/50 rounded-2xl p-5 mb-6 border border-slate-200 dark:border-slate-700/50">
               <div className="text-3xl font-black text-blue-600 dark:text-blue-400 mb-1">
                 {service.stats.value}
               </div>
               <div className="text-sm font-medium text-slate-600 dark:text-slate-400">
                 {service.stats.label}
+              </div>
+            </div>
+          )}
+
+          {/* USPs (Unique Selling Propositions) */}
+          {service.usps && service.usps.length > 0 && (
+            <div className="mb-6 space-y-2.5">
+              {service.usps.map((usp, idx) => (
+                <div key={idx} className="flex items-center text-sm font-semibold">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 mr-2.5 flex-shrink-0"></div>
+                  <span className="text-green-700 dark:text-green-400">{usp}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Proof Metric */}
+          {service.proof && (
+            <div className="flex items-center gap-3 mb-8 p-4 bg-blue-50/50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/30">
+              <div className="text-2xl font-black text-blue-600 dark:text-blue-400">
+                {service.proof.metric}
+              </div>
+              <div className="text-xs font-medium text-blue-700 dark:text-blue-300">
+                {service.proof.label}
               </div>
             </div>
           )}

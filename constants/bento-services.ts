@@ -37,6 +37,11 @@ export interface BentoService {
     label: string;
   };
   badge?: string;
+  usps?: string[];  // Unique Selling Propositions
+  proof?: {          // Social proof metrics
+    metric: string;
+    label: string;
+  };
 }
 
 /**
@@ -67,7 +72,15 @@ export const BENTO_SERVICES: BentoService[] = [
       value: '500억원+',
       label: '자산관리 실적'
     },
-    badge: 'Premium'
+    badge: 'Premium',
+    usps: [
+      '삼성생명 검증 실적',
+      '평균 15% 연수익률 달성'
+    ],
+    proof: {
+      metric: '98%',
+      label: '고객 만족도'
+    }
   },
   {
     id: 'business-succession',
@@ -89,7 +102,15 @@ export const BENTO_SERVICES: BentoService[] = [
       value: '20년+',
       label: '승계 전문 경험'
     },
-    badge: 'Expertise'
+    badge: 'Expertise',
+    usps: [
+      '평균 40% 상속세 절감',
+      '500+ 승계 성공 사례'
+    ],
+    proof: {
+      metric: '95%',
+      label: '승계 성공률'
+    }
   },
 
   // ========================================
