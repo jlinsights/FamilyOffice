@@ -28,9 +28,12 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+import { ServiceFAQ } from '@/components/faq/service-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
+import { BUSINESS_SUCCESSION_FAQS } from '@/constants/faqs';
+import { FAQSchema } from '@/lib/faq-schema';
 import { businessSuccessionHowTo } from '@/lib/seo/howto-data';
 
 
@@ -779,6 +782,19 @@ const BusinessSuccessionPage = () => {
           </div>
         </section>
       </main>
+
+      {/* FAQ Section */}
+      <ServiceFAQ 
+        faqs={BUSINESS_SUCCESSION_FAQS}
+        title="가업승계 자주 묻는 질문"
+        description="가업승계 준비 시 많이 묻는 질문들에 대한 전문가 답변입니다"
+      />
+
+      {/* FAQ Schema for SEO */}
+      <FAQSchema 
+        faqs={BUSINESS_SUCCESSION_FAQS}
+        url="https://familyoffices.vip/business-succession-strategy"
+      />
 
       <Footer />
     </div>
