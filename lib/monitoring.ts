@@ -65,7 +65,7 @@ export class ErrorMonitor {
     });
 
     // In production, send to monitoring service
-    // TODO: Integrate with Sentry, DataDog, or similar service
+    // Monitoring service integration: GitHub Issue #2
     this.sendToMonitoringService(errorInfo);
   }
 
@@ -88,7 +88,7 @@ export class ErrorMonitor {
       ...context,
     });
 
-    // TODO: Send to performance monitoring service
+    // Performance monitoring service: GitHub Issue #2
     this.sendToPerformanceService(performanceInfo);
   }
 

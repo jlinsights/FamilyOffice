@@ -3,6 +3,7 @@
  * Clerk 인증과 연동하여 관리자 권한을 검증
  */
 
+import { logger } from '@/lib/logger';
 import { auth, currentUser } from '@clerk/nextjs/server';
 
 /**
@@ -29,7 +30,10 @@ export async function checkAdminPermissions(): Promise<boolean> {
   try {
     // 개발 환경 또는 Vercel Preview 환경에서는 디버깅을 위해 권한 체크 패스
     if (process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') {
-      console.log('🔓 Admin permissions bypassed in development/preview environment');
+      logger.debug('Admin permissions bypassed in development/preview environment', {
+        component: 'admin-permissions',
+        function: 'checkAdminPermissions'
+      });
       return true;
     }
 
@@ -37,7 +41,10 @@ export async function checkAdminPermissions(): Promise<boolean> {
     const { userId } = await auth();
     
     if (!userId) {
-      console.warn('⚠️ Admin permission check failed: No authenticated user session');
+      logger.warn('Admin permission check failed: No authenticated user session', {
+        component: 'admin-permissions',
+        function: 'checkAdminPermissions'
+      });
       return false;
     }
 
@@ -45,13 +52,20 @@ export async function checkAdminPermissions(): Promise<boolean> {
     const user = await currentUser();
     
     if (!user) {
-      console.warn('⚠️ Admin permission check failed: User session exists but currentUser() returned null');
+      logger.warn('Admin permission check failed: User session exists but currentUser() returned null', {
+        component: 'admin-permissions',
+        function: 'checkAdminPermissions'
+      });
       return false;
     }
 
     // 사용자 이메일 주소 확인
     if (!user.emailAddresses || user.emailAddresses.length === 0) {
-      console.warn('⚠️ Admin permission check failed: User has no email addresses');
+      logger.warn('Admin permission check failed: User has no email addresses', {
+        component: 'admin-permissions',
+        function: 'checkAdminPermissions',
+        metadata: { userId }
+      });
       return false;
     }
 
@@ -64,22 +78,31 @@ export async function checkAdminPermissions(): Promise<boolean> {
     );
 
     if (isAdmin) {
-      console.log(`✅ Admin access granted for user: ${user.emailAddresses[0]?.emailAddress || 'unknown'}`);
+      logger.info('Admin access granted', {
+        component: 'admin-permissions',
+        function: 'checkAdminPermissions',
+        metadata: {
+          userEmail: user.emailAddresses[0]?.emailAddress || 'unknown'
+        }
+      });
     } else {
-      console.warn(`🚫 Admin access denied for user: ${user.emailAddresses[0]?.emailAddress || 'unknown'}`);
-      console.warn(`   Allowed admin emails: ${adminEmails.join(', ')}`);
+      logger.warn('Admin access denied', {
+        component: 'admin-permissions',
+        function: 'checkAdminPermissions',
+        metadata: {
+          userEmail: user.emailAddresses[0]?.emailAddress || 'unknown',
+          allowedEmails: adminEmails
+        }
+      });
     }
 
     return isAdmin;
     
   } catch (error) {
-    console.error('❌ Error checking admin permissions:', error);
-    
-    // Clerk 관련 오류인 경우 상세 로그
-    if (error instanceof Error) {
-      console.error('   Error message:', error.message);
-      console.error('   Error stack:', error.stack);
-    }
+    logger.error('Error checking admin permissions', error as Error, {
+      component: 'admin-permissions',
+      function: 'checkAdminPermissions'
+    });
     
     return false;
   }
@@ -92,7 +115,10 @@ export async function checkAdminPermissions(): Promise<boolean> {
 export async function requireAdminPermissions(): Promise<boolean> {
   // 개발 환경 또는 Preview 환경 bypass
   if (process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') {
-    console.log('🔓 Admin permissions requirement bypassed in development/preview environment');
+    logger.debug('Admin permissions requirement bypassed in development/preview environment', {
+      component: 'admin-permissions',
+      function: 'requireAdminPermissions'
+    });
     return true;
   }
 
@@ -126,7 +152,10 @@ export async function getUserRole(): Promise<'admin' | 'user' | 'anonymous'> {
     return isAdmin ? 'admin' : 'user';
     
   } catch (error) {
-    console.error('❌ Error getting user role:', error);
+    logger.error('Error getting user role', error as Error, {
+      component: 'admin-permissions',
+      function: 'getUserRole'
+    });
     return 'anonymous';
   }
 }
@@ -139,7 +168,10 @@ export async function getCurrentUserEmail(): Promise<string | null> {
     const user = await currentUser();
     return user?.emailAddresses[0]?.emailAddress || null;
   } catch (error) {
-    console.error('❌ Error getting current user email:', error);
+    logger.error('Error getting current user email', error as Error, {
+      component: 'admin-permissions',
+      function: 'getCurrentUserEmail'
+    });
     return null;
   }
 }

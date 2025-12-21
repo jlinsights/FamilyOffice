@@ -87,7 +87,7 @@ export class BMADKeywordTracker {
     endDate: Date,
     keywords: string[]
   ): Promise<Map<string, Partial<KeywordPerformance>>> {
-    // TODO: 실제 GA4 API 연동
+    // GA4 API integration: https://github.com/jlinsights/FamilyOffice/issues/6
     // const { BetaAnalyticsDataClient } = require('@google-analytics/data');
     // const analyticsDataClient = new BetaAnalyticsDataClient();
 
@@ -188,7 +188,7 @@ export class BMADKeywordTracker {
         avgBounceRate,
       });
 
-      // 트렌드 분석 (TODO: 이전 기간 데이터와 비교)
+      // Trend analysis: https://github.com/jlinsights/FamilyOffice/issues/9
       const trend: 'up' | 'down' | 'stable' = 'stable';
       const trendPercentage = 0;
 

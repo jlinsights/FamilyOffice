@@ -1,36 +1,64 @@
-// 간단한 메모리 캐시 fallback
-class SimpleMemoryCache {
-  private cache = new Map<string, { value: any; expiry: number }>();
+// 캠시 엔트리 타입 정의
+interface CacheEntry<T = unknown> {
+  value: T;
+  expiry: number;
+}
+
+// 캠시 인스턴스 인터페이스
+interface CacheInstance {
+  get<T>(key: string): T | undefined;
+  set<T>(key: string, value: T, ttlSeconds?: number): void;
+  del(key: string): void;
+  keys(): string[];
+  flushAll(): void;
+  getStats(): CacheStats;
+  mget?(keys: string[]): Record<string, unknown>;
+  mset?(pairs: Array<{ key: string; val: unknown; ttl?: number }>): boolean;
+  has?(key: string): boolean;
+}
+
+// 캠시 통계 타입
+interface CacheStats {
+  hits: number;
+  misses: number;
+  keys: number;
+  expired?: number;
+  size?: number;
+}
+
+// 간단한 메모리 캠시 fallback
+class SimpleMemoryCache implements CacheInstance {
+  private cache = new Map<string, CacheEntry>();
 
   get<T>(key: string): T | undefined {
     const item = this.cache.get(key);
     if (!item || Date.now() > item.expiry) {
-      this.cache.delete(key);
+      if (item) this.cache.delete(key);
       return undefined;
     }
-    return item.value;
+    return item.value as T;
   }
 
-  set(key: string, value: any, ttlSeconds: number = 300) {
+  set<T>(key: string, value: T, ttlSeconds: number = 300): void {
     this.cache.set(key, {
       value,
       expiry: Date.now() + ttlSeconds * 1000,
     });
   }
 
-  del(key: string) {
+  del(key: string): void {
     this.cache.delete(key);
   }
 
-  keys() {
+  keys(): string[] {
     return Array.from(this.cache.keys());
   }
 
-  flushAll() {
+  flushAll(): void {
     this.cache.clear();
   }
 
-  getStats() {
+  getStats(): CacheStats {
     const now = Date.now();
     const totalKeys = this.cache.size;
     const expiredKeys = Array.from(this.cache.entries()).filter(
@@ -110,13 +138,13 @@ export const caches = {
 };
 
 // Cache wrapper class
-export class CacheManager {
-  private cache: any;
+export class CacheManager<T = unknown> {
+  private cache: CacheInstance;
   private prefix: string;
 
-  constructor(cache: any, prefix?: string) {
+  constructor(cache: CacheInstance, prefix: string = '') {
     this.cache = cache;
-    this.prefix = prefix || '';
+    this.prefix = prefix;
   }
 
   private getKey(key: string): string {
@@ -135,7 +163,8 @@ export class CacheManager {
 
   async set<T>(key: string, value: T, ttl?: number): Promise<boolean> {
     try {
-      return this.cache.set(this.getKey(key), value, ttl);
+      this.cache.set(this.getKey(key), value, ttl);
+      return true;
     } catch (error) {
       console.error('Cache set error:', error);
       return false;
@@ -144,7 +173,8 @@ export class CacheManager {
 
   async del(key: string): Promise<number> {
     try {
-      return this.cache.del(this.getKey(key));
+      this.cache.del(this.getKey(key));
+      return 1; // Successfully deleted
     } catch (error) {
       console.error('Cache del error:', error);
       return 0;
@@ -153,7 +183,12 @@ export class CacheManager {
 
   async has(key: string): Promise<boolean> {
     try {
-      return this.cache.has(this.getKey(key));
+      if (this.cache.has) {
+        return this.cache.has(this.getKey(key));
+      }
+      // Fallback: check if get returns a value
+      const value = this.cache.get(this.getKey(key));
+      return value !== undefined;
     } catch (error) {
       console.error('Cache has error:', error);
       return false;
@@ -179,6 +214,15 @@ export class CacheManager {
 
   async mget<T>(keys: string[]): Promise<Record<string, T | undefined>> {
     try {
+      if (!this.cache.mget) {
+        // Fallback: get each key individually
+        const result: Record<string, T | undefined> = {};
+        for (const key of keys) {
+          result[key] = this.cache.get<T>(this.getKey(key));
+        }
+        return result;
+      }
+      
       const prefixedKeys = keys.map(key => this.getKey(key));
       const result = this.cache.mget(prefixedKeys);
 
@@ -202,6 +246,14 @@ export class CacheManager {
     pairs: Array<{ key: string; value: T; ttl?: number }>
   ): Promise<boolean> {
     try {
+      if (!this.cache.mset) {
+        // Fallback: set each key individually
+        for (const { key, value, ttl } of pairs) {
+          this.cache.set(this.getKey(key), value, ttl);
+        }
+        return true;
+      }
+      
       const mappedPairs = pairs.map(({ key, value, ttl }) => ({
         key: this.getKey(key),
         val: value,

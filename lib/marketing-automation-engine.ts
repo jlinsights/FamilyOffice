@@ -118,7 +118,7 @@ export class MarketingAutomationEngine {
 
       console.log(`[AutomationEngine] Rule executed successfully: ${rule.name} (${log.duration}ms)`);
 
-      // TODO: Supabase에 로그 저장
+      // Supabase logging: https://github.com/jlinsights/FamilyOffice/issues/8
       // await this.saveLogToDatabase(log);
 
       return log;
@@ -276,7 +276,7 @@ export class MarketingAutomationEngine {
 
     for (const [, rule] of this.rules) {
       if (rule.trigger.type === 'schedule' && rule.enabled) {
-        // TODO: 실제 cron 표현식 파싱 및 매칭
+        // Cron expression parsing: https://github.com/jlinsights/FamilyOffice/issues/8
         // 현재는 단순화된 로직
         if (this.shouldExecuteNow(rule.trigger.schedule, now)) {
           const log = await this.executeRule(rule.id);
@@ -292,7 +292,7 @@ export class MarketingAutomationEngine {
    * Cron 스케줄 매칭 (단순화된 버전)
    */
   private shouldExecuteNow(schedule: string, now: Date): boolean {
-    // TODO: 실제 cron-parser 라이브러리 사용
+    // Cron parser library integration: https://github.com/jlinsights/FamilyOffice/issues/8
     // 현재는 특정 패턴만 지원
 
     const schedulePatterns: Record<string, () => boolean> = {
@@ -320,10 +320,10 @@ export class MarketingAutomationEngine {
 
     this.alerts.push(alert);
 
-    // TODO: 실제 알림 전송 (이메일, Slack, Discord 등)
+    // Notification integration (Email, Slack, Discord): https://github.com/jlinsights/FamilyOffice/issues/8
     console.log(`[AutomationEngine] Alert created: ${alert.title}`);
 
-    // TODO: Supabase에 알림 저장
+    // Supabase notification storage: https://github.com/jlinsights/FamilyOffice/issues/8
     // await this.saveAlertToDatabase(alert);
 
     return alert;
@@ -449,6 +449,6 @@ export const marketingAutomationEngine = new MarketingAutomationEngine();
 
 // 기본 규칙 등록 (개발 환경)
 if (process.env.NODE_ENV === 'development') {
-  // TODO: 데이터베이스에서 규칙 로드
+  // Database rules loading: https://github.com/jlinsights/FamilyOffice/issues/8
   console.log('[AutomationEngine] Development mode: Ready to register rules');
 }

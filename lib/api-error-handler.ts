@@ -154,7 +154,7 @@ async function logError(error: Error | ApiError, context: ErrorContext): Promise
 
     // 프로덕션 환경에서는 외부 로깅 서비스로 전송
     if (process.env.NODE_ENV === 'production') {
-      // TODO: Sentry, LogRocket 등 외부 서비스로 전송
+      // External error tracking (Sentry, LogRocket): https://github.com/jlinsights/FamilyOffice/issues/7
     }
 
   } catch (loggingError) {

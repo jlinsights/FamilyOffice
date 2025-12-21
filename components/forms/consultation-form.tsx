@@ -56,7 +56,7 @@ export const ConsultationForm = memo(function ConsultationForm() {
     }
 
     try {
-      // TODO: 실제 환경에서는 Supabase에 저장
+      // Supabase integration: https://github.com/jlinsights/FamilyOffice/issues/6
       const formData = {
         name: name.trim(),
         email: email.trim(),

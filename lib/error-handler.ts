@@ -2,9 +2,9 @@
  * 글로벌 에러 핸들러 - 표준화된 에러 응답 시스템
  * 사용자 친화적 에러 메시지와 개발자 디버깅 정보 제공
  */
+import { env } from '@/lib/env';
 import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
-import { env } from '@/lib/env';
 
 // 에러 타입 정의
 export enum ErrorType {
@@ -20,13 +20,16 @@ export enum ErrorType {
   TIMEOUT = 'TIMEOUT_ERROR',
 }
 
+// Unknown error type for type-safe error handling
+type UnknownError = Error | { message?: string; code?: string; status?: number; name?: string; details?: unknown } | unknown;
+
 // 에러 상세 정보 인터페이스
 export interface ErrorDetail {
   type: ErrorType;
   message: string;
   userMessage: string; // 사용자에게 표시할 친화적 메시지
   code?: string;
-  details?: any;
+  details?: unknown;
   statusCode: number;
   timestamp: string;
   requestId?: string;
@@ -112,41 +115,45 @@ function formatZodError(error: ZodError): string[] {
 /**
  * 에러 타입 자동 감지
  */
-function detectErrorType(error: any): ErrorType {
+function detectErrorType(error: UnknownError): ErrorType {
   if (error instanceof ZodError) {
     return ErrorType.VALIDATION;
   }
   
-  if (error.name === 'UnauthorizedError' || error.status === 401) {
-    return ErrorType.AUTHENTICATION;
-  }
-  
-  if (error.name === 'ForbiddenError' || error.status === 403) {
-    return ErrorType.AUTHORIZATION;
-  }
-  
-  if (error.name === 'NotFoundError' || error.status === 404) {
-    return ErrorType.NOT_FOUND;
-  }
-  
-  if (error.status === 429) {
-    return ErrorType.RATE_LIMIT;
-  }
-  
-  if (error.status === 400) {
-    return ErrorType.BAD_REQUEST;
-  }
-  
-  if (error.name === 'TimeoutError' || error.code === 'TIMEOUT') {
-    return ErrorType.TIMEOUT;
-  }
-  
-  if (error.name === 'DatabaseError' || error.code?.startsWith('DB_')) {
-    return ErrorType.DATABASE;
-  }
-  
-  if (error.name === 'ExternalAPIError' || error.code?.startsWith('EXT_')) {
-    return ErrorType.EXTERNAL_API;
+  if (typeof error === 'object' && error !== null) {
+    const err = error as { name?: string; status?: number; code?: string };
+    
+    if (err.name === 'UnauthorizedError' || err.status === 401) {
+      return ErrorType.AUTHENTICATION;
+    }
+    
+    if (err.name === 'ForbiddenError' || err.status === 403) {
+      return ErrorType.AUTHORIZATION;
+    }
+    
+    if (err.name === 'NotFoundError' || err.status === 404) {
+      return ErrorType.NOT_FOUND;
+    }
+    
+    if (err.status === 429) {
+      return ErrorType.RATE_LIMIT;
+    }
+    
+    if (err.status === 400) {
+      return ErrorType.BAD_REQUEST;
+    }
+    
+    if (err.name === 'TimeoutError' || err.code === 'TIMEOUT') {
+      return ErrorType.TIMEOUT;
+    }
+    
+    if (err.name === 'DatabaseError' || err.code?.startsWith('DB_')) {
+      return ErrorType.DATABASE;
+    }
+    
+    if (err.name === 'ExternalAPIError' || err.code?.startsWith('EXT_')) {
+      return ErrorType.EXTERNAL_API;
+    }
   }
   
   return ErrorType.SERVER;
@@ -176,7 +183,7 @@ function getStatusCode(errorType: ErrorType): number {
  * 상세 에러 정보 생성
  */
 export function createErrorDetail(
-  error: any,
+  error: UnknownError,
   customMessage?: string,
   requestId?: string
 ): ErrorDetail {
@@ -193,16 +200,18 @@ export function createErrorDetail(
     userMessage = zodErrors.join(', ');
   }
   
+  const errorObj = error as { message?: string; code?: string; details?: unknown; stack? : string };
+  
   return {
     type: errorType,
-    message: error.message || 'Unknown error',
+    message: errorObj.message || (error instanceof Error ? error.message : 'Unknown error'),
     userMessage,
-    code: error.code,
-    details: isDev ? error.details : undefined,
+    code: errorObj.code,
+    details: isDev ? errorObj.details : undefined,
     statusCode,
     timestamp: new Date().toISOString(),
     requestId: requestId || generateRequestId(),
-    stack: isDev ? error.stack : undefined,
+    stack: isDev ? errorObj.stack : undefined,
   };
 }
 
@@ -210,7 +219,7 @@ export function createErrorDetail(
  * API 에러 응답 생성
  */
 export function createErrorResponse(
-  error: any,
+  error: UnknownError,
   customMessage?: string,
   requestId?: string
 ): NextResponse {

@@ -28,11 +28,6 @@ export function KakaoSDK({ javascriptKey, debug = false }: KakaoSDKProps) {
     if (typeof window !== 'undefined' && window.Kakao) {
       if (!window.Kakao.isInitialized()) {
         window.Kakao.init(javascriptKey);
-        
-        if (debug) {
-          console.log('✅ Kakao SDK initialized with key:', javascriptKey.substring(0, 10) + '...');
-          console.log('🔧 Kakao SDK services:', Object.keys(window.Kakao));
-        }
       }
     }
   }, [javascriptKey, debug]);
@@ -46,11 +41,6 @@ export function KakaoSDK({ javascriptKey, debug = false }: KakaoSDKProps) {
         if (window.Kakao && !window.Kakao.isInitialized()) {
           if (javascriptKey) {
             window.Kakao.init(javascriptKey);
-
-            if (debug) {
-              console.log('✅ Kakao SDK script loaded and initialized');
-              console.log('🔑 Using key:', javascriptKey.substring(0, 10) + '...');
-            }
           } else {
             console.error('❌ Kakao JavaScript Key가 설정되지 않았습니다.');
           }

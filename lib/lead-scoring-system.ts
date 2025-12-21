@@ -956,7 +956,7 @@ export class LeadScoringSystem {
 
     console.log(`[LeadScoring] Syncing lead to CRM: ${lead.email}`);
 
-    // TODO: Supabase에 저장
+    // Supabase storage: https://github.com/jlinsights/FamilyOffice/issues/6
     // await supabase.from('leads').upsert({
     //   id: lead.id,
     //   email: lead.email,
@@ -964,7 +964,7 @@ export class LeadScoringSystem {
     //   ...
     // });
 
-    // TODO: 외부 CRM API 연동 (HubSpot, Salesforce 등)
+    // CRM API integration (HubSpot, Salesforce): https://github.com/jlinsights/FamilyOffice/issues/6
     // await crmClient.createOrUpdateContact({
     //   email: lead.email,
     //   ...

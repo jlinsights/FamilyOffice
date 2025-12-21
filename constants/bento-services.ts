@@ -115,7 +115,7 @@ export const BENTO_SERVICES: BentoService[] = [
     priority: 4,
     icon: Shield,
     title: '기업보험',
-    description: '기업 리스크 관리와 임직원 복리후생을 위한 보험 솔루션입니다.',
+    description: '기업 리스크 관리와 임직원 복리후생을 위한 보험 솔루션입니다.'
     features: [
       '경영진정기보험',
       '단체보험 설계',

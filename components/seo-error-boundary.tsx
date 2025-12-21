@@ -40,7 +40,7 @@ export class SEOErrorBoundary extends React.Component<Props, State> {
 
     // In production, log to error tracking service
     if (IS_PRODUCTION) {
-      // TODO: Integrate with error tracking service (Sentry, etc.)
+      // Error tracking service integration: https://github.com/jlinsights/FamilyOffice/issues/7
       console.error('SEO component error:', {
         message: error.message,
         stack: error.stack,

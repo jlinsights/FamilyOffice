@@ -3,10 +3,26 @@
 import { currentUser } from '@clerk/nextjs/server';
 
 import { createAdminClient } from '@/lib/supabase/admin-client';
-import { Database } from '@/types/supabase';
 
 // Supabase 클라이언트 (서비스 키) - 타입 안전하게 생성
 const supabaseAdmin = createAdminClient();
+
+// 사용자 메타데이터 타입 정의
+export interface UserMetadata {
+  deleted?: boolean;
+  clerk_created_at?: number;
+  clerk_updated_at?: number;
+  [key: string]: unknown; // 추가 메타데이터
+}
+
+// 최근 사용자 정보 타입
+export interface RecentUser {
+  id: string;
+  is_admin: boolean;
+  created_at: string;
+  last_sign_in_at: string | null;
+  metadata: UserMetadata;
+}
 
 // 사용자 타입 정의
 export interface SyncedUser {
@@ -22,7 +38,7 @@ export interface SyncedUser {
   created_at: string;
   updated_at: string;
   last_sign_in_at?: string;
-  metadata: Record<string, any>;
+  metadata: UserMetadata;
 }
 
 /**
@@ -193,7 +209,7 @@ export async function getUserStats(): Promise<{
   admins: number;
   active: number;
   deleted: number;
-  recent: any[];
+  recent: RecentUser[];
 }> {
   try {
     const { data, error } = await supabaseAdmin

@@ -3,7 +3,7 @@
  * 캘린더 기반 자동 게시, 승인 워크플로우, SEO 메타데이터 자동 설정, 소셜 미디어 연동
  */
 
-import { generateContentCalendar, ContentCalendarItem } from './seo/inbound-marketing-automation';
+import { ContentCalendarItem, generateContentCalendar } from './seo/inbound-marketing-automation';
 
 export type ContentStatus = 'draft' | 'pending_approval' | 'approved' | 'scheduled' | 'published' | 'failed' | 'archived';
 export type ContentType = 'blog' | 'case-study' | 'guide' | 'whitepaper' | 'news' | 'tutorial';
@@ -207,7 +207,7 @@ export class ContentAutoPublisher {
 
     console.log(`[ContentPublisher] Approval requested: ${content.title} → ${approver}`);
 
-    // TODO: 승인자에게 이메일 알림 전송
+    // Email notification integration: https://github.com/jlinsights/FamilyOffice/issues/6
     // await this.sendApprovalNotification(approver, content);
 
     return approvalRequest;
@@ -345,10 +345,10 @@ export class ContentAutoPublisher {
       content.publishedDate = new Date();
       this.contents.set(contentId, content);
 
-      // TODO: 실제 CMS/블로그 플랫폼에 게시
+      // CMS integration: https://github.com/jlinsights/FamilyOffice/issues/6
       // await this.publishToCMS(content);
 
-      // TODO: Supabase에 저장
+      // Database persistence: https://github.com/jlinsights/FamilyOffice/issues/6
       // await this.saveToDatabase(content);
 
       const publishedUrl = this.generatePublishedUrl(content.slug);
@@ -483,7 +483,7 @@ export class ContentAutoPublisher {
       const post = this.generateSocialPost(content, platform);
       posts.push(post);
 
-      // TODO: 실제 소셜 미디어 API 연동
+      // Social media API integration: https://github.com/jlinsights/FamilyOffice/issues/6
       // await this.publishToSocialMedia(post);
     }
 
@@ -781,7 +781,7 @@ export class ContentAutoPublisher {
     console.log(`URL: ${url}`);
     console.log(`Recipients: ${this.config.notificationEmails.join(', ')}`);
 
-    // TODO: 실제 이메일 전송
+    // Email service integration: https://github.com/jlinsights/FamilyOffice/issues/6
     // await sendEmail({
     //   to: this.config.notificationEmails,
     //   subject: `콘텐츠 게시 완료: ${content.title}`,

@@ -292,7 +292,7 @@ ${JSON.stringify(event.additional_data || {}, null, 2)}
 FamilyOffice 보안 시스템
 `;
 
-    // TODO: SMTP 이메일 전송 구현
+    // SMTP email implementation: https://github.com/jlinsights/FamilyOffice/issues/6
     console.log('[EMAIL ALERT] Would send email:', {
       to: adminEmail,
       subject: `🚨 [${event.severity.toUpperCase()}] 보안 경고`,
@@ -324,7 +324,7 @@ async function sendSMSAlert(event: SecurityEvent, ip: string, alertMessage: stri
 
     const smsMessage = `🚨 FamilyOffice 보안 경고\n${event.description}\nIP: ${ip}\n시간: ${new Date().toLocaleString('ko-KR')}\n즉시 확인 필요`;
 
-    // TODO: SMS API 호출 (Twilio, AWS SNS 등)
+    // SMS API integration (Twilio, AWS SNS): https://github.com/jlinsights/FamilyOffice/issues/6
     console.log('[SMS ALERT] Would send SMS:', {
       to: adminPhone,
       message: smsMessage

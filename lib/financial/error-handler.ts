@@ -93,7 +93,7 @@ function structuredLog(
 
   // 프로덕션 환경에서는 외부 로깅 서비스로 전송
   if (process.env.NODE_ENV === 'production' && level === LogLevel.ERROR) {
-    // TODO: 외부 로깅 서비스 (예: DataDog, Sentry) 연동
+    // External logging service integration: https://github.com/jlinsights/FamilyOffice/issues/7
     sendToExternalLogging(logEntry);
   }
 }
@@ -241,7 +241,7 @@ async function sendCriticalAlert(
     // 실제 구현에서는 알림 서비스 (예: Slack, PagerDuty) 연동
     console.error('🚨 치명적 오류 알림:', JSON.stringify(alertData, null, 2));
 
-    // TODO: 실제 알림 서비스 연동
+    // Notification service integration: https://github.com/jlinsights/FamilyOffice/issues/6
     // await sendSlackAlert(alertData)
     // await sendPagerDutyAlert(alertData)
   } catch (alertError) {

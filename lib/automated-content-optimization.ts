@@ -1,3 +1,15 @@
+import type {
+    ABTestConfiguration,
+    ContentQuality,
+    ConversionOptimization,
+    GeneratedContent,
+    HistoricalPerformance,
+    IntentBasedOptimizations,
+    SEOOptimization,
+    SeasonalSchedule,
+    SeasonalUpdate,
+    UserIntentAnalysis,
+} from './types/content-optimization';
 
 interface ContentAnalysis {
   contentId: string;
@@ -135,8 +147,8 @@ interface PerformanceTarget {
 export class AutomatedContentOptimization {
   private contentDatabase = new Map<string, ContentAnalysis>();
   private optimizationHistory = new Map<string, OptimizationStrategy[]>();
-  private performanceTracking = new Map<string, any[]>();
-  private aiContentModels = new Map<string, any>();
+  private performanceTracking = new Map<string, HistoricalPerformance[]>();
+  private aiContentModels = new Map<string, GeneratedContent>();
 
   // 메인 콘텐츠 최적화 엔진
   async optimizeContent(
@@ -697,7 +709,7 @@ export class AutomatedContentOptimization {
     console.log('Performance tracking setup:', trackingConfig);
   }
 
-  private getHistoricalPerformance(url: string): any {
+  private getHistoricalPerformance(url: string): HistoricalPerformance {
     // 과거 성과 데이터 반환
     return {
       traffic: [1000, 1100, 950, 1200],
@@ -723,7 +735,7 @@ export class AutomatedContentOptimization {
     targetKeywords: string[],
     contentType: string,
     targetAudience: string
-  ): Promise<any> {
+  ): Promise<GeneratedContent> {
     // AI 기반 콘텐츠 생성
     return {
       title: `${targetKeywords[0]} - 전문가 가이드`,
@@ -742,7 +754,7 @@ export class AutomatedContentOptimization {
     };
   }
 
-  private async applySEOOptimization(content: any, targetKeywords: string[], domain: string): Promise<any> {
+  private async applySEOOptimization(content: GeneratedContent, targetKeywords: string[], domain: string): Promise<SEOOptimization> {
     return {
       titleTags: targetKeywords.map(k => `${k} | ${domain}`),
       metaTags: {
@@ -761,7 +773,7 @@ export class AutomatedContentOptimization {
     };
   }
 
-  private async calculateContentQuality(content: any, targetKeywords: string[]): Promise<any> {
+  private async calculateContentQuality(content: GeneratedContent, targetKeywords: string[]): Promise<ContentQuality> {
     return {
       readability: 85,
       seoOptimization: 90,
@@ -770,7 +782,7 @@ export class AutomatedContentOptimization {
     };
   }
 
-  private async startABTestMonitoring(testConfiguration: any): Promise<void> {
+  private async startABTestMonitoring(testConfiguration: ABTestConfiguration): Promise<void> {
     // A/B 테스트 모니터링 시작
     console.log('A/B test monitoring started:', testConfiguration.testId);
   }
@@ -794,7 +806,7 @@ export class AutomatedContentOptimization {
     return seasonalMap[season as keyof typeof seasonalMap] || [];
   }
 
-  private async generateSeasonalUpdates(season: string, keywords: string[]): Promise<any[]> {
+  private async generateSeasonalUpdates(season: string, keywords: string[]): Promise<SeasonalUpdate[]> {
     return [
       {
         url: '/services',
@@ -805,7 +817,7 @@ export class AutomatedContentOptimization {
     ];
   }
 
-  private createSeasonalSchedule(): any[] {
+  private createSeasonalSchedule(): SeasonalSchedule[] {
     return [
       {
         date: '2024-03-01',
@@ -815,7 +827,7 @@ export class AutomatedContentOptimization {
     ];
   }
 
-  private async analyzeUserIntent(url: string, stage: string): Promise<any> {
+  private async analyzeUserIntent(url: string, stage: string): Promise<UserIntentAnalysis> {
     return {
       detectedIntent: 'informational',
       confidence: 85,
@@ -823,7 +835,7 @@ export class AutomatedContentOptimization {
     };
   }
 
-  private async generateIntentBasedOptimizations(intentAnalysis: any): Promise<any> {
+  private async generateIntentBasedOptimizations(intentAnalysis: UserIntentAnalysis): Promise<IntentBasedOptimizations> {
     return {
       contentStructure: ['명확한 정보 제공', '단계별 가이드'],
       callToActions: ['더 알아보기', '전문가 상담'],
@@ -832,7 +844,7 @@ export class AutomatedContentOptimization {
     };
   }
 
-  private async optimizeForConversion(intentAnalysis: any, stage: string): Promise<any> {
+  private async optimizeForConversion(intentAnalysis: UserIntentAnalysis, stage: string): Promise<ConversionOptimization> {
     return {
       recommendations: ['명확한 가치 제안', '신뢰성 신호 강화'],
       expectedLift: 15,

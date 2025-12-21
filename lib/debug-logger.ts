@@ -6,46 +6,49 @@
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isServer = typeof window === 'undefined';
 
+// Type-safe logger arguments
+type LogArgs = unknown[];
+
 export const logger = {
-  log: (...args: any[]) => {
+  log: (...args: LogArgs) => {
     if (isDevelopment) {
       console.log(...args);
     }
   },
   
-  error: (...args: any[]) => {
+  error: (...args: LogArgs) => {
     if (isDevelopment) {
       console.error(...args);
     }
   },
   
-  warn: (...args: any[]) => {
+  warn: (...args: LogArgs) => {
     if (isDevelopment) {
       console.warn(...args);
     }
   },
   
-  info: (...args: any[]) => {
+  info: (...args: LogArgs) => {
     if (isDevelopment) {
       console.info(...args);
     }
   },
   
-  debug: (...args: any[]) => {
+  debug: (...args: LogArgs) => {
     if (isDevelopment) {
       console.debug(...args);
     }
   },
   
   // Server-only logging
-  server: (...args: any[]) => {
+  server: (...args: LogArgs) => {
     if (isDevelopment && isServer) {
       console.log('[SERVER]', ...args);
     }
   },
   
   // Client-only logging
-  client: (...args: any[]) => {
+  client: (...args: LogArgs) => {
     if (isDevelopment && !isServer) {
       console.log('[CLIENT]', ...args);
     }
@@ -68,7 +71,7 @@ export const logger = {
   },
   
   // Security logging (always log in production for audit)
-  security: (...args: any[]) => {
+  security: (...args: LogArgs) => {
     // Always log security events
     console.log('[SECURITY]', ...args);
   }
