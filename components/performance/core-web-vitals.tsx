@@ -168,8 +168,7 @@ export default function CoreWebVitals() {
       document.head.appendChild(link);
     };
 
-    // 중요 폰트 프리로드
-    addPreloadLink('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', 'style');
+    // Fonts are handled by next/font/google - no manual preload needed
     
     // 중요 CSS 프리로드
     if (document.querySelector('link[href*="/globals.css"]')) {
