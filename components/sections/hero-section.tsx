@@ -59,7 +59,7 @@ export const HeroSection = memo(function HeroSection() {
         <p
           className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-backwards"
         >
-          대한민국 0.1%를 위한
+          대한민국 1%를 위한
           <span className="block mt-1 font-light text-muted-foreground">
             프라이빗 패밀리 오피스
           </span>
