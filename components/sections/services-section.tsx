@@ -49,7 +49,7 @@ export function ServicesSection() {
             className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed animate-slide-up font-light"
             style={{ animationDelay: '100ms' }}
           >
-            최고 자산가와 성공한 기업가를 위한 <span className="font-semibold text-blue-700 dark:text-blue-400">프리미엄 서비스 포트폴리오</span>로<br className="hidden sm:block" /> 세대를 잇는 자산관리를 실현합니다
+            법인 자산 관리 및 가업승계 전문 <span className="font-semibold text-blue-700 dark:text-blue-400">프리미엄 서비스 포트폴리오</span>로<br className="hidden sm:block" /> 세대를 잇는 자산관리를 실현합니다
           </p>
         </Reveal>
 

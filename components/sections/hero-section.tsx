@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 import { ArrowDown, Crown } from 'lucide-react';
 
@@ -14,15 +14,30 @@ import { AnimatedCounter } from '@/components/animated-counter';
 export const HeroSection = memo(function HeroSection() {
   const router = useRouter();
   const [startAnimation, setStartAnimation] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 컴포넌트가 마운트된 후 애니메이션 시작
-    const timer = setTimeout(() => {
-      setStartAnimation(true);
-    }, 500); // 500ms 지연 후 애니메이션 시작
+    // Intersection Observer로 통계 섹션이 보일 때 애니메이션 시작
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry && entry.isIntersecting && !startAnimation) {
+          setStartAnimation(true);
+        }
+      },
+      { threshold: 0.3 } // 30% 보일 때 트리거
+    );
 
-    return () => clearTimeout(timer);
-  }, []);
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => {
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current);
+      }
+    };
+  }, [startAnimation]);
 
   return (
     <section
@@ -59,7 +74,7 @@ export const HeroSection = memo(function HeroSection() {
         <p
           className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-backwards"
         >
-          대한민국 1%를 위한
+          성공한 기업가와 자산가를 위한
           <span className="block mt-1 font-light text-muted-foreground">
             프라이빗 패밀리 오피스
           </span>
@@ -76,7 +91,8 @@ export const HeroSection = memo(function HeroSection() {
 
         {/* 핵심 성과 지표 */}
         <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 mb-10 sm:mb-12 md:mb-14 lg:mb-20 min-h-[160px]"
+          ref={statsRef}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mb-10 sm:mb-12 md:mb-14 lg:mb-20 min-h-[160px]"
         >
           <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-100 border-glow">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-gold-enhanced mb-2 lg:mb-3 tabular-nums">
@@ -144,7 +160,7 @@ export const HeroSection = memo(function HeroSection() {
             className="interaction-ready px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-colors duration-200"
             onClick={() => router.push('/structure-check#request-form')}
           >
-            이 문제, 혼자 판단하셔도 되는 단계인가요?
+            전문가 상담 예약
           </Button>
           <Button
             size="lg"
@@ -157,7 +173,7 @@ export const HeroSection = memo(function HeroSection() {
               });
             }}
           >
-            통합 자산관리 솔루션 알아보기
+            서비스 솔루션 보기
           </Button>
         </div>
 

@@ -234,7 +234,7 @@ export default function RootLayout({
               "priceRange": "₩₩₩₩",
               "targetAudience": {
                 "@type": "Audience",
-                "audienceType": "성공한 법인 대표",
+                "audienceType": "성공한 기업가와 자산가",
                 "geographicArea": "대한민국"
               },
               "knowsAbout": [
