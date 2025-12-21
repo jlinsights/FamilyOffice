@@ -13,6 +13,7 @@ import {
 
 import Link from 'next/link';
 
+import { Reveal, StaggerContainer } from '@/components/animations/reveal';
 import { Badge } from '@/components/ui/badge';
 import {
     Card,
@@ -55,7 +56,7 @@ export function ServicesSection() {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-400/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="container relative z-10">
-        <div className="text-center mb-16">
+        <Reveal className="text-center mb-16">
           <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-6 shadow-sm animate-fade-in">
             <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full mr-2">Premium</span>
             <span className="text-sm text-slate-600 dark:text-slate-300 pr-2 flex items-center">
@@ -77,65 +78,68 @@ export function ServicesSection() {
           >
             최고 자산가와 성공한 기업가를 위한 <span className="font-semibold text-blue-700 dark:text-blue-400">프리미엄 서비스 포트폴리오</span>로<br className="hidden sm:block" /> 세대를 잇는 자산관리를 실현합니다
           </p>
-        </div>
+        </Reveal>
 
         {/* 서비스 카테고리 그리드 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <StaggerContainer
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+          staggerDelay={0.1}
+        >
           {mainPageServices.map((service, index) => (
-            <Link
-              key={service.id}
-              href={`/solutions#${service.id}`}
-              className="block group"
-            >
-              <Card
-                className="h-full relative overflow-hidden transition-all duration-500 hover:shadow-2xl border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md animate-slide-up hover:-translate-y-2"
-                style={{ animationDelay: `${index * 100}ms` }}
+            <Reveal key={service.id}>
+              <Link
+                href={`/solutions#${service.id}`}
+                className="block group"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                <CardHeader className="relative pb-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-slate-100 dark:border-slate-700">
-                      <service.icon className="h-6 w-6 text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
+                <Card
+                  className="h-full relative overflow-hidden transition-all duration-500 hover:shadow-2xl border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md hover:-translate-y-2"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <CardHeader className="relative pb-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="h-12 w-12 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-slate-100 dark:border-slate-700">
+                        <service.icon className="h-6 w-6 text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
+                      </div>
+                      <Badge
+                        variant="secondary"
+                        className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-300"
+                      >
+                        {service.serviceCount}개 서비스
+                      </Badge>
                     </div>
-                    <Badge
-                      variant="secondary"
-                      className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-300"
-                    >
-                      {service.serviceCount}개 서비스
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-300">
-                    {service.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-2 line-clamp-2">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="relative pt-0">
-                  <div className="space-y-2.5 mb-6">
-                    {service.keyFeatures.slice(0, 3).map((feature, idx) => (
-                      <div key={idx} className="flex items-center text-sm text-slate-600 dark:text-slate-400">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500/50 mr-2.5 flex-shrink-0 group-hover:bg-blue-500 transition-colors duration-300"></div>
-                        <span className="group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors duration-300">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                    {service.keyFeatures.length > 3 && (
-                      <div className="flex items-center text-sm text-slate-400 dark:text-slate-500 pl-4">
-                        +{service.keyFeatures.length - 3}개 더보기
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex items-center text-sm font-bold text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    자세히 보기 <ArrowRight className="h-4 w-4 ml-1" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+                    <CardTitle className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-300">
+                      {service.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-2 line-clamp-2">
+                      {service.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="relative pt-0">
+                    <div className="space-y-2.5 mb-6">
+                      {service.keyFeatures.slice(0, 3).map((feature, idx) => (
+                        <div key={idx} className="flex items-center text-sm text-slate-600 dark:text-slate-400">
+                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500/50 mr-2.5 flex-shrink-0 group-hover:bg-blue-500 transition-colors duration-300"></div>
+                          <span className="group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors duration-300">
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                      {service.keyFeatures.length > 3 && (
+                        <div className="flex items-center text-sm text-slate-400 dark:text-slate-500 pl-4">
+                          +{service.keyFeatures.length - 3}개 더보기
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center text-sm font-bold text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      자세히 보기 <ArrowRight className="h-4 w-4 ml-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Reveal>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* 통계 섹션 */}
         <div className="relative rounded-3xl p-10 mb-20 overflow-hidden bg-slate-900 dark:bg-slate-950 text-white shadow-2xl">
