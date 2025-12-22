@@ -1,7 +1,7 @@
 import {
-    InheritanceIcon,
-    TaxLegalIcon,
-    WealthManagementIcon,
+  InheritanceIcon,
+  TaxLegalIcon,
+  WealthManagementIcon,
 } from '@/components/icons/service-icons';
 
 import { NavigationItem, ServiceItem } from '@/types/globals';
@@ -10,58 +10,7 @@ import { NavigationItem, ServiceItem } from '@/types/globals';
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/about', label: '소개' },
   { href: '/program', label: '프로그램' },
-  { 
-    href: '/solutions', 
-    label: '솔루션',
-    submenu: [
-      {
-        href: '/tax-strategy',
-        label: '절세의 미학',
-        description: '체계적인 법인세·소득세·상속세 절세 전략'
-      },
-      {
-        href: '/ceo-checklist',
-        label: 'CEO 경영진단',
-        description: '5대 핵심영역 자가진단 및 맞춤형 솔루션'
-      },
-      {
-        href: '/corporate-tax-checklist',
-        label: '법인세 결산 체크리스트',
-        description: '결산 후 필수 점검 포인트 완벽 가이드'
-      },
-      {
-        href: '/hr-labor-management',
-        label: '인사노무 관리 가이드',
-        description: '6개 영역 36개 항목 인사노무 완벽 체크리스트'
-      },
-      {
-        href: '/business-succession-strategy',
-        label: '전략적 가업승계',
-        description: '체계적인 승계 전략으로 상속세 50% 절감과 경영권 안정화'
-      },
-      {
-        href: '/inheritance-gift-tax',
-        label: '상속·증여세 가이드',
-        description: '국세청 공식 자료 기반 상속·증여세 완벽 해설과 절세 전략'
-      },
-      {
-        href: '/family-office-center',
-        label: '패밀리오피스 센터',
-        description: '최고 자산가와 성공한 기업가를 위한 차별화된 전용 솔루션'
-      },
-      {
-        href: '/fp-center',
-        label: 'FP센터',
-        description: '전문 Financial Planner와 함께하는 종합 재무설계 서비스'
-      },
-      {
-        href: '/wealth-consulting',
-        label: '통합 자산관리',
-        description: '자산 전체를 아우르는 통합적 관리 전략'
-      },
-      // 중복 항목 제거됨: 상속·증여 설계, 세무·법률 자문은 상단 항목과 중복
-    ]
-  },
+  { href: '/solutions', label: '솔루션' },
   { href: '/insights', label: '인사이트' },
   { href: '/calculators', label: '계산기' },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
