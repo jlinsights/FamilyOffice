@@ -2,7 +2,6 @@ import {
     BrainCircuit,
     Building,
     Calculator,
-    ClipboardCheck,
     Cpu,
     FileText,
     Gavel,
@@ -680,6 +679,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: Shield,
     services: [
       {
+        title: '가지급금 해결 방안',
+        description: '가지급금 문제의 근본적 해결과 재발 방지 시스템 구축',
+        features: [
+          '가지급금 현황 정밀 분석',
+          '단계별 정리 계획 수립',
+          '세무상 불이익 최소화 방안',
+          '내부통제 시스템 구축',
+        ],
+        benefits: [
+          '세무조사 리스크 해소',
+          '재무건전성 회복',
+          '금융기관 신용도 개선',
+          '경영 투명성 확보',
+        ],
+        targetClient: '가지급금 문제로 고민하는 중소기업',
+        caseStudy: {
+          situation: 'IT기업 R사, 대표이사 가지급금 8억원으로 세무리스크 상존',
+          solution: '3년 단계별 정리계획 수립, 급여/배당 조정, 내부통제 강화',
+          result: '가지급금 완전 정리, 의제배당 회피로 2억원 절세',
+        },
+      },
+      {
         title: '법인종합재무 컨설팅',
         description: '기업의 재무전략 수립부터 실행까지 종합 컨설팅',
         features: [
@@ -1094,36 +1115,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         targetClient: 'M&A를 고려하는 중소중견기업',
       },
-    ],
-  },
-  {
-    id: 'finance-tax-labor',
-    title: '재무·세무·노무 통합관리',
-    description: '가지급금 해결부터 고용지원금, 경정청구까지 통합 솔루션',
-    icon: ClipboardCheck,
-    services: [
-      {
-        title: '가지급금 해결 방안',
-        description: '가지급금 문제의 근본적 해결과 재발 방지 시스템 구축',
-        features: [
-          '가지급금 현황 정밀 분석',
-          '단계별 정리 계획 수립',
-          '세무상 불이익 최소화 방안',
-          '내부통제 시스템 구축',
-        ],
-        benefits: [
-          '세무조사 리스크 해소',
-          '재무건전성 회복',
-          '금융기관 신용도 개선',
-          '경영 투명성 확보',
-        ],
-        targetClient: '가지급금 문제로 고민하는 중소기업',
-        caseStudy: {
-          situation: 'IT기업 R사, 대표이사 가지급금 8억원으로 세무리스크 상존',
-          solution: '3년 단계별 정리계획 수립, 급여/배당 조정, 내부통제 강화',
-          result: '가지급금 완전 정리, 의제배당 회피로 2억원 절세',
-        },
-      }
     ],
   },
 ];
