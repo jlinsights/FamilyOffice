@@ -3,7 +3,6 @@ import {
     Building,
     Calculator,
     Cpu,
-    FileText,
     Gavel,
     Hammer,
     HandshakeIcon,
@@ -430,9 +429,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     ]
   },
   {
-    id: 'corporate-governance',
-    title: '법인 지배구조 & 컨설팅',
-    description: '정관 설계부터 임원 운영까지 법인 경영의 모든 영역',
+    id: 'corporate-structure-governance',
+    title: '법인 구조 & 지배구조',
+    description: '법인설립부터 지배구조 설계, 정관/배당까지 기업 지배 전반',
     icon: Gavel,
     services: [
       {
@@ -488,6 +487,42 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           solution: '차등의결권 도입 및 배당정책 최적화를 통한 정관 전면 개정',
           result: '승계과정에서 30% 세무비용 절감 및 경영권 안정화 달성',
         },
+      },
+      {
+        title: '법인설립등기 및 사업자등록 실무',
+        description: '법인설립부터 각종 인허가까지 원스톱 서비스',
+        features: [
+          '법인설립 등기',
+          '사업자등록 신청',
+          '각종 인허가 신청',
+          '설립 후 세무신고',
+        ],
+        benefits: ['신속한 사업 시작', '법적 리스크 최소화', '행정업무 효율화'],
+        targetClient: '법인설립을 준비하는 예비창업자',
+      },
+      {
+        title: '스톡옵션 설계',
+        description: '핵심인재 유지를 위한 효과적인 스톡옵션 제도 설계',
+        features: [
+          '스톡옵션 제도 설계',
+          '세무 최적화 방안',
+          '계약서 작성',
+          '운영 지원',
+        ],
+        benefits: ['핵심인재 retention', '세무 효율성', '동기부여 효과'],
+        targetClient: '핵심인재 확보가 중요한 성장기업',
+      },
+      {
+        title: '유상증자 컨설팅',
+        description: '유상증자를 통한 자금조달 및 자본구조 개선',
+        features: [
+          '증자 방식 결정',
+          '주주총회 결의',
+          '증자 실행',
+          '등기 및 신고',
+        ],
+        benefits: ['자금조달 성공', '자본구조 개선', '재무 안정성 확보'],
+        targetClient: '자금조달이 필요한 성장기업',
       },
     ],
   },
@@ -673,9 +708,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     ],
   },
   {
-    id: 'asset-management',
-    title: '자산관리 & 구조화',
-    description: '가지급금부터 자기주식까지 기업자산 통합 관리',
+    id: 'asset-wealth-management',
+    title: '자산관리 & 부유층 솔루션',
+    description: '가지급금 구조화부터 고액자산가 관리까지 종합 자산관리',
     icon: Shield,
     services: [
       {
@@ -735,6 +770,43 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         benefits: ['법적 리스크 해소', '경영권 안정화', '세무 투명성 확보'],
         targetClient: '차명주식 문제를 해결해야 하는 기업',
+      },
+      {
+        title: '고액자산가 자산관리',
+        description: '100억원 이상 고액자산가를 위한 종합 자산관리 서비스',
+        features: [
+          '개인별 맞춤형 포트폴리오 구성',
+          '글로벌 자산 배분 전략',
+          '세무 최적화 방안',
+          '위험 관리 솔루션',
+        ],
+        benefits: [
+          '체계적인 자산 보전',
+          '수익성 극대화',
+          '세무 효율성 제고',
+        ],
+        targetClient: '100억원 이상 고액자산가',
+        caseStudy: {
+          situation: '제조업 오너 D씨, 500억원 자산의 체계적 관리 필요',
+          solution: '글로벌 자산배분, 세무최적화, 리스크헤지를 통한 통합 자산관리',
+          result: '연 15% 수익률 달성, 세금 부담 30% 절감',
+        },
+      },
+      {
+        title: '부유층 자산관리 컨설팅',
+        description: '중상류층을 위한 전문적이고 체계적인 자산관리 컨설팅',
+        features: [
+          '자산 규모별 맞춤 전략',
+          '다양한 투자 상품 포트폴리오',
+          '세대간 자산 승계 설계',
+          '정기적인 자산 점검',
+        ],
+        benefits: [
+          '안정적인 자산 증식',
+          '리스크 분산',
+          '승계 준비',
+        ],
+        targetClient: '50억원 이상 중상류층',
       },
     ],
   },
@@ -815,50 +887,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     ],
   },
   {
-    id: 'corporate-structure',
-    title: '법인구조 & 등기실무',
-    description: '법인설립부터 구조변경까지 기업 생애주기 전반',
-    icon: FileText,
-    services: [
-      {
-        title: '법인설립등기 및 사업자등록 실무',
-        description: '법인설립부터 각종 인허가까지 원스톱 서비스',
-        features: [
-          '법인설립 등기',
-          '사업자등록 신청',
-          '각종 인허가 신청',
-          '설립 후 세무신고',
-        ],
-        benefits: ['신속한 사업 시작', '법적 리스크 최소화', '행정업무 효율화'],
-        targetClient: '법인설립을 준비하는 예비창업자',
-      },
-      {
-        title: '스톡옵션 설계',
-        description: '핵심인재 유지를 위한 효과적인 스톡옵션 제도 설계',
-        features: [
-          '스톡옵션 제도 설계',
-          '세무 최적화 방안',
-          '계약서 작성',
-          '운영 지원',
-        ],
-        benefits: ['핵심인재 retention', '세무 효율성', '동기부여 효과'],
-        targetClient: '핵심인재 확보가 중요한 성장기업',
-      },
-      {
-        title: '유상증자 컨설팅',
-        description: '유상증자를 통한 자금조달 및 자본구조 개선',
-        features: [
-          '증자 방식 결정',
-          '주주총회 결의',
-          '증자 실행',
-          '등기 및 신고',
-        ],
-        benefits: ['자금조달 성공', '자본구조 개선', '재무 안정성 확보'],
-        targetClient: '자금조달이 필요한 성장기업',
-      },
-    ],
-  },
-  {
     id: 'analysis-planning',
     title: '분석기획 & 전략수립',
     description: '데이터 기반 의사결정과 미래전략 수립',
@@ -915,51 +943,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         benefits: ['성공적 M&A 실행', '거래가격 최적화', '리스크 최소화'],
         targetClient: 'M&A를 추진하는 기업',
-      },
-    ],
-  },
-  {
-    id: 'wealth-management',
-    title: '고액자산가 & 부유층 관리',
-    description: '고액자산가를 위한 전문적인 자산관리 및 부유층 맞춤 서비스',
-    icon: TrendingUp,
-    services: [
-      {
-        title: '고액자산가 자산관리',
-        description: '100억원 이상 고액자산가를 위한 종합 자산관리 서비스',
-        features: [
-          '개인별 맞춤형 포트폴리오 구성',
-          '글로벌 자산 배분 전략',
-          '세무 최적화 방안',
-          '위험 관리 솔루션',
-        ],
-        benefits: [
-          '체계적인 자산 보전',
-          '수익성 극대화',
-          '세무 효율성 제고',
-        ],
-        targetClient: '100억원 이상 고액자산가',
-        caseStudy: {
-          situation: '제조업 오너 D씨, 500억원 자산의 체계적 관리 필요',
-          solution: '글로벌 자산배분, 세무최적화, 리스크헤지를 통한 통합 자산관리',
-          result: '연 15% 수익률 달성, 세금 부담 30% 절감',
-        },
-      },
-      {
-        title: '부유층 자산관리 컨설팅',
-        description: '중상류층을 위한 전문적이고 체계적인 자산관리 컨설팅',
-        features: [
-          '자산 규모별 맞춤 전략',
-          '다양한 투자 상품 포트폴리오',
-          '세대간 자산 승계 설계',
-          '정기적인 자산 점검',
-        ],
-        benefits: [
-          '안정적인 자산 증식',
-          '리스크 분산',
-          '승계 준비',
-        ],
-        targetClient: '50억원 이상 중상류층',
       },
     ],
   },
