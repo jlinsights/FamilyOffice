@@ -87,9 +87,9 @@ export const BENTO_SERVICES: BentoService[] = [
     size: 'large',
     priority: 2,
     icon: Target,
-    title: '가업승계',
-    tagline: '전략적 가업승계 설계',
-    description: '가업을 다음 세대로 안정적으로 승계하기 위한 종합 전략을 수립하고, 상속세 부담을 최소화하는 최적의 솔루션을 제공합니다.',
+    title: '기업승계',
+    tagline: '전략적 기업승계 설계',
+    description: '기업을 다음 세대로 안정적으로 승계하기 위한 종합 전략. 친족승계, M&A, 제3자 승계 등 다양한 경로를 통해 상속세 부담을 최소화하는 최적의 솔루션을 제공합니다.',
     features: [
       '5단계 승계 로드맵',
       '상속세 최적화 전략',

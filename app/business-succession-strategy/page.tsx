@@ -37,7 +37,7 @@ import { FAQSchema } from '@/lib/faq-schema';
 import { businessSuccessionHowTo } from '@/lib/seo/howto-data';
 
 
-// 5단계 가업승계 로드맵
+// 5단계 기업승계 로드맵
 const successionRoadmap = [
   {
     phase: 1,
@@ -302,13 +302,13 @@ const BusinessSuccessionPage = () => {
             </Badge>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground">
-              전략적 가업승계 방안
+              전략적 기업승계 방안
             </h1>
 
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              성공적인 세대교체를 위한 체계적 승계 전략으로
+              친족승계, M&A, 제3자 승계 등 다양한 경로를 통한
               <span className="block mt-2 text-primary font-semibold">
-                상속세 50% 절감과 경영권 안정화를 동시에 실현
+                성공적인 기업승계 전략과 상속세 50% 절감 실현
               </span>
             </p>
 
@@ -567,7 +567,7 @@ const BusinessSuccessionPage = () => {
                 가족 거버넌스 체계 구축
               </h2>
               <p className="text-xl text-muted-foreground">
-                지속가능한 가업승계를 위한 체계적인 가족 거버넌스
+                지속가능한 기업승계를 위한 체계적인 가족 거버넌스
               </p>
             </div>
 
@@ -612,7 +612,7 @@ const BusinessSuccessionPage = () => {
               </Badge>
               
               <h3 className="text-3xl md:text-4xl font-bold mb-4 font-playfair animate-slide-up text-foreground dark:text-white">
-                <span className="text-amber-600 dark:text-amber-400">가업승계</span>를 넘어선{' '}
+                <span className="text-amber-600 dark:text-amber-400">기업승계</span>를 넘어선{' '}
                 <span className="text-indigo-900 dark:text-indigo-300">패밀리오피스</span>
               </h3>
               
@@ -786,8 +786,8 @@ const BusinessSuccessionPage = () => {
       {/* FAQ Section */}
       <ServiceFAQ 
         faqs={BUSINESS_SUCCESSION_FAQS}
-        title="가업승계 자주 묻는 질문"
-        description="가업승계 준비 시 많이 묻는 질문들에 대한 전문가 답변입니다"
+        title="기업승계 자주 묻는 질문"
+        description="기업승계 준비 시 많이 묻는 질문들에 대한 전문가 답변입니다"
       />
 
       {/* FAQ Schema for SEO */}
