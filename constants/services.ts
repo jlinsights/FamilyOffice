@@ -1,24 +1,20 @@
 import {
-  Building,
-  Cpu,
-  Hammer,
-  Users,
-  FileText,
-  TrendingUp,
-  Shield,
-  Calculator,
-  Gavel,
-  BrainCircuit,
-  Target,
-  Heart,
-  AlertTriangle,
-  Banknote,
-  PiggyBank,
-  Lightbulb,
-  HandshakeIcon,
-  ClipboardCheck,
+    BrainCircuit,
+    Building,
+    Calculator,
+    ClipboardCheck,
+    Cpu,
+    FileText,
+    Gavel,
+    Hammer,
+    HandshakeIcon,
+    Lightbulb,
+    LucideIcon,
+    Shield,
+    Target,
+    TrendingUp,
+    Users
 } from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
 
 /**
  * 전문 서비스 카테고리 정의
@@ -245,13 +241,13 @@ export const SEO_PAGE_MAPPING: { [key: string]: string } = {
 };
 
 /**
- * 전문 서비스 카테고리별 상세 서비스
+ * 전문 서비스 카테고리별 상세 서비스 (8개 카테고리로 재구조화)
  */
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
-    id: 'corporate-insurance-finance',
-    title: '기업보험 & 금융솔루션',
-    description: '기업의 리스크 관리와 금융 최적화를 위한 종합 솔루션을 제공합니다.',
+    id: 'corporate-insurance-risk',
+    title: '기업보험 & 리스크관리',
+    description: '기업의 리스크 관리와 임직원 보장을 위한 종합 보험 솔루션',
     icon: Shield,
     services: [
       {
@@ -386,28 +382,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           situation: '유통업 D사 회장, 100억 자산 상속 계획',
           solution: '단계적 증여와 신탁 활용 전략',
           result: '상속세 50억 → 15억으로 70% 절감'
-        }
-      },
-      {
-        title: '정책자금 컨설팅',
-        description: '정부 및 공공기관의 다양한 정책자금 확보를 위한 전문 컨설팅',
-        features: [
-          '정책자금 발굴',
-          '신청서류 작성',
-          '심사 대응 지원',
-          '사후관리 서비스'
-        ],
-        benefits: [
-          '저리 자금 확보',
-          '신청 성공률 향상',
-          '행정 부담 경감',
-          '자금조달 다각화'
-        ],
-        targetClient: '성장기업, 혁신기업',
-        caseStudy: {
-          situation: '바이오기업 F사, 연구개발 자금 필요',
-          solution: '정책자금 매칭 및 신청 지원',
-          result: '15억원 정책자금 확보, 금리 2% 절감'
         }
       },
       {
@@ -706,27 +680,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: Shield,
     services: [
       {
-        title: '가지급금 컨설팅',
-        description: '가지급금 발생 예방 및 기존 가지급금 정리 전문 서비스',
-        features: [
-          '가지급금 현황 분석',
-          '정리 방안 수립',
-          '세무 리스크 관리',
-          '내부통제 시스템 구축',
-        ],
-        benefits: [
-          '세무조사 리스크 해소',
-          '의제배당 부담 경감',
-          '재무제표 건전성 확보',
-        ],
-        targetClient: '가지급금 문제가 있는 중소기업 및 가족기업',
-        caseStudy: {
-          situation: '제조업 C사, 5억원 가지급금으로 세무조사 우려',
-          solution: '단계적 가지급금 정리 및 내부통제시스템 구축',
-          result: '3년간 단계적 정리로 의제배당 부담 80% 절감',
-        },
-      },
-      {
         title: '법인종합재무 컨설팅',
         description: '기업의 재무전략 수립부터 실행까지 종합 컨설팅',
         features: [
@@ -846,18 +799,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: '법인설립부터 구조변경까지 기업 생애주기 전반',
     icon: FileText,
     services: [
-      {
-        title: '기업인증 컨설팅',
-        description: '벤처기업, 이노비즈 등 각종 기업인증 획득 지원',
-        features: [
-          '인증 요건 분석',
-          '신청서류 작성',
-          '심사 대응 지원',
-          '사후관리',
-        ],
-        benefits: ['정부지원 자격 확보', '세제혜택 획득', '기업 신뢰도 향상'],
-        targetClient: '기업인증 취득이 필요한 중소기업',
-      },
       {
         title: '법인설립등기 및 사업자등록 실무',
         description: '법인설립부터 각종 인허가까지 원스톱 서비스',
@@ -1182,41 +1123,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           solution: '3년 단계별 정리계획 수립, 급여/배당 조정, 내부통제 강화',
           result: '가지급금 완전 정리, 의제배당 회피로 2억원 절세',
         },
-      },
-      {
-        title: '경정청구 전문 서비스',
-        description: '과다납부 세금의 체계적 분석과 환급 절차 지원',
-        features: [
-          '5년간 세무신고 정밀 검토',
-          '경정청구 사유 발굴',
-          '증빙자료 준비 및 신청',
-          '세무서 대응 및 환급 지원',
-        ],
-        benefits: [
-          '과납세액 환급',
-          '세무 정확성 향상',
-          '현금 유동성 개선',
-          '세무 전문성 확보',
-        ],
-        targetClient: '세무신고 실수가 의심되는 모든 기업',
-      },
-      {
-        title: '고용지원금 활용 컨설팅',
-        description: '정부 고용지원금 발굴부터 신청, 사후관리까지 원스톱 서비스',
-        features: [
-          '기업별 활용 가능 지원금 발굴',
-          '신청서류 작성 및 제출',
-          '지원금 수령 후 관리',
-          '추가 지원제도 연계',
-        ],
-        benefits: [
-          '인건비 부담 대폭 경감',
-          '고용 창출 활성화',
-          '기업 경쟁력 강화',
-          '정부정책 혜택 극대화',
-        ],
-        targetClient: '신규채용 계획이 있는 모든 기업',
-      },
+      }
     ],
   },
 ];
