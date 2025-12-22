@@ -5,7 +5,6 @@ import {
     Cpu,
     Gavel,
     Hammer,
-    HandshakeIcon,
     Lightbulb,
     LucideIcon,
     Shield,
@@ -887,9 +886,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     ],
   },
   {
-    id: 'analysis-planning',
-    title: '분석기획 & 전략수립',
-    description: '데이터 기반 의사결정과 미래전략 수립',
+    id: 'strategic-planning-ma',
+    title: '전략기획 & M&A',
+    description: '데이터 기반 전략수립부터 인수합병, 부실채권까지',
     icon: BrainCircuit,
     services: [
       {
@@ -943,6 +942,62 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         ],
         benefits: ['성공적 M&A 실행', '거래가격 최적화', '리스크 최소화'],
         targetClient: 'M&A를 추진하는 기업',
+      },
+      {
+        title: '기업구조조정 지원',
+        description: '재무적 어려움을 겪는 기업의 회생을 위한 종합 지원',
+        features: [
+          '재무구조 개선 방안',
+          '사업구조 재편 전략',
+          '채권자 협상 지원',
+          '정부지원제도 활용',
+        ],
+        benefits: [
+          '기업 회생 가능성 제고',
+          '채무 부담 경감',
+          '사업 정상화',
+          '고용 유지',
+        ],
+        targetClient: '재무적 어려움을 겪는 기업',
+      },
+      {
+        title: '부실채권 정리',
+        description: '부실채권 매입, 정리, 회수를 위한 전문 컨설팅',
+        features: [
+          '부실채권 실사 및 평가',
+          '채권 회수 전략 수립',
+          '법적 절차 진행 지원',
+          '채권 매각 중개',
+        ],
+        benefits: [
+          '자산 건전성 개선',
+          '현금 유동성 확보',
+          '재무구조 개선',
+          '신용등급 상승',
+        ],
+        targetClient: '부실채권 보유 기업, 금융기관',
+        caseStudy: {
+          situation: '중견기업 Q사, 거래처 부도로 30억 부실채권 발생',
+          solution: '채권 실사, 회수전략 수립, 일부 매각을 통한 단계적 정리',
+          result: '18개월 내 70% 회수, 재무건전성 회복',
+        },
+      },
+      {
+        title: '인수합병(M&A) 컨설팅',
+        description: 'M&A 전 과정에 대한 종합적인 자문 서비스',
+        features: [
+          'M&A 전략 수립',
+          '대상기업 발굴 및 평가',
+          'Due Diligence 지원',
+          'PMI(Post Merger Integration) 컨설팅',
+        ],
+        benefits: [
+          '성공적인 M&A 실행',
+          '시너지 효과 극대화',
+          '인수가격 최적화',
+          '통합 리스크 최소화',
+        ],
+        targetClient: 'M&A를 고려하는 중소중견기업',
       },
     ],
   },
@@ -1033,70 +1088,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           solution: '기업 특성을 반영한 전문 홈페이지 제작 및 SEO 최적화',
           result: '온라인 문의 300% 증가, 브랜드 인지도 대폭 향상'
         }
-      },
-    ],
-  },
-  {
-    id: 'ma-debt',
-    title: '인수합병 & 부실채권',
-    description: 'M&A 전략수립부터 부실채권 정리까지 전문 솔루션',
-    icon: HandshakeIcon,
-    services: [
-      {
-        title: '기업구조조정 지원',
-        description: '재무적 어려움을 겪는 기업의 회생을 위한 종합 지원',
-        features: [
-          '재무구조 개선 방안',
-          '사업구조 재편 전략',
-          '채권자 협상 지원',
-          '정부지원제도 활용',
-        ],
-        benefits: [
-          '기업 회생 가능성 제고',
-          '채무 부담 경감',
-          '사업 정상화',
-          '고용 유지',
-        ],
-        targetClient: '재무적 어려움을 겪는 기업',
-      },
-      {
-        title: '부실채권 정리',
-        description: '부실채권 매입, 정리, 회수를 위한 전문 컨설팅',
-        features: [
-          '부실채권 실사 및 평가',
-          '채권 회수 전략 수립',
-          '법적 절차 진행 지원',
-          '채권 매각 중개',
-        ],
-        benefits: [
-          '자산 건전성 개선',
-          '현금 유동성 확보',
-          '재무구조 개선',
-          '신용등급 상승',
-        ],
-        targetClient: '부실채권 보유 기업, 금융기관',
-        caseStudy: {
-          situation: '중견기업 Q사, 거래처 부도로 30억 부실채권 발생',
-          solution: '채권 실사, 회수전략 수립, 일부 매각을 통한 단계적 정리',
-          result: '18개월 내 70% 회수, 재무건전성 회복',
-        },
-      },
-      {
-        title: '인수합병(M&A) 컨설팅',
-        description: 'M&A 전 과정에 대한 종합적인 자문 서비스',
-        features: [
-          'M&A 전략 수립',
-          '대상기업 발굴 및 평가',
-          'Due Diligence 지원',
-          'PMI(Post Merger Integration) 컨설팅',
-        ],
-        benefits: [
-          '성공적인 M&A 실행',
-          '시너지 효과 극대화',
-          '인수가격 최적화',
-          '통합 리스크 최소화',
-        ],
-        targetClient: 'M&A를 고려하는 중소중견기업',
       },
     ],
   },
