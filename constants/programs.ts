@@ -1,23 +1,21 @@
 import {
-  Coffee,
-  BookOpen,
-  Globe,
-  Brain,
-  Users,
-  TrendingUp,
-  Building2,
-  Crown,
-  Network,
-  Trophy,
-  Target,
+    Brain,
+    Building2,
+    Coffee,
+    Crown,
+    Globe,
+    Network,
+    Target,
+    TrendingUp,
+    Users
 } from 'lucide-react';
 
 import type {
-  MembershipStat,
-  MemberBenefit,
-  ExclusiveProgramCategory,
-  EducationPrograms,
-  SpecialProgram,
+    EducationPrograms,
+    ExclusiveProgramCategory,
+    MemberBenefit,
+    MembershipStat,
+    SpecialProgram,
 } from '@/types/program';
 
 export const MEMBERSHIP_STATS: MembershipStat[] = [
@@ -49,33 +47,43 @@ export const MEMBERSHIP_STATS: MembershipStat[] = [
 
 export const MEMBER_BENEFITS: MemberBenefit[] = [
   {
-    icon: Coffee,
-    title: '월간 CEO 조찬 모임',
-    description: '매월 첫째 주 목요일, 업계 리더들과의 정기 네트워킹',
+    icon: Target,
+    title: 'CEO Risk Audit & Simulation',
+    description: '국세청 시스템 기반 모의 세무조사와 가업승계 출구전략 시뮬레이션',
     details: [
-      '업계 트렌드 정보 공유',
-      '경영 현안 토론',
-      '비즈니스 협력 기회 발굴',
-    ],
-  },
-  {
-    icon: BookOpen,
-    title: '분기별 전략 워크숍',
-    description: '업종별 맞춤형 전략 세션과 전문가 초청 강연',
-    details: [
-      '업종별 라운드테이블',
-      '전문가 1:1 멘토링',
-      '실무진 교육 프로그램',
+      '국세청 시스템 기반 정밀 세무진단',
+      '가업승계 Exit Plan 시뮬레이션',
+      '최상위 법무/세무법인 제휴 리포트',
     ],
   },
   {
     icon: Globe,
-    title: '해외 투자 기회 공유',
-    description: '글로벌 투자 정보와 해외 진출 기회 공유',
+    title: 'The Private Retreat',
+    description: '비공개 도슨트 투어와 프라이빗 힐링 여행으로 특별한 경험 제공',
     details: [
-      '해외 시장 분석 리포트',
-      '현지 파트너 소개',
-      '투자 기회 공동 검토',
+      '미술관/갤러리 휴관일 대관 Private View',
+      '일본 나오시마·스위스 웰니스 리트릿',
+      '비공개 장소 도슨트 & 프라이빗 만찬',
+    ],
+  },
+  {
+    icon: Crown,
+    title: 'Premier Concierge Service',
+    description: '해외 출장, 골프, 건강검진 등 CEO의 일상을 전담 비서처럼 케어',
+    details: [
+      'Airport Protocol: 자택-공항 리무진',
+      'Medical Care: VIP 검진센터 우선 예약',
+      'Golf & Dining: 명문 골프장 부킹',
+    ],
+  },
+  {
+    icon: Coffee,
+    title: 'CEO 전용 네트워킹',
+    description: '매월 첫째 주 목요일, 업계 리더들과의 정기 조찬 모임',
+    details: [
+      '업계 트렌드 정보 공유',
+      '경영 현안 토론',
+      '비즈니스 협력 기회 발굴',
     ],
   },
   {
@@ -84,17 +92,74 @@ export const MEMBER_BENEFITS: MemberBenefit[] = [
     description: '자녀 및 후계자를 위한 체계적 경영 교육 프로그램',
     details: ['리더십 개발 과정', '해외 연수 프로그램', '멘토링 시스템'],
   },
-  {
-    icon: Target,
-    title: '개인자산가 전용 서비스',
-    description: '30억+ 고액자산가를 위한 맞춤형 자산관리 및 상속계획',
-    details: ['가족신탁 설립 지원', '상속세 최적화 컨설팅', '해외자산 관리 자문'],
-  },
 ];
 
 export const EXCLUSIVE_PROGRAMS: ExclusiveProgramCategory[] = [
   {
-    category: '네트워킹',
+    category: 'Financial Shield',
+    icon: Target,
+    programs: [
+      {
+        name: 'CEO Risk Audit',
+        frequency: '연 2회',
+        description: '국세청 시스템 기반 모의 세무조사 및 정밀 진단 리포트',
+      },
+      {
+        name: '가업승계 시뮬레이션',
+        frequency: '분기 1회',
+        description: 'Exit Plan 설계 및 승계 시나리오별 전략 수립',
+      },
+      {
+        name: '자산보전 컨설팅',
+        frequency: '수시',
+        description: '최상위 법무/세무법인 제휴 전문가 1:1 상담',
+      },
+    ],
+  },
+  {
+    category: 'Private Art & Wellness',
+    icon: Globe,
+    programs: [
+      {
+        name: 'Private View 도슨트 투어',
+        frequency: '분기 1회',
+        description: '미술관/갤러리 휴관일 비공개 대관 프라이빗 관람',
+      },
+      {
+        name: '글로벌 힐링 리트릿',
+        frequency: '반기 1회',
+        description: '일본 나오시마, 스위스 등 청정지역 웰니스 여행',
+      },
+      {
+        name: '아트 컬렉션 자문',
+        frequency: '수시',
+        description: '예술 자산 투자 및 컬렉션 관리 전문가 상담',
+      },
+    ],
+  },
+  {
+    category: 'VVIP Concierge',
+    icon: Crown,
+    programs: [
+      {
+        name: 'Airport Protocol',
+        frequency: '상시',
+        description: '자택-공항 리무진 픽업 & 샌딩 서비스',
+      },
+      {
+        name: 'Medical Care',
+        frequency: '상시',
+        description: '대학병원 VIP 검진센터 우선 예약 및 전담 에스코트',
+      },
+      {
+        name: 'Golf & Dining',
+        frequency: '상시',
+        description: '명문 골프장 부킹 및 특급호텔 파인다이닝 예약',
+      },
+    ],
+  },
+  {
+    category: 'CEO 네트워킹',
     icon: Network,
     programs: [
       {
@@ -110,70 +175,7 @@ export const EXCLUSIVE_PROGRAMS: ExclusiveProgramCategory[] = [
       {
         name: '가족 동반 이벤트',
         frequency: '연 2회',
-        description: '가족 단위 참여 가능한 특별 이벤트',
-      },
-    ],
-  },
-  {
-    category: '교육',
-    icon: Trophy,
-    programs: [
-      {
-        name: '패밀리오피스 마스터클래스',
-        frequency: '연 4회',
-        description: '고급 자산관리 전략과 승계 설계 집중 교육',
-      },
-      {
-        name: '글로벌 경제 전망 세미나',
-        frequency: '분기 1회',
-        description: '해외 석학 초청 글로벌 경제 트렌드 분석',
-      },
-      {
-        name: '차세대 CEO 아카데미',
-        frequency: '연중 운영',
-        description: '후계자를 위한 체계적 경영 교육 과정',
-      },
-    ],
-  },
-  {
-    category: '투자',
-    icon: Target,
-    programs: [
-      {
-        name: '프라이빗 투자 기회 소개',
-        frequency: '수시',
-        description: '검증된 프라이빗 투자 기회 우선 소개',
-      },
-      {
-        name: '공동 투자 프로젝트',
-        frequency: '분기 1회',
-        description: '멤버 간 공동 투자 기회 발굴 및 진행',
-      },
-      {
-        name: 'M&A 딜 네트워킹',
-        frequency: '월 1회',
-        description: 'M&A 정보 공유 및 파트너 매칭',
-      },
-    ],
-  },
-  {
-    category: '자산가 전용',
-    icon: Crown,
-    programs: [
-      {
-        name: '고액자산가 비공개 모임',
-        frequency: '월 1회',
-        description: '개인자산 30억+ 자산가들만의 프라이빗 네트워킹',
-      },
-      {
-        name: '가족신탁 설립 워크숍',
-        frequency: '분기 1회',
-        description: '가족신탁 및 상속계획 전문가 집중 교육',
-      },
-      {
-        name: '해외자산 관리 세미나',
-        frequency: '반기 1회',
-        description: '글로벌 자산배분 및 해외 투자 전략 공유',
+        description: '가족 단위 참여 가능한 특별 프라이빗 이벤트',
       },
     ],
   },
