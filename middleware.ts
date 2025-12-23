@@ -1,7 +1,7 @@
 import { ALLOWED_ORIGINS } from '@/lib/config';
 import { globalRateLimit } from '@/lib/rate-limit';
 import { autoSecurityResponse, detectSuspiciousActivity, logSecurityEvent } from '@/lib/security/security-monitor';
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkClient, clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 
@@ -10,6 +10,21 @@ const isProtectedApiRoute = createRouteMatcher([
   '/api/admin(.*)',
   '/api/financial/admin(.*)',
   '/api/internal(.*)'
+]);
+
+// 온보딩이 필요한 경로 (인증된 사용자가 접근하는 주요 페이지)
+const isOnboardingRequiredRoute = createRouteMatcher([
+  '/dashboard(.*)',
+  '/calculators(.*)',
+  '/admin(.*)',
+]);
+
+// 온보딩 예외 경로 (이 경로들은 온보딩 체크하지 않음)
+const isOnboardingExcludedRoute = createRouteMatcher([
+  '/onboarding(.*)',
+  '/auth(.*)',
+  '/api(.*)',
+  '/_next(.*)',
 ]);
 
 function isAllowedOrigin(origin: string | null): boolean {
@@ -56,6 +71,27 @@ export default clerkMiddleware(async (auth, request) => {
         description: `Authenticated access to ${request.nextUrl.pathname}`,
         additional_data: { path: request.nextUrl.pathname, userId }
       }, request);
+    }
+  }
+
+  // 1.5 온보딩 체크 - 인증된 사용자가 주요 페이지 접근 시
+  if (isOnboardingRequiredRoute(request) && !isOnboardingExcludedRoute(request)) {
+    const { userId } = await auth();
+    if (userId) {
+      try {
+        const client = await clerkClient();
+        const user = await client.users.getUser(userId);
+        const onboardingCompleted = user.unsafeMetadata?.onboardingCompleted;
+        
+        if (!onboardingCompleted) {
+          // 온보딩이 완료되지 않은 경우 리다이렉트
+          const onboardingUrl = new URL('/onboarding', request.url);
+          return NextResponse.redirect(onboardingUrl);
+        }
+      } catch (error) {
+        // 사용자 정보 조회 실패 시 계속 진행 (온보딩 스킵)
+        console.error('Onboarding check failed:', error);
+      }
     }
   }
 

@@ -1,7 +1,7 @@
-import { SignUp } from '@clerk/nextjs';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Badge } from '@/components/ui/badge';
+import { SignUp } from '@clerk/nextjs';
 import { Crown, Shield, TrendingUp, Users } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -114,7 +114,7 @@ export default function SignUpPage() {
                 },
               }}
               signInUrl="/auth/sign-in"
-              fallbackRedirectUrl="/dashboard"
+              fallbackRedirectUrl="/onboarding"
             />
           </div>
         </div>

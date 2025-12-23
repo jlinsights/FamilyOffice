@@ -1,24 +1,24 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
 import { createClient } from '@/lib/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Building, Eye, EyeOff, Loader2, Lock, Mail, Phone, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Eye, EyeOff, Mail, Lock, User, Loader2, Building } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
-import { useToast } from '@/hooks/use-toast';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
 
 const signUpSchema = z.object({
   email: z
@@ -40,14 +40,11 @@ const signUpSchema = z.object({
   companyName: z
     .string()
     .min(2, '회사명은 최소 2자 이상이어야 합니다.')
-    .max(100, '회사명은 최대 100자까지 입력 가능합니다.')
-    .optional()
-    .or(z.literal('')),
+    .max(100, '회사명은 최대 100자까지 입력 가능합니다.'),
   phone: z
     .string()
-    .regex(/^01[0-9]-[0-9]{4}-[0-9]{4}$/, '올바른 휴대폰 번호 형식을 입력해주세요. (예: 010-1234-5678)')
-    .optional()
-    .or(z.literal('')),
+    .min(1, '연락처를 입력해주세요.')
+    .regex(/^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/, '올바른 휴대폰 번호 형식을 입력해주세요. (예: 010-1234-5678)'),
   agreeToTerms: z
     .boolean()
     .refine(val => val === true, '이용약관에 동의해주세요.'),
@@ -245,7 +242,7 @@ export function SignUpForm({
           name="companyName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>회사명</FormLabel>
+              <FormLabel>소속(회사명) *</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Building className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
@@ -269,14 +266,18 @@ export function SignUpForm({
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>휴대폰 번호</FormLabel>
+              <FormLabel>연락처(모바일) *</FormLabel>
               <FormControl>
-                <Input
-                  type="tel"
-                  placeholder="010-1234-5678"
-                  disabled={isLoading}
-                  {...field}
-                />
+                <div className="relative">
+                  <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="tel"
+                    placeholder="010-1234-5678"
+                    className="pl-10"
+                    disabled={isLoading}
+                    {...field}
+                  />
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -1,4 +1,4 @@
-import { Crown, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Crown, Sparkles } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -14,16 +14,17 @@ import { MemberBenefitsSection } from '@/components/program/MemberBenefitsSectio
 import { MembershipCTASection } from '@/components/program/MembershipCTASection';
 import { MembershipStatsSection } from '@/components/program/MembershipStatsSection';
 import { SpecialProgramsSection } from '@/components/program/SpecialProgramsSection';
+import { VVIPBenefitsSection } from '@/components/program/VVIPBenefitsSection';
 
-import {
-  MEMBERSHIP_STATS,
-  MEMBER_BENEFITS,
-  EXCLUSIVE_PROGRAMS,
-  EDUCATION_PROGRAMS,
-  CEO_PROGRAMS,
-  ASSET_PROGRAMS,
-} from '@/constants/programs';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
+import {
+    ASSET_PROGRAMS,
+    CEO_PROGRAMS,
+    EDUCATION_PROGRAMS,
+    EXCLUSIVE_PROGRAMS,
+    MEMBERSHIP_STATS,
+    MEMBER_BENEFITS,
+} from '@/constants/programs';
 
 export const metadata: Metadata = {
   title: '프로그램 | 성공한 기업가·자산가 전용 프리미엄 프로그램 안내',
@@ -120,6 +121,7 @@ export default function ProgramPage() {
       <Header />
       <main className="pt-20">
         <HeroSection />
+        <VVIPBenefitsSection />
         <MembershipStatsSection stats={MEMBERSHIP_STATS} />
         <MemberBenefitsSection benefits={MEMBER_BENEFITS} />
         <ExclusiveProgramsSection categories={EXCLUSIVE_PROGRAMS} />
