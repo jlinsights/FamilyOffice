@@ -17,6 +17,7 @@ export interface ContentSchedule {
   targetAudience: string;
   expectedLength: number;
   seoKeywords: string[];
+  focusArea?: string;
 }
 
 export const WEEKLY_CONTENT_SCHEDULE: ContentSchedule[] = [

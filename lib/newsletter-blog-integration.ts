@@ -1,7 +1,7 @@
 // Newsletter-Blog Integration System
 // Phase 3 Implementation - Content Marketing Strategy
 
-import { WEEKLY_CONTENT_SCHEDULE, CONTENT_TEMPLATES, ContentGenerator } from './content-strategy';
+import { CONTENT_TEMPLATES, ContentGenerator, ContentSchedule, WEEKLY_CONTENT_SCHEDULE } from './content-strategy';
 
 /**
  * 뉴스레터-블로그 통합 자동화 시스템
@@ -22,6 +22,53 @@ export interface BlogPostConfig {
   seoOptimized: boolean;
   autoPromote: boolean;
   socialDistribution: boolean;
+}
+
+/** 뉴스레터 데이터 구조 */
+export interface NewsletterData {
+  id: string;
+  type: 'newsletter';
+  day: string;
+  publishDate: Date;
+  topic: string;
+  subject: string;
+  htmlContent: string;
+  config: NewsletterConfig;
+  focusArea?: string | undefined;
+  segmentTags: string[];
+  scheduledTime: string;
+}
+
+/** 블로그 데이터 구조 */
+export interface BlogData {
+  id: string;
+  type: 'blog';
+  publishDate: Date;
+  topic: string;
+  title: string;
+  slug: string;
+  markdownContent: string;
+  metaDescription: string;
+  keywords: string[];
+  focusArea?: string | undefined;
+  category: string;
+  scheduledTime: string;
+}
+
+/** 콘텐츠 구조 인터페이스 */
+export interface ContentStructure {
+  title: string;
+  metaDescription: string;
+  structure: Array<{ section: string; content: string; keyPoint?: string }>;
+  keywords: string[];
+}
+
+/** 성과 데이터 인터페이스 */
+export interface PerformanceData {
+  id: string;
+  views: number;
+  engagement: number;
+  publishDate: Date;
 }
 
 /**
@@ -64,13 +111,13 @@ export class ContentDistributionSystem {
    * 주간 콘텐츠 자동 스케줄링
    */
   static async scheduleWeeklyContent(): Promise<{
-    newsletters: any[];
-    blogs: any[];
+    newsletters: NewsletterData[];
+    blogs: BlogData[];
     scheduled: Date[];
   }> {
     const scheduledContent = {
-      newsletters: [] as any[],
-      blogs: [] as any[],
+      newsletters: [] as NewsletterData[],
+      blogs: [] as BlogData[],
       scheduled: [] as Date[]
     };
 
@@ -103,7 +150,7 @@ export class ContentDistributionSystem {
   /**
    * 뉴스레터 콘텐츠 생성
    */
-  private static async createNewsletterContent(schedule: any, publishDate: Date) {
+  private static async createNewsletterContent(schedule: ContentSchedule, publishDate: Date): Promise<NewsletterData> {
     const config = schedule.day === 'tuesday' ? NEWSLETTER_CONFIGS.tuesday : NEWSLETTER_CONFIGS.friday;
     if (!config) throw new Error(`Newsletter config not found for day: ${schedule.day}`);
     
@@ -137,7 +184,7 @@ export class ContentDistributionSystem {
   /**
    * 블로그 콘텐츠 생성
    */
-  private static async createBlogContent(schedule: any, publishDate: Date) {
+  private static async createBlogContent(schedule: ContentSchedule, publishDate: Date): Promise<BlogData> {
     const template = CONTENT_TEMPLATES.find(t => t.type === 'blog');
     
     if (!template) throw new Error('Blog template not found');
@@ -170,7 +217,7 @@ export class ContentDistributionSystem {
   /**
    * 뉴스레터 자동 발송
    */
-  static async sendNewsletter(newsletterData: any): Promise<boolean> {
+  static async sendNewsletter(newsletterData: NewsletterData): Promise<boolean> {
     try {
       const config = newsletterData.config;
       
@@ -213,7 +260,7 @@ export class ContentDistributionSystem {
   /**
    * 블로그 자동 발행
    */
-  static async publishBlog(blogData: any): Promise<boolean> {
+  static async publishBlog(blogData: BlogData): Promise<boolean> {
     try {
       // 블로그 포스트를 파일 시스템 또는 CMS에 저장
       // 실제 구현에서는 데이터베이스나 CMS API 사용
@@ -251,7 +298,7 @@ export class ContentDistributionSystem {
   /**
    * 크로스 프로모션 (뉴스레터 ↔ 블로그)
    */
-  static async enableCrossPromotion(newsletterData: any, blogData: any): Promise<void> {
+  static async enableCrossPromotion(newsletterData: NewsletterData, blogData: BlogData): Promise<void> {
     try {
       // 뉴스레터에 블로그 링크 추가
       const blogPromoSection = `
@@ -287,8 +334,8 @@ export class ContentDistributionSystem {
    * 성과 추적 시스템
    */
   static async trackContentPerformance(): Promise<{
-    newsletters: any[];
-    blogs: any[];
+    newsletters: PerformanceData[];
+    blogs: PerformanceData[];
     insights: string[];
   }> {
     try {
@@ -362,8 +409,8 @@ export class ContentDistributionSystem {
     return categoryTopics[topicIndex] || '기본 주제';
   }
 
-  private static convertToNewsletterHTML(contentStructure: any, _template: any): string {
-    const sections = contentStructure.structure.map((section: any) => `
+  private static convertToNewsletterHTML(contentStructure: ContentStructure, _template: unknown): string {
+    const sections = contentStructure.structure.map((section) => `
       <div style="margin: 20px 0;">
         <h3 style="color: #1e3a8a; margin: 0 0 10px 0;">${section.section}</h3>
         <p style="line-height: 1.6;">${section.content}</p>
@@ -387,8 +434,8 @@ export class ContentDistributionSystem {
     `;
   }
 
-  private static convertToBlogMarkdown(contentStructure: any, _template: any): string {
-    const sections = contentStructure.structure.map((section: any) => `
+  private static convertToBlogMarkdown(contentStructure: ContentStructure, _template: unknown): string {
+    const sections = contentStructure.structure.map((section) => `
 ## ${section.section}
 
 ${section.content}
@@ -433,22 +480,22 @@ ${sections}
       .substring(0, 50);
   }
 
-  private static async distributeBlogToSocial(blogPost: any): Promise<void> {
+  private static async distributeBlogToSocial(blogPost: { title: string; slug: string }): Promise<void> {
     // 소셜 미디어 자동 배포 로직
     console.log(`Distributing blog to social media: ${blogPost.title}`);
   }
 
-  private static async getNewsletterAnalytics(): Promise<any[]> {
+  private static async getNewsletterAnalytics(): Promise<PerformanceData[]> {
     // 뉴스레터 분석 데이터 수집
     return [];
   }
 
-  private static async getBlogAnalytics(): Promise<any[]> {
+  private static async getBlogAnalytics(): Promise<PerformanceData[]> {
     // 블로그 분석 데이터 수집  
     return [];
   }
 
-  private static generatePerformanceInsights(_newsletters: any[], _blogs: any[]): string[] {
+  private static generatePerformanceInsights(_newsletters: PerformanceData[], _blogs: PerformanceData[]): string[] {
     return [
       '뉴스레터 평균 오픈율: 화요일 68.3%, 금요일 71.2%',
       '블로그 평균 체류시간: 3분 42초 (업계 평균 대비 +45%)',
@@ -522,7 +569,7 @@ export class ContentScheduler {
     }
   }
 
-  private static async processScheduledContent(schedule: any, date: Date): Promise<void> {
+  private static async processScheduledContent(schedule: ContentSchedule, date: Date): Promise<void> {
     console.log(`Processing ${schedule.type} for ${schedule.day}`);
     
     if (schedule.type === 'newsletter') {

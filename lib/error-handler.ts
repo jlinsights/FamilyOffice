@@ -304,13 +304,13 @@ export class AppError extends Error {
   public readonly type: ErrorType;
   public readonly statusCode: number;
   public readonly code?: string;
-  public readonly details?: any;
+  public readonly details?: unknown;
 
   constructor(
     message: string,
     type: ErrorType = ErrorType.SERVER,
     code?: string,
-    details?: any
+    details?: unknown
   ) {
     super(message);
     this.name = this.constructor.name;
@@ -330,7 +330,7 @@ export class AppError extends Error {
 }
 
 export class ValidationError extends AppError {
-  constructor(message: string, details?: any) {
+  constructor(message: string, details?: unknown) {
     super(message, ErrorType.VALIDATION, 'VALIDATION_FAILED', details);
   }
 }
@@ -354,7 +354,7 @@ export class NotFoundError extends AppError {
 }
 
 export class ExternalAPIError extends AppError {
-  constructor(service: string, originalError?: any) {
+  constructor(service: string, originalError?: unknown) {
     super(
       `External service error: ${service}`,
       ErrorType.EXTERNAL_API,
@@ -365,7 +365,7 @@ export class ExternalAPIError extends AppError {
 }
 
 export class DatabaseError extends AppError {
-  constructor(operation: string, originalError?: any) {
+  constructor(operation: string, originalError?: unknown) {
     super(
       `Database operation failed: ${operation}`,
       ErrorType.DATABASE,

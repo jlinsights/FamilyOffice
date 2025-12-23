@@ -309,7 +309,7 @@ export class AutomatedContentOptimization {
     seoOptimization: {
       titleTags: string[];
       metaTags: Record<string, string>;
-      structuredData: any;
+      structuredData: Record<string, unknown>;
       internalLinks: string[];
     };
     qualityScore: {
@@ -887,7 +887,7 @@ export async function generateSEOContent(
 
 export async function setupContentABTest(
   url: string,
-  variants: any[],
+  variants: Array<{ name: string; changes: Array<{ element: string; originalValue: string; testValue: string }> }>,
   duration: number,
   metric: string
 ) {
