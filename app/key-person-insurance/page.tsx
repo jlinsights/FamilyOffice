@@ -203,33 +203,36 @@ export default function KeyPersonInsurancePage() {
     <>
       <StructuredData data={faqData} />
       <Header />
-      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <main className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white py-20">
-          <div className="absolute inset-0 bg-black/20"></div>
+        <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 py-20">
+          <div className="absolute inset-0 bg-black/5 dark:bg-black/20"></div>
           <div className="container relative mx-auto px-4">
             <div className="text-center max-w-4xl mx-auto">
               <div className="flex justify-center mb-6">
-                <Badge className="bg-yellow-500 text-yellow-900 px-4 py-2 text-sm font-semibold">
+                <Badge 
+                  variant="outline"
+                  className="border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 dark:border-amber-800 dark:from-amber-950/80 dark:to-amber-900/50 dark:text-amber-200 shadow-lg backdrop-blur-sm px-4 py-2 text-sm font-semibold"
+                >
                   <Trophy className="w-4 h-4 mr-1" />
                   CEO 전용 특별상품
                 </Badge>
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-foreground">
                 경영인정기보험
                 <br />
-                <span className="text-yellow-400">완벽 가이드</span>
+                <span className="bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent">완벽 가이드</span>
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed">
-                법인 명의 가입으로 <strong className="text-yellow-300">보험료 전액 손금처리</strong>
+              <p className="text-xl md:text-2xl mb-8 text-muted-foreground leading-relaxed">
+                법인 명의 가입으로 <strong className="text-foreground">보험료 전액 손금처리</strong>
                 <br />
-                CEO·핵심임원 사망시 <strong className="text-yellow-300">기업 연속성 보장</strong> 및 <strong className="text-yellow-300">법인세 절약</strong>
+                CEO·핵심임원 사망시 <strong className="text-foreground">기업 연속성 보장</strong> 및 <strong className="text-foreground">법인세 절약</strong>
               </p>
               
               {/* 핵심 통계 */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
+                <div className="glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 border-glow">
+                  <div className="text-3xl font-bold text-premium-gold-enhanced mb-1 tabular-nums">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
@@ -239,10 +242,10 @@ export default function KeyPersonInsurancePage() {
                       />
                     )}%
                   </div>
-                  <p className="text-sm text-blue-200">법인세 절약효과</p>
+                  <p className="text-sm text-stat-description font-medium">법인세 절약효과</p>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                <div className="glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 border-glow">
+                  <div className="text-3xl font-bold text-premium-navy-enhanced mb-1 tabular-nums">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
@@ -252,10 +255,10 @@ export default function KeyPersonInsurancePage() {
                       />
                     )}억
                   </div>
-                  <p className="text-sm text-blue-200">최대 보장한도</p>
+                  <p className="text-sm text-stat-description font-medium">최대 보장한도</p>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                <div className="glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 border-glow">
+                  <div className="text-3xl font-bold text-green-enhanced mb-1 tabular-nums">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
@@ -265,10 +268,10 @@ export default function KeyPersonInsurancePage() {
                       />
                     )}%
                   </div>
-                  <p className="text-sm text-blue-200">손금처리 비율</p>
+                  <p className="text-sm text-stat-description font-medium">손금처리 비율</p>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                <div className="glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 border-glow">
+                  <div className="text-3xl font-bold text-purple-enhanced mb-1 tabular-nums">
                     {startAnimation && (
                       <AnimatedCounter 
                         start={0} 
@@ -278,14 +281,18 @@ export default function KeyPersonInsurancePage() {
                       />
                     )}년
                   </div>
-                  <p className="text-sm text-blue-200">갱신 보장기간</p>
+                  <p className="text-sm text-stat-description font-medium">갱신 보장기간</p>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <CalComPopup
                   trigger={
-                    <Button size="lg" className="bg-yellow-500 text-yellow-900 hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+                    <Button 
+                      size="lg" 
+                      variant="default"
+                      className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-colors duration-200"
+                    >
                       <Calculator className="mr-2 h-5 w-5" />
                       무료 절세효과 계산
                     </Button>
@@ -295,7 +302,7 @@ export default function KeyPersonInsurancePage() {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 text-lg"
+                  className="font-bold px-8 py-4 text-lg shadow-lg transition-colors duration-200"
                   onClick={() => {
                     const element = document.getElementById('product-comparison');
                     element?.scrollIntoView({ behavior: 'smooth' });
@@ -310,28 +317,28 @@ export default function KeyPersonInsurancePage() {
         </section>
 
         {/* CEO보장정기보험 특징 섹션 */}
-        <section className="py-16 bg-gradient-to-r from-gray-50 to-white">
+        <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  CEO보장정기보험이 <span className="text-blue-600">특별한 이유</span>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  CEO보장정기보험이 <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">특별한 이유</span>
                 </h2>
-                <p className="text-xl text-gray-600">
+                <p className="text-xl text-muted-foreground">
                   법인 명의 가입으로 얻는 세무적 장점과 기업 보호 효과
                 </p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-8 mb-16">
-                <Card className="border-l-4 border-l-green-500 shadow-lg">
+                <Card className="glass-premium-enhanced border-glow shadow-premium hover-premium">
                   <CardHeader>
-                    <CardTitle className="flex items-center text-green-700">
-                      <Building className="w-6 h-6 mr-3" />
+                    <CardTitle className="flex items-center text-foreground">
+                      <Building className="w-6 h-6 mr-3 text-green-600 dark:text-green-400" />
                       법인세 절약 효과
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2 text-gray-700">
+                    <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start">
                         <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
                         보험료 전액 <strong>손금처리</strong> (법인세법 제19조)
@@ -348,15 +355,15 @@ export default function KeyPersonInsurancePage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-l-4 border-l-blue-500 shadow-lg">
+                <Card className="glass-premium-enhanced border-glow shadow-premium hover-premium">
                   <CardHeader>
-                    <CardTitle className="flex items-center text-blue-700">
-                      <Shield className="w-6 h-6 mr-3" />
+                    <CardTitle className="flex items-center text-foreground">
+                      <Shield className="w-6 h-6 mr-3 text-blue-600 dark:text-blue-400" />
                       기업 연속성 보장
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2 text-gray-700">
+                    <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start">
                         <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
                         핵심인재 사망시 <strong>운영자금 확보</strong>
@@ -373,15 +380,15 @@ export default function KeyPersonInsurancePage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-l-4 border-l-purple-500 shadow-lg">
+                <Card className="glass-premium-enhanced border-glow shadow-premium hover-premium">
                   <CardHeader>
-                    <CardTitle className="flex items-center text-purple-700">
-                      <Trophy className="w-6 h-6 mr-3" />
+                    <CardTitle className="flex items-center text-foreground">
+                      <Trophy className="w-6 h-6 mr-3 text-purple-600 dark:text-purple-400" />
                       임원 전용 우대혜택
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2 text-gray-700">
+                    <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start">
                         <CheckCircle className="w-4 h-4 text-purple-500 mr-2 mt-1 flex-shrink-0" />
                         <strong>최대 50억원</strong> 고액 보장한도
@@ -398,15 +405,15 @@ export default function KeyPersonInsurancePage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-l-4 border-l-orange-500 shadow-lg">
+                <Card className="glass-premium-enhanced border-glow shadow-premium hover-premium">
                   <CardHeader>
-                    <CardTitle className="flex items-center text-orange-700">
-                      <Zap className="w-6 h-6 mr-3" />
+                    <CardTitle className="flex items-center text-foreground">
+                      <Zap className="w-6 h-6 mr-3 text-orange-600 dark:text-orange-400" />
                       간편한 관리 시스템
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2 text-gray-700">
+                    <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start">
                         <CheckCircle className="w-4 h-4 text-orange-500 mr-2 mt-1 flex-shrink-0" />
                         <strong>1년 갱신형</strong>으로 유연한 보장관리
@@ -428,13 +435,13 @@ export default function KeyPersonInsurancePage() {
         </section>
 
         {/* 핵심 혜택 섹션 */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-gradient-to-br from-background via-muted/10 to-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                CEO보장정기보험 <span className="text-blue-600">핵심 혜택</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                CEO보장정기보험 <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">핵심 혜택</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 법인과 CEO 모두에게 도움이 되는 실질적 혜택들
               </p>
             </div>
@@ -479,13 +486,13 @@ export default function KeyPersonInsurancePage() {
         </section>
 
         {/* 상품 비교 섹션 */}
-        <section id="product-comparison" className="py-20 bg-gray-50">
+        <section id="product-comparison" className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                경영인정기보험 <span className="text-blue-600">상품 비교</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                경영인정기보험 <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">상품 비교</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 주요 생명보험사 CEO 전용 상품 완전 비교분석
               </p>
             </div>
@@ -562,13 +569,13 @@ export default function KeyPersonInsurancePage() {
         </section>
 
         {/* 가입 절차 섹션 */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-gradient-to-br from-background via-muted/10 to-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                경영인정기보험 <span className="text-blue-600">가입 절차</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                경영인정기보험 <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">가입 절차</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 전문가와 함께하는 체계적인 4단계 가입 프로세스
               </p>
             </div>
@@ -605,13 +612,13 @@ export default function KeyPersonInsurancePage() {
         </section>
 
         {/* FAQ 섹션 */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                경영인정기보험 <span className="text-blue-600">FAQ</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                경영인정기보험 <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">FAQ</span>
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-muted-foreground">
                 경영인정기보험에 대한 자주 묻는 질문들
               </p>
             </div>
@@ -786,12 +793,12 @@ export default function KeyPersonInsurancePage() {
         </section>
 
         {/* CTA 섹션 */}
-        <section className="py-20 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+        <section className="py-20 bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              지금 시작하는 <span className="text-yellow-400">CEO 전용 보험</span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+              지금 시작하는 <span className="bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent">CEO 전용 보험</span>
             </h2>
-            <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 text-muted-foreground max-w-2xl mx-auto">
               경영인정기보험 전문가와 함께 
               <br />
               <strong>퇴직금·상속세 절세</strong> 전략을 수립하세요
@@ -799,7 +806,11 @@ export default function KeyPersonInsurancePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <CalComPopup
                 trigger={
-                  <Button size="lg" className="bg-yellow-500 text-yellow-900 hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+                  <Button 
+                    size="lg" 
+                    variant="default"
+                    className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-colors duration-200"
+                  >
                     <Phone className="mr-2 h-5 w-5" />
                     무료 상담 예약
                   </Button>
@@ -809,7 +820,7 @@ export default function KeyPersonInsurancePage() {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 text-lg"
+                className="font-bold px-8 py-4 text-lg shadow-lg transition-colors duration-200"
                 onClick={() => window.open('tel:0502-5550-8700')}
               >
                 <Phone className="mr-2 h-5 w-5" />

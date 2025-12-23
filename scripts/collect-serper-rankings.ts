@@ -11,9 +11,15 @@
  * - Schedule: "0 2 * * *" (매일 새벽 2시)
  */
 
-import { batchSearch } from '../lib/serper/client';
-import { BMAD_AI_KEYWORDS } from '../lib/ai-search-monitoring';
+import { config } from 'dotenv';
+import { resolve } from 'path';
+
+// Load environment variables from .env.local
+config({ path: resolve(process.cwd(), '.env.local') });
+
 import { createClient } from '@supabase/supabase-js';
+import { BMAD_AI_KEYWORDS } from '../lib/ai-search-monitoring';
+import { batchSearch } from '../lib/serper/client';
 
 // Supabase 클라이언트 초기화
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;

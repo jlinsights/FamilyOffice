@@ -1,11 +1,11 @@
 'use client';
 
 import {
-  ArrowRight,
-  Briefcase,
-  CheckCircle,
-  Crown,
-  Star
+    ArrowRight,
+    Briefcase,
+    CheckCircle,
+    Crown,
+    Star
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -14,18 +14,16 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 
 import { AnimatedCounter } from '@/components/animated-counter';
-import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
 
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { StructuredData } from '@/components/structured-data';
 import { SEO_PAGE_MAPPING, SERVICE_CATEGORIES, getServiceStats } from '@/constants/services';
+import { sanitizeHTMLContent } from '@/lib/security/html-sanitizer';
 import { generateInternalLinks } from '@/lib/seo/content-optimizer';
 import { generateStructuredData } from '@/lib/seo/structured-data';
-import { sanitizeHTMLContent, isTextOnlyContent } from '@/lib/security/html-sanitizer';
 
 const ServicePageContent = () => {
   const [startAnimation, setStartAnimation] = React.useState(false);
@@ -80,14 +78,6 @@ const ServicePageContent = () => {
       <Header />
 
       <main className="pt-20">
-        {/* 브레드크럼 네비게이션 */}
-        <div className="container mx-auto px-6 py-4">
-          <BreadcrumbNavigation customItems={[
-            { name: '홈', url: 'https://familyoffices.vip' },
-            { name: '솔루션', url: 'https://familyoffices.vip/solutions', isCurrentPage: true }
-          ]} />
-        </div>
-        
         {/* Hero Section */}
         <section className="relative w-full py-24 md:py-32 flex flex-col items-center justify-center overflow-hidden">
           {/* Background Elements */}
