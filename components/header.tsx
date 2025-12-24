@@ -305,7 +305,7 @@ export const Header = memo(function Header({
           role="navigation"
           aria-label="모바일 메뉴"
         >
-          <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="px-2 pt-2 pb-3 space-y-1 text-center">
             {NAVIGATION_ITEMS
               .filter((item: NavigationItem) => !item.requireAuth || isSignedIn)
               .map((item: NavigationItem) => (
@@ -314,7 +314,7 @@ export const Header = memo(function Header({
                   <div className="space-y-1">
                     <button
                       onClick={() => toggleMobileSubmenu(item.label)}
-                      className="w-full flex items-center justify-between px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                      className="w-full flex items-center justify-center px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
                       aria-expanded={mobileSubmenus[item.label] || false}
                       aria-label={`${item.label} 메뉴 ${mobileSubmenus[item.label] ? '접기' : '펼치기'}`}
                     >
@@ -337,7 +337,7 @@ export const Header = memo(function Header({
                                 ? 'noopener noreferrer'
                                 : undefined
                             }
-                            className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                            className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors text-center"
                             onClick={handleMobileLinkClick}
                             aria-label={
                               subItem.isExternal
@@ -356,7 +356,7 @@ export const Header = memo(function Header({
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors text-center"
                     onClick={handleMobileLinkClick}
                     aria-label={
                       item.isExternal
