@@ -63,6 +63,7 @@ export interface NavigationItem {
   href: string;
   label: string;
   isExternal?: boolean; // 외부 링크 여부
+  requireAuth?: boolean; // 인증 필요 여부
   submenu?: NavigationSubItem[]; // 서브메뉴 아이템들
 }
 

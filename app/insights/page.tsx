@@ -48,7 +48,7 @@ export default function InsightsPage() {
       
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative py-20 lg:py-32 overflow-hidden">
+        <section className="relative py-20 lg:py-32">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-emerald-400/10 rounded-full blur-xl -z-10 will-change-transform"></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -276,7 +276,7 @@ export default function InsightsPage() {
         <CompactMultimediaSection />
 
         {/* Newsletter CTA */}
-        <section className="py-24 bg-gradient-to-br from-slate-900 to-blue-900 relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-br from-slate-900 to-blue-900 relative">
           <div className="absolute inset-0 bg-[url('/Images/grid-pattern.svg')] opacity-10"></div>
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-3xl"></div>
           

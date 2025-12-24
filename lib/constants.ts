@@ -1,7 +1,7 @@
 import {
-  InheritanceIcon,
-  TaxLegalIcon,
-  WealthManagementIcon,
+    InheritanceIcon,
+    TaxLegalIcon,
+    WealthManagementIcon,
 } from '@/components/icons/service-icons';
 
 import { NavigationItem, ServiceItem } from '@/types/globals';
@@ -12,7 +12,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/program', label: '프로그램' },
   { href: '/solutions', label: '솔루션' },
   { href: '/insights', label: '인사이트' },
-  { href: '/calculators', label: '계산기' },
+  { href: '/calculators', label: '계산기', requireAuth: true },
   // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
   // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김

@@ -39,8 +39,9 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-light-border dark:border-dark-border bg-white dark:bg-dark-bg-primary p-6 shadow-heavy dark:shadow-dark-heavy duration-200 data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out',
-        'rounded-md max-h-[95vh] overflow-hidden',
+        'fixed z-50 grid w-full max-w-lg gap-4 border border-light-border dark:border-dark-border bg-white dark:bg-dark-bg-primary p-6 shadow-heavy dark:shadow-dark-heavy duration-200 data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out',
+        'rounded-md max-h-[90vh] overflow-y-auto',
+        'left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]',
         className
       )}
       {...props}
@@ -114,11 +115,6 @@ const DialogDescription = React.forwardRef<
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 export {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
+    Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
 };
+

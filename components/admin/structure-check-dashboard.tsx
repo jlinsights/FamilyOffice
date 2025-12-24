@@ -1,36 +1,36 @@
 'use client';
 
-import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { CheckCircle2, XCircle, Clock, Mail, Phone, Building2, AlertCircle } from 'lucide-react';
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import { AlertCircle, Building2, CheckCircle2, Clock, Mail, Phone } from 'lucide-react';
+import { useState } from 'react';
 
 interface StructureCheckRequest {
   id: string;
@@ -259,10 +259,10 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
                               상세보기
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                          <DialogContent className="sm:max-w-2xl w-[95vw] bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                             <DialogHeader>
-                              <DialogTitle>구조 점검 요청 상세</DialogTitle>
-                              <DialogDescription>
+                              <DialogTitle className="text-slate-900 dark:text-white">구조 점검 요청 상세</DialogTitle>
+                              <DialogDescription className="text-slate-600 dark:text-slate-400">
                                 제출일: {format(new Date(request.submitted_at), 'PPP p', { locale: ko })}
                               </DialogDescription>
                             </DialogHeader>
@@ -270,34 +270,34 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
                             <div className="space-y-6 mt-4">
                               {/* 연락처 정보 */}
                               <div>
-                                <h3 className="font-semibold mb-3 text-lg">연락처 정보</h3>
-                                <div className="grid grid-cols-2 gap-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">연락처 정보</h3>
+                                <div className="grid grid-cols-2 gap-4 p-4 bg-slate-100 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
                                   <div>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400">이름</p>
-                                    <p className="font-medium">{request.name}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">이름</p>
+                                    <p className="font-medium text-slate-900 dark:text-white">{request.name}</p>
                                   </div>
                                   <div>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400">이메일</p>
-                                    <p className="font-medium">{request.email}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">이메일</p>
+                                    <p className="font-medium text-slate-900 dark:text-white">{request.email}</p>
                                   </div>
                                   <div>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400">전화번호</p>
-                                    <p className="font-medium">{request.phone}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">전화번호</p>
+                                    <p className="font-medium text-slate-900 dark:text-white">{request.phone}</p>
                                   </div>
                                   <div>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400">회사명</p>
-                                    <p className="font-medium">{request.company || '-'}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">회사명</p>
+                                    <p className="font-medium text-slate-900 dark:text-white">{request.company || '-'}</p>
                                   </div>
                                 </div>
                               </div>
 
                               {/* 설문 응답 */}
                               <div>
-                                <h3 className="font-semibold mb-3 text-lg">설문 응답</h3>
+                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">설문 응답</h3>
                                 <div className="space-y-3">
-                                  <div className="p-3 border rounded-lg">
-                                    <p className="text-sm font-medium mb-1">Q1. 상속/증여 관련 결정 사항</p>
-                                    <p className="text-slate-700 dark:text-slate-300">
+                                  <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q1. 상속/증여 관련 결정 사항</p>
+                                    <p className="text-slate-900 dark:text-white">
                                       {getAnswerLabel('q1_decision_made', request.q1_decision_made)}
                                       {request.q1_decision_detail && (
                                         <span className="block mt-1 text-sm text-slate-600 dark:text-slate-400">
@@ -306,34 +306,34 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
                                       )}
                                     </p>
                                   </div>
-                                  <div className="p-3 border rounded-lg">
-                                    <p className="text-sm font-medium mb-1">Q2. 문서화 여부</p>
-                                    <p className="text-slate-700 dark:text-slate-300">
+                                  <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q2. 문서화 여부</p>
+                                    <p className="text-slate-900 dark:text-white">
                                       {getAnswerLabel('q2_documented', request.q2_documented)}
                                     </p>
                                   </div>
-                                  <div className="p-3 border rounded-lg">
-                                    <p className="text-sm font-medium mb-1">Q3. 의사결정 권한 명확성</p>
-                                    <p className="text-slate-700 dark:text-slate-300">
+                                  <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q3. 의사결정 권한 명확성</p>
+                                    <p className="text-slate-900 dark:text-white">
                                       {getAnswerLabel('q3_authority_clear', request.q3_authority_clear)}
                                     </p>
                                   </div>
-                                  <div className="p-3 border rounded-lg">
-                                    <p className="text-sm font-medium mb-1">Q4. 현금 유동성 계획</p>
-                                    <p className="text-slate-700 dark:text-slate-300">
+                                  <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q4. 현금 유동성 계획</p>
+                                    <p className="text-slate-900 dark:text-white">
                                       {getAnswerLabel('q4_cash_plan', request.q4_cash_plan)}
                                     </p>
                                   </div>
-                                  <div className="p-3 border rounded-lg">
-                                    <p className="text-sm font-medium mb-1">Q5. 실행 시기</p>
-                                    <p className="text-slate-700 dark:text-slate-300">
+                                  <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q5. 실행 시기</p>
+                                    <p className="text-slate-900 dark:text-white">
                                       {getAnswerLabel('q5_deadline', request.q5_deadline)}
                                     </p>
                                   </div>
                                   {request.q6_concerns && request.q6_concerns.length > 0 && (
-                                    <div className="p-3 border rounded-lg">
-                                      <p className="text-sm font-medium mb-1">Q6. 주요 우려사항</p>
-                                      <ul className="list-disc list-inside text-slate-700 dark:text-slate-300">
+                                    <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                      <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q6. 주요 우려사항</p>
+                                      <ul className="list-disc list-inside text-slate-900 dark:text-white">
                                         {request.q6_concerns.map((concern, idx) => (
                                           <li key={idx}>{concern}</li>
                                         ))}
@@ -341,9 +341,9 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
                                     </div>
                                   )}
                                   {request.q7_advisors && request.q7_advisors.length > 0 && (
-                                    <div className="p-3 border rounded-lg">
-                                      <p className="text-sm font-medium mb-1">Q7. 현재 자문단</p>
-                                      <ul className="list-disc list-inside text-slate-700 dark:text-slate-300">
+                                    <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                      <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q7. 현재 자문단</p>
+                                      <ul className="list-disc list-inside text-slate-900 dark:text-white">
                                         {request.q7_advisors.map((advisor, idx) => (
                                           <li key={idx}>{advisor}</li>
                                         ))}
@@ -351,9 +351,9 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
                                     </div>
                                   )}
                                   {request.additional_notes && (
-                                    <div className="p-3 border rounded-lg">
-                                      <p className="text-sm font-medium mb-1">추가 메모</p>
-                                      <p className="text-slate-700 dark:text-slate-300">
+                                    <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                      <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">추가 메모</p>
+                                      <p className="text-slate-900 dark:text-white">
                                         {request.additional_notes}
                                       </p>
                                     </div>
@@ -363,16 +363,16 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
 
                               {/* 우선순위 정보 */}
                               <div>
-                                <h3 className="font-semibold mb-3 text-lg">우선순위 분석</h3>
-                                <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">우선순위 분석</h3>
+                                <div className="p-4 bg-slate-100 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
                                   <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm text-slate-600 dark:text-slate-400">
+                                    <span className="text-sm text-slate-600 dark:text-slate-300">
                                       자격 점수
                                     </span>
                                     {getScoreBadge(request.qualification_score)}
                                   </div>
                                   <div className="flex items-center justify-between">
-                                    <span className="text-sm text-slate-600 dark:text-slate-400">
+                                    <span className="text-sm text-slate-600 dark:text-slate-300">
                                       현재 상태
                                     </span>
                                     {getStatusBadge(request.status)}

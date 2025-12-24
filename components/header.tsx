@@ -172,7 +172,9 @@ export const Header = memo(function Header({
             role="navigation"
             aria-label="주 메뉴"
           >
-            {NAVIGATION_ITEMS.map((item: NavigationItem) => (
+            {NAVIGATION_ITEMS
+              .filter((item: NavigationItem) => !item.requireAuth || isSignedIn)
+              .map((item: NavigationItem) => (
               <div key={item.href || item.label} className="relative group">
                 {item.submenu && item.submenu.length > 0 ? (
                   <>
@@ -304,7 +306,9 @@ export const Header = memo(function Header({
           aria-label="모바일 메뉴"
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
-            {NAVIGATION_ITEMS.map((item: NavigationItem) => (
+            {NAVIGATION_ITEMS
+              .filter((item: NavigationItem) => !item.requireAuth || isSignedIn)
+              .map((item: NavigationItem) => (
               <div key={item.href || item.label}>
                 {item.submenu && item.submenu.length > 0 ? (
                   <div className="space-y-1">
