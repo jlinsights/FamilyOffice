@@ -47,6 +47,7 @@ export interface SeminarSpecialInfo {
   requiredInfo?: string[];
   transportation?: string;
   hybridOption?: string;
+  parking?: string;
 }
 
 export interface Speaker {
