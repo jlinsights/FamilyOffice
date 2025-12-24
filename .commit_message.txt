@@ -1,10 +1,115 @@
-🔄 Fix: Vercel 빌드 캐시 무효화 (v0.1.2)
+✨ Golden Zone 3-Tier Strategy 통합 완료 (Tier 3 Door Opener 추가)
 
-Vercel 빌드 캐시 문제 해결을 위한 버전 업데이트
+## 완료된 작업
 
-- package.json 버전: 0.1.1 → 0.1.2
-- 빌드 캐시 강제 무효화로 @google-analytics/data 패키지 정상 설치 유도
-- 이전 빌드에서 캐시된 node_modules에 패키지가 없어 발생한 오류 해결
+### 1. main-idea.md 업데이트 ✅
+**Version: 1.1 → 1.2 (Golden Zone 3-Tier Strategy Integrated)**
+
+**Tier 3 (Door Opener) 추가**:
+- **타겟 정의**: "사람과 가족이 고민인 성장기 기업"
+- **매출액**: 50억원 ~ 100억원
+- **영업이익**: 3억원 ~ 7억원 (월납 30~100만 원 여력)
+- **CEO 연령**: 40대 후반 ~ 50대
+- **핵심 Pain Points**: 노무 리스크, 가족 임원 혜택, 복지 투자, 건강 관리
+- **공략 전략**: 안전/복지 어필 (단체보험, 건강검진권)
+- **주력 상품**: 단체상해보험, 임원(가족) 건강보험
+
+**확장된 블랙리스트 기준**:
+- ❌ 영업손실 (최근 1년 영업이익 마이너스)
+- ❌ 자본잠식 (자본총계 < 자본금)
+- ❌ 도소매/무역업 (마진율 낮고 현금 흐름 불안정)
+- ❌ 유흥/사행성 업종 (규제 리스크, 사회적 이미지)
+
+**포트폴리오 배분 전략**:
+- Tier 1 (20%): 소수정예, 1:1 맞춤, 장기 관계
+- Tier 2 (50%): 볼륨 확보, 표준화, 효율적 온보딩
+- Tier 3 (30%): 대량 진입, 자동화, Tier 1/2 육성 경로
+
+**KPI 업데이트**:
+- **Active Clients**: 650+ (Tier 1: 100, Tier 2: 400, Tier 3: 150)
+- **리드 전환율**: Tier 1: 20%, Tier 2: 30%, Tier 3: 40%
+
+### 2. user-personas.md 업데이트 ✅
+**Version: 1.1 → 1.2 (Golden Zone 3-Tier Strategy Integrated)**
+
+**Persona 3 추가 (Tier 3)**:
+- **이름**: 최진우 (Choi Jin-woo)
+- **나이**: 48세 (40대 후반~50대)
+- **업종**: 서비스업 (IT 유지보수 & 시설관리)
+- **매출액**: ₩75 billion
+- **직원 수**: 35명
+- **핵심 Pain Points**:
+  1. 노무 리스크 (산재, 소송, 중대재해처벌법)
+  2. 가족 임원 혜택 (배우자/자녀 임원 등록, 복지 부족)
+  3. 복지 투자 고민 (어디서부터 시작?)
+  4. 건강 관리 (CEO + 가족 건강검진 부족)
+  5. 성장기 특유 과제 (현금 흐름, HR 시스템화)
+
+**페르소나 번호 재조정**:
+- Persona 1: 김철수 (Manufacturing, Tier 1)
+- Persona 2: 이영희 (IT/SaaS, Tier 2)
+- **Persona 3: 최진우 (Service, Tier 3)** ← NEW
+- Persona 4: 박민수 (Construction, Tier 1) ← 기존 Persona 3
+- Persona 5: 정수진 (CFO, Influencer) ← 기존 Persona 4
+- Persona 6: 이준호 (Next-Gen, Tier 1) ← 기존 Persona 5
+
+**Persona Usage Guide 업데이트**:
+- Tier별 접근 방식 (Tier 1: 대면, Tier 2: 화상, Tier 3: 온라인)
+- Tier별 보고 스타일 (Tier 1: 요약, Tier 2: 대시보드, Tier 3: 체크리스트)
+
+### 3. features.md 업데이트 ✅
+
+**Feature #34 (Golden Zone Lead Qualification System) 업데이트**:
+- Tier 3 자동 감지 기준 추가
+- 확장된 블랙리스트 필터 (7개 항목)
+
+**Feature #37 (DB Quality Management System) 업데이트**:
+- Tier별 필수 지표 추가
+- Tier 3: 직원 수 10명 이상, 최근 2년 성장세
+
+**Feature #38 추가 (Tier 3 Door Opener Service Package)**:
+- **핵심 메시지**: "대표님, 직원들 복지도 중요하지만 대표님과 가족 건강은 챙기고 계신가요?"
+- **주요 기능**:
+  1. 단체보험 프로그램 (월 30~100만 원)
+  2. 건강검진권 제공 (CEO + 배우자 VIP)
+  3. 중대재해처벌법 대응
+  4. 임원 가족 복리후생
+  5. 복지 투자 컨설팅
+  6. 제안 상품: 단체상해보험, 임원(가족) 건강보험
+- **Target KPIs**:
+  - 타겟: 150명
+  - 리드 전환율: 40%
+  - Tier 1/2 육성 경로: 30%
+
+## 2026 Golden Zone 3-Tier 전략 요약
+
+### Tier 구성
+| Tier | 타겟 정의 | 매출액 | 포트폴리오 | 전환율 | 주력 상품 |
+|------|----------|--------|-----------|--------|---------|
+| **Tier 1** | 승계/가문 완성형 | 300억~600억 | 20% | 20% | 종신보험 |
+| **Tier 2** | 성장/실리 추구형 | 100억~300억 | 50% | 30% | 경영인 정기보험 |
+| **Tier 3** | 진입/활동형 | 50억~100억 | 30% | 40% | 단체상해보험 |
+
+### 공략 전략
+- **Tier 1**: 감성/명예 어필 (서예, 인문학, 자서전, 의전)
+- **Tier 2**: 이성/실리 어필 (법무 지원, 세무 진단, 네트워킹)
+- **Tier 3**: 안전/복지 어필 (단체보험, 건강검진, 중대재해 대응)
+
+### 에너지 배분
+- **Tier 1 (20%)**: 소수정예, 1:1 맞춤, 장기 관계
+- **Tier 2 (50%)**: 볼륨 확보, 표준화, 효율적 온보딩
+- **Tier 3 (30%)**: 대량 진입, 자동화, 육성 경로 (→ Tier 2)
+
+## 변경된 파일
+- `.agent-os/product/main-idea.md` (v1.1 → v1.2)
+- `.agent-os/product/user-personas.md` (v1.1 → v1.2)
+- `.agent-os/product/features.md` (Feature #34, #37 업데이트, #38 추가)
+
+## 다음 단계
+- ✅ 3-Tier 전략 문서화 완료
+- 📋 Tier 3 마케팅 캠페인 설계
+- 📋 단체보험 파트너 협력사 발굴
+- 📋 중대재해처벌법 컨설팅 프로그램 개발
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
