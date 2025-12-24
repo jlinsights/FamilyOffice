@@ -27,12 +27,13 @@ const nextConfig = {
     // Vercel Toolbar 제거
     // webpackBuildWorker: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true, // TEMPORARY: Disable ESLint to isolate build error
-  },
+  // Next.js 16: eslint configuration moved to eslint.config.js
   typescript: {
     ignoreBuildErrors: true,  // TEMPORARY: Disable TS checks to isolate build error
   },
+
+  // Next.js 16: Turbopack configuration (empty config to silence warning)
+  turbopack: {},
 
   // 이미지 최적화
   images: {
@@ -40,8 +41,21 @@ const nextConfig = {
     minimumCacheTTL: 60,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    domains: ['familyoffices.vip', 'localhost'],
+    // Next.js 16: domains deprecated, use remotePatterns instead
     remotePatterns: [
+      // Localhost for development
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'localhost',
+        port: '',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
@@ -133,93 +147,100 @@ const nextConfig = {
   poweredByHeader: false,
   
   // 정적 자산 경로 설정
-  // 정적 자산 경로 설정
-  // assetPrefix: process.env.NODE_ENV === 'production' && process.env.VERCEL_URL 
-  //   ? `https://${process.env.VERCEL_URL}` 
+  // assetPrefix: process.env.NODE_ENV === 'production' && process.env.VERCEL_URL
+  //   ? `https://${process.env.VERCEL_URL}`
   //   : undefined,
 
-  // 웹팩 설정 최적화
-  webpack: (config, { dev, isServer }) => {
-    // React Server Components 관련 설정
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-        crypto: false,
-        stream: false,
-        url: false,
-        zlib: false,
-        http: false,
-        https: false,
-        assert: false,
-        os: false,
-        path: false,
-      };
-    }
-
-    // Suppress punycode deprecation warnings
-    config.ignoreWarnings = [
-      /Critical dependency: the request of a dependency is an expression/,
-      /Module not found: Can't resolve 'punycode'/,
-      { module: /node_modules\/punycode/ },
-    ];
-
-    // Optimize chunk splitting with granular vendor splitting
-    if (!dev && !isServer) {
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        maxInitialRequests: 25,
-        maxAsyncRequests: 20,
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-            priority: 10,
-          },
-          // Split out React and related packages
-          react: {
-            test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
-            name: 'react',
-            chunks: 'all',
-            priority: 20,
-          },
-          // Split out UI libraries
-          ui: {
-            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|class-variance-authority|clsx|tailwind-merge)[\\/]/,
-            name: 'ui',
-            chunks: 'all',
-            priority: 15,
-          },
-          // Split out Clerk
-          clerk: {
-            test: /[\\/]node_modules[\\/]@clerk[\\/]/,
-            name: 'clerk',
-            chunks: 'async',
-            priority: 18,
-          },
-          // Split out Supabase
-          supabase: {
-            test: /[\\/]node_modules[\\/]@supabase[\\/]/,
-            name: 'supabase',
-            chunks: 'async',
-            priority: 17,
-          },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            priority: 5,
-            reuseExistingChunk: true,
-          },
-        },
-      };
-    }
-
-    return config;
-  },
+  // Next.js 16: Turbopack handles optimization automatically
+  // Webpack configuration commented out - Turbopack provides:
+  // - Automatic module fallbacks for client bundles
+  // - Optimized chunk splitting and code splitting
+  // - Built-in warning suppression
+  //
+  // If custom webpack config is needed, enable with:
+  // experimental: { webpackBuildWorker: false }
+  //
+  // webpack: (config, { dev, isServer }) => {
+  //   // React Server Components 관련 설정
+  //   if (!isServer) {
+  //     config.resolve.fallback = {
+  //       ...config.resolve.fallback,
+  //       fs: false,
+  //       net: false,
+  //       tls: false,
+  //       crypto: false,
+  //       stream: false,
+  //       url: false,
+  //       zlib: false,
+  //       http: false,
+  //       https: false,
+  //       assert: false,
+  //       os: false,
+  //       path: false,
+  //     };
+  //   }
+  //
+  //   // Suppress punycode deprecation warnings
+  //   config.ignoreWarnings = [
+  //     /Critical dependency: the request of a dependency is an expression/,
+  //     /Module not found: Can't resolve 'punycode'/,
+  //     { module: /node_modules\/punycode/ },
+  //   ];
+  //
+  //   // Optimize chunk splitting with granular vendor splitting
+  //   if (!dev && !isServer) {
+  //     config.optimization.splitChunks = {
+  //       chunks: 'all',
+  //       maxInitialRequests: 25,
+  //       maxAsyncRequests: 20,
+  //       cacheGroups: {
+  //         vendor: {
+  //           test: /[\\/]node_modules[\\/]/,
+  //           name: 'vendors',
+  //           chunks: 'all',
+  //           priority: 10,
+  //         },
+  //         // Split out React and related packages
+  //         react: {
+  //           test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+  //           name: 'react',
+  //           chunks: 'all',
+  //           priority: 20,
+  //         },
+  //         // Split out UI libraries
+  //         ui: {
+  //           test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|class-variance-authority|clsx|tailwind-merge)[\\/]/,
+  //           name: 'ui',
+  //           chunks: 'all',
+  //           priority: 15,
+  //         },
+  //         // Split out Clerk
+  //         clerk: {
+  //           test: /[\\/]node_modules[\\/]@clerk[\\/]/,
+  //           name: 'clerk',
+  //           chunks: 'async',
+  //           priority: 18,
+  //         },
+  //         // Split out Supabase
+  //         supabase: {
+  //           test: /[\\/]node_modules[\\/]@supabase[\\/]/,
+  //           name: 'supabase',
+  //           chunks: 'async',
+  //           priority: 17,
+  //         },
+  //         common: {
+  //           name: 'common',
+  //           minChunks: 2,
+  //           chunks: 'all',
+  //           priority: 5,
+  //           reuseExistingChunk: true,
+  //         },
+  //       },
+  //     };
+  //   }
+  //
+  //   return config;
+  // },
 
   // 환경 변수
   env: {
