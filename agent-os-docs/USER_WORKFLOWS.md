@@ -7,24 +7,28 @@ This document outlines the key user workflows for FamilyOffice S, designed speci
 ## Primary User Personas
 
 ### 1. Established CEO (기존 경영자)
+
 - **Profile**: 50-65 years old, 1st generation entrepreneur
 - **Company**: ₩500억-₩2,000억 annual revenue
 - **Goals**: Business succession planning, tax optimization, wealth preservation
 - **Pain Points**: Complex Korean tax laws, succession timing, family dynamics
 
-### 2. Next-Generation Leader (차세대 경영자) 
+### 2. Next-Generation Leader (차세대 경영자)
+
 - **Profile**: 30-45 years old, 2nd/3rd generation family business successor
 - **Company**: Inherited or co-managing family business
 - **Goals**: Modernization, growth strategies, leadership development
 - **Pain Points**: Balancing tradition with innovation, proving capability, managing family expectations
 
 ### 3. Tech Entrepreneur (테크 기업가)
+
 - **Profile**: 35-50 years old, founded tech company
 - **Company**: ₩100억-₩1,000억 valuation
 - **Goals**: Exit strategies, investment opportunities, scaling operations
 - **Pain Points**: Regulatory compliance, international expansion, talent retention
 
 ### 4. Serial Investor (연쇄 투자자)
+
 - **Profile**: 45-60 years old, multiple business interests
 - **Assets**: ₩100억+ liquid assets, diverse portfolio
 - **Goals**: Portfolio optimization, new opportunities, risk management
@@ -35,6 +39,7 @@ This document outlines the key user workflows for FamilyOffice S, designed speci
 ### Workflow 1: Initial Onboarding & Assessment
 
 #### 1.1 Discovery & Registration
+
 ```mermaid
 graph LR
     A[Website Landing] --> B[Service Inquiry]
@@ -53,16 +58,30 @@ graph LR
    - Action: Clicks "상담 신청" (Request Consultation)
 
 2. **Initial Contact Form**
+
    ```typescript
    interface InitialInquiry {
      name: string;
      company: string;
-     industry: 'manufacturing' | 'construction' | 'it_venture' | 'finance' | 'other';
+     industry:
+       | 'manufacturing'
+       | 'construction'
+       | 'it_venture'
+       | 'finance'
+       | 'other';
      companySize: '1-50' | '51-200' | '201-1000' | '1000+';
      revenue: string;
-     inquiryType: 'succession_planning' | 'tax_optimization' | 'investment' | 'general';
+     inquiryType:
+       | 'succession_planning'
+       | 'tax_optimization'
+       | 'investment'
+       | 'general';
      preferredContactMethod: 'phone' | 'email' | 'in_person';
-     urgency: 'immediate' | 'within_month' | 'within_quarter' | 'planning_ahead';
+     urgency:
+       | 'immediate'
+       | 'within_month'
+       | 'within_quarter'
+       | 'planning_ahead';
    }
    ```
 
@@ -113,6 +132,7 @@ graph LR
 **Success Metrics:** Complete profile, identified priority areas, action plan created
 
 #### 1.2 Strategic Planning Session
+
 ```mermaid
 graph TD
     A[Assessment Complete] --> B[Strategy Development]
@@ -123,6 +143,7 @@ graph TD
 ```
 
 **Planning Session Agenda:**
+
 1. **Current State Analysis** (30 minutes)
    - Asset portfolio review
    - Tax situation assessment
@@ -150,6 +171,7 @@ graph TD
 ### Workflow 2: Business Succession Planning (가업승계)
 
 #### 2.1 Succession Assessment & Design
+
 ```mermaid
 graph LR
     A[Succession Request] --> B[Business Valuation]
@@ -162,6 +184,7 @@ graph LR
 **Detailed Process:**
 
 1. **Business Valuation**
+
    ```typescript
    interface BusinessValuation {
      valuationMethod: 'dcf' | 'market_multiple' | 'asset_based' | 'hybrid';
@@ -188,6 +211,7 @@ graph LR
    - Family governance structure
 
 3. **Tax Optimization Modeling**
+
    ```typescript
    interface TaxScenario {
      scenarioName: string;
@@ -215,13 +239,15 @@ graph LR
    - Governance protocols
 
 **Timeline:** 8-12 weeks
-**Key Deliverables:** 
+**Key Deliverables:**
+
 - Comprehensive valuation report
 - Tax optimization analysis
 - Implementation roadmap
 - Legal structure recommendations
 
 #### 2.2 Implementation & Execution
+
 ```mermaid
 graph TD
     A[Plan Approval] --> B[Legal Structure Creation]
@@ -260,6 +286,7 @@ graph TD
 ### Workflow 3: Investment Management & Portfolio Optimization
 
 #### 3.1 Portfolio Analysis & Strategy
+
 ```mermaid
 graph LR
     A[Portfolio Review] --> B[Risk Assessment]
@@ -272,6 +299,7 @@ graph LR
 **Portfolio Management Process:**
 
 1. **Current Holdings Analysis**
+
    ```typescript
    interface PortfolioAnalysis {
      totalValue: number;
@@ -317,12 +345,14 @@ graph LR
    - Performance benchmarking
 
 **Key Features:**
+
 - Real-time Korean market data integration
 - Automated rebalancing alerts
 - Tax-efficient rebalancing
 - Performance attribution analysis
 
 #### 3.2 Alternative Investment Opportunities
+
 ```mermaid
 graph TD
     A[Opportunity Sourcing] --> B[Due Diligence]
@@ -341,6 +371,7 @@ graph TD
    - Direct business investments
 
 2. **Due Diligence Framework**
+
    ```typescript
    interface DueDiligenceReport {
      investment: {
@@ -370,6 +401,7 @@ graph TD
 ### Workflow 4: Tax Planning & Optimization
 
 #### 4.1 Annual Tax Strategy Review
+
 ```mermaid
 graph LR
     A[Tax Law Updates] --> B[Situation Analysis]
@@ -388,6 +420,7 @@ graph LR
    - Compliance requirement changes
 
 2. **Tax Position Analysis**
+
    ```typescript
    interface TaxAnalysis {
      currentYear: {
@@ -420,6 +453,7 @@ graph LR
    - Audit defense preparation
 
 #### 4.2 Business Structure Optimization
+
 ```mermaid
 graph TD
     A[Business Review] --> B[Structure Analysis]
@@ -452,6 +486,7 @@ graph TD
 ### Workflow 5: Member Engagement & Networking
 
 #### 5.1 Premium Member Onboarding
+
 ```mermaid
 graph LR
     A[Membership Upgrade] --> B[Welcome Package]
@@ -464,6 +499,7 @@ graph LR
 **Member Onboarding Process:**
 
 1. **Welcome & Orientation**
+
    ```typescript
    interface MemberWelcomePackage {
      membershipTier: 'premium' | 'vip';
@@ -499,6 +535,7 @@ graph LR
    - Guidance and support
 
 #### 5.2 Event Participation & Networking
+
 ```mermaid
 graph TD
     A[Event Invitation] --> B[Registration]
@@ -531,6 +568,7 @@ graph TD
 ### Workflow 6: Digital Platform Usage
 
 #### 6.1 Dashboard & Analytics Access
+
 ```mermaid
 graph LR
     A[Login] --> B[Dashboard View]
@@ -549,6 +587,7 @@ graph LR
    - Mobile-responsive interface
 
 2. **Real-Time Data Integration**
+
    ```typescript
    interface DashboardData {
      portfolio: {
@@ -577,6 +616,7 @@ graph LR
    - Document library access
 
 #### 6.2 Communication & Support
+
 ```mermaid
 graph TD
     A[Support Request] --> B[Channel Selection]
@@ -609,31 +649,33 @@ graph TD
 ## Success Metrics & KPIs
 
 ### User Engagement Metrics
+
 ```typescript
 interface UserEngagementKPIs {
   onboarding: {
-    completionRate: number;        // Target: >95%
-    timeToFirstValue: number;      // Target: <7 days
+    completionRate: number; // Target: >95%
+    timeToFirstValue: number; // Target: <7 days
     dropOffPoints: string[];
   };
   platform: {
     monthlyActiveUsers: number;
-    sessionDuration: number;       // Target: >10 minutes
-    featureAdoption: number;       // Target: >80%
+    sessionDuration: number; // Target: >10 minutes
+    featureAdoption: number; // Target: >80%
   };
   satisfaction: {
-    nps: number;                   // Target: >70
-    retentionRate: number;         // Target: >95%
-    referralRate: number;          // Target: >25%
+    nps: number; // Target: >70
+    retentionRate: number; // Target: >95%
+    referralRate: number; // Target: >25%
   };
 }
 ```
 
 ### Business Outcome Metrics
+
 ```typescript
 interface BusinessOutcomeKPIs {
   financial: {
-    aum: number;                   // Assets Under Management
+    aum: number; // Assets Under Management
     revenuePerClient: number;
     profitMargin: number;
   };

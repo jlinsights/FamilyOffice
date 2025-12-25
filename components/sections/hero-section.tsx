@@ -1,9 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { ArrowDown, Crown } from 'lucide-react';
+
 import { memo, useEffect, useRef, useState } from 'react';
 
-import { ArrowDown, Crown } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,7 @@ export const HeroSection = memo(function HeroSection() {
   useEffect(() => {
     // Intersection Observer로 통계 섹션이 보일 때 애니메이션 시작
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         const entry = entries[0];
         if (entry && entry.isIntersecting && !startAnimation) {
           setStartAnimation(true);
@@ -28,13 +29,14 @@ export const HeroSection = memo(function HeroSection() {
       { threshold: 0.3 } // 30% 보일 때 트리거
     );
 
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
+    const currentRef = statsRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (statsRef.current) {
-        observer.unobserve(statsRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [startAnimation]);
@@ -56,7 +58,10 @@ export const HeroSection = memo(function HeroSection() {
             animation="fade"
             className="border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 dark:border-amber-800 dark:from-amber-950/80 dark:to-amber-900/50 dark:text-amber-200 shadow-lg backdrop-blur-sm"
           >
-            <ClientOnlyIcon icon={Crown} className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
+            <ClientOnlyIcon
+              icon={Crown}
+              className="h-3 w-3 lg:h-4 lg:w-4 mr-1"
+            />
             Family Office Excellence
           </Badge>
         </div>
@@ -71,18 +76,14 @@ export const HeroSection = memo(function HeroSection() {
         </h1>
 
         {/* 서브 헤드라인 (SEO: Family Office 키워드 포함) */}
-        <p
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-backwards"
-        >
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-backwards">
           성공한 기업가와 자산가를 위한
           <span className="block mt-1 font-light text-muted-foreground">
             프라이빗 패밀리 오피스
           </span>
         </p>
 
-        <p
-          className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto leading-relaxed font-light animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300 fill-mode-backwards"
-        >
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto leading-relaxed font-light animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300 fill-mode-backwards">
           자산의 보전을 넘어,
           <span className="block mt-1">
             위대한 유산이 세대를 이어갈 수 있도록 돕습니다
@@ -104,7 +105,9 @@ export const HeroSection = memo(function HeroSection() {
                 easingFunction={t => 1 - Math.pow(1 - t, 3)}
               />
             </div>
-            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">자산관리 실적</div>
+            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
+              자산관리 실적
+            </div>
           </div>
           <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-200 border-glow">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-navy-enhanced mb-2 lg:mb-3 tabular-nums">
@@ -151,9 +154,7 @@ export const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* CTA 버튼 */}
-        <div
-          className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center mb-12 sm:mb-16 lg:mb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-backwards"
-        >
+        <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center mb-12 sm:mb-16 lg:mb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-backwards">
           <Button
             size="lg"
             variant="default"

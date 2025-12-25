@@ -10,15 +10,22 @@
  * To fully resolve: Run the database migrations and regenerate types with:
  * npx supabase gen types typescript --project-id <project-id> > types/supabase.ts
  */
-
-import { createClient } from '@/lib/supabase/server';
 import { getHubSpotClient } from '@/lib/hubspot/api-client';
-import { getLeadScoringEngine } from './lead-scoring-engine';
+import { safeFrom, safeInsert, safeUpdate } from '@/lib/supabase/helpers';
+import { createClient } from '@/lib/supabase/server';
+
 import { getAIContentEngine } from './ai-content-engine';
+import { getLeadScoringEngine } from './lead-scoring-engine';
 
 export interface WorkflowStep {
   step: number;
-  type: 'email' | 'content_recommendation' | 'sales_notification' | 'wait' | 'condition' | 'hubspot_action';
+  type:
+    | 'email'
+    | 'content_recommendation'
+    | 'sales_notification'
+    | 'wait'
+    | 'condition'
+    | 'hubspot_action';
   template?: string;
   content_type?: string;
   content_id?: string;
@@ -30,13 +37,27 @@ export interface WorkflowStep {
 
 export interface WorkflowCondition {
   property: string;
-  operator: 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte' | 'contains' | 'not_contains';
+  operator:
+    | 'eq'
+    | 'neq'
+    | 'gt'
+    | 'gte'
+    | 'lt'
+    | 'lte'
+    | 'contains'
+    | 'not_contains';
   value: any;
   logical_operator?: 'and' | 'or';
 }
 
 export interface WorkflowTrigger {
-  trigger_type: 'contact_created' | 'score_change' | 'property_change' | 'form_submit' | 'page_visit' | 'manual';
+  trigger_type:
+    | 'contact_created'
+    | 'score_change'
+    | 'property_change'
+    | 'form_submit'
+    | 'page_visit'
+    | 'manual';
   conditions: WorkflowCondition[];
   trigger_data?: Record<string, any>;
 }
@@ -59,7 +80,12 @@ export interface MarketingWorkflow {
   id: string;
   name: string;
   description?: string;
-  workflow_type: 'nurture' | 'onboarding' | 'reengagement' | 'lead_qualification' | 'upsell';
+  workflow_type:
+    | 'nurture'
+    | 'onboarding'
+    | 'reengagement'
+    | 'lead_qualification'
+    | 'upsell';
   trigger_conditions: WorkflowTrigger;
   workflow_steps: WorkflowStep[];
   status: 'draft' | 'active' | 'paused';
@@ -124,7 +150,6 @@ export class WorkflowEngine {
           await this.startWorkflowExecution(workflow, contactId, triggerData);
         }
       }
-
     } catch (error) {
       console.error('워크플로우 트리거 처리 실패:', error);
     }
@@ -144,7 +169,10 @@ export class WorkflowEngine {
       const trigger = workflow.trigger_conditions;
 
       // 1. 기본 트리거 타입 매칭
-      if (trigger.trigger_type !== triggerType && trigger.trigger_type !== 'manual') {
+      if (
+        trigger.trigger_type !== triggerType &&
+        trigger.trigger_type !== 'manual'
+      ) {
         return false;
       }
 
@@ -189,7 +217,6 @@ export class WorkflowEngine {
       }
 
       return true;
-
     } catch (error) {
       console.error('트리거 조건 평가 실패:', error);
       return false;
@@ -234,13 +261,16 @@ export class WorkflowEngine {
         case 'lte':
           return Number(actualValue) <= Number(condition.value);
         case 'contains':
-          return String(actualValue).toLowerCase().includes(String(condition.value).toLowerCase());
+          return String(actualValue)
+            .toLowerCase()
+            .includes(String(condition.value).toLowerCase());
         case 'not_contains':
-          return !String(actualValue).toLowerCase().includes(String(condition.value).toLowerCase());
+          return !String(actualValue)
+            .toLowerCase()
+            .includes(String(condition.value).toLowerCase());
         default:
           return false;
       }
-
     } catch (error) {
       console.error('조건 평가 실패:', error);
       return false;
@@ -260,9 +290,10 @@ export class WorkflowEngine {
       console.log(`🚀 워크플로우 시작: ${workflow.name} for ${contactId}`);
 
       // 1. 실행 로그 생성
-      const { data: execution, error: executionError } = await supabase
-        .from('workflow_executions')
-        .insert({
+      const { data: execution, error: executionError } = await safeInsert(
+        supabase,
+        'workflow_executions',
+        {
           workflow_id: workflow.id,
           hubspot_contact_id: contactId,
           status: 'running',
@@ -275,7 +306,8 @@ export class WorkflowEngine {
           },
           started_at: new Date().toISOString(),
           next_action_at: new Date().toISOString(),
-        })
+        }
+      )
         .select()
         .single();
 
@@ -284,19 +316,19 @@ export class WorkflowEngine {
       }
 
       // 2. 워크플로우 등록 수 증가
-      await supabase
-        .from('marketing_workflows')
-        .update({ 
-          enrolled_count: workflow.enrolled_count + 1 
-        })
-        .eq('id', workflow.id);
+      await safeUpdate(
+        supabase,
+        'marketing_workflows' as any,
+        {
+          enrolled_count: workflow.enrolled_count + 1,
+        } as any
+      ).eq('id', workflow.id);
 
       // 3. 첫 번째 단계 실행 스케줄링
       const firstStep = workflow.workflow_steps[0];
       if (firstStep) {
         await this.scheduleNextStep(execution.id, firstStep);
       }
-
     } catch (error) {
       console.error('워크플로우 실행 시작 실패:', error);
     }
@@ -311,22 +343,22 @@ export class WorkflowEngine {
   ): Promise<void> {
     try {
       const supabase = await this.supabase;
-      const nextActionTime = new Date(Date.now() + step.delay_hours * 60 * 60 * 1000);
+      const nextActionTime = new Date(
+        Date.now() + step.delay_hours * 60 * 60 * 1000
+      );
 
-      await supabase
-        .from('workflow_executions')
-        .update({
-          next_action_at: nextActionTime.toISOString(),
-        })
-        .eq('id', executionId);
+      await safeUpdate(supabase, 'workflow_executions', {
+        next_action_at: nextActionTime.toISOString(),
+      }).eq('id', executionId);
 
-      console.log(`⏰ 다음 단계 스케줄: ${step.type} in ${step.delay_hours}시간`);
+      console.log(
+        `⏰ 다음 단계 스케줄: ${step.type} in ${step.delay_hours}시간`
+      );
 
       // 즉시 실행 (delay_hours가 0인 경우)
       if (step.delay_hours === 0) {
         await this.executeWorkflowStep(executionId);
       }
-
     } catch (error) {
       console.error('단계 스케줄링 실패:', error);
     }
@@ -341,12 +373,16 @@ export class WorkflowEngine {
       console.log('🔄 예정된 워크플로우 단계 실행 시작');
 
       // 실행 예정 워크플로우 조회
-      const { data: executions, error } = await supabase
-        .from('workflow_executions')
-        .select(`
+      const { data: executions, error } = await safeFrom(
+        supabase,
+        'workflow_executions'
+      )
+        .select(
+          `
           *,
           workflow:marketing_workflows(*)
-        `)
+        `
+        )
         .eq('status', 'running')
         .lte('next_action_at', new Date().toISOString())
         .limit(50); // 한 번에 최대 50개 처리
@@ -366,7 +402,6 @@ export class WorkflowEngine {
       }
 
       console.log(`✅ ${executions.length}개 워크플로우 단계 실행 완료`);
-
     } catch (error) {
       console.error('예정된 워크플로우 실행 실패:', error);
     }
@@ -379,12 +414,16 @@ export class WorkflowEngine {
     try {
       const supabase = await this.supabase;
       // 1. 실행 정보 조회
-      const { data: execution, error: executionError } = await supabase
-        .from('workflow_executions')
-        .select(`
+      const { data: execution, error: executionError } = await safeFrom(
+        supabase,
+        'workflow_executions'
+      )
+        .select(
+          `
           *,
           workflow:marketing_workflows(*)
-        `)
+        `
+        )
         .eq('id', executionId)
         .single();
 
@@ -401,14 +440,16 @@ export class WorkflowEngine {
       }
 
       const step = workflow.workflow_steps[currentStepIndex];
-      
+
       if (!step) {
         console.error('워크플로우 단계를 찾을 수 없음:', currentStepIndex);
         await this.completeWorkflow(execution);
         return;
       }
 
-      console.log(`▶️ 워크플로우 단계 실행: ${workflow.name} - Step ${step.step} (${step.type})`);
+      console.log(
+        `▶️ 워크플로우 단계 실행: ${workflow.name} - Step ${step.step} (${step.type})`
+      );
 
       // 2. 단계별 액션 실행
       const stepResult = await this.executeStepAction(step, execution);
@@ -424,61 +465,57 @@ export class WorkflowEngine {
         } else {
           // 다음 단계 준비
           const nextStep = workflow.workflow_steps[nextStepIndex];
-          
+
           if (!nextStep) {
-            console.error('다음 워크플로우 단계를 찾을 수 없음:', nextStepIndex);
+            console.error(
+              '다음 워크플로우 단계를 찾을 수 없음:',
+              nextStepIndex
+            );
             await this.completeWorkflow(execution);
             return;
           }
 
-          await supabase
-            .from('workflow_executions')
-            .update({
-              current_step: nextStepIndex,
-              execution_data: {
-                ...execution.execution_data,
-                step_results: [
-                  ...(execution.execution_data.step_results || []),
-                  {
-                    step: step.step,
-                    type: step.type,
-                    result: stepResult,
-                    executed_at: new Date().toISOString(),
-                  }
-                ]
-              },
-            })
-            .eq('id', executionId);
+          await safeUpdate(supabase, 'workflow_executions', {
+            current_step: nextStepIndex,
+            execution_data: {
+              ...execution.execution_data,
+              step_results: [
+                ...(execution.execution_data.step_results || []),
+                {
+                  step: step.step,
+                  type: step.type,
+                  result: stepResult,
+                  executed_at: new Date().toISOString(),
+                },
+              ],
+            } as any,
+          }).eq('id', executionId);
 
           // 다음 단계 스케줄링
           await this.scheduleNextStep(executionId, nextStep);
         }
       } else {
         // 실행 실패 처리
-        await supabase
-          .from('workflow_executions')
-          .update({
-            status: 'failed',
-            error_message: stepResult.error || '단계 실행 실패',
-          })
-          .eq('id', executionId);
+        await safeUpdate(supabase, 'workflow_executions', {
+          status: 'failed',
+          error_message: stepResult.error || '단계 실행 실패',
+        }).eq('id', executionId);
 
-        console.error(`❌ 워크플로우 단계 실패: ${workflow.name} - ${stepResult.error}`);
+        console.error(
+          `❌ 워크플로우 단계 실패: ${workflow.name} - ${stepResult.error}`
+        );
       }
-
     } catch (error) {
       console.error('워크플로우 단계 실행 실패:', error);
-      
+
       try {
         const supabase = await this.supabase;
         // 실행 상태를 실패로 업데이트
-        await supabase
-        .from('workflow_executions')
-        .update({
+        await safeUpdate(supabase, 'workflow_executions', {
           status: 'failed',
-          error_message: error instanceof Error ? error.message : '알 수 없는 오류',
-        })
-        .eq('id', executionId);
+          error_message:
+            error instanceof Error ? error.message : '알 수 없는 오류',
+        }).eq('id', executionId);
       } catch (updateError) {
         console.error('실행 상태 업데이트 실패:', updateError);
       }
@@ -496,30 +533,29 @@ export class WorkflowEngine {
       switch (step.type) {
         case 'email':
           return await this.executeEmailAction(step, execution);
-        
+
         case 'content_recommendation':
           return await this.executeContentRecommendationAction(step, execution);
-        
+
         case 'sales_notification':
           return await this.executeSalesNotificationAction(step, execution);
-        
+
         case 'hubspot_action':
           return await this.executeHubSpotAction(step, execution);
-        
+
         case 'wait':
           return { success: true, data: { message: 'Wait step completed' } };
-        
+
         case 'condition':
           return await this.executeConditionAction(step, execution);
-        
+
         default:
           return { success: false, error: `Unknown step type: ${step.type}` };
       }
-
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : '알 수 없는 오류' 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : '알 수 없는 오류',
       };
     }
   }
@@ -541,8 +577,10 @@ export class WorkflowEngine {
       };
 
       // 실제 이메일 발송 로직 (HubSpot 이메일 API 또는 다른 서비스)
-      console.log(`📧 이메일 발송: ${step.template} to ${execution.hubspot_contact_id}`);
-      
+      console.log(
+        `📧 이메일 발송: ${step.template} to ${execution.hubspot_contact_id}`
+      );
+
       // HubSpot 이메일 활동 기록
       await this.hubspotClient.trackEmailActivity(
         execution.hubspot_contact_id,
@@ -550,19 +588,18 @@ export class WorkflowEngine {
         `자동화된 마케팅 이메일 (워크플로우: ${execution.execution_data.workflow_name})`
       );
 
-      return { 
-        success: true, 
-        data: { 
-          email_sent: true, 
+      return {
+        success: true,
+        data: {
+          email_sent: true,
           template: step.template,
-          timestamp: new Date().toISOString() 
-        } 
+          timestamp: new Date().toISOString(),
+        },
       };
-
     } catch (error) {
-      return { 
-        success: false, 
-        error: `이메일 발송 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}` 
+      return {
+        success: false,
+        error: `이메일 발송 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}`,
       };
     }
   }
@@ -576,10 +613,11 @@ export class WorkflowEngine {
   ): Promise<{ success: boolean; error?: string; data?: any }> {
     try {
       // AI 콘텐츠 엔진으로 추천 생성
-      const recommendations = await this.aiContentEngine.generateRecommendations(
-        execution.hubspot_contact_id,
-        3 // 최대 3개 추천
-      );
+      const recommendations =
+        await this.aiContentEngine.generateRecommendations(
+          execution.hubspot_contact_id,
+          3 // 최대 3개 추천
+        );
 
       // 특정 콘텐츠 타입 필터링
       let filteredRecommendations = recommendations;
@@ -591,19 +629,18 @@ export class WorkflowEngine {
 
       console.log(`📖 콘텐츠 추천 생성: ${filteredRecommendations.length}개`);
 
-      return { 
-        success: true, 
-        data: { 
+      return {
+        success: true,
+        data: {
           recommendations_generated: filteredRecommendations.length,
           content_type: step.content_type,
-          timestamp: new Date().toISOString() 
-        } 
+          timestamp: new Date().toISOString(),
+        },
       };
-
     } catch (error) {
-      return { 
-        success: false, 
-        error: `콘텐츠 추천 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}` 
+      return {
+        success: false,
+        error: `콘텐츠 추천 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}`,
       };
     }
   }
@@ -632,21 +669,22 @@ export class WorkflowEngine {
         `영업팀 알림 - ${execution.execution_data.workflow_name}`
       );
 
-      console.log(`🔔 영업팀 알림: ${step.priority} priority for ${execution.hubspot_contact_id}`);
+      console.log(
+        `🔔 영업팀 알림: ${step.priority} priority for ${execution.hubspot_contact_id}`
+      );
 
-      return { 
-        success: true, 
-        data: { 
-          notification_sent: true, 
+      return {
+        success: true,
+        data: {
+          notification_sent: true,
           priority: step.priority,
-          timestamp: new Date().toISOString() 
-        } 
+          timestamp: new Date().toISOString(),
+        },
       };
-
     } catch (error) {
-      return { 
-        success: false, 
-        error: `영업팀 알림 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}` 
+      return {
+        success: false,
+        error: `영업팀 알림 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}`,
       };
     }
   }
@@ -660,42 +698,40 @@ export class WorkflowEngine {
   ): Promise<{ success: boolean; error?: string; data?: any }> {
     try {
       const actionData = step.action_data || {};
-      
+
       // 액션 타입에 따른 처리
       switch (actionData.action_type) {
         case 'update_property':
-          await this.hubspotClient.updateContact(
-            execution.hubspot_contact_id,
-            { [actionData.property]: actionData.value }
-          );
+          await this.hubspotClient.updateContact(execution.hubspot_contact_id, {
+            [actionData.property]: actionData.value,
+          });
           break;
-        
+
         case 'add_to_list':
           // HubSpot 리스트 추가 API 호출
           console.log(`📝 HubSpot 리스트 추가: ${actionData.list_id}`);
           break;
-        
+
         case 'create_task':
           // HubSpot 작업 생성 API 호출
           console.log(`✅ HubSpot 작업 생성: ${actionData.task_title}`);
           break;
-        
+
         default:
           throw new Error(`Unknown HubSpot action: ${actionData.action_type}`);
       }
 
-      return { 
-        success: true, 
-        data: { 
+      return {
+        success: true,
+        data: {
           hubspot_action: actionData.action_type,
-          timestamp: new Date().toISOString() 
-        } 
+          timestamp: new Date().toISOString(),
+        },
       };
-
     } catch (error) {
-      return { 
-        success: false, 
-        error: `HubSpot 액션 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}` 
+      return {
+        success: false,
+        error: `HubSpot 액션 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}`,
       };
     }
   }
@@ -713,8 +749,12 @@ export class WorkflowEngine {
       }
 
       // 조건 평가를 위한 컨텍스트 수집
-      const contact = await this.hubspotClient.getContactByEmail(execution.hubspot_contact_id);
-      const leadScore = await this.leadScoringEngine.getLeadScore(execution.hubspot_contact_id);
+      const contact = await this.hubspotClient.getContactByEmail(
+        execution.hubspot_contact_id
+      );
+      const leadScore = await this.leadScoringEngine.getLeadScore(
+        execution.hubspot_contact_id
+      );
 
       const conditionMet = this.evaluateCondition(step.condition, {
         contact: contact?.properties || {},
@@ -722,19 +762,18 @@ export class WorkflowEngine {
         executionData: execution.execution_data,
       });
 
-      return { 
-        success: true, 
-        data: { 
+      return {
+        success: true,
+        data: {
           condition_met: conditionMet,
           condition: step.condition,
-          timestamp: new Date().toISOString() 
-        } 
+          timestamp: new Date().toISOString(),
+        },
       };
-
     } catch (error) {
-      return { 
-        success: false, 
-        error: `조건 평가 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}` 
+      return {
+        success: false,
+        error: `조건 평가 실패: ${error instanceof Error ? error.message : '알 수 없는 오류'}`,
       };
     }
   }
@@ -746,22 +785,19 @@ export class WorkflowEngine {
     try {
       const supabase = await this.supabase;
       // 1. 실행 상태 완료로 업데이트
-      await supabase
-        .from('workflow_executions')
-        .update({
-          status: 'completed',
-          completed_at: new Date().toISOString(),
-        })
-        .eq('id', execution.id);
+      await safeUpdate(supabase, 'workflow_executions', {
+        status: 'completed',
+        completed_at: new Date().toISOString(),
+      }).eq('id', execution.id);
 
       // 2. 워크플로우 완료 수 증가
-      await supabase
-        .rpc('increment_workflow_completed_count', { 
-          workflow_id: execution.workflow_id 
-        });
+      await (supabase as any).rpc('increment_workflow_completed_count', {
+        workflow_id: execution.workflow_id,
+      });
 
-      console.log(`🎉 워크플로우 완료: ${execution.execution_data.workflow_name} for ${execution.hubspot_contact_id}`);
-
+      console.log(
+        `🎉 워크플로우 완료: ${execution.execution_data.workflow_name} for ${execution.hubspot_contact_id}`
+      );
     } catch (error) {
       console.error('워크플로우 완료 처리 실패:', error);
     }
@@ -773,10 +809,12 @@ export class WorkflowEngine {
   async getWorkflowAnalytics(workflowId?: string, daysBack: number = 30) {
     try {
       const supabase = await this.supabase;
-      let query = supabase
-        .from('workflow_executions')
+      let query = safeFrom(supabase, 'workflow_executions')
         .select('*')
-        .gte('started_at', new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString());
+        .gte(
+          'started_at',
+          new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString()
+        );
 
       if (workflowId) {
         query = query.eq('workflow_id', workflowId);
@@ -789,20 +827,28 @@ export class WorkflowEngine {
       }
 
       const total = executions.length;
-      const completed = executions.filter(ex => ex.status === 'completed').length;
-      const failed = executions.filter(ex => ex.status === 'failed').length;
-      const running = executions.filter(ex => ex.status === 'running').length;
+      const completed = executions.filter(
+        (ex: any) => ex.status === 'completed'
+      ).length;
+      const failed = executions.filter(
+        (ex: any) => ex.status === 'failed'
+      ).length;
+      const running = executions.filter(
+        (ex: any) => ex.status === 'running'
+      ).length;
 
       return {
         total_executions: total,
         completed_executions: completed,
         failed_executions: failed,
         running_executions: running,
-        completion_rate: total > 0 ? ((completed / total) * 100).toFixed(1) : '0',
+        completion_rate:
+          total > 0 ? ((completed / total) * 100).toFixed(1) : '0',
         failure_rate: total > 0 ? ((failed / total) * 100).toFixed(1) : '0',
-        avg_completion_time: this.calculateAverageCompletionTime(executions.filter(ex => ex.completed_at)),
+        avg_completion_time: this.calculateAverageCompletionTime(
+          executions.filter((ex: any) => ex.completed_at)
+        ),
       };
-
     } catch (error) {
       console.error('워크플로우 성과 분석 실패:', error);
       throw error;
@@ -824,7 +870,7 @@ export class WorkflowEngine {
     }, 0);
 
     const avgMinutes = Math.round(totalMinutes / completedExecutions.length);
-    
+
     if (avgMinutes < 60) {
       return `${avgMinutes}분`;
     } else if (avgMinutes < 1440) {

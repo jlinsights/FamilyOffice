@@ -15,6 +15,7 @@
 ### ✅ 2. 필수 계정 및 서비스 설정
 
 #### Kakao Developers
+
 - [ ] [Kakao Developers Console](https://developers.kakao.com/) 계정 생성
 - [ ] 새 애플리케이션 등록
 - [ ] REST API 키 발급
@@ -22,11 +23,13 @@
 - [ ] JavaScript 키 발급
 
 #### Supabase
+
 - [ ] [Supabase Console](https://supabase.com/) 프로젝트 생성
 - [ ] 데이터베이스 URL 및 API 키 확인
 - [ ] Service Role Key 확인
 
 #### Vercel (배포 플랫폼)
+
 - [ ] [Vercel](https://vercel.com/) 계정 생성
 - [ ] GitHub 저장소 연결
 - [ ] 도메인 설정 (선택사항)
@@ -128,9 +131,9 @@ Redirect URL: https://your-project-ref.supabase.co/auth/v1/callback
 
 ```sql
 -- 필수 테이블이 존재하는지 확인
-SELECT table_name 
-FROM information_schema.tables 
-WHERE table_schema = 'public' 
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public'
 AND table_name IN ('users', 'consultations');
 
 -- users 테이블 구조 확인
@@ -371,6 +374,7 @@ vercel logs --follow
 ### 자주 발생하는 문제와 해결책
 
 #### 1. 카카오 로그인 실패
+
 ```bash
 # 증상: OAuth 플로우에서 에러 발생
 # 원인: Redirect URI 불일치
@@ -385,6 +389,7 @@ console.log('Redirect URL:', process.env.NEXT_PUBLIC_APP_URL + '/auth/callback')
 ```
 
 #### 2. Supabase RLS 정책 오류
+
 ```bash
 # 증상: 데이터베이스 액세스 거부
 # 원인: RLS 정책 설정 오류
@@ -399,6 +404,7 @@ SELECT * FROM pg_policies WHERE tablename = 'users';
 ```
 
 #### 3. 성능 문제
+
 ```bash
 # 증상: 느린 로딩 시간
 # 원인: 비효율적인 쿼리 또는 캐시 미스
@@ -414,6 +420,7 @@ SELECT * FROM pg_policies WHERE tablename = 'users';
 ```
 
 #### 4. 환경 변수 문제
+
 ```bash
 # 증상: API 키 관련 오류
 # 원인: 환경 변수 설정 오류
@@ -455,11 +462,13 @@ console.log('Environment check:', {
 ## 📞 지원 및 문의
 
 ### 기술 지원
+
 - **카카오 개발자**: https://devtalk.kakao.com/
 - **Supabase 지원**: https://supabase.com/support
 - **Vercel 지원**: https://vercel.com/help
 
 ### 추가 문서
+
 - [카카오 API 문서](https://developers.kakao.com/docs)
 - [Supabase 문서](https://supabase.com/docs)
 - [Next.js 배포 가이드](https://nextjs.org/docs/deployment)
@@ -470,6 +479,6 @@ console.log('Environment check:', {
 
 FamilyOffice S 카카오 로그인 시스템이 성공적으로 배포되었습니다. 이제 사용자들이 안전하고 편리하게 카카오 계정으로 로그인하여 프리미엄 패밀리오피스 서비스를 이용할 수 있습니다.
 
-**배포 일시**: _______________
+**배포 일시**: ******\_\_\_******
 **배포 버전**: v1.0.0
-**담당자**: _______________
+**담당자**: ******\_\_\_******

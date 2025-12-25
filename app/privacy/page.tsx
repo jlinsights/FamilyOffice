@@ -43,8 +43,8 @@ export default function PrivacyPolicyPage() {
               className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-slide-up leading-relaxed"
               style={{ animationDelay: '200ms' }}
             >
-              FamilyOffice S 서비스를 운영하는 「패밀리오피스」의 개인정보 수집, 이용, 보관에 관한 상세한 정책을
-              확인하세요
+              FamilyOffice S 서비스를 운영하는 「패밀리오피스」의 개인정보 수집,
+              이용, 보관에 관한 상세한 정책을 확인하세요
             </p>
 
             <div
@@ -84,11 +84,11 @@ export default function PrivacyPolicyPage() {
                   </h2>
                   <div className="pl-4 space-y-4">
                     <p>
-                      「패밀리오피스」(이하 &apos;회사&apos;라 함)는 다음의 목적을
-                      위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는
-                      다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이
-                      변경되는 경우에는 개인정보보호법 제18조에 따라 별도의
-                      동의를 받는 등 필요한 조치를 이행할 예정입니다.
+                      「패밀리오피스」(이하 &apos;회사&apos;라 함)는 다음의
+                      목적을 위하여 개인정보를 처리합니다. 처리하고 있는
+                      개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며,
+                      이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라
+                      별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
                     </p>
 
                     <h3 className="text-lg font-semibold mt-6 mb-3">

@@ -1,7 +1,8 @@
 'use client';
 
-import Script from 'next/script';
 import { useEffect, useState } from 'react';
+
+import Script from 'next/script';
 
 import { AdminAccessDeniedAlert } from '@/components/admin-access-denied-alert';
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -16,8 +17,12 @@ import { SkipLinks } from '@/components/skip-links';
 import { SmoothScroll } from '@/components/smooth-scroll';
 import { StructuredData } from '@/components/structured-data';
 
+import {
+  createAnalyticsScript,
+  createGTMScript,
+  isAllowedScriptSource,
+} from '@/lib/security/html-sanitizer';
 import { generateStructuredData } from '@/lib/seo/structured-data';
-import { createAnalyticsScript, createGTMScript, isAllowedScriptSource } from '@/lib/security/html-sanitizer';
 
 export default function ClientPage() {
   const [mounted, setMounted] = useState(false);
@@ -43,7 +48,9 @@ export default function ClientPage() {
         <div className="pt-20">
           <div className="text-center py-20">
             <h1 className="text-2xl font-semibold">로딩 중...</h1>
-            <p className="text-muted-foreground mt-2">페이지를 준비하고 있습니다.</p>
+            <p className="text-muted-foreground mt-2">
+              페이지를 준비하고 있습니다.
+            </p>
           </div>
         </div>
       </div>
@@ -67,7 +74,7 @@ export default function ClientPage() {
         strategy="lazyOnload"
       />
       <Script
-        id="ga" 
+        id="ga"
         strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: createAnalyticsScript('G-DB6TXRZLTK'),
@@ -109,4 +116,4 @@ export default function ClientPage() {
       </ErrorBoundary>
     </>
   );
-} 
+}

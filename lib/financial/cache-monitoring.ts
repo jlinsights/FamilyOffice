@@ -74,7 +74,9 @@ class CacheMonitoringService {
   /**
    * 시간 범위 내 메트릭 필터링
    */
-  private getMetricsInWindow(windowMs: number = this.analysisWindowMs): CacheHitMetrics[] {
+  private getMetricsInWindow(
+    windowMs: number = this.analysisWindowMs
+  ): CacheHitMetrics[] {
     const now = Date.now();
     const cutoff = now - windowMs;
     return this.metrics.filter(m => m.timestamp >= cutoff);
@@ -83,10 +85,13 @@ class CacheMonitoringService {
   /**
    * 특정 타입별 통계 계산
    */
-  private calculateStatsForType(metrics: CacheHitMetrics[], type: 'memory' | 'redis' | 'miss'): CacheStatsDetail {
+  private calculateStatsForType(
+    metrics: CacheHitMetrics[],
+    type: 'memory' | 'redis' | 'miss'
+  ): CacheStatsDetail {
     const typeMetrics = metrics.filter(m => m.type === type);
     const total = typeMetrics.length;
-    
+
     if (total === 0) {
       return {
         total: 0,
@@ -101,8 +106,12 @@ class CacheMonitoringService {
     const hits = type === 'miss' ? 0 : total;
     const misses = type === 'miss' ? total : 0;
     const hitRate = hits / total;
-    const avgResponseTime = typeMetrics.reduce((sum, m) => sum + m.responseTime, 0) / total;
-    const totalDataSize = typeMetrics.reduce((sum, m) => sum + (m.dataSize || 0), 0);
+    const avgResponseTime =
+      typeMetrics.reduce((sum, m) => sum + m.responseTime, 0) / total;
+    const totalDataSize = typeMetrics.reduce(
+      (sum, m) => sum + (m.dataSize || 0),
+      0
+    );
 
     return {
       total,
@@ -147,7 +156,9 @@ class CacheMonitoringService {
   /**
    * 종합 캐시 통계 분석
    */
-  getComprehensiveStats(windowMs: number = this.analysisWindowMs): CacheMonitoringData {
+  getComprehensiveStats(
+    windowMs: number = this.analysisWindowMs
+  ): CacheMonitoringData {
     const windowMetrics = this.getMetricsInWindow(windowMs);
     const now = Date.now();
     const windowStart = now - windowMs;
@@ -162,9 +173,11 @@ class CacheMonitoringService {
     const totalHits = memoryStats.hits + redisStats.hits;
     const totalMisses = missStats.total;
     const overallHitRate = totalRequests > 0 ? totalHits / totalRequests : 0;
-    const avgResponseTime = totalRequests > 0 
-      ? windowMetrics.reduce((sum, m) => sum + m.responseTime, 0) / totalRequests
-      : 0;
+    const avgResponseTime =
+      totalRequests > 0
+        ? windowMetrics.reduce((sum, m) => sum + m.responseTime, 0) /
+          totalRequests
+        : 0;
     const totalDataSize = memoryStats.totalDataSize + redisStats.totalDataSize;
 
     const overallStats: CacheStatsDetail = {
@@ -258,7 +271,9 @@ class CacheMonitoringService {
     stats: CacheMonitoringData;
     rawMetrics: CacheHitMetrics[];
   } {
-    const windowMetrics = windowMs ? this.getMetricsInWindow(windowMs) : this.metrics;
+    const windowMetrics = windowMs
+      ? this.getMetricsInWindow(windowMs)
+      : this.metrics;
     return {
       stats: this.getComprehensiveStats(windowMs),
       rawMetrics: windowMetrics,
@@ -270,7 +285,12 @@ class CacheMonitoringService {
 export const cacheMonitoring = new CacheMonitoringService();
 
 // 편의 함수들
-export const recordCacheHit = (key: string, source: 'memory' | 'redis', responseTime: number, dataSize?: number) => {
+export const recordCacheHit = (
+  key: string,
+  source: 'memory' | 'redis',
+  responseTime: number,
+  dataSize?: number
+) => {
   cacheMonitoring.recordCacheAccess(key, source, responseTime, dataSize);
 };
 
@@ -292,10 +312,13 @@ export const checkCacheAlerts = () => {
 
 // 주기적 성능 체크 (개발/프로덕션에서만)
 if (typeof window === 'undefined' && process.env.NODE_ENV !== 'test') {
-  setInterval(() => {
-    const alerts = checkCacheAlerts();
-    if (Object.keys(alerts).length > 0) {
-      console.warn('🚨 캐시 성능 알림:', alerts);
-    }
-  }, 5 * 60 * 1000); // 5분마다 체크
+  setInterval(
+    () => {
+      const alerts = checkCacheAlerts();
+      if (Object.keys(alerts).length > 0) {
+        console.warn('🚨 캐시 성능 알림:', alerts);
+      }
+    },
+    5 * 60 * 1000
+  ); // 5분마다 체크
 }

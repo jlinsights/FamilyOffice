@@ -8,15 +8,15 @@ export function generateFAQSchema(faqs: FAQItem[], url?: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    'mainEntity': faqs.map(faq => ({
+    mainEntity: faqs.map(faq => ({
       '@type': 'Question',
-      'name': faq.question,
-      'acceptedAnswer': {
+      name: faq.question,
+      acceptedAnswer: {
         '@type': 'Answer',
-        'text': faq.answer
-      }
+        text: faq.answer,
+      },
     })),
-    ...(url && { 'url': url })
+    ...(url && { url: url }),
   };
 }
 
@@ -25,7 +25,7 @@ export function generateFAQSchema(faqs: FAQItem[], url?: string) {
  */
 export function FAQSchema({ faqs, url }: { faqs: FAQItem[]; url?: string }) {
   const schema = generateFAQSchema(faqs, url);
-  
+
   return (
     <script
       type="application/ld+json"

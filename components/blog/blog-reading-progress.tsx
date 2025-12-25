@@ -7,7 +7,8 @@ export function BlogReadingProgress() {
 
   useEffect(() => {
     const updateProgress = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = window.scrollY;
       const progress = scrollHeight > 0 ? (scrolled / scrollHeight) * 100 : 0;
       setProgress(Math.min(100, Math.max(0, progress)));

@@ -3,16 +3,35 @@
  */
 'use client';
 
+import { CheckCircle, Info, Loader2, Send, XCircle } from 'lucide-react';
+
+import { useState } from 'react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+
 import { useToast } from '@/hooks/use-toast';
-import { CheckCircle, Info, Loader2, Send, XCircle } from 'lucide-react';
-import { useState } from 'react';
+
+/**
+ * Resend 이메일 테스트 패널 (관리자용)
+ */
 
 interface EmailStatus {
   configured: boolean;
@@ -24,7 +43,9 @@ interface EmailStatus {
 }
 
 export function ResendTestPanel() {
-  const [emailType, setEmailType] = useState<'consultation' | 'newsletter' | 'custom'>('custom');
+  const [emailType, setEmailType] = useState<
+    'consultation' | 'newsletter' | 'custom'
+  >('custom');
   const [formData, setFormData] = useState({
     to: '',
     name: '',
@@ -125,11 +146,26 @@ export function ResendTestPanel() {
     if (!status) return null;
 
     if (status.configured && status.apiConnected) {
-      return <Badge variant="default" className="bg-green-500"><CheckCircle className="w-3 h-3 mr-1" />연결됨</Badge>;
+      return (
+        <Badge variant="default" className="bg-green-500">
+          <CheckCircle className="w-3 h-3 mr-1" />
+          연결됨
+        </Badge>
+      );
     } else if (status.configured && status.apiConnected === false) {
-      return <Badge variant="destructive"><XCircle className="w-3 h-3 mr-1" />API 오류</Badge>;
+      return (
+        <Badge variant="destructive">
+          <XCircle className="w-3 h-3 mr-1" />
+          API 오류
+        </Badge>
+      );
     } else {
-      return <Badge variant="secondary"><Info className="w-3 h-3 mr-1" />미설정</Badge>;
+      return (
+        <Badge variant="secondary">
+          <Info className="w-3 h-3 mr-1" />
+          미설정
+        </Badge>
+      );
     }
   };
 
@@ -140,13 +176,17 @@ export function ResendTestPanel() {
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             Resend 시스템 상태
-            <Button 
-              onClick={checkStatus} 
+            <Button
+              onClick={checkStatus}
               disabled={statusLoading}
               variant="outline"
               size="sm"
             >
-              {statusLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : '상태 확인'}
+              {statusLoading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                '상태 확인'
+              )}
             </Button>
           </CardTitle>
           <CardDescription>
@@ -162,7 +202,9 @@ export function ResendTestPanel() {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">발송 도메인:</span>
-                <code className="text-sm bg-muted px-2 py-1 rounded">{status.domain}</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">
+                  {status.domain}
+                </code>
               </div>
               {status.domainsCount !== undefined && (
                 <div className="flex items-center justify-between">
@@ -176,11 +218,14 @@ export function ResendTestPanel() {
                 </div>
               )}
               <div className="text-xs text-muted-foreground">
-                마지막 확인: {new Date(status.timestamp).toLocaleString('ko-KR')}
+                마지막 확인:{' '}
+                {new Date(status.timestamp).toLocaleString('ko-KR')}
               </div>
             </div>
           ) : (
-            <p className="text-sm text-muted-foreground">상태를 확인하려면 &apos;상태 확인&apos; 버튼을 클릭하세요.</p>
+            <p className="text-sm text-muted-foreground">
+              상태를 확인하려면 &apos;상태 확인&apos; 버튼을 클릭하세요.
+            </p>
           )}
         </CardContent>
       </Card>
@@ -197,7 +242,10 @@ export function ResendTestPanel() {
           {/* 이메일 타입 선택 */}
           <div className="space-y-2">
             <Label>이메일 타입</Label>
-            <Select value={emailType} onValueChange={(value: any) => setEmailType(value)}>
+            <Select
+              value={emailType}
+              onValueChange={(value: any) => setEmailType(value)}
+            >
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -217,7 +265,9 @@ export function ResendTestPanel() {
                 id="to"
                 type="email"
                 value={formData.to}
-                onChange={(e) => setFormData(prev => ({ ...prev, to: e.target.value }))}
+                onChange={e =>
+                  setFormData(prev => ({ ...prev, to: e.target.value }))
+                }
                 placeholder="test@example.com"
               />
             </div>
@@ -226,7 +276,9 @@ export function ResendTestPanel() {
               <Input
                 id="name"
                 value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                onChange={e =>
+                  setFormData(prev => ({ ...prev, name: e.target.value }))
+                }
                 placeholder="홍길동"
               />
             </div>
@@ -240,7 +292,12 @@ export function ResendTestPanel() {
                 <Input
                   id="consultationType"
                   value={formData.consultationType}
-                  onChange={(e) => setFormData(prev => ({ ...prev, consultationType: e.target.value }))}
+                  onChange={e =>
+                    setFormData(prev => ({
+                      ...prev,
+                      consultationType: e.target.value,
+                    }))
+                  }
                   placeholder="자산관리 상담"
                 />
               </div>
@@ -249,7 +306,12 @@ export function ResendTestPanel() {
                 <Input
                   id="consultationDate"
                   value={formData.consultationDate}
-                  onChange={(e) => setFormData(prev => ({ ...prev, consultationDate: e.target.value }))}
+                  onChange={e =>
+                    setFormData(prev => ({
+                      ...prev,
+                      consultationDate: e.target.value,
+                    }))
+                  }
                   placeholder="2024년 1월 30일 오후 2시"
                 />
               </div>
@@ -263,7 +325,9 @@ export function ResendTestPanel() {
                 <Input
                   id="subject"
                   value={formData.subject}
-                  onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
+                  onChange={e =>
+                    setFormData(prev => ({ ...prev, subject: e.target.value }))
+                  }
                   placeholder="이메일 제목을 입력하세요"
                 />
               </div>
@@ -272,7 +336,9 @@ export function ResendTestPanel() {
                 <Textarea
                   id="message"
                   value={formData.message}
-                  onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                  onChange={e =>
+                    setFormData(prev => ({ ...prev, message: e.target.value }))
+                  }
                   placeholder="이메일 내용을 입력하세요"
                   rows={5}
                 />
@@ -281,8 +347,8 @@ export function ResendTestPanel() {
           )}
 
           {/* 전송 버튼 */}
-          <Button 
-            onClick={sendTestEmail} 
+          <Button
+            onClick={sendTestEmail}
             disabled={isLoading || !formData.to}
             className="w-full"
           >

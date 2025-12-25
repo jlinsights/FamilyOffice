@@ -2,7 +2,7 @@
 
 ## 📊 Project Status
 
-![Status](https://img.shields.io/badge/Status-Production-green?style=for-the-badge&labelColor=000000) ![Client_Satisfaction](https://img.shields.io/badge/Client_Satisfaction-95%-brightgreen?style=for-the-badge&labelColor=000000) ![Assets_Under_Management](https://img.shields.io/badge/Assets_Under_Management-$50M+-blue?style=for-the-badge&labelColor=000000) ![Tech_Stack](https://img.shields.io/badge/Tech_Stack-Next.js_15.2.4-blue?style=for-the-badge&labelColor=000000) ![Auth](https://img.shields.io/badge/Auth-Clerk-orange?style=for-the-badge&labelColor=000000) ![Database](https://img.shields.io/badge/Database-Supabase-green?style=for-the-badge&labelColor=000000) 
+![Status](https://img.shields.io/badge/Status-Production-green?style=for-the-badge&labelColor=000000) ![Client_Satisfaction](https://img.shields.io/badge/Client_Satisfaction-95%-brightgreen?style=for-the-badge&labelColor=000000) ![Assets_Under_Management](https://img.shields.io/badge/Assets_Under_Management-$50M+-blue?style=for-the-badge&labelColor=000000) ![Tech_Stack](https://img.shields.io/badge/Tech_Stack-Next.js_15.2.4-blue?style=for-the-badge&labelColor=000000) ![Auth](https://img.shields.io/badge/Auth-Clerk-orange?style=for-the-badge&labelColor=000000) ![Database](https://img.shields.io/badge/Database-Supabase-green?style=for-the-badge&labelColor=000000)
 
 ### 🛠️ Tech Stack
 
@@ -67,11 +67,13 @@ interface AssetManagementMetrics {
 ## 🔮 성공 사례: A그룹의 디지털 전환
 
 ### 도전과제
+
 - 3세대에 걸친 복잡한 지분구조
 - 해외 자산 500억원 규모의 불투명한 관리
 - 가업승계세 추정 200억원의 부담
 
 ### 솔루션
+
 **FamilyOffice S** 플랫폼 도입으로:
 
 1. **자산 통합**: 17개 계좌 → 통합 대시보드
@@ -79,6 +81,7 @@ interface AssetManagementMetrics {
 3. **리스크 관리**: 포트폴리오 변동성 23% → 14% 감소
 
 ### 성과 지표
+
 ```json
 {
   "time_to_insight": "실시간 (기존 1주일)",
@@ -91,14 +94,17 @@ interface AssetManagementMetrics {
 ## 💭 향후 전망: 2025년 패밀리오피스 트렌드
 
 ### 1. AI 기반 예측 분석
+
 - **시장 예측**: 머신러닝 기반 시장 동향 분석
 - **리스크 예측**: 조기 경보 시스템 구축
 
 ### 2. ESG 통합 관리
+
 - **탄소 발자국 추적**: 투자 포트폴리오의 환경 영향 측정
 - **지속가능성 리포팅**: 투명한 ESG 성과 공개
 
 ### 3. 차세대 승계 준비
+
 - **디지털 네이티브 세대**: MZ세대 맞춤형 인터페이스
 - **글로벌 표준**: 국제 회계 기준 준수
 

@@ -1,13 +1,13 @@
 import {
-  Menu,
-  X,
-  Home,
-  User,
   BarChart3,
   Calendar,
   FileText,
-  Settings,
+  Home,
   LogOut,
+  Menu,
+  Settings,
+  User,
+  X,
 } from 'lucide-react';
 
 import { useState } from 'react';
@@ -54,10 +54,10 @@ const navigationItems: NavigationItem[] = [
     description: '컨설팅 서비스',
   },
   {
-    href: '/contact',
-    label: '문의',
+    href: '/structure-check',
+    label: '구조 점검',
     icon: User,
-    description: '상담 신청',
+    description: '구조 점검 요청',
   },
 ];
 
@@ -192,9 +192,9 @@ export function MobileQuickActions() {
             className="flex flex-col items-center gap-1 h-auto p-2"
             asChild
           >
-            <Link href="/contact">
+            <Link href="/structure-check">
               <User className="h-4 w-4" />
-              <span className="text-xs">상담</span>
+              <span className="text-xs">구조 점검</span>
             </Link>
           </Button>
 

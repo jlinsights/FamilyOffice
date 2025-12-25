@@ -1,15 +1,34 @@
+import {
+  BarChart3,
+  CheckCircle2,
+  Globe,
+  PieChart,
+  Shield,
+  Star,
+  Target,
+  TrendingUp,
+} from 'lucide-react';
+
+import type { Metadata } from 'next';
+import Link from 'next/link';
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+
 import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { generateMetadata } from '@/lib/seo/metadata';
-import { BarChart3, CheckCircle2, Globe, PieChart, Shield, Star, Target, TrendingUp } from 'lucide-react';
-import type { Metadata } from 'next';
-import Link from 'next/link';
 
 export const metadata: Metadata = generateMetadata(
   '투자자문 전문 서비스 | 개인 맞춤형 자산관리 및 투자전략',
@@ -30,7 +49,7 @@ export const metadata: Metadata = generateMetadata(
     '채권투자',
     '대체투자',
     '글로벌투자',
-    '은퇴설계'
+    '은퇴설계',
   ],
   undefined,
   '전문가급',
@@ -49,26 +68,26 @@ export default function InvestmentAdvisoryPage() {
         name: '투자자문 서비스의 최소 투자금액은 얼마인가요?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '개인 투자자문 서비스는 1억원부터 시작합니다. 이는 분산투자 효과와 전문적인 포트폴리오 관리의 실질적 혜택을 누릴 수 있는 최소 규모입니다. 투자금액에 따라 더욱 세분화된 맞춤형 서비스를 제공합니다.'
-        }
+          text: '개인 투자자문 서비스는 1억원부터 시작합니다. 이는 분산투자 효과와 전문적인 포트폴리오 관리의 실질적 혜택을 누릴 수 있는 최소 규모입니다. 투자금액에 따라 더욱 세분화된 맞춤형 서비스를 제공합니다.',
+        },
       },
       {
         '@type': 'Question',
         name: '투자자문 수수료는 어떻게 책정되나요?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '자산 규모에 따라 연간 1.0~2.5% 수준입니다. 자산이 클수록 수수료율은 낮아지며, 성과연동 수수료 옵션도 제공합니다. 투자 성과가 벤치마크를 초과달성할 경우에만 추가 수수료가 발생하는 구조로 고객과 이해관계를 일치시킵니다.'
-        }
+          text: '자산 규모에 따라 연간 1.0~2.5% 수준입니다. 자산이 클수록 수수료율은 낮아지며, 성과연동 수수료 옵션도 제공합니다. 투자 성과가 벤치마크를 초과달성할 경우에만 추가 수수료가 발생하는 구조로 고객과 이해관계를 일치시킵니다.',
+        },
       },
       {
         '@type': 'Question',
         name: '투자 성과는 어느 정도 기대할 수 있나요?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '시장 상황과 투자성향에 따라 다르지만, 최근 5년간 평균 연 12-15%의 수익률을 달성했습니다. 안정형 포트폴리오는 연 8-10%, 성장형은 연 12-18% 수준을 목표로 합니다. 다만 투자에는 손실 위험이 따르므로 리스크 관리가 우선입니다.'
-        }
-      }
-    ]
+          text: '시장 상황과 투자성향에 따라 다르지만, 최근 5년간 평균 연 12-15%의 수익률을 달성했습니다. 안정형 포트폴리오는 연 8-10%, 성장형은 연 12-18% 수준을 목표로 합니다. 다만 투자에는 손실 위험이 따르므로 리스크 관리가 우선입니다.',
+        },
+      },
+    ],
   };
 
   const howToData = {
@@ -80,35 +99,35 @@ export default function InvestmentAdvisoryPage() {
     estimatedCost: {
       '@type': 'MonetaryAmount',
       currency: 'KRW',
-      value: '상담 후 결정'
+      value: '상담 후 결정',
     },
     step: [
       {
         '@type': 'HowToStep',
         name: '투자 성향 분석',
-        text: '위험 허용도, 투자 목표, 투자 기간 등 개인 특성 파악'
+        text: '위험 허용도, 투자 목표, 투자 기간 등 개인 특성 파악',
       },
       {
         '@type': 'HowToStep',
         name: '자산 현황 진단',
-        text: '현재 보유 자산 분석, 포트폴리오 점검, 개선점 도출'
+        text: '현재 보유 자산 분석, 포트폴리오 점검, 개선점 도출',
       },
       {
         '@type': 'HowToStep',
         name: '투자 전략 수립',
-        text: '맞춤형 자산배분, 투자 상품 선정, 리밸런싱 계획'
+        text: '맞춤형 자산배분, 투자 상품 선정, 리밸런싱 계획',
       },
       {
         '@type': 'HowToStep',
         name: '포트폴리오 구성',
-        text: '최적 자산배분 실행, 투자상품 매매, 리스크 관리'
+        text: '최적 자산배분 실행, 투자상품 매매, 리스크 관리',
       },
       {
         '@type': 'HowToStep',
         name: '지속 관리',
-        text: '정기 성과 점검, 시장 변화 대응, 전략 조정'
-      }
-    ]
+        text: '정기 성과 점검, 시장 변화 대응, 전략 조정',
+      },
+    ],
   };
 
   return (
@@ -125,10 +144,13 @@ export default function InvestmentAdvisoryPage() {
               Professional Investment Advisory
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              개인 맞춤형 투자자문으로<br />안정적인 자산 증식을 실현하세요
+              개인 맞춤형 투자자문으로
+              <br />
+              안정적인 자산 증식을 실현하세요
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              연 15% 수익률 달성, 리스크 최소화, 글로벌 분산투자<br />
+              연 15% 수익률 달성, 리스크 최소화, 글로벌 분산투자
+              <br />
               전문 투자자문가가 설계하는 개인 맞춤형 포트폴리오
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -150,7 +172,7 @@ export default function InvestmentAdvisoryPage() {
               <Star className="h-4 w-4" />
               <AlertTitle>2025년 투자 전망</AlertTitle>
               <AlertDescription>
-                글로벌 경제 회복과 한국 시장의 구조적 변화로 새로운 투자 기회가 
+                글로벌 경제 회복과 한국 시장의 구조적 변화로 새로운 투자 기회가
                 확대되고 있습니다. 지금이 포트폴리오 재구성의 최적 시기입니다.
               </AlertDescription>
             </Alert>
@@ -171,7 +193,9 @@ export default function InvestmentAdvisoryPage() {
             <div className="grid md:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-4xl font-bold text-primary">15%</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-primary">
+                    15%
+                  </CardTitle>
                   <CardDescription>연평균 수익률</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -182,7 +206,9 @@ export default function InvestmentAdvisoryPage() {
               </Card>
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-4xl font-bold text-primary">85%</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-primary">
+                    85%
+                  </CardTitle>
                   <CardDescription>목표 달성률</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -193,7 +219,9 @@ export default function InvestmentAdvisoryPage() {
               </Card>
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-4xl font-bold text-primary">12%</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-primary">
+                    12%
+                  </CardTitle>
                   <CardDescription>최대 손실 제한</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -204,7 +232,9 @@ export default function InvestmentAdvisoryPage() {
               </Card>
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-4xl font-bold text-primary">500+</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-primary">
+                    500+
+                  </CardTitle>
                   <CardDescription>관리 고객 수</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -237,7 +267,9 @@ export default function InvestmentAdvisoryPage() {
                     </div>
                     <div>
                       <CardTitle>맞춤형 자산배분</CardTitle>
-                      <CardDescription>개인 특성 기반 포트폴리오</CardDescription>
+                      <CardDescription>
+                        개인 특성 기반 포트폴리오
+                      </CardDescription>
                     </div>
                   </div>
                 </CardHeader>
@@ -374,7 +406,9 @@ export default function InvestmentAdvisoryPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">투자 상품별 전문 서비스</h2>
+              <h2 className="text-3xl font-bold mb-4">
+                투자 상품별 전문 서비스
+              </h2>
               <p className="text-lg text-muted-foreground">
                 다양한 자산군에 대한 전문적인 투자 서비스 제공
               </p>
@@ -396,7 +430,7 @@ export default function InvestmentAdvisoryPage() {
                   </ul>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-center">채권 투자</CardTitle>
@@ -413,7 +447,7 @@ export default function InvestmentAdvisoryPage() {
                   </ul>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-center">대체 투자</CardTitle>
@@ -448,29 +482,40 @@ export default function InvestmentAdvisoryPage() {
                   <div>
                     <h3 className="font-bold text-lg mb-2">투자자 현황</h3>
                     <p className="text-muted-foreground text-sm">
-                      • 직장인 B씨 (45세)<br />
-                      • 투자금액: 5억원<br />
-                      • 투자성향: 적극적<br />
-                      • 목표수익률: 12%
+                      • 직장인 B씨 (45세)
+                      <br />
+                      • 투자금액: 5억원
+                      <br />
+                      • 투자성향: 적극적
+                      <br />• 목표수익률: 12%
                     </p>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-2">투자 전략</h3>
                     <p className="text-muted-foreground text-sm">
-                      • 국내 주식 40%<br />
-                      • 해외 주식 30%<br />
-                      • 채권 20%<br />
-                      • 대체투자 10%<br />
-                      • 분기별 리밸런싱
+                      • 국내 주식 40%
+                      <br />
+                      • 해외 주식 30%
+                      <br />
+                      • 채권 20%
+                      <br />
+                      • 대체투자 10%
+                      <br />• 분기별 리밸런싱
                     </p>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-2">투자 성과</h3>
                     <p className="text-muted-foreground text-sm">
-                      • <span className="text-primary font-semibold">연 16.5% 수익률</span> 달성<br />
-                      • 시장 대비 4.2% 초과<br />
-                      • 최대 손실 8.5% 제한<br />
-                      • 목표 수익률 138% 달성
+                      •{' '}
+                      <span className="text-primary font-semibold">
+                        연 16.5% 수익률
+                      </span>{' '}
+                      달성
+                      <br />
+                      • 시장 대비 4.2% 초과
+                      <br />
+                      • 최대 손실 8.5% 제한
+                      <br />• 목표 수익률 138% 달성
                     </p>
                   </div>
                 </div>
@@ -488,7 +533,8 @@ export default function InvestmentAdvisoryPage() {
               전문가와 함께하는 성공 투자
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              혼자 하는 투자에서 벗어나 전문가의 도움을 받아보세요.<br />
+              혼자 하는 투자에서 벗어나 전문가의 도움을 받아보세요.
+              <br />
               체계적인 투자 전략으로 더 나은 수익률을 실현할 수 있습니다.
             </p>
             <div className="grid md:grid-cols-3 gap-4 mb-8">

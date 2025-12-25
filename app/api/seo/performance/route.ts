@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { performanceMonitor, seoPerformanceTracker } from '@/lib/performance-monitor';
+
 import { enhancedSEOCache, aiCacheOperations } from '@/lib/enhanced-seo-cache';
 import { getAllFeatureFlags } from '@/lib/feature-flags';
+import {
+  performanceMonitor,
+  seoPerformanceTracker,
+} from '@/lib/performance-monitor';
 import { BundleSizeMonitor } from '@/lib/seo-bundle-optimizer';
 import { SEOErrorHandler } from '@/lib/seo-error-handling';
 
@@ -19,14 +23,18 @@ export async function GET(request: NextRequest) {
     const cacheStats = enhancedSEOCache.getStats();
     const aiCacheStats = aiCacheOperations.getPerformanceMetrics();
     const errorStats = SEOErrorHandler.getErrorStats();
-    
+
     // Bundle optimization metrics
     const bundleStats = {
       loadTimes: BundleSizeMonitor.getLoadTimes(),
       totalImports: Object.keys(BundleSizeMonitor.getLoadTimes()).length,
-      averageLoadTime: Object.values(BundleSizeMonitor.getLoadTimes()).length > 0 
-        ? Object.values(BundleSizeMonitor.getLoadTimes()).reduce((a, b) => a + b, 0) / Object.values(BundleSizeMonitor.getLoadTimes()).length
-        : 0,
+      averageLoadTime:
+        Object.values(BundleSizeMonitor.getLoadTimes()).length > 0
+          ? Object.values(BundleSizeMonitor.getLoadTimes()).reduce(
+              (a, b) => a + b,
+              0
+            ) / Object.values(BundleSizeMonitor.getLoadTimes()).length
+          : 0,
     };
 
     // Get system stats
@@ -55,7 +63,8 @@ export async function GET(request: NextRequest) {
       },
       performance: {
         totalOperations: performanceSummary.totalOperations,
-        averageResponseTime: Math.round(performanceSummary.averageResponseTime * 100) / 100,
+        averageResponseTime:
+          Math.round(performanceSummary.averageResponseTime * 100) / 100,
         slowOperations: performanceSummary.slowOperations,
         errorRate: Math.round(performanceSummary.errorRate * 10000) / 100, // Convert to percentage
       },
@@ -72,16 +81,31 @@ export async function GET(request: NextRequest) {
       bundleOptimization: {
         totalImports: bundleStats.totalImports,
         averageLoadTime: Math.round(bundleStats.averageLoadTime * 100) / 100,
-        status: bundleStats.averageLoadTime < 100 ? 'optimal' : 'needs-optimization',
+        status:
+          bundleStats.averageLoadTime < 100 ? 'optimal' : 'needs-optimization',
       },
       errorTracking: {
         totalErrors: errorStats.totalErrors,
-        criticalErrors: (errorStats.errorsBySeverity.critical || 0),
-        recentErrorRate: errorStats.totalErrors > 0 ? Math.round((errorStats.recentErrors.length / errorStats.totalErrors) * 100) : 0,
-        status: (errorStats.errorsBySeverity.critical || 0) > 0 ? 'critical' : 
-                (errorStats.errorsBySeverity.high || 0) > 0 ? 'attention' : 'healthy',
+        criticalErrors: errorStats.errorsBySeverity.critical || 0,
+        recentErrorRate:
+          errorStats.totalErrors > 0
+            ? Math.round(
+                (errorStats.recentErrors.length / errorStats.totalErrors) * 100
+              )
+            : 0,
+        status:
+          (errorStats.errorsBySeverity.critical || 0) > 0
+            ? 'critical'
+            : (errorStats.errorsBySeverity.high || 0) > 0
+              ? 'attention'
+              : 'healthy',
       },
-      recommendations: generateRecommendations(performanceSummary, featureFlags, bundleStats, aiCacheStats),
+      recommendations: generateRecommendations(
+        performanceSummary,
+        featureFlags,
+        bundleStats,
+        aiCacheStats
+      ),
     };
 
     if (detailed) {
@@ -103,7 +127,9 @@ export async function GET(request: NextRequest) {
           bundleOptimization: {
             loadTimes: bundleStats.loadTimes,
             averageLoadTime: bundleStats.averageLoadTime,
-            slowImports: Object.entries(bundleStats.loadTimes).filter(([_, time]) => time > 100),
+            slowImports: Object.entries(bundleStats.loadTimes).filter(
+              ([_, time]) => time > 100
+            ),
           },
           enhancedCache: {
             detailed: cacheStats,
@@ -168,7 +194,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         status: 'error',
-        message: 'Invalid action. Use ?action=clear-cache or ?action=clear-metrics',
+        message:
+          'Invalid action. Use ?action=clear-cache or ?action=clear-metrics',
       },
       { status: 400 }
     );
@@ -184,7 +211,12 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function generateRecommendations(performanceSummary: any, featureFlags: any, bundleStats?: any, aiCacheStats?: any): string[] {
+function generateRecommendations(
+  performanceSummary: any,
+  featureFlags: any,
+  bundleStats?: any,
+  aiCacheStats?: any
+): string[] {
   const recommendations = [];
 
   // Performance recommendations
@@ -197,44 +229,62 @@ function generateRecommendations(performanceSummary: any, featureFlags: any, bun
   }
 
   if (performanceSummary.slowOperations > 5) {
-    recommendations.push('Multiple slow operations detected - consider optimization');
+    recommendations.push(
+      'Multiple slow operations detected - consider optimization'
+    );
   }
 
   // Feature flag recommendations
   const enabledFeatures = Object.values(featureFlags).filter(Boolean).length;
   if (enabledFeatures === 0) {
-    recommendations.push('All SEO features disabled - consider gradual activation');
+    recommendations.push(
+      'All SEO features disabled - consider gradual activation'
+    );
   }
 
   if (enabledFeatures >= 4 && performanceSummary.errorRate < 0.01) {
-    recommendations.push('✅ Week 3: AI features enabled - monitoring performance impact');
+    recommendations.push(
+      '✅ Week 3: AI features enabled - monitoring performance impact'
+    );
   }
 
   if (enabledFeatures < 4 && performanceSummary.errorRate < 0.01) {
-    recommendations.push('System stable - safe to enable AI-powered SEO features');
+    recommendations.push(
+      'System stable - safe to enable AI-powered SEO features'
+    );
   }
 
   // Bundle optimization recommendations
   if (bundleStats && bundleStats.averageLoadTime > 100) {
-    recommendations.push('Bundle load times detected >100ms - consider preloading');
+    recommendations.push(
+      'Bundle load times detected >100ms - consider preloading'
+    );
   }
-  
+
   if (bundleStats && bundleStats.totalImports > 5) {
-    recommendations.push('Multiple dynamic imports active - monitor bundle size');
+    recommendations.push(
+      'Multiple dynamic imports active - monitor bundle size'
+    );
   }
 
   // Cache performance recommendations
   if (aiCacheStats && aiCacheStats.hitRate < 70) {
-    recommendations.push('AI cache hit rate <70% - consider increasing cache TTL');
+    recommendations.push(
+      'AI cache hit rate <70% - consider increasing cache TTL'
+    );
   }
 
   if (aiCacheStats && aiCacheStats.hitRate > 85) {
-    recommendations.push('Excellent AI cache performance - ready for next phase');
+    recommendations.push(
+      'Excellent AI cache performance - ready for next phase'
+    );
   }
 
   // Default recommendation
   if (recommendations.length === 0) {
-    recommendations.push('✅ Week 3: AI-powered SEO features active - system performing optimally');
+    recommendations.push(
+      '✅ Week 3: AI-powered SEO features active - system performing optimally'
+    );
   }
 
   return recommendations;
@@ -242,8 +292,12 @@ function generateRecommendations(performanceSummary: any, featureFlags: any, bun
 
 function generateHTMLReport(data: any): string {
   const statusColor = data.status === 'healthy' ? '#10B981' : '#EF4444';
-  const errorRateColor = data.performance.errorRate < 1 ? '#10B981' : 
-                        data.performance.errorRate < 5 ? '#F59E0B' : '#EF4444';
+  const errorRateColor =
+    data.performance.errorRate < 1
+      ? '#10B981'
+      : data.performance.errorRate < 5
+        ? '#F59E0B'
+        : '#EF4444';
 
   return `
 <!DOCTYPE html>
@@ -310,9 +364,12 @@ function generateHTMLReport(data: any): string {
           <span class="metric-value">${data.featureFlags.enabledCount}/${data.featureFlags.totalCount}</span>
         </div>
         <div class="feature-flags">
-          ${data.featureFlags.enabled.map((feature: string) => 
-            `<span class="flag enabled">${feature}</span>`
-          ).join('')}
+          ${data.featureFlags.enabled
+            .map(
+              (feature: string) =>
+                `<span class="flag enabled">${feature}</span>`
+            )
+            .join('')}
         </div>
       </div>
 
@@ -381,14 +438,18 @@ function generateHTMLReport(data: any): string {
       </div>
     </div>
 
-    ${data.recommendations.length > 0 ? `
+    ${
+      data.recommendations.length > 0
+        ? `
     <div class="recommendations">
       <h4>💡 Recommendations</h4>
       <ul>
         ${data.recommendations.map((rec: string) => `<li>${rec}</li>`).join('')}
       </ul>
     </div>
-    ` : ''}
+    `
+        : ''
+    }
   </div>
 </body>
 </html>`;

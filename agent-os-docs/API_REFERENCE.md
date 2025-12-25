@@ -27,6 +27,7 @@ X-RateLimit-Reset: 1640995200
 ### 1. Authentication & User Management
 
 #### Check Admin Permission
+
 ```typescript
 GET /api/admin/check-permission
 
@@ -53,6 +54,7 @@ Authorization: Bearer <token>
 ```
 
 #### User Statistics
+
 ```typescript
 GET /api/admin/users/stats
 
@@ -83,6 +85,7 @@ GET /api/admin/users/stats
 ```
 
 #### Sync User Profile
+
 ```typescript
 POST /api/sync-user
 
@@ -111,6 +114,7 @@ POST /api/sync-user
 ### 2. Financial Data Services
 
 #### Korean Market Data
+
 ```typescript
 GET /api/financial/korean-market
 
@@ -140,6 +144,7 @@ GET /api/financial/korean-market
 ```
 
 #### Global Stock Data
+
 ```typescript
 GET /api/financial/stocks
 
@@ -171,6 +176,7 @@ GET /api/financial/stocks
 ```
 
 #### Forex Rates
+
 ```typescript
 GET /api/financial/forex
 
@@ -182,7 +188,7 @@ GET /api/financial/forex
   "success": true,
   "data": {
     "fromCurrency": "USD",
-    "toCurrency": "KRW", 
+    "toCurrency": "KRW",
     "rate": 1305.50,
     "amount": 1000,
     "convertedAmount": 1305500,
@@ -195,6 +201,7 @@ GET /api/financial/forex
 ```
 
 #### Tax Optimization Calculator
+
 ```typescript
 POST /api/financial/tax-optimization
 
@@ -245,6 +252,7 @@ POST /api/financial/tax-optimization
 ### 3. Consultation & Booking System
 
 #### Cal.com Integration
+
 ```typescript
 GET /api/cal-com/bookings
 
@@ -282,6 +290,7 @@ GET /api/cal-com/bookings
 ```
 
 #### Create Consultation Booking
+
 ```typescript
 POST /api/cal-com/bookings
 
@@ -327,6 +336,7 @@ POST /api/cal-com/bookings
 ### 4. Analytics & Monitoring
 
 #### Performance Metrics
+
 ```typescript
 GET /api/analytics/performance
 
@@ -359,7 +369,7 @@ GET /api/analytics/performance
     },
     "trends": {
       "api_response_time": "improving",
-      "page_load_time": "stable", 
+      "page_load_time": "stable",
       "error_rate": "improving"
     }
   },
@@ -368,6 +378,7 @@ GET /api/analytics/performance
 ```
 
 #### System Health Check
+
 ```typescript
 GET /api/monitoring/health
 
@@ -395,7 +406,7 @@ GET /api/monitoring/health
           "successRate": 0.99
         },
         "alpha_vantage": {
-          "status": "healthy", 
+          "status": "healthy",
           "responseTime": 320,
           "successRate": 0.97
         },
@@ -416,6 +427,7 @@ GET /api/monitoring/health
 ### 5. Document & Newsletter Management
 
 #### Newsletter Subscription
+
 ```typescript
 POST /api/newsletter/subscribe
 
@@ -434,7 +446,7 @@ POST /api/newsletter/subscribe
   "success": true,
   "data": {
     "subscriptionId": "sub_abc123",
-    "email": "investor@company.co.kr", 
+    "email": "investor@company.co.kr",
     "status": "confirmed",
     "subscribedAt": "2024-01-15T10:30:00Z",
     "preferences": {
@@ -448,6 +460,7 @@ POST /api/newsletter/subscribe
 ```
 
 #### Document Generation
+
 ```typescript
 POST /api/docs
 
@@ -486,6 +499,7 @@ POST /api/docs
 ## Error Handling
 
 ### Standard Error Response Format
+
 ```typescript
 {
   "success": false,
@@ -500,40 +514,42 @@ POST /api/docs
 ```
 
 ### Common Error Codes
+
 ```typescript
 // Authentication Errors
-UNAUTHORIZED: "Authentication required"
-FORBIDDEN: "Insufficient permissions"
-INVALID_TOKEN: "Invalid or expired token"
+UNAUTHORIZED: 'Authentication required';
+FORBIDDEN: 'Insufficient permissions';
+INVALID_TOKEN: 'Invalid or expired token';
 
-// Validation Errors  
-VALIDATION_ERROR: "Request validation failed"
-INVALID_PARAMETER: "Invalid parameter value"
-MISSING_REQUIRED_FIELD: "Required field missing"
+// Validation Errors
+VALIDATION_ERROR: 'Request validation failed';
+INVALID_PARAMETER: 'Invalid parameter value';
+MISSING_REQUIRED_FIELD: 'Required field missing';
 
 // Rate Limiting
-RATE_LIMIT_EXCEEDED: "Too many requests"
-QUOTA_EXCEEDED: "API quota exceeded"
+RATE_LIMIT_EXCEEDED: 'Too many requests';
+QUOTA_EXCEEDED: 'API quota exceeded';
 
 // External Service Errors
-EXTERNAL_API_ERROR: "External service unavailable"
-FINANCIAL_DATA_UNAVAILABLE: "Financial data service error"
-BOOKING_SERVICE_ERROR: "Booking service unavailable"
+EXTERNAL_API_ERROR: 'External service unavailable';
+FINANCIAL_DATA_UNAVAILABLE: 'Financial data service error';
+BOOKING_SERVICE_ERROR: 'Booking service unavailable';
 
 // Business Logic Errors
-INSUFFICIENT_DATA: "Insufficient data for calculation"
-INVALID_BUSINESS_SCENARIO: "Invalid business scenario"
-CALCULATION_ERROR: "Calculation failed"
+INSUFFICIENT_DATA: 'Insufficient data for calculation';
+INVALID_BUSINESS_SCENARIO: 'Invalid business scenario';
+CALCULATION_ERROR: 'Calculation failed';
 
 // System Errors
-INTERNAL_SERVER_ERROR: "Internal server error"
-DATABASE_ERROR: "Database connection failed"
-CACHE_ERROR: "Cache service unavailable"
+INTERNAL_SERVER_ERROR: 'Internal server error';
+DATABASE_ERROR: 'Database connection failed';
+CACHE_ERROR: 'Cache service unavailable';
 ```
 
 ## WebSocket Real-Time APIs
 
 ### Financial Data Streaming
+
 ```typescript
 // WebSocket Connection
 wss://familyoffices.vip/ws/financial
@@ -560,10 +576,11 @@ wss://familyoffices.vip/ws/financial
 ```
 
 ### Portfolio Updates
+
 ```typescript
 // Subscribe to Portfolio Changes
 {
-  "action": "subscribe", 
+  "action": "subscribe",
   "channel": "portfolio_updates",
   "userId": "user_123"
 }
@@ -585,26 +602,27 @@ wss://familyoffices.vip/ws/financial
 ## SDK & Client Libraries
 
 ### JavaScript/TypeScript SDK
+
 ```typescript
 import { FamilyOfficeClient } from '@familyoffice-s/sdk';
 
 const client = new FamilyOfficeClient({
   apiKey: 'your-api-key',
   baseUrl: 'https://familyoffices.vip/api',
-  timeout: 10000
+  timeout: 10000,
 });
 
 // Financial Data
 const koreanStocks = await client.financial.getKoreanMarketData({
   symbols: ['005930.KS', '000660.KS'],
-  refresh: false
+  refresh: false,
 });
 
 // Tax Optimization
 const taxAnalysis = await client.financial.calculateTaxOptimization({
   scenario: 'business_succession',
   businessValue: 5000000000,
-  ownershipPercentage: 75
+  ownershipPercentage: 75,
 });
 
 // Booking Management
@@ -613,18 +631,19 @@ const booking = await client.booking.createConsultation({
   startTime: '2024-01-20T14:00:00+09:00',
   attendee: {
     name: '김대표',
-    email: 'ceo@company.co.kr'
-  }
+    email: 'ceo@company.co.kr',
+  },
 });
 ```
 
 ## Rate Limiting & Quotas
 
 ### Rate Limits by Endpoint Category
+
 ```typescript
 // Financial Data APIs
 - Korean Market: 120 requests/minute
-- Global Stocks: 100 requests/minute  
+- Global Stocks: 100 requests/minute
 - Forex Rates: 60 requests/minute
 - Tax Calculator: 30 requests/minute
 
@@ -642,6 +661,7 @@ const booking = await client.booking.createConsultation({
 ```
 
 ### Headers for Rate Limiting
+
 ```typescript
 X-RateLimit-Limit: 100        // Requests allowed per minute
 X-RateLimit-Remaining: 85     // Requests remaining in current window

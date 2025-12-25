@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { marketingAutomationEngine, ExecutionStatus } from '@/lib/marketing-automation-engine';
+
+import {
+  marketingAutomationEngine,
+  ExecutionStatus,
+} from '@/lib/marketing-automation-engine';
 import { createAutomationRule } from '@/lib/seo/inbound-marketing-automation';
 
 /**
@@ -31,7 +35,8 @@ export async function GET(request: NextRequest) {
         }
 
         const limit = parseInt(searchParams.get('limit') || '10');
-        const recentLogs = marketingAutomationEngine.getRecentExecutionLogs(limit);
+        const recentLogs =
+          marketingAutomationEngine.getRecentExecutionLogs(limit);
 
         return NextResponse.json({
           success: true,
@@ -75,7 +80,12 @@ export async function GET(request: NextRequest) {
 
       case 'alerts': {
         // 알림 조회
-        const acknowledgedFilter = acknowledged === 'true' ? true : acknowledged === 'false' ? false : undefined;
+        const acknowledgedFilter =
+          acknowledged === 'true'
+            ? true
+            : acknowledged === 'false'
+              ? false
+              : undefined;
         const alerts = marketingAutomationEngine.getAlerts(acknowledgedFilter);
 
         return NextResponse.json({
@@ -105,10 +115,13 @@ export async function GET(request: NextRequest) {
         const unacknowledgedAlerts = marketingAutomationEngine.getAlerts(false);
 
         // 상태별 로그 수
-        const statusCounts = recentLogs.reduce((acc, log) => {
-          acc[log.status] = (acc[log.status] || 0) + 1;
-          return acc;
-        }, {} as Record<ExecutionStatus, number>);
+        const statusCounts = recentLogs.reduce(
+          (acc, log) => {
+            acc[log.status] = (acc[log.status] || 0) + 1;
+            return acc;
+          },
+          {} as Record<ExecutionStatus, number>
+        );
 
         return NextResponse.json({
           success: true,
@@ -118,10 +131,16 @@ export async function GET(request: NextRequest) {
             statusCounts,
             alerts: {
               total: unacknowledgedAlerts.length,
-              critical: unacknowledgedAlerts.filter(a => a.severity === 'critical').length,
-              error: unacknowledgedAlerts.filter(a => a.severity === 'error').length,
-              warning: unacknowledgedAlerts.filter(a => a.severity === 'warning').length,
-              info: unacknowledgedAlerts.filter(a => a.severity === 'info').length,
+              critical: unacknowledgedAlerts.filter(
+                a => a.severity === 'critical'
+              ).length,
+              error: unacknowledgedAlerts.filter(a => a.severity === 'error')
+                .length,
+              warning: unacknowledgedAlerts.filter(
+                a => a.severity === 'warning'
+              ).length,
+              info: unacknowledgedAlerts.filter(a => a.severity === 'info')
+                .length,
             },
             lastUpdated: new Date().toISOString(),
           },
@@ -199,7 +218,10 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const alert = marketingAutomationEngine.acknowledgeAlert(alertId, acknowledgedBy);
+        const alert = marketingAutomationEngine.acknowledgeAlert(
+          alertId,
+          acknowledgedBy
+        );
 
         if (!alert) {
           return NextResponse.json(
@@ -284,7 +306,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to process request',
+        error:
+          error instanceof Error ? error.message : 'Failed to process request',
       },
       { status: 500 }
     );

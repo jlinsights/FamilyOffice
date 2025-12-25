@@ -5,12 +5,13 @@ This file provides comprehensive guidance to Claude Code (claude.ai/code) when w
 ## 🚀 Quick Start (Agent-Friendly)
 
 ### Essential Commands
+
 ```bash
 # Development (DO NOT use npm run build during dev sessions)
 npm run dev          # Start development server with HMR
 npm run dev:mobile   # Mobile development server
 
-# Quality Checks  
+# Quality Checks
 npm run lint         # ESLint analysis
 npm run typecheck    # TypeScript validation
 
@@ -19,6 +20,7 @@ npm run test:e2e     # Playwright E2E tests (56 tests)
 ```
 
 ### Key Project Facts
+
 - **Framework**: Next.js 15.4.6 + TypeScript + Tailwind CSS
 - **Target**: Korean mid-market company CEOs
 - **Admin**: `jhlim725@gmail.com` (super admin)
@@ -40,12 +42,12 @@ npm run dev:mobile   # Mobile development server (0.0.0.0:3000)
 npm run dev:inspect  # Development with Node.js inspector
 
 # Quality Assurance (Run before commits)
-npm run lint         # ESLint code analysis  
+npm run lint         # ESLint code analysis
 npm run typecheck    # TypeScript type checking
 
 # Build Commands (Use outside agent sessions only)
 npm run build        # Production build - No deprecation warnings
-npm run start        # Start production server  
+npm run start        # Start production server
 npm run vercel-build # Vercel-specific build process
 ```
 

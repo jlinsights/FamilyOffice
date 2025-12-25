@@ -2,8 +2,8 @@
  * Korean Performance Analytics API
  * 한국 시장 성능 분석 데이터 수집 엔드포인트
  */
-import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
 
 interface KoreanPerformanceData {
   metrics: any[];
@@ -17,14 +17,15 @@ interface KoreanPerformanceData {
 export async function POST(request: NextRequest) {
   try {
     const data: KoreanPerformanceData = await request.json();
-    
+
     // 요청 헤더에서 추가 정보 수집
     const headersList = await headers();
     const userAgent = headersList.get('user-agent') || '';
     const referer = headersList.get('referer') || '';
-    const clientIP = headersList.get('x-forwarded-for') || 
-                     headersList.get('x-real-ip') || 
-                     'unknown';
+    const clientIP =
+      headersList.get('x-forwarded-for') ||
+      headersList.get('x-real-ip') ||
+      'unknown';
 
     // 한국 시장 특화 성능 데이터 구성
     const performanceData = {
@@ -34,12 +35,13 @@ export async function POST(request: NextRequest) {
         referer,
         ip: clientIP,
         isMobile: /Mobile|Android|iPhone|iPad/.test(userAgent),
-        isKoreanIP: clientIP.startsWith('1.') || // KT
-                    clientIP.startsWith('14.') || // LG U+
-                    clientIP.startsWith('27.') || // SK
-                    clientIP.startsWith('58.') || // Korea Telecom
-                    clientIP.startsWith('59.') || // Korea Telecom
-                    clientIP.startsWith('61.'), // Various Korean ISPs
+        isKoreanIP:
+          clientIP.startsWith('1.') || // KT
+          clientIP.startsWith('14.') || // LG U+
+          clientIP.startsWith('27.') || // SK
+          clientIP.startsWith('58.') || // Korea Telecom
+          clientIP.startsWith('59.') || // Korea Telecom
+          clientIP.startsWith('61.'), // Various Korean ISPs
       },
       processed: new Date().toISOString(),
     };
@@ -47,11 +49,17 @@ export async function POST(request: NextRequest) {
     // 개발 환경에서 콘솔 로그
     if (process.env.NODE_ENV === 'development') {
       console.log('🇰🇷 한국 성능 데이터 수신:', {
-        로딩시간: data.metrics?.[0]?.loadTime ? `${data.metrics[0].loadTime.toFixed(0)}ms` : 'N/A',
-        폰트로딩: data.metrics?.[0]?.koreanFontLoadTime ? `${data.metrics[0].koreanFontLoadTime.toFixed(0)}ms` : 'N/A',
+        로딩시간: data.metrics?.[0]?.loadTime
+          ? `${data.metrics[0].loadTime.toFixed(0)}ms`
+          : 'N/A',
+        폰트로딩: data.metrics?.[0]?.koreanFontLoadTime
+          ? `${data.metrics[0].koreanFontLoadTime.toFixed(0)}ms`
+          : 'N/A',
         비즈니스시간: data.businessHours ? '업무시간' : '업무외시간',
         기기유형: performanceData.clientInfo.isMobile ? '모바일' : '데스크톱',
-        세션시간: data.userBehavior?.sessionDuration ? `${(data.userBehavior.sessionDuration / 1000).toFixed(1)}초` : 'N/A',
+        세션시간: data.userBehavior?.sessionDuration
+          ? `${(data.userBehavior.sessionDuration / 1000).toFixed(1)}초`
+          : 'N/A',
       });
     }
 
@@ -86,7 +94,6 @@ export async function POST(request: NextRequest) {
         if (process.env.SENTRY_DSN) {
           // Sentry는 자동으로 성능 메트릭을 수집하므로 별도 전송 불필요
         }
-
       } catch (error) {
         console.warn('외부 분석 서비스 전송 실패:', error);
       }
@@ -95,13 +102,17 @@ export async function POST(request: NextRequest) {
     // 성능 임계값 체크 및 알림
     const loadTime = data.metrics?.[0]?.loadTime || 0;
     const fontLoadTime = data.metrics?.[0]?.koreanFontLoadTime || 0;
-    
+
     const alerts = [];
     if (loadTime > 5000) {
-      alerts.push(`페이지 로딩 시간이 ${(loadTime/1000).toFixed(1)}초로 임계값을 초과했습니다.`);
+      alerts.push(
+        `페이지 로딩 시간이 ${(loadTime / 1000).toFixed(1)}초로 임계값을 초과했습니다.`
+      );
     }
     if (fontLoadTime > 2000) {
-      alerts.push(`한국 폰트 로딩이 ${(fontLoadTime/1000).toFixed(1)}초로 지연되었습니다.`);
+      alerts.push(
+        `한국 폰트 로딩이 ${(fontLoadTime / 1000).toFixed(1)}초로 지연되었습니다.`
+      );
     }
 
     // 응답 반환
@@ -114,17 +125,19 @@ export async function POST(request: NextRequest) {
         timestamp: data.timestamp,
         market: data.market,
         businessHours: data.businessHours,
-      }
+      },
     });
-
   } catch (error) {
     console.error('한국 성능 데이터 처리 오류:', error);
-    
-    return NextResponse.json({
-      success: false,
-      error: 'Failed to process Korean performance data',
-      message: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to process Korean performance data',
+        message: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -137,7 +150,7 @@ export async function GET() {
     businessHours: {
       start: '09:00 KST',
       end: '18:00 KST',
-      weekdays: 'Monday-Friday'
+      weekdays: 'Monday-Friday',
     },
     metrics: [
       'Page Load Time',
@@ -145,9 +158,9 @@ export async function GET() {
       'Mobile Network Performance',
       'Region Latency',
       'Business Hours Performance',
-      'API Response Time'
+      'API Response Time',
     ],
     supportedMarket: 'Korean',
-    version: '1.0.0'
+    version: '1.0.0',
   });
 }

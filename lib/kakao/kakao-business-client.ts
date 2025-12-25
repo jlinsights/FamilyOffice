@@ -2,8 +2,11 @@
  * Kakao Business Client 초기화 서비스
  * 환경변수 기반으로 Kakao Business API 클라이언트를 초기화하고 관리
  */
-
-import { KakaoBusinessAPI, createKakaoBusinessClient, type KakaoBusinessConfig } from './business-api';
+import {
+  KakaoBusinessAPI,
+  createKakaoBusinessClient,
+  type KakaoBusinessConfig,
+} from './business-api';
 
 // Kakao Business 클라이언트 인스턴스
 let kakaoClient: KakaoBusinessAPI | null = null;
@@ -18,8 +21,13 @@ function getKakaoBusinessConfig(): KakaoBusinessConfig | null {
     channelId: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID || '',
     appKey: process.env.KAKAO_APP_KEY || '',
     restApiKey: process.env.KAKAO_REST_API_KEY || '',
-    javascriptKey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY || process.env.KAKAO_JAVASCRIPT_KEY || '',
-    ...(process.env.KAKAO_ADMIN_KEY && { adminKey: process.env.KAKAO_ADMIN_KEY }),
+    javascriptKey:
+      process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY ||
+      process.env.KAKAO_JAVASCRIPT_KEY ||
+      '',
+    ...(process.env.KAKAO_ADMIN_KEY && {
+      adminKey: process.env.KAKAO_ADMIN_KEY,
+    }),
   };
 
   // 최소 필수 값들이 있는지 확인
@@ -56,7 +64,6 @@ export function initializeKakaoBusinessClient(): KakaoBusinessAPI | null {
 
     console.log('✅ Kakao Business 클라이언트가 성공적으로 초기화되었습니다.');
     return kakaoClient;
-
   } catch (error) {
     console.error('❌ Kakao Business 클라이언트 초기화 실패:', error);
     return null;
@@ -70,7 +77,7 @@ export function getKakaoBusinessClient(): KakaoBusinessAPI | null {
   if (!kakaoClient) {
     return initializeKakaoBusinessClient();
   }
-  
+
   return kakaoClient;
 }
 
@@ -92,12 +99,12 @@ export function checkKakaoBusinessStatus(): {
 
   return {
     isConfigured: !!config,
-    hasApiKey: !!(config?.apiKey),
-    hasPixelId: !!(config?.pixelId),
-    hasChannelId: !!(config?.channelId),
-    hasJavaScriptKey: !!(config?.javascriptKey),
-    hasAppKey: !!(config?.appKey),
-    hasRestApiKey: !!(config?.restApiKey),
+    hasApiKey: !!config?.apiKey,
+    hasPixelId: !!config?.pixelId,
+    hasChannelId: !!config?.channelId,
+    hasJavaScriptKey: !!config?.javascriptKey,
+    hasAppKey: !!config?.appKey,
+    hasRestApiKey: !!config?.restApiKey,
     isClientReady: !!client && client.validateConfig(),
   };
 }
@@ -124,13 +131,25 @@ export function debugKakaoBusinessConfig() {
   const config = getKakaoBusinessConfig();
   if (config) {
     console.log('📝 Kakao Business 환경변수:');
-    console.log(`  - KAKAO_BUSINESS_API_KEY: ${config.apiKey ? `${config.apiKey.substring(0, 10)}...` : 'N/A'}`);
+    console.log(
+      `  - KAKAO_BUSINESS_API_KEY: ${config.apiKey ? `${config.apiKey.substring(0, 10)}...` : 'N/A'}`
+    );
     console.log(`  - NEXT_PUBLIC_KAKAO_PIXEL_ID: ${config.pixelId || 'N/A'}`);
-    console.log(`  - NEXT_PUBLIC_KAKAO_CHANNEL_ID: ${config.channelId || 'N/A'}`);
-    console.log(`  - KAKAO_APP_KEY: ${config.appKey ? `${config.appKey.substring(0, 10)}...` : 'N/A'}`);
-    console.log(`  - KAKAO_REST_API_KEY: ${config.restApiKey ? `${config.restApiKey.substring(0, 10)}...` : 'N/A'}`);
-    console.log(`  - KAKAO_JAVASCRIPT_KEY: ${config.javascriptKey ? `${config.javascriptKey.substring(0, 10)}...` : 'N/A'}`);
-    console.log(`  - KAKAO_ADMIN_KEY: ${config.adminKey ? `${config.adminKey.substring(0, 10)}...` : 'N/A'}`);
+    console.log(
+      `  - NEXT_PUBLIC_KAKAO_CHANNEL_ID: ${config.channelId || 'N/A'}`
+    );
+    console.log(
+      `  - KAKAO_APP_KEY: ${config.appKey ? `${config.appKey.substring(0, 10)}...` : 'N/A'}`
+    );
+    console.log(
+      `  - KAKAO_REST_API_KEY: ${config.restApiKey ? `${config.restApiKey.substring(0, 10)}...` : 'N/A'}`
+    );
+    console.log(
+      `  - KAKAO_JAVASCRIPT_KEY: ${config.javascriptKey ? `${config.javascriptKey.substring(0, 10)}...` : 'N/A'}`
+    );
+    console.log(
+      `  - KAKAO_ADMIN_KEY: ${config.adminKey ? `${config.adminKey.substring(0, 10)}...` : 'N/A'}`
+    );
   }
 }
 
@@ -151,8 +170,16 @@ export const kakaoBusinessHelpers = {
     try {
       return await client.getAnalytics({
         dateRange,
-        metrics: ['impressions', 'clicks', 'conversions', 'cost', 'ctr', 'cpc', 'roas'],
-        dimensions: ['campaign']
+        metrics: [
+          'impressions',
+          'clicks',
+          'conversions',
+          'cost',
+          'ctr',
+          'cpc',
+          'roas',
+        ],
+        dimensions: ['campaign'],
       });
     } catch (error) {
       console.error('캠페인 성과 조회 실패:', error);
@@ -163,13 +190,16 @@ export const kakaoBusinessHelpers = {
   /**
    * 전환 이벤트를 추적하는 헬퍼 함수
    */
-  async trackConversion(eventName: 'Contact' | 'Lead' | 'Purchase' | 'CompleteRegistration', params: {
-    userId?: string;
-    sessionId: string;
-    value?: number;
-    contentCategory?: string;
-    contentIds?: string[];
-  }) {
+  async trackConversion(
+    eventName: 'Contact' | 'Lead' | 'Purchase' | 'CompleteRegistration',
+    params: {
+      userId?: string;
+      sessionId: string;
+      value?: number;
+      contentCategory?: string;
+      contentIds?: string[];
+    }
+  ) {
     const client = getKakaoBusinessClient();
     if (!client) {
       console.warn('Kakao Business 클라이언트가 초기화되지 않았습니다.');
@@ -187,7 +217,9 @@ export const kakaoBusinessHelpers = {
         userId: params.userId,
         sessionId: params.sessionId,
         parameters: {
-          ...(params.contentCategory && { content_category: params.contentCategory as any }),
+          ...(params.contentCategory && {
+            content_category: params.contentCategory as any,
+          }),
           ...(params.contentIds && { content_ids: params.contentIds }),
           ...(params.value !== undefined && { value: params.value }),
           currency: 'KRW',
@@ -197,7 +229,7 @@ export const kakaoBusinessHelpers = {
         },
         timestamp: new Date().toISOString(),
       });
-      
+
       return true;
     } catch (error) {
       console.error('전환 추적 실패:', error);
@@ -229,13 +261,13 @@ export const kakaoBusinessHelpers = {
       return await client.createMessageTemplate({
         ...template,
         variables: template.variables || [],
-        status: 'draft'
+        status: 'draft',
       });
     } catch (error) {
       console.error('메시지 템플릿 생성 실패:', error);
       return null;
     }
-  }
+  },
 };
 
 // 개발 환경에서 자동으로 설정 정보 출력

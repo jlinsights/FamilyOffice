@@ -12,7 +12,11 @@ const Toaster = ({ ...props }: ToasterProps) => {
   // 서버와 클라이언트 렌더링을 일치시키기 위해 항상 동일한 구조 반환
   return (
     <Sonner
-      theme={theme === 'light' || theme === 'dark' || theme === 'system' ? theme : 'system'}
+      theme={
+        theme === 'light' || theme === 'dark' || theme === 'system'
+          ? theme
+          : 'system'
+      }
       className="toaster group"
       toastOptions={{
         classNames: {

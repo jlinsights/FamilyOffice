@@ -1,9 +1,11 @@
 'use client';
 
 import { Play, Headphones, FileText } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+
 import Image from 'next/image';
+
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 
 export type MediaType = 'youtube' | 'spotify' | 'article';
 
@@ -32,7 +34,8 @@ const mediaLabels = {
 
 const mediaColors = {
   youtube: 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400',
-  spotify: 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400',
+  spotify:
+    'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400',
   article: 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400',
 };
 
@@ -52,7 +55,12 @@ export function MediaCard({
 
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden">
-      <a href={link} target={type !== 'article' ? '_blank' : '_self'} rel="noopener noreferrer" className="block">
+      <a
+        href={link}
+        target={type !== 'article' ? '_blank' : '_self'}
+        rel="noopener noreferrer"
+        className="block"
+      >
         {thumbnail && (
           <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
             <Image
@@ -69,7 +77,7 @@ export function MediaCard({
             )}
           </div>
         )}
-        
+
         <CardContent className="p-4 space-y-3">
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className={`${colorClass} gap-1`}>
@@ -77,7 +85,10 @@ export function MediaCard({
               {label}
             </Badge>
             {isNew && (
-              <Badge variant="default" className="bg-gradient-to-r from-purple-600 to-pink-600">
+              <Badge
+                variant="default"
+                className="bg-gradient-to-r from-purple-600 to-pink-600"
+              >
                 NEW
               </Badge>
             )}
@@ -96,10 +107,10 @@ export function MediaCard({
 
           {date && (
             <time className="text-xs text-gray-500 dark:text-gray-500">
-              {date.toLocaleDateString('ko-KR', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
+              {date.toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
               })}
             </time>
           )}

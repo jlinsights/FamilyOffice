@@ -1,6 +1,7 @@
 'use client';
 
 import { Calendar } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 
 interface CalComEmbedProps {
@@ -9,18 +10,18 @@ interface CalComEmbedProps {
   calLink?: string;
 }
 
-export default function CalComEmbed({ 
-  className = '', 
+export default function CalComEmbed({
+  className = '',
   style,
-  calLink = 'familyoffice'
+  calLink = 'familyoffice',
 }: CalComEmbedProps) {
   const handleClick = () => {
     window.open(`https://cal.com/${calLink}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div 
-      className={`flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 rounded-lg border border-gray-200 dark:border-gray-700 ${className}`} 
+    <div
+      className={`flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 rounded-lg border border-gray-200 dark:border-gray-700 ${className}`}
       style={style}
     >
       <div className="text-center p-8">

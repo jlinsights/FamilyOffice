@@ -1,22 +1,23 @@
-"use client";
+'use client';
 
-import React from "react";
-import { cn } from "@/lib/aceternity-utils";
+import React from 'react';
+
+import { cn } from '@/lib/aceternity-utils';
 
 export const BackgroundBeams = ({ className }: { className?: string }) => {
   const paths = [
-    "M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875",
-    "M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867",
-    "M-366 -205C-366 -205 -298 200 166 327C630 454 698 859 698 859",
-    "M-359 -213C-359 -213 -291 192 173 319C637 446 705 851 705 851",
-    "M-352 -221C-352 -221 -284 184 180 311C644 438 712 843 712 843",
-    "M-345 -229C-345 -229 -277 176 187 303C651 430 719 835 719 835",
+    'M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875',
+    'M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867',
+    'M-366 -205C-366 -205 -298 200 166 327C630 454 698 859 698 859',
+    'M-359 -213C-359 -213 -291 192 173 319C637 446 705 851 705 851',
+    'M-352 -221C-352 -221 -284 184 180 311C644 438 712 843 712 843',
+    'M-345 -229C-345 -229 -277 176 187 303C651 430 719 835 719 835',
   ];
 
   return (
     <div
       className={cn(
-        "absolute h-screen w-full bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-800",
+        'absolute h-screen w-full bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-800',
         className
       )}
     >
@@ -57,7 +58,7 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
           ))}
         </defs>
       </svg>
-      
+
       {/* Animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20 animate-gradient"></div>
     </div>

@@ -13,11 +13,11 @@
  * - 환경 변수 형식 유효성
  * - 외부 서비스 연결 테스트 (GA4, Serper, Supabase)
  */
-
+import { createClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
+
 import { checkGA4Connection } from '@/lib/google-analytics/ga4-client';
 import { checkSerperConnection } from '@/lib/serper/client';
-import { createClient } from '@supabase/supabase-js';
 
 // .env 파일 로드
 config({ path: '.env.local' });
@@ -90,7 +90,10 @@ function validateGA4Env(): void {
   // GOOGLE_PRIVATE_KEY
   if (checkExists('GOOGLE_PRIVATE_KEY', category)) {
     const privateKey = process.env.GOOGLE_PRIVATE_KEY!;
-    if (privateKey.includes('BEGIN PRIVATE KEY') && privateKey.includes('END PRIVATE KEY')) {
+    if (
+      privateKey.includes('BEGIN PRIVATE KEY') &&
+      privateKey.includes('END PRIVATE KEY')
+    ) {
       results.push({
         category,
         variable: 'GOOGLE_PRIVATE_KEY',
@@ -103,7 +106,8 @@ function validateGA4Env(): void {
         variable: 'GOOGLE_PRIVATE_KEY',
         status: 'fail',
         message: 'Private key 형식이 올바르지 않습니다',
-        suggestion: 'JSON 파일의 private_key 값을 그대로 복사하세요 (-----BEGIN/END 포함)',
+        suggestion:
+          'JSON 파일의 private_key 값을 그대로 복사하세요 (-----BEGIN/END 포함)',
       });
     }
   }
@@ -127,7 +131,8 @@ function validateGA4Env(): void {
         variable: 'GOOGLE_ANALYTICS_PROPERTY_ID',
         status: 'warning',
         message: 'GA4 속성 ID는 숫자여야 합니다',
-        suggestion: 'Google Analytics 관리자 → 속성 설정에서 속성 ID를 확인하세요',
+        suggestion:
+          'Google Analytics 관리자 → 속성 설정에서 속성 ID를 확인하세요',
       });
     }
   }
@@ -187,7 +192,8 @@ function validateSupabaseEnv(): void {
         variable: 'NEXT_PUBLIC_SUPABASE_URL',
         status: 'warning',
         message: 'Supabase URL 형식이 올바르지 않을 수 있습니다',
-        suggestion: 'Supabase Dashboard → Project Settings → API에서 URL을 확인하세요',
+        suggestion:
+          'Supabase Dashboard → Project Settings → API에서 URL을 확인하세요',
       });
     }
   }
@@ -257,7 +263,8 @@ function validateCronEnv(): void {
         variable: 'CRON_SECRET',
         status: 'warning',
         message: 'Cron secret이 너무 짧습니다 (권장: ≥32자)',
-        suggestion: 'openssl rand -base64 32 명령으로 강력한 시크릿을 생성하세요',
+        suggestion:
+          'openssl rand -base64 32 명령으로 강력한 시크릿을 생성하세요',
       });
     }
   }
@@ -287,7 +294,8 @@ async function testGA4Connection(): Promise<void> {
         variable: 'GA4_API',
         status: 'fail',
         message: 'GA4 API 연결 실패',
-        suggestion: '서비스 계정 권한을 확인하고, GA4 속성에 뷰어 권한이 부여되었는지 확인하세요',
+        suggestion:
+          '서비스 계정 권한을 확인하고, GA4 속성에 뷰어 권한이 부여되었는지 확인하세요',
       });
     }
   } catch (error) {
@@ -325,7 +333,8 @@ async function testSerperConnection(): Promise<void> {
         variable: 'SERPER_API',
         status: 'fail',
         message: 'Serper API 연결 실패',
-        suggestion: 'API 키를 확인하고, Serper.dev 대시보드에서 요금제 상태를 확인하세요',
+        suggestion:
+          'API 키를 확인하고, Serper.dev 대시보드에서 요금제 상태를 확인하세요',
       });
     }
   } catch (error) {
@@ -370,13 +379,17 @@ async function testSupabaseConnection(): Promise<void> {
       .limit(0);
 
     if (error) {
-      if (error.message.includes("relation") && error.message.includes("does not exist")) {
+      if (
+        error.message.includes('relation') &&
+        error.message.includes('does not exist')
+      ) {
         results.push({
           category,
           variable: 'SUPABASE_TABLE',
           status: 'fail',
           message: 'keyword_rankings 테이블이 존재하지 않습니다',
-          suggestion: 'Phase 2 가이드를 참고하여 Supabase 마이그레이션을 실행하세요',
+          suggestion:
+            'Phase 2 가이드를 참고하여 Supabase 마이그레이션을 실행하세요',
         });
       } else {
         results.push({
@@ -439,10 +452,14 @@ function printResults(): void {
     totalWarning += warning;
 
     console.log(`\n📁 ${category}`);
-    console.log(`   ✅ Pass: ${pass} | ❌ Fail: ${fail} | ⚠️  Warning: ${warning}`);
+    console.log(
+      `   ✅ Pass: ${pass} | ❌ Fail: ${fail} | ⚠️  Warning: ${warning}`
+    );
 
     // 실패 및 경고 항목 상세 출력
-    const issues = categoryResults.filter(r => r.status === 'fail' || r.status === 'warning');
+    const issues = categoryResults.filter(
+      r => r.status === 'fail' || r.status === 'warning'
+    );
     for (const issue of issues) {
       const icon = issue.status === 'fail' ? '❌' : '⚠️';
       console.log(`\n   ${icon} ${issue.variable}`);
@@ -503,7 +520,7 @@ async function main(): Promise<void> {
 }
 
 // 실행
-main().catch((error) => {
+main().catch(error => {
   console.error('❌ 검증 스크립트 실행 중 오류 발생:', error);
   process.exit(1);
 });

@@ -1,6 +1,7 @@
 'use client';
 
 import Script from 'next/script';
+
 import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
 import { createLogger } from '@/lib/security/secure-logger';
 
@@ -19,7 +20,7 @@ export function StructuredData({ data }: StructuredDataProps) {
   try {
     // Securely serialize and validate structured data
     const jsonData = sanitizeStructuredData(data);
-    
+
     return (
       <Script
         id="structured-data"

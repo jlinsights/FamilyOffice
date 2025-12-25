@@ -48,7 +48,7 @@ export class AuthMonitoringService {
     tokenRefreshTime: [],
     profileSyncTime: [],
     cacheHitRate: 0,
-    errorRate: 0
+    errorRate: 0,
   };
   private userBehaviors = new Map<string, UserBehavior>();
   private readonly MAX_METRICS_HISTORY = 1000;
@@ -60,11 +60,11 @@ export class AuthMonitoringService {
   recordAuthEvent(event: Omit<AuthMetrics, 'timestamp'>) {
     const metric: AuthMetrics = {
       ...event,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     this.metrics.push(metric);
-    
+
     // 메트릭 히스토리 크기 제한
     if (this.metrics.length > this.MAX_METRICS_HISTORY) {
       this.metrics = this.metrics.slice(-this.MAX_METRICS_HISTORY);
@@ -112,18 +112,22 @@ export class AuthMonitoringService {
     // 에러율 계산
     const totalEvents = recentMetrics.length;
     const failedEvents = recentMetrics.filter(m => !m.success).length;
-    this.performanceData.errorRate = totalEvents > 0 ? failedEvents / totalEvents : 0;
+    this.performanceData.errorRate =
+      totalEvents > 0 ? failedEvents / totalEvents : 0;
 
     // 배열 크기 제한 (메모리 관리)
     const maxDataPoints = 100;
     if (this.performanceData.loginTime.length > maxDataPoints) {
-      this.performanceData.loginTime = this.performanceData.loginTime.slice(-maxDataPoints);
+      this.performanceData.loginTime =
+        this.performanceData.loginTime.slice(-maxDataPoints);
     }
     if (this.performanceData.tokenRefreshTime.length > maxDataPoints) {
-      this.performanceData.tokenRefreshTime = this.performanceData.tokenRefreshTime.slice(-maxDataPoints);
+      this.performanceData.tokenRefreshTime =
+        this.performanceData.tokenRefreshTime.slice(-maxDataPoints);
     }
     if (this.performanceData.profileSyncTime.length > maxDataPoints) {
-      this.performanceData.profileSyncTime = this.performanceData.profileSyncTime.slice(-maxDataPoints);
+      this.performanceData.profileSyncTime =
+        this.performanceData.profileSyncTime.slice(-maxDataPoints);
     }
   }
 
@@ -138,13 +142,13 @@ export class AuthMonitoringService {
       preferredAuthMethod: 'kakao',
       failureCount: 0,
       avgSessionDuration: 0,
-      deviceType: 'desktop'
+      deviceType: 'desktop',
     };
 
     if (metric.action === 'login') {
       existing.loginCount++;
       existing.lastLogin = metric.timestamp;
-      
+
       if (metric.success) {
         // 디바이스 타입 감지
         existing.deviceType = this.detectDeviceType();
@@ -161,14 +165,14 @@ export class AuthMonitoringService {
    */
   private handleErrorAlert(metric: AuthMetrics) {
     const severity = this.calculateErrorSeverity(metric);
-    
+
     if (severity >= 0.7) {
       this.sendCriticalAlert({
         event: metric.action,
         ...(metric.error && { error: metric.error }),
         ...(metric.userId && { userId: metric.userId }),
         timestamp: metric.timestamp,
-        severity
+        severity,
       });
     }
 
@@ -204,25 +208,29 @@ export class AuthMonitoringService {
       .slice(-10);
 
     // 연속 실패 감지
-    const consecutiveFailures = recentErrors.filter(e => e.action === metric.action).length;
+    const consecutiveFailures = recentErrors.filter(
+      e => e.action === metric.action
+    ).length;
     if (consecutiveFailures >= 3) {
       this.sendPatternAlert({
         type: 'consecutive_failures',
         action: metric.action,
         count: consecutiveFailures,
-        timeWindow: '5m'
+        timeWindow: '5m',
       });
     }
 
     // 특정 사용자 반복 실패
     if (metric.userId) {
-      const userErrors = recentErrors.filter(e => e.userId === metric.userId).length;
+      const userErrors = recentErrors.filter(
+        e => e.userId === metric.userId
+      ).length;
       if (userErrors >= 3) {
         this.sendPatternAlert({
           type: 'user_repeated_failures',
           userId: metric.userId,
           count: userErrors,
-          timeWindow: '5m'
+          timeWindow: '5m',
         });
       }
     }
@@ -233,14 +241,20 @@ export class AuthMonitoringService {
    */
   getSystemHealth(): SystemHealth {
     const now = Date.now();
-    const recentMetrics = this.metrics.filter(m => m.timestamp > now - 60 * 60 * 1000); // 1시간
+    const recentMetrics = this.metrics.filter(
+      m => m.timestamp > now - 60 * 60 * 1000
+    ); // 1시간
 
-    const avgResponseTime = recentMetrics.length > 0 
-      ? recentMetrics.reduce((sum, m) => sum + m.duration, 0) / recentMetrics.length 
-      : 0;
+    const avgResponseTime =
+      recentMetrics.length > 0
+        ? recentMetrics.reduce((sum, m) => sum + m.duration, 0) /
+          recentMetrics.length
+        : 0;
 
     const errorRate = this.performanceData.errorRate;
-    const activeUsers = new Set(recentMetrics.map(m => m.userId).filter(Boolean)).size;
+    const activeUsers = new Set(
+      recentMetrics.map(m => m.userId).filter(Boolean)
+    ).size;
 
     let status: SystemHealth['status'] = 'healthy';
     if (errorRate > 0.1 || avgResponseTime > 5000) status = 'degraded';
@@ -252,7 +266,7 @@ export class AuthMonitoringService {
       responseTime: avgResponseTime,
       errorRate,
       activeUsers,
-      lastUpdate: now
+      lastUpdate: now,
     };
   }
 
@@ -294,8 +308,12 @@ export class AuthMonitoringService {
 
     // 평균 시간 계산
     const avgLoginTime = this.calculateAverage(this.performanceData.loginTime);
-    const avgTokenRefreshTime = this.calculateAverage(this.performanceData.tokenRefreshTime);
-    const avgProfileSyncTime = this.calculateAverage(this.performanceData.profileSyncTime);
+    const avgTokenRefreshTime = this.calculateAverage(
+      this.performanceData.tokenRefreshTime
+    );
+    const avgProfileSyncTime = this.calculateAverage(
+      this.performanceData.profileSyncTime
+    );
 
     // 시간별 트렌드
     const hourlyTrends = this.generateHourlyTrends(recentMetrics);
@@ -314,14 +332,14 @@ export class AuthMonitoringService {
         avgLoginTime,
         avgTokenRefreshTime,
         avgProfileSyncTime,
-        cacheHitRate: this.performanceData.cacheHitRate
+        cacheHitRate: this.performanceData.cacheHitRate,
       },
       trends: {
         hourly: hourlyTrends,
-        daily: dailyTrends
+        daily: dailyTrends,
       },
       topErrors,
-      userInsights
+      userInsights,
     };
   }
 
@@ -330,10 +348,11 @@ export class AuthMonitoringService {
    */
   private detectDeviceType(): 'mobile' | 'desktop' {
     if (typeof navigator === 'undefined') return 'desktop';
-    
+
     const userAgent = navigator.userAgent.toLowerCase();
-    const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-    
+    const mobileRegex =
+      /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+
     return mobileRegex.test(userAgent) ? 'mobile' : 'desktop';
   }
 
@@ -360,7 +379,7 @@ export class AuthMonitoringService {
     const hours = Array.from({ length: 24 }, (_, i) => ({
       hour: i,
       events: 0,
-      errors: 0
+      errors: 0,
     }));
 
     metrics.forEach(metric => {
@@ -384,7 +403,7 @@ export class AuthMonitoringService {
       return {
         day: date.toLocaleDateString('ko-KR', { weekday: 'short' }),
         events: 0,
-        errors: 0
+        errors: 0,
       };
     });
 
@@ -411,7 +430,7 @@ export class AuthMonitoringService {
       .map(([error, count]) => ({
         error,
         count,
-        percentage: totalErrors > 0 ? (count / totalErrors) * 100 : 0
+        percentage: totalErrors > 0 ? (count / totalErrors) * 100 : 0,
       }));
 
     return sortedErrors;
@@ -427,17 +446,23 @@ export class AuthMonitoringService {
     const lastWeek = now - 7 * 24 * 60 * 60 * 1000;
 
     const activeUsers = users.filter(u => u.lastLogin > last24h).length;
-    const newUsers = users.filter(u => u.loginCount === 1 && u.lastLogin > lastWeek).length;
-    const returningUsers = users.filter(u => u.loginCount > 1 && u.lastLogin > last24h).length;
+    const newUsers = users.filter(
+      u => u.loginCount === 1 && u.lastLogin > lastWeek
+    ).length;
+    const returningUsers = users.filter(
+      u => u.loginCount > 1 && u.lastLogin > last24h
+    ).length;
 
-    const avgSessionDuration = users.length > 0 
-      ? users.reduce((sum, u) => sum + u.avgSessionDuration, 0) / users.length 
-      : 0;
+    const avgSessionDuration =
+      users.length > 0
+        ? users.reduce((sum, u) => sum + u.avgSessionDuration, 0) / users.length
+        : 0;
 
     // 선호하는 인증 방법
     const authMethods: Record<string, number> = {};
     users.forEach(user => {
-      authMethods[user.preferredAuthMethod] = (authMethods[user.preferredAuthMethod] || 0) + 1;
+      authMethods[user.preferredAuthMethod] =
+        (authMethods[user.preferredAuthMethod] || 0) + 1;
     });
 
     // 디바이스 타입
@@ -453,7 +478,7 @@ export class AuthMonitoringService {
       returningUsers,
       avgSessionDuration,
       preferredAuthMethods: authMethods,
-      deviceTypes
+      deviceTypes,
     };
   }
 
@@ -472,19 +497,22 @@ export class AuthMonitoringService {
     // Sentry 통합 예시
     if (typeof window !== 'undefined' && window.Sentry) {
       if (!metric.success) {
-        window.Sentry.captureException(new Error(metric.error || 'Auth error'), {
-          tags: {
-            action: metric.action,
-            userId: metric.userId
-          },
-          extra: metric.metadata
-        });
+        window.Sentry.captureException(
+          new Error(metric.error || 'Auth error'),
+          {
+            tags: {
+              action: metric.action,
+              userId: metric.userId,
+            },
+            extra: metric.metadata,
+          }
+        );
       } else {
         window.Sentry.addBreadcrumb({
           category: 'auth',
           message: metric.action,
           level: 'info',
-          data: { duration: metric.duration }
+          data: { duration: metric.duration },
         });
       }
     }
@@ -496,7 +524,7 @@ export class AuthMonitoringService {
       window.DD_RUM.addAction(metric.action, {
         success: metric.success,
         duration: metric.duration,
-        userId: metric.userId
+        userId: metric.userId,
       });
     }
   }
@@ -512,7 +540,7 @@ export class AuthMonitoringService {
     severity: number;
   }) {
     console.error('🚨 Critical Auth Alert:', alert);
-    
+
     // 실제 구현에서는 Slack, PagerDuty, 이메일 등으로 전송
     if (process.env.NODE_ENV === 'production') {
       this.sendToSlack(alert);
@@ -531,7 +559,7 @@ export class AuthMonitoringService {
     timeWindow: string;
   }) {
     console.warn('⚠️ Auth Pattern Alert:', alert);
-    
+
     // 실제 구현에서는 모니터링 대시보드로 전송
   }
 

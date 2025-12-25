@@ -4,7 +4,7 @@ on:
   schedule:
     # 화요일 오후 2:30 (UTC+9 = UTC+0 05:30)
     - cron: '30 5 * * 2'
-    # 목요일 저녁 8:00 (UTC+9 = UTC+0 11:00)  
+    # 목요일 저녁 8:00 (UTC+9 = UTC+0 11:00)
     - cron: '0 11 * * 4'
   workflow_dispatch:
     inputs:
@@ -36,17 +36,17 @@ jobs:
       should_publish: ${{ steps.approval-check.outputs.approved }}
       content_ready: ${{ steps.content-check.outputs.ready }}
       publish_type: ${{ steps.schedule-check.outputs.type }}
-      
+
     steps:
       - name: 🛠️ Checkout Repository
         uses: actions/checkout@v4
-        
+
       - name: 📅 Check Schedule & Content Type
         id: schedule-check
         run: |
           CURRENT_DAY=$(date +%u)  # 1=Monday, 2=Tuesday, 4=Thursday
           CURRENT_HOUR=$(date +%H)
-          
+
           if [[ "${{ github.event.inputs.publish_type }}" == "tuesday-only" ]] || [[ $CURRENT_DAY == 2 && $CURRENT_HOUR == 14 ]]; then
             echo "type=tuesday" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event.inputs.publish_type }}" == "thursday-only" ]] || [[ $CURRENT_DAY == 4 && $CURRENT_HOUR == 20 ]]; then
@@ -56,13 +56,13 @@ jobs:
           else
             echo "type=none" >> $GITHUB_OUTPUT
           fi
-          
+
       - name: 🔍 Check for Approved Content
         id: content-check
         run: |
           # 승인된 PR에서 ready-to-publish 라벨 확인
           CURRENT_WEEK=$(date +%V)
-          
+
           # GitHub API로 승인된 PR 찾기
           APPROVED_PRS=$(curl -s \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -76,14 +76,14 @@ jobs:
           else
             echo "ready=false" >> $GITHUB_OUTPUT
           fi
-          
+
       - name: ✅ Approval Status Check
         id: approval-check
         run: |
           FORCE_PUBLISH="${{ github.event.inputs.force_publish }}"
           CONTENT_READY="${{ steps.content-check.outputs.ready }}"
           PUBLISH_TYPE="${{ steps.schedule-check.outputs.type }}"
-          
+
           if [[ "$FORCE_PUBLISH" == "true" ]] || [[ "$CONTENT_READY" == "true" && "$PUBLISH_TYPE" != "none" ]]; then
             echo "approved=true" >> $GITHUB_OUTPUT
             echo "✅ 발행 승인됨: Force=$FORCE_PUBLISH, Ready=$CONTENT_READY, Type=$PUBLISH_TYPE"
@@ -96,28 +96,28 @@ jobs:
     needs: check-approval
     if: needs.check-approval.outputs.should_publish == 'true'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 🛠️ Checkout Repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
-          
+
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          
+
       - name: 📦 Install Dependencies
         run: npm install
-        
+
       - name: 🔄 Merge Approved Content
         if: needs.check-approval.outputs.content_ready == 'true'
         run: |
           PR_NUMBER="${{ needs.check-approval.outputs.pr_number }}"
-          
+
           # PR 정보 가져오기
           PR_INFO=$(curl -s \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -125,23 +125,23 @@ jobs:
             "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER")
             
           BRANCH_NAME=$(echo "$PR_INFO" | jq -r '.head.ref')
-          
+
           # 브랜치 체크아웃 및 병합
           git checkout main
           git pull origin main
           git checkout "$BRANCH_NAME"
           git checkout main
           git merge --no-ff "$BRANCH_NAME" -m "🚀 Auto-publish blog content from PR #$PR_NUMBER"
-          
+
           echo "merged_branch=$BRANCH_NAME" >> $GITHUB_OUTPUT
-          
+
       - name: 📝 Process Draft Content
         id: process-content
         run: |
           PUBLISH_TYPE="${{ needs.check-approval.outputs.publish_type }}"
           CURRENT_DATE=$(date +%Y-%m-%d)
           CURRENT_DAY=$(date +%A)
-          
+
           # Draft 폴더에서 콘텐츠 확인
           if [[ -d "lib/blog-drafts" ]]; then
             DRAFT_FILES=$(ls lib/blog-drafts/*.md 2>/dev/null || echo "")
@@ -162,16 +162,16 @@ jobs:
             echo "processed=false" >> $GITHUB_OUTPUT
             echo "⚠️ No draft content found"
           fi
-          
+
       - name: 🔄 Update Blog Data
         run: |
           # 실제 blog-data.ts 업데이트 로직
           node scripts/update-blog-data.js
-          
+
           git add lib/blog-data.ts
           git config user.name "Blog Auto Publisher"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           if git diff --cached --quiet; then
             echo "📌 No changes to commit"
           else
@@ -185,7 +185,7 @@ jobs:
             
             git push origin main
           fi
-          
+
       - name: 🧹 Cleanup Published Content
         run: |
           # 발행된 draft 파일들 정리
@@ -198,12 +198,12 @@ jobs:
             git commit -m "📁 Archive published drafts for $PUBLISHED_DATE" || true
             git push origin main || true
           fi
-          
+
       - name: 🏷️ Close and Label PR
         if: needs.check-approval.outputs.content_ready == 'true'
         run: |
           PR_NUMBER="${{ needs.check-approval.outputs.pr_number }}"
-          
+
           # PR 자동 닫기 및 라벨링
           curl -X PATCH \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -217,12 +217,12 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/labels" \
             -d '{"labels": ["published", "auto-merged"]}'
-            
+
       - name: 📢 Send Publication Notification
         run: |
           PUBLISH_TYPE="${{ needs.check-approval.outputs.publish_type }}"
           CURRENT_TIME=$(date +'%Y년 %m월 %d일 %H:%M')
-          
+
           # 슬랙 알림
           curl -X POST "${{ env.SLACK_WEBHOOK }}" \
             -H "Content-Type: application/json" \
@@ -259,7 +259,7 @@ jobs:
                 }
               ]
             }"
-            
+
       - name: 📊 Publication Summary
         run: |
           echo "## 🚀 블로그 자동 발행 완료!" >> $GITHUB_STEP_SUMMARY
@@ -281,12 +281,12 @@ jobs:
     needs: check-approval
     if: needs.check-approval.outputs.should_publish == 'false'
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: 📢 Send Skip Notification  
+      - name: 📢 Send Skip Notification
         run: |
           REASON="승인되지 않은 콘텐츠 또는 잘못된 스케줄"
-          
+
           curl -X POST "${{ env.SLACK_WEBHOOK }}" \
             -H "Content-Type: application/json" \
             -d "{
@@ -301,7 +301,7 @@ jobs:
                 }
               ]
             }"
-            
+
       - name: 📊 Skip Summary
         run: |
           echo "## ⏭️ 블로그 발행 건너뜀" >> $GITHUB_STEP_SUMMARY

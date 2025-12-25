@@ -1,8 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { ExternalLink, X } from 'lucide-react';
+
 import { useEffect, useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 
 export function DomainMigrationBanner() {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,9 +15,10 @@ export function DomainMigrationBanner() {
     const dismissed = localStorage.getItem('domain-migration-dismissed');
     if (!dismissed) {
       // 리퍼러 확인 - 기존 도메인에서 온 경우 또는 쿠키로 기존 사용자 식별
-      const isFromOldDomain = document.referrer.includes('samsunglife.vip') || 
-                              localStorage.getItem('legacy-user') === 'true';
-      
+      const isFromOldDomain =
+        document.referrer.includes('samsunglife.vip') ||
+        localStorage.getItem('legacy-user') === 'true';
+
       if (isFromOldDomain) {
         setIsVisible(true);
       }
@@ -51,8 +54,10 @@ export function DomainMigrationBanner() {
             <div className="text-sm md:text-base">
               <span className="font-semibold">도메인이 변경되었습니다!</span>
               <span className="ml-2">
-                <span className="text-blue-200">samsunglife.vip</span> → 
-                <span className="text-white font-semibold ml-1">familyoffices.vip</span>
+                <span className="text-blue-200">samsunglife.vip</span> →
+                <span className="text-white font-semibold ml-1">
+                  familyoffices.vip
+                </span>
               </span>
               <span className="hidden md:inline ml-2 text-blue-200">
                 북마크를 업데이트해 주세요.

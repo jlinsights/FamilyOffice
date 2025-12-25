@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Parser from 'rss-parser';
+
 import { blogPosts } from './blog-data';
 import { cacheManagers } from './cache';
 
@@ -11,7 +12,13 @@ export interface RSSItem {
   url: string;
   publishedAt: string;
   author: string;
-  source: 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | 'substack' | 'local';
+  source:
+    | 'beehiiv'
+    | 'naver-blog'
+    | 'tistory'
+    | 'brunch'
+    | 'substack'
+    | 'local';
   category?: string;
   tags: string[];
   readTime?: string;
@@ -84,25 +91,27 @@ export class RSSAggregator {
       const response = await axios.get(url, {
         headers: {
           'User-Agent': userAgent,
-          'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
+          Accept: 'application/rss+xml, application/xml, text/xml; q=0.1',
         },
         timeout: 5000,
         maxRedirects: 0,
-        validateStatus: (status: number) => status >= 200 && status < 400
+        validateStatus: (status: number) => status >= 200 && status < 400,
       });
 
       if (response.status >= 300) {
-        console.warn(`Redirect detected for ${url}: ${response.status} to ${response.headers.location}`);
+        console.warn(
+          `Redirect detected for ${url}: ${response.status} to ${response.headers.location}`
+        );
         if (response.headers.location) {
-             const redirectResponse = await axios.get(response.headers.location, {
-                headers: {
-                    'User-Agent': userAgent,
-                    'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
-                },
-                timeout: 5000,
-                maxRedirects: 0
-             });
-             return await this.parser.parseString(redirectResponse.data);
+          const redirectResponse = await axios.get(response.headers.location, {
+            headers: {
+              'User-Agent': userAgent,
+              Accept: 'application/rss+xml, application/xml, text/xml; q=0.1',
+            },
+            timeout: 5000,
+            maxRedirects: 0,
+          });
+          return await this.parser.parseString(redirectResponse.data);
         }
       }
 
@@ -131,7 +140,7 @@ export class RSSAggregator {
     'https://images.unsplash.com/photo-1665686376173-ada7a0031a85?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1664575600850-c4b712e6e2bf?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1664575599736-c5197c91766a?auto=format&fit=crop&w=800&q=80',
-    
+
     // Technology & Innovation
     'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
@@ -178,14 +187,14 @@ export class RSSAggregator {
     'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80'
+    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
   ];
 
   private getFallbackImage(id: string): string {
     // Generate a deterministic index based on the ID string
     let hash = 0;
     for (let i = 0; i < id.length; i++) {
-      hash = ((hash << 5) - hash) + id.charCodeAt(i);
+      hash = (hash << 5) - hash + id.charCodeAt(i);
       hash = hash & hash;
     }
     const index = Math.abs(hash) % this.fallbackImages.length;
@@ -197,7 +206,7 @@ export class RSSAggregator {
    */
   async getBeehiivPosts(limit = 10): Promise<RSSItem[]> {
     const cacheKey = `${this.cachePrefix}:beehiiv`;
-    
+
     try {
       // 캐시 확인
       const cached = await cacheManagers.content.get<string>(cacheKey);
@@ -215,25 +224,39 @@ export class RSSAggregator {
         // 파싱 실패 시 빈 배열 반환
         return [];
       }
-      
-      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
-        id: this.generateId('beehiiv', item.guid || item.link || '', index),
-        title: item.title || '제목 없음',
-        content: this.extractContent(item),
-        excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
-        url: item.link || '',
-        publishedAt: item.pubDate || new Date().toISOString(),
-        author: this.normalizeAuthorName(item.author || item.creator || '패밀리오피스 에디터'),
-        source: 'beehiiv' as const,
-        category: this.extractCategory(item.categories),
-        tags: this.extractTags(item.categories || []),
-        readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('beehiiv', item.guid || item.link || '', index)),
-        featured: index === 0 // 첫 번째 글을 featured로 설정
-      }));
+
+      const posts: RSSItem[] = (feed.items as unknown as ParsedFeedItem[]).map(
+        (item: ParsedFeedItem, index: number) => ({
+          id: this.generateId('beehiiv', item.guid || item.link || '', index),
+          title: item.title || '제목 없음',
+          content: this.extractContent(item),
+          excerpt: this.generateExcerpt(
+            item.contentSnippet || item.description || ''
+          ),
+          url: item.link || '',
+          publishedAt: item.pubDate || new Date().toISOString(),
+          author: this.normalizeAuthorName(
+            item.author || item.creator || '패밀리오피스 에디터'
+          ),
+          source: 'beehiiv' as const,
+          category: this.extractCategory(item.categories),
+          tags: this.extractTags(item.categories || []),
+          readTime: this.calculateReadTime(this.extractContent(item)),
+          imageUrl:
+            this.extractImageUrl(item) ||
+            this.getFallbackImage(
+              this.generateId('beehiiv', item.guid || item.link || '', index)
+            ),
+          featured: index === 0, // 첫 번째 글을 featured로 설정
+        })
+      );
 
       // 캐시 저장
-      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
+      await cacheManagers.content.set(
+        cacheKey,
+        JSON.stringify(posts),
+        this.cacheDuration
+      );
 
       return posts.slice(0, limit);
     } catch (error) {
@@ -247,7 +270,7 @@ export class RSSAggregator {
    */
   async getNaverBlogPosts(blogId: string, limit = 10): Promise<RSSItem[]> {
     const cacheKey = `${this.cachePrefix}:naver:${blogId}`;
-    
+
     try {
       // 캐시 확인
       const cached = await cacheManagers.content.get<string>(cacheKey);
@@ -265,25 +288,39 @@ export class RSSAggregator {
         // 파싱 실패 시 빈 배열 반환
         return [];
       }
-      
-      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index) => ({
-        id: this.generateId('naver', item.guid || item.link || '', index),
-        title: item.title || '제목 없음',
-        content: this.extractContent(item),
-        excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
-        url: item.link || '',
-        publishedAt: item.pubDate || new Date().toISOString(),
-        author: this.normalizeAuthorName(item.author || item.creator || '패밀리오피스 블로거'),
-        source: 'naver-blog' as const,
-        category: this.extractCategory(item.categories),
-        tags: this.extractTags(item.categories || []),
-        readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('naver', item.guid || item.link || '', index)),
-        featured: false
-      }));
+
+      const posts: RSSItem[] = (feed.items as unknown as ParsedFeedItem[]).map(
+        (item: ParsedFeedItem, index: number) => ({
+          id: this.generateId('naver', item.guid || item.link || '', index),
+          title: item.title || '제목 없음',
+          content: this.extractContent(item),
+          excerpt: this.generateExcerpt(
+            item.contentSnippet || item.description || ''
+          ),
+          url: item.link || '',
+          publishedAt: item.pubDate || new Date().toISOString(),
+          author: this.normalizeAuthorName(
+            item.author || item.creator || '패밀리오피스 블로거'
+          ),
+          source: 'naver-blog' as const,
+          category: this.extractCategory(item.categories),
+          tags: this.extractTags(item.categories || []),
+          readTime: this.calculateReadTime(this.extractContent(item)),
+          imageUrl:
+            this.extractImageUrl(item) ||
+            this.getFallbackImage(
+              this.generateId('naver', item.guid || item.link || '', index)
+            ),
+          featured: false,
+        })
+      );
 
       // 캐시 저장
-      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
+      await cacheManagers.content.set(
+        cacheKey,
+        JSON.stringify(posts),
+        this.cacheDuration
+      );
 
       return posts.slice(0, limit);
     } catch (error) {
@@ -295,9 +332,12 @@ export class RSSAggregator {
   /**
    * 티스토리 블로그 RSS 피드에서 포스트 가져오기
    */
-  async getTistoryPosts(blogName: string = 'family-office', limit = 10): Promise<RSSItem[]> {
+  async getTistoryPosts(
+    blogName: string = 'family-office',
+    limit = 10
+  ): Promise<RSSItem[]> {
     const cacheKey = `${this.cachePrefix}:tistory:${blogName}`;
-    
+
     try {
       // 캐시 확인
       const cached = await cacheManagers.content.get<string>(cacheKey);
@@ -315,25 +355,39 @@ export class RSSAggregator {
         // 파싱 실패 시 빈 배열 반환
         return [];
       }
-      
-      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index: number) => ({
-        id: this.generateId('tistory', item.guid || item.link || '', index),
-        title: item.title || '제목 없음',
-        content: this.extractContent(item),
-        excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
-        url: item.link || '',
-        publishedAt: item.pubDate || new Date().toISOString(),
-        author: this.normalizeAuthorName(item.author || item.creator || '패밀리오피스 에디터'),
-        source: 'tistory' as const,
-        category: this.extractCategory(item.categories),
-        tags: this.extractTags(item.categories || []),
-        readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('tistory', item.guid || item.link || '', index)),
-        featured: false
-      }));
+
+      const posts: RSSItem[] = feed.items.map(
+        (item: ParsedFeedItem, index: number) => ({
+          id: this.generateId('tistory', item.guid || item.link || '', index),
+          title: item.title || '제목 없음',
+          content: this.extractContent(item),
+          excerpt: this.generateExcerpt(
+            item.contentSnippet || item.description || ''
+          ),
+          url: item.link || '',
+          publishedAt: item.pubDate || new Date().toISOString(),
+          author: this.normalizeAuthorName(
+            item.author || item.creator || '패밀리오피스 에디터'
+          ),
+          source: 'tistory' as const,
+          category: this.extractCategory(item.categories),
+          tags: this.extractTags(item.categories || []),
+          readTime: this.calculateReadTime(this.extractContent(item)),
+          imageUrl:
+            this.extractImageUrl(item) ||
+            this.getFallbackImage(
+              this.generateId('tistory', item.guid || item.link || '', index)
+            ),
+          featured: false,
+        })
+      );
 
       // 캐시 저장
-      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
+      await cacheManagers.content.set(
+        cacheKey,
+        JSON.stringify(posts),
+        this.cacheDuration
+      );
 
       return posts.slice(0, limit);
     } catch (error) {
@@ -345,9 +399,12 @@ export class RSSAggregator {
   /**
    * 브런치스토리 RSS 피드에서 포스트 가져오기
    */
-  async getBrunchPosts(brunchId: string = 'familyoffice', limit = 10): Promise<RSSItem[]> {
+  async getBrunchPosts(
+    brunchId: string = 'familyoffice',
+    limit = 10
+  ): Promise<RSSItem[]> {
     const cacheKey = `${this.cachePrefix}:brunch:${brunchId}`;
-    
+
     try {
       // 캐시 확인
       const cached = await cacheManagers.content.get<string>(cacheKey);
@@ -367,25 +424,39 @@ export class RSSAggregator {
         // 파싱 실패 시 빈 배열 반환
         return [];
       }
-      
-      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index: number) => ({
-        id: this.generateId('brunch', item.guid || item.link || '', index),
-        title: item.title || '제목 없음',
-        content: this.extractContent(item),
-        excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
-        url: item.link || '',
-        publishedAt: item.pubDate || new Date().toISOString(),
-        author: this.normalizeAuthorName(item.author || item.creator || '패밀리오피스 에디터'),
-        source: 'brunch' as const,
-        category: this.extractCategory(item.categories),
-        tags: this.extractTags(item.categories || []),
-        readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('brunch', item.guid || item.link || '', index)),
-        featured: false
-      }));
+
+      const posts: RSSItem[] = feed.items.map(
+        (item: ParsedFeedItem, index: number) => ({
+          id: this.generateId('brunch', item.guid || item.link || '', index),
+          title: item.title || '제목 없음',
+          content: this.extractContent(item),
+          excerpt: this.generateExcerpt(
+            item.contentSnippet || item.description || ''
+          ),
+          url: item.link || '',
+          publishedAt: item.pubDate || new Date().toISOString(),
+          author: this.normalizeAuthorName(
+            item.author || item.creator || '패밀리오피스 에디터'
+          ),
+          source: 'brunch' as const,
+          category: this.extractCategory(item.categories),
+          tags: this.extractTags(item.categories || []),
+          readTime: this.calculateReadTime(this.extractContent(item)),
+          imageUrl:
+            this.extractImageUrl(item) ||
+            this.getFallbackImage(
+              this.generateId('brunch', item.guid || item.link || '', index)
+            ),
+          featured: false,
+        })
+      );
 
       // 캐시 저장
-      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
+      await cacheManagers.content.set(
+        cacheKey,
+        JSON.stringify(posts),
+        this.cacheDuration
+      );
 
       return posts.slice(0, limit);
     } catch (error) {
@@ -397,9 +468,12 @@ export class RSSAggregator {
   /**
    * Substack RSS 피드에서 포스트 가져오기
    */
-  async getSubstackPosts(substackId: string = 'jaehong', limit = 10): Promise<RSSItem[]> {
+  async getSubstackPosts(
+    substackId: string = 'jaehong',
+    limit = 10
+  ): Promise<RSSItem[]> {
     const cacheKey = `${this.cachePrefix}:substack:${substackId}`;
-    
+
     try {
       // 캐시 확인
       const cached = await cacheManagers.content.get<string>(cacheKey);
@@ -417,25 +491,39 @@ export class RSSAggregator {
         // 파싱 실패 시 빈 배열 반환
         return [];
       }
-      
-      const posts: RSSItem[] = feed.items.map((item: ParsedFeedItem, index: number) => ({
-        id: this.generateId('substack', item.guid || item.link || '', index),
-        title: item.title || '제목 없음',
-        content: this.extractContent(item),
-        excerpt: this.generateExcerpt(item.contentSnippet || item.description || ''),
-        url: item.link || '',
-        publishedAt: item.pubDate || new Date().toISOString(),
-        author: this.normalizeAuthorName(item.author || item.creator || 'Substack Writer'),
-        source: 'substack' as const,
-        category: this.extractCategory(item.categories),
-        tags: this.extractTags(item.categories || []),
-        readTime: this.calculateReadTime(this.extractContent(item)),
-        imageUrl: this.extractImageUrl(item) || this.getFallbackImage(this.generateId('substack', item.guid || item.link || '', index)),
-        featured: false
-      }));
+
+      const posts: RSSItem[] = feed.items.map(
+        (item: ParsedFeedItem, index: number) => ({
+          id: this.generateId('substack', item.guid || item.link || '', index),
+          title: item.title || '제목 없음',
+          content: this.extractContent(item),
+          excerpt: this.generateExcerpt(
+            item.contentSnippet || item.description || ''
+          ),
+          url: item.link || '',
+          publishedAt: item.pubDate || new Date().toISOString(),
+          author: this.normalizeAuthorName(
+            item.author || item.creator || 'Substack Writer'
+          ),
+          source: 'substack' as const,
+          category: this.extractCategory(item.categories),
+          tags: this.extractTags(item.categories || []),
+          readTime: this.calculateReadTime(this.extractContent(item)),
+          imageUrl:
+            this.extractImageUrl(item) ||
+            this.getFallbackImage(
+              this.generateId('substack', item.guid || item.link || '', index)
+            ),
+          featured: false,
+        })
+      );
 
       // 캐시 저장
-      await cacheManagers.content.set(cacheKey, JSON.stringify(posts), this.cacheDuration);
+      await cacheManagers.content.set(
+        cacheKey,
+        JSON.stringify(posts),
+        this.cacheDuration
+      );
 
       return posts.slice(0, limit);
     } catch (error) {
@@ -453,11 +541,11 @@ export class RSSAggregator {
       const seoBlogSlugs = [
         'successful-ceo-asset-management',
         'inheritance-tax-calculator-2025',
-        'business-succession-checklist'
+        'business-succession-checklist',
       ];
 
       const allPosts = Object.values(blogPosts);
-      
+
       // SEO 블로그는 Insights 피드에서 제외
       const posts = allPosts
         .filter(post => !seoBlogSlugs.includes(post.slug))
@@ -475,12 +563,16 @@ export class RSSAggregator {
           readTime: post.readTime,
           imageUrl: post.image,
           featured: post.featured ?? false,
-          lastUpdated: post.lastUpdated
+          lastUpdated: post.lastUpdated,
         }));
 
       // 날짜순 정렬
       return posts
-        .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+        .sort(
+          (a, b) =>
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+        )
         .slice(0, limit);
     } catch (error) {
       console.error('로컬 포스트 가져오기 오류:', error);
@@ -491,11 +583,14 @@ export class RSSAggregator {
   /**
    * 통합 콘텐츠 가져오기 (beehiiv + 네이버 블로그 + 로컬 포스트)
    */
-  async getIntegratedContent(naverBlogId?: string, limit = 20): Promise<RSSItem[]> {
+  async getIntegratedContent(
+    naverBlogId?: string,
+    limit = 20
+  ): Promise<RSSItem[]> {
     try {
       const promises: Promise<RSSItem[]>[] = [
         this.getBeehiivPosts(limit / 2),
-        this.getLocalPosts(limit)
+        this.getLocalPosts(limit),
       ];
 
       if (naverBlogId) {
@@ -516,7 +611,11 @@ export class RSSAggregator {
 
       // 발행일 기준 내림차순 정렬
       return allPosts
-        .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+        .sort(
+          (a, b) =>
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+        )
         .slice(0, limit);
     } catch (error) {
       console.error('통합 콘텐츠 가져오기 오류:', error);
@@ -527,7 +626,17 @@ export class RSSAggregator {
   /**
    * 특정 소스의 콘텐츠만 가져오기
    */
-  async getContentBySource(source: 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | 'substack' | 'local', identifier?: string, limit = 10): Promise<RSSItem[]> {
+  async getContentBySource(
+    source:
+      | 'beehiiv'
+      | 'naver-blog'
+      | 'tistory'
+      | 'brunch'
+      | 'substack'
+      | 'local',
+    identifier?: string,
+    limit = 10
+  ): Promise<RSSItem[]> {
     if (source === 'beehiiv') {
       return this.getBeehiivPosts(limit);
     } else if (source === 'naver-blog' && identifier) {
@@ -550,7 +659,7 @@ export class RSSAggregator {
   async getContentById(id: string): Promise<RSSItem | null> {
     try {
       console.log('Getting content by ID:', id);
-      
+
       // beehiiv에서 먼저 찾기
       try {
         const beehiivPosts = await this.getBeehiivPosts(50);
@@ -592,7 +701,7 @@ export class RSSAggregator {
     let hash = 0;
     for (let i = 0; i < base.length; i++) {
       const char = base.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // Convert to 32bit integer
     }
     // 음수를 양수로 변환하고 hex로 변환
@@ -606,7 +715,7 @@ export class RSSAggregator {
 
   private generateExcerpt(content: string, maxLength = 200): string {
     const cleanContent = content.replace(/<[^>]*>/g, '').trim();
-    return cleanContent.length > maxLength 
+    return cleanContent.length > maxLength
       ? `${cleanContent.slice(0, maxLength)}...`
       : cleanContent;
   }
@@ -633,9 +742,11 @@ export class RSSAggregator {
    */
   private normalizeAuthorName(author: string): string {
     // lim_jaehong, Jaehong LIM 등을 'Editor'로 변환
-    if (author.toLowerCase().includes('lim_jaehong') || 
-        author.toLowerCase().includes('jaehong') || 
-        author.toLowerCase().includes('lim')) {
+    if (
+      author.toLowerCase().includes('lim_jaehong') ||
+      author.toLowerCase().includes('jaehong') ||
+      author.toLowerCase().includes('lim')
+    ) {
       return 'Editor';
     }
     // 패밀리오피스 에디터/블로거도 'Editor'로 통일
@@ -661,21 +772,28 @@ export class RSSAggregator {
     }
 
     // 3. Media RSS content
-    if (item['media:content']?.$?.url &&
-        (item['media:content'].$?.medium === 'image' || !item['media:content'].$?.medium)) {
+    if (
+      item['media:content']?.$?.url &&
+      (item['media:content'].$?.medium === 'image' ||
+        !item['media:content'].$?.medium)
+    ) {
       return item['media:content'].$.url;
     }
 
     const content = this.extractContent(item);
 
     // 4. Open Graph image meta tag
-    const ogImageMatch = content.match(/<meta\s+(?:property|name)="og:image"\s+content="([^">]+)"/i);
+    const ogImageMatch = content.match(
+      /<meta\s+(?:property|name)="og:image"\s+content="([^">]+)"/i
+    );
     if (ogImageMatch) {
       return ogImageMatch[1];
     }
 
     // 5. Twitter Card image meta tag
-    const twitterImageMatch = content.match(/<meta\s+(?:property|name)="twitter:image"\s+content="([^">]+)"/i);
+    const twitterImageMatch = content.match(
+      /<meta\s+(?:property|name)="twitter:image"\s+content="([^">]+)"/i
+    );
     if (twitterImageMatch) {
       return twitterImageMatch[1];
     }
@@ -693,8 +811,20 @@ export class RSSAggregator {
   /**
    * RSS 피드 상태 확인
    */
-  async checkFeedHealth(): Promise<{ beehiiv: boolean; naver?: boolean; tistory?: boolean; brunch?: boolean; substack?: boolean }> {
-    const status = { beehiiv: false, naver: false, tistory: false, brunch: false, substack: false };
+  async checkFeedHealth(): Promise<{
+    beehiiv: boolean;
+    naver?: boolean;
+    tistory?: boolean;
+    brunch?: boolean;
+    substack?: boolean;
+  }> {
+    const status = {
+      beehiiv: false,
+      naver: false,
+      tistory: false,
+      brunch: false,
+      substack: false,
+    };
 
     try {
       // beehiiv 상태 확인

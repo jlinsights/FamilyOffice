@@ -7,7 +7,6 @@
  * - GOOGLE_PRIVATE_KEY: 서비스 계정 비공개 키
  * - GOOGLE_ANALYTICS_PROPERTY_ID: GA4 속성 ID
  */
-
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
 /**
@@ -21,11 +20,19 @@ function getGA4Client(): BetaAnalyticsDataClient {
 
   // 개발 환경에서 credentials 없으면 에러 대신 경고
   if (!credentials.client_email || !credentials.private_key) {
-    console.warn('⚠️  GA4 credentials not found. Using mock data in development.');
+    console.warn(
+      '⚠️  GA4 credentials not found. Using mock data in development.'
+    );
     throw new Error('GA4 credentials not configured');
   }
 
-  return new BetaAnalyticsDataClient({ credentials });
+  // Type assertion after validation
+  return new BetaAnalyticsDataClient({
+    credentials: {
+      client_email: credentials.client_email,
+      private_key: credentials.private_key,
+    },
+  });
 }
 
 /**
@@ -104,7 +111,9 @@ export async function getKeywordPerformance(
 
         // 랜딩 페이지에서 키워드 추출 (URL 매칭)
         const matchedKeyword = keywords.find(keyword =>
-          landingPage.toLowerCase().includes(keyword.toLowerCase().replace(/\s+/g, '-'))
+          landingPage
+            .toLowerCase()
+            .includes(keyword.toLowerCase().replace(/\s+/g, '-'))
         );
 
         if (matchedKeyword) {
@@ -148,7 +157,11 @@ export async function getCategoryPerformance(
 ): Promise<CategoryPerformanceData[]> {
   try {
     const allKeywords = Object.values(categoryKeywordsMap).flat();
-    const keywordData = await getKeywordPerformance(startDate, endDate, allKeywords);
+    const keywordData = await getKeywordPerformance(
+      startDate,
+      endDate,
+      allKeywords
+    );
 
     // 카테고리별 집계
     const categoryStats: Record<string, CategoryPerformanceData> = {};
@@ -158,15 +171,28 @@ export async function getCategoryPerformance(
         keywords.includes(data.keyword)
       );
 
-      const totalSessions = categoryData.reduce((sum, d) => sum + d.sessions, 0);
-      const totalPageViews = categoryData.reduce((sum, d) => sum + d.pageViews, 0);
-      const totalConversions = categoryData.reduce((sum, d) => sum + d.conversions, 0);
-      const avgBounceRate = categoryData.length > 0
-        ? categoryData.reduce((sum, d) => sum + d.bounceRate, 0) / categoryData.length
-        : 0;
-      const avgSessionDuration = categoryData.length > 0
-        ? categoryData.reduce((sum, d) => sum + d.avgSessionDuration, 0) / categoryData.length
-        : 0;
+      const totalSessions = categoryData.reduce(
+        (sum, d) => sum + d.sessions,
+        0
+      );
+      const totalPageViews = categoryData.reduce(
+        (sum, d) => sum + d.pageViews,
+        0
+      );
+      const totalConversions = categoryData.reduce(
+        (sum, d) => sum + d.conversions,
+        0
+      );
+      const avgBounceRate =
+        categoryData.length > 0
+          ? categoryData.reduce((sum, d) => sum + d.bounceRate, 0) /
+            categoryData.length
+          : 0;
+      const avgSessionDuration =
+        categoryData.length > 0
+          ? categoryData.reduce((sum, d) => sum + d.avgSessionDuration, 0) /
+            categoryData.length
+          : 0;
 
       categoryStats[category] = {
         category,
@@ -175,7 +201,8 @@ export async function getCategoryPerformance(
         avgBounceRate,
         avgSessionDuration,
         totalConversions,
-        conversionRate: totalSessions > 0 ? (totalConversions / totalSessions) * 100 : 0,
+        conversionRate:
+          totalSessions > 0 ? (totalConversions / totalSessions) * 100 : 0,
       };
     }
 
@@ -212,10 +239,7 @@ export async function getWeeklyTrend(
       property: `properties/${propertyId}`,
       dateRanges: [{ startDate, endDate }],
       dimensions: [{ name: 'date' }],
-      metrics: [
-        { name: 'sessions' },
-        { name: 'conversions' },
-      ],
+      metrics: [{ name: 'sessions' }, { name: 'conversions' }],
       orderBys: [
         {
           dimension: {

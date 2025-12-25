@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import { kakaoPixelTrack } from './kakao-pixel';
 
 export function PensionCalculatorTracking() {
   useEffect(() => {
     // 페이지 조회 추적
     kakaoPixelTrack.pageView('연금계산기 페이지', 'calculator');
-    
+
     // 컨텐츠 조회 추적 - 계산기 페이지 전용
     kakaoPixelTrack.viewContent('calculator', 'pension-calculator', 80000);
   }, []);
@@ -19,7 +20,7 @@ export function PensionCalculatorTracking() {
         content_category: 'calculator',
         value: 50000,
         currency: 'KRW',
-        event_type: 'engagement'
+        event_type: 'engagement',
       });
     };
 
@@ -32,7 +33,7 @@ export function PensionCalculatorTracking() {
           content_category: 'calculator',
           value: 10000,
           currency: 'KRW',
-          event_type: 'interaction'
+          event_type: 'interaction',
         });
       }, 2000); // 2초 디바운싱
     };
@@ -43,14 +44,16 @@ export function PensionCalculatorTracking() {
         content_category: 'calculator',
         value: 100000,
         currency: 'KRW',
-        event_type: 'conversion'
+        event_type: 'conversion',
       });
     };
 
     // 이벤트 리스너 등록
     const calculatorForm = document.querySelector('#pension-calculator-form');
-    const inputFields = document.querySelectorAll('input[type="number"], input[type="range"]');
-    
+    const inputFields = document.querySelectorAll(
+      'input[type="number"], input[type="range"]'
+    );
+
     if (calculatorForm) {
       calculatorForm.addEventListener('submit', handleCalculationInteraction);
     }
@@ -63,19 +66,22 @@ export function PensionCalculatorTracking() {
     // 결과 영역 관찰
     const resultSection = document.querySelector('#calculation-results');
     if (resultSection) {
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
           if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
             handleResultView();
           }
         });
       });
-      
+
       observer.observe(resultSection, { childList: true, subtree: true });
-      
+
       return () => {
         observer.disconnect();
-        calculatorForm?.removeEventListener('submit', handleCalculationInteraction);
+        calculatorForm?.removeEventListener(
+          'submit',
+          handleCalculationInteraction
+        );
         inputFields.forEach(input => {
           input.removeEventListener('input', handleInputInteraction);
           input.removeEventListener('change', handleInputInteraction);
@@ -85,7 +91,10 @@ export function PensionCalculatorTracking() {
     }
 
     return () => {
-      calculatorForm?.removeEventListener('submit', handleCalculationInteraction);
+      calculatorForm?.removeEventListener(
+        'submit',
+        handleCalculationInteraction
+      );
       inputFields.forEach(input => {
         input.removeEventListener('input', handleInputInteraction);
         input.removeEventListener('change', handleInputInteraction);

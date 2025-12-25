@@ -1,4 +1,6 @@
 import { Icon } from '@iconify/react';
+// Lucide + Iconify 함께 사용하기
+import { Home, User } from 'lucide-react';
 
 /**
  * Iconify 아이콘 사용 예제
@@ -64,10 +66,20 @@ export function KoreanIconsExample() {
   return (
     <div className="flex gap-4 items-center">
       {/* 카카오 */}
-      <Icon icon="simple-icons:kakao" width="24" height="24" className="text-yellow-400" />
+      <Icon
+        icon="simple-icons:kakao"
+        width="24"
+        height="24"
+        className="text-yellow-400"
+      />
 
       {/* 네이버 */}
-      <Icon icon="simple-icons:naver" width="24" height="24" className="text-green-500" />
+      <Icon
+        icon="simple-icons:naver"
+        width="24"
+        height="24"
+        className="text-green-500"
+      />
 
       {/* 한글 */}
       <Icon icon="mdi:alphabet-hangul" width="24" height="24" />
@@ -84,18 +96,53 @@ export function FinanceIconsExample() {
     <div className="flex gap-4 items-center flex-wrap">
       {/* 금융 */}
       <Icon icon="mdi:bank" width="24" height="24" className="text-blue-600" />
-      <Icon icon="mdi:chart-line" width="24" height="24" className="text-green-600" />
-      <Icon icon="mdi:cash-multiple" width="24" height="24" className="text-emerald-600" />
+      <Icon
+        icon="mdi:chart-line"
+        width="24"
+        height="24"
+        className="text-green-600"
+      />
+      <Icon
+        icon="mdi:cash-multiple"
+        width="24"
+        height="24"
+        className="text-emerald-600"
+      />
 
       {/* 비즈니스 */}
-      <Icon icon="mdi:briefcase" width="24" height="24" className="text-slate-600" />
-      <Icon icon="mdi:handshake" width="24" height="24" className="text-blue-500" />
-      <Icon icon="mdi:office-building" width="24" height="24" className="text-gray-600" />
+      <Icon
+        icon="mdi:briefcase"
+        width="24"
+        height="24"
+        className="text-slate-600"
+      />
+      <Icon
+        icon="mdi:handshake"
+        width="24"
+        height="24"
+        className="text-blue-500"
+      />
+      <Icon
+        icon="mdi:office-building"
+        width="24"
+        height="24"
+        className="text-gray-600"
+      />
 
       {/* 자산관리 */}
       <Icon icon="mdi:safe" width="24" height="24" className="text-amber-600" />
-      <Icon icon="mdi:shield-check" width="24" height="24" className="text-green-500" />
-      <Icon icon="mdi:trophy" width="24" height="24" className="text-yellow-500" />
+      <Icon
+        icon="mdi:shield-check"
+        width="24"
+        height="24"
+        className="text-green-500"
+      />
+      <Icon
+        icon="mdi:trophy"
+        width="24"
+        height="24"
+        className="text-yellow-500"
+      />
     </div>
   );
 }
@@ -107,19 +154,13 @@ interface IconifyIconProps {
   className?: string;
 }
 
-export function IconifyIcon({ icon, size = 24, className = '' }: IconifyIconProps) {
-  return (
-    <Icon
-      icon={icon}
-      width={size}
-      height={size}
-      className={className}
-    />
-  );
+export function IconifyIcon({
+  icon,
+  size = 24,
+  className = '',
+}: IconifyIconProps) {
+  return <Icon icon={icon} width={size} height={size} className={className} />;
 }
-
-// Lucide + Iconify 함께 사용하기
-import { Home, User } from 'lucide-react';
 
 export function MixedIconsExample() {
   return (
@@ -130,7 +171,12 @@ export function MixedIconsExample() {
 
       {/* Iconify 아이콘 */}
       <Icon icon="mdi:home" width="24" height="24" className="text-blue-500" />
-      <Icon icon="mdi:account" width="24" height="24" className="text-green-500" />
+      <Icon
+        icon="mdi:account"
+        width="24"
+        height="24"
+        className="text-green-500"
+      />
     </div>
   );
 }

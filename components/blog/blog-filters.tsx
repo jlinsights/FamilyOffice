@@ -1,10 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { Calendar, Filter, Tag, TrendingUp, Clock, Eye } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { X } from 'lucide-react';
+
+import { useState } from 'react';
+
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,8 +25,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
+
 import { blogCategories } from '@/lib/blog-data';
-import { X } from 'lucide-react';
 
 export type SortOption = 'latest' | 'popular' | 'views' | 'oldest';
 
@@ -43,13 +47,24 @@ const dateRanges = [
 ];
 
 // 예시 태그 (실제로는 포스트에서 추출)
-const popularTags = ['자산관리', '상속', '세무', '투자전략', 'M&A', '기업승계', '부동산', '해외투자'];
+const popularTags = [
+  '자산관리',
+  '상속',
+  '세무',
+  '투자전략',
+  'M&A',
+  '기업승계',
+  '부동산',
+  '해외투자',
+];
 
 export function BlogFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
-  const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '');
+
+  const [selectedCategory, setSelectedCategory] = useState(
+    searchParams.get('category') || ''
+  );
   const [selectedTags, setSelectedTags] = useState<string[]>(
     searchParams.get('tags')?.split(',').filter(Boolean) || []
   );
@@ -61,7 +76,7 @@ export function BlogFilters() {
 
   const updateURL = (updates: Record<string, string | null>) => {
     const url = new URL(window.location.href);
-    
+
     Object.entries(updates).forEach(([key, value]) => {
       if (value) {
         url.searchParams.set(key, value);
@@ -69,7 +84,7 @@ export function BlogFilters() {
         url.searchParams.delete(key);
       }
     });
-    
+
     router.push(url.pathname + url.search);
   };
 
@@ -82,7 +97,7 @@ export function BlogFilters() {
     const newTags = selectedTags.includes(tag)
       ? selectedTags.filter(t => t !== tag)
       : [...selectedTags, tag];
-    
+
     setSelectedTags(newTags);
     updateURL({ tags: newTags.length > 0 ? newTags.join(',') : null });
   };
@@ -102,7 +117,7 @@ export function BlogFilters() {
     setSelectedTags([]);
     setSortBy('latest');
     setDateRange('all');
-    
+
     const url = new URL(window.location.href);
     url.searchParams.delete('category');
     url.searchParams.delete('tags');
@@ -134,7 +149,7 @@ export function BlogFilters() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {sortOptions.map((option) => {
+              {sortOptions.map(option => {
                 const Icon = option.icon;
                 return (
                   <SelectItem key={option.value} value={option.value}>
@@ -166,7 +181,7 @@ export function BlogFilters() {
             <DropdownMenuContent align="end" className="w-80">
               <DropdownMenuLabel>필터 옵션</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              
+
               {/* 기간 필터 */}
               <div className="p-2">
                 <p className="text-sm font-medium mb-2">기간</p>
@@ -175,7 +190,7 @@ export function BlogFilters() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {dateRanges.map((range) => (
+                    {dateRanges.map(range => (
                       <SelectItem key={range.value} value={range.value}>
                         {range.label}
                       </SelectItem>
@@ -183,17 +198,19 @@ export function BlogFilters() {
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <DropdownMenuSeparator />
-              
+
               {/* 태그 필터 */}
               <div className="p-2">
                 <p className="text-sm font-medium mb-2">태그</p>
                 <div className="flex flex-wrap gap-1">
-                  {popularTags.map((tag) => (
+                  {popularTags.map(tag => (
                     <Badge
                       key={tag}
-                      variant={selectedTags.includes(tag) ? 'default' : 'outline'}
+                      variant={
+                        selectedTags.includes(tag) ? 'default' : 'outline'
+                      }
                       className="cursor-pointer"
                       onClick={() => toggleTag(tag)}
                     >
@@ -202,7 +219,7 @@ export function BlogFilters() {
                   ))}
                 </div>
               </div>
-              
+
               {filterCount > 0 && (
                 <>
                   <DropdownMenuSeparator />
@@ -220,8 +237,10 @@ export function BlogFilters() {
       {/* 활성 필터 표시 */}
       {(selectedTags.length > 0 || dateRange !== 'all') && (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm text-slate-600 dark:text-slate-400">활성 필터:</span>
-          
+          <span className="text-sm text-slate-600 dark:text-slate-400">
+            활성 필터:
+          </span>
+
           {dateRange !== 'all' && (
             <Badge variant="secondary" className="gap-1">
               <Calendar className="h-3 w-3" />
@@ -234,8 +253,8 @@ export function BlogFilters() {
               </button>
             </Badge>
           )}
-          
-          {selectedTags.map((tag) => (
+
+          {selectedTags.map(tag => (
             <Badge key={tag} variant="secondary" className="gap-1">
               <Tag className="h-3 w-3" />
               {tag}
@@ -247,7 +266,7 @@ export function BlogFilters() {
               </button>
             </Badge>
           ))}
-          
+
           <Button
             variant="ghost"
             size="sm"
@@ -261,4 +280,3 @@ export function BlogFilters() {
     </div>
   );
 }
-

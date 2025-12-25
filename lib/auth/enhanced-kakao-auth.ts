@@ -1,8 +1,11 @@
 'use client';
 
-import { createClient } from '@/lib/supabase/client';
-import { Database } from '@/types/supabase';
 import { User } from '@supabase/supabase-js';
+
+import { createClient } from '@/lib/supabase/client';
+import { safeUpdate } from '@/lib/supabase/helpers';
+
+import { Database } from '@/types/supabase';
 
 type UserRecord = Database['public']['Tables']['users']['Row'];
 type UserUpdate = Database['public']['Tables']['users']['Update'];
@@ -41,13 +44,13 @@ export class EnhancedKakaoAuthService {
       if (event === 'TOKEN_REFRESHED' && session) {
         this.logger.info('Token refreshed automatically', {
           expiresAt: session.expires_at,
-          userId: session.user.id
+          userId: session.user.id,
         });
-        
+
         // 캐시 갱신
         await this.invalidateUserCache(session.user.id);
       }
-      
+
       if (event === 'SIGNED_OUT') {
         this.clearAllCaches();
       }
@@ -64,7 +67,7 @@ export class EnhancedKakaoAuthService {
     retryAfter?: number;
   }> {
     const cacheKey = 'kakao_login';
-    
+
     try {
       // 중복 요청 방지
       if (this.pendingRequests.has(cacheKey)) {
@@ -74,16 +77,18 @@ export class EnhancedKakaoAuthService {
 
       const loginPromise = this.performKakaoLogin();
       this.pendingRequests.set(cacheKey, loginPromise);
-      
+
       const result = await loginPromise;
       return result;
-      
     } catch (error) {
       this.logger.error('Kakao login failed', error as Error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : '로그인 중 오류가 발생했습니다.',
-        retryAfter: 5000 // 5초 후 재시도 가능
+        error:
+          error instanceof Error
+            ? error.message
+            : '로그인 중 오류가 발생했습니다.',
+        retryAfter: 5000, // 5초 후 재시도 가능
       };
     } finally {
       this.pendingRequests.delete(cacheKey);
@@ -98,23 +103,27 @@ export class EnhancedKakaoAuthService {
         queryParams: {
           scope: 'profile_nickname profile_image account_email',
           // CSRF 보호를 위한 state 값
-          state: this.generateSecureState()
-        }
-      }
+          state: this.generateSecureState(),
+        },
+      },
     });
 
     if (error) {
-      throw new AuthError('카카오 OAuth 요청 실패', 'OAUTH_REQUEST_FAILED', error);
+      throw new AuthError(
+        '카카오 OAuth 요청 실패',
+        'OAUTH_REQUEST_FAILED',
+        error
+      );
     }
 
     this.logger.info('Kakao OAuth initiated', {
       redirectUrl: data.url,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     return {
       success: true,
-      redirectUrl: data.url
+      redirectUrl: data.url,
     };
   }
 
@@ -124,36 +133,37 @@ export class EnhancedKakaoAuthService {
   async refreshToken(): Promise<TokenRefreshResult> {
     try {
       const { data, error } = await this.supabase.auth.refreshSession();
-      
+
       if (error) {
         this.logger.error('Token refresh failed', error);
         return {
           success: false,
-          error: error.message
+          error: error.message,
         };
       }
 
       if (data.session) {
         this.logger.info('Token refreshed manually', {
           userId: data.session.user.id,
-          expiresAt: data.session.expires_at
+          expiresAt: data.session.expires_at,
         });
-        
+
         return {
           success: true,
-          expiresAt: data.session.expires_at || Math.floor(Date.now() / 1000) + 3600
+          expiresAt:
+            data.session.expires_at || Math.floor(Date.now() / 1000) + 3600,
         };
       }
 
       return {
         success: false,
-        error: '세션 갱신에 실패했습니다.'
+        error: '세션 갱신에 실패했습니다.',
       };
     } catch (error) {
       this.logger.error('Token refresh error', error as Error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : '토큰 갱신 오류'
+        error: error instanceof Error ? error.message : '토큰 갱신 오류',
       };
     }
   }
@@ -163,8 +173,10 @@ export class EnhancedKakaoAuthService {
    */
   async ensureValidToken(): Promise<boolean> {
     try {
-      const { data: { session } } = await this.supabase.auth.getSession();
-      
+      const {
+        data: { session },
+      } = await this.supabase.auth.getSession();
+
       if (!session) {
         return false;
       }
@@ -172,14 +184,15 @@ export class EnhancedKakaoAuthService {
       // 토큰이 5분 내에 만료되면 갱신
       const now = Math.floor(Date.now() / 1000);
       const expiresAt = session.expires_at || 0;
-      
-      if (expiresAt - now < 300) { // 5분
+
+      if (expiresAt - now < 300) {
+        // 5분
         this.logger.info('Token expiring soon, refreshing...', {
           expiresAt,
           now,
-          userId: session.user.id
+          userId: session.user.id,
         });
-        
+
         const refreshResult = await this.refreshToken();
         return refreshResult.success;
       }
@@ -194,15 +207,17 @@ export class EnhancedKakaoAuthService {
   /**
    * 캐시된 사용자 정보 조회
    */
-  async getCachedUser(userId: string): Promise<{ user: User | null; userRecord: UserRecord | null }> {
+  async getCachedUser(
+    userId: string
+  ): Promise<{ user: User | null; userRecord: UserRecord | null }> {
     const cacheKey = `user_${userId}`;
     const cached = this.cache.get(cacheKey);
-    
+
     // 캐시 유효성 확인
     if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
       return {
         user: cached.user,
-        userRecord: cached.userRecord
+        userRecord: cached.userRecord,
       };
     }
 
@@ -213,18 +228,18 @@ export class EnhancedKakaoAuthService {
 
     const fetchPromise = this.fetchUserWithRetry(userId);
     this.pendingRequests.set(cacheKey, fetchPromise);
-    
+
     try {
       const result = await fetchPromise;
-      
+
       // 캐시 저장
       this.cache.set(cacheKey, {
         user: result.user,
         userRecord: result.userRecord,
         timestamp: Date.now(),
-        expiresAt: Date.now() + this.CACHE_TTL
+        expiresAt: Date.now() + this.CACHE_TTL,
       });
-      
+
       return result;
     } finally {
       this.pendingRequests.delete(cacheKey);
@@ -234,20 +249,26 @@ export class EnhancedKakaoAuthService {
   /**
    * 재시도 로직을 포함한 사용자 정보 조회
    */
-  private async fetchUserWithRetry(userId: string): Promise<{ user: User | null; userRecord: UserRecord | null }> {
+  private async fetchUserWithRetry(
+    userId: string
+  ): Promise<{ user: User | null; userRecord: UserRecord | null }> {
     return this.retryOperation(async () => {
       const [userResult, recordResult] = await Promise.all([
         this.supabase.auth.getUser(),
-        this.supabase.from('users').select('*').eq('id', userId).single()
+        this.supabase.from('users').select('*').eq('id', userId).single(),
       ]);
 
       if (userResult.error && userResult.error.status !== 401) {
-        throw new AuthError('사용자 인증 정보 조회 실패', 'USER_FETCH_FAILED', userResult.error);
+        throw new AuthError(
+          '사용자 인증 정보 조회 실패',
+          'USER_FETCH_FAILED',
+          userResult.error
+        );
       }
 
       return {
         user: userResult.data?.user || null,
-        userRecord: recordResult.data || null
+        userRecord: recordResult.data || null,
       };
     }, 'fetchUser');
   }
@@ -255,21 +276,28 @@ export class EnhancedKakaoAuthService {
   /**
    * 프로필 업데이트 (낙관적 업데이트 + 롤백)
    */
-  async updateProfileWithRollback(userId: string, updates: Partial<UserUpdate>): Promise<{
+  async updateProfileWithRollback(
+    userId: string,
+    updates: Partial<UserUpdate>
+  ): Promise<{
     success: boolean;
     userRecord?: UserRecord;
     error?: string;
   }> {
     const cacheKey = `user_${userId}`;
     const originalCache = this.cache.get(cacheKey);
-    
+
     try {
       // 낙관적 업데이트 (UI 즉시 반영)
       if (originalCache?.userRecord) {
         const optimisticUpdate = {
           ...originalCache,
-          userRecord: { ...originalCache.userRecord, ...updates, updated_at: new Date().toISOString() },
-          timestamp: Date.now()
+          userRecord: {
+            ...originalCache.userRecord,
+            ...updates,
+            updated_at: new Date().toISOString(),
+          },
+          timestamp: Date.now(),
         };
         this.cache.set(cacheKey, optimisticUpdate);
       }
@@ -277,12 +305,14 @@ export class EnhancedKakaoAuthService {
       // 실제 데이터베이스 업데이트
       const updateData: UserUpdate = {
         ...updates,
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       };
 
-      const { data, error } = await this.supabase
-        .from('users')
-        .update(updateData)
+      const { data, error } = await safeUpdate(
+        this.supabase,
+        'users',
+        updateData
+      )
         .eq('id', userId)
         .select()
         .single();
@@ -292,8 +322,12 @@ export class EnhancedKakaoAuthService {
         if (originalCache) {
           this.cache.set(cacheKey, originalCache);
         }
-        
-        throw new AuthError('프로필 업데이트 실패', 'PROFILE_UPDATE_FAILED', error);
+
+        throw new AuthError(
+          '프로필 업데이트 실패',
+          'PROFILE_UPDATE_FAILED',
+          error
+        );
       }
 
       // 성공 시 최종 캐시 업데이트
@@ -301,30 +335,29 @@ export class EnhancedKakaoAuthService {
         this.cache.set(cacheKey, {
           ...originalCache,
           userRecord: data,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         });
       }
 
       this.logger.info('Profile updated successfully', {
         userId,
-        updates: Object.keys(updates)
+        updates: Object.keys(updates),
       });
 
       return {
         success: true,
-        userRecord: data
+        userRecord: data,
       };
-
     } catch (error) {
       // 롤백
       if (originalCache) {
         this.cache.set(cacheKey, originalCache);
       }
-      
+
       this.logger.error('Profile update failed', error as Error, { userId });
       return {
         success: false,
-        error: error instanceof Error ? error.message : '프로필 업데이트 실패'
+        error: error instanceof Error ? error.message : '프로필 업데이트 실패',
       };
     }
   }
@@ -345,43 +378,48 @@ export class EnhancedKakaoAuthService {
     maxRetries = this.MAX_RETRY_ATTEMPTS
   ): Promise<T> {
     let lastError: Error = new Error('Unknown error');
-    
+
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
         // 네트워크 상태 확인
         if (!this.isOnline()) {
           throw new AuthError('인터넷 연결을 확인해주세요', 'NETWORK_OFFLINE');
         }
-        
+
         const result = await operation();
-        
+
         // 첫 시도가 아닌 경우 복구 로그
         if (attempt > 1) {
-          this.logger.info(`Operation ${operationName} recovered on attempt ${attempt}`);
+          this.logger.info(
+            `Operation ${operationName} recovered on attempt ${attempt}`
+          );
         }
-        
+
         return result;
-        
       } catch (error) {
         lastError = error instanceof Error ? error : new Error('Unknown error');
-        
-        this.logger.error(`Operation ${operationName} failed on attempt ${attempt}`, lastError, {
-          attempt,
-          maxRetries,
-          willRetry: attempt < maxRetries
-        });
-        
+
+        this.logger.error(
+          `Operation ${operationName} failed on attempt ${attempt}`,
+          lastError,
+          {
+            attempt,
+            maxRetries,
+            willRetry: attempt < maxRetries,
+          }
+        );
+
         // 마지막 시도인 경우 에러 발생
         if (attempt === maxRetries) {
           break;
         }
-        
+
         // 지수 백오프로 지연
         const delay = this.RETRY_DELAY * Math.pow(2, attempt - 1);
         await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
-    
+
     throw new AuthError(
       `Operation ${operationName} failed after ${maxRetries} attempts`,
       'MAX_RETRIES_EXCEEDED',
@@ -395,7 +433,9 @@ export class EnhancedKakaoAuthService {
   private generateSecureState(): string {
     const array = new Uint8Array(32);
     crypto.getRandomValues(array);
-    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join(
+      ''
+    );
   }
 
   /**
@@ -422,7 +462,7 @@ export class EnhancedKakaoAuthService {
     return {
       cacheSize: this.cache.size,
       pendingRequests: this.pendingRequests.size,
-      cacheHitRate: 0.95 // 실제 구현 시 추적 필요
+      cacheHitRate: 0.95, // 실제 구현 시 추적 필요
     };
   }
 
@@ -437,26 +477,34 @@ export class EnhancedKakaoAuthService {
       // 프로덕션에서는 외부 로깅 서비스로 전송
       this.sendToLoggingService('info', event, data);
     },
-    
+
     error: (event: string, error: Error, data?: any) => {
-      console.error(`[AUTH] ${event}`, { 
-        error: error.message, 
+      console.error(`[AUTH] ${event}`, {
+        error: error.message,
         stack: error.stack,
-        ...data 
+        ...data,
       });
       // 에러 모니터링 서비스로 전송
       this.sendToErrorMonitoring(event, error, data);
-    }
+    },
   };
 
-  private sendToLoggingService(_level: string, _event: string, _data?: any): void {
+  private sendToLoggingService(
+    _level: string,
+    _event: string,
+    _data?: any
+  ): void {
     // 실제 구현 시 Sentry, LogRocket, DataDog 등 연동
     if (process.env.NODE_ENV === 'production') {
       // 로깅 서비스 연동 코드
     }
   }
 
-  private sendToErrorMonitoring(_event: string, _error: Error, _data?: any): void {
+  private sendToErrorMonitoring(
+    _event: string,
+    _error: Error,
+    _data?: any
+  ): void {
     // 실제 구현 시 에러 모니터링 서비스 연동
     if (process.env.NODE_ENV === 'production') {
       // 에러 모니터링 서비스 연동 코드
@@ -482,7 +530,7 @@ export class AuthError extends Error {
       name: this.name,
       message: this.message,
       code: this.code,
-      originalError: this.originalError
+      originalError: this.originalError,
     };
   }
 }

@@ -11,29 +11,35 @@ Copy and paste these into GitHub Issues for tracking.
 **Assignee:** TBD
 
 ### Description
+
 48 TypeScript errors are currently bypassed via `ignoreBuildErrors: true` in next.config.mjs. This creates runtime risk and technical debt.
 
 ### Problem
+
 - Type system bypassed in production
 - Supabase SSR client type inference issues
 - `exactOptionalPropertyTypes: true` conflicts with library types
 
 ### Root Cause
+
 Missing/outdated Supabase type definitions
 
 ### Solution
+
 1. Install Supabase CLI
 2. Regenerate types from database schema
 3. Fix remaining type errors
 4. Re-enable TypeScript build checks
 
 ### Steps to Reproduce
+
 ```bash
 npm run typecheck
 # Shows 48 errors
 ```
 
 ### Acceptance Criteria
+
 - [ ] Supabase CLI installed
 - [ ] Types regenerated: `types/supabase.ts`
 - [ ] All 48 TypeScript errors fixed
@@ -41,6 +47,7 @@ npm run typecheck
 - [ ] Build checks re-enabled in `next.config.mjs`
 
 ### Files Affected
+
 - `lib/marketing/workflow-engine.ts` (28 errors)
 - `lib/user-sync.ts` (8 errors)
 - `lib/rss-aggregator.ts` (2 errors)
@@ -49,6 +56,7 @@ npm run typecheck
 - `scripts/test-connection.ts` (1 error)
 
 ### Commands
+
 ```bash
 # Install CLI
 npm install -g supabase
@@ -61,6 +69,7 @@ npm run typecheck
 ```
 
 ### Related Issues
+
 - Blocks re-enabling build quality checks
 - Related to #4 (Re-enable Build Checks)
 
@@ -73,25 +82,31 @@ npm run typecheck
 **Assignee:** TBD
 
 ### Description
+
 1,038 console.log statements throughout the codebase causing:
+
 - Performance degradation in production
 - Information leakage (internal logic exposed)
 - Poor debugging experience
 
 ### Problem
+
 - Production logs reveal business logic
 - Performance overhead in hot paths
 - No structured logging system
 
 ### Impact
+
 - **Security:** Internal implementation details exposed
 - **Performance:** Console I/O overhead
 - **Maintainability:** Hard to filter/search logs
 
 ### Solution
+
 Replace console.log with structured logging using existing `lib/logger.ts`
 
 ### High-Priority Files (61 logs)
+
 ```
 lib/marketing/workflow-engine.ts        (28 logs)
 lib/marketing/lead-scoring-engine.ts    (14 logs)
@@ -100,6 +115,7 @@ lib/marketing/ai-content-engine.ts      (6 logs)
 ```
 
 ### Acceptance Criteria
+
 - [ ] All production code uses `lib/logger.ts`
 - [ ] Console.log count: 1,038 → <50
 - [ ] Only dev-only files (scripts/) keep console.log
@@ -107,20 +123,23 @@ lib/marketing/ai-content-engine.ts      (6 logs)
 - [ ] Production only logs WARN and ERROR
 
 ### Migration Pattern
+
 ```typescript
+// AFTER:
+import { logger } from '@/lib/logger';
+
 // BEFORE:
 console.log('워크플로우 트리거 체크:', triggerType, contactId);
 
-// AFTER:
-import { logger } from '@/lib/logger';
 logger.info('workflow_trigger_check', {
   triggerType,
   contactId,
-  timestamp: new Date().toISOString()
+  timestamp: new Date().toISOString(),
 });
 ```
 
 ### Commands
+
 ```bash
 # Find all console.log
 grep -rn "console\.log" --include="*.ts" --include="*.tsx" lib/ components/ app/ > console-audit.txt
@@ -130,6 +149,7 @@ grep -r "console\.log" --include="*.ts" --include="*.tsx" lib/ | wc -l
 ```
 
 ### Related
+
 - Improves monitoring and debugging
 - Required for production readiness
 
@@ -142,26 +162,33 @@ grep -r "console\.log" --include="*.ts" --include="*.tsx" lib/ | wc -l
 **Assignee:** TBD
 
 ### Description
+
 210 client components (`"use client"`) causing:
+
 - Larger bundle sizes
 - Slower page loads
 - Unnecessary client-side hydration
 
 ### Problem
+
 Many components marked as client components don't need interactivity:
+
 - Static display components
 - Layout components
 - Content-only components
 
 ### Impact
+
 - First Load JS: ~239 KB (can be reduced)
 - Bundle size: Larger than necessary
 - Performance: Slower initial page load
 
 ### Solution
+
 Audit and convert server-eligible components to Server Components
 
 ### Strategy
+
 1. Identify components without:
    - useState/useEffect
    - Event handlers
@@ -170,6 +197,7 @@ Audit and convert server-eligible components to Server Components
 3. Measure bundle size improvement
 
 ### Acceptance Criteria
+
 - [ ] Audit completed: 210/210 components reviewed
 - [ ] Converted: ~60 components to Server Components
 - [ ] Target: 210 → ~150 client components (30% reduction)
@@ -178,6 +206,7 @@ Audit and convert server-eligible components to Server Components
 - [ ] All pages still functional
 
 ### Commands
+
 ```bash
 # Find all client components
 grep -r "use client" components/ app/ --include="*.tsx" > client-components.txt
@@ -187,7 +216,9 @@ npm run analyze
 ```
 
 ### Conversion Checklist Template
+
 For each component:
+
 - [ ] Uses useState/useEffect? → Keep Client
 - [ ] Has event handlers? → Keep Client
 - [ ] Uses browser APIs? → Keep Client
@@ -195,6 +226,7 @@ For each component:
 - [ ] Only fetches data? → Convert to Server
 
 ### Related
+
 - Improves Core Web Vitals
 - Better SEO performance
 
@@ -207,7 +239,9 @@ For each component:
 **Assignee:** TBD
 
 ### Description
+
 Build quality checks are disabled in `next.config.mjs`:
+
 ```javascript
 eslint: { ignoreDuringBuilds: true },
 typescript: { ignoreBuildErrors: true }
@@ -216,19 +250,23 @@ typescript: { ignoreBuildErrors: true }
 This allows broken code to reach production.
 
 ### Problem
+
 - No automated quality gates
 - TypeScript errors ignored
 - ESLint warnings ignored
 - Technical debt accumulation
 
 ### Dependencies
+
 - **Blocked by:** Issue #1 (Fix TypeScript errors)
 - All TypeScript errors must be resolved first
 
 ### Solution
+
 Remove the ignore flags after fixing all errors
 
 ### Acceptance Criteria
+
 - [ ] Issue #1 completed (0 TypeScript errors)
 - [ ] Remove `ignoreDuringBuilds: true`
 - [ ] Remove `ignoreBuildErrors: true`
@@ -238,7 +276,9 @@ Remove the ignore flags after fixing all errors
 - [ ] CI/CD updated to enforce checks
 
 ### Changes Required
+
 **File:** `next.config.mjs`
+
 ```diff
 - eslint: {
 -   ignoreDuringBuilds: true,
@@ -249,6 +289,7 @@ Remove the ignore flags after fixing all errors
 ```
 
 ### Verification
+
 ```bash
 npm run typecheck  # Should pass
 npm run lint       # Should pass
@@ -256,6 +297,7 @@ npm run build      # Should succeed
 ```
 
 ### Related
+
 - Prevents regression
 - Improves code quality
 - Required for production deployment
@@ -269,24 +311,30 @@ npm run build      # Should succeed
 **Assignee:** TBD
 
 ### Description
+
 36 files use `dangerouslySetInnerHTML` or `innerHTML`, potential XSS vulnerability.
 
 ### Problem
+
 Not all usages are properly sanitized:
+
 - ✅ `lib/security/html-sanitizer.ts` - Uses DOMPurify (SAFE)
 - ⚠️ Blog pages - Needs review
 - ⚠️ `components/structured-data.tsx` - Needs review
 - ⚠️ `components/footer.tsx` - Needs review
 
 ### Security Risk
+
 - **XSS attacks** if user content not sanitized
 - **Code injection** if dynamic content unsanitized
 - **Data theft** through malicious scripts
 
 ### Solution
+
 Audit all 36 files and ensure proper sanitization
 
 ### Acceptance Criteria
+
 - [ ] All 36 files reviewed and documented
 - [ ] Every usage has security assessment
 - [ ] All user-generated content uses DOMPurify
@@ -295,6 +343,7 @@ Audit all 36 files and ensure proper sanitization
 - [ ] Documentation updated with security patterns
 
 ### Review Checklist (per file)
+
 - [ ] Is content sanitized with DOMPurify?
 - [ ] Is source trusted (static/database)?
 - [ ] Can we use React components instead?
@@ -302,6 +351,7 @@ Audit all 36 files and ensure proper sanitization
 - [ ] Security test added?
 
 ### Standard Pattern
+
 ```typescript
 import DOMPurify from 'isomorphic-dompurify';
 
@@ -314,12 +364,14 @@ const cleanHtml = DOMPurify.sanitize(dirtyHtml, {
 ```
 
 ### Commands
+
 ```bash
 # Find all usages
 grep -rn "dangerouslySetInnerHTML\|innerHTML" --include="*.ts" --include="*.tsx" components/ app/ lib/ > html-injection-audit.txt
 ```
 
 ### Related
+
 - OWASP Top 10 compliance
 - Production security requirement
 
@@ -332,25 +384,30 @@ grep -rn "dangerouslySetInnerHTML\|innerHTML" --include="*.ts" --include="*.tsx"
 **Assignee:** TBD
 
 ### Description
+
 node_modules is 1.3GB with 1,980 packages - this is excessive.
 
 ### Problem
+
 - Slow npm install (high bandwidth)
 - Large deployment size
 - Many unused dependencies
 - Possible duplicate packages
 
 ### Impact
+
 - CI/CD time: Longer builds
 - Developer experience: Slow installs
 - Deployment: Larger container images
 
 ### Solution
+
 1. Analyze and remove unused packages
 2. Optimize heavy dependencies
 3. Use specific imports instead of entire libraries
 
 ### Acceptance Criteria
+
 - [ ] node_modules: 1.3GB → <1GB (23% reduction)
 - [ ] Total packages: 1,980 → <1,500 (24% reduction)
 - [ ] Install time: -20% to -30%
@@ -358,6 +415,7 @@ node_modules is 1.3GB with 1,980 packages - this is excessive.
 - [ ] No unused dependencies remain
 
 ### Strategy
+
 ```bash
 # 1. Find unused packages
 npx depcheck
@@ -373,15 +431,16 @@ npm dedupe
 ```
 
 ### Optimization Examples
+
 ```javascript
 // BEFORE: Import entire library
 import _ from 'lodash';
-
 // AFTER: Import specific function
 import debounce from 'lodash/debounce';
 ```
 
 ### Expected Results
+
 - Faster CI/CD pipelines
 - Quicker local development
 - Smaller Docker images
@@ -395,19 +454,24 @@ import debounce from 'lodash/debounce';
 **Assignee:** TBD
 
 ### Description
+
 Enhance existing `lib/logger.ts` with structured logging capabilities.
 
 ### Problem
+
 Current logger is basic:
+
 - No log levels filtering
 - No structured metadata
 - No environment-based logging
 - No integration with monitoring tools
 
 ### Solution
+
 Enhance logger with professional features
 
 ### Features to Add
+
 1. **Log Levels:** DEBUG, INFO, WARN, ERROR
 2. **Structured Metadata:** Context objects
 3. **Environment Filtering:** Production vs Dev
@@ -415,6 +479,7 @@ Enhance logger with professional features
 5. **Service Identification:** Track log source
 
 ### Acceptance Criteria
+
 - [ ] Log levels implemented and working
 - [ ] Production only logs WARN and ERROR
 - [ ] Development logs all levels
@@ -424,6 +489,7 @@ Enhance logger with professional features
 - [ ] Documentation updated
 
 ### Implementation
+
 ```typescript
 interface LogEntry {
   level: LogLevel;
@@ -447,12 +513,14 @@ class Logger {
 ```
 
 ### Optional Enhancements
+
 - [ ] Integration with Sentry/LogRocket
 - [ ] Log aggregation service
 - [ ] Real-time monitoring dashboard
 - [ ] Alert system for errors
 
 ### Related
+
 - Replaces console.log (Issue #2)
 - Improves debugging and monitoring
 - Production-ready logging
@@ -466,9 +534,11 @@ class Logger {
 **Assignee:** TBD
 
 ### Description
+
 Track overall progress of code quality improvements
 
 ### Sub-Issues
+
 - #1 Fix TypeScript Errors (Week 1) 🔴
 - #2 Remove Console Logging (Week 1) 🔴
 - #3 Reduce Client Components (Week 2-3) 🟡
@@ -478,7 +548,9 @@ Track overall progress of code quality improvements
 - #7 Enhanced Logging (Week 4) 🟢
 
 ### Success Metrics
+
 **Current State:**
+
 - Health Score: 72/100
 - Security Vulnerabilities: 0 ✅
 - TypeScript Errors: 48
@@ -487,6 +559,7 @@ Track overall progress of code quality improvements
 - node_modules: 1.3GB
 
 **Target State (4 weeks):**
+
 - Health Score: 85/100
 - Security Vulnerabilities: 0
 - TypeScript Errors: 0
@@ -495,12 +568,14 @@ Track overall progress of code quality improvements
 - node_modules: <1GB
 
 ### Weekly Checkpoints
+
 - **Week 1:** Issues #1, #2 completed
 - **Week 2:** Issues #3, #4 in progress
 - **Week 3:** Issues #3, #5 completed
 - **Week 4:** Issues #6, #7 completed
 
 ### Overall Progress
+
 - [ ] Week 1 (Dec 24-31): 🔴 Urgent fixes
 - [ ] Week 2 (Jan 1-7): 🟡 High priority
 - [ ] Week 3 (Jan 8-14): 🟡 High priority
@@ -510,6 +585,7 @@ Track overall progress of code quality improvements
 ---
 
 **How to Use:**
+
 1. Copy each issue section
 2. Create new GitHub issue
 3. Add appropriate labels
@@ -517,6 +593,7 @@ Track overall progress of code quality improvements
 5. Track progress in project board
 
 **Priority Legend:**
+
 - 🔴 URGENT (Week 1)
 - 🟡 HIGH (Week 2-3)
 - 🟢 MEDIUM (Week 4)

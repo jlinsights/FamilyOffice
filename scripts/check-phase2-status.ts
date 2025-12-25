@@ -1,20 +1,18 @@
 #!/usr/bin/env tsx
 /**
  * Phase 2 Setup Status Checker
- * 
+ *
  * This script checks if Phase 2 (BMAD Keyword Tracking System) is properly set up:
  * 1. Environment variables
  * 2. Supabase table existence
  * 3. Recent data collection
  */
-
+import { createClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
 import { resolve } from 'path';
 
 // Load environment variables from .env.local
 config({ path: resolve(process.cwd(), '.env.local') });
-
-import { createClient } from '@supabase/supabase-js';
 
 interface StatusCheck {
   name: string;
@@ -24,7 +22,11 @@ interface StatusCheck {
 
 const results: StatusCheck[] = [];
 
-function addResult(name: string, status: 'pass' | 'fail' | 'warning', message: string) {
+function addResult(
+  name: string,
+  status: 'pass' | 'fail' | 'warning',
+  message: string
+) {
   results.push({ name, status, message });
 }
 
@@ -38,13 +40,16 @@ function printResults() {
   const warnCount = results.filter(r => r.status === 'warning').length;
 
   results.forEach(result => {
-    const icon = result.status === 'pass' ? '✅' : result.status === 'fail' ? '❌' : '⚠️';
+    const icon =
+      result.status === 'pass' ? '✅' : result.status === 'fail' ? '❌' : '⚠️';
     console.log(`${icon} ${result.name}`);
     console.log(`   ${result.message}\n`);
   });
 
   console.log('================================');
-  console.log(`Summary: ${passCount} passed, ${failCount} failed, ${warnCount} warnings`);
+  console.log(
+    `Summary: ${passCount} passed, ${failCount} failed, ${warnCount} warnings`
+  );
   console.log('================================\n');
 
   if (failCount === 0 && warnCount === 0) {
@@ -61,12 +66,23 @@ async function main() {
 
   // 1. Check environment variables
   console.log('1️⃣  Checking Environment Variables...');
-  
+
   // Supabase
-  if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    addResult('Supabase Configuration', 'pass', 'URL and Service Role Key are set');
+  if (
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  ) {
+    addResult(
+      'Supabase Configuration',
+      'pass',
+      'URL and Service Role Key are set'
+    );
   } else {
-    addResult('Supabase Configuration', 'fail', 'Missing SUPABASE_URL or SERVICE_ROLE_KEY');
+    addResult(
+      'Supabase Configuration',
+      'fail',
+      'Missing SUPABASE_URL or SERVICE_ROLE_KEY'
+    );
   }
 
   // Serper API
@@ -83,7 +99,11 @@ async function main() {
   const hasGooglePropertyId = !!process.env.GOOGLE_ANALYTICS_PROPERTY_ID;
 
   if (hasGoogleEmail && hasGoogleKey) {
-    addResult('Google Service Account', 'pass', 'Email and Private Key are set');
+    addResult(
+      'Google Service Account',
+      'pass',
+      'Email and Private Key are set'
+    );
   } else {
     addResult('Google Service Account', 'fail', 'Missing Google credentials');
   }
@@ -91,26 +111,45 @@ async function main() {
   if (hasGoogleProjectId) {
     addResult('Google Project ID', 'pass', 'Project ID is configured');
   } else {
-    addResult('Google Project ID', 'warning', 'GOOGLE_PROJECT_ID not set (may not be critical)');
+    addResult(
+      'Google Project ID',
+      'warning',
+      'GOOGLE_PROJECT_ID not set (may not be critical)'
+    );
   }
 
   if (hasGooglePropertyId) {
-    addResult('Google Analytics Property ID', 'pass', 'GA4 Property ID is configured');
+    addResult(
+      'Google Analytics Property ID',
+      'pass',
+      'GA4 Property ID is configured'
+    );
   } else {
-    addResult('Google Analytics Property ID', 'warning', 'GOOGLE_ANALYTICS_PROPERTY_ID not set');
+    addResult(
+      'Google Analytics Property ID',
+      'warning',
+      'GOOGLE_ANALYTICS_PROPERTY_ID not set'
+    );
   }
 
   // Cron Secret
   if (process.env.CRON_SECRET) {
     addResult('Cron Secret', 'pass', 'CRON_SECRET is configured');
   } else {
-    addResult('Cron Secret', 'warning', 'CRON_SECRET not set (needed for production cron jobs)');
+    addResult(
+      'Cron Secret',
+      'warning',
+      'CRON_SECRET not set (needed for production cron jobs)'
+    );
   }
 
   // 2. Check Supabase table
   console.log('\n2️⃣  Checking Supabase Tables...');
-  
-  if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+
+  if (
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  ) {
     try {
       const supabase = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -125,12 +164,24 @@ async function main() {
 
       if (tableError) {
         if (tableError.message.includes('does not exist')) {
-          addResult('keyword_rankings Table', 'fail', 'Table does not exist. Run migration SQL.');
+          addResult(
+            'keyword_rankings Table',
+            'fail',
+            'Table does not exist. Run migration SQL.'
+          );
         } else {
-          addResult('keyword_rankings Table', 'fail', `Error accessing table: ${tableError.message}`);
+          addResult(
+            'keyword_rankings Table',
+            'fail',
+            `Error accessing table: ${tableError.message}`
+          );
         }
       } else {
-        addResult('keyword_rankings Table', 'pass', 'Table exists and is accessible');
+        addResult(
+          'keyword_rankings Table',
+          'pass',
+          'Table exists and is accessible'
+        );
 
         // Check for recent data
         const { data: recentData, error: dataError } = await supabase
@@ -140,17 +191,35 @@ async function main() {
           .limit(1);
 
         if (dataError) {
-          addResult('Recent Data Collection', 'warning', `Cannot check data: ${dataError.message}`);
+          addResult(
+            'Recent Data Collection',
+            'warning',
+            `Cannot check data: ${dataError.message}`
+          );
         } else if (recentData && recentData.length > 0) {
           const lastCollection = new Date(recentData[0].created_at);
-          const hoursAgo = Math.floor((Date.now() - lastCollection.getTime()) / (1000 * 60 * 60));
-          
+          const hoursAgo = Math.floor(
+            (Date.now() - lastCollection.getTime()) / (1000 * 60 * 60)
+          );
+
           if (hoursAgo < 24) {
-            addResult('Recent Data Collection', 'pass', `Last collection: ${hoursAgo} hours ago`);
+            addResult(
+              'Recent Data Collection',
+              'pass',
+              `Last collection: ${hoursAgo} hours ago`
+            );
           } else if (hoursAgo < 72) {
-            addResult('Recent Data Collection', 'warning', `Last collection: ${hoursAgo} hours ago (>24h)`);
+            addResult(
+              'Recent Data Collection',
+              'warning',
+              `Last collection: ${hoursAgo} hours ago (>24h)`
+            );
           } else {
-            addResult('Recent Data Collection', 'warning', `Last collection: ${Math.floor(hoursAgo / 24)} days ago`);
+            addResult(
+              'Recent Data Collection',
+              'warning',
+              `Last collection: ${Math.floor(hoursAgo / 24)} days ago`
+            );
           }
 
           // Count total records
@@ -159,10 +228,18 @@ async function main() {
             .select('*', { count: 'exact', head: true });
 
           if (count !== null) {
-            addResult('Total Records', 'pass', `${count} keyword ranking records in database`);
+            addResult(
+              'Total Records',
+              'pass',
+              `${count} keyword ranking records in database`
+            );
           }
         } else {
-          addResult('Recent Data Collection', 'warning', 'No data collected yet. Run collection script.');
+          addResult(
+            'Recent Data Collection',
+            'warning',
+            'No data collected yet. Run collection script.'
+          );
         }
 
         // Check if views exist
@@ -172,7 +249,11 @@ async function main() {
           .limit(1);
 
         if (viewCheck !== null) {
-          addResult('Database Views', 'pass', 'latest_keyword_rankings view exists');
+          addResult(
+            'Database Views',
+            'pass',
+            'latest_keyword_rankings view exists'
+          );
         }
       }
     } catch (error) {
@@ -182,10 +263,10 @@ async function main() {
 
   // 3. Check if collection scripts exist
   console.log('\n3️⃣  Checking Collection Scripts...');
-  
+
   const fs = require('fs');
   const path = require('path');
-  
+
   const scriptsToCheck = [
     'scripts/collect-serper-rankings.ts',
     'app/api/cron/daily-bmad-collection/route.ts',

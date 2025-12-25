@@ -3,19 +3,24 @@
  * 한국 및 해외 주식 정보 제공
  */
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  validateApiRequest, 
-  createValidationErrorResponse, 
-  createApiResponse, 
+
+import {
+  validateApiRequest,
+  createValidationErrorResponse,
+  createApiResponse,
   createErrorResponse,
-  stockQuerySchema 
+  stockQuerySchema,
 } from '@/lib/api-validation';
 
 export async function GET(request: NextRequest) {
   try {
     // 쿼리 파라미터 검증
-    const validation = await validateApiRequest(request, stockQuerySchema, 'query');
-    
+    const validation = await validateApiRequest(
+      request,
+      stockQuerySchema,
+      'query'
+    );
+
     if (!validation.success) {
       return createValidationErrorResponse(validation);
     }
@@ -26,19 +31,52 @@ export async function GET(request: NextRequest) {
     if (korean) {
       // 주요 한국 주식 목록
       const koreanStocks = [
-        { symbol: '005930.KS', name: '삼성전자', price: 71000, change: 1000, changePercent: 1.43 },
-        { symbol: '000660.KS', name: 'SK하이닉스', price: 125000, change: -2000, changePercent: -1.57 },
-        { symbol: '035420.KS', name: 'NAVER', price: 196000, change: 3000, changePercent: 1.55 },
-        { symbol: '005490.KS', name: 'POSCO홀딩스', price: 398000, change: -5000, changePercent: -1.24 },
-        { symbol: '051910.KS', name: 'LG화학', price: 389000, change: 7000, changePercent: 1.83 },
+        {
+          symbol: '005930.KS',
+          name: '삼성전자',
+          price: 71000,
+          change: 1000,
+          changePercent: 1.43,
+        },
+        {
+          symbol: '000660.KS',
+          name: 'SK하이닉스',
+          price: 125000,
+          change: -2000,
+          changePercent: -1.57,
+        },
+        {
+          symbol: '035420.KS',
+          name: 'NAVER',
+          price: 196000,
+          change: 3000,
+          changePercent: 1.55,
+        },
+        {
+          symbol: '005490.KS',
+          name: 'POSCO홀딩스',
+          price: 398000,
+          change: -5000,
+          changePercent: -1.24,
+        },
+        {
+          symbol: '051910.KS',
+          name: 'LG화학',
+          price: 389000,
+          change: 7000,
+          changePercent: 1.83,
+        },
       ];
 
-      return createApiResponse({
-        stocks: koreanStocks,
-        market: 'KRX',
-        currency: 'KRW',
-        timestamp: new Date().toISOString(),
-      }, '한국 주식 데이터 조회 완료');
+      return createApiResponse(
+        {
+          stocks: koreanStocks,
+          market: 'KRX',
+          currency: 'KRW',
+          timestamp: new Date().toISOString(),
+        },
+        '한국 주식 데이터 조회 완료'
+      );
     }
 
     // 개별 종목 조회
@@ -57,7 +95,10 @@ export async function GET(request: NextRequest) {
         timestamp: new Date().toISOString(),
       };
 
-      return createApiResponse(mockStockData, `${symbol} 주식 데이터 조회 완료`);
+      return createApiResponse(
+        mockStockData,
+        `${symbol} 주식 데이터 조회 완료`
+      );
     }
 
     // 기본 시장 개요
@@ -86,7 +127,6 @@ export async function GET(request: NextRequest) {
     };
 
     return createApiResponse(marketOverview, '시장 개요 조회 완료');
-
   } catch (error) {
     console.error('Stock API error:', error);
     return createErrorResponse(
@@ -97,4 +137,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-

@@ -1,17 +1,5 @@
 'use client';
 
-import { AnimatedCounter } from '@/components/animated-counter';
-import { CalComPopup } from '@/components/cal-com-popup';
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
-import { StructuredData } from '@/components/structured-data';
-
-import { PremiumFAQ } from '@/components/faq/premium-faq';
-import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FAQ_CATEGORIES } from '@/constants/faq';
-import { generateStructuredData } from '@/lib/seo/structured-data';
 import {
   AlertCircle,
   ArrowRight,
@@ -26,18 +14,34 @@ import {
   Shield,
   Target,
   TrendingUp,
-  Users
+  Users,
 } from 'lucide-react';
+
 import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+import { AnimatedCounter } from '@/components/animated-counter';
+import { CalComPopup } from '@/components/cal-com-popup';
+import { PremiumFAQ } from '@/components/faq/premium-faq';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
+import { StructuredData } from '@/components/structured-data';
+
+import { generateStructuredData } from '@/lib/seo/structured-data';
+
+import { FAQ_CATEGORIES } from '@/constants/faq';
 
 // 아이콘 매핑 헬퍼 함수
 const getIcon = (iconName: string) => {
   const icons: { [key: string]: React.ComponentType<any> } = {
-    'Building': Building,
-    'Factory': Factory,
-    'Hammer': Hammer,
-    'Cpu': Cpu,
-    'Medal': Medal,
+    Building: Building,
+    Factory: Factory,
+    Hammer: Hammer,
+    Cpu: Cpu,
+    Medal: Medal,
   };
   return icons[iconName] || Building;
 };
@@ -79,7 +83,9 @@ export default function AboutPageContent() {
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
             <div className="flex justify-center mb-8">
               <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full shadow-sm animate-fade-in">
-                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full mr-2">About Us</span>
+                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full mr-2">
+                  About Us
+                </span>
                 <span className="text-sm text-slate-600 dark:text-slate-300 pr-2 flex items-center">
                   <Building className="h-3 w-3 mr-1" />
                   Family Office S
@@ -89,18 +95,20 @@ export default function AboutPageContent() {
 
             <h1 className="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight mb-8 text-slate-900 dark:text-white whitespace-pre-line animate-slide-up tracking-tight">
               성공한 기업가·자산가의{'\n'}
-              <span className="bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">통합자산관리</span>
+              <span className="bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                통합자산관리
+              </span>
               {'\n'}파트너
             </h1>
 
-            <p 
+            <p
               className="text-2xl sm:text-3xl font-bold text-slate-700 dark:text-slate-200 mb-6 animate-slide-up"
               style={{ animationDelay: '200ms' }}
             >
               기업가·자산가 전문 통합자산관리
             </p>
 
-            <p 
+            <p
               className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed animate-slide-up font-light"
               style={{ animationDelay: '300ms' }}
             >
@@ -114,31 +122,51 @@ export default function AboutPageContent() {
               를 제공합니다
             </p>
 
-            <div 
+            <div
               className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up"
               style={{ animationDelay: '400ms' }}
             >
-              <span className="font-bold text-blue-700 dark:text-blue-400">FamilyOffice S</span>는{' '}
-              <span className="font-semibold text-slate-900 dark:text-white">삼성생명 기업컨설팅센터</span>의{' '}
-              <span className="text-blue-600 dark:text-blue-400 font-semibold">VIP 고객 전담 프로젝트팀</span>입니다
+              <span className="font-bold text-blue-700 dark:text-blue-400">
+                FamilyOffice S
+              </span>
+              는{' '}
+              <span className="font-semibold text-slate-900 dark:text-white">
+                삼성생명 기업컨설팅센터
+              </span>
+              의{' '}
+              <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                VIP 고객 전담 프로젝트팀
+              </span>
+              입니다
             </div>
 
-            <div 
+            <div
               className="text-sm text-slate-500 dark:text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed space-y-3 animate-slide-up"
               style={{ animationDelay: '450ms' }}
             >
               <p className="bg-slate-50 dark:bg-slate-900/50 rounded-lg px-4 py-3 border border-slate-100 dark:border-slate-800">
-                <span className="font-semibold text-slate-700 dark:text-slate-300">삼성생명 소속</span>으로{' '}
-                <span className="text-blue-600 dark:text-blue-400">대한민국 최고 보험사의 전문성</span>을 바탕으로 작성되었습니다.{' '}
-                <span className="text-xs text-slate-400">(삼성화재 교차 판매 가능)</span>
+                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  삼성생명 소속
+                </span>
+                으로{' '}
+                <span className="text-blue-600 dark:text-blue-400">
+                  대한민국 최고 보험사의 전문성
+                </span>
+                을 바탕으로 작성되었습니다.{' '}
+                <span className="text-xs text-slate-400">
+                  (삼성화재 교차 판매 가능)
+                </span>
               </p>
               <p className="bg-slate-50 dark:bg-slate-900/50 rounded-lg px-4 py-3 border border-slate-100 dark:border-slate-800">
                 상품 추천 시에는 항상{' '}
-                <span className="font-semibold text-slate-700 dark:text-slate-300">복수의 대안을 함께 검토</span>하여 제안드립니다.
+                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  복수의 대안을 함께 검토
+                </span>
+                하여 제안드립니다.
               </p>
             </div>
 
-            <div 
+            <div
               className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
               style={{ animationDelay: '500ms' }}
             >
@@ -186,7 +214,7 @@ export default function AboutPageContent() {
                   suffix: '억원+',
                   icon: TrendingUp,
                   color: 'text-blue-600 dark:text-blue-400',
-                  bg: 'bg-blue-50 dark:bg-blue-900/20'
+                  bg: 'bg-blue-50 dark:bg-blue-900/20',
                 },
                 {
                   label: '고객 만족도',
@@ -194,7 +222,7 @@ export default function AboutPageContent() {
                   suffix: '%',
                   icon: Target,
                   color: 'text-purple-600 dark:text-purple-400',
-                  bg: 'bg-purple-50 dark:bg-purple-900/20'
+                  bg: 'bg-purple-50 dark:bg-purple-900/20',
                 },
                 {
                   label: '기업가·자산가 고객',
@@ -202,7 +230,7 @@ export default function AboutPageContent() {
                   suffix: '+',
                   icon: Users,
                   color: 'text-emerald-600 dark:text-emerald-400',
-                  bg: 'bg-emerald-50 dark:bg-emerald-900/20'
+                  bg: 'bg-emerald-50 dark:bg-emerald-900/20',
                 },
                 {
                   label: '자산관리 전문경험',
@@ -210,14 +238,16 @@ export default function AboutPageContent() {
                   suffix: '년+',
                   icon: Medal,
                   color: 'text-amber-600 dark:text-amber-400',
-                  bg: 'bg-amber-50 dark:bg-amber-900/20'
+                  bg: 'bg-amber-50 dark:bg-amber-900/20',
                 },
               ].map((stat, index) => (
                 <div
                   key={index}
                   className="p-8 text-center bg-white dark:bg-slate-800 rounded-3xl shadow-lg border border-slate-100 dark:border-slate-700 hover:-translate-y-1 transition-transform duration-300"
                 >
-                  <div className={`flex h-16 w-16 items-center justify-center rounded-2xl ${stat.bg} ${stat.color} mx-auto mb-6 shadow-sm`}>
+                  <div
+                    className={`flex h-16 w-16 items-center justify-center rounded-2xl ${stat.bg} ${stat.color} mx-auto mb-6 shadow-sm`}
+                  >
                     <stat.icon className="h-8 w-8" />
                   </div>
                   <div className="text-4xl font-black mb-2 text-slate-900 dark:text-white tracking-tight">
@@ -237,17 +267,20 @@ export default function AboutPageContent() {
           </div>
         </section>
 
-
         {/* 핵심 가치 섹션 */}
         <section className="py-24">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <div className="inline-flex items-center justify-center p-2 bg-slate-100 dark:bg-slate-800 rounded-full mb-6">
                 <Target className="h-4 w-4 mr-2 text-blue-600" />
-                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">Core Values</span>
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">
+                  Core Values
+                </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
-                <span className="text-blue-600 dark:text-blue-400">핵심 가치</span>
+                <span className="text-blue-600 dark:text-blue-400">
+                  핵심 가치
+                </span>
               </h2>
             </div>
 
@@ -257,44 +290,56 @@ export default function AboutPageContent() {
                 {
                   icon: Shield,
                   title: '신뢰와 투명성',
-                  description: '고객의 자산을 내 자산처럼 소중히 여기며, 모든 거래와 운용 과정을 투명하게 공개합니다.',
+                  description:
+                    '고객의 자산을 내 자산처럼 소중히 여기며, 모든 거래와 운용 과정을 투명하게 공개합니다.',
                   features: [
                     '실시간 자산 현황 공개',
                     '투명한 수수료 구조',
                     '정기적인 운용 보고서 제공',
                   ],
-                  color: 'blue'
+                  color: 'blue',
                 },
                 {
                   icon: Users,
                   title: '전문성과 경험',
-                  description: '20년 이상의 기업가와 고액자산가 전문 경험을 바탕으로 최적의 통합자산관리 솔루션을 제공합니다.',
+                  description:
+                    '20년 이상의 기업가와 고액자산가 전문 경험을 바탕으로 최적의 통합자산관리 솔루션을 제공합니다.',
                   features: [
                     '기업가·자산가 특화 노하우',
                     '자산규모별 맞춤 전략',
                     '지속적인 전문가 교육',
                   ],
-                  color: 'purple'
+                  color: 'purple',
                 },
                 {
                   icon: Target,
                   title: '맞춤형 서비스',
-                  description: '획일화된 서비스가 아닌, 각 고객의 자산 특성과 목표에 맞는 개별화된 서비스를 제공합니다.',
+                  description:
+                    '획일화된 서비스가 아닌, 각 고객의 자산 특성과 목표에 맞는 개별화된 서비스를 제공합니다.',
                   features: [
                     '개별 자산 구조 분석',
                     '맞춤형 포트폴리오 구성',
                     '전담 전문가 배정',
                   ],
-                  color: 'emerald'
+                  color: 'emerald',
                 },
               ].map((value, index) => (
-                <Card key={index} className="h-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group overflow-hidden">
-                  <div className={`absolute inset-0 bg-gradient-to-br from-${value.color}-50 to-transparent dark:from-${value.color}-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                <Card
+                  key={index}
+                  className="h-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group overflow-hidden"
+                >
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br from-${value.color}-50 to-transparent dark:from-${value.color}-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  ></div>
                   <CardHeader className="relative text-center">
-                    <div className={`w-20 h-20 bg-${value.color}-50 dark:bg-${value.color}-900/20 rounded-3xl mx-auto mb-6 flex items-center justify-center text-${value.color}-600 dark:text-${value.color}-400 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`w-20 h-20 bg-${value.color}-50 dark:bg-${value.color}-900/20 rounded-3xl mx-auto mb-6 flex items-center justify-center text-${value.color}-600 dark:text-${value.color}-400 shadow-sm group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <value.icon className="h-10 w-10" />
                     </div>
-                    <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">{value.title}</CardTitle>
+                    <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
+                      {value.title}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="relative flex-1 flex flex-col">
                     <p className="text-slate-600 dark:text-slate-400 mb-8 text-center leading-relaxed">
@@ -302,8 +347,13 @@ export default function AboutPageContent() {
                     </p>
                     <ul className="space-y-3 mt-auto">
                       {value.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
-                          <CheckCircle className={`h-5 w-5 text-${value.color}-500 mr-3 flex-shrink-0`} />
+                        <li
+                          key={featureIndex}
+                          className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300"
+                        >
+                          <CheckCircle
+                            className={`h-5 w-5 text-${value.color}-500 mr-3 flex-shrink-0`}
+                          />
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -318,13 +368,19 @@ export default function AboutPageContent() {
               <div className="text-center mb-12">
                 <div className="inline-flex items-center justify-center p-2 bg-slate-100 dark:bg-slate-800 rounded-full mb-6">
                   <CheckCircle className="h-4 w-4 mr-2 text-emerald-600" />
-                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">Differentiated Approach</span>
+                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">
+                    Differentiated Approach
+                  </span>
                 </div>
                 <h3 className="text-3xl md:text-4xl font-bold mb-4">
-                  차별화된 <span className="text-blue-600 dark:text-blue-400">접근 방식</span>
+                  차별화된{' '}
+                  <span className="text-blue-600 dark:text-blue-400">
+                    접근 방식
+                  </span>
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-                  고객의 이익을 최우선으로 하는 독립적이고 객관적인 자산관리 서비스
+                  고객의 이익을 최우선으로 하는 독립적이고 객관적인 자산관리
+                  서비스
                 </p>
               </div>
 
@@ -335,7 +391,8 @@ export default function AboutPageContent() {
                     title: '다양한 솔루션 제시',
                     description: (
                       <>
-                        보험만이 답은 아닙니다.<br />
+                        보험만이 답은 아닙니다.
+                        <br />
                         상황에 따라 다른 방법이 더 적합할 수 있어요.
                       </>
                     ),
@@ -344,14 +401,15 @@ export default function AboutPageContent() {
                       '상황별 최적 방법 분석',
                       '종합적 접근 방식',
                     ],
-                    color: 'emerald'
+                    color: 'emerald',
                   },
                   {
                     icon: TrendingUp,
                     title: '객관적 비교 분석',
                     description: (
                       <>
-                        각 금융사별(삼성생명, 삼성화재) 장단점을<br />
+                        각 금융사별(삼성생명, 삼성화재) 장단점을
+                        <br />
                         객관적으로 비교 분석하여 드립니다.
                       </>
                     ),
@@ -360,16 +418,25 @@ export default function AboutPageContent() {
                       '객관적 장단점 분석',
                       '투명한 평가 기준',
                     ],
-                    color: 'blue'
+                    color: 'blue',
                   },
                 ].map((approach, index) => (
-                  <Card key={index} className="text-center h-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:scale-105 group relative overflow-hidden">
-                    <div className={`absolute inset-0 bg-gradient-to-br from-${approach.color}-50 to-transparent dark:from-${approach.color}-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                  <Card
+                    key={index}
+                    className="text-center h-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:scale-105 group relative overflow-hidden"
+                  >
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br from-${approach.color}-50 to-transparent dark:from-${approach.color}-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                    ></div>
                     <CardHeader className="relative">
-                      <div className={`w-20 h-20 bg-${approach.color}-50 dark:bg-${approach.color}-900/20 rounded-full mx-auto mb-6 flex items-center justify-center text-${approach.color}-600 dark:text-${approach.color}-400 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                      <div
+                        className={`w-20 h-20 bg-${approach.color}-50 dark:bg-${approach.color}-900/20 rounded-full mx-auto mb-6 flex items-center justify-center text-${approach.color}-600 dark:text-${approach.color}-400 shadow-sm group-hover:scale-110 transition-transform duration-300`}
+                      >
                         <approach.icon className="h-10 w-10" />
                       </div>
-                      <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">{approach.title}</CardTitle>
+                      <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
+                        {approach.title}
+                      </CardTitle>
                     </CardHeader>
                     <CardContent className="relative flex-1 flex flex-col">
                       <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
@@ -377,8 +444,13 @@ export default function AboutPageContent() {
                       </p>
                       <ul className="space-y-3 mt-auto inline-block text-left mx-auto">
                         {approach.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
-                            <CheckCircle className={`h-5 w-5 text-${approach.color}-500 mr-3 flex-shrink-0`} />
+                          <li
+                            key={featureIndex}
+                            className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300"
+                          >
+                            <CheckCircle
+                              className={`h-5 w-5 text-${approach.color}-500 mr-3 flex-shrink-0`}
+                            />
                             <span>{feature}</span>
                           </li>
                         ))}
@@ -397,7 +469,9 @@ export default function AboutPageContent() {
             <div className="text-center mb-16">
               <div className="inline-flex items-center justify-center p-2 bg-white dark:bg-slate-800 rounded-full mb-6 shadow-sm">
                 <AlertCircle className="h-4 w-4 mr-2 text-orange-500" />
-                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">FAQ</span>
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">
+                  FAQ
+                </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
                 자주 묻는 질문
@@ -406,7 +480,7 @@ export default function AboutPageContent() {
                 FamilyOffice S 서비스에 대해 궁금한 점들을 확인해보세요
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
               {FAQ_CATEGORIES.map((category, categoryIndex) => {
                 const IconComponent = getIcon(category.icon);
@@ -420,31 +494,37 @@ export default function AboutPageContent() {
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">
                           {category.title}
                         </h3>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">관련 질문 {category.faqs.length}개</p>
+                        <p className="text-sm text-slate-500 dark:text-slate-400">
+                          관련 질문 {category.faqs.length}개
+                        </p>
                       </div>
                     </div>
-                    
+
                     <PremiumFAQ items={category.faqs} />
                   </div>
                 );
               })}
             </div>
-            
+
             <div className="text-center mt-24">
               <div className="bg-gradient-to-br from-blue-900 to-slate-900 rounded-3xl p-12 relative overflow-hidden shadow-2xl max-w-4xl mx-auto text-white">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
-                
+
                 <div className="relative z-10">
                   <div className="inline-flex items-center justify-center p-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/20">
                     <Phone className="h-4 w-4 mr-2 text-blue-300" />
-                    <span className="text-sm font-bold text-blue-100 pr-2">Contact Us</span>
+                    <span className="text-sm font-bold text-blue-100 pr-2">
+                      Contact Us
+                    </span>
                   </div>
                   <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight">
                     성공한 기업가·자산가 전문 상담
                   </h3>
                   <p className="text-lg text-blue-100/80 mb-10 max-w-2xl mx-auto leading-relaxed">
-                    귀하의 기업과 개인자산에 최적화된 통합자산관리 전략을 함께 설계해보세요.<br />
+                    귀하의 기업과 개인자산에 최적화된 통합자산관리 전략을 함께
+                    설계해보세요.
+                    <br />
                     전문 상담사가 맞춤형 답변을 제공해드립니다.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -454,17 +534,23 @@ export default function AboutPageContent() {
                       size="lg"
                       eventType="consultation"
                       trigger={
-                        <Button size="lg" className="px-8 py-6 text-lg font-bold bg-white text-blue-900 hover:bg-blue-50 shadow-lg border-none rounded-full">
+                        <Button
+                          size="lg"
+                          className="px-8 py-6 text-lg font-bold bg-white text-blue-900 hover:bg-blue-50 shadow-lg border-none rounded-full"
+                        >
                           <Phone className="mr-2 h-5 w-5" />
                           무료 상담 신청
                           <ArrowRight className="ml-2 h-5 w-5" />
                         </Button>
                       }
                     />
-                    <Button size="lg" variant="outline" className="px-8 py-6 text-lg font-bold border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full" asChild>
-                      <Link href="/solutions">
-                        서비스 자세히 보기
-                      </Link>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="px-8 py-6 text-lg font-bold border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full"
+                      asChild
+                    >
+                      <Link href="/solutions">서비스 자세히 보기</Link>
                     </Button>
                   </div>
                 </div>

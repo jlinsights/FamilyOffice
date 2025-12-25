@@ -1,11 +1,16 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
-import { type KakaoAuthResult } from '@/lib/auth/kakao-auth';
 import { Loader2 } from 'lucide-react';
-import Image from 'next/image';
+
 import { useState } from 'react';
+
+import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+
+import { type KakaoAuthResult } from '@/lib/auth/kakao-auth';
+
+import { useToast } from '@/hooks/use-toast';
 
 interface KakaoLoginButtonProps {
   onSuccess?: (result: KakaoAuthResult) => void;
@@ -26,25 +31,26 @@ export function KakaoLoginButton({
   fullWidth = false,
   showIcon = true,
   useOfficialImage = true,
-  children
+  children,
 }: KakaoLoginButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const handleKakaoLogin = async () => {
     setIsLoading(true);
-    
+
     try {
       // 카카오싱크 방식으로 리다이렉트
       const redirectUri = `${process.env.NEXT_PUBLIC_APP_URL}/oauth`;
       const clientId = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
-      
+
       if (!clientId) {
         throw new Error('카카오 JavaScript 키가 설정되지 않았습니다.');
       }
 
       // 카카오 OAuth URL 생성
-      const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?` +
+      const kakaoAuthUrl =
+        `https://kauth.kakao.com/oauth/authorize?` +
         `client_id=${clientId}&` +
         `redirect_uri=${encodeURIComponent(redirectUri)}&` +
         `response_type=code&` +
@@ -52,17 +58,19 @@ export function KakaoLoginButton({
 
       // 카카오 인증 페이지로 리다이렉트
       window.location.href = kakaoAuthUrl;
-      
+
       // onSuccess 콜백 호출 (리다이렉트 전)
       if (onSuccess) {
         onSuccess({
-          success: true
+          success: true,
         });
       }
-      
     } catch (error) {
       setIsLoading(false);
-      const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : '알 수 없는 오류가 발생했습니다.';
       toast({
         title: '로그인 오류',
         description: errorMessage,
@@ -92,11 +100,11 @@ export function KakaoLoginButton({
           ) : (
             <Image
               src={
-                size === 'lg' 
+                size === 'lg'
                   ? '/images/KAKAO/kakao_login/ko/kakao_login_large_wide.png'
                   : size === 'sm'
-                  ? '/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png'
-                  : '/images/KAKAO/kakao_login/ko/kakao_login_medium_wide.png'
+                    ? '/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png'
+                    : '/images/KAKAO/kakao_login/ko/kakao_login_medium_wide.png'
               }
               alt="카카오로 로그인"
               width={size === 'lg' ? 300 : size === 'sm' ? 222 : 300}
@@ -132,11 +140,11 @@ export function KakaoLoginButton({
         ) : (
           <>
             {showIcon && !useOfficialImage && (
-              <Image 
-                src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-                alt="카카오" 
-                width={20} 
-                height={20} 
+              <Image
+                src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+                alt="카카오"
+                width={20}
+                height={20}
                 className="mr-2"
               />
             )}

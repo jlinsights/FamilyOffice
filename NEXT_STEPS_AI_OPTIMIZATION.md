@@ -3,16 +3,19 @@
 ## ✅ 완료된 작업 (Phase 0)
 
 ### 제안 1: AI 검색엔진 대시보드 활성화
+
 - ✅ SERPER_API_KEY 환경 변수 설정
 - ✅ AI 검색엔진 모니터링 대시보드 (/admin → "AI 검색엔진")
 - ✅ 5개 AI 엔진 최적화 (ChatGPT, Perplexity, Claude, Gemini, Bing Copilot)
 
 ### 제안 2: BMAD 키워드 추적 강화
+
 - ✅ BMAD 대시보드 컴포넌트 구현
 - ✅ /admin 페이지에 "BMAD 추적" 탭 추가
 - ✅ 4개 카테고리 성과 분석 시스템
 
 ### 제안 3: 블로그 콘텐츠 AI 최적화
+
 - ✅ blog-ai-optimization.ts 라이브러리 생성
 - ✅ 자동 FAQ 생성 시스템
 - ✅ BMAD 키워드 자동 매핑
@@ -20,6 +23,7 @@
 - ✅ AI 최적화 점수 계산
 
 ### 시스템 테스트 결과
+
 ```
 ✅ AI 최적화 시스템: 정상 작동
 ✅ 키워드 추출: 16개 (테스트 포스트)
@@ -37,6 +41,7 @@
 **목표**: 실제 블로그 성과 데이터를 BMAD 대시보드에 표시
 
 #### 1.1.1 Google Cloud Console 설정
+
 ```bash
 # 1. Google Cloud Console 접속
 https://console.cloud.google.com/
@@ -58,6 +63,7 @@ GA4 관리 → 속성 액세스 관리 → 서비스 계정 이메일 추가 (Vi
 ```
 
 #### 1.1.2 환경 변수 설정
+
 ```bash
 # .env.local 또는 Vercel 환경 변수에 추가
 GOOGLE_SERVICE_ACCOUNT_EMAIL=ga4-bmad-tracker@project.iam.gserviceaccount.com
@@ -66,6 +72,7 @@ GOOGLE_ANALYTICS_PROPERTY_ID=123456789  # GA4 속성 ID
 ```
 
 #### 1.1.3 GA4 클라이언트 구현
+
 파일: `/lib/google-analytics/ga4-client.ts` (신규 생성 필요)
 
 ```typescript
@@ -106,6 +113,7 @@ export async function getKeywordPerformance(
 ```
 
 #### 1.1.4 BMAD API 업데이트
+
 파일: `/app/api/bmad-tracking/route.ts` (수정 필요)
 
 ```typescript
@@ -123,6 +131,7 @@ const ga4Data = await getKeywordPerformance(startDate, endDate, bmadKeywords);
 **목표**: 실시간 Google 검색 순위 데이터 수집
 
 #### 1.2.1 Serper API 키 발급
+
 ```bash
 # 1. Serper.dev 가입
 https://serper.dev/
@@ -135,6 +144,7 @@ SERPER_API_KEY=your_serper_api_key_here
 ```
 
 #### 1.2.2 일일 검색 순위 수집 스크립트
+
 파일: `/scripts/collect-serper-rankings.ts` (신규 생성 필요)
 
 ```typescript
@@ -177,6 +187,7 @@ export async function collectDailyRankings() {
 ```
 
 #### 1.2.3 Supabase에 순위 데이터 저장
+
 ```sql
 -- Supabase에서 실행
 CREATE TABLE keyword_rankings (
@@ -200,10 +211,12 @@ CREATE INDEX idx_keyword_rankings_created_at ON keyword_rankings(created_at);
 ### 2.1 Vercel Cron Jobs 설정
 
 #### 2.1.1 일일 데이터 수집
+
 파일: `/app/api/cron/daily-bmad-collection/route.ts` (신규 생성)
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
+
 import { collectDailyRankings } from '@/scripts/collect-serper-rankings';
 
 export async function GET(request: NextRequest) {
@@ -222,7 +235,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       collected: rankings.length,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   } catch (error) {
     return NextResponse.json({ error: 'Collection failed' }, { status: 500 });
@@ -231,6 +244,7 @@ export async function GET(request: NextRequest) {
 ```
 
 #### 2.1.2 vercel.json 설정
+
 ```json
 {
   "crons": [
@@ -243,6 +257,7 @@ export async function GET(request: NextRequest) {
 ```
 
 #### 2.1.3 환경 변수 추가
+
 ```bash
 CRON_SECRET=random_secure_string_here
 ```
@@ -252,6 +267,7 @@ CRON_SECRET=random_secure_string_here
 ### 2.2 주간 AI 최적화 리포트
 
 #### 2.2.1 리포트 생성 API
+
 파일: `/app/api/reports/weekly-ai-optimization/route.ts` (신규 생성)
 
 ```typescript
@@ -269,14 +285,14 @@ export async function generateWeeklyReport() {
   await sendReportEmail({
     scores: optimizationScores,
     recommendations,
-    period: 'last_week'
+    period: 'last_week',
   });
 
   return {
     period: getLastWeekPeriod(),
     scores: optimizationScores,
     recommendations,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 }
 ```
@@ -290,21 +306,23 @@ export async function generateWeeklyReport() {
 **작업 대상**: 14개 블로그 포스트
 
 #### 수동 FAQ 추가 프로세스
+
 ```typescript
 // lib/blog-data.ts에서 각 포스트에 FAQ 추가
 {
   // ... 기존 포스트 데이터
   faq: [
     {
-      question: "구체적인 질문 (검색 쿼리 기반)",
-      answer: "명확하고 실용적인 답변 (200-400자)"
+      question: '구체적인 질문 (검색 쿼리 기반)',
+      answer: '명확하고 실용적인 답변 (200-400자)',
     },
     // 3-5개 FAQ 권장
-  ]
+  ];
 }
 ```
 
 #### AI 최적화 점수 향상 목표
+
 - 현재: 45/100 (F등급)
 - 목표: 80+/100 (A등급)
 
@@ -313,6 +331,7 @@ export async function generateWeeklyReport() {
 ### 3.2 새 블로그 포스트 작성 가이드
 
 #### AI 최적화 체크리스트
+
 - [ ] 카테고리 선택 → BMAD 키워드 자동 매핑
 - [ ] 3-5개 FAQ 추가 (사용자 질문 기반)
 - [ ] 태그 5개 이상 (BMAD 키워드 포함)
@@ -320,6 +339,7 @@ export async function generateWeeklyReport() {
 - [ ] Schema.org 확장 필드 자동 적용 확인
 
 #### 작성 후 검증
+
 ```bash
 # AI 최적화 점수 확인
 npm run test:ai-optimization -- [post-slug]
@@ -334,12 +354,13 @@ npm run test:ai-optimization -- [post-slug]
 ### 4.1 실시간 알림 설정
 
 #### Slack 웹훅 통합
+
 ```typescript
 // 키워드 순위 변동 알림
 if (positionChange > 5) {
   await sendSlackNotification({
     channel: '#ai-optimization',
-    message: `🚨 키워드 "${keyword}" 순위 ${positionChange}칸 하락!`
+    message: `🚨 키워드 "${keyword}" 순위 ${positionChange}칸 하락!`,
   });
 }
 ```
@@ -347,11 +368,13 @@ if (positionChange > 5) {
 ### 4.2 A/B 테스팅
 
 #### FAQ 형식 테스트
+
 - A: 기본 Q&A 형식
 - B: 단계별 가이드 형식
 - C: 사례 중심 형식
 
 #### 성과 측정
+
 - CTR (Click-Through Rate)
 - 평균 체류 시간
 - 이탈률
@@ -361,18 +384,21 @@ if (positionChange > 5) {
 ## 🎯 성공 지표 (KPI)
 
 ### 단기 목표 (1개월)
+
 - ✅ GA4 연동 완료
 - ✅ Serper API 일일 수집 자동화
 - ✅ 블로그 포스트 10개 이상 FAQ 추가
 - ✅ 평균 AI 최적화 점수 70점 이상
 
 ### 중기 목표 (3개월)
+
 - 📈 AI 검색엔진 노출 20% 증가
 - 📈 BMAD Decisional 키워드 Top 10 진입
 - 📈 블로그 트래픽 30% 증가
 - 📈 평균 체류 시간 2분 이상
 
 ### 장기 목표 (6개월)
+
 - 🏆 주요 키워드 Top 3 진입
 - 🏆 AI 검색엔진 Featured Snippet 획득
 - 🏆 월간 블로그 방문자 10,000명 이상
@@ -383,17 +409,20 @@ if (positionChange > 5) {
 ## 📝 실행 체크리스트
 
 ### 즉시 실행 (오늘)
+
 - [ ] `.env.local`에 SERPER_API_KEY 추가
 - [ ] Serper API 키 발급 및 테스트
 - [ ] 블로그 포스트 1개 FAQ 추가 및 테스트
 
 ### 이번 주 (1주일 이내)
+
 - [ ] Google Cloud Console 서비스 계정 생성
 - [ ] GA4 API 연동 구현
 - [ ] 일일 데이터 수집 스크립트 작성
 - [ ] Supabase 테이블 생성
 
 ### 이번 달 (1개월 이내)
+
 - [ ] Vercel Cron Jobs 설정
 - [ ] 주간 리포트 자동화
 - [ ] 모든 블로그 포스트 FAQ 추가
@@ -431,14 +460,17 @@ npm install nodemailer
 ## 💡 추가 최적화 아이디어
 
 ### 1. AI 챗봇 통합
+
 - ChatGPT Plugin 개발
 - Perplexity 인덱싱 최적화
 
 ### 2. 음성 검색 최적화
+
 - Google Assistant
 - Siri
 
 ### 3. 다국어 지원
+
 - 영어 버전 블로그
 - 일본어 버전 (일본 시장)
 

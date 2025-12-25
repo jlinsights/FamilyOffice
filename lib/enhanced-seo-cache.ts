@@ -21,16 +21,21 @@ interface CacheStats {
 
 class EnhancedSEOCache {
   private cache = new Map<string, EnhancedCacheEntry<any>>();
-  private stats: CacheStats = { hits: 0, misses: 0, evictions: 0, totalRequests: 0 };
+  private stats: CacheStats = {
+    hits: 0,
+    misses: 0,
+    evictions: 0,
+    totalRequests: 0,
+  };
   private readonly maxEntries = 2000; // Increased for AI features
   private readonly defaultTTL = 5 * 60 * 1000; // 5 minutes
-  
+
   // Priority-based TTL
   private readonly priorityTTL = {
-    low: 2 * 60 * 1000,       // 2 minutes
-    medium: 10 * 60 * 1000,   // 10 minutes  
-    high: 30 * 60 * 1000,     // 30 minutes
-    critical: 2 * 60 * 60 * 1000 // 2 hours
+    low: 2 * 60 * 1000, // 2 minutes
+    medium: 10 * 60 * 1000, // 10 minutes
+    high: 30 * 60 * 1000, // 30 minutes
+    critical: 2 * 60 * 60 * 1000, // 2 hours
   };
 
   constructor() {
@@ -48,7 +53,7 @@ class EnhancedSEOCache {
 
     this.stats.totalRequests++;
     const entry = this.cache.get(key);
-    
+
     if (!entry) {
       this.stats.misses++;
       return null;
@@ -71,8 +76,8 @@ class EnhancedSEOCache {
 
   // Enhanced set with priority and cost tracking
   set<T>(
-    key: string, 
-    value: T, 
+    key: string,
+    value: T,
     options?: {
       ttl?: number;
       priority?: 'low' | 'medium' | 'high' | 'critical';
@@ -112,12 +117,21 @@ class EnhancedSEOCache {
 
     for (const [key, entry] of this.cache.entries()) {
       // Calculate value score (higher = more valuable)
-      const ageScore = Math.max(0, 1 - (now - entry.lastAccessed) / (24 * 60 * 60 * 1000)); // 0-1 based on recency
+      const ageScore = Math.max(
+        0,
+        1 - (now - entry.lastAccessed) / (24 * 60 * 60 * 1000)
+      ); // 0-1 based on recency
       const frequencyScore = Math.min(1, entry.accessCount / 10); // 0-1 based on access count
-      const priorityScore = { low: 0.2, medium: 0.5, high: 0.8, critical: 1.0 }[entry.priority];
+      const priorityScore = { low: 0.2, medium: 0.5, high: 0.8, critical: 1.0 }[
+        entry.priority
+      ];
       const costScore = Math.min(1, entry.computationCost / 1000); // 0-1 based on computation cost
-      
-      const valueScore = (ageScore * 0.3) + (frequencyScore * 0.3) + (priorityScore * 0.3) + (costScore * 0.1);
+
+      const valueScore =
+        ageScore * 0.3 +
+        frequencyScore * 0.3 +
+        priorityScore * 0.3 +
+        costScore * 0.1;
 
       if (valueScore < lowestScore) {
         lowestScore = valueScore;
@@ -133,9 +147,10 @@ class EnhancedSEOCache {
 
   // Get cache statistics
   getStats(): CacheStats & { hitRate: number; size: number } {
-    const hitRate = this.stats.totalRequests > 0 
-      ? (this.stats.hits / this.stats.totalRequests) * 100 
-      : 0;
+    const hitRate =
+      this.stats.totalRequests > 0
+        ? (this.stats.hits / this.stats.totalRequests) * 100
+        : 0;
 
     return {
       ...this.stats,
@@ -154,7 +169,7 @@ class EnhancedSEOCache {
     }
   ): Promise<T> {
     const cacheKey = `ai_${key}`;
-    
+
     return await performanceMonitor.trackAsyncOperation(
       'ai_cache_operation',
       async () => {
@@ -233,11 +248,10 @@ export const aiCacheOperations = {
     operation: () => Promise<any>
   ): Promise<any> {
     const key = `keywords_${domain}_${keywords.join('_')}`;
-    return await enhancedSEOCache.cacheAIOperation(
-      key,
-      operation,
-      { priority: 'high', estimatedCost: 500 }
-    );
+    return await enhancedSEOCache.cacheAIOperation(key, operation, {
+      priority: 'high',
+      estimatedCost: 500,
+    });
   },
 
   // Cache AI content optimization results
@@ -247,11 +261,10 @@ export const aiCacheOperations = {
     operation: () => Promise<any>
   ): Promise<any> {
     const key = `content_${pageName}_${content.substring(0, 50)}`;
-    return await enhancedSEOCache.cacheAIOperation(
-      key,
-      operation,
-      { priority: 'medium', estimatedCost: 800 }
-    );
+    return await enhancedSEOCache.cacheAIOperation(key, operation, {
+      priority: 'medium',
+      estimatedCost: 800,
+    });
   },
 
   // Cache advanced metadata generation
@@ -262,11 +275,10 @@ export const aiCacheOperations = {
     operation: () => Promise<any>
   ): Promise<any> {
     const key = `metadata_${domain}_${pageName}_${JSON.stringify(context).substring(0, 100)}`;
-    return await enhancedSEOCache.cacheAIOperation(
-      key,
-      operation,
-      { priority: 'critical', estimatedCost: 300 }
-    );
+    return await enhancedSEOCache.cacheAIOperation(key, operation, {
+      priority: 'critical',
+      estimatedCost: 300,
+    });
   },
 
   // Get cache performance metrics
@@ -279,9 +291,11 @@ export const aiCacheOperations = {
     // Clear only AI-related entries
     const allKeys = Array.from((enhancedSEOCache as any).cache.keys());
     allKeys
-      .filter((key): key is string => typeof key === 'string' && key.startsWith('ai_'))
+      .filter(
+        (key): key is string => typeof key === 'string' && key.startsWith('ai_')
+      )
       .forEach(key => enhancedSEOCache.delete(key));
-  }
+  },
 };
 
 // Backward compatibility with existing SEO cache

@@ -1,6 +1,7 @@
-import React from "react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+import React from 'react';
 
 // Enhanced cn function for Aceternity UI
 export function cn(...inputs: ClassValue[]) {
@@ -13,17 +14,11 @@ export const random = (min: number, max: number) => {
 };
 
 // Color utilities for Aceternity effects
-export const colors = [
-  "#ffbe0b",
-  "#fb5607", 
-  "#ff006e",
-  "#8338ec",
-  "#3a86ff",
-];
+export const colors = ['#ffbe0b', '#fb5607', '#ff006e', '#8338ec', '#3a86ff'];
 
 // Generate gradient string for backgrounds
 export const generateGradient = (colors: string[]) => {
-  return `linear-gradient(45deg, ${colors.join(", ")})`;
+  return `linear-gradient(45deg, ${colors.join(', ')})`;
 };
 
 // Utility for creating SVG patterns
@@ -43,21 +38,21 @@ export const createPattern = (id: string, children: string) => {
 // Mouse position tracking utility
 export const useMousePosition = () => {
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
-  
+
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const updateMousePosition = (ev: MouseEvent) => {
       setMousePosition({ x: ev.clientX, y: ev.clientY });
     };
-    
+
     window.addEventListener('mousemove', updateMousePosition);
-    
+
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
     };
   }, []);
-  
+
   return mousePosition;
 };
 
@@ -67,21 +62,35 @@ export const getAnimationDelay = (index: number, baseDelay: number = 0.1) => {
 };
 
 // Generate dots pattern for backgrounds
-export const generateDotPattern = (size: number = 20, color: string = "#000000", opacity: number = 0.1) => {
-  return createPattern("dots", `
+export const generateDotPattern = (
+  size: number = 20,
+  color: string = '#000000',
+  opacity: number = 0.1
+) => {
+  return createPattern(
+    'dots',
+    `
     <circle cx="10" cy="10" r="1.5" fill="${color}" opacity="${opacity}" />
-  `);
+  `
+  );
 };
 
 // Generate grid pattern for backgrounds
-export const generateGridPattern = (size: number = 20, color: string = "#000000", opacity: number = 0.1) => {
-  return createPattern("grid", `
+export const generateGridPattern = (
+  size: number = 20,
+  color: string = '#000000',
+  opacity: number = 0.1
+) => {
+  return createPattern(
+    'grid',
+    `
     <path d="M ${size} 0 L 0 0 0 ${size}" fill="none" stroke="${color}" stroke-width="1" opacity="${opacity}" />
-  `);
+  `
+  );
 };
 
 // Shimmer effect utility
-export const getShimmerGradient = (direction: string = "to right") => {
+export const getShimmerGradient = (direction: string = 'to right') => {
   return `linear-gradient(${direction}, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)`;
 };
 
@@ -89,9 +98,9 @@ export const getShimmerGradient = (direction: string = "to right") => {
 export const getTextGradient = (colors: string[]) => {
   return {
     background: generateGradient(colors),
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
   };
 };
 
@@ -101,32 +110,32 @@ export const getCardTransform = (x: number, y: number, rect: DOMRect) => {
   const centerY = rect.top + rect.height / 2;
   const rotateX = (y - centerY) / 10;
   const rotateY = (centerX - x) / 10;
-  
+
   return `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 };
 
 // Noise texture utility (for subtle backgrounds)
 export const generateNoiseTexture = () => {
   if (typeof window === 'undefined') return '';
-  
+
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   if (!ctx) return '';
-  
+
   canvas.width = 100;
   canvas.height = 100;
-  
+
   const imageData = ctx.createImageData(canvas.width, canvas.height);
   const data = imageData.data;
-  
+
   for (let i = 0; i < data.length; i += 4) {
     const noise = Math.random() * 255;
-    data[i] = noise;     // red
+    data[i] = noise; // red
     data[i + 1] = noise; // green
     data[i + 2] = noise; // blue
-    data[i + 3] = 25;    // alpha (low opacity)
+    data[i + 3] = 25; // alpha (low opacity)
   }
-  
+
   ctx.putImageData(imageData, 0, 0);
   return canvas.toDataURL();
 };

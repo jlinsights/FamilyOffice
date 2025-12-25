@@ -105,6 +105,7 @@ canonicalUrl: 'https://familyoffice.jlinsights.com/insights/market-intelligence/
 
 단순한 보험 가입을 넘어, 기업의 재무 전략 차원에서 다음 3가지 핵심 가치를 창출합니다.<li className="flex items-start gap-3">
 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">3</span>
+
 <div>
 <strong className="text-slate-800 dark:text-slate-200">유동성 확보:</strong> CEO 은퇴 시점에는 해지환급금을 퇴직금 재원으로 활용하고, 유고 시에는 사망보험금을 수령하여 긴급 자금으로 활용
 </div>

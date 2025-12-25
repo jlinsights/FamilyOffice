@@ -1,15 +1,14 @@
 /**
  * FamilySecretManager - 1Password Family 플랜을 위한 시크릿 관리 클래스
- * 
+ *
  * Family 플랜 제약사항:
  * - Service Accounts 사용 불가
  * - Connect Server 사용 불가
  * - 개인 Vault에 프로젝트별 아이템 저장
  * - CLI 기반 접근만 가능
  */
-
-import { z } from 'zod';
 import { execSync } from 'child_process';
+import { z } from 'zod';
 
 // 시크릿 스키마 정의
 const secretsSchema = z.object({
@@ -50,32 +49,32 @@ export class FamilySecretManager {
     'supabase.serviceRoleKey': {
       title: 'FamilyOffice-Supabase-Production',
       username: 'service_role_key',
-      description: 'Supabase Service Role Key'
+      description: 'Supabase Service Role Key',
     },
     'database.password': {
-      title: 'FamilyOffice-Database-Production', 
+      title: 'FamilyOffice-Database-Production',
       username: 'postgres.syyklnwynskwoxvcghkf',
-      description: 'PostgreSQL Database Password'
+      description: 'PostgreSQL Database Password',
     },
     'database.jwtSecret': {
       title: 'FamilyOffice-JWT-Production',
-      username: 'jwt_secret', 
-      description: 'Supabase JWT Secret'
+      username: 'jwt_secret',
+      description: 'Supabase JWT Secret',
     },
     'clerk.secretKey': {
       title: 'FamilyOffice-Clerk-Production',
       username: 'Secret Key',
-      description: 'Clerk Secret Key'
+      description: 'Clerk Secret Key',
     },
     'clerk.webhookSecret': {
       title: 'FamilyOffice-Clerk-Webhook-Production',
       username: 'Webhook Secret',
-      description: 'Clerk Webhook Secret'
+      description: 'Clerk Webhook Secret',
     },
     'clerk.publishableKey': {
       title: 'FamilyOffice-Clerk-PublishableKey-Production',
       username: 'Publishable Key',
-      description: 'Clerk Publishable Key'
+      description: 'Clerk Publishable Key',
     },
   };
 
@@ -91,11 +90,11 @@ export class FamilySecretManager {
 
     // 1Password에서 조회
     const value = await this.fetchFromOnePassword(key);
-    
+
     // 캐시 저장
     this.cache.set(key, {
       value,
-      expires: Date.now() + this.CACHE_TTL
+      expires: Date.now() + this.CACHE_TTL,
     });
 
     return value;
@@ -111,14 +110,14 @@ export class FamilySecretManager {
       jwtSecret,
       clerkSecretKey,
       clerkWebhookSecret,
-      clerkPublishableKey
+      clerkPublishableKey,
     ] = await Promise.all([
       this.getSecret('supabase.serviceRoleKey'),
       this.getSecret('database.password'),
       this.getSecret('database.jwtSecret'),
       this.getSecret('clerk.secretKey'),
       this.getSecret('clerk.webhookSecret'),
-      this.getSecret('clerk.publishableKey')
+      this.getSecret('clerk.publishableKey'),
     ]);
 
     const rawSecrets = {
@@ -138,7 +137,7 @@ export class FamilySecretManager {
         hubspotToken: process.env.HUBSPOT_ACCESS_TOKEN,
         resendApiKey: process.env.RESEND_API_KEY,
         beehiivApiKey: process.env.BEEHIIV_API_KEY,
-      }
+      },
     };
 
     return secretsSchema.parse(rawSecrets);
@@ -150,7 +149,9 @@ export class FamilySecretManager {
   private static async fetchFromOnePassword(key: string): Promise<string> {
     const mapping = this.SECRET_MAPPING[key];
     if (!mapping) {
-      throw new Error(`Unknown secret key: ${key}. Available keys: ${Object.keys(this.SECRET_MAPPING).join(', ')}`);
+      throw new Error(
+        `Unknown secret key: ${key}. Available keys: ${Object.keys(this.SECRET_MAPPING).join(', ')}`
+      );
     }
 
     try {
@@ -159,18 +160,18 @@ export class FamilySecretManager {
       try {
         result = execSync(
           `op item get "${mapping.title}" --field password --reveal`,
-          { 
+          {
             encoding: 'utf-8',
-            stdio: ['pipe', 'pipe', 'pipe']
+            stdio: ['pipe', 'pipe', 'pipe'],
           }
         ).trim();
       } catch {
         // password 필드가 없으면 커스텀 필드에서 조회
         result = execSync(
           `op item get "${mapping.title}" --field "${mapping.username}" --reveal`,
-          { 
+          {
             encoding: 'utf-8',
-            stdio: ['pipe', 'pipe', 'pipe']
+            stdio: ['pipe', 'pipe', 'pipe'],
           }
         ).trim();
       }
@@ -188,17 +189,17 @@ export class FamilySecretManager {
       if (error.message?.includes('item not found')) {
         throw new Error(
           `1Password item "${mapping.title}" not found. ` +
-          `Please run migration script: ./scripts/migrate-secrets.sh`
-        );
-      }
-      
-      if (error.message?.includes('not signed in')) {
-        throw new Error(
-          `Not signed in to 1Password. Please run: op signin`
+            `Please run migration script: ./scripts/migrate-secrets.sh`
         );
       }
 
-      throw new Error(`Failed to fetch ${key} from 1Password: ${error.message}`);
+      if (error.message?.includes('not signed in')) {
+        throw new Error(`Not signed in to 1Password. Please run: op signin`);
+      }
+
+      throw new Error(
+        `Failed to fetch ${key} from 1Password: ${error.message}`
+      );
     }
   }
 
@@ -236,7 +237,7 @@ export class FamilySecretManager {
     return {
       isValid: errors.length === 0,
       errors,
-      warnings
+      warnings,
     };
   }
 
@@ -252,12 +253,14 @@ export class FamilySecretManager {
    */
   static async generateDevelopmentEnv(): Promise<string> {
     if (process.env.NODE_ENV === 'production') {
-      throw new Error('Development environment generation is not allowed in production');
+      throw new Error(
+        'Development environment generation is not allowed in production'
+      );
     }
 
     try {
       const secrets = await this.getAllSecrets();
-      
+
       return `# Generated from 1Password Family - ${new Date().toISOString()}
 # DO NOT EDIT MANUALLY - Run npm run secrets:sync to update
 
@@ -282,9 +285,10 @@ ${secrets.integrations.calcomApiKey ? `CALCOM_API_KEY="${secrets.integrations.ca
 ${secrets.integrations.hubspotToken ? `HUBSPOT_ACCESS_TOKEN="${secrets.integrations.hubspotToken}"` : '# HUBSPOT_ACCESS_TOKEN=your_token_here'}
 ${secrets.integrations.resendApiKey ? `RESEND_API_KEY="${secrets.integrations.resendApiKey}"` : '# RESEND_API_KEY=your_api_key_here'}
 ${secrets.integrations.beehiivApiKey ? `BEEHIIV_API_KEY="${secrets.integrations.beehiivApiKey}"` : '# BEEHIIV_API_KEY=your_api_key_here'}`;
-
     } catch (error: any) {
-      throw new Error(`Failed to generate development environment: ${error.message}`);
+      throw new Error(
+        `Failed to generate development environment: ${error.message}`
+      );
     }
   }
 }

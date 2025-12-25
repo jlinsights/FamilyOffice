@@ -1,7 +1,8 @@
 'use client';
 
-import Script from 'next/script';
 import { useEffect } from 'react';
+
+import Script from 'next/script';
 
 // Kakao Pixel 글로벌 타입 정의
 declare global {
@@ -11,9 +12,20 @@ declare global {
 }
 
 export interface KakaoPixelEvent {
-  event_name: 'PageView' | 'CompleteRegistration' | 'Purchase' | 'Contact' | 'Lead' | 'ViewContent';
+  event_name:
+    | 'PageView'
+    | 'CompleteRegistration'
+    | 'Purchase'
+    | 'Contact'
+    | 'Lead'
+    | 'ViewContent';
   parameters: {
-    content_category?: 'consultation' | 'seminar' | 'newsletter' | 'calculator' | 'program';
+    content_category?:
+      | 'consultation'
+      | 'seminar'
+      | 'newsletter'
+      | 'calculator'
+      | 'program';
     content_ids?: string[];
     value?: number;
     currency?: 'KRW';
@@ -33,10 +45,10 @@ export function KakaoPixel({ pixelId, debug = false }: KakaoPixelProps) {
     // Kakao Pixel 초기화
     if (typeof window !== 'undefined') {
       window.kakaoPixel = window.kakaoPixel || [];
-      
+
       // 픽셀 초기화
       window.kakaoPixel.push(['init', pixelId]);
-      
+
       // 자동 페이지뷰 추적
       window.kakaoPixel.push(['track', 'PageView']);
     }
@@ -137,7 +149,7 @@ export function useKakaoPixel(pixelId?: string) {
       parameters: {
         page_url: window.location.href,
         page_title: document.title,
-      }
+      },
     });
   };
 
@@ -148,7 +160,7 @@ export function useKakaoPixel(pixelId?: string) {
         content_category: 'consultation',
         value: 0,
         currency: 'KRW',
-      }
+      },
     });
   };
 
@@ -160,7 +172,7 @@ export function useKakaoPixel(pixelId?: string) {
         content_ids: [type],
         value: 0,
         currency: 'KRW',
-      }
+      },
     });
   };
 

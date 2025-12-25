@@ -1,10 +1,13 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
-import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 import { Loader2 } from 'lucide-react';
+
 import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+
+import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
+import { useToast } from '@/hooks/use-toast';
 
 interface SupabaseKakaoLoginButtonProps {
   onSuccess?: () => void;
@@ -25,7 +28,7 @@ export function SupabaseKakaoLoginButton({
   fullWidth = false,
   showIcon = true,
   useOfficialImage = true,
-  children
+  children,
 }: SupabaseKakaoLoginButtonProps) {
   const { signInWithKakao, isLoading } = useSupabaseKakaoAuth();
   const { toast } = useToast();
@@ -33,7 +36,7 @@ export function SupabaseKakaoLoginButton({
   const handleKakaoLogin = async () => {
     try {
       const result = await signInWithKakao();
-      
+
       if (result.success) {
         toast({
           title: '카카오 로그인',
@@ -49,7 +52,10 @@ export function SupabaseKakaoLoginButton({
         onError?.(result.error || '알 수 없는 오류');
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : '알 수 없는 오류가 발생했습니다.';
       toast({
         title: '로그인 오류',
         description: errorMessage,
@@ -79,11 +85,11 @@ export function SupabaseKakaoLoginButton({
         ) : (
           <Image
             src={
-              size === 'lg' 
+              size === 'lg'
                 ? '/images/KAKAO/kakao_login/ko/kakao_login_large_wide.png'
                 : size === 'sm'
-                ? '/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png'
-                : '/images/KAKAO/kakao_login/ko/kakao_login_medium_wide.png'
+                  ? '/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png'
+                  : '/images/KAKAO/kakao_login/ko/kakao_login_medium_wide.png'
             }
             alt="카카오로 로그인"
             width={size === 'lg' ? 300 : size === 'sm' ? 222 : 300}
@@ -118,11 +124,11 @@ export function SupabaseKakaoLoginButton({
       ) : (
         <>
           {showIcon && !useOfficialImage && (
-            <Image 
-              src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-              alt="카카오" 
-              width={20} 
-              height={20} 
+            <Image
+              src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+              alt="카카오"
+              width={20}
+              height={20}
               className="mr-2"
             />
           )}

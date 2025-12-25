@@ -22,16 +22,17 @@ import {
   Users,
 } from 'lucide-react';
 
-import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
 
-import { CalComPopup } from '@/components/cal-com-popup';
-import { PremiumFAQ } from '@/components/faq/premium-faq';
+import Script from 'next/script';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { AnimatedCounter } from '@/components/animated-counter';
+import { CalComPopup } from '@/components/cal-com-popup';
+import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { YouTubeEmbed } from '@/components/media/youtube-embed';
@@ -45,61 +46,70 @@ const recruitFaqCategories = [
       {
         id: 'basic-1',
         question: '삼성생명 GFC란 무엇인가요?',
-        answer: '삼성생명 GFC(Group Financial Consultant)는 기업재무컨설턴트로서, 중소중견기업 CEO와 고액자산가를 대상으로 가업승계, 자산관리, 세무최적화, 리스크관리 등 종합적인 재무컨설팅을 제공하는 전문가입니다. 삼성생명의 프리미엄 브랜드와 전문성을 바탕으로 고품질 서비스를 제공합니다.'
+        answer:
+          '삼성생명 GFC(Group Financial Consultant)는 기업재무컨설턴트로서, 중소중견기업 CEO와 고액자산가를 대상으로 가업승계, 자산관리, 세무최적화, 리스크관리 등 종합적인 재무컨설팅을 제공하는 전문가입니다. 삼성생명의 프리미엄 브랜드와 전문성을 바탕으로 고품질 서비스를 제공합니다.',
       },
       {
         id: 'basic-2',
         question: '기업재무컨설턴트와 일반 보험설계사의 차이점은?',
-        answer: '일반 보험설계사는 주로 개인 고객 대상 보험상품 판매에 집중하는 반면, 기업재무컨설턴트(GFC)는 중소중견기업 CEO와 고액자산가를 대상으로 종합적인 재무컨설팅을 제공합니다. 가업승계, 절세전략, 기업보험, 자산관리 등 복합적이고 전문적인 서비스로 훨씬 높은 수수료와 안정적인 고객관계를 유지합니다.'
+        answer:
+          '일반 보험설계사는 주로 개인 고객 대상 보험상품 판매에 집중하는 반면, 기업재무컨설턴트(GFC)는 중소중견기업 CEO와 고액자산가를 대상으로 종합적인 재무컨설팅을 제공합니다. 가업승계, 절세전략, 기업보험, 자산관리 등 복합적이고 전문적인 서비스로 훨씬 높은 수수료와 안정적인 고객관계를 유지합니다.',
       },
       {
         id: 'basic-3',
         question: 'GFC의 주요 업무 영역은 무엇인가요?',
-        answer: 'GFC의 주요 업무는 ①가업승계 설계 및 실행 지원 ②기업 및 개인 자산관리 ③세무최적화 전략 수립 ④기업보험 및 리스크관리 ⑤투자 포트폴리오 관리 등입니다. 고객의 니즈에 맞는 맞춤형 통합 솔루션을 제공하는 것이 핵심입니다.'
-      }
-    ]
+        answer:
+          'GFC의 주요 업무는 ①가업승계 설계 및 실행 지원 ②기업 및 개인 자산관리 ③세무최적화 전략 수립 ④기업보험 및 리스크관리 ⑤투자 포트폴리오 관리 등입니다. 고객의 니즈에 맞는 맞춤형 통합 솔루션을 제공하는 것이 핵심입니다.',
+      },
+    ],
   },
   {
     title: '채용 조건 및 자격',
-    icon: 'FileText', 
+    icon: 'FileText',
     faqs: [
       {
         id: 'requirements-1',
         question: '삼성생명 GFC 채용 자격조건은 어떻게 되나요?',
-        answer: '기본적으로 4년제 대졸 이상, 금융/경영/회계 관련 전공자를 우대합니다. 가업승계 전문가는 관련 경력 5년 이상, 자산관리 전문가는 3년 이상의 경력이 필요합니다. CFP, CFA, 세무사, 변호사 등 관련 자격증 보유자는 우대하며, 무엇보다 성실하고 책임감 있는 성격이 중요합니다.'
+        answer:
+          '기본적으로 4년제 대졸 이상, 금융/경영/회계 관련 전공자를 우대합니다. 가업승계 전문가는 관련 경력 5년 이상, 자산관리 전문가는 3년 이상의 경력이 필요합니다. CFP, CFA, 세무사, 변호사 등 관련 자격증 보유자는 우대하며, 무엇보다 성실하고 책임감 있는 성격이 중요합니다.',
       },
       {
         id: 'requirements-2',
         question: '경력이 부족한 경우에도 지원할 수 있나요?',
-        answer: '경력이 부족하더라도 관련 자격증이나 전공, 그리고 학습 의지가 뛰어난 분은 지원 가능합니다. 삼성생명에서 24개월간의 체계적인 교육과정을 제공하므로, 열정과 성장 가능성이 더 중요한 평가 기준입니다.'
+        answer:
+          '경력이 부족하더라도 관련 자격증이나 전공, 그리고 학습 의지가 뛰어난 분은 지원 가능합니다. 삼성생명에서 24개월간의 체계적인 교육과정을 제공하므로, 열정과 성장 가능성이 더 중요한 평가 기준입니다.',
       },
       {
         id: 'requirements-3',
         question: '필요한 자격증이나 전문지식은 무엇인가요?',
-        answer: 'CFP(Certified Financial Planner), CFA(Chartered Financial Analyst), 세무사, 변호사 등의 자격증이 있으면 유리하지만 필수는 아닙니다. 금융, 세무, 법무에 대한 기본 지식과 지속적인 학습 의지가 더 중요합니다.'
-      }
-    ]
+        answer:
+          'CFP(Certified Financial Planner), CFA(Chartered Financial Analyst), 세무사, 변호사 등의 자격증이 있으면 유리하지만 필수는 아닙니다. 금융, 세무, 법무에 대한 기본 지식과 지속적인 학습 의지가 더 중요합니다.',
+      },
+    ],
   },
   {
     title: '급여 및 처우',
     icon: 'DollarSign',
     faqs: [
       {
-        id: 'compensation-1', 
+        id: 'compensation-1',
         question: '삼성생명 GFC 연봉은 얼마나 되나요?',
-        answer: '삼성생명 GFC는 위촉직으로 고정급과 성과급을 결합한 보수체계를 운영합니다. 경력과 실력에 따라 연봉 상위 1% 수준의 높은 수입이 가능하며, 프리미엄 고객 대상으로 고단가 서비스를 제공하여 일반 설계사 대비 3-5배 높은 수익을 기대할 수 있습니다. 자세한 조건은 면접 시 상담받으실 수 있습니다.'
+        answer:
+          '삼성생명 GFC는 위촉직으로 고정급과 성과급을 결합한 보수체계를 운영합니다. 경력과 실력에 따라 연봉 상위 1% 수준의 높은 수입이 가능하며, 프리미엄 고객 대상으로 고단가 서비스를 제공하여 일반 설계사 대비 3-5배 높은 수익을 기대할 수 있습니다. 자세한 조건은 면접 시 상담받으실 수 있습니다.',
       },
       {
         id: 'compensation-2',
         question: 'GFC의 수입 구조는 어떻게 되나요?',
-        answer: '기본급 + 성과급 구조로 운영됩니다. 기본급은 안정적인 생활을 보장하고, 성과급은 개인의 실력과 노력에 따라 무제한으로 가능합니다. 특히 장기적인 고객 관계를 통한 지속적인 수수료 수입이 특징입니다.'
+        answer:
+          '기본급 + 성과급 구조로 운영됩니다. 기본급은 안정적인 생활을 보장하고, 성과급은 개인의 실력과 노력에 따라 무제한으로 가능합니다. 특히 장기적인 고객 관계를 통한 지속적인 수수료 수입이 특징입니다.',
       },
       {
         id: 'compensation-3',
         question: '복리후생이나 교육 지원은 어떤 것들이 있나요?',
-        answer: '삼성생명 임직원과 동일한 복리후생 혜택을 받을 수 있으며, 24개월간의 전문 교육과정은 전액 회사 부담입니다. 교육 기간 중에도 기본급을 지급하며, 지속적인 재교육과 전문성 향상을 위한 지원을 제공합니다.'
-      }
-    ]
+        answer:
+          '삼성생명 임직원과 동일한 복리후생 혜택을 받을 수 있으며, 24개월간의 전문 교육과정은 전액 회사 부담입니다. 교육 기간 중에도 기본급을 지급하며, 지속적인 재교육과 전문성 향상을 위한 지원을 제공합니다.',
+      },
+    ],
   },
   {
     title: '채용 과정 및 교육',
@@ -108,20 +118,23 @@ const recruitFaqCategories = [
       {
         id: 'process-1',
         question: 'GFC 채용 과정은 어떻게 진행되나요?',
-        answer: '채용 과정은 ①지원서 접수 → ②서류심사(3-5일) → ③면접진행(1차 실무진, 2차 임원) → ④최종선발 순으로 진행됩니다. 전체 과정은 약 2-3주 소요되며, 합격 시 위촉계약을 체결하고 24개월간의 체계적인 교육과정을 제공받게 됩니다. 온라인 지원과 잡페어 참석, 두 가지 방법으로 지원 가능합니다.'
+        answer:
+          '채용 과정은 ①지원서 접수 → ②서류심사(3-5일) → ③면접진행(1차 실무진, 2차 임원) → ④최종선발 순으로 진행됩니다. 전체 과정은 약 2-3주 소요되며, 합격 시 위촉계약을 체결하고 24개월간의 체계적인 교육과정을 제공받게 됩니다. 온라인 지원과 잡페어 참석, 두 가지 방법으로 지원 가능합니다.',
       },
       {
         id: 'process-2',
         question: '삼성생명 GFC 교육 시스템은 어떻게 운영되나요?',
-        answer: '삼성생명 GFC는 24개월간의 체계적인 교육과정을 제공합니다. 기본 금융지식부터 고급 컨설팅 스킬, 세무·법무 전문지식까지 단계별 커리큘럼으로 구성되어 있습니다. 삼성생명 본사 전문 강사진과 외부 전문가가 참여하며, 실무 중심의 OJT(On the Job Training)도 병행합니다. 교육비는 전액 회사 부담이며, 교육 기간 중에도 기본급을 지급합니다.'
+        answer:
+          '삼성생명 GFC는 24개월간의 체계적인 교육과정을 제공합니다. 기본 금융지식부터 고급 컨설팅 스킬, 세무·법무 전문지식까지 단계별 커리큘럼으로 구성되어 있습니다. 삼성생명 본사 전문 강사진과 외부 전문가가 참여하며, 실무 중심의 OJT(On the Job Training)도 병행합니다. 교육비는 전액 회사 부담이며, 교육 기간 중에도 기본급을 지급합니다.',
       },
       {
         id: 'process-3',
         question: '신입자도 성공할 수 있는 지원 시스템이 있나요?',
-        answer: '네, 멘토링 시스템과 단계별 목표 관리를 통해 신입자도 체계적으로 성장할 수 있도록 지원합니다. 선배 컨설턴트의 1:1 멘토링, 정기적인 피드백, 그리고 개인별 맞춤형 교육 계획을 통해 성공적인 커리어를 만들어갈 수 있습니다.'
-      }
-    ]
-  }
+        answer:
+          '네, 멘토링 시스템과 단계별 목표 관리를 통해 신입자도 체계적으로 성장할 수 있도록 지원합니다. 선배 컨설턴트의 1:1 멘토링, 정기적인 피드백, 그리고 개인별 맞춤형 교육 계획을 통해 성공적인 커리어를 만들어갈 수 있습니다.',
+      },
+    ],
+  },
 ];
 
 // 아이콘 매핑 함수
@@ -135,11 +148,10 @@ const getIcon = (iconName: string): React.ElementType => {
     Users: Users,
     Award: Award,
     Star: Star,
-    TrendingUp: TrendingUp
+    TrendingUp: TrendingUp,
   };
   return iconMap[iconName] || Info;
 };
-
 
 export default function RecruitPage() {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -221,38 +233,38 @@ export default function RecruitPage() {
       icon: Building,
       title: '기업 전문',
       description: '중소중견기업 CEO 맞춤형 컨설팅',
-      color: 'blue'
+      color: 'blue',
     },
     {
       icon: TrendingUp,
       title: '높은 수입',
       description: '프리미엄 고객 대상 고수익 보장',
-      color: 'green'
+      color: 'green',
     },
     {
       icon: Award,
       title: '전문 브랜드',
       description: '삼성생명의 신뢰와 명성',
-      color: 'yellow'
+      color: 'yellow',
     },
     {
       icon: GraduationCap,
       title: '체계적 교육',
       description: '전문가 양성 교육 시스템',
-      color: 'purple'
+      color: 'purple',
     },
     {
       icon: Users,
       title: '전문가 네트워크',
       description: '삼성생명 FP 및 전국 GFC 협업',
-      color: 'indigo'
+      color: 'indigo',
     },
     {
       icon: Heart,
       title: '워라밸 보장',
       description: '유연근무제 및 복리후생 혜택',
-      color: 'pink'
-    }
+      color: 'pink',
+    },
   ];
 
   return (
@@ -375,8 +387,7 @@ export default function RecruitPage() {
                 asChild
               >
                 <a href="tel:0502-5550-8700">
-                  <Phone className="mr-2 h-5 w-5" />
-                  ☎ 0502-5550-8700
+                  <Phone className="mr-2 h-5 w-5" />☎ 0502-5550-8700
                 </a>
               </Button>
               <Button
@@ -406,12 +417,13 @@ export default function RecruitPage() {
                 GFC(기업재무컨설턴트)란?
               </h2>
               <p className="text-lg text-muted-foreground">
-                삼성생명의 프리미엄 기업재무컨설턴트로서<br />
+                삼성생명의 프리미엄 기업재무컨설턴트로서
+                <br />
                 중소중견기업 CEO들에게 가업승계, 자산관리, 절세전략 등<br />
                 종합적인 재무컨설팅을 제공하는 전문가입니다.
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {gfcBenefits.map((benefit, index) => {
                 const Icon = benefit.icon;
@@ -421,13 +433,16 @@ export default function RecruitPage() {
                   yellow: 'bg-yellow-100 text-yellow-600',
                   purple: 'bg-purple-100 text-purple-600',
                   indigo: 'bg-indigo-100 text-indigo-600',
-                  pink: 'bg-pink-100 text-pink-600'
+                  pink: 'bg-pink-100 text-pink-600',
                 };
-                const colorClasses = colorClassesMap[benefit.color as keyof typeof colorClassesMap] || 'bg-primary/10 text-primary';
-                
+                const colorClasses =
+                  colorClassesMap[
+                    benefit.color as keyof typeof colorClassesMap
+                  ] || 'bg-primary/10 text-primary';
+
                 return (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="text-center group cursor-pointer"
                     onClick={() => {
                       window.open(
@@ -436,11 +451,17 @@ export default function RecruitPage() {
                       );
                     }}
                   >
-                    <div className={`w-16 h-16 ${colorClasses} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:scale-110 transition-all duration-300`}>
+                    <div
+                      className={`w-16 h-16 ${colorClasses} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:scale-110 transition-all duration-300`}
+                    >
                       <Icon className="h-8 w-8" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{benefit.title}</h3>
-                    <p className="text-muted-foreground">{benefit.description}</p>
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-muted-foreground">
+                      {benefit.description}
+                    </p>
                   </div>
                 );
               })}
@@ -463,7 +484,8 @@ export default function RecruitPage() {
                   <span className="text-foreground">삼성생명 GFC</span>
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  삼성생명 GFC의 성공 스토리와 전문성을 영상과 팟캐스트를 통해 확인해보세요.
+                  삼성생명 GFC의 성공 스토리와 전문성을 영상과 팟캐스트를 통해
+                  확인해보세요.
                   <br />
                   실제 성공 사례와 전문가들의 인사이트를 만나볼 수 있습니다.
                 </p>
@@ -477,8 +499,12 @@ export default function RecruitPage() {
                       <Play className="h-6 w-6 text-red-600 dark:text-red-400" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-foreground">영상으로 보는 GFC</h3>
-                      <p className="text-muted-foreground">삼성생명 GFC의 성공 스토리</p>
+                      <h3 className="text-2xl font-bold text-foreground">
+                        영상으로 보는 GFC
+                      </h3>
+                      <p className="text-muted-foreground">
+                        삼성생명 GFC의 성공 스토리
+                      </p>
                     </div>
                   </div>
 
@@ -504,19 +530,25 @@ export default function RecruitPage() {
                     </ul>
                     <div className="flex items-center justify-between mt-4 pt-4 border-t border-border/30">
                       <div className="flex gap-2">
-                        <Badge variant="secondary" className="text-xs">성공사례</Badge>
-                        <Badge variant="secondary" className="text-xs">전문성</Badge>
-                        <Badge variant="secondary" className="text-xs">고객만족</Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          성공사례
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          전문성
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          고객만족
+                        </Badge>
                       </div>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
+                      <Button
+                        variant="ghost"
+                        size="sm"
                         asChild
                         className="hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 dark:hover:text-red-400"
                       >
-                        <a 
-                          href="https://youtu.be/YK1IRyUrxtk" 
-                          target="_blank" 
+                        <a
+                          href="https://youtu.be/YK1IRyUrxtk"
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1"
                         >
@@ -535,8 +567,12 @@ export default function RecruitPage() {
                       <Headphones className="h-6 w-6 text-green-600 dark:text-green-400" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-foreground">팟캐스트로 듣는 GFC</h3>
-                      <p className="text-muted-foreground">전문가 인터뷰 & 인사이트</p>
+                      <h3 className="text-2xl font-bold text-foreground">
+                        팟캐스트로 듣는 GFC
+                      </h3>
+                      <p className="text-muted-foreground">
+                        전문가 인터뷰 & 인사이트
+                      </p>
                     </div>
                   </div>
 
@@ -544,15 +580,15 @@ export default function RecruitPage() {
                     <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
                     <div className="relative bg-card rounded-xl overflow-hidden shadow-2xl">
                       <div className="p-4">
-                        <iframe 
-                          data-testid="embed-iframe" 
-                          style={{borderRadius: '12px'}} 
-                          src="https://open.spotify.com/embed/episode/1ZUHuWpjQRdbwcPaZhqe5W?utm_source=generator" 
-                          width="100%" 
-                          height="152" 
-                          frameBorder="0" 
-                          allowFullScreen 
-                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        <iframe
+                          data-testid="embed-iframe"
+                          style={{ borderRadius: '12px' }}
+                          src="https://open.spotify.com/embed/episode/1ZUHuWpjQRdbwcPaZhqe5W?utm_source=generator"
+                          width="100%"
+                          height="152"
+                          frameBorder="0"
+                          allowFullScreen
+                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                           loading="lazy"
                           className="w-full"
                         />
@@ -572,19 +608,25 @@ export default function RecruitPage() {
                     </ul>
                     <div className="flex items-center justify-between mt-4 pt-4 border-t border-border/30">
                       <div className="flex gap-2">
-                        <Badge variant="secondary" className="text-xs">전문가인터뷰</Badge>
-                        <Badge variant="secondary" className="text-xs">커리어노하우</Badge>
-                        <Badge variant="secondary" className="text-xs">성장전략</Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          전문가인터뷰
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          커리어노하우
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          성장전략
+                        </Badge>
                       </div>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
+                      <Button
+                        variant="ghost"
+                        size="sm"
                         asChild
                         className="hover:bg-green-50 hover:text-green-600 dark:hover:bg-green-900/20 dark:hover:text-green-400"
                       >
-                        <a 
-                          href="https://open.spotify.com/episode/1ZUHuWpjQRdbwcPaZhqe5W?si=MHKRpQslQiWy-glvVDOsCw" 
-                          target="_blank" 
+                        <a
+                          href="https://open.spotify.com/episode/1ZUHuWpjQRdbwcPaZhqe5W?si=MHKRpQslQiWy-glvVDOsCw"
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1"
                         >
@@ -604,7 +646,8 @@ export default function RecruitPage() {
                     삼성생명 GFC와 함께 성공하세요
                   </h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    영상과 팟캐스트에서 확인한 성공 스토리의 주인공이 되어보세요.
+                    영상과 팟캐스트에서 확인한 성공 스토리의 주인공이
+                    되어보세요.
                     <br />
                     전문성과 열정으로 무장한 당신을 기다리고 있습니다.
                   </p>
@@ -615,8 +658,8 @@ export default function RecruitPage() {
                       size="lg"
                       className="hover:scale-105 transition-transform duration-200"
                     />
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       size="lg"
                       className="hover:scale-105 transition-transform duration-200"
                       onClick={() => {
@@ -648,7 +691,7 @@ export default function RecruitPage() {
                   GFC 자격조건 및 우대사항
                 </h2>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="bg-background rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-4 flex items-center">
@@ -663,7 +706,7 @@ export default function RecruitPage() {
                     <li>• 성실하고 책임감 있는 성격</li>
                   </ul>
                 </div>
-                
+
                 <div className="bg-background rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-4 flex items-center">
                     <Star className="h-5 w-5 text-yellow-500 mr-2" />
@@ -682,7 +725,6 @@ export default function RecruitPage() {
           </div>
         </section>
 
-
         {/* 채용 프로세스 */}
         <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
           <div className="container mx-auto px-6">
@@ -698,7 +740,7 @@ export default function RecruitPage() {
                 간단하고 신속한 채용 프로세스로 여러분의 커리어를 시작하세요
               </p>
             </div>
-            
+
             <div className="max-w-7xl mx-auto">
               {/* Desktop View - Horizontal Cards */}
               <div className="hidden lg:grid lg:grid-cols-4 lg:gap-6">
@@ -711,7 +753,9 @@ export default function RecruitPage() {
                           1
                         </div>
                       </div>
-                      <h3 className="text-xl font-bold text-center mb-3">지원서 접수</h3>
+                      <h3 className="text-xl font-bold text-center mb-3">
+                        지원서 접수
+                      </h3>
                       <p className="text-muted-foreground text-center text-sm">
                         온라인 지원서 작성 및 제출. 경력사항과 자기소개서 작성
                       </p>
@@ -722,7 +766,7 @@ export default function RecruitPage() {
                     <div className="w-0 h-0 border-t-[20px] border-t-transparent border-l-[30px] border-l-primary/30 border-b-[20px] border-b-transparent"></div>
                   </div>
                 </div>
-                
+
                 {/* Step 2 */}
                 <div className="relative group">
                   <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/50 dark:bg-gray-800 dark:border-gray-700">
@@ -732,7 +776,9 @@ export default function RecruitPage() {
                           2
                         </div>
                       </div>
-                      <h3 className="text-xl font-bold text-center mb-3">서류 심사</h3>
+                      <h3 className="text-xl font-bold text-center mb-3">
+                        서류 심사
+                      </h3>
                       <p className="text-muted-foreground text-center text-sm">
                         지원서류 검토 및 기본 자격요건 확인 (3-5일 소요)
                       </p>
@@ -743,7 +789,7 @@ export default function RecruitPage() {
                     <div className="w-0 h-0 border-t-[20px] border-t-transparent border-l-[30px] border-l-blue-500/30 border-b-[20px] border-b-transparent"></div>
                   </div>
                 </div>
-                
+
                 {/* Step 3 */}
                 <div className="relative group">
                   <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/50 dark:bg-gray-800 dark:border-gray-700">
@@ -753,7 +799,9 @@ export default function RecruitPage() {
                           3
                         </div>
                       </div>
-                      <h3 className="text-xl font-bold text-center mb-3">면접 진행</h3>
+                      <h3 className="text-xl font-bold text-center mb-3">
+                        면접 진행
+                      </h3>
                       <p className="text-muted-foreground text-center text-sm">
                         1차 실무진 면접, 2차 임원 면접 (개별 일정 조율)
                       </p>
@@ -764,7 +812,7 @@ export default function RecruitPage() {
                     <div className="w-0 h-0 border-t-[20px] border-t-transparent border-l-[30px] border-l-purple-500/30 border-b-[20px] border-b-transparent"></div>
                   </div>
                 </div>
-                
+
                 {/* Step 4 */}
                 <div className="group">
                   <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/50 dark:bg-gray-800 dark:border-gray-700">
@@ -774,7 +822,9 @@ export default function RecruitPage() {
                           4
                         </div>
                       </div>
-                      <h3 className="text-xl font-bold text-center mb-3">최종 선발</h3>
+                      <h3 className="text-xl font-bold text-center mb-3">
+                        최종 선발
+                      </h3>
                       <p className="text-muted-foreground text-center text-sm">
                         위촉계약 체결 및 교육 과정 안내
                       </p>
@@ -782,45 +832,52 @@ export default function RecruitPage() {
                   </Card>
                 </div>
               </div>
-              
+
               {/* Mobile View - Vertical Cards */}
               <div className="lg:hidden space-y-4">
                 {[
                   {
                     number: 1,
-                    title: "지원서 접수",
-                    description: "온라인 지원서 작성 및 제출. 경력사항과 자기소개서 작성",
-                    color: "from-primary to-primary/80"
+                    title: '지원서 접수',
+                    description:
+                      '온라인 지원서 작성 및 제출. 경력사항과 자기소개서 작성',
+                    color: 'from-primary to-primary/80',
                   },
                   {
                     number: 2,
-                    title: "서류 심사",
-                    description: "지원서류 검토 및 기본 자격요건 확인 (3-5일 소요)",
-                    color: "from-blue-500 to-blue-600"
+                    title: '서류 심사',
+                    description:
+                      '지원서류 검토 및 기본 자격요건 확인 (3-5일 소요)',
+                    color: 'from-blue-500 to-blue-600',
                   },
                   {
                     number: 3,
-                    title: "면접 진행",
-                    description: "1차 실무진 면접, 2차 임원 면접 (개별 일정 조율)",
-                    color: "from-purple-500 to-purple-600"
+                    title: '면접 진행',
+                    description:
+                      '1차 실무진 면접, 2차 임원 면접 (개별 일정 조율)',
+                    color: 'from-purple-500 to-purple-600',
                   },
                   {
                     number: 4,
-                    title: "최종 선발",
-                    description: "위촉계약 체결 및 교육 과정 안내",
-                    color: "from-green-500 to-green-600",
-                    isLast: true
-                  }
+                    title: '최종 선발',
+                    description: '위촉계약 체결 및 교육 과정 안내',
+                    color: 'from-green-500 to-green-600',
+                    isLast: true,
+                  },
                 ].map((step, index) => (
                   <div key={index} className="relative">
                     <Card className="hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:border-gray-700">
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
-                          <div className={`flex-shrink-0 w-14 h-14 bg-gradient-to-br ${step.color} rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg ${step.isLast ? 'animate-pulse' : ''}`}>
+                          <div
+                            className={`flex-shrink-0 w-14 h-14 bg-gradient-to-br ${step.color} rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg ${step.isLast ? 'animate-pulse' : ''}`}
+                          >
                             {step.number}
                           </div>
                           <div className="flex-1">
-                            <h3 className="text-lg font-bold mb-2">{step.title}</h3>
+                            <h3 className="text-lg font-bold mb-2">
+                              {step.title}
+                            </h3>
                             <p className="text-muted-foreground text-sm">
                               {step.description}
                             </p>
@@ -853,11 +910,14 @@ export default function RecruitPage() {
                 Job Positions
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-                <span className="text-primary dark:text-emerald-300">삼성생명GFC</span>{' '}
+                <span className="text-primary dark:text-emerald-300">
+                  삼성생명GFC
+                </span>{' '}
                 채용 포지션
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-gray-200">
-                가업승계, 자산관리, 세무회계, 투자금융 전문가로 함께할 기업재무컨설턴트를 모집합니다
+                가업승계, 자산관리, 세무회계, 투자금융 전문가로 함께할
+                기업재무컨설턴트를 모집합니다
               </p>
             </div>
 
@@ -889,7 +949,7 @@ export default function RecruitPage() {
                         style={{
                           border: '1px solid #bfcbda88',
                           borderRadius: '8px',
-                          minHeight: '400px'
+                          minHeight: '400px',
                         }}
                         frameBorder="0"
                         allowFullScreen
@@ -899,14 +959,17 @@ export default function RecruitPage() {
                       />
                     </div>
                     <p className="text-sm text-muted-foreground dark:text-gray-300 mt-2 text-center">
-                      📍 위 캘린더에서 잡페어 일정을 확인하고 참석 신청하실 수 있습니다
+                      📍 위 캘린더에서 잡페어 일정을 확인하고 참석 신청하실 수
+                      있습니다
                     </p>
                   </div>
 
                   {/* Divider */}
                   <div className="flex items-center">
                     <div className="flex-1 border-t border-gray-200 dark:border-gray-600"></div>
-                    <div className="px-4 text-sm text-muted-foreground dark:text-gray-400">또는</div>
+                    <div className="px-4 text-sm text-muted-foreground dark:text-gray-400">
+                      또는
+                    </div>
                     <div className="flex-1 border-t border-gray-200 dark:border-gray-600"></div>
                   </div>
 
@@ -916,13 +979,18 @@ export default function RecruitPage() {
                       <Briefcase className="h-5 w-5 mr-2 text-primary" />
                       개별 인터뷰 상담
                     </h3>
-                    <div 
-                      style={{width:'100%', height:'500px', overflow:'scroll'}} 
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '500px',
+                        overflow: 'scroll',
+                      }}
                       id="my-cal-inline-recruit"
                       className="border border-gray-200 dark:border-gray-600 rounded-lg"
                     />
                     <p className="text-sm text-muted-foreground dark:text-gray-300 mt-2 text-center">
-                      💼 구직자 개별 상담 및 인터뷰 일정을 직접 예약하실 수 있습니다
+                      💼 구직자 개별 상담 및 인터뷰 일정을 직접 예약하실 수
+                      있습니다
                     </p>
                   </div>
                 </CardContent>
@@ -1001,7 +1069,7 @@ export default function RecruitPage() {
                     </CardContent>
                   </Card>
                 ))}
-                
+
                 {/* Samsung Life GFC Card */}
                 <Card className="hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:border-gray-700">
                   <CardHeader>
@@ -1065,11 +1133,11 @@ export default function RecruitPage() {
                           {category.title}
                         </h3>
                       </div>
-                      
+
                       <PremiumFAQ
                         items={category.faqs.map(item => ({
                           question: item.question,
-                          answer: item.answer
+                          answer: item.answer,
                         }))}
                       />
                     </div>
@@ -1080,9 +1148,12 @@ export default function RecruitPage() {
               {/* FAQ CTA */}
               <div className="mt-12 text-center">
                 <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-8 border border-primary/20">
-                  <h3 className="text-xl font-bold mb-4">더 궁금한 점이 있으신가요?</h3>
+                  <h3 className="text-xl font-bold mb-4">
+                    더 궁금한 점이 있으신가요?
+                  </h3>
                   <p className="text-muted-foreground mb-6">
-                    삼성생명 GFC 채용에 대한 추가 질문이나 개별 상담을 원하시면 언제든 연락주세요.
+                    삼성생명 GFC 채용에 대한 추가 질문이나 개별 상담을 원하시면
+                    언제든 연락주세요.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <CalComPopup
@@ -1092,8 +1163,7 @@ export default function RecruitPage() {
                     />
                     <Button variant="outline" size="lg" asChild>
                       <a href="tel:0502-5550-8700">
-                        <Phone className="mr-2 h-4 w-4" />
-                        ☎ 0502-5550-8700
+                        <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
                       </a>
                     </Button>
                   </div>
@@ -1112,7 +1182,8 @@ export default function RecruitPage() {
                 삼성생명 GFC로 성공하세요
               </h2>
               <p className="text-xl mb-8 opacity-90">
-                전문적인 기업재무컨설턴트로서<br />
+                전문적인 기업재무컨설턴트로서
+                <br />
                 높은 수입과 안정적인 커리어를 만들어가세요
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1121,10 +1192,14 @@ export default function RecruitPage() {
                   variant="secondary"
                   size="lg"
                 />
-                <Button variant="outline" size="lg" className="bg-white/10 border-white/20 hover:bg-white/20" asChild>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="bg-white/10 border-white/20 hover:bg-white/20"
+                  asChild
+                >
                   <a href="tel:0502-5550-8700">
-                    <Phone className="mr-2 h-4 w-4" />
-                    ☎ 0502-5550-8700
+                    <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
                   </a>
                 </Button>
               </div>
@@ -1176,141 +1251,149 @@ export default function RecruitPage() {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
+            '@context': 'https://schema.org',
+            '@graph': [
               {
-                "@type": "JobPosting",
-                "@id": "https://familyoffices.vip/recruit#gfc-succession",
-                "title": "삼성생명 GFC 기업재무컨설턴트 - 가업승계 전문가",
-                "description": "삼성생명 GFC(Group Financial Consultant) 채용. 가족기업의 체계적인 가업승계 설계 및 실행을 지원하는 기업재무컨설턴트를 모집합니다. 높은 수입 보장, 체계적 교육 시스템, 삼성생명 프리미엄 브랜드 지원.",
-                "datePosted": "2025-01-31",
-                "validThrough": "2025-12-31",
-                "employmentType": ["CONTRACTOR"],
-                "hiringOrganization": {
-                  "@type": "Organization",
-                  "name": "삼성생명 GFC",
-                  "sameAs": "https://familyoffices.vip",
-                  "logo": "https://familyoffices.vip/favicon.ico"
+                '@type': 'JobPosting',
+                '@id': 'https://familyoffices.vip/recruit#gfc-succession',
+                title: '삼성생명 GFC 기업재무컨설턴트 - 가업승계 전문가',
+                description:
+                  '삼성생명 GFC(Group Financial Consultant) 채용. 가족기업의 체계적인 가업승계 설계 및 실행을 지원하는 기업재무컨설턴트를 모집합니다. 높은 수입 보장, 체계적 교육 시스템, 삼성생명 프리미엄 브랜드 지원.',
+                datePosted: '2025-01-31',
+                validThrough: '2025-12-31',
+                employmentType: ['CONTRACTOR'],
+                hiringOrganization: {
+                  '@type': 'Organization',
+                  name: '삼성생명 GFC',
+                  sameAs: 'https://familyoffices.vip',
+                  logo: 'https://familyoffices.vip/favicon.ico',
                 },
-                "jobLocation": {
-                  "@type": "Place",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "서울시 중구",
-                    "addressLocality": "서울",
-                    "addressRegion": "서울특별시",
-                    "addressCountry": "KR"
-                  }
+                jobLocation: {
+                  '@type': 'Place',
+                  address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: '서울시 중구',
+                    addressLocality: '서울',
+                    addressRegion: '서울특별시',
+                    addressCountry: 'KR',
+                  },
                 },
-                "baseSalary": {
-                  "@type": "MonetaryAmount",
-                  "currency": "KRW",
-                  "value": {
-                    "@type": "QuantitativeValue",
-                    "minValue": 50000000,
-                    "maxValue": 200000000,
-                    "unitText": "YEAR"
-                  }
+                baseSalary: {
+                  '@type': 'MonetaryAmount',
+                  currency: 'KRW',
+                  value: {
+                    '@type': 'QuantitativeValue',
+                    minValue: 50000000,
+                    maxValue: 200000000,
+                    unitText: 'YEAR',
+                  },
                 },
-                "qualifications": [
-                  "금융/경영 관련 학과 졸업 또는 동등한 경력",
-                  "기업재무 또는 가업승계 컨설팅 경력 5년 이상",
-                  "CFP, 세무사, 변호사 등 전문 자격증 우대",
-                  "가족기업 및 상속/증여 관련 업무 경험 필수"
+                qualifications: [
+                  '금융/경영 관련 학과 졸업 또는 동등한 경력',
+                  '기업재무 또는 가업승계 컨설팅 경력 5년 이상',
+                  'CFP, 세무사, 변호사 등 전문 자격증 우대',
+                  '가족기업 및 상속/증여 관련 업무 경험 필수',
                 ],
-                "skills": ["가업승계", "상속증여", "세무최적화", "기업재무", "자산관리"],
-                "benefits": [
-                  "연봉 상위 1% 수준 고수입",
-                  "24개월 체계적 교육 과정",
-                  "삼성생명 프리미엄 브랜드",
-                  "전문가 네트워크 지원",
-                  "유연근무제"
+                skills: [
+                  '가업승계',
+                  '상속증여',
+                  '세무최적화',
+                  '기업재무',
+                  '자산관리',
                 ],
-                "industry": "Financial Services",
-                "occupationalCategory": "Financial Consultant"
+                benefits: [
+                  '연봉 상위 1% 수준 고수입',
+                  '24개월 체계적 교육 과정',
+                  '삼성생명 프리미엄 브랜드',
+                  '전문가 네트워크 지원',
+                  '유연근무제',
+                ],
+                industry: 'Financial Services',
+                occupationalCategory: 'Financial Consultant',
               },
               {
-                "@type": "JobPosting", 
-                "@id": "https://familyoffices.vip/recruit#gfc-asset",
-                "title": "삼성생명 GFC 기업재무컨설턴트 - 자산관리 전문가",
-                "description": "삼성생명 GFC 자산관리 전문가 채용. 고액자산가 및 기업의 종합자산관리 서비스를 제공하는 전문 컨설턴트를 모집합니다.",
-                "datePosted": "2025-01-31",
-                "validThrough": "2025-12-31", 
-                "employmentType": ["CONTRACTOR"],
-                "hiringOrganization": {
-                  "@type": "Organization",
-                  "name": "삼성생명 GFC",
-                  "sameAs": "https://familyoffices.vip",
-                  "logo": "https://familyoffices.vip/favicon.ico"
+                '@type': 'JobPosting',
+                '@id': 'https://familyoffices.vip/recruit#gfc-asset',
+                title: '삼성생명 GFC 기업재무컨설턴트 - 자산관리 전문가',
+                description:
+                  '삼성생명 GFC 자산관리 전문가 채용. 고액자산가 및 기업의 종합자산관리 서비스를 제공하는 전문 컨설턴트를 모집합니다.',
+                datePosted: '2025-01-31',
+                validThrough: '2025-12-31',
+                employmentType: ['CONTRACTOR'],
+                hiringOrganization: {
+                  '@type': 'Organization',
+                  name: '삼성생명 GFC',
+                  sameAs: 'https://familyoffices.vip',
+                  logo: 'https://familyoffices.vip/favicon.ico',
                 },
-                "jobLocation": {
-                  "@type": "Place",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "서울시 중구",
-                    "addressLocality": "서울",
-                    "addressRegion": "서울특별시", 
-                    "addressCountry": "KR"
-                  }
+                jobLocation: {
+                  '@type': 'Place',
+                  address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: '서울시 중구',
+                    addressLocality: '서울',
+                    addressRegion: '서울특별시',
+                    addressCountry: 'KR',
+                  },
                 },
-                "baseSalary": {
-                  "@type": "MonetaryAmount",
-                  "currency": "KRW",
-                  "value": {
-                    "@type": "QuantitativeValue",
-                    "minValue": 40000000,
-                    "maxValue": 150000000,
-                    "unitText": "YEAR"
-                  }
+                baseSalary: {
+                  '@type': 'MonetaryAmount',
+                  currency: 'KRW',
+                  value: {
+                    '@type': 'QuantitativeValue',
+                    minValue: 40000000,
+                    maxValue: 150000000,
+                    unitText: 'YEAR',
+                  },
                 },
-                "qualifications": [
-                  "금융 관련 학과 졸업 또는 동등한 경력",
-                  "자산관리 또는 기업재무 경력 3년 이상",
-                  "금융투자분석사, CFP, CFA 등 관련 자격증 우대"
+                qualifications: [
+                  '금융 관련 학과 졸업 또는 동등한 경력',
+                  '자산관리 또는 기업재무 경력 3년 이상',
+                  '금융투자분석사, CFP, CFA 등 관련 자격증 우대',
                 ],
-                "skills": ["자산관리", "포트폴리오 운용", "투자자문", "기업재무"],
-                "industry": "Financial Services",
-                "occupationalCategory": "Financial Consultant"
+                skills: ['자산관리', '포트폴리오 운용', '투자자문', '기업재무'],
+                industry: 'Financial Services',
+                occupationalCategory: 'Financial Consultant',
               },
               {
-                "@type": "FAQPage",
-                "mainEntity": [
+                '@type': 'FAQPage',
+                mainEntity: [
                   {
-                    "@type": "Question",
-                    "name": "삼성생명 GFC란 무엇인가요?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "삼성생명 GFC(Group Financial Consultant)는 기업재무컨설턴트로서, 중소중견기업 CEO와 고액자산가를 대상으로 가업승계, 자산관리, 세무최적화, 리스크관리 등 종합적인 재무컨설팅을 제공하는 전문가입니다."
-                    }
+                    '@type': 'Question',
+                    name: '삼성생명 GFC란 무엇인가요?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: '삼성생명 GFC(Group Financial Consultant)는 기업재무컨설턴트로서, 중소중견기업 CEO와 고액자산가를 대상으로 가업승계, 자산관리, 세무최적화, 리스크관리 등 종합적인 재무컨설팅을 제공하는 전문가입니다.',
+                    },
                   },
                   {
-                    "@type": "Question", 
-                    "name": "삼성생명 GFC 채용 자격조건은 어떻게 되나요?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "기본적으로 4년제 대졸 이상, 금융/경영/회계 관련 전공자를 우대합니다. 가업승계 전문가는 관련 경력 5년 이상, 자산관리 전문가는 3년 이상의 경력이 필요합니다. CFP, CFA, 세무사, 변호사 등 관련 자격증 보유자는 우대합니다."
-                    }
+                    '@type': 'Question',
+                    name: '삼성생명 GFC 채용 자격조건은 어떻게 되나요?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: '기본적으로 4년제 대졸 이상, 금융/경영/회계 관련 전공자를 우대합니다. 가업승계 전문가는 관련 경력 5년 이상, 자산관리 전문가는 3년 이상의 경력이 필요합니다. CFP, CFA, 세무사, 변호사 등 관련 자격증 보유자는 우대합니다.',
+                    },
                   },
                   {
-                    "@type": "Question",
-                    "name": "삼성생명 GFC 연봉은 얼마나 되나요?",
-                    "acceptedAnswer": {
-                      "@type": "Answer", 
-                      "text": "삼성생명 GFC는 위촉직으로 고정급과 성과급을 결합한 보수체계를 운영합니다. 경력과 실력에 따라 연봉 상위 1% 수준의 높은 수입이 가능하며, 프리미엄 고객 대상으로 고단가 서비스를 제공하여 일반 설계사 대비 3-5배 높은 수익을 기대할 수 있습니다."
-                    }
+                    '@type': 'Question',
+                    name: '삼성생명 GFC 연봉은 얼마나 되나요?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: '삼성생명 GFC는 위촉직으로 고정급과 성과급을 결합한 보수체계를 운영합니다. 경력과 실력에 따라 연봉 상위 1% 수준의 높은 수입이 가능하며, 프리미엄 고객 대상으로 고단가 서비스를 제공하여 일반 설계사 대비 3-5배 높은 수익을 기대할 수 있습니다.',
+                    },
                   },
                   {
-                    "@type": "Question",
-                    "name": "GFC 채용 과정은 어떻게 진행되나요?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "채용 과정은 ①지원서 접수 → ②서류심사(3-5일) → ③면접진행(1차 실무진, 2차 임원) → ④최종선발 순으로 진행됩니다. 전체 과정은 약 2-3주 소요되며, 합격 시 위촉계약을 체결하고 24개월간의 체계적인 교육과정을 제공받게 됩니다."
-                    }
-                  }
-                ]
-              }
-            ]
-          })
+                    '@type': 'Question',
+                    name: 'GFC 채용 과정은 어떻게 진행되나요?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: '채용 과정은 ①지원서 접수 → ②서류심사(3-5일) → ③면접진행(1차 실무진, 2차 임원) → ④최종선발 순으로 진행됩니다. 전체 과정은 약 2-3주 소요되며, 합격 시 위촉계약을 체결하고 24개월간의 체계적인 교육과정을 제공받게 됩니다.',
+                    },
+                  },
+                ],
+              },
+            ],
+          }),
         }}
       />
 
@@ -1363,7 +1446,7 @@ export default function RecruitPage() {
               "hideEventTypeDetails": false,
               "layout": "month_view"
             });
-          `
+          `,
         }}
       />
     </div>

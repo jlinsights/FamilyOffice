@@ -1,19 +1,21 @@
+'use client';
+
 import {
-  Palette,
   ArrowRight,
-  Users,
+  BookOpen,
   Calendar,
-  MapPin,
+  Camera,
+  CheckCircle2,
   Clock,
-  TrendingUp,
+  Crown,
   Eye,
   Heart,
   Lightbulb,
+  MapPin,
+  Palette,
   Star,
-  CheckCircle2,
-  Camera,
-  BookOpen,
-  Crown,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
@@ -25,14 +27,7 @@ import { Button } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
-export const metadata: Metadata = {
-  title: '예술자산클래ART | VIP 고객 예술 투자 및 문화 교육 프로그램',
-  description:
-    '삼성생명 VIP 고객만을 위한 특별한 예술 투자 교육 프로그램. 예술 작품 감상법부터 투자 전략까지, 전문가와 함께하는 프리미엄 문화 체험을 제공합니다.',
-  keywords:
-    '예술자산클래스, ART, 예술투자, 문화교육, VIP프로그램, 예술품감상, 아트투어, 삼성생명',
-};
+import { PremiumContentGuard } from '@/components/premium-content-guard';
 
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
@@ -88,11 +83,11 @@ function HeroSection() {
             className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
           >
             <Link
-              href="/contact"
+              href="/structure-check"
               className="flex items-center"
-              aria-label="프로그램 참가 신청"
+              aria-label="구조 점검 요청"
             >
-              프로그램 참가 신청
+              구조 점검 요청
               <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
             </Link>
           </Button>
@@ -407,8 +402,8 @@ function CTASection() {
             asChild
             className="font-bold shadow-lg px-8 py-4 text-lg"
           >
-            <Link href="/contact" className="flex items-center">
-              프로그램 참가 신청
+            <Link href="/structure-check" className="flex items-center">
+              구조 점검 요청
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
@@ -436,13 +431,15 @@ export default function ArtAssetClassPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20">
-        <HeroSection />
-        <ProgramOverviewSection />
-        <ProgramFeaturesSection />
-        <BenefitsSection />
-        <CTASection />
-      </main>
+      <PremiumContentGuard>
+        <main className="pt-20">
+          <HeroSection />
+          <ProgramOverviewSection />
+          <ProgramFeaturesSection />
+          <BenefitsSection />
+          <CTASection />
+        </main>
+      </PremiumContentGuard>
       <Footer />
     </div>
   );

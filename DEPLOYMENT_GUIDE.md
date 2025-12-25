@@ -3,9 +3,11 @@
 ## 📋 배포 전 체크리스트
 
 ### 1. 환경 변수 설정
+
 다음 환경 변수들을 Vercel 프로젝트 설정에서 추가해야 합니다:
 
 #### 필수 환경 변수
+
 ```bash
 # Clerk 인증
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
@@ -41,6 +43,7 @@ NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app
 ```
 
 #### 선택적 환경 변수
+
 ```bash
 # 성능 최적화
 CDN_BASE_URL=https://your-cdn-domain.com
@@ -120,17 +123,20 @@ vercel --prod --yes
 ## 🔧 배포 후 확인사항
 
 ### 1. 기본 기능 테스트
+
 - [ ] 홈페이지 로딩 확인
 - [ ] 인증 시스템 작동 확인
 - [ ] API 엔드포인트 응답 확인
 - [ ] 데이터베이스 연결 확인
 
 ### 2. 성능 모니터링
+
 - [ ] Core Web Vitals 확인
 - [ ] 페이지 로딩 속도 측정
 - [ ] API 응답 시간 모니터링
 
 ### 3. 보안 검증
+
 - [ ] HTTPS 리다이렉트 확인
 - [ ] 보안 헤더 설정 확인
 - [ ] 환경 변수 노출 여부 확인
@@ -140,6 +146,7 @@ vercel --prod --yes
 ### 일반적인 배포 오류
 
 #### 1. 빌드 실패
+
 ```bash
 # 로컬에서 빌드 테스트
 npm run build
@@ -152,6 +159,7 @@ npm run lint
 ```
 
 #### 2. 환경 변수 오류
+
 ```bash
 # 환경 변수 확인
 vercel env ls
@@ -161,6 +169,7 @@ vercel env add NEXT_PUBLIC_SUPABASE_URL
 ```
 
 #### 3. 의존성 오류
+
 ```bash
 # node_modules 삭제 후 재설치
 rm -rf node_modules package-lock.json
@@ -170,26 +179,31 @@ npm install
 ### 성능 최적화
 
 #### 1. 번들 크기 최적화
+
 ```bash
 # 번들 분석
 npm run analyze
 ```
 
 #### 2. 이미지 최적화
+
 - Next.js Image 컴포넌트 사용 확인
 - WebP/AVIF 포맷 지원 확인
 
 #### 3. 캐싱 전략
+
 - 정적 자산 캐싱 설정 확인
 - API 응답 캐싱 구현
 
 ## 📊 모니터링 설정
 
 ### 1. Vercel Analytics
+
 - Vercel 대시보드에서 Analytics 활성화
 - 성능 메트릭 모니터링
 
 ### 2. Sentry 에러 추적
+
 ```typescript
 // lib/monitoring.ts에서 Sentry 설정 확인
 if (process.env.SENTRY_DSN) {
@@ -201,12 +215,14 @@ if (process.env.SENTRY_DSN) {
 ```
 
 ### 3. 로그 모니터링
+
 - Vercel Function Logs 확인
 - API 응답 시간 모니터링
 
 ## 🔄 CI/CD 파이프라인
 
 ### GitHub Actions 워크플로우
+
 ```yaml
 name: Deploy to Vercel
 on:
@@ -237,6 +253,7 @@ jobs:
 ## 🚨 긴급 상황 대응
 
 ### 1. 롤백 방법
+
 ```bash
 # 이전 배포로 롤백
 vercel rollback
@@ -246,6 +263,7 @@ vercel rollback <deployment-url>
 ```
 
 ### 2. 환경 변수 업데이트
+
 ```bash
 # 환경 변수 업데이트
 vercel env add VARIABLE_NAME
@@ -255,6 +273,7 @@ vercel --prod
 ```
 
 ### 3. 도메인 설정
+
 - Vercel 대시보드에서 커스텀 도메인 추가
 - DNS 설정 확인
 - SSL 인증서 자동 발급 확인
@@ -262,16 +281,19 @@ vercel --prod
 ## 📈 성능 최적화 팁
 
 ### 1. 한국 사용자를 위한 최적화
+
 - Vercel의 `icn1` 리전 사용 (vercel.json에 설정됨)
 - 이미지 CDN 활용
 - 번들 크기 최소화
 
 ### 2. 모바일 최적화
+
 - 반응형 디자인 확인
 - 터치 인터페이스 최적화
 - 모바일 성능 테스트
 
 ### 3. SEO 최적화
+
 - 메타 태그 설정 확인
 - 구조화된 데이터 추가
 - 사이트맵 생성
@@ -297,4 +319,4 @@ vercel --prod
 ---
 
 **마지막 업데이트**: 2024년 12월
-**버전**: 1.0.0 
+**버전**: 1.0.0

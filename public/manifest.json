@@ -52,10 +52,10 @@
   ],
   "shortcuts": [
     {
-      "name": "상담 신청",
-      "short_name": "상담",
-      "description": "무료 자산관리 상담 신청",
-      "url": "/contact",
+      "name": "구조 점검 요청",
+      "short_name": "구조점검",
+      "description": "무료 구조 점검 신청",
+      "url": "/structure-check",
       "icons": [
         {
           "src": "/icon-consultation.png",
@@ -78,10 +78,10 @@
       ]
     },
     {
-      "name": "프로그램",
-      "short_name": "프로그램",
-      "description": "CEO 전용 프로그램",
-      "url": "/program",
+      "name": "인사이트",
+      "short_name": "인사이트",
+      "description": "전문가 칼럼 및 뉴스레터",
+      "url": "/insights",
       "icons": [
         {
           "src": "/icon-program.png",

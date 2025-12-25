@@ -3,12 +3,13 @@
  * GET /api/cache/monitoring - 캐시 성능 및 히트율 통계
  */
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  getAdvancedCacheStats, 
-  getRealTimeCacheHitRate, 
-  checkCachePerformanceAlerts 
-} from '@/lib/financial/cache';
+
 import { checkAdminPermissions } from '@/lib/admin-permissions';
+import {
+  getAdvancedCacheStats,
+  getRealTimeCacheHitRate,
+  checkCachePerformanceAlerts,
+} from '@/lib/financial/cache';
 
 export async function GET(request: NextRequest) {
   try {
@@ -16,9 +17,9 @@ export async function GET(request: NextRequest) {
     const hasPermission = await checkAdminPermissions();
     if (!hasPermission) {
       return NextResponse.json(
-        { 
+        {
           error: 'Unauthorized',
-          message: '관리자 권한이 필요합니다.'
+          message: '관리자 권한이 필요합니다.',
         },
         { status: 403 }
       );
@@ -28,10 +29,12 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const windowParam = url.searchParams.get('window');
     const format = url.searchParams.get('format') || 'full';
-    
+
     // 시간 윈도우 설정 (기본값: 1시간)
-    const windowMs = windowParam ? parseInt(windowParam) * 1000 : 60 * 60 * 1000;
-    
+    const windowMs = windowParam
+      ? parseInt(windowParam) * 1000
+      : 60 * 60 * 1000;
+
     if (format === 'realtime') {
       // 실시간 히트율만 반환
       const realTimeHitRate = await getRealTimeCacheHitRate();
@@ -43,7 +46,7 @@ export async function GET(request: NextRequest) {
         },
       });
     }
-    
+
     if (format === 'alerts') {
       // 성능 알림만 반환
       const alerts = await checkCachePerformanceAlerts();
@@ -81,10 +84,9 @@ export async function GET(request: NextRequest) {
         },
       },
     });
-
   } catch (error) {
     console.error('캐시 모니터링 API 오류:', error);
-    
+
     return NextResponse.json(
       {
         error: 'Internal Server Error',
@@ -102,15 +104,16 @@ export async function DELETE() {
     const hasPermission = await checkAdminPermissions();
     if (!hasPermission) {
       return NextResponse.json(
-        { 
+        {
           error: 'Unauthorized',
-          message: '관리자 권한이 필요합니다.'
+          message: '관리자 권한이 필요합니다.',
         },
         { status: 403 }
       );
     }
 
-    const { cacheMonitoring } = await import('@/lib/financial/cache-monitoring');
+    const { cacheMonitoring } =
+      await import('@/lib/financial/cache-monitoring');
     cacheMonitoring.clearMetrics();
 
     return NextResponse.json({
@@ -118,10 +121,9 @@ export async function DELETE() {
       message: '캐시 메트릭이 초기화되었습니다.',
       timestamp: Date.now(),
     });
-
   } catch (error) {
     console.error('캐시 메트릭 리셋 오류:', error);
-    
+
     return NextResponse.json(
       {
         error: 'Internal Server Error',

@@ -97,6 +97,15 @@ interface ConversionOptimization {
 }
 
 export type {
-    ABTestConfiguration, ContentQuality, ConversionOptimization, GeneratedContent, HistoricalPerformance, IntentBasedOptimizations, SEOOptimization, SeasonalSchedule, SeasonalUpdate, StructuredData, UserIntentAnalysis
+  ABTestConfiguration,
+  ContentQuality,
+  ConversionOptimization,
+  GeneratedContent,
+  HistoricalPerformance,
+  IntentBasedOptimizations,
+  SEOOptimization,
+  SeasonalSchedule,
+  SeasonalUpdate,
+  StructuredData,
+  UserIntentAnalysis,
 };
-

@@ -1,7 +1,8 @@
 'use client';
 
-import Script from 'next/script';
 import { useEffect } from 'react';
+
+import Script from 'next/script';
 
 // Kakao SDK 글로벌 타입 정의
 declare global {
@@ -19,8 +20,12 @@ export function KakaoSDK({ javascriptKey, debug = false }: KakaoSDKProps) {
   useEffect(() => {
     // 환경 변수 검증
     if (!javascriptKey) {
-      console.error('❌ NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY가 설정되지 않았습니다.');
-      console.error('   .env.local 파일에 NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY를 추가하세요.');
+      console.error(
+        '❌ NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY가 설정되지 않았습니다.'
+      );
+      console.error(
+        '   .env.local 파일에 NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY를 추가하세요.'
+      );
       return;
     }
 
@@ -46,7 +51,7 @@ export function KakaoSDK({ javascriptKey, debug = false }: KakaoSDKProps) {
           }
         }
       }}
-      onError={(error) => {
+      onError={error => {
         console.error('❌ Kakao SDK script loading failed:', error);
       }}
     />
@@ -62,7 +67,7 @@ export const kakaoSDKUtils = {
         success: callback,
         fail: (error: any) => {
           console.error('카카오 로그인 실패:', error);
-        }
+        },
       });
     }
   },
@@ -85,7 +90,7 @@ export const kakaoSDKUtils = {
   addChannel: (channelPublicId: string) => {
     if (window.Kakao?.Channel) {
       window.Kakao.Channel.addChannel({
-        channelPublicId: channelPublicId
+        channelPublicId: channelPublicId,
       });
     }
   },
@@ -94,7 +99,7 @@ export const kakaoSDKUtils = {
   chatChannel: (channelPublicId: string) => {
     if (window.Kakao?.Channel) {
       window.Kakao.Channel.chat({
-        channelPublicId: channelPublicId
+        channelPublicId: channelPublicId,
       });
     }
   },
@@ -107,10 +112,10 @@ export const kakaoSDKUtils = {
         success: callback,
         fail: (error: any) => {
           console.error('사용자 정보 가져오기 실패:', error);
-        }
+        },
       });
     }
-  }
+  },
 };
 
 // React Hook for Kakao SDK
@@ -121,13 +126,14 @@ export function useKakaoSDK(javascriptKey?: string) {
     }
   }, [javascriptKey]);
 
-  const isReady = typeof window !== 'undefined' && 
-                 window.Kakao && 
-                 window.Kakao.isInitialized();
+  const isReady =
+    typeof window !== 'undefined' &&
+    window.Kakao &&
+    window.Kakao.isInitialized();
 
   return {
     isReady,
     kakao: isReady ? window.Kakao : null,
-    ...kakaoSDKUtils
+    ...kakaoSDKUtils,
   };
 }

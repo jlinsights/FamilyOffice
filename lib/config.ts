@@ -8,17 +8,17 @@ export function getBaseUrl(): string {
   if (process.env.NODE_ENV === 'production') {
     return process.env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip';
   }
-  
+
   // In development
   if (process.env.NEXT_PUBLIC_APP_URL) {
     return process.env.NEXT_PUBLIC_APP_URL;
   }
-  
+
   // For Vercel preview deployments
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  
+
   // Default to localhost
   return 'http://localhost:3000';
 }
@@ -51,5 +51,5 @@ export const ALLOWED_ORIGINS = [
   'https://www.familyoffices.vip',
   'https://familyoffice-jet.vercel.app',
   'https://familyoffice-jlinsights-projects.vercel.app',
-  ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : [])
+  ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : []),
 ];

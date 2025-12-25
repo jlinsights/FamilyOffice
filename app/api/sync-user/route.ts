@@ -8,11 +8,11 @@ import { syncCurrentUser } from '@/lib/user-sync';
 
 async function handler() {
   const startTime = Date.now();
-  
+
   try {
     // Log API request
     await logAPI.request('/api/sync-user', 'POST');
-    
+
     // 현재 사용자를 Supabase에 동기화
     const syncedUser = await syncCurrentUser();
 
@@ -26,7 +26,12 @@ async function handler() {
 
     // Log successful sync
     await logAuth.login(syncedUser.id, 'sync', true);
-    await logAPI.response('/api/sync-user', 200, Date.now() - startTime, syncedUser.id);
+    await logAPI.response(
+      '/api/sync-user',
+      200,
+      Date.now() - startTime,
+      syncedUser.id
+    );
 
     return NextResponse.json({
       success: true,
@@ -39,7 +44,7 @@ async function handler() {
     });
   } catch (error) {
     console.error('User sync error:', error);
-    
+
     // Log the error
     await logAPI.error('/api/sync-user', error);
     await logAPI.response('/api/sync-user', 500, Date.now() - startTime);

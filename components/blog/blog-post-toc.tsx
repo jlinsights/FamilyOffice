@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
 import { cn } from '@/lib/utils';
 
 interface TocItem {
@@ -38,8 +39,8 @@ export function BlogPostToc({ content, className }: BlogPostTocProps) {
   // Track active heading
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
           }
@@ -48,7 +49,7 @@ export function BlogPostToc({ content, className }: BlogPostTocProps) {
       { rootMargin: '-80px 0px -80% 0px' }
     );
 
-    tocItems.forEach((item) => {
+    tocItems.forEach(item => {
       const element = document.getElementById(item.id);
       if (element) observer.observe(element);
     });
@@ -73,7 +74,7 @@ export function BlogPostToc({ content, className }: BlogPostTocProps) {
         목차
       </h3>
       <ul className="space-y-1 text-sm">
-        {tocItems.map((item) => (
+        {tocItems.map(item => (
           <li
             key={item.id}
             style={{ paddingLeft: `${(item.level - 2) * 12}px` }}

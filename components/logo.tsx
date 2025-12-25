@@ -1,6 +1,7 @@
 import React from 'react';
-import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';
+
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 
 // Samsung Financial Networks 로고 컴포넌트 - 테마 기반 자동 전환
@@ -11,12 +12,9 @@ interface SamsungFinancialNetworksLogoProps {
   priority?: boolean;
 }
 
-export const SamsungFinancialNetworksLogo: React.FC<SamsungFinancialNetworksLogoProps> = ({
-  width = 140,
-  height = 32,
-  className = '',
-  priority = false,
-}) => {
+export const SamsungFinancialNetworksLogo: React.FC<
+  SamsungFinancialNetworksLogoProps
+> = ({ width = 140, height = 32, className = '', priority = false }) => {
   const { theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -42,9 +40,10 @@ export const SamsungFinancialNetworksLogo: React.FC<SamsungFinancialNetworksLogo
 
   return (
     <Image
-      src={isDarkMode 
-        ? "/SVG/samsung-financial-networks-white.svg" 
-        : "/SVG/samsung-financial-networks.svg"
+      src={
+        isDarkMode
+          ? '/SVG/samsung-financial-networks-white.svg'
+          : '/SVG/samsung-financial-networks.svg'
       }
       alt="Samsung Financial Networks"
       width={width}

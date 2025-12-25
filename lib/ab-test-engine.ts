@@ -3,7 +3,12 @@
  * 트래픽 분할, 결과 수집, 통계적 유의성 검증, 승자 선정
  */
 
-export type ABTestStatus = 'draft' | 'running' | 'paused' | 'completed' | 'archived';
+export type ABTestStatus =
+  | 'draft'
+  | 'running'
+  | 'paused'
+  | 'completed'
+  | 'archived';
 export type VariantType = 'control' | 'variant';
 
 export interface ABTestVariant {
@@ -47,7 +52,12 @@ export interface ABTest {
   duration: number; // days
   minSampleSize: number;
   confidenceThreshold: number; // 95% default
-  primaryMetric: 'conversion_rate' | 'bounce_rate' | 'time_on_page' | 'revenue' | 'ctr';
+  primaryMetric:
+    | 'conversion_rate'
+    | 'bounce_rate'
+    | 'time_on_page'
+    | 'revenue'
+    | 'ctr';
   createdAt: Date;
   updatedAt: Date;
   createdBy: string;
@@ -101,13 +111,20 @@ export class ABTestEngine {
     createdBy: string;
   }): ABTest {
     // 트래픽 할당 검증
-    const totalAllocation = params.variants.reduce((sum, v) => sum + v.trafficAllocation, 0);
+    const totalAllocation = params.variants.reduce(
+      (sum, v) => sum + v.trafficAllocation,
+      0
+    );
     if (Math.abs(totalAllocation - 100) > 0.01) {
-      throw new Error(`Traffic allocation must sum to 100% (current: ${totalAllocation}%)`);
+      throw new Error(
+        `Traffic allocation must sum to 100% (current: ${totalAllocation}%)`
+      );
     }
 
     // Control variant 검증
-    const controlCount = params.variants.filter(v => v.type === 'control').length;
+    const controlCount = params.variants.filter(
+      v => v.type === 'control'
+    ).length;
     if (controlCount !== 1) {
       throw new Error('Exactly one control variant is required');
     }
@@ -215,7 +232,11 @@ export class ABTestEngine {
   /**
    * 메트릭 기록
    */
-  recordMetrics(testId: string, variantId: string, metrics: Partial<ABTestMetrics>): void {
+  recordMetrics(
+    testId: string,
+    variantId: string,
+    metrics: Partial<ABTestMetrics>
+  ): void {
     const test = this.tests.get(testId);
     if (!test) {
       throw new Error(`Test not found: ${testId}`);
@@ -239,8 +260,14 @@ export class ABTestEngine {
     const updatedMetrics: ABTestMetrics = {
       visitors: currentMetrics.visitors + (metrics.visitors || 0),
       conversions: currentMetrics.conversions + (metrics.conversions || 0),
-      bounceRate: metrics.bounceRate !== undefined ? metrics.bounceRate : currentMetrics.bounceRate,
-      avgTimeOnPage: metrics.avgTimeOnPage !== undefined ? metrics.avgTimeOnPage : currentMetrics.avgTimeOnPage,
+      bounceRate:
+        metrics.bounceRate !== undefined
+          ? metrics.bounceRate
+          : currentMetrics.bounceRate,
+      avgTimeOnPage:
+        metrics.avgTimeOnPage !== undefined
+          ? metrics.avgTimeOnPage
+          : currentMetrics.avgTimeOnPage,
       pageViews: currentMetrics.pageViews + (metrics.pageViews || 0),
       revenue: (currentMetrics.revenue || 0) + (metrics.revenue || 0),
       clicks: (currentMetrics.clicks || 0) + (metrics.clicks || 0),
@@ -249,12 +276,14 @@ export class ABTestEngine {
     };
 
     // 전환율 및 CTR 계산
-    updatedMetrics.conversionRate = updatedMetrics.visitors > 0
-      ? (updatedMetrics.conversions / updatedMetrics.visitors) * 100
-      : 0;
+    updatedMetrics.conversionRate =
+      updatedMetrics.visitors > 0
+        ? (updatedMetrics.conversions / updatedMetrics.visitors) * 100
+        : 0;
 
     if (updatedMetrics.clicks !== undefined && updatedMetrics.visitors > 0) {
-      updatedMetrics.ctr = (updatedMetrics.clicks / updatedMetrics.visitors) * 100;
+      updatedMetrics.ctr =
+        (updatedMetrics.clicks / updatedMetrics.visitors) * 100;
     }
 
     testMetrics.set(variantId, updatedMetrics);
@@ -314,37 +343,54 @@ export class ABTestEngine {
     });
 
     // 승자 결정
-    const winner = this.determineWinner(variantResults, test.confidenceThreshold);
+    const winner = this.determineWinner(
+      variantResults,
+      test.confidenceThreshold
+    );
     if (winner) {
       winner.isWinner = true;
     }
 
     // 전체 메트릭 집계
-    const totalVisitors = variantResults.reduce((sum, v) => sum + v.metrics.visitors, 0);
-    const totalConversions = variantResults.reduce((sum, v) => sum + v.metrics.conversions, 0);
+    const totalVisitors = variantResults.reduce(
+      (sum, v) => sum + v.metrics.visitors,
+      0
+    );
+    const totalConversions = variantResults.reduce(
+      (sum, v) => sum + v.metrics.conversions,
+      0
+    );
 
     // 테스트 기간 계산
     const now = new Date();
-    const testDuration = Math.floor((now.getTime() - test.startDate.getTime()) / (1000 * 60 * 60 * 24));
+    const testDuration = Math.floor(
+      (now.getTime() - test.startDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
 
     // 데이터 품질 평가
-    const dataQuality = this.assessDataQuality(variantResults, test.minSampleSize);
+    const dataQuality = this.assessDataQuality(
+      variantResults,
+      test.minSampleSize
+    );
 
     // 결론 및 권장사항 생성
-    const { conclusion, recommendations } = this.generateConclusion(test, variantResults, winner);
+    const { conclusion, recommendations } = this.generateConclusion(
+      test,
+      variantResults,
+      winner
+    );
 
-    return {
+    const result: ABTestResult = {
       testId: test.id,
       testName: test.name,
       status: test.status,
       startDate: test.startDate,
-      endDate: test.endDate,
       duration: test.duration,
       variants: variantResults,
-      winner,
       conclusion,
       recommendations,
-      statisticalSignificance: winner !== undefined && winner.confidence >= test.confidenceThreshold,
+      statisticalSignificance:
+        winner !== undefined && winner.confidence >= test.confidenceThreshold,
       confidenceLevel: winner?.confidence || 0,
       metadata: {
         totalVisitors,
@@ -353,6 +399,16 @@ export class ABTestEngine {
         dataQuality,
       },
     };
+
+    // Conditionally add optional properties
+    if (test.endDate !== undefined) {
+      result.endDate = test.endDate;
+    }
+    if (winner !== undefined) {
+      result.winner = winner;
+    }
+
+    return result;
   }
 
   /**
@@ -391,7 +447,10 @@ export class ABTestEngine {
     }
 
     // Uplift 계산
-    const uplift = controlValue > 0 ? ((variantValue - controlValue) / controlValue) * 100 : 0;
+    const uplift =
+      controlValue > 0
+        ? ((variantValue - controlValue) / controlValue) * 100
+        : 0;
 
     // 전환율 기반 Z-test
     const p1 = controlMetrics.conversions / controlMetrics.visitors;
@@ -403,8 +462,11 @@ export class ABTestEngine {
       return { confidence: 0, uplift: 0 };
     }
 
-    const pooledProbability = (controlMetrics.conversions + variantMetrics.conversions) / (n1 + n2);
-    const standardError = Math.sqrt(pooledProbability * (1 - pooledProbability) * (1 / n1 + 1 / n2));
+    const pooledProbability =
+      (controlMetrics.conversions + variantMetrics.conversions) / (n1 + n2);
+    const standardError = Math.sqrt(
+      pooledProbability * (1 - pooledProbability) * (1 / n1 + 1 / n2)
+    );
 
     if (standardError === 0) {
       return { confidence: 0, uplift };
@@ -424,7 +486,7 @@ export class ABTestEngine {
   private zScoreToConfidence(zScore: number): number {
     // 간단한 근사값
     if (zScore >= 2.576) return 99; // 99% confidence
-    if (zScore >= 1.96) return 95;  // 95% confidence
+    if (zScore >= 1.96) return 95; // 95% confidence
     if (zScore >= 1.645) return 90; // 90% confidence
     if (zScore >= 1.282) return 80; // 80% confidence
     return Math.min(zScore * 38.2, 75); // Linear approximation below 80%
@@ -479,9 +541,10 @@ export class ABTestEngine {
     winner: ABTestVariantResult | undefined
   ): { conclusion: string; recommendations: string[] } {
     const recommendations: string[] = [];
+    let conclusion: string;
 
     if (winner) {
-      const conclusion = `${winner.name}이(가) ${winner.uplift.toFixed(2)}% 개선으로 ${winner.confidence.toFixed(1)}% 신뢰도로 승리했습니다.`;
+      conclusion = `${winner.name}이(가) ${winner.uplift.toFixed(2)}% 개선으로 ${winner.confidence.toFixed(1)}% 신뢰도로 승리했습니다.`;
 
       recommendations.push(`✅ ${winner.name}을(를) 전체 트래픽에 적용하세요`);
       recommendations.push(`📊 개선 효과를 지속적으로 모니터링하세요`);
@@ -489,9 +552,12 @@ export class ABTestEngine {
     } else {
       const bestVariant = variants
         .filter(v => v.type !== 'control')
-        .reduce((best, current) => (current.uplift > best.uplift ? current : best), variants[0]);
+        .reduce(
+          (best, current) => (current.uplift > best.uplift ? current : best),
+          variants[0]!
+        );
 
-      const conclusion = `통계적으로 유의미한 결과를 얻지 못했습니다. ${bestVariant.confidence.toFixed(1)}% 신뢰도는 ${test.confidenceThreshold}% 기준에 미달합니다.`;
+      conclusion = `통계적으로 유의미한 결과를 얻지 못했습니다. ${bestVariant.confidence.toFixed(1)}% 신뢰도는 ${test.confidenceThreshold}% 기준에 미달합니다.`;
 
       recommendations.push(`⏱️ 테스트 기간을 연장하여 더 많은 데이터 수집`);
       recommendations.push(`👥 트래픽 양을 늘리거나 타겟팅 개선`);
@@ -500,7 +566,9 @@ export class ABTestEngine {
       // 샘플 사이즈 부족
       const minVisitors = Math.min(...variants.map(v => v.sampleSize));
       if (minVisitors < test.minSampleSize) {
-        recommendations.push(`📈 최소 샘플 사이즈(${test.minSampleSize})에 도달하지 못했습니다`);
+        recommendations.push(
+          `📈 최소 샘플 사이즈(${test.minSampleSize})에 도달하지 못했습니다`
+        );
       }
     }
 
@@ -552,7 +620,7 @@ export class ABTestEngine {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // Convert to 32bit integer
     }
     return Math.abs(hash);

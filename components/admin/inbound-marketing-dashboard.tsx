@@ -5,29 +5,36 @@
 
 'use client';
 
+import {
+  Activity,
+  BarChart3,
+  BookOpen,
+  CheckCircle,
+  Clock,
+  Eye,
+  MousePointer,
+  RefreshCw,
+  Star,
+  Target,
+  TrendingUp,
+  Users,
+  XCircle,
+  Zap,
+} from 'lucide-react';
+
+import { useCallback, useEffect, useState } from 'react';
+
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-    Activity,
-    BarChart3,
-    BookOpen,
-    CheckCircle,
-    Clock,
-    Eye,
-    MousePointer,
-    RefreshCw,
-    Star,
-    Target,
-    TrendingUp,
-    Users,
-    XCircle,
-    Zap
-} from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+
+/**
+ * 인바운드 마케팅 대시보드
+ * 리드 스코어링, 워크플로우, 콘텐츠 추천 성과를 종합적으로 모니터링
+ */
 
 interface MarketingAnalytics {
   period: {
@@ -82,7 +89,9 @@ export function InboundMarketingDashboard() {
   const fetchAnalytics = useCallback(async () => {
     try {
       setRefreshing(true);
-      const response = await fetch(`/api/marketing/analytics?days_back=${selectedPeriod}&include_details=true`);
+      const response = await fetch(
+        `/api/marketing/analytics?days_back=${selectedPeriod}&include_details=true`
+      );
       const result = await response.json();
 
       if (!response.ok) {
@@ -91,10 +100,11 @@ export function InboundMarketingDashboard() {
 
       setAnalytics(result.data);
       setError(null);
-
     } catch (err) {
       console.error('Analytics fetch error:', err);
-      setError(err instanceof Error ? err.message : '데이터를 불러오는데 실패했습니다.');
+      setError(
+        err instanceof Error ? err.message : '데이터를 불러오는데 실패했습니다.'
+      );
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -112,7 +122,9 @@ export function InboundMarketingDashboard() {
     return 'text-red-600 dark:text-red-400';
   };
 
-  const getHealthScoreBadgeVariant = (score: number): "default" | "secondary" | "destructive" | "outline" => {
+  const getHealthScoreBadgeVariant = (
+    score: number
+  ): 'default' | 'secondary' | 'destructive' | 'outline' => {
     if (score >= 80) return 'default';
     if (score >= 60) return 'secondary';
     if (score >= 40) return 'outline';
@@ -148,9 +160,9 @@ export function InboundMarketingDashboard() {
         <XCircle className="h-4 w-4" />
         <AlertDescription>
           {error}
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             className="ml-2"
             onClick={fetchAnalytics}
           >
@@ -179,26 +191,28 @@ export function InboundMarketingDashboard() {
             최근 {analytics.period.days_back}일간 마케팅 성과 분석
           </p>
         </div>
-        
+
         <div className="flex items-center gap-2">
-          <select 
-            value={selectedPeriod} 
-            onChange={(e) => setSelectedPeriod(Number(e.target.value))}
+          <select
+            value={selectedPeriod}
+            onChange={e => setSelectedPeriod(Number(e.target.value))}
             className="px-3 py-2 border rounded-md"
           >
             <option value={7}>7일</option>
             <option value={30}>30일</option>
             <option value={90}>90일</option>
           </select>
-          
-          <Button 
-            variant="outline" 
+
+          <Button
+            variant="outline"
             size="sm"
             onClick={fetchAnalytics}
             disabled={refreshing}
             className="gap-2"
           >
-            <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`}
+            />
             새로고침
           </Button>
         </div>
@@ -215,22 +229,32 @@ export function InboundMarketingDashboard() {
         <CardContent>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className={`text-4xl font-bold ${getHealthScoreColor(analytics.summary.marketing_health_score)}`}>
+              <div
+                className={`text-4xl font-bold ${getHealthScoreColor(analytics.summary.marketing_health_score)}`}
+              >
                 {analytics.summary.marketing_health_score}
               </div>
               <div>
-                <Badge variant={getHealthScoreBadgeVariant(analytics.summary.marketing_health_score)}>
-                  {analytics.summary.marketing_health_score >= 80 ? '우수' :
-                   analytics.summary.marketing_health_score >= 60 ? '양호' :
-                   analytics.summary.marketing_health_score >= 40 ? '개선필요' : '위험'}
+                <Badge
+                  variant={getHealthScoreBadgeVariant(
+                    analytics.summary.marketing_health_score
+                  )}
+                >
+                  {analytics.summary.marketing_health_score >= 80
+                    ? '우수'
+                    : analytics.summary.marketing_health_score >= 60
+                      ? '양호'
+                      : analytics.summary.marketing_health_score >= 40
+                        ? '개선필요'
+                        : '위험'}
                 </Badge>
                 <div className="text-sm text-gray-600 mt-1">
                   전체 마케팅 성과 종합 점수
                 </div>
               </div>
             </div>
-            <Progress 
-              value={analytics.summary.marketing_health_score} 
+            <Progress
+              value={analytics.summary.marketing_health_score}
               className="w-32"
             />
           </div>
@@ -245,8 +269,12 @@ export function InboundMarketingDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">총 리드</p>
-                <p className="text-2xl font-bold">{analytics.lead_scoring.total_leads}</p>
-                <p className="text-xs text-gray-500">최근 {analytics.period.days_back}일</p>
+                <p className="text-2xl font-bold">
+                  {analytics.lead_scoring.total_leads}
+                </p>
+                <p className="text-xs text-gray-500">
+                  최근 {analytics.period.days_back}일
+                </p>
               </div>
               <Users className="h-8 w-8 text-blue-500" />
             </div>
@@ -259,10 +287,14 @@ export function InboundMarketingDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">리드 전환율</p>
-                <p className="text-2xl font-bold">{analytics.lead_scoring.conversion_rate}</p>
+                <p className="text-2xl font-bold">
+                  {analytics.lead_scoring.conversion_rate}
+                </p>
                 <div className="flex items-center gap-1 text-xs">
                   <Target className="h-3 w-3" />
-                  <span>자격 리드: {analytics.lead_scoring.qualified_leads}</span>
+                  <span>
+                    자격 리드: {analytics.lead_scoring.qualified_leads}
+                  </span>
                 </div>
               </div>
               <TrendingUp className="h-8 w-8 text-green-500" />
@@ -276,7 +308,9 @@ export function InboundMarketingDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">워크플로우 완료율</p>
-                <p className="text-2xl font-bold">{analytics.workflow_performance.completion_rate}</p>
+                <p className="text-2xl font-bold">
+                  {analytics.workflow_performance.completion_rate}
+                </p>
                 <p className="text-xs text-gray-500">
                   {analytics.workflow_performance.total_executions}개 실행
                 </p>
@@ -291,10 +325,15 @@ export function InboundMarketingDashboard() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">콘텐츠 클릭률</p>
-                <p className="text-2xl font-bold">{analytics.content_recommendations.click_rate}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  콘텐츠 클릭률
+                </p>
+                <p className="text-2xl font-bold">
+                  {analytics.content_recommendations.click_rate}
+                </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {analytics.content_recommendations.total_recommendations}개 추천
+                  {analytics.content_recommendations.total_recommendations}개
+                  추천
                 </p>
               </div>
               <BookOpen className="h-8 w-8 text-indigo-500 dark:text-indigo-400" />
@@ -325,14 +364,23 @@ export function InboundMarketingDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {(analytics.summary?.key_insights || []).map((insight, index) => (
-                    <div key={index} className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                      <div className="w-6 h-6 bg-blue-100 dark:bg-blue-800 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-xs font-semibold text-blue-600 dark:text-blue-200">{index + 1}</span>
+                  {(analytics.summary?.key_insights || []).map(
+                    (insight, index) => (
+                      <div
+                        key={index}
+                        className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                      >
+                        <div className="w-6 h-6 bg-blue-100 dark:bg-blue-800 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <span className="text-xs font-semibold text-blue-600 dark:text-blue-200">
+                            {index + 1}
+                          </span>
+                        </div>
+                        <p className="text-sm text-blue-800 dark:text-blue-100">
+                          {insight}
+                        </p>
                       </div>
-                      <p className="text-sm text-blue-800 dark:text-blue-100">{insight}</p>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -347,14 +395,23 @@ export function InboundMarketingDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {(analytics.summary?.recommendations || []).map((recommendation, index) => (
-                    <div key={index} className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
-                      <div className="w-6 h-6 bg-amber-100 dark:bg-amber-800 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-xs font-semibold text-amber-600 dark:text-amber-200">{index + 1}</span>
+                  {(analytics.summary?.recommendations || []).map(
+                    (recommendation, index) => (
+                      <div
+                        key={index}
+                        className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg"
+                      >
+                        <div className="w-6 h-6 bg-amber-100 dark:bg-amber-800 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <span className="text-xs font-semibold text-amber-600 dark:text-amber-200">
+                            {index + 1}
+                          </span>
+                        </div>
+                        <p className="text-sm text-amber-800 dark:text-amber-100">
+                          {recommendation}
+                        </p>
                       </div>
-                      <p className="text-sm text-amber-800 dark:text-amber-100">{recommendation}</p>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -371,26 +428,42 @@ export function InboundMarketingDashboard() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">평균 리드 스코어</span>
-                    <span className="font-semibold">{analytics.lead_scoring.avg_lead_score}점</span>
+                    <span className="text-sm text-gray-600">
+                      평균 리드 스코어
+                    </span>
+                    <span className="font-semibold">
+                      {analytics.lead_scoring.avg_lead_score}점
+                    </span>
                   </div>
-                  
+
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">전환율</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      전환율
+                    </span>
                     <span className="font-semibold text-green-600 dark:text-green-400">
                       {analytics.lead_scoring?.conversion_rate || '0%'}
                     </span>
                   </div>
 
                   <div className="pt-2">
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">리드 전환 현황</div>
-                    <Progress 
-                      value={parseFloat((analytics.lead_scoring?.conversion_rate || '0').replace('%', ''))} 
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      리드 전환 현황
+                    </div>
+                    <Progress
+                      value={parseFloat(
+                        (
+                          analytics.lead_scoring?.conversion_rate || '0'
+                        ).replace('%', '')
+                      )}
                       className="h-2"
                     />
                     <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-                      <span>{analytics.lead_scoring?.qualified_leads || 0} 자격</span>
-                      <span>{analytics.lead_scoring?.total_leads || 0} 총계</span>
+                      <span>
+                        {analytics.lead_scoring?.qualified_leads || 0} 자격
+                      </span>
+                      <span>
+                        {analytics.lead_scoring?.total_leads || 0} 총계
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -403,14 +476,18 @@ export function InboundMarketingDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {(analytics.lead_scoring?.top_activities || []).map((activity, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                        <span className="text-sm font-semibold">{index + 1}</span>
+                  {(analytics.lead_scoring?.top_activities || []).map(
+                    (activity, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                          <span className="text-sm font-semibold">
+                            {index + 1}
+                          </span>
+                        </div>
+                        <span className="text-sm">{activity}</span>
                       </div>
-                      <span className="text-sm">{activity}</span>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -449,7 +526,8 @@ export function InboundMarketingDashboard() {
                   {analytics.workflow_performance.running_executions}
                 </div>
                 <p className="text-sm text-gray-600">
-                  평균 소요시간: {analytics.workflow_performance.avg_completion_time}
+                  평균 소요시간:{' '}
+                  {analytics.workflow_performance.avg_completion_time}
                 </p>
               </CardContent>
             </Card>
@@ -480,16 +558,26 @@ export function InboundMarketingDashboard() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm">총 실행 수</span>
-                  <span className="font-semibold">{analytics.workflow_performance.total_executions}</span>
+                  <span className="font-semibold">
+                    {analytics.workflow_performance.total_executions}
+                  </span>
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs">
-                    <span>완료: {analytics.workflow_performance.completion_rate}</span>
-                    <span>실패: {analytics.workflow_performance.failure_rate}</span>
+                    <span>
+                      완료: {analytics.workflow_performance.completion_rate}
+                    </span>
+                    <span>
+                      실패: {analytics.workflow_performance.failure_rate}
+                    </span>
                   </div>
-                  <Progress 
-                    value={parseFloat((analytics.workflow_performance?.completion_rate || '0').replace('%', ''))} 
+                  <Progress
+                    value={parseFloat(
+                      (
+                        analytics.workflow_performance?.completion_rate || '0'
+                      ).replace('%', '')
+                    )}
                     className="h-2"
                   />
                 </div>
@@ -512,7 +600,9 @@ export function InboundMarketingDashboard() {
                       <Eye className="h-4 w-4 text-blue-500" />
                       <span className="text-sm">조회율</span>
                     </div>
-                    <span className="font-semibold">{analytics.content_recommendations.view_rate}</span>
+                    <span className="font-semibold">
+                      {analytics.content_recommendations.view_rate}
+                    </span>
                   </div>
 
                   <div className="flex items-center justify-between">
@@ -520,7 +610,9 @@ export function InboundMarketingDashboard() {
                       <MousePointer className="h-4 w-4 text-green-500" />
                       <span className="text-sm">클릭률</span>
                     </div>
-                    <span className="font-semibold">{analytics.content_recommendations.click_rate}</span>
+                    <span className="font-semibold">
+                      {analytics.content_recommendations.click_rate}
+                    </span>
                   </div>
 
                   <div className="flex items-center justify-between">
@@ -528,7 +620,9 @@ export function InboundMarketingDashboard() {
                       <BarChart3 className="h-4 w-4 text-purple-500" />
                       <span className="text-sm">평균 관련도</span>
                     </div>
-                    <span className="font-semibold">{analytics.content_recommendations.avg_relevance_score}</span>
+                    <span className="font-semibold">
+                      {analytics.content_recommendations.avg_relevance_score}
+                    </span>
                   </div>
 
                   <div className="flex items-center justify-between">
@@ -536,7 +630,9 @@ export function InboundMarketingDashboard() {
                       <Star className="h-4 w-4 text-yellow-500" />
                       <span className="text-sm">AI 신뢰도</span>
                     </div>
-                    <span className="font-semibold">{analytics.content_recommendations.avg_ai_confidence}</span>
+                    <span className="font-semibold">
+                      {analytics.content_recommendations.avg_ai_confidence}
+                    </span>
                   </div>
                 </div>
               </CardContent>
@@ -548,11 +644,19 @@ export function InboundMarketingDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {(analytics.content_recommendations?.top_performing_content || []).map((content, index) => (
-                    <div key={content.content_id} className="p-3 border rounded-lg">
+                  {(
+                    analytics.content_recommendations?.top_performing_content ||
+                    []
+                  ).map((content, index) => (
+                    <div
+                      key={content.content_id}
+                      className="p-3 border rounded-lg"
+                    >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="font-medium text-sm mb-1">{content.content_title}</h4>
+                          <h4 className="font-medium text-sm mb-1">
+                            {content.content_title}
+                          </h4>
                           <div className="flex items-center gap-2">
                             <Badge variant="secondary" className="text-xs">
                               {content.content_type}
@@ -563,7 +667,9 @@ export function InboundMarketingDashboard() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="font-semibold text-green-600">{content.click_rate}%</div>
+                          <div className="font-semibold text-green-600">
+                            {content.click_rate}%
+                          </div>
                           <div className="text-xs text-gray-500">클릭률</div>
                         </div>
                       </div>

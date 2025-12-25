@@ -1,25 +1,36 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  ArrowRight,
+  Building,
+  CheckCircle,
+  Loader2,
+  Phone,
+} from 'lucide-react';
+import * as z from 'zod';
+
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { useRouter } from 'next/navigation';
+
+import { useUser } from '@clerk/nextjs';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+
 import { useToast } from '@/hooks/use-toast';
-import { useUser } from '@clerk/nextjs';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowRight, Building, CheckCircle, Loader2, Phone } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 const onboardingSchema = z.object({
   companyName: z
@@ -29,7 +40,10 @@ const onboardingSchema = z.object({
   phone: z
     .string()
     .min(1, '연락처를 입력해주세요.')
-    .regex(/^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/, '올바른 휴대폰 번호 형식을 입력해주세요. (예: 010-1234-5678)'),
+    .regex(
+      /^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/,
+      '올바른 휴대폰 번호 형식을 입력해주세요. (예: 010-1234-5678)'
+    ),
 });
 
 type OnboardingFormData = z.infer<typeof onboardingSchema>;
@@ -45,14 +59,14 @@ export default function OnboardingPage() {
     defaultValues: {
       companyName: '',
       phone: '',
-    }
+    },
   });
 
   const onSubmit = async (data: OnboardingFormData) => {
     if (!user) return;
-    
+
     setIsLoading(true);
-    
+
     try {
       // Clerk 사용자 메타데이터 업데이트
       await user.update({
@@ -102,7 +116,10 @@ export default function OnboardingPage() {
       <div className="w-full max-w-lg">
         {/* 헤더 */}
         <div className="text-center mb-8">
-          <Badge variant="outline" className="mb-4 bg-primary/10 text-primary border-primary/20">
+          <Badge
+            variant="outline"
+            className="mb-4 bg-primary/10 text-primary border-primary/20"
+          >
             <CheckCircle className="h-3 w-3 mr-1" />
             가입 완료
           </Badge>
@@ -110,8 +127,8 @@ export default function OnboardingPage() {
             프로필을 완성해주세요
           </h1>
           <p className="text-muted-foreground">
-            {user.firstName || '회원'}님, 환영합니다!<br />
-            더 나은 서비스를 위해 추가 정보를 입력해주세요.
+            {user.firstName || '회원'}님, 환영합니다!
+            <br />더 나은 서비스를 위해 추가 정보를 입력해주세요.
           </p>
         </div>
 
@@ -210,8 +227,12 @@ export default function OnboardingPage() {
 
         {/* 안내 문구 */}
         <p className="text-xs text-muted-foreground text-center mt-6">
-          입력하신 정보는 서비스 제공 목적으로만 사용되며,<br />
-          <a href="/privacy" className="text-primary hover:underline">개인정보처리방침</a>에 따라 안전하게 관리됩니다.
+          입력하신 정보는 서비스 제공 목적으로만 사용되며,
+          <br />
+          <a href="/privacy" className="text-primary hover:underline">
+            개인정보처리방침
+          </a>
+          에 따라 안전하게 관리됩니다.
         </p>
       </div>
     </div>

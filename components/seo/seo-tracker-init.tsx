@@ -6,7 +6,16 @@
 'use client';
 
 import { useEffect } from 'react';
-import { initializeSEOTracker, type AnalyticsConfig } from '@/lib/seo/analytics-tracker';
+
+import {
+  initializeSEOTracker,
+  type AnalyticsConfig,
+} from '@/lib/seo/analytics-tracker';
+
+/**
+ * SEO 추적기 초기화 컴포넌트
+ * 전체 사이트에서 SEO 성과 측정을 위한 글로벌 초기화
+ */
 
 // Extract environment variables at module level for client components
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
@@ -32,13 +41,13 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
       customDomain: 'familyoffices.vip',
       trackingEnabled: IS_PRODUCTION,
       reportingInterval: 'daily',
-      ...config
+      ...config,
     };
 
     try {
       // SEO 추적기 초기화
       const tracker = initializeSEOTracker(defaultConfig);
-      
+
       // 실시간 추적 시작 (1분 간격)
       tracker.startRealTimeTracking(60000);
 
@@ -48,7 +57,7 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
         page_url: window.location.href,
         referrer: document.referrer,
         user_agent: navigator.userAgent,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
 
       // 페이지 가시성 변화 추적
@@ -56,7 +65,7 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
         if (document.visibilityState === 'hidden') {
           tracker.trackEvent('page_exit', {
             page_url: window.location.href,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
         }
       });
@@ -66,7 +75,7 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
         tracker.trackEvent('session_end', {
           page_url: window.location.href,
           session_duration: Date.now() - performance.timeOrigin,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
       });
 
@@ -83,18 +92,26 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
       if (window.location.pathname.includes('/admin/seo')) {
         const detail = event.detail;
         console.log('📊 SEO 메트릭 업데이트:', detail);
-        
+
         // 커스텀 이벤트로 대시보드에 알림
-        window.dispatchEvent(new CustomEvent('dashboard-metrics-update', {
-          detail: detail
-        }));
+        window.dispatchEvent(
+          new CustomEvent('dashboard-metrics-update', {
+            detail: detail,
+          })
+        );
       }
     };
 
-    window.addEventListener('seo-metrics-update', handleMetricsUpdate as EventListener);
-    
+    window.addEventListener(
+      'seo-metrics-update',
+      handleMetricsUpdate as EventListener
+    );
+
     return () => {
-      window.removeEventListener('seo-metrics-update', handleMetricsUpdate as EventListener);
+      window.removeEventListener(
+        'seo-metrics-update',
+        handleMetricsUpdate as EventListener
+      );
     };
   }, []);
 
@@ -107,7 +124,7 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
  */
 export function trackPageSEO(pagePath: string, keywords: string[] = []) {
   if (typeof window === 'undefined') return;
-  
+
   const tracker = (window as any).seoTracker;
   if (!tracker) return;
 
@@ -116,15 +133,22 @@ export function trackPageSEO(pagePath: string, keywords: string[] = []) {
     page_path: pagePath,
     target_keywords: keywords,
     meta_title: document.title,
-    meta_description: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
-    canonical_url: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || window.location.href,
+    meta_description:
+      document
+        .querySelector('meta[name="description"]')
+        ?.getAttribute('content') || '',
+    canonical_url:
+      document.querySelector('link[rel="canonical"]')?.getAttribute('href') ||
+      window.location.href,
     h1_count: document.querySelectorAll('h1').length,
     h2_count: document.querySelectorAll('h2').length,
     internal_links: document.querySelectorAll('a[href^="/"]').length,
-    external_links: document.querySelectorAll('a[href^="http"]:not([href*="familyoffices.vip"])').length,
+    external_links: document.querySelectorAll(
+      'a[href^="http"]:not([href*="familyoffices.vip"])'
+    ).length,
     image_count: document.querySelectorAll('img').length,
     word_count: document.body.innerText.split(/\s+/).length,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 }
 
@@ -133,7 +157,7 @@ export function trackPageSEO(pagePath: string, keywords: string[] = []) {
  */
 export function trackSearchEngineLanding() {
   if (typeof window === 'undefined') return;
-  
+
   const tracker = (window as any).seoTracker;
   if (!tracker) return;
 
@@ -143,10 +167,10 @@ export function trackSearchEngineLanding() {
     'naver.com': 'naver',
     'daum.net': 'daum',
     'bing.com': 'bing',
-    'yahoo.com': 'yahoo'
+    'yahoo.com': 'yahoo',
   };
 
-  const searchEngine = Object.entries(searchEngines).find(([domain]) => 
+  const searchEngine = Object.entries(searchEngines).find(([domain]) =>
     referrer.includes(domain)
   )?.[1];
 
@@ -155,9 +179,11 @@ export function trackSearchEngineLanding() {
     let searchQuery = '';
     try {
       const referrerUrl = new URL(referrer);
-      searchQuery = referrerUrl.searchParams.get('q') || 
-                   referrerUrl.searchParams.get('query') || 
-                   referrerUrl.searchParams.get('search') || '';
+      searchQuery =
+        referrerUrl.searchParams.get('q') ||
+        referrerUrl.searchParams.get('query') ||
+        referrerUrl.searchParams.get('search') ||
+        '';
     } catch (e) {
       // URL 파싱 실패시 무시
     }
@@ -167,7 +193,7 @@ export function trackSearchEngineLanding() {
       search_query: searchQuery,
       landing_page: window.location.pathname,
       referrer_url: referrer,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 }
@@ -177,7 +203,7 @@ export function trackSearchEngineLanding() {
  */
 export function trackContentEngagement() {
   if (typeof window === 'undefined') return;
-  
+
   const tracker = (window as any).seoTracker;
   if (!tracker) return;
 
@@ -188,7 +214,9 @@ export function trackContentEngagement() {
   let maxScroll = 0;
   const trackScroll = () => {
     const scrollPercent = Math.round(
-      (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+      (window.scrollY /
+        (document.documentElement.scrollHeight - window.innerHeight)) *
+        100
     );
     maxScroll = Math.max(maxScroll, scrollPercent);
   };
@@ -208,7 +236,7 @@ export function trackContentEngagement() {
     isEngaged = false;
 
     const engagementTime = Date.now() - startTime;
-    
+
     tracker.trackEvent('content_engagement', {
       page_url: window.location.pathname,
       engagement_time: engagementTime,
@@ -216,7 +244,7 @@ export function trackContentEngagement() {
       click_count: clickCount,
       page_title: document.title,
       content_type: getContentType(),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     // 이벤트 리스너 정리
@@ -237,7 +265,7 @@ export function trackContentEngagement() {
  */
 function getContentType(): string {
   const path = window.location.pathname;
-  
+
   if (path.startsWith('/blog/')) return 'blog';
   if (path.startsWith('/solutions')) return 'solutions';
   if (path.startsWith('/services')) return 'services';
@@ -246,7 +274,7 @@ function getContentType(): string {
   if (path.startsWith('/recruit')) return 'recruit';
   if (path.startsWith('/about')) return 'about';
   if (path === '/') return 'homepage';
-  
+
   return 'other';
 }
 

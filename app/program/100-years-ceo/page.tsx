@@ -1,18 +1,20 @@
+'use client';
+
 import {
-  Crown,
   ArrowRight,
-  Users,
-  Calendar,
-  MapPin,
-  Clock,
   Award,
-  TrendingUp,
+  BookOpen,
   Building2,
+  Calendar,
+  CheckCircle2,
+  Clock,
+  Crown,
   GraduationCap,
   Handshake,
+  MapPin,
   Target,
-  BookOpen,
-  CheckCircle2,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
@@ -24,14 +26,7 @@ import { Button } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
-export const metadata: Metadata = {
-  title: '100년 기업 차세대 CEO 과정 | 지속가능한 경영의 시작',
-  description:
-    '100년 기업을 꿈꾸는 차세대 CEO를 위한 특별한 프로그램. 지속가능한 경영전략, 가업승계, ESG 경영 등 미래를 준비하는 실무교육과 최고급 네트워킹을 제공합니다.',
-  keywords:
-    '100년 기업, 차세대 CEO, 가업승계, 지속가능경영, ESG, 경영전략, CEO 교육, 네트워킹',
-};
+import { PremiumContentGuard } from '@/components/premium-content-guard';
 
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
@@ -89,11 +84,11 @@ function HeroSection() {
             className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
           >
             <Link
-              href="/contact"
+              href="/structure-check"
               className="flex items-center"
-              aria-label="프로그램 참가 신청"
+              aria-label="구조 점검 요청"
             >
-              프로그램 참가 신청
+              구조 점검 요청
               <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
             </Link>
           </Button>
@@ -377,8 +372,8 @@ function CTASection() {
             asChild
             className="font-bold shadow-lg px-8 py-4 text-lg"
           >
-            <Link href="/contact" className="flex items-center">
-              프로그램 참가 신청
+            <Link href="/structure-check" className="flex items-center">
+              구조 점검 요청
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
@@ -406,13 +401,15 @@ export default function HundredYearsCEOPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20">
-        <HeroSection />
-        <ProgramOverviewSection />
-        <CurriculumSection />
-        <BenefitsSection />
-        <CTASection />
-      </main>
+      <PremiumContentGuard>
+        <main className="pt-20">
+          <HeroSection />
+          <ProgramOverviewSection />
+          <CurriculumSection />
+          <BenefitsSection />
+          <CTASection />
+        </main>
+      </PremiumContentGuard>
       <Footer />
     </div>
   );

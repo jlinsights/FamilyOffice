@@ -232,13 +232,17 @@ export function calculateMaxDrawdown(values: number[]): number {
   }
 
   if (values.length === 0 || values[0] === undefined) return 0;
-  
+
   let maxDrawdown = 0;
   let peak = values[0];
 
   for (let i = 1; i < values.length; i++) {
     const currentValue = values[i];
-    if (currentValue !== undefined && peak !== undefined && currentValue > peak) {
+    if (
+      currentValue !== undefined &&
+      peak !== undefined &&
+      currentValue > peak
+    ) {
       peak = currentValue;
     }
 
@@ -280,7 +284,7 @@ export function calculateBeta(
   for (let i = 0; i < portfolioReturns.length; i++) {
     const portfolioReturn = portfolioReturns[i];
     const benchmarkReturn = benchmarkReturns[i];
-    
+
     if (portfolioReturn !== undefined && benchmarkReturn !== undefined) {
       const portfolioDeviation = portfolioReturn - portfolioMean;
       const benchmarkDeviation = benchmarkReturn - benchmarkMean;
@@ -360,12 +364,14 @@ export function calculatePerformanceMetrics(
     weekly: dailyReturn * 7 * 100,
     monthly: dailyReturn * 30 * 100,
     quarterly: dailyReturn * 90 * 100,
-    yearly: (startValue !== undefined && endValue !== undefined) 
-      ? calculateAnnualizedReturn(startValue, endValue, totalDays / 365)
-      : 0,
-    ytd: (startValue !== undefined && endValue !== undefined && startValue !== 0)
-      ? (endValue / startValue - 1) * 100
-      : 0,
+    yearly:
+      startValue !== undefined && endValue !== undefined
+        ? calculateAnnualizedReturn(startValue, endValue, totalDays / 365)
+        : 0,
+    ytd:
+      startValue !== undefined && endValue !== undefined && startValue !== 0
+        ? (endValue / startValue - 1) * 100
+        : 0,
   };
 
   // Calculate volatility
@@ -387,13 +393,17 @@ export function calculatePerformanceMetrics(
   const beta = calculateBeta(portfolioReturns, benchmarkReturns);
   const benchmarkStartValue = benchmarkValues[0];
   const benchmarkEndValue = benchmarkValues[benchmarkValues.length - 1];
-  
+
   const alpha = calculateAlpha(
     returns.yearly,
     riskFreeRate * 100,
     beta,
-    (benchmarkStartValue !== undefined && benchmarkEndValue !== undefined)
-      ? calculateAnnualizedReturn(benchmarkStartValue, benchmarkEndValue, totalDays / 365)
+    benchmarkStartValue !== undefined && benchmarkEndValue !== undefined
+      ? calculateAnnualizedReturn(
+          benchmarkStartValue,
+          benchmarkEndValue,
+          totalDays / 365
+        )
       : 0
   );
 
@@ -444,7 +454,7 @@ export function calculateRebalancing(
     const currentWeight = currentAllocation[symbol] || 0;
     const targetWeight = targetAllocation[symbol];
     if (targetWeight === undefined) return;
-    
+
     const difference = currentWeight - targetWeight;
 
     let action: 'BUY' | 'SELL' | 'HOLD' = 'HOLD';

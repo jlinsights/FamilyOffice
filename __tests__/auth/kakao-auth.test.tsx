@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import { KakaoLoginButton } from '@/components/auth/kakao-login-button';
 
 // Mock KakaoAuthService
@@ -31,16 +32,16 @@ describe('Kakao Authentication Flow', () => {
   describe('KakaoLoginButton', () => {
     it('renders kakao login button correctly', () => {
       render(<KakaoLoginButton />);
-      
+
       expect(screen.getByRole('button')).toBeInTheDocument();
       expect(screen.getByText('카카오로 로그인')).toBeInTheDocument();
     });
 
     it('redirects to kakao oauth when clicked', async () => {
       const user = userEvent.setup();
-      
+
       render(<KakaoLoginButton />);
-      
+
       const button = screen.getByRole('button');
       await user.click(button);
 
@@ -54,16 +55,18 @@ describe('Kakao Authentication Flow', () => {
 
     it('includes correct oauth parameters', async () => {
       const user = userEvent.setup();
-      
+
       render(<KakaoLoginButton />);
-      
+
       const button = screen.getByRole('button');
       await user.click(button);
 
       await waitFor(() => {
         const callArgs = mockOpen.mock.calls[0][0];
         expect(callArgs).toContain('client_id=test-key');
-        expect(callArgs).toContain('redirect_uri=https://familyoffices.vip/oauth');
+        expect(callArgs).toContain(
+          'redirect_uri=https://familyoffices.vip/oauth'
+        );
         expect(callArgs).toContain('response_type=code');
         expect(callArgs).toContain('state=');
       });
@@ -71,11 +74,11 @@ describe('Kakao Authentication Flow', () => {
 
     it('shows error when kakao key is missing', async () => {
       process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY = '';
-      
+
       const user = userEvent.setup();
-      
+
       render(<KakaoLoginButton />);
-      
+
       const button = screen.getByRole('button');
       await user.click(button);
 

@@ -8,11 +8,11 @@ export default function TestButton() {
   };
 
   return (
-    <button 
+    <button
       className="bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
       onClick={handleClick}
     >
       테스트 버튼
     </button>
   );
-} 
+}

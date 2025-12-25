@@ -6,7 +6,6 @@
  * - TTFB (Time to First Byte): 서버 응답 시간
  * - FCP (First Contentful Paint): 최초 콘텐츠 렌더링
  */
-
 import { NextWebVitalsMetric } from 'next/app';
 
 export interface WebVitalsMetric {
@@ -92,7 +91,10 @@ class WebVitalsMonitoring {
   /**
    * Web Vitals 메트릭 등급 계산
    */
-  private calculateRating(name: string, value: number): 'good' | 'needs-improvement' | 'poor' {
+  private calculateRating(
+    name: string,
+    value: number
+  ): 'good' | 'needs-improvement' | 'poor' {
     const thresholds = {
       LCP: { good: 2500, poor: 4000 },
       FID: { good: 100, poor: 300 },
@@ -119,10 +121,15 @@ class WebVitalsMonitoring {
     const nav = navigator as Navigator & {
       connection?: { effectiveType: string; downlink: number; rtt: number };
       mozConnection?: { effectiveType: string; downlink: number; rtt: number };
-      webkitConnection?: { effectiveType: string; downlink: number; rtt: number };
+      webkitConnection?: {
+        effectiveType: string;
+        downlink: number;
+        rtt: number;
+      };
     };
-    const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
-    
+    const connection =
+      nav.connection || nav.mozConnection || nav.webkitConnection;
+
     if (!connection) return null;
 
     return JSON.stringify({
@@ -178,7 +185,9 @@ class WebVitalsMonitoring {
   /**
    * 임계값 정보 반환
    */
-  private getThresholdInfo(name: string): { good: number; poor: number } | null {
+  private getThresholdInfo(
+    name: string
+  ): { good: number; poor: number } | null {
     const thresholds = {
       LCP: { good: 2500, poor: 4000 },
       FID: { good: 100, poor: 300 },
@@ -252,12 +261,14 @@ class WebVitalsMonitoring {
     metricName: WebVitalsMetric['name']
   ): { value: number; rating: 'good' | 'needs-improvement' | 'poor' } {
     const filteredMetrics = metrics.filter(m => m.name === metricName);
-    
+
     if (filteredMetrics.length === 0) {
       return { value: 0, rating: 'good' };
     }
 
-    const average = filteredMetrics.reduce((sum, m) => sum + m.value, 0) / filteredMetrics.length;
+    const average =
+      filteredMetrics.reduce((sum, m) => sum + m.value, 0) /
+      filteredMetrics.length;
     const rating = this.calculateRating(metricName, average);
 
     return { value: Math.round(average), rating };
@@ -266,14 +277,16 @@ class WebVitalsMonitoring {
   /**
    * 전체 성능 점수 계산 (Google Lighthouse 스타일)
    */
-  private calculatePerformanceScore(averageScores: Record<string, { value: number; rating: string }>): number {
+  private calculatePerformanceScore(
+    averageScores: Record<string, { value: number; rating: string }>
+  ): number {
     const weights = {
-      lcp: 0.25,  // 25%
-      fid: 0.10,  // 10%
-      cls: 0.25,  // 25%
-      fcp: 0.15,  // 15%
-      ttfb: 0.10, // 10%
-      inp: 0.15,  // 15%
+      lcp: 0.25, // 25%
+      fid: 0.1, // 10%
+      cls: 0.25, // 25%
+      fcp: 0.15, // 15%
+      ttfb: 0.1, // 10%
+      inp: 0.15, // 15%
     };
 
     let totalScore = 0;
@@ -309,7 +322,7 @@ class WebVitalsMonitoring {
 
     if (value <= threshold.good) return 1;
     if (value >= threshold.poor) return 0;
-    
+
     // Linear interpolation between good and poor
     return 1 - (value - threshold.good) / (threshold.poor - threshold.good);
   }
@@ -325,52 +338,65 @@ class WebVitalsMonitoring {
     averageCLS: number;
     performanceGrade: string;
   }> {
-    const pageGroups = metrics.reduce((groups, metric) => {
-      if (!groups[metric.url]) {
-        groups[metric.url] = [];
-      }
-      groups[metric.url]!.push(metric);
-      return groups;
-    }, {} as Record<string, WebVitalsMetric[]>);
+    const pageGroups = metrics.reduce(
+      (groups, metric) => {
+        if (!groups[metric.url]) {
+          groups[metric.url] = [];
+        }
+        groups[metric.url]!.push(metric);
+        return groups;
+      },
+      {} as Record<string, WebVitalsMetric[]>
+    );
 
-    return Object.entries(pageGroups).map(([url, pageMetrics]) => {
-      const lcpMetrics = pageMetrics.filter(m => m.name === 'LCP');
-      const fidMetrics = pageMetrics.filter(m => m.name === 'FID');
-      const clsMetrics = pageMetrics.filter(m => m.name === 'CLS');
+    return Object.entries(pageGroups)
+      .map(([url, pageMetrics]) => {
+        const lcpMetrics = pageMetrics.filter(m => m.name === 'LCP');
+        const fidMetrics = pageMetrics.filter(m => m.name === 'FID');
+        const clsMetrics = pageMetrics.filter(m => m.name === 'CLS');
 
-      const averageLCP = lcpMetrics.length > 0 
-        ? lcpMetrics.reduce((sum, m) => sum + m.value, 0) / lcpMetrics.length 
-        : 0;
-      const averageFID = fidMetrics.length > 0 
-        ? fidMetrics.reduce((sum, m) => sum + m.value, 0) / fidMetrics.length 
-        : 0;
-      const averageCLS = clsMetrics.length > 0 
-        ? clsMetrics.reduce((sum, m) => sum + m.value, 0) / clsMetrics.length 
-        : 0;
+        const averageLCP =
+          lcpMetrics.length > 0
+            ? lcpMetrics.reduce((sum, m) => sum + m.value, 0) /
+              lcpMetrics.length
+            : 0;
+        const averageFID =
+          fidMetrics.length > 0
+            ? fidMetrics.reduce((sum, m) => sum + m.value, 0) /
+              fidMetrics.length
+            : 0;
+        const averageCLS =
+          clsMetrics.length > 0
+            ? clsMetrics.reduce((sum, m) => sum + m.value, 0) /
+              clsMetrics.length
+            : 0;
 
-      // 페이지 등급 계산
-      const lcpGrade = this.calculateRating('LCP', averageLCP);
-      const fidGrade = this.calculateRating('FID', averageFID);
-      const clsGrade = this.calculateRating('CLS', averageCLS);
-      
-      const grades = [lcpGrade, fidGrade, clsGrade];
-      const poorCount = grades.filter(g => g === 'poor').length;
-      const needsImprovementCount = grades.filter(g => g === 'needs-improvement').length;
-      
-      let performanceGrade = 'A';
-      if (poorCount > 0) performanceGrade = 'F';
-      else if (needsImprovementCount >= 2) performanceGrade = 'C';
-      else if (needsImprovementCount === 1) performanceGrade = 'B';
+        // 페이지 등급 계산
+        const lcpGrade = this.calculateRating('LCP', averageLCP);
+        const fidGrade = this.calculateRating('FID', averageFID);
+        const clsGrade = this.calculateRating('CLS', averageCLS);
 
-      return {
-        url,
-        sampleCount: pageMetrics.length,
-        averageLCP: Math.round(averageLCP),
-        averageFID: Math.round(averageFID),
-        averageCLS: Math.round(averageCLS * 1000) / 1000,
-        performanceGrade,
-      };
-    }).sort((a, b) => b.sampleCount - a.sampleCount);
+        const grades = [lcpGrade, fidGrade, clsGrade];
+        const poorCount = grades.filter(g => g === 'poor').length;
+        const needsImprovementCount = grades.filter(
+          g => g === 'needs-improvement'
+        ).length;
+
+        let performanceGrade = 'A';
+        if (poorCount > 0) performanceGrade = 'F';
+        else if (needsImprovementCount >= 2) performanceGrade = 'C';
+        else if (needsImprovementCount === 1) performanceGrade = 'B';
+
+        return {
+          url,
+          sampleCount: pageMetrics.length,
+          averageLCP: Math.round(averageLCP),
+          averageFID: Math.round(averageFID),
+          averageCLS: Math.round(averageCLS * 1000) / 1000,
+          performanceGrade,
+        };
+      })
+      .sort((a, b) => b.sampleCount - a.sampleCount);
   }
 
   /**
@@ -394,12 +420,14 @@ class WebVitalsMonitoring {
 
     // 각 메트릭별 최근 평균 계산
     const metricTypes = ['LCP', 'FID', 'CLS', 'FCP', 'TTFB', 'INP'] as const;
-    
+
     metricTypes.forEach(metricType => {
       const recentForType = recentMetrics.filter(m => m.name === metricType);
       if (recentForType.length < 3) return; // 최소 3개 샘플 필요
 
-      const average = recentForType.reduce((sum, m) => sum + m.value, 0) / recentForType.length;
+      const average =
+        recentForType.reduce((sum, m) => sum + m.value, 0) /
+        recentForType.length;
       const rating = this.calculateRating(metricType, average);
       const thresholds = this.getThresholdInfo(metricType);
 
@@ -461,10 +489,16 @@ export function reportWebVitals(metric: NextWebVitalsMetric): void {
   webVitalsMonitoring.recordMetric(metric);
 
   // Google Analytics에 메트릭 전송 (선택적)
-  if (typeof window !== 'undefined' && (window as any).gtag && process.env.NODE_ENV === 'production') {
+  if (
+    typeof window !== 'undefined' &&
+    (window as any).gtag &&
+    process.env.NODE_ENV === 'production'
+  ) {
     (window as any).gtag('event', metric.name, {
       custom_map: { metric_id: 'custom_metric' },
-      value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+      value: Math.round(
+        metric.name === 'CLS' ? metric.value * 1000 : metric.value
+      ),
       metric_id: metric.id,
       metric_value: metric.value,
       metric_delta: (metric as any).delta || 0,

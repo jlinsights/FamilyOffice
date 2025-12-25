@@ -11,28 +11,32 @@ Based on the comprehensive analysis of Nanum Partners documents, I've identified
 The Nanum Partners documents reveal a sophisticated approach to business certification that goes beyond basic certification types:
 
 #### **GFC Level System (단계별 컨설팅 강의)**
+
 - **Level UP III**: Advanced business strategy and legal consulting
 - **4 Phases of Development**:
   1. Business Establishment (기업설립이란)
-  2. Legal Framework (법인설립/개인제도/근로계약)  
+  2. Legal Framework (법인설립/개인제도/근로계약)
   3. Business Scaling (ISO certification training)
   4. Exit Strategy (주식지분이전)
 
 ### 2. Comprehensive Business Certification Categories
 
 #### **SPECUP Category** (핵심 인증)
+
 - **연구소 운영**: R&D facility certifications with specific personnel requirements
 - **특허/출원지원**: IP management and patent application support
 - **시스템 인증관리**: ISO 9001, 14001, 45001 certifications
 - **KS/ISO/MOD 등**: Korean Standards and industry-specific certifications
 
 #### **무상 지원 Category** (Free Support Services)
+
 - **사업법 자금**: Business legal funding consultation
 - **R&D 지원사업**: R&D funding program navigation
 - **고용지원금사업**: Employment subsidy programs
 - **교육 무상지원사업**: Free training programs
 
 #### **정책/삼속전략 Category** (Policy Strategy)
+
 - **독수출적법인 설립**: Export-exclusive corporation setup
 - **자금주식 활용**: Equity and funding utilization
 - **상속공제 활용**: Inheritance tax deduction strategies
@@ -43,20 +47,21 @@ The Nanum Partners documents reveal a sophisticated approach to business certifi
 The documents provide detailed insights into major certification types:
 
 #### **ISO Certifications**
+
 - **ISO 9001**: Quality management system
-- **ISO 14001**: Environmental management 
+- **ISO 14001**: Environmental management
 - **ISO 45001**: Occupational health & safety
-- **Additional Benefits**: 
+- **Additional Benefits**:
   - 중소기업대출금리 인하 (SME loan interest reduction)
   - 입찰가산점 (Bidding advantage points)
   - 정부조달 우선권 (Government procurement priority)
 
 #### **Korean Market-Specific Certifications**
-- **이노비즈** (Innobiz): 
+
+- **이노비즈** (Innobiz):
   - Technology innovation certification
   - 최대 10억원 보증 지원 (Up to 1 billion KRW guarantee)
   - 금리 우대 최대 1.5% (Interest rate preference up to 1.5%)
-  
 - **메인비즈** (Main-biz):
   - Management innovation certification
   - 신용보증 우대 (Credit guarantee preference)
@@ -65,6 +70,7 @@ The documents provide detailed insights into major certification types:
 ### 4. Disability Employment Certification Benefits
 
 Special focus on **장애인 표준사업장** (Standard Workplace for Disabled):
+
 - **근로자수 최소 10인 이상** (Minimum 10 employees)
 - **장애인 근로자 30% 이상** (30% or more disabled workers)
 - **Benefits**:
@@ -76,11 +82,13 @@ Special focus on **장애인 표준사업장** (Standard Workplace for Disabled)
 ### 5. Government Support Programs
 
 #### **Corporate Tax Benefits**
+
 - **Research & Development**: Up to 50% tax deduction
 - **Export Companies**: Special tax reduction for export-focused companies
 - **Green/Environmental**: Additional benefits for eco-friendly certifications
 
 #### **Financial Support**
+
 - **정책자금 우선지원** (Priority policy funding)
 - **금리우대** (Interest rate preferences)
 - **신용보증 우대** (Credit guarantee preferences)
@@ -152,8 +160,8 @@ const businessGrowthRoadmap = [
       '법인설립 컨설팅',
       '사업자등록 지원',
       '초기자본 확보 전략',
-      'CEO 보상체계 설계'
-    ]
+      'CEO 보상체계 설계',
+    ],
   },
   {
     phase: 2,
@@ -162,8 +170,8 @@ const businessGrowthRoadmap = [
       '기업인증 취득 전략',
       'R&D 투자 최적화',
       '정책자금 활용',
-      'M&A 기회 탐색'
-    ]
+      'M&A 기회 탐색',
+    ],
   },
   {
     phase: 3,
@@ -172,19 +180,14 @@ const businessGrowthRoadmap = [
       'ISO 인증 획득',
       '수출기업 전환',
       '상속/증여 계획',
-      '기업가치 극대화'
-    ]
+      '기업가치 극대화',
+    ],
   },
   {
     phase: 4,
     title: 'Exit 전략',
-    items: [
-      'IPO 준비',
-      'M&A 매각',
-      '가업승계',
-      '지분이전 최적화'
-    ]
-  }
+    items: ['IPO 준비', 'M&A 매각', '가업승계', '지분이전 최적화'],
+  },
 ];
 ```
 
@@ -200,18 +203,18 @@ const enhancedIndustryStrategies = [
     certificationBenefits: {
       '스마트공장 구축비용': '최대 50% 지원',
       '설비투자 세액공제': '10% 추가',
-      '고용창출 지원금': '인당 연 720만원'
-    }
+      '고용창출 지원금': '인당 연 720만원',
+    },
   },
   {
     industry: '수출기업',
     recommended: ['무역업 등록', 'AEO 인증', 'ISO 인증'],
     certificationBenefits: {
       '수출금융 우대': '금리 1.5% 인하',
-      '무역보증보험': '한도 200% 확대',
-      '관세 간소화': '신속통관 혜택'
-    }
-  }
+      무역보증보험: '한도 200% 확대',
+      '관세 간소화': '신속통관 혜택',
+    },
+  },
 ];
 ```
 
@@ -225,14 +228,14 @@ const certificationBenefitsCalculator = {
     'annualRevenue',
     'numberOfEmployees',
     'rdInvestmentRatio',
-    'exportRatio'
+    'exportRatio',
   ],
   calculations: {
     taxSavings: 'Calculate based on certification type',
     fundingEligibility: 'Show eligible funding programs',
     interestSavings: 'Calculate loan interest reductions',
-    bidPoints: 'Show government bidding advantages'
-  }
+    bidPoints: 'Show government bidding advantages',
+  },
 };
 ```
 
@@ -247,7 +250,7 @@ const certificationTimeline = [
   { month: 6, action: 'ISO 9001 준비 시작' },
   { month: 12, action: '이노비즈 인증 도전' },
   { month: 18, action: '수출기업 등록' },
-  { month: 24, action: '글로벌 인증 취득' }
+  { month: 24, action: '글로벌 인증 취득' },
 ];
 ```
 
@@ -264,8 +267,8 @@ const expertServices = [
       '법인설립부터 Exit까지',
       '세무/법률 통합 자문',
       '정책자금 매칭',
-      'M&A 자문'
-    ]
+      'M&A 자문',
+    ],
   },
   {
     service: '인증 패키지 컨설팅',
@@ -274,9 +277,9 @@ const expertServices = [
       '인증 간 시너지 분석',
       '통합 준비 로드맵',
       '비용 최적화',
-      '사후관리 시스템'
-    ]
-  }
+      '사후관리 시스템',
+    ],
+  },
 ];
 ```
 
@@ -292,18 +295,14 @@ const successStories = [
     results: [
       '법인세 연 3,000만원 절감',
       'R&D 자금 5억원 확보',
-      '정부입찰 가점으로 10억원 수주'
-    ]
+      '정부입찰 가점으로 10억원 수주',
+    ],
   },
   {
     company: '서비스업 B사',
     scenario: '장애인 표준사업장 전환',
-    results: [
-      '고용장려금 연 2억원',
-      '법인세 50% 감면',
-      '기업 이미지 개선'
-    ]
-  }
+    results: ['고용장려금 연 2억원', '법인세 50% 감면', '기업 이미지 개선'],
+  },
 ];
 ```
 

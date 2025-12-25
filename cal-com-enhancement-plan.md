@@ -1,6 +1,7 @@
 # 🗓️ Cal.com 통합 개선 계획
 
 ## 현재 문제점
+
 - 외부 링크 방식으로만 구현 (`window.open`)
 - 사용자가 사이트를 떠나야 함 (이탈률 증가)
 - 서비스별 맞춤 예약 시스템 없음
@@ -9,6 +10,7 @@
 ## 개선 계획
 
 ### 1. 인라인 임베딩 구현
+
 ```typescript
 // components/cal-com-embedded.tsx
 'use client';
@@ -27,8 +29,8 @@ interface CalComEmbeddedProps {
   };
 }
 
-export function CalComEmbedded({ 
-  calLink, 
+export function CalComEmbedded({
+  calLink,
   height = "500px",
   config = {}
 }: CalComEmbeddedProps) {
@@ -61,25 +63,26 @@ export function CalComEmbedded({
 ```
 
 ### 2. 서비스별 맞춤 예약 시스템
+
 ```typescript
 // lib/cal-com-config.ts
 export const calComLinks = {
   // 일반 상담
   general: 'familyoffice/30min',
-  
+
   // 서비스별 전문 상담
   familyOffice: 'familyoffice/family-office-consultation',
   succession: 'familyoffice/succession-planning',
   taxOptimization: 'familyoffice/tax-strategy',
   riskManagement: 'familyoffice/risk-management',
-  
+
   // 교육 프로그램
   ceoProgram: 'familyoffice/ceo-program-info',
   seminar: 'familyoffice/seminar-registration',
-  
+
   // 긴급/VIP
   urgent: 'familyoffice/urgent-consultation',
-  vip: 'familyoffice/vip-session'
+  vip: 'familyoffice/vip-session',
 };
 
 export const calComConfig = {
@@ -90,24 +93,21 @@ export const calComConfig = {
     questions: [
       '현재 관리 자산 규모',
       '관심 있는 서비스 영역',
-      '상담 희망 일정'
-    ]
+      '상담 희망 일정',
+    ],
   },
   succession: {
     title: '가업승계 전략 상담',
     description: '성공적인 가업승계를 위한 종합 전략 수립',
     duration: 90,
-    questions: [
-      '기업 업종 및 규모',
-      '승계 예정 시기',
-      '현재 가족 구성원 현황'
-    ]
+    questions: ['기업 업종 및 규모', '승계 예정 시기', '현재 가족 구성원 현황'],
   },
   // ... 기타 서비스별 설정
 };
 ```
 
 ### 3. 스마트 예약 위젯
+
 ```typescript
 // components/smart-booking-widget.tsx
 'use client';
@@ -122,10 +122,10 @@ interface SmartBookingWidgetProps {
   };
 }
 
-export function SmartBookingWidget({ 
+export function SmartBookingWidget({
   pageContext = 'homepage',
   serviceType,
-  userInfo 
+  userInfo
 }: SmartBookingWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(serviceType);
@@ -141,11 +141,11 @@ export function SmartBookingWidget({
   };
 
   const calLink = selectedService ? calComLinks[selectedService] : calComLinks.general;
-  
+
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {/* 플로팅 버튼 */}
-      <Button 
+      <Button
         onClick={() => setIsOpen(true)}
         className="rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all"
         size="lg"
@@ -162,7 +162,7 @@ export function SmartBookingWidget({
               FamilyOffice S 전문가와 1:1 맞춤 상담을 받아보세요
             </DialogDescription>
           </DialogHeader>
-          
+
           {/* 서비스 선택 */}
           <div className="mb-4">
             <Select value={selectedService} onValueChange={setSelectedService}>

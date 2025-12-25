@@ -7,11 +7,11 @@ export interface FeatureFlags {
   enableContentOptimization: boolean;
   enableCrossDomainRouting: boolean;
   enableDynamicStructuredData: boolean;
-  
+
   // Performance Features
   enableServerSideCaching: boolean;
   enableLazyLoading: boolean;
-  
+
   // Monitoring Features
   enableErrorTracking: boolean;
   enablePerformanceMonitoring: boolean;
@@ -20,21 +20,21 @@ export interface FeatureFlags {
 // Default feature flag configuration - Week 4 rollout (FINAL)
 const defaultFlags: FeatureFlags = {
   // Week 2: Basic SEO features (stable)
-  enableAdvancedSEO: true,           // ✅ Advanced metadata generation
+  enableAdvancedSEO: true, // ✅ Advanced metadata generation
   enableDynamicStructuredData: true, // ✅ Structured data
-  
+
   // Week 3: AI-powered features (stable)
-  enableAIKeywordOptimization: true,  // ✅ AI keyword optimization
-  enableContentOptimization: true,   // ✅ Content optimization
-  
+  enableAIKeywordOptimization: true, // ✅ AI keyword optimization
+  enableContentOptimization: true, // ✅ Content optimization
+
   // Week 4: FINAL advanced features (new)
-  enableRealtimeSEODashboard: true,   // 🆕 Real-time SEO dashboard
-  enableCrossDomainRouting: true,     // 🆕 Cross-domain routing
-  
+  enableRealtimeSEODashboard: true, // 🆕 Real-time SEO dashboard
+  enableCrossDomainRouting: true, // 🆕 Cross-domain routing
+
   // Performance features enabled by default
   enableServerSideCaching: true,
   enableLazyLoading: true,
-  
+
   // Monitoring enabled by default
   enableErrorTracking: true,
   enablePerformanceMonitoring: true,
@@ -43,7 +43,7 @@ const defaultFlags: FeatureFlags = {
 // Environment-based overrides
 const getEnvironmentFlags = (): Partial<FeatureFlags> => {
   const env = process.env.NODE_ENV;
-  
+
   // Development environment - enable all features
   if (env === 'development') {
     return {
@@ -55,7 +55,7 @@ const getEnvironmentFlags = (): Partial<FeatureFlags> => {
       enableDynamicStructuredData: true,
     };
   }
-  
+
   // Staging environment - enable some features
   if (process.env.VERCEL_ENV === 'preview') {
     return {
@@ -63,7 +63,7 @@ const getEnvironmentFlags = (): Partial<FeatureFlags> => {
       enableDynamicStructuredData: true,
     };
   }
-  
+
   // Production - use defaults or environment variable overrides
   return {
     enableAdvancedSEO: process.env.FEATURE_ADVANCED_SEO === 'true',
@@ -84,11 +84,11 @@ const featureFlags: FeatureFlags = {
 // Feature flag checker with logging
 export function isFeatureEnabled(feature: keyof FeatureFlags): boolean {
   const enabled = featureFlags[feature];
-  
+
   if (process.env.NODE_ENV === 'development') {
     console.log(`Feature ${feature}: ${enabled ? 'enabled' : 'disabled'}`);
   }
-  
+
   return enabled;
 }
 
@@ -98,7 +98,9 @@ export function getAllFeatureFlags(): FeatureFlags {
 }
 
 // Check multiple features at once
-export function areFeaturesEnabled(...features: (keyof FeatureFlags)[]): boolean {
+export function areFeaturesEnabled(
+  ...features: (keyof FeatureFlags)[]
+): boolean {
   return features.every(feature => isFeatureEnabled(feature));
 }
 

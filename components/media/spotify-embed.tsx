@@ -8,12 +8,12 @@ interface SpotifyEmbedProps {
   className?: string;
 }
 
-export function SpotifyEmbed({ 
-  uri, 
+export function SpotifyEmbed({
+  uri,
   title,
   height = 152,
   theme = 'dark',
-  className = '' 
+  className = '',
 }: SpotifyEmbedProps) {
   // Extract type and ID from Spotify URI
   const parts = uri.split(':');

@@ -17,6 +17,7 @@ These features are currently in development and have some TypeScript type infere
 ### TypeScript Type Errors
 
 The Supabase SSR client doesn't always properly infer table types in certain contexts, particularly with:
+
 - Complex query chains
 - Dynamic table name selection
 - Nested JSON field access
@@ -28,6 +29,7 @@ The Supabase SSR client doesn't always properly infer table types in certain con
 To fully resolve TypeScript errors:
 
 1. **Apply Database Migrations**:
+
    ```bash
    # Using Supabase CLI (if configured)
    supabase db push
@@ -37,6 +39,7 @@ To fully resolve TypeScript errors:
    ```
 
 2. **Regenerate Types**:
+
    ```bash
    npx supabase gen types typescript --project-id <your-project-id> > types/supabase.ts
    ```
@@ -58,9 +61,9 @@ The following tables are required (defined in migration files):
 ## Usage
 
 ```typescript
+import { getAIContentEngine } from '@/lib/marketing/ai-content-engine';
 import { getLeadScoringEngine } from '@/lib/marketing/lead-scoring-engine';
 import { getWorkflowEngine } from '@/lib/marketing/workflow-engine';
-import { getAIContentEngine } from '@/lib/marketing/ai-content-engine';
 
 // Track lead activity
 const scoringEngine = getLeadScoringEngine();
@@ -68,7 +71,7 @@ await scoringEngine.trackActivity({
   hubspot_contact_id: 'contact-123',
   activity_type: 'page_view',
   activity_data: { url: '/services' },
-  score_impact: 5
+  score_impact: 5,
 });
 
 // Execute workflow
@@ -83,6 +86,7 @@ const recommendations = await contentEngine.getRecommendations('contact-123');
 ## Integration
 
 These engines integrate with:
+
 - **HubSpot CRM** - Contact data and engagement tracking
 - **Supabase** - Data persistence and real-time updates
 - **Next.js API Routes** - HTTP endpoints in `app/api/marketing/`
@@ -90,6 +94,7 @@ These engines integrate with:
 ## Security
 
 All tables have Row Level Security (RLS) enabled:
+
 - Admin users (jhlim725@gmail.com) have full access
 - Regular users can only view their own data
 - Service role has full access for backend operations

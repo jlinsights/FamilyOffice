@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
+import { NextResponse } from 'next/server';
+
 import { beehiiv } from '@/lib/beehiiv/client';
 
 // Vercel Cron Job handler for newsletter synchronization
@@ -17,18 +18,18 @@ export async function GET() {
       return NextResponse.json({
         success: true,
         message: 'Beehiiv API not configured',
-        synced: false
+        synced: false,
       });
     }
 
     // Fetch latest posts from Beehiiv
     const response = await beehiiv.getRecentPosts(10);
-    
+
     if (!response.data || response.data.length === 0) {
       return NextResponse.json({
         success: true,
         message: 'No posts to sync',
-        synced: false
+        synced: false,
       });
     }
 
@@ -36,26 +37,30 @@ export async function GET() {
     // 1. Cache the posts in a database
     // 2. Send notifications about new posts
     // 3. Update any statistics
-    
+
     // For now, we'll just log the sync
-    console.log(`Newsletter sync completed: ${response.data.length} posts found`);
-    
+    console.log(
+      `Newsletter sync completed: ${response.data.length} posts found`
+    );
+
     return NextResponse.json({
       success: true,
       message: 'Newsletter sync completed',
       synced: true,
       postsCount: response.data.length,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
     console.error('Newsletter sync error:', error);
-    
-    return NextResponse.json({
-      success: false,
-      error: 'Failed to sync newsletter',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to sync newsletter',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }
 

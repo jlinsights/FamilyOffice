@@ -1,10 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import {
-  checkRateLimit,
-  withRateLimit,
-  rateLimitConfig,
-} from '../rate-limit';
+import { checkRateLimit, withRateLimit, rateLimitConfig } from '../rate-limit';
 
 // Mock Redis and NodeCache
 jest.mock('ioredis', () => {
@@ -35,7 +31,7 @@ describe('Rate Limiting System', () => {
       expect(rateLimitConfig).toHaveProperty('api');
       expect(rateLimitConfig).toHaveProperty('form');
       expect(rateLimitConfig).toHaveProperty('auth');
-      
+
       expect(rateLimitConfig.api.max).toBe(100);
       expect(rateLimitConfig.form.max).toBe(5);
       expect(rateLimitConfig.auth.max).toBe(10);
@@ -52,17 +48,17 @@ describe('Rate Limiting System', () => {
       });
 
       const result = await checkRateLimit(request, 'api');
-      
+
       expect(result.success).toBe(true);
       expect(result.remaining).toBeGreaterThan(0);
     });
 
     it('should handle different rate limit types', async () => {
       const request = new NextRequest('http://localhost:3000/api/test');
-      
+
       const apiResult = await checkRateLimit(request, 'api');
       const formResult = await checkRateLimit(request, 'form');
-      
+
       expect(apiResult).toHaveProperty('success');
       expect(formResult).toHaveProperty('success');
     });
@@ -72,11 +68,11 @@ describe('Rate Limiting System', () => {
     it('should wrap a handler with rate limiting', async () => {
       const mockHandler = jest.fn().mockResolvedValue(new Response('OK'));
       const wrappedHandler = withRateLimit(mockHandler, 'api');
-      
+
       const request = new NextRequest('http://localhost:3000/api/test');
-      
+
       await wrappedHandler(request, {});
-      
+
       expect(mockHandler).toHaveBeenCalledWith(request);
     });
   });

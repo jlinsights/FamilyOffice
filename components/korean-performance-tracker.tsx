@@ -5,6 +5,7 @@
  * 한국 시장 맞춤형 성능 추적 컴포넌트
  */
 import { useEffect } from 'react';
+
 import { koreanPerformanceMonitor } from '@/lib/korean-performance-monitor';
 
 // Extract environment variables at module level for client components

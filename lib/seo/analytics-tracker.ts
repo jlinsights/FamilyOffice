@@ -10,20 +10,23 @@ export interface SEOMetrics {
     change: number;
     trend: 'up' | 'down' | 'stable';
   };
-  
+
   // 키워드 성과
   keywordPerformance: {
     totalKeywords: number;
-    topRankings: Record<string, {
-      position: number;
-      previousPosition: number;
-      clicks: number;
-      impressions: number;
-      ctr: number;
-    }>;
+    topRankings: Record<
+      string,
+      {
+        position: number;
+        previousPosition: number;
+        clicks: number;
+        impressions: number;
+        ctr: number;
+      }
+    >;
     improvementOpportunities: string[];
   };
-  
+
   // 기술적 SEO
   technicalSEO: {
     pageSpeed: {
@@ -38,7 +41,7 @@ export interface SEOMetrics {
     crawlErrors: number;
     indexedPages: number;
   };
-  
+
   // 컨텐츠 성과
   contentPerformance: {
     totalPages: number;
@@ -52,7 +55,7 @@ export interface SEOMetrics {
       seoScore: number;
     }>;
   };
-  
+
   // 전환 및 비즈니스 메트릭
   conversionMetrics: {
     organicConversions: number;
@@ -95,7 +98,7 @@ export class SEOAnalyticsTracker {
 
       // 커스텀 이벤트 리스너 설정
       this.setupCustomEventTracking();
-      
+
       // Core Web Vitals 측정
       this.measureCoreWebVitals();
     }
@@ -124,8 +127,8 @@ export class SEOAnalyticsTracker {
       page_location: window.location.href,
       custom_map: {
         custom_parameter_1: 'seo_source',
-        custom_parameter_2: 'content_category'
-      }
+        custom_parameter_2: 'content_category',
+      },
     });
 
     // SEO 관련 커스텀 이벤트 설정
@@ -137,34 +140,36 @@ export class SEOAnalyticsTracker {
    */
   private setupSEOEvents(): void {
     // 검색 엔진 랜딩 추적
-    if (document.referrer.includes('google.com') || 
-        document.referrer.includes('naver.com') || 
-        document.referrer.includes('daum.net')) {
+    if (
+      document.referrer.includes('google.com') ||
+      document.referrer.includes('naver.com') ||
+      document.referrer.includes('daum.net')
+    ) {
       this.trackEvent('seo_landing', {
         search_engine: this.getSearchEngine(document.referrer),
         landing_page: window.location.pathname,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
 
     // 내부 링크 클릭 추적
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', event => {
       const target = event.target as HTMLElement;
       const link = target.closest('a');
-      
+
       if (link && this.isInternalLink(link.href)) {
         this.trackEvent('internal_link_click', {
           from_page: window.location.pathname,
           to_page: new URL(link.href).pathname,
           link_text: link.textContent?.trim() || '',
-          link_position: this.getLinkPosition(link)
+          link_position: this.getLinkPosition(link),
         });
       }
     });
 
     // 스크롤 깊이 추적
     this.trackScrollDepth();
-    
+
     // 컨텐츠 읽기 시간 추적
     this.trackReadingTime();
   }
@@ -177,7 +182,7 @@ export class SEOAnalyticsTracker {
       window.gtag('event', eventName, {
         ...parameters,
         timestamp: new Date().toISOString(),
-        page_url: window.location.href
+        page_url: window.location.href,
       });
     }
 
@@ -190,27 +195,30 @@ export class SEOAnalyticsTracker {
    */
   private measureCoreWebVitals(): void {
     // LCP (Largest Contentful Paint) 측정
-    new PerformanceObserver((entryList) => {
+    new PerformanceObserver(entryList => {
       const entries = entryList.getEntries();
       const lastEntry = entries[entries.length - 1];
-      
+
       if (lastEntry) {
         this.trackEvent('core_web_vital_lcp', {
           value: lastEntry.startTime,
-          rating: this.getRating(lastEntry.startTime, [2500, 4000])
+          rating: this.getRating(lastEntry.startTime, [2500, 4000]),
         });
       }
     }).observe({ entryTypes: ['largest-contentful-paint'] });
 
     // FID (First Input Delay) 측정
-    new PerformanceObserver((entryList) => {
+    new PerformanceObserver(entryList => {
       const entries = entryList.getEntries();
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         const fidEntry = entry as any; // Type assertion for PerformanceEventTiming
         if (fidEntry.processingStart && fidEntry.startTime) {
           this.trackEvent('core_web_vital_fid', {
             value: fidEntry.processingStart - fidEntry.startTime,
-            rating: this.getRating(fidEntry.processingStart - fidEntry.startTime, [100, 300])
+            rating: this.getRating(
+              fidEntry.processingStart - fidEntry.startTime,
+              [100, 300]
+            ),
           });
         }
       });
@@ -218,18 +226,18 @@ export class SEOAnalyticsTracker {
 
     // CLS (Cumulative Layout Shift) 측정
     let clsValue = 0;
-    new PerformanceObserver((entryList) => {
+    new PerformanceObserver(entryList => {
       const entries = entryList.getEntries();
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         const clsEntry = entry as any; // Type assertion for PerformanceLayoutShift
         if (!clsEntry.hadRecentInput && clsEntry.value) {
           clsValue += clsEntry.value;
         }
       });
-      
+
       this.trackEvent('core_web_vital_cls', {
         value: clsValue,
-        rating: this.getRating(clsValue, [0.1, 0.25])
+        rating: this.getRating(clsValue, [0.1, 0.25]),
       });
     }).observe({ entryTypes: ['layout-shift'] });
   }
@@ -243,7 +251,9 @@ export class SEOAnalyticsTracker {
 
     const trackScroll = () => {
       const scrollPercent = Math.round(
-        (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+        (window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight)) *
+          100
       );
 
       thresholds.forEach(threshold => {
@@ -251,7 +261,7 @@ export class SEOAnalyticsTracker {
           tracked.add(threshold);
           this.trackEvent('scroll_depth', {
             percent: threshold,
-            page_url: window.location.pathname
+            page_url: window.location.pathname,
           });
         }
       });
@@ -270,27 +280,31 @@ export class SEOAnalyticsTracker {
 
     const updateActiveTime = () => {
       const now = Date.now();
-      if (now - lastActiveTime < 5000) { // 5초 이내 활동이 있었다면
+      if (now - lastActiveTime < 5000) {
+        // 5초 이내 활동이 있었다면
         totalActiveTime += now - lastActiveTime;
       }
       lastActiveTime = now;
     };
 
     // 활동 감지 이벤트들
-    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-      document.addEventListener(event, updateActiveTime, { passive: true });
-    });
+    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(
+      event => {
+        document.addEventListener(event, updateActiveTime, { passive: true });
+      }
+    );
 
     // 페이지 떠날 때 읽기 시간 전송
     window.addEventListener('beforeunload', () => {
       updateActiveTime();
       const readingTime = Math.round(totalActiveTime / 1000);
-      
-      if (readingTime > 10) { // 10초 이상 읽었을 때만 추적
+
+      if (readingTime > 10) {
+        // 10초 이상 읽었을 때만 추적
         this.trackEvent('reading_time', {
           duration_seconds: readingTime,
           page_url: window.location.pathname,
-          page_title: document.title
+          page_title: document.title,
         });
       }
     });
@@ -305,13 +319,13 @@ export class SEOAnalyticsTracker {
       keywordPerformance: await this.getKeywordPerformanceData(),
       technicalSEO: await this.getTechnicalSEOData(),
       contentPerformance: await this.getContentPerformanceData(),
-      conversionMetrics: await this.getConversionMetricsData()
+      conversionMetrics: await this.getConversionMetricsData(),
     };
 
     // 메트릭 히스토리에 추가
     this.metricsHistory.push({
       ...metrics,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     } as SEOMetrics & { timestamp: string });
 
     return metrics;
@@ -330,45 +344,47 @@ export class SEOAnalyticsTracker {
     return {
       total: currentTraffic,
       change: Math.round(change * 100) / 100,
-      trend: change > 5 ? 'up' : change < -5 ? 'down' : 'stable'
+      trend: change > 5 ? 'up' : change < -5 ? 'down' : 'stable',
     };
   }
 
   /**
    * 키워드 성과 데이터 수집
    */
-  private async getKeywordPerformanceData(): Promise<SEOMetrics['keywordPerformance']> {
+  private async getKeywordPerformanceData(): Promise<
+    SEOMetrics['keywordPerformance']
+  > {
     // 실제 구현에서는 Google Search Console API 호출
     return {
       totalKeywords: 145,
       topRankings: {
-        '패밀리오피스': {
+        패밀리오피스: {
           position: 2,
           previousPosition: 3,
           clicks: 450,
           impressions: 3200,
-          ctr: 14.1
+          ctr: 14.1,
         },
-        '자산관리서비스': {
+        자산관리서비스: {
           position: 5,
           previousPosition: 7,
           clicks: 280,
           impressions: 2100,
-          ctr: 13.3
+          ctr: 13.3,
         },
-        '기업승계': {
+        기업승계: {
           position: 3,
           previousPosition: 4,
           clicks: 320,
           impressions: 1800,
-          ctr: 17.8
-        }
+          ctr: 17.8,
+        },
       },
       improvementOpportunities: [
         '포트폴리오관리 (15위 → 10위 목표)',
         '프라이빗뱅킹 (12위 → 5위 목표)',
-        '세무최적화 (8위 → 3위 목표)'
-      ]
+        '세무최적화 (8위 → 3위 목표)',
+      ],
     };
   }
 
@@ -380,22 +396,24 @@ export class SEOAnalyticsTracker {
     return {
       pageSpeed: {
         mobile: 85,
-        desktop: 92
+        desktop: 92,
       },
       coreWebVitals: {
         lcp: 2.1,
         fid: 85,
-        cls: 0.08
+        cls: 0.08,
       },
       crawlErrors: 2,
-      indexedPages: 127
+      indexedPages: 127,
     };
   }
 
   /**
    * 컨텐츠 성과 데이터 수집
    */
-  private async getContentPerformanceData(): Promise<SEOMetrics['contentPerformance']> {
+  private async getContentPerformanceData(): Promise<
+    SEOMetrics['contentPerformance']
+  > {
     return {
       totalPages: 127,
       averageDwellTime: 285,
@@ -406,34 +424,36 @@ export class SEOAnalyticsTracker {
           url: '/solutions',
           traffic: 3200,
           conversionRate: 4.2,
-          seoScore: 92
+          seoScore: 92,
         },
         {
           url: '/business-succession-strategy',
           traffic: 2100,
           conversionRate: 3.8,
-          seoScore: 88
+          seoScore: 88,
         },
         {
           url: '/blog/family-office-guide',
           traffic: 1800,
           conversionRate: 2.1,
-          seoScore: 85
-        }
-      ]
+          seoScore: 85,
+        },
+      ],
     };
   }
 
   /**
    * 전환 메트릭 데이터 수집
    */
-  private async getConversionMetricsData(): Promise<SEOMetrics['conversionMetrics']> {
+  private async getConversionMetricsData(): Promise<
+    SEOMetrics['conversionMetrics']
+  > {
     return {
       organicConversions: 28,
       conversionRate: 3.4,
       revenue: 140000000, // 1.4억원
       costPerAcquisition: 85000, // 8만 5천원
-      roi: 420
+      roi: 420,
     };
   }
 
@@ -459,37 +479,43 @@ export class SEOAnalyticsTracker {
   private getLinkPosition(link: HTMLElement): string {
     const rect = link.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
-    
+
     if (rect.top < viewportHeight * 0.3) return 'top';
     if (rect.top < viewportHeight * 0.7) return 'middle';
     return 'bottom';
   }
 
-  private getRating(value: number, thresholds: [number, number]): 'good' | 'needs-improvement' | 'poor' {
+  private getRating(
+    value: number,
+    thresholds: [number, number]
+  ): 'good' | 'needs-improvement' | 'poor' {
     if (value <= thresholds[0]) return 'good';
     if (value <= thresholds[1]) return 'needs-improvement';
     return 'poor';
   }
 
-  private logCustomEvent(eventName: string, parameters: Record<string, any>): void {
+  private logCustomEvent(
+    eventName: string,
+    parameters: Record<string, any>
+  ): void {
     // 자체 로깅 시스템 구현
     const logEntry = {
       event: eventName,
       parameters,
       timestamp: new Date().toISOString(),
       url: window.location.href,
-      userAgent: navigator.userAgent
+      userAgent: navigator.userAgent,
     };
 
     // 로컬 스토리지에 임시 저장 (실제 구현에서는 서버로 전송)
     const logs = JSON.parse(localStorage.getItem('seo_events') || '[]');
     logs.push(logEntry);
-    
+
     // 최대 100개 이벤트만 저장
     if (logs.length > 100) {
       logs.splice(0, logs.length - 100);
     }
-    
+
     localStorage.setItem('seo_events', JSON.stringify(logs));
   }
 
@@ -498,38 +524,40 @@ export class SEOAnalyticsTracker {
    */
   private setupCustomEventTracking(): void {
     // 폼 제출 추적
-    document.addEventListener('submit', (event) => {
+    document.addEventListener('submit', event => {
       const form = event.target as HTMLFormElement;
       const formId = form.id || form.className || 'unknown';
-      
+
       this.trackEvent('form_submission', {
         form_id: formId,
-        page_url: window.location.pathname
+        page_url: window.location.pathname,
       });
     });
 
     // CTA 버튼 클릭 추적
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', event => {
       const target = event.target as HTMLElement;
       const button = target.closest('button, .cta-button, [data-cta]');
-      
+
       if (button) {
         this.trackEvent('cta_click', {
           button_text: button.textContent?.trim() || '',
           button_id: button.id || '',
-          page_url: window.location.pathname
+          page_url: window.location.pathname,
         });
       }
     });
 
     // 검색 기능 사용 추적
-    const searchInputs = document.querySelectorAll('input[type="search"], input[name*="search"], input[placeholder*="검색"]');
+    const searchInputs = document.querySelectorAll(
+      'input[type="search"], input[name*="search"], input[placeholder*="검색"]'
+    );
     searchInputs.forEach(input => {
-      input.addEventListener('keypress', (event) => {
+      input.addEventListener('keypress', event => {
         if ((event as KeyboardEvent).key === 'Enter') {
           this.trackEvent('site_search', {
             search_term: (input as HTMLInputElement).value,
-            page_url: window.location.pathname
+            page_url: window.location.pathname,
           });
         }
       });
@@ -550,10 +578,10 @@ export class SEOAnalyticsTracker {
     setInterval(async () => {
       try {
         const metrics = await this.collectSEOMetrics();
-        
+
         // 실시간 대시보드 업데이트 이벤트 발생
         const event = new CustomEvent('seo-metrics-update', {
-          detail: metrics
+          detail: metrics,
         });
         window.dispatchEvent(event);
       } catch (error) {
@@ -566,14 +594,16 @@ export class SEOAnalyticsTracker {
 /**
  * 글로벌 SEO 추적기 인스턴스
  */
-export function initializeSEOTracker(config: AnalyticsConfig): SEOAnalyticsTracker {
+export function initializeSEOTracker(
+  config: AnalyticsConfig
+): SEOAnalyticsTracker {
   const tracker = new SEOAnalyticsTracker(config);
-  
+
   // 글로벌 객체에 등록
   if (typeof window !== 'undefined') {
     (window as any).seoTracker = tracker;
   }
-  
+
   return tracker;
 }
 

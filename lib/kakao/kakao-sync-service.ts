@@ -2,8 +2,9 @@
  * 카카오 싱크 서비스
  * 카카오톡 메시지, 채널 연동, 상담 시스템 등의 고급 카카오 기능 제공
  */
-
 import { createClient } from '@/lib/supabase/client';
+import { safeFrom } from '@/lib/supabase/helpers';
+
 import { Database } from '@/types/supabase';
 
 // type UserRecord = Database['public']['Tables']['users']['Row']; // 미사용
@@ -47,8 +48,10 @@ export class KakaoSyncService {
 
     try {
       // 상담 정보 조회
-      const { data: consultation, error } = await this.supabase
-        .from('consultations')
+      const { data: consultation, error } = await safeFrom(
+        this.supabase,
+        'consultations'
+      )
         .select('*')
         .eq('id', consultationId)
         .single();
@@ -60,20 +63,19 @@ export class KakaoSyncService {
 
       // 카카오톡 메시지 템플릿 생성
       const message = this.createConsultationMessage(consultation);
-      
+
       // 개발 환경에서는 로그만 출력
       if (process.env.NODE_ENV === 'development') {
         console.log('📱 카카오톡 상담 알림 (개발 모드):', {
           to: consultation.email,
           message,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
         return true;
       }
 
       // 실제 카카오톡 메시지 발송 (구현 필요)
       return await this.sendKakaoMessage(consultation.email, message);
-
     } catch (error) {
       console.error('상담 알림 발송 실패:', error);
       return false;
@@ -99,9 +101,9 @@ export class KakaoSyncService {
 💡 성공한 CEO들의 선택, 함께하세요!`,
         link: {
           web_url: 'https://newsletter.familyoffices.vip',
-          mobile_web_url: 'https://newsletter.familyoffices.vip'
+          mobile_web_url: 'https://newsletter.familyoffices.vip',
         },
-        button_title: '뉴스레터 보기'
+        button_title: '뉴스레터 보기',
       };
 
       return await this.sendKakaoMessage(userEmail, message);
@@ -129,7 +131,7 @@ export class KakaoSyncService {
 
       // 채널 추가 팝업 표시
       window.Kakao.Channel.addChannel({
-        channelPublicId: this.channelId
+        channelPublicId: this.channelId,
       });
 
       return true;
@@ -157,7 +159,7 @@ export class KakaoSyncService {
 
       // 채널 채팅 시작
       window.Kakao.Channel.chat({
-        channelPublicId: this.channelId
+        channelPublicId: this.channelId,
       });
 
       return true;
@@ -191,7 +193,9 @@ export class KakaoSyncService {
         content: {
           title: content.title,
           description: content.description,
-          imageUrl: content.imageUrl || 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+          imageUrl:
+            content.imageUrl ||
+            'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
           link: {
             mobileWebUrl: content.linkUrl || process.env.NEXT_PUBLIC_APP_URL,
             webUrl: content.linkUrl || process.env.NEXT_PUBLIC_APP_URL,
@@ -218,7 +222,10 @@ export class KakaoSyncService {
   /**
    * 사용자별 카카오 싱크 설정 관리
    */
-  async updateUserSyncSettings(userId: string, options: KakaoSyncOptions): Promise<boolean> {
+  async updateUserSyncSettings(
+    userId: string,
+    options: KakaoSyncOptions
+  ): Promise<boolean> {
     try {
       // users 테이블에 싱크 설정 저장 (향후 컬럼 추가 시)
       // 현재는 로컬 스토리지 또는 별도 테이블 사용
@@ -240,25 +247,37 @@ export class KakaoSyncService {
   getUserSyncSettings(userId: string): KakaoSyncOptions {
     try {
       if (typeof window === 'undefined') {
-        return { enableNotifications: true, enableChannelSync: true, enableAutoReply: false };
+        return {
+          enableNotifications: true,
+          enableChannelSync: true,
+          enableAutoReply: false,
+        };
       }
 
       const settings = localStorage.getItem(`kakao_sync_${userId}`);
-      return settings ? JSON.parse(settings) : {
-        enableNotifications: true,
-        enableChannelSync: true, 
-        enableAutoReply: false
-      };
+      return settings
+        ? JSON.parse(settings)
+        : {
+            enableNotifications: true,
+            enableChannelSync: true,
+            enableAutoReply: false,
+          };
     } catch (error) {
       console.error('카카오 싱크 설정 조회 실패:', error);
-      return { enableNotifications: true, enableChannelSync: true, enableAutoReply: false };
+      return {
+        enableNotifications: true,
+        enableChannelSync: true,
+        enableAutoReply: false,
+      };
     }
   }
 
   /**
    * 상담 메시지 템플릿 생성
    */
-  private createConsultationMessage(consultation: ConsultationRecord): KakaoMessageTemplate {
+  private createConsultationMessage(
+    consultation: ConsultationRecord
+  ): KakaoMessageTemplate {
     return {
       object_type: 'text',
       text: `🎯 FamilyOffice S 상담 예약 완료!
@@ -274,23 +293,26 @@ export class KakaoSyncService {
 ✨ 가업승계·자산관리 완전해결`,
       link: {
         web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-        mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`
+        mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
       },
-      button_title: '상담 현황 확인'
+      button_title: '상담 현황 확인',
     };
   }
 
   /**
    * 실제 카카오톡 메시지 발송 (구현 필요)
    */
-  private async sendKakaoMessage(userEmail: string, message: KakaoMessageTemplate): Promise<boolean> {
+  private async sendKakaoMessage(
+    userEmail: string,
+    message: KakaoMessageTemplate
+  ): Promise<boolean> {
     try {
       // 개발 환경에서는 콘솔 로그
       if (process.env.NODE_ENV === 'development') {
         console.log('📱 카카오톡 메시지 발송 시뮬레이션:', {
           to: userEmail,
           message,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
         return true;
       }
@@ -301,7 +323,7 @@ export class KakaoSyncService {
         if (Notification.permission === 'granted') {
           new Notification('FamilyOffice S', {
             body: message.text?.substring(0, 100) || '새로운 알림이 있습니다.',
-            icon: '/favicon.ico'
+            icon: '/favicon.ico',
           });
         }
       }
@@ -319,13 +341,10 @@ export class KakaoSyncService {
   getStatus(): { enabled: boolean; channelId: string; features: string[] } {
     return {
       enabled: this.isEnabled,
-      channelId: this.channelId ? `${this.channelId.substring(0, 8)}...` : '설정 안됨',
-      features: [
-        '상담 알림',
-        '뉴스레터 환영',
-        '채널 연동',
-        '메시지 공유'
-      ]
+      channelId: this.channelId
+        ? `${this.channelId.substring(0, 8)}...`
+        : '설정 안됨',
+      features: ['상담 알림', '뉴스레터 환영', '채널 연동', '메시지 공유'],
     };
   }
 }

@@ -1,24 +1,29 @@
-'use client'
+'use client';
 
 /**
  * 🎯 관리자 성능 분석 페이지
  * Core Web Vitals 성능 대시보드 통합
  */
+import { BarChart3, Monitor, Smartphone, TrendingUp, Zap } from 'lucide-react';
 
-import { AdminAccessDeniedAlert } from '@/components/admin-access-denied-alert'
-import PerformanceDashboard from '@/components/performance/performance-dashboard'
-import PerformanceOptimizer from '@/components/performance/performance-optimizer'
-import WebVitalsReporter from '@/components/performance/web-vitals-reporter'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useUser } from '@clerk/nextjs'
-import { BarChart3, Monitor, Smartphone, TrendingUp, Zap } from 'lucide-react'
+import { useUser } from '@clerk/nextjs';
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+import { AdminAccessDeniedAlert } from '@/components/admin-access-denied-alert';
+import PerformanceDashboard from '@/components/performance/performance-dashboard';
+import PerformanceOptimizer from '@/components/performance/performance-optimizer';
+import WebVitalsReporter from '@/components/performance/web-vitals-reporter';
 
 export default function AdminPerformancePage() {
-  const { user } = useUser()
-  
-  if (!user || user.primaryEmailAddress?.emailAddress !== 'jhlim725@gmail.com') {
-    return <AdminAccessDeniedAlert />
+  const { user } = useUser();
+
+  if (
+    !user ||
+    user.primaryEmailAddress?.emailAddress !== 'jhlim725@gmail.com'
+  ) {
+    return <AdminAccessDeniedAlert />;
   }
 
   return (
@@ -36,7 +41,9 @@ export default function AdminPerformancePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Lighthouse 점수</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Lighthouse 점수
+              </CardTitle>
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -44,7 +51,7 @@ export default function AdminPerformancePage() {
               <p className="text-xs text-muted-foreground">+2 지난 주 대비</p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">LCP (ms)</CardTitle>
@@ -55,18 +62,22 @@ export default function AdminPerformancePage() {
               <p className="text-xs text-muted-foreground">-180ms 개선</p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">모바일 사용률</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                모바일 사용률
+              </CardTitle>
               <Smartphone className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">72%</div>
-              <p className="text-xs text-muted-foreground">한국 모바일 트래픽</p>
+              <p className="text-xs text-muted-foreground">
+                한국 모바일 트래픽
+              </p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">페이지 로드</CardTitle>
@@ -159,13 +170,15 @@ export default function AdminPerformancePage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div>
                     <h3 className="font-semibold mb-4">기술적 메트릭</h3>
                     <div className="space-y-3">
                       <div className="flex justify-between">
                         <span>JavaScript 에러율</span>
-                        <span className="font-medium text-green-600">0.02%</span>
+                        <span className="font-medium text-green-600">
+                          0.02%
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span>API 응답 시간</span>
@@ -195,7 +208,9 @@ export default function AdminPerformancePage() {
                 <div className="space-y-4">
                   <div className="p-4 border rounded-lg">
                     <h4 className="font-semibold mb-2">📈 월간 성능 리포트</h4>
-                    <p className="text-gray-600 mb-2">2024년 12월 성능 개선 사항:</p>
+                    <p className="text-gray-600 mb-2">
+                      2024년 12월 성능 개선 사항:
+                    </p>
                     <ul className="list-disc list-inside space-y-1 text-sm text-gray-600">
                       <li>LCP 180ms 개선 (이미지 최적화)</li>
                       <li>INP 30ms 개선 (JavaScript 최적화)</li>
@@ -203,7 +218,7 @@ export default function AdminPerformancePage() {
                       <li>전체 Lighthouse 점수 92→94 개선</li>
                     </ul>
                   </div>
-                  
+
                   <div className="p-4 border rounded-lg">
                     <h4 className="font-semibold mb-2">🎯 다음 단계 최적화</h4>
                     <ul className="list-disc list-inside space-y-1 text-sm text-gray-600">
@@ -213,10 +228,14 @@ export default function AdminPerformancePage() {
                       <li>Third-party 스크립트 지연 로딩</li>
                     </ul>
                   </div>
-                  
+
                   <div className="p-4 border rounded-lg">
-                    <h4 className="font-semibold mb-2">📊 한국 시장 특화 최적화</h4>
-                    <p className="text-gray-600 mb-2">모바일 우선 최적화 결과:</p>
+                    <h4 className="font-semibold mb-2">
+                      📊 한국 시장 특화 최적화
+                    </h4>
+                    <p className="text-gray-600 mb-2">
+                      모바일 우선 최적화 결과:
+                    </p>
                     <ul className="list-disc list-inside space-y-1 text-sm text-gray-600">
                       <li>모바일 LCP: 2.1초 (목표: 2.5초 이하)</li>
                       <li>4G 네트워크 최적화 완료</li>
@@ -231,5 +250,5 @@ export default function AdminPerformancePage() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

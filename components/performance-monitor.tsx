@@ -94,9 +94,15 @@ export const PerformanceMonitor = memo(function PerformanceMonitor() {
       // Time to First Byte (TTFB)
       const navigationEntries = performance.getEntriesByType('navigation');
       if (navigationEntries.length > 0) {
-        const navigationEntry = navigationEntries[0] as PerformanceNavigationTiming;
-        if (navigationEntry && navigationEntry.responseStart && navigationEntry.requestStart) {
-          metrics.ttfb = navigationEntry.responseStart - navigationEntry.requestStart;
+        const navigationEntry =
+          navigationEntries[0] as PerformanceNavigationTiming;
+        if (
+          navigationEntry &&
+          navigationEntry.responseStart &&
+          navigationEntry.requestStart
+        ) {
+          metrics.ttfb =
+            navigationEntry.responseStart - navigationEntry.requestStart;
         }
       }
     } catch (error) {
@@ -104,7 +110,10 @@ export const PerformanceMonitor = memo(function PerformanceMonitor() {
     }
 
     // 성능 메트릭을 서버로 전송 (선택사항)
-    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+    if (
+      typeof window !== 'undefined' &&
+      window.location.hostname !== 'localhost'
+    ) {
       // 실제 구현에서는 분석 서비스로 전송
       // Performance metrics are now sent via the PerformanceMonitor class
     }

@@ -49,7 +49,7 @@ export class DualDomainSEOMonitor {
     'www.samsunglife.com',
     'sni.samsungsecurities.com',
     'www.nhqv.com',
-    'www.wealthyandwisefamilyoffice.com'
+    'www.wealthyandwisefamilyoffice.com',
   ];
 
   // 키워드 순위 추적
@@ -58,7 +58,7 @@ export class DualDomainSEOMonitor {
     if (!config) return {};
 
     const rankings: Record<string, number> = {};
-    
+
     // 각 타겟 키워드별 순위 추적
     for (const keyword of config.targetKeywords) {
       try {
@@ -103,7 +103,7 @@ export class DualDomainSEOMonitor {
           rankings: await this.getCompetitorRankings(competitor),
           estimatedTraffic: await this.getEstimatedTraffic(competitor),
           backlinks: await this.getBacklinkCount(competitor),
-          contentGaps: await this.identifyContentGaps(competitor)
+          contentGaps: await this.identifyContentGaps(competitor),
         };
         analyses.push(analysis);
       } catch (error) {
@@ -129,12 +129,15 @@ export class DualDomainSEOMonitor {
     const familyofficesVip = await this.getFullSEOMetrics('familyoffices.vip');
 
     // 성과 비교 분석
-    const comparison = this.generateComparisonAnalysis(samsunglifeVip, familyofficesVip);
+    const comparison = this.generateComparisonAnalysis(
+      samsunglifeVip,
+      familyofficesVip
+    );
 
     return {
       samsunglifeVip,
       familyofficesVip,
-      comparison
+      comparison,
     };
   }
 
@@ -170,33 +173,42 @@ export class DualDomainSEOMonitor {
   }> {
     const [samsunglifeData, familyofficesData] = await Promise.all([
       this.getFullSEOMetrics('samsunglife.vip'),
-      this.getFullSEOMetrics('familyoffices.vip')
+      this.getFullSEOMetrics('familyoffices.vip'),
     ]);
 
     // 통합 지표 계산
     const overview = {
-      totalTraffic: samsunglifeData.traffic.organic + familyofficesData.traffic.organic,
-      totalConversions: samsunglifeData.conversions.consultations + familyofficesData.conversions.consultations,
-      averageRanking: this.calculateAverageRanking([samsunglifeData, familyofficesData]),
+      totalTraffic:
+        samsunglifeData.traffic.organic + familyofficesData.traffic.organic,
+      totalConversions:
+        samsunglifeData.conversions.consultations +
+        familyofficesData.conversions.consultations,
+      averageRanking: this.calculateAverageRanking([
+        samsunglifeData,
+        familyofficesData,
+      ]),
       domainAuthority: Math.max(
         this.calculateDomainAuthority(samsunglifeData),
         this.calculateDomainAuthority(familyofficesData)
-      )
+      ),
     };
 
     // 알림 및 추천사항 생성
     const alerts = this.generateAlerts([samsunglifeData, familyofficesData]);
-    const recommendations = this.generateRecommendations([samsunglifeData, familyofficesData]);
+    const recommendations = this.generateRecommendations([
+      samsunglifeData,
+      familyofficesData,
+    ]);
 
     return {
       overview,
       domainBreakdown: {
         samsunglifeVip: samsunglifeData,
-        familyofficesVip: familyofficesData
+        familyofficesVip: familyofficesData,
       },
       trends: await this.getTrendData(),
       alerts,
-      recommendations
+      recommendations,
     };
   }
 
@@ -210,7 +222,7 @@ export class DualDomainSEOMonitor {
   }> {
     const endDate = new Date();
     const startDate = new Date(endDate.getTime() - 7 * 24 * 60 * 60 * 1000);
-    
+
     const dashboardData = await this.generateDashboardData();
     const competitorData = await this.analyzeCompetitors();
 
@@ -223,13 +235,16 @@ export class DualDomainSEOMonitor {
         'Total Organic Traffic': dashboardData.overview.totalTraffic,
         'Average Keyword Ranking': dashboardData.overview.averageRanking,
         'Conversion Rate': this.calculateConversionRate(dashboardData),
-        'Domain Authority Score': dashboardData.overview.domainAuthority
-      }
+        'Domain Authority Score': dashboardData.overview.domainAuthority,
+      },
     };
   }
 
   // 헬퍼 메서드들
-  private async getKeywordRank(keyword: string, domain: string): Promise<number> {
+  private async getKeywordRank(
+    keyword: string,
+    domain: string
+  ): Promise<number> {
     // SEO 도구 API 또는 Google Search Console API 호출
     // 실제 구현에서는 SEMrush, Ahrefs, 또는 Google Search Console API 사용
     return Math.floor(Math.random() * 100) + 1; // 임시 데이터
@@ -241,7 +256,7 @@ export class DualDomainSEOMonitor {
       organic: Math.floor(Math.random() * 10000),
       direct: Math.floor(Math.random() * 5000),
       referral: Math.floor(Math.random() * 2000),
-      social: Math.floor(Math.random() * 1000)
+      social: Math.floor(Math.random() * 1000),
     };
   }
 
@@ -254,23 +269,23 @@ export class DualDomainSEOMonitor {
       conversions: {
         inquiries: Math.floor(Math.random() * 100),
         consultations: Math.floor(Math.random() * 50),
-        signups: Math.floor(Math.random() * 20)
+        signups: Math.floor(Math.random() * 20),
       },
       technicalSEO: {
         pageSpeed: 85 + Math.random() * 15,
         coreWebVitals: {
           lcp: 2.0 + Math.random() * 1.0,
           fid: 80 + Math.random() * 40,
-          cls: Math.random() * 0.2
+          cls: Math.random() * 0.2,
         },
         indexedPages: Math.floor(Math.random() * 200) + 50,
-        crawlErrors: Math.floor(Math.random() * 10)
+        crawlErrors: Math.floor(Math.random() * 10),
       },
       backlinks: {
         total: Math.floor(Math.random() * 1000) + 100,
         domains: Math.floor(Math.random() * 100) + 20,
-        quality: 70 + Math.random() * 30
-      }
+        quality: 70 + Math.random() * 30,
+      },
     };
   }
 
@@ -279,24 +294,31 @@ export class DualDomainSEOMonitor {
     const domain2Score = this.calculateOverallScore(domain2);
 
     return {
-      winningDomain: domain1Score > domain2Score ? domain1.domain : domain2.domain,
+      winningDomain:
+        domain1Score > domain2Score ? domain1.domain : domain2.domain,
       keywordGaps: this.identifyKeywordGaps(domain1, domain2),
       opportunityKeywords: this.findOpportunityKeywords(domain1, domain2),
-      crossLinkingOpportunities: this.findCrossLinkingOpps(domain1, domain2)
+      crossLinkingOpportunities: this.findCrossLinkingOpps(domain1, domain2),
     };
   }
 
   private calculateOverallScore(metrics: SEOMetrics): number {
-    const trafficScore = Object.values(metrics.traffic).reduce((a, b) => a + b, 0) / 10000;
-    const rankingScore = Object.values(metrics.rankings).reduce((a, b) => a + (101 - b), 0) / Object.keys(metrics.rankings).length;
-    const technicalScore = (metrics.technicalSEO.pageSpeed + (101 - metrics.technicalSEO.coreWebVitals.lcp * 20)) / 2;
-    
-    return (trafficScore * 0.4 + rankingScore * 0.4 + technicalScore * 0.2);
+    const trafficScore =
+      Object.values(metrics.traffic).reduce((a, b) => a + b, 0) / 10000;
+    const rankingScore =
+      Object.values(metrics.rankings).reduce((a, b) => a + (101 - b), 0) /
+      Object.keys(metrics.rankings).length;
+    const technicalScore =
+      (metrics.technicalSEO.pageSpeed +
+        (101 - metrics.technicalSEO.coreWebVitals.lcp * 20)) /
+      2;
+
+    return trafficScore * 0.4 + rankingScore * 0.4 + technicalScore * 0.2;
   }
 
   private generateAlerts(metricsArray: SEOMetrics[]): any[] {
     const alerts: any[] = [];
-    
+
     metricsArray.forEach(metrics => {
       // 성능 저하 알림
       if (metrics.technicalSEO.pageSpeed < 80) {
@@ -304,21 +326,21 @@ export class DualDomainSEOMonitor {
           type: 'warning',
           message: `페이지 속도가 ${metrics.technicalSEO.pageSpeed}점으로 낮습니다`,
           domain: metrics.domain,
-          priority: 8
+          priority: 8,
         });
       }
 
       // 순위 하락 알림
-      const lowRankings = Object.entries(metrics.rankings)
-        .filter(([_, rank]) => rank > 20)
-        .length;
-      
+      const lowRankings = Object.entries(metrics.rankings).filter(
+        ([_, rank]) => rank > 20
+      ).length;
+
       if (lowRankings > 5) {
         alerts.push({
           type: 'error',
           message: `${lowRankings}개 키워드가 20위 밖으로 밀려났습니다`,
           domain: metrics.domain,
-          priority: 9
+          priority: 9,
         });
       }
     });
@@ -336,20 +358,21 @@ export class DualDomainSEOMonitor {
           action: '페이지 속도 최적화 (이미지 압축, CDN 적용)',
           impact: 'high',
           effort: 'medium',
-          domain: metrics.domain
+          domain: metrics.domain,
         });
       }
 
       // 콘텐츠 개선사항
-      const poorRankings = Object.entries(metrics.rankings)
-        .filter(([_, rank]) => rank > 10 && rank <= 30);
-      
+      const poorRankings = Object.entries(metrics.rankings).filter(
+        ([_, rank]) => rank > 10 && rank <= 30
+      );
+
       if (poorRankings.length > 3) {
         recommendations.push({
           action: `${poorRankings.length}개 키워드의 콘텐츠 품질 개선`,
           impact: 'high',
           effort: 'high',
-          domain: metrics.domain
+          domain: metrics.domain,
         });
       }
     });
@@ -363,7 +386,10 @@ export class DualDomainSEOMonitor {
   }
 
   private calculateDomainAuthority(metrics: SEOMetrics): number {
-    return Math.min(100, metrics.backlinks.quality + (metrics.backlinks.domains / 10));
+    return Math.min(
+      100,
+      metrics.backlinks.quality + metrics.backlinks.domains / 10
+    );
   }
 
   private calculateConversionRate(dashboardData: any): number {
@@ -377,29 +403,35 @@ export class DualDomainSEOMonitor {
     return {
       trafficTrend: [100, 110, 105, 120, 115, 130, 125],
       rankingTrend: [25, 23, 20, 18, 17, 15, 14],
-      conversionTrend: [2.1, 2.3, 2.0, 2.5, 2.4, 2.7, 2.6]
+      conversionTrend: [2.1, 2.3, 2.0, 2.5, 2.4, 2.7, 2.6],
     };
   }
 
-  private generateExecutiveSummary(dashboardData: any, competitorData: any[]): string {
+  private generateExecutiveSummary(
+    dashboardData: any,
+    competitorData: any[]
+  ): string {
     return `지난 주 동안 두 도메인 모두 안정적인 성과를 보였습니다. 
     총 오가닉 트래픽은 ${dashboardData.overview.totalTraffic.toLocaleString()}명이며, 
     평균 키워드 순위는 ${dashboardData.overview.averageRanking.toFixed(1)}위입니다.
     주요 경쟁사 대비 ${this.getCompetitivePosition(competitorData)} 위치를 유지하고 있습니다.`;
   }
 
-  private extractKeyFindings(dashboardData: any, competitorData: any[]): string[] {
+  private extractKeyFindings(
+    dashboardData: any,
+    competitorData: any[]
+  ): string[] {
     return [
       `samsunglife.vip가 기업 관련 키워드에서 강세`,
       `familyoffices.vip의 개인화 키워드 순위 상승`,
       `전체 도메인 권위도 ${dashboardData.overview.domainAuthority}점 달성`,
-      `크로스 도메인 트래픽 증가 추세 확인`
+      `크로스 도메인 트래픽 증가 추세 확인`,
     ];
   }
 
   private generateActionItems(dashboardData: any): string[] {
-    return dashboardData.recommendations.map((rec: any) => 
-      `${rec.domain}: ${rec.action} (우선순위: ${rec.impact})`
+    return dashboardData.recommendations.map(
+      (rec: any) => `${rec.domain}: ${rec.action} (우선순위: ${rec.impact})`
     );
   }
 
@@ -408,22 +440,33 @@ export class DualDomainSEOMonitor {
     return '상위 30%';
   }
 
-  private identifyKeywordGaps(domain1: SEOMetrics, domain2: SEOMetrics): string[] {
+  private identifyKeywordGaps(
+    domain1: SEOMetrics,
+    domain2: SEOMetrics
+  ): string[] {
     // 키워드 갭 분석 로직
     return ['키워드 갭 1', '키워드 갭 2'];
   }
 
-  private findOpportunityKeywords(domain1: SEOMetrics, domain2: SEOMetrics): string[] {
+  private findOpportunityKeywords(
+    domain1: SEOMetrics,
+    domain2: SEOMetrics
+  ): string[] {
     // 기회 키워드 식별 로직
     return ['기회 키워드 1', '기회 키워드 2'];
   }
 
-  private findCrossLinkingOpps(domain1: SEOMetrics, domain2: SEOMetrics): string[] {
+  private findCrossLinkingOpps(
+    domain1: SEOMetrics,
+    domain2: SEOMetrics
+  ): string[] {
     // 크로스 링킹 기회 식별 로직
     return ['크로스 링킹 기회 1', '크로스 링킹 기회 2'];
   }
 
-  private async getCompetitorRankings(competitor: string): Promise<Record<string, number>> {
+  private async getCompetitorRankings(
+    competitor: string
+  ): Promise<Record<string, number>> {
     // 경쟁사 순위 데이터 수집
     return {};
   }

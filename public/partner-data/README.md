@@ -5,24 +5,28 @@ FamilyOffice S의 신뢰할만한 파트너사들로부터 제공받은 전문 �
 ## 🤝 파트너사 현황
 
 ### 삼성생명 (Samsung Life)
+
 - **분야**: 생명보험, 연금, 상속·증여, 세무최적화
 - **신뢰도**: A+ 등급
 - **제공 자료**: 보험료율, 세제혜택, 상속세계산, 연금설계
 - **업데이트 주기**: 분기별
 
 ### 삼성화재 (Samsung Fire)
+
 - **분야**: 손해보험, 자산보험, 리스크관리, 기업보험
 - **신뢰도**: A+ 등급
 - **제공 자료**: 보험료율, 보상한도, 리스크분석, 사고통계
 - **업데이트 주기**: 분기별
 
 ### 런인베스트 (Run Investment)
+
 - **분야**: 자산관리, 포트폴리오, 펀드운용, 투자전략
 - **신뢰도**: A 등급
 - **제공 자료**: 펀드성과, 자산배분, 시장분석, 투자전략
 - **업데이트 주기**: 월별
 
 ### 나눔파트너스 (Nanum Partners)
+
 - **분야**: 세무컨설팅, 회계, 상속세, 법인세
 - **신뢰도**: A 등급
 - **제공 자료**: 세법개정, 절세전략, 세무사례, 회계기준
@@ -58,22 +62,26 @@ public/partner-data/
 ## 🔧 사용 방법
 
 ### 파트너 데이터 시스템 초기화
+
 ```bash
 cd /Users/jaehong/Developer/Projects/FamilyOffice
 node scripts/partner-data-integration.js setup
 ```
 
 ### 업로드된 자료 스캔
+
 ```bash
 node scripts/partner-data-integration.js scan
 ```
 
 ### 인덱스 생성/업데이트
+
 ```bash
 node scripts/partner-data-integration.js index
 ```
 
 ### 특정 카테고리 관련 데이터 조회
+
 ```bash
 # 세무최적화 관련 파트너 데이터
 node scripts/partner-data-integration.js get-relevant 세무최적화
@@ -88,6 +96,7 @@ node scripts/partner-data-integration.js get-relevant 패밀리오피스
 ## 📝 자료 업로드 가이드라인
 
 ### 파일 명명 규칙
+
 ```
 {파트너명}_{자료유형}_{날짜}_{버전}.{확장자}
 
@@ -98,12 +107,14 @@ node scripts/partner-data-integration.js get-relevant 패밀리오피스
 ```
 
 ### 권장 파일 형식
+
 - **보고서**: PDF, DOCX
 - **데이터**: XLSX, CSV, JSON
 - **이미지**: PNG, JPG, SVG
 - **문서**: PDF, DOCX, TXT
 
 ### 메타데이터 포함 사항
+
 - 제작일자
 - 버전 정보
 - 담당자/부서
@@ -113,6 +124,7 @@ node scripts/partner-data-integration.js get-relevant 패밀리오피스
 ## 🔗 블로그 콘텐츠 활용
 
 ### 자동 통합 시스템
+
 파트너사 자료는 블로그 콘텐츠 자동 생성 시 다음과 같이 활용됩니다:
 
 1. **키워드 매칭**: 콘텐츠 주제와 관련된 파트너 데이터 자동 검색
@@ -123,26 +135,31 @@ node scripts/partner-data-integration.js get-relevant 패밀리오피스
 ### 콘텐츠별 활용 예시
 
 #### 세무최적화 콘텐츠
+
 - **삼성생명**: 상속세 계산, 보험 활용 절세 전략
 - **나눔파트너스**: 세법 개정안, 실무 절세 사례
 
 #### 투자전략 콘텐츠
+
 - **런인베스트**: 포트폴리오 최적화, 펀드 성과 분석
 - **삼성생명**: 연금 상품, 자산 배분 전략
 
 #### 패밀리오피스 콘텐츠
+
 - **삼성생명**: 가족자산관리, 승계 전략
 - **삼성화재**: 리스크 관리, 자산 보험
 
 ## 📊 품질 관리
 
 ### 데이터 검증 기준
+
 - **최신성**: 6개월 이내 자료 우선 활용
 - **신뢰성**: A+ 등급 파트너사 자료 우선 처리
 - **완전성**: 메타데이터 및 출처 정보 완비
 - **정확성**: 수치 데이터 교차 검증
 
 ### 업데이트 모니터링
+
 ```bash
 # 자동 모니터링 (GitHub Actions에서 실행)
 node scripts/partner-data-integration.js index
@@ -156,11 +173,13 @@ node scripts/partner-data-integration.js index
 ## ⚖️ 법적 고지사항
 
 ### 저작권 및 사용권한
+
 - 모든 파트너사 제공 자료는 해당 기관의 저작권 보호를 받습니다
 - FamilyOffice S는 파트너십 협약 하에 제한적 사용권을 보유합니다
 - 상업적 재배포는 파트너사의 사전 승인이 필요합니다
 
 ### 면책사항
+
 - 파트너사 제공 자료의 정확성에 대한 최종 책임은 해당 기관에 있습니다
 - 투자 및 세무 관련 의사결정은 반드시 전문가와 상담 후 진행하시기 바랍니다
 - 법규 변경 등으로 인한 자료의 시효성은 지속적으로 확인이 필요합니다
@@ -168,11 +187,13 @@ node scripts/partner-data-integration.js index
 ## 🔄 지속적 개선
 
 ### 피드백 수집
+
 - 파트너사 담당자 정기 미팅
 - 콘텐츠 활용 효과성 측정
 - 사용자 반응 및 요구사항 수집
 
 ### 시스템 업데이트
+
 - 자동화 프로세스 개선
 - 새로운 파트너사 추가 대응
 - 데이터 활용 방식 최적화

@@ -48,6 +48,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
  * APM, RUM, Infrastructure monitoring 통합
  */
 
+/**
+ * 성능 모니터링 대시보드
+ * APM, RUM, Infrastructure monitoring 통합
+ */
+
 // 성능 메트릭 타입 정의
 interface PerformanceMetrics {
   webVitals: {
@@ -465,7 +470,10 @@ function AlertCard({ alert }: { alert: Alert }) {
             <p className="text-sm text-muted-foreground">
               현재 값: {alert.value} (임계값: {alert.rule.threshold})
             </p>
-            <p className="text-xs text-muted-foreground" suppressHydrationWarning>
+            <p
+              className="text-xs text-muted-foreground"
+              suppressHydrationWarning
+            >
               {new Date(alert.timestamp).toLocaleTimeString('ko-KR')}
             </p>
           </div>

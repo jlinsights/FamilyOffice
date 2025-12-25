@@ -1,26 +1,35 @@
 'use client';
 
 import {
-    BookOpen,
-    Eye,
-    FileText,
-    Heart,
-    Share2,
-    Tag,
-    TrendingUp
+  BookOpen,
+  Eye,
+  FileText,
+  Heart,
+  Share2,
+  Tag,
+  TrendingUp,
 } from 'lucide-react';
+
+import { useCallback, useEffect, useMemo, useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+
 import { blogPosts } from '@/lib/blog-data';
 import { cn } from '@/lib/utils';
+
 import type { BlogPost } from '@/types/blog';
 
 // Import our new components
@@ -47,7 +56,7 @@ export function BlogContentAdvanced({
   itemsPerPage = 12,
 }: BlogContentAdvancedProps) {
   const searchParams = useSearchParams();
-  
+
   // States
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [currentPage, setCurrentPage] = useState(
@@ -60,11 +69,26 @@ export function BlogContentAdvanced({
   const [isLoading, setIsLoading] = useState(false);
 
   // URL parameters - memoize to prevent unnecessary re-renders
-  const selectedCategory = useMemo(() => searchParams.get('category') || '', [searchParams]);
-  const searchQuery = useMemo(() => searchParams.get('search') || '', [searchParams]);
-  const selectedTags = useMemo(() => searchParams.get('tags')?.split(',').filter(Boolean) || [], [searchParams]);
-  const sortBy = useMemo(() => (searchParams.get('sort') as SortOption) || 'latest', [searchParams]);
-  const dateRange = useMemo(() => searchParams.get('date') || 'all', [searchParams]);
+  const selectedCategory = useMemo(
+    () => searchParams.get('category') || '',
+    [searchParams]
+  );
+  const searchQuery = useMemo(
+    () => searchParams.get('search') || '',
+    [searchParams]
+  );
+  const selectedTags = useMemo(
+    () => searchParams.get('tags')?.split(',').filter(Boolean) || [],
+    [searchParams]
+  );
+  const sortBy = useMemo(
+    () => (searchParams.get('sort') as SortOption) || 'latest',
+    [searchParams]
+  );
+  const dateRange = useMemo(
+    () => searchParams.get('date') || 'all',
+    [searchParams]
+  );
 
   // Filter and sort posts
   const filteredPosts = useMemo(() => {
@@ -98,7 +122,7 @@ export function BlogContentAdvanced({
     if (dateRange !== 'all') {
       const now = new Date();
       const filterDate = new Date();
-      
+
       switch (dateRange) {
         case 'today':
           filterDate.setDate(now.getDate() - 1);
@@ -116,17 +140,21 @@ export function BlogContentAdvanced({
           filterDate.setFullYear(now.getFullYear() - 1);
           break;
       }
-      
+
       posts = posts.filter(post => new Date(post.date) >= filterDate);
     }
 
     // Sorting
     switch (sortBy) {
       case 'latest':
-        posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        posts.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
         break;
       case 'oldest':
-        posts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        posts.sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
         break;
       case 'popular':
         posts.sort((a, b) => (b.likes || 0) - (a.likes || 0));
@@ -150,15 +178,15 @@ export function BlogContentAdvanced({
   }, [filteredPosts, currentPage, perPage, infiniteScroll, loadedPages]);
 
   // Featured posts
-  const featuredPosts = useMemo(() => 
-    filteredPosts.filter(post => post.featured).slice(0, 3),
+  const featuredPosts = useMemo(
+    () => filteredPosts.filter(post => post.featured).slice(0, 3),
     [filteredPosts]
   );
 
   // Infinite scroll handler
   const loadMore = useCallback(() => {
     if (isLoading || paginatedPosts.length >= filteredPosts.length) return;
-    
+
     setIsLoading(true);
     setTimeout(() => {
       setLoadedPages(prev => prev + 1);
@@ -198,68 +226,55 @@ export function BlogContentAdvanced({
             <BlogSearch />
           </div>
         )}
-        
+
         <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
           {showFilters && <BlogFilters />}
           {showViewToggle && (
-            <BlogViewToggle
-              defaultView={viewMode}
-              onViewChange={setViewMode}
-            />
+            <BlogViewToggle defaultView={viewMode} onViewChange={setViewMode} />
           )}
         </div>
       </div>
 
       {/* Featured Posts - Only show on first page without active filters */}
-      {featuredPosts.length > 0 && currentPage === 1 && !searchQuery && selectedTags.length === 0 && (
-        <section className="mb-16">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl">
-                <TrendingUp className="h-5 w-5 text-white" />
+      {featuredPosts.length > 0 &&
+        currentPage === 1 &&
+        !searchQuery &&
+        selectedTags.length === 0 && (
+          <section className="mb-16">
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl">
+                  <TrendingUp className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  추천 포스트
+                </h3>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                추천 포스트
-              </h3>
+              <p className="text-muted-foreground text-lg">
+                전문가가 선정한 주요 인사이트
+              </p>
             </div>
-            <p className="text-muted-foreground text-lg">
-              전문가가 선정한 주요 인사이트
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredPosts.map((post) => (
-              <PostCard
-                key={post.id}
-                post={post}
-                featured
-                viewMode="grid"
-              />
-            ))}
-          </div>
-        </section>
-      )}
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredPosts.map(post => (
+                <PostCard key={post.id} post={post} featured viewMode="grid" />
+              ))}
+            </div>
+          </section>
+        )}
 
       {/* Main Posts Grid/List */}
       <section className="mb-12">
         {viewMode === 'grid' ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {paginatedPosts.map((post) => (
-              <PostCard
-                key={post.id}
-                post={post}
-                viewMode={viewMode}
-              />
+            {paginatedPosts.map(post => (
+              <PostCard key={post.id} post={post} viewMode={viewMode} />
             ))}
           </div>
         ) : (
           <div className="space-y-4">
-            {paginatedPosts.map((post) => (
-              <PostCard
-                key={post.id}
-                post={post}
-                viewMode={viewMode}
-              />
+            {paginatedPosts.map(post => (
+              <PostCard key={post.id} post={post} viewMode={viewMode} />
             ))}
           </div>
         )}
@@ -297,7 +312,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsLiked(!isLiked);
-    setLikes(prev => isLiked ? prev - 1 : prev + 1);
+    setLikes(prev => (isLiked ? prev - 1 : prev + 1));
   };
 
   const handleShare = (e: React.MouseEvent) => {
@@ -337,25 +352,28 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
               </Badge>
             )}
           </div>
-          
+
           <div className="md:w-2/3 p-6">
             <div className="flex items-center gap-3 mb-3">
-              <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">{post.category}</Badge>
+              <Badge
+                variant="secondary"
+                className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300"
+              >
+                {post.category}
+              </Badge>
               <span className="text-sm text-muted-foreground/70">
                 {new Date(post.date).toLocaleDateString('ko-KR')}
               </span>
             </div>
-            
+
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
-              <Link href={`/insights/${post.slug}`}>
-                {post.title}
-              </Link>
+              <Link href={`/insights/${post.slug}`}>{post.title}</Link>
             </h3>
-            
+
             <p className="text-muted-foreground mb-4 line-clamp-2">
               {post.excerpt}
             </p>
-            
+
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
@@ -370,13 +388,18 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
                   {post.readTime}
                 </span>
               </div>
-              
+
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleLike}
                   className="flex items-center gap-1 text-muted-foreground/70 hover:text-red-500 transition-colors"
                 >
-                  <Heart className={cn('h-4 w-4', isLiked && 'fill-current text-red-500')} />
+                  <Heart
+                    className={cn(
+                      'h-4 w-4',
+                      isLiked && 'fill-current text-red-500'
+                    )}
+                  />
                   <span className="text-sm">{likes}</span>
                 </button>
                 {post.views && (
@@ -425,36 +448,43 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
           )}
         </div>
       </CardHeader>
-      
+
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-3">
-          <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">{post.category}</Badge>
+          <Badge
+            variant="secondary"
+            className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300"
+          >
+            {post.category}
+          </Badge>
           <span className="text-xs text-muted-foreground/70">
             {new Date(post.date).toLocaleDateString('ko-KR')}
           </span>
         </div>
-        
+
         <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-          <Link href={`/insights/${post.slug}`}>
-            {post.title}
-          </Link>
+          <Link href={`/insights/${post.slug}`}>{post.title}</Link>
         </h3>
-        
+
         <p className="text-sm text-slate-600 dark:text-slate-300 mb-4 line-clamp-3 leading-relaxed">
           {post.excerpt}
         </p>
-        
+
         {post.tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mb-4">
-            {post.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant="outline" className="text-xs border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400">
+            {post.tags.slice(0, 3).map(tag => (
+              <Badge
+                key={tag}
+                variant="outline"
+                className="text-xs border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400"
+              >
                 <Tag className="h-3 w-3 mr-1" />
                 {tag}
               </Badge>
             ))}
           </div>
         )}
-        
+
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
           <Avatar className="h-6 w-6">
             <AvatarFallback>{post.author[0]}</AvatarFallback>
@@ -464,7 +494,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
           <span>{post.readTime}</span>
         </div>
       </CardContent>
-      
+
       <CardFooter className="p-6 pt-0">
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-3">
@@ -472,7 +502,12 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
               onClick={handleLike}
               className="flex items-center gap-1 text-muted-foreground/70 hover:text-red-500 transition-colors"
             >
-              <Heart className={cn('h-4 w-4', isLiked && 'fill-current text-red-500')} />
+              <Heart
+                className={cn(
+                  'h-4 w-4',
+                  isLiked && 'fill-current text-red-500'
+                )}
+              />
               <span className="text-sm">{likes}</span>
             </button>
             {post.views && (
@@ -482,7 +517,7 @@ function PostCard({ post, featured = false, viewMode }: PostCardProps) {
               </div>
             )}
           </div>
-          
+
           <Button
             variant="ghost"
             size="sm"

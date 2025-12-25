@@ -2,12 +2,13 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '절세의 미학 | Smart Tax Strategy | FamilyOffice S',
-  description: '삼성생명과 함께하는 체계적인 절세 전략으로 법인세 30%, 소득세 40%, 상속세 50% 절감을 경험하세요. 가업승계, 자기주식 활용 등 검증된 절세 솔루션을 제공합니다.',
+  description:
+    '삼성생명과 함께하는 체계적인 절세 전략으로 법인세 30%, 소득세 40%, 상속세 50% 절감을 경험하세요. 가업승계, 자기주식 활용 등 검증된 절세 솔루션을 제공합니다.',
   keywords: [
     '절세의 미학',
     '절세 전략',
     '법인세 절세',
-    '소득세 절세', 
+    '소득세 절세',
     '상속세 절세',
     '삼성생명',
     '가업승계',
@@ -17,12 +18,13 @@ export const metadata: Metadata = {
     '세무컨설팅',
     '절세 방법',
     '세무최적화',
-    'FamilyOffice S'
+    'FamilyOffice S',
   ].join(', '),
   authors: [{ name: 'FamilyOffice S Tax Strategy Team' }],
   openGraph: {
     title: '절세의 미학 | Smart Tax Strategy | FamilyOffice S',
-    description: '삼성생명과 함께하는 체계적인 절세 전략으로 평균 40% 절세 효과를 경험하세요. 법인세, 소득세, 상속세 절감을 위한 맞춤형 솔루션을 제공합니다.',
+    description:
+      '삼성생명과 함께하는 체계적인 절세 전략으로 평균 40% 절세 효과를 경험하세요. 법인세, 소득세, 상속세 절감을 위한 맞춤형 솔루션을 제공합니다.',
     url: 'https://familyoffices.vip/tax-strategy',
     siteName: 'FamilyOffice S',
     locale: 'ko_KR',
@@ -39,7 +41,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '절세의 미학 | FamilyOffice S',
-    description: '삼성생명과 함께하는 체계적인 절세 전략으로 평균 40% 절세 효과를 경험하세요.',
+    description:
+      '삼성생명과 함께하는 체계적인 절세 전략으로 평균 40% 절세 효과를 경험하세요.',
     images: ['/og-tax-strategy.jpg'],
   },
   robots: {

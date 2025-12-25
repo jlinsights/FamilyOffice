@@ -3,15 +3,18 @@
  * GET /api/email/status
  */
 import { NextResponse } from 'next/server';
+
+import { logger } from '@/lib/debug-logger';
 import { resend } from '@/lib/email/resend-client';
 import { env } from '@/lib/env';
-import { logger } from '@/lib/debug-logger';
 
 export async function GET() {
   try {
     const apiKey = (env as any).RESEND_API_KEY || process.env.RESEND_API_KEY;
-    const fromEmail = (env as any).NEXT_PUBLIC_RESEND_FROM_EMAIL || process.env.NEXT_PUBLIC_RESEND_FROM_EMAIL;
-    
+    const fromEmail =
+      (env as any).NEXT_PUBLIC_RESEND_FROM_EMAIL ||
+      process.env.NEXT_PUBLIC_RESEND_FROM_EMAIL;
+
     const status: any = {
       configured: !!apiKey,
       domain: fromEmail || 'noreply@email.familyoffices.vip',
@@ -24,11 +27,14 @@ export async function GET() {
         // 도메인 목록 조회로 연결 테스트
         const domains = await resend.domains.list();
         status.apiConnected = !!domains.data;
-        status.domainsCount = Array.isArray(domains.data) ? domains.data.length : 0;
+        status.domainsCount = Array.isArray(domains.data)
+          ? domains.data.length
+          : 0;
       } catch (error) {
         logger.warn('Resend API 연결 테스트 실패:', error);
         status.apiConnected = false;
-        status.error = error instanceof Error ? error.message : 'API connection failed';
+        status.error =
+          error instanceof Error ? error.message : 'API connection failed';
       }
     } else {
       status.apiConnected = false;
@@ -36,7 +42,6 @@ export async function GET() {
     }
 
     return NextResponse.json(status);
-
   } catch (error) {
     logger.error('이메일 상태 확인 중 오류:', error);
     return NextResponse.json(

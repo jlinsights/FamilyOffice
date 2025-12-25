@@ -3,11 +3,14 @@
  * 필수 환경변수 누락 시 애플리케이션 실행 중단
  */
 import { z } from 'zod';
+
 import { logger } from './debug-logger';
 
 // 공용 (클라이언트/서버) 환경변수 스키마
 export const publicEnvSchema = z.object({
-  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  NODE_ENV: z
+    .enum(['development', 'production', 'test'])
+    .default('development'),
   VERCEL_ENV: z.enum(['development', 'preview', 'production']).optional(),
   VERCEL_URL: z.string().optional(),
   NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
@@ -16,12 +19,14 @@ export const publicEnvSchema = z.object({
 // 서버 전용 환경변수 스키마 - 보안 강화
 export const serverEnvSchema = z.object({
   // Supabase - 필수 환경변수 (production에서는 필수)
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1, 'Supabase Service Role Key is required'),
-  
+  SUPABASE_SERVICE_ROLE_KEY: z
+    .string()
+    .min(1, 'Supabase Service Role Key is required'),
+
   // Clerk - 필수 환경변수 (production에서는 필수)
   CLERK_SECRET_KEY: z.string().min(1, 'Clerk Secret Key is required'),
   CLERK_WEBHOOK_SECRET: z.string().min(1, 'Clerk Webhook Secret is required'),
-  
+
   // 선택적 환경변수들
   REDIS_URL: z.string().optional(),
   REDIS_HOST: z.string().optional(),
@@ -34,7 +39,7 @@ export const serverEnvSchema = z.object({
   BEEHIIV_PUBLICATION_ID: z.string().optional(),
   HUBSPOT_API_KEY: z.string().optional(),
   HUBSPOT_PRIVATE_ACCESS_TOKEN: z.string().optional(),
-  
+
   // Resend Email - 추가됨
   RESEND_API_KEY: z.string().optional(),
 });
@@ -42,9 +47,13 @@ export const serverEnvSchema = z.object({
 // 클라이언트 전용 환경변수 스키마 - 보안 강화
 export const clientEnvSchema = z.object({
   // 필수 클라이언트 환경변수
-  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1, 'Clerk Publishable Key is required'),
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z
+    .string()
+    .min(1, 'Clerk Publishable Key is required'),
   NEXT_PUBLIC_SUPABASE_URL: z.string().url('Invalid Supabase URL'),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1, 'Supabase Anon Key is required'),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z
+    .string()
+    .min(1, 'Supabase Anon Key is required'),
 
   // 선택적 클라이언트 환경변수
   NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().optional(),
@@ -64,82 +73,106 @@ export const clientEnvSchema = z.object({
 export function createEnv() {
   const isServer = typeof window === 'undefined';
   const isDev = process.env.NODE_ENV === 'development';
-  const isBuild = typeof process !== 'undefined' && process.env.NEXT_PHASE === 'phase-production-build';
-  const skipValidation = typeof process !== 'undefined' && process.env.SKIP_ENV_VALIDATION === 'true';
-  
+  const isBuild =
+    typeof process !== 'undefined' &&
+    process.env.NEXT_PHASE === 'phase-production-build';
+  const skipValidation =
+    typeof process !== 'undefined' &&
+    process.env.SKIP_ENV_VALIDATION === 'true';
+
   // 빌드 시에는 기본값 반환
   if (isBuild) {
     return {
-      NODE_ENV: (process.env.NODE_ENV || 'development') as 'development' | 'production' | 'test',
-      NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+      NODE_ENV: (process.env.NODE_ENV || 'development') as
+        | 'development'
+        | 'production'
+        | 'test',
+      NEXT_PUBLIC_APP_URL:
+        process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
     };
   }
-  
+
   // 공용 환경변수 수집
   const publicEnv = {
-    NODE_ENV: (process.env.NODE_ENV || 'development') as 'development' | 'production' | 'test',
-    VERCEL_ENV: typeof process !== 'undefined' ? process.env.VERCEL_ENV : undefined,
-    VERCEL_URL: typeof process !== 'undefined' ? process.env.VERCEL_URL : undefined,
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+    NODE_ENV: (process.env.NODE_ENV || 'development') as
+      | 'development'
+      | 'production'
+      | 'test',
+    VERCEL_ENV:
+      typeof process !== 'undefined' ? process.env.VERCEL_ENV : undefined,
+    VERCEL_URL:
+      typeof process !== 'undefined' ? process.env.VERCEL_URL : undefined,
+    NEXT_PUBLIC_APP_URL:
+      process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   };
-  
+
   // 클라이언트 환경변수 수집
   const clientEnv = {
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_CALCOM_API_KEY: process.env.NEXT_PUBLIC_CALCOM_API_KEY,
-    NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY,
+    NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY:
+      process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY,
     NEXT_PUBLIC_KAKAO_CHANNEL_ID: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID,
     NEXT_PUBLIC_KAKAO_PIXEL_ID: process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID,
     NEXT_PUBLIC_HUBSPOT_PORTAL_ID: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID,
     NEXT_PUBLIC_RESEND_FROM_EMAIL: process.env.NEXT_PUBLIC_RESEND_FROM_EMAIL,
   };
-  
+
   // 서버 환경변수 수집 (서버에서만)
-  const serverEnv = isServer ? {
-    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
-    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
-    CLERK_WEBHOOK_SECRET: process.env.CLERK_WEBHOOK_SECRET,
-    REDIS_URL: process.env.REDIS_URL,
-    REDIS_HOST: process.env.REDIS_HOST,
-    REDIS_PORT: process.env.REDIS_PORT,
-    REDIS_PASSWORD: process.env.REDIS_PASSWORD,
-    LOGS_SO_API_KEY: process.env.LOGS_SO_API_KEY,
-    LOGS_SO_WORKSPACE_ID: process.env.LOGS_SO_WORKSPACE_ID,
-    ALPHA_VANTAGE_API_KEY: process.env.ALPHA_VANTAGE_API_KEY,
-    BEEHIIV_API_KEY: process.env.BEEHIIV_API_KEY,
-    BEEHIIV_PUBLICATION_ID: process.env.BEEHIIV_PUBLICATION_ID,
-    HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
-    HUBSPOT_PRIVATE_ACCESS_TOKEN: process.env.HUBSPOT_PRIVATE_ACCESS_TOKEN,
-    RESEND_API_KEY: process.env.RESEND_API_KEY,
-  } : {};
-  
+  const serverEnv = isServer
+    ? {
+        SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+        CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+        CLERK_WEBHOOK_SECRET: process.env.CLERK_WEBHOOK_SECRET,
+        REDIS_URL: process.env.REDIS_URL,
+        REDIS_HOST: process.env.REDIS_HOST,
+        REDIS_PORT: process.env.REDIS_PORT,
+        REDIS_PASSWORD: process.env.REDIS_PASSWORD,
+        LOGS_SO_API_KEY: process.env.LOGS_SO_API_KEY,
+        LOGS_SO_WORKSPACE_ID: process.env.LOGS_SO_WORKSPACE_ID,
+        ALPHA_VANTAGE_API_KEY: process.env.ALPHA_VANTAGE_API_KEY,
+        BEEHIIV_API_KEY: process.env.BEEHIIV_API_KEY,
+        BEEHIIV_PUBLICATION_ID: process.env.BEEHIIV_PUBLICATION_ID,
+        HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
+        HUBSPOT_PRIVATE_ACCESS_TOKEN: process.env.HUBSPOT_PRIVATE_ACCESS_TOKEN,
+        RESEND_API_KEY: process.env.RESEND_API_KEY,
+      }
+    : {};
+
   const allEnv = { ...publicEnv, ...clientEnv, ...serverEnv };
-  
+
   // 검증 (개발 모드에서만, skipValidation이 false일 때)
   if (isDev && !skipValidation) {
     try {
       // 클라이언트 환경변수 검증
       const clientResult = clientEnvSchema.safeParse(clientEnv);
       if (!clientResult.success) {
-        logger.warn('Client environment variables validation failed:', clientResult.error.format());
+        logger.warn(
+          'Client environment variables validation failed:',
+          clientResult.error.format()
+        );
       }
-      
+
       // 서버 환경변수 검증 (서버에서만)
       if (isServer) {
         const serverResult = serverEnvSchema.safeParse(serverEnv);
         if (!serverResult.success) {
-          logger.warn('Server environment variables validation failed:', serverResult.error.format());
+          logger.warn(
+            'Server environment variables validation failed:',
+            serverResult.error.format()
+          );
         }
       }
     } catch (error) {
       logger.warn('Environment validation error:', error);
     }
   }
-  
+
   return allEnv;
 }
 
@@ -149,8 +182,13 @@ export const validateEnvOnStartup = () => {
 };
 
 // 특정 환경변수 그룹 검증 - 단순화
-export const validateEnvGroup = (group: 'clerk' | 'supabase' | 'redis' | 'analytics') => {
-  return { success: true, message: `${group} 환경변수 검증 건너뛰기 (단순화됨)` };
+export const validateEnvGroup = (
+  group: 'clerk' | 'supabase' | 'redis' | 'analytics'
+) => {
+  return {
+    success: true,
+    message: `${group} 환경변수 검증 건너뛰기 (단순화됨)`,
+  };
 };
 
 // 캐싱된 환경변수 객체
@@ -160,7 +198,7 @@ export function getEnv() {
   if (cachedEnv) {
     return cachedEnv;
   }
-  
+
   try {
     cachedEnv = createEnv();
     return cachedEnv;
@@ -175,7 +213,6 @@ export function getEnv() {
     return fallbackEnv as Env;
   }
 }
-
 
 // 검증된 환경변수 전역 객체
 export const env = getEnv();

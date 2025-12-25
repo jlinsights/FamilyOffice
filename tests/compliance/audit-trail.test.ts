@@ -4,9 +4,7 @@
  */
 import { describe, test, expect, beforeEach, afterEach } from '@jest/globals';
 
-import {
-  FINANCIAL_SCENARIOS,
-} from '../fixtures/financial-scenarios';
+import { FINANCIAL_SCENARIOS } from '../fixtures/financial-scenarios';
 
 interface AuditLogEntry {
   id: string;
@@ -321,33 +319,23 @@ class ComplianceTestSuite {
     if (filters) {
       if (filters.startDate) {
         const startDate = filters.startDate;
-        filteredLogs = filteredLogs.filter(
-          log => log.timestamp >= startDate
-        );
+        filteredLogs = filteredLogs.filter(log => log.timestamp >= startDate);
       }
       if (filters.endDate) {
         const endDate = filters.endDate;
-        filteredLogs = filteredLogs.filter(
-          log => log.timestamp <= endDate
-        );
+        filteredLogs = filteredLogs.filter(log => log.timestamp <= endDate);
       }
       if (filters.userId) {
         const userId = filters.userId;
-        filteredLogs = filteredLogs.filter(
-          log => log.userId === userId
-        );
+        filteredLogs = filteredLogs.filter(log => log.userId === userId);
       }
       if (filters.action) {
         const action = filters.action;
-        filteredLogs = filteredLogs.filter(
-          log => log.action === action
-        );
+        filteredLogs = filteredLogs.filter(log => log.action === action);
       }
       if (filters.resource) {
         const resource = filters.resource;
-        filteredLogs = filteredLogs.filter(
-          log => log.resource === resource
-        );
+        filteredLogs = filteredLogs.filter(log => log.resource === resource);
       }
     }
 
@@ -466,7 +454,8 @@ describe('Compliance and Audit Trail Testing', () => {
 
     test('should log transaction execution with before/after values', () => {
       const scenario = FINANCIAL_SCENARIOS.FAMILY_OFFICE_DIVERSIFIED;
-      if (!scenario?.transactions?.[0]) throw new Error('Transaction not found');
+      if (!scenario?.transactions?.[0])
+        throw new Error('Transaction not found');
       const transaction = scenario.transactions[0];
 
       complianceSuite.logAuditEvent({

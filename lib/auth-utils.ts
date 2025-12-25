@@ -32,7 +32,9 @@ export async function requireAdmin(): Promise<string | NextResponse> {
 
 type AuthHandler = (req: Request, userId: string) => Promise<NextResponse>;
 
-export function withAuth(handler: AuthHandler): (req: Request) => Promise<NextResponse> {
+export function withAuth(
+  handler: AuthHandler
+): (req: Request) => Promise<NextResponse> {
   return async (req: Request) => {
     const authResult = await requireAuth();
     if (authResult instanceof NextResponse) {
@@ -42,7 +44,9 @@ export function withAuth(handler: AuthHandler): (req: Request) => Promise<NextRe
   };
 }
 
-export function withAdmin(handler: AuthHandler): (req: Request) => Promise<NextResponse> {
+export function withAdmin(
+  handler: AuthHandler
+): (req: Request) => Promise<NextResponse> {
   return async (req: Request) => {
     const authResult = await requireAdmin();
     if (authResult instanceof NextResponse) {

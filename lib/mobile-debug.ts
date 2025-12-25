@@ -23,7 +23,7 @@ const getLocalIPAddress = (): string => {
       }
     }
   }
-  
+
   return results[0] || 'localhost';
 };
 
@@ -31,7 +31,7 @@ const getLocalIPAddress = (): string => {
 export const mobileDebugLog = (message: string, data?: any) => {
   if (typeof window !== 'undefined' && window.innerWidth < 768) {
     console.log(`📱 Mobile Debug: ${message}`, data);
-    
+
     // Visual debug overlay for mobile
     const debugElement = document.createElement('div');
     debugElement.style.cssText = `
@@ -47,7 +47,7 @@ export const mobileDebugLog = (message: string, data?: any) => {
       word-wrap: break-word;
     `;
     debugElement.textContent = `${message} ${JSON.stringify(data || '')}`;
-    
+
     document.body.appendChild(debugElement);
     setTimeout(() => debugElement.remove(), 3000);
   }
@@ -61,13 +61,13 @@ export const touchDebugger = {
       type: event.type,
       x: touch?.clientX,
       y: touch?.clientY,
-      target: (event.target as Element)?.tagName
+      target: (event.target as Element)?.tagName,
     });
   },
 
   logSwipe: (direction: 'left' | 'right' | 'up' | 'down', element: string) => {
     mobileDebugLog('Swipe Detected', { direction, element });
-  }
+  },
 };
 
 // Viewport debugging
@@ -78,9 +78,9 @@ export const viewportDebugger = () => {
       height: window.innerHeight,
       devicePixelRatio: window.devicePixelRatio,
       orientation: screen.orientation?.type || 'unknown',
-      userAgent: navigator.userAgent.substring(0, 50) + '...'
+      userAgent: navigator.userAgent.substring(0, 50) + '...',
     };
-    
+
     mobileDebugLog('Viewport Info', info);
     return info;
   }
@@ -93,15 +93,15 @@ export const koreanInputDebugger = {
     const inputType = element.type;
     const inputMode = element.inputMode;
     const lang = element.lang || document.documentElement.lang;
-    
+
     mobileDebugLog('Korean Input Debug', {
       inputType,
       inputMode,
       lang,
       hasKoreanCharacters: /[가-힣]/.test(element.value),
-      composing: element.dataset.composing === 'true'
+      composing: element.dataset.composing === 'true',
     });
-  }
+  },
 };
 
 // Export utilities for development
@@ -110,5 +110,5 @@ export const mobileDevTools = {
   mobileDebugLog,
   touchDebugger,
   viewportDebugger,
-  koreanInputDebugger
+  koreanInputDebugger,
 };

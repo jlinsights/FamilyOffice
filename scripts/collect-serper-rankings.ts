@@ -10,16 +10,15 @@
  * - Path: /api/cron/daily-bmad-collection
  * - Schedule: "0 2 * * *" (매일 새벽 2시)
  */
-
+import { createClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
 import { resolve } from 'path';
 
-// Load environment variables from .env.local
-config({ path: resolve(process.cwd(), '.env.local') });
-
-import { createClient } from '@supabase/supabase-js';
 import { BMAD_AI_KEYWORDS } from '../lib/ai-search-monitoring';
 import { batchSearch } from '../lib/serper/client';
+
+// Load environment variables from .env.local
+config({ path: resolve(process.cwd(), '.env.local') });
 
 // Supabase 클라이언트 초기화
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -101,11 +100,16 @@ export async function collectDailyRankings() {
       .insert(batch);
 
     if (error) {
-      console.error(`❌ 배치 ${Math.floor(i / batchSize) + 1} 저장 실패:`, error.message);
+      console.error(
+        `❌ 배치 ${Math.floor(i / batchSize) + 1} 저장 실패:`,
+        error.message
+      );
       errorCount += batch.length;
     } else {
       insertedCount += batch.length;
-      console.log(`✅ 배치 ${Math.floor(i / batchSize) + 1} 저장 완료: ${batch.length}개`);
+      console.log(
+        `✅ 배치 ${Math.floor(i / batchSize) + 1} 저장 완료: ${batch.length}개`
+      );
     }
   }
 
@@ -142,7 +146,9 @@ export async function collectDailyRankings() {
 
   for (const [category, stats] of Object.entries(categoryStats)) {
     const percentage = ((stats.found / stats.total) * 100).toFixed(1);
-    console.log(`  ${category}: ${stats.found}/${stats.total} (${percentage}%)`);
+    console.log(
+      `  ${category}: ${stats.found}/${stats.total} (${percentage}%)`
+    );
   }
 
   console.log('');
@@ -215,7 +221,10 @@ export async function getCategoryAverageRankings() {
   }
 
   // 카테고리별 평균 계산
-  const categoryAverages: Record<string, { sum: number; count: number; avg: number }> = {};
+  const categoryAverages: Record<
+    string,
+    { sum: number; count: number; avg: number }
+  > = {};
 
   for (const record of data || []) {
     const category = record.bmad_category || 'unknown';
@@ -232,7 +241,9 @@ export async function getCategoryAverageRankings() {
   // 평균 계산
   for (const category in categoryAverages) {
     const stats = categoryAverages[category];
-    stats.avg = stats.sum / stats.count;
+    if (stats) {
+      stats.avg = stats.sum / stats.count;
+    }
   }
 
   return categoryAverages;

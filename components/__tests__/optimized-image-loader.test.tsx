@@ -1,14 +1,21 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { AvatarImage, BackgroundImage, HeroImage, OptimizedImage, ThumbnailImage } from '../optimized-image-loader';
+
+import {
+  AvatarImage,
+  BackgroundImage,
+  HeroImage,
+  OptimizedImage,
+  ThumbnailImage,
+} from '../optimized-image-loader';
 
 // Mock Next.js Image component
 jest.mock('next/image', () => {
-  return function MockImage({ 
-    src, 
-    alt, 
-    onLoad, 
-    onError, 
-    ...props 
+  return function MockImage({
+    src,
+    alt,
+    onLoad,
+    onError,
+    ...props
   }: {
     src: string;
     alt: string;
@@ -95,12 +102,7 @@ describe('OptimizedImage', () => {
     });
 
     it('sets lazy loading by default', () => {
-      render(
-        <OptimizedImage
-          src="/test-image.jpg"
-          alt="Test image"
-        />
-      );
+      render(<OptimizedImage src="/test-image.jpg" alt="Test image" />);
 
       const image = screen.getByTestId('next-image');
       expect(image).toHaveAttribute('loading', 'lazy');
@@ -109,12 +111,7 @@ describe('OptimizedImage', () => {
 
   describe('Loading States', () => {
     it('shows loading skeleton initially', () => {
-      render(
-        <OptimizedImage
-          src="/test-image.jpg"
-          alt="Test image"
-        />
-      );
+      render(<OptimizedImage src="/test-image.jpg" alt="Test image" />);
 
       // Check for loading skeleton
       const skeleton = document.querySelector('.animate-pulse');
@@ -123,10 +120,7 @@ describe('OptimizedImage', () => {
 
     it('hides loading skeleton after image loads', async () => {
       const { container } = render(
-        <OptimizedImage
-          src="/test-image.jpg"
-          alt="Test image"
-        />
+        <OptimizedImage src="/test-image.jpg" alt="Test image" />
       );
 
       const image = screen.getByTestId('next-image');
@@ -159,18 +153,15 @@ describe('OptimizedImage', () => {
 
   describe('Error Handling', () => {
     it('shows error fallback when image fails to load', async () => {
-      render(
-        <OptimizedImage
-          src="/broken-image.jpg"
-          alt="Broken image"
-        />
-      );
+      render(<OptimizedImage src="/broken-image.jpg" alt="Broken image" />);
 
       const image = screen.getByTestId('next-image');
       fireEvent.error(image);
 
       await waitFor(() => {
-        expect(screen.getByText('이미지를 불러올 수 없습니다')).toBeInTheDocument();
+        expect(
+          screen.getByText('이미지를 불러올 수 없습니다')
+        ).toBeInTheDocument();
       });
     });
 
@@ -215,26 +206,16 @@ describe('OptimizedImage', () => {
   describe('WebP Detection', () => {
     it('detects WebP support', () => {
       mockToDataURL.mockReturnValue('data:image/webp;base64,test');
-      
-      render(
-        <OptimizedImage
-          src="/test-image.jpg"
-          alt="Test image"
-        />
-      );
+
+      render(<OptimizedImage src="/test-image.jpg" alt="Test image" />);
 
       expect(mockToDataURL).toHaveBeenCalledWith('image/webp');
     });
 
     it('handles no WebP support', () => {
       mockToDataURL.mockReturnValue('data:image/png;base64,test');
-      
-      render(
-        <OptimizedImage
-          src="/test-image.jpg"
-          alt="Test image"
-        />
-      );
+
+      render(<OptimizedImage src="/test-image.jpg" alt="Test image" />);
 
       const image = screen.getByTestId('next-image');
       expect(image).toBeInTheDocument();
@@ -256,24 +237,14 @@ describe('OptimizedImage', () => {
 
     it('handles data URLs', () => {
       const dataUrl = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD';
-      render(
-        <OptimizedImage
-          src={dataUrl}
-          alt="Data URL image"
-        />
-      );
+      render(<OptimizedImage src={dataUrl} alt="Data URL image" />);
 
       const image = screen.getByTestId('next-image');
       expect(image).toHaveAttribute('src', dataUrl);
     });
 
     it('handles local images', () => {
-      render(
-        <OptimizedImage
-          src="/local-image.jpg"
-          alt="Local image"
-        />
-      );
+      render(<OptimizedImage src="/local-image.jpg" alt="Local image" />);
 
       const image = screen.getByTestId('next-image');
       expect(image).toHaveAttribute('src', '/local-image.jpg');
@@ -285,12 +256,7 @@ describe('Specialized Image Components', () => {
   describe('HeroImage', () => {
     it('renders with hero-specific optimizations', () => {
       render(
-        <HeroImage
-          src="/hero.jpg"
-          alt="Hero image"
-          width={1200}
-          height={600}
-        />
+        <HeroImage src="/hero.jpg" alt="Hero image" width={1200} height={600} />
       );
 
       const image = screen.getByTestId('next-image');
@@ -299,15 +265,13 @@ describe('Specialized Image Components', () => {
     });
 
     it('uses hero-specific responsive sizes', () => {
-      render(
-        <HeroImage
-          src="/hero.jpg"
-          alt="Hero image"
-        />
-      );
+      render(<HeroImage src="/hero.jpg" alt="Hero image" />);
 
       const image = screen.getByTestId('next-image');
-      expect(image).toHaveAttribute('sizes', '(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px');
+      expect(image).toHaveAttribute(
+        'sizes',
+        '(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px'
+      );
     });
   });
 
@@ -324,7 +288,10 @@ describe('Specialized Image Components', () => {
 
       const image = screen.getByTestId('next-image');
       expect(image).toHaveAttribute('quality', '75');
-      expect(image).toHaveAttribute('sizes', '(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px');
+      expect(image).toHaveAttribute(
+        'sizes',
+        '(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px'
+      );
     });
   });
 
@@ -357,7 +324,8 @@ describe('Specialized Image Components', () => {
         </BackgroundImage>
       );
 
-      const container = screen.getByTestId('overlay-content').parentElement?.parentElement;
+      const container =
+        screen.getByTestId('overlay-content').parentElement?.parentElement;
       expect(container).toHaveClass('custom-bg');
       expect(screen.getByTestId('overlay-content')).toBeInTheDocument();
       expect(screen.getByTestId('next-image')).toBeInTheDocument();
@@ -365,10 +333,7 @@ describe('Specialized Image Components', () => {
 
     it('sets fill property for background images', () => {
       render(
-        <BackgroundImage
-          src="/background.jpg"
-          alt="Background"
-        >
+        <BackgroundImage src="/background.jpg" alt="Background">
           <div>Content</div>
         </BackgroundImage>
       );
@@ -381,24 +346,14 @@ describe('Specialized Image Components', () => {
 
 describe('Accessibility', () => {
   it('provides proper alt text', () => {
-    render(
-      <OptimizedImage
-        src="/test.jpg"
-        alt="Detailed image description"
-      />
-    );
+    render(<OptimizedImage src="/test.jpg" alt="Detailed image description" />);
 
     const image = screen.getByAltText('Detailed image description');
     expect(image).toBeInTheDocument();
   });
 
   it('handles empty alt text for decorative images', () => {
-    render(
-      <OptimizedImage
-        src="/decorative.jpg"
-        alt=""
-      />
-    );
+    render(<OptimizedImage src="/decorative.jpg" alt="" />);
 
     const image = screen.getByTestId('next-image');
     expect(image).toHaveAttribute('alt', '');
@@ -407,26 +362,14 @@ describe('Accessibility', () => {
 
 describe('Performance Optimizations', () => {
   it('uses appropriate quality settings', () => {
-    render(
-      <OptimizedImage
-        src="/test.jpg"
-        alt="Test"
-        quality={95}
-      />
-    );
+    render(<OptimizedImage src="/test.jpg" alt="Test" quality={95} />);
 
     const image = screen.getByTestId('next-image');
     expect(image).toHaveAttribute('quality', '95');
   });
 
   it('handles placeholder settings', () => {
-    render(
-      <OptimizedImage
-        src="/test.jpg"
-        alt="Test"
-        placeholder="blur"
-      />
-    );
+    render(<OptimizedImage src="/test.jpg" alt="Test" placeholder="blur" />);
 
     const image = screen.getByTestId('next-image');
     expect(image).toHaveAttribute('placeholder', 'blur');
@@ -434,13 +377,7 @@ describe('Performance Optimizations', () => {
 
   it('handles responsive sizes', () => {
     const customSizes = '(max-width: 768px) 100vw, 50vw';
-    render(
-      <OptimizedImage
-        src="/test.jpg"
-        alt="Test"
-        sizes={customSizes}
-      />
-    );
+    render(<OptimizedImage src="/test.jpg" alt="Test" sizes={customSizes} />);
 
     const image = screen.getByTestId('next-image');
     expect(image).toHaveAttribute('sizes', customSizes);

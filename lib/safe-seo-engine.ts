@@ -1,5 +1,6 @@
 // Safe wrapper for SEO engine with feature flags and error handling
 import { Metadata } from 'next';
+
 import { isFeatureEnabled } from './feature-flags';
 import { performanceMonitor } from './performance-monitor';
 import { BundleSizeMonitor, dynamicSEOImports } from './seo-bundle-optimizer';
@@ -50,12 +51,12 @@ export async function generateSafeMetadata(
     }
 
     // Simplified SEO logic (since advanced engine was removed)
-      return {
-        ...defaultMetadata,
-        title: options?.title || defaultMetadata.title,
-        description: options?.description || defaultMetadata.description,
-        keywords: options?.keywords || defaultMetadata.keywords,
-      };
+    return {
+      ...defaultMetadata,
+      title: options?.title || defaultMetadata.title,
+      description: options?.description || defaultMetadata.description,
+      keywords: options?.keywords || defaultMetadata.keywords,
+    };
   } catch (error) {
     // Log error in development
     if (process.env.NODE_ENV === 'development') {
@@ -85,21 +86,22 @@ export async function generateSafeStructuredData(
 
     const structuredDataEngine = await performanceMonitor.trackAsyncOperation(
       'seo_structured_data_generation',
-      () => BundleSizeMonitor.trackImportTime(
-        'structured-data-engine',
-        () => dynamicSEOImports.loadStructuredDataEngine()
-      ),
+      () =>
+        BundleSizeMonitor.trackImportTime('structured-data-engine', () =>
+          dynamicSEOImports.loadStructuredDataEngine()
+        ),
       { feature: 'structuredData' }
     );
-    
+
     if (structuredDataEngine) {
       return await performanceMonitor.trackAsyncOperation(
         'seo_generate_structured_data',
-        () => structuredDataEngine.generateDynamicStructuredData({
-          pageName,
-          domain: 'familyoffices.vip',
-          ...pageData
-        }),
+        () =>
+          structuredDataEngine.generateDynamicStructuredData({
+            pageName,
+            domain: 'familyoffices.vip',
+            ...pageData,
+          }),
         { operation: 'generateDynamicStructuredData' }
       );
     }

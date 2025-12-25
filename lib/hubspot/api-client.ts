@@ -2,7 +2,6 @@
  * HubSpot API 통합 클라이언트
  * 리드 관리, 콘택트 동기화, 마케팅 자동화를 위한 HubSpot API 래퍼
  */
-
 import { z } from 'zod';
 
 // HubSpot API 응답 스키마
@@ -101,11 +100,11 @@ export class HubSpotAPIClient {
     }
 
     const url = `${this.baseURL}${endpoint}`;
-    
+
     const response = await fetch(url, {
       ...options,
       headers: {
-        'Authorization': `Bearer ${this.accessToken}`,
+        Authorization: `Bearer ${this.accessToken}`,
         'Content-Type': 'application/json',
         ...options.headers,
       },
@@ -113,7 +112,9 @@ export class HubSpotAPIClient {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(`HubSpot API Error: ${response.status} - ${JSON.stringify(errorData)}`);
+      throw new Error(
+        `HubSpot API Error: ${response.status} - ${JSON.stringify(errorData)}`
+      );
     }
 
     return response.json();
@@ -214,7 +215,9 @@ export class HubSpotAPIClient {
       `/crm/v3/objects/contacts?limit=${limit}&sort=createdate&properties=email,firstname,lastname,company,phone,lifecyclestage,lead_status,lead_score,createdate`
     );
 
-    return response.results.map((contact: any) => HubSpotContactSchema.parse(contact));
+    return response.results.map((contact: any) =>
+      HubSpotContactSchema.parse(contact)
+    );
   }
 
   // ==================== 딜 관리 ====================
@@ -249,8 +252,10 @@ export class HubSpotAPIClient {
       requestBody.associations = [
         {
           to: { id: dealData.contactId },
-          types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 3 }]
-        }
+          types: [
+            { associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 3 },
+          ],
+        },
       ];
     }
 
@@ -271,7 +276,7 @@ export class HubSpotAPIClient {
       {
         method: 'PATCH',
         body: JSON.stringify({
-          properties: { dealstage: stage }
+          properties: { dealstage: stage },
         }),
       }
     );
@@ -284,7 +289,11 @@ export class HubSpotAPIClient {
   /**
    * 이메일 활동 추가
    */
-  async trackEmailActivity(contactId: string, subject: string, body: string): Promise<void> {
+  async trackEmailActivity(
+    contactId: string,
+    subject: string,
+    body: string
+  ): Promise<void> {
     await this.makeRequest('/crm/v3/objects/emails', {
       method: 'POST',
       body: JSON.stringify({
@@ -295,9 +304,14 @@ export class HubSpotAPIClient {
         associations: [
           {
             to: { id: contactId },
-            types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 198 }]
-          }
-        ]
+            types: [
+              {
+                associationCategory: 'HUBSPOT_DEFINED',
+                associationTypeId: 198,
+              },
+            ],
+          },
+        ],
       }),
     });
   }
@@ -305,7 +319,11 @@ export class HubSpotAPIClient {
   /**
    * 웹사이트 활동 추가
    */
-  async trackWebActivity(contactId: string, pageUrl: string, pageTitle?: string): Promise<void> {
+  async trackWebActivity(
+    contactId: string,
+    pageUrl: string,
+    pageTitle?: string
+  ): Promise<void> {
     await this.makeRequest('/crm/v3/objects/notes', {
       method: 'POST',
       body: JSON.stringify({
@@ -316,9 +334,14 @@ export class HubSpotAPIClient {
         associations: [
           {
             to: { id: contactId },
-            types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 }]
-          }
-        ]
+            types: [
+              {
+                associationCategory: 'HUBSPOT_DEFINED',
+                associationTypeId: 202,
+              },
+            ],
+          },
+        ],
       }),
     });
   }
@@ -326,7 +349,11 @@ export class HubSpotAPIClient {
   /**
    * 컨설팅 신청 활동 추가
    */
-  async trackConsultationRequest(contactId: string, serviceType: string, message: string): Promise<void> {
+  async trackConsultationRequest(
+    contactId: string,
+    serviceType: string,
+    message: string
+  ): Promise<void> {
     await this.makeRequest('/crm/v3/objects/notes', {
       method: 'POST',
       body: JSON.stringify({
@@ -337,9 +364,14 @@ export class HubSpotAPIClient {
         associations: [
           {
             to: { id: contactId },
-            types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 }]
-          }
-        ]
+            types: [
+              {
+                associationCategory: 'HUBSPOT_DEFINED',
+                associationTypeId: 202,
+              },
+            ],
+          },
+        ],
       }),
     });
   }
@@ -359,44 +391,63 @@ export class HubSpotAPIClient {
 
     if (filters.leadStatus) {
       filterGroups.push({
-        filters: [{
-          propertyName: 'lead_status',
-          operator: 'EQ',
-          value: filters.leadStatus
-        }]
+        filters: [
+          {
+            propertyName: 'lead_status',
+            operator: 'EQ',
+            value: filters.leadStatus,
+          },
+        ],
       });
     }
 
     if (filters.serviceInterest) {
       filterGroups.push({
-        filters: [{
-          propertyName: 'service_interest',
-          operator: 'EQ',
-          value: filters.serviceInterest
-        }]
+        filters: [
+          {
+            propertyName: 'service_interest',
+            operator: 'EQ',
+            value: filters.serviceInterest,
+          },
+        ],
       });
     }
 
     if (filters.leadScoreMin) {
       filterGroups.push({
-        filters: [{
-          propertyName: 'lead_score',
-          operator: 'GTE',
-          value: filters.leadScoreMin.toString()
-        }]
+        filters: [
+          {
+            propertyName: 'lead_score',
+            operator: 'GTE',
+            value: filters.leadScoreMin.toString(),
+          },
+        ],
       });
     }
 
-    const response = await this.makeRequest<any>('/crm/v3/objects/contacts/search', {
-      method: 'POST',
-      body: JSON.stringify({
-        filterGroups,
-        properties: ['email', 'firstname', 'lastname', 'company', 'lead_status', 'lead_score', 'service_interest'],
-        limit: 100,
-      }),
-    });
+    const response = await this.makeRequest<any>(
+      '/crm/v3/objects/contacts/search',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          filterGroups,
+          properties: [
+            'email',
+            'firstname',
+            'lastname',
+            'company',
+            'lead_status',
+            'lead_score',
+            'service_interest',
+          ],
+          limit: 100,
+        }),
+      }
+    );
 
-    return response.results.map((contact: any) => HubSpotContactSchema.parse(contact));
+    return response.results.map((contact: any) =>
+      HubSpotContactSchema.parse(contact)
+    );
   }
 
   // ==================== 마케팅 이벤트 ====================
@@ -404,13 +455,17 @@ export class HubSpotAPIClient {
   /**
    * 마케팅 이벤트 트리거 (이메일 자동화)
    */
-  async triggerMarketingEvent(contactId: string, eventName: string, properties?: Record<string, any>): Promise<void> {
+  async triggerMarketingEvent(
+    contactId: string,
+    eventName: string,
+    properties?: Record<string, any>
+  ): Promise<void> {
     await this.makeRequest('/automation/v2/workflows/trigger', {
       method: 'POST',
       body: JSON.stringify({
         enrollmentTrigger: {
           triggerType: 'PROPERTY_CHANGE',
-          propertyName: 'lead_status'
+          propertyName: 'lead_status',
         },
         contactId,
         eventName,
@@ -461,6 +516,6 @@ export function verifyHubSpotWebhook(
     .createHmac('sha256', clientSecret)
     .update(requestBody)
     .digest('hex');
-  
+
   return signature === hash;
 }

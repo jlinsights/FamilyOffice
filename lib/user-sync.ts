@@ -3,9 +3,16 @@
 import { currentUser } from '@clerk/nextjs/server';
 
 import { createAdminClient } from '@/lib/supabase/admin-client';
+import { safeFrom, safeInsert, safeUpdate } from '@/lib/supabase/helpers';
+
+import { Database } from '@/types/supabase';
 
 // Supabase 클라이언트 (서비스 키) - 타입 안전하게 생성
 const supabaseAdmin = createAdminClient();
+
+// Database 타입 별칭
+type UserInsert = Database['public']['Tables']['users']['Insert'];
+type UserUpdate = Database['public']['Tables']['users']['Update'];
 
 // 사용자 메타데이터 타입 정의
 export interface UserMetadata {
@@ -89,7 +96,7 @@ export async function syncCurrentUser(): Promise<SyncedUser | null> {
       throw new Error(`Failed to check existing user: ${selectError.message}`);
     }
 
-    const userPayload = {
+    const userPayload: UserInsert = {
       clerk_id: clerkUser.id,
       email: primaryEmail.emailAddress,
       first_name: clerkUser.firstName || null,
@@ -97,16 +104,20 @@ export async function syncCurrentUser(): Promise<SyncedUser | null> {
       image_url: clerkUser.imageUrl || null,
       phone_number: primaryPhone?.phoneNumber || null,
       last_sign_in_at: new Date().toISOString(),
-      metadata: metadata,
+      metadata:
+        (metadata as Database['public']['Tables']['users']['Insert']['metadata']) ||
+        null,
     };
 
     let userData: SyncedUser;
 
     if (existingUser) {
       // 기존 사용자 업데이트
-      const { data, error } = await supabaseAdmin
-        .from('users')
-        .update(userPayload)
+      const { data, error } = await safeUpdate(
+        supabaseAdmin,
+        'users',
+        userPayload
+      )
         .eq('clerk_id', clerkUser.id)
         .select()
         .single();
@@ -119,9 +130,11 @@ export async function syncCurrentUser(): Promise<SyncedUser | null> {
       console.log(`User updated: ${userData.email}`);
     } else {
       // 새 사용자 생성
-      const { data, error } = await supabaseAdmin
-        .from('users')
-        .insert(userPayload)
+      const { data, error } = await safeInsert(
+        supabaseAdmin,
+        'users',
+        userPayload
+      )
         .select()
         .single();
 
@@ -212,8 +225,7 @@ export async function getUserStats(): Promise<{
   recent: RecentUser[];
 }> {
   try {
-    const { data, error } = await supabaseAdmin
-      .from('users')
+    const { data, error } = await safeFrom(supabaseAdmin, 'users')
       .select('id, is_admin, created_at, last_sign_in_at, metadata')
       .order('created_at', { ascending: false });
 
@@ -221,15 +233,21 @@ export async function getUserStats(): Promise<{
       throw new Error(`Failed to get user stats: ${error.message}`);
     }
 
+    if (!data) {
+      throw new Error('No data returned from user stats query');
+    }
+
     const total = data.length;
-    const admins = data.filter(user => user.is_admin).length;
+    const admins = data.filter((user: RecentUser) => user.is_admin).length;
     const active = data.filter(
-      user =>
+      (user: RecentUser) =>
         user.last_sign_in_at &&
         new Date(user.last_sign_in_at) >
           new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
     ).length;
-    const deleted = data.filter(user => user.metadata?.deleted).length;
+    const deleted = data.filter(
+      (user: RecentUser) => (user.metadata as UserMetadata)?.deleted
+    ).length;
 
     return {
       total,

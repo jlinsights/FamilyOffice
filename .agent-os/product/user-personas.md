@@ -13,6 +13,7 @@
 **타겟 정의**: "돈은 많은데 세금이 무서운 장수기업"
 
 **Demographics**
+
 - **Age**: 65 years old (60-70대)
 - **Industry**: Manufacturing (precision machinery, 정밀 기계)
 - **Company**: 50-year-old family business, 2nd generation CEO
@@ -27,6 +28,7 @@
 - **Business Age**: 50+ years (설립 연차 20년 이상)
 
 **Goals & Motivations**
+
 1. **Primary Goal**: Smooth business succession to his son (28) within 5 years
 2. **Financial Goals**:
    - Optimize corporate tax structure
@@ -38,6 +40,7 @@
    - Maintain company control within family
 
 **Pain Points & Challenges** (Tier 1 핵심 Pain Points)
+
 1. **가업 승계 (Business Succession)**:
    - 50년 일군 회사가 상속세로 공중분해 우려
    - Inheritance tax burden estimated at ₩150 billion (50% rate)
@@ -69,6 +72,7 @@
    - Needs simple, proven solutions
 
 **Technology Usage**
+
 - **Devices**: Samsung Galaxy S24, MacBook Pro (work)
 - **Communication**: KakaoTalk (primary), Email, Channel Talk
 - **Behavior**: Mobile-first (70% mobile, 30% desktop)
@@ -76,6 +80,7 @@
 - **Digital Literacy**: Medium (comfortable with business apps, prefers guidance)
 
 **Content Preferences**
+
 - **Topics**: Tax optimization, succession planning, case studies from similar companies
 - **Format**: Short videos (3-5 min), infographics, step-by-step guides
 - **Language**: Korean with minimal jargon
@@ -83,6 +88,7 @@
 - **Trusted Sources**: Industry associations, peer recommendations, certified experts
 
 **Decision-Making Process**
+
 1. **Research Phase** (2-3 weeks):
    - Google search for "상속세 절세" (inheritance tax optimization)
    - Read blog articles and industry reports
@@ -101,6 +107,7 @@
    - Reasonable pricing (willing to pay premium for quality)
 
 **Engagement Touchpoints** (Tier 1 감성/명예 어필 전략)
+
 - **Discovery**: Industry association referral, peer CEO recommendation
 - **Awareness**: Exclusive seminar on "30년 기업, 세금으로 무너지지 않는 법"
 - **Consideration**: VIP succession planning guide, 서예/인문학 프로그램 초대
@@ -109,6 +116,7 @@
 - **Retention**: Quarterly VIP advisory meetings, cultural events (서예 전시회, 골프), 자서전 출간 지원
 
 **Tier 1 Attack Strategy**:
+
 - **핵심 메시지**: "회장님, 50년 일구신 이 공장이 세금 때문에 사모펀드(PEF)에 팔려가도 괜찮으십니까?"
 - **감성 어필**: 기업의 역사와 가문의 명예 강조
 - **명예 제공**: 서예 작품 전시, 인문학 강좌, 의전 서비스
@@ -116,6 +124,7 @@
 - **제안 상품**: 종신보험 (계약 건당 규모 大)
 
 **Success Metrics** (What success looks like for this persona)
+
 - Inheritance tax reduced by 30-50%
 - Clear 5-year succession roadmap
 - Son prepared for CEO transition
@@ -129,6 +138,7 @@
 **타겟 정의**: "돈을 막 벌기 시작해 세금이 아까운 기업"
 
 **Demographics**
+
 - **Age**: 52 years old (50-60대)
 - **Industry**: IT/SaaS (B2B software)
 - **Company**: 15-year-old company, founder-CEO
@@ -143,6 +153,7 @@
 - **Business Age**: 15 years (설립 연차 10~20년)
 
 **Goals & Motivations**
+
 1. **Primary Goal**: Exit strategy (IPO or M&A) within 3 years
 2. **Financial Goals**:
    - Maximize post-exit wealth preservation
@@ -154,6 +165,7 @@
    - Employee retention through equity compensation
 
 **Pain Points & Challenges** (Tier 2 핵심 Pain Points)
+
 1. **가지급금 문제 (Corporate Loan Issues)**:
    - ₩7 billion in corporate loans to CEO (가지급금 5억 이상)
    - Cannot freely use company funds without tax penalties
@@ -185,6 +197,7 @@
    - Needs data-driven recommendations
 
 **Technology Usage**
+
 - **Devices**: iPhone 15 Pro, MacBook Air (work), iPad Pro
 - **Communication**: Slack (team), KakaoTalk (personal), Email
 - **Behavior**: 80% mobile, prefers apps over websites
@@ -192,6 +205,7 @@
 - **Digital Literacy**: Very high (expects seamless digital experience)
 
 **Content Preferences**
+
 - **Topics**: Exit strategies, stock option taxation, tech industry case studies, ESG investing
 - **Format**: Podcasts (commute listening), dashboards (data-driven), concise summaries
 - **Language**: Korean + English terms acceptable
@@ -199,6 +213,7 @@
 - **Trusted Sources**: Tech industry leaders, venture capitalists, data-driven insights
 
 **Decision-Making Process**
+
 1. **Research Phase** (1 week):
    - LinkedIn, tech community recommendations
    - Google search for "스타트업 엑싯 전략" (startup exit strategy)
@@ -217,6 +232,7 @@
    - Transparent pricing with clear ROI
 
 **Engagement Touchpoints** (Tier 2 이성/실리 어필 전략)
+
 - **Discovery**: LinkedIn, Google search "CEO 가지급금 해결", tax advisor referral
 - **Awareness**: Webinar on "법인세 절감 전략 & CEO 은퇴 자금 마련"
 - **Consideration**: Newsletter signup, 무료 세무 진단 신청, 법무비용 지원 프로그램
@@ -225,6 +241,7 @@
 - **Retention**: Quarterly tax optimization review, CEO networking events
 
 **Tier 2 Attack Strategy**:
+
 - **핵심 메시지**: "대표님, 회사 키우느라 고생하셨는데 정작 대표님 퇴직금은 준비되셨습니까?"
 - **이성 어필**: 구체적인 절세 금액, ROI 계산, 세무 리스크 제거
 - **실리 제공**: 법무비용 지원, 무료 세무 진단, 실무 가이드
@@ -232,6 +249,7 @@
 - **제안 상품**: 경영인 정기보험 (계약 건수 多)
 
 **Success Metrics**
+
 - Post-exit tax optimization (save 20-30% on capital gains)
 - Clear exit roadmap (IPO or M&A pros/cons)
 - Employee stock option plan optimized
@@ -245,6 +263,7 @@
 **타겟 정의**: "사람과 가족이 고민인 성장기 기업"
 
 **Demographics**
+
 - **Age**: 48 years old (40대 후반~50대)
 - **Industry**: Service (IT maintenance & facility management, 서비스업)
 - **Company**: 8-year-old company, founder-CEO
@@ -259,6 +278,7 @@
 - **Business Age**: 8 years (설립 연차 상관없음, 성장기 기업)
 
 **Goals & Motivations**
+
 1. **Primary Goal**: Business stabilization and employee welfare improvement
 2. **Financial Goals**:
    - Reduce monthly cash flow volatility
@@ -270,6 +290,7 @@
    - Prepare for next growth phase
 
 **Pain Points & Challenges** (Tier 3 핵심 Pain Points)
+
 1. **노무 리스크 (Labor Risk)**:
    - Concerned about 산재 사고 (industrial accidents) at client sites
    - Worried about 근로자 소송 (employee lawsuits) and labor disputes
@@ -301,6 +322,7 @@
    - Building scalable processes and systems
 
 **Technology Usage**
+
 - **Devices**: Samsung Galaxy S23, laptop (Windows)
 - **Communication**: KakaoTalk (primary), Naver Workspace, Email
 - **Behavior**: Mobile-first (75% mobile)
@@ -308,6 +330,7 @@
 - **Digital Literacy**: Medium-high (comfortable with business apps)
 
 **Content Preferences**
+
 - **Topics**: Employee welfare best practices, labor law compliance, tax-efficient benefits, health insurance
 - **Format**: Short guides (3-5 pages), video tutorials (5-10 min), checklists
 - **Language**: Simple Korean with practical examples
@@ -315,6 +338,7 @@
 - **Trusted Sources**: Labor consultants, peer CEO recommendations, industry associations
 
 **Decision-Making Process**
+
 1. **Research Phase** (1 week):
    - Google search for "중소기업 복리후생" (SME employee welfare)
    - Ask peer CEOs in industry community
@@ -333,6 +357,7 @@
    - Fast onboarding (1-2 weeks ideal)
 
 **Engagement Touchpoints** (Tier 3 안전/복지 어필 전략)
+
 - **Discovery**: Google search "단체보험 비교", peer CEO recommendation, labor consultant referral
 - **Awareness**: Free webinar on "중대재해처벌법 대응 & 임원 가족 복리후생"
 - **Consideration**: Free health check-up voucher offer, employee welfare assessment
@@ -341,6 +366,7 @@
 - **Retention**: Annual policy review, claims support, compliance updates
 
 **Tier 3 Attack Strategy**:
+
 - **핵심 메시지**: "대표님, 직원들 복지도 중요하지만 대표님과 가족 건강은 챙기고 계신가요?"
 - **안전 어필**: 산재 예방, 중대재해처벌법 대응, 임직원 보호
 - **복지 제공**: 단체보험 (저렴한 보험료), 건강검진권 (VIP 혜택), 의료비 지원
@@ -348,6 +374,7 @@
 - **제안 상품**: 단체상해보험, 임원(가족) 건강보험 (계약 건수 多, 진입 용이)
 
 **Success Metrics**
+
 - Employee retention improved by 20%+
 - CEO and family covered with health insurance
 - Compliance with 중대재해처벌법 (zero violations)
@@ -363,6 +390,7 @@
 **Note**: ⚠️ Excluded from target: 건설업 중 '시행사' (PF 리스크). This persona is a construction **contractor** (시공사), which is acceptable.
 
 **Demographics**
+
 - **Age**: 62 years old (60-70대)
 - **Industry**: Construction contractor (commercial buildings, 시공사)
 - **Company**: 35-year-old company, founder-CEO
@@ -377,6 +405,7 @@
 - **Business Age**: 35 years (설립 연차 20년 이상)
 
 **Goals & Motivations**
+
 1. **Primary Goal**: Risk management and asset protection
 2. **Financial Goals**:
    - Protect personal assets from business liabilities
@@ -388,6 +417,7 @@
    - Maintain cash flow during economic downturns
 
 **Pain Points & Challenges** (Tier 1 + Construction-Specific)
+
 1. **가업 승계 & 자녀 진로 (Succession Planning)**:
    - Two children not interested in construction industry
    - 35년 일군 회사의 미래가 불투명
@@ -420,6 +450,7 @@
    - Needs regional service or hybrid model
 
 **Technology Usage**
+
 - **Devices**: Samsung Galaxy (phone), Windows laptop
 - **Communication**: KakaoTalk (primary), phone calls (preferred for important matters)
 - **Behavior**: 50% mobile, 50% desktop
@@ -427,6 +458,7 @@
 - **Digital Literacy**: Medium (uses apps, prefers human guidance)
 
 **Content Preferences**
+
 - **Topics**: Risk management, asset protection, construction industry case studies, retirement planning
 - **Format**: PDF guides (printable), webinars with Q&A, phone consultations
 - **Language**: Korean, clear explanations
@@ -434,6 +466,7 @@
 - **Trusted Sources**: Industry associations, legal experts, insurance specialists
 
 **Decision-Making Process**
+
 1. **Research Phase** (3-4 weeks):
    - Ask industry peers for recommendations
    - Search Naver for "건설업 자산보호" (construction asset protection)
@@ -452,6 +485,7 @@
    - Long-term relationship focus
 
 **Engagement Touchpoints** (Tier 1 감성/명예 + Construction Risk Focus)
+
 - **Discovery**: Construction industry association, peer CEO referral from Busan
 - **Awareness**: Exclusive seminar "중대재해처벌법 대응 & 35년 기업 자산 보호 전략"
 - **Consideration**: VIP succession planning guide, 중대재해 리스크 진단, regional consultation in Busan
@@ -460,6 +494,7 @@
 - **Retention**: Quarterly meetings (alternating Seoul/Busan), 중대재해 모니터링, 문화 이벤트
 
 **Tier 1 Attack Strategy** (Construction-Specific):
+
 - **핵심 메시지**: "회장님, 35년 일구신 건설 회사가 중대재해 사고나 세금으로 무너져도 괜찮으십니까?"
 - **감성 어필**: 기업의 역사와 건설업계 원로로서의 명예 강조
 - **리스크 관리**: 중대재해처벌법 대응, 개인 자산 보호 전략
@@ -467,6 +502,7 @@
 - **제안 상품**: 종신보험 + 중대재해 특약 (계약 규모 大)
 
 **Success Metrics**
+
 - Personal assets separated from business liabilities
 - Comprehensive insurance coverage (liability, key person)
 - Clear retirement and exit strategy
@@ -482,28 +518,33 @@
 **Role**: Chief Financial Officer at manufacturing company (Tier 1 or Tier 2 company)
 
 **Demographics**
+
 - Age: 38 years old
 - Education: Yonsei University, Accounting + CPA
 - Reports to: CEO (primary persona)
 - Location: Seoul
 
 **Goals**
+
 - Support CEO with financial planning and tax optimization
 - Research and recommend wealth management solutions
 - Coordinate with external advisors (tax, legal)
 
 **Pain Points**
+
 - CEO too busy for detailed financial planning
 - Need to present options clearly to CEO
 - Balance corporate finance with personal wealth management
 
 **Engagement**
+
 - **Role in Decision**: Influencer (researches, recommends, but doesn't decide)
 - **Information Needs**: Detailed technical information, ROI analysis, case studies
 - **Preferred Content**: White papers, detailed guides, webinars
 - **Contact**: Email, scheduled calls, professional tone
 
 **How to Serve**
+
 - Provide detailed technical materials for CFO to review
 - Offer CFO-specific webinars and training
 - Enable CFO to brief CEO effectively with executive summaries
@@ -516,6 +557,7 @@
 **Role**: Heir apparent, preparing for CEO transition from Tier 1 family business
 
 **Demographics**
+
 - Age: 32 years old
 - Education: USC MBA, currently working in family business
 - Family: Son of manufacturing CEO Tier 1 (persona 1: 김철수)
@@ -523,22 +565,26 @@
 - Succession Timeline: 3-5 years to full CEO transition
 
 **Goals**
+
 - Learn family business and prepare for CEO role
 - Understand wealth management and succession planning
 - Build credibility with employees and stakeholders
 
 **Pain Points**
+
 - Pressure to prove capability beyond family connection
 - Need to learn both business and wealth management
 - Balance modern ideas with father's traditional approach
 
 **Engagement**
+
 - **Role in Decision**: Influencer (input on succession plan, future relationship)
 - **Information Needs**: Next-gen focused content, peer community
 - **Preferred Content**: Podcasts, peer networking events, mentorship
 - **Contact**: LinkedIn, email, prefers digital-first
 
 **How to Serve**
+
 - Offer next-gen CEO programs and peer groups
 - Provide succession planning education
 - Create bridge between traditional and modern wealth management
@@ -549,22 +595,26 @@
 ## Persona Usage Guide
 
 ### For Product Development
+
 - **Persona 1 (Manufacturing CEO, Tier 1)**: Focus on succession planning features, tax optimization tools
 - **Persona 2 (IT/Venture CEO, Tier 2)**: Prioritize digital experience, real-time dashboards, exit strategy modules
 - **Persona 3 (Service CEO, Tier 3)**: Employee welfare features, group insurance, health check-up programs
 - **Persona 4 (Construction CEO, Tier 1)**: Emphasize risk management, asset protection, insurance integration
 
 ### For Content Marketing
+
 - **Blog Topics**: Match topics to persona pain points (succession, exits, employee welfare, risk)
 - **Newsletter Segmentation**: Tag subscribers by tier/industry/persona for targeted content
 - **Case Studies**: Develop tier-specific and industry-specific success stories
 
 ### For Sales & Onboarding
+
 - **Consultation Approach**: Adapt style to tier preferences (Tier 1: face-to-face, Tier 2: virtual, Tier 3: simple online)
 - **Proposal Format**: Customize based on tier decision criteria
 - **Service Packages**: Tier-specific offerings (Tier 1: premium, Tier 2: volume, Tier 3: entry-level)
 
 ### For Customer Success
+
 - **Communication Cadence**: Match tier preferences (Tier 1: quarterly VIP, Tier 2: real-time, Tier 3: annual review)
 - **Reporting Style**: Tier 1: executive summaries, Tier 2: data dashboards, Tier 3: simple checklists
 - **Relationship Building**: Tier 1: long-term trust, Tier 2: efficient transactions, Tier 3: practical support
@@ -574,12 +624,14 @@
 ## Persona Research Methodology
 
 **Data Sources**:
+
 1. **Industry Research**: Korean mid-market CEO surveys and reports
 2. **Competitive Analysis**: Existing wealth management client profiles
 3. **Stakeholder Interviews**: Discussions with advisors serving this segment
 4. **Market Data**: Korean business demographics and wealth statistics
 
 **Validation**:
+
 - Personas based on real Korean market characteristics
 - Aligned with Korean business culture and decision-making norms
 - Verified against industry standards for this segment
@@ -591,21 +643,25 @@
 ## Summary: Tier Assignment Overview
 
 ### Tier 1 (Premium Segment) Personas:
+
 - **Persona 1**: 김철수 (Manufacturing, 65세, ₩450B revenue) - 승계/가문 완성형
 - **Persona 4**: 박민수 (Construction Contractor, 62세, ₩380B revenue) - 승계/리스크 관리형
 - **Persona 6**: 이준호 (Next-Gen Heir, 32세) - Tier 1 승계 준비
 
 ### Tier 2 (Volume Segment) Personas:
+
 - **Persona 2**: 이영희 (IT/SaaS, 52세, ₩180B revenue) - 성장/실리 추구형
 
 ### Tier 3 (Door Opener Segment) Personas:
+
 - **Persona 3**: 최진우 (Service Industry, 48세, ₩75B revenue) - 진입/활동형 (사람과 가족)
 
 ### Secondary Personas (Influencers):
+
 - **Persona 5**: 정수진 (CFO) - Tier 1, 2 & 3 기업 재무담당자
 
 ---
 
-*Last Updated: December 24, 2024*
-*Next Review: March 31, 2025*
-*Version: 1.2 (Golden Zone 3-Tier Strategy Integrated)*
+_Last Updated: December 24, 2024_
+_Next Review: March 31, 2025_
+_Version: 1.2 (Golden Zone 3-Tier Strategy Integrated)_

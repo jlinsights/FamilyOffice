@@ -1,12 +1,13 @@
 'use client';
 
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from '@/components/ui/accordion';
 import { HelpCircle } from 'lucide-react';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 export interface FAQItem {
   question: string;
@@ -25,11 +26,11 @@ interface ServiceFAQProps {
  * Reusable FAQ component for service pages
  * Includes SEO-optimized markup and accessible accordion
  */
-export function ServiceFAQ({ 
-  faqs, 
+export function ServiceFAQ({
+  faqs,
   title = '자주 묻는 질문',
   description,
-  className = ''
+  className = '',
 }: ServiceFAQProps) {
   if (!faqs || faqs.length === 0) return null;
 
@@ -51,7 +52,7 @@ export function ServiceFAQ({
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             {title}
           </h2>
-          
+
           {description && (
             <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
               {description}
@@ -63,8 +64,8 @@ export function ServiceFAQ({
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, idx) => (
-              <AccordionItem 
-                key={idx} 
+              <AccordionItem
+                key={idx}
                 value={`item-${idx}`}
                 className="border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 px-6 transition-all duration-200 hover:border-blue-300 dark:hover:border-blue-700"
               >
@@ -87,9 +88,7 @@ export function ServiceFAQ({
                         A
                       </span>
                     </div>
-                    <div className="flex-1">
-                      {faq.answer}
-                    </div>
+                    <div className="flex-1">{faq.answer}</div>
                   </div>
                 </AccordionContent>
               </AccordionItem>
@@ -102,8 +101,8 @@ export function ServiceFAQ({
           <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
             추가 문의사항이 있으신가요?
           </p>
-          <a 
-            href="/contact" 
+          <a
+            href="/contact"
             className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200"
           >
             전문가 상담 신청

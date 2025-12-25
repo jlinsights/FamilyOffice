@@ -4,12 +4,15 @@
  * 카카오톡 공유 버튼 컴포넌트
  * 카카오톡 메시지 API를 사용한 콘텐츠 공유 기능
  */
+import { MessageCircle } from 'lucide-react';
 
 import React, { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
-import { MessageCircle } from 'lucide-react';
+
 import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+
+import { useToast } from '@/hooks/use-toast';
 
 interface KakaoShareButtonProps {
   title: string;
@@ -40,7 +43,7 @@ export function KakaoShareButton({
   size = 'default',
   fullWidth = false,
   useOfficialImage = true,
-  children
+  children,
 }: KakaoShareButtonProps) {
   const [isKakaoReady, setIsKakaoReady] = useState(false);
   const { toast } = useToast();
@@ -87,7 +90,9 @@ export function KakaoShareButton({
         content: {
           title: title,
           description: description || '프리미엄 패밀리오피스 서비스',
-          imageUrl: imageUrl || 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+          imageUrl:
+            imageUrl ||
+            'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
           link: {
             mobileWebUrl: mobileWebUrl || webUrl || window.location.href,
             webUrl: webUrl || window.location.href,
@@ -107,7 +112,7 @@ export function KakaoShareButton({
             },
           },
         ],
-        callback: function(result: any) {
+        callback: function (result: any) {
           if (result.warningMsg) {
             toast({
               title: '공유 알림',
@@ -120,7 +125,7 @@ export function KakaoShareButton({
             });
           }
         },
-        serverCallbackUrl: `${process.env.NEXT_PUBLIC_APP_URL}/api/kakao/share/callback`
+        serverCallbackUrl: `${process.env.NEXT_PUBLIC_APP_URL}/api/kakao/share/callback`,
       });
     } catch (error) {
       console.error('카카오 공유 오류:', error);
@@ -146,11 +151,11 @@ export function KakaoShareButton({
         title={isKakaoReady ? '카카오톡으로 공유하기' : 'SDK 로딩 중...'}
       >
         <div className="flex items-center justify-center px-4 py-2 bg-[#FEE500] hover:bg-[#FDD835] rounded-md transition-colors">
-          <Image 
-            src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-            alt="카카오" 
-            width={20} 
-            height={20} 
+          <Image
+            src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+            alt="카카오"
+            width={20}
+            height={20}
             className="mr-2 rounded-sm"
           />
           <MessageCircle className="mr-1 h-4 w-4 text-[#3C1E1E]" />
@@ -185,11 +190,11 @@ export function KakaoShareButton({
       ) : (
         <>
           {useOfficialImage ? (
-            <Image 
-              src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-              alt="카카오" 
-              width={16} 
-              height={16} 
+            <Image
+              src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+              alt="카카오"
+              width={16}
+              height={16}
               className="mr-2 rounded-sm"
             />
           ) : (

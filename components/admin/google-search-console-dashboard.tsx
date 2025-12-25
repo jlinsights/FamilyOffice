@@ -1,10 +1,5 @@
-"use client";
+'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   AlertTriangle,
   BarChart3,
@@ -15,9 +10,22 @@ import {
   MousePointer,
   Search,
   Target,
-  TrendingUp
+  TrendingUp,
 } from 'lucide-react';
+
 import { useEffect, useState } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 /**
  * Google Search Console 대시보드 컴포넌트
@@ -55,7 +63,7 @@ export function GoogleSearchConsoleDashboard() {
   const loadSearchConsoleData = async () => {
     try {
       setLoading(true);
-      
+
       // 실제 Google Search Console API 연동
       const response = await fetch('/api/search-console/metrics');
       const result = await response.json();
@@ -67,53 +75,55 @@ export function GoogleSearchConsoleDashboard() {
         console.warn('Using sample data due to API error/empty:', result.error);
         throw new Error('API request failed');
       }
-
     } catch (error) {
-      console.error('Failed to load Search Console data, using fallback:', error);
-      
+      console.error(
+        'Failed to load Search Console data, using fallback:',
+        error
+      );
+
       // Fallback: Use sample data if API fails or keys are invalid
       const sampleSearchMetrics: SearchMetrics[] = [
         {
-          query: "패밀리오피스 (Demo)",
+          query: '패밀리오피스 (Demo)',
           clicks: 1247,
           impressions: 8934,
           ctr: 13.95,
           position: 4.2,
-          change: +23
+          change: +23,
         },
         // ... (Keep existing sample data as fallback provided originally)
-         {
-          query: "가업승계 컨설팅",
+        {
+          query: '가업승계 컨설팅',
           clicks: 892,
           impressions: 5671,
           ctr: 15.73,
           position: 3.8,
-          change: +45
+          change: +45,
         },
         {
-          query: "중소기업 자산관리",
+          query: '중소기업 자산관리',
           clicks: 634,
           impressions: 4521,
           ctr: 14.02,
           position: 5.1,
-          change: +12
+          change: +12,
         },
       ];
 
       const samplePagePerformance: PagePerformance[] = [
         {
-          url: "/services",
+          url: '/services',
           clicks: 2341,
           impressions: 15672,
           ctr: 14.93,
-          position: 4.1
-        }, 
-         {
-          url: "/blog",
+          position: 4.1,
+        },
+        {
+          url: '/blog',
           clicks: 1876,
           impressions: 12543,
           ctr: 14.95,
-          position: 4.8
+          position: 4.8,
         },
       ];
 
@@ -125,15 +135,36 @@ export function GoogleSearchConsoleDashboard() {
   };
 
   const getTrendIcon = (change: number) => {
-    if (change > 0) return <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />;
-    if (change < 0) return <TrendingUp className="h-4 w-4 text-red-600 dark:text-red-400 rotate-180" />;
+    if (change > 0)
+      return (
+        <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
+      );
+    if (change < 0)
+      return (
+        <TrendingUp className="h-4 w-4 text-red-600 dark:text-red-400 rotate-180" />
+      );
     return <Target className="h-4 w-4 text-gray-400" />;
   };
 
   const getPositionBadge = (position: number) => {
-    if (position <= 3) return <Badge className="bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300">상위 3위</Badge>;
-    if (position <= 5) return <Badge className="bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300">상위 5위</Badge>;
-    if (position <= 10) return <Badge className="bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">1페이지</Badge>;
+    if (position <= 3)
+      return (
+        <Badge className="bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300">
+          상위 3위
+        </Badge>
+      );
+    if (position <= 5)
+      return (
+        <Badge className="bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300">
+          상위 5위
+        </Badge>
+      );
+    if (position <= 10)
+      return (
+        <Badge className="bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">
+          1페이지
+        </Badge>
+      );
     return <Badge variant="outline">개선 필요</Badge>;
   };
 
@@ -143,9 +174,17 @@ export function GoogleSearchConsoleDashboard() {
 
   const getRankingStatus = () => {
     if (brandRanking.current <= brandRanking.target) {
-      return { icon: CheckCircle, color: 'text-green-600 dark:text-green-400', status: '목표 달성' };
+      return {
+        icon: CheckCircle,
+        color: 'text-green-600 dark:text-green-400',
+        status: '목표 달성',
+      };
     }
-    return { icon: Clock, color: 'text-orange-600 dark:text-orange-400', status: '진행 중' };
+    return {
+      icon: Clock,
+      color: 'text-orange-600 dark:text-orange-400',
+      status: '진행 중',
+    };
   };
 
   if (loading) {
@@ -163,7 +202,9 @@ export function GoogleSearchConsoleDashboard() {
       {/* 헤더 섹션 */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Google Search Console</h2>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Google Search Console
+          </h2>
           <p className="text-muted-foreground">
             SEO 성과 측정 및 검색 트래픽 분석 대시보드
           </p>
@@ -179,7 +220,9 @@ export function GoogleSearchConsoleDashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">검색 트래픽 증가율</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              검색 트래픽 증가율
+            </CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -187,15 +230,18 @@ export function GoogleSearchConsoleDashboard() {
             <div className="space-y-2">
               <Progress value={calculateTrafficProgress()} className="h-2" />
               <p className="text-xs text-muted-foreground">
-                목표: {trafficGoal.target}% (진행률: {Math.round(calculateTrafficProgress())}%)
+                목표: {trafficGoal.target}% (진행률:{' '}
+                {Math.round(calculateTrafficProgress())}%)
               </p>
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">브랜드 키워드 순위</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              브랜드 키워드 순위
+            </CardTitle>
             <RankingIcon className={`h-4 w-4 ${getRankingStatus().color}`} />
           </CardHeader>
           <CardContent>
@@ -207,7 +253,7 @@ export function GoogleSearchConsoleDashboard() {
             </p>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">총 클릭 수</CardTitle>
@@ -215,14 +261,14 @@ export function GoogleSearchConsoleDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {searchMetrics.reduce((sum, metric) => sum + metric.clicks, 0).toLocaleString()}
+              {searchMetrics
+                .reduce((sum, metric) => sum + metric.clicks, 0)
+                .toLocaleString()}
             </div>
-            <p className="text-xs text-muted-foreground">
-              지난 28일
-            </p>
+            <p className="text-xs text-muted-foreground">지난 28일</p>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">평균 CTR</CardTitle>
@@ -230,7 +276,11 @@ export function GoogleSearchConsoleDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {(searchMetrics.reduce((sum, metric) => sum + metric.ctr, 0) / searchMetrics.length).toFixed(2)}%
+              {(
+                searchMetrics.reduce((sum, metric) => sum + metric.ctr, 0) /
+                searchMetrics.length
+              ).toFixed(2)}
+              %
             </div>
             <p className="text-xs text-muted-foreground">
               업계 평균 대비 +2.8%p
@@ -261,33 +311,47 @@ export function GoogleSearchConsoleDashboard() {
             <CardContent>
               <div className="space-y-4">
                 {searchMetrics.map((metric, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between p-4 border rounded-lg"
+                  >
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h4 className="font-medium">{metric.query}</h4>
                         {getPositionBadge(metric.position)}
                         <div className="flex items-center gap-1">
                           {getTrendIcon(metric.change)}
-                          <span className={`text-sm ${metric.change > 0 ? 'text-green-600 dark:text-green-400' : metric.change < 0 ? 'text-red-600 dark:text-red-400' : 'text-gray-500 dark:text-gray-400'}`}>
-                            {metric.change > 0 ? '+' : ''}{metric.change}%
+                          <span
+                            className={`text-sm ${metric.change > 0 ? 'text-green-600 dark:text-green-400' : metric.change < 0 ? 'text-red-600 dark:text-red-400' : 'text-gray-500 dark:text-gray-400'}`}
+                          >
+                            {metric.change > 0 ? '+' : ''}
+                            {metric.change}%
                           </span>
                         </div>
                       </div>
                       <div className="grid grid-cols-4 gap-4 text-sm text-muted-foreground">
                         <div>
-                          <span className="font-medium text-foreground">{metric.clicks.toLocaleString()}</span>
+                          <span className="font-medium text-foreground">
+                            {metric.clicks.toLocaleString()}
+                          </span>
                           <div>클릭</div>
                         </div>
                         <div>
-                          <span className="font-medium text-foreground">{metric.impressions.toLocaleString()}</span>
+                          <span className="font-medium text-foreground">
+                            {metric.impressions.toLocaleString()}
+                          </span>
                           <div>노출</div>
                         </div>
                         <div>
-                          <span className="font-medium text-foreground">{metric.ctr.toFixed(2)}%</span>
+                          <span className="font-medium text-foreground">
+                            {metric.ctr.toFixed(2)}%
+                          </span>
                           <div>CTR</div>
                         </div>
                         <div>
-                          <span className="font-medium text-foreground">{metric.position.toFixed(1)}위</span>
+                          <span className="font-medium text-foreground">
+                            {metric.position.toFixed(1)}위
+                          </span>
                           <div>평균 순위</div>
                         </div>
                       </div>
@@ -313,7 +377,10 @@ export function GoogleSearchConsoleDashboard() {
             <CardContent>
               <div className="space-y-4">
                 {pagePerformance.map((page, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between p-4 border rounded-lg"
+                  >
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h4 className="font-medium">{page.url}</h4>
@@ -321,19 +388,27 @@ export function GoogleSearchConsoleDashboard() {
                       </div>
                       <div className="grid grid-cols-4 gap-4 text-sm text-muted-foreground">
                         <div>
-                          <span className="font-medium text-foreground">{page.clicks.toLocaleString()}</span>
+                          <span className="font-medium text-foreground">
+                            {page.clicks.toLocaleString()}
+                          </span>
                           <div>클릭</div>
                         </div>
                         <div>
-                          <span className="font-medium text-foreground">{page.impressions.toLocaleString()}</span>
+                          <span className="font-medium text-foreground">
+                            {page.impressions.toLocaleString()}
+                          </span>
                           <div>노출</div>
                         </div>
                         <div>
-                          <span className="font-medium text-foreground">{page.ctr.toFixed(2)}%</span>
+                          <span className="font-medium text-foreground">
+                            {page.ctr.toFixed(2)}%
+                          </span>
                           <div>CTR</div>
                         </div>
                         <div>
-                          <span className="font-medium text-foreground">{page.position.toFixed(1)}위</span>
+                          <span className="font-medium text-foreground">
+                            {page.position.toFixed(1)}위
+                          </span>
                           <div>평균 순위</div>
                         </div>
                       </div>
@@ -357,7 +432,9 @@ export function GoogleSearchConsoleDashboard() {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
                     <div>
-                      <div className="font-medium">&quot;가업승계 컨설팅&quot; 키워드 상승</div>
+                      <div className="font-medium">
+                        &quot;가업승계 컨설팅&quot; 키워드 상승
+                      </div>
                       <div className="text-sm text-muted-foreground">
                         지난 달 대비 +45% 클릭 증가, 평균 순위 3.8위 달성
                       </div>
@@ -388,7 +465,9 @@ export function GoogleSearchConsoleDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>개선 권장사항</CardTitle>
-                <CardDescription>SEO 성과 향상을 위한 액션 아이템</CardDescription>
+                <CardDescription>
+                  SEO 성과 향상을 위한 액션 아이템
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -397,7 +476,8 @@ export function GoogleSearchConsoleDashboard() {
                     <div>
                       <div className="font-medium">롱테일 키워드 확대</div>
                       <div className="text-sm text-muted-foreground">
-                        &quot;성공한 CEO 자산관리&quot; 등 구체적 키워드 콘텐츠 보강
+                        &quot;성공한 CEO 자산관리&quot; 등 구체적 키워드 콘텐츠
+                        보강
                       </div>
                     </div>
                   </div>
@@ -439,12 +519,15 @@ export function GoogleSearchConsoleDashboard() {
                       <span>현재 달성률</span>
                       <span>{Math.round(calculateTrafficProgress())}%</span>
                     </div>
-                    <Progress value={calculateTrafficProgress()} className="h-3" />
+                    <Progress
+                      value={calculateTrafficProgress()}
+                      className="h-3"
+                    />
                     <div className="text-xs text-muted-foreground mt-2">
                       현재 +{trafficGoal.current}% | 목표 +{trafficGoal.target}%
                     </div>
                   </div>
-                  
+
                   <div className="pt-4 border-t">
                     <h4 className="font-medium mb-2">월별 진행 상황</h4>
                     <div className="space-y-2 text-sm">
@@ -470,7 +553,9 @@ export function GoogleSearchConsoleDashboard() {
                       </div>
                       <div className="flex justify-between font-medium">
                         <span>현재 (6개월차)</span>
-                        <span className="text-blue-600">+{trafficGoal.current}%</span>
+                        <span className="text-blue-600">
+                          +{trafficGoal.current}%
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -481,7 +566,9 @@ export function GoogleSearchConsoleDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>브랜드 키워드 목표</CardTitle>
-                <CardDescription>&quot;패밀리오피스&quot; 상위 3위 진입</CardDescription>
+                <CardDescription>
+                  &quot;패밀리오피스&quot; 상위 3위 진입
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -490,10 +577,11 @@ export function GoogleSearchConsoleDashboard() {
                       {brandRanking.current}위
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      목표: {brandRanking.target}위 (잔여: {brandRanking.current - brandRanking.target}위)
+                      목표: {brandRanking.target}위 (잔여:{' '}
+                      {brandRanking.current - brandRanking.target}위)
                     </div>
                   </div>
-                  
+
                   <div className="pt-4 border-t">
                     <h4 className="font-medium mb-2">순위 변화 추이</h4>
                     <div className="space-y-2 text-sm">
@@ -515,7 +603,9 @@ export function GoogleSearchConsoleDashboard() {
                       </div>
                       <div className="flex justify-between font-medium">
                         <span>현재</span>
-                        <span className="text-green-600">{brandRanking.current}위 ⬆️</span>
+                        <span className="text-green-600">
+                          {brandRanking.current}위 ⬆️
+                        </span>
                       </div>
                     </div>
                   </div>

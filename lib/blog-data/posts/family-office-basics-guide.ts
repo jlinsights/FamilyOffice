@@ -2,15 +2,17 @@ import { BlogPost } from '@/types/blog';
 
 /**
  * Sample Blog Post: Family Office Basics Guide
- * 
+ *
  * This is a code-split version that loads on-demand
  */
 
 const post: BlogPost = {
   id: 'family-office-basics-guide',
   title: '패밀리오피스란 무엇인가',
-  image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop',
-  excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
+  image:
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
   content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -43,7 +45,18 @@ const post: BlogPost = {
   author: '임재홍',
   date: '2025-08-13',
   readTime: '12분',
-  tags: ['패밀리오피스', '가업승계', '자산관리', '상속세', '중견기업', 'MFO', '디지털패밀리오피스', '가문경영', '세무전략', '투자다각화'],
+  tags: [
+    '패밀리오피스',
+    '가업승계',
+    '자산관리',
+    '상속세',
+    '중견기업',
+    'MFO',
+    '디지털패밀리오피스',
+    '가문경영',
+    '세무전략',
+    '투자다각화',
+  ],
   slug: 'family-office-basics-guide',
   featured: true,
 };

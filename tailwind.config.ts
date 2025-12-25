@@ -157,14 +157,14 @@ const config: Config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         // Aceternity UI animations
         'meteor-effect': 'meteor 5s linear infinite',
-        'gradient': 'gradient 15s ease infinite',
-        'ripple': 'ripple 3400ms ease infinite',
-        'grid': 'grid 15s linear infinite',
+        gradient: 'gradient 15s ease infinite',
+        ripple: 'ripple 3400ms ease infinite',
+        grid: 'grid 15s linear infinite',
         'spin-around': 'spin-around calc(var(--speed) * 2) infinite linear',
-        'slide': 'slide var(--speed) ease-in-out infinite alternate',
-        'spotlight': 'spotlight 2s ease .75s 1 forwards',
-        'shimmer': 'shimmer 2s linear infinite',
-        'aurora': 'aurora 60s linear infinite',
+        slide: 'slide var(--speed) ease-in-out infinite alternate',
+        spotlight: 'spotlight 2s ease .75s 1 forwards',
+        shimmer: 'shimmer 2s linear infinite',
+        aurora: 'aurora 60s linear infinite',
       },
       keyframes: {
         'fade-in': {
@@ -198,12 +198,15 @@ const config: Config = {
           to: { height: '0' },
         },
         // Aceternity UI keyframes
-        'meteor': {
+        meteor: {
           '0%': { transform: 'rotate(215deg) translateX(0)', opacity: '1' },
           '70%': { opacity: '1' },
-          '100%': { transform: 'rotate(215deg) translateX(-500px)', opacity: '0' },
+          '100%': {
+            transform: 'rotate(215deg) translateX(-500px)',
+            opacity: '0',
+          },
         },
-        'gradient': {
+        gradient: {
           '0%, 100%': {
             'background-size': '200% 200%',
             'background-position': 'left center',
@@ -213,7 +216,7 @@ const config: Config = {
             'background-position': 'right center',
           },
         },
-        'ripple': {
+        ripple: {
           '0%, 100%': {
             transform: 'translate(-50%, -50%) scale(1)',
           },
@@ -221,7 +224,7 @@ const config: Config = {
             transform: 'translate(-50%, -50%) scale(0.9)',
           },
         },
-        'grid': {
+        grid: {
           '0%': { transform: 'translateY(-50%)' },
           '100%': { transform: 'translateY(0)' },
         },
@@ -239,12 +242,12 @@ const config: Config = {
             transform: 'translateZ(0) rotate(360deg)',
           },
         },
-        'slide': {
+        slide: {
           to: {
             transform: 'translate(calc(100cqw - 100%), 0)',
           },
         },
-        'spotlight': {
+        spotlight: {
           '0%': {
             opacity: '0',
             transform: 'translate(-72%, -62%) scale(0.5)',
@@ -254,7 +257,7 @@ const config: Config = {
             transform: 'translate(-50%,-40%) scale(1)',
           },
         },
-        'shimmer': {
+        shimmer: {
           from: {
             backgroundPosition: '0 0',
           },
@@ -262,7 +265,7 @@ const config: Config = {
             backgroundPosition: '-200% 0',
           },
         },
-        'aurora': {
+        aurora: {
           from: {
             backgroundPosition: '50% 50%, 50% 50%',
           },

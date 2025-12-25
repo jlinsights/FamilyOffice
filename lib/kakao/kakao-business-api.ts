@@ -86,14 +86,16 @@ export class KakaoBusinessAPIService {
   /**
    * 사용자 프로필 정보 조회
    */
-  async getUserProfile(accessToken: string): Promise<KakaoAPIResponse<KakaoProfile>> {
+  async getUserProfile(
+    accessToken: string
+  ): Promise<KakaoAPIResponse<KakaoProfile>> {
     try {
       const response = await fetch(`${this.BASE_URL}/v2/user/me`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-        }
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+        },
       });
 
       if (!response.ok) {
@@ -103,26 +105,25 @@ export class KakaoBusinessAPIService {
           error: {
             code: response.status,
             message: errorData.msg || '프로필 조회에 실패했습니다.',
-            details: errorData
-          }
+            details: errorData,
+          },
         };
       }
 
       const profileData: KakaoProfile = await response.json();
-      
+
       return {
         success: true,
-        data: profileData
+        data: profileData,
       };
-
     } catch (error) {
       return {
         success: false,
         error: {
           code: 0,
           message: '네트워크 오류가 발생했습니다.',
-          details: error
-        }
+          details: error,
+        },
       };
     }
   }
@@ -130,20 +131,26 @@ export class KakaoBusinessAPIService {
   /**
    * 나에게 메시지 보내기 (개발/테스트용)
    */
-  async sendMessageToMe(accessToken: string, template: KakaoMessageTemplate): Promise<KakaoAPIResponse> {
+  async sendMessageToMe(
+    accessToken: string,
+    template: KakaoMessageTemplate
+  ): Promise<KakaoAPIResponse> {
     try {
       const templateObject = JSON.stringify(template);
-      
-      const response = await fetch(`${this.BASE_URL}/v2/api/talk/memo/default/send`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-          template_object: templateObject
-        })
-      });
+
+      const response = await fetch(
+        `${this.BASE_URL}/v2/api/talk/memo/default/send`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            template_object: templateObject,
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -152,26 +159,25 @@ export class KakaoBusinessAPIService {
           error: {
             code: response.status,
             message: errorData.msg || '메시지 발송에 실패했습니다.',
-            details: errorData
-          }
+            details: errorData,
+          },
         };
       }
 
       const result = await response.json();
-      
+
       return {
         success: true,
-        data: result
+        data: result,
       };
-
     } catch (error) {
       return {
         success: false,
         error: {
           code: 0,
           message: '네트워크 오류가 발생했습니다.',
-          details: error
-        }
+          details: error,
+        },
       };
     }
   }
@@ -180,24 +186,27 @@ export class KakaoBusinessAPIService {
    * 친구에게 메시지 보내기 (비즈니스 계정 필요)
    */
   async sendMessageToFriends(
-    accessToken: string, 
-    template: KakaoMessageTemplate, 
+    accessToken: string,
+    template: KakaoMessageTemplate,
     receiverUuids: string[]
   ): Promise<KakaoAPIResponse> {
     try {
       const templateObject = JSON.stringify(template);
-      
-      const response = await fetch(`${this.BASE_URL}/v1/api/talk/friends/message/default/send`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-          template_object: templateObject,
-          receiver_uuids: JSON.stringify(receiverUuids)
-        })
-      });
+
+      const response = await fetch(
+        `${this.BASE_URL}/v1/api/talk/friends/message/default/send`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            template_object: templateObject,
+            receiver_uuids: JSON.stringify(receiverUuids),
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -206,26 +215,25 @@ export class KakaoBusinessAPIService {
           error: {
             code: response.status,
             message: errorData.msg || '친구 메시지 발송에 실패했습니다.',
-            details: errorData
-          }
+            details: errorData,
+          },
         };
       }
 
       const result = await response.json();
-      
+
       return {
         success: true,
-        data: result
+        data: result,
       };
-
     } catch (error) {
       return {
         success: false,
         error: {
           code: 0,
           message: '네트워크 오류가 발생했습니다.',
-          details: error
-        }
+          details: error,
+        },
       };
     }
   }
@@ -244,28 +252,29 @@ export class KakaoBusinessAPIService {
       content: {
         title: '🎯 FamilyOffice S 상담 예약 완료',
         description: `${data.name}님의 ${data.serviceType} 상담이 예약되었습니다.\n담당자가 24시간 내에 연락드리겠습니다.`,
-        image_url: 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+        image_url:
+          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
         link: {
           web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-          mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`
-        }
+          mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+        },
       },
       buttons: [
         {
           title: '상담 현황 확인',
           link: {
             web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`
-          }
+            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+          },
         },
         {
           title: '추가 문의하기',
           link: {
             web_url: `${process.env.NEXT_PUBLIC_APP_URL}/contact`,
-            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/contact`
-          }
-        }
-      ]
+            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/contact`,
+          },
+        },
+      ],
     };
   }
 
@@ -281,28 +290,29 @@ export class KakaoBusinessAPIService {
       content: {
         title: '🌟 뉴스레터 구독을 환영합니다!',
         description: `${data.name ? `${data.name}님, ` : ''}FamilyOffice S 프리미엄 뉴스레터 구독이 완료되었습니다.\n\n📬 매주 화/금 발송\n💡 가업승계·자산관리 전문 인사이트`,
-        image_url: 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+        image_url:
+          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
         link: {
           web_url: 'https://newsletter.familyoffices.vip',
-          mobile_web_url: 'https://newsletter.familyoffices.vip'
-        }
+          mobile_web_url: 'https://newsletter.familyoffices.vip',
+        },
       },
       buttons: [
         {
           title: '뉴스레터 보기',
           link: {
             web_url: 'https://newsletter.familyoffices.vip',
-            mobile_web_url: 'https://newsletter.familyoffices.vip'
-          }
+            mobile_web_url: 'https://newsletter.familyoffices.vip',
+          },
         },
         {
           title: '서비스 둘러보기',
           link: {
             web_url: `${process.env.NEXT_PUBLIC_APP_URL}/services`,
-            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/services`
-          }
-        }
-      ]
+            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/services`,
+          },
+        },
+      ],
     };
   }
 
@@ -320,21 +330,22 @@ export class KakaoBusinessAPIService {
       content: {
         title: '🎓 세미나 신청이 완료되었습니다',
         description: `📚 ${data.seminarTitle}\n🗓️ ${data.seminarDate}\n👤 참석자: ${data.name}\n${data.venue ? `📍 장소: ${data.venue}` : ''}\n\n세미나 자료는 이메일로 발송됩니다.`,
-        image_url: 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+        image_url:
+          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
         link: {
           web_url: `${process.env.NEXT_PUBLIC_APP_URL}/seminar`,
-          mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/seminar`
-        }
+          mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/seminar`,
+        },
       },
       buttons: [
         {
           title: '세미나 정보',
           link: {
             web_url: `${process.env.NEXT_PUBLIC_APP_URL}/seminar`,
-            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/seminar`
-          }
-        }
-      ]
+            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/seminar`,
+          },
+        },
+      ],
     };
   }
 
@@ -350,28 +361,29 @@ export class KakaoBusinessAPIService {
       content: {
         title: '👑 FamilyOffice S에 오신 것을 환영합니다!',
         description: `${data.name}님, ${data.membershipTier || 'Premium'} 회원가입을 축하드립니다!\n\n🌟 전용 혜택\n✅ 개인 맞춤 자산관리 상담\n✅ VIP 전용 세미나 우선 초대\n✅ 프리미엄 투자정보 제공`,
-        image_url: 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+        image_url:
+          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
         link: {
           web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-          mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`
-        }
+          mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+        },
       },
       buttons: [
         {
           title: '대시보드 바로가기',
           link: {
             web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`
-          }
+            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+          },
         },
         {
           title: '서비스 소개',
           link: {
             web_url: `${process.env.NEXT_PUBLIC_APP_URL}/services`,
-            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/services`
-          }
-        }
-      ]
+            mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/services`,
+          },
+        },
+      ],
     };
   }
 
@@ -383,9 +395,9 @@ export class KakaoBusinessAPIService {
       const response = await fetch(`${this.BASE_URL}/v1/user/unlink`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       });
 
       if (!response.ok) {
@@ -395,26 +407,25 @@ export class KakaoBusinessAPIService {
           error: {
             code: response.status,
             message: errorData.msg || '계정 연결 해제에 실패했습니다.',
-            details: errorData
-          }
+            details: errorData,
+          },
         };
       }
 
       const result = await response.json();
-      
+
       return {
         success: true,
-        data: result
+        data: result,
       };
-
     } catch (error) {
       return {
         success: false,
         error: {
           code: 0,
           message: '네트워크 오류가 발생했습니다.',
-          details: error
-        }
+          details: error,
+        },
       };
     }
   }
@@ -428,8 +439,8 @@ export class KakaoBusinessAPIService {
         success: false,
         error: {
           code: 401,
-          message: 'Admin Key가 설정되지 않았습니다.'
-        }
+          message: 'Admin Key가 설정되지 않았습니다.',
+        },
       };
     }
 
@@ -437,9 +448,9 @@ export class KakaoBusinessAPIService {
       const response = await fetch(`${this.BASE_URL}/v1/api/quota`, {
         method: 'GET',
         headers: {
-          'Authorization': `KakaoAK ${this.ADMIN_KEY}`,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+          Authorization: `KakaoAK ${this.ADMIN_KEY}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       });
 
       if (!response.ok) {
@@ -449,26 +460,25 @@ export class KakaoBusinessAPIService {
           error: {
             code: response.status,
             message: errorData.msg || 'API 사용량 조회에 실패했습니다.',
-            details: errorData
-          }
+            details: errorData,
+          },
         };
       }
 
       const result = await response.json();
-      
+
       return {
         success: true,
-        data: result
+        data: result,
       };
-
     } catch (error) {
       return {
         success: false,
         error: {
           code: 0,
           message: '네트워크 오류가 발생했습니다.',
-          details: error
-        }
+          details: error,
+        },
       };
     }
   }
@@ -504,7 +514,7 @@ export class KakaoBusinessAPIService {
     return {
       isConfigured: missingConfig.length === 0,
       availableFeatures,
-      missingConfig
+      missingConfig,
     };
   }
 }

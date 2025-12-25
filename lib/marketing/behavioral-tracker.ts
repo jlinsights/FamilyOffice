@@ -2,7 +2,6 @@
  * 행동 추적 시스템
  * 클라이언트 사이드에서 사용자 행동을 추적하고 리드 스코어링에 반영
  */
-
 import { getLeadScoringEngine } from './lead-scoring-engine';
 
 export interface BehaviorTrackingConfig {
@@ -95,7 +94,10 @@ export class BehavioralTracker {
       };
 
       // API 호출 (트래킹 픽셀 방식)
-      const trackingUrl = new URL(this.config.apiEndpoint!, window.location.origin);
+      const trackingUrl = new URL(
+        this.config.apiEndpoint!,
+        window.location.origin
+      );
       trackingUrl.searchParams.set('contact_id', this.config.contactId);
       trackingUrl.searchParams.set('page_url', pageData.page_url);
       trackingUrl.searchParams.set('page_title', pageData.page_title);
@@ -107,7 +109,6 @@ export class BehavioralTracker {
 
       this.pageViewCount++;
       console.log(`📊 페이지 뷰 추적: ${pageData.page_path}`);
-
     } catch (error) {
       console.error('페이지 뷰 추적 실패:', error);
     }
@@ -121,7 +122,8 @@ export class BehavioralTracker {
 
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = Math.round((scrollTop / docHeight) * 100);
 
       if (scrollPercent > this.maxScrollDepth) {
@@ -162,7 +164,6 @@ export class BehavioralTracker {
       });
 
       console.log(`📜 스크롤 마일스톤: ${percent}%`);
-
     } catch (error) {
       console.error('스크롤 마일스톤 추적 실패:', error);
     }
@@ -184,7 +185,6 @@ export class BehavioralTracker {
           session_id: this.config.sessionId,
         },
       });
-
     } catch (error) {
       console.error('스크롤 깊이 추적 실패:', error);
     }
@@ -197,14 +197,15 @@ export class BehavioralTracker {
     // 페이지 이탈 시 시간 추적
     const trackTimeOnPage = () => {
       const timeOnPage = Date.now() - this.currentPageStartTime;
-      if (timeOnPage > 30000) { // 30초 이상일 때만 추적
+      if (timeOnPage > 30000) {
+        // 30초 이상일 때만 추적
         this.trackTimeOnPage(timeOnPage);
       }
     };
 
     // 페이지 이탈 이벤트
     window.addEventListener('beforeunload', trackTimeOnPage);
-    
+
     // 페이지 숨김 이벤트 (모바일에서 더 정확)
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'hidden') {
@@ -234,7 +235,6 @@ export class BehavioralTracker {
       });
 
       console.log(`⏱️ 페이지 체류 시간: ${Math.round(timeMs / 1000)}초`);
-
     } catch (error) {
       console.error('체류 시간 추적 실패:', error);
     }
@@ -245,15 +245,19 @@ export class BehavioralTracker {
    */
   private initFormTracking(): void {
     // 폼 필드 포커스 추적
-    document.addEventListener('focusin', (event) => {
+    document.addEventListener('focusin', event => {
       const target = event.target as HTMLElement;
-      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT') {
+      if (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.tagName === 'SELECT'
+      ) {
         this.trackFormInteraction('field_focus', target);
       }
     });
 
     // 폼 제출 추적
-    document.addEventListener('submit', (event) => {
+    document.addEventListener('submit', event => {
       const target = event.target as HTMLFormElement;
       if (target.tagName === 'FORM') {
         this.trackFormSubmission(target);
@@ -261,9 +265,13 @@ export class BehavioralTracker {
     });
 
     // 폼 필드 변경 추적
-    document.addEventListener('change', (event) => {
+    document.addEventListener('change', event => {
       const target = event.target as HTMLElement;
-      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT') {
+      if (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.tagName === 'SELECT'
+      ) {
         this.trackFormInteraction('field_change', target);
       }
     });
@@ -272,11 +280,15 @@ export class BehavioralTracker {
   /**
    * 폼 상호작용 추적
    */
-  private trackFormInteraction(interactionType: string, element: HTMLElement): void {
+  private trackFormInteraction(
+    interactionType: string,
+    element: HTMLElement
+  ): void {
     const formId = element.closest('form')?.id || 'unknown-form';
-    const fieldName = (element as HTMLInputElement).name || 
-                     (element as HTMLInputElement).id || 
-                     'unknown-field';
+    const fieldName =
+      (element as HTMLInputElement).name ||
+      (element as HTMLInputElement).id ||
+      'unknown-field';
 
     const key = `${formId}-${fieldName}`;
     const currentCount = this.formInteractions.get(key) || 0;
@@ -290,7 +302,8 @@ export class BehavioralTracker {
           interaction_type: interactionType,
           form_id: formId,
           field_name: fieldName,
-          field_type: (element as HTMLInputElement).type || element.tagName.toLowerCase(),
+          field_type:
+            (element as HTMLInputElement).type || element.tagName.toLowerCase(),
           page_url: window.location.href,
           session_id: this.config.sessionId,
         },
@@ -307,13 +320,16 @@ export class BehavioralTracker {
     try {
       const formData = new FormData(form);
       const formFields: Record<string, any> = {};
-      
+
       formData.forEach((value, key) => {
         // 민감한 정보는 제외하고 메타데이터만 수집
-        if (!['password', 'card', 'ssn', 'social'].some(sensitive => 
-          key.toLowerCase().includes(sensitive)
-        )) {
-          formFields[key] = typeof value === 'string' ? value.substring(0, 100) : '[file]';
+        if (
+          !['password', 'card', 'ssn', 'social'].some(sensitive =>
+            key.toLowerCase().includes(sensitive)
+          )
+        ) {
+          formFields[key] =
+            typeof value === 'string' ? value.substring(0, 100) : '[file]';
         }
       });
 
@@ -332,7 +348,6 @@ export class BehavioralTracker {
       });
 
       console.log(`📝 폼 제출 추적: ${form.id || 'unknown-form'}`);
-
     } catch (error) {
       console.error('폼 제출 추적 실패:', error);
     }
@@ -352,12 +367,12 @@ export class BehavioralTracker {
       setTimeout(() => this.trackPageView(), 100); // DOM 업데이트 후 추적
     };
 
-    history.pushState = function(...args) {
+    history.pushState = function (...args) {
       originalPushState.apply(this, args);
       trackNavigationChange();
     };
 
-    history.replaceState = function(...args) {
+    history.replaceState = function (...args) {
       originalReplaceState.apply(this, args);
       trackNavigationChange();
     };
@@ -369,7 +384,10 @@ export class BehavioralTracker {
   /**
    * 커스텀 이벤트 추적
    */
-  async trackCustomEvent(eventName: string, eventData: Record<string, any>): Promise<void> {
+  async trackCustomEvent(
+    eventName: string,
+    eventData: Record<string, any>
+  ): Promise<void> {
     if (!this.config.contactId) return;
 
     try {
@@ -385,7 +403,6 @@ export class BehavioralTracker {
       });
 
       console.log(`🎯 커스텀 이벤트 추적: ${eventName}`);
-
     } catch (error) {
       console.error('커스텀 이벤트 추적 실패:', error);
     }
@@ -416,7 +433,6 @@ export class BehavioralTracker {
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
-
     } catch (error) {
       // 추적 실패가 사용자 경험을 방해하지 않도록 조용히 처리
       console.debug('추적 이벤트 전송 실패:', error);
@@ -456,11 +472,13 @@ export class BehavioralTracker {
 // 전역 인스턴스 관리
 let globalTracker: BehavioralTracker | null = null;
 
-export function initializeBehavioralTracker(config: BehaviorTrackingConfig): BehavioralTracker {
+export function initializeBehavioralTracker(
+  config: BehaviorTrackingConfig
+): BehavioralTracker {
   if (globalTracker) {
     globalTracker.stopTracking();
   }
-  
+
   globalTracker = new BehavioralTracker(config);
   return globalTracker;
 }

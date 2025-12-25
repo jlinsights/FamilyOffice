@@ -1,9 +1,14 @@
-import { Badge } from '@/components/ui/badge';
 import { memo } from 'react';
+
+import { Badge } from '@/components/ui/badge';
 
 import { MembershipStat } from '@/types/program';
 
-export const MembershipStatsSection = memo(function MembershipStatsSection({ stats }: { stats: MembershipStat[] }) {
+export const MembershipStatsSection = memo(function MembershipStatsSection({
+  stats,
+}: {
+  stats: MembershipStat[];
+}) {
   return (
     <section className="section bg-gradient-to-r from-muted/30 to-background">
       <div className="container">

@@ -1,7 +1,21 @@
 'use client';
 
-import { Copy, Check, Eye, Download, Award, Target, Shield, TrendingUp, Users, Building2, Sparkles } from 'lucide-react';
+import {
+  Copy,
+  Check,
+  Eye,
+  Download,
+  Award,
+  Target,
+  Shield,
+  TrendingUp,
+  Users,
+  Building2,
+  Sparkles,
+} from 'lucide-react';
+
 import { useState } from 'react';
+
 import Image from 'next/image';
 
 import { Badge } from '@/components/ui/badge';
@@ -20,32 +34,43 @@ const ExecutiveSummary = () => (
   <div className="mb-12">
     <div className="text-center mb-8">
       <Badge className="mb-4">Executive Brand Overview</Badge>
-      <h2 className="text-3xl font-bold mb-4">FamilyOffice S 브랜드 가이드라인</h2>
+      <h2 className="text-3xl font-bold mb-4">
+        FamilyOffice S 브랜드 가이드라인
+      </h2>
       <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-        성공한 기업가를 위한 프리미엄 패밀리오피스 서비스의 브랜드 아이덴티티 시스템
+        성공한 기업가를 위한 프리미엄 패밀리오피스 서비스의 브랜드 아이덴티티
+        시스템
       </p>
     </div>
-    
+
     <div className="grid md:grid-cols-4 gap-6">
       <Card className="text-center p-6">
         <Shield className="h-8 w-8 text-primary mx-auto mb-3" />
         <h3 className="font-semibold mb-2">신뢰성</h3>
-        <p className="text-sm text-muted-foreground">삼성생명 1000억+ 자산관리 실적 기반</p>
+        <p className="text-sm text-muted-foreground">
+          삼성생명 1000억+ 자산관리 실적 기반
+        </p>
       </Card>
       <Card className="text-center p-6">
         <Target className="h-8 w-8 text-primary mx-auto mb-3" />
         <h3 className="font-semibold mb-2">전문성</h3>
-        <p className="text-sm text-muted-foreground">중소중견기업 CEO 전용 맞춤 솔루션</p>
+        <p className="text-sm text-muted-foreground">
+          중소중견기업 CEO 전용 맞춤 솔루션
+        </p>
       </Card>
       <Card className="text-center p-6">
         <Sparkles className="h-8 w-8 text-primary mx-auto mb-3" />
         <h3 className="font-semibold mb-2">프리미엄</h3>
-        <p className="text-sm text-muted-foreground">VVIP 전용 고급 패밀리오피스 서비스</p>
+        <p className="text-sm text-muted-foreground">
+          VVIP 전용 고급 패밀리오피스 서비스
+        </p>
       </Card>
       <Card className="text-center p-6">
         <TrendingUp className="h-8 w-8 text-primary mx-auto mb-3" />
         <h3 className="font-semibold mb-2">성장지향</h3>
-        <p className="text-sm text-muted-foreground">백년영속 가업승계와 자산증식 지원</p>
+        <p className="text-sm text-muted-foreground">
+          백년영속 가업승계와 자산증식 지원
+        </p>
       </Card>
     </div>
   </div>
@@ -60,21 +85,38 @@ const BrandIdentity = () => (
         <h4 className="text-xl font-semibold mb-4">브랜드 네임</h4>
         <div className="space-y-4">
           <div>
-            <span className="text-sm font-medium text-muted-foreground">Primary:</span>
-            <p className="text-2xl font-bold text-primary" style={{ fontFamily: 'Playfair Display, serif' }}>FamilyOffice S</p>
+            <span className="text-sm font-medium text-muted-foreground">
+              Primary:
+            </span>
+            <p
+              className="text-2xl font-bold text-primary"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              FamilyOffice S
+            </p>
             <div className="mt-2 text-sm text-muted-foreground space-y-1">
-              <p><strong>Font:</strong> Playfair Display</p>
-              <p><strong>Weight:</strong> Bold (700)</p>
-              <p><strong>Style:</strong> Serif, Premium Typography</p>
-              <p><strong>Usage:</strong> 로고, 브랜드명 전용</p>
+              <p>
+                <strong>Font:</strong> Playfair Display
+              </p>
+              <p>
+                <strong>Weight:</strong> Bold (700)
+              </p>
+              <p>
+                <strong>Style:</strong> Serif, Premium Typography
+              </p>
+              <p>
+                <strong>Usage:</strong> 로고, 브랜드명 전용
+              </p>
             </div>
           </div>
           <div>
-            <span className="text-sm font-medium text-muted-foreground">Subtitle:</span>
+            <span className="text-sm font-medium text-muted-foreground">
+              Subtitle:
+            </span>
             <div className="flex items-center gap-3 mt-2">
-              <Image 
-                src="/samsung-financial-networks-logo.png" 
-                alt="Samsung Financial Networks" 
+              <Image
+                src="/samsung-financial-networks-logo.png"
+                alt="Samsung Financial Networks"
                 width={120}
                 height={32}
                 className="h-8 w-auto"
@@ -83,26 +125,42 @@ const BrandIdentity = () => (
             </div>
           </div>
           <div>
-            <span className="text-sm font-medium text-muted-foreground">Tagline:</span>
-            <p className="text-base font-medium">&quot;Your Trusted Financial Partner for Life&quot;</p>
+            <span className="text-sm font-medium text-muted-foreground">
+              Tagline:
+            </span>
+            <p className="text-base font-medium">
+              &quot;Your Trusted Financial Partner for Life&quot;
+            </p>
           </div>
         </div>
       </Card>
-      
+
       <Card className="p-6">
         <h4 className="text-xl font-semibold mb-4">브랜드 약속</h4>
         <div className="space-y-3">
           <div className="flex items-start gap-3">
-            <Badge variant="outline" className="mt-1">01</Badge>
-            <p className="text-sm"><strong>백년영속:</strong> 대를 이어갈 지속가능한 자산관리</p>
+            <Badge variant="outline" className="mt-1">
+              01
+            </Badge>
+            <p className="text-sm">
+              <strong>백년영속:</strong> 대를 이어갈 지속가능한 자산관리
+            </p>
           </div>
           <div className="flex items-start gap-3">
-            <Badge variant="outline" className="mt-1">02</Badge>
-            <p className="text-sm"><strong>전문성:</strong> 삼성생명 검증된 금융 전문가 네트워크</p>
+            <Badge variant="outline" className="mt-1">
+              02
+            </Badge>
+            <p className="text-sm">
+              <strong>전문성:</strong> 삼성생명 검증된 금융 전문가 네트워크
+            </p>
           </div>
           <div className="flex items-start gap-3">
-            <Badge variant="outline" className="mt-1">03</Badge>
-            <p className="text-sm"><strong>맞춤화:</strong> 중소중견기업 CEO를 위한 특화 솔루션</p>
+            <Badge variant="outline" className="mt-1">
+              03
+            </Badge>
+            <p className="text-sm">
+              <strong>맞춤화:</strong> 중소중견기업 CEO를 위한 특화 솔루션
+            </p>
           </div>
         </div>
       </Card>
@@ -126,7 +184,10 @@ const ColorPalette = ({
     <h4 className="text-lg font-semibold mb-4">{title}</h4>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {colors.map(color => (
-        <Card key={color.name} className="overflow-hidden hover:shadow-md transition-shadow">
+        <Card
+          key={color.name}
+          className="overflow-hidden hover:shadow-md transition-shadow"
+        >
           <div
             className="h-16 w-full cursor-pointer relative group"
             style={{ backgroundColor: color.hex }}
@@ -156,34 +217,53 @@ const TypographyShowcase = ({ system }: { system: TypographyCategory[] }) => (
   <div className="space-y-8">
     {system.map(category => (
       <div key={category.category}>
-        <h4 className="text-lg font-semibold mb-4 capitalize">{category.category}</h4>
+        <h4 className="text-lg font-semibold mb-4 capitalize">
+          {category.category}
+        </h4>
         <div className="grid gap-4">
           {category.styles.map(style => (
             <Card key={style.name} className="p-4">
               <div className="grid md:grid-cols-2 gap-4 items-center">
                 <div>
-                  <div 
+                  <div
                     className="mb-2"
                     style={{
                       fontSize: style.size,
                       fontWeight: style.weight,
-                      lineHeight: style.lineHeight
+                      lineHeight: style.lineHeight,
                     }}
                   >
                     {style.name === 'Display Large' && '패밀리오피스 브랜딩'}
                     {style.name === 'Display Medium' && '프리미엄 자산관리'}
                     {style.name === 'H1' && '브랜드 가이드라인'}
                     {style.name === 'H2' && '디자인 시스템'}
-                    {style.name === 'Body Large' && '성공한 기업가를 위한 맞춤형 패밀리오피스 서비스입니다.'}
-                    {!['Display Large', 'Display Medium', 'H1', 'H2', 'Body Large'].includes(style.name) && `${style.name} 스타일 예시`}
+                    {style.name === 'Body Large' &&
+                      '성공한 기업가를 위한 맞춤형 패밀리오피스 서비스입니다.'}
+                    {![
+                      'Display Large',
+                      'Display Medium',
+                      'H1',
+                      'H2',
+                      'Body Large',
+                    ].includes(style.name) && `${style.name} 스타일 예시`}
                   </div>
-                  <Badge variant="outline" size="sm">{style.name}</Badge>
+                  <Badge variant="outline" size="sm">
+                    {style.name}
+                  </Badge>
                 </div>
                 <div className="text-sm text-muted-foreground space-y-1">
-                  <p><strong>Size:</strong> {style.size}</p>
-                  <p><strong>Weight:</strong> {style.weight}</p>
-                  <p><strong>Line Height:</strong> {style.lineHeight}</p>
-                  <p><strong>Usage:</strong> {style.usage}</p>
+                  <p>
+                    <strong>Size:</strong> {style.size}
+                  </p>
+                  <p>
+                    <strong>Weight:</strong> {style.weight}
+                  </p>
+                  <p>
+                    <strong>Line Height:</strong> {style.lineHeight}
+                  </p>
+                  <p>
+                    <strong>Usage:</strong> {style.usage}
+                  </p>
                 </div>
               </div>
             </Card>
@@ -208,13 +288,15 @@ const ComponentExamples = () => (
       </div>
       <Card className="p-4 bg-muted">
         <code className="text-sm">
-          {`<Button>Primary</Button>`}<br/>
-          {`<Button variant="secondary">Secondary</Button>`}<br/>
+          {`<Button>Primary</Button>`}
+          <br />
+          {`<Button variant="secondary">Secondary</Button>`}
+          <br />
           {`<Button variant="outline">Outline</Button>`}
         </code>
       </Card>
     </div>
-    
+
     <div>
       <h4 className="text-lg font-semibold mb-4">카드 시스템</h4>
       <div className="grid md:grid-cols-2 gap-4 mb-4">
@@ -223,7 +305,9 @@ const ComponentExamples = () => (
             <CardTitle>Standard Card</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">기본 카드 스타일입니다.</p>
+            <p className="text-sm text-muted-foreground">
+              기본 카드 스타일입니다.
+            </p>
           </CardContent>
         </Card>
         <Card className="p-4 bg-gradient-to-br from-primary/5 to-primary/10">
@@ -231,7 +315,9 @@ const ComponentExamples = () => (
             <CardTitle>Premium Card</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">프리미엄 그라디언트 카드입니다.</p>
+            <p className="text-sm text-muted-foreground">
+              프리미엄 그라디언트 카드입니다.
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -276,11 +362,15 @@ export default function BrandPage() {
             </div>
           </div>
         </section>
-        
+
         {/* Main Content */}
         <section className="py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
               <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="identity">Identity</TabsTrigger>
@@ -289,114 +379,190 @@ export default function BrandPage() {
                 <TabsTrigger value="components">Components</TabsTrigger>
                 <TabsTrigger value="guidelines">Guidelines</TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="overview" className="mt-8">
                 <ExecutiveSummary />
                 <div className="grid md:grid-cols-2 gap-8">
                   <Card className="p-6">
-                    <h3 className="text-xl font-semibold mb-4">Target Audience</h3>
+                    <h3 className="text-xl font-semibold mb-4">
+                      Target Audience
+                    </h3>
                     <ul className="space-y-2 text-sm">
-                      <li className="flex items-center gap-2"><Building2 className="h-4 w-4" />중소중견기업 CEO (40-60세)</li>
-                      <li className="flex items-center gap-2"><Users className="h-4 w-4" />연 매출 100억원 이상 기업 경영진</li>
-                      <li className="flex items-center gap-2"><Award className="h-4 w-4" />프리미엄 자산관리 서비스 선호</li>
+                      <li className="flex items-center gap-2">
+                        <Building2 className="h-4 w-4" />
+                        중소중견기업 CEO (40-60세)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Users className="h-4 w-4" />연 매출 100억원 이상 기업
+                        경영진
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Award className="h-4 w-4" />
+                        프리미엄 자산관리 서비스 선호
+                      </li>
                     </ul>
                   </Card>
                   <Card className="p-6">
-                    <h3 className="text-xl font-semibold mb-4">Brand Positioning</h3>
+                    <h3 className="text-xl font-semibold mb-4">
+                      Brand Positioning
+                    </h3>
                     <div className="space-y-3 text-sm">
-                      <p><strong>Category:</strong> Premium Family Office Services</p>
-                      <p><strong>Positioning:</strong> 성공한 기업가를 위한 통합 자산관리 파트너</p>
-                      <p><strong>Differentiation:</strong> 삼성생명 백그라운드 + AI 기술력</p>
+                      <p>
+                        <strong>Category:</strong> Premium Family Office
+                        Services
+                      </p>
+                      <p>
+                        <strong>Positioning:</strong> 성공한 기업가를 위한 통합
+                        자산관리 파트너
+                      </p>
+                      <p>
+                        <strong>Differentiation:</strong> 삼성생명 백그라운드 +
+                        AI 기술력
+                      </p>
                     </div>
                   </Card>
                 </div>
               </TabsContent>
-              
+
               <TabsContent value="identity" className="mt-8">
                 <BrandIdentity />
               </TabsContent>
-              
+
               <TabsContent value="colors" className="mt-8">
                 <h3 className="text-2xl font-bold mb-6">Color System</h3>
-                <ColorPalette 
-                  colors={brandColors.primary} 
-                  title="Primary Colors" 
-                  copiedColor={copiedColor} 
-                  copyToClipboard={copyToClipboard} 
+                <ColorPalette
+                  colors={brandColors.primary}
+                  title="Primary Colors"
+                  copiedColor={copiedColor}
+                  copyToClipboard={copyToClipboard}
                 />
-                <ColorPalette 
-                  colors={brandColors.accent} 
-                  title="Accent Colors" 
-                  copiedColor={copiedColor} 
-                  copyToClipboard={copyToClipboard} 
+                <ColorPalette
+                  colors={brandColors.accent}
+                  title="Accent Colors"
+                  copiedColor={copiedColor}
+                  copyToClipboard={copyToClipboard}
                 />
-                <ColorPalette 
-                  colors={brandColors.neutral} 
-                  title="Neutral Colors" 
-                  copiedColor={copiedColor} 
-                  copyToClipboard={copyToClipboard} 
+                <ColorPalette
+                  colors={brandColors.neutral}
+                  title="Neutral Colors"
+                  copiedColor={copiedColor}
+                  copyToClipboard={copyToClipboard}
                 />
-                <ColorPalette 
-                  colors={brandColors.status} 
-                  title="Status Colors" 
-                  copiedColor={copiedColor} 
-                  copyToClipboard={copyToClipboard} 
+                <ColorPalette
+                  colors={brandColors.status}
+                  title="Status Colors"
+                  copiedColor={copiedColor}
+                  copyToClipboard={copyToClipboard}
                 />
               </TabsContent>
-              
+
               <TabsContent value="typography" className="mt-8">
                 <h3 className="text-2xl font-bold mb-6">Typography System</h3>
                 <TypographyShowcase system={typographySystem} />
               </TabsContent>
-              
+
               <TabsContent value="components" className="mt-8">
                 <h3 className="text-2xl font-bold mb-6">Component Library</h3>
                 <ComponentExamples />
               </TabsContent>
-              
+
               <TabsContent value="guidelines" className="mt-8">
-                <h3 className="text-2xl font-bold mb-6">Implementation Guidelines</h3>
+                <h3 className="text-2xl font-bold mb-6">
+                  Implementation Guidelines
+                </h3>
                 <div className="grid md:grid-cols-2 gap-8">
                   <Card className="p-6">
-                    <h4 className="text-lg font-semibold mb-4">CSS Design Tokens</h4>
+                    <h4 className="text-lg font-semibold mb-4">
+                      CSS Design Tokens
+                    </h4>
                     <div className="bg-muted p-4 rounded-lg text-sm font-mono space-y-1 text-muted-foreground dark:text-foreground">
-                      <p className="text-foreground dark:text-foreground">--primary: hsl(221, 83%, 53%);</p>
-                      <p className="text-foreground dark:text-foreground">--primary-foreground: hsl(210, 40%, 98%);</p>
-                      <p className="text-foreground dark:text-foreground">--secondary: hsl(210, 40%, 96%);</p>
-                      <p className="text-foreground dark:text-foreground">--muted: hsl(210, 40%, 96%);</p>
-                      <p className="text-foreground dark:text-foreground">--accent: hsl(210, 40%, 96%);</p>
+                      <p className="text-foreground dark:text-foreground">
+                        --primary: hsl(221, 83%, 53%);
+                      </p>
+                      <p className="text-foreground dark:text-foreground">
+                        --primary-foreground: hsl(210, 40%, 98%);
+                      </p>
+                      <p className="text-foreground dark:text-foreground">
+                        --secondary: hsl(210, 40%, 96%);
+                      </p>
+                      <p className="text-foreground dark:text-foreground">
+                        --muted: hsl(210, 40%, 96%);
+                      </p>
+                      <p className="text-foreground dark:text-foreground">
+                        --accent: hsl(210, 40%, 96%);
+                      </p>
                     </div>
                   </Card>
                   <Card className="p-6">
-                    <h4 className="text-lg font-semibold mb-4">Accessibility Standards</h4>
+                    <h4 className="text-lg font-semibold mb-4">
+                      Accessibility Standards
+                    </h4>
                     <ul className="space-y-2 text-sm">
-                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600 dark:text-green-400" />WCAG 2.1 AA 준수</li>
-                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600 dark:text-green-400" />4.5:1 최소 대비율</li>
-                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600 dark:text-green-400" />키보드 네비게이션 지원</li>
-                      <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600 dark:text-green-400" />스크린 리더 호환성</li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+                        WCAG 2.1 AA 준수
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+                        4.5:1 최소 대비율
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+                        키보드 네비게이션 지원
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+                        스크린 리더 호환성
+                      </li>
                     </ul>
                   </Card>
                 </div>
-                
+
                 <Card className="p-6 mt-8">
-                  <h4 className="text-lg font-semibold mb-4">Brand Compliance Checklist</h4>
+                  <h4 className="text-lg font-semibold mb-4">
+                    Brand Compliance Checklist
+                  </h4>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h5 className="font-medium mb-3">Design Requirements</h5>
                       <ul className="space-y-2 text-sm">
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />브랜드 컬러 시스템 사용</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />타이포그래피 스케일 준수</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />일관된 스페이싱 적용</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />반응형 디자인 구현</li>
+                        <li className="flex items-center gap-2">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                          브랜드 컬러 시스템 사용
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                          타이포그래피 스케일 준수
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                          일관된 스페이싱 적용
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                          반응형 디자인 구현
+                        </li>
                       </ul>
                     </div>
                     <div>
                       <h5 className="font-medium mb-3">Content Guidelines</h5>
                       <ul className="space-y-2 text-sm">
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />프리미엄 톤앤매너 유지</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />전문용어 적절한 사용</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />한글 맞춤법 검수</li>
-                        <li className="flex items-center gap-2"><Check className="h-3 w-3 text-green-600 dark:text-green-400" />삼성생명 파트너십 명시</li>
+                        <li className="flex items-center gap-2">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                          프리미엄 톤앤매너 유지
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                          전문용어 적절한 사용
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                          한글 맞춤법 검수
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                          삼성생명 파트너십 명시
+                        </li>
                       </ul>
                     </div>
                   </div>

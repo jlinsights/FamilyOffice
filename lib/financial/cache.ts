@@ -1,7 +1,11 @@
 /**
  * 캐시 모니터링 관련 함수 export
  */
-import { cacheMonitoring, getRealTimeHitRate, checkCacheAlerts } from './cache-monitoring';
+import {
+  cacheMonitoring,
+  getRealTimeHitRate,
+  checkCacheAlerts,
+} from './cache-monitoring';
 
 /**
  * 고급 캐시 통계 조회
@@ -23,4 +27,3 @@ export async function getRealTimeCacheHitRate(): Promise<number> {
 export async function checkCachePerformanceAlerts() {
   return checkCacheAlerts();
 }
-

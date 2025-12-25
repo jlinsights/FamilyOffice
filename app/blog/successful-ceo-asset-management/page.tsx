@@ -1,20 +1,30 @@
+import {
+  Award,
+  Building2,
+  CheckCircle2,
+  FileCheck,
+  Shield,
+  TrendingUp,
+} from 'lucide-react';
+
+import type { Metadata } from 'next';
+import Link from 'next/link';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+
 import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { generateMetadata } from '@/lib/seo/metadata';
-import {
-    Award,
-    Building2,
-    CheckCircle2,
-    FileCheck,
-    Shield,
-    TrendingUp
-} from 'lucide-react';
-import type { Metadata } from 'next';
-import Link from 'next/link';
 
 export const metadata: Metadata = generateMetadata(
   '성공한 CEO 자산관리 방법 7가지 | 전문가 가이드',
@@ -29,7 +39,7 @@ export const metadata: Metadata = generateMetadata(
     'CEO 세무 전략',
     'CEO 투자 전략',
     '성공한 기업가 재테크',
-    '경영인 자산배분'
+    '경영인 자산배분',
   ],
   '/blog/successful-ceo-asset-management-cover.jpg',
   '전문가급',
@@ -48,42 +58,42 @@ export default function SuccessfulCEOAssetManagementPage() {
         name: 'CEO는 개인 자산과 기업 자산을 어떻게 분리해야 하나요?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '법인 계좌와 개인 계좌를 명확히 분리하고, 법인 자금으로 개인 경비를 지출하지 않아야 합니다. 가지급금 발생을 최소화하고, 급여·배당금 등 정당한 방법으로 자금을 인출해야 세무 리스크를 줄일 수 있습니다.'
-        }
+          text: '법인 계좌와 개인 계좌를 명확히 분리하고, 법인 자금으로 개인 경비를 지출하지 않아야 합니다. 가지급금 발생을 최소화하고, 급여·배당금 등 정당한 방법으로 자금을 인출해야 세무 리스크를 줄일 수 있습니다.',
+        },
       },
       {
         '@type': 'Question',
         name: 'CEO에게 가장 효과적인 세무 절세 전략은 무엇인가요?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '법인세와 소득세를 함께 고려한 통합 세무 설계가 중요합니다. 급여와 배당의 최적 비율 설정, 퇴직금 준비, 법인보험 활용, 기업부설연구소 설립 등 다양한 방법을 조합하여 합법적으로 절세할 수 있습니다.'
-        }
+          text: '법인세와 소득세를 함께 고려한 통합 세무 설계가 중요합니다. 급여와 배당의 최적 비율 설정, 퇴직금 준비, 법인보험 활용, 기업부설연구소 설립 등 다양한 방법을 조합하여 합법적으로 절세할 수 있습니다.',
+        },
       },
       {
         '@type': 'Question',
         name: 'CEO의 가업승계는 언제부터 준비해야 하나요?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '가업승계는 최소 5-10년의 준비 기간이 필요합니다. 기업 가치가 급등하기 전에 미리 계획하고, 단계적으로 지분을 이전하며, 후계자 교육을 병행해야 합니다. 빠를수록 세금 부담이 줄어들고 안정적인 승계가 가능합니다.'
-        }
+          text: '가업승계는 최소 5-10년의 준비 기간이 필요합니다. 기업 가치가 급등하기 전에 미리 계획하고, 단계적으로 지분을 이전하며, 후계자 교육을 병행해야 합니다. 빠를수록 세금 부담이 줄어들고 안정적인 승계가 가능합니다.',
+        },
       },
       {
         '@type': 'Question',
         name: 'CEO가 해외 투자를 할 때 주의할 점은?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '해외금융계좌 신고의무를 준수하고, 환율 리스크를 헤지하며, 현지 세법과 한국 세법을 모두 고려해야 합니다. 전문가와 함께 이중과세 방지 전략을 수립하고, 컴플라이언스를 철저히 지키는 것이 중요합니다.'
-        }
+          text: '해외금융계좌 신고의무를 준수하고, 환율 리스크를 헤지하며, 현지 세법과 한국 세법을 모두 고려해야 합니다. 전문가와 함께 이중과세 방지 전략을 수립하고, 컴플라이언스를 철저히 지키는 것이 중요합니다.',
+        },
       },
       {
         '@type': 'Question',
         name: 'CEO에게 적합한 자산배분 비율은?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '일반적으로 안전자산 30-40%, 성장자산 40-50%, 대체투자 10-20%를 권장합니다. 다만 나이, 기업 현황, 리스크 성향에 따라 조정이 필요하며, 기업 자산과 개인 자산을 통합적으로 고려한 포트폴리오 설계가 중요합니다.'
-        }
-      }
-    ]
+          text: '일반적으로 안전자산 30-40%, 성장자산 40-50%, 대체투자 10-20%를 권장합니다. 다만 나이, 기업 현황, 리스크 성향에 따라 조정이 필요하며, 기업 자산과 개인 자산을 통합적으로 고려한 포트폴리오 설계가 중요합니다.',
+        },
+      },
+    ],
   };
 
   return (
@@ -108,7 +118,7 @@ export default function SuccessfulCEOAssetManagementPage() {
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center">
-                  <Badge Check className="mr-2 h-4 w-4" />
+                  <CheckCircle2 className="mr-2 h-4 w-4" />
                   읽는 시간: 8분
                 </div>
                 <div className="flex items-center">
@@ -129,12 +139,15 @@ export default function SuccessfulCEOAssetManagementPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto prose dark:prose-invert">
               <p className="lead text-lg">
-                성공한 기업을 이끄는 CEO와 경영자에게 <strong>자산관리</strong>는 단순한 재테크를 넘어 기업의 지속 가능성과 
-                직결되는 중요한 경영 활동입니다. 기업 자산과 개인 자산의 균형, 세무 최적화, 그리고 차세대로의 
-                안정적인 승계까지 고려해야 하는 복잡한 과제입니다.
+                성공한 기업을 이끄는 CEO와 경영자에게 <strong>자산관리</strong>
+                는 단순한 재테크를 넘어 기업의 지속 가능성과 직결되는 중요한
+                경영 활동입니다. 기업 자산과 개인 자산의 균형, 세무 최적화,
+                그리고 차세대로의 안정적인 승계까지 고려해야 하는 복잡한
+                과제입니다.
               </p>
               <p>
-                본 가이드에서는 수백 명의 성공한 CEO와 경영자를 자문한 경험을 바탕으로, 
+                본 가이드에서는 수백 명의 성공한 CEO와 경영자를 자문한 경험을
+                바탕으로,
                 <strong>검증된 7가지 핵심 자산관리 전략</strong>을 소개합니다.
               </p>
             </div>
@@ -145,7 +158,6 @@ export default function SuccessfulCEOAssetManagementPage() {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto space-y-12">
-              
               {/* Strategy 1 */}
               <Card>
                 <CardHeader>
@@ -165,14 +177,23 @@ export default function SuccessfulCEOAssetManagementPage() {
                 </CardHeader>
                 <CardContent className="prose dark:prose-invert max-w-none">
                   <p>
-                    성공한 CEO의 첫 번째 자산관리 원칙은 <strong>기업 자산과 개인 자산의 철저한 분리</strong>입니다.
+                    성공한 CEO의 첫 번째 자산관리 원칙은{' '}
+                    <strong>기업 자산과 개인 자산의 철저한 분리</strong>입니다.
                   </p>
-                  
+
                   <h4>왜 중요한가요?</h4>
                   <ul>
-                    <li><strong>세무 리스크 감소</strong>: 가지급금 발생 시 인정이자 과세 회피</li>
-                    <li><strong>법적 책임 분리</strong>: 기업 부채로부터 개인 자산 보호</li>
-                    <li><strong>투명성 확보</strong>: 향후 IPO, M&A 시 유리</li>
+                    <li>
+                      <strong>세무 리스크 감소</strong>: 가지급금 발생 시
+                      인정이자 과세 회피
+                    </li>
+                    <li>
+                      <strong>법적 책임 분리</strong>: 기업 부채로부터 개인 자산
+                      보호
+                    </li>
+                    <li>
+                      <strong>투명성 확보</strong>: 향후 IPO, M&A 시 유리
+                    </li>
                   </ul>
 
                   <h4>실전 방법</h4>
@@ -180,7 +201,8 @@ export default function SuccessfulCEOAssetManagementPage() {
                     <li>
                       <strong>법인 계좌와 개인 계좌 100% 분리</strong>
                       <p className="text-sm text-muted-foreground mt-1">
-                        사업 목적 지출은 법인 계좌에서만, 개인 소비는 급여 계좌에서만 처리
+                        사업 목적 지출은 법인 계좌에서만, 개인 소비는 급여
+                        계좌에서만 처리
                       </p>
                     </li>
                     <li>
@@ -198,10 +220,13 @@ export default function SuccessfulCEOAssetManagementPage() {
                   </ul>
 
                   <div className="bg-blue-50 dark:bg-blue-950/30 p-4 rounded-lg border border-blue-200 dark:border-blue-800 mt-4">
-                    <p className="font-semibold text-blue-900 dark:text-blue-100 mb-2">💡 전문가 팁</p>
+                    <p className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                      💡 전문가 팁
+                    </p>
                     <p className="text-sm text-blue-800 dark:text-blue-200">
-                      가지급금이 발생했다면 1년 이내 상환하고, 부득이한 경우 이사회 결의를 통해 
-                      정당한 대여로 전환하세요. 금리는 시장 금리 수준을 적용해야 합니다.
+                      가지급금이 발생했다면 1년 이내 상환하고, 부득이한 경우
+                      이사회 결의를 통해 정당한 대여로 전환하세요. 금리는 시장
+                      금리 수준을 적용해야 합니다.
                     </p>
                   </div>
                 </CardContent>
@@ -226,16 +251,20 @@ export default function SuccessfulCEOAssetManagementPage() {
                 </CardHeader>
                 <CardContent className="prose dark:prose-invert max-w-none">
                   <p>
-                    CEO는 법인세와 개인소득세를 동시에 관리해야 합니다. <strong>통합 세무 전략</strong>을 
-                    통해 전체 세금 부담을 최적화할 수 있습니다.
+                    CEO는 법인세와 개인소득세를 동시에 관리해야 합니다.{' '}
+                    <strong>통합 세무 전략</strong>을 통해 전체 세금 부담을
+                    최적화할 수 있습니다.
                   </p>
 
                   <h4>핵심 절세 전략</h4>
                   <div className="grid md:grid-cols-2 gap-4 not-prose">
                     <div className="border rounded-lg p-4">
-                      <h5 className="font-semibold mb-2">급여 vs 배당 최적 비율</h5>
+                      <h5 className="font-semibold mb-2">
+                        급여 vs 배당 최적 비율
+                      </h5>
                       <p className="text-sm text-muted-foreground">
-                        소득세율과 배당소득세율을 비교하여 세후 수령액이 최대가 되는 비율 선택
+                        소득세율과 배당소득세율을 비교하여 세후 수령액이 최대가
+                        되는 비율 선택
                       </p>
                     </div>
                     <div className="border rounded-lg p-4">
@@ -259,10 +288,12 @@ export default function SuccessfulCEOAssetManagementPage() {
                   </div>
 
                   <div className="bg-amber-50 dark:bg-amber-950/30 p-4 rounded-lg border border-amber-200 dark:border-amber-800 mt-4">
-                    <p className="font-semibold text-amber-900 dark:text-amber-100 mb-2">⚠️ 주의사항</p>
+                    <p className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
+                      ⚠️ 주의사항
+                    </p>
                     <p className="text-sm text-amber-800 dark:text-amber-200">
-                      과도한 절세는 불성실 신고로 간주될 수 있습니다. 세무 전문가와 상담하여 
-                      합법적인 범위 내에서 절세하세요.
+                      과도한 절세는 불성실 신고로 간주될 수 있습니다. 세무
+                      전문가와 상담하여 합법적인 범위 내에서 절세하세요.
                     </p>
                   </div>
                 </CardContent>
@@ -282,7 +313,6 @@ export default function SuccessfulCEOAssetManagementPage() {
                   </Link>
                 </Button>
               </div>
-
             </div>
           </div>
         </section>
@@ -304,7 +334,9 @@ export default function SuccessfulCEOAssetManagementPage() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground">{faq.acceptedAnswer.text}</p>
+                      <p className="text-muted-foreground">
+                        {faq.acceptedAnswer.text}
+                      </p>
                     </CardContent>
                   </Card>
                 ))}
@@ -328,14 +360,15 @@ export default function SuccessfulCEOAssetManagementPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button asChild size="lg" variant="secondary">
-                    <Link href="/wealth-consulting">
-                      자산관리 서비스 보기
-                    </Link>
+                    <Link href="/wealth-consulting">자산관리 서비스 보기</Link>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20">
-                    <Link href="/contact">
-                      무료 상담 신청
-                    </Link>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20"
+                  >
+                    <Link href="/contact">무료 상담 신청</Link>
                   </Button>
                 </div>
               </CardContent>
@@ -372,7 +405,9 @@ export default function SuccessfulCEOAssetManagementPage() {
                     5-10년 장기 계획이 필요한 가업승계 완벽 가이드
                   </p>
                   <Button asChild variant="outline" size="sm">
-                    <Link href="/business-succession-strategy">자세히 보기</Link>
+                    <Link href="/business-succession-strategy">
+                      자세히 보기
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>

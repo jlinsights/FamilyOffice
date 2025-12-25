@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 
-import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { StructureCheckHeroSection } from '@/components/sections/structure-check-hero';
+import { Header } from '@/components/header';
 import { StructureCheckContentSection } from '@/components/sections/structure-check-content';
 import { StructureCheckFormSection } from '@/components/sections/structure-check-form';
+import { StructureCheckHeroSection } from '@/components/sections/structure-check-hero';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
 
 export const metadata: Metadata = {
@@ -15,7 +15,8 @@ export const metadata: Metadata = {
     '구조 점검, 판단 정리, 상속 구조, 가업승계 판단, CEO 의사결정, 자산관리 기준, 전문가 자문',
   openGraph: {
     title: '구조 점검 요청 | 이 문제, 혼자 판단하셔도 되는 단계인가요?',
-    description: '상담이 아닌 판단 구조 정리. 지금 결정해야 할 것과 미뤄도 되는 것의 경계를 명확히 합니다.',
+    description:
+      '상담이 아닌 판단 구조 정리. 지금 결정해야 할 것과 미뤄도 되는 것의 경계를 명확히 합니다.',
     url: 'https://familyoffices.vip/structure-check',
     siteName: 'FamilyOffice S',
     locale: 'ko_KR',

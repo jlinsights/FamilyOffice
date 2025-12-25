@@ -3,8 +3,19 @@
  * 행동 기반 점수 계산, BMAD 단계 분류, 자동 세그먼트 생성, CRM 연동 준비
  */
 
-export type BMADStage = 'behavioral' | 'motivational' | 'aspirational' | 'decisional';
-export type LeadStatus = 'new' | 'qualified' | 'nurturing' | 'hot' | 'cold' | 'converted' | 'lost';
+export type BMADStage =
+  | 'behavioral'
+  | 'motivational'
+  | 'aspirational'
+  | 'decisional';
+export type LeadStatus =
+  | 'new'
+  | 'qualified'
+  | 'nurturing'
+  | 'hot'
+  | 'cold'
+  | 'converted'
+  | 'lost';
 export type LeadSegment =
   | 'high-value'
   | 'medium-value'
@@ -259,7 +270,9 @@ export class LeadScoringSystem {
     ];
 
     defaultRules.forEach(rule => this.scoringRules.set(rule.id, rule));
-    console.log(`[LeadScoring] Initialized ${defaultRules.length} scoring rules`);
+    console.log(
+      `[LeadScoring] Initialized ${defaultRules.length} scoring rules`
+    );
   }
 
   /**
@@ -320,7 +333,9 @@ export class LeadScoringSystem {
       },
     ];
 
-    console.log(`[LeadScoring] Initialized ${this.segmentDefinitions.length} segment definitions`);
+    console.log(
+      `[LeadScoring] Initialized ${this.segmentDefinitions.length} segment definitions`
+    );
   }
 
   /**
@@ -338,23 +353,21 @@ export class LeadScoringSystem {
 
     if (lead) {
       // 기존 리드 업데이트
-      lead.name = params.name || lead.name;
-      lead.company = params.company || lead.company;
-      lead.position = params.position || lead.position;
-      lead.phone = params.phone || lead.phone;
-      lead.demographics = { ...lead.demographics, ...params.demographics };
+      if (params.name !== undefined) lead.name = params.name;
+      if (params.company !== undefined) lead.company = params.company;
+      if (params.position !== undefined) lead.position = params.position;
+      if (params.phone !== undefined) lead.phone = params.phone;
+      if (params.demographics !== undefined) {
+        lead.demographics = { ...lead.demographics, ...params.demographics };
+      }
 
       this.leads.set(lead.id, lead);
       console.log(`[LeadScoring] Updated lead: ${lead.email}`);
     } else {
       // 새 리드 생성
-      lead = {
+      const newLead: Lead = {
         id: this.generateLeadId(),
         email: params.email,
-        name: params.name,
-        company: params.company,
-        position: params.position,
-        phone: params.phone,
         score: 0,
         maxScore: this.maxScore,
         scoreHistory: [],
@@ -369,11 +382,19 @@ export class LeadScoringSystem {
         interests: [],
         intentSignals: [],
         engagementLevel: 'low',
-        demographics: params.demographics,
         conversionProbability: 0,
         estimatedValue: 0,
       };
 
+      // Conditionally add optional properties
+      if (params.name !== undefined) newLead.name = params.name;
+      if (params.company !== undefined) newLead.company = params.company;
+      if (params.position !== undefined) newLead.position = params.position;
+      if (params.phone !== undefined) newLead.phone = params.phone;
+      if (params.demographics !== undefined)
+        newLead.demographics = params.demographics;
+
+      lead = newLead;
       this.leads.set(lead.id, lead);
       console.log(`[LeadScoring] Created new lead: ${lead.email}`);
     }
@@ -400,8 +421,12 @@ export class LeadScoringSystem {
       type: activityType,
       timestamp: new Date(),
       scoreImpact: 0,
-      details,
     };
+
+    // Conditionally add optional property
+    if (details !== undefined) {
+      activity.details = details;
+    }
 
     // 점수 계산
     const scoreImpact = this.calculateScoreImpact(lead, activity);
@@ -414,7 +439,12 @@ export class LeadScoringSystem {
 
     // 점수 업데이트
     if (scoreImpact !== 0) {
-      this.updateLeadScore(lead, scoreImpact, `Activity: ${activityType}`, activity.id);
+      this.updateLeadScore(
+        lead,
+        scoreImpact,
+        `Activity: ${activityType}`,
+        activity.id
+      );
     }
 
     // BMAD 단계 재분류
@@ -457,7 +487,9 @@ export class LeadScoringSystem {
 
     // 최대 발생 횟수 체크
     if (rule.maxOccurrences) {
-      const previousOccurrences = lead.activities.filter(a => a.type === activity.type).length;
+      const previousOccurrences = lead.activities.filter(
+        a => a.type === activity.type
+      ).length;
       if (previousOccurrences >= rule.maxOccurrences) {
         return 0; // 최대 횟수 초과
       }
@@ -466,8 +498,12 @@ export class LeadScoringSystem {
     // 시간 감쇠 적용
     if (rule.decayRate) {
       const daysSinceFirstActivity =
-        (new Date().getTime() - lead.firstSeenAt.getTime()) / (1000 * 60 * 60 * 24);
-      const decayFactor = Math.max(0, 1 - rule.decayRate * daysSinceFirstActivity);
+        (new Date().getTime() - lead.firstSeenAt.getTime()) /
+        (1000 * 60 * 60 * 24);
+      const decayFactor = Math.max(
+        0,
+        1 - rule.decayRate * daysSinceFirstActivity
+      );
       score *= decayFactor;
     }
 
@@ -485,7 +521,8 @@ export class LeadScoringSystem {
         rule.conditions.duration &&
         activity.details?.duration !== undefined &&
         (activity.details.duration < (rule.conditions.duration.min || 0) ||
-          activity.details.duration > (rule.conditions.duration.max || Infinity))
+          activity.details.duration >
+            (rule.conditions.duration.max || Infinity))
       ) {
         score *= 0.5; // 조건 미충족 시 50% 감점
       }
@@ -497,19 +534,29 @@ export class LeadScoringSystem {
   /**
    * 리드 점수 업데이트
    */
-  private updateLeadScore(lead: Lead, change: number, reason: string, activityId?: string): void {
+  private updateLeadScore(
+    lead: Lead,
+    change: number,
+    reason: string,
+    activityId?: string
+  ): void {
     const oldScore = lead.score;
     const newScore = Math.max(0, Math.min(this.maxScore, oldScore + change));
 
-    lead.scoreHistory.push({
+    const scoreChange: ScoreChange = {
       timestamp: new Date(),
       oldScore,
       newScore,
       change,
       reason,
-      activityId,
-    });
+    };
 
+    // Conditionally add optional property
+    if (activityId !== undefined) {
+      scoreChange.activityId = activityId;
+    }
+
+    lead.scoreHistory.push(scoreChange);
     lead.score = newScore;
   }
 
@@ -556,12 +603,17 @@ export class LeadScoringSystem {
     }
 
     // 가장 높은 점수의 단계 선택
-    const maxStage = Object.entries(stageScores).reduce((max, [stage, score]) =>
-      score > max[1] ? [stage as BMADStage, score] : max
+    const maxStage = Object.entries(stageScores).reduce(
+      (max, [stage, score]) =>
+        score > max[1] ? [stage as BMADStage, score] : max
     )[0] as BMADStage;
 
-    const totalScore = Object.values(stageScores).reduce((sum, score) => sum + score, 0);
-    const confidence = totalScore > 0 ? (stageScores[maxStage] / totalScore) * 100 : 0;
+    const totalScore = Object.values(stageScores).reduce(
+      (sum, score) => sum + score,
+      0
+    );
+    const confidence =
+      totalScore > 0 ? (stageScores[maxStage] / totalScore) * 100 : 0;
 
     lead.bmadStage = maxStage;
     lead.bmadStageConfidence = Math.round(confidence);
@@ -578,7 +630,11 @@ export class LeadScoringSystem {
     const signals: IntentSignal[] = [];
 
     // High-Intent 신호
-    if (['consultation_request', 'demo_request', 'pricing_view'].includes(activity.type)) {
+    if (
+      ['consultation_request', 'demo_request', 'pricing_view'].includes(
+        activity.type
+      )
+    ) {
       signals.push({
         signal: 'High Purchase Intent',
         strength: 'strong',
@@ -589,7 +645,8 @@ export class LeadScoringSystem {
 
     // Frequency-based 신호
     const recentActivities = lead.activities.filter(
-      a => new Date().getTime() - a.timestamp.getTime() < 7 * 24 * 60 * 60 * 1000 // 최근 7일
+      a =>
+        new Date().getTime() - a.timestamp.getTime() < 7 * 24 * 60 * 60 * 1000 // 최근 7일
     );
 
     if (recentActivities.length >= 10) {
@@ -609,7 +666,9 @@ export class LeadScoringSystem {
     }
 
     // Return Visit 신호
-    const returnVisits = lead.activities.filter(a => a.type === 'return_visit').length;
+    const returnVisits = lead.activities.filter(
+      a => a.type === 'return_visit'
+    ).length;
     if (returnVisits >= 3) {
       signals.push({
         signal: 'Recurring Interest',
@@ -621,10 +680,14 @@ export class LeadScoringSystem {
 
     // 새로운 신호만 추가
     for (const signal of signals) {
-      const existingSignal = lead.intentSignals.find(s => s.signal === signal.signal);
+      const existingSignal = lead.intentSignals.find(
+        s => s.signal === signal.signal
+      );
       if (!existingSignal) {
         lead.intentSignals.push(signal);
-        console.log(`[LeadScoring] Intent signal detected: ${signal.signal} (${signal.strength})`);
+        console.log(
+          `[LeadScoring] Intent signal detected: ${signal.signal} (${signal.strength})`
+        );
       } else {
         // 기존 신호 업데이트
         existingSignal.strength = signal.strength;
@@ -642,8 +705,10 @@ export class LeadScoringSystem {
       const { criteria } = segmentDef;
 
       // 점수 범위 체크
-      if (criteria.scoreMin !== undefined && lead.score < criteria.scoreMin) continue;
-      if (criteria.scoreMax !== undefined && lead.score > criteria.scoreMax) continue;
+      if (criteria.scoreMin !== undefined && lead.score < criteria.scoreMin)
+        continue;
+      if (criteria.scoreMax !== undefined && lead.score > criteria.scoreMax)
+        continue;
 
       // BMAD 단계 체크
       if (
@@ -654,7 +719,11 @@ export class LeadScoringSystem {
         continue;
 
       // 활동 수 체크
-      if (criteria.activityCountMin && lead.totalActivities < criteria.activityCountMin) continue;
+      if (
+        criteria.activityCountMin &&
+        lead.totalActivities < criteria.activityCountMin
+      )
+        continue;
 
       // 전환 확률 체크
       if (
@@ -668,7 +737,9 @@ export class LeadScoringSystem {
         if (
           criteria.demographics.companySize &&
           lead.demographics?.companySize &&
-          !criteria.demographics.companySize.includes(lead.demographics.companySize)
+          !criteria.demographics.companySize.includes(
+            lead.demographics.companySize
+          )
         )
           continue;
 
@@ -717,8 +788,12 @@ export class LeadScoringSystem {
     probability += activityScore;
 
     // 의도 신호 (최대 15점)
-    const strongSignals = lead.intentSignals.filter(s => s.strength === 'strong').length;
-    const moderateSignals = lead.intentSignals.filter(s => s.strength === 'moderate').length;
+    const strongSignals = lead.intentSignals.filter(
+      s => s.strength === 'strong'
+    ).length;
+    const moderateSignals = lead.intentSignals.filter(
+      s => s.strength === 'moderate'
+    ).length;
     const intentScore = Math.min(strongSignals * 5 + moderateSignals * 3, 15);
     probability += intentScore;
 
@@ -767,7 +842,9 @@ export class LeadScoringSystem {
     }
 
     if (oldStatus !== lead.status) {
-      console.log(`[LeadScoring] Status changed: ${lead.email} → ${lead.status} (was ${oldStatus})`);
+      console.log(
+        `[LeadScoring] Status changed: ${lead.email} → ${lead.status} (was ${oldStatus})`
+      );
     }
   }
 
@@ -776,7 +853,8 @@ export class LeadScoringSystem {
    */
   updateEngagementLevel(lead: Lead): void {
     const recentActivities = lead.activities.filter(
-      a => new Date().getTime() - a.timestamp.getTime() < 30 * 24 * 60 * 60 * 1000 // 최근 30일
+      a =>
+        new Date().getTime() - a.timestamp.getTime() < 30 * 24 * 60 * 60 * 1000 // 최근 30일
     );
 
     if (recentActivities.length >= 15) {
@@ -874,12 +952,16 @@ export class LeadScoringSystem {
     const totalScore = leads.reduce((sum, l) => sum + l.score, 0);
     const averageScore = leads.length > 0 ? totalScore / leads.length : 0;
 
-    const totalConversionProbability = leads.reduce((sum, l) => sum + l.conversionProbability, 0);
+    const totalConversionProbability = leads.reduce(
+      (sum, l) => sum + l.conversionProbability,
+      0
+    );
     const averageConversionProbability =
       leads.length > 0 ? totalConversionProbability / leads.length : 0;
 
     const convertedLeads = leads.filter(l => l.status === 'converted').length;
-    const conversionRate = leads.length > 0 ? (convertedLeads / leads.length) * 100 : 0;
+    const conversionRate =
+      leads.length > 0 ? (convertedLeads / leads.length) * 100 : 0;
 
     return {
       totalLeads: leads.length,
@@ -908,15 +990,22 @@ export class LeadScoringSystem {
     const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const recentActivities: LeadActivity[] = [];
     for (const lead of this.leads.values()) {
-      recentActivities.push(...lead.activities.filter(a => a.timestamp >= oneDayAgo));
+      recentActivities.push(
+        ...lead.activities.filter(a => a.timestamp >= oneDayAgo)
+      );
     }
-    recentActivities.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+    recentActivities.sort(
+      (a, b) => b.timestamp.getTime() - a.timestamp.getTime()
+    );
 
     // 의도 신호 집계
     const intentSignalCounts = new Map<string, number>();
     for (const lead of this.leads.values()) {
       for (const signal of lead.intentSignals) {
-        intentSignalCounts.set(signal.signal, (intentSignalCounts.get(signal.signal) || 0) + 1);
+        intentSignalCounts.set(
+          signal.signal,
+          (intentSignalCounts.get(signal.signal) || 0) + 1
+        );
       }
     }
 

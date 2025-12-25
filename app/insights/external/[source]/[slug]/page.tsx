@@ -1,14 +1,25 @@
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  ExternalLink,
+  Share2,
+  User,
+} from 'lucide-react';
+
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { Button } from '@/components/ui/button';
+import { notFound } from 'next/navigation';
+
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { ArrowLeft, Calendar, Clock, ExternalLink, Share2, User } from 'lucide-react';
-import { rssAggregator } from '@/lib/rss-aggregator';
+
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+
 import { env } from '@/lib/env';
+import { rssAggregator } from '@/lib/rss-aggregator';
 
 interface InsightContentPageProps {
   params: Promise<{
@@ -18,12 +29,14 @@ interface InsightContentPageProps {
 }
 
 // 메타데이터 생성
-export async function generateMetadata({ params }: InsightContentPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: InsightContentPageProps): Promise<Metadata> {
   const { source, slug } = await params;
-  
+
   try {
     const content = await rssAggregator.getContentById(slug);
-    
+
     if (!content) {
       return {
         title: '콘텐츠를 찾을 수 없습니다 | FamilyOffice S',
@@ -34,9 +47,11 @@ export async function generateMetadata({ params }: InsightContentPageProps): Pro
     const sourceLabel = getSourceLabel(source);
 
     // 절대 URL 생성 (소셜 미디어 플랫폼은 절대 URL 필요)
-    const baseUrl = env.NEXT_PUBLIC_SITE_URL || env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip';
+    const baseUrl = env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip';
     const imageUrl = content.imageUrl
-      ? (content.imageUrl.startsWith('http') ? content.imageUrl : `${baseUrl}${content.imageUrl}`)
+      ? content.imageUrl.startsWith('http')
+        ? content.imageUrl
+        : `${baseUrl}${content.imageUrl}`
       : undefined;
 
     return {
@@ -50,12 +65,16 @@ export async function generateMetadata({ params }: InsightContentPageProps): Pro
         publishedTime: content.publishedAt,
         authors: [content.author],
         tags: content.tags,
-        images: imageUrl ? [{
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: content.title,
-        }] : undefined,
+        images: imageUrl
+          ? [
+              {
+                url: imageUrl,
+                width: 1200,
+                height: 630,
+                alt: content.title,
+              },
+            ]
+          : undefined,
         url: `${baseUrl}/insights/external/${source}/${slug}`,
         siteName: 'FamilyOffice S',
         locale: 'ko_KR',
@@ -103,15 +122,17 @@ function getSourceBadgeVariant(source: string) {
   }
 }
 
-export default async function InsightContentPage({ params }: InsightContentPageProps) {
+export default async function InsightContentPage({
+  params,
+}: InsightContentPageProps) {
   const { source, slug } = await params;
-  
+
   // 디버깅을 위해 로그 추가
   console.log('Fetching content for:', { source, slug });
-  
+
   try {
     const content = await rssAggregator.getContentById(slug);
-    
+
     if (!content) {
       notFound();
     }
@@ -122,73 +143,77 @@ export default async function InsightContentPage({ params }: InsightContentPageP
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        weekday: 'long'
+        weekday: 'long',
       });
     };
 
     // 구조화된 데이터 (JSON-LD)
     const articleSchema = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": content.title,
-      "description": content.excerpt,
-      "author": {
-        "@type": "Person",
-        "name": content.author
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: content.title,
+      description: content.excerpt,
+      author: {
+        '@type': 'Person',
+        name: content.author,
       },
-      "publisher": {
-        "@type": "Organization",
-        "name": "FamilyOffice S",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://familyoffices.vip/favicon.png"
-        }
+      publisher: {
+        '@type': 'Organization',
+        name: 'FamilyOffice S',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://familyoffices.vip/favicon.png',
+        },
       },
-      "datePublished": content.publishedAt,
-      "dateModified": content.publishedAt,
-      "articleSection": content.category,
-      "keywords": content.tags.join(', '),
-      "url": `https://familyoffices.vip/insights/external/${source}/${slug}`,
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": `https://familyoffices.vip/insights/external/${source}/${slug}`
-      }
+      datePublished: content.publishedAt,
+      dateModified: content.publishedAt,
+      articleSection: content.category,
+      keywords: content.tags.join(', '),
+      url: `https://familyoffices.vip/insights/external/${source}/${slug}`,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://familyoffices.vip/insights/external/${source}/${slug}`,
+      },
     };
 
     if (content.imageUrl) {
       (articleSchema as any).image = {
-        "@type": "ImageObject",
-        "url": content.imageUrl
+        '@type': 'ImageObject',
+        url: content.imageUrl,
       };
     }
 
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        
+
         {/* 구조화된 데이터 */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(articleSchema)
+            __html: JSON.stringify(articleSchema),
           }}
         />
-        
+
         <main className="pt-20">
           {/* Breadcrumb & Back Navigation */}
           <section className="py-8 border-b border-border">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2 text-sm text-foreground/70">
-                  <Link href="/" className="hover:text-foreground">홈</Link>
+                  <Link href="/" className="hover:text-foreground">
+                    홈
+                  </Link>
                   <span>·</span>
-                  <Link href="/insights" className="hover:text-foreground">인사이트</Link>
+                  <Link href="/insights" className="hover:text-foreground">
+                    인사이트
+                  </Link>
                   <span>·</span>
                   <Badge variant={getSourceBadgeVariant(source)}>
                     {getSourceLabel(source)}
                   </Badge>
                 </div>
-                
+
                 <Button asChild variant="outline" size="sm">
                   <Link href="/insights">
                     <ArrowLeft className="w-4 h-4 mr-2" />
@@ -208,26 +233,26 @@ export default async function InsightContentPage({ params }: InsightContentPageP
                     {content.category}
                   </Badge>
                 )}
-                
+
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
                   {content.title}
                 </h1>
-                
+
                 <p className="text-xl text-foreground/70 mb-8 leading-relaxed">
                   {content.excerpt}
                 </p>
-                
+
                 <div className="flex flex-wrap items-center justify-center gap-6 text-foreground/60">
                   <div className="flex items-center">
                     <User className="w-4 h-4 mr-2" />
                     {content.author}
                   </div>
-                  
+
                   <div className="flex items-center">
                     <Calendar className="w-4 h-4 mr-2" />
                     {formatDate(content.publishedAt)}
                   </div>
-                  
+
                   {content.readTime && (
                     <div className="flex items-center">
                       <Clock className="w-4 h-4 mr-2" />
@@ -252,21 +277,25 @@ export default async function InsightContentPage({ params }: InsightContentPageP
               <div className="flex flex-wrap gap-4 justify-center mb-12">
                 {content.url && (
                   <Button asChild variant="default">
-                    <a href={content.url} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={content.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <ExternalLink className="w-4 h-4 mr-2" />
                       원문 보기
                     </a>
                   </Button>
                 )}
-                
-                <Button 
-                  variant="outline" 
+
+                <Button
+                  variant="outline"
                   onClick={() => {
                     if (navigator.share) {
                       navigator.share({
                         title: content.title,
                         text: content.excerpt,
-                        url: window.location.href
+                        url: window.location.href,
                       });
                     } else {
                       navigator.clipboard.writeText(window.location.href);
@@ -290,7 +319,11 @@ export default async function InsightContentPage({ params }: InsightContentPageP
                     <h3 className="text-lg font-semibold">콘텐츠 미리보기</h3>
                     {content.url && (
                       <Button asChild variant="ghost" size="sm">
-                        <a href={content.url} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={content.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           전체 내용 보기
                           <ExternalLink className="w-3 h-3 ml-1" />
                         </a>
@@ -300,17 +333,20 @@ export default async function InsightContentPage({ params }: InsightContentPageP
                 </CardHeader>
                 <CardContent>
                   {content.content ? (
-                    <div 
+                    <div
                       className="prose prose-lg max-w-none text-foreground/80"
-                      dangerouslySetInnerHTML={{ 
-                        __html: content.content.slice(0, 500) + (content.content.length > 500 ? '...' : '')
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          content.content.slice(0, 500) +
+                          (content.content.length > 500 ? '...' : ''),
                       }}
                     />
                   ) : (
                     <div className="text-foreground/70">
                       <p className="mb-4">{content.excerpt}</p>
                       <p className="text-sm">
-                        전체 내용을 보시려면 위의 &ldquo;원문 보기&rdquo; 버튼을 클릭해주세요.
+                        전체 내용을 보시려면 위의 &ldquo;원문 보기&rdquo; 버튼을
+                        클릭해주세요.
                       </p>
                     </div>
                   )}
@@ -330,24 +366,24 @@ export default async function InsightContentPage({ params }: InsightContentPageP
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary">
-                  <Link href="/insights/weekly-brief">
-                    뉴스레터 구독하기
-                  </Link>
+                  <Link href="/insights/weekly-brief">뉴스레터 구독하기</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary">
-                  <Link href="/insights">
-                    더 많은 글 보기
-                  </Link>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
+                >
+                  <Link href="/insights">더 많은 글 보기</Link>
                 </Button>
               </div>
             </div>
           </section>
         </main>
-        
+
         <Footer />
       </div>
     );
-    
   } catch (error) {
     console.error('콘텐츠 페이지 오류:', error);
     notFound();

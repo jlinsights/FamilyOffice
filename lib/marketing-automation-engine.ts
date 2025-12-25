@@ -2,14 +2,18 @@
  * 마케팅 자동화 규칙 실행 엔진
  * Cron job 연동, 실행 로그 저장, 실패 시 알림, 재시도 로직
  */
-
 import {
   AutomationRule,
   generateContentTemplate,
-  ContentTemplate
+  ContentTemplate,
 } from './seo/inbound-marketing-automation';
 
-export type ExecutionStatus = 'pending' | 'running' | 'success' | 'failed' | 'retrying';
+export type ExecutionStatus =
+  | 'pending'
+  | 'running'
+  | 'success'
+  | 'failed'
+  | 'retrying';
 
 export interface ExecutionLog {
   id: string;
@@ -68,7 +72,9 @@ export class MarketingAutomationEngine {
    */
   registerRule(rule: AutomationRule): void {
     this.rules.set(rule.id, rule);
-    console.log(`[AutomationEngine] Rule registered: ${rule.name} (${rule.id})`);
+    console.log(
+      `[AutomationEngine] Rule registered: ${rule.name} (${rule.id})`
+    );
   }
 
   /**
@@ -116,13 +122,14 @@ export class MarketingAutomationEngine {
 
       this.executionLogs.set(log.id, log);
 
-      console.log(`[AutomationEngine] Rule executed successfully: ${rule.name} (${log.duration}ms)`);
+      console.log(
+        `[AutomationEngine] Rule executed successfully: ${rule.name} (${log.duration}ms)`
+      );
 
       // Supabase logging: https://github.com/jlinsights/FamilyOffice/issues/8
       // await this.saveLogToDatabase(log);
 
       return log;
-
     } catch (error) {
       // 실패 처리
       const completedAt = new Date();
@@ -151,7 +158,10 @@ export class MarketingAutomationEngine {
         await this.scheduleRetry(rule, log);
       }
 
-      console.error(`[AutomationEngine] Rule execution failed: ${rule.name}`, error);
+      console.error(
+        `[AutomationEngine] Rule execution failed: ${rule.name}`,
+        error
+      );
 
       return log;
     }
@@ -160,15 +170,19 @@ export class MarketingAutomationEngine {
   /**
    * 액션 실행 로직
    */
-  private async performAction(rule: AutomationRule): Promise<Record<string, unknown>> {
+  private async performAction(
+    rule: AutomationRule
+  ): Promise<Record<string, unknown>> {
     const { action } = rule;
 
     switch (action.type) {
       case 'generate-content': {
         // 콘텐츠 자동 생성
-        const targetKeyword = action.config?.targetKeyword || '패밀리오피스';
-        const contentType = action.config?.contentType || 'blog';
-        const targetAudience = action.config?.targetAudience || 'ceo';
+        const targetKeyword =
+          (action.config?.targetKeyword as string) || '패밀리오피스';
+        const contentType = (action.config?.contentType as string) || 'blog';
+        const targetAudience =
+          (action.config?.targetAudience as string) || 'ceo';
 
         const template = generateContentTemplate(
           targetKeyword,
@@ -176,7 +190,9 @@ export class MarketingAutomationEngine {
           targetAudience as 'ceo' | 'high-net-worth' | 'mid-market'
         );
 
-        console.log(`[AutomationEngine] Generated content template: ${template.title}`);
+        console.log(
+          `[AutomationEngine] Generated content template: ${template.title}`
+        );
 
         return {
           action: 'generate-content',
@@ -204,9 +220,11 @@ export class MarketingAutomationEngine {
 
       case 'update-metadata': {
         // 메타데이터 업데이트
-        const pages = action.config?.pages || [];
+        const pages = (action.config?.pages as string[]) || [];
 
-        console.log(`[AutomationEngine] Updating metadata for ${pages.length} pages`);
+        console.log(
+          `[AutomationEngine] Updating metadata for ${pages.length} pages`
+        );
 
         return {
           action: 'update-metadata',
@@ -217,8 +235,8 @@ export class MarketingAutomationEngine {
 
       case 'create-internal-links': {
         // 내부 링크 생성
-        const sourcePages = action.config?.sourcePages || [];
-        const targetPages = action.config?.targetPages || [];
+        const sourcePages = (action.config?.sourcePages as string[]) || [];
+        const targetPages = (action.config?.targetPages as string[]) || [];
 
         console.log(`[AutomationEngine] Creating internal links`);
 
@@ -238,7 +256,10 @@ export class MarketingAutomationEngine {
   /**
    * 재시도 스케줄링
    */
-  private async scheduleRetry(rule: AutomationRule, log: ExecutionLog): Promise<void> {
+  private async scheduleRetry(
+    rule: AutomationRule,
+    log: ExecutionLog
+  ): Promise<void> {
     const retryDelay = rule.retryPolicy?.retryDelay || 300000; // 5분 기본값
     const nextRetryAt = new Date(Date.now() + retryDelay);
 
@@ -275,7 +296,11 @@ export class MarketingAutomationEngine {
     const logs: ExecutionLog[] = [];
 
     for (const [, rule] of this.rules) {
-      if (rule.trigger.type === 'schedule' && rule.enabled) {
+      if (
+        rule.trigger.type === 'schedule' &&
+        rule.enabled &&
+        rule.trigger.schedule
+      ) {
         // Cron expression parsing: https://github.com/jlinsights/FamilyOffice/issues/8
         // 현재는 단순화된 로직
         if (this.shouldExecuteNow(rule.trigger.schedule, now)) {
@@ -296,8 +321,10 @@ export class MarketingAutomationEngine {
     // 현재는 특정 패턴만 지원
 
     const schedulePatterns: Record<string, () => boolean> = {
-      '0 9 * * 2': () => now.getDay() === 2 && now.getHours() === 9 && now.getMinutes() === 0, // 매주 화요일 9시
-      '0 2 1 * *': () => now.getDate() === 1 && now.getHours() === 2 && now.getMinutes() === 0, // 매월 1일 2시
+      '0 9 * * 2': () =>
+        now.getDay() === 2 && now.getHours() === 9 && now.getMinutes() === 0, // 매주 화요일 9시
+      '0 2 1 * *': () =>
+        now.getDate() === 1 && now.getHours() === 2 && now.getMinutes() === 0, // 매월 1일 2시
       '0 * * * *': () => now.getMinutes() === 0, // 매시간
     };
 
@@ -332,7 +359,10 @@ export class MarketingAutomationEngine {
   /**
    * 알림 확인 처리
    */
-  acknowledgeAlert(alertId: string, acknowledgedBy: string): ExecutionAlert | undefined {
+  acknowledgeAlert(
+    alertId: string,
+    acknowledgedBy: string
+  ): ExecutionAlert | undefined {
     const alert = this.alerts.find(a => a.id === alertId);
 
     if (alert && !alert.acknowledged) {
@@ -357,7 +387,9 @@ export class MarketingAutomationEngine {
    * 규칙별 실행 로그 조회
    */
   getExecutionLogsByRule(ruleId: string): ExecutionLog[] {
-    return Array.from(this.executionLogs.values()).filter(log => log.ruleId === ruleId);
+    return Array.from(this.executionLogs.values()).filter(
+      log => log.ruleId === ruleId
+    );
   }
 
   /**
@@ -385,35 +417,45 @@ export class MarketingAutomationEngine {
   getEngineStats(): EngineStats {
     const logs = Array.from(this.executionLogs.values());
     const totalExecutions = logs.length;
-    const successfulExecutions = logs.filter(l => l.status === 'success').length;
+    const successfulExecutions = logs.filter(
+      l => l.status === 'success'
+    ).length;
     const failedExecutions = logs.filter(l => l.status === 'failed').length;
 
     const durations = logs
       .filter(l => l.duration !== undefined)
       .map(l => l.duration as number);
 
-    const averageDuration = durations.length > 0
-      ? durations.reduce((sum, d) => sum + d, 0) / durations.length
-      : 0;
+    const averageDuration =
+      durations.length > 0
+        ? durations.reduce((sum, d) => sum + d, 0) / durations.length
+        : 0;
 
-    const successRate = totalExecutions > 0
-      ? (successfulExecutions / totalExecutions) * 100
-      : 0;
+    const successRate =
+      totalExecutions > 0 ? (successfulExecutions / totalExecutions) * 100 : 0;
 
-    const lastLog = logs.sort((a, b) => b.startedAt.getTime() - a.startedAt.getTime())[0];
+    const lastLog = logs.sort(
+      (a, b) => b.startedAt.getTime() - a.startedAt.getTime()
+    )[0];
     const lastExecutionAt = lastLog?.startedAt;
 
     const uptime = Math.floor((Date.now() - this.startTime.getTime()) / 1000);
 
-    return {
+    const stats: EngineStats = {
       totalExecutions,
       successfulExecutions,
       failedExecutions,
       averageDuration,
       successRate,
-      lastExecutionAt,
       uptime,
     };
+
+    // Conditionally add optional property
+    if (lastExecutionAt !== undefined) {
+      stats.lastExecutionAt = lastExecutionAt;
+    }
+
+    return stats;
   }
 
   /**

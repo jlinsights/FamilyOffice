@@ -2,17 +2,18 @@
  * 관리자 권한 확인 유틸리티
  * Clerk 인증과 연동하여 관리자 권한을 검증
  */
+import { auth, currentUser } from '@clerk/nextjs/server';
 
 import { logger } from '@/lib/logger';
-import { auth, currentUser } from '@clerk/nextjs/server';
 
 /**
  * 환경변수 또는 하드코딩된 관리자 이메일 목록 가져오기
  */
 function getAdminEmails(): string[] {
   // 환경변수에서 관리자 이메일 목록 가져오기 (쉼표로 구분)
-  const envAdminEmails = process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || [];
-  
+  const envAdminEmails =
+    process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || [];
+
   // 기본 관리자 이메일 (환경변수가 없을 경우 폴백)
   const defaultAdminEmails = [
     'jhlim725@gmail.com',
@@ -29,52 +30,68 @@ function getAdminEmails(): string[] {
 export async function checkAdminPermissions(): Promise<boolean> {
   try {
     // 개발 환경 또는 Vercel Preview 환경에서는 디버깅을 위해 권한 체크 패스
-    if (process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') {
-      logger.debug('Admin permissions bypassed in development/preview environment', {
-        component: 'admin-permissions',
-        function: 'checkAdminPermissions'
-      });
+    if (
+      process.env.NODE_ENV === 'development' ||
+      process.env.VERCEL_ENV === 'preview'
+    ) {
+      logger.debug(
+        'Admin permissions bypassed in development/preview environment',
+        {
+          component: 'admin-permissions',
+          function: 'checkAdminPermissions',
+        }
+      );
       return true;
     }
 
     // Clerk 세션 확인
     const { userId } = await auth();
-    
+
     if (!userId) {
-      logger.warn('Admin permission check failed: No authenticated user session', {
-        component: 'admin-permissions',
-        function: 'checkAdminPermissions'
-      });
+      logger.warn(
+        'Admin permission check failed: No authenticated user session',
+        {
+          component: 'admin-permissions',
+          function: 'checkAdminPermissions',
+        }
+      );
       return false;
     }
 
     // 현재 사용자 정보 가져오기
     const user = await currentUser();
-    
+
     if (!user) {
-      logger.warn('Admin permission check failed: User session exists but currentUser() returned null', {
-        component: 'admin-permissions',
-        function: 'checkAdminPermissions'
-      });
+      logger.warn(
+        'Admin permission check failed: User session exists but currentUser() returned null',
+        {
+          component: 'admin-permissions',
+          function: 'checkAdminPermissions',
+        }
+      );
       return false;
     }
 
     // 사용자 이메일 주소 확인
     if (!user.emailAddresses || user.emailAddresses.length === 0) {
-      logger.warn('Admin permission check failed: User has no email addresses', {
-        component: 'admin-permissions',
-        function: 'checkAdminPermissions',
-        metadata: { userId }
-      });
+      logger.warn(
+        'Admin permission check failed: User has no email addresses',
+        {
+          component: 'admin-permissions',
+          function: 'checkAdminPermissions',
+          metadata: { userId },
+        }
+      );
       return false;
     }
 
     // 관리자 이메일 목록 가져오기
     const adminEmails = getAdminEmails();
-    
+
     // 관리자 이메일인지 확인
-    const isAdmin = user.emailAddresses.some((email: { emailAddress: string }) => 
-      adminEmails.includes(email.emailAddress)
+    const isAdmin = user.emailAddresses.some(
+      (email: { emailAddress: string }) =>
+        adminEmails.includes(email.emailAddress)
     );
 
     if (isAdmin) {
@@ -82,8 +99,8 @@ export async function checkAdminPermissions(): Promise<boolean> {
         component: 'admin-permissions',
         function: 'checkAdminPermissions',
         metadata: {
-          userEmail: user.emailAddresses[0]?.emailAddress || 'unknown'
-        }
+          userEmail: user.emailAddresses[0]?.emailAddress || 'unknown',
+        },
       });
     } else {
       logger.warn('Admin access denied', {
@@ -91,19 +108,18 @@ export async function checkAdminPermissions(): Promise<boolean> {
         function: 'checkAdminPermissions',
         metadata: {
           userEmail: user.emailAddresses[0]?.emailAddress || 'unknown',
-          allowedEmails: adminEmails
-        }
+          allowedEmails: adminEmails,
+        },
       });
     }
 
     return isAdmin;
-    
   } catch (error) {
     logger.error('Error checking admin permissions', error as Error, {
       component: 'admin-permissions',
-      function: 'checkAdminPermissions'
+      function: 'checkAdminPermissions',
     });
-    
+
     return false;
   }
 }
@@ -114,26 +130,32 @@ export async function checkAdminPermissions(): Promise<boolean> {
  */
 export async function requireAdminPermissions(): Promise<boolean> {
   // 개발 환경 또는 Preview 환경 bypass
-  if (process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') {
-    logger.debug('Admin permissions requirement bypassed in development/preview environment', {
-      component: 'admin-permissions',
-      function: 'requireAdminPermissions'
-    });
+  if (
+    process.env.NODE_ENV === 'development' ||
+    process.env.VERCEL_ENV === 'preview'
+  ) {
+    logger.debug(
+      'Admin permissions requirement bypassed in development/preview environment',
+      {
+        component: 'admin-permissions',
+        function: 'requireAdminPermissions',
+      }
+    );
     return true;
   }
 
   const isAdmin = await checkAdminPermissions();
-  
+
   if (!isAdmin) {
     const { userId } = await auth();
-    
+
     if (!userId) {
       throw new Error('인증이 필요합니다. 로그인 후 다시 시도해주세요.');
     }
-    
+
     throw new Error('관리자 권한이 필요합니다. 권한이 없는 사용자입니다.');
   }
-  
+
   return true;
 }
 
@@ -143,18 +165,17 @@ export async function requireAdminPermissions(): Promise<boolean> {
 export async function getUserRole(): Promise<'admin' | 'user' | 'anonymous'> {
   try {
     const { userId } = await auth();
-    
+
     if (!userId) {
       return 'anonymous';
     }
 
     const isAdmin = await checkAdminPermissions();
     return isAdmin ? 'admin' : 'user';
-    
   } catch (error) {
     logger.error('Error getting user role', error as Error, {
       component: 'admin-permissions',
-      function: 'getUserRole'
+      function: 'getUserRole',
     });
     return 'anonymous';
   }
@@ -170,7 +191,7 @@ export async function getCurrentUserEmail(): Promise<string | null> {
   } catch (error) {
     logger.error('Error getting current user email', error as Error, {
       component: 'admin-permissions',
-      function: 'getCurrentUserEmail'
+      function: 'getCurrentUserEmail',
     });
     return null;
   }

@@ -39,16 +39,18 @@ public/insurance-products/
 ## 📋 파일 명명 규칙
 
 ### **필수 명명 형식**
+
 ```
 {보험사}_{상품분류}_{상품명}_{자료유형}_{버전}_{날짜}.{확장자}
 ```
 
 ### **실제 예시**
+
 ```bash
 # 삼성생명 종신보험 브로셔
 samsung-life_whole-life_premium-plus_brochure_v2.1_2025-02.pdf
 
-# 삼성화재 자산보험 리플릿  
+# 삼성화재 자산보험 리플릿
 samsung-fire_asset-protection_business-guard_leaflet_v1.0_2025-01.pdf
 
 # 런인베스트 변액보험 상품 설명서
@@ -61,6 +63,7 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
 ## 🗂️ 자료 유형별 업로드 가이드
 
 ### 1️⃣ **브로셔 (Brochures)**
+
 ```yaml
 위치: {카테고리}/{보험사}/brochures/
 형식: PDF (권장), JPG, PNG
@@ -69,6 +72,7 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
 ```
 
 ### 2️⃣ **리플릿 (Leaflets)**
+
 ```yaml
 위치: {카테고리}/{보험사}/leaflets/
 형식: PDF, JPG, PNG
@@ -77,6 +81,7 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
 ```
 
 ### 3️⃣ **상품 설명서 (Product Guides)**
+
 ```yaml
 위치: {카테고리}/{보험사}/product-guides/
 형식: PDF (권장), DOCX
@@ -85,6 +90,7 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
 ```
 
 ### 4️⃣ **보험료율표 (Rate Tables)**
+
 ```yaml
 위치: {카테고리}/{보험사}/rate-tables/
 형식: XLSX (권장), CSV, PDF
@@ -93,6 +99,7 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
 ```
 
 ### 5️⃣ **마케팅 자료 (Marketing Materials)**
+
 ```yaml
 위치: {카테고리}/{보험사}/marketing-materials/
 형식: PPTX, PDF, JPG, PNG
@@ -103,6 +110,7 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
 ## 📊 카테고리별 상품 분류
 
 ### 🛡️ **생명보험 (life-insurance)**
+
 ```yaml
 상품 분류:
   - whole-life: 종신보험
@@ -114,12 +122,12 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
   - samsung-life: 삼성생명 (메인)
   - other-providers: 기타 생명보험사
 
-업로드 예시:
-  public/insurance-products/life-insurance/samsung-life/brochures/
+업로드 예시: public/insurance-products/life-insurance/samsung-life/brochures/
   samsung-life_whole-life_premium-plus_brochure_v2.0_2025-02.pdf
 ```
 
 ### 🏠 **손해보험 (property-insurance)**
+
 ```yaml
 상품 분류:
   - asset-protection: 자산보험
@@ -131,12 +139,12 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
   - samsung-fire: 삼성화재 (메인)
   - other-providers: 기타 손해보험사
 
-업로드 예시:
-  public/insurance-products/property-insurance/samsung-fire/leaflets/
+업로드 예시: public/insurance-products/property-insurance/samsung-fire/leaflets/
   samsung-fire_asset-protection_business-guard_leaflet_v1.0_2025-01.pdf
 ```
 
 ### 💰 **연금상품 (pension-products)**
+
 ```yaml
 상품 분류:
   - annuity-insurance: 연금보험
@@ -149,6 +157,7 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
 ```
 
 ### 📈 **투자연계상품 (investment-products)**
+
 ```yaml
 상품 분류:
   - variable-life: 변액생명보험
@@ -168,6 +177,7 @@ samsung-life_annuity_guaranteed-pension_rate-table_2025Q1.xlsx
 ## 🛠️ 특별 폴더들
 
 ### **판매 지원 도구 (sales-tools)**
+
 ```yaml
 calculators/        # 보험료 계산기, 시뮬레이터
 presentations/      # 영업용 프레젠테이션
@@ -180,6 +190,7 @@ roi-simulators/     # 수익률 시뮬레이터
 ```
 
 ### **컴플라이언스 (compliance)**
+
 ```yaml
 regulations/        # 규제 관련 자료
 disclaimers/        # 면책 사항
@@ -193,6 +204,7 @@ approval-documents/ # 금융당국 승인 문서
 ## 🔄 업로드 후 관리
 
 ### **자동 스캔 및 인덱싱**
+
 ```bash
 # 새로 업로드된 자료 스캔
 node scripts/insurance-products-manager.js scan
@@ -202,6 +214,7 @@ node scripts/insurance-products-manager.js index
 ```
 
 ### **업로드 확인**
+
 1. 파일이 올바른 위치에 업로드되었는지 확인
 2. 파일명이 명명 규칙을 준수하는지 확인
 3. 시스템 스캔으로 자동 인식 여부 확인
@@ -209,18 +222,21 @@ node scripts/insurance-products-manager.js index
 ## ⚠️ 주의사항
 
 ### **파일 형식**
+
 - **PDF**: 상품 설명서, 브로셔 (권장)
 - **XLSX**: 보험료율표, 데이터 테이블 (권장)
 - **PPTX**: 프레젠테이션, 교육 자료
 - **JPG/PNG**: 이미지 형태의 리플릿, 인포그래픽
 
 ### **파일 크기**
+
 - **브로셔/설명서**: 최대 50MB
-- **리플릿**: 최대 20MB  
+- **리플릿**: 최대 20MB
 - **데이터 파일**: 최대 100MB
 - **프레젠테이션**: 최대 200MB
 
 ### **보안 및 컴플라이언스**
+
 - 금융당국 승인이 완료된 자료만 업로드
 - 개인정보 포함 자료는 별도 처리
 - 저작권이 있는 자료는 사용 권한 확인

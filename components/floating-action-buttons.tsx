@@ -1,10 +1,15 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { BRAND_COLORS } from '@/constants/brand';
 import { Calendar } from 'lucide-react';
-import Image from 'next/image';
+
 import { useState } from 'react';
+
+import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+
+import { BRAND_COLORS } from '@/constants/brand';
+
 import { CalComPopup } from './cal-com-popup';
 
 export function FloatingActionButtons() {
@@ -25,10 +30,10 @@ export function FloatingActionButtons() {
       {/* 카카오톡 문의 버튼 */}
       <div className="relative group pointer-events-auto">
         {/* 호버 툴팁 */}
-        <div 
+        <div
           className={`absolute bottom-20 right-0 bg-gray-900 dark:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg transition-all duration-300 transform ${
-            isHovered === 'kakao' 
-              ? 'opacity-100 translate-y-0' 
+            isHovered === 'kakao'
+              ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-2 pointer-events-none'
           }`}
         >
@@ -40,11 +45,11 @@ export function FloatingActionButtons() {
         <Button
           size="lg"
           onClick={handleKakaoTalk}
-          onMouseEnter={(e) => {
+          onMouseEnter={e => {
             setIsHovered('kakao');
             e.currentTarget.style.backgroundColor = '#FFED00';
           }}
-          onMouseLeave={(e) => {
+          onMouseLeave={e => {
             setIsHovered(null);
             e.currentTarget.style.backgroundColor = '#FEE500';
           }}
@@ -67,59 +72,60 @@ export function FloatingActionButtons() {
           `}
           style={{
             backgroundColor: '#FEE500',
-            backgroundImage: 'none'
+            backgroundImage: 'none',
           }}
         >
           <div className="relative w-10 h-10 flex items-center justify-center">
-            <Image 
-              src="/images/KAKAO/kakaotalk_sharing_btn/kakaotalk_sharing_btn_small.png" 
-              alt="카카오톡" 
-              width={36} 
-              height={36} 
+            <Image
+              src="/images/KAKAO/kakaotalk_sharing_btn/kakaotalk_sharing_btn_small.png"
+              alt="카카오톡"
+              width={36}
+              height={36}
               className={`
                 transition-all duration-300 
                 ${isHovered === 'kakao' ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}
                 drop-shadow-sm
                 object-contain
-              `} 
+              `}
               style={{
                 filter: 'none',
                 maxWidth: '100%',
-                height: 'auto'
+                height: 'auto',
               }}
             />
           </div>
         </Button>
 
         {/* 맥동 효과 */}
-        <div 
-          className="absolute inset-0 rounded-full border-2 animate-pulse-ring pointer-events-none" 
+        <div
+          className="absolute inset-0 rounded-full border-2 animate-pulse-ring pointer-events-none"
           style={{ borderColor: '#FEE500', opacity: 0.4 }}
         />
-        <div 
+        <div
           className="absolute inset-0 rounded-full border-2 animate-pulse-ring pointer-events-none"
-          style={{ 
-            borderColor: '#FEE500', 
+          style={{
+            borderColor: '#FEE500',
             opacity: 0.2,
-            animationDelay: '1s' 
+            animationDelay: '1s',
           }}
         />
-        
+
         {/* 글로우 효과 */}
-        <div 
+        <div
           className={`
             absolute inset-0 rounded-full 
             blur-xl
             transition-all duration-500
             pointer-events-none
-            ${isHovered === 'kakao' 
-              ? 'scale-150 opacity-60' 
-              : 'scale-100 opacity-30'
+            ${
+              isHovered === 'kakao'
+                ? 'scale-150 opacity-60'
+                : 'scale-100 opacity-30'
             }
           `}
           style={{
             backgroundColor: '#FEE500',
-            opacity: isHovered === 'kakao' ? 0.6 : 0.3
+            opacity: isHovered === 'kakao' ? 0.6 : 0.3,
           }}
         />
       </div>
@@ -127,10 +133,10 @@ export function FloatingActionButtons() {
       {/* 상담 예약 버튼 */}
       <div className="relative group pointer-events-auto">
         {/* 호버 툴팁 */}
-        <div 
+        <div
           className={`absolute bottom-20 right-0 bg-gray-900 dark:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg transition-all duration-300 transform ${
-            isHovered === 'consultation' 
-              ? 'opacity-100 translate-y-0' 
+            isHovered === 'consultation'
+              ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-2 pointer-events-none'
           }`}
         >
@@ -139,7 +145,7 @@ export function FloatingActionButtons() {
         </div>
 
         {/* 상담 예약 버튼 */}
-        <CalComPopup 
+        <CalComPopup
           trigger={
             <Button
               size="lg"
@@ -169,13 +175,13 @@ export function FloatingActionButtons() {
                 after:rounded-full after:pointer-events-none
               `}
             >
-              <Calendar 
+              <Calendar
                 className={`
                   h-6 w-6 md:h-7 md:w-7 
                   transition-all duration-300 
                   ${isHovered === 'consultation' ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}
                   drop-shadow-sm
-                `} 
+                `}
               />
             </Button>
           }
@@ -187,21 +193,22 @@ export function FloatingActionButtons() {
 
         {/* 맥동 효과 */}
         <div className="absolute inset-0 rounded-full border-2 border-primary/40 animate-pulse-ring pointer-events-none" />
-        <div 
+        <div
           className="absolute inset-0 rounded-full border-2 border-primary/20 animate-pulse-ring pointer-events-none"
           style={{ animationDelay: '1s' }}
         />
-        
+
         {/* 글로우 효과 */}
-        <div 
+        <div
           className={`
             absolute inset-0 rounded-full 
             bg-primary/20 blur-xl
             transition-all duration-500
             pointer-events-none
-            ${isHovered === 'consultation' 
-              ? 'scale-150 opacity-60' 
-              : 'scale-100 opacity-30'
+            ${
+              isHovered === 'consultation'
+                ? 'scale-150 opacity-60'
+                : 'scale-100 opacity-30'
             }
           `}
         />

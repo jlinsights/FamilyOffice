@@ -7,6 +7,7 @@ FamilyOffice S is built as a modern, scalable web application using Next.js 15.2
 ## Technology Stack
 
 ### Frontend Architecture
+
 ```typescript
 // Core Framework
 Next.js 15.2.4 (App Router) + TypeScript 5.4.5
@@ -29,6 +30,7 @@ class-variance-authority 0.7.1 for component variants
 ```
 
 ### Backend & API Layer
+
 ```typescript
 // API Routes (Next.js App Router)
 app/api/
@@ -52,6 +54,7 @@ Real-time subscriptions for live data
 ```
 
 ### Authentication & Security
+
 ```typescript
 // Authentication Provider
 Clerk Authentication 6.20.0
@@ -75,6 +78,7 @@ Data encryption for sensitive information
 ### External Integrations
 
 #### Financial Data Services
+
 ```typescript
 // Multi-Provider Strategy (Failover Architecture)
 Yahoo Finance 2 (Primary) + Alpha Vantage (Backup)
@@ -95,6 +99,7 @@ interface FinancialDataConfig {
 ```
 
 #### Customer Engagement Platform
+
 ```typescript
 // HubSpot Integration
 - CRM data synchronization
@@ -102,7 +107,7 @@ interface FinancialDataConfig {
 - Marketing automation
 - Customer journey tracking
 
-// ChannelTalk Integration  
+// ChannelTalk Integration
 - Real-time customer support
 - Korean language optimization
 - Business hours management
@@ -110,6 +115,7 @@ interface FinancialDataConfig {
 ```
 
 #### Booking & Scheduling
+
 ```typescript
 // Cal.com Integration (@calcom/embed-react 1.5.3)
 - Consultation scheduling
@@ -122,6 +128,7 @@ interface FinancialDataConfig {
 ## Database Architecture
 
 ### Supabase PostgreSQL Schema
+
 ```sql
 -- Core User Management
 CREATE TABLE profiles (
@@ -191,6 +198,7 @@ CREATE TABLE succession_plans (
 ```
 
 ### Caching Strategy
+
 ```typescript
 // Multi-Layer Redis Caching
 interface CacheStrategy {
@@ -218,7 +226,11 @@ export class FinancialDataCache {
     return await redis.get(cacheKey);
   }
 
-  async setCachedStockData(symbol: string, data: StockData, ttl: number): Promise<void> {
+  async setCachedStockData(
+    symbol: string,
+    data: StockData,
+    ttl: number
+  ): Promise<void> {
     const cacheKey = `stock:${symbol}:${Math.floor(Date.now() / 300000)}`;
     await redis.setex(cacheKey, ttl, JSON.stringify(data));
   }
@@ -228,13 +240,15 @@ export class FinancialDataCache {
 ## Performance Optimization
 
 ### Frontend Performance
+
 ```typescript
+// Image Optimization
+import Image from 'next/image';
+
 // Code Splitting & Lazy Loading
 const AdminDashboard = lazy(() => import('./admin/AdminDashboard'));
 const FinancialCharts = lazy(() => import('./charts/FinancialCharts'));
 
-// Image Optimization
-import Image from 'next/image';
 // Automatic WebP conversion, responsive sizing, lazy loading
 
 // Font Optimization
@@ -247,18 +261,21 @@ import Image from 'next/image';
 ```
 
 ### API Optimization
+
 ```typescript
 // Request Batching
-export async function getMultipleStocks(symbols: string[]): Promise<StockData[]> {
+export async function getMultipleStocks(
+  symbols: string[]
+): Promise<StockData[]> {
   // Batch API calls for improved performance
   const batchSize = 10;
   const batches = chunk(symbols, batchSize);
-  
+
   const results = await Promise.allSettled(
     batches.map(batch => fetchStockDataBatch(batch))
   );
-  
-  return results.flatMap(result => 
+
+  return results.flatMap(result =>
     result.status === 'fulfilled' ? result.value : []
   );
 }
@@ -269,6 +286,7 @@ export async function getMultipleStocks(symbols: string[]): Promise<StockData[]>
 ```
 
 ### Database Performance
+
 ```typescript
 // Query Optimization
 -- Indexes for performance-critical queries
@@ -297,18 +315,17 @@ const supabase = createClient(
 ## Security Implementation
 
 ### Authentication & Authorization
+
 ```typescript
 // Clerk + Supabase Integration
 export async function syncUserToSupabase(clerkUser: ClerkUser) {
-  const { data, error } = await supabase
-    .from('profiles')
-    .upsert({
-      id: clerkUser.id,
-      email: clerkUser.emailAddresses[0]?.emailAddress,
-      full_name: `${clerkUser.firstName} ${clerkUser.lastName}`,
-      updated_at: new Date().toISOString(),
-    });
-  
+  const { data, error } = await supabase.from('profiles').upsert({
+    id: clerkUser.id,
+    email: clerkUser.emailAddresses[0]?.emailAddress,
+    full_name: `${clerkUser.firstName} ${clerkUser.lastName}`,
+    updated_at: new Date().toISOString(),
+  });
+
   if (error) throw new Error('Failed to sync user');
   return data;
 }
@@ -321,6 +338,7 @@ export function checkAdminPermission(userId: string): Promise<boolean> {
 ```
 
 ### Rate Limiting
+
 ```typescript
 // Upstash Redis Rate Limiting
 import { Ratelimit } from '@upstash/ratelimit';
@@ -333,17 +351,19 @@ const ratelimit = new Ratelimit({
 });
 
 export async function rateLimit(identifier: string) {
-  const { success, limit, reset, remaining } = await ratelimit.limit(identifier);
-  
+  const { success, limit, reset, remaining } =
+    await ratelimit.limit(identifier);
+
   if (!success) {
     throw new Error('Rate limit exceeded');
   }
-  
+
   return { limit, reset, remaining };
 }
 ```
 
 ### Data Protection
+
 ```typescript
 // Input Validation with Zod
 const UserProfileSchema = z.object({
@@ -369,6 +389,7 @@ export const env = envSchema.parse(process.env);
 ## Korean Market Optimization
 
 ### SEO & Localization
+
 ```typescript
 // Korean Search Engine Optimization
 export const koreanSEOConfig = {
@@ -403,25 +424,31 @@ const KOREAN_STOCK_SYMBOLS: KoreanStockSymbol[] = [
 
 const MAJOR_FOREX_PAIRS: MajorForexPair[] = [
   'USD/KRW',
-  'EUR/KRW', 
+  'EUR/KRW',
   'JPY/KRW',
   'CNY/KRW',
 ];
 ```
 
 ### Korean Business Calendar Integration
+
 ```typescript
 // Korean Holiday and Business Calendar
 export const koreanBusinessCalendar = {
   holidays: [
     '2024-01-01', // New Year
-    '2024-02-09', '2024-02-10', '2024-02-11', '2024-02-12', // Lunar New Year
+    '2024-02-09',
+    '2024-02-10',
+    '2024-02-11',
+    '2024-02-12', // Lunar New Year
     '2024-03-01', // Independence Movement Day
     '2024-05-05', // Children's Day
     '2024-05-15', // Buddha's Birthday
     '2024-06-06', // Memorial Day
     '2024-08-15', // Liberation Day
-    '2024-09-16', '2024-09-17', '2024-09-18', // Chuseok
+    '2024-09-16',
+    '2024-09-17',
+    '2024-09-18', // Chuseok
     '2024-10-03', // National Foundation Day
     '2024-10-09', // Hangeul Day
     '2024-12-25', // Christmas
@@ -438,6 +465,7 @@ export const koreanBusinessCalendar = {
 ## Monitoring & Analytics
 
 ### Performance Monitoring
+
 ```typescript
 // Custom Performance Monitoring
 export class PerformanceMonitor {
@@ -449,7 +477,11 @@ export class PerformanceMonitor {
     });
   }
 
-  static trackAPICall(endpoint: string, responseTime: number, success: boolean) {
+  static trackAPICall(
+    endpoint: string,
+    responseTime: number,
+    success: boolean
+  ) {
     gtag('event', 'api_performance', {
       endpoint,
       response_time: responseTime,
@@ -461,7 +493,7 @@ export class PerformanceMonitor {
 // Real-time Error Monitoring
 export function logError(error: Error, context: string) {
   console.error(`[${context}] ${error.message}`, error.stack);
-  
+
   // Send to monitoring service
   gtag('event', 'exception', {
     description: error.message,
@@ -472,15 +504,16 @@ export function logError(error: Error, context: string) {
 ```
 
 ### Business Analytics
+
 ```typescript
 // Google Analytics 4 Integration
 export const GA4_CONFIG = {
   measurementId: 'G-DB6TXRZLTK',
   customDimensions: {
-    user_type: 'dimension1',        // 'premium', 'standard', 'trial'
-    industry: 'dimension2',         // User's industry
-    company_size: 'dimension3',     // Company size category
-    membership_tier: 'dimension4',  // Membership level
+    user_type: 'dimension1', // 'premium', 'standard', 'trial'
+    industry: 'dimension2', // User's industry
+    company_size: 'dimension3', // Company size category
+    membership_tier: 'dimension4', // Membership level
   },
   customEvents: {
     consultation_booked: 'consultation_booked',
@@ -491,7 +524,10 @@ export const GA4_CONFIG = {
 };
 
 // HubSpot Analytics Integration
-export function trackHubSpotEvent(eventName: string, properties: Record<string, any>) {
+export function trackHubSpotEvent(
+  eventName: string,
+  properties: Record<string, any>
+) {
   if (typeof window !== 'undefined' && window.hbspt) {
     window.hbspt.cta.load(24900000, properties);
   }
@@ -501,6 +537,7 @@ export function trackHubSpotEvent(eventName: string, properties: Record<string, 
 ## Deployment & DevOps
 
 ### Vercel Deployment Configuration
+
 ```typescript
 // next.config.mjs
 /** @type {import('next').NextConfig} */
@@ -516,9 +553,18 @@ const nextConfig = {
     {
       source: '/api/:path*',
       headers: [
-        { key: 'Access-Control-Allow-Origin', value: 'https://familyoffices.vip' },
-        { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' },
-        { key: 'Access-Control-Allow-Headers', value: 'Content-Type, Authorization' },
+        {
+          key: 'Access-Control-Allow-Origin',
+          value: 'https://familyoffices.vip',
+        },
+        {
+          key: 'Access-Control-Allow-Methods',
+          value: 'GET, POST, PUT, DELETE, OPTIONS',
+        },
+        {
+          key: 'Access-Control-Allow-Headers',
+          value: 'Content-Type, Authorization',
+        },
       ],
     },
   ],
@@ -533,6 +579,7 @@ const nextConfig = {
 ```
 
 ### Environment Configuration
+
 ```bash
 # Production Environment Variables
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
@@ -548,6 +595,7 @@ GOOGLE_ANALYTICS_ID=G-DB6TXRZLTK
 ```
 
 ### Testing Strategy
+
 ```typescript
 // Jest Configuration
 export default {

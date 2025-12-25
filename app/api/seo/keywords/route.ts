@@ -2,8 +2,8 @@
  * SEO 키워드 랭킹 API
  * 네이버 검색 순위 추적 및 성과 모니터링
  */
-
 import { NextRequest, NextResponse } from 'next/server';
+
 import { SEOMetrics } from '@/lib/analytics/seo-tracker';
 
 export async function GET(request: NextRequest) {
@@ -23,9 +23,9 @@ export async function GET(request: NextRequest) {
         changePercent: 87,
         url: '/services',
         naverRank: 6,
-        googleRank: 12
+        googleRank: 12,
       },
-      '패밀리오피스': {
+      패밀리오피스: {
         currentRank: 12,
         previousRank: 18,
         searchVolume: 2400,
@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
         changePercent: 50,
         url: '/',
         naverRank: 8,
-        googleRank: 15
+        googleRank: 15,
       },
       '법인세 절세': {
         currentRank: 22,
@@ -43,9 +43,9 @@ export async function GET(request: NextRequest) {
         changePercent: 27,
         url: '/blog/corporate-tax',
         naverRank: 18,
-        googleRank: 25
+        googleRank: 25,
       },
-      '절세전략': {
+      절세전략: {
         currentRank: 16,
         previousRank: 19,
         searchVolume: 6800,
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
         changePercent: 18,
         url: '/tax-strategy',
         naverRank: 12,
-        googleRank: 20
+        googleRank: 20,
       },
       '정책자금 신청': {
         currentRank: 25,
@@ -63,18 +63,19 @@ export async function GET(request: NextRequest) {
         changePercent: 20,
         url: '/policy-funding',
         naverRank: 20,
-        googleRank: 30
-      }
+        googleRank: 30,
+      },
     };
 
     // 요청된 키워드가 있으면 필터링
-    const filteredData = keywords.length > 0 
-      ? Object.fromEntries(
-          Object.entries(mockKeywordData).filter(([keyword]) => 
-            keywords.includes(keyword)
+    const filteredData =
+      keywords.length > 0
+        ? Object.fromEntries(
+            Object.entries(mockKeywordData).filter(([keyword]) =>
+              keywords.includes(keyword)
+            )
           )
-        )
-      : mockKeywordData;
+        : mockKeywordData;
 
     const response = {
       success: true,
@@ -83,25 +84,30 @@ export async function GET(request: NextRequest) {
         keywords: filteredData,
         summary: {
           totalKeywords: Object.keys(filteredData).length,
-          avgRank: Object.values(filteredData).reduce((acc, curr) => acc + curr.currentRank, 0) / Object.keys(filteredData).length,
-          improvements: Object.values(filteredData).filter(k => k.trend === 'up').length,
+          avgRank:
+            Object.values(filteredData).reduce(
+              (acc, curr) => acc + curr.currentRank,
+              0
+            ) / Object.keys(filteredData).length,
+          improvements: Object.values(filteredData).filter(
+            k => k.trend === 'up'
+          ).length,
           topPerformers: Object.entries(filteredData)
             .filter(([_, data]) => data.currentRank <= 10)
-            .map(([keyword]) => keyword)
+            .map(([keyword]) => keyword),
         },
-        lastUpdated: new Date().toISOString()
-      }
+        lastUpdated: new Date().toISOString(),
+      },
     };
 
     return NextResponse.json(response);
-
   } catch (error) {
     console.error('키워드 API 오류:', error);
     return NextResponse.json(
-      { 
-        success: false, 
+      {
+        success: false,
         error: 'Failed to fetch keyword data',
-        message: '키워드 데이터를 가져오는 중 오류가 발생했습니다.'
+        message: '키워드 데이터를 가져오는 중 오류가 발생했습니다.',
       },
       { status: 500 }
     );
@@ -116,15 +122,15 @@ export async function POST(request: NextRequest) {
     if (action === 'track') {
       // 새로운 키워드 추적 시작
       // 실제로는 데이터베이스에 키워드 저장하고 크론 작업 설정
-      
+
       return NextResponse.json({
         success: true,
         message: `${keywords.length}개 키워드 추적이 시작되었습니다.`,
         data: {
           addedKeywords: keywords,
           trackingId: `track_${Date.now()}`,
-          nextUpdate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
-        }
+          nextUpdate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+        },
       });
     }
 
@@ -135,8 +141,8 @@ export async function POST(request: NextRequest) {
         message: '키워드 순위가 업데이트되었습니다.',
         data: {
           refreshedAt: new Date().toISOString(),
-          affectedKeywords: keywords.length
-        }
+          affectedKeywords: keywords.length,
+        },
       });
     }
 
@@ -144,14 +150,13 @@ export async function POST(request: NextRequest) {
       { success: false, error: 'Invalid action' },
       { status: 400 }
     );
-
   } catch (error) {
     console.error('키워드 추적 API 오류:', error);
     return NextResponse.json(
-      { 
-        success: false, 
+      {
+        success: false,
         error: 'Failed to process keyword tracking',
-        message: '키워드 추적 요청 처리 중 오류가 발생했습니다.'
+        message: '키워드 추적 요청 처리 중 오류가 발생했습니다.',
       },
       { status: 500 }
     );

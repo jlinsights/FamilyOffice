@@ -4,10 +4,12 @@
  * 카카오톡 채널 추가 버튼 컴포넌트
  * 공식 카카오 브랜딩 가이드라인에 따른 채널 추가 버튼
  */
-
 import React from 'react';
+
 import Image from 'next/image';
+
 import { Button } from '@/components/ui/button';
+
 import { useToast } from '@/hooks/use-toast';
 
 interface KakaoChannelAddButtonProps {
@@ -23,7 +25,7 @@ export function KakaoChannelAddButton({
   variant = 'banner',
   size = 'default',
   fullWidth = false,
-  onChannelAdd
+  onChannelAdd,
 }: KakaoChannelAddButtonProps) {
   const { toast } = useToast();
 
@@ -31,18 +33,18 @@ export function KakaoChannelAddButton({
     try {
       // 카카오톡 채널 추가 URL 생성
       const channelUrl = `https://pf.kakao.com/${channelId.replace('@', '')}`;
-      
+
       // 모바일에서는 카카오톡 앱으로, 데스크톱에서는 웹으로
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      
+
       if (isMobile) {
         // 모바일: 카카오톡 앱 실행
         const kakaoScheme = `kakaotalk://plusfriend/home/${channelId}`;
         const fallbackUrl = channelUrl;
-        
+
         // 카카오톡 앱 실행 시도
         window.location.href = kakaoScheme;
-        
+
         // 앱이 설치되지 않은 경우 웹으로 fallback
         setTimeout(() => {
           window.open(fallbackUrl, '_blank');
@@ -80,7 +82,7 @@ export function KakaoChannelAddButton({
       >
         <Image
           src={
-            size === 'lg' 
+            size === 'lg'
               ? '/images/KAKAO/banner_type@2x.png'
               : '/images/KAKAO/banner_type.png'
           }
@@ -107,11 +109,11 @@ export function KakaoChannelAddButton({
         hover:scale-[1.02] flex items-center space-x-2
       `}
     >
-      <Image 
-        src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-        alt="카카오" 
-        width={20} 
-        height={20} 
+      <Image
+        src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+        alt="카카오"
+        width={20}
+        height={20}
         className="rounded-sm"
       />
       <span>채널 추가</span>

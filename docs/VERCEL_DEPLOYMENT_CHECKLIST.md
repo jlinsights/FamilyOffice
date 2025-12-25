@@ -9,24 +9,28 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
 ### 1. 로컬 환경 검증
 
 - [ ] **TypeScript 타입 체크 통과**
+
   ```bash
   npm run typecheck
   # 0 errors expected
   ```
 
 - [ ] **ESLint 검사 통과**
+
   ```bash
   npm run lint
   # No warnings or errors expected
   ```
 
 - [ ] **환경 변수 검증 통과**
+
   ```bash
   npx tsx scripts/validate-env.ts
   # All tests should pass
   ```
 
 - [ ] **통합 테스트 성공**
+
   ```bash
   # 로컬 dev 서버 시작
   npm run dev
@@ -118,6 +122,7 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
 ### 6. 환경 변수 설정 (Production)
 
 **Google Analytics 4**:
+
 - [ ] `GOOGLE_SERVICE_ACCOUNT_EMAIL`
   - 값: `________________@________________.iam.gserviceaccount.com`
   - 환경: Production, Preview, Development
@@ -136,11 +141,13 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
   - 환경: Production, Preview, Development
 
 **Serper.dev**:
+
 - [ ] `SERPER_API_KEY`
   - 값: `________________`
   - 환경: Production, Preview, Development
 
 **Supabase**:
+
 - [ ] `NEXT_PUBLIC_SUPABASE_URL`
   - 값: `https://________________.supabase.co`
   - 환경: Production, Preview, Development
@@ -154,6 +161,7 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
   - 환경: Production, Preview, Development
 
 **Vercel Cron**:
+
 - [ ] `CRON_SECRET`
   - 값: `________________` (openssl rand -base64 32로 생성)
   - 환경: Production, Preview, Development
@@ -175,6 +183,7 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
   - Vercel Dashboard → Deployments 탭 확인
 
 - [ ] **또는 수동 배포**
+
   ```bash
   # Vercel CLI 설치 (미설치 시)
   npm install -g vercel
@@ -206,12 +215,14 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
 ### 10. 프로덕션 환경 테스트
 
 - [ ] **홈페이지 접속**
+
   ```
   https://your-domain.vercel.app
   # 또는 https://familyoffices.vip
   ```
 
 - [ ] **환경 변수 검증 API**
+
   ```bash
   curl https://your-domain.vercel.app/api/test/bmad-integration
   # 모든 테스트 pass 확인
@@ -227,12 +238,14 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
 ### 11. Cron Job 테스트
 
 - [ ] **수동 트리거 (POST)**
+
   ```bash
   curl -X POST https://your-domain.vercel.app/api/cron/daily-bmad-collection
   # 200 OK, collected: 40
   ```
 
 - [ ] **Cron 엔드포인트 (GET with auth)**
+
   ```bash
   curl -X GET https://your-domain.vercel.app/api/cron/daily-bmad-collection \
     -H "Authorization: Bearer YOUR_CRON_SECRET"
@@ -256,16 +269,17 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
   - 40개 레코드 확인
 
 - [ ] **뷰 테스트**
+
   ```sql
   SELECT * FROM latest_keyword_rankings LIMIT 10;
   SELECT * FROM category_average_rankings;
   ```
 
 - [ ] **카테고리별 발견율 확인**
-  - Behavioral: ___/10 (___%)
-  - Motivational: ___/10 (___%)
-  - Aspirational: ___/10 (___%)
-  - Decisional: ___/10 (___%)
+  - Behavioral: **_/10 (_**%)
+  - Motivational: **_/10 (_**%)
+  - Aspirational: **_/10 (_**%)
+  - Decisional: **_/10 (_**%)
 
 ---
 
@@ -393,11 +407,13 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
    - 에러 메시지 및 스택 트레이스 확인
 
 2. **환경 변수 재확인**
+
    ```bash
    npx tsx scripts/validate-env.ts
    ```
 
 3. **통합 테스트 재실행**
+
    ```bash
    curl https://your-domain.vercel.app/api/test/bmad-integration?detailed=true
    ```
@@ -413,36 +429,40 @@ BMAD 키워드 추적 시스템을 Vercel 프로덕션 환경에 안전하게 �
 ```markdown
 ## BMAD 추적 시스템 배포 완료
 
-**배포 일시**: 2025-01-__
-**배포자**: ________________
+**배포 일시**: 2025-01-**
+**배포자**: ******\_\_********
 **Vercel URL**: https://________________.vercel.app
 
 ### 환경 설정
+
 - [x] Google Cloud Console 설정
 - [x] Serper.dev API 키 발급
 - [x] Supabase 마이그레이션 실행
 - [x] Vercel 환경 변수 설정 (12개)
 
 ### 검증 결과
+
 - [x] 통합 테스트: 5/5 pass
 - [x] Cron Job 수동 테스트: 성공
 - [x] 첫 데이터 수집: 40개 키워드
 - [x] 카테고리별 발견율:
-  - Behavioral: __/10 (__%)
-  - Motivational: __/10 (__%)
-  - Aspirational: __/10 (__%)
-  - Decisional: __/10 (__%)
+  - Behavioral: **/10 (**%)
+  - Motivational: **/10 (**%)
+  - Aspirational: **/10 (**%)
+  - Decisional: **/10 (**%)
 
 ### 모니터링
+
 - [x] Vercel Analytics 활성화
-- [x] Cron Job 스케줄: 매일 UTC __시 (KST __시)
+- [x] Cron Job 스케줄: 매일 UTC **시 (KST **시)
 - [x] Supabase 데이터 저장 정상
 
 ### 다음 단계
+
 - Phase 3: 블로그 AI 최적화
 - Phase 4: 실시간 알림 설정
 
-**비고**: ________________
+**비고**: ******\_\_\_\_******
 ```
 
 ---

@@ -10,30 +10,30 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   // Test directory structure
   testDir: './tests/e2e',
-  
+
   // Global test configuration
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : '50%',
-  
+
   // Reporter configuration
   reporter: [
     ['html'],
     ['json', { outputFile: 'playwright-report/results.json' }],
     ['junit', { outputFile: 'playwright-report/results.xml' }],
   ],
-  
+
   // Global test settings
   use: {
     // Base URL for tests
     baseURL: 'http://localhost:3000',
-    
+
     // Browser context settings
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    
+
     // Timeouts
     actionTimeout: 10000,
     navigationTimeout: 30000,
@@ -45,12 +45,12 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    
+
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-    
+
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
@@ -61,7 +61,7 @@ export default defineConfig({
       name: 'mobile-chrome',
       use: { ...devices['Pixel 5'] },
     },
-    
+
     {
       name: 'mobile-safari',
       use: { ...devices['iPhone 12'] },
@@ -70,7 +70,7 @@ export default defineConfig({
     // Financial platform specific scenarios
     {
       name: 'financial-desktop',
-      use: { 
+      use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1920, height: 1080 },
         // Simulate high-end user setup
@@ -110,14 +110,10 @@ export default defineConfig({
 
   // Output directories
   outputDir: 'test-results/',
-  
+
   // Test match patterns
-  testMatch: [
-    '**/*.spec.ts',
-    '**/*.test.ts',
-    '**/*.e2e.ts'
-  ],
-  
+  testMatch: ['**/*.spec.ts', '**/*.test.ts', '**/*.e2e.ts'],
+
   // Test ignore patterns
   testIgnore: [
     '**/node_modules/**',

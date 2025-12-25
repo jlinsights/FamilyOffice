@@ -1,6 +1,7 @@
+'use client';
+
 import { ArrowRight, Crown, Sparkles } from 'lucide-react';
 
-import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +9,7 @@ import { Button } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { PremiumContentGuard } from '@/components/premium-content-guard';
 import { EducationScheduleSection } from '@/components/program/EducationScheduleSection';
 import { ExclusiveProgramsSection } from '@/components/program/ExclusiveProgramsSection';
 import { MemberBenefitsSection } from '@/components/program/MemberBenefitsSection';
@@ -15,24 +17,16 @@ import { MembershipCTASection } from '@/components/program/MembershipCTASection'
 import { MembershipStatsSection } from '@/components/program/MembershipStatsSection';
 import { SpecialProgramsSection } from '@/components/program/SpecialProgramsSection';
 import { VVIPBenefitsSection } from '@/components/program/VVIPBenefitsSection';
-
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
-import {
-    ASSET_PROGRAMS,
-    CEO_PROGRAMS,
-    EDUCATION_PROGRAMS,
-    EXCLUSIVE_PROGRAMS,
-    MEMBERSHIP_STATS,
-    MEMBER_BENEFITS,
-} from '@/constants/programs';
 
-export const metadata: Metadata = {
-  title: '프로그램 | 성공한 기업가·자산가 전용 프리미엄 프로그램 안내',
-  description:
-    '성공한 기업가와 개인자산 30억+ 고액자산가를 위한 프리미엄 프로그램. 네트워킹, 투자, 승계, 자산관리, 가족신탁 등 다양한 맞춤형 혜택 제공.',
-  keywords:
-    '프로그램, 기업가 네트워킹, 고액자산가 모임, 자산가 교육, 개인자산 30억 이상, 패밀리오피스 프로그램, 상속계획, 가족신탁, 자산관리 교육, VIP 자산가 모임',
-};
+import {
+  ASSET_PROGRAMS,
+  CEO_PROGRAMS,
+  EDUCATION_PROGRAMS,
+  EXCLUSIVE_PROGRAMS,
+  MEMBERSHIP_STATS,
+  MEMBER_BENEFITS,
+} from '@/constants/programs';
 
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
@@ -71,7 +65,9 @@ function HeroSection() {
           style={{ animationDelay: '300ms' }}
         >
           검증된{' '}
-          <span className="font-semibold text-primary">500+ 기업가와 개인자산 30억+ 자산가</span>
+          <span className="font-semibold text-primary">
+            500+ 기업가와 개인자산 30억+ 자산가
+          </span>
           가 함께하는 특별한 공간에서
           <br />
           최고의 네트워킹과 전문 통합자산관리 서비스를 경험하세요
@@ -119,20 +115,22 @@ export default function ProgramPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20">
-        <HeroSection />
-        <VVIPBenefitsSection />
-        <MembershipStatsSection stats={MEMBERSHIP_STATS} />
-        <MemberBenefitsSection benefits={MEMBER_BENEFITS} />
-        <ExclusiveProgramsSection categories={EXCLUSIVE_PROGRAMS} />
-        <SpecialProgramsSection
-          ceoPrograms={CEO_PROGRAMS}
-          assetPrograms={ASSET_PROGRAMS}
-        />
-        <EducationScheduleSection educationPrograms={EDUCATION_PROGRAMS} />
-        <CompactMultimediaSection />
-        <MembershipCTASection />
-      </main>
+      <PremiumContentGuard>
+        <main className="pt-20">
+          <HeroSection />
+          <VVIPBenefitsSection />
+          <MembershipStatsSection stats={MEMBERSHIP_STATS} />
+          <MemberBenefitsSection benefits={MEMBER_BENEFITS} />
+          <ExclusiveProgramsSection categories={EXCLUSIVE_PROGRAMS} />
+          <SpecialProgramsSection
+            ceoPrograms={CEO_PROGRAMS}
+            assetPrograms={ASSET_PROGRAMS}
+          />
+          <EducationScheduleSection educationPrograms={EDUCATION_PROGRAMS} />
+          <CompactMultimediaSection />
+          <MembershipCTASection />
+        </main>
+      </PremiumContentGuard>
       <Footer />
     </div>
   );

@@ -1,20 +1,25 @@
 'use client';
 
 import {
-    ArrowRight,
-    Briefcase,
-    Building2,
-    Crown,
-    Search,
-    Shield,
-    Target,
-    TrendingUp
+  ArrowRight,
+  Briefcase,
+  Building2,
+  Crown,
+  Search,
+  Shield,
+  Target,
+  TrendingUp,
 } from 'lucide-react';
 
 import Link from 'next/link';
 
 import { Reveal, StaggerContainer } from '@/components/animations/reveal';
-import { CTACard, LargeServiceCard, RegularServiceCard } from '@/components/bento';
+import {
+  CTACard,
+  LargeServiceCard,
+  RegularServiceCard,
+} from '@/components/bento';
+
 import { BENTO_SERVICES, getGridClass } from '@/constants/bento-services';
 
 export function ServicesSection() {
@@ -31,7 +36,9 @@ export function ServicesSection() {
       <div className="container relative z-10">
         <Reveal className="text-center mb-16">
           <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-6 shadow-sm animate-fade-in">
-            <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full mr-2">Premium</span>
+            <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full mr-2">
+              Premium
+            </span>
             <span className="text-sm text-slate-600 dark:text-slate-300 pr-2 flex items-center">
               <Briefcase className="h-3 w-3 mr-1" />
               Family Office Excellence
@@ -42,14 +49,21 @@ export function ServicesSection() {
             <span className="bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-900 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent">
               차별화된 패밀리오피스
             </span>{' '}
-            <span className="text-slate-700 dark:text-slate-300">전용 솔루션</span>
+            <span className="text-slate-700 dark:text-slate-300">
+              전용 솔루션
+            </span>
           </h2>
 
           <p
             className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed animate-slide-up font-light"
             style={{ animationDelay: '100ms' }}
           >
-            법인 자산 관리 및 가업승계 전문 <span className="font-semibold text-blue-700 dark:text-blue-400">프리미엄 서비스 포트폴리오</span>로<br className="hidden sm:block" /> 세대를 잇는 자산관리를 실현합니다
+            법인 자산 관리 및 가업승계 전문{' '}
+            <span className="font-semibold text-blue-700 dark:text-blue-400">
+              프리미엄 서비스 포트폴리오
+            </span>
+            로<br className="hidden sm:block" /> 세대를 잇는 자산관리를
+            실현합니다
           </p>
         </Reveal>
 
@@ -58,17 +72,21 @@ export function ServicesSection() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 auto-rows-auto"
           staggerDelay={0.1}
         >
-          {BENTO_SERVICES.map((service) => {
+          {BENTO_SERVICES.map(service => {
             const gridClass = getGridClass(service.size);
-            
+
             return (
               <Reveal key={service.id} className={gridClass}>
                 {service.size === 'large' ? (
                   <LargeServiceCard service={service} />
                 ) : service.size === 'cta' ? (
-                  <CTACard 
-                    service={service} 
-                    variant={service.id === 'family-office-center' ? 'primary' : 'secondary'}
+                  <CTACard
+                    service={service}
+                    variant={
+                      service.id === 'family-office-center'
+                        ? 'primary'
+                        : 'secondary'
+                    }
                   />
                 ) : (
                   <RegularServiceCard service={service} />
@@ -89,18 +107,42 @@ export function ServicesSection() {
               <span className="text-blue-300">패밀리오피스</span>의 탁월한 성과
             </h3>
             <p className="text-slate-300 max-w-2xl mx-auto text-lg font-light">
-              최고 자산가들이 신뢰하는 패밀리오피스의 검증된 실적과 <span className="font-bold text-white">차별화된 전문성</span>
+              최고 자산가들이 신뢰하는 패밀리오피스의 검증된 실적과{' '}
+              <span className="font-bold text-white">차별화된 전문성</span>
             </p>
           </div>
 
           <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: '500억원+', label: '자산관리 실적', icon: TrendingUp, color: 'text-blue-400' },
-              { value: '500+', label: '법인 고객사', icon: Building2, color: 'text-purple-400' },
-              { value: '20년+', label: '전문 경험', icon: Shield, color: 'text-green-400' },
-              { value: '98%', label: '만족도', icon: Target, color: 'text-yellow-400' },
+              {
+                value: '500억원+',
+                label: '자산관리 실적',
+                icon: TrendingUp,
+                color: 'text-blue-400',
+              },
+              {
+                value: '500+',
+                label: '법인 고객사',
+                icon: Building2,
+                color: 'text-purple-400',
+              },
+              {
+                value: '20년+',
+                label: '전문 경험',
+                icon: Shield,
+                color: 'text-green-400',
+              },
+              {
+                value: '98%',
+                label: '만족도',
+                icon: Target,
+                color: 'text-yellow-400',
+              },
             ].map((stat, index) => (
-              <div key={index} className="text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors duration-300">
+              <div
+                key={index}
+                className="text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors duration-300"
+              >
                 <div className="flex justify-center mb-4">
                   <stat.icon className={`h-8 w-8 ${stat.color}`} />
                 </div>

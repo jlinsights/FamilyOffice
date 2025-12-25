@@ -7,7 +7,10 @@ interface ClientWrapperProps {
   fallback?: React.ReactNode;
 }
 
-export function ClientWrapper({ children, fallback = null }: ClientWrapperProps) {
+export function ClientWrapper({
+  children,
+  fallback = null,
+}: ClientWrapperProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -19,4 +22,4 @@ export function ClientWrapper({ children, fallback = null }: ClientWrapperProps)
   }
 
   return <>{children}</>;
-} 
+}

@@ -20,7 +20,6 @@ export interface TistoryConfig {
 }
 
 export class TistoryContentConverter {
-  
   /**
    * 뉴스레터/블로그 콘텐츠를 티스토리 최적화 버전으로 변환
    */
@@ -34,7 +33,7 @@ export class TistoryContentConverter {
       tags: this.generateNaverOptimizedTags(originalContent),
       category: this.mapToTistoryCategory(originalContent.category),
       naverKeywords: this.extractNaverKeywords(originalContent),
-      originalBlogUrl: `https://familyoffices.vip/blog/${originalContent.slug}`
+      originalBlogUrl: `https://familyoffices.vip/blog/${originalContent.slug}`,
     };
   }
 
@@ -46,11 +45,11 @@ export class TistoryContentConverter {
     const keywordMap = {
       '중견기업 CEO': 'CEO',
       '리스크 관리': '위기관리',
-      '기업생명보험': '기업보험',
-      '의제배당': '배당세금',
-      '이익잉여금': '회사 적립금',
-      'MSO': '병원 관리회사',
-      '가업승계': '사업 승계'
+      기업생명보험: '기업보험',
+      의제배당: '배당세금',
+      이익잉여금: '회사 적립금',
+      MSO: '병원 관리회사',
+      가업승계: '사업 승계',
     };
 
     let optimizedTitle = originalTitle;
@@ -59,7 +58,7 @@ export class TistoryContentConverter {
     });
 
     // 티스토리/네이버 친화적 형태로 변환
-    return optimizedTitle.length > 40 
+    return optimizedTitle.length > 40
       ? optimizedTitle.substring(0, 40) + '...'
       : optimizedTitle;
   }
@@ -70,11 +69,14 @@ export class TistoryContentConverter {
   private static extractExecutiveSummary(content: BlogPost): string {
     // 원본 content에서 핵심 요약 부분 추출 로직
     // 실제로는 content.excerpt 또는 특별한 마커를 사용
-    return content.excerpt || `
+    return (
+      content.excerpt ||
+      `
 ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
 실무에 바로 적용 가능한 구체적인 방법과 주의사항을 제시합니다.
 전문가가 분석한 최신 트렌드와 성공 사례를 확인해보세요.
-    `.trim();
+    `.trim()
+    );
   }
 
   /**
@@ -82,7 +84,9 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
    */
   private static extractKeyPoints(content: BlogPost): string[] {
     // 태그를 기반으로 주요 포인트 생성
-    return content.tags.slice(0, 5).map(tag => `${tag} 관련 핵심 전략 및 실행 방안`);
+    return content.tags
+      .slice(0, 5)
+      .map(tag => `${tag} 관련 핵심 전략 및 실행 방안`);
   }
 
   /**
@@ -91,14 +95,19 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
   private static extractCaseStudy(content: BlogPost): string {
     // 카테고리별 대표 사례 템플릿
     const caseTemplates: Record<string, string> = {
-      '리스크관리': '실제 중견기업 A사가 CEO 건강 이슈로 위기를 겪었지만, 사전 준비된 리스크 관리 시스템으로 안정적 경영을 유지한 사례',
-      '의료법인': 'B 종합병원이 MSO 도입으로 연간 2억원 절세 효과를 달성한 성공 사례',
-      '법인자산': 'C 제조업체가 150억 이익잉여금을 단계적 배당으로 3억원 세금을 절약한 사례',
-      '세무': 'D 기업이 자기주식 소각 대신 배당 정책으로 13억원 세무 위험을 회피한 사례'
+      리스크관리:
+        '실제 중견기업 A사가 CEO 건강 이슈로 위기를 겪었지만, 사전 준비된 리스크 관리 시스템으로 안정적 경영을 유지한 사례',
+      의료법인:
+        'B 종합병원이 MSO 도입으로 연간 2억원 절세 효과를 달성한 성공 사례',
+      법인자산:
+        'C 제조업체가 150억 이익잉여금을 단계적 배당으로 3억원 세금을 절약한 사례',
+      세무: 'D 기업이 자기주식 소각 대신 배당 정책으로 13억원 세무 위험을 회피한 사례',
     };
 
-    return caseTemplates[content.category] || 
-      `${content.category} 분야에서 전문적인 전략을 통해 성공적인 결과를 달성한 실제 사례를 살펴봅니다.`;
+    return (
+      caseTemplates[content.category] ||
+      `${content.category} 분야에서 전문적인 전략을 통해 성공적인 결과를 달성한 실제 사례를 살펴봅니다.`
+    );
   }
 
   /**
@@ -107,43 +116,45 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
   private static extractActionItems(content: BlogPost): string[] {
     // 카테고리별 실행 방법 템플릿
     const actionTemplates: Record<string, string[]> = {
-      '리스크관리': [
+      리스크관리: [
         '현재 리스크 수준 정확한 진단',
         '적정 보험 설계 및 가입',
         '정기적 점검 시스템 구축',
         '비상 계획 문서화',
-        '전문가와 정기 상담'
+        '전문가와 정기 상담',
       ],
-      '의료법인': [
+      의료법인: [
         'MSO 설립 타당성 검토',
         '관리업무 범위 명확화',
         '적정 수수료 구조 설계',
         '세무 위험 사전 점검',
-        '운영 시스템 구축'
+        '운영 시스템 구축',
       ],
-      '법인자산': [
+      법인자산: [
         '이익잉여금 현황 분석',
         '배당 시나리오별 세무 계산',
         '단계적 실행 계획 수립',
         '가족 지분 구조 검토',
-        '투자 연계 방안 마련'
+        '투자 연계 방안 마련',
       ],
-      '세무': [
+      세무: [
         '현행 세법 정확한 이해',
         '세무 위험도 정밀 평가',
         '대안 전략 비교 검토',
         '전문가 자문 확보',
-        '실행 전 시뮬레이션'
-      ]
+        '실행 전 시뮬레이션',
+      ],
     };
 
-    return actionTemplates[content.category] || [
-      '현재 상황 정확한 분석',
-      '전문가와 상담 진행',
-      '단계적 실행 계획 수립',
-      '정기적 모니터링',
-      '지속적 최적화'
-    ];
+    return (
+      actionTemplates[content.category] || [
+        '현재 상황 정확한 분석',
+        '전문가와 상담 진행',
+        '단계적 실행 계획 수립',
+        '정기적 모니터링',
+        '지속적 최적화',
+      ]
+    );
   }
 
   /**
@@ -153,7 +164,7 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
     const baseTag = this.simplifyTags(content.tags);
     const categoryTag = [content.category];
     const industryTags = ['CEO', '중견기업', '자산관리'];
-    
+
     return [...baseTag, ...categoryTag, ...industryTags].slice(0, 10);
   }
 
@@ -165,12 +176,12 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
       // 복잡한 전문용어를 일반 용어로 변환
       const simplifications: Record<string, string> = {
         'CEO 유고': 'CEO위기',
-        '기업생명보험': '기업보험',
-        '의제배당': '배당세',
-        '이익잉여금': '회사돈',
-        '자기주식 소각': '주식소각'
+        기업생명보험: '기업보험',
+        의제배당: '배당세',
+        이익잉여금: '회사돈',
+        '자기주식 소각': '주식소각',
       };
-      
+
       return simplifications[tag] || tag;
     });
   }
@@ -180,15 +191,15 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
    */
   private static mapToTistoryCategory(originalCategory: string): string {
     const categoryMap: Record<string, string> = {
-      '리스크관리': '보험',
-      '의료법인': 'Family Office',
-      '법인자산': 'Family Office', 
-      '세무': '상속세',
-      '패밀리오피스': 'Family Office',
-      '투자전략': 'Family Office',
-      '세무최적화': '상속세',
-      '자산관리': 'Family Office',
-      '승계전략': '상속세'
+      리스크관리: '보험',
+      의료법인: 'Family Office',
+      법인자산: 'Family Office',
+      세무: '상속세',
+      패밀리오피스: 'Family Office',
+      투자전략: 'Family Office',
+      세무최적화: '상속세',
+      자산관리: 'Family Office',
+      승계전략: '상속세',
     };
 
     return categoryMap[originalCategory] || 'Family Office';
@@ -200,13 +211,15 @@ ${content.title}에 대한 핵심 인사이트를 3분만에 파악하세요.
   private static extractNaverKeywords(content: BlogPost): string[] {
     // 네이버에서 검색량이 높은 키워드들로 매핑
     const naverKeywords: Record<string, string[]> = {
-      '리스크관리': ['CEO위기', '기업위험', '보험가입', '위기관리'],
-      '의료법인': ['병원경영', '의료세무', '병원절세', 'MSO'],
-      '법인자산': ['배당금', '회사돈', '법인세', '절세'],
-      '세무': ['세금절약', '절세', '세무상담', '세법']
+      리스크관리: ['CEO위기', '기업위험', '보험가입', '위기관리'],
+      의료법인: ['병원경영', '의료세무', '병원절세', 'MSO'],
+      법인자산: ['배당금', '회사돈', '법인세', '절세'],
+      세무: ['세금절약', '절세', '세무상담', '세법'],
     };
 
-    return naverKeywords[content.category] || ['CEO', '기업', '자산관리', '세금'];
+    return (
+      naverKeywords[content.category] || ['CEO', '기업', '자산관리', '세금']
+    );
   }
 }
 
@@ -220,22 +233,24 @@ export class TistoryPublisher {
   /**
    * 티스토리에 포스트 발행
    */
-  async publishPost(content: TistoryPost): Promise<{ success: boolean; url?: string; error?: string }> {
+  async publishPost(
+    content: TistoryPost
+  ): Promise<{ success: boolean; url?: string; error?: string }> {
     try {
       const tistoryContent = this.formatForTistory(content);
-      
+
       // 실제 구현에서는 티스토리 API 또는 자동화 도구 사용
       // 현재는 포맷팅된 콘텐츠를 반환
       console.log('Tistory Content Generated:', tistoryContent);
-      
+
       return {
         success: true,
-        url: `${this.config.baseUrl}/post/${Date.now()}`
+        url: `${this.config.baseUrl}/post/${Date.now()}`,
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error'
+        error: error instanceof Error ? error.message : 'Unknown error',
       };
     }
   }
@@ -278,7 +293,9 @@ ${content.actionItems.map((item, i) => `${i + 1}. ${item}`).join('\n')}
    * 기존 블로그 포스트를 티스토리용으로 일괄 변환
    */
   async convertExistingPosts(blogPosts: BlogPost[]): Promise<TistoryPost[]> {
-    return blogPosts.map(post => TistoryContentConverter.convertForTistory(post));
+    return blogPosts.map(post =>
+      TistoryContentConverter.convertForTistory(post)
+    );
   }
 }
 
@@ -289,7 +306,7 @@ export class ContentSyncManager {
   constructor() {
     this.tistoryPublisher = new TistoryPublisher({
       blogName: 'family-office',
-      baseUrl: 'https://family-office.tistory.com'
+      baseUrl: 'https://family-office.tistory.com',
     });
   }
 
@@ -300,19 +317,19 @@ export class ContentSyncManager {
     try {
       // 1. 자체 블로그 포스트 생성 (기존 시스템)
       const blogPost = await this.convertNewsletterToBlog(newsletterData);
-      
+
       // 2. 티스토리 포스트 생성
       const tistoryPost = TistoryContentConverter.convertForTistory(blogPost);
-      
+
       // 3. 동시 발행
       await Promise.all([
         this.publishToBlog(blogPost),
-        this.tistoryPublisher.publishPost(tistoryPost)
+        this.tistoryPublisher.publishPost(tistoryPost),
       ]);
 
       // 4. SEO 후속 작업
       await this.updateSEOElements();
-      
+
       console.log('✅ All platforms synchronized successfully');
     } catch (error) {
       console.error('❌ Content sync failed:', error);
@@ -323,7 +340,9 @@ export class ContentSyncManager {
   /**
    * 뉴스레터를 블로그 포스트로 변환 (기존 시스템)
    */
-  private async convertNewsletterToBlog(newsletterData: any): Promise<BlogPost> {
+  private async convertNewsletterToBlog(
+    newsletterData: any
+  ): Promise<BlogPost> {
     // 기존 뉴스레터 → 블로그 변환 로직
     return {
       id: `newsletter-${newsletterData.issueNumber}`,
@@ -336,7 +355,7 @@ export class ContentSyncManager {
       readTime: newsletterData.readTime || '5분',
       tags: newsletterData.keywords || [],
       slug: this.generateSlug(newsletterData.title),
-      featured: false
+      featured: false,
     };
   }
 
@@ -378,14 +397,14 @@ export class ContentSyncManager {
 // 사용 예시
 export async function initTistoryIntegration() {
   const syncManager = new ContentSyncManager();
-  
+
   // 기존 4개 블로그 포스트를 티스토리로 변환 예시
   const existingPosts: BlogPost[] = [
     // 여기에 기존 생성된 4개 포스트 데이터
   ];
 
   const tistoryPosts = await syncManager.convertExistingPosts(existingPosts);
-  
+
   console.log('Generated Tistory posts:', tistoryPosts.length);
   return tistoryPosts;
 }

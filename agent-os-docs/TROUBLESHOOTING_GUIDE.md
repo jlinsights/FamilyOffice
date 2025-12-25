@@ -7,6 +7,7 @@ This comprehensive troubleshooting guide covers common issues, debugging procedu
 ## System Health Monitoring
 
 ### Health Check Endpoints
+
 ```bash
 # System Health
 curl https://familyoffices.vip/api/monitoring/health
@@ -22,13 +23,14 @@ curl https://familyoffices.vip/api/monitoring/performance
 ```
 
 ### Key System Metrics
+
 ```typescript
 interface SystemHealth {
   status: 'healthy' | 'degraded' | 'critical';
   uptime: string;
-  responseTime: number;        // Target: <500ms
-  errorRate: number;          // Target: <0.1%
-  throughput: number;         // Requests per minute
+  responseTime: number; // Target: <500ms
+  errorRate: number; // Target: <0.1%
+  throughput: number; // Requests per minute
   services: {
     database: ServiceStatus;
     redis: ServiceStatus;
@@ -44,6 +46,7 @@ interface SystemHealth {
 ### 1. Authentication & Authorization Issues
 
 #### Issue: User Cannot Login
+
 ```bash
 # Symptoms
 - "Invalid credentials" error despite correct information
@@ -64,6 +67,7 @@ echo $CLERK_SECRET_KEY
 ```
 
 **Resolution Steps:**
+
 ```typescript
 // 1. Clear browser cookies and localStorage
 localStorage.clear();
@@ -90,6 +94,7 @@ SELECT * FROM profiles WHERE id = 'user_2abc123def456';
 ```
 
 #### Issue: Admin Access Denied
+
 ```bash
 # Symptoms
 - "Insufficient permissions" error for admin users
@@ -106,22 +111,24 @@ SELECT * FROM profiles WHERE id = 'user_id' AND membership_tier = 'admin';
 ```
 
 **Resolution:**
+
 ```sql
 -- Update user to admin status
-UPDATE profiles 
-SET membership_tier = 'admin', 
-    updated_at = NOW() 
+UPDATE profiles
+SET membership_tier = 'admin',
+    updated_at = NOW()
 WHERE id = 'user_id';
 
 -- Verify admin permissions
-SELECT id, email, membership_tier, created_at 
-FROM profiles 
+SELECT id, email, membership_tier, created_at
+FROM profiles
 WHERE membership_tier = 'admin';
 ```
 
 ### 2. Financial Data Integration Issues
 
 #### Issue: Korean Stock Data Not Loading
+
 ```bash
 # Symptoms
 - Empty stock data responses
@@ -138,6 +145,7 @@ curl "https://query1.finance.yahoo.com/v8/finance/chart/005930.KS"
 ```
 
 **Resolution Steps:**
+
 ```typescript
 // 1. Clear financial data cache
 await redis.del('stock:005930.KS:*');
@@ -165,6 +173,7 @@ console.log('Cache Statistics:', cacheStats);
 ```
 
 #### Issue: Forex Rates Inconsistent
+
 ```bash
 # Symptoms
 - Inconsistent USD/KRW rates
@@ -179,6 +188,7 @@ console.log('Cache Statistics:', cacheStats);
 ```
 
 **Fix Implementation:**
+
 ```typescript
 // Enhanced forex data validation
 interface ForexValidation {
@@ -186,19 +196,23 @@ interface ForexValidation {
   timestamp: Date;
   source: 'yahoo' | 'alpha_vantage';
   validationChecks: {
-    reasonabilityCheck: boolean;    // Rate within 10% of previous
-    freshnessCheck: boolean;        // Data less than 5 minutes old
-    crossRateValidation: boolean;   // Consistent with cross rates
+    reasonabilityCheck: boolean; // Rate within 10% of previous
+    freshnessCheck: boolean; // Data less than 5 minutes old
+    crossRateValidation: boolean; // Consistent with cross rates
   };
 }
 
 const validateForexRate = (data: ForexData): boolean => {
   const checks = {
-    reasonabilityCheck: isReasonableRate(data.rate, data.fromCurrency, data.toCurrency),
+    reasonabilityCheck: isReasonableRate(
+      data.rate,
+      data.fromCurrency,
+      data.toCurrency
+    ),
     freshnessCheck: isDataFresh(data.lastUpdated, 5 * 60 * 1000),
-    crossRateValidation: validateCrossRates(data)
+    crossRateValidation: validateCrossRates(data),
   };
-  
+
   return Object.values(checks).every(check => check === true);
 };
 ```
@@ -206,6 +220,7 @@ const validateForexRate = (data: ForexData): boolean => {
 ### 3. Database & Performance Issues
 
 #### Issue: Slow Database Queries
+
 ```bash
 # Symptoms
 - API response times >2 seconds
@@ -220,6 +235,7 @@ const validateForexRate = (data: ForexData): boolean => {
 ```
 
 **Optimization Steps:**
+
 ```sql
 -- Identify slow queries
 SELECT query, mean_exec_time, calls, total_exec_time
@@ -228,11 +244,11 @@ ORDER BY mean_exec_time DESC
 LIMIT 10;
 
 -- Add missing indexes
-CREATE INDEX CONCURRENTLY idx_holdings_portfolio_user 
+CREATE INDEX CONCURRENTLY idx_holdings_portfolio_user
 ON holdings(portfolio_id, user_id);
 
-CREATE INDEX CONCURRENTLY idx_consultations_scheduled_date 
-ON consultations(scheduled_date) 
+CREATE INDEX CONCURRENTLY idx_consultations_scheduled_date
+ON consultations(scheduled_date)
 WHERE status = 'scheduled';
 
 -- Analyze table statistics
@@ -241,19 +257,20 @@ ANALYZE portfolios;
 ANALYZE holdings;
 
 -- Check connection pool status
-SELECT state, count(*) 
-FROM pg_stat_activity 
+SELECT state, count(*)
+FROM pg_stat_activity
 GROUP BY state;
 ```
 
 **Connection Pool Optimization:**
+
 ```typescript
 // Supabase connection optimization
 const supabaseConfig = {
   db: {
     schema: 'public',
-    poolSize: 10,           // Increased from default
-    idleTimeout: 30000,     // 30 seconds
+    poolSize: 10, // Increased from default
+    idleTimeout: 30000, // 30 seconds
     connectionTimeout: 5000, // 5 seconds
   },
   auth: {
@@ -264,13 +281,14 @@ const supabaseConfig = {
   global: {
     headers: {
       'x-application-name': 'familyoffice-s',
-      'x-connection-source': 'nextjs-app'
-    }
-  }
+      'x-connection-source': 'nextjs-app',
+    },
+  },
 };
 ```
 
 #### Issue: Redis Cache Problems
+
 ```bash
 # Symptoms
 - Cache misses despite recent data
@@ -285,36 +303,45 @@ redis-cli SLOWLOG GET 10
 ```
 
 **Cache Troubleshooting:**
+
 ```typescript
 // Cache health check
 const checkCacheHealth = async () => {
   try {
     // Connection test
     await redis.ping();
-    
+
     // Memory usage check
     const info = await redis.info('memory');
-    const usedMemory = parseInt(info.split('\r\n')
-      .find(line => line.startsWith('used_memory:'))
-      ?.split(':')[1] || '0');
-    
+    const usedMemory = parseInt(
+      info
+        .split('\r\n')
+        .find(line => line.startsWith('used_memory:'))
+        ?.split(':')[1] || '0'
+    );
+
     // Hit rate analysis
     const stats = await redis.info('stats');
-    const hits = parseInt(stats.split('\r\n')
-      .find(line => line.startsWith('keyspace_hits:'))
-      ?.split(':')[1] || '0');
-    const misses = parseInt(stats.split('\r\n')
-      .find(line => line.startsWith('keyspace_misses:'))
-      ?.split(':')[1] || '0');
-    
+    const hits = parseInt(
+      stats
+        .split('\r\n')
+        .find(line => line.startsWith('keyspace_hits:'))
+        ?.split(':')[1] || '0'
+    );
+    const misses = parseInt(
+      stats
+        .split('\r\n')
+        .find(line => line.startsWith('keyspace_misses:'))
+        ?.split(':')[1] || '0'
+    );
+
     const hitRate = hits / (hits + misses);
-    
+
     console.log('Cache Health:', {
       usedMemory: `${(usedMemory / 1024 / 1024).toFixed(2)} MB`,
       hitRate: `${(hitRate * 100).toFixed(2)}%`,
-      totalKeys: await redis.dbsize()
+      totalKeys: await redis.dbsize(),
     });
-    
   } catch (error) {
     console.error('Cache Health Check Failed:', error);
   }
@@ -333,6 +360,7 @@ const clearCache = async (pattern: string) => {
 ### 4. External Service Integration Issues
 
 #### Issue: Cal.com Booking Failures
+
 ```bash
 # Symptoms
 - Booking confirmation emails not sent
@@ -347,6 +375,7 @@ const clearCache = async (pattern: string) => {
 ```
 
 **Resolution Process:**
+
 ```typescript
 // Test Cal.com integration
 const testCalComIntegration = async () => {
@@ -354,30 +383,29 @@ const testCalComIntegration = async () => {
     // Test API connectivity
     const response = await fetch('https://api.cal.com/v1/me', {
       headers: {
-        'Authorization': `Bearer ${process.env.CAL_COM_API_KEY}`,
-        'Content-Type': 'application/json'
-      }
+        Authorization: `Bearer ${process.env.CAL_COM_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
     });
-    
+
     if (!response.ok) {
       throw new Error(`Cal.com API Error: ${response.status}`);
     }
-    
+
     const userData = await response.json();
     console.log('Cal.com User Data:', userData);
-    
+
     // Test booking creation
     const testBooking = await createTestBooking({
       eventTypeId: 'succession_planning',
       startTime: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       attendee: {
         name: 'Test User',
-        email: 'test@example.com'
-      }
+        email: 'test@example.com',
+      },
     });
-    
+
     console.log('Test Booking:', testBooking);
-    
   } catch (error) {
     console.error('Cal.com Integration Error:', error);
   }
@@ -386,19 +414,20 @@ const testCalComIntegration = async () => {
 // Webhook verification
 const verifyWebhooks = async () => {
   const webhookUrl = 'https://familyoffices.vip/api/cal-com/webhooks';
-  
+
   // Check webhook registration
   const webhooks = await fetch('https://api.cal.com/v1/webhooks', {
     headers: {
-      'Authorization': `Bearer ${process.env.CAL_COM_API_KEY}`
-    }
+      Authorization: `Bearer ${process.env.CAL_COM_API_KEY}`,
+    },
   });
-  
+
   console.log('Registered Webhooks:', await webhooks.json());
 };
 ```
 
 #### Issue: HubSpot Sync Problems
+
 ```bash
 # Symptoms
 - Contact data not syncing
@@ -413,35 +442,35 @@ const verifyWebhooks = async () => {
 ```
 
 **HubSpot Integration Fix:**
+
 ```typescript
 // HubSpot health check
 const checkHubSpotIntegration = async () => {
   try {
     const hubspotClient = new HubSpotAPI({
-      apiKey: process.env.HUBSPOT_API_KEY
+      apiKey: process.env.HUBSPOT_API_KEY,
     });
-    
+
     // Test API connectivity
     const account = await hubspotClient.auth.oauth.accessTokensApi.get();
     console.log('HubSpot Account:', account);
-    
+
     // Check rate limit status
     const rateLimitInfo = await hubspotClient.crm.contacts.basicApi.getPage(1);
     console.log('Rate Limit Info:', {
       remaining: rateLimitInfo.headers['x-hubspot-ratelimit-remaining'],
-      max: rateLimitInfo.headers['x-hubspot-ratelimit-max']
+      max: rateLimitInfo.headers['x-hubspot-ratelimit-max'],
     });
-    
+
     // Test contact sync
     const testContact = await syncContactToHubSpot({
       email: 'test@example.com',
       firstName: 'Test',
       lastName: 'User',
-      company: 'Test Company'
+      company: 'Test Company',
     });
-    
+
     console.log('Test Contact Sync:', testContact);
-    
   } catch (error) {
     console.error('HubSpot Integration Error:', error);
   }
@@ -451,6 +480,7 @@ const checkHubSpotIntegration = async () => {
 ### 5. Korean Localization Issues
 
 #### Issue: Korean Characters Not Displaying
+
 ```bash
 # Symptoms
 - Korean text appearing as boxes or question marks
@@ -465,21 +495,28 @@ const checkHubSpotIntegration = async () => {
 ```
 
 **Font & Encoding Fix:**
+
 ```css
 /* Korean font optimization */
 @font-face {
   font-family: 'Korean Sans';
-  src: local('Noto Sans KR'),
-       local('Malgun Gothic'),
-       local('Apple SD Gothic Neo'),
-       url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR') format('woff2');
+  src:
+    local('Noto Sans KR'),
+    local('Malgun Gothic'),
+    local('Apple SD Gothic Neo'),
+    url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR') format('woff2');
   font-display: swap;
   unicode-range: U+AC00-D7AF, U+1100-11FF, U+3130-318F;
 }
 
 body {
-  font-family: 'Korean Sans', -apple-system, BlinkMacSystemFont, 
-               'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Korean Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
 }
 ```
 
@@ -489,17 +526,18 @@ SHOW client_encoding;
 SHOW server_encoding;
 
 -- Check Korean text storage
-SELECT 
-  id, 
+SELECT
+  id,
   company_name,
   length(company_name) as char_count,
   octet_length(company_name) as byte_count
-FROM profiles 
+FROM profiles
 WHERE company_name ~ '[가-힣]'
 LIMIT 5;
 ```
 
 #### Issue: Korean Date/Time Formatting
+
 ```bash
 # Symptoms
 - Incorrect timezone display
@@ -514,6 +552,7 @@ LIMIT 5;
 ```
 
 **Date/Time Localization:**
+
 ```typescript
 // Korean timezone handling
 const koreaTimezone = 'Asia/Seoul';
@@ -524,7 +563,7 @@ const formatKoreanDate = (date: Date): string => {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-    weekday: 'long'
+    weekday: 'long',
   }).format(date);
 };
 
@@ -536,16 +575,18 @@ const formatKoreanDateTime = (date: Date): string => {
     day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
-    hour12: false
+    hour12: false,
   }).format(date);
 };
 
 // Business hours validation
 const isKoreanBusinessHours = (date: Date): boolean => {
-  const koreaTime = new Date(date.toLocaleString("en-US", {timeZone: koreaTimezone}));
+  const koreaTime = new Date(
+    date.toLocaleString('en-US', { timeZone: koreaTimezone })
+  );
   const day = koreaTime.getDay(); // 0 = Sunday, 6 = Saturday
   const hour = koreaTime.getHours();
-  
+
   // Monday to Friday, 9 AM to 6 PM KST
   return day >= 1 && day <= 5 && hour >= 9 && hour < 18;
 };
@@ -554,55 +595,58 @@ const isKoreanBusinessHours = (date: Date): boolean => {
 ## Error Codes & Resolution Matrix
 
 ### HTTP Status Codes
-| Code | Meaning | Common Causes | Resolution |
-|------|---------|---------------|------------|
-| 400 | Bad Request | Invalid input data, malformed JSON | Validate request format, check required fields |
-| 401 | Unauthorized | Missing/invalid authentication token | Refresh token, re-authenticate |
-| 403 | Forbidden | Insufficient permissions | Check user roles, verify admin status |
-| 404 | Not Found | Resource doesn't exist | Verify resource ID, check database |
-| 429 | Too Many Requests | Rate limit exceeded | Implement backoff, check rate limits |
-| 500 | Internal Server Error | Server-side error | Check logs, restart services |
-| 502 | Bad Gateway | External service unavailable | Check external API status |
-| 503 | Service Unavailable | Maintenance mode, overload | Check system resources, scaling |
+
+| Code | Meaning               | Common Causes                        | Resolution                                     |
+| ---- | --------------------- | ------------------------------------ | ---------------------------------------------- |
+| 400  | Bad Request           | Invalid input data, malformed JSON   | Validate request format, check required fields |
+| 401  | Unauthorized          | Missing/invalid authentication token | Refresh token, re-authenticate                 |
+| 403  | Forbidden             | Insufficient permissions             | Check user roles, verify admin status          |
+| 404  | Not Found             | Resource doesn't exist               | Verify resource ID, check database             |
+| 429  | Too Many Requests     | Rate limit exceeded                  | Implement backoff, check rate limits           |
+| 500  | Internal Server Error | Server-side error                    | Check logs, restart services                   |
+| 502  | Bad Gateway           | External service unavailable         | Check external API status                      |
+| 503  | Service Unavailable   | Maintenance mode, overload           | Check system resources, scaling                |
 
 ### Custom Error Codes
+
 ```typescript
 enum FamilyOfficeErrorCodes {
   // Authentication Errors
   INVALID_CLERK_TOKEN = 'AUTH001',
   USER_SYNC_FAILED = 'AUTH002',
   ADMIN_ACCESS_DENIED = 'AUTH003',
-  
+
   // Financial Data Errors
   YAHOO_API_UNAVAILABLE = 'FIN001',
   ALPHA_VANTAGE_QUOTA_EXCEEDED = 'FIN002',
   KOREAN_MARKET_DATA_STALE = 'FIN003',
   INVALID_CURRENCY_PAIR = 'FIN004',
-  
+
   // Database Errors
   CONNECTION_TIMEOUT = 'DB001',
   QUERY_EXECUTION_FAILED = 'DB002',
   CONSTRAINT_VIOLATION = 'DB003',
-  
+
   // Cache Errors
   REDIS_CONNECTION_FAILED = 'CACHE001',
   CACHE_SERIALIZATION_ERROR = 'CACHE002',
-  
+
   // External Service Errors
   CALCOM_BOOKING_FAILED = 'EXT001',
   HUBSPOT_SYNC_ERROR = 'EXT002',
   EMAIL_DELIVERY_FAILED = 'EXT003',
-  
+
   // Business Logic Errors
   INVALID_SUCCESSION_SCENARIO = 'BIZ001',
   TAX_CALCULATION_ERROR = 'BIZ002',
-  PORTFOLIO_VALIDATION_FAILED = 'BIZ003'
+  PORTFOLIO_VALIDATION_FAILED = 'BIZ003',
 }
 ```
 
 ## Monitoring & Alerting
 
 ### Alert Conditions
+
 ```typescript
 interface AlertingRules {
   critical: {
@@ -626,6 +670,7 @@ interface AlertingRules {
 ```
 
 ### Log Analysis
+
 ```bash
 # Error log patterns to monitor
 grep "ERROR" /var/log/familyoffice/app.log | tail -100
@@ -644,6 +689,7 @@ grep "portfolio_updated" /var/log/familyoffice/business.log | tail -20
 ## Emergency Procedures
 
 ### Critical System Failure
+
 ```bash
 # Immediate Response Checklist
 1. Check system status page
@@ -654,11 +700,12 @@ grep "portfolio_updated" /var/log/familyoffice/business.log | tail -20
 
 # Emergency contacts
 - Technical Lead: +82-10-xxxx-xxxx
-- Infrastructure Team: +82-10-xxxx-xxxx  
+- Infrastructure Team: +82-10-xxxx-xxxx
 - Business Continuity: +82-10-xxxx-xxxx
 ```
 
 ### Data Backup & Recovery
+
 ```bash
 # Database backup verification
 pg_dump familyoffice_production > backup_$(date +%Y%m%d).sql
@@ -676,6 +723,7 @@ tar -czf config_backup_$(date +%Y%m%d).tar.gz \
 ```
 
 ### Communication Templates
+
 ```markdown
 # User Communication Template - Service Disruption
 
@@ -683,8 +731,8 @@ Subject: [FamilyOffice S] Temporary Service Disruption Notice
 
 Dear Valued Client,
 
-We are currently experiencing technical difficulties that may affect 
-your access to our platform. Our team is working to resolve this issue 
+We are currently experiencing technical difficulties that may affect
+your access to our platform. Our team is working to resolve this issue
 as quickly as possible.
 
 Current Status: [Brief description]
@@ -693,7 +741,7 @@ Affected Services: [List of affected features]
 
 We apologize for any inconvenience and will provide updates every 30 minutes.
 
-For urgent matters, please contact our support team directly at 
+For urgent matters, please contact our support team directly at
 +82-2-xxxx-xxxx.
 
 Thank you for your patience.

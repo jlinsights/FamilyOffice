@@ -9,6 +9,7 @@
 ## Core Framework
 
 ### Frontend Framework
+
 - **Next.js 16.1.1** - React framework with App Router
   - App Router architecture (not Pages Router)
   - Server Components by default
@@ -45,6 +46,7 @@
   - Gesture handling
 
 ### Icon Libraries
+
 - **Lucide React 0.525.0** - Icon set (primary)
 - **Iconify React 6.0.2** - Multi-icon framework
 
@@ -67,6 +69,7 @@
   - Row-level security (RLS)
 
 ### Database Architecture
+
 - **PostgreSQL** (via Supabase)
   - `users` table (synced from Clerk)
   - `consultations` table (booking data)
@@ -88,6 +91,7 @@
   - Cluster support
 
 ### Rate Limiting & Security
+
 - **Upstash Rate Limit 2.0.5** - API rate limiting
 - **Svix 1.67.0** - Webhook signature verification
 - **Zod 3.24.1** - Runtime validation and schema
@@ -97,12 +101,14 @@
 ## Third-Party Integrations
 
 ### Booking & Scheduling
+
 - **Cal.com Embed React 1.5.3**
   - CalComButton, CalComInline, CalComFloating widgets
   - Korean timezone support
   - Business hours configuration
 
 ### Marketing & CRM
+
 - **HubSpot** - CRM integration (via API)
   - Contact sync
   - Form submissions tracking
@@ -119,15 +125,18 @@
   - Subscription management
 
 ### Financial Data APIs
+
 - **Yahoo Finance** - Stock data (primary)
 - **Alpha Vantage** - Stock/forex data (fallback)
 - **Axios 1.10.0** - HTTP client for API calls
 
 ### Communication
+
 - **Channel Talk** - Customer support chat (via script)
 - **Kakao Business** - Korean messaging platform (via API)
 
 ### Email
+
 - **Resend 6.2.2** - Transactional email
 - **React Email 4.3.2** - Email templates
 - **@react-email/components 0.5.7** - Email component library
@@ -153,6 +162,7 @@
 ### Testing Frameworks
 
 #### E2E Testing (Primary)
+
 - **Playwright 1.56.1** - Cross-browser testing
   - 56 E2E tests
   - 8 browser/device configurations:
@@ -165,6 +175,7 @@
   - Performance testing
 
 #### Unit & Integration Testing
+
 - **Jest 29.7.0** - Test runner
   - Unit tests
   - Integration tests
@@ -176,6 +187,7 @@
   - @testing-library/user-event 14.6.1
 
 #### Performance Testing
+
 - **Artillery 2.0.26** - Load testing
   - API endpoint testing
   - Stress testing
@@ -208,37 +220,44 @@
 ## Utility Libraries
 
 ### Form Management
+
 - **React Hook Form 7.54.1** - Form state management
 - **@hookform/resolvers 3.9.1** - Validation integration
 - **Zod 3.24.1** - Schema validation
 
 ### UI Utilities
+
 - **clsx 2.1.1** - Conditional className
 - **tailwind-merge 2.5.5** - Tailwind class merging
 - **class-variance-authority 0.7.1** - Component variants
 - **cmdk 1.0.4** - Command menu component
 
 ### Date & Time
+
 - **date-fns 3.6.0** - Date utilities (Korean timezone support)
 - **react-day-picker 8.10.1** - Calendar component
 
 ### Data Visualization
+
 - **Recharts 2.15.0** - Charts and graphs
   - Stock charts
   - Portfolio visualization
 
 ### QR Code & OTP
+
 - **qrcode 1.5.4** - QR code generation
 - **otplib 12.0.1** - OTP generation/verification
 - **input-otp 1.4.1** - OTP input component
 
 ### Other Utilities
+
 - **nanoid 5.1.5** - Unique ID generation
 - **mini-svg-data-uri 1.4.4** - SVG optimization
 - **rss-parser 3.13.0** - RSS feed parsing
 - **logs-so 2.2.2** - Enhanced logging
 
 ### Google APIs
+
 - **googleapis 131.0.0** - Google API client
   - Google Analytics API
   - Google Sheets API (potential)
@@ -248,25 +267,30 @@
 ## Development Environment
 
 ### Package Manager
+
 - **npm >=8.0.0** (required)
 - **Node.js >=18.0.0** (required)
 
 ### Build Tools
+
 - **PostCSS 8.4.38** - CSS processing
 - **Autoprefixer 10.4.20** - CSS vendor prefixes
 - **cross-env 7.0.3** - Cross-platform environment variables
 
 ### Image Optimization
+
 - **Next.js Image Optimization** (built-in)
   - AVIF/WebP formats
   - Automatic responsive images
   - Lazy loading
 
 ### TypeScript Configuration
+
 - **ts-jest 29.4.0** - Jest TypeScript support
 - **openapi-types 12.1.3** - OpenAPI type definitions
 
 ### SVG Handling
+
 - **@svgr/webpack 8.1.0** - SVG to React component conversion
 
 ---
@@ -274,6 +298,7 @@
 ## Deployment & Infrastructure
 
 ### Platform
+
 - **Vercel** (primary deployment)
   - Automatic deployments from Git
   - Edge functions
@@ -281,11 +306,13 @@
   - Analytics integration
 
 ### Environment Management
+
 - **1Password** (secret management)
   - Scripts for secret sync
   - Environment variable management
 
 ### Build Configuration
+
 - **NODE_OPTIONS='--no-deprecation'** - Clean builds
 - **Turbopack** - Fast development builds
 - **Code splitting** - Optimized bundle size
@@ -295,6 +322,7 @@
 ## Removed/Deprecated Technologies
 
 ### Migrated from Cypress to Playwright (December 2024)
+
 - **Removed**: Cypress 13.18.3 and 133 related packages
 - **Reason**: Better cross-browser support, faster execution, Korean mobile testing
 - **Replaced by**: Playwright 1.56.1 with 8 browser/device configurations
@@ -304,6 +332,7 @@
 ## Performance Metrics
 
 ### Build Performance
+
 - **Build Time**: 14 seconds
 - **Static Pages**: 37 generated
 - **Bundle Size**: Main page 4.28 kB (First Load JS: 239 kB)
@@ -313,6 +342,7 @@
   - Image optimization (AVIF/WebP)
 
 ### Runtime Performance
+
 - **Caching Strategy**:
   - Memory cache: 5-minute TTL
   - Redis cache: 5-minute TTL
@@ -325,24 +355,28 @@
 ## Architecture Decisions
 
 ### Frontend
+
 - **App Router over Pages Router**: Better performance, server components
 - **Server Components by default**: Reduced JavaScript bundle
 - **Client Components**: Minimal use for interactivity
 
 ### Backend
+
 - **Supabase over custom backend**: Faster development, built-in auth/RLS
 - **Redis caching**: High performance for financial data
 - **Multi-provider fallback**: Yahoo Finance + Alpha Vantage for reliability
 
 ### Testing
+
 - **Playwright over Cypress**: Cross-browser testing, better Korean mobile support
 - **56 E2E tests over 100+ unit tests**: Focus on user workflows
 
 ### Authentication
+
 - **Clerk over custom auth**: Social login, webhook sync, admin management
 - **Webhook sync to Supabase**: Single source of truth for user data
 
 ---
 
-*Last Updated: December 24, 2024*
-*Version: 1.0 (Agent OS Installed)*
+_Last Updated: December 24, 2024_
+_Version: 1.0 (Agent OS Installed)_

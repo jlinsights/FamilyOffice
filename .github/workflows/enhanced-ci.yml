@@ -5,9 +5,9 @@ name: FamilyOffice Enhanced CI/CD
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
   workflow_dispatch: # Manual trigger
 
 concurrency:
@@ -47,7 +47,7 @@ jobs:
       - name: Lint check
         run: pnpm lint
 
-      - name: Format check  
+      - name: Format check
         run: pnpm format:check
 
   # Security and dependency analysis
@@ -205,7 +205,7 @@ jobs:
           # Check bundle size limits for financial platform
           MAIN_JS_SIZE=$(stat -c%s .next/static/chunks/pages/_app-*.js | head -1)
           MAX_SIZE=350000  # 350KB limit for main bundle
-          
+
           if [ $MAIN_JS_SIZE -gt $MAX_SIZE ]; then
             echo "❌ Main bundle size ($MAIN_JS_SIZE bytes) exceeds limit ($MAX_SIZE bytes)"
             exit 1
@@ -260,12 +260,12 @@ jobs:
             echo "❌ Build ID not found"
             exit 1
           fi
-          
+
           if [ ! -d ".next/static" ]; then
             echo "❌ Static assets not generated"
             exit 1
           fi
-          
+
           echo "✅ Build verification passed"
 
       - name: Upload build artifacts
@@ -290,14 +290,14 @@ jobs:
         run: |
           # Validate required environment variables are set
           REQUIRED_VARS="NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY CLERK_SECRET_KEY NEXT_PUBLIC_SUPABASE_URL"
-          
+
           for var in $REQUIRED_VARS; do
             if [ -z "${!var}" ]; then
               echo "❌ Missing required environment variable: $var"
               exit 1
             fi
           done
-          
+
           echo "✅ All required environment variables present"
 
       - name: Database connectivity check
@@ -319,12 +319,12 @@ jobs:
           curl -f "https://api.clerk.com/v1/health" || {
             echo "⚠️ Clerk service may be experiencing issues"
           }
-          
+
           # Check Cal.com availability
           curl -f "https://cal.com/api/health" || {
             echo "⚠️ Cal.com service may be experiencing issues"  
           }
-          
+
           echo "✅ Third-party service checks completed"
 
   # Slack notification

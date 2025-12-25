@@ -45,22 +45,22 @@ export const INTERNAL_LINK_STRATEGY = {
       title: '패밀리오피스 서비스',
       keywords: ['패밀리오피스', '자산관리서비스', '프라이빗뱅킹'],
       priority: 'high',
-      linkCount: 15 // 목표 내부링크 수
+      linkCount: 15, // 목표 내부링크 수
     },
     {
-      url: '/business-succession-strategy', 
+      url: '/business-succession-strategy',
       title: '기업승계 전략',
       keywords: ['기업승계', '가업승계', '승계계획'],
       priority: 'high',
-      linkCount: 12
+      linkCount: 12,
     },
     {
       url: '/tax-strategy',
       title: '세무최적화 전략',
       keywords: ['세무최적화', '절세전략', '상속세', '증여세'],
-      priority: 'high', 
-      linkCount: 10
-    }
+      priority: 'high',
+      linkCount: 10,
+    },
   ],
 
   // 지원 페이지 (중간 우선순위)
@@ -70,22 +70,22 @@ export const INTERNAL_LINK_STRATEGY = {
       title: '기업임원 생명보험',
       keywords: ['기업임원 생명보험', 'CEO 보험설계'],
       priority: 'medium',
-      linkCount: 8
+      linkCount: 8,
     },
     {
       url: '/key-person-insurance',
       title: '핵심인력보험',
       keywords: ['핵심인력보험', '기업 리스크 관리'],
       priority: 'medium',
-      linkCount: 6
+      linkCount: 6,
     },
     {
       url: '/program',
       title: 'CEO 교육 프로그램',
       keywords: ['CEO 교육', '자산관리 교육'],
       priority: 'medium',
-      linkCount: 8
-    }
+      linkCount: 8,
+    },
   ],
 
   // 컨텐츠 페이지 (낮은 우선순위)
@@ -95,29 +95,35 @@ export const INTERNAL_LINK_STRATEGY = {
       title: '자산관리 인사이트',
       keywords: ['자산관리 블로그', '투자 인사이트'],
       priority: 'low',
-      linkCount: 5
+      linkCount: 5,
     },
     {
       url: '/insights',
       title: '마켓 인텔리전스',
       keywords: ['마켓 인텔리전스', '시장분석'],
       priority: 'low',
-      linkCount: 4
-    }
-  ]
+      linkCount: 4,
+    },
+  ],
 };
 
 /**
  * 컨텐츠 분석
  */
-export function analyzeContent(content: string, targetKeywords: string[]): ContentAnalysis {
-  const words = content.toLowerCase().split(/\s+/).filter(word => word.length > 1);
+export function analyzeContent(
+  content: string,
+  targetKeywords: string[]
+): ContentAnalysis {
+  const words = content
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(word => word.length > 1);
   const wordCount = words.length;
 
   // 키워드 밀도 계산
   const keywordDensity: Record<string, number> = {};
   targetKeywords.forEach(keyword => {
-    const keywordCount = words.filter(word => 
+    const keywordCount = words.filter(word =>
       word.includes(keyword.toLowerCase())
     ).length;
     keywordDensity[keyword] = (keywordCount / wordCount) * 100;
@@ -127,7 +133,8 @@ export function analyzeContent(content: string, targetKeywords: string[]): Conte
   const sentences = content.split(/[.!?]+/).filter(s => s.trim().length > 0);
   const avgWordsPerSentence = wordCount / sentences.length;
   const avgSyllablesPerWord = 2.5; // 한국어 평균 음절수 근사치
-  const readabilityScore = 206.835 - (1.015 * avgWordsPerSentence) - (84.6 * avgSyllablesPerWord);
+  const readabilityScore =
+    206.835 - 1.015 * avgWordsPerSentence - 84.6 * avgSyllablesPerWord;
 
   // 제목 구조 분석
   const headingStructure = extractHeadingStructure(content);
@@ -141,7 +148,7 @@ export function analyzeContent(content: string, targetKeywords: string[]): Conte
     keywordDensity,
     readabilityScore,
     headingStructure,
-    internalLinks
+    internalLinks,
   });
 
   return {
@@ -151,7 +158,7 @@ export function analyzeContent(content: string, targetKeywords: string[]): Conte
     headingStructure,
     internalLinks,
     externalLinks,
-    recommendations
+    recommendations,
   };
 }
 
@@ -173,7 +180,7 @@ function extractHeadingStructure(content: string): HeadingStructure[] {
       level,
       text,
       id,
-      keywords
+      keywords,
     });
   }
 
@@ -183,7 +190,10 @@ function extractHeadingStructure(content: string): HeadingStructure[] {
 /**
  * 링크 추출
  */
-function extractLinks(content: string): { internalLinks: InternalLink[], externalLinks: ExternalLink[] } {
+function extractLinks(content: string): {
+  internalLinks: InternalLink[];
+  externalLinks: ExternalLink[];
+} {
   const linkRegex = /<a[^>]+href="([^"]*)"[^>]*>([^<]+)<\/a>/gi;
   const internalLinks: InternalLink[] = [];
   const externalLinks: ExternalLink[] = [];
@@ -201,7 +211,7 @@ function extractLinks(content: string): { internalLinks: InternalLink[], externa
         text,
         url,
         context,
-        relevanceScore
+        relevanceScore,
       });
     } else if (url) {
       // 외부 링크
@@ -211,7 +221,7 @@ function extractLinks(content: string): { internalLinks: InternalLink[], externa
         text,
         url,
         domain,
-        rel
+        rel,
       });
     }
   }
@@ -224,11 +234,20 @@ function extractLinks(content: string): { internalLinks: InternalLink[], externa
  */
 function extractKeywordsFromText(text: string): string[] {
   const commonKeywords = [
-    '패밀리오피스', '자산관리', '기업승계', '세무최적화', '생명보험',
-    'CEO', '투자', '절세', '상속세', '증여세', '리스크관리'
+    '패밀리오피스',
+    '자산관리',
+    '기업승계',
+    '세무최적화',
+    '생명보험',
+    'CEO',
+    '투자',
+    '절세',
+    '상속세',
+    '증여세',
+    '리스크관리',
   ];
 
-  return commonKeywords.filter(keyword => 
+  return commonKeywords.filter(keyword =>
     text.toLowerCase().includes(keyword.toLowerCase())
   );
 }
@@ -271,23 +290,35 @@ function generateRecommendations(analysis: {
 
   // 글자 수 권장사항
   if (analysis.wordCount < 300) {
-    recommendations.push('컨텐츠 길이를 300단어 이상으로 늘리세요. (현재: ' + analysis.wordCount + '단어)');
+    recommendations.push(
+      '컨텐츠 길이를 300단어 이상으로 늘리세요. (현재: ' +
+        analysis.wordCount +
+        '단어)'
+    );
   } else if (analysis.wordCount > 2000) {
-    recommendations.push('컨텐츠가 너무 깁니다. 가독성을 위해 2000단어 이하로 줄이는 것을 고려하세요.');
+    recommendations.push(
+      '컨텐츠가 너무 깁니다. 가독성을 위해 2000단어 이하로 줄이는 것을 고려하세요.'
+    );
   }
 
   // 키워드 밀도 권장사항
   Object.entries(analysis.keywordDensity).forEach(([keyword, density]) => {
     if (density < 0.5) {
-      recommendations.push(`"${keyword}" 키워드 밀도가 낮습니다. (${density.toFixed(1)}%) 더 자연스럽게 포함시키세요.`);
+      recommendations.push(
+        `"${keyword}" 키워드 밀도가 낮습니다. (${density.toFixed(1)}%) 더 자연스럽게 포함시키세요.`
+      );
     } else if (density > 3) {
-      recommendations.push(`"${keyword}" 키워드 밀도가 높습니다. (${density.toFixed(1)}%) 키워드 스터핑을 피하세요.`);
+      recommendations.push(
+        `"${keyword}" 키워드 밀도가 높습니다. (${density.toFixed(1)}%) 키워드 스터핑을 피하세요.`
+      );
     }
   });
 
   // 제목 구조 권장사항
   if (analysis.headingStructure.length === 0) {
-    recommendations.push('H1, H2, H3 태그를 사용하여 컨텐츠 구조를 개선하세요.');
+    recommendations.push(
+      'H1, H2, H3 태그를 사용하여 컨텐츠 구조를 개선하세요.'
+    );
   }
 
   const h1Count = analysis.headingStructure.filter(h => h.level === 1).length;
@@ -299,12 +330,18 @@ function generateRecommendations(analysis: {
 
   // 내부 링크 권장사항
   if (analysis.internalLinks.length < 3) {
-    recommendations.push('관련 페이지로의 내부 링크를 더 추가하세요. (현재: ' + analysis.internalLinks.length + '개)');
+    recommendations.push(
+      '관련 페이지로의 내부 링크를 더 추가하세요. (현재: ' +
+        analysis.internalLinks.length +
+        '개)'
+    );
   }
 
   // 가독성 권장사항
   if (analysis.readabilityScore < 60) {
-    recommendations.push('문장을 더 짧고 간결하게 만들어 가독성을 향상시키세요.');
+    recommendations.push(
+      '문장을 더 짧고 간결하게 만들어 가독성을 향상시키세요.'
+    );
   }
 
   return recommendations;
@@ -313,27 +350,30 @@ function generateRecommendations(analysis: {
 /**
  * 자동 내부 링크 생성
  */
-export function generateInternalLinks(content: string, currentUrl: string): string {
+export function generateInternalLinks(
+  content: string,
+  currentUrl: string
+): string {
   let optimizedContent = content;
 
   // 관련 페이지 매핑
   const linkMappings = {
-    '패밀리오피스': '/services',
-    '기업승계': '/business-succession-strategy',
-    '세무최적화': '/tax-strategy',
-    '절세전략': '/tax-strategy',
-    '자산관리': '/services',
-    '생명보험': '/corporate-life-insurance',
-    '리스크관리': '/key-person-insurance',
-    'CEO 교육': '/program'
+    패밀리오피스: '/services',
+    기업승계: '/business-succession-strategy',
+    세무최적화: '/tax-strategy',
+    절세전략: '/tax-strategy',
+    자산관리: '/services',
+    생명보험: '/corporate-life-insurance',
+    리스크관리: '/key-person-insurance',
+    'CEO 교육': '/program',
   };
 
   Object.entries(linkMappings).forEach(([keyword, url]) => {
     if (url !== currentUrl && !optimizedContent.includes(`href="${url}"`)) {
       const regex = new RegExp(`\\b${keyword}\\b`, 'g');
       let hasReplaced = false;
-      
-      optimizedContent = optimizedContent.replace(regex, (match) => {
+
+      optimizedContent = optimizedContent.replace(regex, match => {
         if (!hasReplaced) {
           hasReplaced = true;
           return `<a href="${url}" title="${keyword} 자세히 보기">${match}</a>`;
@@ -349,17 +389,22 @@ export function generateInternalLinks(content: string, currentUrl: string): stri
 /**
  * 메타 키워드 생성
  */
-export function generateMetaKeywords(content: string, targetKeywords: string[]): string[] {
+export function generateMetaKeywords(
+  content: string,
+  targetKeywords: string[]
+): string[] {
   const analysis = analyzeContent(content, targetKeywords);
-  
+
   // 키워드 밀도 기준으로 정렬
   const sortedKeywords = Object.entries(analysis.keywordDensity)
-    .sort(([,a], [,b]) => b - a)
+    .sort(([, a], [, b]) => b - a)
     .map(([keyword]) => keyword);
 
   // 상위 5개 키워드 + 타겟 키워드
-  const metaKeywords = [...new Set([...sortedKeywords.slice(0, 5), ...targetKeywords])];
-  
+  const metaKeywords = [
+    ...new Set([...sortedKeywords.slice(0, 5), ...targetKeywords]),
+  ];
+
   return metaKeywords.slice(0, 10); // 최대 10개
 }
 
@@ -367,7 +412,7 @@ const contentOptimizer = {
   INTERNAL_LINK_STRATEGY,
   analyzeContent,
   generateInternalLinks,
-  generateMetaKeywords
+  generateMetaKeywords,
 };
 
 export default contentOptimizer;

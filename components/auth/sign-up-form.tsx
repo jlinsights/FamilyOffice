@@ -1,63 +1,82 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  Building,
+  Eye,
+  EyeOff,
+  Loader2,
+  Lock,
+  Mail,
+  Phone,
+  User,
+} from 'lucide-react';
+import * as z from 'zod';
+
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
-import { createClient } from '@/lib/supabase/client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Building, Eye, EyeOff, Loader2, Lock, Mail, Phone, User } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
-const signUpSchema = z.object({
-  email: z
-    .string()
-    .min(1, '이메일을 입력해주세요.')
-    .email('올바른 이메일 형식을 입력해주세요.'),
-  password: z
-    .string()
-    .min(8, '비밀번호는 최소 8자 이상이어야 합니다.')
-    .max(50, '비밀번호는 최대 50자까지 입력 가능합니다.')
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, '대소문자, 숫자를 포함해야 합니다.'),
-  confirmPassword: z
-    .string()
-    .min(1, '비밀번호 확인을 입력해주세요.'),
-  name: z
-    .string()
-    .min(2, '이름은 최소 2자 이상이어야 합니다.')
-    .max(50, '이름은 최대 50자까지 입력 가능합니다.'),
-  companyName: z
-    .string()
-    .min(2, '회사명은 최소 2자 이상이어야 합니다.')
-    .max(100, '회사명은 최대 100자까지 입력 가능합니다.'),
-  phone: z
-    .string()
-    .min(1, '연락처를 입력해주세요.')
-    .regex(/^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/, '올바른 휴대폰 번호 형식을 입력해주세요. (예: 010-1234-5678)'),
-  agreeToTerms: z
-    .boolean()
-    .refine(val => val === true, '이용약관에 동의해주세요.'),
-  agreeToPrivacy: z
-    .boolean()
-    .refine(val => val === true, '개인정보처리방침에 동의해주세요.'),
-  agreeToMarketing: z
-    .boolean()
-    .optional()
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "비밀번호가 일치하지 않습니다.",
-  path: ["confirmPassword"],
-});
+import { createClient } from '@/lib/supabase/client';
+import { safeInsert } from '@/lib/supabase/helpers';
+
+import { useToast } from '@/hooks/use-toast';
+
+const signUpSchema = z
+  .object({
+    email: z
+      .string()
+      .min(1, '이메일을 입력해주세요.')
+      .email('올바른 이메일 형식을 입력해주세요.'),
+    password: z
+      .string()
+      .min(8, '비밀번호는 최소 8자 이상이어야 합니다.')
+      .max(50, '비밀번호는 최대 50자까지 입력 가능합니다.')
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+        '대소문자, 숫자를 포함해야 합니다.'
+      ),
+    confirmPassword: z.string().min(1, '비밀번호 확인을 입력해주세요.'),
+    name: z
+      .string()
+      .min(2, '이름은 최소 2자 이상이어야 합니다.')
+      .max(50, '이름은 최대 50자까지 입력 가능합니다.'),
+    companyName: z
+      .string()
+      .min(2, '회사명은 최소 2자 이상이어야 합니다.')
+      .max(100, '회사명은 최대 100자까지 입력 가능합니다.'),
+    phone: z
+      .string()
+      .min(1, '연락처를 입력해주세요.')
+      .regex(
+        /^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/,
+        '올바른 휴대폰 번호 형식을 입력해주세요. (예: 010-1234-5678)'
+      ),
+    agreeToTerms: z
+      .boolean()
+      .refine(val => val === true, '이용약관에 동의해주세요.'),
+    agreeToPrivacy: z
+      .boolean()
+      .refine(val => val === true, '개인정보처리방침에 동의해주세요.'),
+    agreeToMarketing: z.boolean().optional(),
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: '비밀번호가 일치하지 않습니다.',
+    path: ['confirmPassword'],
+  });
 
 type SignUpFormData = z.infer<typeof signUpSchema>;
 
@@ -66,9 +85,9 @@ interface SignUpFormProps {
   redirectTo?: string;
 }
 
-export function SignUpForm({ 
-  onSuccess, 
-  redirectTo = '/dashboard' 
+export function SignUpForm({
+  onSuccess,
+  redirectTo = '/dashboard',
 }: SignUpFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -88,13 +107,13 @@ export function SignUpForm({
       phone: '',
       agreeToTerms: false,
       agreeToPrivacy: false,
-      agreeToMarketing: false
-    }
+      agreeToMarketing: false,
+    },
   });
 
   const onSubmit = async (data: SignUpFormData) => {
     setIsLoading(true);
-    
+
     try {
       // 1. Supabase Auth에 사용자 생성
       const { data: authData, error: authError } = await supabase.auth.signUp({
@@ -105,14 +124,14 @@ export function SignUpForm({
             name: data.name,
             company_name: data.companyName || null,
             phone: data.phone || null,
-          }
-        }
+          },
+        },
       });
 
       if (authError) {
         // 에러 메시지 한국어 처리
         let errorMessage = '회원가입에 실패했습니다.';
-        
+
         if (authError.message.includes('User already registered')) {
           errorMessage = '이미 가입된 이메일입니다. 로그인을 시도해보세요.';
         } else if (authError.message.includes('Password should be at least')) {
@@ -120,7 +139,8 @@ export function SignUpForm({
         } else if (authError.message.includes('Invalid email')) {
           errorMessage = '올바른 이메일 형식을 입력해주세요.';
         } else if (authError.message.includes('Signup is disabled')) {
-          errorMessage = '현재 회원가입이 비활성화되어 있습니다. 관리자에게 문의하세요.';
+          errorMessage =
+            '현재 회원가입이 비활성화되어 있습니다. 관리자에게 문의하세요.';
         }
 
         toast({
@@ -133,19 +153,17 @@ export function SignUpForm({
 
       if (authData.user) {
         // 2. users 테이블에 추가 정보 저장
-        const { error: insertError } = await supabase
-          .from('users')
-          .insert({
-            id: authData.user.id,
-            email: data.email,
-            name: data.name,
-            company_name: data.companyName || null,
-            phone: data.phone || null,
-            provider: 'email',
-            marketing_consent: data.agreeToMarketing || false,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString()
-          });
+        const { error: insertError } = await safeInsert(supabase, 'users', {
+          id: authData.user.id,
+          email: data.email,
+          name: data.name,
+          company_name: data.companyName || null,
+          phone: data.phone || null,
+          provider: 'email',
+          marketing_consent: data.agreeToMarketing || false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        });
 
         if (insertError) {
           console.error('사용자 정보 저장 실패:', insertError);
@@ -156,11 +174,14 @@ export function SignUpForm({
         if (!authData.session) {
           toast({
             title: '회원가입 완료!',
-            description: '이메일 인증 링크를 전송했습니다. 이메일을 확인하고 인증을 완료해주세요.',
+            description:
+              '이메일 인증 링크를 전송했습니다. 이메일을 확인하고 인증을 완료해주세요.',
           });
-          
+
           // 이메일 인증 안내 페이지로 리다이렉트
-          router.push('/auth/verify-email?email=' + encodeURIComponent(data.email));
+          router.push(
+            '/auth/verify-email?email=' + encodeURIComponent(data.email)
+          );
           return;
         }
 
@@ -376,9 +397,14 @@ export function SignUpForm({
                 </FormControl>
                 <div className="space-y-1 leading-none">
                   <FormLabel className="text-sm font-medium">
-                    <a href="/terms" target="_blank" className="text-primary hover:underline">
+                    <a
+                      href="/terms"
+                      target="_blank"
+                      className="text-primary hover:underline"
+                    >
                       이용약관
-                    </a>에 동의합니다. (필수) *
+                    </a>
+                    에 동의합니다. (필수) *
                   </FormLabel>
                   <FormMessage />
                 </div>
@@ -400,9 +426,14 @@ export function SignUpForm({
                 </FormControl>
                 <div className="space-y-1 leading-none">
                   <FormLabel className="text-sm font-medium">
-                    <a href="/privacy" target="_blank" className="text-primary hover:underline">
+                    <a
+                      href="/privacy"
+                      target="_blank"
+                      className="text-primary hover:underline"
+                    >
                       개인정보처리방침
-                    </a>에 동의합니다. (필수) *
+                    </a>
+                    에 동의합니다. (필수) *
                   </FormLabel>
                   <FormMessage />
                 </div>
@@ -427,7 +458,8 @@ export function SignUpForm({
                     마케팅 정보 수신에 동의합니다. (선택)
                   </FormLabel>
                   <p className="text-xs text-muted-foreground">
-                    프리미엄 콘텐츠, 세미나 정보 등을 이메일로 받아보실 수 있습니다.
+                    프리미엄 콘텐츠, 세미나 정보 등을 이메일로 받아보실 수
+                    있습니다.
                   </p>
                 </div>
               </FormItem>
@@ -435,12 +467,7 @@ export function SignUpForm({
           />
         </div>
 
-        <Button
-          type="submit"
-          className="w-full"
-          size="lg"
-          disabled={isLoading}
-        >
+        <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

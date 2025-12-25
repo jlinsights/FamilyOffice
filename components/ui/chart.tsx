@@ -4,8 +4,8 @@ import * as RechartsPrimitive from 'recharts';
 
 import * as React from 'react';
 
-import { cn } from '@/lib/utils';
 import { sanitizeHTMLContent } from '@/lib/security/html-sanitizer';
+import { cn } from '@/lib/utils';
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const;
@@ -30,17 +30,29 @@ function sanitizeCSSColor(color: string): string | null {
 
   // Common safe named colors
   const namedColors = [
-    'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown',
-    'black', 'white', 'gray', 'grey', 'transparent', 'currentColor'
+    'red',
+    'blue',
+    'green',
+    'yellow',
+    'orange',
+    'purple',
+    'pink',
+    'brown',
+    'black',
+    'white',
+    'gray',
+    'grey',
+    'transparent',
+    'currentColor',
   ];
 
   const trimmedColor = color.trim();
-  
+
   // Check against patterns
   if (colorPatterns.some(pattern => pattern.test(trimmedColor))) {
     return trimmedColor;
   }
-  
+
   // Check against named colors
   if (namedColors.includes(trimmedColor.toLowerCase())) {
     return trimmedColor;
@@ -61,7 +73,7 @@ function sanitizeCSSPropertyName(name: string): string | null {
 
   // CSS custom property names: --[a-zA-Z0-9_-]+
   const validPattern = /^[a-zA-Z0-9_-]+$/;
-  
+
   if (validPattern.test(name)) {
     return name;
   }
@@ -154,9 +166,9 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
             const color =
               itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
               itemConfig.color;
-            
+
             if (!color) return null;
-            
+
             const sanitizedColor = sanitizeCSSColor(color);
             if (!sanitizedColor) {
               console.warn(`Invalid color value for ${key}: ${color}`);
@@ -172,7 +184,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
 
         // Sanitize chart ID (should only contain safe characters)
         const sanitizedId = id.replace(/[^a-zA-Z0-9_-]/g, '');
-        
+
         return `
 ${prefix} [data-chart="${sanitizedId}"] {
 ${cssRules}
@@ -183,7 +195,7 @@ ${cssRules}
   };
 
   const secureCSS = generateSecureCSS();
-  
+
   if (!secureCSS) {
     return null;
   }

@@ -1,7 +1,12 @@
 'use client';
 
 import Script from 'next/script';
-import { createAnalyticsScript, createGTMScript, isAllowedScriptSource } from '@/lib/security/html-sanitizer';
+
+import {
+  createAnalyticsScript,
+  createGTMScript,
+  isAllowedScriptSource,
+} from '@/lib/security/html-sanitizer';
 import { createLogger, securityLogger } from '@/lib/security/secure-logger';
 
 // Extract environment variables at module level for client components
@@ -18,9 +23,11 @@ export function Analytics() {
   try {
     // Validate script sources and create secure script content
     const gtmSrc = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    
+
     if (!isAllowedScriptSource(gtmSrc)) {
-      securityLogger.security('Blocked script from unauthorized source', { source: gtmSrc });
+      securityLogger.security('Blocked script from unauthorized source', {
+        source: gtmSrc,
+      });
       return null;
     }
 
@@ -30,10 +37,7 @@ export function Analytics() {
     return (
       <>
         {/* Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src={gtmSrc}
-        />
+        <Script strategy="afterInteractive" src={gtmSrc} />
         <Script
           id="google-analytics"
           strategy="afterInteractive"

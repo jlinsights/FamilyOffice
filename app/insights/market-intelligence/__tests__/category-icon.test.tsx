@@ -1,43 +1,68 @@
 import { render, screen } from '@testing-library/react';
+
 import CategoryIcon from '../category-icon';
 
 // Mock lucide-react icons
 jest.mock('lucide-react', () => ({
   Target: (props: { className?: string }) => (
-    <svg data-testid="target-icon" className={props.className}>Target</svg>
+    <svg data-testid="target-icon" className={props.className}>
+      Target
+    </svg>
   ),
   BarChart3: (props: { className?: string }) => (
-    <svg data-testid="barchart3-icon" className={props.className}>BarChart3</svg>
+    <svg data-testid="barchart3-icon" className={props.className}>
+      BarChart3
+    </svg>
   ),
   TrendingUp: (props: { className?: string }) => (
-    <svg data-testid="trendingup-icon" className={props.className}>TrendingUp</svg>
+    <svg data-testid="trendingup-icon" className={props.className}>
+      TrendingUp
+    </svg>
   ),
   FileText: (props: { className?: string }) => (
-    <svg data-testid="filetext-icon" className={props.className}>FileText</svg>
+    <svg data-testid="filetext-icon" className={props.className}>
+      FileText
+    </svg>
   ),
   Users: (props: { className?: string }) => (
-    <svg data-testid="users-icon" className={props.className}>Users</svg>
+    <svg data-testid="users-icon" className={props.className}>
+      Users
+    </svg>
   ),
   Cpu: (props: { className?: string }) => (
-    <svg data-testid="cpu-icon" className={props.className}>Cpu</svg>
+    <svg data-testid="cpu-icon" className={props.className}>
+      Cpu
+    </svg>
   ),
   Building: (props: { className?: string }) => (
-    <svg data-testid="building-icon" className={props.className}>Building</svg>
+    <svg data-testid="building-icon" className={props.className}>
+      Building
+    </svg>
   ),
   Scale: (props: { className?: string }) => (
-    <svg data-testid="scale-icon" className={props.className}>Scale</svg>
+    <svg data-testid="scale-icon" className={props.className}>
+      Scale
+    </svg>
   ),
   Globe: (props: { className?: string }) => (
-    <svg data-testid="globe-icon" className={props.className}>Globe</svg>
+    <svg data-testid="globe-icon" className={props.className}>
+      Globe
+    </svg>
   ),
   Briefcase: (props: { className?: string }) => (
-    <svg data-testid="briefcase-icon" className={props.className}>Briefcase</svg>
+    <svg data-testid="briefcase-icon" className={props.className}>
+      Briefcase
+    </svg>
   ),
   Play: (props: { className?: string }) => (
-    <svg data-testid="play-icon" className={props.className}>Play</svg>
+    <svg data-testid="play-icon" className={props.className}>
+      Play
+    </svg>
   ),
   Headphones: (props: { className?: string }) => (
-    <svg data-testid="headphones-icon" className={props.className}>Headphones</svg>
+    <svg data-testid="headphones-icon" className={props.className}>
+      Headphones
+    </svg>
   ),
 }));
 
@@ -61,7 +86,7 @@ describe('CategoryIcon', () => {
     supportedIcons.forEach(({ name, testId }) => {
       it(`renders ${name} icon correctly`, () => {
         render(<CategoryIcon iconName={name} />);
-        
+
         const icon = screen.getByTestId(testId);
         expect(icon).toBeInTheDocument();
         expect(icon).toHaveClass('h-5 w-5 text-primary');
@@ -70,16 +95,26 @@ describe('CategoryIcon', () => {
 
     it('renders all blog category icons', () => {
       const blogCategoryIcons = [
-        'Target', 'BarChart3', 'TrendingUp', 'FileText', 
-        'Users', 'Cpu', 'Building', 'Scale', 'Globe', 'Briefcase'
+        'Target',
+        'BarChart3',
+        'TrendingUp',
+        'FileText',
+        'Users',
+        'Cpu',
+        'Building',
+        'Scale',
+        'Globe',
+        'Briefcase',
       ];
 
       blogCategoryIcons.forEach(iconName => {
         const { unmount } = render(<CategoryIcon iconName={iconName} />);
-        
-        const iconElement = screen.getByTestId(`${iconName.toLowerCase()}-icon`);
+
+        const iconElement = screen.getByTestId(
+          `${iconName.toLowerCase()}-icon`
+        );
         expect(iconElement).toBeInTheDocument();
-        
+
         unmount();
       });
     });
@@ -89,10 +124,12 @@ describe('CategoryIcon', () => {
 
       mediaIcons.forEach(iconName => {
         const { unmount } = render(<CategoryIcon iconName={iconName} />);
-        
-        const iconElement = screen.getByTestId(`${iconName.toLowerCase()}-icon`);
+
+        const iconElement = screen.getByTestId(
+          `${iconName.toLowerCase()}-icon`
+        );
         expect(iconElement).toBeInTheDocument();
-        
+
         unmount();
       });
     });
@@ -101,7 +138,7 @@ describe('CategoryIcon', () => {
   describe('Fallback Behavior', () => {
     it('renders fallback div for unknown icon name', () => {
       const { container } = render(<CategoryIcon iconName="UnknownIcon" />);
-      
+
       // Should render a div with the default className
       const fallbackDiv = container.querySelector('.h-5.w-5.text-primary');
       expect(fallbackDiv).toBeInTheDocument();
@@ -110,7 +147,7 @@ describe('CategoryIcon', () => {
 
     it('renders fallback div for empty icon name', () => {
       const { container } = render(<CategoryIcon iconName="" />);
-      
+
       const fallbackDiv = container.querySelector('.h-5.w-5.text-primary');
       expect(fallbackDiv).toBeInTheDocument();
       expect(fallbackDiv?.tagName).toBe('DIV');
@@ -118,15 +155,17 @@ describe('CategoryIcon', () => {
 
     it('renders fallback div for null icon name', () => {
       const { container } = render(<CategoryIcon iconName={null as any} />);
-      
+
       const fallbackDiv = container.querySelector('.h-5.w-5.text-primary');
       expect(fallbackDiv).toBeInTheDocument();
       expect(fallbackDiv?.tagName).toBe('DIV');
     });
 
     it('renders fallback div for undefined icon name', () => {
-      const { container } = render(<CategoryIcon iconName={undefined as any} />);
-      
+      const { container } = render(
+        <CategoryIcon iconName={undefined as any} />
+      );
+
       const fallbackDiv = container.querySelector('.h-5.w-5.text-primary');
       expect(fallbackDiv).toBeInTheDocument();
       expect(fallbackDiv?.tagName).toBe('DIV');
@@ -135,33 +174,38 @@ describe('CategoryIcon', () => {
 
   describe('Custom Styling', () => {
     it('applies custom className', () => {
-      render(<CategoryIcon iconName="Target" className="h-6 w-6 text-blue-500" />);
-      
+      render(
+        <CategoryIcon iconName="Target" className="h-6 w-6 text-blue-500" />
+      );
+
       const icon = screen.getByTestId('target-icon');
       expect(icon).toHaveClass('h-6 w-6 text-blue-500');
     });
 
     it('applies custom className to different icons', () => {
       const customClass = 'h-8 w-8 text-red-600';
-      
+
       render(<CategoryIcon iconName="BarChart3" className={customClass} />);
-      
+
       const icon = screen.getByTestId('barchart3-icon');
       expect(icon).toHaveClass('h-8 w-8 text-red-600');
     });
 
     it('uses default className when not provided', () => {
       render(<CategoryIcon iconName="FileText" />);
-      
+
       const icon = screen.getByTestId('filetext-icon');
       expect(icon).toHaveClass('h-5 w-5 text-primary');
     });
 
     it('applies custom className to fallback div', () => {
       const { container } = render(
-        <CategoryIcon iconName="UnknownIcon" className="h-10 w-10 text-gray-400" />
+        <CategoryIcon
+          iconName="UnknownIcon"
+          className="h-10 w-10 text-gray-400"
+        />
       );
-      
+
       const fallbackDiv = container.querySelector('.h-10.w-10.text-gray-400');
       expect(fallbackDiv).toBeInTheDocument();
     });
@@ -175,7 +219,7 @@ describe('CategoryIcon', () => {
 
     it('does not match different cases', () => {
       const { container } = render(<CategoryIcon iconName="target" />);
-      
+
       // Should render fallback since 'target' !== 'Target'
       const fallbackDiv = container.querySelector('.h-5.w-5.text-primary');
       expect(fallbackDiv).toBeInTheDocument();
@@ -184,7 +228,7 @@ describe('CategoryIcon', () => {
 
     it('does not match mixed cases', () => {
       const { container } = render(<CategoryIcon iconName="tARGET" />);
-      
+
       const fallbackDiv = container.querySelector('.h-5.w-5.text-primary');
       expect(fallbackDiv).toBeInTheDocument();
       expect(fallbackDiv?.tagName).toBe('DIV');
@@ -194,12 +238,12 @@ describe('CategoryIcon', () => {
   describe('Performance and Lazy Loading', () => {
     it('renders icons without delay', () => {
       const startTime = performance.now();
-      
+
       render(<CategoryIcon iconName="Globe" />);
-      
+
       const endTime = performance.now();
       const renderTime = endTime - startTime;
-      
+
       // Should render very quickly (under 50ms)
       expect(renderTime).toBeLessThan(50);
       expect(screen.getByTestId('globe-icon')).toBeInTheDocument();
@@ -207,7 +251,7 @@ describe('CategoryIcon', () => {
 
     it('handles multiple icons efficiently', () => {
       const icons = ['Target', 'BarChart3', 'TrendingUp', 'FileText', 'Users'];
-      
+
       const { container } = render(
         <div>
           {icons.map((iconName, index) => (
@@ -215,7 +259,7 @@ describe('CategoryIcon', () => {
           ))}
         </div>
       );
-      
+
       // All icons should render
       icons.forEach(iconName => {
         const icon = screen.getByTestId(`${iconName.toLowerCase()}-icon`);
@@ -227,17 +271,17 @@ describe('CategoryIcon', () => {
   describe('Accessibility', () => {
     it('renders semantic SVG elements', () => {
       render(<CategoryIcon iconName="Users" />);
-      
+
       const icon = screen.getByTestId('users-icon');
       expect(icon.tagName).toBe('svg');
     });
 
     it('maintains icon semantics for screen readers', () => {
       render(<CategoryIcon iconName="Scale" />);
-      
+
       const icon = screen.getByTestId('scale-icon');
       expect(icon).toBeInTheDocument();
-      
+
       // SVG should be readable by screen readers
       expect(icon.tagName).toBe('svg');
     });
@@ -248,10 +292,10 @@ describe('CategoryIcon', () => {
           <CategoryIcon iconName="Briefcase" />
         </button>
       );
-      
+
       const button = container.querySelector('button');
       const icon = screen.getByTestId('briefcase-icon');
-      
+
       expect(button).toContainElement(icon);
     });
   });
@@ -273,10 +317,10 @@ describe('CategoryIcon', () => {
 
       blogCategories.forEach(({ icon }) => {
         const { unmount } = render(<CategoryIcon iconName={icon} />);
-        
+
         const iconElement = screen.getByTestId(`${icon.toLowerCase()}-icon`);
         expect(iconElement).toBeInTheDocument();
-        
+
         unmount();
       });
     });
@@ -291,10 +335,10 @@ describe('CategoryIcon', () => {
 
       mediaControls.forEach(({ icon }) => {
         const { unmount } = render(<CategoryIcon iconName={icon} />);
-        
+
         const iconElement = screen.getByTestId(`${icon.toLowerCase()}-icon`);
         expect(iconElement).toBeInTheDocument();
-        
+
         unmount();
       });
     });

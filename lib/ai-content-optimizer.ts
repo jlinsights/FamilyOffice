@@ -1,8 +1,8 @@
 // AI Content Optimization for Week 3 rollout
-import { isFeatureEnabled } from './feature-flags';
 import { aiCacheOperations } from './enhanced-seo-cache';
-import { dynamicSEOImports } from './seo-bundle-optimizer';
+import { isFeatureEnabled } from './feature-flags';
 import { performanceMonitor } from './performance-monitor';
+import { dynamicSEOImports } from './seo-bundle-optimizer';
 
 interface ContentOptimizationOptions {
   target: 'ceo' | 'entrepreneur' | 'asset-manager' | 'general';
@@ -27,7 +27,10 @@ class AIContentOptimizer {
   // Optimize content for Korean CEO/entrepreneur audience
   async optimizeForKoreanCEOs(
     content: string,
-    options: ContentOptimizationOptions = { target: 'ceo', tone: 'professional' }
+    options: ContentOptimizationOptions = {
+      target: 'ceo',
+      tone: 'professional',
+    }
   ): Promise<OptimizedContent> {
     if (!isFeatureEnabled('enableContentOptimization')) {
       return this.getBasicOptimization(content);
@@ -44,7 +47,11 @@ class AIContentOptimizer {
   async optimizeBlogContent(
     title: string,
     content: string,
-    category: 'asset-management' | 'succession-planning' | 'tax-strategy' | 'education'
+    category:
+      | 'asset-management'
+      | 'succession-planning'
+      | 'tax-strategy'
+      | 'education'
   ): Promise<OptimizedContent> {
     if (!isFeatureEnabled('enableContentOptimization')) {
       return this.getBasicOptimization(content);
@@ -55,7 +62,7 @@ class AIContentOptimizer {
       tone: 'educational',
       keywords: this.getCategoryKeywords(category),
       maxLength: 2000,
-      includeCallToAction: true
+      includeCallToAction: true,
     };
 
     return await aiCacheOperations.optimizeContent(
@@ -69,7 +76,11 @@ class AIContentOptimizer {
   async optimizeServiceContent(
     serviceName: string,
     content: string,
-    targetIndustry: 'manufacturing' | 'construction' | 'it-venture' | 'family-corp'
+    targetIndustry:
+      | 'manufacturing'
+      | 'construction'
+      | 'it-venture'
+      | 'family-corp'
   ): Promise<OptimizedContent> {
     if (!isFeatureEnabled('enableContentOptimization')) {
       return this.getBasicOptimization(content);
@@ -79,7 +90,7 @@ class AIContentOptimizer {
       target: 'ceo',
       tone: 'consultative',
       keywords: this.getIndustryKeywords(targetIndustry),
-      includeCallToAction: true
+      includeCallToAction: true,
     };
 
     return await aiCacheOperations.optimizeContent(
@@ -98,7 +109,7 @@ class AIContentOptimizer {
       'ai_content_optimization',
       async () => {
         const contentOptimizer = await dynamicSEOImports.loadContentOptimizer();
-        
+
         if (!contentOptimizer) {
           throw new Error('Content optimizer failed to load');
         }
@@ -119,7 +130,7 @@ class AIContentOptimizer {
           readabilityScore: result.analysis?.metrics?.readabilityScore || 80,
           targetAudienceMatch: 90, // Not available in the API
           suggestedKeywords: [], // Would need to extract from strategy
-          callToAction: result.recommendations?.immediate?.[0] || undefined
+          callToAction: result.recommendations?.immediate?.[0] || undefined,
         };
       },
       { operation: 'ai_content_optimization', target: options.target }
@@ -131,12 +142,14 @@ class AIContentOptimizer {
     return {
       originalText: content,
       optimizedText: content,
-      improvements: ['AI 콘텐츠 최적화가 비활성화되어 기본 콘텐츠를 반환합니다.'],
+      improvements: [
+        'AI 콘텐츠 최적화가 비활성화되어 기본 콘텐츠를 반환합니다.',
+      ],
       seoScore: 75,
       readabilityScore: 75,
       targetAudienceMatch: 75,
       suggestedKeywords: ['패밀리오피스', '자산관리', '가업승계'],
-      callToAction: '전문가와 상담하기'
+      callToAction: '전문가와 상담하기',
     };
   }
 
@@ -148,22 +161,22 @@ class AIContentOptimizer {
         interests: ['경영전략', '세무최적화', '가업승계'],
         painPoints: ['세금부담', '승계준비', '리스크관리'],
         preferredTone: 'authoritative',
-        decisionStyle: 'data-driven'
+        decisionStyle: 'data-driven',
       },
       entrepreneur: {
         demographics: '성장기업 창업자, 35-55세',
         interests: ['사업확장', '자산관리', '투자전략'],
         painPoints: ['자금조달', '위험관리', '성장전략'],
         preferredTone: 'consultative',
-        decisionStyle: 'opportunity-focused'
+        decisionStyle: 'opportunity-focused',
       },
       'asset-manager': {
         demographics: '고액자산가, 45-70세',
         interests: ['자산보전', '상속계획', '세무절약'],
         painPoints: ['상속세', '자산분산', '수익률'],
         preferredTone: 'professional',
-        decisionStyle: 'conservative'
-      }
+        decisionStyle: 'conservative',
+      },
     };
 
     return profiles[target] || profiles.ceo;
@@ -173,17 +186,27 @@ class AIContentOptimizer {
   private getCategoryKeywords(category: string): string[] {
     const keywordMap: Record<string, string[]> = {
       'asset-management': [
-        '자산관리', '포트폴리오', '투자전략', '리스크관리', '수익률최적화'
+        '자산관리',
+        '포트폴리오',
+        '투자전략',
+        '리스크관리',
+        '수익률최적화',
       ],
       'succession-planning': [
-        '가업승계', '승계세무', '경영권이전', '차세대교육', '승계준비'
+        '가업승계',
+        '승계세무',
+        '경영권이전',
+        '차세대교육',
+        '승계준비',
       ],
       'tax-strategy': [
-        '세무최적화', '절세전략', '법인세절약', '증여세', '상속세'
+        '세무최적화',
+        '절세전략',
+        '법인세절약',
+        '증여세',
+        '상속세',
       ],
-      'education': [
-        'CEO교육', '자산관리교육', '승계교육', '세미나', '전문과정'
-      ]
+      education: ['CEO교육', '자산관리교육', '승계교육', '세미나', '전문과정'],
     };
 
     return keywordMap[category] || keywordMap['asset-management'] || [];
@@ -192,18 +215,28 @@ class AIContentOptimizer {
   // Industry-specific keywords
   private getIndustryKeywords(industry: string): string[] {
     const industryMap: Record<string, string[]> = {
-      manufacturing: [
-        '제조업', '생산관리', '공장운영', '품질관리', '산업안전'
-      ],
+      manufacturing: ['제조업', '생산관리', '공장운영', '품질관리', '산업안전'],
       construction: [
-        '건설업', '부동산개발', '프로젝트관리', '건축허가', '안전관리'
+        '건설업',
+        '부동산개발',
+        '프로젝트관리',
+        '건축허가',
+        '안전관리',
       ],
       'it-venture': [
-        'IT기업', '벤처투자', '기술창업', '디지털전환', '혁신경영'
+        'IT기업',
+        '벤처투자',
+        '기술창업',
+        '디지털전환',
+        '혁신경영',
       ],
       'family-corp': [
-        '가족기업', '동족경영', '지배구조', '가족헌법', '세대교체'
-      ]
+        '가족기업',
+        '동족경영',
+        '지배구조',
+        '가족헌법',
+        '세대교체',
+      ],
     };
 
     return industryMap[industry] || industryMap['manufacturing'] || [];
@@ -226,7 +259,7 @@ export const contentOptimizationHelpers = {
       target: 'ceo',
       tone: 'authoritative',
       keywords: ['패밀리오피스', '자산관리', '가업승계', '세무최적화'],
-      includeCallToAction: true
+      includeCallToAction: true,
     });
   },
 
@@ -234,18 +267,34 @@ export const contentOptimizationHelpers = {
   async optimizeServiceDescription(
     serviceName: string,
     description: string,
-    industry: 'manufacturing' | 'construction' | 'it-venture' | 'family-corp' = 'manufacturing'
+    industry:
+      | 'manufacturing'
+      | 'construction'
+      | 'it-venture'
+      | 'family-corp' = 'manufacturing'
   ): Promise<OptimizedContent> {
-    return await aiContentOptimizer.optimizeServiceContent(serviceName, description, industry);
+    return await aiContentOptimizer.optimizeServiceContent(
+      serviceName,
+      description,
+      industry
+    );
   },
 
   // Optimize blog posts
   async optimizeBlogPost(
     title: string,
     content: string,
-    category: 'asset-management' | 'succession-planning' | 'tax-strategy' | 'education' = 'asset-management'
+    category:
+      | 'asset-management'
+      | 'succession-planning'
+      | 'tax-strategy'
+      | 'education' = 'asset-management'
   ): Promise<OptimizedContent> {
-    return await aiContentOptimizer.optimizeBlogContent(title, content, category);
+    return await aiContentOptimizer.optimizeBlogContent(
+      title,
+      content,
+      category
+    );
   },
 
   // Optimize newsletter content
@@ -254,7 +303,7 @@ export const contentOptimizationHelpers = {
       target: 'entrepreneur',
       tone: 'educational',
       maxLength: 1500,
-      includeCallToAction: true
+      includeCallToAction: true,
     });
-  }
+  },
 };

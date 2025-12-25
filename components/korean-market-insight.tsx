@@ -20,6 +20,10 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+/**
+ * 한국 시장 인사이트 컴포넌트 - FamilyOffice S 특화 기능
+ */
+
 // 금융 API 제거에 따라 실시간 카드 의존성 제거
 
 /**
@@ -289,11 +293,22 @@ export default function KoreanMarketInsight({
                 </CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[{s:'005930',p:74500,c:1.2},{s:'000660',p:153000,c:-0.8},{s:'035420',p:183000,c:0.4}].map((it,idx)=> (
+                {[
+                  { s: '005930', p: 74500, c: 1.2 },
+                  { s: '000660', p: 153000, c: -0.8 },
+                  { s: '035420', p: 183000, c: 0.4 },
+                ].map((it, idx) => (
                   <div key={idx} className="rounded-lg border p-3 bg-card/60">
                     <div className="text-sm text-muted-foreground">{it.s}</div>
-                    <div className="text-xl font-bold">{it.p.toLocaleString()}원</div>
-                    <div className={`text-sm ${it.c>0?'text-green-600':'text-red-600'}`}>{it.c>0?'+':''}{it.c}%</div>
+                    <div className="text-xl font-bold">
+                      {it.p.toLocaleString()}원
+                    </div>
+                    <div
+                      className={`text-sm ${it.c > 0 ? 'text-green-600' : 'text-red-600'}`}
+                    >
+                      {it.c > 0 ? '+' : ''}
+                      {it.c}%
+                    </div>
                   </div>
                 ))}
               </CardContent>
@@ -308,11 +323,22 @@ export default function KoreanMarketInsight({
                 </CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[{p:'USD/KRW',r:1361.5,c:0.2},{p:'EUR/KRW',r:1458.3,c:-0.1},{p:'JPY/KRW',r:9.12,c:0.05}].map((fx,idx)=> (
+                {[
+                  { p: 'USD/KRW', r: 1361.5, c: 0.2 },
+                  { p: 'EUR/KRW', r: 1458.3, c: -0.1 },
+                  { p: 'JPY/KRW', r: 9.12, c: 0.05 },
+                ].map((fx, idx) => (
                   <div key={idx} className="rounded-lg border p-3 bg-card/60">
                     <div className="text-sm text-muted-foreground">{fx.p}</div>
-                    <div className="text-xl font-bold">{fx.r.toLocaleString()}</div>
-                    <div className={`text-sm ${fx.c>0?'text-green-600':'text-red-600'}`}>{fx.c>0?'+':''}{fx.c}%</div>
+                    <div className="text-xl font-bold">
+                      {fx.r.toLocaleString()}
+                    </div>
+                    <div
+                      className={`text-sm ${fx.c > 0 ? 'text-green-600' : 'text-red-600'}`}
+                    >
+                      {fx.c > 0 ? '+' : ''}
+                      {fx.c}%
+                    </div>
                   </div>
                 ))}
               </CardContent>
@@ -450,8 +476,12 @@ export default function KoreanMarketInsight({
                     AI 수요 증가로 HBM 관련주 주목
                   </p>
                   <div className="flex gap-2 mt-2">
-                    <Badge variant="ghost" size="xs">삼성전자</Badge>
-                    <Badge variant="ghost" size="xs">SK하이닉스</Badge>
+                    <Badge variant="ghost" size="xs">
+                      삼성전자
+                    </Badge>
+                    <Badge variant="ghost" size="xs">
+                      SK하이닉스
+                    </Badge>
                   </div>
                 </div>
 
@@ -461,8 +491,12 @@ export default function KoreanMarketInsight({
                     전기차 수요 확대 지속
                   </p>
                   <div className="flex gap-2 mt-2">
-                    <Badge variant="ghost" size="xs">LG화학</Badge>
-                    <Badge variant="ghost" size="xs">삼성SDI</Badge>
+                    <Badge variant="ghost" size="xs">
+                      LG화학
+                    </Badge>
+                    <Badge variant="ghost" size="xs">
+                      삼성SDI
+                    </Badge>
                   </div>
                 </div>
               </CardContent>

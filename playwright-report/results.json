@@ -18,10 +18,7 @@
     },
     "preserveOutput": "always",
     "reporter": [
-      [
-        "html",
-        null
-      ],
+      ["html", null],
       [
         "json",
         {
@@ -54,16 +51,8 @@
         "id": "chromium",
         "name": "chromium",
         "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
-        "testIgnore": [
-          "**/node_modules/**",
-          "**/.next/**",
-          "**/cypress/**"
-        ],
-        "testMatch": [
-          "**/*.spec.ts",
-          "**/*.test.ts",
-          "**/*.e2e.ts"
-        ],
+        "testIgnore": ["**/node_modules/**", "**/.next/**", "**/cypress/**"],
+        "testMatch": ["**/*.spec.ts", "**/*.test.ts", "**/*.e2e.ts"],
         "timeout": 60000
       },
       {
@@ -79,16 +68,8 @@
         "id": "firefox",
         "name": "firefox",
         "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
-        "testIgnore": [
-          "**/node_modules/**",
-          "**/.next/**",
-          "**/cypress/**"
-        ],
-        "testMatch": [
-          "**/*.spec.ts",
-          "**/*.test.ts",
-          "**/*.e2e.ts"
-        ],
+        "testIgnore": ["**/node_modules/**", "**/.next/**", "**/cypress/**"],
+        "testMatch": ["**/*.spec.ts", "**/*.test.ts", "**/*.e2e.ts"],
         "timeout": 60000
       },
       {
@@ -104,16 +85,8 @@
         "id": "webkit",
         "name": "webkit",
         "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
-        "testIgnore": [
-          "**/node_modules/**",
-          "**/.next/**",
-          "**/cypress/**"
-        ],
-        "testMatch": [
-          "**/*.spec.ts",
-          "**/*.test.ts",
-          "**/*.e2e.ts"
-        ],
+        "testIgnore": ["**/node_modules/**", "**/.next/**", "**/cypress/**"],
+        "testMatch": ["**/*.spec.ts", "**/*.test.ts", "**/*.e2e.ts"],
         "timeout": 60000
       },
       {
@@ -129,16 +102,8 @@
         "id": "mobile-chrome",
         "name": "mobile-chrome",
         "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
-        "testIgnore": [
-          "**/node_modules/**",
-          "**/.next/**",
-          "**/cypress/**"
-        ],
-        "testMatch": [
-          "**/*.spec.ts",
-          "**/*.test.ts",
-          "**/*.e2e.ts"
-        ],
+        "testIgnore": ["**/node_modules/**", "**/.next/**", "**/cypress/**"],
+        "testMatch": ["**/*.spec.ts", "**/*.test.ts", "**/*.e2e.ts"],
         "timeout": 60000
       },
       {
@@ -154,16 +119,8 @@
         "id": "mobile-safari",
         "name": "mobile-safari",
         "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
-        "testIgnore": [
-          "**/node_modules/**",
-          "**/.next/**",
-          "**/cypress/**"
-        ],
-        "testMatch": [
-          "**/*.spec.ts",
-          "**/*.test.ts",
-          "**/*.e2e.ts"
-        ],
+        "testIgnore": ["**/node_modules/**", "**/.next/**", "**/cypress/**"],
+        "testMatch": ["**/*.spec.ts", "**/*.test.ts", "**/*.e2e.ts"],
         "timeout": 60000
       },
       {
@@ -179,16 +136,8 @@
         "id": "financial-desktop",
         "name": "financial-desktop",
         "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
-        "testIgnore": [
-          "**/node_modules/**",
-          "**/.next/**",
-          "**/cypress/**"
-        ],
-        "testMatch": [
-          "**/*.spec.ts",
-          "**/*.test.ts",
-          "**/*.e2e.ts"
-        ],
+        "testIgnore": ["**/node_modules/**", "**/.next/**", "**/cypress/**"],
+        "testMatch": ["**/*.spec.ts", "**/*.test.ts", "**/*.e2e.ts"],
         "timeout": 60000
       },
       {
@@ -204,16 +153,8 @@
         "id": "financial-mobile",
         "name": "financial-mobile",
         "testDir": "/Users/jaehong/Developer/Projects/FamilyOffice/tests/e2e",
-        "testIgnore": [
-          "**/node_modules/**",
-          "**/.next/**",
-          "**/cypress/**"
-        ],
-        "testMatch": [
-          "**/*.spec.ts",
-          "**/*.test.ts",
-          "**/*.e2e.ts"
-        ],
+        "testIgnore": ["**/node_modules/**", "**/.next/**", "**/cypress/**"],
+        "testMatch": ["**/*.spec.ts", "**/*.test.ts", "**/*.e2e.ts"],
         "timeout": 60000
       }
     ],

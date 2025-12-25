@@ -1,18 +1,18 @@
 import {
-    ArrowRight,
-    Building2,
-    Calculator,
-    Crown,
-    Shield,
-    Target,
-    TrendingUp,
-    Users,
-    type LucideIcon
+  ArrowRight,
+  Building2,
+  Calculator,
+  Crown,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
+  type LucideIcon,
 } from 'lucide-react';
 
 /**
  * Bento Grid Service Configuration
- * 
+ *
  * Size variants:
  * - 'large': 2col × 2row (featured)
  * - 'regular': 1col × 1row (standard)
@@ -37,8 +37,9 @@ export interface BentoService {
     label: string;
   };
   badge?: string;
-  usps?: string[];  // Unique Selling Propositions
-  proof?: {          // Social proof metrics
+  usps?: string[]; // Unique Selling Propositions
+  proof?: {
+    // Social proof metrics
     metric: string;
     label: string;
   };
@@ -59,28 +60,26 @@ export const BENTO_SERVICES: BentoService[] = [
     icon: TrendingUp,
     title: '자산관리',
     tagline: '세대를 잇는 자산관리 전략',
-    description: '500억원+ 자산 관리 경험을 바탕으로 고액 자산가를 위한 맞춤형 포트폴리오 관리와 리스크 헤지 전략을 제공합니다.',
+    description:
+      '500억원+ 자산 관리 경험을 바탕으로 고액 자산가를 위한 맞춤형 포트폴리오 관리와 리스크 헤지 전략을 제공합니다.',
     features: [
       '포트폴리오 다각화 전략',
       '리스크 관리 및 헤지',
       '세금 최적화 솔루션',
       '차세대 승계 설계',
-      '글로벌 자산 배분'
+      '글로벌 자산 배분',
     ],
     href: '/solutions#asset-management',
     stats: {
       value: '500억원+',
-      label: '자산관리 실적'
+      label: '자산관리 실적',
     },
     badge: 'Premium',
-    usps: [
-      '삼성생명 검증 실적',
-      '평균 15% 연수익률 달성'
-    ],
+    usps: ['삼성생명 검증 실적', '평균 15% 연수익률 달성'],
     proof: {
       metric: '98%',
-      label: '고객 만족도'
-    }
+      label: '고객 만족도',
+    },
   },
   {
     id: 'business-succession',
@@ -89,28 +88,26 @@ export const BENTO_SERVICES: BentoService[] = [
     icon: Target,
     title: '기업승계',
     tagline: '전략적 기업승계 설계',
-    description: '기업을 다음 세대로 안정적으로 승계하기 위한 종합 전략. 친족승계, M&A, 제3자 승계 등 다양한 경로를 통해 상속세 부담을 최소화하는 최적의 솔루션을 제공합니다.',
+    description:
+      '기업을 다음 세대로 안정적으로 승계하기 위한 종합 전략. 친족승계, M&A, 제3자 승계 등 다양한 경로를 통해 상속세 부담을 최소화하는 최적의 솔루션을 제공합니다.',
     features: [
       '5단계 승계 로드맵',
       '상속세 최적화 전략',
       '경영권 안정화 방안',
       '가족신탁 활용',
-      '차세대 CEO 육성'
+      '차세대 CEO 육성',
     ],
     href: '/business-succession-strategy',
     stats: {
       value: '20년+',
-      label: '승계 전문 경험'
+      label: '승계 전문 경험',
     },
     badge: 'Expertise',
-    usps: [
-      '평균 40% 상속세 절감',
-      '500+ 승계 성공 사례'
-    ],
+    usps: ['평균 40% 상속세 절감', '500+ 승계 성공 사례'],
     proof: {
       metric: '95%',
-      label: '승계 성공률'
-    }
+      label: '승계 성공률',
+    },
   },
 
   // ========================================
@@ -122,13 +119,10 @@ export const BENTO_SERVICES: BentoService[] = [
     priority: 3,
     icon: Calculator,
     title: '세무컨설팅',
-    description: '법인세 절세부터 개인세 최적화까지 종합 세무 전략을 제공합니다.',
-    features: [
-      '법인세 절세 전략',
-      '개인세 최적화',
-      '경정청구 컨설팅'
-    ],
-    href: '/tax-strategy'
+    description:
+      '법인세 절세부터 개인세 최적화까지 종합 세무 전략을 제공합니다.',
+    features: ['법인세 절세 전략', '개인세 최적화', '경정청구 컨설팅'],
+    href: '/tax-strategy',
   },
   {
     id: 'corporate-insurance',
@@ -137,12 +131,8 @@ export const BENTO_SERVICES: BentoService[] = [
     icon: Shield,
     title: '기업보험',
     description: '기업 리스크 관리와 임직원 복리후생을 위한 보험 솔루션입니다.',
-    features: [
-      '경영진정기보험',
-      '단체보험 설계',
-      '중대재해법 대응'
-    ],
-    href: '/solutions#corporate-insurance-finance'
+    features: ['경영진정기보험', '단체보험 설계', '중대재해법 대응'],
+    href: '/solutions#corporate-insurance-finance',
   },
   {
     id: 'real-estate',
@@ -150,13 +140,10 @@ export const BENTO_SERVICES: BentoService[] = [
     priority: 5,
     icon: Building2,
     title: '부동산 투자',
-    description: '안정적인 수익을 위한 부동산 투자 전략과 자산 관리 서비스입니다.',
-    features: [
-      '상업용 부동산 투자',
-      '부동산 포트폴리오',
-      '자산 가치 평가'
-    ],
-    href: '/solutions#investment-finance'
+    description:
+      '안정적인 수익을 위한 부동산 투자 전략과 자산 관리 서비스입니다.',
+    features: ['상업용 부동산 투자', '부동산 포트폴리오', '자산 가치 평가'],
+    href: '/solutions#investment-finance',
   },
   {
     id: 'hr-support',
@@ -165,12 +152,8 @@ export const BENTO_SERVICES: BentoService[] = [
     icon: Users,
     title: '인사노무',
     description: '중소기업 인사관리부터 정부지원금까지 종합 HR 솔루션입니다.',
-    features: [
-      '노무관리 시스템',
-      '고용지원금 신청',
-      '복리후생 설계'
-    ],
-    href: '/solutions#hr-support'
+    features: ['노무관리 시스템', '고용지원금 신청', '복리후생 설계'],
+    href: '/solutions#hr-support',
   },
 
   // ========================================
@@ -185,7 +168,7 @@ export const BENTO_SERVICES: BentoService[] = [
     description: '최고 자산가를 위한 전용 서비스',
     features: [],
     href: '/family-office-center',
-    badge: 'VIP'
+    badge: 'VIP',
   },
   {
     id: 'view-all',
@@ -195,8 +178,8 @@ export const BENTO_SERVICES: BentoService[] = [
     title: '전체 솔루션 보기',
     description: '30+ 전문 서비스 확인',
     features: [],
-    href: '/solutions'
-  }
+    href: '/solutions',
+  },
 ];
 
 /**

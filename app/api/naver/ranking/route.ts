@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { GoogleSearchConsoleAPI } from '@/lib/google/search-console';
-import { 
-  validateApiRequest, 
-  createValidationErrorResponse, 
-  createApiResponse, 
+
+import {
+  validateApiRequest,
+  createValidationErrorResponse,
+  createApiResponse,
   createErrorResponse,
-  naverRankingSchema 
+  naverRankingSchema,
 } from '@/lib/api-validation';
+import { GoogleSearchConsoleAPI } from '@/lib/google/search-console';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,15 +19,15 @@ const TRACKED_KEYWORDS = [
     category: '컨설팅',
     priority: 'high',
     targetRank: 5,
-    url: '/services'
+    url: '/services',
   },
   {
-    id: '2', 
+    id: '2',
     keyword: '패밀리오피스',
     category: '서비스',
     priority: 'high',
     targetRank: 8,
-    url: '/'
+    url: '/',
   },
   {
     id: '3',
@@ -34,7 +35,7 @@ const TRACKED_KEYWORDS = [
     category: '절세',
     priority: 'high',
     targetRank: 15,
-    url: '/blog/corporate-tax'
+    url: '/blog/corporate-tax',
   },
   {
     id: '4',
@@ -42,7 +43,7 @@ const TRACKED_KEYWORDS = [
     category: '절세',
     priority: 'high',
     targetRank: 10,
-    url: '/tax-strategy'
+    url: '/tax-strategy',
   },
   {
     id: '5',
@@ -50,7 +51,7 @@ const TRACKED_KEYWORDS = [
     category: '자금',
     priority: 'high',
     targetRank: 15,
-    url: '/policy-funding'
+    url: '/policy-funding',
   },
   {
     id: '6',
@@ -58,7 +59,7 @@ const TRACKED_KEYWORDS = [
     category: '인증',
     priority: 'medium',
     targetRank: 8,
-    url: '/business-certification'
+    url: '/business-certification',
   },
   {
     id: '7',
@@ -66,15 +67,19 @@ const TRACKED_KEYWORDS = [
     category: '보험',
     priority: 'medium',
     targetRank: 6,
-    url: '/key-person-insurance'
-  }
+    url: '/key-person-insurance',
+  },
 ];
 
 export async function GET(request: NextRequest) {
   try {
     // 쿼리 파라미터 검증
-    const validation = await validateApiRequest(request, naverRankingSchema, 'query');
-    
+    const validation = await validateApiRequest(
+      request,
+      naverRankingSchema,
+      'query'
+    );
+
     if (!validation.success) {
       return createValidationErrorResponse(validation);
     }
@@ -84,17 +89,24 @@ export async function GET(request: NextRequest) {
     switch (action) {
       case 'get_rankings':
         return await getRankings();
-      
+
       case 'check_rank':
         if (!keyword) {
-          return createErrorResponse('키워드는 필수입니다', 'MISSING_KEYWORD', 400);
+          return createErrorResponse(
+            '키워드는 필수입니다',
+            'MISSING_KEYWORD',
+            400
+          );
         }
         return await checkSingleRank(keyword);
-      
-      default:
-        return createErrorResponse('지원하지 않는 액션입니다', 'INVALID_ACTION', 400);
-    }
 
+      default:
+        return createErrorResponse(
+          '지원하지 않는 액션입니다',
+          'INVALID_ACTION',
+          400
+        );
+    }
   } catch (error) {
     console.error('네이버 순위 API 오류:', error);
     return createErrorResponse(
@@ -109,8 +121,12 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // POST 바디 검증
-    const validation = await validateApiRequest(request, naverRankingSchema, 'body');
-    
+    const validation = await validateApiRequest(
+      request,
+      naverRankingSchema,
+      'body'
+    );
+
     if (!validation.success) {
       return createValidationErrorResponse(validation);
     }
@@ -120,24 +136,35 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'add_keyword':
         if (!keyword) {
-          return createErrorResponse('키워드는 필수입니다', 'MISSING_KEYWORD', 400);
+          return createErrorResponse(
+            '키워드는 필수입니다',
+            'MISSING_KEYWORD',
+            400
+          );
         }
-        return await addKeyword({ 
-          keyword, 
-          ...(target_rank !== undefined && { target_rank }), 
-          ...(category !== undefined && { category }) 
+        return await addKeyword({
+          keyword,
+          ...(target_rank !== undefined && { target_rank }),
+          ...(category !== undefined && { category }),
         });
-        
+
       case 'remove_keyword':
         if (!keyword) {
-          return createErrorResponse('키워드는 필수입니다', 'MISSING_KEYWORD', 400);
+          return createErrorResponse(
+            '키워드는 필수입니다',
+            'MISSING_KEYWORD',
+            400
+          );
         }
         return await removeKeyword(keyword);
-        
-      default:
-        return createErrorResponse('지원하지 않는 액션입니다', 'INVALID_ACTION', 400);
-    }
 
+      default:
+        return createErrorResponse(
+          '지원하지 않는 액션입니다',
+          'INVALID_ACTION',
+          400
+        );
+    }
   } catch (error) {
     console.error('네이버 순위 API 오류:', error);
     return createErrorResponse(
@@ -153,7 +180,7 @@ async function getRankings() {
   try {
     // Google Search Console API를 통한 실제 순위 데이터
     const searchConsole = new GoogleSearchConsoleAPI();
-    
+
     // 현재 키워드 성과 가져오기
     const keywordPerformance = await searchConsole.getKeywordPerformance(
       TRACKED_KEYWORDS.map(k => k.keyword),
@@ -162,19 +189,28 @@ async function getRankings() {
 
     // 데이터 변환 및 통계 계산
     const rankings = TRACKED_KEYWORDS.map(tracked => {
-      const performance = keywordPerformance.find(p => 
-        p.keyword.includes(tracked.keyword) || 
-        tracked.keyword.includes(p.keyword)
+      const performance = keywordPerformance.find(
+        p =>
+          p.keyword.includes(tracked.keyword) ||
+          tracked.keyword.includes(p.keyword)
       );
 
       // 모의 이전 순위 데이터 (실제로는 데이터베이스에서 가져옴)
-      const mockPreviousRank = performance ? 
-        Math.max(1, performance.currentPosition + Math.floor(Math.random() * 10) - 5) : 
-        Math.floor(Math.random() * 30) + 10;
+      const mockPreviousRank = performance
+        ? Math.max(
+            1,
+            performance.currentPosition + Math.floor(Math.random() * 10) - 5
+          )
+        : Math.floor(Math.random() * 30) + 10;
 
-      const currentRank = performance?.currentPosition || Math.floor(Math.random() * 30) + 10;
-      const changePercent = mockPreviousRank > 0 && currentRank > 0 ?
-        Math.round(((mockPreviousRank - currentRank) / mockPreviousRank) * 100) : 0;
+      const currentRank =
+        performance?.currentPosition || Math.floor(Math.random() * 30) + 10;
+      const changePercent =
+        mockPreviousRank > 0 && currentRank > 0
+          ? Math.round(
+              ((mockPreviousRank - currentRank) / mockPreviousRank) * 100
+            )
+          : 0;
 
       return {
         id: tracked.id,
@@ -185,27 +221,30 @@ async function getRankings() {
         searchVolume: Math.floor(Math.random() * 10000) + 1000,
         difficulty: Math.floor(Math.random() * 40) + 60,
         url: tracked.url,
-        trend: changePercent > 5 ? 'up' : changePercent < -5 ? 'down' : 'stable',
+        trend:
+          changePercent > 5 ? 'up' : changePercent < -5 ? 'down' : 'stable',
         changePercent: Math.abs(changePercent),
         lastUpdated: new Date().toISOString(),
         targetRank: tracked.targetRank,
         category: tracked.category,
         priority: tracked.priority,
         clicks: performance?.clicks || Math.floor(Math.random() * 100),
-        impressions: performance?.impressions || Math.floor(Math.random() * 1000) + 500,
-        ctr: performance?.ctr || Math.random() * 5 + 1
+        impressions:
+          performance?.impressions || Math.floor(Math.random() * 1000) + 500,
+        ctr: performance?.ctr || Math.random() * 5 + 1,
       };
     });
 
     // 요약 통계 계산
     const summary = {
       totalKeywords: rankings.length,
-      avgRank: rankings.reduce((acc, r) => acc + r.currentRank, 0) / rankings.length,
+      avgRank:
+        rankings.reduce((acc, r) => acc + r.currentRank, 0) / rankings.length,
       improvingKeywords: rankings.filter(r => r.trend === 'up').length,
       decliningKeywords: rankings.filter(r => r.trend === 'down').length,
       top10Keywords: rankings.filter(r => r.currentRank <= 10).length,
       top20Keywords: rankings.filter(r => r.currentRank <= 20).length,
-      totalSearchVolume: rankings.reduce((acc, r) => acc + r.searchVolume, 0)
+      totalSearchVolume: rankings.reduce((acc, r) => acc + r.searchVolume, 0),
     };
 
     // 카테고리별 통계
@@ -215,7 +254,7 @@ async function getRankings() {
         categories[ranking.category] = {
           count: 0,
           totalRank: 0,
-          trends: { up: 0, down: 0, stable: 0 }
+          trends: { up: 0, down: 0, stable: 0 },
         };
       }
       categories[ranking.category].count++;
@@ -226,38 +265,47 @@ async function getRankings() {
     Object.keys(categories).forEach(category => {
       const cat = categories[category];
       cat.avgRank = cat.totalRank / cat.count;
-      cat.trend = cat.trends.up > cat.trends.down ? 'up' : 
-                  cat.trends.down > cat.trends.up ? 'down' : 'stable';
+      cat.trend =
+        cat.trends.up > cat.trends.down
+          ? 'up'
+          : cat.trends.down > cat.trends.up
+            ? 'down'
+            : 'stable';
       delete cat.totalRank;
       delete cat.trends;
     });
 
-    return createApiResponse({
-      keywords: rankings,
-      summary,
-      categories,
-      lastUpdate: new Date().toISOString()
-    }, '네이버 순위 데이터 조회 완료');
-
+    return createApiResponse(
+      {
+        keywords: rankings,
+        summary,
+        categories,
+        lastUpdate: new Date().toISOString(),
+      },
+      '네이버 순위 데이터 조회 완료'
+    );
   } catch (error) {
     console.error('순위 데이터 조회 오류:', error);
-    
+
     // 에러 시 기본 데이터 반환
-    return createApiResponse({
-      keywords: [],
-      summary: {
-        totalKeywords: 0,
-        avgRank: 0,
-        improvingKeywords: 0,
-        decliningKeywords: 0,
-        top10Keywords: 0,
-        top20Keywords: 0,
-        totalSearchVolume: 0
+    return createApiResponse(
+      {
+        keywords: [],
+        summary: {
+          totalKeywords: 0,
+          avgRank: 0,
+          improvingKeywords: 0,
+          decliningKeywords: 0,
+          top10Keywords: 0,
+          top20Keywords: 0,
+          totalSearchVolume: 0,
+        },
+        categories: {},
+        lastUpdate: new Date().toISOString(),
+        note: 'Search Console 연결 오류로 기본 데이터를 표시합니다.',
       },
-      categories: {},
-      lastUpdate: new Date().toISOString(),
-      note: 'Search Console 연결 오류로 기본 데이터를 표시합니다.'
-    }, 'Search Console 연결 실패 - 기본 데이터 반환');
+      'Search Console 연결 실패 - 기본 데이터 반환'
+    );
   }
 }
 
@@ -266,15 +314,17 @@ async function checkSingleRank(keyword: string) {
     // 실제로는 Naver API 또는 웹 스크래핑을 통해 순위 확인
     const mockRank = Math.floor(Math.random() * 50) + 1;
     const mockSearchVolume = Math.floor(Math.random() * 5000) + 500;
-    
-    return createApiResponse({
-      keyword,
-      currentRank: mockRank,
-      searchVolume: mockSearchVolume,
-      difficulty: Math.floor(Math.random() * 30) + 50,
-      lastChecked: new Date().toISOString(),
-    }, `"${keyword}" 순위 확인 완료`);
-    
+
+    return createApiResponse(
+      {
+        keyword,
+        currentRank: mockRank,
+        searchVolume: mockSearchVolume,
+        difficulty: Math.floor(Math.random() * 30) + 50,
+        lastChecked: new Date().toISOString(),
+      },
+      `"${keyword}" 순위 확인 완료`
+    );
   } catch (error) {
     return createErrorResponse(
       '키워드 순위 확인 중 오류가 발생했습니다.',
@@ -284,7 +334,11 @@ async function checkSingleRank(keyword: string) {
   }
 }
 
-async function addKeyword(data: { keyword: string; target_rank?: number; category?: string }) {
+async function addKeyword(data: {
+  keyword: string;
+  target_rank?: number;
+  category?: string;
+}) {
   try {
     const { keyword, target_rank, category } = data;
 
@@ -296,15 +350,17 @@ async function addKeyword(data: { keyword: string; target_rank?: number; categor
       priority: 'medium' as const,
       targetRank: target_rank || 20,
       url: '/',
-      dateAdded: new Date().toISOString()
+      dateAdded: new Date().toISOString(),
     };
 
     console.log('새 키워드 추가:', newKeyword);
 
-    return createApiResponse({
-      keyword: newKeyword
-    }, '키워드가 성공적으로 추가되었습니다.');
-
+    return createApiResponse(
+      {
+        keyword: newKeyword,
+      },
+      '키워드가 성공적으로 추가되었습니다.'
+    );
   } catch (error) {
     console.error('키워드 추가 오류:', error);
     return createErrorResponse(
@@ -320,11 +376,13 @@ async function removeKeyword(keyword: string) {
     // 실제로는 데이터베이스에서 삭제
     console.log('키워드 삭제:', keyword);
 
-    return createApiResponse({
-      keyword,
-      deletedAt: new Date().toISOString()
-    }, '키워드가 성공적으로 삭제되었습니다.');
-
+    return createApiResponse(
+      {
+        keyword,
+        deletedAt: new Date().toISOString(),
+      },
+      '키워드가 성공적으로 삭제되었습니다.'
+    );
   } catch (error) {
     console.error('키워드 삭제 오류:', error);
     return createErrorResponse(

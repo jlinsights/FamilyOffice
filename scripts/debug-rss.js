@@ -8,28 +8,28 @@ async function testFeed(name, url) {
     const response = await axios.get(url, {
       headers: {
         'User-Agent': 'curl/7.68.0',
-        'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
+        Accept: 'application/rss+xml, application/xml, text/xml; q=0.1',
       },
       timeout: 5000,
       maxRedirects: 0,
-      validateStatus: status => status >= 200 && status < 400 // Accept 3xx to inspect
+      validateStatus: status => status >= 200 && status < 400, // Accept 3xx to inspect
     });
-    
+
     console.log(`   Status: ${response.status}`);
     if (response.status >= 300 && response.status < 400) {
       console.log(`   Redirect to: ${response.headers.location}`);
     }
-    
+
     if (response.status === 200) {
-       console.log('   Request Headers:', response.config.headers);
-       const feed = await parser.parseString(response.data);
-       console.log(`✅ ${name} Success! Found ${feed.items.length} items.`);
+      console.log('   Request Headers:', response.config.headers);
+      const feed = await parser.parseString(response.data);
+      console.log(`✅ ${name} Success! Found ${feed.items.length} items.`);
     }
   } catch (error) {
     console.error(`❌ ${name} Failed:`, error.message);
     if (error.response) {
-        console.log(`   Status: ${error.response.status}`);
-        console.log(`   Headers:`, error.response.headers);
+      console.log(`   Status: ${error.response.status}`);
+      console.log(`   Headers:`, error.response.headers);
     }
   }
   console.log('---');
@@ -41,16 +41,20 @@ async function testFetch(name, url) {
     const response = await fetch(url, {
       headers: {
         'User-Agent': 'curl/7.68.0',
-        'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
-      }
+        Accept: 'application/rss+xml, application/xml, text/xml; q=0.1',
+      },
     });
     console.log(`   Status: ${response.status}`);
     if (response.ok) {
-        const text = await response.text();
-        const feed = await parser.parseString(text);
-        console.log(`✅ ${name} FETCH Success! Found ${feed.items.length} items.`);
+      const text = await response.text();
+      const feed = await parser.parseString(text);
+      console.log(
+        `✅ ${name} FETCH Success! Found ${feed.items.length} items.`
+      );
     } else {
-        console.log(`❌ ${name} FETCH Failed: ${response.status} ${response.statusText}`);
+      console.log(
+        `❌ ${name} FETCH Failed: ${response.status} ${response.statusText}`
+      );
     }
   } catch (error) {
     console.error(`❌ ${name} FETCH Error:`, error.message);

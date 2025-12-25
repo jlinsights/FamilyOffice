@@ -1,9 +1,18 @@
 'use client';
 
+import {
+  ArrowRight,
+  CheckCircle,
+  Crown,
+  Palette,
+  Shield,
+  Sparkles,
+} from 'lucide-react';
+
+import Link from 'next/link';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Crown, Palette, Shield, Sparkles } from 'lucide-react';
-import Link from 'next/link';
 
 interface Benefit {
   icon: React.ReactNode;
@@ -20,7 +29,8 @@ const VVIP_BENEFITS: Benefit[] = [
     category: 'Financial Shield',
     title: 'CEO Risk Audit & Simulation',
     subtitle: '자산 보호의 완벽한 시작',
-    description: '국세청 시스템 기반 모의 세무조사와 가업승계 출구전략(Exit Plan) 시뮬레이션을 제공합니다.',
+    description:
+      '국세청 시스템 기반 모의 세무조사와 가업승계 출구전략(Exit Plan) 시뮬레이션을 제공합니다.',
     features: [
       '국세청 시스템 기반 모의 세무조사',
       '가업승계 및 Exit Plan 시뮬레이션',
@@ -33,7 +43,8 @@ const VVIP_BENEFITS: Benefit[] = [
     category: 'Private Art & Wellness',
     title: 'The Private Retreat',
     subtitle: 'Art & Healing',
-    description: '일반 여행사에서는 접할 수 없는 비공개 도슨트 투어와 프라이빗 힐링 여행을 경험하세요.',
+    description:
+      '일반 여행사에서는 접할 수 없는 비공개 도슨트 투어와 프라이빗 힐링 여행을 경험하세요.',
     features: [
       '미술관/갤러리 휴관일 대관 Private View',
       '일본 나오시마 예술 기행',
@@ -46,7 +57,8 @@ const VVIP_BENEFITS: Benefit[] = [
     category: 'VVIP Concierge',
     title: 'Premier Concierge Service',
     subtitle: '당신의 시간을 디자인합니다',
-    description: '해외 출장, 골프, 건강검진 등 CEO의 일상을 전담 비서처럼 케어합니다.',
+    description:
+      '해외 출장, 골프, 건강검진 등 CEO의 일상을 전담 비서처럼 케어합니다.',
     features: [
       'Airport Protocol: 자택-공항 리무진 픽업',
       'Medical Care: VIP 검진센터 우선 예약',
@@ -77,7 +89,10 @@ export function VVIPBenefitsSection() {
             style={{ animationDelay: '100ms' }}
           >
             성공한 CEO의 삶을 완벽하게 케어하는{' '}
-            <span className="text-foreground font-semibold">통합 프리미엄 솔루션</span>을 경험하세요
+            <span className="text-foreground font-semibold">
+              통합 프리미엄 솔루션
+            </span>
+            을 경험하세요
           </p>
         </div>
 
@@ -100,9 +115,7 @@ export function VVIPBenefitsSection() {
               </Badge>
 
               {/* Title */}
-              <h3 className="text-xl font-bold mb-2">
-                {benefit.title}
-              </h3>
+              <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
               <p className="text-sm text-muted-foreground font-medium mb-4">
                 {benefit.subtitle}
               </p>
@@ -116,7 +129,10 @@ export function VVIPBenefitsSection() {
               <ul className="space-y-3 mb-8">
                 {benefit.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-start text-sm">
-                    <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0 mt-0.5" aria-hidden />
+                    <CheckCircle
+                      className="h-4 w-4 text-primary mr-2 flex-shrink-0 mt-0.5"
+                      aria-hidden
+                    />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -159,23 +175,18 @@ export function VVIPBenefitsSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="font-bold"
-                asChild
-              >
+              <Button size="lg" className="font-bold" asChild>
                 <Link href="/structure-check#request-form">
                   프라이빗 초청 제안서 받기
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="font-bold"
-                asChild
-              >
-                <Link href="http://pf.kakao.com/_gsxkxdG/chat" target="_blank" rel="noopener noreferrer">
+              <Button size="lg" variant="outline" className="font-bold" asChild>
+                <Link
+                  href="http://pf.kakao.com/_gsxkxdG/chat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   카카오톡 간편 문의
                 </Link>
               </Button>

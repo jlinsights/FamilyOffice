@@ -1,21 +1,21 @@
 import {
-    Brain,
-    Building2,
-    Coffee,
-    Crown,
-    Globe,
-    Network,
-    Target,
-    TrendingUp,
-    Users
+  Brain,
+  Building2,
+  Coffee,
+  Crown,
+  Globe,
+  Network,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
 
 import type {
-    EducationPrograms,
-    ExclusiveProgramCategory,
-    MemberBenefit,
-    MembershipStat,
-    SpecialProgram,
+  EducationPrograms,
+  ExclusiveProgramCategory,
+  MemberBenefit,
+  MembershipStat,
+  SpecialProgram,
 } from '@/types/program';
 
 export const MEMBERSHIP_STATS: MembershipStat[] = [
@@ -49,7 +49,8 @@ export const MEMBER_BENEFITS: MemberBenefit[] = [
   {
     icon: Target,
     title: 'CEO Risk Audit & Simulation',
-    description: '국세청 시스템 기반 모의 세무조사와 가업승계 출구전략 시뮬레이션',
+    description:
+      '국세청 시스템 기반 모의 세무조사와 가업승계 출구전략 시뮬레이션',
     details: [
       '국세청 시스템 기반 정밀 세무진단',
       '가업승계 Exit Plan 시뮬레이션',

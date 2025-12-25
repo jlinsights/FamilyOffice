@@ -20,26 +20,31 @@
 ## ✅ 해결 완료 사항
 
 ### 1. vercel.json 최적화
+
 - `regions` 설정 제거 (Hobby 플랜 호환)
 - 함수 실행 시간 제한 설정 (30초)
 - 필수 헤더와 CORS 설정 유지
 
 ### 2. next.config.mjs Sentry 조건부 설정
+
 - 환경변수 존재 여부 확인 후 Sentry 적용
 - 빌드 실패 방지를 위한 조건부 초기화
 
 ### 3. TypeScript 에러 수정
+
 - 한국 성능 모니터링 시스템 타입 오류 해결
 - Sentry 설정 타입 안전성 개선
 
 ## 🌐 배포 결과
 
 ### ✅ 성공한 배포
+
 - **최신 배포 URL**: https://familyoffice-e0tdh8tai-jlinsights-projects.vercel.app
 - **상태**: 200 OK 응답 ✅
 - **메인 도메인**: https://familyoffices.vip (리다이렉트 후 200 OK) ✅
 
 ### 사용한 배포 명령어
+
 ```bash
 # 성공한 배포 명령어
 vercel --prod --yes
@@ -52,11 +57,13 @@ curl -s -L -o /dev/null -w "%{http_code}" https://familyoffices.vip
 ## 🚫 배포 실패 원인 요약
 
 ### 주요 실패 원인들
+
 1. **Multiple Regions**: Hobby 플랜에서 지원하지 않음
 2. **Sentry 환경변수**: 프로덕션 환경에서 누락된 환경변수
 3. **빌드 설정**: 복잡한 설정으로 인한 리소스 할당 실패
 
 ### 해결 접근법
+
 - 설정 간소화 우선
 - 조건부 기능 활성화
 - 플랜 제약사항 준수
@@ -64,6 +71,7 @@ curl -s -L -o /dev/null -w "%{http_code}" https://familyoffices.vip
 ## 🔧 프로덕션 환경 설정 가이드
 
 ### Vercel 대시보드에서 설정할 환경변수
+
 ```bash
 # 필수 환경변수
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...
@@ -84,11 +92,13 @@ VERCEL_ANALYTICS_ID=... # Vercel에서 자동 설정
 ## 📊 모니터링 시스템 현재 상태
 
 ### ✅ 활성화된 모니터링
+
 1. **Vercel Analytics**: 자동 활성화됨
 2. **한국 성능 모니터링**: 배포와 함께 활성화
 3. **Core Web Vitals**: 실시간 수집 중
 
 ### ⏳ 환경변수 설정 후 활성화될 기능
+
 1. **Sentry 에러 트래킹**: SENTRY_DSN 설정 필요
 2. **고급 성능 분석**: Sentry 프로파일링
 3. **에러 알림**: Slack/이메일 연동
@@ -96,6 +106,7 @@ VERCEL_ANALYTICS_ID=... # Vercel에서 자동 설정
 ## 🎯 즉시 해야 할 작업
 
 ### 1. 도메인 별칭 연결
+
 ```bash
 # Vercel 웹 대시보드에서 수행
 1. https://vercel.com/dashboard 접속
@@ -105,12 +116,14 @@ VERCEL_ANALYTICS_ID=... # Vercel에서 자동 설정
 ```
 
 ### 2. 환경변수 설정
+
 ```bash
 # Vercel 대시보드 > Settings > Environment Variables
 # 위의 환경변수 목록 참조하여 설정
 ```
 
 ### 3. 모니터링 검증
+
 ```bash
 # 사이트 방문 후 브라우저 콘솔에서 확인
 console.log("한국 성능 모니터링 시작 메시지 확인");

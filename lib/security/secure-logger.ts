@@ -11,7 +11,7 @@ export const LogLevel = {
   DEBUG: 3,
 } as const;
 
-type LogLevelType = typeof LogLevel[keyof typeof LogLevel];
+type LogLevelType = (typeof LogLevel)[keyof typeof LogLevel];
 
 // Production log level (only errors and warnings)
 const PRODUCTION_LOG_LEVEL = LogLevel.WARN;
@@ -34,8 +34,8 @@ const SENSITIVE_PATTERNS = [
 
 // Get current log level based on environment
 function getCurrentLogLevel(): LogLevelType {
-  return process.env.NODE_ENV === 'production' 
-    ? PRODUCTION_LOG_LEVEL 
+  return process.env.NODE_ENV === 'production'
+    ? PRODUCTION_LOG_LEVEL
     : DEVELOPMENT_LOG_LEVEL;
 }
 
@@ -85,42 +85,46 @@ export class SecureLogger {
     return level <= getCurrentLogLevel();
   }
 
-  private formatMessage(level: string, message: string, data?: unknown): [string, ...unknown[]] {
+  private formatMessage(
+    level: string,
+    message: string,
+    data?: unknown
+  ): [string, ...unknown[]] {
     const timestamp = new Date().toISOString();
     const contextPrefix = `[${timestamp}] [${level}] [${this.context}]`;
-    
+
     if (data !== undefined) {
       const sanitizedData = sanitizeData(data);
       return [`${contextPrefix} ${message}`, sanitizedData];
     }
-    
+
     return [`${contextPrefix} ${message}`];
   }
 
   error(message: string, data?: unknown): void {
     if (!this.shouldLog(LogLevel.ERROR)) return;
-    
+
     const args = this.formatMessage('ERROR', message, data);
     console.error(...args);
   }
 
   warn(message: string, data?: unknown): void {
     if (!this.shouldLog(LogLevel.WARN)) return;
-    
+
     const args = this.formatMessage('WARN', message, data);
     console.warn(...args);
   }
 
   info(message: string, data?: unknown): void {
     if (!this.shouldLog(LogLevel.INFO)) return;
-    
+
     const args = this.formatMessage('INFO', message, data);
     console.info(...args);
   }
 
   debug(message: string, data?: unknown): void {
     if (!this.shouldLog(LogLevel.DEBUG)) return;
-    
+
     const args = this.formatMessage('DEBUG', message, data);
     console.debug(...args);
   }
@@ -167,11 +171,17 @@ export function isSafeToLog(data: unknown): boolean {
 /**
  * Utility for error boundary logging
  */
-export function logError(error: Error, context: string, additionalData?: unknown): void {
+export function logError(
+  error: Error,
+  context: string,
+  additionalData?: unknown
+): void {
   const logger = createLogger(context);
   logger.error(error.message, {
     stack: error.stack,
     name: error.name,
-    ...(additionalData && typeof additionalData === 'object' ? additionalData : {}),
+    ...(additionalData && typeof additionalData === 'object'
+      ? additionalData
+      : {}),
   });
 }

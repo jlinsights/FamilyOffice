@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'CEO 체크리스트 | 경영진단 자가평가 | FamilyOffice S',
-  description: '삼성생명과 함께하는 CEO 경영진단 체크리스트. 재무세무, 리스크관리, 가업승계, 성장전략, 개인자산 5대 핵심영역 자가진단으로 맞춤형 솔루션을 제공합니다.',
+  description:
+    '삼성생명과 함께하는 CEO 경영진단 체크리스트. 재무세무, 리스크관리, 가업승계, 성장전략, 개인자산 5대 핵심영역 자가진단으로 맞춤형 솔루션을 제공합니다.',
   keywords: [
     'CEO 체크리스트',
     '경영진단',
@@ -17,12 +18,13 @@ export const metadata: Metadata = {
     'M&A 전략',
     '디지털 전환',
     '기업 컴플라이언스',
-    'FamilyOffice S'
+    'FamilyOffice S',
   ].join(', '),
   authors: [{ name: 'FamilyOffice S CEO Advisory Team' }],
   openGraph: {
     title: 'CEO 체크리스트 | 경영진단 자가평가 | FamilyOffice S',
-    description: '5대 핵심영역 30개 항목으로 진단하는 CEO 경영 체크리스트. 재무세무, 리스크관리, 가업승계 준비도를 점검하고 맞춤형 솔루션을 받아보세요.',
+    description:
+      '5대 핵심영역 30개 항목으로 진단하는 CEO 경영 체크리스트. 재무세무, 리스크관리, 가업승계 준비도를 점검하고 맞춤형 솔루션을 받아보세요.',
     url: 'https://familyoffices.vip/ceo-checklist',
     siteName: 'FamilyOffice S',
     locale: 'ko_KR',
@@ -39,7 +41,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'CEO 체크리스트 | FamilyOffice S',
-    description: '5대 핵심영역 30개 항목 CEO 경영진단. 무료 상담으로 맞춤형 솔루션을 받아보세요.',
+    description:
+      '5대 핵심영역 30개 항목 CEO 경영진단. 무료 상담으로 맞춤형 솔루션을 받아보세요.',
     images: ['/og-ceo-checklist.jpg'],
   },
   robots: {

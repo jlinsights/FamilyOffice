@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import {
   contentAutoPublisher,
   ContentStatus,
@@ -77,7 +78,8 @@ export async function GET(request: NextRequest) {
       case 'upcoming-scheduled': {
         // 다가오는 스케줄된 콘텐츠
         const days = parseInt(searchParams.get('days') || '7');
-        const contents = contentAutoPublisher.getUpcomingScheduledContents(days);
+        const contents =
+          contentAutoPublisher.getUpcomingScheduledContents(days);
 
         return NextResponse.json({
           success: true,
@@ -91,7 +93,9 @@ export async function GET(request: NextRequest) {
 
       case 'pending-approvals': {
         // 승인 대기 중인 콘텐츠
-        const contents = contentAutoPublisher.getPendingApprovals(approver || undefined);
+        const contents = contentAutoPublisher.getPendingApprovals(
+          approver || undefined
+        );
 
         return NextResponse.json({
           success: true,
@@ -116,7 +120,8 @@ export async function GET(request: NextRequest) {
       case 'dashboard-data': {
         // 대시보드용 종합 데이터
         const stats = contentAutoPublisher.getDashboardStats();
-        const upcomingScheduled = contentAutoPublisher.getUpcomingScheduledContents(7);
+        const upcomingScheduled =
+          contentAutoPublisher.getUpcomingScheduledContents(7);
         const pendingApprovals = contentAutoPublisher.getPendingApprovals();
         const recentPublished = contentAutoPublisher
           .getContentsByStatus('published')
@@ -199,7 +204,15 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'create-content': {
         // 콘텐츠 생성
-        const { title, content, type, createdBy, scheduledDate, tags, categories } = body;
+        const {
+          title,
+          content,
+          type,
+          createdBy,
+          scheduledDate,
+          tags,
+          categories,
+        } = body;
 
         if (!title || !content || !type || !createdBy) {
           return NextResponse.json(
@@ -216,7 +229,7 @@ export async function POST(request: NextRequest) {
           content,
           type: type as ContentType,
           createdBy,
-          scheduledDate: scheduledDate ? new Date(scheduledDate) : undefined,
+          ...(scheduledDate && { scheduledDate: new Date(scheduledDate) }),
           tags,
           categories,
         });
@@ -236,7 +249,8 @@ export async function POST(request: NextRequest) {
           return NextResponse.json(
             {
               success: false,
-              error: 'Missing required fields: contentId, requestedBy, approver',
+              error:
+                'Missing required fields: contentId, requestedBy, approver',
             },
             { status: 400 }
           );
@@ -263,7 +277,8 @@ export async function POST(request: NextRequest) {
           return NextResponse.json(
             {
               success: false,
-              error: 'Missing required fields: contentId, approvalRequestId, approvedBy',
+              error:
+                'Missing required fields: contentId, approvalRequestId, approvedBy',
             },
             { status: 400 }
           );
@@ -291,7 +306,8 @@ export async function POST(request: NextRequest) {
           return NextResponse.json(
             {
               success: false,
-              error: 'Missing required fields: contentId, approvalRequestId, rejectedBy, comments',
+              error:
+                'Missing required fields: contentId, approvalRequestId, rejectedBy, comments',
             },
             { status: 400 }
           );
@@ -325,7 +341,10 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const content = contentAutoPublisher.scheduleContent(contentId, new Date(scheduledDate));
+        const content = contentAutoPublisher.scheduleContent(
+          contentId,
+          new Date(scheduledDate)
+        );
 
         return NextResponse.json({
           success: true,
@@ -352,7 +371,9 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({
           success: result.success,
-          message: result.success ? 'Content published successfully' : 'Failed to publish content',
+          message: result.success
+            ? 'Content published successfully'
+            : 'Failed to publish content',
           data: result,
         });
       }
@@ -428,7 +449,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to process request',
+        error:
+          error instanceof Error ? error.message : 'Failed to process request',
       },
       { status: 500 }
     );

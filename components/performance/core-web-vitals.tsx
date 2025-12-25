@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
 /**
  * 🚀 Core Web Vitals 최적화 컴포넌트
  * LCP, FID, CLS 개선을 위한 성능 모니터링
  */
+import { onCLS, onFCP, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
 
 import { useEffect } from 'react';
-import { onCLS, onFCP, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
 
 // Extract environment variables at module level for client components
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
@@ -22,18 +22,21 @@ interface WebVitalsMetric {
 
 // Web Vitals 임계값 설정 (2024 최신 기준)
 const THRESHOLDS = {
-  LCP: { good: 2500, poor: 4000 },    // Largest Contentful Paint
-  FID: { good: 100, poor: 300 },     // First Input Delay (레거시)
-  INP: { good: 200, poor: 500 },     // Interaction to Next Paint (새 기준)
-  CLS: { good: 0.1, poor: 0.25 },    // Cumulative Layout Shift
-  FCP: { good: 1800, poor: 3000 },   // First Contentful Paint
-  TTFB: { good: 800, poor: 1800 }    // Time to First Byte
+  LCP: { good: 2500, poor: 4000 }, // Largest Contentful Paint
+  FID: { good: 100, poor: 300 }, // First Input Delay (레거시)
+  INP: { good: 200, poor: 500 }, // Interaction to Next Paint (새 기준)
+  CLS: { good: 0.1, poor: 0.25 }, // Cumulative Layout Shift
+  FCP: { good: 1800, poor: 3000 }, // First Contentful Paint
+  TTFB: { good: 800, poor: 1800 }, // Time to First Byte
 };
 
-function getRating(name: string, value: number): 'good' | 'needs-improvement' | 'poor' {
+function getRating(
+  name: string,
+  value: number
+): 'good' | 'needs-improvement' | 'poor' {
   const threshold = THRESHOLDS[name as keyof typeof THRESHOLDS];
   if (!threshold) return 'good';
-  
+
   if (value <= threshold.good) return 'good';
   if (value <= threshold.poor) return 'needs-improvement';
   return 'poor';
@@ -45,7 +48,9 @@ function sendToAnalytics(metric: WebVitalsMetric) {
     window.gtag('event', metric.name, {
       event_category: 'Web Vitals',
       event_label: metric.id,
-      value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+      value: Math.round(
+        metric.name === 'CLS' ? metric.value * 1000 : metric.value
+      ),
       non_interaction: true,
     });
   }
@@ -64,7 +69,7 @@ function sendToAnalytics(metric: WebVitalsMetric) {
     window.va('Web Vitals', {
       metric: metric.name,
       value: metric.value,
-      rating: metric.rating
+      rating: metric.rating,
     });
   }
 }
@@ -73,10 +78,10 @@ export default function CoreWebVitals() {
   useEffect(() => {
     // 🚀 자동 성능 최적화 실행
     setTimeout(() => {
-      optimizeImages()
-      reduceCLS()
-      improveLCP()
-    }, 1000) // 페이지 로드 후 1초 뒤 실행
+      optimizeImages();
+      reduceCLS();
+      improveLCP();
+    }, 1000); // 페이지 로드 후 1초 뒤 실행
 
     // 🎯 LCP (Largest Contentful Paint) 모니터링
     onLCP((metric: Metric) => {
@@ -85,7 +90,7 @@ export default function CoreWebVitals() {
         name: 'LCP',
         value: metric.value,
         rating: getRating('LCP', metric.value),
-        delta: metric.delta
+        delta: metric.delta,
       };
       sendToAnalytics(webVitalsMetric);
     });
@@ -97,7 +102,7 @@ export default function CoreWebVitals() {
         name: 'INP',
         value: metric.value,
         rating: getRating('INP', metric.value),
-        delta: metric.delta
+        delta: metric.delta,
       };
       sendToAnalytics(webVitalsMetric);
     });
@@ -109,7 +114,7 @@ export default function CoreWebVitals() {
         name: 'CLS',
         value: metric.value,
         rating: getRating('CLS', metric.value),
-        delta: metric.delta
+        delta: metric.delta,
       };
       sendToAnalytics(webVitalsMetric);
     });
@@ -121,7 +126,7 @@ export default function CoreWebVitals() {
         name: 'FCP',
         value: metric.value,
         rating: getRating('FCP', metric.value),
-        delta: metric.delta
+        delta: metric.delta,
       };
       sendToAnalytics(webVitalsMetric);
     });
@@ -133,7 +138,7 @@ export default function CoreWebVitals() {
         name: 'TTFB',
         value: metric.value,
         rating: getRating('TTFB', metric.value),
-        delta: metric.delta
+        delta: metric.delta,
       };
       sendToAnalytics(webVitalsMetric);
     });
@@ -169,16 +174,17 @@ export default function CoreWebVitals() {
     };
 
     // Fonts are handled by next/font/google - no manual preload needed
-    
+
     // 중요 CSS 프리로드
     if (document.querySelector('link[href*="/globals.css"]')) {
-      const globalCSS = document.querySelector('link[href*="/globals.css"]') as HTMLLinkElement;
+      const globalCSS = document.querySelector(
+        'link[href*="/globals.css"]'
+      ) as HTMLLinkElement;
       if (globalCSS) {
         globalCSS.rel = 'preload';
         globalCSS.as = 'style';
       }
     }
-
   }, []);
 
   return null; // 렌더링하지 않는 성능 모니터링 컴포넌트
@@ -193,17 +199,17 @@ export function optimizeImages() {
     if (!img.loading) {
       img.loading = 'lazy';
     }
-    
+
     // decoding 속성 설정
     if (!img.decoding) {
       img.decoding = 'async';
     }
-    
+
     // fetchpriority 설정 (Above the fold 이미지)
     if (img.getBoundingClientRect().top < window.innerHeight) {
       img.setAttribute('fetchpriority', 'high');
     }
-    
+
     // WebP 포맷 지원 확인 및 적용
     if (supportsWebP()) {
       const src = img.src;
@@ -263,10 +269,12 @@ export function reduceCLS() {
 
 export function improveLCP() {
   // LCP 개선을 위한 최적화
-  
+
   // 중요 리소스 프리로드
   const preloadCriticalResources = () => {
-    const criticalImages = document.querySelectorAll('img[data-priority="high"]');
+    const criticalImages = document.querySelectorAll(
+      'img[data-priority="high"]'
+    );
     criticalImages.forEach(img => {
       const link = document.createElement('link');
       link.rel = 'preload';
@@ -293,7 +301,11 @@ export function improveLCP() {
 // 글로벌 타입 선언
 declare global {
   interface Window {
-    gtag: (command: string, action: string, parameters?: Record<string, any>) => void;
+    gtag: (
+      command: string,
+      action: string,
+      parameters?: Record<string, any>
+    ) => void;
     va?: (event: string, data?: any) => void;
   }
 }

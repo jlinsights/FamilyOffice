@@ -1,4 +1,3 @@
-
 export interface SEOConfig {
   title: string;
   description: string;
@@ -10,6 +9,13 @@ export interface SEOConfig {
 }
 
 export interface StructuredDataConfig {
-  type: 'Organization' | 'WebSite' | 'Service' | 'FAQPage' | 'LocalBusiness' | 'BreadcrumbList' | 'AIOptimized';
+  type:
+    | 'Organization'
+    | 'WebSite'
+    | 'Service'
+    | 'FAQPage'
+    | 'LocalBusiness'
+    | 'BreadcrumbList'
+    | 'AIOptimized';
   path?: string;
 }

@@ -1,11 +1,24 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Calendar, Clock, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import {
+  Calendar,
+  Clock,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+} from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState, useEffect } from 'react';
+
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 interface AvailabilitySlot {
   start: string;
@@ -43,11 +56,13 @@ export function CalComAvailability({
       const date = new Date();
       date.setDate(date.getDate() + i);
       dates.push({
-        value: date.toISOString().split('T')[0] || date.toISOString().substring(0, 10),
-        label: date.toLocaleDateString('ko-KR', { 
-          month: 'short', 
+        value:
+          date.toISOString().split('T')[0] ||
+          date.toISOString().substring(0, 10),
+        label: date.toLocaleDateString('ko-KR', {
+          month: 'short',
           day: 'numeric',
-          weekday: 'short'
+          weekday: 'short',
         }),
         isToday: i === 0,
       });
@@ -66,10 +81,10 @@ export function CalComAvailability({
       // This would be replaced with actual Cal.com API call
       // const response = await fetch(`/api/cal-com/availability?date=${date}&eventTypeId=${eventTypeId}`);
       console.log('Fetching availability for date:', date); // Use the date parameter
-      
+
       // Mock data for demonstration
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
-      
+
       const mockSlots: AvailabilitySlot[] = [
         { start: '09:00', end: '10:00', available: true },
         { start: '10:00', end: '11:00', available: false },
@@ -78,7 +93,7 @@ export function CalComAvailability({
         { start: '15:00', end: '16:00', available: true },
         { start: '16:00', end: '17:00', available: false },
       ];
-      
+
       setAvailability(mockSlots);
     } catch (err) {
       setError('예약 가능 시간을 불러올 수 없습니다.');
@@ -130,7 +145,7 @@ export function CalComAvailability({
         <div className="space-y-2">
           <h4 className="text-sm font-medium">날짜 선택</h4>
           <div className="flex space-x-2 overflow-x-auto pb-2">
-            {dates.map((date) => (
+            {dates.map(date => (
               <Button
                 key={date.value}
                 variant={selectedDate === date.value ? 'default' : 'outline'}
@@ -204,7 +219,9 @@ export function CalComAvailability({
           {!isLoading && !error && availability.length === 0 && (
             <div className="text-center p-6 text-muted-foreground">
               <Calendar className="h-8 w-8 mx-auto mb-2 opacity-50" />
-              <p className="text-sm">선택한 날짜에 예약 가능한 시간이 없습니다.</p>
+              <p className="text-sm">
+                선택한 날짜에 예약 가능한 시간이 없습니다.
+              </p>
               <p className="text-xs mt-1">다른 날짜를 선택해 주세요.</p>
             </div>
           )}
@@ -213,11 +230,7 @@ export function CalComAvailability({
         {/* Book Now Button */}
         {showBookButton && !error && availableSlots > 0 && (
           <div className="pt-4 border-t">
-            <Button
-              onClick={handleBookNow}
-              className="w-full"
-              size="lg"
-            >
+            <Button onClick={handleBookNow} className="w-full" size="lg">
               <Calendar className="mr-2 h-4 w-4" />
               지금 예약하기
             </Button>

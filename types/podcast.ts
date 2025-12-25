@@ -81,25 +81,25 @@ export interface PodcastPlaylist {
 }
 
 /** Podcast content categories aligned with blog categories */
-export type PodcastCategory = 
-  | '투자전략'      // Investment Strategy
-  | '세무최적화'    // Tax Optimization
-  | '가업승계'      // Business Succession
-  | '패밀리오피스'  // Family Office
-  | '자산관리'      // Asset Management
-  | '디지털혁신'    // Digital Innovation
-  | '글로벌트렌드'  // Global Trends
-  | '승계전략'      // Succession Strategy
-  | '기업분석'      // Business Analysis
-  | '시장동향';     // Market Trends
+export type PodcastCategory =
+  | '투자전략' // Investment Strategy
+  | '세무최적화' // Tax Optimization
+  | '가업승계' // Business Succession
+  | '패밀리오피스' // Family Office
+  | '자산관리' // Asset Management
+  | '디지털혁신' // Digital Innovation
+  | '글로벌트렌드' // Global Trends
+  | '승계전략' // Succession Strategy
+  | '기업분석' // Business Analysis
+  | '시장동향'; // Market Trends
 
 /** Content matching algorithms for blog-podcast correlation */
-export type ContentMatchingStrategy = 
-  | 'category'      // Direct category matching
-  | 'tags'          // Tag-based matching
-  | 'keywords'      // Keyword extraction and matching
-  | 'semantic'      // Semantic similarity matching
-  | 'manual';       // Manual curation
+export type ContentMatchingStrategy =
+  | 'category' // Direct category matching
+  | 'tags' // Tag-based matching
+  | 'keywords' // Keyword extraction and matching
+  | 'semantic' // Semantic similarity matching
+  | 'manual'; // Manual curation
 
 export interface ContentMatcher {
   /** Matching strategy used */
@@ -192,7 +192,12 @@ export interface BlogPodcastConnectionProps {
 /** Error types for podcast functionality */
 export interface PodcastError {
   /** Error code */
-  code: 'EPISODE_NOT_FOUND' | 'SPOTIFY_UNAVAILABLE' | 'INVALID_URL' | 'NETWORK_ERROR' | 'PARSING_ERROR';
+  code:
+    | 'EPISODE_NOT_FOUND'
+    | 'SPOTIFY_UNAVAILABLE'
+    | 'INVALID_URL'
+    | 'NETWORK_ERROR'
+    | 'PARSING_ERROR';
   /** Error message */
   message: string;
   /** Additional error context */

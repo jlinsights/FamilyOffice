@@ -2,11 +2,14 @@
  * Supabase 보안 감사 API 엔드포인트
  * 관리자만 접근 가능한 보안 상태 모니터링
  */
-
 import { NextRequest, NextResponse } from 'next/server';
+
 import { requireAdminPermissions } from '@/lib/admin-permissions';
-import { runSecurityAudit, getCriticalIssues } from '@/lib/security/supabase-security-checker';
 import { globalRateLimit } from '@/lib/rate-limit';
+import {
+  runSecurityAudit,
+  getCriticalIssues,
+} from '@/lib/security/supabase-security-checker';
 
 export async function GET(request: NextRequest) {
   try {
@@ -33,10 +36,10 @@ export async function GET(request: NextRequest) {
           id: issue.id,
           priority: issue.severity === 'critical' ? '긴급' : '중요',
           action: issue.recommendation,
-          category: issue.category
-        }))
+          category: issue.category,
+        })),
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     // 5. 성공 응답
@@ -44,20 +47,19 @@ export async function GET(request: NextRequest) {
       status: 200,
       headers: {
         'Cache-Control': 'no-store, max-age=0',
-        'X-Security-Audit': 'completed'
-      }
+        'X-Security-Audit': 'completed',
+      },
     });
-
   } catch (error) {
     console.error('Security audit API error:', error);
 
     // 권한 오류인 경우
     if (error instanceof Error && error.message.includes('권한')) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Unauthorized access', 
-          message: '관리자 권한이 필요합니다.' 
+        {
+          success: false,
+          error: 'Unauthorized access',
+          message: '관리자 권한이 필요합니다.',
         },
         { status: 403 }
       );
@@ -68,9 +70,12 @@ export async function GET(request: NextRequest) {
       {
         success: false,
         error: 'Security audit failed',
-        message: process.env.NODE_ENV === 'development' 
-          ? error instanceof Error ? error.message : 'Unknown error'
-          : '보안 감사 중 오류가 발생했습니다.'
+        message:
+          process.env.NODE_ENV === 'development'
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : '보안 감사 중 오류가 발생했습니다.',
       },
       { status: 500 }
     );
@@ -99,21 +104,20 @@ export async function POST(request: NextRequest) {
 
     // 여기서 특정 보안 이슈 해결 액션을 수행할 수 있음
     // 예: RLS 활성화, 정책 생성 등
-    
+
     return NextResponse.json({
       success: true,
       message: `Security action '${action}' initiated for issue '${issueId}'`,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
     console.error('Security action API error:', error);
-    
+
     return NextResponse.json(
       {
         success: false,
         error: 'Security action failed',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );

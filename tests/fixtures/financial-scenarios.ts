@@ -348,7 +348,9 @@ export const DAY_TRADER_HIGH_FREQUENCY: FinancialScenario = {
     ...Array.from({ length: 50 }, (_, i) => ({
       id: `day-txn-${i + 1}`,
       type: (Math.random() > 0.5 ? 'BUY' : 'SELL') as 'BUY' | 'SELL',
-      symbol: (['TSLA', 'NVDA', 'AMD'] as const)[Math.floor(Math.random() * 3)] || 'TSLA',
+      symbol:
+        (['TSLA', 'NVDA', 'AMD'] as const)[Math.floor(Math.random() * 3)] ||
+        'TSLA',
       shares: Math.floor(Math.random() * 100) + 10,
       price: 200 + Math.random() * 600, // Random price between $200-800
       timestamp: new Date(

@@ -1,21 +1,21 @@
 import {
-    Building2,
-    Calculator,
-    Crown,
-    DollarSign,
-    Laptop,
-    Leaf,
-    Network,
-    Scale,
-    TrendingUp,
-    Users,
+  Building2,
+  Calculator,
+  Crown,
+  DollarSign,
+  Laptop,
+  Leaf,
+  Network,
+  Scale,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
 
 import type {
-    Seminar,
-    SeminarCategoryInfo,
-    SeminarSeries,
-    Speaker,
+  Seminar,
+  SeminarCategoryInfo,
+  SeminarSeries,
+  Speaker,
 } from '@/types/seminar';
 
 export const SEMINAR_CATEGORIES: SeminarCategoryInfo[] = [
@@ -358,7 +358,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
     agenda: [
       {
         time: '10:30',
-        title: '세법개정 및 상법 반영 구조변화를 통한 자산(가업) 승계 핵심 전략',
+        title:
+          '세법개정 및 상법 반영 구조변화를 통한 자산(가업) 승계 핵심 전략',
         description: '2026년 개정 세법과 상법을 반영한 구조변화 전략',
         speaker: '이상선 박사',
         duration: 120,
@@ -393,7 +394,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
   {
     id: 'vvip-asset-succession-tax-reform-2025',
     title: 'VVIP 고객초청 세미나',
-    subtitle: '🎉🌟 자산 관리의 새로운 지평을 여는 VVIP 고객초청 세미나에 여러분을 초대합니다! 🌟🎉',
+    subtitle:
+      '🎉🌟 자산 관리의 새로운 지평을 여는 VVIP 고객초청 세미나에 여러분을 초대합니다! 🌟🎉',
     description:
       '바쁘신 일정에도 시간을 내주셔서 성공적인 가업승계와 절세 플랜을 시작하는 첫걸음을 함께해 주시길 바랍니다. 본 세미나는 대표님의 사업과 가정에 실질적인 도움을 드릴 수 있는 특별한 자리로 준비되었습니다.',
     speaker: {
@@ -462,7 +464,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
   {
     id: '2030-business-live-on-trend-korea-2026',
     title: '2030 Business Live ON',
-    subtitle: '🎉🌟 경계가 사라지는 시대, 미래를 혁신하고 새로운 가능성을 창출하기 위한 기술의 진보 🌟🎉',
+    subtitle:
+      '🎉🌟 경계가 사라지는 시대, 미래를 혁신하고 새로운 가능성을 창출하기 위한 기술의 진보 🌟🎉',
     description:
       '미래를 혁신하고 새로운 가능성을 창출하기 위한 기술의 진보 속에서 2025년 2030 Business Live ON과 함께 우리 앞에 예고된 세 가지 기술적 혁명을 알아보며, 이와 연계될 다른 산업 분야의 새로운 미래를 상상하고 꿈을 현실로 만드는 방법을 가늠해 보고자 합니다.',
     speaker: {
@@ -505,7 +508,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       {
         time: '07:30',
         title: '미리 보는 트렌드 코리아 2026',
-        description: '2026년 핵심 비즈니스 동향과 기술 혁신 기반 신규 사업 기회',
+        description:
+          '2026년 핵심 비즈니스 동향과 기술 혁신 기반 신규 사업 기회',
         speaker: '김난도 교수',
         duration: 90,
       },
@@ -529,14 +533,17 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       ],
       registrationDeadline: '10/14(화) 17시',
       requiredInfo: ['법인명/고객명', '고객연락처', '차량번호', '조찬여부'],
-      transportation: '교대역 5번출구 앞 서초 03버스 탑승 후 삼성레포츠센터 정류장 하차 후 도보 3분',
-      hybridOption: '온라인 라이브 스트리밍 제공 - 출장이나 일정상 현장 참석이 어려우신 분들을 위한 비대면 참가 가능',
+      transportation:
+        '교대역 5번출구 앞 서초 03버스 탑승 후 삼성레포츠센터 정류장 하차 후 도보 3분',
+      hybridOption:
+        '온라인 라이브 스트리밍 제공 - 출장이나 일정상 현장 참석이 어려우신 분들을 위한 비대면 참가 가능',
     },
   },
   {
     id: 'vvip-critical-disaster-law-seminar',
     title: 'VVIP 고객초청 세미나',
-    subtitle: '🎉🌟 자산 관리의 새로운 지평을 여는 VVIP 고객초청 세미나에 여러분을 초대합니다! 🌟🎉',
+    subtitle:
+      '🎉🌟 자산 관리의 새로운 지평을 여는 VVIP 고객초청 세미나에 여러분을 초대합니다! 🌟🎉',
     description:
       '바쁘신 일정에도 시간을 내주셔서 성공적인 가업승계와 절세 플랜을 시작하는 첫걸음을 함께해 주시길 바랍니다. 본 세미나는 대표님의 사업과 가정에 실질적인 도움을 드릴 수 있는 특별한 자리로 준비되었습니다.',
     speaker: {
@@ -628,7 +635,8 @@ export const UPCOMING_SEMINARS: Seminar[] = [
       {
         time: '11:00',
         title: '법인 정관개정과 금융상품 활용 전략',
-        description: '법인 정관개정을 통한 가업승계 준비와 최적의 금융상품 활용 방안',
+        description:
+          '법인 정관개정을 통한 가업승계 준비와 최적의 금융상품 활용 방안',
         speaker: '패밀리오피스 전문가팀',
         duration: 90,
       },

@@ -5,12 +5,14 @@
 ## 📋 사전 준비사항
 
 ### ✅ 필요한 정보
+
 - [ ] 카카오계정 (개발자 등록용)
 - [ ] 사업자등록증 (비즈니스 API 사용 시)
 - [ ] 서비스 도메인 정보
 - [ ] 개발/운영 환경 URL
 
 ### ✅ 기술 요구사항
+
 - [ ] HTTPS 지원 도메인 (프로덕션)
 - [ ] Supabase 프로젝트 준비 완료
 - [ ] Next.js 애플리케이션 빌드 가능
@@ -18,6 +20,7 @@
 ## 🚀 1단계: 카카오 개발자 계정 생성
 
 ### 1.1 개발자 등록
+
 ```bash
 # 1. 카카오 개발자 콘솔 접속
 https://developers.kakao.com/
@@ -35,6 +38,7 @@ https://developers.kakao.com/
 ```
 
 ### 1.2 애플리케이션 생성
+
 ```bash
 # 애플리케이션 추가하기
 앱 이름: FamilyOffice S
@@ -46,6 +50,7 @@ https://developers.kakao.com/
 ## 🔧 2단계: 앱 기본 정보 설정
 
 ### 2.1 앱 키 확인
+
 ```bash
 # 생성된 앱 > 앱 키 탭에서 확인
 JavaScript 키: 클라이언트에서 사용
@@ -60,13 +65,14 @@ KAKAO_ADMIN_KEY=Admin_키_값  # 선택사항
 ```
 
 ### 2.2 플랫폼 등록
+
 ```bash
 # 플랫폼 탭 > Web 플랫폼 등록
 
 # 개발 환경
 사이트 도메인: http://localhost:3000
 
-# 프로덕션 환경  
+# 프로덕션 환경
 사이트 도메인: https://familyoffices.vip
 (또는 https://your-custom-domain.com)
 
@@ -79,6 +85,7 @@ KAKAO_ADMIN_KEY=Admin_키_값  # 선택사항
 ## 🔑 3단계: 카카오 로그인 설정
 
 ### 3.1 카카오 로그인 활성화
+
 ```bash
 # 제품 설정 > 카카오 로그인
 ✅ 카카오 로그인 활성화
@@ -88,6 +95,7 @@ KAKAO_ADMIN_KEY=Admin_키_값  # 선택사항
 ```
 
 ### 3.2 Redirect URI 설정
+
 ```bash
 # Redirect URI 등록 (정확히 입력!)
 
@@ -108,6 +116,7 @@ https://your-project-ref.supabase.co/auth/v1/callback
 ```
 
 ### 3.3 동의항목 설정
+
 ```bash
 # 개인정보 탭에서 설정
 
@@ -115,7 +124,7 @@ https://your-project-ref.supabase.co/auth/v1/callback
 ✅ 닉네임: 필수 (서비스에 필수)
 ✅ 프로필 사진: 필수 (사용자 경험 향상)
 
-# 선택 동의항목  
+# 선택 동의항목
 ✅ 카카오계정(이메일): 선택 (연락처로 활용)
 ✅ 이름: 선택 (상담 서비스용)
 ✅ 연령대: 선택 (맞춤 서비스)
@@ -130,6 +139,7 @@ https://your-project-ref.supabase.co/auth/v1/callback
 ## 💬 4단계: 메시지 API 설정 (선택사항)
 
 ### 4.1 카카오톡 메시지 활성화
+
 ```bash
 # 제품 설정 > 카카오톡 메시지
 ✅ 메시지 API 사용
@@ -140,12 +150,13 @@ https://your-project-ref.supabase.co/auth/v1/callback
 ```
 
 ### 4.2 템플릿 등록
+
 ```bash
 # 내 애플리케이션 > 카카오톡 메시지 > 템플릿
 
 # 기본 템플릿 등록:
 1. 회원가입 환영 메시지
-2. 상담 예약 확인 메시지  
+2. 상담 예약 확인 메시지
 3. 뉴스레터 구독 안내
 4. 세미나 신청 완료 메시지
 
@@ -154,6 +165,7 @@ https://your-project-ref.supabase.co/auth/v1/callback
 ```
 
 ### 4.3 비즈니스 채널 연결 (고급)
+
 ```bash
 # 메시지 전송을 위해 비즈니스 채널 필요
 
@@ -173,6 +185,7 @@ https://center-pf.kakao.com/
 ## 🔧 5단계: Supabase OAuth 설정
 
 ### 5.1 Supabase OAuth 프로바이더 설정
+
 ```bash
 # Supabase Dashboard 접속
 https://supabase.com/dashboard/project/your-project/auth
@@ -187,6 +200,7 @@ Redirect URL: https://your-project-ref.supabase.co/auth/v1/callback
 ```
 
 ### 5.2 추가 OAuth 설정
+
 ```bash
 # Site URL 설정 (중요!)
 Site URL: https://familyoffices.vip
@@ -203,6 +217,7 @@ Refresh token rotation: ✅ Enabled
 ```
 
 ### 5.3 카카오 OAuth 스코프 설정
+
 ```bash
 # Provider Scopes (선택사항)
 profile_nickname: 닉네임 조회
@@ -218,6 +233,7 @@ queryParams: {
 ## 🧪 6단계: 테스트 및 디버깅
 
 ### 6.1 로컬 환경 테스트
+
 ```bash
 # .env.local 파일 생성
 KAKAO_REST_API_KEY=your_rest_api_key
@@ -237,6 +253,7 @@ npm run dev
 ```
 
 ### 6.2 디버깅 도구 활용
+
 ```bash
 # Chrome DevTools 네트워크 탭에서 확인
 1. OAuth 요청 URL 정확성
@@ -251,7 +268,7 @@ Dashboard > Authentication > Users
 Error: invalid_client
 → REST API 키 확인, Client ID 재설정
 
-Error: redirect_uri_mismatch  
+Error: redirect_uri_mismatch
 → Redirect URI 정확성 재확인
 
 Error: unauthorized_client
@@ -259,6 +276,7 @@ Error: unauthorized_client
 ```
 
 ### 6.3 프로덕션 배포 전 체크
+
 ```bash
 # 카카오 개발자 콘솔 체크리스트:
 ✅ 앱 상태: 서비스 중
@@ -276,6 +294,7 @@ Error: unauthorized_client
 ## 📱 7단계: 고급 설정
 
 ### 7.1 모바일 최적화
+
 ```bash
 # 모바일 환경 고려사항:
 - 카카오톡 인앱브라우저 호환성
@@ -288,6 +307,7 @@ Error: unauthorized_client
 ```
 
 ### 7.2 로그인 UX 개선
+
 ```bash
 # 로그인 버튼 최적화:
 - 카카오 브랜드 가이드라인 준수
@@ -302,6 +322,7 @@ Error: unauthorized_client
 ```
 
 ### 7.3 보안 강화
+
 ```bash
 # 보안 설정:
 - CSRF 토큰 검증
@@ -320,6 +341,7 @@ Error: unauthorized_client
 ### 자주 발생하는 문제들
 
 #### 1. Redirect URI Mismatch
+
 ```bash
 # 문제: OAuth 콜백에서 URI 불일치 오류
 # 원인: 등록된 URI와 실제 요청 URI 불일치
@@ -338,6 +360,7 @@ Error: unauthorized_client
 ```
 
 #### 2. API 키 인식 오류
+
 ```bash
 # 문제: API 키를 인식하지 못함
 # 원인: 환경변수 설정 오류 또는 키 값 문제
@@ -349,13 +372,14 @@ Error: unauthorized_client
 
 2. Vercel 환경변수 확인
    Dashboard > Settings > Environment Variables
-   
+
 3. 키 값 앞뒤 공백 제거 확인
 
 4. 개발자 콘솔에서 키 재생성 시도
 ```
 
 #### 3. 카카오 로그인 비활성화
+
 ```bash
 # 문제: "카카오 로그인이 비활성화되었습니다"
 # 원인: 앱 심사 미완료 또는 정책 위반
@@ -371,11 +395,12 @@ Error: unauthorized_client
 
 3. 정책 준수 확인
    - 성인 콘텐츠 금지
-   - 스팸/광고 금지  
+   - 스팸/광고 금지
    - 카카오 브랜드 가이드라인 준수
 ```
 
 #### 4. 토큰 만료 문제
+
 ```bash
 # 문제: 로그인 후 바로 토큰 만료
 # 원인: 토큰 갱신 로직 오류
@@ -394,6 +419,7 @@ Error: unauthorized_client
 ## ✅ 최종 체크리스트
 
 ### 🔐 카카오 개발자 콘솔
+
 - [ ] 애플리케이션 생성 완료
 - [ ] 플랫폼 등록 (Web) 완료
 - [ ] 카카오 로그인 활성화 완료
@@ -402,6 +428,7 @@ Error: unauthorized_client
 - [ ] API 키 발급 완료
 
 ### 🗄️ Supabase 설정
+
 - [ ] OAuth 프로바이더 활성화
 - [ ] Client ID (REST API 키) 설정
 - [ ] Redirect URL 설정 완료
@@ -409,6 +436,7 @@ Error: unauthorized_client
 - [ ] RLS 정책 배포 완료
 
 ### 🌐 애플리케이션 설정
+
 - [ ] 환경변수 모든 키 설정
 - [ ] OAuth 콜백 라우트 구현
 - [ ] 에러 처리 로직 구현
@@ -416,6 +444,7 @@ Error: unauthorized_client
 - [ ] 모바일 반응형 대응
 
 ### 🧪 테스트 완료
+
 - [ ] 로컬 환경 로그인 테스트
 - [ ] 프로덕션 환경 로그인 테스트
 - [ ] 모바일 기기 테스트
@@ -424,21 +453,23 @@ Error: unauthorized_client
 
 ## 🎉 성공!
 
-FamilyOffice S의 카카오 OAuth 설정이 완료되었습니다. 
+FamilyOffice S의 카카오 OAuth 설정이 완료되었습니다.
 
 **다음 단계:**
+
 1. 사용자 테스트 및 피드백 수집
 2. 모니터링 시스템으로 로그인 패턴 분석
 3. 추가 소셜 로그인 옵션 검토
 4. 보안 정기 점검 계획 수립
 
 **지원 리소스:**
+
 - [카카오 개발자 문서](https://developers.kakao.com/docs)
 - [Supabase Auth 가이드](https://supabase.com/docs/guides/auth)
 - [Next.js Auth 패턴](https://nextjs.org/docs/authentication)
 
 ---
 
-**설정 완료 일시**: _______________  
-**담당자**: _______________  
+**설정 완료 일시**: ******\_\_\_******  
+**담당자**: ******\_\_\_******  
 **버전**: v1.0.0

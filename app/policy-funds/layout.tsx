@@ -1,5 +1,6 @@
-import { generateMetadata } from '@/lib/seo/metadata';
 import type { Metadata } from 'next';
+
+import { generateMetadata } from '@/lib/seo/metadata';
 
 // 정책자금 페이지 SEO 최적화 메타데이터
 export const metadata: Metadata = {
@@ -62,9 +63,9 @@ export const metadata: Metadata = {
   // 파비콘 및 앱 아이콘 설정
   icons: {
     icon: [{ url: '/favicon.ico', sizes: 'any' }],
-    apple: { url: '/apple-touch-icon.png' }
+    apple: { url: '/apple-touch-icon.png' },
   },
-  manifest: '/site.webmanifest'
+  manifest: '/site.webmanifest',
 };
 
 export default function PolicyFundsLayout({

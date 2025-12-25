@@ -3,15 +3,19 @@
  * email.familyoffices.vip 도메인 통합
  */
 import { Resend } from 'resend';
-import { env } from '@/lib/env';
+
 import { logger } from '@/lib/debug-logger';
+import { env } from '@/lib/env';
 
 // Resend 클라이언트 초기화 (조건부)
 const apiKey = (env as any).RESEND_API_KEY || process.env.RESEND_API_KEY;
 const resend = new Resend(apiKey || 'dummy-key-for-build');
 
 // 기본 발송자 이메일
-export const DEFAULT_FROM_EMAIL = (env as any).NEXT_PUBLIC_RESEND_FROM_EMAIL || process.env.NEXT_PUBLIC_RESEND_FROM_EMAIL || 'noreply@email.familyoffices.vip';
+export const DEFAULT_FROM_EMAIL =
+  (env as any).NEXT_PUBLIC_RESEND_FROM_EMAIL ||
+  process.env.NEXT_PUBLIC_RESEND_FROM_EMAIL ||
+  'noreply@email.familyoffices.vip';
 
 // 이메일 타입 정의
 export interface EmailData {
@@ -68,14 +72,16 @@ export async function sendEmail(emailData: EmailData): Promise<EmailResult> {
       return { success: false, error: response.error.message };
     }
 
-    logger.info('이메일 전송 성공:', { id: response.data?.id, to: emailData.to });
+    logger.info('이메일 전송 성공:', {
+      id: response.data?.id,
+      to: emailData.to,
+    });
     return { success: true, id: response.data?.id };
-
   } catch (error) {
     logger.error('이메일 전송 중 오류 발생:', error);
-    return { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Unknown error' 
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 }
@@ -90,7 +96,7 @@ export async function sendConsultationConfirmation(
   consultationType: string
 ): Promise<EmailResult> {
   const subject = '패밀리오피스 S - 상담 예약이 확정되었습니다';
-  
+
   const html = `
     <!DOCTYPE html>
     <html>
@@ -145,7 +151,7 @@ export async function sendConsultationConfirmation(
     to: userEmail,
     subject,
     html,
-    replyTo: 'support@familyoffices.vip'
+    replyTo: 'support@familyoffices.vip',
   });
 }
 
@@ -157,7 +163,7 @@ export async function sendNewsletterWelcome(
   userName?: string
 ): Promise<EmailResult> {
   const subject = '패밀리오피스 S 뉴스레터에 오신 것을 환영합니다';
-  
+
   const html = `
     <!DOCTYPE html>
     <html>
@@ -225,7 +231,7 @@ export async function sendSystemNotification(
   const severityColors = {
     info: '#3b82f6',
     warning: '#f59e0b',
-    error: '#ef4444'
+    error: '#ef4444',
   };
 
   const html = `
@@ -263,7 +269,7 @@ export async function sendSystemNotification(
     to: adminEmail,
     subject: `[FamilyOffice S] ${subject}`,
     html,
-    from: 'system@email.familyoffices.vip'
+    from: 'system@email.familyoffices.vip',
   });
 }
 
@@ -279,9 +285,10 @@ export async function sendStructureCheckConfirmation(
   const subject = '패밀리오피스 S - 구조 점검 요청이 접수되었습니다';
 
   // 점수에 따른 메시지 조정
-  const scoreMessage = qualificationScore >= 3
-    ? '귀하의 상황에 대한 전문가 검토가 필요해 보입니다. 영업일 기준 1-2일 내에 담당자가 연락드리겠습니다.'
-    : '접수하신 내용을 검토한 후 연락드리겠습니다.';
+  const scoreMessage =
+    qualificationScore >= 3
+      ? '귀하의 상황에 대한 전문가 검토가 필요해 보입니다. 영업일 기준 1-2일 내에 담당자가 연락드리겠습니다.'
+      : '접수하신 내용을 검토한 후 연락드리겠습니다.';
 
   const html = `
     <!DOCTYPE html>
@@ -411,7 +418,7 @@ export async function sendStructureCheckConfirmation(
     to: userEmail,
     subject,
     html,
-    replyTo: 'contact@familyoffices.vip'
+    replyTo: 'contact@familyoffices.vip',
   });
 }
 
@@ -429,13 +436,14 @@ export async function sendStructureCheckMeetingConfirmation(
 ): Promise<EmailResult> {
   const subject = '패밀리오피스 S - 구조 점검 미팅이 확정되었습니다';
 
-  const meetingLocationHtml = meetingType === 'online'
-    ? `
+  const meetingLocationHtml =
+    meetingType === 'online'
+      ? `
       <p><strong>미팅 방식:</strong> 온라인 (화상회의)</p>
       <p><strong>회의 링크:</strong> <a href="${meetingLink}" style="color: #3b82f6;">${meetingLink}</a></p>
       <p style="color: #64748b; font-size: 14px;">※ 미팅 시간 5분 전에 접속해주시기 바랍니다.</p>
     `
-    : `
+      : `
       <p><strong>미팅 방식:</strong> 오프라인 (대면)</p>
       <p><strong>장소:</strong> ${meetingAddress || '서울특별시 강남구 테헤란로 (상세 주소는 별도 안내)'}</p>
       <p style="color: #64748b; font-size: 14px;">※ 방문 시 주차는 건물 지하 주차장을 이용하시면 됩니다.</p>
@@ -576,7 +584,7 @@ export async function sendStructureCheckMeetingConfirmation(
     to: userEmail,
     subject,
     html,
-    replyTo: 'contact@familyoffices.vip'
+    replyTo: 'contact@familyoffices.vip',
   });
 }
 

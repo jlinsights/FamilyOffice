@@ -1,7 +1,7 @@
+import { NextRequest, NextResponse } from 'next/server';
 
 import { requireAdminPermissions } from '@/lib/admin-permissions';
 import { GoogleSearchConsoleAPI } from '@/lib/google/search-console';
-import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
@@ -15,12 +15,14 @@ export async function GET(request: NextRequest) {
     const end = new Date();
     const start = new Date();
     start.setDate(end.getDate() - 28);
-    
+
     const prevEnd = new Date(start);
     const prevStart = new Date(prevEnd);
     prevStart.setDate(prevEnd.getDate() - 28);
 
-    const dateStr = (d: Date) => d.toISOString().split('T')[0];
+    const dateStr = (d: Date): string => {
+      return d.toISOString().split('T')[0]!;
+    };
 
     // 4. Fetch Current Period Data
     const currentData = await api.getKeywordRankings(
@@ -37,7 +39,7 @@ export async function GET(request: NextRequest) {
     // To do this strictly we need previous period data.
     // We'll fetch previous period for top 10 queries only to save quota/time.
     const topQueries = currentData.queries.slice(0, 10);
-    
+
     // Fetch previous period for comparison (Global stats)
     const previousData = await api.getKeywordRankings(
       dateStr(prevStart),
@@ -47,8 +49,8 @@ export async function GET(request: NextRequest) {
 
     const searchMetrics = topQueries.map(q => {
       const prevQ = previousData.queries.find(p => p.query === q.query);
-      
-      // Calculate change in Clicks or Position? 
+
+      // Calculate change in Clicks or Position?
       // The dashboard shows "change" as a percentage (likely clicks or general score).
       // Let's use Clicks change %
       let change = 0;
@@ -64,7 +66,7 @@ export async function GET(request: NextRequest) {
         impressions: q.impressions,
         ctr: q.ctr,
         position: q.position,
-        change: change
+        change: change,
       };
     });
 
@@ -77,20 +79,19 @@ export async function GET(request: NextRequest) {
           clicks: p.clicks,
           impressions: p.impressions,
           ctr: p.ctr,
-          position: p.position
-        }))
-      }
+          position: p.position,
+        })),
+      },
     });
-
   } catch (error) {
     console.error('Search Console API Error:', error);
-    
-    // Fallback/Mock for error case to prevent dashboard crash, 
+
+    // Fallback/Mock for error case to prevent dashboard crash,
     // but log the error.
     return NextResponse.json(
-      { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Unknown Error' 
+      {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown Error',
       },
       { status: 500 }
     );

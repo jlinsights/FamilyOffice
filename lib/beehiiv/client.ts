@@ -19,7 +19,6 @@ interface BeehiivSubscriber {
   referrer?: string;
 }
 
-
 export class BeehiivClient {
   private config: BeehiivConfig;
 
@@ -28,7 +27,8 @@ export class BeehiivClient {
       ...config,
       baseUrl: config.baseUrl || 'https://api.beehiiv.com/v2',
       apiKey: process.env.BEEHIIV_API_KEY! || config.apiKey,
-      publicationId: process.env.BEEHIIV_PUBLICATION_ID! || config.publicationId,
+      publicationId:
+        process.env.BEEHIIV_PUBLICATION_ID! || config.publicationId,
     };
   }
 
@@ -40,7 +40,7 @@ export class BeehiivClient {
         {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${this.config.apiKey}`,
+            Authorization: `Bearer ${this.config.apiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -52,7 +52,8 @@ export class BeehiivClient {
             utm_source: subscriber.utmSource || 'familyoffice-blog',
             utm_campaign: subscriber.utmCampaign || 'blog-subscription',
             utm_medium: subscriber.utmMedium || 'website',
-            referring_site: subscriber.referrer || 'https://familyoffices.vercel.app/blog',
+            referring_site:
+              subscriber.referrer || 'https://familyoffices.vercel.app/blog',
           }),
         }
       );
@@ -76,7 +77,7 @@ export class BeehiivClient {
         {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${this.config.apiKey}`,
+            Authorization: `Bearer ${this.config.apiKey}`,
           },
         }
       );
@@ -101,7 +102,7 @@ export class BeehiivClient {
         {
           method: 'PATCH',
           headers: {
-            'Authorization': `Bearer ${this.config.apiKey}`,
+            Authorization: `Bearer ${this.config.apiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -130,7 +131,7 @@ export class BeehiivClient {
         {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${this.config.apiKey}`,
+            Authorization: `Bearer ${this.config.apiKey}`,
           },
         }
       );
@@ -155,7 +156,7 @@ export class BeehiivClient {
       .createHmac('sha256', process.env.BEEHIIV_WEBHOOK_SECRET!)
       .update(body)
       .digest('hex');
-    
+
     return signature === expectedSignature;
   }
 
@@ -167,7 +168,7 @@ export class BeehiivClient {
         {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${this.config.apiKey}`,
+            Authorization: `Bearer ${this.config.apiKey}`,
           },
         }
       );

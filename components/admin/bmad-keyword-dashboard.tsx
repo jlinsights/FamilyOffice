@@ -1,10 +1,5 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   AlertCircle,
   ArrowDown,
@@ -16,9 +11,22 @@ import {
   RefreshCw,
   Target,
   TrendingUp,
-  Zap
+  Zap,
 } from 'lucide-react';
+
 import { useEffect, useState } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 /**
  * BMAD 키워드 추적 대시보드
@@ -71,7 +79,9 @@ export function BMADKeywordDashboard() {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('/api/bmad-tracking?action=dashboard-summary');
+      const response = await fetch(
+        '/api/bmad-tracking?action=dashboard-summary'
+      );
       const result = await response.json();
 
       if (result.success) {
@@ -97,7 +107,9 @@ export function BMADKeywordDashboard() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center space-y-4">
           <RefreshCw className="h-8 w-8 animate-spin mx-auto text-primary" />
-          <p className="text-muted-foreground">BMAD 키워드 데이터를 분석 중입니다...</p>
+          <p className="text-muted-foreground">
+            BMAD 키워드 데이터를 분석 중입니다...
+          </p>
         </div>
       </div>
     );
@@ -126,7 +138,9 @@ export function BMADKeywordDashboard() {
       {/* 헤더 */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">BMAD 키워드 추적</h2>
+          <h2 className="text-3xl font-bold tracking-tight">
+            BMAD 키워드 추적
+          </h2>
           <p className="text-muted-foreground">
             성공한 기업가의 검색 패턴별 성과 모니터링
           </p>
@@ -151,7 +165,9 @@ export function BMADKeywordDashboard() {
             <Eye className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data.overview.totalImpressions.toLocaleString()}</div>
+            <div className="text-2xl font-bold">
+              {data.overview.totalImpressions.toLocaleString()}
+            </div>
             <p className="text-xs text-muted-foreground">
               {data.overview.totalKeywords}개 키워드 추적 중
             </p>
@@ -164,7 +180,9 @@ export function BMADKeywordDashboard() {
             <MousePointerClick className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data.overview.totalClicks.toLocaleString()}</div>
+            <div className="text-2xl font-bold">
+              {data.overview.totalClicks.toLocaleString()}
+            </div>
             <p className="text-xs text-muted-foreground">
               평균 CTR: {data.overview.avgCTR.toFixed(2)}%
             </p>
@@ -223,13 +241,21 @@ export function BMADKeywordDashboard() {
                     <div className="flex items-center space-x-3">
                       <span className="font-medium text-lg">
                         {category.category === 'behavioral' && '🎯 Behavioral'}
-                        {category.category === 'motivational' && '🚀 Motivational'}
-                        {category.category === 'aspirational' && '✨ Aspirational'}
+                        {category.category === 'motivational' &&
+                          '🚀 Motivational'}
+                        {category.category === 'aspirational' &&
+                          '✨ Aspirational'}
                         {category.category === 'decisional' && '⚡ Decisional'}
                       </span>
-                      <Badge variant="outline">{category.totalKeywords}개</Badge>
+                      <Badge variant="outline">
+                        {category.totalKeywords}개
+                      </Badge>
                       {category.trend !== 'stable' && (
-                        <Badge variant={category.trend === 'up' ? 'default' : 'destructive'}>
+                        <Badge
+                          variant={
+                            category.trend === 'up' ? 'default' : 'destructive'
+                          }
+                        >
                           {category.trend === 'up' ? (
                             <ArrowUp className="h-3 w-3 mr-1" />
                           ) : (
@@ -252,15 +278,21 @@ export function BMADKeywordDashboard() {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
                     <div>
                       <p className="text-xs text-muted-foreground">노출수</p>
-                      <p className="font-medium">{category.totalImpressions.toLocaleString()}</p>
+                      <p className="font-medium">
+                        {category.totalImpressions.toLocaleString()}
+                      </p>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">클릭수</p>
-                      <p className="font-medium">{category.totalClicks.toLocaleString()}</p>
+                      <p className="font-medium">
+                        {category.totalClicks.toLocaleString()}
+                      </p>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">CTR</p>
-                      <p className="font-medium">{category.avgCTR.toFixed(2)}%</p>
+                      <p className="font-medium">
+                        {category.avgCTR.toFixed(2)}%
+                      </p>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">전환율</p>
@@ -271,10 +303,14 @@ export function BMADKeywordDashboard() {
                   </div>
 
                   <div className="text-sm text-muted-foreground pt-2 border-t">
-                    {category.category === 'behavioral' && '실제 기업가들의 검색 행동 패턴'}
-                    {category.category === 'motivational' && '성취 동기와 성장 욕구 기반'}
-                    {category.category === 'aspirational' && '미래 비전과 열망 기반'}
-                    {category.category === 'decisional' && '구체적 실행과 즉시 결정 기반 - 최고 성과'}
+                    {category.category === 'behavioral' &&
+                      '실제 기업가들의 검색 행동 패턴'}
+                    {category.category === 'motivational' &&
+                      '성취 동기와 성장 욕구 기반'}
+                    {category.category === 'aspirational' &&
+                      '미래 비전과 열망 기반'}
+                    {category.category === 'decisional' &&
+                      '구체적 실행과 즉시 결정 기반 - 최고 성과'}
                   </div>
                 </div>
               ))}
@@ -293,15 +329,22 @@ export function BMADKeywordDashboard() {
             <CardContent>
               <div className="space-y-4">
                 {data.topKeywords.map((keyword, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 rounded-lg border">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 rounded-lg border"
+                  >
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
-                        <span className="font-bold text-primary text-lg">#{index + 1}</span>
+                        <span className="font-bold text-primary text-lg">
+                          #{index + 1}
+                        </span>
                         <span className="font-medium">{keyword.keyword}</span>
                         <Badge variant="secondary" className="text-xs">
                           {keyword.category === 'behavioral' && '🎯 Behavioral'}
-                          {keyword.category === 'motivational' && '🚀 Motivational'}
-                          {keyword.category === 'aspirational' && '✨ Aspirational'}
+                          {keyword.category === 'motivational' &&
+                            '🚀 Motivational'}
+                          {keyword.category === 'aspirational' &&
+                            '✨ Aspirational'}
                           {keyword.category === 'decisional' && '⚡ Decisional'}
                         </Badge>
                       </div>
@@ -309,11 +352,15 @@ export function BMADKeywordDashboard() {
                       <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
                         <div>
                           <p className="text-xs text-muted-foreground">노출</p>
-                          <p className="font-medium">{keyword.impressions.toLocaleString()}</p>
+                          <p className="font-medium">
+                            {keyword.impressions.toLocaleString()}
+                          </p>
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">클릭</p>
-                          <p className="font-medium">{keyword.clicks.toLocaleString()}</p>
+                          <p className="font-medium">
+                            {keyword.clicks.toLocaleString()}
+                          </p>
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">전환</p>
@@ -323,11 +370,17 @@ export function BMADKeywordDashboard() {
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">CTR</p>
-                          <p className="font-medium">{keyword.ctr.toFixed(2)}%</p>
+                          <p className="font-medium">
+                            {keyword.ctr.toFixed(2)}%
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">전환율</p>
-                          <p className="font-medium">{keyword.conversionRate.toFixed(2)}%</p>
+                          <p className="text-xs text-muted-foreground">
+                            전환율
+                          </p>
+                          <p className="font-medium">
+                            {keyword.conversionRate.toFixed(2)}%
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -345,9 +398,7 @@ export function BMADKeywordDashboard() {
                 <Zap className="h-5 w-5 mr-2" />
                 BMAD 키워드 인사이트 & 권장사항
               </CardTitle>
-              <CardDescription>
-                데이터 기반 최적화 전략
-              </CardDescription>
+              <CardDescription>데이터 기반 최적화 전략</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* 핵심 인사이트 */}
@@ -360,22 +411,23 @@ export function BMADKeywordDashboard() {
                   <div className="flex items-start space-x-2">
                     <div className="text-green-500 mt-1">✓</div>
                     <p className="text-sm">
-                      <strong>Decisional 키워드</strong>가 전체 전환의 <strong>68%</strong>를 차지하며
-                      가장 높은 ROI 제공
+                      <strong>Decisional 키워드</strong>가 전체 전환의{' '}
+                      <strong>68%</strong>를 차지하며 가장 높은 ROI 제공
                     </p>
                   </div>
                   <div className="flex items-start space-x-2">
                     <div className="text-green-500 mt-1">✓</div>
                     <p className="text-sm">
-                      "무료 상담", "비용 문의" 등 <strong>즉시 행동 유도 키워드</strong>의
-                      전환율이 평균 <strong>2.5배</strong> 높음
+                      &ldquo;무료 상담&rdquo;, &ldquo;비용 문의&rdquo; 등{' '}
+                      <strong>즉시 행동 유도 키워드</strong>의 전환율이 평균{' '}
+                      <strong>2.5배</strong> 높음
                     </p>
                   </div>
                   <div className="flex items-start space-x-2">
                     <div className="text-yellow-500 mt-1">!</div>
                     <p className="text-sm">
-                      Aspirational 키워드는 높은 노출 대비 <strong>낮은 전환율</strong> →
-                      콘텐츠 최적화 필요
+                      Aspirational 키워드는 높은 노출 대비{' '}
+                      <strong>낮은 전환율</strong> → 콘텐츠 최적화 필요
                     </p>
                   </div>
                 </div>
@@ -393,7 +445,8 @@ export function BMADKeywordDashboard() {
                       🎯 우선순위 1: Decisional 키워드 중심 랜딩 페이지 최적화
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      "패밀리오피스 비용", "무료 상담" 등 고전환 키워드 타겟 페이지 개선
+                      &ldquo;패밀리오피스 비용&rdquo;, &ldquo;무료 상담&rdquo;
+                      등 고전환 키워드 타겟 페이지 개선
                     </p>
                   </div>
 
@@ -411,7 +464,8 @@ export function BMADKeywordDashboard() {
                       🚀 우선순위 3: CTA 버튼 최적화
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      "무료 상담 신청" CTA를 더 눈에 띄는 위치로 이동 및 강조
+                      &ldquo;무료 상담 신청&rdquo; CTA를 더 눈에 띄는 위치로
+                      이동 및 강조
                     </p>
                   </div>
                 </div>

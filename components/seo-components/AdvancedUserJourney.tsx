@@ -1,22 +1,24 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { 
-  TrendingUp, 
-  Target, 
-  Clock, 
-  CheckCircle, 
-  ArrowRight, 
+import {
+  TrendingUp,
+  Target,
+  Clock,
+  CheckCircle,
+  ArrowRight,
   Lightbulb,
   Calculator,
   Users,
   Shield,
-  Zap
+  Zap,
 } from 'lucide-react';
+
+import { useState, useEffect, useCallback } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 
 // 🎯 Agent OS급 사용자 여정 최적화 시스템
 interface AdvancedUserJourneyProps {
@@ -42,10 +44,10 @@ interface UserInsight {
   value?: string;
 }
 
-export function AdvancedUserJourney({ 
-  calculatorType, 
-  onStepComplete, 
-  onConversion 
+export function AdvancedUserJourney({
+  calculatorType,
+  onStepComplete,
+  onConversion,
 }: AdvancedUserJourneyProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [journeySteps, setJourneySteps] = useState<JourneyStep[]>([]);
@@ -63,7 +65,7 @@ export function AdvancedUserJourney({
           description: '현재 상속세 부담 수준을 확인하세요',
           status: 'active' as const,
           timeSpent: 0,
-          completionTrigger: 'asset_input_started'
+          completionTrigger: 'asset_input_started',
         },
         {
           id: 'calculation',
@@ -71,7 +73,7 @@ export function AdvancedUserJourney({
           description: '전문가급 정밀도로 상속세를 계산합니다',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'calculation_completed'
+          completionTrigger: 'calculation_completed',
         },
         {
           id: 'optimization',
@@ -79,7 +81,7 @@ export function AdvancedUserJourney({
           description: 'AI가 분석한 최적의 절세 방안을 확인하세요',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'results_viewed'
+          completionTrigger: 'results_viewed',
         },
         {
           id: 'consultation',
@@ -87,8 +89,8 @@ export function AdvancedUserJourney({
           description: '맞춤형 상속세 전략을 전문가와 함께 완성하세요',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'consultation_requested'
-        }
+          completionTrigger: 'consultation_requested',
+        },
       ],
       gift: [
         {
@@ -97,7 +99,7 @@ export function AdvancedUserJourney({
           description: '분할증여의 놀라운 절세 효과를 확인하세요',
           status: 'active' as const,
           timeSpent: 0,
-          completionTrigger: 'gift_info_started'
+          completionTrigger: 'gift_info_started',
         },
         {
           id: 'calculation',
@@ -105,7 +107,7 @@ export function AdvancedUserJourney({
           description: '관계별 공제한도까지 고려한 정확한 계산',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'calculation_completed'
+          completionTrigger: 'calculation_completed',
         },
         {
           id: 'planning',
@@ -113,7 +115,7 @@ export function AdvancedUserJourney({
           description: '체계적인 분할증여로 최대 절세 효과 달성',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'optimization_viewed'
+          completionTrigger: 'optimization_viewed',
         },
         {
           id: 'consultation',
@@ -121,8 +123,8 @@ export function AdvancedUserJourney({
           description: '가족 상황에 맞는 맞춤형 증여 계획 수립',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'consultation_requested'
-        }
+          completionTrigger: 'consultation_requested',
+        },
       ],
       succession: [
         {
@@ -131,7 +133,7 @@ export function AdvancedUserJourney({
           description: '성공적인 가업승계를 위한 첫 단계를 시작하세요',
           status: 'active' as const,
           timeSpent: 0,
-          completionTrigger: 'company_info_started'
+          completionTrigger: 'company_info_started',
         },
         {
           id: 'analysis',
@@ -139,7 +141,7 @@ export function AdvancedUserJourney({
           description: '방법별 세무비용을 정확히 비교 분석합니다',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'calculation_completed'
+          completionTrigger: 'calculation_completed',
         },
         {
           id: 'strategy',
@@ -147,7 +149,7 @@ export function AdvancedUserJourney({
           description: '특례 혜택까지 고려한 최적의 승계 방법 제시',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'strategy_viewed'
+          completionTrigger: 'strategy_viewed',
         },
         {
           id: 'consultation',
@@ -155,104 +157,119 @@ export function AdvancedUserJourney({
           description: '5-10년 장기 승계 계획을 전문가와 수립하세요',
           status: 'pending' as const,
           timeSpent: 0,
-          completionTrigger: 'consultation_requested'
-        }
-      ]
+          completionTrigger: 'consultation_requested',
+        },
+      ],
     };
 
     setJourneySteps(journeyConfigs[calculatorType]);
   }, [calculatorType]);
 
   // 🎯 사용자 인사이트 생성 (실시간)
-  const generateUserInsights = useCallback((step: number, timeSpent: number) => {
-    const insights: UserInsight[] = [];
-    
-    // 시간 기반 인사이트
-    if (timeSpent > 120 && step === 0) {
-      insights.push({
-        type: 'tip',
-        title: '💡 계산 팁',
-        message: '정확한 계산을 위해 모든 자산 정보를 입력해주세요',
-        action: '상세 입력 가이드 보기'
-      });
-    }
-    
-    if (timeSpent > 180 && step === 1) {
-      insights.push({
-        type: 'success',
-        title: '🎯 계산 완료',
-        message: '전문가 수준의 정확한 계산이 완료되었습니다',
-        value: '99.9% 정확도'
-      });
-    }
+  const generateUserInsights = useCallback(
+    (step: number, timeSpent: number) => {
+      const insights: UserInsight[] = [];
 
-    // 단계별 맞춤 인사이트
-    if (step === 2) {
-      const calculatorInsights = {
-        inheritance: {
-          type: 'warning' as const,
-          title: '⚠️ 상속세 부담',
-          message: '아무 대책 없이는 상속세 부담이 클 수 있습니다',
-          action: '절세 전략 확인하기'
-        },
-        gift: {
-          type: 'success' as const,
-          title: '✨ 분할증여 효과',
-          message: '체계적인 분할증여로 큰 절세 효과를 얻을 수 있습니다',
-          value: '최대 70% 절감 가능'
-        },
-        succession: {
-          type: 'info' as const,
-          title: '🏢 승계 골든타임',
-          message: '조기 승계 준비로 더 큰 혜택을 받을 수 있습니다',
-          action: '승계 전략 상담받기'
-        }
-      };
-      
-      insights.push(calculatorInsights[calculatorType]);
-    }
-
-    setUserInsights(insights);
-  }, [calculatorType]);
-
-  // 🎯 여정 진행 관리
-  const advanceStep = useCallback((trigger: string) => {
-    setJourneySteps(prev => {
-      const updated = [...prev];
-      const currentIndex = updated.findIndex(step => step.status === 'active');
-      
-      if (currentIndex >= 0 && updated[currentIndex]?.completionTrigger === trigger) {
-        // 현재 단계 완료
-        updated[currentIndex].status = 'completed';
-        updated[currentIndex].timeSpent = Date.now() - sessionStartTime;
-        
-        // 다음 단계 활성화
-        const nextStep = updated[currentIndex + 1];
-        if (currentIndex + 1 < updated.length && nextStep) {
-          nextStep.status = 'active';
-          setCurrentStep(currentIndex + 1);
-        }
-        
-        onStepComplete?.(updated[currentIndex]?.id || '', {
-          timeSpent: updated[currentIndex]?.timeSpent || 0,
-          step: currentIndex
+      // 시간 기반 인사이트
+      if (timeSpent > 120 && step === 0) {
+        insights.push({
+          type: 'tip',
+          title: '💡 계산 팁',
+          message: '정확한 계산을 위해 모든 자산 정보를 입력해주세요',
+          action: '상세 입력 가이드 보기',
         });
       }
-      
-      return updated;
-    });
-  }, [sessionStartTime, onStepComplete]);
+
+      if (timeSpent > 180 && step === 1) {
+        insights.push({
+          type: 'success',
+          title: '🎯 계산 완료',
+          message: '전문가 수준의 정확한 계산이 완료되었습니다',
+          value: '99.9% 정확도',
+        });
+      }
+
+      // 단계별 맞춤 인사이트
+      if (step === 2) {
+        const calculatorInsights = {
+          inheritance: {
+            type: 'warning' as const,
+            title: '⚠️ 상속세 부담',
+            message: '아무 대책 없이는 상속세 부담이 클 수 있습니다',
+            action: '절세 전략 확인하기',
+          },
+          gift: {
+            type: 'success' as const,
+            title: '✨ 분할증여 효과',
+            message: '체계적인 분할증여로 큰 절세 효과를 얻을 수 있습니다',
+            value: '최대 70% 절감 가능',
+          },
+          succession: {
+            type: 'info' as const,
+            title: '🏢 승계 골든타임',
+            message: '조기 승계 준비로 더 큰 혜택을 받을 수 있습니다',
+            action: '승계 전략 상담받기',
+          },
+        };
+
+        insights.push(calculatorInsights[calculatorType]);
+      }
+
+      setUserInsights(insights);
+    },
+    [calculatorType]
+  );
+
+  // 🎯 여정 진행 관리
+  const advanceStep = useCallback(
+    (trigger: string) => {
+      setJourneySteps(prev => {
+        const updated = [...prev];
+        const currentIndex = updated.findIndex(
+          step => step.status === 'active'
+        );
+
+        if (
+          currentIndex >= 0 &&
+          updated[currentIndex]?.completionTrigger === trigger
+        ) {
+          // 현재 단계 완료
+          updated[currentIndex].status = 'completed';
+          updated[currentIndex].timeSpent = Date.now() - sessionStartTime;
+
+          // 다음 단계 활성화
+          const nextStep = updated[currentIndex + 1];
+          if (currentIndex + 1 < updated.length && nextStep) {
+            nextStep.status = 'active';
+            setCurrentStep(currentIndex + 1);
+          }
+
+          onStepComplete?.(updated[currentIndex]?.id || '', {
+            timeSpent: updated[currentIndex]?.timeSpent || 0,
+            step: currentIndex,
+          });
+        }
+
+        return updated;
+      });
+    },
+    [sessionStartTime, onStepComplete]
+  );
 
   // 🎯 참여도 점수 계산
   useEffect(() => {
     const calculateEngagementScore = () => {
       const timeSpent = Date.now() - sessionStartTime;
-      const completedSteps = journeySteps.filter(step => step.status === 'completed').length;
+      const completedSteps = journeySteps.filter(
+        step => step.status === 'completed'
+      ).length;
       const progressScore = (completedSteps / journeySteps.length) * 50;
       const timeScore = Math.min((timeSpent / 300000) * 30, 30); // 5분 기준
       const interactionScore = 20; // 기본 상호작용 점수
-      
-      setEngagementScore(Math.round(progressScore + timeScore + interactionScore));
+
+      setEngagementScore(
+        Math.round(progressScore + timeScore + interactionScore)
+      );
     };
 
     const interval = setInterval(calculateEngagementScore, 10000); // 10초마다 업데이트
@@ -270,7 +287,10 @@ export function AdvancedUserJourney({
     generateUserInsights(currentStep, timeSpent / 1000);
   }, [currentStep, sessionStartTime, generateUserInsights]);
 
-  const progressPercentage = (journeySteps.filter(step => step.status === 'completed').length / journeySteps.length) * 100;
+  const progressPercentage =
+    (journeySteps.filter(step => step.status === 'completed').length /
+      journeySteps.length) *
+    100;
 
   return (
     <div className="space-y-6">
@@ -286,7 +306,10 @@ export function AdvancedUserJourney({
               <Badge variant="secondary" className="bg-blue-100 text-blue-800">
                 {Math.round(progressPercentage)}% 완료
               </Badge>
-              <Badge variant="outline" className="border-blue-300 text-blue-700">
+              <Badge
+                variant="outline"
+                className="border-blue-300 text-blue-700"
+              >
                 참여도: {engagementScore}점
               </Badge>
             </div>
@@ -294,20 +317,20 @@ export function AdvancedUserJourney({
         </CardHeader>
         <CardContent className="space-y-4">
           <Progress value={progressPercentage} className="h-3" />
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             {journeySteps.map((step, index) => {
               const isActive = step.status === 'active';
               const isCompleted = step.status === 'completed';
-              
+
               return (
-                <div 
+                <div
                   key={step.id}
                   className={`p-3 rounded-lg border transition-all duration-300 ${
-                    isCompleted 
+                    isCompleted
                       ? 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800'
-                      : isActive 
-                        ? 'bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800' 
+                      : isActive
+                        ? 'bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800'
                         : 'bg-gray-50 border-gray-200 dark:bg-gray-800 dark:border-gray-700'
                   }`}
                 >
@@ -319,19 +342,27 @@ export function AdvancedUserJourney({
                     ) : (
                       <div className="w-4 h-4 rounded-full border-2 border-gray-400" />
                     )}
-                    <span className={`text-sm font-medium ${
-                      isCompleted ? 'text-green-800 dark:text-green-200' : 
-                      isActive ? 'text-blue-800 dark:text-blue-200' : 
-                      'text-gray-600 dark:text-gray-400'
-                    }`}>
+                    <span
+                      className={`text-sm font-medium ${
+                        isCompleted
+                          ? 'text-green-800 dark:text-green-200'
+                          : isActive
+                            ? 'text-blue-800 dark:text-blue-200'
+                            : 'text-gray-600 dark:text-gray-400'
+                      }`}
+                    >
                       {step.title}
                     </span>
                   </div>
-                  <p className={`text-xs ${
-                    isCompleted ? 'text-green-600 dark:text-green-300' :
-                    isActive ? 'text-blue-600 dark:text-blue-300' :
-                    'text-gray-500 dark:text-gray-400'
-                  }`}>
+                  <p
+                    className={`text-xs ${
+                      isCompleted
+                        ? 'text-green-600 dark:text-green-300'
+                        : isActive
+                          ? 'text-blue-600 dark:text-blue-300'
+                          : 'text-gray-500 dark:text-gray-400'
+                    }`}
+                  >
                     {step.description}
                   </p>
                 </div>
@@ -345,17 +376,25 @@ export function AdvancedUserJourney({
       {userInsights.length > 0 && (
         <div className="space-y-3">
           {userInsights.map((insight, index) => (
-            <Card key={index} className={`border-l-4 ${
-              insight.type === 'success' ? 'border-l-green-500 bg-green-50 dark:bg-green-900/20' :
-              insight.type === 'warning' ? 'border-l-yellow-500 bg-yellow-50 dark:bg-yellow-900/20' :
-              insight.type === 'tip' ? 'border-l-blue-500 bg-blue-50 dark:bg-blue-900/20' :
-              'border-l-gray-500 bg-gray-50 dark:bg-gray-900/20'
-            }`}>
+            <Card
+              key={index}
+              className={`border-l-4 ${
+                insight.type === 'success'
+                  ? 'border-l-green-500 bg-green-50 dark:bg-green-900/20'
+                  : insight.type === 'warning'
+                    ? 'border-l-yellow-500 bg-yellow-50 dark:bg-yellow-900/20'
+                    : insight.type === 'tip'
+                      ? 'border-l-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                      : 'border-l-gray-500 bg-gray-50 dark:bg-gray-900/20'
+              }`}
+            >
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <h4 className="font-semibold mb-1">{insight.title}</h4>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">{insight.message}</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                      {insight.message}
+                    </p>
                     {insight.value && (
                       <Badge className="mt-2" variant="secondary">
                         {insight.value}
@@ -393,29 +432,51 @@ export function AdvancedUserJourney({
                   </p>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 {[
-                  { icon: Calculator, text: '정확한 계산 완료', desc: '전문가급 99.9% 정확도' },
-                  { icon: Lightbulb, text: 'AI 최적화 분석', desc: '맞춤형 절세 전략 확인' },
-                  { icon: Shield, text: '전문가 검증 준비', desc: '1:1 맞춤 컨설팅 가능' }
+                  {
+                    icon: Calculator,
+                    text: '정확한 계산 완료',
+                    desc: '전문가급 99.9% 정확도',
+                  },
+                  {
+                    icon: Lightbulb,
+                    text: 'AI 최적화 분석',
+                    desc: '맞춤형 절세 전략 확인',
+                  },
+                  {
+                    icon: Shield,
+                    text: '전문가 검증 준비',
+                    desc: '1:1 맞춤 컨설팅 가능',
+                  },
                 ].map((achievement, index) => (
-                  <div key={index} className="flex flex-col items-center p-4 bg-white/60 dark:bg-slate-800/60 rounded-xl">
+                  <div
+                    key={index}
+                    className="flex flex-col items-center p-4 bg-white/60 dark:bg-slate-800/60 rounded-xl"
+                  >
                     <achievement.icon className="w-8 h-8 text-green-600 mb-2" />
-                    <h4 className="font-semibold text-green-800 dark:text-green-200">{achievement.text}</h4>
-                    <p className="text-sm text-green-600 dark:text-green-300 text-center">{achievement.desc}</p>
+                    <h4 className="font-semibold text-green-800 dark:text-green-200">
+                      {achievement.text}
+                    </h4>
+                    <p className="text-sm text-green-600 dark:text-green-300 text-center">
+                      {achievement.desc}
+                    </p>
                   </div>
                 ))}
               </div>
-              
-              <Button 
+
+              <Button
                 className="w-full h-14 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold text-lg"
                 onClick={() => {
-                  onConversion?.('consultation_premium', { 
-                    engagementScore, 
-                    completionTime: Date.now() - sessionStartTime 
+                  onConversion?.('consultation_premium', {
+                    engagementScore,
+                    completionTime: Date.now() - sessionStartTime,
                   });
-                  window.open('/contact?service=premium-consultation&journey=completed', '_blank');
+                  window.open(
+                    '/contact?service=premium-consultation&journey=completed',
+                    '_blank'
+                  );
                 }}
               >
                 <Users className="w-6 h-6 mr-3" />
@@ -434,9 +495,11 @@ export function AdvancedUserJourney({
 export function useJourneyTrigger() {
   const triggerStep = useCallback((trigger: string) => {
     // 글로벌 이벤트 발생
-    window.dispatchEvent(new CustomEvent('journeyStep', { 
-      detail: { trigger } 
-    }));
+    window.dispatchEvent(
+      new CustomEvent('journeyStep', {
+        detail: { trigger },
+      })
+    );
   }, []);
 
   return { triggerStep };

@@ -1,16 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { Eye, EyeOff, Mail, Lock, Loader2 } from 'lucide-react';
+import * as z from 'zod';
+
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
 import {
   Form,
   FormControl,
@@ -19,6 +18,13 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
+import { createClient } from '@/lib/supabase/client';
+import { safeInsert, safeUpdate } from '@/lib/supabase/helpers';
+
+import { useToast } from '@/hooks/use-toast';
 
 const signInSchema = z.object({
   email: z
@@ -29,7 +35,7 @@ const signInSchema = z.object({
     .string()
     .min(6, '비밀번호는 최소 6자 이상이어야 합니다.')
     .max(50, '비밀번호는 최대 50자까지 입력 가능합니다.'),
-  rememberMe: z.boolean().optional()
+  rememberMe: z.boolean().optional(),
 });
 
 type SignInFormData = z.infer<typeof signInSchema>;
@@ -39,9 +45,9 @@ interface SignInFormProps {
   redirectTo?: string;
 }
 
-export function SignInForm({ 
-  onSuccess, 
-  redirectTo = '/dashboard' 
+export function SignInForm({
+  onSuccess,
+  redirectTo = '/dashboard',
 }: SignInFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,13 +60,13 @@ export function SignInForm({
     defaultValues: {
       email: '',
       password: '',
-      rememberMe: false
-    }
+      rememberMe: false,
+    },
   });
 
   const onSubmit = async (data: SignInFormData) => {
     setIsLoading(true);
-    
+
     try {
       const { data: authData, error } = await supabase.auth.signInWithPassword({
         email: data.email,
@@ -70,13 +76,14 @@ export function SignInForm({
       if (error) {
         // 에러 메시지 한국어 처리
         let errorMessage = '로그인에 실패했습니다.';
-        
+
         if (error.message.includes('Invalid login credentials')) {
           errorMessage = '이메일 또는 비밀번호가 올바르지 않습니다.';
         } else if (error.message.includes('Email not confirmed')) {
           errorMessage = '이메일 인증이 필요합니다. 이메일을 확인해주세요.';
         } else if (error.message.includes('Too many requests')) {
-          errorMessage = '너무 많은 시도가 있었습니다. 잠시 후 다시 시도해주세요.';
+          errorMessage =
+            '너무 많은 시도가 있었습니다. 잠시 후 다시 시도해주세요.';
         }
 
         toast({
@@ -97,25 +104,23 @@ export function SignInForm({
 
         if (!existingUser) {
           // users 테이블에 기본 정보 생성
-          await supabase
-            .from('users')
-            .insert({
-              id: authData.user.id,
-              email: authData.user.email,
-              name: authData.user.user_metadata?.name || authData.user.email?.split('@')[0] || '사용자',
-              provider: 'email',
-              created_at: new Date().toISOString(),
-              updated_at: new Date().toISOString()
-            });
+          await safeInsert(supabase, 'users', {
+            id: authData.user.id,
+            email: authData.user.email || null,
+            name:
+              authData.user.user_metadata?.name ||
+              authData.user.email?.split('@')[0] ||
+              '사용자',
+            provider: 'email',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          });
         } else {
           // 기존 사용자 로그인 시간 업데이트
-          await supabase
-            .from('users')
-            .update({
-              last_sign_in_at: new Date().toISOString(),
-              updated_at: new Date().toISOString()
-            })
-            .eq('id', authData.user.id);
+          await safeUpdate(supabase, 'users', {
+            last_sign_in_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }).eq('id', authData.user.id);
         }
 
         toast({
@@ -140,7 +145,7 @@ export function SignInForm({
 
   const handleForgotPassword = async () => {
     const email = form.getValues('email');
-    
+
     if (!email) {
       toast({
         title: '이메일 입력 필요',
@@ -270,12 +275,7 @@ export function SignInForm({
           </Button>
         </div>
 
-        <Button
-          type="submit"
-          className="w-full"
-          size="lg"
-          disabled={isLoading}
-        >
+        <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -1,10 +1,25 @@
 'use client';
 
+import {
+  RefreshCw,
+  Activity,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+  Database,
+} from 'lucide-react';
+
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { RefreshCw, Activity, AlertCircle, CheckCircle, Clock, Database } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 interface PerformanceData {
   status: string;
@@ -54,11 +69,11 @@ export default function SEODashboardPage() {
       setLoading(true);
       setError(null);
       const response = await fetch('/api/seo/performance?detailed=true');
-      
+
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
-      
+
       const result = await response.json();
       setData(result);
       setLastRefresh(new Date());
@@ -74,7 +89,7 @@ export default function SEODashboardPage() {
       const response = await fetch('/api/seo/performance?action=clear-cache', {
         method: 'POST',
       });
-      
+
       if (response.ok) {
         await fetchData(); // Refresh data after clearing cache
       }
@@ -85,7 +100,7 @@ export default function SEODashboardPage() {
 
   useEffect(() => {
     fetchData();
-    
+
     // Auto-refresh every 30 seconds
     const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
@@ -97,7 +112,9 @@ export default function SEODashboardPage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center py-20">
             <RefreshCw className="h-8 w-8 animate-spin text-blue-600" />
-            <span className="ml-2 text-lg">Loading SEO performance data...</span>
+            <span className="ml-2 text-lg">
+              Loading SEO performance data...
+            </span>
           </div>
         </div>
       </div>
@@ -111,7 +128,9 @@ export default function SEODashboardPage() {
           <div className="flex items-center justify-center py-20">
             <AlertCircle className="h-8 w-8 text-red-600" />
             <div className="ml-2">
-              <p className="text-lg font-medium text-red-600">Error loading dashboard</p>
+              <p className="text-lg font-medium text-red-600">
+                Error loading dashboard
+              </p>
               <p className="text-gray-600">{error}</p>
               <Button onClick={fetchData} className="mt-2">
                 Try Again
@@ -124,10 +143,15 @@ export default function SEODashboardPage() {
   }
 
   const getStatusColor = (status: string) => {
-    return status === 'healthy' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+    return status === 'healthy'
+      ? 'bg-green-100 text-green-800'
+      : 'bg-red-100 text-red-800';
   };
 
-  const getPerformanceColor = (value: number, thresholds: { good: number; warning: number }) => {
+  const getPerformanceColor = (
+    value: number,
+    thresholds: { good: number; warning: number }
+  ) => {
     if (value <= thresholds.good) return 'text-green-600';
     if (value <= thresholds.warning) return 'text-yellow-600';
     return 'text-red-600';
@@ -147,18 +171,20 @@ export default function SEODashboardPage() {
               Real-time monitoring of SEO system performance and feature flags
             </p>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <Badge className={getStatusColor(data?.status || 'unknown')}>
               {data?.status?.toUpperCase() || 'UNKNOWN'}
             </Badge>
-            <Button 
-              onClick={fetchData} 
+            <Button
+              onClick={fetchData}
               disabled={loading}
               variant="outline"
               size="sm"
             >
-              <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+              <RefreshCw
+                className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`}
+              />
               Refresh
             </Button>
           </div>
@@ -170,22 +196,28 @@ export default function SEODashboardPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Total Operations</CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600">
+                    Total Operations
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{data.performance.totalOperations}</div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    Since deployment
-                  </p>
+                  <div className="text-2xl font-bold">
+                    {data.performance.totalOperations}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Since deployment</p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Avg Response Time</CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600">
+                    Avg Response Time
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className={`text-2xl font-bold ${getPerformanceColor(data.performance.averageResponseTime, { good: 100, warning: 500 })}`}>
+                  <div
+                    className={`text-2xl font-bold ${getPerformanceColor(data.performance.averageResponseTime, { good: 100, warning: 500 })}`}
+                  >
                     {data.performance.averageResponseTime.toFixed(1)}ms
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
@@ -196,28 +228,35 @@ export default function SEODashboardPage() {
 
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Error Rate</CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600">
+                    Error Rate
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className={`text-2xl font-bold ${getPerformanceColor(data.performance.errorRate, { good: 1, warning: 5 })}`}>
+                  <div
+                    className={`text-2xl font-bold ${getPerformanceColor(data.performance.errorRate, { good: 1, warning: 5 })}`}
+                  >
                     {data.performance.errorRate.toFixed(2)}%
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    Target: &lt; 1%
-                  </p>
+                  <p className="text-xs text-gray-500 mt-1">Target: &lt; 1%</p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Bundle Optimization</CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600">
+                    Bundle Optimization
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className={`text-2xl font-bold ${getPerformanceColor(data.bundleOptimization.averageLoadTime, { good: 50, warning: 100 })}`}>
+                  <div
+                    className={`text-2xl font-bold ${getPerformanceColor(data.bundleOptimization.averageLoadTime, { good: 50, warning: 100 })}`}
+                  >
                     {data.bundleOptimization.averageLoadTime.toFixed(1)}ms
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
-                    {data.bundleOptimization.totalImports} imports • {data.bundleOptimization.status}
+                    {data.bundleOptimization.totalImports} imports •{' '}
+                    {data.bundleOptimization.status}
                   </p>
                 </CardContent>
               </Card>
@@ -231,22 +270,38 @@ export default function SEODashboardPage() {
                   Feature Flags Status
                 </CardTitle>
                 <CardDescription>
-                  {data.featureFlags.enabledCount} of {data.featureFlags.totalCount} features enabled
+                  {data.featureFlags.enabledCount} of{' '}
+                  {data.featureFlags.totalCount} features enabled
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                   {/* Show enabled features */}
-                  {data.featureFlags.enabled.map((feature) => (
-                    <Badge key={feature} variant="secondary" className="bg-green-100 text-green-800">
-                      {feature.replace('enable', '').replace(/([A-Z])/g, ' $1').trim()}
+                  {data.featureFlags.enabled.map(feature => (
+                    <Badge
+                      key={feature}
+                      variant="secondary"
+                      className="bg-green-100 text-green-800"
+                    >
+                      {feature
+                        .replace('enable', '')
+                        .replace(/([A-Z])/g, ' $1')
+                        .trim()}
                     </Badge>
                   ))}
-                  
+
                   {/* Show count of disabled features */}
-                  {data.featureFlags.totalCount - data.featureFlags.enabledCount > 0 && (
-                    <Badge variant="outline" className="bg-gray-100 text-gray-600">
-                      +{data.featureFlags.totalCount - data.featureFlags.enabledCount} disabled
+                  {data.featureFlags.totalCount -
+                    data.featureFlags.enabledCount >
+                    0 && (
+                    <Badge
+                      variant="outline"
+                      className="bg-gray-100 text-gray-600"
+                    >
+                      +
+                      {data.featureFlags.totalCount -
+                        data.featureFlags.enabledCount}{' '}
+                      disabled
                     </Badge>
                   )}
                 </div>
@@ -260,7 +315,9 @@ export default function SEODashboardPage() {
                   <CardTitle className="flex items-center">
                     <Database className="h-5 w-5 mr-2 text-purple-600" />
                     AI Cache Performance
-                    <Badge className="ml-2 bg-purple-100 text-purple-800">Week 3</Badge>
+                    <Badge className="ml-2 bg-purple-100 text-purple-800">
+                      Week 3
+                    </Badge>
                   </CardTitle>
                   <CardDescription>
                     AI-powered SEO operations caching statistics
@@ -269,17 +326,25 @@ export default function SEODashboardPage() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Cache Hit Rate:</span>
-                    <span className={`font-medium ${data.aiCache.hitRate > 80 ? 'text-green-600' : data.aiCache.hitRate > 60 ? 'text-yellow-600' : 'text-red-600'}`}>
+                    <span
+                      className={`font-medium ${data.aiCache.hitRate > 80 ? 'text-green-600' : data.aiCache.hitRate > 60 ? 'text-yellow-600' : 'text-red-600'}`}
+                    >
                       {data.aiCache.hitRate.toFixed(1)}%
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total AI Requests:</span>
-                    <span className="font-medium">{data.aiCache.totalRequests}</span>
+                    <span className="font-medium">
+                      {data.aiCache.totalRequests}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">AI Cache Status:</span>
-                    <Badge variant={data.aiCache.status === 'active' ? 'default' : 'outline'}>
+                    <Badge
+                      variant={
+                        data.aiCache.status === 'active' ? 'default' : 'outline'
+                      }
+                    >
                       {data.aiCache.status}
                     </Badge>
                   </div>
@@ -314,7 +379,9 @@ export default function SEODashboardPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">System Uptime:</span>
-                    <span className="font-mono text-sm">{data.environment.uptime}</span>
+                    <span className="font-mono text-sm">
+                      {data.environment.uptime}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Last Updated:</span>
@@ -335,31 +402,39 @@ export default function SEODashboardPage() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Slow Operations:</span>
-                    <span className={`font-medium ${data.performance.slowOperations > 0 ? 'text-red-600' : 'text-green-600'}`}>
+                    <span
+                      className={`font-medium ${data.performance.slowOperations > 0 ? 'text-red-600' : 'text-green-600'}`}
+                    >
                       {data.performance.slowOperations}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Cache Entries:</span>
-                    <span className="font-medium">{data.cache.entriesStored}</span>
+                    <span className="font-medium">
+                      {data.cache.entriesStored}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Cache Hit Rate:</span>
-                    <span className={`font-medium ${data.cache.hitRate > 80 ? 'text-green-600' : 'text-yellow-600'}`}>
+                    <span
+                      className={`font-medium ${data.cache.hitRate > 80 ? 'text-green-600' : 'text-yellow-600'}`}
+                    >
                       {data.cache.hitRate.toFixed(1)}%
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Bundle Load Time:</span>
-                    <span className={`font-medium ${data.bundleOptimization.averageLoadTime > 100 ? 'text-yellow-600' : 'text-green-600'}`}>
+                    <span
+                      className={`font-medium ${data.bundleOptimization.averageLoadTime > 100 ? 'text-yellow-600' : 'text-green-600'}`}
+                    >
                       {data.bundleOptimization.averageLoadTime.toFixed(1)}ms
                     </span>
                   </div>
                   <div className="pt-2">
-                    <Button 
-                      onClick={clearCache} 
-                      variant="outline" 
-                      size="sm" 
+                    <Button
+                      onClick={clearCache}
+                      variant="outline"
+                      size="sm"
                       className="w-full"
                     >
                       <Database className="h-4 w-4 mr-2" />
@@ -398,8 +473,8 @@ export default function SEODashboardPage() {
             {/* Footer Info */}
             <div className="text-center text-sm text-gray-500 pt-4">
               <p>
-                Dashboard auto-refreshes every 30 seconds • 
-                Last updated: {new Date(data.timestamp).toLocaleString()}
+                Dashboard auto-refreshes every 30 seconds • Last updated:{' '}
+                {new Date(data.timestamp).toLocaleString()}
               </p>
             </div>
           </>

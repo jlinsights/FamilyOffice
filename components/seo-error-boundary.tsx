@@ -76,7 +76,7 @@ export function useSEOErrorHandler() {
     if (error) {
       // Log error
       console.error('SEO Hook Error:', error);
-      
+
       // Reset error after logging
       setError(null);
     }

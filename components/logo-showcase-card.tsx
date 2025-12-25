@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { SVGLogoDisplay } from './svg-logo-display';
 
 /**
@@ -14,7 +15,7 @@ const LogoShowcaseCard: React.FC = () => (
     <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
       태그라인이 포함된 풀 브랜드 로고
     </p>
-    
+
     {/* 실제 SVG 렌더링 */}
     <div className="flex flex-col items-center mb-6">
       <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 flex items-center justify-center">
@@ -38,10 +39,12 @@ const LogoShowcaseCard: React.FC = () => (
         </div>
       </div>
     </div>
-    
+
     {/* 사용 가이드 */}
     <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 text-xs space-y-2">
-      <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">사용 가이드</h4>
+      <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">
+        사용 가이드
+      </h4>
       <ul className="space-y-1 text-gray-600 dark:text-gray-400">
         <li>• 최소 크기: 너비 180px 이상 유지</li>
         <li>• 여백: 로고 주변 최소 20px 확보</li>

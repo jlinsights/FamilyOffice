@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { GoogleSearchConsoleAPI } from '@/lib/google/search-console';
 
 export const dynamic = 'force-dynamic';
 
 interface MonitoringRequest {
-  action?: 'get_status' | 'get_alerts' | 'toggle_automation' | 'generate_report';
+  action?:
+    | 'get_status'
+    | 'get_alerts'
+    | 'toggle_automation'
+    | 'generate_report';
   automation_key?: string;
   report_type?: string;
   time_range?: string;
@@ -26,23 +31,28 @@ export async function GET(request: NextRequest) {
     switch (action) {
       case 'get_status':
         return await getSystemStatus();
-      
+
       case 'get_alerts':
         return await getAlerts();
-        
-      default:
-        return NextResponse.json({
-          success: false,
-          error: '지원하지 않는 액션입니다.'
-        }, { status: 400 });
-    }
 
+      default:
+        return NextResponse.json(
+          {
+            success: false,
+            error: '지원하지 않는 액션입니다.',
+          },
+          { status: 400 }
+        );
+    }
   } catch (error) {
     console.error('모니터링 API 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '서버 오류가 발생했습니다.'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: '서버 오류가 발생했습니다.',
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -54,23 +64,28 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'toggle_automation':
         return await toggleAutomation(body);
-        
+
       case 'generate_report':
         return await generateReport(body);
-        
-      default:
-        return NextResponse.json({
-          success: false,
-          error: '지원하지 않는 액션입니다.'
-        }, { status: 400 });
-    }
 
+      default:
+        return NextResponse.json(
+          {
+            success: false,
+            error: '지원하지 않는 액션입니다.',
+          },
+          { status: 400 }
+        );
+    }
   } catch (error) {
     console.error('모니터링 API 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '서버 오류가 발생했습니다.'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: '서버 오류가 발생했습니다.',
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -83,41 +98,45 @@ async function getSystemStatus() {
         status: 'online',
         uptime: 99.9,
         lastCheck: new Date().toISOString(),
-        metrics: await checkSEOService()
+        metrics: await checkSEOService(),
       },
       {
         name: '순위 추적',
-        status: 'online', 
+        status: 'online',
         uptime: 98.7,
         lastCheck: new Date().toISOString(),
-        metrics: await checkRankingService()
+        metrics: await checkRankingService(),
       },
       {
         name: 'AEO 엔진',
         status: 'online',
         uptime: 99.5,
         lastCheck: new Date().toISOString(),
-        metrics: { optimization_score: 89 }
+        metrics: { optimization_score: 89 },
       },
       {
         name: '성과 모니터링',
         status: Math.random() > 0.1 ? 'online' : 'degraded',
         uptime: 95.2,
         lastCheck: new Date().toISOString(),
-        metrics: { response_time: 120 }
+        metrics: { response_time: 120 },
       },
       {
         name: '알림 시스템',
         status: 'online',
         uptime: 100.0,
         lastCheck: new Date().toISOString(),
-        metrics: { queue_size: 0 }
-      }
+        metrics: { queue_size: 0 },
+      },
     ];
 
     // 전체 시스템 상태 계산
-    const onlineComponents = components.filter(c => c.status === 'online').length;
-    const overallHealth = Math.round((onlineComponents / components.length) * 100);
+    const onlineComponents = components.filter(
+      c => c.status === 'online'
+    ).length;
+    const overallHealth = Math.round(
+      (onlineComponents / components.length) * 100
+    );
 
     // 실시간 메트릭 수집
     const realTimeMetrics = await collectRealTimeMetrics();
@@ -127,7 +146,7 @@ async function getSystemStatus() {
       data: {
         systemHealth: {
           overall: overallHealth,
-          components
+          components,
         },
         realTimeMetrics,
         automationStatus: {
@@ -136,18 +155,20 @@ async function getSystemStatus() {
           contentGeneration: Math.random() > 0.5,
           performanceMonitoring: true,
           alertNotifications: true,
-          reportGeneration: true
+          reportGeneration: true,
         },
-        lastUpdate: new Date().toISOString()
-      }
+        lastUpdate: new Date().toISOString(),
+      },
     });
-
   } catch (error) {
     console.error('시스템 상태 조회 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '시스템 상태를 조회할 수 없습니다.'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: '시스템 상태를 조회할 수 없습니다.',
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -155,15 +176,17 @@ async function checkSEOService() {
   try {
     // Google Search Console 연결 테스트
     const searchConsole = new GoogleSearchConsoleAPI();
-    
+
     // 간단한 상태 체크 (실제로는 더 복잡한 헬스체크)
-    const startDate = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const startDate = new Date(Date.now() - 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split('T')[0];
     const endDate = new Date().toISOString().split('T')[0];
-    
+
     if (!startDate || !endDate) {
       throw new Error('날짜 생성 실패');
     }
-    
+
     const testQuery = await searchConsole.getKeywordRankings(
       startDate,
       endDate,
@@ -174,15 +197,14 @@ async function checkSEOService() {
       search_console_connected: true,
       last_data_update: new Date().toISOString(),
       query_count: testQuery.queries.length,
-      response_time: Math.random() * 500 + 100
+      response_time: Math.random() * 500 + 100,
     };
-
   } catch (error) {
     console.error('SEO 서비스 체크 오류:', error);
     return {
       search_console_connected: false,
       error: 'Search Console 연결 실패',
-      last_attempt: new Date().toISOString()
+      last_attempt: new Date().toISOString(),
     };
   }
 }
@@ -190,22 +212,23 @@ async function checkSEOService() {
 async function checkRankingService() {
   try {
     // 순위 추적 서비스 상태 체크
-    const rankingResponse = await fetch('/api/naver/ranking?action=get_rankings');
+    const rankingResponse = await fetch(
+      '/api/naver/ranking?action=get_rankings'
+    );
     const isHealthy = rankingResponse.ok;
 
     return {
       service_healthy: isHealthy,
       last_ranking_update: new Date().toISOString(),
       tracked_keywords: 8, // 실제로는 DB에서 카운트
-      response_time: Math.random() * 300 + 50
+      response_time: Math.random() * 300 + 50,
     };
-
   } catch (error) {
     console.error('순위 서비스 체크 오류:', error);
     return {
       service_healthy: false,
       error: '순위 추적 서비스 오류',
-      last_attempt: new Date().toISOString()
+      last_attempt: new Date().toISOString(),
     };
   }
 }
@@ -214,25 +237,43 @@ async function collectRealTimeMetrics() {
   try {
     // Google Search Console에서 실제 메트릭 수집
     const searchConsole = new GoogleSearchConsoleAPI();
-    
+
     const endDate = new Date().toISOString().split('T')[0];
-    const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-    
+    const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split('T')[0];
+
     if (!startDate || !endDate) {
       throw new Error('날짜 생성 실패');
     }
-    
-    const keywordData = await searchConsole.getKeywordRankings(startDate, endDate, ['query']);
-    const pageData = await searchConsole.getKeywordRankings(startDate, endDate, ['page']);
+
+    const keywordData = await searchConsole.getKeywordRankings(
+      startDate,
+      endDate,
+      ['query']
+    );
+    const pageData = await searchConsole.getKeywordRankings(
+      startDate,
+      endDate,
+      ['page']
+    );
 
     // 메트릭 계산
-    const avgRanking = keywordData.queries.length > 0 
-      ? keywordData.queries.reduce((acc, q) => acc + q.position, 0) / keywordData.queries.length
-      : 0;
+    const avgRanking =
+      keywordData.queries.length > 0
+        ? keywordData.queries.reduce((acc, q) => acc + q.position, 0) /
+          keywordData.queries.length
+        : 0;
 
-    const totalClicks = keywordData.queries.reduce((acc, q) => acc + q.clicks, 0);
-    const totalImpressions = keywordData.queries.reduce((acc, q) => acc + q.impressions, 0);
-    
+    const totalClicks = keywordData.queries.reduce(
+      (acc, q) => acc + q.clicks,
+      0
+    );
+    const totalImpressions = keywordData.queries.reduce(
+      (acc, q) => acc + q.impressions,
+      0
+    );
+
     return {
       seo: {
         avgRanking: {
@@ -242,7 +283,12 @@ async function collectRealTimeMetrics() {
           target: 15.0,
           unit: '위',
           trend: avgRanking < avgRanking * 1.1 ? 'up' : 'down',
-          status: avgRanking <= 15 ? 'good' : avgRanking <= 25 ? 'warning' : 'critical'
+          status:
+            avgRanking <= 15
+              ? 'good'
+              : avgRanking <= 25
+                ? 'warning'
+                : 'critical',
         },
         organicTraffic: {
           name: '유기적 트래픽',
@@ -251,16 +297,24 @@ async function collectRealTimeMetrics() {
           target: 8000,
           unit: '세션',
           trend: totalClicks > totalClicks * 0.9 ? 'up' : 'down',
-          status: totalClicks >= 8000 ? 'good' : totalClicks >= 6000 ? 'warning' : 'critical'
+          status:
+            totalClicks >= 8000
+              ? 'good'
+              : totalClicks >= 6000
+                ? 'warning'
+                : 'critical',
         },
         keywordVisibility: {
           name: '키워드 가시성',
           current: Math.min(100, Math.round((totalImpressions / 50000) * 100)),
-          previous: Math.min(100, Math.round((totalImpressions * 0.9 / 50000) * 100)),
+          previous: Math.min(
+            100,
+            Math.round(((totalImpressions * 0.9) / 50000) * 100)
+          ),
           target: 80,
           unit: '%',
           trend: 'up',
-          status: 'warning'
+          status: 'warning',
         },
         technicalScore: {
           name: '기술적 SEO',
@@ -269,8 +323,8 @@ async function collectRealTimeMetrics() {
           target: 90,
           unit: '점',
           trend: 'up',
-          status: 'good'
-        }
+          status: 'good',
+        },
       },
       aeo: {
         answerCoverage: {
@@ -280,7 +334,7 @@ async function collectRealTimeMetrics() {
           target: 95,
           unit: '%',
           trend: 'up',
-          status: 'good'
+          status: 'good',
         },
         voiceOptimization: {
           name: '음성 최적화',
@@ -289,7 +343,7 @@ async function collectRealTimeMetrics() {
           target: 90,
           unit: '%',
           trend: 'up',
-          status: 'warning'
+          status: 'warning',
         },
         aiCompatibility: {
           name: 'AI 호환성',
@@ -298,7 +352,7 @@ async function collectRealTimeMetrics() {
           target: 92,
           unit: '%',
           trend: 'up',
-          status: 'warning'
+          status: 'warning',
         },
         structuredAnswers: {
           name: '구조화 답변',
@@ -307,8 +361,8 @@ async function collectRealTimeMetrics() {
           target: 95,
           unit: '%',
           trend: 'up',
-          status: 'good'
-        }
+          status: 'good',
+        },
       },
       performance: {
         pageSpeed: {
@@ -318,7 +372,7 @@ async function collectRealTimeMetrics() {
           target: 90,
           unit: '점',
           trend: 'up',
-          status: 'good'
+          status: 'good',
         },
         coreWebVitals: {
           name: 'Core Web Vitals',
@@ -327,7 +381,7 @@ async function collectRealTimeMetrics() {
           target: 90,
           unit: '점',
           trend: 'down',
-          status: 'warning'
+          status: 'warning',
         },
         uptime: {
           name: '가동률',
@@ -336,7 +390,7 @@ async function collectRealTimeMetrics() {
           target: 99.9,
           unit: '%',
           trend: 'up',
-          status: 'good'
+          status: 'good',
         },
         errorRate: {
           name: '오류율',
@@ -345,8 +399,8 @@ async function collectRealTimeMetrics() {
           target: 0.1,
           unit: '%',
           trend: 'up',
-          status: 'good'
-        }
+          status: 'good',
+        },
       },
       business: {
         conversionRate: {
@@ -356,16 +410,17 @@ async function collectRealTimeMetrics() {
           target: 2.5,
           unit: '%',
           trend: 'up',
-          status: 'warning'
+          status: 'warning',
         },
         leadGeneration: {
           name: '리드 생성',
           current: totalClicks > 0 ? Math.round(totalClicks * 0.15) : 127,
-          previous: totalClicks > 0 ? Math.round(totalClicks * 0.9 * 0.15) : 115,
+          previous:
+            totalClicks > 0 ? Math.round(totalClicks * 0.9 * 0.15) : 115,
           target: 150,
           unit: '건',
           trend: 'up',
-          status: 'warning'
+          status: 'warning',
         },
         engagement: {
           name: '참여도',
@@ -374,7 +429,7 @@ async function collectRealTimeMetrics() {
           target: 80,
           unit: '%',
           trend: 'up',
-          status: 'warning'
+          status: 'warning',
         },
         retention: {
           name: '재방문율',
@@ -383,21 +438,20 @@ async function collectRealTimeMetrics() {
           target: 50,
           unit: '%',
           trend: 'up',
-          status: 'warning'
-        }
-      }
+          status: 'warning',
+        },
+      },
     };
-
   } catch (error) {
     console.error('실시간 메트릭 수집 오류:', error);
-    
+
     // 기본값 반환
     return {
       seo: {},
       aeo: {},
       performance: {},
       business: {},
-      note: '일부 메트릭이 실시간 데이터 대신 기본값을 표시합니다.'
+      note: '일부 메트릭이 실시간 데이터 대신 기본값을 표시합니다.',
     };
   }
 }
@@ -414,7 +468,7 @@ async function getAlerts() {
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
         source: 'ranking',
         actionRequired: true,
-        acknowledged: false
+        acknowledged: false,
       },
       {
         id: '2',
@@ -424,21 +478,23 @@ async function getAlerts() {
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
         source: 'traffic',
         actionRequired: false,
-        acknowledged: false
-      }
+        acknowledged: false,
+      },
     ];
 
     return NextResponse.json({
       success: true,
-      data: { alerts }
+      data: { alerts },
     });
-
   } catch (error) {
     console.error('알림 조회 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '알림을 조회할 수 없습니다.'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: '알림을 조회할 수 없습니다.',
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -446,10 +502,13 @@ async function toggleAutomation(body: MonitoringRequest) {
   const { automation_key } = body;
 
   if (!automation_key) {
-    return NextResponse.json({
-      success: false,
-      error: '자동화 키를 입력해주세요.'
-    }, { status: 400 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: '자동화 키를 입력해주세요.',
+      },
+      { status: 400 }
+    );
   }
 
   try {
@@ -460,16 +519,18 @@ async function toggleAutomation(body: MonitoringRequest) {
       success: true,
       data: {
         message: '자동화 설정이 성공적으로 업데이트되었습니다.',
-        automation_key
-      }
+        automation_key,
+      },
     });
-
   } catch (error) {
     console.error('자동화 토글 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '자동화 설정 업데이트 중 오류가 발생했습니다.'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: '자동화 설정 업데이트 중 오류가 발생했습니다.',
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -477,10 +538,13 @@ async function generateReport(body: MonitoringRequest) {
   const { report_type, time_range } = body;
 
   if (!report_type) {
-    return NextResponse.json({
-      success: false,
-      error: '리포트 타입을 입력해주세요.'
-    }, { status: 400 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: '리포트 타입을 입력해주세요.',
+      },
+      { status: 400 }
+    );
   }
 
   try {
@@ -494,15 +558,17 @@ async function generateReport(body: MonitoringRequest) {
       data: {
         reportId,
         message: '리포트 생성이 시작되었습니다.',
-        estimatedCompletion: new Date(Date.now() + 5 * 60 * 1000).toISOString()
-      }
+        estimatedCompletion: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
+      },
     });
-
   } catch (error) {
     console.error('리포트 생성 오류:', error);
-    return NextResponse.json({
-      success: false,
-      error: '리포트 생성 중 오류가 발생했습니다.'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: '리포트 생성 중 오류가 발생했습니다.',
+      },
+      { status: 500 }
+    );
   }
 }

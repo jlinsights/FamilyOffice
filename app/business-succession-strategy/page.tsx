@@ -1,29 +1,36 @@
 'use client';
 
 import {
-    AlertTriangle,
-    ArrowRight,
-    Award,
-    Building2,
-    CheckCircle2,
-    ChevronRight,
-    Crown,
-    FileText,
-    Gem,
-    HandHeart,
-    Shield,
-    Target,
-    TreePine,
-    TrendingUp,
-    Users,
-    XCircle
+  AlertTriangle,
+  ArrowRight,
+  Award,
+  Building2,
+  CheckCircle2,
+  ChevronRight,
+  Crown,
+  FileText,
+  Gem,
+  HandHeart,
+  Shield,
+  Target,
+  TreePine,
+  TrendingUp,
+  Users,
+  XCircle,
 } from 'lucide-react';
 
-import Link from 'next/link';
 import React from 'react';
 
+import Link from 'next/link';
+
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -32,10 +39,11 @@ import { ServiceFAQ } from '@/components/faq/service-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
-import { BUSINESS_SUCCESSION_FAQS } from '@/constants/faqs';
+
 import { FAQSchema } from '@/lib/faq-schema';
 import { businessSuccessionHowTo } from '@/lib/seo/howto-data';
 
+import { BUSINESS_SUCCESSION_FAQS } from '@/constants/faqs';
 
 // 5단계 기업승계 로드맵
 const successionRoadmap = [
@@ -49,9 +57,9 @@ const successionRoadmap = [
       '현 경영진과 차세대 역량 진단',
       '승계 목표 및 일정 수립',
       '세무·법률 리스크 분석',
-      '가족 구성원 의견 수렴'
+      '가족 구성원 의견 수렴',
     ],
-    critical: true
+    critical: true,
   },
   {
     phase: 2,
@@ -63,9 +71,9 @@ const successionRoadmap = [
       '세무 최적화 전략 수립',
       '지분 재구성 계획',
       '경영권 이전 로드맵',
-      '리스크 관리 전략'
+      '리스크 관리 전략',
     ],
-    critical: true
+    critical: true,
   },
   {
     phase: 3,
@@ -77,9 +85,9 @@ const successionRoadmap = [
       '실무 경험 및 책임 확대',
       '리더십 및 소통 능력 개발',
       '업계 네트워크 구축',
-      '가족 경영 철학 전수'
+      '가족 경영 철학 전수',
     ],
-    critical: false
+    critical: false,
   },
   {
     phase: 4,
@@ -91,9 +99,9 @@ const successionRoadmap = [
       '경영권 단계별 이양',
       '조직 변화 관리',
       '이해관계자 소통',
-      '성과 모니터링'
+      '성과 모니터링',
     ],
-    critical: true
+    critical: true,
   },
   {
     phase: 5,
@@ -105,10 +113,10 @@ const successionRoadmap = [
       '추가 지원 및 멘토링',
       '차차세대 승계 준비',
       '가족 거버넌스 체계 구축',
-      '지속 가능 경영 체계 확립'
+      '지속 가능 경영 체계 확립',
     ],
-    critical: false
-  }
+    critical: false,
+  },
 ];
 
 // 승계 방법별 특징
@@ -121,16 +129,16 @@ const successionMethods = {
       '증여세 절세 효과 (할인 평가)',
       '단계적 승계로 리스크 최소화',
       '경영권 조기 안정화',
-      '상속세 부담 경감'
+      '상속세 부담 경감',
     ],
     considerations: [
       '증여세 현금 납부 부담',
       '증여시점 기업 가치 평가',
       '증여 후 통제권 이슈',
-      '세무조사 가능성'
+      '세무조사 가능성',
     ],
     suitableFor: '안정적 현금흐름 보유 기업, 장기적 승계 계획',
-    taxSaving: '30-50%'
+    taxSaving: '30-50%',
   },
   inheritance: {
     title: '상속승계',
@@ -140,16 +148,16 @@ const successionMethods = {
       '상속세 납부유예 활용 가능',
       '경영권 일괄 승계',
       '가업상속공제 활용',
-      '분할납부 혜택'
+      '분할납부 혜택',
     ],
     considerations: [
       '높은 상속세 부담',
       '유동성 확보 어려움',
       '상속 시점 불확실성',
-      '가족간 분쟁 가능성'
+      '가족간 분쟁 가능성',
     ],
     suitableFor: '높은 기업 가치, 유동성 확보 방안 보유',
-    taxSaving: '20-40%'
+    taxSaving: '20-40%',
   },
   sale: {
     title: '매각승계',
@@ -159,16 +167,16 @@ const successionMethods = {
       '현금 확보 가능',
       '세무 부담 상대적 경미',
       '승계 시점 통제 가능',
-      '가족간 갈등 최소화'
+      '가족간 갈등 최소화',
     ],
     considerations: [
       '경영권 상실',
       '매수자 선정의 어려움',
       '기업 문화 변화',
-      '직원 고용 불안'
+      '직원 고용 불안',
     ],
     suitableFor: '적절한 매수자 존재, 경영권 유지 불요',
-    taxSaving: '10-30%'
+    taxSaving: '10-30%',
   },
   mbo: {
     title: 'MBO/MBI',
@@ -178,17 +186,17 @@ const successionMethods = {
       '전문 경영체제 구축',
       '기업 가치 극대화',
       '경영진 동기부여',
-      '자본 구조 최적화'
+      '자본 구조 최적화',
     ],
     considerations: [
       '복잡한 구조 설계',
       '높은 금융비용',
       '경영진 부담 가중',
-      '실행 위험성'
+      '실행 위험성',
     ],
     suitableFor: '전문 경영진 보유, 안정적 수익성',
-    taxSaving: '15-35%'
-  }
+    taxSaving: '15-35%',
+  },
 };
 
 // 가족 거버넌스 체계
@@ -202,8 +210,8 @@ const familyGovernance = {
       '핵심 가치와 원칙',
       '의사결정 프로세스',
       '갈등 해결 방안',
-      '차세대 교육 방침'
-    ]
+      '차세대 교육 방침',
+    ],
   },
   council: {
     title: '가족경영협의회',
@@ -214,8 +222,8 @@ const familyGovernance = {
       '중요 안건 심의',
       '가족 구성원 교육',
       '갈등 조정 역할',
-      '승계 계획 검토'
-    ]
+      '승계 계획 검토',
+    ],
   },
   office: {
     title: '패밀리오피스',
@@ -226,8 +234,8 @@ const familyGovernance = {
       '세무 및 법률 자문',
       '교육 및 개발 지원',
       '차세대 멘토링',
-      '네트워크 구축'
-    ]
+      '네트워크 구축',
+    ],
   },
   trust: {
     title: '가족신탁',
@@ -238,14 +246,16 @@ const familyGovernance = {
       '세무 효율성',
       '승계 계획 실행',
       '분쟁 방지 효과',
-      '전문가 관리'
-    ]
-  }
+      '전문가 관리',
+    ],
+  },
 };
 
 const BusinessSuccessionPage = () => {
   const [selectedMethod, setSelectedMethod] = React.useState('gift');
-  const [checkedTasks, setCheckedTasks] = React.useState<Set<string>>(new Set());
+  const [checkedTasks, setCheckedTasks] = React.useState<Set<string>>(
+    new Set()
+  );
   const [selectedPhase, setSelectedPhase] = React.useState(1);
 
   // 체크리스트 토글
@@ -261,7 +271,7 @@ const BusinessSuccessionPage = () => {
 
   // 진행률 계산
   const calculateProgress = () => {
-    const allTasks = successionRoadmap.flatMap((phase, phaseIndex) => 
+    const allTasks = successionRoadmap.flatMap((phase, phaseIndex) =>
       phase.tasks.map((task, taskIndex) => `${phaseIndex}-${taskIndex}`)
     );
     return (checkedTasks.size / allTasks.length) * 100;
@@ -281,15 +291,15 @@ const BusinessSuccessionPage = () => {
       position: index + 1,
       name: step.name,
       text: step.text,
-      url: step.url
-    }))
+      url: step.url,
+    })),
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
       {/* HowTo Structured Data */}
       <StructuredData data={howToStructuredData} />
-      
+
       <Header />
 
       <main className="pt-20">
@@ -319,8 +329,12 @@ const BusinessSuccessionPage = () => {
                   <CardTitle className="text-lg">상속세 절감</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-primary mb-2">50%</div>
-                  <div className="text-sm text-muted-foreground">평균 절세 효과</div>
+                  <div className="text-3xl font-bold text-primary mb-2">
+                    50%
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    평균 절세 효과
+                  </div>
                 </CardContent>
               </Card>
 
@@ -329,8 +343,12 @@ const BusinessSuccessionPage = () => {
                   <CardTitle className="text-lg">승계 성공률</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">95%</div>
-                  <div className="text-sm text-muted-foreground">체계적 준비 시</div>
+                  <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+                    95%
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    체계적 준비 시
+                  </div>
                 </CardContent>
               </Card>
 
@@ -339,7 +357,9 @@ const BusinessSuccessionPage = () => {
                   <CardTitle className="text-lg">준비 기간</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">3-5</div>
+                  <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
+                    3-5
+                  </div>
                   <div className="text-sm text-muted-foreground">년 권장</div>
                 </CardContent>
               </Card>
@@ -371,23 +391,37 @@ const BusinessSuccessionPage = () => {
               </p>
             </div>
 
-            <Tabs value={selectedPhase.toString()} onValueChange={(value) => setSelectedPhase(parseInt(value))} className="w-full">
+            <Tabs
+              value={selectedPhase.toString()}
+              onValueChange={value => setSelectedPhase(parseInt(value))}
+              className="w-full"
+            >
               <TabsList className="grid grid-cols-5 w-full mb-8">
-                {successionRoadmap.map((phase) => (
-                  <TabsTrigger key={phase.phase} value={phase.phase.toString()} className="text-sm">
+                {successionRoadmap.map(phase => (
+                  <TabsTrigger
+                    key={phase.phase}
+                    value={phase.phase.toString()}
+                    className="text-sm"
+                  >
                     {phase.phase}단계
                   </TabsTrigger>
                 ))}
               </TabsList>
 
-              {successionRoadmap.map((phase) => (
+              {successionRoadmap.map(phase => (
                 <TabsContent key={phase.phase} value={phase.phase.toString()}>
-                  <Card className={`bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5 ${phase.critical ? 'border-primary dark:border-primary/70' : 'border-muted dark:border-muted/70'}`}>
+                  <Card
+                    className={`bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5 ${phase.critical ? 'border-primary dark:border-primary/70' : 'border-muted dark:border-muted/70'}`}
+                  >
                     <CardHeader>
                       <div className="flex items-center gap-3">
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                          phase.critical ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
-                        }`}>
+                        <div
+                          className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                            phase.critical
+                              ? 'bg-primary text-primary-foreground'
+                              : 'bg-muted text-muted-foreground'
+                          }`}
+                        >
                           {phase.phase}
                         </div>
                         <div>
@@ -417,7 +451,10 @@ const BusinessSuccessionPage = () => {
                                 checked={checkedTasks.has(taskId)}
                                 onCheckedChange={() => toggleTask(taskId)}
                               />
-                              <label htmlFor={taskId} className="flex-1 cursor-pointer select-none">
+                              <label
+                                htmlFor={taskId}
+                                className="flex-1 cursor-pointer select-none"
+                              >
                                 {task}
                               </label>
                               <div className="flex items-center">
@@ -484,7 +521,11 @@ const BusinessSuccessionPage = () => {
               </p>
             </div>
 
-            <Tabs value={selectedMethod} onValueChange={setSelectedMethod} className="w-full">
+            <Tabs
+              value={selectedMethod}
+              onValueChange={setSelectedMethod}
+              className="w-full"
+            >
               <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full mb-8">
                 {Object.entries(successionMethods).map(([key, method]) => (
                   <TabsTrigger key={key} value={key}>
@@ -502,7 +543,9 @@ const BusinessSuccessionPage = () => {
                         <div className="flex items-center gap-3">
                           <Icon className="h-8 w-8 text-primary" />
                           <div>
-                            <CardTitle className="text-2xl">{method.title}</CardTitle>
+                            <CardTitle className="text-2xl">
+                              {method.title}
+                            </CardTitle>
                             <CardDescription className="text-lg">
                               {method.description}
                             </CardDescription>
@@ -521,7 +564,10 @@ const BusinessSuccessionPage = () => {
                             </h4>
                             <ul className="space-y-2">
                               {method.advantages.map((advantage, index) => (
-                                <li key={index} className="flex items-start gap-2">
+                                <li
+                                  key={index}
+                                  className="flex items-start gap-2"
+                                >
                                   <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
                                   <span className="text-sm">{advantage}</span>
                                 </li>
@@ -534,12 +580,19 @@ const BusinessSuccessionPage = () => {
                               고려사항
                             </h4>
                             <ul className="space-y-2">
-                              {method.considerations.map((consideration, index) => (
-                                <li key={index} className="flex items-start gap-2">
-                                  <AlertTriangle className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
-                                  <span className="text-sm">{consideration}</span>
-                                </li>
-                              ))}
+                              {method.considerations.map(
+                                (consideration, index) => (
+                                  <li
+                                    key={index}
+                                    className="flex items-start gap-2"
+                                  >
+                                    <AlertTriangle className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                                    <span className="text-sm">
+                                      {consideration}
+                                    </span>
+                                  </li>
+                                )
+                              )}
                             </ul>
                           </div>
                         </div>
@@ -575,13 +628,18 @@ const BusinessSuccessionPage = () => {
               {Object.entries(familyGovernance).map(([key, governance]) => {
                 const Icon = governance.icon;
                 return (
-                  <Card key={key} className="h-full bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5">
+                  <Card
+                    key={key}
+                    className="h-full bg-card dark:bg-card/80 border-border/40 dark:border-border hover:shadow-2xl dark:hover:shadow-white/5"
+                  >
                     <CardHeader>
                       <div className="flex items-center gap-3">
                         <Icon className="h-8 w-8 text-primary" />
                         <div>
                           <CardTitle>{governance.title}</CardTitle>
-                          <CardDescription>{governance.description}</CardDescription>
+                          <CardDescription>
+                            {governance.description}
+                          </CardDescription>
                         </div>
                       </div>
                     </CardHeader>
@@ -606,59 +664,90 @@ const BusinessSuccessionPage = () => {
         <section className="py-16 bg-gradient-to-br from-amber-50/30 to-blue-50/30 dark:from-slate-900/50 dark:to-slate-800/50">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge variant="outline" className="mb-6 border-amber-200 dark:border-amber-700/50 bg-gradient-to-r from-amber-50/80 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/50 text-amber-800 dark:text-amber-300 shadow-lg backdrop-blur-sm" animation="fade">
+              <Badge
+                variant="outline"
+                className="mb-6 border-amber-200 dark:border-amber-700/50 bg-gradient-to-r from-amber-50/80 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/50 text-amber-800 dark:text-amber-300 shadow-lg backdrop-blur-sm"
+                animation="fade"
+              >
                 <Crown className="h-4 w-4 mr-2 text-amber-600 dark:text-amber-400" />
                 Family Office Excellence
               </Badge>
-              
+
               <h3 className="text-3xl md:text-4xl font-bold mb-4 font-playfair animate-slide-up text-foreground dark:text-white">
-                <span className="text-amber-600 dark:text-amber-400">기업승계</span>를 넘어선{' '}
-                <span className="text-indigo-900 dark:text-indigo-300">패밀리오피스</span>
+                <span className="text-amber-600 dark:text-amber-400">
+                  기업승계
+                </span>
+                를 넘어선{' '}
+                <span className="text-indigo-900 dark:text-indigo-300">
+                  패밀리오피스
+                </span>
               </h3>
-              
-              <p className="text-xl text-muted-foreground dark:text-gray-300 mb-8 max-w-3xl mx-auto animate-slide-up" style={{ animationDelay: '200ms' }}>
-                단순한 승계 전략에서 <span className="font-bold text-indigo-900 dark:text-indigo-300">세대를 아우르는 통합 자산관리</span>로 업그레이드하세요.
-                성공한 기업가 가문들이 선택한 차별화된 패밀리오피스 서비스를 경험해보세요.
+
+              <p
+                className="text-xl text-muted-foreground dark:text-gray-300 mb-8 max-w-3xl mx-auto animate-slide-up"
+                style={{ animationDelay: '200ms' }}
+              >
+                단순한 승계 전략에서{' '}
+                <span className="font-bold text-indigo-900 dark:text-indigo-300">
+                  세대를 아우르는 통합 자산관리
+                </span>
+                로 업그레이드하세요. 성공한 기업가 가문들이 선택한 차별화된
+                패밀리오피스 서비스를 경험해보세요.
               </p>
-              
+
               <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="border-border/50 bg-card/80 dark:bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border shadow-white/5 hover:shadow-lg transition-all duration-300 group">
                   <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white rounded-xl mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
                     <Building2 className="h-6 w-6" />
                   </div>
-                  <h4 className="font-bold text-lg mb-2 text-card-foreground dark:text-white">기업 + 개인자산 통합</h4>
-                  <p className="text-muted-foreground dark:text-gray-400 text-sm">기업자산과 개인자산을 통합하여 최적의 승계 구조 설계</p>
+                  <h4 className="font-bold text-lg mb-2 text-card-foreground dark:text-white">
+                    기업 + 개인자산 통합
+                  </h4>
+                  <p className="text-muted-foreground dark:text-gray-400 text-sm">
+                    기업자산과 개인자산을 통합하여 최적의 승계 구조 설계
+                  </p>
                 </div>
-                
+
                 <div className="border-border/50 bg-card/80 dark:bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border shadow-white/5 hover:shadow-lg transition-all duration-300 group">
                   <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white rounded-xl mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
                     <Users className="h-6 w-6" />
                   </div>
-                  <h4 className="font-bold text-lg mb-2 text-card-foreground dark:text-white">차세대 교육 프로그램</h4>
-                  <p className="text-muted-foreground dark:text-gray-400 text-sm">후계자 역량 개발과 가족 거버넌스 체계 구축</p>
+                  <h4 className="font-bold text-lg mb-2 text-card-foreground dark:text-white">
+                    차세대 교육 프로그램
+                  </h4>
+                  <p className="text-muted-foreground dark:text-gray-400 text-sm">
+                    후계자 역량 개발과 가족 거버넌스 체계 구축
+                  </p>
                 </div>
-                
+
                 <div className="border-border/50 bg-card/80 dark:bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border shadow-white/5 hover:shadow-lg transition-all duration-300 group">
                   <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 text-white rounded-xl mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
                     <TrendingUp className="h-6 w-6" />
                   </div>
-                  <h4 className="font-bold text-lg mb-2 text-card-foreground dark:text-white">지속가능 성장전략</h4>
-                  <p className="text-muted-foreground dark:text-gray-400 text-sm">승계 이후 장기 성장을 위한 투자 및 운영 전략</p>
+                  <h4 className="font-bold text-lg mb-2 text-card-foreground dark:text-white">
+                    지속가능 성장전략
+                  </h4>
+                  <p className="text-muted-foreground dark:text-gray-400 text-sm">
+                    승계 이후 장기 성장을 위한 투자 및 운영 전략
+                  </p>
                 </div>
               </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '400ms' }}>
-                <Link 
-                  href="/family-office-center" 
+
+              <div
+                className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up"
+                style={{ animationDelay: '400ms' }}
+              >
+                <Link
+                  href="/family-office-center"
                   className="inline-flex items-center justify-center px-8 py-4 bg-indigo-900 dark:bg-indigo-600 text-white text-lg font-semibold rounded-2xl hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   <Crown className="h-6 w-6 mr-2" />
                   패밀리오피스 센터 보기
                   <ChevronRight className="h-6 w-6 ml-2" />
                 </Link>
-                
-                <Link 
-                  href="/fp-center" 
+
+                <Link
+                  href="/fp-center"
                   className="inline-flex items-center justify-center px-8 py-4 border-2 border-amber-200 dark:border-amber-700 hover:bg-amber-50 dark:hover:bg-amber-900/20 text-foreground dark:text-amber-100 text-lg font-semibold rounded-2xl transition-all duration-300"
                 >
                   <Users className="h-6 w-6 mr-2" />
@@ -669,14 +758,11 @@ const BusinessSuccessionPage = () => {
           </div>
         </section>
 
-
         {/* Success Cases */}
         <section className="py-12 px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                성공 사례
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">성공 사례</h2>
               <p className="text-xl text-muted-foreground">
                 체계적인 승계 전략으로 성공한 기업들의 사례
               </p>
@@ -784,14 +870,14 @@ const BusinessSuccessionPage = () => {
       </main>
 
       {/* FAQ Section */}
-      <ServiceFAQ 
+      <ServiceFAQ
         faqs={BUSINESS_SUCCESSION_FAQS}
         title="기업승계 자주 묻는 질문"
         description="기업승계 준비 시 많이 묻는 질문들에 대한 전문가 답변입니다"
       />
 
       {/* FAQ Schema for SEO */}
-      <FAQSchema 
+      <FAQSchema
         faqs={BUSINESS_SUCCESSION_FAQS}
         url="https://familyoffices.vip/business-succession-strategy"
       />

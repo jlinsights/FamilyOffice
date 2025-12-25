@@ -39,11 +39,7 @@ export function SeminarHeroSection() {
       <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
         {/* 상단 태그 */}
         <div className="flex justify-center mb-8">
-          <Badge
-            variant="outline"
-            size="lg"
-            animation="fade"
-          >
+          <Badge variant="outline" size="lg" animation="fade">
             <GraduationCap className="h-3 w-3 mr-1" />
             Premium Education Program
           </Badge>
@@ -63,12 +59,12 @@ export function SeminarHeroSection() {
         </p>
 
         {/* 참석 자격 기준 배지 */}
-        <div 
+        <div
           className="mb-8 animate-slide-up"
           style={{ animationDelay: '250ms' }}
         >
-          <Badge 
-            variant="secondary" 
+          <Badge
+            variant="secondary"
             className="px-4 py-2 text-sm md:text-base bg-amber-100 text-amber-900 border-amber-200 dark:bg-amber-900/30 dark:text-amber-100 dark:border-amber-800"
           >
             <Users className="w-4 h-4 mr-2" />
@@ -158,7 +154,10 @@ export function SeminarHeroSection() {
               <Calendar className="ml-2 h-5 w-5" />
             </Button>
           </a>
-          <a href="/structure-check#request-form" style={{ textDecoration: 'none' }}>
+          <a
+            href="/structure-check#request-form"
+            style={{ textDecoration: 'none' }}
+          >
             <Button
               variant="outline"
               size="lg"

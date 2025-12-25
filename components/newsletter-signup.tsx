@@ -13,45 +13,48 @@ const NewsletterSignup = memo(function NewsletterSignup() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!email) return;
 
-    setIsSubmitting(true);
-    setError('');
+      setIsSubmitting(true);
+      setError('');
 
-    try {
-      const response = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
+      try {
+        const response = await fetch('/api/newsletter/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || '구독 신청 중 오류가 발생했습니다.');
+        if (!response.ok) {
+          throw new Error(data.error || '구독 신청 중 오류가 발생했습니다.');
+        }
+
+        setIsSuccess(true);
+        setEmail('');
+
+        // 3초 후 성공 상태 리셋
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 3000);
+      } catch (error) {
+        setError(
+          error instanceof Error
+            ? error.message
+            : '구독 신청 중 오류가 발생했습니다. 다시 시도해주세요.'
+        );
+      } finally {
+        setIsSubmitting(false);
       }
-
-      setIsSuccess(true);
-      setEmail('');
-
-      // 3초 후 성공 상태 리셋
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 3000);
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : '구독 신청 중 오류가 발생했습니다. 다시 시도해주세요.'
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [email]);
+    },
+    [email]
+  );
 
   if (isSuccess) {
     return (

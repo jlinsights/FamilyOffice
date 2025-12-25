@@ -1,20 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  ArrowUp, 
-  ArrowDown, 
+import {
+  TrendingUp,
+  TrendingDown,
+  ArrowUp,
+  ArrowDown,
   Minus,
-  Search, 
+  Search,
   Target,
   Clock,
   RefreshCw,
@@ -23,8 +15,24 @@ import {
   Eye,
   MousePointer,
   AlertTriangle,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react';
+
+import React, { useState, useEffect } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface KeywordRanking {
   id: string;
@@ -54,11 +62,14 @@ interface NaverRankingData {
     top20Keywords: number;
     totalSearchVolume: number;
   };
-  categories: Record<string, {
-    count: number;
-    avgRank: number;
-    trend: 'up' | 'down' | 'stable';
-  }>;
+  categories: Record<
+    string,
+    {
+      count: number;
+      avgRank: number;
+      trend: 'up' | 'down' | 'stable';
+    }
+  >;
   lastUpdate: string;
 }
 
@@ -87,7 +98,7 @@ export function NaverRankingTracker() {
           lastUpdated: '2024-01-15 14:30',
           targetRank: 5,
           category: '컨설팅',
-          priority: 'high'
+          priority: 'high',
         },
         {
           id: '2',
@@ -103,7 +114,7 @@ export function NaverRankingTracker() {
           lastUpdated: '2024-01-15 14:30',
           targetRank: 8,
           category: '서비스',
-          priority: 'high'
+          priority: 'high',
         },
         {
           id: '3',
@@ -119,7 +130,7 @@ export function NaverRankingTracker() {
           lastUpdated: '2024-01-15 14:30',
           targetRank: 15,
           category: '절세',
-          priority: 'high'
+          priority: 'high',
         },
         {
           id: '4',
@@ -135,7 +146,7 @@ export function NaverRankingTracker() {
           lastUpdated: '2024-01-15 14:30',
           targetRank: 10,
           category: '절세',
-          priority: 'high'
+          priority: 'high',
         },
         {
           id: '5',
@@ -151,7 +162,7 @@ export function NaverRankingTracker() {
           lastUpdated: '2024-01-15 14:30',
           targetRank: 15,
           category: '자금',
-          priority: 'high'
+          priority: 'high',
         },
         {
           id: '6',
@@ -167,7 +178,7 @@ export function NaverRankingTracker() {
           lastUpdated: '2024-01-15 14:30',
           targetRank: 8,
           category: '인증',
-          priority: 'medium'
+          priority: 'medium',
         },
         {
           id: '7',
@@ -183,7 +194,7 @@ export function NaverRankingTracker() {
           lastUpdated: '2024-01-15 14:30',
           targetRank: 6,
           category: '보험',
-          priority: 'medium'
+          priority: 'medium',
         },
         {
           id: '8',
@@ -199,8 +210,8 @@ export function NaverRankingTracker() {
           lastUpdated: '2024-01-15 14:30',
           targetRank: 10,
           category: '컨설팅',
-          priority: 'medium'
-        }
+          priority: 'medium',
+        },
       ],
       summary: {
         totalKeywords: 8,
@@ -209,17 +220,17 @@ export function NaverRankingTracker() {
         decliningKeywords: 1,
         top10Keywords: 1,
         top20Keywords: 6,
-        totalSearchVolume: 38100
+        totalSearchVolume: 38100,
       },
       categories: {
-        '컨설팅': { count: 2, avgRank: 13.0, trend: 'up' },
-        '절세': { count: 2, avgRank: 19.0, trend: 'up' },
-        '서비스': { count: 1, avgRank: 12.0, trend: 'up' },
-        '자금': { count: 1, avgRank: 25.0, trend: 'up' },
-        '인증': { count: 1, avgRank: 14.0, trend: 'up' },
-        '보험': { count: 1, avgRank: 11.0, trend: 'up' }
+        컨설팅: { count: 2, avgRank: 13.0, trend: 'up' },
+        절세: { count: 2, avgRank: 19.0, trend: 'up' },
+        서비스: { count: 1, avgRank: 12.0, trend: 'up' },
+        자금: { count: 1, avgRank: 25.0, trend: 'up' },
+        인증: { count: 1, avgRank: 14.0, trend: 'up' },
+        보험: { count: 1, avgRank: 11.0, trend: 'up' },
       },
-      lastUpdate: '2024-01-15 14:30:00'
+      lastUpdate: '2024-01-15 14:30:00',
     };
 
     setTimeout(() => {
@@ -243,10 +254,14 @@ export function NaverRankingTracker() {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'text-red-600';
-      case 'medium': return 'text-yellow-600';
-      case 'low': return 'text-green-600';
-      default: return 'text-gray-600';
+      case 'high':
+        return 'text-red-600';
+      case 'medium':
+        return 'text-yellow-600';
+      case 'low':
+        return 'text-green-600';
+      default:
+        return 'text-gray-600';
     }
   };
 
@@ -257,7 +272,7 @@ export function NaverRankingTracker() {
 
   const addKeyword = () => {
     if (!newKeyword.trim()) return;
-    
+
     // 실제로는 API 호출
     console.log('Adding keyword:', newKeyword);
     setNewKeyword('');
@@ -271,20 +286,24 @@ export function NaverRankingTracker() {
     }, 2000);
   };
 
-  const filteredKeywords = data?.keywords.filter(keyword => 
-    selectedCategory === '전체' || keyword.category === selectedCategory
-  ).sort((a, b) => {
-    switch (sortBy) {
-      case 'rank':
-        return a.currentRank - b.currentRank;
-      case 'change':
-        return b.changePercent - a.changePercent;
-      case 'volume':
-        return b.searchVolume - a.searchVolume;
-      default:
-        return 0;
-    }
-  }) || [];
+  const filteredKeywords =
+    data?.keywords
+      .filter(
+        keyword =>
+          selectedCategory === '전체' || keyword.category === selectedCategory
+      )
+      .sort((a, b) => {
+        switch (sortBy) {
+          case 'rank':
+            return a.currentRank - b.currentRank;
+          case 'change':
+            return b.changePercent - a.changePercent;
+          case 'volume':
+            return b.searchVolume - a.searchVolume;
+          default:
+            return 0;
+        }
+      }) || [];
 
   const categories = ['전체', ...Object.keys(data?.categories || {})];
 
@@ -314,13 +333,15 @@ export function NaverRankingTracker() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="sm"
             onClick={refreshData}
             disabled={loading}
           >
-            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`}
+            />
             새로고침
           </Button>
           <Button size="sm">
@@ -338,7 +359,9 @@ export function NaverRankingTracker() {
             <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data.summary.avgRank.toFixed(1)}위</div>
+            <div className="text-2xl font-bold">
+              {data.summary.avgRank.toFixed(1)}위
+            </div>
             <div className="flex items-center text-xs text-green-600">
               <TrendingUp className="h-3 w-3 mr-1" />
               {data.summary.improvingKeywords}개 상승 중
@@ -352,10 +375,12 @@ export function NaverRankingTracker() {
             <CheckCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data.summary.top10Keywords}개</div>
+            <div className="text-2xl font-bold">
+              {data.summary.top10Keywords}개
+            </div>
             <div className="flex items-center text-xs text-blue-600">
-              <Target className="h-3 w-3 mr-1" />
-              총 {data.summary.totalKeywords}개 중
+              <Target className="h-3 w-3 mr-1" />총 {data.summary.totalKeywords}
+              개 중
             </div>
           </CardContent>
         </Card>
@@ -366,7 +391,9 @@ export function NaverRankingTracker() {
             <Eye className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data.summary.totalSearchVolume.toLocaleString()}</div>
+            <div className="text-2xl font-bold">
+              {data.summary.totalSearchVolume.toLocaleString()}
+            </div>
             <div className="flex items-center text-xs text-green-600">
               <ArrowUp className="h-3 w-3 mr-1" />
               월간 검색 기회
@@ -407,11 +434,13 @@ export function NaverRankingTracker() {
               <select
                 id="category-filter"
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                onChange={e => setSelectedCategory(e.target.value)}
                 className="px-3 py-1 border rounded-md text-sm"
               >
                 {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
                 ))}
               </select>
             </div>
@@ -421,7 +450,9 @@ export function NaverRankingTracker() {
               <select
                 id="sort-by"
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as 'rank' | 'change' | 'volume')}
+                onChange={e =>
+                  setSortBy(e.target.value as 'rank' | 'change' | 'volume')
+                }
                 className="px-3 py-1 border rounded-md text-sm"
               >
                 <option value="rank">순위 순</option>
@@ -454,8 +485,11 @@ export function NaverRankingTracker() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredKeywords.map((keyword) => (
-                      <tr key={keyword.id} className="border-b hover:bg-muted/30">
+                    {filteredKeywords.map(keyword => (
+                      <tr
+                        key={keyword.id}
+                        className="border-b hover:bg-muted/30"
+                      >
                         <td className="py-3 px-4">
                           <div>
                             <div className="font-medium">{keyword.keyword}</div>
@@ -465,17 +499,24 @@ export function NaverRankingTracker() {
                           </div>
                         </td>
                         <td className="text-center py-3 px-2">
-                          <Badge variant={getRankBadgeVariant(keyword.currentRank)}>
+                          <Badge
+                            variant={getRankBadgeVariant(keyword.currentRank)}
+                          >
                             {keyword.currentRank}위
                           </Badge>
                         </td>
                         <td className="text-center py-3 px-2">
                           <div className="flex items-center justify-center space-x-1">
                             {getTrendIcon(keyword.trend, keyword.changePercent)}
-                            <span className={`text-sm ${
-                              keyword.trend === 'up' ? 'text-green-600' : 
-                              keyword.trend === 'down' ? 'text-red-600' : 'text-gray-600'
-                            }`}>
+                            <span
+                              className={`text-sm ${
+                                keyword.trend === 'up'
+                                  ? 'text-green-600'
+                                  : keyword.trend === 'down'
+                                    ? 'text-red-600'
+                                    : 'text-gray-600'
+                              }`}
+                            >
                               {formatChange(keyword.changePercent)}
                             </span>
                           </div>
@@ -497,20 +538,25 @@ export function NaverRankingTracker() {
                         </td>
                         <td className="text-center py-3 px-2">
                           <div className="flex items-center justify-center">
-                            <span className="text-sm mr-1">{keyword.difficulty}</span>
-                            <Progress 
-                              value={keyword.difficulty} 
+                            <span className="text-sm mr-1">
+                              {keyword.difficulty}
+                            </span>
+                            <Progress
+                              value={keyword.difficulty}
                               className="w-12 h-2"
                             />
                           </div>
                         </td>
                         <td className="text-center py-3 px-2">
-                          <Badge 
-                            variant="outline" 
+                          <Badge
+                            variant="outline"
                             className={getPriorityColor(keyword.priority)}
                           >
-                            {keyword.priority === 'high' ? '높음' : 
-                             keyword.priority === 'medium' ? '보통' : '낮음'}
+                            {keyword.priority === 'high'
+                              ? '높음'
+                              : keyword.priority === 'medium'
+                                ? '보통'
+                                : '낮음'}
                           </Badge>
                         </td>
                         <td className="text-center py-3 px-2">
@@ -539,17 +585,22 @@ export function NaverRankingTracker() {
                     {category}
                     {getTrendIcon(stats.trend, 0)}
                   </CardTitle>
-                  <CardDescription>
-                    {stats.count}개 키워드
-                  </CardDescription>
+                  <CardDescription>{stats.count}개 키워드</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">평균 순위</span>
-                      <span className="font-medium">{stats.avgRank.toFixed(1)}위</span>
+                      <span className="text-sm text-muted-foreground">
+                        평균 순위
+                      </span>
+                      <span className="font-medium">
+                        {stats.avgRank.toFixed(1)}위
+                      </span>
                     </div>
-                    <Progress value={(50 - stats.avgRank) * 2} className="h-2" />
+                    <Progress
+                      value={(50 - stats.avgRank) * 2}
+                      className="h-2"
+                    />
                   </div>
                 </CardContent>
               </Card>
@@ -572,8 +623,8 @@ export function NaverRankingTracker() {
                   <Input
                     placeholder="키워드 입력"
                     value={newKeyword}
-                    onChange={(e) => setNewKeyword(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && addKeyword()}
+                    onChange={e => setNewKeyword(e.target.value)}
+                    onKeyPress={e => e.key === 'Enter' && addKeyword()}
                   />
                   <Button onClick={addKeyword}>
                     <Plus className="h-4 w-4 mr-2" />
@@ -594,15 +645,16 @@ export function NaverRankingTracker() {
                 <div className="space-y-4">
                   {data.keywords
                     .filter(k => k.currentRank > k.targetRank)
-                    .map((keyword) => (
-                      <div 
-                        key={keyword.id} 
+                    .map(keyword => (
+                      <div
+                        key={keyword.id}
                         className="flex items-center justify-between p-3 bg-muted/30 rounded-lg border-l-4 border-yellow-400"
                       >
                         <div>
                           <div className="font-medium">{keyword.keyword}</div>
                           <div className="text-sm text-muted-foreground">
-                            현재 {keyword.currentRank}위 → 목표 {keyword.targetRank}위
+                            현재 {keyword.currentRank}위 → 목표{' '}
+                            {keyword.targetRank}위
                           </div>
                         </div>
                         <div className="text-right">
@@ -610,8 +662,12 @@ export function NaverRankingTracker() {
                             -{keyword.currentRank - keyword.targetRank}위 차이
                           </div>
                           <div className="text-xs text-muted-foreground">
-                            우선순위: {keyword.priority === 'high' ? '높음' : 
-                                    keyword.priority === 'medium' ? '보통' : '낮음'}
+                            우선순위:{' '}
+                            {keyword.priority === 'high'
+                              ? '높음'
+                              : keyword.priority === 'medium'
+                                ? '보통'
+                                : '낮음'}
                           </div>
                         </div>
                       </div>

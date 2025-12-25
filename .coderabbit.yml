@@ -5,23 +5,23 @@
 reviews:
   # Profile: assertive (thorough), chill (gentle feedback)
   profile: assertive
-  
+
   # Request changes workflow in PRs
   request_changes_workflow: true
-  
+
   # High-level summary of changes
   high_level_summary: true
-  
+
   # Poem-style review summaries (optional fun feature)
   poem: false
-  
+
   # Focus areas for this financial platform
   focus:
-    - security          # Critical for financial data
-    - performance       # Fast loading for user experience
-    - accessibility     # Inclusive design
-    - type-safety      # Strong TypeScript usage
-    - testing          # Comprehensive test coverage
+    - security # Critical for financial data
+    - performance # Fast loading for user experience
+    - accessibility # Inclusive design
+    - type-safety # Strong TypeScript usage
+    - testing # Comprehensive test coverage
 
 # Chat settings
 chat:
@@ -41,8 +41,8 @@ rules:
     check_secrets: true
     # Validate authentication flows
     auth_validation: true
-    
-  # Performance requirements for premium UX  
+
+  # Performance requirements for premium UX
   performance:
     # Bundle size monitoring
     bundle_analysis: true
@@ -50,7 +50,7 @@ rules:
     anti_patterns: true
     # Memory leak detection
     memory_leaks: true
-    
+
   # Code quality standards
   quality:
     # Enforce TypeScript strict mode
@@ -59,7 +59,7 @@ rules:
     error_handling: true
     # Validate proper async/await usage
     async_patterns: true
-    
+
   # Next.js specific checks
   nextjs:
     # App Router best practices
@@ -71,22 +71,22 @@ rules:
 
 # File patterns to focus on
 include:
-  - "**/*.ts"
-  - "**/*.tsx" 
-  - "**/*.js"
-  - "**/*.jsx"
-  - "app/**/*"
-  - "components/**/*"
-  - "lib/**/*"
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
+  - 'app/**/*'
+  - 'components/**/*'
+  - 'lib/**/*'
 
 # Files to exclude from review
 exclude:
-  - "node_modules/**"
-  - ".next/**"
-  - "coverage/**"
-  - "*.config.js"
-  - "*.config.ts"
-  - "public/**"
+  - 'node_modules/**'
+  - '.next/**'
+  - 'coverage/**'
+  - '*.config.js'
+  - '*.config.ts'
+  - 'public/**'
 
 # Custom prompts for financial domain
 prompts:
@@ -98,7 +98,7 @@ prompts:
     - API security and rate limiting
     - Clerk webhook signature validation
     - Supabase RLS (Row Level Security) policies
-    
+
   performance: |
     This platform serves high-net-worth individuals who expect premium performance.
     Focus on:
@@ -107,7 +107,7 @@ prompts:
     - Image optimization for Korean content
     - Cal.com integration performance
     - Real-time data loading patterns
-    
+
   korean_localization: |
     This is a Korean-focused financial platform.
     Consider:
@@ -115,7 +115,7 @@ prompts:
     - Right-to-left number formatting for KRW
     - Korean business hours and timezone handling
     - Cultural appropriateness of financial terms
-    
+
 # Integration settings
 integrations:
   # GitHub integration
@@ -126,7 +126,7 @@ integrations:
     create_issues: false
     # Auto-assign reviewers for security issues
     auto_assign_security: true
-    
+
   # Slack notifications (if configured)
   slack:
     enabled: false

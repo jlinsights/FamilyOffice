@@ -21,10 +21,12 @@ graph TD
 ## 📅 자동 스케줄
 
 ### 콘텐츠 생성
+
 - **매주 월요일 오전 10:00**: 다음 주 콘텐츠 자동 생성
 - **수동 실행**: GitHub Actions에서 언제든 실행 가능
 
 ### 자동 발행
+
 - **화요일 오후 2:30**: 실무 가이드 자동 발행
 - **목요일 저녁 8:00**: 사례 연구/분석 자동 발행
 
@@ -33,6 +35,7 @@ graph TD
 ### 1. GitHub Actions 워크플로우
 
 #### 📝 콘텐츠 생성 (`blog-content-generation.yml`)
+
 ```yaml
 트리거:
   - 스케줄: 매주 월요일 10시 (cron: '0 1 * * 1')
@@ -46,6 +49,7 @@ graph TD
 ```
 
 #### 🚀 자동 발행 (`blog-auto-publish.yml`)
+
 ```yaml
 트리거:
   - 스케줄: 화요일 14:30, 목요일 20:00
@@ -61,10 +65,12 @@ graph TD
 ### 2. 스크립트 시스템
 
 #### `scripts/convert-draft-to-blog.js`
+
 - Draft 마크다운을 블로그 포스트 객체로 변환
 - Frontmatter 파싱 및 메타데이터 처리
 
 #### `scripts/update-blog-data.js`
+
 - 블로그 데이터 최적화 및 정렬
 - 카테고리별 포스트 수 자동 계산
 - 데이터 유효성 검사
@@ -93,19 +99,21 @@ FamilyOffice/
 1. **알림 확인**: 매주 월요일 10시 이후 슬랙/이메일 알림
 2. **PR 검토**: GitHub에서 생성된 PR 확인
 3. **콘텐츠 검수**: Draft 파일들의 품질 및 정확성 검토
-4. **승인 처리**: 
+4. **승인 처리**:
    - ✅ 승인: `ready-to-publish` 라벨 추가
    - 🔄 수정: 코멘트로 수정 요청 또는 직접 편집
 
 ### 수동 실행
 
 #### 콘텐츠 생성
+
 ```bash
 # GitHub Actions에서 수동 실행
 Actions > 블로그 콘텐츠 자동 생성 및 검토 > Run workflow
 ```
 
 #### 즉시 발행
+
 ```bash
 # GitHub Actions에서 수동 실행
 Actions > 블로그 콘텐츠 자동 발행 > Run workflow
@@ -114,12 +122,14 @@ Actions > 블로그 콘텐츠 자동 발행 > Run workflow
 ## 🔧 설정 및 환경변수
 
 ### GitHub Secrets 필요
+
 ```bash
 GITHUB_TOKEN          # 기본 제공
 SLACK_WEBHOOK_URL      # 슬랙 알림용 (선택사항)
 ```
 
 ### 환경 설정
+
 - **Node.js**: 18+
 - **Dependencies**: badge-maker, @octokit/rest
 - **권한**: Repository write 권한 필요
@@ -127,6 +137,7 @@ SLACK_WEBHOOK_URL      # 슬랙 알림용 (선택사항)
 ## 📊 콘텐츠 템플릿
 
 ### 화요일 - 실무 가이드
+
 ```yaml
 구조:
   - 도입부 (300단어): 문제 제기 + 중요성
@@ -141,6 +152,7 @@ SLACK_WEBHOOK_URL      # 슬랙 알림용 (선택사항)
 ```
 
 ### 목요일 - 사례 연구/분석
+
 ```yaml
 구조:
   - Executive Summary (200단어): 핵심 성과 3가지
@@ -160,18 +172,21 @@ SLACK_WEBHOOK_URL      # 슬랙 알림용 (선택사항)
 ### 일반적인 문제들
 
 #### 1. PR 생성 실패
+
 ```bash
 원인: GitHub Token 권한 부족
 해결: Repository Settings > Actions > General > Workflow permissions 확인
 ```
 
 #### 2. 자동 발행 건너뜀
+
 ```bash
 원인: ready-to-publish 라벨 누락
 해결: PR에 라벨 수동 추가 후 다음 스케줄 대기
 ```
 
 #### 3. Draft 변환 오류
+
 ```bash
 원인: Frontmatter 형식 불일치
 해결: scripts/convert-draft-to-blog.js 실행하여 오류 확인
@@ -180,6 +195,7 @@ SLACK_WEBHOOK_URL      # 슬랙 알림용 (선택사항)
 ### 수동 복구 방법
 
 #### Draft를 직접 블로그 데이터로 추가
+
 ```bash
 cd /Users/jaehong/Developer/Projects/FamilyOffice
 node scripts/convert-draft-to-blog.js lib/blog-drafts/tuesday-2025-02-04.md
@@ -187,6 +203,7 @@ node scripts/update-blog-data.js
 ```
 
 #### 블로그 데이터 최적화
+
 ```bash
 node scripts/update-blog-data.js
 ```
@@ -194,12 +211,14 @@ node scripts/update-blog-data.js
 ## 📈 모니터링 및 성과
 
 ### 자동 추적 지표
+
 - 생성된 콘텐츠 수
 - 발행 성공률
 - 평균 검토 시간
 - 사용자 참여도
 
 ### 알림 채널
+
 - **슬랙**: 실시간 워크플로우 상태
 - **이메일**: 중요한 승인 요청
 - **GitHub**: PR 코멘트 및 라벨
@@ -207,15 +226,18 @@ node scripts/update-blog-data.js
 ## 🔄 업데이트 및 유지보수
 
 ### 콘텐츠 템플릿 수정
+
 1. `content-templates.md` 업데이트
 2. `blog-content-generation.yml` 템플릿 섹션 수정
 3. 테스트 실행으로 확인
 
 ### 스케줄 변경
+
 1. `.github/workflows/` 파일의 cron 표현식 수정
 2. `content-calendar-2025.md` 일정 업데이트
 
 ### 알림 설정 변경
+
 1. GitHub Secrets에 새로운 웹훅 URL 추가
 2. 워크플로우 파일의 알림 섹션 수정
 

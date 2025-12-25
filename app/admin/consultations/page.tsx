@@ -2,6 +2,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 import { createAdminClient } from '@/lib/supabase/admin-client';
+
 import { Database } from '@/types/supabase';
 
 type ConsultationRow = Database['public']['Tables']['consultations']['Row'];
@@ -24,7 +25,8 @@ export default async function ConsultationsPage() {
               상담 신청 목록
             </h1>
             <div className="bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 p-4 rounded-md mb-6">
-              Supabase 관리자 키(SERVICE_ROLE_KEY)가 설정되지 않았습니다. 환경변수를 확인해주세요.
+              Supabase 관리자 키(SERVICE_ROLE_KEY)가 설정되지 않았습니다.
+              환경변수를 확인해주세요.
             </div>
           </div>
         </section>
@@ -40,10 +42,14 @@ export default async function ConsultationsPage() {
     .order('created_at', { ascending: false });
 
   // 타입 안전성을 위한 타입 단언
-  const typedConsultations: ConsultationRow[] = (consultations || []) as ConsultationRow[];
+  const typedConsultations: ConsultationRow[] = (consultations ||
+    []) as ConsultationRow[];
 
   if (error) {
-    console.error('Error fetching consultations:', JSON.stringify(error, null, 2));
+    console.error(
+      'Error fetching consultations:',
+      JSON.stringify(error, null, 2)
+    );
   }
 
   return (

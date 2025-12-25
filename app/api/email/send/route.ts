@@ -2,23 +2,32 @@
  * 이메일 전송 API 엔드포인트
  * POST /api/email/send
  */
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
-import { sendEmail, sendConsultationConfirmation, sendNewsletterWelcome } from '@/lib/email/resend-client';
-import { logger } from '@/lib/debug-logger';
 import { z } from 'zod';
+
+import { NextRequest, NextResponse } from 'next/server';
+
+import { auth } from '@clerk/nextjs/server';
+
+import { logger } from '@/lib/debug-logger';
+import {
+  sendEmail,
+  sendConsultationConfirmation,
+  sendNewsletterWelcome,
+} from '@/lib/email/resend-client';
 
 // 이메일 전송 요청 스키마
 const emailRequestSchema = z.object({
   type: z.enum(['consultation', 'newsletter', 'custom']),
   to: z.string().email(),
-  data: z.object({
-    name: z.string().optional(),
-    consultationType: z.string().optional(),
-    consultationDate: z.string().optional(),
-    subject: z.string().optional(),
-    message: z.string().optional(),
-  }).optional(),
+  data: z
+    .object({
+      name: z.string().optional(),
+      consultationType: z.string().optional(),
+      consultationDate: z.string().optional(),
+      subject: z.string().optional(),
+      message: z.string().optional(),
+    })
+    .optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -26,10 +35,7 @@ export async function POST(request: NextRequest) {
     // 인증 확인 (관리자 권한 필요)
     const { userId } = await auth();
     if (!userId) {
-      return NextResponse.json(
-        { error: '인증이 필요합니다' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: '인증이 필요합니다' }, { status: 401 });
     }
 
     // 요청 데이터 검증
@@ -48,7 +54,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        
+
         result = await sendConsultationConfirmation(
           to,
           data.name,
@@ -101,7 +107,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         success: true,
         id: result.id,
-        message: '이메일이 성공적으로 전송되었습니다'
+        message: '이메일이 성공적으로 전송되었습니다',
       });
     } else {
       logger.error('이메일 전송 실패:', { type, to, error: result.error });
@@ -110,10 +116,9 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
   } catch (error) {
     logger.error('이메일 API 오류:', error);
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: '요청 데이터가 유효하지 않습니다', details: error.errors },
@@ -133,8 +138,8 @@ export async function GET() {
     message: 'Resend 이메일 API',
     endpoints: [
       'POST /api/email/send - 이메일 전송',
-      'GET /api/email/status - 시스템 상태'
+      'GET /api/email/status - 시스템 상태',
     ],
-    domain: 'email.familyoffices.vip'
+    domain: 'email.familyoffices.vip',
   });
 }

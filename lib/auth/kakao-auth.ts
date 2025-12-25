@@ -2,9 +2,10 @@
  * 카카오 소셜 로그인 시스템 with Supabase 통합
  * Kakao SDK + Supabase Auth 완전 연동
  */
+import type { User } from '@supabase/supabase-js';
 
 import { createClient } from '@/lib/supabase/client';
-import type { User } from '@supabase/supabase-js';
+import { safeInsert, safeUpdate, safeFrom } from '@/lib/supabase/helpers';
 
 export interface KakaoUser {
   id: number;
@@ -60,12 +61,14 @@ export class KakaoAuthService {
     if (typeof window !== 'undefined') {
       const javascriptKey = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
       if (!javascriptKey) {
-        console.error('❌ NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY가 설정되지 않았습니다.');
+        console.error(
+          '❌ NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY가 설정되지 않았습니다.'
+        );
         console.error('   카카오 로그인이 작동하지 않습니다.');
         return;
       }
     }
-    
+
     this.initializeKakaoSDK();
   }
 
@@ -74,7 +77,7 @@ export class KakaoAuthService {
 
     // Kakao SDK 초기화 대기
     const checkKakaoSDK = () => {
-      return new Promise<void>((resolve) => {
+      return new Promise<void>(resolve => {
         const check = () => {
           if (window.Kakao && window.Kakao.isInitialized()) {
             this.isInitialized = true;
@@ -106,34 +109,41 @@ export class KakaoAuthService {
       if (!kakaoAuthResult.success || !kakaoAuthResult.accessToken) {
         return {
           success: false,
-          error: '카카오 로그인에 실패했습니다.'
+          error: '카카오 로그인에 실패했습니다.',
         };
       }
 
       // 카카오 사용자 정보 가져오기
-      const kakaoUser = await this.getKakaoUserInfo(kakaoAuthResult.accessToken);
+      const kakaoUser = await this.getKakaoUserInfo(
+        kakaoAuthResult.accessToken
+      );
       if (!kakaoUser) {
         return {
           success: false,
-          error: '카카오 사용자 정보를 가져올 수 없습니다.'
+          error: '카카오 사용자 정보를 가져올 수 없습니다.',
         };
       }
 
       // Supabase에 사용자 등록/로그인
-      const supabaseResult = await this.signInOrCreateUser(kakaoUser, kakaoAuthResult.accessToken);
-      
+      const supabaseResult = await this.signInOrCreateUser(
+        kakaoUser,
+        kakaoAuthResult.accessToken
+      );
+
       return {
         success: true,
         user: supabaseResult.user,
         kakaoUser,
-        isNewUser: supabaseResult.isNewUser
+        isNewUser: supabaseResult.isNewUser,
       };
-
     } catch (error) {
       console.error('카카오 로그인 오류:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : '로그인 중 오류가 발생했습니다.'
+        error:
+          error instanceof Error
+            ? error.message
+            : '로그인 중 오류가 발생했습니다.',
       };
     }
   }
@@ -141,8 +151,11 @@ export class KakaoAuthService {
   /**
    * 카카오 SDK를 통한 로그인
    */
-  private performKakaoLogin(): Promise<{ success: boolean; accessToken?: string }> {
-    return new Promise((resolve) => {
+  private performKakaoLogin(): Promise<{
+    success: boolean;
+    accessToken?: string;
+  }> {
+    return new Promise(resolve => {
       if (!window.Kakao?.Auth) {
         resolve({ success: false });
         return;
@@ -152,13 +165,13 @@ export class KakaoAuthService {
         success: (authObj: any) => {
           resolve({
             success: true,
-            accessToken: authObj.access_token
+            accessToken: authObj.access_token,
           });
         },
         fail: (error: any) => {
           console.error('카카오 로그인 실패:', error);
           resolve({ success: false });
-        }
+        },
       });
     });
   }
@@ -166,14 +179,16 @@ export class KakaoAuthService {
   /**
    * 카카오 사용자 정보 가져오기
    */
-  private async getKakaoUserInfo(accessToken: string): Promise<KakaoUser | null> {
+  private async getKakaoUserInfo(
+    accessToken: string
+  ): Promise<KakaoUser | null> {
     try {
       const response = await fetch('https://kapi.kakao.com/v2/user/me', {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       });
 
       if (!response.ok) {
@@ -182,7 +197,6 @@ export class KakaoAuthService {
 
       const userData: KakaoUser = await response.json();
       return userData;
-
     } catch (error) {
       console.error('카카오 사용자 정보 가져오기 실패:', error);
       return null;
@@ -192,13 +206,20 @@ export class KakaoAuthService {
   /**
    * Supabase에 사용자 등록/로그인
    */
-  private async signInOrCreateUser(kakaoUser: KakaoUser, accessToken: string): Promise<{
+  private async signInOrCreateUser(
+    kakaoUser: KakaoUser,
+    accessToken: string
+  ): Promise<{
     user: User;
     isNewUser: boolean;
   }> {
     const email = kakaoUser.kakao_account.email;
-    const nickname = kakaoUser.kakao_account.profile?.nickname || kakaoUser.properties.nickname;
-    const profileImage = kakaoUser.kakao_account.profile?.profile_image_url || kakaoUser.properties.profile_image;
+    const nickname =
+      kakaoUser.kakao_account.profile?.nickname ||
+      kakaoUser.properties.nickname;
+    const profileImage =
+      kakaoUser.kakao_account.profile?.profile_image_url ||
+      kakaoUser.properties.profile_image;
 
     // 기존 사용자 확인
     const { data: existingUser } = await this.supabase
@@ -210,45 +231,40 @@ export class KakaoAuthService {
     if (existingUser) {
       // 기존 사용자 로그인 - 정보 업데이트
       const { data, error } = await this.supabase.auth.signInAnonymously();
-      
+
       if (error) throw error;
 
       // 사용자 정보 업데이트
-      await this.supabase
-        .from('users')
-        .update({
-          name: nickname,
-          avatar_url: profileImage,
-          kakao_access_token: accessToken,
-          last_sign_in_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
-        .eq('kakao_id', kakaoUser.id.toString());
+      await safeUpdate(this.supabase, 'users', {
+        name: nickname,
+        avatar_url: profileImage || null,
+        kakao_access_token: accessToken,
+        last_sign_in_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }).eq('kakao_id', kakaoUser.id.toString());
 
       return {
         user: data.user!,
-        isNewUser: false
+        isNewUser: false,
       };
     } else {
       // 새 사용자 생성
       const { data, error } = await this.supabase.auth.signInAnonymously();
-      
+
       if (error) throw error;
 
       // users 테이블에 카카오 사용자 정보 저장
-      const { error: insertError } = await this.supabase
-        .from('users')
-        .insert({
-          id: data.user!.id,
-          email: email || null,
-          name: nickname,
-          avatar_url: profileImage || null,
-          kakao_id: kakaoUser.id.toString(),
-          kakao_access_token: accessToken,
-          provider: 'kakao',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        });
+      const { error: insertError } = await safeInsert(this.supabase, 'users', {
+        id: data.user!.id,
+        email: email || null,
+        name: nickname,
+        avatar_url: profileImage || null,
+        kakao_id: kakaoUser.id.toString(),
+        kakao_access_token: accessToken,
+        provider: 'kakao',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      });
 
       if (insertError) {
         console.error('사용자 정보 저장 실패:', insertError);
@@ -257,7 +273,7 @@ export class KakaoAuthService {
 
       return {
         user: data.user!,
-        isNewUser: true
+        isNewUser: true,
       };
     }
   }
@@ -277,12 +293,14 @@ export class KakaoAuthService {
       if (error) throw error;
 
       return { success: true };
-
     } catch (error) {
       console.error('로그아웃 오류:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : '로그아웃 중 오류가 발생했습니다.'
+        error:
+          error instanceof Error
+            ? error.message
+            : '로그아웃 중 오류가 발생했습니다.',
       };
     }
   }
@@ -294,22 +312,24 @@ export class KakaoAuthService {
     user: User | null;
     kakaoUser?: KakaoUser;
   }> {
-    const { data: { user } } = await this.supabase.auth.getUser();
-    
+    const {
+      data: { user },
+    } = await this.supabase.auth.getUser();
+
     if (!user) {
       return { user: null };
     }
 
     // 카카오 사용자 정보 가져오기
-    const { data: userData } = await this.supabase
-      .from('users')
+    const { data: userData } = await safeFrom(this.supabase, 'users')
       .select('*')
       .eq('id', user.id)
       .single();
 
     let kakaoUser: KakaoUser | undefined;
     if (userData?.kakao_access_token) {
-      kakaoUser = await this.getKakaoUserInfo(userData.kakao_access_token) || undefined;
+      kakaoUser =
+        (await this.getKakaoUserInfo(userData.kakao_access_token)) || undefined;
     }
 
     const result: { user: User | null; kakaoUser?: KakaoUser } = { user };
@@ -328,28 +348,29 @@ export class KakaoAuthService {
     phone?: string;
   }): Promise<{ success: boolean; error?: string }> {
     try {
-      const { data: { user } } = await this.supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await this.supabase.auth.getUser();
       if (!user) {
         throw new Error('로그인이 필요합니다.');
       }
 
-      const { error } = await this.supabase
-        .from('users')
-        .update({
-          ...updates,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', user.id);
+      const { error } = await safeUpdate(this.supabase, 'users', {
+        ...updates,
+        updated_at: new Date().toISOString(),
+      }).eq('id', user.id);
 
       if (error) throw error;
 
       return { success: true };
-
     } catch (error) {
       console.error('프로필 업데이트 오류:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : '프로필 업데이트 중 오류가 발생했습니다.'
+        error:
+          error instanceof Error
+            ? error.message
+            : '프로필 업데이트 중 오류가 발생했습니다.',
       };
     }
   }
@@ -391,20 +412,25 @@ export class KakaoAuthService {
       }
 
       // Supabase에 사용자 등록/로그인
-      const supabaseResult = await this.signInOrCreateUser(kakaoUser, accessToken);
-      
+      const supabaseResult = await this.signInOrCreateUser(
+        kakaoUser,
+        accessToken
+      );
+
       return {
         success: true,
         user: supabaseResult.user,
         kakaoUser,
-        isNewUser: supabaseResult.isNewUser
+        isNewUser: supabaseResult.isNewUser,
       };
-
     } catch (error) {
       console.error('OAuth 콜백 처리 오류:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'OAuth 처리 중 오류가 발생했습니다.'
+        error:
+          error instanceof Error
+            ? error.message
+            : 'OAuth 처리 중 오류가 발생했습니다.',
       };
     }
   }
@@ -426,7 +452,7 @@ export class KakaoAuthService {
           await fetch('https://kapi.kakao.com/v1/user/logout', {
             method: 'POST',
             headers: {
-              'Authorization': `Bearer ${window.Kakao.Auth.getAccessToken()}`,
+              Authorization: `Bearer ${window.Kakao.Auth.getAccessToken()}`,
             },
           });
         } catch (error) {
@@ -441,9 +467,12 @@ export class KakaoAuthService {
       return { success: true };
     } catch (error) {
       console.error('카카오 로그아웃 오류:', error);
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : '카카오 로그아웃 중 오류가 발생했습니다.' 
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : '카카오 로그아웃 중 오류가 발생했습니다.',
       };
     }
   }
@@ -459,31 +488,32 @@ export class KakaoAuthService {
           window.Kakao.API.request({
             url: '/v1/user/unlink',
             success: () => resolve(),
-            fail: (error: any) => reject(error)
+            fail: (error: any) => reject(error),
           });
         });
       }
 
       // Supabase에서 카카오 정보 제거
-      const { data: { user } } = await this.supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await this.supabase.auth.getUser();
       if (user) {
-        await this.supabase
-          .from('users')
-          .update({
-            kakao_id: null,
-            kakao_access_token: null,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', user.id);
+        await safeUpdate(this.supabase, 'users', {
+          kakao_id: null,
+          kakao_access_token: null,
+          updated_at: new Date().toISOString(),
+        }).eq('id', user.id);
       }
 
       return { success: true };
-
     } catch (error) {
       console.error('계정 연동 해제 오류:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : '계정 연동 해제 중 오류가 발생했습니다.'
+        error:
+          error instanceof Error
+            ? error.message
+            : '계정 연동 해제 중 오류가 발생했습니다.',
       };
     }
   }

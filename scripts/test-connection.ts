@@ -1,4 +1,3 @@
-
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -19,9 +18,9 @@ if (!url || !serviceKey || !anonKey) {
 async function testKey(name: string, key: string) {
   console.log(`\nTesting ${name}... (Key: ${key.substring(0, 10)}...)`);
   const client = createClient(url!, key, {
-    auth: { autoRefreshToken: false, persistSession: false }
+    auth: { autoRefreshToken: false, persistSession: false },
   });
-  
+
   try {
     // Try a simple select. If table 'consultations' is protected, anon might fail with 401 or return [] depending on policies.
     // Use 'users' or just check health? RLS might block 'consultations' for anon.
@@ -37,13 +36,13 @@ async function testKey(name: string, key: string) {
       console.log(`[${name}] SUCCESS! Count: ${count}`);
     }
   } catch (err: any) {
-     console.error(`[${name}] EXCEPTION:`, err.message);
+    console.error(`[${name}] EXCEPTION:`, err.message);
   }
 }
 
 async function run() {
   console.log('Testing connection to:', url);
-  await testKey('ANON_KEY', anonKey);
+  await testKey('ANON_KEY', anonKey!);
   await testKey('SERVICE_ROLE_KEY', serviceKey!);
 }
 

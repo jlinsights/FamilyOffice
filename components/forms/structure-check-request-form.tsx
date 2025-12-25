@@ -1,5 +1,13 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CheckCircle2, Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
+import * as z from 'zod';
+
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -7,12 +15,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckCircle2, Loader2 } from 'lucide-react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import * as z from 'zod';
 
 // Form validation schema
 const structureCheckSchema = z.object({
@@ -113,18 +115,21 @@ export function StructureCheckRequestForm() {
           </h3>
           <div className="max-w-2xl mx-auto space-y-4 text-left text-green-800">
             <p>
-              구조 점검은 문제를 해결하기 위한 자리가 아니라,
-              지금 무엇을 결정해야 하는지, 아직 미뤄도 되는 문제는 무엇인지를 정리하는 과정입니다.
+              구조 점검은 문제를 해결하기 위한 자리가 아니라, 지금 무엇을
+              결정해야 하는지, 아직 미뤄도 되는 문제는 무엇인지를 정리하는
+              과정입니다.
             </p>
             <p>
-              제출해 주신 내용을 바탕으로, 구조 점검이 필요한 경우에 한해 개별적으로 연락드릴 예정입니다.
+              제출해 주신 내용을 바탕으로, 구조 점검이 필요한 경우에 한해
+              개별적으로 연락드릴 예정입니다.
             </p>
             <p>
-              모든 요청이 진행되는 것은 아니며, 추가 정보가 필요한 경우 별도로 안내드릴 수 있습니다.
+              모든 요청이 진행되는 것은 아니며, 추가 정보가 필요한 경우 별도로
+              안내드릴 수 있습니다.
             </p>
             <p className="pt-4 font-semibold">
-              결정을 서두르실 필요는 없습니다.
-              다만, 판단의 기준이 정리되면 이후의 선택은 훨씬 단순해집니다.
+              결정을 서두르실 필요는 없습니다. 다만, 판단의 기준이 정리되면
+              이후의 선택은 훨씬 단순해집니다.
             </p>
           </div>
         </CardContent>
@@ -137,14 +142,17 @@ export function StructureCheckRequestForm() {
       {/* 안내 문구 */}
       <div className="bg-muted/30 dark:bg-muted/10 border border-border p-6 rounded-lg">
         <p className="text-sm text-foreground leading-relaxed">
-          아래 질문은 상담을 위한 것이 아닙니다.
-          현재 상황에서 무엇이 정리되어 있고, 무엇이 아직 결정되지 않았는지를 확인하기 위한 최소한의 질문입니다.
+          아래 질문은 상담을 위한 것이 아닙니다. 현재 상황에서 무엇이 정리되어
+          있고, 무엇이 아직 결정되지 않았는지를 확인하기 위한 최소한의
+          질문입니다.
         </p>
       </div>
 
       {/* 연락처 정보 */}
       <div className="space-y-4">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">연락처 정보</h3>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          연락처 정보
+        </h3>
 
         <div className="space-y-2">
           <Label htmlFor="name">이름 *</Label>
@@ -198,7 +206,9 @@ export function StructureCheckRequestForm() {
 
       {/* 필수 질문 */}
       <div className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">사전 질문 (필수)</h3>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          사전 질문 (필수)
+        </h3>
 
         {/* Q1 */}
         <div className="space-y-3">
@@ -206,7 +216,9 @@ export function StructureCheckRequestForm() {
             1. 상속·가업승계와 관련해 이미 결정된 사항이 있습니까? *
           </Label>
           <RadioGroup
-            onValueChange={(value) => setValue('q1_decision_made', value as 'yes' | 'no')}
+            onValueChange={value =>
+              setValue('q1_decision_made', value as 'yes' | 'no')
+            }
             className="space-y-2"
           >
             <div className="flex items-center space-x-2">
@@ -230,7 +242,9 @@ export function StructureCheckRequestForm() {
             />
           )}
           {errors.q1_decision_made && (
-            <p className="text-sm text-red-500">{errors.q1_decision_made.message}</p>
+            <p className="text-sm text-red-500">
+              {errors.q1_decision_made.message}
+            </p>
           )}
         </div>
 
@@ -240,7 +254,9 @@ export function StructureCheckRequestForm() {
             2. 위 결정은 문서(정관, 계약, 메모 등)로 남아 있습니까? *
           </Label>
           <RadioGroup
-            onValueChange={(value) => setValue('q2_documented', value as 'yes' | 'no')}
+            onValueChange={value =>
+              setValue('q2_documented', value as 'yes' | 'no')
+            }
             className="space-y-2"
           >
             <div className="flex items-center space-x-2">
@@ -257,7 +273,9 @@ export function StructureCheckRequestForm() {
             </div>
           </RadioGroup>
           {errors.q2_documented && (
-            <p className="text-sm text-red-500">{errors.q2_documented.message}</p>
+            <p className="text-sm text-red-500">
+              {errors.q2_documented.message}
+            </p>
           )}
         </div>
 
@@ -267,8 +285,11 @@ export function StructureCheckRequestForm() {
             3. 대표자 유고 시, 회사의 의사결정 권한은 명확히 정리돼 있습니까? *
           </Label>
           <RadioGroup
-            onValueChange={(value) =>
-              setValue('q3_authority_clear', value as 'clear' | 'partial' | 'unclear')
+            onValueChange={value =>
+              setValue(
+                'q3_authority_clear',
+                value as 'clear' | 'partial' | 'unclear'
+              )
             }
             className="space-y-2"
           >
@@ -280,19 +301,27 @@ export function StructureCheckRequestForm() {
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="partial" id="q3-partial" />
-              <Label htmlFor="q3-partial" className="font-normal cursor-pointer">
+              <Label
+                htmlFor="q3-partial"
+                className="font-normal cursor-pointer"
+              >
                 일부만 정리됨
               </Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="unclear" id="q3-unclear" />
-              <Label htmlFor="q3-unclear" className="font-normal cursor-pointer">
+              <Label
+                htmlFor="q3-unclear"
+                className="font-normal cursor-pointer"
+              >
                 잘 모르겠다
               </Label>
             </div>
           </RadioGroup>
           {errors.q3_authority_clear && (
-            <p className="text-sm text-red-500">{errors.q3_authority_clear.message}</p>
+            <p className="text-sm text-red-500">
+              {errors.q3_authority_clear.message}
+            </p>
           )}
         </div>
 
@@ -302,7 +331,7 @@ export function StructureCheckRequestForm() {
             4. 상속이나 유사시 필요한 현금을 어떻게 마련할 계획입니까? *
           </Label>
           <RadioGroup
-            onValueChange={(value) =>
+            onValueChange={value =>
               setValue(
                 'q4_cash_plan',
                 value as 'structure_exists' | 'rough_idea' | 'not_considered'
@@ -330,7 +359,9 @@ export function StructureCheckRequestForm() {
             </div>
           </RadioGroup>
           {errors.q4_cash_plan && (
-            <p className="text-sm text-red-500">{errors.q4_cash_plan.message}</p>
+            <p className="text-sm text-red-500">
+              {errors.q4_cash_plan.message}
+            </p>
           )}
         </div>
 
@@ -340,8 +371,11 @@ export function StructureCheckRequestForm() {
             5. 이 문제를 언제까지 미뤄도 괜찮다고 생각하십니까? *
           </Label>
           <RadioGroup
-            onValueChange={(value) =>
-              setValue('q5_deadline', value as 'within_6m' | '1_2y' | 'when_needed')
+            onValueChange={value =>
+              setValue(
+                'q5_deadline',
+                value as 'within_6m' | '1_2y' | 'when_needed'
+              )
             }
             className="space-y-2"
           >
@@ -372,7 +406,9 @@ export function StructureCheckRequestForm() {
 
       {/* 선택 질문 */}
       <div className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">선택 질문 (선택)</h3>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          선택 질문 (선택)
+        </h3>
 
         {/* Q6 */}
         <div className="space-y-3">
@@ -380,18 +416,18 @@ export function StructureCheckRequestForm() {
             6. 가장 불안한 영역은 무엇입니까? (복수 선택 가능)
           </Label>
           <div className="space-y-2">
-            {concernOptions.map((option) => (
+            {concernOptions.map(option => (
               <div key={option.value} className="flex items-center space-x-2">
                 <Checkbox
                   id={`concern-${option.value}`}
                   checked={concernsValue.includes(option.value)}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={checked => {
                     if (checked) {
                       setValue('q6_concerns', [...concernsValue, option.value]);
                     } else {
                       setValue(
                         'q6_concerns',
-                        concernsValue.filter((v) => v !== option.value)
+                        concernsValue.filter(v => v !== option.value)
                       );
                     }
                   }}
@@ -413,18 +449,18 @@ export function StructureCheckRequestForm() {
             7. 현재 도움을 받고 있는 전문가가 있습니까?
           </Label>
           <div className="space-y-2">
-            {advisorOptions.map((option) => (
+            {advisorOptions.map(option => (
               <div key={option.value} className="flex items-center space-x-2">
                 <Checkbox
                   id={`advisor-${option.value}`}
                   checked={advisorsValue.includes(option.value)}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={checked => {
                     if (checked) {
                       setValue('q7_advisors', [...advisorsValue, option.value]);
                     } else {
                       setValue(
                         'q7_advisors',
-                        advisorsValue.filter((v) => v !== option.value)
+                        advisorsValue.filter(v => v !== option.value)
                       );
                     }
                   }}
@@ -442,7 +478,9 @@ export function StructureCheckRequestForm() {
 
         {/* 추가 메모 */}
         <div className="space-y-2">
-          <Label htmlFor="additional_notes">추가로 전달하고 싶은 내용 (선택)</Label>
+          <Label htmlFor="additional_notes">
+            추가로 전달하고 싶은 내용 (선택)
+          </Label>
           <Textarea
             id="additional_notes"
             {...register('additional_notes')}

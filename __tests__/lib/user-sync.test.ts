@@ -2,7 +2,7 @@ import { syncCurrentUser, getUserByClerkId } from '@/lib/user-sync';
 
 // Mock Clerk
 jest.mock('@clerk/nextjs/server', () => ({
-  currentUser: jest.fn()
+  currentUser: jest.fn(),
 }));
 
 // Mock Supabase
@@ -11,21 +11,21 @@ jest.mock('@supabase/supabase-js', () => ({
     from: jest.fn(() => ({
       select: jest.fn(() => ({
         eq: jest.fn(() => ({
-          single: jest.fn()
-        }))
+          single: jest.fn(),
+        })),
       })),
       insert: jest.fn(() => ({
         select: jest.fn(() => ({
-          single: jest.fn()
-        }))
+          single: jest.fn(),
+        })),
       })),
       upsert: jest.fn(() => ({
         select: jest.fn(() => ({
-          single: jest.fn()
-        }))
-      }))
-    }))
-  }))
+          single: jest.fn(),
+        })),
+      })),
+    })),
+  })),
 }));
 
 describe('User Synchronization', () => {

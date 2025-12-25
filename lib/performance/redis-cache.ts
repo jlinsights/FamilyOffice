@@ -432,7 +432,8 @@ export class RedisCache {
       const missesMatch = stats.match(/keyspace_misses:(\d+)/);
 
       const hits = hitsMatch && hitsMatch[1] ? parseInt(hitsMatch[1]) : 0;
-      const misses = missesMatch && missesMatch[1] ? parseInt(missesMatch[1]) : 0;
+      const misses =
+        missesMatch && missesMatch[1] ? parseInt(missesMatch[1]) : 0;
 
       return hits + misses > 0 ? (hits / (hits + misses)) * 100 : 0;
     } catch {

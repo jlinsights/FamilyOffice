@@ -15,11 +15,18 @@
  * GET /api/test/bmad-integration
  * GET /api/test/bmad-integration?detailed=true
  */
+import { createClient } from '@supabase/supabase-js';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { checkGA4Connection, getKeywordPerformance } from '@/lib/google-analytics/ga4-client';
+
+import {
+  checkGA4Connection,
+  getKeywordPerformance,
+} from '@/lib/google-analytics/ga4-client';
 import { checkSerperConnection, checkDomainRanking } from '@/lib/serper/client';
-import { createClient } from '@supabase/supabase-js';
+import { safeInsert } from '@/lib/supabase/helpers';
+
+import { Database } from '@/types/supabase';
 
 interface TestResult {
   test: string;
@@ -87,8 +94,13 @@ export async function GET(request: NextRequest) {
   results.push(supabaseTest);
 
   // Test 5: End-to-End 테스트 (모든 이전 테스트 성공 시)
-  const allPreviousTestsPassed = results.every(r => r.status === 'pass' || r.status === 'skip');
-  if (allPreviousTestsPassed && results.filter(r => r.status === 'pass').length >= 3) {
+  const allPreviousTestsPassed = results.every(
+    r => r.status === 'pass' || r.status === 'skip'
+  );
+  if (
+    allPreviousTestsPassed &&
+    results.filter(r => r.status === 'pass').length >= 3
+  ) {
     console.log('\n🚀 Test 5: End-to-End 데이터 수집 테스트...');
     const e2eTest = await testEndToEnd(detailed);
     results.push(e2eTest);
@@ -114,18 +126,26 @@ export async function GET(request: NextRequest) {
     failed,
     skipped,
     duration,
-    results: detailed ? results : results.map(r => ({
-      test: r.test,
-      status: r.status,
-      message: r.message,
-      duration: r.duration,
-    })),
+    results: detailed
+      ? results
+      : results.map(r => ({
+          test: r.test,
+          status: r.status,
+          message: r.message,
+          ...(r.duration !== undefined && { duration: r.duration }),
+        })),
     summary: {
-      environment: results.find(r => r.test === 'Environment Variables')?.status || 'fail',
+      environment: (results.find(r => r.test === 'Environment Variables')
+        ?.status === 'pass'
+        ? 'pass'
+        : 'fail') as 'pass' | 'fail',
       ga4: results.find(r => r.test === 'GA4 Connection')?.status || 'skip',
-      serper: results.find(r => r.test === 'Serper Connection')?.status || 'skip',
-      supabase: results.find(r => r.test === 'Supabase Connection')?.status || 'skip',
-      endToEnd: results.find(r => r.test === 'End-to-End Collection')?.status || 'skip',
+      serper:
+        results.find(r => r.test === 'Serper Connection')?.status || 'skip',
+      supabase:
+        results.find(r => r.test === 'Supabase Connection')?.status || 'skip',
+      endToEnd:
+        results.find(r => r.test === 'End-to-End Collection')?.status || 'skip',
     },
   };
 
@@ -201,13 +221,17 @@ async function testGA4Connection(detailed: boolean): Promise<TestResult> {
 
     // Detailed 모드: 실제 데이터 조회 테스트
     if (detailed) {
-      const endDate = new Date().toISOString().split('T')[0];
-      const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+      const endDate: string = new Date().toISOString().split('T')[0]!;
+      const startDate: string = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
         .toISOString()
-        .split('T')[0];
+        .split('T')[0]!;
 
       const testKeywords = ['패밀리오피스란'];
-      const performance = await getKeywordPerformance(startDate, endDate, testKeywords);
+      const performance = await getKeywordPerformance(
+        startDate,
+        endDate,
+        testKeywords
+      );
 
       return {
         test: 'GA4 Connection',
@@ -320,7 +344,7 @@ async function testSupabaseConnection(detailed: boolean): Promise<TestResult> {
       };
     }
 
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = createClient<Database>(supabaseUrl, supabaseKey);
 
     // 테이블 존재 확인
     const { data, error } = await supabase
@@ -329,7 +353,10 @@ async function testSupabaseConnection(detailed: boolean): Promise<TestResult> {
       .limit(1);
 
     if (error) {
-      if (error.message.includes('relation') && error.message.includes('does not exist')) {
+      if (
+        error.message.includes('relation') &&
+        error.message.includes('does not exist')
+      ) {
         return {
           test: 'Supabase Connection',
           status: 'fail',
@@ -392,7 +419,7 @@ async function testEndToEnd(detailed: boolean): Promise<TestResult> {
   try {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = createClient<Database>(supabaseUrl, supabaseKey);
 
     const testKeyword = '패밀리오피스란';
     const testDomain = 'familyoffices.vip';
@@ -413,10 +440,11 @@ async function testEndToEnd(detailed: boolean): Promise<TestResult> {
       created_at: new Date().toISOString(),
     };
 
-    const { data: inserted, error: insertError } = await supabase
-      .from('keyword_rankings')
-      .insert(testRecord)
-      .select();
+    const { data: inserted, error: insertError } = await safeInsert(
+      supabase,
+      'keyword_rankings' as any,
+      testRecord as any
+    ).select();
 
     if (insertError) {
       return {

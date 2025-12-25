@@ -1,13 +1,18 @@
+import { Crown, Shield, TrendingUp, Users } from 'lucide-react';
+
+import type { Metadata } from 'next';
+
+import { SignUp } from '@clerk/nextjs';
+
+import { Badge } from '@/components/ui/badge';
+
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { Badge } from '@/components/ui/badge';
-import { SignUp } from '@clerk/nextjs';
-import { Crown, Shield, TrendingUp, Users } from 'lucide-react';
-import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '회원가입 | FamilyOffice S - 百年永續 기업의 가치를 다음 세대로',
-  description: '중소중견기업 법인대표를 위한 百年永續 솔루션에 가입하세요. 기업의 가치를 다음 세대로 이어가는 전문 서비스입니다.',
+  description:
+    '중소중견기업 법인대표를 위한 百年永續 솔루션에 가입하세요. 기업의 가치를 다음 세대로 이어가는 전문 서비스입니다.',
 };
 
 export default function SignUpPage() {
@@ -15,23 +20,23 @@ export default function SignUpPage() {
     {
       icon: Crown,
       title: 'CEO 전용 서비스',
-      description: '중소중견기업 대표님만을 위한 맞춤형 솔루션'
+      description: '중소중견기업 대표님만을 위한 맞춤형 솔루션',
     },
     {
       icon: Shield,
       title: '안전한 자산관리',
-      description: '기업급 보안으로 소중한 자산을 안전하게 보호'
+      description: '기업급 보안으로 소중한 자산을 안전하게 보호',
     },
     {
       icon: Users,
       title: '전문가 1:1 상담',
-      description: '20년 경력의 전문가와 직접 상담'
+      description: '20년 경력의 전문가와 직접 상담',
     },
     {
       icon: TrendingUp,
       title: '맞춤형 투자전략',
-      description: '기업 상황에 최적화된 투자 포트폴리오'
-    }
+      description: '기업 상황에 최적화된 투자 포트폴리오',
+    },
   ];
 
   return (
@@ -43,7 +48,10 @@ export default function SignUpPage() {
           <div className="space-y-8">
             <div className="text-center lg:text-left">
               <div className="flex justify-center lg:justify-start mb-6">
-                <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                <Badge
+                  variant="outline"
+                  className="bg-primary/10 text-primary border-primary/20"
+                >
                   ⭐ 성공한 CEO 전용 플랫폼
                 </Badge>
               </div>
@@ -53,8 +61,8 @@ export default function SignUpPage() {
                 기업의 가치를 다음 세대로
               </h1>
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                중소중견기업 법인대표님을 위한 전문적인 자산관리와 가업승계 솔루션을 제공합니다.
-                지금 가입하고 프리미엄 서비스를 경험하세요.
+                중소중견기업 법인대표님을 위한 전문적인 자산관리와 가업승계
+                솔루션을 제공합니다. 지금 가입하고 프리미엄 서비스를 경험하세요.
               </p>
             </div>
 
@@ -69,8 +77,12 @@ export default function SignUpPage() {
                     <feature.icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.description}</p>
+                    <h3 className="font-semibold text-foreground">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {feature.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -98,19 +110,19 @@ export default function SignUpPage() {
             <SignUp
               appearance={{
                 elements: {
-                  rootBox: "w-full",
-                  card: "shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm w-full",
-                  headerTitle: "text-2xl font-bold",
-                  headerSubtitle: "text-base text-muted-foreground",
-                  socialButtonsBlockButton: "bg-primary hover:bg-primary/90",
-                  formButtonPrimary: "bg-primary hover:bg-primary/90",
-                  footerActionLink: "text-primary hover:text-primary/80",
-                  formFieldInput: "border-border",
-                  identityPreviewEditButton: "text-primary",
+                  rootBox: 'w-full',
+                  card: 'shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm w-full',
+                  headerTitle: 'text-2xl font-bold',
+                  headerSubtitle: 'text-base text-muted-foreground',
+                  socialButtonsBlockButton: 'bg-primary hover:bg-primary/90',
+                  formButtonPrimary: 'bg-primary hover:bg-primary/90',
+                  footerActionLink: 'text-primary hover:text-primary/80',
+                  formFieldInput: 'border-border',
+                  identityPreviewEditButton: 'text-primary',
                 },
                 layout: {
-                  socialButtonsPlacement: "top",
-                  socialButtonsVariant: "blockButton",
+                  socialButtonsPlacement: 'top',
+                  socialButtonsVariant: 'blockButton',
                 },
               }}
               signInUrl="/auth/sign-in"

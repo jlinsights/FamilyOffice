@@ -2,7 +2,6 @@
  * SEO 대시보드 - 95/100 점수 달성 추적 시스템
  * 실시간 SEO 성과 모니터링 및 개선 추천
  */
-
 import { calculateTeamEATScore, expertTeam } from './expert-profiles';
 import { instantAnswerDB } from './instant-answers';
 import { keywordMetrics } from './korean-keywords';
@@ -87,19 +86,19 @@ export class SEODashboard {
         totalPages: 102, // From build output
         optimizedPages: 85,
         faqItems: instantAnswerDB.getAllAnswers().length,
-        expertProfiles: expertTeam.length
+        expertProfiles: expertTeam.length,
       },
       technicalMetrics: {
         pageSpeed: 94,
         coreWebVitals: 88,
         structuredData: 96,
-        mobileOptimization: 92
+        mobileOptimization: 92,
       },
       aiOptimization: {
         chatgptOptimized: 89,
         perplexityOptimized: 91,
         claudeOptimized: 88,
-        instantAnswers: instantAnswerDB.getAllAnswers().length
+        instantAnswers: instantAnswerDB.getAllAnswers().length,
       },
       eatSignals: eatScores,
       recommendations: this.generateRecommendations(scoreBreakdown),
@@ -110,15 +109,15 @@ export class SEODashboard {
           'AI 검색엔진 특화 FAQ 30개 추가',
           'AI 엔진별 맞춤 콘텐츠 구조 구현',
           '한국 특화 키워드 50개 확장',
-          '전문가 프로필 시스템 구축'
+          '전문가 프로필 시스템 구축',
         ],
         upcomingTasks: [
           '즉문즉답 스키마 마크업 확장',
           '기술적 SEO 최적화',
           '로컬 SEO 강화',
-          'AI 답변 품질 개선'
-        ]
-      }
+          'AI 답변 품질 개선',
+        ],
+      },
     };
   }
 
@@ -134,11 +133,11 @@ export class SEODashboard {
           'Perplexity 구조화된 답변 포맷 강화',
           'Claude 분석적 콘텐츠 확대',
           'ChatGPT 대화형 Q&A 최적화',
-          '즉문즉답 답변 품질 개선'
+          '즉문즉답 답변 품질 개선',
         ],
         priority: 'high',
         timeToComplete: '1-2주',
-        roi: '높음 (즉시 트래픽 증가)'
+        roi: '높음 (즉시 트래픽 증가)',
       },
       {
         category: '한국 SEO 전문화',
@@ -149,11 +148,11 @@ export class SEODashboard {
           'Naver 웹마스터 도구 연동',
           'Daum 검색 등록 완료',
           '지역 SEO 키워드 확장',
-          '한국어 자연어 처리 최적화'
+          '한국어 자연어 처리 최적화',
         ],
         priority: 'high',
         timeToComplete: '2-3주',
-        roi: '높음 (국내 검색 점유율)'
+        roi: '높음 (국내 검색 점유율)',
       },
       {
         category: '콘텐츠 전략',
@@ -164,11 +163,11 @@ export class SEODashboard {
           '업종별 특화 콘텐츠 추가',
           '롱폼 콘텐츠 확대',
           '인터랙티브 요소 강화',
-          '동영상 콘텐츠 통합'
+          '동영상 콘텐츠 통합',
         ],
         priority: 'medium',
         timeToComplete: '4-6주',
-        roi: '중간 (장기 트래픽 성장)'
+        roi: '중간 (장기 트래픽 성장)',
       },
       {
         category: 'E-A-T 신뢰도',
@@ -179,11 +178,11 @@ export class SEODashboard {
           '전문가 프로필 페이지 확장',
           '고객 후기 및 사례 추가',
           '미디어 언급 확대',
-          '인증 및 수상 내역 강화'
+          '인증 및 수상 내역 강화',
         ],
         priority: 'medium',
         timeToComplete: '3-4주',
-        roi: '높음 (신뢰도 향상)'
+        roi: '높음 (신뢰도 향상)',
       },
       {
         category: '기술적 SEO',
@@ -194,12 +193,12 @@ export class SEODashboard {
           'Core Web Vitals 최적화',
           '이미지 최적화 완료',
           'hreflang 태그 구현',
-          'JSON-LD 스키마 확장'
+          'JSON-LD 스키마 확장',
         ],
         priority: 'low',
         timeToComplete: '2주',
-        roi: '중간 (검색엔진 평가)'
-      }
+        roi: '중간 (검색엔진 평가)',
+      },
     ];
   }
 
@@ -210,7 +209,7 @@ export class SEODashboard {
       '한국 SEO 전문화': 0.25,
       '콘텐츠 전략': 0.2,
       'E-A-T 신뢰도': 0.15,
-      '기술적 SEO': 0.1
+      '기술적 SEO': 0.1,
     };
 
     let weightedScore = 0;
@@ -237,20 +236,20 @@ export class SEODashboard {
         'Perplexity 최적화 답변 포맷 구현',
         'Naver 웹마스터 도구 연동',
         'Core Web Vitals 최적화',
-        'ChatGPT 대화형 콘텐츠 확장'
+        'ChatGPT 대화형 콘텐츠 확장',
       ],
       shortTerm: [
         '전문가 프로필 페이지 구축',
         '고객 사례 콘텐츠 추가',
         'hreflang 태그 구현',
-        '지역 SEO 키워드 확장'
+        '지역 SEO 키워드 확장',
       ],
       longTerm: [
         '업종별 특화 콘텐츠 체계',
         '동영상 콘텐츠 통합',
         'AI 답변 품질 지속 개선',
-        '국제 SEO 확장'
-      ]
+        '국제 SEO 확장',
+      ],
     };
   }
 
@@ -259,7 +258,7 @@ export class SEODashboard {
     const scoreItem = this.currentMetrics.scoreBreakdown.find(
       item => item.category === category
     );
-    
+
     if (scoreItem) {
       scoreItem.currentScore = newScore;
       this.currentMetrics.overallScore = this.calculateOverallScore(
@@ -274,30 +273,34 @@ export class SEODashboard {
     byCategory: { [key: string]: number };
     estimatedCompletion: string;
   } {
-    const overallProgress = (this.currentMetrics.overallScore / this.currentMetrics.targetScore) * 100;
-    
+    const overallProgress =
+      (this.currentMetrics.overallScore / this.currentMetrics.targetScore) *
+      100;
+
     const byCategory: { [key: string]: number } = {};
     this.currentMetrics.scoreBreakdown.forEach(score => {
-      byCategory[score.category] = (score.currentScore / score.targetScore) * 100;
+      byCategory[score.category] =
+        (score.currentScore / score.targetScore) * 100;
     });
 
     // 현재 진행 속도를 바탕으로 완료 예상 시점 계산
-    const remainingPoints = this.currentMetrics.targetScore - this.currentMetrics.overallScore;
+    const remainingPoints =
+      this.currentMetrics.targetScore - this.currentMetrics.overallScore;
     const weeklyGrowth = this.currentMetrics.progressTracking.weeklyGrowth;
     const estimatedWeeks = Math.ceil(remainingPoints / weeklyGrowth);
-    
+
     const completionDate = new Date();
-    completionDate.setDate(completionDate.getDate() + (estimatedWeeks * 7));
+    completionDate.setDate(completionDate.getDate() + estimatedWeeks * 7);
     const estimatedCompletion = completionDate.toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
 
     return {
       overall: Math.round(overallProgress),
       byCategory,
-      estimatedCompletion
+      estimatedCompletion,
     };
   }
 
@@ -318,13 +321,13 @@ export class SEODashboard {
       currentMonth: {
         investment: 500000, // 50만원 (인력 비용)
         expectedReturn: 2500000, // 250만원 (신규 상담 증가)
-        roi: 400 // 400% ROI
+        roi: 400, // 400% ROI
       },
       projected6Months: {
         investment: 3000000, // 300만원
         expectedReturn: 25000000, // 2500만원
-        roi: 733 // 733% ROI
-      }
+        roi: 733, // 733% ROI
+      },
     };
   }
 
@@ -341,12 +344,9 @@ export class SEODashboard {
       leadingCategories: [
         '기술적 SEO',
         'AI 검색엔진 최적화',
-        '한국 SEO 전문화'
+        '한국 SEO 전문화',
       ],
-      improvementAreas: [
-        '콘텐츠 전략',
-        'E-A-T 신뢰도'
-      ]
+      improvementAreas: ['콘텐츠 전략', 'E-A-T 신뢰도'],
     };
   }
 
@@ -360,7 +360,7 @@ export class SEODashboard {
     const metrics = this.currentMetrics;
     const progress = this.getProgressToTarget();
     const roi = this.calculateROI();
-    
+
     return `# SEO 성과 리포트 - ${new Date().toLocaleDateString('ko-KR')}
 
 ## 📊 전체 점수
@@ -370,13 +370,17 @@ export class SEODashboard {
 - **예상 완료**: ${progress.estimatedCompletion}
 
 ## 🎯 카테고리별 성과
-${metrics.scoreBreakdown.map(score => `
+${metrics.scoreBreakdown
+  .map(
+    score => `
 ### ${score.category}
 - 현재: ${score.currentScore}/${score.maxScore}
 - 목표: ${score.targetScore}
 - 우선순위: ${score.priority}
 - 완료 예상: ${score.timeToComplete}
-`).join('')}
+`
+  )
+  .join('')}
 
 ## 🚀 AI 최적화 현황
 - ChatGPT 최적화: ${metrics.aiOptimization.chatgptOptimized}%
@@ -407,7 +411,7 @@ export class SEOAlertSystem {
   private thresholds = {
     scoreDropAlert: 2, // 점수가 2점 이상 떨어지면 알림
     weeklyGrowthAlert: 1, // 주간 성장률이 1 미만이면 알림
-    competitorAlert: 5 // 경쟁사와 점수 차이가 5점 이상 나면 알림
+    competitorAlert: 5, // 경쟁사와 점수 차이가 5점 이상 나면 알림
   };
 
   public checkAlerts(): {
@@ -419,7 +423,7 @@ export class SEOAlertSystem {
     const alerts = {
       critical: [] as string[],
       warning: [] as string[],
-      info: [] as string[]
+      info: [] as string[],
     };
 
     // 점수 하락 체크
@@ -428,7 +432,9 @@ export class SEOAlertSystem {
     }
 
     // 성장률 체크
-    if (metrics.progressTracking.weeklyGrowth < this.thresholds.weeklyGrowthAlert) {
+    if (
+      metrics.progressTracking.weeklyGrowth < this.thresholds.weeklyGrowthAlert
+    ) {
       alerts.warning.push('주간 성장률이 목표치를 밑돌고 있습니다.');
     }
 
@@ -448,7 +454,7 @@ const seoDashboardExports = {
   SEODashboard,
   seoDashboard,
   SEOAlertSystem,
-  seoAlerts
+  seoAlerts,
 };
 
 export default seoDashboardExports;

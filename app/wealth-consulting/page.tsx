@@ -1,15 +1,33 @@
+import {
+  Award,
+  CheckCircle2,
+  DollarSign,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
+} from 'lucide-react';
+
+import type { Metadata } from 'next';
+import Link from 'next/link';
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+
 import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/structured-data';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { generateMetadata } from '@/lib/seo/metadata';
-import { Award, CheckCircle2, DollarSign, Shield, Target, TrendingUp, Users } from 'lucide-react';
-import type { Metadata } from 'next';
-import Link from 'next/link';
 
 export const metadata: Metadata = generateMetadata(
   '고액자산가 자산관리 전문 컨설팅 | 100억원 이상 VIP 전용 서비스',
@@ -29,7 +47,7 @@ export const metadata: Metadata = generateMetadata(
     '초고액자산가',
     '패밀리오피스',
     '자산가 맞춤관리',
-    '고액자산 포트폴리오'
+    '고액자산 포트폴리오',
   ],
   undefined,
   '전문가급',
@@ -48,26 +66,26 @@ export default function WealthConsultingPage() {
         name: '고액자산가 자산관리의 최소 기준은 얼마인가요?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '일반적으로 100억원 이상의 자산을 보유하신 분들을 대상으로 합니다. 이는 전문적인 자산관리 서비스의 효과가 명확하게 나타나는 최소 규모이며, 글로벌 자산배분과 세무최적화의 실질적 효과를 기대할 수 있는 기준입니다.'
-        }
+          text: '일반적으로 100억원 이상의 자산을 보유하신 분들을 대상으로 합니다. 이는 전문적인 자산관리 서비스의 효과가 명확하게 나타나는 최소 규모이며, 글로벌 자산배분과 세무최적화의 실질적 효과를 기대할 수 있는 기준입니다.',
+        },
       },
       {
         '@type': 'Question',
         name: '일반 자산관리와 고액자산가 서비스의 차이점은?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '고액자산가 서비스는 1:1 전담 컨설턴트 배정, 글로벌 자산배분, 복합적 세무구조 설계, 상속 및 승계 통합 서비스, 24시간 VIP 지원 등이 제공됩니다. 또한 alternative investment, 해외부동산, 사모펀드 등 다양한 투자 옵션에 접근 가능합니다.'
-        }
+          text: '고액자산가 서비스는 1:1 전담 컨설턴트 배정, 글로벌 자산배분, 복합적 세무구조 설계, 상속 및 승계 통합 서비스, 24시간 VIP 지원 등이 제공됩니다. 또한 alternative investment, 해외부동산, 사모펀드 등 다양한 투자 옵션에 접근 가능합니다.',
+        },
       },
       {
         '@type': 'Question',
         name: '고액자산가 자산관리 수수료는 얼마인가요?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: '자산 규모와 서비스 범위에 따라 연 0.5~2% 수준입니다. 자산 규모가 클수록 수수료율은 낮아지며, 포괄적 서비스(세무, 상속, 투자자문 등) 이용 시 더욱 경제적입니다. 정확한 수수료는 자산 규모와 서비스 범위 확인 후 개별 산정됩니다.'
-        }
-      }
-    ]
+          text: '자산 규모와 서비스 범위에 따라 연 0.5~2% 수준입니다. 자산 규모가 클수록 수수료율은 낮아지며, 포괄적 서비스(세무, 상속, 투자자문 등) 이용 시 더욱 경제적입니다. 정확한 수수료는 자산 규모와 서비스 범위 확인 후 개별 산정됩니다.',
+        },
+      },
+    ],
   };
 
   const howToData = {
@@ -79,35 +97,35 @@ export default function WealthConsultingPage() {
     estimatedCost: {
       '@type': 'MonetaryAmount',
       currency: 'KRW',
-      value: '상담 후 결정'
+      value: '상담 후 결정',
     },
     step: [
       {
         '@type': 'HowToStep',
         name: '자산 현황 진단',
-        text: '전체 자산 정밀 분석, 리스크 평가, 수익성 검토'
+        text: '전체 자산 정밀 분석, 리스크 평가, 수익성 검토',
       },
       {
         '@type': 'HowToStep',
         name: '투자 목표 설정',
-        text: '수익 목표, 리스크 허용도, 투자 기간 설정'
+        text: '수익 목표, 리스크 허용도, 투자 기간 설정',
       },
       {
         '@type': 'HowToStep',
         name: '포트폴리오 구성',
-        text: '글로벌 자산배분, 대체투자 포함, 분산투자 실행'
+        text: '글로벌 자산배분, 대체투자 포함, 분산투자 실행',
       },
       {
         '@type': 'HowToStep',
         name: '세무 최적화',
-        text: '절세 구조 설계, 상속세 대비, 증여 전략 수립'
+        text: '절세 구조 설계, 상속세 대비, 증여 전략 수립',
       },
       {
         '@type': 'HowToStep',
         name: '정기 모니터링',
-        text: '월간 리포트, 분기 리밸런싱, 연간 전략 점검'
-      }
-    ]
+        text: '월간 리포트, 분기 리밸런싱, 연간 전략 점검',
+      },
+    ],
   };
 
   return (
@@ -124,10 +142,13 @@ export default function WealthConsultingPage() {
               High Net Worth Wealth Management
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              고액자산가를 위한<br />프라이빗 뱅킹급 자산관리
+              고액자산가를 위한
+              <br />
+              프라이빗 뱅킹급 자산관리
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              100억원 이상 자산가를 위한 VIP 전용 맞춤형 서비스<br />
+              100억원 이상 자산가를 위한 VIP 전용 맞춤형 서비스
+              <br />
               글로벌 자산배분부터 세무최적화까지 원스톱 솔루션
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -149,8 +170,9 @@ export default function WealthConsultingPage() {
               <Shield className="h-4 w-4" />
               <AlertTitle>VIP 전용 서비스</AlertTitle>
               <AlertDescription>
-                100억원 이상 자산가를 위한 1:1 전담 컨설턴트 배정 및 24시간 VIP 지원 서비스를 제공합니다.
-                모든 상담과 거래는 100% 비밀보장됩니다.
+                100억원 이상 자산가를 위한 1:1 전담 컨설턴트 배정 및 24시간 VIP
+                지원 서비스를 제공합니다. 모든 상담과 거래는 100%
+                비밀보장됩니다.
               </AlertDescription>
             </Alert>
           </div>
@@ -164,7 +186,9 @@ export default function WealthConsultingPage() {
             <div className="grid md:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-4xl font-bold text-primary">15%</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-primary">
+                    15%
+                  </CardTitle>
                   <CardDescription>연평균 수익률</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -175,7 +199,9 @@ export default function WealthConsultingPage() {
               </Card>
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-4xl font-bold text-primary">30%</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-primary">
+                    30%
+                  </CardTitle>
                   <CardDescription>세금 절감 효과</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -186,7 +212,9 @@ export default function WealthConsultingPage() {
               </Card>
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-4xl font-bold text-primary">24/7</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-primary">
+                    24/7
+                  </CardTitle>
                   <CardDescription>VIP 전담 서비스</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -197,7 +225,9 @@ export default function WealthConsultingPage() {
               </Card>
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-4xl font-bold text-primary">100+</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-primary">
+                    100+
+                  </CardTitle>
                   <CardDescription>VIP 고객</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -366,38 +396,49 @@ export default function WealthConsultingPage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              성공 사례
-            </h2>
+            <h2 className="text-3xl font-bold text-center mb-12">성공 사례</h2>
             <Card>
               <CardContent className="p-8">
                 <div className="grid md:grid-cols-3 gap-8">
                   <div>
                     <h3 className="font-bold text-lg mb-2">고객 현황</h3>
                     <p className="text-muted-foreground text-sm">
-                      • 제조업 CEO D씨<br />
-                      • 자산 규모: 500억원<br />
-                      • 연령: 55세<br />
-                      • 목표: 안정적 수익 + 상속 준비
+                      • 제조업 CEO D씨
+                      <br />
+                      • 자산 규모: 500억원
+                      <br />
+                      • 연령: 55세
+                      <br />• 목표: 안정적 수익 + 상속 준비
                     </p>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-2">맞춤 솔루션</h3>
                     <p className="text-muted-foreground text-sm">
-                      • 글로벌 포트폴리오 40%<br />
-                      • 국내 우량주 30%<br />
-                      • 부동산 펀드 20%<br />
-                      • 현금성 자산 10%<br />
-                      • 상속세 절세 구조 설계
+                      • 글로벌 포트폴리오 40%
+                      <br />
+                      • 국내 우량주 30%
+                      <br />
+                      • 부동산 펀드 20%
+                      <br />
+                      • 현금성 자산 10%
+                      <br />• 상속세 절세 구조 설계
                     </p>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-2">성과</h3>
                     <p className="text-muted-foreground text-sm">
-                      • <span className="text-primary font-semibold">연 15% 수익률</span> 달성<br />
-                      • <span className="text-primary font-semibold">세금 30% 절감</span><br />
-                      • 상속 구조 완성<br />
-                      • 리스크 50% 감소
+                      •{' '}
+                      <span className="text-primary font-semibold">
+                        연 15% 수익률
+                      </span>{' '}
+                      달성
+                      <br />•{' '}
+                      <span className="text-primary font-semibold">
+                        세금 30% 절감
+                      </span>
+                      <br />
+                      • 상속 구조 완성
+                      <br />• 리스크 50% 감소
                     </p>
                   </div>
                 </div>
@@ -415,7 +456,8 @@ export default function WealthConsultingPage() {
               VIP만을 위한 특별한 자산관리 서비스
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              100억원 이상 자산가를 위한 1:1 맞춤형 프리미엄 서비스<br />
+              100억원 이상 자산가를 위한 1:1 맞춤형 프리미엄 서비스
+              <br />
               전담 컨설턴트와 함께 더 나은 자산관리의 경험을 시작하세요
             </p>
             <div className="grid md:grid-cols-3 gap-4 mb-8">

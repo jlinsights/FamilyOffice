@@ -1,25 +1,33 @@
-import { rssAggregator } from '@/lib/rss-aggregator';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { rssAggregator } from '@/lib/rss-aggregator';
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    
+
     // 쿼리 파라미터 추출
-    const source = searchParams.get('source') as 'beehiiv' | 'naver-blog' | 'tistory' | 'brunch' | 'substack' | null;
+    const source = searchParams.get('source') as
+      | 'beehiiv'
+      | 'naver-blog'
+      | 'tistory'
+      | 'brunch'
+      | 'substack'
+      | null;
     const limit = parseInt(searchParams.get('limit') || '20');
     const blogId = searchParams.get('blog_id');
     const category = searchParams.get('category');
-    
+
     let content;
-    
+
     if (source) {
       // 특정 소스의 콘텐츠만 가져오기
       // 네이버 블로그인 경우에만 기본 ID 적용 (다른 소스는 각자의 기본값 사용)
-      const targetId = (source === 'naver-blog' && !blogId) 
-        ? (process.env.NAVER_BLOG_ID || 'lim_jaehong') 
-        : (blogId || undefined);
-        
+      const targetId =
+        source === 'naver-blog' && !blogId
+          ? process.env.NAVER_BLOG_ID || 'lim_jaehong'
+          : blogId || undefined;
+
       content = await rssAggregator.getContentBySource(source, targetId, limit);
     } else {
       // 통합 콘텐츠 가져오기 (beehiiv + 네이버 블로그)
@@ -27,15 +35,18 @@ export async function GET(request: NextRequest) {
       const targetId = blogId || process.env.NAVER_BLOG_ID || 'lim_jaehong';
       content = await rssAggregator.getIntegratedContent(targetId, limit);
     }
-    
+
     // 카테고리 필터링
     if (category) {
-      content = content.filter(item => 
-        item.category?.toLowerCase().includes(category.toLowerCase()) ||
-        item.tags.some(tag => tag.toLowerCase().includes(category.toLowerCase()))
+      content = content.filter(
+        item =>
+          item.category?.toLowerCase().includes(category.toLowerCase()) ||
+          item.tags.some(tag =>
+            tag.toLowerCase().includes(category.toLowerCase())
+          )
       );
     }
-    
+
     return NextResponse.json({
       success: true,
       data: content,
@@ -44,18 +55,17 @@ export async function GET(request: NextRequest) {
         source,
         limit,
         category,
-        timestamp: new Date().toISOString()
-      }
+        timestamp: new Date().toISOString(),
+      },
     });
-    
   } catch (error) {
     console.error('Insights API 오류:', error);
-    
+
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to fetch insights content',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );
@@ -71,8 +81,8 @@ export async function HEAD() {
       status: status.beehiiv ? 200 : 503,
       headers: {
         'X-Feed-Status': JSON.stringify(status),
-        'Cache-Control': 'no-cache'
-      }
+        'Cache-Control': 'no-cache',
+      },
     });
   } catch (error) {
     return new NextResponse(null, { status: 503 });
@@ -87,7 +97,14 @@ export async function POST(request: NextRequest) {
 
     if (action === 'refresh-cache') {
       // 캐시 키 삭제하여 새로고침 트리거
-      const sources = ['beehiiv', 'naver-blog', 'tistory', 'brunch', 'substack', 'local'];
+      const sources = [
+        'beehiiv',
+        'naver-blog',
+        'tistory',
+        'brunch',
+        'substack',
+        'local',
+      ];
 
       // 실제 캐시 삭제는 rss-aggregator 내부에서 처리
       // 새로운 데이터를 가져와서 자동으로 캐시 갱신
@@ -102,19 +119,20 @@ export async function POST(request: NextRequest) {
         data: {
           refreshedAt: new Date().toISOString(),
           itemsCount: refreshedContent.length,
-          sources: Array.from(new Set(refreshedContent.map(item => item.source)))
-        }
+          sources: Array.from(
+            new Set(refreshedContent.map(item => item.source))
+          ),
+        },
       });
     }
 
     return NextResponse.json(
       {
         success: false,
-        error: 'Invalid action. Use ?action=refresh-cache'
+        error: 'Invalid action. Use ?action=refresh-cache',
       },
       { status: 400 }
     );
-
   } catch (error) {
     console.error('Cache refresh error:', error);
 
@@ -122,7 +140,7 @@ export async function POST(request: NextRequest) {
       {
         success: false,
         error: 'Failed to refresh cache',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );

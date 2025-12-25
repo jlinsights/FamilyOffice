@@ -5,12 +5,14 @@
 
 // Dynamic imports for heavy components
 export const LazyFinancialCharts = () => {
-  return import('recharts').then(({ ResponsiveContainer, LineChart, XAxis, YAxis }) => ({
-    ResponsiveContainer,
-    LineChart,
-    XAxis,
-    YAxis,
-  }));
+  return import('recharts').then(
+    ({ ResponsiveContainer, LineChart, XAxis, YAxis }) => ({
+      ResponsiveContainer,
+      LineChart,
+      XAxis,
+      YAxis,
+    })
+  );
 };
 
 export const LazyCalComEmbed = () => {
@@ -25,8 +27,10 @@ export const LazyDatePicker = () => {
 export const optimizedIconImports = {
   // 자주 사용되는 아이콘만 선별 import (일반적인 방식 사용)
   Calendar: () => import('lucide-react').then(m => ({ Calendar: m.Calendar })),
-  TrendingUp: () => import('lucide-react').then(m => ({ TrendingUp: m.TrendingUp })),
-  DollarSign: () => import('lucide-react').then(m => ({ DollarSign: m.DollarSign })),
+  TrendingUp: () =>
+    import('lucide-react').then(m => ({ TrendingUp: m.TrendingUp })),
+  DollarSign: () =>
+    import('lucide-react').then(m => ({ DollarSign: m.DollarSign })),
   User: () => import('lucide-react').then(m => ({ User: m.User })),
   Settings: () => import('lucide-react').then(m => ({ Settings: m.Settings })),
 };
@@ -64,7 +68,7 @@ export const imageOptimizations = {
   // WebP/AVIF fallback system
   generateSrcSet: (src: string, sizes: number[]) => {
     const extensions = ['avif', 'webp', 'jpg'];
-    return extensions.map(ext => 
+    return extensions.map(ext =>
       sizes.map(size => `${src}?w=${size}&f=${ext} ${size}w`).join(', ')
     );
   },
@@ -72,7 +76,7 @@ export const imageOptimizations = {
   // Lazy loading with intersection observer
   setupLazyLoading: () => {
     if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver((entries) => {
+      const imageObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const img = entry.target as HTMLImageElement;
@@ -87,14 +91,15 @@ export const imageOptimizations = {
         imageObserver.observe(img);
       });
     }
-  }
+  },
 };
 
 // Service Worker for aggressive caching
 export const setupServiceWorker = () => {
   if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
+      navigator.serviceWorker
+        .register('/sw.js')
         .then(registration => {
           console.log('SW registered: ', registration);
         })
@@ -120,13 +125,16 @@ export const memoryOptimizer = {
 
   optimizeReactRendering: () => {
     // React DevTools Production profiling
-    if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      typeof window !== 'undefined'
+    ) {
       const hook = (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__;
       if (hook && hook.onCommitFiberRoot) {
         hook.onCommitFiberRoot = () => {};
       }
     }
-  }
+  },
 };
 
 const bundleOptimizations = {

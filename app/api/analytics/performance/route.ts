@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { safeInsertMany } from '@/lib/supabase/helpers';
 import { createClient } from '@/lib/supabase/server';
+
 import { Database } from '@/types/supabase';
 
-type PerformanceMetricInsert = Database['public']['Tables']['performance_metrics']['Insert'];
+type PerformanceMetricInsert =
+  Database['public']['Tables']['performance_metrics']['Insert'];
 
 // Performance metrics endpoint
 export async function POST(request: NextRequest) {
@@ -31,9 +34,11 @@ export async function POST(request: NextRequest) {
       metadata: body.context || {},
     };
 
-    const { data, error } = await supabase
-      .from('performance_metrics')
-      .insert([insertData])
+    const { data, error } = await safeInsertMany(
+      supabase,
+      'performance_metrics',
+      [insertData]
+    )
       .select()
       .single();
 

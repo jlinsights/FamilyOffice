@@ -203,7 +203,8 @@ export class CacheManager<T = unknown> {
         const prefixedKeys = keys.filter((key: string) =>
           key.startsWith(this.prefix)
         );
-        this.cache.del(prefixedKeys);
+        // Delete each key individually
+        prefixedKeys.forEach((key: string) => this.cache.del(key));
       } else {
         this.cache.flushAll();
       }
@@ -222,7 +223,7 @@ export class CacheManager<T = unknown> {
         }
         return result;
       }
-      
+
       const prefixedKeys = keys.map(key => this.getKey(key));
       const result = this.cache.mget(prefixedKeys);
 
@@ -253,12 +254,18 @@ export class CacheManager<T = unknown> {
         }
         return true;
       }
-      
-      const mappedPairs = pairs.map(({ key, value, ttl }) => ({
-        key: this.getKey(key),
-        val: value,
-        ttl,
-      }));
+
+      const mappedPairs = pairs.map(({ key, value, ttl }) => {
+        const pair: { key: string; val: unknown; ttl?: number } = {
+          key: this.getKey(key),
+          val: value,
+        };
+        // Conditionally add ttl if defined
+        if (ttl !== undefined) {
+          pair.ttl = ttl;
+        }
+        return pair;
+      });
 
       return this.cache.mset(mappedPairs);
     } catch (error) {

@@ -1,36 +1,51 @@
 'use client';
 
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import {
+  AlertCircle,
+  Building2,
+  CheckCircle2,
+  Clock,
+  Mail,
+  Phone,
+} from 'lucide-react';
+
+import { useState } from 'react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale';
-import { AlertCircle, Building2, CheckCircle2, Clock, Mail, Phone } from 'lucide-react';
-import { useState } from 'react';
 
 interface StructureCheckRequest {
   id: string;
@@ -56,15 +71,20 @@ interface StructureCheckDashboardProps {
   initialRequests: StructureCheckRequest[];
 }
 
-export function StructureCheckDashboard({ initialRequests }: StructureCheckDashboardProps) {
-  const [requests, setRequests] = useState<StructureCheckRequest[]>(initialRequests);
+export function StructureCheckDashboard({
+  initialRequests,
+}: StructureCheckDashboardProps) {
+  const [requests, setRequests] =
+    useState<StructureCheckRequest[]>(initialRequests);
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedRequest, setSelectedRequest] = useState<StructureCheckRequest | null>(null);
+  const [selectedRequest, setSelectedRequest] =
+    useState<StructureCheckRequest | null>(null);
 
   // 필터링 및 검색
-  const filteredRequests = requests.filter((request) => {
-    const matchesStatus = filterStatus === 'all' || request.status === filterStatus;
+  const filteredRequests = requests.filter(request => {
+    const matchesStatus =
+      filterStatus === 'all' || request.status === filterStatus;
     const matchesSearch =
       searchQuery === '' ||
       request.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -78,25 +98,44 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
     if (b.qualification_score !== a.qualification_score) {
       return b.qualification_score - a.qualification_score;
     }
-    return new Date(b.submitted_at).getTime() - new Date(a.submitted_at).getTime();
+    return (
+      new Date(b.submitted_at).getTime() - new Date(a.submitted_at).getTime()
+    );
   });
 
   // 통계 계산
   const stats = {
     total: requests.length,
-    pending: requests.filter((r) => r.status === 'pending_review').length,
-    highPriority: requests.filter((r) => r.qualification_score >= 3).length,
-    contacted: requests.filter((r) => r.status === 'contacted').length,
+    pending: requests.filter(r => r.status === 'pending_review').length,
+    highPriority: requests.filter(r => r.qualification_score >= 3).length,
+    contacted: requests.filter(r => r.status === 'contacted').length,
   };
 
   const getStatusBadge = (status: string) => {
     const variants = {
-      pending_review: { label: '검토 대기', variant: 'default' as const, icon: Clock },
-      low_priority: { label: '낮은 우선순위', variant: 'secondary' as const, icon: AlertCircle },
-      contacted: { label: '연락 완료', variant: 'outline' as const, icon: CheckCircle2 },
-      completed: { label: '완료', variant: 'outline' as const, icon: CheckCircle2 },
+      pending_review: {
+        label: '검토 대기',
+        variant: 'default' as const,
+        icon: Clock,
+      },
+      low_priority: {
+        label: '낮은 우선순위',
+        variant: 'secondary' as const,
+        icon: AlertCircle,
+      },
+      contacted: {
+        label: '연락 완료',
+        variant: 'outline' as const,
+        icon: CheckCircle2,
+      },
+      completed: {
+        label: '완료',
+        variant: 'outline' as const,
+        icon: CheckCircle2,
+      },
     };
-    const config = variants[status as keyof typeof variants] || variants.pending_review;
+    const config =
+      variants[status as keyof typeof variants] || variants.pending_review;
     const Icon = config.icon;
     return (
       <Badge variant={config.variant} className="flex items-center gap-1">
@@ -123,7 +162,11 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
     const labels: Record<string, Record<string, string>> = {
       q1_decision_made: { yes: '있음', no: '없음' },
       q2_documented: { yes: '있음', no: '없음' },
-      q3_authority_clear: { clear: '명확함', partial: '부분적', unclear: '불명확' },
+      q3_authority_clear: {
+        clear: '명확함',
+        partial: '부분적',
+        unclear: '불명확',
+      },
       q4_cash_plan: {
         structure_exists: '구조 있음',
         rough_idea: '대략적 계획',
@@ -151,19 +194,25 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
         <Card>
           <CardHeader className="pb-2">
             <CardDescription>검토 대기</CardDescription>
-            <CardTitle className="text-3xl text-blue-600">{stats.pending}</CardTitle>
+            <CardTitle className="text-3xl text-blue-600">
+              {stats.pending}
+            </CardTitle>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader className="pb-2">
             <CardDescription>높은 우선순위</CardDescription>
-            <CardTitle className="text-3xl text-orange-600">{stats.highPriority}</CardTitle>
+            <CardTitle className="text-3xl text-orange-600">
+              {stats.highPriority}
+            </CardTitle>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader className="pb-2">
             <CardDescription>연락 완료</CardDescription>
-            <CardTitle className="text-3xl text-green-600">{stats.contacted}</CardTitle>
+            <CardTitle className="text-3xl text-green-600">
+              {stats.contacted}
+            </CardTitle>
           </CardHeader>
         </Card>
       </div>
@@ -172,14 +221,16 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
       <Card>
         <CardHeader>
           <CardTitle>요청 목록</CardTitle>
-          <CardDescription>구조 점검 요청을 필터링하고 관리합니다</CardDescription>
+          <CardDescription>
+            구조 점검 요청을 필터링하고 관리합니다
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <Input
               placeholder="이름, 이메일, 회사명으로 검색..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
               className="md:w-96"
             />
             <Select value={filterStatus} onValueChange={setFilterStatus}>
@@ -213,15 +264,22 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
               <TableBody>
                 {sortedRequests.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8 text-slate-500">
+                    <TableCell
+                      colSpan={7}
+                      className="text-center py-8 text-slate-500"
+                    >
                       요청이 없습니다
                     </TableCell>
                   </TableRow>
                 ) : (
-                  sortedRequests.map((request) => (
+                  sortedRequests.map(request => (
                     <TableRow key={request.id}>
-                      <TableCell>{getScoreBadge(request.qualification_score)}</TableCell>
-                      <TableCell className="font-medium">{request.name}</TableCell>
+                      <TableCell>
+                        {getScoreBadge(request.qualification_score)}
+                      </TableCell>
+                      <TableCell className="font-medium">
+                        {request.name}
+                      </TableCell>
                       <TableCell>
                         <div className="flex flex-col gap-1 text-sm">
                           <span className="flex items-center gap-1">
@@ -246,7 +304,9 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
                       </TableCell>
                       <TableCell>{getStatusBadge(request.status)}</TableCell>
                       <TableCell>
-                        {format(new Date(request.submitted_at), 'PPp', { locale: ko })}
+                        {format(new Date(request.submitted_at), 'PPp', {
+                          locale: ko,
+                        })}
                       </TableCell>
                       <TableCell className="text-right">
                         <Dialog>
@@ -261,44 +321,76 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
                           </DialogTrigger>
                           <DialogContent className="sm:max-w-2xl w-[95vw] bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                             <DialogHeader>
-                              <DialogTitle className="text-slate-900 dark:text-white">구조 점검 요청 상세</DialogTitle>
+                              <DialogTitle className="text-slate-900 dark:text-white">
+                                구조 점검 요청 상세
+                              </DialogTitle>
                               <DialogDescription className="text-slate-600 dark:text-slate-400">
-                                제출일: {format(new Date(request.submitted_at), 'PPP p', { locale: ko })}
+                                제출일:{' '}
+                                {format(
+                                  new Date(request.submitted_at),
+                                  'PPP p',
+                                  { locale: ko }
+                                )}
                               </DialogDescription>
                             </DialogHeader>
 
                             <div className="space-y-6 mt-4">
                               {/* 연락처 정보 */}
                               <div>
-                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">연락처 정보</h3>
+                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">
+                                  연락처 정보
+                                </h3>
                                 <div className="grid grid-cols-2 gap-4 p-4 bg-slate-100 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
                                   <div>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">이름</p>
-                                    <p className="font-medium text-slate-900 dark:text-white">{request.name}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                                      이름
+                                    </p>
+                                    <p className="font-medium text-slate-900 dark:text-white">
+                                      {request.name}
+                                    </p>
                                   </div>
                                   <div>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">이메일</p>
-                                    <p className="font-medium text-slate-900 dark:text-white">{request.email}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                                      이메일
+                                    </p>
+                                    <p className="font-medium text-slate-900 dark:text-white">
+                                      {request.email}
+                                    </p>
                                   </div>
                                   <div>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">전화번호</p>
-                                    <p className="font-medium text-slate-900 dark:text-white">{request.phone}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                                      전화번호
+                                    </p>
+                                    <p className="font-medium text-slate-900 dark:text-white">
+                                      {request.phone}
+                                    </p>
                                   </div>
                                   <div>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">회사명</p>
-                                    <p className="font-medium text-slate-900 dark:text-white">{request.company || '-'}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                                      회사명
+                                    </p>
+                                    <p className="font-medium text-slate-900 dark:text-white">
+                                      {request.company || '-'}
+                                    </p>
                                   </div>
                                 </div>
                               </div>
 
                               {/* 설문 응답 */}
                               <div>
-                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">설문 응답</h3>
+                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">
+                                  설문 응답
+                                </h3>
                                 <div className="space-y-3">
                                   <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
-                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q1. 상속/증여 관련 결정 사항</p>
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                                      Q1. 상속/증여 관련 결정 사항
+                                    </p>
                                     <p className="text-slate-900 dark:text-white">
-                                      {getAnswerLabel('q1_decision_made', request.q1_decision_made)}
+                                      {getAnswerLabel(
+                                        'q1_decision_made',
+                                        request.q1_decision_made
+                                      )}
                                       {request.q1_decision_detail && (
                                         <span className="block mt-1 text-sm text-slate-600 dark:text-slate-400">
                                           상세: {request.q1_decision_detail}
@@ -307,52 +399,84 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
                                     </p>
                                   </div>
                                   <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
-                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q2. 문서화 여부</p>
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                                      Q2. 문서화 여부
+                                    </p>
                                     <p className="text-slate-900 dark:text-white">
-                                      {getAnswerLabel('q2_documented', request.q2_documented)}
+                                      {getAnswerLabel(
+                                        'q2_documented',
+                                        request.q2_documented
+                                      )}
                                     </p>
                                   </div>
                                   <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
-                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q3. 의사결정 권한 명확성</p>
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                                      Q3. 의사결정 권한 명확성
+                                    </p>
                                     <p className="text-slate-900 dark:text-white">
-                                      {getAnswerLabel('q3_authority_clear', request.q3_authority_clear)}
+                                      {getAnswerLabel(
+                                        'q3_authority_clear',
+                                        request.q3_authority_clear
+                                      )}
                                     </p>
                                   </div>
                                   <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
-                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q4. 현금 유동성 계획</p>
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                                      Q4. 현금 유동성 계획
+                                    </p>
                                     <p className="text-slate-900 dark:text-white">
-                                      {getAnswerLabel('q4_cash_plan', request.q4_cash_plan)}
+                                      {getAnswerLabel(
+                                        'q4_cash_plan',
+                                        request.q4_cash_plan
+                                      )}
                                     </p>
                                   </div>
                                   <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
-                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q5. 실행 시기</p>
+                                    <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                                      Q5. 실행 시기
+                                    </p>
                                     <p className="text-slate-900 dark:text-white">
-                                      {getAnswerLabel('q5_deadline', request.q5_deadline)}
+                                      {getAnswerLabel(
+                                        'q5_deadline',
+                                        request.q5_deadline
+                                      )}
                                     </p>
                                   </div>
-                                  {request.q6_concerns && request.q6_concerns.length > 0 && (
-                                    <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
-                                      <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q6. 주요 우려사항</p>
-                                      <ul className="list-disc list-inside text-slate-900 dark:text-white">
-                                        {request.q6_concerns.map((concern, idx) => (
-                                          <li key={idx}>{concern}</li>
-                                        ))}
-                                      </ul>
-                                    </div>
-                                  )}
-                                  {request.q7_advisors && request.q7_advisors.length > 0 && (
-                                    <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
-                                      <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Q7. 현재 자문단</p>
-                                      <ul className="list-disc list-inside text-slate-900 dark:text-white">
-                                        {request.q7_advisors.map((advisor, idx) => (
-                                          <li key={idx}>{advisor}</li>
-                                        ))}
-                                      </ul>
-                                    </div>
-                                  )}
+                                  {request.q6_concerns &&
+                                    request.q6_concerns.length > 0 && (
+                                      <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                        <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                                          Q6. 주요 우려사항
+                                        </p>
+                                        <ul className="list-disc list-inside text-slate-900 dark:text-white">
+                                          {request.q6_concerns.map(
+                                            (concern, idx) => (
+                                              <li key={idx}>{concern}</li>
+                                            )
+                                          )}
+                                        </ul>
+                                      </div>
+                                    )}
+                                  {request.q7_advisors &&
+                                    request.q7_advisors.length > 0 && (
+                                      <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
+                                        <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                                          Q7. 현재 자문단
+                                        </p>
+                                        <ul className="list-disc list-inside text-slate-900 dark:text-white">
+                                          {request.q7_advisors.map(
+                                            (advisor, idx) => (
+                                              <li key={idx}>{advisor}</li>
+                                            )
+                                          )}
+                                        </ul>
+                                      </div>
+                                    )}
                                   {request.additional_notes && (
                                     <div className="p-3 border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700/30">
-                                      <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">추가 메모</p>
+                                      <p className="text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                                        추가 메모
+                                      </p>
                                       <p className="text-slate-900 dark:text-white">
                                         {request.additional_notes}
                                       </p>
@@ -363,7 +487,9 @@ export function StructureCheckDashboard({ initialRequests }: StructureCheckDashb
 
                               {/* 우선순위 정보 */}
                               <div>
-                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">우선순위 분석</h3>
+                                <h3 className="font-semibold mb-3 text-lg text-slate-900 dark:text-white">
+                                  우선순위 분석
+                                </h3>
                                 <div className="p-4 bg-slate-100 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
                                   <div className="flex items-center justify-between mb-2">
                                     <span className="text-sm text-slate-600 dark:text-slate-300">

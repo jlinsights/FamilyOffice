@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   // 파비콘 및 앱 아이콘 설정 (메인 레이아웃과 동일하게)
   icons: {
     icon: [{ url: '/favicon.ico', sizes: 'any' }],
-    apple: { url: '/apple-touch-icon.png' }
+    apple: { url: '/apple-touch-icon.png' },
   },
-  manifest: '/site.webmanifest'
+  manifest: '/site.webmanifest',
 };
 
 export default function BrandGuidelinesLayout({

@@ -37,7 +37,7 @@ export interface StructureCheckRequest {
 
 export async function getStructureCheckRequests(): Promise<{
   data: StructureCheckRequest[] | null;
-  error: string | null
+  error: string | null;
 }> {
   try {
     const supabase = createAdminClient();
@@ -55,19 +55,33 @@ export async function getStructureCheckRequests(): Promise<{
     };
   } catch (error: any) {
     console.error('Error fetching structure check requests:', error);
-    return { data: null, error: error.message || 'Failed to fetch structure check requests' };
+    return {
+      data: null,
+      error: error.message || 'Failed to fetch structure check requests',
+    };
   }
 }
 
-export async function getAdminStats(): Promise<{ data: AdminStats | null; error: string | null }> {
+export async function getAdminStats(): Promise<{
+  data: AdminStats | null;
+  error: string | null;
+}> {
   try {
     const supabase = createAdminClient();
-    
+
     // Check if client creation failed (though createAdminClient throws, we wrap in try/catch)
-    
+
     const now = new Date();
-    const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+    const startOfDay = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    ).toISOString();
+    const startOfMonth = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      1
+    ).toISOString();
 
     // Fetch Total Consultations (This Month - to match UI "This Month")
     // Wait, UI says "67 This Month". Let's fetch "This Month".
@@ -80,7 +94,7 @@ export async function getAdminStats(): Promise<{ data: AdminStats | null; error:
 
     // Fetch Today's Scheduled (or just created today?)
     // UI says "Today Scheduled". But consultations table usually has 'scheduled_at' or just 'created_at'.
-    // Let's check the schema in types/supabase.ts or just assume 'created_at' for 'Today's requests' 
+    // Let's check the schema in types/supabase.ts or just assume 'created_at' for 'Today's requests'
     // OR check for a specific status like 'scheduled'.
     // The table view showed: created_at, name, ... status.
     // Let's assume "Today" means "Requests received today".
@@ -100,24 +114,27 @@ export async function getAdminStats(): Promise<{ data: AdminStats | null; error:
     if (pendingError) throw pendingError;
 
     // Fetch Structure Check Requests Statistics
-    const { count: structureMonthCount, error: structureMonthError } = await supabase
-      .from('structure_check_requests')
-      .select('*', { count: 'exact', head: true })
-      .gte('submitted_at', startOfMonth);
+    const { count: structureMonthCount, error: structureMonthError } =
+      await supabase
+        .from('structure_check_requests')
+        .select('*', { count: 'exact', head: true })
+        .gte('submitted_at', startOfMonth);
 
     if (structureMonthError) throw structureMonthError;
 
-    const { count: structureTodayCount, error: structureTodayError } = await supabase
-      .from('structure_check_requests')
-      .select('*', { count: 'exact', head: true })
-      .gte('submitted_at', startOfDay);
+    const { count: structureTodayCount, error: structureTodayError } =
+      await supabase
+        .from('structure_check_requests')
+        .select('*', { count: 'exact', head: true })
+        .gte('submitted_at', startOfDay);
 
     if (structureTodayError) throw structureTodayError;
 
-    const { count: structurePendingCount, error: structurePendingError } = await supabase
-      .from('structure_check_requests')
-      .select('*', { count: 'exact', head: true })
-      .eq('status', 'pending_review');
+    const { count: structurePendingCount, error: structurePendingError } =
+      await supabase
+        .from('structure_check_requests')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'pending_review');
 
     if (structurePendingError) throw structurePendingError;
 
@@ -138,6 +155,9 @@ export async function getAdminStats(): Promise<{ data: AdminStats | null; error:
     };
   } catch (error: any) {
     console.error('Error fetching admin stats:', error);
-    return { data: null, error: error.message || 'Failed to fetch admin stats' };
+    return {
+      data: null,
+      error: error.message || 'Failed to fetch admin stats',
+    };
   }
 }

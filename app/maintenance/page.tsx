@@ -28,6 +28,11 @@ import {
  * Shown when critical environment variables are missing or invalid
  */
 
+/**
+ * Maintenance Page
+ * Shown when critical environment variables are missing or invalid
+ */
+
 export default function MaintenancePage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">

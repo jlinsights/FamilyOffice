@@ -1,7 +1,7 @@
 import {
-    InheritanceIcon,
-    TaxLegalIcon,
-    WealthManagementIcon,
+  InheritanceIcon,
+  TaxLegalIcon,
+  WealthManagementIcon,
 } from '@/components/icons/service-icons';
 
 import { NavigationItem, ServiceItem } from '@/types/globals';
@@ -49,7 +49,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       '복잡한 세무 및 법률 이슈를 효과적으로 해결하고, 최적의 구조를 설계합니다.',
     href: '/solutions#tax-legal',
   },
-]
+];
 
 // 프로그램 데이터 (familyoffices.vip 벤치마킹)
 export const PROGRAM_DATA = {

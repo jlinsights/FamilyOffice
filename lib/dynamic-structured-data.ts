@@ -21,9 +21,11 @@ export class DynamicStructuredDataEngine {
   private performanceMetrics = new Map<string, number>();
 
   // 메인 구조화 데이터 생성 엔진
-  async generateDynamicStructuredData(context: StructuredDataContext): Promise<EnhancedSchema[]> {
+  async generateDynamicStructuredData(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema[]> {
     const cacheKey = this.generateCacheKey(context);
-    
+
     // 캐시 확인
     if (this.schemaCache.has(cacheKey)) {
       return this.schemaCache.get(cacheKey)!;
@@ -31,56 +33,58 @@ export class DynamicStructuredDataEngine {
 
     // AI 기반 스키마 생성
     const schemas = await this.buildContextualSchemas(context);
-    
+
     // 성능 최적화
     const optimizedSchemas = await this.optimizeSchemas(schemas, context);
-    
+
     // 검증 및 캐시
     const validatedSchemas = this.validateSchemas(optimizedSchemas);
     this.schemaCache.set(cacheKey, validatedSchemas);
-    
+
     return validatedSchemas;
   }
 
   // 컨텍스트 기반 스키마 빌드
-  private async buildContextualSchemas(context: StructuredDataContext): Promise<EnhancedSchema[]> {
+  private async buildContextualSchemas(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema[]> {
     const schemas: EnhancedSchema[] = [];
-    
+
     // 1. 조직 스키마 (항상 포함)
     schemas.push(await this.generateOrganizationSchema(context));
-    
+
     // 2. 웹사이트 스키마 (항상 포함)
     schemas.push(await this.generateWebSiteSchema(context));
-    
+
     // 3. 서비스 스키마 (조건부)
     if (context.pageType === 'service' || context.pageType === 'homepage') {
       schemas.push(await this.generateServiceSchema(context));
     }
-    
+
     // 4. FAQ 스키마 (조건부)
     if (context.pageType === 'service' || context.pageType === 'about') {
       schemas.push(await this.generateFAQSchema(context));
     }
-    
+
     // 5. 로컬 비즈니스 스키마 (조건부)
     if (context.businessType !== 'personal') {
       schemas.push(await this.generateLocalBusinessSchema(context));
     }
-    
+
     // 6. 브레드크럼 스키마 (비 홈페이지)
     if (context.pageType !== 'homepage') {
       schemas.push(await this.generateBreadcrumbSchema(context));
     }
-    
+
     // 7. AI 최적화 스키마 (고급)
     schemas.push(await this.generateAIOptimizedSchema(context));
-    
+
     // 8. 소셜 프로필 스키마
     schemas.push(await this.generateSocialProfileSchema(context));
-    
+
     // 9. 리뷰/평점 스키마
     schemas.push(await this.generateReviewSchema(context));
-    
+
     // 10. 오퍼 카탈로그 스키마
     schemas.push(await this.generateOfferCatalogSchema(context));
 
@@ -88,9 +92,11 @@ export class DynamicStructuredDataEngine {
   }
 
   // 1. 고도화된 조직 스키마
-  private async generateOrganizationSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
+  private async generateOrganizationSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
     const domainConfig = this.getDomainConfig(context.domain);
-    
+
     return {
       '@context': 'https://schema.org',
       '@type': ['Organization', 'FinancialService'],
@@ -104,14 +110,14 @@ export class DynamicStructuredDataEngine {
         url: `https://${context.domain}/logo-structured-data.png`,
         width: 512,
         height: 512,
-        caption: `${domainConfig.brandName} 로고`
+        caption: `${domainConfig.brandName} 로고`,
       },
       image: {
         '@type': 'ImageObject',
         url: `https://${context.domain}/og-image-organization.jpg`,
         width: 1200,
         height: 630,
-        caption: `${domainConfig.brandName} 대표 이미지`
+        caption: `${domainConfig.brandName} 대표 이미지`,
       },
       address: {
         '@type': 'PostalAddress',
@@ -119,7 +125,7 @@ export class DynamicStructuredDataEngine {
         addressRegion: '서울특별시',
         addressLocality: '강남구',
         streetAddress: '테헤란로 123',
-        postalCode: '06159'
+        postalCode: '06159',
       },
       contactPoint: [
         {
@@ -134,56 +140,56 @@ export class DynamicStructuredDataEngine {
             opens: '09:00',
             closes: '18:00',
             validFrom: '2024-01-01',
-            validThrough: '2025-12-31'
-          }
+            validThrough: '2025-12-31',
+          },
         },
         {
           '@type': 'ContactPoint',
           contactType: 'sales',
           email: `sales@${context.domain}`,
           areaServed: 'KR',
-          availableLanguage: 'Korean'
-        }
+          availableLanguage: 'Korean',
+        },
       ],
       sameAs: [
         `https://www.linkedin.com/company/${domainConfig.brandName.toLowerCase().replace(/\s+/g, '-')}`,
         `https://www.facebook.com/${domainConfig.brandName.toLowerCase().replace(/\s+/g, '')}`,
-        `https://blog.naver.com/${domainConfig.brandName.toLowerCase().replace(/\s+/g, '')}`
+        `https://blog.naver.com/${domainConfig.brandName.toLowerCase().replace(/\s+/g, '')}`,
       ],
       founder: {
         '@type': 'Person',
         name: domainConfig.founderName,
         jobTitle: 'Founder & CEO',
-        knowsAbout: domainConfig.expertise
+        knowsAbout: domainConfig.expertise,
       },
       foundingDate: '2020-01-01',
       numberOfEmployees: {
         '@type': 'QuantitativeValue',
         value: 50,
-        unitText: 'employees'
+        unitText: 'employees',
       },
       areaServed: {
         '@type': 'GeoCircle',
         geoMidpoint: {
           '@type': 'GeoCoordinates',
           latitude: 37.5665,
-          longitude: 126.9780
+          longitude: 126.978,
         },
-        geoRadius: 50000
+        geoRadius: 50000,
       },
       serviceArea: {
         '@type': 'AdministrativeArea',
         name: '대한민국',
         containedInPlace: {
           '@type': 'Country',
-          name: 'South Korea'
-        }
+          name: 'South Korea',
+        },
       },
       knowsAbout: domainConfig.expertise,
       memberOf: {
         '@type': 'Organization',
         name: '한국금융투자협회',
-        url: 'https://www.kofia.or.kr'
+        url: 'https://www.kofia.or.kr',
       },
       hasCredential: domainConfig.credentials,
       award: domainConfig.awards,
@@ -192,32 +198,34 @@ export class DynamicStructuredDataEngine {
         ratingValue: 4.9,
         reviewCount: 150,
         bestRating: 5,
-        worstRating: 1
+        worstRating: 1,
       },
       // AI 검색 엔진 최적화
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `https://${context.domain}${context.pagePath}`
+        '@id': `https://${context.domain}${context.pagePath}`,
       },
       potentialAction: [
         {
           '@type': 'SearchAction',
           target: `https://${context.domain}/search?q={search_term_string}`,
-          'query-input': 'required name=search_term_string'
+          'query-input': 'required name=search_term_string',
         },
         {
           '@type': 'ContactAction',
           target: `https://${context.domain}/contact`,
-          name: '무료 상담 신청'
-        }
-      ]
+          name: '무료 상담 신청',
+        },
+      ],
     };
   }
 
   // 2. 웹사이트 스키마
-  private async generateWebSiteSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
+  private async generateWebSiteSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
     const domainConfig = this.getDomainConfig(context.domain);
-    
+
     return {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
@@ -226,27 +234,27 @@ export class DynamicStructuredDataEngine {
       name: domainConfig.brandName,
       description: domainConfig.description,
       publisher: {
-        '@id': `https://${context.domain}/#organization`
+        '@id': `https://${context.domain}/#organization`,
       },
       potentialAction: {
         '@type': 'SearchAction',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: `https://${context.domain}/search?q={search_term_string}`
+          urlTemplate: `https://${context.domain}/search?q={search_term_string}`,
         },
-        'query-input': 'required name=search_term_string'
+        'query-input': 'required name=search_term_string',
       },
       about: {
         '@type': 'Thing',
         name: domainConfig.aboutTopic,
-        description: domainConfig.aboutDescription
+        description: domainConfig.aboutDescription,
       },
       mainEntity: {
-        '@id': `https://${context.domain}/#organization`
+        '@id': `https://${context.domain}/#organization`,
       },
       copyrightYear: new Date().getFullYear(),
       copyrightHolder: {
-        '@id': `https://${context.domain}/#organization`
+        '@id': `https://${context.domain}/#organization`,
       },
       license: `https://${context.domain}/terms`,
       inLanguage: 'ko-KR',
@@ -257,21 +265,26 @@ export class DynamicStructuredDataEngine {
         {
           '@type': 'InteractionCounter',
           interactionType: 'https://schema.org/ViewAction',
-          userInteractionCount: 50000
+          userInteractionCount: 50000,
         },
         {
           '@type': 'InteractionCounter',
           interactionType: 'https://schema.org/LikeAction',
-          userInteractionCount: 1200
-        }
-      ]
+          userInteractionCount: 1200,
+        },
+      ],
     };
   }
 
   // 3. 서비스 스키마
-  private async generateServiceSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
-    const services = this.getServicesForDomain(context.domain, context.businessType);
-    
+  private async generateServiceSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
+    const services = this.getServicesForDomain(
+      context.domain,
+      context.businessType
+    );
+
     return {
       '@context': 'https://schema.org',
       '@type': 'Service',
@@ -279,24 +292,24 @@ export class DynamicStructuredDataEngine {
       name: services.primaryService.name,
       description: services.primaryService.description,
       provider: {
-        '@id': `https://${context.domain}/#organization`
+        '@id': `https://${context.domain}/#organization`,
       },
       serviceType: services.primaryService.type,
       areaServed: {
         '@type': 'Country',
-        name: 'South Korea'
+        name: 'South Korea',
       },
       availableChannel: {
         '@type': 'ServiceChannel',
         serviceUrl: `https://${context.domain}/contact`,
         serviceSmsNumber: '+82-502-555-0870',
-        servicePhone: '+82-502-555-0870'
+        servicePhone: '+82-502-555-0870',
       },
       hoursAvailable: {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         opens: '09:00',
-        closes: '18:00'
+        closes: '18:00',
       },
       offers: services.offers.map((offer: any) => ({
         '@type': 'Offer',
@@ -305,12 +318,14 @@ export class DynamicStructuredDataEngine {
         category: offer.category,
         availability: 'https://schema.org/InStock',
         validFrom: new Date().toISOString(),
-        validThrough: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
+        validThrough: new Date(
+          Date.now() + 365 * 24 * 60 * 60 * 1000
+        ).toISOString(),
       })),
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: `${services.primaryService.name} 서비스 카탈로그`,
-        itemListElement: services.catalog
+        itemListElement: services.catalog,
       },
       review: this.generateServiceReviews(context),
       aggregateRating: {
@@ -318,7 +333,7 @@ export class DynamicStructuredDataEngine {
         ratingValue: 4.8,
         reviewCount: 89,
         bestRating: 5,
-        worstRating: 1
+        worstRating: 1,
       },
       // 고급 서비스 속성
       serviceOutput: services.primaryService.output,
@@ -328,16 +343,18 @@ export class DynamicStructuredDataEngine {
         audienceType: context.userSegment,
         geographicArea: {
           '@type': 'AdministrativeArea',
-          name: '대한민국'
-        }
-      }
+          name: '대한민국',
+        },
+      },
     };
   }
 
   // 4. FAQ 스키마
-  private async generateFAQSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
+  private async generateFAQSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
     const faqs = this.getFAQsForDomain(context.domain, context.pageType);
-    
+
     return {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -352,25 +369,27 @@ export class DynamicStructuredDataEngine {
           upvoteCount: faq.upvotes,
           author: {
             '@type': 'Organization',
-            name: this.getDomainConfig(context.domain).brandName
-          }
-        }
+            name: this.getDomainConfig(context.domain).brandName,
+          },
+        },
       })),
       about: {
         '@type': 'Thing',
-        name: `${this.getDomainConfig(context.domain).brandName} 자주 묻는 질문`
+        name: `${this.getDomainConfig(context.domain).brandName} 자주 묻는 질문`,
       },
       audience: {
         '@type': 'Audience',
-        audienceType: context.userSegment
-      }
+        audienceType: context.userSegment,
+      },
     };
   }
 
   // 5. 로컬 비즈니스 스키마
-  private async generateLocalBusinessSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
+  private async generateLocalBusinessSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
     const domainConfig = this.getDomainConfig(context.domain);
-    
+
     return {
       '@context': 'https://schema.org',
       '@type': ['LocalBusiness', 'FinancialService'],
@@ -385,44 +404,46 @@ export class DynamicStructuredDataEngine {
         addressLocality: '강남구',
         addressRegion: '서울특별시',
         postalCode: '06159',
-        addressCountry: 'KR'
+        addressCountry: 'KR',
       },
       geo: {
         '@type': 'GeoCoordinates',
         latitude: 37.5665,
-        longitude: 126.9780
+        longitude: 126.978,
       },
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
           opens: '09:00',
-          closes: '18:00'
-        }
+          closes: '18:00',
+        },
       ],
       priceRange: '$$$$',
       paymentAccepted: ['현금', '카드', '계좌이체'],
       currenciesAccepted: 'KRW',
       areaServed: {
         '@type': 'City',
-        name: '서울특별시'
+        name: '서울특별시',
       },
       serviceArea: {
         '@type': 'GeoCircle',
         geoMidpoint: {
           '@type': 'GeoCoordinates',
           latitude: 37.5665,
-          longitude: 126.9780
+          longitude: 126.978,
         },
-        geoRadius: 50000
-      }
+        geoRadius: 50000,
+      },
     };
   }
 
   // 6. 브레드크럼 스키마
-  private async generateBreadcrumbSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
+  private async generateBreadcrumbSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
     const breadcrumbs = this.generateBreadcrumbList(context);
-    
+
     return {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
@@ -431,13 +452,15 @@ export class DynamicStructuredDataEngine {
         '@type': 'ListItem',
         position: index + 1,
         name: crumb.name,
-        item: `https://${context.domain}${crumb.path}`
-      }))
+        item: `https://${context.domain}${crumb.path}`,
+      })),
     };
   }
 
   // 7. AI 최적화 스키마
-  private async generateAIOptimizedSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
+  private async generateAIOptimizedSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
     return {
       '@context': 'https://schema.org',
       '@type': 'Thing',
@@ -447,7 +470,7 @@ export class DynamicStructuredDataEngine {
       about: {
         '@type': 'Intangible',
         name: 'AI 기반 금융 상담',
-        description: '인공지능을 활용한 맞춤형 금융 서비스 상담'
+        description: '인공지능을 활용한 맞춤형 금융 서비스 상담',
       },
       // AI 검색 친화적 속성
       knowsAbout: [
@@ -455,39 +478,41 @@ export class DynamicStructuredDataEngine {
         '디지털 패밀리오피스',
         '스마트 금융 상담',
         '자동화된 포트폴리오 관리',
-        '데이터 기반 투자 전략'
+        '데이터 기반 투자 전략',
       ],
       subjectOf: {
         '@type': 'CreativeWork',
         name: 'AI 금융 서비스 가이드',
-        description: '인공지능을 활용한 차세대 금융 서비스 소개'
+        description: '인공지능을 활용한 차세대 금융 서비스 소개',
       },
       // 음성 검색 최적화
       speakable: {
         '@type': 'SpeakableSpecification',
         cssSelector: ['.hero-title', '.main-description'],
-        xpath: ['/html/head/title', '//*[@class="hero-title"]']
+        xpath: ['/html/head/title', '//*[@class="hero-title"]'],
       },
       // 특성화 속성
       additionalProperty: [
         {
           '@type': 'PropertyValue',
           name: 'AI 최적화 수준',
-          value: '95%'
+          value: '95%',
         },
         {
           '@type': 'PropertyValue',
           name: '자동화 정도',
-          value: '90%'
-        }
-      ]
+          value: '90%',
+        },
+      ],
     };
   }
 
   // 8. 소셜 프로필 스키마
-  private async generateSocialProfileSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
+  private async generateSocialProfileSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
     const domainConfig = this.getDomainConfig(context.domain);
-    
+
     return {
       '@context': 'https://schema.org',
       '@type': 'ProfilePage',
@@ -499,51 +524,58 @@ export class DynamicStructuredDataEngine {
           `https://www.linkedin.com/company/${domainConfig.brandName.toLowerCase()}`,
           `https://www.facebook.com/${domainConfig.brandName.toLowerCase()}`,
           `https://blog.naver.com/${domainConfig.brandName.toLowerCase()}`,
-          `https://www.youtube.com/c/${domainConfig.brandName.toLowerCase()}`
-        ]
+          `https://www.youtube.com/c/${domainConfig.brandName.toLowerCase()}`,
+        ],
       },
       dateCreated: '2024-01-01',
       dateModified: new Date().toISOString(),
       about: {
         '@type': 'Thing',
-        name: `${domainConfig.brandName} 소셜 미디어 프로필`
-      }
+        name: `${domainConfig.brandName} 소셜 미디어 프로필`,
+      },
     };
   }
 
   // 9. 리뷰 스키마
-  private async generateReviewSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
+  private async generateReviewSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
     const reviews = this.getReviewsForDomain(context.domain);
-    
+
     return {
       '@context': 'https://schema.org',
       '@type': 'Review',
       '@id': `https://${context.domain}/#reviews`,
       itemReviewed: {
-        '@id': `https://${context.domain}/#organization`
+        '@id': `https://${context.domain}/#organization`,
       },
       author: {
         '@type': 'Organization',
-        name: '고객 만족도 조사'
+        name: '고객 만족도 조사',
       },
       reviewRating: {
         '@type': 'Rating',
         ratingValue: 4.9,
         bestRating: 5,
-        worstRating: 1
+        worstRating: 1,
       },
       reviewBody: '전문적이고 신뢰할 수 있는 자산관리 서비스를 제공합니다.',
       datePublished: new Date().toISOString(),
       publisher: {
-        '@id': `https://${context.domain}/#organization`
-      }
+        '@id': `https://${context.domain}/#organization`,
+      },
     };
   }
 
   // 10. 오퍼 카탈로그 스키마
-  private async generateOfferCatalogSchema(context: StructuredDataContext): Promise<EnhancedSchema> {
-    const offers = this.getOffersForDomain(context.domain, context.businessType);
-    
+  private async generateOfferCatalogSchema(
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema> {
+    const offers = this.getOffersForDomain(
+      context.domain,
+      context.businessType
+    );
+
     return {
       '@context': 'https://schema.org',
       '@type': 'OfferCatalog',
@@ -559,30 +591,35 @@ export class DynamicStructuredDataEngine {
         category: offer.category,
         availability: 'https://schema.org/InStock',
         seller: {
-          '@id': `https://${context.domain}/#organization`
+          '@id': `https://${context.domain}/#organization`,
         },
         validFrom: new Date().toISOString(),
-        validThrough: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+        validThrough: new Date(
+          Date.now() + 365 * 24 * 60 * 60 * 1000
+        ).toISOString(),
         areaServed: {
           '@type': 'Country',
-          name: 'South Korea'
-        }
-      }))
+          name: 'South Korea',
+        },
+      })),
     };
   }
 
   // 스키마 최적화
-  private async optimizeSchemas(schemas: EnhancedSchema[], context: StructuredDataContext): Promise<EnhancedSchema[]> {
+  private async optimizeSchemas(
+    schemas: EnhancedSchema[],
+    context: StructuredDataContext
+  ): Promise<EnhancedSchema[]> {
     return schemas.map(schema => {
       // 성능 최적화
       schema = this.optimizeSchemaSize(schema);
-      
+
       // SEO 최적화
       schema = this.optimizeSchemaForSEO(schema, context);
-      
+
       // AI 검색 최적화
       schema = this.optimizeSchemaForAI(schema);
-      
+
       return schema;
     });
   }
@@ -594,12 +631,12 @@ export class DynamicStructuredDataEngine {
       if (!schema['@context'] || !schema['@type']) {
         return false;
       }
-      
+
       // 구조 검증
       if (typeof schema !== 'object') {
         return false;
       }
-      
+
       return true;
     });
   }
@@ -620,7 +657,7 @@ export class DynamicStructuredDataEngine {
         founderName: 'Samsung Life Team',
         expertise: ['기업보험', '법인세절감', '기업승계', '리스크관리'],
         credentials: ['금융투자협회 인증', '보험업 허가'],
-        awards: ['2024 최우수 기업금융상', '2023 고객만족도 1위']
+        awards: ['2024 최우수 기업금융상', '2023 고객만족도 1위'],
       },
       'familyoffices.vip': {
         brandName: 'FamilyOffice S',
@@ -629,13 +666,20 @@ export class DynamicStructuredDataEngine {
         aboutTopic: '개인 맞춤 자산관리',
         aboutDescription: '중소기업 오너·개인을 위한 전문 자산관리',
         founderName: 'FamilyOffice S Team',
-        expertise: ['독립자산관리', '개인맞춤설계', '포트폴리오관리', '재무컨설팅'],
+        expertise: [
+          '독립자산관리',
+          '개인맞춤설계',
+          '포트폴리오관리',
+          '재무컨설팅',
+        ],
         credentials: ['투자자문업 등록', '재무설계사 자격'],
-        awards: ['2024 부티크 서비스 우수상', '2023 고객추천도 1위']
-      }
+        awards: ['2024 부티크 서비스 우수상', '2023 고객추천도 1위'],
+      },
     };
-    
-    return configs[domain as keyof typeof configs] || configs['familyoffices.vip'];
+
+    return (
+      configs[domain as keyof typeof configs] || configs['familyoffices.vip']
+    );
   }
 
   private generateSiteNavigationList(context: StructuredDataContext): any[] {
@@ -643,14 +687,14 @@ export class DynamicStructuredDataEngine {
       { name: '홈', path: '/' },
       { name: '서비스', path: '/services' },
       { name: '소개', path: '/about' },
-      { name: '연락처', path: '/contact' }
+      { name: '연락처', path: '/contact' },
     ];
-    
+
     return navigation.map((item, index) => ({
       '@type': 'SiteNavigationElement',
       position: index + 1,
       name: item.name,
-      url: `https://${context.domain}${item.path}`
+      url: `https://${context.domain}${item.path}`,
     }));
   }
 
@@ -662,22 +706,22 @@ export class DynamicStructuredDataEngine {
         description: '고액자산가를 위한 전문 자산관리 서비스',
         type: 'FinancialService',
         output: '맞춤형 포트폴리오',
-        produces: '투자 수익'
+        produces: '투자 수익',
       },
       offers: [
         {
           name: '자산관리 컨설팅',
           description: '개인 맞춤형 자산관리 상담',
-          category: 'Consulting'
-        }
+          category: 'Consulting',
+        },
       ],
       catalog: [
         {
           '@type': 'ListItem',
           position: 1,
-          name: '기본 상담'
-        }
-      ]
+          name: '기본 상담',
+        },
+      ],
     };
   }
 
@@ -687,24 +731,24 @@ export class DynamicStructuredDataEngine {
         question: '서비스 이용 방법은?',
         answer: '무료 상담 신청을 통해 시작하실 수 있습니다.',
         dateCreated: '2024-01-01',
-        upvotes: 25
-      }
+        upvotes: 25,
+      },
     ];
   }
 
   private generateBreadcrumbList(context: StructuredDataContext): any[] {
     const pathSegments = context.pagePath.split('/').filter(segment => segment);
     const breadcrumbs = [{ name: '홈', path: '/' }];
-    
+
     let currentPath = '';
     for (const segment of pathSegments) {
       currentPath += `/${segment}`;
       breadcrumbs.push({
         name: this.formatSegmentName(segment),
-        path: currentPath
+        path: currentPath,
       });
     }
-    
+
     return breadcrumbs;
   }
 
@@ -714,14 +758,14 @@ export class DynamicStructuredDataEngine {
         '@type': 'Review',
         author: {
           '@type': 'Person',
-          name: '김○○'
+          name: '김○○',
         },
         reviewRating: {
           '@type': 'Rating',
-          ratingValue: 5
+          ratingValue: 5,
         },
-        reviewBody: '전문적이고 신뢰할 수 있는 서비스입니다.'
-      }
+        reviewBody: '전문적이고 신뢰할 수 있는 서비스입니다.',
+      },
     ];
   }
 
@@ -735,8 +779,8 @@ export class DynamicStructuredDataEngine {
         name: '프리미엄 자산관리',
         description: '고액자산가 전용 자산관리 서비스',
         category: 'Financial Service',
-        slug: 'premium-wealth-management'
-      }
+        slug: 'premium-wealth-management',
+      },
     ];
   }
 
@@ -745,7 +789,10 @@ export class DynamicStructuredDataEngine {
     return schema;
   }
 
-  private optimizeSchemaForSEO(schema: EnhancedSchema, context: StructuredDataContext): EnhancedSchema {
+  private optimizeSchemaForSEO(
+    schema: EnhancedSchema,
+    context: StructuredDataContext
+  ): EnhancedSchema {
     // SEO 최적화 로직
     return schema;
   }
@@ -756,7 +803,9 @@ export class DynamicStructuredDataEngine {
   }
 
   private formatSegmentName(segment: string): string {
-    return segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+    return (
+      segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')
+    );
   }
 }
 

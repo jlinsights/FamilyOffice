@@ -1,7 +1,8 @@
 'use client';
 
-import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+
 import { CalComFloating } from './cal-com-floating';
 
 export function CalComFloatingPortal() {
@@ -9,7 +10,7 @@ export function CalComFloatingPortal() {
 
   useEffect(() => {
     setMounted(true);
-    
+
     // 버튼이 확실히 렌더링되도록 강제 리플로우
     const forceReflow = () => {
       const button = document.querySelector('.cal-com-floating-force');
@@ -21,7 +22,7 @@ export function CalComFloatingPortal() {
 
     // DOM이 완전히 로드된 후 위치 확인
     setTimeout(forceReflow, 100);
-    
+
     return () => {
       // Cleanup if needed
     };
@@ -33,8 +34,5 @@ export function CalComFloatingPortal() {
   }
 
   // document.body에 직접 포털로 렌더링
-  return createPortal(
-    <CalComFloating />,
-    document.body
-  );
+  return createPortal(<CalComFloating />, document.body);
 }

@@ -1,7 +1,9 @@
 'use client';
 
 import { Moon, Sun, Monitor } from 'lucide-react';
+
 import { useState, useEffect } from 'react';
+
 import { useTheme } from 'next-themes';
 
 export function ThemeToggle() {
@@ -35,9 +37,10 @@ export function ThemeToggle() {
             type="button"
             className={`
               relative z-10 inline-flex h-7 w-7 items-center justify-center rounded-full transition-all duration-200
-              ${isActive 
-                ? 'bg-white dark:bg-neutral-700 shadow-sm text-neutral-900 dark:text-neutral-100' 
-                : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
+              ${
+                isActive
+                  ? 'bg-white dark:bg-neutral-700 shadow-sm text-neutral-900 dark:text-neutral-100'
+                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
               }
             `}
             onClick={() => setTheme(value)}

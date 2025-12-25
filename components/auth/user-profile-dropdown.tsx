@@ -1,7 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { User, Settings, LogOut, ChevronDown } from 'lucide-react';
+
+import { useState } from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,24 +17,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+
 import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
-import Link from 'next/link';
-import Image from 'next/image';
 
 interface UserProfileDropdownProps {
   className?: string;
 }
 
-export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps) {
-  const { 
-    user, 
-    isAuthenticated, 
-    isLoading, 
-    displayName, 
-    profileImage, 
+export function UserProfileDropdown({
+  className = '',
+}: UserProfileDropdownProps) {
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    displayName,
+    profileImage,
     email,
     signOut,
-    isKakaoUser
+    isKakaoUser,
   } = useSupabaseKakaoAuth();
   const [isSigningOut, setIsSigningOut] = useState(false);
 
@@ -74,11 +80,11 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
               </span>
               {isKakaoUser && (
                 <div className="h-4 px-1 text-xs mt-1 bg-[#FEE500] text-[#3C1E1E] rounded flex items-center space-x-1">
-                  <Image 
-                    src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-                    alt="카카오" 
-                    width={8} 
-                    height={8} 
+                  <Image
+                    src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+                    alt="카카오"
+                    width={8}
+                    height={8}
                     className="rounded-sm"
                   />
                   <span>카카오</span>
@@ -95,7 +101,10 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
           <div className="flex flex-col space-y-2">
             <div className="flex items-center space-x-2">
               <Avatar className="h-10 w-10">
-                <AvatarImage src={profileImage || undefined} alt={displayName} />
+                <AvatarImage
+                  src={profileImage || undefined}
+                  alt={displayName}
+                />
                 <AvatarFallback>{userInitials}</AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
@@ -110,11 +119,11 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
                 {isKakaoUser && (
                   <div className="flex items-center mt-1">
                     <div className="h-4 px-1 text-xs bg-[#FEE500] text-[#3C1E1E] rounded flex items-center space-x-1">
-                      <Image 
-                        src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-                        alt="카카오" 
-                        width={8} 
-                        height={8} 
+                      <Image
+                        src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+                        alt="카카오"
+                        width={8}
+                        height={8}
                         className="rounded-sm"
                       />
                       <span>카카오 연동됨</span>
@@ -149,16 +158,16 @@ export function UserProfileDropdown({ className = '' }: UserProfileDropdownProps
               onClick={() => {
                 if (window.Kakao?.Channel) {
                   window.Kakao.Channel.chat({
-                    channelPublicId: '_gsxkxdG'
+                    channelPublicId: '_gsxkxdG',
                   });
                 }
               }}
             >
-              <Image 
-                src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-                alt="카카오" 
-                width={16} 
-                height={16} 
+              <Image
+                src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+                alt="카카오"
+                width={16}
+                height={16}
                 className="mr-2 rounded-sm"
               />
               <span>카카오톡 상담</span>

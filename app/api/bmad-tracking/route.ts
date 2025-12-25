@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { bmadKeywordTracker, type BMADCategory } from '@/lib/bmad-keyword-tracker';
+
+import {
+  bmadKeywordTracker,
+  type BMADCategory,
+} from '@/lib/bmad-keyword-tracker';
 
 /**
  * BMAD 키워드 추적 API 엔드포인트
@@ -16,10 +20,15 @@ export async function GET(request: NextRequest) {
     switch (action) {
       case 'track-all': {
         // 모든 키워드 추적
-        const start = startDate ? new Date(startDate) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        const start = startDate
+          ? new Date(startDate)
+          : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
         const end = endDate ? new Date(endDate) : new Date();
 
-        const keywordData = await bmadKeywordTracker.trackAllKeywords(start, end);
+        const keywordData = await bmadKeywordTracker.trackAllKeywords(
+          start,
+          end
+        );
 
         // 카테고리 필터링
         const filteredData = category
@@ -41,11 +50,17 @@ export async function GET(request: NextRequest) {
 
       case 'category-performance': {
         // 카테고리별 성과 분석
-        const start = startDate ? new Date(startDate) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        const start = startDate
+          ? new Date(startDate)
+          : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
         const end = endDate ? new Date(endDate) : new Date();
 
-        const keywordData = await bmadKeywordTracker.trackAllKeywords(start, end);
-        const categoryPerformance = bmadKeywordTracker.analyzeCategoryPerformance(keywordData);
+        const keywordData = await bmadKeywordTracker.trackAllKeywords(
+          start,
+          end
+        );
+        const categoryPerformance =
+          bmadKeywordTracker.analyzeCategoryPerformance(keywordData);
 
         // 특정 카테고리만 반환
         const filteredPerformance = category
@@ -66,8 +81,12 @@ export async function GET(request: NextRequest) {
 
       case 'monthly-report': {
         // 월간 리포트 생성
-        const month = parseInt(searchParams.get('month') || String(new Date().getMonth() + 1));
-        const year = parseInt(searchParams.get('year') || String(new Date().getFullYear()));
+        const month = parseInt(
+          searchParams.get('month') || String(new Date().getMonth() + 1)
+        );
+        const year = parseInt(
+          searchParams.get('year') || String(new Date().getFullYear())
+        );
 
         if (month < 1 || month > 12) {
           return NextResponse.json(
@@ -79,7 +98,10 @@ export async function GET(request: NextRequest) {
           );
         }
 
-        const report = await bmadKeywordTracker.generateMonthlyReport(month, year);
+        const report = await bmadKeywordTracker.generateMonthlyReport(
+          month,
+          year
+        );
 
         return NextResponse.json({
           success: true,
@@ -90,10 +112,15 @@ export async function GET(request: NextRequest) {
       case 'top-performing': {
         // 상위 성과 키워드
         const limit = parseInt(searchParams.get('limit') || '10');
-        const start = startDate ? new Date(startDate) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        const start = startDate
+          ? new Date(startDate)
+          : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
         const end = endDate ? new Date(endDate) : new Date();
 
-        const keywordData = await bmadKeywordTracker.trackAllKeywords(start, end);
+        const keywordData = await bmadKeywordTracker.trackAllKeywords(
+          start,
+          end
+        );
 
         // 카테고리 필터링
         const filteredData = category
@@ -121,16 +148,28 @@ export async function GET(request: NextRequest) {
 
       case 'dashboard-summary': {
         // 대시보드용 요약 데이터
-        const start = startDate ? new Date(startDate) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        const start = startDate
+          ? new Date(startDate)
+          : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
         const end = endDate ? new Date(endDate) : new Date();
 
-        const keywordData = await bmadKeywordTracker.trackAllKeywords(start, end);
-        const categoryPerformance = bmadKeywordTracker.analyzeCategoryPerformance(keywordData);
+        const keywordData = await bmadKeywordTracker.trackAllKeywords(
+          start,
+          end
+        );
+        const categoryPerformance =
+          bmadKeywordTracker.analyzeCategoryPerformance(keywordData);
 
         // 전체 통계
-        const totalImpressions = keywordData.reduce((sum, k) => sum + k.impressions, 0);
+        const totalImpressions = keywordData.reduce(
+          (sum, k) => sum + k.impressions,
+          0
+        );
         const totalClicks = keywordData.reduce((sum, k) => sum + k.clicks, 0);
-        const totalConversions = keywordData.reduce((sum, k) => sum + k.conversions, 0);
+        const totalConversions = keywordData.reduce(
+          (sum, k) => sum + k.conversions,
+          0
+        );
         const totalTraffic = keywordData.reduce((sum, k) => sum + k.traffic, 0);
 
         // 상위 5개 키워드
@@ -151,8 +190,12 @@ export async function GET(request: NextRequest) {
               totalClicks,
               totalConversions,
               totalTraffic,
-              avgCTR: totalImpressions > 0 ? (totalClicks / totalImpressions) * 100 : 0,
-              avgConversionRate: totalClicks > 0 ? (totalConversions / totalClicks) * 100 : 0,
+              avgCTR:
+                totalImpressions > 0
+                  ? (totalClicks / totalImpressions) * 100
+                  : 0,
+              avgConversionRate:
+                totalClicks > 0 ? (totalConversions / totalClicks) * 100 : 0,
             },
             categoryPerformance,
             topKeywords,

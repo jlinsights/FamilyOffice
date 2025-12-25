@@ -57,7 +57,8 @@ const buttonVariants = cva(
  * @interface ButtonProps
  */
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   /** Render as child component (using Radix Slot) */
   asChild?: boolean;
@@ -65,20 +66,20 @@ export interface ButtonProps
 
 /**
  * Custom Button component with enhanced styling and Korean market optimization.
- * 
+ *
  * Features:
  * - 12 variant styles including Korean business themes
  * - Responsive hover animations with scale effects
  * - Support for consultation and emerald luxury variants
  * - Radix Slot integration for composition
  * - Full accessibility support
- * 
+ *
  * @example
  * ```tsx
  * <Button variant="consultation" size="lg">
  *   무료 상담 예약
  * </Button>
- * 
+ *
  * <Button asChild>
  *   <Link href="/contact">연락하기</Link>
  * </Button>

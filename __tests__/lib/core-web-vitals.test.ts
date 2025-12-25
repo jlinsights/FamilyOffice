@@ -17,7 +17,7 @@ const localStorageMock = (() => {
     },
     clear: () => {
       store = {};
-    }
+    },
   };
 })();
 
@@ -26,37 +26,39 @@ const mockPerformance = {
   now: jest.fn(() => Date.now()),
   getEntriesByType: jest.fn((type: string) => {
     if (type === 'navigation') {
-      return [{
-        responseStart: 200,
-        requestStart: 100,
-        domContentLoadedEventEnd: 800,
-        loadEventEnd: 1200,
-        navigationStart: 0
-      }];
+      return [
+        {
+          responseStart: 200,
+          requestStart: 100,
+          domContentLoadedEventEnd: 800,
+          loadEventEnd: 1200,
+          navigationStart: 0,
+        },
+      ];
     }
     return [];
-  })
+  }),
 };
 
 // Mock PerformanceObserver
-const mockPerformanceObserver = jest.fn().mockImplementation((_callback) => ({
+const mockPerformanceObserver = jest.fn().mockImplementation(_callback => ({
   observe: jest.fn(),
-  disconnect: jest.fn()
+  disconnect: jest.fn(),
 }));
 
 describe('Core Web Vitals System', () => {
   beforeEach(() => {
     // Setup mocks
     Object.defineProperty(window, 'localStorage', {
-      value: localStorageMock
+      value: localStorageMock,
     });
-    
+
     Object.defineProperty(window, 'performance', {
-      value: mockPerformance
+      value: mockPerformance,
     });
-    
+
     Object.defineProperty(window, 'PerformanceObserver', {
-      value: mockPerformanceObserver
+      value: mockPerformanceObserver,
     });
 
     // Reset storage
@@ -72,7 +74,7 @@ describe('Core Web Vitals System', () => {
     test('should initialize with empty metrics', () => {
       // Import here to ensure mocks are in place
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       const analytics = webVitalsMonitoring.getAnalytics();
       expect(analytics.summary.totalSamples).toBe(0);
       expect(analytics.metrics).toHaveLength(0);
@@ -80,16 +82,16 @@ describe('Core Web Vitals System', () => {
 
     test('should record LCP metric correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       const mockMetric = {
         name: 'LCP',
         value: 2500,
         id: 'lcp-test-123',
-        delta: 2500
+        delta: 2500,
       };
 
       webVitalsMonitoring.recordMetric(mockMetric);
-      
+
       const analytics = webVitalsMonitoring.getAnalytics();
       expect(analytics.summary.totalSamples).toBe(1);
       expect(analytics.metrics).toHaveLength(1);
@@ -100,16 +102,16 @@ describe('Core Web Vitals System', () => {
 
     test('should record FID metric correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       const mockMetric = {
         name: 'FID',
         value: 80,
         id: 'fid-test-123',
-        delta: 80
+        delta: 80,
       };
 
       webVitalsMonitoring.recordMetric(mockMetric);
-      
+
       const analytics = webVitalsMonitoring.getAnalytics();
       expect(analytics.summary.averageScores.fid.value).toBe(80);
       expect(analytics.summary.averageScores.fid.rating).toBe('good');
@@ -117,16 +119,16 @@ describe('Core Web Vitals System', () => {
 
     test('should record CLS metric correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       const mockMetric = {
         name: 'CLS',
         value: 0.05,
         id: 'cls-test-123',
-        delta: 0.05
+        delta: 0.05,
       };
 
       webVitalsMonitoring.recordMetric(mockMetric);
-      
+
       const analytics = webVitalsMonitoring.getAnalytics();
       expect(analytics.summary.averageScores.cls.value).toBe(0);
       expect(analytics.summary.averageScores.cls.rating).toBe('good');
@@ -134,7 +136,7 @@ describe('Core Web Vitals System', () => {
 
     test('should calculate performance score correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       // Record good metrics
       const goodMetrics = [
         { name: 'LCP', value: 2000, id: 'lcp-1', delta: 2000 },
@@ -154,7 +156,7 @@ describe('Core Web Vitals System', () => {
 
     test('should detect performance alerts for poor metrics', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       // Record poor metrics
       const poorMetrics = [
         { name: 'LCP', value: 5000, id: 'lcp-poor-1', delta: 5000 },
@@ -174,14 +176,14 @@ describe('Core Web Vitals System', () => {
 
     test('should limit metrics history to maximum', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       // Record more than max metrics (simulated)
       for (let i = 0; i < 15; i++) {
         webVitalsMonitoring.recordMetric({
           name: 'LCP',
           value: 2000 + i,
           id: `lcp-${i}`,
-          delta: 2000 + i
+          delta: 2000 + i,
         });
       }
 
@@ -191,13 +193,13 @@ describe('Core Web Vitals System', () => {
 
     test('should clear metrics correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       // Record some metrics
       webVitalsMonitoring.recordMetric({
         name: 'LCP',
         value: 2000,
         id: 'lcp-test',
-        delta: 2000
+        delta: 2000,
       });
 
       let analytics = webVitalsMonitoring.getAnalytics();
@@ -213,18 +215,18 @@ describe('Core Web Vitals System', () => {
 
     test('should generate page breakdown correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       // Mock window.location for different pages
       const originalLocation = window.location;
       delete (window as any).location;
-      
+
       // Record metrics for different pages
       (window as any).location = { pathname: '/home' };
       webVitalsMonitoring.recordMetric({
         name: 'LCP',
         value: 2000,
         id: 'lcp-home',
-        delta: 2000
+        delta: 2000,
       });
 
       (window as any).location = { pathname: '/about' };
@@ -232,17 +234,17 @@ describe('Core Web Vitals System', () => {
         name: 'LCP',
         value: 3000,
         id: 'lcp-about',
-        delta: 3000
+        delta: 3000,
       });
 
       // Restore location
       Object.defineProperty(window, 'location', {
         writable: true,
-        value: originalLocation
+        value: originalLocation,
       });
 
       const analytics = webVitalsMonitoring.getAnalytics();
-      
+
       // Note: Since we're mocking, the actual URL might not be captured correctly
       // This test mainly verifies the structure
       expect(analytics.pageBreakdown).toBeDefined();
@@ -251,16 +253,16 @@ describe('Core Web Vitals System', () => {
 
     test('should export metrics data correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       webVitalsMonitoring.recordMetric({
         name: 'LCP',
         value: 2000,
         id: 'lcp-export-test',
-        delta: 2000
+        delta: 2000,
       });
 
       const exportData = webVitalsMonitoring.exportMetrics();
-      
+
       expect(exportData).toHaveProperty('data');
       expect(exportData).toHaveProperty('exportedAt');
       expect(exportData).toHaveProperty('userAgent');
@@ -271,13 +273,13 @@ describe('Core Web Vitals System', () => {
   describe('Rating Calculation', () => {
     test('should rate LCP correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       // Good LCP
       webVitalsMonitoring.recordMetric({
         name: 'LCP',
         value: 2000,
         id: 'lcp-good',
-        delta: 2000
+        delta: 2000,
       });
 
       // Needs improvement LCP
@@ -285,7 +287,7 @@ describe('Core Web Vitals System', () => {
         name: 'LCP',
         value: 3000,
         id: 'lcp-needs-improvement',
-        delta: 3000
+        delta: 3000,
       });
 
       // Poor LCP
@@ -293,24 +295,26 @@ describe('Core Web Vitals System', () => {
         name: 'LCP',
         value: 5000,
         id: 'lcp-poor',
-        delta: 5000
+        delta: 5000,
       });
 
       const analytics = webVitalsMonitoring.getAnalytics();
-      
+
       // With mixed ratings, average should be in needs-improvement or poor range
-      expect(['needs-improvement', 'poor']).toContain(analytics.summary.averageScores.lcp.rating);
+      expect(['needs-improvement', 'poor']).toContain(
+        analytics.summary.averageScores.lcp.rating
+      );
     });
 
     test('should rate CLS correctly', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       // Good CLS
       webVitalsMonitoring.recordMetric({
         name: 'CLS',
         value: 0.05,
         id: 'cls-good',
-        delta: 0.05
+        delta: 0.05,
       });
 
       const analytics = webVitalsMonitoring.getAnalytics();
@@ -321,19 +325,21 @@ describe('Core Web Vitals System', () => {
   describe('Time Window Filtering', () => {
     test('should filter metrics by time window', () => {
       const { webVitalsMonitoring } = require('@/lib/core-web-vitals');
-      
+
       // Test focuses on time window filtering behavior
-      
+
       webVitalsMonitoring.recordMetric({
         name: 'LCP',
         value: 2000,
         id: 'lcp-old',
-        delta: 2000
+        delta: 2000,
       });
 
       // Manually set older timestamp (normally this would be handled internally)
-      const analytics24h = webVitalsMonitoring.getAnalytics(24 * 60 * 60 * 1000); // 24 hours
-      
+      const analytics24h = webVitalsMonitoring.getAnalytics(
+        24 * 60 * 60 * 1000
+      ); // 24 hours
+
       // The metric should be included since it's recent (just recorded)
       expect(analytics24h.summary.totalSamples).toBeGreaterThan(0);
     });

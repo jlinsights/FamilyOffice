@@ -2,7 +2,6 @@
  * Supabase Type Helpers
  * Helper types and utilities to work around Supabase SSR type inference limitations
  */
-
 import { Database } from './supabase';
 
 // Extract table row types for easier use
@@ -19,7 +18,8 @@ export type LeadActivity = Tables['lead_activities']['Row'];
 export type ConsultationInsert = Tables['consultations']['Insert'];
 export type UserInsert = Tables['users']['Insert'];
 export type PerformanceMetricInsert = Tables['performance_metrics']['Insert'];
-export type ContentRecommendationInsert = Tables['content_recommendations']['Insert'];
+export type ContentRecommendationInsert =
+  Tables['content_recommendations']['Insert'];
 export type WorkflowExecutionInsert = Tables['workflow_executions']['Insert'];
 export type LeadActivityInsert = Tables['lead_activities']['Insert'];
 
@@ -27,7 +27,8 @@ export type LeadActivityInsert = Tables['lead_activities']['Insert'];
 export type ConsultationUpdate = Tables['consultations']['Update'];
 export type UserUpdate = Tables['users']['Update'];
 export type PerformanceMetricUpdate = Tables['performance_metrics']['Update'];
-export type ContentRecommendationUpdate = Tables['content_recommendations']['Update'];
+export type ContentRecommendationUpdate =
+  Tables['content_recommendations']['Update'];
 export type WorkflowExecutionUpdate = Tables['workflow_executions']['Update'];
 export type LeadActivityUpdate = Tables['lead_activities']['Update'];
 

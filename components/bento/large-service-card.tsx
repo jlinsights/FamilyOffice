@@ -1,9 +1,12 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import type { BentoService } from '@/constants/bento-services';
 import { ArrowRight } from 'lucide-react';
+
 import Link from 'next/link';
+
+import { Badge } from '@/components/ui/badge';
+
+import type { BentoService } from '@/constants/bento-services';
 
 interface LargeServiceCardProps {
   service: BentoService;
@@ -14,33 +17,35 @@ interface LargeServiceCardProps {
  * Large featured service card (2×2 grid space)
  * Premium design with extended content
  */
-export function LargeServiceCard({ service, className = '' }: LargeServiceCardProps) {
+export function LargeServiceCard({
+  service,
+  className = '',
+}: LargeServiceCardProps) {
   // Gradient colors based on service type
   const gradientMap: Record<string, string> = {
     'asset-management': 'from-blue-500/10 via-indigo-500/5 to-transparent',
     'business-succession': 'from-purple-500/10 via-pink-500/5 to-transparent',
   };
-  
+
   const gradient = gradientMap[service.id] || 'from-blue-500/10 to-transparent';
 
   return (
-    <Link
-      href={service.href}
-      className={`block group ${className}`}
-    >
+    <Link href={service.href} className={`block group ${className}`}>
       <div className="h-full relative overflow-hidden transition-all duration-500 hover:shadow-2xl border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md rounded-3xl p-8 border-glow hover:-translate-y-1">
         {/* Background gradient - always visible, enhanced on hover */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-100 dark:opacity-80`}></div>
-        
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-100 dark:opacity-80`}
+        ></div>
+
         {/* Hover gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
+
         {/* Content */}
         <div className="relative z-10">
           {/* Badge */}
           {service.badge && (
-            <Badge 
-              variant="secondary" 
+            <Badge
+              variant="secondary"
               className="mb-6 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/50 font-semibold"
             >
               {service.badge}
@@ -56,7 +61,7 @@ export function LargeServiceCard({ service, className = '' }: LargeServiceCardPr
           <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-300 leading-tight">
             {service.title}
           </h3>
-          
+
           {service.tagline && (
             <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold mb-6">
               {service.tagline}
@@ -71,7 +76,10 @@ export function LargeServiceCard({ service, className = '' }: LargeServiceCardPr
           {/* Features */}
           <div className="space-y-3.5 mb-8">
             {service.features.map((feature, idx) => (
-              <div key={idx} className="flex items-start text-sm text-slate-600 dark:text-slate-400">
+              <div
+                key={idx}
+                className="flex items-start text-sm text-slate-600 dark:text-slate-400"
+              >
                 <div className="w-2 h-2 rounded-full bg-blue-500 mt-1.5 mr-3 flex-shrink-0 group-hover:bg-blue-600 group-hover:shadow-[0_0_8px_rgba(59,130,246,0.5)] transition-all duration-300"></div>
                 <span className="group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-300 leading-relaxed">
                   {feature}
@@ -96,9 +104,14 @@ export function LargeServiceCard({ service, className = '' }: LargeServiceCardPr
           {service.usps && service.usps.length > 0 && (
             <div className="mb-6 space-y-2.5">
               {service.usps.map((usp, idx) => (
-                <div key={idx} className="flex items-center text-sm font-semibold">
+                <div
+                  key={idx}
+                  className="flex items-center text-sm font-semibold"
+                >
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500 mr-2.5 flex-shrink-0"></div>
-                  <span className="text-green-700 dark:text-green-400">{usp}</span>
+                  <span className="text-green-700 dark:text-green-400">
+                    {usp}
+                  </span>
                 </div>
               ))}
             </div>
@@ -118,7 +131,8 @@ export function LargeServiceCard({ service, className = '' }: LargeServiceCardPr
 
           {/* CTA */}
           <div className="flex items-center text-base font-bold text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-            자세히 보기 <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            자세히 보기{' '}
+            <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
           </div>
         </div>
       </div>

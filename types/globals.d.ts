@@ -7,7 +7,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string;
     CLERK_SECRET_KEY: string;
 
-
     // Analytics
     NEXT_PUBLIC_GTM_ID?: string;
     NEXT_PUBLIC_GA_MEASUREMENT_ID?: string;
@@ -25,7 +24,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?: string;
     NEXT_PUBLIC_NAVER_SITE_VERIFICATION?: string;
     NEXT_PUBLIC_BING_SITE_VERIFICATION?: string;
-
 
     // Beehiiv Newsletter
     BEEHIIV_API_KEY?: string;

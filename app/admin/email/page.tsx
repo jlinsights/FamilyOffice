@@ -2,15 +2,17 @@
  * 이메일 관리 페이지 (관리자용)
  * /admin/email
  */
-import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+
+import { auth } from '@clerk/nextjs/server';
+
 import { ResendTestPanel } from '@/components/email/resend-test-panel';
 
 const SUPER_ADMIN_EMAILS = ['jhlim725@gmail.com'];
 
 export default async function EmailAdminPage() {
   const { userId } = await auth();
-  
+
   if (!userId) {
     redirect('/sign-in');
   }

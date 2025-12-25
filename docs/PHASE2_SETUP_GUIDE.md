@@ -53,6 +53,7 @@ Google Analytics 4 Data API를 사용하기 위한 서비스 계정 생성 및 �
 6. **다운로드된 JSON 파일 안전하게 보관** ⚠️
 
 JSON 파일 구조:
+
 ```json
 {
   "type": "service_account",
@@ -69,6 +70,7 @@ JSON 파일 구조:
 ```
 
 **필요한 값**:
+
 - `client_email` → `GOOGLE_SERVICE_ACCOUNT_EMAIL`
 - `private_key` → `GOOGLE_PRIVATE_KEY`
 - `project_id` → `GOOGLE_PROJECT_ID`
@@ -116,11 +118,13 @@ Google 검색 순위 데이터 수집을 위한 Serper.dev API 키 발급입니�
 ### 2.3 요금제 확인
 
 **무료 플랜**:
+
 - 2,500 검색/월 무료
 - 일일 40개 키워드 수집 = 월 1,200 검색
 - **무료 플랜으로 충분함** ✅
 
 **유료 플랜** (필요 시):
+
 - $50/월 = 5,000 검색
 - $150/월 = 20,000 검색
 
@@ -139,6 +143,7 @@ curl -X POST https://google.serper.dev/search \
 ```
 
 성공 응답:
+
 ```json
 {
   "searchParameters": {
@@ -178,6 +183,7 @@ curl -X POST https://google.serper.dev/search \
 5. "Run" 버튼 클릭 (Cmd/Ctrl + Enter)
 
 **예상 결과**:
+
 ```
 ✅ BMAD Keyword Rankings 테이블 생성 완료
 📊 테이블: keyword_rankings
@@ -189,11 +195,13 @@ curl -X POST https://google.serper.dev/search \
 ### 3.3 마이그레이션 실행 (방법 2: Supabase CLI)
 
 **사전 요구사항**: Supabase CLI 설치
+
 ```bash
 npm install -g supabase
 ```
 
 **실행 단계**:
+
 ```bash
 # 1. Supabase 로그인
 supabase login
@@ -247,12 +255,15 @@ Vercel 프로젝트에 필요한 모든 환경 변수를 설정합니다.
 #### Google Analytics 4 API
 
 **GOOGLE_SERVICE_ACCOUNT_EMAIL**
+
 ```
 familyoffices-ga4-reader@your-project.iam.gserviceaccount.com
 ```
+
 - 환경: Production, Preview, Development
 
 **GOOGLE_PRIVATE_KEY**
+
 ```
 -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...
@@ -260,38 +271,47 @@ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...
 ...
 -----END PRIVATE KEY-----
 ```
+
 ⚠️ **주의사항**:
+
 - JSON 파일의 `\n`을 실제 줄바꿈으로 변경
 - 시작과 끝의 `-----BEGIN/END PRIVATE KEY-----` 포함
 - Vercel은 자동으로 줄바꿈을 이스케이프 처리함
 
 **GOOGLE_PROJECT_ID**
+
 ```
 your-project-id
 ```
 
 **GOOGLE_ANALYTICS_PROPERTY_ID**
+
 ```
 123456789
 ```
+
 - GA4 속성 설정에서 확인한 숫자 ID
 
 #### Serper.dev API
 
 **SERPER_API_KEY**
+
 ```
 your_serper_api_key_here
 ```
+
 - Serper.dev 대시보드에서 생성한 API 키
 
 #### Vercel Cron Job
 
 **CRON_SECRET**
+
 ```
 your_random_secure_string_here
 ```
 
 생성 방법:
+
 ```bash
 # macOS/Linux
 openssl rand -base64 32
@@ -301,6 +321,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 ```
 
 예시 결과:
+
 ```
 wX3zP9kL2mN8qR5tY7vB1cD4eF6gH9jK0lM2nO4pQ=
 ```
@@ -310,11 +331,13 @@ wX3zP9kL2mN8qR5tY7vB1cD4eF6gH9jK0lM2nO4pQ=
 다음 환경 변수가 이미 설정되어 있는지 확인:
 
 **Supabase**:
+
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
 
 **없다면 설정 필요**:
+
 1. Supabase Dashboard → Project Settings → API
 2. URL, anon key, service_role key 복사
 3. Vercel에 추가
@@ -340,6 +363,7 @@ wX3zP9kL2mN8qR5tY7vB1cD4eF6gH9jK0lM2nO4pQ=
 3. `vercel.json`의 cron 설정이 자동으로 인식됨
 
 **설정 확인**:
+
 - Path: `/api/cron/daily-bmad-collection`
 - Schedule: `0 2 * * *` (매일 UTC 2시 = KST 11시)
 
@@ -348,6 +372,7 @@ wX3zP9kL2mN8qR5tY7vB1cD4eF6gH9jK0lM2nO4pQ=
 현재 UTC 2시 = KST 11시인데, KST 새벽 2시로 변경하려면:
 
 **파일**: `vercel.json`
+
 ```json
 {
   "version": 2,
@@ -359,9 +384,11 @@ wX3zP9kL2mN8qR5tY7vB1cD4eF6gH9jK0lM2nO4pQ=
   ]
 }
 ```
+
 - `0 17 * * *` = UTC 17시 = KST 새벽 2시
 
 **변경 후 재배포**:
+
 ```bash
 git add vercel.json
 git commit -m "⏰ Adjust Cron schedule to KST 2 AM"
@@ -371,18 +398,21 @@ git push
 ### 5.3 Cron Job 수동 테스트
 
 **로컬 테스트 (POST 요청)**:
+
 ```bash
 curl -X POST http://localhost:3000/api/cron/daily-bmad-collection \
   -H "Content-Type: application/json"
 ```
 
 **프로덕션 테스트 (GET 요청 with CRON_SECRET)**:
+
 ```bash
 curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
   -H "Authorization: Bearer YOUR_CRON_SECRET"
 ```
 
 **예상 응답**:
+
 ```json
 {
   "success": true,
@@ -417,7 +447,10 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **테스트 스크립트** 생성: `/scripts/test-ga4-connection.ts`
 
 ```typescript
-import { checkGA4Connection, getKeywordPerformance } from '@/lib/google-analytics/ga4-client';
+import {
+  checkGA4Connection,
+  getKeywordPerformance,
+} from '@/lib/google-analytics/ga4-client';
 
 async function testGA4() {
   console.log('🔍 GA4 연결 테스트 시작...');
@@ -447,6 +480,7 @@ testGA4().catch(console.error);
 ```
 
 **실행**:
+
 ```bash
 npx tsx scripts/test-ga4-connection.ts
 ```
@@ -484,6 +518,7 @@ testSerper().catch(console.error);
 ```
 
 **실행**:
+
 ```bash
 npx tsx scripts/test-serper-connection.ts
 ```
@@ -555,6 +590,7 @@ testSupabase().catch(console.error);
 ```
 
 **실행**:
+
 ```bash
 npx tsx scripts/test-supabase-connection.ts
 ```
@@ -562,11 +598,13 @@ npx tsx scripts/test-supabase-connection.ts
 ### 6.4 전체 수집 프로세스 테스트
 
 **수동 실행**:
+
 ```bash
 npx tsx scripts/collect-serper-rankings.ts
 ```
 
 **예상 출력**:
+
 ```
 🚀 Serper API 일일 검색 순위 수집 시작
 📊 수집할 키워드 수: 40
@@ -602,17 +640,20 @@ npx tsx scripts/collect-serper-rankings.ts
 ### 6.5 Cron Job 엔드포인트 테스트
 
 **로컬 개발 서버 시작**:
+
 ```bash
 npm run dev
 ```
 
 **POST 요청 (수동 트리거)**:
+
 ```bash
 curl -X POST http://localhost:3000/api/cron/daily-bmad-collection \
   -H "Content-Type: application/json"
 ```
 
 **프로덕션 GET 요청**:
+
 ```bash
 curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
   -H "Authorization: Bearer YOUR_CRON_SECRET"
@@ -629,6 +670,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: 환경 변수가 설정되지 않음
 
 **해결**:
+
 1. Vercel 환경 변수 확인:
    - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
    - `GOOGLE_PRIVATE_KEY`
@@ -636,6 +678,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
    - `GOOGLE_ANALYTICS_PROPERTY_ID`
 
 2. `GOOGLE_PRIVATE_KEY` 형식 확인:
+
    ```
    -----BEGIN PRIVATE KEY-----
    (여러 줄의 키)
@@ -656,6 +699,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: GA4 속성에 서비스 계정 권한 미부여
 
 **해결**:
+
 1. Google Analytics → 관리자 → 속성 액세스 관리
 2. 서비스 계정 이메일 추가 (뷰어 역할)
 3. 5-10분 대기 후 재시도
@@ -665,6 +709,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: GA4에 실제 데이터가 없음
 
 **해결**:
+
 1. GA4 실시간 보고서에서 트래픽 확인
 2. 날짜 범위를 최근 7일로 조정
 3. 개발 환경에서는 모의 데이터 사용:
@@ -681,6 +726,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: API 키가 유효하지 않음
 
 **해결**:
+
 1. Serper.dev 대시보드에서 API 키 확인
 2. Vercel 환경 변수 `SERPER_API_KEY` 확인
 3. API 키에 공백이나 특수문자 없는지 확인
@@ -690,6 +736,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: API 호출 제한 초과
 
 **해결**:
+
 1. 무료 플랜: 2,500 검색/월 확인
 2. 배치 검색 간격 늘리기:
    ```typescript
@@ -702,6 +749,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: 검색 결과에 도메인이 없음
 
 **해결**:
+
 1. 정상 동작입니다 (모든 키워드가 순위권에 있지 않을 수 있음)
 2. `found: false`, `position: null`로 기록됨
 3. 카테고리별 발견율로 성과 추적
@@ -713,6 +761,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: 마이그레이션 미실행
 
 **해결**:
+
 1. Supabase Dashboard → SQL Editor
 2. `/supabase/migrations/20250101_create_keyword_rankings.sql` 실행
 3. 테이블 생성 확인
@@ -722,7 +771,9 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: RLS 정책 문제
 
 **해결**:
+
 1. Service Role Key 사용 확인:
+
    ```typescript
    const supabase = createClient(
      process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -740,6 +791,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: 데이터 타입 불일치 또는 제약 조건 위반
 
 **해결**:
+
 1. `bmad_category` 값 확인:
    - 허용: `behavioral`, `motivational`, `aspirational`, `decisional`, `unknown`
 2. 로그 확인:
@@ -754,6 +806,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: Vercel Cron이 활성화되지 않음
 
 **해결**:
+
 1. Vercel 프로젝트가 Pro 플랜인지 확인 (Hobby는 제한적)
 2. `vercel.json` 파일이 루트에 있는지 확인
 3. 재배포 후 Vercel Dashboard에서 Cron Jobs 탭 확인
@@ -763,6 +816,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: `CRON_SECRET` 불일치
 
 **해결**:
+
 1. Vercel 환경 변수 `CRON_SECRET` 확인
 2. 로컬 테스트 시 POST 요청 사용 (인증 불필요)
 3. 프로덕션 테스트 시 정확한 `Authorization` 헤더 사용:
@@ -776,6 +830,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 **원인**: 40개 키워드 수집에 시간 초과
 
 **해결**:
+
 1. Vercel 함수 타임아웃 확인 (Pro: 60초, Enterprise: 900초)
 2. 배치 크기 줄이기:
    ```typescript
@@ -790,6 +845,7 @@ curl -X GET https://familyoffices.vip/api/cron/daily-bmad-collection \
 Phase 2 완료를 위한 최종 체크리스트입니다.
 
 ### ✅ Google Cloud Console
+
 - [ ] Google Cloud Project 생성 완료
 - [ ] Google Analytics Data API 활성화
 - [ ] 서비스 계정 생성 및 JSON 키 다운로드
@@ -797,12 +853,14 @@ Phase 2 완료를 위한 최종 체크리스트입니다.
 - [ ] GA4 속성 ID 확인
 
 ### ✅ Serper.dev
+
 - [ ] Serper.dev 계정 생성
 - [ ] API 키 발급 완료
 - [ ] 요금제 확인 (무료 2,500 검색/월)
 - [ ] 테스트 요청 성공 확인
 
 ### ✅ Supabase
+
 - [ ] Supabase 프로젝트 확인
 - [ ] 마이그레이션 SQL 실행 완료
 - [ ] `keyword_rankings` 테이블 생성 확인
@@ -812,6 +870,7 @@ Phase 2 완료를 위한 최종 체크리스트입니다.
 - [ ] RLS 정책 활성화 확인
 
 ### ✅ Vercel 환경 변수
+
 - [ ] `GOOGLE_SERVICE_ACCOUNT_EMAIL` 설정
 - [ ] `GOOGLE_PRIVATE_KEY` 설정 (줄바꿈 포함)
 - [ ] `GOOGLE_PROJECT_ID` 설정
@@ -823,6 +882,7 @@ Phase 2 완료를 위한 최종 체크리스트입니다.
 - [ ] `SUPABASE_SERVICE_ROLE_KEY` 확인
 
 ### ✅ Vercel Cron Job
+
 - [ ] `vercel.json` cron 설정 확인
 - [ ] Vercel Dashboard에서 Cron Jobs 탭 확인
 - [ ] 스케줄 시간 확인 (`0 2 * * *` = UTC 2시)
@@ -830,6 +890,7 @@ Phase 2 완료를 위한 최종 체크리스트입니다.
 - [ ] 실제 Cron 실행 로그 확인 (다음날)
 
 ### ✅ 통합 테스트
+
 - [ ] GA4 연결 테스트 성공
 - [ ] Serper API 연결 테스트 성공
 - [ ] Supabase 연결 테스트 성공
@@ -841,12 +902,14 @@ Phase 2 완료를 위한 최종 체크리스트입니다.
 ## 다음 단계 (Phase 3-4)
 
 ### Phase 3: 블로그 콘텐츠 AI 최적화
+
 - AI 최적화 점수 70점 이상 목표
 - FAQ 섹션 추가
 - 구조화된 데이터 강화
 - 내부 링크 최적화
 
 ### Phase 4: 실시간 알림 및 A/B 테스팅
+
 - Slack/Discord 웹훅 알림 설정
 - 순위 급변동 알림 (±10 이상)
 - A/B 테스트 프레임워크 구축
@@ -857,11 +920,13 @@ Phase 2 완료를 위한 최종 체크리스트입니다.
 ## 문의 및 지원
 
 **이슈 발생 시**:
+
 1. 로그 확인: Vercel Dashboard → Logs
 2. 환경 변수 재확인
 3. 각 서비스별 문제 해결 섹션 참조
 
 **추가 도움이 필요하면**:
+
 - GitHub Issues 생성
 - 팀 Slack 채널 문의
 - 기술 문서 참조: `/docs`

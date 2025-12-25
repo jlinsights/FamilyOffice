@@ -122,8 +122,10 @@ export const blogPostsMeta: BlogPostMeta[] = [
   {
     id: 'family-office-basics-guide',
     title: '패밀리오피스란 무엇인가',
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다.',
+    image:
+      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다.',
     category: '패밀리오피스',
     author: '임재홍',
     date: '2025-08-13',

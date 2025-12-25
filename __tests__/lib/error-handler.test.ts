@@ -2,8 +2,10 @@
  * 글로벌 에러 핸들러 테스트
  * 표준화된 에러 응답 시스템 검증
  */
-import { NextResponse } from 'next/server';
 import { ZodError, z } from 'zod';
+
+import { NextResponse } from 'next/server';
+
 import {
   ErrorType,
   createErrorDetail,
@@ -67,12 +69,12 @@ describe('Global Error Handler', () => {
         email: z.string().email(),
         age: z.number().min(0),
       });
-      
+
       try {
         schema.parse({ email: 'invalid', age: -1 });
       } catch (error) {
         const detail = createErrorDetail(error as ZodError);
-        
+
         expect(detail.type).toBe(ErrorType.VALIDATION);
         expect(detail.statusCode).toBe(400);
         expect(detail.userMessage).toContain('이메일');
@@ -80,7 +82,11 @@ describe('Global Error Handler', () => {
     });
 
     it('should detect authentication errors', () => {
-      const error = { name: 'UnauthorizedError', status: 401, message: 'Not authenticated' };
+      const error = {
+        name: 'UnauthorizedError',
+        status: 401,
+        message: 'Not authenticated',
+      };
       const detail = createErrorDetail(error);
 
       expect(detail.type).toBe(ErrorType.AUTHENTICATION);
@@ -89,7 +95,11 @@ describe('Global Error Handler', () => {
     });
 
     it('should detect authorization errors', () => {
-      const error = { name: 'ForbiddenError', status: 403, message: 'Access denied' };
+      const error = {
+        name: 'ForbiddenError',
+        status: 403,
+        message: 'Access denied',
+      };
       const detail = createErrorDetail(error);
 
       expect(detail.type).toBe(ErrorType.AUTHORIZATION);
@@ -112,25 +122,39 @@ describe('Global Error Handler', () => {
 
       expect(detail.type).toBe(ErrorType.RATE_LIMIT);
       expect(detail.statusCode).toBe(429);
-      expect(detail.userMessage).toBe('너무 많은 요청입니다. 잠시 후 다시 시도해주세요.');
+      expect(detail.userMessage).toBe(
+        '너무 많은 요청입니다. 잠시 후 다시 시도해주세요.'
+      );
     });
 
     it('should detect database errors', () => {
-      const error = { name: 'DatabaseError', code: 'DB_CONNECTION_FAILED', message: 'DB error' };
+      const error = {
+        name: 'DatabaseError',
+        code: 'DB_CONNECTION_FAILED',
+        message: 'DB error',
+      };
       const detail = createErrorDetail(error);
 
       expect(detail.type).toBe(ErrorType.DATABASE);
       expect(detail.statusCode).toBe(500);
-      expect(detail.userMessage).toBe('데이터베이스 오류가 발생했습니다. 다시 시도해주세요.');
+      expect(detail.userMessage).toBe(
+        '데이터베이스 오류가 발생했습니다. 다시 시도해주세요.'
+      );
     });
 
     it('should detect external API errors', () => {
-      const error = { name: 'ExternalAPIError', code: 'EXT_SERVICE_DOWN', message: 'Service unavailable' };
+      const error = {
+        name: 'ExternalAPIError',
+        code: 'EXT_SERVICE_DOWN',
+        message: 'Service unavailable',
+      };
       const detail = createErrorDetail(error);
 
       expect(detail.type).toBe(ErrorType.EXTERNAL_API);
       expect(detail.statusCode).toBe(502);
-      expect(detail.userMessage).toBe('외부 서비스가 일시적으로 사용 불가합니다.');
+      expect(detail.userMessage).toBe(
+        '외부 서비스가 일시적으로 사용 불가합니다.'
+      );
     });
 
     it('should use custom message when provided', () => {
@@ -173,7 +197,7 @@ describe('Global Error Handler', () => {
       // and skip this test for now as the module is already loaded
       const error = new Error('Test error');
       error.stack = 'Test stack trace';
-      
+
       createErrorResponse(error);
 
       // In test environment, it behaves like production (no debug info)
@@ -192,7 +216,7 @@ describe('Global Error Handler', () => {
     it('should log errors appropriately', () => {
       const consoleSpy = jest.spyOn(console, 'error');
       const error = new Error('Test error');
-      
+
       createErrorResponse(error);
 
       expect(consoleSpy).toHaveBeenCalled();
@@ -201,9 +225,9 @@ describe('Global Error Handler', () => {
 
   describe('withErrorHandler', () => {
     it('should call handler normally when no error', async () => {
-      const mockHandler = jest.fn().mockResolvedValue(
-        NextResponse.json({ success: true })
-      );
+      const mockHandler = jest
+        .fn()
+        .mockResolvedValue(NextResponse.json({ success: true }));
       const wrappedHandler = withErrorHandler(mockHandler);
 
       const result = await wrappedHandler('arg1', 'arg2');
@@ -213,7 +237,9 @@ describe('Global Error Handler', () => {
     });
 
     it('should catch and handle errors', async () => {
-      const mockHandler = jest.fn().mockRejectedValue(new Error('Handler error'));
+      const mockHandler = jest
+        .fn()
+        .mockRejectedValue(new Error('Handler error'));
       const wrappedHandler = withErrorHandler(mockHandler);
 
       await wrappedHandler('arg1', 'arg2');
@@ -248,7 +274,7 @@ describe('Global Error Handler', () => {
   describe('safeAsync', () => {
     it('should return data on success', async () => {
       const asyncFn = jest.fn().mockResolvedValue('success result');
-      
+
       const result = await safeAsync(asyncFn);
 
       expect(result.data).toBe('success result');
@@ -257,7 +283,7 @@ describe('Global Error Handler', () => {
 
     it('should return error on failure', async () => {
       const asyncFn = jest.fn().mockRejectedValue(new Error('Async error'));
-      
+
       const result = await safeAsync(asyncFn);
 
       expect(result.data).toBeUndefined();
@@ -269,7 +295,7 @@ describe('Global Error Handler', () => {
     it('should return fallback value on error when provided', async () => {
       const asyncFn = jest.fn().mockRejectedValue(new Error('Async error'));
       const fallback = 'fallback value';
-      
+
       const result = await safeAsync(asyncFn, fallback);
 
       expect(result.data).toBe(fallback);
@@ -304,7 +330,9 @@ describe('Global Error Handler', () => {
 
     describe('ValidationError', () => {
       it('should create validation error', () => {
-        const error = new ValidationError('Validation failed', { field: 'email' });
+        const error = new ValidationError('Validation failed', {
+          field: 'email',
+        });
 
         expect(error.type).toBe(ErrorType.VALIDATION);
         expect(error.statusCode).toBe(400);
@@ -401,10 +429,9 @@ describe('Global Error Handler', () => {
       it('should use custom status code', () => {
         createSuccessResponse({}, undefined, 201);
 
-        expect(NextResponse.json).toHaveBeenCalledWith(
-          expect.anything(),
-          { status: 201 }
-        );
+        expect(NextResponse.json).toHaveBeenCalledWith(expect.anything(), {
+          status: 201,
+        });
       });
     });
 
@@ -456,7 +483,7 @@ describe('Global Error Handler', () => {
         schema.parse({ name: '', email: 'invalid' });
       } catch (error) {
         const detail = createErrorDetail(error as ZodError);
-        
+
         expect(detail.userMessage).toContain('이름:');
         expect(detail.userMessage).toContain('이메일:');
       }
@@ -473,7 +500,7 @@ describe('Global Error Handler', () => {
         schema.parse({ name: '', email: 'invalid', phone: 'abc' });
       } catch (error) {
         const detail = createErrorDetail(error as ZodError);
-        
+
         const messages = detail.userMessage.split(', ');
         expect(messages.length).toBe(3);
       }

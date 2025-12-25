@@ -1,12 +1,17 @@
 'use client';
 
-import { useMemo } from 'react';
-import Link from 'next/link';
 import { ArrowRight, Clock, Calendar, Tag } from 'lucide-react';
+
+import { useMemo } from 'react';
+
+import Link from 'next/link';
+
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+
 import { blogPosts } from '@/lib/blog-data';
+
 import type { BlogPost } from '@/types/blog';
 
 interface BlogRelatedPostsProps {
@@ -14,31 +19,38 @@ interface BlogRelatedPostsProps {
   maxPosts?: number;
 }
 
-export function BlogRelatedPosts({ currentPost, maxPosts = 3 }: BlogRelatedPostsProps) {
+export function BlogRelatedPosts({
+  currentPost,
+  maxPosts = 3,
+}: BlogRelatedPostsProps) {
   const relatedPosts = useMemo(() => {
-    const allPosts = Object.values(blogPosts).filter(post => post.id !== currentPost.id);
-    
+    const allPosts = Object.values(blogPosts).filter(
+      post => post.id !== currentPost.id
+    );
+
     // Score posts based on similarity
     const scoredPosts = allPosts.map(post => {
       let score = 0;
-      
+
       // Same category = highest score
       if (post.category === currentPost.category) {
         score += 10;
       }
-      
+
       // Shared tags
-      const sharedTags = post.tags.filter(tag => currentPost.tags.includes(tag));
+      const sharedTags = post.tags.filter(tag =>
+        currentPost.tags.includes(tag)
+      );
       score += sharedTags.length * 3;
-      
+
       // Similar author
       if (post.author === currentPost.author) {
         score += 2;
       }
-      
+
       return { post, score };
     });
-    
+
     // Sort by score and return top posts
     return scoredPosts
       .sort((a, b) => b.score - a.score)
@@ -60,19 +72,20 @@ export function BlogRelatedPosts({ currentPost, maxPosts = 3 }: BlogRelatedPosts
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
-        {relatedPosts.map((post) => (
-          <Card key={post.id} className="group hover:shadow-lg transition-all duration-300">
+        {relatedPosts.map(post => (
+          <Card
+            key={post.id}
+            className="group hover:shadow-lg transition-all duration-300"
+          >
             <CardContent className="p-6">
               <Badge variant="secondary" className="mb-3">
                 {post.category}
               </Badge>
-              
+
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-                <Link href={`/insights/${post.slug}`}>
-                  {post.title}
-                </Link>
+                <Link href={`/insights/${post.slug}`}>{post.title}</Link>
               </h3>
-              
+
               <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
                 {post.excerpt}
               </p>
@@ -90,7 +103,7 @@ export function BlogRelatedPosts({ currentPost, maxPosts = 3 }: BlogRelatedPosts
 
               {post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1">
-                  {post.tags.slice(0, 2).map((tag) => (
+                  {post.tags.slice(0, 2).map(tag => (
                     <Badge key={tag} variant="outline" className="text-xs">
                       <Tag className="h-3 w-3 mr-1" />
                       {tag}

@@ -7,6 +7,11 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
+/**
+ * 네이버 검색 순위 추적 React Hook
+ * 실시간 키워드 순위 모니터링 및 관리
+ */
+
 export interface KeywordRanking {
   id: string;
   keyword: string;
@@ -38,11 +43,14 @@ export interface NaverRankingData {
     top20Keywords: number;
     totalSearchVolume: number;
   };
-  categories: Record<string, {
-    count: number;
-    avgRank: number;
-    trend: 'up' | 'down' | 'stable';
-  }>;
+  categories: Record<
+    string,
+    {
+      count: number;
+      avgRank: number;
+      trend: 'up' | 'down' | 'stable';
+    }
+  >;
   lastUpdate: string;
   note?: string;
 }
@@ -69,7 +77,7 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
   const {
     autoRefresh = true,
     refreshInterval = 15 * 60 * 1000, // 15분
-    enableRealTime = false
+    enableRealTime = false,
   } = options;
 
   const [data, setData] = useState<NaverRankingData | null>(null);
@@ -82,10 +90,10 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
     try {
       const response = await fetch('/api/naver/ranking?action=get_rankings');
       if (!response.ok) throw new Error('순위 데이터 가져오기 실패');
-      
+
       const result = await response.json();
       if (!result.success) throw new Error(result.error || '데이터 조회 실패');
-      
+
       return result.data;
     } catch (err) {
       console.error('순위 데이터 조회 오류:', err);
@@ -106,7 +114,6 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
 
       setData(rankingData);
       setLastUpdated(new Date());
-
     } catch (err) {
       console.error('데이터 새로고침 오류:', err);
       setError(err instanceof Error ? err.message : '알 수 없는 오류');
@@ -116,60 +123,66 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
   }, [fetchRankings]);
 
   // 새 키워드 추가
-  const addKeyword = useCallback(async (keywordData: AddKeywordRequest) => {
-    try {
-      const response = await fetch('/api/naver/ranking', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'add_keyword',
-          ...keywordData
-        })
-      });
+  const addKeyword = useCallback(
+    async (keywordData: AddKeywordRequest) => {
+      try {
+        const response = await fetch('/api/naver/ranking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'add_keyword',
+            ...keywordData,
+          }),
+        });
 
-      if (!response.ok) throw new Error('키워드 추가 실패');
-      
-      const result = await response.json();
-      if (!result.success) throw new Error(result.error || '키워드 추가 실패');
+        if (!response.ok) throw new Error('키워드 추가 실패');
 
-      // 데이터 새로고침
-      await refreshData();
-      
-      return result.data;
+        const result = await response.json();
+        if (!result.success)
+          throw new Error(result.error || '키워드 추가 실패');
 
-    } catch (err) {
-      console.error('키워드 추가 오류:', err);
-      throw err;
-    }
-  }, [refreshData]);
+        // 데이터 새로고침
+        await refreshData();
+
+        return result.data;
+      } catch (err) {
+        console.error('키워드 추가 오류:', err);
+        throw err;
+      }
+    },
+    [refreshData]
+  );
 
   // 목표 순위 업데이트
-  const updateTargetRank = useCallback(async (updateData: UpdateTargetRequest) => {
-    try {
-      const response = await fetch('/api/naver/ranking', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'update_target',
-          ...updateData
-        })
-      });
+  const updateTargetRank = useCallback(
+    async (updateData: UpdateTargetRequest) => {
+      try {
+        const response = await fetch('/api/naver/ranking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_target',
+            ...updateData,
+          }),
+        });
 
-      if (!response.ok) throw new Error('목표 순위 업데이트 실패');
-      
-      const result = await response.json();
-      if (!result.success) throw new Error(result.error || '목표 순위 업데이트 실패');
+        if (!response.ok) throw new Error('목표 순위 업데이트 실패');
 
-      // 데이터 새로고침
-      await refreshData();
-      
-      return result.data;
+        const result = await response.json();
+        if (!result.success)
+          throw new Error(result.error || '목표 순위 업데이트 실패');
 
-    } catch (err) {
-      console.error('목표 순위 업데이트 오류:', err);
-      throw err;
-    }
-  }, [refreshData]);
+        // 데이터 새로고침
+        await refreshData();
+
+        return result.data;
+      } catch (err) {
+        console.error('목표 순위 업데이트 오류:', err);
+        throw err;
+      }
+    },
+    [refreshData]
+  );
 
   // 벌크 순위 체크
   const bulkCheckRankings = useCallback(async (keywords: string[]) => {
@@ -179,17 +192,17 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'bulk_check',
-          keywords
-        })
+          keywords,
+        }),
       });
 
       if (!response.ok) throw new Error('벌크 순위 체크 실패');
-      
+
       const result = await response.json();
-      if (!result.success) throw new Error(result.error || '벌크 순위 체크 실패');
+      if (!result.success)
+        throw new Error(result.error || '벌크 순위 체크 실패');
 
       return result.data;
-
     } catch (err) {
       console.error('벌크 순위 체크 오류:', err);
       throw err;
@@ -221,7 +234,7 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
     //     setData(prev => prev ? { ...prev, ...update.data } : null);
     //   }
     // };
-    
+
     // return () => ws.close();
   }, [enableRealTime]);
 
@@ -242,8 +255,8 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
 
     getKeywordsByCategory: (category: string) => {
       if (!data) return [];
-      return category === '전체' 
-        ? data.keywords 
+      return category === '전체'
+        ? data.keywords
         : data.keywords.filter(k => k.category === category);
     },
 
@@ -259,7 +272,10 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
       if (!data) return [];
       return data.keywords
         .filter(k => k.currentRank > k.targetRank)
-        .sort((a, b) => (b.currentRank - b.targetRank) - (a.currentRank - a.targetRank))
+        .sort(
+          (a, b) =>
+            b.currentRank - b.targetRank - (a.currentRank - a.targetRank)
+        )
         .slice(0, limit);
     },
 
@@ -277,7 +293,12 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
         .map(([category, stats]) => ({
           category,
           ...stats,
-          performance: stats.avgRank <= 15 ? 'good' : stats.avgRank <= 25 ? 'average' : 'poor'
+          performance:
+            stats.avgRank <= 15
+              ? 'good'
+              : stats.avgRank <= 25
+                ? 'average'
+                : 'poor',
         }))
         .sort((a, b) => a.avgRank - b.avgRank);
     },
@@ -286,20 +307,24 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
       if (!data) return null;
 
       const totalKeywords = data.summary.totalKeywords;
-      const achievedTargets = data.keywords.filter(k => k.currentRank <= k.targetRank).length;
-      const progressPercentage = totalKeywords > 0 ? (achievedTargets / totalKeywords) * 100 : 0;
+      const achievedTargets = data.keywords.filter(
+        k => k.currentRank <= k.targetRank
+      ).length;
+      const progressPercentage =
+        totalKeywords > 0 ? (achievedTargets / totalKeywords) * 100 : 0;
 
       return {
         achievedTargets,
         totalKeywords,
         progressPercentage: Math.round(progressPercentage),
-        avgRankImprovement: data.summary.improvingKeywords - data.summary.decliningKeywords
+        avgRankImprovement:
+          data.summary.improvingKeywords - data.summary.decliningKeywords,
       };
     },
 
     getSearchVolumeOpportunity: () => {
       if (!data) return 0;
-      
+
       // 상위 20위 내 키워드들의 검색량 합계
       const top20Volume = data.keywords
         .filter(k => k.currentRank <= 20)
@@ -311,17 +336,21 @@ export function useNaverRanking(options: UseNaverRankingOptions = {}) {
     getCompetitiveAnalysis: () => {
       if (!data) return null;
 
-      const highCompetitionKeywords = data.keywords.filter(k => k.difficulty >= 80);
-      const lowHangingFruit = data.keywords.filter(k => 
-        k.difficulty < 70 && k.currentRank > k.targetRank
+      const highCompetitionKeywords = data.keywords.filter(
+        k => k.difficulty >= 80
+      );
+      const lowHangingFruit = data.keywords.filter(
+        k => k.difficulty < 70 && k.currentRank > k.targetRank
       );
 
       return {
         highCompetitionCount: highCompetitionKeywords.length,
         lowHangingFruitCount: lowHangingFruit.length,
-        avgDifficulty: data.keywords.reduce((sum, k) => sum + k.difficulty, 0) / data.keywords.length,
-        recommendedFocus: lowHangingFruit.slice(0, 3)
+        avgDifficulty:
+          data.keywords.reduce((sum, k) => sum + k.difficulty, 0) /
+          data.keywords.length,
+        recommendedFocus: lowHangingFruit.slice(0, 3),
       };
-    }
+    },
   };
 }

@@ -2,7 +2,10 @@
  * Rate Limiting 미들웨어 - API 엔드포인트 보호
  * Redis 기반 고성능 rate limiting with fallback to memory
  */
+import { Redis } from '@upstash/redis';
+
 import { NextRequest } from 'next/server';
+
 // import { env } from '@/lib/env';
 
 // Rate limit configuration per endpoint type
@@ -14,15 +17,15 @@ export const rateLimitConfig = {
     message: 'API 요청 한도를 초과했습니다. 15분 후 다시 시도해주세요.',
     skipSuccessfulRequests: false,
   },
-  
+
   // Form submissions (more restrictive)
   form: {
-    windowMs: 5 * 60 * 1000, // 5 minutes  
+    windowMs: 5 * 60 * 1000, // 5 minutes
     max: 5, // requests per window
     message: '폼 제출 한도를 초과했습니다. 5분 후 다시 시도해주세요.',
     skipSuccessfulRequests: true,
   },
-  
+
   // Authentication endpoints (very restrictive)
   auth: {
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -30,7 +33,7 @@ export const rateLimitConfig = {
     message: '인증 요청 한도를 초과했습니다. 15분 후 다시 시도해주세요.',
     skipSuccessfulRequests: false,
   },
-  
+
   // Financial data endpoints
   financial: {
     windowMs: 1 * 60 * 1000, // 1 minute
@@ -38,7 +41,7 @@ export const rateLimitConfig = {
     message: '금융 데이터 요청 한도를 초과했습니다. 1분 후 다시 시도해주세요.',
     skipSuccessfulRequests: false,
   },
-  
+
   // Admin endpoints (most restrictive)
   admin: {
     windowMs: 60 * 60 * 1000, // 1 hour
@@ -75,37 +78,36 @@ function getClientId(request: NextRequest): string {
   if (userId) {
     return `user:${userId}`;
   }
-  
+
   // Get real IP address (considering proxies)
   const forwarded = request.headers.get('x-forwarded-for');
   const realIp = request.headers.get('x-real-ip');
   const ip = forwarded?.split(',')[0] || realIp || 'unknown';
-  
-    // Fallback to User-Agent hash for localhost development
+
+  // Fallback to User-Agent hash for localhost development
   if (ip === 'unknown' || ip === '127.0.0.1' || ip === '::1') {
     const userAgent = request.headers.get('user-agent') || 'unknown';
     return `ua:${btoa(userAgent).slice(0, 10)}`;
   }
-  
+
   return `ip:${ip}`;
 }
 
-import { Redis } from '@upstash/redis';
-
 // Redis client initialization
-const redis = process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
-  ? new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN,
-    })
-  : null;
+const redis =
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? new Redis({
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+      })
+    : null;
 
 /**
  * Redis-based rate limiting (if available)
  */
 async function checkRateLimitRedis(
   key: string,
-  config: typeof rateLimitConfig[RateLimitType]
+  config: (typeof rateLimitConfig)[RateLimitType]
 ): Promise<{
   success: boolean;
   limit: number;
@@ -118,7 +120,7 @@ async function checkRateLimitRedis(
   try {
     const now = Date.now();
     const windowStart = now - config.windowMs;
-    
+
     // Use a transaction to ensure atomicity
     // 1. Remove old requests
     // 2. Add current request
@@ -129,17 +131,19 @@ async function checkRateLimitRedis(
     multi.zadd(key, { score: now, member: `${now}-${Math.random()}` });
     multi.zcard(key);
     multi.expire(key, Math.ceil(config.windowMs / 1000));
-    
+
     const results = await multi.exec();
     const requestCount = results[2] as number;
-    
+
     if (requestCount > config.max) {
       // Calculate retry after
       const oldestRequest = await redis.zrange(key, 0, 0, { withScores: true });
-      const resetTime = oldestRequest.length > 0 
-        ? (oldestRequest[0] as unknown as { score: number }).score + config.windowMs 
-        : now + config.windowMs;
-        
+      const resetTime =
+        oldestRequest.length > 0
+          ? (oldestRequest[0] as unknown as { score: number }).score +
+            config.windowMs
+          : now + config.windowMs;
+
       return {
         success: false,
         limit: config.max,
@@ -148,7 +152,7 @@ async function checkRateLimitRedis(
         retryAfter: Math.ceil((resetTime - now) / 1000),
       };
     }
-    
+
     return {
       success: true,
       limit: config.max,
@@ -156,7 +160,10 @@ async function checkRateLimitRedis(
       reset: now + config.windowMs,
     };
   } catch (error) {
-    console.warn('Redis rate limit check failed, falling back to memory store:', error);
+    console.warn(
+      'Redis rate limit check failed, falling back to memory store:',
+      error
+    );
     return null;
   }
 }
@@ -166,7 +173,7 @@ async function checkRateLimitRedis(
  */
 function checkRateLimitMemory(
   key: string,
-  config: typeof rateLimitConfig[RateLimitType]
+  config: (typeof rateLimitConfig)[RateLimitType]
 ): {
   success: boolean;
   limit: number;
@@ -175,10 +182,10 @@ function checkRateLimitMemory(
   retryAfter?: number;
 } {
   const now = Date.now();
-  
+
   // Get or create entry
   let entry = memoryStore.get(key);
-  
+
   // Reset if window expired
   if (!entry || now > entry.resetTime) {
     entry = {
@@ -187,7 +194,7 @@ function checkRateLimitMemory(
     };
     memoryStore.set(key, entry);
   }
-  
+
   // Check if limit exceeded
   if (entry.count >= config.max) {
     const retryAfter = Math.ceil((entry.resetTime - now) / 1000);
@@ -199,10 +206,10 @@ function checkRateLimitMemory(
       retryAfter,
     };
   }
-  
+
   // Increment counter
   entry.count++;
-  
+
   return {
     success: true,
     limit: config.max,
@@ -227,13 +234,13 @@ export async function checkRateLimit(
   const config = rateLimitConfig[type];
   const clientId = getClientId(request);
   const key = `ratelimit:${type}:${clientId}`;
-  
+
   // Try Redis first, fallback to memory
   const redisResult = await checkRateLimitRedis(key, config);
   if (redisResult) {
     return redisResult;
   }
-  
+
   return checkRateLimitMemory(key, config);
 }
 
@@ -251,11 +258,11 @@ export function getRateLimitHeaders(result: {
     'X-RateLimit-Remaining': result.remaining.toString(),
     'X-RateLimit-Reset': new Date(result.reset).toISOString(),
   };
-  
+
   if (result.retryAfter) {
     headers['Retry-After'] = result.retryAfter.toString();
   }
-  
+
   return headers;
 }
 
@@ -273,7 +280,7 @@ export function createRateLimitResponse(
 ) {
   const config = rateLimitConfig[type];
   const headers = getRateLimitHeaders(result);
-  
+
   return new Response(
     JSON.stringify({
       error: 'RATE_LIMIT_EXCEEDED',
@@ -301,30 +308,32 @@ export function withRateLimit(
 ) {
   return async (request: NextRequest, context: any) => {
     // Skip rate limiting in development (optional)
-    if (process.env.NODE_ENV === 'development' && process.env.SKIP_RATE_LIMIT === 'true') {
+    if (
+      process.env.NODE_ENV === 'development' &&
+      process.env.SKIP_RATE_LIMIT === 'true'
+    ) {
       return handler(request, context);
     }
-    
+
     try {
       // Check rate limit
       const rateLimitResult = await checkRateLimit(request, type);
-      
+
       // If rate limit exceeded, return 429 response
       if (!rateLimitResult.success) {
         return createRateLimitResponse(type, rateLimitResult);
       }
-      
+
       // Execute the actual handler
       const response = await handler(request, context);
-      
+
       // Add rate limit headers to successful responses
       const rateLimitHeaders = getRateLimitHeaders(rateLimitResult);
       Object.entries(rateLimitHeaders).forEach(([key, value]) => {
         response.headers.set(key, value);
       });
-      
+
       return response;
-      
     } catch (error) {
       console.error('Rate limiting error:', error);
       // If rate limiting fails, allow the request to proceed
@@ -340,19 +349,27 @@ export function detectRateLimitType(pathname: string): RateLimitType {
   if (pathname.startsWith('/api/admin/')) {
     return 'admin';
   }
-  
+
   if (pathname.startsWith('/api/webhooks/') || pathname.includes('auth')) {
     return 'auth';
   }
-  
-  if (pathname.startsWith('/api/financial/') || pathname.includes('stocks') || pathname.includes('forex')) {
+
+  if (
+    pathname.startsWith('/api/financial/') ||
+    pathname.includes('stocks') ||
+    pathname.includes('forex')
+  ) {
     return 'financial';
   }
-  
-  if (pathname.includes('contact') || pathname.includes('consultation') || pathname.includes('newsletter')) {
+
+  if (
+    pathname.includes('contact') ||
+    pathname.includes('consultation') ||
+    pathname.includes('newsletter')
+  ) {
     return 'form';
   }
-  
+
   return 'api';
 }
 
@@ -361,23 +378,27 @@ export function detectRateLimitType(pathname: string): RateLimitType {
  */
 export async function globalRateLimit(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  
+
   // Skip rate limiting for static assets
-  if (pathname.startsWith('/_next/') || pathname.startsWith('/static/') || pathname.includes('.')) {
+  if (
+    pathname.startsWith('/_next/') ||
+    pathname.startsWith('/static/') ||
+    pathname.includes('.')
+  ) {
     return null;
   }
-  
+
   // Only apply to API routes
   if (!pathname.startsWith('/api/')) {
     return null;
   }
-  
+
   const type = detectRateLimitType(pathname);
   const rateLimitResult = await checkRateLimit(request, type);
-  
+
   if (!rateLimitResult.success) {
     return createRateLimitResponse(type, rateLimitResult);
   }
-  
+
   return getRateLimitHeaders(rateLimitResult);
 }

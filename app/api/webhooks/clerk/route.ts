@@ -5,8 +5,10 @@ import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { createAdminClient } from '@/lib/supabase/admin-client';
 import { logger } from '@/lib/debug-logger';
+import { createAdminClient } from '@/lib/supabase/admin-client';
+import { safeInsert, safeUpdate } from '@/lib/supabase/helpers';
+
 import { Database } from '@/types/supabase';
 
 type UserInsert = Database['public']['Tables']['users']['Insert'];
@@ -140,7 +142,7 @@ async function handleUserCreated(
       metadata: metadata,
     };
 
-    const { data, error } = await supabase.from('users').insert(insertData);
+    const { data, error } = await safeInsert(supabase, 'users', insertData);
 
     if (error) {
       throw new Error(`Supabase insert error: ${error.message}`);
@@ -185,10 +187,10 @@ async function handleUserUpdated(
       metadata: metadata,
     };
 
-    const { data, error } = await supabase
-      .from('users')
-      .update(updateData)
-      .eq('clerk_id', userData.id);
+    const { data, error } = await safeUpdate(supabase, 'users', updateData).eq(
+      'clerk_id',
+      userData.id
+    );
 
     if (error) {
       throw new Error(`Supabase update error: ${error.message}`);
@@ -212,10 +214,10 @@ async function handleUserDeleted(
       metadata: { deleted: true, deleted_at: new Date().toISOString() },
     };
 
-    const { data, error } = await supabase
-      .from('users')
-      .update(updateData)
-      .eq('clerk_id', userId);
+    const { data, error } = await safeUpdate(supabase, 'users', updateData).eq(
+      'clerk_id',
+      userId
+    );
 
     if (error) {
       throw new Error(`Supabase soft delete error: ${error.message}`);
@@ -238,10 +240,10 @@ async function handleSignIn(
       last_sign_in_at: new Date().toISOString(),
     };
 
-    const { data, error } = await supabase
-      .from('users')
-      .update(updateData)
-      .eq('clerk_id', userId);
+    const { data, error } = await safeUpdate(supabase, 'users', updateData).eq(
+      'clerk_id',
+      userId
+    );
 
     if (error) {
       throw new Error(`Supabase sign in update error: ${error.message}`);

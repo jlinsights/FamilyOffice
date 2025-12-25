@@ -6,8 +6,18 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+
 import { useUser } from '@clerk/nextjs';
-import { initializeBehavioralTracker, BehavioralTracker } from '@/lib/marketing/behavioral-tracker';
+
+import {
+  initializeBehavioralTracker,
+  BehavioralTracker,
+} from '@/lib/marketing/behavioral-tracker';
+
+/**
+ * 행동 추적 스크립트 컴포넌트
+ * 클라이언트 사이드에서 사용자 행동을 자동으로 추적
+ */
 
 interface TrackingScriptProps {
   contactId?: string;
@@ -37,8 +47,9 @@ export function TrackingScript({
     }
 
     // 추적할 콘택트 ID 결정
-    const effectiveContactId = contactId || user?.emailAddresses?.[0]?.emailAddress || '';
-    
+    const effectiveContactId =
+      contactId || user?.emailAddresses?.[0]?.emailAddress || '';
+
     // 콘택트 ID가 없으면 추적하지 않음
     if (!effectiveContactId) {
       if (debug) {
@@ -68,7 +79,6 @@ export function TrackingScript({
           sessionId: sessionIdRef.current,
         });
       }
-
     } catch (error) {
       console.error('행동 추적기 초기화 실패:', error);
     }
@@ -80,23 +90,24 @@ export function TrackingScript({
       }
     };
   }, [
-    contactId, 
-    user?.id, 
+    contactId,
+    user?.id,
     user?.emailAddresses,
     enablePageTracking,
     enableScrollTracking,
     enableTimeTracking,
     enableFormTracking,
-    debug
+    debug,
   ]);
 
   // 콘택트 ID 변경 시 업데이트
   useEffect(() => {
-    const effectiveContactId = contactId || user?.emailAddresses?.[0]?.emailAddress || '';
-    
+    const effectiveContactId =
+      contactId || user?.emailAddresses?.[0]?.emailAddress || '';
+
     if (trackerRef.current && effectiveContactId) {
       trackerRef.current.updateContactId(effectiveContactId);
-      
+
       if (debug) {
         console.log('🔄 콘택트 ID 업데이트:', effectiveContactId);
       }
@@ -114,17 +125,25 @@ export function useEventTracking() {
 
   // 전역 추적기 가져오기
   useEffect(() => {
-    const { getBehavioralTracker } = require('@/lib/marketing/behavioral-tracker');
+    const {
+      getBehavioralTracker,
+    } = require('@/lib/marketing/behavioral-tracker');
     trackerRef.current = getBehavioralTracker();
   }, []);
 
-  const trackEvent = async (eventName: string, eventData?: Record<string, any>) => {
+  const trackEvent = async (
+    eventName: string,
+    eventData?: Record<string, any>
+  ) => {
     if (trackerRef.current) {
       await trackerRef.current.trackCustomEvent(eventName, eventData || {});
     }
   };
 
-  const trackConsultationRequest = async (serviceType: string, formData: Record<string, any>) => {
+  const trackConsultationRequest = async (
+    serviceType: string,
+    formData: Record<string, any>
+  ) => {
     await trackEvent('consultation_request', {
       service_type: serviceType,
       form_data: formData,
@@ -140,7 +159,11 @@ export function useEventTracking() {
     });
   };
 
-  const trackVideoEngagement = async (videoId: string, action: 'play' | 'pause' | 'complete', progress?: number) => {
+  const trackVideoEngagement = async (
+    videoId: string,
+    action: 'play' | 'pause' | 'complete',
+    progress?: number
+  ) => {
     await trackEvent('video_engagement', {
       video_id: videoId,
       action,
@@ -149,7 +172,10 @@ export function useEventTracking() {
     });
   };
 
-  const trackServiceInquiry = async (serviceCategory: string, inquiryDetails: Record<string, any>) => {
+  const trackServiceInquiry = async (
+    serviceCategory: string,
+    inquiryDetails: Record<string, any>
+  ) => {
     await trackEvent('service_inquiry', {
       service_category: serviceCategory,
       inquiry_details: inquiryDetails,
@@ -169,7 +195,11 @@ export function useEventTracking() {
 /**
  * HubSpot 웹훅과 연동하기 위한 추적 컴포넌트
  */
-export function HubSpotTrackingScript({ hubspotContactId }: { hubspotContactId: string }) {
+export function HubSpotTrackingScript({
+  hubspotContactId,
+}: {
+  hubspotContactId: string;
+}) {
   return (
     <TrackingScript
       contactId={hubspotContactId}
@@ -213,7 +243,11 @@ export function AdvancedTrackingScript({
     if (customEvents.trackOutboundLinks) {
       const handleLinkClick = (event: MouseEvent) => {
         const target = event.target as HTMLAnchorElement;
-        if (target.tagName === 'A' && target.href && !target.href.includes(window.location.hostname)) {
+        if (
+          target.tagName === 'A' &&
+          target.href &&
+          !target.href.includes(window.location.hostname)
+        ) {
           trackEvent('outbound_link_click', {
             link_url: target.href,
             link_text: target.textContent?.substring(0, 100) || '',
@@ -234,9 +268,21 @@ export function AdvancedTrackingScript({
       const handleDownloadClick = (event: MouseEvent) => {
         const target = event.target as HTMLAnchorElement;
         if (target.tagName === 'A' && target.href) {
-          const fileExtensions = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.zip', '.rar'];
-          const hasFileExtension = fileExtensions.some(ext => target.href.toLowerCase().includes(ext));
-          
+          const fileExtensions = [
+            '.pdf',
+            '.doc',
+            '.docx',
+            '.xls',
+            '.xlsx',
+            '.ppt',
+            '.pptx',
+            '.zip',
+            '.rar',
+          ];
+          const hasFileExtension = fileExtensions.some(ext =>
+            target.href.toLowerCase().includes(ext)
+          );
+
           if (hasFileExtension) {
             trackEvent('file_download', {
               file_url: target.href,
@@ -268,7 +314,8 @@ export function AdvancedTrackingScript({
 
       const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
         trackEvent('unhandled_promise_rejection', {
-          error_reason: event.reason?.toString()?.substring(0, 200) || 'Unknown',
+          error_reason:
+            event.reason?.toString()?.substring(0, 200) || 'Unknown',
           page_context: window.location.pathname,
         });
       };
@@ -278,7 +325,10 @@ export function AdvancedTrackingScript({
 
       return () => {
         window.removeEventListener('error', handleError);
-        window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+        window.removeEventListener(
+          'unhandledrejection',
+          handleUnhandledRejection
+        );
       };
     }
     return () => {}; // 빈 cleanup 함수

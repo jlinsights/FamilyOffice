@@ -108,8 +108,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'family-office-basics-guide': {
     id: 'family-office-basics-guide',
     title: '패밀리오피스란 무엇인가',
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
+    image:
+      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '과거 초고액 자산가들만의 전유물로 여겨졌던 패밀리오피스가 이제는 중견기업과 성공한 창업가들 사이에서 빠르게 확산되고 있습니다. 단순히 부를 물려주는 것이 아닌, 대표님의 철학과 가치를 담아 다음 세대의 행복을 설계하는 현대적 패밀리오피스의 진정한 의미를 알아보세요.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -390,7 +392,18 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-08-13',
     readTime: '12분',
-    tags: ['패밀리오피스', '가업승계', '자산관리', '상속세', '중견기업', 'MFO', '디지털패밀리오피스', '가문경영', '세무전략', '투자다각화'],
+    tags: [
+      '패밀리오피스',
+      '가업승계',
+      '자산관리',
+      '상속세',
+      '중견기업',
+      'MFO',
+      '디지털패밀리오피스',
+      '가문경영',
+      '세무전략',
+      '투자다각화',
+    ],
     slug: 'family-office-basics-guide',
     featured: true,
   },
@@ -398,8 +411,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'asset-management-strategy': {
     id: 'asset-management-strategy',
     title: '체계적인 자산관리 전략',
-    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '중견기업 CEO를 위한 체계적인 자산관리 전략. 기업 지분부터 대체투자까지, 전문가가 제시하는 포트폴리오 구성의 핵심 원칙과 실행 방안을 담았습니다.',
+    image:
+      'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '중견기업 CEO를 위한 체계적인 자산관리 전략. 기업 지분부터 대체투자까지, 전문가가 제시하는 포트폴리오 구성의 핵심 원칙과 실행 방안을 담았습니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">CEO 자산관리의 새로운 패러다임</h1>
@@ -821,7 +836,8 @@ export const blogPosts: Record<string, BlogPost> = {
   'tax-optimization-basics': {
     id: 'tax-optimization-basics',
     title: '중견기업을 위한 절세 전략',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&auto=format&fit=crop',
+    image:
+      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&auto=format&fit=crop',
     excerpt: '합법적이고 효과적인 절세 방법과 상속세 대비 전략을 알아봅니다.',
     content: `# 중견기업을 위한 절세 전략
 
@@ -850,12 +866,13 @@ export const blogPosts: Record<string, BlogPost> = {
     featured: true,
   },
 
-
   'succession-planning-guide': {
     id: 'succession-planning-guide',
     title: '성공적인 기업 승계를 위한 준비',
-    image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '기업 승계 과정에서 고려해야 할 법적, 세무적, 경영적 요소들을 정리했습니다.',
+    image:
+      'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '기업 승계 과정에서 고려해야 할 법적, 세무적, 경영적 요소들을 정리했습니다.',
     content: `# 성공적인 기업 승계를 위한 준비
 
 기업 승계는 단순한 소유권 이전이 아닙니다. 기업의 지속가능성과 가족의 화합을 위한 종합적인 계획이 필요합니다.
@@ -892,8 +909,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'digital-transformation-finance': {
     id: 'digital-transformation-finance',
     title: '금융업계의 디지털 혁신',
-    image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '핀테크와 디지털 기술이 자산관리 업계에 가져온 변화와 기회를 살펴봅니다.',
+    image:
+      'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '핀테크와 디지털 기술이 자산관리 업계에 가져온 변화와 기회를 살펴봅니다.',
     content: `# 금융업계의 디지털 혁신
 
 디지털 기술의 발전은 자산관리 업계에 근본적인 변화를 가져오고 있습니다. 인공지능, 빅데이터, 블록체인 등의 기술이 새로운 서비스와 기회를 창출하고 있습니다.
@@ -931,8 +950,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'business-succession-2024-analysis': {
     id: 'business-succession-2024-analysis',
     title: '2024년 가업승계 성공 요인 분석',
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '성공적인 가업승계를 위한 핵심 요소들과 2024년 트렌드를 분석합니다.',
+    image:
+      'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '성공적인 가업승계를 위한 핵심 요소들과 2024년 트렌드를 분석합니다.',
     content: `# 2024년 가업승계 성공 요인 분석
 
 2024년은 한국 중견기업들에게 가업승계의 중요한 전환점이 되는 해입니다. 창업 1세대에서 2세대로의 경영권 이양이 본격화되는 시기로, 성공적인 승계를 위한 전략이 그 어느 때보다 중요합니다.
@@ -966,14 +987,14 @@ export const blogPosts: Record<string, BlogPost> = {
     featured: true,
   },
 
-
-
   // 세무·법무 인사이트 카테고리
   'inheritance-tax-reform-analysis': {
     id: 'inheritance-tax-reform-analysis',
     title: '상속세법 개정안 영향 분석',
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '최근 상속세법 개정안이 중견기업 가업승계에 미치는 영향을 상세히 분석합니다.',
+    image:
+      'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '최근 상속세법 개정안이 중견기업 가업승계에 미치는 영향을 상세히 분석합니다.',
     content: `# 상속세법 개정안 영향 분석
 
 2024년 발표된 상속세법 개정안은 중견기업의 가업승계에 상당한 영향을 미칠 것으로 예상됩니다. 주요 변경사항과 대응 전략을 살펴보겠습니다.
@@ -1022,8 +1043,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'family-business-governance-optimization': {
     id: 'family-business-governance-optimization',
     title: '가족기업 지배구조 최적화 방안',
-    image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '가족기업의 효율적인 지배구조 구축을 위한 실무적 가이드라인을 제공합니다.',
+    image:
+      'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '가족기업의 효율적인 지배구조 구축을 위한 실무적 가이드라인을 제공합니다.',
     content: `# 가족기업 지배구조 최적화 방안
 
 가족기업의 지속 가능한 성장을 위해서는 투명하고 효율적인 지배구조가 필수입니다. 가족 구성원과 전문 경영진 간의 역할 분담과 책임 체계를 명확히 하는 것이 핵심입니다.
@@ -1073,8 +1096,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'singapore-family-office-trends': {
     id: 'singapore-family-office-trends',
     title: '싱가포르 패밀리오피스 최신 동향',
-    image: 'https://images.unsplash.com/photo-1565967511849-76a60a516170?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '아시아 패밀리오피스 허브로 부상한 싱가포르의 최신 동향과 시사점을 분석합니다.',
+    image:
+      'https://images.unsplash.com/photo-1565967511849-76a60a516170?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '아시아 패밀리오피스 허브로 부상한 싱가포르의 최신 동향과 시사점을 분석합니다.',
     content: `# 싱가포르 패밀리오피스 최신 동향
 
 싱가포르는 아시아 태평양 지역의 대표적인 패밀리오피스 허브로 자리잡고 있습니다. 2024년 현재 400개 이상의 패밀리오피스가 설립되어 운영 중이며, 이들이 관리하는 자산 규모는 3,000억 달러를 넘어섰습니다.
@@ -1129,8 +1154,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'hospital-mso-guide-tax-saving-strategy': {
     id: 'hospital-mso-guide-tax-saving-strategy',
     title: '병원경영지원회사(MSO) 설립 가이드와 절세 전략',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '병원의 수익성 개선과 세금 절감을 위한 MSO 설립의 모든 것. 의료진 특화 세무 전략부터 실무 설립 절차까지, 10년차 컨설턴트가 전하는 완벽한 실무 가이드입니다.',
+    image:
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '병원의 수익성 개선과 세금 절감을 위한 MSO 설립의 모든 것. 의료진 특화 세무 전략부터 실무 설립 절차까지, 10년차 컨설턴트가 전하는 완벽한 실무 가이드입니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -1621,8 +1648,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'us-trust-strategies': {
     id: 'us-trust-strategies',
     title: '미국 신탁 제도 활용 전략',
-    image: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '미국의 다양한 신탁 제도를 활용한 자산 보전 및 승계 전략을 소개합니다.',
+    image:
+      'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '미국의 다양한 신탁 제도를 활용한 자산 보전 및 승계 전략을 소개합니다.',
     content: `# 미국 신탁 제도 활용 전략
 
 미국의 신탁 제도는 세계에서 가장 발달하고 다양한 형태를 가지고 있습니다. 한국의 고액 자산가들도 글로벌 자산관리의 일환으로 미국 신탁을 적극 활용하고 있습니다.
@@ -1687,7 +1716,8 @@ export const blogPosts: Record<string, BlogPost> = {
   'high-net-worth-real-estate-portfolio': {
     id: 'high-net-worth-real-estate-portfolio',
     title: '고액자산가 부동산 포트폴리오 구성법',
-    excerpt: '고액자산가를 위한 전략적 부동산 포트폴리오 구성 방법과 리스크 관리 전략을 제시합니다.',
+    excerpt:
+      '고액자산가를 위한 전략적 부동산 포트폴리오 구성 방법과 리스크 관리 전략을 제시합니다.',
     content: `# 고액자산가 부동산 포트폴리오 구성법
 
 부동산은 고액자산가들의 포트폴리오에서 핵심적인 역할을 합니다. 안정적인 현금흐름과 인플레이션 헤지 효과, 그리고 장기적인 자산 가치 상승을 기대할 수 있는 투자처입니다.
@@ -1767,7 +1797,8 @@ export const blogPosts: Record<string, BlogPost> = {
   'alternative-investment-market-outlook': {
     id: 'alternative-investment-market-outlook',
     title: '대체투자 시장 전망과 기회',
-    excerpt: '2025년 대체투자 시장의 주요 트렌드와 고액자산가를 위한 투자 기회를 분석합니다.',
+    excerpt:
+      '2025년 대체투자 시장의 주요 트렌드와 고액자산가를 위한 투자 기회를 분석합니다.',
     content: `# 대체투자 시장 전망과 기회
 
 전통적인 주식과 채권을 넘어서는 대체투자는 고액자산가들의 포트폴리오에서 점점 중요한 비중을 차지하고 있습니다. 2025년 대체투자 시장의 전망과 주요 기회를 살펴보겠습니다.
@@ -1872,8 +1903,10 @@ export const blogPosts: Record<string, BlogPost> = {
   'investment-strategy-2025': {
     id: 'investment-strategy-2025',
     title: '2025년 자산관리 트렌드와 고액자산가를 위한 투자 전략',
-    image: 'https://images.unsplash.com/photo-1611974765270-ca1258634369?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '금리 인하 사이클의 본격화와 지정학적 리스크의 공존. 2025년, 고액자산가가 주목해야 할 투자 트렌드와 변동성을 이기는 자산 배분 전략을 심층 분석합니다.',
+    image:
+      'https://images.unsplash.com/photo-1611974765270-ca1258634369?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '금리 인하 사이클의 본격화와 지정학적 리스크의 공존. 2025년, 고액자산가가 주목해야 할 투자 트렌드와 변동성을 이기는 자산 배분 전략을 심층 분석합니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -2045,28 +2078,31 @@ export const blogPosts: Record<string, BlogPost> = {
     faq: [
       {
         question: '2025년 자산관리의 핵심 키워드는 무엇인가요?',
-        answer: '2025년은 \'금리 인하\'와 \'AI 혁명\'이 교차하는 시기입니다. 채권으로 안정적인 인컴을 확보하고, AI 관련 퀄리티 성장주에 집중하며, 사모 대출 등 대체투자로 포트폴리오를 다변화하는 것이 핵심입니다.'
+        answer:
+          "2025년은 '금리 인하'와 'AI 혁명'이 교차하는 시기입니다. 채권으로 안정적인 인컴을 확보하고, AI 관련 퀄리티 성장주에 집중하며, 사모 대출 등 대체투자로 포트폴리오를 다변화하는 것이 핵심입니다.",
       },
       {
         question: '금리 인하 시기에 채권 투자는 어떻게 해야 하나요?',
-        answer: '금리가 하락하면 채권 가격은 상승합니다. 따라서 장기 국채나 우량 회사채를 미리 확보하여 자본 차익과 이자 수익을 동시에 노리는 전략이 유효합니다.'
+        answer:
+          '금리가 하락하면 채권 가격은 상승합니다. 따라서 장기 국채나 우량 회사채를 미리 확보하여 자본 차익과 이자 수익을 동시에 노리는 전략이 유효합니다.',
       },
       {
         question: '고액자산가가 주목해야 할 리스크 관리 방법은?',
-        answer: '지정학적 위기와 화폐 가치 하락에 대비해 금(Gold) 비중을 늘리고, 현금성 자산을 확보하여 시장 변동성에 유연하게 대응해야 합니다.'
-      }
+        answer:
+          '지정학적 위기와 화폐 가치 하락에 대비해 금(Gold) 비중을 늘리고, 현금성 자산을 확보하여 시장 변동성에 유연하게 대응해야 합니다.',
+      },
     ],
   },
-
-
 
   // 새로 추가된 뉴스레터 기반 블로그 포스트들
 
   'corporate-funds-personalization-strategy': {
     id: 'corporate-funds-personalization-strategy',
-    title: '법인 자금의 개인화, \'가지급금\'과 \'이익잉여금\'의 늪에서 탈출하는 법',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '회사는 부자인데 대표님은 가난하다? 법인에 묶인 자금을 가장 안전하고 효율적으로 개인화하는 4가지 핵심 전략(배당, 급여, 퇴직금, 자사주)을 공개합니다.',
+    title: "법인 자금의 개인화, '가지급금'과 '이익잉여금'의 늪에서 탈출하는 법",
+    image:
+      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '회사는 부자인데 대표님은 가난하다? 법인에 묶인 자금을 가장 안전하고 효율적으로 개인화하는 4가지 핵심 전략(배당, 급여, 퇴직금, 자사주)을 공개합니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">법인 자금의 개인화,<br/>'가지급금'과 '이익잉여금'의 늪에서 탈출하는 법</h1>
@@ -2198,30 +2234,43 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-12-04',
     readTime: '13분',
-    tags: ['가지급금', '이익잉여금', '배당전략', '자사주매입', '이익소각', '법인자금개인화', 'CEO플랜'],
+    tags: [
+      '가지급금',
+      '이익잉여금',
+      '배당전략',
+      '자사주매입',
+      '이익소각',
+      '법인자금개인화',
+      'CEO플랜',
+    ],
     slug: 'corporate-funds-personalization-strategy',
     featured: true,
     faq: [
       {
         question: '가지급금을 가장 빨리 해결하는 방법은 무엇인가요?',
-        answer: '대표이사 개인 자산으로 상환하는 것이 원칙이나, 자금이 부족하다면 자사주 매입(이익 소각)이나 급여/상여 인상, 퇴직금 중간 정산(요건 충족 시) 등을 통해 마련한 자금으로 상환할 수 있습니다.'
+        answer:
+          '대표이사 개인 자산으로 상환하는 것이 원칙이나, 자금이 부족하다면 자사주 매입(이익 소각)이나 급여/상여 인상, 퇴직금 중간 정산(요건 충족 시) 등을 통해 마련한 자금으로 상환할 수 있습니다.',
       },
       {
         question: '이익 소각 시 주의할 점은 무엇인가요?',
-        answer: '주식 시가 평가의 적정성, 상법상 절차 준수(주주총회 등), 그리고 자금 출처 소명 등이 중요합니다. 국세청은 이를 실질적인 배당으로 보아 과세할 수 있으므로 전문가의 도움을 받아 정교하게 실행해야 합니다.'
+        answer:
+          '주식 시가 평가의 적정성, 상법상 절차 준수(주주총회 등), 그리고 자금 출처 소명 등이 중요합니다. 국세청은 이를 실질적인 배당으로 보아 과세할 수 있으므로 전문가의 도움을 받아 정교하게 실행해야 합니다.',
       },
       {
         question: '차등 배당은 증여세 문제가 없나요?',
-        answer: '과거에는 소득세와 증여세 중 큰 금액만 과세되었으나, 세법 개정으로 초과 배당 금액에 대한 소득세와 증여세가 비교 과세되거나 합산 과세될 수 있으므로 실익을 따져봐야 합니다.'
-      }
+        answer:
+          '과거에는 소득세와 증여세 중 큰 금액만 과세되었으나, 세법 개정으로 초과 배당 금액에 대한 소득세와 증여세가 비교 과세되거나 합산 과세될 수 있으므로 실익을 따져봐야 합니다.',
+      },
     ],
   },
 
   'real-estate-corporation-conversion-pros-cons': {
     id: 'real-estate-corporation-conversion-pros-cons',
-    title: '2025년 부동산 법인 전환, 여전히 유효한 \'절세 치트키\'인가?',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '취득세 중과, 종부세 강화 등 잇따른 규제 속에서도 부동산 법인 전환이 유리한 이유는 무엇일까요? 개인 임대사업자가 반드시 알아야 할 법인 전환의 득과 실, 그리고 2025년 핵심 전략을 분석합니다.',
+    title: "2025년 부동산 법인 전환, 여전히 유효한 '절세 치트키'인가?",
+    image:
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '취득세 중과, 종부세 강화 등 잇따른 규제 속에서도 부동산 법인 전환이 유리한 이유는 무엇일까요? 개인 임대사업자가 반드시 알아야 할 법인 전환의 득과 실, 그리고 2025년 핵심 전략을 분석합니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">2025년 부동산 법인 전환,<br/>여전히 유효한 '절세 치트키'인가?</h1>
@@ -2362,30 +2411,43 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-12-05',
     readTime: '15분',
-    tags: ['부동산법인', '법인전환', '양도소득세이월과세', '취득세중과', '종부세', '성실신고확인제도', '가업승계'],
+    tags: [
+      '부동산법인',
+      '법인전환',
+      '양도소득세이월과세',
+      '취득세중과',
+      '종부세',
+      '성실신고확인제도',
+      '가업승계',
+    ],
     slug: 'real-estate-corporation-conversion-pros-cons',
     featured: true,
     faq: [
       {
         question: '부동산 법인 전환 시 취득세는 얼마나 나오나요?',
-        answer: '현물출자 방식으로 전환 시 취득세의 75%를 감면받을 수 있습니다. (단, 농어촌특별세는 감면 제외) 하지만 과밀억제권역 내 법인 설립 등 중과세 요건에 해당하면 감면 혜택이 배제될 수 있으니 주의해야 합니다.'
+        answer:
+          '현물출자 방식으로 전환 시 취득세의 75%를 감면받을 수 있습니다. (단, 농어촌특별세는 감면 제외) 하지만 과밀억제권역 내 법인 설립 등 중과세 요건에 해당하면 감면 혜택이 배제될 수 있으니 주의해야 합니다.',
       },
       {
         question: '법인 전환 후 자금 회수는 어떻게 하나요?',
-        answer: '대표이사의 급여, 배당, 퇴직금 등을 통해 회수할 수 있습니다. 특히 법인 전환 시 발생한 영업권(Goodwill)을 평가하여 법인에 양도하면, 대표이사는 60% 필요경비가 인정되는 기타소득으로 자금을 회수할 수 있어 절세 효과가 큽니다.'
+        answer:
+          '대표이사의 급여, 배당, 퇴직금 등을 통해 회수할 수 있습니다. 특히 법인 전환 시 발생한 영업권(Goodwill)을 평가하여 법인에 양도하면, 대표이사는 60% 필요경비가 인정되는 기타소득으로 자금을 회수할 수 있어 절세 효과가 큽니다.',
       },
       {
         question: '1주택자도 법인 전환이 유리한가요?',
-        answer: '1세대 1주택 비과세 혜택을 받을 수 있는 고가 주택이라면 개인 명의 유지가 유리할 수 있습니다. 하지만 다주택자이거나 상가, 빌딩 등 수익형 부동산을 보유한 경우에는 법인 전환이 유리한 경우가 많습니다.'
-      }
+        answer:
+          '1세대 1주택 비과세 혜택을 받을 수 있는 고가 주택이라면 개인 명의 유지가 유리할 수 있습니다. 하지만 다주택자이거나 상가, 빌딩 등 수익형 부동산을 보유한 경우에는 법인 전환이 유리한 경우가 많습니다.',
+      },
     ],
   },
 
   'children-startup-fund-gift-strategy': {
     id: 'children-startup-fund-gift-strategy',
-    title: '자녀의 홀로서기를 돕는 \'창업자금 증여세 과세특례\' 100% 활용법',
-    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '자녀에게 5억 원까지 세금 없이, 50억 원까지는 10%의 낮은 세율로 증여할 수 있는 기회. 가업승계의 대안으로 떠오르는 창업자금 증여세 과세특례 제도의 모든 것을 10년 차 컨설턴트가 정리해 드립니다.',
+    title: "자녀의 홀로서기를 돕는 '창업자금 증여세 과세특례' 100% 활용법",
+    image:
+      'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '자녀에게 5억 원까지 세금 없이, 50억 원까지는 10%의 낮은 세율로 증여할 수 있는 기회. 가업승계의 대안으로 떠오르는 창업자금 증여세 과세특례 제도의 모든 것을 10년 차 컨설턴트가 정리해 드립니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">자녀의 홀로서기를 돕는<br/>'창업자금 증여세 과세특례' 100% 활용법</h1>
@@ -2533,36 +2595,43 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-12-09',
     readTime: '12분',
-    tags: ['창업자금증여', '증여세과세특례', '5억원비과세', '가업승계', '청년창업', '절세전략', '패밀리오피스'],
+    tags: [
+      '창업자금증여',
+      '증여세과세특례',
+      '5억원비과세',
+      '가업승계',
+      '청년창업',
+      '절세전략',
+      '패밀리오피스',
+    ],
     slug: 'children-startup-fund-gift-strategy',
     featured: true,
     faq: [
       {
         question: '창업 후 폐업하면 증여세는 어떻게 되나요?',
-        answer: '창업 후 10년 이내에 정당한 사유 없이 폐업하거나 휴업하는 경우, 증여세와 이자 상당액(연 8% 수준)을 추징당하게 됩니다. 따라서 사업의 지속 가능성을 충분히 검토한 후 실행해야 합니다.'
+        answer:
+          '창업 후 10년 이내에 정당한 사유 없이 폐업하거나 휴업하는 경우, 증여세와 이자 상당액(연 8% 수준)을 추징당하게 됩니다. 따라서 사업의 지속 가능성을 충분히 검토한 후 실행해야 합니다.',
       },
       {
         question: '음식점이나 카페 창업도 가능한가요?',
-        answer: '네, 가능합니다. 음식점업은 창업 중소기업 감면 대상 업종에 포함됩니다. 하지만 일반 유흥주점이나 부동산 임대업은 대상에서 제외됩니다.'
+        answer:
+          '네, 가능합니다. 음식점업은 창업 중소기업 감면 대상 업종에 포함됩니다. 하지만 일반 유흥주점이나 부동산 임대업은 대상에서 제외됩니다.',
       },
       {
         question: '증여받은 돈으로 건물을 사서 사업을 해도 되나요?',
-        answer: '네, 창업을 위해 사업용 자산(토지, 건물 등)을 취득하는 것은 가능합니다. 단, 해당 부동산을 임대 목적으로 사용하면 안 되며, 반드시 본인의 사업장으로 직접 사용해야 합니다.'
-      }
+        answer:
+          '네, 창업을 위해 사업용 자산(토지, 건물 등)을 취득하는 것은 가능합니다. 단, 해당 부동산을 임대 목적으로 사용하면 안 되며, 반드시 본인의 사업장으로 직접 사용해야 합니다.',
+      },
     ],
   },
-
-
-
-
-
-
 
   'retained-earnings-dividend-strategy-ceo-asset-optimization': {
     id: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
     title: '대표님의 숨은 자산 이익잉여금을 깨울 시간입니다',
-    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '기업의 이익잉여금을 효과적으로 활용하여 개인 자산화하는 전략과 절세 방안을 제시합니다. 회사는 부자인데, 왜 대표님은 현금이 없으십니까? 평생을 바쳐 회사를 키운 대표님께서 정작 본인의 노후 자금이나 자녀 승계 자금이 부족해 고민하는 "부자 기업, 가난한 사장"의 역설을 해결하는 전략적 출구 전략입니다.',
+    image:
+      'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '기업의 이익잉여금을 효과적으로 활용하여 개인 자산화하는 전략과 절세 방안을 제시합니다. 회사는 부자인데, 왜 대표님은 현금이 없으십니까? 평생을 바쳐 회사를 키운 대표님께서 정작 본인의 노후 자금이나 자녀 승계 자금이 부족해 고민하는 "부자 기업, 가난한 사장"의 역설을 해결하는 전략적 출구 전략입니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -2769,15 +2838,26 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-12-02',
     readTime: '15분',
-    tags: ['이익잉여금', '배당전략', '차등배당', '자사주매입', 'CEO자산최적화', '상속세절세', '가업승계'],
+    tags: [
+      '이익잉여금',
+      '배당전략',
+      '차등배당',
+      '자사주매입',
+      'CEO자산최적화',
+      '상속세절세',
+      '가업승계',
+    ],
     slug: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
     featured: true,
   },
   'corporate-treasury-stock-retirement-2025-tax-analysis': {
     id: 'corporate-treasury-stock-retirement-2025-tax-analysis',
-    title: '[2025 세법] 자기주식 이익소각: CEO를 위한 가장 확실한 엑시트(Exit) 전략인가?',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '배당보다 낮은 세율로 잉여금을 회수하고, 가지급금 문제까지 해결할 수 있는 자기주식 이익소각. 하지만 국세청의 검증은 더욱 강화되고 있습니다. 2025년, 안전하고 효과적인 실행을 위한 전문가의 심층 분석.',
+    title:
+      '[2025 세법] 자기주식 이익소각: CEO를 위한 가장 확실한 엑시트(Exit) 전략인가?',
+    image:
+      'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '배당보다 낮은 세율로 잉여금을 회수하고, 가지급금 문제까지 해결할 수 있는 자기주식 이익소각. 하지만 국세청의 검증은 더욱 강화되고 있습니다. 2025년, 안전하고 효과적인 실행을 위한 전문가의 심층 분석.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -2987,15 +3067,26 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-01-15',
     readTime: '15분',
-    tags: ['자기주식소각', '이익소각', '가지급금해결', '이익잉여금', '양도소득세', '의제배당', '2025세법'],
+    tags: [
+      '자기주식소각',
+      '이익소각',
+      '가지급금해결',
+      '이익잉여금',
+      '양도소득세',
+      '의제배당',
+      '2025세법',
+    ],
     slug: 'corporate-treasury-stock-retirement-2025-tax-analysis',
     featured: true,
   },
   'corporate-life-insurance-ceo-risk-management': {
     id: 'corporate-life-insurance-ceo-risk-management',
-    title: 'CEO의 부재(不在), 기업의 위기가 되지 않으려면: 경영인 정기보험(CEO Plan)의 재발견',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop',
-    excerpt: 'CEO의 갑작스러운 유고는 기업 생존을 위협하는 최대의 리스크입니다. 유족 보상금, 상속세 재원, 그리고 법인세 절세까지. 경영인 정기보험이 단순한 보험을 넘어 기업의 필수 안전장치인 이유를 10년 차 컨설턴트가 분석합니다.',
+    title:
+      'CEO의 부재(不在), 기업의 위기가 되지 않으려면: 경영인 정기보험(CEO Plan)의 재발견',
+    image:
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      'CEO의 갑작스러운 유고는 기업 생존을 위협하는 최대의 리스크입니다. 유족 보상금, 상속세 재원, 그리고 법인세 절세까지. 경영인 정기보험이 단순한 보험을 넘어 기업의 필수 안전장치인 이유를 10년 차 컨설턴트가 분석합니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -3184,29 +3275,43 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-02-10',
     readTime: '14분',
-    tags: ['CEO유고', '경영인정기보험', 'CEO플랜', '법인세절세', '상속세재원', '가지급금상환', '기업리스크관리'],
+    tags: [
+      'CEO유고',
+      '경영인정기보험',
+      'CEO플랜',
+      '법인세절세',
+      '상속세재원',
+      '가지급금상환',
+      '기업리스크관리',
+    ],
     slug: 'corporate-life-insurance-ceo-risk-management',
     featured: true,
     faq: [
       {
         question: '경영인 정기보험은 비용 처리가 가능한가요?',
-        answer: '네, 법인이 계약하고 수익자가 되는 경우 납입 보험료를 비용(손금)으로 처리하여 법인세를 절감할 수 있습니다. 단, 상품 종류와 가입 시기에 따라 손금 인정 비율이 다를 수 있습니다.'
+        answer:
+          '네, 법인이 계약하고 수익자가 되는 경우 납입 보험료를 비용(손금)으로 처리하여 법인세를 절감할 수 있습니다. 단, 상품 종류와 가입 시기에 따라 손금 인정 비율이 다를 수 있습니다.',
       },
       {
         question: 'CEO 유고 시 보험금은 어떻게 활용되나요?',
-        answer: '법인으로 지급된 사망보험금은 긴급 자금으로 대출 상환에 쓰이거나, 유족들에게 퇴직금 또는 위로금 형태로 지급되어 상속세 재원으로 활용될 수 있습니다.'
+        answer:
+          '법인으로 지급된 사망보험금은 긴급 자금으로 대출 상환에 쓰이거나, 유족들에게 퇴직금 또는 위로금 형태로 지급되어 상속세 재원으로 활용될 수 있습니다.',
       },
       {
         question: '해지환급금은 어떻게 활용하나요?',
-        answer: 'CEO 은퇴 시점에 맞춰 해지하여 퇴직금 재원으로 활용할 수 있습니다. 이를 위해서는 정관에 임원 퇴직금 지급 규정이 명확히 마련되어 있어야 합니다.'
-      }
+        answer:
+          'CEO 은퇴 시점에 맞춰 해지하여 퇴직금 재원으로 활용할 수 있습니다. 이를 위해서는 정관에 임원 퇴직금 지급 규정이 명확히 마련되어 있어야 합니다.',
+      },
     ],
   },
   'mid-sized-company-succession-issues': {
     id: 'mid-sized-company-succession-issues',
-    title: '중견기업 승계, \'세금\'보다 무서운 것은 \'준비 없는 이별\'입니다: 10년 차 컨설턴트의 제언',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '상속세 최고세율 60%의 공포, 그리고 경영권 분쟁의 리스크. 중견기업 승계의 성공과 실패를 가르는 결정적 차이와 골든타임 전략을 심층 분석합니다.',
+    title:
+      "중견기업 승계, '세금'보다 무서운 것은 '준비 없는 이별'입니다: 10년 차 컨설턴트의 제언",
+    image:
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '상속세 최고세율 60%의 공포, 그리고 경영권 분쟁의 리스크. 중견기업 승계의 성공과 실패를 가르는 결정적 차이와 골든타임 전략을 심층 분석합니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -3349,29 +3454,42 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-02-20',
     readTime: '16분',
-    tags: ['가업승계', '상속세', '증여세과세특례', '경영권방어', '지배구조개편', '유류분반환청구', '패밀리오피스'],
+    tags: [
+      '가업승계',
+      '상속세',
+      '증여세과세특례',
+      '경영권방어',
+      '지배구조개편',
+      '유류분반환청구',
+      '패밀리오피스',
+    ],
     slug: 'mid-sized-company-succession-issues',
     featured: true,
     faq: [
       {
         question: '가업승계 시 가장 큰 리스크는 무엇인가요?',
-        answer: '최대 60%에 달하는 상속세 부담과 준비 없는 승계로 인한 가족 간 경영권 분쟁이 가장 큰 리스크입니다.'
+        answer:
+          '최대 60%에 달하는 상속세 부담과 준비 없는 승계로 인한 가족 간 경영권 분쟁이 가장 큰 리스크입니다.',
       },
       {
         question: '가업상속공제란 무엇인가요?',
-        answer: '일정 요건을 갖춘 중소·중견기업을 승계할 때, 가업상속재산 가액의 일부(최대 600억 원)를 상속세 과세가액에서 공제해 주는 제도입니다.'
+        answer:
+          '일정 요건을 갖춘 중소·중견기업을 승계할 때, 가업상속재산 가액의 일부(최대 600억 원)를 상속세 과세가액에서 공제해 주는 제도입니다.',
       },
       {
         question: '승계 준비는 언제부터 시작해야 하나요?',
-        answer: '최소 10년 이상의 장기적인 계획이 필요합니다. 주가가 낮을 때 사전 증여를 실행하고, 지배구조를 개편하며, 후계자를 육성하는 시간을 확보해야 합니다.'
-      }
+        answer:
+          '최소 10년 이상의 장기적인 계획이 필요합니다. 주가가 낮을 때 사전 증여를 실행하고, 지배구조를 개편하며, 후계자를 육성하는 시간을 확보해야 합니다.',
+      },
     ],
   },
   'super-rich-inheritance-trends-2025': {
     id: 'super-rich-inheritance-trends-2025',
     title: '부자들의 상속 준비 트렌드 분석',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '2025년 대한민국 슈퍼리치의 상속 및 자산 승계 전략을 종합 분석한 전문가 보고서입니다. 세법 개정 무산, 감정평가 확대 등 급변하는 환경 속에서 부자들이 선택한 실전 전략을 공개합니다.',
+    image:
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '2025년 대한민국 슈퍼리치의 상속 및 자산 승계 전략을 종합 분석한 전문가 보고서입니다. 세법 개정 무산, 감정평가 확대 등 급변하는 환경 속에서 부자들이 선택한 실전 전략을 공개합니다.',
     content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
@@ -3899,40 +4017,58 @@ export const blogPosts: Record<string, BlogPost> = {
     author: '임재홍',
     date: '2025-12-12',
     readTime: '45분',
-    tags: ['상속세', '증여세', '세대생략증여', '유언대용신탁', '가족법인', '패밀리오피스', '감정평가', '절세전략', '부동산증여', '슈퍼리치'],
+    tags: [
+      '상속세',
+      '증여세',
+      '세대생략증여',
+      '유언대용신탁',
+      '가족법인',
+      '패밀리오피스',
+      '감정평가',
+      '절세전략',
+      '부동산증여',
+      '슈퍼리치',
+    ],
     slug: 'super-rich-inheritance-trends-2025',
     featured: true,
     faq: [
       {
         question: '2025년 상속세 개정이 왜 중요한가요?',
-        answer: '25년 만의 전면 개편안이 국회에서 부결되면서 기존의 높은 세율(최고 50%)과 낮은 공제 한도가 유지되었습니다. 더욱이 부동산 감정평가 대상 확대로 실질적인 세 부담은 60% 이상 증가할 전망입니다.'
+        answer:
+          '25년 만의 전면 개편안이 국회에서 부결되면서 기존의 높은 세율(최고 50%)과 낮은 공제 한도가 유지되었습니다. 더욱이 부동산 감정평가 대상 확대로 실질적인 세 부담은 60% 이상 증가할 전망입니다.',
       },
       {
         question: '세대 생략 증여란 무엇인가요?',
-        answer: '자녀를 건너뛰고 손자녀에게 직접 자산을 이전하는 방법입니다. 30~40%의 할증 과세가 있지만, 2번의 상속세/증여세를 한 번으로 줄이고 손자녀의 자산 증식 기간을 늘려 전체적으로 유리합니다.'
+        answer:
+          '자녀를 건너뛰고 손자녀에게 직접 자산을 이전하는 방법입니다. 30~40%의 할증 과세가 있지만, 2번의 상속세/증여세를 한 번으로 줄이고 손자녀의 자산 증식 기간을 늘려 전체적으로 유리합니다.',
       },
       {
         question: '유언대용신탁이 유언장보다 좋은 이유는?',
-        answer: '유언장은 분실, 위변조 분쟁이 있지만, 금융기관과 체결하는 신탁 계약은 확실한 집행력을 가집니다. 또한 생전에 자산 통제권을 유지하면서 사후 자산 분배를 명확히 설계할 수 있어 효도 리스크를 방지합니다.'
+        answer:
+          '유언장은 분실, 위변조 분쟁이 있지만, 금융기관과 체결하는 신탁 계약은 확실한 집행력을 가집니다. 또한 생전에 자산 통제권을 유지하면서 사후 자산 분배를 명확히 설계할 수 있어 효도 리스크를 방지합니다.',
       },
       {
         question: '꼬마빌딩 소유주가 가장 주의해야 할 점은?',
-        answer: '2025년부터 국세청의 감정평가 대상 확대로 공시가격과 실제 시세의 차이가 5억 원 이상이면 직권 감정평가를 받게 됩니다. 사전에 감정평가를 받아 예상 세액을 확인하고, 필요시 법인 전환이나 현금화를 고려해야 합니다.'
+        answer:
+          '2025년부터 국세청의 감정평가 대상 확대로 공시가격과 실제 시세의 차이가 5억 원 이상이면 직권 감정평가를 받게 됩니다. 사전에 감정평가를 받아 예상 세액을 확인하고, 필요시 법인 전환이나 현금화를 고려해야 합니다.',
       },
       {
         question: '미국 상속세 일몰(Sunset)이 한국 자산가에게 미치는 영향은?',
-        answer: '미국 시민권자 자녀를 둔 한국 자산가나 미국 내 자산 보유자는 2025년 말까지 미국 유산세 면제 한도(1,399만 달러)를 활용해야 합니다. 2026년부터는 절반으로 줄어들기 때문에 2025년이 증여의 데드라인입니다.'
-      }
+        answer:
+          '미국 시민권자 자녀를 둔 한국 자산가나 미국 내 자산 보유자는 2025년 말까지 미국 유산세 면제 한도(1,399만 달러)를 활용해야 합니다. 2026년부터는 절반으로 줄어들기 때문에 2025년이 증여의 데드라인입니다.',
+      },
     ],
   },
-  
+
   // SEO 최적화 블로그 포스트 (2025-12-20 추가)
   'successful-ceo-asset-management': {
     id: 'successful-ceo-asset-management',
     title: '성공한 CEO 자산관리 방법 7가지',
     slug: 'successful-ceo-asset-management',
-    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '20년 경력 세무사가 알려주는 CEO 자산관리 핵심 전략. 법인과 개인 자산 최적화부터 절세까지, 실전 노하우를 공개합니다.',
+    image:
+      'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '20년 경력 세무사가 알려주는 CEO 자산관리 핵심 전략. 법인과 개인 자산 최적화부터 절세까지, 실전 노하우를 공개합니다.',
     content: 'CEO 자산관리의 7가지 핵심 전략을 다룬 포괄적 가이드입니다.',
     category: '자산관리',
     author: 'Editor',
@@ -3940,38 +4076,50 @@ export const blogPosts: Record<string, BlogPost> = {
     readTime: '8분',
     tags: ['CEO', '자산관리', '절세', '법인자산', '개인자산'],
     featured: true,
-    lastUpdated: '2025-12-20'
+    lastUpdated: '2025-12-20',
   },
-  
+
   'inheritance-tax-calculator-2025': {
     id: 'inheritance-tax-calculator-2025',
     title: '2025년 상속세 계산기 사용법 완벽 가이드',
     slug: 'inheritance-tax-calculator-2025',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '2025년 최신 상속세율과 공제한도로 계산하는 방법! 상속세 계산기 사용법부터 절세 전략까지 세무사가 직접 알려드립니다.',
-    content: '2025년 상속세율표, 공제 항목, 계산 방법을 단계별로 설명한 완벽 가이드입니다.',
+    image:
+      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '2025년 최신 상속세율과 공제한도로 계산하는 방법! 상속세 계산기 사용법부터 절세 전략까지 세무사가 직접 알려드립니다.',
+    content:
+      '2025년 상속세율표, 공제 항목, 계산 방법을 단계별로 설명한 완벽 가이드입니다.',
     category: '세무최적화',
     author: 'Editor',
     date: '2025-12-20',
     readTime: '10분',
     tags: ['상속세', '상속세 계산기', '상속세율', '상속공제', '2025 세법'],
     featured: true,
-    lastUpdated: '2025-12-20'
+    lastUpdated: '2025-12-20',
   },
-  
+
   'business-succession-checklist': {
     id: 'business-succession-checklist',
     title: '가업승계 체크리스트 완벽 가이드',
     slug: 'business-succession-checklist',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&auto=format&fit=crop',
-    excerpt: '5-10년 장기 계획이 필요한 가업승계, 단계별 준비사항을 체크리스트로 정리했습니다. 무료 PDF 다운로드 제공.',
-    content: '10년 전부터 승계 완료까지 5단계 체크리스트와 실용적인 가업승계 전략 가이드입니다.',
+    image:
+      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&auto=format&fit=crop',
+    excerpt:
+      '5-10년 장기 계획이 필요한 가업승계, 단계별 준비사항을 체크리스트로 정리했습니다. 무료 PDF 다운로드 제공.',
+    content:
+      '10년 전부터 승계 완료까지 5단계 체크리스트와 실용적인 가업승계 전략 가이드입니다.',
     category: '승계전략',
     author: 'Editor',
     date: '2025-12-20',
     readTime: '12분',
-    tags: ['가업승계', '가업승계 체크리스트', '가업상속공제', '후계자 교육', '절세 전략'],
+    tags: [
+      '가업승계',
+      '가업승계 체크리스트',
+      '가업상속공제',
+      '후계자 교육',
+      '절세 전략',
+    ],
     featured: true,
-    lastUpdated: '2025-12-20'
-  }
+    lastUpdated: '2025-12-20',
+  },
 };

@@ -2,10 +2,13 @@
  * BMAD 키워드 추적 시스템
  * Google Analytics 4 연동 및 키워드별 성과 추적
  */
-
 import { BMAD_AI_KEYWORDS } from './ai-search-monitoring';
 
-export type BMADCategory = 'behavioral' | 'motivational' | 'aspirational' | 'decisional';
+export type BMADCategory =
+  | 'behavioral'
+  | 'motivational'
+  | 'aspirational'
+  | 'decisional';
 
 export interface KeywordPerformance {
   keyword: string;
@@ -74,7 +77,9 @@ export interface MonthlyReport {
 export class BMADKeywordTracker {
   private gaPropertyId: string;
 
-  constructor(gaPropertyId: string = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '') {
+  constructor(
+    gaPropertyId: string = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''
+  ) {
     this.gaPropertyId = gaPropertyId;
   }
 
@@ -131,7 +136,7 @@ export class BMADKeywordTracker {
         const clicks = data.clicks || 0;
         const conversions = data.conversions || 0;
 
-        allKeywords.push({
+        const performanceData: KeywordPerformance = {
           keyword,
           category: category as BMADCategory,
           impressions,
@@ -146,9 +151,15 @@ export class BMADKeywordTracker {
           pageViews: data.pageViews || 0,
           newUsers: data.newUsers || 0,
           returningUsers: data.returningUsers || 0,
-          revenue: data.revenue,
           lastUpdated: new Date(),
-        });
+        };
+
+        // Conditionally add revenue if defined
+        if (data.revenue !== undefined) {
+          performanceData.revenue = data.revenue;
+        }
+
+        allKeywords.push(performanceData);
       }
     }
 
@@ -161,7 +172,12 @@ export class BMADKeywordTracker {
   analyzeCategoryPerformance(
     keywordData: KeywordPerformance[]
   ): CategoryPerformance[] {
-    const categories: BMADCategory[] = ['behavioral', 'motivational', 'aspirational', 'decisional'];
+    const categories: BMADCategory[] = [
+      'behavioral',
+      'motivational',
+      'aspirational',
+      'decisional',
+    ];
     const categoryPerformance: CategoryPerformance[] = [];
 
     for (const category of categories) {
@@ -169,16 +185,38 @@ export class BMADKeywordTracker {
 
       if (categoryKeywords.length === 0) continue;
 
-      const totalImpressions = categoryKeywords.reduce((sum, k) => sum + k.impressions, 0);
-      const totalClicks = categoryKeywords.reduce((sum, k) => sum + k.clicks, 0);
-      const totalConversions = categoryKeywords.reduce((sum, k) => sum + k.conversions, 0);
-      const totalTraffic = categoryKeywords.reduce((sum, k) => sum + k.traffic, 0);
+      const totalImpressions = categoryKeywords.reduce(
+        (sum, k) => sum + k.impressions,
+        0
+      );
+      const totalClicks = categoryKeywords.reduce(
+        (sum, k) => sum + k.clicks,
+        0
+      );
+      const totalConversions = categoryKeywords.reduce(
+        (sum, k) => sum + k.conversions,
+        0
+      );
+      const totalTraffic = categoryKeywords.reduce(
+        (sum, k) => sum + k.traffic,
+        0
+      );
 
-      const avgCTR = categoryKeywords.reduce((sum, k) => sum + k.ctr, 0) / categoryKeywords.length;
-      const avgConversionRate = categoryKeywords.reduce((sum, k) => sum + k.conversionRate, 0) / categoryKeywords.length;
-      const avgPosition = categoryKeywords.reduce((sum, k) => sum + k.avgPosition, 0) / categoryKeywords.length;
-      const avgBounceRate = categoryKeywords.reduce((sum, k) => sum + k.bounceRate, 0) / categoryKeywords.length;
-      const avgSessionDuration = categoryKeywords.reduce((sum, k) => sum + k.avgSessionDuration, 0) / categoryKeywords.length;
+      const avgCTR =
+        categoryKeywords.reduce((sum, k) => sum + k.ctr, 0) /
+        categoryKeywords.length;
+      const avgConversionRate =
+        categoryKeywords.reduce((sum, k) => sum + k.conversionRate, 0) /
+        categoryKeywords.length;
+      const avgPosition =
+        categoryKeywords.reduce((sum, k) => sum + k.avgPosition, 0) /
+        categoryKeywords.length;
+      const avgBounceRate =
+        categoryKeywords.reduce((sum, k) => sum + k.bounceRate, 0) /
+        categoryKeywords.length;
+      const avgSessionDuration =
+        categoryKeywords.reduce((sum, k) => sum + k.avgSessionDuration, 0) /
+        categoryKeywords.length;
 
       // 성과 점수 계산 (0-100)
       const performanceScore = this.calculatePerformanceScore({
@@ -229,12 +267,11 @@ export class BMADKeywordTracker {
     const bounceScore = Math.max(100 - metrics.avgBounceRate * 100, 0); // 0% 이탈률 = 100점
 
     // 가중치 적용
-    const totalScore = (
+    const totalScore =
       ctrScore * 0.3 +
       conversionScore * 0.4 +
       positionScore * 0.2 +
-      bounceScore * 0.1
-    );
+      bounceScore * 0.1;
 
     return Math.round(totalScore);
   }
@@ -264,13 +301,17 @@ export class BMADKeywordTracker {
       .slice(0, 10);
 
     // 개선 기회 발견
-    const improvementOpportunities = this.identifyImprovementOpportunities(keywordData);
+    const improvementOpportunities =
+      this.identifyImprovementOpportunities(keywordData);
 
     // 인사이트 생성
     const insights = this.generateInsights(categoryBreakdown, keywordData);
 
     // 권장사항 생성
-    const recommendations = this.generateRecommendations(categoryBreakdown, improvementOpportunities);
+    const recommendations = this.generateRecommendations(
+      categoryBreakdown,
+      improvementOpportunities
+    );
 
     // 전체 통계
     const overview = {
@@ -278,8 +319,11 @@ export class BMADKeywordTracker {
       totalImpressions: keywordData.reduce((sum, k) => sum + k.impressions, 0),
       totalClicks: keywordData.reduce((sum, k) => sum + k.clicks, 0),
       totalConversions: keywordData.reduce((sum, k) => sum + k.conversions, 0),
-      avgCTR: keywordData.reduce((sum, k) => sum + k.ctr, 0) / keywordData.length,
-      avgConversionRate: keywordData.reduce((sum, k) => sum + k.conversionRate, 0) / keywordData.length,
+      avgCTR:
+        keywordData.reduce((sum, k) => sum + k.ctr, 0) / keywordData.length,
+      avgConversionRate:
+        keywordData.reduce((sum, k) => sum + k.conversionRate, 0) /
+        keywordData.length,
     };
 
     return {
@@ -376,7 +420,9 @@ export class BMADKeywordTracker {
     );
 
     // 전환율 분석
-    const highConversionKeywords = keywordData.filter(k => k.conversionRate > 5);
+    const highConversionKeywords = keywordData.filter(
+      k => k.conversionRate > 5
+    );
     if (highConversionKeywords.length > 0) {
       insights.push(
         `🎯 ${highConversionKeywords.length}개 키워드가 5% 이상의 우수한 전환율을 달성했습니다.`
@@ -384,7 +430,9 @@ export class BMADKeywordTracker {
     }
 
     // Decisional 키워드 분석
-    const decisionalCategory = categoryBreakdown.find(c => c.category === 'decisional');
+    const decisionalCategory = categoryBreakdown.find(
+      c => c.category === 'decisional'
+    );
     if (decisionalCategory && decisionalCategory.avgConversionRate > 3) {
       insights.push(
         `💰 Decisional 키워드의 평균 전환율 ${decisionalCategory.avgConversionRate.toFixed(2)}%는 높은 구매 의도를 보여줍니다.`
@@ -392,7 +440,10 @@ export class BMADKeywordTracker {
     }
 
     // 트래픽 성장
-    const totalTraffic = categoryBreakdown.reduce((sum, c) => sum + c.totalTraffic, 0);
+    const totalTraffic = categoryBreakdown.reduce(
+      (sum, c) => sum + c.totalTraffic,
+      0
+    );
     if (totalTraffic > 5000) {
       insights.push(
         `📈 BMAD 키워드를 통한 총 트래픽이 ${totalTraffic.toLocaleString()}회를 기록했습니다.`
@@ -412,7 +463,9 @@ export class BMADKeywordTracker {
     const recommendations: string[] = [];
 
     // 저성과 카테고리 개선
-    const lowPerformingCategories = categoryBreakdown.filter(c => c.performance < 70);
+    const lowPerformingCategories = categoryBreakdown.filter(
+      c => c.performance < 70
+    );
     if (lowPerformingCategories.length > 0) {
       lowPerformingCategories.forEach(category => {
         recommendations.push(
@@ -422,7 +475,9 @@ export class BMADKeywordTracker {
     }
 
     // 개선 기회 기반 권장사항
-    const highImpactOpportunities = opportunities.filter(o => o.potentialImpact === 'high');
+    const highImpactOpportunities = opportunities.filter(
+      o => o.potentialImpact === 'high'
+    );
     if (highImpactOpportunities.length > 0) {
       recommendations.push(
         `🚀 ${highImpactOpportunities.length}개의 고영향 개선 기회 발견: 즉시 실행 권장`

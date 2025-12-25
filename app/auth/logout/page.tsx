@@ -1,17 +1,29 @@
 'use client';
 
+import { CheckCircle, Loader2, LogOut, XCircle } from 'lucide-react';
+
+import { useEffect, useState, Suspense } from 'react';
+
+import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+
 import { getKakaoAuthService } from '@/lib/auth/kakao-auth';
 import { createClient } from '@/lib/supabase/client';
-import { CheckCircle, Loader2, LogOut, XCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState, Suspense } from 'react';
 
 function LogoutContent() {
   const router = useRouter();
 
-  const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
+  const [status, setStatus] = useState<'loading' | 'success' | 'error'>(
+    'loading'
+  );
   const [message, setMessage] = useState<string>('로그아웃 처리 중...');
   const [error, setError] = useState<string>('');
 
@@ -40,7 +52,6 @@ function LogoutContent() {
         setTimeout(() => {
           router.push('/auth/sign-in');
         }, 3000);
-
       } catch (error) {
         console.error('로그아웃 처리 오류:', error);
         setStatus('error');
@@ -82,17 +93,13 @@ function LogoutContent() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
         <CardHeader className="text-center space-y-4">
-          <div className="flex justify-center">
-            {getStatusIcon()}
-          </div>
+          <div className="flex justify-center">{getStatusIcon()}</div>
           <CardTitle className={`text-2xl font-bold ${getStatusColor()}`}>
             {status === 'loading' && '로그아웃 처리 중'}
             {status === 'success' && '로그아웃 완료'}
             {status === 'error' && '로그아웃 실패'}
           </CardTitle>
-          <CardDescription className="text-base">
-            {message}
-          </CardDescription>
+          <CardDescription className="text-base">{message}</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-6">
@@ -115,7 +122,7 @@ function LogoutContent() {
                   곧 로그인 페이지로 이동합니다...
                 </p>
               </div>
-              <Button 
+              <Button
                 onClick={() => router.push('/auth/sign-in')}
                 className="w-full"
               >
@@ -131,17 +138,17 @@ function LogoutContent() {
                   {error}
                 </p>
               </div>
-              
+
               <div className="space-y-3">
-                <Button 
+                <Button
                   onClick={() => router.push('/auth/sign-in')}
                   variant="outline"
                   className="w-full"
                 >
                   로그인 페이지로 이동
                 </Button>
-                
-                <Button 
+
+                <Button
                   onClick={() => window.location.reload()}
                   className="w-full"
                 >
@@ -160,10 +167,14 @@ function LogoutContent() {
                   <span className="font-medium">Status:</span> {status}
                 </div>
                 <div>
-                  <span className="font-medium">URL:</span> {typeof window !== 'undefined' ? window.location.href : 'N/A'}
+                  <span className="font-medium">URL:</span>{' '}
+                  {typeof window !== 'undefined' ? window.location.href : 'N/A'}
                 </div>
                 <div>
-                  <span className="font-medium">Referrer:</span> {typeof window !== 'undefined' ? (document.referrer || '직접 접근') : 'N/A'}
+                  <span className="font-medium">Referrer:</span>{' '}
+                  {typeof window !== 'undefined'
+                    ? document.referrer || '직접 접근'
+                    : 'N/A'}
                 </div>
               </div>
             </div>
@@ -176,23 +187,25 @@ function LogoutContent() {
 
 export default function LogoutPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
-          <CardHeader className="text-center space-y-4">
-            <div className="flex justify-center">
-              <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
-            </div>
-            <CardTitle className="text-2xl font-bold text-blue-600">
-              로그아웃 준비 중
-            </CardTitle>
-            <CardDescription className="text-base">
-              로그아웃 페이지를 준비하고 있습니다...
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
+          <Card className="w-full max-w-md shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
+            <CardHeader className="text-center space-y-4">
+              <div className="flex justify-center">
+                <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+              </div>
+              <CardTitle className="text-2xl font-bold text-blue-600">
+                로그아웃 준비 중
+              </CardTitle>
+              <CardDescription className="text-base">
+                로그아웃 페이지를 준비하고 있습니다...
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+      }
+    >
       <LogoutContent />
     </Suspense>
   );

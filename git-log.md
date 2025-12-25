@@ -31,12 +31,15 @@ a62cfde fix: Resolve all TypeScript and ESLint validation errors
 ## Detailed Log (Last 10)
 
 ### a09b69e - 📦 프로덕션 배포를 위한 누락된 의존성 추가 (@google/generative-ai, axios) (9 minutes ago) <홍길동>
+
 🤖 Generated with [Claude Code](https://claude.ai/code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### 3ae78fc - fix: resolve Supabase server cookie API compatibility for Next.js 15 (32 hours ago) <홍길동>
+
 - Fix createClient function to handle async cookies() API in Next.js 15
 - Update admin consultations page to await createClient() call
 - Ensure compatibility with Next.js App Router server components
@@ -46,7 +49,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### 2db044d - fix: resolve TypeScript compilation errors from missing test dependencies (33 hours ago) <홍길동>
+
 - Add missing Jest and Testing Library dependencies to package.json
 - Configure test scripts (test, test:watch, test:ci, typecheck)
 - Remove unused LucideIcon import in types/faq.ts
@@ -55,6 +60,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 - Enable proper testing infrastructure for development
 
 Dependencies added:
+
 - @testing-library/jest-dom@^6.1.4
 - @testing-library/react@^14.1.2
 - @testing-library/user-event@^14.5.1
@@ -68,7 +74,9 @@ Dependencies added:
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### 4f0583b - feat: Update Cal.com floating button and hero section navigation (6 days ago) <홍길동>
+
 - 수정: Cal.com 플로팅 버튼을 familyoffice/consultation에서 familyoffice로 링크 변경
 - 개선: Cal.com 버튼 구현 방식을 완전히 새로 작성하여 안정성과 가시성 향상
 - 수정: 메인 페이지 히어로 섹션의 '지금 바로 물어보세요' 버튼을 /contact 페이지로 연결
@@ -80,7 +88,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### 6ea4fad - feat: Add new VVIP seminar and improve user experience (6 days ago) <홍길동>
+
 - Add new VVIP seminar for September 17, 2025 (asset management focus)
 - Sort seminars chronologically by date (earliest first)
 - Remove unnecessary 'Details' buttons from seminar cards
@@ -93,7 +103,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### b29dc6f - feat: 투자금융 전문가 포지션 추가 - 4번째 GFC 전문 영역 (6 days ago) <홍길동>
+
 - 기업재무컨설턴트(GFC) - 투자금융 전문가 포지션 추가
 - 기업 자금조달 및 투자금융 전문 컨설팅 서비스 제공
 - IB, 기업금융, M&A 관련 업무 경험 요구사항 명시
@@ -106,7 +118,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### 5e6ed02 - feat: AI 시스템에 삼성생명GFC 채용 정보 추가 (6 days ago) <홍길동>
+
 - 개발용 AI 응답 시스템에 채용 카테고리 및 상세 정보 추가
 - 기본 응답에 GFC 전문가 채용 정보 섹션 추가
 - 지능적 라우터에서 채용 관련 키워드 인식 개선
@@ -118,7 +132,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### 26ff166 - feat: 삼성생명GFC 채용 포지션으로 통일 및 전문 영역별 분화 (6 days ago) <홍길동>
+
 - 자산관리 어드바이저 → 기업재무컨설턴트(GFC) - 가업승계 전문가
 - 세무 컨설턴트 → 기업재무컨설턴트(GFC) - 자산관리 전문가
 - 부동산 투자 매니저 → 기업재무컨설턴트(GFC) - 세무회계 전문가
@@ -131,7 +147,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### c12e015 - fix: AI API 크레딧 오류 해결 및 fallback 시스템 구현 (6 days ago) <홍길동>
+
 - DevelopmentFallbackAI 클래스 추가 (키워드 기반 응답 시스템)
 - Triple-AI 엔진에 fallback 처리 로직 통합
 - API 크레딧 오류 감지 및 자동 fallback 전환
@@ -139,6 +157,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 - 개발/프로덕션 환경에서 안정적인 AI 응답 제공
 
 Issues Fixed:
+
 - Claude: 크레딧 잔액 부족 오류
 - OpenAI: 모델 접근 권한 오류
 - Gemini: 무료 티어 할당량 초과 오류
@@ -148,7 +167,9 @@ Issues Fixed:
 Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
+
 ### 53fc379 - feat: Mobile landscape menu & AI chat consultation integration (7 days ago) <홍길동>
+
 - Mobile landscape hamburger menu support (md → lg breakpoint)
 - Cal.com floating button disabled in external-scripts.tsx
 - AI chat now always shows consultation booking button

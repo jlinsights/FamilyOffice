@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ContentSyncManager, TistoryContentConverter } from '@/lib/tistory-integration';
+
 import { blogPosts } from '@/lib/blog-data';
+import {
+  ContentSyncManager,
+  TistoryContentConverter,
+} from '@/lib/tistory-integration';
 
 /**
  * 티스토리 콘텐츠 동기화 API
@@ -28,14 +32,20 @@ export async function POST(request: NextRequest) {
 
       default:
         return NextResponse.json(
-          { error: 'Invalid action. Use: convert-existing, sync-new, or convert-single' },
+          {
+            error:
+              'Invalid action. Use: convert-existing, sync-new, or convert-single',
+          },
           { status: 400 }
         );
     }
   } catch (error) {
     console.error('Tistory sync error:', error);
     return NextResponse.json(
-      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }
@@ -49,9 +59,9 @@ async function handleConvertExisting() {
     // 최근 추가된 뉴스레터 기반 포스트들만 변환
     const newsletterBasedPosts = [
       'corporate-life-insurance-ceo-risk-management',
-      'hospital-mso-guide-tax-saving-strategy', 
+      'hospital-mso-guide-tax-saving-strategy',
       'retained-earnings-dividend-strategy-ceo-asset-optimization',
-      'corporate-treasury-stock-retirement-2025-tax-analysis'
+      'corporate-treasury-stock-retirement-2025-tax-analysis',
     ];
 
     const convertedPosts = [];
@@ -63,7 +73,7 @@ async function handleConvertExisting() {
         convertedPosts.push({
           original: blogPost,
           tistory: tistoryPost,
-          formattedContent: formatTistoryContent(tistoryPost)
+          formattedContent: formatTistoryContent(tistoryPost),
         });
       }
     }
@@ -77,18 +87,23 @@ async function handleConvertExisting() {
         step2: 'https://family-office.tistory.com 관리자로 이동하세요',
         step3: '각 포스트를 새 글쓰기에 붙여넣고 발행하세요',
         step4: '카테고리를 올바르게 설정하세요',
-        step5: '태그를 추가하세요'
-      }
+        step5: '태그를 추가하세요',
+      },
     });
   } catch (error) {
-    throw new Error(`Failed to convert existing posts: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    throw new Error(
+      `Failed to convert existing posts: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
   }
 }
 
 /**
  * 새로운 뉴스레터를 모든 플랫폼에 동기화
  */
-async function handleSyncNew(newsletterData: any, syncManager: ContentSyncManager) {
+async function handleSyncNew(
+  newsletterData: any,
+  syncManager: ContentSyncManager
+) {
   if (!newsletterData) {
     return NextResponse.json(
       { error: 'Newsletter data is required for sync-new action' },
@@ -98,18 +113,20 @@ async function handleSyncNew(newsletterData: any, syncManager: ContentSyncManage
 
   try {
     await syncManager.syncAllPlatforms(newsletterData);
-    
+
     return NextResponse.json({
       success: true,
       message: 'Newsletter content synchronized to all platforms',
       data: {
         blog: 'Published to familyoffices.vip/blog',
         tistory: 'Ready for family-office.tistory.com',
-        newsletter: 'Original source maintained'
-      }
+        newsletter: 'Original source maintained',
+      },
     });
   } catch (error) {
-    throw new Error(`Failed to sync new content: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    throw new Error(
+      `Failed to sync new content: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
   }
 }
 
@@ -143,11 +160,13 @@ async function handleConvertSingle(postId: string) {
         original: blogPost,
         tistory: tistoryPost,
         formattedContent,
-        publishUrl: 'https://family-office.tistory.com/admin/entry/post'
-      }
+        publishUrl: 'https://family-office.tistory.com/admin/entry/post',
+      },
     });
   } catch (error) {
-    throw new Error(`Failed to convert single post: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    throw new Error(
+      `Failed to convert single post: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
   }
 }
 
@@ -198,8 +217,8 @@ export async function GET() {
     const newsletterBasedPosts = [
       'corporate-life-insurance-ceo-risk-management',
       'hospital-mso-guide-tax-saving-strategy',
-      'retained-earnings-dividend-strategy-ceo-asset-optimization', 
-      'corporate-treasury-stock-retirement-2025-tax-analysis'
+      'retained-earnings-dividend-strategy-ceo-asset-optimization',
+      'corporate-treasury-stock-retirement-2025-tax-analysis',
     ];
 
     const status = {
@@ -210,8 +229,8 @@ export async function GET() {
       availableActions: [
         'POST /api/tistory-sync with action: convert-existing',
         'POST /api/tistory-sync with action: sync-new + newsletterData',
-        'POST /api/tistory-sync with action: convert-single + postId'
-      ]
+        'POST /api/tistory-sync with action: convert-single + postId',
+      ],
     };
 
     return NextResponse.json({
@@ -221,12 +240,15 @@ export async function GET() {
         id,
         title: blogPosts[id]?.title || 'Unknown',
         category: blogPosts[id]?.category || 'Unknown',
-        date: blogPosts[id]?.date || 'Unknown'
-      }))
+        date: blogPosts[id]?.date || 'Unknown',
+      })),
     });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to get sync status', details: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        error: 'Failed to get sync status',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }

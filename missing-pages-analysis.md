@@ -3,8 +3,9 @@
 ## 현재 상태 분석
 
 ### ✅ 이미 존재하는 주요 페이지들
+
 1. **inheritance-gift-tax/** - 상속증여세 (✓ 존재)
-2. **serious-accident-law/** - 중대재해처벌법 (✓ 존재)  
+2. **serious-accident-law/** - 중대재해처벌법 (✓ 존재)
 3. **family-office-center/** - 패밀리오피스 (✓ 존재)
 4. **business-succession-strategy/** - 가업승계 (✓ 존재)
 5. **tax-strategy/** - 세무전략 (✓ 존재)
@@ -12,6 +13,7 @@
 ### ⚠️ 개선이 필요하거나 누락된 페이지들
 
 #### 1. 삼성생명 GFC 전용 페이지 (중요도: 높음)
+
 **현재**: `/삼성생명-gfc/` 디렉토리만 존재 (한글명)
 **필요**: `/samsung-life-gfc/` 영문 SEO 친화적 페이지
 
@@ -24,17 +26,19 @@
 ```
 
 #### 2. 상속세/증여세 계산기 (중요도: 높음)
+
 **현재**: 기본 정보 페이지만 존재
 **필요**: 인터랙티브 계산 도구
 
 ```typescript
-// 예상 URL 구조  
-/inheritance-tax-calculator/
-/gift-tax-calculator/
-/succession-planning-calculator/
+// 예상 URL 구조
+/inheritance-tax-calculator/ / gift -
+  tax -
+  calculator / /succession-planning-calculator/;
 ```
 
 #### 3. 자산관리 서비스별 세분화 페이지 (중요도: 중간)
+
 **현재**: 포괄적 페이지들만 존재
 **필요**: 서비스별 전문 랜딩페이지
 
@@ -42,33 +46,38 @@
 // 누락된 서비스 페이지들
 /portfolio-management/           // 포트폴리오 관리
 /alternative-investment/         // 대체투자
-/global-investment/             // 해외투자  
+/global-investment/             // 해외투자
 /real-estate-investment/        // 부동산 투자
 /private-equity/               // 사모펀드
 /hedge-fund-investment/        // 헤지펀드
 ```
 
 #### 4. 업종별 맞춤 솔루션 페이지 (중요도: 중간)
+
 **현재**: 일반적 서비스 페이지만 존재
 **필요**: 업종별 특화 페이지
 
 ```typescript
 // 타겟 업종별 페이지
-/manufacturing-ceo/            // 제조업 CEO
-/construction-ceo/             // 건설업 CEO  
-/it-startup-ceo/              // IT/스타트업 CEO
-/family-business-ceo/         // 가족기업 CEO
-/medical-group-ceo/           // 의료법인 CEO
+/manufacturing-ceo/ / // 제조업 CEO
+  construction -
+  ceo / // 건설업 CEO
+    /it-startup-ceo/ / // IT/스타트업 CEO
+    family -
+  business -
+  ceo / // 가족기업 CEO
+    /medical-group-ceo/; // 의료법인 CEO
 ```
 
 #### 5. 교육/세미나 상세 페이지 (중요도: 중간)
+
 **현재**: `/seminar/` 기본 페이지만 존재
 **필요**: 프로그램별 전용 페이지
 
 ```typescript
 // 교육 프로그램별 페이지
 /ceo-academy/                 // CEO 아카데미
-/next-generation-program/     // 차세대 프로그램  
+/next-generation-program/     // 차세대 프로그램
 /family-governance/           // 가족 거버넌스
 /wealth-preservation/         // 자산보전 교육
 ```
@@ -80,17 +89,18 @@
 ### Priority 1: 즉시 생성 필요 (고가치 키워드)
 
 #### 1. 상속세/증여세 계산기 (최우선)
+
 ```bash
 이유:
 - "상속세 계산기" (월간검색량 2,200)
-- "증여세 계산기" (월간검색량 1,800)  
+- "증여세 계산기" (월간검색량 1,800)
 - 높은 사용자 참여도 및 리드 생성
 
 생성 페이지:
 /app/calculators/
 ├── inheritance-tax/
 │   └── page.tsx         # 상속세 계산기
-├── gift-tax/  
+├── gift-tax/
 │   └── page.tsx         # 증여세 계산기
 └── succession-cost/
     └── page.tsx         # 가업승계 비용 계산기
@@ -99,6 +109,7 @@
 ### Priority 2: 단기 생성 (중가치 키워드)
 
 #### 3. 포트폴리오 관리 전문 페이지
+
 ```bash
 키워드: "포트폴리오 관리" (월간검색량 1,600)
 
@@ -106,17 +117,18 @@
 ├── page.tsx              # 포트폴리오 관리 서비스
 ├── alternative-investment/
 │   └── page.tsx         # 대체투자
-└── global-investment/  
+└── global-investment/
     └── page.tsx         # 해외투자
 ```
 
 #### 4. 업종별 CEO 솔루션
+
 ```bash
 키워드 클러스터: "제조업 CEO 자산관리" 등
 
 /app/solutions/
 ├── manufacturing/
-├── construction/  
+├── construction/
 ├── healthcare/
 └── technology/
 ```
@@ -124,6 +136,7 @@
 ### Priority 3: 중장기 생성 (니치 키워드)
 
 #### 5. 고급 교육 프로그램
+
 ```bash
 /app/academy/
 ├── ceo-program/
@@ -187,8 +200,8 @@ export default function SamsungGFCPage() {
                 삼성생명 GFC × FamilyOffice S
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                삼성생명의 70년 신뢰와 글로벌 네트워크, 그리고 FamilyOffice S의 
-                혁신적인 패밀리오피스 서비스가 만나 중견기업 CEO들에게 
+                삼성생명의 70년 신뢰와 글로벌 네트워크, 그리고 FamilyOffice S의
+                혁신적인 패밀리오피스 서비스가 만나 중견기업 CEO들에게
                 최고 수준의 자산관리 솔루션을 제공합니다.
               </p>
               <ul className="space-y-3">
@@ -207,7 +220,7 @@ export default function SamsungGFCPage() {
               </ul>
             </div>
             <div>
-              <Image 
+              <Image
                 src="/images/samsung-gfc-partnership.jpg"
                 alt="삼성생명 GFC 파트너십"
                 width={600}
@@ -327,7 +340,7 @@ export default function InheritanceTaxCalculatorPage() {
     business: 0,
     other: 0
   });
-  
+
   const [beneficiaries, setBeneficiaries] = useState({
     spouse: 0,
     children: 0,
@@ -339,7 +352,7 @@ export default function InheritanceTaxCalculatorPage() {
     const totalAssets = Object.values(assets).reduce((sum, val) => sum + val, 0);
     const deduction = calculateDeduction();
     const taxableAssets = Math.max(0, totalAssets - deduction);
-    
+
     // 상속세율 구간별 계산
     return calculateProgressiveTax(taxableAssets);
   };
@@ -393,7 +406,7 @@ export default function InheritanceTaxCalculatorPage() {
                     </span>
                   </div>
                   {/* 기타 계산 항목들... */}
-                  
+
                   <div className="border-t pt-4">
                     <div className="flex justify-between text-lg font-bold">
                       <span>예상 상속세</span>
@@ -428,12 +441,13 @@ export default function InheritanceTaxCalculatorPage() {
 ## 📊 예상 SEO 효과
 
 ### 단기 효과 (2-3개월)
+
 ```bash
 새 페이지 추가로 인한 예상 효과:
 
 검색 키워드 확장:
 - "삼성생명 GFC": TOP 3 랭킹 목표 (현재 미등록)
-- "상속세 계산기": TOP 5 랭킹 목표  
+- "상속세 계산기": TOP 5 랭킹 목표
 - "증여세 계산기": TOP 5 랭킹 목표
 
 트래픽 증가:
@@ -442,6 +456,7 @@ export default function InheritanceTaxCalculatorPage() {
 ```
 
 ### 장기 효과 (6개월)
+
 ```bash
 도메인 권위도 향상:
 - 추가 랜딩페이지로 인한 롱테일 키워드 확대
@@ -458,7 +473,8 @@ export default function InheritanceTaxCalculatorPage() {
 현재 FamilyOffice 프로젝트는 **주요 서비스 페이지는 잘 구축**되어 있으나, **고가치 니치 키워드를 타겟으로 하는 전문 페이지들이 부족**합니다.
 
 **우선순위**:
-1. **삼성생명 GFC 페이지** (즉시) - 브랜드 연관성 + 채용 키워드 
+
+1. **삼성생명 GFC 페이지** (즉시) - 브랜드 연관성 + 채용 키워드
 2. **상속세/증여세 계산기** (1주) - 높은 사용자 참여 + 리드 생성
 3. **업종별 CEO 솔루션** (2주) - 타겟 세분화 강화
 

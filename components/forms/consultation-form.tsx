@@ -17,81 +17,84 @@ export const ConsultationForm = memo(function ConsultationForm() {
   const [formSuccess, setFormSuccess] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setFormError(null);
-    setFieldErrors({});
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setIsSubmitting(true);
+      setFormError(null);
+      setFieldErrors({});
 
-    const formData = new FormData(event.currentTarget);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const service = formData.get('service') as string;
-    const message = formData.get('message') as string;
+      const formData = new FormData(event.currentTarget);
+      const name = formData.get('name') as string;
+      const email = formData.get('email') as string;
+      const phone = formData.get('phone') as string;
+      const service = formData.get('service') as string;
+      const message = formData.get('message') as string;
 
-    // 필드별 검증
-    const errors: Record<string, string> = {};
+      // 필드별 검증
+      const errors: Record<string, string> = {};
 
-    if (!name?.trim()) {
-      errors.name = '성함을 입력해주세요.';
-    }
-
-    if (!email?.trim()) {
-      errors.email = '이메일을 입력해주세요.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errors.email = '올바른 이메일 형식을 입력해주세요.';
-    }
-
-    if (!phone?.trim()) {
-      errors.phone = '연락처를 입력해주세요.';
-    } else if (!/^[0-9-+\s()]+$/.test(phone)) {
-      errors.phone = '올바른 전화번호 형식을 입력해주세요.';
-    }
-
-    if (Object.keys(errors).length > 0) {
-      setFieldErrors(errors);
-      setIsSubmitting(false);
-      return;
-    }
-
-    try {
-      // Supabase integration: https://github.com/jlinsights/FamilyOffice/issues/6
-      const formData = {
-        name: name.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-        service_type: service || null,
-        message: message?.trim() || null,
-        status: 'pending',
-      };
-      // 실제 API 엔드포인트로 전송
-      // await submitConsultationForm(formData);
-
-      // 임시 성공 처리
-      setFormSuccess(true);
-      event.currentTarget.reset();
-
-      // 3초 후 성공 메시지 숨기기
-      setTimeout(() => {
-        setFormSuccess(false);
-      }, 3000);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-
-      let errorMessage = '상담 신청 중 오류가 발생했습니다.';
-
-      if (error instanceof Error) {
-        errorMessage = error.message;
-      } else if (error && typeof error === 'object' && 'message' in error) {
-        errorMessage = String(error.message);
+      if (!name?.trim()) {
+        errors.name = '성함을 입력해주세요.';
       }
 
-      setFormError(errorMessage);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, []);
+      if (!email?.trim()) {
+        errors.email = '이메일을 입력해주세요.';
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.email = '올바른 이메일 형식을 입력해주세요.';
+      }
+
+      if (!phone?.trim()) {
+        errors.phone = '연락처를 입력해주세요.';
+      } else if (!/^[0-9-+\s()]+$/.test(phone)) {
+        errors.phone = '올바른 전화번호 형식을 입력해주세요.';
+      }
+
+      if (Object.keys(errors).length > 0) {
+        setFieldErrors(errors);
+        setIsSubmitting(false);
+        return;
+      }
+
+      try {
+        // Supabase integration: https://github.com/jlinsights/FamilyOffice/issues/6
+        const formData = {
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          service_type: service || null,
+          message: message?.trim() || null,
+          status: 'pending',
+        };
+        // 실제 API 엔드포인트로 전송
+        // await submitConsultationForm(formData);
+
+        // 임시 성공 처리
+        setFormSuccess(true);
+        event.currentTarget.reset();
+
+        // 3초 후 성공 메시지 숨기기
+        setTimeout(() => {
+          setFormSuccess(false);
+        }, 3000);
+      } catch (error) {
+        console.error('Error submitting form:', error);
+
+        let errorMessage = '상담 신청 중 오류가 발생했습니다.';
+
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        } else if (error && typeof error === 'object' && 'message' in error) {
+          errorMessage = String(error.message);
+        }
+
+        setFormError(errorMessage);
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    []
+  );
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>

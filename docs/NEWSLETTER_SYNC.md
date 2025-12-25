@@ -74,6 +74,7 @@ CRON_SECRET → Production 환경에 설정
 ### 2. Cron Job 확인
 
 `vercel.json`에서 설정된 스케줄:
+
 ```json
 {
   "crons": [
@@ -86,9 +87,10 @@ CRON_SECRET → Production 환경에 설정
 ```
 
 **스케줄 해석**:
+
 - `30 7 * * 2,5` = 매주 화요일(2)과 금요일(5) 오전 7:30 (UTC)
 - KST 기준: 오후 4:30 (UTC+9)
-- **조정 필요**: 
+- **조정 필요**:
   - 화요일 오전 9:30 KST = 화요일 오전 0:30 UTC = `30 0 * * 2`
   - 금요일 오전 7:30 KST = 목요일 오후 10:30 UTC = `30 22 * * 4`
 
@@ -118,11 +120,13 @@ CRON_SECRET → Production 환경에 설정
 **GET/POST** `/api/cron/sync-newsletter`
 
 **요청 헤더**:
+
 ```
 Authorization: Bearer ${CRON_SECRET}
 ```
 
 **응답**:
+
 ```json
 {
   "success": true,
@@ -138,6 +142,7 @@ Authorization: Bearer ${CRON_SECRET}
 **GET** `/api/newsletter/posts?limit=4`
 
 **응답**:
+
 ```json
 {
   "success": true,
@@ -250,12 +255,14 @@ console.error('Newsletter sync error:', error);
 
 #### 1. Cron Job이 실행되지 않음
 
-**원인**: 
+**원인**:
+
 - CRON_SECRET 미설정
 - Vercel 환경 변수 누락
 - 잘못된 cron 스케줄
 
 **해결**:
+
 ```bash
 # Vercel 환경 변수 확인
 vercel env ls
@@ -266,22 +273,26 @@ vercel logs --function=api/cron/sync-newsletter
 
 #### 2. Beehiiv API 오류
 
-**원인**: 
+**원인**:
+
 - API 키 만료
 - 요청 한도 초과
 - 네트워크 문제
 
 **해결**:
+
 - 시스템이 자동으로 정적 데이터로 fallback
 - API 키 갱신 필요
 
 #### 3. 데이터가 업데이트되지 않음
 
-**원인**: 
+**원인**:
+
 - 클라이언트 캐시 문제
 - API 응답 오류
 
 **해결**:
+
 ```bash
 # 브라우저 캐시 클리어
 # 또는 API 직접 호출로 확인
@@ -309,8 +320,8 @@ curl "https://your-domain.com/api/newsletter/posts?limit=1"
 ```javascript
 export const newsletterPosts = [
   {
-    issueNumber: '#53',  // 새 이슈 번호
-    date: '2025.08.23',  // 발행일
+    issueNumber: '#53', // 새 이슈 번호
+    date: '2025.08.23', // 발행일
     title: '새 뉴스레터 제목',
     excerpt: '요약 내용...',
     readTime: '5분',
@@ -324,16 +335,19 @@ export const newsletterPosts = [
 ## 향후 확장 계획
 
 ### Phase 1 (현재)
+
 - ✅ 자동 동기화
 - ✅ Fallback 시스템
 - ✅ 기본 모니터링
 
 ### Phase 2 (계획)
+
 - 🔄 Webhook 기반 실시간 동기화
 - 🔄 데이터베이스 저장
 - 🔄 구독자 통계 통합
 
 ### Phase 3 (확장)
+
 - 🔄 AI 기반 콘텐츠 분석
 - 🔄 개인화된 추천
 - 🔄 고급 분석 대시보드

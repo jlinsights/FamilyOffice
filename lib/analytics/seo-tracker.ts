@@ -57,7 +57,7 @@ export interface TechnicalSEOScore {
   };
   coreWebVitals: {
     lcp: number; // Largest Contentful Paint
-    fid: number; // First Input Delay  
+    fid: number; // First Input Delay
     cls: number; // Cumulative Layout Shift
   };
   indexability: {
@@ -141,24 +141,24 @@ export interface NaverMetrics {
 export const SEO_TARGETS = {
   keywordRankings: {
     '가업승계 컨설팅': { target: 5, timeframe: '3개월' },
-    '패밀리오피스': { target: 3, timeframe: '1개월' },
+    패밀리오피스: { target: 3, timeframe: '1개월' },
     '법인세 절세': { target: 8, timeframe: '3개월' },
-    '절세전략': { target: 10, timeframe: '2개월' },
+    절세전략: { target: 10, timeframe: '2개월' },
     '정책자금 신청': { target: 15, timeframe: '3개월' },
     '기업인증 혜택': { target: 12, timeframe: '2개월' },
-    '경영인정기보험': { target: 10, timeframe: '2개월' }
+    경영인정기보험: { target: 10, timeframe: '2개월' },
   },
-  
+
   trafficTargets: {
     monthly: {
       organic: { target: 10000, current: 0 },
       total: { target: 15000, current: 0 },
-      conversion: { target: 200, current: 0 }
+      conversion: { target: 200, current: 0 },
     },
     daily: {
       organic: { target: 300, current: 0 },
-      total: { target: 500, current: 0 }
-    }
+      total: { target: 500, current: 0 },
+    },
   },
 
   technicalTargets: {
@@ -166,17 +166,17 @@ export const SEO_TARGETS = {
     coreWebVitals: {
       lcp: { target: 2.5, current: 0 },
       fid: { target: 100, current: 0 },
-      cls: { target: 0.1, current: 0 }
+      cls: { target: 0.1, current: 0 },
     },
-    indexedPages: { target: 100, current: 0 }
+    indexedPages: { target: 100, current: 0 },
   },
 
   naverTargets: {
     blogSubscribers: { target: 2000, current: 0 },
     premiumSubscribers: { target: 500, current: 0 },
     monthlyRevenue: { target: 5000000, current: 0 },
-    naverSearchRank: { target: 10, current: 0 }
-  }
+    naverSearchRank: { target: 10, current: 0 },
+  },
 };
 
 // SEO 점수 계산 함수
@@ -196,7 +196,8 @@ export function calculateSEOScore(metrics: SEOMetrics): {
   // 기술적 SEO 점수 (25점)
   const technicalScore = metrics.technicalSEO.overall * 0.25;
   breakdown['기술적 SEO'] = technicalScore;
-  if (technicalScore < 20) improvements.push('페이지 속도 및 기술적 최적화 필요');
+  if (technicalScore < 20)
+    improvements.push('페이지 속도 및 기술적 최적화 필요');
 
   // 콘텐츠 품질 점수 (20점)
   const contentScore = calculateContentScore(metrics.contentPerformance);
@@ -215,13 +216,17 @@ export function calculateSEOScore(metrics: SEOMetrics): {
 
 function calculateKeywordScore(rankings: KeywordRanking[]): number {
   if (rankings.length === 0) return 0;
-  
+
   const targetKeywords = Object.keys(SEO_TARGETS.keywordRankings);
-  const relevantRankings = rankings.filter(r => targetKeywords.includes(r.keyword));
-  
+  const relevantRankings = rankings.filter(r =>
+    targetKeywords.includes(r.keyword)
+  );
+
   let totalScore = 0;
   relevantRankings.forEach(ranking => {
-    const keywordTarget = (SEO_TARGETS.keywordRankings as Record<string, any>)[ranking.keyword];
+    const keywordTarget = (SEO_TARGETS.keywordRankings as Record<string, any>)[
+      ranking.keyword
+    ];
     const target = keywordTarget?.target || 20;
     const score = Math.max(0, 100 - (ranking.currentRank - target) * 5);
     totalScore += score;
@@ -232,19 +237,20 @@ function calculateKeywordScore(rankings: KeywordRanking[]): number {
 
 function calculateContentScore(content: ContentMetrics): number {
   let score = 0;
-  
+
   // 키워드 밀도 점수 (적정 범위: 1.5-3.5%)
-  if (content.keywordDensity >= 1.5 && content.keywordDensity <= 3.5) score += 5;
-  
+  if (content.keywordDensity >= 1.5 && content.keywordDensity <= 3.5)
+    score += 5;
+
   // 가독성 점수
   if (content.readabilityScore >= 60) score += 5;
-  
+
   // 내부 링크 점수
   if (content.internalLinkCount >= 3) score += 3;
-  
+
   // 이미지 최적화 점수
   if (content.imageOptimization >= 80) score += 3;
-  
+
   // 중복 콘텐츠 점수
   if (content.duplicateContentIssues === 0) score += 4;
 
@@ -253,18 +259,18 @@ function calculateContentScore(content: ContentMetrics): number {
 
 function calculateTrafficScore(traffic: TrafficData): number {
   let score = 0;
-  
+
   const target = SEO_TARGETS.trafficTargets.monthly.organic.target;
   const current = traffic.organicSessions;
-  
+
   // 트래픽 달성률
   const achievementRate = (current / target) * 100;
   score += Math.min(8, achievementRate * 0.08);
-  
+
   // 전환율 점수
   if (traffic.conversionRate >= 2) score += 4;
   else if (traffic.conversionRate >= 1) score += 2;
-  
+
   // 바운스율 점수
   if (traffic.bounceRate <= 40) score += 3;
   else if (traffic.bounceRate <= 60) score += 1;
@@ -282,7 +288,7 @@ export function analyzeCompetitors(): CompetitorData[] {
       averageRank: 12,
       backlinkCount: 450,
       contentGap: ['가업승계 실무', '중소기업 특화'],
-      marketShare: 25
+      marketShare: 25,
     },
     {
       competitor: 'KB프라이빗뱅킹',
@@ -291,7 +297,7 @@ export function analyzeCompetitors(): CompetitorData[] {
       averageRank: 15,
       backlinkCount: 320,
       contentGap: ['정책자금 정보', '세무 전문성'],
-      marketShare: 20
+      marketShare: 20,
     },
     {
       competitor: '삼성증권 패밀리오피스',
@@ -300,8 +306,8 @@ export function analyzeCompetitors(): CompetitorData[] {
       averageRank: 18,
       backlinkCount: 280,
       contentGap: ['실무 가이드', '중소기업 사례'],
-      marketShare: 15
-    }
+      marketShare: 15,
+    },
   ];
 }
 
@@ -315,9 +321,11 @@ export function generateSEORecommendations(metrics: SEOMetrics): {
   implementation: string;
 }[] {
   const recommendations = [];
-  
+
   // 키워드 순위 개선
-  const lowRankKeywords = metrics.keywordRankings.filter(k => k.currentRank > 20);
+  const lowRankKeywords = metrics.keywordRankings.filter(
+    k => k.currentRank > 20
+  );
   if (lowRankKeywords.length > 0) {
     recommendations.push({
       priority: 'high' as const,
@@ -325,7 +333,7 @@ export function generateSEORecommendations(metrics: SEOMetrics): {
       title: '순위 저조 키워드 집중 최적화',
       description: `${lowRankKeywords.length}개 키워드의 순위가 20위 이하입니다.`,
       expectedImpact: '3개월 내 평균 10위 이상 순위 상승',
-      implementation: '콘텐츠 개선, 내부링크 강화, 키워드 밀도 조정'
+      implementation: '콘텐츠 개선, 내부링크 강화, 키워드 밀도 조정',
     });
   }
 
@@ -337,7 +345,7 @@ export function generateSEORecommendations(metrics: SEOMetrics): {
       title: '모바일 페이지 속도 최적화',
       description: `모바일 페이지 속도: ${metrics.technicalSEO.pagespeed.mobile}점`,
       expectedImpact: '검색 순위 5-10위 상승, 사용자 경험 개선',
-      implementation: '이미지 최적화, CSS/JS 압축, 캐싱 설정'
+      implementation: '이미지 최적화, CSS/JS 압축, 캐싱 설정',
     });
   }
 
@@ -349,7 +357,7 @@ export function generateSEORecommendations(metrics: SEOMetrics): {
       title: '콘텐츠 길이 확장',
       description: `평균 글자 수: ${metrics.contentPerformance.avgWordCount}자`,
       expectedImpact: '검색 노출 증가, 체류시간 연장',
-      implementation: '기존 콘텐츠 확장, 새로운 섹션 추가'
+      implementation: '기존 콘텐츠 확장, 새로운 섹션 추가',
     });
   }
 
@@ -361,7 +369,7 @@ export function generateSEORecommendations(metrics: SEOMetrics): {
       title: '포스팅 빈도 증가',
       description: `주간 포스팅: ${metrics.naverSpecificMetrics.blogOptimization.postFrequency}회`,
       expectedImpact: '네이버 검색 노출 증가, 블로그 구독자 증가',
-      implementation: '콘텐츠 캘린더 수립, 자동화 도구 활용'
+      implementation: '콘텐츠 캘린더 수립, 자동화 도구 활용',
     });
   }
 
@@ -373,7 +381,10 @@ export function generateSEORecommendations(metrics: SEOMetrics): {
 
 // 실시간 알림 시스템
 export class SEOAlertSystem {
-  static checkRankingChanges(current: KeywordRanking[], previous: KeywordRanking[]) {
+  static checkRankingChanges(
+    current: KeywordRanking[],
+    previous: KeywordRanking[]
+  ) {
     const alerts: Array<{
       type: 'ranking_drop' | 'ranking_gain' | 'new_keyword';
       keyword: string;
@@ -381,7 +392,7 @@ export class SEOAlertSystem {
       severity: 'low' | 'medium' | 'high';
       timestamp: string;
     }> = [];
-    
+
     current.forEach(curr => {
       const prev = previous.find(p => p.keyword === curr.keyword);
       if (prev) {
@@ -392,7 +403,7 @@ export class SEOAlertSystem {
             keyword: curr.keyword,
             message: `"${curr.keyword}" 키워드 ${change}위 상승! (${curr.currentRank}위)`,
             severity: 'low',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
         } else if (change <= -5) {
           alerts.push({
@@ -400,47 +411,53 @@ export class SEOAlertSystem {
             keyword: curr.keyword,
             message: `"${curr.keyword}" 키워드 ${Math.abs(change)}위 하락 (${curr.currentRank}위)`,
             severity: 'high',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
         }
       }
     });
-    
+
     return alerts;
   }
-  
+
   static checkTrafficAnomalies(current: TrafficData, baseline: TrafficData) {
     const alerts = [];
-    
-    const trafficChange = ((current.organicSessions - baseline.organicSessions) / baseline.organicSessions) * 100;
-    
+
+    const trafficChange =
+      ((current.organicSessions - baseline.organicSessions) /
+        baseline.organicSessions) *
+      100;
+
     if (trafficChange <= -20) {
       alerts.push({
         type: 'error',
         message: `유기적 트래픽 ${Math.abs(trafficChange).toFixed(1)}% 감소`,
-        action: 'SEO 문제 점검 필요'
+        action: 'SEO 문제 점검 필요',
       });
     } else if (trafficChange >= 20) {
       alerts.push({
         type: 'success',
         message: `유기적 트래픽 ${trafficChange.toFixed(1)}% 증가!`,
-        action: '성공 요인 분석 및 확대'
+        action: '성공 요인 분석 및 확대',
       });
     }
-    
+
     return alerts;
   }
 }
 
 // 보고서 생성 함수
-export function generateSEOReport(metrics: SEOMetrics, timeframe: 'weekly' | 'monthly'): {
+export function generateSEOReport(
+  metrics: SEOMetrics,
+  timeframe: 'weekly' | 'monthly'
+): {
   summary: string;
   keyFindings: string[];
   actionItems: string[];
   projections: string[];
 } {
   const score = calculateSEOScore(metrics);
-  
+
   const summary = `
     SEO 전체 점수: ${score.overall.toFixed(1)}/100점
     주요 키워드 평균 순위: ${metrics.keywordRankings.reduce((acc, k) => acc + k.currentRank, 0) / metrics.keywordRankings.length}위
@@ -451,7 +468,7 @@ export function generateSEOReport(metrics: SEOMetrics, timeframe: 'weekly' | 'mo
   const keyFindings = [
     `상위 5개 키워드 중 ${metrics.keywordRankings.filter(k => k.currentRank <= 10).length}개가 10위 이내`,
     `기술적 SEO 점수: ${metrics.technicalSEO.overall}점`,
-    `네이버 블로그 구독자: ${metrics.naverSpecificMetrics.blogOptimization.subscriberCount}명`
+    `네이버 블로그 구독자: ${metrics.naverSpecificMetrics.blogOptimization.subscriberCount}명`,
   ];
 
   const actionItems = score.improvements;
@@ -459,7 +476,7 @@ export function generateSEOReport(metrics: SEOMetrics, timeframe: 'weekly' | 'mo
   const projections = [
     '현재 추세 유지 시 3개월 후 유기적 트래픽 30% 증가 예상',
     '키워드 최적화 완료 시 전환율 50% 개선 가능',
-    '네이버 블로그 전략 실행 시 월간 리드 200% 증가'
+    '네이버 블로그 전략 실행 시 월간 리드 200% 증가',
   ];
 
   return { summary, keyFindings, actionItems, projections };

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import {
   leadScoringSystem,
   LeadStatus,
@@ -147,7 +148,10 @@ export async function GET(request: NextRequest) {
         const minScore = parseInt(searchParams.get('minScore') || '0');
         const maxScore = parseInt(searchParams.get('maxScore') || '100');
 
-        const leads = leadScoringSystem.getLeadsByScoreRange(minScore, maxScore);
+        const leads = leadScoringSystem.getLeadsByScoreRange(
+          minScore,
+          maxScore
+        );
 
         return NextResponse.json({
           success: true,
@@ -162,7 +166,9 @@ export async function GET(request: NextRequest) {
 
       case 'get-hot-leads': {
         // Hot Leads 조회
-        const minProbability = parseInt(searchParams.get('minProbability') || '70');
+        const minProbability = parseInt(
+          searchParams.get('minProbability') || '70'
+        );
         const leads = leadScoringSystem.getHotLeads(minProbability);
 
         return NextResponse.json({
@@ -317,7 +323,11 @@ export async function POST(request: NextRequest) {
         }
 
         // 활동 기록
-        lead = leadScoringSystem.recordActivity(lead.id, activityType as ActivityType, details);
+        lead = leadScoringSystem.recordActivity(
+          lead.id,
+          activityType as ActivityType,
+          details
+        );
 
         return NextResponse.json({
           success: true,
@@ -340,7 +350,8 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const results: { leadId: string; success: boolean; error?: string }[] = [];
+        const results: { leadId: string; success: boolean; error?: string }[] =
+          [];
 
         for (const activity of activities) {
           try {
@@ -365,7 +376,11 @@ export async function POST(request: NextRequest) {
               continue;
             }
 
-            leadScoringSystem.recordActivity(lead.id, activityType as ActivityType, details);
+            leadScoringSystem.recordActivity(
+              lead.id,
+              activityType as ActivityType,
+              details
+            );
             results.push({
               leadId: lead.id,
               success: true,
@@ -438,7 +453,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to process request',
+        error:
+          error instanceof Error ? error.message : 'Failed to process request',
       },
       { status: 500 }
     );

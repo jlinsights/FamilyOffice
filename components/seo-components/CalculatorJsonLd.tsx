@@ -27,23 +27,31 @@ interface CalculatorJsonLdProps {
 
 export function CalculatorJsonLd({ type, results }: CalculatorJsonLdProps) {
   const baseUrl = 'https://familyoffices.vip';
-  
+
   const calculatorData = {
     inheritance: {
       name: '상속세 계산기 2025',
-      description: '2025년 최신 세법 기준 상속세 계산기. 누진세율 정확 적용, 공제 한도 자동 계산, AI 절세 전략 제안.',
+      description:
+        '2025년 최신 세법 기준 상속세 계산기. 누진세율 정확 적용, 공제 한도 자동 계산, AI 절세 전략 제안.',
       url: `${baseUrl}/calculators/inheritance-tax`,
-      keywords: ['상속세 계산기', '상속세 절세', '2025년 상속세', '누진세율 계산'],
+      keywords: [
+        '상속세 계산기',
+        '상속세 절세',
+        '2025년 상속세',
+        '누진세율 계산',
+      ],
     },
     gift: {
       name: '증여세 계산기 2025',
-      description: '2025년 최신 세법 기준 증여세 계산기. 관계별 공제한도 자동 적용, 분할증여 최적화 분석.',
+      description:
+        '2025년 최신 세법 기준 증여세 계산기. 관계별 공제한도 자동 적용, 분할증여 최적화 분석.',
       url: `${baseUrl}/calculators/gift-tax`,
       keywords: ['증여세 계산기', '분할증여', '증여세 절세', '관계별 공제'],
     },
     succession: {
       name: '가업승계 비용 계산기 2025',
-      description: '2025년 최신 세법 기준 가업승계 비용 계산기. 승계 방법별 세무비용 정확 계산, 특례 혜택 분석.',
+      description:
+        '2025년 최신 세법 기준 가업승계 비용 계산기. 승계 방법별 세무비용 정확 계산, 특례 혜택 분석.',
       url: `${baseUrl}/calculators/succession-cost`,
       keywords: ['가업승계 비용', '사업승계', '가업승계 특례', '승계 세무비용'],
     },
@@ -60,7 +68,7 @@ export function CalculatorJsonLd({ type, results }: CalculatorJsonLdProps) {
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'Any',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
-    
+
     // 🎯 BMAD Behavioral: 기능적 특징
     featureList: [
       '2025년 최신 세법 반영',
@@ -68,18 +76,18 @@ export function CalculatorJsonLd({ type, results }: CalculatorJsonLdProps) {
       'AI 최적화 전략 제안',
       '전문가 수준 분석',
       '모바일 최적화',
-      '무료 이용'
+      '무료 이용',
     ],
-    
+
     // 🎯 BMAD Motivational: 가치 제안
     offers: {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'KRW',
       availability: 'https://schema.org/InStock',
-      description: '무료 세무 계산 및 최적화 서비스'
+      description: '무료 세무 계산 및 최적화 서비스',
     },
-    
+
     // 🎯 BMAD Aspirational: 성과 지표 (실제 계산 결과가 있는 경우)
     ...(results && {
       potentialAction: {
@@ -88,11 +96,11 @@ export function CalculatorJsonLd({ type, results }: CalculatorJsonLdProps) {
         result: {
           '@type': 'QuantitativeValue',
           value: results.taxAmount || 0,
-          unitText: '만원'
-        }
-      }
+          unitText: '만원',
+        },
+      },
     }),
-    
+
     // 🎯 BMAD Decisional: 행동 유도
     provider: {
       '@type': 'Organization',
@@ -102,9 +110,9 @@ export function CalculatorJsonLd({ type, results }: CalculatorJsonLdProps) {
       contactPoint: {
         '@type': 'ContactPoint',
         telephone: '+82-2-1234-5678',
-        contactType: 'Customer Service'
-      }
-    }
+        contactType: 'Customer Service',
+      },
+    },
   };
 
   return <JsonLd data={jsonLd} />;
@@ -117,7 +125,11 @@ interface UserJourneyTrackingProps {
   metadata?: Record<string, any>;
 }
 
-export function UserJourneyTracking({ step, calculatorType, metadata }: UserJourneyTrackingProps) {
+export function UserJourneyTracking({
+  step,
+  calculatorType,
+  metadata,
+}: UserJourneyTrackingProps) {
   const trackingData = {
     '@context': 'https://schema.org',
     '@type': 'Action',
@@ -125,14 +137,14 @@ export function UserJourneyTracking({ step, calculatorType, metadata }: UserJour
     object: {
       '@type': 'WebPage',
       name: `${calculatorType} Calculator - ${step}`,
-      url: window?.location?.href || ''
+      url: window?.location?.href || '',
     },
     startTime: new Date().toISOString(),
     instrument: {
       '@type': 'SoftwareApplication',
-      name: 'FamilyOffice S Calculator'
+      name: 'FamilyOffice S Calculator',
     },
-    ...(metadata && { additionalProperty: metadata })
+    ...(metadata && { additionalProperty: metadata }),
   };
 
   return <JsonLd data={trackingData} />;
@@ -155,9 +167,9 @@ export function FAQJsonLd({ faqs }: FAQJsonLdProps) {
       name: faq.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: faq.answer
-      }
-    }))
+        text: faq.answer,
+      },
+    })),
   };
 
   return <JsonLd data={faqData} />;

@@ -61,13 +61,15 @@ export class SEOErrorHandler {
           // Add timeout protection
           const timeoutPromise = new Promise<never>((_, reject) => {
             setTimeout(() => {
-              reject(this.createError(
-                `Operation timeout after ${timeout}ms`,
-                'OPERATION_TIMEOUT',
-                'high',
-                module,
-                operationName
-              ));
+              reject(
+                this.createError(
+                  `Operation timeout after ${timeout}ms`,
+                  'OPERATION_TIMEOUT',
+                  'high',
+                  module,
+                  operationName
+                )
+              );
             }, timeout);
           });
 
@@ -82,12 +84,15 @@ export class SEOErrorHandler {
             operationName,
             error instanceof Error ? error : undefined
           );
-          
+
           seoError.fallbackUsed = true;
-          
+
           // Log in development for debugging
           if (process.env.NODE_ENV === 'development') {
-            console.error(`SEO AI Operation Failed [${module}:${operationName}]:`, error);
+            console.error(
+              `SEO AI Operation Failed [${module}:${operationName}]:`,
+              error
+            );
             console.info(`Using fallback value:`, fallback);
           }
 
@@ -99,7 +104,10 @@ export class SEOErrorHandler {
   }
 
   // Validate input for AI operations
-  static validateContentInput(content: string, maxLength: number = 10000): {
+  static validateContentInput(
+    content: string,
+    maxLength: number = 10000
+  ): {
     isValid: boolean;
     sanitizedContent: string;
     errors: string[];
@@ -136,7 +144,7 @@ export class SEOErrorHandler {
     return {
       isValid: errors.length === 0,
       sanitizedContent,
-      errors
+      errors,
     };
   }
 
@@ -152,18 +160,24 @@ export class SEOErrorHandler {
 
     // Log to console in development
     if (process.env.NODE_ENV === 'development') {
-      console.error(`SEO Error [${error.severity}] ${error.module}:${error.operation}:`, error.message);
+      console.error(
+        `SEO Error [${error.severity}] ${error.module}:${error.operation}:`,
+        error.message
+      );
     }
 
     // In production, could send to error tracking service
-    if (process.env.NODE_ENV === 'production' && error.severity === 'critical') {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      error.severity === 'critical'
+    ) {
       // Could integrate with Sentry, LogRocket, etc.
       console.error('Critical SEO Error:', {
         code: error.code,
         message: error.message,
         module: error.module,
         operation: error.operation,
-        timestamp: error.timestamp
+        timestamp: error.timestamp,
       });
     }
   }
@@ -179,7 +193,8 @@ export class SEOErrorHandler {
     const errorsByModule: Record<string, number> = {};
 
     this.errors.forEach(error => {
-      errorsBySeverity[error.severity] = (errorsBySeverity[error.severity] || 0) + 1;
+      errorsBySeverity[error.severity] =
+        (errorsBySeverity[error.severity] || 0) + 1;
       errorsByModule[error.module] = (errorsByModule[error.module] || 0) + 1;
     });
 
@@ -187,7 +202,7 @@ export class SEOErrorHandler {
       totalErrors: this.errors.length,
       errorsBySeverity,
       errorsByModule,
-      recentErrors: this.errors.slice(-10) // Last 10 errors
+      recentErrors: this.errors.slice(-10), // Last 10 errors
     };
   }
 
@@ -211,36 +226,35 @@ export const inputSanitizer = {
   // Sanitize keywords array
   sanitizeKeywords(keywords: string[]): string[] {
     return keywords
-      .filter(keyword => typeof keyword === 'string' && keyword.trim().length > 0)
+      .filter(
+        keyword => typeof keyword === 'string' && keyword.trim().length > 0
+      )
       .map(keyword => keyword.trim().toLowerCase())
       .slice(0, 20); // Limit number of keywords
   },
 
   // Validate domain input
   validateDomain(domain: string): boolean {
-    const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
+    const domainRegex =
+      /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
     return domainRegex.test(domain);
-  }
+  },
 };
 
 // Export error handling utilities
 export const seoErrorUtils = {
   handler: SEOErrorHandler,
   sanitizer: inputSanitizer,
-  
+
   // Quick helper for safe operations
   async withFallback<T>(
     operation: () => Promise<T>,
     fallback: T,
     operationName: string
   ): Promise<T> {
-    return await SEOErrorHandler.safeAIOperation(
-      operation,
-      fallback,
-      {
-        module: 'general',
-        operationName
-      }
-    );
-  }
+    return await SEOErrorHandler.safeAIOperation(operation, fallback, {
+      module: 'general',
+      operationName,
+    });
+  },
 };

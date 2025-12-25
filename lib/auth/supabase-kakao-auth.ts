@@ -1,8 +1,11 @@
 'use client';
 
-import { createClient } from '@/lib/supabase/client';
-import { Database } from '@/types/supabase';
 import { User } from '@supabase/supabase-js';
+
+import { createClient } from '@/lib/supabase/client';
+import { safeInsert, safeUpdate } from '@/lib/supabase/helpers';
+
+import { Database } from '@/types/supabase';
 
 type UserRecord = Database['public']['Tables']['users']['Row'];
 type UserInsert = Database['public']['Tables']['users']['Insert'];
@@ -51,29 +54,28 @@ export class SupabaseKakaoAuthService {
           redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
           queryParams: {
             // 카카오에서 추가 정보 요청
-            scope: 'profile_nickname profile_image account_email'
-          }
-        }
+            scope: 'profile_nickname profile_image account_email',
+          },
+        },
       });
 
       if (error) {
         console.error('Supabase 카카오 OAuth 오류:', error);
         return {
           success: false,
-          error: error.message
+          error: error.message,
         };
       }
 
       // OAuth 리다이렉트가 성공적으로 시작됨
       return {
-        success: true
+        success: true,
       };
-
     } catch (error) {
       console.error('카카오 로그인 오류:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : '알 수 없는 오류'
+        error: error instanceof Error ? error.message : '알 수 없는 오류',
       };
     }
   }
@@ -83,8 +85,11 @@ export class SupabaseKakaoAuthService {
    */
   async getSession() {
     try {
-      const { data: { session }, error } = await this.supabase.auth.getSession();
-      
+      const {
+        data: { session },
+        error,
+      } = await this.supabase.auth.getSession();
+
       if (error) {
         console.error('세션 조회 오류:', error);
         return null;
@@ -102,8 +107,11 @@ export class SupabaseKakaoAuthService {
    */
   async getCurrentUser() {
     try {
-      const { data: { user }, error } = await this.supabase.auth.getUser();
-      
+      const {
+        data: { user },
+        error,
+      } = await this.supabase.auth.getUser();
+
       if (error) {
         console.error('사용자 조회 오류:', error);
         return null;
@@ -128,7 +136,8 @@ export class SupabaseKakaoAuthService {
         .single();
 
       if (error) {
-        if (error.code !== 'PGRST116') { // Not found 에러가 아닌 경우만 로그
+        if (error.code !== 'PGRST116') {
+          // Not found 에러가 아닌 경우만 로그
           console.error('사용자 레코드 조회 오류:', error);
         }
         return null;
@@ -155,19 +164,26 @@ export class SupabaseKakaoAuthService {
       const userData: UserInsert | UserUpdate = {
         id: user.id,
         email: user.email || kakaoData?.email || null,
-        name: kakaoData?.full_name || kakaoData?.name || kakaoData?.nickname || null,
-        avatar_url: kakaoData?.avatar_url || kakaoData?.profile_image_url || null,
+        name:
+          kakaoData?.full_name ||
+          kakaoData?.name ||
+          kakaoData?.nickname ||
+          null,
+        avatar_url:
+          kakaoData?.avatar_url || kakaoData?.profile_image_url || null,
         kakao_id: kakaoId || null,
         provider: 'kakao',
         last_sign_in_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       };
 
       if (userRecord) {
         // 기존 사용자 업데이트
-        const { data, error } = await this.supabase
-          .from('users')
-          .update(userData as UserUpdate)
+        const { data, error } = await safeUpdate(
+          this.supabase,
+          'users',
+          userData as UserUpdate
+        )
           .eq('id', user.id)
           .select()
           .single();
@@ -181,13 +197,15 @@ export class SupabaseKakaoAuthService {
       } else {
         // 새 사용자 생성
         const insertData: UserInsert = {
-          ...userData as UserInsert,
-          created_at: new Date().toISOString()
+          ...(userData as UserInsert),
+          created_at: new Date().toISOString(),
         };
 
-        const { data, error } = await this.supabase
-          .from('users')
-          .insert(insertData)
+        const { data, error } = await safeInsert(
+          this.supabase,
+          'users',
+          insertData
+        )
           .select()
           .single();
 
@@ -207,17 +225,20 @@ export class SupabaseKakaoAuthService {
   /**
    * 사용자 프로필 업데이트
    */
-  async updateUserProfile(userId: string, updates: Partial<UserUpdate>): Promise<boolean> {
+  async updateUserProfile(
+    userId: string,
+    updates: Partial<UserUpdate>
+  ): Promise<boolean> {
     try {
       const updateData: UserUpdate = {
         ...updates,
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       };
 
-      const { error } = await this.supabase
-        .from('users')
-        .update(updateData)
-        .eq('id', userId);
+      const { error } = await safeUpdate(this.supabase, 'users', updateData).eq(
+        'id',
+        userId
+      );
 
       if (error) {
         console.error('프로필 업데이트 오류:', error);
@@ -237,7 +258,7 @@ export class SupabaseKakaoAuthService {
   async signOut(): Promise<boolean> {
     try {
       const { error } = await this.supabase.auth.signOut();
-      
+
       if (error) {
         console.error('로그아웃 오류:', error);
         return false;
@@ -256,15 +277,12 @@ export class SupabaseKakaoAuthService {
   async unlinkKakaoAccount(userId: string): Promise<boolean> {
     try {
       // users 테이블에서 카카오 관련 정보 제거
-      const { error } = await this.supabase
-        .from('users')
-        .update({
-          kakao_id: null,
-          kakao_access_token: null,
-          provider: null,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', userId);
+      const { error } = await safeUpdate(this.supabase, 'users', {
+        kakao_id: null,
+        kakao_access_token: null,
+        provider: null,
+        updated_at: new Date().toISOString(),
+      }).eq('id', userId);
 
       if (error) {
         console.error('카카오 연동 해제 오류:', error);
@@ -281,7 +299,9 @@ export class SupabaseKakaoAuthService {
   /**
    * 인증 상태 변경 리스너 등록
    */
-  onAuthStateChange(callback: (user: User | null, userRecord: UserRecord | null) => void) {
+  onAuthStateChange(
+    callback: (user: User | null, userRecord: UserRecord | null) => void
+  ) {
     return this.supabase.auth.onAuthStateChange(async (_event, session) => {
       if (session?.user) {
         // 로그인 시 사용자 레코드 동기화
@@ -298,9 +318,11 @@ export class SupabaseKakaoAuthService {
    */
   isKakaoUser(user: User | null): boolean {
     if (!user) return false;
-    return user.app_metadata?.provider === 'kakao' || 
-           user.identities?.some(identity => identity.provider === 'kakao') || 
-           false;
+    return (
+      user.app_metadata?.provider === 'kakao' ||
+      user.identities?.some(identity => identity.provider === 'kakao') ||
+      false
+    );
   }
 
   /**
@@ -313,18 +335,21 @@ export class SupabaseKakaoAuthService {
     return {
       id: user.identities?.[0]?.id || user.id,
       properties: {
-        nickname: metadata?.full_name || metadata?.name || metadata?.nickname || '',
+        nickname:
+          metadata?.full_name || metadata?.name || metadata?.nickname || '',
         profile_image: metadata?.avatar_url || metadata?.profile_image_url,
-        thumbnail_image: metadata?.thumbnail_image_url
+        thumbnail_image: metadata?.thumbnail_image_url,
       },
       kakao_account: {
         email: user.email || metadata?.email,
         profile: {
-          nickname: metadata?.full_name || metadata?.name || metadata?.nickname || '',
-          profile_image_url: metadata?.avatar_url || metadata?.profile_image_url,
-          thumbnail_image_url: metadata?.thumbnail_image_url
-        }
-      }
+          nickname:
+            metadata?.full_name || metadata?.name || metadata?.nickname || '',
+          profile_image_url:
+            metadata?.avatar_url || metadata?.profile_image_url,
+          thumbnail_image_url: metadata?.thumbnail_image_url,
+        },
+      },
     };
   }
 
@@ -340,22 +365,24 @@ export class SupabaseKakaoAuthService {
     return {
       id: user.id,
       email: user.email || userRecord?.email || '',
-      displayName: userRecord?.name || 
-                   kakaoUser?.properties?.nickname || 
-                   user.user_metadata?.name || 
-                   user.email?.split('@')[0] || 
-                   '사용자',
-      profileImage: userRecord?.avatar_url || 
-                    kakaoUser?.properties?.profile_image || 
-                    user.user_metadata?.avatar_url || 
-                    null,
+      displayName:
+        userRecord?.name ||
+        kakaoUser?.properties?.nickname ||
+        user.user_metadata?.name ||
+        user.email?.split('@')[0] ||
+        '사용자',
+      profileImage:
+        userRecord?.avatar_url ||
+        kakaoUser?.properties?.profile_image ||
+        user.user_metadata?.avatar_url ||
+        null,
       companyName: userRecord?.company_name || null,
       phone: userRecord?.phone || null,
       isKakaoUser,
       kakaoUser,
       userRecord,
       createdAt: user.created_at,
-      lastSignInAt: userRecord?.last_sign_in_at || user.last_sign_in_at
+      lastSignInAt: userRecord?.last_sign_in_at || user.last_sign_in_at,
     };
   }
 }

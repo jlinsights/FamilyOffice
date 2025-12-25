@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { Play } from 'lucide-react';
+
+import { useState } from 'react';
 
 interface YouTubeThumbnailProps {
   videoId: string;
@@ -9,10 +10,10 @@ interface YouTubeThumbnailProps {
   className?: string;
 }
 
-export function YouTubeThumbnail({ 
-  videoId, 
+export function YouTubeThumbnail({
+  videoId,
   title,
-  className = '' 
+  className = '',
 }: YouTubeThumbnailProps) {
   const [showVideo, setShowVideo] = useState(false);
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
@@ -36,7 +37,7 @@ export function YouTubeThumbnail({
 
   return (
     <div className={`group ${className}`}>
-      <div 
+      <div
         className="relative w-full aspect-video rounded-lg overflow-hidden cursor-pointer"
         onClick={() => setShowVideo(true)}
       >
@@ -46,17 +47,17 @@ export function YouTubeThumbnail({
           alt={title || 'YouTube video thumbnail'}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        
+
         {/* 오버레이 */}
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
-        
+
         {/* 재생 버튼 */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
             <Play className="h-8 w-8 text-white ml-1" fill="white" />
           </div>
         </div>
-        
+
         {/* 제목 오버레이 */}
         {title && (
           <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">

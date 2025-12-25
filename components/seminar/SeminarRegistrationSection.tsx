@@ -1,17 +1,17 @@
 'use client';
 
 import {
-    ArrowRight,
-    Calendar,
-    CheckCircle,
-    Clock,
-    CreditCard,
-    Gift,
-    Mail,
-    Phone,
-    Star,
-    UserPlus,
-    Users,
+  ArrowRight,
+  Calendar,
+  CheckCircle,
+  Clock,
+  CreditCard,
+  Gift,
+  Mail,
+  Phone,
+  Star,
+  UserPlus,
+  Users,
 } from 'lucide-react';
 
 import { useEffect } from 'react';
@@ -127,12 +127,19 @@ export default function SeminarRegistrationSection() {
         </div>
 
         {/* 참석 자격 기준 안내 */}
-        <div className="max-w-3xl mx-auto mb-16 animate-slide-up" style={{ animationDelay: '250ms' }}>
+        <div
+          className="max-w-3xl mx-auto mb-16 animate-slide-up"
+          style={{ animationDelay: '250ms' }}
+        >
           <Alert className="bg-amber-50 border-amber-200 dark:bg-amber-900/20 dark:border-amber-800">
             <Users className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-            <AlertTitle className="text-amber-800 dark:text-amber-300 font-semibold ml-2">참석 자격 기준 안내</AlertTitle>
+            <AlertTitle className="text-amber-800 dark:text-amber-300 font-semibold ml-2">
+              참석 자격 기준 안내
+            </AlertTitle>
             <AlertDescription className="text-amber-700 dark:text-amber-400 ml-2 mt-1">
-              본 세미나는 <strong>순자산 50억 이상</strong> 또는 <strong>순이익 3억 이상</strong>인 기업 오너 일가만 참석 가능합니다.
+              본 세미나는 <strong>순자산 50억 이상</strong> 또는{' '}
+              <strong>순이익 3억 이상</strong>인 기업 오너 일가만 참석
+              가능합니다.
             </AlertDescription>
           </Alert>
         </div>
@@ -334,7 +341,9 @@ export default function SeminarRegistrationSection() {
                     예약 확정 및 보증금 안내
                   </h4>
                   <p className="text-sm text-purple-700 dark:text-purple-300">
-                    원활한 행사 진행과 노쇼(No-Show) 방지를 위해, 예약 확정 시 소정의 보증금(Deposit)이 발생할 수 있습니다. (참석 시 전액 환불)
+                    원활한 행사 진행과 노쇼(No-Show) 방지를 위해, 예약 확정 시
+                    소정의 보증금(Deposit)이 발생할 수 있습니다. (참석 시 전액
+                    환불)
                   </p>
                 </div>
               </div>

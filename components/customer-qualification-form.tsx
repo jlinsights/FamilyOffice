@@ -1,28 +1,39 @@
-'use client'
+'use client';
 
 /**
  * 🎯 고객 자격 검증 폼 컴포넌트
  * 순자산/순이익 기준으로 패밀리오피스 vs FP센터 자동 분류
  */
-
-import { CalComButton } from '@/components/cal-com-button'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
 import {
-    CUSTOMER_SEGMENTS,
-    assessCustomerQualification,
-    generateTargetingMessage,
-    type CustomerQualificationForm
-} from '@/lib/customer-segmentation'
-import { Award, Calculator, CheckCircle, Crown, Star, Target, TrendingUp } from 'lucide-react'
-import { useState } from 'react'
+  Award,
+  Calculator,
+  CheckCircle,
+  Crown,
+  Star,
+  Target,
+  TrendingUp,
+} from 'lucide-react';
+
+import { useState } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+
+import { CalComButton } from '@/components/cal-com-button';
+
+import {
+  CUSTOMER_SEGMENTS,
+  assessCustomerQualification,
+  generateTargetingMessage,
+  type CustomerQualificationForm,
+} from '@/lib/customer-segmentation';
 
 export default function CustomerQualificationForm() {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<CustomerQualificationForm>({
     companyName: '',
     ceoName: '',
@@ -35,44 +46,46 @@ export default function CustomerQualificationForm() {
       realEstate: 0,
       financial: 0,
       business: 0,
-      other: 0
+      other: 0,
     },
     needsAssessment: {
       familyOffice: false,
       businessSuccession: false,
       taxOptimization: false,
       portfolioManagement: false,
-      estatePlanning: false
+      estatePlanning: false,
     },
     preferredContactMethod: 'phone',
-    urgency: 'within-month'
-  })
-  
-  const [assessment, setAssessment] = useState<ReturnType<typeof assessCustomerQualification> | null>(null)
+    urgency: 'within-month',
+  });
+
+  const [assessment, setAssessment] = useState<ReturnType<
+    typeof assessCustomerQualification
+  > | null>(null);
 
   const handleInputChange = (field: string, value: any) => {
     if (field.includes('.')) {
-      const [parent, child] = field.split('.')
+      const [parent, child] = field.split('.');
       setFormData(prev => ({
         ...prev,
         [parent as string]: {
-          ...prev[parent as keyof CustomerQualificationForm] as any,
-          [child as string]: value
-        }
-      }))
+          ...(prev[parent as keyof CustomerQualificationForm] as any),
+          [child as string]: value,
+        },
+      }));
     } else {
       setFormData(prev => ({
         ...prev,
-        [field]: value
-      }))
+        [field]: value,
+      }));
     }
-  }
+  };
 
   const handleSubmit = () => {
-    const result = assessCustomerQualification(formData)
-    setAssessment(result)
-    setStep(4)
-  }
+    const result = assessCustomerQualification(formData);
+    setAssessment(result);
+    setStep(4);
+  };
 
   if (step === 1) {
     return (
@@ -90,7 +103,7 @@ export default function CustomerQualificationForm() {
               <Input
                 id="companyName"
                 value={formData.companyName}
-                onChange={(e) => handleInputChange('companyName', e.target.value)}
+                onChange={e => handleInputChange('companyName', e.target.value)}
                 placeholder="회사명을 입력하세요"
               />
             </div>
@@ -99,19 +112,19 @@ export default function CustomerQualificationForm() {
               <Input
                 id="ceoName"
                 value={formData.ceoName}
-                onChange={(e) => handleInputChange('ceoName', e.target.value)}
+                onChange={e => handleInputChange('ceoName', e.target.value)}
                 placeholder="대표자명을 입력하세요"
               />
             </div>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="industry">업종</Label>
               <Input
                 id="industry"
                 value={formData.industry}
-                onChange={(e) => handleInputChange('industry', e.target.value)}
+                onChange={e => handleInputChange('industry', e.target.value)}
                 placeholder="예: 제조업, IT, 건설업"
               />
             </div>
@@ -121,7 +134,9 @@ export default function CustomerQualificationForm() {
                 id="employees"
                 type="number"
                 value={formData.employees || ''}
-                onChange={(e) => handleInputChange('employees', Number(e.target.value))}
+                onChange={e =>
+                  handleInputChange('employees', Number(e.target.value))
+                }
                 placeholder="직원 수"
               />
             </div>
@@ -133,7 +148,9 @@ export default function CustomerQualificationForm() {
               id="annualRevenue"
               type="number"
               value={formData.annualRevenue || ''}
-              onChange={(e) => handleInputChange('annualRevenue', Number(e.target.value))}
+              onChange={e =>
+                handleInputChange('annualRevenue', Number(e.target.value))
+              }
               placeholder="연 매출을 입력하세요"
             />
           </div>
@@ -143,7 +160,7 @@ export default function CustomerQualificationForm() {
           </Button>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   if (step === 2) {
@@ -165,7 +182,9 @@ export default function CustomerQualificationForm() {
                 id="netWorth"
                 type="number"
                 value={formData.netWorth || ''}
-                onChange={(e) => handleInputChange('netWorth', Number(e.target.value))}
+                onChange={e =>
+                  handleInputChange('netWorth', Number(e.target.value))
+                }
                 placeholder="총 순자산"
                 className="text-lg"
               />
@@ -181,13 +200,13 @@ export default function CustomerQualificationForm() {
                 id="netIncome"
                 type="number"
                 value={formData.netIncome || ''}
-                onChange={(e) => handleInputChange('netIncome', Number(e.target.value))}
+                onChange={e =>
+                  handleInputChange('netIncome', Number(e.target.value))
+                }
                 placeholder="연 순이익"
                 className="text-lg"
               />
-              <p className="text-sm text-gray-600 mt-1">
-                세후 순이익 기준
-              </p>
+              <p className="text-sm text-gray-600 mt-1">세후 순이익 기준</p>
             </div>
           </div>
 
@@ -202,7 +221,12 @@ export default function CustomerQualificationForm() {
                   id="realEstate"
                   type="number"
                   value={formData.assets.realEstate || ''}
-                  onChange={(e) => handleInputChange('assets.realEstate', Number(e.target.value))}
+                  onChange={e =>
+                    handleInputChange(
+                      'assets.realEstate',
+                      Number(e.target.value)
+                    )
+                  }
                   placeholder="부동산 자산"
                 />
               </div>
@@ -212,7 +236,12 @@ export default function CustomerQualificationForm() {
                   id="financial"
                   type="number"
                   value={formData.assets.financial || ''}
-                  onChange={(e) => handleInputChange('assets.financial', Number(e.target.value))}
+                  onChange={e =>
+                    handleInputChange(
+                      'assets.financial',
+                      Number(e.target.value)
+                    )
+                  }
                   placeholder="주식, 채권, 예금 등"
                 />
               </div>
@@ -224,7 +253,9 @@ export default function CustomerQualificationForm() {
                   id="business"
                   type="number"
                   value={formData.assets.business || ''}
-                  onChange={(e) => handleInputChange('assets.business', Number(e.target.value))}
+                  onChange={e =>
+                    handleInputChange('assets.business', Number(e.target.value))
+                  }
                   placeholder="사업지분, 영업권 등"
                 />
               </div>
@@ -234,7 +265,9 @@ export default function CustomerQualificationForm() {
                   id="other"
                   type="number"
                   value={formData.assets.other || ''}
-                  onChange={(e) => handleInputChange('assets.other', Number(e.target.value))}
+                  onChange={e =>
+                    handleInputChange('assets.other', Number(e.target.value))
+                  }
                   placeholder="예술품, 귀금속 등"
                 />
               </div>
@@ -251,7 +284,7 @@ export default function CustomerQualificationForm() {
           </div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   if (step === 3) {
@@ -272,13 +305,25 @@ export default function CustomerQualificationForm() {
                 { key: 'businessSuccession', label: '가업승계 설계' },
                 { key: 'taxOptimization', label: '세무 최적화' },
                 { key: 'portfolioManagement', label: '포트폴리오 관리' },
-                { key: 'estatePlanning', label: '상속 설계' }
-              ].map((service) => (
-                <label key={service.key} className="flex items-center space-x-2 cursor-pointer">
+                { key: 'estatePlanning', label: '상속 설계' },
+              ].map(service => (
+                <label
+                  key={service.key}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
                   <input
                     type="checkbox"
-                    checked={formData.needsAssessment[service.key as keyof typeof formData.needsAssessment]}
-                    onChange={(e) => handleInputChange(`needsAssessment.${service.key}`, e.target.checked)}
+                    checked={
+                      formData.needsAssessment[
+                        service.key as keyof typeof formData.needsAssessment
+                      ]
+                    }
+                    onChange={e =>
+                      handleInputChange(
+                        `needsAssessment.${service.key}`,
+                        e.target.checked
+                      )
+                    }
                     className="rounded"
                   />
                   <span>{service.label}</span>
@@ -292,7 +337,9 @@ export default function CustomerQualificationForm() {
               <Label>선호 연락 방법</Label>
               <select
                 value={formData.preferredContactMethod}
-                onChange={(e) => handleInputChange('preferredContactMethod', e.target.value)}
+                onChange={e =>
+                  handleInputChange('preferredContactMethod', e.target.value)
+                }
                 className="w-full p-2 border rounded"
               >
                 <option value="phone">전화 상담</option>
@@ -304,7 +351,7 @@ export default function CustomerQualificationForm() {
               <Label>상담 긴급도</Label>
               <select
                 value={formData.urgency}
-                onChange={(e) => handleInputChange('urgency', e.target.value)}
+                onChange={e => handleInputChange('urgency', e.target.value)}
                 className="w-full p-2 border rounded"
               >
                 <option value="immediate">즉시</option>
@@ -325,12 +372,12 @@ export default function CustomerQualificationForm() {
           </div>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   if (step === 4 && assessment) {
-    const segmentData = CUSTOMER_SEGMENTS[assessment.segment]
-    const targetingMessage = generateTargetingMessage(assessment.segment)
+    const segmentData = CUSTOMER_SEGMENTS[assessment.segment];
+    const targetingMessage = generateTargetingMessage(assessment.segment);
 
     return (
       <div className="space-y-6">
@@ -348,25 +395,25 @@ export default function CustomerQualificationForm() {
                 <Star className="w-16 h-16 text-green-600 mx-auto mb-4" />
               )}
             </div>
-            
-            <Badge 
-              variant="secondary" 
+
+            <Badge
+              variant="secondary"
               className={`mb-4 px-4 py-2 text-lg ${
-                assessment.segment === 'family-office' ? 'bg-amber-100 text-amber-800' :
-                assessment.segment === 'fp-center' ? 'bg-blue-100 text-blue-800' :
-                'bg-green-100 text-green-800'
+                assessment.segment === 'family-office'
+                  ? 'bg-amber-100 text-amber-800'
+                  : assessment.segment === 'fp-center'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'bg-green-100 text-green-800'
               }`}
             >
               {segmentData.serviceLevel}
             </Badge>
-            
+
             <CardTitle className="text-2xl mb-4">
               {segmentData.name} 서비스 추천
             </CardTitle>
-            
-            <p className="text-gray-600">
-              {segmentData.description}
-            </p>
+
+            <p className="text-gray-600">{segmentData.description}</p>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -399,11 +446,15 @@ export default function CustomerQualificationForm() {
               <div className="grid md:grid-cols-2 gap-4 mt-6">
                 <div>
                   <h4 className="font-semibold text-sm">예상 서비스 비용</h4>
-                  <p className="text-lg font-bold text-blue-600">{assessment.estimatedFee}</p>
+                  <p className="text-lg font-bold text-blue-600">
+                    {assessment.estimatedFee}
+                  </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-sm">배정 담당자</h4>
-                  <p className="text-lg font-bold text-blue-600">{assessment.assignedManager}</p>
+                  <p className="text-lg font-bold text-blue-600">
+                    {assessment.assignedManager}
+                  </p>
                 </div>
               </div>
             </div>
@@ -416,21 +467,21 @@ export default function CustomerQualificationForm() {
             <h3 className="text-xl font-semibold mb-4">
               {targetingMessage.cta}
             </h3>
-            <p className="text-gray-600 mb-6">
-              {targetingMessage.urgency}
-            </p>
-            
-            <CalComButton 
+            <p className="text-gray-600 mb-6">{targetingMessage.urgency}</p>
+
+            <CalComButton
               variant="default"
               size="lg"
               className={`px-8 py-4 ${
-                assessment.segment === 'family-office' ? 'bg-amber-600 hover:bg-amber-700' :
-                assessment.segment === 'fp-center' ? 'bg-blue-600 hover:bg-blue-700' :
-                'bg-green-600 hover:bg-green-700'
+                assessment.segment === 'family-office'
+                  ? 'bg-amber-600 hover:bg-amber-700'
+                  : assessment.segment === 'fp-center'
+                    ? 'bg-blue-600 hover:bg-blue-700'
+                    : 'bg-green-600 hover:bg-green-700'
               }`}
               buttonText={targetingMessage.cta}
             />
-            
+
             <p className="text-sm text-gray-500 mt-4">
               * 제출하신 정보를 바탕으로 맞춤 상담을 제공합니다
             </p>
@@ -439,11 +490,11 @@ export default function CustomerQualificationForm() {
 
         {/* 시작하기 다시 버튼 */}
         <div className="text-center">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={() => {
-              setStep(1)
-              setAssessment(null)
+              setStep(1);
+              setAssessment(null);
               setFormData({
                 companyName: '',
                 ceoName: '',
@@ -456,26 +507,26 @@ export default function CustomerQualificationForm() {
                   realEstate: 0,
                   financial: 0,
                   business: 0,
-                  other: 0
+                  other: 0,
                 },
                 needsAssessment: {
                   familyOffice: false,
                   businessSuccession: false,
                   taxOptimization: false,
                   portfolioManagement: false,
-                  estatePlanning: false
+                  estatePlanning: false,
                 },
                 preferredContactMethod: 'phone',
-                urgency: 'within-month'
-              })
+                urgency: 'within-month',
+              });
             }}
           >
             다시 진단하기
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
-  return null
+  return null;
 }

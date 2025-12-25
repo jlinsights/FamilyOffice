@@ -1,9 +1,11 @@
 import { ArrowLeft, Search } from 'lucide-react';
+
 import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { Button } from '@/components/ui/button';
 
 export default function NotFound() {
   return (
@@ -60,7 +62,10 @@ export default function NotFound() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   { title: '법인종신보험', href: '/life-insurance' },
-                  { title: '가업승계 전략', href: '/business-succession-strategy' },
+                  {
+                    title: '가업승계 전략',
+                    href: '/business-succession-strategy',
+                  },
                   { title: '경영인정기보험', href: '/key-person-insurance' },
                   { title: '상속·증여 컨설팅', href: '/inheritance-gift' },
                 ].map((service, index) => (

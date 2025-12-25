@@ -8,22 +8,22 @@ import { motion } from 'framer-motion';
  * Slash.financial-inspired premium reveal animation
  */
 export const fadeInUp = {
-  initial: { 
-    opacity: 0, 
-    y: 20 
+  initial: {
+    opacity: 0,
+    y: 20,
   },
-  whileInView: { 
-    opacity: 1, 
-    y: 0 
+  whileInView: {
+    opacity: 1,
+    y: 0,
   },
-  transition: { 
-    duration: 0.6, 
-    ease: [0.25, 0.1, 0.25, 1] // Custom easing for premium feel
+  transition: {
+    duration: 0.6,
+    ease: [0.25, 0.1, 0.25, 1], // Custom easing for premium feel
   },
   viewport: {
     once: true, // Animate only once
-    margin: '-50px' // Trigger 50px before entering viewport
-  }
+    margin: '-50px', // Trigger 50px before entering viewport
+  },
 };
 
 /**
@@ -33,35 +33,35 @@ export const fadeInUp = {
 export const staggerContainer = {
   initial: {},
   whileInView: {},
-  transition: { 
-    staggerChildren: 0.1 // 100ms delay between children
+  transition: {
+    staggerChildren: 0.1, // 100ms delay between children
   },
   viewport: {
     once: true,
-    margin: '-50px'
-  }
+    margin: '-50px',
+  },
 };
 
 /**
  * Scale in animation for cards/buttons
  */
 export const scaleIn = {
-  initial: { 
-    opacity: 0, 
-    scale: 0.95 
+  initial: {
+    opacity: 0,
+    scale: 0.95,
   },
-  whileInView: { 
-    opacity: 1, 
-    scale: 1 
+  whileInView: {
+    opacity: 1,
+    scale: 1,
   },
-  transition: { 
-    duration: 0.5, 
-    ease: [0.25, 0.1, 0.25, 1]
+  transition: {
+    duration: 0.5,
+    ease: [0.25, 0.1, 0.25, 1],
   },
   viewport: {
     once: true,
-    margin: '-50px'
-  }
+    margin: '-50px',
+  },
 };
 
 interface RevealProps extends HTMLMotionProps<'div'> {
@@ -71,7 +71,7 @@ interface RevealProps extends HTMLMotionProps<'div'> {
 
 /**
  * Reusable reveal animation component
- * 
+ *
  * Usage:
  * ```tsx
  * <Reveal>
@@ -79,15 +79,20 @@ interface RevealProps extends HTMLMotionProps<'div'> {
  * </Reveal>
  * ```
  */
-export function Reveal({ delay = 0, children, className, ...props }: RevealProps) {
+export function Reveal({
+  delay = 0,
+  children,
+  className,
+  ...props
+}: RevealProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ 
-        duration: 0.6, 
+      transition={{
+        duration: 0.6,
         delay,
-        ease: [0.25, 0.1, 0.25, 1]
+        ease: [0.25, 0.1, 0.25, 1],
       }}
       viewport={{ once: true, margin: '-50px' }}
       className={className}
@@ -101,7 +106,7 @@ export function Reveal({ delay = 0, children, className, ...props }: RevealProps
 /**
  * Stagger container component
  * Animates children with cascading effect
- * 
+ *
  * Usage:
  * ```tsx
  * <StaggerContainer>
@@ -111,11 +116,11 @@ export function Reveal({ delay = 0, children, className, ...props }: RevealProps
  * </StaggerContainer>
  * ```
  */
-export function StaggerContainer({ 
-  children, 
+export function StaggerContainer({
+  children,
   className,
   staggerDelay = 0.1,
-  ...props 
+  ...props
 }: HTMLMotionProps<'div'> & { staggerDelay?: number }) {
   return (
     <motion.div

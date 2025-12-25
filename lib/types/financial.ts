@@ -35,4 +35,3 @@ export interface CacheMetrics {
   avgResponseTime: number;
   totalRequests: number;
 }
-

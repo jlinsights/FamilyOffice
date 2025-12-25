@@ -1,8 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { ArrowUp } from 'lucide-react';
+
 import { useEffect, useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 
 export function ScrollToTopFloating() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,7 +13,7 @@ export function ScrollToTopFloating() {
 
   useEffect(() => {
     setMounted(true);
-    
+
     const toggleVisibility = () => {
       // Show button when page is scrolled down 500px (더 아래에서 표시)
       if (window.pageYOffset > 500) {
@@ -22,7 +24,7 @@ export function ScrollToTopFloating() {
     };
 
     window.addEventListener('scroll', toggleVisibility);
-    
+
     // Force a reflow to ensure proper positioning
     const button = document.querySelector('.scroll-to-top-floating-force');
     if (button) {
@@ -40,21 +42,23 @@ export function ScrollToTopFloating() {
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
 
   return (
-    <div 
+    <div
       className={`scroll-to-top-mobile group transition-all duration-300 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        isVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
       {/* 호버 시 나타나는 툴팁 텍스트 */}
-      <div 
+      <div
         className={`absolute bottom-20 right-0 bg-[#3B4455] text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg transition-all duration-300 transform ${
-          isHovered 
-            ? 'opacity-100 translate-y-0' 
+          isHovered
+            ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-2 pointer-events-none'
         }`}
       >
@@ -62,7 +66,7 @@ export function ScrollToTopFloating() {
         {/* 말풍선 꼬리 */}
         <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#3B4455]"></div>
       </div>
-      
+
       <Button
         size="lg"
         onClick={handleScrollToTop}
@@ -93,18 +97,18 @@ export function ScrollToTopFloating() {
           border-0
         `}
       >
-        <ArrowUp 
+        <ArrowUp
           className={`
             h-6 w-6 md:h-7 md:w-7 
             transition-all duration-300 
             ${isHovered ? 'scale-110 -translate-y-1' : 'scale-100 translate-y-0'}
             drop-shadow-sm
-          `} 
+          `}
         />
       </Button>
-      
+
       {/* 지속적인 맥동 효과를 위한 링 */}
-      <div 
+      <div
         className={`
           absolute inset-0 rounded-full 
           border-2 border-[#3B4455]/40 
@@ -112,9 +116,9 @@ export function ScrollToTopFloating() {
           pointer-events-none
         `}
       />
-      
+
       {/* 두 번째 맥동 링 (딜레이 적용) */}
-      <div 
+      <div
         className={`
           absolute inset-0 rounded-full 
           border-2 border-[#3B4455]/20 
@@ -123,18 +127,15 @@ export function ScrollToTopFloating() {
         `}
         style={{ animationDelay: '1s' }}
       />
-      
+
       {/* 백그라운드 글로우 효과 */}
-      <div 
+      <div
         className={`
           absolute inset-0 rounded-full 
           bg-[#3B4455]/20 blur-xl
           transition-all duration-500
           pointer-events-none
-          ${isHovered 
-            ? 'scale-150 opacity-60' 
-            : 'scale-100 opacity-30'
-          }
+          ${isHovered ? 'scale-150 opacity-60' : 'scale-100 opacity-30'}
         `}
       />
     </div>

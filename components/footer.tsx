@@ -1,28 +1,28 @@
 'use client';
 
-import { memo, useEffect, useState } from 'react';
-
 import {
-    Award,
-    Facebook,
-    Instagram,
-    Linkedin,
-    Mail,
-    MapPin,
-    MessageSquare,
-    Phone,
-    Shield,
-    Sparkles,
-    TrendingUp,
-    Users,
-    Youtube,
+  Award,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Shield,
+  Sparkles,
+  TrendingUp,
+  Users,
+  Youtube,
 } from 'lucide-react';
 
+import { memo, useEffect, useState } from 'react';
+
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
-import { useTheme } from 'next-themes';
 import { ClientScripts } from './client-scripts';
 
 // 커스텀 아이콘 컴포넌트들
@@ -46,16 +46,20 @@ const NaverIcon = ({ className }: { className?: string }) => (
 
 const SpotifyIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/>
+    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z" />
   </svg>
 );
 
-
 const TistoryIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 459 459" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+  <svg
+    viewBox="0 0 459 459"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <title>티스토리 로고</title>
     <g>
-      <path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z"/>
+      <path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z" />
     </g>
   </svg>
 );
@@ -102,8 +106,16 @@ export const Footer = memo(function Footer() {
             </div>
 
             {/* Curator.io Feed Container */}
-            <div id="curator-feed-default-feed-layout" className="max-w-6xl mx-auto">
-              <a href="https://curator.io" target="_blank" rel="noopener noreferrer" className="crt-logo crt-tag">
+            <div
+              id="curator-feed-default-feed-layout"
+              className="max-w-6xl mx-auto"
+            >
+              <a
+                href="https://curator.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="crt-logo crt-tag"
+              >
                 Powered by Curator.io
               </a>
             </div>
@@ -139,7 +151,7 @@ export const Footer = memo(function Footer() {
                   />
                 </Link>
               </div>
-              
+
               {/* 소셜 미디어 */}
               <div className="flex flex-wrap gap-3 mb-6 justify-start">
                 <Link
@@ -370,7 +382,12 @@ export const Footer = memo(function Footer() {
                   <div className="text-sm">
                     <p className="font-medium mb-1">찾아오시는 곳</p>
                     <p className="text-muted-foreground leading-relaxed">
-                      <a href="https://naver.me/x1Vz2wUe" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                      <a
+                        href="https://naver.me/x1Vz2wUe"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-primary transition-colors"
+                      >
                         서울시 중구 세종대로 73 태평로빌딩
                       </a>
                     </p>
@@ -467,24 +484,36 @@ export const Footer = memo(function Footer() {
                     <Shield className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <p className="text-foreground font-medium mb-1">전문성 보장</p>
+                    <p className="text-foreground font-medium mb-1">
+                      전문성 보장
+                    </p>
                     <p className="text-muted-foreground text-xs leading-relaxed">
                       <span className="font-semibold">삼성생명 소속</span>으로{' '}
-                      <span className="text-primary">대한민국 최고 보험사의 전문성</span>을 바탕으로 작성되었습니다.{' '}
-                      <span className="text-xs opacity-80">(삼성화재 교차 판매 가능)</span>
+                      <span className="text-primary">
+                        대한민국 최고 보험사의 전문성
+                      </span>
+                      을 바탕으로 작성되었습니다.{' '}
+                      <span className="text-xs opacity-80">
+                        (삼성화재 교차 판매 가능)
+                      </span>
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-3">
                   <div className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
                     <Award className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <p className="text-foreground font-medium mb-1">투명한 상품 추천</p>
+                    <p className="text-foreground font-medium mb-1">
+                      투명한 상품 추천
+                    </p>
                     <p className="text-muted-foreground text-xs leading-relaxed">
                       상품 추천 시에는 항상{' '}
-                      <span className="font-semibold">복수의 대안을 함께 검토</span>하여 제안드립니다.
+                      <span className="font-semibold">
+                        복수의 대안을 함께 검토
+                      </span>
+                      하여 제안드립니다.
                     </p>
                   </div>
                 </div>
@@ -495,9 +524,8 @@ export const Footer = memo(function Footer() {
           {/* 저작권 */}
           <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              © 2025{' '}
-              <span className="playfair-display-bold">FamilyOffice</span>. All
-              rights reserved.
+              © 2025 <span className="playfair-display-bold">FamilyOffice</span>
+              . All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
               <Link

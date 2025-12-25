@@ -1,10 +1,13 @@
+import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+
+import { currentUser } from '@clerk/nextjs/server';
+
 import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+
 import { createAdminClient } from '@/lib/supabase/admin-client';
-import { currentUser } from '@clerk/nextjs/server';
-import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: '구조 점검 요청 관리 | Admin',

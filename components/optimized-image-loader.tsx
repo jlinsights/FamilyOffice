@@ -1,7 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
+
+import Image from 'next/image';
+
 import { cn } from '@/lib/utils';
 
 /**
@@ -38,7 +40,7 @@ interface OptimizedImageProps {
 /**
  * An optimized image component with WebP/AVIF support, loading states, and error handling.
  * Automatically detects WebP support and provides fallback mechanisms.
- * 
+ *
  * @example
  * ```tsx
  * <OptimizedImage
@@ -50,7 +52,7 @@ interface OptimizedImageProps {
  *   quality={90}
  * />
  * ```
- * 
+ *
  * @param props - The component props
  * @returns JSX element with optimized image loading
  */
@@ -72,22 +74,26 @@ export function OptimizedImage({
   const [hasError, setHasError] = useState(false);
 
   // WebP/AVIF 지원 확인
-  const supportsWebP = typeof window !== 'undefined' && 
-    document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  const supportsWebP =
+    typeof window !== 'undefined' &&
+    document
+      .createElement('canvas')
+      .toDataURL('image/webp')
+      .indexOf('data:image/webp') === 0;
 
   // 최적화된 이미지 URL 생성
   const getOptimizedSrc = (originalSrc: string) => {
     if (!originalSrc || originalSrc.startsWith('data:')) return originalSrc;
-    
+
     // 외부 이미지인 경우 Next.js Image Optimization 사용
     if (originalSrc.startsWith('http')) return originalSrc;
-    
+
     // 로컬 이미지인 경우 WebP 변환 고려
     if (supportsWebP && originalSrc.match(/\.(jpg|jpeg|png)$/i)) {
       // Next.js가 자동으로 WebP 변환을 처리
       return originalSrc;
     }
-    
+
     return originalSrc;
   };
 
@@ -105,7 +111,7 @@ export function OptimizedImage({
   // 에러 상태일 때 fallback 이미지 표시
   if (hasError) {
     return (
-      <div 
+      <div
         className={cn(
           'flex items-center justify-center bg-gray-100 dark:bg-gray-800',
           'text-gray-500 dark:text-gray-400 text-sm',
@@ -114,8 +120,18 @@ export function OptimizedImage({
         style={{ width: width || '100%', height: height || 'auto' }}
       >
         <div className="text-center">
-          <svg className="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          <svg
+            className="w-8 h-8 mx-auto mb-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
           </svg>
           <p>이미지를 불러올 수 없습니다</p>
         </div>
@@ -148,7 +164,7 @@ export function OptimizedImage({
           objectFit: 'cover',
         }}
       />
-      
+
       {/* 로딩 스켈레톤 */}
       {isLoading && (
         <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded" />
@@ -233,9 +249,7 @@ export function BackgroundImage({
         quality={85}
         sizes="100vw"
       />
-      <div className="relative z-10">
-        {children}
-      </div>
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }

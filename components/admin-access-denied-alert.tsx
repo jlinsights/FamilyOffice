@@ -10,11 +10,16 @@ import { useEffect, useState, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
+// FamilyOffice S - 관리자 접근 거부 알림 컴포넌트
+// URL 파라미터를 통해 관리자 접근 거부 메시지를 표시하는 컴포넌트
+
 function AdminAccessDeniedAlertContent() {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState('');
   const [mounted, setMounted] = useState(false);
-  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
+  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(
+    null
+  );
 
   useEffect(() => {
     setMounted(true);

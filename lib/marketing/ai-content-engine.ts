@@ -5,15 +5,27 @@
  * NOTE: Experimental feature with TypeScript type inference limitations.
  * See workflow-engine.ts for detailed explanation.
  */
-
-import { createClient } from '@/lib/supabase/server';
 import { getHubSpotClient, HubSpotContact } from '@/lib/hubspot/api-client';
+import { safeFrom, safeInsert, safeUpdate } from '@/lib/supabase/helpers';
+import { createClient } from '@/lib/supabase/server';
 
 export interface ContentItem {
   id: string;
   title: string;
-  type: 'blog_post' | 'whitepaper' | 'case_study' | 'webinar' | 'guide' | 'video' | 'infographic';
-  category: 'asset_management' | 'succession_planning' | 'tax_strategy' | 'education' | 'general';
+  type:
+    | 'blog_post'
+    | 'whitepaper'
+    | 'case_study'
+    | 'webinar'
+    | 'guide'
+    | 'video'
+    | 'infographic';
+  category:
+    | 'asset_management'
+    | 'succession_planning'
+    | 'tax_strategy'
+    | 'education'
+    | 'general';
   description: string;
   url: string;
   tags: string[];
@@ -52,28 +64,30 @@ const CONTENT_CATALOG: ContentItem[] = [
     title: '2024년 기업승계 완전가이드',
     type: 'whitepaper',
     category: 'succession_planning',
-    description: '중견기업 CEO를 위한 체계적인 기업승계 전략과 세무 최적화 방안',
+    description:
+      '중견기업 CEO를 위한 체계적인 기업승계 전략과 세무 최적화 방안',
     url: '/resources/succession-planning-guide-2024.pdf',
     tags: ['기업승계', '세무계획', '지배구조', '상속세'],
     target_audience: ['중견기업CEO', '1세대사업가', '가족기업'],
     difficulty_level: 'intermediate',
     reading_time_minutes: 45,
     created_at: '2024-01-15T00:00:00Z',
-    performance_score: 85
+    performance_score: 85,
   },
   {
     id: 'private-wealth-management-2024',
     title: '개인자산 30억+ 맞춤 자산관리 전략',
     type: 'whitepaper',
     category: 'asset_management',
-    description: '고액자산가를 위한 체계적인 개인자산관리 및 상속세 최적화 방안',
+    description:
+      '고액자산가를 위한 체계적인 개인자산관리 및 상속세 최적화 방안',
     url: '/resources/private-wealth-management-2024.pdf',
     tags: ['개인자산관리', '상속세최적화', '자산배분', '고액자산가'],
     target_audience: ['고액자산가', '개인자산30억이상', '자산가'],
     difficulty_level: 'advanced',
     reading_time_minutes: 50,
     created_at: '2024-01-20T00:00:00Z',
-    performance_score: 88
+    performance_score: 88,
   },
   {
     id: 'asset-diversification-strategy',
@@ -87,7 +101,7 @@ const CONTENT_CATALOG: ContentItem[] = [
     difficulty_level: 'intermediate',
     reading_time_minutes: 12,
     created_at: '2024-02-01T00:00:00Z',
-    performance_score: 92
+    performance_score: 92,
   },
   {
     id: 'tax-optimization-case-study',
@@ -101,7 +115,7 @@ const CONTENT_CATALOG: ContentItem[] = [
     difficulty_level: 'advanced',
     reading_time_minutes: 20,
     created_at: '2024-01-30T00:00:00Z',
-    performance_score: 78
+    performance_score: 78,
   },
   {
     id: 'family-office-webinar-series',
@@ -115,7 +129,7 @@ const CONTENT_CATALOG: ContentItem[] = [
     difficulty_level: 'intermediate',
     reading_time_minutes: 60,
     created_at: '2024-02-15T00:00:00Z',
-    performance_score: 88
+    performance_score: 88,
   },
   {
     id: 'korean-tax-changes-2024',
@@ -129,7 +143,7 @@ const CONTENT_CATALOG: ContentItem[] = [
     difficulty_level: 'intermediate',
     reading_time_minutes: 25,
     created_at: '2024-01-10T00:00:00Z',
-    performance_score: 91
+    performance_score: 91,
   },
   {
     id: 'it-company-asset-management',
@@ -143,7 +157,7 @@ const CONTENT_CATALOG: ContentItem[] = [
     difficulty_level: 'beginner',
     reading_time_minutes: 15,
     created_at: '2024-02-20T00:00:00Z',
-    performance_score: 83
+    performance_score: 83,
   },
   {
     id: 'inheritance-tax-optimization-guide',
@@ -157,7 +171,7 @@ const CONTENT_CATALOG: ContentItem[] = [
     difficulty_level: 'advanced',
     reading_time_minutes: 35,
     created_at: '2024-02-25T00:00:00Z',
-    performance_score: 91
+    performance_score: 91,
   },
   {
     id: 'family-trust-setup-guide',
@@ -171,7 +185,7 @@ const CONTENT_CATALOG: ContentItem[] = [
     difficulty_level: 'advanced',
     reading_time_minutes: 40,
     created_at: '2024-03-01T00:00:00Z',
-    performance_score: 89
+    performance_score: 89,
   },
   {
     id: 'private-wealth-webinar-series',
@@ -185,7 +199,7 @@ const CONTENT_CATALOG: ContentItem[] = [
     difficulty_level: 'intermediate',
     reading_time_minutes: 60,
     created_at: '2024-03-05T00:00:00Z',
-    performance_score: 87
+    performance_score: 87,
   },
 ];
 
@@ -210,14 +224,16 @@ export class AIContentEngine {
     try {
       // 1. 추천 컨텍스트 수집
       const context = await this.gatherRecommendationContext(contactId);
-      
+
       if (!context) {
         throw new Error(`콘택트 정보를 찾을 수 없음: ${contactId}`);
       }
 
       // 2. 각 콘텐츠에 대해 관련도 점수 계산
       const scoredContent = await Promise.all(
-        this.contentCatalog.map(content => this.scoreContentRelevance(content, context))
+        this.contentCatalog.map(content =>
+          this.scoreContentRelevance(content, context)
+        )
       );
 
       // 3. 점수별 정렬 및 상위 항목 선택
@@ -229,10 +245,11 @@ export class AIContentEngine {
       // 4. 추천 결과 데이터베이스 저장
       await this.saveRecommendations(contactId, recommendations);
 
-      console.log(`🤖 AI 콘텐츠 추천 생성: ${contactId} → ${recommendations.length}개`);
-      
-      return recommendations;
+      console.log(
+        `🤖 AI 콘텐츠 추천 생성: ${contactId} → ${recommendations.length}개`
+      );
 
+      return recommendations;
     } catch (error) {
       console.error('콘텐츠 추천 생성 실패:', error);
       throw error;
@@ -242,7 +259,9 @@ export class AIContentEngine {
   /**
    * 추천 컨텍스트 수집
    */
-  private async gatherRecommendationContext(contactId: string): Promise<RecommendationContext | null> {
+  private async gatherRecommendationContext(
+    contactId: string
+  ): Promise<RecommendationContext | null> {
     try {
       // 1. HubSpot 콘택트 정보 조회
       const contact = await this.hubspotClient.getContactByEmail(contactId);
@@ -250,30 +269,38 @@ export class AIContentEngine {
 
       // 2. 최근 활동 조회 (30일)
       const supabase = await this.supabase;
-      const { data: activities } = await supabase
-        .from('lead_activities')
+      const { data: activities } = await safeFrom(supabase, 'lead_activities')
         .select('*')
         .eq('hubspot_contact_id', contactId)
-        .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
+        .gte(
+          'created_at',
+          new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+        )
         .order('created_at', { ascending: false })
         .limit(50);
 
       // 3. 리드 스코어 조회
-      const { data: leadScore } = await supabase
-        .from('lead_scores')
+      const { data: leadScore } = await safeFrom(supabase, 'lead_scores' as any)
         .select('total_score')
         .eq('hubspot_contact_id', contactId)
         .single();
 
       // 4. 서비스 관심도 추출
-      const serviceInterests = this.extractServiceInterests(contact, activities || []);
+      const serviceInterests = this.extractServiceInterests(
+        contact,
+        activities || []
+      );
 
       // 5. 회사 프로필 정보
       const industryInfo = this.inferIndustry(contact);
       const companyProfile = {
-        ...(contact.properties.company_size && { size: contact.properties.company_size }),
+        ...(contact.properties.company_size && {
+          size: contact.properties.company_size,
+        }),
         ...(industryInfo && { industry: industryInfo }),
-        ...(contact.properties.revenue_range && { revenue_range: contact.properties.revenue_range }),
+        ...(contact.properties.revenue_range && {
+          revenue_range: contact.properties.revenue_range,
+        }),
       };
 
       return {
@@ -284,7 +311,6 @@ export class AIContentEngine {
         service_interests: serviceInterests,
         company_profile: companyProfile,
       };
-
     } catch (error) {
       console.error('추천 컨텍스트 수집 실패:', error);
       return null;
@@ -308,7 +334,9 @@ export class AIContentEngine {
     relevanceScore += serviceMatch.score;
     aiConfidence += serviceMatch.confidence;
     if (serviceMatch.score > 0) {
-      personalizationFactors.push(`서비스 관심도 매칭 (${serviceMatch.reason})`);
+      personalizationFactors.push(
+        `서비스 관심도 매칭 (${serviceMatch.reason})`
+      );
     }
 
     // 2. 회사 프로필 매칭 (25점)
@@ -346,7 +374,10 @@ export class AIContentEngine {
     aiConfidence += 5;
 
     // 7. 추천 이유 생성
-    recommendationReason = this.generateRecommendationReason(content, personalizationFactors);
+    recommendationReason = this.generateRecommendationReason(
+      content,
+      personalizationFactors
+    );
 
     // 8. AI 신뢰도 정규화 (0-100)
     aiConfidence = Math.min(aiConfidence / 1.05, 100); // 105점 만점을 100점으로 정규화
@@ -363,15 +394,19 @@ export class AIContentEngine {
   /**
    * 서비스 관심도 매칭 계산
    */
-  private calculateServiceMatch(content: ContentItem, context: RecommendationContext) {
+  private calculateServiceMatch(
+    content: ContentItem,
+    context: RecommendationContext
+  ) {
     let score = 0;
     let confidence = 0;
     let reason = '';
 
     // 직접적인 서비스 관심도 매칭
-    const matchingInterests = context.service_interests.filter(interest => 
-      content.category === interest || 
-      content.tags.some(tag => tag.includes(interest))
+    const matchingInterests = context.service_interests.filter(
+      interest =>
+        content.category === interest ||
+        content.tags.some(tag => tag.includes(interest))
     );
 
     if (matchingInterests.length > 0) {
@@ -381,9 +416,10 @@ export class AIContentEngine {
     } else {
       // 간접적인 매칭 (태그 기반)
       const indirectMatches = content.tags.filter(tag =>
-        context.service_interests.some(interest => 
-          tag.toLowerCase().includes(interest.toLowerCase()) ||
-          interest.toLowerCase().includes(tag.toLowerCase())
+        context.service_interests.some(
+          interest =>
+            tag.toLowerCase().includes(interest.toLowerCase()) ||
+            interest.toLowerCase().includes(tag.toLowerCase())
         )
       );
 
@@ -400,7 +436,10 @@ export class AIContentEngine {
   /**
    * 회사 프로필 매칭 계산
    */
-  private calculateCompanyMatch(content: ContentItem, context: RecommendationContext) {
+  private calculateCompanyMatch(
+    content: ContentItem,
+    context: RecommendationContext
+  ) {
     let score = 0;
     let confidence = 0;
     let reason = '';
@@ -408,9 +447,13 @@ export class AIContentEngine {
     const { company_profile, contact_profile } = context;
 
     // 회사 규모 매칭
-    if (company_profile.size && content.target_audience.some(audience => 
-      audience.includes('중견기업') && company_profile.size === 'medium'
-    )) {
+    if (
+      company_profile.size &&
+      content.target_audience.some(
+        audience =>
+          audience.includes('중견기업') && company_profile.size === 'medium'
+      )
+    ) {
       score += 10;
       confidence += 10;
       reason += '회사 규모 적합 ';
@@ -418,9 +461,12 @@ export class AIContentEngine {
 
     // 산업 매칭
     if (company_profile.industry) {
-      const industryMatch = content.tags.some(tag => 
-        tag.includes(company_profile.industry!) || 
-        content.target_audience.some(audience => audience.includes(company_profile.industry!))
+      const industryMatch = content.tags.some(
+        tag =>
+          tag.includes(company_profile.industry!) ||
+          content.target_audience.some(audience =>
+            audience.includes(company_profile.industry!)
+          )
       );
 
       if (industryMatch) {
@@ -431,13 +477,20 @@ export class AIContentEngine {
     }
 
     // 직책/역할 매칭
-    const isExecutive = contact_profile.properties.jobtitle?.toLowerCase().includes('ceo') ||
-                       contact_profile.properties.jobtitle?.toLowerCase().includes('대표') ||
-                       contact_profile.properties.jobtitle?.toLowerCase().includes('사장');
+    const isExecutive =
+      contact_profile.properties.jobtitle?.toLowerCase().includes('ceo') ||
+      contact_profile.properties.jobtitle?.toLowerCase().includes('대표') ||
+      contact_profile.properties.jobtitle?.toLowerCase().includes('사장');
 
-    if (isExecutive && content.target_audience.some(audience => 
-      audience.includes('CEO') || audience.includes('대표') || audience.includes('임원')
-    )) {
+    if (
+      isExecutive &&
+      content.target_audience.some(
+        audience =>
+          audience.includes('CEO') ||
+          audience.includes('대표') ||
+          audience.includes('임원')
+      )
+    ) {
       score += 5;
       confidence += 5;
       reason += '경영진 대상 ';
@@ -449,7 +502,10 @@ export class AIContentEngine {
   /**
    * 행동 패턴 매칭 계산
    */
-  private calculateBehaviorMatch(content: ContentItem, context: RecommendationContext) {
+  private calculateBehaviorMatch(
+    content: ContentItem,
+    context: RecommendationContext
+  ) {
     let score = 0;
     let confidence = 0;
     let reason = '';
@@ -461,15 +517,19 @@ export class AIContentEngine {
       .join(' ');
 
     // 페이지 방문 패턴 분석
-    if (content.category === 'succession_planning' && 
-        recentTopics.includes('/program')) {
+    if (
+      content.category === 'succession_planning' &&
+      recentTopics.includes('/program')
+    ) {
       score += 15;
       confidence += 15;
       reason += '교육 프로그램 관심 ';
     }
 
-    if (content.category === 'asset_management' && 
-        recentTopics.includes('/services')) {
+    if (
+      content.category === 'asset_management' &&
+      recentTopics.includes('/services')
+    ) {
       score += 15;
       confidence += 15;
       reason += '자산관리 서비스 관심 ';
@@ -503,7 +563,10 @@ export class AIContentEngine {
   /**
    * 난이도 매칭 계산
    */
-  private calculateDifficultyMatch(content: ContentItem, context: RecommendationContext) {
+  private calculateDifficultyMatch(
+    content: ContentItem,
+    context: RecommendationContext
+  ) {
     let score = 0;
     let confidence = 15;
     let reason = '';
@@ -562,7 +625,7 @@ export class AIContentEngine {
    * 추천 이유 생성
    */
   private generateRecommendationReason(
-    content: ContentItem, 
+    content: ContentItem,
     personalizationFactors: string[]
   ): string {
     if (personalizationFactors.length === 0) {
@@ -584,7 +647,7 @@ export class AIContentEngine {
    * 추천 결과 데이터베이스 저장
    */
   private async saveRecommendations(
-    contactId: string, 
+    contactId: string,
     recommendations: ContentRecommendation[]
   ): Promise<void> {
     try {
@@ -602,14 +665,15 @@ export class AIContentEngine {
       }));
 
       const supabase = await this.supabase;
-      const { error } = await supabase
-        .from('content_recommendations')
-        .insert(recommendationRows);
+      const { error } = await safeInsert(
+        supabase,
+        'content_recommendations',
+        recommendationRows as any
+      );
 
       if (error) {
         throw error;
       }
-
     } catch (error) {
       console.error('추천 결과 저장 실패:', error);
       // 저장 실패가 추천 생성을 중단시키지 않음
@@ -619,7 +683,10 @@ export class AIContentEngine {
   /**
    * 서비스 관심도 추출
    */
-  private extractServiceInterests(contact: HubSpotContact, activities: any[]): string[] {
+  private extractServiceInterests(
+    contact: HubSpotContact,
+    activities: any[]
+  ): string[] {
     const interests: Set<string> = new Set();
 
     // HubSpot 프로필에서 추출
@@ -632,11 +699,17 @@ export class AIContentEngine {
       .filter(activity => activity.activity_type === 'page_view')
       .map(activity => activity.activity_data.page_url || '');
 
-    if (pageUrls.some(url => url.includes('/services') || url.includes('asset'))) {
+    if (
+      pageUrls.some(url => url.includes('/services') || url.includes('asset'))
+    ) {
       interests.add('asset_management');
     }
 
-    if (pageUrls.some(url => url.includes('/program') || url.includes('succession'))) {
+    if (
+      pageUrls.some(
+        url => url.includes('/program') || url.includes('succession')
+      )
+    ) {
       interests.add('succession_planning');
     }
 
@@ -644,7 +717,11 @@ export class AIContentEngine {
       interests.add('tax_strategy');
     }
 
-    if (pageUrls.some(url => url.includes('/seminar') || url.includes('education'))) {
+    if (
+      pageUrls.some(
+        url => url.includes('/seminar') || url.includes('education')
+      )
+    ) {
       interests.add('education');
     }
 
@@ -658,19 +735,31 @@ export class AIContentEngine {
     const company = contact.properties.company?.toLowerCase() || '';
     const jobTitle = contact.properties.jobtitle?.toLowerCase() || '';
 
-    if (company.includes('제조') || company.includes('manufacturing') || 
-        jobTitle.includes('제조') || jobTitle.includes('생산')) {
+    if (
+      company.includes('제조') ||
+      company.includes('manufacturing') ||
+      jobTitle.includes('제조') ||
+      jobTitle.includes('생산')
+    ) {
       return '제조업';
     }
 
-    if (company.includes('IT') || company.includes('소프트웨어') || 
-        company.includes('개발') || jobTitle.includes('개발') || 
-        jobTitle.includes('IT')) {
+    if (
+      company.includes('IT') ||
+      company.includes('소프트웨어') ||
+      company.includes('개발') ||
+      jobTitle.includes('개발') ||
+      jobTitle.includes('IT')
+    ) {
       return 'IT';
     }
 
-    if (company.includes('건설') || company.includes('부동산') || 
-        jobTitle.includes('건설') || jobTitle.includes('부동산')) {
+    if (
+      company.includes('건설') ||
+      company.includes('부동산') ||
+      jobTitle.includes('건설') ||
+      jobTitle.includes('부동산')
+    ) {
       return '건설업';
     }
 
@@ -699,15 +788,15 @@ export class AIContentEngine {
       }
 
       const supabase = await this.supabase;
-      const { error } = await supabase
-        .from('content_recommendations')
-        .update(updateData)
-        .eq('id', recommendationId);
+      const { error } = await safeUpdate(
+        supabase,
+        'content_recommendations',
+        updateData
+      ).eq('id', recommendationId);
 
       if (error) {
         throw error;
       }
-
     } catch (error) {
       console.error('추천 성과 추적 실패:', error);
     }
@@ -719,28 +808,48 @@ export class AIContentEngine {
   async getRecommendationAnalytics(daysBack: number = 30) {
     try {
       const supabase = await this.supabase;
-      const { data, error } = await supabase
-        .from('content_recommendations')
+      const { data, error } = await safeFrom(
+        supabase,
+        'content_recommendations'
+      )
         .select('*')
-        .gte('created_at', new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString());
+        .gte(
+          'created_at',
+          new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString()
+        );
 
       if (error) {
         throw error;
       }
 
       const total = data.length;
-      const viewed = data.filter(rec => rec.viewed_at).length;
-      const clicked = data.filter(rec => rec.clicked_at).length;
+      const viewed = data.filter((rec: any) => rec.viewed_at).length;
+      const clicked = data.filter((rec: any) => rec.clicked_at).length;
 
       return {
         total_recommendations: total,
-        view_rate: total > 0 ? (viewed / total * 100).toFixed(1) : '0',
-        click_rate: total > 0 ? (clicked / total * 100).toFixed(1) : '0',
-        avg_relevance_score: total > 0 ? (data.reduce((sum, rec) => sum + rec.relevance_score, 0) / total).toFixed(1) : '0',
-        avg_ai_confidence: total > 0 ? (data.reduce((sum, rec) => sum + rec.ai_confidence, 0) / total).toFixed(1) : '0',
+        view_rate: total > 0 ? ((viewed / total) * 100).toFixed(1) : '0',
+        click_rate: total > 0 ? ((clicked / total) * 100).toFixed(1) : '0',
+        avg_relevance_score:
+          total > 0
+            ? (
+                data.reduce(
+                  (sum: any, rec: any) => sum + rec.relevance_score,
+                  0
+                ) / total
+              ).toFixed(1)
+            : '0',
+        avg_ai_confidence:
+          total > 0
+            ? (
+                data.reduce(
+                  (sum: any, rec: any) => sum + rec.ai_confidence,
+                  0
+                ) / total
+              ).toFixed(1)
+            : '0',
         top_performing_content: this.getTopPerformingContent(data),
       };
-
     } catch (error) {
       console.error('추천 성과 분석 실패:', error);
       throw error;
@@ -751,32 +860,39 @@ export class AIContentEngine {
    * 최고 성과 콘텐츠 추출
    */
   private getTopPerformingContent(recommendations: any[]) {
-    const contentPerformance = recommendations.reduce((acc, rec) => {
-      const contentId = rec.content_id;
-      if (!acc[contentId]) {
-        acc[contentId] = {
-          content_id: contentId,
-          content_title: rec.content_title,
-          content_type: rec.content_type,
-          total_recommendations: 0,
-          total_clicks: 0,
-          click_rate: 0,
-        };
-      }
-      acc[contentId].total_recommendations++;
-      if (rec.clicked_at) {
-        acc[contentId].total_clicks++;
-      }
-      return acc;
-    }, {} as Record<string, any>);
+    const contentPerformance = recommendations.reduce(
+      (acc, rec) => {
+        const contentId = rec.content_id;
+        if (!acc[contentId]) {
+          acc[contentId] = {
+            content_id: contentId,
+            content_title: rec.content_title,
+            content_type: rec.content_type,
+            total_recommendations: 0,
+            total_clicks: 0,
+            click_rate: 0,
+          };
+        }
+        acc[contentId].total_recommendations++;
+        if (rec.clicked_at) {
+          acc[contentId].total_clicks++;
+        }
+        return acc;
+      },
+      {} as Record<string, any>
+    );
 
     // 클릭률 계산 및 정렬
     return Object.values(contentPerformance)
       .map((content: any) => ({
         ...content,
-        click_rate: content.total_recommendations > 0 
-          ? (content.total_clicks / content.total_recommendations * 100).toFixed(1)
-          : '0'
+        click_rate:
+          content.total_recommendations > 0
+            ? (
+                (content.total_clicks / content.total_recommendations) *
+                100
+              ).toFixed(1)
+            : '0',
       }))
       .sort((a, b) => parseFloat(b.click_rate) - parseFloat(a.click_rate))
       .slice(0, 5);

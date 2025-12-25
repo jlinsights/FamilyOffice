@@ -3,6 +3,7 @@
  * Next.js App Router에서 Web Vitals 자동 수집
  */
 import { useEffect } from 'react';
+
 import { reportWebVitals } from '@/lib/core-web-vitals';
 
 // Performance API 타입 정의
@@ -27,10 +28,10 @@ export function useWebVitals(): void {
       // LCP (Largest Contentful Paint) 관찰
       const observeLCP = () => {
         try {
-          const observer = new PerformanceObserver((entryList) => {
+          const observer = new PerformanceObserver(entryList => {
             const entries = entryList.getEntries();
             const lastEntry = entries[entries.length - 1];
-            
+
             if (lastEntry) {
               reportWebVitals({
                 name: 'LCP',
@@ -39,8 +40,11 @@ export function useWebVitals(): void {
               } as any);
             }
           });
-          
-          observer.observe({ type: 'largest-contentful-paint', buffered: true });
+
+          observer.observe({
+            type: 'largest-contentful-paint',
+            buffered: true,
+          });
         } catch (error) {
           console.warn('LCP 관찰 실패:', error);
         }
@@ -49,10 +53,10 @@ export function useWebVitals(): void {
       // FCP (First Contentful Paint) 관찰
       const observeFCP = () => {
         try {
-          const observer = new PerformanceObserver((entryList) => {
+          const observer = new PerformanceObserver(entryList => {
             const entries = entryList.getEntries();
-            
-            entries.forEach((entry) => {
+
+            entries.forEach(entry => {
               if (entry.name === 'first-contentful-paint') {
                 reportWebVitals({
                   name: 'FCP',
@@ -62,7 +66,7 @@ export function useWebVitals(): void {
               }
             });
           });
-          
+
           observer.observe({ type: 'paint', buffered: true });
         } catch (error) {
           console.warn('FCP 관찰 실패:', error);
@@ -78,22 +82,27 @@ export function useWebVitals(): void {
           const maxSessionGap = 1000; // 1초
           const maxWindowGap = 5000; // 5초
 
-          const observer = new PerformanceObserver((entryList) => {
+          const observer = new PerformanceObserver(entryList => {
             const entries = entryList.getEntries() as PerformanceEntry[];
-            
-            entries.forEach((entry) => {
+
+            entries.forEach(entry => {
               const layoutEntry = entry as LayoutShift;
               // 레이아웃 시프트가 사용자 입력 직후에 발생했다면 제외
               if (!layoutEntry.hadRecentInput) {
                 const firstSessionEntry = sessionEntries[0];
-                const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
+                const lastSessionEntry =
+                  sessionEntries[sessionEntries.length - 1];
 
                 // 새로운 세션이거나 기존 세션 내에서 발생한 경우
-                if (sessionValue && 
-                    lastSessionEntry &&
-                    layoutEntry.startTime - lastSessionEntry.startTime < maxSessionGap &&
-                    firstSessionEntry &&
-                    layoutEntry.startTime - firstSessionEntry.startTime < maxWindowGap) {
+                if (
+                  sessionValue &&
+                  lastSessionEntry &&
+                  layoutEntry.startTime - lastSessionEntry.startTime <
+                    maxSessionGap &&
+                  firstSessionEntry &&
+                  layoutEntry.startTime - firstSessionEntry.startTime <
+                    maxWindowGap
+                ) {
                   sessionValue += layoutEntry.value;
                   sessionEntries.push(layoutEntry);
                 } else {
@@ -114,7 +123,7 @@ export function useWebVitals(): void {
               id: `cls-${Date.now()}`,
             } as any);
           });
-          
+
           observer.observe({ type: 'layout-shift', buffered: true });
         } catch (error) {
           console.warn('CLS 관찰 실패:', error);
@@ -124,10 +133,10 @@ export function useWebVitals(): void {
       // FID (First Input Delay) 관찰
       const observeFID = () => {
         try {
-          const observer = new PerformanceObserver((entryList) => {
+          const observer = new PerformanceObserver(entryList => {
             const entries = entryList.getEntries();
             const firstEntry = entries[0];
-            
+
             if (firstEntry) {
               const fidEntry = firstEntry as PerformanceEventTiming;
               reportWebVitals({
@@ -137,7 +146,7 @@ export function useWebVitals(): void {
               } as any);
             }
           });
-          
+
           observer.observe({ type: 'first-input', buffered: true });
         } catch (error) {
           console.warn('FID 관찰 실패:', error);
@@ -147,11 +156,13 @@ export function useWebVitals(): void {
       // TTFB (Time to First Byte) 측정
       const measureTTFB = () => {
         try {
-          const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-          
+          const navigation = performance.getEntriesByType(
+            'navigation'
+          )[0] as PerformanceNavigationTiming;
+
           if (navigation) {
             const ttfb = navigation.responseStart - navigation.requestStart;
-            
+
             reportWebVitals({
               name: 'TTFB',
               value: ttfb,
@@ -166,14 +177,14 @@ export function useWebVitals(): void {
       // INP (Interaction to Next Paint) 관찰 - 실험적 기능
       const observeINP = () => {
         try {
-          const observer = new PerformanceObserver((entryList) => {
+          const observer = new PerformanceObserver(entryList => {
             const entries = entryList.getEntries();
-            
-            entries.forEach((entry) => {
+
+            entries.forEach(entry => {
               const eventEntry = entry as PerformanceEventTiming;
               if (eventEntry.processingStart && eventEntry.processingEnd) {
                 const inp = eventEntry.processingEnd - eventEntry.startTime;
-                
+
                 reportWebVitals({
                   name: 'INP',
                   value: inp,
@@ -182,7 +193,7 @@ export function useWebVitals(): void {
               }
             });
           });
-          
+
           // INP는 아직 표준화되지 않아 지원하지 않을 수 있음
           if ('PerformanceEventTiming' in window) {
             observer.observe({ type: 'event', buffered: true });
@@ -202,11 +213,11 @@ export function useWebVitals(): void {
 
       // 페이지 언로드 시 최종 CLS 값 보고
       const reportFinalCLS = () => {
-        const observer = new PerformanceObserver((entryList) => {
+        const observer = new PerformanceObserver(entryList => {
           const entries = entryList.getEntries();
           let finalCLS = 0;
-          
-          entries.forEach((entry) => {
+
+          entries.forEach(entry => {
             const layoutEntry = entry as LayoutShift;
             if (!layoutEntry.hadRecentInput) {
               finalCLS += layoutEntry.value;
@@ -223,7 +234,7 @@ export function useWebVitals(): void {
         });
 
         observer.observe({ type: 'layout-shift', buffered: true });
-        
+
         // 페이지 언로드 시 관찰 중단
         window.addEventListener('beforeunload', () => {
           observer.disconnect();
@@ -244,15 +255,17 @@ export function useWebVitals(): void {
     // 개발 환경에서 디버그 정보
     if (process.env.NODE_ENV === 'development') {
       console.log('🔍 Core Web Vitals 자동 수집이 시작되었습니다.');
-      
+
       // 페이지 성능 정보 로그
       window.addEventListener('load', () => {
         setTimeout(() => {
-          const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+          const navigation = performance.getEntriesByType(
+            'navigation'
+          )[0] as PerformanceNavigationTiming;
           console.log('📊 페이지 성능 요약:', {
             'DOM 로드': `${Math.round(navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart)}ms`,
             '페이지 로드': `${Math.round(navigation.loadEventEnd - navigation.loadEventStart)}ms`,
-            'TTFB': `${Math.round(navigation.responseStart - navigation.requestStart)}ms`,
+            TTFB: `${Math.round(navigation.responseStart - navigation.requestStart)}ms`,
           });
         }, 1000);
       });

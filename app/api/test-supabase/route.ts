@@ -44,7 +44,7 @@ export async function GET() {
       success: true,
       message: 'Supabase connection successful',
       tableExists: true,
-      recordCount: data?.[0]?.count || 0,
+      recordCount: (data as any)?.[0]?.count || 0,
     });
   } catch (error) {
     return NextResponse.json({

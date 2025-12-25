@@ -1,148 +1,169 @@
 'use client';
 
-import { memo } from 'react';
 import { CheckCircle, Target, Clock, Shield, AlertCircle } from 'lucide-react';
+
+import { memo } from 'react';
+
 import { Card, CardContent } from '@/components/ui/card';
 import { ClientOnlyIcon } from '@/components/ui/client-only-icon';
 
-export const StructureCheckContentSection = memo(function StructureCheckContentSection() {
-  return (
-    <section className="py-16 lg:py-24 bg-muted/10">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* 이런 분들께 필요합니다 */}
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            이런 분들께 필요합니다
-          </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-12"></div>
+export const StructureCheckContentSection = memo(
+  function StructureCheckContentSection() {
+    return (
+      <section className="py-16 lg:py-24 bg-muted/10">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* 이런 분들께 필요합니다 */}
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              이런 분들께 필요합니다
+            </h2>
+            <div className="w-20 h-1 bg-primary mx-auto mb-12"></div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {targetAudiences.map((audience, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow bg-card border-border">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
-                      <ClientOnlyIcon icon={CheckCircle} className="h-6 w-6 text-primary" />
-                    </div>
-                    <p className="text-base md:text-lg text-foreground leading-relaxed pt-2">
-                      {audience}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <p className="text-center text-xl font-medium text-primary mt-8">
-            한 가지라도 해당된다면, 구조 점검이 먼저입니다.
-          </p>
-        </div>
-
-        {/* 구조 점검이 다루는 것 */}
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            구조 점검이 다루는 것
-          </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-8"></div>
-
-          <div className="max-w-3xl mx-auto mb-12">
-            <p className="text-center text-lg text-muted-foreground mb-8">
-              구조 점검은 해결책을 제시하는 자리가 아닙니다.
-              <br />
-              <span className="font-semibold text-foreground">판단의 기준을 명확히 하는 과정입니다.</span>
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {checkPoints.map((point, index) => (
-              <Card key={index} className="bg-card border-border">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <ClientOnlyIcon icon={point.icon} className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-                    <p className="text-base text-foreground leading-relaxed">
-                      {point.text}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-lg font-medium text-foreground">
-              이 네 가지가 정리되면,
-              <br />
-              이후의 선택은 훨씬 단순해집니다.
-            </p>
-          </div>
-        </div>
-
-        {/* 구조 점검 진행 방식 */}
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            구조 점검은 이렇게 진행됩니다
-          </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-12"></div>
-
-          <div className="max-w-4xl mx-auto space-y-8">
-            {processSteps.map((step, index) => (
-              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-colors">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl">
-                      {index + 1}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-3 text-foreground">
-                        {step.title}
-                      </h3>
-                      <p className="text-base text-muted-foreground leading-relaxed whitespace-pre-line">
-                        {step.description}
+            <div className="grid md:grid-cols-2 gap-6">
+              {targetAudiences.map((audience, index) => (
+                <Card
+                  key={index}
+                  className="hover:shadow-lg transition-shadow bg-card border-border"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
+                        <ClientOnlyIcon
+                          icon={CheckCircle}
+                          className="h-6 w-6 text-primary"
+                        />
+                      </div>
+                      <p className="text-base md:text-lg text-foreground leading-relaxed pt-2">
+                        {audience}
                       </p>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <p className="text-center text-xl font-medium text-primary mt-8">
+              한 가지라도 해당된다면, 구조 점검이 먼저입니다.
+            </p>
           </div>
 
-          <div className="mt-12 text-center">
-            <Card className="max-w-2xl mx-auto bg-primary/10 dark:bg-primary/5 border-primary/30">
-              <CardContent className="p-8">
-                <p className="text-lg font-semibold text-foreground">
-                  이 단계까지가 구조 점검의 전부입니다.
-                </p>
-              </CardContent>
-            </Card>
+          {/* 구조 점검이 다루는 것 */}
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              구조 점검이 다루는 것
+            </h2>
+            <div className="w-20 h-1 bg-primary mx-auto mb-8"></div>
+
+            <div className="max-w-3xl mx-auto mb-12">
+              <p className="text-center text-lg text-muted-foreground mb-8">
+                구조 점검은 해결책을 제시하는 자리가 아닙니다.
+                <br />
+                <span className="font-semibold text-foreground">
+                  판단의 기준을 명확히 하는 과정입니다.
+                </span>
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {checkPoints.map((point, index) => (
+                <Card key={index} className="bg-card border-border">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <ClientOnlyIcon
+                        icon={point.icon}
+                        className="h-6 w-6 text-primary flex-shrink-0 mt-1"
+                      />
+                      <p className="text-base text-foreground leading-relaxed">
+                        {point.text}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="text-lg font-medium text-foreground">
+                이 네 가지가 정리되면,
+                <br />
+                이후의 선택은 훨씬 단순해집니다.
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* 자주 묻는 질문 */}
-        <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            자주 묻는 질문
-          </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-12"></div>
+          {/* 구조 점검 진행 방식 */}
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              구조 점검은 이렇게 진행됩니다
+            </h2>
+            <div className="w-20 h-1 bg-primary mx-auto mb-12"></div>
 
-          <div className="max-w-3xl mx-auto space-y-6">
-            {faqs.map((faq, index) => (
-              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold mb-3 text-primary">
-                    Q. {faq.question}
-                  </h3>
-                  <p className="text-base text-foreground leading-relaxed">
-                    {faq.answer}
+            <div className="max-w-4xl mx-auto space-y-8">
+              {processSteps.map((step, index) => (
+                <Card
+                  key={index}
+                  className="bg-card border-border hover:border-primary/50 transition-colors"
+                >
+                  <CardContent className="p-8">
+                    <div className="flex items-start gap-6">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl">
+                        {index + 1}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold mb-3 text-foreground">
+                          {step.title}
+                        </h3>
+                        <p className="text-base text-muted-foreground leading-relaxed whitespace-pre-line">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <Card className="max-w-2xl mx-auto bg-primary/10 dark:bg-primary/5 border-primary/30">
+                <CardContent className="p-8">
+                  <p className="text-lg font-semibold text-foreground">
+                    이 단계까지가 구조 점검의 전부입니다.
                   </p>
                 </CardContent>
               </Card>
-            ))}
+            </div>
+          </div>
+
+          {/* 자주 묻는 질문 */}
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              자주 묻는 질문
+            </h2>
+            <div className="w-20 h-1 bg-primary mx-auto mb-12"></div>
+
+            <div className="max-w-3xl mx-auto space-y-6">
+              {faqs.map((faq, index) => (
+                <Card
+                  key={index}
+                  className="bg-card border-border hover:border-primary/50 transition-colors"
+                >
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold mb-3 text-primary">
+                      Q. {faq.question}
+                    </h3>
+                    <p className="text-base text-foreground leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-});
+      </section>
+    );
+  }
+);
 
 const targetAudiences = [
   '상속·가업승계를 언젠가는 해야 한다고 느끼지만, 언제가 적절한지 모르겠는 분',

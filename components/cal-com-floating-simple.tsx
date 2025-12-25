@@ -1,9 +1,12 @@
 'use client';
 
 import { Calendar } from 'lucide-react';
-import { CalComPopup } from './cal-com-popup';
-import { Button } from '@/components/ui/button';
+
 import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
+
+import { CalComPopup } from './cal-com-popup';
 
 export function CalComFloatingSimple() {
   const [isHovered, setIsHovered] = useState(false);
@@ -78,8 +81,11 @@ export function CalComFloatingSimple() {
               fontSize: '16px',
               fontWeight: '600',
               cursor: 'pointer',
-              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-              transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)',
+              boxShadow:
+                '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+              transform: isHovered
+                ? 'scale(1.1) rotate(5deg)'
+                : 'scale(1) rotate(0deg)',
               transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
               zIndex: 2147483647,
               position: 'relative',
@@ -88,7 +94,9 @@ export function CalComFloatingSimple() {
             <Calendar
               size={28}
               style={{
-                transform: isHovered ? 'scale(1.1) rotate(12deg)' : 'scale(1) rotate(0deg)',
+                transform: isHovered
+                  ? 'scale(1.1) rotate(12deg)'
+                  : 'scale(1) rotate(0deg)',
                 transition: 'all 300ms',
                 filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1))',
               }}
@@ -112,7 +120,7 @@ export function CalComFloatingSimple() {
           pointerEvents: 'none',
         }}
       />
-      
+
       <div
         style={{
           position: 'absolute',

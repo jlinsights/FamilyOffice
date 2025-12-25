@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '법인세 결산 후 필수 점검 포인트 | 삼성생명 세무 체크리스트 | FamilyOffice S',
-  description: '법인 결산 완료 후 놓치기 쉬운 세무 및 재무 핵심 체크포인트. 법인세 신고, 재무제표 검토, 절세 전략, 컴플라이언스 점검까지 5개 영역 30개 항목 완벽 가이드.',
+  title:
+    '법인세 결산 후 필수 점검 포인트 | 삼성생명 세무 체크리스트 | FamilyOffice S',
+  description:
+    '법인 결산 완료 후 놓치기 쉬운 세무 및 재무 핵심 체크포인트. 법인세 신고, 재무제표 검토, 절세 전략, 컴플라이언스 점검까지 5개 영역 30개 항목 완벽 가이드.',
   keywords: [
     '법인세 결산',
     '결산 후 점검',
@@ -18,12 +20,13 @@ export const metadata: Metadata = {
     '이전가격',
     '결손금 이월',
     '삼성생명',
-    'FamilyOffice S'
+    'FamilyOffice S',
   ].join(', '),
   authors: [{ name: 'FamilyOffice S Tax Advisory Team' }],
   openGraph: {
     title: '법인세 결산 후 필수 점검 포인트 | FamilyOffice S',
-    description: '법인 결산 완료 후 5개 영역 30개 항목 완벽 체크리스트. 법인세 신고 마감일까지 놓치면 안 되는 핵심 포인트를 확인하세요.',
+    description:
+      '법인 결산 완료 후 5개 영역 30개 항목 완벽 체크리스트. 법인세 신고 마감일까지 놓치면 안 되는 핵심 포인트를 확인하세요.',
     url: 'https://familyoffices.vip/corporate-tax-checklist',
     siteName: 'FamilyOffice S',
     locale: 'ko_KR',
@@ -40,7 +43,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '법인세 결산 후 필수 점검 포인트 | FamilyOffice S',
-    description: '결산 완료 후 30개 핵심 체크포인트로 세무리스크 최소화. 전문가 상담으로 완벽한 법인세 신고를 준비하세요.',
+    description:
+      '결산 완료 후 30개 핵심 체크포인트로 세무리스크 최소화. 전문가 상담으로 완벽한 법인세 신고를 준비하세요.',
     images: ['/og-corporate-tax-checklist.jpg'],
   },
   robots: {

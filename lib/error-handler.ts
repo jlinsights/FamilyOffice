@@ -2,9 +2,11 @@
  * 글로벌 에러 핸들러 - 표준화된 에러 응답 시스템
  * 사용자 친화적 에러 메시지와 개발자 디버깅 정보 제공
  */
-import { env } from '@/lib/env';
-import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
+
+import { NextResponse } from 'next/server';
+
+import { env } from '@/lib/env';
 
 // 에러 타입 정의
 export enum ErrorType {
@@ -21,7 +23,16 @@ export enum ErrorType {
 }
 
 // Unknown error type for type-safe error handling
-type UnknownError = Error | { message?: string; code?: string; status?: number; name?: string; details?: unknown } | unknown;
+type UnknownError =
+  | Error
+  | {
+      message?: string;
+      code?: string;
+      status?: number;
+      name?: string;
+      details?: unknown;
+    }
+  | unknown;
 
 // 에러 상세 정보 인터페이스
 export interface ErrorDetail {
@@ -84,8 +95,10 @@ const ERROR_MESSAGES = {
  * 요청 ID 생성 (디버깅용)
  */
 function generateRequestId(): string {
-  return Math.random().toString(36).substring(2, 15) + 
-         Math.random().toString(36).substring(2, 15);
+  return (
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15)
+  );
 }
 
 /**
@@ -95,7 +108,7 @@ function formatZodError(error: ZodError): string[] {
   return error.errors.map(err => {
     const path = err.path.join('.');
     const message = err.message;
-    
+
     // 한국어 필드명 매핑
     const fieldNames: Record<string, string> = {
       name: '이름',
@@ -106,7 +119,7 @@ function formatZodError(error: ZodError): string[] {
       message: '메시지',
       password: '비밀번호',
     };
-    
+
     const fieldName = fieldNames[path] || path;
     return `${fieldName}: ${message}`;
   });
@@ -119,43 +132,43 @@ function detectErrorType(error: UnknownError): ErrorType {
   if (error instanceof ZodError) {
     return ErrorType.VALIDATION;
   }
-  
+
   if (typeof error === 'object' && error !== null) {
     const err = error as { name?: string; status?: number; code?: string };
-    
+
     if (err.name === 'UnauthorizedError' || err.status === 401) {
       return ErrorType.AUTHENTICATION;
     }
-    
+
     if (err.name === 'ForbiddenError' || err.status === 403) {
       return ErrorType.AUTHORIZATION;
     }
-    
+
     if (err.name === 'NotFoundError' || err.status === 404) {
       return ErrorType.NOT_FOUND;
     }
-    
+
     if (err.status === 429) {
       return ErrorType.RATE_LIMIT;
     }
-    
+
     if (err.status === 400) {
       return ErrorType.BAD_REQUEST;
     }
-    
+
     if (err.name === 'TimeoutError' || err.code === 'TIMEOUT') {
       return ErrorType.TIMEOUT;
     }
-    
+
     if (err.name === 'DatabaseError' || err.code?.startsWith('DB_')) {
       return ErrorType.DATABASE;
     }
-    
+
     if (err.name === 'ExternalAPIError' || err.code?.startsWith('EXT_')) {
       return ErrorType.EXTERNAL_API;
     }
   }
-  
+
   return ErrorType.SERVER;
 }
 
@@ -175,7 +188,7 @@ function getStatusCode(errorType: ErrorType): number {
     [ErrorType.BAD_REQUEST]: 400,
     [ErrorType.TIMEOUT]: 504,
   };
-  
+
   return statusCodes[errorType] || 500;
 }
 
@@ -190,29 +203,50 @@ export function createErrorDetail(
   const errorType = detectErrorType(error);
   const statusCode = getStatusCode(errorType);
   const isDev = env.NODE_ENV === 'development';
-  
+
   // 사용자 친화적 메시지 결정
   let userMessage = customMessage || ERROR_MESSAGES[errorType].ko;
-  
+
   // Zod 에러의 경우 구체적인 필드 에러 메시지
   if (error instanceof ZodError) {
     const zodErrors = formatZodError(error);
     userMessage = zodErrors.join(', ');
   }
-  
-  const errorObj = error as { message?: string; code?: string; details?: unknown; stack? : string };
-  
-  return {
+
+  const errorObj = error as {
+    message?: string;
+    code?: string;
+    details?: unknown;
+    stack?: string;
+  };
+
+  const errorDetail: ErrorDetail = {
     type: errorType,
-    message: errorObj.message || (error instanceof Error ? error.message : 'Unknown error'),
+    message:
+      errorObj.message ||
+      (error instanceof Error ? error.message : 'Unknown error'),
     userMessage,
-    code: errorObj.code,
-    details: isDev ? errorObj.details : undefined,
     statusCode,
     timestamp: new Date().toISOString(),
-    requestId: requestId || generateRequestId(),
-    stack: isDev ? errorObj.stack : undefined,
   };
+
+  // Conditionally add optional properties
+  if (errorObj.code !== undefined) {
+    errorDetail.code = errorObj.code;
+  }
+  if (isDev && errorObj.details !== undefined) {
+    errorDetail.details = errorObj.details;
+  }
+  if (requestId) {
+    errorDetail.requestId = requestId;
+  } else {
+    errorDetail.requestId = generateRequestId();
+  }
+  if (isDev && errorObj.stack !== undefined) {
+    errorDetail.stack = errorObj.stack;
+  }
+
+  return errorDetail;
 }
 
 /**
@@ -224,7 +258,7 @@ export function createErrorResponse(
   requestId?: string
 ): NextResponse {
   const errorDetail = createErrorDetail(error, customMessage, requestId);
-  
+
   // 개발 환경에서는 상세 정보 로깅
   if (env.NODE_ENV === 'development') {
     console.error('🚨 Error Detail:', {
@@ -241,7 +275,7 @@ export function createErrorResponse(
       requestId: errorDetail.requestId,
     });
   }
-  
+
   // 응답 데이터 구성
   const responseData = {
     error: true,
@@ -258,7 +292,7 @@ export function createErrorResponse(
       },
     }),
   };
-  
+
   return NextResponse.json(responseData, { status: errorDetail.statusCode });
 }
 
@@ -289,10 +323,10 @@ export async function safeAsync<T>(
     return { data };
   } catch (error) {
     const errorDetail = createErrorDetail(error);
-    
-    return { 
+
+    return {
       error: errorDetail,
-      ...(fallback !== undefined && { data: fallback })
+      ...(fallback !== undefined && { data: fallback }),
     };
   }
 }
@@ -322,7 +356,7 @@ export class AppError extends Error {
     if (details !== undefined) {
       this.details = details;
     }
-    
+
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, this.constructor);
     }
@@ -383,12 +417,15 @@ export function createSuccessResponse<T = any>(
   message?: string,
   statusCode: number = 200
 ): NextResponse {
-  return NextResponse.json({
-    success: true,
-    data,
-    message,
-    timestamp: new Date().toISOString(),
-  }, { status: statusCode });
+  return NextResponse.json(
+    {
+      success: true,
+      data,
+      message,
+      timestamp: new Date().toISOString(),
+    },
+    { status: statusCode }
+  );
 }
 
 /**
@@ -402,7 +439,7 @@ export function createPaginatedResponse<T = any>(
   message?: string
 ): NextResponse {
   const totalPages = Math.ceil(total / limit);
-  
+
   return NextResponse.json({
     success: true,
     data,

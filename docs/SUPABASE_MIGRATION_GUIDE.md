@@ -7,6 +7,7 @@
 **파일**: `/supabase/migrations/20250101_create_keyword_rankings.sql`
 
 **생성 객체**:
+
 - 1개 테이블: `keyword_rankings`
 - 6개 인덱스: 성능 최적화
 - 2개 뷰: `latest_keyword_rankings`, `category_average_rankings`
@@ -28,6 +29,7 @@
    - "New query" 클릭
 
 3. **마이그레이션 SQL 복사**
+
    ```bash
    # 로컬 파일 경로
    /supabase/migrations/20250101_create_keyword_rankings.sql
@@ -103,6 +105,7 @@ supabase db remote commit
 ### ✅ 인덱스 확인
 
 **SQL Editor에서 실행**:
+
 ```sql
 SELECT
   tablename,
@@ -114,6 +117,7 @@ ORDER BY indexname;
 ```
 
 **예상 결과**: 6개 인덱스
+
 - `idx_keyword_rankings_bmad_category`
 - `idx_keyword_rankings_category_position`
 - `idx_keyword_rankings_created_at`
@@ -124,6 +128,7 @@ ORDER BY indexname;
 ### ✅ 뷰 확인
 
 **SQL Editor에서 실행**:
+
 ```sql
 -- 뷰 존재 확인
 SELECT table_name
@@ -141,6 +146,7 @@ SELECT * FROM category_average_rankings;
 ### ✅ 함수 확인
 
 **SQL Editor에서 실행**:
+
 ```sql
 -- 함수 존재 확인
 SELECT
@@ -159,6 +165,7 @@ SELECT * FROM get_keyword_trend('패밀리오피스란', 30);
 ### ✅ RLS 정책 확인
 
 **SQL Editor에서 실행**:
+
 ```sql
 SELECT
   schemaname,
@@ -175,6 +182,7 @@ ORDER BY policyname;
 ```
 
 **예상 결과**: 4개 정책
+
 1. `Allow authenticated delete access` (DELETE)
 2. `Allow authenticated insert access` (INSERT)
 3. `Allow authenticated update access` (UPDATE)
@@ -218,6 +226,7 @@ DELETE FROM keyword_rankings WHERE keyword IN ('패밀리오피스란', '자산�
 **원인**: 마이그레이션이 실행되지 않았거나 실패함
 
 **해결**:
+
 1. SQL Editor에서 전체 마이그레이션 SQL을 다시 실행
 2. 오류 메시지 확인
 3. Supabase 프로젝트 권한 확인
@@ -227,6 +236,7 @@ DELETE FROM keyword_rankings WHERE keyword IN ('패밀리오피스란', '자산�
 **원인**: 데이터베이스 권한 부족
 
 **해결**:
+
 1. Supabase Dashboard 로그인 확인
 2. 프로젝트 소유자 또는 관리자 권한 확인
 3. Service Role Key 사용 (API 접근 시)
@@ -236,6 +246,7 @@ DELETE FROM keyword_rankings WHERE keyword IN ('패밀리오피스란', '자산�
 **원인**: 마이그레이션이 이미 실행됨
 
 **해결**:
+
 ```sql
 -- 기존 테이블 확인
 SELECT * FROM keyword_rankings LIMIT 1;
@@ -247,11 +258,12 @@ DROP TABLE IF EXISTS keyword_rankings CASCADE;
 -- (전체 SQL 다시 실행)
 ```
 
-### ⚠️  경고: "function already exists"
+### ⚠️ 경고: "function already exists"
 
 **원인**: 함수가 이미 존재함
 
 **해결**:
+
 - `CREATE OR REPLACE FUNCTION` 구문이 자동으로 처리
 - 경고 무시 가능
 - 기존 함수 덮어쓰기됨
@@ -291,16 +303,19 @@ SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
 마이그레이션 완료 후:
 
 1. **통합 테스트 실행**
+
    ```bash
    npx tsx scripts/validate-env.ts
    ```
 
 2. **API 테스트**
+
    ```bash
    curl http://localhost:3000/api/test/bmad-integration?detailed=true
    ```
 
 3. **첫 데이터 수집**
+
    ```bash
    npx tsx scripts/collect-serper-rankings.ts
    ```

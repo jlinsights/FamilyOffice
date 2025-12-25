@@ -29,25 +29,25 @@ env:
 jobs:
   generate-content:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 🛠️ Checkout Repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          
+
       - name: 📦 Install Dependencies
         run: |
           npm install
           cd ../../../Tools/scripts
           npm install badge-maker
-          
+
       - name: 📅 Calculate Content Dates
         id: dates
         run: |
@@ -55,11 +55,11 @@ jobs:
           TUESDAY=$(date -d "next tuesday" '+%Y-%m-%d')
           THURSDAY=$(date -d "next thursday" '+%Y-%m-%d')
           WEEK_OF_YEAR=$(date -d "next tuesday" '+%V')
-          
+
           echo "tuesday=$TUESDAY" >> $GITHUB_OUTPUT
           echo "thursday=$THURSDAY" >> $GITHUB_OUTPUT
           echo "week=$WEEK_OF_YEAR" >> $GITHUB_OUTPUT
-          
+
       - name: 🎯 Generate Weekly Content Plan
         id: content-plan
         run: |
@@ -81,28 +81,28 @@ jobs:
             }
           }
           EOF
-          
+
           echo "content_plan=$(cat content-plan.json | jq -c .)" >> $GITHUB_OUTPUT
-          
+
       - name: 📊 Scan Partner Data
         id: partner-data
         run: |
           # 파트너사 자료 스캔 및 관련 데이터 추출
           node scripts/partner-data-integration.js setup
           node scripts/partner-data-integration.js index
-          
+
           echo "partner_data_available=true" >> $GITHUB_OUTPUT
-          
+
       - name: 📝 Generate Tuesday Content (실무 가이드)
         id: tuesday-content
         run: |
           # 실무 가이드 콘텐츠 생성 (파트너 데이터 활용)
           node ../../../Tools/scripts/generate-badges.js FamilyOffice
-          
+
           # 파트너 데이터 활용 정보 가져오기
           PARTNER_DATA=$(node scripts/partner-data-integration.js get-relevant "세무최적화")
           echo "Using partner data for content enhancement..."
-          
+
           # Claude Code API 호출을 시뮬레이션 (실제 구현 시 API 호출)
           cat > tuesday-draft.md << 'EOF'
           ---
@@ -118,26 +118,26 @@ jobs:
           publishTime: "14:30"
           status: "draft"
           ---
-          
+
           ![Status](https://img.shields.io/badge/Status-Production-green?style=for-the-badge)
           ![Tech_Stack](https://img.shields.io/badge/Tech_Stack-Next.js_15.2.4-blue?style=for-the-badge)
           ![Legal_Compliance](https://img.shields.io/badge/Legal_Compliance-2025_Tax_Reform-orange?style=for-the-badge)
-          
+
           ## 🎯 핵심 요약 (Executive Summary)
-          
+
           2025년 상속세 개정안이 중견기업에 미치는 영향을 분석하고, 50억원 이상 절세 가능한 실무 대응 방안을 제시합니다.
-          
+
           - **세율 변화**: 최고세율 50%에서 55%로 상향
           - **공제 한도**: 가업상속공제 한도 300억→500억 확대  
           - **유예 제도**: 분할납부 기간 10년→15년 연장
-          
+
           ## 📊 현황 분석
-          
+
           ### 개정안 주요 변화 10가지
-          
+
           > **신뢰할만한 파트너사 데이터 기반 분석**  
           > 삼성생명, 나눔파트너스 제공 최신 세법 개정 자료 활용
-          
+
           1. **최고세율 상향** (50% → 55%)
              - 삼성생명 분석: 중견기업 평균 세부담 15% 증가 예상
           2. **가업상속공제 확대** (300억 → 500억)
@@ -145,65 +145,65 @@ jobs:
           3. **분할납부 연장** (10년 → 15년)
              - 현금흐름 개선효과: 연평균 30% 유동성 확보
           ...
-          
+
           ## 💡 실무 가이드
-          
+
           ### 1단계: 현재 상속세 예상액 계산
           **실행 방법**:
           - 자산 평가 업데이트 (부동산, 주식, 사업자산)
           - 새로운 세율표 적용 시뮬레이션
           - 절세 효과 정량 분석
-          
+
           ### 2단계: 가업승계 구조 재설계
           ...
-          
+
           ## 📈 사례 연구
-          
+
           ## 💼 배경 상황
-          
+
           ### 클라이언트 프로필 *(파트너사 협력 프로젝트)*
           - **업종**: 정밀 부품 제조업
           - **규모**: 연매출 800억, 직원 450명
           - **창립**: 1987년 (업력 37년)
           - **파트너사**: 삼성생명(주계약사), 삼성화재(리스크관리), 나눔파트너스(세무전문)
-          
+
           ### 주요 도전과제
           1. **상속세 부담**: 기존 예상 120억 → 개정 후 140억 예상
              - 삼성생명 시뮬레이션: 현 구조 유지 시 17% 추가 부담
           2. **유동성 부족**: 현금자산 30억, 부족분 110억
              - 런인베스트 분석: 자산 중 현금비중 12% 불과
           3. **시간 제약**: 개정안 시행 전 6개월 남은 상황
-          
+
           ## 📞 전문가 상담 CTA
-          
+
           복잡한 상속세 개정안 대응으로 고민이신가요? **FamilyOffice S** 세무 전문가와 1:1 맞춤 상담을 받아보세요.
-          
+
           [무료 세무 진단 예약하기](https://cal.com/familyoffice-s/tax-consultation)
-          
+
           ## 📬 뉴스레터 구독 CTA
-          
+
           매주 월·수·금 오전 9:30 발송되는 세무 최적화 전문 인사이트를 받아보세요.
-          
+
           ---
-          
+
           ## 📚 참고자료 및 출처
-          
+
           - **삼성생명 제공 자료**: 2025년 상속세 개정 영향 분석 보고서
           - **나눔파트너스 제공 자료**: 가업승계 세무전략 가이드라인
           - **런인베스트 제공 자료**: 자산 유동성 관리 방안
-          
+
           *본 자료는 신뢰할만한 파트너사들의 협조로 제공되었습니다.*
           EOF
-          
+
           echo "tuesday_draft_created=true" >> $GITHUB_OUTPUT
-          
+
       - name: 📊 Generate Thursday Content (전략 분석)
         id: thursday-content
         run: |
           # 전략 분석 콘텐츠 생성 (파트너 데이터 활용)
           PARTNER_DATA_ANALYSIS=$(node scripts/partner-data-integration.js get-relevant "사례연구")
           echo "Integrating partner data for case study analysis..."
-          
+
           cat > thursday-draft.md << 'EOF'
           ---
           title: "A제조업 사례: 상속세 개정 전 긴급 대응으로 50억 절세한 전략"
@@ -218,39 +218,39 @@ jobs:
           publishTime: "20:00"
           status: "draft"
           ---
-          
+
           ![Status](https://img.shields.io/badge/Performance-+50B_KRW_Saved-brightgreen?style=for-the-badge)
           ![Timeline](https://img.shields.io/badge/Timeline-6_Months-blue?style=for-the-badge)
           ![Industry](https://img.shields.io/badge/Industry-Manufacturing-orange?style=for-the-badge)
-          
+
           ## 🎯 Executive Summary
-          
+
           **핵심 성과**: 상속세 개정 대응으로 달성한 주요 결과
           1. **절세액**: 50억원 (예상 상속세 120억→70억)
           2. **대응 기간**: 6개월 (2024년 7월~12월)
           3. **승계 준비도**: 85% → 95% 향상
-          
+
           ## 💼 배경 상황
-          
+
           ### 클라이언트 프로필
           - **업종**: 정밀 부품 제조업
           - **규모**: 연매출 800억, 직원 450명
           - **창립**: 1987년 (업력 37년)
           - **가족 구성**: 1세대 회장 + 2세대 사장 + 3세대 준비 중
-          
+
           ### 주요 도전과제
           1. **상속세 부담**: 기존 예상 120억 → 개정 후 140억 예상
           2. **유동성 부족**: 현금자산 30억, 부족분 110억
           3. **시간 제약**: 개정안 시행 전 6개월 남은 상황
-          
+
           ## 🔍 상세 전략 분석
-          
+
           ### Phase 1: 긴급 현황 진단 (1개월)
           **발견된 핵심 이슈**:
           - 비상장주식 평가 680억 (전체 자산의 70%)
           - 가업상속공제 미활용 (300억 절세 기회)
           - 분할납부 계획 부재
-          
+
           ### Phase 2: 3단계 절세 전략 수립 (2개월)
           ```typescript
           interface TaxStrategy {
@@ -260,81 +260,81 @@ jobs:
             expected_savings: "50억원+";
           }
           ```
-          
+
           ### Phase 3: 실행 및 완료 (3개월)
           **월별 실행 성과**:
           - **1-2월**: 법인 구조 개편 완료
           - **3-4월**: 가업상속공제 승인 획득  
           - **5-6월**: 분할납부 계획 수립
-          
+
           ## 📊 측정 가능한 성과
-          
+
           ### 정량적 성과
           | 지표 | Before | After | 절세액 |
           |------|--------|-------|---------|
           | 예상 상속세 | 120억 | 70억 | 50억 |
           | 현금 필요액 | 120억 | 35억 | 85억 |
           | 분할납부 | 불가 | 15년 | 유동성 확보 |
-          
+
           ### 정성적 성과
           - **가족 안정성**: 승계 불안감 해소, 가족 화합 증진
           - **기업 지속성**: 현금 유출 최소화로 경영 안정성 확보
-          
+
           ## 🎓 핵심 교훈 & 시사점
-          
+
           ### 성공 요인 3가지
           1. **신속한 의사결정**: 6개월 내 모든 절차 완료
           2. **전문가 협업**: 세무사, 변호사, 평가사 통합 대응
           3. **가족 합의**: 3세대 모두 참여한 투명한 소통
-          
+
           ### 다른 중견기업에 주는 시사점
           - 상속세 개정 대응은 최소 1년 전부터 준비 필요
           - 가업상속공제는 조건 충족 시 반드시 활용
           - 유동성 확보 계획을 사전에 수립해야 함
-          
+
           ## 🚀 Next Steps
-          
+
           유사한 제조업체를 위한 액션 아이템:
           1. **즉시 실행**: 현재 상속세 시뮬레이션 업데이트
           2. **3개월 내**: 가업상속공제 요건 점검 및 준비
           3. **1년 내**: 종합적 승계 계획 수립 및 실행
-          
+
           ## 📞 맞춤 컨설팅 CTA
-          
+
           제조업과 유사한 상속세 고민이 있으시나요? 
           **FamilyOffice S** 전문가와 업종별 맞춤 전략을 수립해보세요.
-          
+
           [제조업 전용 상담 신청](https://cal.com/familyoffice-s/manufacturing-consultation)
           EOF
-          
+
           echo "thursday_draft_created=true" >> $GITHUB_OUTPUT
-          
+
       - name: 🌿 Create Draft Branch
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           BRANCH_NAME="blog/week-${{ steps.dates.outputs.week }}-auto-generated"
           git checkout -b $BRANCH_NAME
-          
+
           # Draft 파일들을 적절한 위치로 이동
           mkdir -p lib/blog-drafts
           mv tuesday-draft.md "lib/blog-drafts/tuesday-${{ steps.dates.outputs.tuesday }}.md"
           mv thursday-draft.md "lib/blog-drafts/thursday-${{ steps.dates.outputs.thursday }}.md"
           mv content-plan.json "lib/blog-drafts/plan-week-${{ steps.dates.outputs.week }}.json"
-          
+
           git add .
           git config user.name "Blog Auto Generator"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "📝 Auto-generated blog content for Week ${{ steps.dates.outputs.week }}
-          
+
           - Tuesday (${{ steps.dates.outputs.tuesday }}): 실무 가이드
           - Thursday (${{ steps.dates.outputs.thursday }}): 사례 연구
-          
+
           Status: Ready for review 🔍"
-          
+
           git push origin $BRANCH_NAME
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
         id: branch
-        
+
       - name: 📋 Create Pull Request for Review
         if: ${{ github.event.inputs.dry_run != 'true' }}
         uses: peter-evans/create-pull-request@v5
@@ -342,54 +342,54 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ steps.branch.outputs.branch_name }}
-          title: "📝 Week ${{ steps.dates.outputs.week }} 블로그 콘텐츠 자동 생성 - 검토 요청"
+          title: '📝 Week ${{ steps.dates.outputs.week }} 블로그 콘텐츠 자동 생성 - 검토 요청'
           body: |
             ## 📅 이번 주 콘텐츠 계획
-            
+
             ### 📊 발행 일정
             - **화요일 (${{ steps.dates.outputs.tuesday }}) 14:30**: 실무 가이드
             - **목요일 (${{ steps.dates.outputs.thursday }}) 20:00**: 사례 연구
-            
+
             ### 📝 생성된 콘텐츠
-            
+
             #### 🔧 화요일 - 실무 가이드
             **제목**: "2025년 상속세 개정안 완벽 분석: 중견기업이 알아야 할 10가지 변화"  
             **타겟 키워드**: 상속세 개정안 2025, 중견기업 상속세  
             **예상 읽기 시간**: 12분  
-            
+
             #### 📊 목요일 - 사례 연구  
             **제목**: "A제조업 사례: 상속세 개정 전 긴급 대응으로 50억 절세한 전략"  
             **타겟 키워드**: 상속세 절세 사례, 제조업 가업승계  
             **예상 읽기 시간**: 15분  
-            
+
             ### ✅ 검토 체크리스트
-            
+
             - [ ] 콘텐츠 품질 및 정확성 확인
             - [ ] SEO 키워드 최적화 상태 점검  
             - [ ] 브랜드 톤앤매너 일관성 확인
             - [ ] CTA 및 링크 작동 상태 점검
             - [ ] 배지 및 메타데이터 확인
-            
+
             ### 🚀 다음 단계
-            
+
             1. **검토 완료 후**: 이 PR을 승인해주세요
             2. **자동 발행**: 화/목 정시에 자동으로 메인 브랜치에 병합됩니다
             3. **Vercel 배포**: 병합 즉시 자동 배포가 진행됩니다
-            
+
             ### ⚠️ 수정이 필요한 경우
-            
+
             Draft 파일을 직접 편집하거나 코멘트로 수정 사항을 알려주세요.
-            
+
             ---
-            
+
             **자동 생성 시간**: ${{ steps.date.outputs.generated_at }}  
             **다음 자동 발행**: 화요일 14:30, 목요일 20:00  
-            
+
             🤖 *이 콘텐츠는 Claude Code + Badge Generation 시스템으로 자동 생성되었습니다.*
           reviewers: |
             jhlim725
           draft: false
-          
+
       - name: 📧 Send Review Notification
         if: ${{ github.event.inputs.dry_run != 'true' && steps.pr.outputs.pull-request-url }}
         run: |
@@ -429,7 +429,7 @@ jobs:
                 }
               ]
             }'
-            
+
       - name: 📊 Summary Report
         run: |
           echo "## 🎉 콘텐츠 생성 완료!" >> $GITHUB_STEP_SUMMARY
@@ -443,7 +443,7 @@ jobs:
           echo "1. PR 검토 및 승인" >> $GITHUB_STEP_SUMMARY
           echo "2. 화/목 정시 자동 발행" >> $GITHUB_STEP_SUMMARY
           echo "3. Vercel 자동 배포" >> $GITHUB_STEP_SUMMARY
-          
+
           if [[ "${{ github.event.inputs.dry_run }}" == "true" ]]; then
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "⚠️ **DRY RUN 모드**: 실제 PR은 생성되지 않았습니다." >> $GITHUB_STEP_SUMMARY

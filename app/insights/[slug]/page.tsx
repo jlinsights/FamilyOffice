@@ -5,23 +5,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { ShareButton } from '@/components/share-button';
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
+import { ShareButton } from '@/components/share-button';
+
 import {
-    extractAIOptimizedKeywords,
-    generateAIOptimizedFAQ,
-    generateAIOptimizedMetadata
+  extractAIOptimizedKeywords,
+  generateAIOptimizedFAQ,
+  generateAIOptimizedMetadata,
 } from '@/lib/blog-ai-optimization';
 import { blogPosts } from '@/lib/blog-data';
 import { env } from '@/lib/env';
@@ -48,10 +49,13 @@ export async function generateMetadata({
   const aiKeywords = extractAIOptimizedKeywords(post);
 
   // 절대 URL 생성 (소셜 미디어 플랫폼은 절대 URL 필요)
-  const baseUrl = env.NEXT_PUBLIC_SITE_URL || env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip';
-  const imageUrl = post.image.startsWith('http')
-    ? post.image
-    : `${baseUrl}${post.image}`;
+  const baseUrl = env.NEXT_PUBLIC_APP_URL || 'https://familyoffices.vip';
+  const imageUrl =
+    post.image && post.image.startsWith('http')
+      ? post.image
+      : post.image
+        ? `${baseUrl}${post.image}`
+        : `${baseUrl}/placeholder.jpg`;
 
   return {
     title: aiOptimizedMetadata.title,
@@ -105,7 +109,8 @@ export default async function BlogPostPage({
 
   // AI 최적화 FAQ 생성 (기존 FAQ가 없거나 부족한 경우)
   const aiOptimizedFAQ = generateAIOptimizedFAQ(post);
-  const displayFAQ = post.faq && post.faq.length > 0 ? post.faq : aiOptimizedFAQ;
+  const displayFAQ =
+    post.faq && post.faq.length > 0 ? post.faq : aiOptimizedFAQ;
 
   // 관련 포스트 추천: 같은 카테고리에서 최대 3개 (SEO & 내부 링크 강화)
   const relatedPosts = Object.values(blogPosts)
@@ -137,7 +142,9 @@ export default async function BlogPostPage({
 
           {/* Category and Meta - Clean Typography */}
           <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500 dark:text-slate-400 mb-6">
-            <span className="font-medium text-blue-600 dark:text-blue-400">{post.category}</span>
+            <span className="font-medium text-blue-600 dark:text-blue-400">
+              {post.category}
+            </span>
             <span>·</span>
             <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString('ko-KR', {
@@ -187,7 +194,9 @@ export default async function BlogPostPage({
               >
                 {post.author}
               </Link>
-              <div className="text-sm text-slate-500 dark:text-slate-400">수석 컨설턴트</div>
+              <div className="text-sm text-slate-500 dark:text-slate-400">
+                수석 컨설턴트
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <ShareButton
@@ -222,7 +231,10 @@ export default async function BlogPostPage({
               '@type': 'Article',
               headline: post.title,
               description: post.excerpt,
-              image: post.image || post.coverImage || 'https://familyoffices.vip/og-image.jpg',
+              image:
+                post.image ||
+                post.coverImage ||
+                'https://familyoffices.vip/og-image.jpg',
               datePublished: post.date,
               dateModified: post.lastUpdated || post.date,
               author: {
@@ -230,7 +242,7 @@ export default async function BlogPostPage({
                 name: post.author,
                 jobTitle: '수석 컨설턴트',
                 image: '/Images/Profile Image-3-1080 x 1080 px.png',
-                url: 'https://litt.ly/familyoffice'
+                url: 'https://litt.ly/familyoffice',
               },
               publisher: {
                 '@type': 'Organization',
@@ -238,12 +250,12 @@ export default async function BlogPostPage({
                 url: 'https://familyoffices.vip',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://familyoffices.vip/logo.png'
-                }
+                  url: 'https://familyoffices.vip/logo.png',
+                },
               },
               mainEntityOfPage: {
                 '@type': 'WebPage',
-                '@id': `https://familyoffices.vip/insights/${post.slug}`
+                '@id': `https://familyoffices.vip/insights/${post.slug}`,
               },
               articleSection: post.category,
               keywords: extractAIOptimizedKeywords(post).join(', '),
@@ -256,17 +268,17 @@ export default async function BlogPostPage({
                 audienceType: '중견기업 CEO, 고액자산가',
                 geographicArea: {
                   '@type': 'Country',
-                  name: 'South Korea'
-                }
+                  name: 'South Korea',
+                },
               },
               inLanguage: 'ko-KR',
               isAccessibleForFree: true,
               about: {
                 '@type': 'Thing',
                 name: '패밀리오피스 및 자산관리',
-                sameAs: 'https://ko.wikipedia.org/wiki/패밀리_오피스'
-              }
-            })
+                sameAs: 'https://ko.wikipedia.org/wiki/패밀리_오피스',
+              },
+            }),
           }}
         />
 
@@ -282,34 +294,35 @@ export default async function BlogPostPage({
                   '@type': 'ListItem',
                   position: 1,
                   name: '홈',
-                  item: 'https://familyoffices.vip'
+                  item: 'https://familyoffices.vip',
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: '인사이트',
-                  item: 'https://familyoffices.vip/insights'
+                  item: 'https://familyoffices.vip/insights',
                 },
                 {
                   '@type': 'ListItem',
                   position: 3,
                   name: post.category,
-                  item: `https://familyoffices.vip/insights?category=${encodeURIComponent(post.category)}`
+                  item: `https://familyoffices.vip/insights?category=${encodeURIComponent(post.category)}`,
                 },
                 {
                   '@type': 'ListItem',
                   position: 4,
-                  name: post.title
-                }
-              ]
-            })
+                  name: post.title,
+                },
+              ],
+            }),
           }}
         />
 
         {/* Content - Brunch Style: Clean Typography, Generous Spacing */}
         <article className="max-w-[720px] mx-auto px-6 md:px-8">
           {/* Main Content with Beautiful Typography - Brunch Optimized */}
-          <div className="prose prose-lg md:prose-xl max-w-none
+          <div
+            className="prose prose-lg md:prose-xl max-w-none
             prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:tracking-tight
             prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-5 prose-h2:leading-[1.4]
             prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:leading-[1.4]
@@ -321,7 +334,8 @@ export default async function BlogPostPage({
             prose-pre:bg-slate-900 dark:prose-pre:bg-slate-800 prose-pre:text-slate-100 prose-pre:rounded-lg prose-pre:p-6
             prose-ul:my-6 prose-li:my-2 prose-li:text-lg prose-li:leading-[1.8] prose-li:text-slate-700 dark:prose-li:text-slate-300
             prose-img:rounded-none prose-img:my-10 prose-img:w-full
-            dark:prose-invert">
+            dark:prose-invert"
+          >
             <div
               dangerouslySetInnerHTML={{
                 __html: post.content.replace(/\n/g, '<br/>'),
@@ -348,10 +362,15 @@ export default async function BlogPostPage({
         {/* References - Minimal Style */}
         {post.sources && post.sources.length > 0 && (
           <article className="max-w-[720px] mx-auto px-6 md:px-8 mt-12 pt-12 border-t border-slate-200 dark:border-slate-800">
-            <h4 className="text-sm font-medium text-slate-400 dark:text-slate-500 mb-4">참고 문헌</h4>
+            <h4 className="text-sm font-medium text-slate-400 dark:text-slate-500 mb-4">
+              참고 문헌
+            </h4>
             <ul className="space-y-3">
               {post.sources.map((source, index) => (
-                <li key={index} className="text-sm text-slate-600 dark:text-slate-400">
+                <li
+                  key={index}
+                  className="text-sm text-slate-600 dark:text-slate-400"
+                >
                   {source.url ? (
                     <a
                       href={source.url}
@@ -408,7 +427,9 @@ export default async function BlogPostPage({
                   >
                     {post.author}
                   </Link>
-                  <div className="text-sm text-slate-500 dark:text-slate-400 mt-1">수석 컨설턴트</div>
+                  <div className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                    수석 컨설턴트
+                  </div>
                 </div>
                 <Button
                   variant="outline"
@@ -422,9 +443,10 @@ export default async function BlogPostPage({
                 </Button>
               </div>
               <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.7]">
-                국내 대기업 및 글로벌 외국계 기업 출신으로 중견기업 자산관리 경험과 전문성을 보유하고 있습니다.
-                패밀리오피스 설계, 가업승계 전략, 세무최적화 등 통합적인 솔루션으로
-                기업과 가족의 지속가능한 성장을 지원합니다.
+                국내 대기업 및 글로벌 외국계 기업 출신으로 중견기업 자산관리
+                경험과 전문성을 보유하고 있습니다. 패밀리오피스 설계, 가업승계
+                전략, 세무최적화 등 통합적인 솔루션으로 기업과 가족의 지속가능한
+                성장을 지원합니다.
               </p>
             </div>
           </div>
@@ -437,7 +459,7 @@ export default async function BlogPostPage({
               관련 글
             </h3>
             <div className="space-y-6">
-              {relatedPosts.map((relatedPost) => (
+              {relatedPosts.map(relatedPost => (
                 <Link
                   key={relatedPost.slug}
                   href={`/insights/${relatedPost.slug}`}
@@ -518,11 +540,13 @@ export default async function BlogPostPage({
         <section className="py-20 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
           <div className="max-w-[720px] mx-auto px-6 md:px-8 text-center">
             <h2 className="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-5 leading-tight">
-              매주 화·금요일 아침,<br/>
+              매주 화·금요일 아침,
+              <br />
               성공한 기업가의 인사이트를 받아보세요
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-xl mx-auto">
-              1,200+ 명의 CEO가 선택한 프리미엄 뉴스레터.<br className="hidden sm:block" />
+              1,200+ 명의 CEO가 선택한 프리미엄 뉴스레터.
+              <br className="hidden sm:block" />
               기업승계, 자산관리, 세무 전략 등 깊이 있는 정보를 전해드립니다.
             </p>
 
@@ -532,7 +556,11 @@ export default async function BlogPostPage({
                 className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
                 asChild
               >
-                <Link href="https://newsletter.familyoffices.vip" target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="https://newsletter.familyoffices.vip"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   뉴스레터 구독하기
                 </Link>
               </Button>
@@ -542,9 +570,7 @@ export default async function BlogPostPage({
                 className="w-full sm:w-auto border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-3 rounded-lg font-medium"
                 asChild
               >
-                <Link href="/structure-check#request-form">
-                  구조 점검 요청
-                </Link>
+                <Link href="/structure-check#request-form">구조 점검 요청</Link>
               </Button>
             </div>
 

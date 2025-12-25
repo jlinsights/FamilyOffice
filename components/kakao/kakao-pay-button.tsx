@@ -4,11 +4,13 @@
  * 카카오페이 결제 버튼 컴포넌트
  * 프리미엄 서비스 결제를 위한 카카오페이 통합
  */
+import { Loader2, CreditCard } from 'lucide-react';
 
 import React, { useState } from 'react';
+
 import { Button } from '@/components/ui/button';
+
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, CreditCard } from 'lucide-react';
 
 interface KakaoPayButtonProps {
   amount: number;
@@ -33,14 +35,14 @@ export function KakaoPayButton({
   useOfficialImage = true,
   onSuccess,
   onError,
-  children
+  children,
 }: KakaoPayButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const handleKakaoPay = async () => {
     setIsLoading(true);
-    
+
     try {
       // 카카오페이 결제 요청 API 호출
       const response = await fetch('/api/payment/kakao/request', {
@@ -69,7 +71,7 @@ export function KakaoPayButton({
       }
 
       const paymentData = await response.json();
-      
+
       if (paymentData.success && paymentData.next_redirect_pc_url) {
         // PC 환경: 새 창에서 결제 페이지 열기
         const paymentWindow = window.open(
@@ -91,37 +93,40 @@ export function KakaoPayButton({
         };
 
         const interval = setInterval(checkPaymentComplete, 1000);
-        
+
         // 결제 성공 시 콜백 처리
-        window.addEventListener('message', (event) => {
+        window.addEventListener('message', event => {
           if (event.data.type === 'KAKAO_PAY_SUCCESS') {
             clearInterval(interval);
             paymentWindow?.close();
             setIsLoading(false);
-            
+
             toast({
               title: '결제 완료',
               description: '카카오페이 결제가 완료되었습니다.',
             });
-            
+
             onSuccess?.(event.data.result);
           }
         });
-
       } else {
-        throw new Error(paymentData.message || '결제 URL을 받아올 수 없습니다.');
+        throw new Error(
+          paymentData.message || '결제 URL을 받아올 수 없습니다.'
+        );
       }
-      
     } catch (error) {
       setIsLoading(false);
-      const errorMessage = error instanceof Error ? error.message : '결제 요청 중 오류가 발생했습니다.';
-      
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : '결제 요청 중 오류가 발생했습니다.';
+
       toast({
         title: '결제 오류',
         description: errorMessage,
         variant: 'destructive',
       });
-      
+
       onError?.(errorMessage);
     }
   };

@@ -50,9 +50,9 @@ export function UpcomingSeminarsSection() {
   };
 
   // Filter out seminars with past dates and sort by date
-  const upcomingSeminars = UPCOMING_SEMINARS
-    .filter(seminar => !isDatePassed(seminar.date))
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const upcomingSeminars = UPCOMING_SEMINARS.filter(
+    seminar => !isDatePassed(seminar.date)
+  ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   const getLocationIcon = (type: string) => {
     switch (type) {
@@ -69,12 +69,24 @@ export function UpcomingSeminarsSection() {
 
   const getStatusBadge = (seminar: Seminar) => {
     if (seminar.registeredCount >= seminar.capacity) {
-      return <Badge variant="destructive" size="sm">마감</Badge>;
+      return (
+        <Badge variant="destructive" size="sm">
+          마감
+        </Badge>
+      );
     }
     if (seminar.registeredCount / seminar.capacity > 0.8) {
-      return <Badge variant="warning" size="sm">마감 임박</Badge>;
+      return (
+        <Badge variant="warning" size="sm">
+          마감 임박
+        </Badge>
+      );
     }
-    return <Badge variant="success" size="sm">접수 중</Badge>;
+    return (
+      <Badge variant="success" size="sm">
+        접수 중
+      </Badge>
+    );
   };
 
   return (
@@ -114,151 +126,172 @@ export function UpcomingSeminarsSection() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {upcomingSeminars.map((seminar, index) => {
-            const categoryInfo = getCategoryInfo(seminar.category);
-            const LocationIcon = getLocationIcon(seminar.location.type);
+              const categoryInfo = getCategoryInfo(seminar.category);
+              const LocationIcon = getLocationIcon(seminar.location.type);
 
-            return (
-              <Card
-                key={seminar.id}
-                className="group hover:shadow-lg transition-all duration-300 animate-slide-up dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between mb-3">
-                    {categoryInfo && (
-                      <Badge
-                        variant="secondary"
-                        className={`${categoryInfo.bgColor} ${categoryInfo.color} border-0 dark:bg-primary/80 dark:text-white dark:border-primary/60`}
-                      >
-                        <categoryInfo.icon className="h-3 w-3 mr-1" />
-                        {categoryInfo.name}
-                      </Badge>
+              return (
+                <Card
+                  key={seminar.id}
+                  className="group hover:shadow-lg transition-all duration-300 animate-slide-up dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between mb-3">
+                      {categoryInfo && (
+                        <Badge
+                          variant="secondary"
+                          className={`${categoryInfo.bgColor} ${categoryInfo.color} border-0 dark:bg-primary/80 dark:text-white dark:border-primary/60`}
+                        >
+                          <categoryInfo.icon className="h-3 w-3 mr-1" />
+                          {categoryInfo.name}
+                        </Badge>
+                      )}
+                      {getStatusBadge(seminar)}
+                    </div>
+                    <h3 className="text-xl font-semibold group-hover:text-primary transition-colors dark:text-white">
+                      {seminar.title}
+                    </h3>
+                    {seminar.subtitle && (
+                      <p className="text-sm text-muted-foreground dark:text-gray-300">
+                        {seminar.subtitle}
+                      </p>
                     )}
-                    {getStatusBadge(seminar)}
-                  </div>
-                  <h3 className="text-xl font-semibold group-hover:text-primary transition-colors dark:text-white">
-                    {seminar.title}
-                  </h3>
-                  {seminar.subtitle && (
-                    <p className="text-sm text-muted-foreground dark:text-gray-300">
-                      {seminar.subtitle}
+                  </CardHeader>
+
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground line-clamp-3 dark:text-gray-200">
+                      {seminar.description}
                     </p>
-                  )}
-                </CardHeader>
 
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground line-clamp-3 dark:text-gray-200">
-                    {seminar.description}
-                  </p>
-
-                  {/* Speaker Info */}
-                  <div className="flex items-center gap-3 p-3 bg-muted/50 dark:bg-gray-900 border border-muted dark:border-gray-700 rounded-lg">
-                    <div className="w-10 h-10 bg-primary/10 dark:bg-primary/30 rounded-full flex items-center justify-center">
-                      <Users className="h-5 w-5 text-primary dark:text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-medium text-sm text-foreground dark:text-white">
-                        {seminar.speaker.name}
+                    {/* Speaker Info */}
+                    <div className="flex items-center gap-3 p-3 bg-muted/50 dark:bg-gray-900 border border-muted dark:border-gray-700 rounded-lg">
+                      <div className="w-10 h-10 bg-primary/10 dark:bg-primary/30 rounded-full flex items-center justify-center">
+                        <Users className="h-5 w-5 text-primary dark:text-primary" />
                       </div>
-                      <div className="text-xs text-muted-foreground dark:text-gray-300">
-                        {seminar.speaker.title}, {seminar.speaker.company}
+                      <div>
+                        <div className="font-medium text-sm text-foreground dark:text-white">
+                          {seminar.speaker.name}
+                        </div>
+                        <div className="text-xs text-muted-foreground dark:text-gray-300">
+                          {seminar.speaker.title}, {seminar.speaker.company}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Event Details */}
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
-                      <span className="text-foreground dark:text-white">
-                        {formatDate(seminar.date)}
-                      </span>
+                    {/* Event Details */}
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
+                        <span className="text-foreground dark:text-white">
+                          {formatDate(seminar.date)}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
+                        <span className="text-foreground dark:text-white">
+                          {seminar.time} ({seminar.duration})
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <LocationIcon className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
+                        <span className="line-clamp-1 text-foreground dark:text-white">
+                          {seminar.location.type === 'online'
+                            ? '온라인 진행'
+                            : seminar.location.type === 'hybrid'
+                              ? '하이브리드 (온/오프라인)'
+                              : seminar.location.venue}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
+                        <span className="text-foreground dark:text-white">
+                          {seminar.registeredCount}/{seminar.capacity}명 등록
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <DollarSign className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
+                        <span
+                          className={
+                            seminar.price === 0
+                              ? 'text-green-600 dark:text-green-400 font-medium'
+                              : 'text-foreground dark:text-white'
+                          }
+                        >
+                          {formatPrice(seminar.price)}
+                          {seminar.isPremium && (
+                            <Badge
+                              variant="outline"
+                              className="ml-2 text-xs dark:bg-emerald-900 dark:text-emerald-200"
+                            >
+                              Premium
+                            </Badge>
+                          )}
+                        </span>
+                      </div>
+                      {seminar.deposit && (
+                        <div className="mt-2 p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                          <div className="text-xs text-blue-700 dark:text-blue-300 font-medium mb-1">
+                            참가보증금: {formatPrice(seminar.deposit)}
+                          </div>
+                          <div className="text-xs text-blue-600 dark:text-blue-400">
+                            {seminar.depositNote}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
-                      <span className="text-foreground dark:text-white">
-                        {seminar.time} ({seminar.duration})
-                      </span>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1">
+                      {seminar.tags.slice(0, 3).map((tag, tagIndex) => (
+                        <Badge
+                          key={tagIndex}
+                          variant="outline"
+                          className="text-xs dark:bg-gray-700 dark:text-gray-200"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                      {seminar.tags.length > 3 && (
+                        <Badge
+                          variant="outline"
+                          className="text-xs dark:bg-gray-700 dark:text-gray-200"
+                        >
+                          +{seminar.tags.length - 3}
+                        </Badge>
+                      )}
                     </div>
-                    <div className="flex items-center gap-2">
-                      <LocationIcon className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
-                      <span className="line-clamp-1 text-foreground dark:text-white">
-                        {seminar.location.type === 'online'
-                          ? '온라인 진행'
-                          : seminar.location.type === 'hybrid'
-                            ? '하이브리드 (온/오프라인)'
-                            : seminar.location.venue}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
-                      <span className="text-foreground dark:text-white">
-                        {seminar.registeredCount}/{seminar.capacity}명 등록
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <DollarSign className="h-4 w-4 text-muted-foreground dark:text-gray-300" />
-                      <span
-                        className={
-                          seminar.price === 0
-                            ? 'text-green-600 dark:text-green-400 font-medium'
-                            : 'text-foreground dark:text-white'
-                        }
-                      >
-                        {formatPrice(seminar.price)}
-                        {seminar.isPremium && (
-                          <Badge
-                            variant="outline"
-                            className="ml-2 text-xs dark:bg-emerald-900 dark:text-emerald-200"
+                  </CardContent>
+
+                  <CardFooter className="pt-4">
+                    <div className="w-full">
+                      {seminar.registrationUrl ? (
+                        <a
+                          href={seminar.registrationUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <Button
+                            className="w-full group dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
+                            disabled={
+                              seminar.registeredCount >= seminar.capacity
+                            }
                           >
-                            Premium
-                          </Badge>
-                        )}
-                      </span>
-                    </div>
-                    {seminar.deposit && (
-                      <div className="mt-2 p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-800">
-                        <div className="text-xs text-blue-700 dark:text-blue-300 font-medium mb-1">
-                          참가보증금: {formatPrice(seminar.deposit)}
-                        </div>
-                        <div className="text-xs text-blue-600 dark:text-blue-400">
-                          {seminar.depositNote}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1">
-                    {seminar.tags.slice(0, 3).map((tag, tagIndex) => (
-                      <Badge
-                        key={tagIndex}
-                        variant="outline"
-                        className="text-xs dark:bg-gray-700 dark:text-gray-200"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                    {seminar.tags.length > 3 && (
-                      <Badge
-                        variant="outline"
-                        className="text-xs dark:bg-gray-700 dark:text-gray-200"
-                      >
-                        +{seminar.tags.length - 3}
-                      </Badge>
-                    )}
-                  </div>
-                </CardContent>
-
-                <CardFooter className="pt-4">
-                  <div className="w-full">
-                    {seminar.registrationUrl ? (
-                      <a
-                        href={seminar.registrationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ textDecoration: 'none' }}
-                      >
+                            {seminar.registeredCount >= seminar.capacity ? (
+                              <>
+                                <CheckCircle className="h-4 w-4 mr-2" />
+                                마감되었습니다
+                              </>
+                            ) : (
+                              <>
+                                <Calendar className="h-4 w-4 mr-2" />
+                                신청하기
+                                <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                              </>
+                            )}
+                          </Button>
+                        </a>
+                      ) : (
                         <Button
                           className="w-full group dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
                           disabled={seminar.registeredCount >= seminar.capacity}
@@ -276,31 +309,12 @@ export function UpcomingSeminarsSection() {
                             </>
                           )}
                         </Button>
-                      </a>
-                    ) : (
-                      <Button
-                        className="w-full group dark:bg-primary/80 dark:text-white dark:hover:bg-primary/90"
-                        disabled={seminar.registeredCount >= seminar.capacity}
-                      >
-                        {seminar.registeredCount >= seminar.capacity ? (
-                          <>
-                            <CheckCircle className="h-4 w-4 mr-2" />
-                            마감되었습니다
-                          </>
-                        ) : (
-                          <>
-                            <Calendar className="h-4 w-4 mr-2" />
-                            신청하기
-                            <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
-                          </>
-                        )}
-                      </Button>
-                    )}
-                  </div>
-                </CardFooter>
-              </Card>
-            );
-          })}
+                      )}
+                    </div>
+                  </CardFooter>
+                </Card>
+              );
+            })}
           </div>
         )}
 

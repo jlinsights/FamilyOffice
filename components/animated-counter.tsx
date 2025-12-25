@@ -76,10 +76,10 @@ function AnimatedCounterComponent({
 
       // ref를 통해 최신 easing 함수 사용
       const currentEasingFunction = easingFunctionRef.current;
-      const easedProgress = currentEasingFunction 
-        ? currentEasingFunction(progress) 
+      const easedProgress = currentEasingFunction
+        ? currentEasingFunction(progress)
         : 1 - Math.pow(1 - progress, 3);
-      
+
       const currentCount = start + difference * easedProgress;
 
       setCount(currentCount);
@@ -126,5 +126,5 @@ function AnimatedCounterComponent({
   );
 }
 
-// Memoize the component to prevent unnecessary re-renders  
+// Memoize the component to prevent unnecessary re-renders
 export const AnimatedCounter = memo(AnimatedCounterComponent);

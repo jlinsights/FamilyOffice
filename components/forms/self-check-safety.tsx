@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+
 import { CalComPopup } from '@/components/cal-com-popup';
 
 type ChecklistItem = {
@@ -31,8 +32,14 @@ const riskItems: ChecklistItem[] = [
 ];
 
 function scoreToGrade(score: number) {
-  if (score >= 12) return { grade: 'High', color: 'text-red-600', recommendation: 'Premium' };
-  if (score >= 7) return { grade: 'Medium', color: 'text-orange-600', recommendation: 'Advanced' };
+  if (score >= 12)
+    return { grade: 'High', color: 'text-red-600', recommendation: 'Premium' };
+  if (score >= 7)
+    return {
+      grade: 'Medium',
+      color: 'text-orange-600',
+      recommendation: 'Advanced',
+    };
   return { grade: 'Low', color: 'text-green-600', recommendation: 'Essential' };
 }
 
@@ -52,23 +59,39 @@ export function SelfCheckSafety() {
   return (
     <Card className="border-blue-200 dark:border-blue-800/50 bg-card text-card-foreground">
       <CardHeader>
-        <Badge variant="outline" className="mb-2">Risk Self-Check</Badge>
-        <CardTitle className="text-xl text-foreground">중대재해 위험도 자가진단</CardTitle>
+        <Badge variant="outline" className="mb-2">
+          Risk Self-Check
+        </Badge>
+        <CardTitle className="text-xl text-foreground">
+          중대재해 위험도 자가진단
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <h4 className="font-semibold mb-3 text-foreground">📋 안전관리 현황</h4>
+            <h4 className="font-semibold mb-3 text-foreground">
+              📋 안전관리 현황
+            </h4>
             <div className="space-y-2">
-              {managementItems.map((item) => (
-                <label key={item.id} className="flex items-start gap-3 cursor-pointer">
+              {managementItems.map(item => (
+                <label
+                  key={item.id}
+                  className="flex items-start gap-3 cursor-pointer"
+                >
                   <input
                     type="checkbox"
                     className="mt-1 border-border text-primary focus:ring-primary"
                     checked={!!answers[item.id]}
-                    onChange={(e) => setAnswers((prev) => ({ ...prev, [item.id]: e.target.checked }))}
+                    onChange={e =>
+                      setAnswers(prev => ({
+                        ...prev,
+                        [item.id]: e.target.checked,
+                      }))
+                    }
                   />
-                  <span className="text-sm text-foreground/90">{item.label}</span>
+                  <span className="text-sm text-foreground/90">
+                    {item.label}
+                  </span>
                 </label>
               ))}
             </div>
@@ -76,15 +99,26 @@ export function SelfCheckSafety() {
           <div>
             <h4 className="font-semibold mb-3 text-foreground">⚠️ 위험 요소</h4>
             <div className="space-y-2">
-              {riskItems.map((item) => (
-                <label key={item.id} className="flex items-start gap-3 cursor-pointer">
+              {riskItems.map(item => (
+                <label
+                  key={item.id}
+                  className="flex items-start gap-3 cursor-pointer"
+                >
                   <input
                     type="checkbox"
                     className="mt-1 border-border text-primary focus:ring-primary"
                     checked={!!answers[item.id]}
-                    onChange={(e) => setAnswers((prev) => ({ ...prev, [item.id]: e.target.checked }))}
+                    onChange={e =>
+                      setAnswers(prev => ({
+                        ...prev,
+                        [item.id]: e.target.checked,
+                      }))
+                    }
                   />
-                  <span className="text-sm text-foreground/90">{item.label}{item.weight ? ` (가중치 x${item.weight})` : ''}</span>
+                  <span className="text-sm text-foreground/90">
+                    {item.label}
+                    {item.weight ? ` (가중치 x${item.weight})` : ''}
+                  </span>
                 </label>
               ))}
             </div>
@@ -98,12 +132,20 @@ export function SelfCheckSafety() {
           </div>
           <Progress value={Math.min(100, score * 6)} className="h-2" />
           <div className="mt-2 text-sm">
-            현재 점수: <span className="font-semibold text-foreground">{score}</span> / 추천 패키지: <span className="font-semibold text-foreground">{recommendation}</span>
+            현재 점수:{' '}
+            <span className="font-semibold text-foreground">{score}</span> /
+            추천 패키지:{' '}
+            <span className="font-semibold text-foreground">
+              {recommendation}
+            </span>
           </div>
         </div>
 
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
-          <CalComPopup buttonText={`추천 패키지 상담 (${recommendation})`} size="lg" />
+          <CalComPopup
+            buttonText={`추천 패키지 상담 (${recommendation})`}
+            size="lg"
+          />
           <Button asChild variant="outline">
             <a href="/serious-accident-law">상세 대응 가이드 보기</a>
           </Button>
@@ -112,5 +154,3 @@ export function SelfCheckSafety() {
     </Card>
   );
 }
-
-

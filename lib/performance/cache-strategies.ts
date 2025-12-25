@@ -1,6 +1,7 @@
 // Advanced caching strategies for Next.js
 import { unstable_cache } from 'next/cache';
 import { revalidateTag, revalidatePath } from 'next/cache';
+
 import { logger } from '../debug-logger';
 
 // Cache duration constants
@@ -116,7 +117,7 @@ export const createCachedFunction = <T extends any[], R>(
       } catch (error) {
         if (options.revalidateOnError) {
           // Revalidate cache on error
-          options.tags?.forEach(tag => revalidateTag(tag));
+          options.tags?.forEach(tag => revalidateTag(tag, '/'));
         }
         throw error;
       }
@@ -258,14 +259,14 @@ export const preloadCriticalData = async () => {
 
 // Cache invalidation utilities
 export const invalidateCache = {
-  financial: () => revalidateTag(CACHE_TAGS.FINANCIAL),
-  user: () => revalidateTag(CACHE_TAGS.USER),
-  consultation: () => revalidateTag(CACHE_TAGS.CONSULTATION),
-  analytics: () => revalidateTag(CACHE_TAGS.ANALYTICS),
-  staticContent: () => revalidateTag(CACHE_TAGS.STATIC_CONTENT),
-  page: (path: string) => revalidatePath(path),
+  financial: () => revalidateTag(CACHE_TAGS.FINANCIAL, '/'),
+  user: () => revalidateTag(CACHE_TAGS.USER, '/'),
+  consultation: () => revalidateTag(CACHE_TAGS.CONSULTATION, '/'),
+  analytics: () => revalidateTag(CACHE_TAGS.ANALYTICS, '/'),
+  staticContent: () => revalidateTag(CACHE_TAGS.STATIC_CONTENT, '/'),
+  page: (path: string) => revalidatePath(path, 'page'),
   all: () => {
-    Object.values(CACHE_TAGS).forEach(tag => revalidateTag(tag));
+    Object.values(CACHE_TAGS).forEach(tag => revalidateTag(tag, '/'));
     memoryCache.clear();
   },
 };

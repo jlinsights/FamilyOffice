@@ -12,8 +12,8 @@
  * 실행 스케줄: 매일 새벽 2시 (KST 기준)
  * 인증: CRON_SECRET 환경 변수로 보호
  */
-
 import { NextRequest, NextResponse } from 'next/server';
+
 import { collectDailyRankings } from '@/scripts/collect-serper-rankings';
 
 export async function GET(request: NextRequest) {
@@ -23,10 +23,7 @@ export async function GET(request: NextRequest) {
 
   if (authHeader !== expectedAuth) {
     console.error('❌ Unauthorized cron job access attempt');
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   console.log('🚀 Starting daily BMAD keyword ranking collection...');

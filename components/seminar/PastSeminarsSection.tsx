@@ -1,19 +1,7 @@
-import {
-  Calendar,
-  Users,
-  Archive,
-  Star,
-  Crown,
-  Building,
-} from 'lucide-react';
+import { Calendar, Users, Archive, Star, Crown, Building } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export function PastSeminarsSection() {
   return (
@@ -69,7 +57,7 @@ export function PastSeminarsSection() {
                   style={{
                     border: '1px solid #bfcbda88',
                     borderRadius: '8px',
-                    minHeight: '500px'
+                    minHeight: '500px',
                   }}
                   frameBorder="0"
                   allowFullScreen
@@ -127,7 +115,7 @@ export function PastSeminarsSection() {
                   style={{
                     border: '1px solid #bfcbda88',
                     borderRadius: '8px',
-                    minHeight: '500px'
+                    minHeight: '500px',
                   }}
                   frameBorder="0"
                   allowFullScreen
@@ -203,7 +191,8 @@ export function PastSeminarsSection() {
             </div>
             <div className="mt-8 pt-6 border-t border-primary/10 dark:border-primary/20">
               <p className="text-sm text-muted-foreground dark:text-gray-300 font-medium">
-                ⚡ 참석 보증금은 세미나 당일 전액 환불되며, 불참 시에는 차후 세미나 참석권으로 전환됩니다
+                ⚡ 참석 보증금은 세미나 당일 전액 환불되며, 불참 시에는 차후
+                세미나 참석권으로 전환됩니다
               </p>
             </div>
           </div>

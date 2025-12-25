@@ -40,7 +40,10 @@ export class ErrorBoundary extends React.Component<
     console.error('Error caught by boundary:', error, errorInfo);
 
     // Log to analytics service in production
-    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+    if (
+      typeof window !== 'undefined' &&
+      window.location.hostname !== 'localhost'
+    ) {
       // Send to error monitoring service
       this.logErrorToService(error, errorInfo);
     }
@@ -121,17 +124,18 @@ function DefaultErrorFallback({
           시도해 주세요.
         </p>
 
-        {typeof window !== 'undefined' && window.location.hostname === 'localhost' && (
-          <details className="mb-6 text-left">
-            <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">
-              개발자 정보 보기
-            </summary>
-            <pre className="mt-2 text-xs bg-muted p-4 rounded-lg overflow-auto">
-              {error.message}
-              {error.stack && `\n\n${error.stack}`}
-            </pre>
-          </details>
-        )}
+        {typeof window !== 'undefined' &&
+          window.location.hostname === 'localhost' && (
+            <details className="mb-6 text-left">
+              <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">
+                개발자 정보 보기
+              </summary>
+              <pre className="mt-2 text-xs bg-muted p-4 rounded-lg overflow-auto">
+                {error.message}
+                {error.stack && `\n\n${error.stack}`}
+              </pre>
+            </details>
+          )}
 
         <div className="flex gap-4 justify-center">
           <Button onClick={resetError} variant="outline">

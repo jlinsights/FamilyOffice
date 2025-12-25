@@ -1,10 +1,11 @@
-import { blogCategories, blogPosts } from '@/lib/blog-data';
 import { MetadataRoute } from 'next';
+
+import { blogCategories, blogPosts } from '@/lib/blog-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://familyoffices.vip';
   const currentDate = new Date();
-  
+
   const staticPages = [
     {
       url: `${baseUrl}/`,
@@ -164,7 +165,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 개별 블로그 포스트 페이지 추가 (SEO 최적화)
   const blogPostPages = Object.values(blogPosts).map(post => ({
     url: `${baseUrl}/insights/${post.slug}`,
-    lastModified: post.lastUpdated ? new Date(post.lastUpdated) : new Date(post.date),
+    lastModified: post.lastUpdated
+      ? new Date(post.lastUpdated)
+      : new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
@@ -191,5 +194,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return [...staticPages, ...categoryPages, ...blogPostPages, ...rssAndApiPages];
+  return [
+    ...staticPages,
+    ...categoryPages,
+    ...blogPostPages,
+    ...rssAndApiPages,
+  ];
 }

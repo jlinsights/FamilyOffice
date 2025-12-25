@@ -2,8 +2,8 @@
  * Supabase 보안 상태 체크 도구
  * 보안 경고 및 취약점을 실시간으로 모니터링
  */
-
 import { createClient } from '@supabase/supabase-js';
+
 import { Database } from '@/types/supabase';
 
 // Supabase 관리자 클라이언트
@@ -43,13 +43,16 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
   try {
     // 1. RLS 활성화 상태 확인
     const { data: tables } = await supabaseAdmin.rpc('get_table_rls_status');
-    
+
     const criticalTables = ['users', 'consultations', 'audit_logs'];
-    const tableList = tables as Array<{ table_name: string; rls_enabled: boolean }> | null;
-    
+    const tableList = tables as Array<{
+      table_name: string;
+      rls_enabled: boolean;
+    }> | null;
+
     for (const tableName of criticalTables) {
-      const tableInfo = tableList?.find((t) => t.table_name === tableName);
-      
+      const tableInfo = tableList?.find(t => t.table_name === tableName);
+
       if (!tableInfo) {
         checks.push({
           id: `rls-missing-${tableName}`,
@@ -58,7 +61,7 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
           message: `${tableName} 테이블이 존재하지 않습니다.`,
           recommendation: `${tableName} 테이블을 생성하고 RLS를 활성화하세요.`,
           severity: 'critical',
-          category: 'rls'
+          category: 'rls',
         });
         continue;
       }
@@ -71,7 +74,7 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
           message: `${tableName} 테이블에 RLS가 비활성화되어 있습니다.`,
           recommendation: `ALTER TABLE ${tableName} ENABLE ROW LEVEL SECURITY;`,
           severity: 'critical',
-          category: 'rls'
+          category: 'rls',
         });
       } else {
         checks.push({
@@ -80,18 +83,22 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
           status: 'pass',
           message: `${tableName} 테이블에 RLS가 정상 활성화되어 있습니다.`,
           severity: 'low',
-          category: 'rls'
+          category: 'rls',
         });
       }
     }
 
     // 2. RLS 정책 존재 여부 확인
     const { data: policies } = await supabaseAdmin.rpc('get_table_policies');
-    const policyList = policies as Array<{ table_name: string; policy_name: string }> | null;
-    
+    const policyList = policies as Array<{
+      table_name: string;
+      policy_name: string;
+    }> | null;
+
     for (const tableName of criticalTables) {
-      const tablePolicies = policyList?.filter((p) => p.table_name === tableName) || [];
-      
+      const tablePolicies =
+        policyList?.filter(p => p.table_name === tableName) || [];
+
       if (tablePolicies.length === 0) {
         checks.push({
           id: `rls-no-policies-${tableName}`,
@@ -100,7 +107,7 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
           message: `${tableName} 테이블에 RLS 정책이 없습니다.`,
           recommendation: `RLS 정책을 생성하여 데이터 접근을 제한하세요.`,
           severity: 'critical',
-          category: 'rls'
+          category: 'rls',
         });
       } else {
         checks.push({
@@ -109,11 +116,10 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
           status: 'pass',
           message: `${tableName} 테이블에 ${tablePolicies.length}개의 RLS 정책이 설정되어 있습니다.`,
           severity: 'low',
-          category: 'rls'
+          category: 'rls',
         });
       }
     }
-
   } catch (error) {
     checks.push({
       id: 'rls-check-error',
@@ -122,7 +128,7 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
       message: `RLS 정책 확인 중 오류가 발생했습니다: ${error instanceof Error ? error.message : 'Unknown error'}`,
       recommendation: 'Supabase 연결 및 권한을 확인하세요.',
       severity: 'high',
-      category: 'rls'
+      category: 'rls',
     });
   }
 
@@ -139,7 +145,7 @@ async function checkAuthSecurity(): Promise<SecurityCheck[]> {
     // 1. Auth 설정 확인 (getConfig API 사용 불가로 임시 비활성화)
     // const { data: authConfig } = await supabaseAdmin.auth.admin.getConfig();
     const authConfig = null;
-    
+
     // SMTP 설정 확인 (이메일 인증용) - 임시 비활성화
     /*
     if (!authConfig?.smtp?.enabled) {
@@ -161,21 +167,23 @@ async function checkAuthSecurity(): Promise<SecurityCheck[]> {
         status: 'pass',
         message: 'SMTP가 정상 설정되어 있습니다.',
         severity: 'low',
-        category: 'auth'
+        category: 'auth',
       });
     }
 
     // JWT 만료 시간 확인 - 임시 기본값 사용
     const jwtExpiry = 3600; // authConfig?.jwt_exp || 3600;
-    if (jwtExpiry > 24 * 60 * 60) { // 24시간보다 길면 경고
+    if (jwtExpiry > 24 * 60 * 60) {
+      // 24시간보다 길면 경고
       checks.push({
         id: 'auth-jwt-expiry-long',
         name: 'JWT 토큰 만료 시간',
         status: 'warn',
         message: `JWT 토큰 만료 시간이 ${jwtExpiry}초로 너무 깁니다.`,
-        recommendation: 'JWT 만료 시간을 24시간 이하로 설정하는 것을 권장합니다.',
+        recommendation:
+          'JWT 만료 시간을 24시간 이하로 설정하는 것을 권장합니다.',
         severity: 'medium',
-        category: 'auth'
+        category: 'auth',
       });
     } else {
       checks.push({
@@ -184,10 +192,9 @@ async function checkAuthSecurity(): Promise<SecurityCheck[]> {
         status: 'pass',
         message: `JWT 토큰 만료 시간이 ${jwtExpiry}초로 적절합니다.`,
         severity: 'low',
-        category: 'auth'
+        category: 'auth',
       });
     }
-
   } catch (error) {
     checks.push({
       id: 'auth-check-error',
@@ -196,7 +203,7 @@ async function checkAuthSecurity(): Promise<SecurityCheck[]> {
       message: `인증 시스템 확인 중 오류가 발생했습니다: ${error instanceof Error ? error.message : 'Unknown error'}`,
       recommendation: 'Supabase Auth 설정을 확인하세요.',
       severity: 'high',
-      category: 'auth'
+      category: 'auth',
     });
   }
 
@@ -218,7 +225,7 @@ async function checkAPISecurity(): Promise<SecurityCheck[]> {
       message: 'SUPABASE_SERVICE_ROLE_KEY 환경변수가 설정되지 않았습니다.',
       recommendation: 'Supabase 프로젝트에서 Service Role Key를 설정하세요.',
       severity: 'critical',
-      category: 'api'
+      category: 'api',
     });
   } else {
     checks.push({
@@ -227,7 +234,7 @@ async function checkAPISecurity(): Promise<SecurityCheck[]> {
       status: 'pass',
       message: 'Service Role Key가 정상 설정되어 있습니다.',
       severity: 'low',
-      category: 'api'
+      category: 'api',
     });
   }
 
@@ -240,7 +247,7 @@ async function checkAPISecurity(): Promise<SecurityCheck[]> {
       message: 'NEXT_PUBLIC_SUPABASE_ANON_KEY 환경변수가 설정되지 않았습니다.',
       recommendation: 'Supabase 프로젝트에서 Anonymous Key를 설정하세요.',
       severity: 'critical',
-      category: 'api'
+      category: 'api',
     });
   } else {
     checks.push({
@@ -249,7 +256,7 @@ async function checkAPISecurity(): Promise<SecurityCheck[]> {
       status: 'pass',
       message: 'Anonymous Key가 정상 설정되어 있습니다.',
       severity: 'low',
-      category: 'api'
+      category: 'api',
     });
   }
 
@@ -277,7 +284,7 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
         message: `관리자 계정 확인 중 오류: ${error.message}`,
         recommendation: 'users 테이블과 RLS 정책을 확인하세요.',
         severity: 'high',
-        category: 'data'
+        category: 'data',
       });
     } else if (!adminUsers || adminUsers.length === 0) {
       checks.push({
@@ -287,7 +294,7 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
         message: '등록된 관리자 계정이 없습니다.',
         recommendation: '관리자 계정을 생성하고 is_admin을 true로 설정하세요.',
         severity: 'medium',
-        category: 'data'
+        category: 'data',
       });
     } else {
       checks.push({
@@ -296,22 +303,25 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
         status: 'pass',
         message: '관리자 계정이 정상 설정되어 있습니다.',
         severity: 'low',
-        category: 'data'
+        category: 'data',
       });
     }
 
     // 2. 테이블 암호화 확인
     const { data: columns } = await supabaseAdmin.rpc('get_encrypted_columns');
-    const columnList = columns as Array<{ column_name: string; is_encrypted: boolean }> | null;
-    
+    const columnList = columns as Array<{
+      column_name: string;
+      is_encrypted: boolean;
+    }> | null;
+
     const sensitiveColumns = ['kakao_access_token', 'phone', 'personal_id'];
     let encryptedCount = 0;
-    
+
     for (const columnName of sensitiveColumns) {
-      const isEncrypted = columnList?.some((c) => 
-        c.column_name === columnName && c.is_encrypted
+      const isEncrypted = columnList?.some(
+        c => c.column_name === columnName && c.is_encrypted
       );
-      
+
       if (isEncrypted) {
         encryptedCount++;
       }
@@ -325,7 +335,7 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
         message: '민감한 데이터가 암호화되지 않았습니다.',
         recommendation: '토큰, 전화번호 등 민감 데이터에 암호화를 적용하세요.',
         severity: 'medium',
-        category: 'data'
+        category: 'data',
       });
     } else {
       checks.push({
@@ -334,10 +344,9 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
         status: 'pass',
         message: `${encryptedCount}개 민감 필드에 암호화가 적용되어 있습니다.`,
         severity: 'low',
-        category: 'data'
+        category: 'data',
       });
     }
-
   } catch (error) {
     checks.push({
       id: 'data-check-error',
@@ -346,7 +355,7 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
       message: `데이터 보안 확인 중 오류가 발생했습니다: ${error instanceof Error ? error.message : 'Unknown error'}`,
       recommendation: '데이터베이스 연결 및 권한을 확인하세요.',
       severity: 'high',
-      category: 'data'
+      category: 'data',
     });
   }
 
@@ -371,7 +380,7 @@ async function checkNetworkSecurity(): Promise<SecurityCheck[]> {
       message: '프로덕션 환경에서 HTTPS가 설정되지 않았습니다.',
       recommendation: 'APP_URL을 https://로 시작하도록 설정하세요.',
       severity: 'critical',
-      category: 'network'
+      category: 'network',
     });
   } else {
     checks.push({
@@ -380,7 +389,7 @@ async function checkNetworkSecurity(): Promise<SecurityCheck[]> {
       status: 'pass',
       message: 'HTTPS가 정상 설정되어 있습니다.',
       severity: 'low',
-      category: 'network'
+      category: 'network',
     });
   }
 
@@ -393,7 +402,7 @@ async function checkNetworkSecurity(): Promise<SecurityCheck[]> {
       status: 'pass',
       message: '프로덕션 CORS 설정이 적절합니다.',
       severity: 'low',
-      category: 'network'
+      category: 'network',
     });
   }
 
@@ -407,15 +416,22 @@ export async function runSecurityAudit(): Promise<SecurityReport> {
   const checks: SecurityCheck[] = [];
 
   // 각 카테고리별 보안 검사 실행
-  const [rlsChecks, authChecks, apiChecks, dataChecks, networkChecks] = await Promise.all([
-    checkRLSPolicies(),
-    checkAuthSecurity(),
-    checkAPISecurity(),
-    checkDataSecurity(),
-    checkNetworkSecurity()
-  ]);
+  const [rlsChecks, authChecks, apiChecks, dataChecks, networkChecks] =
+    await Promise.all([
+      checkRLSPolicies(),
+      checkAuthSecurity(),
+      checkAPISecurity(),
+      checkDataSecurity(),
+      checkNetworkSecurity(),
+    ]);
 
-  checks.push(...rlsChecks, ...authChecks, ...apiChecks, ...dataChecks, ...networkChecks);
+  checks.push(
+    ...rlsChecks,
+    ...authChecks,
+    ...apiChecks,
+    ...dataChecks,
+    ...networkChecks
+  );
 
   // 결과 통계 계산
   const summary = {
@@ -446,7 +462,7 @@ export async function runSecurityAudit(): Promise<SecurityReport> {
     timestamp: new Date(),
     overallScore,
     checks,
-    summary
+    summary,
   };
 }
 
@@ -464,8 +480,9 @@ export function getSecurityStatus(score: number): string {
  * 우선순위가 높은 보안 이슈만 반환
  */
 export function getCriticalIssues(checks: SecurityCheck[]): SecurityCheck[] {
-  return checks.filter(check => 
-    check.status === 'fail' && 
-    (check.severity === 'critical' || check.severity === 'high')
+  return checks.filter(
+    check =>
+      check.status === 'fail' &&
+      (check.severity === 'critical' || check.severity === 'high')
   );
 }

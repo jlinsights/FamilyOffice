@@ -4,7 +4,7 @@ import Logs from 'logs-so';
 const logsClient = process.env.LOGS_SO_API_KEY
   ? new Logs({
       apiKey: process.env.LOGS_SO_API_KEY,
-      project: 'FamilyOffice'
+      project: 'FamilyOffice',
     })
   : null;
 
@@ -14,7 +14,7 @@ export enum LogLevel {
   WARNING = 'warning',
   ERROR = 'error',
   SUCCESS = 'success',
-  DEBUG = 'debug'
+  DEBUG = 'debug',
 }
 
 // Common log channels
@@ -26,7 +26,7 @@ export enum LogChannel {
   USER = 'user',
   SYSTEM = 'system',
   PERFORMANCE = 'performance',
-  SECURITY = 'security'
+  SECURITY = 'security',
 }
 
 // Icon mapping for different log types
@@ -35,7 +35,7 @@ const iconMap: Record<LogLevel, string> = {
   [LogLevel.WARNING]: '⚠️',
   [LogLevel.ERROR]: '❌',
   [LogLevel.SUCCESS]: '✅',
-  [LogLevel.DEBUG]: '🐛'
+  [LogLevel.DEBUG]: '🐛',
 };
 
 interface LogOptions {
@@ -56,7 +56,11 @@ interface LogOptions {
 export async function log(options: LogOptions): Promise<void> {
   if (!logsClient) {
     // Fallback to console.log in development or when API key is not set
-    console.log(`[${options.level || LogLevel.INFO}] ${options.event}:`, options.description || '', options.tags || {});
+    console.log(
+      `[${options.level || LogLevel.INFO}] ${options.event}:`,
+      options.description || '',
+      options.tags || {}
+    );
     return;
   }
 
@@ -66,38 +70,60 @@ export async function log(options: LogOptions): Promise<void> {
       event: options.event,
       description: options.description || '',
       icon: iconMap[options.level || LogLevel.INFO],
-      notify: options.notify || (options.level === LogLevel.ERROR),
+      notify: options.notify || options.level === LogLevel.ERROR,
       tags: {
         level: options.level || LogLevel.INFO,
         environment: process.env.NODE_ENV || 'development',
         timestamp: new Date().toISOString(),
-        ...options.tags
+        ...options.tags,
       },
       ...(options.userId && { user_id: options.userId }),
-      keywords: options.keywords || [options.channel, options.level || LogLevel.INFO]
+      keywords: options.keywords || [
+        options.channel,
+        options.level || LogLevel.INFO,
+      ],
     });
   } catch (error) {
     // Fallback to console.error if logging fails
     console.error('Failed to send log to logs.so:', error);
-    console.log(`[${options.level || LogLevel.INFO}] ${options.event}:`, options.description || '', options.tags || {});
+    console.log(
+      `[${options.level || LogLevel.INFO}] ${options.event}:`,
+      options.description || '',
+      options.tags || {}
+    );
   }
 }
 
 // Convenience methods for different log levels
-export const logInfo = (channel: LogChannel, event: string, options?: Partial<LogOptions>) =>
-  log({ ...options, channel, event, level: LogLevel.INFO });
+export const logInfo = (
+  channel: LogChannel,
+  event: string,
+  options?: Partial<LogOptions>
+) => log({ ...options, channel, event, level: LogLevel.INFO });
 
-export const logWarning = (channel: LogChannel, event: string, options?: Partial<LogOptions>) =>
-  log({ ...options, channel, event, level: LogLevel.WARNING });
+export const logWarning = (
+  channel: LogChannel,
+  event: string,
+  options?: Partial<LogOptions>
+) => log({ ...options, channel, event, level: LogLevel.WARNING });
 
-export const logError = (channel: LogChannel, event: string, options?: Partial<LogOptions>) =>
-  log({ ...options, channel, event, level: LogLevel.ERROR, notify: true });
+export const logError = (
+  channel: LogChannel,
+  event: string,
+  options?: Partial<LogOptions>
+) => log({ ...options, channel, event, level: LogLevel.ERROR, notify: true });
 
-export const logSuccess = (channel: LogChannel, event: string, options?: Partial<LogOptions>) =>
-  log({ ...options, channel, event, level: LogLevel.SUCCESS });
+export const logSuccess = (
+  channel: LogChannel,
+  event: string,
+  options?: Partial<LogOptions>
+) => log({ ...options, channel, event, level: LogLevel.SUCCESS });
 
-export const logDebug = (channel: LogChannel, event: string, options?: Partial<LogOptions>) =>
-  log({ ...options, channel, event, level: LogLevel.DEBUG });
+export const logDebug = (
+  channel: LogChannel,
+  event: string,
+  options?: Partial<LogOptions>
+) => log({ ...options, channel, event, level: LogLevel.DEBUG });
 
 // Specialized logging functions for common scenarios
 
@@ -112,25 +138,25 @@ export const logAuth = {
       level: success ? LogLevel.SUCCESS : LogLevel.WARNING,
       userId,
       tags: { method },
-      notify: !success
+      notify: !success,
     }),
-  
+
   logout: (userId: string) =>
     log({
       channel: LogChannel.AUTH,
       event: 'user-logout',
       level: LogLevel.INFO,
-      userId
+      userId,
     }),
-  
+
   register: (userId: string, method: string) =>
     log({
       channel: LogChannel.AUTH,
       event: 'user-registration',
       level: LogLevel.SUCCESS,
       userId,
-      tags: { method }
-    })
+      tags: { method },
+    }),
 };
 
 /**
@@ -143,19 +169,24 @@ export const logAPI = {
       event: 'api-request',
       level: LogLevel.INFO,
       ...(userId && { userId }),
-      tags: { endpoint, method }
+      tags: { endpoint, method },
     }),
-  
-  response: (endpoint: string, statusCode: number, duration: number, userId?: string) =>
+
+  response: (
+    endpoint: string,
+    statusCode: number,
+    duration: number,
+    userId?: string
+  ) =>
     log({
       channel: LogChannel.API,
       event: 'api-response',
       level: statusCode >= 400 ? LogLevel.ERROR : LogLevel.INFO,
       ...(userId && { userId }),
       tags: { endpoint, statusCode, duration },
-      notify: statusCode >= 500
+      notify: statusCode >= 500,
     }),
-  
+
   error: (endpoint: string, error: any, userId?: string) =>
     log({
       channel: LogChannel.API,
@@ -164,8 +195,8 @@ export const logAPI = {
       ...(userId && { userId }),
       description: error.message || 'Unknown error',
       tags: { endpoint, error: error.stack || error.toString() },
-      notify: true
-    })
+      notify: true,
+    }),
 };
 
 /**
@@ -178,16 +209,16 @@ export const logPerformance = {
       event: 'slow-operation',
       level: LogLevel.WARNING,
       description: `${operation} took ${duration}ms (threshold: ${threshold}ms)`,
-      tags: { operation, duration, threshold }
+      tags: { operation, duration, threshold },
     }),
-  
+
   metric: (name: string, value: number, unit: string) =>
     log({
       channel: LogChannel.PERFORMANCE,
       event: 'performance-metric',
       level: LogLevel.INFO,
-      tags: { metric: name, value, unit }
-    })
+      tags: { metric: name, value, unit },
+    }),
 };
 
 /**
@@ -202,9 +233,9 @@ export const logSecurity = {
       ...(userId && { userId }),
       description: `Security threat detected: ${type}`,
       tags: { type, details },
-      notify: true
+      notify: true,
     }),
-  
+
   accessDenied: (resource: string, userId?: string) =>
     log({
       channel: LogChannel.SECURITY,
@@ -212,8 +243,8 @@ export const logSecurity = {
       level: LogLevel.WARNING,
       ...(userId && { userId }),
       description: `Access denied to resource: ${resource}`,
-      tags: { resource }
-    })
+      tags: { resource },
+    }),
 };
 
 export default log;

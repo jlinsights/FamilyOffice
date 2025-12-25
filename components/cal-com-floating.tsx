@@ -1,25 +1,28 @@
 'use client';
 
 import { Calendar } from 'lucide-react';
-import { CalComPopup } from './cal-com-popup';
-import { Button } from '@/components/ui/button';
+
 import { useState, useEffect } from 'react';
+
+import { Button } from '@/components/ui/button';
+
+import { CalComPopup } from './cal-com-popup';
 
 /**
  * Floating Cal.com booking widget positioned at bottom-right of screen.
  * Provides quick access to consultation booking across all pages.
- * 
+ *
  * Features:
  * - Responsive hover animations
  * - Korean timezone optimization
  * - Anti-flicker mounting strategy
  * - High z-index for overlay positioning
- * 
+ *
  * @example
  * ```tsx
  * <CalComFloating />
  * ```
- * 
+ *
  * @returns Fixed-position floating booking button
  */
 export function CalComFloating() {
@@ -41,9 +44,9 @@ export function CalComFloating() {
   if (!mounted) return null;
 
   return (
-    <div 
+    <div
       className="cal-com-floating-force group"
-      style={{ 
+      style={{
         zIndex: 999999,
         position: 'fixed',
         bottom: '24px',
@@ -54,14 +57,14 @@ export function CalComFloating() {
         willChange: 'transform',
         // Ensure it's not affected by parent transforms
         containIntrinsicSize: 'auto',
-        contain: 'layout style'
+        contain: 'layout style',
       }}
     >
       {/* 호버 시 나타나는 툴팁 텍스트 */}
-      <div 
+      <div
         className={`absolute bottom-20 right-0 bg-gray-900 dark:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg transition-all duration-300 transform ${
-          isHovered 
-            ? 'opacity-100 translate-y-0' 
+          isHovered
+            ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-2 pointer-events-none'
         }`}
       >
@@ -69,8 +72,8 @@ export function CalComFloating() {
         {/* 말풍선 꼬리 */}
         <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
       </div>
-      
-      <CalComPopup 
+
+      <CalComPopup
         trigger={
           <Button
             size="lg"
@@ -100,13 +103,13 @@ export function CalComFloating() {
               after:rounded-full after:pointer-events-none
             `}
           >
-            <Calendar 
+            <Calendar
               className={`
                 h-7 w-7 
                 transition-all duration-300 
                 ${isHovered ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}
                 drop-shadow-sm
-              `} 
+              `}
             />
           </Button>
         }
@@ -115,9 +118,9 @@ export function CalComFloating() {
         variant="default"
         size="lg"
       />
-      
+
       {/* 지속적인 맥동 효과를 위한 링 */}
-      <div 
+      <div
         className={`
           absolute inset-0 rounded-full 
           border-2 border-primary/40 
@@ -125,9 +128,9 @@ export function CalComFloating() {
           pointer-events-none
         `}
       />
-      
+
       {/* 두 번째 맥동 링 (딜레이 적용) */}
-      <div 
+      <div
         className={`
           absolute inset-0 rounded-full 
           border-2 border-primary/20 
@@ -136,18 +139,15 @@ export function CalComFloating() {
         `}
         style={{ animationDelay: '1s' }}
       />
-      
+
       {/* 백그라운드 글로우 효과 */}
-      <div 
+      <div
         className={`
           absolute inset-0 rounded-full 
           bg-primary/20 blur-xl
           transition-all duration-500
           pointer-events-none
-          ${isHovered 
-            ? 'scale-150 opacity-60' 
-            : 'scale-100 opacity-30'
-          }
+          ${isHovered ? 'scale-150 opacity-60' : 'scale-100 opacity-30'}
         `}
       />
     </div>

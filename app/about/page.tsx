@@ -1,5 +1,6 @@
-import AboutPageContent from '@/components/about/about-page-content';
 import { Metadata } from 'next';
+
+import AboutPageContent from '@/components/about/about-page-content';
 
 export const metadata: Metadata = {
   title: '회사 소개 | FamilyOffice S - 삼성생명 기업컨설팅센터',

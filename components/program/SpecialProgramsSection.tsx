@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -24,7 +25,7 @@ function ProgramCard({
   };
 
   return (
-    <div 
+    <div
       className="rounded-xl border border-muted/30 bg-white/5 shadow-lg p-6 flex flex-col min-h-[340px] transition-transform duration-200 hover:scale-105 hover:shadow-2xl cursor-pointer"
       onClick={handleCardClick}
     >
@@ -61,7 +62,13 @@ function ProgramCard({
           className="flex-1 border-primary text-primary hover:bg-primary hover:text-white"
           size="sm"
         >
-          <a href="https://cal.com/familyoffice" target="_blank" rel="noopener noreferrer">상담 신청</a>
+          <a
+            href="https://cal.com/familyoffice"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            상담 신청
+          </a>
         </Button>
       </div>
     </div>

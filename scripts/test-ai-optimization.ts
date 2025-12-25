@@ -2,15 +2,14 @@
  * AI 최적화 시스템 테스트 스크립트
  * 블로그 AI 최적화 기능 동작 검증
  */
-
-import { blogPosts } from '../lib/blog-data';
 import {
   generateAIOptimizedFAQ,
   generateAIOptimizedMetadata,
   extractAIOptimizedKeywords,
   calculateAIOptimizationScore,
-  generateOptimizationRecommendations
+  generateOptimizationRecommendations,
 } from '../lib/blog-ai-optimization';
+import { blogPosts } from '../lib/blog-data';
 
 console.log('🤖 AI 최적화 시스템 테스트 시작\n');
 console.log('='.repeat(80));
@@ -60,7 +59,9 @@ const aiMetadata = generateAIOptimizedMetadata(post);
 console.log(`✅ 타이틀: ${aiMetadata.title}`);
 console.log(`✅ 설명: ${aiMetadata.description.substring(0, 100)}...`);
 console.log(`✅ BMAD 카테고리: ${aiMetadata.aiOptimization.bmadCategory}`);
-console.log(`✅ 타겟 엔진 수: ${aiMetadata.aiOptimization.targetEngines.length}`);
+console.log(
+  `✅ 타겟 엔진 수: ${aiMetadata.aiOptimization.targetEngines.length}`
+);
 console.log(`📋 타겟 엔진:`);
 aiMetadata.aiOptimization.targetEngines.forEach((engine, idx) => {
   console.log(`   ${idx + 1}. ${engine}`);
@@ -95,7 +96,9 @@ console.log(`✅ @type: ${schema['@type']}`);
 console.log(`✅ educationalLevel: ${schema.educationalLevel}`);
 console.log(`✅ educationalUse: ${schema.educationalUse}`);
 console.log(`✅ audience.audienceType: ${schema.audience.audienceType}`);
-console.log(`✅ audience.geographicArea: ${schema.audience.geographicArea.name}`);
+console.log(
+  `✅ audience.geographicArea: ${schema.audience.geographicArea.name}`
+);
 console.log(`✅ about.name: ${schema.about.name}`);
 
 // 종합 결과

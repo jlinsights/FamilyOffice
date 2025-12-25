@@ -22,7 +22,7 @@ export function CalComButton({
   const handleClick = () => {
     // Force dark theme for better visibility
     const themeParams = `?theme=dark&bg=000000&text=ffffff&layout=month_view`;
-    
+
     if (typeof window !== 'undefined') {
       window.open(
         `https://cal.com/${calLink}${themeParams}`,

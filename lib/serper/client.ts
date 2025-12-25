@@ -47,14 +47,14 @@ export async function searchSerper(
       method: 'POST',
       headers: {
         'X-API-KEY': apiKey,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         q: query,
         gl: gl,
         hl: hl,
-        num: 20
-      })
+        num: 20,
+      }),
     });
 
     if (!response.ok) {
@@ -99,9 +99,7 @@ export async function checkDomainRanking(
   }
 
   // 도메인 매칭 (서브도메인 포함)
-  const matchedResult = result.organic.find(item =>
-    item.link.includes(domain)
-  );
+  const matchedResult = result.organic.find(item => item.link.includes(domain));
 
   if (matchedResult) {
     return {
@@ -133,13 +131,15 @@ export async function batchSearch(
     language?: string;
     delayMs?: number; // 각 요청 간 대기 시간 (기본: 1000ms)
   } = {}
-): Promise<Array<{
-  keyword: string;
-  found: boolean;
-  position: number | null;
-  url: string | null;
-  timestamp: string;
-}>> {
+): Promise<
+  Array<{
+    keyword: string;
+    found: boolean;
+    position: number | null;
+    url: string | null;
+    timestamp: string;
+  }>
+> {
   const { delayMs = 1000, ...searchOptions } = options;
   const results = [];
 
@@ -212,7 +212,10 @@ export async function checkAIEnginePresence(
     { engine: 'Perplexity', domains: ['perplexity.ai'] },
     { engine: 'Claude', domains: ['claude.ai'] },
     { engine: 'Gemini', domains: ['gemini.google.com', 'bard.google.com'] },
-    { engine: 'Bing Copilot', domains: ['bing.com/chat', 'copilot.microsoft.com'] },
+    {
+      engine: 'Bing Copilot',
+      domains: ['bing.com/chat', 'copilot.microsoft.com'],
+    },
   ];
 
   const presence: AIEnginePresence[] = [];
@@ -225,8 +228,8 @@ export async function checkAIEnginePresence(
     presence.push({
       engine,
       present: !!match,
-      position: match?.position,
-      snippet: match?.snippet,
+      ...(match?.position !== undefined && { position: match.position }),
+      ...(match?.snippet !== undefined && { snippet: match.snippet }),
     });
   }
 

@@ -5,23 +5,40 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useContentOptimization, useSEOScore } from '@/hooks/use-content-optimization';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { 
-  CheckCircle, 
-  AlertCircle, 
-  XCircle, 
-  TrendingUp, 
-  Search, 
+import {
+  CheckCircle,
+  AlertCircle,
+  XCircle,
+  TrendingUp,
+  Search,
   Link,
   Target,
-  BarChart3
+  BarChart3,
 } from 'lucide-react';
+
+import { useState, useEffect } from 'react';
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+import {
+  useContentOptimization,
+  useSEOScore,
+} from '@/hooks/use-content-optimization';
+
+/**
+ * 컨텐츠 최적화 컴포넌트
+ * 페이지별 SEO 최적화 및 실시간 분석
+ */
 
 interface ContentOptimizerProps {
   content: string;
@@ -39,15 +56,10 @@ export function ContentOptimizer({
   targetKeywords = [],
   showAnalysis = true,
   autoOptimize = true,
-  onOptimizedContent
+  onOptimizedContent,
 }: ContentOptimizerProps) {
-  const { 
-    analysis, 
-    optimizedContent, 
-    metaKeywords, 
-    isLoading, 
-    error 
-  } = useContentOptimization(content, targetKeywords, autoOptimize);
+  const { analysis, optimizedContent, metaKeywords, isLoading, error } =
+    useContentOptimization(content, targetKeywords, autoOptimize);
 
   const { score, factors } = useSEOScore(analysis);
 
@@ -88,12 +100,20 @@ export function ContentOptimizer({
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-2xl font-bold">{score}/100</span>
-              <Badge variant={score >= 80 ? "default" : score >= 60 ? "secondary" : "destructive"}>
-                {score >= 80 ? "최적화됨" : score >= 60 ? "보통" : "개선 필요"}
+              <Badge
+                variant={
+                  score >= 80
+                    ? 'default'
+                    : score >= 60
+                      ? 'secondary'
+                      : 'destructive'
+                }
+              >
+                {score >= 80 ? '최적화됨' : score >= 60 ? '보통' : '개선 필요'}
               </Badge>
             </div>
             <Progress value={score} className="w-full" />
-            
+
             {isLoading && (
               <div className="text-sm text-muted-foreground">
                 컨텐츠 분석 중...
@@ -122,19 +142,27 @@ export function ContentOptimizer({
                 <CardContent className="space-y-2">
                   <div className="flex justify-between">
                     <span>단어 수:</span>
-                    <span className="font-mono">{analysis.wordCount.toLocaleString()}</span>
+                    <span className="font-mono">
+                      {analysis.wordCount.toLocaleString()}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>가독성 점수:</span>
-                    <span className="font-mono">{analysis.readabilityScore.toFixed(1)}</span>
+                    <span className="font-mono">
+                      {analysis.readabilityScore.toFixed(1)}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>제목 개수:</span>
-                    <span className="font-mono">{analysis.headingStructure.length}</span>
+                    <span className="font-mono">
+                      {analysis.headingStructure.length}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>내부 링크:</span>
-                    <span className="font-mono">{analysis.internalLinks.length}</span>
+                    <span className="font-mono">
+                      {analysis.internalLinks.length}
+                    </span>
                   </div>
                 </CardContent>
               </Card>
@@ -148,7 +176,9 @@ export function ContentOptimizer({
                     <div key={index} className="space-y-1">
                       <div className="flex items-center justify-between text-sm">
                         <span>{factor.name}</span>
-                        <span className="font-mono">{Math.round(factor.score)}/100</span>
+                        <span className="font-mono">
+                          {Math.round(factor.score)}/100
+                        </span>
                       </div>
                       <Progress value={factor.score} className="h-2" />
                     </div>
@@ -169,19 +199,26 @@ export function ContentOptimizer({
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {Object.entries(analysis.keywordDensity).map(([keyword, density]) => (
-                    <div key={keyword} className="flex items-center justify-between">
-                      <span className="text-sm">{keyword}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-sm">{density.toFixed(1)}%</span>
-                        {density >= 0.5 && density <= 3 ? (
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                        ) : (
-                          <AlertCircle className="h-4 w-4 text-orange-500" />
-                        )}
+                  {Object.entries(analysis.keywordDensity).map(
+                    ([keyword, density]) => (
+                      <div
+                        key={keyword}
+                        className="flex items-center justify-between"
+                      >
+                        <span className="text-sm">{keyword}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-sm">
+                            {density.toFixed(1)}%
+                          </span>
+                          {density >= 0.5 && density <= 3 ? (
+                            <CheckCircle className="h-4 w-4 text-green-500" />
+                          ) : (
+                            <AlertCircle className="h-4 w-4 text-orange-500" />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </CardContent>
               </Card>
 
@@ -253,7 +290,11 @@ export function ContentOptimizer({
                       {heading.keywords.length > 0 && (
                         <div className="flex flex-wrap gap-1 ml-8">
                           {heading.keywords.map((keyword, kIndex) => (
-                            <Badge key={kIndex} variant="secondary" className="text-xs">
+                            <Badge
+                              key={kIndex}
+                              variant="secondary"
+                              className="text-xs"
+                            >
                               {keyword}
                             </Badge>
                           ))}
@@ -307,12 +348,12 @@ export function ContentOptimizer({
 /**
  * 간단한 SEO 점수 표시 컴포넌트
  */
-export function SEOScoreIndicator({ 
-  content, 
-  targetKeywords = [] 
-}: { 
-  content: string; 
-  targetKeywords?: string[] 
+export function SEOScoreIndicator({
+  content,
+  targetKeywords = [],
+}: {
+  content: string;
+  targetKeywords?: string[];
 }) {
   const { analysis } = useContentOptimization(content, targetKeywords, false);
   const { score } = useSEOScore(analysis);
@@ -321,12 +362,14 @@ export function SEOScoreIndicator({
 
   return (
     <div className="flex items-center gap-2">
-      <Badge variant={score >= 80 ? "default" : score >= 60 ? "secondary" : "destructive"}>
+      <Badge
+        variant={
+          score >= 80 ? 'default' : score >= 60 ? 'secondary' : 'destructive'
+        }
+      >
         SEO: {score}/100
       </Badge>
-      {score < 60 && (
-        <AlertCircle className="h-4 w-4 text-orange-500" />
-      )}
+      {score < 60 && <AlertCircle className="h-4 w-4 text-orange-500" />}
     </div>
   );
 }

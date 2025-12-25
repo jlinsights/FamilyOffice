@@ -329,7 +329,7 @@ export class NetworkSecurityService {
     if (!network || !bits) {
       return false;
     }
-    
+
     const networkParts = network.split('.').map(Number);
     const ipParts = ip.split('.').map(Number);
 
@@ -339,11 +339,11 @@ export class NetworkSecurityService {
     for (let i = 0; i < 4; i++) {
       const networkPart = networkParts[i];
       const ipPart = ipParts[i];
-      
+
       if (networkPart === undefined || ipPart === undefined) {
         return false;
       }
-      
+
       if ((networkPart & networkMask) !== (ipPart & networkMask)) {
         return false;
       }

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { abTestEngine, ABTestStatus } from '@/lib/ab-test-engine';
 
 /**
@@ -207,13 +208,24 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case 'create-test': {
         // 테스트 생성
-        const { name, description, targetPage, variants, duration, minSampleSize, confidenceThreshold, primaryMetric, createdBy } = body;
+        const {
+          name,
+          description,
+          targetPage,
+          variants,
+          duration,
+          minSampleSize,
+          confidenceThreshold,
+          primaryMetric,
+          createdBy,
+        } = body;
 
         if (!name || !targetPage || !variants || !createdBy) {
           return NextResponse.json(
             {
               success: false,
-              error: 'Missing required fields: name, targetPage, variants, createdBy',
+              error:
+                'Missing required fields: name, targetPage, variants, createdBy',
             },
             { status: 400 }
           );
@@ -356,7 +368,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to process request',
+        error:
+          error instanceof Error ? error.message : 'Failed to process request',
       },
       { status: 500 }
     );

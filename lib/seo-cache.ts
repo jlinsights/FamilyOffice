@@ -11,10 +11,11 @@ class SEOCache {
   private cache = new Map<string, CacheEntry<any>>();
   private readonly defaultTTL = 5 * 60 * 1000; // 5 minutes
   private readonly maxEntries = 1000;
-  
+
   constructor() {
     // Clean up expired entries every minute
-    if (typeof window === 'undefined') { // Server-side only
+    if (typeof window === 'undefined') {
+      // Server-side only
       setInterval(() => this.cleanup(), 60000);
     }
   }
@@ -119,7 +120,7 @@ export function withSEOCache<T extends (...args: any[]) => Promise<any>>(
 ): T {
   return (async (...args: Parameters<T>) => {
     // Generate cache key
-    const key = options?.keyGenerator 
+    const key = options?.keyGenerator
       ? options.keyGenerator(...args)
       : `${fn.name}_${JSON.stringify(args)}`;
 
@@ -174,5 +175,5 @@ export const seoOperationCache = {
   // Clear all SEO caches
   clearAll() {
     seoCache.clear();
-  }
+  },
 };

@@ -1,27 +1,31 @@
 'use client';
 
+import {
+  AtSign,
+  Check,
+  Facebook,
+  Link as LinkIcon,
+  Linkedin,
+  MessageCircle,
+  Share2,
+  Twitter,
+} from 'lucide-react';
+
+import { useEffect, useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useToast } from '@/hooks/use-toast';
+
 import { KakaoSyncService } from '@/lib/kakao/kakao-sync-service';
-import {
-    AtSign,
-    Check,
-    Facebook,
-    Link as LinkIcon,
-    Linkedin,
-    MessageCircle,
-    Share2,
-    Twitter
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
+
+import { useToast } from '@/hooks/use-toast';
 
 interface ShareButtonProps {
   title: string;
@@ -31,12 +35,12 @@ interface ShareButtonProps {
   className?: string;
 }
 
-export function ShareButton({ 
-  title, 
-  description = '', 
-  url, 
+export function ShareButton({
+  title,
+  description = '',
+  url,
   image,
-  className 
+  className,
 }: ShareButtonProps) {
   const { toast } = useToast();
   const [currentUrl, setCurrentUrl] = useState('');
@@ -53,15 +57,15 @@ export function ShareButton({
       await navigator.clipboard.writeText(currentUrl);
       setCopied(true);
       toast({
-        title: "링크 복사 완료",
-        description: "클립보드에 링크가 복사되었습니다.",
+        title: '링크 복사 완료',
+        description: '클립보드에 링크가 복사되었습니다.',
       });
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       toast({
-        title: "복사 실패",
-        description: "링크 복사에 실패했습니다.",
-        variant: "destructive",
+        title: '복사 실패',
+        description: '링크 복사에 실패했습니다.',
+        variant: 'destructive',
       });
     }
   };
@@ -100,15 +104,16 @@ export function ShareButton({
       title,
       description,
       imageUrl: image || '',
-      linkUrl: currentUrl
+      linkUrl: currentUrl,
     });
 
     if (!success) {
       // Fallback if SDK fails or not loaded
       toast({
-        title: "카카오톡 공유 실패",
-        description: "카카오톡 공유 기능을 사용할 수 없습니다. 링크 복사를 이용해주세요.",
-        variant: "destructive",
+        title: '카카오톡 공유 실패',
+        description:
+          '카카오톡 공유 기능을 사용할 수 없습니다. 링크 복사를 이용해주세요.',
+        variant: 'destructive',
       });
     }
   };
@@ -128,39 +133,50 @@ export function ShareButton({
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel>공유하기</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        
+
         <DropdownMenuItem onClick={handleCopyLink} className="cursor-pointer">
-          {copied ? <Check className="mr-2 h-4 w-4" /> : <LinkIcon className="mr-2 h-4 w-4" />}
+          {copied ? (
+            <Check className="mr-2 h-4 w-4" />
+          ) : (
+            <LinkIcon className="mr-2 h-4 w-4" />
+          )}
           링크 복사
         </DropdownMenuItem>
-        
+
         <DropdownMenuSeparator />
-        
-        <DropdownMenuItem onClick={shareToKakao} className="cursor-pointer text-yellow-900 focus:text-yellow-900 focus:bg-yellow-100 dark:text-yellow-500 dark:focus:text-yellow-400 dark:focus:bg-yellow-900/20">
+
+        <DropdownMenuItem
+          onClick={shareToKakao}
+          className="cursor-pointer text-yellow-900 focus:text-yellow-900 focus:bg-yellow-100 dark:text-yellow-500 dark:focus:text-yellow-400 dark:focus:bg-yellow-900/20"
+        >
           <MessageCircle className="mr-2 h-4 w-4 fill-current" />
           카카오톡
         </DropdownMenuItem>
 
-        <DropdownMenuItem onClick={shareToLinkedIn} className="cursor-pointer text-blue-700 focus:text-blue-700 focus:bg-blue-50 dark:text-blue-400 dark:focus:text-blue-300 dark:focus:bg-blue-900/20">
+        <DropdownMenuItem
+          onClick={shareToLinkedIn}
+          className="cursor-pointer text-blue-700 focus:text-blue-700 focus:bg-blue-50 dark:text-blue-400 dark:focus:text-blue-300 dark:focus:bg-blue-900/20"
+        >
           <Linkedin className="mr-2 h-4 w-4 fill-current" />
           LinkedIn
         </DropdownMenuItem>
 
-        <DropdownMenuItem onClick={shareToFacebook} className="cursor-pointer text-blue-600 focus:text-blue-600 focus:bg-blue-50 dark:text-blue-400 dark:focus:text-blue-300 dark:focus:bg-blue-900/20">
+        <DropdownMenuItem
+          onClick={shareToFacebook}
+          className="cursor-pointer text-blue-600 focus:text-blue-600 focus:bg-blue-50 dark:text-blue-400 dark:focus:text-blue-300 dark:focus:bg-blue-900/20"
+        >
           <Facebook className="mr-2 h-4 w-4 fill-current" />
           Facebook
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={shareToX} className="cursor-pointer">
-          <Twitter className="mr-2 h-4 w-4 fill-current" />
-          X (Twitter)
+          <Twitter className="mr-2 h-4 w-4 fill-current" />X (Twitter)
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={shareToThreads} className="cursor-pointer">
           <AtSign className="mr-2 h-4 w-4" />
           Threads
         </DropdownMenuItem>
-
       </DropdownMenuContent>
     </DropdownMenu>
   );

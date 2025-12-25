@@ -4,12 +4,13 @@
  * DELETE /api/web-vitals - 웹 바이탈 데이터 초기화
  */
 import { NextRequest, NextResponse } from 'next/server';
+
 import { checkAdminPermissions } from '@/lib/admin-permissions';
-import { 
-  getWebVitalsAnalytics, 
-  getPerformanceAlerts, 
+import {
+  getWebVitalsAnalytics,
+  getPerformanceAlerts,
   clearWebVitalsData,
-  exportWebVitalsData 
+  exportWebVitalsData,
 } from '@/lib/core-web-vitals';
 
 export async function GET(request: NextRequest) {
@@ -18,9 +19,9 @@ export async function GET(request: NextRequest) {
     const hasPermission = await checkAdminPermissions();
     if (!hasPermission) {
       return NextResponse.json(
-        { 
+        {
           error: 'Unauthorized',
-          message: '관리자 권한이 필요합니다.'
+          message: '관리자 권한이 필요합니다.',
         },
         { status: 403 }
       );
@@ -29,11 +30,11 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const format = url.searchParams.get('format') || 'full';
     const timeWindow = url.searchParams.get('timeWindow');
-    
+
     // 시간 윈도우 설정 (기본값: 24시간)
-    const timeWindowMs = timeWindow ? 
-      parseInt(timeWindow) * 60 * 60 * 1000 : 
-      24 * 60 * 60 * 1000;
+    const timeWindowMs = timeWindow
+      ? parseInt(timeWindow) * 60 * 60 * 1000
+      : 24 * 60 * 60 * 1000;
 
     if (format === 'alerts') {
       // 성능 알림만 반환
@@ -78,8 +79,10 @@ export async function GET(request: NextRequest) {
     ]);
 
     // 성능 등급 계산
-    const performanceGrade = getPerformanceGrade(analytics.summary.performanceScore);
-    
+    const performanceGrade = getPerformanceGrade(
+      analytics.summary.performanceScore
+    );
+
     // 개선 권장사항 생성
     const recommendations = generateRecommendations(analytics, alerts);
 
@@ -105,10 +108,9 @@ export async function GET(request: NextRequest) {
         },
       },
     });
-
   } catch (error) {
     console.error('웹 바이탈 API 오류:', error);
-    
+
     return NextResponse.json(
       {
         error: 'Internal Server Error',
@@ -126,9 +128,9 @@ export async function DELETE() {
     const hasPermission = await checkAdminPermissions();
     if (!hasPermission) {
       return NextResponse.json(
-        { 
+        {
           error: 'Unauthorized',
-          message: '관리자 권한이 필요합니다.'
+          message: '관리자 권한이 필요합니다.',
         },
         { status: 403 }
       );
@@ -142,10 +144,9 @@ export async function DELETE() {
       message: '웹 바이탈 데이터가 초기화되었습니다.',
       timestamp: Date.now(),
     });
-
   } catch (error) {
     console.error('웹 바이탈 데이터 초기화 오류:', error);
-    
+
     return NextResponse.json(
       {
         error: 'Internal Server Error',
@@ -195,7 +196,10 @@ interface PerformanceAlert {
 /**
  * 성능 개선 권장사항 생성
  */
-function generateRecommendations(analytics: WebVitalsAnalytics, alerts: PerformanceAlert[]): string[] {
+function generateRecommendations(
+  analytics: WebVitalsAnalytics,
+  alerts: PerformanceAlert[]
+): string[] {
   const recommendations: string[] = [];
   const { averageScores } = analytics.summary;
 
@@ -256,7 +260,9 @@ function generateRecommendations(analytics: WebVitalsAnalytics, alerts: Performa
     );
   }
 
-  return recommendations.length > 0 ? recommendations : [
-    '현재 웹 성능이 양호합니다. 지속적인 모니터링을 통해 성능을 유지하세요.'
-  ];
+  return recommendations.length > 0
+    ? recommendations
+    : [
+        '현재 웹 성능이 양호합니다. 지속적인 모니터링을 통해 성능을 유지하세요.',
+      ];
 }

@@ -45,7 +45,12 @@ export interface CampaignConfig {
 }
 
 export interface ConversionEvent {
-  eventName: 'PageView' | 'CompleteRegistration' | 'Contact' | 'Purchase' | 'Lead';
+  eventName:
+    | 'PageView'
+    | 'CompleteRegistration'
+    | 'Contact'
+    | 'Purchase'
+    | 'Lead';
   userId?: string;
   sessionId: string;
   kclid?: string; // Kakao Click ID
@@ -66,7 +71,15 @@ export interface AnalyticsParams {
     start: string;
     end: string;
   };
-  metrics: ('impressions' | 'clicks' | 'conversions' | 'cost' | 'ctr' | 'cpc' | 'roas')[];
+  metrics: (
+    | 'impressions'
+    | 'clicks'
+    | 'conversions'
+    | 'cost'
+    | 'ctr'
+    | 'cpc'
+    | 'roas'
+  )[];
   dimensions?: ('campaign' | 'ad_group' | 'keyword' | 'audience')[];
   filters?: Record<string, any>;
 }
@@ -149,7 +162,7 @@ export class KakaoBusinessAPI {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.config.apiKey}`,
+          Authorization: `Bearer ${this.config.apiKey}`,
         },
         body: JSON.stringify({
           ...campaignConfig,
@@ -174,7 +187,7 @@ export class KakaoBusinessAPI {
       const response = await fetch(`${this.baseURL}/v1/campaigns`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${this.config.apiKey}`,
+          Authorization: `Bearer ${this.config.apiKey}`,
         },
       });
 
@@ -190,16 +203,22 @@ export class KakaoBusinessAPI {
     }
   }
 
-  async updateCampaign(campaignId: string, updates: Partial<CampaignConfig>): Promise<Campaign> {
+  async updateCampaign(
+    campaignId: string,
+    updates: Partial<CampaignConfig>
+  ): Promise<Campaign> {
     try {
-      const response = await fetch(`${this.baseURL}/v1/campaigns/${campaignId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.config.apiKey}`,
-        },
-        body: JSON.stringify(updates),
-      });
+      const response = await fetch(
+        `${this.baseURL}/v1/campaigns/${campaignId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.config.apiKey}`,
+          },
+          body: JSON.stringify(updates),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Campaign update failed: ${response.statusText}`);
@@ -216,23 +235,26 @@ export class KakaoBusinessAPI {
   // 전환 추적
   async trackConversion(event: ConversionEvent): Promise<void> {
     try {
-      const response = await fetch(`${this.baseURL}/v1/pixel/${this.config.pixelId}/events`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.config.apiKey}`,
-        },
-        body: JSON.stringify({
-          event_name: event.eventName,
-          event_time: Math.floor(new Date(event.timestamp).getTime() / 1000),
-          user_data: {
-            user_id: event.userId,
-            session_id: event.sessionId,
+      const response = await fetch(
+        `${this.baseURL}/v1/pixel/${this.config.pixelId}/events`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.config.apiKey}`,
           },
-          custom_data: event.parameters,
-          action_source: 'website',
-        }),
-      });
+          body: JSON.stringify({
+            event_name: event.eventName,
+            event_time: Math.floor(new Date(event.timestamp).getTime() / 1000),
+            user_data: {
+              user_id: event.userId,
+              session_id: event.sessionId,
+            },
+            custom_data: event.parameters,
+            action_source: 'website',
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Conversion tracking failed: ${response.statusText}`);
@@ -254,12 +276,15 @@ export class KakaoBusinessAPI {
         ...(params.filters && { filters: JSON.stringify(params.filters) }),
       });
 
-      const response = await fetch(`${this.baseURL}/v1/analytics?${queryParams}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${this.config.apiKey}`,
-        },
-      });
+      const response = await fetch(
+        `${this.baseURL}/v1/analytics?${queryParams}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${this.config.apiKey}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Analytics request failed: ${response.statusText}`);
@@ -274,13 +299,15 @@ export class KakaoBusinessAPI {
   }
 
   // 오디언스 관리
-  async createAudience(audienceConfig: AudienceConfig): Promise<{ id: string; size: number }> {
+  async createAudience(
+    audienceConfig: AudienceConfig
+  ): Promise<{ id: string; size: number }> {
     try {
       const response = await fetch(`${this.baseURL}/v1/audiences`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.config.apiKey}`,
+          Authorization: `Bearer ${this.config.apiKey}`,
         },
         body: JSON.stringify({
           ...audienceConfig,
@@ -301,14 +328,19 @@ export class KakaoBusinessAPI {
   }
 
   // 메시징 템플릿
-  async createMessageTemplate(template: MessagingTemplate): Promise<MessagingTemplate> {
+  async createMessageTemplate(
+    template: MessagingTemplate
+  ): Promise<MessagingTemplate> {
     try {
-      const endpoint = template.type === 'alimtalk' ? 'alimtalk/templates' : 'friendtalk/templates';
+      const endpoint =
+        template.type === 'alimtalk'
+          ? 'alimtalk/templates'
+          : 'friendtalk/templates';
       const response = await fetch(`${this.baseURL}/v1/messaging/${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.config.apiKey}`,
+          Authorization: `Bearer ${this.config.apiKey}`,
         },
         body: JSON.stringify({
           ...template,
@@ -328,13 +360,17 @@ export class KakaoBusinessAPI {
     }
   }
 
-  async sendMessage(templateId: string, recipient: string, variables: Record<string, string>): Promise<{ messageId: string }> {
+  async sendMessage(
+    templateId: string,
+    recipient: string,
+    variables: Record<string, string>
+  ): Promise<{ messageId: string }> {
     try {
       const response = await fetch(`${this.baseURL}/v1/messaging/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.config.apiKey}`,
+          Authorization: `Bearer ${this.config.apiKey}`,
         },
         body: JSON.stringify({
           template_id: templateId,
@@ -364,7 +400,13 @@ export class KakaoBusinessAPI {
   }
 
   validateConfig(): boolean {
-    const required = ['pixelId', 'channelId', 'appKey', 'restApiKey', 'javascriptKey'];
+    const required = [
+      'pixelId',
+      'channelId',
+      'appKey',
+      'restApiKey',
+      'javascriptKey',
+    ];
     return required.every(key => this.config[key as keyof KakaoBusinessConfig]);
   }
 }
@@ -372,7 +414,9 @@ export class KakaoBusinessAPI {
 // 싱글톤 인스턴스 생성
 let kakaoBusinessInstance: KakaoBusinessAPI | null = null;
 
-export function createKakaoBusinessClient(config: KakaoBusinessConfig): KakaoBusinessAPI {
+export function createKakaoBusinessClient(
+  config: KakaoBusinessConfig
+): KakaoBusinessAPI {
   if (!kakaoBusinessInstance) {
     kakaoBusinessInstance = new KakaoBusinessAPI(config);
   }
@@ -381,7 +425,9 @@ export function createKakaoBusinessClient(config: KakaoBusinessConfig): KakaoBus
 
 export function getKakaoBusinessClient(): KakaoBusinessAPI {
   if (!kakaoBusinessInstance) {
-    throw new Error('Kakao Business client not initialized. Call createKakaoBusinessClient first.');
+    throw new Error(
+      'Kakao Business client not initialized. Call createKakaoBusinessClient first.'
+    );
   }
   return kakaoBusinessInstance;
 }

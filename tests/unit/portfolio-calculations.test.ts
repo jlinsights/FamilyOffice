@@ -436,7 +436,9 @@ describe('Portfolio Calculations', () => {
         const portfolioReturn = portfolioReturns[i];
         const benchmarkReturn = benchmarkReturns[i];
         if (portfolioReturn !== undefined && benchmarkReturn !== undefined) {
-          covariance += (portfolioReturn - portfolioMean) * (benchmarkReturn - benchmarkMean);
+          covariance +=
+            (portfolioReturn - portfolioMean) *
+            (benchmarkReturn - benchmarkMean);
           benchmarkVariance += Math.pow(benchmarkReturn - benchmarkMean, 2);
         }
       }

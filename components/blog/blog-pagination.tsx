@@ -1,10 +1,24 @@
 'use client';
 
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from 'lucide-react';
+
 import { useState, useEffect } from 'react';
+
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface BlogPaginationProps {
   totalItems: number;
@@ -93,7 +107,7 @@ export function BlogPagination({
           전체 {totalItems}개 중 {(currentPage - 1) * itemsPerPage + 1}-
           {Math.min(currentPage * itemsPerPage, totalItems)}개 표시
         </p>
-        
+
         {showItemsPerPage && (
           <Select
             value={itemsPerPage.toString()}
@@ -187,12 +201,16 @@ export function BlogPagination({
 }
 
 // 무한 스크롤 컴포넌트
-export function InfiniteScrollTrigger({ onLoadMore }: { onLoadMore: () => void }) {
+export function InfiniteScrollTrigger({
+  onLoadMore,
+}: {
+  onLoadMore: () => void;
+}) {
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         const entry = entries[0];
         if (entry) {
           setIsIntersecting(entry.isIntersecting);
@@ -213,14 +231,13 @@ export function InfiniteScrollTrigger({ onLoadMore }: { onLoadMore: () => void }
   }, [onLoadMore]);
 
   return (
-    <div
-      id="infinite-scroll-trigger"
-      className="flex justify-center py-8"
-    >
+    <div id="infinite-scroll-trigger" className="flex justify-center py-8">
       {isIntersecting && (
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-blue-600" />
-          <span className="text-slate-600 dark:text-slate-400">더 불러오는 중...</span>
+          <span className="text-slate-600 dark:text-slate-400">
+            더 불러오는 중...
+          </span>
         </div>
       )}
     </div>

@@ -2,11 +2,26 @@
  * 콘텐츠 자동 게시 시스템
  * 캘린더 기반 자동 게시, 승인 워크플로우, SEO 메타데이터 자동 설정, 소셜 미디어 연동
  */
+import {
+  ContentCalendar,
+  generateContentCalendar,
+} from './seo/inbound-marketing-automation';
 
-import { ContentCalendarItem, generateContentCalendar } from './seo/inbound-marketing-automation';
-
-export type ContentStatus = 'draft' | 'pending_approval' | 'approved' | 'scheduled' | 'published' | 'failed' | 'archived';
-export type ContentType = 'blog' | 'case-study' | 'guide' | 'whitepaper' | 'news' | 'tutorial';
+export type ContentStatus =
+  | 'draft'
+  | 'pending_approval'
+  | 'approved'
+  | 'scheduled'
+  | 'published'
+  | 'failed'
+  | 'archived';
+export type ContentType =
+  | 'blog'
+  | 'case-study'
+  | 'guide'
+  | 'whitepaper'
+  | 'news'
+  | 'tutorial';
 export type SocialPlatform = 'twitter' | 'linkedin' | 'facebook' | 'instagram';
 
 export interface ContentItem {
@@ -164,7 +179,6 @@ export class ContentAutoPublisher {
       type: params.type,
       status: 'draft',
       seoMetadata,
-      scheduledDate: params.scheduledDate,
       createdBy: params.createdBy,
       createdAt: new Date(),
       approvalRequests: [],
@@ -173,9 +187,16 @@ export class ContentAutoPublisher {
       categories: params.categories || [],
     };
 
+    // Conditionally add optional property
+    if (params.scheduledDate !== undefined) {
+      content.scheduledDate = params.scheduledDate;
+    }
+
     this.contents.set(content.id, content);
 
-    console.log(`[ContentPublisher] Content created: ${content.title} (${content.id})`);
+    console.log(
+      `[ContentPublisher] Content created: ${content.title} (${content.id})`
+    );
 
     return content;
   }
@@ -183,14 +204,20 @@ export class ContentAutoPublisher {
   /**
    * 승인 요청
    */
-  requestApproval(contentId: string, requestedBy: string, approver: string): ApprovalRequest {
+  requestApproval(
+    contentId: string,
+    requestedBy: string,
+    approver: string
+  ): ApprovalRequest {
     const content = this.contents.get(contentId);
     if (!content) {
       throw new Error(`Content not found: ${contentId}`);
     }
 
     if (content.status !== 'draft') {
-      throw new Error(`Content must be in draft status to request approval: ${content.status}`);
+      throw new Error(
+        `Content must be in draft status to request approval: ${content.status}`
+      );
     }
 
     const approvalRequest: ApprovalRequest = {
@@ -205,7 +232,9 @@ export class ContentAutoPublisher {
     content.status = 'pending_approval';
     this.contents.set(contentId, content);
 
-    console.log(`[ContentPublisher] Approval requested: ${content.title} → ${approver}`);
+    console.log(
+      `[ContentPublisher] Approval requested: ${content.title} → ${approver}`
+    );
 
     // Email notification integration: https://github.com/jlinsights/FamilyOffice/issues/6
     // await this.sendApprovalNotification(approver, content);
@@ -227,18 +256,26 @@ export class ContentAutoPublisher {
       throw new Error(`Content not found: ${contentId}`);
     }
 
-    const approvalRequest = content.approvalRequests.find(r => r.id === approvalRequestId);
+    const approvalRequest = content.approvalRequests.find(
+      r => r.id === approvalRequestId
+    );
     if (!approvalRequest) {
       throw new Error(`Approval request not found: ${approvalRequestId}`);
     }
 
     if (approvalRequest.approver !== approvedBy) {
-      throw new Error(`Only the assigned approver can approve: ${approvalRequest.approver}`);
+      throw new Error(
+        `Only the assigned approver can approve: ${approvalRequest.approver}`
+      );
     }
 
     approvalRequest.status = 'approved';
     approvalRequest.respondedAt = new Date();
-    approvalRequest.comments = comments;
+
+    // Conditionally add optional property
+    if (comments !== undefined) {
+      approvalRequest.comments = comments;
+    }
 
     content.status = 'approved';
     content.approvedBy = approvedBy;
@@ -246,7 +283,9 @@ export class ContentAutoPublisher {
 
     this.contents.set(contentId, content);
 
-    console.log(`[ContentPublisher] Content approved: ${content.title} by ${approvedBy}`);
+    console.log(
+      `[ContentPublisher] Content approved: ${content.title} by ${approvedBy}`
+    );
 
     // 자동 게시가 활성화되어 있고 스케줄이 없으면 즉시 게시
     if (this.config.autoPublish && !content.scheduledDate) {
@@ -270,7 +309,9 @@ export class ContentAutoPublisher {
       throw new Error(`Content not found: ${contentId}`);
     }
 
-    const approvalRequest = content.approvalRequests.find(r => r.id === approvalRequestId);
+    const approvalRequest = content.approvalRequests.find(
+      r => r.id === approvalRequestId
+    );
     if (!approvalRequest) {
       throw new Error(`Approval request not found: ${approvalRequestId}`);
     }
@@ -283,7 +324,9 @@ export class ContentAutoPublisher {
 
     this.contents.set(contentId, content);
 
-    console.log(`[ContentPublisher] Content rejected: ${content.title} by ${rejectedBy}`);
+    console.log(
+      `[ContentPublisher] Content rejected: ${content.title} by ${rejectedBy}`
+    );
 
     return content;
   }
@@ -298,7 +341,9 @@ export class ContentAutoPublisher {
     }
 
     if (content.status !== 'approved') {
-      throw new Error(`Content must be approved before scheduling: ${content.status}`);
+      throw new Error(
+        `Content must be approved before scheduling: ${content.status}`
+      );
     }
 
     content.scheduledDate = scheduledDate;
@@ -323,7 +368,9 @@ export class ContentAutoPublisher {
     }
 
     if (content.status !== 'approved' && content.status !== 'scheduled') {
-      throw new Error(`Content must be approved or scheduled before publishing: ${content.status}`);
+      throw new Error(
+        `Content must be approved or scheduled before publishing: ${content.status}`
+      );
     }
 
     try {
@@ -331,7 +378,10 @@ export class ContentAutoPublisher {
 
       // SEO 최적화
       if (this.config.seoAutoOptimize) {
-        content.seoMetadata = this.optimizeSEOMetadata(content.seoMetadata, content.content);
+        content.seoMetadata = this.optimizeSEOMetadata(
+          content.seoMetadata,
+          content.content
+        );
       }
 
       // 소셜 미디어 포스트 생성 및 게시
@@ -353,7 +403,9 @@ export class ContentAutoPublisher {
 
       const publishedUrl = this.generatePublishedUrl(content.slug);
 
-      console.log(`[ContentPublisher] Content published successfully: ${publishedUrl}`);
+      console.log(
+        `[ContentPublisher] Content published successfully: ${publishedUrl}`
+      );
 
       // 알림 전송
       if (this.config.notifyOnPublish) {
@@ -371,7 +423,10 @@ export class ContentAutoPublisher {
       content.status = 'failed';
       this.contents.set(contentId, content);
 
-      console.error(`[ContentPublisher] Failed to publish content: ${content.title}`, error);
+      console.error(
+        `[ContentPublisher] Failed to publish content: ${content.title}`,
+        error
+      );
 
       return {
         success: false,
@@ -405,7 +460,9 @@ export class ContentAutoPublisher {
     }
 
     if (results.length > 0) {
-      console.log(`[ContentPublisher] Published ${results.length} scheduled contents`);
+      console.log(
+        `[ContentPublisher] Published ${results.length} scheduled contents`
+      );
     }
 
     return results;
@@ -422,13 +479,14 @@ export class ContentAutoPublisher {
     const { title, content, slug } = params;
 
     // 본문에서 첫 160자 추출하여 description 생성
-    const description = content.replace(/<[^>]*>/g, '').substring(0, 160) + '...';
+    const description =
+      content.replace(/<[^>]*>/g, '').substring(0, 160) + '...';
 
     // 키워드 추출 (간단한 버전 - 실제로는 NLP 사용)
     const keywords = this.extractKeywords(content);
 
     // Focus Keyword (제목의 첫 번째 주요 단어)
-    const focusKeyword = keywords[0] || title.split(' ')[0];
+    const focusKeyword = keywords[0] || title.split(' ')[0] || 'default';
 
     const canonicalUrl = `https://familyoffice.com/blog/${slug}`;
 
@@ -451,9 +509,15 @@ export class ContentAutoPublisher {
   /**
    * SEO 메타데이터 최적화
    */
-  private optimizeSEOMetadata(metadata: SEOMetadata, content: string): SEOMetadata {
+  private optimizeSEOMetadata(
+    metadata: SEOMetadata,
+    content: string
+  ): SEOMetadata {
     // 키워드 밀도 체크
-    const keywordDensity = this.calculateKeywordDensity(content, metadata.focusKeyword);
+    const keywordDensity = this.calculateKeywordDensity(
+      content,
+      metadata.focusKeyword
+    );
 
     // SEO 점수 계산
     const seoScore = this.calculateSEOScore({
@@ -476,7 +540,9 @@ export class ContentAutoPublisher {
   /**
    * 소셜 미디어 포스트 생성 및 게시
    */
-  private async createAndPublishSocialPosts(content: ContentItem): Promise<SocialMediaPost[]> {
+  private async createAndPublishSocialPosts(
+    content: ContentItem
+  ): Promise<SocialMediaPost[]> {
     const posts: SocialMediaPost[] = [];
 
     for (const platform of this.config.socialPlatforms) {
@@ -487,7 +553,9 @@ export class ContentAutoPublisher {
       // await this.publishToSocialMedia(post);
     }
 
-    console.log(`[ContentPublisher] Created ${posts.length} social media posts`);
+    console.log(
+      `[ContentPublisher] Created ${posts.length} social media posts`
+    );
 
     return posts;
   }
@@ -495,7 +563,10 @@ export class ContentAutoPublisher {
   /**
    * 플랫폼별 소셜 미디어 포스트 생성
    */
-  private generateSocialPost(content: ContentItem, platform: SocialPlatform): SocialMediaPost {
+  private generateSocialPost(
+    content: ContentItem,
+    platform: SocialPlatform
+  ): SocialMediaPost {
     const baseUrl = `https://familyoffice.com/blog/${content.slug}`;
     const hashtags = this.generateHashtags(content.tags, platform);
 
@@ -539,7 +610,8 @@ export class ContentAutoPublisher {
     const hashtags = tags.map(tag => `#${tag.replace(/\s+/g, '')}`);
 
     // 플랫폼별 해시태그 제한
-    const maxHashtags = platform === 'twitter' ? 3 : platform === 'instagram' ? 30 : 5;
+    const maxHashtags =
+      platform === 'twitter' ? 3 : platform === 'instagram' ? 30 : 5;
 
     return hashtags.slice(0, maxHashtags);
   }
@@ -551,19 +623,41 @@ export class ContentAutoPublisher {
     targetAudience: 'ceo' | 'high-net-worth' | 'mid-market',
     monthsAhead: number = 3
   ): Promise<ContentItem[]> {
-    const calendarItems = generateContentCalendar(targetAudience, monthsAhead);
+    // Generate calendar with proper date range
+    const startDate = new Date();
+    const endDate = new Date();
+    endDate.setMonth(endDate.getMonth() + monthsAhead);
+
+    const calendarItems = generateContentCalendar(startDate, endDate);
     const contents: ContentItem[] = [];
 
     for (const item of calendarItems) {
-      const content = this.createContent({
+      // Build params object with conditional scheduledDate
+      const params: {
+        title: string;
+        content: string;
+        type: ContentType;
+        createdBy: string;
+        scheduledDate?: Date;
+        tags: string[];
+        categories: string[];
+      } = {
         title: item.title,
         content: this.generateContentFromTemplate(item),
         type: this.mapContentType(item.type),
         createdBy: 'system',
-        scheduledDate: item.publishDate,
-        tags: [item.bmadCategory, item.targetAudience],
+        tags: [item.bmadCategory, item.targetAudience].filter(
+          (tag): tag is string => tag !== undefined
+        ),
         categories: [item.type],
-      });
+      };
+
+      // Conditionally add scheduledDate if publishDate is defined
+      if (item.publishDate !== undefined) {
+        params.scheduledDate = item.publishDate;
+      }
+
+      const content = this.createContent(params);
 
       contents.push(content);
     }
@@ -618,7 +712,9 @@ export class ContentAutoPublisher {
       if (c.status !== 'pending_approval') return false;
       if (!approver) return true;
 
-      return c.approvalRequests.some(r => r.approver === approver && r.status === 'pending');
+      return c.approvalRequests.some(
+        r => r.approver === approver && r.status === 'pending'
+      );
     });
   }
 
@@ -646,7 +742,10 @@ export class ContentAutoPublisher {
     );
 
     const publishedThisMonth = contents.filter(
-      c => c.status === 'published' && c.publishedDate && c.publishedDate >= monthStart
+      c =>
+        c.status === 'published' &&
+        c.publishedDate &&
+        c.publishedDate >= monthStart
     ).length;
 
     const engagementRates = contents
@@ -655,7 +754,8 @@ export class ContentAutoPublisher {
 
     const averageEngagementRate =
       engagementRates.length > 0
-        ? engagementRates.reduce((sum, rate) => sum + rate, 0) / engagementRates.length
+        ? engagementRates.reduce((sum, rate) => sum + rate, 0) /
+          engagementRates.length
         : 0;
 
     return {
@@ -693,7 +793,10 @@ export class ContentAutoPublisher {
 
   private generateExcerpt(content: string, maxLength: number = 200): string {
     const plainText = content.replace(/<[^>]*>/g, '');
-    return plainText.substring(0, maxLength) + (plainText.length > maxLength ? '...' : '');
+    return (
+      plainText.substring(0, maxLength) +
+      (plainText.length > maxLength ? '...' : '')
+    );
   }
 
   private extractKeywords(content: string): string[] {
@@ -721,7 +824,9 @@ export class ContentAutoPublisher {
 
   private calculateKeywordDensity(content: string, keyword: string): number {
     const words = content.toLowerCase().split(/\s+/);
-    const keywordCount = words.filter(w => w.includes(keyword.toLowerCase())).length;
+    const keywordCount = words.filter(w =>
+      w.includes(keyword.toLowerCase())
+    ).length;
     return (keywordCount / words.length) * 100;
   }
 
@@ -746,7 +851,10 @@ export class ContentAutoPublisher {
     // 설명 길이 (150-160자 최적)
     if (params.descriptionLength >= 150 && params.descriptionLength <= 160) {
       score += 20;
-    } else if (params.descriptionLength >= 140 && params.descriptionLength <= 170) {
+    } else if (
+      params.descriptionLength >= 140 &&
+      params.descriptionLength <= 170
+    ) {
       score += 15;
     } else {
       score += 5;
@@ -776,8 +884,13 @@ export class ContentAutoPublisher {
     return `https://familyoffice.com/blog/${slug}`;
   }
 
-  private async sendPublishNotification(content: ContentItem, url: string): Promise<void> {
-    console.log(`[ContentPublisher] Sending publish notification for: ${content.title}`);
+  private async sendPublishNotification(
+    content: ContentItem,
+    url: string
+  ): Promise<void> {
+    console.log(
+      `[ContentPublisher] Sending publish notification for: ${content.title}`
+    );
     console.log(`URL: ${url}`);
     console.log(`Recipients: ${this.config.notificationEmails.join(', ')}`);
 
@@ -789,7 +902,7 @@ export class ContentAutoPublisher {
     // });
   }
 
-  private generateContentFromTemplate(item: ContentCalendarItem): string {
+  private generateContentFromTemplate(item: ContentCalendar): string {
     // 템플릿 기반 콘텐츠 생성 (간단한 버전)
     return `
       <h1>${item.title}</h1>
@@ -797,7 +910,7 @@ export class ContentAutoPublisher {
 
       <h2>주요 내용</h2>
       <ul>
-        ${item.topics.map(topic => `<li>${topic}</li>`).join('\n')}
+        ${item.topics?.map((topic: string) => `<li>${topic}</li>`).join('\n') || ''}
       </ul>
 
       <h2>키워드</h2>

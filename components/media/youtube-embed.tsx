@@ -7,11 +7,11 @@ interface YouTubeEmbedProps {
   className?: string;
 }
 
-export function YouTubeEmbed({ 
-  videoId, 
+export function YouTubeEmbed({
+  videoId,
   title,
   aspectRatio = '16:9',
-  className = '' 
+  className = '',
 }: YouTubeEmbedProps) {
   const aspectRatioClasses = {
     '16:9': 'pb-[56.25%]',
@@ -26,7 +26,9 @@ export function YouTubeEmbed({
           {title}
         </h3>
       )}
-      <div className={`relative w-full ${aspectRatioClasses[aspectRatio]} overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800`}>
+      <div
+        className={`relative w-full ${aspectRatioClasses[aspectRatio]} overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800`}
+      >
         <iframe
           src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
           title={title || 'YouTube video'}

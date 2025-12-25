@@ -1,9 +1,18 @@
 'use client';
-import React, { memo } from 'react';
+
 import { Play, Headphones, Calendar, Clock, TrendingUp } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
+import React, { memo } from 'react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 interface VideoContent {
   id: string;
@@ -16,9 +25,7 @@ interface VideoContent {
   url?: string;
 }
 
-
 const MultimediaContentSection = memo(() => {
-
   // Mock data - 실제 구현 시 API에서 가져올 예정
   const youtubeVideos: VideoContent[] = [
     {
@@ -29,7 +36,7 @@ const MultimediaContentSection = memo(() => {
       views: '247',
       thumbnail: '/images/video-thumb-1.jpg',
       isNew: true,
-      url: 'Wj-q-Xmg41Q' // YouTube video ID
+      url: 'Wj-q-Xmg41Q', // YouTube video ID
     },
     {
       id: '2',
@@ -38,7 +45,7 @@ const MultimediaContentSection = memo(() => {
       duration: '13:28',
       views: '312',
       thumbnail: '/images/video-thumb-2.jpg',
-      url: 'sKeFgAEAO1M' // YouTube video ID
+      url: 'sKeFgAEAO1M', // YouTube video ID
     },
     {
       id: '3',
@@ -47,10 +54,9 @@ const MultimediaContentSection = memo(() => {
       duration: '11:55',
       views: '189',
       thumbnail: '/images/video-thumb-3.jpg',
-      url: 'Ufk5FHmG0LA' // YouTube video ID
-    }
+      url: 'Ufk5FHmG0LA', // YouTube video ID
+    },
   ];
-
 
   return (
     <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background">
@@ -92,59 +98,68 @@ const MultimediaContentSection = memo(() => {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground">
-                복잡한 승계 전략, 세무 절세, 법인보험 설계를 실제 사례와 함께 쉽게 풀어드립니다.
+                복잡한 승계 전략, 세무 절세, 법인보험 설계를 실제 사례와 함께
+                쉽게 풀어드립니다.
               </p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-sm font-medium text-red-600 mb-3">
                 🎥 이번 주 인기 영상
               </div>
-              
+
               {/* Featured YouTube Video - NEW */}
-              {youtubeVideos.filter(v => v.isNew).map((video) => (
-                <div key={video.id} className="mb-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Badge className="text-xs bg-red-500">NEW</Badge>
-                    <span className="text-sm font-medium text-red-600 dark:text-red-400">🎬 최신 영상</span>
+              {youtubeVideos
+                .filter(v => v.isNew)
+                .map(video => (
+                  <div key={video.id} className="mb-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Badge className="text-xs bg-red-500">NEW</Badge>
+                      <span className="text-sm font-medium text-red-600 dark:text-red-400">
+                        🎬 최신 영상
+                      </span>
+                    </div>
+                    <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
+                      <iframe
+                        data-testid="embed-iframe"
+                        style={{ borderRadius: '12px' }}
+                        src={`https://www.youtube.com/embed/${video.url}`}
+                        width="100%"
+                        height="152"
+                        frameBorder="0"
+                        allowFullScreen
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
-                  <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
-                    <iframe 
-                      data-testid="embed-iframe" 
-                      style={{borderRadius: '12px'}} 
-                      src={`https://www.youtube.com/embed/${video.url}`}
-                      width="100%" 
-                      height="152" 
-                      frameBorder="0" 
-                      allowFullScreen
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-              ))}
+                ))}
 
               {/* Other YouTube Videos */}
-              {youtubeVideos.filter(v => !v.isNew).map((video) => (
-                <div key={video.id} className="mb-4">
-                  <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
-                    <iframe 
-                      data-testid="embed-iframe" 
-                      style={{borderRadius: '12px'}} 
-                      src={`https://www.youtube.com/embed/${video.url}`}
-                      width="100%" 
-                      height="152" 
-                      frameBorder="0" 
-                      allowFullScreen
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                      loading="lazy"
-                    />
+              {youtubeVideos
+                .filter(v => !v.isNew)
+                .map(video => (
+                  <div key={video.id} className="mb-4">
+                    <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
+                      <iframe
+                        data-testid="embed-iframe"
+                        style={{ borderRadius: '12px' }}
+                        src={`https://www.youtube.com/embed/${video.url}`}
+                        width="100%"
+                        height="152"
+                        frameBorder="0"
+                        allowFullScreen
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
 
               {/* Regular Schedule */}
               <div className="bg-red-500/5 dark:bg-red-500/10 p-4 rounded-lg mt-4 border border-red-500/20">
-                <h4 className="text-sm font-medium text-red-600 dark:text-red-400 mb-2">📌 정기 프로그램</h4>
+                <h4 className="text-sm font-medium text-red-600 dark:text-red-400 mb-2">
+                  📌 정기 프로그램
+                </h4>
                 <div className="space-y-2 text-xs text-red-600 dark:text-red-400">
                   <div>✅ 매주 월요일: &quot;5분 가업승계 클리닉&quot;</div>
                   <div>✅ 매주 수요일: &quot;백년기업 성공스토리&quot;</div>
@@ -153,16 +168,26 @@ const MultimediaContentSection = memo(() => {
               </div>
 
               <div className="flex gap-2">
-                <Button 
+                <Button
                   className="flex-1 bg-red-500 hover:bg-red-600 text-white"
-                  onClick={() => window.open('https://www.youtube.com/@FamilyOffice-S', '_blank')}
+                  onClick={() =>
+                    window.open(
+                      'https://www.youtube.com/@FamilyOffice-S',
+                      '_blank'
+                    )
+                  }
                 >
                   🔔 구독하고 알림받기
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="flex-1 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20"
-                  onClick={() => window.open('https://www.youtube.com/@FamilyOffice-S', '_blank')}
+                  onClick={() =>
+                    window.open(
+                      'https://www.youtube.com/@FamilyOffice-S',
+                      '_blank'
+                    )
+                  }
                 >
                   전체 영상 보기
                 </Button>
@@ -187,30 +212,33 @@ const MultimediaContentSection = memo(() => {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground">
-                출퇴근길, 운동 중, 휴식 시간... 국내 최고 전문가들의 생생한 조언을 팟캐스트로 만나보세요.
+                출퇴근길, 운동 중, 휴식 시간... 국내 최고 전문가들의 생생한
+                조언을 팟캐스트로 만나보세요.
               </p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-sm font-medium text-green-600 mb-3">
                 🎙️ 이번 주 필청 에피소드
               </div>
-              
-{/* Featured Spotify Episode - NEW */}
+
+              {/* Featured Spotify Episode - NEW */}
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Badge className="text-xs bg-green-500">NEW</Badge>
-                  <span className="text-sm font-medium text-green-600 dark:text-green-400">🎙️ 최신 에피소드</span>
+                  <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                    🎙️ 최신 에피소드
+                  </span>
                 </div>
                 <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
-                  <iframe 
-                    data-testid="embed-iframe" 
-                    style={{borderRadius: '12px'}} 
-                    src="https://open.spotify.com/embed/episode/5aIG8p9AWFuzBSlnIYiL4E?utm_source=generator" 
-                    width="100%" 
-                    height="152" 
-                    frameBorder="0" 
+                  <iframe
+                    data-testid="embed-iframe"
+                    style={{ borderRadius: '12px' }}
+                    src="https://open.spotify.com/embed/episode/5aIG8p9AWFuzBSlnIYiL4E?utm_source=generator"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
                     allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     loading="lazy"
                   />
                 </div>
@@ -219,15 +247,15 @@ const MultimediaContentSection = memo(() => {
               {/* 2nd Spotify Episode */}
               <div className="mb-4">
                 <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
-                  <iframe 
-                    data-testid="embed-iframe" 
-                    style={{borderRadius: '12px'}} 
-                    src="https://open.spotify.com/embed/episode/5G9JHBLEfR9L6CKLMr86Sm?utm_source=generator" 
-                    width="100%" 
-                    height="152" 
-                    frameBorder="0" 
+                  <iframe
+                    data-testid="embed-iframe"
+                    style={{ borderRadius: '12px' }}
+                    src="https://open.spotify.com/embed/episode/5G9JHBLEfR9L6CKLMr86Sm?utm_source=generator"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
                     allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     loading="lazy"
                   />
                 </div>
@@ -236,15 +264,15 @@ const MultimediaContentSection = memo(() => {
               {/* 3rd Spotify Episode */}
               <div className="mb-4">
                 <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
-                  <iframe 
-                    data-testid="embed-iframe" 
-                    style={{borderRadius: '12px'}} 
-                    src="https://open.spotify.com/embed/episode/2X1KIsTYtKNAfvrVgVLoJw?utm_source=generator" 
-                    width="100%" 
-                    height="152" 
-                    frameBorder="0" 
+                  <iframe
+                    data-testid="embed-iframe"
+                    style={{ borderRadius: '12px' }}
+                    src="https://open.spotify.com/embed/episode/2X1KIsTYtKNAfvrVgVLoJw?utm_source=generator"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
                     allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     loading="lazy"
                   />
                 </div>
@@ -252,7 +280,9 @@ const MultimediaContentSection = memo(() => {
 
               {/* Schedule */}
               <div className="bg-green-500/5 dark:bg-green-500/10 p-4 rounded-lg mt-4 border border-green-500/20">
-                <h4 className="text-sm font-medium text-green-600 dark:text-green-400 mb-2">🗓️ 주간 방송 스케줄</h4>
+                <h4 className="text-sm font-medium text-green-600 dark:text-green-400 mb-2">
+                  🗓️ 주간 방송 스케줄
+                </h4>
                 <div className="space-y-2 text-xs text-green-600 dark:text-green-400">
                   <div>🔹 월요일 오전 7시: &quot;Monday Morning CEO&quot;</div>
                   <div>🔹 수요일 오후 12시: &quot;승계의 정석&quot;</div>
@@ -261,16 +291,26 @@ const MultimediaContentSection = memo(() => {
               </div>
 
               <div className="flex gap-2">
-                <Button 
+                <Button
                   className="flex-1 bg-green-500 hover:bg-green-600 text-white"
-                  onClick={() => window.open('https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=1736cfee52584a98', '_blank')}
+                  onClick={() =>
+                    window.open(
+                      'https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=1736cfee52584a98',
+                      '_blank'
+                    )
+                  }
                 >
                   🎧 팔로우하고 알림받기
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="flex-1 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/20"
-                  onClick={() => window.open('https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=1736cfee52584a98', '_blank')}
+                  onClick={() =>
+                    window.open(
+                      'https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=1736cfee52584a98',
+                      '_blank'
+                    )
+                  }
                 >
                   전체 에피소드 듣기
                 </Button>
@@ -285,46 +325,56 @@ const MultimediaContentSection = memo(() => {
             <h3 className="text-2xl font-bold text-foreground mb-6">
               당신의 시간을 가치있게, 당신의 결정을 현명하게
             </h3>
-            
+
             <div className="grid md:grid-cols-5 gap-6 mt-8">
               <div className="text-center">
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
                   <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">실무 중심</h4>
-                <p className="text-xs text-muted-foreground">바로 적용 가능한 실전 솔루션</p>
+                <p className="text-xs text-muted-foreground">
+                  바로 적용 가능한 실전 솔루션
+                </p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Badge className="w-6 h-6 bg-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">검증된 전문성</h4>
-                <p className="text-xs text-muted-foreground">삼성생명 파트너 빅4 전문가</p>
+                <p className="text-xs text-muted-foreground">
+                  삼성생명 파트너 빅4 전문가
+                </p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Clock className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">시간 효율성</h4>
-                <p className="text-xs text-muted-foreground">5분 요약부터 40분 심층분석</p>
+                <p className="text-xs text-muted-foreground">
+                  5분 요약부터 40분 심층분석
+                </p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Play className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">멀티 플랫폼</h4>
-                <p className="text-xs text-muted-foreground">YouTube, Spotify 플랫폼</p>
+                <p className="text-xs text-muted-foreground">
+                  YouTube, Spotify 플랫폼
+                </p>
               </div>
-              
+
               <div className="text-center">
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Calendar className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">정기 업데이트</h4>
-                <p className="text-xs text-muted-foreground">매주 3회 신규 콘텐츠</p>
+                <p className="text-xs text-muted-foreground">
+                  매주 3회 신규 콘텐츠
+                </p>
               </div>
             </div>
           </div>

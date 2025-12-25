@@ -23,29 +23,29 @@ class PerformanceMonitor {
     }
 
     const startTime = performance.now();
-    
+
     try {
       const result = await operation();
       const duration = performance.now() - startTime;
-      
+
       this.recordMetric({
         name: `${operationName}_duration`,
         value: duration,
         timestamp: Date.now(),
-        tags: { ...tags, status: 'success' }
+        tags: { ...tags, status: 'success' },
       });
-      
+
       return result;
     } catch (error) {
       const duration = performance.now() - startTime;
-      
+
       this.recordMetric({
         name: `${operationName}_duration`,
         value: duration,
         timestamp: Date.now(),
-        tags: { ...tags, status: 'error' }
+        tags: { ...tags, status: 'error' },
       });
-      
+
       throw error;
     }
   }
@@ -61,29 +61,29 @@ class PerformanceMonitor {
     }
 
     const startTime = performance.now();
-    
+
     try {
       const result = operation();
       const duration = performance.now() - startTime;
-      
+
       this.recordMetric({
         name: `${operationName}_duration`,
         value: duration,
         timestamp: Date.now(),
-        tags: { ...tags, status: 'success' }
+        tags: { ...tags, status: 'success' },
       });
-      
+
       return result;
     } catch (error) {
       const duration = performance.now() - startTime;
-      
+
       this.recordMetric({
         name: `${operationName}_duration`,
         value: duration,
         timestamp: Date.now(),
-        tags: { ...tags, status: 'error' }
+        tags: { ...tags, status: 'error' },
       });
-      
+
       throw error;
     }
   }
@@ -103,7 +103,9 @@ class PerformanceMonitor {
 
     // Log slow operations in development
     if (process.env.NODE_ENV === 'development' && metric.value > 100) {
-      console.warn(`Slow operation detected: ${metric.name} took ${metric.value.toFixed(2)}ms`);
+      console.warn(
+        `Slow operation detected: ${metric.name} took ${metric.value.toFixed(2)}ms`
+      );
     }
   }
 
@@ -119,21 +121,24 @@ class PerformanceMonitor {
         totalOperations: 0,
         averageResponseTime: 0,
         slowOperations: 0,
-        errorRate: 0
+        errorRate: 0,
       };
     }
 
     const totalOperations = this.metrics.length;
-    const averageResponseTime = this.metrics.reduce((sum, m) => sum + m.value, 0) / totalOperations;
+    const averageResponseTime =
+      this.metrics.reduce((sum, m) => sum + m.value, 0) / totalOperations;
     const slowOperations = this.metrics.filter(m => m.value > 1000).length; // > 1 second
-    const errorOperations = this.metrics.filter(m => m.tags?.status === 'error').length;
+    const errorOperations = this.metrics.filter(
+      m => m.tags?.status === 'error'
+    ).length;
     const errorRate = errorOperations / totalOperations;
 
     return {
       totalOperations,
       averageResponseTime,
       slowOperations,
-      errorRate
+      errorRate,
     };
   }
 
@@ -156,7 +161,11 @@ export function monitorPerformance<T extends (...args: any[]) => Promise<any>>(
   operationName: string,
   tags?: Record<string, string>
 ) {
-  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
     const originalMethod = descriptor.value;
 
     descriptor.value = async function (...args: any[]) {
@@ -190,11 +199,15 @@ export const seoPerformanceTracker = {
     structuredData: PerformanceMetric[];
   } {
     return {
-      metadataGeneration: performanceMonitor.getOperationMetrics('seo_metadata'),
-      keywordOptimization: performanceMonitor.getOperationMetrics('seo_keywords'),
-      structuredData: performanceMonitor.getOperationMetrics('seo_structured-data'),
+      metadataGeneration:
+        performanceMonitor.getOperationMetrics('seo_metadata'),
+      keywordOptimization:
+        performanceMonitor.getOperationMetrics('seo_keywords'),
+      structuredData: performanceMonitor.getOperationMetrics(
+        'seo_structured-data'
+      ),
     };
-  }
+  },
 };
 
 // Web Vitals tracking (client-side)
@@ -204,7 +217,7 @@ export const webVitalsTracker = {
       name: 'web_vitals_cls',
       value,
       timestamp: Date.now(),
-      tags: { metric: 'cls' }
+      tags: { metric: 'cls' },
     });
   },
 
@@ -213,7 +226,7 @@ export const webVitalsTracker = {
       name: 'web_vitals_fid',
       value,
       timestamp: Date.now(),
-      tags: { metric: 'fid' }
+      tags: { metric: 'fid' },
     });
   },
 
@@ -222,7 +235,7 @@ export const webVitalsTracker = {
       name: 'web_vitals_lcp',
       value,
       timestamp: Date.now(),
-      tags: { metric: 'lcp' }
+      tags: { metric: 'lcp' },
     });
-  }
+  },
 };

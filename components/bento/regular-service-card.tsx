@@ -1,8 +1,10 @@
 'use client';
 
-import type { BentoService } from '@/constants/bento-services';
 import { ArrowRight } from 'lucide-react';
+
 import Link from 'next/link';
+
+import type { BentoService } from '@/constants/bento-services';
 
 interface RegularServiceCardProps {
   service: BentoService;
@@ -13,16 +15,16 @@ interface RegularServiceCardProps {
  * Regular service card (1×1 grid space)
  * Compact design, similar to existing cards
  */
-export function RegularServiceCard({ service, className = '' }: RegularServiceCardProps) {
+export function RegularServiceCard({
+  service,
+  className = '',
+}: RegularServiceCardProps) {
   return (
-    <Link
-      href={service.href}
-      className={`block group ${className}`}
-    >
+    <Link href={service.href} className={`block group ${className}`}>
       <div className="h-full relative overflow-hidden transition-all duration-500 hover:shadow-2xl border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md rounded-2xl p-6 border hover:-translate-y-2">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
+
         {/* Content */}
         <div className="relative z-10">
           {/* Icon */}
@@ -43,7 +45,10 @@ export function RegularServiceCard({ service, className = '' }: RegularServiceCa
           {/* Features (max 3) */}
           <div className="space-y-2.5 mb-6">
             {service.features.slice(0, 3).map((feature, idx) => (
-              <div key={idx} className="flex items-center text-sm text-slate-600 dark:text-slate-400">
+              <div
+                key={idx}
+                className="flex items-center text-sm text-slate-600 dark:text-slate-400"
+              >
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500/50 mr-2.5 flex-shrink-0 group-hover:bg-blue-500 transition-colors duration-300"></div>
                 <span className="group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors duration-300">
                   {feature}

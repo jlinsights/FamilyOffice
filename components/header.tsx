@@ -5,8 +5,9 @@ import { ArrowRight, ChevronDown, ClipboardCheck, Menu, X } from 'lucide-react';
 import type { KeyboardEvent, MouseEventHandler } from 'react';
 import { memo, useCallback, useEffect, useState } from 'react';
 
-import { SignInButton, UserButton, useAuth } from '@clerk/nextjs';
 import Link from 'next/link';
+
+import { SignInButton, UserButton, useAuth } from '@clerk/nextjs';
 
 import { Button } from '@/components/ui/button';
 
@@ -25,7 +26,9 @@ export const Header = memo(function Header({
   isScrolled = false,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileSubmenus, setMobileSubmenus] = useState<{ [key: string]: boolean }>({});
+  const [mobileSubmenus, setMobileSubmenus] = useState<{
+    [key: string]: boolean;
+  }>({});
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { isSignedIn, isLoaded } = useAuth();
@@ -58,7 +61,7 @@ export const Header = memo(function Header({
   const toggleMobileSubmenu = useCallback((label: string) => {
     setMobileSubmenus(prev => ({
       ...prev,
-      [label]: !prev[label]
+      [label]: !prev[label],
     }));
   }, []);
 
@@ -80,7 +83,7 @@ export const Header = memo(function Header({
         className="fixed top-0 w-full z-50 bg-white/80 dark:bg-background/80 backdrop-blur-sm border-b border-gray-200 dark:border-border"
         style={{
           willChange: 'transform, opacity',
-          backfaceVisibility: 'hidden'
+          backfaceVisibility: 'hidden',
         }}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -114,9 +117,9 @@ export const Header = memo(function Header({
           ? 'bg-white/95 dark:bg-background/95 backdrop-blur-md border-gray-200 dark:border-border shadow-sm'
           : 'bg-white/80 dark:bg-background/80 backdrop-blur-sm border-transparent'
       }`}
-      style={{ 
+      style={{
         willChange: 'transform, opacity',
-        backfaceVisibility: 'hidden'
+        backfaceVisibility: 'hidden',
       }}
       role="banner"
       aria-label="사이트 헤더"
@@ -172,9 +175,9 @@ export const Header = memo(function Header({
             role="navigation"
             aria-label="주 메뉴"
           >
-            {NAVIGATION_ITEMS
-              .filter((item: NavigationItem) => !item.requireAuth || isSignedIn)
-              .map((item: NavigationItem) => (
+            {NAVIGATION_ITEMS.filter(
+              (item: NavigationItem) => !item.requireAuth || isSignedIn
+            ).map((item: NavigationItem) => (
               <div key={item.href || item.label} className="relative group">
                 {item.submenu && item.submenu.length > 0 ? (
                   <>
@@ -187,13 +190,19 @@ export const Header = memo(function Header({
                     </button>
 
                     {/* 서브메뉴 드롭다운 - CSS group hover 사용 */}
-                    <div className={`absolute top-full left-0 pt-2 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-[60] ${
-                      item.label === '솔루션' ? 'w-96' : 'w-80'
-                    }`}>
+                    <div
+                      className={`absolute top-full left-0 pt-2 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-[60] ${
+                        item.label === '솔루션' ? 'w-96' : 'w-80'
+                      }`}
+                    >
                       <div className="bg-background/70 dark:bg-gray-900/70 backdrop-blur-md border border-border rounded-lg shadow-xl">
-                        <div className={`p-2 ${
-                          item.label === '솔루션' ? 'max-h-[70vh] overflow-y-auto' : ''
-                        }`}>
+                        <div
+                          className={`p-2 ${
+                            item.label === '솔루션'
+                              ? 'max-h-[70vh] overflow-y-auto'
+                              : ''
+                          }`}
+                        >
                           {item.submenu.map((subItem: NavigationSubItem) => (
                             <Link
                               key={subItem.href}
@@ -262,8 +271,8 @@ export const Header = memo(function Header({
                     afterSignOutUrl="/"
                     appearance={{
                       elements: {
-                        avatarBox: "h-9 w-9"
-                      }
+                        avatarBox: 'h-9 w-9',
+                      },
                     }}
                   />
                 </>
@@ -306,9 +315,9 @@ export const Header = memo(function Header({
           aria-label="모바일 메뉴"
         >
           <div className="px-2 pt-2 pb-3 space-y-1 text-center">
-            {NAVIGATION_ITEMS
-              .filter((item: NavigationItem) => !item.requireAuth || isSignedIn)
-              .map((item: NavigationItem) => (
+            {NAVIGATION_ITEMS.filter(
+              (item: NavigationItem) => !item.requireAuth || isSignedIn
+            ).map((item: NavigationItem) => (
               <div key={item.href || item.label}>
                 {item.submenu && item.submenu.length > 0 ? (
                   <div className="space-y-1">
@@ -319,10 +328,10 @@ export const Header = memo(function Header({
                       aria-label={`${item.label} 메뉴 ${mobileSubmenus[item.label] ? '접기' : '펼치기'}`}
                     >
                       {item.label}
-                      <ChevronDown 
+                      <ChevronDown
                         className={`h-4 w-4 transition-transform duration-200 ${
                           mobileSubmenus[item.label] ? 'rotate-180' : ''
-                        }`} 
+                        }`}
                       />
                     </button>
                     {mobileSubmenus[item.label] && (
@@ -391,7 +400,10 @@ export const Header = memo(function Header({
                     aria-label="구조 점검 요청"
                     title="구조 점검 요청"
                   >
-                    <ClipboardCheck className="h-5 w-5 mr-2" aria-hidden="true" />
+                    <ClipboardCheck
+                      className="h-5 w-5 mr-2"
+                      aria-hidden="true"
+                    />
                     구조 점검 요청
                   </Link>
                 </>
@@ -413,7 +425,10 @@ export const Header = memo(function Header({
                     aria-label="구조 점검 요청"
                     title="구조 점검 요청"
                   >
-                    <ClipboardCheck className="h-5 w-5 mr-2" aria-hidden="true" />
+                    <ClipboardCheck
+                      className="h-5 w-5 mr-2"
+                      aria-hidden="true"
+                    />
                     구조 점검 요청
                   </Link>
                 </>
@@ -429,8 +444,6 @@ export const Header = memo(function Header({
           </div>
         </div>
       )}
-
-
     </header>
   );
 });

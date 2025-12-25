@@ -19,7 +19,7 @@ export function ChannelTalk() {
   useEffect(() => {
     // 클라이언트에서만 실행
     if (!isClient) return;
-    
+
     // 채널톡 스크립트 로딩 및 초기화
     if (typeof window !== 'undefined' && !window.ChannelIO) {
       const script = `
@@ -68,7 +68,7 @@ export function ChannelTalk() {
           else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}
         })();
       `;
-      
+
       // 스크립트 실행
       const scriptElement = document.createElement('script');
       scriptElement.innerHTML = script;

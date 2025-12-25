@@ -24,10 +24,15 @@ export function isValidEnvVarName(envVarName: string): boolean {
  * Sanitizes environment variables for use in client-side scripts
  * Only allows NEXT_PUBLIC_ prefixed variables and validates format
  */
-export function sanitizeEnvVar(envVarName: string, value: string | undefined): string {
+export function sanitizeEnvVar(
+  envVarName: string,
+  value: string | undefined
+): string {
   // Only allow NEXT_PUBLIC_ environment variables on client side
   if (!envVarName.startsWith('NEXT_PUBLIC_')) {
-    throw new Error(`Environment variable ${envVarName} is not safe for client-side use`);
+    throw new Error(
+      `Environment variable ${envVarName} is not safe for client-side use`
+    );
   }
 
   if (!isValidEnvVarName(envVarName)) {
@@ -36,7 +41,7 @@ export function sanitizeEnvVar(envVarName: string, value: string | undefined): s
 
   // Return sanitized value or empty string if undefined
   const sanitizedValue = value || '';
-  
+
   // Basic XSS prevention - escape potential script injection
   return sanitizedValue
     .replace(/</g, '&lt;')
@@ -52,8 +57,10 @@ export function sanitizeEnvVar(envVarName: string, value: string | undefined): s
 export function isAllowedScriptSource(src: string): boolean {
   try {
     const url = new URL(src.startsWith('//') ? `https:${src}` : src);
-    return ALLOWED_SCRIPT_SOURCES.some(allowedDomain => 
-      url.hostname === allowedDomain || url.hostname.endsWith(`.${allowedDomain}`)
+    return ALLOWED_SCRIPT_SOURCES.some(
+      allowedDomain =>
+        url.hostname === allowedDomain ||
+        url.hostname.endsWith(`.${allowedDomain}`)
     );
   } catch {
     return false;
@@ -69,8 +76,11 @@ export function createAnalyticsScript(measurementId: string): string {
     throw new Error('Invalid Google Analytics measurement ID format');
   }
 
-  const sanitizedId = sanitizeEnvVar('NEXT_PUBLIC_GA_MEASUREMENT_ID', measurementId);
-  
+  const sanitizedId = sanitizeEnvVar(
+    'NEXT_PUBLIC_GA_MEASUREMENT_ID',
+    measurementId
+  );
+
   return `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -89,7 +99,7 @@ export function createGTMScript(containerId: string): string {
   }
 
   const sanitizedId = sanitizeEnvVar('NEXT_PUBLIC_GTM_ID', containerId);
-  
+
   return `
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -110,12 +120,12 @@ export function sanitizeStructuredData(data: unknown): string {
   try {
     // Serialize and validate JSON
     const jsonString = JSON.stringify(data);
-    
+
     // Additional validation - ensure no script tags in the JSON
     if (jsonString.includes('<script') || jsonString.includes('javascript:')) {
       throw new Error('Structured data contains potentially dangerous content');
     }
-    
+
     return jsonString;
   } catch (error) {
     throw new Error(`Failed to serialize structured data: ${error}`);
@@ -127,7 +137,8 @@ export function sanitizeStructuredData(data: unknown): string {
  */
 export function isSafeHTMLContent(content: string): boolean {
   // Check if this is a safe GTM noscript iframe
-  const gtmNoscriptPattern = /^<noscript><iframe\s+src="https:\/\/www\.googletagmanager\.com\/ns\.html\?id=GTM-[A-Z0-9]{6,8}"\s+height="0"\s+width="0"\s+style="display:none;visibility:hidden"><\/iframe><\/noscript>$/;
+  const gtmNoscriptPattern =
+    /^<noscript><iframe\s+src="https:\/\/www\.googletagmanager\.com\/ns\.html\?id=GTM-[A-Z0-9]{6,8}"\s+height="0"\s+width="0"\s+style="display:none;visibility:hidden"><\/iframe><\/noscript>$/;
   if (gtmNoscriptPattern.test(content)) {
     return true;
   }
@@ -151,12 +162,12 @@ export function isSafeHTMLContent(content: string): boolean {
  */
 export function validateCSPNonce(nonce?: string): string | undefined {
   if (!nonce) return undefined;
-  
+
   // CSP nonces should be base64 encoded and at least 128 bits (16 bytes)
   if (!/^[A-Za-z0-9+/]{22,}={0,2}$/.test(nonce)) {
     throw new Error('Invalid CSP nonce format');
   }
-  
+
   return nonce;
 }
 
@@ -170,14 +181,25 @@ export function sanitizeHTMLContent(content: string): string {
   }
 
   // Remove all script tags and their content
-  let sanitized = content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-  
+  let sanitized = content.replace(
+    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+    ''
+  );
+
   // Remove dangerous attributes
   sanitized = sanitized.replace(/\s+on\w+\s*=\s*["'][^"']*["']/gi, ''); // onclick, onload, etc.
   sanitized = sanitized.replace(/\s+javascript\s*:\s*[^"'\s>]*/gi, ''); // javascript: URLs
-  
+
   // Remove dangerous tags completely
-  const dangerousTags = ['iframe', 'object', 'embed', 'form', 'input', 'textarea', 'button'];
+  const dangerousTags = [
+    'iframe',
+    'object',
+    'embed',
+    'form',
+    'input',
+    'textarea',
+    'button',
+  ];
   dangerousTags.forEach(tag => {
     const regex = new RegExp(`<${tag}\\b[^>]*>.*?<\\/${tag}>`, 'gi');
     sanitized = sanitized.replace(regex, '');
@@ -185,13 +207,13 @@ export function sanitizeHTMLContent(content: string): string {
     const selfClosingRegex = new RegExp(`<${tag}\\b[^>]*\\/>`, 'gi');
     sanitized = sanitized.replace(selfClosingRegex, '');
   });
-  
+
   // Remove style attributes that could contain malicious CSS
   sanitized = sanitized.replace(/\s+style\s*=\s*["'][^"']*["']/gi, '');
-  
+
   // Clean up any remaining whitespace/newlines
   sanitized = sanitized.replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
-  
+
   return sanitized;
 }
 
@@ -201,7 +223,8 @@ export function sanitizeHTMLContent(content: string): string {
  */
 export function isTextOnlyContent(content: string): boolean {
   // Check if content has no HTML tags except basic formatting
-  const allowedTags = /^[^<>]*(?:<\/?(?:p|br|strong|em|b|i|u|span|div|h[1-6])\b[^>]*>[^<>]*)*$/i;
+  const allowedTags =
+    /^[^<>]*(?:<\/?(?:p|br|strong|em|b|i|u|span|div|h[1-6])\b[^>]*>[^<>]*)*$/i;
   return allowedTags.test(content) && !content.includes('<script');
 }
 
@@ -211,7 +234,7 @@ export function isTextOnlyContent(content: string): boolean {
  */
 export function createUserTrackingScript(): string {
   const isDevelopment = process.env.NODE_ENV === 'development';
-  
+
   return `
     // Safe user behavior analysis
     if (typeof window !== 'undefined') {

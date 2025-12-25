@@ -1,14 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { useToast } from '@/hooks/use-toast';
-import { getKakaoSyncService } from '@/lib/kakao/kakao-sync-service';
-import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 import {
   Bell,
   Users,
@@ -16,9 +7,29 @@ import {
   Settings,
   CheckCircle,
   XCircle,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react';
+
+import { useState } from 'react';
+
 import Image from 'next/image';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Switch } from '@/components/ui/switch';
+
+import { getKakaoSyncService } from '@/lib/kakao/kakao-sync-service';
+
+import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
+import { useToast } from '@/hooks/use-toast';
 
 interface KakaoSyncPanelProps {
   className?: string;
@@ -31,7 +42,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
   const [syncSettings, setSyncSettings] = useState({
     enableNotifications: true,
     enableChannelSync: true,
-    enableAutoReply: false
+    enableAutoReply: false,
   });
 
   const kakaoSyncService = getKakaoSyncService();
@@ -49,8 +60,10 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
 
     setIsLoading(true);
     try {
-      const success = await kakaoSyncService.promoteChannelSubscription(user?.id || '');
-      
+      const success = await kakaoSyncService.promoteChannelSubscription(
+        user?.id || ''
+      );
+
       if (success) {
         toast({
           title: '채널 연동 요청',
@@ -78,7 +91,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
     setIsLoading(true);
     try {
       const success = await kakaoSyncService.startChannelChat();
-      
+
       if (success) {
         toast({
           title: '상담 채팅 시작',
@@ -105,7 +118,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
   const handleShare = () => {
     // 카카오톡 공유 기능은 향후 구현 예정
     const success = false; // getKakaoSyncService().shareToKakao(shareContent);
-    
+
     if (success) {
       toast({
         title: '카카오톡 공유',
@@ -120,7 +133,10 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
     }
   };
 
-  const handleSyncSettingsChange = async (key: keyof typeof syncSettings, value: boolean) => {
+  const handleSyncSettingsChange = async (
+    key: keyof typeof syncSettings,
+    value: boolean
+  ) => {
     if (!user) return;
 
     const newSettings = { ...syncSettings, [key]: value };
@@ -151,7 +167,9 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
 
   const getStatusBadge = (enabled: boolean) => {
     return enabled ? (
-      <Badge className="bg-green-100 text-green-800 hover:bg-green-100">활성화</Badge>
+      <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+        활성화
+      </Badge>
     ) : (
       <Badge variant="secondary">비활성화</Badge>
     );
@@ -162,11 +180,11 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Image 
-              src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-              alt="카카오" 
-              width={20} 
-              height={20} 
+            <Image
+              src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+              alt="카카오"
+              width={20}
+              height={20}
               className="rounded-sm"
             />
             <CardTitle>카카오 싱크</CardTitle>
@@ -185,17 +203,21 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
             <Settings className="h-4 w-4" />
             서비스 상태
           </h4>
-          
+
           <div className="grid gap-2">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">채널 ID</span>
-              <span className="text-sm font-mono">{serviceStatus.channelId}</span>
+              <span className="text-sm font-mono">
+                {serviceStatus.channelId}
+              </span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">카카오 연동</span>
               <div className="flex items-center gap-2">
                 {getStatusIcon(isKakaoUser)}
-                <span className="text-sm">{isKakaoUser ? '연동됨' : '미연동'}</span>
+                <span className="text-sm">
+                  {isKakaoUser ? '연동됨' : '미연동'}
+                </span>
               </div>
             </div>
           </div>
@@ -206,11 +228,11 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
         {/* 카카오톡 기능 */}
         <div className="space-y-4">
           <h4 className="text-sm font-medium flex items-center gap-2">
-            <Image 
-              src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-              alt="카카오" 
-              width={16} 
-              height={16} 
+            <Image
+              src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+              alt="카카오"
+              width={16}
+              height={16}
               className="rounded-sm"
             />
             카카오톡 기능
@@ -242,11 +264,11 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <Image 
-                    src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png" 
-                    alt="카카오" 
-                    width={16} 
-                    height={16} 
+                  <Image
+                    src="/images/KAKAO/kakao_sync_login/simple/ko/kakao_login_small.png"
+                    alt="카카오"
+                    width={16}
+                    height={16}
                     className="rounded-sm"
                   />
                   <span className="text-sm font-medium">상담 채팅</span>
@@ -307,7 +329,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
               </div>
               <Switch
                 checked={syncSettings.enableNotifications}
-                onCheckedChange={(checked) => 
+                onCheckedChange={checked =>
                   handleSyncSettingsChange('enableNotifications', checked)
                 }
                 disabled={!isKakaoUser}
@@ -323,7 +345,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
               </div>
               <Switch
                 checked={syncSettings.enableChannelSync}
-                onCheckedChange={(checked) => 
+                onCheckedChange={checked =>
                   handleSyncSettingsChange('enableChannelSync', checked)
                 }
                 disabled={!isKakaoUser}
@@ -339,7 +361,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
               </div>
               <Switch
                 checked={syncSettings.enableAutoReply}
-                onCheckedChange={(checked) => 
+                onCheckedChange={checked =>
                   handleSyncSettingsChange('enableAutoReply', checked)
                 }
                 disabled={!isKakaoUser}
@@ -367,7 +389,9 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
 
         {/* 기능 목록 */}
         <div className="space-y-2">
-          <h5 className="text-xs font-medium text-muted-foreground">지원 기능</h5>
+          <h5 className="text-xs font-medium text-muted-foreground">
+            지원 기능
+          </h5>
           <div className="flex flex-wrap gap-1">
             {serviceStatus.features.map((feature, index) => (
               <Badge key={index} variant="outline" className="text-xs">

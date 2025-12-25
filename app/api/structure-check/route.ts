@@ -1,10 +1,18 @@
+import { z } from 'zod';
+
+import { NextRequest, NextResponse } from 'next/server';
+
 import {
-    sendStructureCheckConfirmation,
-    sendSystemNotification
+  sendStructureCheckConfirmation,
+  sendSystemNotification,
 } from '@/lib/email/resend-client';
 import { createAdminClient } from '@/lib/supabase/admin-client';
-import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
+import { safeInsert } from '@/lib/supabase/helpers';
+
+import { Database } from '@/types/supabase';
+
+type StructureCheckInsert =
+  Database['public']['Tables']['structure_check_requests']['Insert'];
 
 // Request validation schema
 const structureCheckRequestSchema = z.object({
@@ -35,31 +43,35 @@ export async function POST(request: NextRequest) {
 
     // Calculate qualification score (자동 필터링 점수)
     const qualificationScore = calculateQualificationScore(validatedData);
-    
+
     // Generate a unique request ID (simple timestamp-based for now)
     const requestId = `REQ-${Date.now().toString(36).toUpperCase()}`;
 
     // 1. Save to Database (using Admin Client for security override)
     const supabase = createAdminClient();
-    const { error: dbError } = await supabase
-      .from('structure_check_requests')
-      .insert({
-        name: validatedData.name,
-        email: validatedData.email,
-        phone: validatedData.phone,
-        company: validatedData.company,
-        q1_decision_made: validatedData.q1_decision_made,
-        q1_decision_detail: validatedData.q1_decision_detail,
-        q2_documented: validatedData.q2_documented,
-        q3_authority_clear: validatedData.q3_authority_clear,
-        q4_cash_plan: validatedData.q4_cash_plan,
-        q5_deadline: validatedData.q5_deadline,
-        q6_concerns: validatedData.q6_concerns,
-        q7_advisors: validatedData.q7_advisors,
-        additional_notes: validatedData.additional_notes,
-        qualification_score: qualificationScore,
-        status: 'pending_review'
-      });
+    const insertData: StructureCheckInsert = {
+      name: validatedData.name,
+      email: validatedData.email,
+      phone: validatedData.phone,
+      company: validatedData.company ?? null,
+      q1_decision_made: validatedData.q1_decision_made,
+      q1_decision_detail: validatedData.q1_decision_detail ?? null,
+      q2_documented: validatedData.q2_documented,
+      q3_authority_clear: validatedData.q3_authority_clear,
+      q4_cash_plan: validatedData.q4_cash_plan,
+      q5_deadline: validatedData.q5_deadline,
+      q6_concerns: validatedData.q6_concerns ?? null,
+      q7_advisors: validatedData.q7_advisors ?? null,
+      additional_notes: validatedData.additional_notes ?? null,
+      qualification_score: qualificationScore,
+      status: 'pending_review',
+    };
+
+    const { error: dbError } = await safeInsert(
+      supabase,
+      'structure_check_requests',
+      insertData
+    );
 
     if (dbError) {
       console.error('Failed to save structure check request:', dbError);
@@ -68,7 +80,11 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Send Admin Notification
-    const adminMessage = formatAdminMessage(validatedData, qualificationScore, requestId);
+    const adminMessage = formatAdminMessage(
+      validatedData,
+      qualificationScore,
+      requestId
+    );
     await sendSystemNotification(
       `새로운 구조 점검 요청 (${validatedData.name})`,
       adminMessage,
@@ -127,7 +143,9 @@ export async function POST(request: NextRequest) {
  * Calculate qualification score based on responses
  * 5문항 중 "정리되지 않음" 응답 개수를 계산
  */
-function calculateQualificationScore(data: z.infer<typeof structureCheckRequestSchema>): number {
+function calculateQualificationScore(
+  data: z.infer<typeof structureCheckRequestSchema>
+): number {
   let score = 0;
 
   // Q1: 결정 사항 없음 = +1
@@ -137,7 +155,10 @@ function calculateQualificationScore(data: z.infer<typeof structureCheckRequestS
   if (data.q2_documented === 'no') score += 1;
 
   // Q3: 권한 불명확 = +1
-  if (data.q3_authority_clear === 'unclear' || data.q3_authority_clear === 'partial') {
+  if (
+    data.q3_authority_clear === 'unclear' ||
+    data.q3_authority_clear === 'partial'
+  ) {
     score += 1;
   }
 
@@ -154,7 +175,7 @@ function calculateQualificationScore(data: z.infer<typeof structureCheckRequestS
  * Format message for Admin Email
  */
 function formatAdminMessage(
-  data: z.infer<typeof structureCheckRequestSchema>, 
+  data: z.infer<typeof structureCheckRequestSchema>,
   score: number,
   requestId: string
 ): string {

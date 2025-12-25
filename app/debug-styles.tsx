@@ -19,25 +19,35 @@ export function DebugStyles() {
     const updateDebugInfo = () => {
       const body = document.body;
       const html = document.documentElement;
-      const floatingButton = document.querySelector('.cal-com-floating-force') as HTMLElement;
-      const containers = Array.from(document.querySelectorAll('*')).filter(el => {
-        const style = window.getComputedStyle(el);
-        return style.overflow === 'hidden' || style.position === 'fixed' || style.position === 'sticky';
-      });
+      const floatingButton = document.querySelector(
+        '.cal-com-floating-force'
+      ) as HTMLElement;
+      const containers = Array.from(document.querySelectorAll('*')).filter(
+        el => {
+          const style = window.getComputedStyle(el);
+          return (
+            style.overflow === 'hidden' ||
+            style.position === 'fixed' ||
+            style.position === 'sticky'
+          );
+        }
+      );
 
       setDebugInfo({
         bodyComputedStyle: window.getComputedStyle(body),
         floatingButton,
         scrollY: window.scrollY,
         bodyPaddingTop: window.getComputedStyle(body).paddingTop,
-        announcementHeight: getComputedStyle(html).getPropertyValue('--announcement-height'),
+        announcementHeight: getComputedStyle(html).getPropertyValue(
+          '--announcement-height'
+        ),
         viewportHeight: window.innerHeight,
         bodyOverflow: window.getComputedStyle(body).overflow,
         htmlOverflow: window.getComputedStyle(html).overflow,
         containerOverflow: containers.slice(0, 10).map(el => {
           const style = window.getComputedStyle(el);
           return `${el.tagName}.${el.className} - overflow: ${style.overflow}, position: ${style.position}`;
-        })
+        }),
       });
     };
 
@@ -70,18 +80,38 @@ export function DebugStyles() {
         <p>Floating Button Found: {debugInfo.floatingButton ? 'Yes' : 'No'}</p>
         {debugInfo.floatingButton && (
           <>
-            <p>Button Position: {window.getComputedStyle(debugInfo.floatingButton).position}</p>
-            <p>Button Bottom: {window.getComputedStyle(debugInfo.floatingButton).bottom}</p>
-            <p>Button Right: {window.getComputedStyle(debugInfo.floatingButton).right}</p>
-            <p>Button Z-Index: {window.getComputedStyle(debugInfo.floatingButton).zIndex}</p>
-            <p>Button Display: {window.getComputedStyle(debugInfo.floatingButton).display}</p>
-            <p>Button Visibility: {window.getComputedStyle(debugInfo.floatingButton).visibility}</p>
+            <p>
+              Button Position:{' '}
+              {window.getComputedStyle(debugInfo.floatingButton).position}
+            </p>
+            <p>
+              Button Bottom:{' '}
+              {window.getComputedStyle(debugInfo.floatingButton).bottom}
+            </p>
+            <p>
+              Button Right:{' '}
+              {window.getComputedStyle(debugInfo.floatingButton).right}
+            </p>
+            <p>
+              Button Z-Index:{' '}
+              {window.getComputedStyle(debugInfo.floatingButton).zIndex}
+            </p>
+            <p>
+              Button Display:{' '}
+              {window.getComputedStyle(debugInfo.floatingButton).display}
+            </p>
+            <p>
+              Button Visibility:{' '}
+              {window.getComputedStyle(debugInfo.floatingButton).visibility}
+            </p>
           </>
         )}
         <div className="mt-2">
           <p className="font-bold">Problematic Containers:</p>
           {debugInfo.containerOverflow?.map((info, i) => (
-            <p key={i} className="text-xs">{info}</p>
+            <p key={i} className="text-xs">
+              {info}
+            </p>
           ))}
         </div>
       </div>
