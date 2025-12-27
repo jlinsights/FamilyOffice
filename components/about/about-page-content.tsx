@@ -33,6 +33,7 @@ import { StructuredData } from '@/components/structured-data';
 import { generateStructuredData } from '@/lib/seo/structured-data';
 
 import { FAQ_CATEGORIES } from '@/constants/faq';
+import { CONSULTANT_IDENTITY } from '@/constants/brand';
 
 // 아이콘 매핑 헬퍼 함수
 const getIcon = (iconName: string) => {
@@ -458,6 +459,118 @@ export default function AboutPageContent() {
                     </CardContent>
                   </Card>
                 ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 컨설턴트 소개 섹션 */}
+        <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03]"></div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center justify-center p-2 bg-white dark:bg-slate-800 rounded-full mb-6 shadow-sm">
+                <Users className="h-4 w-4 mr-2 text-blue-600" />
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 pr-2">
+                  Lead Consultant
+                </span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
+                {CONSULTANT_IDENTITY.name}{' '}
+                <span className="text-blue-600 dark:text-blue-400">
+                  대표 컨설턴트
+                </span>
+              </h2>
+              <p className="text-xl text-slate-600 dark:text-slate-400 mb-4 font-medium">
+                {CONSULTANT_IDENTITY.title}
+              </p>
+              <p className="text-lg text-slate-500 dark:text-slate-400 italic">
+                "{CONSULTANT_IDENTITY.philosophy}"
+              </p>
+            </div>
+
+            {/* 핵심 강점 */}
+            <div className="mb-20">
+              <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
+                핵심{' '}
+                <span className="text-blue-600 dark:text-blue-400">강점</span>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {CONSULTANT_IDENTITY.coreStrengths.map((strength, index) => (
+                  <Card
+                    key={index}
+                    className="h-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <CardHeader className="relative text-center">
+                      <div className="text-5xl mb-4">{strength.icon}</div>
+                      <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">
+                        {strength.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="relative">
+                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        {strength.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* 본질 */}
+            <div className="mb-20 max-w-4xl mx-auto">
+              <Card className="bg-gradient-to-br from-blue-900 to-slate-900 text-white border-0 shadow-2xl overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+                <CardContent className="relative z-10 p-12 text-center">
+                  <div className="text-6xl mb-6">🌱</div>
+                  <h3 className="text-3xl font-black mb-6 tracking-tight">
+                    {CONSULTANT_IDENTITY.essence.title}
+                  </h3>
+                  <p className="text-xl text-blue-100/90 leading-relaxed">
+                    {CONSULTANT_IDENTITY.essence.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* 개인 브랜딩 방향 */}
+            <div className="mb-16">
+              <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
+                개인 브랜딩{' '}
+                <span className="text-blue-600 dark:text-blue-400">방향</span>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {CONSULTANT_IDENTITY.personalBranding.map((brand, index) => (
+                  <Card
+                    key={index}
+                    className="h-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:scale-105 group overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent dark:from-purple-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <CardHeader className="relative text-center">
+                      <div className="text-5xl mb-4">{brand.icon}</div>
+                      <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">
+                        {brand.direction}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="relative">
+                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        {brand.approach}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* 태그라인 */}
+            <div className="text-center">
+              <div className="inline-block bg-white dark:bg-slate-800 rounded-3xl px-12 py-8 shadow-xl border border-slate-200 dark:border-slate-700">
+                <div className="text-4xl mb-4">🤝</div>
+                <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+                  "{CONSULTANT_IDENTITY.tagline}"
+                </p>
               </div>
             </div>
           </div>
