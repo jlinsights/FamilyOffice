@@ -4,11 +4,11 @@
  */
 import { Metadata } from 'next';
 
-import { targetKeywords } from '../seo-keywords';
 import {
-  generateNaverOptimizedMeta,
-  PAGE_META_CONFIGS,
+    generateNaverOptimizedMeta,
+    PAGE_META_CONFIGS,
 } from './metadata-optimizer';
+import { targetKeywords } from './seo-keywords';
 
 /**
  * 홈페이지 메타데이터

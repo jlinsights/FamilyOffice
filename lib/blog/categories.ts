@@ -1,0 +1,103 @@
+import { BlogCategory } from '@/types/blog';
+
+export const blogCategories: BlogCategory[] = [
+  {
+    name: '패밀리오피스',
+    slug: 'family-office',
+    icon: 'Target',
+    count: 1,
+    description: '가족자산관리와 패밀리오피스 구축 전략',
+  },
+  {
+    name: '투자전략',
+    slug: 'investment-strategy',
+    icon: 'TrendingUp',
+    count: 3,
+    description: '포트폴리오 최적화와 투자 전략 가이드',
+  },
+  {
+    name: '세무최적화',
+    slug: 'tax-optimization',
+    icon: 'FileText',
+    count: 2,
+    description: '상속세 절세와 세무 구조 개선 전략',
+  },
+  {
+    name: '자산관리',
+    slug: 'asset-management',
+    icon: 'BarChart3',
+    count: 4,
+    description: '통합자산관리 및 위험관리 솔루션',
+  },
+  {
+    name: '승계전략',
+    slug: 'succession-planning',
+    icon: 'Users',
+    count: 2,
+    description: '기업승계와 차세대 경영진 준비',
+  },
+  {
+    name: '디지털혁신',
+    slug: 'digital-innovation',
+    icon: 'Cpu',
+    count: 1,
+    description: '핀테크와 디지털 자산관리 기술',
+  },
+  {
+    name: '기업승계 분석',
+    slug: 'business-succession-analysis',
+    icon: 'Building',
+    count: 2,
+    description: '가업승계 성공 요인과 중견기업 승계 전략',
+  },
+  {
+    name: '세무·법무 인사이트',
+    slug: 'tax-legal-insights',
+    icon: 'Scale',
+    count: 3,
+    description: '상속세법 개정과 가족기업 지배구조 최적화',
+  },
+  {
+    name: '글로벌 트렌드',
+    slug: 'global-trends',
+    icon: 'Globe',
+    count: 2,
+    description: '해외 패밀리오피스 동향과 글로벌 자산관리 전략',
+  },
+  {
+    name: '자산관리 전략',
+    slug: 'asset-management-strategy',
+    icon: 'Briefcase',
+    count: 2,
+    description: '고액자산가 포트폴리오 구성과 대체투자 기회',
+  },
+  // 새로 추가된 뉴스레터 기반 카테고리들
+  {
+    name: '리스크관리',
+    slug: 'risk-management',
+    icon: 'Shield',
+    count: 1,
+    description: 'CEO 리스크 관리와 기업보호 전략',
+  },
+  {
+    name: '의료법인',
+    slug: 'medical-corporation',
+    icon: 'Stethoscope',
+    count: 1,
+    description: '병원경영과 의료법인 최적화 전략',
+  },
+  {
+    name: '법인자산',
+    slug: 'corporate-assets',
+    icon: 'CreditCard',
+    count: 2,
+    description: '법인자산 활용과 배당 최적화',
+  },
+  {
+    name: '세무',
+    slug: 'tax-affairs',
+    icon: 'Calculator',
+    count: 1,
+    description: '세무전략과 절세 방안',
+  },
+];

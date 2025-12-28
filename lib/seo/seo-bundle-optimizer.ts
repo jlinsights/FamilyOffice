@@ -27,7 +27,7 @@ export const dynamicSEOImports = {
     }
 
     try {
-      const contentModule = await import('./automated-content-optimization');
+      const contentModule = await import('@/lib/marketing/automated-content-optimization');
       return contentModule.automatedContentOptimization;
     } catch (error) {
       console.error('Failed to load content optimizer:', error);
