@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowDown, Crown } from 'lucide-react';
+import { ArrowDown, Calculator, Crown } from 'lucide-react';
 
 import { memo, useEffect, useRef, useState } from 'react';
 
@@ -155,6 +155,15 @@ export const HeroSection = memo(function HeroSection() {
 
         {/* CTA 버튼 */}
         <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center mb-12 sm:mb-16 lg:mb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-backwards">
+          <Button
+            size="lg"
+            variant="default"
+            className="interaction-ready px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold shadow-xl transition-all duration-200 border-0"
+            onClick={() => router.push('/calculators/inheritance-tax')}
+          >
+            <Calculator className="mr-2 h-5 w-5" />
+            상속세 3분 계산하기
+          </Button>
           <Button
             size="lg"
             variant="default"

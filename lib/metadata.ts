@@ -57,6 +57,32 @@ export const metadata: Metadata = {
   referrer: 'origin-when-cross-origin',
   creator: 'FamilyOffice S',
   publisher: 'FamilyOffice S - 프리미엄 법인금융 서비스',
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: 'https://familyoffices.vip',
+    siteName: 'FamilyOffice S',
+    title: '패밀리오피스 | 가업승계·절세·자산관리 전문',
+    description:
+      '법인 대표와 고액자산가를 위한 종합 자산관리 서비스. 가업승계, 절세 전략, 자산관리부터 금융상품까지 맞춤형 CEO플랜. 삼성생명 1000억+ 운용 실적.',
+    images: [
+      {
+        url: 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+        width: 1200,
+        height: 630,
+        alt: 'FamilyOffice S - 패밀리오피스',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '패밀리오피스 | 가업승계·절세·자산관리 전문',
+    description:
+      '법인 대표와 고액자산가를 위한 종합 자산관리 서비스',
+    images: [
+      'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
+    ],
+  },
 };
 
 // Next.js 15: colorScheme을 별도 viewport export로 분리

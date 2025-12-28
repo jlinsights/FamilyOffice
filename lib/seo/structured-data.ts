@@ -945,7 +945,7 @@ export function generateStructuredData(
         '@id': 'https://familyoffices.vip',
         name: 'FamilyOffice S - 삼성생명 기업컨설팅센터',
         image:
-          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+          'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
         logo: 'https://familyoffices.vip/logo.png',
         url: 'https://familyoffices.vip',
         telephone: '+82-502-5550-8700',

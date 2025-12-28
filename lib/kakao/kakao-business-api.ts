@@ -253,7 +253,7 @@ export class KakaoBusinessAPIService {
         title: '🎯 FamilyOffice S 상담 예약 완료',
         description: `${data.name}님의 ${data.serviceType} 상담이 예약되었습니다.\n담당자가 24시간 내에 연락드리겠습니다.`,
         image_url:
-          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+          'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
         link: {
           web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
           mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
@@ -291,7 +291,7 @@ export class KakaoBusinessAPIService {
         title: '🌟 뉴스레터 구독을 환영합니다!',
         description: `${data.name ? `${data.name}님, ` : ''}FamilyOffice S 프리미엄 뉴스레터 구독이 완료되었습니다.\n\n📬 매주 화/금 발송\n💡 가업승계·자산관리 전문 인사이트`,
         image_url:
-          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+          'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
         link: {
           web_url: 'https://newsletter.familyoffices.vip',
           mobile_web_url: 'https://newsletter.familyoffices.vip',
@@ -331,7 +331,7 @@ export class KakaoBusinessAPIService {
         title: '🎓 세미나 신청이 완료되었습니다',
         description: `📚 ${data.seminarTitle}\n🗓️ ${data.seminarDate}\n👤 참석자: ${data.name}\n${data.venue ? `📍 장소: ${data.venue}` : ''}\n\n세미나 자료는 이메일로 발송됩니다.`,
         image_url:
-          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+          'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
         link: {
           web_url: `${process.env.NEXT_PUBLIC_APP_URL}/seminar`,
           mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/seminar`,
@@ -362,7 +362,7 @@ export class KakaoBusinessAPIService {
         title: '👑 FamilyOffice S에 오신 것을 환영합니다!',
         description: `${data.name}님, ${data.membershipTier || 'Premium'} 회원가입을 축하드립니다!\n\n🌟 전용 혜택\n✅ 개인 맞춤 자산관리 상담\n✅ VIP 전용 세미나 우선 초대\n✅ 프리미엄 투자정보 제공`,
         image_url:
-          'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+          'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
         link: {
           web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
           mobile_web_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,

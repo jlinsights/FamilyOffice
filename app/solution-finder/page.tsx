@@ -1,8 +1,11 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 import { useState } from 'react';
+
+import Link from 'next/link';
 
 import { useRouter } from 'next/navigation';
 
@@ -146,6 +149,16 @@ export default function SolutionFinderPage() {
                 )}
               </AnimatePresence>
             </div>
+          </div>
+          {/* 전체 솔루션 카탈로그 링크 */}
+          <div className="mt-12 text-center">
+            <Link
+              href="/solutions"
+              className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-navy-700 dark:text-amber-400 hover:text-navy-900 dark:hover:text-amber-300 transition-colors duration-200 border-2 border-navy-200 dark:border-amber-600 hover:border-navy-400 dark:hover:border-amber-400 rounded-lg group"
+            >
+              <span>전체 솔루션 카탈로그 보기</span>
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </main>
       </PremiumContentGuard>

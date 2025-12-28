@@ -195,7 +195,7 @@ export class KakaoSyncService {
           description: content.description,
           imageUrl:
             content.imageUrl ||
-            'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+            'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
           link: {
             mobileWebUrl: content.linkUrl || process.env.NEXT_PUBLIC_APP_URL,
             webUrl: content.linkUrl || process.env.NEXT_PUBLIC_APP_URL,

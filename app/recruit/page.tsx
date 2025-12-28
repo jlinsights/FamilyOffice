@@ -1,25 +1,25 @@
 'use client';
 
 import {
-  Award,
-  Briefcase,
-  Building,
-  CheckCircle,
-  Clock,
-  DollarSign,
-  ExternalLink,
-  FileText,
-  GraduationCap,
-  Headphones,
-  Heart,
-  Info,
-  Mail,
-  MapPin,
-  Phone,
-  Play,
-  Star,
-  TrendingUp,
-  Users,
+    Award,
+    Briefcase,
+    Building,
+    CheckCircle,
+    Clock,
+    DollarSign,
+    ExternalLink,
+    FileText,
+    GraduationCap,
+    Headphones,
+    Heart,
+    Info,
+    Mail,
+    MapPin,
+    Phone,
+    Play,
+    Star,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -132,6 +132,36 @@ const recruitFaqCategories = [
         question: '신입자도 성공할 수 있는 지원 시스템이 있나요?',
         answer:
           '네, 멘토링 시스템과 단계별 목표 관리를 통해 신입자도 체계적으로 성장할 수 있도록 지원합니다. 선배 컨설턴트의 1:1 멘토링, 정기적인 피드백, 그리고 개인별 맞춤형 교육 계획을 통해 성공적인 커리어를 만들어갈 수 있습니다.',
+      },
+    ],
+  },
+  {
+    title: '경력 및 연령',
+    icon: 'Award',
+    faqs: [
+      {
+        id: 'career-1',
+        question: '50대 이상도 지원 가능한가요?',
+        answer:
+          '물론입니다. GFC는 나이보다 경력과 전문성을 중시합니다. 오히려 50대 이상의 풍부한 경험과 인맥은 고객 신뢰 구축에 큰 강점이 됩니다. 실제로 많은 50대 이상 GFC가 뛰어난 성과를 내고 계시며, 20-30년의 경력이 세컨드 커리어에서 최고의 자산이 됩니다. 경험을 활용한 고소득 비즈니스 파이프라인 구축이 가능합니다.',
+      },
+      {
+        id: 'career-2',
+        question: '비즈니스 파이프라인이란 무엇인가요?',
+        answer:
+          '비즈니스 파이프라인은 한 번의 고객 관계 구축으로 지속적인 수입을 창출하는 구조를 말합니다. GFC는 단순 일회성 영업이 아닌, 고객의 평생 재무 파트너로서 장기적인 관계를 유지합니다. 초기 계약 후에도 연금, 자산 재배분, 가업승계 등 지속적인 컨설팅을 통해 안정적이고 누적되는 수입원을 확보할 수 있습니다. 이는 평생 수입원이 되는 자산입니다.',
+      },
+      {
+        id: 'career-3',
+        question: '일반 재취업과 어떻게 다른가요?',
+        answer:
+          'GFC 위촉은 일반 재취업과 근본적으로 다릅니다. ①독립적 업무: 출퇴근 자유, 자기주도적 일정 관리 ②무제한 수입: 연봉제가 아닌 성과급 체계로 능력에 따른 고소득 가능 ③전문가 포지셔닝: 단순 직원이 아닌 전문 컨설턴트로서의 위상 ④경험 가치 극대화: 오랜 경력과 인맥이 경쟁력이 되는 구조입니다. 나이 제한 없이 능력으로만 평가받는 진정한 세컨드 커리어입니다.',
+      },
+      {
+        id: 'career-4',
+        question: '금융업계 경험이 없어도 가능한가요?',
+        answer:
+          '금융업계 경험이 없어도 충분히 가능합니다. 중요한 것은 사업가적 마인드, 고객 관계 구축 능력, 그리고 학습 의지입니다. 전직 사업가, 임원 출신 등 다양한 배경의 전문가들이 성공하고 있습니다. 24개월 교육 프로그램을 통해 필요한 금융 지식과 컨설팅 스킬을 체계적으로 습득할 수 있으며, 오히려 다양한 산업 경험이 고객과의 공감대 형성에 도움이 됩니다.',
       },
     ],
   },
@@ -291,7 +321,7 @@ export default function RecruitPage() {
 
             {/* 메인 헤드라인 */}
             <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-              삼성생명 GFC{'\n'}채용
+              삼성생명 GFC{'\n'}위촉
             </h1>
 
             {/* 서브 헤드라인 */}
@@ -299,15 +329,15 @@ export default function RecruitPage() {
               className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
               style={{ animationDelay: '200ms' }}
             >
-              기업재무컨설턴트로 성공의 기회를 잡으세요
+              풍부한 경험이 곧 자산입니다
             </p>
 
             <p
               className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed whitespace-pre-line"
               style={{ animationDelay: '300ms' }}
             >
-              가업승계·패밀리오피스 전문가가 되는 길{'\n'}
-              삼성생명의 신뢰와 함께 높은 수입과 전문성을 겸비하세요
+              세컨드 커리어로 시작하는 새로운 성공{'\n'}
+              경력을 활용한 고소득 비즈니스 파이프라인 구축
             </p>
 
             {/* 핵심 성과 지표 - 메인 페이지와 동일한 스타일 */}
@@ -1256,9 +1286,9 @@ export default function RecruitPage() {
               {
                 '@type': 'JobPosting',
                 '@id': 'https://familyoffices.vip/recruit#gfc-succession',
-                title: '삼성생명 GFC 기업재무컨설턴트 - 가업승계 전문가',
+                title: '삼성생명 GFC 기업재무컨설턴트 위촉 - 50대 이상 경력직 환영',
                 description:
-                  '삼성생명 GFC(Group Financial Consultant) 채용. 가족기업의 체계적인 가업승계 설계 및 실행을 지원하는 기업재무컨설턴트를 모집합니다. 높은 수입 보장, 체계적 교육 시스템, 삼성생명 프리미엄 브랜드 지원.',
+                  '삼성생명 GFC(Group Financial Consultant) 위촉. 50대 이상 경력직 환영. 풍부한 경험을 자산으로 고소득 비즈니스 파이프라인을 구축하세요. 세컨드 커리어 최적화, 경력 활용 고수익 보장, 체계적 교육 시스템. 나이 제한 없이 능력으로 평가받는 전문가 위촉.',
                 datePosted: '2025-01-31',
                 validThrough: '2025-12-31',
                 employmentType: ['CONTRACTOR'],
@@ -1314,9 +1344,9 @@ export default function RecruitPage() {
               {
                 '@type': 'JobPosting',
                 '@id': 'https://familyoffices.vip/recruit#gfc-asset',
-                title: '삼성생명 GFC 기업재무컨설턴트 - 자산관리 전문가',
+                title: '삼성생명 GFC 기업재무컨설턴트 위촉 - 경력직 우대 · 자산관리 전문',
                 description:
-                  '삼성생명 GFC 자산관리 전문가 채용. 고액자산가 및 기업의 종합자산관리 서비스를 제공하는 전문 컨설턴트를 모집합니다.',
+                  '삼성생명 GFC 자산관리 전문가 위촉. 경력직 우대. 고액자산가 및 기업의 종합자산관리 서비스를 제공하는 전문 컨설턴트 모집. 경험을 활용한 고소득 비즈니스 파이프라인 구축 기회.',
                 datePosted: '2025-01-31',
                 validThrough: '2025-12-31',
                 employmentType: ['CONTRACTOR'],

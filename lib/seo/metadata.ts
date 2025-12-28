@@ -33,7 +33,7 @@ export const defaultMetadata: Metadata = {
     url: 'https://familyoffices.vip',
     images: [
       {
-        url: 'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+        url: 'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
         width: 1200,
         height: 630,
         alt: '성공한 CEO 전용 패밀리오피스 가업승계 자산관리 전문 FamilyOffice S',
@@ -57,7 +57,7 @@ export const defaultMetadata: Metadata = {
       '성공한 법인대표 전용. 가업승계·승계세무 완전해결, 기업가 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
     creator: '@FamilyOfficeS_CEO',
     images: [
-      'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+      'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
     ],
   },
 
@@ -75,7 +75,7 @@ export const defaultMetadata: Metadata = {
     'kakao:description':
       '성공한 법인대표를 위한 프리미엄 패밀리오피스. 가업승계·승계세무 완전해결, VVIP 맞춤 자산관리. 삼성생명 1000억+ 운용실적',
     'kakao:image':
-      'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+      'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
     'kakao:url': 'https://familyoffices.vip',
 
     // 네이버 블로그/카페 최적화
@@ -83,14 +83,14 @@ export const defaultMetadata: Metadata = {
     'naver:description':
       'SuperClaude BMAD Method 적용 패밀리오피스. 성공한 법인대표 전용 가업승계·자산관리 완전해결',
     'naver:image':
-      'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+      'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
 
     // LinkedIn 비즈니스 네트워크 최적화
     'linkedin:title': '성공한 CEO를 위한 패밀리오피스 | 가업승계 전문',
     'linkedin:description':
       '중소중견기업 CEO 전용 프리미엄 자산관리. 가업승계부터 세무최적화까지 원스톱 솔루션',
     'linkedin:image':
-      'https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain',
+      'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
 
     // YouTube 동영상 최적화 (향후 콘텐츠용)
     'youtube:title': '성공한 기업가의 자산관리 노하우 | 패밀리오피스',

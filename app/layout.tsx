@@ -208,7 +208,7 @@ export default function RootLayout({
         />
         <meta
           property="kakao:image"
-          content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain"
+          content="https://familyoffices.vip/images/og-image-familyoffice-v2.png"
         />
         <meta property="kakao:url" content="https://familyoffices.vip" />
 
@@ -223,7 +223,7 @@ export default function RootLayout({
         />
         <meta
           name="naver:image"
-          content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain"
+          content="https://familyoffices.vip/images/og-image-familyoffice-v2.png"
         />
 
         {/* LinkedIn 비즈니스 네트워크 최적화 */}
@@ -237,7 +237,7 @@ export default function RootLayout({
         />
         <meta
           property="linkedin:image"
-          content="https://imagedelivery.net/iELritu8tmGaSR8tZ-NWcg/0eadf9f9-146c-4dd7-1d1b-ac4d29126d00/Contain"
+          content="https://familyoffices.vip/images/og-image-familyoffice-v2.png"
         />
 
         {/* 지역 비즈니스 신뢰성 향상 - 수도권 + 충청권 확장 */}

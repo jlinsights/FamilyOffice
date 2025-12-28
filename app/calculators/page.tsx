@@ -1,27 +1,24 @@
 import {
-  ArrowRight,
-  Building2,
-  Calculator,
-  CheckCircle,
-  Gift,
-  PieChart,
-  PiggyBank,
-  Shield,
-  TrendingUp,
+    ArrowRight,
+    Building2,
+    Calculator,
+    CheckCircle,
+    Gift,
+    PieChart,
+    PiggyBank,
+    Shield,
+    TrendingUp,
 } from 'lucide-react';
 
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
-
-import { auth } from '@clerk/nextjs/server';
 
 import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 
 import { PremiumFAQ } from '@/components/faq/premium-faq';
@@ -32,9 +29,9 @@ import { generateStructuredData } from '@/lib/seo/structured-data';
 // 🎯 BMAD Method SEO 최적화: 계산기 허브 페이지
 export const metadata: Metadata = {
   title:
-    '세무 계산기 2025 | 상속세·증여세·가업승계·연금 전문가급 계산 - FamilyOffice S',
+    '세무 계산기 2025 | 절세플랜·자산관리 전문 | 법인·자산가 전용 계산 - FamilyOffice S',
   description:
-    '2025년 최신 세법 반영 세무 계산기. 상속세 40% 절약, 증여세 70% 절감, 가업승계 60% 최적화, 연금 수령액 30% 증대. 99.9% 정확도의 AI 계산기로 즉시 절세 전략 확인.',
+    '자산가와 법인 대표를 위한 절세플랜 전문 계산기. 상속세 40% 절약, 증여세 70% 절감, 자산관리 최적화. 법인세 절감 전략 시뮬레이션. 99.9% 정확도 AI 계산기로 즉시 절세 전략 확인 ☎0502-5550-8700',
   keywords: [
     // 🎯 BMAD Behavioral Keywords (검색 의도 기반)
     '세무 계산기 2025',
@@ -85,6 +82,47 @@ export const metadata: Metadata = {
     '전문가 세무 분석',
     '세무 전략 수립',
     '1:1 세무 상담',
+
+    // 💰 절세플랜 키워드 (Tax Planning Focused)
+    '절세플랜 계산기',
+    '절세 전략 계산',
+    '세금 절약 플랜',
+    '절세 시뮬레이션',
+    '최적 절세 방안',
+    '절세 효과 계산',
+    '절세 전략 도구',
+
+    // 📊 자산관리 키워드 (Asset Management)
+    '자산관리 계산기',
+    '자산배분 계산',
+    '자산 최적화 도구',
+    '자산관리 시뮬레이션',
+    '포트폴리오 계산',
+    '자산 증식 계획',
+    '자산관리 전략',
+
+    // 🏢 법인 대표 키워드 (Corporate Representatives)
+    '법인 대표 세무 계산',
+    '법인세 계산기',
+    '법인 절세 전략',
+    '법인 세무 최적화',
+    '기업 세무 계산',
+    '법인세 절감 계산',
+    '법인 세무 플랜',
+
+    // 💼 자산가 타겟 키워드 (Asset Holders)
+    '고액자산가 계산기',
+    '자산가 전용 세무',
+    '자산가 절세 도구',
+    '대규모 자산 관리',
+    '자산가 세무 플랜',
+
+    // 📈 세무 최적화 키워드 (Tax Optimization)
+    '세무 최적화 계산',
+    '세금 최적화 전략',
+    '세무구조 최적화',
+    '스마트 세무 플랜',
+    '세무 효율화 도구',
   ],
   authors: [{ name: 'FamilyOffice S 세무팀' }],
   creator: 'FamilyOffice S',
@@ -97,28 +135,21 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://familyoffices.vip/calculators',
-    title: '세무 계산기 2025 - 전문가급 상속세·증여세·가업승계·연금 계산',
-    description:
-      '2025년 최신 세법 반영, AI 최적화 계산기로 상속세 40% 절약, 증여세 70% 절감, 가업승계 60% 최적화. 99.9% 정확도, 즉시 계산, 무료 전문가 상담.',
-    images: [
-      {
-        url: 'https://familyoffices.vip/images/calculators-hub-og.jpg',
-        width: 1200,
-        height: 630,
-        alt: '세무 계산기 2025 - FamilyOffice S',
-        type: 'image/jpeg',
-      },
-    ],
     siteName: 'FamilyOffice S',
+    title: '세무 계산기 2025 | 절세플랜·자산관리 전문',
+    description: '상속세 40% 절약, 증여세 70% 절감. 법인·자산가 전용 AI 세무 계산기. 무료 절세 전략 시뮬레이션',
+    images: [{
+      url: 'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
+      width: 1200,
+      height: 630,
+      alt: '세무 계산기 2025 - FamilyOffice S',
+    }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '세무 계산기 2025 | AI 최적화 절세 전략',
-    description:
-      '상속세 40% 절약, 증여세 70% 절감, 가업승계 60% 최적화. 2025년 최신 세법 반영 전문가급 계산기.',
-    images: ['https://familyoffices.vip/images/calculators-hub-twitter.jpg'],
-    creator: '@FamilyOfficeS',
+    title: '세무 계산기 2025 | 절세플랜 전문',
+    description: '상속세 40% 절약, 증여세 70% 절감',
+    images: ['https://familyoffices.vip/images/og-image-familyoffice-v2.png'],
   },
   robots: {
     index: true,
@@ -145,14 +176,7 @@ interface ColorClasses {
   gradient: string;
 }
 
-export default async function CalculatorsPage() {
-  // 인증 확인 - 로그인하지 않은 사용자는 로그인 페이지로 리다이렉트
-  const { userId } = await auth();
-
-  if (!userId) {
-    redirect('/auth/sign-in?redirect_url=/calculators');
-  }
-
+export default function CalculatorsPage() {
   const calculators = [
     {
       title: '상속세 계산기',
@@ -276,7 +300,7 @@ export default async function CalculatorsPage() {
   const aiOptimizedData = generateStructuredData('AIOptimized');
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white selection:bg-blue-500/30">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white selection:bg-blue-500/30">
       <StructuredData data={faqData} />
       <StructuredData data={aiOptimizedData} />
 
@@ -296,7 +320,7 @@ export default async function CalculatorsPage() {
           </div>
 
           <h1 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
-            <span className="bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-900 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 dark:from-blue-200 dark:via-indigo-200 dark:to-violet-200 bg-clip-text text-transparent">
               전문가급 세무 계산기
             </span>
           </h1>
@@ -403,7 +427,7 @@ export default async function CalculatorsPage() {
         </div>
 
         {/* 통계 및 성과 */}
-        <div className="relative overflow-hidden bg-slate-900 dark:bg-slate-950 rounded-3xl p-10 mb-24 text-white shadow-2xl">
+        <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-700 dark:bg-slate-950 rounded-3xl p-10 mb-24 text-white shadow-2xl">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
