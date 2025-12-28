@@ -95,7 +95,7 @@ export const LazyKoreanMarketInsight = createLazyComponent(
 // Cal.com components with lazy loading
 export const LazyCalComInline = createLazyComponent(
   () =>
-    import('@/components/cal-com-inline').then(mod => ({
+    import('@/components/calendar/cal-com-inline').then(mod => ({
       default: mod.CalComInline,
     })),
   'CalComInline',
@@ -108,7 +108,7 @@ export const LazyCalComInline = createLazyComponent(
 
 export const LazyCalComAdvanced = createLazyComponent(
   () =>
-    import('@/components/cal-com-advanced').then(mod => ({
+    import('@/components/calendar/cal-com-advanced').then(mod => ({
       default: mod.CalComAdvanced,
     })),
   'CalComAdvanced'

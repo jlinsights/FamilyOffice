@@ -6,14 +6,16 @@ import { Suspense, useEffect, useState } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
+
+import { cn } from '@/lib/utils';
 
 import { getSupabaseKakaoAuthService } from '@/lib/auth/supabase-kakao-auth';
 
@@ -183,12 +185,12 @@ function AuthCallbackContent() {
                   </div>
                 )}
               </div>
-              <Button
+              {/* <Button
                 onClick={() => router.push('/dashboard')}
                 className="w-full"
               >
                 대시보드로 바로 이동
-              </Button>
+              </Button> */}
             </div>
           )}
 
@@ -201,20 +203,19 @@ function AuthCallbackContent() {
               </div>
 
               <div className="space-y-3">
-                <Button
+                <button
                   onClick={() => router.push('/auth/sign-in')}
-                  variant="outline"
-                  className="w-full"
+                  className={cn(buttonVariants({ variant: "outline" }), "w-full")}
                 >
                   로그인 페이지로 돌아가기
-                </Button>
+                </button>
 
-                <Button
+                <button
                   onClick={() => window.location.reload()}
-                  className="w-full"
+                  className={cn(buttonVariants({ variant: "default" }), "w-full")}
                 >
                   다시 시도하기
-                </Button>
+                </button>
               </div>
             </div>
           )}

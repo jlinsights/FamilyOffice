@@ -5,7 +5,7 @@ import {
   ContentStatus,
   ContentType,
   SocialPlatform,
-} from '@/lib/content-auto-publisher';
+} from '@/lib/marketing/content-auto-publisher';
 
 /**
  * 콘텐츠 자동 게시 시스템 API 엔드포인트

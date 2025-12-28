@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 
-import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComPopup } from '@/components/calendar/cal-com-popup';
 
 type ChecklistItem = {
   id: string;

@@ -1,6 +1,6 @@
 // Enhanced multi-layer caching for Week 3 AI-powered SEO features
-import { isFeatureEnabled } from './feature-flags';
-import { performanceMonitor } from './performance-monitor';
+import { isFeatureEnabled } from '@/lib/feature-flags';
+import { performanceMonitor } from '@/lib/performance-monitor';
 
 interface EnhancedCacheEntry<T> {
   value: T;

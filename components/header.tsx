@@ -12,7 +12,7 @@ import { SignInButton, UserButton, useAuth } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 
 import { SamsungFinancialNetworksLogo } from '@/components/logo';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggle } from '@/components/theme/theme-toggle';
 
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 

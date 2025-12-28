@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { preloadCriticalSEOModules } from '@/lib/seo-bundle-optimizer';
+import { preloadCriticalSEOModules } from '@/lib/seo/seo-bundle-optimizer';
 
 export function SEOModulePreloader() {
   useEffect(() => {

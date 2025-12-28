@@ -24,7 +24,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Header } from '@/components/header';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/seo/structured-data';
 
 import { generateMetadata } from '@/lib/seo/metadata';
 import { generateStructuredData } from '@/lib/seo/structured-data';

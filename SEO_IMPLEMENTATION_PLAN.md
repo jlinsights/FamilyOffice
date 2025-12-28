@@ -8,7 +8,7 @@
 
 1. **SEO 전략 문서 작성** (`SEO_STRATEGY.md`)
 2. **콘텐츠 계획 수립** (`SEO_CONTENT_PLAN.md`)
-3. **키워드 관리 시스템** (`lib/seo-keywords.ts`)
+3. **키워드 관리 시스템** (`lib/seo/seo-keywords.ts`)
 4. **핵심 랜딩 페이지 생성**:
    - `/family-office` - 패밀리오피스 완벽 가이드
    - `/business-succession` - 가업승계 7단계 프로세스

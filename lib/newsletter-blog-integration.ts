@@ -1,11 +1,11 @@
 // Newsletter-Blog Integration System
 // Phase 3 Implementation - Content Marketing Strategy
 import {
-  CONTENT_TEMPLATES,
-  ContentGenerator,
-  ContentSchedule,
-  WEEKLY_CONTENT_SCHEDULE,
-} from './content-strategy';
+    CONTENT_TEMPLATES,
+    ContentGenerator,
+    ContentSchedule,
+    WEEKLY_CONTENT_SCHEDULE,
+} from '@/lib/marketing/content-strategy';
 
 /**
  * 뉴스레터-블로그 통합 자동화 시스템

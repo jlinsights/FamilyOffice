@@ -531,7 +531,7 @@ export function useRealTimeData<T>(
 
 ```typescript
 // 1. Advanced analytics dashboard
-// File: components/analytics/analytics-dashboard.tsx
+// File: components/analytics/analytics/analytics-dashboard.tsx
 export function AnalyticsDashboard() {
   const [timeRange, setTimeRange] = useState('1Y')
   const [selectedMetrics, setSelectedMetrics] = useState(['return', 'volatility'])

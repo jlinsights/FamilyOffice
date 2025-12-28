@@ -70,7 +70,7 @@ const GoogleSearchConsoleDashboard = nextDynamic(
 
 const WebVitalsDashboard = nextDynamic(
   () =>
-    import('@/components/web-vitals-dashboard').then(mod => ({
+    import('@/components/analytics/web-vitals-dashboard').then(mod => ({
       default: mod.WebVitalsDashboard,
     })),
   {

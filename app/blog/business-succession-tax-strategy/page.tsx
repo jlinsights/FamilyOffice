@@ -25,7 +25,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 

@@ -7,7 +7,7 @@ import {
   ContentAnalytics,
   ContentAutomation,
   type ContentPerformanceMetrics,
-} from '@/lib/content-strategy';
+} from '@/lib/marketing/content-strategy';
 
 /**
  * 콘텐츠 전략 관리 API

@@ -10,9 +10,9 @@ import CoreWebVitals from '@/components/performance/core-web-vitals';
 import { PreloadCriticalResources } from '@/components/preload-critical-resources';
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
 import { ScrollToTop } from '@/components/scroll-to-top';
-import { SEOErrorBoundary } from '@/components/seo-error-boundary';
+import { SEOErrorBoundary } from '@/components/seo/seo-error-boundary';
 import { OrganizationStructuredData } from '@/components/seo/structured-data';
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThirdPartyIntegration } from '@/components/third-party-integration';
 
 import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';

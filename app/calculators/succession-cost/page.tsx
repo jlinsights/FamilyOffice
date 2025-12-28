@@ -1,38 +1,34 @@
 'use client';
 
 import {
-  Building2,
-  Calculator,
-  TrendingUp,
-  Users,
-  AlertCircle,
-  CheckCircle,
-  PieChart,
-  Target,
-  Lightbulb,
-  Zap,
-  ArrowRight,
-  BarChart3,
-  Shield,
-  Star,
-  Clock,
-  DollarSign,
-  Award,
-  Globe,
-  Brain,
-  Sparkles,
-  Briefcase,
-  TrendingDown,
+    AlertCircle,
+    ArrowRight,
+    Award,
+    BarChart3,
+    Brain,
+    Briefcase,
+    Building2,
+    Calculator,
+    CheckCircle,
+    Clock,
+    DollarSign,
+    Lightbulb,
+    PieChart,
+    Shield,
+    Sparkles,
+    Star,
+    Target,
+    TrendingUp,
+    Users
 } from 'lucide-react';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
 
 export default function SuccessionCostCalculatorPage() {
   const [businessInfo, setBusinessInfo] = useState({
@@ -1339,20 +1335,7 @@ export default function SuccessionCostCalculatorPage() {
                 '업종별 특화 분석',
               ],
               color: 'purple',
-              link: '/services/business-valuation',
-            },
-            {
-              icon: Building2,
-              title: '🏗️ 지주회사 설립',
-              description:
-                '세무 효율성과 경영 효율성을 동시에 확보하는 지주회사 구조 설계',
-              features: [
-                '세무 최적화 구조',
-                '경영권 안정화',
-                '투자 효율성 극대화',
-              ],
-              color: 'blue',
-              link: '/services/holding-company',
+              link: '/structure-check#request-form',
             },
             {
               icon: TrendingUp,
@@ -1365,7 +1348,7 @@ export default function SuccessionCostCalculatorPage() {
                 '후계자 육성 계획',
               ],
               color: 'green',
-              link: '/contact?service=succession-consulting',
+              link: '/structure-check#request-form',
             },
           ].map((service, index) => (
             <div

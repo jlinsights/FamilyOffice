@@ -1,20 +1,20 @@
 'use client';
 
 import {
-  AlertCircle,
-  ArrowRight,
-  Briefcase,
-  Building,
-  CheckCircle,
-  Cpu,
-  Factory,
-  Hammer,
-  Medal,
-  Phone,
-  Shield,
-  Target,
-  TrendingUp,
-  Users,
+    AlertCircle,
+    ArrowRight,
+    Briefcase,
+    Building,
+    CheckCircle,
+    Cpu,
+    Factory,
+    Hammer,
+    Medal,
+    Phone,
+    Shield,
+    Target,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -23,17 +23,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { AnimatedCounter } from '@/components/animated-counter';
-import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/seo/structured-data';
 
 import { generateStructuredData } from '@/lib/seo/structured-data';
 
-import { FAQ_CATEGORIES } from '@/constants/faq';
 import { CONSULTANT_IDENTITY } from '@/constants/brand';
+import { FAQ_CATEGORIES } from '@/constants/faq';
 
 // 아이콘 매핑 헬퍼 함수
 const getIcon = (iconName: string) => {

@@ -2,7 +2,7 @@
  * 인바운드 마케팅 자동화 시스템
  * SEO 최적화된 컨텐츠 자동 생성 및 배포
  */
-import { CONTENT_KEYWORD_MAPPING, KEYWORD_CLUSTERS } from './keyword-strategy';
+import { CONTENT_KEYWORD_MAPPING, KEYWORD_CLUSTERS } from '@/lib/seo/keyword-strategy';
 
 export interface ContentTemplate {
   type: 'blog' | 'guide' | 'case-study' | 'faq' | 'landing-page';

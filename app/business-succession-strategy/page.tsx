@@ -1,22 +1,22 @@
 'use client';
 
 import {
-  AlertTriangle,
-  ArrowRight,
-  Award,
-  Building2,
-  CheckCircle2,
-  ChevronRight,
-  Crown,
-  FileText,
-  Gem,
-  HandHeart,
-  Shield,
-  Target,
-  TreePine,
-  TrendingUp,
-  Users,
-  XCircle,
+    AlertTriangle,
+    ArrowRight,
+    Award,
+    Building2,
+    CheckCircle2,
+    ChevronRight,
+    Crown,
+    FileText,
+    Gem,
+    HandHeart,
+    Shield,
+    Target,
+    TreePine,
+    TrendingUp,
+    Users,
+    XCircle,
 } from 'lucide-react';
 
 import React from 'react';
@@ -25,25 +25,21 @@ import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { ServiceFAQ } from '@/components/faq/service-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { StructuredData } from '@/components/structured-data';
 
-import { FAQSchema } from '@/lib/faq-schema';
 import { businessSuccessionHowTo } from '@/lib/seo/howto-data';
 
-import { BUSINESS_SUCCESSION_FAQS } from '@/constants/faqs';
 
 // 5단계 기업승계 로드맵
 const successionRoadmap = [
@@ -298,7 +294,7 @@ const BusinessSuccessionPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-900 dark:via-gray-900/50 dark:to-gray-900">
       {/* HowTo Structured Data */}
-      <StructuredData data={howToStructuredData} />
+      {/* <StructuredData data={howToStructuredData} /> */}
 
       <Header />
 
@@ -870,17 +866,17 @@ const BusinessSuccessionPage = () => {
       </main>
 
       {/* FAQ Section */}
-      <ServiceFAQ
+      {/* <ServiceFAQ
         faqs={BUSINESS_SUCCESSION_FAQS}
         title="기업승계 자주 묻는 질문"
         description="기업승계 준비 시 많이 묻는 질문들에 대한 전문가 답변입니다"
-      />
+      /> */}
 
       {/* FAQ Schema for SEO */}
-      <FAQSchema
+      {/* <FAQSchema
         faqs={BUSINESS_SUCCESSION_FAQS}
         url="https://familyoffices.vip/business-succession-strategy"
-      />
+      /> */}
 
       <Footer />
     </div>

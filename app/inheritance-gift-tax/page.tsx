@@ -34,12 +34,12 @@ import {
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { SelfCheckSuccession } from '@/components/forms/self-check-succession';
 import { Header } from '@/components/header';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/seo/structured-data';
 
 import { generateStructuredData } from '@/lib/seo/structured-data';
 

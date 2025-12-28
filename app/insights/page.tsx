@@ -28,7 +28,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import InsightsFeed from '@/components/insights-feed';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/seo/structured-data';
 
 import { insightsFAQ } from '@/lib/seo/insights-faq-data';
 

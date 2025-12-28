@@ -21,7 +21,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
-import { CalComButton } from '@/components/cal-com-button';
+import { CalComButton } from '@/components/calendar/cal-com-button';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
@@ -29,7 +29,7 @@ import {
   CUSTOMER_SEGMENTS,
   generateDynamicContent,
   generateTargetingMessage,
-} from '@/lib/customer-segmentation';
+} from '@/lib/marketing/customer-segmentation';
 
 export default function FPCenterPage() {
   const segmentData = CUSTOMER_SEGMENTS['fp-center'];

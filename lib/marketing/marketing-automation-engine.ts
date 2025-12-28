@@ -3,10 +3,10 @@
  * Cron job 연동, 실행 로그 저장, 실패 시 알림, 재시도 로직
  */
 import {
-  AutomationRule,
-  generateContentTemplate,
-  ContentTemplate,
-} from './seo/inbound-marketing-automation';
+    AutomationRule,
+    ContentTemplate,
+    generateContentTemplate,
+} from '@/lib/marketing/inbound-marketing-automation';
 
 export type ExecutionStatus =
   | 'pending'

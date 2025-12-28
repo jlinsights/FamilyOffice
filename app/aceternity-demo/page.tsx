@@ -1,16 +1,16 @@
 'use client';
 
-import { HomeIcon, UserIcon, PhoneIcon } from 'lucide-react';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { HomeIcon, PhoneIcon, UserIcon } from 'lucide-react';
 
-import React from 'react';
 
-import { Button } from '@/components/ui/button';
 
 import { BackgroundBeams } from '@/components/aceternity/background-beams';
 import { FloatingNav } from '@/components/aceternity/floating-navbar';
 import {
-  HeroHighlight,
-  Highlight,
+    HeroHighlight,
+    Highlight,
 } from '@/components/aceternity/hero-highlight';
 import { InfiniteMovingCards } from '@/components/aceternity/infinite-moving-cards';
 import { Meteors } from '@/components/aceternity/meteors';
@@ -81,12 +81,11 @@ export default function AceternityDemo() {
             프리미엄 자산 관리 서비스로 <br />
             차세대 성공을 준비하세요
           </p>
-          <Button
-            className="mt-8 bg-white text-black hover:bg-gray-200"
-            size="lg"
+          <button
+            className={cn(buttonVariants({ size: "lg" }), "mt-8 bg-white text-black hover:bg-gray-200")}
           >
             상담 신청하기
-          </Button>
+          </button>
         </div>
         <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:[mask-image:radial-gradient(farthest-side_at_top,black,transparent)]" />
       </section>
@@ -188,19 +187,16 @@ export default function AceternityDemo() {
             수립해보세요
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              size="lg"
+            <button
+              className={cn(buttonVariants({ size: "lg" }), "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-primary-foreground")}
             >
               무료 상담 신청
-            </Button>
-            <Button
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-black"
-              size="lg"
+            </button>
+            <button
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "border-white text-white hover:bg-white hover:text-black")}
             >
               서비스 자료 다운로드
-            </Button>
+            </button>
           </div>
         </div>
       </section>

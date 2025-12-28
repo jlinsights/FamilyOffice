@@ -12,7 +12,10 @@ import {
 
 import { Metadata } from 'next';
 
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+
 import {
     Card,
     CardContent,
@@ -22,7 +25,7 @@ import {
 } from '@/components/ui/card';
 
 import { PremiumFAQ } from '@/components/faq/premium-faq';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/seo/structured-data';
 
 import { generateStructuredData } from '@/lib/seo/structured-data';
 
@@ -408,18 +411,13 @@ export default function CalculatorsPage() {
                     </div>
                   </div>
 
-                  <Button
-                    className={`w-full ${colorClasses.button} text-white shadow-lg group-hover:shadow-xl transition-all duration-300`}
-                    asChild
-                  >
-                    <a
+                  <a
                       href={calculator.href}
-                      className="flex items-center justify-center gap-2"
+                      className={cn(buttonVariants(), `w-full ${colorClasses.button} text-white shadow-lg group-hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2`)}
                     >
                       계산하기
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </a>
-                  </Button>
                 </CardContent>
               </Card>
             );
@@ -493,19 +491,13 @@ export default function CalculatorsPage() {
                 세무 전문가가 직접 분석하여 최적의 솔루션을 제안해 드립니다.
               </p>
             </div>
-            <Button
-              size="lg"
-              className="bg-white text-blue-600 hover:bg-blue-50 w-full sm:w-auto text-lg font-bold h-14"
-              asChild
-            >
-              <a
+            <a
                 href="/contact?service=tax-consulting"
-                className="flex items-center justify-center gap-2"
+                className={cn(buttonVariants({ size: "lg" }), "bg-white text-blue-600 hover:bg-blue-50 w-full sm:w-auto text-lg font-bold h-14 flex items-center justify-center gap-2")}
               >
                 무료 상담 신청하기
                 <ArrowRight className="w-5 h-5" />
               </a>
-            </Button>
           </div>
 
           <div className="bg-slate-100 dark:bg-slate-800 rounded-3xl p-10 flex flex-col justify-between border border-slate-200 dark:border-slate-700 shadow-lg">
@@ -518,20 +510,13 @@ export default function CalculatorsPage() {
                 상속, 증여, 가업승계의 마스터플랜을 수립해 드립니다.
               </p>
             </div>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 w-full sm:w-auto text-lg font-bold h-14"
-              asChild
-            >
-              <a
+            <a
                 href="/services/tax-optimization"
-                className="flex items-center justify-center gap-2"
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 w-full sm:w-auto text-lg font-bold h-14 flex items-center justify-center gap-2")}
               >
                 서비스 자세히 보기
                 <ArrowRight className="w-5 h-5" />
               </a>
-            </Button>
           </div>
         </div>
 

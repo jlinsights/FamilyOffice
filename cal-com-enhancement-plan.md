@@ -12,7 +12,7 @@
 ### 1. 인라인 임베딩 구현
 
 ```typescript
-// components/cal-com-embedded.tsx
+// components/calendar/cal-com-embedded.tsx
 'use client';
 
 import { useEffect } from 'react';

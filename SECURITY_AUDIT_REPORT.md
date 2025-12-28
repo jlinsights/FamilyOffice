@@ -26,19 +26,19 @@ Comprehensive security audit of all `dangerouslySetInnerHTML` usage in the Famil
 - **Security Measures**: Input validation, allowlist patterns, proper escaping
 - **Risk**: LOW - This is the security utility itself
 
-**2. `/components/structured-data.tsx`** - SECURE ✅
+**2. `/components/seo/structured-data.tsx`** - SECURE ✅
 
 - **Usage**: JSON-LD structured data with `sanitizeStructuredData()`
 - **Security Measures**: Validated input, no user content, JSON serialization
 - **Risk**: LOW - Properly sanitized through security utility
 
-**3. `/components/analytics.tsx`** - SECURE ✅
+**3. `/components/analytics/analytics.tsx`** - SECURE ✅
 
 - **Usage**: GA/GTM scripts with security validation
 - **Security Measures**: Uses `createAnalyticsScript()`, `isAllowedScriptSource()`
 - **Risk**: LOW - All scripts validated through security functions
 
-**4. `/components/external-scripts.tsx`** - SECURE ✅
+**4. `/components/analytics/external-scripts.tsx`** - SECURE ✅
 
 - **Usage**: Third-party scripts with allowlist validation
 - **Security Measures**: Domain validation, CSP compliance

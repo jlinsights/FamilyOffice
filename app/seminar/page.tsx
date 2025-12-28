@@ -8,7 +8,7 @@ import { SeminarCategoriesSection } from '@/components/seminar/SeminarCategories
 import { SeminarHeroSection } from '@/components/seminar/SeminarHeroSection';
 import SeminarRegistrationSection from '@/components/seminar/SeminarRegistrationSection';
 import { UpcomingSeminarsSection } from '@/components/seminar/UpcomingSeminarsSection';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/seo/structured-data';
 
 import { generateMetadata } from '@/lib/seo/metadata';
 

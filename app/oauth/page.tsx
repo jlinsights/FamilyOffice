@@ -1,21 +1,21 @@
 'use client';
 
-import { Loader2, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle, Loader2, XCircle } from 'lucide-react';
 
-import { useEffect, useState, Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { Button } from '@/components/ui/button';
+
+
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardDescription,
+    CardHeader,
+    CardTitle
 } from '@/components/ui/card';
 
-import { getKakaoAuthService } from '@/lib/auth/kakao-auth';
+
 
 function OAuthContent() {
   const router = useRouter();
@@ -49,8 +49,9 @@ function OAuthContent() {
         }
 
         // 카카오 인증 서비스로 인증 코드 처리
-        const kakaoAuth = getKakaoAuthService();
-        const result = await kakaoAuth.handleOAuthCallback(code);
+        // const kakaoAuth = getKakaoAuthService();
+        // const result = await kakaoAuth.handleOAuthCallback(code);
+        const result = { success: false, isNewUser: false, error: 'OAuth disabled' };
 
         if (result.success) {
           setStatus('success');
@@ -108,97 +109,27 @@ function OAuthContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
+      <Card className="w-full max-w-md shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm animate-fade-in">
         <CardHeader className="text-center space-y-4">
           <div className="flex justify-center">{getStatusIcon()}</div>
           <CardTitle className={`text-2xl font-bold ${getStatusColor()}`}>
-            {status === 'loading' && '인증 처리 중'}
-            {status === 'success' && '인증 완료'}
-            {status === 'error' && '인증 실패'}
+            {status === 'loading'
+              ? '인증 처리 중'
+              : status === 'success'
+                ? '인증 성공'
+                : '인증 실패'}
           </CardTitle>
-          <CardDescription className="text-base">{message}</CardDescription>
+          <CardDescription className="text-base text-slate-600 dark:text-slate-300">
+            {message}
+          </CardDescription>
         </CardHeader>
-
-        <CardContent className="space-y-6">
-          {status === 'loading' && (
-            <div className="text-center space-y-4">
-              <div className="animate-pulse">
-                <div className="h-2 bg-gray-200 rounded w-3/4 mx-auto mb-2"></div>
-                <div className="h-2 bg-gray-200 rounded w-1/2 mx-auto"></div>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                잠시만 기다려주세요...
-              </p>
+        {error && (
+          <div className="px-6 pb-6">
+            <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-3 rounded-lg text-sm text-center">
+              {error}
             </div>
-          )}
-
-          {status === 'success' && (
-            <div className="text-center space-y-4">
-              <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
-                <p className="text-sm text-green-700 dark:text-green-300">
-                  곧 대시보드로 이동합니다...
-                </p>
-              </div>
-              <Button
-                onClick={() => router.push('/dashboard')}
-                className="w-full"
-              >
-                바로 이동하기
-              </Button>
-            </div>
-          )}
-
-          {status === 'error' && (
-            <div className="space-y-4">
-              <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
-                <p className="text-sm text-red-700 dark:text-red-300">
-                  {error}
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                <Button
-                  onClick={() => router.push('/auth/sign-in')}
-                  variant="outline"
-                  className="w-full"
-                >
-                  로그인 페이지로 돌아가기
-                </Button>
-
-                <Button
-                  onClick={() => window.location.reload()}
-                  className="w-full"
-                >
-                  다시 시도하기
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {/* 디버그 정보 (개발 모드에서만 표시) */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <h4 className="text-sm font-medium mb-2">🔍 디버그 정보</h4>
-              <div className="space-y-2 text-xs">
-                <div>
-                  <span className="font-medium">Status:</span> {status}
-                </div>
-                <div>
-                  <span className="font-medium">Code:</span>{' '}
-                  {searchParams.get('code') ? '있음' : '없음'}
-                </div>
-                <div>
-                  <span className="font-medium">Error:</span>{' '}
-                  {searchParams.get('error') || '없음'}
-                </div>
-                <div>
-                  <span className="font-medium">State:</span>{' '}
-                  {searchParams.get('state') || '없음'}
-                </div>
-              </div>
-            </div>
-          )}
-        </CardContent>
+          </div>
+        )}
       </Card>
     </div>
   );

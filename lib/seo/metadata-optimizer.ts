@@ -4,7 +4,7 @@
  */
 import { Metadata } from 'next';
 
-import { KeywordData, targetKeywords } from '@/lib/seo-keywords';
+import { KeywordData, targetKeywords } from '@/lib/seo/seo-keywords';
 
 export interface OptimizedMetadata extends Metadata {
   structuredData?: any;

@@ -19,11 +19,11 @@
  * 6. Return success response
  */
 
-import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import crypto from 'crypto';
+import { NextRequest, NextResponse } from 'next/server';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 // Beehiiv webhook event types
 type BeehiivEventType =

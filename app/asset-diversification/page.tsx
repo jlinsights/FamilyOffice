@@ -1,34 +1,35 @@
 import {
-  BarChart3,
-  CheckCircle2,
-  Globe,
-  PieChart,
-  Shield,
-  Target,
-  TrendingUp,
-  Zap,
+    BarChart3,
+    CheckCircle2,
+    Globe,
+    PieChart,
+    Shield,
+    Target,
+    TrendingUp,
+    Zap,
 } from 'lucide-react';
 
-import type { Metadata } from 'next';
+import { buttonVariants } from '@/components/ui/button';
 import Link from 'next/link';
+
+import type { Metadata } from 'next';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 
-import { CalComPopup } from '@/components/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { StructuredData } from '@/components/structured-data';
 
 import { generateMetadata } from '@/lib/seo/metadata';
+
+import { StructuredData } from '@/components/seo/structured-data';
 
 export const metadata: Metadata = generateMetadata(
   '자산분산 전문 컨설팅 | 포트폴리오 최적화 및 리스크 관리',
@@ -155,19 +156,20 @@ export default function AssetDiversificationPage() {
               전문가가 설계하는 최적 자산배분 전략
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <CalComPopup
-                buttonText="무료 포트폴리오 진단"
-                variant="default"
-                size="lg"
-                className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
-                eventType="consultation"
-              />
-              <Button size="lg" variant="outline" asChild>
-                <Link href="#services">
+              {/* <CalComPopup
+                 buttonText="무료 포트폴리오 진단"
+                 variant="default"
+                 size="lg"
+                 className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
+                 eventType="consultation"
+               /> */}
+              <Link 
+                  href="#services"
+                  className={buttonVariants({ variant: "outline", size: "lg" })}
+                >
                   <PieChart className="mr-2 h-4 w-4" />
                   분산전략 살펴보기
                 </Link>
-              </Button>
             </div>
             <Alert className="max-w-2xl mx-auto">
               <Zap className="h-4 w-4" />
@@ -630,13 +632,13 @@ export default function AssetDiversificationPage() {
                 </CardContent>
               </Card>
             </div>
-            <CalComPopup
+            {/* <CalComPopup
               buttonText="무료 포트폴리오 진단 신청"
               variant="default"
               size="lg"
               className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg mb-6"
               eventType="consultation"
-            />
+            /> */}
             <p className="text-sm text-muted-foreground">
               ☎ 0502-5550-8700 | 평일 09:00-18:00 | 자산분산 전문가 직접 상담
             </p>

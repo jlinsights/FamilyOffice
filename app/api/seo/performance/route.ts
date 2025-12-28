@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { enhancedSEOCache, aiCacheOperations } from '@/lib/enhanced-seo-cache';
+import { enhancedSEOCache, aiCacheOperations } from '@/lib/seo/enhanced-seo-cache';
 import { getAllFeatureFlags } from '@/lib/feature-flags';
 import {
   performanceMonitor,
   seoPerformanceTracker,
 } from '@/lib/performance-monitor';
-import { BundleSizeMonitor } from '@/lib/seo-bundle-optimizer';
-import { SEOErrorHandler } from '@/lib/seo-error-handling';
+import { BundleSizeMonitor } from '@/lib/seo/seo-bundle-optimizer';
+import { SEOErrorHandler } from '@/lib/seo/seo-error-handling';
 
 export async function GET(request: NextRequest) {
   try {

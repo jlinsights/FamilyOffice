@@ -1,7 +1,7 @@
 // Bundle optimization for SEO features with dynamic imports
 import React from 'react';
 
-import { isFeatureEnabled } from './feature-flags';
+import { isFeatureEnabled } from '@/lib/feature-flags';
 
 // Dynamic import wrapper with loading fallbacks
 export const dynamicSEOImports = {
@@ -12,7 +12,7 @@ export const dynamicSEOImports = {
     }
 
     try {
-      const structuredModule = await import('./dynamic-structured-data');
+      const structuredModule = await import('@/lib/seo/dynamic-structured-data');
       return structuredModule.dynamicStructuredDataEngine;
     } catch (error) {
       console.error('Failed to load structured data engine:', error);
@@ -48,7 +48,7 @@ export const dynamicSEOImports = {
     }
 
     try {
-      const routingModule = await import('./intelligent-cross-domain-routing');
+      const routingModule = await import('@/lib/seo/intelligent-cross-domain-routing');
       return routingModule.intelligentCrossDomainRouter;
     } catch (error) {
       console.error('Failed to load cross-domain router:', error);

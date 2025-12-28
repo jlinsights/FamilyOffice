@@ -40,11 +40,11 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
-import { CUSTOMER_SEGMENTS } from '@/lib/customer-segmentation';
+import { CUSTOMER_SEGMENTS } from '@/lib/marketing/customer-segmentation';
 
 // 패밀리오피스 핵심 서비스 영역
 const familyOfficeServices = {

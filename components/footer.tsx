@@ -1,19 +1,19 @@
 'use client';
 
 import {
-  Award,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Phone,
-  Shield,
-  Sparkles,
-  TrendingUp,
-  Users,
-  Youtube,
+    Award,
+    Facebook,
+    Instagram,
+    Linkedin,
+    Mail,
+    MapPin,
+    MessageSquare,
+    Phone,
+    Shield,
+    Sparkles,
+    TrendingUp,
+    Users,
+    Youtube,
 } from 'lucide-react';
 
 import { memo, useEffect, useState } from 'react';
@@ -23,7 +23,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
-import { ClientScripts } from './client-scripts';
+import { ClientScripts } from '@/components/analytics/client-scripts';
 
 // 커스텀 아이콘 컴포넌트들
 const XIcon = ({ className }: { className?: string }) => (

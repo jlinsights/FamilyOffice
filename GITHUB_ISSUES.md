@@ -320,7 +320,7 @@ Not all usages are properly sanitized:
 
 - ✅ `lib/security/html-sanitizer.ts` - Uses DOMPurify (SAFE)
 - ⚠️ Blog pages - Needs review
-- ⚠️ `components/structured-data.tsx` - Needs review
+- ⚠️ `components/seo/structured-data.tsx` - Needs review
 - ⚠️ `components/footer.tsx` - Needs review
 
 ### Security Risk

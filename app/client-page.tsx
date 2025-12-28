@@ -9,13 +9,13 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { HubSpotIntegration } from '@/components/hubspot-integration';
-import { PerformanceMonitor } from '@/components/performance-monitor';
-import { Providers } from '@/components/providers';
+import { PerformanceMonitor } from '@/components/analytics/performance-monitor';
+import { Providers } from '@/components/theme/providers';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ServicesSection } from '@/components/sections/services-section';
 import { SkipLinks } from '@/components/skip-links';
 import { SmoothScroll } from '@/components/smooth-scroll';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/seo/structured-data';
 
 import {
   createAnalyticsScript,

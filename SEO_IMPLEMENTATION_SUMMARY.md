@@ -111,7 +111,7 @@ export function generateContentTemplate(
 4. **`/hooks/use-content-optimization.ts`** - React Hook 기반 최적화 도구
 5. **`/components/seo/content-optimizer.tsx`** - 컨텐츠 분석 UI 컴포넌트
 6. **`/components/seo/breadcrumb-navigation.tsx`** - SEO 최적화 브레드크럼
-7. **`/lib/seo/inbound-marketing-automation.ts`** - 마케팅 자동화 엔진
+7. **`/lib/marketing/inbound-marketing-automation.ts`** - 마케팅 자동화 엔진
 8. **`/components/seo/inbound-marketing-dashboard.tsx`** - 통합 관리 대시보드
 9. **`/app/admin/seo/page.tsx`** - 관리자 전용 SEO 제어판
 10. **`/lib/seo/analytics-tracker.ts`** - 실시간 성과 추적 시스템

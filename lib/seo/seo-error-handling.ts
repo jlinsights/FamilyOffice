@@ -1,5 +1,5 @@
 // Comprehensive error handling for SEO operations
-import { performanceMonitor } from './performance-monitor';
+import { performanceMonitor } from '@/lib/performance-monitor';
 
 export interface SEOError extends Error {
   code: string;

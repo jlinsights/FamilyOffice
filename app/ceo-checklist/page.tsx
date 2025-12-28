@@ -1,22 +1,22 @@
 'use client';
 
 import {
-  AlertCircle,
-  Briefcase,
-  Building,
-  Calculator,
-  CheckCircle2,
-  ChevronRight,
-  Crown,
-  Download,
-  FileCheck,
-  Heart,
-  Phone,
-  Shield,
-  Target,
-  TrendingUp,
-  Users,
-  XCircle,
+    AlertCircle,
+    Briefcase,
+    Building,
+    Calculator,
+    CheckCircle2,
+    ChevronRight,
+    Crown,
+    Download,
+    FileCheck,
+    Heart,
+    Phone,
+    Shield,
+    Target,
+    TrendingUp,
+    Users,
+    XCircle,
 } from 'lucide-react';
 
 import React from 'react';
@@ -24,19 +24,19 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
@@ -585,85 +585,56 @@ const CEOChecklistPage = () => {
                       className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors w-full h-full min-h-[3.5rem]"
                       buttonText="무료 경영진단 상담"
                       eventType="consultation"
-                      trigger={
-                        <div className="inline-flex items-center">
-                          <Briefcase className="h-5 w-5 mr-2" />
-                          무료 경영진단 상담
-                        </div>
-                      }
+
                     />
 
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      asChild
-                      className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700"
-                    >
-                      <Link href="/tax-strategy">
+                    <Link 
+                        href="/tax-strategy"
+                        className={buttonVariants({ variant: "outline", size: "lg", className: "w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700" })}
+                      >
                         <Calculator className="h-5 w-5 mr-2" />
                         절세 전략 보기
                       </Link>
-                    </Button>
 
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      asChild
-                      className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700"
-                    >
-                      <Link href="/corporate-tax-checklist">
+                    <Link 
+                        href="/corporate-tax-checklist"
+                        className={buttonVariants({ variant: "outline", size: "lg", className: "w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700" })}
+                      >
                         <FileCheck className="h-5 w-5 mr-2" />
                         법인세 결산 체크리스트
                       </Link>
-                    </Button>
 
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      asChild
-                      className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700"
-                    >
-                      <Link href="/hr-labor-management">
+                    <Link 
+                        href="/hr-labor-management"
+                        className={buttonVariants({ variant: "outline", size: "lg", className: "w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700" })}
+                      >
                         <Users className="h-5 w-5 mr-2" />
                         인사노무 관리 가이드
                       </Link>
-                    </Button>
 
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      asChild
-                      className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700"
-                    >
-                      <Link href="/business-succession-strategy">
+                    <Link 
+                        href="/business-succession-strategy"
+                        className={buttonVariants({ variant: "outline", size: "lg", className: "w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700" })}
+                      >
                         <Crown className="h-5 w-5 mr-2" />
                         전략적 가업승계
                       </Link>
-                    </Button>
 
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      asChild
-                      className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700"
-                    >
-                      <Link href="/inheritance-gift-tax">
+                    <Link 
+                        href="/inheritance-gift-tax"
+                        className={buttonVariants({ variant: "outline", size: "lg", className: "w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700" })}
+                      >
                         <Heart className="h-5 w-5 mr-2" />
                         상속·증여세 가이드
                       </Link>
-                    </Button>
 
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      asChild
-                      className="w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700"
-                    >
-                      <Link href="/fp-center">
+                    <Link 
+                        href="/fp-center"
+                        className={buttonVariants({ variant: "outline", size: "lg", className: "w-full h-full min-h-[3.5rem] dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700" })}
+                      >
                         <Users className="h-5 w-5 mr-2" />
                         FP센터 종합진단
                       </Link>
-                    </Button>
 
                     <Button
                       variant="outline"
@@ -699,17 +670,13 @@ const CEOChecklistPage = () => {
                         중대재해처벌법, 세무 리스크 등 법적 위험에 노출되어
                         있습니다.
                       </p>
-                      <Button
-                        variant="destructive"
-                        size="sm"
-                        className="w-full"
-                        asChild
-                      >
-                        <Link href="/serious-accident-law">
+                      <Link 
+                          href="/serious-accident-law"
+                          className={buttonVariants({ variant: "destructive", size: "sm", className: "w-full" })}
+                        >
                           즉시 대응하기
                           <ChevronRight className="h-4 w-4 ml-1" />
                         </Link>
-                      </Button>
                     </CardContent>
                   </Card>
 
@@ -725,17 +692,13 @@ const CEOChecklistPage = () => {
                         체계적인 승계 계획 수립으로 상속세를 50% 이상 절감할 수
                         있습니다.
                       </p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full"
-                        asChild
-                      >
-                        <Link href="/business-succession-strategy">
+                      <Link 
+                          href="/business-succession-strategy"
+                          className={buttonVariants({ variant: "outline", size: "sm", className: "w-full" })}
+                        >
                           승계 전략 보기
                           <ChevronRight className="h-4 w-4 ml-1" />
                         </Link>
-                      </Button>
                     </CardContent>
                   </Card>
 
@@ -751,17 +714,13 @@ const CEOChecklistPage = () => {
                         기업 리스크 관리와 절세를 동시에 해결하는 맞춤형 보험
                         설계가 필요합니다.
                       </p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full"
-                        asChild
-                      >
-                        <Link href="/corporate-life-insurance">
+                      <Link 
+                          href="/corporate-life-insurance"
+                          className={buttonVariants({ variant: "outline", size: "sm", className: "w-full" })}
+                        >
                           보험 전략 보기
                           <ChevronRight className="h-4 w-4 ml-1" />
                         </Link>
-                      </Button>
                     </CardContent>
                   </Card>
                 </>
