@@ -126,7 +126,7 @@ export const metadata: Metadata = generateMetadata(
     '종합소득세 고액',
     '상속세 대규모 절세',
   ],
-  'https://familyoffices.vip/images/og-image-familyoffice-v2.png'
+  'https://familyoffices.vip/Images/og-image-familyoffice-v2.png'
 );
 
 export default function SeminarPage() {

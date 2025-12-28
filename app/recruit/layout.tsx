@@ -55,7 +55,8 @@ export const metadata: Metadata = {
       '중구 금융컨설턴트',
       '은퇴 후 재취업',
       '전문가 네트워크',
-    ]
+    ],
+    'https://familyoffices.vip/Images/og-image-familyoffice-v2.png'
   ),
   // 파비콘 및 앱 아이콘 설정 (메인 레이아웃과 동일하게)
   icons: {

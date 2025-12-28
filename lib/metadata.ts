@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     description:
       '법인 대표와 고액자산가를 위한 종합 자산관리 서비스',
     images: [
-      'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
+      'https://familyoffices.vip/Images/og-image-familyoffice-v2.png',
     ],
   },
 };

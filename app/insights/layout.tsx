@@ -62,7 +62,7 @@ export const metadata: Metadata = generateMetadata(
     'CEO 인사이트',
     '자산가 전문',
   ],
-  'https://familyoffices.vip/images/og-image-familyoffice-v2.png'
+  'https://familyoffices.vip/Images/og-image-familyoffice-v2.png'
 );
 
 export default function InsightsLayout({

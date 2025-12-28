@@ -49,7 +49,8 @@ export const metadata: Metadata = {
       '자산관리 서비스',
       '재무설계 서비스',
       '세무 서비스',
-    ]
+    ],
+    'https://familyoffices.vip/Images/og-image-familyoffice-v2.png'
   ),
   // 파비콘 및 앱 아이콘 설정 (메인 레이아웃과 동일하게)
   icons: {
