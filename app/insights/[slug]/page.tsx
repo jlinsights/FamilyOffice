@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -20,9 +20,9 @@ import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { ShareButton } from '@/components/share-button';
 
 import {
-  extractAIOptimizedKeywords,
-  generateAIOptimizedFAQ,
-  generateAIOptimizedMetadata,
+    extractAIOptimizedKeywords,
+    generateAIOptimizedFAQ,
+    generateAIOptimizedMetadata,
 } from '@/lib/blog-ai-optimization';
 import { blogPosts } from '@/lib/blog-data';
 import { env } from '@/lib/env';
@@ -177,7 +177,7 @@ export default async function BlogPostPage({
             >
               <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 group-hover:opacity-80 transition-opacity">
                 <Image
-                  src="/Images/Profile Image-3-1080 x 1080 px.png"
+                  src="/images/Profile Image-3-1080 x 1080 px.png"
                   alt={post.author}
                   width={48}
                   height={48}
@@ -241,7 +241,7 @@ export default async function BlogPostPage({
                 '@type': 'Person',
                 name: post.author,
                 jobTitle: '수석 컨설턴트',
-                image: '/Images/Profile Image-3-1080 x 1080 px.png',
+                image: '/images/Profile Image-3-1080 x 1080 px.png',
                 url: 'https://litt.ly/familyoffice',
               },
               publisher: {
@@ -408,7 +408,7 @@ export default async function BlogPostPage({
             >
               <div className="w-20 h-20 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 group-hover:opacity-90 transition-opacity">
                 <Image
-                  src="/Images/Profile Image-3-1080 x 1080 px.png"
+                  src="/images/Profile Image-3-1080 x 1080 px.png"
                   alt={post.author}
                   width={80}
                   height={80}

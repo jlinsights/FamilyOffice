@@ -1,22 +1,22 @@
 'use client';
 
 import {
-  Mail,
-  Calendar,
-  Users,
-  TrendingUp,
-  BarChart,
-  Star,
-  Clock,
-  ArrowRight,
-  Shield,
-  Target,
-  Play,
-  Headphones,
-  ChevronRight,
+    ArrowRight,
+    BarChart,
+    Calendar,
+    ChevronRight,
+    Clock,
+    Headphones,
+    Mail,
+    Play,
+    Shield,
+    Star,
+    Target,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -24,13 +24,12 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { Footer } from '@/components/footer';
@@ -743,7 +742,7 @@ export default function WeeklyBriefPage() {
                       >
                         <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-primary/10 to-primary/5 border-4 border-primary/20 group-hover:border-primary/40 transition-all duration-300 group-hover:scale-105">
                           <Image
-                            src="/Images/Profile Image-3-1080 x 1080 px.png"
+                            src="/images/Profile Image-3-1080 x 1080 px.png"
                             alt="임재홍 수석 컨설턴트"
                             width={512}
                             height={512}

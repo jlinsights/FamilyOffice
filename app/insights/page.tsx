@@ -1,17 +1,17 @@
 'use client';
 
 import {
-  BarChart3,
-  BookOpen,
-  Briefcase,
-  Calendar,
-  FileText,
-  HelpCircle,
-  Lightbulb,
-  Mail,
-  Shield,
-  TrendingUp,
-  Users,
+    BarChart3,
+    BookOpen,
+    Briefcase,
+    Calendar,
+    FileText,
+    HelpCircle,
+    Lightbulb,
+    Mail,
+    Shield,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
 import { useEffect, useState } from 'react';
@@ -268,7 +268,7 @@ export default function InsightsPage() {
         <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden bg-white dark:bg-slate-800 rounded-3xl p-12 shadow-xl border border-slate-100 dark:border-slate-700">
-              <div className="absolute top-0 left-0 w-full h-full bg-[url('/Images/grid-pattern.svg')] opacity-[0.03]"></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/grid-pattern.svg')] opacity-[0.03]"></div>
 
               <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-12">
                 <div className="text-center group">
@@ -351,7 +351,7 @@ export default function InsightsPage() {
 
         {/* Newsletter CTA */}
         <section className="py-24 bg-gradient-to-br from-slate-900 to-blue-900 relative">
-          <div className="absolute inset-0 bg-[url('/Images/grid-pattern.svg')] opacity-10"></div>
+          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-3xl"></div>
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">

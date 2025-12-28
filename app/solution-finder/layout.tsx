@@ -43,7 +43,7 @@ export const metadata: Metadata = generateMetadata(
     '전문가 추천',
     '무료 컨설팅',
   ],
-  'https://familyoffices.vip/Images/og-image-familyoffice-v2.png'
+  'https://familyoffices.vip/images/og-image-familyoffice-v2.png'
 );
 
 export default function SolutionFinderLayout({

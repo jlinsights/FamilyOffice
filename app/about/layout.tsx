@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: '가업승계·절세·자산관리 전문가 | FamilyOffice S',
     description: '법인 대표와 고액자산가를 위한 맞춤형 패밀리오피스 서비스',
-    images: ['https://familyoffices.vip/Images/og-image-familyoffice-v2.png'],
+    images: ['https://familyoffices.vip/images/og-image-familyoffice-v2.png'],
   },
   // 파비콘 및 앱 아이콘 설정 (메인 레이아웃과 동일하게)
   icons: {

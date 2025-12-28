@@ -20,7 +20,8 @@ import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
 import { DebugStyles } from './debug-styles';
 import './globals.css';
 
-export { metadata, viewport } from '@/lib/metadata';
+
+export { defaultMetadata as metadata, viewport } from '@/lib/seo/metadata';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -208,7 +209,7 @@ export default function RootLayout({
         />
         <meta
           property="kakao:image"
-          content="https://familyoffices.vip/Images/og-image-familyoffice-v2.png"
+          content="https://familyoffices.vip/images/og-image-familyoffice-v2.png"
         />
         <meta property="kakao:url" content="https://familyoffices.vip" />
 
@@ -223,7 +224,7 @@ export default function RootLayout({
         />
         <meta
           name="naver:image"
-          content="https://familyoffices.vip/Images/og-image-familyoffice-v2.png"
+          content="https://familyoffices.vip/images/og-image-familyoffice-v2.png"
         />
 
         {/* LinkedIn 비즈니스 네트워크 최적화 */}
@@ -237,7 +238,7 @@ export default function RootLayout({
         />
         <meta
           property="linkedin:image"
-          content="https://familyoffices.vip/Images/og-image-familyoffice-v2.png"
+          content="https://familyoffices.vip/images/og-image-familyoffice-v2.png"
         />
 
         {/* 지역 비즈니스 신뢰성 향상 - 수도권 + 충청권 확장 */}

@@ -1,15 +1,15 @@
 'use client';
 
 import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle,
-  Clock,
-  DollarSign,
-  Star,
-  Target,
-  TrendingUp,
-  Users,
+    ArrowLeft,
+    ArrowRight,
+    CheckCircle,
+    Clock,
+    DollarSign,
+    Star,
+    Target,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -24,9 +24,9 @@ import { PremiumContentGuard } from '@/components/premium-content-guard';
 import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
 
 import {
-  generateServiceSlug,
-  getRelatedServices,
-  getServiceBySlug,
+    generateServiceSlug,
+    getRelatedServices,
+    getServiceBySlug,
 } from '@/constants/services';
 
 interface ServiceDetailPageProps {
@@ -73,7 +73,7 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
 
           {/* Hero Section */}
           <section className="relative py-20 overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/Images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
 
             <div className="container mx-auto px-6 relative z-10">
               <div className="max-w-4xl mx-auto">

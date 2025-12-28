@@ -45,7 +45,7 @@ export const metadata: Metadata = generateMetadata(
     '세무 컨설팅',
     '재무 컨설팅',
   ],
-  'https://familyoffices.vip/Images/og-image-familyoffice-v2.png'
+  'https://familyoffices.vip/images/og-image-familyoffice-v2.png'
 );
 
 export default function SolutionsLayout({

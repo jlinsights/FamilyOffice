@@ -41,7 +41,7 @@ export const metadata: Metadata = generateMetadata(
     '대체자산 교육',
     '경영 교육',
   ],
-  'https://familyoffices.vip/Images/og-image-familyoffice-v2.png'
+  'https://familyoffices.vip/images/og-image-familyoffice-v2.png'
 );
 
 export default function ProgramLayout({
