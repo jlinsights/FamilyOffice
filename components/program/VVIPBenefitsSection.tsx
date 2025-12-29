@@ -1,18 +1,19 @@
 'use client';
 
 import {
-  ArrowRight,
-  CheckCircle,
-  Crown,
-  Palette,
-  Shield,
-  Sparkles,
+    ArrowRight,
+    CheckCircle,
+    Crown,
+    Palette,
+    Shield,
+    Sparkles,
 } from 'lucide-react';
 
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface Benefit {
   icon: React.ReactNode;
@@ -139,16 +140,16 @@ export function VVIPBenefitsSection() {
               </ul>
 
               {/* CTA Button */}
-              <Button
-                variant="outline"
-                className="w-full font-semibold"
-                asChild
+              <Link
+                href="/structure-check#request-form"
+                className={cn(
+                  buttonVariants({ variant: 'outline' }),
+                  'w-full font-semibold'
+                )}
               >
-                <Link href="/structure-check#request-form">
-                  프라이빗 초청 제안서 받기
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+                프라이빗 초청 제안서 받기
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </div>
           ))}
         </div>
@@ -175,21 +176,24 @@ export function VVIPBenefitsSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="font-bold" asChild>
-                <Link href="/structure-check#request-form">
-                  프라이빗 초청 제안서 받기
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="font-bold" asChild>
-                <Link
-                  href="http://pf.kakao.com/_gsxkxdG/chat"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  카카오톡 간편 문의
-                </Link>
-              </Button>
+              <Link
+                href="/structure-check#request-form"
+                className={cn(buttonVariants({ size: 'lg' }), 'font-bold')}
+              >
+                프라이빗 초청 제안서 받기
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+              <Link
+                href="http://pf.kakao.com/_gsxkxdG/chat"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ size: 'lg', variant: 'outline' }),
+                  'font-bold'
+                )}
+              >
+                카카오톡 간편 문의
+              </Link>
             </div>
           </div>
         </div>

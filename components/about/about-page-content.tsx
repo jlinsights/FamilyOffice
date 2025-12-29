@@ -21,7 +21,7 @@ import { cn } from '@/lib/utils';
 
 import Link from 'next/link';
 
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { AnimatedCounter } from '@/components/animated-counter';
@@ -180,14 +180,16 @@ export default function AboutPageContent() {
                 className="px-8 py-4 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full"
                 eventType="consultation"
                 trigger={
-                  <Button
-                    size="lg"
-                    className="px-8 py-6 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full"
+                  <div
+                    className={cn(
+                      buttonVariants({ size: 'lg' }),
+                      'px-8 py-6 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full cursor-pointer'
+                    )}
                   >
                     <Phone className="mr-2 h-5 w-5" />
                     상담 신청
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
+                  </div>
                 }
               />
               <Link
@@ -648,14 +650,16 @@ export default function AboutPageContent() {
                       size="lg"
                       eventType="consultation"
                       trigger={
-                        <Button
-                          size="lg"
-                          className="px-8 py-6 text-lg font-bold bg-white text-blue-900 hover:bg-blue-50 shadow-lg border-none rounded-full"
+                        <div
+                          className={cn(
+                            buttonVariants({ size: 'lg' }),
+                            'px-8 py-6 text-lg font-bold bg-white text-blue-900 hover:bg-blue-50 shadow-lg border-none rounded-full cursor-pointer'
+                          )}
                         >
                           <Phone className="mr-2 h-5 w-5" />
                           무료 상담 신청
                           <ArrowRight className="ml-2 h-5 w-5" />
-                        </Button>
+                        </div>
                       }
                     />
                     <Link

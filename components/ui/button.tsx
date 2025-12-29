@@ -95,19 +95,25 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {/* 컨텐츠 */}
-        <span className="relative z-10 flex items-center justify-center">
-          {children}
-        </span>
+        {asChild ? (
+          children
+        ) : (
+          <>
+            {/* 컨텐츠 */}
+            <span className="relative z-10 flex items-center justify-center">
+              {children}
+            </span>
 
-        {/* 글래스 샤인 효과 */}
-        {variant !== 'link' && variant !== 'ghost' && (
-          <div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full"
-            style={{
-              transition: 'transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)',
-            }}
-          />
+            {/* 글래스 샤인 효과 */}
+            {variant !== 'link' && variant !== 'ghost' && (
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full"
+                style={{
+                  transition: 'transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)',
+                }}
+              />
+            )}
+          </>
         )}
       </Comp>
     );

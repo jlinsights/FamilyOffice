@@ -1,9 +1,10 @@
-import { Crown, ArrowRight } from 'lucide-react';
+import { ArrowRight, Crown } from 'lucide-react';
 
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export function MembershipCTASection() {
   return (
@@ -28,24 +29,29 @@ export function MembershipCTASection() {
             className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up"
             style={{ animationDelay: '200ms' }}
           >
-            <Button size="lg" asChild className="btn-primary group">
-              <Link
-                href="/structure-check#request-form"
-                className="flex items-center"
-                aria-label="구조 점검 요청"
-              >
-                구조 점검 요청
-                <ArrowRight
-                  className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
-                  aria-hidden
-                />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/solutions" aria-label="솔루션 자세히 보기">
-                솔루션 자세히 보기
-              </Link>
-            </Button>
+            <Link
+              href="/structure-check#request-form"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'btn-primary group flex items-center'
+              )}
+              aria-label="구조 점검 요청"
+            >
+              구조 점검 요청
+              <ArrowRight
+                className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                aria-hidden
+              />
+            </Link>
+            <Link
+              href="/solutions"
+              aria-label="솔루션 자세히 보기"
+              className={cn(
+                buttonVariants({ size: 'lg', variant: 'outline' })
+              )}
+            >
+              솔루션 자세히 보기
+            </Link>
           </div>
           <div
             className="mt-8 text-sm text-muted-foreground animate-slide-up"

@@ -3,7 +3,9 @@
 import React from 'react';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 import { SpecialProgram } from '@/types/program';
 
@@ -49,27 +51,28 @@ function ProgramCard({
         </Badge>
       </div>
       <div className="flex gap-2 mt-4">
-        <Button
-          asChild
-          className="flex-1 bg-primary hover:bg-primary/90 text-white"
-          size="sm"
+      <div className="flex gap-2 mt-4">
+        <Link
+          href={href}
+          className={cn(
+            buttonVariants({ size: 'sm' }),
+            'flex-1 bg-primary hover:bg-primary/90 text-white'
+          )}
         >
-          <a href={href}>더 알아보기</a>
-        </Button>
-        <Button
-          asChild
-          variant="outline"
-          className="flex-1 border-primary text-primary hover:bg-primary hover:text-white"
-          size="sm"
+          더 알아보기
+        </Link>
+        <a
+          href="https://cal.com/familyoffice"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(
+            buttonVariants({ variant: 'outline', size: 'sm' }),
+            'flex-1 border-primary text-primary hover:bg-primary hover:text-white'
+          )}
         >
-          <a
-            href="https://cal.com/familyoffice"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            상담 신청
-          </a>
-        </Button>
+          상담 신청
+        </a>
+      </div>
       </div>
     </div>
   );

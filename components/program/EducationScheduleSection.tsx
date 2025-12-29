@@ -1,7 +1,9 @@
-import { Calendar, ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 import type { EducationPrograms } from '@/types/program';
 
@@ -80,24 +82,21 @@ export function EducationScheduleSection({
           <div className="mb-4 text-lg text-muted-foreground font-medium">
             최신 세미나 일정이 궁금하다면?
           </div>
-          <Button
-            asChild
-            size="lg"
-            className="bg-primary text-white px-8 py-5 text-lg font-bold shadow-lg hover:bg-primary/90 transition group"
+          <Link
+            href="/seminar"
+             className={cn(
+              buttonVariants({ size: 'lg' }),
+              'bg-primary text-white px-8 py-5 text-lg font-bold shadow-lg hover:bg-primary/90 transition group flex items-center justify-center gap-2'
+            )}
             aria-label="세미나 바로가기"
           >
-            <a
-              href="/seminar"
-              className="flex items-center justify-center gap-2"
-            >
-              <Calendar className="h-5 w-5 mr-2" aria-hidden />
-              세미나 바로가기
-              <ArrowRight
-                className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform"
-                aria-hidden
-              />
-            </a>
-          </Button>
+            <Calendar className="h-5 w-5 mr-2" aria-hidden />
+            세미나 바로가기
+            <ArrowRight
+              className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform"
+              aria-hidden
+            />
+          </Link>
           <div className="mt-2 text-sm text-muted-foreground">
             클릭 시 세미나 예약/등록 페이지로 이동합니다
           </div>
