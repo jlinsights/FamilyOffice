@@ -14,11 +14,11 @@
  * 6. Return success response
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
 import { beehiiv } from '@/lib/beehiiv/client';
+import { createClient } from '@/lib/supabase/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 // Request body interface
 interface CaptureLeadRequest {
