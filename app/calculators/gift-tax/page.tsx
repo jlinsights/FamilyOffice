@@ -1,35 +1,33 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import {
-  Calculator,
-  Gift,
-  Users,
-  AlertCircle,
-  CheckCircle,
-  TrendingDown,
-  Heart,
-  Shield,
-  Clock,
-  Target,
-  Lightbulb,
-  DollarSign,
-  Calendar,
-  PieChart,
-  Zap,
-  TrendingUp,
-  BarChart3,
-  User,
-  Users2,
-  Home,
-  Building2,
+    AlertCircle,
+    BarChart3,
+    Building2,
+    Calculator,
+    Calendar,
+    CheckCircle,
+    Clock,
+    DollarSign,
+    Gift,
+    Heart,
+    Home,
+    Lightbulb,
+    PieChart,
+    Shield,
+    Target,
+    TrendingUp,
+    Users,
+    Users2,
+    Zap
 } from 'lucide-react';
 
 import { useState } from 'react';
 
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
@@ -884,19 +882,16 @@ export default function GiftTaxCalculatorPage() {
                     상속세 계산
                   </a>
                 </Button>
-                <Button
-                  variant="outline"
-                  className="h-12 border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400"
-                  asChild
+                <Link
+                  href="/blog"
+                  className={cn(
+                    buttonVariants({ variant: 'outline' }),
+                    'h-12 border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center gap-2 w-full justify-center'
+                  )}
                 >
-                  <Link
-                    href="/blog"
-                    className="flex items-center gap-2 w-full justify-center"
-                  >
-                    <Users className="w-4 h-4" />
-                    전문가 블로그
-                  </Link>
-                </Button>
+                  <Users className="w-4 h-4" />
+                  전문가 블로그
+                </Link>
               </div>
             </div>
 

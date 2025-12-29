@@ -1,10 +1,10 @@
 import {
-  ArrowLeft,
-  Calendar,
-  Clock,
-  ExternalLink,
-  Share2,
-  User,
+    ArrowLeft,
+    Calendar,
+    Clock,
+    ExternalLink,
+    Share2,
+    User,
 } from 'lucide-react';
 
 import { Metadata } from 'next';
@@ -214,12 +214,13 @@ export default async function InsightContentPage({
                   </Badge>
                 </div>
 
-                <Button asChild variant="outline" size="sm">
-                  <Link href="/insights">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    목록으로
-                  </Link>
-                </Button>
+                <Link
+                  href="/insights"
+                  className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  목록으로
+                </Link>
               </div>
             </div>
           </section>
@@ -276,16 +277,15 @@ export default async function InsightContentPage({
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4 justify-center mb-12">
                 {content.url && (
-                  <Button asChild variant="default">
-                    <a
-                      href={content.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      원문 보기
-                    </a>
-                  </Button>
+                  <a
+                    href={content.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonVariants({ variant: 'default' })}
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    원문 보기
+                  </a>
                 )}
 
                 <Button
@@ -318,16 +318,15 @@ export default async function InsightContentPage({
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold">콘텐츠 미리보기</h3>
                     {content.url && (
-                      <Button asChild variant="ghost" size="sm">
-                        <a
-                          href={content.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          전체 내용 보기
-                          <ExternalLink className="w-3 h-3 ml-1" />
-                        </a>
-                      </Button>
+                      <a
+                        href={content.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+                      >
+                        전체 내용 보기
+                        <ExternalLink className="w-3 h-3 ml-1" />
+                      </a>
                     )}
                   </div>
                 </CardHeader>
@@ -365,17 +364,21 @@ export default async function InsightContentPage({
                 매주 업데이트되는 자산관리 전문 인사이트를 놓치지 마세요
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" variant="secondary">
-                  <Link href="/insights/weekly-brief">뉴스레터 구독하기</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
+                <Link
+                  href="/insights/weekly-brief"
+                  className={buttonVariants({ size: 'lg', variant: 'secondary' })}
                 >
-                  <Link href="/insights">더 많은 글 보기</Link>
-                </Button>
+                  뉴스레터 구독하기
+                </Link>
+                <Link
+                  href="/insights"
+                  className={cn(
+                    buttonVariants({ size: 'lg', variant: 'outline' }),
+                    'bg-transparent border-white text-white hover:bg-white hover:text-primary'
+                  )}
+                >
+                  더 많은 글 보기
+                </Link>
               </div>
             </div>
           </section>

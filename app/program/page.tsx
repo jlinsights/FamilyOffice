@@ -5,7 +5,8 @@ import { ArrowRight, Crown, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -20,12 +21,12 @@ import { VVIPBenefitsSection } from '@/components/program/VVIPBenefitsSection';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 
 import {
-  ASSET_PROGRAMS,
-  CEO_PROGRAMS,
-  EDUCATION_PROGRAMS,
-  EXCLUSIVE_PROGRAMS,
-  MEMBERSHIP_STATS,
-  MEMBER_BENEFITS,
+    ASSET_PROGRAMS,
+    CEO_PROGRAMS,
+    EDUCATION_PROGRAMS,
+    EXCLUSIVE_PROGRAMS,
+    MEMBERSHIP_STATS,
+    MEMBER_BENEFITS,
 } from '@/constants/programs';
 
 // Disable static generation for this page
@@ -76,35 +77,28 @@ function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
           style={{ animationDelay: '500ms' }}
         >
-          <Button
-            size="lg"
-            asChild
-            className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
+          <Link
+            href="/structure-check#request-form"
+            className={cn(
+              buttonVariants({ size: 'lg' }),
+              'bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg'
+            )}
+            aria-label="구조 점검 요청"
           >
-            <Link
-              href="/structure-check#request-form"
-              className="flex items-center"
-              aria-label="구조 점검 요청"
-            >
-              구조 점검 요청
-              <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
-            </Link>
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            asChild
-            className="font-bold shadow-lg px-8 py-4 text-lg"
+            구조 점검 요청
+            <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
+          </Link>
+          <Link
+            href="#benefits"
+            className={cn(
+              buttonVariants({ size: 'lg', variant: 'outline' }),
+              'font-bold shadow-lg px-8 py-4 text-lg'
+            )}
+            aria-label="혜택 알아보기"
           >
-            <Link
-              href="#benefits"
-              className="flex items-center"
-              aria-label="혜택 알아보기"
-            >
-              <Sparkles className="mr-2 h-5 w-5" aria-hidden />
-              혜택 알아보기
-            </Link>
-          </Button>
+            <Sparkles className="mr-2 h-5 w-5" aria-hidden />
+            혜택 알아보기
+          </Link>
         </div>
       </div>
     </section>

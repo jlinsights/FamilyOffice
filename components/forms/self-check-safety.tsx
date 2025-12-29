@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from 'react';
 
+import Link from 'next/link';
+
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 
@@ -146,9 +148,12 @@ export function SelfCheckSafety() {
             buttonText={`추천 패키지 상담 (${recommendation})`}
             size="lg"
           />
-          <Button asChild variant="outline">
-            <a href="/serious-accident-law">상세 대응 가이드 보기</a>
-          </Button>
+          <Link
+            href="/serious-accident-law"
+            className={buttonVariants({ variant: 'outline' })}
+          >
+            상세 대응 가이드 보기
+          </Link>
         </div>
       </CardContent>
     </Card>

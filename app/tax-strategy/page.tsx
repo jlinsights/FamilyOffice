@@ -1,21 +1,21 @@
 'use client';
 
 import {
-  AlertTriangle,
-  ArrowRight,
-  Building,
-  Calculator,
-  CheckCircle,
-  Crown,
-  DollarSign,
-  FileText,
-  Lightbulb,
-  Shield,
-  Star,
-  Target,
-  TrendingDown,
-  Trophy,
-  Users,
+    AlertTriangle,
+    ArrowRight,
+    Building,
+    Calculator,
+    CheckCircle,
+    Crown,
+    DollarSign,
+    FileText,
+    Lightbulb,
+    Shield,
+    Star,
+    Target,
+    TrendingDown,
+    Trophy,
+    Users,
 } from 'lucide-react';
 
 import React from 'react';
@@ -23,15 +23,16 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
@@ -116,14 +117,15 @@ const TaxStrategyPage = () => {
                 className="px-8 py-4 text-lg bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold shadow-xl"
                 eventType="consultation"
               />
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-bold px-8 py-4 text-lg shadow-lg"
-                asChild
+              <Link
+                href="#strategies"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'font-bold px-8 py-4 text-lg shadow-lg'
+                )}
               >
-                <Link href="#strategies">절세 전략 보기</Link>
-              </Button>
+                절세 전략 보기
+              </Link>
             </div>
 
             {/* Quick Stats */}
@@ -286,9 +288,14 @@ const TaxStrategyPage = () => {
                       className={`w-full border-${item.color}-200 text-${item.color}-700 hover:bg-${item.color}-50`}
                       eventType="consultation"
                       trigger={
-                        <Button variant="outline" size="sm" className="w-full">
+                        <div
+                          className={cn(
+                            buttonVariants({ variant: 'outline', size: 'sm' }),
+                            'w-full cursor-pointer'
+                          )}
+                        >
                           맞춤 절세 상담 →
-                        </Button>
+                        </div>
                       }
                     />
                   </CardContent>
@@ -490,17 +497,15 @@ const TaxStrategyPage = () => {
                         </div>
 
                         <div className="flex gap-2">
-                          <Button
-                            asChild
-                            className={`flex-1 bg-${strategy.color}-600 hover:bg-${strategy.color}-700 dark:bg-${strategy.color}-600 dark:hover:bg-${strategy.color}-700 text-white`}
-                            size="sm"
+                          <Link
+                            href={`/solutions/${strategy.title.replace(/\s+/g, '-').toLowerCase()}`}
+                            className={cn(
+                              buttonVariants({ size: 'sm' }),
+                              `flex-1 bg-${strategy.color}-600 hover:bg-${strategy.color}-700 dark:bg-${strategy.color}-600 dark:hover:bg-${strategy.color}-700 text-white`
+                            )}
                           >
-                            <Link
-                              href={`/solutions/${strategy.title.replace(/\s+/g, '-').toLowerCase()}`}
-                            >
-                              자세히 보기
-                            </Link>
-                          </Button>
+                            자세히 보기
+                          </Link>
                           <CalComPopup
                             buttonText="상담"
                             variant="outline"
@@ -508,9 +513,14 @@ const TaxStrategyPage = () => {
                             className={`border-${strategy.color}-200 dark:border-${strategy.color}-700 text-${strategy.color}-700 dark:text-${strategy.color}-300 hover:bg-${strategy.color}-50 dark:hover:bg-${strategy.color}-900/30`}
                             eventType="consultation"
                             trigger={
-                              <Button variant="outline" size="sm">
+                              <div
+                                className={cn(
+                                  buttonVariants({ variant: 'outline', size: 'sm' }),
+                                  'cursor-pointer'
+                                )}
+                              >
                                 상담 →
-                              </Button>
+                              </div>
                             }
                           />
                         </div>
@@ -800,16 +810,16 @@ const TaxStrategyPage = () => {
 
                           {/* 액션 버튼 */}
                           <div className="flex gap-2 pt-4 border-t">
-                            <Button
-                              asChild
-                              className="flex-1 bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-700 text-white"
-                              size="sm"
+                            <Link
+                              href={`/business-succession`}
+                              className={cn(
+                                buttonVariants({ variant: 'default', size: 'sm' }),
+                                'flex-1 bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-700 text-white'
+                              )}
                             >
-                              <Link href={`/business-succession`}>
-                                자세한 정보
-                                <ArrowRight className="ml-1 h-4 w-4" />
-                              </Link>
-                            </Button>
+                              자세한 정보
+                              <ArrowRight className="ml-1 h-4 w-4" />
+                            </Link>
                             <CalComPopup
                               buttonText="승계 상담"
                               variant="outline"
@@ -817,9 +827,14 @@ const TaxStrategyPage = () => {
                               className="border-purple-200 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30"
                               eventType="consultation"
                               trigger={
-                                <Button variant="outline" size="sm">
-                                  승계 상담 →
-                                </Button>
+                                <div
+                                  className={cn(
+                                    buttonVariants({ variant: 'outline', size: 'sm' }),
+                                    'cursor-pointer'
+                                  )}
+                                >
+                                  맞춤 상담 신청
+                                </div>
                               }
                             />
                           </div>
@@ -1135,29 +1150,28 @@ const TaxStrategyPage = () => {
                 size="lg"
                 eventType="consultation"
                 trigger={
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold px-8 py-4 shadow-xl"
+                  <div
+                    className={cn(
+                      buttonVariants({ size: 'lg' }),
+                      'bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold px-8 py-4 shadow-xl cursor-pointer'
+                    )}
                   >
                     무료 절세 진단 받기 (30분 상담)
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
+                  </div>
                 }
               />
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className="border-primary/60 text-primary hover:bg-primary/10 font-bold px-8 py-4"
+              <Link
+                href="http://pf.kakao.com/_gsxkxdG/chat"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'border-primary/60 text-primary hover:bg-primary/10 font-bold px-8 py-4'
+                )}
               >
-                <Link
-                  href="http://pf.kakao.com/_gsxkxdG/chat"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  카카오톡 간편 상담
-                </Link>
-              </Button>
+                카카오톡 간편 상담
+              </Link>
             </div>
 
             <div className="text-sm text-muted-foreground mt-6 space-y-1">
@@ -1230,28 +1244,27 @@ const TaxStrategyPage = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  size="lg"
-                  className="px-8 py-4 text-lg font-bold bg-blue-600 hover:bg-blue-700"
-                  asChild
+                <Link
+                  href="/ceo-checklist"
+                  className={cn(
+                    buttonVariants({ variant: 'default', size: 'lg' }),
+                    "px-8 py-4 text-lg font-bold bg-blue-600 hover:bg-blue-700"
+                  )}
                 >
-                  <Link href="/ceo-checklist">
-                    <FileText className="h-5 w-5 mr-2" />
-                    CEO 체크리스트 진단하기
-                  </Link>
-                </Button>
+                  <FileText className="h-5 w-5 mr-2" />
+                  CEO 체크리스트 진단하기
+                </Link>
 
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="px-8 py-4 text-lg font-bold"
-                  asChild
+                <Link
+                  href="/ceo-checklist#succession"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    "px-8 py-4 text-lg font-bold"
+                  )}
                 >
-                  <Link href="/ceo-checklist#succession">
-                    승계 준비도 확인하기
-                    <ArrowRight className="h-5 w-5 ml-2" />
-                  </Link>
-                </Button>
+                  승계 준비도 확인하기
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Link>
               </div>
 
               <p className="text-sm text-muted-foreground mt-6">

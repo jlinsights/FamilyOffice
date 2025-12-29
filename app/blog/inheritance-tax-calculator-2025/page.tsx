@@ -1,26 +1,27 @@
 import {
-  ArrowRight,
-  Calculator,
-  CheckCircle2,
-  DollarSign,
-  FileText,
-  Shield,
-  TrendingDown,
-  Users,
+    ArrowRight,
+    Calculator,
+    CheckCircle2,
+    DollarSign,
+    FileText,
+    Shield,
+    TrendingDown,
+    Users,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -149,17 +150,16 @@ export default function InheritanceTaxCalculator2025Page() {
                     2025년 최신 세율 자동 적용, 3분이면 결과 확인
                   </p>
                 </div>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="secondary"
-                  className="whitespace-nowrap"
+                <Link
+                  href="/calculators/inheritance-tax"
+                  className={cn(
+                    buttonVariants({ size: 'lg', variant: 'secondary' }),
+                    'whitespace-nowrap'
+                  )}
                 >
-                  <Link href="/calculators/inheritance-tax">
-                    <Calculator className="mr-2 h-5 w-5" />
-                    무료 계산 시작
-                  </Link>
-                </Button>
+                  <Calculator className="mr-2 h-5 w-5" />
+                  무료 계산 시작
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -394,18 +394,26 @@ export default function InheritanceTaxCalculator2025Page() {
                     3분이면 내 상속세를 무료로 계산할 수 있습니다
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button asChild size="lg">
-                      <Link href="/calculators/inheritance-tax">
-                        <Calculator className="mr-2 h-5 w-5" />
-                        무료 상속세 계산기
-                      </Link>
-                    </Button>
-                    <Button asChild size="lg" variant="outline">
-                      <Link href="/contact">
-                        <Users className="mr-2 h-5 w-5" />
-                        전문가 상담 신청
-                      </Link>
-                    </Button>
+                    <Link
+                      href="/calculators/inheritance-tax"
+                      className={cn(
+                        buttonVariants({ size: 'lg', variant: 'secondary' }),
+                        'bg-white text-blue-600 hover:bg-blue-50'
+                      )}
+                    >
+                      <Calculator className="mr-2 h-5 w-5" />
+                      2025년 기준 무료 계산하기
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className={cn(
+                        buttonVariants({ size: 'lg', variant: 'outline' }),
+                        'border-white text-white hover:bg-white/10 whitespace-nowrap'
+                      )}
+                    >
+                      <Users className="mr-2 h-5 w-5" />
+                      전문가 상담
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
@@ -455,16 +463,12 @@ export default function InheritanceTaxCalculator2025Page() {
                   <p className="text-sm text-muted-foreground mb-4">
                     상속세 신고부터 절세 전략까지 전문가 1:1 컨설팅
                   </p>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
+                  <Link
+                    href="/wealth-consulting"
+                    className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
                   >
-                    <Link href="/inheritance-gift-tax">
-                      자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                    자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
               <Card>
@@ -476,16 +480,12 @@ export default function InheritanceTaxCalculator2025Page() {
                   <p className="text-sm text-muted-foreground mb-4">
                     5-10년 장기 계획으로 세금 부담 최소화하는 승계 전략
                   </p>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
+                  <Link
+                    href="/business-succession-strategy"
+                    className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
                   >
-                    <Link href="/business-succession-strategy">
-                      자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                    자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
               <Card>
@@ -497,16 +497,12 @@ export default function InheritanceTaxCalculator2025Page() {
                   <p className="text-sm text-muted-foreground mb-4">
                     법인세, 소득세, 상속세 통합 절세 솔루션
                   </p>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
+                  <Link
+                    href="/tax-strategy"
+                    className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
                   >
-                    <Link href="/tax-strategy">
-                      자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                    자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
             </div>

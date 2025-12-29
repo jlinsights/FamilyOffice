@@ -1,29 +1,28 @@
 import {
-  ArrowRight,
-  Building2,
-  Calculator,
-  CheckCircle2,
-  Clock,
-  FileText,
-  Lightbulb,
-  Scale,
-  Shield,
-  TrendingUp,
-  Users,
+    Building2,
+    Calculator,
+    CheckCircle2,
+    Clock,
+    FileText,
+    Lightbulb,
+    Shield,
+    TrendingUp,
+    Users
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -134,17 +133,16 @@ export default function BusinessSuccessionTaxStrategyPage() {
               <p className="text-blue-50 mb-6">
                 우리 회사 지분 가치로 상속세를 미리 계산해보세요
               </p>
-              <Button
-                asChild
-                size="lg"
-                variant="secondary"
-                className="bg-white text-blue-600 hover:bg-blue-50"
+              <Link
+                href="/calculators/inheritance-tax"
+                className={cn(
+                  buttonVariants({ size: 'lg', variant: 'secondary' }),
+                  'bg-white text-blue-600 hover:bg-blue-50'
+                )}
               >
-                <Link href="/calculators/inheritance-tax">
-                  <Calculator className="mr-2 h-5 w-5" />
-                  무료 계산 시작하기
-                </Link>
-              </Button>
+                <Calculator className="mr-2 h-5 w-5" />
+                무료 계산 시작하기
+              </Link>
             </div>
           </div>
         </section>
@@ -449,12 +447,13 @@ export default function BusinessSuccessionTaxStrategyPage() {
                         ))}
                       </ul>
                       {step.action && (
-                        <Button asChild variant="outline" className="w-full">
-                          <Link href={step.action.href}>
-                            <Calculator className="mr-2 h-4 w-4" />
-                            {step.action.text}
-                          </Link>
-                        </Button>
+                        <Link
+                          href={step.action.href}
+                          className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
+                        >
+                          <Calculator className="mr-2 h-4 w-4" />
+                          {step.action.text}
+                        </Link>
                       )}
                     </CardContent>
                   </Card>
@@ -556,20 +555,22 @@ export default function BusinessSuccessionTaxStrategyPage() {
                   <br />
                   맞춤형 절세 로드맵을 받아보세요
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild size="lg">
-                    <Link href="/calculators/inheritance-tax">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link
+                      href="/calculators/inheritance-tax"
+                      className={buttonVariants({ size: 'lg' })}
+                    >
                       <Calculator className="mr-2 h-5 w-5" />
                       무료 상속세 계산하기
                     </Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline">
-                    <Link href="/contact">
+                    <Link
+                      href="/contact"
+                      className={buttonVariants({ size: 'lg', variant: 'outline' })}
+                    >
                       <Users className="mr-2 h-5 w-5" />
                       가업승계 전문가 상담
                     </Link>
-                  </Button>
-                </div>
+                  </div>
               </CardContent>
             </Card>
           </div>
@@ -651,28 +652,26 @@ export default function BusinessSuccessionTaxStrategyPage() {
                 기업의 지속가능성과 가족의 미래를 지키세요
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-                <Button
-                  asChild
-                  size="lg"
-                  variant="secondary"
-                  className="bg-white text-blue-600 hover:bg-blue-50"
+                <Link
+                  href="/calculators/inheritance-tax"
+                  className={cn(
+                    buttonVariants({ size: 'lg', variant: 'secondary' }),
+                    'bg-white text-blue-600 hover:bg-blue-50'
+                  )}
                 >
-                  <Link href="/calculators/inheritance-tax">
-                    <Calculator className="mr-2 h-5 w-5" />
-                    상속세 무료 계산
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/10"
+                  <Calculator className="mr-2 h-5 w-5" />
+                  상속세 무료 계산
+                </Link>
+                <Link
+                  href="/contact"
+                  className={cn(
+                    buttonVariants({ size: 'lg', variant: 'outline' }),
+                    'border-white text-white hover:bg-white/10'
+                  )}
                 >
-                  <Link href="/contact">
-                    <Users className="mr-2 h-5 w-5" />
-                    가업승계 전문가 상담
-                  </Link>
-                </Button>
+                  <Users className="mr-2 h-5 w-5" />
+                  가업승계 전문가 상담
+                </Link>
               </div>
               <p className="text-sm text-blue-100">
                 ☎️ 0502-5550-8700 | 20년 경력 가업승계 전문가 직접 상담

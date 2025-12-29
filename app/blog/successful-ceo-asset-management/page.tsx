@@ -1,17 +1,20 @@
 import {
+  ArrowRight,
   Award,
   Building2,
+  Calculator,
   CheckCircle2,
   FileCheck,
   Shield,
   TrendingUp,
+  Users,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -19,6 +22,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -129,9 +133,16 @@ export default function SuccessfulCEOAssetManagementPage() {
                   <Award className="mr-2 h-4 w-4" />
                   실전 활용 가능
                 </div>
-              </div>
+                <Link
+                href="/contact"
+                className={cn(buttonVariants({ size: 'lg' }), 'w-full')}
+              >
+                <Users className="mr-2 h-5 w-5" />
+                전문가 상담 신청
+              </Link>
             </div>
           </div>
+        </div>
         </section>
 
         {/* Introduction */}
@@ -306,12 +317,13 @@ export default function SuccessfulCEOAssetManagementPage() {
                 <p className="text-muted-foreground mb-4">
                   나머지 5가지 전략은 전문가 상담을 통해 맞춤형으로 안내드립니다
                 </p>
-                <Button asChild size="lg">
-                  <Link href="/contact">
-                    <Award className="mr-2 h-5 w-5" />
-                    CEO 자산관리 무료 상담 신청
-                  </Link>
-                </Button>
+                <Link
+                  href="/contact"
+                  className={buttonVariants({ size: 'lg' })}
+                >
+                  <Award className="mr-2 h-5 w-5" />
+                  CEO 자산관리 무료 상담 신청
+                </Link>
               </div>
             </div>
           </div>
@@ -359,17 +371,25 @@ export default function SuccessfulCEOAssetManagementPage() {
                   최적의 자산관리 전략을 제시합니다
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild size="lg" variant="secondary">
-                    <Link href="/wealth-consulting">자산관리 서비스 보기</Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20"
+                  <Link
+                    href="/wealth-consulting"
+                    className={buttonVariants({ size: 'lg', variant: 'secondary' })}
                   >
-                    <Link href="/contact">무료 상담 신청</Link>
-                  </Button>
+                    자산관리 서비스 보기
+                  </Link>
+                <Link
+                  href="/calculators/inheritance-tax"
+                  className={buttonVariants({ size: 'lg', variant: 'outline' })}
+                >
+                  <Calculator className="mr-2 h-5 w-5" />
+                  상속세 무료 계산
+                </Link>
+                  <Link
+                    href="/contact"
+                    className={cn(buttonVariants({ size: 'lg', variant: 'outline' }), "bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20")}
+                  >
+                    무료 상담 신청
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -391,9 +411,12 @@ export default function SuccessfulCEOAssetManagementPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     100억원 이상 자산가를 위한 전문 자산관리 전략
                   </p>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href="/wealth-consulting">자세히 보기</Link>
-                  </Button>
+                  <Link
+                    href="/wealth-consulting"
+                    className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                  >
+                    자세히 보기
+                  </Link>
                 </CardContent>
               </Card>
               <Card>
@@ -404,11 +427,12 @@ export default function SuccessfulCEOAssetManagementPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     5-10년 장기 계획이 필요한 가업승계 완벽 가이드
                   </p>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href="/business-succession-strategy">
-                      자세히 보기
-                    </Link>
-                  </Button>
+                  <Link
+                  href="/calculators/inheritance-tax"
+                  className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                >
+                  계산하기 <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
                 </CardContent>
               </Card>
               <Card>
@@ -419,9 +443,12 @@ export default function SuccessfulCEOAssetManagementPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     법인세, 소득세, 상속세 통합 절세 전략
                   </p>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href="/tax-strategy">자세히 보기</Link>
-                  </Button>
+                  <Link
+                    href="/tax-strategy"
+                    className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                  >
+                    자세히 보기
+                  </Link>
                 </CardContent>
               </Card>
             </div>

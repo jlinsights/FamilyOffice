@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from 'react';
 
+import Link from 'next/link';
+
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 
@@ -146,9 +148,12 @@ export function SelfCheckSuccession() {
 
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <CalComPopup buttonText={`권장 플랜 상담 (${tier})`} size="lg" />
-          <Button asChild variant="outline">
-            <a href="/inheritance-gift-tax">세무/승계 가이드 보기</a>
-          </Button>
+          <Link
+            href="/inheritance-gift-tax"
+            className={buttonVariants({ variant: 'outline' })}
+          >
+            세무/승계 가이드 보기
+          </Link>
         </div>
       </CardContent>
     </Card>

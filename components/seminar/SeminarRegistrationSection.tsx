@@ -1,17 +1,17 @@
 'use client';
 
 import {
-  ArrowRight,
-  Calendar,
-  CheckCircle,
-  Clock,
-  CreditCard,
-  Gift,
-  Mail,
-  Phone,
-  Star,
-  UserPlus,
-  Users,
+    ArrowRight,
+    Calendar,
+    CheckCircle,
+    Clock,
+    CreditCard,
+    Gift,
+    Mail,
+    Phone,
+    Star,
+    UserPlus,
+    Users,
 } from 'lucide-react';
 
 import { useEffect } from 'react';
@@ -20,8 +20,9 @@ import dynamic from 'next/dynamic';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 // Cal.com 컴포넌트를 동적으로 import
 const Cal = dynamic(
@@ -217,25 +218,22 @@ export default function SeminarRegistrationSection() {
                               </p>
                             </div>
                           </div>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="group/btn dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700"
-                            asChild
+                          <a
+                            href={method.href}
+                            className={cn(
+                              buttonVariants({ variant: 'outline', size: 'sm' }),
+                              'group/btn dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700'
+                            )}
+                            {...(method.href.startsWith('http')
+                              ? {
+                                  target: '_blank',
+                                  rel: 'noopener noreferrer',
+                                }
+                              : {})}
                           >
-                            <a
-                              href={method.href}
-                              {...(method.href.startsWith('http')
-                                ? {
-                                    target: '_blank',
-                                    rel: 'noopener noreferrer',
-                                  }
-                                : {})}
-                            >
-                              {method.action}
-                              <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                            </a>
-                          </Button>
+                            {method.action}
+                            <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                          </a>
                         </div>
                       </CardContent>
                     </Card>

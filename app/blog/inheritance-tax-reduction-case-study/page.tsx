@@ -1,28 +1,29 @@
 import {
-  ArrowRight,
-  Building2,
-  Calculator,
-  CheckCircle2,
-  DollarSign,
-  FileText,
-  Lightbulb,
-  ShieldCheck,
-  TrendingDown,
-  Users,
+    ArrowRight,
+    Building2,
+    Calculator,
+    CheckCircle2,
+    DollarSign,
+    FileText,
+    Lightbulb,
+    ShieldCheck,
+    TrendingDown,
+    Users,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -155,17 +156,16 @@ export default function InheritanceTaxReductionCaseStudy() {
               <p className="text-emerald-50 mb-6">
                 3분 무료 계산으로 맞춤 절세 전략을 확인하세요
               </p>
-              <Button
-                asChild
-                size="lg"
-                variant="secondary"
-                className="bg-white text-emerald-600 hover:bg-emerald-50"
+              <Link
+                href="/calculators/inheritance-tax"
+                className={cn(
+                  buttonVariants({ size: 'lg', variant: 'secondary' }),
+                  'bg-white text-emerald-600 hover:bg-emerald-50'
+                )}
               >
-                <Link href="/calculators/inheritance-tax">
-                  <Calculator className="mr-2 h-5 w-5" />
-                  무료 상속세 계산하기
-                </Link>
-              </Button>
+                <Calculator className="mr-2 h-5 w-5" />
+                무료 상속세 계산하기
+              </Link>
             </div>
           </div>
         </section>
@@ -395,12 +395,13 @@ export default function InheritanceTaxReductionCaseStudy() {
                   <br />
                   먼저 현재 예상 상속세를 확인하세요
                 </p>
-                <Button asChild size="lg">
-                  <Link href="/calculators/inheritance-tax">
-                    <Calculator className="mr-2 h-5 w-5" />
-                    3분 만에 무료 계산하기
-                  </Link>
-                </Button>
+                <Link
+                  href="/calculators/inheritance-tax"
+                  className={buttonVariants({ size: 'lg' })}
+                >
+                  <Calculator className="mr-2 h-5 w-5" />
+                  3분 만에 무료 계산하기
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -742,11 +743,12 @@ export default function InheritanceTaxReductionCaseStudy() {
                           </div>
                         </div>
                         {item.link && (
-                          <Button asChild size="sm" variant="outline">
-                            <Link href={item.link}>
-                              시작하기 <ArrowRight className="ml-1 h-4 w-4" />
-                            </Link>
-                          </Button>
+                          <Link
+                            href={item.link}
+                            className={buttonVariants({ size: 'sm', variant: 'outline' })}
+                          >
+                            시작하기 <ArrowRight className="ml-1 h-4 w-4" />
+                          </Link>
                         )}
                       </div>
                     ))}
@@ -770,28 +772,26 @@ export default function InheritanceTaxReductionCaseStudy() {
                 지금 바로 무료 계산으로 시작하세요
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  asChild
-                  size="lg"
-                  variant="secondary"
-                  className="bg-white text-emerald-600 hover:bg-emerald-50"
+                <Link
+                  href="/calculators/inheritance-tax"
+                  className={cn(
+                    buttonVariants({ size: 'lg', variant: 'secondary' }),
+                    'bg-white text-emerald-600 hover:bg-emerald-50'
+                  )}
                 >
-                  <Link href="/calculators/inheritance-tax">
-                    <Calculator className="mr-2 h-5 w-5" />
-                    무료 상속세 계산하기
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/10"
+                  <Calculator className="mr-2 h-5 w-5" />
+                  무료 상속세 계산하기
+                </Link>
+                <Link
+                  href="/contact"
+                  className={cn(
+                    buttonVariants({ size: 'lg', variant: 'outline' }),
+                    'border-white text-white hover:bg-white/10'
+                  )}
                 >
-                  <Link href="/contact">
-                    <Users className="mr-2 h-5 w-5" />
-                    전문가 상담 신청
-                  </Link>
-                </Button>
+                  <Users className="mr-2 h-5 w-5" />
+                  전문가 상담 신청
+                </Link>
               </div>
               <p className="text-sm text-emerald-100 mt-6">
                 ☎️ 0502-5550-8700 | 20년 경력 세무 전문가가 직접 상담합니다

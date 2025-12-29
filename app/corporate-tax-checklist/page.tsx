@@ -2,14 +2,14 @@
 
 import { motion } from 'framer-motion';
 import {
-  Calculator,
-  CheckCircle2,
-  Clock,
-  Download,
-  FileText,
-  Shield,
-  Target,
-  TrendingUp,
+    Calculator,
+    CheckCircle2,
+    Clock,
+    Download,
+    FileText,
+    Shield,
+    Target,
+    TrendingUp,
 } from 'lucide-react';
 
 import React from 'react';
@@ -17,11 +17,12 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -412,14 +413,15 @@ const CorporateTaxChecklistPage = () => {
                 buttonText="전문가 무료 상담 신청"
                 eventType="consultation"
               />
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-full px-8 py-6 bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"
-                asChild
+              <Link
+                href="#checklist-start"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'rounded-full px-8 py-6 bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm'
+                )}
               >
-                <Link href="#checklist-start">체크리스트 시작하기</Link>
-              </Button>
+                체크리스트 시작하기
+              </Link>
             </motion.div>
           </div>
         </section>

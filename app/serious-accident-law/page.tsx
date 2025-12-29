@@ -1,21 +1,21 @@
 'use client';
 
 import {
-  AlertTriangle,
-  Building,
-  CheckCircle,
-  Clock,
-  Gavel,
-  HardHat,
-  Heart,
-  Info,
-  Phone,
-  Scale,
-  Shield,
-  Star,
-  Target,
-  Users,
-  Zap,
+    AlertTriangle,
+    Building,
+    CheckCircle,
+    Clock,
+    Gavel,
+    HardHat,
+    Heart,
+    Info,
+    Phone,
+    Scale,
+    Shield,
+    Star,
+    Target,
+    Users,
+    Zap,
 } from 'lucide-react';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -23,8 +23,9 @@ import { useCallback, useEffect, useState } from 'react';
 import Script from 'next/script';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
@@ -326,16 +327,15 @@ export default function SeriousAccidentLawPage() {
                 size="lg"
                 className="font-bold shadow-lg px-8 py-4 text-lg bg-red-600 hover:bg-red-700"
               />
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-bold shadow-lg px-8 py-4 text-lg"
-                asChild
+              <a
+                href="tel:0502-5550-8700"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'font-bold shadow-lg px-8 py-4 text-lg'
+                )}
               >
-                <a href="tel:0502-5550-8700">
-                  <Phone className="mr-2 h-5 w-5" />☎ 0502-5550-8700
-                </a>
-              </Button>
+                <Phone className="mr-2 h-5 w-5" />☎ 0502-5550-8700
+              </a>
               <Button
                 variant="outline"
                 size="lg"
@@ -814,11 +814,12 @@ export default function SeriousAccidentLawPage() {
                       variant="default"
                       size="lg"
                     />
-                    <Button variant="outline" size="lg" asChild>
-                      <a href="tel:0502-5550-8700">
-                        <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
-                      </a>
-                    </Button>
+                    <a
+                      href="tel:0502-5550-8700"
+                      className={buttonVariants({ variant: 'outline', size: 'lg' })}
+                    >
+                      <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
+                    </a>
                   </div>
                 </div>
               </div>
@@ -870,16 +871,15 @@ export default function SeriousAccidentLawPage() {
                   size="lg"
                   className="bg-white text-red-600 hover:bg-gray-100"
                 />
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-white/10 border-white/20 hover:bg-white/20 text-white"
-                  asChild
+                <a
+                  href="tel:0502-5550-8700"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    'bg-white/10 border-white/20 hover:bg-white/20 text-white'
+                  )}
                 >
-                  <a href="tel:0502-5550-8700">
-                    <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
-                  </a>
-                </Button>
+                  <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
+                </a>
               </div>
 
               <p className="text-xs opacity-75 mt-6">

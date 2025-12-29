@@ -12,6 +12,7 @@ interface CalComPopupProps {
   size?: 'default' | 'sm' | 'lg' | 'icon';
   className?: string;
   eventType?: string;
+  trigger?: React.ReactNode;
 }
 
 export function CalComPopup({
@@ -20,6 +21,7 @@ export function CalComPopup({
   size = 'default',
   className,
   eventType = 'consultation',
+  trigger,
 }: CalComPopupProps) {
   // Cal.com 통합이 완료될 때까지 임시로 연락처 페이지로 이동
   const handleClick = () => {
@@ -31,8 +33,14 @@ export function CalComPopup({
       className={cn(buttonVariants({ variant, size, className }))}
       onClick={handleClick}
     >
-      <Calendar className="mr-2 h-4 w-4" />
-      {buttonText}
+      {trigger ? (
+        trigger
+      ) : (
+        <>
+          <Calendar className="mr-2 h-4 w-4" />
+          {buttonText}
+        </>
+      )}
     </button>
   );
 }

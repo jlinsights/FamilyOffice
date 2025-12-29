@@ -2,7 +2,7 @@
  * BMAD 키워드 추적 시스템
  * Google Analytics 4 연동 및 키워드별 성과 추적
  */
-import { BMAD_AI_KEYWORDS } from './ai-search-monitoring';
+import { BMAD_AI_KEYWORDS } from './ai/ai-search-monitoring';
 
 export type BMADCategory =
   | 'behavioral'

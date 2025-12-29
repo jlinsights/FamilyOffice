@@ -1,26 +1,27 @@
 import {
-  Building,
-  Calculator,
-  FileText,
-  HelpCircle,
-  Shield,
-  Users,
-  Wallet,
+    Building,
+    Calculator,
+    FileText,
+    HelpCircle,
+    Shield,
+    Users,
+    Wallet,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Header } from '@/components/header';
@@ -360,9 +361,12 @@ export default function FAQPage() {
                   <CardDescription>전문가와 판단 기준 정리</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button asChild className="w-full">
-                    <Link href="/structure-check">구조 점검 요청</Link>
-                  </Button>
+                  <Link
+                    href="/structure-check"
+                    className={cn(buttonVariants(), 'w-full')}
+                  >
+                    구조 점검 요청
+                  </Link>
                 </CardContent>
               </Card>
 
@@ -372,9 +376,12 @@ export default function FAQPage() {
                   <CardDescription>가이드북 무료 다운로드</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button asChild variant="outline" className="w-full">
-                    <Link href="/resources">자료실 방문</Link>
-                  </Button>
+                  <Link
+                    href="/resources"
+                    className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
+                  >
+                    자료실 방문
+                  </Link>
                 </CardContent>
               </Card>
 
@@ -384,9 +391,12 @@ export default function FAQPage() {
                   <CardDescription>CEO 대상 프리미엄 세미나</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button asChild variant="outline" className="w-full">
-                    <Link href="/seminar">세미나 일정</Link>
-                  </Button>
+                  <Link
+                    href="/seminar"
+                    className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
+                  >
+                    세미나 일정
+                  </Link>
                 </CardContent>
               </Card>
             </div>
@@ -407,15 +417,19 @@ export default function FAQPage() {
               부담 없이 문의해주세요.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link href="/structure-check">
-                  <HelpCircle className="mr-2 h-4 w-4" />
-                  구조 점검 요청
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <a href="tel:0502-5550-8700">☎ 0502-5550-8700</a>
-              </Button>
+              <Link
+                href="/structure-check"
+                className={buttonVariants({ size: 'lg' })}
+              >
+                <HelpCircle className="mr-2 h-4 w-4" />
+                구조 점검 요청
+              </Link>
+              <a
+                href="tel:0502-5550-8700"
+                className={buttonVariants({ size: 'lg', variant: 'outline' })}
+              >
+                ☎ 0502-5550-8700
+              </a>
             </div>
             <p className="mt-6 text-sm text-muted-foreground">
               평일 09:00-18:00 | 100% 비밀 보장

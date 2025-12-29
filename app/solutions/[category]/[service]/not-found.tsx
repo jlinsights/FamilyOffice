@@ -2,7 +2,8 @@ import { ArrowLeft, Search } from 'lucide-react';
 
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -34,24 +35,25 @@ export default function NotFound() {
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl rounded-full px-8"
-                asChild
+              <Link
+                href="/solutions"
+                className={cn(
+                  buttonVariants({ variant: 'default', size: 'lg' }),
+                  'bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl rounded-full px-8'
+                )}
               >
-                <Link href="/solutions">
-                  <ArrowLeft className="mr-2 h-5 w-5" />
-                  전체 솔루션 보기
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-slate-300 dark:border-slate-700 font-bold rounded-full px-8"
-                asChild
+                <ArrowLeft className="mr-2 h-5 w-5" />
+                전체 솔루션 보기
+              </Link>
+              <Link
+                href="/"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'border-2 border-slate-300 dark:border-slate-700 font-bold rounded-full px-8'
+                )}
               >
-                <Link href="/">홈으로 돌아가기</Link>
-              </Button>
+                홈으로 돌아가기
+              </Link>
             </div>
 
             {/* Popular Services */}

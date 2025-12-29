@@ -1,24 +1,24 @@
 'use client';
 
 import {
-  AlertCircle,
-  AlertTriangle,
-  ArrowRight,
-  Award,
-  BookOpen,
-  CheckCircle2,
-  Clock,
-  DollarSign,
-  Download,
-  FileCheck,
-  Phone,
-  Scale,
-  Shield,
-  Target,
-  TrendingUp,
-  UserCheck,
-  Users,
-  XCircle,
+    AlertCircle,
+    AlertTriangle,
+    ArrowRight,
+    Award,
+    BookOpen,
+    CheckCircle2,
+    Clock,
+    DollarSign,
+    Download,
+    FileCheck,
+    Phone,
+    Scale,
+    Shield,
+    Target,
+    TrendingUp,
+    UserCheck,
+    Users,
+    XCircle,
 } from 'lucide-react';
 
 import React from 'react';
@@ -26,17 +26,18 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -623,12 +624,13 @@ const HRLaborManagementPage = () => {
                 }
               />
 
-              <Button variant="outline" size="lg" asChild>
-                <Link href="#checklist">
-                  <FileCheck className="h-5 w-5 mr-2" />
-                  체크리스트 시작하기
-                </Link>
-              </Button>
+              <Link
+                href="#checklist"
+                className={buttonVariants({ variant: 'outline', size: 'lg' })}
+              >
+                <FileCheck className="h-5 w-5 mr-2" />
+                체크리스트 시작하기
+              </Link>
             </div>
           </div>
         </section>
@@ -971,17 +973,16 @@ const HRLaborManagementPage = () => {
                       }
                     />
 
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      asChild
-                      className="dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700"
+                    <Link
+                      href="/ceo-checklist"
+                      className={cn(
+                        buttonVariants({ variant: 'outline', size: 'lg' }),
+                        'dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700'
+                      )}
                     >
-                      <Link href="/ceo-checklist">
-                        <Target className="h-5 w-5 mr-2" />
-                        CEO 경영진단 보기
-                      </Link>
-                    </Button>
+                      <Target className="h-5 w-5 mr-2" />
+                      CEO 경영진단 보기
+                    </Link>
 
                     <Button
                       variant="outline"

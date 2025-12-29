@@ -27,8 +27,9 @@ import { useCallback, useEffect, useState } from 'react';
 import Script from 'next/script';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { AnimatedCounter } from '@/components/animated-counter';
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
@@ -410,16 +411,15 @@ export default function RecruitPage() {
                 size="lg"
                 className="font-bold shadow-lg px-8 py-4 text-lg"
               />
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-bold shadow-lg px-8 py-4 text-lg"
-                asChild
+              <a
+                href="tel:0502-5550-8700"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'font-bold shadow-lg px-8 py-4 text-lg'
+                )}
               >
-                <a href="tel:0502-5550-8700">
-                  <Phone className="mr-2 h-5 w-5" /> 0502-5550-8700
-                </a>
-              </Button>
+                <Phone className="mr-2 h-5 w-5" /> 0502-5550-8700
+              </a>
               <Button
                 variant="outline"
                 size="lg"
@@ -570,22 +570,18 @@ export default function RecruitPage() {
                           고객만족
                         </Badge>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        asChild
-                        className="hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 dark:hover:text-red-400"
+                      <a
+                        href="https://youtu.be/YK1IRyUrxtk"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          buttonVariants({ variant: 'ghost', size: 'sm' }),
+                          'hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 dark:hover:text-red-400'
+                        )}
                       >
-                        <a
-                          href="https://youtu.be/YK1IRyUrxtk"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1"
-                        >
-                          YouTube에서 보기
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      </Button>
+                        YouTube에서 보기
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -648,22 +644,18 @@ export default function RecruitPage() {
                           성장전략
                         </Badge>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        asChild
-                        className="hover:bg-green-50 hover:text-green-600 dark:hover:bg-green-900/20 dark:hover:text-green-400"
+                      <a
+                        href="https://open.spotify.com/episode/1ZUHuWpjQRdbwcPaZhqe5W?si=MHKRpQslQiWy-glvVDOsCw"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          buttonVariants({ variant: 'ghost', size: 'sm' }),
+                          'hover:bg-green-50 hover:text-green-600 dark:hover:bg-green-900/20 dark:hover:text-green-400'
+                        )}
                       >
-                        <a
-                          href="https://open.spotify.com/episode/1ZUHuWpjQRdbwcPaZhqe5W?si=MHKRpQslQiWy-glvVDOsCw"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1"
-                        >
-                          Spotify에서 듣기
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      </Button>
+                        Spotify에서 듣기
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -1191,11 +1183,12 @@ export default function RecruitPage() {
                       variant="default"
                       size="lg"
                     />
-                    <Button variant="outline" size="lg" asChild>
-                      <a href="tel:0502-5550-8700">
-                        <Phone className="mr-2 h-4 w-4" /> 0502-5550-8700
-                      </a>
-                    </Button>
+                    <a
+                      href="tel:0502-5550-8700"
+                      className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+                    >
+                      <Phone className="mr-2 h-4 w-4" /> 0502-5550-8700
+                    </a>
                   </div>
                 </div>
               </div>
@@ -1222,16 +1215,15 @@ export default function RecruitPage() {
                   variant="secondary"
                   size="lg"
                 />
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-white/10 border-white/20 hover:bg-white/20"
-                  asChild
+                <a
+                  href="tel:0502-5550-8700"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    'bg-white/10 border-white/20 hover:bg-white/20'
+                  )}
                 >
-                  <a href="tel:0502-5550-8700">
-                    <Phone className="mr-2 h-4 w-4" /> 0502-5550-8700
-                  </a>
-                </Button>
+                  <Phone className="mr-2 h-4 w-4" /> 0502-5550-8700
+                </a>
               </div>
             </div>
 
@@ -1255,17 +1247,16 @@ export default function RecruitPage() {
                   <Users className="mr-2 h-5 w-5" />
                   잡페어 참석하기
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="font-bold shadow-lg"
-                  asChild
+                <a
+                  href="mailto:recruit@familyoffices.vip"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    'font-bold shadow-lg'
+                  )}
                 >
-                  <a href="mailto:recruit@familyoffices.vip">
-                    <Mail className="mr-2 h-5 w-5" />
-                    이메일 문의
-                  </a>
-                </Button>
+                  <Mail className="mr-2 h-5 w-5" />
+                  이메일 문의
+                </a>
               </div>
             </div>
           </div>

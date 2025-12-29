@@ -22,7 +22,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
     Card,
     CardContent,
@@ -31,6 +31,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -376,17 +377,18 @@ export default function WeeklyBriefPage() {
                 </div>
 
                 <div className="text-center">
-                  <Button variant="outline" size="lg" asChild>
-                    <Link
-                      href="https://youtube.com/@FamilyOffice-S"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2"
-                    >
-                      전체 영상 보기
-                      <ChevronRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <Link
+                    href="https://youtube.com/@FamilyOffice-S"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      buttonVariants({ variant: 'outline', size: 'lg' }),
+                      'inline-flex items-center gap-2'
+                    )}
+                  >
+                    전체 영상 보기
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </TabsContent>
 
@@ -429,17 +431,18 @@ export default function WeeklyBriefPage() {
                 </div>
 
                 <div className="text-center">
-                  <Button variant="outline" size="lg" asChild>
-                    <Link
-                      href="https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2"
-                    >
-                      전체 에피소드 듣기
-                      <ChevronRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <Link
+                    href="https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      buttonVariants({ variant: 'outline', size: 'lg' }),
+                      'inline-flex items-center gap-2'
+                    )}
+                  >
+                    전체 에피소드 듣기
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </TabsContent>
             </Tabs>
@@ -793,12 +796,16 @@ export default function WeeklyBriefPage() {
                       정보로 경영 의사결정을 지원합니다.
                     </p>
                     <div className="space-y-4">
-                      <Button size="lg" className="w-full" asChild>
-                        <Link href="/structure-check#request-form">
-                          <Calendar className="mr-2 h-5 w-5" />
-                          구조 점검 요청
-                        </Link>
-                      </Button>
+                      <Link
+                        href="/structure-check#request-form"
+                        className={cn(
+                          buttonVariants({ variant: 'default', size: 'lg' }),
+                          'w-full'
+                        )}
+                      >
+                        <Calendar className="mr-2 h-5 w-5" />
+                        구조 점검 요청
+                      </Link>
                       <div className="text-center text-sm text-muted-foreground">
                         월 20분 한정 - 전문가의 구조 점검을 받아보세요
                       </div>

@@ -5,17 +5,18 @@
 
 'use client';
 
+import { cn } from '@/lib/utils';
 import { AlertTriangle, RefreshCw, Settings } from 'lucide-react';
 
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 
 /**
@@ -87,9 +88,12 @@ export default function MaintenancePage() {
               새로고침
             </Button>
 
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/api/health/env">시스템 상태 확인</Link>
-            </Button>
+            <Link
+              href="/api/health/env"
+              className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
+            >
+              시스템 상태 확인
+            </Link>
           </div>
 
           <div className="text-center text-sm text-muted-foreground">

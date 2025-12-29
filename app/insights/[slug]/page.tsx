@@ -12,7 +12,8 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -23,7 +24,7 @@ import {
     extractAIOptimizedKeywords,
     generateAIOptimizedFAQ,
     generateAIOptimizedMetadata,
-} from '@/lib/blog-ai-optimization';
+} from '@/lib/ai/blog-ai-optimization';
 import { blogPosts } from '@/lib/blog-data';
 import { env } from '@/lib/env';
 
@@ -431,16 +432,15 @@ export default async function BlogPostPage({
                     수석 컨설턴트
                   </div>
                 </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
-                  asChild
+                <Link
+                  href="/structure-check#request-form"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'sm' }),
+                    'border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                  )}
                 >
-                  <Link href="/structure-check#request-form">
-                    구조 점검 요청
-                  </Link>
-                </Button>
+                  구조 점검 요청
+                </Link>
               </div>
               <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.7]">
                 국내 대기업 및 글로벌 외국계 기업 출신으로 중견기업 자산관리
@@ -551,27 +551,26 @@ export default async function BlogPostPage({
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
-                asChild
+              <Link
+                href="https://newsletter.familyoffices.vip"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: 'default', size: 'lg' }),
+                  'w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors'
+                )}
               >
-                <Link
-                  href="https://newsletter.familyoffices.vip"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  뉴스레터 구독하기
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-3 rounded-lg font-medium"
-                asChild
+                뉴스레터 구독하기
+              </Link>
+              <Link
+                href="/structure-check#request-form"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'w-full sm:w-auto border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-3 rounded-lg font-medium'
+                )}
               >
-                <Link href="/structure-check#request-form">구조 점검 요청</Link>
-              </Button>
+                구조 점검 요청
+              </Link>
             </div>
 
             <p className="text-sm text-slate-500 dark:text-slate-600 mt-8">

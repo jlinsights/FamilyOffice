@@ -1,11 +1,11 @@
 import {
-  Award,
-  CheckCircle2,
-  DollarSign,
-  Shield,
-  Target,
-  TrendingUp,
-  Users,
+    Award,
+    CheckCircle2,
+    DollarSign,
+    Shield,
+    Target,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
@@ -13,13 +13,13 @@ import Link from 'next/link';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
@@ -159,12 +159,13 @@ export default function WealthConsultingPage() {
                 className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
                 eventType="consultation"
               />
-              <Button size="lg" variant="outline" asChild>
-                <Link href="#services">
-                  <TrendingUp className="mr-2 h-4 w-4" />
-                  서비스 상세보기
-                </Link>
-              </Button>
+              <Link
+                href="#services"
+                className={buttonVariants({ variant: 'outline', size: 'lg' })}
+              >
+                <TrendingUp className="mr-2 h-4 w-4" />
+                서비스 상세보기
+              </Link>
             </div>
             <Alert className="max-w-2xl mx-auto">
               <Shield className="h-4 w-4" />

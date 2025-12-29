@@ -1,28 +1,26 @@
 'use client';
 
 import {
-  ArrowRight,
-  Award,
-  BookOpen,
-  Building2,
-  Calendar,
-  CheckCircle2,
-  Clock,
-  Crown,
-  GraduationCap,
-  Handshake,
-  MapPin,
-  Target,
-  TrendingUp,
-  Users,
+    ArrowRight,
+    Award,
+    BookOpen,
+    Building2,
+    Calendar,
+    CheckCircle2,
+    Clock,
+    Crown,
+    GraduationCap,
+    Handshake,
+    MapPin,
+    Target,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -78,35 +76,28 @@ function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
           style={{ animationDelay: '500ms' }}
         >
-          <Button
-            size="lg"
-            asChild
-            className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
+          <Link
+            href="/structure-check"
+            className={cn(
+              buttonVariants({ size: 'lg' }),
+              'bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg'
+            )}
+            aria-label="구조 점검 요청"
           >
-            <Link
-              href="/structure-check"
-              className="flex items-center"
-              aria-label="구조 점검 요청"
-            >
-              구조 점검 요청
-              <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
-            </Link>
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            asChild
-            className="font-bold shadow-lg px-8 py-4 text-lg"
+            구조 점검 요청
+            <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
+          </Link>
+          <Link
+            href="#program-details"
+            className={cn(
+              buttonVariants({ size: 'lg', variant: 'outline' }),
+              'font-bold shadow-lg px-8 py-4 text-lg'
+            )}
+            aria-label="프로그램 상세 정보"
           >
-            <Link
-              href="#program-details"
-              className="flex items-center"
-              aria-label="프로그램 상세 정보"
-            >
-              <BookOpen className="mr-2 h-5 w-5" aria-hidden />
-              프로그램 상세 정보
-            </Link>
-          </Button>
+            <BookOpen className="mr-2 h-5 w-5" aria-hidden />
+            프로그램 상세 정보
+          </Link>
         </div>
 
         {/* 프로그램 이미지 */}
@@ -366,27 +357,25 @@ function CTASection() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <Button
-            size="lg"
-            variant="secondary"
-            asChild
-            className="font-bold shadow-lg px-8 py-4 text-lg"
+          <Link
+            href="/structure-check"
+            className={cn(
+              buttonVariants({ size: 'lg', variant: 'secondary' }),
+              'font-bold shadow-lg px-8 py-4 text-lg'
+            )}
           >
-            <Link href="/structure-check" className="flex items-center">
-              구조 점검 요청
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            asChild
-            className="font-bold shadow-lg px-8 py-4 text-lg border-white text-white hover:bg-white hover:text-primary"
+            구조 점검 요청
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+          <Link
+            href="tel:0502-5550-8700"
+            className={cn(
+              buttonVariants({ size: 'lg', variant: 'outline' }),
+              'font-bold shadow-lg px-8 py-4 text-lg border-white text-white hover:bg-white hover:text-primary'
+            )}
           >
-            <Link href="tel:0502-5550-8700" className="flex items-center">
-              전화 문의: 0502-5550-8700
-            </Link>
-          </Button>
+            전화 문의: 0502-5550-8700
+          </Link>
         </div>
 
         <p className="text-sm text-white/70">

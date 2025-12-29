@@ -1,24 +1,25 @@
 import {
-  ArrowRight,
-  Award,
-  Building,
-  Calculator,
-  CheckCircle,
-  Clock,
-  Heart,
-  Phone,
-  Shield,
-  Stethoscope,
-  TrendingUp,
-  User,
-  Users,
+    ArrowRight,
+    Award,
+    Building,
+    Calculator,
+    CheckCircle,
+    Clock,
+    Heart,
+    Phone,
+    Shield,
+    Stethoscope,
+    TrendingUp,
+    User,
+    Users,
 } from 'lucide-react';
 
 import { Metadata } from 'next';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -147,14 +148,15 @@ export default function HealthInsurancePage() {
                   className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
                   eventType="consultation"
                 />
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
-                  asChild
+                <a
+                  href="#services"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    'font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg'
+                  )}
                 >
-                  <a href="#services">서비스 알아보기</a>
-                </Button>
+                  서비스 알아보기
+                </a>
               </div>
             </div>
           </section>
@@ -617,14 +619,15 @@ export default function HealthInsurancePage() {
                       </Button>
                     }
                   />
-                  <Button size="lg" variant="outline" asChild>
-                    <a
-                      href="tel:0502-5550-8700"
-                      className="inline-flex items-center"
-                    >
-                      ☎︎ 0502-5550-8700
-                    </a>
-                  </Button>
+                  <a
+                    href="tel:0502-5550-8700"
+                    className={cn(
+                      buttonVariants({ size: 'lg', variant: 'outline' }),
+                      'inline-flex items-center'
+                    )}
+                  >
+                    ☎︎ 0502-5550-8700
+                  </a>
                 </div>
 
                 <div className="mt-8 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">

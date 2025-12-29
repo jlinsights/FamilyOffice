@@ -1,14 +1,14 @@
 'use client';
 
 import {
-  Brain,
-  ClipboardCheck,
-  Gauge,
-  Phone,
-  Search,
-  Shield,
-  Target,
-  TrendingUp,
+    Brain,
+    ClipboardCheck,
+    Gauge,
+    Phone,
+    Search,
+    Shield,
+    Target,
+    TrendingUp,
 } from 'lucide-react';
 
 // ... (previous imports)
@@ -18,13 +18,13 @@ import nextDynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -34,9 +34,9 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 import {
-  getAdminStats,
-  getStructureCheckRequests,
-  type StructureCheckRequest,
+    getAdminStats,
+    getStructureCheckRequests,
+    type StructureCheckRequest,
 } from './actions';
 
 // Dynamic imports for heavy dashboard components
@@ -322,9 +322,9 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <Button asChild>
-                      <Link href="/admin/consultations">상담 목록 보기</Link>
-                    </Button>
+                    <Link href="/admin/consultations" className={buttonVariants()}>
+                      상담 목록 보기
+                    </Link>
                   </div>
                 </CardContent>
               </Card>

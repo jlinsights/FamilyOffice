@@ -1,26 +1,27 @@
 import {
-  ArrowRight,
-  Award,
-  BarChart3,
-  Briefcase,
-  Building,
-  Calculator,
-  CheckCircle,
-  Coins,
-  Phone,
-  PiggyBank,
-  Shield,
-  Target,
-  TrendingUp,
-  User,
-  Users,
+    ArrowRight,
+    Award,
+    BarChart3,
+    Briefcase,
+    Building,
+    Calculator,
+    CheckCircle,
+    Coins,
+    Phone,
+    PiggyBank,
+    Shield,
+    Target,
+    TrendingUp,
+    User,
+    Users,
 } from 'lucide-react';
 
 import { Metadata } from 'next';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -149,14 +150,15 @@ export default function RetirementPensionPage() {
                   className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
                   eventType="consultation"
                 />
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
-                  asChild
+                <a
+                  href="#services"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    'font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg'
+                  )}
                 >
-                  <a href="#services">서비스 알아보기</a>
-                </Button>
+                  서비스 알아보기
+                </a>
               </div>
             </div>
           </section>
@@ -360,14 +362,15 @@ export default function RetirementPensionPage() {
                         className="w-full border-primary text-primary hover:bg-primary hover:text-white"
                         eventType="consultation"
                         trigger={
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full border-primary text-primary hover:bg-primary hover:text-white"
+                          <div
+                            className={cn(
+                              buttonVariants({ variant: 'outline', size: 'sm' }),
+                              'w-full border-primary text-primary hover:bg-primary hover:text-white cursor-pointer'
+                            )}
                           >
                             상담 신청
                             <ArrowRight className="ml-2 h-4 w-4" />
-                          </Button>
+                          </div>
                         }
                       />
                     </CardContent>
@@ -715,23 +718,26 @@ export default function RetirementPensionPage() {
                     className="bg-primary hover:bg-primary/90 text-white"
                     eventType="consultation"
                     trigger={
-                      <Button
-                        size="lg"
-                        className="bg-primary hover:bg-primary/90 text-white"
+                      <div
+                        className={cn(
+                          buttonVariants({ size: 'lg' }),
+                          'bg-primary hover:bg-primary/90 text-white cursor-pointer'
+                        )}
                       >
                         무료 퇴직연금 상담 신청
                         <ArrowRight className="ml-2 h-5 w-5" />
-                      </Button>
+                      </div>
                     }
                   />
-                  <Button size="lg" variant="outline" asChild>
-                    <a
-                      href="tel:0502-5550-8700"
-                      className="inline-flex items-center"
-                    >
-                      ☎︎ 0502-5550-8700
-                    </a>
-                  </Button>
+                  <a
+                    href="tel:0502-5550-8700"
+                    className={cn(
+                      buttonVariants({ size: 'lg', variant: 'outline' }),
+                      'inline-flex items-center'
+                    )}
+                  >
+                    ☎︎ 0502-5550-8700
+                  </a>
                 </div>
 
                 <div className="mt-8 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">

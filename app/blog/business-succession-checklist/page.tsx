@@ -1,27 +1,28 @@
 import {
-  ArrowRight,
-  Building2,
-  CheckCircle2,
-  Download,
-  FileCheck,
-  Shield,
-  Timer,
-  TrendingUp,
-  Users,
+    ArrowRight,
+    Building2,
+    CheckCircle2,
+    Download,
+    FileCheck,
+    Shield,
+    Timer,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -121,17 +122,19 @@ export default function BusinessSuccessionChecklistPage() {
                 무료 PDF 다운로드 제공
               </p>
               <div className="flex justify-center gap-4">
-                <Button asChild size="lg">
-                  <Link href="/contact">
-                    <Download className="mr-2 h-5 w-5" />
-                    무료 체크리스트 받기
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link href="/business-succession-strategy">
-                    전문가 상담 신청
-                  </Link>
-                </Button>
+                <Link
+                  href="/contact"
+                  className={buttonVariants({ size: 'lg' })}
+                >
+                  <Download className="mr-2 h-5 w-5" />
+                  무료 체크리스트 받기
+                </Link>
+                <Link
+                  href="/business-succession-strategy"
+                  className={buttonVariants({ size: 'lg', variant: 'outline' })}
+                >
+                  전문가 상담 신청
+                </Link>
               </div>
             </div>
           </div>
@@ -514,22 +517,25 @@ export default function BusinessSuccessionChecklistPage() {
                   가이업승계 성공률을 70%까지 높이세요
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild size="lg" variant="secondary">
-                    <Link href="/contact">
-                      <Download className="mr-2 h-5 w-5" />
-                      무료 PDF 다운로드
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20"
+                <Link
+                href="/contact"
+                className={cn(
+                  buttonVariants({ size: 'lg', variant: 'secondary' }),
+                  'bg-white text-violet-600 hover:bg-violet-50'
+                )}
+              >
+                <Download className="mr-2 h-5 w-5" />
+                체크리스트 무료 다운로드
+              </Link>
+                  <Link
+                    href="/business-succession-strategy"
+                    className={cn(
+                      buttonVariants({ size: 'lg', variant: 'outline' }),
+                      'bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20'
+                    )}
                   >
-                    <Link href="/business-succession-strategy">
-                      전문가 1:1 상담
-                    </Link>
-                  </Button>
+                    전문가 1:1 상담
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -578,16 +584,12 @@ export default function BusinessSuccessionChecklistPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     5-10년 장기 플랜 수립부터 실행까지 전문가가 함께합니다
                   </p>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
+                  <Link
+                    href="/business-succession-strategy"
+                    className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
                   >
-                    <Link href="/business-succession-strategy">
-                      자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                    자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
               <Card>
@@ -599,16 +601,12 @@ export default function BusinessSuccessionChecklistPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     가업상속공제 최대 600억원 활용 전략
                   </p>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
-                  >
-                    <Link href="/inheritance-gift-tax">
-                      자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <Link
+                  href="/calculators/inheritance-tax"
+                  className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                >
+                  계산하기 <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
                 </CardContent>
               </Card>
               <Card>
@@ -620,16 +618,12 @@ export default function BusinessSuccessionChecklistPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     기업 자산과 개인 자산을 통합 관리하는 전략
                   </p>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
-                  >
-                    <Link href="/wealth-consulting">
-                      자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <Link
+                  href="/tax-strategy"
+                  className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                >
+                  확인하기 <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
                 </CardContent>
               </Card>
             </div>

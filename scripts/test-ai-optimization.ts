@@ -3,12 +3,12 @@
  * 블로그 AI 최적화 기능 동작 검증
  */
 import {
-  generateAIOptimizedFAQ,
-  generateAIOptimizedMetadata,
-  extractAIOptimizedKeywords,
-  calculateAIOptimizationScore,
-  generateOptimizationRecommendations,
-} from '../lib/blog-ai-optimization';
+    calculateAIOptimizationScore,
+    extractAIOptimizedKeywords,
+    generateAIOptimizedFAQ,
+    generateAIOptimizedMetadata,
+    generateOptimizationRecommendations,
+} from '../lib/ai/blog-ai-optimization';
 import { blogPosts } from '../lib/blog-data';
 
 console.log('🤖 AI 최적화 시스템 테스트 시작\n');

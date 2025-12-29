@@ -10,9 +10,10 @@ import {
     Target,
 } from 'lucide-react';
 
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
@@ -164,16 +165,16 @@ export function DualPillarSection() {
         </div>
 
         <div className="text-center">
-          <Button
-            asChild
-            size="lg"
-            className="px-10 py-6 text-lg font-bold rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
+          <Link
+            href="/solutions"
+            className={cn(
+              buttonVariants({ size: 'lg' }),
+              'px-10 py-6 text-lg font-bold rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300'
+            )}
           >
-            <Link href="/solutions">
-              <Target className="h-5 w-5 mr-2" />
-              업종·규모별 맞춤 패키지 보기
-            </Link>
-          </Button>
+            <Target className="h-5 w-5 mr-2" />
+            업종·규모별 맞춤 패키지 보기
+          </Link>
         </div>
       </div>
     </section>

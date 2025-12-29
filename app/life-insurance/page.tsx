@@ -1,20 +1,20 @@
 'use client';
 
 import {
-  AlertTriangle,
-  Award,
-  Building,
-  Calculator,
-  CheckCircle,
-  Clock,
-  Crown,
-  DollarSign,
-  FileCheck,
-  Heart,
-  Shield,
-  Target,
-  TrendingUp,
-  Users,
+    AlertTriangle,
+    Award,
+    Building,
+    Calculator,
+    CheckCircle,
+    Clock,
+    Crown,
+    DollarSign,
+    FileCheck,
+    Heart,
+    Shield,
+    Target,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
 import { useState } from 'react';
@@ -22,9 +22,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
@@ -208,14 +209,15 @@ const LifeInsurancePage = () => {
                   size="lg"
                   className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
                 />
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="px-8 py-4 text-lg font-bold"
-                  asChild
+                <Link
+                  href="#comparison"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    'px-8 py-4 text-lg font-bold'
+                  )}
                 >
-                  <Link href="#comparison">설계 비교 보기</Link>
-                </Button>
+                  설계 비교 보기
+                </Link>
               </div>
 
               {/* 핵심 수치 */}
@@ -987,16 +989,15 @@ const LifeInsurancePage = () => {
                 size="lg"
                 className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
               />
-              <Button
-                size="lg"
-                variant="outline"
-                className="px-8 py-4 text-lg font-bold"
-                asChild
+              <Link
+                href="tel:0502-5550-8700"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'px-8 py-4 text-lg font-bold'
+                )}
               >
-                <Link href="tel:0502-5550-8700">
-                  📞 전화 상담 (0502-5550-8700)
-                </Link>
-              </Button>
+                📞 전화 상담 (0502-5550-8700)
+              </Link>
             </div>
 
             <div className="text-sm text-muted-foreground mt-6 space-y-1">

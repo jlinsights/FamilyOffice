@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import {
-  aiOptimizedFAQSystem,
-  faqSearchEngine,
-  BMAD_FAQ_CATEGORIES,
-  AI_FAQ_OPTIMIZATIONS,
-} from '@/lib/ai-faq-expansion';
+    AI_FAQ_OPTIMIZATIONS,
+    BMAD_FAQ_CATEGORIES,
+    aiOptimizedFAQSystem,
+    faqSearchEngine,
+} from '@/lib/ai/ai-faq-expansion';
 
 /**
  * AI 최적화 FAQ 시스템 API

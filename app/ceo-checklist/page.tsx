@@ -35,6 +35,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
@@ -759,17 +760,13 @@ const CEOChecklistPage = () => {
                         법인세와 소득세를 동시에 절감하는 통합 세무 전략을
                         수립하세요.
                       </p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full"
-                        asChild
+                      <Link
+                        href="/tax-strategy"
+                        className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
                       >
-                        <Link href="/tax-strategy">
-                          절세 전략 보기
-                          <ChevronRight className="h-4 w-4 ml-1" />
-                        </Link>
-                      </Button>
+                        절세 전략 보기
+                        <ChevronRight className="h-4 w-4 ml-1" />
+                      </Link>
                     </CardContent>
                   </Card>
 

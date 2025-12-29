@@ -15,7 +15,8 @@ import {
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
@@ -122,30 +123,27 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button
-                    size="lg"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl rounded-full px-8"
-                    asChild
+                  <Link
+                    href="/structure-check#request-form"
+                    className={cn(
+                      buttonVariants({ variant: 'default', size: 'lg' }),
+                      'bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl rounded-full px-8'
+                    )}
                   >
-                    <Link href="/structure-check#request-form">
-                      무료 구조 점검 신청
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-2 border-slate-300 dark:border-slate-700 font-bold rounded-full px-8"
-                    asChild
+                    무료 구조 점검 신청
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                  <Link
+                    href="http://pf.kakao.com/_gsxkxdG/chat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      buttonVariants({ variant: 'outline', size: 'lg' }),
+                      'border-2 border-slate-300 dark:border-slate-700 font-bold rounded-full px-8'
+                    )}
                   >
-                    <Link
-                      href="http://pf.kakao.com/_gsxkxdG/chat"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      카카오톡 상담
-                    </Link>
-                  </Button>
+                    카카오톡 상담
+                  </Link>
                 </div>
               </div>
             </div>
@@ -428,30 +426,27 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  size="lg"
-                  className="bg-white text-blue-900 hover:bg-blue-50 font-bold shadow-xl rounded-full px-8 py-6 text-lg border-none"
-                  asChild
+                <Link
+                  href="/structure-check#request-form"
+                  className={cn(
+                    buttonVariants({ variant: 'default', size: 'lg' }),
+                    'bg-white text-blue-900 hover:bg-blue-50 font-bold shadow-xl rounded-full px-8 py-6 text-lg border-none'
+                  )}
                 >
-                  <Link href="/structure-check#request-form">
-                    무료 구조 점검 신청
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full px-8 py-6 text-lg font-bold"
-                  asChild
+                  무료 구조 점검 신청
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+                <Link
+                  href="http://pf.kakao.com/_gsxkxdG/chat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    'border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full px-8 py-6 text-lg font-bold'
+                  )}
                 >
-                  <Link
-                    href="http://pf.kakao.com/_gsxkxdG/chat"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    카카오톡 간편 상담
-                  </Link>
-                </Button>
+                  카카오톡 간편 상담
+                </Link>
               </div>
             </div>
           </section>

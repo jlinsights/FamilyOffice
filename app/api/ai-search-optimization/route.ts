@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import {
-  AI_SEARCH_ENGINES,
-  BMAD_AI_KEYWORDS,
-  aiSearchMonitor,
-  generateAIOptimizedContent,
-  generateAIOptimizedFAQ,
-} from '@/lib/ai-search-monitoring';
+    AI_SEARCH_ENGINES,
+    BMAD_AI_KEYWORDS,
+    aiSearchMonitor,
+    generateAIOptimizedContent,
+    generateAIOptimizedFAQ,
+} from '@/lib/ai/ai-search-monitoring';
 
 /**
  * AI 검색엔진 최적화 API 엔드포인트

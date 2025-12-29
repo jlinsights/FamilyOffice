@@ -1,21 +1,21 @@
 'use client';
 
 import {
-  Award,
-  Building,
-  Calculator,
-  Calendar,
-  CheckCircle2,
-  ChevronRight,
-  Clock,
-  Crown,
-  Download,
-  Heart,
-  Info,
-  Phone,
-  Receipt,
-  Shield,
-  Users,
+    Award,
+    Building,
+    Calculator,
+    Calendar,
+    CheckCircle2,
+    ChevronRight,
+    Clock,
+    Crown,
+    Download,
+    Heart,
+    Info,
+    Phone,
+    Receipt,
+    Shield,
+    Users,
 } from 'lucide-react';
 
 import React from 'react';
@@ -23,16 +23,17 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
@@ -1087,19 +1088,21 @@ const InheritanceGiftTaxPage = () => {
                       }
                     />
 
-                    <Button variant="outline" size="lg" asChild>
-                      <Link href="/business-succession-strategy">
-                        <Crown className="h-5 w-5 mr-2" />
-                        가업승계 전략
-                      </Link>
-                    </Button>
+                    <Link
+                      href="/business-succession-strategy"
+                      className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+                    >
+                      <Crown className="h-5 w-5 mr-2" />
+                      가업승계 전략
+                    </Link>
 
-                    <Button variant="outline" size="lg" asChild>
-                      <Link href="/tax-strategy">
-                        <Calculator className="h-5 w-5 mr-2" />
-                        절세 전략 보기
-                      </Link>
-                    </Button>
+                    <Link
+                      href="/tax-strategy"
+                      className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+                    >
+                      <Calculator className="h-5 w-5 mr-2" />
+                      절세 전략 보기
+                    </Link>
 
                     <Button variant="outline" size="lg">
                       <Download className="h-5 w-5 mr-2" />

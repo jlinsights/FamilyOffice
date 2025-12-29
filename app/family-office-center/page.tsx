@@ -1,42 +1,43 @@
 'use client';
 
 import {
-  Award,
-  BookOpen,
-  Briefcase,
-  CheckCircle2,
-  Clock,
-  Crown,
-  Diamond,
-  Eye,
-  Gem,
-  Globe,
-  Infinity,
-  Landmark,
-  Lock,
-  Mountain,
-  Phone,
-  Shield,
-  Sparkles,
-  Star,
-  Target,
-  TrendingUp,
-  Users,
-  Zap,
+    Award,
+    BookOpen,
+    Briefcase,
+    CheckCircle2,
+    Clock,
+    Crown,
+    Diamond,
+    Eye,
+    Gem,
+    Globe,
+    Infinity,
+    Landmark,
+    Lock,
+    Mountain,
+    Phone,
+    Shield,
+    Sparkles,
+    Star,
+    Target,
+    TrendingUp,
+    Users,
+    Zap,
 } from 'lucide-react';
 
 import React from 'react';
 
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -386,17 +387,16 @@ const FamilyOfficeCenterPage = () => {
                 }
               />
 
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-8 py-4 border-2 border-amber-200 hover:bg-amber-50 rounded-2xl"
-                asChild
+              <Link
+                href="#services"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'text-lg px-8 py-4 border-2 border-amber-200 hover:bg-amber-50 rounded-2xl'
+                )}
               >
-                <Link href="#services">
-                  <BookOpen className="h-6 w-6 mr-2" />
-                  서비스 포트폴리오 보기
-                </Link>
-              </Button>
+                <BookOpen className="h-6 w-6 mr-2" />
+                서비스 포트폴리오 보기
+              </Link>
             </div>
           </div>
         </section>
@@ -837,17 +837,16 @@ const FamilyOfficeCenterPage = () => {
                 }
               />
 
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-10 py-4 border-2 border-white/20 text-white hover:bg-white/10 rounded-2xl backdrop-blur-sm"
-                asChild
+              <Link
+                href="/fp-center"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'text-lg px-10 py-4 border-2 border-white/20 text-white hover:bg-white/10 rounded-2xl backdrop-blur-sm'
+                )}
               >
-                <Link href="/fp-center">
-                  <Briefcase className="h-6 w-6 mr-2" />
-                  FP센터 보기
-                </Link>
-              </Button>
+                <Briefcase className="h-6 w-6 mr-2" />
+                FP센터 보기
+              </Link>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 text-blue-100">

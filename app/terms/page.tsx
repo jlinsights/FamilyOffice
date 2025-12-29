@@ -1,10 +1,11 @@
-import { FileText, ArrowLeft, Shield } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { ArrowLeft, FileText, Shield } from 'lucide-react';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -51,25 +52,26 @@ export default function TermsOfServicePage() {
               className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up"
               style={{ animationDelay: '400ms' }}
             >
-              <Button
-                variant="outline"
-                asChild
-                className="font-bold shadow-lg px-6 py-3"
+              <Link
+                href="/"
+                className={cn(
+                  buttonVariants({ variant: 'outline' }),
+                  'font-bold shadow-lg px-6 py-3'
+                )}
               >
-                <Link href="/">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  홈으로 돌아가기
-                </Link>
-              </Button>
-              <Button
-                asChild
-                className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-6 py-3"
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                홈으로 돌아가기
+              </Link>
+              <Link
+                href="/privacy"
+                className={cn(
+                  buttonVariants({ variant: 'default' }),
+                  'bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-6 py-3'
+                )}
               >
-                <Link href="/privacy">
-                  <Shield className="mr-2 h-4 w-4" />
-                  개인정보처리방침 보기
-                </Link>
-              </Button>
+                <Shield className="mr-2 h-4 w-4" />
+                개인정보처리방침 보기
+              </Link>
             </div>
           </div>
         </section>

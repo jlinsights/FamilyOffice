@@ -1,25 +1,27 @@
 'use client';
 
 import {
-    AlertCircle,
-    ArrowRight,
-    Briefcase,
-    Building,
-    CheckCircle,
-    Cpu,
-    Factory,
-    Hammer,
-    Medal,
-    Phone,
-    Shield,
-    Target,
-    TrendingUp,
-    Users,
+  AlertCircle,
+  ArrowRight,
+  Briefcase,
+  Building,
+  CheckCircle,
+  Cpu,
+  Factory,
+  Hammer,
+  Medal,
+  Phone,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
 
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { AnimatedCounter } from '@/components/animated-counter';
@@ -188,17 +190,16 @@ export default function AboutPageContent() {
                   </Button>
                 }
               />
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-bold px-8 py-6 text-lg shadow-md hover:shadow-lg rounded-full border-2 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
-                asChild
+              <Link
+                href="/solutions"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'font-bold px-8 py-6 text-lg shadow-md hover:shadow-lg rounded-full border-2 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                )}
               >
-                <Link href="/solutions">
-                  <Briefcase className="mr-2 h-5 w-5" />
-                  솔루션
-                </Link>
-              </Button>
+                <Briefcase className="mr-2 h-5 w-5" />
+                솔루션
+              </Link>
             </div>
           </div>
         </section>
@@ -657,14 +658,15 @@ export default function AboutPageContent() {
                         </Button>
                       }
                     />
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="px-8 py-6 text-lg font-bold border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full"
-                      asChild
+                    <Link
+                      href="/solutions"
+                      className={cn(
+                        buttonVariants({ variant: 'outline', size: 'lg' }),
+                        'px-8 py-6 text-lg font-bold border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full'
+                      )}
                     >
-                      <Link href="/solutions">서비스 자세히 보기</Link>
-                    </Button>
+                      서비스 자세히 보기
+                    </Link>
                   </div>
                 </div>
               </div>
