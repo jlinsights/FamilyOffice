@@ -2,11 +2,11 @@
 
 import { motion } from 'framer-motion';
 import {
-  ArrowRight,
-  BarChart3,
-  CheckCircle,
-  Download,
-  Phone,
+    ArrowRight,
+    BarChart3,
+    CheckCircle,
+    Download,
+    Phone,
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -183,7 +183,7 @@ export const QuizResults = ({ result, onRetry }: QuizResultsProps) => {
           다른 솔루션이 궁금하신가요?
         </p>
         <Link
-          href="/services"
+          href="/solutions"
           className="inline-flex items-center text-navy-700 dark:text-amber-400 hover:text-navy-900 dark:hover:text-amber-300 font-medium transition-colors group"
         >
           <span>전체 솔루션 카탈로그 보기</span>

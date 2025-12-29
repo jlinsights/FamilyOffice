@@ -338,6 +338,11 @@ const nextConfig = {
         destination: '/hr-labor-management',
         permanent: true,
       },
+      {
+        source: '/services',
+        destination: '/solutions',
+        permanent: true,
+      },
     ];
   },
 
