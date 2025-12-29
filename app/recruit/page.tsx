@@ -1,25 +1,25 @@
 'use client';
 
 import {
-    Award,
-    Briefcase,
-    Building,
-    CheckCircle,
-    Clock,
-    DollarSign,
-    ExternalLink,
-    FileText,
-    GraduationCap,
-    Headphones,
-    Heart,
-    Info,
-    Mail,
-    MapPin,
-    Phone,
-    Play,
-    Star,
-    TrendingUp,
-    Users,
+  Award,
+  Briefcase,
+  Building,
+  CheckCircle,
+  Clock,
+  DollarSign,
+  ExternalLink,
+  FileText,
+  GraduationCap,
+  Headphones,
+  Heart,
+  Info,
+  Mail,
+  MapPin,
+  Phone,
+  Play,
+  Star,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -417,7 +417,7 @@ export default function RecruitPage() {
                 asChild
               >
                 <a href="tel:0502-5550-8700">
-                  <Phone className="mr-2 h-5 w-5" />☎ 0502-5550-8700
+                  <Phone className="mr-2 h-5 w-5" /> 0502-5550-8700
                 </a>
               </Button>
               <Button
@@ -1193,7 +1193,7 @@ export default function RecruitPage() {
                     />
                     <Button variant="outline" size="lg" asChild>
                       <a href="tel:0502-5550-8700">
-                        <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
+                        <Phone className="mr-2 h-4 w-4" /> 0502-5550-8700
                       </a>
                     </Button>
                   </div>
@@ -1229,7 +1229,7 @@ export default function RecruitPage() {
                   asChild
                 >
                   <a href="tel:0502-5550-8700">
-                    <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
+                    <Phone className="mr-2 h-4 w-4" /> 0502-5550-8700
                   </a>
                 </Button>
               </div>
