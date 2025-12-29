@@ -2,7 +2,7 @@
 
 import React, { memo, useEffect, useState } from 'react';
 
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/theme/theme-provider';
 
 export const Providers = memo(function Providers({
   children,

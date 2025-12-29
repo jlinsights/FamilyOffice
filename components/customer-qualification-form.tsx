@@ -5,13 +5,13 @@
  * 순자산/순이익 기준으로 패밀리오피스 vs FP센터 자동 분류
  */
 import {
-  Award,
-  Calculator,
-  CheckCircle,
-  Crown,
-  Star,
-  Target,
-  TrendingUp,
+    Award,
+    Calculator,
+    CheckCircle,
+    Crown,
+    Star,
+    Target,
+    TrendingUp,
 } from 'lucide-react';
 
 import { useState } from 'react';
@@ -23,13 +23,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 
-import { CalComButton } from '@/components/cal-com-button';
+import { CalComButton } from '@/components/calendar/cal-com-button';
 
 import {
-  CUSTOMER_SEGMENTS,
-  assessCustomerQualification,
-  generateTargetingMessage,
-  type CustomerQualificationForm,
+    CUSTOMER_SEGMENTS,
+    assessCustomerQualification,
+    generateTargetingMessage,
+    type CustomerQualificationForm,
 } from '@/lib/customer-segmentation';
 
 export default function CustomerQualificationForm() {

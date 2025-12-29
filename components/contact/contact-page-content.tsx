@@ -1,16 +1,16 @@
 'use client';
 
 import {
-  ArrowRight,
-  Building,
-  Clock,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Phone,
-  Shield,
-  Target,
-  User,
+    ArrowRight,
+    Building,
+    Clock,
+    Mail,
+    MapPin,
+    MessageSquare,
+    Phone,
+    Shield,
+    Target,
+    User,
 } from 'lucide-react';
 
 import { useState } from 'react';
@@ -23,10 +23,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
-import { CalComPopup } from '@/components/cal-com-popup';
+import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/seo/structured-data';
 
 import { generateStructuredData } from '@/lib/seo/structured-data';
 

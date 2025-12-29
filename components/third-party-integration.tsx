@@ -6,12 +6,12 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Toaster } from '@/components/ui/sonner';
 
 import { Analytics } from '@/components/analytics/analytics';
+import { ChannelTalk } from '@/components/analytics/channel-talk';
 import ExternalScripts from '@/components/analytics/external-scripts';
+import { KoreanPerformanceTracker } from '@/components/analytics/korean-performance-tracker';
 import { WebVitalsTracker } from '@/components/analytics/web-vitals-tracker';
-import { ChannelTalk } from '@/components/channel-talk';
 import { KakaoPixel } from '@/components/kakao/kakao-pixel';
 import { KakaoSDK } from '@/components/kakao/kakao-sdk';
-import { KoreanPerformanceTracker } from '@/components/korean-performance-tracker';
 import { SEOModulePreloader } from '@/components/seo/seo-module-preloader';
 import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
 

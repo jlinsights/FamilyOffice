@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 
 import { BRAND_COLORS } from '@/constants/brand';
 
-import { CalComPopup } from './cal-com-popup';
+import { CalComPopup } from '@/components/calendar/cal-com-popup';
 
 export function FloatingActionButtons() {
   const [isHovered, setIsHovered] = useState<string | null>(null);

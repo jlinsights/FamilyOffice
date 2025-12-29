@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -9,10 +8,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
 import {
-  HubSpotForm,
-  HubSpotField,
-  HubSpotApiForm,
-} from '@/components/hubspot-integration';
+    HubSpotApiForm,
+    HubSpotField,
+    HubSpotForm,
+} from '@/components/analytics/hubspot-integration';
 
 interface HubSpotContactFormProps {
   className?: string;
