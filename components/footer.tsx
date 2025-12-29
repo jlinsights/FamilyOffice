@@ -281,51 +281,59 @@ export const Footer = memo(function Footer() {
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
-                    href="/solutions#core-services"
+                    href="/business-succession-strategy"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
-                    세무 최적화
+                    가업승계 & 절세
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/solutions#core-services"
+                    href="/services"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
-                    투자 관리
+                    패밀리오피스
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/solutions#core-services"
+                    href="/asset-diversification"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
-                    승계 설계
+                    기업 자산관리
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/solutions#industry-services"
-                    className="nav-link text-muted-foreground hover:text-foreground"
+                    href="/solutions"
+                    className="nav-link font-medium text-primary hover:text-primary/80"
                   >
-                    중대재해처벌법 대응
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/solutions#industry-services"
-                    className="nav-link text-muted-foreground hover:text-foreground"
-                  >
-                    가족법인 설립
+                    전체 솔루션 보기
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* 정보 */}
+            {/* 정보 & 리소스 */}
             <div>
-              <h4 className="font-semibold mb-4">정보</h4>
+              <h4 className="font-semibold mb-4 text-foreground">리소스</h4>
               <ul className="space-y-3 text-sm">
+                <li>
+                  <Link
+                    href="/insights"
+                    className="nav-link text-muted-foreground hover:text-foreground"
+                  >
+                    인사이트
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/calculators"
+                    className="nav-link text-muted-foreground hover:text-foreground"
+                  >
+                    상속세 계산기
+                  </Link>
+                </li>
                 <li>
                   <Link
                     href="/about"
@@ -336,36 +344,10 @@ export const Footer = memo(function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/solutions"
+                    href="/recruit"
                     className="nav-link text-muted-foreground hover:text-foreground"
                   >
-                    업종별 특화 솔루션
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about#faq"
-                    className="nav-link text-muted-foreground hover:text-foreground"
-                  >
-                    자주 묻는 질문
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/structure-check#request-form"
-                    className="nav-link text-muted-foreground hover:text-foreground"
-                  >
-                    구조 점검 요청
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="https://newsletter.familyoffices.vip"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="nav-link text-muted-foreground hover:text-foreground"
-                  >
-                    뉴스레터
+                    채용
                   </Link>
                 </li>
               </ul>
