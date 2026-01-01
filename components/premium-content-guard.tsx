@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { Loader2 } from 'lucide-react';
 
 import { useSafeAuth } from '@/hooks/use-safe-auth';
@@ -12,9 +14,14 @@ interface PremiumContentGuardProps {
 
 export function PremiumContentGuard({ children }: PremiumContentGuardProps) {
   const { isSignedIn, isLoaded } = useSafeAuth();
+  const [hasMounted, setHasMounted] = useState(false);
 
-  // Loading state
-  if (!isLoaded) {
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  // Loading state (ensure it matches server-side initial render which is always 'loading' effectively)
+  if (!hasMounted || !isLoaded) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950">
         <div className="text-center">
