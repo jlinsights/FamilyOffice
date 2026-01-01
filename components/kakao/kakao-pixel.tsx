@@ -57,7 +57,7 @@ export function KakaoPixel({ pixelId, debug = false }: KakaoPixelProps) {
   return (
     <Script
       id="kakao-pixel"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       src="https://t1.kakaocdn.net/kakao_pixel/kakao_pixel.js"
     />
   );

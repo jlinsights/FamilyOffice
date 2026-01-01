@@ -40,7 +40,7 @@ export function KakaoSDK({ javascriptKey, debug = false }: KakaoSDKProps) {
   return (
     <Script
       id="kakao-sdk"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       src="https://developers.kakao.com/sdk/js/kakao.js"
       onLoad={() => {
         if (window.Kakao && !window.Kakao.isInitialized()) {

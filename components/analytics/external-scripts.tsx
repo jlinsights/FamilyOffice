@@ -3,8 +3,8 @@
 import Script from 'next/script';
 
 import {
-  isAllowedScriptSource,
-  isSafeHTMLContent,
+    isAllowedScriptSource,
+    isSafeHTMLContent,
 } from '@/lib/security/html-sanitizer';
 import { securityLogger } from '@/lib/security/secure-logger';
 
@@ -38,7 +38,7 @@ export default function ExternalScripts() {
         src="//js.hs-scripts.com/43932435.js"
         async
         defer
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* Cal.com Floating Button - 주석 처리됨 (AI 챗봇에서 상담 예약 버튼으로 대체) */}
