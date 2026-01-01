@@ -1,4 +1,4 @@
-'use client';
+
 
 import { DebugStyles } from '@/app/debug-styles';
 import { ErrorBoundary } from '@/components/error-boundary';
