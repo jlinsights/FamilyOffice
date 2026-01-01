@@ -1,46 +1,9 @@
-'use client';
-
-import { ArrowDown, Calculator, Crown } from 'lucide-react';
-
-import { memo, useEffect, useRef, useState } from 'react';
-
-import { useRouter } from 'next/navigation';
-
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ClientOnlyIcon } from '@/components/ui/client-only-icon';
+import { ArrowDown, Crown } from 'lucide-react';
+import { HeroActions } from './hero-actions';
+import { HeroStats } from './hero-stats';
 
-import { AnimatedCounter } from '@/components/animated-counter';
-
-export const HeroSection = memo(function HeroSection() {
-  const router = useRouter();
-  const [startAnimation, setStartAnimation] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Intersection Observer로 통계 섹션이 보일 때 애니메이션 시작
-    const observer = new IntersectionObserver(
-      entries => {
-        const entry = entries[0];
-        if (entry && entry.isIntersecting && !startAnimation) {
-          setStartAnimation(true);
-        }
-      },
-      { threshold: 0.3 } // 30% 보일 때 트리거
-    );
-
-    const currentRef = statsRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, [startAnimation]);
-
+export function HeroSection() {
   return (
     <section
       id="hero"
@@ -58,17 +21,14 @@ export const HeroSection = memo(function HeroSection() {
             animation="fade"
             className="border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 dark:border-amber-800 dark:from-amber-950/80 dark:to-amber-900/50 dark:text-amber-200 shadow-lg backdrop-blur-sm"
           >
-            <ClientOnlyIcon
-              icon={Crown}
-              className="h-3 w-3 lg:h-4 lg:w-4 mr-1"
-            />
+            <Crown className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
             Family Office Excellence
           </Badge>
         </div>
 
         {/* 메인 헤드라인 - LCP Element */}
-        {/* 애니메이션으로 인해 보이지 않는 문제를 해결하기 위해 opacity-0 제거 또는 초기값 조정 */}
-        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent whitespace-pre-line font-serif animate-in fade-in slide-in-from-bottom-4 duration-1000 fill-mode-backwards">
+        {/* 애니메이션 제거하여 LCP 최적화 */}
+        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent whitespace-pre-line font-serif">
           百年永續
           <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-wider font-sans text-foreground">
             가문의 영원한 번영을 위한 약속
@@ -90,111 +50,17 @@ export const HeroSection = memo(function HeroSection() {
           </span>
         </p>
 
-        {/* 핵심 성과 지표 */}
-        <div
-          ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mb-10 sm:mb-12 md:mb-14 lg:mb-20 min-h-[160px]"
-        >
-          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-100 border-glow">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-gold-enhanced mb-2 lg:mb-3 tabular-nums">
-              <AnimatedCounter
-                end={500}
-                suffix="억원+"
-                startAnimation={startAnimation}
-                duration={1500}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
-              />
-            </div>
-            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-              자산관리 실적
-            </div>
-          </div>
-          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-200 border-glow">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-premium-navy-enhanced mb-2 lg:mb-3 tabular-nums">
-              <AnimatedCounter
-                end={500}
-                suffix="+"
-                startAnimation={startAnimation}
-                duration={2000}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
-              />
-            </div>
-            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-              법인 고객사
-            </div>
-          </div>
-          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-300 border-glow">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-enhanced mb-2 lg:mb-3 tabular-nums">
-              <AnimatedCounter
-                end={20}
-                suffix="년+"
-                startAnimation={startAnimation}
-                duration={1500}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
-              />
-            </div>
-            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-              전문 경험
-            </div>
-          </div>
-          <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-400 border-glow">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-purple-enhanced mb-2 lg:mb-3 tabular-nums">
-              <AnimatedCounter
-                end={98}
-                suffix="%"
-                startAnimation={startAnimation}
-                duration={1800}
-                easingFunction={t => 1 - Math.pow(1 - t, 3)}
-              />
-            </div>
-            <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-              만족도
-            </div>
-          </div>
-        </div>
+        {/* 핵심 성과 지표 (Client Component) */}
+        <HeroStats />
 
-        {/* CTA 버튼 */}
-        <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center mb-12 sm:mb-16 lg:mb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-backwards">
-          <Button
-            size="lg"
-            variant="default"
-            className="interaction-ready px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold shadow-xl transition-all duration-200 border-0"
-            onClick={() => router.push('/calculators/inheritance-tax')}
-          >
-            <Calculator className="mr-2 h-5 w-5" />
-            상속세 3분 계산하기
-          </Button>
-          <Button
-            size="lg"
-            variant="default"
-            className="interaction-ready px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-colors duration-200"
-            onClick={() => router.push('/structure-check#request-form')}
-          >
-            전문가 상담 예약
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="interaction-ready font-bold px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl shadow-lg transition-colors duration-200"
-            onClick={() => {
-              document.getElementById('services')?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              });
-            }}
-          >
-            서비스 솔루션 보기
-          </Button>
-        </div>
+        {/* CTA 버튼 (Client Component) */}
+        <HeroActions />
 
         {/* 스크롤 인디케이터 */}
         <div className="animate-bounce mt-8 lg:mt-12">
-          <ClientOnlyIcon
-            icon={ArrowDown}
-            className="h-6 w-6 lg:h-8 lg:w-8 text-muted-foreground mx-auto"
-          />
+          <ArrowDown className="h-6 w-6 lg:h-8 lg:w-8 text-muted-foreground mx-auto" />
         </div>
       </div>
     </section>
   );
-});
+}

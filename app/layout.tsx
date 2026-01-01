@@ -40,7 +40,7 @@ const inter = Inter({
 const playfair = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
-  preload: false, // Only preload primary font
+  preload: true, // Preload primary font for LCP optimization
   variable: '--font-playfair',
   fallback: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
   adjustFontFallback: true,
