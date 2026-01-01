@@ -29,6 +29,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
+import { useSafeUser } from '@/hooks/use-safe-auth';
 import { useToast } from '@/hooks/use-toast';
 
 const onboardingSchema = z.object({
