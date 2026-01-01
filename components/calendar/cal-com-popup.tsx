@@ -13,6 +13,7 @@ interface CalComPopupProps {
   className?: string;
   eventType?: string;
   trigger?: React.ReactNode;
+  calLink?: string; // Cal.com event type link (e.g., "familyoffices/consultation")
 }
 
 export function CalComPopup({

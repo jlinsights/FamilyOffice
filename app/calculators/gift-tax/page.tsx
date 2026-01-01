@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
     AlertCircle,
     BarChart3,
@@ -24,6 +24,8 @@ import {
 } from 'lucide-react';
 
 import { useState } from 'react';
+
+import { cn } from '@/lib/utils';
 
 import Link from 'next/link';
 

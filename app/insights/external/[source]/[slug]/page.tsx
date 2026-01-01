@@ -12,13 +12,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 import { env } from '@/lib/env';
+import { cn } from '@/lib/utils';
 import { rssAggregator } from '@/lib/rss-aggregator';
 
 interface InsightContentPageProps {

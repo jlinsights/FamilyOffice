@@ -21,10 +21,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { PremiumContentGuard } from '@/components/premium-content-guard';
+
+import { cn } from '@/lib/utils';
 
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
