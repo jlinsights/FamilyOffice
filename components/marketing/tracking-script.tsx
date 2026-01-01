@@ -7,11 +7,10 @@
 
 import { useEffect, useRef } from 'react';
 
-import { useUser } from '@clerk/nextjs';
 
 import {
-  initializeBehavioralTracker,
-  BehavioralTracker,
+    BehavioralTracker,
+    initializeBehavioralTracker,
 } from '@/lib/marketing/behavioral-tracker';
 
 /**
@@ -36,7 +35,7 @@ export function TrackingScript({
   enableFormTracking = true,
   debug = false,
 }: TrackingScriptProps) {
-  const { user } = useUser();
+  const { user } = useSafeUser();
   const trackerRef = useRef<BehavioralTracker | null>(null);
   const sessionIdRef = useRef<string>('');
 

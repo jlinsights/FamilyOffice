@@ -2,7 +2,7 @@
 
 import { Loader2 } from 'lucide-react';
 
-import { useAuth } from '@clerk/nextjs';
+import { useSafeAuth } from '@/hooks/use-safe-auth';
 
 import { PremiumOverlay } from './premium-overlay';
 
@@ -11,7 +11,7 @@ interface PremiumContentGuardProps {
 }
 
 export function PremiumContentGuard({ children }: PremiumContentGuardProps) {
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn, isLoaded } = useSafeAuth();
 
   // Loading state
   if (!isLoaded) {

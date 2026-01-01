@@ -6,7 +6,6 @@
  */
 import { BarChart3, Monitor, Smartphone, TrendingUp, Zap } from 'lucide-react';
 
-import { useUser } from '@clerk/nextjs';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -17,7 +16,7 @@ import PerformanceOptimizer from '@/components/performance/performance-optimizer
 import WebVitalsReporter from '@/components/performance/web-vitals-reporter';
 
 export default function AdminPerformancePage() {
-  const { user } = useUser();
+  const { user } = useSafeUser();
 
   if (
     !user ||

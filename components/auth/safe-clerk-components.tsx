@@ -1,12 +1,28 @@
 'use client';
 
-import { SignInButton, UserButton } from '@clerk/nextjs';
+import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
 function isBypassMode() {
   return (
     process.env.NODE_ENV === 'development' &&
     process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith('pk_live_')
   );
+}
+
+export function SafeSignUpButton({ children, ...props }: React.ComponentProps<typeof SignUpButton>) {
+  if (isBypassMode()) {
+    return (
+      <span 
+        onClick={() => alert('Authentication is disabled in development mode because production keys are detected.')}
+        className="cursor-not-allowed opacity-80 block"
+        title="Auth Disabled (Dev Mode)"
+      >
+        {children}
+      </span>
+    );
+  }
+
+  return <SignUpButton {...props}>{children}</SignUpButton>;
 }
 
 export function SafeUserButton(props: React.ComponentProps<typeof UserButton>) {
@@ -22,13 +38,13 @@ export function SafeSignInButton({ children, ...props }: React.ComponentProps<ty
   if (isBypassMode()) {
     // Return a dummy button wrapper that alerts user
     return (
-      <div 
+      <span 
         onClick={() => alert('Authentication is disabled in development mode because production keys are detected.')}
         className="cursor-not-allowed opacity-80"
         title="Auth Disabled (Dev Mode)"
       >
         {children}
-      </div>
+      </span>
     );
   }
 

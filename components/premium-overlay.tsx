@@ -2,8 +2,8 @@
 
 import { Check, Lock } from 'lucide-react';
 
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
 
+import { SafeSignInButton, SafeSignUpButton } from '@/components/auth/safe-clerk-components';
 import { Button } from '@/components/ui/button';
 
 export function PremiumOverlay() {
@@ -69,29 +69,29 @@ export function PremiumOverlay() {
 
             {/* CTAs */}
             <div className="space-y-3">
-              <SignUpButton mode="modal">
+              <SafeSignUpButton mode="modal">
                 <Button
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                   size="lg"
                 >
                   회원가입하기
                 </Button>
-              </SignUpButton>
-              <SignInButton mode="modal">
+              </SafeSignUpButton>
+              <SafeSignInButton mode="modal">
                 <Button variant="outline" className="w-full" size="lg">
                   로그인
                 </Button>
-              </SignInButton>
+              </SafeSignInButton>
             </div>
 
             {/* Additional info */}
             <p className="text-xs text-center text-slate-500 dark:text-slate-500 mt-4">
               이미 계정이 있으신가요?{' '}
-              <SignInButton mode="modal">
+              <SafeSignInButton mode="modal">
                 <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium underline">
                   로그인
                 </button>
-              </SignInButton>
+              </SafeSignInButton>
             </p>
           </div>
         </div>
