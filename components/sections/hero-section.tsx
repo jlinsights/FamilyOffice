@@ -1,4 +1,5 @@
 import { Badge } from '@/components/ui/badge';
+import { HERO_CONTENT } from '@/constants/main-page';
 import { ArrowDown, Crown } from 'lucide-react';
 import { HeroActions } from './hero-actions';
 import { HeroStats } from './hero-stats';
@@ -22,31 +23,31 @@ export function HeroSection() {
             className="border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 dark:border-amber-800 dark:from-amber-950/80 dark:to-amber-900/50 dark:text-amber-200 shadow-lg backdrop-blur-sm"
           >
             <Crown className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
-            Family Office Excellence
+            {HERO_CONTENT.badge}
           </Badge>
         </div>
 
         {/* 메인 헤드라인 - LCP Element */}
         {/* 애니메이션 제거하여 LCP 최적화 */}
         <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent whitespace-pre-line font-serif">
-          百年永續
+          {HERO_CONTENT.title.main}
           <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-wider font-sans text-foreground">
-            가문의 영원한 번영을 위한 약속
+            {HERO_CONTENT.title.sub}
           </span>
         </h1>
 
         {/* 서브 헤드라인 (SEO: Family Office 키워드 포함) */}
         <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-backwards">
-          성공한 기업가와 자산가를 위한
+          {HERO_CONTENT.subtitle.prefix}
           <span className="block mt-1 font-light text-muted-foreground">
-            프라이빗 패밀리 오피스
+            {HERO_CONTENT.subtitle.highlight}
           </span>
         </p>
 
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto leading-relaxed font-light animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300 fill-mode-backwards">
-          자산의 보전을 넘어,
+          {HERO_CONTENT.description.prefix}
           <span className="block mt-1">
-            위대한 유산이 세대를 이어갈 수 있도록 돕습니다
+            {HERO_CONTENT.description.highlight}
           </span>
         </p>
 

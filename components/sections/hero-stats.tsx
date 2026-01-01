@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatedCounter } from '@/components/animated-counter';
+import { HERO_CONTENT } from '@/constants/main-page';
 import { memo, useEffect, useRef, useState } from 'react';
 
 export const HeroStats = memo(function HeroStats() {
@@ -46,7 +47,7 @@ export const HeroStats = memo(function HeroStats() {
           />
         </div>
         <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-          자산관리 실적
+          {HERO_CONTENT.stats.assetManagement}
         </div>
       </div>
       <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-200 border-glow">
@@ -60,7 +61,7 @@ export const HeroStats = memo(function HeroStats() {
           />
         </div>
         <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-          법인 고객사
+            {HERO_CONTENT.stats.corporateClients}
         </div>
       </div>
       <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-300 border-glow">
@@ -74,7 +75,7 @@ export const HeroStats = memo(function HeroStats() {
           />
         </div>
         <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-          전문 경험
+            {HERO_CONTENT.stats.experience}
         </div>
       </div>
       <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-400 border-glow">
@@ -88,7 +89,7 @@ export const HeroStats = memo(function HeroStats() {
           />
         </div>
         <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-          만족도
+            {HERO_CONTENT.stats.satisfaction}
         </div>
       </div>
     </div>

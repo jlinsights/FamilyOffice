@@ -109,8 +109,55 @@ export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
 
 declare global {
   interface Window {
+    // Cal.com
     Cal?: ((command: string, ...args: unknown[]) => void) & {
       ns?: Record<string, (...args: unknown[]) => void>;
     };
+    
+    // Google Analytics / GTM
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+    
+    // Kakao SDK
+    Kakao?: {
+      init: (key: string) => void;
+      isInitialized: () => boolean;
+      Auth: {
+        login: (options: unknown) => void;
+        logout: (callback?: () => void) => void;
+        getAccessToken: () => string | null;
+      };
+      Share: {
+        sendDefault: (options: unknown) => void;
+      };
+      API: {
+        request: (options: unknown) => void;
+      };
+    };
+    
+    // Channel.io
+    ChannelIO?: {
+      (method: 'boot', options: unknown): void;
+      (method: 'shutdown'): void;
+      (method: 'showMessenger'): void;
+      (method: 'hideMessenger'): void;
+      (method: 'openChat', chatId?: string | number, message?: string): void;
+      (method: 'track', eventName: string, eventProperty?: unknown): void;
+      q?: unknown[];
+      c?: (args: unknown) => void;
+    };
+    ChannelIOInitialized?: boolean;
+    
+    // HubSpot
+    hbspt?: {
+      forms: {
+        create: (options: unknown) => void;
+      };
+    };
+
+    // Custom
+    seoTracker?: any; // Replace with specific type if available
+    pwaManagers?: any;
+    __REACT_DEVTOOLS_GLOBAL_HOOK__?: any;
   }
 }

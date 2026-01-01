@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { HERO_CONTENT } from '@/constants/main-page';
 import { Calculator } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -16,7 +17,7 @@ export function HeroActions() {
         onClick={() => router.push('/calculators/inheritance-tax')}
       >
         <Calculator className="mr-2 h-5 w-5" />
-        상속세 3분 계산하기
+        {HERO_CONTENT.actions.calculator}
       </Button>
       <Button
         size="lg"
@@ -24,7 +25,7 @@ export function HeroActions() {
         className="interaction-ready px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg lg:text-xl bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-colors duration-200"
         onClick={() => router.push('/structure-check#request-form')}
       >
-        전문가 상담 예약
+        {HERO_CONTENT.actions.reservation}
       </Button>
       <Button
         size="lg"
@@ -37,7 +38,7 @@ export function HeroActions() {
           });
         }}
       >
-        서비스 솔루션 보기
+        {HERO_CONTENT.actions.solutions}
       </Button>
     </div>
   );

@@ -119,7 +119,9 @@ export class SEOAnalyticsTracker {
     // gtag 초기화
     window.dataLayer = window.dataLayer || [];
     function gtag(...args: any[]) {
-      window.dataLayer.push(args);
+      if (window.dataLayer) {
+        window.dataLayer.push(args);
+      }
     }
     gtag('js', new Date());
     gtag('config', this.config.gaTrackingId, {
@@ -601,17 +603,17 @@ export function initializeSEOTracker(
 
   // 글로벌 객체에 등록
   if (typeof window !== 'undefined') {
-    (window as any).seoTracker = tracker;
+    window.seoTracker = tracker;
   }
 
   return tracker;
 }
 
-// 타입 확장 - 기존 Window 확장과 충돌 방지
-declare global {
-  interface Window {
-    seoTracker?: SEOAnalyticsTracker;
-  }
-}
+// 타입 확장 - global.d.ts에서 이미 정의됨
+// declare global {
+//   interface Window {
+//     seoTracker?: SEOAnalyticsTracker;
+//   }
+// }
 
 export default SEOAnalyticsTracker;

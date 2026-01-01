@@ -143,8 +143,8 @@ class RealTimePerformanceMonitor {
     }
 
     // Send to analytics (Vercel Analytics, Google Analytics, etc.)
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'performance_metric', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'performance_metric', {
         metric_name: name,
         metric_value: Math.round(value),
         metric_rating: this.getMetricRating(name, value),

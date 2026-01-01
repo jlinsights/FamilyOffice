@@ -491,10 +491,10 @@ export function reportWebVitals(metric: NextWebVitalsMetric): void {
   // Google Analytics에 메트릭 전송 (선택적)
   if (
     typeof window !== 'undefined' &&
-    (window as any).gtag &&
+    window.gtag &&
     process.env.NODE_ENV === 'production'
   ) {
-    (window as any).gtag('event', metric.name, {
+    window.gtag('event', metric.name, {
       custom_map: { metric_id: 'custom_metric' },
       value: Math.round(
         metric.name === 'CLS' ? metric.value * 1000 : metric.value

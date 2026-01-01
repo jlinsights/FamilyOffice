@@ -175,46 +175,29 @@ export function validateCSPNonce(nonce?: string): string | undefined {
  * Sanitizes HTML content for safe rendering in dangerouslySetInnerHTML
  * Removes dangerous elements and attributes while preserving basic formatting
  */
+import DOMPurify from 'isomorphic-dompurify';
+
+/**
+ * Sanitizes HTML content for safe rendering in dangerouslySetInnerHTML
+ * Uses isomorphic-dompurify for robust XSS protection
+ */
 export function sanitizeHTMLContent(content: string): string {
   if (!content || typeof content !== 'string') {
     return '';
   }
 
-  // Remove all script tags and their content
-  let sanitized = content.replace(
-    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-    ''
-  );
-
-  // Remove dangerous attributes
-  sanitized = sanitized.replace(/\s+on\w+\s*=\s*["'][^"']*["']/gi, ''); // onclick, onload, etc.
-  sanitized = sanitized.replace(/\s+javascript\s*:\s*[^"'\s>]*/gi, ''); // javascript: URLs
-
-  // Remove dangerous tags completely
-  const dangerousTags = [
-    'iframe',
-    'object',
-    'embed',
-    'form',
-    'input',
-    'textarea',
-    'button',
-  ];
-  dangerousTags.forEach(tag => {
-    const regex = new RegExp(`<${tag}\\b[^>]*>.*?<\\/${tag}>`, 'gi');
-    sanitized = sanitized.replace(regex, '');
-    // Also remove self-closing versions
-    const selfClosingRegex = new RegExp(`<${tag}\\b[^>]*\\/>`, 'gi');
-    sanitized = sanitized.replace(selfClosingRegex, '');
+  // Use DOMPurify to sanitize content
+  // We allow standard text formatting tags but strictly forbid scripts/iframes
+  return DOMPurify.sanitize(content, {
+    ALLOWED_TAGS: [
+      'p', 'br', 'b', 'i', 'em', 'strong', 'u', 'span', 'div', 'ul', 'ol', 'li',
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'pre', 'hr'
+    ],
+    ALLOWED_ATTR: ['class', 'id', 'style'],
+    // forbid all scripts and iframes explicitly (though default does this too)
+    FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'form', 'input', 'style'],
+    FORBID_ATTR: ['on*'], // forbids event handlers
   });
-
-  // Remove style attributes that could contain malicious CSS
-  sanitized = sanitized.replace(/\s+style\s*=\s*["'][^"']*["']/gi, '');
-
-  // Clean up any remaining whitespace/newlines
-  sanitized = sanitized.replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
-
-  return sanitized;
 }
 
 /**

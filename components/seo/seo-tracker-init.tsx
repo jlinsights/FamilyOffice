@@ -8,8 +8,8 @@
 import { useEffect } from 'react';
 
 import {
-  initializeSEOTracker,
-  type AnalyticsConfig,
+    initializeSEOTracker,
+    type AnalyticsConfig,
 } from '@/lib/seo/analytics-tracker';
 
 /**
@@ -125,7 +125,7 @@ export function SEOTrackerInit({ config = {} }: SEOTrackerInitProps) {
 export function trackPageSEO(pagePath: string, keywords: string[] = []) {
   if (typeof window === 'undefined') return;
 
-  const tracker = (window as any).seoTracker;
+  const tracker = window.seoTracker;
   if (!tracker) return;
 
   // 페이지별 SEO 메트릭 수집
@@ -158,7 +158,7 @@ export function trackPageSEO(pagePath: string, keywords: string[] = []) {
 export function trackSearchEngineLanding() {
   if (typeof window === 'undefined') return;
 
-  const tracker = (window as any).seoTracker;
+  const tracker = window.seoTracker;
   if (!tracker) return;
 
   const referrer = document.referrer;
@@ -204,7 +204,7 @@ export function trackSearchEngineLanding() {
 export function trackContentEngagement() {
   if (typeof window === 'undefined') return;
 
-  const tracker = (window as any).seoTracker;
+  const tracker = window.seoTracker;
   if (!tracker) return;
 
   let startTime = Date.now();

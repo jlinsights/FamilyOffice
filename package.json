@@ -106,6 +106,7 @@
     "googleapis": "^131.0.0",
     "input-otp": "1.4.1",
     "ioredis": "^5.6.1",
+    "isomorphic-dompurify": "^2.35.0",
     "logs-so": "^2.2.2",
     "lucide-react": "^0.525.0",
     "mini-svg-data-uri": "^1.4.4",

@@ -75,8 +75,8 @@ export const fontOptimization = {
       console.log(`Fonts loaded in: ${loadTime}ms`);
 
       // Report to analytics if needed
-      if ('gtag' in window) {
-        (window as any).gtag('event', 'font_load_time', {
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'font_load_time', {
           event_category: 'Performance',
           event_label: 'Font Loading',
           value: Math.round(loadTime),

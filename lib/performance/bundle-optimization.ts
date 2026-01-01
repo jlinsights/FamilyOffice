@@ -129,7 +129,7 @@ export const memoryOptimizer = {
       process.env.NODE_ENV === 'production' &&
       typeof window !== 'undefined'
     ) {
-      const hook = (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__;
+      const hook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
       if (hook && hook.onCommitFiberRoot) {
         hook.onCommitFiberRoot = () => {};
       }

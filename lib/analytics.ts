@@ -7,8 +7,8 @@ export const analytics = {
     }
 
     // In production, send to analytics service (Google Analytics, etc.)
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', eventName, properties);
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', eventName, properties);
     }
 
     // Store in localStorage for debugging

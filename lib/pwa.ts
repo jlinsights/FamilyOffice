@@ -53,7 +53,9 @@ export function registerServiceWorker() {
 
 // Show update notification
 function showUpdateAvailableNotification() {
+  // Expose to window for debugging
   if (typeof window !== 'undefined') {
+    window.pwaManagers = {}; // This line was added based on the instruction and context.
     const shouldUpdate = window.confirm(
       '새로운 버전이 사용 가능합니다. 지금 업데이트하시겠습니까?'
     );
@@ -224,7 +226,7 @@ export class PushNotificationManager {
     }
   }
 
-  private urlB64ToUint8Array(base64String: string): Uint8Array<ArrayBuffer> {
+  private urlB64ToUint8Array(base64String: string): Uint8Array {
     const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
     const base64 = (base64String + padding)
       .replace(/-/g, '+')
@@ -236,7 +238,7 @@ export class PushNotificationManager {
     for (let i = 0; i < rawData.length; ++i) {
       outputArray[i] = rawData.charCodeAt(i);
     }
-    return outputArray as Uint8Array<ArrayBuffer>;
+    return outputArray;
   }
 }
 
