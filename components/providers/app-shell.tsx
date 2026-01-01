@@ -13,6 +13,31 @@ import { Toaster } from '@/components/ui/toaster';
 import { ClerkProvider } from '@clerk/nextjs';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
+  // Check for "Bypass Mode" (Dev env + Live keys)
+  const isBypassMode =
+    process.env.NODE_ENV === 'development' &&
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith('pk_live_');
+
+  const content = (
+    <>
+      <SEOErrorBoundary>{children}</SEOErrorBoundary>
+
+      <ThirdPartyIntegration />
+      <DebugStyles />
+      <Toaster />
+
+      {/* 🚀 Core Web Vitals 성능 모니터링 */}
+      <CoreWebVitals />
+
+      {/* 맨 위로 가기 버튼 (채널톡 위에 표시) */}
+      <ScrollToTop />
+
+      {/* 🚀 PWA Components */}
+      <PWAInstallPrompt />
+      <OfflineIndicator />
+    </>
+  );
+
   return (
     <ErrorBoundary>
       <ThemeProvider
@@ -21,23 +46,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         enableSystem={false}
         disableTransitionOnChange
       >
-        <ClerkProvider>
-          <SEOErrorBoundary>{children}</SEOErrorBoundary>
-
-          <ThirdPartyIntegration />
-          <DebugStyles />
-          <Toaster />
-
-          {/* 🚀 Core Web Vitals 성능 모니터링 */}
-          <CoreWebVitals />
-
-          {/* 맨 위로 가기 버튼 (채널톡 위에 표시) */}
-          <ScrollToTop />
-
-          {/* 🚀 PWA Components */}
-          <PWAInstallPrompt />
-          <OfflineIndicator />
-        </ClerkProvider>
+        {isBypassMode ? (
+          // In bypass mode, render content directly without ClerkProvider
+          content
+        ) : (
+          <ClerkProvider>{content}</ClerkProvider>
+        )}
       </ThemeProvider>
     </ErrorBoundary>
   );

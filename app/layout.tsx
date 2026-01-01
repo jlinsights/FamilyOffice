@@ -49,6 +49,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${inter.variable} ${playfair.variable}`}
         style={{ fontOpticalSizing: 'auto' }}
+        suppressHydrationWarning
       >
         <AppShell>{children}</AppShell>
       </body>

@@ -7,7 +7,9 @@ import { memo, useCallback, useEffect, useState } from 'react';
 
 import Link from 'next/link';
 
-import { SignInButton, UserButton, useAuth } from '@clerk/nextjs';
+// import { SignInButton, UserButton, useAuth } from '@clerk/nextjs';
+import { SafeSignInButton, SafeUserButton } from '@/components/auth/safe-clerk-components';
+import { useSafeAuth } from '@/hooks/use-safe-auth';
 
 import { Button } from '@/components/ui/button';
 
@@ -31,7 +33,7 @@ export const Header = memo(function Header({
   }>({});
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn, isLoaded } = useSafeAuth();
 
   useEffect(() => {
     setMounted(true);
@@ -255,47 +257,36 @@ export const Header = memo(function Header({
 
           {/* 데스크톱 우측 버튼들 */}
           <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
+{/* 구조 점검 요청 버튼 - 항상 표시 */}
+            <Link
+              href="/structure-check#request-form"
+              className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+              aria-label="구조 점검 요청"
+              title="구조 점검 요청"
+            >
+              <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
+            </Link>
+
+            {/* 인증 관련 버튼 */}
             {isLoaded ? (
               isSignedIn ? (
-                // 로그인 상태: 구조 점검 요청 + Clerk UserButton 표시
-                <>
-                  <Link
-                    href="/structure-check#request-form"
-                    className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                    aria-label="구조 점검 요청"
-                    title="구조 점검 요청"
-                  >
-                    <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
-                  </Link>
-                  <UserButton
-                    afterSignOutUrl="/"
-                    appearance={{
-                      elements: {
-                        avatarBox: 'h-9 w-9',
-                      },
-                    }}
-                  />
-                </>
+                <SafeUserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      avatarBox: 'h-9 w-9',
+                    },
+                  }}
+                />
               ) : (
-                // 로그아웃 상태: 로그인 버튼 + 구조 점검 요청 표시
-                <>
-                  <SignInButton mode="modal">
-                    <button
-                      className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                      aria-label="로그인"
-                    >
-                      로그인
-                    </button>
-                  </SignInButton>
-                  <Link
-                    href="/structure-check#request-form"
-                    className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
-                    aria-label="구조 점검 요청"
-                    title="구조 점검 요청"
+                <SafeSignInButton mode="modal">
+                  <button
+                    className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                    aria-label="로그인"
                   >
-                    <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
-                  </Link>
-                </>
+                    로그인
+                  </button>
+                </SafeSignInButton>
               )
             ) : (
               // 로딩 중: 스켈레톤 표시
