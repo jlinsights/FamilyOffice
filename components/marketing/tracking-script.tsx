@@ -8,6 +8,7 @@
 import { useEffect, useRef } from 'react';
 
 
+import { useSafeUser } from '@/hooks/use-safe-auth';
 import {
     BehavioralTracker,
     initializeBehavioralTracker,

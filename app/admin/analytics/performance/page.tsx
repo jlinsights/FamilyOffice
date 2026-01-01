@@ -14,6 +14,7 @@ import { AdminAccessDeniedAlert } from '@/components/admin-access-denied-alert';
 import PerformanceDashboard from '@/components/performance/performance-dashboard';
 import PerformanceOptimizer from '@/components/performance/performance-optimizer';
 import WebVitalsReporter from '@/components/performance/web-vitals-reporter';
+import { useSafeUser } from '@/hooks/use-safe-auth';
 
 export default function AdminPerformancePage() {
   const { user } = useSafeUser();
