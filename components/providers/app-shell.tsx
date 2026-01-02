@@ -1,6 +1,7 @@
 
 
 import { DebugStyles } from '@/app/debug-styles';
+import { SafeAuthProvider } from '@/components/auth/safe-auth-provider';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { OfflineIndicator } from '@/components/offline-indicator';
 import CoreWebVitals from '@/components/performance/core-web-vitals';
@@ -10,14 +11,8 @@ import { SEOErrorBoundary } from '@/components/seo/seo-error-boundary';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThirdPartyIntegration } from '@/components/third-party-integration';
 import { Toaster } from '@/components/ui/toaster';
-import { ClerkProvider } from '@clerk/nextjs';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  // Check for "Bypass Mode" (Dev env + Live keys)
-  const isBypassMode =
-    process.env.NODE_ENV === 'development' &&
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith('pk_live_');
-
   const content = (
     <>
       <SEOErrorBoundary>{children}</SEOErrorBoundary>
@@ -46,12 +41,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         enableSystem={false}
         disableTransitionOnChange
       >
-        {isBypassMode ? (
-          // In bypass mode, render content directly without ClerkProvider
-          content
-        ) : (
-          <ClerkProvider>{content}</ClerkProvider>
-        )}
+        <SafeAuthProvider>{content}</SafeAuthProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

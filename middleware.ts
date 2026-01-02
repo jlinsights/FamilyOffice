@@ -24,7 +24,6 @@ const isProtectedApiRoute = createRouteMatcher([
 // 온보딩이 필요한 경로 (인증된 사용자가 접근하는 주요 페이지)
 const isOnboardingRequiredRoute = createRouteMatcher([
   '/dashboard(.*)',
-  '/calculators(.*)',
   '/admin(.*)',
 ]);
 

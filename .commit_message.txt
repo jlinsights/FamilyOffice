@@ -1,21 +1,46 @@
-🐛 증여세 계산기 hydration mismatch 에러 수정
+🚨 Clerk JS 로딩 오류 - 환경변수 오버라이드 시도
 
-🎯 문제 원인:
-- gift-tax calculator에서 new Date().getFullYear()를 useState 초기값에 직접 사용
-- 서버 렌더링 시점과 클라이언트 hydration 시점의 날짜 불일치로 React 에러 발생
-- "Application error: a client-side exception has occurred" 화면 표시
+⚠️ 핵심 문제:
+- Clerk 퍼블릭 키에 커스텀 도메인(clerk.familyoffices.vip) 인코딩됨
+- 해당 서브도메인이 Clerk JS 파일을 서빙하도록 구성되지 않음
+- Clerk Dashboard에 Domains 설정 메뉴 없음 (Account 레벨 설정으로 추정)
 
-✅ 수정 내용:
-- useState 초기값을 고정값 2025로 설정
-- useEffect에서 클라이언트 마운트 후 실제 현재 연도로 업데이트
-- hydration mismatch 완전 해결
+📝 시도한 해결책 (`.env.local`):
+✅ Clerk URL 오버라이드 환경변수 추가:
+- NEXT_PUBLIC_CLERK_SIGN_IN_URL=/auth/sign-in
+- NEXT_PUBLIC_CLERK_SIGN_UP_URL=/auth/sign-up
+- NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+- NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
-📝 수정 파일:
-- app/calculators/gift-tax/page.tsx
-  - useEffect import 추가
-  - timing.year 초기값 하드코딩 (2025)
-  - useEffect로 마운트 후 현재 연도 설정
+✅ Clerk JS URL 직접 지정 시도:
+- NEXT_PUBLIC_CLERK_JS_URL=https://clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js
+- NEXT_PUBLIC_CLERK_FRONTEND_API=clerk.accounts.dev
 
-✅ 검증:
-- TypeScript 컴파일 성공
-- 다른 calculator 페이지(inheritance-tax, succession-cost)는 문제 없음
+⚠️ 이 환경변수들이 작동하지 않을 경우 최종 해결 방법:
+
+1️⃣ **DNS 레벨 CNAME 설정** (가장 확실):
+   - 도메인 DNS 설정에서 추가:
+   - Type: CNAME
+   - Name: clerk
+   - Value: clerk.accounts.dev
+   - TTL: 3600
+
+2️⃣ **Clerk Support 문의**:
+   - support@clerk.com
+   - 커스텀 도메인 제거 또는 설정 지원 요청
+
+3️⃣ **완전히 새로운 Clerk 계정 생성**:
+   - 다른 이메일로 새 Clerk 계정 생성
+   - 커스텀 도메인 없는 기본 설정 사용
+   - 새 퍼블릭 키로 .env.local 업데이트
+
+🧪 테스트 방법:
+1. 개발 서버 재시작: npm run dev
+2. 브라우저 개발자 도구 → Network 탭 확인
+3. clerk-js@5 파일 로딩 성공 여부 확인
+4. 로그인 팝업 작동 확인
+
+📊 현재 상황:
+- ✅ 계산기 페이지 접근 정상
+- ✅ Premium Overlay 팝업 표시 정상
+- ❌ Clerk JS 로딩 실패로 로그인 기능 불가

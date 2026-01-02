@@ -1,6 +1,5 @@
 'use client';
 
-import { ErrorBoundary } from '@/components/error-boundary';
 import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
 function isBypassMode() {
@@ -23,11 +22,7 @@ export function SafeSignUpButton({ children, ...props }: React.ComponentProps<ty
     );
   }
 
-  return (
-    <ErrorBoundary fallback={({}) => <span title="Auth Error">{children}</span>}>
-      <SignUpButton {...props}>{children}</SignUpButton>
-    </ErrorBoundary>
-  );
+  return <SignUpButton {...props}>{children}</SignUpButton>;
 }
 
 export function SafeUserButton(props: React.ComponentProps<typeof UserButton>) {
@@ -36,11 +31,7 @@ export function SafeUserButton(props: React.ComponentProps<typeof UserButton>) {
     return <div className="h-9 w-9 rounded-full bg-muted border border-border" title="Auth Bypass Mode (User)" />;
   }
 
-  return (
-    <ErrorBoundary fallback={({}) => <div className="h-9 w-9 rounded-full bg-muted border border-border" title="Auth Error" />}>
-      <UserButton {...props} />
-    </ErrorBoundary>
-  );
+  return <UserButton {...props} />;
 }
 
 export function SafeSignInButton({ children, ...props }: React.ComponentProps<typeof SignInButton>) {
@@ -57,9 +48,5 @@ export function SafeSignInButton({ children, ...props }: React.ComponentProps<ty
     );
   }
 
-  return (
-    <ErrorBoundary fallback={({}) => <span title="Auth Error">{children}</span>}>
-      <SignInButton {...props}>{children}</SignInButton>
-    </ErrorBoundary>
-  );
+  return <SignInButton {...props}>{children}</SignInButton>;
 }

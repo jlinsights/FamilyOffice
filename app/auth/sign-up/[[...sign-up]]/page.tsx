@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { isClerkBypassMode } from '@/lib/auth/clerk-utils';
 
 export const metadata: Metadata = {
   title: '회원가입 | FamilyOffice S - 百年永續 기업의 가치를 다음 세대로',
@@ -38,6 +39,8 @@ export default function SignUpPage() {
       description: '기업 상황에 최적화된 투자 포트폴리오',
     },
   ];
+
+  const isBypass = isClerkBypassMode();
 
   return (
     <>
@@ -107,27 +110,40 @@ export default function SignUpPage() {
 
           {/* 우측: Clerk 회원가입 컴포넌트 */}
           <div className="w-full max-w-md mx-auto lg:mx-0 flex items-center justify-center">
-            <SignUp
-              appearance={{
-                elements: {
-                  rootBox: 'w-full',
-                  card: 'shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm w-full',
-                  headerTitle: 'text-2xl font-bold',
-                  headerSubtitle: 'text-base text-muted-foreground',
-                  socialButtonsBlockButton: 'bg-primary hover:bg-primary/90',
-                  formButtonPrimary: 'bg-primary hover:bg-primary/90',
-                  footerActionLink: 'text-primary hover:text-primary/80',
-                  formFieldInput: 'border-border',
-                  identityPreviewEditButton: 'text-primary',
-                },
-                layout: {
-                  socialButtonsPlacement: 'top',
-                  socialButtonsVariant: 'blockButton',
-                },
-              }}
-              signInUrl="/auth/sign-in"
-              fallbackRedirectUrl="/onboarding"
-            />
+            {isBypass ? (
+              <div className="w-full p-8 rounded-lg bg-card border border-border/50 text-center shadow-2xl">
+                <h2 className="text-2xl font-bold mb-4">Development Mode</h2>
+                <p className="text-muted-foreground mb-4">
+                  Sign-up is disabled because you are using production Clerk
+                  keys in a development environment.
+                </p>
+                <div className="p-4 bg-muted/50 rounded items-center justify-center font-mono text-xs">
+                  Review setup in .env.local
+                </div>
+              </div>
+            ) : (
+              <SignUp
+                appearance={{
+                  elements: {
+                    rootBox: 'w-full',
+                    card: 'shadow-2xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm w-full',
+                    headerTitle: 'text-2xl font-bold',
+                    headerSubtitle: 'text-base text-muted-foreground',
+                    socialButtonsBlockButton: 'bg-primary hover:bg-primary/90',
+                    formButtonPrimary: 'bg-primary hover:bg-primary/90',
+                    footerActionLink: 'text-primary hover:text-primary/80',
+                    formFieldInput: 'border-border',
+                    identityPreviewEditButton: 'text-primary',
+                  },
+                  layout: {
+                    socialButtonsPlacement: 'top',
+                    socialButtonsVariant: 'blockButton',
+                  },
+                }}
+                signInUrl="/auth/sign-in"
+                fallbackRedirectUrl="/onboarding"
+              />
+            )}
           </div>
         </div>
       </div>

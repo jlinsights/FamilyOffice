@@ -9,9 +9,6 @@ import {
 } from 'lucide-react';
 
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
-
-import { auth } from '@clerk/nextjs/server';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -35,14 +32,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function PensionCalculatorPage() {
-  // 인증 확인 - 로그인하지 않은 사용자는 로그인 페이지로 리다이렉트
-  const { userId } = await auth();
-
-  if (!userId) {
-    redirect('/auth/sign-in?redirect_url=/pension-calculator');
-  }
-
+export default function PensionCalculatorPage() {
   return (
     <>
       <Header />
