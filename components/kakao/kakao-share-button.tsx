@@ -27,12 +27,6 @@ interface KakaoShareButtonProps {
   children?: React.ReactNode;
 }
 
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
-
 export function KakaoShareButton({
   title,
   description,
@@ -52,8 +46,9 @@ export function KakaoShareButton({
     // 카카오 SDK 로드 및 초기화
     const loadKakaoSDK = () => {
       if (window.Kakao) {
-        if (!window.Kakao.isInitialized()) {
-          window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY);
+        const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
+        if (kakaoKey && !window.Kakao.isInitialized()) {
+          window.Kakao.init(kakaoKey);
         }
         setIsKakaoReady(true);
         return;

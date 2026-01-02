@@ -4,13 +4,6 @@ import { useEffect } from 'react';
 
 import Script from 'next/script';
 
-// Kakao SDK 글로벌 타입 정의
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
-
 interface KakaoSDKProps {
   javascriptKey: string;
   debug?: boolean;

@@ -2,13 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-declare global {
-  interface Window {
-    ChannelIO?: any;
-    ChannelIOInitialized?: boolean;
-  }
-}
-
 export function ChannelTalk() {
   const [isClient, setIsClient] = useState(false);
 

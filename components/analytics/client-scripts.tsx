@@ -2,14 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-// 전역 타입 확장
-declare global {
-  interface Window {
-    hbspt?: any;
-    dataLayer: any[];
-  }
-}
-
 export function ClientScripts() {
   const [mounted, setMounted] = useState(false);
   const [isClient, setIsClient] = useState(false);

@@ -55,7 +55,7 @@ export function RelatedContent({
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
-        {recommendations.map(item => (
+        {recommendations.map((item: any) => (
           <Link
             key={item.id}
             href={item.url}

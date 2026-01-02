@@ -66,7 +66,7 @@ export default function CustomerQualificationForm() {
   const handleInputChange = (field: string, value: any) => {
     if (field.includes('.')) {
       const [parent, child] = field.split('.');
-      setFormData(prev => ({
+      setFormData((prev: CustomerQualificationForm) => ({
         ...prev,
         [parent as string]: {
           ...(prev[parent as keyof CustomerQualificationForm] as any),
@@ -74,7 +74,7 @@ export default function CustomerQualificationForm() {
         },
       }));
     } else {
-      setFormData(prev => ({
+      setFormData((prev: CustomerQualificationForm) => ({
         ...prev,
         [field]: value,
       }));
@@ -420,7 +420,7 @@ export default function CustomerQualificationForm() {
               <div>
                 <h3 className="font-semibold mb-2">추천 서비스 범위</h3>
                 <div className="grid md:grid-cols-2 gap-2">
-                  {segmentData.services.slice(0, 4).map((service, index) => (
+                  {segmentData.services.slice(0, 4).map((service: string, index: number) => (
                     <div key={index} className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600" />
                       <span className="text-sm">{service}</span>
@@ -432,7 +432,7 @@ export default function CustomerQualificationForm() {
               <div>
                 <h3 className="font-semibold mb-2">다음 단계</h3>
                 <ul className="space-y-2">
-                  {assessment.nextSteps.map((step, index) => (
+                  {assessment.nextSteps.map((step: string, index: number) => (
                     <li key={index} className="flex items-start gap-2">
                       <span className="w-5 h-5 bg-blue-100 text-blue-800 rounded-full flex items-center justify-center text-xs font-semibold mt-0.5">
                         {index + 1}

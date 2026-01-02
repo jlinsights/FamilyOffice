@@ -401,14 +401,14 @@ export const Header = memo(function Header({
               ) : (
                 // 로그아웃 상태: 로그인 버튼 + 구조 점검 요청 표시
                 <>
-                  <SignInButton mode="modal">
+                  <SafeSignInButton mode="modal">
                     <button
                       className="flex items-center justify-center w-full border border-primary text-primary font-semibold rounded-lg px-4 py-3 hover:bg-primary hover:text-white transition-colors duration-200"
                       aria-label="로그인"
                     >
                       로그인
                     </button>
-                  </SignInButton>
+                  </SafeSignInButton>
                   <Link
                     href="/structure-check#request-form"
                     onClick={handleMobileLinkClick}

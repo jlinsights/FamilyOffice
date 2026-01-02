@@ -301,11 +301,6 @@ export function improveLCP() {
 // 글로벌 타입 선언
 declare global {
   interface Window {
-    gtag: (
-      command: string,
-      action: string,
-      parameters?: Record<string, any>
-    ) => void;
     va?: (event: string, data?: any) => void;
   }
 }

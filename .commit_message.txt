@@ -1,1 +1,1 @@
-✨ BMAD 키워드 추적 시스템 GA4 실시간 데이터 연동 완료 (mock → 실제 API)
+🔧 TypeScript 에러 14개 수정 (65개→51개): 누락 모듈, Kakao SDK, gtag 타입 충돌 해결

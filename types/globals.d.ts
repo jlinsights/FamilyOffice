@@ -130,6 +130,15 @@ declare global {
       Share: {
         sendDefault: (options: unknown) => void;
       };
+      Link: {
+        sendDefault: (options: unknown) => void;
+        sendScrap: (options: unknown) => void;
+        sendCustom: (options: unknown) => void;
+      };
+      Channel: {
+        chat: (options: unknown) => void;
+        addChannel: (options: unknown) => void;
+      };
       API: {
         request: (options: unknown) => void;
       };

@@ -2,18 +2,6 @@
  * 성능 모니터링 유틸리티
  */
 
-// gtag 타입 선언
-declare global {
-  function gtag(...args: any[]): void;
-  interface Window {
-    gtag: (
-      command: string,
-      action: string,
-      parameters?: Record<string, any>
-    ) => void;
-  }
-}
-
 // Performance metrics interface
 export interface PerformanceMetrics {
   fcp: number; // First Contentful Paint
