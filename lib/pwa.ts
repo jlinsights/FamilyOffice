@@ -216,7 +216,7 @@ export class PushNotificationManager {
     try {
       const subscription = await this.registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: this.urlB64ToUint8Array(vapidKey),
+        applicationServerKey: this.urlB64ToUint8Array(vapidKey) as BufferSource,
       });
 
       return subscription;

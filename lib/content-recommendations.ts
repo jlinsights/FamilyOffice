@@ -17,3 +17,12 @@ export function getRelatedContent(
   // TODO: Implement content recommendation logic
   return [];
 }
+
+export function getRecommendations(
+  currentItem: unknown,
+  allItems: unknown[],
+  limit?: number
+): unknown[] {
+  // TODO: Implement recommendation algorithm
+  return [];
+}

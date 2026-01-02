@@ -485,7 +485,7 @@ export class KakaoAuthService {
       // 카카오 연결 끊기
       if (window.Kakao?.API) {
         await new Promise<void>((resolve, reject) => {
-          window.Kakao.API.request({
+          window.Kakao?.API?.request({
             url: '/v1/user/unlink',
             success: () => resolve(),
             fail: (error: any) => reject(error),

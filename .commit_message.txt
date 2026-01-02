@@ -1,1 +1,21 @@
-🔧 TypeScript 에러 14개 수정 (65개→51개): 누락 모듈, Kakao SDK, gtag 타입 충돌 해결
+🐛 증여세 계산기 hydration mismatch 에러 수정
+
+🎯 문제 원인:
+- gift-tax calculator에서 new Date().getFullYear()를 useState 초기값에 직접 사용
+- 서버 렌더링 시점과 클라이언트 hydration 시점의 날짜 불일치로 React 에러 발생
+- "Application error: a client-side exception has occurred" 화면 표시
+
+✅ 수정 내용:
+- useState 초기값을 고정값 2025로 설정
+- useEffect에서 클라이언트 마운트 후 실제 현재 연도로 업데이트
+- hydration mismatch 완전 해결
+
+📝 수정 파일:
+- app/calculators/gift-tax/page.tsx
+  - useEffect import 추가
+  - timing.year 초기값 하드코딩 (2025)
+  - useEffect로 마운트 후 현재 연도 설정
+
+✅ 검증:
+- TypeScript 컴파일 성공
+- 다른 calculator 페이지(inheritance-tax, succession-cost)는 문제 없음

@@ -48,6 +48,9 @@ export default function CustomerQualificationForm() {
       business: 0,
       other: 0,
     },
+    services: [],
+    goals: [],
+    timeline: '',
     needsAssessment: {
       familyOffice: false,
       businessSuccession: false,
@@ -375,9 +378,13 @@ export default function CustomerQualificationForm() {
     );
   }
 
-  if (step === 4 && assessment) {
+  if (step === 4 && assessment && assessment.segment) {
     const segmentData = CUSTOMER_SEGMENTS[assessment.segment];
     const targetingMessage = generateTargetingMessage(assessment.segment);
+
+    if (!segmentData) {
+      return null;
+    }
 
     return (
       <div className="space-y-6">
@@ -509,6 +516,9 @@ export default function CustomerQualificationForm() {
                   business: 0,
                   other: 0,
                 },
+                services: [],
+                goals: [],
+                timeline: '',
                 needsAssessment: {
                   familyOffice: false,
                   businessSuccession: false,

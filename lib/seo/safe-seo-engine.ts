@@ -84,14 +84,14 @@ export async function generateSafeStructuredData(
       };
     }
 
-    const structuredDataEngine = await performanceMonitor.trackAsyncOperation(
+    const structuredDataEngine = (await performanceMonitor.trackAsyncOperation(
       'seo_structured_data_generation',
       () =>
         BundleSizeMonitor.trackImportTime('structured-data-engine', () =>
           dynamicSEOImports.loadStructuredDataEngine()
         ),
       { feature: 'structuredData' }
-    );
+    )) as { generateDynamicStructuredData: (data: Record<string, unknown>) => Promise<unknown> } | null;
 
     if (structuredDataEngine) {
       return await performanceMonitor.trackAsyncOperation(

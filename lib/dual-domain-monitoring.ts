@@ -60,7 +60,7 @@ export class DualDomainSEOMonitor {
     const rankings: Record<string, number> = {};
 
     // 각 타겟 키워드별 순위 추적
-    for (const keyword of config.targetKeywords) {
+    for (const keyword of config.targetKeywords || []) {
       try {
         // 실제 구현에서는 Google Search Console API 또는 SEO 도구 API 사용
         const rank = await this.getKeywordRank(keyword, domain);

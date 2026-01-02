@@ -64,6 +64,9 @@ export function InboundMarketingDashboard({
   const [automationRules, setAutomationRules] = useState<AutomationRule[]>([]);
   const [metrics, setMetrics] = useState<MarketingMetrics>(
     initialMetrics || {
+      views: 15000,
+      clicks: 1200,
+      conversions: 48,
       period: '2024-01',
       organicTraffic: 12450,
       keywordRankings: {
@@ -125,7 +128,7 @@ export function InboundMarketingDashboard({
     setAutomationRules(rules);
   }, []);
 
-  const roiData = calculateMarketingROI(metrics, 2000000); // 200만원 투자 가정
+  const roiData = calculateMarketingROI(metrics, 2000000) as { roi: number; costPerLead: number; ltv: number; recommendations?: string[] }; // 200만원 투자 가정
 
   return (
     <div className={`w-full space-y-6 ${className}`}>
@@ -170,7 +173,7 @@ export function InboundMarketingDashboard({
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {metrics.organicTraffic.toLocaleString()}
+                  {metrics.organicTraffic?.toLocaleString() || '0'}
                 </div>
                 <p className="text-xs text-muted-foreground">
                   +12.5% 전월 대비
@@ -228,7 +231,7 @@ export function InboundMarketingDashboard({
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {Object.entries(metrics.keywordRankings).map(
+                {Object.entries(metrics.keywordRankings || {}).map(
                   ([keyword, rank]) => (
                     <div
                       key={keyword}
@@ -276,15 +279,15 @@ export function InboundMarketingDashboard({
                   </div>
                   <div className="text-2xl font-bold">
                     {Math.floor(
-                      metrics.contentEngagement.averageTimeOnPage / 60
+                      (metrics.contentEngagement?.averageTimeOnPage || 0) / 60
                     )}
-                    분 {metrics.contentEngagement.averageTimeOnPage % 60}초
+                    분 {(metrics.contentEngagement?.averageTimeOnPage || 0) % 60}초
                   </div>
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground">이탈률</div>
                   <div className="text-2xl font-bold">
-                    {metrics.contentEngagement.bounceRate}%
+                    {metrics.contentEngagement?.bounceRate || 0}%
                   </div>
                 </div>
                 <div>
@@ -292,7 +295,7 @@ export function InboundMarketingDashboard({
                     세션당 페이지뷰
                   </div>
                   <div className="text-2xl font-bold">
-                    {metrics.contentEngagement.pagesPerSession}
+                    {metrics.contentEngagement?.pagesPerSession || 0}
                   </div>
                 </div>
               </div>
@@ -317,7 +320,7 @@ export function InboundMarketingDashboard({
 
         {/* 최적화 탭 */}
         <TabsContent value="optimization" className="space-y-6">
-          <OptimizationView recommendations={roiData.recommendations} />
+          <OptimizationView recommendations={roiData.recommendations || []} />
         </TabsContent>
       </Tabs>
     </div>
@@ -375,7 +378,7 @@ function ContentCalendarView({ calendar }: { calendar: ContentCalendar[] }) {
                   <div>
                     <div className="font-medium">{item.title}</div>
                     <div className="text-sm text-muted-foreground">
-                      타겟: {item.targetKeywords.join(', ')}
+                      타겟: {item.targetKeywords?.join(', ') || '없음'}
                     </div>
                   </div>
                 </div>
@@ -450,9 +453,9 @@ function AutomationRulesView({ rules }: { rules: AutomationRule[] }) {
                   <div>
                     <div className="font-medium">{rule.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      {rule.trigger.type === 'schedule'
+                      {typeof rule.trigger === 'object' && rule.trigger.type === 'schedule'
                         ? `스케줄: ${rule.trigger.schedule}`
-                        : `트리거: ${rule.trigger.type}`}
+                        : `트리거: ${typeof rule.trigger === 'object' ? rule.trigger.type : rule.trigger}`}
                     </div>
                   </div>
                 </div>
@@ -503,7 +506,7 @@ function AnalyticsView({
   roiData,
 }: {
   metrics: MarketingMetrics;
-  roiData: ReturnType<typeof calculateMarketingROI>;
+  roiData: { roi: number; costPerLead: number; ltv: number; recommendations?: string[] };
 }) {
   return (
     <div className="space-y-6">

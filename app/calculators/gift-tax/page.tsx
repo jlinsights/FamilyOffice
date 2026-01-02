@@ -23,7 +23,7 @@ import {
     Zap
 } from 'lucide-react';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -42,9 +42,17 @@ export default function GiftTaxCalculatorPage() {
   });
 
   const [timing, setTiming] = useState({
-    year: new Date().getFullYear(),
+    year: 2025,
     splitYears: 1,
   });
+
+  // Set current year after component mounts to avoid hydration mismatch
+  useEffect(() => {
+    setTiming((prev) => ({
+      ...prev,
+      year: new Date().getFullYear(),
+    }));
+  }, []);
 
   // 증여세 계산 로직
   const calculateGiftTax = () => {

@@ -55,7 +55,7 @@ describe('Services Module Backward Compatibility', () => {
 
     it('should have same structure as new path', () => {
       OLD_SERVICE_CATEGORIES.forEach((oldCat, index) => {
-        const newCat = NEW_SERVICE_CATEGORIES[index];
+        const newCat = NEW_SERVICE_CATEGORIES[index]!;
         expect(oldCat.id).toBe(newCat.id);
         expect(oldCat.title).toBe(newCat.title);
         expect(oldCat.description).toBe(newCat.description);
@@ -138,7 +138,7 @@ describe('Services Module Backward Compatibility', () => {
       );
       expect(oldRelated.length).toBe(newRelated.length);
       oldRelated.forEach((service, index) => {
-        expect(service.title).toBe(newRelated[index].title);
+        expect(service.title).toBe(newRelated[index]!.title);
       });
     });
   });
@@ -220,7 +220,7 @@ describe('Services Module Backward Compatibility', () => {
       const newServiceCounts = NEW_SERVICE_STATS.servicesByCategory;
 
       oldServiceCounts.forEach((oldCat, index) => {
-        const newCat = newServiceCounts[index];
+        const newCat = newServiceCounts[index]!;
         expect(oldCat.count).toBe(newCat.count);
         expect(oldCat.id).toBe(newCat.id);
       });

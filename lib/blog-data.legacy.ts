@@ -10,3 +10,6 @@ export interface LegacyBlogPost {
 }
 
 export const legacyBlogPosts: LegacyBlogPost[] = [];
+
+// Re-export as blogPosts for backward compatibility
+export const blogPosts = legacyBlogPosts;

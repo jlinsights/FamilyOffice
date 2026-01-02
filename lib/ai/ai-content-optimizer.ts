@@ -105,7 +105,7 @@ class AIContentOptimizer {
     content: string,
     options: ContentOptimizationOptions
   ): Promise<OptimizedContent> {
-    return await performanceMonitor.trackAsyncOperation(
+    return (await performanceMonitor.trackAsyncOperation(
       'ai_content_optimization',
       async () => {
         const contentOptimizer = await dynamicSEOImports.loadContentOptimizer();
@@ -134,7 +134,7 @@ class AIContentOptimizer {
         };
       },
       { operation: 'ai_content_optimization', target: options.target }
-    );
+    )) as OptimizedContent;
   }
 
   // Fallback optimization when AI features are disabled

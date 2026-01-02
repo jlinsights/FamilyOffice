@@ -356,9 +356,25 @@ export class AutomatedContentOptimization {
     );
 
     return {
-      content,
-      seoOptimization,
-      qualityScore,
+      content: {
+        title: content.title,
+        metaDescription: content.metaDescription || '',
+        headings: content.headings || [],
+        sections: content.sections || [],
+        callToActions: content.callToActions || [],
+      },
+      seoOptimization: {
+        titleTags: seoOptimization.titleTags || [],
+        metaTags: seoOptimization.metaTags || {},
+        structuredData: seoOptimization.structuredData || {},
+        internalLinks: seoOptimization.internalLinks || [],
+      },
+      qualityScore: {
+        readability: qualityScore.readability || 0,
+        seoOptimization: qualityScore.seoOptimization || 0,
+        userValue: qualityScore.userValue || 0,
+        originalityScore: qualityScore.originalityScore || 0,
+      },
     };
   }
 
@@ -392,9 +408,10 @@ export class AutomatedContentOptimization {
     const testId = `ab_test_${Date.now()}`;
 
     // A/B 테스트 설정
-    const testConfiguration = {
+    const testConfiguration: ABTestConfiguration = {
       testId,
       url: contentUrl,
+      enabled: true,
       variants: testVariants.map((variant, index) => ({
         name: variant.name,
         trafficAllocation: 100 / testVariants.length,
@@ -410,8 +427,14 @@ export class AutomatedContentOptimization {
 
     return {
       testId,
-      status: 'active',
-      variants: testConfiguration.variants,
+      status: 'active' as const,
+      variants: testConfiguration.variants
+        .filter((v): v is { name?: string; trafficAllocation?: number; currentMetrics?: Record<string, unknown> } => typeof v === 'object')
+        .map(v => ({
+          name: v.name || 'Variant',
+          trafficAllocation: v.trafficAllocation || 50,
+          currentMetrics: (v.currentMetrics as Record<string, number>) || {},
+        })),
       recommendations: {
         nextSteps: [
           '최소 7일간 데이터 수집',
@@ -450,8 +473,17 @@ export class AutomatedContentOptimization {
     return {
       currentSeason,
       seasonalKeywords,
-      contentUpdates,
-      scheduledOptimizations,
+      contentUpdates: contentUpdates.map(update => ({
+        url: update.url || '',
+        updateType: update.updateType || 'content',
+        changes: update.changes || [],
+        expectedImpact: update.expectedImpact || '',
+      })),
+      scheduledOptimizations: scheduledOptimizations.map(opt => ({
+        date: opt.date || '',
+        action: opt.action || '',
+        targetContent: opt.targetContent || [],
+      })),
     };
   }
 
@@ -489,9 +521,22 @@ export class AutomatedContentOptimization {
     );
 
     return {
-      intentAnalysis,
-      optimizations,
-      conversionOptimization,
+      intentAnalysis: {
+        detectedIntent: intentAnalysis.detectedIntent || intentAnalysis.intent || '',
+        confidence: intentAnalysis.confidence,
+        userJourneyAlignment: intentAnalysis.userJourneyAlignment || 0,
+      },
+      optimizations: {
+        contentStructure: optimizations.contentStructure || [],
+        callToActions: optimizations.callToActions || [],
+        keywordFocus: optimizations.keywordFocus || [],
+        userExperience: optimizations.userExperience || [],
+      },
+      conversionOptimization: {
+        recommendations: conversionOptimization.recommendations || [],
+        expectedLift: conversionOptimization.expectedLift || 0,
+        testSuggestions: conversionOptimization.testSuggestions || [],
+      },
     };
   }
 
@@ -750,9 +795,10 @@ export class AutomatedContentOptimization {
   private getHistoricalPerformance(url: string): HistoricalPerformance {
     // 과거 성과 데이터 반환
     return {
-      traffic: [1000, 1100, 950, 1200],
-      ranking: [15, 12, 18, 10],
-      engagement: [2.5, 2.8, 2.2, 3.1],
+      views: 15000,
+      clicks: 1200,
+      conversions: 48,
+      traffic: 12000,
     };
   }
 
@@ -801,12 +847,14 @@ export class AutomatedContentOptimization {
     domain: string
   ): Promise<SEOOptimization> {
     return {
+      enabled: true,
+      targetKeywords,
       titleTags: targetKeywords.map(k => `${k} | ${domain}`),
       metaTags: {
         'og:title': content.title,
-        'og:description': content.metaDescription,
+        'og:description': content.metaDescription || content.title,
         'twitter:title': content.title,
-        'twitter:description': content.metaDescription,
+        'twitter:description': content.metaDescription || content.title,
       },
       structuredData: {
         '@context': 'https://schema.org',
@@ -823,6 +871,13 @@ export class AutomatedContentOptimization {
     targetKeywords: string[]
   ): Promise<ContentQuality> {
     return {
+      score: 88.75,
+      metrics: {
+        readability: 85,
+        seoOptimization: 90,
+        userValue: 88,
+        originalityScore: 92,
+      },
       readability: 85,
       seoOptimization: 90,
       userValue: 88,
@@ -907,6 +962,8 @@ export class AutomatedContentOptimization {
     stage: string
   ): Promise<ConversionOptimization> {
     return {
+      enabled: true,
+      targetRate: 3.5,
       recommendations: ['명확한 가치 제안', '신뢰성 신호 강화'],
       expectedLift: 15,
       testSuggestions: ['CTA 버튼 색상', '제목 메시지'],

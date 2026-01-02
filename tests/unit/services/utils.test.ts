@@ -284,7 +284,7 @@ describe('Services Utility Functions', () => {
 
     it('should generate paths that can be used to retrieve services', () => {
       const paths = getAllServicePaths();
-      const firstPath = paths[0];
+      const firstPath = paths[0]!;
 
       const result = getServiceBySlug(
         firstPath.category,
