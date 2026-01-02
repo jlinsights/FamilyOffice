@@ -1,7 +1,5 @@
+import { CalculatorLayoutWrapper } from '@/components/layout/calculator-layout-wrapper';
 import { Metadata } from 'next';
-
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
   title: '세무 계산기 | FamilyOffice S',
@@ -21,14 +19,5 @@ export default function CalculatorsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-
-      {/* 메인 콘텐츠 */}
-      <main className="container mx-auto px-4 py-20">{children}</main>
-
-      <Footer />
-    </div>
-  );
+  return <CalculatorLayoutWrapper>{children}</CalculatorLayoutWrapper>;
 }
