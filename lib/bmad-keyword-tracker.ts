@@ -3,6 +3,7 @@
  * Google Analytics 4 연동 및 키워드별 성과 추적
  */
 import { BMAD_AI_KEYWORDS } from './ai/ai-search-monitoring';
+import { getKeywordPerformance } from './google-analytics/ga4-client';
 
 export type BMADCategory =
   | 'behavioral'
@@ -92,29 +93,82 @@ export class BMADKeywordTracker {
     endDate: Date,
     keywords: string[]
   ): Promise<Map<string, Partial<KeywordPerformance>>> {
-    // GA4 API integration: https://github.com/jlinsights/FamilyOffice/issues/6
-    // const { BetaAnalyticsDataClient } = require('@google-analytics/data');
-    // const analyticsDataClient = new BetaAnalyticsDataClient();
+    try {
+      // Format dates for GA4 API (YYYY-MM-DD)
+      const startDateStr = startDate.toISOString().split('T')[0]!;
+      const endDateStr = endDate.toISOString().split('T')[0]!;
 
-    // 개발용 모의 데이터
-    const mockData = new Map<string, Partial<KeywordPerformance>>();
+      // Fetch real GA4 data
+      const ga4Data = await getKeywordPerformance(
+        startDateStr,
+        endDateStr,
+        keywords
+      );
 
-    keywords.forEach(keyword => {
-      mockData.set(keyword, {
-        impressions: Math.floor(Math.random() * 1000) + 100,
-        clicks: Math.floor(Math.random() * 100) + 10,
-        conversions: Math.floor(Math.random() * 20) + 1,
-        avgPosition: Math.floor(Math.random() * 10) + 1,
-        traffic: Math.floor(Math.random() * 500) + 50,
-        bounceRate: Math.random() * 0.5 + 0.3, // 30-80%
-        avgSessionDuration: Math.floor(Math.random() * 300) + 60, // 60-360초
-        pageViews: Math.floor(Math.random() * 1000) + 100,
-        newUsers: Math.floor(Math.random() * 400) + 40,
-        returningUsers: Math.floor(Math.random() * 100) + 10,
+      // Convert GA4 data to KeywordPerformance map
+      const performanceMap = new Map<string, Partial<KeywordPerformance>>();
+
+      ga4Data.forEach(data => {
+        if (data.keyword) {
+          performanceMap.set(data.keyword, {
+            impressions: data.sessions, // GA4 sessions as impressions proxy
+            clicks: data.sessions, // Sessions indicate user engagement
+            conversions: data.conversions,
+            avgPosition: 0, // Not available from GA4, needs Search Console
+            traffic: data.sessions,
+            bounceRate: data.bounceRate,
+            avgSessionDuration: data.avgSessionDuration,
+            pageViews: data.pageViews,
+            newUsers: 0, // Can be added to GA4 client if needed
+            returningUsers: 0, // Can be added to GA4 client if needed
+          });
+        }
       });
-    });
 
-    return mockData;
+      // Fill in missing keywords with zeros
+      keywords.forEach(keyword => {
+        if (!performanceMap.has(keyword)) {
+          performanceMap.set(keyword, {
+            impressions: 0,
+            clicks: 0,
+            conversions: 0,
+            avgPosition: 0,
+            traffic: 0,
+            bounceRate: 0,
+            avgSessionDuration: 0,
+            pageViews: 0,
+            newUsers: 0,
+            returningUsers: 0,
+          });
+        }
+      });
+
+      return performanceMap;
+    } catch (error) {
+      console.warn(
+        '⚠️  GA4 API failed, using empty data. Ensure GA4 credentials are configured.',
+        error
+      );
+
+      // Fallback to empty data on error
+      const emptyData = new Map<string, Partial<KeywordPerformance>>();
+      keywords.forEach(keyword => {
+        emptyData.set(keyword, {
+          impressions: 0,
+          clicks: 0,
+          conversions: 0,
+          avgPosition: 0,
+          traffic: 0,
+          bounceRate: 0,
+          avgSessionDuration: 0,
+          pageViews: 0,
+          newUsers: 0,
+          returningUsers: 0,
+        });
+      });
+
+      return emptyData;
+    }
   }
 
   /**
