@@ -1,46 +1,35 @@
-🚨 Clerk JS 로딩 오류 - 환경변수 오버라이드 시도
+✅ Clerk 인증 완전 해결 - Premium Overlay 로그인 정상 작동
 
-⚠️ 핵심 문제:
-- Clerk 퍼블릭 키에 커스텀 도메인(clerk.familyoffices.vip) 인코딩됨
-- 해당 서브도메인이 Clerk JS 파일을 서빙하도록 구성되지 않음
-- Clerk Dashboard에 Domains 설정 메뉴 없음 (Account 레벨 설정으로 추정)
+🎯 최종 성공:
+- ✅ Clerk JS 정상 로딩 (200 OK)
+- ✅ Premium Overlay 로그인 기능 작동
+- ✅ Console 에러 없음
+- ✅ 계산기 페이지 Premium 기능 사용 가능
 
-📝 시도한 해결책 (`.env.local`):
-✅ Clerk URL 오버라이드 환경변수 추가:
-- NEXT_PUBLIC_CLERK_SIGN_IN_URL=/auth/sign-in
-- NEXT_PUBLIC_CLERK_SIGN_UP_URL=/auth/sign-up
-- NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
-- NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+📝 .env.local 최종 설정:
+- Development Keys (pk_test_...) 사용
+- 도메인: holy-tapir-98.clerk.accounts.dev
+- Frontend API 오버라이드 변수 제거
 
-✅ Clerk JS URL 직접 지정 시도:
-- NEXT_PUBLIC_CLERK_JS_URL=https://clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js
-- NEXT_PUBLIC_CLERK_FRONTEND_API=clerk.accounts.dev
+✅ 작동 확인:
+1. Network: Clerk API 요청 → 200 OK
+2. Premium Overlay 표시 → 정상
+3. 로그인 버튼 클릭 → Clerk 로그인 UI 표시
+4. 로그인 완료 → 계산기 사용 가능
 
-⚠️ 이 환경변수들이 작동하지 않을 경우 최종 해결 방법:
+💡 문제 원인 & 해결책:
+❌ Production Key (pk_live_...)는 커스텀 도메인(clerk.familyoffices.vip)이 Base64로 인코딩됨
+❌ localhost에서 커스텀 도메인 사용 불가 → 타임아웃 에러
+✅ Development Key (pk_test_...)는 기본 Clerk 도메인 사용 → 정상 작동
 
-1️⃣ **DNS 레벨 CNAME 설정** (가장 확실):
-   - 도메인 DNS 설정에서 추가:
-   - Type: CNAME
-   - Name: clerk
-   - Value: clerk.accounts.dev
-   - TTL: 3600
+📋 시도한 방법들:
+1. DNS CNAME 설정 (clerk → frontend-api.clerk.services)
+2. CSP 헤더에 clerk.services 추가
+3. Component paths를 application domain으로 변경
+4. Frontend API 환경 변수 오버라이드
+5. **Development Keys 사용** ← 최종 해결책
 
-2️⃣ **Clerk Support 문의**:
-   - support@clerk.com
-   - 커스텀 도메인 제거 또는 설정 지원 요청
-
-3️⃣ **완전히 새로운 Clerk 계정 생성**:
-   - 다른 이메일로 새 Clerk 계정 생성
-   - 커스텀 도메인 없는 기본 설정 사용
-   - 새 퍼블릭 키로 .env.local 업데이트
-
-🧪 테스트 방법:
-1. 개발 서버 재시작: npm run dev
-2. 브라우저 개발자 도구 → Network 탭 확인
-3. clerk-js@5 파일 로딩 성공 여부 확인
-4. 로그인 팝업 작동 확인
-
-📊 현재 상황:
-- ✅ 계산기 페이지 접근 정상
-- ✅ Premium Overlay 팝업 표시 정상
-- ❌ Clerk JS 로딩 실패로 로그인 기능 불가
+⚠️ Production 배포 시 주의사항:
+- Vercel 환경 변수에는 Production Keys (pk_live_...) 사용
+- localhost 개발: Development Keys
+- Production 배포: Production Keys (커스텀 도메인 포함)
