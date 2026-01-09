@@ -1,164 +1,186 @@
 #!/usr/bin/env tsx
+
 /**
- * 1Password Family 기반 시크릿 유효성 검증 스크립트
+ * Secret Validation Script
+ * Validates that all required environment variables are present
  */
-import { FamilySecretManager } from '../lib/secrets/family-manager';
 
-async function validateSecrets() {
-  console.log('🔍 FamilyOffice 시크릿 유효성 검증을 시작합니다...');
-  console.log('');
+import * as fs from 'fs/promises';
 
+const ENV_FILE = '.env.local';
+
+// Required secrets by category
+const REQUIRED_SECRETS = {
+  'Core Authentication & Database': {
+    required: [
+      'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY',
+      'CLERK_SECRET_KEY',
+      'CLERK_WEBHOOK_SECRET',
+      'NEXT_PUBLIC_SUPABASE_URL',
+      'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+      'SUPABASE_SERVICE_ROLE_KEY',
+    ],
+    optional: ['DATABASE_URL'],
+  },
+  'Analytics & Tracking': {
+    required: ['NEXT_PUBLIC_GA_MEASUREMENT_ID', 'NEXT_PUBLIC_GTM_ID'],
+    optional: ['NEXT_PUBLIC_KAKAO_PIXEL_ID'],
+  },
+  'Email & Communication': {
+    required: ['RESEND_API_KEY', 'NEXT_PUBLIC_RESEND_FROM_EMAIL'],
+    optional: ['BEEHIIV_API_KEY', 'BEEHIIV_PUBLICATION_ID'],
+  },
+  'Google APIs': {
+    required: [],
+    optional: [
+      'GOOGLE_SERVICE_ACCOUNT_EMAIL',
+      'GOOGLE_PRIVATE_KEY',
+      'GOOGLE_PROJECT_ID',
+      'GOOGLE_SEARCH_CONSOLE_PROPERTY',
+      'GOOGLE_ANALYTICS_PROPERTY_ID',
+    ],
+  },
+  'Korean APIs': {
+    required: [],
+    optional: [
+      'NAVER_CLIENT_ID',
+      'NAVER_CLIENT_SECRET',
+      'NAVER_WEBMASTER_SITE_URL',
+      'NAVER_BLOG_ID',
+    ],
+  },
+  'AI & Machine Learning': {
+    required: [],
+    optional: ['OPENAI_API_KEY', 'SERPER_API_KEY'],
+  },
+  'Caching & Performance': {
+    required: [],
+    optional: ['REDIS_URL', 'REDIS_HOST', 'REDIS_PORT', 'REDIS_PASSWORD'],
+  },
+  'Financial APIs': {
+    required: [],
+    optional: ['ALPHA_VANTAGE_API_KEY', 'YAHOO_FINANCE_API_KEY'],
+  },
+  'Monitoring & Error Tracking': {
+    required: [],
+    optional: [
+      'NEXT_PUBLIC_SENTRY_DSN',
+      'SENTRY_DSN',
+      'SENTRY_ORG',
+      'SENTRY_PROJECT',
+    ],
+  },
+  'Security & Webhooks': {
+    required: [],
+    optional: [
+      'SEO_WEBHOOK_SECRET',
+      'AUTOMATION_SECRET_KEY',
+      'CRON_SECRET',
+      'SLACK_SECURITY_WEBHOOK_URL',
+    ],
+  },
+};
+
+// Parse .env file
+async function parseEnvFile(): Promise<Map<string, string>> {
   try {
-    // 기본 연결 검증
-    const validation = await FamilySecretManager.validateAllSecrets();
+    const content = await fs.readFile(ENV_FILE, 'utf-8');
+    const env = new Map<string, string>();
 
-    // 결과 출력
-    if (validation.isValid) {
-      console.log('✅ 모든 시크릿이 유효합니다!');
-    } else {
-      console.log('❌ 시크릿 검증 실패:');
-      validation.errors.forEach(error => {
-        console.log(`   ❌ ${error}`);
-      });
+    for (const line of content.split('\n')) {
+      const trimmed = line.trim();
+
+      // Skip comments and empty lines
+      if (!trimmed || trimmed.startsWith('#')) continue;
+
+      const [key, ...valueParts] = trimmed.split('=');
+      const value = valueParts.join('=').trim();
+
+      if (key && value) {
+        env.set(key, value);
+      }
     }
 
-    if (validation.warnings.length > 0) {
-      console.log('');
-      console.log('⚠️ 경고 사항:');
-      validation.warnings.forEach(warning => {
-        console.log(`   ⚠️ ${warning}`);
-      });
-    }
-
-    // 상세 테스트
-    console.log('');
-    console.log('🧪 상세 테스트 진행 중...');
-
-    await testSupabaseConnection();
-    await testClerkConfiguration();
-    await testEnvironmentVariables();
-
-    console.log('');
-    if (validation.isValid) {
-      console.log('🎉 모든 검증을 통과했습니다!');
-      console.log('');
-      console.log('🚀 사용 가능한 명령어:');
-      console.log('   npm run dev:1p       # 1Password 연동 개발 서버');
-      console.log('   npm run build:1p     # 1Password 연동 빌드');
-      console.log('   npm run secrets:sync # 시크릿 동기화');
-    } else {
-      console.log('🔧 문제를 해결한 후 다시 실행해주세요.');
-      process.exit(1);
-    }
-  } catch (error: any) {
-    console.error('❌ 검증 중 오류 발생:', error.message);
-
-    if (error.message.includes('not signed in')) {
-      console.log('');
-      console.log('💡 해결책:');
-      console.log('   npm run 1password:login');
-      console.log('   또는: op signin');
-    } else if (error.message.includes('not found')) {
-      console.log('');
-      console.log('💡 해결책:');
-      console.log('   npm run secrets:migrate');
-      console.log('   또는: ./scripts/migrate-secrets.sh');
-    }
-
+    return env;
+  } catch (error) {
+    console.error(`❌ ${ENV_FILE} 파일을 읽을 수 없습니다.`);
     process.exit(1);
   }
 }
 
-async function testSupabaseConnection() {
-  try {
-    const serviceRoleKey = await FamilySecretManager.getSecret(
-      'supabase.serviceRoleKey'
-    );
+// Validate secrets
+async function validateSecrets(): Promise<void> {
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('  Secret Validation');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
-    if (!serviceRoleKey.startsWith('eyJ')) {
-      console.log('   ⚠️ Supabase Service Role Key: JWT 형식이 아닙니다');
-      return;
+  const env = await parseEnvFile();
+  let hasErrors = false;
+  let totalRequired = 0;
+  let totalOptional = 0;
+  let missingRequired = 0;
+  let missingOptional = 0;
+
+  for (const [category, secrets] of Object.entries(REQUIRED_SECRETS)) {
+    console.log(`\n📦 ${category}:`);
+
+    // Check required secrets
+    for (const key of secrets.required) {
+      totalRequired++;
+      const value = env.get(key);
+
+      if (!value || value === '') {
+        console.log(`  ❌ ${key} (필수 - 누락됨)`);
+        hasErrors = true;
+        missingRequired++;
+      } else {
+        console.log(`  ✅ ${key}`);
+      }
     }
 
-    // JWT 디코딩 테스트
-    const jwtParts = serviceRoleKey.split('.');
-    if (jwtParts.length < 2 || !jwtParts[1]) {
-      console.log(
-        '   ⚠️ Supabase Service Role Key: 유효하지 않은 JWT 형식입니다'
-      );
-      return;
-    }
-    const payload = JSON.parse(Buffer.from(jwtParts[1]!, 'base64').toString());
+    // Check optional secrets
+    for (const key of secrets.optional) {
+      totalOptional++;
+      const value = env.get(key);
 
-    if (payload.role !== 'service_role') {
-      console.log(
-        '   ⚠️ Supabase Service Role Key: 역할이 service_role이 아닙니다'
-      );
-      return;
-    }
-
-    console.log('   ✅ Supabase 설정 검증 통과');
-  } catch (error: any) {
-    console.log(`   ❌ Supabase 테스트 실패: ${error.message}`);
-  }
-}
-
-async function testClerkConfiguration() {
-  try {
-    const secretKey = await FamilySecretManager.getSecret('clerk.secretKey');
-    const webhookSecret = await FamilySecretManager.getSecret(
-      'clerk.webhookSecret'
-    );
-
-    if (!secretKey.startsWith('sk_')) {
-      console.log(
-        '   ⚠️ Clerk Secret Key: 형식이 올바르지 않습니다 (sk_로 시작해야 함)'
-      );
-      return;
-    }
-
-    if (!webhookSecret.startsWith('whsec_')) {
-      console.log(
-        '   ⚠️ Clerk Webhook Secret: 형식이 올바르지 않습니다 (whsec_로 시작해야 함)'
-      );
-      return;
-    }
-
-    console.log('   ✅ Clerk 설정 검증 통과');
-  } catch (error: any) {
-    console.log(`   ❌ Clerk 테스트 실패: ${error.message}`);
-  }
-}
-
-async function testEnvironmentVariables() {
-  const requiredEnvVars = [
-    'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY',
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-  ];
-
-  let missingVars = 0;
-
-  for (const envVar of requiredEnvVars) {
-    if (!process.env[envVar]) {
-      console.log(`   ❌ 환경변수 누락: ${envVar}`);
-      missingVars++;
+      if (!value || value === '') {
+        console.log(`  ⚠️  ${key} (선택 - 누락됨)`);
+        missingOptional++;
+      } else {
+        console.log(`  ✅ ${key}`);
+      }
     }
   }
 
-  if (missingVars === 0) {
-    console.log('   ✅ 환경변수 검증 통과');
+  // Summary
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('  Validation Summary');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  console.log(`필수 환경 변수: ${totalRequired - missingRequired}/${totalRequired}`);
+  console.log(`선택 환경 변수: ${totalOptional - missingOptional}/${totalOptional}`);
+
+  if (hasErrors) {
+    console.log('\n❌ 검증 실패: 필수 환경 변수가 누락되었습니다.');
+    console.log('\n해결 방법:');
+    console.log('  1. 1Password에 누락된 Secret 추가');
+    console.log('  2. npm run secrets:sync 실행');
+    process.exit(1);
+  } else if (missingOptional > 0) {
+    console.log('\n⚠️  검증 경고: 선택 환경 변수 일부가 누락되었습니다.');
+    console.log('   일부 기능이 제한될 수 있습니다.');
+    console.log('\n선택 사항:');
+    console.log('  - 1Password에 선택 Secret 추가 (기능 활성화)');
+    console.log('  - 현재 상태로 계속 (일부 기능 비활성화)');
   } else {
-    console.log(`   ⚠️ ${missingVars}개의 환경변수가 누락되었습니다`);
-    console.log(
-      '   💡 npm run secrets:sync를 실행하여 .env.local을 생성하세요'
-    );
+    console.log('\n✅ 검증 성공: 모든 환경 변수가 설정되었습니다!');
   }
+
+  console.log('');
 }
 
-// 스크립트 실행
-if (require.main === module) {
-  validateSecrets().catch(console.error);
-}
-
-export { validateSecrets };
+// Main execution
+validateSecrets().catch((error) => {
+  console.error('❌ 에러 발생:', error.message);
+  process.exit(1);
+});

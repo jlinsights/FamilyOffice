@@ -1,17 +1,24 @@
 import { NavigationItem } from '@/types/globals';
 
 // 네비게이션 메뉴 데이터
+// 네비게이션 메뉴 데이터
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/about', label: '소개' },
-  { href: '/program', label: '프로그램' },
-  { href: '/solution-finder', label: '솔루션' },
+  { href: '/membership', label: '멤버십' },
+  { 
+    href: '/solution-finder', 
+    label: '서비스',
+    submenu: [
+        { href: '/program', label: '프로그램' },
+        { href: '/solution-finder', label: '솔루션 파인더' },
+        { href: '/seminar', label: '세미나' },
+        { href: '/calculators', label: '계산기' },
+    ]
+  },
   { href: '/insights', label: '인사이트' },
-  { href: '/calculators', label: '계산기' },
-  // { href: "/chat", label: "AI 상담" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
-  // { href: "/dashboard", label: "대시보드" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
-  // { href: "/education", label: "투자 교육" }, // [미완성] 추후 오픈 예정 - 현재는 숨김
-  { href: '/seminar', label: '세미나' },
   { href: '/recruit', label: '채용' },
+  // { href: '/stories', label: '케이스/스토리' }, // [미완성] 추후 오픈
+  { href: '/apply/membership-intake', label: '상담신청', isPrimary: true },
 ];
 
 // 위 4개 메뉴는 미완성 상태이므로 주석 처리하여 숨깁니다.

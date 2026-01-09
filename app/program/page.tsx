@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Crown, Sparkles } from 'lucide-react';
+import { ArrowRight, Crown } from 'lucide-react';
 
 import Link from 'next/link';
 
@@ -89,15 +89,15 @@ function HeroSection() {
             <ArrowRight className="ml-2 h-5 w-5" aria-hidden />
           </Link>
           <Link
-            href="#benefits"
+            href="/membership"
             className={cn(
               buttonVariants({ size: 'lg', variant: 'outline' }),
               'font-bold shadow-lg px-8 py-4 text-lg'
             )}
-            aria-label="혜택 알아보기"
+            aria-label="멤버십 안내"
           >
-            <Sparkles className="mr-2 h-5 w-5" aria-hidden />
-            혜택 알아보기
+            <Crown className="mr-2 h-5 w-5" aria-hidden />
+            멤버십 안내
           </Link>
         </div>
       </div>

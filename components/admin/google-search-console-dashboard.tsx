@@ -1,16 +1,16 @@
 'use client';
 
 import {
-  AlertTriangle,
-  BarChart3,
-  CheckCircle,
-  Clock,
-  Eye,
-  Globe,
-  MousePointer,
-  Search,
-  Target,
-  TrendingUp,
+    AlertTriangle,
+    BarChart3,
+    CheckCircle,
+    Clock,
+    Eye,
+    Globe,
+    MousePointer,
+    Search,
+    Target,
+    TrendingUp,
 } from 'lucide-react';
 
 import { useEffect, useState } from 'react';
@@ -18,11 +18,11 @@ import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -66,21 +66,43 @@ export function GoogleSearchConsoleDashboard() {
 
       // 실제 Google Search Console API 연동
       const response = await fetch('/api/search-console/metrics');
-      const result = await response.json();
-
-      if (result.success && result.data) {
-        setSearchMetrics(result.data.searchMetrics);
-        setPagePerformance(result.data.pagePerformance);
+      
+      let shouldUseFallback = false;
+      
+      if (response.ok) {
+        try {
+          const result = await response.json();
+          if (result.success && result.data) {
+            setSearchMetrics(result.data.searchMetrics);
+            setPagePerformance(result.data.pagePerformance);
+          } else {
+            console.warn('Google Search Console API returned unsuccessful response:', result.error);
+            shouldUseFallback = true;
+          }
+        } catch (e) {
+             console.warn('Failed to parse Google Search Console API response:', e);
+             shouldUseFallback = true;
+        }
       } else {
-        console.warn('Using sample data due to API error/empty:', result.error);
-        throw new Error('API request failed');
+        console.warn(`Google Search Console API failed with status: ${response.status}`);
+        shouldUseFallback = true;
+      }
+
+      if (shouldUseFallback) {
+         loadFallbackData();
       }
     } catch (error) {
-      console.error(
+      console.warn(
         'Failed to load Search Console data, using fallback:',
         error
       );
+      loadFallbackData();
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  const loadFallbackData = () => {
       // Fallback: Use sample data if API fails or keys are invalid
       const sampleSearchMetrics: SearchMetrics[] = [
         {
@@ -89,16 +111,31 @@ export function GoogleSearchConsoleDashboard() {
           impressions: 8934,
           ctr: 13.95,
           position: 4.2,
-          change: +23,
+          change: 23,
         },
-        // ... (Keep existing sample data as fallback provided originally)
+        {
+          query: '법인 자산관리',
+          clicks: 982,
+          impressions: 6543,
+          ctr: 15.01,
+          position: 3.5,
+          change: 15,
+        },
+        {
+          query: 'CEO 세금계산',
+          clicks: 876,
+          impressions: 5432,
+          ctr: 16.12,
+          position: 2.8,
+          change: -5,
+        },
         {
           query: '가업승계 컨설팅',
           clicks: 892,
           impressions: 5671,
           ctr: 15.73,
           position: 3.8,
-          change: +45,
+          change: 45,
         },
         {
           query: '중소기업 자산관리',
@@ -106,7 +143,7 @@ export function GoogleSearchConsoleDashboard() {
           impressions: 4521,
           ctr: 14.02,
           position: 5.1,
-          change: +12,
+          change: 12,
         },
       ];
 
@@ -125,13 +162,24 @@ export function GoogleSearchConsoleDashboard() {
           ctr: 14.95,
           position: 4.8,
         },
+        {
+          url: '/contact',
+          clicks: 1245,
+          impressions: 8921,
+          ctr: 13.95,
+          position: 5.2,
+        },
+        {
+          url: '/about',
+          clicks: 982,
+          impressions: 6543,
+          ctr: 15.01,
+          position: 3.5,
+        },
       ];
 
       setSearchMetrics(sampleSearchMetrics);
       setPagePerformance(samplePagePerformance);
-    } finally {
-      setLoading(false);
-    }
   };
 
   const getTrendIcon = (change: number) => {

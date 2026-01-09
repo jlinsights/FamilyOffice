@@ -314,7 +314,8 @@ class ComplianceTestSuite {
     action?: string;
     resource?: string;
   }): AuditLogEntry[] {
-    let filteredLogs = [...this.auditLogs];
+    // Deep clone to ensure immutability
+    let filteredLogs = this.auditLogs.map(log => ({ ...log }));
 
     if (filters) {
       if (filters.startDate) {
@@ -557,8 +558,10 @@ describe('Compliance and Audit Trail Testing', () => {
 
       expect(results).toHaveLength(1);
       expect(results[0]?.compliant).toBe(false);
-      expect(results[0]?.violations).toContain(
-        expect.stringMatching(/Large transaction not reported within 24 hours/)
+      expect(results[0]?.violations).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(/Large transaction not reported within 24 hours/)
+        ])
       );
       expect(results[0]?.riskLevel).toBe('CRITICAL');
     });
@@ -604,11 +607,15 @@ describe('Compliance and Audit Trail Testing', () => {
 
       expect(results).toHaveLength(1);
       expect(results[0]?.compliant).toBe(false);
-      expect(results[0]?.violations).toContain(
-        expect.stringMatching(/AAPL: 6\.00% ownership requires 13D filing/)
+      expect(results[0]?.violations).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(/AAPL: 6\.00% ownership requires 13D filing/)
+        ])
       );
-      expect(results[0]?.recommendations).toContain(
-        expect.stringMatching(/File Schedule 13D for AAPL within 10 days/)
+      expect(results[0]?.recommendations).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(/File Schedule 13D for AAPL within 10 days/)
+        ])
       );
     });
 
@@ -654,20 +661,46 @@ describe('Compliance and Audit Trail Testing', () => {
 
       expect(results).toHaveLength(1);
       expect(results[0]?.compliant).toBe(false);
-      expect(results[0]?.violations).toContain(
-        expect.stringMatching(/Potential structuring detected/)
+      expect(results[0]?.violations).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(/Potential structuring detected/)
+        ])
       );
-      expect(results[0]?.recommendations).toContain(
-        'File Suspicious Activity Report (SAR)'
+      expect(results[0]?.recommendations).toEqual(
+        expect.arrayContaining([
+          'File Suspicious Activity Report (SAR)'
+        ])
       );
       expect(results[0]?.riskLevel).toBe('CRITICAL');
     });
 
     test('should detect high frequency trading patterns', () => {
-      const dayTradingScenario = FINANCIAL_SCENARIOS.DAY_TRADER_HIGH_FREQUENCY;
+      // Create deterministic high frequency trading pattern
+      const highFrequencyTransactions = [
+        // 12 BUY transactions for TSLA
+        ...Array.from({ length: 12 }, (_, i) => ({
+          id: `hft-buy-${i}`,
+          type: 'BUY' as const,
+          symbol: 'TSLA',
+          shares: 100,
+          price: 240 + i,
+          timestamp: new Date(Date.now() - i * 60 * 60 * 1000).toISOString(),
+          currency: 'USD',
+        })),
+        // 12 SELL transactions for TSLA
+        ...Array.from({ length: 12 }, (_, i) => ({
+          id: `hft-sell-${i}`,
+          type: 'SELL' as const,
+          symbol: 'TSLA',
+          shares: 100,
+          price: 245 + i,
+          timestamp: new Date(Date.now() - (i + 12) * 60 * 60 * 1000).toISOString(),
+          currency: 'USD',
+        })),
+      ];
 
       const results = complianceSuite.checkCompliance(
-        dayTradingScenario.transactions,
+        highFrequencyTransactions,
         'AML-001'
       );
 
@@ -729,13 +762,17 @@ describe('Compliance and Audit Trail Testing', () => {
 
       expect(results).toHaveLength(1);
       expect(results[0]?.compliant).toBe(false);
-      expect(results[0]?.violations).toContain(
-        expect.stringMatching(
-          /User data retained for \d+ days without activity/
-        )
+      expect(results[0]?.violations).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(
+            /User data retained for \d+ days without activity/
+          )
+        ])
       );
-      expect(results[0]?.recommendations).toContain(
-        'Consider data anonymization or deletion for inactive users'
+      expect(results[0]?.recommendations).toEqual(
+        expect.arrayContaining([
+          'Consider data anonymization or deletion for inactive users'
+        ])
       );
     });
 

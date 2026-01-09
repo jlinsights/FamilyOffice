@@ -63,6 +63,7 @@ export interface NavigationItem {
   isExternal?: boolean; // 외부 링크 여부
   requireAuth?: boolean; // 인증 필요 여부
   submenu?: NavigationSubItem[]; // 서브메뉴 아이템들
+  isPrimary?: boolean;
 }
 
 // 서브메뉴 아이템 타입 정의

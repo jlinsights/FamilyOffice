@@ -1,3 +1,4 @@
+import { FadeIn } from '@/components/ui/animation/FadeIn';
 import { Badge } from '@/components/ui/badge';
 import { HERO_CONTENT } from '@/constants/main-page';
 import { ArrowDown, Crown } from 'lucide-react';
@@ -29,38 +30,51 @@ export function HeroSection() {
 
         {/* 메인 헤드라인 - LCP Element */}
         {/* 애니메이션 제거하여 LCP 최적화 */}
-        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent whitespace-pre-line font-serif">
-          {HERO_CONTENT.title.main}
+        {/* 메인 헤드라인 - LCP Element */}
+        <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-primary via-blue-700 to-amber-600 bg-clip-text text-transparent font-serif">
+          <span className="whitespace-pre-line block">
+            {HERO_CONTENT.title.main}
+          </span>
           <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-wider font-sans text-foreground">
             {HERO_CONTENT.title.sub}
           </span>
         </h1>
 
         {/* 서브 헤드라인 (SEO: Family Office 키워드 포함) */}
-        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-backwards">
-          {HERO_CONTENT.subtitle.prefix}
-          <span className="block mt-1 font-light text-muted-foreground">
-            {HERO_CONTENT.subtitle.highlight}
-          </span>
-        </p>
-
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto leading-relaxed font-light animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300 fill-mode-backwards">
-          {HERO_CONTENT.description.prefix}
-          <span className="block mt-1">
-            {HERO_CONTENT.description.highlight}
-          </span>
-        </p>
+        <FadeIn direction="up" delay={1.2}>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8">
+            {HERO_CONTENT.subtitle.prefix}
+            <span className="block mt-1 font-light text-muted-foreground">
+              {HERO_CONTENT.subtitle.highlight}
+            </span>
+          </p>
+        </FadeIn>
+        
+        <FadeIn direction="up" delay={1.4}>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto leading-relaxed font-light">
+            {HERO_CONTENT.description.prefix}
+            <span className="block mt-1">
+              {HERO_CONTENT.description.highlight}
+            </span>
+          </p>
+        </FadeIn>
 
         {/* 핵심 성과 지표 (Client Component) */}
-        <HeroStats />
+        <FadeIn direction="up" delay={1.6}>
+          <HeroStats />
+        </FadeIn>
 
         {/* CTA 버튼 (Client Component) */}
-        <HeroActions />
+        <FadeIn direction="up" delay={1.8}>
+           <HeroActions />
+        </FadeIn>
 
         {/* 스크롤 인디케이터 */}
-        <div className="animate-bounce mt-8 lg:mt-12">
-          <ArrowDown className="h-6 w-6 lg:h-8 lg:w-8 text-muted-foreground mx-auto" />
-        </div>
+        <FadeIn direction="down" delay={2.5}>
+          <div className="animate-bounce mt-8 lg:mt-12">
+            <ArrowDown className="h-6 w-6 lg:h-8 lg:w-8 text-muted-foreground mx-auto" />
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

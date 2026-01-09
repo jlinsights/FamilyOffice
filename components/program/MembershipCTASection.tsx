@@ -44,13 +44,13 @@ export function MembershipCTASection() {
               />
             </Link>
             <Link
-              href="/solutions"
-              aria-label="솔루션 자세히 보기"
+              href="/membership"
+              aria-label="멤버십 자세히 보기"
               className={cn(
                 buttonVariants({ size: 'lg', variant: 'outline' })
               )}
             >
-              솔루션 자세히 보기
+              멤버십 자세히 보기
             </Link>
           </div>
           <div

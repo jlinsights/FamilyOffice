@@ -48,6 +48,9 @@ const mockPerformanceObserver = jest.fn().mockImplementation(_callback => ({
 
 describe('Core Web Vitals System', () => {
   beforeEach(() => {
+    // Reset modules to get fresh singleton instance
+    jest.resetModules();
+
     // Setup mocks
     Object.defineProperty(window, 'localStorage', {
       value: localStorageMock,
@@ -68,6 +71,7 @@ describe('Core Web Vitals System', () => {
 
   afterEach(() => {
     localStorageMock.clear();
+    jest.resetModules();
   });
 
   describe('WebVitalsMonitoring Class', () => {

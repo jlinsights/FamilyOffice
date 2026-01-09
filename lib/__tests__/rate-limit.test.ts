@@ -1,8 +1,38 @@
-import { NextRequest } from 'next/server';
+// Mock uncrypto (dependency of @upstash/redis)
+jest.mock('uncrypto', () => ({
+  default: {
+    getRandomValues: jest.fn(),
+    randomUUID: jest.fn(),
+    subtle: {},
+  },
+  getRandomValues: jest.fn(),
+  randomUUID: jest.fn(),
+  subtle: {},
+}));
 
-import { checkRateLimit, withRateLimit, rateLimitConfig } from '../rate-limit';
+// Mock Upstash Redis (MUST come before imports)
+jest.mock('@upstash/redis', () => ({
+  Redis: jest.fn().mockImplementation(() => ({
+    get: jest.fn().mockResolvedValue(null),
+    set: jest.fn().mockResolvedValue('OK'),
+    setex: jest.fn().mockResolvedValue('OK'),
+    incr: jest.fn().mockResolvedValue(1),
+    expire: jest.fn().mockResolvedValue(1),
+    del: jest.fn().mockResolvedValue(1),
+    exists: jest.fn().mockResolvedValue(0),
+    ttl: jest.fn().mockResolvedValue(-1),
+  })),
+  Ratelimit: jest.fn().mockImplementation(() => ({
+    limit: jest.fn().mockResolvedValue({
+      success: true,
+      limit: 10,
+      remaining: 9,
+      reset: Date.now() + 60000,
+    }),
+  })),
+}));
 
-// Mock Redis and NodeCache
+// Mock ioredis
 jest.mock('ioredis', () => {
   return jest.fn().mockImplementation(() => ({
     get: jest.fn(),
@@ -13,6 +43,7 @@ jest.mock('ioredis', () => {
   }));
 });
 
+// Mock NodeCache
 jest.mock('node-cache', () => {
   return jest.fn().mockImplementation(() => ({
     get: jest.fn(),
@@ -20,6 +51,10 @@ jest.mock('node-cache', () => {
     clear: jest.fn(),
   }));
 });
+
+import { NextRequest } from 'next/server';
+
+import { checkRateLimit, withRateLimit, rateLimitConfig } from '../rate-limit';
 
 describe('Rate Limiting System', () => {
   beforeEach(() => {
@@ -70,10 +105,12 @@ describe('Rate Limiting System', () => {
       const wrappedHandler = withRateLimit(mockHandler, 'api');
 
       const request = new NextRequest('http://localhost:3000/api/test');
+      const params = {};
 
-      await wrappedHandler(request, {});
+      await wrappedHandler(request, params);
 
-      expect(mockHandler).toHaveBeenCalledWith(request);
+      // Next.js route handlers receive (request, params) as arguments
+      expect(mockHandler).toHaveBeenCalledWith(request, params);
     });
   });
 });

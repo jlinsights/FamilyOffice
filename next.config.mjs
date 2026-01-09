@@ -29,7 +29,7 @@ const nextConfig = {
   },
   // Next.js 16: eslint configuration moved to eslint.config.js
   typescript: {
-    ignoreBuildErrors: true, // TEMPORARY: Disable TS checks to isolate build error
+    ignoreBuildErrors: false, // Enable TypeScript validation for production safety
   },
 
   // Next.js 16: Turbopack configuration (empty config to silence warning)

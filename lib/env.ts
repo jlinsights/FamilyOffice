@@ -18,23 +18,24 @@ export const publicEnvSchema = z.object({
 
 // 서버 전용 환경변수 스키마 - 보안 강화
 export const serverEnvSchema = z.object({
-  // Supabase - 필수 환경변수 (production에서는 필수)
+  // Supabase - 개발 환경에서는 선택적, production에서는 필수
   SUPABASE_SERVICE_ROLE_KEY: z
     .string()
-    .min(1, 'Supabase Service Role Key is required'),
+    .min(1, 'Supabase Service Role Key is required')
+    .optional(),
 
-  // Clerk - 필수 환경변수 (production에서는 필수)
-  CLERK_SECRET_KEY: z.string().min(1, 'Clerk Secret Key is required'),
-  CLERK_WEBHOOK_SECRET: z.string().min(1, 'Clerk Webhook Secret is required'),
+  // Clerk - 개발 환경에서는 선택적, production에서는 필수
+  CLERK_SECRET_KEY: z.string().min(1, 'Clerk Secret Key is required').optional(),
+  CLERK_WEBHOOK_SECRET: z.string().min(1, 'Clerk Webhook Secret is required').optional(),
 
   // 선택적 환경변수들
-  REDIS_URL: z.string().optional(),
+  REDIS_URL: z.string().url().optional().or(z.literal('')),
   REDIS_HOST: z.string().optional(),
-  REDIS_PORT: z.string().optional(),
+  REDIS_PORT: z.string().regex(/^\d+$/).transform(Number).optional().or(z.literal('')),
   REDIS_PASSWORD: z.string().optional(),
   LOGS_SO_API_KEY: z.string().optional(),
   LOGS_SO_WORKSPACE_ID: z.string().optional(),
-  ALPHA_VANTAGE_API_KEY: z.string().optional(),
+  ALPHA_VANTAGE_API_KEY: z.string().regex(/^[A-Z0-9]+$/, 'Invalid Alpha Vantage API key format').optional().or(z.literal('')),
   BEEHIIV_API_KEY: z.string().optional(),
   BEEHIIV_PUBLICATION_ID: z.string().optional(),
   HUBSPOT_API_KEY: z.string().optional(),
@@ -46,20 +47,27 @@ export const serverEnvSchema = z.object({
 
 // 클라이언트 전용 환경변수 스키마 - 보안 강화
 export const clientEnvSchema = z.object({
-  // 필수 클라이언트 환경변수
+  // 개발 환경에서는 선택적, production에서는 필수
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z
     .string()
-    .min(1, 'Clerk Publishable Key is required'),
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url('Invalid Supabase URL'),
+    .min(1, 'Clerk Publishable Key is required')
+    .optional(),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url('Invalid Supabase URL').optional(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z
     .string()
-    .min(1, 'Supabase Anon Key is required'),
+    .min(1, 'Supabase Anon Key is required')
+    .optional(),
 
   // 선택적 클라이언트 환경변수
-  NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().optional(),
+  NEXT_PUBLIC_GA_MEASUREMENT_ID: z
+    .string()
+    .regex(/^G-[A-Z0-9]{10}$/, 'Invalid GA4 measurement ID format')
+    .optional()
+    .or(z.literal('')),
   NEXT_PUBLIC_APP_URL: z.string().url().optional(),
   NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
   NEXT_PUBLIC_CALCOM_API_KEY: z.string().optional(),
+  NEXT_PUBLIC_CALCOM_NAMESPACE: z.string().optional(),
   NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: z.string().optional(),
   NEXT_PUBLIC_KAKAO_CHANNEL_ID: z.string().optional(),
   NEXT_PUBLIC_KAKAO_PIXEL_ID: z.string().optional(),
@@ -176,19 +184,124 @@ export function createEnv() {
   return allEnv;
 }
 
-// 환경변수 validation helper functions - 단순화
+// 환경변수 validation helper functions
 export const validateEnvOnStartup = () => {
-  return { success: true, message: '환경변수 검증 건너뛰기 (단순화됨)' };
+  try {
+    // Skip validation in test environment
+    if (process.env.SKIP_ENV_VALIDATION === 'true') {
+      return { success: true, message: '환경변수 검증 성공' };
+    }
+
+    const publicResult = publicEnvSchema.safeParse({
+      NODE_ENV: process.env.NODE_ENV,
+      VERCEL_ENV: process.env.VERCEL_ENV,
+      VERCEL_URL: process.env.VERCEL_URL,
+      NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    });
+
+    if (!publicResult.success) {
+      return { success: false, message: '공용 환경변수 검증 실패' };
+    }
+
+    return { success: true, message: '환경변수 검증 성공' };
+  } catch (error) {
+    return { success: false, message: '환경변수 검증 오류' };
+  }
 };
 
-// 특정 환경변수 그룹 검증 - 단순화
+// 특정 환경변수 그룹 검증
 export const validateEnvGroup = (
   group: 'clerk' | 'supabase' | 'redis' | 'analytics'
 ) => {
-  return {
-    success: true,
-    message: `${group} 환경변수 검증 건너뛰기 (단순화됨)`,
-  };
+  try {
+    if (group === 'clerk') {
+      const clerkEnv = {
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+          process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+        CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+        CLERK_WEBHOOK_SECRET: process.env.CLERK_WEBHOOK_SECRET,
+      };
+
+      const schema = z.object({
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().optional(),
+        CLERK_SECRET_KEY: z.string().optional(),
+        CLERK_WEBHOOK_SECRET: z.string().optional(),
+      });
+
+      const result = schema.safeParse(clerkEnv);
+      if (!result.success) {
+        return { success: false, message: 'clerk 환경변수 오류' };
+      }
+      return { success: true, message: 'clerk 환경변수 검증 성공' };
+    }
+
+    if (group === 'supabase') {
+      const supabaseEnv = {
+        NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+        NEXT_PUBLIC_SUPABASE_ANON_KEY:
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+        SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+      };
+
+      const schema = z.object({
+        NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
+        SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
+      });
+
+      const result = schema.safeParse(supabaseEnv);
+      if (!result.success) {
+        return { success: false, message: 'supabase 환경변수 오류' };
+      }
+      return { success: true, message: 'supabase 환경변수 검증 성공' };
+    }
+
+    if (group === 'redis') {
+      const redisEnv = {
+        REDIS_URL: process.env.REDIS_URL,
+        REDIS_HOST: process.env.REDIS_HOST,
+        REDIS_PORT: process.env.REDIS_PORT,
+        REDIS_PASSWORD: process.env.REDIS_PASSWORD,
+      };
+
+      const schema = z.object({
+        REDIS_URL: z.string().url().optional().or(z.literal('')),
+        REDIS_HOST: z.string().optional(),
+        REDIS_PORT: z.string().optional(),
+        REDIS_PASSWORD: z.string().optional(),
+      });
+
+      const result = schema.safeParse(redisEnv);
+      if (!result.success) {
+        return { success: false, message: 'redis 환경변수 오류' };
+      }
+      return { success: true, message: 'redis 환경변수 검증 성공' };
+    }
+
+    if (group === 'analytics') {
+      const analyticsEnv = {
+        NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+      };
+
+      const schema = z.object({
+        NEXT_PUBLIC_GA_MEASUREMENT_ID: z
+          .string()
+          .regex(/^G-[A-Z0-9]{10}$/)
+          .optional()
+          .or(z.literal('')),
+      });
+
+      const result = schema.safeParse(analyticsEnv);
+      if (!result.success) {
+        return { success: false, message: 'analytics 환경변수 오류' };
+      }
+      return { success: true, message: 'analytics 환경변수 검증 성공' };
+    }
+
+    return { success: false, message: '알 수 없는 그룹' };
+  } catch (error) {
+    return { success: false, message: `${group} 환경변수 오류` };
+  }
 };
 
 // 캐싱된 환경변수 객체

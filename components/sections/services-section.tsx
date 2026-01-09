@@ -1,24 +1,24 @@
 'use client';
 
 import {
-  ArrowRight,
-  Briefcase,
-  Building2,
-  Crown,
-  Search,
-  Shield,
-  Target,
-  TrendingUp,
+    ArrowRight,
+    Briefcase,
+    Building2,
+    Crown,
+    Search,
+    Shield,
+    Target,
+    TrendingUp,
 } from 'lucide-react';
 
 import Link from 'next/link';
 
-import { Reveal, StaggerContainer } from '@/components/animations/reveal';
 import {
-  CTACard,
-  LargeServiceCard,
-  RegularServiceCard,
+    CTACard,
+    LargeServiceCard,
+    RegularServiceCard,
 } from '@/components/bento';
+import { FadeIn } from '@/components/ui/animation/FadeIn';
 
 import { BENTO_SERVICES, getGridClass } from '@/constants/bento-services';
 
@@ -34,8 +34,8 @@ export function ServicesSection() {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-400/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="container relative z-10">
-        <Reveal className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-6 shadow-sm animate-fade-in">
+        <FadeIn direction="up" className="text-center mb-16">
+          <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-6 shadow-sm">
             <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full mr-2">
               Premium
             </span>
@@ -45,18 +45,14 @@ export function ServicesSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 dark:text-white tracking-tight animate-slide-up">
-            <span className="bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-900 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent">
-              차별화된 패밀리오피스
-            </span>{' '}
-            <span className="text-slate-700 dark:text-slate-300">
-              전용 솔루션
+          <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
+             <span className="inline-block">
+              차별화된 패밀리오피스 전용 솔루션
             </span>
           </h2>
 
           <p
-            className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed animate-slide-up font-light"
-            style={{ animationDelay: '100ms' }}
+            className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-light"
           >
             법인 자산 관리 및 가업승계 전문{' '}
             <span className="font-semibold text-blue-700 dark:text-blue-400">
@@ -65,18 +61,18 @@ export function ServicesSection() {
             로<br className="hidden sm:block" /> 세대를 잇는 자산관리를
             실현합니다
           </p>
-        </Reveal>
+        </FadeIn>
 
         {/* Bento Grid 서비스 카드 */}
-        <StaggerContainer
+        <FadeIn
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 auto-rows-auto"
-          staggerDelay={0.1}
+          stagger={0.1}
         >
           {BENTO_SERVICES.map(service => {
             const gridClass = getGridClass(service.size);
 
             return (
-              <Reveal key={service.id} className={gridClass}>
+              <div key={service.id} className={gridClass}>
                 {service.size === 'large' ? (
                   <LargeServiceCard service={service} />
                 ) : service.size === 'cta' ? (
@@ -91,12 +87,13 @@ export function ServicesSection() {
                 ) : (
                   <RegularServiceCard service={service} />
                 )}
-              </Reveal>
+              </div>
             );
           })}
-        </StaggerContainer>
+        </FadeIn>
 
         {/* 통계 섹션 */}
+        <FadeIn direction="up" delay={0.2}>
         <div className="relative rounded-3xl p-10 mb-20 overflow-hidden bg-slate-900 dark:bg-slate-950 text-white shadow-2xl">
           <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
@@ -156,31 +153,56 @@ export function ServicesSection() {
             ))}
           </div>
         </div>
+        </FadeIn>
 
         {/* CTA 섹션 */}
-        <div className="text-center">
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <FadeIn direction="up" delay={0.4} className="text-center">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
             <Link
               href="/family-office-center"
-              className="inline-flex items-center justify-center rounded-full text-lg font-bold px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="group relative flex flex-col items-center justify-center p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden"
             >
-              <Crown className="mr-2 h-5 w-5" />
-              패밀리오피스 센터
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Crown className="w-24 h-24 -mr-8 -mt-8 rotate-12" />
+              </div>
+              
+              <div className="relative z-10 text-center">
+                <div className="inline-flex items-center justify-center p-2 bg-white/10 backdrop-blur-sm rounded-full mb-4">
+                  <span className="text-xs font-bold px-2 text-blue-100">VIP 전용</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+                  패밀리오피스 센터
+                  <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                </h3>
+                <p className="text-blue-100 font-medium">최고 자산가를 위한 전용 서비스</p>
+              </div>
             </Link>
+
             <Link
               href="/solutions"
-              className="inline-flex items-center justify-center rounded-full text-lg font-bold px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm hover:shadow-md transition-all duration-300"
+              className="group relative flex flex-col items-center justify-center p-8 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
             >
-              <Search className="mr-2 h-5 w-5" />
-              전체 솔루션 보기
+              <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                <Search className="w-24 h-24 -mr-8 -mt-8 -rotate-12" />
+              </div>
+
+              <div className="relative z-10 text-center">
+                <div className="inline-flex items-center justify-center p-2 bg-slate-100 dark:bg-slate-700 rounded-full mb-4">
+                  <span className="text-xs font-bold px-2 text-slate-600 dark:text-slate-300">Total Solutions</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+                  전체 솔루션 보기
+                  <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400 font-medium">30+ 전문 서비스 확인</p>
+              </div>
             </Link>
           </div>
 
           <p className="text-sm text-slate-500 dark:text-slate-400">
             최고 자산가를 위한 차별화된 패밀리오피스 서비스를 경험해보세요
           </p>
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

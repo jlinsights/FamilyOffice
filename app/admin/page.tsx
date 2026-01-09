@@ -1,14 +1,16 @@
 'use client';
 
 import {
-    Brain,
-    ClipboardCheck,
-    Gauge,
-    Phone,
-    Search,
-    Shield,
-    Target,
-    TrendingUp,
+  BellRing,
+  Brain,
+  ClipboardCheck,
+  Gauge,
+  Phone,
+  Search,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
 
 // ... (previous imports)
@@ -20,11 +22,11 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -33,10 +35,17 @@ import { StructureCheckDashboard } from '@/components/admin/structure-check-dash
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
+import { getMembershipIntakeSubmissions } from '@/app/apply/membership-intake/actions';
+import { type MembershipIntakeSubmission } from '@/app/apply/membership-intake/schema';
+import { getRequestTickets } from '@/app/request/actions';
+import { type RequestTicketSubmission } from '@/app/request/schema';
+import { MembershipIntakeDashboard } from '@/components/admin/membership-intake-dashboard';
+import { RequestTicketDashboard } from '@/components/admin/request-ticket-dashboard';
+
 import {
-    getAdminStats,
-    getStructureCheckRequests,
-    type StructureCheckRequest,
+  getAdminStats,
+  getStructureCheckRequests,
+  type StructureCheckRequest,
 } from './actions';
 
 // Dynamic imports for heavy dashboard components
@@ -156,6 +165,39 @@ export default function AdminDashboard() {
     StructureCheckRequest[]
   >([]);
   const [loadingRequests, setLoadingRequests] = useState(true);
+  const [membershipSubmissions, setMembershipSubmissions] = useState<MembershipIntakeSubmission[]>([]);
+  const [loadingMembership, setLoadingMembership] = useState(true);
+
+  // ... (previous useEffects)
+
+  useEffect(() => {
+    async function loadMembershipSubmissions() {
+      const { data, error } = await getMembershipIntakeSubmissions();
+      if (data) {
+        setMembershipSubmissions(data);
+      } else {
+        console.error('Failed to load membership submissions:', error);
+      }
+      setLoadingMembership(false);
+    }
+    loadMembershipSubmissions();
+  }, []);
+
+  const [requestTickets, setRequestTickets] = useState<RequestTicketSubmission[]>([]);
+  const [loadingTickets, setLoadingTickets] = useState(true);
+
+  useEffect(() => {
+    async function loadRequestTickets() {
+      const { data, error } = await getRequestTickets();
+      if (data) {
+        setRequestTickets(data);
+      } else {
+        console.error('Failed to load request tickets:', error);
+      }
+      setLoadingTickets(false);
+    }
+    loadRequestTickets();
+  }, []);
 
   useEffect(() => {
     async function loadStats() {
@@ -233,6 +275,22 @@ export default function AdminDashboard() {
                 <ClipboardCheck className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
                 <span className="hidden sm:inline">구조 점검</span>
                 <span className="sm:hidden">구조</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="membership-intake"
+                className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm"
+              >
+                <Users className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">멤버십 진단</span>
+                <span className="sm:hidden">진단</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="request-ticket"
+                className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm"
+              >
+                <BellRing className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                <span className="hidden sm:inline">컨시어지 요청</span>
+                <span className="sm:hidden">요청</span>
               </TabsTrigger>
               <TabsTrigger
                 value="search-console"
@@ -343,6 +401,35 @@ export default function AdminDashboard() {
                 <StructureCheckDashboard
                   initialRequests={structureCheckRequests}
                 />
+              )}
+
+            </TabsContent>
+
+            <TabsContent value="membership-intake" className="space-y-6">
+              {loadingMembership ? (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <p className="text-muted-foreground">
+                      멤버십 진단 데이터를 불러오는 중...
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : (
+                <MembershipIntakeDashboard initialSubmissions={membershipSubmissions} />
+              )}
+            </TabsContent>
+
+            <TabsContent value="request-ticket" className="space-y-6">
+              {loadingTickets ? (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <p className="text-muted-foreground">
+                      요청 티켓을 불러오는 중...
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : (
+                <RequestTicketDashboard initialTickets={requestTickets} />
               )}
             </TabsContent>
 

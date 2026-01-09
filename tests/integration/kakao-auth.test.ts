@@ -496,6 +496,10 @@ beforeAll(() => {
   process.env.KAKAO_REST_API_KEY = 'test-rest-api-key';
   process.env.KAKAO_ADMIN_KEY = 'test-admin-key';
 
+  // Mock Supabase environment variables for testing
+  process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://test-project.supabase.co';
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = 'test-anon-key-for-integration-tests';
+
   // Mock global functions
   global.crypto = {
     getRandomValues: (arr: Uint8Array) => {

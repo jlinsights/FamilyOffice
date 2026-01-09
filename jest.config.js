@@ -32,6 +32,8 @@ const customJestConfig = {
     '^@/constants/(.*)$': '<rootDir>/constants/$1',
     '^@/types/(.*)$': '<rootDir>/types/$1',
     '^@/tests/(.*)$': '<rootDir>/tests/$1',
+    // Mock ESM modules that cause issues
+    '^uncrypto$': '<rootDir>/tests/mocks/uncrypto.js',
   },
 
   // Test directories
@@ -146,7 +148,7 @@ const customJestConfig = {
 
   // Transform configuration
   transformIgnorePatterns: [
-    'node_modules/(?!(.*\\.mjs$|@radix-ui|lucide-react|recharts))',
+    'node_modules/(?!(.*\\.mjs$|@radix-ui|lucide-react|recharts|uncrypto|@upstash/redis|ioredis))',
   ],
 
   // Globals for financial testing
