@@ -37,7 +37,7 @@ export function RequestTicketForm() {
   const form = useForm<z.infer<typeof requestTicketSchema>>({
     resolver: zodResolver(requestTicketSchema),
     defaultValues: {
-      requestType: undefined,
+      requestType: undefined as any,
       requestTypeOther: '',
       preferredDate: '',
       deadline: '',
