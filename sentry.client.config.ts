@@ -20,7 +20,7 @@ declare const process: {
 // @ts-ignore - Next.js will replace this at build time
 const sentryDsn = process.env.NEXT_PUBLIC_SENTRY_DSN;
 
-if (sentryDsn) {
+if (sentryDsn && process.env.NODE_ENV === 'production') {
   Sentry.init({
     dsn: sentryDsn,
 

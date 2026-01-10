@@ -151,9 +151,9 @@ export class KoreanPerformanceMonitor {
     KoreanPerformanceMetrics['regionLatency']
   > {
     const regions = {
-      seoul: 'https://familyoffices.vip/api/ping',
-      busan: 'https://familyoffices.vip/api/ping',
-      international: 'https://www.google.com/favicon.ico',
+      seoul: '/api/ping',
+      busan: '/api/ping',
+      international: 'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js', // Global CDN for international check
     };
 
     const results: any = {};

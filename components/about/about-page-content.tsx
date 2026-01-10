@@ -31,6 +31,8 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { StructuredData } from '@/components/seo/structured-data';
+import { FadeIn } from '@/components/ui/animation/FadeIn';
+import { TextReveal } from '@/components/ui/animation/TextReveal';
 
 import { generateStructuredData } from '@/lib/seo/structured-data';
 

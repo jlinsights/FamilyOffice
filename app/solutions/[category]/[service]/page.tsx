@@ -23,6 +23,9 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { PremiumContentGuard } from '@/components/premium-content-guard';
 import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
+import { FadeIn } from '@/components/ui/animation/FadeIn';
+import { TextReveal } from '@/components/ui/animation/TextReveal';
+import { Badge } from '@/components/ui/badge';
 
 import {
     generateServiceSlug,

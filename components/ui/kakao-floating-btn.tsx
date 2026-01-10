@@ -22,7 +22,8 @@ export function KakaoFloatingButton() {
       className={cn(
         "fixed z-[2147483647] transition-all duration-300 transform hover:scale-110",
         // Position considering typical ChannelTalk position (bottom: 20px, right: 20px, height: 60px)
-        // We place this above it. aprox bottom-24 (96px)
+        // We place this above it. aprox bottom-24 (96px). 
+        // ScrollToTop is at bottom-[150px], so this sits below it.
         "bottom-[90px] right-[24px] md:bottom-[90px] md:right-[24px]", 
         "translate-y-0 opacity-100"
       )}
