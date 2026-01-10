@@ -1,20 +1,20 @@
 'use client';
 
 import {
-  AlertCircle,
-  ArrowRight,
-  Briefcase,
-  Building,
-  CheckCircle,
-  Cpu,
-  Factory,
-  Hammer,
-  Medal,
-  Phone,
-  Shield,
-  Target,
-  TrendingUp,
-  Users,
+    AlertCircle,
+    ArrowRight,
+    Briefcase,
+    Building,
+    CheckCircle,
+    Cpu,
+    Factory,
+    Hammer,
+    Medal,
+    Phone,
+    Shield,
+    Target,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -177,19 +177,14 @@ export default function AboutPageContent() {
                 buttonText="상담 신청"
                 variant="default"
                 size="lg"
-                className="px-8 py-4 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full"
+                className="px-8 py-6 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full"
                 eventType="consultation"
                 trigger={
-                  <div
-                    className={cn(
-                      buttonVariants({ size: 'lg' }),
-                      'px-8 py-6 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full cursor-pointer'
-                    )}
-                  >
+                  <>
                     <Phone className="mr-2 h-5 w-5" />
                     상담 신청
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </div>
+                  </>
                 }
               />
               <Link
@@ -649,17 +644,13 @@ export default function AboutPageContent() {
                       variant="default"
                       size="lg"
                       eventType="consultation"
+                      className="px-8 py-6 text-lg font-bold bg-white text-blue-900 hover:bg-blue-50 shadow-lg border-none rounded-full"
                       trigger={
-                        <div
-                          className={cn(
-                            buttonVariants({ size: 'lg' }),
-                            'px-8 py-6 text-lg font-bold bg-white text-blue-900 hover:bg-blue-50 shadow-lg border-none rounded-full cursor-pointer'
-                          )}
-                        >
+                        <>
                           <Phone className="mr-2 h-5 w-5" />
                           무료 상담 신청
                           <ArrowRight className="ml-2 h-5 w-5" />
-                        </div>
+                        </>
                       }
                     />
                     <Link

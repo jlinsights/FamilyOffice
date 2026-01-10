@@ -3,7 +3,7 @@ import { NavigationItem } from '@/types/globals';
 // 네비게이션 메뉴 데이터
 // 네비게이션 메뉴 데이터
 export const NAVIGATION_ITEMS: NavigationItem[] = [
-  { href: '/about', label: '소개' },
+  // { href: '/about', label: '소개' },
   { href: '/membership', label: '멤버십' },
   { 
     href: '/solution-finder', 
