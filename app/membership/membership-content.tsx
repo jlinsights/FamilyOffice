@@ -3,8 +3,9 @@
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { FadeIn } from '@/components/ui/animation/FadeIn';
+import { TextReveal } from '@/components/ui/animation/TextReveal';
 import { Badge } from '@/components/ui/badge';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
     ArrowRight,
@@ -12,13 +13,12 @@ import {
     ChevronDown,
     ChevronUp,
     Clock,
-    Crown,
     Key,
     Landmark,
     Plane,
     Shield,
     Star,
-    Users,
+    Users
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -101,69 +101,62 @@ export default function MembershipContent() {
       <main className="flex-grow pt-16">
         {/* Assumes Header height is roughly 64px (h-16), adjusting pt-16 ensures content is not hidden behind fixed header */}
 
-
-        {/* Hero Section - Refactored for Premium Consistency */}
+        {/* Hero Section - Refactored for Premium Consistency with Brand v3.0 */}
         <section
           id="hero"
-          className="mobile-scroll-smooth hero-section-optimized priority-content relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20 safe-area-top"
+          className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white pt-20"
         >
-          {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 pointer-events-none"></div>
-
+          {/* Dynamic Background */}
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
+          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
+          
           <div className="relative z-10 text-center max-w-7xl mx-auto px-6 py-12">
             {/* Badge */}
-            <div className="flex justify-center mb-6 lg:mb-10 min-h-[32px] lg:min-h-[40px]">
-              <Badge
-                variant="outline"
-                size="lg"
-                animation="fade"
-                className="border-amber-200 bg-gradient-to-r from-amber-50/80 to-amber-100/50 text-amber-800 dark:border-amber-800 dark:from-amber-950/80 dark:to-amber-900/50 dark:text-amber-200 shadow-lg backdrop-blur-sm"
-              >
-                <Crown className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
-                Private Concierge & Asset Management
-              </Badge>
-            </div>
+            <FadeIn delay={0.2} direction="down">
+                 <div className="flex justify-center mb-12">
+                    <Badge variant="outline" className="px-4 py-1.5 text-sm border-white/20 text-blue-200 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-300">
+                      <span className="w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
+                      Private Concierge & Asset Management
+                    </Badge>
+                  </div>
+            </FadeIn>
 
             {/* Main Headline */}
-            <h1 className="mobile-text-optimize font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6 sm:mb-8 lg:mb-10 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-slate-400 bg-clip-text text-transparent whitespace-pre-line font-serif">
-              자산을 키우는 것만큼,{'\n'}
-              <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-wider font-sans text-foreground">
-                 <span className="inline-block">
-                  시간·선택·품격을 관리합니다.
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-10 tracking-tight leading-[1.1] text-white">
+                <span className="block mb-2">
+                    <TextReveal delay={0.4} type="word">자산을 키우는 것만큼,</TextReveal>
                 </span>
-              </span>
+                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+                    <TextReveal delay={0.6} type="word">선택과 품격을 관리합니다.</TextReveal>
+                </span>
             </h1>
 
             {/* Description */}
-            <FadeIn direction="up" delay={1.0}>
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-4 sm:mb-6 lg:mb-8 text-balance">
-                FamilyOffice S 멤버십은 단순한 혜택 나열이 아닙니다.
-              </p>
-            </FadeIn>
-
-            <FadeIn direction="up" delay={1.2}>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 lg:mb-16 max-w-4xl mx-auto leading-relaxed font-light text-balance">
-                당신의 라이프스타일 효율을 극대화하는 <span className="font-semibold text-primary">의사결정 파트너</span>입니다.
+            <FadeIn direction="up" delay={0.8}>
+              <p className="text-xl md:text-2xl text-slate-300 font-light leading-relaxed mb-4 max-w-3xl mx-auto text-balance">
+                FamilyOffice S 멤버십은 단순한 혜택 나열이 아닌,<br className="hidden md:block"/>
+                라이프스타일 효율을 극대화하는 <span className="font-semibold text-blue-300">최고의 의사결정 파트너</span>입니다.
               </p>
             </FadeIn>
 
             {/* CTA Buttons */}
-             <FadeIn direction="up" delay={1.4}>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">            <Link
+             <FadeIn direction="up" delay={1.2}>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">            
+                <Link
                 href="/apply/membership-intake"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
-                  'bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-6 text-lg transform hover:-translate-y-0.5 transition-all'
+                  'bg-blue-600 hover:bg-blue-700 text-white font-bold h-14 px-10 text-lg rounded-full shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] transform hover:-translate-y-0.5 transition-all'
                 )}
               >
-                전문가 멤버십 진단 받기
+                멤버십 등급 진단받기
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
                 <Link
                   href="tel:0502-5550-8700"
                   className={cn(
                     buttonVariants({ size: 'lg', variant: 'outline' }),
-                    'bg-transparent border-primary/20 hover:bg-primary/5 text-foreground font-bold shadow-lg px-8 py-6 text-lg transform hover:-translate-y-0.5 transition-all'
+                    'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white h-14 px-10 text-lg rounded-full backdrop-blur-sm transform hover:-translate-y-0.5 transition-all'
                   )}
                 >
                   Founder's Circle 문의
@@ -171,17 +164,22 @@ export default function MembershipContent() {
               </div>
             </FadeIn>
           </div>
+          
+          {/* Scroll Indicator */}
+           <FadeIn delay={1.4} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+              <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-slate-500 to-transparent"></div>
+           </FadeIn>
         </section>
 
 
         {/* Philosophy Section */}
-        <section id="philosophy" className="section bg-gradient-to-b from-background via-muted/50 to-background border-t border-muted/20">
+        <section id="philosophy" className="section bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
           <div className="container">
             <FadeIn direction="up">
               <div className="text-center mb-16">
                 <Badge variant="secondary" className="mb-4">Core Values</Badge>
                 <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground">Core Value Proposition</h2>
-                <p className="mt-4 text-muted-foreground text-lg text-balance">당신이 원하는 건 ‘할인’이 아니라 ‘<span className="text-foreground font-medium">접근(Access)과 속도(Speed)</span>’입니다.</p>
+                <p className="mt-4 text-muted-foreground text-lg text-balance">당신이 원하는 건 ‘할인’이 아니라 ‘<span className="text-primary font-bold">접근(Access)과 속도(Speed)</span>’입니다.</p>
               </div>
             </FadeIn>
 
@@ -204,8 +202,8 @@ export default function MembershipContent() {
                   desc: "프리뷰, 라운드테이블, 전문가 네트워크 등 공개된 시장에서 얻기 어려운 독점적인 접근성을 제공합니다."
                 }
               ].map((item, idx) => (
-                <div key={idx} className="card-interactive p-8 group border-transparent hover:border-border">
-                  <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform duration-300">
+                <div key={idx} className="card-interactive p-8 group border-transparent hover:border-border bg-white dark:bg-slate-800 shadow-sm rounded-2xl hover:shadow-xl transition-all duration-300">
+                  <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
                   <h3 className="text-xl font-bold text-foreground mb-3">{item.title}</h3>
@@ -223,6 +221,9 @@ export default function MembershipContent() {
         {/* Detailed Services (Modules) */}
         <section id="benefits" className="section bg-slate-950 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-grid-white opacity-5 pointer-events-none"></div>
+           {/* Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-blue-950/20 to-slate-950 pointer-events-none"></div>
+          
           <div className="container relative z-10">
             <FadeIn direction="up">
               <div className="mb-16">
@@ -272,11 +273,11 @@ export default function MembershipContent() {
                 }
               ].map((service, idx) => (
                 <div key={idx} className="flex gap-6 group hover:translate-x-2 transition-transform duration-300">
-                  <div className="flex-shrink-0 mt-1 p-3 rounded-xl bg-slate-900 border border-slate-800 group-hover:border-amber-500/50 transition-colors">
+                  <div className="flex-shrink-0 mt-1 p-3 rounded-xl bg-slate-900 border border-slate-800 group-hover:border-amber-500/50 transition-colors shadow-lg">
                     {service.icon}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-4 text-white">{service.title}</h3>
+                    <h3 className="text-xl font-bold mb-4 text-white group-hover:text-amber-400 transition-colors">{service.title}</h3>
                     <ul className="space-y-3 text-slate-300">
                       {service.items.map((item, i) => (
                         <li key={i} className="flex items-start">
@@ -295,13 +296,12 @@ export default function MembershipContent() {
 
 
         {/* Membership Tiers */}
-        <section id="membership" className="section bg-muted/30">
+        <section id="membership" className="section bg-slate-50 dark:bg-slate-900/50">
           <div className="container">
             <FadeIn direction="up">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground">Membership Tiers</h2>
                 <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-lg text-balance">
-                  아래 '월납 합산 기준'은 참고지표입니다.<br/>
                   실제 등급은 가족 단위 자산, 법인 구조 복잡도, 서비스 니즈에 따라 맞춤 제안됩니다.
                 </p>
               </div>
@@ -312,15 +312,15 @@ export default function MembershipContent() {
               {tiers.map((tier, index) => (
                 <div
                   key={index}
-                  className={`relative rounded-xl p-8 border flex flex-col transition-all duration-300 bg-card ${
+                  className={`relative rounded-2xl p-8 border flex flex-col transition-all duration-300 bg-white dark:bg-slate-800 ${
                     tier.isPopular
-                      ? 'border-amber-400 shadow-xl ring-1 ring-amber-400 z-10 scale-105 md:scale-105'
-                      : 'border-border shadow-sm hover:shadow-lg'
+                      ? 'border-blue-500 shadow-2xl ring-1 ring-blue-500 z-10 scale-105 md:scale-105'
+                      : 'border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl'
                   }`}
                 >
                   {tier.isPopular && (
-                    <span className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">
-                      Most Popular
+                    <span className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">
+                      Recommended
                     </span>
                   )}
                   <div className="mb-4">
@@ -337,7 +337,7 @@ export default function MembershipContent() {
                   <ul className="space-y-4 mb-8 flex-grow">
                     {tier.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start text-sm">
-                        <Check className="text-amber-500 flex-shrink-0 mr-2 h-4 w-4" />
+                        <Check className="text-blue-500 flex-shrink-0 mr-2 h-4 w-4" />
                         <span className="text-foreground/80">{feature}</span>
                       </li>
                     ))}
@@ -348,10 +348,10 @@ export default function MembershipContent() {
                         href="tel:0502-5550-8700" 
                         className={cn(
                           buttonVariants({ 
-                            className: `w-full py-6 text-sm font-semibold transition ${
+                            className: `w-full py-6 text-sm font-semibold transition rounded-xl ${
                               tier.isPopular
-                                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                                : 'bg-background border border-input text-foreground hover:bg-accent hover:text-accent-foreground'
+                                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                                : 'bg-white border border-slate-200 text-slate-900 hover:bg-slate-50'
                             }`
                           }),
                           "flex items-center justify-center"
@@ -360,44 +360,32 @@ export default function MembershipContent() {
                          문의하기
                       </Link>
                     ) : (
-                      <Button
-                        className={`w-full py-6 text-sm font-semibold transition ${
-                          tier.isPopular
-                            ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                            : 'bg-background border border-input text-foreground hover:bg-accent hover:text-accent-foreground'
-                        }`}
+                      <Link
+                        href="/apply/membership-intake"
+                         className={cn(
+                          buttonVariants({ 
+                            className: `w-full py-6 text-sm font-semibold transition rounded-xl flex items-center justify-center ${
+                              tier.isPopular
+                                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                                : 'bg-white border border-slate-200 text-slate-900 hover:bg-slate-50'
+                            }`
+                          })
+                        )}
                       >
                         진단 및 신청
-                      </Button>
+                      </Link>
                     )}
                   </div>
                 </div>
               ))}
             </div>
             </FadeIn>
-
-            <FadeIn direction="up" delay={0.4}>
-              <div className="mt-12 p-8 bg-card border border-border rounded-xl text-center md:text-left md:flex justify-between items-center shadow-sm">
-                <div>
-                  <h3 className="text-xl font-bold text-foreground">Founder’s Circle</h3>
-                  <p className="text-muted-foreground mt-1">가문·법인 단위 전담 관리, 전문가 네트워크 우선 연결, 비공개 라운드테이블</p>
-                </div>
-                <Link 
-                  href="tel:0502-5550-8700"
-                  className={cn(
-                    buttonVariants({ className: 'mt-6 md:mt-0 bg-slate-900 text-white px-8 h-12 rounded-md hover:bg-slate-800 transition whitespace-nowrap flex items-center justify-center' })
-                  )}
-                >
-                  별도 제안 요청
-                </Link>
-              </div>
-            </FadeIn>
           </div>
         </section>
 
 
         {/* Process Flow */}
-        <section className="section bg-background border-b border-border">
+        <section className="section bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
           <div className="container">
              <FadeIn direction="up">
                <div className="text-center mb-16">
@@ -413,10 +401,10 @@ export default function MembershipContent() {
                 { step: "04", title: "실행 & 큐레이션", desc: "요청 시 기획안 제시 후 예약 및 섭외, 사후 정리까지 수행합니다." }
               ].map((item, index) => (
                 <div key={index} className="text-center relative group p-4">
-                  <div className="text-6xl font-serif text-muted/30 font-bold mb-6 group-hover:text-amber-500/10 transition-colors duration-500">{item.step}</div>
+                  <div className="text-6xl font-serif text-slate-100 dark:text-slate-800 font-bold mb-6 group-hover:text-blue-50 dark:group-hover:text-blue-900/20 transition-colors duration-500">{item.step}</div>
                   <h3 className="text-xl font-bold text-foreground mb-3 relative z-10 -mt-8">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed text-balance">{item.desc}</p>
-                  {index < 3 && <ArrowRight className="hidden md:block absolute top-[20%] -right-4 text-muted" size={24} />}
+                  {index < 3 && <ArrowRight className="hidden md:block absolute top-[20%] -right-4 text-slate-200" size={24} />}
                 </div>
               ))}
             </div>
@@ -426,23 +414,23 @@ export default function MembershipContent() {
 
 
         {/* FAQ & CTA */}
-        <section id="faq" className="section bg-muted/10">
+        <section id="faq" className="section bg-slate-50 dark:bg-slate-900/30">
           <FadeIn direction="up">
           <div className="max-w-3xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-center text-foreground mb-16">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div key={index} className="bg-card rounded-lg border border-border overflow-hidden transition-all hover:border-primary/20">
+                <div key={index} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all hover:border-blue-500/20 shadow-sm">
                   <button
-                    className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none hover:bg-muted/30 transition"
+                    className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"
                     onClick={() => toggleFaq(index)}
                   >
                     <span className="font-semibold text-foreground text-base md:text-lg">{faq.q}</span>
-                    {activeFaq === index ? <ChevronUp className="text-primary flex-shrink-0" size={20} /> : <ChevronDown className="text-muted-foreground flex-shrink-0" size={20} />}
+                    {activeFaq === index ? <ChevronUp className="text-blue-600 flex-shrink-0" size={20} /> : <ChevronDown className="text-muted-foreground flex-shrink-0" size={20} />}
                   </button>
                   {activeFaq === index && (
-                    <div className="px-8 pb-8 pt-2 bg-muted/5 border-t border-border">
-                      <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
+                    <div className="px-8 pb-8 pt-2 border-t border-slate-100 dark:border-slate-700">
+                      <p className="text-muted-foreground leading-relaxed text-base">{faq.a}</p>
                     </div>
                   )}
                 </div>
@@ -456,7 +444,7 @@ export default function MembershipContent() {
                 <Link 
                   href="/apply/membership-intake"
                   className={cn(
-                    buttonVariants({ className: 'btn-primary w-full sm:w-auto px-10 py-6 h-auto text-lg shadow-lg' })
+                    buttonVariants({ className: 'bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-10 py-6 h-auto text-lg shadow-lg rounded-full' })
                   )}
                 >
                   멤버십 진단 받기
@@ -464,7 +452,7 @@ export default function MembershipContent() {
                 <Link 
                   href="tel:0502-5550-8700"
                   className={cn(
-                    buttonVariants({ variant: 'outline', className: 'w-full sm:w-auto px-10 py-6 h-auto text-lg font-bold shadow-lg text-foreground bg-transparent border-primary/20 hover:bg-primary/5' })
+                    buttonVariants({ variant: 'outline', className: 'w-full sm:w-auto px-10 py-6 h-auto text-lg font-bold shadow-sm rounded-full bg-white hover:bg-slate-50 border-slate-200 text-slate-900' })
                   )}
                 >
                   Founder’s Circle 문의

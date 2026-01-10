@@ -73,61 +73,73 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
           </div>
 
           {/* Hero Section */}
-          <section className="relative py-20 overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
+          <section className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white pt-20 pb-20">
+             {/* Dynamic Background */}
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
+            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
 
             <div className="container mx-auto px-6 relative z-10">
-              <div className="max-w-4xl mx-auto">
-                {/* Back Button */}
-                <Link
-                  href="/solutions"
-                  className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-8 font-medium"
-                >
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  솔루션 목록으로
-                </Link>
+              <div className="max-w-4xl mx-auto text-center">
+                 {/* Back Button */}
+                 <FadeIn direction="down" delay={0.1}>
+                    <Link
+                      href="/solutions"
+                      className="inline-flex items-center text-blue-200 hover:text-white mb-8 font-medium transition-colors"
+                    >
+                      <ArrowLeft className="h-4 w-4 mr-2" />
+                      솔루션 목록으로
+                    </Link>
+                 </FadeIn>
 
                 {/* Category Badge */}
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-bold rounded-full">
-                    {category.title}
-                  </span>
-                  <span className="px-4 py-2 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-bold rounded-full flex items-center">
-                    <Star className="h-3 w-3 mr-1 fill-current" />
-                    Premium Service
-                  </span>
-                </div>
+                <FadeIn direction="down" delay={0.2}>
+                    <div className="flex items-center justify-center gap-3 mb-8">
+                       <Badge variant="outline" className="px-4 py-1.5 text-sm border-blue-500/30 text-blue-300 bg-blue-500/10 backdrop-blur-md">
+                        {category.title}
+                      </Badge>
+                      <Badge variant="outline" className="px-4 py-1.5 text-sm border-amber-500/30 text-amber-300 bg-amber-500/10 backdrop-blur-md flex items-center">
+                        <Star className="h-3 w-3 mr-1 fill-current" />
+                        Premium Service
+                      </Badge>
+                    </div>
+                </FadeIn>
 
                 {/* Title */}
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-slate-900 dark:text-white leading-tight">
-                  {service.title}
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white leading-tight tracking-tight">
+                   <TextReveal delay={0.3} type="char">{service.title}</TextReveal>
                 </h1>
 
                 {/* Description */}
-                <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
-                  {service.description}
-                </p>
+                <FadeIn delay={0.5}>
+                    <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl mx-auto text-balance">
+                      {service.description}
+                    </p>
+                </FadeIn>
 
                 {/* Target Client */}
-                <div className="flex items-start gap-3 p-6 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl mb-8">
-                  <Users className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
-                  <div>
-                    <div className="font-bold text-slate-900 dark:text-white mb-1">
-                      추천 고객
-                    </div>
-                    <div className="text-slate-600 dark:text-slate-300">
-                      {service.targetClient}
-                    </div>
-                  </div>
-                </div>
+                <FadeIn delay={0.7} className="mb-12">
+                   <div className="inline-flex items-center gap-4 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl text-left max-w-2xl">
+                      <div className="w-12 h-12 rounded-full bg-blue-600/20 flex items-center justify-center flex-shrink-0 text-blue-400">
+                        <Users className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-white mb-1">
+                          추천 고객
+                        </div>
+                        <div className="text-slate-300 text-sm">
+                          {service.targetClient}
+                        </div>
+                      </div>
+                   </div>
+                </FadeIn>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4">
+                <FadeIn delay={0.9} className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/structure-check#request-form"
                     className={cn(
                       buttonVariants({ variant: 'default', size: 'lg' }),
-                      'bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl rounded-full px-8'
+                      'bg-blue-600 hover:bg-blue-700 text-white font-bold h-14 px-8 text-lg rounded-full shadow-[0_0_30px_-5px_rgba(37,99,235,0.4)]'
                     )}
                   >
                     무료 구조 점검 신청
@@ -139,12 +151,12 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
                     rel="noopener noreferrer"
                     className={cn(
                       buttonVariants({ variant: 'outline', size: 'lg' }),
-                      'border-2 border-slate-300 dark:border-slate-700 font-bold rounded-full px-8'
+                      'border-white/20 text-white hover:bg-white/10 bg-transparent h-14 px-8 text-lg font-bold rounded-full'
                     )}
                   >
                     카카오톡 상담
                   </Link>
-                </div>
+                </FadeIn>
               </div>
             </div>
           </section>

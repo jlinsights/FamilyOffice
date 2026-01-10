@@ -78,106 +78,77 @@ export default function AboutPageContent() {
 
       <main className="pt-20">
         {/* 히어로 섹션 */}
-        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-emerald-400/10 rounded-full blur-3xl -z-10"></div>
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
-
+        <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white pt-20">
+          {/* Dynamic Background */}
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
+          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
+          
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
-            <div className="flex justify-center mb-8">
-              <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full shadow-sm animate-fade-in">
-                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full mr-2">
-                  About Us
-                </span>
-                <span className="text-sm text-slate-600 dark:text-slate-300 pr-2 flex items-center">
-                  <Building className="h-3 w-3 mr-1" />
-                  Family Office S
-                </span>
-              </div>
-            </div>
+            <FadeIn delay={0.2} direction="down">
+                <div className="flex justify-center mb-10">
+                <div className="inline-flex items-center justify-center px-4 py-1.5 bg-white/5 backdrop-blur-md border border-white/20 rounded-full shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
+                    <span className="text-sm font-bold text-blue-200 pr-2">
+                    FamilyOffice S
+                    </span>
+                    <span className="text-xs text-slate-400 border-l border-slate-600 pl-2">
+                    About Us
+                    </span>
+                </div>
+                </div>
+            </FadeIn>
 
-            <h1 className="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight mb-8 text-slate-900 dark:text-white whitespace-pre-line animate-slide-up tracking-tight">
-              성공한 기업가·자산가의{'\n'}
-              <span className="bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                통합자산관리
+            <h1 className="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight mb-8 text-white whitespace-pre-line tracking-tight">
+               <span className="block mb-2">
+                 <TextReveal delay={0.4} type="word">성공한 기업가·자산가의</TextReveal>
+               </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+                <TextReveal delay={0.6} type="word">통합자산관리 파트너</TextReveal>
               </span>
-              {'\n'}파트너
             </h1>
 
-            <p
-              className="text-2xl sm:text-3xl font-bold text-slate-700 dark:text-slate-200 mb-6 animate-slide-up"
-              style={{ animationDelay: '200ms' }}
-            >
-              기업가·자산가 전문 통합자산관리
-            </p>
+            <FadeIn delay={0.8}>
+                <p className="text-2xl sm:text-3xl font-bold text-slate-200 mb-6">
+                기업가·자산가 전문 통합자산관리
+                </p>
+            </FadeIn>
 
-            <p
-              className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed animate-slide-up font-light"
-              style={{ animationDelay: '300ms' }}
-            >
-              <span className="font-semibold text-slate-900 dark:text-white">
-                성공한 기업가와 개인자산 30억+ 고액자산가
-              </span>
-              를 위한{' '}
-              <span className="font-semibold text-blue-600 dark:text-blue-400">
-                통합자산관리 및 가업승계 설계 서비스
-              </span>
-              를 제공합니다
-            </p>
+            <FadeIn delay={1.0}>
+                <p className="text-lg sm:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light text-balance">
+                <span className="font-semibold text-white">
+                    성공한 기업가와 개인자산 30억+ 고액자산가
+                </span>
+                를 위한{' '}
+                <span className="font-semibold text-blue-400">
+                    통합자산관리 및 가업승계 설계 서비스
+                </span>
+                를 제공합니다
+                </p>
+            </FadeIn>
 
-            <div
-              className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg animate-slide-up"
-              style={{ animationDelay: '400ms' }}
-            >
-              <span className="font-bold text-blue-700 dark:text-blue-400">
-                FamilyOffice S
-              </span>
-              는{' '}
-              <span className="font-semibold text-slate-900 dark:text-white">
-                삼성생명 기업컨설팅센터
-              </span>
-              의{' '}
-              <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                VIP 고객 전담 프로젝트팀
-              </span>
-              입니다
-            </div>
-
-            <div
-              className="text-sm text-slate-500 dark:text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed space-y-3 animate-slide-up"
-              style={{ animationDelay: '450ms' }}
-            >
-              <p className="bg-slate-50 dark:bg-slate-900/50 rounded-lg px-4 py-3 border border-slate-100 dark:border-slate-800">
-                <span className="font-semibold text-slate-700 dark:text-slate-300">
-                  삼성생명 소속
+            <FadeIn delay={1.2}>
+                <div className="text-base sm:text-lg text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-lg">
+                <span className="font-bold text-blue-400">
+                    FamilyOffice S
                 </span>
-                으로{' '}
-                <span className="text-blue-600 dark:text-blue-400">
-                  대한민국 최고 보험사의 전문성
+                는{' '}
+                <span className="font-semibold text-white">
+                    삼성생명 기업컨설팅센터
                 </span>
-                을 바탕으로 작성되었습니다.{' '}
-                <span className="text-xs text-slate-400">
-                  (삼성화재 교차 판매 가능)
+                의{' '}
+                <span className="text-blue-400 font-semibold">
+                    VIP 고객 전담 프로젝트팀
                 </span>
-              </p>
-              <p className="bg-slate-50 dark:bg-slate-900/50 rounded-lg px-4 py-3 border border-slate-100 dark:border-slate-800">
-                상품 추천 시에는 항상{' '}
-                <span className="font-semibold text-slate-700 dark:text-slate-300">
-                  복수의 대안을 함께 검토
-                </span>
-                하여 제안드립니다.
-              </p>
-            </div>
-
-            <div
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
-              style={{ animationDelay: '500ms' }}
-            >
+                입니다
+                </div>
+            </FadeIn>
+            
+            <FadeIn delay={1.4} className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <CalComPopup
                 buttonText="상담 신청"
                 variant="default"
                 size="lg"
-                className="px-8 py-6 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full"
+                className="px-8 py-6 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-[0_0_30px_-5px_rgba(37,99,235,0.4)] hover:scale-105 transition-all duration-300 rounded-full border-none"
                 eventType="consultation"
                 trigger={
                   <>
@@ -191,13 +162,13 @@ export default function AboutPageContent() {
                 href="/solutions"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
-                  'font-bold px-8 py-6 text-lg shadow-md hover:shadow-lg rounded-full border-2 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                  'font-bold px-8 py-6 text-lg shadow-md rounded-full border-white/20 text-white hover:bg-white/10 bg-transparent'
                 )}
               >
                 <Briefcase className="mr-2 h-5 w-5" />
                 솔루션
               </Link>
-            </div>
+            </FadeIn>
           </div>
         </section>
 

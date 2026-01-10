@@ -5,7 +5,6 @@ import {
     Facebook,
     Instagram,
     Linkedin,
-    Mail,
     MapPin,
     MessageSquare,
     Phone,
@@ -13,7 +12,7 @@ import {
     Sparkles,
     TrendingUp,
     Users,
-    Youtube,
+    Youtube
 } from 'lucide-react';
 
 import { memo, useEffect, useState } from 'react';
@@ -396,16 +395,27 @@ export const Footer = memo(function Footer() {
 
                 <div className="flex items-start space-x-3">
                   <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
-                    <Mail className="h-5 w-5 text-primary" />
+                    <MessageSquare className="h-5 w-5 text-primary" />
                   </div>
                   <div className="text-sm">
-                    <p className="font-medium mb-1">이메일</p>
-                    <p className="text-muted-foreground">
-                      cs@familyoffices.vip
-                    </p>
-                    <p className="text-muted-foreground text-xs mt-1">
-                      24시간 내 답변
-                    </p>
+                    <p className="font-medium mb-1">카카오 오픈채팅</p>
+                    <a
+                      href="https://open.kakao.com/me/familyoffice"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      패밀리오피스
+                    </a>
+                    <div className="mt-2">
+                        <Image 
+                            src="/images/kakao-qr.jpg" 
+                            alt="Kakao Open Chat QR Code" 
+                            width={100} 
+                            height={100} 
+                            className="rounded-lg border border-border/40"
+                        />
+                    </div>
                   </div>
                 </div>
               </div>

@@ -16,10 +16,11 @@ import { StructuredData } from '@/components/seo/structured-data';
 import { SkipLinks } from '@/components/skip-links';
 import { SmoothScroll } from '@/components/smooth-scroll';
 import { Providers } from '@/components/theme/providers';
+import { KakaoFloatingButton } from '@/components/ui/kakao-floating-btn';
 
 import {
-    createAnalyticsScript,
-    createGTMScript
+  createAnalyticsScript,
+  createGTMScript
 } from '@/lib/security/html-sanitizer';
 import { generateStructuredData } from '@/lib/seo/structured-data';
 
@@ -110,6 +111,7 @@ export default function ClientPage() {
             </main>
 
             <Footer />
+            <KakaoFloatingButton />
           </div>
         </Providers>
       </ErrorBoundary>
