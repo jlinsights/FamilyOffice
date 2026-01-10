@@ -20,7 +20,7 @@ export function DebugStyles() {
       const body = document.body;
       const html = document.documentElement;
       const floatingButton = document.querySelector(
-        '.cal-com-floating-force'
+        '#kakao-floating-btn'
       ) as HTMLElement;
       const containers = Array.from(document.querySelectorAll('*')).filter(
         el => {

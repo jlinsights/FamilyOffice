@@ -11,11 +11,11 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     submenu: [
         { href: '/program', label: '프로그램' },
         { href: '/solution-finder', label: '솔루션 파인더' },
-        { href: '/seminar', label: '세미나' },
         { href: '/calculators', label: '계산기' },
     ]
   },
   { href: '/insights', label: '인사이트' },
+  { href: '/seminar', label: '세미나' },
   { href: '/recruit', label: '채용' },
   // { href: '/stories', label: '케이스/스토리' }, // [미완성] 추후 오픈
   { href: '/apply/membership-intake', label: '상담신청', isPrimary: true },
