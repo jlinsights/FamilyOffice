@@ -1,6 +1,7 @@
 'use client';
 
-import { Calendar, GraduationCap, Users } from 'lucide-react';
+import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
+import { Calendar, FileText, GraduationCap, Users } from 'lucide-react';
 
 import { useEffect, useState } from 'react';
 
@@ -21,6 +22,7 @@ const AnimatedCounter = dynamic(
 
 export function SeminarHeroSection() {
   const [startAnimation, setStartAnimation] = useState(false);
+  const [showSchedule, setShowSchedule] = useState(false);
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후 애니메이션 시작
@@ -154,21 +156,29 @@ export function SeminarHeroSection() {
               <Calendar className="ml-2 h-5 w-5" />
             </Button>
           </a>
-          <a
-            href="/structure-check#request-form"
-            style={{ textDecoration: 'none' }}
+          <Button
+            variant="outline"
+            size="lg"
+            className="font-bold shadow-lg px-8 py-4 text-lg"
+            onClick={() => setShowSchedule(true)}
           >
-            <Button
-              variant="outline"
-              size="lg"
-              className="font-bold shadow-lg px-8 py-4 text-lg"
-            >
-              <Users className="mr-2 h-5 w-5" />
-              구조 점검 요청
-            </Button>
-          </a>
+            <FileText className="mr-2 h-5 w-5" />
+            2025 연간 일정표 다운로드
+          </Button>
         </div>
       </div>
+
+      <LeadCaptureDialog 
+        isOpen={showSchedule}
+        onClose={() => setShowSchedule(false)}
+        onSuccess={() => setShowSchedule(false)}
+        title="2025 세미나 일정표 다운로드"
+        description="이상선 박사, 황병훈 세무사 등\n최고 전문가들의 강연 일정을 확인하세요."
+        source="seminar-schedule"
+        ctaLabel="일정표 받기"
+        successTitle="일정표가 발송되었습니다"
+        successDescription="이메일로 연간 세미나 일정표를 보내드렸습니다."
+      />
     </section>
   );
 }

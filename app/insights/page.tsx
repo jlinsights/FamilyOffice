@@ -1,17 +1,18 @@
 'use client';
 
+import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
 import {
-    BarChart3,
-    BookOpen,
-    Briefcase,
-    Calendar,
-    FileText,
-    HelpCircle,
-    Lightbulb,
-    Mail,
-    Shield,
-    TrendingUp,
-    Users,
+  BarChart3,
+  BookOpen,
+  Briefcase,
+  Calendar,
+  FileText,
+  HelpCircle,
+  Lightbulb,
+  Mail,
+  Shield,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
 
 import { useEffect, useState } from 'react';
@@ -27,6 +28,7 @@ import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import InsightsFeed from '@/components/insights-feed';
+import { NewsletterRegistrationForm } from '@/components/newsletter-registration-form';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { StructuredData } from '@/components/seo/structured-data';
 
@@ -34,6 +36,7 @@ import { insightsFAQ } from '@/lib/seo/insights-faq-data';
 
 export default function InsightsPage() {
   const [startAnimation, setStartAnimation] = useState(false);
+  const [showReport, setShowReport] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -95,6 +98,32 @@ export default function InsightsPage() {
               <br className="hidden md:block" />
               시장의 변화를 앞서가는 통찰력으로 성공적인 투자 결정을 지원합니다.
             </p>
+          </div>
+        </section>
+
+
+
+        {/* Premium Report Lead Magnet */}
+        <section className="py-8 bg-slate-50 dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-gradient-to-r from-slate-900 to-slate-800 dark:from-blue-950 dark:to-slate-900 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between shadow-lg relative overflow-hidden">
+               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+               
+               <div className="relative z-10 mb-6 md:mb-0 md:mr-8 text-center md:text-left">
+                 <Badge className="mb-3 bg-blue-500/20 text-blue-200 hover:bg-blue-500/30 border-blue-500/50">2025 Special Report</Badge>
+                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">2025년 자산관리 시장 전망 리포트</h3>
+                 <p className="text-blue-100/80 text-lg">VIP 고객을 위한 프라이빗 마켓 트렌드와 대응 전략을 담았습니다.</p>
+               </div>
+
+               <Button 
+                onClick={() => setShowReport(true)}
+                size="lg" 
+                className="relative z-10 bg-white text-slate-900 hover:bg-blue-50 font-bold px-8 py-6 text-lg shadow-xl shrink-0"
+               >
+                 <FileText className="mr-2 h-5 w-5" />
+                 리포트 무료 다운로드
+               </Button>
+            </div>
           </div>
         </section>
 
@@ -371,22 +400,29 @@ export default function InsightsPage() {
               가장 먼저 이메일로 받아보실 수 있습니다.
             </p>
 
-            <Link href="/insights/weekly-brief">
-              <Button
-                size="lg"
-                className="bg-white text-blue-900 hover:bg-blue-50 hover:scale-105 transition-all duration-300 h-14 px-8 text-lg font-bold shadow-xl"
-              >
-                주간 브리프 무료 구독하기
-                <Mail className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-
-            <p className="mt-6 text-sm text-blue-200/60">
-              * 언제든지 구독을 취소하실 수 있습니다.
-            </p>
+            <div className="mt-8">
+              <NewsletterRegistrationForm />
+              <p className="mt-6 text-sm text-blue-200/60">
+                * 언제든지 구독을 취소하실 수 있습니다.
+              </p>
+            </div>
           </div>
         </section>
       </main>
+
+
+
+      <LeadCaptureDialog 
+        isOpen={showReport}
+        onClose={() => setShowReport(false)}
+        onSuccess={() => setShowReport(false)}
+        title="2025 시장 전망 리포트 다운로드"
+        description="전문가가 분석한 2025년 자산관리\n핵심 트렌드와 전략을 확인하세요."
+        source="insights-report-2025"
+        ctaLabel="리포트 받기"
+        successTitle="리포트가 발송되었습니다"
+        successDescription="이메일로 2025 시장 전망 리포트를 보내드렸습니다."
+      />
 
       <Footer />
     </div>

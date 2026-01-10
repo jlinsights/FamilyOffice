@@ -9,8 +9,10 @@ import {
     PieChart,
     PiggyBank,
     Shield,
-    TrendingUp,
+    TrendingUp
 } from 'lucide-react';
+
+import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
 
 import { useState } from 'react';
 
@@ -31,9 +33,8 @@ import {
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { StructuredData } from '@/components/seo/structured-data';
 
-import { generateStructuredData } from '@/lib/seo/structured-data';
 import { useSafeAuth } from '@/hooks/use-safe-auth';
-import { PremiumOverlay } from '@/components/premium-overlay';
+import { generateStructuredData } from '@/lib/seo/structured-data';
 
 interface ColorClasses {
   icon: string;
@@ -46,9 +47,21 @@ interface ColorClasses {
 export default function CalculatorsPage() {
   const { isSignedIn } = useSafeAuth();
   const router = useRouter();
-  const [showPremiumOverlay, setShowPremiumOverlay] = useState(false);
+  const [showLeadCapture, setShowLeadCapture] = useState(false);
+  const [pendingUrl, setPendingUrl] = useState<string | null>(null);
 
-  const calculators = [
+  interface CalculatorItem {
+    title: string;
+    description: string;
+    icon: typeof Calculator; // Lucide icon type
+    color: string;
+    href: string;
+    features: string[];
+    keywords: string;
+    benefit: string;
+  }
+
+  const calculators: CalculatorItem[] = [
     {
       title: '상속세 계산기',
       description:
@@ -100,18 +113,26 @@ export default function CalculatorsPage() {
   ];
 
   const handleCalculatorClick = (href: string) => {
-    // 상속세 계산기는 인증 없이 바로 접근 가능
-    if (href === '/calculators/inheritance-tax') {
+    // 상속세 계산기는 인증 없이 바로 접근 가능 (Legacy logic, but applied generally now via soft gate if needed)
+    // Actually, let's gate ALL calculators with the soft gate for better lead gen, 
+    // OR keep Inheritance Tax open if that was the specific strategy. 
+    // The prompt suggested lowering the barrier for "Calculators" generally.
+    // However, if the user already clicked, let's treat them all as needing at least "Lead Info" OR "Auth".
+    
+    if (isSignedIn) {
       router.push(href);
       return;
     }
 
-    if (isSignedIn) {
-      // 로그인된 경우 페이지로 이동
-      router.push(href);
-    } else {
-      // 로그인하지 않은 경우 프리미엄 팝업 표시
-      setShowPremiumOverlay(true);
+    // Set the targeted URL and show dialog
+    setPendingUrl(href);
+    setShowLeadCapture(true);
+  };
+
+  const handleLeadCaptureSuccess = () => {
+    setShowLeadCapture(false);
+    if (pendingUrl) {
+      router.push(pendingUrl);
     }
   };
 
@@ -190,7 +211,7 @@ export default function CalculatorsPage() {
     <>
       <div className={cn(
         "min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white selection:bg-blue-500/30 transition-all duration-300",
-        showPremiumOverlay && "blur-sm select-none pointer-events-none"
+        showLeadCapture && "blur-sm select-none pointer-events-none"
       )}>
         <StructuredData data={faqData} />
         <StructuredData data={aiOptimizedData} />
@@ -437,8 +458,12 @@ export default function CalculatorsPage() {
       </div>
     </div>
 
-      {/* 프리미엄 콘텐츠 팝업 */}
-      {showPremiumOverlay && <PremiumOverlay />}
+      {/* 리드 캡처 팝업 */}
+      <LeadCaptureDialog 
+        isOpen={showLeadCapture}
+        onClose={() => setShowLeadCapture(false)}
+        onSuccess={handleLeadCaptureSuccess}
+      />
     </>
   );
 }

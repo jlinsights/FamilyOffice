@@ -2,10 +2,11 @@
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
 import { FadeIn } from '@/components/ui/animation/FadeIn';
 import { TextReveal } from '@/components/ui/animation/TextReveal';
 import { Badge } from '@/components/ui/badge';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
     ArrowRight,
@@ -13,6 +14,7 @@ import {
     ChevronDown,
     ChevronUp,
     Clock,
+    FileText,
     Key,
     Landmark,
     Plane,
@@ -25,6 +27,7 @@ import { useState } from 'react';
 
 export default function MembershipContent() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [showBrochure, setShowBrochure] = useState(false);
 
   const toggleFaq = (index: number) => {
     setActiveFaq(activeFaq === index ? null : index);
@@ -152,15 +155,17 @@ export default function MembershipContent() {
                 멤버십 등급 진단받기
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-                <Link
-                  href="tel:0502-5550-8700"
+                <Button
+                  onClick={() => setShowBrochure(true)}
+                  variant="outline"
+                  size="lg"
                   className={cn(
-                    buttonVariants({ size: 'lg', variant: 'outline' }),
                     'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white h-14 px-10 text-lg rounded-full backdrop-blur-sm transform hover:-translate-y-0.5 transition-all'
                   )}
                 >
-                  Founder's Circle 문의
-                </Link>
+                  <FileText className="mr-2 h-5 w-5" />
+                  멤버십 제안서 다운로드
+                </Button>
               </div>
             </FadeIn>
           </div>
@@ -492,7 +497,20 @@ export default function MembershipContent() {
             </FadeIn>
           </div>
         </section>
+
       </main>
+
+      <LeadCaptureDialog 
+        isOpen={showBrochure}
+        onClose={() => setShowBrochure(false)}
+        onSuccess={() => setShowBrochure(false)}
+        title="멤버십 제안서 무료 다운로드"
+        description="FamilyOffice S의 상세 멤버십 혜택과\n포트폴리오 예시를 확인하세요."
+        source="membership-brochure"
+        ctaLabel="다운로드 받기"
+        successTitle="제안서가 발송되었습니다"
+        successDescription="입력하신 이메일로 상세 안내서를 보내드렸습니다."
+      />
 
       <Footer />
     </div>

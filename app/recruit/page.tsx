@@ -19,12 +19,15 @@ import {
   Play,
   Star,
   TrendingUp,
-  Users,
+  Users
 } from 'lucide-react';
 
-import { useCallback, useEffect, useState } from 'react';
+
+
+
 
 import Script from 'next/script';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -186,6 +189,7 @@ const getIcon = (iconName: string): React.ElementType => {
 
 export default function RecruitPage() {
   const [startAnimation, setStartAnimation] = useState(false);
+  const [showBrochure, setShowBrochure] = useState(false);
 
   // easing 함수를 메모이제이션
   const easingFunction = useCallback((t: number) => 1 - Math.pow(1 - t, 3), []);
@@ -405,12 +409,19 @@ export default function RecruitPage() {
               className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up"
               style={{ animationDelay: '500ms' }}
             >
-              <CalComPopup
-                buttonText="GFC 채용 상담 신청"
-                variant="default"
-                size="lg"
-                className="font-bold shadow-lg px-8 py-4 text-lg"
-              />
+              <a
+                href="https://cal.com/familyoffice/recruit"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg px-8 py-4 text-lg"
+                >
+                  <Briefcase className="mr-2 h-5 w-5" />
+                  GFC 위촉 상담 신청
+                </Button>
+              </a>
               <a
                 href="tel:0502-5550-8700"
                 className={cn(
@@ -474,12 +485,7 @@ export default function RecruitPage() {
                   <div
                     key={index}
                     className="text-center group cursor-pointer"
-                    onClick={() => {
-                      window.open(
-                        'https://pub-66c6dc2fd6894c5687d260702159ac9a.r2.dev/20250123%20GFC%20%E1%84%87%E1%85%B3%E1%84%85%E1%85%A9%E1%84%89%E1%85%A7.pdf',
-                        '_blank'
-                      );
-                    }}
+                    onClick={() => setShowBrochure(true)}
                   >
                     <div
                       className={`w-16 h-16 ${colorClasses} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:scale-110 transition-all duration-300`}
@@ -684,12 +690,7 @@ export default function RecruitPage() {
                       variant="outline"
                       size="lg"
                       className="hover:scale-105 transition-transform duration-200"
-                      onClick={() => {
-                        window.open(
-                          'https://pub-66c6dc2fd6894c5687d260702159ac9a.r2.dev/20250123%20GFC%20%E1%84%87%E1%85%B3%E1%84%85%E1%85%A9%E1%84%89%E1%85%A7.pdf',
-                          '_blank'
-                        );
-                      }}
+                      onClick={() => setShowBrochure(true)}
                     >
                       GFC 브로셔 다운로드
                     </Button>

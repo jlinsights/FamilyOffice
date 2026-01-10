@@ -24,7 +24,7 @@ export const runtime = 'nodejs';
 interface CaptureLeadRequest {
   email: string;
   name?: string;
-  calculationResult: {
+  calculationResult?: {
     totalAssets: number;
     totalDebts: number;
     netAssets: number;
@@ -77,12 +77,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!body.calculationResult) {
-      return NextResponse.json<CaptureLeadResponse>(
+    // If it's a simple lead capture without calculation (e.g. access gate)
+    // we allow it, but we won't have financial data.
+    // Ensure at least source is present.
+    if (!body.calculationResult && !body.source) {
+       return NextResponse.json<CaptureLeadResponse>(
         {
           success: false,
-          message: '계산 결과가 필요합니다.',
-          error: 'MISSING_CALCULATION',
+          message: '잘못된 요청입니다.',
+          error: 'MISSING_DATA',
         },
         { status: 400 }
       );
@@ -108,25 +111,30 @@ export async function POST(request: NextRequest) {
       leadId = existingLead.id;
       beehiivSubscriptionId = existingLead.beehiiv_subscription_id || undefined;
 
+    const leadData = {
+        name: name || existingLead.name,
+        source: source || 'calculator',
+        utm_source: utm?.source,
+        utm_medium: utm?.medium,
+        utm_campaign: utm?.campaign,
+        utm_content: utm?.content,
+        referring_url: referringUrl,
+        updated_at: new Date().toISOString(),
+    } as any;
+
+    if (calculationResult) {
+        leadData.total_assets = calculationResult.totalAssets;
+        leadData.total_debts = calculationResult.totalDebts;
+        leadData.net_assets = calculationResult.netAssets;
+        leadData.estimated_tax = calculationResult.estimatedTax;
+        leadData.has_spouse = calculationResult.hasSpouse;
+        leadData.num_children = calculationResult.numChildren;
+        leadData.num_minor_children = calculationResult.numMinorChildren || 0;
+    }
+
       const { error: updateError } = (await (supabase
         .from('leads') as any)
-        .update({
-          name: name || existingLead.name,
-          total_assets: calculationResult.totalAssets,
-          total_debts: calculationResult.totalDebts,
-          net_assets: calculationResult.netAssets,
-          estimated_tax: calculationResult.estimatedTax,
-          has_spouse: calculationResult.hasSpouse,
-          num_children: calculationResult.numChildren,
-          num_minor_children: calculationResult.numMinorChildren || 0,
-          source: source || 'calculator',
-          utm_source: utm?.source,
-          utm_medium: utm?.medium,
-          utm_campaign: utm?.campaign,
-          utm_content: utm?.content,
-          referring_url: referringUrl,
-          updated_at: new Date().toISOString(),
-        } as any)
+        .update(leadData)
         .eq('id', leadId)) as any;
 
       if (updateError) {
@@ -138,30 +146,35 @@ export async function POST(request: NextRequest) {
         success: true,
         leadId,
         beehiivSubscriptionId,
-        message: '이미 등록된 이메일입니다. 계산 결과가 업데이트되었습니다.',
+        message: '이미 등록된 이메일입니다. 정보가 업데이트되었습니다.',
       });
     }
 
     // New lead - insert into Supabase
-    const { data: newLead, error: insertError } = (await supabase
-      .from('leads')
-      .insert({
+    const newLeadData = {
         email,
         name,
-        total_assets: calculationResult.totalAssets,
-        total_debts: calculationResult.totalDebts,
-        net_assets: calculationResult.netAssets,
-        estimated_tax: calculationResult.estimatedTax,
-        has_spouse: calculationResult.hasSpouse,
-        num_children: calculationResult.numChildren,
-        num_minor_children: calculationResult.numMinorChildren || 0,
         source: source || 'calculator',
         utm_source: utm?.source,
         utm_medium: utm?.medium,
         utm_campaign: utm?.campaign,
         utm_content: utm?.content,
         referring_url: referringUrl,
-      } as any)
+    } as any;
+
+    if (calculationResult) {
+        newLeadData.total_assets = calculationResult.totalAssets;
+        newLeadData.total_debts = calculationResult.totalDebts;
+        newLeadData.net_assets = calculationResult.netAssets;
+        newLeadData.estimated_tax = calculationResult.estimatedTax;
+        newLeadData.has_spouse = calculationResult.hasSpouse;
+        newLeadData.num_children = calculationResult.numChildren;
+        newLeadData.num_minor_children = calculationResult.numMinorChildren || 0;
+    }
+
+    const { data: newLead, error: insertError } = (await supabase
+      .from('leads')
+      .insert(newLeadData)
       .select('id')
       .single()) as any;
 
@@ -177,10 +190,10 @@ export async function POST(request: NextRequest) {
       const beehiivResponse = await beehiiv.addCalculatorLead({
         email,
         name: name || undefined,
-        totalAssets: calculationResult.totalAssets,
-        estimatedTax: calculationResult.estimatedTax,
-        hasSpouse: calculationResult.hasSpouse,
-        numChildren: calculationResult.numChildren,
+        totalAssets: calculationResult?.totalAssets || 0,
+        estimatedTax: calculationResult?.estimatedTax || 0,
+        hasSpouse: calculationResult?.hasSpouse || false,
+        numChildren: calculationResult?.numChildren || 0,
         source: source || 'calculator',
         utm,
       });
