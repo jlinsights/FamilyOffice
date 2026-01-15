@@ -52,8 +52,8 @@ export default function MembershipIntakePage() {
               </div>
             </div>
 
-            {/* Process Steps */}
-            <div className="flex justify-center gap-2 mt-8 text-sm text-muted-foreground">
+            {/* Process Steps - Desktop */}
+            <div className="hidden sm:flex justify-center gap-2 mt-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-green-600" />
                 <span>간단 진단</span>
@@ -73,6 +73,21 @@ export default function MembershipIntakePage() {
                 <CheckCircle2 className="h-4 w-4 text-green-600" />
                 <span>실행</span>
               </div>
+            </div>
+
+            {/* Process Steps - Mobile (2x2 Grid) */}
+            <div className="grid grid-cols-2 gap-3 mt-8 sm:hidden">
+              {[
+                { step: '01', label: '간단 진단' },
+                { step: '02', label: '등급 제안' },
+                { step: '03', label: '온보딩' },
+                { step: '04', label: '실행' },
+              ].map((item) => (
+                <div key={item.step} className="flex items-center gap-2 p-2 rounded-lg bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50">
+                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400">{item.step}</span>
+                  <span className="text-xs text-muted-foreground">{item.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 
