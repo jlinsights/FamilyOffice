@@ -35,66 +35,99 @@ export default function MembershipContent() {
 
   const tiers = [
     {
-      name: "Essential",
-      price: "300만원",
-      target: "월납 30~60만원 구간",
-      desc: "기본 점검 + 리포트",
+      name: "Foundation",
+      tier: "Entry Level",
+      desc: "패밀리오피스 서비스의 첫 경험을 위한 맞춤 입문 프로그램",
       features: [
-        "코어 체크업 2회",
-        "자산 리포트 12회",
-        "전시 동선 큐레이션 4회",
-        "기본 컨시어지 지원"
+        "자산 구조 진단 및 포트폴리오 리포트 (연 1회)",
+        "분기별 자산 리밸런싱 리뷰 세션",
+        "엄선된 전시·문화 행사 큐레이션 안내",
+        "영업일 기준 전화 컨시어지 지원",
+        "멤버 전용 뉴스레터 및 마켓 인사이트"
       ],
       isPopular: false
     },
     {
       name: "Signature",
-      price: "600만원",
-      target: "월납 60~120만원 구간",
-      desc: "경험형 큐레이션 시작",
+      tier: "Recommended",
+      desc: "자산관리와 라이프스타일 큐레이션을 하나로, 바쁜 CEO를 위한 최적 솔루션",
       features: [
-        "코어 미팅 2회",
-        "호텔/다이닝 기획 4회",
-        "전시/프리뷰 6회",
-        "우선 예약 서비스"
+        "전담 어드바이저 1:1 배정 및 월간 리뷰",
+        "럭셔리 호텔·파인다이닝 우선 예약 및 VIP 업그레이드",
+        "프라이빗 전시 프리뷰 및 갤러리 투어 초청",
+        "긴급 예약 요청 우선 처리 (48시간 내)",
+        "반기별 자산·리스크 종합 점검 미팅",
+        "VIP 세미나 및 네트워킹 디너 초청"
       ],
       isPopular: true
     },
     {
-      name: "Platinum",
-      price: "1,200만원",
-      target: "월납 120~250만원 구간",
-      desc: "월 1회 전담 컨시어지",
+      name: "Elite",
+      tier: "Premium",
+      desc: "전담 컨시어지가 일상의 모든 선택을 대신하는 프리미엄 라이프 매니지먼트",
       features: [
-        "컨시어지 12회",
-        "국내 1박2일 기획 1회",
-        "컬렉팅 로드맵 수립",
-        "전용 핫라인 제공"
+        "전담 컨시어지 배정 및 월 2회 정기 미팅",
+        "국내외 맞춤 트래블 디자인 (동선·일정 최적화)",
+        "아트 컬렉션 로드맵 수립 및 전문가 자문",
+        "24/7 전용 핫라인 및 긴급 요청 즉시 대응",
+        "프리미엄 메디컬 체크업 예약 지원",
+        "가족 행사(돌잔치, 결혼식 등) 기획 자문"
       ],
       isPopular: false
     },
     {
-      name: "Black",
-      price: "2,400만원",
-      target: "월납 250~500만원 구간",
-      desc: "가족 단위 확장 서비스",
+      name: "Legacy",
+      tier: "Family Office",
+      desc: "세대를 넘어 가치를 전승하는 초고액자산가 전용 토털 패밀리오피스",
       features: [
-        "가족회의(거버넌스) 2회",
-        "해외 아트/호텔 동행 기획 1회",
-        "전문가 우선 연결",
-        "배우자/자녀 온보딩"
+        "패밀리 거버넌스 미팅 및 가족헌장 수립 지원",
+        "글로벌 아트페어·옥션 현지 동행 서비스",
+        "차세대 리더십 교육 및 해외 연수 프로그램",
+        "세무·법무·의료 최고 전문가 우선 연결",
+        "프라이빗 제트·요트 섭외 및 VIP 트래블",
+        "연간 자산관리 전략 보고서 (분기별 업데이트)"
       ],
       isPopular: false
     }
   ];
 
   const faqs = [
-    { q: "멤버십은 누구에게 적합한가요?", a: "바쁜 일정 속에서 선택·예약·조율에 쓰는 시간을 줄이고, 자산/승계/라이프 의사결정을 빠르고 정확하게 하고 싶은 분께 적합합니다." },
-    { q: "호텔/여행을 무료로 제공하나요?", a: "아닙니다. 본 서비스는 기획·섭외·우선예약·동선 설계가 핵심이며, 항공/숙박/티켓/식음료 등 실비는 멤버 부담입니다(파트너 혜택 적용 가능)." },
-    { q: "등급은 무엇으로 결정되나요?", a: "월납 합산은 참고지표이며, 실제로는 요청 빈도, 가족 단위 여부, 자산 구조 복잡도(승계/법인/부동산 비중) 등을 종합해 제안드립니다." },
-    { q: "보험 상품 가입이 필수인가요?", a: "필수가 아닙니다. 멤버십은 독립된 서비스 계약으로 운영됩니다. 기존 보유 계약이나 자산 규모만으로도 심사 가능합니다." },
-    { q: "컨시어지는 무엇을 해주나요?", a: "예약 대행을 넘어, 목적·취향을 반영한 옵션 비교 → 일정 설계 → 커뮤니케이션 → 확정까지 실무를 끝까지 책임집니다." },
-    { q: "전문가(세무/법무) 연결 비용은?", a: "연결 자체는 멤버십 범위에 포함될 수 있으나, 전문가의 실제 자문/용역 비용은 별도 계약일 수 있습니다." }
+    {
+      q: "멤버십은 누구에게 적합한가요?",
+      a: "자산관리와 라이프스타일 큐레이션을 통합적으로 관리하고 싶으신 고액자산가, 기업 CEO, 전문직 종사자에게 적합합니다. 특히 '시간 > 비용'을 중시하고, 일상의 복잡한 선택을 위임하고 싶으신 분들께 최적화된 서비스입니다. 바쁜 일정 속에서도 최고의 경험과 접근성을 원하시는 분들을 위한 토털 솔루션입니다."
+    },
+    {
+      q: "멤버십 등급은 어떻게 결정되나요?",
+      a: "온라인 10분 진단 또는 전화 상담을 통해 ① 가족 단위 자산 규모 ② 법인 구조의 복잡도 ③ 예상 서비스 이용 빈도 ④ 라이프스타일 니즈(여행, 아트, 교육 등)를 종합 평가합니다. 진단 결과를 바탕으로 Foundation부터 Legacy까지 최적 등급을 맞춤 제안드리며, 상황 변화에 따라 등급 조정도 유연하게 지원합니다."
+    },
+    {
+      q: "여행·호텔 서비스는 어떻게 제공되나요?",
+      a: "멤버십에는 '기획·섭외·우선권·동행' 서비스가 포함됩니다. 컨시어지가 여행 목적과 취향을 파악해 최적의 일정을 설계하고, 특급 호텔 스위트 쇼잉, 미쉐린 레스토랑 프라이빗 룸 예약, 공항 VIP 라운지 등을 섭외합니다. 실제 항공권·숙박·식음료 비용은 멤버님 부담이지만, 제휴 파트너를 통한 VIP 업그레이드와 우대 혜택이 제공됩니다."
+    },
+    {
+      q: "보험 상품과 연계되어 있나요?",
+      a: "아닙니다. FamilyOffice S 멤버십은 보험 상품과 완전히 분리된 독립적인 라이프스타일·자산관리 서비스입니다. 보험 가입 여부와 관계없이 자산 규모와 서비스 니즈만으로 가입 가능합니다. 다만, 삼성생명 GFC와의 제휴를 통해 VIP 교육 프로그램(100세 CEO, 가업승계 아카데미 등)에 우선 초청됩니다."
+    },
+    {
+      q: "컨시어지 서비스의 범위는?",
+      a: "단순 예약 대행을 넘어 '토털 라이프 매니지먼트'를 제공합니다. 목적·취향 분석 → 최적 옵션 리서치 → 비교 제안 → 일정 설계 → 예약·섭외 → 실시간 소통 → 사후 피드백까지 전 과정을 전담합니다. Elite 등급 이상은 24/7 핫라인이 제공되며, 긴급 요청 시 즉시 대응합니다."
+    },
+    {
+      q: "전문가 연결 서비스는 무료인가요?",
+      a: "세무사·변호사·의료 전문가 등 최상위 전문가 네트워크 '연결' 자체는 멤버십에 포함됩니다. 단, 실제 자문이나 용역 수행 시 발생하는 비용은 별도입니다. 멤버 우대 조건이 적용되어 일반 시장가 대비 유리한 조건으로 서비스를 이용하실 수 있습니다."
+    },
+    {
+      q: "멤버십 비용은 얼마인가요?",
+      a: "등급별 연회비는 개별 상담을 통해 안내드립니다. 자산 규모, 서비스 이용 범위, 가족 구성원 수 등에 따라 맞춤 견적이 제공되며, 10분 진단 후 구체적인 비용 안내를 받으실 수 있습니다. Legacy 등급의 경우 별도 프라이빗 상담을 통해 협의합니다."
+    },
+    {
+      q: "가족 구성원도 함께 이용할 수 있나요?",
+      a: "네, 가능합니다. Signature 등급부터는 배우자 동반 이용이 기본 포함되며, Elite·Legacy 등급에서는 자녀를 포함한 가족 단위 서비스가 제공됩니다. Legacy 등급의 경우 차세대 교육 프로그램, 가족 거버넌스 미팅 등 가족 전체를 위한 특화 서비스가 포함됩니다."
+    },
+    {
+      q: "해외에서도 서비스 이용이 가능한가요?",
+      a: "물론입니다. 글로벌 럭셔리 트래블 파트너 네트워크를 통해 전 세계 주요 도시에서 서비스를 이용하실 수 있습니다. 바젤·프리즈 등 글로벌 아트페어 현지 동행, 해외 미쉐린 레스토랑 예약, 현지 전문가 연결 등이 가능하며, 시차를 고려한 실시간 커뮤니케이션을 지원합니다."
+    }
   ];
 
   return (
@@ -104,117 +137,188 @@ export default function MembershipContent() {
       <main className="flex-grow pt-16">
         {/* Assumes Header height is roughly 64px (h-16), adjusting pt-16 ensures content is not hidden behind fixed header */}
 
-        {/* Hero Section - Refactored for Premium Consistency with Brand v3.0 */}
+        {/* Hero Section - Premium Design v4.0 */}
         <section
           id="hero"
-          className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white pt-20"
+          className="relative min-h-[100vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white"
         >
-          {/* Dynamic Background */}
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
-          
-          <div className="relative z-10 text-center max-w-7xl mx-auto px-6 py-12">
-            {/* Badge */}
+          {/* Premium Background Effects */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(15,23,42,0))]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_80%_80%,rgba(59,130,246,0.15),transparent)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_60%,rgba(217,178,112,0.08),transparent)]"></div>
+
+          {/* Animated Grid Pattern */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
+
+          {/* Floating Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+
+          <div className="relative z-10 text-center max-w-7xl mx-auto px-6 py-20">
+            {/* Premium Badge */}
             <FadeIn delay={0.2} direction="down">
-                 <div className="flex justify-center mb-12">
-                    <Badge variant="outline" className="px-4 py-1.5 text-sm border-white/20 text-blue-200 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-300">
-                      <span className="w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
-                      Private Concierge & Asset Management
-                    </Badge>
-                  </div>
+              <div className="flex justify-center mb-14">
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-blue-500/20 to-amber-500/20 rounded-full blur-sm group-hover:blur-md transition-all duration-500"></div>
+                  <Badge variant="outline" className="relative px-6 py-2 text-sm border-amber-500/30 text-amber-200/90 bg-slate-900/80 hover:bg-slate-900/90 backdrop-blur-xl transition-all duration-300 shadow-lg">
+                    <span className="w-2 h-2 rounded-full bg-amber-400 mr-3 animate-pulse shadow-[0_0_10px_rgba(251,191,36,0.5)]"></span>
+                    Private Concierge & Asset Management
+                    <span className="w-2 h-2 rounded-full bg-amber-400 ml-3 animate-pulse shadow-[0_0_10px_rgba(251,191,36,0.5)]"></span>
+                  </Badge>
+                </div>
+              </div>
             </FadeIn>
 
-            {/* Main Headline */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-10 tracking-tight leading-[1.1] text-white">
-                <span className="block mb-2">
-                    <TextReveal delay={0.4} type="word">자산을 키우는 것만큼,</TextReveal>
+            {/* Main Headline - Enhanced Typography */}
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black mb-12 tracking-tight leading-[1.05]">
+              <span className="block mb-3 text-white/95">
+                <TextReveal delay={0.4} type="word">당신의 시간은 소중합니다.</TextReveal>
+              </span>
+              <span className="block relative">
+                <span className="absolute inset-0 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent blur-sm opacity-50">
+                  선택은 저희가 대신합니다.
                 </span>
-                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-                    <TextReveal delay={0.6} type="word">선택과 품격을 관리합니다.</TextReveal>
+                <span className="relative bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent">
+                  <TextReveal delay={0.6} type="word">선택은 저희가 대신합니다.</TextReveal>
                 </span>
+              </span>
             </h1>
 
-            {/* Description */}
+            {/* Description - Refined */}
             <FadeIn direction="up" delay={0.8}>
-              <p className="text-xl md:text-2xl text-slate-300 font-light leading-relaxed mb-4 max-w-3xl mx-auto text-balance">
-                FamilyOffice S 멤버십은 단순한 혜택 나열이 아닌,<br className="hidden md:block"/>
-                라이프스타일 효율을 극대화하는 <span className="font-semibold text-blue-300">최고의 의사결정 파트너</span>입니다.
+              <p className="text-xl md:text-2xl text-slate-300/90 font-light leading-relaxed mb-6 max-w-3xl mx-auto text-balance">
+                복잡한 자산관리부터 일상의 모든 선택까지,<br className="hidden md:block"/>
+                전담 컨시어지가 완벽하게 관리하는
+              </p>
+              <p className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-blue-300 to-indigo-300 bg-clip-text text-transparent mb-8">
+                프라이빗 라이프 매니지먼트
               </p>
             </FadeIn>
 
-            {/* CTA Buttons */}
-             <FadeIn direction="up" delay={1.2}>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">            
+            {/* CTA Buttons - Premium Style */}
+            <FadeIn direction="up" delay={1.2}>
+              <div className="flex flex-col sm:flex-row gap-5 justify-center mt-14">
                 <Link
-                href="/apply/membership-intake"
-                className={cn(
-                  buttonVariants({ size: 'lg' }),
-                  'bg-blue-600 hover:bg-blue-700 text-white font-bold h-14 px-10 text-lg rounded-full shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] transform hover:-translate-y-0.5 transition-all'
-                )}
-              >
-                멤버십 등급 진단받기
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+                  href="/apply/membership-intake"
+                  className={cn(
+                    buttonVariants({ size: 'lg' }),
+                    'relative group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-bold h-16 px-12 text-lg rounded-full shadow-[0_0_50px_-10px_rgba(251,191,36,0.5)] transform hover:-translate-y-1 hover:shadow-[0_0_60px_-5px_rgba(251,191,36,0.6)] transition-all duration-300'
+                  )}
+                >
+                  <span className="relative z-10 flex items-center">
+                    멤버십 등급 진단받기
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
                 <Button
                   onClick={() => setShowBrochure(true)}
                   variant="outline"
                   size="lg"
                   className={cn(
-                    'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white h-14 px-10 text-lg rounded-full backdrop-blur-sm transform hover:-translate-y-0.5 transition-all'
+                    'relative group bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-white/30 hover:text-white h-16 px-12 text-lg rounded-full backdrop-blur-md transform hover:-translate-y-1 transition-all duration-300'
                   )}
                 >
-                  <FileText className="mr-2 h-5 w-5" />
+                  <FileText className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                   멤버십 제안서 다운로드
                 </Button>
               </div>
             </FadeIn>
+
+            {/* Trust Indicators */}
+            <FadeIn direction="up" delay={1.6}>
+              <div className="flex flex-wrap justify-center gap-8 mt-16 text-sm text-slate-400">
+                <div className="flex items-center gap-2">
+                  <Shield className="h-4 w-4 text-amber-500/70" />
+                  <span>프라이빗 서비스</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="h-4 w-4 text-amber-500/70" />
+                  <span>전담 컨시어지</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Star className="h-4 w-4 text-amber-500/70" />
+                  <span>VIP 네트워크</span>
+                </div>
+              </div>
+            </FadeIn>
           </div>
-          
-          {/* Scroll Indicator */}
-           <FadeIn delay={1.4} className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-              <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-slate-500 to-transparent"></div>
-           </FadeIn>
+
+          {/* Premium Scroll Indicator */}
+          <FadeIn delay={1.8} className="absolute bottom-12 left-1/2 -translate-x-1/2">
+            <div className="flex flex-col items-center gap-3 text-slate-500">
+              <span className="text-xs tracking-widest uppercase">Scroll</span>
+              <div className="w-[1px] h-12 bg-gradient-to-b from-amber-500/50 via-slate-500/50 to-transparent animate-pulse"></div>
+            </div>
+          </FadeIn>
         </section>
 
 
-        {/* Philosophy Section */}
-        <section id="philosophy" className="section bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
-          <div className="container">
+        {/* Philosophy Section - Premium Design v4.0 */}
+        <section id="philosophy" className="section bg-white dark:bg-slate-900 py-24 md:py-32 relative overflow-hidden">
+          {/* Subtle Background Pattern */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.03),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.03),transparent_50%)]"></div>
+
+          <div className="container relative z-10">
             <FadeIn direction="up">
-              <div className="text-center mb-16">
-                <Badge variant="secondary" className="mb-4">Core Values</Badge>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground">Core Value Proposition</h2>
-                <p className="mt-4 text-muted-foreground text-lg text-balance">당신이 원하는 건 ‘할인’이 아니라 ‘<span className="text-primary font-bold">접근(Access)과 속도(Speed)</span>’입니다.</p>
+              <div className="text-center mb-20">
+                <Badge variant="outline" className="mb-6 px-4 py-1.5 border-amber-500/30 text-amber-700 dark:text-amber-400 bg-amber-50/50 dark:bg-amber-500/10">
+                  <Shield className="h-3 w-3 mr-2" />
+                  Core Values
+                </Badge>
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
+                  바쁜 당신을 위한 <span className="bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">단 하나의 솔루션</span>
+                </h2>
+                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  당신이 원하는 건 &apos;할인&apos;이 아닙니다.<br className="md:hidden"/>
+                  <span className="font-semibold text-amber-600 dark:text-amber-400">결정의 속도, 최고의 접근성, 완벽한 실행력</span>입니다.
+                </p>
               </div>
             </FadeIn>
 
-            <FadeIn direction="up" delay={0.2} stagger={0.1}>
-            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+            <FadeIn direction="up" delay={0.2} stagger={0.15}>
+            <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  icon: <Shield className="h-8 w-8" />,
+                  icon: <Shield className="h-7 w-7" />,
                   title: "Decision Support",
-                  desc: "자산·리스크·승계 이슈를 빠르게 정리하고 \"다음 행동\"을 명확히 합니다. 불필요한 고민의 시간을 줄여드립니다."
+                  subtitle: "의사결정 파트너",
+                  desc: "자산·리스크·승계 이슈를 빠르게 정리하고 \"다음 행동\"을 명확히 합니다. 불필요한 고민의 시간을 줄여드립니다.",
+                  gradient: "from-blue-500 to-indigo-600"
                 },
                 {
-                  icon: <Clock className="h-8 w-8" />,
+                  icon: <Clock className="h-7 w-7" />,
                   title: "Concierge Execution",
-                  desc: "호텔, 여행, 전시, 미팅을 \"알아서\" 되는 수준으로 정리합니다. 기획부터 동선 설계까지 완벽하게 수행합니다."
+                  subtitle: "완벽한 실행력",
+                  desc: "호텔, 여행, 전시, 미팅을 \"알아서\" 되는 수준으로 정리합니다. 기획부터 동선 설계까지 완벽하게 수행합니다.",
+                  gradient: "from-amber-500 to-orange-600"
                 },
                 {
-                  icon: <Key className="h-8 w-8" />,
+                  icon: <Key className="h-7 w-7" />,
                   title: "Private Access",
-                  desc: "프리뷰, 라운드테이블, 전문가 네트워크 등 공개된 시장에서 얻기 어려운 독점적인 접근성을 제공합니다."
+                  subtitle: "독점적 접근성",
+                  desc: "프리뷰, 라운드테이블, 전문가 네트워크 등 공개된 시장에서 얻기 어려운 독점적인 접근성을 제공합니다.",
+                  gradient: "from-purple-500 to-pink-600"
                 }
               ].map((item, idx) => (
-                <div key={idx} className="card-interactive p-8 group border-transparent hover:border-border bg-white dark:bg-slate-800 shadow-sm rounded-2xl hover:shadow-xl transition-all duration-300">
-                  <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
-                    {item.icon}
+                <div key={idx} className="group relative p-8 bg-slate-50 dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-slate-700/50 hover:border-amber-500/30 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-3">
+                  {/* Hover Glow */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  {/* Icon */}
+                  <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                    <div className="text-white">
+                      {item.icon}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {item.desc}
-                  </p>
+
+                  <div className="relative z-10">
+                    <p className="text-xs text-amber-600 dark:text-amber-400 font-semibold uppercase tracking-widest mb-2">{item.subtitle}</p>
+                    <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-amber-600 transition-colors">{item.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -223,71 +327,117 @@ export default function MembershipContent() {
         </section>
 
 
-        {/* Detailed Services (Modules) */}
-        <section id="benefits" className="section bg-slate-950 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-white opacity-5 pointer-events-none"></div>
-           {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-blue-950/20 to-slate-950 pointer-events-none"></div>
-          
+        {/* Detailed Services (Modules) - Premium Design v4.0 */}
+        <section id="benefits" className="section bg-slate-950 text-white relative overflow-hidden py-24 md:py-32">
+          {/* Premium Background Effects */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(251,191,36,0.08),transparent)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.05),transparent)]"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]"></div>
+
+          {/* Animated Accent Lines */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent"></div>
+
           <div className="container relative z-10">
             <FadeIn direction="up">
-              <div className="mb-16">
-                <span className="text-amber-500 font-semibold tracking-wider text-sm uppercase block mb-2">Curated Services</span>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold">Modular Benefits</h2>
+              <div className="mb-20 max-w-3xl">
+                <Badge variant="outline" className="mb-6 px-4 py-1.5 border-amber-500/30 text-amber-400 bg-amber-500/10">
+                  <Star className="h-3 w-3 mr-2" />
+                  Curated Services
+                </Badge>
+                <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+                  원하는 것만 <span className="bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent">골라 담는</span> 맞춤 서비스
+                </h2>
+                <p className="text-lg text-slate-400 leading-relaxed">
+                  4가지 핵심 모듈을 자유롭게 조합하세요.<br className="hidden md:block"/>
+                  필요한 서비스만 선택해 나만의 패키지를 완성합니다.
+                </p>
               </div>
             </FadeIn>
 
-            <FadeIn direction="up" delay={0.2} stagger={0.1}>
-            <div className="grid md:grid-cols-2 gap-x-16 gap-y-16">
+            <FadeIn direction="up" delay={0.2} stagger={0.15}>
+            <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
-                  icon: <Plane className="text-amber-500" size={32} />,
-                  title: "Travel & Hotel Concierge",
+                  icon: <Plane size={28} />,
+                  title: "Travel Design & Curation",
+                  subtitle: "글로벌 럭셔리 트래블 파트너 협업",
+                  gradient: "from-blue-500 to-indigo-600",
                   items: [
-                    "호텔 투어/스위트 쇼잉/다이닝 코스 섭외",
-                    "해외 일정 동선 최적화(도시/항공/숙박/이동)",
-                    "허니문/기념일 테마별 프라이빗 플래닝"
+                    "아트·컬처·웰니스·골프 등 테마별 맞춤 여행 기획",
+                    "현지 전문가와 함께하는 숨겨진 명소 프라이빗 투어",
+                    "포시즌스·아만·만다린오리엔탈 등 특급 호텔 스위트 쇼잉",
+                    "미쉐린 스타 레스토랑 프라이빗 룸 예약 및 셰프 테이블",
+                    "항공·숙박·이동 동선 원스톱 최적화 설계"
                   ]
                 },
                 {
-                  icon: <Star className="text-amber-500" size={32} />,
-                  title: "Art & Collection",
+                  icon: <Star size={28} />,
+                  title: "Art Collection & Cultural Access",
+                  subtitle: "전문 아트 큐레이터 네트워크 제휴",
+                  gradient: "from-purple-500 to-pink-600",
                   items: [
-                    "전시 프리뷰/프라이빗 도슨트 섭외",
-                    "작가·갤러리·아트페어 미팅 셋업",
-                    "컬렉션 관리 가이드 및 리스크 체크리스트"
+                    "국립현대미술관, 리움 등 휴관일 프라이빗 프리뷰",
+                    "바젤·프리즈·KIAF 등 글로벌 아트페어 현지 동행",
+                    "작가·컬렉터 1:1 미팅 및 스튜디오 방문 주선",
+                    "컬렉션 구축 전략, 보존 관리, 자산화 자문",
+                    "신진 작가 발굴 및 블루칩 작품 투자 기회 제공"
                   ]
                 },
                 {
-                  icon: <Landmark className="text-amber-500" size={32} />,
-                  title: "Family Office Core Review",
+                  icon: <Landmark size={28} />,
+                  title: "Family Office Core Services",
+                  subtitle: "삼성생명 GFC 제휴 프로그램 연계",
+                  gradient: "from-amber-500 to-orange-600",
                   items: [
-                    "자산 구조(현금흐름·부동산·법인) 통합 점검",
-                    "승계·가업·가족 거버넌스 액션아이템 도출",
-                    "분기/반기 리밸런싱 미팅 진행"
+                    "법인·개인 자산 통합 진단 및 구조 최적화",
+                    "가업승계 로드맵 수립 및 가족 거버넌스 체계화",
+                    "분기별 포트폴리오 리밸런싱 및 리스크 점검",
+                    "100세 CEO, 가업승계 아카데미 등 VIP 교육 우선 초청",
+                    "글로벌 자산배분 및 해외투자 전략 자문"
                   ]
                 },
                 {
-                  icon: <Users className="text-amber-500" size={32} />,
-                  title: "Private Network",
+                  icon: <Users size={28} />,
+                  title: "Premier Concierge Network",
+                  subtitle: "전담 컨시어지 및 프라이빗 네트워크",
+                  gradient: "from-emerald-500 to-teal-600",
                   items: [
-                    "멤버 전용 소규모 디너/라운드테이블(초청제)",
-                    "분야별 최고 전문가(세무·법무) 우선 연결",
-                    "비공개 투자 딜 소싱 및 공유"
+                    "24/7 전담 컨시어지 배정 및 실시간 메신저 지원",
+                    "국내외 특급 호텔·프라이빗 멤버스클럽 우선 예약",
+                    "멤버 전용 비즈니스 라운드테이블·디너 네트워킹",
+                    "최고 전문가(세무사·변호사·주치의) 직통 연결",
+                    "가족 이벤트(돌잔치·결혼식·장례) 토털 기획 지원"
                   ]
                 }
               ].map((service, idx) => (
-                <div key={idx} className="flex gap-6 group hover:translate-x-2 transition-transform duration-300">
-                  <div className="flex-shrink-0 mt-1 p-3 rounded-xl bg-slate-900 border border-slate-800 group-hover:border-amber-500/50 transition-colors shadow-lg">
-                    {service.icon}
+                <div
+                  key={idx}
+                  className="group relative p-8 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-amber-500/30 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/5"
+                >
+                  {/* Card Glow Effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  {/* Icon with Gradient */}
+                  <div className={`relative inline-flex p-4 rounded-2xl bg-gradient-to-br ${service.gradient} shadow-lg mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                    <div className="text-white">
+                      {service.icon}
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-4 text-white group-hover:text-amber-400 transition-colors">{service.title}</h3>
-                    <ul className="space-y-3 text-slate-300">
+
+                  <div className="relative z-10">
+                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-400 transition-colors duration-300">{service.title}</h3>
+                    <p className="text-sm text-slate-400 mb-6 flex items-center gap-2">
+                      <span className="w-6 h-px bg-amber-500/50"></span>
+                      {service.subtitle}
+                    </p>
+                    <ul className="space-y-4 text-slate-300">
                       {service.items.map((item, i) => (
-                        <li key={i} className="flex items-start">
-                          <Check className="h-4 w-4 mr-3 text-amber-500 mt-1 flex-shrink-0" />
-                          <span className="leading-relaxed">{item}</span>
+                        <li key={i} className="flex items-start group/item">
+                          <div className="w-6 h-6 rounded-full flex items-center justify-center bg-amber-500/10 mr-3 flex-shrink-0 group-hover/item:bg-amber-500/20 transition-colors">
+                            <Check className="h-3.5 w-3.5 text-amber-500" />
+                          </div>
+                          <span className="leading-relaxed text-sm group-hover/item:text-white transition-colors">{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -300,116 +450,179 @@ export default function MembershipContent() {
         </section>
 
 
-        {/* Membership Tiers */}
-        <section id="membership" className="section bg-slate-50 dark:bg-slate-900/50">
-          <div className="container">
+        {/* Membership Tiers - Premium Design v4.0 */}
+        <section id="membership" className="section bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-900 relative overflow-hidden">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber-500/5 to-transparent rounded-full blur-3xl"></div>
+
+          <div className="container relative z-10">
             <FadeIn direction="up">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground">Membership Tiers</h2>
-                <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-lg text-balance">
-                  실제 등급은 가족 단위 자산, 법인 구조 복잡도, 서비스 니즈에 따라 맞춤 제안됩니다.
+              <div className="text-center mb-16">
+                <Badge variant="outline" className="mb-6 px-4 py-1.5 border-amber-500/30 text-amber-700 dark:text-amber-400 bg-amber-50/50 dark:bg-amber-500/10">
+                  <Star className="h-3 w-3 mr-2" />
+                  Membership Structure
+                </Badge>
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
+                  10분 진단으로 찾는 <span className="bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">나만의 등급</span>
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+                  자산 규모와 라이프스타일을 분석해 최적의 멤버십을 추천드립니다.<br className="hidden md:block"/>
+                  Foundation부터 Legacy까지, 당신의 상황에 맞는 등급을 제안합니다.
                 </p>
               </div>
             </FadeIn>
 
-            <FadeIn direction="up" delay={0.2} stagger={0.1}>
-            <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
-              {tiers.map((tier, index) => (
-                <div
-                  key={index}
-                  className={`relative rounded-2xl p-8 border flex flex-col transition-all duration-300 bg-white dark:bg-slate-800 ${
-                    tier.isPopular
-                      ? 'border-blue-500 shadow-2xl ring-1 ring-blue-500 z-10 scale-105 md:scale-105'
-                      : 'border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl'
-                  }`}
-                >
-                  {tier.isPopular && (
-                    <span className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">
-                      Recommended
-                    </span>
-                  )}
-                  <div className="mb-4">
-                    <h3 className="text-xl font-bold text-foreground">{tier.name}</h3>
-                    <p className="text-xs text-muted-foreground mt-1 font-medium">{tier.target}</p>
-                  </div>
-                  <div className="mb-6 pb-6 border-b border-border">
-                    <div className="flex items-baseline">
-                      <span className="text-2xl font-bold text-foreground">₩{tier.price}</span>
-                      <span className="text-muted-foreground text-sm ml-1">/년 (예시)</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground mt-2 min-h-[40px] leading-relaxed">{tier.desc}</p>
-                  </div>
-                  <ul className="space-y-4 mb-8 flex-grow">
-                    {tier.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start text-sm">
-                        <Check className="text-blue-500 flex-shrink-0 mr-2 h-4 w-4" />
-                        <span className="text-foreground/80">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="w-full">
-                    {tier.name === "Black" || tier.name === "Founder's Circle" ? (
-                      <Link 
-                        href="tel:0502-5550-8700" 
-                        className={cn(
-                          buttonVariants({ 
-                            className: `w-full py-6 text-sm font-semibold transition rounded-xl ${
-                              tier.isPopular
-                                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                : 'bg-white border border-slate-200 text-slate-900 hover:bg-slate-50'
-                            }`
-                          }),
-                          "flex items-center justify-center"
-                        )}
-                      >
-                         문의하기
-                      </Link>
-                    ) : (
-                      <Link
-                        href="/apply/membership-intake"
-                         className={cn(
-                          buttonVariants({ 
-                            className: `w-full py-6 text-sm font-semibold transition rounded-xl flex items-center justify-center ${
-                              tier.isPopular
-                                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                : 'bg-white border border-slate-200 text-slate-900 hover:bg-slate-50'
-                            }`
-                          })
-                        )}
-                      >
-                        진단 및 신청
-                      </Link>
+            <FadeIn direction="up" delay={0.2} stagger={0.15}>
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 lg:gap-4">
+              {tiers.map((tier, index) => {
+                const tierColors = {
+                  Foundation: { accent: 'slate', gradient: 'from-slate-500 to-slate-600', glow: 'slate-500/20' },
+                  Signature: { accent: 'blue', gradient: 'from-blue-500 to-indigo-600', glow: 'blue-500/30' },
+                  Elite: { accent: 'purple', gradient: 'from-purple-500 to-violet-600', glow: 'purple-500/25' },
+                  Legacy: { accent: 'amber', gradient: 'from-amber-500 to-orange-600', glow: 'amber-500/30' },
+                };
+                const colors = tierColors[tier.name as keyof typeof tierColors] || tierColors.Foundation;
+
+                return (
+                  <div
+                    key={index}
+                    className={`relative group rounded-2xl p-8 flex flex-col transition-all duration-500 ${
+                      tier.isPopular
+                        ? 'bg-gradient-to-b from-slate-900 to-slate-950 text-white shadow-2xl ring-2 ring-blue-500/50 z-10 lg:scale-[1.05] lg:-my-4'
+                        : 'bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/50 shadow-lg hover:shadow-2xl hover:-translate-y-2'
+                    }`}
+                  >
+                    {/* Glow Effect */}
+                    {tier.isPopular && (
+                      <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-indigo-500/10 rounded-2xl"></div>
                     )}
+
+                    {tier.isPopular && (
+                      <span className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-bold px-5 py-2 rounded-full uppercase tracking-wider shadow-lg shadow-blue-500/30">
+                        ✨ Recommended
+                      </span>
+                    )}
+
+                    {/* Tier Icon */}
+                    <div className={`w-12 h-12 mb-6 rounded-xl flex items-center justify-center bg-gradient-to-br ${colors.gradient} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      {index === 0 && <Shield className="h-6 w-6 text-white" />}
+                      {index === 1 && <Star className="h-6 w-6 text-white" />}
+                      {index === 2 && <Key className="h-6 w-6 text-white" />}
+                      {index === 3 && <Landmark className="h-6 w-6 text-white" />}
+                    </div>
+
+                    <div className="mb-4 relative z-10">
+                      <h3 className={`text-2xl font-bold mb-2 ${tier.isPopular ? 'text-white' : 'text-foreground'}`}>{tier.name}</h3>
+                      <p className={`text-xs font-semibold uppercase tracking-widest ${tier.isPopular ? 'text-blue-300' : `text-${colors.accent}-600 dark:text-${colors.accent}-400`}`}>
+                        {tier.tier}
+                      </p>
+                    </div>
+                    <div className={`mb-6 pb-6 border-b relative z-10 ${tier.isPopular ? 'border-slate-700' : 'border-slate-200 dark:border-slate-700'}`}>
+                      <p className={`text-sm leading-relaxed min-h-[60px] ${tier.isPopular ? 'text-slate-300' : 'text-muted-foreground'}`}>
+                        {tier.desc}
+                      </p>
+                    </div>
+                    <ul className="space-y-4 mb-8 flex-grow relative z-10">
+                      {tier.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start text-sm">
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center mr-3 flex-shrink-0 ${tier.isPopular ? 'bg-blue-500/20' : 'bg-slate-100 dark:bg-slate-700'}`}>
+                            <Check className={`h-3 w-3 ${tier.isPopular ? 'text-blue-400' : `text-${colors.accent}-500`}`} />
+                          </div>
+                          <span className={tier.isPopular ? 'text-slate-200' : 'text-foreground/80'}>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="w-full relative z-10">
+                      {tier.name === "Legacy" ? (
+                        <Link
+                          href="tel:0502-5550-8700"
+                          className={cn(
+                            buttonVariants({ size: 'lg' }),
+                            'w-full py-6 text-sm font-semibold transition-all duration-300 rounded-xl flex items-center justify-center',
+                            'bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-400 hover:to-orange-400 shadow-lg hover:shadow-xl hover:shadow-amber-500/20'
+                          )}
+                        >
+                          <Landmark className="h-4 w-4 mr-2" />
+                          프라이빗 상담 문의
+                        </Link>
+                      ) : (
+                        <Link
+                          href="/apply/membership-intake"
+                          className={cn(
+                            buttonVariants({ size: 'lg' }),
+                            'w-full py-6 text-sm font-semibold transition-all duration-300 rounded-xl flex items-center justify-center',
+                            tier.isPopular
+                              ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-400 hover:to-indigo-500 shadow-lg hover:shadow-xl hover:shadow-blue-500/30'
+                              : 'bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100'
+                          )}
+                        >
+                          멤버십 진단 시작
+                          <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
             </FadeIn>
           </div>
         </section>
 
 
-        {/* Process Flow */}
-        <section className="section bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
-          <div className="container">
-             <FadeIn direction="up">
-               <div className="text-center mb-16">
-                <h2 className="text-3xl font-serif font-bold text-foreground">How It Works</h2>
+        {/* Process Flow - Premium Design v4.0 */}
+        <section className="section bg-gradient-to-b from-white to-slate-50 dark:from-slate-950 dark:to-slate-900 py-24 md:py-32 relative overflow-hidden">
+          {/* Decorative Elements */}
+          <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[150px] -translate-y-1/2"></div>
+
+          <div className="container relative z-10">
+            <FadeIn direction="up">
+              <div className="text-center mb-20">
+                <Badge variant="outline" className="mb-6 px-4 py-1.5 border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 bg-slate-100/50 dark:bg-slate-800/50">
+                  <Clock className="h-3 w-3 mr-2" />
+                  Simple Process
+                </Badge>
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
+                  복잡한 절차 없이, <span className="bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">오늘 바로</span> 시작하세요
+                </h2>
               </div>
-             </FadeIn>
-            <FadeIn delay={0.2} stagger={0.1}>
-            <div className="grid md:grid-cols-4 gap-8">
+            </FadeIn>
+            <FadeIn delay={0.2} stagger={0.15}>
+            <div className="grid md:grid-cols-4 gap-6 relative">
+              {/* Connection Line */}
+              <div className="hidden md:block absolute top-16 left-[12.5%] right-[12.5%] h-[2px] bg-gradient-to-r from-amber-500/20 via-amber-500/40 to-amber-500/20"></div>
+
               {[
-                { step: "01", title: "간단 진단", desc: "10분 설문을 통해 목적과 취향, 제약사항을 파악합니다." },
-                { step: "02", title: "등급 제안", desc: "고객님의 상황에 최적화된 멤버십 등급과 범위를 제안드립니다." },
-                { step: "03", title: "온보딩", desc: "선호/금기사항, 캘린더, 예산, 동행자 정보를 등록합니다." },
-                { step: "04", title: "실행 & 큐레이션", desc: "요청 시 기획안 제시 후 예약 및 섭외, 사후 정리까지 수행합니다." }
+                { step: "01", title: "간단 진단", desc: "10분 설문을 통해 목적과 취향, 제약사항을 파악합니다.", icon: <FileText className="h-5 w-5" /> },
+                { step: "02", title: "등급 제안", desc: "고객님의 상황에 최적화된 멤버십 등급과 범위를 제안드립니다.", icon: <Star className="h-5 w-5" /> },
+                { step: "03", title: "온보딩", desc: "선호/금기사항, 캘린더, 예산, 동행자 정보를 등록합니다.", icon: <Users className="h-5 w-5" /> },
+                { step: "04", title: "실행 & 큐레이션", desc: "요청 시 기획안 제시 후 예약 및 섭외, 사후 정리까지 수행합니다.", icon: <Check className="h-5 w-5" /> }
               ].map((item, index) => (
-                <div key={index} className="text-center relative group p-4">
-                  <div className="text-6xl font-serif text-slate-100 dark:text-slate-800 font-bold mb-6 group-hover:text-blue-50 dark:group-hover:text-blue-900/20 transition-colors duration-500">{item.step}</div>
-                  <h3 className="text-xl font-bold text-foreground mb-3 relative z-10 -mt-8">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed text-balance">{item.desc}</p>
-                  {index < 3 && <ArrowRight className="hidden md:block absolute top-[20%] -right-4 text-slate-200" size={24} />}
+                <div key={index} className="relative group">
+                  {/* Step Circle */}
+                  <div className="flex justify-center mb-8">
+                    <div className="relative">
+                      <div className="w-16 h-16 rounded-full bg-white dark:bg-slate-800 border-2 border-amber-500/30 flex items-center justify-center shadow-lg group-hover:border-amber-500 group-hover:shadow-amber-500/20 transition-all duration-300">
+                        <div className="text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform">
+                          {item.icon}
+                        </div>
+                      </div>
+                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center shadow-md">
+                        {item.step.replace('0', '')}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content Card */}
+                  <div className="text-center p-6 rounded-2xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 shadow-sm group-hover:shadow-xl group-hover:-translate-y-2 transition-all duration-300">
+                    <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-amber-600 transition-colors">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+
+                  {/* Arrow (mobile hidden) */}
+                  {index < 3 && (
+                    <ArrowRight className="hidden md:block absolute top-8 -right-3 text-amber-500/30 z-20" size={20} />
+                  )}
                 </div>
               ))}
             </div>
@@ -418,50 +631,98 @@ export default function MembershipContent() {
         </section>
 
 
-        {/* FAQ & CTA */}
-        <section id="faq" className="section bg-slate-50 dark:bg-slate-900/30">
+        {/* FAQ & CTA - Premium Design v4.0 */}
+        <section id="faq" className="section bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 py-24 md:py-32 relative overflow-hidden">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-blue-500/5 rounded-full blur-[120px]"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-amber-500/5 rounded-full blur-[100px]"></div>
+
           <FadeIn direction="up">
-          <div className="max-w-3xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-center text-foreground mb-16">Frequently Asked Questions</h2>
+          <div className="max-w-4xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-6 px-4 py-1.5 border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800/50">
+                FAQ
+              </Badge>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground">
+                자주 묻는 <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">질문</span>
+              </h2>
+            </div>
+
             <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div key={index} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all hover:border-blue-500/20 shadow-sm">
+                <div
+                  key={index}
+                  className={`group bg-white dark:bg-slate-800/80 rounded-2xl border overflow-hidden transition-all duration-300 shadow-sm hover:shadow-lg ${
+                    activeFaq === index
+                      ? 'border-amber-500/50 shadow-lg shadow-amber-500/5'
+                      : 'border-slate-200 dark:border-slate-700/50 hover:border-amber-500/30'
+                  }`}
+                >
                   <button
-                    className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"
+                    className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none transition-colors"
                     onClick={() => toggleFaq(index)}
                   >
-                    <span className="font-semibold text-foreground text-base md:text-lg">{faq.q}</span>
-                    {activeFaq === index ? <ChevronUp className="text-blue-600 flex-shrink-0" size={20} /> : <ChevronDown className="text-muted-foreground flex-shrink-0" size={20} />}
+                    <div className="flex items-center gap-4">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                        activeFaq === index
+                          ? 'bg-amber-500 text-white'
+                          : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
+                      }`}>
+                        <span className="text-sm font-bold">{index + 1}</span>
+                      </div>
+                      <span className="font-semibold text-foreground text-base md:text-lg pr-4">{faq.q}</span>
+                    </div>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                      activeFaq === index
+                        ? 'bg-amber-500/10 rotate-180'
+                        : 'bg-slate-100 dark:bg-slate-700'
+                    }`}>
+                      <ChevronDown className={`flex-shrink-0 transition-colors ${activeFaq === index ? 'text-amber-500' : 'text-muted-foreground'}`} size={18} />
+                    </div>
                   </button>
-                  {activeFaq === index && (
-                    <div className="px-8 pb-8 pt-2 border-t border-slate-100 dark:border-slate-700">
+                  <div className={`overflow-hidden transition-all duration-300 ${activeFaq === index ? 'max-h-96' : 'max-h-0'}`}>
+                    <div className="px-8 pb-8 pt-2 ml-12">
                       <p className="text-muted-foreground leading-relaxed text-base">{faq.a}</p>
                     </div>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-20 text-center">
-              <h3 className="text-2xl font-bold text-foreground mb-4">프리미엄 멤버십 상담 신청</h3>
-              <p className="text-muted-foreground mb-10 text-lg">짧은 진단만으로도, 어떤 등급이 과소/과대인지 바로 정리됩니다.</p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link 
-                  href="/apply/membership-intake"
-                  className={cn(
-                    buttonVariants({ className: 'bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-10 py-6 h-auto text-lg shadow-lg rounded-full' })
-                  )}
-                >
-                  멤버십 진단 받기
-                </Link>
-                <Link 
-                  href="tel:0502-5550-8700"
-                  className={cn(
-                    buttonVariants({ variant: 'outline', className: 'w-full sm:w-auto px-10 py-6 h-auto text-lg font-bold shadow-sm rounded-full bg-white hover:bg-slate-50 border-slate-200 text-slate-900' })
-                  )}
-                >
-                  Founder’s Circle 문의
-                </Link>
+            {/* CTA Section */}
+            <div className="mt-24 text-center relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 via-blue-500/5 to-amber-500/5 rounded-3xl"></div>
+              <div className="relative bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-3xl p-12 shadow-xl">
+                <h3 className="text-3xl font-bold text-foreground mb-4">
+                  지금 바로 <span className="bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent">나의 등급</span>을 확인하세요
+                </h3>
+                <p className="text-muted-foreground mb-10 text-lg max-w-2xl mx-auto">
+                  10분이면 충분합니다. 자산 구조와 라이프스타일을 분석해<br className="hidden md:block"/>
+                  Foundation부터 Legacy까지 맞춤 등급을 제안드립니다.
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center gap-5">
+                  <Link
+                    href="/apply/membership-intake"
+                    className={cn(
+                      buttonVariants({ size: 'lg' }),
+                      'relative group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-bold h-14 px-10 text-lg rounded-full shadow-lg hover:shadow-xl hover:shadow-amber-500/20 transform hover:-translate-y-1 transition-all duration-300'
+                    )}
+                  >
+                    <span className="flex items-center">
+                      무료 진단 시작하기
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </Link>
+                  <Link
+                    href="/program"
+                    className={cn(
+                      buttonVariants({ variant: 'outline', size: 'lg' }),
+                      'h-14 px-10 text-lg font-semibold rounded-full bg-white hover:bg-slate-50 border-slate-200 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:hover:bg-slate-700 transform hover:-translate-y-1 transition-all duration-300'
+                    )}
+                  >
+                    VIP 프로그램 미리보기
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -474,25 +735,66 @@ export default function MembershipContent() {
             <FadeIn direction="up">
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div>
-                <span className="text-xl font-serif font-bold text-white tracking-tight block mb-4">FamilyOffice S</span>
-                <p className="text-sm max-w-xs leading-relaxed text-slate-400 mb-4">
-                  자산 관리의 새로운 기준.<br/>
-                  귀하의 시간과 품격을 가장 우선순위에 둡니다.
+                <span className="text-xl font-serif font-bold text-white tracking-tight block mb-4">FamilyOffice S Premium Membership</span>
+                <p className="text-sm max-w-lg leading-relaxed text-slate-400 mb-4">
+                  시간, 선택, 품격을 관리하는 프라이빗 컨시어지 서비스.<br/>
+                  아트·트래블·라이프스타일 큐레이션과 자산관리를 통합한<br/>
+                  독립적인 멤버십 프로그램입니다.
                 </p>
-                <div className="text-sm space-y-1 text-slate-400">
-                  <p>운영 원칙: 실비 별도 부담 / 예약 보증금 제도 운용</p>
-                  <p>문의: concierge@familyoffices.vip</p>
+                <div className="text-sm space-y-2 text-slate-400 mt-6">
+                  <p className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    협업: 글로벌 럭셔리 트래블 파트너 / 전문 아트 큐레이터 네트워크
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    제휴: 삼성생명 GFC VIP·CEO 프로그램 우선 초청
+                  </p>
+                  <p className="flex items-center gap-2 mt-4 text-blue-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                    문의: concierge@familyoffices.vip
+                  </p>
                 </div>
+              </div>
+              <div className="md:pl-8">
+                <p className="text-sm font-semibold text-white mb-3">서비스 운영 원칙</p>
+                <ul className="text-sm space-y-2 text-slate-400">
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                    <span>기획·섭외·우선권 제공이 핵심이며, 실비(항공·숙박·식음료 등)는 멤버 부담</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                    <span>예약 보증금 제도 운용 (노쇼 방지 및 서비스 품질 유지)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                    <span>제휴 파트너 혜택은 사전 공지 후 변경 가능</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
             <div className="border-t border-slate-800 pt-8 mt-8 text-xs text-slate-500 leading-relaxed">
-              <p className="mb-2 font-bold text-slate-400">유의사항</p>
-              <ul className="list-disc pl-4 space-y-1">
-                <li>본 멤버십은 금융상품의 체결/유지와 분리된 독립 서비스입니다.</li>
-                <li>여행/호텔/전시 등은 기획·섭외·우선권 제공이 중심이며, 실비 비용은 멤버 부담입니다.</li>
-                <li>제휴사 혜택은 운영 상황에 따라 변경될 수 있으며, 사전 공지 후 적용됩니다.</li>
-              </ul>
+              <p className="mb-3 font-bold text-slate-400 text-sm">중요 공지사항 (Legal Disclaimer)</p>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <p className="font-semibold text-slate-400 mb-2">독립 서비스 운영</p>
+                  <ul className="list-disc pl-4 space-y-1.5">
+                    <li>본 멤버십은 보험 상품 및 금융상품의 체결·유지와 <span className="text-amber-500 font-semibold">완전히 분리</span>된 독립적인 라이프스타일 서비스입니다.</li>
+                    <li>보험 가입 여부와 관계없이 자산 규모 및 서비스 니즈만으로 가입·이용 가능합니다.</li>
+                    <li>멤버십 가입이 보험 상품 구매를 조건으로 하거나, 보험 가입으로 인한 특별 이익이 아님을 명시합니다.</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-400 mb-2">서비스 범위 및 책임</p>
+                  <ul className="list-disc pl-4 space-y-1.5">
+                    <li>여행·호텔·전시·이벤트 등은 기획·섭외·우선권 제공이 중심이며, 실비는 멤버 부담입니다.</li>
+                    <li>전문가(세무·법무·의료) 연결 서비스는 멤버십에 포함되나, 실제 자문 용역 비용은 별도입니다.</li>
+                    <li>제휴 파트너사의 서비스 품질 및 가격 변동에 대한 직접 책임은 해당 파트너사에 있습니다.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
             </FadeIn>
           </div>

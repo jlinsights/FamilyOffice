@@ -102,29 +102,29 @@ export default function AboutPageContent() {
 
             <h1 className="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight mb-8 text-white whitespace-pre-line tracking-tight">
                <span className="block mb-2">
-                 <TextReveal delay={0.4} type="word">성공한 기업가·자산가의</TextReveal>
+                 <TextReveal delay={0.4} type="word">자산관리부터 일상의 선택까지</TextReveal>
                </span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-                <TextReveal delay={0.6} type="word">통합자산관리 파트너</TextReveal>
+                <TextReveal delay={0.6} type="word">모두 맡기세요</TextReveal>
               </span>
             </h1>
 
             <FadeIn delay={0.8}>
                 <p className="text-2xl sm:text-3xl font-bold text-slate-200 mb-6">
-                기업가·자산가 전문 통합자산관리
+                기업가·자산가 전용 토털 라이프 매니지먼트
                 </p>
             </FadeIn>
 
             <FadeIn delay={1.0}>
                 <p className="text-lg sm:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light text-balance">
                 <span className="font-semibold text-white">
-                    성공한 기업가와 개인자산 30억+ 고액자산가
+                    복잡한 자산 구조 정리, 가업승계 설계
                 </span>
-                를 위한{' '}
+                는 물론{' '}
                 <span className="font-semibold text-blue-400">
-                    통합자산관리 및 가업승계 설계 서비스
+                    여행·아트·라이프스타일 큐레이션
                 </span>
-                를 제공합니다
+                까지 전담 컨시어지가 완벽하게 관리합니다
                 </p>
             </FadeIn>
 
@@ -146,30 +146,30 @@ export default function AboutPageContent() {
             </FadeIn>
             
             <FadeIn delay={1.4} className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <Link
+                href="/membership"
+                className={cn(
+                  buttonVariants({ size: 'lg' }),
+                  'px-8 py-6 text-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-bold shadow-[0_0_30px_-5px_rgba(251,191,36,0.4)] hover:scale-105 transition-all duration-300 rounded-full border-none'
+                )}
+              >
+                <Users className="mr-2 h-5 w-5" />
+                멤버십 등급 진단받기
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
               <CalComPopup
                 buttonText="상담 신청"
                 variant="default"
                 size="lg"
-                className="px-8 py-6 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-[0_0_30px_-5px_rgba(37,99,235,0.4)] hover:scale-105 transition-all duration-300 rounded-full border-none"
+                className="px-8 py-6 text-lg bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-md hover:scale-105 transition-all duration-300 rounded-full border-none"
                 eventType="consultation"
                 trigger={
                   <>
                     <Phone className="mr-2 h-5 w-5" />
-                    상담 신청
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    무료 상담 신청
                   </>
                 }
               />
-              <Link
-                href="/solutions"
-                className={cn(
-                  buttonVariants({ variant: 'outline', size: 'lg' }),
-                  'font-bold px-8 py-6 text-lg shadow-md rounded-full border-white/20 text-white hover:bg-white/10 bg-transparent'
-                )}
-              >
-                <Briefcase className="mr-2 h-5 w-5" />
-                솔루션
-              </Link>
             </FadeIn>
           </div>
         </section>
@@ -261,37 +261,37 @@ export default function AboutPageContent() {
               {[
                 {
                   icon: Shield,
-                  title: '신뢰와 투명성',
+                  title: '시간을 되돌려 드립니다',
                   description:
-                    '고객의 자산을 내 자산처럼 소중히 여기며, 모든 거래와 운용 과정을 투명하게 공개합니다.',
+                    '복잡한 의사결정, 예약, 섭외를 모두 대신합니다. 당신은 중요한 일에만 집중하세요.',
                   features: [
-                    '실시간 자산 현황 공개',
-                    '투명한 수수료 구조',
-                    '정기적인 운용 보고서 제공',
+                    '전담 컨시어지 배정',
+                    '24/7 요청 대응 시스템',
+                    '일정·예약·동선 원스톱 관리',
                   ],
                   color: 'blue',
                 },
                 {
                   icon: Users,
-                  title: '전문성과 경험',
+                  title: '최고의 접근성을 제공합니다',
                   description:
-                    '20년 이상의 기업가와 고액자산가 전문 경험을 바탕으로 최적의 통합자산관리 솔루션을 제공합니다.',
+                    '일반 시장에서 얻기 어려운 VIP 네트워크, 프라이빗 프리뷰, 전문가 직통 연결을 드립니다.',
                   features: [
-                    '기업가·자산가 특화 노하우',
-                    '자산규모별 맞춤 전략',
-                    '지속적인 전문가 교육',
+                    '프라이빗 전시·이벤트 초청',
+                    '최고 전문가 우선 연결',
+                    'VIP 세미나 및 네트워킹',
                   ],
                   color: 'purple',
                 },
                 {
                   icon: Target,
-                  title: '맞춤형 서비스',
+                  title: '완벽하게 실행합니다',
                   description:
-                    '획일화된 서비스가 아닌, 각 고객의 자산 특성과 목표에 맞는 개별화된 서비스를 제공합니다.',
+                    '기획부터 섭외, 동선 설계, 사후 정리까지. "알아서 되는" 수준의 완벽한 실행력을 보장합니다.',
                   features: [
-                    '개별 자산 구조 분석',
-                    '맞춤형 포트폴리오 구성',
-                    '전담 전문가 배정',
+                    '맞춤 트래블 디자인',
+                    '아트 컬렉션 큐레이션',
+                    '가족 행사 토털 기획',
                   ],
                   color: 'emerald',
                 },
@@ -597,43 +597,39 @@ export default function AboutPageContent() {
 
                 <div className="relative z-10">
                   <div className="inline-flex items-center justify-center p-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/20">
-                    <Phone className="h-4 w-4 mr-2 text-blue-300" />
-                    <span className="text-sm font-bold text-blue-100 pr-2">
-                      Contact Us
+                    <Users className="h-4 w-4 mr-2 text-amber-300" />
+                    <span className="text-sm font-bold text-amber-100 pr-2">
+                      Premium Membership
                     </span>
                   </div>
                   <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight">
-                    성공한 기업가·자산가 전문 상담
+                    10분 진단으로 나만의 멤버십을 찾으세요
                   </h3>
                   <p className="text-lg text-blue-100/80 mb-10 max-w-2xl mx-auto leading-relaxed">
-                    귀하의 기업과 개인자산에 최적화된 통합자산관리 전략을 함께
-                    설계해보세요.
+                    자산 규모와 라이프스타일을 분석해
                     <br />
-                    전문 상담사가 맞춤형 답변을 제공해드립니다.
+                    Foundation부터 Legacy까지 최적의 등급을 제안드립니다.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <CalComPopup
-                      buttonText="무료 상담 신청"
-                      variant="default"
-                      size="lg"
-                      eventType="consultation"
-                      className="px-8 py-6 text-lg font-bold bg-white text-blue-900 hover:bg-blue-50 shadow-lg border-none rounded-full"
-                      trigger={
-                        <>
-                          <Phone className="mr-2 h-5 w-5" />
-                          무료 상담 신청
-                          <ArrowRight className="ml-2 h-5 w-5" />
-                        </>
-                      }
-                    />
                     <Link
-                      href="/solutions"
+                      href="/apply/membership-intake"
+                      className={cn(
+                        buttonVariants({ size: 'lg' }),
+                        'px-8 py-6 text-lg font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 shadow-lg border-none rounded-full'
+                      )}
+                    >
+                      <Users className="mr-2 h-5 w-5" />
+                      무료 진단 시작하기
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                    <Link
+                      href="/membership"
                       className={cn(
                         buttonVariants({ variant: 'outline', size: 'lg' }),
                         'px-8 py-6 text-lg font-bold border-2 border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full'
                       )}
                     >
-                      서비스 자세히 보기
+                      멤버십 혜택 알아보기
                     </Link>
                   </div>
                 </div>

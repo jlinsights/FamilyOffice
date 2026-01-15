@@ -41,8 +41,8 @@ jest.mock('next/image', () => {
     className?: string;
     [key: string]: unknown;
   }) {
-    // Map Next.js props to HTML attributes
-    const htmlProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+    // Map Next.js props to HTML attributes with data-* support
+    const htmlProps: React.ImgHTMLAttributes<HTMLImageElement> & Record<string, unknown> = {
       src,
       alt,
       onLoad,
@@ -60,22 +60,22 @@ jest.mock('next/image', () => {
 
     // Store Next.js-specific props as data attributes for testing
     if (quality !== undefined) {
-      htmlProps['data-quality'] = quality.toString();
+      (htmlProps as Record<string, unknown>)['data-quality'] = quality.toString();
     }
     if (sizes !== undefined) {
-      htmlProps['data-sizes'] = sizes;
+      (htmlProps as Record<string, unknown>)['data-sizes'] = sizes;
     }
     if (placeholder !== undefined) {
-      htmlProps['data-placeholder'] = placeholder;
+      (htmlProps as Record<string, unknown>)['data-placeholder'] = placeholder;
     }
     if (fill !== undefined) {
-      htmlProps['data-fill'] = fill.toString();
+      (htmlProps as Record<string, unknown>)['data-fill'] = fill.toString();
     }
     if (width !== undefined) {
-      htmlProps['data-width'] = width.toString();
+      (htmlProps as Record<string, unknown>)['data-width'] = width.toString();
     }
     if (height !== undefined) {
-      htmlProps['data-height'] = height.toString();
+      (htmlProps as Record<string, unknown>)['data-height'] = height.toString();
     }
 
     return (
