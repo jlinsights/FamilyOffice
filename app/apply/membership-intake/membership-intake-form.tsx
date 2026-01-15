@@ -118,20 +118,25 @@ export function MembershipIntakeForm() {
 
   if (isSubmitted) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 text-center animate-fade-in bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-        <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-6">
-          <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
+      <div className="flex flex-col items-center justify-center p-10 text-center animate-fade-in bg-gradient-to-b from-amber-50/50 to-white dark:from-amber-500/5 dark:to-slate-900 rounded-2xl border border-amber-200/50 dark:border-amber-500/20">
+        <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-amber-500/20">
+          <Check className="h-10 w-10 text-white" />
         </div>
-        <h3 className="text-2xl font-bold mb-4 font-serif">진단이 접수되었습니다</h3>
-        <p className="text-muted-foreground mb-8 max-w-md">
-          제출해주신 내용을 바탕으로 귀하의 라이프스타일과 자산 규모에 최적화된 멤버십 플랜을 설계하여, <span className="text-foreground font-semibold">영업일 기준 24시간 이내</span>에 1차 안내를 드리겠습니다.
+        <h3 className="text-2xl md:text-3xl font-bold mb-4 font-serif text-foreground">
+          진단이 접수되었습니다
+        </h3>
+        <p className="text-muted-foreground mb-4 max-w-md leading-relaxed">
+          제출해주신 내용을 바탕으로 <span className="text-amber-600 dark:text-amber-400 font-semibold">Foundation부터 Legacy까지</span> 귀하에게 최적화된 멤버십 등급을 분석하고 있습니다.
         </p>
-        <div className="flex gap-4">
-          <Button variant="outline" onClick={() => window.location.href = '/'}>
+        <p className="text-sm text-muted-foreground mb-8 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-full">
+          <span className="text-foreground font-medium">영업일 기준 24시간 이내</span> 1차 안내 예정
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button variant="outline" className="rounded-full px-6" onClick={() => window.location.href = '/'}>
             홈으로 돌아가기
           </Button>
-          <Button onClick={() => window.location.href = 'tel:0502-5550-8700'}>
-            Founder's Circle 문의
+          <Button className="rounded-full px-6 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900" onClick={() => window.location.href = '/membership'}>
+            멤버십 혜택 둘러보기
           </Button>
         </div>
       </div>
@@ -230,12 +235,13 @@ export function MembershipIntakeForm() {
           </div>
         </section>
 
-        {/* B. 관심 범위 */}
+        {/* B. 관심 서비스 (4대 핵심 모듈) */}
         <section className="space-y-4">
           <h3 className="text-lg font-semibold border-b pb-2 flex items-center gap-2">
              <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
-            관심 범위 (복수 선택) <span className="text-red-500 text-sm">*</span>
+            관심 서비스 (복수 선택) <span className="text-red-500 text-sm">*</span>
           </h3>
+          <p className="text-sm text-muted-foreground">4가지 핵심 모듈 중 관심 있는 서비스를 선택해주세요.</p>
           <FormField
             control={form.control}
             name="interests"
@@ -243,11 +249,11 @@ export function MembershipIntakeForm() {
               <FormItem>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {[
-                    { id: 'travel', label: 'Travel & Hotel (여행·호텔 큐레이션)' },
-                    { id: 'art', label: 'Art & Collection (전시·컬렉팅)' },
-                    { id: 'core', label: 'Family Office Core (자산·승계·법인 점검)' },
-                    { id: 'network', label: 'Private Network (라운드테이블/네트워크)' },
-                    { id: 'other', label: '기타 (직접 입력)' },
+                    { id: 'travel', label: 'Travel Design & Curation', desc: '글로벌 럭셔리 트래블 · 특급 호텔 VIP 예약' },
+                    { id: 'art', label: 'Art Collection & Cultural Access', desc: '프라이빗 전시 · 아트페어 동행 · 컬렉션 자문' },
+                    { id: 'core', label: 'Family Office Core Services', desc: '자산 진단 · 가업승계 · 포트폴리오 리밸런싱' },
+                    { id: 'network', label: 'Premier Concierge Network', desc: '24/7 컨시어지 · 전문가 연결 · VIP 네트워킹' },
+                    { id: 'other', label: '기타', desc: '직접 입력' },
                   ].map((item) => (
                     <FormField
                       key={item.id}
@@ -257,7 +263,7 @@ export function MembershipIntakeForm() {
                         return (
                           <FormItem
                             key={item.id}
-                            className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 hover:bg-muted/50 transition-colors"
+                            className="flex flex-row items-start space-x-3 space-y-0 rounded-xl border p-4 hover:bg-amber-50/50 dark:hover:bg-amber-500/5 hover:border-amber-500/30 transition-all duration-200"
                           >
                             <FormControl>
                               <Checkbox
@@ -273,9 +279,12 @@ export function MembershipIntakeForm() {
                                 }}
                               />
                             </FormControl>
-                            <FormLabel className="font-normal cursor-pointer w-full">
-                              {item.label}
-                            </FormLabel>
+                            <div className="flex flex-col gap-1">
+                              <FormLabel className="font-semibold cursor-pointer text-foreground">
+                                {item.label}
+                              </FormLabel>
+                              <span className="text-xs text-muted-foreground">{item.desc}</span>
+                            </div>
                           </FormItem>
                         )
                       }}
@@ -293,7 +302,7 @@ export function MembershipIntakeForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="기타 관심사를 입력해주세요" {...field} />
+                    <Input placeholder="기타 관심 서비스를 입력해주세요" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -357,7 +366,8 @@ export function MembershipIntakeForm() {
               name="budget"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>멤버십 연회비 예산대 <span className="text-red-500">*</span></FormLabel>
+                  <FormLabel>관심 멤버십 등급 <span className="text-red-500">*</span></FormLabel>
+                  <FormDescription className="text-xs">상담 후 최적 등급을 제안드립니다.</FormDescription>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -368,31 +378,34 @@ export function MembershipIntakeForm() {
                         <FormControl>
                           <RadioGroupItem value="300" />
                         </FormControl>
-                        <FormLabel className="font-normal">300만원 (Essential)</FormLabel>
+                        <FormLabel className="font-normal">Foundation (입문) - 자산 진단 · 분기 리뷰</FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="600" />
                         </FormControl>
-                        <FormLabel className="font-normal">600만원 (Signature)</FormLabel>
+                        <FormLabel className="font-normal flex items-center gap-2">
+                          Signature (권장) - 전담 어드바이저 · VIP 예약
+                          <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2 py-0.5 rounded-full">추천</span>
+                        </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="1200" />
                         </FormControl>
-                        <FormLabel className="font-normal">1,200만원 (Platinum)</FormLabel>
+                        <FormLabel className="font-normal">Elite (프리미엄) - 24/7 핫라인 · 트래블 디자인</FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="2400" />
                         </FormControl>
-                        <FormLabel className="font-normal">2,400만원 (Black)</FormLabel>
+                        <FormLabel className="font-normal">Legacy (패밀리오피스) - 다세대 자산관리</FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="negotiable" />
                         </FormControl>
-                        <FormLabel className="font-normal">별도 협의 (Founder's Circle)</FormLabel>
+                        <FormLabel className="font-normal">아직 모르겠어요 (상담 후 결정)</FormLabel>
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
@@ -520,18 +533,23 @@ export function MembershipIntakeForm() {
         </section>
 
         <div className="flex flex-col gap-4 pt-6">
-          <Button type="submit" size="lg" className="w-full text-lg h-14" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            size="lg"
+            className="w-full text-lg h-14 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-bold shadow-lg hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                제출 중...
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                진단 제출 중...
               </>
             ) : (
-              '10분 진단 제출하기'
+              '멤버십 등급 진단 제출하기'
             )}
           </Button>
           <p className="text-center text-sm text-muted-foreground">
-             제출 후 영업일 기준 24시간 내 1차 안내를 드립니다.
+             제출 후 <span className="font-medium text-foreground">영업일 기준 24시간 내</span> Foundation~Legacy 최적 등급을 안내드립니다.
           </p>
         </div>
       </form>
