@@ -170,7 +170,7 @@ export default function MembershipContent() {
             </FadeIn>
 
             {/* Main Headline - Enhanced Typography */}
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black mb-12 tracking-tight leading-[1.05]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-black mb-8 sm:mb-12 tracking-tight leading-[1.1] sm:leading-[1.05]">
               <span className="block mb-3 text-white/95">
                 <TextReveal delay={0.4} type="word">당신의 시간은 소중합니다.</TextReveal>
               </span>
@@ -226,7 +226,7 @@ export default function MembershipContent() {
 
             {/* Trust Indicators */}
             <FadeIn direction="up" delay={1.6}>
-              <div className="flex flex-wrap justify-center gap-8 mt-16 text-sm text-slate-400">
+              <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-12 sm:mt-16 text-sm text-slate-400">
                 <div className="flex items-center gap-2">
                   <Shield className="h-4 w-4 text-amber-500/70" />
                   <span>프라이빗 서비스</span>
@@ -659,29 +659,29 @@ export default function MembershipContent() {
                   }`}
                 >
                   <button
-                    className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none transition-colors"
+                    className="w-full px-4 sm:px-8 py-5 sm:py-6 text-left flex justify-between items-center focus:outline-none transition-colors"
                     onClick={() => toggleFaq(index)}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                    <div className="flex items-center gap-2 sm:gap-4">
+                      <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
                         activeFaq === index
                           ? 'bg-amber-500 text-white'
                           : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
                       }`}>
-                        <span className="text-sm font-bold">{index + 1}</span>
+                        <span className="text-xs sm:text-sm font-bold">{index + 1}</span>
                       </div>
-                      <span className="font-semibold text-foreground text-base md:text-lg pr-4">{faq.q}</span>
+                      <span className="font-semibold text-foreground text-sm sm:text-base md:text-lg pr-2 sm:pr-4">{faq.q}</span>
                     </div>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                    <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                       activeFaq === index
                         ? 'bg-amber-500/10 rotate-180'
                         : 'bg-slate-100 dark:bg-slate-700'
                     }`}>
-                      <ChevronDown className={`flex-shrink-0 transition-colors ${activeFaq === index ? 'text-amber-500' : 'text-muted-foreground'}`} size={18} />
+                      <ChevronDown className={`flex-shrink-0 transition-colors ${activeFaq === index ? 'text-amber-500' : 'text-muted-foreground'}`} size={16} />
                     </div>
                   </button>
                   <div className={`overflow-hidden transition-all duration-300 ${activeFaq === index ? 'max-h-96' : 'max-h-0'}`}>
-                    <div className="px-8 pb-8 pt-2 ml-12">
+                    <div className="px-4 sm:px-8 pb-6 sm:pb-8 pt-2 ml-0 sm:ml-12">
                       <p className="text-muted-foreground leading-relaxed text-base">{faq.a}</p>
                     </div>
                   </div>
