@@ -19,8 +19,9 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 import { env } from '@/lib/env';
-import { cn } from '@/lib/utils';
 import { rssAggregator } from '@/lib/rss-aggregator';
+import { sanitizeHTMLContent } from '@/lib/security/html-sanitizer';
+import { cn } from '@/lib/utils';
 
 interface InsightContentPageProps {
   params: Promise<{
@@ -336,9 +337,10 @@ export default async function InsightContentPage({
                     <div
                       className="prose prose-lg max-w-none text-foreground/80"
                       dangerouslySetInnerHTML={{
-                        __html:
+                        __html: sanitizeHTMLContent(
                           content.content.slice(0, 500) +
-                          (content.content.length > 500 ? '...' : ''),
+                            (content.content.length > 500 ? '...' : '')
+                        ),
                       }}
                     />
                   ) : (

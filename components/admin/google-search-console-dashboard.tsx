@@ -13,7 +13,7 @@ import {
     TrendingUp,
 } from 'lucide-react';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -56,53 +56,7 @@ export function GoogleSearchConsoleDashboard() {
   const [brandRanking] = useState({ current: 4, previous: 7, target: 3 });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadSearchConsoleData();
-  }, []);
-
-  const loadSearchConsoleData = async () => {
-    try {
-      setLoading(true);
-
-      // 실제 Google Search Console API 연동
-      const response = await fetch('/api/search-console/metrics');
-      
-      let shouldUseFallback = false;
-      
-      if (response.ok) {
-        try {
-          const result = await response.json();
-          if (result.success && result.data) {
-            setSearchMetrics(result.data.searchMetrics);
-            setPagePerformance(result.data.pagePerformance);
-          } else {
-            console.warn('Google Search Console API returned unsuccessful response:', result.error);
-            shouldUseFallback = true;
-          }
-        } catch (e) {
-             console.warn('Failed to parse Google Search Console API response:', e);
-             shouldUseFallback = true;
-        }
-      } else {
-        console.warn(`Google Search Console API failed with status: ${response.status}`);
-        shouldUseFallback = true;
-      }
-
-      if (shouldUseFallback) {
-         loadFallbackData();
-      }
-    } catch (error) {
-      console.warn(
-        'Failed to load Search Console data, using fallback:',
-        error
-      );
-      loadFallbackData();
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadFallbackData = () => {
+  const loadFallbackData = useCallback(() => {
       // Fallback: Use sample data if API fails or keys are invalid
       const sampleSearchMetrics: SearchMetrics[] = [
         {
@@ -180,7 +134,53 @@ export function GoogleSearchConsoleDashboard() {
 
       setSearchMetrics(sampleSearchMetrics);
       setPagePerformance(samplePagePerformance);
-  };
+  }, []);
+
+  const loadSearchConsoleData = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      // 실제 Google Search Console API 연동
+      const response = await fetch('/api/search-console/metrics');
+
+      let shouldUseFallback = false;
+
+      if (response.ok) {
+        try {
+          const result = await response.json();
+          if (result.success && result.data) {
+            setSearchMetrics(result.data.searchMetrics);
+            setPagePerformance(result.data.pagePerformance);
+          } else {
+            console.warn('Google Search Console API returned unsuccessful response:', result.error);
+            shouldUseFallback = true;
+          }
+        } catch (e) {
+             console.warn('Failed to parse Google Search Console API response:', e);
+             shouldUseFallback = true;
+        }
+      } else {
+        console.warn(`Google Search Console API failed with status: ${response.status}`);
+        shouldUseFallback = true;
+      }
+
+      if (shouldUseFallback) {
+         loadFallbackData();
+      }
+    } catch (error) {
+      console.warn(
+        'Failed to load Search Console data, using fallback:',
+        error
+      );
+      loadFallbackData();
+    } finally {
+      setLoading(false);
+    }
+  }, [loadFallbackData]);
+
+  useEffect(() => {
+    loadSearchConsoleData();
+  }, [loadSearchConsoleData]);
 
   const getTrendIcon = (change: number) => {
     if (change > 0)

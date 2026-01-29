@@ -45,6 +45,15 @@ export const QuestionCard = ({
         <div className="p-8 md:p-10">
           {/* Question Header */}
           <div className="mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-2"
+            >
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-navy-50 text-navy-600 dark:bg-amber-900/30 dark:text-amber-400 border border-navy-100 dark:border-amber-800/50">
+                {question.section}
+              </span>
+            </motion.div>
             <h2 className="text-2xl md:text-3xl font-bold text-navy-900 dark:text-white mb-3 leading-tight">
               {question.question}
             </h2>

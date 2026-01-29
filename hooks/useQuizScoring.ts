@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import {
-  CATEGORY_SOLUTIONS,
-  QUIZ_CATEGORIES,
-  QUIZ_QUESTIONS,
-  QuizCategory,
-  RecommendedSolution,
+    CATEGORY_SOLUTIONS,
+    QUIZ_CATEGORIES,
+    QUIZ_QUESTIONS,
+    QuizCategory,
+    RecommendedSolution,
 } from '@/constants/quiz';
 
 export interface QuizScores {
@@ -80,48 +80,35 @@ export const useQuizScoring = () => {
   ): QuizScores => {
     const newScores = { ...scores };
 
-    // Q1: Size, Q2: Priority, Q3: Type, Q4: Timing, Q5: Prep
-
-    // Rule 1: Emergency Situation
-    // Condition: Q4 = D (Urgent) OR (Q2 = B (Risk) AND Q4 = D)
-    const isUrgent = answers['q4'] === 'D';
-    const isRiskPriority = answers['q2'] === 'B';
-
-    if (isUrgent || (isRiskPriority && isUrgent)) {
-      newScores['보험'] = (newScores['보험'] || 0) + 3;
+    // Rule A: Low Salary + Good Cash Flow -> Corporate Health Insurance (Salary Process)
+    // q5_salary = A (Low), q2_cashflow = B (Sufficient)
+    if (answers['q5_salary'] === 'A' && answers['q2_cashflow'] === 'B') {
+      newScores['보험'] = (newScores['보험'] || 0) + 5; // Boost for Health Insurance
+      newScores['세무'] = (newScores['세무'] || 0) + 2; // Salary process tax benefit
     }
 
-    // Rule 2: Tax Optimization Priority
-    // Condition: Q2 = A (Tax) AND Q1 >= B (Medium+)
-    const isTaxPriority = answers['q2'] === 'A';
-    const isMediumOrLarger = ['B', 'C', 'D'].includes(answers['q1'] || '');
+    // Rule B: High Salary + Weak Bylaws + Succession -> CEO Term Insurance + Bylaws
+    // q5_salary = B (High), q9_articles = B (Old/Need update), q12_succession = A (Yes)
+    // Note: Checking specific conditions.
+    const isHighSalary = answers['q5_salary'] === 'B';
+    const isBylawWeak = answers['q9_articles'] === 'B' || answers['q10_severance'] === 'B';
+    const hasSuccessionNeeds = answers['q12_succession'] === 'A';
 
-    if (isTaxPriority && isMediumOrLarger) {
-      newScores['세무'] = (newScores['세무'] || 0) + 2;
+    if (isHighSalary && isBylawWeak && hasSuccessionNeeds) {
+      newScores['보험'] = (newScores['보험'] || 0) + 5; // CEO Plan
+      newScores['법인'] = (newScores['법인'] || 0) + 5; // Bylaws/Corporate Structure
     }
 
-    // Rule 3: Integrated Solution Needed (Family Office)
-    // Condition: Q1 >= C (Large+) AND Q3 >= C (Multi Corp)
-    const isLargeOrLarger = ['C', 'D'].includes(answers['q1'] || '');
-    const isMultiCorp = ['C', 'D'].includes(answers['q3'] || '');
-
-    if (isLargeOrLarger && isMultiCorp) {
-      // Boost comprehensive categories
-      newScores['자산'] = (newScores['자산'] || 0) + 1.5;
-      newScores['승계'] = (newScores['승계'] || 0) + 1.5;
-      newScores['법인'] = (newScores['법인'] || 0) + 1.5;
+    // Rule C: High Suspense + Sole Owner -> Severance Funding
+    // q3_debt = B (Exist), q6_shareholding = A (Family)
+    if (answers['q3_debt'] === 'B' && answers['q6_shareholding'] === 'A') {
+      newScores['보험'] = (newScores['보험'] || 0) + 4; // Funding
+      newScores['세무'] = (newScores['세무'] || 0) + 4; // Suspense/Tax issue
     }
 
-    // Rule 4: Foundation Education Needed
-    // Condition: Q5 = A (None) AND Q1 = A (Small)
-    const isPrepNone = answers['q5'] === 'A';
-    const isSmall = answers['q1'] === 'A';
-
-    if (isPrepNone && isSmall) {
-      // Boost entry level categories if needed, or maybe specific content recommendation logic
-      // For now, let's boost '특허' (Startup) and '인사' (HR) slightly as they are foundational
-      newScores['특허'] = (newScores['특허'] || 0) + 1;
-      newScores['인사'] = (newScores['인사'] || 0) + 1;
+    // Additional Rule: Risk Preparation
+    if (answers['q14_risk'] === 'B') {
+      newScores['보험'] = (newScores['보험'] || 0) + 3; // Risk Hedge
     }
 
     return newScores;

@@ -94,7 +94,7 @@ export default function SolutionFinderPage() {
                   transition={{ delay: 0.1 }}
                   className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-light leading-relaxed"
                 >
-                  <b>5개의 전략적 질문</b>에 답하시면 귀사의 현황을 분석하여
+                  <b>4가지 핵심 영역 진단</b>을 통해 귀사의 현황을 분석하여
                   <br className="hidden md:block" />
                   <span className="text-navy-700 dark:text-amber-400 font-semibold">
                     가장 적합한 솔루션 TOP 3
