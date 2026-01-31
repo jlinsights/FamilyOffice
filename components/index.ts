@@ -7,8 +7,8 @@
 export * from './ui';
 
 // Re-export layout components
-export { Header } from './layout/header';
-export { Footer } from './layout/footer';
+export { Header } from './layout/header/Header';
+export { Footer } from './layout/footer/Footer';
 
 // Re-export feature components
 export {
@@ -21,7 +21,7 @@ export { ClientWrapper } from './client-wrapper';
 export { Logo } from './logo';
 
 // Re-export theme components
-export { ThemeToggle, ThemeProvider } from './theme/theme-toggle';
+export { ThemeToggle, ThemeProvider } from './theme/theme-provider';
 
 // Re-export hooks
 export * from './hooks';
