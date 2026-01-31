@@ -22,9 +22,9 @@ const ChartSkeleton = () => (
   </div>
 );
 
-// Dynamic Recharts import
-const RechartsPrimitive = dynamic(
-  () => import('recharts').then(mod => ({ default: mod })),
+// Dynamic ResponsiveContainer
+const ResponsiveContainer = dynamic(
+  () => import('recharts').then((mod) => ({ default: mod.ResponsiveContainer })),
   {
     loading: () => <ChartSkeleton />,
     ssr: false,
@@ -66,20 +66,6 @@ const ChartContainer = React.forwardRef<
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;
 
-  const [RechartsComponent, setRechartsComponent] = React.useState<any>(null);
-
-  React.useEffect(() => {
-    RechartsPrimitive.then(mod => {
-      setRechartsComponent(mod.default);
-    });
-  }, []);
-
-  if (!RechartsComponent) {
-    return <ChartSkeleton />;
-  }
-
-  const { ResponsiveContainer } = RechartsComponent;
-
   return (
     <ChartContext.Provider value={{ config }}>
       <div
@@ -91,7 +77,7 @@ const ChartContainer = React.forwardRef<
         )}
         {...props}
       >
-        <ResponsiveContainer>{children}</ResponsiveContainer>
+        <ResponsiveContainer>{children as React.ReactElement}</ResponsiveContainer>
       </div>
     </ChartContext.Provider>
   );
@@ -102,11 +88,11 @@ export { ChartContainer, useChart, type ChartConfig, type ChartContextProps };
 
 // Dynamic exports for individual chart components
 export const ChartTooltip = dynamic(
-  () => import('recharts').then(mod => ({ default: mod.Tooltip })),
+  () => import('recharts').then(mod => ({ default: mod.Tooltip as any })),
   { ssr: false }
 );
 
 export const ChartLegend = dynamic(
-  () => import('recharts').then(mod => ({ default: mod.Legend })),
+  () => import('recharts').then(mod => ({ default: mod.Legend as any })),
   { ssr: false }
 );

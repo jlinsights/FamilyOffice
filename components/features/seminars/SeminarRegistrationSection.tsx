@@ -1,0 +1,354 @@
+'use client';
+
+import {
+    ArrowRight,
+    Calendar,
+    CheckCircle,
+    Clock,
+    CreditCard,
+    Gift,
+    Mail,
+    Phone,
+    Star,
+    UserPlus,
+    Users,
+} from 'lucide-react';
+
+import { useEffect } from 'react';
+
+import dynamic from 'next/dynamic';
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+
+// Cal.com 컴포넌트를 동적으로 import
+const Cal = dynamic(
+  () => import('@calcom/embed-react').then(mod => mod.default),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-[600px] bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg" />
+    ),
+  }
+);
+
+export default function SeminarRegistrationSection() {
+  useEffect(() => {
+    (async function () {
+      try {
+        const { getCalApi } = await import('@calcom/embed-react');
+        const cal = await getCalApi({ namespace: 'consulting' });
+        cal('ui', {
+          cssVarsPerTheme: {
+            light: { 'cal-brand': '#000000' },
+            dark: { 'cal-brand': '#ffffff' },
+          },
+          hideEventTypeDetails: false,
+          layout: 'month_view',
+        });
+      } catch (error) {
+        console.error('Error loading Cal.com API:', error);
+      }
+    })();
+  }, []);
+
+  const benefits = [
+    {
+      icon: Calendar,
+      title: '우선 예약',
+      description: '신규 세미나 일정을 가장 먼저 안내받고 우선 예약하세요',
+    },
+    {
+      icon: Gift,
+      title: '멤버 할인',
+      description: 'FamilyOffice S 멤버에게는 특별 할인 혜택을 제공합니다',
+    },
+    {
+      icon: Users,
+      title: '전용 네트워킹',
+      description: '세미나 후 전용 네트워킹 시간에 참여하실 수 있습니다',
+    },
+    {
+      icon: Star,
+      title: '프리미엄 자료',
+      description: '세미나 영상과 추가 자료를 무제한으로 이용하세요',
+    },
+  ];
+
+  const contactMethods = [
+    {
+      icon: Phone,
+      title: '전화 상담',
+      description: '☎︎ 0502-5550-8700',
+      action: '전화하기',
+      href: 'tel:0502-5550-8700',
+    },
+    {
+      icon: Mail,
+      title: '이메일 문의',
+      description: 'cs@familyoffices.vip',
+      action: '메일 보내기',
+      href: 'mailto:cs@familyoffices.vip',
+    },
+    {
+      icon: Calendar,
+      title: '온라인 예약',
+      description: 'Cal.com을 통한 즉시 예약',
+      action: '예약하기',
+      href: 'https://cal.com/familyoffice/coffeechat',
+    },
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-b from-muted/20 to-primary/5 dark:from-gray-900 dark:to-gray-900">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <Badge
+            variant="secondary"
+            className="mb-4 animate-fade-in dark:bg-primary/80 dark:text-white dark:border-primary/60"
+          >
+            <UserPlus className="h-3 w-3 mr-1" />
+            Registration & Contact
+          </Badge>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-slide-up text-gray-900 dark:text-white">
+            <span className="text-primary dark:text-emerald-300">
+              세미나 신청
+            </span>{' '}
+            및 문의
+          </h2>
+          <p
+            className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-up dark:text-gray-200"
+            style={{ animationDelay: '200ms' }}
+          >
+            다양한 방법으로 세미나 신청 및 상담 예약이 가능합니다
+          </p>
+        </div>
+
+        {/* 참석 자격 기준 안내 */}
+        <div
+          className="max-w-3xl mx-auto mb-16 animate-slide-up"
+          style={{ animationDelay: '250ms' }}
+        >
+          <Alert className="bg-amber-50 border-amber-200 dark:bg-amber-900/20 dark:border-amber-800">
+            <Users className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+            <AlertTitle className="text-amber-800 dark:text-amber-300 font-semibold ml-2">
+              참석 자격 기준 안내
+            </AlertTitle>
+            <AlertDescription className="text-amber-700 dark:text-amber-400 ml-2 mt-1">
+              본 세미나는 <strong>순자산 50억 이상</strong> 또는{' '}
+              <strong>순이익 3억 이상</strong>인 기업 오너 일가만 참석
+              가능합니다.
+            </AlertDescription>
+          </Alert>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* Left Column - Benefits and Contact Methods */}
+          <div className="space-y-8">
+            {/* Member Benefits */}
+            <div
+              className="animate-slide-up"
+              style={{ animationDelay: '300ms' }}
+            >
+              <h3 className="text-2xl font-bold mb-6 flex items-center text-foreground dark:text-white">
+                <Gift className="h-6 w-6 text-primary dark:text-primary mr-3" />
+                멤버 전용 혜택
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {benefits.map((benefit, index) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <Card
+                      key={index}
+                      className="group hover:shadow-md transition-all duration-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                    >
+                      <CardContent className="p-4">
+                        <div className="flex items-start gap-3">
+                          <div className="w-10 h-10 bg-primary/10 dark:bg-primary/30 rounded-full flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors">
+                            <Icon className="h-5 w-5 text-primary dark:text-primary" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-sm mb-1 text-foreground dark:text-white">
+                              {benefit.title}
+                            </h4>
+                            <p className="text-xs text-muted-foreground dark:text-gray-200 leading-relaxed">
+                              {benefit.description}
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Contact Methods */}
+            <div
+              className="animate-slide-up"
+              style={{ animationDelay: '400ms' }}
+            >
+              <h3 className="text-2xl font-bold mb-6 flex items-center text-foreground dark:text-white">
+                <Phone className="h-6 w-6 text-primary dark:text-primary mr-3" />
+                문의 방법
+              </h3>
+              <div className="space-y-4">
+                {contactMethods.map((method, index) => {
+                  const Icon = method.icon;
+                  return (
+                    <Card
+                      key={index}
+                      className="group hover:shadow-md transition-all duration-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                    >
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-primary/10 dark:bg-primary/30 rounded-full flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/40 transition-colors">
+                              <Icon className="h-6 w-6 text-primary dark:text-primary" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold mb-1 text-foreground dark:text-white">
+                                {method.title}
+                              </h4>
+                              <p className="text-sm text-muted-foreground dark:text-gray-200">
+                                {method.description}
+                              </p>
+                            </div>
+                          </div>
+                          <a
+                            href={method.href}
+                            className={cn(
+                              buttonVariants({ variant: 'outline', size: 'sm' }),
+                              'group/btn dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700'
+                            )}
+                            {...(method.href.startsWith('http')
+                              ? {
+                                  target: '_blank',
+                                  rel: 'noopener noreferrer',
+                                }
+                              : {})}
+                          >
+                            {method.action}
+                            <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                          </a>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Quick Stats */}
+            <div
+              className="bg-primary/5 dark:bg-primary/10 border border-primary/20 dark:border-primary/30 rounded-lg p-6 animate-slide-up"
+              style={{ animationDelay: '500ms' }}
+            >
+              <h4 className="font-semibold mb-4 flex items-center text-foreground dark:text-white">
+                <CheckCircle className="h-5 w-5 text-primary dark:text-primary mr-2" />
+                신청 현황
+              </h4>
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-primary dark:text-emerald-300">
+                    89%
+                  </div>
+                  <div className="text-xs text-muted-foreground dark:text-gray-300">
+                    평균 예약률
+                  </div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary dark:text-emerald-300">
+                    24h
+                  </div>
+                  <div className="text-xs text-muted-foreground dark:text-gray-300">
+                    평균 응답시간
+                  </div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary dark:text-emerald-300">
+                    98%
+                  </div>
+                  <div className="text-xs text-muted-foreground dark:text-gray-300">
+                    재참석률
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Cal.com Integration */}
+          <div className="animate-slide-up" style={{ animationDelay: '600ms' }}>
+            <div
+              id="booking"
+              className="bg-background dark:bg-background rounded-lg border shadow-lg overflow-hidden"
+            >
+              <div className="p-6 border-b border-border dark:border-border">
+                <h3 className="text-xl font-bold mb-2 flex items-center text-foreground dark:text-foreground">
+                  <Calendar className="h-5 w-5 text-primary dark:text-primary mr-2" />
+                  온라인 상담 예약
+                </h3>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                  세미나 관련 상담을 위한 시간을 예약하세요
+                </p>
+              </div>
+              <div className="p-6">
+                <Cal
+                  namespace="consulting"
+                  calLink="familyoffice/coffeechat"
+                  style={{ width: '100%', height: '600px', overflow: 'scroll' }}
+                  config={{ layout: 'month_view' }}
+                />
+              </div>
+            </div>
+
+            {/* Additional Info */}
+            <div className="mt-6 space-y-4">
+              <div className="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30 rounded-lg">
+                <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-blue-900 dark:text-blue-300 mb-1">
+                    상담 시간 안내
+                  </h4>
+                  <p className="text-sm text-blue-700 dark:text-blue-300">
+                    평일 오전 9시부터 오후 6시까지 상담이 가능합니다. 주말 및
+                    공휴일은 온라인 문의를 이용해 주세요.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/30 rounded-lg">
+                <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-green-900 dark:text-green-300 mb-1">
+                    예약 확인
+                  </h4>
+                  <p className="text-sm text-green-700 dark:text-green-300">
+                    예약 완료 후 이메일과 SMS로 상담 일정을 확인해 드립니다.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800/30 rounded-lg">
+                <CreditCard className="h-5 w-5 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-purple-900 dark:text-purple-300 mb-1">
+                    예약 확정 및 보증금 안내
+                  </h4>
+                  <p className="text-sm text-purple-700 dark:text-purple-300">
+                    원활한 행사 진행과 노쇼(No-Show) 방지를 위해, 예약 확정 시
+                    소정의 보증금(Deposit)이 발생할 수 있습니다. (참석 시 전액
+                    환불)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
