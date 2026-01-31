@@ -1,14 +1,14 @@
 import {
-    ArrowRight,
-    Building2,
-    Calculator,
-    CheckCircle2,
-    DollarSign,
-    FileText,
-    Lightbulb,
-    ShieldCheck,
-    TrendingDown,
-    Users,
+  ArrowRight,
+  Building2,
+  Calculator,
+  CheckCircle2,
+  DollarSign,
+  FileText,
+  Lightbulb,
+  ShieldCheck,
+  TrendingDown,
+  Users,
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
@@ -17,19 +17,19 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 import { generateMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '상속세 40% 절감 사례 분석 | 실제 성공 사례로 보는 절세 전략',
@@ -175,22 +175,23 @@ export default function InheritanceTaxReductionCaseStudy() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto prose dark:prose-invert">
               <p className="lead text-lg">
-                "상속세를 40% 이상 줄일 수 있다고?" 많은 분들이 의구심을 가지십니다.
-                하지만 <strong>실제로 가능</strong>합니다.
+                &ldquo;상속세를 40% 이상 줄일 수 있다고?&rdquo; 많은 분들이
+                의구심을 가지십니다. 하지만 <strong>실제로 가능</strong>합니다.
               </p>
               <p>
-                본 글에서는 FamilyOffice S가 직접 컨설팅한 두 가지 실제 사례를 통해{' '}
-                <strong>어떻게 상속세를 40-80%까지 절감</strong>할 수 있었는지,
-                그 구체적인 전략과 실행 과정을 공개합니다.
+                본 글에서는 FamilyOffice S가 직접 컨설팅한 두 가지 실제 사례를
+                통해 <strong>어떻게 상속세를 40-80%까지 절감</strong>할 수
+                있었는지, 그 구체적인 전략과 실행 과정을 공개합니다.
               </p>
               <div className="bg-amber-50 dark:bg-amber-950/30 p-6 rounded-lg border border-amber-200 dark:border-amber-800 my-6">
                 <p className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
                   ⚠️ 중요 안내
                 </p>
                 <p className="text-sm text-amber-800 dark:text-amber-200 m-0">
-                  아래 사례는 개인정보 보호를 위해 일부 내용을 각색했으나,
-                  절세 전략과 결과는 실제 사례를 기반으로 합니다. 개별 상황에 따라
-                  결과가 다를 수 있으므로 반드시 전문가 상담을 받으시기 바랍니다.
+                  아래 사례는 개인정보 보호를 위해 일부 내용을 각색했으나, 절세
+                  전략과 결과는 실제 사례를 기반으로 합니다. 개별 상황에 따라
+                  결과가 다를 수 있으므로 반드시 전문가 상담을 받으시기
+                  바랍니다.
                 </p>
               </div>
             </div>
@@ -241,7 +242,9 @@ export default function InheritanceTaxReductionCaseStudy() {
                         <div className="text-sm text-muted-foreground mb-1">
                           가족 구성
                         </div>
-                        <div className="text-2xl font-bold">배우자 + 자녀 2명</div>
+                        <div className="text-2xl font-bold">
+                          배우자 + 자녀 2명
+                        </div>
                         <div className="text-xs text-muted-foreground mt-1">
                           배우자 59세, 자녀 30대
                         </div>
@@ -358,18 +361,20 @@ export default function InheritanceTaxReductionCaseStudy() {
                         </div>
                         <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
                           <li>
-                            • <strong>조기 시작</strong>: 60대 초반부터 10년 계획
-                            수립
+                            • <strong>조기 시작</strong>: 60대 초반부터 10년
+                            계획 수립
                           </li>
                           <li>
-                            • <strong>복합 전략</strong>: 증여+법인+공제 동시 활용
+                            • <strong>복합 전략</strong>: 증여+법인+공제 동시
+                            활용
                           </li>
                           <li>
-                            • <strong>전문가 협업</strong>: 세무사, 변호사, 회계사
-                            팀 구성
+                            • <strong>전문가 협업</strong>: 세무사, 변호사,
+                            회계사 팀 구성
                           </li>
                           <li>
-                            • <strong>지속 관리</strong>: 매년 2회 정기 점검 및 조정
+                            • <strong>지속 관리</strong>: 매년 2회 정기 점검 및
+                            조정
                           </li>
                         </ul>
                       </div>
@@ -451,7 +456,9 @@ export default function InheritanceTaxReductionCaseStudy() {
                         <div className="text-sm text-muted-foreground mb-1">
                           가족 구성
                         </div>
-                        <div className="text-2xl font-bold">배우자 + 자녀 3명</div>
+                        <div className="text-2xl font-bold">
+                          배우자 + 자녀 3명
+                        </div>
                         <div className="text-xs text-muted-foreground mt-1">
                           배우자 52세, 자녀 10대-20대
                         </div>
@@ -500,8 +507,7 @@ export default function InheritanceTaxReductionCaseStudy() {
                         },
                         {
                           title: '4. 배우자 공동명의',
-                          description:
-                            '주요 자산을 배우자와 공동명의로 전환',
+                          description: '주요 자산을 배우자와 공동명의로 전환',
                           impact: '배우자 공제 30억 확보 가능',
                         },
                       ].map((strategy, index) => (
@@ -568,15 +574,16 @@ export default function InheritanceTaxReductionCaseStudy() {
                         </div>
                         <ul className="text-sm text-purple-800 dark:text-purple-200 space-y-1">
                           <li>
-                            • <strong>50대 조기 시작</strong>: 20년 이상 장기 플랜
-                            가능
+                            • <strong>50대 조기 시작</strong>: 20년 이상 장기
+                            플랜 가능
                           </li>
                           <li>
-                            • <strong>다양한 방법 조합</strong>:
-                            증여+신탁+법인 병행
+                            • <strong>다양한 방법 조합</strong>: 증여+신탁+법인
+                            병행
                           </li>
                           <li>
-                            • <strong>부동산 특화</strong>: 부동산 비중 높은 점 활용
+                            • <strong>부동산 특화</strong>: 부동산 비중 높은 점
+                            활용
                           </li>
                           <li>
                             • <strong>2차 증여 준비</strong>: 2028년 추가 증여로
@@ -625,7 +632,8 @@ export default function InheritanceTaxReductionCaseStudy() {
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-600 mt-1">✓</span>
                         <span>
-                          <strong>전문가 팀 구성</strong> (세무사, 변호사, 회계사)
+                          <strong>전문가 팀 구성</strong> (세무사, 변호사,
+                          회계사)
                         </span>
                       </li>
                       <li className="flex items-start gap-2">
@@ -674,7 +682,8 @@ export default function InheritanceTaxReductionCaseStudy() {
                       <li className="flex items-start gap-2">
                         <span className="text-blue-600 mt-1">→</span>
                         <span>
-                          <strong>자산 구성</strong>: 회사 지분 중심 vs 부동산 중심
+                          <strong>자산 구성</strong>: 회사 지분 중심 vs 부동산
+                          중심
                         </span>
                       </li>
                       <li className="flex items-start gap-2">
@@ -745,7 +754,10 @@ export default function InheritanceTaxReductionCaseStudy() {
                         {item.link && (
                           <Link
                             href={item.link}
-                            className={buttonVariants({ size: 'sm', variant: 'outline' })}
+                            className={buttonVariants({
+                              size: 'sm',
+                              variant: 'outline',
+                            })}
                           >
                             시작하기 <ArrowRight className="ml-1 h-4 w-4" />
                           </Link>

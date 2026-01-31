@@ -28,6 +28,9 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:report": "playwright show-report",
+    "test:e2e:visual": "playwright test tests/e2e/visual-regression.spec.ts",
+    "test:e2e:visual:update": "playwright test tests/e2e/visual-regression.spec.ts --update-snapshots",
+    "test:e2e:visual:basic": "playwright test tests/e2e/basic-visual.spec.ts --headed",
     "test:performance": "node tests/performance/load-tests.js",
     "test:performance:standard": "artillery run artillery.yml",
     "test:all": "npm run test:unit && npm run test:integration && npm run test:security && npm run test:e2e && npm run test:performance",
@@ -52,7 +55,9 @@
     "dev:1p": "npm run secrets:sync && npm run dev",
     "build:1p": "npm run secrets:sync && npm run build",
     "1password:login": "op signin",
-    "1password:setup": "./scripts/setup-1password.sh"
+    "1password:setup": "./scripts/setup-1password.sh",
+    "env:validate": "tsx scripts/setup-environment.ts",
+    "env:check": "tsx scripts/setup-environment.ts"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
@@ -140,7 +145,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@next/bundle-analyzer": "^15.4.3",
+    "@next/bundle-analyzer": "^15.5.11",
     "@playwright/test": "^1.56.1",
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.6.3",

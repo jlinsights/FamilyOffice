@@ -421,7 +421,15 @@ export const CATEGORY_SOLUTIONS: Record<QuizCategory, RecommendedSolution[]> = {
   ],
   보험: [
     {
-      title: '경영인정기보험',
+      title: '법인 건강보험 (급여 재원 마련)',
+      description: '낮은 연봉의 CEO를 위한 건강보험 활용 급여 처리 플랜',
+      expectedBenefit: '소득세 절감 + 개인 자산 형성',
+      duration: '1주',
+      tags: ['법인건강보험', '급여관리', '절세'],
+      link: '/finance-tax-labor/salary-setup', // Assuming this link or similar
+    },
+    {
+      title: '경영인정기보험 (CEO 플랜)',
       description: 'CEO 유고 리스크 대비 및 퇴직금 재원 마련',
       expectedBenefit: '리스크 헤지 + 법인세 절감',
       duration: '1-2주',

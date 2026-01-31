@@ -151,14 +151,92 @@ const nextConfig = {
   //   ? `https://${process.env.VERCEL_URL}`
   //   : undefined,
 
-  // Next.js 16: Turbopack handles optimization automatically
-  // Webpack configuration commented out - Turbopack provides:
-  // - Automatic module fallbacks for client bundles
-  // - Optimized chunk splitting and code splitting
-  // - Built-in warning suppression
-  //
-  // If custom webpack config is needed, enable with:
-  // experimental: { webpackBuildWorker: false }
+  // Enhanced webpack configuration for better bundle splitting
+  webpack: (config, { dev, isServer }) => {
+    // Optimize bundle splitting for production
+    if (!dev && !isServer) {
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        maxInitialRequests: 25,
+        maxAsyncRequests: 20,
+        cacheGroups: {
+          // Core React libraries
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+            name: 'react',
+            chunks: 'all',
+            priority: 25,
+            enforce: true,
+          },
+          // Authentication libraries
+          auth: {
+            test: /[\\/]node_modules[\\/](@clerk|@supabase)[\\/]/,
+            name: 'auth',
+            chunks: 'async',
+            priority: 20,
+            enforce: true,
+          },
+          // UI libraries and components
+          ui: {
+            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|class-variance-authority|clsx|tailwind-merge)[\\/]/,
+            name: 'ui',
+            chunks: 'all',
+            priority: 15,
+            enforce: true,
+          },
+          // Chart libraries (heavy)
+          charts: {
+            test: /[\\/]node_modules[\\/](recharts|d3)[\\/]/,
+            name: 'charts',
+            chunks: 'async',
+            priority: 18,
+            enforce: true,
+          },
+          // Animation libraries (heavy)
+          animations: {
+            test: /[\\/]node_modules[\\/](framer-motion|@gsap|gsap)[\\/]/,
+            name: 'animations',
+            chunks: 'async',
+            priority: 17,
+            enforce: true,
+          },
+          // Common vendor libraries
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            priority: 10,
+            minChunks: 2,
+            reuseExistingChunk: true,
+          },
+          // Common application code
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            priority: 5,
+            reuseExistingChunk: true,
+          },
+        },
+      };
+    }
+
+    // Suppress warnings for optional dependencies
+    config.ignoreWarnings = [
+      {
+        module: /node_modules\/punycode/,
+      },
+      {
+        message:
+          /Critical dependency: the request of a dependency is an expression/,
+      },
+      {
+        message: /export 'default'.*imported as indirect dependency/,
+      },
+    ];
+
+    return config;
+  },
   //
   // webpack: (config, { dev, isServer }) => {
   //   // React Server Components 관련 설정

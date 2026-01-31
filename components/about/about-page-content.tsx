@@ -1,26 +1,26 @@
 'use client';
 
 import {
-    AlertCircle,
-    ArrowRight,
-    Briefcase,
-    Building,
-    CheckCircle,
-    Cpu,
-    Factory,
-    Hammer,
-    Medal,
-    Phone,
-    Shield,
-    Target,
-    TrendingUp,
-    Users,
+  AlertCircle,
+  ArrowRight,
+  Briefcase,
+  Building,
+  CheckCircle,
+  Cpu,
+  Factory,
+  Hammer,
+  Medal,
+  Phone,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-
-import { cn } from '@/lib/utils';
 
 import Link from 'next/link';
 
+import { FadeIn } from '@/components/ui/animation/FadeIn';
+import { TextReveal } from '@/components/ui/animation/TextReveal';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -31,10 +31,9 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { StructuredData } from '@/components/seo/structured-data';
-import { FadeIn } from '@/components/ui/animation/FadeIn';
-import { TextReveal } from '@/components/ui/animation/TextReveal';
 
 import { generateStructuredData } from '@/lib/seo/structured-data';
+import { cn } from '@/lib/utils';
 
 import { CONSULTANT_IDENTITY } from '@/constants/brand';
 import { FAQ_CATEGORIES } from '@/constants/faq';
@@ -84,68 +83,73 @@ export default function AboutPageContent() {
           {/* Dynamic Background */}
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
           <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
-          
+
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
             <FadeIn delay={0.2} direction="down">
-                <div className="flex justify-center mb-10">
+              <div className="flex justify-center mb-10">
                 <div className="inline-flex items-center justify-center px-4 py-1.5 bg-white/5 backdrop-blur-md border border-white/20 rounded-full shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
-                    <span className="text-sm font-bold text-blue-200 pr-2">
+                  <span className="w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
+                  <span className="text-sm font-bold text-blue-200 pr-2">
                     FamilyOffice S
-                    </span>
-                    <span className="text-xs text-slate-400 border-l border-slate-600 pl-2">
+                  </span>
+                  <span className="text-xs text-slate-400 border-l border-slate-600 pl-2">
                     About Us
-                    </span>
+                  </span>
                 </div>
-                </div>
+              </div>
             </FadeIn>
 
             <h1 className="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight mb-8 text-white whitespace-pre-line tracking-tight">
-               <span className="block mb-2">
-                 <TextReveal delay={0.4} type="word">자산관리부터 일상의 선택까지</TextReveal>
-               </span>
+              <span className="block mb-2">
+                <TextReveal delay={0.4} type="word">
+                  자산관리부터 일상의 선택까지
+                </TextReveal>
+              </span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-                <TextReveal delay={0.6} type="word">모두 맡기세요</TextReveal>
+                <TextReveal delay={0.6} type="word">
+                  모두 맡기세요
+                </TextReveal>
               </span>
             </h1>
 
             <FadeIn delay={0.8}>
-                <p className="text-2xl sm:text-3xl font-bold text-slate-200 mb-6">
+              <p className="text-2xl sm:text-3xl font-bold text-slate-200 mb-6">
                 기업가·자산가 전용 토털 라이프 매니지먼트
-                </p>
+              </p>
             </FadeIn>
 
             <FadeIn delay={1.0}>
-                <p className="text-lg sm:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light text-balance">
+              <p className="text-lg sm:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light text-balance">
                 <span className="font-semibold text-white">
-                    복잡한 자산 구조 정리, 가업승계 설계
+                  복잡한 자산 구조 정리, 가업승계 설계
                 </span>
                 는 물론{' '}
                 <span className="font-semibold text-blue-400">
-                    여행·아트·라이프스타일 큐레이션
+                  여행·아트·라이프스타일 큐레이션
                 </span>
                 까지 전담 컨시어지가 완벽하게 관리합니다
-                </p>
+              </p>
             </FadeIn>
 
             <FadeIn delay={1.2}>
-                <div className="text-base sm:text-lg text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-lg">
-                <span className="font-bold text-blue-400">
-                    FamilyOffice S
-                </span>
+              <div className="text-base sm:text-lg text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-lg">
+                <span className="font-bold text-blue-400">FamilyOffice S</span>
                 는{' '}
                 <span className="font-semibold text-white">
-                    삼성생명 기업컨설팅센터
+                  삼성생명 기업컨설팅센터
                 </span>
                 의{' '}
                 <span className="text-blue-400 font-semibold">
-                    VIP 고객 전담 프로젝트팀
+                  VIP 고객 전담 프로젝트팀
                 </span>
                 입니다
-                </div>
+              </div>
             </FadeIn>
-            
-            <FadeIn delay={1.4} className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+
+            <FadeIn
+              delay={1.4}
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+            >
               <Link
                 href="/membership"
                 className={cn(
@@ -456,7 +460,7 @@ export default function AboutPageContent() {
                 {CONSULTANT_IDENTITY.title}
               </p>
               <p className="text-lg text-slate-500 dark:text-slate-400 italic">
-                "{CONSULTANT_IDENTITY.philosophy}"
+                &ldquo;{CONSULTANT_IDENTITY.philosophy}&rdquo;
               </p>
             </div>
 
@@ -540,7 +544,7 @@ export default function AboutPageContent() {
               <div className="inline-block bg-white dark:bg-slate-800 rounded-3xl px-12 py-8 shadow-xl border border-slate-200 dark:border-slate-700">
                 <div className="text-4xl mb-4">🤝</div>
                 <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
-                  "{CONSULTANT_IDENTITY.tagline}"
+                  &ldquo;{CONSULTANT_IDENTITY.tagline}&rdquo;
                 </p>
               </div>
             </div>

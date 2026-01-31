@@ -83,8 +83,9 @@ export const useQuizScoring = () => {
     // Rule A: Low Salary + Good Cash Flow -> Corporate Health Insurance (Salary Process)
     // q5_salary = A (Low), q2_cashflow = B (Sufficient)
     if (answers['q5_salary'] === 'A' && answers['q2_cashflow'] === 'B') {
-      newScores['보험'] = (newScores['보험'] || 0) + 5; // Boost for Health Insurance
-      newScores['세무'] = (newScores['세무'] || 0) + 2; // Salary process tax benefit
+      newScores['보험'] = (newScores['보험'] || 0) + 6; // Increased boost to ensure Top 3
+      newScores['세무'] = (newScores['세무'] || 0) + 3; // Salary process tax benefit
+      newScores['인사'] = (newScores['인사'] || 0) + 2; // HR/Salary benefit
     }
 
     // Rule B: High Salary + Weak Bylaws + Succession -> CEO Term Insurance + Bylaws
@@ -95,7 +96,7 @@ export const useQuizScoring = () => {
     const hasSuccessionNeeds = answers['q12_succession'] === 'A';
 
     if (isHighSalary && isBylawWeak && hasSuccessionNeeds) {
-      newScores['보험'] = (newScores['보험'] || 0) + 5; // CEO Plan
+      newScores['보험'] = (newScores['보험'] || 0) + 6; // CEO Plan
       newScores['법인'] = (newScores['법인'] || 0) + 5; // Bylaws/Corporate Structure
     }
 

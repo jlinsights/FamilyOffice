@@ -54,3 +54,5 @@ coverage/
 # TypeScript cache
 *.tsbuildinfo
 SuperClaude/
+test-results/
+playwright-report/
