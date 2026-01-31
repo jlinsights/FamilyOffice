@@ -380,12 +380,12 @@ export const Header = memo(function Header({
                 // 로그인 상태: 대시보드 링크 + 구조 점검 요청 표시
                 <>
                   <Link
-                    href="/dashboard"
+                    href="/portal"
                     onClick={handleMobileLinkClick}
                     className="flex items-center justify-center w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 hover:bg-primary/90 transition-colors duration-200"
-                    aria-label="대시보드로 이동"
+                    aria-label="포털로 이동"
                   >
-                    내 대시보드
+                    내 포털
                     <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Link>
                   <Link

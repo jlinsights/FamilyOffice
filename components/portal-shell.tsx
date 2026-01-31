@@ -57,7 +57,7 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-export function PortalSidebar() {
+export function PortalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -80,7 +80,7 @@ export function PortalSidebar() {
   };
 
   return (
-    <>
+    <div className="flex pt-16">
       {/* Mobile toggle button */}
       <button
         onClick={toggleMobile}
@@ -152,12 +152,14 @@ export function PortalSidebar() {
                   collapsed && 'justify-center px-2'
                 )}
               >
-                <span className={cn(active && 'text-white dark:text-slate-900')}>
+                <span
+                  className={cn(
+                    active && 'text-white dark:text-slate-900'
+                  )}
+                >
                   {item.icon}
                 </span>
-                {!collapsed && (
-                  <span className="flex-1">{item.label}</span>
-                )}
+                {!collapsed && <span className="flex-1">{item.label}</span>}
                 {!collapsed && item.comingSoon && (
                   <span className="px-1.5 py-0.5 text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded">
                     Soon
@@ -204,6 +206,16 @@ export function PortalSidebar() {
           </div>
         )}
       </aside>
-    </>
+
+      {/* Main content with dynamic margin */}
+      <main
+        className={cn(
+          'flex-1 min-h-[calc(100vh-4rem)] transition-all duration-300',
+          collapsed ? 'lg:ml-16' : 'lg:ml-64'
+        )}
+      >
+        {children}
+      </main>
+    </div>
   );
 }
