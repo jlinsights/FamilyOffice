@@ -23,11 +23,6 @@ export interface FooterProps {
 }
 
 // Form Component Props
-export interface ContactFormProps {
-  onSubmit: (data: ContactFormData) => void;
-  className?: string;
-}
-
 export interface ContactFormData {
   name: string;
   email: string;
@@ -36,29 +31,15 @@ export interface ContactFormData {
   message: string;
 }
 
+export interface ContactFormProps {
+  onSubmit: (data: ContactFormData) => void;
+  className?: string;
+}
+
 // Feature Component Props
 export interface AuthComponentProps {
   mode?: 'modal' | 'redirect';
   afterSignInUrl?: string;
-}
-
-export interface FinancialComponentProps {
-  data: any;
-  loading?: boolean;
-  error?: string;
-}
-
-// Blog Component Props
-export interface BlogComponentProps {
-  posts: BlogPost[];
-  category?: string;
-  loading?: boolean;
-}
-
-export interface SeminarComponentProps {
-  seminars: Seminar[];
-  loading?: boolean;
-  filter?: SeminarFilter;
 }
 
 // Common Component Types

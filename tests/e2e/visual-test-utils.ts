@@ -2,7 +2,7 @@
  * Visual Regression Test Configuration
  * Custom setup for consistent screenshot testing
  */
-import { devices, expect, type TestType } from '@playwright/test';
+import { expect } from '@playwright/test';
 
 // Custom viewports for testing
 const customViewports = {
@@ -129,7 +129,7 @@ export const visualTestUtils = {
   async takeStandardScreenshot(page: any, name: string, options = {}) {
     const defaultOptions = {
       fullPage: true,
-      animations: 'disabled',
+      animations: 'disabled' as 'disabled',
       mask: [], // Elements to mask
       maskColor: '#ff0000', // Red for visibility
       ...options,
