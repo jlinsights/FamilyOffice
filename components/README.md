@@ -166,7 +166,6 @@ Removed. 실시간 금융 기능은 프로젝트 범위에서 제외되었습니
 // UI components
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 // Feature components
 import { OptimizedImage } from '@/components/optimized-image-loader';

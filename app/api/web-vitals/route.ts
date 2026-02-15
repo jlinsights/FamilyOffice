@@ -4,7 +4,6 @@
  * DELETE /api/web-vitals - 웹 바이탈 데이터 초기화
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { checkAdminPermissions } from '@/lib/admin-permissions';
 import {
   getWebVitalsAnalytics,

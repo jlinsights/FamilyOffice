@@ -1,9 +1,7 @@
 'use client';
 
 import { Mail, Send, CheckCircle } from 'lucide-react';
-
 import { useState, useCallback, memo } from 'react';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 

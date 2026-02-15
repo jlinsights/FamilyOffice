@@ -183,7 +183,6 @@ export function NewComponent({ className, children }: ComponentProps) {
 ```typescript
 // app/api/new-endpoint/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-
 import { auth } from '@clerk/nextjs/server';
 
 export async function POST(request: NextRequest) {

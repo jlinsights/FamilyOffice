@@ -1,8 +1,8 @@
 'use client';
 
+import { memo, useEffect, useRef, useState } from 'react';
 import { AnimatedCounter } from '@/components/animated-counter';
 import { HERO_CONTENT } from '@/constants/main-page';
-import { memo, useEffect, useRef, useState } from 'react';
 
 export const HeroStats = memo(function HeroStats() {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -61,7 +61,7 @@ export const HeroStats = memo(function HeroStats() {
           />
         </div>
         <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-            {HERO_CONTENT.stats.corporateClients}
+          {HERO_CONTENT.stats.corporateClients}
         </div>
       </div>
       <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-300 border-glow">
@@ -75,7 +75,7 @@ export const HeroStats = memo(function HeroStats() {
           />
         </div>
         <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-            {HERO_CONTENT.stats.experience}
+          {HERO_CONTENT.stats.experience}
         </div>
       </div>
       <div className="text-center glass-premium-enhanced rounded-2xl p-6 hover-premium transition-all duration-500 delay-400 border-glow">
@@ -89,7 +89,7 @@ export const HeroStats = memo(function HeroStats() {
           />
         </div>
         <div className="text-xs sm:text-sm lg:text-base text-stat-description font-medium">
-            {HERO_CONTENT.stats.satisfaction}
+          {HERO_CONTENT.stats.satisfaction}
         </div>
       </div>
     </div>

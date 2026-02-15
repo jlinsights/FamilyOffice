@@ -19,27 +19,20 @@ import {
   Play,
   Star,
   TrendingUp,
-  Users
+  Users,
 } from 'lucide-react';
-
-
-
-
-
-import Script from 'next/script';
 import { useCallback, useEffect, useState } from 'react';
-
+import Script from 'next/script';
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 import { AnimatedCounter } from '@/components/animated-counter';
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { YouTubeEmbed } from '@/components/media/youtube-embed';
+import { cn } from '@/lib/utils';
 
 // GFC 채용 FAQ 카테고리 데이터
 const recruitFaqCategories = [
@@ -1186,7 +1179,9 @@ export default function RecruitPage() {
                     />
                     <a
                       href="tel:0502-5550-8700"
-                      className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+                      className={cn(
+                        buttonVariants({ variant: 'outline', size: 'lg' })
+                      )}
                     >
                       <Phone className="mr-2 h-4 w-4" /> 0502-5550-8700
                     </a>
@@ -1278,7 +1273,8 @@ export default function RecruitPage() {
               {
                 '@type': 'JobPosting',
                 '@id': 'https://familyoffices.vip/recruit#gfc-succession',
-                title: '삼성생명 GFC 기업재무컨설턴트 위촉 - 50대 이상 경력직 환영',
+                title:
+                  '삼성생명 GFC 기업재무컨설턴트 위촉 - 50대 이상 경력직 환영',
                 description:
                   '삼성생명 GFC(Group Financial Consultant) 위촉. 50대 이상 경력직 환영. 풍부한 경험을 자산으로 고소득 비즈니스 파이프라인을 구축하세요. 세컨드 커리어 최적화, 경력 활용 고수익 보장, 체계적 교육 시스템. 나이 제한 없이 능력으로 평가받는 전문가 위촉.',
                 datePosted: '2025-01-31',
@@ -1336,7 +1332,8 @@ export default function RecruitPage() {
               {
                 '@type': 'JobPosting',
                 '@id': 'https://familyoffices.vip/recruit#gfc-asset',
-                title: '삼성생명 GFC 기업재무컨설턴트 위촉 - 경력직 우대 · 자산관리 전문',
+                title:
+                  '삼성생명 GFC 기업재무컨설턴트 위촉 - 경력직 우대 · 자산관리 전문',
                 description:
                   '삼성생명 GFC 자산관리 전문가 위촉. 경력직 우대. 고액자산가 및 기업의 종합자산관리 서비스를 제공하는 전문 컨설턴트 모집. 경험을 활용한 고소득 비즈니스 파이프라인 구축 기회.',
                 datePosted: '2025-01-31',

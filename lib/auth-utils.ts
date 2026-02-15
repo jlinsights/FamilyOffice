@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-
 import { auth } from '@clerk/nextjs/server';
+import { getAdminEmails } from '@/lib/admin-permissions';
 
 export async function requireAuth(): Promise<string | NextResponse> {
   const { userId } = await auth();
@@ -16,9 +16,8 @@ export async function requireAdmin(): Promise<string | NextResponse> {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // Check if user is admin (you can implement your admin check logic here)
-  const adminEmails = ['jhlim725@gmail.com'];
   const user = await auth();
+  const adminEmails = getAdminEmails();
 
   if (
     !user.sessionClaims?.email ||

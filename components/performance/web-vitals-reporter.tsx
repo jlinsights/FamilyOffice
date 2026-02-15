@@ -5,9 +5,7 @@
  * 실시간 성능 데이터 수집 및 리포팅
  */
 import { AlertCircle, CheckCircle, Clock } from 'lucide-react';
-
 import { useEffect, useState } from 'react';
-
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 

@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-
 import { TestButton } from '@/tests/utils/test-helpers';
 
 // Basic test to verify Jest setup is working

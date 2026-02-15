@@ -1,7 +1,5 @@
 import { ArrowRight, Crown } from 'lucide-react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -46,9 +44,7 @@ export function MembershipCTASection() {
             <Link
               href="/membership"
               aria-label="멤버십 자세히 보기"
-              className={cn(
-                buttonVariants({ size: 'lg', variant: 'outline' })
-              )}
+              className={cn(buttonVariants({ size: 'lg', variant: 'outline' }))}
             >
               멤버십 자세히 보기
             </Link>

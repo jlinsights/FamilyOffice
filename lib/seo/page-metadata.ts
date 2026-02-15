@@ -3,10 +3,9 @@
  * 네이버 검색 엔진 최적화 중심
  */
 import { Metadata } from 'next';
-
 import {
-    generateNaverOptimizedMeta,
-    PAGE_META_CONFIGS,
+  generateNaverOptimizedMeta,
+  PAGE_META_CONFIGS,
 } from './metadata-optimizer';
 import { targetKeywords } from './seo-keywords';
 

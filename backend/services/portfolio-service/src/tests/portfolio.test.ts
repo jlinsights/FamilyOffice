@@ -1,5 +1,4 @@
 import request from 'supertest';
-
 import { pgPool, redisClient } from '../../../shared/database/connection';
 import { app } from '../index';
 import { PortfolioRepository } from '../repositories/portfolio.repository';

@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
-    AI_SEARCH_ENGINES,
-    BMAD_AI_KEYWORDS,
-    aiSearchMonitor,
-    generateAIOptimizedContent,
-    generateAIOptimizedFAQ,
+  AI_SEARCH_ENGINES,
+  BMAD_AI_KEYWORDS,
+  aiSearchMonitor,
+  generateAIOptimizedContent,
+  generateAIOptimizedFAQ,
 } from '@/lib/ai/ai-search-monitoring';
 
 /**

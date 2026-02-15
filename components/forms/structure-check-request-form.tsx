@@ -4,10 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CheckCircle2, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import * as z from 'zod';
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';

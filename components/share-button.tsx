@@ -10,9 +10,7 @@ import {
   Share2,
   Twitter,
 } from 'lucide-react';
-
 import { useEffect, useState } from 'react';
-
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -22,9 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
 import { KakaoSyncService } from '@/lib/kakao/kakao-sync-service';
-
 import { useToast } from '@/hooks/use-toast';
 
 interface ShareButtonProps {

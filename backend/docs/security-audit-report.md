@@ -718,7 +718,6 @@ CREATE TABLE data_classification (
 ```typescript
 // middleware/security.ts
 import { NextRequest, NextResponse } from 'next/server';
-
 import { AuditService } from '@/lib/security/audit';
 import { MFAService } from '@/lib/security/mfa';
 import { PAMService } from '@/lib/security/pam';

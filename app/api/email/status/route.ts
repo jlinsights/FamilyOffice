@@ -3,7 +3,6 @@
  * GET /api/email/status
  */
 import { NextResponse } from 'next/server';
-
 import { logger } from '@/lib/debug-logger';
 import { resend } from '@/lib/email/resend-client';
 import { env } from '@/lib/env';

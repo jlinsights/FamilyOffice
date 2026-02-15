@@ -3,11 +3,8 @@
  * POST /api/email/send
  */
 import { z } from 'zod';
-
 import { NextRequest, NextResponse } from 'next/server';
-
 import { auth } from '@clerk/nextjs/server';
-
 import { logger } from '@/lib/debug-logger';
 import {
   sendEmail,

@@ -10,7 +10,6 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-
 import type {
   Seminar,
   SeminarCategoryInfo,
@@ -1076,8 +1075,10 @@ export const UPCOMING_SEMINARS: Seminar[] = [
         '전략적 인사이트 확보: 기술 혁신 기반 신규 사업 기회 발굴',
         '네트워크 확장: 동종업계 리더들과의 전략적 파트너십 구축',
       ],
-      transportation: '교대역 5번출구 앞 서초 03버스 탑승 후 삼성레포츠센터 정류장 하차 후 도보 3분',
-      hybridOption: '온라인 라이브 스트리밍 제공 (신청 링크: https://luma.com/tet8ln6p)',
+      transportation:
+        '교대역 5번출구 앞 서초 03버스 탑승 후 삼성레포츠센터 정류장 하차 후 도보 3분',
+      hybridOption:
+        '온라인 라이브 스트리밍 제공 (신청 링크: https://luma.com/tet8ln6p)',
     },
   },
 ];

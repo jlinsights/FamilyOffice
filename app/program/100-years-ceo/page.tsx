@@ -1,32 +1,28 @@
 'use client';
 
 import {
-    ArrowRight,
-    Award,
-    BookOpen,
-    Building2,
-    Calendar,
-    CheckCircle2,
-    Clock,
-    Crown,
-    GraduationCap,
-    Handshake,
-    MapPin,
-    Target,
-    TrendingUp,
-    Users,
+  ArrowRight,
+  Award,
+  BookOpen,
+  Building2,
+  Calendar,
+  CheckCircle2,
+  Clock,
+  Crown,
+  GraduationCap,
+  Handshake,
+  MapPin,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { PremiumContentGuard } from '@/components/premium-content-guard';
-
 import { cn } from '@/lib/utils';
 
 // Disable static generation for this page

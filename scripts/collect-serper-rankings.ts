@@ -13,7 +13,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
 import { resolve } from 'path';
-
 import { BMAD_AI_KEYWORDS } from '../lib/ai/ai-search-monitoring';
 import { batchSearch } from '../lib/serper/client';
 

@@ -3,6 +3,7 @@
  * 의심스러운 활동 감지 및 자동 대응
  */
 import { NextRequest } from 'next/server';
+import { getAdminEmails } from '@/lib/admin-permissions';
 
 interface SecurityEvent {
   type:
@@ -627,9 +628,7 @@ export async function unblockIP(
   try {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    const adminEmails = (process.env.ADMIN_EMAILS || 'jhlim725@gmail.com')
-      .split(',')
-      .map(e => e.trim().toLowerCase());
+    const adminEmails = getAdminEmails();
 
     if (!supabaseUrl || !supabaseKey) return false;
 

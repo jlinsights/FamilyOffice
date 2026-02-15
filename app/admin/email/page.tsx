@@ -3,12 +3,9 @@
  * /admin/email
  */
 import { redirect } from 'next/navigation';
-
 import { auth } from '@clerk/nextjs/server';
-
 import { ResendTestPanel } from '@/components/email/resend-test-panel';
-
-const SUPER_ADMIN_EMAILS = ['jhlim725@gmail.com'];
+import { getAdminEmails } from '@/lib/admin-permissions';
 
 export default async function EmailAdminPage() {
   const { userId } = await auth();

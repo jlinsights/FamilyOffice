@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'investment-strategy-2025',
-    title: '2025년 자산관리 트렌드와 고액자산가를 위한 투자 전략',
-    image:
-      'https://images.unsplash.com/photo-1611974765270-ca1258634369?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '금리 인하 사이클의 본격화와 지정학적 리스크의 공존. 2025년, 고액자산가가 주목해야 할 투자 트렌드와 변동성을 이기는 자산 배분 전략을 심층 분석합니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'investment-strategy-2025',
+  title: '2025년 자산관리 트렌드와 고액자산가를 위한 투자 전략',
+  image:
+    'https://images.unsplash.com/photo-1611974765270-ca1258634369?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '금리 인하 사이클의 본격화와 지정학적 리스크의 공존. 2025년, 고액자산가가 주목해야 할 투자 트렌드와 변동성을 이기는 자산 배분 전략을 심층 분석합니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">2025년 투자 전망:<br/>'변곡점(Inflection Point)'에서의 생존과 성장</h1>
@@ -168,28 +168,28 @@ export const post: BlogPost = {
 </div>
 
 </div>`,
-    category: '자산관리',
-    author: '임재홍',
-    date: '2025-01-10',
-    readTime: '12분',
-    tags: ['2025전망', '자산배분', '투자전략', '패밀리오피스', '대체투자'],
-    slug: 'investment-strategy-2025',
-    featured: true,
-    faq: [
-      {
-        question: '2025년 자산관리의 핵심 키워드는 무엇인가요?',
-        answer:
-          "2025년은 '금리 인하'와 'AI 혁명'이 교차하는 시기입니다. 채권으로 안정적인 인컴을 확보하고, AI 관련 퀄리티 성장주에 집중하며, 사모 대출 등 대체투자로 포트폴리오를 다변화하는 것이 핵심입니다.",
-      },
-      {
-        question: '금리 인하 시기에 채권 투자는 어떻게 해야 하나요?',
-        answer:
-          '금리가 하락하면 채권 가격은 상승합니다. 따라서 장기 국채나 우량 회사채를 미리 확보하여 자본 차익과 이자 수익을 동시에 노리는 전략이 유효합니다.',
-      },
-      {
-        question: '고액자산가가 주목해야 할 리스크 관리 방법은?',
-        answer:
-          '지정학적 위기와 화폐 가치 하락에 대비해 금(Gold) 비중을 늘리고, 현금성 자산을 확보하여 시장 변동성에 유연하게 대응해야 합니다.',
-      },
-    ],
-  };
+  category: '자산관리',
+  author: '임재홍',
+  date: '2025-01-10',
+  readTime: '12분',
+  tags: ['2025전망', '자산배분', '투자전략', '패밀리오피스', '대체투자'],
+  slug: 'investment-strategy-2025',
+  featured: true,
+  faq: [
+    {
+      question: '2025년 자산관리의 핵심 키워드는 무엇인가요?',
+      answer:
+        "2025년은 '금리 인하'와 'AI 혁명'이 교차하는 시기입니다. 채권으로 안정적인 인컴을 확보하고, AI 관련 퀄리티 성장주에 집중하며, 사모 대출 등 대체투자로 포트폴리오를 다변화하는 것이 핵심입니다.",
+    },
+    {
+      question: '금리 인하 시기에 채권 투자는 어떻게 해야 하나요?',
+      answer:
+        '금리가 하락하면 채권 가격은 상승합니다. 따라서 장기 국채나 우량 회사채를 미리 확보하여 자본 차익과 이자 수익을 동시에 노리는 전략이 유효합니다.',
+    },
+    {
+      question: '고액자산가가 주목해야 할 리스크 관리 방법은?',
+      answer:
+        '지정학적 위기와 화폐 가치 하락에 대비해 금(Gold) 비중을 늘리고, 현금성 자산을 확보하여 시장 변동성에 유연하게 대응해야 합니다.',
+    },
+  ],
+};

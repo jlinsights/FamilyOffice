@@ -8,11 +8,8 @@ import {
   CheckCircle,
   XCircle,
 } from 'lucide-react';
-
 import { Suspense } from 'react';
-
 import { Metadata } from 'next';
-
 import { Badge } from '@/components/ui/badge';
 import {
   Card,

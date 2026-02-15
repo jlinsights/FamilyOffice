@@ -3,7 +3,6 @@
  * 모든 API 라우트에서 사용할 수 있는 포괄적인 Zod 검증 스키마
  */
 import { z } from 'zod';
-
 import { NextRequest, NextResponse } from 'next/server';
 
 // 기본 데이터 타입 검증

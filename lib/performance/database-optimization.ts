@@ -3,7 +3,6 @@
  * Portfolio dashboard load time: <2 seconds 목표
  */
 import { createClient } from '@supabase/supabase-js';
-
 import type { Database } from '@/types/supabase';
 
 // 성능 최적화된 Supabase 클라이언트 설정

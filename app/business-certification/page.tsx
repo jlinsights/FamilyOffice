@@ -19,12 +19,9 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-
 import { useCallback, useEffect, useState } from 'react';
-
 import Link from 'next/link';
 import Script from 'next/script';
-
 import {
   Accordion,
   AccordionContent,
@@ -34,7 +31,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 import { AnimatedCounter } from '@/components/animated-counter';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';

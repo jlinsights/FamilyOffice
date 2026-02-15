@@ -5,11 +5,8 @@
  * Core Web Vitals 성능 대시보드 통합
  */
 import { BarChart3, Monitor, Smartphone, TrendingUp, Zap } from 'lucide-react';
-
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import { AdminAccessDeniedAlert } from '@/components/admin-access-denied-alert';
 import PerformanceDashboard from '@/components/performance/performance-dashboard';
 import PerformanceOptimizer from '@/components/performance/performance-optimizer';
@@ -19,10 +16,13 @@ import { useSafeUser } from '@/hooks/use-safe-auth';
 export default function AdminPerformancePage() {
   const { user } = useSafeUser();
 
-  if (
-    !user ||
-    user.primaryEmailAddress?.emailAddress !== 'jhlim725@gmail.com'
-  ) {
+  const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || process.env.ADMIN_EMAILS || '')
+    .split(',')
+    .map(e => e.trim().toLowerCase())
+    .filter(Boolean);
+  const userEmail = user?.primaryEmailAddress?.emailAddress?.toLowerCase();
+
+  if (!user || !userEmail || !adminEmails.includes(userEmail)) {
     return <AdminAccessDeniedAlert />;
   }
 

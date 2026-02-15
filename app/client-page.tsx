@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import Script from 'next/script';
-
+import { KakaoFloatingButton } from '@/components/ui/kakao-floating-btn';
 import { AdminAccessDeniedAlert } from '@/components/admin-access-denied-alert';
 import { HubSpotIntegration } from '@/components/analytics/hubspot-integration';
 import { PerformanceMonitor } from '@/components/analytics/performance-monitor';
@@ -16,11 +15,9 @@ import { StructuredData } from '@/components/seo/structured-data';
 import { SkipLinks } from '@/components/skip-links';
 import { SmoothScroll } from '@/components/smooth-scroll';
 import { Providers } from '@/components/theme/providers';
-import { KakaoFloatingButton } from '@/components/ui/kakao-floating-btn';
-
 import {
   createAnalyticsScript,
-  createGTMScript
+  createGTMScript,
 } from '@/lib/security/html-sanitizer';
 import { generateStructuredData } from '@/lib/seo/structured-data';
 

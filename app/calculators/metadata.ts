@@ -111,13 +111,16 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     siteName: 'FamilyOffice S',
     title: '세무 계산기 2025 | 절세플랜·자산관리 전문',
-    description: '상속세 40% 절약, 증여세 70% 절감. 법인·자산가 전용 AI 세무 계산기. 무료 절세 전략 시뮬레이션',
-    images: [{
-      url: 'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
-      width: 1200,
-      height: 630,
-      alt: '세무 계산기 2025 - FamilyOffice S',
-    }],
+    description:
+      '상속세 40% 절약, 증여세 70% 절감. 법인·자산가 전용 AI 세무 계산기. 무료 절세 전략 시뮬레이션',
+    images: [
+      {
+        url: 'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
+        width: 1200,
+        height: 630,
+        alt: '세무 계산기 2025 - FamilyOffice S',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

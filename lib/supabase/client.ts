@@ -1,7 +1,6 @@
 'use client';
 
 import { createBrowserClient } from '@supabase/ssr';
-
 import { Database } from '@/types/supabase';
 
 // 환경 변수를 빌드 타임에 인라인으로 대체

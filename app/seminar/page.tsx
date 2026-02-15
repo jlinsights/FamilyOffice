@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
@@ -9,7 +8,6 @@ import { SeminarHeroSection } from '@/components/seminar/SeminarHeroSection';
 import SeminarRegistrationSection from '@/components/seminar/SeminarRegistrationSection';
 import { UpcomingSeminarsSection } from '@/components/seminar/UpcomingSeminarsSection';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { generateMetadata } from '@/lib/seo/metadata';
 
 // SEO 최적화 메타데이터 - 검색 의도별 키워드 전략
@@ -177,7 +175,8 @@ export default function SeminarPage() {
       '@type': 'Audience',
       audienceType: '30억 이상 초고액자산가 및 법인 대표',
       name: 'UHNW 고객, CEO 및 기업 오너',
-      description: '자산 30억+ 초고액자산가, 중견기업 CEO, 법인 대표, 기업 오너',
+      description:
+        '자산 30억+ 초고액자산가, 중견기업 CEO, 법인 대표, 기업 오너',
     },
     offers: {
       '@type': 'Offer',

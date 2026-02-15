@@ -18,12 +18,16 @@ import {
   User,
   Users2,
 } from 'lucide-react';
-
 import { useState, useCallback } from 'react';
-
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
@@ -76,85 +80,92 @@ export default function InheritanceTaxCalculatorPage() {
   const [emailError, setEmailError] = useState<string | null>(null);
 
   // 2025년 한국 상속세 계산 로직 (개선된 버전)
-  const calculateInheritanceTax = useCallback((data: FormData): InheritanceTaxResult => {
-    // 1. 총 자산 계산
-    const totalAssets =
-      Number(data.realEstate || 0) +
-      Number(data.cash || 0) +
-      Number(data.stocks || 0) +
-      Number(data.otherAssets || 0);
+  const calculateInheritanceTax = useCallback(
+    (data: FormData): InheritanceTaxResult => {
+      // 1. 총 자산 계산
+      const totalAssets =
+        Number(data.realEstate || 0) +
+        Number(data.cash || 0) +
+        Number(data.stocks || 0) +
+        Number(data.otherAssets || 0);
 
-    // 2. 총 부채 계산
-    const totalDebt = Number(data.debt || 0) + Number(data.funeralExpenses || 0);
+      // 2. 총 부채 계산
+      const totalDebt =
+        Number(data.debt || 0) + Number(data.funeralExpenses || 0);
 
-    // 3. 순자산 (상속재산)
-    const netAssets = totalAssets - totalDebt;
+      // 3. 순자산 (상속재산)
+      const netAssets = totalAssets - totalDebt;
 
-    // 4. 공제 계산
-    // 배우자 공제: 최소 5억, 최대 30억 (법정상속분 범위 내)
-    const spouseDeduction = data.hasSpouse
-      ? Math.min(Math.max(500000000, netAssets * 0.5), 3000000000)
-      : 0;
+      // 4. 공제 계산
+      // 배우자 공제: 최소 5억, 최대 30억 (법정상속분 범위 내)
+      const spouseDeduction = data.hasSpouse
+        ? Math.min(Math.max(500000000, netAssets * 0.5), 3000000000)
+        : 0;
 
-    // 자녀 공제: 1인당 5천만원
-    const numberOfChildren = Number(data.numberOfChildren || 0);
-    const childDeduction = numberOfChildren * 50000000;
+      // 자녀 공제: 1인당 5천만원
+      const numberOfChildren = Number(data.numberOfChildren || 0);
+      const childDeduction = numberOfChildren * 50000000;
 
-    // 기초공제: 2억원
-    const basicDeduction = 200000000;
+      // 기초공제: 2억원
+      const basicDeduction = 200000000;
 
-    // 총 공제액
-    const totalDeductions = spouseDeduction + childDeduction + basicDeduction;
+      // 총 공제액
+      const totalDeductions = spouseDeduction + childDeduction + basicDeduction;
 
-    // 5. 과세표준 (순자산 - 공제)
-    const taxableAmount = Math.max(0, netAssets - totalDeductions);
+      // 5. 과세표준 (순자산 - 공제)
+      const taxableAmount = Math.max(0, netAssets - totalDeductions);
 
-    // 6. 상속세 계산 (2025년 세율 구조)
-    let calculatedTax = 0;
-    if (taxableAmount <= 100000000) {
-      // 1억 이하: 10%
-      calculatedTax = taxableAmount * 0.1;
-    } else if (taxableAmount <= 500000000) {
-      // 5억 이하: 10% + 초과분 20%
-      calculatedTax = 10000000 + (taxableAmount - 100000000) * 0.2;
-    } else if (taxableAmount <= 1000000000) {
-      // 10억 이하: 90백만 + 초과분 30%
-      calculatedTax = 90000000 + (taxableAmount - 500000000) * 0.3;
-    } else if (taxableAmount <= 3000000000) {
-      // 30억 이하: 240백만 + 초과분 40%
-      calculatedTax = 240000000 + (taxableAmount - 1000000000) * 0.4;
-    } else {
-      // 30억 초과: 1,040백만 + 초과분 50%
-      calculatedTax = 1040000000 + (taxableAmount - 3000000000) * 0.5;
-    }
+      // 6. 상속세 계산 (2025년 세율 구조)
+      let calculatedTax = 0;
+      if (taxableAmount <= 100000000) {
+        // 1억 이하: 10%
+        calculatedTax = taxableAmount * 0.1;
+      } else if (taxableAmount <= 500000000) {
+        // 5억 이하: 10% + 초과분 20%
+        calculatedTax = 10000000 + (taxableAmount - 100000000) * 0.2;
+      } else if (taxableAmount <= 1000000000) {
+        // 10억 이하: 90백만 + 초과분 30%
+        calculatedTax = 90000000 + (taxableAmount - 500000000) * 0.3;
+      } else if (taxableAmount <= 3000000000) {
+        // 30억 이하: 240백만 + 초과분 40%
+        calculatedTax = 240000000 + (taxableAmount - 1000000000) * 0.4;
+      } else {
+        // 30억 초과: 1,040백만 + 초과분 50%
+        calculatedTax = 1040000000 + (taxableAmount - 3000000000) * 0.5;
+      }
 
-    // 7. 세액공제 (간이 계산)
-    const taxDeduction = 0;
+      // 7. 세액공제 (간이 계산)
+      const taxDeduction = 0;
 
-    // 8. 최종 납부세액
-    const finalTax = Math.max(0, calculatedTax - taxDeduction);
+      // 8. 최종 납부세액
+      const finalTax = Math.max(0, calculatedTax - taxDeduction);
 
-    // 9. 실효세율 계산
-    const effectiveRate = netAssets > 0 ? (finalTax / netAssets) * 100 : 0;
+      // 9. 실효세율 계산
+      const effectiveRate = netAssets > 0 ? (finalTax / netAssets) * 100 : 0;
 
-    return {
-      totalAssets,
-      totalDebt,
-      netAssets,
-      spouseDeduction,
-      childDeduction,
-      basicDeduction,
-      totalDeductions,
-      taxableAmount,
-      calculatedTax,
-      taxDeduction,
-      finalTax,
-      effectiveRate,
-    };
-  }, []);
+      return {
+        totalAssets,
+        totalDebt,
+        netAssets,
+        spouseDeduction,
+        childDeduction,
+        basicDeduction,
+        totalDeductions,
+        taxableAmount,
+        calculatedTax,
+        taxDeduction,
+        finalTax,
+        effectiveRate,
+      };
+    },
+    []
+  );
 
-  const handleInputChange = (field: keyof FormData, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  const handleInputChange = (
+    field: keyof FormData,
+    value: string | boolean
+  ) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleCalculate = useCallback(
@@ -212,11 +223,27 @@ export default function InheritanceTaxCalculatorPage() {
           },
           source: 'inheritance_tax_calculator',
           utm: {
-            source: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('utm_source') || undefined : undefined,
-            medium: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('utm_medium') || undefined : undefined,
-            campaign: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('utm_campaign') || undefined : undefined,
+            source:
+              typeof window !== 'undefined'
+                ? new URLSearchParams(window.location.search).get(
+                    'utm_source'
+                  ) || undefined
+                : undefined,
+            medium:
+              typeof window !== 'undefined'
+                ? new URLSearchParams(window.location.search).get(
+                    'utm_medium'
+                  ) || undefined
+                : undefined,
+            campaign:
+              typeof window !== 'undefined'
+                ? new URLSearchParams(window.location.search).get(
+                    'utm_campaign'
+                  ) || undefined
+                : undefined,
           },
-          referringUrl: typeof window !== 'undefined' ? document.referrer : undefined,
+          referringUrl:
+            typeof window !== 'undefined' ? document.referrer : undefined,
         }),
       });
 
@@ -242,7 +269,11 @@ export default function InheritanceTaxCalculatorPage() {
       setTimeout(() => setEmailSuccess(false), 5000);
     } catch (error) {
       console.error('Email submission error:', error);
-      setEmailError(error instanceof Error ? error.message : '이메일 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+      setEmailError(
+        error instanceof Error
+          ? error.message
+          : '이메일 전송 중 오류가 발생했습니다. 다시 시도해주세요.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -386,7 +417,9 @@ export default function InheritanceTaxCalculatorPage() {
                         id="cash"
                         type="number"
                         value={formData.cash}
-                        onChange={(e) => handleInputChange('cash', e.target.value)}
+                        onChange={e =>
+                          handleInputChange('cash', e.target.value)
+                        }
                         placeholder="예: 500000000 (5억원)"
                         className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-emerald-500/20 dark:focus:ring-emerald-400/20 rounded-xl transition-all duration-200"
                         min="0"
@@ -406,7 +439,9 @@ export default function InheritanceTaxCalculatorPage() {
                         id="realEstate"
                         type="number"
                         value={formData.realEstate}
-                        onChange={(e) => handleInputChange('realEstate', e.target.value)}
+                        onChange={e =>
+                          handleInputChange('realEstate', e.target.value)
+                        }
                         placeholder="예: 1000000000 (10억원)"
                         className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 rounded-xl transition-all duration-200"
                         min="0"
@@ -426,7 +461,9 @@ export default function InheritanceTaxCalculatorPage() {
                         id="stocks"
                         type="number"
                         value={formData.stocks}
-                        onChange={(e) => handleInputChange('stocks', e.target.value)}
+                        onChange={e =>
+                          handleInputChange('stocks', e.target.value)
+                        }
                         placeholder="예: 300000000 (3억원)"
                         className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-purple-500/20 dark:focus:ring-purple-400/20 rounded-xl transition-all duration-200"
                         min="0"
@@ -446,7 +483,9 @@ export default function InheritanceTaxCalculatorPage() {
                         id="otherAssets"
                         type="number"
                         value={formData.otherAssets}
-                        onChange={(e) => handleInputChange('otherAssets', e.target.value)}
+                        onChange={e =>
+                          handleInputChange('otherAssets', e.target.value)
+                        }
                         placeholder="예: 200000000 (2억원)"
                         className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-amber-500 dark:focus:border-amber-400 focus:ring-amber-500/20 dark:focus:ring-amber-400/20 rounded-xl transition-all duration-200"
                         min="0"
@@ -486,7 +525,9 @@ export default function InheritanceTaxCalculatorPage() {
                         type="checkbox"
                         id="hasSpouse"
                         checked={formData.hasSpouse}
-                        onChange={(e) => handleInputChange('hasSpouse', e.target.checked)}
+                        onChange={e =>
+                          handleInputChange('hasSpouse', e.target.checked)
+                        }
                         className="w-5 h-5 rounded border-emerald-300 dark:border-emerald-600 text-emerald-600 dark:text-emerald-400 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                       />
                     </div>
@@ -503,7 +544,9 @@ export default function InheritanceTaxCalculatorPage() {
                         id="numberOfChildren"
                         type="number"
                         value={formData.numberOfChildren}
-                        onChange={(e) => handleInputChange('numberOfChildren', e.target.value)}
+                        onChange={e =>
+                          handleInputChange('numberOfChildren', e.target.value)
+                        }
                         min="0"
                         max="10"
                         placeholder="0"
@@ -531,7 +574,9 @@ export default function InheritanceTaxCalculatorPage() {
                         id="debt"
                         type="number"
                         value={formData.debt}
-                        onChange={(e) => handleInputChange('debt', e.target.value)}
+                        onChange={e =>
+                          handleInputChange('debt', e.target.value)
+                        }
                         placeholder="예: 200000000 (2억원)"
                         className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500/20 dark:focus:ring-red-400/20 rounded-xl transition-all duration-200"
                         min="0"
@@ -551,7 +596,9 @@ export default function InheritanceTaxCalculatorPage() {
                         id="funeralExpenses"
                         type="number"
                         value={formData.funeralExpenses}
-                        onChange={(e) => handleInputChange('funeralExpenses', e.target.value)}
+                        onChange={e =>
+                          handleInputChange('funeralExpenses', e.target.value)
+                        }
                         placeholder="예: 5000000 (500만원)"
                         className="h-12 bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600 focus:border-slate-500 dark:focus:border-slate-400 focus:ring-slate-500/20 dark:focus:ring-slate-400/20 rounded-xl transition-all duration-200"
                         min="0"
@@ -560,7 +607,11 @@ export default function InheritanceTaxCalculatorPage() {
                     </div>
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full h-14 text-lg font-bold">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full h-14 text-lg font-bold"
+                  >
                     상속세 계산하기
                   </Button>
                 </form>
@@ -800,7 +851,8 @@ export default function InheritanceTaxCalculatorPage() {
                         className="w-full h-14 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 dark:from-blue-500 dark:to-indigo-500 dark:hover:from-blue-600 dark:hover:to-indigo-600 text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1"
                         size="lg"
                         onClick={() => {
-                          window.location.href = '/structure-check#request-form';
+                          window.location.href =
+                            '/structure-check#request-form';
                         }}
                       >
                         <Shield className="w-6 h-6 mr-2" />
@@ -824,7 +876,8 @@ export default function InheritanceTaxCalculatorPage() {
                           className="h-12 border-2 border-purple-200 dark:border-purple-700 hover:border-purple-300 dark:hover:border-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20 font-semibold rounded-xl transition-all duration-200"
                           size="lg"
                           onClick={() => {
-                            window.location.href = '/calculators/succession-cost';
+                            window.location.href =
+                              '/calculators/succession-cost';
                           }}
                         >
                           <Building2 className="w-4 h-4 mr-2" />
@@ -841,7 +894,8 @@ export default function InheritanceTaxCalculatorPage() {
                     <CardHeader>
                       <CardTitle>맞춤 절세 전략 받아보기</CardTitle>
                       <CardDescription>
-                        이메일을 입력하시면 자산 규모별 맞춤 절세 전략과 실제 사례를 보내드립니다.
+                        이메일을 입력하시면 자산 규모별 맞춤 절세 전략과 실제
+                        사례를 보내드립니다.
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -853,7 +907,7 @@ export default function InheritanceTaxCalculatorPage() {
                             type="email"
                             placeholder="your@email.com"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={e => setEmail(e.target.value)}
                             required
                           />
                         </div>
@@ -865,12 +919,17 @@ export default function InheritanceTaxCalculatorPage() {
                           </Alert>
                         )}
 
-                        <Button type="submit" className="w-full" disabled={isSubmitting}>
+                        <Button
+                          type="submit"
+                          className="w-full"
+                          disabled={isSubmitting}
+                        >
                           {isSubmitting ? '전송 중...' : '무료 리포트 받기'}
                         </Button>
 
                         <p className="text-xs text-muted-foreground text-center">
-                          개인정보는 안전하게 보호되며, 마케팅 목적으로만 사용됩니다.
+                          개인정보는 안전하게 보호되며, 마케팅 목적으로만
+                          사용됩니다.
                         </p>
                       </form>
                     </CardContent>
@@ -882,7 +941,8 @@ export default function InheritanceTaxCalculatorPage() {
                   <Alert className="border-primary">
                     <CheckCircle className="h-4 w-4 text-primary" />
                     <AlertDescription>
-                      이메일이 성공적으로 등록되었습니다. 24시간 내 맞춤 절세 전략 리포트를 보내드리겠습니다.
+                      이메일이 성공적으로 등록되었습니다. 24시간 내 맞춤 절세
+                      전략 리포트를 보내드리겠습니다.
                     </AlertDescription>
                   </Alert>
                 )}

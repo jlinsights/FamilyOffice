@@ -6,18 +6,16 @@
 'use client';
 
 import {
+  Activity,
   AlertTriangle,
   CheckCircle,
   Clock,
-  Activity,
   Database,
-  TrendingUp,
   TrendingDown,
+  TrendingUp,
   Users,
 } from 'lucide-react';
-
-import React, { useState, useEffect, useMemo } from 'react';
-
+import React, { useEffect, useMemo, useState } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -37,21 +35,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-/**
- * 성능 모니터링 대시보드
- * APM, RUM, Infrastructure monitoring 통합
- */
-
-/**
- * 성능 모니터링 대시보드
- * APM, RUM, Infrastructure monitoring 통합
- */
-
-/**
- * 성능 모니터링 대시보드
- * APM, RUM, Infrastructure monitoring 통합
- */
 
 // 성능 메트릭 타입 정의
 interface PerformanceMetrics {

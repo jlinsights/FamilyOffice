@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   WEEKLY_CONTENT_SCHEDULE,
   CONTENT_TEMPLATES,

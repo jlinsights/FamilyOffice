@@ -5,11 +5,8 @@
  * 공식 카카오 브랜딩 가이드라인에 따른 채널 추가 버튼
  */
 import React from 'react';
-
 import Image from 'next/image';
-
 import { Button } from '@/components/ui/button';
-
 import { useToast } from '@/hooks/use-toast';
 
 interface KakaoChannelAddButtonProps {

@@ -2,33 +2,28 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-    ArrowRight,
-    Building,
-    CheckCircle,
-    Loader2,
-    Phone,
+  ArrowRight,
+  Building,
+  CheckCircle,
+  Loader2,
+  Phone,
 } from 'lucide-react';
 import * as z from 'zod';
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { useRouter } from 'next/navigation';
-
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-
 import { useSafeUser } from '@/hooks/use-safe-auth';
 import { useToast } from '@/hooks/use-toast';
 

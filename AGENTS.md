@@ -54,19 +54,12 @@ npx jest tests/unit/financial-calculations.test.ts        # Specific unit test
 ```typescript
 // Order: React → Next → Clerk → Radix UI → shadcn/ui → components → lib → relative imports
 import { useState } from 'react';
-
 import { Metadata } from 'next';
-
 import { currentUser } from '@clerk/nextjs';
-
 import { Button } from '@radix-ui/react-button';
-
 import { Card } from '@/components/ui/card';
-
 import { CalComButton } from '@/components/cal-com-button';
-
 import { supabase } from '@/lib/supabase';
-
 import { localUtil } from './utils';
 ```
 
@@ -116,7 +109,7 @@ try {
   console.error('API call failed:', error);
   return {
     success: false,
-    error: error instanceof Error ? error.message : 'Unknown error'
+    error: error instanceof Error ? error.message : 'Unknown error',
   };
 }
 ```
@@ -144,7 +137,6 @@ export function ServiceList({ services }: { services: Service[] }) {
 
 ```typescript
 import { z } from 'zod';
-
 import { NextRequest, NextResponse } from 'next/server';
 
 const RequestSchema = z.object({

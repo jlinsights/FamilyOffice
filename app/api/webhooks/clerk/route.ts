@@ -1,14 +1,11 @@
 // FamilyOffice S - Clerk 웹훅 처리
 // Clerk 사용자 이벤트를 받아 Supabase에 동기화하는 API 엔드포인트
 import { Webhook } from 'svix';
-
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-
 import { logger } from '@/lib/debug-logger';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { safeInsert, safeUpdate } from '@/lib/supabase/helpers';
-
 import { Database } from '@/types/supabase';
 
 type UserInsert = Database['public']['Tables']['users']['Insert'];

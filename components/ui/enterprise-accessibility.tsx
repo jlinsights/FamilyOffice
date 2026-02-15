@@ -10,9 +10,7 @@ import {
   Contrast,
   ZoomIn,
 } from 'lucide-react';
-
 import React, { useState, useRef, useEffect } from 'react';
-
 import { Button } from '@/components/ui/button';
 import {
   CardContent,
@@ -22,7 +20,6 @@ import {
 } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-
 import { cn } from '@/lib/utils';
 
 // 접근성 설정 타입

@@ -1,9 +1,7 @@
 'use client';
 
 import { CheckCircle, Target, Clock, Shield, AlertCircle } from 'lucide-react';
-
 import { memo } from 'react';
-
 import { Card, CardContent } from '@/components/ui/card';
 import { ClientOnlyIcon } from '@/components/ui/client-only-icon';
 

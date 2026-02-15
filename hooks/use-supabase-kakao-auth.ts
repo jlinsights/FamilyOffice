@@ -1,14 +1,11 @@
 'use client';
 
 import { User } from '@supabase/supabase-js';
-
 import { useEffect, useState, useCallback } from 'react';
-
 import {
   getSupabaseKakaoAuthService,
   type SupabaseKakaoAuthResult,
 } from '@/lib/auth/supabase-kakao-auth';
-
 import { Database } from '@/types/supabase';
 
 type UserRecord = Database['public']['Tables']['users']['Row'];

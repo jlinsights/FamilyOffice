@@ -1,9 +1,7 @@
 'use client';
 
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
-
 import { useEffect } from 'react';
-
 import { Button } from '@/components/ui/button';
 import {
   Card,

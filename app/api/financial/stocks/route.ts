@@ -3,7 +3,6 @@
  * 한국 및 해외 주식 정보 제공
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   validateApiRequest,
   createValidationErrorResponse,

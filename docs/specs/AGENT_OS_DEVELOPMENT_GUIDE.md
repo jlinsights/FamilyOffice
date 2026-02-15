@@ -109,7 +109,6 @@ export async function GET(request: NextRequest) {
 // Forms use react-hook-form + zod validation
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-
 import { useForm } from 'react-hook-form';
 
 const schema = z.object({
@@ -148,17 +147,17 @@ CREATE TABLE consultations (
 
 ```typescript
 // Server-side (app/api routes)
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server';
 
-const supabase = createClient()
+const supabase = createClient();
 const { data, error } = await supabase
   .from('consultations')
-  .insert({ name, email, phone })
+  .insert({ name, email, phone });
 
 // Client-side (components)
-import { createClient } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/client';
 
-const supabase = createClient()
+const supabase = createClient();
 // Use for client-side operations
 ```
 

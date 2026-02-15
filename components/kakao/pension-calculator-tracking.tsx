@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-
 import { kakaoPixelTrack } from './kakao-pixel';
 
 export function PensionCalculatorTracking() {

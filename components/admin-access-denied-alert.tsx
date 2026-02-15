@@ -3,15 +3,10 @@
 
 'use client';
 
-import { X, Shield } from 'lucide-react';
-
-import { useEffect, useState, Suspense } from 'react';
-
+import { Shield, X } from 'lucide-react';
+import { Suspense, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-
-// FamilyOffice S - 관리자 접근 거부 알림 컴포넌트
-// URL 파라미터를 통해 관리자 접근 거부 메시지를 표시하는 컴포넌트
 
 function AdminAccessDeniedAlertContent() {
   const [show, setShow] = useState(false);
@@ -40,7 +35,7 @@ function AdminAccessDeniedAlertContent() {
       switch (error) {
         case 'admin_access_denied':
           errorMessage =
-            '관리자 페이지에 접근할 권한이 없습니다. jhlim725@gmail.com 계정으로 로그인해주세요.';
+            '관리자 페이지에 접근할 권한이 없습니다. 관리자 계정으로 로그인해주세요.';
           break;
         case 'admin_check_failed':
           errorMessage =

@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'asset-management-strategy',
-    title: '체계적인 자산관리 전략',
-    image:
-      'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '중견기업 CEO를 위한 체계적인 자산관리 전략. 기업 지분부터 대체투자까지, 전문가가 제시하는 포트폴리오 구성의 핵심 원칙과 실행 방안을 담았습니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'asset-management-strategy',
+  title: '체계적인 자산관리 전략',
+  image:
+    'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '중견기업 CEO를 위한 체계적인 자산관리 전략. 기업 지분부터 대체투자까지, 전문가가 제시하는 포트폴리오 구성의 핵심 원칙과 실행 방안을 담았습니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">CEO 자산관리의 새로운 패러다임</h1>
     <p className="text-muted-foreground text-lg font-normal leading-relaxed">기업 지분부터 글로벌 투자까지, 중견기업 CEO를 위한 체계적 자산관리 전략과 포트폴리오 구성의 모든 것</p>
@@ -416,11 +416,11 @@ export const post: BlogPost = {
 </section>
 
 </div>`,
-    category: '자산관리',
-    author: '임재홍',
-    date: '2024-12-10',
-    readTime: '12분',
-    tags: ['자산관리', '포트폴리오', '투자전략', '대체투자', '리스크관리'],
-    slug: 'asset-management-strategy',
-    featured: true,
-  };
+  category: '자산관리',
+  author: '임재홍',
+  date: '2024-12-10',
+  readTime: '12분',
+  tags: ['자산관리', '포트폴리오', '투자전략', '대체투자', '리스크관리'],
+  slug: 'asset-management-strategy',
+  featured: true,
+};

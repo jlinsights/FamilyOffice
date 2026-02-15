@@ -2,22 +2,18 @@
  * Unit tests for service category modules
  * Validates structure, content, and data integrity across all 8 categories
  */
-
+import { assetWealthManagement } from '@/constants/services/categories/asset-wealth-management';
+import { businessSuccession } from '@/constants/services/categories/business-succession';
 import { corporateInsuranceRiskCategory } from '@/constants/services/categories/corporate-insurance-risk';
 import { corporateStructureGovernance } from '@/constants/services/categories/corporate-structure-governance';
 import { hrStartupSupport } from '@/constants/services/categories/hr-startup-support';
-import { taxAccounting } from '@/constants/services/categories/tax-accounting';
 import { investmentFinance } from '@/constants/services/categories/investment-finance';
-import { assetWealthManagement } from '@/constants/services/categories/asset-wealth-management';
-import { businessSuccession } from '@/constants/services/categories/business-succession';
 import { strategicPlanningMA } from '@/constants/services/categories/strategic-planning-ma';
+import { taxAccounting } from '@/constants/services/categories/tax-accounting';
 
 describe('Service Category Modules', () => {
   // Helper function to validate category structure
-  const validateCategoryStructure = (
-    category: any,
-    categoryName: string
-  ) => {
+  const validateCategoryStructure = (category: any, categoryName: string) => {
     describe(`${categoryName} structure validation`, () => {
       it('should have required properties', () => {
         expect(category).toHaveProperty('id');
@@ -83,9 +79,7 @@ describe('Service Category Modules', () => {
               expect(service.detailedContent).toHaveProperty('deliverables');
 
               expect(typeof service.detailedContent.overview).toBe('string');
-              expect(Array.isArray(service.detailedContent.process)).toBe(
-                true
-              );
+              expect(Array.isArray(service.detailedContent.process)).toBe(true);
               expect(typeof service.detailedContent.pricing).toBe('object');
               expect(typeof service.detailedContent.timeline).toBe('string');
               expect(Array.isArray(service.detailedContent.deliverables)).toBe(
@@ -98,9 +92,7 @@ describe('Service Category Modules', () => {
             if (service.detailedContent?.pricing) {
               const pricing = service.detailedContent.pricing;
               expect(pricing).toHaveProperty('type');
-              expect(['custom', 'fixed', 'percentage']).toContain(
-                pricing.type
-              );
+              expect(['custom', 'fixed', 'percentage']).toContain(pricing.type);
               expect(pricing).toHaveProperty('description');
               expect(typeof pricing.description).toBe('string');
             }
@@ -266,7 +258,7 @@ describe('Service Category Modules', () => {
     ];
 
     it('should have unique category IDs', () => {
-      const ids = allCategories.map((cat) => cat.id);
+      const ids = allCategories.map(cat => cat.id);
       const uniqueIds = new Set(ids);
       expect(uniqueIds.size).toBe(ids.length);
     });
@@ -280,15 +272,15 @@ describe('Service Category Modules', () => {
     });
 
     it('should have unique service titles across all categories', () => {
-      const allServiceTitles = allCategories.flatMap((cat) =>
-        cat.services.map((service) => service.title)
+      const allServiceTitles = allCategories.flatMap(cat =>
+        cat.services.map(service => service.title)
       );
       const uniqueTitles = new Set(allServiceTitles);
       expect(uniqueTitles.size).toBe(allServiceTitles.length);
     });
 
     it('should all use Korean language for titles and descriptions', () => {
-      allCategories.forEach((category) => {
+      allCategories.forEach(category => {
         const hasKoreanTitle = /[\uAC00-\uD7AF]/.test(category.title);
         const hasKoreanDesc = /[\uAC00-\uD7AF]/.test(category.description);
         expect(hasKoreanTitle).toBe(true);

@@ -1,51 +1,46 @@
 'use client';
 
 import {
-    Award,
-    BookOpen,
-    Briefcase,
-    CheckCircle2,
-    Clock,
-    Crown,
-    Diamond,
-    Eye,
-    Gem,
-    Globe,
-    Infinity,
-    Landmark,
-    Lock,
-    Mountain,
-    Phone,
-    Shield,
-    Sparkles,
-    Star,
-    Target,
-    TrendingUp,
-    Users,
-    Zap,
+  Award,
+  BookOpen,
+  Briefcase,
+  CheckCircle2,
+  Clock,
+  Crown,
+  Diamond,
+  Eye,
+  Gem,
+  Globe,
+  Infinity,
+  Landmark,
+  Lock,
+  Mountain,
+  Phone,
+  Shield,
+  Sparkles,
+  Star,
+  Target,
+  TrendingUp,
+  Users,
+  Zap,
 } from 'lucide-react';
-
 import React from 'react';
-
-import { cn } from '@/lib/utils';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { CUSTOMER_SEGMENTS } from '@/lib/marketing/customer-segmentation';
+import { cn } from '@/lib/utils';
 
 // 패밀리오피스 핵심 서비스 영역
 const familyOfficeServices = {

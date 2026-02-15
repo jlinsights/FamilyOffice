@@ -1,23 +1,19 @@
 import {
-    ArrowLeft,
-    Calendar,
-    Clock,
-    ExternalLink,
-    Share2,
-    User,
+  ArrowLeft,
+  Calendar,
+  Clock,
+  ExternalLink,
+  Share2,
+  User,
 } from 'lucide-react';
-
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { env } from '@/lib/env';
 import { rssAggregator } from '@/lib/rss-aggregator';
 import { sanitizeHTMLContent } from '@/lib/security/html-sanitizer';
@@ -324,7 +320,10 @@ export default async function InsightContentPage({
                         href={content.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+                        className={buttonVariants({
+                          variant: 'ghost',
+                          size: 'sm',
+                        })}
                       >
                         전체 내용 보기
                         <ExternalLink className="w-3 h-3 ml-1" />
@@ -369,7 +368,10 @@ export default async function InsightContentPage({
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/insights/weekly-brief"
-                  className={buttonVariants({ size: 'lg', variant: 'secondary' })}
+                  className={buttonVariants({
+                    size: 'lg',
+                    variant: 'secondary',
+                  })}
                 >
                   뉴스레터 구독하기
                 </Link>

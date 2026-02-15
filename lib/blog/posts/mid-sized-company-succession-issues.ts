@@ -1,14 +1,14 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'mid-sized-company-succession-issues',
-    title:
-      "중견기업 승계, '세금'보다 무서운 것은 '준비 없는 이별'입니다: 10년 차 컨설턴트의 제언",
-    image:
-      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '상속세 최고세율 60%의 공포, 그리고 경영권 분쟁의 리스크. 중견기업 승계의 성공과 실패를 가르는 결정적 차이와 골든타임 전략을 심층 분석합니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'mid-sized-company-succession-issues',
+  title:
+    "중견기업 승계, '세금'보다 무서운 것은 '준비 없는 이별'입니다: 10년 차 컨설턴트의 제언",
+  image:
+    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '상속세 최고세율 60%의 공포, 그리고 경영권 분쟁의 리스크. 중견기업 승계의 성공과 실패를 가르는 결정적 차이와 골든타임 전략을 심층 분석합니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">중견기업 승계, '세금'보다 무서운 것은<br/>'준비 없는 이별'입니다</h1>
@@ -146,36 +146,36 @@ export const post: BlogPost = {
 </div>
 
 </div>`,
-    category: '승계전략',
-    author: '임재홍',
-    date: '2025-02-20',
-    readTime: '16분',
-    tags: [
-      '가업승계',
-      '상속세',
-      '증여세과세특례',
-      '경영권방어',
-      '지배구조개편',
-      '유류분반환청구',
-      '패밀리오피스',
-    ],
-    slug: 'mid-sized-company-succession-issues',
-    featured: true,
-    faq: [
-      {
-        question: '가업승계 시 가장 큰 리스크는 무엇인가요?',
-        answer:
-          '최대 60%에 달하는 상속세 부담과 준비 없는 승계로 인한 가족 간 경영권 분쟁이 가장 큰 리스크입니다.',
-      },
-      {
-        question: '가업상속공제란 무엇인가요?',
-        answer:
-          '일정 요건을 갖춘 중소·중견기업을 승계할 때, 가업상속재산 가액의 일부(최대 600억 원)를 상속세 과세가액에서 공제해 주는 제도입니다.',
-      },
-      {
-        question: '승계 준비는 언제부터 시작해야 하나요?',
-        answer:
-          '최소 10년 이상의 장기적인 계획이 필요합니다. 주가가 낮을 때 사전 증여를 실행하고, 지배구조를 개편하며, 후계자를 육성하는 시간을 확보해야 합니다.',
-      },
-    ],
-  };
+  category: '승계전략',
+  author: '임재홍',
+  date: '2025-02-20',
+  readTime: '16분',
+  tags: [
+    '가업승계',
+    '상속세',
+    '증여세과세특례',
+    '경영권방어',
+    '지배구조개편',
+    '유류분반환청구',
+    '패밀리오피스',
+  ],
+  slug: 'mid-sized-company-succession-issues',
+  featured: true,
+  faq: [
+    {
+      question: '가업승계 시 가장 큰 리스크는 무엇인가요?',
+      answer:
+        '최대 60%에 달하는 상속세 부담과 준비 없는 승계로 인한 가족 간 경영권 분쟁이 가장 큰 리스크입니다.',
+    },
+    {
+      question: '가업상속공제란 무엇인가요?',
+      answer:
+        '일정 요건을 갖춘 중소·중견기업을 승계할 때, 가업상속재산 가액의 일부(최대 600억 원)를 상속세 과세가액에서 공제해 주는 제도입니다.',
+    },
+    {
+      question: '승계 준비는 언제부터 시작해야 하나요?',
+      answer:
+        '최소 10년 이상의 장기적인 계획이 필요합니다. 주가가 낮을 때 사전 증여를 실행하고, 지배구조를 개편하며, 후계자를 육성하는 시간을 확보해야 합니다.',
+    },
+  ],
+};

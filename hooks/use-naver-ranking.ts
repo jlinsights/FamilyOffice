@@ -5,12 +5,7 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-
-/**
- * 네이버 검색 순위 추적 React Hook
- * 실시간 키워드 순위 모니터링 및 관리
- */
+import { useCallback, useEffect, useState } from 'react';
 
 export interface KeywordRanking {
   id: string;

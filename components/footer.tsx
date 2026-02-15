@@ -1,27 +1,24 @@
 'use client';
 
 import {
-    Award,
-    Facebook,
-    Instagram,
-    Linkedin,
-    MapPin,
-    MessageSquare,
-    Phone,
-    Shield,
-    Sparkles,
-    TrendingUp,
-    Users,
-    Youtube
+  Award,
+  Facebook,
+  Instagram,
+  Linkedin,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Shield,
+  Sparkles,
+  TrendingUp,
+  Users,
+  Youtube,
 } from 'lucide-react';
-
 import { memo, useEffect, useState } from 'react';
-
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
-
 import { ClientScripts } from '@/components/analytics/client-scripts';
 
 // 커스텀 아이콘 컴포넌트들
@@ -408,13 +405,13 @@ export const Footer = memo(function Footer() {
                       패밀리오피스
                     </a>
                     <div className="mt-2">
-                        <Image 
-                            src="/images/kakao-qr.jpg" 
-                            alt="Kakao Open Chat QR Code" 
-                            width={100} 
-                            height={100} 
-                            className="rounded-lg border border-border/40"
-                        />
+                      <Image
+                        src="/images/kakao-qr.jpg"
+                        alt="Kakao Open Chat QR Code"
+                        width={100}
+                        height={100}
+                        className="rounded-lg border border-border/40"
+                      />
                     </div>
                   </div>
                 </div>

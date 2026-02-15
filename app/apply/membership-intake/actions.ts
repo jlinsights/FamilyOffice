@@ -3,12 +3,18 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { z } from 'zod';
-
-const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'membership-intakes.json');
-
 // Define the schema as used in the form (we can export this from a shared file later, but keeping it here for simplicity now)
 // Note: We need to match the form schema structure
-import { membershipIntakeSchema, type MembershipIntakeSubmission } from './schema';
+import {
+  membershipIntakeSchema,
+  type MembershipIntakeSubmission,
+} from './schema';
+
+const DATA_FILE_PATH = path.join(
+  process.cwd(),
+  'data',
+  'membership-intakes.json'
+);
 
 // Re-export type for convenience if needed, but usually better to import from schema
 export type { MembershipIntakeSubmission } from './schema';
@@ -22,10 +28,12 @@ async function ensureDataFile() {
   }
 }
 
-export async function submitMembershipIntake(data: z.infer<typeof membershipIntakeSchema>) {
+export async function submitMembershipIntake(
+  data: z.infer<typeof membershipIntakeSchema>
+) {
   try {
     await ensureDataFile();
-    
+
     const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
     const submissions: MembershipIntakeSubmission[] = JSON.parse(fileContent);
 
@@ -38,7 +46,11 @@ export async function submitMembershipIntake(data: z.infer<typeof membershipInta
 
     submissions.unshift(newSubmission); // Add to top
 
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(submissions, null, 2), 'utf-8');
+    await fs.writeFile(
+      DATA_FILE_PATH,
+      JSON.stringify(submissions, null, 2),
+      'utf-8'
+    );
 
     return { success: true };
   } catch (error) {

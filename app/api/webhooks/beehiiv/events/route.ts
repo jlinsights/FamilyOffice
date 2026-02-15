@@ -18,10 +18,9 @@
  * 5. Insert event log into email_events table
  * 6. Return success response
  */
-
-import { createClient } from '@/lib/supabase/server';
 import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@/lib/supabase/server';
 
 export const runtime = 'nodejs';
 
@@ -157,7 +156,9 @@ export async function POST(request: NextRequest) {
     const rawBody = await request.text();
 
     // Verify signature
-    if (!verifyWebhookSignature(signature, rawBody, webhookSecret || undefined)) {
+    if (
+      !verifyWebhookSignature(signature, rawBody, webhookSecret || undefined)
+    ) {
       console.error('Invalid webhook signature');
       return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
@@ -166,7 +167,14 @@ export async function POST(request: NextRequest) {
     const payload: BeehiivWebhookPayload = JSON.parse(rawBody);
 
     const { type, data } = payload;
-    const { subscription_id, email, email_id, clicked_url, bounce_type, timestamp } = data;
+    const {
+      subscription_id,
+      email,
+      email_id,
+      clicked_url,
+      bounce_type,
+      timestamp,
+    } = data;
 
     // Create Supabase client
     const supabase = await createClient();
@@ -179,7 +187,11 @@ export async function POST(request: NextRequest) {
       .single()) as any;
 
     if (leadError || !lead) {
-      console.error('Lead not found:', { subscription_id, email, error: leadError });
+      console.error('Lead not found:', {
+        subscription_id,
+        email,
+        error: leadError,
+      });
       // Return 200 to prevent Beehiiv from retrying
       return NextResponse.json({
         success: false,
@@ -197,8 +209,7 @@ export async function POST(request: NextRequest) {
 
     // Update leads table if there are changes
     if (Object.keys(leadUpdate).length > 0) {
-      const { error: updateError } = (await (supabase
-        .from('leads') as any)
+      const { error: updateError } = (await (supabase.from('leads') as any)
         .update({
           ...leadUpdate,
           updated_at: new Date().toISOString(),

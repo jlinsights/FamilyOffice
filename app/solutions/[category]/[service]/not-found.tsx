@@ -1,12 +1,9 @@
 import { ArrowLeft, Search } from 'lucide-react';
-
 import Link from 'next/link';
-
 import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { cn } from '@/lib/utils';
 
 export default function NotFound() {
   return (

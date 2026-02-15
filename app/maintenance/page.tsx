@@ -5,34 +5,17 @@
 
 'use client';
 
-import { cn } from '@/lib/utils';
 import { AlertTriangle, RefreshCw, Settings } from 'lucide-react';
-
 import Link from 'next/link';
-
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-
-/**
- * Maintenance Page
- * Shown when critical environment variables are missing or invalid
- */
-
-/**
- * Maintenance Page
- * Shown when critical environment variables are missing or invalid
- */
-
-/**
- * Maintenance Page
- * Shown when critical environment variables are missing or invalid
- */
+import { cn } from '@/lib/utils';
 
 export default function MaintenancePage() {
   return (

@@ -1,11 +1,8 @@
 'use client';
 
 import { Loader2 } from 'lucide-react';
-
 import Image from 'next/image';
-
 import { Button } from '@/components/ui/button';
-
 import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 import { useToast } from '@/hooks/use-toast';
 

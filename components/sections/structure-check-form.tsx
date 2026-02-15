@@ -1,9 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-
 import { Card, CardContent } from '@/components/ui/card';
-
 import { StructureCheckRequestForm } from '@/components/forms/structure-check-request-form';
 
 export const StructureCheckFormSection = memo(

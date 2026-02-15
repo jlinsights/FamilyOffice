@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'inheritance-tax-reform-analysis',
-    title: '상속세법 개정안 영향 분석',
-    image:
-      'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '최근 상속세법 개정안이 중견기업 가업승계에 미치는 영향을 상세히 분석합니다.',
-    content: `# 상속세법 개정안 영향 분석
+  id: 'inheritance-tax-reform-analysis',
+  title: '상속세법 개정안 영향 분석',
+  image:
+    'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '최근 상속세법 개정안이 중견기업 가업승계에 미치는 영향을 상세히 분석합니다.',
+  content: `# 상속세법 개정안 영향 분석
 
 2024년 발표된 상속세법 개정안은 중견기업의 가업승계에 상당한 영향을 미칠 것으로 예상됩니다. 주요 변경사항과 대응 전략을 살펴보겠습니다.
 
@@ -43,11 +43,11 @@ export const post: BlogPost = {
 ## 대응 전략
 
 개정안의 혜택을 최대한 활용하기 위해서는 사전 준비가 핵심입니다. 특히 가업승계 요건을 충족하기 위한 준비 작업이 중요합니다.`,
-    category: '세무·법무 인사이트',
-    author: '임재홍',
-    date: '2025-01-10',
-    readTime: '8분',
-    tags: ['상속세', '세법 개정', '가업승계', '세무 전략'],
-    slug: 'inheritance-tax-reform-analysis',
-    featured: false,
-  };
+  category: '세무·법무 인사이트',
+  author: '임재홍',
+  date: '2025-01-10',
+  readTime: '8분',
+  tags: ['상속세', '세법 개정', '가업승계', '세무 전략'],
+  slug: 'inheritance-tax-reform-analysis',
+  featured: false,
+};

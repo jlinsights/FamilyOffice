@@ -3,25 +3,25 @@
  * Clerk 인증과 연동하여 관리자 권한을 검증
  */
 import { auth, currentUser } from '@clerk/nextjs/server';
-
 import { logger } from '@/lib/logger';
 
 /**
- * 환경변수 또는 하드코딩된 관리자 이메일 목록 가져오기
+ * 환경변수에서 관리자 이메일 목록 가져오기
+ * ADMIN_EMAILS 환경변수를 쉼표로 구분하여 파싱
+ * 예: ADMIN_EMAILS=admin1@example.com,admin2@example.com
  */
-function getAdminEmails(): string[] {
-  // 환경변수에서 관리자 이메일 목록 가져오기 (쉼표로 구분)
+export function getAdminEmails(): string[] {
   const envAdminEmails =
-    process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || [];
+    process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()).filter(Boolean) || [];
 
-  // 기본 관리자 이메일 (환경변수가 없을 경우 폴백)
-  const defaultAdminEmails = [
-    'jhlim725@gmail.com',
-    // 필요시 추가 관리자 이메일
-  ];
+  if (envAdminEmails.length === 0) {
+    logger.warn('ADMIN_EMAILS 환경변수가 설정되지 않았습니다. 관리자 접근이 불가합니다.', {
+      component: 'admin-permissions',
+      function: 'getAdminEmails',
+    });
+  }
 
-  // 환경변수가 설정되어 있으면 우선 사용, 없으면 기본값 사용
-  return envAdminEmails.length > 0 ? envAdminEmails : defaultAdminEmails;
+  return envAdminEmails;
 }
 
 /**

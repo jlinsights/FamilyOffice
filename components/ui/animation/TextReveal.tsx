@@ -4,7 +4,6 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
-
 import { cn } from '@/lib/utils';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -45,12 +44,8 @@ export function TextReveal({
         ));
       case 'line':
       default:
-         // Simple simulation of line splitting (wrapping in span)
-        return (
-          <span className="inline-block">
-            {children}
-          </span>
-        );
+        // Simple simulation of line splitting (wrapping in span)
+        return <span className="inline-block">{children}</span>;
     }
   };
 
@@ -66,11 +61,11 @@ export function TextReveal({
         stagger: stagger,
         delay: delay,
         ease: 'power3.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 95%',
-            toggleActions: 'play none none none',
-          },
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 95%',
+          toggleActions: 'play none none none',
+        },
       });
     },
     { scope: containerRef }

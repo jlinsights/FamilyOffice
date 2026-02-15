@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,7 +6,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-
 import { AEODashboard } from '@/components/admin/aeo-dashboard';
 
 export default function AEOPage() {

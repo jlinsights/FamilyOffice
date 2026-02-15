@@ -3,7 +3,6 @@
  * Ensures regulatory compliance and proper audit logging
  */
 import { describe, test, expect, beforeEach, afterEach } from '@jest/globals';
-
 import { FINANCIAL_SCENARIOS } from '../fixtures/financial-scenarios';
 
 interface AuditLogEntry {
@@ -560,7 +559,9 @@ describe('Compliance and Audit Trail Testing', () => {
       expect(results[0]?.compliant).toBe(false);
       expect(results[0]?.violations).toEqual(
         expect.arrayContaining([
-          expect.stringMatching(/Large transaction not reported within 24 hours/)
+          expect.stringMatching(
+            /Large transaction not reported within 24 hours/
+          ),
         ])
       );
       expect(results[0]?.riskLevel).toBe('CRITICAL');
@@ -609,12 +610,12 @@ describe('Compliance and Audit Trail Testing', () => {
       expect(results[0]?.compliant).toBe(false);
       expect(results[0]?.violations).toEqual(
         expect.arrayContaining([
-          expect.stringMatching(/AAPL: 6\.00% ownership requires 13D filing/)
+          expect.stringMatching(/AAPL: 6\.00% ownership requires 13D filing/),
         ])
       );
       expect(results[0]?.recommendations).toEqual(
         expect.arrayContaining([
-          expect.stringMatching(/File Schedule 13D for AAPL within 10 days/)
+          expect.stringMatching(/File Schedule 13D for AAPL within 10 days/),
         ])
       );
     });
@@ -663,13 +664,11 @@ describe('Compliance and Audit Trail Testing', () => {
       expect(results[0]?.compliant).toBe(false);
       expect(results[0]?.violations).toEqual(
         expect.arrayContaining([
-          expect.stringMatching(/Potential structuring detected/)
+          expect.stringMatching(/Potential structuring detected/),
         ])
       );
       expect(results[0]?.recommendations).toEqual(
-        expect.arrayContaining([
-          'File Suspicious Activity Report (SAR)'
-        ])
+        expect.arrayContaining(['File Suspicious Activity Report (SAR)'])
       );
       expect(results[0]?.riskLevel).toBe('CRITICAL');
     });
@@ -694,7 +693,9 @@ describe('Compliance and Audit Trail Testing', () => {
           symbol: 'TSLA',
           shares: 100,
           price: 245 + i,
-          timestamp: new Date(Date.now() - (i + 12) * 60 * 60 * 1000).toISOString(),
+          timestamp: new Date(
+            Date.now() - (i + 12) * 60 * 60 * 1000
+          ).toISOString(),
           currency: 'USD',
         })),
       ];
@@ -766,12 +767,12 @@ describe('Compliance and Audit Trail Testing', () => {
         expect.arrayContaining([
           expect.stringMatching(
             /User data retained for \d+ days without activity/
-          )
+          ),
         ])
       );
       expect(results[0]?.recommendations).toEqual(
         expect.arrayContaining([
-          'Consider data anonymization or deletion for inactive users'
+          'Consider data anonymization or deletion for inactive users',
         ])
       );
     });

@@ -22,7 +22,9 @@ export interface ContentCalendar {
 export interface AutomationRule {
   id: string;
   name: string;
-  trigger: string | { type: string; schedule?: string; keywordThreshold?: number };
+  trigger:
+    | string
+    | { type: string; schedule?: string; keywordThreshold?: number };
   action: string;
   enabled?: boolean;
 }

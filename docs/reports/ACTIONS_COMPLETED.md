@@ -221,6 +221,7 @@ Test Coverage:       ✅ 80%+
    ```
 
 3. **Regenerate Types**
+
    ```bash
    npx supabase gen types typescript > types/supabase.ts
    ```

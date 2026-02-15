@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-import { enhancedSEOCache, aiCacheOperations } from '@/lib/seo/enhanced-seo-cache';
 import { getAllFeatureFlags } from '@/lib/feature-flags';
 import {
   performanceMonitor,
   seoPerformanceTracker,
 } from '@/lib/performance-monitor';
+import {
+  enhancedSEOCache,
+  aiCacheOperations,
+} from '@/lib/seo/enhanced-seo-cache';
 import { BundleSizeMonitor } from '@/lib/seo/seo-bundle-optimizer';
 import { SEOErrorHandler } from '@/lib/seo/seo-error-handling';
 

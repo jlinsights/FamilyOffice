@@ -10,9 +10,7 @@ import {
   AlertTriangle,
   LogOut,
 } from 'lucide-react';
-
 import React, { useState } from 'react';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,7 +21,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-
 import { cn } from '@/lib/utils';
 
 // 보안 상태 타입

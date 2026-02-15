@@ -240,12 +240,14 @@ export class BeehiivClient {
     hasSpouse: boolean;
     numChildren: number;
     source: string;
-    utm?: {
-      source?: string;
-      medium?: string;
-      campaign?: string;
-      content?: string;
-    } | undefined;
+    utm?:
+      | {
+          source?: string;
+          medium?: string;
+          campaign?: string;
+          content?: string;
+        }
+      | undefined;
   }): Promise<any> {
     try {
       // Determine asset size tag
@@ -283,16 +285,12 @@ export class BeehiivClient {
               num_children: data.numChildren.toString(),
               lead_source: data.source,
             },
-            tags: [
-              'calculator_user',
-              assetTag,
-              valueTier,
-              'week1_started',
-            ],
+            tags: ['calculator_user', assetTag, valueTier, 'week1_started'],
             utm_source: data.utm?.source || 'calculator',
             utm_medium: data.utm?.medium || 'website',
             utm_campaign: data.utm?.campaign || 'inheritance_tax',
-            referring_site: 'https://familyoffices.vip/calculators/inheritance-tax',
+            referring_site:
+              'https://familyoffices.vip/calculators/inheritance-tax',
           }),
         }
       );

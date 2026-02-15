@@ -1,6 +1,5 @@
 'use client';
 
-import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
 import {
   BarChart3,
   BookOpen,
@@ -14,24 +13,20 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-
 import { useEffect, useState } from 'react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-
 import { AnimatedCounter } from '@/components/animated-counter';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import InsightsFeed from '@/components/insights-feed';
+import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
 import { NewsletterRegistrationForm } from '@/components/newsletter-registration-form';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { insightsFAQ } from '@/lib/seo/insights-faq-data';
 
 export default function InsightsPage() {
@@ -101,28 +96,32 @@ export default function InsightsPage() {
           </div>
         </section>
 
-
-
         {/* Premium Report Lead Magnet */}
         <section className="py-8 bg-slate-50 dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-gradient-to-r from-slate-900 to-slate-800 dark:from-blue-950 dark:to-slate-900 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between shadow-lg relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-               
-               <div className="relative z-10 mb-6 md:mb-0 md:mr-8 text-center md:text-left">
-                 <Badge className="mb-3 bg-blue-500/20 text-blue-200 hover:bg-blue-500/30 border-blue-500/50">2025 Special Report</Badge>
-                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">2025년 자산관리 시장 전망 리포트</h3>
-                 <p className="text-blue-100/80 text-lg">VIP 고객을 위한 프라이빗 마켓 트렌드와 대응 전략을 담았습니다.</p>
-               </div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
 
-               <Button 
+              <div className="relative z-10 mb-6 md:mb-0 md:mr-8 text-center md:text-left">
+                <Badge className="mb-3 bg-blue-500/20 text-blue-200 hover:bg-blue-500/30 border-blue-500/50">
+                  2025 Special Report
+                </Badge>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  2025년 자산관리 시장 전망 리포트
+                </h3>
+                <p className="text-blue-100/80 text-lg">
+                  VIP 고객을 위한 프라이빗 마켓 트렌드와 대응 전략을 담았습니다.
+                </p>
+              </div>
+
+              <Button
                 onClick={() => setShowReport(true)}
-                size="lg" 
+                size="lg"
                 className="relative z-10 bg-white text-slate-900 hover:bg-blue-50 font-bold px-8 py-6 text-lg shadow-xl shrink-0"
-               >
-                 <FileText className="mr-2 h-5 w-5" />
-                 리포트 무료 다운로드
-               </Button>
+              >
+                <FileText className="mr-2 h-5 w-5" />
+                리포트 무료 다운로드
+              </Button>
             </div>
           </div>
         </section>
@@ -410,9 +409,7 @@ export default function InsightsPage() {
         </section>
       </main>
 
-
-
-      <LeadCaptureDialog 
+      <LeadCaptureDialog
         isOpen={showReport}
         onClose={() => setShowReport(false)}
         onSuccess={() => setShowReport(false)}

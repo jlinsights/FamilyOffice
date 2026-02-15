@@ -2,7 +2,6 @@
  * Integration tests for services module backward compatibility
  * Ensures old import paths continue to work after modularization
  */
-
 // Old import path (should still work through deprecation wrapper)
 import {
   SERVICE_CATEGORIES as OLD_SERVICE_CATEGORIES,
@@ -20,7 +19,6 @@ import {
   businessSuccession as oldBusinessSuccession,
   strategicPlanningMA as oldStrategicPlanning,
 } from '@/constants/services';
-
 // New import paths (from modular structure)
 import {
   SERVICE_CATEGORIES as NEW_SERVICE_CATEGORIES,
@@ -48,9 +46,7 @@ describe('Services Module Backward Compatibility', () => {
 
     it('should have same content as new path', () => {
       expect(OLD_SERVICE_CATEGORIES).toEqual(NEW_SERVICE_CATEGORIES);
-      expect(OLD_SERVICE_CATEGORIES.length).toBe(
-        NEW_SERVICE_CATEGORIES.length
-      );
+      expect(OLD_SERVICE_CATEGORIES.length).toBe(NEW_SERVICE_CATEGORIES.length);
     });
 
     it('should have same structure as new path', () => {
@@ -157,9 +153,7 @@ describe('Services Module Backward Compatibility', () => {
 
     it('corporate-insurance-risk should be identical', () => {
       expect(oldCorporateInsuranceRisk).toEqual(newCorporateInsuranceRisk);
-      expect(oldCorporateInsuranceRisk.id).toBe(
-        newCorporateInsuranceRisk.id
-      );
+      expect(oldCorporateInsuranceRisk.id).toBe(newCorporateInsuranceRisk.id);
     });
 
     it('corporate-structure-governance should be identical', () => {
@@ -230,7 +224,7 @@ describe('Services Module Backward Compatibility', () => {
   describe('Functional Equivalence', () => {
     it('should generate identical slugs for all services', () => {
       const paths = oldGetAllServicePaths();
-      paths.forEach((path) => {
+      paths.forEach(path => {
         const oldService = oldGetServiceBySlug(path.category, path.service);
         const newService = newGetServiceBySlug(path.category, path.service);
 
@@ -239,7 +233,7 @@ describe('Services Module Backward Compatibility', () => {
     });
 
     it('should return identical related services for all categories', () => {
-      OLD_SERVICE_CATEGORIES.forEach((category) => {
+      OLD_SERVICE_CATEGORIES.forEach(category => {
         const firstService = category.services[0];
         if (firstService) {
           const oldRelated = oldGetRelatedServices(

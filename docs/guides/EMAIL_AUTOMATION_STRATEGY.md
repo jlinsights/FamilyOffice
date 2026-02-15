@@ -5,12 +5,14 @@
 **목표**: 계산기를 통해 수집한 리드를 교육하고 무료 상담으로 전환
 
 **핵심 지표**:
+
 - 이메일 오픈율: 40-60% 목표
 - 클릭률(CTR): 15-25% 목표
 - 상담 신청 전환율: 5-10% 목표
 - 7일 완료율: 60-70% 목표
 
 **전환 퍼널**:
+
 ```
 계산기 완료 (100%)
     ↓
@@ -28,6 +30,7 @@ Day 7 상담 신청 (10%)
 ```
 
 **예상 결과**:
+
 - 월 리드: 500명
 - 상담 신청: 50명
 - 실제 상담: 35명
@@ -40,12 +43,14 @@ Day 7 상담 신청 (10%)
 ### 전체 구조 및 목적
 
 **AIDA 프레임워크 적용**:
+
 - **Day 1-2**: Attention (주목) - 문제 인식 강화
 - **Day 3-4**: Interest (흥미) - 해결책 제시
 - **Day 5-6**: Desire (욕구) - 가치 입증
 - **Day 7**: Action (행동) - 명확한 CTA
 
 **톤앤매너**:
+
 - 전문적이면서도 친근한 어조
 - 불안감 조성보다는 해결책 중심
 - 구체적 숫자와 사례 활용
@@ -58,6 +63,7 @@ Day 7 상담 신청 (10%)
 **발송 타이밍**: 이메일 수집 후 5분 이내
 
 **제목 옵션** (A/B 테스트):
+
 - A: "계산 결과 확인하셨나요? 절세 가이드 드립니다 📊"
 - B: "[이름]님, 상속세 [금액]원 절감 방법을 알려드릴게요"
 - C: "3가지만 실천하면 상속세 40% 줄일 수 있습니다"
@@ -118,10 +124,12 @@ Day 7: 🎁 전문가 무료 상담 특별 혜택
 ```
 
 **CTA 버튼**:
+
 - Primary: "내 계산 결과 다시 보기"
 - Secondary: "절세 사례 더 보기"
 
 **추적 이벤트**:
+
 - `email_day1_open`
 - `email_day1_click_calculator`
 - `email_day1_click_blog`
@@ -133,6 +141,7 @@ Day 7: 🎁 전문가 무료 상담 특별 혜택
 **발송 타이밍**: Day 1 발송 후 24시간
 
 **제목 옵션**:
+
 - A: "배우자 공제로 최대 30억까지 절세 가능합니다 💰"
 - B: "[이름]님, 이것만 알아도 10억 아낄 수 있어요"
 - C: "가장 강력한 절세 도구: 배우자 공제 완전 정복"
@@ -218,10 +227,12 @@ P.S. 계산기에서 배우자 공제 시뮬레이션을 다시 해보세요.
 ```
 
 **CTA 버튼**:
+
 - Primary: "배우자 공제 시뮬레이션하기"
 - Secondary: "2차 상속 대비 전략 보기"
 
 **추적 이벤트**:
+
 - `email_day2_open`
 - `email_day2_click_calculator`
 - `email_day2_reply`
@@ -233,6 +244,7 @@ P.S. 계산기에서 배우자 공제 시뮬레이션을 다시 해보세요.
 **발송 타이밍**: Day 2 발송 후 24시간
 
 **제목 옵션**:
+
 - A: "중소기업 대표님, 최대 600억까지 상속세 없습니다 🏢"
 - B: "가업승계로 상속세 93% 절감한 M기업 사례"
 - C: "[이름]님 회사도 가업승계 대상일 수 있습니다"
@@ -362,10 +374,12 @@ Phase 5 (승계 후):
 ```
 
 **CTA 버튼**:
+
 - Primary: "가업승계 자격 무료 진단"
 - Secondary: "완전 정복 가이드 보기"
 
 **추적 이벤트**:
+
 - `email_day3_open`
 - `email_day3_click_diagnosis`
 - `email_day3_download_pdf`
@@ -377,6 +391,7 @@ Phase 5 (승계 후):
 **발송 타이밍**: Day 3 발송 후 24시간
 
 **제목 옵션**:
+
 - A: "증여 vs 상속, 어떤 게 유리할까? (타이밍이 전부입니다) ⏰"
 - B: "지금 증여하면 20억 아낄 수 있습니다"
 - C: "[이름]님, 증여 타이밍을 놓치면 수억원 손해입니다"
@@ -521,10 +536,12 @@ Case 2) 생전증여 활용 (10년 × 2회):
 ```
 
 **CTA 버튼**:
+
 - Primary: "증여/상속 비교 계산하기"
 - Secondary: "완벽 가이드 다운로드"
 
 **추적 이벤트**:
+
 - `email_day4_open`
 - `email_day4_click_calculator`
 - `email_day4_reply`
@@ -536,6 +553,7 @@ Case 2) 생전증여 활용 (10년 × 2회):
 **발송 타이밍**: Day 4 발송 후 24시간
 
 **제목 옵션**:
+
 - A: "보험으로 상속세를 납부한다? 똑똑한 절세 전략 🛡️"
 - B: "상속세 납부 자금, 이렇게 준비하세요"
 - C: "[이름]님, 상속세 때문에 회사 팔 필요 없습니다"
@@ -691,10 +709,12 @@ Case 2) 생전증여 활용 (10년 × 2회):
 ```
 
 **CTA 버튼**:
+
 - Primary: "무료 보험 설계 상담"
 - Secondary: "완벽 가이드 보기"
 
 **추적 이벤트**:
+
 - `email_day5_open`
 - `email_day5_click_consultation`
 - `email_day5_download_guide`
@@ -706,6 +726,7 @@ Case 2) 생전증여 활용 (10년 × 2회):
 **발송 타이밍**: Day 5 발송 후 24시간
 
 **제목 옵션**:
+
 - A: "100억 자산가의 완벽한 절세 플랜 (전체 공개) 📋"
 - B: "[이름]님도 이렇게 플랜을 짜보세요 (템플릿 제공)"
 - C: "상속세 80% 절감, 어떻게 가능했을까?"
@@ -887,10 +908,12 @@ After (플랜 실행):
 ```
 
 **CTA 버튼**:
+
 - Primary: "무료 플랜 설계 신청" (강조)
 - Secondary: "템플릿 다운로드"
 
 **추적 이벤트**:
+
 - `email_day6_open`
 - `email_day6_click_consultation` (중요)
 - `email_day6_download_template`
@@ -902,6 +925,7 @@ After (플랜 실행):
 **발송 타이밍**: Day 6 발송 후 24시간
 
 **제목 옵션**:
+
 - A: "[마감 임박] [이름]님께 드리는 특별 혜택 🎁"
 - B: "7일 완주 축하합니다! 특별 선물을 준비했어요"
 - C: "지금 신청하면 500만원 상당 무료 혜택"
@@ -1126,11 +1150,13 @@ P.S.
 ```
 
 **CTA 버튼**:
+
 - Primary: "무료 상담 신청하기" (강조, 크게)
 - Secondary: "전화 상담 예약"
 - Tertiary: "친구 추천하기"
 
 **추적 이벤트**:
+
 - `email_day7_open`
 - `email_day7_click_consultation` (최종 전환)
 - `email_day7_click_phone`
@@ -1234,6 +1260,7 @@ Request Body:
 5. Automation ID 저장
 
 **커스텀 필드 설정**:
+
 - `계산_금액` (Number)
 - `예상_상속세` (Number)
 - `등록_경로` (Text)
@@ -1449,6 +1476,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 **Endpoint**: `POST /api/leads/capture`
 
 **Request Body**:
+
 ```typescript
 {
   email: string;
@@ -1474,6 +1502,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 ```
 
 **Response**:
+
 ```typescript
 {
   success: boolean;
@@ -1484,6 +1513,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 ```
 
 **플로우**:
+
 1. 이메일 유효성 검증
 2. Supabase leads 테이블에 저장 (중복 체크)
 3. Beehiiv API로 구독자 추가
@@ -1496,6 +1526,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 **Endpoint**: `POST /api/webhooks/beehiiv/events`
 
 **Request Body** (Beehiiv webhook):
+
 ```typescript
 {
   type: 'email.sent' | 'email.opened' | 'email.clicked' | 'email.bounced' | 'email.unsubscribed';
@@ -1510,6 +1541,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 ```
 
 **플로우**:
+
 1. Webhook 서명 검증
 2. subscription_id로 lead 조회
 3. 이벤트 타입에 따라 leads 테이블 업데이트
@@ -1521,6 +1553,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 **Endpoint**: `POST /api/consultation/request`
 
 **Request Body**:
+
 ```typescript
 {
   name: string;
@@ -1539,6 +1572,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 ```
 
 **Response**:
+
 ```typescript
 {
   success: boolean;
@@ -1549,6 +1583,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 ```
 
 **플로우**:
+
 1. 입력 유효성 검증
 2. consultation_requests 테이블에 저장
 3. 기존 리드 있으면 연결 및 업데이트
@@ -1561,6 +1596,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 **Endpoint**: `GET /api/admin/leads/analytics`
 
 **Query Parameters**:
+
 ```typescript
 {
   startDate?: string; // ISO date
@@ -1571,6 +1607,7 @@ CREATE POLICY "Service role access" ON consultation_requests
 ```
 
 **Response**:
+
 ```typescript
 {
   summary: {
@@ -1580,7 +1617,7 @@ CREATE POLICY "Service role access" ON consultation_requests
     emailEngagementRate: number; // 평균 오픈율
     consultationRequestRate: number; // 상담 신청률
     conversionRate: number; // 계약 전환율
-  };
+  }
   funnel: {
     totalLeads: number;
     emailDay1Opened: number;
@@ -1589,7 +1626,7 @@ CREATE POLICY "Service role access" ON consultation_requests
     consultationRequested: number;
     consultationCompleted: number;
     convertedToClient: number;
-  };
+  }
   topSources: Array<{
     source: string;
     count: number;
@@ -1698,17 +1735,18 @@ Day 7 이메일
 
 **Day별 목표**:
 
-| Day | 발송율 | 오픈율 | 클릭율 | 목표 |
-|-----|--------|--------|--------|------|
-| 1 | 100% | 60% | 10% | 환영 및 관계 구축 |
-| 2 | 95% | 55% | 15% | 교육 및 관심 유발 |
-| 3 | 90% | 50% | 20% | 가치 제공 |
-| 4 | 85% | 45% | 18% | 심화 교육 |
-| 5 | 80% | 40% | 15% | 추가 가치 |
-| 6 | 75% | 38% | 22% | 상담 준비 |
-| 7 | 70% | 50% | 30% | **최종 전환** |
+| Day | 발송율 | 오픈율 | 클릭율 | 목표              |
+| --- | ------ | ------ | ------ | ----------------- |
+| 1   | 100%   | 60%    | 10%    | 환영 및 관계 구축 |
+| 2   | 95%    | 55%    | 15%    | 교육 및 관심 유발 |
+| 3   | 90%    | 50%    | 20%    | 가치 제공         |
+| 4   | 85%    | 45%    | 18%    | 심화 교육         |
+| 5   | 80%    | 40%    | 15%    | 추가 가치         |
+| 6   | 75%    | 38%    | 22%    | 상담 준비         |
+| 7   | 70%    | 50%    | 30%    | **최종 전환**     |
 
 **전체 퍼널 목표**:
+
 ```
 리드 수집: 500명/월
     ↓ 30% (이메일 수집)
@@ -1734,15 +1772,18 @@ Day 7 도달: 22명
 ### 이메일별 핵심 지표
 
 **Day 1**:
+
 - 오픈율 60% 목표
 - 계산 결과 재확인 클릭 10%
 
 **Day 3**:
+
 - 오픈율 50% 목표
 - 블로그 클릭 15%
 - 무료 진단 신청 5%
 
 **Day 7**:
+
 - 오픈율 50% 목표 (재관심 유도)
 - 상담 신청 클릭 30% (핵심)
 - 실제 상담 신청 10%
@@ -1754,26 +1795,31 @@ Day 7 도달: 22명
 ### 제목 테스트
 
 **Day 1 제목**:
+
 - A: "계산 결과 확인하셨나요? 절세 가이드 드립니다"
 - B: "[이름]님, 상속세 [금액]원 절감 방법을 알려드릴게요"
 
 **Day 7 제목**:
+
 - A: "[마감 임박] [이름]님께 드리는 특별 혜택"
 - B: "7일 완주 축하합니다! 특별 선물을 준비했어요"
 
 ### CTA 버튼 테스트
 
 **Day 3 CTA**:
+
 - A: "가업승계 자격 무료 진단"
 - B: "우리 회사 대상인지 확인하기"
 
 **Day 7 CTA**:
+
 - A: "무료 상담 신청하기"
 - B: "전문가와 30분 통화하기"
 
 ### 발송 타이밍 테스트
 
 **Day 2-6**:
+
 - Group A: 오전 10시 발송
 - Group B: 오후 2시 발송
 - Group C: 저녁 8시 발송
@@ -1793,6 +1839,7 @@ Day 7 도달: 22명
 **문제**: 이메일이 스팸으로 분류될 위험
 
 **대응**:
+
 - SPF, DKIM, DMARC 설정 필수
 - Beehiiv는 기본 설정 제공 (신뢰도 높음)
 - 스팸 단어 피하기 ("무료", "지금", "클릭" 과다 사용 자제)
@@ -1802,12 +1849,14 @@ Day 7 도달: 22명
 ### 법적 컴플라이언스
 
 **개인정보보호법**:
+
 - 이메일 수집 시 동의 명시
 - 개인정보 처리방침 링크
 - 수신거부 즉시 처리
 - 개인정보 암호화 저장 (Supabase RLS)
 
 **전자상거래법**:
+
 - 광고성 정보 표시 "[광고]" (해당 시)
 - 발신자 정보 명시
 - 수신거부 방법 안내
@@ -1817,6 +1866,7 @@ Day 7 도달: 22명
 **문제**: 7일 연속 이메일로 인한 피로도
 
 **대응**:
+
 - 수신거부 시 즉시 중단
 - 가치 중심 콘텐츠 (판매보다 교육)
 - 선택적 건너뛰기 옵션
@@ -1827,24 +1877,28 @@ Day 7 도달: 22명
 ## 구현 우선순위
 
 ### Phase 1 (Week 5): 기반 구축
+
 - [ ] Supabase 스키마 생성
 - [ ] Beehiiv 계정 설정 및 자동화 생성
 - [ ] 7일 이메일 콘텐츠 작성 및 Beehiiv 업로드
 - [ ] 기본 API 엔드포인트 구현 (리드 수집)
 
 ### Phase 2 (Week 6): 연동 및 테스트
+
 - [ ] Beehiiv API 연동 완료
 - [ ] 웹훅 엔드포인트 구현
 - [ ] 계산기 페이지 이메일 수집 폼 개선
 - [ ] 내부 테스트 (10명 샘플)
 
 ### Phase 3 (Week 7): 모니터링 시스템
+
 - [ ] 관리자 대시보드 구축
 - [ ] 실시간 알림 시스템 (상담 신청 시)
 - [ ] GA4 이벤트 트래킹 강화
 - [ ] A/B 테스트 설정
 
 ### Phase 4 (Week 8): 최적화 및 런칭
+
 - [ ] 이메일 콘텐츠 최종 검토
 - [ ] 오픈율/클릭률 모니터링 대시보드
 - [ ] 실제 리드로 베타 테스트
@@ -1857,14 +1911,17 @@ Day 7 도달: 22명
 ### 비용 구조
 
 **Beehiiv 요금**:
+
 - Scale 플랜: $42/월 (2,500 구독자, 자동화 무제한)
 - 예상 구독자: 500명/월 → 충분
 
 **Supabase**:
+
 - Pro 플랜: $25/월 (100,000 rows)
 - 예상 사용: 월 500 리드 + 이벤트 로그
 
 **개발 비용**:
+
 - API 개발: 40시간 × $50/시간 = $2,000
 - 이메일 작성: 20시간 × $30/시간 = $600
 - 테스트/최적화: 10시간 × $50/시간 = $500
@@ -1875,6 +1932,7 @@ Day 7 도달: 22명
 ### ROI 계산
 
 **보수적 시나리오**:
+
 - 월 리드: 500명
 - 상담 신청: 7명 (1.4%)
 - 계약: 2명 (0.4%)
@@ -1884,6 +1942,7 @@ Day 7 도달: 22명
 - **ROI**: 3,689%
 
 **낙관적 시나리오**:
+
 - 월 리드: 1,000명
 - 상담 신청: 30명 (3%)
 - 계약: 12명 (1.2%)
@@ -1897,6 +1956,7 @@ Day 7 도달: 22명
 ## 체크리스트
 
 ### Week 5 체크리스트
+
 - [ ] Beehiiv 계정 생성 및 publication 설정
 - [ ] API 키 발급 및 환경변수 설정
 - [ ] Supabase 스키마 생성 (leads, email_events, consultation_requests)
@@ -1905,6 +1965,7 @@ Day 7 도달: 22명
 - [ ] 자동화 시퀀스 생성 및 테스트
 
 ### Week 6 체크리스트
+
 - [ ] `/api/leads/capture` 엔드포인트 구현
 - [ ] `/api/webhooks/beehiiv/events` 웹훅 구현
 - [ ] Beehiiv API 연동 테스트 (구독자 추가)
@@ -1912,6 +1973,7 @@ Day 7 도달: 22명
 - [ ] 내부 테스트 10명 실행 및 피드백 수집
 
 ### Week 7 체크리스트
+
 - [ ] 관리자 대시보드 `/admin/leads` 구현
 - [ ] `/api/consultation/request` 엔드포인트 구현
 - [ ] 실시간 알림 시스템 (이메일/Slack)
@@ -1919,6 +1981,7 @@ Day 7 도달: 22명
 - [ ] A/B 테스트 프레임워크 구축
 
 ### Week 8 체크리스트
+
 - [ ] 이메일 콘텐츠 세무사 검토 완료
 - [ ] 전체 시스템 통합 테스트
 - [ ] 모니터링 대시보드 최종 점검
@@ -1930,18 +1993,21 @@ Day 7 도달: 22명
 ## 성공 기준
 
 ### 단기 목표 (1개월)
+
 - ✅ 월 리드 500명 수집
 - ✅ 평균 이메일 오픈율 40%+
 - ✅ Day 7 상담 신청 클릭률 25%+
 - ✅ 상담 신청 월 10건+
 
 ### 중기 목표 (3개월)
+
 - ✅ 월 리드 1,000명
 - ✅ 이메일 시퀀스 완료율 60%+
 - ✅ 상담 신청 월 30건+
 - ✅ 신규 계약 월 10건+
 
 ### 장기 목표 (6개월)
+
 - ✅ 누적 리드 5,000명
 - ✅ 이메일 리스트 건강도 유지 (오픈율 35%+)
 - ✅ 상담-계약 전환율 30%+

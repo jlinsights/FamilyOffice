@@ -11,11 +11,8 @@ import {
   X,
   Settings,
 } from 'lucide-react';
-
 import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -30,7 +27,6 @@ import { Input } from '@/components/ui/input';
 import { KakaoSyncPanel } from '@/components/ui/kakao-sync-panel';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-
 import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 import { useToast } from '@/hooks/use-toast';
 

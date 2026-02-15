@@ -5,7 +5,6 @@ import {
   Gauge,
   collectDefaultMetrics,
 } from 'prom-client';
-
 import { logger } from '../logging/logger';
 
 // 기본 메트릭 수집 활성화

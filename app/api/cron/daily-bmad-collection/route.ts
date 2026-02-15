@@ -13,7 +13,6 @@
  * 인증: CRON_SECRET 환경 변수로 보호
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { collectDailyRankings } from '@/scripts/collect-serper-rankings';
 
 export async function GET(request: NextRequest) {

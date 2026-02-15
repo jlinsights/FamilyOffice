@@ -2,9 +2,7 @@
 
 import { CheckCircle, Loader2, Mail } from 'lucide-react';
 import { toast } from 'sonner';
-
 import { useState } from 'react';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 

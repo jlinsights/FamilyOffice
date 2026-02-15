@@ -1,12 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
-
 import {
-  leadScoringSystem,
-  LeadStatus,
-  LeadSegment,
-  BMADStage,
-  ActivityType,
+    ActivityType,
+    BMADStage,
+    LeadSegment,
+    LeadStatus,
+    leadScoringSystem,
 } from '@/lib/lead-scoring-system';
+import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * 리드 스코어링 시스템 API 엔드포인트
@@ -27,7 +26,7 @@ export async function GET(request: NextRequest) {
       case 'get-lead': {
         // 리드 조회
         if (leadId) {
-          const lead = leadScoringSystem.getLead(leadId);
+          const lead = await leadScoringSystem.getLead(leadId);
           if (!lead) {
             return NextResponse.json(
               {
@@ -45,7 +44,7 @@ export async function GET(request: NextRequest) {
         }
 
         if (email) {
-          const lead = leadScoringSystem.findLeadByEmail(email);
+          const lead = await leadScoringSystem.findLeadByEmail(email);
           if (!lead) {
             return NextResponse.json(
               {
@@ -83,7 +82,7 @@ export async function GET(request: NextRequest) {
           );
         }
 
-        const leads = leadScoringSystem.getLeadsByStatus(status);
+        const leads = await leadScoringSystem.getLeadsByStatus(status);
 
         return NextResponse.json({
           success: true,
@@ -107,7 +106,7 @@ export async function GET(request: NextRequest) {
           );
         }
 
-        const leads = leadScoringSystem.getLeadsBySegment(segment);
+        const leads = await leadScoringSystem.getLeadsBySegment(segment);
 
         return NextResponse.json({
           success: true,
@@ -131,7 +130,7 @@ export async function GET(request: NextRequest) {
           );
         }
 
-        const leads = leadScoringSystem.getLeadsByBMADStage(bmadStage);
+        const leads = await leadScoringSystem.getLeadsByBMADStage(bmadStage);
 
         return NextResponse.json({
           success: true,
@@ -148,7 +147,7 @@ export async function GET(request: NextRequest) {
         const minScore = parseInt(searchParams.get('minScore') || '0');
         const maxScore = parseInt(searchParams.get('maxScore') || '100');
 
-        const leads = leadScoringSystem.getLeadsByScoreRange(
+        const leads = await leadScoringSystem.getLeadsByScoreRange(
           minScore,
           maxScore
         );
@@ -169,7 +168,7 @@ export async function GET(request: NextRequest) {
         const minProbability = parseInt(
           searchParams.get('minProbability') || '70'
         );
-        const leads = leadScoringSystem.getHotLeads(minProbability);
+        const leads = await leadScoringSystem.getHotLeads(minProbability);
 
         return NextResponse.json({
           success: true,
@@ -183,7 +182,7 @@ export async function GET(request: NextRequest) {
 
       case 'get-stats': {
         // 통계 조회
-        const stats = leadScoringSystem.getStats();
+        const stats = await leadScoringSystem.getStats();
 
         return NextResponse.json({
           success: true,
@@ -193,7 +192,7 @@ export async function GET(request: NextRequest) {
 
       case 'dashboard-data': {
         // 대시보드용 종합 데이터
-        const data = leadScoringSystem.getDashboardData();
+        const data = await leadScoringSystem.getDashboardData();
 
         return NextResponse.json({
           success: true,
@@ -259,7 +258,7 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const lead = leadScoringSystem.createOrUpdateLead({
+        const lead = await leadScoringSystem.createOrUpdateLead({
           email,
           name,
           company,
@@ -289,7 +288,7 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const lead = leadScoringSystem.recordActivity(
+        const lead = await leadScoringSystem.recordActivity(
           leadId,
           activityType as ActivityType,
           details
@@ -317,13 +316,14 @@ export async function POST(request: NextRequest) {
         }
 
         // 리드 찾기 또는 생성
-        let lead = leadScoringSystem.findLeadByEmail(email);
+        let lead = await leadScoringSystem.findLeadByEmail(email);
         if (!lead) {
-          lead = leadScoringSystem.createOrUpdateLead({ email });
+          lead = await leadScoringSystem.createOrUpdateLead({ email });
         }
 
         // 활동 기록
-        lead = leadScoringSystem.recordActivity(
+        // 활동 기록
+        lead = await leadScoringSystem.recordActivity(
           lead.id,
           activityType as ActivityType,
           details
@@ -359,11 +359,11 @@ export async function POST(request: NextRequest) {
 
             let lead;
             if (leadId) {
-              lead = leadScoringSystem.getLead(leadId);
+              lead = await leadScoringSystem.getLead(leadId);
             } else if (email) {
-              lead = leadScoringSystem.findLeadByEmail(email);
+              lead = await leadScoringSystem.findLeadByEmail(email);
               if (!lead) {
-                lead = leadScoringSystem.createOrUpdateLead({ email });
+                lead = await leadScoringSystem.createOrUpdateLead({ email });
               }
             }
 
@@ -376,7 +376,7 @@ export async function POST(request: NextRequest) {
               continue;
             }
 
-            leadScoringSystem.recordActivity(
+            await leadScoringSystem.recordActivity(
               lead.id,
               activityType as ActivityType,
               details

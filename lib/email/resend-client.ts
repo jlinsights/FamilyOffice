@@ -3,9 +3,9 @@
  * email.familyoffices.vip 도메인 통합
  */
 import { Resend } from 'resend';
-
 import { logger } from '@/lib/debug-logger';
 import { env } from '@/lib/env';
+import { getAdminEmails } from '@/lib/admin-permissions';
 
 // Resend 클라이언트 초기화 (조건부)
 const apiKey = (env as any).RESEND_API_KEY || process.env.RESEND_API_KEY;
@@ -227,7 +227,11 @@ export async function sendSystemNotification(
   message: string,
   severity: 'info' | 'warning' | 'error' = 'info'
 ): Promise<EmailResult> {
-  const adminEmail = 'jhlim725@gmail.com';
+  const adminEmails = getAdminEmails();
+  if (adminEmails.length === 0) {
+    return { success: false, error: 'No admin emails configured' };
+  }
+  const adminEmail = adminEmails[0] as string;
   const severityColors = {
     info: '#3b82f6',
     warning: '#f59e0b',

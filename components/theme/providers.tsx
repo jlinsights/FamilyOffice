@@ -1,7 +1,6 @@
 'use client';
 
 import React, { memo, useEffect, useState } from 'react';
-
 import { ThemeProvider } from '@/components/theme/theme-provider';
 
 export const Providers = memo(function Providers({

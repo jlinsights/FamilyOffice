@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { safeInsertMany } from '@/lib/supabase/helpers';
 import { createClient } from '@/lib/supabase/server';
-
 import { Database } from '@/types/supabase';
 
 type PerformanceMetricInsert =

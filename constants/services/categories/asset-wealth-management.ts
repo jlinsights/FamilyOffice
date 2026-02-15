@@ -73,8 +73,7 @@ export const assetWealthManagement: ServiceCategory = {
     },
     {
       title: '법인종합재무 컨설팅',
-      description:
-        '법인의 재무구조 최적화 및 세무·회계·자금 통합 관리 컨설팅',
+      description: '법인의 재무구조 최적화 및 세무·회계·자금 통합 관리 컨설팅',
       features: [
         '재무제표 분석 및 재무구조 진단',
         '자금 운용 최적화 및 현금흐름 관리',
@@ -134,8 +133,7 @@ export const assetWealthManagement: ServiceCategory = {
     },
     {
       title: '자기주식 컨설팅',
-      description:
-        '자기주식 취득 및 처분을 통한 자본 구조 최적화 및 세무 전략',
+      description: '자기주식 취득 및 처분을 통한 자본 구조 최적화 및 세무 전략',
       features: [
         '자기주식 취득 목적 및 방법 컨설팅 (소각, 재매각, 스톡옵션)',
         '자기주식 취득·처분 시 세무 리스크 분석',
@@ -317,8 +315,7 @@ export const assetWealthManagement: ServiceCategory = {
     },
     {
       title: '부유층 자산관리 컨설팅',
-      description:
-        '30억~100억 원 부유층을 위한 맞춤형 자산관리 및 세무 전략',
+      description: '30억~100억 원 부유층을 위한 맞춤형 자산관리 및 세무 전략',
       features: [
         '자산 포트폴리오 분석 및 리밸런싱',
         '세무 최적화 및 절세 전략 수립',

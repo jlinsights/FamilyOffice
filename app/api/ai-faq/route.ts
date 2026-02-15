@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
-    AI_FAQ_OPTIMIZATIONS,
-    BMAD_FAQ_CATEGORIES,
-    aiOptimizedFAQSystem,
-    faqSearchEngine,
+  AI_FAQ_OPTIMIZATIONS,
+  BMAD_FAQ_CATEGORIES,
+  aiOptimizedFAQSystem,
+  faqSearchEngine,
 } from '@/lib/ai/ai-faq-expansion';
 
 /**

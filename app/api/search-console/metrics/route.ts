@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { requireAdminPermissions } from '@/lib/admin-permissions';
 import { GoogleSearchConsoleAPI } from '@/lib/google/search-console';
 

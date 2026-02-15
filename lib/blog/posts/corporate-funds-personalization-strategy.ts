@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'corporate-funds-personalization-strategy',
-    title: "법인 자금의 개인화, '가지급금'과 '이익잉여금'의 늪에서 탈출하는 법",
-    image:
-      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '회사는 부자인데 대표님은 가난하다? 법인에 묶인 자금을 가장 안전하고 효율적으로 개인화하는 4가지 핵심 전략(배당, 급여, 퇴직금, 자사주)을 공개합니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'corporate-funds-personalization-strategy',
+  title: "법인 자금의 개인화, '가지급금'과 '이익잉여금'의 늪에서 탈출하는 법",
+  image:
+    'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '회사는 부자인데 대표님은 가난하다? 법인에 묶인 자금을 가장 안전하고 효율적으로 개인화하는 4가지 핵심 전략(배당, 급여, 퇴직금, 자사주)을 공개합니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">법인 자금의 개인화,<br/>'가지급금'과 '이익잉여금'의 늪에서 탈출하는 법</h1>
     <p className="text-muted-foreground text-lg font-normal leading-relaxed">회사는 부자인데, 왜 대표님은 현금이 없으십니까?<br/>법인의 성과를 가장 안전하게 내 것으로 만드는 4가지 출구 전략</p>
@@ -134,36 +134,36 @@ export const post: BlogPost = {
     </p>
 </div>
 </div>`,
-    category: '법인자산',
-    author: '임재홍',
-    date: '2025-12-04',
-    readTime: '13분',
-    tags: [
-      '가지급금',
-      '이익잉여금',
-      '배당전략',
-      '자사주매입',
-      '이익소각',
-      '법인자금개인화',
-      'CEO플랜',
-    ],
-    slug: 'corporate-funds-personalization-strategy',
-    featured: true,
-    faq: [
-      {
-        question: '가지급금을 가장 빨리 해결하는 방법은 무엇인가요?',
-        answer:
-          '대표이사 개인 자산으로 상환하는 것이 원칙이나, 자금이 부족하다면 자사주 매입(이익 소각)이나 급여/상여 인상, 퇴직금 중간 정산(요건 충족 시) 등을 통해 마련한 자금으로 상환할 수 있습니다.',
-      },
-      {
-        question: '이익 소각 시 주의할 점은 무엇인가요?',
-        answer:
-          '주식 시가 평가의 적정성, 상법상 절차 준수(주주총회 등), 그리고 자금 출처 소명 등이 중요합니다. 국세청은 이를 실질적인 배당으로 보아 과세할 수 있으므로 전문가의 도움을 받아 정교하게 실행해야 합니다.',
-      },
-      {
-        question: '차등 배당은 증여세 문제가 없나요?',
-        answer:
-          '과거에는 소득세와 증여세 중 큰 금액만 과세되었으나, 세법 개정으로 초과 배당 금액에 대한 소득세와 증여세가 비교 과세되거나 합산 과세될 수 있으므로 실익을 따져봐야 합니다.',
-      },
-    ],
-  };
+  category: '법인자산',
+  author: '임재홍',
+  date: '2025-12-04',
+  readTime: '13분',
+  tags: [
+    '가지급금',
+    '이익잉여금',
+    '배당전략',
+    '자사주매입',
+    '이익소각',
+    '법인자금개인화',
+    'CEO플랜',
+  ],
+  slug: 'corporate-funds-personalization-strategy',
+  featured: true,
+  faq: [
+    {
+      question: '가지급금을 가장 빨리 해결하는 방법은 무엇인가요?',
+      answer:
+        '대표이사 개인 자산으로 상환하는 것이 원칙이나, 자금이 부족하다면 자사주 매입(이익 소각)이나 급여/상여 인상, 퇴직금 중간 정산(요건 충족 시) 등을 통해 마련한 자금으로 상환할 수 있습니다.',
+    },
+    {
+      question: '이익 소각 시 주의할 점은 무엇인가요?',
+      answer:
+        '주식 시가 평가의 적정성, 상법상 절차 준수(주주총회 등), 그리고 자금 출처 소명 등이 중요합니다. 국세청은 이를 실질적인 배당으로 보아 과세할 수 있으므로 전문가의 도움을 받아 정교하게 실행해야 합니다.',
+    },
+    {
+      question: '차등 배당은 증여세 문제가 없나요?',
+      answer:
+        '과거에는 소득세와 증여세 중 큰 금액만 과세되었으나, 세법 개정으로 초과 배당 금액에 대한 소득세와 증여세가 비교 과세되거나 합산 과세될 수 있으므로 실익을 따져봐야 합니다.',
+    },
+  ],
+};

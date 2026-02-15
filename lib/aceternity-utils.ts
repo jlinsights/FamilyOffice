@@ -1,6 +1,5 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-
 import React from 'react';
 
 // Enhanced cn function for Aceternity UI

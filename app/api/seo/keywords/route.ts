@@ -3,7 +3,6 @@
  * 네이버 검색 순위 추적 및 성과 모니터링
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { SEOMetrics } from '@/lib/analytics/seo-tracker';
 
 export async function GET(request: NextRequest) {

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-
 import Script from 'next/script';
 
 // Kakao Pixel 글로벌 타입 정의

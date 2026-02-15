@@ -1,23 +1,20 @@
 'use client';
 
 import {
-    ArrowRight,
-    Calendar,
-    CheckCircle,
-    Clock,
-    CreditCard,
-    Gift,
-    Mail,
-    Phone,
-    Star,
-    UserPlus,
-    Users,
+  ArrowRight,
+  Calendar,
+  CheckCircle,
+  Clock,
+  CreditCard,
+  Gift,
+  Mail,
+  Phone,
+  Star,
+  UserPlus,
+  Users,
 } from 'lucide-react';
-
 import { useEffect } from 'react';
-
 import dynamic from 'next/dynamic';
-
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
@@ -221,7 +218,10 @@ export default function SeminarRegistrationSection() {
                           <a
                             href={method.href}
                             className={cn(
-                              buttonVariants({ variant: 'outline', size: 'sm' }),
+                              buttonVariants({
+                                variant: 'outline',
+                                size: 'sm',
+                              }),
                               'group/btn dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-700'
                             )}
                             {...(method.href.startsWith('http')

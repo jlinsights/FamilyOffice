@@ -8,17 +8,12 @@ import {
   ArrowRight,
   BookOpen,
 } from 'lucide-react';
-
 import { useMemo } from 'react';
-
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-
 import { blogPosts } from '@/lib/blog-data';
-
 import type { BlogPost } from '@/types/blog';
 
 /**

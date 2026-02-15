@@ -1,11 +1,8 @@
 'use client';
 
 import { Calendar } from 'lucide-react';
-
 import { useState } from 'react';
-
 import { Button } from '@/components/ui/button';
-
 import { CalComPopup } from './cal-com-popup';
 
 export function CalComFloatingSimple() {

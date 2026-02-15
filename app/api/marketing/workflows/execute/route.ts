@@ -4,7 +4,6 @@
  */
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-
 import { getWorkflowEngine } from '@/lib/marketing/workflow-engine';
 import { globalRateLimit } from '@/lib/rate-limit';
 

@@ -1,10 +1,8 @@
 'use client';
 
 import { ArrowRight, Calendar, Clock, Sparkles } from 'lucide-react';
-
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -13,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-
 import { getRecommendations } from '@/lib/content-recommendations';
 import { RSSItem } from '@/lib/rss-aggregator';
 

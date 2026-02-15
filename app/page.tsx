@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-
 import { Header } from '@/components/header';
 import { HeroSection } from '@/components/sections/hero-section';
 import {
   OrganizationStructuredData,
   WebsiteStructuredData,
 } from '@/components/seo/structured-data';
-
 import {
   generateHomeMetadata,
   PAGE_STRUCTURED_DATA,

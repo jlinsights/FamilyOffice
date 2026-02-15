@@ -1,48 +1,42 @@
 'use client';
 
 import { format } from 'date-fns';
-import {
-    CheckCircle2,
-    Clock,
-    Phone,
-    Search
-} from 'lucide-react';
+import { CheckCircle2, Clock, Phone, Search } from 'lucide-react';
 import { useState } from 'react';
-
-import { MembershipIntakeSubmission } from '@/app/apply/membership-intake/schema';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table';
+import { MembershipIntakeSubmission } from '@/app/apply/membership-intake/schema';
 
 interface MembershipIntakeDashboardProps {
   initialSubmissions: MembershipIntakeSubmission[];
@@ -51,9 +45,8 @@ interface MembershipIntakeDashboardProps {
 export function MembershipIntakeDashboard({
   initialSubmissions,
 }: MembershipIntakeDashboardProps) {
-  const [submissions, setSubmissions] = useState<MembershipIntakeSubmission[]>(
-    initialSubmissions
-  );
+  const [submissions, setSubmissions] =
+    useState<MembershipIntakeSubmission[]>(initialSubmissions);
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSubmission, setSelectedSubmission] =
@@ -222,9 +215,7 @@ export function MembershipIntakeDashboard({
                 ) : (
                   filteredSubmissions.map(submission => (
                     <TableRow key={submission.id}>
-                      <TableCell>
-                        {getStatusBadge(submission.status)}
-                      </TableCell>
+                      <TableCell>{getStatusBadge(submission.status)}</TableCell>
                       <TableCell className="font-medium">
                         {submission.name}
                         <div className="text-xs text-muted-foreground">
@@ -240,9 +231,14 @@ export function MembershipIntakeDashboard({
                         )}
                       </TableCell>
                       <TableCell>{formatBudget(submission.budget)}</TableCell>
-                      <TableCell>{formatFrequency(submission.frequency)}</TableCell>
                       <TableCell>
-                        {format(new Date(submission.submittedAt), 'MM.dd HH:mm')}
+                        {formatFrequency(submission.frequency)}
+                      </TableCell>
+                      <TableCell>
+                        {format(
+                          new Date(submission.submittedAt),
+                          'MM.dd HH:mm'
+                        )}
                       </TableCell>
                       <TableCell className="text-right">
                         <Dialog>
@@ -267,40 +263,64 @@ export function MembershipIntakeDashboard({
                                 {/* Basic Info */}
                                 <div className="grid md:grid-cols-2 gap-4 border p-4 rounded-lg">
                                   <div>
-                                    <h4 className="font-semibold mb-2">기본 정보</h4>
+                                    <h4 className="font-semibold mb-2">
+                                      기본 정보
+                                    </h4>
                                     <dl className="space-y-1 text-sm">
                                       <div className="flex justify-between">
-                                        <dt className="text-muted-foreground">이름</dt>
+                                        <dt className="text-muted-foreground">
+                                          이름
+                                        </dt>
                                         <dd>{selectedSubmission.name}</dd>
                                       </div>
                                       <div className="flex justify-between">
-                                        <dt className="text-muted-foreground">소속</dt>
-                                        <dd>{selectedSubmission.affiliation}</dd>
+                                        <dt className="text-muted-foreground">
+                                          소속
+                                        </dt>
+                                        <dd>
+                                          {selectedSubmission.affiliation}
+                                        </dd>
                                       </div>
                                       <div className="flex justify-between">
-                                        <dt className="text-muted-foreground">직함</dt>
-                                        <dd>{selectedSubmission.title || '-'}</dd>
+                                        <dt className="text-muted-foreground">
+                                          직함
+                                        </dt>
+                                        <dd>
+                                          {selectedSubmission.title || '-'}
+                                        </dd>
                                       </div>
                                       <div className="flex justify-between">
-                                        <dt className="text-muted-foreground">거주지</dt>
+                                        <dt className="text-muted-foreground">
+                                          거주지
+                                        </dt>
                                         <dd>{selectedSubmission.city}</dd>
                                       </div>
                                     </dl>
                                   </div>
                                   <div>
-                                    <h4 className="font-semibold mb-2">연락처</h4>
+                                    <h4 className="font-semibold mb-2">
+                                      연락처
+                                    </h4>
                                     <dl className="space-y-1 text-sm">
                                       <div className="flex justify-between">
-                                        <dt className="text-muted-foreground">휴대폰</dt>
+                                        <dt className="text-muted-foreground">
+                                          휴대폰
+                                        </dt>
                                         <dd>{selectedSubmission.phone}</dd>
                                       </div>
                                       <div className="flex justify-between">
-                                        <dt className="text-muted-foreground">이메일</dt>
+                                        <dt className="text-muted-foreground">
+                                          이메일
+                                        </dt>
                                         <dd>{selectedSubmission.email}</dd>
                                       </div>
                                       <div className="flex justify-between">
-                                        <dt className="text-muted-foreground">선호 시간</dt>
-                                        <dd>{selectedSubmission.preferredTime}</dd>
+                                        <dt className="text-muted-foreground">
+                                          선호 시간
+                                        </dt>
+                                        <dd>
+                                          {selectedSubmission.preferredTime}
+                                        </dd>
                                       </div>
                                     </dl>
                                   </div>
@@ -308,56 +328,82 @@ export function MembershipIntakeDashboard({
 
                                 {/* Needs Analysis */}
                                 <div className="border p-4 rounded-lg bg-slate-50 dark:bg-slate-900">
-                                  <h4 className="font-semibold mb-3">니즈 분석</h4>
+                                  <h4 className="font-semibold mb-3">
+                                    니즈 분석
+                                  </h4>
                                   <div className="grid md:grid-cols-2 gap-6">
                                     <div>
-                                      <p className="text-sm font-medium text-muted-foreground mb-1">관심사</p>
+                                      <p className="text-sm font-medium text-muted-foreground mb-1">
+                                        관심사
+                                      </p>
                                       <div className="flex flex-wrap gap-1">
-                                        {selectedSubmission.interests.map(interest => (
-                                          <Badge key={interest} variant="secondary">
-                                            {interest}
-                                          </Badge>
-                                        ))}
+                                        {selectedSubmission.interests.map(
+                                          interest => (
+                                            <Badge
+                                              key={interest}
+                                              variant="secondary"
+                                            >
+                                              {interest}
+                                            </Badge>
+                                          )
+                                        )}
                                         {selectedSubmission.interestsOther && (
                                           <Badge variant="outline">
-                                            기타: {selectedSubmission.interestsOther}
+                                            기타:{' '}
+                                            {selectedSubmission.interestsOther}
                                           </Badge>
                                         )}
                                       </div>
                                     </div>
                                     <div>
-                                      <p className="text-sm font-medium text-muted-foreground mb-1">가장 해결하고 싶은 문제</p>
+                                      <p className="text-sm font-medium text-muted-foreground mb-1">
+                                        가장 해결하고 싶은 문제
+                                      </p>
                                       <p className="text-sm p-2 bg-background rounded border">
                                         {selectedSubmission.keyProblem}
                                       </p>
                                     </div>
                                     <div>
-                                        <p className="text-sm font-medium text-muted-foreground mb-1">금기사항 (Taboos)</p>
-                                        <p className="text-sm text-foreground">
-                                            {selectedSubmission.taboos || '-'}
-                                        </p>
+                                      <p className="text-sm font-medium text-muted-foreground mb-1">
+                                        금기사항 (Taboos)
+                                      </p>
+                                      <p className="text-sm text-foreground">
+                                        {selectedSubmission.taboos || '-'}
+                                      </p>
                                     </div>
                                   </div>
                                 </div>
 
                                 {/* Plan Preference */}
                                 <div className="border p-4 rounded-lg">
-                                  <h4 className="font-semibold mb-3">플랜 선호도</h4>
+                                  <h4 className="font-semibold mb-3">
+                                    플랜 선호도
+                                  </h4>
                                   <div className="grid grid-cols-3 gap-4 text-center">
                                     <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded">
-                                      <p className="text-xs text-muted-foreground mb-1">희망 빈도</p>
+                                      <p className="text-xs text-muted-foreground mb-1">
+                                        희망 빈도
+                                      </p>
                                       <p className="font-bold text-sm">
-                                        {formatFrequency(selectedSubmission.frequency)}
+                                        {formatFrequency(
+                                          selectedSubmission.frequency
+                                        )}
                                       </p>
                                     </div>
                                     <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded">
-                                      <p className="text-xs text-muted-foreground mb-1">희망 예산</p>
+                                      <p className="text-xs text-muted-foreground mb-1">
+                                        희망 예산
+                                      </p>
                                       <p className="font-bold text-sm">
-                                        {formatBudget(selectedSubmission.budget)}
+                                        {formatBudget(
+                                          selectedSubmission.budget
+                                        )}
                                       </p>
                                     </div>
                                     <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded">
-                                      <p className="text-xs text-muted-foreground mb-1">결제 방식</p>
+                                      <p className="text-xs text-muted-foreground mb-1">
+                                        결제 방식
+                                      </p>
                                       <p className="font-bold text-sm">
                                         {selectedSubmission.paymentMethod}
                                       </p>

@@ -5,14 +5,14 @@ import { NavigationItem } from '@/types/globals';
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   // { href: '/about', label: '소개' },
   { href: '/membership', label: '멤버십' },
-  { 
-    href: '/solution-finder', 
+  {
+    href: '/solution-finder',
     label: '서비스',
     submenu: [
-        { href: '/program', label: '프로그램' },
-        { href: '/solution-finder', label: '솔루션 파인더' },
-        { href: '/calculators', label: '계산기' },
-    ]
+      { href: '/program', label: '프로그램' },
+      { href: '/solution-finder', label: '솔루션 파인더' },
+      { href: '/calculators', label: '계산기' },
+    ],
   },
   { href: '/insights', label: '인사이트' },
   { href: '/seminar', label: '세미나' },

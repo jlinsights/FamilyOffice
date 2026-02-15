@@ -2,12 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-
 import { cn } from '@/lib/utils';
-
 import { QuizQuestion } from '@/constants/quiz';
 
 interface QuestionCardProps {

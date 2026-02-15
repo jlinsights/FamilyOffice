@@ -3,9 +3,7 @@
  * 인터랙티브 포트폴리오 차트, 성과 분석, 리스크 분석
  */
 import { PieChart, TrendingUp, Eye, EyeOff } from 'lucide-react';
-
 import React, { useState, useEffect, useRef } from 'react';
-
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -14,7 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-
 import { cn } from '@/lib/utils';
 
 // 차트 데이터 타입

@@ -5,13 +5,9 @@
  * 카카오톡 메시지 API를 사용한 콘텐츠 공유 기능
  */
 import { MessageCircle } from 'lucide-react';
-
 import React, { useEffect, useState } from 'react';
-
 import Image from 'next/image';
-
 import { Button } from '@/components/ui/button';
-
 import { useToast } from '@/hooks/use-toast';
 
 interface KakaoShareButtonProps {

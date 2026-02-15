@@ -5,15 +5,8 @@
 'use client';
 
 import * as React from 'react';
-
 import dynamic from 'next/dynamic';
-
 import { cn } from '@/lib/utils';
-
-/**
- * Dynamic Chart Component - Optimized for bundle splitting
- * Loads Recharts only when needed
- */
 
 // Chart Skeleton for loading state
 const ChartSkeleton = () => (
@@ -24,7 +17,7 @@ const ChartSkeleton = () => (
 
 // Dynamic ResponsiveContainer
 const ResponsiveContainer = dynamic(
-  () => import('recharts').then((mod) => ({ default: mod.ResponsiveContainer })),
+  () => import('recharts').then(mod => ({ default: mod.ResponsiveContainer })),
   {
     loading: () => <ChartSkeleton />,
     ssr: false,
@@ -77,7 +70,9 @@ const ChartContainer = React.forwardRef<
         )}
         {...props}
       >
-        <ResponsiveContainer>{children as React.ReactElement}</ResponsiveContainer>
+        <ResponsiveContainer>
+          {children as React.ReactElement}
+        </ResponsiveContainer>
       </div>
     </ChartContext.Provider>
   );

@@ -1,7 +1,5 @@
 import { CheckCircle, Award } from 'lucide-react';
-
 import { Badge } from '@/components/ui/badge';
-
 import { MemberBenefit } from '@/types/program';
 
 export function MemberBenefitsSection({

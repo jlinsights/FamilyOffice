@@ -1,28 +1,26 @@
 'use client';
 
 import {
-    AlertTriangle,
-    BarChart3,
-    CheckCircle,
-    Clock,
-    Eye,
-    Globe,
-    MousePointer,
-    Search,
-    Target,
-    TrendingUp,
+  AlertTriangle,
+  BarChart3,
+  CheckCircle,
+  Clock,
+  Eye,
+  Globe,
+  MousePointer,
+  Search,
+  Target,
+  TrendingUp,
 } from 'lucide-react';
-
 import { useCallback, useEffect, useState } from 'react';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -57,83 +55,83 @@ export function GoogleSearchConsoleDashboard() {
   const [loading, setLoading] = useState(true);
 
   const loadFallbackData = useCallback(() => {
-      // Fallback: Use sample data if API fails or keys are invalid
-      const sampleSearchMetrics: SearchMetrics[] = [
-        {
-          query: '패밀리오피스 (Demo)',
-          clicks: 1247,
-          impressions: 8934,
-          ctr: 13.95,
-          position: 4.2,
-          change: 23,
-        },
-        {
-          query: '법인 자산관리',
-          clicks: 982,
-          impressions: 6543,
-          ctr: 15.01,
-          position: 3.5,
-          change: 15,
-        },
-        {
-          query: 'CEO 세금계산',
-          clicks: 876,
-          impressions: 5432,
-          ctr: 16.12,
-          position: 2.8,
-          change: -5,
-        },
-        {
-          query: '가업승계 컨설팅',
-          clicks: 892,
-          impressions: 5671,
-          ctr: 15.73,
-          position: 3.8,
-          change: 45,
-        },
-        {
-          query: '중소기업 자산관리',
-          clicks: 634,
-          impressions: 4521,
-          ctr: 14.02,
-          position: 5.1,
-          change: 12,
-        },
-      ];
+    // Fallback: Use sample data if API fails or keys are invalid
+    const sampleSearchMetrics: SearchMetrics[] = [
+      {
+        query: '패밀리오피스 (Demo)',
+        clicks: 1247,
+        impressions: 8934,
+        ctr: 13.95,
+        position: 4.2,
+        change: 23,
+      },
+      {
+        query: '법인 자산관리',
+        clicks: 982,
+        impressions: 6543,
+        ctr: 15.01,
+        position: 3.5,
+        change: 15,
+      },
+      {
+        query: 'CEO 세금계산',
+        clicks: 876,
+        impressions: 5432,
+        ctr: 16.12,
+        position: 2.8,
+        change: -5,
+      },
+      {
+        query: '가업승계 컨설팅',
+        clicks: 892,
+        impressions: 5671,
+        ctr: 15.73,
+        position: 3.8,
+        change: 45,
+      },
+      {
+        query: '중소기업 자산관리',
+        clicks: 634,
+        impressions: 4521,
+        ctr: 14.02,
+        position: 5.1,
+        change: 12,
+      },
+    ];
 
-      const samplePagePerformance: PagePerformance[] = [
-        {
-          url: '/services',
-          clicks: 2341,
-          impressions: 15672,
-          ctr: 14.93,
-          position: 4.1,
-        },
-        {
-          url: '/blog',
-          clicks: 1876,
-          impressions: 12543,
-          ctr: 14.95,
-          position: 4.8,
-        },
-        {
-          url: '/contact',
-          clicks: 1245,
-          impressions: 8921,
-          ctr: 13.95,
-          position: 5.2,
-        },
-        {
-          url: '/about',
-          clicks: 982,
-          impressions: 6543,
-          ctr: 15.01,
-          position: 3.5,
-        },
-      ];
+    const samplePagePerformance: PagePerformance[] = [
+      {
+        url: '/services',
+        clicks: 2341,
+        impressions: 15672,
+        ctr: 14.93,
+        position: 4.1,
+      },
+      {
+        url: '/blog',
+        clicks: 1876,
+        impressions: 12543,
+        ctr: 14.95,
+        position: 4.8,
+      },
+      {
+        url: '/contact',
+        clicks: 1245,
+        impressions: 8921,
+        ctr: 13.95,
+        position: 5.2,
+      },
+      {
+        url: '/about',
+        clicks: 982,
+        impressions: 6543,
+        ctr: 15.01,
+        position: 3.5,
+      },
+    ];
 
-      setSearchMetrics(sampleSearchMetrics);
-      setPagePerformance(samplePagePerformance);
+    setSearchMetrics(sampleSearchMetrics);
+    setPagePerformance(samplePagePerformance);
   }, []);
 
   const loadSearchConsoleData = useCallback(async () => {
@@ -152,20 +150,28 @@ export function GoogleSearchConsoleDashboard() {
             setSearchMetrics(result.data.searchMetrics);
             setPagePerformance(result.data.pagePerformance);
           } else {
-            console.warn('Google Search Console API returned unsuccessful response:', result.error);
+            console.warn(
+              'Google Search Console API returned unsuccessful response:',
+              result.error
+            );
             shouldUseFallback = true;
           }
         } catch (e) {
-             console.warn('Failed to parse Google Search Console API response:', e);
-             shouldUseFallback = true;
+          console.warn(
+            'Failed to parse Google Search Console API response:',
+            e
+          );
+          shouldUseFallback = true;
         }
       } else {
-        console.warn(`Google Search Console API failed with status: ${response.status}`);
+        console.warn(
+          `Google Search Console API failed with status: ${response.status}`
+        );
         shouldUseFallback = true;
       }
 
       if (shouldUseFallback) {
-         loadFallbackData();
+        loadFallbackData();
       }
     } catch (error) {
       console.warn(

@@ -5,7 +5,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 interface FadeInProps {
@@ -52,24 +51,20 @@ export function FadeIn({
         }
       };
 
-      gsap.fromTo(
-        element.children,
-        getInitialProps(),
-        {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: duration,
-          delay: delay,
-          stagger: stagger,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: element,
-            start: `top ${100 - threshold * 100}%`,
-            toggleActions: once ? 'play none none none' : 'play none none none',
-          },
-        }
-      );
+      gsap.fromTo(element.children, getInitialProps(), {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: duration,
+        delay: delay,
+        stagger: stagger,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: element,
+          start: `top ${100 - threshold * 100}%`,
+          toggleActions: once ? 'play none none none' : 'play none none none',
+        },
+      });
     },
     { scope: ref }
   );

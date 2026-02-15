@@ -1,48 +1,43 @@
 'use client';
 
 import {
-    Award,
-    Building,
-    Calculator,
-    Calendar,
-    CheckCircle2,
-    ChevronRight,
-    Clock,
-    Crown,
-    Download,
-    Heart,
-    Info,
-    Phone,
-    Receipt,
-    Shield,
-    Users,
+  Award,
+  Building,
+  Calculator,
+  Calendar,
+  CheckCircle2,
+  ChevronRight,
+  Clock,
+  Crown,
+  Download,
+  Heart,
+  Info,
+  Phone,
+  Receipt,
+  Shield,
+  Users,
 } from 'lucide-react';
-
 import React from 'react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { SelfCheckSuccession } from '@/components/forms/self-check-succession';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { generateStructuredData } from '@/lib/seo/structured-data';
+import { cn } from '@/lib/utils';
 
 // 상속세율 구간
 const inheritanceTaxRates = [
@@ -1090,7 +1085,9 @@ const InheritanceGiftTaxPage = () => {
 
                     <Link
                       href="/business-succession-strategy"
-                      className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+                      className={cn(
+                        buttonVariants({ variant: 'outline', size: 'lg' })
+                      )}
                     >
                       <Crown className="h-5 w-5 mr-2" />
                       가업승계 전략
@@ -1098,7 +1095,9 @@ const InheritanceGiftTaxPage = () => {
 
                     <Link
                       href="/tax-strategy"
-                      className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+                      className={cn(
+                        buttonVariants({ variant: 'outline', size: 'lg' })
+                      )}
                     >
                       <Calculator className="h-5 w-5 mr-2" />
                       절세 전략 보기

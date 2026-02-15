@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'singapore-family-office-trends',
-    title: '싱가포르 패밀리오피스 최신 동향',
-    image:
-      'https://images.unsplash.com/photo-1565967511849-76a60a516170?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '아시아 패밀리오피스 허브로 부상한 싱가포르의 최신 동향과 시사점을 분석합니다.',
-    content: `# 싱가포르 패밀리오피스 최신 동향
+  id: 'singapore-family-office-trends',
+  title: '싱가포르 패밀리오피스 최신 동향',
+  image:
+    'https://images.unsplash.com/photo-1565967511849-76a60a516170?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '아시아 패밀리오피스 허브로 부상한 싱가포르의 최신 동향과 시사점을 분석합니다.',
+  content: `# 싱가포르 패밀리오피스 최신 동향
 
 싱가포르는 아시아 태평양 지역의 대표적인 패밀리오피스 허브로 자리잡고 있습니다. 2024년 현재 400개 이상의 패밀리오피스가 설립되어 운영 중이며, 이들이 관리하는 자산 규모는 3,000억 달러를 넘어섰습니다.
 
@@ -48,11 +48,11 @@ export const post: BlogPost = {
 ## 한국 자산가들에게 주는 시사점
 
 싱가포르 패밀리오피스 모델은 한국의 중견기업 가족들에게도 유용한 참고 자료가 됩니다. 특히 글로벌 분산 투자와 차세대 참여 유도 방안에서 배울 점이 많습니다.`,
-    category: '글로벌 트렌드',
-    author: '임재홍',
-    date: '2025-01-06',
-    readTime: '7분',
-    tags: ['싱가포르', '패밀리오피스', '글로벌 트렌드', '아시아'],
-    slug: 'singapore-family-office-trends',
-    featured: false,
-  };
+  category: '글로벌 트렌드',
+  author: '임재홍',
+  date: '2025-01-06',
+  readTime: '7분',
+  tags: ['싱가포르', '패밀리오피스', '글로벌 트렌드', '아시아'],
+  slug: 'singapore-family-office-trends',
+  featured: false,
+};

@@ -3,7 +3,6 @@
  * 필수 환경변수 누락 시 애플리케이션 실행 중단
  */
 import { z } from 'zod';
-
 import { logger } from './debug-logger';
 
 // 공용 (클라이언트/서버) 환경변수 스키마
@@ -25,17 +24,32 @@ export const serverEnvSchema = z.object({
     .optional(),
 
   // Clerk - 개발 환경에서는 선택적, production에서는 필수
-  CLERK_SECRET_KEY: z.string().min(1, 'Clerk Secret Key is required').optional(),
-  CLERK_WEBHOOK_SECRET: z.string().min(1, 'Clerk Webhook Secret is required').optional(),
+  CLERK_SECRET_KEY: z
+    .string()
+    .min(1, 'Clerk Secret Key is required')
+    .optional(),
+  CLERK_WEBHOOK_SECRET: z
+    .string()
+    .min(1, 'Clerk Webhook Secret is required')
+    .optional(),
 
   // 선택적 환경변수들
   REDIS_URL: z.string().url().optional().or(z.literal('')),
   REDIS_HOST: z.string().optional(),
-  REDIS_PORT: z.string().regex(/^\d+$/).transform(Number).optional().or(z.literal('')),
+  REDIS_PORT: z
+    .string()
+    .regex(/^\d+$/)
+    .transform(Number)
+    .optional()
+    .or(z.literal('')),
   REDIS_PASSWORD: z.string().optional(),
   LOGS_SO_API_KEY: z.string().optional(),
   LOGS_SO_WORKSPACE_ID: z.string().optional(),
-  ALPHA_VANTAGE_API_KEY: z.string().regex(/^[A-Z0-9]+$/, 'Invalid Alpha Vantage API key format').optional().or(z.literal('')),
+  ALPHA_VANTAGE_API_KEY: z
+    .string()
+    .regex(/^[A-Z0-9]+$/, 'Invalid Alpha Vantage API key format')
+    .optional()
+    .or(z.literal('')),
   BEEHIIV_API_KEY: z.string().optional(),
   BEEHIIV_PUBLICATION_ID: z.string().optional(),
   HUBSPOT_API_KEY: z.string().optional(),
@@ -280,7 +294,8 @@ export const validateEnvGroup = (
 
     if (group === 'analytics') {
       const analyticsEnv = {
-        NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+        NEXT_PUBLIC_GA_MEASUREMENT_ID:
+          process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
       };
 
       const schema = z.object({

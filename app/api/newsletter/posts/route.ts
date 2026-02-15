@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-
 import { beehiiv } from '@/lib/beehiiv/client';
 import { newsletterPosts } from '@/lib/newsletter/data';
 

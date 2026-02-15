@@ -9,13 +9,10 @@ import {
   Tag,
   TrendingUp,
 } from 'lucide-react';
-
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -26,12 +23,9 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-
 import { blogPosts } from '@/lib/blog-data';
 import { cn } from '@/lib/utils';
-
 import type { BlogPost } from '@/types/blog';
-
 // Import our new components
 import { BlogFilters, SortOption } from './blog-filters';
 import { BlogPagination, InfiniteScrollTrigger } from './blog-pagination';

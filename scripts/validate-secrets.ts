@@ -1,10 +1,8 @@
 #!/usr/bin/env tsx
-
 /**
  * Secret Validation Script
  * Validates that all required environment variables are present
  */
-
 import * as fs from 'fs/promises';
 
 const ENV_FILE = '.env.local';
@@ -157,8 +155,12 @@ async function validateSecrets(): Promise<void> {
   console.log('  Validation Summary');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
-  console.log(`필수 환경 변수: ${totalRequired - missingRequired}/${totalRequired}`);
-  console.log(`선택 환경 변수: ${totalOptional - missingOptional}/${totalOptional}`);
+  console.log(
+    `필수 환경 변수: ${totalRequired - missingRequired}/${totalRequired}`
+  );
+  console.log(
+    `선택 환경 변수: ${totalOptional - missingOptional}/${totalOptional}`
+  );
 
   if (hasErrors) {
     console.log('\n❌ 검증 실패: 필수 환경 변수가 누락되었습니다.');
@@ -180,7 +182,7 @@ async function validateSecrets(): Promise<void> {
 }
 
 // Main execution
-validateSecrets().catch((error) => {
+validateSecrets().catch(error => {
   console.error('❌ 에러 발생:', error.message);
   process.exit(1);
 });

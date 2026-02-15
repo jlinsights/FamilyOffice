@@ -15,6 +15,7 @@ DROP POLICY IF EXISTS "Users can insert own profile" ON users;
 DROP POLICY IF EXISTS "Admin can view all users" ON users;
 DROP POLICY IF EXISTS "Admin can manage all users" ON users;
 
+
 -- 1. 사용자는 자신의 프로필만 조회 가능
 CREATE POLICY "Users can view own profile" ON users
   FOR SELECT 
@@ -36,9 +37,8 @@ CREATE POLICY "Admin can view all users" ON users
   FOR SELECT 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -47,9 +47,8 @@ CREATE POLICY "Admin can manage all users" ON users
   FOR ALL 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -86,9 +85,8 @@ CREATE POLICY "Admin can view all consultations" ON consultations
   FOR SELECT 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -97,9 +95,8 @@ CREATE POLICY "Admin can manage all consultations" ON consultations
   FOR ALL 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -122,9 +119,8 @@ CREATE POLICY "Admin can view all metrics" ON performance_metrics
   FOR SELECT 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -150,9 +146,8 @@ CREATE POLICY "Admin can view all recommendations" ON content_recommendations
   FOR SELECT 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -173,9 +168,8 @@ CREATE POLICY "Admin can view workflows" ON workflow_executions
   FOR SELECT 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -184,9 +178,8 @@ CREATE POLICY "Admin can view activities" ON lead_activities
   FOR SELECT 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -214,9 +207,8 @@ CREATE POLICY "Admins can view all structure check requests" ON structure_check_
   FOR SELECT 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -225,9 +217,8 @@ CREATE POLICY "Admins can update structure check requests" ON structure_check_re
   FOR UPDATE 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 
@@ -311,9 +302,8 @@ CREATE POLICY "Admin can view audit logs" ON audit_logs
   FOR SELECT 
   USING (
     EXISTS (
-      SELECT 1 FROM users 
-      WHERE id = auth.uid() 
-      AND email = 'jhlim725@gmail.com'
+      SELECT 1 FROM admins 
+      WHERE user_id = auth.uid()
     )
   );
 

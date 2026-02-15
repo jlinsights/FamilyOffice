@@ -250,7 +250,8 @@ export interface Database {
       lead_activities: {
         Row: {
           id: string;
-          hubspot_contact_id: string;
+          hubspot_contact_id: string | null;
+          email: string | null;
           user_id: string | null;
           activity_type: string;
           activity_data: Json;
@@ -261,7 +262,8 @@ export interface Database {
         };
         Insert: {
           id?: string;
-          hubspot_contact_id: string;
+          hubspot_contact_id?: string | null;
+          email?: string | null;
           user_id?: string | null;
           activity_type: string;
           activity_data?: Json;
@@ -272,7 +274,8 @@ export interface Database {
         };
         Update: {
           id?: string;
-          hubspot_contact_id?: string;
+          hubspot_contact_id?: string | null;
+          email?: string | null;
           user_id?: string | null;
           activity_type?: string;
           activity_data?: Json;
@@ -280,6 +283,76 @@ export interface Database {
           total_score?: number;
           score_grade?: string | null;
           created_at?: string;
+        };
+      };
+      lead_scores: {
+        Row: {
+          id: string;
+          email: string | null;
+          hubspot_contact_id: string | null;
+          user_id: string | null;
+          demographic_score: number | null;
+          behavioral_score: number | null;
+          engagement_score: number | null;
+          total_score: number | null;
+          score_grade: string | null;
+          last_calculated_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          email?: string | null;
+          hubspot_contact_id?: string | null;
+          user_id?: string | null;
+          demographic_score?: number | null;
+          behavioral_score?: number | null;
+          engagement_score?: number | null;
+          total_score?: number | null;
+          score_grade?: string | null;
+          last_calculated_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          email?: string | null;
+          hubspot_contact_id?: string | null;
+          user_id?: string | null;
+          demographic_score?: number | null;
+          behavioral_score?: number | null;
+          engagement_score?: number | null;
+          total_score?: number | null;
+          score_grade?: string | null;
+          last_calculated_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      admins: {
+        Row: {
+          id: string;
+          user_id: string;
+          email: string;
+          role: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          email: string;
+          role?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          email?: string;
+          role?: string;
+          created_at?: string;
+          updated_at?: string;
         };
       };
       structure_check_requests: {
@@ -628,7 +701,12 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      calculate_lead_score_by_email: {
+        Args: {
+          target_email: string;
+        };
+        Returns: number;
+      };
     };
   };
 }

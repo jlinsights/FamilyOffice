@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * 🎯 순자산 50억+ 순이익 3억+ FP센터 전용 랜딩페이지
  * Premium 고객 대상 전문 자산관리 서비스
@@ -13,18 +11,14 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-
 import { CalComButton } from '@/components/calendar/cal-com-button';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import {
   CUSTOMER_SEGMENTS,
   generateDynamicContent,

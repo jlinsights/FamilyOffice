@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
-    title: '대표님의 숨은 자산 이익잉여금을 깨울 시간입니다',
-    image:
-      'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '기업의 이익잉여금을 효과적으로 활용하여 개인 자산화하는 전략과 절세 방안을 제시합니다. 회사는 부자인데, 왜 대표님은 현금이 없으십니까? 평생을 바쳐 회사를 키운 대표님께서 정작 본인의 노후 자금이나 자녀 승계 자금이 부족해 고민하는 "부자 기업, 가난한 사장"의 역설을 해결하는 전략적 출구 전략입니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
+  title: '대표님의 숨은 자산 이익잉여금을 깨울 시간입니다',
+  image:
+    'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '기업의 이익잉여금을 효과적으로 활용하여 개인 자산화하는 전략과 절세 방안을 제시합니다. 회사는 부자인데, 왜 대표님은 현금이 없으십니까? 평생을 바쳐 회사를 키운 대표님께서 정작 본인의 노후 자금이나 자녀 승계 자금이 부족해 고민하는 "부자 기업, 가난한 사장"의 역설을 해결하는 전략적 출구 전략입니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">대표님의 숨은 자산 이익잉여금을 깨울 시간입니다</h1>
@@ -209,19 +209,19 @@ export const post: BlogPost = {
 </div>
 
 </div>`,
-    category: '법인자산',
-    author: '임재홍',
-    date: '2025-12-02',
-    readTime: '15분',
-    tags: [
-      '이익잉여금',
-      '배당전략',
-      '차등배당',
-      '자사주매입',
-      'CEO자산최적화',
-      '상속세절세',
-      '가업승계',
-    ],
-    slug: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
-    featured: true,
-  };
+  category: '법인자산',
+  author: '임재홍',
+  date: '2025-12-02',
+  readTime: '15분',
+  tags: [
+    '이익잉여금',
+    '배당전략',
+    '차등배당',
+    '자사주매입',
+    'CEO자산최적화',
+    '상속세절세',
+    '가업승계',
+  ],
+  slug: 'retained-earnings-dividend-strategy-ceo-asset-optimization',
+  featured: true,
+};

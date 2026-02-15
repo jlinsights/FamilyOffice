@@ -285,7 +285,6 @@ const config = {
 import * as Sentry from '@sentry/nextjs';
 // Performance monitoring with Vercel Analytics
 import { Analytics } from '@vercel/analytics';
-
 // Health checks
 import { cacheMonitor } from '@/lib/financial/cache-health-monitor';
 ```

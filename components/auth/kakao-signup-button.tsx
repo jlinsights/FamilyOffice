@@ -1,15 +1,10 @@
 'use client';
 
 import { Loader2 } from 'lucide-react';
-
 import { useState } from 'react';
-
 import Image from 'next/image';
-
 import { Button } from '@/components/ui/button';
-
 import { type KakaoAuthResult } from '@/lib/auth/kakao-auth';
-
 import { useToast } from '@/hooks/use-toast';
 
 interface KakaoSignUpButtonProps {

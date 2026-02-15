@@ -5,7 +5,6 @@
  * LCP, FID, CLS 개선을 위한 성능 모니터링
  */
 import { onCLS, onFCP, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
-
 import { useEffect } from 'react';
 
 // Extract environment variables at module level for client components

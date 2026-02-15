@@ -1,5 +1,4 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-
 import {
   AvatarImage,
   BackgroundImage,
@@ -42,7 +41,8 @@ jest.mock('next/image', () => {
     [key: string]: unknown;
   }) {
     // Map Next.js props to HTML attributes with data-* support
-    const htmlProps: React.ImgHTMLAttributes<HTMLImageElement> & Record<string, unknown> = {
+    const htmlProps: React.ImgHTMLAttributes<HTMLImageElement> &
+      Record<string, unknown> = {
       src,
       alt,
       onLoad,
@@ -60,7 +60,8 @@ jest.mock('next/image', () => {
 
     // Store Next.js-specific props as data attributes for testing
     if (quality !== undefined) {
-      (htmlProps as Record<string, unknown>)['data-quality'] = quality.toString();
+      (htmlProps as Record<string, unknown>)['data-quality'] =
+        quality.toString();
     }
     if (sizes !== undefined) {
       (htmlProps as Record<string, unknown>)['data-sizes'] = sizes;
@@ -353,7 +354,10 @@ describe('Specialized Image Components', () => {
 
       const image = screen.getByTestId('next-image');
       expect(image).toHaveAttribute('data-quality', '80');
-      expect(image).toHaveAttribute('data-sizes', '(max-width: 768px) 40px, 60px');
+      expect(image).toHaveAttribute(
+        'data-sizes',
+        '(max-width: 768px) 40px, 60px'
+      );
     });
   });
 

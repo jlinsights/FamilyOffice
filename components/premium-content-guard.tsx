@@ -1,11 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { Loader2 } from 'lucide-react';
-
+import { useEffect, useState } from 'react';
 import { useSafeAuth } from '@/hooks/use-safe-auth';
-
 import { PremiumOverlay } from './premium-overlay';
 
 interface PremiumContentGuardProps {

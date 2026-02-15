@@ -1,34 +1,30 @@
 import {
-    ArrowRight,
-    Award,
-    BarChart3,
-    Briefcase,
-    Building,
-    Calculator,
-    CheckCircle,
-    Coins,
-    Phone,
-    PiggyBank,
-    Shield,
-    Target,
-    TrendingUp,
-    User,
-    Users,
+  ArrowRight,
+  Award,
+  BarChart3,
+  Briefcase,
+  Building,
+  Calculator,
+  CheckCircle,
+  Coins,
+  Phone,
+  PiggyBank,
+  Shield,
+  Target,
+  TrendingUp,
+  User,
+  Users,
 } from 'lucide-react';
-
 import { Metadata } from 'next';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { generateMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '퇴직연금 컨설팅 | 확정기여형·확정급여형 | 패밀리오피스',
@@ -364,7 +360,10 @@ export default function RetirementPensionPage() {
                         trigger={
                           <div
                             className={cn(
-                              buttonVariants({ variant: 'outline', size: 'sm' }),
+                              buttonVariants({
+                                variant: 'outline',
+                                size: 'sm',
+                              }),
                               'w-full border-primary text-primary hover:bg-primary hover:text-white cursor-pointer'
                             )}
                           >

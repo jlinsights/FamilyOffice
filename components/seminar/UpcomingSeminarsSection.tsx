@@ -9,7 +9,6 @@ import {
   ExternalLink,
   CheckCircle,
 } from 'lucide-react';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,7 +17,6 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-
 import { UPCOMING_SEMINARS, SEMINAR_CATEGORIES } from '@/constants/seminars';
 import type { Seminar } from '@/types/seminar';
 

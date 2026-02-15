@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { blogPosts } from '@/lib/blog-data';
 import {
   ContentSyncManager,

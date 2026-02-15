@@ -9,7 +9,6 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-
 import type {
   EducationPrograms,
   ExclusiveProgramCategory,

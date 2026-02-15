@@ -1,21 +1,14 @@
 'use client';
 
 import { AlertCircle, CheckCircle, Loader2, XCircle } from 'lucide-react';
-
 import { Suspense, useEffect, useState } from 'react';
-
 import { useRouter, useSearchParams } from 'next/navigation';
-
-
-
 import {
-    Card,
-    CardDescription,
-    CardHeader,
-    CardTitle
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-
-
 
 function OAuthContent() {
   const router = useRouter();
@@ -51,7 +44,11 @@ function OAuthContent() {
         // 카카오 인증 서비스로 인증 코드 처리
         // const kakaoAuth = getKakaoAuthService();
         // const result = await kakaoAuth.handleOAuthCallback(code);
-        const result = { success: false, isNewUser: false, error: 'OAuth disabled' };
+        const result = {
+          success: false,
+          isNewUser: false,
+          error: 'OAuth disabled',
+        };
 
         if (result.success) {
           setStatus('success');

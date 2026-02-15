@@ -1,40 +1,35 @@
 'use client';
 
 import {
-    AlertTriangle,
-    Award,
-    Building,
-    Calculator,
-    CheckCircle,
-    Clock,
-    Crown,
-    DollarSign,
-    FileCheck,
-    Heart,
-    Shield,
-    Target,
-    TrendingUp,
-    Users,
+  AlertTriangle,
+  Award,
+  Building,
+  Calculator,
+  CheckCircle,
+  Clock,
+  Crown,
+  DollarSign,
+  FileCheck,
+  Heart,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-
 import { useState } from 'react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { generateStructuredData } from '@/lib/seo/structured-data';
+import { cn } from '@/lib/utils';
 
 const LifeInsurancePage = () => {
   const [selectedCase, setSelectedCase] = useState(0);

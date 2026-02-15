@@ -4,9 +4,7 @@
 'use client';
 
 import { CheckCircle, Info, Loader2, Send, XCircle } from 'lucide-react';
-
 import { useState } from 'react';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,12 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-
 import { useToast } from '@/hooks/use-toast';
-
-/**
- * Resend 이메일 테스트 패널 (관리자용)
- */
 
 interface EmailStatus {
   configured: boolean;

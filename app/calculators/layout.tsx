@@ -1,5 +1,5 @@
-import { CalculatorLayoutWrapper } from '@/components/layout/calculator-layout-wrapper';
 import { Metadata } from 'next';
+import { CalculatorLayoutWrapper } from '@/components/layout/calculator-layout-wrapper';
 
 export const metadata: Metadata = {
   title: '세무 계산기 | FamilyOffice S',

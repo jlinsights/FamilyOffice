@@ -1,35 +1,29 @@
 import {
-    BarChart3,
-    CheckCircle2,
-    Globe,
-    PieChart,
-    Shield,
-    Target,
-    TrendingUp,
-    Zap,
+  BarChart3,
+  CheckCircle2,
+  Globe,
+  PieChart,
+  Shield,
+  Target,
+  TrendingUp,
+  Zap,
 } from 'lucide-react';
-
-import { buttonVariants } from '@/components/ui/button';
-import Link from 'next/link';
-
 import type { Metadata } from 'next';
-
+import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
-import { generateMetadata } from '@/lib/seo/metadata';
-
 import { StructuredData } from '@/components/seo/structured-data';
+import { generateMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = generateMetadata(
   '자산분산 전문 컨설팅 | 포트폴리오 최적화 및 리스크 관리',
@@ -163,13 +157,13 @@ export default function AssetDiversificationPage() {
                  className="px-8 py-4 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg"
                  eventType="consultation"
                /> */}
-              <Link 
-                  href="#services"
-                  className={buttonVariants({ variant: "outline", size: "lg" })}
-                >
-                  <PieChart className="mr-2 h-4 w-4" />
-                  분산전략 살펴보기
-                </Link>
+              <Link
+                href="#services"
+                className={buttonVariants({ variant: 'outline', size: 'lg' })}
+              >
+                <PieChart className="mr-2 h-4 w-4" />
+                분산전략 살펴보기
+              </Link>
             </div>
             <Alert className="max-w-2xl mx-auto">
               <Zap className="h-4 w-4" />

@@ -1,12 +1,9 @@
 'use client';
 
 import { User, Settings, LogOut, ChevronDown } from 'lucide-react';
-
 import { useState } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -17,7 +14,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
 import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 
 interface UserProfileDropdownProps {

@@ -9,11 +9,8 @@ import {
   XCircle,
   AlertCircle,
 } from 'lucide-react';
-
 import { useState } from 'react';
-
 import Image from 'next/image';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,9 +22,7 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
-
 import { getKakaoSyncService } from '@/lib/kakao/kakao-sync-service';
-
 import { useSupabaseKakaoAuth } from '@/hooks/use-supabase-kakao-auth';
 import { useToast } from '@/hooks/use-toast';
 

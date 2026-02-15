@@ -1,7 +1,6 @@
 'use client';
 
 import Script from 'next/script';
-
 import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
 import { createLogger } from '@/lib/security/secure-logger';
 import { generateStructuredData } from '@/lib/seo/structured-data';
@@ -44,7 +43,11 @@ export interface BreadcrumbItem {
   isCurrentPage?: boolean;
 }
 
-export function BreadcrumbStructuredData({ items }: { items: BreadcrumbItem[] }) {
+export function BreadcrumbStructuredData({
+  items,
+}: {
+  items: BreadcrumbItem[];
+}) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -73,9 +76,7 @@ export function OrganizationStructuredData() {
       areaServed: 'KR',
       availableLanguage: 'Korean',
     },
-    sameAs: [
-      'https://familyoffices.vip',
-    ],
+    sameAs: ['https://familyoffices.vip'],
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Seoul',

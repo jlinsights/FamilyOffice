@@ -1,10 +1,8 @@
 import { ArrowRight, Calendar, CheckCircle } from 'lucide-react';
-
+import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
-
 import type { EducationPrograms } from '@/types/program';
 
 export function EducationScheduleSection({
@@ -84,7 +82,7 @@ export function EducationScheduleSection({
           </div>
           <Link
             href="/seminar"
-             className={cn(
+            className={cn(
               buttonVariants({ size: 'lg' }),
               'bg-primary text-white px-8 py-5 text-lg font-bold shadow-lg hover:bg-primary/90 transition group flex items-center justify-center gap-2'
             )}

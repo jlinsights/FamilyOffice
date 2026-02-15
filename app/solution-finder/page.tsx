@@ -2,20 +2,15 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-
 import { useState } from 'react';
-
 import Link from 'next/link';
-
 import { useRouter } from 'next/navigation';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { PremiumContentGuard } from '@/components/premium-content-guard';
 import { ProgressBar } from '@/components/quiz/ProgressBar';
 import { QuestionCard } from '@/components/quiz/QuestionCard';
 import { QuizResults } from '@/components/quiz/QuizResults';
-
 import { QUIZ_QUESTIONS } from '@/constants/quiz';
 import { useQuizScoring } from '@/hooks/useQuizScoring';
 

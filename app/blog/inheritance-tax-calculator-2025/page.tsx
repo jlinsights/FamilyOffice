@@ -1,33 +1,29 @@
 import {
-    ArrowRight,
-    Calculator,
-    CheckCircle2,
-    DollarSign,
-    FileText,
-    Shield,
-    TrendingDown,
-    Users,
+  ArrowRight,
+  Calculator,
+  CheckCircle2,
+  DollarSign,
+  FileText,
+  Shield,
+  TrendingDown,
+  Users,
 } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { generateMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '2025년 상속세 계산기 사용법 완벽 가이드 | 절세 전략',
@@ -465,7 +461,10 @@ export default function InheritanceTaxCalculator2025Page() {
                   </p>
                   <Link
                     href="/wealth-consulting"
-                    className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
+                    className={cn(
+                      buttonVariants({ variant: 'outline', size: 'sm' }),
+                      'w-full'
+                    )}
                   >
                     자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -482,7 +481,10 @@ export default function InheritanceTaxCalculator2025Page() {
                   </p>
                   <Link
                     href="/business-succession-strategy"
-                    className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
+                    className={cn(
+                      buttonVariants({ variant: 'outline', size: 'sm' }),
+                      'w-full'
+                    )}
                   >
                     자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -499,7 +501,10 @@ export default function InheritanceTaxCalculator2025Page() {
                   </p>
                   <Link
                     href="/tax-strategy"
-                    className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
+                    className={cn(
+                      buttonVariants({ variant: 'outline', size: 'sm' }),
+                      'w-full'
+                    )}
                   >
                     자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>

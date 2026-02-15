@@ -1,13 +1,12 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'business-succession-2024-analysis',
-    title: '2024년 가업승계 성공 요인 분석',
-    image:
-      'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '성공적인 가업승계를 위한 핵심 요소들과 2024년 트렌드를 분석합니다.',
-    content: `# 2024년 가업승계 성공 요인 분석
+  id: 'business-succession-2024-analysis',
+  title: '2024년 가업승계 성공 요인 분석',
+  image:
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1000&auto=format&fit=crop',
+  excerpt: '성공적인 가업승계를 위한 핵심 요소들과 2024년 트렌드를 분석합니다.',
+  content: `# 2024년 가업승계 성공 요인 분석
 
 2024년은 한국 중견기업들에게 가업승계의 중요한 전환점이 되는 해입니다. 창업 1세대에서 2세대로의 경영권 이양이 본격화되는 시기로, 성공적인 승계를 위한 전략이 그 어느 때보다 중요합니다.
 
@@ -31,11 +30,11 @@ export const post: BlogPost = {
 ## 2024년 주요 트렌드
 
 최근 조사에 따르면, 성공적인 가업승계를 이룬 기업들의 공통점은 '준비된 승계'입니다. 단순한 지분 이전이 아닌, 경영 철학과 기업 문화까지 포함한 종합적 접근이 핵심입니다.`,
-    category: '기업승계 분석',
-    author: '임재홍',
-    date: '2025-01-15',
-    readTime: '6분',
-    tags: ['기업승계', '가업승계', '경영권 이양', '차세대 경영'],
-    slug: 'business-succession-2024-analysis',
-    featured: true,
-  };
+  category: '기업승계 분석',
+  author: '임재홍',
+  date: '2025-01-15',
+  readTime: '6분',
+  tags: ['기업승계', '가업승계', '경영권 이양', '차세대 경영'],
+  slug: 'business-succession-2024-analysis',
+  featured: true,
+};

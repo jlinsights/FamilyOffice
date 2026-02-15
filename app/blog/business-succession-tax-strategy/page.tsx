@@ -1,34 +1,30 @@
 import {
-    Building2,
-    Calculator,
-    CheckCircle2,
-    Clock,
-    FileText,
-    Lightbulb,
-    Shield,
-    TrendingUp,
-    Users
+  Building2,
+  Calculator,
+  CheckCircle2,
+  Clock,
+  FileText,
+  Lightbulb,
+  Shield,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { generateMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '가업승계와 상속세 최적화 전략 2025 | 세금 70% 절감 로드맵',
@@ -152,15 +148,16 @@ export default function BusinessSuccessionTaxStrategyPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto prose dark:prose-invert">
               <p className="lead text-lg">
-                <strong>가업승계</strong>는 단순히 사업을 물려주는 것이 아닙니다.
-                세금 부담 없이 기업의 지속가능성을 확보하고, 창업주가 평생 일군
-                가치를 다음 세대에 온전히 전달하는 것입니다.
+                <strong>가업승계</strong>는 단순히 사업을 물려주는 것이
+                아닙니다. 세금 부담 없이 기업의 지속가능성을 확보하고, 창업주가
+                평생 일군 가치를 다음 세대에 온전히 전달하는 것입니다.
               </p>
               <p>
                 그러나 현실은 녹록지 않습니다. 한국의{' '}
                 <strong>최고 상속세율 50%</strong> (최대주주 할증 시 60%)는 OECD
-                최고 수준으로, 사전 준비 없이는 <strong>기업 가치의 절반 이상</strong>
-                을 세금으로 납부해야 할 수 있습니다.
+                최고 수준으로, 사전 준비 없이는{' '}
+                <strong>기업 가치의 절반 이상</strong>을 세금으로 납부해야 할 수
+                있습니다.
               </p>
               <p>
                 본 가이드에서는 <strong>가업상속공제 600억원 활용법</strong>부터{' '}
@@ -187,8 +184,9 @@ export default function BusinessSuccessionTaxStrategyPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      준비 없이 상속 시 기업 가치의 <strong>40-60%를 세금</strong>으로
-                      납부. 자금난으로 경영권 상실 위험.
+                      준비 없이 상속 시 기업 가치의{' '}
+                      <strong>40-60%를 세금</strong>으로 납부. 자금난으로 경영권
+                      상실 위험.
                     </p>
                   </CardContent>
                 </Card>
@@ -199,8 +197,9 @@ export default function BusinessSuccessionTaxStrategyPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      10년 단위 증여, 요건 충족 기간 등 <strong>최소 5-10년</strong>{' '}
-                      소요. 급하게 준비하면 선택지 제한.
+                      10년 단위 증여, 요건 충족 기간 등{' '}
+                      <strong>최소 5-10년</strong> 소요. 급하게 준비하면 선택지
+                      제한.
                     </p>
                   </CardContent>
                 </Card>
@@ -211,8 +210,8 @@ export default function BusinessSuccessionTaxStrategyPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      <strong>원활한 경영권 이전</strong>과 조직 안정으로 기업 가치
-                      유지. 고용 유지로 사회적 책임 이행.
+                      <strong>원활한 경영권 이전</strong>과 조직 안정으로 기업
+                      가치 유지. 고용 유지로 사회적 책임 이행.
                     </p>
                   </CardContent>
                 </Card>
@@ -270,7 +269,9 @@ export default function BusinessSuccessionTaxStrategyPage() {
                     </div>
                     <div className="pt-4 border-t">
                       <div className="flex items-center justify-between">
-                        <div className="text-lg font-semibold">최대 공제 한도</div>
+                        <div className="text-lg font-semibold">
+                          최대 공제 한도
+                        </div>
                         <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
                           600억원
                         </div>
@@ -449,7 +450,10 @@ export default function BusinessSuccessionTaxStrategyPage() {
                       {step.action && (
                         <Link
                           href={step.action.href}
-                          className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
+                          className={cn(
+                            buttonVariants({ variant: 'outline' }),
+                            'w-full'
+                          )}
                         >
                           <Calculator className="mr-2 h-4 w-4" />
                           {step.action.text}
@@ -528,9 +532,9 @@ export default function BusinessSuccessionTaxStrategyPage() {
                       <div className="flex items-start gap-2">
                         <Lightbulb className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
                         <div className="text-sm text-amber-800 dark:text-amber-200">
-                          <strong>핵심 포인트</strong>: 65세부터 7년간 체계적으로
-                          준비. 후계자 2년 근무 요건, 10년 단위 증여, 가업상속공제
-                          요건을 모두 충족하여 최대 절세 효과 달성.
+                          <strong>핵심 포인트</strong>: 65세부터 7년간
+                          체계적으로 준비. 후계자 2년 근무 요건, 10년 단위 증여,
+                          가업상속공제 요건을 모두 충족하여 최대 절세 효과 달성.
                         </div>
                       </div>
                     </div>
@@ -555,22 +559,25 @@ export default function BusinessSuccessionTaxStrategyPage() {
                   <br />
                   맞춤형 절세 로드맵을 받아보세요
                 </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link
-                      href="/calculators/inheritance-tax"
-                      className={buttonVariants({ size: 'lg' })}
-                    >
-                      <Calculator className="mr-2 h-5 w-5" />
-                      무료 상속세 계산하기
-                    </Link>
-                    <Link
-                      href="/contact"
-                      className={buttonVariants({ size: 'lg', variant: 'outline' })}
-                    >
-                      <Users className="mr-2 h-5 w-5" />
-                      가업승계 전문가 상담
-                    </Link>
-                  </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    href="/calculators/inheritance-tax"
+                    className={buttonVariants({ size: 'lg' })}
+                  >
+                    <Calculator className="mr-2 h-5 w-5" />
+                    무료 상속세 계산하기
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className={buttonVariants({
+                      size: 'lg',
+                      variant: 'outline',
+                    })}
+                  >
+                    <Users className="mr-2 h-5 w-5" />
+                    가업승계 전문가 상담
+                  </Link>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -594,14 +601,12 @@ export default function BusinessSuccessionTaxStrategyPage() {
                   },
                   {
                     mistake: '요건 미충족',
-                    consequence:
-                      '가업상속공제 600억 혜택 포기, 세금 폭탄',
+                    consequence: '가업상속공제 600억 혜택 포기, 세금 폭탄',
                     solution: '전문가와 체크리스트 철저히 점검',
                   },
                   {
                     mistake: '사후 관리 소홀',
-                    consequence:
-                      '공제 취소 + 가산세, 수십억 추가 납부',
+                    consequence: '공제 취소 + 가산세, 수십억 추가 납부',
                     solution: '10년간 업종·고용·지분 유지 관리',
                   },
                   {
@@ -618,9 +623,7 @@ export default function BusinessSuccessionTaxStrategyPage() {
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div>
-                        <div className="text-sm font-semibold mb-1">
-                          결과
-                        </div>
+                        <div className="text-sm font-semibold mb-1">결과</div>
                         <p className="text-sm text-muted-foreground">
                           {item.consequence}
                         </p>

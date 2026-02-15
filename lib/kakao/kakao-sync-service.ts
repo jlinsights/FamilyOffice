@@ -4,7 +4,6 @@
  */
 import { createClient } from '@/lib/supabase/client';
 import { safeFrom } from '@/lib/supabase/helpers';
-
 import { Database } from '@/types/supabase';
 
 // type UserRecord = Database['public']['Tables']['users']['Row']; // 미사용

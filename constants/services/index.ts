@@ -1,3 +1,14 @@
+// Aggregated service categories array
+import { assetWealthManagement } from './categories/asset-wealth-management';
+import { businessSuccession } from './categories/business-succession';
+import { corporateInsuranceRiskCategory } from './categories/corporate-insurance-risk';
+import { corporateStructureGovernance } from './categories/corporate-structure-governance';
+import { hrStartupSupport } from './categories/hr-startup-support';
+import { investmentFinance } from './categories/investment-finance';
+import { strategicPlanningMA } from './categories/strategic-planning-ma';
+import { taxAccounting } from './categories/tax-accounting';
+import type { ServiceCategory } from './types';
+
 /**
  * FamilyOffice S 서비스 카탈로그 통합 모듈
  *
@@ -6,7 +17,11 @@
  */
 
 // Type definitions
-export type { ServiceCategory, DetailedService, IndustryService } from './types';
+export type {
+  ServiceCategory,
+  DetailedService,
+  IndustryService,
+} from './types';
 
 // SEO mappings
 export { SEO_PAGE_MAPPING } from './seo-mapping';
@@ -32,17 +47,6 @@ export { assetWealthManagement } from './categories/asset-wealth-management';
 export { businessSuccession } from './categories/business-succession';
 export { strategicPlanningMA } from './categories/strategic-planning-ma';
 
-// Aggregated service categories array
-import { corporateInsuranceRiskCategory } from './categories/corporate-insurance-risk';
-import { corporateStructureGovernance } from './categories/corporate-structure-governance';
-import { hrStartupSupport } from './categories/hr-startup-support';
-import { taxAccounting } from './categories/tax-accounting';
-import { investmentFinance } from './categories/investment-finance';
-import { assetWealthManagement } from './categories/asset-wealth-management';
-import { businessSuccession } from './categories/business-succession';
-import { strategicPlanningMA } from './categories/strategic-planning-ma';
-import type { ServiceCategory } from './types';
-
 /**
  * 전체 서비스 카테고리 배열
  * 각 카테고리는 관련 서비스들을 그룹화하여 제공
@@ -67,7 +71,7 @@ export const SERVICE_STATS = {
     (sum, category) => sum + category.services.length,
     0
   ),
-  servicesByCategory: SERVICE_CATEGORIES.map((category) => ({
+  servicesByCategory: SERVICE_CATEGORIES.map(category => ({
     id: category.id,
     title: category.title,
     count: category.services.length,

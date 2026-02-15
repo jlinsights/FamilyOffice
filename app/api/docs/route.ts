@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-
 import { swaggerConfig } from '@/lib/api/swagger-config';
 
 // Generate Swagger JSON spec

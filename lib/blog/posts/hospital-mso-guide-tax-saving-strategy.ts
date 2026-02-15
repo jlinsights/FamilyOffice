@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'hospital-mso-guide-tax-saving-strategy',
-    title: '병원경영지원회사(MSO) 설립 가이드와 절세 전략',
-    image:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '병원의 수익성 개선과 세금 절감을 위한 MSO 설립의 모든 것. 의료진 특화 세무 전략부터 실무 설립 절차까지, 10년차 컨설턴트가 전하는 완벽한 실무 가이드입니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'hospital-mso-guide-tax-saving-strategy',
+  title: '병원경영지원회사(MSO) 설립 가이드와 절세 전략',
+  image:
+    'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '병원의 수익성 개선과 세금 절감을 위한 MSO 설립의 모든 것. 의료진 특화 세무 전략부터 실무 설립 절차까지, 10년차 컨설턴트가 전하는 완벽한 실무 가이드입니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">병원경영지원회사(MSO) 설립 가이드와 절세 전략</h1>
@@ -485,11 +485,11 @@ export const post: BlogPost = {
 </div>
 
 </div>`,
-    category: '의료법인',
-    author: '임재홍',
-    date: '2025-02-15',
-    readTime: '15분',
-    tags: ['MSO', '병원경영', '절세전략', '의료법인', '자산관리'],
-    slug: 'hospital-mso-guide-tax-saving-strategy',
-    featured: true,
-  };
+  category: '의료법인',
+  author: '임재홍',
+  date: '2025-02-15',
+  readTime: '15분',
+  tags: ['MSO', '병원경영', '절세전략', '의료법인', '자산관리'],
+  slug: 'hospital-mso-guide-tax-saving-strategy',
+  featured: true,
+};

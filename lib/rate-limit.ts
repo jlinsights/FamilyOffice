@@ -3,7 +3,6 @@
  * Redis 기반 고성능 rate limiting with fallback to memory
  */
 import { Redis } from '@upstash/redis';
-
 import { NextRequest } from 'next/server';
 
 // import { env } from '@/lib/env';

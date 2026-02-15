@@ -1,11 +1,8 @@
 'use client';
 
 import { User } from '@supabase/supabase-js';
-
 import { useState, useEffect, useCallback } from 'react';
-
 import { useRouter } from 'next/navigation';
-
 import {
   getKakaoAuthService,
   type KakaoUser,

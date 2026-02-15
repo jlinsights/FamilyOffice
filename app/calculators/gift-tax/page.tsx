@@ -1,37 +1,33 @@
 'use client';
 
-import { Button, buttonVariants } from '@/components/ui/button';
 import {
-    AlertCircle,
-    BarChart3,
-    Building2,
-    Calculator,
-    Calendar,
-    CheckCircle,
-    Clock,
-    DollarSign,
-    Gift,
-    Heart,
-    Home,
-    Lightbulb,
-    PieChart,
-    Shield,
-    Target,
-    TrendingUp,
-    Users,
-    Users2,
-    Zap
+  AlertCircle,
+  BarChart3,
+  Building2,
+  Calculator,
+  Calendar,
+  CheckCircle,
+  Clock,
+  DollarSign,
+  Gift,
+  Heart,
+  Home,
+  Lightbulb,
+  PieChart,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
+  Users2,
+  Zap,
 } from 'lucide-react';
-
 import { useState, useEffect } from 'react';
-
-import { cn } from '@/lib/utils';
-
 import Link from 'next/link';
-
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
 
 export default function GiftTaxCalculatorPage() {
   const [giftInfo, setGiftInfo] = useState({
@@ -48,7 +44,7 @@ export default function GiftTaxCalculatorPage() {
 
   // Set current year after component mounts to avoid hydration mismatch
   useEffect(() => {
-    setTiming((prev) => ({
+    setTiming(prev => ({
       ...prev,
       year: new Date().getFullYear(),
     }));

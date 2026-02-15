@@ -3,10 +3,9 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { z } from 'zod';
+import { requestTicketSchema, type RequestTicketSubmission } from './schema';
 
 const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'request-tickets.json');
-
-import { requestTicketSchema, type RequestTicketSubmission } from './schema';
 
 // Re-export type
 export type { RequestTicketSubmission } from './schema';
@@ -20,10 +19,12 @@ async function ensureDataFile() {
   }
 }
 
-export async function submitRequestTicket(data: z.infer<typeof requestTicketSchema>) {
+export async function submitRequestTicket(
+  data: z.infer<typeof requestTicketSchema>
+) {
   try {
     await ensureDataFile();
-    
+
     const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
     const submissions: RequestTicketSubmission[] = JSON.parse(fileContent);
 
@@ -36,7 +37,11 @@ export async function submitRequestTicket(data: z.infer<typeof requestTicketSche
 
     submissions.unshift(newSubmission); // Add to top
 
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(submissions, null, 2), 'utf-8');
+    await fs.writeFile(
+      DATA_FILE_PATH,
+      JSON.stringify(submissions, null, 2),
+      'utf-8'
+    );
 
     return { success: true };
   } catch (error) {

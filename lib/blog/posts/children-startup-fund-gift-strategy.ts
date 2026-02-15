@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'children-startup-fund-gift-strategy',
-    title: "자녀의 홀로서기를 돕는 '창업자금 증여세 과세특례' 100% 활용법",
-    image:
-      'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '자녀에게 5억 원까지 세금 없이, 50억 원까지는 10%의 낮은 세율로 증여할 수 있는 기회. 가업승계의 대안으로 떠오르는 창업자금 증여세 과세특례 제도의 모든 것을 10년 차 컨설턴트가 정리해 드립니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'children-startup-fund-gift-strategy',
+  title: "자녀의 홀로서기를 돕는 '창업자금 증여세 과세특례' 100% 활용법",
+  image:
+    'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '자녀에게 5억 원까지 세금 없이, 50억 원까지는 10%의 낮은 세율로 증여할 수 있는 기회. 가업승계의 대안으로 떠오르는 창업자금 증여세 과세특례 제도의 모든 것을 10년 차 컨설턴트가 정리해 드립니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">자녀의 홀로서기를 돕는<br/>'창업자금 증여세 과세특례' 100% 활용법</h1>
     <p className="text-muted-foreground text-lg font-normal leading-relaxed">5억 원까지 세금 0원, 50억 원까지 10%<br/>가업승계가 어렵다면 '창업'을 지원하십시오</p>
@@ -150,36 +150,36 @@ export const post: BlogPost = {
     </p>
 </div>
 </div>`,
-    category: '승계전략',
-    author: '임재홍',
-    date: '2025-12-09',
-    readTime: '12분',
-    tags: [
-      '창업자금증여',
-      '증여세과세특례',
-      '5억원비과세',
-      '가업승계',
-      '청년창업',
-      '절세전략',
-      '패밀리오피스',
-    ],
-    slug: 'children-startup-fund-gift-strategy',
-    featured: true,
-    faq: [
-      {
-        question: '창업 후 폐업하면 증여세는 어떻게 되나요?',
-        answer:
-          '창업 후 10년 이내에 정당한 사유 없이 폐업하거나 휴업하는 경우, 증여세와 이자 상당액(연 8% 수준)을 추징당하게 됩니다. 따라서 사업의 지속 가능성을 충분히 검토한 후 실행해야 합니다.',
-      },
-      {
-        question: '음식점이나 카페 창업도 가능한가요?',
-        answer:
-          '네, 가능합니다. 음식점업은 창업 중소기업 감면 대상 업종에 포함됩니다. 하지만 일반 유흥주점이나 부동산 임대업은 대상에서 제외됩니다.',
-      },
-      {
-        question: '증여받은 돈으로 건물을 사서 사업을 해도 되나요?',
-        answer:
-          '네, 창업을 위해 사업용 자산(토지, 건물 등)을 취득하는 것은 가능합니다. 단, 해당 부동산을 임대 목적으로 사용하면 안 되며, 반드시 본인의 사업장으로 직접 사용해야 합니다.',
-      },
-    ],
-  };
+  category: '승계전략',
+  author: '임재홍',
+  date: '2025-12-09',
+  readTime: '12분',
+  tags: [
+    '창업자금증여',
+    '증여세과세특례',
+    '5억원비과세',
+    '가업승계',
+    '청년창업',
+    '절세전략',
+    '패밀리오피스',
+  ],
+  slug: 'children-startup-fund-gift-strategy',
+  featured: true,
+  faq: [
+    {
+      question: '창업 후 폐업하면 증여세는 어떻게 되나요?',
+      answer:
+        '창업 후 10년 이내에 정당한 사유 없이 폐업하거나 휴업하는 경우, 증여세와 이자 상당액(연 8% 수준)을 추징당하게 됩니다. 따라서 사업의 지속 가능성을 충분히 검토한 후 실행해야 합니다.',
+    },
+    {
+      question: '음식점이나 카페 창업도 가능한가요?',
+      answer:
+        '네, 가능합니다. 음식점업은 창업 중소기업 감면 대상 업종에 포함됩니다. 하지만 일반 유흥주점이나 부동산 임대업은 대상에서 제외됩니다.',
+    },
+    {
+      question: '증여받은 돈으로 건물을 사서 사업을 해도 되나요?',
+      answer:
+        '네, 창업을 위해 사업용 자산(토지, 건물 등)을 취득하는 것은 가능합니다. 단, 해당 부동산을 임대 목적으로 사용하면 안 되며, 반드시 본인의 사업장으로 직접 사용해야 합니다.',
+    },
+  ],
+};

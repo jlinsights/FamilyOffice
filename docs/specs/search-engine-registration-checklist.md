@@ -109,7 +109,6 @@ const kakaoBusinessConfig = {
 ```typescript
 // app/feed.xml/route.ts
 import { NextResponse } from 'next/server';
-
 import { getBlogPosts } from '@/lib/blog-data';
 
 export async function GET() {

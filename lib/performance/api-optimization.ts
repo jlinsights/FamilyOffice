@@ -3,9 +3,7 @@
  * API response time: <500ms for 95th percentile 목표
  */
 import { Agent } from 'https';
-
 import { NextRequest, NextResponse } from 'next/server';
-
 import { logger } from '../logger';
 
 // SSR 안전성을 위한 dynamic imports

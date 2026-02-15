@@ -1,32 +1,28 @@
 import {
-    Award,
-    CheckCircle2,
-    DollarSign,
-    Shield,
-    Target,
-    TrendingUp,
-    Users,
+  Award,
+  CheckCircle2,
+  DollarSign,
+  Shield,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { generateMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = generateMetadata(

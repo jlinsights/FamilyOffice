@@ -1,13 +1,13 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'real-estate-corporation-conversion-pros-cons',
-    title: "2025년 부동산 법인 전환, 여전히 유효한 '절세 치트키'인가?",
-    image:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '취득세 중과, 종부세 강화 등 잇따른 규제 속에서도 부동산 법인 전환이 유리한 이유는 무엇일까요? 개인 임대사업자가 반드시 알아야 할 법인 전환의 득과 실, 그리고 2025년 핵심 전략을 분석합니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'real-estate-corporation-conversion-pros-cons',
+  title: "2025년 부동산 법인 전환, 여전히 유효한 '절세 치트키'인가?",
+  image:
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '취득세 중과, 종부세 강화 등 잇따른 규제 속에서도 부동산 법인 전환이 유리한 이유는 무엇일까요? 개인 임대사업자가 반드시 알아야 할 법인 전환의 득과 실, 그리고 2025년 핵심 전략을 분석합니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">2025년 부동산 법인 전환,<br/>여전히 유효한 '절세 치트키'인가?</h1>
     <p className="text-muted-foreground text-lg font-normal leading-relaxed">규제의 파도 속에서도 길은 있다<br/>개인 임대사업자가 법인으로 가야만 하는 결정적 이유</p>
@@ -143,36 +143,36 @@ export const post: BlogPost = {
     </p>
 </div>
 </div>`,
-    category: '세무최적화',
-    author: '임재홍',
-    date: '2025-12-05',
-    readTime: '15분',
-    tags: [
-      '부동산법인',
-      '법인전환',
-      '양도소득세이월과세',
-      '취득세중과',
-      '종부세',
-      '성실신고확인제도',
-      '가업승계',
-    ],
-    slug: 'real-estate-corporation-conversion-pros-cons',
-    featured: true,
-    faq: [
-      {
-        question: '부동산 법인 전환 시 취득세는 얼마나 나오나요?',
-        answer:
-          '현물출자 방식으로 전환 시 취득세의 75%를 감면받을 수 있습니다. (단, 농어촌특별세는 감면 제외) 하지만 과밀억제권역 내 법인 설립 등 중과세 요건에 해당하면 감면 혜택이 배제될 수 있으니 주의해야 합니다.',
-      },
-      {
-        question: '법인 전환 후 자금 회수는 어떻게 하나요?',
-        answer:
-          '대표이사의 급여, 배당, 퇴직금 등을 통해 회수할 수 있습니다. 특히 법인 전환 시 발생한 영업권(Goodwill)을 평가하여 법인에 양도하면, 대표이사는 60% 필요경비가 인정되는 기타소득으로 자금을 회수할 수 있어 절세 효과가 큽니다.',
-      },
-      {
-        question: '1주택자도 법인 전환이 유리한가요?',
-        answer:
-          '1세대 1주택 비과세 혜택을 받을 수 있는 고가 주택이라면 개인 명의 유지가 유리할 수 있습니다. 하지만 다주택자이거나 상가, 빌딩 등 수익형 부동산을 보유한 경우에는 법인 전환이 유리한 경우가 많습니다.',
-      },
-    ],
-  };
+  category: '세무최적화',
+  author: '임재홍',
+  date: '2025-12-05',
+  readTime: '15분',
+  tags: [
+    '부동산법인',
+    '법인전환',
+    '양도소득세이월과세',
+    '취득세중과',
+    '종부세',
+    '성실신고확인제도',
+    '가업승계',
+  ],
+  slug: 'real-estate-corporation-conversion-pros-cons',
+  featured: true,
+  faq: [
+    {
+      question: '부동산 법인 전환 시 취득세는 얼마나 나오나요?',
+      answer:
+        '현물출자 방식으로 전환 시 취득세의 75%를 감면받을 수 있습니다. (단, 농어촌특별세는 감면 제외) 하지만 과밀억제권역 내 법인 설립 등 중과세 요건에 해당하면 감면 혜택이 배제될 수 있으니 주의해야 합니다.',
+    },
+    {
+      question: '법인 전환 후 자금 회수는 어떻게 하나요?',
+      answer:
+        '대표이사의 급여, 배당, 퇴직금 등을 통해 회수할 수 있습니다. 특히 법인 전환 시 발생한 영업권(Goodwill)을 평가하여 법인에 양도하면, 대표이사는 60% 필요경비가 인정되는 기타소득으로 자금을 회수할 수 있어 절세 효과가 큽니다.',
+    },
+    {
+      question: '1주택자도 법인 전환이 유리한가요?',
+      answer:
+        '1세대 1주택 비과세 혜택을 받을 수 있는 고가 주택이라면 개인 명의 유지가 유리할 수 있습니다. 하지만 다주택자이거나 상가, 빌딩 등 수익형 부동산을 보유한 경우에는 법인 전환이 유리한 경우가 많습니다.',
+    },
+  ],
+};

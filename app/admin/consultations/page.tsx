@@ -1,8 +1,6 @@
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { createAdminClient } from '@/lib/supabase/admin-client';
-
 import { Database } from '@/types/supabase';
 
 type ConsultationRow = Database['public']['Tables']['consultations']['Row'];

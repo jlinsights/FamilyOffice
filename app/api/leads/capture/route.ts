@@ -13,10 +13,9 @@
  * 5. Track GA4 event
  * 6. Return success response
  */
-
+import { NextRequest, NextResponse } from 'next/server';
 import { beehiiv } from '@/lib/beehiiv/client';
 import { createClient } from '@/lib/supabase/server';
-import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
@@ -81,7 +80,7 @@ export async function POST(request: NextRequest) {
     // we allow it, but we won't have financial data.
     // Ensure at least source is present.
     if (!body.calculationResult && !body.source) {
-       return NextResponse.json<CaptureLeadResponse>(
+      return NextResponse.json<CaptureLeadResponse>(
         {
           success: false,
           message: '잘못된 요청입니다.',
@@ -97,11 +96,11 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient();
 
     // Check if lead already exists
-    const { data: existingLead } = await supabase
+    const { data: existingLead } = (await supabase
       .from('leads')
       .select('id, email, beehiiv_subscription_id')
       .eq('email', email)
-      .single() as any;
+      .single()) as any;
 
     let leadId: string;
     let beehiivSubscriptionId: string | undefined;
@@ -111,7 +110,7 @@ export async function POST(request: NextRequest) {
       leadId = existingLead.id;
       beehiivSubscriptionId = existingLead.beehiiv_subscription_id || undefined;
 
-    const leadData = {
+      const leadData = {
         name: name || existingLead.name,
         source: source || 'calculator',
         utm_source: utm?.source,
@@ -120,9 +119,9 @@ export async function POST(request: NextRequest) {
         utm_content: utm?.content,
         referring_url: referringUrl,
         updated_at: new Date().toISOString(),
-    } as any;
+      } as any;
 
-    if (calculationResult) {
+      if (calculationResult) {
         leadData.total_assets = calculationResult.totalAssets;
         leadData.total_debts = calculationResult.totalDebts;
         leadData.net_assets = calculationResult.netAssets;
@@ -130,10 +129,9 @@ export async function POST(request: NextRequest) {
         leadData.has_spouse = calculationResult.hasSpouse;
         leadData.num_children = calculationResult.numChildren;
         leadData.num_minor_children = calculationResult.numMinorChildren || 0;
-    }
+      }
 
-      const { error: updateError } = (await (supabase
-        .from('leads') as any)
+      const { error: updateError } = (await (supabase.from('leads') as any)
         .update(leadData)
         .eq('id', leadId)) as any;
 
@@ -152,24 +150,24 @@ export async function POST(request: NextRequest) {
 
     // New lead - insert into Supabase
     const newLeadData = {
-        email,
-        name,
-        source: source || 'calculator',
-        utm_source: utm?.source,
-        utm_medium: utm?.medium,
-        utm_campaign: utm?.campaign,
-        utm_content: utm?.content,
-        referring_url: referringUrl,
+      email,
+      name,
+      source: source || 'calculator',
+      utm_source: utm?.source,
+      utm_medium: utm?.medium,
+      utm_campaign: utm?.campaign,
+      utm_content: utm?.content,
+      referring_url: referringUrl,
     } as any;
 
     if (calculationResult) {
-        newLeadData.total_assets = calculationResult.totalAssets;
-        newLeadData.total_debts = calculationResult.totalDebts;
-        newLeadData.net_assets = calculationResult.netAssets;
-        newLeadData.estimated_tax = calculationResult.estimatedTax;
-        newLeadData.has_spouse = calculationResult.hasSpouse;
-        newLeadData.num_children = calculationResult.numChildren;
-        newLeadData.num_minor_children = calculationResult.numMinorChildren || 0;
+      newLeadData.total_assets = calculationResult.totalAssets;
+      newLeadData.total_debts = calculationResult.totalDebts;
+      newLeadData.net_assets = calculationResult.netAssets;
+      newLeadData.estimated_tax = calculationResult.estimatedTax;
+      newLeadData.has_spouse = calculationResult.hasSpouse;
+      newLeadData.num_children = calculationResult.numChildren;
+      newLeadData.num_minor_children = calculationResult.numMinorChildren || 0;
     }
 
     const { data: newLead, error: insertError } = (await supabase
@@ -202,8 +200,7 @@ export async function POST(request: NextRequest) {
 
       // Update lead with Beehiiv subscription ID
       if (beehiivSubscriptionId) {
-        await (supabase
-          .from('leads') as any)
+        await (supabase.from('leads') as any)
           .update({
             beehiiv_subscription_id: beehiivSubscriptionId,
             beehiiv_status: 'active',
@@ -244,7 +241,8 @@ export async function POST(request: NextRequest) {
       success: true,
       leadId,
       beehiivSubscriptionId,
-      message: '이메일이 성공적으로 등록되었습니다. 절세 가이드를 이메일로 보내드릴게요!',
+      message:
+        '이메일이 성공적으로 등록되었습니다. 절세 가이드를 이메일로 보내드릴게요!',
     });
   } catch (error) {
     console.error('Lead capture error:', error);
@@ -252,7 +250,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json<CaptureLeadResponse>(
       {
         success: false,
-        message: '이메일 등록 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
+        message:
+          '이메일 등록 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
         error: error instanceof Error ? error.message : 'UNKNOWN_ERROR',
       },
       { status: 500 }

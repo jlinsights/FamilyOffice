@@ -6,7 +6,6 @@
  * 'never' types for insert/update operations. These helpers provide type-safe wrappers.
  */
 import { SupabaseClient } from '@supabase/supabase-js';
-
 import { Database } from '@/types/supabase';
 
 // Flexible Supabase client type that accepts any schema variant

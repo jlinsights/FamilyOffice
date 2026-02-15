@@ -6,20 +6,18 @@
 'use client';
 
 import {
+  BarChart3,
   Calendar,
+  CheckCircle,
+  Clock,
+  FileText,
+  Settings,
+  Target,
   TrendingUp,
   Users,
-  FileText,
   Zap,
-  Settings,
-  BarChart3,
-  Target,
-  Clock,
-  CheckCircle,
 } from 'lucide-react';
-
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -31,7 +29,6 @@ import {
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import {
   generateContentCalendar,
   createAutomationRule,
@@ -41,11 +38,6 @@ import {
   type AutomationRule,
   type MarketingMetrics,
 } from '@/lib/seo/inbound-marketing-automation';
-
-/**
- * 인바운드 마케팅 자동화 대시보드
- * SEO 성과 모니터링 및 컨텐츠 관리
- */
 
 interface InboundMarketingDashboardProps {
   initialMetrics?: MarketingMetrics;
@@ -128,7 +120,12 @@ export function InboundMarketingDashboard({
     setAutomationRules(rules);
   }, []);
 
-  const roiData = calculateMarketingROI(metrics, 2000000) as { roi: number; costPerLead: number; ltv: number; recommendations?: string[] }; // 200만원 투자 가정
+  const roiData = calculateMarketingROI(metrics, 2000000) as {
+    roi: number;
+    costPerLead: number;
+    ltv: number;
+    recommendations?: string[];
+  }; // 200만원 투자 가정
 
   return (
     <div className={`w-full space-y-6 ${className}`}>
@@ -281,7 +278,8 @@ export function InboundMarketingDashboard({
                     {Math.floor(
                       (metrics.contentEngagement?.averageTimeOnPage || 0) / 60
                     )}
-                    분 {(metrics.contentEngagement?.averageTimeOnPage || 0) % 60}초
+                    분{' '}
+                    {(metrics.contentEngagement?.averageTimeOnPage || 0) % 60}초
                   </div>
                 </div>
                 <div>
@@ -453,7 +451,8 @@ function AutomationRulesView({ rules }: { rules: AutomationRule[] }) {
                   <div>
                     <div className="font-medium">{rule.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      {typeof rule.trigger === 'object' && rule.trigger.type === 'schedule'
+                      {typeof rule.trigger === 'object' &&
+                      rule.trigger.type === 'schedule'
                         ? `스케줄: ${rule.trigger.schedule}`
                         : `트리거: ${typeof rule.trigger === 'object' ? rule.trigger.type : rule.trigger}`}
                     </div>
@@ -506,7 +505,12 @@ function AnalyticsView({
   roiData,
 }: {
   metrics: MarketingMetrics;
-  roiData: { roi: number; costPerLead: number; ltv: number; recommendations?: string[] };
+  roiData: {
+    roi: number;
+    costPerLead: number;
+    ltv: number;
+    recommendations?: string[];
+  };
 }) {
   return (
     <div className="space-y-6">

@@ -54,7 +54,8 @@ process.env.CLERK_SECRET_KEY = 'test-secret';
 
 // Mock Supabase environment variables for integration tests
 process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://test-project.supabase.co';
-process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = 'test-anon-key-for-integration-tests';
+process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY =
+  'test-anon-key-for-integration-tests';
 process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-service-role-key-for-admin-tests';
 
 // Mock IntersectionObserver for components that use it
@@ -105,7 +106,7 @@ jest.mock('@/lib/supabase/client', () => ({
         },
         error: null,
       }),
-      onAuthStateChange: (callback) => {
+      onAuthStateChange: callback => {
         return {
           data: { subscription: { unsubscribe: () => {} } },
         };
@@ -133,7 +134,7 @@ jest.mock('@/lib/supabase/client', () => ({
         error: null,
       }),
     },
-    from: (table) => {
+    from: table => {
       const chain = {
         select: () => chain,
         insert: () => chain,
@@ -177,7 +178,7 @@ jest.mock('@/lib/supabase/admin-client', () => ({
         },
         error: null,
       }),
-      onAuthStateChange: (callback) => {
+      onAuthStateChange: callback => {
         return {
           data: { subscription: { unsubscribe: () => {} } },
         };
@@ -205,7 +206,7 @@ jest.mock('@/lib/supabase/admin-client', () => ({
         error: null,
       }),
     },
-    from: (table) => {
+    from: table => {
       const chain = {
         select: () => chain,
         insert: () => chain,
@@ -213,7 +214,7 @@ jest.mock('@/lib/supabase/admin-client', () => ({
         delete: () => chain,
         eq: () => chain,
         single: async () => ({
-          data: null,  // For getUserByClerkId to return null when user doesn't exist
+          data: null, // For getUserByClerkId to return null when user doesn't exist
           error: null,
         }),
       };

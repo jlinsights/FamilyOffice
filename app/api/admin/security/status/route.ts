@@ -3,7 +3,6 @@
  * 관리자만 접근 가능한 실시간 보안 모니터링 데이터
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { requireAdminPermissions } from '@/lib/admin-permissions';
 import { globalRateLimit } from '@/lib/rate-limit';
 import { getSecurityStatus } from '@/lib/security/security-monitor';

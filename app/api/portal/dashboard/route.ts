@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-
 import { currentUser } from '@clerk/nextjs/server';
-
 import { safeFrom } from '@/lib/supabase/helpers';
 import { createClient } from '@/lib/supabase/server';
 
@@ -10,10 +8,7 @@ export async function GET() {
     const user = await currentUser();
 
     if (!user) {
-      return NextResponse.json(
-        { error: 'Not authenticated' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
     const email =
@@ -34,28 +29,43 @@ export async function GET() {
       .single();
 
     // Fetch consultation stats for this user's email
-    const { count: totalConsultations } = await safeFrom(supabase, 'consultations')
+    const { count: totalConsultations } = await safeFrom(
+      supabase,
+      'consultations'
+    )
       .select('*', { count: 'exact', head: true })
       .eq('email', email ?? '');
 
-    const { count: pendingConsultations } = await safeFrom(supabase, 'consultations')
+    const { count: pendingConsultations } = await safeFrom(
+      supabase,
+      'consultations'
+    )
       .select('*', { count: 'exact', head: true })
       .eq('email', email ?? '')
       .eq('status', 'pending');
 
     // Fetch recent consultations (last 5)
-    const { data: recentConsultations } = await safeFrom(supabase, 'consultations')
+    const { data: recentConsultations } = await safeFrom(
+      supabase,
+      'consultations'
+    )
       .select('id, service_type, status, created_at')
       .eq('email', email ?? '')
       .order('created_at', { ascending: false })
       .limit(5);
 
     // Fetch structure check requests for this user
-    const { count: totalStructureChecks } = await safeFrom(supabase, 'structure_check_requests')
+    const { count: totalStructureChecks } = await safeFrom(
+      supabase,
+      'structure_check_requests'
+    )
       .select('*', { count: 'exact', head: true })
       .eq('email', email ?? '');
 
-    const { data: recentStructureChecks } = await safeFrom(supabase, 'structure_check_requests')
+    const { data: recentStructureChecks } = await safeFrom(
+      supabase,
+      'structure_check_requests'
+    )
       .select('id, status, qualification_score, created_at')
       .eq('email', email ?? '')
       .order('created_at', { ascending: false })

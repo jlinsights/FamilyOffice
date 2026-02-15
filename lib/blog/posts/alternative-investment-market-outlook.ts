@@ -1,11 +1,11 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'alternative-investment-market-outlook',
-    title: '대체투자 시장 전망과 기회',
-    excerpt:
-      '2025년 대체투자 시장의 주요 트렌드와 고액자산가를 위한 투자 기회를 분석합니다.',
-    content: `# 대체투자 시장 전망과 기회
+  id: 'alternative-investment-market-outlook',
+  title: '대체투자 시장 전망과 기회',
+  excerpt:
+    '2025년 대체투자 시장의 주요 트렌드와 고액자산가를 위한 투자 기회를 분석합니다.',
+  content: `# 대체투자 시장 전망과 기회
 
 전통적인 주식과 채권을 넘어서는 대체투자는 고액자산가들의 포트폴리오에서 점점 중요한 비중을 차지하고 있습니다. 2025년 대체투자 시장의 전망과 주요 기회를 살펴보겠습니다.
 
@@ -96,11 +96,11 @@ export const post: BlogPost = {
 - 네트워킹 효과
 
 대체투자는 높은 수익 가능성과 함께 상당한 리스크를 수반하므로, 반드시 전문가와 상담 후 신중하게 접근해야 합니다.`,
-    category: '자산관리 전략',
-    author: '임재홍',
-    date: '2024-12-30',
-    readTime: '11분',
-    tags: ['대체투자', '프라이빗 에쿼티', '헤지펀드', '투자 전략'],
-    slug: 'alternative-investment-market-outlook',
-    featured: false,
-  };
+  category: '자산관리 전략',
+  author: '임재홍',
+  date: '2024-12-30',
+  readTime: '11분',
+  tags: ['대체투자', '프라이빗 에쿼티', '헤지펀드', '투자 전략'],
+  slug: 'alternative-investment-market-outlook',
+  featured: false,
+};

@@ -15,7 +15,6 @@
  */
 import { createClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
-
 import { checkGA4Connection } from '@/lib/google-analytics/ga4-client';
 import { checkSerperConnection } from '@/lib/serper/client';
 

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-
 import { generateMetadata } from '@/lib/seo/metadata';
 
 // 기업인증 페이지 SEO 최적화 메타데이터

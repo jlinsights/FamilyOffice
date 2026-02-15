@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import { ErrorBoundary, withErrorBoundary } from '../error-boundary';
 
 // Mock component that throws an error

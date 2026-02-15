@@ -3,18 +3,23 @@ import { z } from 'zod';
 // Schema Definition based on "Request Ticket - 1 min form"
 export const requestTicketSchema = z.object({
   // 1. 요청 유형
-  requestType: z.enum([
-    'hotel_dining',
-    'travel',
-    'art_tour',
-    'family_office_meeting',
-    'network_inquiry',
-    'other',
-  ], { required_error: '요청 유형을 선택해주세요.' }),
+  requestType: z.enum(
+    [
+      'hotel_dining',
+      'travel',
+      'art_tour',
+      'family_office_meeting',
+      'network_inquiry',
+      'other',
+    ],
+    { required_error: '요청 유형을 선택해주세요.' }
+  ),
   requestTypeOther: z.string().optional(), // 기타 선택 시
 
   // 2. 희망 일정/마감
-  preferredDate: z.string().min(1, { message: '희망 날짜/시간을 입력해주세요.' }),
+  preferredDate: z
+    .string()
+    .min(1, { message: '희망 날짜/시간을 입력해주세요.' }),
   deadline: z.string().min(1, { message: '확정 마감 시한을 입력해주세요.' }),
 
   // 3. 참여자/동행
@@ -36,8 +41,10 @@ export const requestTicketSchema = z.object({
 
   // 7. 회신 채널
   contactChannel: z.enum(['kakao', 'email', 'assistant']),
-  contactDetail: z.string().min(1, { message: '연락처 또는 이메일을 입력해주세요.' }),
-  
+  contactDetail: z
+    .string()
+    .min(1, { message: '연락처 또는 이메일을 입력해주세요.' }),
+
   // 8. 추가 요청
   additionalNotes: z.string().optional(),
 });

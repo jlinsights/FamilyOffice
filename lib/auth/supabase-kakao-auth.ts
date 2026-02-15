@@ -1,10 +1,8 @@
 'use client';
 
 import { User } from '@supabase/supabase-js';
-
 import { createClient } from '@/lib/supabase/client';
 import { safeInsert, safeUpdate } from '@/lib/supabase/helpers';
-
 import { Database } from '@/types/supabase';
 
 type UserRecord = Database['public']['Tables']['users']['Row'];

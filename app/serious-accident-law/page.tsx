@@ -1,32 +1,27 @@
 'use client';
 
 import {
-    AlertTriangle,
-    Building,
-    CheckCircle,
-    Clock,
-    Gavel,
-    HardHat,
-    Heart,
-    Info,
-    Phone,
-    Scale,
-    Shield,
-    Star,
-    Target,
-    Users,
-    Zap,
+  AlertTriangle,
+  Building,
+  CheckCircle,
+  Clock,
+  Gavel,
+  HardHat,
+  Heart,
+  Info,
+  Phone,
+  Scale,
+  Shield,
+  Star,
+  Target,
+  Users,
+  Zap,
 } from 'lucide-react';
-
 import { useCallback, useEffect, useState } from 'react';
-
 import Script from 'next/script';
-
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 import { AnimatedCounter } from '@/components/animated-counter';
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { PremiumFAQ } from '@/components/faq/premium-faq';
@@ -34,8 +29,8 @@ import { Footer } from '@/components/footer';
 import { SelfCheckSafety } from '@/components/forms/self-check-safety';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { generateStructuredData } from '@/lib/seo/structured-data';
+import { cn } from '@/lib/utils';
 
 export default function SeriousAccidentLawPage() {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -816,7 +811,10 @@ export default function SeriousAccidentLawPage() {
                     />
                     <a
                       href="tel:0502-5550-8700"
-                      className={buttonVariants({ variant: 'outline', size: 'lg' })}
+                      className={buttonVariants({
+                        variant: 'outline',
+                        size: 'lg',
+                      })}
                     >
                       <Phone className="mr-2 h-4 w-4" />☎ 0502-5550-8700
                     </a>

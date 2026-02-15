@@ -1,7 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
-
 import { cookies } from 'next/headers';
-
 import { Database } from '@/types/supabase';
 
 // 서버 컴포넌트에서 사용할 Supabase 클라이언트

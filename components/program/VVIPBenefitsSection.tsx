@@ -1,16 +1,14 @@
 'use client';
 
 import {
-    ArrowRight,
-    CheckCircle,
-    Crown,
-    Palette,
-    Shield,
-    Sparkles,
+  ArrowRight,
+  CheckCircle,
+  Crown,
+  Palette,
+  Shield,
+  Sparkles,
 } from 'lucide-react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';

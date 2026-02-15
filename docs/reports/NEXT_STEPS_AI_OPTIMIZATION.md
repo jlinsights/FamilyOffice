@@ -216,7 +216,6 @@ CREATE INDEX idx_keyword_rankings_created_at ON keyword_rankings(created_at);
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
-
 import { collectDailyRankings } from '@/scripts/collect-serper-rankings';
 
 export async function GET(request: NextRequest) {

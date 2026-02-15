@@ -6,16 +6,10 @@
 'use client';
 
 import { useEffect } from 'react';
-
 import {
-    initializeSEOTracker,
-    type AnalyticsConfig,
+  initializeSEOTracker,
+  type AnalyticsConfig,
 } from '@/lib/seo/analytics-tracker';
-
-/**
- * SEO 추적기 초기화 컴포넌트
- * 전체 사이트에서 SEO 성과 측정을 위한 글로벌 초기화
- */
 
 // Extract environment variables at module level for client components
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;

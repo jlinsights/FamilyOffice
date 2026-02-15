@@ -1,12 +1,10 @@
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-
 import { currentUser } from '@clerk/nextjs/server';
-
+import { getAdminEmails } from '@/lib/admin-permissions';
 import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { createAdminClient } from '@/lib/supabase/admin-client';
 
 export const metadata: Metadata = {
@@ -17,9 +15,11 @@ export const metadata: Metadata = {
 export default async function StructureCheckAdminPage() {
   // 관리자 권한 확인
   const user = await currentUser();
-  const adminEmail = 'jhlim725@gmail.com';
+  const primaryEmail = user?.emailAddresses.find(
+    email => email.id === user.primaryEmailAddressId
+  )?.emailAddress;
 
-  if (!user || user.emailAddresses[0]?.emailAddress !== adminEmail) {
+  if (!user || !primaryEmail || !getAdminEmails().includes(primaryEmail.toLowerCase())) {
     redirect('/');
   }
 

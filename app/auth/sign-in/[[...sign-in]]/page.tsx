@@ -1,11 +1,7 @@
 import { Crown, Palette, Shield, Sparkles } from 'lucide-react';
-
 import type { Metadata } from 'next';
-
 import { SignIn } from '@clerk/nextjs';
-
 import { Badge } from '@/components/ui/badge';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { isClerkBypassMode } from '@/lib/auth/clerk-utils';

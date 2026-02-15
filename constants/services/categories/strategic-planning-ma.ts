@@ -195,8 +195,7 @@ export const strategicPlanningMA: ServiceCategory = {
     },
     {
       title: '양수도거래 컨설팅',
-      description:
-        '기업 또는 사업부 양수도 시 법률·세무·재무 통합 컨설팅',
+      description: '기업 또는 사업부 양수도 시 법률·세무·재무 통합 컨설팅',
       features: [
         '양수도 대상 기업 실사 (법률, 재무, 세무, 노무)',
         '양수도 가격 협상 전략 및 계약서 작성',
@@ -209,8 +208,7 @@ export const strategicPlanningMA: ServiceCategory = {
         '양수도 후 통합 작업 성공률 제고',
         '세무 리스크 최소화 및 절세',
       ],
-      targetClient:
-        '기업 또는 사업부를 인수하려는 기업, 양도를 계획하는 기업',
+      targetClient: '기업 또는 사업부를 인수하려는 기업, 양도를 계획하는 기업',
       detailedContent: {
         overview:
           '양수도는 기업 또는 사업부의 자산과 부채를 포괄적으로 인수하는 거래로, M&A의 한 방식입니다. 양수도 시 법률, 재무, 세무, 노무 등 다방면의 실사가 필요하며, 양수도 후 통합 작업(PMI)도 중요합니다. FamilyOffice S는 양수도 전 과정을 통합 지원합니다.',
@@ -256,8 +254,7 @@ export const strategicPlanningMA: ServiceCategory = {
     },
     {
       title: '기업구조조정 지원',
-      description:
-        '재무 위기 기업의 구조조정 전략 수립 및 실행 지원',
+      description: '재무 위기 기업의 구조조정 전략 수립 및 실행 지원',
       features: [
         '재무 상태 진단 및 구조조정 필요성 평가',
         '구조조정 전략 수립 (부채 조정, 자산 매각, 인력 조정 등)',
@@ -270,8 +267,7 @@ export const strategicPlanningMA: ServiceCategory = {
         '구조조정 후 사업 정상화 및 재도약',
         '임직원 고용 안정 및 이해관계자 보호',
       ],
-      targetClient:
-        '재무 위기에 처한 기업, 워크아웃·법정관리를 고려하는 기업',
+      targetClient: '재무 위기에 처한 기업, 워크아웃·법정관리를 고려하는 기업',
       detailedContent: {
         overview:
           '기업구조조정은 재무 위기에 처한 기업이 부채 조정, 자산 매각, 인력 조정 등을 통해 재무 건전성을 회복하는 과정입니다. 구조조정은 기업 생존을 위한 불가피한 선택이지만, 전략적으로 접근하지 않으면 실패할 수 있습니다. FamilyOffice S는 구조조정 전략 수립부터 실행까지 전 과정을 지원합니다.',
@@ -317,8 +313,7 @@ export const strategicPlanningMA: ServiceCategory = {
     },
     {
       title: '부실채권 정리',
-      description:
-        '부실채권 회수 전략 수립 및 법률·회계 처리 지원',
+      description: '부실채권 회수 전략 수립 및 법률·회계 처리 지원',
       features: [
         '부실채권 현황 분석 및 회수 가능성 평가',
         '부실채권 회수 전략 (독촉, 소송, 채권 양도 등)',
@@ -379,8 +374,7 @@ export const strategicPlanningMA: ServiceCategory = {
     },
     {
       title: '인수합병(M&A) 컨설팅',
-      description:
-        '기업 인수합병 전략 수립부터 실행까지 통합 M&A 컨설팅',
+      description: '기업 인수합병 전략 수립부터 실행까지 통합 M&A 컨설팅',
       features: [
         'M&A 전략 수립 (매수·매도 전략, 대상 기업 발굴)',
         '기업가치 평가 (DCF, Multiples 등) 및 협상 전략',
@@ -393,8 +387,7 @@ export const strategicPlanningMA: ServiceCategory = {
         '실사를 통한 리스크 사전 파악 및 분쟁 예방',
         'PMI 성공으로 M&A 목적 달성',
       ],
-      targetClient:
-        '기업 인수를 계획하는 기업, 기업 매각을 고려하는 오너',
+      targetClient: '기업 인수를 계획하는 기업, 기업 매각을 고려하는 오너',
       detailedContent: {
         overview:
           'M&A(Mergers & Acquisitions)는 기업 인수합병을 통해 사업을 확장하거나, 기업을 매각하여 자금을 회수하는 전략입니다. M&A는 기업가치 평가, 실사, 협상, 계약, PMI 등 복잡한 과정이 필요하며, 전문가 지원이 필수입니다. FamilyOffice S는 M&A 전 과정을 통합 지원합니다.',

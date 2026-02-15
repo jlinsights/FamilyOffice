@@ -21,20 +21,13 @@ import {
   XCircle,
   Zap,
 } from 'lucide-react';
-
 import { useCallback, useEffect, useState } from 'react';
-
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-/**
- * 인바운드 마케팅 대시보드
- * 리드 스코어링, 워크플로우, 콘텐츠 추천 성과를 종합적으로 모니터링
- */
 
 interface MarketingAnalytics {
   period: {

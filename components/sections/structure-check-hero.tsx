@@ -1,9 +1,7 @@
 'use client';
 
 import { AlertCircle } from 'lucide-react';
-
 import { memo } from 'react';
-
 import { Badge } from '@/components/ui/badge';
 import { ClientOnlyIcon } from '@/components/ui/client-only-icon';
 

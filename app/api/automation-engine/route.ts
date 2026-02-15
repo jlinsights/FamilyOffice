@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-
+import { createAutomationRule } from '@/lib/marketing/inbound-marketing-automation';
 import {
   marketingAutomationEngine,
   ExecutionStatus,
 } from '@/lib/marketing/marketing-automation-engine';
-import { createAutomationRule } from '@/lib/marketing/inbound-marketing-automation';
 
 /**
  * 마케팅 자동화 엔진 API 엔드포인트

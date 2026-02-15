@@ -6,5 +6,4 @@
 // export { useTheme } from 'next-themes';
 // export { useMobileMenu } from '../mobile-nav';
 
-export { };
-
+export {};

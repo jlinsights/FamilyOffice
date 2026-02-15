@@ -1,7 +1,5 @@
 import { Briefcase } from 'lucide-react';
-
 import { Badge } from '@/components/ui/badge';
-
 import { ExclusiveProgramCategory } from '@/types/program';
 
 export function ExclusiveProgramsSection({

@@ -1,34 +1,30 @@
 import {
-    Building,
-    Calculator,
-    FileText,
-    HelpCircle,
-    Shield,
-    Users,
-    Wallet,
+  Building,
+  Calculator,
+  FileText,
+  HelpCircle,
+  Shield,
+  Users,
+  Wallet,
 } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
-
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { generateMetadata } from '@/lib/seo/metadata';
 import { generateStructuredData } from '@/lib/seo/structured-data';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '자주 묻는 질문 | 패밀리오피스·가업승계·개인자산관리 완벽 가이드',
@@ -378,7 +374,10 @@ export default function FAQPage() {
                 <CardContent>
                   <Link
                     href="/resources"
-                    className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
+                    className={cn(
+                      buttonVariants({ variant: 'outline' }),
+                      'w-full'
+                    )}
                   >
                     자료실 방문
                   </Link>
@@ -393,7 +392,10 @@ export default function FAQPage() {
                 <CardContent>
                   <Link
                     href="/seminar"
-                    className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
+                    className={cn(
+                      buttonVariants({ variant: 'outline' }),
+                      'w-full'
+                    )}
                   >
                     세미나 일정
                   </Link>

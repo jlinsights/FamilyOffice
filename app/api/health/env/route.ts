@@ -3,7 +3,6 @@
  * Provides runtime environment variable validation and status
  */
 import { NextResponse } from 'next/server';
-
 import { validateEnv, validateCriticalEnvVars } from '@/lib/env';
 
 export async function GET() {

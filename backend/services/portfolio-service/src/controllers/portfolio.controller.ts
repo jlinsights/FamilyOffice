@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { body, param, query, validationResult } from 'express-validator';
-
 import { logger } from '../../../shared/logging/logger';
 import { metricsCollector } from '../../../shared/monitoring/metrics';
 import { PortfolioService } from '../services/portfolio.service';

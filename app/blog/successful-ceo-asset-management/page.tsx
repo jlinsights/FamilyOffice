@@ -9,10 +9,8 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
@@ -22,13 +20,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { generateMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '성공한 CEO 자산관리 방법 7가지 | 전문가 가이드',
@@ -134,15 +130,15 @@ export default function SuccessfulCEOAssetManagementPage() {
                   실전 활용 가능
                 </div>
                 <Link
-                href="/contact"
-                className={cn(buttonVariants({ size: 'lg' }), 'w-full')}
-              >
-                <Users className="mr-2 h-5 w-5" />
-                전문가 상담 신청
-              </Link>
+                  href="/contact"
+                  className={cn(buttonVariants({ size: 'lg' }), 'w-full')}
+                >
+                  <Users className="mr-2 h-5 w-5" />
+                  전문가 상담 신청
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
         </section>
 
         {/* Introduction */}
@@ -373,20 +369,29 @@ export default function SuccessfulCEOAssetManagementPage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/wealth-consulting"
-                    className={buttonVariants({ size: 'lg', variant: 'secondary' })}
+                    className={buttonVariants({
+                      size: 'lg',
+                      variant: 'secondary',
+                    })}
                   >
                     자산관리 서비스 보기
                   </Link>
-                <Link
-                  href="/calculators/inheritance-tax"
-                  className={buttonVariants({ size: 'lg', variant: 'outline' })}
-                >
-                  <Calculator className="mr-2 h-5 w-5" />
-                  상속세 무료 계산
-                </Link>
+                  <Link
+                    href="/calculators/inheritance-tax"
+                    className={buttonVariants({
+                      size: 'lg',
+                      variant: 'outline',
+                    })}
+                  >
+                    <Calculator className="mr-2 h-5 w-5" />
+                    상속세 무료 계산
+                  </Link>
                   <Link
                     href="/contact"
-                    className={cn(buttonVariants({ size: 'lg', variant: 'outline' }), "bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20")}
+                    className={cn(
+                      buttonVariants({ size: 'lg', variant: 'outline' }),
+                      'bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20'
+                    )}
                   >
                     무료 상담 신청
                   </Link>
@@ -413,7 +418,10 @@ export default function SuccessfulCEOAssetManagementPage() {
                   </p>
                   <Link
                     href="/wealth-consulting"
-                    className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                    className={buttonVariants({
+                      variant: 'outline',
+                      size: 'sm',
+                    })}
                   >
                     자세히 보기
                   </Link>
@@ -428,11 +436,14 @@ export default function SuccessfulCEOAssetManagementPage() {
                     5-10년 장기 계획이 필요한 가업승계 완벽 가이드
                   </p>
                   <Link
-                  href="/calculators/inheritance-tax"
-                  className={buttonVariants({ variant: 'outline', size: 'sm' })}
-                >
-                  계산하기 <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                    href="/calculators/inheritance-tax"
+                    className={buttonVariants({
+                      variant: 'outline',
+                      size: 'sm',
+                    })}
+                  >
+                    계산하기 <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
               <Card>
@@ -445,7 +456,10 @@ export default function SuccessfulCEOAssetManagementPage() {
                   </p>
                   <Link
                     href="/tax-strategy"
-                    className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                    className={buttonVariants({
+                      variant: 'outline',
+                      size: 'sm',
+                    })}
                   >
                     자세히 보기
                   </Link>

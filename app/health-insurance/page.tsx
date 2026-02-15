@@ -1,32 +1,28 @@
 import {
-    ArrowRight,
-    Award,
-    Building,
-    Calculator,
-    CheckCircle,
-    Clock,
-    Heart,
-    Phone,
-    Shield,
-    Stethoscope,
-    TrendingUp,
-    User,
-    Users,
+  ArrowRight,
+  Award,
+  Building,
+  Calculator,
+  CheckCircle,
+  Clock,
+  Heart,
+  Phone,
+  Shield,
+  Stethoscope,
+  TrendingUp,
+  User,
+  Users,
 } from 'lucide-react';
-
 import { Metadata } from 'next';
-
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/seo/structured-data';
-
 import { generateMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '개인/법인 건강보험 | 맞춤형 건강보장 솔루션 | 패밀리오피스',

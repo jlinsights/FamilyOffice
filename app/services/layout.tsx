@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-
 import { generateMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = {

@@ -2,11 +2,8 @@
 
 import { Calendar, Filter, Tag, TrendingUp, Clock, Eye } from 'lucide-react';
 import { X } from 'lucide-react';
-
 import { useState } from 'react';
-
 import { useRouter, useSearchParams } from 'next/navigation';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,7 +22,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-
 import { blogCategories } from '@/lib/blog-data';
 
 export type SortOption = 'latest' | 'popular' | 'views' | 'oldest';

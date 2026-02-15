@@ -12,8 +12,7 @@ export const businessSuccession: ServiceCategory = {
   services: [
     {
       title: '가업상속공제',
-      description:
-        '가업상속공제 요건 충족 및 최대 600억 원 상속세 공제 전략',
+      description: '가업상속공제 요건 충족 및 최대 600억 원 상속세 공제 전략',
       features: [
         '가업상속공제 요건 (10년 이상 영위, 매출액 등) 충족 전략',
         '가업상속공제 한도 (최대 600억 원) 극대화 방안',
@@ -73,8 +72,7 @@ export const businessSuccession: ServiceCategory = {
     },
     {
       title: '가업승계지원 제도 컨설팅',
-      description:
-        '정부 가업승계지원 제도(증여세 과세특례 등) 활용 전략',
+      description: '정부 가업승계지원 제도(증여세 과세특례 등) 활용 전략',
       features: [
         '가업승계 증여세 과세특례 (최대 600억 원 공제) 적용',
         '가업승계 전 단계별 증여 전략 (10년 계획)',
@@ -115,7 +113,8 @@ export const businessSuccession: ServiceCategory = {
         ],
         faqs: [
           {
-            question: '가업승계 증여세 과세특례는 상속세 공제와 무엇이 다른가요?',
+            question:
+              '가업승계 증여세 과세특례는 상속세 공제와 무엇이 다른가요?',
             answer:
               '증여세 과세특례는 생전에 미리 승계하는 것이고, 상속세 공제는 사망 후 승계하는 것입니다. 증여가 조기 승계로 경영권 안정화에 유리하나, 사후관리 의무 기간이 상속보다 깁니다(증여 10년 vs 상속 7년).',
           },
@@ -270,8 +269,7 @@ export const businessSuccession: ServiceCategory = {
         '가업승계 전 자산 이전 수단으로 활용',
         '세무조사 리스크 최소화',
       ],
-      targetClient:
-        '자녀 창업을 지원하려는 부모, 창업 자금이 필요한 자녀',
+      targetClient: '자녀 창업을 지원하려는 부모, 창업 자금이 필요한 자녀',
       detailedContent: {
         overview:
           '창업자금증여특례는 만 18세 이상 자녀가 창업할 때 최대 50억 원까지 증여받으면서 10% 저율로 과세받는 제도입니다. 일반 증여세율(최대 50%)보다 훨씬 낮아 자녀 창업 지원 및 자산 이전 수단으로 활용됩니다. FamilyOffice S는 창업 아이템 발굴부터 사후관리까지 전 과정을 지원합니다.',

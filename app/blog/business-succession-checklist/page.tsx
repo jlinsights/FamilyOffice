@@ -1,34 +1,30 @@
 import {
-    ArrowRight,
-    Building2,
-    CheckCircle2,
-    Download,
-    FileCheck,
-    Shield,
-    Timer,
-    TrendingUp,
-    Users,
+  ArrowRight,
+  Building2,
+  CheckCircle2,
+  Download,
+  FileCheck,
+  Shield,
+  Timer,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { generateMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '가업승계 체크리스트 PDF 다운로드 | 5-10년 준비 가이드',
@@ -517,16 +513,16 @@ export default function BusinessSuccessionChecklistPage() {
                   가이업승계 성공률을 70%까지 높이세요
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                href="/contact"
-                className={cn(
-                  buttonVariants({ size: 'lg', variant: 'secondary' }),
-                  'bg-white text-violet-600 hover:bg-violet-50'
-                )}
-              >
-                <Download className="mr-2 h-5 w-5" />
-                체크리스트 무료 다운로드
-              </Link>
+                  <Link
+                    href="/contact"
+                    className={cn(
+                      buttonVariants({ size: 'lg', variant: 'secondary' }),
+                      'bg-white text-violet-600 hover:bg-violet-50'
+                    )}
+                  >
+                    <Download className="mr-2 h-5 w-5" />
+                    체크리스트 무료 다운로드
+                  </Link>
                   <Link
                     href="/business-succession-strategy"
                     className={cn(
@@ -586,7 +582,10 @@ export default function BusinessSuccessionChecklistPage() {
                   </p>
                   <Link
                     href="/business-succession-strategy"
-                    className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'w-full')}
+                    className={cn(
+                      buttonVariants({ variant: 'outline', size: 'sm' }),
+                      'w-full'
+                    )}
                   >
                     자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -602,11 +601,14 @@ export default function BusinessSuccessionChecklistPage() {
                     가업상속공제 최대 600억원 활용 전략
                   </p>
                   <Link
-                  href="/calculators/inheritance-tax"
-                  className={buttonVariants({ variant: 'outline', size: 'sm' })}
-                >
-                  계산하기 <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                    href="/calculators/inheritance-tax"
+                    className={buttonVariants({
+                      variant: 'outline',
+                      size: 'sm',
+                    })}
+                  >
+                    계산하기 <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
               <Card>
@@ -619,11 +621,14 @@ export default function BusinessSuccessionChecklistPage() {
                     기업 자산과 개인 자산을 통합 관리하는 전략
                   </p>
                   <Link
-                  href="/tax-strategy"
-                  className={buttonVariants({ variant: 'outline', size: 'sm' })}
-                >
-                  확인하기 <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                    href="/tax-strategy"
+                    className={buttonVariants({
+                      variant: 'outline',
+                      size: 'sm',
+                    })}
+                  >
+                    확인하기 <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
             </div>

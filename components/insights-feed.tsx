@@ -9,12 +9,9 @@ import {
   Search,
   Sparkles,
 } from 'lucide-react';
-
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -34,7 +31,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import { blogCategories } from '@/lib/blog-data';
 import { RSSItem } from '@/lib/rss-aggregator';
 

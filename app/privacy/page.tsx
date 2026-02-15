@@ -1,14 +1,11 @@
-import { cn } from '@/lib/utils';
 import { ArrowLeft, FileText, Shield } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: '개인정보처리방침 | FamilyOffice S',

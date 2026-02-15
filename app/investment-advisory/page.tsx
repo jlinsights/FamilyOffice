@@ -1,35 +1,31 @@
 import {
-    BarChart3,
-    CheckCircle2,
-    Globe,
-    PieChart,
-    Shield,
-    Star,
-    Target,
-    TrendingUp,
+  BarChart3,
+  CheckCircle2,
+  Globe,
+  PieChart,
+  Shield,
+  Star,
+  Target,
+  TrendingUp,
 } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructuredData } from '@/components/seo/structured-data';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-
 import { generateMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generateMetadata(
   '투자자문 전문 서비스 | 개인 맞춤형 자산관리 및 투자전략',
@@ -164,7 +160,9 @@ export default function InvestmentAdvisoryPage() {
               />
               <Link
                 href="#services"
-                className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' })
+                )}
               >
                 <TrendingUp className="mr-2 h-4 w-4" />
                 투자전략 살펴보기

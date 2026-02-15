@@ -1,4 +1,10 @@
 /**
+ * Sanitizes HTML content for safe rendering in dangerouslySetInnerHTML
+ * Removes dangerous elements and attributes while preserving basic formatting
+ */
+import DOMPurify from 'isomorphic-dompurify';
+
+/**
  * HTML Sanitization Utility
  * Provides secure methods for handling dynamic content that needs to be rendered as HTML
  */
@@ -173,12 +179,6 @@ export function validateCSPNonce(nonce?: string): string | undefined {
 
 /**
  * Sanitizes HTML content for safe rendering in dangerouslySetInnerHTML
- * Removes dangerous elements and attributes while preserving basic formatting
- */
-import DOMPurify from 'isomorphic-dompurify';
-
-/**
- * Sanitizes HTML content for safe rendering in dangerouslySetInnerHTML
  * Uses isomorphic-dompurify for robust XSS protection
  */
 export function sanitizeHTMLContent(content: string): string {
@@ -190,12 +190,40 @@ export function sanitizeHTMLContent(content: string): string {
   // We allow standard text formatting tags but strictly forbid scripts/iframes
   return DOMPurify.sanitize(content, {
     ALLOWED_TAGS: [
-      'p', 'br', 'b', 'i', 'em', 'strong', 'u', 'span', 'div', 'ul', 'ol', 'li',
-      'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'pre', 'hr'
+      'p',
+      'br',
+      'b',
+      'i',
+      'em',
+      'strong',
+      'u',
+      'span',
+      'div',
+      'ul',
+      'ol',
+      'li',
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      'blockquote',
+      'code',
+      'pre',
+      'hr',
     ],
     ALLOWED_ATTR: ['class', 'id', 'style'],
     // forbid all scripts and iframes explicitly (though default does this too)
-    FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'form', 'input', 'style'],
+    FORBID_TAGS: [
+      'script',
+      'iframe',
+      'object',
+      'embed',
+      'form',
+      'input',
+      'style',
+    ],
     FORBID_ATTR: ['on*'], // forbids event handlers
   });
 }

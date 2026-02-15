@@ -1,7 +1,7 @@
 'use client';
 
-import { ClerkProvider, useAuth, useUser } from '@clerk/nextjs';
 import React, { createContext, useContext } from 'react';
+import { ClerkProvider, useAuth, useUser } from '@clerk/nextjs';
 
 // --- Types ---
 interface SafeAuthState {
@@ -103,7 +103,9 @@ export function SafeAuthProvider({ children }: { children: React.ReactNode }) {
 export function useSafeAuthContext() {
   const context = useContext(SafeAuthContext);
   if (!context) {
-    throw new Error('useSafeAuthContext must be used within a SafeAuthProvider');
+    throw new Error(
+      'useSafeAuthContext must be used within a SafeAuthProvider'
+    );
   }
   return context;
 }

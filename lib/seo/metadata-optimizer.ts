@@ -3,7 +3,6 @@
  * 네이버 검색엔진 최적화 중심
  */
 import { Metadata } from 'next';
-
 import { KeywordData, targetKeywords } from '@/lib/seo/seo-keywords';
 
 export interface OptimizedMetadata extends Metadata {

@@ -3,8 +3,8 @@
  * 보안 경고 및 취약점을 실시간으로 모니터링
  */
 import { createClient } from '@supabase/supabase-js';
-
 import { Database } from '@/types/supabase';
+import { getAdminEmails } from '@/lib/admin-permissions';
 
 // Supabase 관리자 클라이언트
 const supabaseAdmin = createClient<Database>(
@@ -274,7 +274,7 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
     const { data: adminUsers, error } = await supabaseAdmin
       .from('users')
       .select('email, is_admin')
-      .eq('email', 'jhlim725@gmail.com');
+      .in('email', getAdminEmails());
 
     if (error) {
       checks.push({

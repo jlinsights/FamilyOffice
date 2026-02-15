@@ -1,10 +1,8 @@
 // FamilyOffice S - 사용자 동기화 유틸리티
 // Clerk 사용자와 Supabase 사용자 데이터를 동기화하는 함수들
 import { currentUser } from '@clerk/nextjs/server';
-
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { safeFrom, safeInsert, safeUpdate } from '@/lib/supabase/helpers';
-
 import { Database } from '@/types/supabase';
 
 // Supabase 클라이언트 (서비스 키) - 타입 안전하게 생성

@@ -429,7 +429,15 @@ export class AutomatedContentOptimization {
       testId,
       status: 'active' as const,
       variants: testConfiguration.variants
-        .filter((v): v is { name?: string; trafficAllocation?: number; currentMetrics?: Record<string, unknown> } => typeof v === 'object')
+        .filter(
+          (
+            v
+          ): v is {
+            name?: string;
+            trafficAllocation?: number;
+            currentMetrics?: Record<string, unknown>;
+          } => typeof v === 'object'
+        )
         .map(v => ({
           name: v.name || 'Variant',
           trafficAllocation: v.trafficAllocation || 50,
@@ -522,7 +530,8 @@ export class AutomatedContentOptimization {
 
     return {
       intentAnalysis: {
-        detectedIntent: intentAnalysis.detectedIntent || intentAnalysis.intent || '',
+        detectedIntent:
+          intentAnalysis.detectedIntent || intentAnalysis.intent || '',
         confidence: intentAnalysis.confidence,
         userJourneyAlignment: intentAnalysis.userJourneyAlignment || 0,
       },

@@ -2,7 +2,7 @@
 
 This file provides comprehensive guidance to Claude Code (claude.ai/code) when working with code in this repository. For AI agents, see **[AGENTS.md](./AGENTS.md)** for optimized, agent-specific instructions.
 
-## 🚀 Quick Start (Agent-Friendly)
+## Quick Start (Agent-Friendly)
 
 ### Essential Commands
 
@@ -16,16 +16,17 @@ npm run lint         # ESLint analysis
 npm run typecheck    # TypeScript validation
 
 # Testing
-npm run test:e2e     # Playwright E2E tests (56 tests)
+npm run test:e2e     # Playwright E2E tests
 ```
 
 ### Key Project Facts
 
-- **Framework**: Next.js 15.4.6 + TypeScript + Tailwind CSS
+- **Framework**: Next.js 16.1.1 + React 18.3.1 + TypeScript 5.8.3 + Tailwind CSS
 - **Target**: Korean mid-market company CEOs
-- **Admin**: `jhlim725@gmail.com` (super admin)
-- **Database**: Supabase PostgreSQL with Clerk sync
-- **Testing**: Playwright (replaced Cypress, 8 browser/device configs)
+- **Admin**: Environment variable based (`ADMIN_EMAILS` / `NEXT_PUBLIC_ADMIN_EMAILS`)
+- **Auth**: Clerk + Supabase PostgreSQL sync
+- **Testing**: Playwright (8 browser/device configs)
+- **Email**: Resend (`email.familyoffices.vip` domain)
 
 ## Project Overview
 
@@ -33,11 +34,11 @@ FamilyOffice S is a premium wealth management platform targeting Korean mid-mark
 
 ## Development Commands
 
-⚠️ **AGENT WARNING**: Never run `npm run build` during development sessions - it breaks HMR and leaves the dev server in an inconsistent state.
+**AGENT WARNING**: Never run `npm run build` during development sessions - it breaks HMR and leaves the dev server in an inconsistent state.
 
 ```bash
 # Development (Use these during agent sessions)
-npm run dev          # Start development server (localhost:3000) - No deprecation warnings
+npm run dev          # Start development server (localhost:3000)
 npm run dev:mobile   # Mobile development server (0.0.0.0:3000)
 npm run dev:inspect  # Development with Node.js inspector
 
@@ -46,7 +47,7 @@ npm run lint         # ESLint code analysis
 npm run typecheck    # TypeScript type checking
 
 # Build Commands (Use outside agent sessions only)
-npm run build        # Production build - No deprecation warnings
+npm run build        # Production build
 npm run start        # Start production server
 npm run vercel-build # Vercel-specific build process
 ```
@@ -55,10 +56,11 @@ npm run vercel-build # Vercel-specific build process
 
 ### Core Framework
 
-- **Next.js 15.4.6** with App Router and TypeScript 5.8.3
-- **Tailwind CSS 3.4.17** + shadcn/ui components
+- **Next.js 16.1.1** with App Router and TypeScript 5.8.3
+- **React 18.3.1** with Server Components
+- **Tailwind CSS** + shadcn/ui components
 - **ESLint** + **Prettier** for code quality
-- **Playwright** for E2E testing (replaced Cypress)
+- **Playwright** for E2E testing
 
 ### Authentication & Database
 
@@ -69,114 +71,126 @@ npm run vercel-build # Vercel-specific build process
 ### Key Integrations
 
 - **Cal.com** for consultation booking (`@calcom/embed-react`)
+  - Components located in `components/calendar/cal-com-*.tsx`
 - **Newsletter**: Beehiiv platform (https://newsletter.familyoffices.vip)
   - 매주 월요일 오전 7:30, 금요일 오전 7:30 정기 발송
   - API 통합으로 블로그에서 직접 구독 가능
-  - 태그 기반 세분화 및 추적
-- **Blog System**: /blog 페이지에서 자산관리 인사이트 제공
-  - **발행 일정**: 수요일 발행 (주간 금융 인사이트)
-  - **콘텐츠 전략**: 실무 중심 가이드 및 시장 분석
-  - SEO 최적화된 콘텐츠 관리
-  - Shield.io 배지 통합
-  - 뉴스레터 구독 연동
-- **v0 AI** integration for content generation
+- **Blog System**: `/blog` 페이지에서 자산관리 인사이트 제공
+  - SEO 최적화된 콘텐츠 관리 + 뉴스레터 구독 연동
+- **Email**: Resend with `email.familyoffices.vip` domain
 - **Google Analytics 4** with structured data markup
-- **Financial APIs**: Yahoo Finance + Alpha Vantage for real-time stock/forex data
+- **Financial APIs**: `/api/financial/` (stocks, forex, status, tax-optimization, korean-market)
 - **Redis**: Multi-layer caching system with failover support
 
 ## Project Structure
 
-````
+```
 app/
-├── api/webhooks/clerk/     # Clerk webhook for user sync
-├── admin/                  # Admin dashboard (protected)
-├── blog/                   # Blog system (/blog + /blog/[slug])
-├── (marketing pages)/      # Public pages with Korean content
-├── layout.tsx             # Root layout with providers
-└── globals.css            # Tailwind base styles
+├── api/
+│   ├── webhooks/clerk/        # Clerk webhook for user sync
+│   ├── admin/                 # Admin API routes
+│   ├── financial/             # Financial data APIs
+│   ├── newsletter/            # Newsletter subscription
+│   └── email/                 # Email service APIs
+├── admin/                     # Admin dashboard (protected)
+├── blog/                      # Blog system (/blog + /blog/[slug])
+├── portal/                    # User portal (authenticated)
+├── structure-check/           # Structure check request flow
+├── (many service pages)/      # Service landing pages
+├── layout.tsx                 # Root layout with providers
+└── globals.css                # Tailwind base styles
 
 components/
-├── cal-com-*.tsx          # Booking widget variations
-├── forms/                 # Contact/consultation forms
-├── icons/service-icons.tsx # Custom SVG icons
-└── ui/                    # shadcn/ui components
+├── calendar/cal-com-*.tsx     # Booking widget variations
+├── email/                     # Email templates & test panel
+├── features/admin/            # Admin-specific components
+├── forms/                     # Contact/consultation forms
+├── icons/service-icons.tsx    # Custom SVG icons
+├── performance/               # Performance monitoring dashboards
+├── program/                   # Program section components
+├── sections/                  # Page section components
+├── seminar/                   # Seminar section components
+└── ui/                        # shadcn/ui components
 
 lib/
-├── supabase/              # Database client/server setup
-├── blog-data.ts           # Centralized blog content management
-├── financial/             # Financial APIs & caching system
-│   ├── financial-service.ts  # Main service with failover
-│   ├── yahoo-finance.ts      # Yahoo Finance API client
-│   ├── alpha-vantage.ts      # Alpha Vantage API client
-│   ├── cache.ts              # Redis + memory caching
-│   └── error-handler.ts      # Structured logging
-├── user-sync.ts           # Clerk→Supabase sync logic
-├── env.ts                 # Environment validation with Zod
-└── utils.ts               # Utility functions
-
-types/
-├── blog.ts                # Blog system type definitions
-└── (other type files)/    # Additional TypeScript types
+├── admin-permissions.ts       # Centralized admin email management (getAdminEmails)
+├── supabase/                  # Database client/server/admin setup
+├── email/resend-client.ts     # Resend email service
+├── blog-data.ts               # Centralized blog content management
+├── financial/                 # Financial APIs & caching
+│   ├── cache.ts               # Redis + memory caching
+│   └── error-handler.ts       # Structured logging
+├── security/                  # Security monitoring & audit
+├── performance/               # Performance optimization utilities
+├── user-sync.ts               # Clerk→Supabase sync logic
+├── env.ts                     # Environment validation with Zod
+└── rate-limit.ts              # API rate limiting
 
 constants/
-├── services.ts            # Service definitions by industry
-├── programs.ts            # Educational program data
-└── faq.ts                 # FAQ content structure
+├── services.ts                # Service definitions by industry
+├── programs.ts                # Educational program data
+├── seminars.ts                # Seminar data
+└── faq.ts                     # FAQ content structure
+```
 
-tests/
-├── e2e/                   # Playwright E2E tests (replaced Cypress)
-├── unit/                  # Jest unit tests
-├── integration/           # Integration tests
-└── performance/           # Performance tests
-
-## Authentication System
+## Authentication & Admin System
 
 ### Admin Access
 
-- **Super Admin**: `jhlim725@gmail.com` (hardcoded check)
+- **Admin emails**: Configured via `ADMIN_EMAILS` environment variable (comma-separated)
+- **Client-side admin check**: Uses `NEXT_PUBLIC_ADMIN_EMAILS` environment variable
+- **Centralized function**: `getAdminEmails()` from `lib/admin-permissions.ts`
 - **Protected Routes**: `/admin/*` with `AdminAccessDeniedAlert` component
 - **User Sync**: Clerk webhook → `syncUserToSupabase()` → users table
 
-### Database Schema
+### Admin Permission Pattern
 
-```sql
--- Key Supabase tables
-users (id, email, name, created_at, updated_at)
--- Additional tables as needed for consultations, analytics
-````
+```typescript
+// Server Components / API Routes
+import { getAdminEmails } from '@/lib/admin-permissions';
+const isAdmin = getAdminEmails().includes(userEmail.toLowerCase());
+
+// Client Components
+const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
+  .split(',').map(e => e.trim().toLowerCase()).filter(Boolean);
+```
 
 ## Environment Variables
 
 ```bash
-# Required for development
+# Required
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 CLERK_WEBHOOK_SECRET=
-
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 
-V0_API_KEY=
+# Admin Configuration
+ADMIN_EMAILS=admin1@example.com,admin2@example.com
+NEXT_PUBLIC_ADMIN_EMAILS=admin1@example.com,admin2@example.com
 
+# Email
+RESEND_API_KEY=
+NEXT_PUBLIC_RESEND_FROM_EMAIL=noreply@email.familyoffices.vip
+
+# Analytics
 NEXT_PUBLIC_GA_MEASUREMENT_ID=
 
-# Financial APIs (optional)
-ALPHA_VANTAGE_API_KEY=
-YAHOO_FINANCE_API_KEY=
-
-# Redis (optional)
+# Optional
 REDIS_URL=
-REDIS_HOST=
-REDIS_PORT=
-REDIS_PASSWORD=
+BEEHIIV_API_KEY=
+BEEHIIV_PUBLICATION_ID=
+NEXT_PUBLIC_CALCOM_API_KEY=
 ```
+
+See `.env.example` for the complete list.
 
 ## Key Features & Content
 
 ### Target Industries
 
-1. **Manufacturing**: Traditional Korean companies (삼성, LG style)
+1. **Manufacturing**: Traditional Korean companies
 2. **Construction**: Real estate and infrastructure
 3. **IT/Venture**: Modern tech companies
 4. **Family Corporations**: Multi-generational businesses
@@ -187,6 +201,7 @@ REDIS_PASSWORD=
 - **Succession Planning**: Corporate governance, next-gen preparation
 - **Tax Strategy**: Korean tax optimization, international structures
 - **Education**: CEO programs, family workshops
+- **Insurance**: Key-person, group, health, life insurance solutions
 
 ### Design System
 
@@ -202,6 +217,7 @@ REDIS_PASSWORD=
 - **Client Components**: Minimal use with "use client" directive
 - **Type Safety**: Strict TypeScript with Zod validation
 - **Error Handling**: Comprehensive try/catch with user feedback
+- **Admin Checks**: Always use `getAdminEmails()` - never hardcode admin emails
 
 ### SEO & Performance
 
@@ -214,70 +230,35 @@ REDIS_PASSWORD=
 
 - **CSP Headers**: Configured in `next.config.mjs`
 - **Webhook Validation**: Clerk signature verification
-- **Admin Protection**: Email-based access control
+- **Admin Protection**: Environment variable-based access control
+- **Rate Limiting**: `globalRateLimit()` in middleware for API routes
 - **Environment Isolation**: Separate configs for dev/prod
 
-## Cal.com Integration
+## Middleware
 
-Multiple booking widget implementations:
+The middleware (`middleware.ts`) handles:
+1. Maintenance mode check
+2. Rate limiting for API routes (single call, result cached for headers)
+3. Clerk authentication
+4. Admin route protection
+5. Rate limit headers on successful responses
 
-- `CalComButton`: Simple CTA button
-- `CalComInline`: Embedded calendar view
-- `CalComFloating`: Persistent floating widget
-- `CalComAdvanced`: Full-featured booking flow
-
-Configuration for Korean timezone and business hours.
-
-## Financial Data Integration
-
-### Real-time Financial APIs
-
-- **Dual API Strategy**: Yahoo Finance (primary) + Alpha Vantage (fallback)
-- **Multi-layer Caching**: Memory cache (5min) → Redis (5min) → API
-- **Korean Market Focus**: KRX stocks (삼성전자, SK하이닉스, NAVER 등)
-- **Major Forex Pairs**: USD/KRW, EUR/KRW, JPY/KRW
-
-### API Endpoints
-
-```bash
-# Stock data
-GET /api/financial/stocks?symbol=005930.KS
-GET /api/financial/stocks?korean=true
-
-# Forex data
-GET /api/financial/forex?from=USD&to=KRW
-GET /api/financial/forex?major=true
-
-# Service status
-GET /api/financial/status?detailed=true
-```
-
-### Financial Components
-
-- `StockCard`: Real-time stock display with auto-refresh
-- `ForexCard`: Currency exchange rates
-- `FinancialDashboard`: Integrated financial overview
+**Important**: `globalRateLimit()` must only be called once per request to avoid double-counting.
 
 ## Deployment
 
 - **Platform**: Vercel with automatic deployments
 - **Build Command**: `npm run vercel-build`
 - **Environment**: Production variables set in Vercel dashboard
-- **Domain**: Custom domain with Korean SSL certificate
+- **Domain**: familyoffices.vip
 
-## Testing & Quality Assurance
+## Testing
 
 ### E2E Testing with Playwright
 
-**Migration from Cypress completed (December 2024)**
-
-- **56 E2E tests** across 8 browser/device configurations
-- **Cross-browser support**: Chromium, Firefox, WebKit
+- **Cross-browser**: Chromium, Firefox, WebKit
 - **Mobile testing**: Chrome Mobile, Safari Mobile
-- **Financial platform specific**: financial-desktop, financial-mobile projects
 - **Korean content testing** included
-
-### Test Commands
 
 ```bash
 npm run test:e2e          # Run all E2E tests
@@ -287,59 +268,13 @@ npm run test:e2e:debug    # Debug mode with inspector
 npm run test:e2e:report   # View test reports
 ```
 
-### Test Coverage
+## Version Control
 
-- **Unit tests**: Jest + React Testing Library
-- **Integration tests**: Supabase test environment
-- **Performance tests**: Artillery load testing
-- **Security tests**: Automated security scanning
-
-## Recent Technical Improvements
-
-### 1. Cypress → Playwright Migration
-
-- ✅ Complete removal of Cypress dependencies
-- ✅ Package.json cleanup (133 packages removed)
-- ✅ Playwright configuration with Korean market focus
-- ✅ 8 browser/device test matrix
-
-### 2. Node.js Deprecation Warnings Resolution
-
-- ✅ `punycode` deprecation warnings eliminated
-- ✅ NODE_OPTIONS='--no-deprecation' configuration
-- ✅ Clean development and build processes
-
-### 3. Build Performance Optimization
-
-- ✅ **Build time**: 14 seconds
-- ✅ **37 static pages** generated
-- ✅ **Bundle optimization**: Main page 4.28 kB (First Load JS: 239 kB)
-- ✅ **Code splitting** and **image optimization**
-
-## Analytics & Monitoring
-
-- **Google Analytics 4**: Enhanced ecommerce tracking
-- **Supabase Analytics**: Real-time database insights
-- **Vercel Analytics**: Performance and usage metrics
-- **Error Tracking**: Built-in Next.js error boundaries
+- Whenever code changes are made, record a one-line description with emoji in Korean in `.commit_message.txt` using Edit Tool.
+  - Read `.commit_message.txt` first, then Edit.
+  - Overwrite regardless of existing content.
+  - If it was a git revert related operation, make the `.commit_message.txt` file empty.
 
 ---
 
-## 📝 Document Update History
-
-**Last Updated**: December 2024
-
-### Recent Changes
-
-- ✅ **Cypress → Playwright Migration**: Complete E2E testing environment overhaul
-- ✅ **Node.js Deprecation Resolution**: punycode warnings eliminated
-- ✅ **Build Performance**: 14-second build time, 37 static pages
-- ✅ **Package Cleanup**: 133 unused packages removed
-- ✅ **Korean Market Focus**: Enhanced testing for Korean content and mobile usage
-
-### Next Steps
-
-- 🚀 **Vercel Production Deployment**: Ready for production deployment
-- 🔍 **Performance Monitoring**: Core Web Vitals tracking
-- 📱 **Mobile Optimization**: Korean mobile user experience enhancement
-- 🌏 **Internationalization**: Korean language support optimization
+**Last Updated**: February 2025

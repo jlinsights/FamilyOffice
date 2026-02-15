@@ -1,11 +1,8 @@
 // FamilyOffice S - 관리자 권한 체크 API
-// 슈퍼관리자(jhlim725@gmail.com) 권한을 확인하는 엔드포인트
+// 슈퍼관리자 권한을 확인하는 엔드포인트 (ADMIN_EMAILS 환경변수 기반)
 import { NextResponse } from 'next/server';
-
 import { currentUser } from '@clerk/nextjs/server';
-
-// 슈퍼 관리자 이메일 목록
-const SUPER_ADMIN_EMAILS = ['jhlim725@gmail.com'];
+import { getAdminEmails } from '@/lib/admin-permissions';
 
 export async function POST() {
   try {
@@ -31,12 +28,10 @@ export async function POST() {
       );
     }
 
-    // 슈퍼 관리자 이메일 체크
-    const isAdmin = SUPER_ADMIN_EMAILS.includes(
+    // 슈퍼 관리자 이메일 체크 (환경변수 기반)
+    const isAdmin = getAdminEmails().includes(
       primaryEmail.emailAddress.toLowerCase()
     );
-
-    console.log(`Admin check for ${primaryEmail.emailAddress}: ${isAdmin}`);
 
     return NextResponse.json({
       isAdmin,

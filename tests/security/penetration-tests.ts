@@ -3,7 +3,6 @@
  * Simulates real-world attack scenarios specific to financial applications
  */
 import { describe, test, expect, beforeAll, afterAll } from '@jest/globals';
-
 import { SecurityTester } from './security-tests';
 
 interface AttackScenario {

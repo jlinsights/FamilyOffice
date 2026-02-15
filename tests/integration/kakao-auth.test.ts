@@ -10,7 +10,6 @@ import {
   afterAll,
   beforeEach,
 } from '@jest/globals';
-
 import { getEnhancedKakaoAuthService } from '@/lib/auth/enhanced-kakao-auth';
 import { getKakaoBusinessAPIService } from '@/lib/kakao/kakao-business-api';
 import { getAuthMonitoringService } from '@/lib/monitoring/auth-monitoring';
@@ -498,7 +497,8 @@ beforeAll(() => {
 
   // Mock Supabase environment variables for testing
   process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://test-project.supabase.co';
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = 'test-anon-key-for-integration-tests';
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY =
+    'test-anon-key-for-integration-tests';
 
   // Mock global functions
   global.crypto = {

@@ -6,18 +6,11 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-
-
-import { useSafeUser } from '@/hooks/use-safe-auth';
 import {
-    BehavioralTracker,
-    initializeBehavioralTracker,
+  BehavioralTracker,
+  initializeBehavioralTracker,
 } from '@/lib/marketing/behavioral-tracker';
-
-/**
- * 행동 추적 스크립트 컴포넌트
- * 클라이언트 사이드에서 사용자 행동을 자동으로 추적
- */
+import { useSafeUser } from '@/hooks/use-safe-auth';
 
 interface TrackingScriptProps {
   contactId?: string;

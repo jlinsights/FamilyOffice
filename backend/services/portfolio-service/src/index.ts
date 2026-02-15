@@ -3,7 +3,6 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import { register } from 'prom-client';
-
 import { pgPool, redisClient } from '../../shared/database/connection';
 import { logger } from '../../shared/logging/logger';
 import { metricsCollector } from '../../shared/monitoring/metrics';

@@ -5,13 +5,7 @@
 'use client';
 
 import * as React from 'react';
-
 import { cn } from '@/lib/utils';
-
-/**
- * Dynamic Loading Components with Skeletons
- * Optimized loading states for better UX
- */
 
 // Chart Loading Skeleton
 export const ChartSkeleton = () => (

@@ -1,32 +1,28 @@
 import { ArrowLeft } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { ShareButton } from '@/components/share-button';
-
 import {
-    extractAIOptimizedKeywords,
-    generateAIOptimizedFAQ,
-    generateAIOptimizedMetadata,
+  extractAIOptimizedKeywords,
+  generateAIOptimizedFAQ,
+  generateAIOptimizedMetadata,
 } from '@/lib/ai/blog-ai-optimization';
 import { blogPosts } from '@/lib/blog-data';
 import { env } from '@/lib/env';
+import { cn } from '@/lib/utils';
 
 // BlogPost interface and data imported from lib/blog-data
 

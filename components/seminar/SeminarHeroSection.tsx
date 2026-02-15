@@ -1,14 +1,11 @@
 'use client';
 
-import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
 import { Calendar, FileText, GraduationCap, Users } from 'lucide-react';
-
 import { useEffect, useState } from 'react';
-
 import dynamic from 'next/dynamic';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
 
 // AnimatedCounter를 동적으로 import
 const AnimatedCounter = dynamic(
@@ -168,7 +165,7 @@ export function SeminarHeroSection() {
         </div>
       </div>
 
-      <LeadCaptureDialog 
+      <LeadCaptureDialog
         isOpen={showSchedule}
         onClose={() => setShowSchedule(false)}
         onSuccess={() => setShowSchedule(false)}

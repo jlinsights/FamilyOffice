@@ -9,11 +9,8 @@ import {
   Shield,
   User,
 } from 'lucide-react';
-
 import { useEffect, useState } from 'react';
-
 import Link from 'next/link';
-
 import { useSafeAuth } from '@/hooks/use-safe-auth';
 
 interface UserProfile {
@@ -217,8 +214,8 @@ export default function PortalSettings() {
                 정보 변경이 필요하신가요?
               </h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-                개인 정보 또는 계정 정보 변경은 담당자에게 문의해 주세요.
-                보안을 위해 관리자 확인 후 변경이 처리됩니다.
+                개인 정보 또는 계정 정보 변경은 담당자에게 문의해 주세요. 보안을
+                위해 관리자 확인 후 변경이 처리됩니다.
               </p>
               <Link
                 href="/contact"

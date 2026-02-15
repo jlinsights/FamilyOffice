@@ -11,12 +11,9 @@ import {
   TrendingUp,
   X,
 } from 'lucide-react';
-
 import { useCallback, useState } from 'react';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
 import { cn } from '@/lib/utils';
 
 interface NavItem {
@@ -107,9 +104,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         className={cn(
           'fixed top-16 left-0 z-40 h-[calc(100vh-4rem)] bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 transition-all duration-300 flex flex-col',
           collapsed ? 'w-16' : 'w-64',
-          mobileOpen
-            ? 'translate-x-0'
-            : '-translate-x-full lg:translate-x-0'
+          mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         )}
       >
         {/* Collapse toggle - desktop only */}
@@ -153,9 +148,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
                 )}
               >
                 <span
-                  className={cn(
-                    active && 'text-white dark:text-slate-900'
-                  )}
+                  className={cn(active && 'text-white dark:text-slate-900')}
                 >
                   {item.icon}
                 </span>

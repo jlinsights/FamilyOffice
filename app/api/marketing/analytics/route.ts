@@ -3,7 +3,6 @@
  * 리드 스코어링, 워크플로우, 콘텐츠 추천 성과 종합 분석
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { requireAdminPermissions } from '@/lib/admin-permissions';
 import { getAIContentEngine } from '@/lib/marketing/ai-content-engine';
 import { getLeadScoringEngine } from '@/lib/marketing/lead-scoring-engine';

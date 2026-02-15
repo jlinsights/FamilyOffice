@@ -3,7 +3,6 @@
  * 리드별 개인화된 콘텐츠 추천 생성 및 조회
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { requireAdminPermissions } from '@/lib/admin-permissions';
 import { getAIContentEngine } from '@/lib/marketing/ai-content-engine';
 import { globalRateLimit } from '@/lib/rate-limit';

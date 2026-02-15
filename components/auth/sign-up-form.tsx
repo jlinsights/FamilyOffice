@@ -12,12 +12,9 @@ import {
   User,
 } from 'lucide-react';
 import * as z from 'zod';
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { useRouter } from 'next/navigation';
-
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -29,10 +26,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-
 import { createClient } from '@/lib/supabase/client';
 import { safeInsert } from '@/lib/supabase/helpers';
-
 import { useToast } from '@/hooks/use-toast';
 
 const signUpSchema = z

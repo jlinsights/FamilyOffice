@@ -2,7 +2,6 @@
  * Unit tests for services utility functions
  * Tests slug generation, service lookup, path generation, and related services
  */
-
 import {
   generateServiceSlug,
   getServiceBySlug,
@@ -111,10 +110,7 @@ describe('Services Utility Functions', () => {
     });
 
     it('should handle Korean characters in slugs', () => {
-      const result = getServiceBySlug(
-        'business-succession',
-        '가업상속공제'
-      );
+      const result = getServiceBySlug('business-succession', '가업상속공제');
 
       if (result) {
         expect(result.category.id).toBe('business-succession');
@@ -134,7 +130,7 @@ describe('Services Utility Functions', () => {
     it('should return paths with category and service properties', () => {
       const paths = getAllServicePaths();
 
-      paths.forEach((path) => {
+      paths.forEach(path => {
         expect(path).toHaveProperty('category');
         expect(path).toHaveProperty('service');
         expect(typeof path.category).toBe('string');
@@ -144,7 +140,7 @@ describe('Services Utility Functions', () => {
 
     it('should include paths from all 8 categories', () => {
       const paths = getAllServicePaths();
-      const categories = new Set(paths.map((p) => p.category));
+      const categories = new Set(paths.map(p => p.category));
 
       expect(categories.size).toBe(8);
       expect(categories.has('corporate-insurance-risk')).toBe(true);
@@ -160,7 +156,7 @@ describe('Services Utility Functions', () => {
     it('should generate valid service slugs', () => {
       const paths = getAllServicePaths();
 
-      paths.forEach((path) => {
+      paths.forEach(path => {
         expect(path.service).toMatch(/^[a-z0-9가-힣-]+$/);
         expect(path.service).not.toContain(' ');
       });
@@ -174,9 +170,7 @@ describe('Services Utility Functions', () => {
 
     it('should not contain duplicate paths', () => {
       const paths = getAllServicePaths();
-      const pathStrings = paths.map(
-        (p) => `${p.category}/${p.service}`
-      );
+      const pathStrings = paths.map(p => `${p.category}/${p.service}`);
       const uniquePaths = new Set(pathStrings);
 
       expect(pathStrings.length).toBe(uniquePaths.size);
@@ -200,7 +194,7 @@ describe('Services Utility Functions', () => {
         currentServiceTitle
       );
 
-      const titles = related.map((s) => s.title);
+      const titles = related.map(s => s.title);
       expect(titles).not.toContain(currentServiceTitle);
     });
 
@@ -224,10 +218,7 @@ describe('Services Utility Functions', () => {
     });
 
     it('should return empty array for invalid category', () => {
-      const related = getRelatedServices(
-        'invalid-category',
-        'Any Service'
-      );
+      const related = getRelatedServices('invalid-category', 'Any Service');
 
       expect(related).toEqual([]);
     });
@@ -249,7 +240,7 @@ describe('Services Utility Functions', () => {
         '개인/법인 종신보험'
       );
 
-      related.forEach((service) => {
+      related.forEach(service => {
         expect(service).toHaveProperty('title');
         expect(service).toHaveProperty('description');
         expect(service).toHaveProperty('features');
@@ -286,10 +277,7 @@ describe('Services Utility Functions', () => {
       const paths = getAllServicePaths();
       const firstPath = paths[0]!;
 
-      const result = getServiceBySlug(
-        firstPath.category,
-        firstPath.service
-      );
+      const result = getServiceBySlug(firstPath.category, firstPath.service);
 
       expect(result).not.toBeNull();
       expect(result?.category.id).toBe(firstPath.category);
@@ -302,7 +290,7 @@ describe('Services Utility Functions', () => {
         2
       );
 
-      related.forEach((service) => {
+      related.forEach(service => {
         const slug = service.slug || generateServiceSlug(service.title);
         const result = getServiceBySlug('corporate-insurance-risk', slug);
 

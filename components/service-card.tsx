@@ -1,7 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-
 import { memo } from 'react';
-
 import Link from 'next/link';
 
 interface ServiceCardProps {

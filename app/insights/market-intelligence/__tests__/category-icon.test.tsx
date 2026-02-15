@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-
 import CategoryIcon from '../category-icon';
 
 // Mock lucide-react icons

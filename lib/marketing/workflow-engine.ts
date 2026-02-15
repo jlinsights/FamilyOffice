@@ -13,7 +13,6 @@
 import { getHubSpotClient } from '@/lib/hubspot/api-client';
 import { safeFrom, safeInsert, safeUpdate } from '@/lib/supabase/helpers';
 import { createClient } from '@/lib/supabase/server';
-
 import { getAIContentEngine } from './ai-content-engine';
 import { getLeadScoringEngine } from './lead-scoring-engine';
 

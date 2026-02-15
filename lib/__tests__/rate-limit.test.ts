@@ -1,3 +1,6 @@
+import { NextRequest } from 'next/server';
+import { checkRateLimit, withRateLimit, rateLimitConfig } from '../rate-limit';
+
 // Mock uncrypto (dependency of @upstash/redis)
 jest.mock('uncrypto', () => ({
   default: {
@@ -51,10 +54,6 @@ jest.mock('node-cache', () => {
     clear: jest.fn(),
   }));
 });
-
-import { NextRequest } from 'next/server';
-
-import { checkRateLimit, withRateLimit, rateLimitConfig } from '../rate-limit';
 
 describe('Rate Limiting System', () => {
   beforeEach(() => {

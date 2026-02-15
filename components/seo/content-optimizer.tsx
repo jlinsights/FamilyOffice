@@ -6,18 +6,16 @@
 'use client';
 
 import {
-  CheckCircle,
   AlertCircle,
-  XCircle,
-  TrendingUp,
-  Search,
-  Link,
-  Target,
   BarChart3,
+  CheckCircle,
+  Link,
+  Search,
+  Target,
+  TrendingUp,
+  XCircle,
 } from 'lucide-react';
-
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -29,16 +27,10 @@ import {
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import {
   useContentOptimization,
   useSEOScore,
 } from '@/hooks/use-content-optimization';
-
-/**
- * 컨텐츠 최적화 컴포넌트
- * 페이지별 SEO 최적화 및 실시간 분석
- */
 
 interface ContentOptimizerProps {
   content: string;

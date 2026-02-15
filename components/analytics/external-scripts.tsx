@@ -1,10 +1,9 @@
 'use client';
 
 import Script from 'next/script';
-
 import {
-    isAllowedScriptSource,
-    isSafeHTMLContent,
+  isAllowedScriptSource,
+  isSafeHTMLContent,
 } from '@/lib/security/html-sanitizer';
 import { securityLogger } from '@/lib/security/secure-logger';
 

@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import { KakaoLoginButton } from '@/components/auth/kakao-login-button';
 
 // Mock KakaoAuthService

@@ -1,10 +1,11 @@
 'use client';
 
 import { Check, Lock } from 'lucide-react';
-
-
-import { SafeSignInButton, SafeSignUpButton } from '@/components/auth/safe-clerk-components';
 import { Button } from '@/components/ui/button';
+import {
+  SafeSignInButton,
+  SafeSignUpButton,
+} from '@/components/auth/safe-clerk-components';
 
 export function PremiumOverlay() {
   return (

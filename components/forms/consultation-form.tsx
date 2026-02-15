@@ -1,10 +1,8 @@
 'use client';
 
 import { CheckCircle, AlertCircle } from 'lucide-react';
-
 import type React from 'react';
 import { useState, useCallback, memo } from 'react';
-
 // import { createClient } from "@/lib/supabase/client"
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';

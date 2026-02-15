@@ -10,10 +10,8 @@ import {
   TrendingDown,
   Users,
 } from 'lucide-react';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
@@ -23,11 +21,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { generateMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
 

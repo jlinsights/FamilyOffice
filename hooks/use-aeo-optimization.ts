@@ -5,12 +5,7 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-
-/**
- * AEO (Answer Engine Optimization) React Hook
- * AI 검색엔진 및 음성검색 최적화 상태 관리
- */
+import { useCallback, useEffect, useState } from 'react';
 
 export interface AEOData {
   answerCoverage: {

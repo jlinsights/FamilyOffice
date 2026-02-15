@@ -1,16 +1,11 @@
 'use client';
 
 import { Calendar } from 'lucide-react';
-
 import { useState } from 'react';
-
 import Image from 'next/image';
-
 import { Button } from '@/components/ui/button';
-
-import { BRAND_COLORS } from '@/constants/brand';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
+import { BRAND_COLORS } from '@/constants/brand';
 
 export function FloatingActionButtons() {
   const [isHovered, setIsHovered] = useState<string | null>(null);

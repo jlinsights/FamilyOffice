@@ -1,11 +1,10 @@
 import { useState } from 'react';
-
 import {
-    CATEGORY_SOLUTIONS,
-    QUIZ_CATEGORIES,
-    QUIZ_QUESTIONS,
-    QuizCategory,
-    RecommendedSolution,
+  CATEGORY_SOLUTIONS,
+  QUIZ_CATEGORIES,
+  QUIZ_QUESTIONS,
+  QuizCategory,
+  RecommendedSolution,
 } from '@/constants/quiz';
 
 export interface QuizScores {
@@ -92,7 +91,8 @@ export const useQuizScoring = () => {
     // q5_salary = B (High), q9_articles = B (Old/Need update), q12_succession = A (Yes)
     // Note: Checking specific conditions.
     const isHighSalary = answers['q5_salary'] === 'B';
-    const isBylawWeak = answers['q9_articles'] === 'B' || answers['q10_severance'] === 'B';
+    const isBylawWeak =
+      answers['q9_articles'] === 'B' || answers['q10_severance'] === 'B';
     const hasSuccessionNeeds = answers['q12_succession'] === 'A';
 
     if (isHighSalary && isBylawWeak && hasSuccessionNeeds) {

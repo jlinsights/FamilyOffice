@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { rssAggregator } from '@/lib/rss-aggregator';
 
 export async function GET(request: NextRequest) {

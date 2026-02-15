@@ -1,7 +1,6 @@
 // FamilyOffice S - 사용자 동기화 API
 // 로그인한 사용자를 Supabase에 자동 동기화하는 엔드포인트
 import { NextResponse } from 'next/server';
-
 import { logAPI, logAuth } from '@/lib/logs-so';
 import { withRateLimit } from '@/lib/rate-limit';
 import { syncCurrentUser } from '@/lib/user-sync';

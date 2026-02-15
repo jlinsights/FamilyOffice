@@ -1,45 +1,39 @@
 'use client';
 
 import {
-    AlertTriangle,
-    ArrowRight,
-    Award,
-    Building2,
-    CheckCircle2,
-    ChevronRight,
-    Crown,
-    FileText,
-    Gem,
-    HandHeart,
-    Shield,
-    Target,
-    TreePine,
-    TrendingUp,
-    Users,
-    XCircle,
+  AlertTriangle,
+  ArrowRight,
+  Award,
+  Building2,
+  CheckCircle2,
+  ChevronRight,
+  Crown,
+  FileText,
+  Gem,
+  HandHeart,
+  Shield,
+  Target,
+  TreePine,
+  TrendingUp,
+  Users,
+  XCircle,
 } from 'lucide-react';
-
 import React from 'react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { businessSuccessionHowTo } from '@/lib/seo/howto-data';
-
 
 // 5단계 기업승계 로드맵
 const successionRoadmap = [

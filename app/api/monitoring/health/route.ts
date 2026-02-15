@@ -3,7 +3,6 @@
  * Provides status of monitoring services and recent error/performance data
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { logger } from '@/lib/logger';
 
 export async function GET(request: NextRequest) {

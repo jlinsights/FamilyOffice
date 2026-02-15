@@ -1,14 +1,11 @@
 import { z } from 'zod';
-
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   sendStructureCheckConfirmation,
   sendSystemNotification,
 } from '@/lib/email/resend-client';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { safeInsert } from '@/lib/supabase/helpers';
-
 import { Database } from '@/types/supabase';
 
 type StructureCheckInsert =

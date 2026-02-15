@@ -445,7 +445,6 @@ typescript: {
    ```typescript
    // lib/supabase/server-client.ts 생성
    import { createServerClient } from '@supabase/ssr';
-
    import { cookies } from 'next/headers';
 
    export async function createSupabaseServerClient() {
@@ -533,7 +532,6 @@ typescript: {
    ```typescript
    // __tests__/api/webhooks/clerk.test.ts
    import { NextRequest } from 'next/server';
-
    import { POST } from '@/app/api/webhooks/clerk/route';
 
    describe('Clerk Webhook', () => {

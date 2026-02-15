@@ -5,12 +5,7 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-
-/**
- * SEO 데이터 관리 React Hook
- * 실시간 SEO 성과 데이터 및 상태 관리
- */
+import { useCallback, useEffect, useState } from 'react';
 
 export interface SEOData {
   keywords: {

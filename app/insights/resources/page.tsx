@@ -11,7 +11,6 @@ import {
   Briefcase,
   Lock,
 } from 'lucide-react';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -22,7 +21,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 

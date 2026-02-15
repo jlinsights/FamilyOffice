@@ -1,10 +1,8 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-
 import { blogCategories } from '@/lib/blog-data';
 
 export function BlogCategoryFilter() {

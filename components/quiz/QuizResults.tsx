@@ -2,18 +2,15 @@
 
 import { motion } from 'framer-motion';
 import {
-    ArrowRight,
-    BarChart3,
-    CheckCircle,
-    Download,
-    Phone,
+  ArrowRight,
+  BarChart3,
+  CheckCircle,
+  Download,
+  Phone,
 } from 'lucide-react';
-
 import Link from 'next/link';
-
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-
 import { QUIZ_CATEGORIES } from '@/constants/quiz';
 import { QuizResult } from '@/hooks/useQuizScoring';
 

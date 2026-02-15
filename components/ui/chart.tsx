@@ -1,9 +1,7 @@
 'use client';
 
 import * as RechartsPrimitive from 'recharts';
-
 import * as React from 'react';
-
 import { sanitizeHTMLContent } from '@/lib/security/html-sanitizer';
 import { cn } from '@/lib/utils';
 

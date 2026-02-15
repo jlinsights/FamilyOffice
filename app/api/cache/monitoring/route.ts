@@ -3,7 +3,6 @@
  * GET /api/cache/monitoring - 캐시 성능 및 히트율 통계
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { checkAdminPermissions } from '@/lib/admin-permissions';
 import {
   getAdvancedCacheStats,

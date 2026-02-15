@@ -6,16 +6,9 @@
 'use client';
 
 import { ChevronRight, Home } from 'lucide-react';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
 import { BreadcrumbStructuredData } from './structured-data';
-
-/**
- * SEO 최적화된 브레드크럼 네비게이션
- * 구조화 데이터와 접근성 지원
- */
 
 interface BreadcrumbItem {
   name: string;

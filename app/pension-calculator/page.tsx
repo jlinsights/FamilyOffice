@@ -7,11 +7,8 @@ import {
   Target,
   TrendingUp,
 } from 'lucide-react';
-
 import { Metadata } from 'next';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { PensionCalculatorTracking } from '@/components/kakao/pension-calculator-tracking';

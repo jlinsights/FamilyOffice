@@ -18,11 +18,14 @@ export interface ABTestConfiguration {
   testId?: string;
   url?: string;
   enabled: boolean;
-  variants: Array<{
-    name?: string;
-    trafficAllocation?: number;
-    currentMetrics?: Record<string, unknown>;
-  } | string>;
+  variants: Array<
+    | {
+        name?: string;
+        trafficAllocation?: number;
+        currentMetrics?: Record<string, unknown>;
+      }
+    | string
+  >;
   startDate?: Date;
   duration?: number;
   successMetric?: string;

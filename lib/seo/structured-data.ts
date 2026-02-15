@@ -1,19 +1,23 @@
 import { generateAIOptimizedContent } from './modules/ai-content';
 import { generateBreadcrumbStructuredData } from './modules/breadcrumbs';
 import {
-    generateAIOptimizedSchema,
-    generateContactPageSchema,
-    generateFAQPageSchema,
-    generateLocalBusinessSchema,
-    generateOrganizationSchema,
-    generateServiceSchema,
-    generateWebSiteSchema,
-    getBaseData
+  generateAIOptimizedSchema,
+  generateContactPageSchema,
+  generateFAQPageSchema,
+  generateLocalBusinessSchema,
+  generateOrganizationSchema,
+  generateServiceSchema,
+  generateWebSiteSchema,
+  getBaseData,
 } from './modules/schema-generators';
 import { generateSitemapUrls } from './modules/sitemap';
 
 // Re-export specific generators if needed directly
-export { generateAIOptimizedContent, generateBreadcrumbStructuredData, generateSitemapUrls };
+export {
+  generateAIOptimizedContent,
+  generateBreadcrumbStructuredData,
+  generateSitemapUrls,
+};
 
 // Main entry point for generating structured data
 export function generateStructuredData(

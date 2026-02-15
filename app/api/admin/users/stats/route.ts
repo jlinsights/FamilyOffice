@@ -1,13 +1,9 @@
 // FamilyOffice S - 사용자 통계 API
 // 관리자가 사용자 통계 정보를 조회하는 엔드포인트
 import { NextResponse } from 'next/server';
-
 import { auth, currentUser } from '@clerk/nextjs/server';
-
 import { getUserStats } from '@/lib/user-sync';
-
-// 슈퍼 관리자 이메일 목록
-const SUPER_ADMIN_EMAILS = ['jhlim725@gmail.com'];
+import { getAdminEmails } from '@/lib/admin-permissions';
 
 export async function GET() {
   try {
@@ -40,14 +36,14 @@ export async function GET() {
       );
     }
 
-    // 슈퍼 관리자 이메일 체크
-    const isAdmin = SUPER_ADMIN_EMAILS.includes(
+    // 슈퍼 관리자 이메일 체크 (환경변수 기반)
+    const isAdmin = getAdminEmails().includes(
       primaryEmail.emailAddress.toLowerCase()
     );
 
     if (!isAdmin) {
       return NextResponse.json(
-        { error: 'Super admin access required (jhlim725@gmail.com only)' },
+        { error: 'Super admin access required' },
         { status: 403 }
       );
     }

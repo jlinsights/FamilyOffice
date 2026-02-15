@@ -1,11 +1,8 @@
 'use client';
 
 import { CheckCircle, Loader2, LogOut, XCircle } from 'lucide-react';
-
 import { useEffect, useState, Suspense } from 'react';
-
 import { useRouter } from 'next/navigation';
-
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -14,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-
 import { getKakaoAuthService } from '@/lib/auth/kakao-auth';
 import { createClient } from '@/lib/supabase/client';
 

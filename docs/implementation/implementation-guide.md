@@ -436,9 +436,7 @@ export const programsAPI = new ProgramsAPI();
 ```typescript
 // hooks/usePrograms.ts
 import { useState, useEffect, useCallback } from 'react';
-
 import { programsAPI } from '@/lib/api/programs';
-
 import { Program, ProgramCategory, ProgramStatus } from '@/types/program';
 
 interface UseProgramsParams {
@@ -706,9 +704,7 @@ function getRegistrationButtonText(program: Program): string {
 ```typescript
 // app/api/programs/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-
 import { auth } from '@clerk/nextjs';
-
 import { programsAPI } from '@/lib/api/programs';
 
 export async function GET(request: NextRequest) {
@@ -822,7 +818,6 @@ async function checkAdminPermission(userId: string): Promise<boolean> {
 ```typescript
 // __tests__/hooks/usePrograms.test.ts
 import { renderHook, waitFor } from '@testing-library/react';
-
 import { usePrograms } from '@/hooks/usePrograms';
 
 jest.mock('@/lib/api/programs');
@@ -845,7 +840,6 @@ describe('usePrograms', () => {
 ```typescript
 // __tests__/api/programs.test.ts
 import { NextRequest } from 'next/server';
-
 import { GET } from '@/app/api/programs/route';
 
 describe('/api/programs', () => {

@@ -1,5 +1,4 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-
 import { INDUSTRY_SERVICES } from '@/constants/services';
 
 /**

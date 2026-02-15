@@ -1,6 +1,5 @@
 import { Pool, PoolConfig } from 'pg';
 import { createClient } from 'redis';
-
 import { logger } from '../logging/logger';
 
 // PostgreSQL 연결 풀 설정

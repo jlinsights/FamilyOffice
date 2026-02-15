@@ -1,11 +1,9 @@
 import { NextResponse } from 'next/server';
-
 import {
   clerkClient,
   clerkMiddleware,
   createRouteMatcher,
 } from '@clerk/nextjs/server';
-
 import { ALLOWED_ORIGINS } from '@/lib/config';
 import { globalRateLimit } from '@/lib/rate-limit';
 import {
@@ -116,9 +114,10 @@ export default clerkMiddleware(async (auth, request) => {
   }
 
   // 2. Rate limiting 검사 (API 요청에 대해서만)
+  let rateLimitResult: Response | Record<string, string> | null = null;
   if (request.nextUrl.pathname.startsWith('/api/')) {
-    const rateLimitResponse = await globalRateLimit(request);
-    if (rateLimitResponse && rateLimitResponse instanceof Response) {
+    rateLimitResult = await globalRateLimit(request);
+    if (rateLimitResult && rateLimitResult instanceof Response) {
       // Rate limit 위반 로깅
       await logSecurityEvent(
         {
@@ -133,7 +132,7 @@ export default clerkMiddleware(async (auth, request) => {
         request
       );
 
-      return rateLimitResponse;
+      return rateLimitResult;
     }
   }
 
@@ -156,14 +155,11 @@ export default clerkMiddleware(async (auth, request) => {
   const response = NextResponse.next();
   const origin = request.headers.get('origin');
 
-  // 5. Rate limit headers 추가 (성공한 요청에 대해)
-  if (request.nextUrl.pathname.startsWith('/api/')) {
-    const rateLimitHeaders = await globalRateLimit(request);
-    if (rateLimitHeaders && typeof rateLimitHeaders === 'object') {
-      Object.entries(rateLimitHeaders).forEach(([key, value]) => {
-        response.headers.set(key, value as string);
-      });
-    }
+  // 5. Rate limit headers 추가 (성공한 요청에 대해, 위에서 캐시된 결과 재사용)
+  if (rateLimitResult && !(rateLimitResult instanceof Response)) {
+    Object.entries(rateLimitResult).forEach(([key, value]) => {
+      response.headers.set(key, value as string);
+    });
   }
 
   // Ensure proper content type for CSS files

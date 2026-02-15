@@ -1,4 +1,3 @@
-
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -16,19 +15,26 @@ async function testConnection() {
   }
 
   console.log(`Connecting to Supabase URL: ${supabaseUrl}`);
-  
+
   const supabase = createClient(supabaseUrl, supabaseKey);
 
   try {
-    const { data, error } = await supabase.from('users').select('count', { count: 'exact', head: true });
+    const { data, error } = await supabase
+      .from('users')
+      .select('count', { count: 'exact', head: true });
 
     if (error) {
-      console.error('❌ Supabase connection failed:', JSON.stringify(error, null, 2));
+      console.error(
+        '❌ Supabase connection failed:',
+        JSON.stringify(error, null, 2)
+      );
       process.exit(1);
     }
 
     console.log('✅ Supabase connection successful!');
-    console.log(`Current user count (or access check): ${data === null ? 'Accessible' : 'Count ' + data}`);
+    console.log(
+      `Current user count (or access check): ${data === null ? 'Accessible' : 'Count ' + data}`
+    );
   } catch (err) {
     console.error('❌ Unexpected error:', err);
     process.exit(1);

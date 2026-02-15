@@ -1,11 +1,8 @@
 'use client';
 
 import { Mail, CheckCircle, ArrowLeft, RefreshCw } from 'lucide-react';
-
 import { Suspense, useEffect, useState } from 'react';
-
 import { useSearchParams, useRouter } from 'next/navigation';
-
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -14,12 +11,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { createClient } from '@/lib/supabase/client';
-
 import { useToast } from '@/hooks/use-toast';
 
 function VerifyEmailContent() {

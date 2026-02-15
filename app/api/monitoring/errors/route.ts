@@ -3,7 +3,6 @@
  * Receives error reports from the ErrorMonitor service
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { logger } from '@/lib/logger';
 
 interface ErrorReport {

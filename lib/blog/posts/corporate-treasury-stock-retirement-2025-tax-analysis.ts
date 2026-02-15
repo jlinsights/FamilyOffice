@@ -1,14 +1,14 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'corporate-treasury-stock-retirement-2025-tax-analysis',
-    title:
-      '[2025 세법] 자기주식 이익소각: CEO를 위한 가장 확실한 엑시트(Exit) 전략인가?',
-    image:
-      'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      '배당보다 낮은 세율로 잉여금을 회수하고, 가지급금 문제까지 해결할 수 있는 자기주식 이익소각. 하지만 국세청의 검증은 더욱 강화되고 있습니다. 2025년, 안전하고 효과적인 실행을 위한 전문가의 심층 분석.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'corporate-treasury-stock-retirement-2025-tax-analysis',
+  title:
+    '[2025 세법] 자기주식 이익소각: CEO를 위한 가장 확실한 엑시트(Exit) 전략인가?',
+  image:
+    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    '배당보다 낮은 세율로 잉여금을 회수하고, 가지급금 문제까지 해결할 수 있는 자기주식 이익소각. 하지만 국세청의 검증은 더욱 강화되고 있습니다. 2025년, 안전하고 효과적인 실행을 위한 전문가의 심층 분석.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">[2025 세법] 자기주식 이익소각:<br/>CEO를 위한 가장 확실한 엑시트(Exit) 전략인가?</h1>
@@ -213,19 +213,19 @@ export const post: BlogPost = {
 </div>
 
 </div>`,
-    category: '세무최적화',
-    author: '임재홍',
-    date: '2025-01-15',
-    readTime: '15분',
-    tags: [
-      '자기주식소각',
-      '이익소각',
-      '가지급금해결',
-      '이익잉여금',
-      '양도소득세',
-      '의제배당',
-      '2025세법',
-    ],
-    slug: 'corporate-treasury-stock-retirement-2025-tax-analysis',
-    featured: true,
-  };
+  category: '세무최적화',
+  author: '임재홍',
+  date: '2025-01-15',
+  readTime: '15분',
+  tags: [
+    '자기주식소각',
+    '이익소각',
+    '가지급금해결',
+    '이익잉여금',
+    '양도소득세',
+    '의제배당',
+    '2025세법',
+  ],
+  slug: 'corporate-treasury-stock-retirement-2025-tax-analysis',
+  featured: true,
+};

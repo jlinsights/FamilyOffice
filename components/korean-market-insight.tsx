@@ -5,34 +5,20 @@
 'use client';
 
 import {
+  AlertCircle,
   Building2,
-  TrendingUp,
+  Calendar,
   Globe,
   Landmark,
+  TrendingUp,
   Users,
-  AlertCircle,
-  Calendar,
 } from 'lucide-react';
-
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-/**
- * 한국 시장 인사이트 컴포넌트 - FamilyOffice S 특화 기능
- */
-
 // 금융 API 제거에 따라 실시간 카드 의존성 제거
-
-/**
- * 한국 시장 인사이트 컴포넌트 - FamilyOffice S 특화 기능
- */
-
-/**
- * 한국 시장 인사이트 컴포넌트 - FamilyOffice S 특화 기능
- */
 
 interface MarketSentiment {
   kospi: { value: number; change: number };

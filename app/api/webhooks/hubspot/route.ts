@@ -3,7 +3,6 @@
  * 리드 상태 변경, 딜 업데이트 등 HubSpot 이벤트 실시간 동기화
  */
 import { NextRequest, NextResponse } from 'next/server';
-
 import { verifyHubSpotWebhook } from '@/lib/hubspot/api-client';
 import { globalRateLimit } from '@/lib/rate-limit';
 import { logSecurityEvent } from '@/lib/security/security-monitor';

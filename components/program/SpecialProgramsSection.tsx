@@ -1,12 +1,10 @@
 'use client';
 
 import React from 'react';
-
+import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
-
 import { SpecialProgram } from '@/types/program';
 
 function ProgramCard({
@@ -51,28 +49,28 @@ function ProgramCard({
         </Badge>
       </div>
       <div className="flex gap-2 mt-4">
-      <div className="flex gap-2 mt-4">
-        <Link
-          href={href}
-          className={cn(
-            buttonVariants({ size: 'sm' }),
-            'flex-1 bg-primary hover:bg-primary/90 text-white'
-          )}
-        >
-          더 알아보기
-        </Link>
-        <a
-          href="https://cal.com/familyoffice"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            buttonVariants({ variant: 'outline', size: 'sm' }),
-            'flex-1 border-primary text-primary hover:bg-primary hover:text-white'
-          )}
-        >
-          상담 신청
-        </a>
-      </div>
+        <div className="flex gap-2 mt-4">
+          <Link
+            href={href}
+            className={cn(
+              buttonVariants({ size: 'sm' }),
+              'flex-1 bg-primary hover:bg-primary/90 text-white'
+            )}
+          >
+            더 알아보기
+          </Link>
+          <a
+            href="https://cal.com/familyoffice"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ variant: 'outline', size: 'sm' }),
+              'flex-1 border-primary text-primary hover:bg-primary hover:text-white'
+            )}
+          >
+            상담 신청
+          </a>
+        </div>
       </div>
     </div>
   );

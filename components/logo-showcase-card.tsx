@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { SVGLogoDisplay } from './svg-logo-display';
 
 /**

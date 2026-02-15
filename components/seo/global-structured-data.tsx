@@ -1,7 +1,6 @@
 'use client';
 
 import Script from 'next/script';
-
 import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
 
 export function GlobalStructuredData() {
@@ -79,13 +78,7 @@ export function GlobalStructuredData() {
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: [
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-        ],
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         opens: '09:00',
         closes: '18:00',
       },
@@ -118,8 +111,7 @@ export function GlobalStructuredData() {
           itemOffered: {
             '@type': 'Service',
             name: '맞춤형 절세플랜 설계',
-            description:
-              '법인세·소득세·상속세 통합 최적화 절세플랜 전문 설계',
+            description: '법인세·소득세·상속세 통합 최적화 절세플랜 전문 설계',
           },
         },
         {
@@ -143,8 +135,7 @@ export function GlobalStructuredData() {
           itemOffered: {
             '@type': 'Service',
             name: '기업인증 취득 컨설팅',
-            description:
-              '벤처·이노비즈 등 기업인증 취득으로 세제혜택 극대화',
+            description: '벤처·이노비즈 등 기업인증 취득으로 세제혜택 극대화',
           },
         },
       ],

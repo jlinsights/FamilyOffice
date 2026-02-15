@@ -1,5 +1,4 @@
 import { render, screen, waitFor } from '@testing-library/react';
-
 import { HeroSection } from '@/components/sections/hero-section';
 
 // Mock next/navigation
@@ -17,7 +16,9 @@ describe('HeroSection', () => {
 
     // 메인 제목 확인 (HERO_CONTENT에서 가져온 실제 텍스트)
     expect(screen.getByText(/百年永續/i)).toBeInTheDocument();
-    expect(screen.getByText(/가문의 영원한 번영을 위한 약속/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/가문의 영원한 번영을 위한 약속/i)
+    ).toBeInTheDocument();
 
     // CTA 버튼 확인 (HERO_CONTENT.actions의 실제 텍스트)
     expect(screen.getByText(/상속세 3분 계산하기/i)).toBeInTheDocument();

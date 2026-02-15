@@ -16,19 +16,15 @@ import {
   Type,
 } from 'lucide-react';
 import { toast } from 'sonner';
-
 import { useState } from 'react';
-
 import { FadeIn } from '@/components/ui/animation/FadeIn';
 import { TextReveal } from '@/components/ui/animation/TextReveal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { BRAND_COLORS, TYPOGRAPHY_SYSTEM } from '@/constants/brand';
 import type { BrandColorSystem, TypographyCategory } from '@/types/brand';
 

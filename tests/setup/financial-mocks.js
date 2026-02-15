@@ -14,7 +14,7 @@ global.mockFinancialData = {
   forexData: {
     from: 'USD',
     to: 'KRW',
-    rate: 1305.50,
+    rate: 1305.5,
     change: -0.5,
   },
 };

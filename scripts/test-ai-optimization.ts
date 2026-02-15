@@ -3,11 +3,11 @@
  * 블로그 AI 최적화 기능 동작 검증
  */
 import {
-    calculateAIOptimizationScore,
-    extractAIOptimizedKeywords,
-    generateAIOptimizedFAQ,
-    generateAIOptimizedMetadata,
-    generateOptimizationRecommendations,
+  calculateAIOptimizationScore,
+  extractAIOptimizedKeywords,
+  generateAIOptimizedFAQ,
+  generateAIOptimizedMetadata,
+  generateOptimizationRecommendations,
 } from '../lib/ai/blog-ai-optimization';
 import { blogPosts } from '../lib/blog-data';
 

@@ -1,10 +1,8 @@
-import { Inter, Playfair_Display } from 'next/font/google';
-
 import { PreloadCriticalResources } from '@/components/preload-critical-resources';
 import { AppShell } from '@/components/providers/app-shell';
 import { GlobalMetaTags } from '@/components/seo/global-meta-tags';
 import { GlobalStructuredData } from '@/components/seo/global-structured-data';
-
+import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
 export { defaultMetadata as metadata, viewport } from '@/lib/seo/metadata';
@@ -49,7 +47,6 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${inter.variable} ${playfair.variable}`}
         style={{ fontOpticalSizing: 'auto' }}
-        suppressHydrationWarning
       >
         <AppShell>{children}</AppShell>
       </body>

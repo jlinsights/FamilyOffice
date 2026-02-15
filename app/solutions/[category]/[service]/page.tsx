@@ -1,36 +1,30 @@
-'use client';
-
 import {
-    ArrowLeft,
-    ArrowRight,
-    CheckCircle,
-    Clock,
-    DollarSign,
-    Star,
-    Target,
-    TrendingUp,
-    Users,
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle,
+  Clock,
+  DollarSign,
+  Star,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-
+import { FadeIn } from '@/components/ui/animation/FadeIn';
+import { TextReveal } from '@/components/ui/animation/TextReveal';
+import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-
 import { PremiumFAQ } from '@/components/faq/premium-faq';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { PremiumContentGuard } from '@/components/premium-content-guard';
 import { BreadcrumbNavigation } from '@/components/seo/breadcrumb-navigation';
-import { FadeIn } from '@/components/ui/animation/FadeIn';
-import { TextReveal } from '@/components/ui/animation/TextReveal';
-import { Badge } from '@/components/ui/badge';
-
+import { cn } from '@/lib/utils';
 import {
-    generateServiceSlug,
-    getRelatedServices,
-    getServiceBySlug,
+  generateServiceSlug,
+  getRelatedServices,
+  getServiceBySlug,
 } from '@/constants/services';
 
 interface ServiceDetailPageProps {
@@ -77,67 +71,76 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
 
           {/* Hero Section */}
           <section className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white pt-20 pb-20">
-             {/* Dynamic Background */}
+            {/* Dynamic Background */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
             <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
 
             <div className="container mx-auto px-6 relative z-10">
               <div className="max-w-4xl mx-auto text-center">
-                 {/* Back Button */}
-                 <FadeIn direction="down" delay={0.1}>
-                    <Link
-                      href="/solutions"
-                      className="inline-flex items-center text-blue-200 hover:text-white mb-8 font-medium transition-colors"
-                    >
-                      <ArrowLeft className="h-4 w-4 mr-2" />
-                      솔루션 목록으로
-                    </Link>
-                 </FadeIn>
+                {/* Back Button */}
+                <FadeIn direction="down" delay={0.1}>
+                  <Link
+                    href="/solutions"
+                    className="inline-flex items-center text-blue-200 hover:text-white mb-8 font-medium transition-colors"
+                  >
+                    <ArrowLeft className="h-4 w-4 mr-2" />
+                    솔루션 목록으로
+                  </Link>
+                </FadeIn>
 
                 {/* Category Badge */}
                 <FadeIn direction="down" delay={0.2}>
-                    <div className="flex items-center justify-center gap-3 mb-8">
-                       <Badge variant="outline" className="px-4 py-1.5 text-sm border-blue-500/30 text-blue-300 bg-blue-500/10 backdrop-blur-md">
-                        {category.title}
-                      </Badge>
-                      <Badge variant="outline" className="px-4 py-1.5 text-sm border-amber-500/30 text-amber-300 bg-amber-500/10 backdrop-blur-md flex items-center">
-                        <Star className="h-3 w-3 mr-1 fill-current" />
-                        Premium Service
-                      </Badge>
-                    </div>
+                  <div className="flex items-center justify-center gap-3 mb-8">
+                    <Badge
+                      variant="outline"
+                      className="px-4 py-1.5 text-sm border-blue-500/30 text-blue-300 bg-blue-500/10 backdrop-blur-md"
+                    >
+                      {category.title}
+                    </Badge>
+                    <Badge
+                      variant="outline"
+                      className="px-4 py-1.5 text-sm border-amber-500/30 text-amber-300 bg-amber-500/10 backdrop-blur-md flex items-center"
+                    >
+                      <Star className="h-3 w-3 mr-1 fill-current" />
+                      Premium Service
+                    </Badge>
+                  </div>
                 </FadeIn>
 
                 {/* Title */}
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white leading-tight tracking-tight">
-                   <TextReveal delay={0.3} type="char">{service.title}</TextReveal>
+                  <TextReveal delay={0.3} type="char">
+                    {service.title}
+                  </TextReveal>
                 </h1>
 
                 {/* Description */}
                 <FadeIn delay={0.5}>
-                    <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl mx-auto text-balance">
-                      {service.description}
-                    </p>
+                  <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl mx-auto text-balance">
+                    {service.description}
+                  </p>
                 </FadeIn>
 
                 {/* Target Client */}
                 <FadeIn delay={0.7} className="mb-12">
-                   <div className="inline-flex items-center gap-4 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl text-left max-w-2xl">
-                      <div className="w-12 h-12 rounded-full bg-blue-600/20 flex items-center justify-center flex-shrink-0 text-blue-400">
-                        <Users className="h-6 w-6" />
+                  <div className="inline-flex items-center gap-4 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl text-left max-w-2xl">
+                    <div className="w-12 h-12 rounded-full bg-blue-600/20 flex items-center justify-center flex-shrink-0 text-blue-400">
+                      <Users className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-white mb-1">추천 고객</div>
+                      <div className="text-slate-300 text-sm">
+                        {service.targetClient}
                       </div>
-                      <div>
-                        <div className="font-bold text-white mb-1">
-                          추천 고객
-                        </div>
-                        <div className="text-slate-300 text-sm">
-                          {service.targetClient}
-                        </div>
-                      </div>
-                   </div>
+                    </div>
+                  </div>
                 </FadeIn>
 
                 {/* CTA Buttons */}
-                <FadeIn delay={0.9} className="flex flex-col sm:flex-row gap-4 justify-center">
+                <FadeIn
+                  delay={0.9}
+                  className="flex flex-col sm:flex-row gap-4 justify-center"
+                >
                   <Link
                     href="/structure-check#request-form"
                     className={cn(

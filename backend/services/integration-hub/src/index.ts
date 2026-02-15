@@ -3,7 +3,6 @@ import cors from 'cors';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
-
 import { logger } from '../../shared/logging/logger';
 import { authMiddleware } from '../../shared/middleware/auth';
 import { tenantMiddleware } from '../../shared/middleware/tenant';

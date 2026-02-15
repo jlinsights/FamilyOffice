@@ -9,11 +9,18 @@ function isBypassMode() {
   );
 }
 
-export function SafeSignUpButton({ children, ...props }: React.ComponentProps<typeof SignUpButton>) {
+export function SafeSignUpButton({
+  children,
+  ...props
+}: React.ComponentProps<typeof SignUpButton>) {
   if (isBypassMode()) {
     return (
-      <span 
-        onClick={() => alert('Authentication is disabled in development mode because production keys are detected.')}
+      <span
+        onClick={() =>
+          alert(
+            'Authentication is disabled in development mode because production keys are detected.'
+          )
+        }
         className="cursor-not-allowed opacity-80 block"
         title="Auth Disabled (Dev Mode)"
       >
@@ -28,18 +35,30 @@ export function SafeSignUpButton({ children, ...props }: React.ComponentProps<ty
 export function SafeUserButton(props: React.ComponentProps<typeof UserButton>) {
   if (isBypassMode()) {
     // Render a placeholder or null to avoid crashing
-    return <div className="h-9 w-9 rounded-full bg-muted border border-border" title="Auth Bypass Mode (User)" />;
+    return (
+      <div
+        className="h-9 w-9 rounded-full bg-muted border border-border"
+        title="Auth Bypass Mode (User)"
+      />
+    );
   }
 
   return <UserButton {...props} />;
 }
 
-export function SafeSignInButton({ children, ...props }: React.ComponentProps<typeof SignInButton>) {
+export function SafeSignInButton({
+  children,
+  ...props
+}: React.ComponentProps<typeof SignInButton>) {
   if (isBypassMode()) {
     // Return a dummy button wrapper that alerts user
     return (
-      <span 
-        onClick={() => alert('Authentication is disabled in development mode because production keys are detected.')}
+      <span
+        onClick={() =>
+          alert(
+            'Authentication is disabled in development mode because production keys are detected.'
+          )
+        }
         className="cursor-not-allowed opacity-80"
         title="Auth Disabled (Dev Mode)"
       >

@@ -1,20 +1,15 @@
-'use client';
-
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { HomeIcon, PhoneIcon, UserIcon } from 'lucide-react';
-
-
-
+import { buttonVariants } from '@/components/ui/button';
 import { BackgroundBeams } from '@/components/aceternity/background-beams';
 import { FloatingNav } from '@/components/aceternity/floating-navbar';
 import {
-    HeroHighlight,
-    Highlight,
+  HeroHighlight,
+  Highlight,
 } from '@/components/aceternity/hero-highlight';
 import { InfiniteMovingCards } from '@/components/aceternity/infinite-moving-cards';
 import { Meteors } from '@/components/aceternity/meteors';
 import { Spotlight } from '@/components/aceternity/spotlight';
+import { cn } from '@/lib/utils';
 
 const testimonials = [
   {
@@ -82,7 +77,10 @@ export default function AceternityDemo() {
             차세대 성공을 준비하세요
           </p>
           <button
-            className={cn(buttonVariants({ size: "lg" }), "mt-8 bg-white text-black hover:bg-gray-200")}
+            className={cn(
+              buttonVariants({ size: 'lg' }),
+              'mt-8 bg-white text-black hover:bg-gray-200'
+            )}
           >
             상담 신청하기
           </button>
@@ -188,12 +186,18 @@ export default function AceternityDemo() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              className={cn(buttonVariants({ size: "lg" }), "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-primary-foreground")}
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-primary-foreground'
+              )}
             >
               무료 상담 신청
             </button>
             <button
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "border-white text-white hover:bg-white hover:text-black")}
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'lg' }),
+                'border-white text-white hover:bg-white hover:text-black'
+              )}
             >
               서비스 자료 다운로드
             </button>

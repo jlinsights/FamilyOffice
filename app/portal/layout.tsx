@@ -1,9 +1,8 @@
 import { redirect } from 'next/navigation';
-
 import { currentUser } from '@clerk/nextjs/server';
-
 import { Header } from '@/components/header';
 import { PortalShell } from '@/components/portal-shell';
+import { getAdminEmails } from '@/lib/admin-permissions';
 
 export default async function PortalLayout({
   children,
@@ -18,7 +17,7 @@ export default async function PortalLayout({
 
   // Admin redirect
   const email = user.emailAddresses[0]?.emailAddress;
-  if (email === 'jhlim725@gmail.com') {
+  if (email && getAdminEmails().includes(email.toLowerCase())) {
     redirect('/admin');
   }
 

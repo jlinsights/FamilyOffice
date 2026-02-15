@@ -3,8 +3,8 @@
  * 캘린더 기반 자동 게시, 승인 워크플로우, SEO 메타데이터 자동 설정, 소셜 미디어 연동
  */
 import {
-    ContentCalendar,
-    generateContentCalendar,
+  ContentCalendar,
+  generateContentCalendar,
 } from '@/lib/marketing/inbound-marketing-automation';
 
 export type ContentStatus =

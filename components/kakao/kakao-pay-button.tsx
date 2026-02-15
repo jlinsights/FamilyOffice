@@ -5,11 +5,8 @@
  * 프리미엄 서비스 결제를 위한 카카오페이 통합
  */
 import { Loader2, CreditCard } from 'lucide-react';
-
 import React, { useState } from 'react';
-
 import { Button } from '@/components/ui/button';
-
 import { useToast } from '@/hooks/use-toast';
 
 interface KakaoPayButtonProps {

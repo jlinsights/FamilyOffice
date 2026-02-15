@@ -1,9 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
-
 import type { BentoService } from '@/constants/bento-services';
 
 interface CTACardProps {

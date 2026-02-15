@@ -218,6 +218,7 @@ Each issue includes:
    - Add to project board
 
 3. **Remove Console.log (Priority Files)**
+
    ```bash
    # Focus on these files first:
    lib/marketing/workflow-engine.ts        (28 logs)

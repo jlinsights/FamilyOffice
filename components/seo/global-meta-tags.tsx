@@ -17,11 +17,7 @@ export function GlobalMetaTags() {
         href="/favicon.ico?v=2025"
         type="image/x-icon"
       />
-      <link
-        rel="apple-touch-icon"
-        href="/favicon.png?v=2025"
-        sizes="180x180"
-      />
+      <link rel="apple-touch-icon" href="/favicon.png?v=2025" sizes="180x180" />
       <link
         rel="icon"
         href="/favicon.png?v=2025"
@@ -39,10 +35,7 @@ export function GlobalMetaTags() {
       />
       <meta name="geo.position" content="37.5665;126.9780" />
       <meta name="ICBM" content="37.5665, 126.9780" />
-      <meta
-        name="coverage"
-        content="서울특별시, 경기도, 충청북도, 충청남도"
-      />
+      <meta name="coverage" content="서울특별시, 경기도, 충청북도, 충청남도" />
 
       {/* 네이버/다음 SEO */}
       <meta
@@ -202,10 +195,7 @@ export function GlobalMetaTags() {
         name="business:contact_data:phone_number"
         content="+82-502-5550-8700"
       />
-      <meta
-        name="business:contact_data:email"
-        content="cs@familyoffices.vip"
-      />
+      <meta name="business:contact_data:email" content="cs@familyoffices.vip" />
 
       {/* 검색엔진 우선순위 */}
       <meta name="rating" content="general" />

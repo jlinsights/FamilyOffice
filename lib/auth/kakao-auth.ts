@@ -3,7 +3,6 @@
  * Kakao SDK + Supabase Auth 완전 연동
  */
 import type { User } from '@supabase/supabase-js';
-
 import { createClient } from '@/lib/supabase/client';
 import { safeInsert, safeUpdate, safeFrom } from '@/lib/supabase/helpers';
 

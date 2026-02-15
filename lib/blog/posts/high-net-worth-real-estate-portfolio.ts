@@ -1,11 +1,11 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'high-net-worth-real-estate-portfolio',
-    title: '고액자산가 부동산 포트폴리오 구성법',
-    excerpt:
-      '고액자산가를 위한 전략적 부동산 포트폴리오 구성 방법과 리스크 관리 전략을 제시합니다.',
-    content: `# 고액자산가 부동산 포트폴리오 구성법
+  id: 'high-net-worth-real-estate-portfolio',
+  title: '고액자산가 부동산 포트폴리오 구성법',
+  excerpt:
+    '고액자산가를 위한 전략적 부동산 포트폴리오 구성 방법과 리스크 관리 전략을 제시합니다.',
+  content: `# 고액자산가 부동산 포트폴리오 구성법
 
 부동산은 고액자산가들의 포트폴리오에서 핵심적인 역할을 합니다. 안정적인 현금흐름과 인플레이션 헤지 효과, 그리고 장기적인 자산 가치 상승을 기대할 수 있는 투자처입니다.
 
@@ -72,11 +72,11 @@ export const post: BlogPost = {
 - 감가상각비 활용
 
 성공적인 부동산 포트폴리오는 장기적 관점에서 체계적으로 구축해야 합니다.`,
-    category: '자산관리 전략',
-    author: '임재홍',
-    date: '2025-01-02',
-    readTime: '10분',
-    tags: ['부동산 투자', '포트폴리오', '고액자산가', '자산 배분'],
-    slug: 'high-net-worth-real-estate-portfolio',
-    featured: true,
-  };
+  category: '자산관리 전략',
+  author: '임재홍',
+  date: '2025-01-02',
+  readTime: '10분',
+  tags: ['부동산 투자', '포트폴리오', '고액자산가', '자산 배분'],
+  slug: 'high-net-worth-real-estate-portfolio',
+  featured: true,
+};

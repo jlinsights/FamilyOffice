@@ -4,9 +4,8 @@
  */
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-
 import { auth } from '@clerk/nextjs/server';
-
+import { getAdminEmails } from '@/lib/admin-permissions';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,7 +14,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-
 import { SEOAnalyticsDashboard } from '@/components/admin/seo-analytics-dashboard';
 
 export const metadata: Metadata = {
@@ -38,7 +36,7 @@ export default async function AdminSEOPage() {
   const user = await auth();
   const userEmail = user.sessionClaims?.email as string;
 
-  if (userEmail !== 'jhlim725@gmail.com') {
+  if (!getAdminEmails().includes(userEmail)) {
     redirect('/');
   }
 

@@ -1,22 +1,19 @@
 'use client';
 
 import {
-    AlertTriangle,
-    ArrowRight,
-    Building,
-    Crown,
-    HeartHandshake,
-    Shield,
-    Target,
+  AlertTriangle,
+  ArrowRight,
+  Building,
+  Crown,
+  HeartHandshake,
+  Shield,
+  Target,
 } from 'lucide-react';
-
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import Link from 'next/link';
-
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
+import { cn } from '@/lib/utils';
 
 export function DualPillarSection() {
   return (

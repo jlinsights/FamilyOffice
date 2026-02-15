@@ -1,10 +1,8 @@
 'use client';
 
 import { ArrowRight, BookOpen } from 'lucide-react';
-
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-
 import { SEMINAR_CATEGORIES } from '@/constants/seminars';
 
 export function SeminarCategoriesSection() {

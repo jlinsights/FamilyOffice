@@ -1,7 +1,5 @@
 import { memo } from 'react';
-
 import { Badge } from '@/components/ui/badge';
-
 import { MembershipStat } from '@/types/program';
 
 export const MembershipStatsSection = memo(function MembershipStatsSection({

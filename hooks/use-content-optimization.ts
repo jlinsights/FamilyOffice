@@ -3,9 +3,7 @@
  * 페이지별 컨텐츠 분석 및 SEO 최적화
  */
 import { useEffect, useState } from 'react';
-
 import { usePathname } from 'next/navigation';
-
 import {
   analyzeContent,
   generateInternalLinks,

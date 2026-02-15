@@ -2,9 +2,7 @@
 
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-
 import { Toaster } from '@/components/ui/sonner';
-
 import { Analytics } from '@/components/analytics/analytics';
 import { ChannelTalk } from '@/components/analytics/channel-talk';
 import ExternalScripts from '@/components/analytics/external-scripts';
@@ -14,7 +12,6 @@ import { KakaoPixel } from '@/components/kakao/kakao-pixel';
 import { KakaoSDK } from '@/components/kakao/kakao-sdk';
 import { SEOModulePreloader } from '@/components/seo/seo-module-preloader';
 import { SEOTrackerInit } from '@/components/seo/seo-tracker-init';
-
 import { createUserTrackingScript } from '@/lib/security/html-sanitizer';
 
 // Extract environment variables at module level for client components

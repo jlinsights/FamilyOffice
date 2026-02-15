@@ -3,7 +3,6 @@
  * Next.js App Router에서 Web Vitals 자동 수집
  */
 import { useEffect } from 'react';
-
 import { reportWebVitals } from '@/lib/core-web-vitals';
 
 // Performance API 타입 정의

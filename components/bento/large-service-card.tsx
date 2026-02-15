@@ -1,11 +1,8 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
-
 import type { BentoService } from '@/constants/bento-services';
 
 interface LargeServiceCardProps {

@@ -114,11 +114,11 @@ declare global {
     Cal?: ((command: string, ...args: unknown[]) => void) & {
       ns?: Record<string, (...args: unknown[]) => void>;
     };
-    
+
     // Google Analytics / GTM
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
-    
+
     // Kakao SDK
     Kakao?: {
       init: (key: string) => void;
@@ -144,7 +144,7 @@ declare global {
         request: (options: unknown) => void;
       };
     };
-    
+
     // Channel.io
     ChannelIO?: {
       (method: 'boot', options: unknown): void;
@@ -157,7 +157,7 @@ declare global {
       c?: (args: unknown) => void;
     };
     ChannelIOInitialized?: boolean;
-    
+
     // HubSpot
     hbspt?: {
       forms: {

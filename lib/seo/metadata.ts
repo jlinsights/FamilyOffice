@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-
 import { KEYWORDS } from './keywords';
 
 // SuperClaude 통합 SEO 프레임워크 - 성공한 법인 대표 타겟 최적화
@@ -56,9 +55,7 @@ export const defaultMetadata: Metadata = {
     description:
       '성공한 법인대표 전용. 가업승계·승계세무 완전해결, 기업가 맞춤 자산관리, 경영위험 완전보장. 삼성생명 1000억+ 운용실적 ☎0502-5550-8700',
     creator: '@FamilyOfficeS_CEO',
-    images: [
-      'https://familyoffices.vip/images/og-image-familyoffice-v2.png',
-    ],
+    images: ['https://familyoffices.vip/images/og-image-familyoffice-v2.png'],
   },
 
   // 🎯 BMAD Method 지역 SEO 및 소셜 신호 강화

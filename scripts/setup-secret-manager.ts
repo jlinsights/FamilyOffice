@@ -1,14 +1,12 @@
 #!/usr/bin/env tsx
-
 /**
  * 1Password Secret Manager Setup Script
  * Syncs environment variables from 1Password to .env.local for development
  */
-
 import { exec } from 'child_process';
-import { promisify } from 'util';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { promisify } from 'util';
 
 const execAsync = promisify(exec);
 
@@ -200,7 +198,7 @@ async function main() {
   console.log('');
 }
 
-main().catch((error) => {
+main().catch(error => {
   console.error('❌ 에러 발생:', error.message);
   process.exit(1);
 });

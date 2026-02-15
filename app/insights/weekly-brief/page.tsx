@@ -1,43 +1,39 @@
 'use client';
 
 import {
-    ArrowRight,
-    BarChart,
-    Calendar,
-    ChevronRight,
-    Clock,
-    Headphones,
-    Mail,
-    Play,
-    Shield,
-    Star,
-    Target,
-    TrendingUp,
-    Users,
+  ArrowRight,
+  BarChart,
+  Calendar,
+  ChevronRight,
+  Clock,
+  Headphones,
+  Mail,
+  Play,
+  Shield,
+  Star,
+  Target,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-
 import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
-
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { SpotifyEmbed } from '@/components/media/spotify-embed';
 import { YouTubeEmbed } from '@/components/media/youtube-embed';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
+import { cn } from '@/lib/utils';
 
 interface NewsletterPost {
   issueNumber: string;

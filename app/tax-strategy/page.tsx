@@ -1,43 +1,39 @@
 'use client';
 
 import {
-    AlertTriangle,
-    ArrowRight,
-    Building,
-    Calculator,
-    CheckCircle,
-    Crown,
-    DollarSign,
-    FileText,
-    Lightbulb,
-    Shield,
-    Star,
-    Target,
-    TrendingDown,
-    Trophy,
-    Users,
+  AlertTriangle,
+  ArrowRight,
+  Building,
+  Calculator,
+  CheckCircle,
+  Crown,
+  DollarSign,
+  FileText,
+  Lightbulb,
+  Shield,
+  Star,
+  Target,
+  TrendingDown,
+  Trophy,
+  Users,
 } from 'lucide-react';
-
 import React from 'react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
-
 import { AnimatedCounter } from '@/components/animated-counter';
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { cn } from '@/lib/utils';
 
 const TaxStrategyPage = () => {
   const [startAnimation, setStartAnimation] = React.useState(false);
@@ -515,7 +511,10 @@ const TaxStrategyPage = () => {
                             trigger={
                               <div
                                 className={cn(
-                                  buttonVariants({ variant: 'outline', size: 'sm' }),
+                                  buttonVariants({
+                                    variant: 'outline',
+                                    size: 'sm',
+                                  }),
                                   'cursor-pointer'
                                 )}
                               >
@@ -813,7 +812,10 @@ const TaxStrategyPage = () => {
                             <Link
                               href={`/business-succession`}
                               className={cn(
-                                buttonVariants({ variant: 'default', size: 'sm' }),
+                                buttonVariants({
+                                  variant: 'default',
+                                  size: 'sm',
+                                }),
                                 'flex-1 bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-700 text-white'
                               )}
                             >
@@ -829,7 +831,10 @@ const TaxStrategyPage = () => {
                               trigger={
                                 <div
                                   className={cn(
-                                    buttonVariants({ variant: 'outline', size: 'sm' }),
+                                    buttonVariants({
+                                      variant: 'outline',
+                                      size: 'sm',
+                                    }),
                                     'cursor-pointer'
                                   )}
                                 >
@@ -1248,7 +1253,7 @@ const TaxStrategyPage = () => {
                   href="/ceo-checklist"
                   className={cn(
                     buttonVariants({ variant: 'default', size: 'lg' }),
-                    "px-8 py-4 text-lg font-bold bg-blue-600 hover:bg-blue-700"
+                    'px-8 py-4 text-lg font-bold bg-blue-600 hover:bg-blue-700'
                   )}
                 >
                   <FileText className="h-5 w-5 mr-2" />
@@ -1259,7 +1264,7 @@ const TaxStrategyPage = () => {
                   href="/ceo-checklist#succession"
                   className={cn(
                     buttonVariants({ variant: 'outline', size: 'lg' }),
-                    "px-8 py-4 text-lg font-bold"
+                    'px-8 py-4 text-lg font-bold'
                   )}
                 >
                   승계 준비도 확인하기

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { GoogleSearchConsoleAPI } from '@/lib/google/search-console';
 
 export const dynamic = 'force-dynamic';

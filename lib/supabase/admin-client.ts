@@ -4,7 +4,6 @@
  * 타입 안전성을 보장하기 위해 Database 타입을 명시적으로 전달
  */
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-
 import { Database } from '@/types/supabase';
 
 /**

@@ -1,14 +1,14 @@
 import { BlogPost } from '@/types/blog';
 
 export const post: BlogPost = {
-    id: 'corporate-life-insurance-ceo-risk-management',
-    title:
-      'CEO의 부재(不在), 기업의 위기가 되지 않으려면: 경영인 정기보험(CEO Plan)의 재발견',
-    image:
-      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop',
-    excerpt:
-      'CEO의 갑작스러운 유고는 기업 생존을 위협하는 최대의 리스크입니다. 유족 보상금, 상속세 재원, 그리고 법인세 절세까지. 경영인 정기보험이 단순한 보험을 넘어 기업의 필수 안전장치인 이유를 10년 차 컨설턴트가 분석합니다.',
-    content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
+  id: 'corporate-life-insurance-ceo-risk-management',
+  title:
+    'CEO의 부재(不在), 기업의 위기가 되지 않으려면: 경영인 정기보험(CEO Plan)의 재발견',
+  image:
+    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop',
+  excerpt:
+    'CEO의 갑작스러운 유고는 기업 생존을 위협하는 최대의 리스크입니다. 유족 보상금, 상속세 재원, 그리고 법인세 절세까지. 경영인 정기보험이 단순한 보험을 넘어 기업의 필수 안전장치인 이유를 10년 차 컨설턴트가 분석합니다.',
+  content: `<div className="font-sans leading-relaxed max-w-4xl mx-auto text-base text-foreground bg-background px-5">
 
 <header className="text-center mb-10 py-8 border-b-4 border-primary">
     <h1 className="text-primary mb-4 text-3xl md:text-4xl font-bold leading-tight">CEO의 부재(不在), 기업의 위기가 되지 않으려면:<br/>경영인 정기보험(CEO Plan)의 재발견</h1>
@@ -192,36 +192,36 @@ export const post: BlogPost = {
 </div>
 
 </div>`,
-    category: '승계전략',
-    author: '임재홍',
-    date: '2025-02-10',
-    readTime: '14분',
-    tags: [
-      'CEO유고',
-      '경영인정기보험',
-      'CEO플랜',
-      '법인세절세',
-      '상속세재원',
-      '가지급금상환',
-      '기업리스크관리',
-    ],
-    slug: 'corporate-life-insurance-ceo-risk-management',
-    featured: true,
-    faq: [
-      {
-        question: '경영인 정기보험은 비용 처리가 가능한가요?',
-        answer:
-          '네, 법인이 계약하고 수익자가 되는 경우 납입 보험료를 비용(손금)으로 처리하여 법인세를 절감할 수 있습니다. 단, 상품 종류와 가입 시기에 따라 손금 인정 비율이 다를 수 있습니다.',
-      },
-      {
-        question: 'CEO 유고 시 보험금은 어떻게 활용되나요?',
-        answer:
-          '법인으로 지급된 사망보험금은 긴급 자금으로 대출 상환에 쓰이거나, 유족들에게 퇴직금 또는 위로금 형태로 지급되어 상속세 재원으로 활용될 수 있습니다.',
-      },
-      {
-        question: '해지환급금은 어떻게 활용하나요?',
-        answer:
-          'CEO 은퇴 시점에 맞춰 해지하여 퇴직금 재원으로 활용할 수 있습니다. 이를 위해서는 정관에 임원 퇴직금 지급 규정이 명확히 마련되어 있어야 합니다.',
-      },
-    ],
-  };
+  category: '승계전략',
+  author: '임재홍',
+  date: '2025-02-10',
+  readTime: '14분',
+  tags: [
+    'CEO유고',
+    '경영인정기보험',
+    'CEO플랜',
+    '법인세절세',
+    '상속세재원',
+    '가지급금상환',
+    '기업리스크관리',
+  ],
+  slug: 'corporate-life-insurance-ceo-risk-management',
+  featured: true,
+  faq: [
+    {
+      question: '경영인 정기보험은 비용 처리가 가능한가요?',
+      answer:
+        '네, 법인이 계약하고 수익자가 되는 경우 납입 보험료를 비용(손금)으로 처리하여 법인세를 절감할 수 있습니다. 단, 상품 종류와 가입 시기에 따라 손금 인정 비율이 다를 수 있습니다.',
+    },
+    {
+      question: 'CEO 유고 시 보험금은 어떻게 활용되나요?',
+      answer:
+        '법인으로 지급된 사망보험금은 긴급 자금으로 대출 상환에 쓰이거나, 유족들에게 퇴직금 또는 위로금 형태로 지급되어 상속세 재원으로 활용될 수 있습니다.',
+    },
+    {
+      question: '해지환급금은 어떻게 활용하나요?',
+      answer:
+        'CEO 은퇴 시점에 맞춰 해지하여 퇴직금 재원으로 활용할 수 있습니다. 이를 위해서는 정관에 임원 퇴직금 지급 규정이 명확히 마련되어 있어야 합니다.',
+    },
+  ],
+};

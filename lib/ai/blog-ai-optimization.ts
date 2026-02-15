@@ -6,7 +6,6 @@
  * ChatGPT, Perplexity, Claude, Gemini, Bing Copilot 최적화
  */
 import type { BlogPost } from '@/types/blog';
-
 import { BMAD_AI_KEYWORDS } from './ai-search-monitoring';
 
 /**

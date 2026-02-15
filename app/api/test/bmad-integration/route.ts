@@ -16,16 +16,13 @@
  * GET /api/test/bmad-integration?detailed=true
  */
 import { createClient } from '@supabase/supabase-js';
-
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   checkGA4Connection,
   getKeywordPerformance,
 } from '@/lib/google-analytics/ga4-client';
 import { checkSerperConnection, checkDomainRanking } from '@/lib/serper/client';
 import { safeInsert } from '@/lib/supabase/helpers';
-
 import { Database } from '@/types/supabase';
 
 interface TestResult {

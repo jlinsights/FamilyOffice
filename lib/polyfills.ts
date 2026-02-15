@@ -3,7 +3,6 @@
 // existence of the global `self` object. We simply alias it to `globalThis`.
 
 if (typeof globalThis.self === 'undefined') {
-   
   // @ts-expect-error – allow write to global
   globalThis.self = globalThis as unknown as typeof globalThis & {
     self: typeof globalThis;

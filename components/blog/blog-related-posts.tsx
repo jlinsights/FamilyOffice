@@ -1,17 +1,12 @@
 'use client';
 
 import { ArrowRight, Clock, Calendar, Tag } from 'lucide-react';
-
 import { useMemo } from 'react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-
 import { blogPosts } from '@/lib/blog-data';
-
 import type { BlogPost } from '@/types/blog';
 
 interface BlogRelatedPostsProps {

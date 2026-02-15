@@ -1,15 +1,11 @@
 'use client';
 
 import { Search, X } from 'lucide-react';
-
 import { useState, useEffect, useCallback, useMemo } from 'react';
-
 import { useRouter, useSearchParams } from 'next/navigation';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-
 import { debounce } from '@/lib/utils';
 
 export function BlogSearch() {

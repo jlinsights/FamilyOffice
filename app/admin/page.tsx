@@ -12,13 +12,10 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-
 // ... (previous imports)
 import { useEffect, useState } from 'react';
-
 import nextDynamic from 'next/dynamic';
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import {
@@ -29,19 +26,16 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import { BMADKeywordDashboard } from '@/components/admin/bmad-keyword-dashboard';
+import { MembershipIntakeDashboard } from '@/components/admin/membership-intake-dashboard';
+import { RequestTicketDashboard } from '@/components/admin/request-ticket-dashboard';
 import { StructureCheckDashboard } from '@/components/admin/structure-check-dashboard';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-
 import { getMembershipIntakeSubmissions } from '@/app/apply/membership-intake/actions';
 import { type MembershipIntakeSubmission } from '@/app/apply/membership-intake/schema';
 import { getRequestTickets } from '@/app/request/actions';
 import { type RequestTicketSubmission } from '@/app/request/schema';
-import { MembershipIntakeDashboard } from '@/components/admin/membership-intake-dashboard';
-import { RequestTicketDashboard } from '@/components/admin/request-ticket-dashboard';
-
 import {
   getAdminStats,
   getStructureCheckRequests,
@@ -165,7 +159,9 @@ export default function AdminDashboard() {
     StructureCheckRequest[]
   >([]);
   const [loadingRequests, setLoadingRequests] = useState(true);
-  const [membershipSubmissions, setMembershipSubmissions] = useState<MembershipIntakeSubmission[]>([]);
+  const [membershipSubmissions, setMembershipSubmissions] = useState<
+    MembershipIntakeSubmission[]
+  >([]);
   const [loadingMembership, setLoadingMembership] = useState(true);
 
   // ... (previous useEffects)
@@ -183,7 +179,9 @@ export default function AdminDashboard() {
     loadMembershipSubmissions();
   }, []);
 
-  const [requestTickets, setRequestTickets] = useState<RequestTicketSubmission[]>([]);
+  const [requestTickets, setRequestTickets] = useState<
+    RequestTicketSubmission[]
+  >([]);
   const [loadingTickets, setLoadingTickets] = useState(true);
 
   useEffect(() => {
@@ -380,7 +378,10 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <Link href="/admin/consultations" className={buttonVariants()}>
+                    <Link
+                      href="/admin/consultations"
+                      className={buttonVariants()}
+                    >
                       상담 목록 보기
                     </Link>
                   </div>
@@ -402,7 +403,6 @@ export default function AdminDashboard() {
                   initialRequests={structureCheckRequests}
                 />
               )}
-
             </TabsContent>
 
             <TabsContent value="membership-intake" className="space-y-6">
@@ -415,7 +415,9 @@ export default function AdminDashboard() {
                   </CardContent>
                 </Card>
               ) : (
-                <MembershipIntakeDashboard initialSubmissions={membershipSubmissions} />
+                <MembershipIntakeDashboard
+                  initialSubmissions={membershipSubmissions}
+                />
               )}
             </TabsContent>
 

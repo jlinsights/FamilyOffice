@@ -1,12 +1,12 @@
-import type { ServiceCategory, DetailedService } from './types';
+import { assetWealthManagement } from './categories/asset-wealth-management';
+import { businessSuccession } from './categories/business-succession';
 import { corporateInsuranceRiskCategory } from './categories/corporate-insurance-risk';
 import { corporateStructureGovernance } from './categories/corporate-structure-governance';
 import { hrStartupSupport } from './categories/hr-startup-support';
-import { taxAccounting } from './categories/tax-accounting';
 import { investmentFinance } from './categories/investment-finance';
-import { assetWealthManagement } from './categories/asset-wealth-management';
-import { businessSuccession } from './categories/business-succession';
 import { strategicPlanningMA } from './categories/strategic-planning-ma';
+import { taxAccounting } from './categories/tax-accounting';
+import type { ServiceCategory, DetailedService } from './types';
 
 // Local reference to service categories for utility functions
 const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -40,11 +40,11 @@ export function getServiceBySlug(
   categorySlug: string,
   serviceSlug: string
 ): { category: ServiceCategory; service: DetailedService } | null {
-  const category = SERVICE_CATEGORIES.find((cat) => cat.id === categorySlug);
+  const category = SERVICE_CATEGORIES.find(cat => cat.id === categorySlug);
   if (!category) return null;
 
   const service = category.services.find(
-    (svc) => (svc.slug || generateServiceSlug(svc.title)) === serviceSlug
+    svc => (svc.slug || generateServiceSlug(svc.title)) === serviceSlug
   );
   if (!service) return null;
 
@@ -80,10 +80,10 @@ export function getRelatedServices(
   currentServiceTitle: string,
   limit: number = 3
 ): DetailedService[] {
-  const category = SERVICE_CATEGORIES.find((cat) => cat.id === categoryId);
+  const category = SERVICE_CATEGORIES.find(cat => cat.id === categoryId);
   if (!category) return [];
 
   return category.services
-    .filter((svc) => svc.title !== currentServiceTitle)
+    .filter(svc => svc.title !== currentServiceTitle)
     .slice(0, limit);
 }

@@ -1,14 +1,23 @@
 'use client';
 
 import { Calendar } from 'lucide-react';
-
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-
 interface CalComPopupProps {
   buttonText?: string;
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'primary' | 'tertiary' | 'subtle' | 'emerald' | 'consultation';
+  variant?:
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link'
+    | 'primary'
+    | 'tertiary'
+    | 'subtle'
+    | 'emerald'
+    | 'consultation';
   size?: 'default' | 'sm' | 'lg' | 'icon';
   className?: string;
   eventType?: string;

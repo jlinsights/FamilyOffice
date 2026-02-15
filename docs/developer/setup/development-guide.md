@@ -268,7 +268,6 @@ export const PortfolioList: React.FC<PortfolioListProps> = ({
 ```typescript
 // Create reusable custom hooks
 import { useState, useEffect } from 'react';
-
 import { api } from '@/lib/api';
 
 export function usePortfolio(familyId: string) {
@@ -453,7 +452,6 @@ function requireRole(roles: UserRole[]) {
 ```typescript
 // Use Jest for unit testing
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
-
 import { PortfolioRepository } from '@/repositories/PortfolioRepository';
 import { PortfolioService } from '@/services/PortfolioService';
 
@@ -517,7 +515,6 @@ describe('PortfolioService', () => {
 ```typescript
 // Use Supertest for API testing
 import request from 'supertest';
-
 import { app } from '@/app';
 import { createTestUser, createTestPortfolio } from '@/test/helpers';
 

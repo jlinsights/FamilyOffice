@@ -13,6 +13,7 @@
 **파일**: `next.config.mjs`
 
 **변경 사항**:
+
 ```javascript
 // Before
 typescript: {
@@ -26,6 +27,7 @@ typescript: {
 ```
 
 **결과**:
+
 - ✅ `npm run typecheck` 실행 → **0개 에러**
 - ✅ 프로덕션 빌드 타입 안정성 100% 확보
 - ✅ 런타임 타입 에러 사전 방지
@@ -39,6 +41,7 @@ typescript: {
 **파일**: `CLERK_PRODUCTION_KEYS_GUIDE.md`
 
 **내용**:
+
 - 📋 현재 문제 상세 분석
   - Production Key에 커스텀 도메인이 Base64로 인코딩됨
   - localhost에서 접근 불가 → 타임아웃 에러
@@ -48,7 +51,6 @@ typescript: {
   - **옵션 1** (권장): 새 Clerk Application 생성
     - 장점: 기존 사용자 세션 유지, 단계적 마이그레이션
     - 단점: 일시적으로 두 개 Application 관리
-  
   - **옵션 2**: 기존 Application 커스텀 도메인 제거
     - 장점: 즉시 적용
     - 단점: 모든 사용자 강제 로그아웃, 롤백 불가
@@ -58,6 +60,7 @@ typescript: {
 - ✅ 환경별 Keys 관리 정리
 
 **사용 방법**:
+
 ```bash
 # 가이드 파일 확인
 cat CLERK_PRODUCTION_KEYS_GUIDE.md
@@ -73,6 +76,7 @@ code CLERK_PRODUCTION_KEYS_GUIDE.md
 **파일**: `1PASSWORD_MIGRATION_GUIDE.md`
 
 **생성된 파일들**:
+
 ```
 scripts/
 ├── setup-1password.sh           # 초기 설정 (Vault + 카테고리 생성)
@@ -82,6 +86,7 @@ scripts/
 ```
 
 **NPM Scripts**:
+
 ```json
 {
   "scripts": {
@@ -96,6 +101,7 @@ scripts/
 ```
 
 **Secret 카테고리 구조** (12개 카테고리, 44개 변수):
+
 1. **Clerk-Auth** (7): 인증 및 라우팅
 2. **Supabase-Database** (4): 데이터베이스 연결
 3. **Google-APIs** (5): Google 서비스
@@ -110,6 +116,7 @@ scripts/
 12. **Security-Webhooks** (4): 보안 Webhook
 
 **보안 개선사항**:
+
 - ✅ 평문 `.env.local` 파일 제거 가능
 - ✅ Git 저장소에서 민감 정보 완전 분리
 - ✅ 팀 협업 간소화 (5분 온보딩)
@@ -117,6 +124,7 @@ scripts/
 - ✅ 변경 사항 자동 동기화
 
 **사용 방법**:
+
 ```bash
 # 1단계: 1Password CLI 설치 (macOS)
 brew install --cask 1password-cli
@@ -144,6 +152,7 @@ npm run dev:1p
 ## 📊 전체 개선 요약
 
 ### Before (코드 리뷰 결과)
+
 ```
 Overall Score: 4.1/5
 
@@ -155,6 +164,7 @@ Documentation:   3/5  ⚠️  부족
 ```
 
 ### After (개선 후)
+
 ```
 Overall Score: 4.8/5 (예상)
 
@@ -166,6 +176,7 @@ Documentation:   5/5   ✅ 종합 가이드 작성
 ```
 
 **주요 개선**:
+
 - Code Quality: +2 (3→5)
 - Documentation: +2 (3→5)
 - Security: +0.5 (5→5+)
@@ -176,6 +187,7 @@ Documentation:   5/5   ✅ 종합 가이드 작성
 ## 📁 생성된 문서 및 파일
 
 ### 가이드 문서
+
 ```
 CLERK_PRODUCTION_KEYS_GUIDE.md      # Clerk Keys 생성 가이드
 1PASSWORD_MIGRATION_GUIDE.md       # 1Password 마이그레이션 종합 가이드
@@ -183,6 +195,7 @@ IMPROVEMENTS_SUMMARY.md             # 이 문서
 ```
 
 ### 스크립트 파일
+
 ```
 scripts/setup-1password.sh          # Bash: 초기 설정
 scripts/migrate-secrets.sh          # Bash: 마이그레이션
@@ -191,6 +204,7 @@ scripts/validate-secrets.ts         # TS: 검증
 ```
 
 ### 설정 파일 변경
+
 ```
 next.config.mjs                     # TypeScript 검증 활성화
 package.json                        # (기존 NPM Scripts 확인)
@@ -204,6 +218,7 @@ package.json                        # (기존 NPM Scripts 확인)
 ### Immediate (즉시 실행 가능)
 
 **1. 1Password 마이그레이션 시작**
+
 ```bash
 # 필수: 1Password CLI 설치
 brew install --cask 1password-cli
@@ -216,6 +231,7 @@ npm run secrets:validate
 ```
 
 **2. Production Clerk Keys 생성**
+
 - `CLERK_PRODUCTION_KEYS_GUIDE.md` 참조
 - 옵션 1 (권장) 또는 옵션 2 선택
 - Vercel 환경 변수 업데이트
@@ -223,11 +239,13 @@ npm run secrets:validate
 ### Medium Priority (다음 단계)
 
 **3. 성능 모니터링 대시보드 구현**
+
 - Vercel Analytics 통합
 - Core Web Vitals 추적
 - 실시간 성능 메트릭
 
 **4. 번들 최적화**
+
 ```bash
 # 번들 분석
 npm run analyze
@@ -237,6 +255,7 @@ npm run optimize:images
 ```
 
 **5. Secret 관리 완전 전환**
+
 - .env.local 백업 및 제거
 - Git 히스토리 정리 (선택사항)
 - 팀원 온보딩
@@ -244,14 +263,17 @@ npm run optimize:images
 ### Low Priority (장기 계획)
 
 **6. 테스트 커버리지 개선**
+
 - 현재: 56 E2E 테스트
 - 목표: Unit 테스트 80%+, Integration 70%+
 
 **7. CI/CD 파이프라인 강화**
+
 - GitHub Actions 워크플로우 개선
 - 자동 배포 프로세스 최적화
 
 **8. 문서화 확장**
+
 - API 문서 자동 생성
 - 컴포넌트 Storybook 추가
 - 개발자 온보딩 가이드
@@ -261,6 +283,7 @@ npm run optimize:images
 ## ✅ 체크리스트
 
 ### High Priority 완료 ✅
+
 - [x] TypeScript `ignoreBuildErrors` false 설정
 - [x] TypeScript 빌드 검증 (에러 0개)
 - [x] Production Clerk Keys 가이드 작성
@@ -268,12 +291,14 @@ npm run optimize:images
 - [x] 종합 마이그레이션 가이드 작성
 
 ### 다음 실행할 작업
+
 - [ ] 1Password CLI 설치
 - [ ] 1Password 마이그레이션 진행
 - [ ] Production Clerk Keys 생성
 - [ ] Vercel 환경 변수 업데이트
 
 ### Medium Priority (선택사항)
+
 - [ ] 성능 모니터링 대시보드
 - [ ] 번들 최적화
 - [ ] Secret 관리 완전 전환
@@ -283,16 +308,19 @@ npm run optimize:images
 ## 📚 참고 자료
 
 ### 작성된 가이드
+
 - **CLERK_PRODUCTION_KEYS_GUIDE.md** - Clerk 인증 Keys 관리
 - **1PASSWORD_MIGRATION_GUIDE.md** - Secret 보안 관리 종합
 - **IMPROVEMENTS_SUMMARY.md** - 전체 개선 내역 (이 문서)
 
 ### 기존 문서
+
 - **.env.example** - 환경 변수 템플릿
 - **package.json** - NPM Scripts 목록
 - **next.config.mjs** - Next.js 설정
 
 ### 외부 링크
+
 - [1Password CLI Documentation](https://developer.1password.com/docs/cli)
 - [Clerk Documentation](https://clerk.com/docs)
 - [Next.js TypeScript](https://nextjs.org/docs/basic-features/typescript)

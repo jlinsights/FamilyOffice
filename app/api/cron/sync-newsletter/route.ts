@@ -1,6 +1,5 @@
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
-
 import { beehiiv } from '@/lib/beehiiv/client';
 
 // Vercel Cron Job handler for newsletter synchronization

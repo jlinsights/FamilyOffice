@@ -1,47 +1,43 @@
 'use client';
 
 import {
-    AlertCircle,
-    AlertTriangle,
-    ArrowRight,
-    Award,
-    BookOpen,
-    CheckCircle2,
-    Clock,
-    DollarSign,
-    Download,
-    FileCheck,
-    Phone,
-    Scale,
-    Shield,
-    Target,
-    TrendingUp,
-    UserCheck,
-    Users,
-    XCircle,
+  AlertCircle,
+  AlertTriangle,
+  ArrowRight,
+  Award,
+  BookOpen,
+  CheckCircle2,
+  Clock,
+  DollarSign,
+  Download,
+  FileCheck,
+  Phone,
+  Scale,
+  Shield,
+  Target,
+  TrendingUp,
+  UserCheck,
+  Users,
+  XCircle,
 } from 'lucide-react';
-
 import React from 'react';
-
 import Link from 'next/link';
-
 import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
-
 import { CalComPopup } from '@/components/calendar/cal-com-popup';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { cn } from '@/lib/utils';
 
 // 인사노무 핵심 포인트 체크리스트
 const hrLaborChecklist = {
