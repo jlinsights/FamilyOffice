@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
+import { useConversionTracking } from '@/hooks/use-conversion-tracking';
 
 // Form validation schema
 const structureCheckSchema = z.object({
@@ -57,6 +58,7 @@ type StructureCheckFormData = z.infer<typeof structureCheckSchema>;
 export function StructureCheckRequestForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const { trackEvent } = useConversionTracking();
 
   const {
     register,
@@ -86,6 +88,15 @@ export function StructureCheckRequestForm() {
       if (!response.ok) {
         throw new Error('요청 전송에 실패했습니다');
       }
+
+      const result = await response.json();
+
+      // Track conversion event
+      trackEvent('structure_check_submit', {
+        qualification_score: result?.qualificationScore,
+        has_company: !!data.company,
+        deadline: data.q5_deadline,
+      });
 
       setIsSuccess(true);
       toast.success('구조 점검 요청이 접수되었습니다', {

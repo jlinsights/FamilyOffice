@@ -4,6 +4,7 @@ import {
   sendStructureCheckConfirmation,
   sendSystemNotification,
 } from '@/lib/email/resend-client';
+import { conversionTrackingService } from '@/lib/conversion/service';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { safeInsert } from '@/lib/supabase/helpers';
 import { Database } from '@/types/supabase';
@@ -101,6 +102,24 @@ export async function POST(request: NextRequest) {
       // We still return success to the UI because the admin notification was attempted,
       // and we don't want to show an error to the user if the "admin" side succeeded.
       // Ideally, we'd check both results, but blocking on user email failure might be bad UX if we already notified admin.
+    }
+
+    // Record conversion event (server-side, non-blocking)
+    const sessionId = request.headers.get('x-session-id');
+    if (sessionId) {
+      conversionTrackingService
+        .recordEvent(
+          {
+            event_type: 'structure_check_submit',
+            session_id: sessionId,
+            page_path: '/structure-check',
+            metadata: { qualification_score: qualificationScore },
+          },
+          { email: validatedData.email }
+        )
+        .catch((err) =>
+          console.error('[structure-check] Conversion tracking error:', err)
+        );
     }
 
     return NextResponse.json(

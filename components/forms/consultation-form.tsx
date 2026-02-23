@@ -3,17 +3,18 @@
 import { CheckCircle, AlertCircle } from 'lucide-react';
 import type React from 'react';
 import { useState, useCallback, memo } from 'react';
-// import { createClient } from "@/lib/supabase/client"
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useConversionTracking } from '@/hooks/use-conversion-tracking';
 
 export const ConsultationForm = memo(function ConsultationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const { trackEvent } = useConversionTracking();
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -67,7 +68,11 @@ export const ConsultationForm = memo(function ConsultationForm() {
         // 실제 API 엔드포인트로 전송
         // await submitConsultationForm(formData);
 
-        // 임시 성공 처리
+        // Track conversion event
+        trackEvent('consultation_form_submit', {
+          service_type: service || 'not_selected',
+        });
+
         setFormSuccess(true);
         event.currentTarget.reset();
 

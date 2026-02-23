@@ -1,1 +1,1 @@
-🧹 refactor: P2 중복 제거 및 관리자 권한 중앙화 - 미사용 중복 컴포넌트 4개 삭제, security 모듈 getAdminEmails() 통합
+📦 chore: conversion-tracking PDCA 문서 아카이브 완료 (docs/archive/2026-02/conversion-tracking/)

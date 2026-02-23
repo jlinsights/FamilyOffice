@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ConversionDashboard } from '@/components/features/admin/conversion-dashboard';
 
 export const metadata: Metadata = {
   title: '분석 대시보드',
@@ -256,6 +257,7 @@ export default function AnalyticsPage() {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">개요</TabsTrigger>
+            <TabsTrigger value="funnel">전환 퍼널</TabsTrigger>
             <TabsTrigger value="users">사용자</TabsTrigger>
             <TabsTrigger value="system">시스템</TabsTrigger>
             <TabsTrigger value="financial">금융 API</TabsTrigger>
@@ -339,6 +341,10 @@ export default function AnalyticsPage() {
                 <RealTimeChart />
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="funnel" className="space-y-4">
+            <ConversionDashboard />
           </TabsContent>
 
           <TabsContent value="users" className="space-y-4">
