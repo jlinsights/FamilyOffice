@@ -83,7 +83,7 @@ export function HubSpotField({
 }: HubSpotFieldProps) {
   return (
     <div className={className}>
-      {React.cloneElement(children as React.ReactElement, {
+      {React.cloneElement(children as React.ReactElement<Record<string, unknown>>, {
         'data-wfhsfieldname': fieldName,
         type,
         required,

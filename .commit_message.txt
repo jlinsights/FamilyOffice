@@ -1,1 +1,1 @@
-📦 chore: conversion-tracking PDCA 문서 아카이브 완료 (docs/archive/2026-02/conversion-tracking/)
+🔧 fix: Next.js 16 빌드 오류 수정 - NODE_ENV=production 명시, force-dynamic 적용, React 19 타입 호환성 수정

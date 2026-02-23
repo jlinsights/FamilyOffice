@@ -7,6 +7,10 @@ import {
   User,
 } from 'lucide-react';
 import { Metadata } from 'next';
+
+// External RSS content must be dynamically rendered - static prerendering
+// fails because isomorphic-dompurify's JSDOM dependency requires browser CSS files
+export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';

@@ -5,6 +5,10 @@ import { GlobalStructuredData } from '@/components/seo/global-structured-data';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
+// Force all routes to be dynamically rendered — workaround for Next.js 16 static
+// generation worker bug where React resolves to null intermittently (vercel/next.js#85668)
+export const dynamic = 'force-dynamic';
+
 export { defaultMetadata as metadata, viewport } from '@/lib/seo/metadata';
 
 const inter = Inter({

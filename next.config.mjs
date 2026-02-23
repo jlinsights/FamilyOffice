@@ -5,6 +5,10 @@ const bundleAnalyzer = withBundleAnalyzer({
 });
 
 const nextConfig = {
+  // Externalize packages that use native Node.js APIs or runtime file access
+  // jsdom (via isomorphic-dompurify) loads browser/default-stylesheet.css at runtime
+  serverExternalPackages: ['isomorphic-dompurify', 'jsdom', 'dompurify'],
+
   // 개발 성능 최적화
   experimental: {
     optimizePackageImports: [
@@ -21,11 +25,6 @@ const nextConfig = {
       'class-variance-authority',
       'tailwind-merge',
     ],
-    // Enable server components optimization
-    // Better tree shaking
-    // optimizeCss: true,
-    // Vercel Toolbar 제거
-    // webpackBuildWorker: true,
   },
   // Next.js 16: eslint configuration moved to eslint.config.js
   typescript: {
@@ -151,76 +150,8 @@ const nextConfig = {
   //   ? `https://${process.env.VERCEL_URL}`
   //   : undefined,
 
-  // Enhanced webpack configuration for better bundle splitting
-  webpack: (config, { dev, isServer }) => {
-    // Optimize bundle splitting for production
-    if (!dev && !isServer) {
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        maxInitialRequests: 25,
-        maxAsyncRequests: 20,
-        cacheGroups: {
-          // Core React libraries
-          react: {
-            test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
-            name: 'react',
-            chunks: 'all',
-            priority: 25,
-            enforce: true,
-          },
-          // Authentication libraries
-          auth: {
-            test: /[\\/]node_modules[\\/](@clerk|@supabase)[\\/]/,
-            name: 'auth',
-            chunks: 'async',
-            priority: 20,
-            enforce: true,
-          },
-          // UI libraries and components
-          ui: {
-            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|class-variance-authority|clsx|tailwind-merge)[\\/]/,
-            name: 'ui',
-            chunks: 'all',
-            priority: 15,
-            enforce: true,
-          },
-          // Chart libraries (heavy)
-          charts: {
-            test: /[\\/]node_modules[\\/](recharts|d3)[\\/]/,
-            name: 'charts',
-            chunks: 'async',
-            priority: 18,
-            enforce: true,
-          },
-          // Animation libraries (heavy)
-          animations: {
-            test: /[\\/]node_modules[\\/](framer-motion|@gsap|gsap)[\\/]/,
-            name: 'animations',
-            chunks: 'async',
-            priority: 17,
-            enforce: true,
-          },
-          // Common vendor libraries
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-            priority: 10,
-            minChunks: 2,
-            reuseExistingChunk: true,
-          },
-          // Common application code
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            priority: 5,
-            reuseExistingChunk: true,
-          },
-        },
-      };
-    }
-
+  // webpack config removed to debug build issue - custom splitChunks may interfere with Next.js 16 SSR
+  webpack: (config) => {
     // Suppress warnings for optional dependencies
     config.ignoreWarnings = [
       {

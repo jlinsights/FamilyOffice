@@ -158,7 +158,7 @@ export const LazyConsultationForm = createLazyComponent(
 
 // Utility hook for intersection observer
 export const useIntersectionObserver = (
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement | null>,
   options: IntersectionObserverInit = {}
 ) => {
   const [isIntersecting, setIsIntersecting] = React.useState(false);

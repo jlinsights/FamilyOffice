@@ -28,14 +28,15 @@ import {
 } from '@/constants/services';
 
 interface ServiceDetailPageProps {
-  params: {
+  params: Promise<{
     category: string;
     service: string;
-  };
+  }>;
 }
 
-export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
-  const result = getServiceBySlug(params.category, params.service);
+export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
+  const { category: categorySlug, service: serviceSlug } = await params;
+  const result = getServiceBySlug(categorySlug, serviceSlug);
 
   if (!result) {
     notFound();
@@ -62,7 +63,7 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
                 },
                 {
                   name: service.title,
-                  url: `https://familyoffices.vip/solutions/${params.category}/${params.service}`,
+                  url: `https://familyoffices.vip/solutions/${categorySlug}/${serviceSlug}`,
                   isCurrentPage: true,
                 },
               ]}

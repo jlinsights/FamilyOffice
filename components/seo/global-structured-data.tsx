@@ -1,6 +1,3 @@
-'use client';
-
-import Script from 'next/script';
 import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
 
 export function GlobalStructuredData() {
@@ -410,29 +407,25 @@ export function GlobalStructuredData() {
 
   return (
     <>
-      <Script
-        id="global-structured-data-organization"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: sanitizeStructuredData(organizationData),
         }}
       />
-      <Script
-        id="global-structured-data-faq"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: sanitizeStructuredData(faqData),
         }}
       />
-      <Script
-        id="global-structured-data-multiview"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: sanitizeStructuredData(multiPerspectiveData),
         }}
       />
-      <Script
-        id="global-structured-data-rating"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: sanitizeStructuredData(aggregateRatingData),

@@ -1,11 +1,5 @@
-'use client';
-
-import Script from 'next/script';
 import { sanitizeStructuredData } from '@/lib/security/html-sanitizer';
-import { createLogger } from '@/lib/security/secure-logger';
 import { generateStructuredData } from '@/lib/seo/structured-data';
-
-const logger = createLogger('StructuredData');
 
 interface StructuredDataProps {
   data: unknown;
@@ -22,17 +16,14 @@ export function StructuredData({ data }: StructuredDataProps) {
     const jsonData = sanitizeStructuredData(data);
 
     return (
-      <Script
-        id="structured-data"
+      <script
         type="application/ld+json"
-        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: jsonData,
         }}
       />
     );
-  } catch (error) {
-    logger.error('StructuredData validation failed', error);
+  } catch {
     return null;
   }
 }
