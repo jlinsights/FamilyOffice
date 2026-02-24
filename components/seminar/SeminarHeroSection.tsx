@@ -1,11 +1,11 @@
 'use client';
 
-import { Calendar, FileText, GraduationCap, Users } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { LeadCaptureDialog } from '@/components/lead-capture-dialog';
+import { Calendar, FileText, GraduationCap, Users } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
 // AnimatedCounter를 동적으로 import
 const AnimatedCounter = dynamic(
@@ -75,8 +75,8 @@ export function SeminarHeroSection() {
           className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-slide-up leading-relaxed"
           style={{ animationDelay: '300ms' }}
         >
-          업계 최고 전문가들과 함께하는 맞춤형 교육 프로그램으로 경영 역량을
-          강화하고 네트워크를 확장하세요
+          업계 최고 전문가들과 함께하는 맞춤형 교육 프로그램으로<br />
+          경영 역량을 강화하고 네트워크를 확장하세요
         </p>
 
         {/* 핵심 성과 지표 - 메인 페이지와 동일한 스타일 */}

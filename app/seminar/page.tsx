@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import CompactMultimediaSection from '@/components/sections/compact-multimedia-section';
-import { PastSeminarsSection } from '@/components/seminar/PastSeminarsSection';
+import { PremiumSeminarSection } from '@/components/seminar/PremiumSeminarSection';
 import { SeminarCategoriesSection } from '@/components/seminar/SeminarCategoriesSection';
 import { SeminarHeroSection } from '@/components/seminar/SeminarHeroSection';
 import SeminarRegistrationSection from '@/components/seminar/SeminarRegistrationSection';
 import { UpcomingSeminarsSection } from '@/components/seminar/UpcomingSeminarsSection';
 import { StructuredData } from '@/components/seo/structured-data';
 import { generateMetadata } from '@/lib/seo/metadata';
+import { Metadata } from 'next';
 
 // SEO 최적화 메타데이터 - 검색 의도별 키워드 전략
 export const metadata: Metadata = generateMetadata(
@@ -250,7 +250,7 @@ export default function SeminarPage() {
         <SeminarHeroSection />
         <UpcomingSeminarsSection />
         <SeminarCategoriesSection />
-        <PastSeminarsSection />
+        <PremiumSeminarSection />
         <CompactMultimediaSection />
         <SeminarRegistrationSection />
       </main>

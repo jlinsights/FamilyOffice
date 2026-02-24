@@ -1,8 +1,8 @@
-import { Calendar, Users, Archive, Star, Crown, Building } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Archive, Building, Calendar, Crown, Star, Users } from 'lucide-react';
 
-export function PastSeminarsSection() {
+export function PremiumSeminarSection() {
   return (
     <section className="py-20 bg-gradient-to-b from-background to-muted/20 dark:from-gray-900 dark:to-gray-900">
       <div className="container mx-auto px-6">

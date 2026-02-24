@@ -1,5 +1,10 @@
 'use client';
 
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import {
   ArrowRight,
   Calendar,
@@ -13,13 +18,8 @@ import {
   UserPlus,
   Users,
 } from 'lucide-react';
-import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { buttonVariants } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+import { useEffect } from 'react';
 
 // Cal.com 컴포넌트를 동적으로 import
 const Cal = dynamic(
@@ -136,7 +136,7 @@ export default function SeminarRegistrationSection() {
             </AlertTitle>
             <AlertDescription className="text-amber-700 dark:text-amber-400 ml-2 mt-1">
               본 세미나는 <strong>순자산 50억 이상</strong> 또는{' '}
-              <strong>순이익 3억 이상</strong>인 기업 오너 일가만 참석
+              <strong>순이익 5억 이상</strong>인 기업 오너 일가만 참석
               가능합니다.
             </AlertDescription>
           </Alert>
