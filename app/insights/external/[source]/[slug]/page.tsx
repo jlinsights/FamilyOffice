@@ -340,7 +340,7 @@ export default async function InsightContentPage({
                     <div
                       className="prose prose-lg max-w-none text-foreground/80"
                       dangerouslySetInnerHTML={{
-                        __html: sanitizeHTMLContent(
+                        __html: await sanitizeHTMLContent(
                           content.content.slice(0, 500) +
                             (content.content.length > 500 ? '...' : '')
                         ),

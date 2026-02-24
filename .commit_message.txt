@@ -1,1 +1,1 @@
-🔧 fix: Next.js 16 빌드 오류 수정 - NODE_ENV=production 명시, force-dynamic 적용, React 19 타입 호환성 수정
+🔧 fix: Vercel 런타임 500 오류 수정 - isomorphic-dompurify 동적 import 전환

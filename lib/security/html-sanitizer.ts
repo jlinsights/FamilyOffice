@@ -2,7 +2,6 @@
  * Sanitizes HTML content for safe rendering in dangerouslySetInnerHTML
  * Removes dangerous elements and attributes while preserving basic formatting
  */
-import DOMPurify from 'isomorphic-dompurify';
 
 /**
  * HTML Sanitization Utility
@@ -180,14 +179,14 @@ export function validateCSPNonce(nonce?: string): string | undefined {
 /**
  * Sanitizes HTML content for safe rendering in dangerouslySetInnerHTML
  * Uses isomorphic-dompurify for robust XSS protection
+ * Dynamic import to avoid loading jsdom at module level (fails on Vercel serverless)
  */
-export function sanitizeHTMLContent(content: string): string {
+export async function sanitizeHTMLContent(content: string): Promise<string> {
   if (!content || typeof content !== 'string') {
     return '';
   }
 
-  // Use DOMPurify to sanitize content
-  // We allow standard text formatting tags but strictly forbid scripts/iframes
+  const DOMPurify = (await import('isomorphic-dompurify')).default;
   return DOMPurify.sanitize(content, {
     ALLOWED_TAGS: [
       'p',
