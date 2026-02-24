@@ -1,25 +1,25 @@
 'use client';
 
+import { ClientScripts } from '@/components/analytics/client-scripts';
 import {
-  Award,
-  Facebook,
-  Instagram,
-  Linkedin,
-  MapPin,
-  MessageSquare,
-  Phone,
-  Shield,
-  Sparkles,
-  TrendingUp,
-  Users,
-  Youtube,
+    Award,
+    Facebook,
+    Instagram,
+    Linkedin,
+    MapPin,
+    MessageSquare,
+    Phone,
+    Shield,
+    Sparkles,
+    TrendingUp,
+    Users,
+    Youtube,
 } from 'lucide-react';
-import { memo, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
-import { ClientScripts } from '@/components/analytics/client-scripts';
+import { memo, useEffect, useState } from 'react';
 
 // 커스텀 아이콘 컴포넌트들
 const XIcon = ({ className }: { className?: string }) => (
@@ -411,6 +411,7 @@ export const Footer = memo(function Footer() {
                         width={100}
                         height={100}
                         className="rounded-lg border border-border/40"
+                        unoptimized
                       />
                     </div>
                   </div>
