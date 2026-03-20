@@ -1,7 +1,7 @@
 {
   "activeFeature": null,
   "phase": null,
-  "updatedAt": "2026-03-20",
+  "updatedAt": "2026-03-21",
   "history": [],
   "archived": [
     {
@@ -15,6 +15,12 @@
       "matchRate": 100,
       "completedAt": "2026-03-20",
       "archivedTo": "docs/archive/2026-03/force-dynamic-optimization/"
+    },
+    {
+      "feature": "large-page-refactor",
+      "matchRate": 100,
+      "completedAt": "2026-03-21",
+      "archivedTo": "docs/archive/2026-03/large-page-refactor/"
     }
   ]
 }
