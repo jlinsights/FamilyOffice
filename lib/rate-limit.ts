@@ -65,8 +65,17 @@ const cleanupMemoryStore = () => {
   }
 };
 
-// Clean up every 5 minutes
-setInterval(cleanupMemoryStore, 5 * 60 * 1000);
+// Lazy cleanup: 요청 시 만료 체크 (서버리스 환경 호환)
+let lastCleanup = Date.now();
+const CLEANUP_INTERVAL = 5 * 60 * 1000;
+
+function maybeCleanup() {
+  const now = Date.now();
+  if (now - lastCleanup > CLEANUP_INTERVAL) {
+    lastCleanup = now;
+    cleanupMemoryStore();
+  }
+}
 
 /**
  * Get client identifier from request
@@ -376,6 +385,7 @@ export function detectRateLimitType(pathname: string): RateLimitType {
  * Global rate limiter for middleware
  */
 export async function globalRateLimit(request: NextRequest) {
+  maybeCleanup();
   const pathname = request.nextUrl.pathname;
 
   // Skip rate limiting for static assets

@@ -11,6 +11,7 @@ import {
   sendConsultationConfirmation,
   sendNewsletterWelcome,
 } from '@/lib/email/resend-client';
+import { sanitizeHTMLContent } from '@/lib/security/html-sanitizer';
 
 // 이메일 전송 요청 스키마
 const emailRequestSchema = z.object({
@@ -72,6 +73,9 @@ export async function POST(request: NextRequest) {
           );
         }
 
+        const sanitizedMessage = await sanitizeHTMLContent(data.message);
+        const formattedMessage = sanitizedMessage.replace(/\n/g, '<br>');
+
         result = await sendEmail({
           to,
           subject: data.subject,
@@ -80,7 +84,7 @@ export async function POST(request: NextRequest) {
               <body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                 <h2>패밀리오피스 S</h2>
                 <div style="padding: 20px; background-color: #f8fafc; border-radius: 8px;">
-                  ${data.message.replace(/\n/g, '<br>')}
+                  ${formattedMessage}
                 </div>
                 <hr style="margin: 30px 0; border: none; border-top: 1px solid #e2e8f0;">
                 <p style="color: #64748b; font-size: 14px;">

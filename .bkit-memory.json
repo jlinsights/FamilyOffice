@@ -1,0 +1,14 @@
+{
+  "activeFeature": null,
+  "phase": null,
+  "updatedAt": "2026-03-20",
+  "history": [],
+  "archived": [
+    {
+      "feature": "security-fixes",
+      "matchRate": 100,
+      "completedAt": "2026-03-20",
+      "archivedTo": "docs/archive/2026-03/security-fixes/"
+    }
+  ]
+}

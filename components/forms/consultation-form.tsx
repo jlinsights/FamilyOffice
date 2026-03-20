@@ -96,7 +96,7 @@ export const ConsultationForm = memo(function ConsultationForm() {
         setIsSubmitting(false);
       }
     },
-    []
+    [trackEvent]
   );
 
   return (

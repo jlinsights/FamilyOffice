@@ -509,7 +509,6 @@ export function startCacheCleanup(intervalMs: number = 300000) {
   }, intervalMs);
 }
 
-// Initialize cache monitoring in production
-if (process.env.NODE_ENV === 'production') {
-  startCacheCleanup();
-}
+// Note: startCacheCleanup()은 서버리스 환경(Vercel)에서 setInterval이
+// 인스턴스 간 공유되지 않아 실효성이 없으므로 자동 실행하지 않음.
+// node-cache의 자체 TTL 만료가 캐시 정리를 담당합니다.

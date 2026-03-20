@@ -19,6 +19,30 @@ import { createClient } from '@/lib/supabase/server';
 
 export const runtime = 'nodejs';
 
+// Supabase row types (leads 테이블)
+interface LeadRow {
+  id: string;
+  email: string;
+  name?: string;
+  beehiiv_subscription_id?: string;
+  source?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  referring_url?: string;
+  total_assets?: number;
+  total_debts?: number;
+  net_assets?: number;
+  estimated_tax?: number;
+  has_spouse?: boolean;
+  num_children?: number;
+  num_minor_children?: number;
+  beehiiv_status?: string;
+  automation_started_at?: string;
+  updated_at?: string;
+}
+
 // Request body interface
 interface CaptureLeadRequest {
   email: string;
@@ -40,6 +64,8 @@ interface CaptureLeadRequest {
     content?: string;
   };
   referringUrl?: string;
+  _hp?: string;  // 허니팟 필드 (봇 감지)
+  _ts?: number;  // 폼 로드 타임스탬프 (속도 검증)
 }
 
 // Response interface
@@ -63,6 +89,22 @@ export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const body: CaptureLeadRequest = await request.json();
+
+    // 봇 방어: 허니팟 필드가 채워져 있으면 봇으로 간주
+    if (body._hp) {
+      return NextResponse.json<CaptureLeadResponse>({
+        success: true,
+        message: '이메일이 성공적으로 등록되었습니다.',
+      });
+    }
+
+    // 봇 방어: 2초 미만 제출은 봇으로 간주
+    if (body._ts && Date.now() - body._ts < 2000) {
+      return NextResponse.json<CaptureLeadResponse>({
+        success: true,
+        message: '이메일이 성공적으로 등록되었습니다.',
+      });
+    }
 
     // Validate required fields
     if (!body.email || !EMAIL_REGEX.test(body.email)) {
@@ -96,11 +138,14 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient();
 
     // Check if lead already exists
-    const { data: existingLead } = (await supabase
-      .from('leads')
+    // Note: Database 타입 미생성으로 Supabase 쿼리에 타입 단언 필요 (supabase gen types 실행 후 제거 가능)
+    const leads = supabase.from('leads') as any;
+    const emailEvents = supabase.from('email_events') as any;
+
+    const { data: existingLead } = (await leads
       .select('id, email, beehiiv_subscription_id')
       .eq('email', email)
-      .single()) as any;
+      .single()) as { data: Pick<LeadRow, 'id' | 'email' | 'beehiiv_subscription_id'> | null };
 
     let leadId: string;
     let beehiivSubscriptionId: string | undefined;
@@ -110,8 +155,8 @@ export async function POST(request: NextRequest) {
       leadId = existingLead.id;
       beehiivSubscriptionId = existingLead.beehiiv_subscription_id || undefined;
 
-      const leadData = {
-        name: name || existingLead.name,
+      const leadData: Record<string, unknown> = {
+        name: name || undefined,
         source: source || 'calculator',
         utm_source: utm?.source,
         utm_medium: utm?.medium,
@@ -119,7 +164,7 @@ export async function POST(request: NextRequest) {
         utm_content: utm?.content,
         referring_url: referringUrl,
         updated_at: new Date().toISOString(),
-      } as any;
+      };
 
       if (calculationResult) {
         leadData.total_assets = calculationResult.totalAssets;
@@ -131,9 +176,9 @@ export async function POST(request: NextRequest) {
         leadData.num_minor_children = calculationResult.numMinorChildren || 0;
       }
 
-      const { error: updateError } = (await (supabase.from('leads') as any)
+      const { error: updateError } = await leads
         .update(leadData)
-        .eq('id', leadId)) as any;
+        .eq('id', leadId);
 
       if (updateError) {
         console.error('Failed to update existing lead:', updateError);
@@ -149,7 +194,7 @@ export async function POST(request: NextRequest) {
     }
 
     // New lead - insert into Supabase
-    const newLeadData = {
+    const newLeadData: Record<string, unknown> = {
       email,
       name,
       source: source || 'calculator',
@@ -158,7 +203,7 @@ export async function POST(request: NextRequest) {
       utm_campaign: utm?.campaign,
       utm_content: utm?.content,
       referring_url: referringUrl,
-    } as any;
+    };
 
     if (calculationResult) {
       newLeadData.total_assets = calculationResult.totalAssets;
@@ -170,11 +215,10 @@ export async function POST(request: NextRequest) {
       newLeadData.num_minor_children = calculationResult.numMinorChildren || 0;
     }
 
-    const { data: newLead, error: insertError } = (await supabase
-      .from('leads')
+    const { data: newLead, error: insertError } = (await leads
       .insert(newLeadData)
       .select('id')
-      .single()) as any;
+      .single()) as { data: Pick<LeadRow, 'id'> | null; error: Error | null };
 
     if (insertError || !newLead) {
       console.error('Failed to insert lead:', insertError);
@@ -200,12 +244,12 @@ export async function POST(request: NextRequest) {
 
       // Update lead with Beehiiv subscription ID
       if (beehiivSubscriptionId) {
-        await (supabase.from('leads') as any)
+        await leads
           .update({
             beehiiv_subscription_id: beehiivSubscriptionId,
             beehiiv_status: 'active',
             automation_started_at: new Date().toISOString(),
-          } as any)
+          })
           .eq('id', leadId);
       }
 
@@ -225,14 +269,14 @@ export async function POST(request: NextRequest) {
 
     // Log email event
     try {
-      (await supabase.from('email_events').insert({
+      await emailEvents.insert({
         lead_id: leadId,
         event_type: 'captured',
         event_data: {
           source: source || 'calculator',
           utm,
-        } as any,
-      } as any)) as any;
+        },
+      });
     } catch (eventError) {
       console.error('Failed to log event (non-fatal):', eventError);
     }

@@ -22,6 +22,7 @@ import {
 } from '@/lib/ai/blog-ai-optimization';
 import { blogPosts } from '@/lib/blog-data';
 import { env } from '@/lib/env';
+import { sanitizeHTMLContent } from '@/lib/security/html-sanitizer';
 import { cn } from '@/lib/utils';
 
 // BlogPost interface and data imported from lib/blog-data
@@ -108,6 +109,9 @@ export default async function BlogPostPage({
   const aiOptimizedFAQ = generateAIOptimizedFAQ(post);
   const displayFAQ =
     post.faq && post.faq.length > 0 ? post.faq : aiOptimizedFAQ;
+
+  // 블로그 본문 콘텐츠 XSS 방어
+  const sanitizedContent = await sanitizeHTMLContent(post.content);
 
   // 관련 포스트 추천: 같은 카테고리에서 최대 3개 (SEO & 내부 링크 강화)
   const relatedPosts = Object.values(blogPosts)
@@ -335,7 +339,7 @@ export default async function BlogPostPage({
           >
             <div
               dangerouslySetInnerHTML={{
-                __html: post.content.replace(/\n/g, '<br/>'),
+                __html: sanitizedContent.replace(/\n/g, '<br/>'),
               }}
               className="blog-content"
             />

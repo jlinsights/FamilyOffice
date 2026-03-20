@@ -7,7 +7,7 @@ import {
 } from '@/lib/security/html-sanitizer';
 import { securityLogger } from '@/lib/security/secure-logger';
 
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-MP3HPPMN';
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || '';
 
 export default function ExternalScripts() {
   // Validate HubSpot script source

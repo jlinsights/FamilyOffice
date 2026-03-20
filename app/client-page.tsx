@@ -21,6 +21,8 @@ import {
 } from '@/lib/security/html-sanitizer';
 import { generateStructuredData } from '@/lib/seo/structured-data';
 
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || '';
+
 export default function ClientPage() {
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,13 +59,15 @@ export default function ClientPage() {
   return (
     <>
       {/* Google Tag Manager */}
-      <Script
-        id="gtm"
-        strategy="lazyOnload"
-        dangerouslySetInnerHTML={{
-          __html: createGTMScript('GTM-MP3HPPMN'),
-        }}
-      />
+      {GTM_ID && (
+        <Script
+          id="gtm"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: createGTMScript(GTM_ID),
+          }}
+        />
+      )}
 
       {/* Google Analytics */}
       <Script
@@ -79,14 +83,16 @@ export default function ClientPage() {
       />
 
       {/* Google Tag Manager (noscript) */}
-      <noscript>
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-MP3HPPMN"
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        />
-      </noscript>
+      {GTM_ID && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+      )}
 
       <ErrorBoundary fallback={undefined}>
         <Providers>

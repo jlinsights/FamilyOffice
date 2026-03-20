@@ -1,1 +1,1 @@
-🔧 fix: Vercel 런타임 500 오류 수정 - isomorphic-dompurify 동적 import 전환
+🔒 fix: 보안 취약점 7건 수정 - XSS 방어, Rate Limiter 통합, GTM 환경변수화, 봇 방어 추가
