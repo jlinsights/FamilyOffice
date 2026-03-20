@@ -27,9 +27,6 @@ import {
   MEMBER_BENEFITS,
 } from '@/constants/programs';
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
 
 function HeroSection() {
   return (

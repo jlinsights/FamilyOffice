@@ -2,10 +2,6 @@ import Link from 'next/link';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
-
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-background">

@@ -25,9 +25,6 @@ import { Header } from '@/components/header';
 import { PremiumContentGuard } from '@/components/premium-content-guard';
 import { cn } from '@/lib/utils';
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
 
 function HeroSection() {
   return (

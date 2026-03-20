@@ -1,1 +1,1 @@
-🔒 fix: 보안 취약점 7건 수정 - XSS 방어, Rate Limiter 통합, GTM 환경변수화, 봇 방어 추가
+⚡ perf: force-dynamic 최적화 - 루트 레이아웃 제거로 정적 페이지 SSG 전환 (22→15건)
