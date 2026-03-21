@@ -14,6 +14,7 @@ export const ConsultationForm = memo(function ConsultationForm() {
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [formLoadTime] = useState(() => Date.now());
   const { trackEvent } = useConversionTracking();
 
   const handleSubmit = useCallback(
@@ -65,6 +66,8 @@ export const ConsultationForm = memo(function ConsultationForm() {
             phone: phone.trim(),
             service_type: service || null,
             message: message?.trim() || null,
+            _hp: '',
+            _ts: formLoadTime,
           }),
         });
 
@@ -101,7 +104,7 @@ export const ConsultationForm = memo(function ConsultationForm() {
         setIsSubmitting(false);
       }
     },
-    [trackEvent]
+    [trackEvent, formLoadTime]
   );
 
   return (
