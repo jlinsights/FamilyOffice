@@ -56,17 +56,22 @@ export const ConsultationForm = memo(function ConsultationForm() {
       }
 
       try {
-        // Supabase integration: https://github.com/jlinsights/FamilyOffice/issues/6
-        const formData = {
-          name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-          service_type: service || null,
-          message: message?.trim() || null,
-          status: 'pending',
-        };
-        // 실제 API 엔드포인트로 전송
-        // await submitConsultationForm(formData);
+        const response = await fetch('/api/consultations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            service_type: service || null,
+            message: message?.trim() || null,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || '상담 신청에 실패했습니다.');
+        }
 
         // Track conversion event
         trackEvent('consultation_form_submit', {

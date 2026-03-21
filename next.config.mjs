@@ -130,11 +130,6 @@ const nextConfig = {
     ],
   },
 
-  // 실험적 기능 제거 (안정성을 위해)
-  // experimental: {
-  //   optimizeCss: true,
-  // },
-
   // 컴파일러 최적화
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
@@ -145,12 +140,7 @@ const nextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
 
-  // 정적 자산 경로 설정
-  // assetPrefix: process.env.NODE_ENV === 'production' && process.env.VERCEL_URL
-  //   ? `https://${process.env.VERCEL_URL}`
-  //   : undefined,
-
-  // webpack config removed to debug build issue - custom splitChunks may interfere with Next.js 16 SSR
+  // webpack config: suppress optional dependency warnings
   webpack: (config) => {
     // Suppress warnings for optional dependencies
     config.ignoreWarnings = [
@@ -168,88 +158,6 @@ const nextConfig = {
 
     return config;
   },
-  //
-  // webpack: (config, { dev, isServer }) => {
-  //   // React Server Components 관련 설정
-  //   if (!isServer) {
-  //     config.resolve.fallback = {
-  //       ...config.resolve.fallback,
-  //       fs: false,
-  //       net: false,
-  //       tls: false,
-  //       crypto: false,
-  //       stream: false,
-  //       url: false,
-  //       zlib: false,
-  //       http: false,
-  //       https: false,
-  //       assert: false,
-  //       os: false,
-  //       path: false,
-  //     };
-  //   }
-  //
-  //   // Suppress punycode deprecation warnings
-  //   config.ignoreWarnings = [
-  //     /Critical dependency: the request of a dependency is an expression/,
-  //     /Module not found: Can't resolve 'punycode'/,
-  //     { module: /node_modules\/punycode/ },
-  //   ];
-  //
-  //   // Optimize chunk splitting with granular vendor splitting
-  //   if (!dev && !isServer) {
-  //     config.optimization.splitChunks = {
-  //       chunks: 'all',
-  //       maxInitialRequests: 25,
-  //       maxAsyncRequests: 20,
-  //       cacheGroups: {
-  //         vendor: {
-  //           test: /[\\/]node_modules[\\/]/,
-  //           name: 'vendors',
-  //           chunks: 'all',
-  //           priority: 10,
-  //         },
-  //         // Split out React and related packages
-  //         react: {
-  //           test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
-  //           name: 'react',
-  //           chunks: 'all',
-  //           priority: 20,
-  //         },
-  //         // Split out UI libraries
-  //         ui: {
-  //           test: /[\\/]node_modules[\\/](@radix-ui|lucide-react|class-variance-authority|clsx|tailwind-merge)[\\/]/,
-  //           name: 'ui',
-  //           chunks: 'all',
-  //           priority: 15,
-  //         },
-  //         // Split out Clerk
-  //         clerk: {
-  //           test: /[\\/]node_modules[\\/]@clerk[\\/]/,
-  //           name: 'clerk',
-  //           chunks: 'async',
-  //           priority: 18,
-  //         },
-  //         // Split out Supabase
-  //         supabase: {
-  //           test: /[\\/]node_modules[\\/]@supabase[\\/]/,
-  //           name: 'supabase',
-  //           chunks: 'async',
-  //           priority: 17,
-  //         },
-  //         common: {
-  //           name: 'common',
-  //           minChunks: 2,
-  //           chunks: 'all',
-  //           priority: 5,
-  //           reuseExistingChunk: true,
-  //         },
-  //       },
-  //     };
-  //   }
-  //
-  //   return config;
-  // },
 
   // 환경 변수
   env: {
@@ -262,9 +170,6 @@ const nextConfig = {
     FLAGS_vercel_toolbar: 'false',
     DISABLE_VERCEL_TOOLBAR: 'true',
   },
-
-  // Output 설정 제거 (빌드 시간 단축)
-  // output: 'standalone',
 
   // 도메인 리다이렉트 및 HTTPS 강제
   async redirects() {
@@ -406,5 +311,4 @@ const nextConfig = {
   },
 };
 
-// Sentry 설정 비활성화 (배포 안정성을 위해)
 export default bundleAnalyzer(nextConfig);
