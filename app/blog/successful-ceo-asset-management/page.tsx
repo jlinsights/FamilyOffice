@@ -25,6 +25,10 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { generateMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
+import {
+  faqStructuredData,
+  relatedArticles,
+} from '@/constants/blog/successful-ceo-asset-management';
 
 export const metadata: Metadata = generateMetadata(
   '성공한 CEO 자산관리 방법 7가지 | 전문가 가이드',
@@ -49,53 +53,6 @@ export const metadata: Metadata = generateMetadata(
 );
 
 export default function SuccessfulCEOAssetManagementPage() {
-  const faqData = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'CEO는 개인 자산과 기업 자산을 어떻게 분리해야 하나요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '법인 계좌와 개인 계좌를 명확히 분리하고, 법인 자금으로 개인 경비를 지출하지 않아야 합니다. 가지급금 발생을 최소화하고, 급여·배당금 등 정당한 방법으로 자금을 인출해야 세무 리스크를 줄일 수 있습니다.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'CEO에게 가장 효과적인 세무 절세 전략은 무엇인가요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '법인세와 소득세를 함께 고려한 통합 세무 설계가 중요합니다. 급여와 배당의 최적 비율 설정, 퇴직금 준비, 법인보험 활용, 기업부설연구소 설립 등 다양한 방법을 조합하여 합법적으로 절세할 수 있습니다.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'CEO의 가업승계는 언제부터 준비해야 하나요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '가업승계는 최소 5-10년의 준비 기간이 필요합니다. 기업 가치가 급등하기 전에 미리 계획하고, 단계적으로 지분을 이전하며, 후계자 교육을 병행해야 합니다. 빠를수록 세금 부담이 줄어들고 안정적인 승계가 가능합니다.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'CEO가 해외 투자를 할 때 주의할 점은?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '해외금융계좌 신고의무를 준수하고, 환율 리스크를 헤지하며, 현지 세법과 한국 세법을 모두 고려해야 합니다. 전문가와 함께 이중과세 방지 전략을 수립하고, 컴플라이언스를 철저히 지키는 것이 중요합니다.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'CEO에게 적합한 자산배분 비율은?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '일반적으로 안전자산 30-40%, 성장자산 40-50%, 대체투자 10-20%를 권장합니다. 다만 나이, 기업 현황, 리스크 성향에 따라 조정이 필요하며, 기업 자산과 개인 자산을 통합적으로 고려한 포트폴리오 설계가 중요합니다.',
-        },
-      },
-    ],
-  };
-
   return (
     <>
       <Header />
@@ -187,29 +144,18 @@ export default function SuccessfulCEOAssetManagementPage() {
                     성공한 CEO의 첫 번째 자산관리 원칙은{' '}
                     <strong>기업 자산과 개인 자산의 철저한 분리</strong>입니다.
                   </p>
-
                   <h4>왜 중요한가요?</h4>
                   <ul>
-                    <li>
-                      <strong>세무 리스크 감소</strong>: 가지급금 발생 시
-                      인정이자 과세 회피
-                    </li>
-                    <li>
-                      <strong>법적 책임 분리</strong>: 기업 부채로부터 개인 자산
-                      보호
-                    </li>
-                    <li>
-                      <strong>투명성 확보</strong>: 향후 IPO, M&A 시 유리
-                    </li>
+                    <li><strong>세무 리스크 감소</strong>: 가지급금 발생 시 인정이자 과세 회피</li>
+                    <li><strong>법적 책임 분리</strong>: 기업 부채로부터 개인 자산 보호</li>
+                    <li><strong>투명성 확보</strong>: 향후 IPO, M&A 시 유리</li>
                   </ul>
-
                   <h4>실전 방법</h4>
                   <ul className="space-y-2">
                     <li>
                       <strong>법인 계좌와 개인 계좌 100% 분리</strong>
                       <p className="text-sm text-muted-foreground mt-1">
-                        사업 목적 지출은 법인 계좌에서만, 개인 소비는 급여
-                        계좌에서만 처리
+                        사업 목적 지출은 법인 계좌에서만, 개인 소비는 급여 계좌에서만 처리
                       </p>
                     </li>
                     <li>
@@ -225,7 +171,6 @@ export default function SuccessfulCEOAssetManagementPage() {
                       </p>
                     </li>
                   </ul>
-
                   <div className="bg-blue-50 dark:bg-blue-950/30 p-4 rounded-lg border border-blue-200 dark:border-blue-800 mt-4">
                     <p className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
                       💡 전문가 팁
@@ -262,16 +207,12 @@ export default function SuccessfulCEOAssetManagementPage() {
                     <strong>통합 세무 전략</strong>을 통해 전체 세금 부담을
                     최적화할 수 있습니다.
                   </p>
-
                   <h4>핵심 절세 전략</h4>
                   <div className="grid md:grid-cols-2 gap-4 not-prose">
                     <div className="border rounded-lg p-4">
-                      <h5 className="font-semibold mb-2">
-                        급여 vs 배당 최적 비율
-                      </h5>
+                      <h5 className="font-semibold mb-2">급여 vs 배당 최적 비율</h5>
                       <p className="text-sm text-muted-foreground">
-                        소득세율과 배당소득세율을 비교하여 세후 수령액이 최대가
-                        되는 비율 선택
+                        소득세율과 배당소득세율을 비교하여 세후 수령액이 최대가 되는 비율 선택
                       </p>
                     </div>
                     <div className="border rounded-lg p-4">
@@ -293,7 +234,6 @@ export default function SuccessfulCEOAssetManagementPage() {
                       </p>
                     </div>
                   </div>
-
                   <div className="bg-amber-50 dark:bg-amber-950/30 p-4 rounded-lg border border-amber-200 dark:border-amber-800 mt-4">
                     <p className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
                       ⚠️ 주의사항
@@ -306,17 +246,11 @@ export default function SuccessfulCEOAssetManagementPage() {
                 </CardContent>
               </Card>
 
-              {/* Strategy 3-7 계속... */}
-              {/* 길이 제한으로 축약 */}
-
               <div className="text-center py-8">
                 <p className="text-muted-foreground mb-4">
                   나머지 5가지 전략은 전문가 상담을 통해 맞춤형으로 안내드립니다
                 </p>
-                <Link
-                  href="/contact"
-                  className={buttonVariants({ size: 'lg' })}
-                >
+                <Link href="/contact" className={buttonVariants({ size: 'lg' })}>
                   <Award className="mr-2 h-5 w-5" />
                   CEO 자산관리 무료 상담 신청
                 </Link>
@@ -333,7 +267,7 @@ export default function SuccessfulCEOAssetManagementPage() {
                 자주 묻는 질문
               </h2>
               <div className="space-y-4">
-                {faqData.mainEntity.map((faq, index) => (
+                {faqStructuredData.mainEntity.map((faq, index) => (
                   <Card key={index}>
                     <CardHeader>
                       <CardTitle className="text-lg flex items-start gap-2">
@@ -369,19 +303,13 @@ export default function SuccessfulCEOAssetManagementPage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/wealth-consulting"
-                    className={buttonVariants({
-                      size: 'lg',
-                      variant: 'secondary',
-                    })}
+                    className={buttonVariants({ size: 'lg', variant: 'secondary' })}
                   >
                     자산관리 서비스 보기
                   </Link>
                   <Link
                     href="/calculators/inheritance-tax"
-                    className={buttonVariants({
-                      size: 'lg',
-                      variant: 'outline',
-                    })}
+                    className={buttonVariants({ size: 'lg', variant: 'outline' })}
                   >
                     <Calculator className="mr-2 h-5 w-5" />
                     상속세 무료 계산
@@ -408,63 +336,25 @@ export default function SuccessfulCEOAssetManagementPage() {
               관련 글 더 보기
             </h2>
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <Card>
-                <CardHeader>
-                  <CardTitle>고액자산가 자산관리</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    100억원 이상 자산가를 위한 전문 자산관리 전략
-                  </p>
-                  <Link
-                    href="/wealth-consulting"
-                    className={buttonVariants({
-                      variant: 'outline',
-                      size: 'sm',
-                    })}
-                  >
-                    자세히 보기
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>가업승계 플랜</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    5-10년 장기 계획이 필요한 가업승계 완벽 가이드
-                  </p>
-                  <Link
-                    href="/calculators/inheritance-tax"
-                    className={buttonVariants({
-                      variant: 'outline',
-                      size: 'sm',
-                    })}
-                  >
-                    계산하기 <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>세무 최적화 전략</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    법인세, 소득세, 상속세 통합 절세 전략
-                  </p>
-                  <Link
-                    href="/tax-strategy"
-                    className={buttonVariants({
-                      variant: 'outline',
-                      size: 'sm',
-                    })}
-                  >
-                    자세히 보기
-                  </Link>
-                </CardContent>
-              </Card>
+              {relatedArticles.map((article, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <CardTitle>{article.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      {article.description}
+                    </p>
+                    <Link
+                      href={article.href}
+                      className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                    >
+                      {article.linkText}
+                      {index === 1 && <ArrowRight className="ml-2 h-4 w-4" />}
+                    </Link>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -472,7 +362,7 @@ export default function SuccessfulCEOAssetManagementPage() {
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
         />
       </main>
       <Footer />

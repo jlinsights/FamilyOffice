@@ -33,6 +33,12 @@
       "matchRate": 100,
       "completedAt": "2026-03-21",
       "archivedTo": "docs/archive/2026-03/setinterval-cleanup/"
+    },
+    {
+      "feature": "blog-hardcode-separation",
+      "matchRate": 100,
+      "completedAt": "2026-03-21",
+      "archivedTo": "N/A"
     }
   ]
 }

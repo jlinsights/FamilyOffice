@@ -1,1 +1,1 @@
-⚡ perf: 서버리스 부적합 setInterval 정리 - 미사용 파일 3개 삭제 + 자동 실행 제거
+♻️ refactor: 블로그 SEO 5개 페이지 데이터 추출 (constants/blog/) + 레거시 파일 삭제

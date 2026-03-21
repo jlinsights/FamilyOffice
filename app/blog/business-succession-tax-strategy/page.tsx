@@ -25,6 +25,13 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { generateMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
+import {
+  caseStudyStrategies,
+  checklistSections,
+  commonMistakes,
+  faqStructuredData,
+  roadmapSteps,
+} from '@/constants/blog/business-succession-tax-strategy';
 
 export const metadata: Metadata = generateMetadata(
   '가업승계와 상속세 최적화 전략 2025 | 세금 70% 절감 로드맵',
@@ -49,37 +56,6 @@ export const metadata: Metadata = generateMetadata(
 );
 
 export default function BusinessSuccessionTaxStrategyPage() {
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: '가업상속공제는 얼마까지 받을 수 있나요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '가업상속공제는 최대 600억원까지 가능합니다. 업력 10년 이상 30년 미만은 200억원, 30년 이상은 300억원, 추가로 고용유지 요건 충족 시 300억원이 추가되어 최대 600억원까지 공제받을 수 있습니다.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: '가업상속공제 요건은 무엇인가요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '1) 업력 10년 이상, 2) 피상속인 지분율 50%(상장기업 30%) 이상, 3) 중소·중견기업 요건(매출 3천억 미만), 4) 상속인 2년 이상 근무, 5) 상속 후 10년간 업종 유지 및 고용 유지 등의 요건을 충족해야 합니다.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: '가업승계는 언제부터 준비해야 하나요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '최소 5-10년 전부터 준비하는 것이 이상적입니다. 10년 단위 생전증여, 가업상속공제 요건 충족, 지주회사 설립 등 각 단계마다 시간이 필요하므로 현 경영자가 60대 초반부터 시작하는 것을 권장합니다.',
-        },
-      },
-    ],
-  };
-
   return (
     <>
       <Header />
@@ -237,41 +213,27 @@ export default function BusinessSuccessionTaxStrategyPage() {
                     <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
                       <div>
                         <div className="font-semibold">업력 10년 이상</div>
-                        <div className="text-sm text-muted-foreground">
-                          기본 공제
-                        </div>
+                        <div className="text-sm text-muted-foreground">기본 공제</div>
                       </div>
-                      <div className="text-2xl font-bold text-blue-600">
-                        200억원
-                      </div>
+                      <div className="text-2xl font-bold text-blue-600">200억원</div>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
                       <div>
                         <div className="font-semibold">업력 30년 이상</div>
-                        <div className="text-sm text-muted-foreground">
-                          장기 경영 인정
-                        </div>
+                        <div className="text-sm text-muted-foreground">장기 경영 인정</div>
                       </div>
-                      <div className="text-2xl font-bold text-indigo-600">
-                        +100억원
-                      </div>
+                      <div className="text-2xl font-bold text-indigo-600">+100억원</div>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
                       <div>
                         <div className="font-semibold">고용 유지 요건 충족</div>
-                        <div className="text-sm text-muted-foreground">
-                          7년간 평균 고용 100% 유지
-                        </div>
+                        <div className="text-sm text-muted-foreground">7년간 평균 고용 100% 유지</div>
                       </div>
-                      <div className="text-2xl font-bold text-emerald-600">
-                        +300억원
-                      </div>
+                      <div className="text-2xl font-bold text-emerald-600">+300억원</div>
                     </div>
                     <div className="pt-4 border-t">
                       <div className="flex items-center justify-between">
-                        <div className="text-lg font-semibold">
-                          최대 공제 한도
-                        </div>
+                        <div className="text-lg font-semibold">최대 공제 한도</div>
                         <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
                           600억원
                         </div>
@@ -290,44 +252,14 @@ export default function BusinessSuccessionTaxStrategyPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {[
-                      {
-                        category: '기업 요건',
-                        items: [
-                          '업력 10년 이상 (창업일 기준)',
-                          '중소·중견기업 (매출액 3천억원 미만)',
-                          '피상속인 지분율 50% 이상 (상장기업 30%)',
-                          '피상속인 10년 이상 대표이사 재직',
-                        ],
-                      },
-                      {
-                        category: '상속인 요건',
-                        items: [
-                          '상속 개시 전 2년 이상 해당 기업 근무',
-                          '상속일부터 2년 이내 대표이사 취임',
-                          '18세 이상 (직계비속)',
-                        ],
-                      },
-                      {
-                        category: '사후 관리 요건',
-                        items: [
-                          '상속 후 10년간 업종 유지',
-                          '상속 후 7년간 평균 고용 80% 이상 유지',
-                          '상속 후 10년간 지분 50% 이상 보유',
-                          '10년간 정규직 근로자로 근무',
-                        ],
-                      },
-                    ].map((section, index) => (
+                    {checklistSections.map((section, index) => (
                       <div key={index} className="border rounded-lg p-4">
                         <div className="font-semibold mb-2 text-blue-600">
                           {section.category}
                         </div>
                         <ul className="space-y-1">
                           {section.items.map((item, itemIndex) => (
-                            <li
-                              key={itemIndex}
-                              className="text-sm flex items-start gap-2"
-                            >
+                            <li key={itemIndex} className="text-sm flex items-start gap-2">
                               <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
                               <span>{item}</span>
                             </li>
@@ -349,73 +281,8 @@ export default function BusinessSuccessionTaxStrategyPage() {
               <h2 className="text-3xl font-bold mb-8 text-center">
                 가업승계 5단계 로드맵
               </h2>
-
               <div className="space-y-6">
-                {[
-                  {
-                    phase: 'Phase 1',
-                    year: '5-10년 전',
-                    title: '현황 분석 및 전략 수립',
-                    tasks: [
-                      '기업 가치 평가 및 예상 상속세 계산',
-                      '가업상속공제 요건 충족 여부 점검',
-                      '5-10년 장기 로드맵 작성',
-                      '전문가 팀 구성 (세무사, 변호사, 회계사)',
-                    ],
-                    action: {
-                      text: '지금 상속세 계산하기',
-                      href: '/calculators/inheritance-tax',
-                    },
-                  },
-                  {
-                    phase: 'Phase 2',
-                    year: '3-7년 전',
-                    title: '지주회사 구조 설계',
-                    tasks: [
-                      '지주회사 설립 및 사업회사 지분 이전',
-                      '가족 구성원에게 지주회사 지분 증여',
-                      '10년 단위 생전증여 1차 실행',
-                      '후계자 대표이사 취임 (2년 요건 충족)',
-                    ],
-                    action: null,
-                  },
-                  {
-                    phase: 'Phase 3',
-                    year: '2-3년 전',
-                    title: '가업상속공제 요건 완성',
-                    tasks: [
-                      '업력 10년 이상 충족 확인',
-                      '피상속인 대표이사 10년 재직 확인',
-                      '후계자 2년 근무 요건 완료',
-                      '중소·중견기업 기준 충족 확인',
-                    ],
-                    action: null,
-                  },
-                  {
-                    phase: 'Phase 4',
-                    year: '상속 시점',
-                    title: '최적 공제 조합 적용',
-                    tasks: [
-                      '가업상속공제 600억 적용',
-                      '배우자공제 30억 최대 활용',
-                      '기초공제 및 자녀공제 적용',
-                      '상속세 신고 및 납부 (6개월)',
-                    ],
-                    action: null,
-                  },
-                  {
-                    phase: 'Phase 5',
-                    year: '상속 이후',
-                    title: '사후 관리 10년',
-                    tasks: [
-                      '업종 유지 의무 (10년)',
-                      '고용 유지 80% 이상 (7년)',
-                      '지분 50% 이상 보유 (10년)',
-                      '정규직 근로자 근무 (10년)',
-                    ],
-                    action: null,
-                  },
-                ].map((step, index) => (
+                {roadmapSteps.map((step, index) => (
                   <Card
                     key={index}
                     className="border-l-4 border-l-blue-600 hover:shadow-lg transition-shadow"
@@ -426,22 +293,15 @@ export default function BusinessSuccessionTaxStrategyPage() {
                           <Badge className="mb-2" variant="secondary">
                             {step.phase}
                           </Badge>
-                          <CardTitle className="text-xl">
-                            {step.title}
-                          </CardTitle>
-                          <CardDescription className="mt-1">
-                            {step.year}
-                          </CardDescription>
+                          <CardTitle className="text-xl">{step.title}</CardTitle>
+                          <CardDescription className="mt-1">{step.year}</CardDescription>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 mb-4">
                         {step.tasks.map((task, taskIndex) => (
-                          <li
-                            key={taskIndex}
-                            className="flex items-start gap-2 text-sm"
-                          >
+                          <li key={taskIndex} className="flex items-start gap-2 text-sm">
                             <CheckCircle2 className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
                             <span>{task}</span>
                           </li>
@@ -450,10 +310,7 @@ export default function BusinessSuccessionTaxStrategyPage() {
                       {step.action && (
                         <Link
                           href={step.action.href}
-                          className={cn(
-                            buttonVariants({ variant: 'outline' }),
-                            'w-full'
-                          )}
+                          className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
                         >
                           <Calculator className="mr-2 h-4 w-4" />
                           {step.action.text}
@@ -471,10 +328,7 @@ export default function BusinessSuccessionTaxStrategyPage() {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold mb-8 text-center">
-                실제 적용 사례
-              </h2>
-
+              <h2 className="text-3xl font-bold mb-8 text-center">실제 적용 사례</h2>
               <Card className="border-2 border-emerald-200 dark:border-emerald-800">
                 <CardHeader className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30">
                   <CardTitle className="text-2xl">
@@ -484,50 +338,28 @@ export default function BusinessSuccessionTaxStrategyPage() {
                 <CardContent className="p-8">
                   <div className="grid md:grid-cols-2 gap-6 mb-6">
                     <div className="p-4 bg-red-50 dark:bg-red-950/30 rounded-lg border border-red-200 dark:border-red-800">
-                      <div className="text-sm text-red-700 dark:text-red-300 mb-1">
-                        준비 없이 상속 시
-                      </div>
-                      <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">
-                        상속세 약 70억
-                      </div>
-                      <div className="text-xs text-red-600 dark:text-red-400">
-                        세율 35% 적용
-                      </div>
+                      <div className="text-sm text-red-700 dark:text-red-300 mb-1">준비 없이 상속 시</div>
+                      <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">상속세 약 70억</div>
+                      <div className="text-xs text-red-600 dark:text-red-400">세율 35% 적용</div>
                     </div>
                     <div className="p-4 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800">
-                      <div className="text-sm text-emerald-700 dark:text-emerald-300 mb-1">
-                        전략 적용 후
-                      </div>
-                      <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">
-                        상속세 약 5억
-                      </div>
-                      <div className="text-xs text-emerald-600 dark:text-emerald-400">
-                        93% 절감 (65억 절약)
-                      </div>
+                      <div className="text-sm text-emerald-700 dark:text-emerald-300 mb-1">전략 적용 후</div>
+                      <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">상속세 약 5억</div>
+                      <div className="text-xs text-emerald-600 dark:text-emerald-400">93% 절감 (65억 절약)</div>
                     </div>
                   </div>
-
                   <div className="space-y-4">
                     <div>
                       <div className="font-semibold mb-2">적용 전략</div>
                       <div className="space-y-2">
-                        {[
-                          '가업상속공제 300억 적용 (업력 30년 이상)',
-                          '배우자공제 30억 최대 활용',
-                          '생전증여 50억 실행 (2회 × 25억)',
-                          '지주회사 구조로 미래 가치 상승분 분리',
-                        ].map((item, index) => (
-                          <div
-                            key={index}
-                            className="flex items-start gap-2 text-sm"
-                          >
+                        {caseStudyStrategies.map((item, index) => (
+                          <div key={index} className="flex items-start gap-2 text-sm">
                             <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
                             <span>{item}</span>
                           </div>
                         ))}
                       </div>
                     </div>
-
                     <div className="bg-amber-50 dark:bg-amber-950/30 p-4 rounded-lg border border-amber-200 dark:border-amber-800">
                       <div className="flex items-start gap-2">
                         <Lightbulb className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
@@ -551,29 +383,18 @@ export default function BusinessSuccessionTaxStrategyPage() {
             <Card className="max-w-3xl mx-auto bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border-2 border-blue-200 dark:border-blue-800">
               <CardContent className="p-8 text-center">
                 <Calculator className="h-16 w-16 mx-auto mb-4 text-blue-600" />
-                <h3 className="text-2xl font-bold mb-2">
-                  우리 회사 상속세 미리 계산하기
-                </h3>
+                <h3 className="text-2xl font-bold mb-2">우리 회사 상속세 미리 계산하기</h3>
                 <p className="text-muted-foreground mb-6">
                   현재 기업 가치로 예상 상속세를 확인하고
                   <br />
                   맞춤형 절세 로드맵을 받아보세요
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="/calculators/inheritance-tax"
-                    className={buttonVariants({ size: 'lg' })}
-                  >
+                  <Link href="/calculators/inheritance-tax" className={buttonVariants({ size: 'lg' })}>
                     <Calculator className="mr-2 h-5 w-5" />
                     무료 상속세 계산하기
                   </Link>
-                  <Link
-                    href="/contact"
-                    className={buttonVariants({
-                      size: 'lg',
-                      variant: 'outline',
-                    })}
-                  >
+                  <Link href="/contact" className={buttonVariants({ size: 'lg', variant: 'outline' })}>
                     <Users className="mr-2 h-5 w-5" />
                     가업승계 전문가 상담
                   </Link>
@@ -590,31 +411,8 @@ export default function BusinessSuccessionTaxStrategyPage() {
               <h2 className="text-3xl font-bold mb-8 text-center">
                 가업승계 시 흔한 실수 5가지
               </h2>
-
               <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  {
-                    mistake: '너무 늦게 시작',
-                    consequence:
-                      '10년 단위 증여 기회 상실, 요건 충족 기간 부족',
-                    solution: '최소 5-10년 전부터 준비 시작',
-                  },
-                  {
-                    mistake: '요건 미충족',
-                    consequence: '가업상속공제 600억 혜택 포기, 세금 폭탄',
-                    solution: '전문가와 체크리스트 철저히 점검',
-                  },
-                  {
-                    mistake: '사후 관리 소홀',
-                    consequence: '공제 취소 + 가산세, 수십억 추가 납부',
-                    solution: '10년간 업종·고용·지분 유지 관리',
-                  },
-                  {
-                    mistake: '단일 전략 의존',
-                    consequence: '절세 효과 제한, 리스크 증가',
-                    solution: '증여+공제+법인 복합 전략 활용',
-                  },
-                ].map((item, index) => (
+                {commonMistakes.map((item, index) => (
                   <Card key={index} className="border-l-4 border-l-red-600">
                     <CardHeader>
                       <CardTitle className="text-lg text-red-600 dark:text-red-400">
@@ -624,14 +422,10 @@ export default function BusinessSuccessionTaxStrategyPage() {
                     <CardContent className="space-y-3">
                       <div>
                         <div className="text-sm font-semibold mb-1">결과</div>
-                        <p className="text-sm text-muted-foreground">
-                          {item.consequence}
-                        </p>
+                        <p className="text-sm text-muted-foreground">{item.consequence}</p>
                       </div>
                       <div>
-                        <div className="text-sm font-semibold mb-1 text-emerald-600">
-                          해결책
-                        </div>
+                        <div className="text-sm font-semibold mb-1 text-emerald-600">해결책</div>
                         <p className="text-sm">{item.solution}</p>
                       </div>
                     </CardContent>
@@ -686,7 +480,7 @@ export default function BusinessSuccessionTaxStrategyPage() {
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
         />
       </main>
       <Footer />
