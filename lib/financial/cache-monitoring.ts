@@ -310,15 +310,5 @@ export const checkCacheAlerts = () => {
   return cacheMonitoring.checkPerformanceAlerts();
 };
 
-// 주기적 성능 체크 (개발/프로덕션에서만)
-if (typeof window === 'undefined' && process.env.NODE_ENV !== 'test') {
-  setInterval(
-    () => {
-      const alerts = checkCacheAlerts();
-      if (Object.keys(alerts).length > 0) {
-        console.warn('🚨 캐시 성능 알림:', alerts);
-      }
-    },
-    5 * 60 * 1000
-  ); // 5분마다 체크
-}
+// Note: 서버리스 환경에서 setInterval 자동 실행 제거.
+// 캐시 알림은 checkCacheAlerts()를 직접 호출하여 확인.

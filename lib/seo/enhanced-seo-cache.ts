@@ -38,15 +38,21 @@ class EnhancedSEOCache {
     critical: 2 * 60 * 60 * 1000, // 2 hours
   };
 
-  constructor() {
-    // Clean up expired entries every 2 minutes for better performance
-    if (typeof window === 'undefined') {
-      setInterval(() => this.cleanup(), 2 * 60 * 1000);
+  private lastCleanup = Date.now();
+  private readonly cleanupInterval = 2 * 60 * 1000;
+
+  private maybeCleanup(): void {
+    const now = Date.now();
+    if (now - this.lastCleanup > this.cleanupInterval) {
+      this.lastCleanup = now;
+      this.cleanup();
     }
   }
 
   // Enhanced get with access tracking
   get<T>(key: string): T | null {
+    this.maybeCleanup();
+
     if (!isFeatureEnabled('enableServerSideCaching')) {
       return null;
     }

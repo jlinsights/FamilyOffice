@@ -27,6 +27,12 @@
       "matchRate": 100,
       "completedAt": "2026-03-21",
       "archivedTo": "docs/archive/2026-03/remaining-cleanup/"
+    },
+    {
+      "feature": "setinterval-cleanup",
+      "matchRate": 100,
+      "completedAt": "2026-03-21",
+      "archivedTo": "docs/archive/2026-03/setinterval-cleanup/"
     }
   ]
 }
