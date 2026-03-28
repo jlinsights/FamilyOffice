@@ -74,7 +74,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
           <section className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white pt-20 pb-20">
             {/* Dynamic Background */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
-            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
+            <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] z-0"></div>
 
             <div className="container mx-auto px-6 relative z-10">
               <div className="max-w-4xl mx-auto text-center">

@@ -332,7 +332,7 @@ export default function CalculatorsPage() {
 
           {/* 통계 및 성과 */}
           <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-700 dark:bg-slate-950 rounded-3xl p-10 mb-24 text-white shadow-2xl">
-            <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
+            <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-10"></div>
             <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
 

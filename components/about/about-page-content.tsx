@@ -77,7 +77,7 @@ export default function AboutPageContent() {
         <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white pt-20">
           {/* Dynamic Background */}
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] z-0"></div>
 
           <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
             <FadeIn delay={0.2} direction="down">
@@ -175,7 +175,7 @@ export default function AboutPageContent() {
 
         {/* 통계 섹션 */}
         <section className="py-20 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03]"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
@@ -436,7 +436,7 @@ export default function AboutPageContent() {
 
         {/* 컨설턴트 소개 섹션 */}
         <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03]"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-16">
               <div className="inline-flex items-center justify-center p-2 bg-white dark:bg-slate-800 rounded-full mb-6 shadow-sm">
