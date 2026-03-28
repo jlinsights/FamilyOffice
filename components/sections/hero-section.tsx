@@ -13,7 +13,7 @@ export function HeroSection() {
     <div className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white pt-20">
       {/* Dynamic Background */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950 z-0"></div>
-      <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05] z-0"></div>
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] z-0"></div>
 
       {/* Floating Elements */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] animate-pulse z-0 hidden lg:block"></div>

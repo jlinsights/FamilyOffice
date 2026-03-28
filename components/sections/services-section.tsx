@@ -26,7 +26,7 @@ export function ServicesSection() {
       className="section bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/grid-pattern.svg')] opacity-[0.03] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.03] pointer-events-none"></div>
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-blue-400/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-400/5 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -90,7 +90,7 @@ export function ServicesSection() {
         {/* 통계 섹션 */}
         <FadeIn direction="up" delay={0.2}>
           <div className="relative rounded-3xl p-10 mb-20 overflow-hidden bg-slate-900 dark:bg-slate-950 text-white shadow-2xl">
-            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-10"></div>
+            <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
 

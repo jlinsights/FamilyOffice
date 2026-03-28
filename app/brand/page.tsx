@@ -374,7 +374,7 @@ export default function BrandPage() {
         <section className="relative h-[60vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white">
           {/* Background Gradients */}
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950"></div>
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.05]"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
 
           <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
             <FadeIn>

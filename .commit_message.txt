@@ -1,1 +1,1 @@
-♻️ refactor: 블로그 SEO 5개 페이지 데이터 추출 (constants/blog/) + 레거시 파일 삭제
+🧹 fix: bg-grid-pattern CSS 통합 — 미사용 bg-grid-black/white 유틸리티 및 grid-pattern.svg 삭제
