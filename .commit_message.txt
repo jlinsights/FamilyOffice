@@ -1,1 +1,1 @@
-🧹 fix: bg-grid-pattern CSS 통합 — 미사용 bg-grid-black/white 유틸리티 및 grid-pattern.svg 삭제
+✅ fix: FamilyOffice bg-grid-pattern CSS 통합 및 다양한 개선사항 완료

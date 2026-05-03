@@ -78,8 +78,10 @@ export const Header = memo(function Header({
   if (!mounted || !isClient) {
     return (
       <header
-        className="fixed top-0 w-full z-50 bg-white/80 dark:bg-background/80 backdrop-blur-sm border-b border-gray-200 dark:border-border"
+        className="fixed top-0 w-full z-50 backdrop-blur-sm border-b"
         style={{
+          backgroundColor: 'rgba(10, 25, 47, 0.9)',
+          borderColor: 'rgba(212, 175, 55, 0.15)',
           willChange: 'transform, opacity',
           backfaceVisibility: 'hidden',
         }}
@@ -97,9 +99,8 @@ export const Header = memo(function Header({
                 />
               </Link>
             </div>
-            {/* 데스크톱 우측 버튼들 - 초기 렌더링 시 로딩 스켈레톤 표시 */}
             <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
-              <div className="h-9 w-9 rounded-full bg-muted animate-pulse" />
+              <div className="h-9 w-9 rounded-full bg-white/10 animate-pulse" />
               <ThemeToggle />
             </div>
           </div>
@@ -110,12 +111,12 @@ export const Header = memo(function Header({
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
-        isScrolled || isMobileMenuOpen
-          ? 'bg-white/95 dark:bg-background/95 backdrop-blur-md border-gray-200 dark:border-border shadow-sm'
-          : 'bg-white/80 dark:bg-background/80 backdrop-blur-sm border-transparent'
-      }`}
+      className="fixed top-0 w-full z-50 transition-all duration-300 border-b"
       style={{
+        backgroundColor: isScrolled || isMobileMenuOpen ? 'rgba(10, 25, 47, 0.98)' : 'rgba(10, 25, 47, 0.88)',
+        borderColor: 'rgba(212, 175, 55, 0.2)',
+        backdropFilter: 'blur(12px)',
+        boxShadow: isScrolled ? '0 2px 24px rgba(10, 25, 47, 0.35)' : 'none',
         willChange: 'transform, opacity',
         backfaceVisibility: 'hidden',
       }}
@@ -180,11 +181,11 @@ export const Header = memo(function Header({
                 {item.submenu && item.submenu.length > 0 ? (
                   <>
                     <button
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1 py-1 flex items-center gap-1 h-9"
+                      className="text-base font-medium text-white/90 hover:text-[#D4AF37] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#0A192F] rounded-md px-1 py-1 flex items-center gap-1 h-9"
                       aria-label={`${item.label} 메뉴`}
                     >
                       {item.label}
-                      <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
+                      <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180 text-white/70" />
                     </button>
 
                     {/* 서브메뉴 드롭다운 - CSS group hover 사용 */}
@@ -193,7 +194,13 @@ export const Header = memo(function Header({
                         item.label === '솔루션' ? 'w-96' : 'w-80'
                       }`}
                     >
-                      <div className="bg-background/70 dark:bg-gray-900/70 backdrop-blur-md border border-border rounded-lg shadow-xl">
+                      <div
+                        className="backdrop-blur-md border rounded-lg shadow-xl"
+                        style={{
+                          backgroundColor: 'rgba(10, 25, 47, 0.96)',
+                          borderColor: 'rgba(212, 175, 55, 0.2)',
+                        }}
+                      >
                         <div
                           className={`p-2 ${
                             item.label === '솔루션'
@@ -211,18 +218,18 @@ export const Header = memo(function Header({
                                   ? 'noopener noreferrer'
                                   : undefined
                               }
-                              className="block p-3 rounded-md hover:bg-accent transition-colors group/submenu"
+                              className="block p-3 rounded-md hover:bg-white/10 transition-colors group/submenu"
                               aria-label={
                                 subItem.isExternal
                                   ? `${subItem.label} (새 창에서 열림)`
                                   : subItem.label
                               }
                             >
-                              <div className="font-medium text-foreground group-hover/submenu:text-primary transition-colors">
+                              <div className="font-medium text-white group-hover/submenu:text-[#D4AF37] transition-colors">
                                 {subItem.label}
                               </div>
                               {subItem.description && (
-                                <div className="text-sm text-muted-foreground mt-1 group-hover/submenu:text-muted-foreground/80 transition-colors">
+                                <div className="text-sm text-white/60 mt-1 group-hover/submenu:text-white/80 transition-colors">
                                   {subItem.description}
                                 </div>
                               )}
@@ -240,7 +247,7 @@ export const Header = memo(function Header({
                     className={
                       item.isPrimary
                         ? 'inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
-                        : 'text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2 flex items-center h-9'
+                        : 'text-base font-medium text-white/90 hover:text-[#D4AF37] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#0A192F] rounded-md px-3 py-2 flex items-center h-9'
                     }
                     aria-label={
                       item.isExternal
@@ -257,14 +264,16 @@ export const Header = memo(function Header({
 
           {/* 데스크톱 우측 버튼들 */}
           <div className="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0 space-x-3">
-            {/* 구조 점검 요청 버튼 - 항상 표시 */}
+            {/* 구조 점검 요청 버튼 — Heritage Gold CTA */}
             <Link
               href="/structure-check#request-form"
-              className="inline-flex items-center justify-center p-2 border border-transparent rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-xs font-semibold transition-all duration-200 hover:scale-105"
+              style={{ backgroundColor: '#D4AF37', color: '#0A192F' }}
               aria-label="구조 점검 요청"
               title="구조 점검 요청"
             >
-              <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
+              <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
+              <span className="hidden xl:inline">구조 점검</span>
             </Link>
 
             {/* 인증 관련 버튼 */}
@@ -281,7 +290,8 @@ export const Header = memo(function Header({
               ) : (
                 <SafeSignInButton mode="modal">
                   <button
-                    className="inline-flex items-center justify-center px-3 py-1.5 border border-border text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+                    className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    style={{ border: '1px solid rgba(212,175,55,0.4)', color: '#E5C158', backgroundColor: 'transparent' }}
                     aria-label="로그인"
                   >
                     로그인
@@ -289,8 +299,7 @@ export const Header = memo(function Header({
                 </SafeSignInButton>
               )
             ) : (
-              // 로딩 중: 스켈레톤 표시
-              <div className="h-9 w-9 rounded-full bg-muted animate-pulse" />
+              <div className="h-9 w-9 rounded-full bg-white/10 animate-pulse" />
             )}
             <ThemeToggle />
           </div>
@@ -301,7 +310,11 @@ export const Header = memo(function Header({
       {isMobileMenuOpen && (
         <div
           id="mobile-menu"
-          className="lg:hidden bg-background/95 backdrop-blur-sm border-t border-border"
+          className="lg:hidden backdrop-blur-sm border-t"
+          style={{
+            backgroundColor: 'rgba(10, 25, 47, 0.97)',
+            borderColor: 'rgba(212, 175, 55, 0.2)',
+          }}
           role="navigation"
           aria-label="모바일 메뉴"
         >
@@ -314,13 +327,13 @@ export const Header = memo(function Header({
                   <div className="space-y-1">
                     <button
                       onClick={() => toggleMobileSubmenu(item.label)}
-                      className="w-full flex items-center justify-center px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                      className="w-full flex items-center justify-center px-3 py-2 text-base font-medium text-white/90 hover:text-[#D4AF37] hover:bg-white/10 rounded-md transition-colors"
                       aria-expanded={mobileSubmenus[item.label] || false}
                       aria-label={`${item.label} 메뉴 ${mobileSubmenus[item.label] ? '접기' : '펼치기'}`}
                     >
                       {item.label}
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
+                        className={`h-4 w-4 transition-transform duration-200 text-white/70 ${
                           mobileSubmenus[item.label] ? 'rotate-180' : ''
                         }`}
                       />
@@ -337,7 +350,7 @@ export const Header = memo(function Header({
                                 ? 'noopener noreferrer'
                                 : undefined
                             }
-                            className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors text-center"
+                            className="block px-3 py-2 text-sm text-white/60 hover:text-white hover:bg-white/10 rounded-md transition-colors text-center"
                             onClick={handleMobileLinkClick}
                             aria-label={
                               subItem.isExternal
@@ -356,7 +369,7 @@ export const Header = memo(function Header({
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors text-center"
+                    className="block px-3 py-2 text-base font-medium text-white/90 hover:text-[#D4AF37] hover:bg-white/10 rounded-md transition-colors text-center"
                     onClick={handleMobileLinkClick}
                     aria-label={
                       item.isExternal

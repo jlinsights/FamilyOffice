@@ -48,6 +48,196 @@ iframe[src*='vercel.com/toolbar'] {
   }
 }
 
+/* ============================================================
+   🏛️  FamilyOffice S — DESIGN.md Brand Utility Classes
+   Modern Legacy: Signature Navy + Heritage Gold
+   ============================================================ */
+@layer utilities {
+
+  /* ── Typography ─────────────────────────────────────────── */
+  /* Korean-optimized body copy — higher visual density */
+  .font-korean {
+    line-height: 1.75;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  /* Editorial headlines with Playfair Display */
+  .heading-editorial {
+    font-family: var(--font-playfair), 'Playfair Display', ui-serif, Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #0A192F;
+  }
+
+  .dark .heading-editorial {
+    color: #F8FAFC;
+  }
+
+  /* Heritage Gold text accent */
+  .text-gold {
+    color: #D4AF37;
+  }
+
+  .text-bronze {
+    color: #B8860B;
+  }
+
+  /* ── Backgrounds ─────────────────────────────────────────── */
+  .bg-brand-navy {
+    background-color: #0A192F;
+  }
+
+  .bg-brand-gold {
+    background-color: #D4AF37;
+  }
+
+  .bg-brand-bronze {
+    background-color: #B8860B;
+  }
+
+  /* Signature Navy → Deep Slate gradient */
+  .bg-navy-gradient {
+    background: linear-gradient(135deg, #0A192F 0%, #1E293B 100%);
+  }
+
+  /* Heritage Gold shimmer gradient */
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #D4AF37 0%, #E5C158 50%, #B8860B 100%);
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────── */
+  /* Primary: Signature Navy */
+  .btn-brand-navy {
+    background-color: #0A192F;
+    color: #F8FAFC;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-brand-navy:hover {
+    background-color: #162C4E;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(10, 25, 47, 0.25);
+  }
+
+  /* Accent: Heritage Gold */
+  .btn-brand-gold {
+    background-color: #D4AF37;
+    color: #0A192F;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-brand-gold:hover {
+    background-color: #E5C158;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+  }
+
+  /* Outline Gold border button */
+  .btn-outline-gold {
+    background-color: transparent;
+    border: 1.5px solid #D4AF37;
+    color: #D4AF37;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .btn-outline-gold:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+  }
+
+  /* ── Cards ───────────────────────────────────────────────── */
+  /* Gold top-border card — DESIGN.md editorial style */
+  .card-gold-border {
+    border-top: 2px solid #D4AF37;
+    box-shadow: 0 4px 24px rgba(10, 25, 47, 0.06), 0 1px 4px rgba(10, 25, 47, 0.04);
+    background-color: #FFFFFF;
+    border-radius: 8px;
+  }
+
+  .dark .card-gold-border {
+    background-color: #1E293B;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Premium glass card */
+  .card-glass-premium {
+    backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(10, 25, 47, 0.08);
+  }
+
+  .dark .card-glass-premium {
+    background-color: rgba(30, 41, 59, 0.7);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── Borders & Dividers ──────────────────────────────────── */
+  .border-gold {
+    border-color: #D4AF37;
+  }
+
+  .border-gold\/30 {
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+
+  /* Gold accent line (hr-equivalent) */
+  .divider-gold {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    margin: 0 auto;
+  }
+
+  /* ── Section Spacing (DESIGN.md §3) ─────────────────────── */
+  .section-editorial {
+    padding-top: 6rem;   /* py-24 */
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 1024px) {
+    .section-editorial {
+      padding-top: 8rem; /* py-32 on lg+ */
+      padding-bottom: 8rem;
+    }
+  }
+
+  /* ── Financial Data Typography ───────────────────────────── */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  .financial-value {
+    font-family: var(--font-inter), 'Inter', sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  /* Positive / negative semantic colors */
+  .text-financial-positive {
+    color: #10B981;
+  }
+
+  .text-financial-negative {
+    color: #EF4444;
+  }
+
+  .text-financial-neutral {
+    color: #6B7280;
+  }
+}
+
 /* 🚀 Core Web Vitals 최적화 - AgentOS Performance Framework */
 /* Critical CSS 인라인 최적화 및 리소스 로딩 개선 */
 @layer base {
@@ -143,27 +333,25 @@ iframe[src*='vercel.com/toolbar'] {
   /* 🏛️ Family Office Premium Brand Identity */
   /* 고급스럽고 전통적인 패밀리오피스 브랜딩 */
 
-  /* 프리미엄 골드 그라데이션 */
+  /* ⚠️ 구버전 클래스 — DESIGN.md #0A192F Signature Navy로 교체 */
+  /* .bg-premium-gold → .bg-gold-gradient 사용 권장 */
   .bg-premium-gold {
     background: linear-gradient(
       135deg,
-      #f7e7d3 0%,
-      #e6c79a 25%,
-      #d4a574 50%,
-      #c8965f 75%,
-      #b8854a 100%
+      #D4AF37 0%,
+      #E5C158 30%,
+      #D4AF37 60%,
+      #B8860B 100%
     );
   }
 
-  /* 네이비 블루 그라데이션 */
+  /* .bg-premium-navy → .bg-navy-gradient 사용 권장 */
   .bg-premium-navy {
     background: linear-gradient(
       135deg,
-      #1e3a8a 0%,
-      #1e40af 25%,
-      #1d4ed8 50%,
-      #2563eb 75%,
-      #3b82f6 100%
+      #0A192F 0%,
+      #162C4E 50%,
+      #1E293B 100%
     );
   }
 
@@ -554,20 +742,20 @@ iframe[src*='vercel.com/toolbar'] {
 /* 기본 변수 설정 - 외부 폰트 참조 없음 */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 217 91% 60%;
+    --background: 210 31% 98%; /* Serenity White */
+    --foreground: 222.2 47.4% 11.2%; /* Deep Slate */
+    --primary: 217 64% 11%; /* Signature Navy */
+    --primary-foreground: 210 31% 98%;
+    --secondary: 45 66% 52%; /* Heritage Gold */
+    --secondary-foreground: 217 64% 11%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 217 64% 11%;
     --radius: 0.5rem;
     /* 접근성 색상 변수 */
-    --focus-ring: 217 91% 60%;
+    --focus-ring: 217 64% 11%;
     --error: 0 84% 60%;
     --success: 142 76% 36%;
     --warning: 38 92% 50%;
@@ -580,28 +768,40 @@ iframe[src*='vercel.com/toolbar'] {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    /* ── DESIGN.md Surface Tokens ───────────────────────────── */
+    --surface-base: #F8FAFC;   /* Serenity White */
+    --surface-card: #FFFFFF;   /* Card background */
+    --surface-muted: #F1F5F9;  /* Muted surface */
+
+    /* ── DESIGN.md Brand Direct Values ─────────────────────── */
+    --brand-navy: #0A192F;     /* Signature Navy */
+    --brand-gold: #D4AF37;     /* Heritage Gold */
+    --brand-bronze: #B8860B;   /* Muted Bronze */
+    --brand-slate: #1E293B;    /* Deep Slate */
+    --brand-shimmer: #E5C158;  /* Gold Shimmer */
   }
 
   .dark {
-    --background: 240 10% 3.9%; /* 깊은 네이비 톤으로 변경 */
-    --foreground: 0 0% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 3.7% 15.9%; /* 일관된 네이비 계열 */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%; /* secondary와 동일하게 통일 */
+    --background: 217 64% 8%; /* Deepest Navy */
+    --foreground: 210 31% 98%;
+    --primary: 45 66% 52%; /* Gold as primary in dark mode for pop */
+    --primary-foreground: 217 64% 11%;
+    --secondary: 217 64% 15%; /* Deep Navy as secondary */
+    --secondary-foreground: 210 31% 98%;
+    --muted: 217 64% 15%;
     --muted-foreground: 215 20.2% 72%;
-    --border: 240 3.7% 15.9%; /* 테두리도 통일 */
-    --input: 240 3.7% 15.9%;
-    --ring: 217 91% 60%;
+    --border: 217 64% 15%;
+    --input: 217 64% 15%;
+    --ring: 45 66% 52%;
     /* 다크 모드 접근성 색상 */
-    --focus-ring: 217 91% 60%;
+    --focus-ring: 45 66% 52%;
     --error: 0 84% 60%;
     --success: 142 76% 36%;
     --warning: 38 92% 50%;
-    --card: 240 10% 3.9%;
+    --card: 217 64% 8%;
     --card-foreground: 210 40% 98%;
-    --popover: 240 10% 3.9%;
+    --popover: 217 64% 8%;
     --popover-foreground: 210 40% 98%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -638,27 +838,40 @@ iframe[src*='vercel.com/toolbar'] {
 
   body {
     @apply bg-background text-foreground;
+    /* DESIGN.md §2 — Inter primary, Pretendard fallback for Korean */
     font-family:
+      'Inter', 'Pretendard Variable', 'Pretendard',
       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-      Arial, sans-serif;
+      Arial, 'Noto Sans KR', sans-serif;
     font-feature-settings:
       'rlig' 1,
       'calt' 1,
       'kern' 1;
-    line-height: 1.5;
+    /* DESIGN.md §2 — line-height 1.65 (Korean density 대응) */
+    line-height: 1.65;
+    /* font-optical-sizing: CSS로 처리 — layout.tsx 인라인 style 제거로 hydration mismatch 방지 */
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Enhanced typography */
+  /* DESIGN.md §2 — Headlines (H1~H3): Playfair Display (authority) */
   h1,
   h2,
-  h3,
+  h3 {
+    font-family: 'Playfair Display', var(--font-playfair), ui-serif, Georgia, serif;
+    @apply font-semibold tracking-tight;
+    letter-spacing: -0.02em;
+    font-optical-sizing: auto;
+  }
+
+  /* DESIGN.md §2 — Sub-headers (H4~H6): Inter (precision) */
   h4,
   h5,
   h6 {
+    font-family: 'Inter', var(--font-inter), -apple-system, sans-serif;
     @apply font-semibold tracking-tight;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 
   h1 {

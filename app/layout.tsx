@@ -45,8 +45,7 @@ export default function RootLayout({
         <GlobalStructuredData />
       </head>
       <body
-        className={`${inter.className} ${inter.variable} ${playfair.variable}`}
-        style={{ fontOpticalSizing: 'auto' }}
+        className={`${inter.variable} ${playfair.variable} font-body antialiased`}
       >
         <AppShell>{children}</AppShell>
       </body>
