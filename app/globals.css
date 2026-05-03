@@ -333,27 +333,25 @@ iframe[src*='vercel.com/toolbar'] {
   /* 🏛️ Family Office Premium Brand Identity */
   /* 고급스럽고 전통적인 패밀리오피스 브랜딩 */
 
-  /* 프리미엄 골드 그라데이션 */
+  /* ⚠️ 구버전 클래스 — DESIGN.md #0A192F Signature Navy로 교체 */
+  /* .bg-premium-gold → .bg-gold-gradient 사용 권장 */
   .bg-premium-gold {
     background: linear-gradient(
       135deg,
-      #f7e7d3 0%,
-      #e6c79a 25%,
-      #d4a574 50%,
-      #c8965f 75%,
-      #b8854a 100%
+      #D4AF37 0%,
+      #E5C158 30%,
+      #D4AF37 60%,
+      #B8860B 100%
     );
   }
 
-  /* 네이비 블루 그라데이션 */
+  /* .bg-premium-navy → .bg-navy-gradient 사용 권장 */
   .bg-premium-navy {
     background: linear-gradient(
       135deg,
-      #1e3a8a 0%,
-      #1e40af 25%,
-      #1d4ed8 50%,
-      #2563eb 75%,
-      #3b82f6 100%
+      #0A192F 0%,
+      #162C4E 50%,
+      #1E293B 100%
     );
   }
 
@@ -770,6 +768,18 @@ iframe[src*='vercel.com/toolbar'] {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    /* ── DESIGN.md Surface Tokens ───────────────────────────── */
+    --surface-base: #F8FAFC;   /* Serenity White */
+    --surface-card: #FFFFFF;   /* Card background */
+    --surface-muted: #F1F5F9;  /* Muted surface */
+
+    /* ── DESIGN.md Brand Direct Values ─────────────────────── */
+    --brand-navy: #0A192F;     /* Signature Navy */
+    --brand-gold: #D4AF37;     /* Heritage Gold */
+    --brand-bronze: #B8860B;   /* Muted Bronze */
+    --brand-slate: #1E293B;    /* Deep Slate */
+    --brand-shimmer: #E5C158;  /* Gold Shimmer */
   }
 
   .dark {
@@ -828,27 +838,38 @@ iframe[src*='vercel.com/toolbar'] {
 
   body {
     @apply bg-background text-foreground;
+    /* DESIGN.md §2 — Inter primary, Pretendard fallback for Korean */
     font-family:
+      'Inter', 'Pretendard Variable', 'Pretendard',
       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-      Arial, sans-serif;
+      Arial, 'Noto Sans KR', sans-serif;
     font-feature-settings:
       'rlig' 1,
       'calt' 1,
       'kern' 1;
-    line-height: 1.5;
+    /* DESIGN.md §2 — line-height 1.65 (Korean density 대응) */
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Enhanced typography */
+  /* DESIGN.md §2 — Headlines (H1~H3): Playfair Display (authority) */
   h1,
   h2,
-  h3,
+  h3 {
+    font-family: 'Playfair Display', var(--font-playfair), ui-serif, Georgia, serif;
+    @apply font-semibold tracking-tight;
+    letter-spacing: -0.02em;
+    font-optical-sizing: auto;
+  }
+
+  /* DESIGN.md §2 — Sub-headers (H4~H6): Inter (precision) */
   h4,
   h5,
   h6 {
+    font-family: 'Inter', var(--font-inter), -apple-system, sans-serif;
     @apply font-semibold tracking-tight;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 
   h1 {
