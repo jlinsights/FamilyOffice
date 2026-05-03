@@ -62,6 +62,29 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+        // FamilyOffice S - Modern Legacy Brand Colors
+        brand: {
+          navy: {
+            DEFAULT: '#0A192F',
+            light: '#162C4E',
+            dark: '#050D19',
+          },
+          gold: {
+            DEFAULT: '#D4AF37',
+            light: '#E5C158',
+            dark: '#A38428',
+          },
+          bronze: {
+            DEFAULT: '#B8860B',
+            light: '#D49D24',
+            dark: '#8B6508',
+          },
+          slate: {
+            DEFAULT: '#1E293B',
+            light: '#334155',
+            dark: '#0F172A',
+          },
+        },
         // Emerald Luxury - 포지티브 데이터, 성과 지표, 액센트 컬러
         'emerald-luxury': {
           DEFAULT: '#059669',
@@ -116,11 +139,12 @@ const config: Config = {
         inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
       },
       fontFamily: {
-        sans: [...fontFamily.sans],
+        sans: ['var(--font-inter)', ...fontFamily.sans],
         mono: [...fontFamily.mono],
-        heading: [...fontFamily.sans],
-        body: [...fontFamily.sans],
-        playfair: ['Playfair Display', 'ui-serif', 'Georgia', 'serif'],
+        heading: ['var(--font-playfair)', ...fontFamily.sans],
+        body: ['var(--font-inter)', ...fontFamily.sans],
+        playfair: ['var(--font-playfair)', 'ui-serif', 'Georgia', 'serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.05em' }],

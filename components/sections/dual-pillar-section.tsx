@@ -17,34 +17,36 @@ import { cn } from '@/lib/utils';
 
 export function DualPillarSection() {
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-400/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-400/5 rounded-full blur-3xl pointer-events-none"></div>
+    <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 50%, #F8FAFC 100%)' }}>
+      {/* Background Elements — subtle gold */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(212,175,55,0.04)' }}></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(10,25,47,0.03)' }}></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-6 shadow-sm animate-fade-in">
-            <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs font-bold rounded-full mr-2">
+          {/* Core Strategy badge — navy + gold */}
+          <div className="inline-flex items-center justify-center p-1.5 backdrop-blur-sm border rounded-full mb-6 shadow-sm animate-fade-in" style={{ backgroundColor: 'rgba(10,25,47,0.04)', borderColor: 'rgba(212,175,55,0.25)' }}>
+            <span className="px-3 py-1 text-xs font-bold rounded-full mr-2" style={{ backgroundColor: 'rgba(212,175,55,0.12)', color: '#B8860B' }}>
               Core Strategy
             </span>
-            <span className="text-sm text-slate-600 dark:text-slate-300 pr-2 flex items-center">
+            <span className="text-sm pr-2 flex items-center" style={{ color: '#475569' }}>
               <Crown className="h-3 w-3 mr-1" />
               한국 중견·패밀리기업 전용 리스크·세무 통합
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 dark:text-white tracking-tight animate-slide-up">
+          {/* Playfair Display editorial headline */}
+          <h2 className="font-playfair font-semibold mb-6 tracking-tight animate-slide-up" style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', lineHeight: '1.2', letterSpacing: '-0.02em', color: '#0A192F' }}>
             이중 방어선으로 완성하는{' '}
-            <span className="text-blue-600 dark:text-blue-400">
+            <span style={{ color: '#D4AF37' }}>
               기업 지속성
             </span>
           </h2>
 
-          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed animate-slide-up font-light">
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed animate-slide-up font-light font-korean" style={{ color: '#475569' }}>
             중대재해처벌법 통합 대응 × 승계세무 최적화
             <br />
-            <span className="text-base font-semibold text-slate-900 dark:text-white mt-2 bg-slate-100 dark:bg-slate-800/50 inline-block px-4 py-1 rounded-full">
+            <span className="text-base font-semibold mt-2 inline-block px-4 py-1 rounded-full" style={{ color: '#0A192F', backgroundColor: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.2)' }}>
               Compliance + Insurance + Tax Engineering = 차세대 경영 기반
             </span>
           </p>
@@ -166,10 +168,11 @@ export function DualPillarSection() {
             href="/solutions"
             className={cn(
               buttonVariants({ size: 'lg' }),
-              'px-10 py-6 text-lg font-bold rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300'
+              'px-10 py-6 text-lg font-bold rounded-full text-white hover:opacity-90 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300'
             )}
+            style={{ backgroundColor: '#0A192F', border: '1px solid rgba(212,175,55,0.25)' }}
           >
-            <Target className="h-5 w-5 mr-2" />
+            <Target className="h-5 w-5 mr-2" style={{ color: '#D4AF37' }} />
             업종·규모별 맞춤 패키지 보기
           </Link>
         </div>
