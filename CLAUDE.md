@@ -1,149 +1,204 @@
 # CLAUDE.md
 
-This file provides comprehensive guidance to Claude Code (claude.ai/code) when working with code in this repository. For AI agents, see **[AGENTS.md](./AGENTS.md)** for optimized, agent-specific instructions.
+이 파일은 Claude Code (`claude.ai/code`) 및 AI 에이전트가 이 저장소에서 작업할 때 참고하는 종합 가이드입니다.
+AI 에이전트 최적화 버전은 **[AGENTS.md](./AGENTS.md)** 를 참조하세요.
 
-## Quick Start (Agent-Friendly)
+---
 
-### Essential Commands
-
-```bash
-# Development (DO NOT use npm run build during dev sessions)
-npm run dev          # Start development server with HMR
-npm run dev:mobile   # Mobile development server
-
-# Quality Checks
-npm run lint         # ESLint analysis
-npm run typecheck    # TypeScript validation
-
-# Testing
-npm run test:e2e     # Playwright E2E tests
-```
-
-### Key Project Facts
-
-- **Framework**: Next.js 16.1.1 + React 18.3.1 + TypeScript 5.8.3 + Tailwind CSS
-- **Target**: Korean mid-market company CEOs
-- **Admin**: Environment variable based (`ADMIN_EMAILS` / `NEXT_PUBLIC_ADMIN_EMAILS`)
-- **Auth**: Clerk + Supabase PostgreSQL sync
-- **Testing**: Playwright (8 browser/device configs)
-- **Email**: Resend (`email.familyoffices.vip` domain)
-
-## Project Overview
-
-FamilyOffice S is a premium wealth management platform targeting Korean mid-market company CEOs. The site focuses on business succession planning, corporate asset management, and comprehensive family office services with specialized programs for different industries.
-
-## Development Commands
-
-**AGENT WARNING**: Never run `npm run build` during development sessions - it breaks HMR and leaves the dev server in an inconsistent state.
+## ⚡ Quick Start
 
 ```bash
-# Development (Use these during agent sessions)
-npm run dev          # Start development server (localhost:3000)
-npm run dev:mobile   # Mobile development server (0.0.0.0:3000)
-npm run dev:inspect  # Development with Node.js inspector
+# 개발 서버 (HMR)
+npm run dev
 
-# Quality Assurance (Run before commits)
-npm run lint         # ESLint code analysis
-npm run typecheck    # TypeScript type checking
+# 품질 체크 (커밋 전 필수)
+npm run agent:check   # lint + typecheck
 
-# Build Commands (Use outside agent sessions only)
-npm run build        # Production build
-npm run start        # Start production server
-npm run vercel-build # Vercel-specific build process
+# 테스트
+npm run test:e2e      # Playwright E2E
+npm run test:unit     # Jest 단위 테스트
 ```
 
-## Tech Stack & Architecture
+### 핵심 정보
 
-### Core Framework
+| 항목 | 값 |
+|---|---|
+| Framework | Next.js 16.1.6 + React 18.3.1 + TypeScript 5.8.3 |
+| Target | 한국 중소중견기업 CEO (45~65세) |
+| Auth | Clerk + Supabase PostgreSQL sync |
+| Testing | Playwright 134 tests (8 browser/device configs) |
+| Domain | familyoffices.vip |
+| Email | Resend (`email.familyoffices.vip`) |
+| Admin | 환경변수 기반 (`ADMIN_EMAILS` / `NEXT_PUBLIC_ADMIN_EMAILS`) |
 
-- **Next.js 16.1.1** with App Router and TypeScript 5.8.3
-- **React 18.3.1** with Server Components
-- **Tailwind CSS** + shadcn/ui components
-- **ESLint** + **Prettier** for code quality
-- **Playwright** for E2E testing
+---
 
-### Authentication & Database
+## ⚠️ 에이전트 필수 주의사항
 
-- **Clerk** for authentication with webhook sync
-- **Supabase** PostgreSQL for data persistence
-- **Real-time sync**: Clerk users → Supabase users table via webhook
+```bash
+# ❌ 개발 세션 중 절대 금지 — HMR 깨짐
+npm run build
 
-### Key Integrations
+# ✅ 항상 이것 사용
+npm run dev
+npm run agent:check   # 코드 변경 후
+```
 
-- **Cal.com** for consultation booking (`@calcom/embed-react`)
-  - Components located in `components/calendar/cal-com-*.tsx`
-- **Newsletter**: Beehiiv platform (https://newsletter.familyoffices.vip)
-  - 매주 월요일 오전 7:30, 금요일 오전 7:30 정기 발송
-  - API 통합으로 블로그에서 직접 구독 가능
-- **Blog System**: `/blog` 페이지에서 자산관리 인사이트 제공
-  - SEO 최적화된 콘텐츠 관리 + 뉴스레터 구독 연동
-- **Email**: Resend with `email.familyoffices.vip` domain
-- **Google Analytics 4** with structured data markup
-- **Financial APIs**: `/api/financial/` (stocks, forex, status, tax-optimization, korean-market)
-- **Redis**: Multi-layer caching system with failover support
+---
 
-## Project Structure
+## 🎨 디자인 시스템 (Modern Legacy)
+
+> **소스 오브 트루스**: [`DESIGN.md`](./DESIGN.md)
+
+### 브랜드 컬러 토큰
+
+```typescript
+// tailwind.config.ts — brand.* 클래스로 사용 가능
+brand: {
+  navy:   '#0A192F',  // Signature Navy (Primary)
+  gold:   '#D4AF37',  // Heritage Gold (Accent CTA)
+  bronze: '#B8860B',  // Bronze (강조 텍스트)
+  shimmer:'#E5C158',  // Gold Shimmer (그라디언트 중간)
+  slate:  '#1E293B',  // Deep Charcoal (다크 배경)
+}
+```
+
+### 타이포그래피
+
+| 역할 | 폰트 | Tailwind 클래스 |
+|---|---|---|
+| 에디토리얼 헤드라인 | Playfair Display | `font-playfair` |
+| 본문 / UI | Inter | `font-inter` / `font-body` |
+| 한국어 최적화 | — | `font-korean` |
+
+### 글로벌 유틸리티 클래스 (`globals.css`)
+
+```css
+/* Typography */
+.font-korean          /* line-height: 1.75, word-break: keep-all */
+.heading-editorial    /* Playfair Display + Signature Navy */
+.text-gold            /* Heritage Gold #D4AF37 */
+.text-bronze          /* Bronze #B8860B */
+.financial-value      /* tabular-nums Inter */
+
+/* Backgrounds */
+.bg-brand-navy        /* #0A192F */
+.bg-navy-gradient     /* Navy → Deep Slate */
+.bg-gold-gradient     /* Heritage Gold shimmer */
+
+/* Buttons */
+.btn-brand-navy       /* Signature Navy 배경 */
+.btn-brand-gold       /* Heritage Gold 배경 */
+.btn-outline-gold     /* 골드 아웃라인 */
+
+/* Cards */
+.card-gold-border     /* 골드 상단 2px 보더 카드 */
+.card-glass-premium   /* backdrop-blur 글라스모피즘 */
+
+/* Layout */
+.section-editorial    /* py-24 / py-32 표준 섹션 여백 */
+.divider-gold         /* 골드 그라디언트 hr */
+```
+
+---
+
+## 🏗️ 개발 명령어
+
+```bash
+# 개발
+npm run dev              # HMR 개발 서버 (localhost:3000)
+npm run dev:mobile       # 모바일 테스트 (0.0.0.0:3000)
+npm run dev:inspect      # Node.js 인스펙터 포함
+
+# 품질 (커밋 전 필수)
+npm run agent:check      # lint + typecheck (에이전트 최적화)
+npm run lint             # ESLint
+npm run typecheck        # TypeScript
+
+# 테스트
+npm run test:e2e         # Playwright 전체 (134 tests)
+npm run test:e2e:ui      # UI 모드
+npm run test:e2e:debug   # 디버그
+npm run test:unit        # Jest 단위 테스트
+npm run test:coverage    # 커버리지 리포트
+
+# 단일 파일 테스트
+npx playwright test tests/e2e/financial.spec.ts
+npx playwright test --project=chromium tests/e2e/mobile.spec.ts
+npx jest tests/unit/financial-calculations.test.ts
+```
+
+---
+
+## 🔧 기술 스택
+
+### Core
+- **Next.js 16.1.6** — App Router + Turbopack
+- **React 18.3.1** — Server Components 기본
+- **TypeScript 5.8.3** — 엄격한 타입 체크 + Zod 검증
+- **Tailwind CSS** — 브랜드 토큰 커스텀 설정
+- **shadcn/ui** — 컴포넌트 라이브러리
+
+### Auth & Data
+- **Clerk** — 인증 (MFA 지원) + webhook 동기화
+- **Supabase** — PostgreSQL 데이터 영속성
+- **Upstash Redis** — 분산 캐싱 (메모리 → Redis → API 폴백)
+
+### 한국 시장 통합
+- **Cal.com** — 상담 예약 (`components/calendar/`)
+- **Beehiiv** — 뉴스레터 (월/금 7:30 발송)
+- **Resend** — 이메일 (`email.familyoffices.vip`)
+- **HubSpot** — CRM + 마케팅 자동화
+- **Channel Talk** — 고객 지원
+
+---
+
+## 📁 프로젝트 구조
 
 ```
 app/
 ├── api/
-│   ├── webhooks/clerk/        # Clerk webhook for user sync
-│   ├── admin/                 # Admin API routes
-│   ├── financial/             # Financial data APIs
-│   ├── newsletter/            # Newsletter subscription
-│   └── email/                 # Email service APIs
-├── admin/                     # Admin dashboard (protected)
-├── blog/                      # Blog system (/blog + /blog/[slug])
-├── portal/                    # User portal (authenticated)
-├── structure-check/           # Structure check request flow
-├── (many service pages)/      # Service landing pages
-├── layout.tsx                 # Root layout with providers
-└── globals.css                # Tailwind base styles
+│   ├── financial/     # 금융 데이터 API (주식, 환율, 세무)
+│   ├── newsletter/    # 뉴스레터 구독 API
+│   ├── webhooks/clerk/# Clerk→Supabase 동기화
+│   └── admin/         # 어드민 API 라우트
+├── admin/             # Admin Dashboard (인증 보호)
+├── blog/              # 블로그 시스템
+├── portal/            # 사용자 포털
+├── layout.tsx         # Root Layout + Providers
+└── globals.css        # Tailwind 기본 + 브랜드 유틸리티
 
 components/
-├── calendar/cal-com-*.tsx     # Booking widget variations
-├── email/                     # Email templates & test panel
-├── features/admin/            # Admin-specific components
-├── forms/                     # Contact/consultation forms
-├── icons/service-icons.tsx    # Custom SVG icons
-├── performance/               # Performance monitoring dashboards
-├── program/                   # Program section components
-├── sections/                  # Page section components
-├── seminar/                   # Seminar section components
-└── ui/                        # shadcn/ui components
-
-lib/
-├── admin-permissions.ts       # Centralized admin email management (getAdminEmails)
-├── supabase/                  # Database client/server/admin setup
-├── email/resend-client.ts     # Resend email service
-├── blog-data.ts               # Centralized blog content management
-├── financial/                 # Financial APIs & caching
-│   ├── cache.ts               # Redis + memory caching
-│   └── error-handler.ts       # Structured logging
-├── security/                  # Security monitoring & audit
-├── performance/               # Performance optimization utilities
-├── user-sync.ts               # Clerk→Supabase sync logic
-├── env.ts                     # Environment validation with Zod
-└── rate-limit.ts              # API rate limiting
+├── sections/          # 홈페이지 섹션 (hero, services, dual-pillar 등)
+├── calendar/          # Cal.com 예약 위젯 (5종)
+├── seminar/           # 세미나 섹션
+├── bento/             # 벤토 그리드 서비스 카드
+├── header.tsx         # 글로벌 헤더 (Signature Navy)
+├── footer.tsx         # 글로벌 푸터 (Signature Navy + Gold)
+└── ui/                # shadcn/ui 컴포넌트
 
 constants/
-├── services.ts                # Service definitions by industry
-├── programs.ts                # Educational program data
-├── seminars.ts                # Seminar data
-└── faq.ts                     # FAQ content structure
+├── brand.ts           # 브랜드 컬러 + 타이포그래피 상수
+├── bento-services.ts  # 서비스 카드 데이터
+└── services.ts        # 업종별 서비스 정의
+
+lib/
+├── admin-permissions.ts  # getAdminEmails() 중앙화
+├── supabase/             # DB 클라이언트 설정
+├── financial/            # 금융 API + 캐싱
+├── email/resend-client.ts# 이메일 서비스
+└── env.ts                # Zod 환경변수 검증
+
+tailwind.config.ts         # brand.* 토큰 + Playfair/Inter 폰트
+DESIGN.md                  # 디자인 시스템 소스 오브 트루스
+AGENTS.md                  # AI 에이전트 개발 규칙
 ```
 
-## Authentication & Admin System
+---
 
-### Admin Access
+## 🔐 인증 & 관리자 시스템
 
-- **Admin emails**: Configured via `ADMIN_EMAILS` environment variable (comma-separated)
-- **Client-side admin check**: Uses `NEXT_PUBLIC_ADMIN_EMAILS` environment variable
-- **Centralized function**: `getAdminEmails()` from `lib/admin-permissions.ts`
-- **Protected Routes**: `/admin/*` with `AdminAccessDeniedAlert` component
-- **User Sync**: Clerk webhook → `syncUserToSupabase()` → users table
-
-### Admin Permission Pattern
+### 관리자 접근
 
 ```typescript
 // Server Components / API Routes
@@ -155,10 +210,15 @@ const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
   .split(',').map(e => e.trim().toLowerCase()).filter(Boolean);
 ```
 
-## Environment Variables
+- **절대 관리자 이메일 하드코딩 금지** — 항상 `getAdminEmails()` 사용
+- 보호된 라우트: `/admin/*` + `AdminAccessDeniedAlert`
+
+---
+
+## 🌍 환경 변수
 
 ```bash
-# Required
+# 필수
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 CLERK_WEBHOOK_SECRET=
@@ -166,115 +226,158 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 
-# Admin Configuration
+# 관리자
 ADMIN_EMAILS=admin1@example.com,admin2@example.com
 NEXT_PUBLIC_ADMIN_EMAILS=admin1@example.com,admin2@example.com
 
-# Email
+# 이메일
 RESEND_API_KEY=
 NEXT_PUBLIC_RESEND_FROM_EMAIL=noreply@email.familyoffices.vip
+
+# Redis
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
 
 # Analytics
 NEXT_PUBLIC_GA_MEASUREMENT_ID=
 
-# Optional
-REDIS_URL=
+# 선택
 BEEHIIV_API_KEY=
 BEEHIIV_PUBLICATION_ID=
 NEXT_PUBLIC_CALCOM_API_KEY=
 ```
 
-See `.env.example` for the complete list.
-
-## Key Features & Content
-
-### Target Industries
-
-1. **Manufacturing**: Traditional Korean companies
-2. **Construction**: Real estate and infrastructure
-3. **IT/Venture**: Modern tech companies
-4. **Family Corporations**: Multi-generational businesses
-
-### Service Categories
-
-- **Asset Management**: Portfolio optimization, risk management
-- **Succession Planning**: Corporate governance, next-gen preparation
-- **Tax Strategy**: Korean tax optimization, international structures
-- **Education**: CEO programs, family workshops
-- **Insurance**: Key-person, group, health, life insurance solutions
-
-### Design System
-
-- **Color Palette**: Navy (#1e3a8a) + Bronze (#cd7f32) for premium feel
-- **Typography**: Korean-optimized fonts with professional hierarchy
-- **Components**: Consistent shadcn/ui with custom Korean styling
-
-## Development Guidelines
-
-### Code Patterns
-
-- **Server Components**: Default for data fetching and SEO
-- **Client Components**: Minimal use with "use client" directive
-- **Type Safety**: Strict TypeScript with Zod validation
-- **Error Handling**: Comprehensive try/catch with user feedback
-- **Admin Checks**: Always use `getAdminEmails()` - never hardcode admin emails
-
-### SEO & Performance
-
-- **Metadata**: Dynamic generation per page with Korean keywords
-- **Structured Data**: JSON-LD for rich snippets
-- **Image Optimization**: Next.js Image component with proper sizing
-- **Core Web Vitals**: Optimized for Korean search engines
-
-### Security
-
-- **CSP Headers**: Configured in `next.config.mjs`
-- **Webhook Validation**: Clerk signature verification
-- **Admin Protection**: Environment variable-based access control
-- **Rate Limiting**: `globalRateLimit()` in middleware for API routes
-- **Environment Isolation**: Separate configs for dev/prod
-
-## Middleware
-
-The middleware (`middleware.ts`) handles:
-1. Maintenance mode check
-2. Rate limiting for API routes (single call, result cached for headers)
-3. Clerk authentication
-4. Admin route protection
-5. Rate limit headers on successful responses
-
-**Important**: `globalRateLimit()` must only be called once per request to avoid double-counting.
-
-## Deployment
-
-- **Platform**: Vercel with automatic deployments
-- **Build Command**: `npm run vercel-build`
-- **Environment**: Production variables set in Vercel dashboard
-- **Domain**: familyoffices.vip
-
-## Testing
-
-### E2E Testing with Playwright
-
-- **Cross-browser**: Chromium, Firefox, WebKit
-- **Mobile testing**: Chrome Mobile, Safari Mobile
-- **Korean content testing** included
-
-```bash
-npm run test:e2e          # Run all E2E tests
-npm run test:e2e:ui       # Playwright UI mode
-npm run test:e2e:headed   # Headed mode for debugging
-npm run test:e2e:debug    # Debug mode with inspector
-npm run test:e2e:report   # View test reports
-```
-
-## Version Control
-
-- Whenever code changes are made, record a one-line description with emoji in Korean in `.commit_message.txt` using Edit Tool.
-  - Read `.commit_message.txt` first, then Edit.
-  - Overwrite regardless of existing content.
-  - If it was a git revert related operation, make the `.commit_message.txt` file empty.
+전체 목록: `.env.example`
 
 ---
 
-**Last Updated**: February 2025
+## 🎯 코딩 패턴
+
+### TypeScript / 컴포넌트
+
+```typescript
+// Server Component (기본 — SEO + 데이터 페칭)
+export default async function ServicePage() {
+  const services = await getServices();
+  return <ServiceList services={services} />;
+}
+
+// Client Component (최소화 — 인터랙션 필요 시만)
+'use client';
+export function ServiceList({ services }: { services: Service[] }) {
+  const [selected, setSelected] = useState<Service | null>(null);
+}
+```
+
+### API Route 패턴
+
+```typescript
+import { z } from 'zod';
+import { NextRequest, NextResponse } from 'next/server';
+
+const RequestSchema = z.object({ email: z.string().email() });
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const validated = RequestSchema.parse(body);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+  }
+}
+```
+
+### 네이밍 컨벤션
+
+| 대상 | 컨벤션 | 예시 |
+|---|---|---|
+| 컴포넌트 | PascalCase | `HeroSection`, `CalComPopup` |
+| 파일 | kebab-case | `hero-section.tsx` |
+| 변수/함수 | camelCase | `fetchUserData` |
+| 상수 | UPPER_SNAKE_CASE | `API_BASE_URL` |
+| 타입/인터페이스 | PascalCase + 서픽스 | `UserProps`, `ApiResponse` |
+
+### Import 순서 (Prettier 자동 정렬)
+
+```typescript
+// React → Next → Clerk → Radix → shadcn/ui → components → lib → 상대경로
+import { useState } from 'react';
+import { Metadata } from 'next';
+import { currentUser } from '@clerk/nextjs';
+import { Button } from '@/components/ui/button';
+import { HeroSection } from '@/components/sections/hero-section';
+import { supabase } from '@/lib/supabase';
+```
+
+---
+
+## 🧪 테스트 전략
+
+| 레이어 | 도구 | 커버리지 목표 |
+|---|---|---|
+| E2E | Playwright (134 tests) | 핵심 사용자 플로우 |
+| 단위 | Jest | 금융 모듈 90%+ |
+| 통합 | Jest + Supabase | API 엔드포인트 |
+| 보안 | `npm run test:security` | 인증/권한 |
+
+---
+
+## 📊 미들웨어 (`middleware.ts`)
+
+실행 순서:
+1. 유지보수 모드 확인
+2. API Rate Limiting (단일 호출, 헤더 캐시)
+3. Clerk 인증
+4. Admin 라우트 보호
+5. Rate limit 헤더 응답
+
+**중요**: `globalRateLimit()` 요청당 1회만 호출 (이중 카운팅 방지)
+
+---
+
+## 🚢 배포
+
+- **플랫폼**: Vercel 자동 배포
+- **빌드**: `npm run vercel-build`
+- **도메인**: `familyoffices.vip`
+- **모니터링**: Sentry
+
+### 빌드 성능 (2026년 5월)
+
+| 항목 | 수치 |
+|---|---|
+| 컴파일 시간 | ~37초 |
+| 정적 페이지 | 139개 |
+| TypeScript 체크 | ~42초 |
+| Exit code | 0 ✅ |
+
+---
+
+## 📝 버전 관리 규칙
+
+코드 변경 시 `.commit_message.txt`에 한 줄 설명(이모지 포함 한국어) 기록:
+
+```bash
+# 파일 먼저 읽고 → 덮어쓰기
+# 예시:
+🎨 design: DESIGN.md 기반 Modern Legacy 브랜드 팔레트 전면 적용
+✨ feat: 구조점검 예약 폼 Heritage Gold CTA 추가
+🐛 fix: CalComPopup style prop TypeScript 오류 해결
+```
+
+- revert 작업 시: 파일 내용 비움
+
+---
+
+## 📅 문서 이력
+
+| 날짜 | 주요 변경 |
+|---|---|
+| 2026-05-03 | DESIGN.md Modern Legacy 디자인 시스템 적용 완료 |
+| 2026-05-03 | Next.js 16.1.6 업그레이드, 빌드 139 정적 페이지 |
+| 2025-02 | 초기 문서 작성 |
+
+---
+
+**Last Updated**: 2026-05-03

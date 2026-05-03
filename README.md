@@ -1,331 +1,291 @@
-# FamilyOffice S - 중소중견기업 법인 대표 전용 자산관리 플랫폼
+# FamilyOffice S — 중소중견기업 법인 대표 전용 자산관리 플랫폼
+
+> **"百年永續"** — 단순한 자산 증식을 넘어, 백년영속 가문의 유산을 설계합니다.
+
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/jlinsights/FamilyOffice)
+[![Next.js](https://img.shields.io/badge/Next.js-16.1-black)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+---
 
 ## 📋 프로젝트 개요
 
-FamilyOffice S는 비상장기업, 기술기업, 제조업 등 다양한 업종의 법인 대표를 위한 프리미엄 자산관리 플랫폼입니다. 정책자금부터 단체보험, 경영인정기보험, 중대재해처벌법 대응까지 500억원+ 관리 실적을 보유하고 있습니다.
+FamilyOffice S는 비상장기업, 기술기업, 제조업 등 다양한 업종의 법인 대표를 위한 **프리미엄 자산관리 플랫폼**입니다.
+
+- 정책자금 · 단체보험 · 경영인정기보험 · 중대재해처벌법 대응
+- 가업승계 · 증여세 설계 · 세후 유동성 최적화
+- **500억원+ 자산관리 실적** | **500+ 법인 고객사** | **20년+ 전문 경험**
+
+---
+
+## 🎨 디자인 시스템 (Modern Legacy)
+
+> 자세한 내용: [`DESIGN.md`](./DESIGN.md)
+
+### 브랜드 팔레트
+
+| 역할 | 색상명 | Hex |
+|---|---|---|
+| Primary | Signature Navy | `#0A192F` |
+| Accent | Heritage Gold | `#D4AF37` |
+| Warm | Gold Shimmer | `#E5C158` |
+| Deep | Bronze | `#B8860B` |
+| Dark | Deep Charcoal | `#1E293B` |
+
+### 타이포그래피
+
+| 역할 | 폰트 |
+|---|---|
+| 헤드라인 (에디토리얼) | Playfair Display |
+| 본문 / UI | Inter |
+| 한국어 최적화 | `line-height: 1.75`, `word-break: keep-all` |
+
+### 글로벌 유틸리티 클래스 (`globals.css`)
+
+```css
+.font-korean       /* 한국어 최적화 행간 */
+.heading-editorial /* Playfair Display + Signature Navy */
+.text-gold         /* Heritage Gold #D4AF37 */
+.bg-navy-gradient  /* Signature Navy → Deep Slate */
+.bg-gold-gradient  /* Heritage Gold shimmer */
+.btn-brand-navy    /* 네이비 버튼 */
+.btn-brand-gold    /* 골드 버튼 */
+.card-gold-border  /* 골드 상단 보더 카드 */
+.card-glass-premium/* 프리미엄 글라스모피즘 */
+.divider-gold      /* 골드 그라디언트 구분선 */
+.section-editorial /* py-24 / py-32 표준 섹션 여백 */
+.financial-value   /* tabular-nums 금융 데이터 */
+```
+
+---
 
 ## 🚀 주요 기능
 
 ### 💼 자산관리 서비스
-
 - **비상장기업 자산관리**: 매출 50억~300억 비상장기업 전용
-- **상속설계**: 세무최적화를 통한 효율적인 자산승계
+- **가업승계 설계**: 세무최적화를 통한 효율적인 자산승계
 - **재무설계**: 법인 대표 맞춤형 재무상담
 - **투자자문**: 전문적인 투자 전략 수립
 
 ### 🛡️ 리스크 관리
-
 - **법인 단체보험**: 기업 리스크 헷지
 - **경영인정기보험**: CEO 정기보험 및 임원진 보험설계
-- **중대재해처벌법 대응**: 중대재해 예방 및 리스크 관리
+- **중대재해처벌법 대응**: 중대재해 예방 및 리스크 관리 (D&O/임원배상, 변호사비)
 
 ### 📊 기술 스택
 
 #### Frontend
-
-- **Next.js 15.4.3** - React 기반 풀스택 프레임워크
-- **React 18+** - 사용자 인터페이스 라이브러리
-- **TypeScript** - 타입 안전성 보장
-- **Tailwind CSS** - 유틸리티 퍼스트 CSS 프레임워크
-- **Framer Motion** - 애니메이션 라이브러리
+- **Next.js 16.1.6** — React 기반 풀스택 프레임워크 (App Router + Turbopack)
+- **React 18.3.1** — 사용자 인터페이스 라이브러리
+- **TypeScript 5.8.3** — 타입 안전성 보장
+- **Tailwind CSS** — 유틸리티 퍼스트 CSS + 커스텀 브랜드 토큰
+- **shadcn/ui** — 컴포넌트 라이브러리
+- **Framer Motion** — 애니메이션 라이브러리
 
 #### Backend & Database
-
-- **Supabase** - PostgreSQL 기반 백엔드 서비스
-- **Clerk** - 인증 및 사용자 관리
-- **Redis** - 캐싱 및 세션 관리
-- **Upstash** - 서버리스 Redis 서비스
+- **Supabase** — PostgreSQL 기반 백엔드 서비스
+- **Clerk** — 인증 및 사용자 관리 (MFA 지원)
+- **Upstash Redis** — 서버리스 분산 캐싱
 
 #### 한국 시장 통합
-
-- **Cal.com** - 스케줄링 및 예약 시스템
-- **HubSpot** - CRM 및 마케팅 자동화
-- **Channel Talk** - 고객 지원 채팅
-- **Kakao** - 카카오톡 비즈니스 API
-- **Toss Payments** - 한국 결제 시스템
+- **Cal.com** — 스케줄링 및 상담 예약
+- **HubSpot** — CRM 및 마케팅 자동화
+- **Beehiiv** — 뉴스레터 플랫폼 (매주 월/금 7:30 발송)
+- **Channel Talk** — 고객 지원 채팅
+- **Resend** — 이메일 발송 (`email.familyoffices.vip`)
 
 #### DevOps & Monitoring
+- **Vercel** — 배포 플랫폼 (Edge Network)
+- **Sentry** — 에러 추적 및 모니터링
+- **Playwright** — E2E 테스팅 (134 tests, 8 browser/device configs)
+- **Jest** — 단위 테스팅 (90%+ 금융 모듈 커버리지)
 
-- **Vercel** - 배포 플랫폼
-- **Sentry** - 에러 추적 및 모니터링
-- **Playwright** - E2E 테스팅 (Cypress 대체)
-- **Jest** - 단위 테스팅
+---
 
 ## 🛠️ 개발 환경 설정
 
 ### 필수 요구사항
-
 - Node.js 18.0.0 이상
 - npm 9.0.0 이상
-- Git
 
 ### 설치 및 실행
 
 ```bash
 # 저장소 클론
-git clone https://github.com/your-username/familyoffice-s.git
-cd familyoffice-s
+git clone https://github.com/jlinsights/FamilyOffice.git
+cd FamilyOffice
 
 # 의존성 설치
 npm install
 
 # 환경 변수 설정
 cp .env.example .env.local
-# .env.local 파일을 편집하여 필요한 환경 변수 설정
+# .env.local 편집
 
-# 개발 서버 실행
+# 개발 서버 실행 (HMR)
 npm run dev
 ```
 
-### 환경 변수 설정
+### ⚠️ 주의사항
+
+```bash
+# 개발 중 NEVER 실행 — HMR 깨짐
+npm run build  # ❌
+
+# 항상 이것 사용
+npm run dev    # ✅
+```
+
+### 환경 변수 (핵심)
 
 ```env
 # Supabase
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 
 # Clerk
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-CLERK_SECRET_KEY=your_clerk_secret_key
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+CLERK_WEBHOOK_SECRET=
 
-# Redis (Upstash)
-UPSTASH_REDIS_REST_URL=your_redis_url
-UPSTASH_REDIS_REST_TOKEN=your_redis_token
+# Admin
+ADMIN_EMAILS=admin@example.com
+NEXT_PUBLIC_ADMIN_EMAILS=admin@example.com
 
-# 외부 서비스
-NEXT_PUBLIC_CAL_COM_API_KEY=your_cal_com_api_key
-NEXT_PUBLIC_HUBSPOT_PORTAL_ID=your_hubspot_portal_id
-NEXT_PUBLIC_CHANNEL_IO_KEY=your_channel_io_key
+# Email
+RESEND_API_KEY=
+NEXT_PUBLIC_RESEND_FROM_EMAIL=noreply@email.familyoffices.vip
+
+# Redis
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+
+# Analytics
+NEXT_PUBLIC_GA_MEASUREMENT_ID=
 ```
 
-## 🔧 최근 해결된 기술적 이슈
+전체 목록은 `.env.example` 참조.
 
-### 1. Cypress → Playwright 마이그레이션 완료
-
-**2024년 12월** - E2E 테스팅 환경을 Cypress에서 Playwright로 완전 전환했습니다.
-
-#### ✅ 완료된 작업
-
-- **Cypress 디렉토리 완전 제거**
-- **package.json에서 Cypress 의존성 제거**
-- **Playwright 설정 완료** - 8개 브라우저/디바이스 지원
-- **56개 E2E 테스트** 정상 작동 확인
-
-#### 🚀 Playwright 장점
-
-- **크로스 브라우저**: Chromium, Firefox, WebKit
-- **모바일 테스트**: Chrome Mobile, Safari Mobile
-- **금융 플랫폼 특화**: financial-desktop, financial-mobile
-- **한국어 콘텐츠 테스트** 포함
-
-### 2. Node.js Deprecation 경고 해결
-
-**punycode deprecation 경고**를 완전히 해결했습니다.
-
-#### ✅ 해결 방법
-
-```json
-// package.json
-"dev": "NODE_OPTIONS='--no-deprecation' next dev --turbo",
-"build": "NODE_OPTIONS='--no-deprecation' next build"
-```
-
-#### 🔍 Punycode란?
-
-- 유니코드 도메인 이름을 ASCII로 변환하는 인코딩
-- 국제화된 도메인 이름(IDN) 지원
-- Node.js 16+에서 deprecated되었지만 기능상 문제 없음
-
-### 3. SSR (Server-Side Rendering) 호환성 문제 해결
-
-다음 패키지들의 SSR 호환성 문제를 해결했습니다:
-
-#### ✅ 해결된 패키지들
-
-1. **Cal.com embed-react** - 스크립트 기반 통합으로 변경
-2. **HubSpot** - 에러 처리 및 타임아웃 개선
-3. **Recharts** - 동적 import로 SSR 안전성 확보
-4. **Yahoo Finance** - SSR 안전한 데이터 페칭
-5. **NodeCache/ioredis** - 서버사이드 전용 초기화
-6. **Redis Cache** - 동적 import로 SSR 안전성 확보
-7. **WebSocket** - 클라이언트 전용 초기화
-8. **Rate Limit** - SSR 안전한 캐시 시스템
-9. **Cache** - 조건부 초기화로 SSR 호환성 확보
-10. **Load Testing** - 서버사이드 전용 WebSocket
-11. **API Optimization** - Upstash 패키지 SSR 안전성 확보
-12. **MFA Security** - otplib/qrcode SSR 안전성 확보
-
-#### 🔧 해결 방법
-
-```typescript
-// SSR 안전성을 위한 dynamic imports
-let PackageName: any = null;
-
-const initializePackage = () => {
-  if (typeof window === 'undefined' && !PackageName) {
-    try {
-      const packageModule = require('package-name');
-      PackageName = packageModule.default || packageModule;
-    } catch (error) {
-      console.error('패키지 초기화 실패:', error);
-      PackageName = null;
-    }
-  }
-};
-```
+---
 
 ## 📁 프로젝트 구조
 
 ```
 FamilyOffice/
 ├── app/                    # Next.js App Router
-├── components/            # React 컴포넌트
-├── lib/                   # 유틸리티 및 설정
-├── types/                 # TypeScript 타입 정의
-├── constants/             # 상수 정의
-├── hooks/                 # 커스텀 React 훅
-├── tests/                 # 테스트 파일
-├── docs/                  # 문서
-├── backend/               # 백엔드 서비스
-├── tests/                 # 테스트 파일 (Playwright E2E 포함)
-└── README.md              # 프로젝트 문서
+│   ├── api/               # API Routes (금융, 인증, 뉴스레터 등)
+│   ├── admin/             # Admin Dashboard (보호된 라우트)
+│   ├── blog/              # 블로그 시스템
+│   ├── portal/            # 사용자 포털 (인증 필요)
+│   ├── layout.tsx         # Root Layout + Providers
+│   └── globals.css        # 글로벌 스타일 + 브랜드 유틸리티
+├── components/
+│   ├── sections/          # 홈페이지 섹션 (Hero, Services, 등)
+│   ├── calendar/          # Cal.com 예약 위젯 (5종)
+│   ├── seminar/           # 세미나 섹션
+│   ├── forms/             # 폼 컴포넌트
+│   └── ui/                # shadcn/ui 컴포넌트
+├── constants/
+│   ├── brand.ts           # 브랜드 컬러 + 타이포그래피 시스템
+│   └── bento-services.ts  # 서비스 카드 데이터
+├── lib/                   # 유틸리티 (Supabase, Redis, Email 등)
+├── tailwind.config.ts     # 브랜드 토큰 (brand.navy, brand.gold 등)
+├── DESIGN.md              # 디자인 시스템 소스 오브 트루스
+├── AGENTS.md              # AI 에이전트 개발 가이드
+├── CLAUDE.md              # Claude Code 가이드
+└── README.md              # 이 파일
 ```
-
-## 🧪 테스팅
-
-### 테스트 환경
-
-- **단위 테스트**: Jest + React Testing Library
-- **E2E 테스트**: Playwright (Cypress 대체)
-- **통합 테스트**: Jest + Supabase 테스트 환경
-
-### 테스트 실행
-
-```bash
-# 단위 테스트 실행
-npm run test
-
-# E2E 테스트 실행 (Playwright)
-npm run test:e2e
-
-# Playwright UI 모드
-npm run test:e2e:ui
-
-# 특정 브라우저에서 테스트
-npm run test:e2e -- --project=chromium
-
-# 테스트 커버리지 확인
-npm run test:coverage
-```
-
-### E2E 테스트 프로젝트
-
-- **chromium**: 데스크톱 Chrome
-- **firefox**: 데스크톱 Firefox
-- **webkit**: 데스크톱 Safari
-- **mobile-chrome**: 모바일 Chrome
-- **mobile-safari**: 모바일 Safari
-- **financial-desktop**: 금융 플랫폼 데스크톱
-- **financial-mobile**: 금융 플랫폼 모바일
-
-## 🚀 배포
-
-### Vercel 배포
-
-```bash
-# Vercel CLI 설치
-npm i -g vercel
-
-# 배포
-vercel --prod
-```
-
-### 환경별 배포 설정
-
-- **개발**: `npm run dev`
-- **스테이징**: Vercel Preview Deployments
-- **프로덕션**: Vercel Production Deployment
-
-## 📊 성능 최적화
-
-### 구현된 최적화 기법
-
-- **SSR/SSG**: 서버사이드 렌더링 및 정적 생성
-- **이미지 최적화**: Next.js Image 컴포넌트 활용
-- **코드 스플리팅**: 동적 import를 통한 번들 최적화
-- **캐싱 전략**: Redis 기반 분산 캐싱
-- **CDN**: Vercel Edge Network 활용
-
-### 성능 목표
-
-- **First Contentful Paint**: < 1.5초
-- **Largest Contentful Paint**: < 2.5초
-- **Cumulative Layout Shift**: < 0.1
-- **API 응답 시간**: < 500ms (95th percentile)
-
-### 최근 빌드 성능 (2024년 12월)
-
-- **빌드 시간**: 14초
-- **페이지 수**: 37개 정적 생성
-- **번들 크기**: 메인 페이지 4.28 kB (First Load JS: 239 kB)
-- **최적화**: 코드 스플리팅, 이미지 최적화, CDN 활용
-
-## 🔒 보안
-
-### 구현된 보안 기능
-
-- **인증**: Clerk 기반 멀티팩터 인증
-- **권한 관리**: Role-based Access Control (RBAC)
-- **데이터 암호화**: AES-256 암호화
-- **Rate Limiting**: API 요청 제한
-- **CORS**: Cross-Origin Resource Sharing 설정
-- **CSP**: Content Security Policy
-
-## 🤝 기여 가이드
-
-### 개발 워크플로우
-
-1. 이슈 생성 또는 기존 이슈 확인
-2. 새로운 브랜치 생성 (`feature/issue-number`)
-3. 코드 작성 및 테스트
-4. 커밋 메시지 작성 (Conventional Commits)
-5. Pull Request 생성
-
-### 코딩 스타일
-
-- **TypeScript**: 엄격한 타입 체크
-- **ESLint**: 코드 품질 검사
-- **Prettier**: 코드 포맷팅
-- **Husky**: Git 훅을 통한 자동 검사
-
-## 📞 지원
-
-### 기술 지원
-
-- **이슈 트래커**: GitHub Issues
-- **문서**: `/docs` 디렉토리
-- **API 문서**: `/docs/technical/api`
-
-### 비즈니스 문의
-
-- **이메일**: contact@familyoffices.vip
-- **전화**: 02-1234-5678
-- **카카오톡**: @familyoffice-s
-
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
-## 🙏 감사의 말
-
-- **Next.js** 팀 - 훌륭한 React 프레임워크 제공
-- **Vercel** 팀 - 원활한 배포 환경 제공
-- **Supabase** 팀 - 강력한 백엔드 서비스 제공
-- **Clerk** 팀 - 안전한 인증 시스템 제공
 
 ---
 
-**FamilyOffice S** - 중소중견기업 법인 대표를 위한 프리미엄 자산관리 플랫폼
+## 🧪 테스팅
+
+```bash
+# 에이전트 품질 체크 (lint + typecheck)
+npm run agent:check
+
+# E2E 테스트 (Playwright)
+npm run test:e2e
+npm run test:e2e:ui       # UI 모드
+npm run test:e2e:debug    # 디버그 모드
+
+# 단위 테스트 (Jest)
+npm run test:unit
+npm run test:coverage
+
+# 특정 파일만
+npx playwright test tests/e2e/financial.spec.ts
+npx jest tests/unit/financial-calculations.test.ts
+```
+
+### Playwright 프로젝트 (8 configs)
+- `chromium` / `firefox` / `webkit` — 데스크톱 크로스브라우저
+- `mobile-chrome` / `mobile-safari` — 모바일
+- `financial-desktop` / `financial-mobile` — 금융 플랫폼 특화
+- Korean content 테스트 포함
+
+---
+
+## 📊 성능 (2026년 5월 기준)
+
+| 항목 | 수치 |
+|---|---|
+| 빌드 시간 | ~37초 |
+| 정적 페이지 | 139개 생성 |
+| TypeScript 체크 | ~42초 |
+| E2E 테스트 | 134개 |
+| LCP 목표 | < 2.5초 |
+| API 응답 | < 500ms (p95) |
+
+---
+
+## 🔒 보안
+
+- **인증**: Clerk 멀티팩터 인증 (MFA)
+- **권한**: RBAC + 환경변수 기반 관리자 설정
+- **Rate Limiting**: API 요청 제한 (middleware)
+- **암호화**: AES-256
+- **보안 헤더**: CSP, CORS (`next.config.mjs`)
+- **Webhook 검증**: Clerk 서명 검증
+
+---
+
+## 🚀 배포
+
+- **플랫폼**: Vercel (자동 배포)
+- **빌드**: `npm run vercel-build`
+- **도메인**: `familyoffices.vip`
+- **환경**: Vercel 대시보드에서 환경변수 관리
+- **모니터링**: Sentry 에러 추적
+
+```bash
+# PR 브랜치 → Vercel Preview 자동 배포
+# main 병합 → Vercel Production 자동 배포
+```
+
+---
+
+## 📞 지원
+
+| 채널 | 연락처 |
+|---|---|
+| 이메일 | contact@familyoffices.vip |
+| 뉴스레터 | newsletter.familyoffices.vip |
+| 이슈 | GitHub Issues |
+| 문서 | `/docs` 디렉토리 |
+
+---
+
+## 📄 라이선스
+
+MIT License — 자세한 내용은 [LICENSE](LICENSE) 파일 참조.
+
+---
+
+**FamilyOffice S** — 성공한 기업가를 위한 프리미엄 자산관리 파트너
+
+*"단순한 자산 증식을 넘어, 백년영속 가문의 유산을 설계합니다."*
 
 © 2025 FamilyOffice. All rights reserved.
