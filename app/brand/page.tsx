@@ -32,13 +32,13 @@ import type { BrandColorSystem, TypographyCategory } from '@/types/brand';
 const ExecutiveSummary = () => (
   <div className="mb-20">
     <div className="text-center mb-12">
-      <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-200 border-none px-4 py-1.5 text-sm">
-        Executive Overview
-      </Badge>
-      <h2 className="text-4xl font-black mb-4 tracking-tight text-slate-900 dark:text-white">
+      <div className="inline-flex items-center justify-center p-1.5 backdrop-blur-sm border rounded-full mb-6 shadow-sm" style={{ backgroundColor: 'rgba(10,25,47,0.04)', borderColor: 'rgba(212,175,55,0.25)' }}>
+        <span className="px-3 py-1 text-xs font-bold rounded-full" style={{ backgroundColor: 'rgba(212,175,55,0.12)', color: '#B8860B' }}>Executive Overview</span>
+      </div>
+      <h2 className="font-playfair font-semibold mb-4 tracking-tight" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', color: '#0A192F', letterSpacing: '-0.02em' }}>
         Brand Identity System
       </h2>
-      <p className="text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed">
+      <p className="text-xl max-w-2xl mx-auto font-light leading-relaxed font-korean" style={{ color: '#475569' }}>
         성공한 기업가를 위한 프리미엄 패밀리오피스, FamilyOffice S의
         <br />
         브랜드 철학과 핵심 가치를 시각화한 통합 가이드라인입니다.
@@ -47,77 +47,59 @@ const ExecutiveSummary = () => (
 
     <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-full md:h-[600px]">
       {/* Primary Value Card - Large */}
-      <Card className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-blue-600 to-indigo-700 text-white border-none overflow-hidden relative group">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all duration-700"></div>
+      <Card className="md:col-span-2 md:row-span-2 text-white border-none overflow-hidden relative group" style={{ background: 'linear-gradient(135deg, #0A192F 0%, #162C4E 60%, #1E293B 100%)' }}>
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl transition-all duration-700" style={{ backgroundColor: 'rgba(212,175,55,0.08)' }}></div>
+        <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}></div>
         <CardContent className="h-full flex flex-col justify-between p-8 relative z-10">
           <div>
-            <Shield className="h-12 w-12 text-blue-200 mb-6" />
-            <h3 className="text-3xl font-bold mb-4">신뢰와 전문성</h3>
-            <p className="text-lg text-blue-100/90 leading-relaxed font-light">
-              삼성생명 1000억+ 자산관리 실적을 기반으로 한<br />
+            <Shield className="h-12 w-12 mb-6" style={{ color: '#D4AF37' }} />
+            <h3 className="text-3xl font-playfair font-semibold mb-4">신뢰와 전문성</h3>
+            <p className="text-lg text-white/80 leading-relaxed font-light font-korean">
+              삼성생명 500억+ 자산관리 실적을 기반으로 한<br />
               검증된 금융 노하우와 압도적인 신뢰도.
             </p>
           </div>
           <div className="flex items-center gap-3 mt-8">
-            <Badge
-              variant="secondary"
-              className="bg-white/20 hover:bg-white/30 text-white border-0"
-            >
-              Trust
-            </Badge>
-            <Badge
-              variant="secondary"
-              className="bg-white/20 hover:bg-white/30 text-white border-0"
-            >
-              Expertise
-            </Badge>
+            <Badge variant="secondary" className="bg-white/10 hover:bg-white/20 text-white border-0" style={{ borderColor: 'rgba(212,175,55,0.3)' }}>Trust</Badge>
+            <Badge variant="secondary" className="bg-white/10 hover:bg-white/20 text-white border-0">Expertise</Badge>
+            <Badge variant="secondary" className="bg-white/10 hover:bg-white/20 text-white border-0">Legacy</Badge>
           </div>
         </CardContent>
       </Card>
 
-      {/* Secondary Value 1 */}
-      <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 p-6 hover:shadow-lg transition-shadow duration-300 group">
+      {/* Secondary Value 1 — Target-Centric */}
+      <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 p-6 hover:shadow-lg transition-shadow duration-300 group" style={{ borderTop: '2px solid #D4AF37' }}>
         <CardContent className="p-0 h-full flex flex-col justify-between">
-          <Target className="h-8 w-8 text-blue-600 mb-4 group-hover:scale-110 transition-transform duration-300" />
+          <Target className="h-8 w-8 mb-4 group-hover:scale-110 transition-transform duration-300" style={{ color: '#D4AF37' }} />
           <div>
-            <h3 className="text-xl font-bold mb-2">Target-Centric</h3>
-            <p className="text-sm text-muted-foreground">
-              중소중견기업 CEO 전용 맞춤 솔루션 설계
-            </p>
+            <h3 className="text-xl font-bold mb-2" style={{ color: '#0A192F' }}>Target-Centric</h3>
+            <p className="text-sm text-muted-foreground font-korean">중소중견기업 CEO 전용 맞춤 솔루션 설계</p>
           </div>
         </CardContent>
       </Card>
 
-      {/* Secondary Value 2 */}
-      <Card className="bg-slate-900 text-white border-slate-800 p-6 hover:shadow-lg transition-shadow duration-300 group">
+      {/* Secondary Value 2 — Premium */}
+      <Card className="text-white p-6 hover:shadow-lg transition-shadow duration-300 group border-none" style={{ backgroundColor: '#0A192F', borderTop: '2px solid #D4AF37' }}>
         <CardContent className="p-0 h-full flex flex-col justify-between">
-          <Sparkles className="h-8 w-8 text-amber-400 mb-4 group-hover:scale-110 transition-transform duration-300" />
+          <Sparkles className="h-8 w-8 mb-4 group-hover:scale-110 transition-transform duration-300" style={{ color: '#D4AF37' }} />
           <div>
             <h3 className="text-xl font-bold mb-2">Premium VVIP</h3>
-            <p className="text-sm text-slate-400">
-              최상위 고객을 위한 프라이빗 멤버십 서비스
-            </p>
+            <p className="text-sm text-white/60 font-korean">최상위 고객을 위한 프라이빗 멤버십 서비스</p>
           </div>
         </CardContent>
       </Card>
 
-      {/* Secondary Value 3 */}
-      <Card className="md:col-span-2 bg-gradient-to-r from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 border-slate-200 dark:border-slate-700 p-8 hover:shadow-lg transition-shadow duration-300">
+      {/* Secondary Value 3 — Growth & Legacy */}
+      <Card className="md:col-span-2 p-8 hover:shadow-lg transition-shadow duration-300 border" style={{ background: 'linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%)', borderColor: 'rgba(212,175,55,0.2)', borderTop: '2px solid #D4AF37' }}>
         <CardContent className="p-0 flex items-center justify-between h-full">
           <div>
-            <TrendingUp className="h-8 w-8 text-green-600 mb-4" />
-            <h3 className="text-2xl font-bold mb-2 text-slate-900 dark:text-white">
-              Growth & Legacy
-            </h3>
-            <p className="text-muted-foreground">
-              백년영속 가업승계와 안정적인 자산증식 지원
-            </p>
+            <TrendingUp className="h-8 w-8 mb-4" style={{ color: '#D4AF37' }} />
+            <h3 className="text-2xl font-playfair font-semibold mb-2" style={{ color: '#0A192F' }}>Growth &amp; Legacy</h3>
+            <p className="text-muted-foreground font-korean">백년영속 가업승계와 안정적인 자산증식 지원</p>
           </div>
           <div className="hidden md:block">
-            <div className="w-24 h-24 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center">
-              <span className="text-2xl font-black text-green-600 dark:text-green-400">
-                ∞
-              </span>
+            <div className="w-24 h-24 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(212,175,55,0.1)', border: '2px solid rgba(212,175,55,0.3)' }}>
+              <span className="text-2xl font-black" style={{ color: '#D4AF37' }}>∞</span>
             </div>
           </div>
         </CardContent>
@@ -182,11 +164,9 @@ const BrandIdentity = () => (
         </div>
         <div className="space-y-6">
           <div>
-            <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">
-              Tagline
-            </p>
-            <p className="text-2xl font-medium text-slate-900 dark:text-white">
-              &ldquo;Your Trusted Financial Partner for Life&rdquo;
+            <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Tagline</p>
+            <p className="text-2xl font-playfair font-medium" style={{ color: '#0A192F' }}>
+              &ldquo;단순한 자산 증식을 넘어,<br />백년영속 가문의 유산을 설계합니다.&rdquo;
             </p>
           </div>
 
@@ -198,30 +178,24 @@ const BrandIdentity = () => (
             </p>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <Check className="h-5 w-5 text-blue-600 mt-0.5" />
-                <p className="text-slate-700 dark:text-slate-300">
-                  <strong className="text-slate-900 dark:text-white">
-                    백년영속:
-                  </strong>{' '}
+                <Check className="h-5 w-5 mt-0.5" style={{ color: '#D4AF37' }} />
+                <p className="text-slate-700 dark:text-slate-300 font-korean">
+                  <strong style={{ color: '#0A192F' }}>백년영속 (百年永續):</strong>{' '}
                   대를 이어갈 지속가능한 가치 창출
                 </p>
               </div>
               <div className="flex items-start gap-3">
-                <Check className="h-5 w-5 text-blue-600 mt-0.5" />
-                <p className="text-slate-700 dark:text-slate-300">
-                  <strong className="text-slate-900 dark:text-white">
-                    초격차 전문성:
-                  </strong>{' '}
-                  검증된 금융 전문가 그룹
+                <Check className="h-5 w-5 mt-0.5" style={{ color: '#D4AF37' }} />
+                <p className="text-slate-700 dark:text-slate-300 font-korean">
+                  <strong style={{ color: '#0A192F' }}>초격차 전문성:</strong>{' '}
+                  검증된 금융 전문가 그룹의 데이터 기반 자문
                 </p>
               </div>
               <div className="flex items-start gap-3">
-                <Check className="h-5 w-5 text-blue-600 mt-0.5" />
-                <p className="text-slate-700 dark:text-slate-300">
-                  <strong className="text-slate-900 dark:text-white">
-                    완전한 맞춤화:
-                  </strong>{' '}
-                  오직 당신만을 위한 솔루션
+                <Check className="h-5 w-5 mt-0.5" style={{ color: '#D4AF37' }} />
+                <p className="text-slate-700 dark:text-slate-300 font-korean">
+                  <strong style={{ color: '#0A192F' }}>완전한 맞춤화:</strong>{' '}
+                  업종·규모별 CEO 전용 솔루션 설계
                 </p>
               </div>
             </div>
@@ -371,56 +345,56 @@ export default function BrandPage() {
       <Header />
       <main className="min-h-screen pt-20 bg-white dark:bg-slate-950">
         {/* Immersive Hero Section */}
-        <section className="relative h-[60vh] flex flex-col items-center justify-center overflow-hidden bg-slate-950 text-white">
-          {/* Background Gradients */}
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950"></div>
-          <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
+        <section
+          className="relative h-[60vh] flex flex-col items-center justify-center overflow-hidden text-white"
+          style={{ background: 'linear-gradient(135deg, #0A192F 0%, #162C4E 60%, #1E293B 100%)' }}
+        >
+          {/* Heritage Gold ambient glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full blur-3xl pointer-events-none" style={{ backgroundColor: 'rgba(212,175,55,0.07)' }}></div>
+          {/* Gold top accent line */}
+          <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.04]"></div>
 
           <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
             <FadeIn>
-              <Badge className="mb-6 bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 border-blue-500/30 px-4 py-2 text-sm backdrop-blur-sm">
-                Brand Guidelines v3.0
+              <Badge className="mb-6 px-4 py-2 text-sm backdrop-blur-sm" style={{ backgroundColor: 'rgba(212,175,55,0.15)', color: '#E5C158', borderColor: 'rgba(212,175,55,0.3)' }}>
+                Modern Legacy — Brand Guidelines v3.0
               </Badge>
             </FadeIn>
 
-            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
-              <TextReveal delay={0.2}>Design System &</TextReveal>
-              <span className="text-blue-500 block mt-2">
+            <h1 className="font-playfair font-semibold mb-6" style={{ fontSize: 'clamp(2.5rem, 7vw, 5rem)', lineHeight: '1.1', letterSpacing: '-0.02em' }}>
+              <TextReveal delay={0.2}>Design System &amp;</TextReveal>
+              <span className="block mt-2" style={{ color: '#D4AF37' }}>
                 <TextReveal delay={0.4}>Brand Identity</TextReveal>
               </span>
             </h1>
 
             <FadeIn delay={0.6} className="max-w-2xl mx-auto">
-              <p className="text-xl text-slate-400 mb-10 font-light leading-relaxed">
+              <p className="text-xl text-white/70 mb-10 font-light leading-relaxed font-korean">
                 FamilyOffice S의 브랜드 가치와 디자인 원칙을 정의합니다.
                 <br />
-                일관된 브랜드 경험을 위한 통합 가이드라인입니다.
+                일관된 프리미엄 브랜드 경험을 위한 통합 가이드라인입니다.
               </p>
             </FadeIn>
 
-            <FadeIn delay={0.8} className="flex gap-4 justify-center">
+            <FadeIn delay={0.8} className="flex gap-4 justify-center flex-wrap">
               <Button
                 size="lg"
-                className="bg-white text-slate-900 hover:bg-slate-100 font-bold px-8 h-14 rounded-full text-lg shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)]"
-                onClick={() =>
-                  toast.info('Brand Assets Package will be available in v3.1')
-                }
+                className="font-bold px-8 h-14 rounded-full text-lg"
+                style={{ backgroundColor: '#D4AF37', color: '#0A192F' }}
+                onClick={() => toast.info('Brand Assets Package will be available in v3.1')}
               >
                 <Download className="mr-2 h-5 w-5" /> Brand Assets
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-slate-700 text-white hover:bg-slate-800 hover:text-white px-8 h-14 rounded-full text-lg"
+                className="text-white hover:text-white px-8 h-14 rounded-full text-lg"
+                style={{ borderColor: 'rgba(212,175,55,0.4)', backgroundColor: 'transparent' }}
                 onClick={() => {
                   const element = document.getElementById('brand-overview');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    // Fallback if ID not found (though we should add it) or just toast
-                    toast.info('Quick View is activating...');
-                    setActiveTab('overview');
-                  }
+                  if (element) { element.scrollIntoView({ behavior: 'smooth' }); }
+                  else { setActiveTab('overview'); }
                 }}
               >
                 <Eye className="mr-2 h-5 w-5" /> Quick View
@@ -449,7 +423,7 @@ export default function BrandPage() {
                   <TabsTrigger
                     key={tab}
                     value={tab}
-                    className="h-full rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 px-1 text-base font-medium text-muted-foreground transition-none"
+                    className="h-full rounded-none border-b-2 border-transparent data-[state=active]:border-[#D4AF37] data-[state=active]:text-[#B8860B] dark:data-[state=active]:text-[#D4AF37] px-1 text-base font-medium text-muted-foreground transition-none"
                   >
                     {tab.charAt(0).toUpperCase() + tab.slice(1)}
                   </TabsTrigger>
@@ -460,7 +434,7 @@ export default function BrandPage() {
         </div>
 
         {/* Main Content Area */}
-        <section className="py-16 min-h-screen bg-slate-50 dark:bg-slate-950/50">
+        <section className="py-16 min-h-screen" style={{ backgroundColor: '#F8FAFC' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Tabs
               value={activeTab}
