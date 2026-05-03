@@ -181,11 +181,11 @@ export const Header = memo(function Header({
                 {item.submenu && item.submenu.length > 0 ? (
                   <>
                     <button
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1 py-1 flex items-center gap-1 h-9"
+                      className="text-base font-medium text-white/90 hover:text-[#D4AF37] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#0A192F] rounded-md px-1 py-1 flex items-center gap-1 h-9"
                       aria-label={`${item.label} 메뉴`}
                     >
                       {item.label}
-                      <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
+                      <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180 text-white/70" />
                     </button>
 
                     {/* 서브메뉴 드롭다운 - CSS group hover 사용 */}
@@ -194,7 +194,13 @@ export const Header = memo(function Header({
                         item.label === '솔루션' ? 'w-96' : 'w-80'
                       }`}
                     >
-                      <div className="bg-background/70 dark:bg-gray-900/70 backdrop-blur-md border border-border rounded-lg shadow-xl">
+                      <div
+                        className="backdrop-blur-md border rounded-lg shadow-xl"
+                        style={{
+                          backgroundColor: 'rgba(10, 25, 47, 0.96)',
+                          borderColor: 'rgba(212, 175, 55, 0.2)',
+                        }}
+                      >
                         <div
                           className={`p-2 ${
                             item.label === '솔루션'
@@ -212,18 +218,18 @@ export const Header = memo(function Header({
                                   ? 'noopener noreferrer'
                                   : undefined
                               }
-                              className="block p-3 rounded-md hover:bg-accent transition-colors group/submenu"
+                              className="block p-3 rounded-md hover:bg-white/10 transition-colors group/submenu"
                               aria-label={
                                 subItem.isExternal
                                   ? `${subItem.label} (새 창에서 열림)`
                                   : subItem.label
                               }
                             >
-                              <div className="font-medium text-foreground group-hover/submenu:text-primary transition-colors">
+                              <div className="font-medium text-white group-hover/submenu:text-[#D4AF37] transition-colors">
                                 {subItem.label}
                               </div>
                               {subItem.description && (
-                                <div className="text-sm text-muted-foreground mt-1 group-hover/submenu:text-muted-foreground/80 transition-colors">
+                                <div className="text-sm text-white/60 mt-1 group-hover/submenu:text-white/80 transition-colors">
                                   {subItem.description}
                                 </div>
                               )}
@@ -241,7 +247,7 @@ export const Header = memo(function Header({
                     className={
                       item.isPrimary
                         ? 'inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
-                        : 'text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2 flex items-center h-9'
+                        : 'text-base font-medium text-white/90 hover:text-[#D4AF37] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#0A192F] rounded-md px-3 py-2 flex items-center h-9'
                     }
                     aria-label={
                       item.isExternal
@@ -304,7 +310,11 @@ export const Header = memo(function Header({
       {isMobileMenuOpen && (
         <div
           id="mobile-menu"
-          className="lg:hidden bg-background/95 backdrop-blur-sm border-t border-border"
+          className="lg:hidden backdrop-blur-sm border-t"
+          style={{
+            backgroundColor: 'rgba(10, 25, 47, 0.97)',
+            borderColor: 'rgba(212, 175, 55, 0.2)',
+          }}
           role="navigation"
           aria-label="모바일 메뉴"
         >
@@ -317,13 +327,13 @@ export const Header = memo(function Header({
                   <div className="space-y-1">
                     <button
                       onClick={() => toggleMobileSubmenu(item.label)}
-                      className="w-full flex items-center justify-center px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                      className="w-full flex items-center justify-center px-3 py-2 text-base font-medium text-white/90 hover:text-[#D4AF37] hover:bg-white/10 rounded-md transition-colors"
                       aria-expanded={mobileSubmenus[item.label] || false}
                       aria-label={`${item.label} 메뉴 ${mobileSubmenus[item.label] ? '접기' : '펼치기'}`}
                     >
                       {item.label}
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
+                        className={`h-4 w-4 transition-transform duration-200 text-white/70 ${
                           mobileSubmenus[item.label] ? 'rotate-180' : ''
                         }`}
                       />
@@ -340,7 +350,7 @@ export const Header = memo(function Header({
                                 ? 'noopener noreferrer'
                                 : undefined
                             }
-                            className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors text-center"
+                            className="block px-3 py-2 text-sm text-white/60 hover:text-white hover:bg-white/10 rounded-md transition-colors text-center"
                             onClick={handleMobileLinkClick}
                             aria-label={
                               subItem.isExternal
@@ -359,7 +369,7 @@ export const Header = memo(function Header({
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors text-center"
+                    className="block px-3 py-2 text-base font-medium text-white/90 hover:text-[#D4AF37] hover:bg-white/10 rounded-md transition-colors text-center"
                     onClick={handleMobileLinkClick}
                     aria-label={
                       item.isExternal

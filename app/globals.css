@@ -849,6 +849,8 @@ iframe[src*='vercel.com/toolbar'] {
       'kern' 1;
     /* DESIGN.md §2 — line-height 1.65 (Korean density 대응) */
     line-height: 1.65;
+    /* font-optical-sizing: CSS로 처리 — layout.tsx 인라인 style 제거로 hydration mismatch 방지 */
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

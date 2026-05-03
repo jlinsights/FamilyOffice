@@ -46,7 +46,6 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.variable} ${playfair.variable} font-body antialiased`}
-        style={{ fontOpticalSizing: 'auto' }}
       >
         <AppShell>{children}</AppShell>
       </body>
