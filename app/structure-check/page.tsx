@@ -1,4 +1,6 @@
+import { auth } from '@clerk/nextjs/server';
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { StructureCheckContentSection } from '@/components/sections/structure-check-content';
@@ -43,7 +45,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function StructureCheckPage() {
+export default async function StructureCheckPage() {
+  // 유료 상담 결제 보호 — Clerk 로그인 필수
+  const { userId } = await auth();
+  if (!userId) {
+    redirect('/sign-in?redirect_url=/structure-check');
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <OrganizationStructuredData />

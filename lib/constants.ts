@@ -18,7 +18,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/seminar', label: '세미나' },
   { href: '/recruit', label: '채용' },
   // { href: '/stories', label: '케이스/스토리' }, // [미완성] 추후 오픈
-  { href: '/apply/membership-intake', label: '상담신청', isPrimary: true },
+  { href: '/structure-check', label: '상담신청', isPrimary: true },
 ];
 
 // 위 4개 메뉴는 미완성 상태이므로 주석 처리하여 숨깁니다.
@@ -38,6 +38,9 @@ export const APP_CONFIG = {
     businessHours: '평일 09:00 - 18:00',
   },
 } as const;
+
+// 상담 결제 (1회성, VAT 포함)
+export const CONSULTATION_FEE = 330_000 as const;
 
 // 애니메이션 설정
 export const ANIMATION_CONFIG = {

@@ -57,6 +57,16 @@ export const serverEnvSchema = z.object({
 
   // Resend Email - 추가됨
   RESEND_API_KEY: z.string().optional(),
+
+  // Toss Payments - 상담 1회성 결제
+  TOSS_SECRET_KEY: z
+    .string()
+    .regex(
+      /^(test|live)_sk_/,
+      'TOSS_SECRET_KEY must start with test_sk_ or live_sk_'
+    )
+    .optional(),
+  TOSS_WEBHOOK_SECRET: z.string().optional(),
 });
 
 // 클라이언트 전용 환경변수 스키마 - 보안 강화
@@ -89,6 +99,15 @@ export const clientEnvSchema = z.object({
 
   // Resend Email Domain - 추가됨
   NEXT_PUBLIC_RESEND_FROM_EMAIL: z.string().email().optional(),
+
+  // Toss Payments - 클라이언트 키
+  NEXT_PUBLIC_TOSS_CLIENT_KEY: z
+    .string()
+    .regex(
+      /^(test|live)_ck_/,
+      'NEXT_PUBLIC_TOSS_CLIENT_KEY must start with test_ck_ or live_ck_'
+    )
+    .optional(),
 });
 
 // 환경변수 파싱 함수 - 검증 강화
@@ -143,6 +162,7 @@ export function createEnv() {
     NEXT_PUBLIC_KAKAO_PIXEL_ID: process.env.NEXT_PUBLIC_KAKAO_PIXEL_ID,
     NEXT_PUBLIC_HUBSPOT_PORTAL_ID: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID,
     NEXT_PUBLIC_RESEND_FROM_EMAIL: process.env.NEXT_PUBLIC_RESEND_FROM_EMAIL,
+    NEXT_PUBLIC_TOSS_CLIENT_KEY: process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY,
   };
 
   // 서버 환경변수 수집 (서버에서만)
@@ -163,6 +183,8 @@ export function createEnv() {
         HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
         HUBSPOT_PRIVATE_ACCESS_TOKEN: process.env.HUBSPOT_PRIVATE_ACCESS_TOKEN,
         RESEND_API_KEY: process.env.RESEND_API_KEY,
+        TOSS_SECRET_KEY: process.env.TOSS_SECRET_KEY,
+        TOSS_WEBHOOK_SECRET: process.env.TOSS_WEBHOOK_SECRET,
       }
     : {};
 

@@ -96,6 +96,7 @@
     "@sentry/profiling-node": "^10.22.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.5",
+    "@tosspayments/tosspayments-sdk": "^2.7.0",
     "@types/qrcode": "^1.5.5",
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.35.1",
