@@ -65,13 +65,13 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 w-full justify-center"
         >
           <CalComPopup
-            buttonText="무료 상담 신청하기"
+            buttonText="상담 신청하기"
             variant="default"
             size="lg"
             className="w-full sm:w-auto h-14 px-8 text-lg font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] hover:shadow-[0_0_60px_-15px_rgba(37,99,235,0.6)] hover:scale-105 transition-all duration-300"
             trigger={
               <>
-                <span className="mr-2">무료 상담 신청하기</span>
+                <span className="mr-2">상담 신청하기</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </>
             }

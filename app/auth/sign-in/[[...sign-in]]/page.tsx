@@ -58,7 +58,7 @@ export default function SignInPage() {
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                 성공한 CEO의 삶을 완벽하게 케어하는
                 <br className="hidden md:block" />
-                <span className="font-semibold">통합 프리미엄 솔루션</span>을
+                <span className="font-semibold">통합 자산관리 솔루션</span>을
                 경험하세요.
               </p>
             </div>
