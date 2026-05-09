@@ -146,16 +146,25 @@ export default function SuccessfulCEOAssetManagementPage() {
                   </p>
                   <h4>왜 중요한가요?</h4>
                   <ul>
-                    <li><strong>세무 리스크 감소</strong>: 가지급금 발생 시 인정이자 과세 회피</li>
-                    <li><strong>법적 책임 분리</strong>: 기업 부채로부터 개인 자산 보호</li>
-                    <li><strong>투명성 확보</strong>: 향후 IPO, M&A 시 유리</li>
+                    <li>
+                      <strong>세무 리스크 감소</strong>: 가지급금 발생 시
+                      인정이자 과세 회피
+                    </li>
+                    <li>
+                      <strong>법적 책임 분리</strong>: 기업 부채로부터 개인 자산
+                      보호
+                    </li>
+                    <li>
+                      <strong>투명성 확보</strong>: 향후 IPO, M&A 시 유리
+                    </li>
                   </ul>
                   <h4>실전 방법</h4>
                   <ul className="space-y-2">
                     <li>
                       <strong>법인 계좌와 개인 계좌 100% 분리</strong>
                       <p className="text-sm text-muted-foreground mt-1">
-                        사업 목적 지출은 법인 계좌에서만, 개인 소비는 급여 계좌에서만 처리
+                        사업 목적 지출은 법인 계좌에서만, 개인 소비는 급여
+                        계좌에서만 처리
                       </p>
                     </li>
                     <li>
@@ -210,9 +219,12 @@ export default function SuccessfulCEOAssetManagementPage() {
                   <h4>핵심 절세 전략</h4>
                   <div className="grid md:grid-cols-2 gap-4 not-prose">
                     <div className="border rounded-lg p-4">
-                      <h5 className="font-semibold mb-2">급여 vs 배당 최적 비율</h5>
+                      <h5 className="font-semibold mb-2">
+                        급여 vs 배당 최적 비율
+                      </h5>
                       <p className="text-sm text-muted-foreground">
-                        소득세율과 배당소득세율을 비교하여 세후 수령액이 최대가 되는 비율 선택
+                        소득세율과 배당소득세율을 비교하여 세후 수령액이 최대가
+                        되는 비율 선택
                       </p>
                     </div>
                     <div className="border rounded-lg p-4">
@@ -250,9 +262,12 @@ export default function SuccessfulCEOAssetManagementPage() {
                 <p className="text-muted-foreground mb-4">
                   나머지 5가지 전략은 전문가 상담을 통해 맞춤형으로 안내드립니다
                 </p>
-                <Link href="/contact" className={buttonVariants({ size: 'lg' })}>
+                <Link
+                  href="/contact"
+                  className={buttonVariants({ size: 'lg' })}
+                >
                   <Award className="mr-2 h-5 w-5" />
-                  CEO 자산관리 무료 상담 신청
+                  CEO 자산관리 상담 신청
                 </Link>
               </div>
             </div>
@@ -303,13 +318,19 @@ export default function SuccessfulCEOAssetManagementPage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/wealth-consulting"
-                    className={buttonVariants({ size: 'lg', variant: 'secondary' })}
+                    className={buttonVariants({
+                      size: 'lg',
+                      variant: 'secondary',
+                    })}
                   >
                     자산관리 서비스 보기
                   </Link>
                   <Link
                     href="/calculators/inheritance-tax"
-                    className={buttonVariants({ size: 'lg', variant: 'outline' })}
+                    className={buttonVariants({
+                      size: 'lg',
+                      variant: 'outline',
+                    })}
                   >
                     <Calculator className="mr-2 h-5 w-5" />
                     상속세 무료 계산
@@ -321,7 +342,7 @@ export default function SuccessfulCEOAssetManagementPage() {
                       'bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20'
                     )}
                   >
-                    무료 상담 신청
+                    상담 신청
                   </Link>
                 </div>
               </CardContent>
@@ -347,7 +368,10 @@ export default function SuccessfulCEOAssetManagementPage() {
                     </p>
                     <Link
                       href={article.href}
-                      className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                      className={buttonVariants({
+                        variant: 'outline',
+                        size: 'sm',
+                      })}
                     >
                       {article.linkText}
                       {index === 1 && <ArrowRight className="ml-2 h-4 w-4" />}
@@ -362,7 +386,9 @@ export default function SuccessfulCEOAssetManagementPage() {
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqStructuredData),
+          }}
         />
       </main>
       <Footer />

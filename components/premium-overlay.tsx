@@ -31,7 +31,7 @@ export function PremiumOverlay() {
 
             {/* Heading */}
             <h2 className="text-3xl font-bold text-center text-slate-900 dark:text-white mb-3">
-              프리미엄 콘텐츠
+              회원 전용 콘텐츠
             </h2>
 
             {/* Subtitle */}
@@ -50,7 +50,7 @@ export function PremiumOverlay() {
                 <li className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
                   <span className="text-sm text-slate-700 dark:text-slate-300">
-                    프리미엄 프로그램 전체 접근
+                    회원 전용 프로그램 전체 접근
                   </span>
                 </li>
                 <li className="flex items-start gap-3">

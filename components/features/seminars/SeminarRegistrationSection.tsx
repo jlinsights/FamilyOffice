@@ -70,7 +70,7 @@ export default function SeminarRegistrationSection() {
     },
     {
       icon: Star,
-      title: '프리미엄 자료',
+      title: '회원 전용 자료',
       description: '세미나 영상과 추가 자료를 무제한으로 이용하세요',
     },
   ];

@@ -46,7 +46,7 @@ export function SeminarHeroSection() {
 
         {/* 메인 헤드라인 */}
         <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-primary whitespace-pre-line animate-slide-up">
-          전문가와 함께하는{'\n'}프리미엄 세미나
+          전문가와 함께하는{'\n'}회원 전용 세미나
         </h1>
 
         {/* 서브 헤드라인 */}

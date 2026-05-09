@@ -94,8 +94,8 @@ export function SpecialProgramsSection({
             VIP & CEO 특화 프로그램
           </Badge>
           <h2 className="mb-4 mt-4 font-bold text-3xl md:text-4xl text-balance animate-slide-up">
-            <span className="text-primary">VIP & CEO 고객님만을 위한</span>{' '}
-            프리미엄 프로그램
+            <span className="text-primary">VIP & CEO 고객님만을 위한</span> 회원
+            전용 프로그램
           </h2>
           <p
             className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto text-balance animate-slide-up leading-relaxed"
