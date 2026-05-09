@@ -89,7 +89,7 @@ export function VVIPBenefitsSection() {
           >
             성공한 CEO의 삶을 완벽하게 케어하는{' '}
             <span className="text-foreground font-semibold">
-              통합 프리미엄 솔루션
+              통합 자산관리 솔루션
             </span>
             을 경험하세요
           </p>

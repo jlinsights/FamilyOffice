@@ -1,11 +1,12 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckCircle2, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import * as z from 'zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { TossPaymentWidget } from '@/components/payment/toss-payment-widget';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -14,6 +15,15 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import { useConversionTracking } from '@/hooks/use-conversion-tracking';
+
+interface PaymentParams {
+  orderId: string;
+  amount: number;
+  customerKey: string;
+  orderName: string;
+  customerEmail: string;
+  customerName: string;
+}
 
 // Form validation schema
 const structureCheckSchema = z.object({
@@ -57,7 +67,9 @@ type StructureCheckFormData = z.infer<typeof structureCheckSchema>;
 
 export function StructureCheckRequestForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [paymentParams, setPaymentParams] = useState<PaymentParams | null>(
+    null
+  );
   const { trackEvent } = useConversionTracking();
 
   const {
@@ -77,7 +89,7 @@ export function StructureCheckRequestForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/structure-check', {
+      const response = await fetch('/api/payments/structure-check/request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,28 +97,35 @@ export function StructureCheckRequestForm() {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error('요청 전송에 실패했습니다');
-      }
-
       const result = await response.json();
+
+      if (!response.ok || !result?.success) {
+        const message =
+          response.status === 401
+            ? '로그인이 만료되었습니다. 다시 로그인해주세요.'
+            : (result?.error ?? '요청 전송에 실패했습니다');
+        throw new Error(message);
+      }
 
       // Track conversion event
       trackEvent('structure_check_submit', {
-        qualification_score: result?.qualificationScore,
         has_company: !!data.company,
         deadline: data.q5_deadline,
       });
 
-      setIsSuccess(true);
-      toast.success('구조 점검 요청이 접수되었습니다', {
-        description: '검토 후 개별적으로 연락드릴 예정입니다.',
+      setPaymentParams({
+        orderId: result.orderId,
+        amount: result.amount,
+        customerKey: result.customerKey,
+        orderName: result.orderName,
+        customerEmail: data.email,
+        customerName: data.name,
       });
-
-      // 성공 후 폼 리셋은 하지 않음 (사용자가 입력한 내용 확인 가능)
     } catch (error) {
+      const message =
+        error instanceof Error ? error.message : '요청 전송에 실패했습니다';
       console.error('Form submission error:', error);
-      toast.error('요청 전송에 실패했습니다', {
+      toast.error(message, {
         description: '잠시 후 다시 시도해주세요.',
       });
     } finally {
@@ -114,33 +133,29 @@ export function StructureCheckRequestForm() {
     }
   };
 
-  if (isSuccess) {
+  if (paymentParams) {
+    const clientKey = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY ?? '';
     return (
-      <Card className="border-green-200 bg-green-50/50">
-        <CardContent className="p-12 text-center">
-          <CheckCircle2 className="h-16 w-16 text-green-600 mx-auto mb-6" />
-          <h3 className="text-2xl font-bold mb-4 text-green-900">
-            요청 내용을 확인했습니다
-          </h3>
-          <div className="max-w-2xl mx-auto space-y-4 text-left text-green-800">
-            <p>
-              구조 점검은 문제를 해결하기 위한 자리가 아니라, 지금 무엇을
-              결정해야 하는지, 아직 미뤄도 되는 문제는 무엇인지를 정리하는
-              과정입니다.
-            </p>
-            <p>
-              제출해 주신 내용을 바탕으로, 구조 점검이 필요한 경우에 한해
-              개별적으로 연락드릴 예정입니다.
-            </p>
-            <p>
-              모든 요청이 진행되는 것은 아니며, 추가 정보가 필요한 경우 별도로
-              안내드릴 수 있습니다.
-            </p>
-            <p className="pt-4 font-semibold">
-              결정을 서두르실 필요는 없습니다. 다만, 판단의 기준이 정리되면
-              이후의 선택은 훨씬 단순해집니다.
+      <Card>
+        <CardContent className="p-8 md:p-12 space-y-6">
+          <div className="space-y-2">
+            <h3 className="text-2xl font-bold">결제 진행</h3>
+            <p className="text-sm text-muted-foreground">
+              구조 점검 상담 1회 — 330,000원 (VAT 포함). 결제 완료 시 신청이
+              확정되며, 검토 후 개별 안내드립니다.
             </p>
           </div>
+          <TossPaymentWidget
+            clientKey={clientKey}
+            customerKey={paymentParams.customerKey}
+            orderId={paymentParams.orderId}
+            orderName={paymentParams.orderName}
+            amount={paymentParams.amount}
+            customerEmail={paymentParams.customerEmail}
+            customerName={paymentParams.customerName}
+            successUrl={`${typeof window !== 'undefined' ? window.location.origin : ''}/structure-check/payment/success`}
+            failUrl={`${typeof window !== 'undefined' ? window.location.origin : ''}/structure-check/payment/fail`}
+          />
         </CardContent>
       </Card>
     );

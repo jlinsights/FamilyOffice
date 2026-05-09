@@ -545,7 +545,7 @@ export default async function BlogPostPage({
               성공한 기업가의 인사이트를 받아보세요
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-xl mx-auto">
-              1,200+ 명의 CEO가 선택한 프리미엄 뉴스레터.
+              1,200+ 명의 CEO가 선택한 회원 전용 뉴스레터.
               <br className="hidden sm:block" />
               기업승계, 자산관리, 세무 전략 등 깊이 있는 정보를 전해드립니다.
             </p>

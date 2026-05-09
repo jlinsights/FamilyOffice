@@ -61,7 +61,8 @@ export default function SignUpPage() {
               </h1>
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                 중소중견기업 법인대표님을 위한 전문적인 자산관리와 가업승계
-                솔루션을 제공합니다. 지금 가입하고 프리미엄 서비스를 경험하세요.
+                솔루션을 제공합니다. 지금 가입하고 전문 자문 서비스를
+                경험하세요.
               </p>
             </div>
 

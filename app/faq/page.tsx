@@ -387,7 +387,7 @@ export default function FAQPage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">세미나 신청</CardTitle>
-                  <CardDescription>CEO 대상 프리미엄 세미나</CardDescription>
+                  <CardDescription>CEO 대상 회원 전용 세미나</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link

@@ -134,10 +134,9 @@ const familyOfficeServices = {
 const uniqueValuePropositions = [
   {
     icon: Eye,
-    title: '독점적 정보 접근',
+    title: '회원 전용 정보 접근',
     subtitle: 'Exclusive Intelligence',
-    description:
-      '일반인이 접근할 수 없는 프리미엄 투자 기회와 시장 정보를 독점 제공',
+    description: '회원 전용 투자 기회와 시장 정보를 선별 제공',
     details: [
       '글로벌 프라이빗 마켓 정보',
       'UHNW 네트워크 인사이트',
@@ -146,9 +145,9 @@ const uniqueValuePropositions = [
   },
   {
     icon: Lock,
-    title: '최고 수준의 보안',
+    title: '기관급 보안 체계',
     subtitle: 'Ultimate Privacy',
-    description: '완벽한 프라이버시 보호와 최고 수준의 정보 보안 시스템',
+    description: '완벽한 프라이버시 보호와 기관급 정보 보안 시스템',
     details: ['익명성 보장 시스템', '암호화된 통신', '기밀 유지 협약'],
   },
   {
@@ -167,7 +166,7 @@ const uniqueValuePropositions = [
   },
   {
     icon: Zap,
-    title: '혁신적 솔루션',
+    title: '구조적 솔루션',
     subtitle: 'Innovation Edge',
     description: '최신 핀테크와 AI를 활용한 차세대 자산관리 솔루션',
     details: [
@@ -235,7 +234,7 @@ const serviceTiers = [
     features: [
       '가문 전담 패밀리오피스 설립',
       'CIO/CFO급 전담 전문가 배정',
-      '글로벌 대체투자 독점 기회',
+      '글로벌 대체투자 기회',
       '차세대 글로벌 리더십 프로그램',
       '24/7 프라이빗 컨시어지',
     ],
@@ -269,7 +268,7 @@ const serviceTiers = [
       '시니어 전문가 전담 배정',
       '투자/세무/법률 원스톱 자문',
       '정기 자산 리밸런싱',
-      '프리미엄 세미나 초청',
+      '회원 전용 세미나 초청',
     ],
   },
 ];
@@ -317,7 +316,7 @@ const FamilyOfficeCenterPage = () => {
               className="text-xl md:text-2xl lg:text-3xl font-light text-card-foreground/90 mb-6 max-w-4xl mx-auto leading-relaxed animate-slide-up"
               style={{ animationDelay: '200ms' }}
             >
-              최고 자산가와 성공한 기업가를 위한
+              고액자산가와 성공한 기업가를 위한
               <span className="block mt-2 font-medium text-premium-navy dark:text-blue-300">
                 차별화된 전용 솔루션
               </span>
@@ -722,7 +721,7 @@ const FamilyOfficeCenterPage = () => {
                 className="text-xl text-card-foreground/80 max-w-3xl mx-auto font-light animate-slide-up"
                 style={{ animationDelay: '200ms' }}
               >
-                최고 자산가들의 실제 성공 스토리
+                고액자산가들의 실제 성공 스토리
               </p>
             </div>
 
@@ -813,7 +812,7 @@ const FamilyOfficeCenterPage = () => {
             </h3>
 
             <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-              최고 자산가와 성공한 기업가만을 위한 독점적 패밀리오피스 서비스
+              고액자산가와 성공한 기업가를 위한 회원 전용 패밀리오피스 서비스
               <span className="block mt-2">
                 세대를 관통하는 가문의 유산을 함께 구축합니다
               </span>

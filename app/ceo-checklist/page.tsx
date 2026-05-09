@@ -846,7 +846,7 @@ const CEOChecklistPage = () => {
                         추천드립니다.
                       </p>
                       <Button variant="outline" size="sm" className="w-full">
-                        프리미엄 자문 서비스
+                        맞춤 자문 서비스
                         <ChevronRight className="h-4 w-4 ml-1" />
                       </Button>
                     </CardContent>

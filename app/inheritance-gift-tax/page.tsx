@@ -1073,12 +1073,12 @@ const InheritanceGiftTaxPage = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <CalComPopup
                       className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors"
-                      buttonText="무료 세무 상담"
+                      buttonText="세무 상담"
                       eventType="consultation"
                       trigger={
                         <div className="inline-flex items-center">
                           <Receipt className="h-5 w-5 mr-2" />
-                          무료 세무 상담
+                          세무 상담
                         </div>
                       }
                     />
