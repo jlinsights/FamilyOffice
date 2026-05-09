@@ -1,1 +1,1 @@
-📝 copy: round-3 자극형 어휘 정리 19곳 (multimedia/seminars/dialog/auth/SmartCTA/checklist/blog) — 5원칙 + 결제 정책 일관성
+🔧 chore: .gitignore 에 .gstack/ 추가 (gstack/browse skill 부산물 추적 방지)
