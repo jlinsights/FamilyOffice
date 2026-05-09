@@ -856,7 +856,7 @@ export default function InheritanceTaxCalculatorPage() {
                         }}
                       >
                         <Shield className="w-6 h-6 mr-2" />
-                        전문가 맞춤 상속세 최적화 상담 (무료)
+                        전문가 맞춤 상속세 최적화 상담
                       </Button>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

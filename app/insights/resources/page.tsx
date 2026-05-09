@@ -168,7 +168,7 @@ export default function ResourcesPage() {
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
                 투자 전략, 시장 분석, 세무 가이드 등 FamilyOffice S가 엄선한
                 <br />
-                프리미엄 자료를 다운로드하여 실무에 활용하세요.
+                회원 전용 자료를 다운로드하여 실무에 활용하세요.
               </p>
 
               <div className="max-w-xl mx-auto flex gap-2">
@@ -344,7 +344,7 @@ export default function ResourcesPage() {
                   <Card className="bg-card">
                     <CardContent className="p-6">
                       <h3 className="text-lg font-semibold text-foreground mb-3">
-                        프리미엄 자료
+                        회원 전용 자료
                       </h3>
                       <p className="text-card-foreground/80 mb-4">
                         FamilyOffice S 회원 전용 자료입니다. 심층 분석 리포트,
@@ -423,7 +423,7 @@ export default function ResourcesPage() {
               더 많은 자료가 필요하신가요?
             </h2>
             <p className="text-xl text-primary-foreground/90 mb-8">
-              FamilyOffice S 회원이 되시면 모든 프리미엄 자료를 무제한으로
+              FamilyOffice S 회원이 되시면 모든 회원 전용 자료를 무제한으로
               이용하실 수 있습니다
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

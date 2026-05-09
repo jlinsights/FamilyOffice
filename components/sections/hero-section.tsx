@@ -53,7 +53,7 @@ export function HeroSection() {
         {/* Subheadline */}
         <FadeIn delay={0.8} className="max-w-2xl mx-auto mb-12">
           <p className="text-xl md:text-2xl text-slate-300 font-light leading-relaxed">
-            성공한 기업가를 위한 프리미엄 자산관리 파트너.
+            성공한 기업가를 위한 자산관리 파트너.
             <br className="hidden md:block" />
             단순한 자산 증식을 넘어, 백년영속 가문의 유산을 설계합니다.
           </p>

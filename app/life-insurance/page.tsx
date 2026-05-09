@@ -174,7 +174,7 @@ const LifeInsurancePage = () => {
             <div className="max-w-4xl mx-auto text-center">
               <Badge variant="outline" className="mb-6" size="lg">
                 <Crown className="h-4 w-4 mr-2" />
-                CEO 전용 프리미엄 종신보험
+                CEO 전용 맞춤 종신보험
               </Badge>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">

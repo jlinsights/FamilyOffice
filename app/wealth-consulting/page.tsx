@@ -245,7 +245,7 @@ export default function WealthConsultingPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">VIP 전용 맞춤 서비스</h2>
               <p className="text-lg text-muted-foreground">
-                고액자산가의 특별한 요구에 맞춘 프리미엄 서비스
+                고액자산가의 특별한 요구에 맞춘 맞춤 서비스
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
@@ -359,7 +359,7 @@ export default function WealthConsultingPage() {
                     </div>
                     <div>
                       <CardTitle>VIP 전담 서비스</CardTitle>
-                      <CardDescription>1:1 프리미엄 지원</CardDescription>
+                      <CardDescription>1:1 전담 지원</CardDescription>
                     </div>
                   </div>
                 </CardHeader>
@@ -453,7 +453,7 @@ export default function WealthConsultingPage() {
               VIP만을 위한 특별한 자산관리 서비스
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              100억원 이상 자산가를 위한 1:1 맞춤형 프리미엄 서비스
+              100억원 이상 자산가를 위한 1:1 맞춤형 자문 서비스
               <br />
               전담 컨설턴트와 함께 더 나은 자산관리의 경험을 시작하세요
             </p>

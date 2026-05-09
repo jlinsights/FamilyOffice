@@ -39,7 +39,7 @@ const ExecutiveSummary = () => (
         Brand Identity System
       </h2>
       <p className="text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed">
-        성공한 기업가를 위한 프리미엄 패밀리오피스, FamilyOffice S의
+        성공한 기업가를 위한 패밀리오피스, FamilyOffice S의
         <br />
         브랜드 철학과 핵심 가치를 시각화한 통합 가이드라인입니다.
       </p>

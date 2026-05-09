@@ -853,7 +853,7 @@ export default function GiftTaxCalculatorPage() {
                     className="flex items-center gap-3 w-full justify-center"
                   >
                     <Gift className="w-6 h-6" />
-                    무료 증여세 최적화 상담 신청
+                    증여세 최적화 상담 신청
                     <span className="text-sm font-normal opacity-90">
                       (24시간 내 답변)
                     </span>

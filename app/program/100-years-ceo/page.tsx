@@ -25,7 +25,6 @@ import { Header } from '@/components/header';
 import { PremiumContentGuard } from '@/components/premium-content-guard';
 import { cn } from '@/lib/utils';
 
-
 function HeroSection() {
   return (
     <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
@@ -165,7 +164,7 @@ function ProgramOverviewSection() {
             </div>
             <div>
               <p className="text-muted-foreground">
-                서울 프리미엄 교육장 + 해외 벤치마킹
+                서울 전용 교육장 + 해외 벤치마킹
               </p>
             </div>
           </div>
@@ -285,7 +284,7 @@ function BenefitsSection() {
     },
     {
       icon: Handshake,
-      title: '프리미엄 네트워킹',
+      title: '동급 경영자 네트워킹',
       description: '동급 경영자들과의 지속적인 네트워크 구축 기회',
     },
     {
@@ -347,7 +346,7 @@ function CTASection() {
           지금 시작하세요
         </h2>
         <p className="text-xl mb-8 text-white/90">
-          매년 한정된 인원으로 진행되는 프리미엄 교육 프로그램입니다.
+          매년 한정된 인원으로 진행되는 교육 프로그램입니다.
           <br />
           차세대 경영자로서의 역량을 체계적으로 구축하세요.
         </p>

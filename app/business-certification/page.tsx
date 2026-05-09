@@ -100,7 +100,7 @@ export default function BusinessCertificationPage() {
       ],
       duration: '3년',
       color: 'blue',
-      badge: '최고 인기',
+      badge: '추천',
       agency: '중소벤처기업부',
     },
     {

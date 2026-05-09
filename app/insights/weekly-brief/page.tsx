@@ -60,7 +60,7 @@ const valuePropositions = [
   },
   {
     icon: Users,
-    title: '전문가 네트워크 독점 인사이트',
+    title: '전문가 네트워크 인사이트',
     description: '변호사, 회계사, 투자전문가들의 검증된 분석과 조언',
   },
   {

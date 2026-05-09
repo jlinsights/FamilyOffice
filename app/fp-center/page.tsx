@@ -76,7 +76,7 @@ export default function FPCenterPage() {
                 FP센터 자격 기준
               </h2>
               <p className="text-gray-600 dark:text-slate-400">
-                HNW(High Net Worth) 고객을 위한 프리미엄 서비스
+                HNW(High Net Worth) 고객을 위한 자문 서비스
               </p>
             </div>
 

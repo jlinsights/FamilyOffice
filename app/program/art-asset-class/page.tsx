@@ -26,7 +26,6 @@ import { Header } from '@/components/header';
 import { PremiumContentGuard } from '@/components/premium-content-guard';
 import { cn } from '@/lib/utils';
 
-
 function HeroSection() {
   return (
     <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background overflow-hidden pt-20">
@@ -53,7 +52,7 @@ function HeroSection() {
           className="text-2xl md:text-3xl font-semibold text-foreground mb-4 animate-slide-up"
           style={{ animationDelay: '200ms' }}
         >
-          VIP 고객을 위한 프리미엄 예술 교육
+          VIP 고객을 위한 예술 교육
         </p>
 
         <p
@@ -129,8 +128,8 @@ function ProgramOverviewSection() {
             프로그램 개요
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            미술에 관심있는 VIP 고객 50명을 대상으로 하는 프리미엄 예술 투자 및
-            문화 교육 프로그램입니다
+            미술에 관심있는 VIP 고객 50명을 대상으로 하는 예술 투자 및 문화 교육
+            프로그램입니다
           </p>
         </div>
 

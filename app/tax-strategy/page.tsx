@@ -315,7 +315,7 @@ const TaxStrategyPage = () => {
                 <span className="text-primary">맞춤형</span> 절세 전략 솔루션
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
-                삼성생명과 함께하는 검증된 절세 전략으로 세금 부담을 혁신적으로
+                삼성생명과 함께하는 검증된 절세 전략으로 세금 부담을 구조적으로
                 줄여보세요
               </p>
             </div>
@@ -1045,7 +1045,7 @@ const TaxStrategyPage = () => {
                 <span className="font-bold text-indigo-900 dark:text-indigo-300">
                   통합 자산관리 솔루션
                 </span>
-                으로 업그레이드하세요. 최고 자산가들이 선택한 차별화된
+                으로 업그레이드하세요. 고액자산가들이 선택한 차별화된
                 패밀리오피스 서비스를 경험해보세요.
               </p>
 
@@ -1112,7 +1112,7 @@ const TaxStrategyPage = () => {
               </span>
               으로
               <br />
-              세금 부담을 혁신적으로 줄이고 미래를 준비하세요
+              세금 부담을 구조적으로 줄이고 미래를 준비하세요
             </p>
 
             {/* 상담 혜택 */}

@@ -304,7 +304,7 @@ export default function SuccessionCostCalculatorPage() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-green-500" />
-              <span>무료 전문가 상담</span>
+              <span>전문가 상담</span>
             </div>
           </div>
         </div>
@@ -1127,7 +1127,7 @@ export default function SuccessionCostCalculatorPage() {
                   <p className="text-purple-600 dark:text-purple-400 leading-relaxed">
                     계산 결과를 바탕으로{' '}
                     <span className="font-semibold">개인 맞춤형 승계 전략</span>
-                    을 무료로 제공해드립니다
+                    을 제공해드립니다
                   </p>
                 </div>
 
@@ -1178,7 +1178,7 @@ export default function SuccessionCostCalculatorPage() {
                   >
                     <div className="flex items-center gap-3">
                       <Sparkles className="w-6 h-6" />
-                      <span>프리미엄 가업승계 전략 상담 (무료)</span>
+                      <span>가업승계 구조 점검 상담</span>
                       <ArrowRight className="w-5 h-5" />
                     </div>
                   </Button>

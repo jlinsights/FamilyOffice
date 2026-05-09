@@ -33,7 +33,7 @@ export const metadata: Metadata = generateMetadata(
     '맞춤형 해결방안',
     '전문가 솔루션',
     '검증된 서비스',
-    '프리미엄 솔루션',
+    '맞춤 솔루션',
     '종합 컨설팅',
 
     // 📊 서비스 영역 키워드 (Service Areas)

@@ -51,7 +51,7 @@ export function ServicesSection() {
           <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-light">
             법인 자산 관리 및 가업승계 전문{' '}
             <span className="font-semibold text-blue-700 dark:text-blue-400">
-              프리미엄 서비스 포트폴리오
+              통합 자산관리 포트폴리오
             </span>
             로<br className="hidden sm:block" /> 세대를 잇는 자산관리를
             실현합니다
@@ -100,7 +100,7 @@ export function ServicesSection() {
                 성과
               </h3>
               <p className="text-slate-300 max-w-2xl mx-auto text-lg font-light">
-                최고 자산가들이 신뢰하는 패밀리오피스의 검증된 실적과{' '}
+                고액자산가들이 신뢰하는 패밀리오피스의 검증된 실적과{' '}
                 <span className="font-bold text-white">차별화된 전문성</span>
               </p>
             </div>
@@ -173,7 +173,7 @@ export function ServicesSection() {
                   <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                 </h3>
                 <p className="text-blue-100 font-medium">
-                  최고 자산가를 위한 전용 서비스
+                  고액자산가를 위한 전용 서비스
                 </p>
               </div>
             </Link>
@@ -204,7 +204,7 @@ export function ServicesSection() {
           </div>
 
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            최고 자산가를 위한 차별화된 패밀리오피스 서비스를 경험해보세요
+            고액자산가를 위한 차별화된 패밀리오피스 서비스를 경험해보세요
           </p>
         </FadeIn>
       </div>

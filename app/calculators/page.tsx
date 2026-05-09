@@ -339,7 +339,7 @@ export default function CalculatorsPage() {
             <div className="relative z-10 text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">압도적인 절세 성과</h2>
               <p className="text-slate-300 max-w-2xl mx-auto text-lg">
-                FamilyOffice S의 프리미엄 계산기를 통해 고객님들이 달성한 실제
+                FamilyOffice S의 전문 계산기를 통해 고객님들이 달성한 실제
                 성과입니다.
                 <br />
                 데이터에 기반한 정확한 분석으로 자산을 지켜드립니다.
@@ -393,7 +393,7 @@ export default function CalculatorsPage() {
             <div className="bg-blue-600 dark:bg-blue-900 rounded-3xl p-10 text-white flex flex-col justify-between shadow-xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
               <div>
-                <h2 className="text-3xl font-bold mb-4">전문가 무료 상담</h2>
+                <h2 className="text-3xl font-bold mb-4">전문가 상담</h2>
                 <p className="text-blue-100 mb-8 text-lg leading-relaxed">
                   계산 결과가 복잡하신가요? <br />
                   세무 전문가가 직접 분석하여 최적의 솔루션을 제안해 드립니다.
@@ -406,7 +406,7 @@ export default function CalculatorsPage() {
                   'bg-white text-blue-600 hover:bg-blue-50 w-full sm:w-auto text-lg font-bold h-14 flex items-center justify-center gap-2'
                 )}
               >
-                무료 상담 신청하기
+                상담 신청하기
                 <ArrowRight className="w-5 h-5" />
               </a>
             </div>
@@ -414,7 +414,7 @@ export default function CalculatorsPage() {
             <div className="bg-slate-100 dark:bg-slate-800 rounded-3xl p-10 flex flex-col justify-between border border-slate-200 dark:border-slate-700 shadow-lg">
               <div>
                 <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
-                  프리미엄 리포트
+                  심층 리포트
                 </h2>
                 <p className="text-slate-600 dark:text-slate-300 mb-8 text-lg leading-relaxed">
                   우리 가족만을 위한 맞춤형 세무 진단 리포트를 받아보세요.{' '}

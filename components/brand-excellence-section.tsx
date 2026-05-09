@@ -37,7 +37,7 @@ const BrandExcellenceSection: React.FC = () => {
           FamilyOffice S
         </span>
         의 브랜드 아이덴티티를 일관되게 표현하고, 사용자에게 신뢰할 수 있는
-        프리미엄 서비스 경험을 제공할 수 있습니다.
+        차별화된 서비스 경험을 제공할 수 있습니다.
       </p>
       {/* CTA 버튼 2개 */}
       <div className="flex flex-col md:flex-row gap-4 w-full justify-center">
