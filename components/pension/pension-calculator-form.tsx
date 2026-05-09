@@ -527,7 +527,7 @@ export default function PensionCalculatorForm() {
                       className="w-full flex items-center justify-center gap-2"
                     >
                       <Target className="w-5 h-5" />
-                      전문가 무료 상담 신청
+                      전문가 상담 신청
                     </a>
                   </Button>
                   <Button

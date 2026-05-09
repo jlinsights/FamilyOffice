@@ -183,7 +183,7 @@ export function SignUpForm({
         // 4. 즉시 로그인 된 경우
         toast({
           title: '회원가입 완료!',
-          description: `환영합니다, ${data.name}님! FamilyOffice S에서 프리미엄 서비스를 경험하세요.`,
+          description: `환영합니다, ${data.name}님! FamilyOffice S에서 전문 자문 서비스를 경험하세요.`,
         });
 
         onSuccess?.();
@@ -453,7 +453,7 @@ export function SignUpForm({
                     마케팅 정보 수신에 동의합니다. (선택)
                   </FormLabel>
                   <p className="text-xs text-muted-foreground">
-                    프리미엄 콘텐츠, 세미나 정보 등을 이메일로 받아보실 수
+                    회원 전용 콘텐츠, 세미나 정보 등을 이메일로 받아보실 수
                     있습니다.
                   </p>
                 </div>

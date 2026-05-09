@@ -22,7 +22,7 @@ export function LeadCaptureDialog({
   isOpen,
   onClose,
   onSuccess,
-  title = '프리미엄 계산기 접근',
+  title = '회원 전용 계산기 접근',
   description = '정확한 세금 계산 결과를 확인하려면\n이메일을 입력해 주세요.',
   source = 'calculator-access',
   ctaLabel = '계산기 무료 이용하기',

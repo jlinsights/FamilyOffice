@@ -165,7 +165,7 @@ export default function AboutPageContent() {
                 trigger={
                   <>
                     <Phone className="mr-2 h-5 w-5" />
-                    무료 상담 신청
+                    상담 신청
                   </>
                 }
               />

@@ -405,7 +405,7 @@ const CorporateTaxChecklistPage = () => {
             >
               <CalComPopup
                 className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 hover:from-amber-500 hover:to-amber-600 font-semibold px-8 py-4 rounded-full shadow-lg shadow-amber-500/20 transition-all transform hover:scale-105"
-                buttonText="전문가 무료 상담 신청"
+                buttonText="전문가 상담 신청"
                 eventType="consultation"
               />
               <Link

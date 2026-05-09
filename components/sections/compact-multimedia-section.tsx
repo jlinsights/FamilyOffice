@@ -144,7 +144,7 @@ const CompactMultimediaSection = memo(() => {
                     Spotify 독점, 귀로 듣는 컨설팅
                   </CardTitle>
                   <CardDescription className="text-sm">
-                    당신의 일상 속 프리미엄 비즈니스 인사이트
+                    당신의 일상 속 비즈니스 인사이트
                   </CardDescription>
                 </div>
               </div>

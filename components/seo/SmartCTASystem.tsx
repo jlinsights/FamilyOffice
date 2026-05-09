@@ -114,7 +114,7 @@ export function SmartCTASystem({
       },
       succession: {
         default: {
-          title: '가업승계 전략 무료 컨설팅',
+          title: '가업승계 전략 컨설팅',
           description: '승계 방법별 비용 분석으로 최적 전략을 찾아보세요',
           urgency: '승계 전문가 1:1 상담',
         },
@@ -175,7 +175,7 @@ export function SmartCTASystem({
                   {[
                     {
                       icon: MessageCircle,
-                      text: '1. 무료 상담 신청',
+                      text: '1. 상담 신청',
                       time: '30초',
                     },
                     { icon: Phone, text: '2. 전문가 분석', time: '24시간 내' },
@@ -214,7 +214,7 @@ export function SmartCTASystem({
                   >
                     <div className="flex items-center gap-3">
                       <Zap className="w-6 h-6" />
-                      <span>무료 전문가 상담 신청하기</span>
+                      <span>전문가 상담 신청하기</span>
                       <ArrowRight className="w-5 h-5" />
                     </div>
                   </Button>

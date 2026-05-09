@@ -205,13 +205,13 @@ const MultimediaContentSection = memo(() => {
                     Spotify 독점, 귀로 듣는 컨설팅
                   </CardTitle>
                   <CardDescription className="text-sm">
-                    당신의 일상 속 프리미엄 비즈니스 인사이트
+                    당신의 일상 속 비즈니스 인사이트
                   </CardDescription>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground">
-                출퇴근길, 운동 중, 휴식 시간... 국내 최고 전문가들의 생생한
-                조언을 팟캐스트로 만나보세요.
+                출퇴근길, 운동 중, 휴식 시간... 각 분야 전문가들의 생생한 조언을
+                팟캐스트로 만나보세요.
               </p>
             </CardHeader>
             <CardContent className="space-y-4">
