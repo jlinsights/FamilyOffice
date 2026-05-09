@@ -1,1 +1,1 @@
-✅ fix: FamilyOffice bg-grid-pattern CSS 통합 및 다양한 개선사항 완료
+📝 docs: .agents/product-marketing-context.md 자동 초안 (Modern Legacy 브랜드, 한국 중소중견기업 CEO 인바운드 마케팅 컨텍스트)
