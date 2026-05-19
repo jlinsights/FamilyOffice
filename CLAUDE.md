@@ -192,6 +192,8 @@ lib/
 tailwind.config.ts         # brand.* 토큰 + Playfair/Inter 폰트
 DESIGN.md                  # 디자인 시스템 소스 오브 트루스
 AGENTS.md                  # AI 에이전트 개발 규칙
+.claude-plugin/            # family-office Claude Code 플러그인 — .claude-plugin/README.md 참조
+.mcp.json                  # MCP 커넥터 (세션 시작 시 자동 로드) — 현재 빈 객체, 토큰 발급 후 활성화
 ```
 
 ---

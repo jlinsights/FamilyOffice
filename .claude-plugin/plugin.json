@@ -1,0 +1,17 @@
+{
+  "name": "family-office",
+  "version": "0.1.0",
+  "description": "FamilyOffice 마케팅·리드 운영 플러그인 — 콘텐츠 생성, 리드 스코어링 리뷰, 상담 사전 브리핑, SEO 점검 워크플로우를 슬래시 커맨드·스킬·에이전트로 묶음",
+  "author": {
+    "name": "FamilyOffice S"
+  },
+  "homepage": "https://familyoffices.vip",
+  "keywords": [
+    "wealth-management",
+    "marketing-ops",
+    "lead-scoring",
+    "content",
+    "seo"
+  ],
+  "hooks": "./.claude-plugin/hooks.json"
+}
