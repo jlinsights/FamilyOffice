@@ -7,17 +7,14 @@ function makeMockClient(rows: Row[] = [], error: unknown = null) {
     select: jest.fn().mockReturnThis(),
     eq: jest.fn().mockReturnThis(),
     order: jest.fn().mockReturnThis(),
-    single: jest
-      .fn()
-      .mockResolvedValue({ data: rows[0] ?? null, error }),
+    single: jest.fn().mockResolvedValue({ data: rows[0] ?? null, error }),
   };
   // mimic awaitable behavior for non-single queries
   (
     builder as unknown as {
       then: (resolve: (v: unknown) => void) => void;
     }
-  ).then = (resolve: (v: unknown) => void) =>
-    resolve({ data: rows, error });
+  ).then = (resolve: (v: unknown) => void) => resolve({ data: rows, error });
   return {
     from: jest.fn().mockReturnValue(builder),
   };

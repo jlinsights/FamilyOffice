@@ -15,7 +15,9 @@ describe('shippingAddressSchema', () => {
   };
 
   it('passes a complete address', () => {
-    expect(shippingAddressSchema.parse(ok)).toEqual(expect.objectContaining(ok));
+    expect(shippingAddressSchema.parse(ok)).toEqual(
+      expect.objectContaining(ok)
+    );
   });
 
   it('rejects empty buyerName', () => {

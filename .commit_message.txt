@@ -1,1 +1,1 @@
-💳 feat(shop): orders 트랜잭션 — createPendingOrder(on_sale 검증·23505→ORDER_CONFLICT) + markOrderPaid(idempotent UPDATE) + ShopOrderError (TDD 4 cases PASS)
+💄 style(shop): prettier 자동 포맷팅 (order-id/schemas/products·schemas test — 로직 변경 없음)

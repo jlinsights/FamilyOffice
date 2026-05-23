@@ -1,7 +1,6 @@
 import { customAlphabet } from 'nanoid';
 
-const ALPHABET =
-  '0123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz';
+const ALPHABET = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz';
 const nano4 = customAlphabet(ALPHABET, 4);
 
 export const SHOP_ORDER_ID_PATTERN = /^SHOP-\d{8}-[0-9A-Za-z]{4}$/;

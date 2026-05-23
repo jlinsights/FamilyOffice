@@ -7,14 +7,8 @@ const ZIP5 = /^\d{5}$/;
 
 export const shippingAddressSchema = z.object({
   buyerName: z.string().trim().min(1, '받는 분 이름을 입력해 주세요').max(60),
-  buyerPhone: z
-    .string()
-    .trim()
-    .regex(KR_PHONE, '연락처 형식을 확인해 주세요'),
-  shipZip: z
-    .string()
-    .trim()
-    .regex(ZIP5, '우편번호 5자리를 입력해 주세요'),
+  buyerPhone: z.string().trim().regex(KR_PHONE, '연락처 형식을 확인해 주세요'),
+  shipZip: z.string().trim().regex(ZIP5, '우편번호 5자리를 입력해 주세요'),
   shipAddress: z.string().trim().min(1, '주소를 입력해 주세요').max(200),
   shipAddressDetail: z
     .string()
