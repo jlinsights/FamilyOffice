@@ -1,1 +1,1 @@
-🧪 test(shop): lib/shop/constants 라벨·순서 회귀 테스트 추가 (Reconciliation 검증, 2 cases PASS)
+🧪 chore(test): nanoid v5 ESM Jest 차단 우회 — tests/mocks/nanoid.js + moduleNameMapper (counter 기반 deterministic mock)

@@ -34,6 +34,7 @@ const customJestConfig = {
     '^@/tests/(.*)$': '<rootDir>/tests/$1',
     // Mock ESM modules that cause issues
     '^uncrypto$': '<rootDir>/tests/mocks/uncrypto.js',
+    '^nanoid$': '<rootDir>/tests/mocks/nanoid.js',
   },
 
   // Test directories
