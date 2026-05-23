@@ -11,6 +11,27 @@ interface SamsungFinancialNetworksLogoProps {
   priority?: boolean;
 }
 
+interface FamilyOfficeSTaglineBlackLogoProps {
+  width?: number;
+  height?: number;
+  className?: string;
+  priority?: boolean;
+}
+
+/** 태그라인 포함 FamilyOffice S 로고 (black variant) */
+export const FamilyOfficeSTaglineBlackLogo: React.FC<
+  FamilyOfficeSTaglineBlackLogoProps
+> = ({ width = 162, height = 32, className = '', priority = false }) => (
+  <Image
+    src="/SVG/FamilyOfficeS_black_tagline.svg"
+    alt="FamilyOffice — 기업 구조·승계·세무 자문"
+    width={width}
+    height={height}
+    className={className}
+    priority={priority}
+  />
+);
+
 export const SamsungFinancialNetworksLogo: React.FC<
   SamsungFinancialNetworksLogoProps
 > = ({ width = 140, height = 32, className = '', priority = false }) => {

@@ -1,1 +1,1 @@
-🙈 chore: .gitignore 에 root *.pdf 추가 (사업자등록증 등 민감 문서 차단, docs/**/*.pdf 는 보존)
+🎨 feat(brand): 헤더 로고 Samsung Financial Networks → FamilyOfficeS 태그라인 (black variant, brightness-0 invert)

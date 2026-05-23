@@ -10,7 +10,7 @@ import {
   SafeSignInButton,
   SafeUserButton,
 } from '@/components/auth/safe-clerk-components';
-import { SamsungFinancialNetworksLogo } from '@/components/logo';
+import { FamilyOfficeSTaglineBlackLogo } from '@/components/logo';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 import { useSafeAuth } from '@/hooks/use-safe-auth';
@@ -90,11 +90,11 @@ export const Header = memo(function Header({
           <div className="flex justify-between items-center py-3">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/" className="transition-opacity hover:opacity-80">
-                <span className="sr-only">Samsung Financial Networks</span>
-                <SamsungFinancialNetworksLogo
-                  width={140}
+                <span className="sr-only">FamilyOffice</span>
+                <FamilyOfficeSTaglineBlackLogo
+                  width={162}
                   height={32}
-                  className="h-8 w-auto transition-transform hover:scale-105"
+                  className="h-8 w-auto brightness-0 invert transition-transform hover:scale-105"
                   priority
                 />
               </Link>
@@ -134,13 +134,13 @@ export const Header = memo(function Header({
             <Link
               href="/"
               className="transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
-              aria-label="Samsung Financial Networks 홈페이지로 이동"
+              aria-label="FamilyOffice 홈페이지로 이동"
             >
-              <span className="sr-only">Samsung Financial Networks</span>
-              <SamsungFinancialNetworksLogo
-                width={140}
+              <span className="sr-only">FamilyOffice</span>
+              <FamilyOfficeSTaglineBlackLogo
+                width={162}
                 height={32}
-                className="h-8 w-auto transition-transform hover:scale-105"
+                className="h-8 w-auto brightness-0 invert transition-transform hover:scale-105"
                 priority
               />
             </Link>
