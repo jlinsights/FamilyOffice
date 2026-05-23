@@ -1,1 +1,1 @@
-🎨 feat(brand): 헤더 로고 Samsung Financial Networks → FamilyOfficeS 태그라인 (black variant, brightness-0 invert)
+✨ feat(shop): /shop placeholder + 카테고리 탭 + constants + nav 메뉴 + sitemap (MVP pre-setup, plan setup-commit 단계)
