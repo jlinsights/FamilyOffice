@@ -1,1 +1,1 @@
-🪝 feat(shop): webhook orderId 접두사 분기 — SHOP- → shop_orders, 기타 → structure_check_requests (secret 매칭은 structure-check 에만, M1 fix 는 워크스트림 A 에서 선반영, TDD 2 cases PASS)
+💄 style(shop): prettier 자동 포맷팅 (shop/confirm + webhook route — 로직 변경 없음)

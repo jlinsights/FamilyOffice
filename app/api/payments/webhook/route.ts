@@ -186,11 +186,7 @@ export async function POST(request: NextRequest) {
     updateFields.paid_at = tossPayment.approvedAt ?? new Date().toISOString();
     updateFields.payment_method = tossPayment.method ?? null;
     // payment_secret 은 structure_check_requests 만 (shop_orders 컬럼 없음)
-    if (
-      !isShop &&
-      !existingSecret &&
-      typeof tossPayment.secret === 'string'
-    ) {
+    if (!isShop && !existingSecret && typeof tossPayment.secret === 'string') {
       updateFields.payment_secret = tossPayment.secret;
     }
   } else if (newStatus === 'cancelled' || newStatus === 'refunded') {

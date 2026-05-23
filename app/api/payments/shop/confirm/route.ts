@@ -168,12 +168,7 @@ export async function POST(request: Request) {
   }
 
   void Promise.allSettled([
-    sendStructureCheckConfirmation(
-      o.buyer_email,
-      o.buyer_name,
-      o.order_id,
-      0
-    ),
+    sendStructureCheckConfirmation(o.buyer_email, o.buyer_name, o.order_id, 0),
     sendSystemNotification(
       `[Shop 결제] ${o.buyer_name} ${ok.totalAmount.toLocaleString('ko-KR')}원`,
       [
