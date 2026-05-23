@@ -27,7 +27,7 @@ export function HeroSection() {
               variant="outline"
               className="badge-brand-gold px-4 py-1.5 text-sm border-0 hover:opacity-90 transition-opacity duration-300"
             >
-              <span className="w-2 h-2 rounded-full bg-brand-navy mr-2 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-white mr-2 animate-pulse"></span>
               Brand Guidelines v3.0
               <ChevronRight className="ml-1 h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
             </Badge>
@@ -43,9 +43,7 @@ export function HeroSection() {
           </span>
           <span className="block mt-2">
             <FadeIn delay={0.6} direction="up" className="inline-block">
-              <span className="text-transparent bg-clip-text bg-gold-gradient">
-                永續
-              </span>
+              <span className="text-gold-gradient font-inter">永續</span>
             </FadeIn>
           </span>
         </h1>

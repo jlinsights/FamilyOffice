@@ -100,8 +100,7 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
     }
 
     // 2. RLS 정책 존재 여부 확인
-    const { data: policies } =
-      await supabaseAdmin().rpc('get_table_policies');
+    const { data: policies } = await supabaseAdmin().rpc('get_table_policies');
     const policyList = policies as Array<{
       table_name: string;
       policy_name: string;
@@ -320,8 +319,9 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
     }
 
     // 2. 테이블 암호화 확인
-    const { data: columns } =
-      await supabaseAdmin().rpc('get_encrypted_columns');
+    const { data: columns } = await supabaseAdmin().rpc(
+      'get_encrypted_columns'
+    );
     const columnList = columns as Array<{
       column_name: string;
       is_encrypted: boolean;

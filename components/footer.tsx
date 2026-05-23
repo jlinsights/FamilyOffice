@@ -14,11 +14,10 @@ import {
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import Script from 'next/script';
 import { memo, useEffect, useState } from 'react';
 
 const FOOTER_MUTED = 'rgba(255,255,255,0.55)';
-const FOOTER_GOLD = '#D4AF37';
+const FOOTER_GOLD = 'var(--brand-gold)';
 
 // 커스텀 아이콘 컴포넌트들
 const XIcon = ({ className }: { className?: string }) => (
@@ -71,12 +70,12 @@ export const Footer = memo(function Footer() {
 
   if (!mounted || !isClient) {
     return (
-      <footer style={{ backgroundColor: '#0A192F', borderTop: '1px solid rgba(212,175,55,0.15)' }}>
+      <footer style={{ backgroundColor: 'var(--brand-navy)', borderTop: '1px solid rgba(212,175,55,0.15)' }}>
         <div className="container section-sm">
           <div className="text-center py-8">
             <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
               &copy; 2025{' '}
-              <span className="font-playfair font-semibold" style={{ color: '#D4AF37' }}>
+              <span className="font-playfair font-semibold" style={{ color: 'var(--brand-gold)' }}>
                 패밀리오피스
               </span>
             </p>
@@ -93,52 +92,11 @@ export const Footer = memo(function Footer() {
 
       <footer
         className="[&_.text-muted-foreground]:!text-white/55 [&_.text-foreground]:!text-white/90"
-        style={{ backgroundColor: '#0A192F', borderTop: '1px solid rgba(212,175,55,0.2)' }}
+        style={{ backgroundColor: 'var(--brand-navy)', borderTop: '1px solid rgba(212,175,55,0.2)' }}
       >
         {/* Heritage Gold top accent line */}
-        <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }} />
+        <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent, var(--brand-gold), transparent)' }} />
         <div className="container section-sm">
-          {/* Curator.io 소셜 미디어 피드 */}
-          <div className="mb-12">
-            <div className="text-center mb-6">
-              <h4 className="text-xl font-semibold mb-2" style={{ color: FOOTER_GOLD }}>최신 소식</h4>
-              <p className="text-sm text-muted-foreground">
-                인스타그램과 스레드에서 공유되는 최신 인사이트를 확인하세요
-              </p>
-            </div>
-
-            {/* Curator.io Feed Container */}
-            <div
-              id="curator-feed-default-feed-layout"
-              className="max-w-6xl mx-auto"
-            >
-              <a
-                href="https://curator.io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="crt-logo crt-tag"
-              >
-                Powered by Curator.io
-              </a>
-            </div>
-
-            {/* Curator.io Script */}
-            <Script
-              id="curator-feed-script"
-              type="text/javascript"
-              strategy="lazyOnload"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  /* curator-feed-default-feed-layout */
-                  (function(){
-                  var i,e,d=document,s="script";i=d.createElement("script");i.async=1;i.charset="UTF-8";
-                  i.src="https://cdn.curator.io/published/76a9212f-2e3d-43e8-9555-760155d6bd6f.js";
-                  e=d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);})();
-                `,
-              }}
-            />
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* 회사 정보 및 뉴스레터 */}
             <div>
@@ -296,8 +254,8 @@ export const Footer = memo(function Footer() {
 
             {/* 솔루션 */}
             <div>
-              <h4 className="font-semibold mb-4 flex items-center" style={{ color: '#D4AF37' }}>
-                <Sparkles className="h-4 w-4 mr-2" style={{ color: '#D4AF37' }} />
+              <h4 className="font-semibold mb-4 flex items-center" style={{ color: 'var(--brand-gold)' }}>
+                <Sparkles className="h-4 w-4 mr-2" style={{ color: 'var(--brand-gold)' }} />
                 솔루션
               </h4>
               <ul className="space-y-3 text-sm">
@@ -338,7 +296,7 @@ export const Footer = memo(function Footer() {
 
             {/* 정보 & 리소스 */}
             <div>
-              <h4 className="font-semibold mb-4" style={{ color: '#D4AF37' }}>리소스</h4>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--brand-gold)' }}>리소스</h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
@@ -377,7 +335,7 @@ export const Footer = memo(function Footer() {
 
             {/* 연락처 */}
             <div>
-              <h4 className="font-semibold mb-4" style={{ color: '#D4AF37' }}>연락처</h4>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--brand-gold)' }}>연락처</h4>
               <div className="space-y-3 text-sm">
                 <div className="flex items-start space-x-3">
                   <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">

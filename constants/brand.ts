@@ -2,8 +2,8 @@
 export const BRAND_COLORS = {
   primary: [
     {
-      name: 'Signature Navy',
-      hex: '#0A192F',
+      name: 'Revolut Primary',
+      hex: '#494fdf',
       rgb: '10, 25, 47',
       usage: '주요 브랜드 컬러, 신뢰감 형성',
     },
@@ -23,7 +23,7 @@ export const BRAND_COLORS = {
   neutral: [
     {
       name: 'Deep Slate',
-      hex: '#1E293B',
+      hex: '#191c1f',
       rgb: '30, 41, 59',
       usage: '본문 텍스트, 다크모드 배경',
     },
@@ -41,7 +41,7 @@ export const BRAND_COLORS = {
     },
     {
       name: 'Serenity White',
-      hex: '#F8FAFC',
+      hex: '#FFFFFF',
       rgb: '248, 250, 252',
       usage: '기본 배경색',
     },
@@ -55,7 +55,7 @@ export const BRAND_COLORS = {
   accent: [
     {
       name: 'Heritage Gold',
-      hex: '#D4AF37',
+      hex: '#494fdf',
       rgb: '212, 175, 55',
       usage: '프리미엄 강조, 포인트 컬러',
     },
@@ -276,12 +276,19 @@ export const CONSULTANT_IDENTITY = {
 /** DESIGN.md + Revolut benchmark — implementation tokens (Modern Legacy) */
 export const DESIGN_TOKENS = {
   colors: {
-    navy: '#0A192F',
-    gold: '#D4AF37',
-    slate: '#1E293B',
-    serenityWhite: '#F8FAFC',
-    onDarkMute: 'rgba(248, 250, 252, 0.72)',
-    hairlineLight: 'rgba(30, 41, 59, 0.12)',
+    primary: '#494fdf',
+    primaryBright: '#4f55f1',
+    primaryDeep: '#3a40c4',
+    canvasDark: '#000000',
+    surfaceElevated: '#16181a',
+    surfaceSoft: '#f4f4f4',
+    ink: '#191c1f',
+    navy: '#000000',
+    gold: '#494fdf',
+    slate: '#191c1f',
+    serenityWhite: '#FFFFFF',
+    onDarkMute: 'rgba(255, 255, 255, 0.72)',
+    hairlineLight: 'rgba(25, 28, 31, 0.12)',
     hairlineDark: 'rgba(255, 255, 255, 0.12)',
   },
   radius: {

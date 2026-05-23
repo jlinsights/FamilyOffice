@@ -50,7 +50,7 @@ iframe[src*='vercel.com/toolbar'] {
 
 /* ============================================================
    🏛️  FamilyOffice S — DESIGN.md Brand Utility Classes
-   Modern Legacy: Signature Navy + Heritage Gold
+   Revolut benchmark (DESIGN.md): black canvas + primary #494fdf
    ============================================================ */
 @layer utilities {
 
@@ -64,10 +64,10 @@ iframe[src*='vercel.com/toolbar'] {
 
   /* Editorial headlines with Playfair Display */
   .heading-editorial {
-    font-family: var(--font-playfair), 'Playfair Display', ui-serif, Georgia, serif;
-    font-weight: 600;
+    font-family: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
     letter-spacing: -0.02em;
-    color: #0A192F;
+    color: var(--brand-slate);
   }
 
   .dark .heading-editorial {
@@ -76,40 +76,51 @@ iframe[src*='vercel.com/toolbar'] {
 
   /* Heritage Gold text accent */
   .text-gold {
-    color: #D4AF37;
+    color: var(--brand-gold);
   }
 
   .text-bronze {
-    color: #B8860B;
+    color: var(--brand-bronze);
   }
 
   /* ── Backgrounds ─────────────────────────────────────────── */
   .bg-brand-navy {
-    background-color: #0A192F;
+    background-color: var(--brand-navy);
   }
 
   .bg-brand-gold {
-    background-color: #D4AF37;
+    background-color: var(--brand-gold);
   }
 
   .bg-brand-bronze {
-    background-color: #B8860B;
+    background-color: var(--brand-bronze);
   }
 
   /* Signature Navy → Deep Slate gradient */
   .bg-navy-gradient {
-    background: linear-gradient(135deg, #0A192F 0%, #1E293B 100%);
+    background: linear-gradient(180deg, #000000 0%, #16181a 100%);
   }
 
   /* Heritage Gold shimmer gradient */
   .bg-gold-gradient {
-    background: linear-gradient(135deg, #D4AF37 0%, #E5C158 50%, #B8860B 100%);
+    background: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-shimmer) 50%, var(--brand-bronze) 100%);
+  }
+
+  /* Gold gradient clipped to text (use instead of bg-gold-gradient + bg-clip-text) */
+  .text-gold-gradient,
+  .text-primary-gradient {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-shimmer) 50%, var(--brand-bronze) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
   /* ── Buttons ─────────────────────────────────────────────── */
   /* Primary: Signature Navy */
   .btn-brand-navy {
-    background-color: #0A192F;
+    background-color: var(--brand-navy);
     color: #F8FAFC;
     border-radius: 6px;
     font-weight: 600;
@@ -118,15 +129,15 @@ iframe[src*='vercel.com/toolbar'] {
   }
 
   .btn-brand-navy:hover {
-    background-color: #162C4E;
+    background-color: #16181a;
     transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(10, 25, 47, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   }
 
   /* Accent: Heritage Gold */
   .btn-brand-gold {
-    background-color: #D4AF37;
-    color: #0A192F;
+    background-color: var(--brand-gold);
+    color: var(--brand-navy);
     border-radius: 6px;
     font-weight: 700;
     letter-spacing: 0.01em;
@@ -134,30 +145,30 @@ iframe[src*='vercel.com/toolbar'] {
   }
 
   .btn-brand-gold:hover {
-    background-color: #E5C158;
+    background-color: var(--brand-shimmer);
     transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+    box-shadow: 0 8px 24px rgba(73, 79, 223, 0.35);
   }
 
   /* Outline Gold border button */
   .btn-outline-gold {
     background-color: transparent;
-    border: 1.5px solid #D4AF37;
-    color: #D4AF37;
+    border: 1.5px solid var(--brand-gold);
+    color: var(--brand-gold);
     border-radius: 6px;
     font-weight: 600;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   .btn-outline-gold:hover {
-    background-color: rgba(212, 175, 55, 0.1);
+    background-color: rgba(73, 79, 223, 0.1);
   }
 
   /* ── Cards ───────────────────────────────────────────────── */
   /* Gold top-border card — DESIGN.md editorial style */
   .card-gold-border {
-    border-top: 2px solid #D4AF37;
-    box-shadow: 0 4px 24px rgba(10, 25, 47, 0.06), 0 1px 4px rgba(10, 25, 47, 0.04);
+    border-top: 2px solid var(--brand-gold);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
     background-color: #FFFFFF;
     border-radius: 8px;
   }
@@ -173,7 +184,7 @@ iframe[src*='vercel.com/toolbar'] {
     background-color: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(10, 25, 47, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   }
 
   .dark .card-glass-premium {
@@ -183,18 +194,18 @@ iframe[src*='vercel.com/toolbar'] {
 
   /* ── Borders & Dividers ──────────────────────────────────── */
   .border-gold {
-    border-color: #D4AF37;
+    border-color: var(--brand-gold);
   }
 
   .border-gold\/30 {
-    border-color: rgba(212, 175, 55, 0.3);
+    border-color: rgba(73, 79, 223, 0.3);
   }
 
   /* Gold accent line (hr-equivalent) */
   .divider-gold {
     border: none;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    background: linear-gradient(90deg, transparent, var(--brand-gold), transparent);
     margin: 0 auto;
   }
 
@@ -212,22 +223,23 @@ iframe[src*='vercel.com/toolbar'] {
   }
 
   /* ── Revolut Benchmark (Modern Legacy) — DESIGN.md §Revolut ─ */
-  .band-navy {
-    background-color: #0A192F;
+  .band-navy,
+  .band-canvas {
+    background-color: var(--brand-navy);
     color: #F8FAFC;
   }
 
   .band-light {
-    background-color: #F8FAFC;
-    color: #1E293B;
+    background-color: #f4f4f4;
+    color: var(--brand-slate);
   }
 
   .text-on-dark-mute {
-    color: rgba(248, 250, 252, 0.72);
+    color: rgba(255, 255, 255, 0.72);
   }
 
   .hairline-light {
-    border: 1px solid rgba(30, 41, 59, 0.12);
+    border: 1px solid rgba(25, 28, 31, 0.12);
   }
 
   .hairline-dark {
@@ -235,18 +247,18 @@ iframe[src*='vercel.com/toolbar'] {
   }
 
   .surface-elevated-navy {
-    background-color: #1E293B;
+    background-color: #16181a;
     border-radius: 20px;
   }
 
   .card-legacy-lg {
     border-radius: 20px;
     background-color: #FFFFFF;
-    border: 1px solid rgba(30, 41, 59, 0.12);
+    border: 1px solid rgba(25, 28, 31, 0.12);
   }
 
   .dark .card-legacy-lg {
-    background-color: #1E293B;
+    background-color: #16181a;
     border-color: rgba(255, 255, 255, 0.12);
   }
 
@@ -259,7 +271,7 @@ iframe[src*='vercel.com/toolbar'] {
     padding: 0 1.75rem;
     border-radius: 9999px;
     background-color: #FFFFFF;
-    color: #0A192F;
+    color: var(--brand-slate);
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: 0.01em;
@@ -278,7 +290,7 @@ iframe[src*='vercel.com/toolbar'] {
     min-height: 3rem;
     padding: 0 1.75rem;
     border-radius: 9999px;
-    background-color: #0A192F;
+    background-color: var(--brand-navy);
     color: #F8FAFC;
     font-weight: 600;
     font-size: 1rem;
@@ -286,7 +298,7 @@ iframe[src*='vercel.com/toolbar'] {
   }
 
   .btn-pill-navy:hover {
-    background-color: #162C4E;
+    background-color: #16181a;
     transform: translateY(-1px);
   }
 
@@ -297,15 +309,15 @@ iframe[src*='vercel.com/toolbar'] {
     min-height: 3rem;
     padding: 0 1.75rem;
     border-radius: 9999px;
-    background-color: #D4AF37;
-    color: #0A192F;
+    background-color: var(--brand-gold);
+    color: var(--brand-navy);
     font-weight: 700;
     font-size: 1rem;
     transition: background-color 0.2s ease, transform 0.15s ease;
   }
 
   .btn-pill-gold:hover {
-    background-color: #E5C158;
+    background-color: var(--brand-shimmer);
     transform: translateY(-1px);
   }
 
@@ -341,8 +353,8 @@ iframe[src*='vercel.com/toolbar'] {
 
   .input-brand:focus-visible {
     outline: none;
-    border-color: #D4AF37;
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+    border-color: var(--brand-gold);
+    box-shadow: 0 0 0 3px rgba(73, 79, 223, 0.25);
   }
 
   .badge-brand {
@@ -363,8 +375,8 @@ iframe[src*='vercel.com/toolbar'] {
     border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 600;
-    background-color: #D4AF37;
-    color: #0A192F;
+    background-color: var(--brand-gold);
+    color: var(--brand-navy);
   }
 
   .touch-target-legacy {
@@ -373,8 +385,8 @@ iframe[src*='vercel.com/toolbar'] {
   }
 
   .display-hero {
-    font-family: var(--font-playfair), 'Playfair Display', ui-serif, Georgia, serif;
-    font-weight: 600;
+    font-family: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.02em;
     font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -526,15 +538,15 @@ iframe[src*='vercel.com/toolbar'] {
   /* 🏛️ Family Office Premium Brand Identity */
   /* 고급스럽고 전통적인 패밀리오피스 브랜딩 */
 
-  /* ⚠️ 구버전 클래스 — DESIGN.md #0A192F Signature Navy로 교체 */
+  /* ⚠️ 구버전 클래스 — Revolut primary/canvas로 매핑 */
   /* .bg-premium-gold → .bg-gold-gradient 사용 권장 */
   .bg-premium-gold {
     background: linear-gradient(
       135deg,
-      #D4AF37 0%,
-      #E5C158 30%,
-      #D4AF37 60%,
-      #B8860B 100%
+      #494fdf 0%,
+      #4f55f1 30%,
+      #494fdf 60%,
+      #3a40c4 100%
     );
   }
 
@@ -542,9 +554,9 @@ iframe[src*='vercel.com/toolbar'] {
   .bg-premium-navy {
     background: linear-gradient(
       135deg,
-      #0A192F 0%,
-      #162C4E 50%,
-      #1E293B 100%
+      #000000 0%,
+      #16181a 50%,
+      #191c1f 100%
     );
   }
 
@@ -935,20 +947,20 @@ iframe[src*='vercel.com/toolbar'] {
 /* 기본 변수 설정 - 외부 폰트 참조 없음 */
 @layer base {
   :root {
-    --background: 210 31% 98%; /* Serenity White */
-    --foreground: 222.2 47.4% 11.2%; /* Deep Slate */
-    --primary: 217 64% 11%; /* Signature Navy */
-    --primary-foreground: 210 31% 98%;
-    --secondary: 45 66% 52%; /* Heritage Gold */
-    --secondary-foreground: 217 64% 11%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 64% 11%;
+    --background: 0 0% 100%;
+    --foreground: 210 11% 11%; /* Ink */
+    --primary: 238 70% 58%; /* Revolut primary */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%; /* Surface soft */
+    --secondary-foreground: 210 11% 11%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 210 9% 40%;
+    --border: 210 10% 90%;
+    --input: 210 10% 90%;
+    --ring: 238 70% 58%;
     --radius: 0.5rem;
     /* 접근성 색상 변수 */
-    --focus-ring: 217 64% 11%;
+    --focus-ring: 238 70% 58%;
     --error: 0 84% 60%;
     --success: 142 76% 36%;
     --warning: 38 92% 50%;
@@ -963,32 +975,31 @@ iframe[src*='vercel.com/toolbar'] {
     --chart-5: 27 87% 67%;
 
     /* ── DESIGN.md Surface Tokens ───────────────────────────── */
-    --surface-base: #F8FAFC;   /* Serenity White */
-    --surface-card: #FFFFFF;   /* Card background */
-    --surface-muted: #F1F5F9;  /* Muted surface */
+    --surface-base: #FFFFFF;
+    --surface-card: #FFFFFF;
+    --surface-muted: #F4F4F4;
 
-    /* ── DESIGN.md Brand Direct Values ─────────────────────── */
-    --brand-navy: #0A192F;     /* Signature Navy */
-    --brand-gold: #D4AF37;     /* Heritage Gold */
-    --brand-bronze: #B8860B;   /* Muted Bronze */
-    --brand-slate: #1E293B;    /* Deep Slate */
-    --brand-shimmer: #E5C158;  /* Gold Shimmer */
+    /* ── DESIGN.md Revolut tokens ─────────────────────────── */
+    --brand-navy: #000000;     /* Canvas dark (legacy class name) */
+    --brand-gold: #494fdf;     /* Primary accent (legacy class name) */
+    --brand-bronze: #3a40c4;   /* Primary deep */
+    --brand-slate: #191c1f;    /* Ink */
+    --brand-shimmer: #4f55f1;  /* Primary bright */
   }
 
   .dark {
-    --background: 217 64% 8%; /* Deepest Navy */
-    --foreground: 210 31% 98%;
-    --primary: 45 66% 52%; /* Gold as primary in dark mode for pop */
-    --primary-foreground: 217 64% 11%;
-    --secondary: 217 64% 15%; /* Deep Navy as secondary */
-    --secondary-foreground: 210 31% 98%;
-    --muted: 217 64% 15%;
-    --muted-foreground: 215 20.2% 72%;
-    --border: 217 64% 15%;
-    --input: 217 64% 15%;
-    --ring: 45 66% 52%;
-    /* 다크 모드 접근성 색상 */
-    --focus-ring: 45 66% 52%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --primary: 238 70% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 8% 9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 210 8% 12%;
+    --muted-foreground: 0 0% 72%;
+    --border: 0 0% 100% / 0.12;
+    --input: 210 8% 12%;
+    --ring: 238 70% 58%;
+    --focus-ring: 238 70% 58%;
     --error: 0 84% 60%;
     --success: 142 76% 36%;
     --warning: 38 92% 50%;

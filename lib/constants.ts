@@ -16,7 +16,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   },
   { href: '/insights', label: '인사이트' },
   { href: '/seminar', label: '세미나' },
-  { href: '/shop', label: 'SHOP' },
+  { href: '/shop', label: 'SHOP', requireAuth: true },
   { href: '/recruit', label: '채용' },
   // { href: '/stories', label: '케이스/스토리' }, // [미완성] 추후 오픈
   { href: '/structure-check', label: '상담신청', isPrimary: true },

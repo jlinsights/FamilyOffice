@@ -1,1 +1,1 @@
-🐛 fix(build): lib/security/supabase-security-checker — module top-level createClient 를 lazy init 으로 변경 (Vercel build "supabaseUrl is required" 해결)
+🎨 design: Revolut 토큰·히어로/푸터·SHOP 인증 및 lead-scoring 빌드 수정
