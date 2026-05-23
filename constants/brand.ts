@@ -272,3 +272,31 @@ export const CONSULTANT_IDENTITY = {
 
   tagline: '고객의 자산과 미래를 진심으로 고민하는 파트너',
 };
+
+/** DESIGN.md + Revolut benchmark — implementation tokens (Modern Legacy) */
+export const DESIGN_TOKENS = {
+  colors: {
+    navy: '#0A192F',
+    gold: '#D4AF37',
+    slate: '#1E293B',
+    serenityWhite: '#F8FAFC',
+    onDarkMute: 'rgba(248, 250, 252, 0.72)',
+    hairlineLight: 'rgba(30, 41, 59, 0.12)',
+    hairlineDark: 'rgba(255, 255, 255, 0.12)',
+  },
+  radius: {
+    sharp: '6px',
+    md: '12px',
+    lg: '20px',
+    pill: '9999px',
+  },
+  spacing: {
+    section: '88px',
+    band: '120px',
+  },
+  touch: {
+    minTarget: '48px',
+    inputHeight: '56px',
+    buttonHeight: '48px',
+  },
+} as const;

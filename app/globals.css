@@ -211,6 +211,199 @@ iframe[src*='vercel.com/toolbar'] {
     }
   }
 
+  /* ── Revolut Benchmark (Modern Legacy) — DESIGN.md §Revolut ─ */
+  .band-navy {
+    background-color: #0A192F;
+    color: #F8FAFC;
+  }
+
+  .band-light {
+    background-color: #F8FAFC;
+    color: #1E293B;
+  }
+
+  .text-on-dark-mute {
+    color: rgba(248, 250, 252, 0.72);
+  }
+
+  .hairline-light {
+    border: 1px solid rgba(30, 41, 59, 0.12);
+  }
+
+  .hairline-dark {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .surface-elevated-navy {
+    background-color: #1E293B;
+    border-radius: 20px;
+  }
+
+  .card-legacy-lg {
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(30, 41, 59, 0.12);
+  }
+
+  .dark .card-legacy-lg {
+    background-color: #1E293B;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Pill CTAs (marketing) — sharp .btn-brand-* remain for editorial */
+  .btn-pill-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 1.75rem;
+    border-radius: 9999px;
+    background-color: #FFFFFF;
+    color: #0A192F;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn-pill-light:hover {
+    background-color: #F8FAFC;
+    transform: translateY(-1px);
+  }
+
+  .btn-pill-navy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 1.75rem;
+    border-radius: 9999px;
+    background-color: #0A192F;
+    color: #F8FAFC;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn-pill-navy:hover {
+    background-color: #162C4E;
+    transform: translateY(-1px);
+  }
+
+  .btn-pill-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 1.75rem;
+    border-radius: 9999px;
+    background-color: #D4AF37;
+    color: #0A192F;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn-pill-gold:hover {
+    background-color: #E5C158;
+    transform: translateY(-1px);
+  }
+
+  .btn-pill-outline-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 1.75rem;
+    border-radius: 9999px;
+    background-color: transparent;
+    border: 1.5px solid rgba(248, 250, 252, 0.4);
+    color: #F8FAFC;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-pill-outline-dark:hover {
+    border-color: #F8FAFC;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .input-brand {
+    min-height: 3.5rem;
+    padding: 0 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(30, 41, 59, 0.15);
+    background-color: #FFFFFF;
+    color: #1E293B;
+    font-size: 1rem;
+  }
+
+  .input-brand:focus-visible {
+    outline: none;
+    border-color: #D4AF37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+  }
+
+  .badge-brand {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: rgba(30, 41, 59, 0.08);
+    color: #475569;
+  }
+
+  .badge-brand-gold {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background-color: #D4AF37;
+    color: #0A192F;
+  }
+
+  .touch-target-legacy {
+    min-height: 3rem;
+    min-width: 3rem;
+  }
+
+  .display-hero {
+    font-family: var(--font-playfair), 'Playfair Display', ui-serif, Georgia, serif;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .section-legacy {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .section-legacy {
+      padding-top: 7.5rem;
+      padding-bottom: 7.5rem;
+    }
+  }
+
+  .band-legacy {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .band-legacy {
+      padding-top: 7.5rem;
+      padding-bottom: 7.5rem;
+    }
+  }
+
   /* ── Financial Data Typography ───────────────────────────── */
   .tabular-nums {
     font-variant-numeric: tabular-nums;

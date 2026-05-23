@@ -63,6 +63,11 @@ const config: Config = {
           '5': 'hsl(var(--chart-5))',
         },
         // FamilyOffice S - Modern Legacy Brand Colors
+        surface: {
+          base: '#F8FAFC',
+          elevated: '#FFFFFF',
+          muted: 'rgba(30, 41, 59, 0.06)',
+        },
         brand: {
           navy: {
             DEFAULT: '#0A192F',
@@ -126,6 +131,9 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
         '2xl': '1rem',
         '3xl': '1.5rem',
+        'legacy-md': '12px',
+        'legacy-lg': '20px',
+        pill: '9999px',
       },
       boxShadow: {
         // Modern v0-style shadows
@@ -169,6 +177,8 @@ const config: Config = {
         88: '22rem',
         112: '28rem',
         128: '32rem',
+        'section-legacy': '5.5rem',
+        'band-legacy': '7.5rem',
       },
       animation: {
         // Modern v0-style animations

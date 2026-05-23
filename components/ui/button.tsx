@@ -34,6 +34,14 @@ const buttonVariants = cva(
           'bg-emerald-luxury hover:bg-emerald-luxury/90 text-white shadow-lg hover:shadow-xl hover:scale-[1.05] transition-transform duration-300',
         consultation:
           'bg-consultation hover:bg-consultation/90 text-white shadow-lg hover:shadow-xl hover:scale-[1.05] font-semibold transition-transform duration-300',
+        legacyNavy:
+          'rounded-full bg-brand-navy text-[#F8FAFC] hover:bg-brand-navy-light min-h-12 px-7 font-semibold shadow-none hover:scale-[1.02]',
+        legacyGold:
+          'rounded-full bg-brand-gold text-brand-navy hover:bg-brand-gold-light min-h-12 px-7 font-bold shadow-none hover:scale-[1.02]',
+        legacyCtaLight:
+          'rounded-full bg-white text-brand-navy hover:bg-surface-base min-h-12 px-7 font-semibold shadow-none hover:scale-[1.02]',
+        legacyOutlineDark:
+          'rounded-full border border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10 min-h-12 px-7 font-semibold shadow-none hover:scale-[1.02]',
       },
       size: {
         default: 'h-12 px-6 py-3',
