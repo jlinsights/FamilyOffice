@@ -1,1 +1,1 @@
-🔒 feat(payments): Toss 결제 보안 강화 — HMAC 웹훅 검증·UUID v5 customerKey·결제 secret 대조·Clerk 본인 confirm·운영 체크리스트
+🙈 chore: .gitignore 에 root *.pdf 추가 (사업자등록증 등 민감 문서 차단, docs/**/*.pdf 는 보존)

@@ -60,3 +60,6 @@ playwright-report/
 
 # superpowers brainstorming visual companion (local-only)
 .superpowers/
+
+# Sensitive business documents (root only — keep docs/**/*.pdf if needed)
+/*.pdf
