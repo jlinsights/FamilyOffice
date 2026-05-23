@@ -260,4 +260,22 @@ export class LeadScoringSystem {
   }
 }
 
-export const leadScoringSystem = new LeadScoringSystem();
+// Lazy singleton — Proxy 로 module-level instantiation 회피
+// Vercel build "Collecting page data" 단계에서 env 미주입 시 createAdminClient throw 방지.
+// 첫 메서드 호출 시점에 실제 인스턴스 생성.
+let _leadScoringSystemInstance: LeadScoringSystem | null = null;
+export const leadScoringSystem = new Proxy({} as LeadScoringSystem, {
+  get(_target, prop) {
+    if (!_leadScoringSystemInstance) {
+      _leadScoringSystemInstance = new LeadScoringSystem();
+    }
+    const value = Reflect.get(
+      _leadScoringSystemInstance as object,
+      prop,
+      _leadScoringSystemInstance
+    );
+    return typeof value === 'function'
+      ? value.bind(_leadScoringSystemInstance)
+      : value;
+  },
+});
