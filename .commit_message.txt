@@ -1,1 +1,1 @@
-🧪 chore(test): nanoid v5 ESM Jest 차단 우회 — tests/mocks/nanoid.js + moduleNameMapper (counter 기반 deterministic mock)
+🆔 feat(shop): SHOP-YYYYMMDD-XXXX order-id 생성기 + SHOP_ORDER_ID_PATTERN (nanoid customAlphabet 4글자, TDD 3 cases PASS)
