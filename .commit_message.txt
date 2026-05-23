@@ -1,1 +1,1 @@
-🧾 feat(shop): POST /api/payments/shop/create-order — Clerk + zod + createPendingOrder + UUID v5 customerKey (TDD 4 cases PASS)
+💸 feat(shop): POST /api/payments/shop/confirm — Clerk 본인 검증 + zod + amount 재검증 + Toss confirm + totalAmount 검증 + markOrderPaid + 이메일 (TDD 6 cases PASS)
