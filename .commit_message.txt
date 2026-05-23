@@ -1,1 +1,1 @@
-✨ feat(shop): /shop placeholder + 카테고리 탭 + constants + nav 메뉴 + sitemap (MVP pre-setup, plan setup-commit 단계)
+📦 chore(shop): react-daum-postcode 의존성 추가 (nanoid 는 기존 5.1.5 재사용)
