@@ -1,1 +1,1 @@
-🎨 ui: 헤더 구조 점검 버튼 아이콘만 표시
+🐛 fix(build): lib/security/supabase-security-checker — module top-level createClient 를 lazy init 으로 변경 (Vercel build "supabaseUrl is required" 해결)
