@@ -1,1 +1,1 @@
-🗄 feat(shop): shop_products/shop_orders 마이그레이션 작성 — 1-of-1 partial UNIQUE, status/category enum, updated_at 트리거 (DB push 별도 수행)
+🪣 feat(shop): shop-product-images Storage bucket 마이그레이션 (public read, write 는 service role 만 — DB push 별도)
