@@ -171,7 +171,7 @@ TOSS_SECRET_KEY=
 TOSS_WEBHOOK_SECRET=
 ```
 
-전체 목록은 `.env.example` 참조.
+전체 목록은 `.env.example` 참조. 운영·웹훅·마이그레이션 체크는 [`docs/payments/toss-payments-checklist.md`](docs/payments/toss-payments-checklist.md) 참고.
 
 > Toss Payments 운영 키는 사이트 라이브 후 [Toss 가맹점 가입](https://www.tosspayments.com/) 심사 통과 시 발급됩니다. 개발은 `.env.example`의 공개 테스트 키 그대로 사용 가능합니다.
 

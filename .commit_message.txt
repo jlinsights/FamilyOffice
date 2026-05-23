@@ -1,1 +1,1 @@
-✨ feat: family-office Claude Code 플러그인 추가 (콘텐츠·리드·상담·SEO 스킬 4종 + 슬래시 커맨드 + 에이전트, MCP 커넥터는 토큰 발급 후 활성화)
+🔒 feat(payments): Toss 결제 보안 강화 — HMAC 웹훅 검증·UUID v5 customerKey·결제 secret 대조·Clerk 본인 confirm·운영 체크리스트

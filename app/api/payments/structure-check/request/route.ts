@@ -13,6 +13,7 @@ import { nanoid } from 'nanoid';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { CONSULTATION_FEE } from '@/lib/constants';
+import { getTossCustomerKeyForClerkUser } from '@/lib/payments/toss-customer-key';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 
 export const runtime = 'nodejs';
@@ -138,7 +139,7 @@ export async function POST(request: NextRequest) {
       success: true,
       orderId,
       amount: CONSULTATION_FEE,
-      customerKey: userId,
+      customerKey: getTossCustomerKeyForClerkUser(userId),
       orderName: '구조 점검 상담 신청',
     },
     { status: 201 }

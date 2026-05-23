@@ -4,11 +4,12 @@
  * POST /api/payments/structure-check/confirm
  *
  * Toss success URL 콜백 → 서버에서 결제 승인:
- *   1) DB pending 레코드 조회 + amount 재검증 (변조 차단)
+ *   1) Clerk 세션 + DB pending 조회 + amount 재검증
  *   2) Toss /v1/payments/confirm 호출 (server-only secret key)
- *   3) 성공 시 DB payment_status='paid' UPDATE
+ *   3) totalAmount·secret 검증 후 payment_status='paid'
  *   4) Idempotent: 이미 paid면 동일 응답
  */
+import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { CONSULTATION_FEE } from '@/lib/constants';
@@ -35,6 +36,7 @@ interface TossConfirmResponse {
   status: string;
   method?: string;
   approvedAt?: string;
+  secret?: string;
   [key: string]: unknown;
 }
 
@@ -44,7 +46,14 @@ interface TossErrorResponse {
 }
 
 export async function POST(request: NextRequest) {
-  // 1) Body 검증
+  const { userId } = await auth();
+  if (!userId) {
+    return NextResponse.json(
+      { success: false, error: '로그인이 필요합니다' },
+      { status: 401 }
+    );
+  }
+
   let rawBody: unknown;
   try {
     rawBody = await request.json();
@@ -69,7 +78,7 @@ export async function POST(request: NextRequest) {
   const { data: pendingRecord, error: fetchError } = await (supabase
     .from('structure_check_requests')
     .select(
-      'id, order_id, payment_status, payment_key, paid_amount, paid_at, payment_method, name, email, qualification_score'
+      'id, order_id, payment_status, payment_key, paid_amount, paid_at, payment_method, payment_secret, clerk_user_id, name, email, qualification_score'
     )
     .eq('order_id', orderId)
     .single() as unknown as Promise<{
@@ -81,6 +90,8 @@ export async function POST(request: NextRequest) {
       paid_amount: number | null;
       paid_at: string | null;
       payment_method: string | null;
+      payment_secret: string | null;
+      clerk_user_id: string | null;
       name: string;
       email: string;
       qualification_score: number;
@@ -93,6 +104,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { success: false, error: '주문을 찾을 수 없습니다' },
       { status: 404 }
+    );
+  }
+
+  if (pendingRecord.clerk_user_id && pendingRecord.clerk_user_id !== userId) {
+    console.error('[payments/confirm] clerk_user_id mismatch:', {
+      orderId,
+      expected: pendingRecord.clerk_user_id,
+      actual: userId,
+    });
+    return NextResponse.json(
+      { success: false, error: '본인 결제만 승인할 수 있습니다' },
+      { status: 403 }
     );
   }
 
@@ -174,8 +197,21 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // 6) DB UPDATE: paid
   const successResp = tossResponse as TossConfirmResponse;
+
+  if (successResp.totalAmount !== CONSULTATION_FEE) {
+    console.error('[payments/confirm] Toss totalAmount mismatch:', {
+      orderId,
+      totalAmount: successResp.totalAmount,
+      expected: CONSULTATION_FEE,
+    });
+    await updateFailed(supabase, orderId);
+    return NextResponse.json(
+      { success: false, error: '결제 금액이 올바르지 않습니다' },
+      { status: 400 }
+    );
+  }
+
   const updateBuilder = supabase.from(
     'structure_check_requests'
   ) as unknown as {
@@ -195,6 +231,8 @@ export async function POST(request: NextRequest) {
       paid_amount: successResp.totalAmount,
       paid_at: successResp.approvedAt ?? new Date().toISOString(),
       payment_method: successResp.method ?? null,
+      payment_secret:
+        typeof successResp.secret === 'string' ? successResp.secret : null,
     })
     .eq('order_id', orderId)
     .eq('payment_status', 'pending');
