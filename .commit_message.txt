@@ -1,1 +1,1 @@
-🎨 design: Revolut 토큰·히어로/푸터·SHOP 인증 및 lead-scoring 빌드 수정
+🐛 fix: /profile Vercel 빌드 — Supabase SSR placeholder·force-dynamic
