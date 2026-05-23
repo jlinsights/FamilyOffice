@@ -267,13 +267,12 @@ export const Header = memo(function Header({
             {/* 구조 점검 요청 버튼 — Heritage Gold CTA */}
             <Link
               href="/structure-check#request-form"
-              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-xs font-semibold transition-all duration-200 hover:scale-105"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#0A192F]"
               style={{ backgroundColor: '#D4AF37', color: '#0A192F' }}
               aria-label="구조 점검 요청"
               title="구조 점검 요청"
             >
-              <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden xl:inline">구조 점검</span>
+              <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
             </Link>
 
             {/* 인증 관련 버튼 */}

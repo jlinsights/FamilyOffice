@@ -1,1 +1,1 @@
-🎨 design: Modern Legacy 유지 + Revolut 벤치마크(DESIGN.md·유틸·히어로·Button) 반영
+🎨 ui: 헤더 구조 점검 버튼 아이콘만 표시
