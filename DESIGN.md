@@ -14,6 +14,17 @@ FamilyOffice S provides premium wealth management and corporate risk management 
 
 ## 🎨 Visual Identity
 
+### 0. Logo Assets (`public/SVG/`)
+
+| File | Use |
+| :--- | :--- |
+| `FamilyOfficeS_black_tagline.svg` | **Header** (default) — apply `brightness-0 invert` on navy background. Header component: `<FamilyOfficeSTaglineBlackLogo>` in `components/logo.tsx`. |
+| `FamilyOfficeS_blue_tagline.svg` | Light/cream surfaces, print collateral |
+| `FamilyOfficeS_black.svg` / `FamilyOfficeS_blue.svg` | Compact variants without tagline (favicons, OG icons) |
+
+- **Header dimensions**: `width=162 height=32` (mobile & desktop), `h-8 w-auto` Tailwind utility.
+- **Aria/SR text**: `"FamilyOffice 홈페이지로 이동"` (link) + `<span className="sr-only">FamilyOffice</span>`.
+
 ### 1. Color Palette: "Premium Depth"
 Refining the classic Navy and Gold with modern depth and sophistication.
 
@@ -209,3 +220,27 @@ Utilities: `.hairline-light`, `.hairline-dark`, `.surface-elevated-navy`.
 - Code tokens: `constants/brand.ts` → `DESIGN_TOKENS`
 - Utilities: `app/globals.css` (`@layer utilities`)
 - Button variants: `components/ui/button.tsx` → `legacyNavy`, `legacyGold`, `legacyCtaLight`, `legacyOutlineDark`
+
+---
+
+## 🛒 Shop MVP — 1-of-1 큐레이션 (2026-05-23 추가)
+
+**Surface**: `/shop` 페이지는 `bg-navy-gradient` 히어로(상단) + `bg-slate-50` 카탈로그(하단) 의 두-밴드 캔버스 패턴 (Revolut 벤치마크 적용).
+
+| 영역 | 토큰 | 비고 |
+|---|---|---|
+| 히어로 |  `.bg-navy-gradient` + `font-playfair` + Heritage Gold uppercase tracking-[0.25em] eyebrow | "Curated Art & Luxury" |
+| 카테고리 탭 | `bg-brand-navy/40` 배경 + `border-brand-gold/40` 활성 | `<ShopCategoryTabs>` 4종 (서예/사진/그림/럭셔리) |
+| 상품 카드 | `card-gold-border` 또는 hairline border on white | SOLD 상태는 `SoldOutBadge` (반투명 오버레이) |
+| 결제 위젯 컨테이너 | 페이지 자체 토큰 유지 — Toss 결제위젯 iframe 은 PG 자체 디자인 | 위젯 진입 전후 페이지 배경/CTA 만 브랜드 |
+
+**Product 콘텐츠 가이드**:
+- 작가명·작품명을 `heading-editorial` (Playfair)
+- 가격은 `.financial-value` (tabular-nums) + `1,200,000원` 형식 (Korean 천단위 콤마)
+- 4 카테고리: `calligraphy` (서예) / `photography` (사진) / `painting` (그림) / `luxury` (럭셔리)
+- 1-of-1 invariant — `shop_orders.product_id` partial UNIQUE on `payment_status in ('pending','paid')`
+
+**Payment widget integration**:
+- Toss `@tosspayments/tosspayments-sdk` v2 (`test_gck_`/`test_gsk_` 키)
+- 모달은 PG 디자인 그대로 (브랜드 카피 침범 안 함)
+- 진입 CTA 만 `legacyGold` 또는 `.btn-brand-gold` 토큰 사용
