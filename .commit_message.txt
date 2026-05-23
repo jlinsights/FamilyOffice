@@ -1,1 +1,1 @@
-📐 feat(shop): zod schemas — shipping/createOrder/confirm/product (KR phone·우편번호·UUID·SHOP-ID 패턴 검증, TDD 10 cases PASS)
+🛒 feat(shop): Supabase product 쿼리 헬퍼 — listOnSaleProducts/getProductBySlug/getProductById + ShopProductRow 타입 (TDD 3 cases PASS)
