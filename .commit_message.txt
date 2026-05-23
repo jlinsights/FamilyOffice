@@ -1,1 +1,1 @@
-💸 feat(shop): POST /api/payments/shop/confirm — Clerk 본인 검증 + zod + amount 재검증 + Toss confirm + totalAmount 검증 + markOrderPaid + 이메일 (TDD 6 cases PASS)
+🪝 feat(shop): webhook orderId 접두사 분기 — SHOP- → shop_orders, 기타 → structure_check_requests (secret 매칭은 structure-check 에만, M1 fix 는 워크스트림 A 에서 선반영, TDD 2 cases PASS)

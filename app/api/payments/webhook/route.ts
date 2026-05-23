@@ -132,36 +132,43 @@ export async function POST(request: NextRequest) {
   }
 
   const supabase = createAdminClient();
-  const { data: existingRecord } = await (supabase
-    .from('structure_check_requests')
-    .select('payment_secret')
-    .eq('order_id', tossPayment.orderId)
-    .maybeSingle() as unknown as Promise<{
-    data: { payment_secret: string | null } | null;
-    error: unknown;
-  }>);
+  const isShop = tossPayment.orderId.startsWith('SHOP-');
+  const tableName = isShop ? 'shop_orders' : 'structure_check_requests';
 
-  const expectedSecret =
-    existingRecord?.payment_secret ??
-    (typeof tossPayment.secret === 'string' ? tossPayment.secret : null);
+  // Shop 은 payment_secret 컬럼 없음 — confirm route 의 Clerk 본인검증 + Toss confirm 으로 진위 보장.
+  // structure_check_requests 만 payment_secret 매칭 수행.
+  let existingSecret: string | null = null;
+  if (!isShop) {
+    const { data: existingRecord } = await (supabase
+      .from('structure_check_requests')
+      .select('payment_secret')
+      .eq('order_id', tossPayment.orderId)
+      .maybeSingle() as unknown as Promise<{
+      data: { payment_secret: string | null } | null;
+      error: unknown;
+    }>);
+    existingSecret = existingRecord?.payment_secret ?? null;
 
-  if (webhookSecret && expectedSecret) {
-    if (!paymentSecretsMatch(expectedSecret, webhookSecret)) {
-      console.error('[webhook] secret mismatch — DB update skipped', {
-        orderId: tossPayment.orderId,
-      });
-      return NextResponse.json({ received: true }, { status: 200 });
+    const expectedSecret =
+      existingSecret ??
+      (typeof tossPayment.secret === 'string' ? tossPayment.secret : null);
+
+    if (webhookSecret && expectedSecret) {
+      if (!paymentSecretsMatch(expectedSecret, webhookSecret)) {
+        console.error('[webhook] secret mismatch — DB update skipped', {
+          orderId: tossPayment.orderId,
+        });
+        return NextResponse.json({ received: true }, { status: 200 });
+      }
+    } else if (webhookSecret && !expectedSecret) {
+      console.warn(
+        '[webhook] webhook secret present but no stored payment_secret yet',
+        { orderId: tossPayment.orderId }
+      );
     }
-  } else if (webhookSecret && !expectedSecret) {
-    console.warn(
-      '[webhook] webhook secret present but no stored payment_secret yet',
-      { orderId: tossPayment.orderId }
-    );
   }
 
-  const updateBuilder = supabase.from(
-    'structure_check_requests'
-  ) as unknown as {
+  const updateBuilder = supabase.from(tableName) as unknown as {
     update: (data: Record<string, unknown>) => {
       eq: (col: string, val: string) => Promise<{ error: unknown }>;
     };
@@ -178,8 +185,10 @@ export async function POST(request: NextRequest) {
     updateFields.paid_amount = tossPayment.totalAmount ?? null;
     updateFields.paid_at = tossPayment.approvedAt ?? new Date().toISOString();
     updateFields.payment_method = tossPayment.method ?? null;
+    // payment_secret 은 structure_check_requests 만 (shop_orders 컬럼 없음)
     if (
-      !existingRecord?.payment_secret &&
+      !isShop &&
+      !existingSecret &&
       typeof tossPayment.secret === 'string'
     ) {
       updateFields.payment_secret = tossPayment.secret;
