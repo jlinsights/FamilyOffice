@@ -1,1 +1,1 @@
-🪣 feat(shop): shop-product-images Storage bucket 마이그레이션 (public read, write 는 service role 만 — DB push 별도)
+🧪 test(shop): lib/shop/constants 라벨·순서 회귀 테스트 추가 (Reconciliation 검증, 2 cases PASS)
