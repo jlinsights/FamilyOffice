@@ -1,1 +1,1 @@
-🛒 feat(shop): Supabase product 쿼리 헬퍼 — listOnSaleProducts/getProductBySlug/getProductById + ShopProductRow 타입 (TDD 3 cases PASS)
+💳 feat(shop): orders 트랜잭션 — createPendingOrder(on_sale 검증·23505→ORDER_CONFLICT) + markOrderPaid(idempotent UPDATE) + ShopOrderError (TDD 4 cases PASS)
