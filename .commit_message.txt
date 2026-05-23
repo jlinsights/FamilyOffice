@@ -1,1 +1,1 @@
-📦 chore(shop): react-daum-postcode 의존성 추가 (nanoid 는 기존 5.1.5 재사용)
+🗄 feat(shop): shop_products/shop_orders 마이그레이션 작성 — 1-of-1 partial UNIQUE, status/category enum, updated_at 트리거 (DB push 별도 수행)
