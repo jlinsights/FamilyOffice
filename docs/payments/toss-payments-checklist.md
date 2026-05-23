@@ -6,8 +6,8 @@
 
 | 변수 | 용도 | 형식 |
 |------|------|------|
-| `NEXT_PUBLIC_TOSS_CLIENT_KEY` | 브라우저 위젯 | `test_ck_` / `live_ck_` |
-| `TOSS_SECRET_KEY` | 서버 승인·조회 | `test_sk_` / `live_sk_` |
+| `NEXT_PUBLIC_TOSS_CLIENT_KEY` | 브라우저 결제위젯 | `test_gck_` / `live_gck_` (위젯) 또는 `test_ck_` / `live_ck_` (API 개별) |
+| `TOSS_SECRET_KEY` | 서버 승인·조회 | `test_gsk_` / `live_gsk_` (위젯) 또는 `test_sk_` / `live_sk_` (API 개별) |
 | `TOSS_WEBHOOK_SECRET` | 웹훅 서명 검증 | 대시보드에서 발급 |
 
 - 테스트 키와 라이브 키를 섞지 않음 (클라이언트·시크릿은 동일 환경 쌍).

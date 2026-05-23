@@ -62,8 +62,8 @@ export const serverEnvSchema = z.object({
   TOSS_SECRET_KEY: z
     .string()
     .regex(
-      /^(test|live)_sk_/,
-      'TOSS_SECRET_KEY must start with test_sk_ or live_sk_'
+      /^(test|live)_(g)?sk_/,
+      'TOSS_SECRET_KEY must start with test_sk_, test_gsk_, live_sk_, or live_gsk_'
     )
     .optional(),
   TOSS_WEBHOOK_SECRET: z.string().optional(),
@@ -104,8 +104,8 @@ export const clientEnvSchema = z.object({
   NEXT_PUBLIC_TOSS_CLIENT_KEY: z
     .string()
     .regex(
-      /^(test|live)_ck_/,
-      'NEXT_PUBLIC_TOSS_CLIENT_KEY must start with test_ck_ or live_ck_'
+      /^(test|live)_(g)?ck_/,
+      'NEXT_PUBLIC_TOSS_CLIENT_KEY must start with test_ck_, test_gck_, live_ck_, or live_gck_'
     )
     .optional(),
 });
