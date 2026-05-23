@@ -1,1 +1,1 @@
-💄 style(shop): prettier 자동 포맷팅 (order-id/schemas/products·schemas test — 로직 변경 없음)
+🧾 feat(shop): POST /api/payments/shop/create-order — Clerk + zod + createPendingOrder + UUID v5 customerKey (TDD 4 cases PASS)
