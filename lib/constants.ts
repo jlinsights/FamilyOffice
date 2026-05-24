@@ -19,7 +19,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { href: '/shop', label: 'SHOP', requireAuth: true },
   { href: '/recruit', label: '채용' },
   // { href: '/stories', label: '케이스/스토리' }, // [미완성] 추후 오픈
-  { href: '/structure-check', label: '상담신청', isPrimary: true },
+  // 상담신청 메뉴 삭제 (2026-05-24) — 헤더의 ClipboardCheck CTA 버튼으로 진입점 단일화
 ];
 
 // 위 4개 메뉴는 미완성 상태이므로 주석 처리하여 숨깁니다.
