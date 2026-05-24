@@ -11,7 +11,7 @@ export default async function EmailAdminPage() {
   const { userId } = await auth();
 
   if (!userId) {
-    redirect('/sign-in');
+    redirect('/auth/sign-in?redirect_url=/admin/email');
   }
 
   // 추가 권한 확인이 필요한 경우

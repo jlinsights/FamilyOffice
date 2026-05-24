@@ -29,7 +29,7 @@ export default async function AdminSEOPage() {
   const { userId } = await auth();
 
   if (!userId) {
-    redirect('/sign-in');
+    redirect('/auth/sign-in?redirect_url=/admin/seo');
   }
 
   // 관리자 권한 확인

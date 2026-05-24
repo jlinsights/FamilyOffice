@@ -49,7 +49,7 @@ export default async function StructureCheckPage() {
   // 유료 상담 결제 보호 — Clerk 로그인 필수
   const { userId } = await auth();
   if (!userId) {
-    redirect('/sign-in?redirect_url=/structure-check');
+    redirect('/auth/sign-in?redirect_url=/structure-check');
   }
 
   return (
