@@ -35,10 +35,17 @@ export interface SupabaseKakaoAuthResult {
 }
 
 export class SupabaseKakaoAuthService {
-  private supabase;
+  private supabaseClient: ReturnType<typeof createClient> | null = null;
+
+  private get supabase() {
+    if (!this.supabaseClient) {
+      this.supabaseClient = createClient();
+    }
+    return this.supabaseClient;
+  }
 
   constructor() {
-    this.supabase = createClient();
+    // Supabase 클라이언트는 첫 API 호출 시 lazy 초기화
   }
 
   /**

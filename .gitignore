@@ -57,3 +57,9 @@ SuperClaude/
 test-results/
 playwright-report/
 .gstack/
+
+# superpowers brainstorming visual companion (local-only)
+.superpowers/
+
+# Sensitive business documents (root only — keep docs/**/*.pdf if needed)
+/*.pdf

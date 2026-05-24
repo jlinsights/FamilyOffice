@@ -2,24 +2,22 @@
 
 import { ClientScripts } from '@/components/analytics/client-scripts';
 import {
-    Award,
     Facebook,
     Instagram,
     Linkedin,
     MapPin,
     MessageSquare,
     Phone,
-    Shield,
     Sparkles,
-    TrendingUp,
-    Users,
     Youtube,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import Script from 'next/script';
 import { memo, useEffect, useState } from 'react';
+
+const FOOTER_MUTED = 'rgba(255,255,255,0.55)';
+const FOOTER_GOLD = 'var(--brand-gold)';
 
 // 커스텀 아이콘 컴포넌트들
 const XIcon = ({ className }: { className?: string }) => (
@@ -72,11 +70,14 @@ export const Footer = memo(function Footer() {
 
   if (!mounted || !isClient) {
     return (
-      <footer style={{ backgroundColor: '#0A192F', borderTop: '1px solid rgba(212,175,55,0.15)' }}>
+      <footer style={{ backgroundColor: 'var(--brand-navy)', borderTop: '1px solid rgba(212,175,55,0.15)' }}>
         <div className="container section-sm">
           <div className="text-center py-8">
-            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              &copy; 2025 <span className="font-playfair font-semibold text-white">FamilyOffice</span>. All rights reserved.
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
+              &copy; 2025{' '}
+              <span className="font-playfair font-semibold" style={{ color: 'var(--brand-gold)' }}>
+                패밀리오피스
+              </span>
             </p>
           </div>
         </div>
@@ -89,51 +90,13 @@ export const Footer = memo(function Footer() {
       {/* 클라이언트 전용 스크립트들 */}
       <ClientScripts />
 
-      <footer style={{ backgroundColor: '#0A192F', borderTop: '1px solid rgba(212,175,55,0.2)' }}>
+      <footer
+        className="[&_.text-muted-foreground]:!text-white/55 [&_.text-foreground]:!text-white/90"
+        style={{ backgroundColor: 'var(--brand-navy)', borderTop: '1px solid rgba(212,175,55,0.2)' }}
+      >
         {/* Heritage Gold top accent line */}
-        <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }} />
+        <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent, var(--brand-gold), transparent)' }} />
         <div className="container section-sm">
-          {/* Curator.io 소셜 미디어 피드 */}
-          <div className="mb-12">
-            <div className="text-center mb-6">
-              <h4 className="text-xl font-semibold mb-2">최신 소식</h4>
-              <p className="text-sm text-muted-foreground">
-                인스타그램과 스레드에서 공유되는 최신 인사이트를 확인하세요
-              </p>
-            </div>
-
-            {/* Curator.io Feed Container */}
-            <div
-              id="curator-feed-default-feed-layout"
-              className="max-w-6xl mx-auto"
-            >
-              <a
-                href="https://curator.io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="crt-logo crt-tag"
-              >
-                Powered by Curator.io
-              </a>
-            </div>
-
-            {/* Curator.io Script */}
-            <Script
-              id="curator-feed-script"
-              type="text/javascript"
-              strategy="lazyOnload"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  /* curator-feed-default-feed-layout */
-                  (function(){
-                  var i,e,d=document,s="script";i=d.createElement("script");i.async=1;i.charset="UTF-8";
-                  i.src="https://cdn.curator.io/published/76a9212f-2e3d-43e8-9555-760155d6bd6f.js";
-                  e=d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);})();
-                `,
-              }}
-            />
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* 회사 정보 및 뉴스레터 */}
             <div>
@@ -146,6 +109,26 @@ export const Footer = memo(function Footer() {
                     height={50}
                     className="h-12 w-auto transition-transform hover:scale-105"
                   />
+                </Link>
+              </div>
+
+              <div className="mb-6 max-w-sm space-y-3 text-left">
+                <p
+                  className="font-playfair text-lg font-semibold leading-snug"
+                  style={{ color: '#FFFFFF' }}
+                >
+                  패밀리오피스
+                </p>
+                <p className="text-xs leading-relaxed" style={{ color: FOOTER_MUTED }}>
+                  중소·중견기업 CEO와 고액자산가를 위한 통합 자산관리·가업승계
+                  컨설팅
+                </p>
+                <Link
+                  href="/about"
+                  className="inline-block text-xs font-medium transition-opacity hover:opacity-80"
+                  style={{ color: FOOTER_GOLD }}
+                >
+                  회사 소개 보기 →
                 </Link>
               </div>
 
@@ -271,8 +254,8 @@ export const Footer = memo(function Footer() {
 
             {/* 솔루션 */}
             <div>
-              <h4 className="font-semibold mb-4 flex items-center" style={{ color: '#D4AF37' }}>
-                <Sparkles className="h-4 w-4 mr-2" style={{ color: '#D4AF37' }} />
+              <h4 className="font-semibold mb-4 flex items-center" style={{ color: 'var(--brand-gold)' }}>
+                <Sparkles className="h-4 w-4 mr-2" style={{ color: 'var(--brand-gold)' }} />
                 솔루션
               </h4>
               <ul className="space-y-3 text-sm">
@@ -313,7 +296,7 @@ export const Footer = memo(function Footer() {
 
             {/* 정보 & 리소스 */}
             <div>
-              <h4 className="font-semibold mb-4" style={{ color: '#D4AF37' }}>리소스</h4>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--brand-gold)' }}>리소스</h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
@@ -352,7 +335,7 @@ export const Footer = memo(function Footer() {
 
             {/* 연락처 */}
             <div>
-              <h4 className="font-semibold mb-4" style={{ color: '#D4AF37' }}>연락처</h4>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--brand-gold)' }}>연락처</h4>
               <div className="space-y-3 text-sm">
                 <div className="flex items-start space-x-3">
                   <div className="h-10 w-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
@@ -421,100 +404,16 @@ export const Footer = memo(function Footer() {
             </div>
           </div>
 
-          <div className="border-t mt-12 pt-8 mb-8" style={{ borderColor: 'rgba(212,175,55,0.15)' }}>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <div className="text-center group">
-                <div className="flex justify-center mb-2">
-                  <div className="h-12 w-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style={{ backgroundColor: 'rgba(212,175,55,0.12)' }}>
-                    <TrendingUp className="h-6 w-6" style={{ color: '#D4AF37' }} />
-                  </div>
-                </div>
-                <p className="text-2xl font-bold mb-1" style={{ color: '#D4AF37' }}>500억원+</p>
-                <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>자산관리 실적</p>
-              </div>
-
-              <div className="text-center group">
-                <div className="flex justify-center mb-2">
-                  <div className="h-12 w-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style={{ backgroundColor: 'rgba(212,175,55,0.12)' }}>
-                    <Users className="h-6 w-6" style={{ color: '#D4AF37' }} />
-                  </div>
-                </div>
-                <p className="text-2xl font-bold mb-1" style={{ color: '#D4AF37' }}>500+</p>
-                <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>법인 고객사</p>
-              </div>
-
-              <div className="text-center group">
-                <div className="flex justify-center mb-2">
-                  <div className="h-12 w-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style={{ backgroundColor: 'rgba(212,175,55,0.12)' }}>
-                    <Shield className="h-6 w-6" style={{ color: '#D4AF37' }} />
-                  </div>
-                </div>
-                <p className="text-2xl font-bold mb-1" style={{ color: '#D4AF37' }}>20년+</p>
-                <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>전문 경험</p>
-              </div>
-
-              <div className="text-center group">
-                <div className="flex justify-center mb-2">
-                  <div className="h-12 w-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style={{ backgroundColor: 'rgba(212,175,55,0.12)' }}>
-                    <Award className="h-6 w-6" style={{ color: '#D4AF37' }} />
-                  </div>
-                </div>
-                <p className="text-2xl font-bold mb-1" style={{ color: '#D4AF37' }}>98%</p>
-                <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>만족도</p>
-              </div>
-            </div>
-          </div>
-
-          {/* 독립성 및 투명성 고지 */}
-          <div className="border-t pt-8">
-            <div className="bg-muted/30 dark:bg-muted/20 rounded-lg p-6 mb-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div className="flex items-start space-x-3">
-                  <div className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
-                    <Shield className="h-4 w-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-foreground font-medium mb-1">
-                      전문성 보장
-                    </p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">
-                      <span className="font-semibold">삼성생명 소속</span>으로{' '}
-                      <span className="text-primary">
-                        대한민국 최고 보험사의 전문성
-                      </span>
-                      을 바탕으로 작성되었습니다.{' '}
-                      <span className="text-xs opacity-80">
-                        (삼성화재 교차 판매 가능)
-                      </span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <div className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0">
-                    <Award className="h-4 w-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-foreground font-medium mb-1">
-                      투명한 상품 추천
-                    </p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">
-                      상품 추천 시에는 항상{' '}
-                      <span className="font-semibold">
-                        복수의 대안을 함께 검토
-                      </span>
-                      하여 제안드립니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* 저작권 */}
           <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0" style={{ borderColor: 'rgba(212,175,55,0.15)' }}>
-            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              &copy; 2025 <span className="font-playfair font-semibold" style={{ color: '#D4AF37' }}>FamilyOffice</span>. All rights reserved.
+            <p
+              className="text-sm text-center md:text-left leading-relaxed"
+              style={{ color: FOOTER_MUTED }}
+            >
+              &copy; 2025{' '}
+              <span className="font-playfair font-semibold" style={{ color: FOOTER_GOLD }}>
+                패밀리오피스
+              </span>
             </p>
             <div className="flex space-x-6 text-sm">
               <Link

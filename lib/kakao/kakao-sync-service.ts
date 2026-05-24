@@ -26,14 +26,20 @@ interface KakaoSyncOptions {
 }
 
 export class KakaoSyncService {
-  private supabase;
+  private supabaseClient: ReturnType<typeof createClient> | null = null;
   private channelId: string;
   private isEnabled: boolean;
 
   constructor() {
-    this.supabase = createClient();
     this.channelId = process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID || '';
     this.isEnabled = !!this.channelId;
+  }
+
+  private get supabase() {
+    if (!this.supabaseClient) {
+      this.supabaseClient = createClient();
+    }
+    return this.supabaseClient;
   }
 
   /**

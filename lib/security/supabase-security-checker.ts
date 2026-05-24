@@ -2,15 +2,26 @@
  * Supabase 보안 상태 체크 도구
  * 보안 경고 및 취약점을 실시간으로 모니터링
  */
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { Database } from '@/types/supabase';
 import { getAdminEmails } from '@/lib/admin-permissions';
 
-// Supabase 관리자 클라이언트
-const supabaseAdmin = createClient<Database>(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+// Supabase 관리자 클라이언트 — lazy init (build-time evaluation 회피)
+// Module top-level instantiation 은 Next.js 16 build 단계에서 env 미주입 시
+// "supabaseUrl is required" throw 로 build 를 깨뜨리므로 함수 호출 시점으로 지연.
+let _supabaseAdmin: SupabaseClient<Database> | null = null;
+function supabaseAdmin(): SupabaseClient<Database> {
+  if (_supabaseAdmin) return _supabaseAdmin;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    throw new Error(
+      'Supabase admin client unavailable: NEXT_PUBLIC_SUPABASE_URL 또는 SUPABASE_SERVICE_ROLE_KEY 누락'
+    );
+  }
+  _supabaseAdmin = createClient<Database>(url, key);
+  return _supabaseAdmin;
+}
 
 export interface SecurityCheck {
   id: string;
@@ -42,7 +53,7 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
 
   try {
     // 1. RLS 활성화 상태 확인
-    const { data: tables } = await supabaseAdmin.rpc('get_table_rls_status');
+    const { data: tables } = await supabaseAdmin().rpc('get_table_rls_status');
 
     const criticalTables = ['users', 'consultations', 'audit_logs'];
     const tableList = tables as Array<{
@@ -89,7 +100,7 @@ async function checkRLSPolicies(): Promise<SecurityCheck[]> {
     }
 
     // 2. RLS 정책 존재 여부 확인
-    const { data: policies } = await supabaseAdmin.rpc('get_table_policies');
+    const { data: policies } = await supabaseAdmin().rpc('get_table_policies');
     const policyList = policies as Array<{
       table_name: string;
       policy_name: string;
@@ -271,7 +282,7 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
 
   try {
     // 1. 관리자 계정 확인
-    const { data: adminUsers, error } = await supabaseAdmin
+    const { data: adminUsers, error } = await supabaseAdmin()
       .from('users')
       .select('email, is_admin')
       .in('email', getAdminEmails());
@@ -308,7 +319,9 @@ async function checkDataSecurity(): Promise<SecurityCheck[]> {
     }
 
     // 2. 테이블 암호화 확인
-    const { data: columns } = await supabaseAdmin.rpc('get_encrypted_columns');
+    const { data: columns } = await supabaseAdmin().rpc(
+      'get_encrypted_columns'
+    );
     const columnList = columns as Array<{
       column_name: string;
       is_encrypted: boolean;

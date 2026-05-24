@@ -6,7 +6,7 @@
  */
 import { CheckCircle2, XCircle } from 'lucide-react';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import Link from 'next/link';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -41,10 +41,19 @@ async function confirmPayment(
     (process.env.NODE_ENV === 'production' ? 'https' : 'http');
   const url = `${protocol}://${host}/api/payments/structure-check/confirm`;
 
+  const cookieStore = await cookies();
+  const cookieHeader = cookieStore
+    .getAll()
+    .map(c => `${c.name}=${c.value}`)
+    .join('; ');
+
   try {
     const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(cookieHeader ? { Cookie: cookieHeader } : {}),
+      },
       body: JSON.stringify({ paymentKey, orderId, amount }),
       cache: 'no-store',
     });

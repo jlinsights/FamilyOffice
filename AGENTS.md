@@ -177,9 +177,31 @@ GET /api/financial/forex?from=USD&to=KRW  // USD/KRW, EUR/KRW, JPY/KRW
 
 ### Admin Access Control
 
-- **Super Admin**: `jhlim725@gmail.com` (hardcoded validation)
+- **Admin Resolution**: ENV-driven (`ADMIN_EMAILS` / `NEXT_PUBLIC_ADMIN_EMAILS`) via `getAdminEmails()` — **never hardcode emails**
 - **Protected Routes**: `/admin/*` with `AdminAccessDeniedAlert`
-- **Auth Flow**: Clerk authentication → Supabase sync via webhook
+- **Auth Flow**: Clerk authentication → Supabase sync via webhook (`app/api/webhooks/clerk/`)
+
+### Payment Integration (Toss + Shop MVP)
+
+- **SDK**: `@tosspayments/tosspayments-sdk ^2.7` (결제위젯 v2)
+- **Key prefixes**: `test_gck_*`/`test_gsk_*` (v2 widget) or `test_ck_*`/`test_sk_*` (v1 API) — Zod regex in `lib/env.ts` allows both
+- **Domains**: Consultation (`/structure-check`, 330,000원) + Shop 1-of-1 (`/shop`)
+- **Hardening**: HMAC webhook signature (`tosspayments-webhook-signature`), UUID v5 `customerKey` (`getTossCustomerKeyForClerkUser`), `payment_secret` cross-check, Clerk owner verification on confirm
+- **Webhook routing**: `orderId.startsWith('SHOP-')` → `shop_orders`, else `structure_check_requests`
+- **Operations checklist**: `docs/payments/toss-payments-checklist.md`
+
+### Shop MVP Library (`lib/shop/`)
+
+```typescript
+import { SHOP_CATEGORIES, getCategoryLabel } from '@/lib/shop/constants';
+import { generateShopOrderId, SHOP_ORDER_ID_PATTERN } from '@/lib/shop/order-id';
+import { createOrderInputSchema, confirmInputSchema, productInputSchema } from '@/lib/shop/schemas';
+import { listOnSaleProducts, getProductBySlug } from '@/lib/shop/products';
+import { createPendingOrder, markOrderPaid, ShopOrderError } from '@/lib/shop/orders';
+```
+
+- `shop_orders` enforces 1-of-1 via partial UNIQUE index (`payment_status in ('pending','paid')`)
+- `createPendingOrder` returns `code: 'ORDER_CONFLICT'` (HTTP 409) on PG `23505`
 
 ## 🧪 Testing Strategy
 
@@ -199,6 +221,27 @@ tests/e2e/
 ├── financial.spec.ts      # Financial data display
 ├── mobile.spec.ts         # Mobile responsiveness
 └── korean-content.spec.ts # Korean language rendering
+
+tests/unit/
+├── toss-customer-key.test.ts
+├── toss-payment-lookup.test.ts
+└── toss-webhook-signature.test.ts
+
+lib/shop/
+├── constants.test.ts      # category labels regression
+├── order-id.test.ts       # SHOP-YYYYMMDD-XXXX generator
+├── schemas.test.ts        # zod validation (shipping/order/confirm/product)
+├── products.test.ts       # Supabase query helpers (mocked client)
+└── orders.test.ts         # createPendingOrder + markOrderPaid
+
+app/api/payments/
+├── shop/create-order/route.test.ts
+├── shop/confirm/route.test.ts
+└── webhook/route.shop.test.ts  # SHOP- orderId branch routing
+
+tests/mocks/
+├── uncrypto.js            # ESM mock for Jest
+└── nanoid.js              # ESM mock for Jest (counter-based deterministic)
 ```
 
 ### Single Test Execution
@@ -216,12 +259,19 @@ npx playwright test --headed tests/e2e/auth.spec.ts
 
 ## 🎨 UI/UX Standards
 
-### Design System
+### Design System ("Modern Legacy" — see `DESIGN.md`)
 
-- **Colors**: Navy (#1e3a8a) + Bronze (#cd7f32) for premium feel
-- **Typography**: Korean-optimized fonts with professional hierarchy
-- **Components**: shadcn/ui with custom Korean styling
+- **Brand tokens** (`tailwind.config.ts` → `brand.*`):
+  - `brand.navy` `#0A192F` (Signature Navy, primary)
+  - `brand.gold` `#D4AF37` (Heritage Gold, accent CTA)
+  - `brand.bronze` `#B8860B` (Bronze, emphasized text)
+  - `brand.shimmer` `#E5C158` (gradient midpoint)
+  - `brand.slate` `#1E293B` (Deep Charcoal, dark surfaces)
+- **Typography**: Playfair Display (editorial headlines, `font-playfair`) + Inter (body/UI, `font-inter`) + `font-korean` utility (line-height 1.75, word-break keep-all)
+- **Global utilities** (`globals.css`): `heading-editorial`, `text-gold`, `bg-navy-gradient`, `btn-brand-gold`, `card-gold-border`, `section-editorial`, `divider-gold`
+- **Components**: shadcn/ui + brand-tokenized customizations
 - **Accessibility**: WCAG 2.1 AA compliance
+- **Logo**: `FamilyOfficeSTaglineBlackLogo` (header, navy background → `brightness-0 invert`)
 
 ### Component Priority
 

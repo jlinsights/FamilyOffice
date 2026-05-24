@@ -1,12 +1,19 @@
 // FamilyOffice S - 사용자 동기화 유틸리티
 // Clerk 사용자와 Supabase 사용자 데이터를 동기화하는 함수들
+import { type SupabaseClient } from '@supabase/supabase-js';
 import { currentUser } from '@clerk/nextjs/server';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { safeFrom, safeInsert, safeUpdate } from '@/lib/supabase/helpers';
 import { Database } from '@/types/supabase';
 
-// Supabase 클라이언트 (서비스 키) - 타입 안전하게 생성
-const supabaseAdmin = createAdminClient();
+// Supabase 클라이언트 (서비스 키) — lazy init (build-time evaluation 회피)
+// Module top-level instantiation 은 Vercel build 단계에서 env 미주입 시
+// "Missing required Supabase environment variables" throw 로 build 를 깨뜨림.
+let _supabaseAdmin: SupabaseClient<Database> | null = null;
+function supabaseAdmin(): SupabaseClient<Database> {
+  if (!_supabaseAdmin) _supabaseAdmin = createAdminClient();
+  return _supabaseAdmin;
+}
 
 // Database 타입 별칭
 type UserInsert = Database['public']['Tables']['users']['Insert'];
@@ -83,7 +90,7 @@ export async function syncCurrentUser(): Promise<SyncedUser | null> {
     };
 
     // Supabase에서 사용자 확인
-    const { data: existingUser, error: selectError } = await supabaseAdmin
+    const { data: existingUser, error: selectError } = await supabaseAdmin()
       .from('users')
       .select('*')
       .eq('clerk_id', clerkUser.id)
@@ -112,7 +119,7 @@ export async function syncCurrentUser(): Promise<SyncedUser | null> {
     if (existingUser) {
       // 기존 사용자 업데이트
       const { data, error } = await safeUpdate(
-        supabaseAdmin,
+        supabaseAdmin(),
         'users',
         userPayload
       )
@@ -129,7 +136,7 @@ export async function syncCurrentUser(): Promise<SyncedUser | null> {
     } else {
       // 새 사용자 생성
       const { data, error } = await safeInsert(
-        supabaseAdmin,
+        supabaseAdmin(),
         'users',
         userPayload
       )
@@ -158,7 +165,7 @@ export async function getUserByClerkId(
   clerkId: string
 ): Promise<SyncedUser | null> {
   try {
-    const { data, error } = await supabaseAdmin
+    const { data, error } = await supabaseAdmin()
       .from('users')
       .select('*')
       .eq('clerk_id', clerkId)
@@ -223,7 +230,7 @@ export async function getUserStats(): Promise<{
   recent: RecentUser[];
 }> {
   try {
-    const { data, error } = await safeFrom(supabaseAdmin, 'users')
+    const { data, error } = await safeFrom(supabaseAdmin(), 'users')
       .select('id, is_admin, created_at, last_sign_in_at, metadata')
       .order('created_at', { ascending: false });
 

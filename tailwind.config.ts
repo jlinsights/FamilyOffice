@@ -62,27 +62,32 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
-        // FamilyOffice S - Modern Legacy Brand Colors
+        // FamilyOffice S — DESIGN.md Revolut benchmark
+        surface: {
+          base: '#FFFFFF',
+          elevated: '#F4F4F4',
+          muted: 'rgba(25, 28, 31, 0.06)',
+        },
         brand: {
           navy: {
-            DEFAULT: '#0A192F',
-            light: '#162C4E',
-            dark: '#050D19',
+            DEFAULT: '#000000',
+            light: '#16181a',
+            dark: '#000000',
           },
           gold: {
-            DEFAULT: '#D4AF37',
-            light: '#E5C158',
-            dark: '#A38428',
+            DEFAULT: '#494fdf',
+            light: '#4f55f1',
+            dark: '#3a40c4',
           },
           bronze: {
-            DEFAULT: '#B8860B',
-            light: '#D49D24',
-            dark: '#8B6508',
+            DEFAULT: '#3a40c4',
+            light: '#4f55f1',
+            dark: '#2e33a0',
           },
           slate: {
-            DEFAULT: '#1E293B',
-            light: '#334155',
-            dark: '#0F172A',
+            DEFAULT: '#191c1f',
+            light: '#505a63',
+            dark: '#0d0f11',
           },
         },
         // Emerald Luxury - 포지티브 데이터, 성과 지표, 액센트 컬러
@@ -126,6 +131,9 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
         '2xl': '1rem',
         '3xl': '1.5rem',
+        'legacy-md': '12px',
+        'legacy-lg': '20px',
+        pill: '9999px',
       },
       boxShadow: {
         // Modern v0-style shadows
@@ -169,6 +177,8 @@ const config: Config = {
         88: '22rem',
         112: '28rem',
         128: '32rem',
+        'section-legacy': '5.5rem',
+        'band-legacy': '7.5rem',
       },
       animation: {
         // Modern v0-style animations

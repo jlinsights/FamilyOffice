@@ -1,5 +1,10 @@
 'use client';
 
+// 인증 페이지: SSR prerender 시 window.location 등 client-only API 가 module evaluation 단계에서 throw.
+// (build log: ReferenceError: location is not defined + Missing Supabase env)
+// 인증 보호 페이지이므로 SEO 영향 없음 → runtime rendering 으로 prerender skip.
+export const dynamic = 'force-dynamic';
+
 import {
   User,
   Building2,

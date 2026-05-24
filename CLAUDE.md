@@ -150,6 +150,10 @@ npx jest tests/unit/financial-calculations.test.ts
 - **Resend** — 이메일 (`email.familyoffices.vip`)
 - **HubSpot** — CRM + 마케팅 자동화
 - **Channel Talk** — 고객 지원
+- **Toss Payments** — 결제위젯 v2 SDK (`@tosspayments/tosspayments-sdk ^2.7`)
+  - 키 형식: `test_gck_*`/`test_gsk_*` (v2 위젯) 또는 `test_ck_*`/`test_sk_*` (v1 API)
+  - 상담 1회성 결제 (`CONSULTATION_FEE` = 330,000원) + Shop 1-of-1 큐레이션 결제
+  - 보안: HMAC 웹훅 서명 검증 · UUID v5 customerKey · payment_secret cross-check · Clerk 본인 confirm
 
 ---
 
@@ -158,23 +162,33 @@ npx jest tests/unit/financial-calculations.test.ts
 ```
 app/
 ├── api/
-│   ├── financial/     # 금융 데이터 API (주식, 환율, 세무)
-│   ├── newsletter/    # 뉴스레터 구독 API
-│   ├── webhooks/clerk/# Clerk→Supabase 동기화
-│   └── admin/         # 어드민 API 라우트
-├── admin/             # Admin Dashboard (인증 보호)
-├── blog/              # 블로그 시스템
-├── portal/            # 사용자 포털
-├── layout.tsx         # Root Layout + Providers
-└── globals.css        # Tailwind 기본 + 브랜드 유틸리티
+│   ├── financial/                          # 금융 데이터 API (주식, 환율, 세무)
+│   ├── newsletter/                         # 뉴스레터 구독 API
+│   ├── webhooks/clerk/                     # Clerk→Supabase 동기화
+│   ├── payments/
+│   │   ├── structure-check/{request,confirm}/ # 상담 1회성 결제 (Toss)
+│   │   ├── shop/{create-order,confirm}/    # Shop 1-of-1 결제 (Toss)
+│   │   └── webhook/                        # Toss 웹훅 (orderId 접두사로 SHOP-/structure_check 분기)
+│   └── admin/                              # 어드민 API 라우트
+├── admin/                                  # Admin Dashboard (인증 보호)
+├── blog/                                   # 블로그 시스템
+├── portal/                                 # 사용자 포털
+├── shop/                                   # Shop MVP (서예/사진/그림/럭셔리 1-of-1 큐레이션)
+├── structure-check/                        # 구조 점검 상담 신청 + 결제 success/fail
+├── layout.tsx                              # Root Layout + Providers
+└── globals.css                             # Tailwind 기본 + 브랜드 유틸리티
 
 components/
 ├── sections/          # 홈페이지 섹션 (hero, services, dual-pillar 등)
 ├── calendar/          # Cal.com 예약 위젯 (5종)
+├── payment/           # Toss 결제위젯 (toss-payment-widget.tsx)
+├── shop/              # Shop UI (shop-page-content, shop-category-tabs 등)
+├── forms/             # 폼 (structure-check-request-form 등)
 ├── seminar/           # 세미나 섹션
 ├── bento/             # 벤토 그리드 서비스 카드
-├── header.tsx         # 글로벌 헤더 (Signature Navy)
+├── header.tsx         # 글로벌 헤더 (FamilyOfficeS 태그라인 로고)
 ├── footer.tsx         # 글로벌 푸터 (Signature Navy + Gold)
+├── logo.tsx           # 로고 컴포넌트 (FamilyOfficeSTaglineBlackLogo)
 └── ui/                # shadcn/ui 컴포넌트
 
 constants/
@@ -187,11 +201,15 @@ lib/
 ├── supabase/             # DB 클라이언트 설정
 ├── financial/            # 금융 API + 캐싱
 ├── email/resend-client.ts# 이메일 서비스
-└── env.ts                # Zod 환경변수 검증
+├── payments/             # Toss 헬퍼 (UUID v5 customerKey, HMAC 검증, payment_secret 대조, lookup URL)
+├── shop/                 # Shop 라이브러리 (constants/order-id/schemas/products/orders)
+└── env.ts                # Zod 환경변수 검증 (Toss v2 gck/gsk 허용)
 
 tailwind.config.ts         # brand.* 토큰 + Playfair/Inter 폰트
 DESIGN.md                  # 디자인 시스템 소스 오브 트루스
 AGENTS.md                  # AI 에이전트 개발 규칙
+.claude-plugin/            # family-office Claude Code 플러그인 — .claude-plugin/README.md 참조
+.mcp.json                  # MCP 커넥터 (세션 시작 시 자동 로드) — 현재 빈 객체, 토큰 발급 후 활성화
 ```
 
 ---
@@ -241,13 +259,18 @@ UPSTASH_REDIS_REST_TOKEN=
 # Analytics
 NEXT_PUBLIC_GA_MEASUREMENT_ID=
 
+# Toss Payments (결제위젯 v2)
+NEXT_PUBLIC_TOSS_CLIENT_KEY=test_gck_...   # 브라우저 위젯 (test_gck_/live_gck_)
+TOSS_SECRET_KEY=test_gsk_...               # 서버 승인·조회 (test_gsk_/live_gsk_)
+TOSS_WEBHOOK_SECRET=                       # 웹훅 HMAC 서명 검증 (운영 필수)
+
 # 선택
 BEEHIIV_API_KEY=
 BEEHIIV_PUBLICATION_ID=
 NEXT_PUBLIC_CALCOM_API_KEY=
 ```
 
-전체 목록: `.env.example`
+전체 목록: `.env.example` · Toss 운영 체크리스트: `docs/payments/toss-payments-checklist.md`
 
 ---
 
@@ -374,10 +397,13 @@ import { supabase } from '@/lib/supabase';
 
 | 날짜 | 주요 변경 |
 |---|---|
+| 2026-05-23 | Shop MVP 백엔드 (lib/shop, app/api/payments/shop, shop_products/shop_orders 1-of-1), Toss 결제위젯 v2 (gck/gsk) 키 형식 허용, FamilyOfficeS 태그라인 로고 |
+| 2026-05-23 | Toss 결제 보안 강화 — HMAC 웹훅 + UUID v5 customerKey + payment_secret cross-check + Clerk 본인 confirm |
+| 2026-05-23 | family-office Claude Code 플러그인 (.claude-plugin) — 콘텐츠·리드·상담·SEO 스킬 4종 |
 | 2026-05-03 | DESIGN.md Modern Legacy 디자인 시스템 적용 완료 |
 | 2026-05-03 | Next.js 16.1.6 업그레이드, 빌드 139 정적 페이지 |
 | 2025-02 | 초기 문서 작성 |
 
 ---
 
-**Last Updated**: 2026-05-03
+**Last Updated**: 2026-05-23

@@ -10,7 +10,7 @@ import {
   SafeSignInButton,
   SafeUserButton,
 } from '@/components/auth/safe-clerk-components';
-import { SamsungFinancialNetworksLogo } from '@/components/logo';
+import { FamilyOfficeSTaglineBlackLogo } from '@/components/logo';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 import { useSafeAuth } from '@/hooks/use-safe-auth';
@@ -90,11 +90,11 @@ export const Header = memo(function Header({
           <div className="flex justify-between items-center py-3">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/" className="transition-opacity hover:opacity-80">
-                <span className="sr-only">Samsung Financial Networks</span>
-                <SamsungFinancialNetworksLogo
-                  width={140}
+                <span className="sr-only">FamilyOffice</span>
+                <FamilyOfficeSTaglineBlackLogo
+                  width={162}
                   height={32}
-                  className="h-8 w-auto transition-transform hover:scale-105"
+                  className="h-8 w-auto brightness-0 invert transition-transform hover:scale-105"
                   priority
                 />
               </Link>
@@ -134,13 +134,13 @@ export const Header = memo(function Header({
             <Link
               href="/"
               className="transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
-              aria-label="Samsung Financial Networks 홈페이지로 이동"
+              aria-label="FamilyOffice 홈페이지로 이동"
             >
-              <span className="sr-only">Samsung Financial Networks</span>
-              <SamsungFinancialNetworksLogo
-                width={140}
+              <span className="sr-only">FamilyOffice</span>
+              <FamilyOfficeSTaglineBlackLogo
+                width={162}
                 height={32}
-                className="h-8 w-auto transition-transform hover:scale-105"
+                className="h-8 w-auto brightness-0 invert transition-transform hover:scale-105"
                 priority
               />
             </Link>
@@ -181,7 +181,7 @@ export const Header = memo(function Header({
                 {item.submenu && item.submenu.length > 0 ? (
                   <>
                     <button
-                      className="text-base font-medium text-white/90 hover:text-[#D4AF37] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#0A192F] rounded-md px-1 py-1 flex items-center gap-1 h-9"
+                      className="text-base font-medium text-white/90 hover:text-[var(--brand-gold)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--brand-navy)] rounded-md px-1 py-1 flex items-center gap-1 h-9"
                       aria-label={`${item.label} 메뉴`}
                     >
                       {item.label}
@@ -225,7 +225,7 @@ export const Header = memo(function Header({
                                   : subItem.label
                               }
                             >
-                              <div className="font-medium text-white group-hover/submenu:text-[#D4AF37] transition-colors">
+                              <div className="font-medium text-white group-hover/submenu:text-[var(--brand-gold)] transition-colors">
                                 {subItem.label}
                               </div>
                               {subItem.description && (
@@ -247,7 +247,7 @@ export const Header = memo(function Header({
                     className={
                       item.isPrimary
                         ? 'inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
-                        : 'text-base font-medium text-white/90 hover:text-[#D4AF37] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#0A192F] rounded-md px-3 py-2 flex items-center h-9'
+                        : 'text-base font-medium text-white/90 hover:text-[var(--brand-gold)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--brand-navy)] rounded-md px-3 py-2 flex items-center h-9'
                     }
                     aria-label={
                       item.isExternal
@@ -267,13 +267,12 @@ export const Header = memo(function Header({
             {/* 구조 점검 요청 버튼 — Heritage Gold CTA */}
             <Link
               href="/structure-check#request-form"
-              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-xs font-semibold transition-all duration-200 hover:scale-105"
-              style={{ backgroundColor: '#D4AF37', color: '#0A192F' }}
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--brand-navy)]"
+              style={{ backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)' }}
               aria-label="구조 점검 요청"
               title="구조 점검 요청"
             >
-              <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden xl:inline">구조 점검</span>
+              <ClipboardCheck className="h-5 w-5" aria-hidden="true" />
             </Link>
 
             {/* 인증 관련 버튼 */}
@@ -291,7 +290,7 @@ export const Header = memo(function Header({
                 <SafeSignInButton mode="modal">
                   <button
                     className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
-                    style={{ border: '1px solid rgba(212,175,55,0.4)', color: '#E5C158', backgroundColor: 'transparent' }}
+                    style={{ border: '1px solid rgba(212,175,55,0.4)', color: 'var(--brand-shimmer)', backgroundColor: 'transparent' }}
                     aria-label="로그인"
                   >
                     로그인
@@ -327,7 +326,7 @@ export const Header = memo(function Header({
                   <div className="space-y-1">
                     <button
                       onClick={() => toggleMobileSubmenu(item.label)}
-                      className="w-full flex items-center justify-center px-3 py-2 text-base font-medium text-white/90 hover:text-[#D4AF37] hover:bg-white/10 rounded-md transition-colors"
+                      className="w-full flex items-center justify-center px-3 py-2 text-base font-medium text-white/90 hover:text-[var(--brand-gold)] hover:bg-white/10 rounded-md transition-colors"
                       aria-expanded={mobileSubmenus[item.label] || false}
                       aria-label={`${item.label} 메뉴 ${mobileSubmenus[item.label] ? '접기' : '펼치기'}`}
                     >
@@ -369,7 +368,7 @@ export const Header = memo(function Header({
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="block px-3 py-2 text-base font-medium text-white/90 hover:text-[#D4AF37] hover:bg-white/10 rounded-md transition-colors text-center"
+                    className="block px-3 py-2 text-base font-medium text-white/90 hover:text-[var(--brand-gold)] hover:bg-white/10 rounded-md transition-colors text-center"
                     onClick={handleMobileLinkClick}
                     aria-label={
                       item.isExternal

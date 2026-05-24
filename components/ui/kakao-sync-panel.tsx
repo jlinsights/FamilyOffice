@@ -9,7 +9,7 @@ import {
   XCircle,
   AlertCircle,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -40,8 +40,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
     enableAutoReply: false,
   });
 
-  const kakaoSyncService = getKakaoSyncService();
-  const serviceStatus = kakaoSyncService.getStatus();
+  const serviceStatus = useMemo(() => getKakaoSyncService().getStatus(), []);
 
   const handleChannelAdd = async () => {
     if (!isKakaoUser) {
@@ -55,7 +54,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
 
     setIsLoading(true);
     try {
-      const success = await kakaoSyncService.promoteChannelSubscription(
+      const success = await getKakaoSyncService().promoteChannelSubscription(
         user?.id || ''
       );
 
@@ -85,7 +84,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
   const handleChannelChat = async () => {
     setIsLoading(true);
     try {
-      const success = await kakaoSyncService.startChannelChat();
+      const success = await getKakaoSyncService().startChannelChat();
 
       if (success) {
         toast({
@@ -138,7 +137,7 @@ export function KakaoSyncPanel({ className = '' }: KakaoSyncPanelProps) {
     setSyncSettings(newSettings);
 
     try {
-      await kakaoSyncService.updateUserSyncSettings(user.id, newSettings);
+      await getKakaoSyncService().updateUserSyncSettings(user.id, newSettings);
       toast({
         title: '설정 저장 완료',
         description: '카카오 싱크 설정이 업데이트되었습니다.',

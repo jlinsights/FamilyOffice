@@ -10,7 +10,7 @@
  * - Path: /api/cron/daily-bmad-collection
  * - Schedule: "0 2 * * *" (매일 새벽 2시)
  */
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
 import { resolve } from 'path';
 import { BMAD_AI_KEYWORDS } from '../lib/ai/ai-search-monitoring';
@@ -19,10 +19,22 @@ import { batchSearch } from '../lib/serper/client';
 // Load environment variables from .env.local
 config({ path: resolve(process.cwd(), '.env.local') });
 
-// Supabase 클라이언트 초기화
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
+// Supabase 클라이언트 — lazy init (Vercel build-time evaluation 회피)
+// 이 모듈은 Vercel Cron route (/api/cron/daily-bmad-collection) 에서 import 되므로
+// module top-level instantiation 은 build 단계에서 env 미주입 시 throw 로 build 를 깨뜨림.
+let _supabase: SupabaseClient | null = null;
+function supabase(): SupabaseClient {
+  if (_supabase) return _supabase;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    throw new Error(
+      'collect-serper-rankings: NEXT_PUBLIC_SUPABASE_URL 또는 SUPABASE_SERVICE_ROLE_KEY 누락'
+    );
+  }
+  _supabase = createClient(url, key);
+  return _supabase;
+}
 
 // 추적 대상 도메인
 const TARGET_DOMAIN = 'familyoffices.vip';
@@ -94,7 +106,7 @@ export async function collectDailyRankings() {
   for (let i = 0; i < recordsToInsert.length; i += batchSize) {
     const batch = recordsToInsert.slice(i, i + batchSize);
 
-    const { data, error } = await supabase
+    const { data, error } = await supabase()
       .from('keyword_rankings')
       .insert(batch);
 
@@ -166,7 +178,7 @@ export async function collectDailyRankings() {
  * 상위 순위 키워드 조회 (Top 10)
  */
 export async function getTopRankingKeywords(limit: number = 10) {
-  const { data, error } = await supabase
+  const { data, error } = await supabase()
     .from('keyword_rankings')
     .select('*')
     .not('position', 'is', null)
@@ -189,7 +201,7 @@ export async function getKeywordTrend(keyword: string, days: number = 30) {
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - days);
 
-  const { data, error } = await supabase
+  const { data, error } = await supabase()
     .from('keyword_rankings')
     .select('*')
     .eq('keyword', keyword)
@@ -208,7 +220,7 @@ export async function getKeywordTrend(keyword: string, days: number = 30) {
  * 카테고리별 평균 순위 조회
  */
 export async function getCategoryAverageRankings() {
-  const { data, error } = await supabase
+  const { data, error } = await supabase()
     .from('keyword_rankings')
     .select('bmad_category, position')
     .not('position', 'is', null)

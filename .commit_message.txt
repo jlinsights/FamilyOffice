@@ -1,1 +1,1 @@
-🔧 chore: .gitignore 에 .gstack/ 추가 (gstack/browse skill 부산물 추적 방지)
+🐛 fix: /profile Vercel 빌드 — Supabase SSR placeholder·force-dynamic
