@@ -130,7 +130,7 @@ S5. 본 사이클 변경량은 **설정 파일 위주, 본질 코드 0**
 
 | # | 위험 | 완화 |
 |---|---|---|
-| R1 | 임계값 너무 낮게 잡아 회귀 감지 실패 | 모듈별 baseline+5% 마진으로 ratchet, 정기적 상향 |
+| R1 | 임계값 설정 방향 오류 — "baseline+N%" 는 항상 fail 의 aspirational target, "baseline−N%" 가 regression gate | **임계값 = floor(current_coverage) − 1pp buffer (regression gate)**. ratchet (자동 상향) 은 본 사이클 out-of-scope, 별 사이클 (Option D `jest-coverage-thresholds-bumper`) 로 분리 |
 | R2 | `collectCoverageFrom` 축소가 향후 모듈 신설 시 누락 위험 | Design 에서 패턴 (`lib/**/*.ts`) vs 명시(`lib/security/csrf.ts`) 정책 결정 |
 | R3 | CI `coverage` workflow 가 별 명령으로 임계값 적용 중 | T6 점검에서 확인 |
 | R4 | 사용자가 Option A 선호 시 의도 충돌 | Q1 명시적 확인 |

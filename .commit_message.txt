@@ -1,1 +1,1 @@
-📝 docs(pdca): familyoffice-jest-coverage-threshold-cleanup Plan 작성 — 1.88% vs 85% threshold 격차 진단, 4 옵션(A baseline / B 모듈별 differential 권장 / C CI 전용 / D 자동 ratchet), Open Q1~Q5 Design Phase 확정 예정 (origin: csrf-hardening F2 HIGH P0)
+📐 docs(pdca): familyoffice-jest-coverage-threshold-cleanup Design — Q1~Q5 확정 (Option B 단독, 공식 baseline−1pp buffer), jest.config.js 최종 diff(~32 라인), baseline 측정 (calc 98/pay 94/csrf 91.66/financial 0), advisor 6 지적 반영 + Plan R1 wording 정정

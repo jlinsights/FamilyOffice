@@ -1,6 +1,6 @@
 {
   "activeFeature": "familyoffice-jest-coverage-threshold-cleanup",
-  "phase": "plan",
+  "phase": "design",
   "updatedAt": "2026-05-25",
   "history": [
     {
@@ -8,6 +8,12 @@
       "phase": "plan",
       "at": "2026-05-25",
       "note": "Plan 작성 — 1.88% vs 85% global threshold 격차 (lib/financial·portfolio·tax·app/api 0%), 4 옵션(A 임계값 baseline 화 / B 모듈별 differential + global 제거 권장 / C CI 전용 / D 자동 ratchet), Open Q1~Q5 Design 확정 예정"
+    },
+    {
+      "feature": "familyoffice-jest-coverage-threshold-cleanup",
+      "phase": "design",
+      "at": "2026-05-25",
+      "note": "Design 작성 — baseline 측정(calc 98% / pay 94% / csrf 91.66% / financial 0% / api 0%), Option B 단독, 공식 baseline−1pp buffer, csrf.ts 파일 단위 임계값, financial collectCoverageFrom 유지+threshold 제거(CLAUDE.md TODO), api/components/app exclude, 별 사이클 6 후보. advisor A1~A6 반영 (Plan R1 wording 정정 포함). T2~T8 Do Phase 예정, ~32 라인 jest.config.js 만 변경"
     },
     {
       "feature": "familyoffice-csrf-hardening",
