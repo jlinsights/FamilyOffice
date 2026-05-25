@@ -1,8 +1,14 @@
 {
-  "activeFeature": null,
-  "phase": "archived",
+  "activeFeature": "familyoffice-jest-coverage-threshold-cleanup",
+  "phase": "plan",
   "updatedAt": "2026-05-25",
   "history": [
+    {
+      "feature": "familyoffice-jest-coverage-threshold-cleanup",
+      "phase": "plan",
+      "at": "2026-05-25",
+      "note": "Plan 작성 — 1.88% vs 85% global threshold 격차 (lib/financial·portfolio·tax·app/api 0%), 4 옵션(A 임계값 baseline 화 / B 모듈별 differential + global 제거 권장 / C CI 전용 / D 자동 ratchet), Open Q1~Q5 Design 확정 예정"
+    },
     {
       "feature": "familyoffice-csrf-hardening",
       "phase": "plan",
