@@ -4,6 +4,16 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
+// Server Actions allowedOrigins (host only, no scheme).
+// SoT: kept in sync with lib/config.ts ALLOWED_ORIGINS (URL form) — see csrf-hardening design.
+const ALLOWED_HOSTS = [
+  'familyoffices.vip',
+  'www.familyoffices.vip',
+  'familyoffice-jet.vercel.app',
+  'familyoffice-jlinsights-projects.vercel.app',
+  ...(process.env.NODE_ENV !== 'production' ? ['localhost:3000'] : []),
+];
+
 const nextConfig = {
   // Externalize packages that use native Node.js APIs or runtime file access
   // jsdom (via isomorphic-dompurify) loads browser/default-stylesheet.css at runtime
@@ -25,6 +35,10 @@ const nextConfig = {
       'class-variance-authority',
       'tailwind-merge',
     ],
+    // CSRF hardening: explicit Server Actions origin whitelist (defense-in-depth with middleware Origin guard)
+    serverActions: {
+      allowedOrigins: ALLOWED_HOSTS,
+    },
   },
   // Next.js 16: eslint configuration moved to eslint.config.js
   typescript: {

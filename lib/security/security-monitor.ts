@@ -11,7 +11,8 @@ interface SecurityEvent {
     | 'rate_limit_exceeded'
     | 'invalid_auth'
     | 'admin_access'
-    | 'data_breach_attempt';
+    | 'data_breach_attempt'
+    | 'csrf_origin_blocked';
   severity: 'low' | 'medium' | 'high' | 'critical';
   description: string;
   ip_address?: string;
