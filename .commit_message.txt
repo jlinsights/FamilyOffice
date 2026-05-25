@@ -1,1 +1,1 @@
-🔒 feat(csrf): middleware Origin 가드 + serverActions allowedOrigins + members mock 라우트 삭제 + 단위 테스트 9개 (familyoffice-csrf-hardening Do Phase 완료, 6 curl 시나리오 통과)
+📁 chore(pdca): familyoffice-csrf-hardening archive — 4 PDCA 문서 (plan/design/analysis/report) → docs/archive/2026-05/ 이관, _INDEX.md 생성, .bkit-memory.json phase=archived (matchRate 100%, 머지 commit d609429, PR #16)

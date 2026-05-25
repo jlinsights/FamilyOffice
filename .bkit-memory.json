@@ -1,6 +1,6 @@
 {
-  "activeFeature": "familyoffice-csrf-hardening",
-  "phase": "do",
+  "activeFeature": null,
+  "phase": "archived",
   "updatedAt": "2026-05-25",
   "history": [
     {
@@ -20,6 +20,24 @@
       "phase": "do",
       "at": "2026-05-25",
       "note": "Do 완료 — T1~T5 모두 ✅. lib/security/csrf.ts 신규(Jest 호환 위해 design D3 수정·createRouteMatcher 대신 string prefix), middleware.ts 가드 추가·import 정리, security-monitor.ts type 보강, next.config.mjs serverActions allowedOrigins, members 라우트 삭제, unit 9 PASS, typecheck 0, lint 0, dev curl 6 시나리오 PASS"
+    },
+    {
+      "feature": "familyoffice-csrf-hardening",
+      "phase": "check",
+      "at": "2026-05-25",
+      "note": "Match Rate 100% — D1~D7 머지 commit d609429 반영, 내부 gap 0, F1·F2·F3 분리 사이클 후보 식별"
+    },
+    {
+      "feature": "familyoffice-csrf-hardening",
+      "phase": "report",
+      "at": "2026-05-25",
+      "note": "Report 작성 — PR #16 admin squash merge d609429, manual QA 통과, Vercel production 자동 배포"
+    },
+    {
+      "feature": "familyoffice-csrf-hardening",
+      "phase": "archived",
+      "at": "2026-05-25",
+      "note": "4문서 → docs/archive/2026-05/familyoffice-csrf-hardening/ 이관, _INDEX.md 생성"
     }
   ],
   "archived": [
@@ -28,6 +46,7 @@
     { "feature": "large-page-refactor", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/large-page-refactor/" },
     { "feature": "remaining-cleanup", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/remaining-cleanup/" },
     { "feature": "setinterval-cleanup", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/setinterval-cleanup/" },
-    { "feature": "blog-hardcode-separation", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "N/A" }
+    { "feature": "blog-hardcode-separation", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "N/A" },
+    { "feature": "familyoffice-csrf-hardening", "matchRate": 100, "completedAt": "2026-05-25", "archivedTo": "docs/archive/2026-05/familyoffice-csrf-hardening/", "mergeCommit": "d609429", "pr": 16 }
   ]
 }
