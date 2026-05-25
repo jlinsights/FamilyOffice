@@ -1,1 +1,1 @@
-🐛 fix: /profile Vercel 빌드 — Supabase SSR placeholder·force-dynamic
+🔒 feat(csrf): middleware Origin 가드 + serverActions allowedOrigins + members mock 라우트 삭제 + 단위 테스트 9개 (familyoffice-csrf-hardening Do Phase 완료, 6 curl 시나리오 통과)

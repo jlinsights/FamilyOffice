@@ -1,44 +1,33 @@
 {
-  "activeFeature": null,
-  "phase": null,
-  "updatedAt": "2026-03-21",
-  "history": [],
-  "archived": [
+  "activeFeature": "familyoffice-csrf-hardening",
+  "phase": "do",
+  "updatedAt": "2026-05-25",
+  "history": [
     {
-      "feature": "security-fixes",
-      "matchRate": 100,
-      "completedAt": "2026-03-20",
-      "archivedTo": "docs/archive/2026-03/security-fixes/"
+      "feature": "familyoffice-csrf-hardening",
+      "phase": "plan",
+      "at": "2026-05-25",
+      "note": "Plan 문서 작성 완료, Open Questions 4건 (Q1 D1 결정 Design Phase)"
     },
     {
-      "feature": "force-dynamic-optimization",
-      "matchRate": 100,
-      "completedAt": "2026-03-20",
-      "archivedTo": "docs/archive/2026-03/force-dynamic-optimization/"
+      "feature": "familyoffice-csrf-hardening",
+      "phase": "design",
+      "at": "2026-05-25",
+      "note": "Design 압축 완성 — D1~D7 결정, Tasks T1~T5 (~36 본질코드+70 테스트), advisor scope 축소 반영"
     },
     {
-      "feature": "large-page-refactor",
-      "matchRate": 100,
-      "completedAt": "2026-03-21",
-      "archivedTo": "docs/archive/2026-03/large-page-refactor/"
-    },
-    {
-      "feature": "remaining-cleanup",
-      "matchRate": 100,
-      "completedAt": "2026-03-21",
-      "archivedTo": "docs/archive/2026-03/remaining-cleanup/"
-    },
-    {
-      "feature": "setinterval-cleanup",
-      "matchRate": 100,
-      "completedAt": "2026-03-21",
-      "archivedTo": "docs/archive/2026-03/setinterval-cleanup/"
-    },
-    {
-      "feature": "blog-hardcode-separation",
-      "matchRate": 100,
-      "completedAt": "2026-03-21",
-      "archivedTo": "N/A"
+      "feature": "familyoffice-csrf-hardening",
+      "phase": "do",
+      "at": "2026-05-25",
+      "note": "Do 완료 — T1~T5 모두 ✅. lib/security/csrf.ts 신규(Jest 호환 위해 design D3 수정·createRouteMatcher 대신 string prefix), middleware.ts 가드 추가·import 정리, security-monitor.ts type 보강, next.config.mjs serverActions allowedOrigins, members 라우트 삭제, unit 9 PASS, typecheck 0, lint 0, dev curl 6 시나리오 PASS"
     }
+  ],
+  "archived": [
+    { "feature": "security-fixes", "matchRate": 100, "completedAt": "2026-03-20", "archivedTo": "docs/archive/2026-03/security-fixes/" },
+    { "feature": "force-dynamic-optimization", "matchRate": 100, "completedAt": "2026-03-20", "archivedTo": "docs/archive/2026-03/force-dynamic-optimization/" },
+    { "feature": "large-page-refactor", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/large-page-refactor/" },
+    { "feature": "remaining-cleanup", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/remaining-cleanup/" },
+    { "feature": "setinterval-cleanup", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/setinterval-cleanup/" },
+    { "feature": "blog-hardcode-separation", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "N/A" }
   ]
 }

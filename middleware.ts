@@ -4,13 +4,17 @@ import {
   clerkMiddleware,
   createRouteMatcher,
 } from '@clerk/nextjs/server';
-import { ALLOWED_ORIGINS } from '@/lib/config';
 import { globalRateLimit } from '@/lib/rate-limit';
 import {
   autoSecurityResponse,
   detectSuspiciousActivity,
   logSecurityEvent,
 } from '@/lib/security/security-monitor';
+import {
+  STATE_CHANGING_METHODS,
+  isAllowedOrigin,
+  isCsrfExemptRoute,
+} from '@/lib/security/csrf';
 
 // 보호된 API 경로 패턴
 const isProtectedApiRoute = createRouteMatcher([
@@ -32,11 +36,6 @@ const isOnboardingExcludedRoute = createRouteMatcher([
   '/api(.*)',
   '/_next(.*)',
 ]);
-
-function isAllowedOrigin(origin: string | null): boolean {
-  if (!origin) return false;
-  return ALLOWED_ORIGINS.includes(origin);
-}
 
 export default clerkMiddleware(async (auth, request) => {
   // 0. 의심스러운 활동 감지 및 자동 대응
@@ -133,6 +132,37 @@ export default clerkMiddleware(async (auth, request) => {
       );
 
       return rateLimitResult;
+    }
+  }
+
+  // 2.5 CSRF Origin guard (state-changing requests, excluding webhook/cron)
+  if (
+    STATE_CHANGING_METHODS.has(request.method) &&
+    request.nextUrl.pathname.startsWith('/api/') &&
+    !isCsrfExemptRoute(request)
+  ) {
+    const origin = request.headers.get('origin');
+    if (!isAllowedOrigin(origin)) {
+      await logSecurityEvent(
+        {
+          type: 'csrf_origin_blocked',
+          severity: 'high',
+          description: `CSRF guard: invalid Origin '${origin ?? 'null'}' for ${request.method} ${request.nextUrl.pathname}`,
+          additional_data: {
+            path: request.nextUrl.pathname,
+            method: request.method,
+            origin,
+          },
+        },
+        request
+      );
+      return NextResponse.json(
+        {
+          error: 'Forbidden: invalid origin',
+          timestamp: new Date().toISOString(),
+        },
+        { status: 403 }
+      );
     }
   }
 
