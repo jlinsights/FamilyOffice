@@ -1,1 +1,1 @@
-🧹 chore(jest): coverage threshold cleanup Do — 모듈별 differential 임계값 적용 (calculations 97 / payments 93 / csrf.ts 90, baseline−1pp), global 제거, financial NOTE (별 사이클 가시성)
+📊 docs(pdca): familyoffice-jest-coverage-threshold-cleanup Analysis — Match Rate 96% (T1-T8 100% / 시나리오 75% pre-existing CI noise 보정 / Advisor 100%), iterate 불요 → report 권장
