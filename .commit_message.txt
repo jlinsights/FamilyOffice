@@ -1,1 +1,1 @@
-📐 docs(pdca): familyoffice-jest-coverage-threshold-cleanup Design — Q1~Q5 확정 (Option B 단독, 공식 baseline−1pp buffer), jest.config.js 최종 diff(~32 라인), baseline 측정 (calc 98/pay 94/csrf 91.66/financial 0), advisor 6 지적 반영 + Plan R1 wording 정정
+🧹 chore(jest): coverage threshold cleanup Do — 모듈별 differential 임계값 적용 (calculations 97 / payments 93 / csrf.ts 90, baseline−1pp), global 제거, financial NOTE (별 사이클 가시성)
