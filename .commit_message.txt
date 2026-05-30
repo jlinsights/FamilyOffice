@@ -1,1 +1,1 @@
-📊 docs(pdca): familyoffice-jest-coverage-threshold-cleanup Analysis — Match Rate 96% (T1-T8 100% / 시나리오 75% pre-existing CI noise 보정 / Advisor 100%), iterate 불요 → report 권장
+📝 docs(pdca): familyoffice-jest-coverage-threshold-cleanup Report — Match 96% 완료, 5일 분산 사이클, F5 ci-debt-cleanup HIGH 후속 권장
