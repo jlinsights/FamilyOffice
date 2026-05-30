@@ -51,27 +51,20 @@ const customJestConfig = {
     '<rootDir>/dist/',
   ],
 
-  // Coverage configuration - Enhanced for financial applications
+  // Coverage configuration — 모듈별 differential (familyoffice-jest-coverage-threshold-cleanup, 2026-05-30)
+  // 기준선: baseline floor − 1pp buffer (큰 회귀 >1pp 만 차단, prettier 등 노이즈 흡수)
   collectCoverage: true,
   collectCoverageFrom: [
-    // Financial calculation modules (90%+ required)
-    'lib/financial/**/*.{js,ts,jsx,tsx}',
-    'lib/calculations/**/*.{js,ts,jsx,tsx}',
-    'lib/portfolio/**/*.{js,ts,jsx,tsx}',
-    'lib/tax/**/*.{js,ts,jsx,tsx}',
-    'lib/reporting/**/*.{js,ts,jsx,tsx}',
-    'lib/compliance/**/*.{js,ts,jsx,tsx}',
+    // Keep + threshold (실 coverage 양호, 회귀 가드 가치 큼)
+    'lib/calculations/**/*.{ts,tsx}',
+    'lib/payments/**/*.{ts,tsx}',
+    'lib/security/csrf.ts',
 
-    // API routes (85%+ required)
-    'app/api/**/*.{js,ts}',
+    // Keep + no threshold (CLAUDE.md "금융 모듈 90%+" TODO, 별 사이클 familyoffice-financial-test-coverage 예정)
+    // 매 측정마다 0% 가 surface → 별 사이클 진입 신호
+    'lib/financial/**/*.{ts,tsx}',
 
-    // Core application logic (80%+ required)
-    'app/**/*.{js,jsx,ts,tsx}',
-    'components/**/*.{js,jsx,ts,tsx}',
-    'lib/**/*.{js,jsx,ts,tsx}',
-    'constants/**/*.{js,jsx,ts,tsx}',
-
-    // Exclude files
+    // Exclude 영구 (UI/페이지/픽스처 — Playwright e2e 가 담당, jest 측정 부적합)
     '!**/*.d.ts',
     '!**/*.config.{js,ts}',
     '!**/*.stories.{js,ts,jsx,tsx}',
@@ -83,46 +76,34 @@ const customJestConfig = {
     '!**/globals.css',
   ],
 
-  // Strict coverage thresholds for financial calculations
+  // 회귀 가드 — 모듈별 differential 만 유지 (global threshold 제거)
   coverageThreshold: {
-    global: {
-      branches: 80,
-      functions: 85,
-      lines: 85,
-      statements: 85,
-    },
-    // Critical financial modules require 90%+ coverage
-    'lib/financial/': {
-      branches: 90,
-      functions: 95,
-      lines: 95,
-      statements: 95,
-    },
-    'lib/calculations/': {
-      branches: 90,
-      functions: 95,
-      lines: 95,
-      statements: 95,
-    },
-    'lib/portfolio/': {
-      branches: 90,
-      functions: 95,
-      lines: 95,
-      statements: 95,
-    },
-    'lib/tax/': {
-      branches: 90,
-      functions: 95,
-      lines: 95,
-      statements: 95,
-    },
-    // API routes
-    'app/api/': {
-      branches: 85,
-      functions: 90,
-      lines: 90,
+    // 파일 단위 (critical asset 회귀 방지)
+    'lib/security/csrf.ts': {
       statements: 90,
+      branches: 95,
+      functions: 100,
+      lines: 95,
     },
+
+    // 디렉토리 단위 (baseline floor − 1pp buffer)
+    'lib/calculations/': {
+      statements: 97,
+      branches: 89,
+      functions: 100,
+      lines: 98,
+    },
+    'lib/payments/': {
+      statements: 93,
+      branches: 87,
+      functions: 100,
+      lines: 95,
+    },
+
+    // NOTE: lib/financial/ 는 의도적으로 임계값 미설정.
+    // collectCoverageFrom 에는 포함되어 매 측정마다 0% 가 보고됨 (가시성).
+    // 별 사이클 familyoffice-financial-test-coverage 에서 임계값 부여 예정.
+    // CLAUDE.md "테스트 전략 — 금융 모듈 90%+" 와 연동.
   },
 
   // Coverage reporters

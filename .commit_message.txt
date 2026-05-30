@@ -1,1 +1,1 @@
-📁 chore(pdca): familyoffice-csrf-hardening archive — 4 PDCA 문서 (plan/design/analysis/report) → docs/archive/2026-05/ 이관, _INDEX.md 생성, .bkit-memory.json phase=archived (matchRate 100%, 머지 commit d609429, PR #16)
+📝 docs(pdca): familyoffice-jest-coverage-threshold-cleanup Report — Match 96% 완료, 5일 분산 사이클, F5 ci-debt-cleanup HIGH 후속 권장
