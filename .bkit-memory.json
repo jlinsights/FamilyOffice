@@ -1,7 +1,7 @@
 {
-  "activeFeature": "familyoffice-jest-coverage-threshold-cleanup",
-  "phase": "design",
-  "updatedAt": "2026-05-25",
+  "activeFeature": null,
+  "phase": "archived",
+  "updatedAt": "2026-05-30",
   "history": [
     {
       "feature": "familyoffice-jest-coverage-threshold-cleanup",
@@ -50,15 +50,93 @@
       "phase": "archived",
       "at": "2026-05-25",
       "note": "4문서 → docs/archive/2026-05/familyoffice-csrf-hardening/ 이관, _INDEX.md 생성"
+    },
+    {
+      "feature": "familyoffice-jest-coverage-threshold-cleanup",
+      "phase": "do",
+      "at": "2026-05-30",
+      "note": "T2-T8 적용 — jest.config.js +33/-52, collectCoverageFrom 21→14, threshold 6→3+NOTE. test:unit 523/523 PASS exit 0 (1→0), fail-injection (calculations 99→exit 1) gate 동작 증명. commit 4ec23a0."
+    },
+    {
+      "feature": "familyoffice-jest-coverage-threshold-cleanup",
+      "phase": "check",
+      "at": "2026-05-30",
+      "note": "Analysis 작성 — Match Rate 96% (T1-T8 100% / Advisor A1-A6 100% / 시나리오 75% pre-existing CI noise 보정). Gap 0 (G1 sufficient extrapolation, G2 pre-existing CI debt → 별 사이클 F5). commit b61ad32."
+    },
+    {
+      "feature": "familyoffice-jest-coverage-threshold-cleanup",
+      "phase": "report",
+      "at": "2026-05-30",
+      "note": "Report 작성 — 5일 분산 사이클 완료, F5 ci-debt-cleanup HIGH 후속 권장. commit 685a71d. PR #17 admin squash merge ec7697d6."
+    },
+    {
+      "feature": "familyoffice-jest-coverage-threshold-cleanup",
+      "phase": "archived",
+      "at": "2026-05-30",
+      "note": "4 PDCA 문서 → docs/archive/2026-05/familyoffice-jest-coverage-threshold-cleanup/, _INDEX.md 갱신, activeFeature=null. Match 96% / iterate 0 / 별 사이클 후보 6."
     }
   ],
   "archived": [
-    { "feature": "security-fixes", "matchRate": 100, "completedAt": "2026-03-20", "archivedTo": "docs/archive/2026-03/security-fixes/" },
-    { "feature": "force-dynamic-optimization", "matchRate": 100, "completedAt": "2026-03-20", "archivedTo": "docs/archive/2026-03/force-dynamic-optimization/" },
-    { "feature": "large-page-refactor", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/large-page-refactor/" },
-    { "feature": "remaining-cleanup", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/remaining-cleanup/" },
-    { "feature": "setinterval-cleanup", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "docs/archive/2026-03/setinterval-cleanup/" },
-    { "feature": "blog-hardcode-separation", "matchRate": 100, "completedAt": "2026-03-21", "archivedTo": "N/A" },
-    { "feature": "familyoffice-csrf-hardening", "matchRate": 100, "completedAt": "2026-05-25", "archivedTo": "docs/archive/2026-05/familyoffice-csrf-hardening/", "mergeCommit": "d609429", "pr": 16 }
-  ]
+    {
+      "feature": "security-fixes",
+      "matchRate": 100,
+      "completedAt": "2026-03-20",
+      "archivedTo": "docs/archive/2026-03/security-fixes/"
+    },
+    {
+      "feature": "force-dynamic-optimization",
+      "matchRate": 100,
+      "completedAt": "2026-03-20",
+      "archivedTo": "docs/archive/2026-03/force-dynamic-optimization/"
+    },
+    {
+      "feature": "large-page-refactor",
+      "matchRate": 100,
+      "completedAt": "2026-03-21",
+      "archivedTo": "docs/archive/2026-03/large-page-refactor/"
+    },
+    {
+      "feature": "remaining-cleanup",
+      "matchRate": 100,
+      "completedAt": "2026-03-21",
+      "archivedTo": "docs/archive/2026-03/remaining-cleanup/"
+    },
+    {
+      "feature": "setinterval-cleanup",
+      "matchRate": 100,
+      "completedAt": "2026-03-21",
+      "archivedTo": "docs/archive/2026-03/setinterval-cleanup/"
+    },
+    {
+      "feature": "blog-hardcode-separation",
+      "matchRate": 100,
+      "completedAt": "2026-03-21",
+      "archivedTo": "N/A"
+    },
+    {
+      "feature": "familyoffice-csrf-hardening",
+      "matchRate": 100,
+      "completedAt": "2026-05-25",
+      "archivedTo": "docs/archive/2026-05/familyoffice-csrf-hardening/",
+      "mergeCommit": "d609429",
+      "pr": 16
+    }
+  ],
+  "lastArchived": {
+    "feature": "familyoffice-jest-coverage-threshold-cleanup",
+    "date": "2026-05-30",
+    "matchRate": 96,
+    "mergeCommit": "ec7697d6",
+    "mergedPr": 17,
+    "archivedTo": "docs/archive/2026-05/familyoffice-jest-coverage-threshold-cleanup/",
+    "parentCycle": "familyoffice-csrf-hardening (PR #16 머지 d609429) F2",
+    "followupCandidates": [
+      "familyoffice-financial-test-coverage (MEDIUM)",
+      "familyoffice-api-test-coverage (MEDIUM)",
+      "familyoffice-security-test-coverage (MEDIUM)",
+      "familyoffice-coverage-ratchet (LOW)",
+      "familyoffice-ci-debt-cleanup (HIGH, G2 unblock)",
+      "familyoffice-abuse-protection (MEDIUM)"
+    ]
+  }
 }
