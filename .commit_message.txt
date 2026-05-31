@@ -1,1 +1,1 @@
-📁 archive(pdca): familyoffice-jest-coverage-threshold-cleanup Match 96% → docs/archive/2026-05/ (PR #17 admin merge ec7697d6)
+📝 docs(pdca): familyoffice-ci-debt-cleanup Plan — npm audit 79건 (critical 5/high 15) + CodeQL v2→v3 2 workflows, 4 옵션 (A non-breaking 권장), Open Q1~Q5 Design 확정 예정
