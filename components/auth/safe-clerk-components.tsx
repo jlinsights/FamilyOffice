@@ -3,9 +3,16 @@
 import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
 function isBypassMode() {
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+  // When the publishable key is missing, SafeAuthProvider renders in mock mode
+  // without a <ClerkProvider>, so the real Clerk buttons would crash. Bypass in
+  // that case (aligns with SafeAuthProvider), and also when dev runs with
+  // production keys.
   return (
-    process.env.NODE_ENV === 'development' &&
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith('pk_live_')
+    !publishableKey ||
+    (process.env.NODE_ENV === 'development' &&
+      publishableKey.startsWith('pk_live_'))
   );
 }
 
@@ -18,7 +25,7 @@ export function SafeSignUpButton({
       <span
         onClick={() =>
           alert(
-            'Authentication is disabled in development mode because production keys are detected.'
+            'Authentication is disabled in this environment (Clerk keys are not configured).'
           )
         }
         className="cursor-not-allowed opacity-80 block"
@@ -56,7 +63,7 @@ export function SafeSignInButton({
       <span
         onClick={() =>
           alert(
-            'Authentication is disabled in development mode because production keys are detected.'
+            'Authentication is disabled in this environment (Clerk keys are not configured).'
           )
         }
         className="cursor-not-allowed opacity-80"
