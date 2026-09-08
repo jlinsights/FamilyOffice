@@ -123,16 +123,13 @@ export async function POST(request: NextRequest) {
         );
     }
 
-    // Sync to HubSpot (non-blocking, soft-fail)
-    upsertHubSpotContact({
+    // Sync to HubSpot (awaited, soft-fail)
+    const hubspotResult = await upsertHubSpotContact({
       email: validatedData.email,
       firstname: validatedData.name,
       phone: validatedData.phone,
       company: validatedData.company || undefined,
-      lead_source: 'structure_check',
-    }).catch((err) =>
-      console.error('[structure-check] HubSpot sync error (non-fatal):', err)
-    );
+    }).catch(() => ({ synced: false, contactId: null, error: 'EXCEPTION' as const }));
 
     return NextResponse.json(
       {
@@ -140,6 +137,8 @@ export async function POST(request: NextRequest) {
         message: '구조 점검 요청이 접수되었습니다',
         requestId: requestId,
         qualificationScore,
+        hubspotSynced: hubspotResult.synced,
+        hubspotError: hubspotResult.error,
       },
       { status: 201 }
     );
