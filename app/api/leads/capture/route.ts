@@ -74,6 +74,8 @@ interface CaptureLeadResponse {
   success: boolean;
   leadId?: string;
   beehiivSubscriptionId?: string | undefined;
+  hubspotSynced?: boolean;
+  hubspotError?: string | null;
   message: string;
   error?: string;
 }
@@ -306,16 +308,11 @@ export async function POST(request: NextRequest) {
       // Still return success since data was saved to Supabase
     }
 
-    // Sync to HubSpot (non-blocking, soft-fail)
-    upsertHubSpotContact({
+    // Sync to HubSpot (awaited, soft-fail — result reported in response)
+    const hubspotResult = await upsertHubSpotContact({
       email,
       firstname: name || undefined,
-      phone: undefined,
-      company: undefined,
-      lead_source: source || 'calculator',
-    }).catch((err) =>
-      console.error('[leads/capture] HubSpot sync error (non-fatal):', err)
-    );
+    }).catch(() => ({ synced: false, contactId: null, error: 'EXCEPTION' as const }));
 
     // Log email event
     try {
@@ -335,6 +332,8 @@ export async function POST(request: NextRequest) {
       success: true,
       leadId,
       beehiivSubscriptionId,
+      hubspotSynced: hubspotResult.synced,
+      hubspotError: hubspotResult.error,
       message:
         '이메일이 성공적으로 등록되었습니다. 절세 가이드를 이메일로 보내드릴게요!',
     });

@@ -7,11 +7,11 @@
 ```
 Browser ─► /api/leads/capture  ─► Supabase (leads)
                                  ├► Beehiiv (newsletter)
-                                 └► HubSpot (contact upsert)  ← NEW
+                                 └► HubSpot (contact upsert)
 
 Browser ─► /api/structure-check ─► Supabase (structure_check_requests)
                                  ├► Resend (admin + user email)
-                                 └► HubSpot (contact upsert)  ← NEW
+                                 └► HubSpot (contact upsert)
 ```
 
 ### Inbound (existing)
@@ -20,16 +20,38 @@ Browser ─► /api/structure-check ─► Supabase (structure_check_requests)
 creation, property changes, deal updates) and logs them to Supabase
 `lead_activities` / `deal_activities`.
 
-### Outbound (added by this PR)
+### Outbound
 
 `lib/hubspot/sync.ts` provides `upsertHubSpotContact()`:
 
 - **Create-or-update** via `POST /crm/v3/objects/contacts`. On 409 conflict
   it falls back to a lookup-by-email then PATCH.
 - **Soft-fail**: if no token is set or HubSpot returns an error, the primary
-  lead-save flow is unaffected.
-- Properties synced: `email`, `firstname`, `lastname`, `phone`, `company`,
-  `lifecyclestage` (default `lead`), `lead_source`.
+  lead-save flow is unaffected. The result is reported in the API response.
+- **Standard properties only**: `email`, `firstname`, `lastname`, `phone`,
+  `company`, `lifecyclestage` (default `lead`).
+- Custom properties like `lead_source` are **not** sent to avoid
+  `PROPERTY_DOESNT_EXIST` errors.
+
+### Response Fields
+
+Both `/api/leads/capture` and `/api/structure-check` return:
+
+```json
+{
+  "success": true,
+  "hubspotSynced": true,
+  "hubspotError": null
+}
+```
+
+| `hubspotSynced` | `hubspotError` | Meaning |
+|---|---|---|
+| `true` | `null` | Contact created/updated in HubSpot |
+| `false` | `NO_TOKEN` | No HubSpot token configured — skipped |
+| `false` | `HUBSPOT_400` | Bad request (check property names) |
+| `false` | `HUBSPOT_401` | Invalid token |
+| `false` | `NETWORK_ERROR` | Fetch failed |
 
 ## Environment Variables
 
@@ -38,50 +60,34 @@ creation, property changes, deal updates) and logs them to Supabase
 | `HUBSPOT_PRIVATE_ACCESS_TOKEN` | Server | HubSpot Private App token (preferred) |
 | `HUBSPOT_ACCESS_TOKEN` | Server | Fallback token name used by `api-client.ts` |
 
-Either variable works. If **neither** is set the sync is silently skipped.
+Either variable works. If **neither** is set the sync is skipped
+(`hubspotSynced: false, hubspotError: "NO_TOKEN"`).
 
 ## Verifying with a Test Lead
 
-Once `HUBSPOT_PRIVATE_ACCESS_TOKEN` is set (Vercel Dashboard → Settings →
-Environment Variables), you can test end-to-end:
-
 ```bash
-# leads/capture
-curl -X POST https://familyoffices.vip/api/leads/capture \
+curl -s -X POST https://www.familyoffices.vip/api/leads/capture \
   -H 'Content-Type: application/json' \
   -d '{
-    "email": "test-lead@example.com",
+    "email": "hs-test@example.com",
     "name": "홍길동",
-    "source": "manual_test",
-    "calculationResult": {
-      "totalAssets": 5000000000,
-      "totalDebts": 500000000,
-      "netAssets": 4500000000,
-      "estimatedTax": 900000000,
-      "hasSpouse": true,
-      "numChildren": 2
-    }
-  }'
-
-# structure-check
-curl -X POST https://familyoffices.vip/api/structure-check \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "name": "테스트",
-    "email": "test-sc@example.com",
-    "phone": "01012345678",
-    "company": "테스트주식회사",
-    "q1_decision_made": "no",
-    "q2_documented": "no",
-    "q3_authority_clear": "unclear",
-    "q4_cash_plan": "not_considered",
-    "q5_deadline": "within_6m"
-  }'
+    "source": "manual_test"
+  }' | jq '{success, hubspotSynced, hubspotError, leadId}'
 ```
 
-Then check HubSpot → Contacts → search for the email. The contact should
-appear with `lifecyclestage = lead` and `lead_source = manual_test` (or
-`structure_check`).
+Expected:
+
+```json
+{
+  "success": true,
+  "hubspotSynced": true,
+  "hubspotError": null,
+  "leadId": "..."
+}
+```
+
+Then check HubSpot → Contacts → search `hs-test@example.com`. The contact
+should appear with `lifecyclestage = lead`.
 
 ## Existing HubSpot Infrastructure (Reference)
 

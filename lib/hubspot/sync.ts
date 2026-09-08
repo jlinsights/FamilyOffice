@@ -1,22 +1,29 @@
 /**
  * Lightweight outbound HubSpot contact sync.
  *
- * Upserts a contact by email with soft-fail semantics:
- * - Skips silently when no HubSpot token is configured.
- * - Catches all errors so the caller's primary flow is never blocked.
+ * Upserts a contact by email using only standard HubSpot properties.
+ * Returns a result object so callers can report sync status without
+ * leaking secrets or blocking the primary flow.
  */
 
 const HUBSPOT_API = 'https://api.hubapi.com';
 
-interface LeadContactData {
+export interface HubSpotContactInput {
   email: string;
   firstname?: string | undefined;
   lastname?: string | undefined;
   phone?: string | undefined;
   company?: string | undefined;
   lifecyclestage?: string | undefined;
-  lead_source?: string | undefined;
 }
+
+export interface HubSpotSyncResult {
+  synced: boolean;
+  contactId: string | null;
+  error: string | null;
+}
+
+const SKIPPED: HubSpotSyncResult = { synced: false, contactId: null, error: 'NO_TOKEN' };
 
 function getAccessToken(): string | undefined {
   return (
@@ -29,60 +36,56 @@ function getAccessToken(): string | undefined {
 /**
  * Upsert a contact in HubSpot by email.
  *
- * Uses the "create or update" v3 endpoint. Properties are merged; existing
- * values are kept when the incoming field is undefined.
+ * Only standard HubSpot properties are sent (email, firstname, lastname,
+ * phone, company, lifecyclestage). Custom properties like lead_source are
+ * omitted to avoid 400 PROPERTY_DOESNT_EXIST errors.
  *
- * Returns the HubSpot contact id on success, or `null` on skip / error.
+ * Never throws — always returns a result object.
  */
 export async function upsertHubSpotContact(
-  data: LeadContactData,
-): Promise<string | null> {
+  data: HubSpotContactInput,
+): Promise<HubSpotSyncResult> {
   const token = getAccessToken();
-  if (!token) return null;
+  if (!token) return SKIPPED;
 
   const properties: Record<string, string> = {
     email: data.email,
     lifecyclestage: data.lifecyclestage ?? 'lead',
-    lead_source: data.lead_source ?? 'website',
   };
-
   if (data.firstname) properties.firstname = data.firstname;
   if (data.lastname) properties.lastname = data.lastname;
   if (data.phone) properties.phone = data.phone;
   if (data.company) properties.company = data.company;
 
   try {
-    const res = await fetch(
-      `${HUBSPOT_API}/crm/v3/objects/contacts`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ properties }),
+    const res = await fetch(`${HUBSPOT_API}/crm/v3/objects/contacts`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({ properties }),
+    });
 
     if (res.ok) {
       const body = await res.json();
-      return body?.id ?? null;
+      const contactId = body?.id ?? null;
+      console.log('[hubspot-sync] contact created:', contactId);
+      return { synced: true, contactId, error: null };
     }
 
     if (res.status === 409) {
-      const existingId = await patchExistingContact(token, data.email, properties);
-      return existingId;
+      return await patchExistingContact(token, data.email, properties);
     }
 
     const errText = await res.text().catch(() => '');
-    console.error(
-      `[hubspot-sync] create failed (${res.status}):`,
-      errText.slice(0, 300),
-    );
-    return null;
+    const errCode = `HUBSPOT_${res.status}`;
+    console.error(`[hubspot-sync] create failed (${res.status}):`, errText.slice(0, 300));
+    return { synced: false, contactId: null, error: errCode };
   } catch (err) {
-    console.error('[hubspot-sync] network error:', err instanceof Error ? err.message : err);
-    return null;
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('[hubspot-sync] network error:', msg);
+    return { synced: false, contactId: null, error: 'NETWORK_ERROR' };
   }
 }
 
@@ -90,7 +93,7 @@ async function patchExistingContact(
   token: string,
   email: string,
   properties: Record<string, string>,
-): Promise<string | null> {
+): Promise<HubSpotSyncResult> {
   try {
     const { email: _email, lifecyclestage: _lcs, ...updateProps } = properties;
 
@@ -104,14 +107,20 @@ async function patchExistingContact(
       },
     );
 
-    if (!lookupRes.ok) return null;
+    if (!lookupRes.ok) {
+      const errText = await lookupRes.text().catch(() => '');
+      console.error(`[hubspot-sync] lookup failed (${lookupRes.status}):`, errText.slice(0, 200));
+      return { synced: false, contactId: null, error: `HUBSPOT_LOOKUP_${lookupRes.status}` };
+    }
 
     const contact = await lookupRes.json();
     const contactId: string = contact?.id;
-    if (!contactId) return null;
+    if (!contactId) {
+      return { synced: false, contactId: null, error: 'HUBSPOT_NO_ID' };
+    }
 
     if (Object.keys(updateProps).length > 0) {
-      await fetch(`${HUBSPOT_API}/crm/v3/objects/contacts/${contactId}`, {
+      const patchRes = await fetch(`${HUBSPOT_API}/crm/v3/objects/contacts/${contactId}`, {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -119,10 +128,17 @@ async function patchExistingContact(
         },
         body: JSON.stringify({ properties: updateProps }),
       });
+      if (!patchRes.ok) {
+        const errText = await patchRes.text().catch(() => '');
+        console.error(`[hubspot-sync] patch failed (${patchRes.status}):`, errText.slice(0, 200));
+      }
     }
 
-    return contactId;
-  } catch {
-    return null;
+    console.log('[hubspot-sync] existing contact updated:', contactId);
+    return { synced: true, contactId, error: null };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('[hubspot-sync] patch error:', msg);
+    return { synced: false, contactId: null, error: 'NETWORK_ERROR' };
   }
 }
