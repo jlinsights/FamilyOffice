@@ -137,23 +137,46 @@ export async function POST(request: NextRequest) {
 
     // Use admin client to bypass RLS — this is a public API endpoint with no
     // authenticated user, but the leads table has RLS allowing service_role only.
-    const supabase = createAdminClient();
+    let supabase;
+    try {
+      supabase = createAdminClient();
+    } catch (envErr) {
+      console.error('[leads/capture] Supabase admin client init failed:', envErr);
+      return NextResponse.json<CaptureLeadResponse>(
+        {
+          success: false,
+          message: '서버 설정 오류가 발생했습니다.',
+          error: 'SUPABASE_CONFIG_ERROR',
+        },
+        { status: 500 }
+      );
+    }
 
-    // Check if lead already exists
-    // Note: Database 타입 미생성으로 Supabase 쿼리에 타입 단언 필요 (supabase gen types 실행 후 제거 가능)
     const leads = supabase.from('leads') as any;
     const emailEvents = supabase.from('email_events') as any;
 
-    const { data: existingLead } = (await leads
+    // Check if lead already exists — use maybeSingle() to avoid PGRST116 on zero rows
+    const { data: existingLead, error: selectError } = await leads
       .select('id, email, beehiiv_subscription_id')
       .eq('email', email)
-      .single()) as { data: Pick<LeadRow, 'id' | 'email' | 'beehiiv_subscription_id'> | null };
+      .maybeSingle();
+
+    if (selectError) {
+      console.error('[leads/capture] SELECT failed:', JSON.stringify(selectError));
+      return NextResponse.json<CaptureLeadResponse>(
+        {
+          success: false,
+          message: '데이터베이스 조회 중 오류가 발생했습니다.',
+          error: `DB_SELECT_ERROR:${selectError.code ?? 'UNKNOWN'}`,
+        },
+        { status: 500 }
+      );
+    }
 
     let leadId: string;
     let beehiivSubscriptionId: string | undefined;
 
     if (existingLead) {
-      // Lead exists - update with new calculation
       leadId = existingLead.id;
       beehiivSubscriptionId = existingLead.beehiiv_subscription_id || undefined;
 
@@ -183,8 +206,15 @@ export async function POST(request: NextRequest) {
         .eq('id', leadId);
 
       if (updateError) {
-        console.error('Failed to update existing lead:', updateError);
-        throw new Error('데이터 업데이트에 실패했습니다.');
+        console.error('[leads/capture] UPDATE failed:', JSON.stringify(updateError));
+        return NextResponse.json<CaptureLeadResponse>(
+          {
+            success: false,
+            message: '데이터 업데이트에 실패했습니다.',
+            error: `DB_UPDATE_ERROR:${updateError.code ?? 'UNKNOWN'}`,
+          },
+          { status: 500 }
+        );
       }
 
       return NextResponse.json<CaptureLeadResponse>({
@@ -195,7 +225,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // New lead - insert into Supabase
+    // New lead — insert into Supabase
     const newLeadData: Record<string, unknown> = {
       email,
       name,
@@ -217,14 +247,21 @@ export async function POST(request: NextRequest) {
       newLeadData.num_minor_children = calculationResult.numMinorChildren || 0;
     }
 
-    const { data: newLead, error: insertError } = (await leads
+    const { data: newLead, error: insertError } = await leads
       .insert(newLeadData)
       .select('id')
-      .single()) as { data: Pick<LeadRow, 'id'> | null; error: Error | null };
+      .maybeSingle();
 
     if (insertError || !newLead) {
-      console.error('Failed to insert lead:', insertError);
-      throw new Error('데이터 저장에 실패했습니다.');
+      console.error('[leads/capture] INSERT failed:', JSON.stringify(insertError));
+      return NextResponse.json<CaptureLeadResponse>(
+        {
+          success: false,
+          message: '데이터 저장에 실패했습니다.',
+          error: `DB_INSERT_ERROR:${insertError?.code ?? 'NO_DATA'}`,
+        },
+        { status: 500 }
+      );
     }
 
     leadId = newLead.id;
