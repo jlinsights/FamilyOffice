@@ -15,7 +15,7 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { beehiiv } from '@/lib/beehiiv/client';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin-client';
 import { upsertHubSpotContact } from '@/lib/hubspot/sync';
 
 export const runtime = 'nodejs';
@@ -135,8 +135,9 @@ export async function POST(request: NextRequest) {
 
     const { email, name, calculationResult, source, utm, referringUrl } = body;
 
-    // Create Supabase client
-    const supabase = await createClient();
+    // Use admin client to bypass RLS — this is a public API endpoint with no
+    // authenticated user, but the leads table has RLS allowing service_role only.
+    const supabase = createAdminClient();
 
     // Check if lead already exists
     // Note: Database 타입 미생성으로 Supabase 쿼리에 타입 단언 필요 (supabase gen types 실행 후 제거 가능)
