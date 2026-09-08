@@ -8,6 +8,7 @@ import { conversionTrackingService } from '@/lib/conversion/service';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { safeInsert } from '@/lib/supabase/helpers';
 import { Database } from '@/types/supabase';
+import { upsertHubSpotContact } from '@/lib/hubspot/sync';
 
 type StructureCheckInsert =
   Database['public']['Tables']['structure_check_requests']['Insert'];
@@ -121,6 +122,17 @@ export async function POST(request: NextRequest) {
           console.error('[structure-check] Conversion tracking error:', err)
         );
     }
+
+    // Sync to HubSpot (non-blocking, soft-fail)
+    upsertHubSpotContact({
+      email: validatedData.email,
+      firstname: validatedData.name,
+      phone: validatedData.phone,
+      company: validatedData.company || undefined,
+      lead_source: 'structure_check',
+    }).catch((err) =>
+      console.error('[structure-check] HubSpot sync error (non-fatal):', err)
+    );
 
     return NextResponse.json(
       {

@@ -16,6 +16,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { beehiiv } from '@/lib/beehiiv/client';
 import { createClient } from '@/lib/supabase/server';
+import { upsertHubSpotContact } from '@/lib/hubspot/sync';
 
 export const runtime = 'nodejs';
 
@@ -266,6 +267,17 @@ export async function POST(request: NextRequest) {
       console.error('Beehiiv integration failed (non-fatal):', beehiivError);
       // Still return success since data was saved to Supabase
     }
+
+    // Sync to HubSpot (non-blocking, soft-fail)
+    upsertHubSpotContact({
+      email,
+      firstname: name || undefined,
+      phone: undefined,
+      company: undefined,
+      lead_source: source || 'calculator',
+    }).catch((err) =>
+      console.error('[leads/capture] HubSpot sync error (non-fatal):', err)
+    );
 
     // Log email event
     try {
