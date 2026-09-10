@@ -16,7 +16,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <SEOErrorBoundary>{children}</SEOErrorBoundary>
 
       <ThirdPartyIntegration />
-      {process.env.NODE_ENV === 'development' && <DebugStyles />}
+      {process.env.NODE_ENV === 'development' && !process.env.CI && <DebugStyles />}
       <Toaster />
 
       {/* 🚀 Core Web Vitals 성능 모니터링 */}

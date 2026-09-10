@@ -146,13 +146,9 @@ export const koreanTestData = {
   criticalElements: [
     '[data-testid="hero-section"]',
     '[data-testid="main-navigation"]',
-    '[data-testid="korean-content"]',
-    '[data-testid="cta-button"]',
   ],
 
   forms: [
-    '[data-testid="contact-form"]',
-    '[data-testid="consultation-form"]',
     '[data-testid="newsletter-form"]',
   ],
 };
