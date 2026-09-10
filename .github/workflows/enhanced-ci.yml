@@ -87,6 +87,7 @@ jobs:
     timeout-minutes: 15
     needs: quick-checks
     strategy:
+      fail-fast: false
       matrix:
         test-type: [unit, integration, security]
     steps:
@@ -101,7 +102,7 @@ jobs:
         run: npm ci
 
       - name: Run ${{ matrix.test-type }} tests
-        run: npm run test:${{ matrix.test-type }}
+        run: npx jest --testPathPattern=tests/${{ matrix.test-type }} ${{ matrix.test-type == 'unit' && '--coverage' || '--no-coverage' }}
         env:
           CI: true
 
@@ -119,8 +120,7 @@ jobs:
     needs: quick-checks
     strategy:
       matrix:
-        browser: [chromium, firefox, webkit]
-        viewport: [desktop, mobile]
+        project: [chromium, firefox, webkit, mobile-chrome, mobile-safari]
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
@@ -134,10 +134,10 @@ jobs:
         run: npm ci
 
       - name: Install Playwright browsers
-        run: npx playwright install ${{ matrix.browser }} --with-deps
+        run: npx playwright install --with-deps
 
       - name: Run E2E tests
-        run: npx playwright test --project=${{ matrix.browser }}-${{ matrix.viewport }}
+        run: npx playwright test --project=${{ matrix.project }}
         env:
           CI: true
 
@@ -145,7 +145,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ matrix.browser }}-${{ matrix.viewport }}
+          name: playwright-report-${{ matrix.project }}
           path: playwright-report/
           retention-days: 7
 
