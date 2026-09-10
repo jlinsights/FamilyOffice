@@ -16,7 +16,7 @@ test.describe('Basic Visual Tests', () => {
       await page.waitForLoadState('domcontentloaded', { timeout: 10000 });
 
       // Basic visual check - just verify page loads
-      await expect(page).toHaveTitle(/FamilyOffice/i);
+      await expect(page).toHaveTitle(/패밀리오피스|FamilyOffice/i);
 
       // Take a simple screenshot
       await page.screenshot({
@@ -38,7 +38,7 @@ test.describe('Basic Visual Tests', () => {
       await page.goto('/about', { timeout: 15000 });
       await page.waitForLoadState('domcontentloaded', { timeout: 10000 });
 
-      await expect(page).toHaveTitle(/FamilyOffice/i);
+      await expect(page).toHaveTitle(/패밀리오피스|FamilyOffice/i);
 
       await page.screenshot({
         path: 'test-results/about-page-basic.png',

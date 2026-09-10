@@ -86,10 +86,23 @@ jobs:
   deploy:
     needs: [test, security-scan]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && vars.VERCEL_DEPLOY_ENABLED != 'false'
 
     steps:
+      - name: Check Vercel credentials
+        id: creds
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "⚠️ VERCEL_TOKEN not configured — skipping deploy (use Vercel Git integration or add the secret)"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
       - name: Deploy to Vercel
+        if: steps.creds.outputs.skip != 'true'
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
