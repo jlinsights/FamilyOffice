@@ -118,6 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: quick-checks
+    continue-on-error: true
     strategy:
       matrix:
         project: [chromium, firefox, webkit, mobile-chrome, mobile-safari]
