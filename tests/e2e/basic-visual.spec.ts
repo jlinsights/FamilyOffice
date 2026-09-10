@@ -57,21 +57,16 @@ test.describe('Basic Visual Tests', () => {
 
     try {
       await page.goto('/', { timeout: 15000 });
-      await page.waitForLoadState('domcontentloaded', { timeout: 10000 });
+      await page.waitForLoadState('networkidle', { timeout: 15000 });
 
-      // Check if navigation exists (using common selectors)
-      const nav = page.locator('nav').first();
-      if (await nav.isVisible()) {
-        await nav.screenshot({
-          path: 'test-results/navigation-basic.png',
-        });
-        console.log('✅ Navigation found and screenshot taken');
-      } else {
-        console.log('⚠️ Navigation not immediately visible');
-      }
+      const nav = page.locator('[data-testid="main-navigation"]');
+      await expect(nav).toBeVisible({ timeout: 10000 });
+      await nav.screenshot({
+        path: 'test-results/navigation-basic.png',
+      });
+      console.log('✅ Navigation found and screenshot taken');
     } catch (error) {
       console.log('❌ Navigation test failed:', error);
-      // Don't fail the test for this
     }
   });
 });

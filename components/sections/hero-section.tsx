@@ -10,7 +10,7 @@ import { CalComPopup } from '@/components/calendar/cal-com-popup';
 
 export function HeroSection() {
   return (
-    <div className="relative band-navy band-legacy min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-20">
+    <div data-testid="hero-section" className="relative band-navy band-legacy min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-20">
       {/* Dynamic Background */}
       <div className="absolute top-0 left-0 w-full h-full bg-navy-gradient z-0 opacity-90"></div>
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] z-0"></div>
