@@ -2,19 +2,21 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { KakaoLoginButton } from '@/components/auth/kakao-login-button';
 
-// Mock KakaoAuthService
 jest.mock('@/lib/auth/kakao-auth');
-jest.mock('@/hooks/use-toast');
-
-// Mock window.open
-const mockOpen = jest.fn();
-Object.defineProperty(window, 'open', {
-  value: mockOpen,
-  writable: true,
+jest.mock('@/hooks/use-toast', () => ({
+  useToast: () => ({ toast: jest.fn() }),
+}));
+jest.mock('next/image', () => {
+  return function MockImage({ alt, ...props }: { alt: string; [k: string]: unknown }) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img alt={alt} {...props} />;
+  };
 });
 
-// Mock environment variables
 const originalEnv = process.env;
+
+let locationHref = '';
+const locationDescriptor = Object.getOwnPropertyDescriptor(window, 'location');
 
 describe('Kakao Authentication Flow', () => {
   beforeEach(() => {
@@ -22,10 +24,25 @@ describe('Kakao Authentication Flow', () => {
     process.env = { ...originalEnv };
     process.env.NEXT_PUBLIC_APP_URL = 'https://familyoffices.vip';
     process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY = 'test-key';
+
+    locationHref = '';
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: { ...window.location, href: '' },
+      writable: true,
+    });
+    Object.defineProperty(window.location, 'href', {
+      configurable: true,
+      set: (val: string) => { locationHref = val; },
+      get: () => locationHref,
+    });
   });
 
   afterEach(() => {
     process.env = originalEnv;
+    if (locationDescriptor) {
+      Object.defineProperty(window, 'location', locationDescriptor);
+    }
   });
 
   describe('KakaoLoginButton', () => {
@@ -33,7 +50,7 @@ describe('Kakao Authentication Flow', () => {
       render(<KakaoLoginButton />);
 
       expect(screen.getByRole('button')).toBeInTheDocument();
-      expect(screen.getByText('카카오로 로그인')).toBeInTheDocument();
+      expect(screen.getByAltText('카카오로 로그인')).toBeInTheDocument();
     });
 
     it('redirects to kakao oauth when clicked', async () => {
@@ -45,10 +62,7 @@ describe('Kakao Authentication Flow', () => {
       await user.click(button);
 
       await waitFor(() => {
-        expect(mockOpen).toHaveBeenCalledWith(
-          expect.stringContaining('kauth.kakao.com/oauth/authorize'),
-          '_blank'
-        );
+        expect(locationHref).toContain('kauth.kakao.com/oauth/authorize');
       });
     });
 
@@ -61,13 +75,12 @@ describe('Kakao Authentication Flow', () => {
       await user.click(button);
 
       await waitFor(() => {
-        const callArgs = mockOpen.mock.calls[0][0];
-        expect(callArgs).toContain('client_id=test-key');
-        expect(callArgs).toContain(
-          'redirect_uri=https://familyoffices.vip/oauth'
+        expect(locationHref).toContain('client_id=test-key');
+        expect(locationHref).toContain(
+          'redirect_uri=' + encodeURIComponent('https://familyoffices.vip/oauth')
         );
-        expect(callArgs).toContain('response_type=code');
-        expect(callArgs).toContain('state=');
+        expect(locationHref).toContain('response_type=code');
+        expect(locationHref).toContain('state=');
       });
     });
 
@@ -81,9 +94,8 @@ describe('Kakao Authentication Flow', () => {
       const button = screen.getByRole('button');
       await user.click(button);
 
-      // 에러 토스트가 표시되어야 함
       await waitFor(() => {
-        expect(mockOpen).not.toHaveBeenCalled();
+        expect(locationHref).toBe('');
       });
     });
   });
