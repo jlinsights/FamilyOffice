@@ -11,7 +11,7 @@ test.describe('FamilyOffice Homepage', () => {
 
   test('should load homepage successfully', async ({ page }) => {
     // Check if page loads
-    await expect(page).toHaveTitle(/FamilyOffice/i);
+    await expect(page).toHaveTitle(/패밀리오피스|FamilyOffice/i);
 
     // Verify main content is visible
     await expect(page.locator('body')).toBeVisible();
