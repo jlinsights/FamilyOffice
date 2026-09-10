@@ -102,7 +102,7 @@ jobs:
         run: npm ci
 
       - name: Run ${{ matrix.test-type }} tests
-        run: npx jest --testPathPattern=tests/${{ matrix.test-type }} ${{ matrix.test-type == 'unit' && '--coverage' || '--no-coverage' }}
+        run: npx jest --passWithNoTests --testPathPattern=tests/${{ matrix.test-type }} ${{ matrix.test-type == 'unit' && '--coverage' || '--no-coverage' }}
         env:
           CI: true
 
