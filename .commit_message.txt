@@ -1,1 +1,1 @@
-📁 archive(pdca): familyoffice-jest-coverage-threshold-cleanup Match 96% → docs/archive/2026-05/ (PR #17 admin merge ec7697d6)
+🐛 fix: Clerk 키 미설정 시 SafeSignInButton 크래시 수정 — isBypassMode가 키 부재도 우회하도록 정렬 (SafeAuthProvider mock 모드와 일치)
