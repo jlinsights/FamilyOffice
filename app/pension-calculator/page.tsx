@@ -39,7 +39,6 @@ export default function PensionCalculatorPage() {
         <div className="max-w-7xl mx-auto px-4 py-12">
           {/* 🎯 BMAD Method: Behavioral Header - 전문성과 신뢰성 강조 */}
           <div className="relative overflow-hidden bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-3xl shadow-2xl dark:shadow-slate-900/50 mb-16">
-            <div className="absolute inset-0 bg-grid-pattern opacity-20 dark:opacity-10"></div>
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-emerald-400/10 via-teal-400/10 to-cyan-400/10 dark:from-emerald-300/5 dark:via-teal-300/5 dark:to-cyan-300/5 rounded-full blur-3xl"></div>
 
             <div className="relative px-8 py-12 text-center">

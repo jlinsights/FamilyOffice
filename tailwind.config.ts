@@ -186,7 +186,6 @@ const config: Config = {
         'slide-up': 'slide-up 0.5s ease-out',
         'slide-down': 'slide-down 0.3s ease-out',
         'scale-in': 'scale-in 0.3s ease-out',
-        'bounce-in': 'bounce-in 0.6s ease-out',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         // Aceternity UI animations
@@ -215,12 +214,6 @@ const config: Config = {
         },
         'scale-in': {
           '0%': { opacity: '0', transform: 'scale(0.95)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        'bounce-in': {
-          '0%': { opacity: '0', transform: 'scale(0.3)' },
-          '50%': { transform: 'scale(1.05)' },
-          '70%': { transform: 'scale(0.9)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
         'accordion-down': {
@@ -319,10 +312,6 @@ const config: Config = {
       },
       backdropBlur: {
         xs: '2px',
-      },
-      transitionTimingFunction: {
-        'bounce-out': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-        'ease-out-back': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
       },
     },
   },
