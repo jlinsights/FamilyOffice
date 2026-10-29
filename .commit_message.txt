@@ -1,1 +1,1 @@
-📁 archive(pdca): familyoffice-jest-coverage-threshold-cleanup Match 96% → docs/archive/2026-05/ (PR #17 admin merge ec7697d6)
+🎨 style: 그라디언트 텍스트 단색화, 장식용 그리드 배경·미사용 바운스 애니메이션 제거

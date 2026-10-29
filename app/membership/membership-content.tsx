@@ -148,7 +148,6 @@ export default function MembershipContent() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_60%,rgba(217,178,112,0.08),transparent)]"></div>
 
           {/* Animated Grid Pattern */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
 
           {/* Floating Orbs */}
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] animate-pulse"></div>
@@ -367,7 +366,6 @@ export default function MembershipContent() {
           {/* Premium Background Effects */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(251,191,36,0.08),transparent)]"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.05),transparent)]"></div>
-          <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]"></div>
 
           {/* Animated Accent Lines */}
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
