@@ -1,10 +1,10 @@
-const CACHE_NAME = 'familyoffice-s-v1';
-const STATIC_CACHE_NAME = 'familyoffice-s-static-v1';
-const DYNAMIC_CACHE_NAME = 'familyoffice-s-dynamic-v1';
+const CACHE_NAME = 'familyoffice-s-v2';
+const STATIC_CACHE_NAME = 'familyoffice-s-static-v2';
+const DYNAMIC_CACHE_NAME = 'familyoffice-s-dynamic-v2';
 
-// Cache static assets
+// Cache static assets. '/' is left out on purpose: it falls through to
+// network-first below, so a deploy reaches returning visitors immediately.
 const STATIC_ASSETS = [
-  '/',
   '/about',
   '/services',
   '/program',

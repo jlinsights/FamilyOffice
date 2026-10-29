@@ -1,102 +1,97 @@
 'use client';
 
-import { ArrowRight, Building, CheckCircle, Shield } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { FadeIn } from '@/components/ui/animation/FadeIn';
+
+const STEPS = [
+  { no: '01', label: '10문항 체크' },
+  { no: '02', label: '점수화' },
+  { no: '03', label: '권장 패키지 제안' },
+] as const;
+
+interface SelfCheckEntry {
+  href: string;
+  title: string;
+  packages: string;
+}
+
+const ENTRIES: SelfCheckEntry[] = [
+  {
+    href: '/serious-accident-law#risk-assessment',
+    title: '중대재해 위험도 자가진단',
+    packages: 'Essential / Advanced / Premium 패키지 추천',
+  },
+  {
+    href: '/inheritance-gift-tax#self-check',
+    title: '승계·증여(법인명의) 자가진단',
+    packages: 'Cash Shield / Value Control / Succession Ready 권장',
+  },
+];
 
 export function SelfCheckCTASection() {
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/5 via-purple-400/5 to-emerald-400/5 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div className="container relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full mb-6 shadow-sm animate-fade-in">
-            <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full mr-2">
-              Self Check
-            </span>
-            <span className="text-sm text-slate-600 dark:text-slate-300 pr-2 flex items-center">
-              <CheckCircle className="h-3 w-3 mr-1" />
-              Risk & Tax Self-Check
-            </span>
+    <section className="bg-white px-3 py-20 sm:px-5 lg:py-28">
+      <div className="mx-auto grid max-w-[1400px] overflow-hidden rounded-[20px] bg-hp-navy lg:grid-cols-[1fr_1fr]">
+        {/* Process */}
+        <div className="flex flex-col justify-between gap-12 p-8 sm:p-12 lg:p-16">
+          <div>
+            <p className="mb-5 text-xs font-medium tracking-wide text-hp-gold">
+              Risk &amp; Tax Self-Check
+            </p>
+            <h2 className="font-editorial font-normal leading-[1.15] text-[#FCF7EE] text-[clamp(2rem,4vw,3rem)]">
+              자가진단으로 <br />
+              맞춤 솔루션 받기
+            </h2>
           </div>
-
-          <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 dark:text-white tracking-tight animate-slide-up">
-            자가진단으로{' '}
-            <span className="text-blue-600 dark:text-blue-400">
-              맞춤 솔루션
-            </span>{' '}
-            받기
-          </h2>
-
-          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed animate-slide-up font-light">
-            10문항 체크 → 점수화 → 권장 패키지 제안
-            <br />
-            <span className="text-base text-slate-500 dark:text-slate-500 mt-2 block">
+          <div>
+            <ol className="mb-8 border-t border-white/10">
+              {STEPS.map(step => (
+                <li
+                  key={step.no}
+                  className="flex items-baseline gap-6 border-b border-white/10 py-4"
+                >
+                  <span className="text-sm tabular-nums text-hp-gold">
+                    {step.no}.
+                  </span>
+                  <span className="font-editorial text-xl text-white">
+                    {step.label}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <p className="text-white/65 font-korean">
               복잡한 기업 상황을 3분 만에 진단해보세요
-            </span>
-          </p>
+            </p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <Link
-            href="/serious-accident-law#risk-assessment"
-            className="block group"
-          >
-            <Card className="h-full relative overflow-hidden transition-all duration-500 hover:shadow-2xl border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent dark:from-red-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-              <CardHeader className="relative pb-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
-                    <Shield className="h-7 w-7" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
-                      중대재해 위험도 자가진단
-                    </CardTitle>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                      Essential / Advanced / Premium 패키지 추천
-                    </p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="relative">
-                <div className="flex items-center justify-end text-red-600 dark:text-red-400 font-bold mt-4 group-hover:translate-x-2 transition-transform duration-300">
-                  바로 시작하기 <ArrowRight className="h-5 w-5 ml-2" />
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-
-          <Link href="/inheritance-gift-tax#self-check" className="block group">
-            <Card className="h-full relative overflow-hidden transition-all duration-500 hover:shadow-2xl border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-              <CardHeader className="relative pb-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
-                    <Building className="h-7 w-7" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      승계·증여(법인명의) 자가진단
-                    </CardTitle>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                      Cash Shield / Value Control / Succession Ready 권장
-                    </p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="relative">
-                <div className="flex items-center justify-end text-blue-600 dark:text-blue-400 font-bold mt-4 group-hover:translate-x-2 transition-transform duration-300">
-                  바로 시작하기 <ArrowRight className="h-5 w-5 ml-2" />
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        </div>
+        {/* Entry points */}
+        <FadeIn
+          className="flex flex-col justify-center gap-4 bg-hp-panel/60 p-8 sm:p-12 lg:p-16"
+          stagger={0.12}
+        >
+          {ENTRIES.map(entry => (
+            <Link
+              key={entry.href}
+              href={entry.href}
+              className="group block rounded-xl bg-hp-cream p-6 transition-transform duration-300 hover:-translate-y-0.5"
+            >
+              <p className="mb-6 text-xs text-hp-mute font-korean">
+                {entry.packages}
+              </p>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+                <h3 className="font-editorial text-2xl text-hp-text break-keep">
+                  {entry.title}
+                </h3>
+                <span className="inline-flex shrink-0 items-center text-sm font-medium text-hp-gold-deep">
+                  바로 시작하기
+                  <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </FadeIn>
       </div>
     </section>
   );

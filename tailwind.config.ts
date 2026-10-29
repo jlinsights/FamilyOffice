@@ -90,6 +90,18 @@ const config: Config = {
             dark: '#0d0f11',
           },
         },
+        // Homepage editorial palette (Amperos-style layout, Modern Legacy colors)
+        hp: {
+          ink: '#071224',
+          navy: '#0A192F',
+          panel: '#112442',
+          gold: '#D4AF37',
+          'gold-deep': '#B8860B',
+          cream: '#FAF7F0',
+          ivory: '#F2ECDF',
+          text: '#1A2233',
+          mute: '#5B6475',
+        },
         // Emerald Luxury - 포지티브 데이터, 성과 지표, 액센트 컬러
         'emerald-luxury': {
           DEFAULT: '#059669',
@@ -153,6 +165,10 @@ const config: Config = {
         body: ['var(--font-inter)', ...fontFamily.sans],
         playfair: ['var(--font-playfair)', 'ui-serif', 'Georgia', 'serif'],
         inter: ['var(--font-inter)', 'sans-serif'],
+        // Playfair for Latin glyphs, Noto Serif KR for Hangul.
+        // Family name, not var(--font-playfair): that var ends in generic
+        // `serif`, which would swallow Hangul before Noto Serif KR is reached.
+        editorial: ["'Playfair Display'", 'var(--font-serif-kr)'],
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.05em' }],

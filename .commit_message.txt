@@ -1,1 +1,1 @@
-📁 archive(pdca): familyoffice-jest-coverage-threshold-cleanup Match 96% → docs/archive/2026-05/ (PR #17 admin merge ec7697d6)
+🎨 design(home): Amperos 레이아웃 기반 홈페이지 리디자인 — Navy/Gold 에디토리얼 히어로·스크롤 스토리·크림 서비스 벤토, Noto Serif KR 헤드라인, FadeIn reduced-motion 대응, sw.js 홈 cache-first 제거
