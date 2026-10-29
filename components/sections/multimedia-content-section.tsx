@@ -57,7 +57,7 @@ const MultimediaContentSection = memo(() => {
   ];
 
   return (
-    <section className="bg-white py-24 lg:py-32">
+    <section className="bg-white py-24 text-hp-text lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-14">
         {/* Section Header */}
         <div className="mb-14 grid gap-6 lg:grid-cols-2 lg:items-end">
@@ -82,7 +82,7 @@ const MultimediaContentSection = memo(() => {
         {/* Content Cards */}
         <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* YouTube Section */}
-          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-hp-cream border border-hp-text/10">
+          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-hp-cream text-hp-text border border-hp-text/10">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-red-500 rounded-lg">
@@ -196,7 +196,7 @@ const MultimediaContentSection = memo(() => {
           </Card>
 
           {/* Spotify Section */}
-          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-hp-cream border border-hp-text/10">
+          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-hp-cream text-hp-text border border-hp-text/10">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-green-500 rounded-lg">

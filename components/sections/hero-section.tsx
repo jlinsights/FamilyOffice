@@ -54,8 +54,9 @@ export function HeroSection() {
                 </TextReveal>
               </span>
               <span className="block text-hp-gold">
+                {/* FadeIn animates element children only, so the glyph needs a span */}
                 <FadeIn delay={0.5} direction="up" className="inline-block">
-                  永續
+                  <span className="inline-block">永續</span>
                 </FadeIn>
               </span>
             </h1>
