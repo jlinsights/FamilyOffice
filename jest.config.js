@@ -49,6 +49,8 @@ const customJestConfig = {
     '<rootDir>/node_modules/',
     '<rootDir>/coverage/',
     '<rootDir>/dist/',
+    '<rootDir>/tests/e2e/',
+    '<rootDir>/backend/',
   ],
 
   // Coverage configuration — 모듈별 differential (familyoffice-jest-coverage-threshold-cleanup, 2026-05-30)

@@ -58,6 +58,32 @@ process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY =
   'test-anon-key-for-integration-tests';
 process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-service-role-key-for-admin-tests';
 
+// Mock canvas.toDataURL for WebP detection (jsdom canvas has no real codec support)
+const origCreateElement = document.createElement.bind(document);
+document.createElement = function (tagName, options) {
+  const el = origCreateElement(tagName, options);
+  if (tagName === 'canvas') {
+    el.toDataURL = (type) =>
+      type === 'image/webp' ? 'data:image/webp;base64,stub' : 'data:,';
+  }
+  return el;
+};
+
+// Mock matchMedia for GSAP/ScrollTrigger and responsive queries
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
 // Mock IntersectionObserver for components that use it
 global.IntersectionObserver = class IntersectionObserver {
   constructor(callback) {

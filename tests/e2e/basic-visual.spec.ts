@@ -16,7 +16,7 @@ test.describe('Basic Visual Tests', () => {
       await page.waitForLoadState('domcontentloaded', { timeout: 10000 });
 
       // Basic visual check - just verify page loads
-      await expect(page).toHaveTitle(/FamilyOffice/i);
+      await expect(page).toHaveTitle(/패밀리오피스|FamilyOffice/i);
 
       // Take a simple screenshot
       await page.screenshot({
@@ -38,7 +38,7 @@ test.describe('Basic Visual Tests', () => {
       await page.goto('/about', { timeout: 15000 });
       await page.waitForLoadState('domcontentloaded', { timeout: 10000 });
 
-      await expect(page).toHaveTitle(/FamilyOffice/i);
+      await expect(page).toHaveTitle(/패밀리오피스|FamilyOffice/i);
 
       await page.screenshot({
         path: 'test-results/about-page-basic.png',
@@ -57,21 +57,16 @@ test.describe('Basic Visual Tests', () => {
 
     try {
       await page.goto('/', { timeout: 15000 });
-      await page.waitForLoadState('domcontentloaded', { timeout: 10000 });
+      await page.waitForLoadState('networkidle', { timeout: 15000 });
 
-      // Check if navigation exists (using common selectors)
-      const nav = page.locator('nav').first();
-      if (await nav.isVisible()) {
-        await nav.screenshot({
-          path: 'test-results/navigation-basic.png',
-        });
-        console.log('✅ Navigation found and screenshot taken');
-      } else {
-        console.log('⚠️ Navigation not immediately visible');
-      }
+      const nav = page.locator('[data-testid="main-navigation"]');
+      await expect(nav).toBeVisible({ timeout: 10000 });
+      await nav.screenshot({
+        path: 'test-results/navigation-basic.png',
+      });
+      console.log('✅ Navigation found and screenshot taken');
     } catch (error) {
       console.log('❌ Navigation test failed:', error);
-      // Don't fail the test for this
     }
   });
 });

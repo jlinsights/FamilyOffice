@@ -2,6 +2,10 @@
 
 import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
+function isClerkUnavailable() {
+  return !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+}
+
 function isBypassMode() {
   return (
     process.env.NODE_ENV === 'development' &&
@@ -13,6 +17,10 @@ export function SafeSignUpButton({
   children,
   ...props
 }: React.ComponentProps<typeof SignUpButton>) {
+  if (isClerkUnavailable()) {
+    return <>{children}</>;
+  }
+
   if (isBypassMode()) {
     return (
       <span
@@ -33,8 +41,7 @@ export function SafeSignUpButton({
 }
 
 export function SafeUserButton(props: React.ComponentProps<typeof UserButton>) {
-  if (isBypassMode()) {
-    // Render a placeholder or null to avoid crashing
+  if (isClerkUnavailable() || isBypassMode()) {
     return (
       <div
         className="h-9 w-9 rounded-full bg-muted border border-border"
@@ -50,8 +57,11 @@ export function SafeSignInButton({
   children,
   ...props
 }: React.ComponentProps<typeof SignInButton>) {
+  if (isClerkUnavailable()) {
+    return <>{children}</>;
+  }
+
   if (isBypassMode()) {
-    // Return a dummy button wrapper that alerts user
     return (
       <span
         onClick={() =>

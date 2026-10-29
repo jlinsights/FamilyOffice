@@ -127,6 +127,7 @@ export const Header = memo(function Header({
         className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
         role="navigation"
         aria-label="주 네비게이션"
+        data-testid="main-navigation"
       >
         <div className="flex justify-between items-center py-3 md:justify-start md:space-x-6">
           {/* 로고 */}
@@ -156,6 +157,7 @@ export const Header = memo(function Header({
               aria-label={isMobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
+              data-testid="mobile-menu-toggle"
             >
               <span className="sr-only">
                 {isMobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
@@ -309,6 +311,7 @@ export const Header = memo(function Header({
       {isMobileMenuOpen && (
         <div
           id="mobile-menu"
+          data-testid="mobile-menu"
           className="lg:hidden backdrop-blur-sm border-t"
           style={{
             backgroundColor: 'rgba(10, 25, 47, 0.97)',

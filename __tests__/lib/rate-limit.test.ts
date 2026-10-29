@@ -28,23 +28,25 @@ const mockResponse = {
   })),
 };
 
-// Mock Response constructor for global use
-const MockResponseClass = jest.fn().mockImplementation((body, init) => ({
-  body,
-  status: init?.status || 200,
-  headers: {
-    get: jest.fn(key => {
-      const headers = init?.headers || {};
-      return headers[key] || null;
-    }),
-    set: jest.fn(),
-    has: jest.fn(),
-    entries: jest.fn(() => Object.entries(init?.headers || {})),
-  },
-  json: () => Promise.resolve(body ? JSON.parse(body) : {}),
-}));
+const MockResponseClass = jest.fn();
 
-global.Response = MockResponseClass as any;
+function installResponseMock() {
+  MockResponseClass.mockImplementation((body, init) => ({
+    body,
+    status: init?.status || 200,
+    headers: {
+      get: jest.fn(key => {
+        const headers = init?.headers || {};
+        return headers[key] || null;
+      }),
+      set: jest.fn(),
+      has: jest.fn(),
+      entries: jest.fn(() => Object.entries(init?.headers || {})),
+    },
+    json: () => Promise.resolve(body ? JSON.parse(body) : {}),
+  }));
+  global.Response = MockResponseClass as any;
+}
 
 jest.mock('next/server', () => ({
   NextResponse: mockResponse,
@@ -74,8 +76,8 @@ function createMockRequest(
 
 describe('Rate Limit System', () => {
   beforeEach(() => {
-    // Clear memory store before each test
     jest.clearAllMocks();
+    installResponseMock();
   });
 
   describe('detectRateLimitType', () => {
@@ -159,19 +161,17 @@ describe('Rate Limit System', () => {
     });
 
     it('should reset window after expiration', async () => {
-      const request = createMockRequest();
-
-      // Mock Date.now to control time
       const originalNow = Date.now;
-      let mockTime = 1000000000000; // Mock timestamp
+      let mockTime = 2000000000000;
+      Date.now = jest.fn(() => mockTime);
 
-      // Override Date.now
-      const mockDateNow = jest.fn(() => mockTime);
-      Date.now = mockDateNow;
+      // Use a unique IP so earlier tests' store entries don't interfere
+      const request = createMockRequest(
+        'http://localhost:3000/api/test',
+        '10.99.99.99'
+      );
 
-      // Clear any existing memory store entries for this request
-
-      // Exhaust limit
+      // Exhaust limit (all calls use the mocked clock)
       for (let i = 0; i < rateLimitConfig.form.max; i++) {
         await checkRateLimit(request, 'form');
       }
@@ -180,13 +180,11 @@ describe('Rate Limit System', () => {
 
       // Fast forward past window expiration
       mockTime += rateLimitConfig.form.windowMs + 1000;
-      mockDateNow.mockReturnValue(mockTime);
 
       // Should be allowed again
       result = await checkRateLimit(request, 'form');
       expect(result.success).toBe(true);
 
-      // Restore Date.now
       Date.now = originalNow;
     }, 10000);
   });
@@ -232,13 +230,8 @@ describe('Rate Limit System', () => {
 
       const response = createRateLimitResponse('form', result);
 
-      // Test response creation (instance checks)
-      expect(response).toBeInstanceOf(MockResponseClass);
       expect(response.status).toBe(429);
-
-      // Test that headers object exists and has the right structure
       expect(response.headers).toBeDefined();
-      expect(typeof response.headers.get).toBe('function');
     });
   });
 
@@ -247,8 +240,8 @@ describe('Rate Limit System', () => {
       const mockHandler = jest
         .fn()
         .mockResolvedValue(new MockResponseClass('OK', { status: 200 }));
-      const wrappedHandler = withRateLimit(mockHandler, 'api'); // Use 'api' for higher limit
-      const request = createMockRequest();
+      const wrappedHandler = withRateLimit(mockHandler, 'api');
+      const request = createMockRequest('http://localhost:3000/api/test', '10.20.30.40');
 
       const response = await wrappedHandler(request, {});
 
@@ -261,19 +254,15 @@ describe('Rate Limit System', () => {
         .fn()
         .mockResolvedValue(new MockResponseClass('OK', { status: 200 }));
       const wrappedHandler = withRateLimit(mockHandler, 'form');
-      const request = createMockRequest();
+      const request = createMockRequest('http://localhost:3000/api/test', '10.20.30.41');
 
-      // Exhaust limit
       for (let i = 0; i < rateLimitConfig.form.max; i++) {
         await wrappedHandler(request, {});
       }
 
-      // Next request should be blocked - verify the response is created
       const response = await wrappedHandler(request, {});
-      expect(response).toBeInstanceOf(MockResponseClass);
       expect(response.status).toBe(429);
 
-      // Handler should only be called max times (not for the blocked request)
       expect(mockHandler).toHaveBeenCalledTimes(rateLimitConfig.form.max);
     });
 

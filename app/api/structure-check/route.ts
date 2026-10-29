@@ -8,6 +8,7 @@ import { conversionTrackingService } from '@/lib/conversion/service';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { safeInsert } from '@/lib/supabase/helpers';
 import { Database } from '@/types/supabase';
+import { upsertHubSpotContact } from '@/lib/hubspot/sync';
 
 type StructureCheckInsert =
   Database['public']['Tables']['structure_check_requests']['Insert'];
@@ -122,12 +123,22 @@ export async function POST(request: NextRequest) {
         );
     }
 
+    // Sync to HubSpot (awaited, soft-fail)
+    const hubspotResult = await upsertHubSpotContact({
+      email: validatedData.email,
+      firstname: validatedData.name,
+      phone: validatedData.phone,
+      company: validatedData.company || undefined,
+    }).catch(() => ({ synced: false, contactId: null, error: 'EXCEPTION' as const }));
+
     return NextResponse.json(
       {
         success: true,
         message: '구조 점검 요청이 접수되었습니다',
         requestId: requestId,
         qualificationScore,
+        hubspotSynced: hubspotResult.synced,
+        hubspotError: hubspotResult.error,
       },
       { status: 201 }
     );
