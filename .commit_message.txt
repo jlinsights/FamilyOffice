@@ -1,1 +1,1 @@
-🎨 design(home): Amperos 레이아웃 기반 홈페이지 리디자인 — Navy/Gold 에디토리얼 히어로·스크롤 스토리·크림 서비스 벤토, Noto Serif KR 헤드라인, FadeIn reduced-motion 대응, sw.js 홈 cache-first 제거
+🎨 design(home): 히어로 장식용 격자 배경 제거 — 골드 글로우만으로 깊이 표현

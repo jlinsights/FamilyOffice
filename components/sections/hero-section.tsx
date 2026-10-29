@@ -30,10 +30,6 @@ export function HeroSection() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_78%_30%,rgba(212,175,55,0.16),transparent_55%),radial-gradient(ellipse_at_10%_100%,rgba(17,36,66,0.9),transparent_60%)]"
           aria-hidden="true"
         />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:64px_64px]"
-          aria-hidden="true"
-        />
 
         <div className="relative grid min-h-[620px] items-center gap-12 px-6 py-14 sm:px-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-14 lg:py-20">
           {/* Copy */}
