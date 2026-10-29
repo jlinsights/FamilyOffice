@@ -54,6 +54,12 @@ const SelfCheckCTASection = dynamic(
   }
 );
 
+const HomeClosingCTA = dynamic(() =>
+  import('@/components/sections/home/home-closing-cta').then(mod => ({
+    default: mod.HomeClosingCTA,
+  }))
+);
+
 const Footer = dynamic(
   () => import('@/components/footer').then(mod => ({ default: mod.Footer })),
   {
@@ -91,11 +97,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Main Content Sections */}
-      <ServicesSection />
+      {/* Main Content Sections: dark story → cream services → process → content → close */}
       <DualPillarSection />
-      <MultimediaContentSection />
+      <ServicesSection />
       <SelfCheckCTASection />
+      <MultimediaContentSection />
+      <HomeClosingCTA />
 
       <div className="safe-area-bottom">
         <Footer />

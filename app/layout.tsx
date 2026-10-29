@@ -2,7 +2,7 @@ import { PreloadCriticalResources } from '@/components/preload-critical-resource
 import { AppShell } from '@/components/providers/app-shell';
 import { GlobalMetaTags } from '@/components/seo/global-meta-tags';
 import { GlobalStructuredData } from '@/components/seo/global-structured-data';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Inter, Noto_Serif_KR, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
 export { defaultMetadata as metadata, viewport } from '@/lib/seo/metadata';
@@ -32,6 +32,16 @@ const playfair = Playfair_Display({
   adjustFontFallback: true,
 });
 
+// Hangul serif for homepage editorial headlines (Playfair has no Hangul)
+const serifKr = Noto_Serif_KR({
+  weight: ['400', '600'],
+  subsets: ['latin'],
+  display: 'swap',
+  preload: false,
+  variable: '--font-serif-kr',
+  fallback: ['AppleMyungjo', 'Batang', 'serif'],
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -45,7 +55,7 @@ export default function RootLayout({
         <GlobalStructuredData />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} font-body antialiased`}
+        className={`${inter.variable} ${playfair.variable} ${serifKr.variable} font-body antialiased`}
       >
         <AppShell>{children}</AppShell>
       </body>

@@ -35,6 +35,14 @@ export function FadeIn({
       const element = ref.current;
       if (!element) return;
 
+      const prefersReducedMotion =
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        gsap.set(element.children, { opacity: 1 });
+        return;
+      }
+
       const getInitialProps = () => {
         switch (direction) {
           case 'up':

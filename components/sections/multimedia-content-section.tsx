@@ -57,45 +57,47 @@ const MultimediaContentSection = memo(() => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background dark:from-background dark:via-muted/10 dark:to-background">
-      <div className="container mx-auto px-4">
+    <section className="bg-white py-24 text-hp-text lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-14">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-4">
-            <Badge variant="outline" className="text-sm">
+        <div className="mb-14 grid gap-6 lg:grid-cols-2 lg:items-end">
+          <div>
+            <p className="mb-5 text-xs font-medium tracking-wide text-hp-gold-ink font-korean">
               127개 기업이 선택한 검증된 콘텐츠
-            </Badge>
+            </p>
+            <h2 className="font-editorial font-normal leading-[1.15] tracking-[-0.01em] text-hp-text text-[clamp(2rem,4vw,3.25rem)]">
+              지식이 자산이 되는 시간
+            </h2>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            지식이 자산이 되는 시간
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            매주 업데이트되는 전문가 인사이트로 백년영속의 지혜를 쌓아가세요
-          </p>
-          <p className="text-base text-primary mt-2 font-medium">
-            가업승계와 법인보험, 더 이상 어렵게 생각하지 마세요.
-          </p>
+          <div className="lg:justify-self-end">
+            <p className="max-w-lg text-lg leading-relaxed text-hp-mute font-korean">
+              매주 업데이트되는 전문가 인사이트로 백년영속의 지혜를 쌓아가세요
+            </p>
+            <p className="mt-2 text-base font-medium text-hp-text font-korean">
+              가업승계와 법인보험, 더 이상 어렵게 생각하지 마세요.
+            </p>
+          </div>
         </div>
 
         {/* Content Cards */}
         <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* YouTube Section */}
-          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-card/50 backdrop-blur-sm border border-border/50">
+          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-hp-cream text-hp-text border border-hp-text/10">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-red-500 rounded-lg">
                   <Play className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl text-foreground">
+                  <CardTitle className="text-xl text-hp-text">
                     YouTube에서 만나는 5분 솔루션
                   </CardTitle>
-                  <CardDescription className="text-sm">
+                  <CardDescription className="text-sm text-hp-mute">
                     바쁜 경영자를 위한 핵심만 담았습니다
                   </CardDescription>
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-hp-mute">
                 복잡한 승계 전략, 세무 절세, 법인보험 설계를 실제 사례와 함께
                 쉽게 풀어드립니다.
               </p>
@@ -112,11 +114,11 @@ const MultimediaContentSection = memo(() => {
                   <div key={video.id} className="mb-6">
                     <div className="flex items-center gap-2 mb-3">
                       <Badge className="text-xs bg-red-500">NEW</Badge>
-                      <span className="text-sm font-medium text-red-600 dark:text-red-400">
+                      <span className="text-sm font-medium text-red-600">
                         🎬 최신 영상
                       </span>
                     </div>
-                    <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
+                    <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 p-4">
                       <iframe
                         data-testid="embed-iframe"
                         style={{ borderRadius: '12px' }}
@@ -137,7 +139,7 @@ const MultimediaContentSection = memo(() => {
                 .filter(v => !v.isNew)
                 .map(video => (
                   <div key={video.id} className="mb-4">
-                    <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 dark:bg-red-500/10 p-4">
+                    <div className="rounded-lg overflow-hidden border border-red-500/20 bg-red-500/5 p-4">
                       <iframe
                         data-testid="embed-iframe"
                         style={{ borderRadius: '12px' }}
@@ -154,11 +156,11 @@ const MultimediaContentSection = memo(() => {
                 ))}
 
               {/* Regular Schedule */}
-              <div className="bg-red-500/5 dark:bg-red-500/10 p-4 rounded-lg mt-4 border border-red-500/20">
-                <h4 className="text-sm font-medium text-red-600 dark:text-red-400 mb-2">
+              <div className="bg-red-500/5 p-4 rounded-lg mt-4 border border-red-500/20">
+                <h4 className="text-sm font-medium text-red-600 mb-2">
                   📌 정기 프로그램
                 </h4>
-                <div className="space-y-2 text-xs text-red-600 dark:text-red-400">
+                <div className="space-y-2 text-xs text-red-600">
                   <div>✅ 매주 월요일: &quot;5분 가업승계 클리닉&quot;</div>
                   <div>✅ 매주 수요일: &quot;백년기업 성공스토리&quot;</div>
                   <div>✅ 매주 금요일: &quot;법인보험 마스터클래스&quot;</div>
@@ -179,7 +181,7 @@ const MultimediaContentSection = memo(() => {
                 </Button>
                 <Button
                   variant="outline"
-                  className="flex-1 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20"
+                  className="flex-1 text-red-600 border-red-200 hover:bg-red-50"
                   onClick={() =>
                     window.open(
                       'https://www.youtube.com/@FamilyOffice-S',
@@ -194,22 +196,22 @@ const MultimediaContentSection = memo(() => {
           </Card>
 
           {/* Spotify Section */}
-          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-card/50 backdrop-blur-sm border border-border/50">
+          <Card className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] bg-hp-cream text-hp-text border border-hp-text/10">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-green-500 rounded-lg">
                   <Headphones className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl text-foreground">
+                  <CardTitle className="text-xl text-hp-text">
                     Spotify 독점, 귀로 듣는 컨설팅
                   </CardTitle>
-                  <CardDescription className="text-sm">
+                  <CardDescription className="text-sm text-hp-mute">
                     당신의 일상 속 비즈니스 인사이트
                   </CardDescription>
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-hp-mute">
                 출퇴근길, 운동 중, 휴식 시간... 각 분야 전문가들의 생생한 조언을
                 팟캐스트로 만나보세요.
               </p>
@@ -223,11 +225,11 @@ const MultimediaContentSection = memo(() => {
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Badge className="text-xs bg-green-500">NEW</Badge>
-                  <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                  <span className="text-sm font-medium text-green-600">
                     🎙️ 최신 에피소드
                   </span>
                 </div>
-                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
+                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 p-4">
                   <iframe
                     data-testid="embed-iframe"
                     style={{ borderRadius: '12px' }}
@@ -244,7 +246,7 @@ const MultimediaContentSection = memo(() => {
 
               {/* 2nd Spotify Episode */}
               <div className="mb-4">
-                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
+                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 p-4">
                   <iframe
                     data-testid="embed-iframe"
                     style={{ borderRadius: '12px' }}
@@ -261,7 +263,7 @@ const MultimediaContentSection = memo(() => {
 
               {/* 3rd Spotify Episode */}
               <div className="mb-4">
-                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 dark:bg-green-500/10 p-4">
+                <div className="rounded-lg overflow-hidden border border-green-500/20 bg-green-500/5 p-4">
                   <iframe
                     data-testid="embed-iframe"
                     style={{ borderRadius: '12px' }}
@@ -277,11 +279,11 @@ const MultimediaContentSection = memo(() => {
               </div>
 
               {/* Schedule */}
-              <div className="bg-green-500/5 dark:bg-green-500/10 p-4 rounded-lg mt-4 border border-green-500/20">
-                <h4 className="text-sm font-medium text-green-600 dark:text-green-400 mb-2">
+              <div className="bg-green-500/5 p-4 rounded-lg mt-4 border border-green-500/20">
+                <h4 className="text-sm font-medium text-green-600 mb-2">
                   🗓️ 주간 방송 스케줄
                 </h4>
-                <div className="space-y-2 text-xs text-green-600 dark:text-green-400">
+                <div className="space-y-2 text-xs text-green-600">
                   <div>🔹 월요일 오전 7시: &quot;Monday Morning CEO&quot;</div>
                   <div>🔹 수요일 오후 12시: &quot;승계의 정석&quot;</div>
                   <div>🔹 금요일 오후 5시: &quot;Friday Finance&quot;</div>
@@ -302,7 +304,7 @@ const MultimediaContentSection = memo(() => {
                 </Button>
                 <Button
                   variant="outline"
-                  className="flex-1 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/20"
+                  className="flex-1 text-green-600 border-green-200 hover:bg-green-50"
                   onClick={() =>
                     window.open(
                       'https://open.spotify.com/show/6BvRGd3OODaKyJtVl1GN46?si=1736cfee52584a98',
@@ -320,59 +322,55 @@ const MultimediaContentSection = memo(() => {
         {/* Value Proposition */}
         <div className="mt-16 text-center">
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-foreground mb-6">
+            <h3 className="text-2xl font-bold text-hp-text mb-6">
               당신의 시간을 가치있게, 당신의 결정을 현명하게
             </h3>
 
             <div className="grid md:grid-cols-5 gap-6 mt-8">
               <div className="text-center">
-                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <TrendingUp className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 bg-hp-navy/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <TrendingUp className="h-6 w-6 text-hp-gold-deep" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">실무 중심</h4>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-hp-mute">
                   바로 적용 가능한 실전 솔루션
                 </p>
               </div>
 
               <div className="text-center">
-                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Badge className="w-6 h-6 bg-primary" />
+                <div className="w-12 h-12 bg-hp-navy/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Badge className="w-6 h-6 bg-hp-navy" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">검증된 전문성</h4>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-hp-mute">
                   삼성생명 파트너 빅4 전문가
                 </p>
               </div>
 
               <div className="text-center">
-                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Clock className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 bg-hp-navy/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Clock className="h-6 w-6 text-hp-gold-deep" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">시간 효율성</h4>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-hp-mute">
                   5분 요약부터 40분 심층분석
                 </p>
               </div>
 
               <div className="text-center">
-                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Play className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 bg-hp-navy/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Play className="h-6 w-6 text-hp-gold-deep" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">멀티 플랫폼</h4>
-                <p className="text-xs text-muted-foreground">
-                  YouTube, Spotify 플랫폼
-                </p>
+                <p className="text-xs text-hp-mute">YouTube, Spotify 플랫폼</p>
               </div>
 
               <div className="text-center">
-                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Calendar className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 bg-hp-navy/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Calendar className="h-6 w-6 text-hp-gold-deep" />
                 </div>
                 <h4 className="font-semibold text-sm mb-1">정기 업데이트</h4>
-                <p className="text-xs text-muted-foreground">
-                  매주 3회 신규 콘텐츠
-                </p>
+                <p className="text-xs text-hp-mute">매주 3회 신규 콘텐츠</p>
               </div>
             </div>
           </div>
