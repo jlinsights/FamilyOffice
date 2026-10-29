@@ -25,7 +25,7 @@ function FeaturedCard({
     >
       <div>
         <div className="mb-10 flex items-start justify-between">
-          <span className="font-editorial text-5xl text-hp-gold-deep/80 tabular-nums">
+          <span className="font-editorial text-5xl text-hp-gold-deep tabular-nums">
             {String(index + 1).padStart(2, '0')}
           </span>
           <Icon className="h-6 w-6 text-hp-text/40" aria-hidden="true" />
@@ -34,7 +34,7 @@ function FeaturedCard({
           {service.title}
         </h3>
         {service.tagline ? (
-          <p className="mb-4 text-sm font-medium text-hp-gold-deep font-korean">
+          <p className="mb-4 text-sm font-medium text-hp-gold-ink font-korean">
             {service.tagline}
           </p>
         ) : null}
@@ -107,7 +107,7 @@ function CtaCard({
           <p
             className={cn(
               'mb-2 text-xs font-medium tracking-wide',
-              primary ? 'text-hp-gold' : 'text-hp-gold-deep'
+              primary ? 'text-hp-gold' : 'text-hp-gold-ink'
             )}
           >
             {service.badge} 전용
@@ -139,7 +139,7 @@ export function ServicesSection() {
           className="mb-16 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end"
         >
           <div>
-            <p className="mb-5 text-xs font-medium tracking-wide text-hp-gold-deep">
+            <p className="mb-5 text-xs font-medium tracking-wide text-hp-gold-ink">
               Family Office Excellence
             </p>
             <h2 className="font-editorial font-normal leading-[1.15] tracking-[-0.01em] text-hp-text text-[clamp(2rem,4vw,3.25rem)]">

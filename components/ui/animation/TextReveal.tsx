@@ -25,7 +25,7 @@ export function TextReveal({
   duration = 0.8,
   stagger = 0.05,
 }: TextRevealProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLSpanElement>(null);
 
   // Split text logic
   const splitText = () => {
@@ -54,6 +54,11 @@ export function TextReveal({
       const elements = containerRef.current?.children;
       if (!elements) return;
 
+      const prefersReducedMotion =
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
       gsap.from(elements, {
         y: 20,
         opacity: 0,
@@ -72,12 +77,12 @@ export function TextReveal({
   );
 
   return (
-    <div
-      ref={containerRef}
-      className={cn('overflow-hidden', className)}
-      aria-label={children}
-    >
-      {splitText()}
+    <div className={cn('overflow-hidden', className)}>
+      {/* Split spans would be read one by one, so screen readers get the whole string */}
+      <span className="sr-only">{children}</span>
+      <span ref={containerRef} aria-hidden="true">
+        {splitText()}
+      </span>
     </div>
   );
 }

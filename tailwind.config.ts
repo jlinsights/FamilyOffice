@@ -97,6 +97,8 @@ const config: Config = {
           panel: '#112442',
           gold: '#D4AF37',
           'gold-deep': '#B8860B',
+          // gold-deep fails AA as small text on light surfaces; use this for text
+          'gold-ink': '#86620A',
           cream: '#FAF7F0',
           ivory: '#F2ECDF',
           text: '#1A2233',

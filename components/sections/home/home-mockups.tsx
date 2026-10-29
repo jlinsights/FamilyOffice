@@ -94,7 +94,7 @@ const RISK_ROWS: RiskRow[] = [
 
 const LEVEL_STYLE: Record<RiskRow['level'], string> = {
   높음: 'bg-[#F6E3DC] text-[#8A3B22]',
-  중간: 'bg-[#F5ECD3] text-hp-gold-deep',
+  중간: 'bg-[#F5ECD3] text-hp-gold-ink',
   낮음: 'bg-[#E4ECE4] text-[#2F5D3A]',
 };
 

@@ -62,7 +62,7 @@ const MultimediaContentSection = memo(() => {
         {/* Section Header */}
         <div className="mb-14 grid gap-6 lg:grid-cols-2 lg:items-end">
           <div>
-            <p className="mb-5 text-xs font-medium tracking-wide text-hp-gold-deep font-korean">
+            <p className="mb-5 text-xs font-medium tracking-wide text-hp-gold-ink font-korean">
               127개 기업이 선택한 검증된 콘텐츠
             </p>
             <h2 className="font-editorial font-normal leading-[1.15] tracking-[-0.01em] text-hp-text text-[clamp(2rem,4vw,3.25rem)]">

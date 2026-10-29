@@ -1,1 +1,1 @@
-🐛 fix(home): 멀티미디어 섹션 다크모드 글자색 고정, 히어로 永續 FadeIn 대상 span 복원
+♿ fix(home): 밝은 배경 소형 골드 텍스트 대비 보강(gold-ink), 히어로 TextReveal 모션 감소·스크린리더 대응

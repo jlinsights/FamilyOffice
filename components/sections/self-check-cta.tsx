@@ -84,7 +84,7 @@ export function SelfCheckCTASection() {
                 <h3 className="font-editorial text-2xl text-hp-text break-keep">
                   {entry.title}
                 </h3>
-                <span className="inline-flex shrink-0 items-center text-sm font-medium text-hp-gold-deep">
+                <span className="inline-flex shrink-0 items-center text-sm font-medium text-hp-gold-ink">
                   바로 시작하기
                   <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
