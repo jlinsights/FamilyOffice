@@ -4,6 +4,10 @@
 -- 않고, 다시 보낸 값을 email_events(event_type = 'resubmitted')에만 남긴다(PR #31).
 -- 이 뷰는 리드마다 가장 최근 재제출 1건을 저장된 값과 나란히 보여준다.
 --
+-- 위치: leads·email_events 를 만드는 20250127_email_automation_schema.sql 과 같은
+-- lib/supabase/migrations 에 둔다(수동 적용). supabase/migrations(db push 체인)에는
+-- 이 두 테이블이 없어 새 DB 에서 실패하므로 그쪽에 두지 않는다. 적용 순서: 스키마 → 이 파일.
+--
 -- 보안
 -- - security_invoker: 조회하는 역할의 권한·RLS 로 실행한다(뷰 소유자 권한 우회 방지).
 -- - anon·authenticated 에는 권한을 주지 않는다. 대시보드(postgres)·service_role 만 조회.

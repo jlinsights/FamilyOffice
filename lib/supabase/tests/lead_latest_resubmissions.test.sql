@@ -11,8 +11,8 @@
 --          $$ select coalesce(nullif(current_setting('request.jwt.claims', true), ''), '{}')::jsonb $$;
 --        create function auth.role() returns text language sql stable as $$ select auth.jwt() ->> 'role' $$;
 --   2) lib/supabase/migrations/20250127_email_automation_schema.sql
---   3) supabase/migrations/20261114000000_create_lead_latest_resubmissions_view.sql
---   4) psql -f supabase/tests/lead_latest_resubmissions.test.sql
+--   3) lib/supabase/migrations/20261114_create_lead_latest_resubmissions_view.sql
+--   4) psql -f lib/supabase/tests/lead_latest_resubmissions.test.sql
 --      → BEHAVIOUR_OK, ANON_DENIED, AUTHENTICATED_DENIED, SERVICE_ROLE_OK, SERVICE_ROLE_READONLY
 \set ON_ERROR_STOP 1
 begin;
