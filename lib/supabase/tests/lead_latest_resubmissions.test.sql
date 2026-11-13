@@ -1,5 +1,7 @@
 -- lead_latest_resubmissions 뷰 검증 (트랜잭션 안에서 실행 후 ROLLBACK — 데이터를 남기지 않는다)
 --
+-- pgTAP 테스트가 아니다. supabase test db 가 자동으로 집어 가지 않도록 supabase/tests 밖에 둔다.
+--
 -- 운영 DB 에서 돌리지 말 것. 로컬·임시 Postgres 에서:
 --   1) Supabase 와 같은 역할·기본 권한·auth 스텁을 만든다
 --        create role anon nologin; create role authenticated nologin;
@@ -12,7 +14,7 @@
 --        create function auth.role() returns text language sql stable as $$ select auth.jwt() ->> 'role' $$;
 --   2) lib/supabase/migrations/20250127_email_automation_schema.sql
 --   3) supabase/migrations/20261114000000_create_lead_latest_resubmissions_view.sql
---   4) psql -f supabase/tests/lead_latest_resubmissions.test.sql
+--   4) psql -f lib/supabase/tests/lead_latest_resubmissions.test.sql
 --      → BEHAVIOUR_OK, ANON_DENIED, AUTHENTICATED_DENIED, SERVICE_ROLE_OK, SERVICE_ROLE_READONLY
 \set ON_ERROR_STOP 1
 begin;
