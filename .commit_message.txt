@@ -1,1 +1,1 @@
-🔧 Vercel 빌드가 Node 26으로 올라가 멈추지 않도록 engines.node 를 22.x 로 고정
+🔒 package-lock 에 누락된 플랫폼별 optional 의존성 104개 복구 — npm 11 에서 npm ci 가 EUSAGE 로 실패하던 문제 해소
