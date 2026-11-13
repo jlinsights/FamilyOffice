@@ -1,1 +1,1 @@
-📁 archive(pdca): familyoffice-jest-coverage-threshold-cleanup Match 96% → docs/archive/2026-05/ (PR #17 admin merge ec7697d6)
+🔒 공개 리드 수집·구조 진단 API가 이메일만으로 기존 리드·HubSpot 연락처를 덮어쓰지 않도록 생성 전용으로 수정
