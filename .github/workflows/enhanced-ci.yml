@@ -89,7 +89,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test-type: [unit, integration, security]
+        # tests/security holds penetration scripts (*-tests.ts) that call a running
+        # server at localhost:3000. They are not Jest suites, so they are not run here
+        # instead of being reported as a green "security" job that ran nothing.
+        test-type: [unit, integration]
     steps:
       - uses: actions/checkout@v4
 
@@ -102,7 +105,7 @@ jobs:
         run: npm ci
 
       - name: Run ${{ matrix.test-type }} tests
-        run: npx jest --passWithNoTests --testPathPattern=tests/${{ matrix.test-type }} ${{ matrix.test-type == 'unit' && '--coverage' || '--no-coverage' }}
+        run: npx jest --testPathPattern=tests/${{ matrix.test-type }} ${{ matrix.test-type == 'unit' && '--coverage' || '--no-coverage' }}
         env:
           CI: true
 
