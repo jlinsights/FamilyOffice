@@ -1,7 +1,11 @@
 /**
  * Lightweight outbound HubSpot contact sync.
  *
- * Upserts a contact by email using only standard HubSpot properties.
+ * Creates a contact by email using only standard HubSpot properties, and
+ * NEVER modifies an existing contact. Callers are public, unauthenticated
+ * endpoints: anyone who knows an address could otherwise overwrite that
+ * contact's name, phone or company. An existing contact is only looked up
+ * so its id can be reported.
  * Returns a result object so callers can report sync status without
  * leaking secrets or blocking the primary flow.
  */
@@ -34,7 +38,8 @@ function getAccessToken(): string | undefined {
 }
 
 /**
- * Upsert a contact in HubSpot by email.
+ * Make sure a HubSpot contact exists for this email — create it if missing,
+ * leave an existing contact untouched.
  *
  * Only standard HubSpot properties are sent (email, firstname, lastname,
  * phone, company, lifecyclestage). Custom properties like lead_source are
@@ -42,7 +47,7 @@ function getAccessToken(): string | undefined {
  *
  * Never throws — always returns a result object.
  */
-export async function upsertHubSpotContact(
+export async function ensureHubSpotContact(
   data: HubSpotContactInput,
 ): Promise<HubSpotSyncResult> {
   const token = getAccessToken();
@@ -75,7 +80,8 @@ export async function upsertHubSpotContact(
     }
 
     if (res.status === 409) {
-      return await patchExistingContact(token, data.email, properties);
+      // Already exists: report its id, never overwrite it from a public request
+      return await lookupExistingContact(token, data.email);
     }
 
     const errText = await res.text().catch(() => '');
@@ -89,14 +95,11 @@ export async function upsertHubSpotContact(
   }
 }
 
-async function patchExistingContact(
+async function lookupExistingContact(
   token: string,
   email: string,
-  properties: Record<string, string>,
 ): Promise<HubSpotSyncResult> {
   try {
-    const { email: _email, lifecyclestage: _lcs, ...updateProps } = properties;
-
     const lookupRes = await fetch(
       `${HUBSPOT_API}/crm/v3/objects/contacts/${encodeURIComponent(email)}?idProperty=email`,
       {
@@ -119,26 +122,11 @@ async function patchExistingContact(
       return { synced: false, contactId: null, error: 'HUBSPOT_NO_ID' };
     }
 
-    if (Object.keys(updateProps).length > 0) {
-      const patchRes = await fetch(`${HUBSPOT_API}/crm/v3/objects/contacts/${contactId}`, {
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ properties: updateProps }),
-      });
-      if (!patchRes.ok) {
-        const errText = await patchRes.text().catch(() => '');
-        console.error(`[hubspot-sync] patch failed (${patchRes.status}):`, errText.slice(0, 200));
-      }
-    }
-
-    console.log('[hubspot-sync] existing contact updated:', contactId);
+    console.log('[hubspot-sync] existing contact kept unchanged:', contactId);
     return { synced: true, contactId, error: null };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    console.error('[hubspot-sync] patch error:', msg);
+    console.error('[hubspot-sync] lookup error:', msg);
     return { synced: false, contactId: null, error: 'NETWORK_ERROR' };
   }
 }

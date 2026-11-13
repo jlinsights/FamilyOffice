@@ -8,7 +8,7 @@ import { conversionTrackingService } from '@/lib/conversion/service';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { safeInsert } from '@/lib/supabase/helpers';
 import { Database } from '@/types/supabase';
-import { upsertHubSpotContact } from '@/lib/hubspot/sync';
+import { ensureHubSpotContact } from '@/lib/hubspot/sync';
 
 type StructureCheckInsert =
   Database['public']['Tables']['structure_check_requests']['Insert'];
@@ -123,8 +123,9 @@ export async function POST(request: NextRequest) {
         );
     }
 
-    // Sync to HubSpot (awaited, soft-fail)
-    const hubspotResult = await upsertHubSpotContact({
+    // Sync to HubSpot (awaited, soft-fail). Creates the contact if missing and never
+    // overwrites an existing one — this endpoint is public and the email is unverified.
+    const hubspotResult = await ensureHubSpotContact({
       email: validatedData.email,
       firstname: validatedData.name,
       phone: validatedData.phone,

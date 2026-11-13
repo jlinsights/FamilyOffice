@@ -16,7 +16,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { beehiiv } from '@/lib/beehiiv/client';
 import { createAdminClient } from '@/lib/supabase/admin-client';
-import { upsertHubSpotContact } from '@/lib/hubspot/sync';
+import { ensureHubSpotContact } from '@/lib/hubspot/sync';
 
 export const runtime = 'nodejs';
 
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
 
     // Check if lead already exists — use maybeSingle() to avoid PGRST116 on zero rows
     const { data: existingLead, error: selectError } = await leads
-      .select('id, email, beehiiv_subscription_id')
+      .select('id, email, name, beehiiv_subscription_id')
       .eq('email', email)
       .maybeSingle();
 
@@ -179,51 +179,50 @@ export async function POST(request: NextRequest) {
     let beehiivSubscriptionId: string | undefined;
 
     if (existingLead) {
+      // This endpoint is public and the email is not verified, so a request for an
+      // address that already has a lead must not change that lead: anyone who knows
+      // the address could otherwise overwrite the name and financial figures. The
+      // resubmitted values are kept as an append-only event for sales to review.
       leadId = existingLead.id;
-      beehiivSubscriptionId = existingLead.beehiiv_subscription_id || undefined;
-
-      const leadData: Record<string, unknown> = {
-        name: name || undefined,
-        source: source || 'calculator',
-        utm_source: utm?.source,
-        utm_medium: utm?.medium,
-        utm_campaign: utm?.campaign,
-        utm_content: utm?.content,
-        referring_url: referringUrl,
-        updated_at: new Date().toISOString(),
-      };
-
-      if (calculationResult) {
-        leadData.total_assets = calculationResult.totalAssets;
-        leadData.total_debts = calculationResult.totalDebts;
-        leadData.net_assets = calculationResult.netAssets;
-        leadData.estimated_tax = calculationResult.estimatedTax;
-        leadData.has_spouse = calculationResult.hasSpouse;
-        leadData.num_children = calculationResult.numChildren;
-        leadData.num_minor_children = calculationResult.numMinorChildren || 0;
-      }
-
-      const { error: updateError } = await leads
-        .update(leadData)
-        .eq('id', leadId);
-
-      if (updateError) {
-        console.error('[leads/capture] UPDATE failed:', JSON.stringify(updateError));
+      // Supabase reports insert failures in `error` rather than throwing. This event
+      // is the only copy of the resubmitted values, so a failure is surfaced to the
+      // caller (who can retry) instead of being answered with success.
+      const { error: resubmitError } = await emailEvents.insert({
+        lead_id: leadId,
+        event_type: 'resubmitted',
+        event_data: {
+          source: source || 'calculator',
+          utm,
+          referring_url: referringUrl,
+          name: name || undefined,
+          calculation: calculationResult,
+        },
+      });
+      if (resubmitError) {
+        console.error('[leads/capture] resubmit event INSERT failed:', JSON.stringify(resubmitError));
         return NextResponse.json<CaptureLeadResponse>(
           {
             success: false,
-            message: '데이터 업데이트에 실패했습니다.',
-            error: `DB_UPDATE_ERROR:${updateError.code ?? 'UNKNOWN'}`,
+            message: '데이터 저장에 실패했습니다. 잠시 후 다시 시도해주세요.',
+            error: `DB_EVENT_ERROR:${resubmitError.code ?? 'UNKNOWN'}`,
           },
           { status: 500 }
         );
       }
 
+      // Still make sure the CRM contact exists (e.g. the lead predates HubSpot sync
+      // or the first sync failed). Uses the stored name, never the request's, and
+      // never modifies an existing contact.
+      const hubspotResult = await ensureHubSpotContact({
+        email: existingLead.email,
+        firstname: existingLead.name || undefined,
+      }).catch(() => ({ synced: false, contactId: null, error: 'EXCEPTION' as const }));
+
       return NextResponse.json<CaptureLeadResponse>({
         success: true,
-        leadId,
-        beehiivSubscriptionId,
-        message: '이미 등록된 이메일입니다. 정보가 업데이트되었습니다.',
+        hubspotSynced: hubspotResult.synced,
+        hubspotError: hubspotResult.error,
+        message: '이미 등록된 이메일입니다.',
       });
     }
 
@@ -308,8 +307,9 @@ export async function POST(request: NextRequest) {
       // Still return success since data was saved to Supabase
     }
 
-    // Sync to HubSpot (awaited, soft-fail — result reported in response)
-    const hubspotResult = await upsertHubSpotContact({
+    // Sync to HubSpot (awaited, soft-fail — result reported in response).
+    // Creates the contact if missing; never overwrites an existing one.
+    const hubspotResult = await ensureHubSpotContact({
       email,
       firstname: name || undefined,
     }).catch(() => ({ synced: false, contactId: null, error: 'EXCEPTION' as const }));
