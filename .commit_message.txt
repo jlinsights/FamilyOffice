@@ -1,1 +1,1 @@
-🔒 package-lock 에 누락된 플랫폼별 optional 의존성 104개 복구 — npm 11 에서 npm ci 가 EUSAGE 로 실패하던 문제 해소
+✨ 기존 리드 재제출 계산 결과를 영업이 볼 수 있는 lead_latest_resubmissions 뷰 추가
