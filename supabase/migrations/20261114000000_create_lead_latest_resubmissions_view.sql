@@ -4,9 +4,11 @@
 -- 않고, 다시 보낸 값을 email_events(event_type = 'resubmitted')에만 남긴다(PR #31).
 -- 이 뷰는 리드마다 가장 최근 재제출 1건을 저장된 값과 나란히 보여준다.
 --
--- 위치: leads·email_events 를 만드는 20250127_email_automation_schema.sql 과 같은
--- lib/supabase/migrations 에 둔다(수동 적용). supabase/migrations(db push 체인)에는
--- 이 두 테이블이 없어 새 DB 에서 실패하므로 그쪽에 두지 않는다. 적용 순서: 스키마 → 이 파일.
+-- 적용: supabase/migrations(db push 체인)에 두어 운영 DB 에 자동 적용되게 한다.
+-- 단 leads·email_events 는 이 체인이 아니라 lib/supabase/migrations/
+-- 20250127_email_automation_schema.sql 에서 만들어지므로, 두 테이블이 없으면(새 DB)
+-- 실패하지 않고 NOTICE 만 남기고 건너뛴다. 그런 환경에서는 스키마를 적용한 뒤 이 파일을
+-- SQL Editor 에서 한 번 더 실행하면 된다(멱등).
 --
 -- 보안
 -- - security_invoker: 조회하는 역할의 권한·RLS 로 실행한다(뷰 소유자 권한 우회 방지).
@@ -15,6 +17,14 @@
 --   꺼내고, 아니면 NULL 로 둔다(잘못된 값 하나가 뷰 전체 조회를 깨지 않게).
 --   이름·출처는 표시용 텍스트일 뿐이며, 리드 소유가 확인된 값이 아니다.
 
+DO $migration$
+BEGIN
+  IF to_regclass('public.leads') IS NULL OR to_regclass('public.email_events') IS NULL THEN
+    RAISE NOTICE 'lead_latest_resubmissions: leads/email_events 가 없어 건너뜀 — 20250127_email_automation_schema.sql 적용 후 이 파일을 다시 실행';
+    RETURN;
+  END IF;
+
+  EXECUTE $view$
 CREATE OR REPLACE VIEW public.lead_latest_resubmissions
 WITH (security_invoker = true) AS
 WITH resubmissions AS (
@@ -73,11 +83,16 @@ SELECT
   l.num_children             AS stored_num_children,
   l.num_minor_children       AS stored_num_minor_children
 FROM latest
-JOIN public.leads l ON l.id = latest.lead_id;
+JOIN public.leads l ON l.id = latest.lead_id
+  $view$;
 
+  EXECUTE $comment$
 COMMENT ON VIEW public.lead_latest_resubmissions IS
-  '기존 리드의 최근 재제출 계산 결과(검증되지 않은 공개 입력)와 저장된 값 비교. 영업 조회 전용, service_role·대시보드만.';
+  '기존 리드의 최근 재제출 계산 결과(검증되지 않은 공개 입력)와 저장된 값 비교. 영업 조회 전용, service_role·대시보드만.'
+  $comment$;
 
-REVOKE ALL ON public.lead_latest_resubmissions FROM PUBLIC;
-REVOKE ALL ON public.lead_latest_resubmissions FROM anon, authenticated, service_role;
-GRANT SELECT ON public.lead_latest_resubmissions TO service_role;
+  EXECUTE 'REVOKE ALL ON public.lead_latest_resubmissions FROM PUBLIC';
+  EXECUTE 'REVOKE ALL ON public.lead_latest_resubmissions FROM anon, authenticated, service_role';
+  EXECUTE 'GRANT SELECT ON public.lead_latest_resubmissions TO service_role';
+END
+$migration$;
