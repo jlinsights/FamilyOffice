@@ -1,1 +1,1 @@
-🔧 CI(ci.yml·enhanced-ci.yml) Node 버전을 배포와 같은 22로 맞춤
+🔒 package-lock 에 누락된 플랫폼별 optional 의존성 104개 복구 — npm 11 에서 npm ci 가 EUSAGE 로 실패하던 문제 해소
