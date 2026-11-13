@@ -1,1 +1,1 @@
-📁 archive(pdca): familyoffice-jest-coverage-threshold-cleanup Match 96% → docs/archive/2026-05/ (PR #17 admin merge ec7697d6)
+🔧 Vercel 빌드가 Node 26으로 올라가 멈추지 않도록 engines.node 를 22.x 로 고정
