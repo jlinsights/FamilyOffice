@@ -8,6 +8,7 @@ import { NextRequest } from 'next/server';
 type Op = { table: string; op: string; args: unknown[] };
 const ops: Op[] = [];
 let existing: Record<string, unknown> | null = null;
+let eventInsertError: { code: string } | null = null;
 
 function table(name: string) {
   const chain: Record<string, unknown> = {};
@@ -23,7 +24,10 @@ function table(name: string) {
     return { data: existing, error: null };
   };
   chain.then = (resolve: (v: unknown) => unknown) =>
-    resolve({ data: null, error: null });
+    resolve({
+      data: null,
+      error: name === 'email_events' ? eventInsertError : null,
+    });
   return chain;
 }
 
@@ -73,6 +77,7 @@ const attack = {
 beforeEach(() => {
   ops.length = 0;
   existing = null;
+  eventInsertError = null;
   ensureHubSpotContact.mockReset();
   ensureHubSpotContact.mockImplementation(async () => ({
     synced: true,
@@ -126,6 +131,17 @@ describe('POST /api/leads/capture — existing lead', () => {
     });
     expect(body).toMatchObject({ success: true, hubspotSynced: true });
     expect(body).not.toHaveProperty('leadId');
+  });
+
+  it('reports failure when the resubmitted values could not be stored', async () => {
+    existing = { id: 'lead-1', email: 'victim@x.org', name: '김원래' };
+    eventInsertError = { code: '42501' };
+    const res = await post(attack);
+    expect(res.status).toBe(500);
+    expect(await res.json()).toMatchObject({ success: false });
+    expect(ops.filter(o => o.table === 'leads' && o.op === 'update')).toEqual(
+      []
+    );
   });
 });
 

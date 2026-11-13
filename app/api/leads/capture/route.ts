@@ -184,20 +184,30 @@ export async function POST(request: NextRequest) {
       // the address could otherwise overwrite the name and financial figures. The
       // resubmitted values are kept as an append-only event for sales to review.
       leadId = existingLead.id;
-      try {
-        await emailEvents.insert({
-          lead_id: leadId,
-          event_type: 'resubmitted',
-          event_data: {
-            source: source || 'calculator',
-            utm,
-            referring_url: referringUrl,
-            name: name || undefined,
-            calculation: calculationResult,
+      // Supabase reports insert failures in `error` rather than throwing. This event
+      // is the only copy of the resubmitted values, so a failure is surfaced to the
+      // caller (who can retry) instead of being answered with success.
+      const { error: resubmitError } = await emailEvents.insert({
+        lead_id: leadId,
+        event_type: 'resubmitted',
+        event_data: {
+          source: source || 'calculator',
+          utm,
+          referring_url: referringUrl,
+          name: name || undefined,
+          calculation: calculationResult,
+        },
+      });
+      if (resubmitError) {
+        console.error('[leads/capture] resubmit event INSERT failed:', JSON.stringify(resubmitError));
+        return NextResponse.json<CaptureLeadResponse>(
+          {
+            success: false,
+            message: '데이터 저장에 실패했습니다. 잠시 후 다시 시도해주세요.',
+            error: `DB_EVENT_ERROR:${resubmitError.code ?? 'UNKNOWN'}`,
           },
-        });
-      } catch (eventError) {
-        console.error('[leads/capture] resubmit event failed (non-fatal):', eventError);
+          { status: 500 }
+        );
       }
 
       // Still make sure the CRM contact exists (e.g. the lead predates HubSpot sync
