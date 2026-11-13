@@ -1,1 +1,1 @@
-🔧 CI(ci.yml·enhanced-ci.yml) Node 버전을 배포와 같은 22로 맞춤
+✨ 기존 리드 재제출 계산 결과를 영업이 볼 수 있는 lead_latest_resubmissions 뷰 추가
