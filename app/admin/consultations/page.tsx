@@ -1,5 +1,7 @@
+import { redirect } from 'next/navigation';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { checkAdminPermissions } from '@/lib/admin-permissions';
 import { createAdminClient } from '@/lib/supabase/admin-client';
 import { Database } from '@/types/supabase';
 
@@ -9,6 +11,12 @@ type ConsultationRow = Database['public']['Tables']['consultations']['Row'];
 export const dynamic = 'force-dynamic';
 
 export default async function ConsultationsPage() {
+  // 관리자만 — service role(RLS 우회)로 전체 상담 신청(이름·연락처)을 읽기 때문
+  const isAdmin = await checkAdminPermissions().catch(() => false);
+  if (!isAdmin) {
+    redirect('/');
+  }
+
   // 환경변수가 없으면 에러 페이지 표시
   if (
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
