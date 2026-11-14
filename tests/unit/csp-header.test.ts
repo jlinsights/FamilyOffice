@@ -48,8 +48,24 @@ describe('운영 Content-Security-Policy', () => {
     expect(directives.get('connect-src')).toContain(host);
   });
 
-  it('img-src 가 HubSpot 추적 픽셀을 허용한다', () => {
-    expect(directives.get('img-src')).toContain('https://*.hubspot.com');
+  it.each(['https://*.hubspot.com', 'https://*.hsforms.com'])(
+    'img-src 가 HubSpot 추적 픽셀 호스트 %s 를 허용한다',
+    host => {
+      expect(directives.get('img-src')).toContain(host);
+    }
+  );
+
+  it("media-src 가 'self' 와 Channel Talk 알림음만 허용한다", () => {
+    expect(directives.get('media-src')).toEqual([
+      "'self'",
+      'https://cdn.channel.io',
+    ]);
+  });
+
+  it('connect-src 에 쓰지 않는 외부 CDN 을 열지 않는다', () => {
+    expect(directives.get('connect-src')).not.toContain(
+      'https://cdnjs.cloudflare.com'
+    );
   });
 
   it("worker-src 가 'self' 와 blob: 만 허용한다", () => {

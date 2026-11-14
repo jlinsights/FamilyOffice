@@ -1,1 +1,1 @@
-🔒 운영 CSP 에 HubSpot 추적 호스트(*.hs-scripts.com·*.hsforms.com·static.hsappstatic.net 등)와 worker-src blob: 허용 — 라이브에서 HubSpot 스크립트·blob worker 차단 해소
+🔒 남은 콘솔 CSP 위반 정리 — HubSpot 카운터 픽셀·Channel Talk 알림음 허용, Clerk 텔레메트리 끄기, 성능 모니터의 cdnjs 외부 핑 제거

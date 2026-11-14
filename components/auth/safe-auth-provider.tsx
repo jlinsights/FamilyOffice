@@ -93,7 +93,7 @@ export function SafeAuthProvider({ children }: { children: React.ReactNode }) {
 
   // Always use ClerkProvider when keys are available (regardless of dev/prod)
   return (
-    <ClerkProvider>
+    <ClerkProvider telemetry={false}>
       <ClerkBridge>{children}</ClerkBridge>
     </ClerkProvider>
   );
