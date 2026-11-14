@@ -16,7 +16,6 @@ interface KoreanPerformanceMetrics {
   regionLatency: {
     seoul: number;
     busan: number;
-    international: number;
   };
   businessHoursPerformance: {
     peak: number; // 9AM-6PM KST
@@ -153,8 +152,6 @@ export class KoreanPerformanceMonitor {
     const regions = {
       seoul: '/api/ping',
       busan: '/api/ping',
-      international:
-        'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js', // Global CDN for international check
     };
 
     const results: any = {};
