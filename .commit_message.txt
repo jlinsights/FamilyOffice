@@ -1,1 +1,1 @@
-🔒 package-lock 에 누락된 플랫폼별 optional 의존성 104개 복구 — npm 11 에서 npm ci 가 EUSAGE 로 실패하던 문제 해소
+🔒 @grpc/grpc-js 1.14.2 → 1.14.7 — Trivy HIGH 3건(CVE-2026-48068·48069·101916)과 LOW 1건 해소, lockfile 만 변경
