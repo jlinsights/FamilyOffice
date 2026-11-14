@@ -1,7 +1,8 @@
 /**
  * 운영 CSP(next.config.mjs)가 HubSpot 추적 스크립트와 blob worker 를 막지 않는지 확인한다.
  * js.hs-scripts.com 로더는 js-na2.hs-scripts.com 으로 리다이렉트된 뒤
- * *.hscollectedforms.net · *.hs-analytics.net · *.hs-banner.com 스크립트를 불러온다.
+ * *.hscollectedforms.net · *.hs-analytics.net · *.hs-banner.com 스크립트를 불러오고,
+ * collected-forms 는 forms-<hublet>.hsforms.com 으로 제출하며 static.hsappstatic.net 에서 자산을 받는다.
  */
 import { readFileSync } from 'fs';
 import path from 'path';
@@ -33,6 +34,7 @@ describe('운영 Content-Security-Policy', () => {
     'https://*.hs-analytics.net',
     'https://*.hs-banner.com',
     'https://*.hscollectedforms.net',
+    'https://static.hsappstatic.net',
   ])('script-src 가 HubSpot 스크립트 호스트 %s 를 허용한다', host => {
     expect(directives.get('script-src')).toContain(host);
   });
@@ -41,6 +43,7 @@ describe('운영 Content-Security-Policy', () => {
     'https://*.hubspot.com',
     'https://*.hubapi.com',
     'https://*.hscollectedforms.net',
+    'https://*.hsforms.com',
   ])('connect-src 가 HubSpot 수집 호스트 %s 를 허용한다', host => {
     expect(directives.get('connect-src')).toContain(host);
   });

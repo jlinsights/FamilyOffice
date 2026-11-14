@@ -1,1 +1,1 @@
-🔒 운영 CSP 에 HubSpot 추적 호스트(*.hs-scripts.com 등)와 worker-src blob: 허용 — 라이브에서 HubSpot 스크립트·blob worker 차단 해소
+🔒 운영 CSP 에 HubSpot 추적 호스트(*.hs-scripts.com·*.hsforms.com·static.hsappstatic.net 등)와 worker-src blob: 허용 — 라이브에서 HubSpot 스크립트·blob worker 차단 해소
