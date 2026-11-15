@@ -1,7 +1,7 @@
 // FamilyOffice S - 사용자 통계 API
 // 관리자가 사용자 통계 정보를 조회하는 엔드포인트
 import { NextResponse } from 'next/server';
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { auth, currentUser } from '@/lib/auth/server-auth';
 import { getUserStats } from '@/lib/user-sync';
 import { getAdminEmails } from '@/lib/admin-permissions';
 

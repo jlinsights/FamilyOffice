@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth/server-auth';
 import { getAdminEmails } from '@/lib/admin-permissions';
 
 export async function requireAuth(): Promise<string | NextResponse> {

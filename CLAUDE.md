@@ -230,6 +230,7 @@ const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
 
 - **절대 관리자 이메일 하드코딩 금지** — 항상 `getAdminEmails()` 사용
 - 보호된 라우트: `/admin/*` + `AdminAccessDeniedAlert`
+- **서버의 `auth()`·`currentUser()` 는 `@/lib/auth/server-auth` 에서 import** — `@clerk/nextjs/server` 에서 직접 가져오지 않는다. Clerk 키가 없는 Vercel Preview 에서 예외(500) 대신 미로그인을 돌려준다. 건너뛰는 조건은 `lib/auth/clerk-config.ts` (Preview·로컬 개발만, 그 밖은 키가 빠지면 바로 실패)
 
 ---
 

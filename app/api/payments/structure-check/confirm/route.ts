@@ -9,7 +9,7 @@
  *   3) totalAmount·secret 검증 후 payment_status='paid'
  *   4) Idempotent: 이미 paid면 동일 응답
  */
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth/server-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { CONSULTATION_FEE } from '@/lib/constants';

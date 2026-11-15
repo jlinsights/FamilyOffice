@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@/lib/auth/server-auth';
 
 import { getAdminEmails } from '@/lib/admin-permissions';
 import { conversionTrackingService } from '@/lib/conversion/service';

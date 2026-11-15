@@ -2,7 +2,7 @@
  * 관리자 권한 확인 유틸리티
  * Clerk 인증과 연동하여 관리자 권한을 검증
  */
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { auth, currentUser } from '@/lib/auth/server-auth';
 import { logger } from '@/lib/logger';
 
 /**

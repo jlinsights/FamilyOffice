@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth/server-auth';
 
 export const metadata: Metadata = {
   title: '상속세 계산기 | FamilyOffice S - 2025년 최신 세법 기준 정확한 계산',

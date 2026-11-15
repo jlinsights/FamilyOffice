@@ -1,1 +1,1 @@
-🔒 남은 콘솔 CSP 위반 정리 — HubSpot 카운터 픽셀·Channel Talk 알림음 허용, Clerk 텔레메트리 끄기, 성능 모니터의 cdnjs 외부 핑 제거
+🩹 Clerk 키 없는 Preview 에서 서버 auth()/currentUser() 500 방지 — 미로그인으로 대체, 대체 조건은 Preview·로컬 개발로 좁힘

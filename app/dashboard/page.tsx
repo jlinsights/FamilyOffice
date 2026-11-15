@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@/lib/auth/server-auth';
 import { getAdminEmails } from '@/lib/admin-permissions';
 
 export default async function DashboardPage() {

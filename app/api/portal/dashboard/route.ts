@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@/lib/auth/server-auth';
 import { safeFrom } from '@/lib/supabase/helpers';
 import { createClient } from '@/lib/supabase/server';
 

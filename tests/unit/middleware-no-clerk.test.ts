@@ -1,7 +1,8 @@
 /**
  * Clerk 키가 없는 배포(Vercel Preview)에서 미들웨어가 사이트 전체를 500 으로 만들지 않는지,
  * 그러면서도 /admin·보호 API 는 미로그인과 똑같이 막는지 확인한다.
- * Production 은 키가 빠져도 Clerk 경로를 그대로 타서 설정 누락이 드러나야 한다.
+ * Vercel Preview·로컬 개발 밖(Vercel Production, Vercel 밖의 운영 서버)은 키가 빠져도
+ * Clerk 경로를 그대로 타서 설정 누락이 드러나야 한다.
  */
 import { NextRequest, NextResponse, type NextFetchEvent } from 'next/server';
 
@@ -31,7 +32,8 @@ jest.mock('@/lib/security/security-monitor', () => ({
   logSecurityEvent: async () => undefined,
 }));
 
-import middleware, { isClerkConfigured } from '@/middleware';
+import { isClerkConfigured } from '@/lib/auth/clerk-config';
+import middleware from '@/middleware';
 
 const BASE = 'https://family-office-git-branch-goodman-ksways.vercel.app';
 const event = {} as NextFetchEvent;
@@ -122,5 +124,24 @@ describe('미들웨어 — Clerk 키가 없는 배포', () => {
       'Missing publishableKey'
     );
     expect(clerkCalls.count).toBe(1);
+  });
+
+  it('Vercel 밖의 운영 서버도 키가 없으면 대체하지 않는다', () => {
+    delete env.VERCEL_ENV;
+
+    expect(() => middleware(request('/services'), event)).toThrow(
+      'Missing publishableKey'
+    );
+    expect(clerkCalls.count).toBe(1);
+  });
+
+  it('로컬 개발은 키가 없어도 Clerk 없이 연다', async () => {
+    delete env.VERCEL_ENV;
+    env.NODE_ENV = 'development';
+
+    await middleware(request('/services'), event);
+
+    expect(clerkCalls.count).toBe(0);
+    expect(nextSpy).toHaveBeenCalledTimes(1);
   });
 });

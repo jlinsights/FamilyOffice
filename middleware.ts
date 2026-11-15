@@ -4,6 +4,7 @@ import {
   clerkMiddleware,
   createRouteMatcher,
 } from '@clerk/nextjs/server';
+import { shouldBypassClerk } from '@/lib/auth/clerk-config';
 import { globalRateLimit } from '@/lib/rate-limit';
 import {
   autoSecurityResponse,
@@ -276,20 +277,14 @@ const withClerk = clerkMiddleware((auth, request) =>
 
 // Clerk 키가 없으면 clerkMiddleware 가 모든 요청에서 예외를 던져 사이트 전체가 500 이 된다.
 // Clerk 키는 Production 에만 있으므로 Vercel Preview 가 그렇다.
-// Production 이 아닐 때만 '아무도 로그인하지 않은' 상태로 대신 처리한다.
+// Vercel Preview·로컬 개발에서만 '아무도 로그인하지 않은' 상태로 대신 처리한다(lib/auth/clerk-config).
 // → 공개 페이지는 열리고, /admin·보호 API 는 미로그인과 똑같이 막힌다.
-// Production 은 키가 빠지면 지금처럼 바로 실패해서 설정 누락이 드러나게 둔다.
+// 그 밖의 배포(Vercel Production, Vercel 밖의 운영 서버)는 키가 빠지면 바로 실패해서
+// 설정 누락이 드러나게 둔다.
 const signedOut: MiddlewareAuth = async () => ({ userId: null });
 
-export function isClerkConfigured(): boolean {
-  return Boolean(
-    process.env.CLERK_SECRET_KEY &&
-      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-  );
-}
-
 export default function middleware(request: NextRequest, event: NextFetchEvent) {
-  if (!isClerkConfigured() && process.env.VERCEL_ENV !== 'production') {
+  if (shouldBypassClerk()) {
     return handleRequest(signedOut, request);
   }
   return withClerk(request, event);

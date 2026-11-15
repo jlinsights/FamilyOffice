@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth/server-auth';
 
 export const metadata: Metadata = {
   title: '가업승계 비용 계산기 | FamilyOffice S - 승계 방법별 정확한 비용 계산',

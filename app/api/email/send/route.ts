@@ -4,7 +4,7 @@
  */
 import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth/server-auth';
 import { logger } from '@/lib/debug-logger';
 import {
   sendEmail,

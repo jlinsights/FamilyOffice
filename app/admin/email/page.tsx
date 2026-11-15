@@ -3,7 +3,7 @@
  * /admin/email
  */
 import { redirect } from 'next/navigation';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth/server-auth';
 import { ResendTestPanel } from '@/components/email/resend-test-panel';
 import { getAdminEmails } from '@/lib/admin-permissions';
 
