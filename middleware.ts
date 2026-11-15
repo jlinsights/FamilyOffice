@@ -93,7 +93,9 @@ export default clerkMiddleware(async (auth, request) => {
   }
 
   // 1.2 관리자 페이지: 로그인 필수
-  if (isAdminPageRoute(request)) {
+  // 로컬 개발(NODE_ENV=development)은 checkAdminPermissions 의 개발 우회와 맞춰 건너뛴다.
+  // Vercel Preview·Production 은 NODE_ENV=production 이라 이 분기에 해당하지 않는다.
+  if (isAdminPageRoute(request) && process.env.NODE_ENV !== 'development') {
     const { userId } = await auth();
     if (!userId) {
       await logSecurityEvent(

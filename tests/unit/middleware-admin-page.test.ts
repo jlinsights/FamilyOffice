@@ -59,7 +59,12 @@ function redirectTarget(): URL {
 }
 
 describe('미들웨어 — /admin 페이지 보호', () => {
+  const env = process.env as Record<string, string | undefined>;
+  const originalNodeEnv = env.NODE_ENV;
+
   beforeEach(() => {
+    // Vercel Preview·Production 과 같은 조건
+    env.NODE_ENV = 'production';
     authState.userId = null;
     redirectSpy = jest.spyOn(NextResponse, 'redirect');
     nextSpy = jest.spyOn(NextResponse, 'next');
@@ -86,6 +91,19 @@ describe('미들웨어 — /admin 페이지 보호', () => {
 
   it('로그인한 사용자는 /admin 으로 통과시킨다 (관리자 여부는 Server Action 이 확인)', async () => {
     authState.userId = 'user_1';
+
+    await run(request('/admin'));
+
+    expect(redirectSpy).not.toHaveBeenCalled();
+    expect(nextSpy).toHaveBeenCalledTimes(1);
+  });
+
+  afterEach(() => {
+    env.NODE_ENV = originalNodeEnv;
+  });
+
+  it('로컬 개발(NODE_ENV=development)에서는 관리자 확인 개발 우회와 맞춰 통과시킨다', async () => {
+    env.NODE_ENV = 'development';
 
     await run(request('/admin'));
 
