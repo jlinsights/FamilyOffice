@@ -23,6 +23,10 @@ const isProtectedApiRoute = createRouteMatcher([
   '/api/internal(.*)',
 ]);
 
+// 관리자 페이지 — 로그인하지 않은 방문자는 페이지와 Server Action(POST /admin*) 모두 차단.
+// 관리자 여부(ADMIN_EMAILS)는 각 Server Action / API 가 다시 확인한다.
+const isAdminPageRoute = createRouteMatcher(['/admin(.*)']);
+
 // 온보딩이 필요한 경로 (인증된 사용자가 접근하는 주요 페이지)
 const isOnboardingRequiredRoute = createRouteMatcher([
   '/dashboard(.*)',
@@ -85,6 +89,31 @@ export default clerkMiddleware(async (auth, request) => {
         },
         request
       );
+    }
+  }
+
+  // 1.2 관리자 페이지: 로그인 필수
+  // 로컬 개발(NODE_ENV=development)은 checkAdminPermissions 의 개발 우회와 맞춰 건너뛴다.
+  // Vercel Preview·Production 은 NODE_ENV=production 이라 이 분기에 해당하지 않는다.
+  if (isAdminPageRoute(request) && process.env.NODE_ENV !== 'development') {
+    const { userId } = await auth();
+    if (!userId) {
+      await logSecurityEvent(
+        {
+          type: 'invalid_auth',
+          severity: 'high',
+          description: `Unauthenticated ${request.method} to admin page ${request.nextUrl.pathname}`,
+          additional_data: {
+            path: request.nextUrl.pathname,
+            method: request.method,
+          },
+        },
+        request
+      );
+
+      const signInUrl = new URL('/auth/sign-in', request.url);
+      signInUrl.searchParams.set('redirect_url', request.nextUrl.pathname);
+      return NextResponse.redirect(signInUrl);
     }
   }
 

@@ -29,13 +29,11 @@ export function getAdminEmails(): string[] {
  */
 export async function checkAdminPermissions(): Promise<boolean> {
   try {
-    // 개발 환경 또는 Vercel Preview 환경에서는 디버깅을 위해 권한 체크 패스
-    if (
-      process.env.NODE_ENV === 'development' ||
-      process.env.VERCEL_ENV === 'preview'
-    ) {
+    // 로컬 개발 환경에서만 권한 체크 패스.
+    // Vercel Preview 는 공개 주소라 우회하지 않는다 (NODE_ENV 는 Preview 에서도 'production').
+    if (process.env.NODE_ENV === 'development') {
       logger.debug(
-        'Admin permissions bypassed in development/preview environment',
+        'Admin permissions bypassed in development environment',
         {
           component: 'admin-permissions',
           function: 'checkAdminPermissions',
@@ -129,13 +127,10 @@ export async function checkAdminPermissions(): Promise<boolean> {
  * API 라우트에서 사용하기 위한 헬퍼 함수
  */
 export async function requireAdminPermissions(): Promise<boolean> {
-  // 개발 환경 또는 Preview 환경 bypass
-  if (
-    process.env.NODE_ENV === 'development' ||
-    process.env.VERCEL_ENV === 'preview'
-  ) {
+  // 로컬 개발 환경에서만 bypass (Vercel Preview 는 우회하지 않는다)
+  if (process.env.NODE_ENV === 'development') {
     logger.debug(
-      'Admin permissions requirement bypassed in development/preview environment',
+      'Admin permissions requirement bypassed in development environment',
       {
         component: 'admin-permissions',
         function: 'requireAdminPermissions',

@@ -1,6 +1,19 @@
 'use server';
 
+import { checkAdminPermissions } from '@/lib/admin-permissions';
 import { createAdminClient } from '@/lib/supabase/admin-client';
+
+// Server Action 은 누구나 POST 로 직접 호출할 수 있다. service role(RLS 우회)로 DB 를 읽기 전에
+// 반드시 관리자인지 확인한다. 확인 중 예외가 나면 거절한다 (fail closed).
+async function isAuthorizedAdmin(): Promise<boolean> {
+  try {
+    return await checkAdminPermissions();
+  } catch {
+    return false;
+  }
+}
+
+const UNAUTHORIZED = { data: null, error: 'Unauthorized' } as const;
 
 export interface AdminStats {
   consultations: {
@@ -39,6 +52,8 @@ export async function getStructureCheckRequests(): Promise<{
   data: StructureCheckRequest[] | null;
   error: string | null;
 }> {
+  if (!(await isAuthorizedAdmin())) return UNAUTHORIZED;
+
   try {
     const supabase = createAdminClient();
 
@@ -66,6 +81,8 @@ export async function getAdminStats(): Promise<{
   data: AdminStats | null;
   error: string | null;
 }> {
+  if (!(await isAuthorizedAdmin())) return UNAUTHORIZED;
+
   try {
     const supabase = createAdminClient();
 
