@@ -1,7 +1,7 @@
 // FamilyOffice S - 관리자 권한 체크 API
 // 슈퍼관리자 권한을 확인하는 엔드포인트 (ADMIN_EMAILS 환경변수 기반)
 import { NextResponse } from 'next/server';
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@/lib/auth/server-auth';
 import { getAdminEmails } from '@/lib/admin-permissions';
 
 export async function POST() {

@@ -1,9 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server';
 import {
   clerkClient,
   clerkMiddleware,
   createRouteMatcher,
 } from '@clerk/nextjs/server';
+import { shouldBypassClerk } from '@/lib/auth/clerk-config';
 import { globalRateLimit } from '@/lib/rate-limit';
 import {
   autoSecurityResponse,
@@ -41,7 +42,10 @@ const isOnboardingExcludedRoute = createRouteMatcher([
   '/_next(.*)',
 ]);
 
-export default clerkMiddleware(async (auth, request) => {
+// 미들웨어가 쓰는 인증 정보는 userId 하나뿐이다. Clerk 가 없을 때 같은 모양의 대체 함수를 넘긴다.
+type MiddlewareAuth = () => Promise<{ userId: string | null }>;
+
+async function handleRequest(auth: MiddlewareAuth, request: NextRequest) {
   // 0. 의심스러운 활동 감지 및 자동 대응
   const suspiciousActivity = detectSuspiciousActivity(request);
   if (suspiciousActivity.isSuspicious) {
@@ -265,7 +269,26 @@ export default clerkMiddleware(async (auth, request) => {
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
   return response;
-});
+}
+
+const withClerk = clerkMiddleware((auth, request) =>
+  handleRequest(auth, request)
+);
+
+// Clerk 키가 없으면 clerkMiddleware 가 모든 요청에서 예외를 던져 사이트 전체가 500 이 된다.
+// Clerk 키는 Production 에만 있으므로 Vercel Preview 가 그렇다.
+// Vercel Preview·로컬 개발에서만 '아무도 로그인하지 않은' 상태로 대신 처리한다(lib/auth/clerk-config).
+// → 공개 페이지는 열리고, /admin·보호 API 는 미로그인과 똑같이 막힌다.
+// 그 밖의 배포(Vercel Production, Vercel 밖의 운영 서버)는 키가 빠지면 바로 실패해서
+// 설정 누락이 드러나게 둔다.
+const signedOut: MiddlewareAuth = async () => ({ userId: null });
+
+export default function middleware(request: NextRequest, event: NextFetchEvent) {
+  if (shouldBypassClerk()) {
+    return handleRequest(signedOut, request);
+  }
+  return withClerk(request, event);
+}
 
 export const config = {
   matcher: [

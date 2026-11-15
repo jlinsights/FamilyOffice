@@ -65,6 +65,9 @@ describe('미들웨어 — /admin 페이지 보호', () => {
   beforeEach(() => {
     // Vercel Preview·Production 과 같은 조건
     env.NODE_ENV = 'production';
+    // Clerk 가 설정된 배포(Production)와 같은 조건 — 키가 없으면 미들웨어가 Clerk 를 건너뛴다
+    env.CLERK_SECRET_KEY = 'sk_test_dummy';
+    env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = 'pk_test_dummy';
     authState.userId = null;
     redirectSpy = jest.spyOn(NextResponse, 'redirect');
     nextSpy = jest.spyOn(NextResponse, 'next');
@@ -100,6 +103,8 @@ describe('미들웨어 — /admin 페이지 보호', () => {
 
   afterEach(() => {
     env.NODE_ENV = originalNodeEnv;
+    delete env.CLERK_SECRET_KEY;
+    delete env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
   });
 
   it('로컬 개발(NODE_ENV=development)에서는 관리자 확인 개발 우회와 맞춰 통과시킨다', async () => {

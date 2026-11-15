@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { UserProfile } from '@clerk/nextjs';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth/server-auth';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 

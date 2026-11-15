@@ -8,7 +8,7 @@
  *
  * 흐름: 폼 제출 → 본 API → Toss 결제 위젯 → success → confirm API
  */
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth/server-auth';
 import { nanoid } from 'nanoid';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';

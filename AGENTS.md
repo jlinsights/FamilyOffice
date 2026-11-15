@@ -180,6 +180,7 @@ GET /api/financial/forex?from=USD&to=KRW  // USD/KRW, EUR/KRW, JPY/KRW
 - **Admin Resolution**: ENV-driven (`ADMIN_EMAILS` / `NEXT_PUBLIC_ADMIN_EMAILS`) via `getAdminEmails()` — **never hardcode emails**
 - **Protected Routes**: `/admin/*` with `AdminAccessDeniedAlert`
 - **Auth Flow**: Clerk authentication → Supabase sync via webhook (`app/api/webhooks/clerk/`)
+- **Server auth**: 서버의 `auth()`·`currentUser()` 는 `@/lib/auth/server-auth` 에서 import 한다 — `@clerk/nextjs/server` 직접 import 금지. Clerk 키가 없는 Vercel Preview 에서 예외(500) 대신 미로그인을 돌려준다. 건너뛰는 조건은 `lib/auth/clerk-config.ts` (Preview·로컬 개발만, 그 밖은 키가 빠지면 바로 실패)
 
 ### Payment Integration (Toss + Shop MVP)
 

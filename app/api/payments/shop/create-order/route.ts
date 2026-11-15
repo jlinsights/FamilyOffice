@@ -1,4 +1,4 @@
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@/lib/auth/server-auth';
 import { NextResponse } from 'next/server';
 import { getTossCustomerKeyForClerkUser } from '@/lib/payments/toss-customer-key';
 import { createPendingOrder, ShopOrderError } from '@/lib/shop/orders';
