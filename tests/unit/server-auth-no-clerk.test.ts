@@ -61,6 +61,14 @@ describe('서버 auth()/currentUser() — Clerk 키가 없는 배포', () => {
     expect(clerkCalls).toEqual({ auth: 1, currentUser: 1 });
   });
 
+  it('공개키만 있으면 Clerk 를 그대로 부른다 (브라우저와 같은 판단)', async () => {
+    env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = 'pk_test_dummy';
+
+    await auth();
+    await currentUser();
+    expect(clerkCalls).toEqual({ auth: 1, currentUser: 1 });
+  });
+
   it('Production 은 키가 없어도 Clerk 를 그대로 부른다 (설정 누락이 드러나야 한다)', async () => {
     env.VERCEL_ENV = 'production';
 

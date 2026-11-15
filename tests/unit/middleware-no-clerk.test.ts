@@ -102,11 +102,23 @@ describe('미들웨어 — Clerk 키가 없는 배포', () => {
     expect(nextSpy).not.toHaveBeenCalled();
   });
 
-  it('키가 하나만 있어도 Clerk 를 쓰지 않는다', () => {
+  it('공개키만 있으면 대체하지 않는다 — 브라우저가 Clerk 로그인을 띄우므로 서버도 Clerk 를 써야 한다', () => {
     env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = 'pk_test_dummy';
-    expect(isClerkConfigured()).toBe(false);
-    env.CLERK_SECRET_KEY = 'sk_test_dummy';
+
     expect(isClerkConfigured()).toBe(true);
+    expect(() => middleware(request('/services'), event)).toThrow(
+      'Missing publishableKey'
+    );
+    expect(clerkCalls.count).toBe(1);
+  });
+
+  it('비밀키만 있으면 브라우저처럼 Clerk 없이 연다', async () => {
+    env.CLERK_SECRET_KEY = 'sk_test_dummy';
+
+    expect(isClerkConfigured()).toBe(false);
+    await middleware(request('/services'), event);
+    expect(clerkCalls.count).toBe(0);
+    expect(nextSpy).toHaveBeenCalledTimes(1);
   });
 
   it('키가 있으면 Clerk 미들웨어를 쓴다', () => {

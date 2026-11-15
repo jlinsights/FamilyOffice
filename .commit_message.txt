@@ -1,1 +1,1 @@
-🩹 Clerk 키 없는 Preview 에서 서버 auth()/currentUser() 500 방지 — 미로그인으로 대체, 대체 조건은 Preview·로컬 개발로 좁힘
+🩹 Clerk 사용 여부를 공개키로 판단 — 브라우저와 서버의 인증 상태 어긋남 방지
