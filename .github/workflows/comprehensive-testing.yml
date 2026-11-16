@@ -20,7 +20,7 @@ env:
 jobs:
   # Unit and Integration Tests
   unit-integration-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         test-suite: [unit, integration, security]
@@ -71,7 +71,7 @@ jobs:
 
   # End-to-End Tests
   e2e-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         browser: [chrome, firefox, edge]
@@ -129,7 +129,7 @@ jobs:
 
   # Performance Tests
   performance-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -181,7 +181,7 @@ jobs:
 
   # Security Audit
   security-audit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -219,7 +219,7 @@ jobs:
 
   # Accessibility Tests
   accessibility-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -261,7 +261,7 @@ jobs:
 
   # Compliance Tests
   compliance-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -305,7 +305,7 @@ jobs:
 
   # Test Results Summary
   test-summary:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       [
         unit-integration-tests,
@@ -427,7 +427,7 @@ jobs:
 
   # Coverage Report
   coverage-report:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [unit-integration-tests]
     if: always()
 

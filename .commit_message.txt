@@ -1,1 +1,1 @@
-🎨 PR #40에서 추가한 middleware.ts·server-auth 테스트에 Prettier 포맷 적용
+🔧 GitHub Actions 러너를 ubuntu-24.04 로 고정 — ubuntu-latest(26.04)에서 Playwright 설치 실패

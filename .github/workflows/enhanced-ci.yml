@@ -24,7 +24,7 @@ env:
 jobs:
   quick-checks:
     name: Quick Validation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +47,7 @@ jobs:
 
   security-scan:
     name: Security Analysis
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -83,7 +83,7 @@ jobs:
 
   test-suite:
     name: Test Suite
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     needs: quick-checks
     strategy:
@@ -118,7 +118,7 @@ jobs:
 
   e2e-tests:
     name: E2E Tests (Playwright)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     needs: quick-checks
     continue-on-error: true
@@ -155,7 +155,7 @@ jobs:
 
   build-verification:
     name: Build Verification
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     needs: [security-scan, test-suite]
     steps:
@@ -198,7 +198,7 @@ jobs:
 
   notify:
     name: Notification
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: always() && github.ref == 'refs/heads/main'
     needs: [build-verification, e2e-tests]
     steps:
