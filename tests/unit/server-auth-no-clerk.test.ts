@@ -47,7 +47,10 @@ describe('서버 auth()/currentUser() — Clerk 키가 없는 배포', () => {
   });
 
   it('Preview 에서는 Clerk 를 부르지 않고 미로그인을 돌려준다', async () => {
-    await expect(auth()).resolves.toEqual({ userId: null, sessionClaims: null });
+    await expect(auth()).resolves.toEqual({
+      userId: null,
+      sessionClaims: null,
+    });
     await expect(currentUser()).resolves.toBeNull();
     expect(clerkCalls).toEqual({ auth: 0, currentUser: 0 });
   });
