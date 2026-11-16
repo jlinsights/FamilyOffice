@@ -1,1 +1,1 @@
-🩹 Clerk 사용 여부를 공개키로 판단 — 브라우저와 서버의 인증 상태 어긋남 방지
+🎨 PR #40에서 추가한 middleware.ts·server-auth 테스트에 Prettier 포맷 적용

@@ -1,4 +1,8 @@
-import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server';
+import {
+  NextResponse,
+  type NextFetchEvent,
+  type NextRequest,
+} from 'next/server';
 import {
   clerkClient,
   clerkMiddleware,
@@ -283,7 +287,10 @@ const withClerk = clerkMiddleware((auth, request) =>
 // 설정 누락이 드러나게 둔다.
 const signedOut: MiddlewareAuth = async () => ({ userId: null });
 
-export default function middleware(request: NextRequest, event: NextFetchEvent) {
+export default function middleware(
+  request: NextRequest,
+  event: NextFetchEvent
+) {
   if (shouldBypassClerk()) {
     return handleRequest(signedOut, request);
   }
